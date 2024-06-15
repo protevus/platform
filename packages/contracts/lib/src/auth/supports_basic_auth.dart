@@ -1,4 +1,4 @@
-import 'package:symfony/http_foundation.dart';
+//import 'package:symfony/http_foundation.dart';
 
 abstract class SupportsBasicAuth {
   /// Attempt to authenticate using HTTP Basic Auth.
@@ -15,3 +15,5 @@ abstract class SupportsBasicAuth {
   /// @return Response|null
   Response? onceBasic({String field = 'email', Map<String, dynamic> extraConditions = const {}});
 }
+
+// TODO: Find a dart package to replace symfony package for Response.
