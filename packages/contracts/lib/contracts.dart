@@ -3,6 +3,6 @@
 /// More dartdocs go here.
 library;
 
-export 'src/fabric_contracts_base.dart';
+// export 'src/fabric_contracts_base.dart';
 
 // TODO: Export any libraries intended for clients of this package.
