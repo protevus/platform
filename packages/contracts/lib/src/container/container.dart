@@ -1,5 +1,4 @@
-import 'package:meta/meta.dart';
-
+import 'contextual_binding_builder.dart';
 abstract class Container {
   /// Determine if the given abstract type has been bound.
   ///
@@ -164,14 +163,6 @@ abstract class Container {
   /// @param  Function|null  callback
   /// @return void
   void afterResolving(dynamic abstract, [Function? callback]);
-}
-
-class ContextualBindingBuilder {
-  // Implementation for ContextualBindingBuilder
-}
-
-class BindingResolutionException implements Exception {
-  // Implementation for BindingResolutionException
 }
 
 class InvalidArgumentException implements Exception {

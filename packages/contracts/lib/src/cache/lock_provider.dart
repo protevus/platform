@@ -1,3 +1,4 @@
+import 'lock.dart';
 abstract class LockProvider {
   /// Get a lock instance.
   ///
@@ -13,8 +14,4 @@ abstract class LockProvider {
   /// @param  String  owner
   /// @return Lock
   Lock restoreLock(String name, String owner);
-}
-
-abstract class Lock {
-  // Define the methods and properties that the Lock class should have
 }
