@@ -1,0 +1,87 @@
+fabric-platform/
+├── .devbox/
+│   ├
+├── .github/
+│   ├
+├── .vscode/
+│   ├
+├── config/
+│   ├
+├── docs/
+│   ├
+├── example/
+│   ├
+├── packages/
+│   ├── auth/
+│   ├── base/
+│   ├── broadcasting/
+│   ├── bus/
+│   ├── cache/
+│   ├── collections/
+│   ├── conditionable/
+│   ├── config/
+│   ├── console/
+│   │   ├── cli/
+│   ├── container/
+│   ├── contracts/
+│   ├── cookie/
+│   ├── database/
+│   │   ├── orm/
+│   ├── encryption/
+│   ├── events/
+│   ├── extensions/
+│   │   ├── kafka/
+│   │   ├── mongodb/
+│   │   ├── redis/
+│   │   ├── blockchain/
+│   │   └── other extensions/
+│   ├── filesystem/
+│   ├── foundation/
+│   ├── hashing/
+│   ├── http/
+│   ├── log/
+│   ├── macroable/
+│   ├── mail/
+│   ├── notifications/
+│   ├── pagination/
+│   ├── pipeline/
+│   ├── process/
+│   ├── queue/
+│   ├── routing/
+│   ├── rtc/
+│   │   ├── websocket/
+│   │   └── gRPC/
+│   ├── session/
+│   ├── support/
+│   ├── testing/
+│   ├── translation/
+│   ├── validation/
+│   ├── view/
+│   ├
+├── scripts/
+│   ├
+├── spike/
+│   ├
+├── stubs/
+│   ├
+├── test/
+│   ├
+├── tool/
+│   ├
+│
+├── .editorconfig
+├── .gitattributes
+├── .gitignore
+├── .publishable
+├── .toolversion
+├── analysis_options.yaml
+├── AUTHORS.md
+├── CHANGELOG.md
+├── CODE_OF_CONDUCT.md
+├── CONTRIBUTING.md
+├── LICENSE
+├── melos.yaml
+├── pubspec.yaml
+├── README.md
+├── SECURITY.md
+└── VFP_VERSION
