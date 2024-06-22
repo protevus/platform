@@ -1,6 +1,6 @@
 //import 'package:your_project_path/contracts/auth/guard.dart';
 //import 'package:your_project_path/contracts/auth/stateful_guard.dart';
-import 'package:fabric_contracts/auth.dart';
+import 'package:protevus_contracts/auth.dart';
 
 abstract class Factory {
   /// Get a guard instance by name.
