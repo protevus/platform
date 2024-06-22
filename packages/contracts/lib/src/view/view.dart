@@ -1,5 +1,5 @@
 
-import "package:fabric_contracts/support.dart";
+import "package:protevus_contracts/support.dart";
 
 abstract class View extends Renderable {
   /// Get the name of the view.
