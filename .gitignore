@@ -13,6 +13,7 @@ pubspec.lock
 
 # Ignore autosave files
 README.md~
+.gitignore~
 
 # Directory created by dartdoc
 # If you don't generate documentation locally you can remove this line.
@@ -27,4 +28,4 @@ doc/api/
 *.js.deps
 *.js.map
 
-.gitignore~
+
