@@ -11,6 +11,9 @@ spike/
 # If you're building an application, you may want to check-in your pubspec.lock
 pubspec.lock
 
+# Ignore autosave files
+README.md~
+
 # Directory created by dartdoc
 # If you don't generate documentation locally you can remove this line.
 doc/api/
@@ -23,3 +26,5 @@ doc/api/
 *.js_
 *.js.deps
 *.js.map
+
+.gitignore~
