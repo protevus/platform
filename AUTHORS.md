@@ -2,9 +2,15 @@
 
 ## Core Team
 
-- John Doe <john.doe@example.com> (Project Lead)
-- Jane Smith <jane.smith@example.com> (Lead Developer)
-- Bob Johnson <bob.johnson@example.com> (Developer)
+- Patrick Stewart <p.stewart@protevus.com> (Project Lead)
+- Vacant Spot <jane.smith@example.com> (Lead Developer)
+- Vacant Spot <bob.johnson@example.com> (Developer)
+
+## AI Team
+- Cody <cody@protevus.com> (AI Coding Assistant)
+- Claude <claude@protevus.com> (AI Coding Assistant)
+- Code Copilot <c.copilot@protevus.com> (AI Coding Assistant)
+- Keymate <keymate@protevus.com> (AI Coding Assistant)
 
 ## Contributors
 
@@ -26,7 +32,5 @@
 
 # Additional contributors (in alphabetical order)
 
-- David Thompson
-- Emily Wilson
-- Oliver Thompson
-- Sophia Anderson
+- Vacant Spot
+
