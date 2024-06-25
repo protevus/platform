@@ -1,12 +1,12 @@
 # Project Knowledge Base Index
 
 ## 1. Project Overview
-- **Summary**: An overview of Project XYZ, its goals, and key components.
-- **Vision and Mission**: High-level vision and mission statements.
+- [Summary](https://github.com/protevus/platform/blob/main/.pkb/1_project_overview/pkb-project-overview.md): An overview of Project XYZ, its goals, and key components.
+- [Vision and Mission](https://github.com/protevus/platform/blob/main/.pkb/1_project_overview/pkb-project-overview.md): High-level vision and mission statements.
 
 ## 2. Documentation
-- [Design Draft](https://raw.githubusercontent.com/your-repo/project/main/docs/design-draft.md): Core architecture and components of the project. Updated as necessary.
-- [Project Instructions](https://raw.githubusercontent.com/your-repo/project/main/docs/project-instructions.md): Instructions and guidelines for working on Project XYZ.
+- [Design Draft](https://github.com/protevus/platform/blob/main/.pkb/2_documentation/pkb-design-draft.md): Core architecture and components of the project. Updated as necessary.
+- [Project Instructions](https://raw.githubusercontent.com/protevus/platform/main/.pkb/2_documentation/pkb-project-instructions.md): Instructions and guidelines for working on Project XYZ.
 - **API Documentation**: Detailed API documentation and specifications.
 - **User Guides**: Guides and manuals for end-users and developers.
 - **FAQs**: Frequently Asked Questions related to the project.
