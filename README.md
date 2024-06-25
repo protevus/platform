@@ -4,6 +4,30 @@
 
 Protevus Platform is a highly versatile and extensible application server platform for the Dart programming language. Inspired by the Laravel framework, Protevus aims to provide a familiar and Laravel-compatible API, allowing developers to leverage their existing Laravel knowledge and experience in the Dart ecosystem.
 
+## AI Assistance
+
+The Protevus Platform project utilizes AI assistance in various aspects of its development process. We believe in leveraging the capabilities of AI to enhance productivity, code quality, and overall project progress while maintaining transparency and adhering to ethical practices.
+
+### AI Tools and Models
+
+The following AI tools and models have been employed in the development of the Protevus Platform:
+
+- **Claude** (Anthropic): A conversational AI assistant trained by Anthropic. Claude has been utilized for research, ideation, and problem-solving during the development process. Claude assists with documentation, code generation, code refactoring, and code testing.
+- **Keymate** (Keymate.ai): A conversational chatGPT AI assistant trained by Protevus using long-term memory provided by keymate.ai. Keymate is used to provide context and project scope during development. Keymate assists with porting, refactoring and testing of code.
+- **Code Copilot** (promptspellsmith.com): A conversational chatGPT AI assistant trained by PromptSpellSmith. Code Copilot is used to provide validation during development. Code Copilot assists with code validation, code generation and refactoring.
+- **Cody** (sourcegraph): A conversational AI coding assistant trained by Sourcegraph. Cody lives inside our IDE and is used to provide code completion, code navigation and code documentation during development. Cody assists with advanced search and codebase context that help developers understand, write, and fix code faster.
+
+### Guidelines and Limitations
+
+While AI assistance has been invaluable in accelerating certain aspects of development, it is important to note the following guidelines and limitations:
+
+- All code generated or modified with the help of AI tools undergoes thorough manual review, testing, and validation by the project's core team to ensure quality, security, and adherence to project standards.
+- AI-generated code is treated as a starting point or reference, and human developers are responsible for understanding, modifying, and maintaining the codebase.
+- Sensitive or confidential information is never shared with AI models, and appropriate measures are taken to protect intellectual property and data privacy.
+- The project's core team retains full ownership and responsibility for the codebase and its development.
+
+We believe in the responsible and ethical use of AI assistance and are committed to fostering an open and transparent development process. If you have any questions or concerns regarding the use of AI in the Protevus Platform project, please feel free to reach out to the project maintainers.
+
 ## Features
 
 - **Laravel API Compatibility**: Protevus Platform offers a high degree of compatibility with the Laravel API, enabling developers to seamlessly transition from Laravel to the Dart ecosystem.
