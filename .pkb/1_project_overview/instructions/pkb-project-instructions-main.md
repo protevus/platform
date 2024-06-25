@@ -1,4 +1,4 @@
-# Protevus Platform Project Instructions
+# Project Instructions
 
 ## Project Overview
 
