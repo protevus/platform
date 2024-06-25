@@ -15,7 +15,7 @@ The following AI tools and models have been employed in the development of the P
 - **Claude** (Anthropic): A conversational AI assistant trained by Anthropic. Claude has been utilized for research, ideation, and problem-solving during the development process. Claude assists with documentation, code generation, code refactoring, and code testing.
 - **Keymate** (Keymate.ai): A conversational chatGPT AI assistant trained by Protevus using long-term memory provided by keymate.ai. Keymate is used to provide context and project scope during development. Keymate assists with porting, refactoring and testing of code.
 - **Code Copilot** (promptspellsmith.com): A conversational chatGPT AI assistant trained by PromptSpellSmith. Code Copilot is used to provide validation during development. Code Copilot assists with code validation, code generation and refactoring.
-- **Cody** (sourcegraph): A conversational AI coding assistant trained by Sourcegraph. Cody lives inside our IDE and is used to provide code completion, code navigation and code documentation during development. Cody assists with advanced search and codebase context that help developers understand, write, and fix code faster.
+- **Cody** (sourcegraph): A conversational AI coding assistant trained by Sourcegraph that utilizes Claude. Cody lives inside our IDE and is used to provide code completion, code navigation and code documentation during development. Cody assists with advanced search and codebase context that help developers understand, write, and fix code faster.
 
 ### Guidelines and Limitations
 
