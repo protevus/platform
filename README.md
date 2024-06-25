@@ -1,5 +1,6 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/protevus/branding/main/protevus-logo-bg.png"></a></p>
-# Protevus Platform
+
+## About Protevus
 
 > **Note:** This repository contains the core code of the Protevus Platform. If you want to build an application using Protevus, visit the main [Protevus repository](https://github.com/protevus/protevus).
 
