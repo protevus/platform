@@ -12,12 +12,19 @@ The Protevus Platform project utilizes AI assistance in various aspects of its d
 
 ### AI Tools and Models
 
-The following AI tools and models have been employed in the development of the Protevus Platform:
+The following AI tools and models have been primarily employed in the development of the Protevus Platform:
 
-- **Claude** (Anthropic): A conversational AI assistant trained by Anthropic. Claude has been utilized for research, ideation, and problem-solving during the development process. Claude assists with documentation, code generation, code refactoring, and code testing.
-- **Keymate** (Keymate.ai): A conversational chatGPT AI assistant trained by Protevus using long-term memory provided by keymate.ai. Keymate is used to provide context and project scope during development. Keymate assists with porting, refactoring and testing of code.
-- **Code Copilot** (promptspellsmith.com): A conversational chatGPT AI coding assistant trained by PromptSpellSmith. Code Copilot is used to provide validation during development. Code Copilot assists with code validation, code generation and refactoring.
-- **Cody** (sourcegraph): A conversational AI coding assistant trained by Sourcegraph that utilizes Claude. Cody lives inside our IDE and is used to provide code completion, code navigation and code documentation during development. Cody assists with advanced search and codebase context that help developers understand, write, and fix code faster.
+- **Continue** (continue.dev): An AI-powered Assistant that integrates with VS Code to provide intelligent code completions, context-aware suggestions, natural langauge understanding, and assistance during the coding process. It leverages multiple advanced machine learning models to understand the context of your code and offer relevant recommendations.
+
+- **OpenRouter** (openrouter.ai):  is a fully managed service that simplifies the integration of high-performing foundation models (FMs) into your applications. It provides a unified API that allows you to access a wide range of foundation models from leading AI startups and Amazon, enabling you to select the most suitable model for your specific use case.
+
+- **Claude** (claude.ai): is an advanced large language model (LLM) developed by Anthropic that excels in understanding and generating human-like text. It is used to provide code generation, code navigation, and code documentation during development. We also use Claude to generate the documentation, ideals, and brainstorming for the Protevus Platform.
+
+- **Codestral** (mistral.ai): is a large language model (LLM) that is used to provide code completion, refactoring and validation. It is trained on a diverse dataset of code from various programming languages and is capable of understanding and generating code in multiple languages.
+
+- **Voyage** (voyage.ai): is a powerful neural net model, or transformer, that is used to convert unstructured and complex data (documents, images, audios, videos, or tabular data) into dense numerical vectors called embeddings. These embeddings capture the semantic meanings and serve as essential building blocks for semantic search and retrieval-augmented generation (RAG), which is the predominant approach for building domain-specific or company-specific chatbots and other AI applications. Voyage also offers Rerankers, specialized neural networks that assess the relevance between a query and multiple documents, enhancing the ranking and retrieval process to deliver highly relevant and contextually appropriate results.
+
+- **Other Tools**: We also use other tools and LLM's in our workflow, leveraging their unique capabilities to enhance the development process.
 
 ### Guidelines and Limitations
 
