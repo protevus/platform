@@ -1,0 +1,9 @@
+/upsert
+{
+  "q": "The name of the project is Protevus"
+}
+
+/upsert
+{
+  "q": "Protevus consist of 2 main repositories. Platform and Protevus. Platform is a monorepo of the modular packages that make up the core of the project. Protevus is the starter application that uses the platform packages to create applications"
+}
