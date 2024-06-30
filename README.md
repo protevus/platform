@@ -18,7 +18,7 @@ The following AI tools and models have been primarily employed in the developmen
 
 - **OpenRouter** (openrouter.ai):  is a fully managed service that simplifies the integration of high-performing foundation models (FMs) into your applications. It provides a unified API that allows you to access a wide range of foundation models from leading LLM providers such as Mistral AI, Anthropic, Meta AI, Llama, OpenAI, and more. This enables us to easily switch between models and providers, allowing us to select the most suitable model for our specific use case.
 
-- **Claude** (claude.ai): is an advanced large language model (LLM) developed by Anthropic that excels in understanding and generating human-like text. It is used to provide code generation, code navigation, and code documentation during development. We also use Claude to generate the documentation, ideals, and brainstorming for the Protevus Platform.
+- **Claude** (claude.ai): is an advanced large language model (LLM) developed by Anthropic that excels in understanding and generating human-like text. It is used to provide code generation, code navigation, and code documentation during development. We also use Claude to generate ideals, brainstorming and general project conversations for the Protevus Platform.
 
 - **Codestral** (mistral.ai): is a large language model (LLM) that is used to provide code completion, refactoring and validation. It is trained on a diverse dataset of code from various programming languages and is capable of understanding and generating code in multiple languages.
 
