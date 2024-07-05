@@ -346,39 +346,45 @@ abstract class ParameterBag implements Iterable<MapEntry<String, dynamic>>, Coun
     }
   }
 
-  /// Filters and transforms a parameter value using a provided function.
+  /// Filters a parameter value based on the given key.
   ///
   /// This method retrieves the value associated with the given [key] and applies
-  /// a [filterFunction] to transform or validate it. If the key doesn't exist,
-  /// it returns the [defaultValue].
+  /// basic filtering logic. If the key doesn't exist, it returns the [defaultValue].
+  ///
+  /// The current implementation provides a simple string sanitization for string values,
+  /// trimming whitespace from the beginning and end. For all other types, the value
+  /// is returned as-is.
+  ///
+  /// This method is designed to be overridden or extended in subclasses to provide
+  /// more sophisticated filtering logic.
   ///
   /// Parameters:
-  ///   [key] - The key of the parameter to retrieve and filter.
-  ///   [defaultValue] - Optional. The value to return if the key is not found.
-  ///   [filterFunction] - A function that takes the parameter value as input
-  ///                      and returns a transformed or validated value.
+  ///   [key] - The key of the parameter to filter.
+  ///   [defaultValue] - Optional. The value to return if the key doesn't exist.
+  ///   [filter] - Optional. An integer representing the filter type (not used in the base implementation).
+  ///   [options] - Optional. Additional options for filtering (not used in the base implementation).
   ///
   /// Returns:
-  ///   The filtered and transformed parameter value, or the defaultValue if
-  ///   the key is not found.
-  ///
-  /// Throws:
-  ///   [UnexpectedValueException] if the filterFunction throws an exception,
-  ///   indicating that the parameter value is invalid.
+  ///   The filtered value if the key exists, otherwise the [defaultValue].
   ///
   /// Example:
-  ///   var age = parameterBag.filter('age',
-  ///     defaultValue: 0,
-  ///     filterFunction: (value) => int.parse(value.toString()));
-  dynamic filter(String key, {dynamic defaultValue, required String Function(dynamic) filterFunction}) {
-    final value = get(key, defaultValue);
-    if (value == null) return defaultValue;
-
-    try {
-      return filterFunction(value);
-    } catch (e) {
-      throw UnexpectedValueException('Parameter value "$key" is invalid: ${e.toString()}');
+  ///   parameterBag.set('name', '  John Doe  ');
+  ///   print(parameterBag.filter('name')); // Outputs: 'John Doe'
+  dynamic filter(String key, {dynamic defaultValue, int? filter, dynamic options}) {
+    if (!has(key)) {
+      return defaultValue;
     }
+
+    var value = get(key);
+
+    // Basic filtering logic, can be overridden or extended in subclasses
+    if (value is String) {
+      // Simple string sanitization as an example
+      return value.trim();
+    }
+
+    // For other types, return as is
+    return value;
   }
 
   /// Returns an iterator for the entries in the parameters map.
