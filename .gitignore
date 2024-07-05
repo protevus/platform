@@ -7,6 +7,7 @@ build/
 
 # Files and directories created by developer
 spike/
+devbox.d/
 
 # If you're building an application, you may want to check-in your pubspec.lock
 pubspec.lock
