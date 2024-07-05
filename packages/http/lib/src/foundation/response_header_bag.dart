@@ -9,9 +9,7 @@
  * file that was distributed with this source code.
  */
 
-import 'cookie.dart';
-import 'header_utils.dart';
-import 'header_bag.dart';
+import 'package:protevus_http/foundation.dart';
 
 /// ResponseHeaderBag is a container for HTTP response headers.
 ///

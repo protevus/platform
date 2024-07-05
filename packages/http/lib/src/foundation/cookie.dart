@@ -10,7 +10,7 @@
  */
 
 import 'dart:math';
-import 'header_utils.dart';
+import 'package:protevus_http/foundation.dart';
 
 /// Represents an HTTP cookie.
 ///
