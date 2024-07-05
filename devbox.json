@@ -1,9 +1,13 @@
 {
-  "$schema":  "https://raw.githubusercontent.com/jetify-com/devbox/0.11.0/.schema/devbox.schema.json",
-  "packages": ["dart@latest"],
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.11.0/.schema/devbox.schema.json",
+  "packages": [
+    "dart@latest",
+    "php@latest",
+    "php83Packages.composer@latest"
+  ],
   "shell": {
     "init_hook": [
-      "echo 'Welcome to devbox!' > /dev/null"
+      "echo 'Welcome to Protevus!' > /dev/null"
     ],
     "scripts": {
       "test": [
