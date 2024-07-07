@@ -1,9 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.11.0/.schema/devbox.schema.json",
   "packages": [
-    "dart@latest",
-    "php@latest",
-    "php83Packages.composer@latest"
+    "dart@latest"
   ],
   "shell": {
     "init_hook": [
