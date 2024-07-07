@@ -203,21 +203,21 @@ abstract class InputBag extends ParameterBag {
     }
     options ??= {};
 
-    if (value is List && !((options['flags'] ?? 0) & (Filter.requireArray | Filter.forceArray))) {
+    if (value is List && !((options['flags'] ?? 0) & (Filter.FILTER_REQUIRE_ARRAY | Filter.FILTER_FORCE_ARRAY))) {
       throw BadRequestException(
           'Input value "$key" contains a List, but "FILTER_REQUIRE_ARRAY" or "FILTER_FORCE_ARRAY" flags were not set.');
     }
 
-    if ((filter ?? 0) & Filter.callback != 0 && options['options'] is! Function) {
+    if ((filter ?? 0) & Filter.FILTER_CALLBACK != 0 && options['options'] is! Function) {
       throw FormatException(
           'A Function must be passed when FILTER_CALLBACK is used, "${options['options'].runtimeType}" given.');
     }
 
     options['flags'] ??= 0;
-    bool nullOnFailure = (options['flags'] & Filter.nullOnFailure) != 0;
-    options['flags'] |= Filter.nullOnFailure;
+    bool nullOnFailure = (options['flags'] & Filter.FILTER_NULL_ON_FAILURE) != 0;
+    options['flags'] |= Filter.FILTER_NULL_ON_FAILURE;
 
-    var filteredValue = Filter.filterVar(value, filter ?? Filter.defaultFilter, options);
+    var filteredValue = Filter.filterVar(value, filter ?? Filter.FILTER_DEFAULT, options);
 
     if (filteredValue != null || nullOnFailure) {
       return filteredValue;
