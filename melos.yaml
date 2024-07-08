@@ -1,0 +1,7 @@
+name: protevus_platform
+repository: https://github.com/protevus/platform
+packages:
+  - packages/**
+ide:
+  intellij:
+    enabled: false

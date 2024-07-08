@@ -10,7 +10,7 @@ spike/
 devbox.d/
 
 # If you're building an application, you may want to check-in your pubspec.lock
-pubspec.lock
+#pubspec.lock
 
 # Ignore autosave files
 README.md~
