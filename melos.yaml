@@ -2,6 +2,15 @@ name: protevus_platform
 repository: https://github.com/protevus/platform
 packages:
   - packages/**
+
+command:
+  version:
+    # Generate commit links in package changelogs.
+    linkToCommits: true
+    # Only allow versioning to happen on main branch.
+    branch: main
+    workspaceChangelog: true
+    
 ide:
   intellij:
     enabled: false
