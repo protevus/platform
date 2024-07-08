@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+import 'dart:collection';
+
 import 'package:protevus_http/foundation.dart';
 import 'package:protevus_http/foundation_exception.dart';
 
@@ -25,8 +27,8 @@ import 'package:protevus_http/foundation_exception.dart';
 /// This class implements type-safe operations and throws appropriate exceptions
 /// for invalid inputs or operations. It's designed to work with various types of
 /// input data such as GET, POST, REQUEST, and COOKIE parameters.
-abstract class InputBag extends ParameterBag {
-
+final class InputBag extends ParameterBag
+    with IterableMixin<MapEntry<String, dynamic>> {
   /// Retrieves a value from the input bag by its key.
   ///
   /// This method overrides the base [ParameterBag.get] method to add additional
@@ -62,7 +64,8 @@ abstract class InputBag extends ParameterBag {
             value is String ||
             value is bool ||
             value is Stringable)) {
-      throw BadRequestException('Input value "$key" contains a non-scalar value.');
+      throw BadRequestException(
+          'Input value "$key" contains a non-scalar value.');
     }
 
     return identical(this, value) ? defaultValue : value;
@@ -194,7 +197,8 @@ abstract class InputBag extends ParameterBag {
   /// - Applies the filter using [Filter.filterVar].
   /// - Handles the FILTER_NULL_ON_FAILURE flag.
   @override
-  dynamic filter(String key, {dynamic defaultValue, int? filter, dynamic options}) {
+  dynamic filter(String key,
+      {dynamic defaultValue, int? filter, dynamic options}) {
     var value = has(key) ? parameters[key] : defaultValue;
 
     // Always turn options into a Map - this allows filter_var option shortcuts.
@@ -203,21 +207,26 @@ abstract class InputBag extends ParameterBag {
     }
     options ??= {};
 
-    if (value is List && !((options['flags'] ?? 0) & (Filter.FILTER_REQUIRE_ARRAY | Filter.FILTER_FORCE_ARRAY))) {
+    if (value is List &&
+        !((options['flags'] ?? 0) &
+            (Filter.FILTER_REQUIRE_ARRAY | Filter.FILTER_FORCE_ARRAY))) {
       throw BadRequestException(
           'Input value "$key" contains a List, but "FILTER_REQUIRE_ARRAY" or "FILTER_FORCE_ARRAY" flags were not set.');
     }
 
-    if ((filter ?? 0) & Filter.FILTER_CALLBACK != 0 && options['options'] is! Function) {
+    if ((filter ?? 0) & Filter.FILTER_CALLBACK != 0 &&
+        options['options'] is! Function) {
       throw FormatException(
           'A Function must be passed when FILTER_CALLBACK is used, "${options['options'].runtimeType}" given.');
     }
 
     options['flags'] ??= 0;
-    bool nullOnFailure = (options['flags'] & Filter.FILTER_NULL_ON_FAILURE) != 0;
+    bool nullOnFailure =
+        (options['flags'] & Filter.FILTER_NULL_ON_FAILURE) != 0;
     options['flags'] |= Filter.FILTER_NULL_ON_FAILURE;
 
-    var filteredValue = Filter.filterVar(value, filter ?? Filter.FILTER_DEFAULT, options);
+    var filteredValue =
+        Filter.filterVar(value, filter ?? Filter.FILTER_DEFAULT, options);
 
     if (filteredValue != null || nullOnFailure) {
       return filteredValue;
@@ -227,4 +236,3 @@ abstract class InputBag extends ParameterBag {
         'Input value "$key" is invalid and flag "FILTER_NULL_ON_FAILURE" was not set.');
   }
 }
-

@@ -10,7 +10,5 @@
           "description": "Write unit tests for highlighted code"
         }
       ],
-      "contextProviders": [],
-      "slashCommands": [],
       "allowAnonymousTelemetry": false
 }
