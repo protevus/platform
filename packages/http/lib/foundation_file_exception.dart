@@ -16,5 +16,5 @@ export 'src/foundation/file/exception/file_not_found_exception.dart';
 export 'src/foundation/file/exception/form_size_file_exception.dart';
 export 'src/foundation/file/exception/ini_size_file_exception.dart';
 export 'src/foundation/file/exception/no_file_exception.dart';
-export 'src/foundation/file/exception/no_tmpdir_file_exception.dart';
+export 'src/foundation/file/exception/no_tmp_dir_file_exception.dart';
 export 'src/foundation/file/exception/partial_file_exception.dart';

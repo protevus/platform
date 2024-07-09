@@ -12,5 +12,5 @@ import 'package:protevus_http/foundation_file_exception.dart';
 /// @author Florent Mata <florentmata@gmail.com>
 class CannotWriteFileException extends FileException {
   /// Creates a new [CannotWriteFileException] with the given [message].
-  CannotWriteFileException([String message = '']) : super(message);
+  CannotWriteFileException([super.message]);
 }

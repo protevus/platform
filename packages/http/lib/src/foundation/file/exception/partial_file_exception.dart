@@ -14,6 +14,5 @@ import 'package:protevus_http/foundation_file_exception.dart';
 ///
 /// @author Florent Mata <florentmata@gmail.com>
 class PartialFileException extends FileException {
-  // In Dart, we don't need to declare an empty class body if there are no additional
-  // properties or methods. The class will inherit everything from FileException.
+  PartialFileException(super.message);
 }

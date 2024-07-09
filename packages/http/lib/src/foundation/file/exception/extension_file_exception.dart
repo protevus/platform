@@ -12,5 +12,5 @@ import 'package:protevus_http/foundation_file_exception.dart';
 /// @author Florent Mata <florentmata@gmail.com>
 class ExtensionFileException extends FileException {
   // The constructor is empty as it inherits from FileException
-  ExtensionFileException([String message = '']) : super(message);
+  ExtensionFileException([super.message]);
 }

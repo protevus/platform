@@ -4,5 +4,5 @@ import 'package:protevus_http/foundation_file_exception.dart';
 ///
 /// @author Florent Mata <florentmata@gmail.com>
 class NoTmpDirFileException extends FileException {
-  // The constructor is implicit in this case, as it doesn't require any additional setup
+  NoTmpDirFileException(super.message);
 }

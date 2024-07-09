@@ -9,4 +9,5 @@
 
 library;
 
+export "src/foundation/file/file.dart";
 export 'src/foundation/file/upload_file.dart';

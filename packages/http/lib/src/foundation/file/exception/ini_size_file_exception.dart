@@ -11,5 +11,5 @@ import 'package:protevus_http/foundation_file_exception.dart';
 ///
 /// @author Florent Mata <florentmata@gmail.com>
 class IniSizeFileException extends FileException {
-  // No additional functionality needed, as this exception is just a specific type of FileException
+  IniSizeFileException(super.message);
 }

@@ -11,5 +11,5 @@ import 'package:protevus_http/foundation_file_exception.dart';
 ///
 /// @author Florent Mata <florentmata@gmail.com>
 class FormSizeFileException extends FileException {
-  FormSizeFileException([String message = '']) : super(message);
+  FormSizeFileException([super.message]);
 }

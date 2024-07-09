@@ -11,6 +11,5 @@ import 'package:protevus_http/foundation_file_exception.dart';
 ///
 /// @author Florent Mata <florentmata@gmail.com>
 class NoFileException extends FileException {
-  // In Dart, we don't need to explicitly declare an empty class body
-  // if there are no additional members or methods.
+  NoFileException(super.message);
 }
