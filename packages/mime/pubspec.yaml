@@ -10,6 +10,7 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
+  mime: ^1.0.5
   # path: ^1.8.0
 
 dev_dependencies:
