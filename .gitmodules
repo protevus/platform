@@ -1,3 +1,21 @@
 [submodule "stubs/protevus"]
 	path = stubs/protevus
 	url = https://github.com/protevus/protevus
+[submodule "stubs/mobile"]
+	path = stubs/mobile
+	url = https://github.com/protevus/mobile
+[submodule "stubs/IoT"]
+	path = stubs/IoT
+	url = https://github.com/protevus/IoT
+[submodule "stubs/console"]
+	path = stubs/console
+	url = https://github.com/protevus/console
+[submodule "stubs/service"]
+	path = stubs/service
+	url = https://github.com/protevus/service
+[submodule "stubs/desktop"]
+	path = stubs/desktop
+	url = https://github.com/protevus/desktop
+[submodule "stubs/web"]
+	path = stubs/web
+	url = https://github.com/protevus/web
