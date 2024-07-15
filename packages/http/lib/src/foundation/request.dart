@@ -12,7 +12,7 @@ import 'header_utils.dart';
 import 'input_bag.dart';
 import 'parameter_bag.dart';
 import 'server_bag.dart';
-import 'session_interface.dart';
+import "package:protevus_http/foundation_session.dart";
 import 'ip_utils.dart';
 
 class Request {

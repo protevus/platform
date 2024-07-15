@@ -10,3 +10,4 @@
 library;
 
 export 'src/foundation/session/session_bag_interface.dart';
+export 'src/foundation/session/session_interface.dart';
