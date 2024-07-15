@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "stubs/protevus"
+		},
+		{
+			"path": "stubs/console"
+		},
+		{
+			"path": "stubs/service"
+		},
+		{
+			"path": "stubs/desktop"
+		},
+		{
+			"path": "stubs/web"
+		},
+		{
+			"path": "stubs/mobile"
+		},
+		{
+			"path": "stubs/IoT"
+		}
+	]
+}
