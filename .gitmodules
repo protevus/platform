@@ -19,3 +19,9 @@
 [submodule "stubs/web"]
 	path = stubs/web
 	url = https://github.com/protevus/web
+[submodule "resources/branding"]
+	path = resources/branding
+	url = https://github.com/protevus/branding
+[submodule "resources/profile"]
+	path = resources/profile
+	url = https://github.com/protevus/.github

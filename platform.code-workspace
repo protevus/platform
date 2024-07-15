@@ -23,6 +23,12 @@
 		},
 		{
 			"path": "stubs/IoT"
+		},
+		{
+			"path": "resources/branding"
+		},
+		{
+			"path": "resources/profile"
 		}
 	]
 }
