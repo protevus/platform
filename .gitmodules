@@ -1,0 +1,3 @@
+[submodule "stubs/protevus"]
+	path = stubs/protevus
+	url = https://github.com/protevus/protevus
