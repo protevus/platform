@@ -29,6 +29,23 @@
 		},
 		{
 			"path": "resources/profile"
+		},
+		{
+			"path": "../resources"
 		}
-	]
+	],
+	"settings": {
+        "files.exclude": {
+            "**/resources/**/tests": true
+        },
+        "search.exclude": {
+            "**/resources/**/tests": true
+        },
+        "dart.testExclude": [
+            "**/resourcese/**"
+        ],
+        "files.watcherExclude": {
+            "**/resources/**": true
+        }
+    }
 }
