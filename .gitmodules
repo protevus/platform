@@ -1,27 +1,27 @@
 [submodule "stubs/protevus"]
 	path = stubs/protevus
-	url = https://github.com/protevus/protevus
+	url = https://git.protevus.com/protevus/protevus.git
 [submodule "stubs/mobile"]
 	path = stubs/mobile
-	url = https://github.com/protevus/mobile
+	url = https://git.protevus.com/protevus/mobile.git
 [submodule "stubs/IoT"]
 	path = stubs/IoT
-	url = https://github.com/protevus/IoT
+	url = https://git.protevus.com/protevus/IoT.git
 [submodule "stubs/console"]
 	path = stubs/console
-	url = https://github.com/protevus/console
+	url = https://git.protevus.com/protevus/console.git
 [submodule "stubs/service"]
 	path = stubs/service
-	url = https://github.com/protevus/service
+	url = https://git.protevus.com/protevus/service.git
 [submodule "stubs/desktop"]
 	path = stubs/desktop
-	url = https://github.com/protevus/desktop
+	url = https://git.protevus.com/protevus/desktop.git
 [submodule "stubs/web"]
 	path = stubs/web
-	url = https://github.com/protevus/web
+	url = https://git.protevus.com/protevus/web.git
 [submodule "resources/branding"]
 	path = resources/branding
-	url = https://github.com/protevus/branding
+	url = https://git.protevus.com/protevus/branding.git
 [submodule "resources/profile"]
 	path = resources/profile
-	url = https://github.com/protevus/.github
+	url = https://git.protevus.com/protevus/.github.git
