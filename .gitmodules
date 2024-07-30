@@ -31,3 +31,6 @@
 [submodule "resources/org-profile"]
 	path = resources/org-profile
 	url = https://git.protevus.com/protevus/.profile.git
+[submodule "resources/per-profile"]
+	path = resources/per-profile
+	url = https://git.protevus.com/mrpastewart/.profile.git
