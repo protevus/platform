@@ -22,9 +22,6 @@
 [submodule "resources/branding"]
 	path = resources/branding
 	url = https://git.protevus.com/protevus/branding.git
-[submodule "resources/profile"]
-	path = resources/profile
-	url = https://git.protevus.com/protevus/.github.git
 [submodule "stubs/ignition"]
 	path = stubs/ignition
 	url = https://git.protevus.com/protevus/ignition.git
