@@ -25,3 +25,6 @@
 [submodule "stubs/ignition"]
 	path = stubs/ignition
 	url = https://git.protevus.com/protevus/ignition.git
+[submodule "resources/ghb-profile"]
+	path = resources/ghb-profile
+	url = https://git.protevus.com/protevus/.github.git
