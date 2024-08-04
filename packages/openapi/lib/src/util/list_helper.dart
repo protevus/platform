@@ -23,6 +23,8 @@
 List<String>? removeNullsFromList(List<String?>? list) {
   if (list == null) return null;
 
-  // remove nulls and convert to List<String>
+  // Remove null entries from the list using the 'nonNulls' property
+  // which returns an Iterable containing only the non-null elements
+  // Convert the resulting Iterable to a List<String> using toList()
   return list.nonNulls.toList();
 }

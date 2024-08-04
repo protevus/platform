@@ -26,10 +26,14 @@ Map<K, V> removeNullsFromMap<K, V>(Map<K, V?>? map) {
 
   final fixed = <K, V>{};
 
-  // remove nulls
+  // Iterate through all keys in the input map
   for (final key in map.keys) {
+    // Get the value associated with the current key
     final value = map[key];
+    // Check if the value is not null
     if (value != null) {
+      // If the value is not null, add it to the 'fixed' map
+      // This effectively removes all null values from the original map
       fixed[key] = value;
     }
   }
