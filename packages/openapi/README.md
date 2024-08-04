@@ -1,39 +1,37 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+<p align="center"><a href="https://protevus.com" target="_blank"><img src="https://git.protevus.com/protevus/branding/raw/branch/main/protevus-logo-bg.png"></a></p>
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+# protevus_openapi
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+Reads and writes OpenAPI (Swagger) specifications.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+conduit_open_api supports both v2 and v3 of the open_api specification.
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+To use v2 import:
 
 ```dart
-const like = 'sample';
+import 'package:conduit_open_api/v2.dart';
 ```
 
-## Additional information
+To use v3 import:
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+```dart
+import 'package:conduit_open_api/v3.dart';
+```
+
+You can us v2 and v3 within a single project.
+
+
+Example
+---
+
+```dart
+import 'package:conduit_open_api/v3.dart';
+
+
+final file = File("test/specs/kubernetes.json");
+final contents = await file.readAsString();
+final doc = APIDocument.fromJSON(contents);
+
+final output = JSON.encode(doc.asMap());
+```
+
