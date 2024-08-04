@@ -1,39 +1,147 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+<p align="center"><a href="https://protevus.com" target="_blank"><img src="https://git.protevus.com/protevus/branding/raw/branch/main/protevus-logo-bg.png"></a></p>
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+# protevus_typeforge
+ 
+[![Build Status](https://travis-ci.org/conduit.dart/dart-codable.svg?branch=master)](https://travis-ci.org/conduit.dart/dart-codable)
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
+A library for encoding and decoding dynamic data into Dart objects.
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+## Basic Usage 
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+Data objects extend `Coding`:
 
 ```dart
-const like = 'sample';
+class Person extends Coding {
+  String name;
+
+  @override
+  void decode(KeyedArchive object) {
+    // must call super
+    super.decode(object);
+
+    name = object.decode("name");   
+  }
+
+  @override
+  void encode(KeyedArchive object) {
+    object.encode("name", name);
+  }
+}
 ```
 
-## Additional information
+An object that extends `Coding` can be read from JSON: 
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+```dart
+final json = json.decode(...);
+final archive = KeyedArchive.unarchive(json);
+final person = Person()..decode(archive);
+```
+
+Objects that extend `Coding` may also be written to JSON:
+
+```dart
+final person = Person()..name = "Bob";
+final archive = KeyedArchive.archive(person);
+final json = json.encode(archive);
+```
+
+`Coding` objects can encode or decode other `Coding` objects, including lists of `Coding` objects and maps where `Coding` objects are values. You must provide a closure that instantiates the `Coding` object being decoded.
+
+```dart
+class Team extends Coding {
+
+  List<Person> members;
+  Person manager;
+
+  @override
+  void decode(KeyedArchive object) {
+    super.decode(object); // must call super
+
+    members = object.decodeObjects("members", () => Person());
+    manager = object.decodeObject("manager", () => Person());
+  }
+
+  @override
+  void encode(KeyedArchive object) {
+    object.encodeObject("manager", manager);
+    object.encodeObjects("members", members);
+  }
+}
+```
+
+## Dynamic Type Casting 
+
+Types with primitive type arguments (e.g., `List<String>` or `Map<String, int>`) are a particular pain point when decoding. Override `castMap` in `Coding` to perform type coercion.
+You must import `package:protevus_typeforge/cast.dart as cast` and prefix type names with `cast`.
+
+```dart
+import 'package:protevus_typeforge/cast.dart' as cast;
+class Container extends Coding {  
+  List<String> things;
+
+  @override
+  Map<String, cast.Cast<dynamic>> get castMap => {
+    "things": cast.List(cast.String)
+  };
+  
+  @override
+  void decode(KeyedArchive object) {
+    super.decode(object);
+
+    things = object.decode("things");
+  }
+
+  @override
+  void encode(KeyedArchive object) {
+    object.encode("things", things);
+  }
+}
+
+``` 
+
+
+## Document References
+
+`Coding` objects may be referred to multiple times in a document without duplicating their structure. An object is referenced with the `$key` key. 
+For example, consider the following JSON: 
+
+```json
+{
+  "components": {
+    "thing": {
+      "name": "The Thing"
+    }    
+  },
+  "data": {
+    "$ref": "#/components/thing"
+  }
+}
+```
+
+In the above, the decoded value of `data` inherits all properties from `/components/thing`:
+
+```json
+{
+  "$ref": "#/components/thing",
+  "name": "The Thing"
+}
+```
+
+You may create references in your in-memory data structures through the `Coding.referenceURI`. 
+
+```dart
+final person = Person()..referenceURI = Uri(path: "/teams/engineering/manager");
+```
+
+The above person is encoded as:
+
+```json
+{
+  "$ref": "#/teams/engineering/manager"
+}
+```
+
+You may have cyclical references.
+
+See the specification for [JSON Schema](http://json-schema.org) and the `$ref` keyword for more details.
+
