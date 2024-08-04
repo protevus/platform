@@ -1,5 +1,5 @@
 name: protevus_openapi
-description: The openapi specification for the Protevus Platform
+description: Data structures for OpenAPI (Swagger) specification. Reads and writes JSON specifications.
 version: 0.0.1
 homepage: https://protevus.com
 documentation: https://docs.protevus.com
@@ -10,7 +10,8 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
-  # path: ^1.8.0
+  protevus_typeforge: ^0.0.1
+  meta: ^1.12.0
 
 dev_dependencies:
   lints: ^3.0.0
