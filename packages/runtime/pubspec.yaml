@@ -1,14 +1,23 @@
 name: protevus_runtime
-description: A starting point for Dart libraries or applications.
+description: Provides behaviors and base types for packages that can use mirrors and be AOT compiled.
 version: 0.0.1
-# repository: https://github.com/my_org/my_repo
+homepage: https://protevus.com
+documentation: https://docs.protevus.com
+repository: https://git.protevus.com/protevus/platform
 
 environment:
   sdk: ^3.4.3
 
 # Add regular dependencies here.
 dependencies:
-  # path: ^1.8.0
+  analyzer: ^6.5.0
+  args: ^2.0.0
+  protevus_isolate: ^0.0.1
+  io: ^1.0.4
+  package_config: ^2.1.0
+  path: ^1.9.0
+  pubspec_parse: ^1.2.3
+  yaml: ^3.1.2
 
 dev_dependencies:
   lints: ^3.0.0

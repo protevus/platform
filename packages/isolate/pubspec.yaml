@@ -1,14 +1,18 @@
 name: protevus_isolate
-description: A starting point for Dart libraries or applications.
+description: This library contains types that allow for executing code in a spawned isolate, perhaps with additional imports.
 version: 0.0.1
-# repository: https://github.com/my_org/my_repo
+homepage: https://protevus.com
+documentation: https://docs.protevus.com
+repository: https://git.protevus.com/protevus/platform
 
 environment:
   sdk: ^3.4.3
 
 # Add regular dependencies here.
 dependencies:
-  # path: ^1.8.0
+  analyzer: ^6.5.0
+  glob: ^2.1.2
+  path: ^1.9.0
 
 dev_dependencies:
   lints: ^3.0.0
