@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Check if the correct number of arguments is provided
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 <project_name> <project_type>"
+    echo "Project types: package, web, console"
+    exit 1
+fi
+
+# Assign arguments to variables
+PROJECT_NAME=$1
+PROJECT_TYPE=$2
+
+# Set the base directory for packages
+PACKAGES_DIR="$HOME/Devboxes/platform/packages"
+
+# Create the packages directory if it doesn't exist
+mkdir -p "$PACKAGES_DIR"
+
+# Change to the packages directory
+cd "$PACKAGES_DIR"
+
+# Validate project type
+case $PROJECT_TYPE in
+    package|web|console)
+        ;;
+    *)
+        echo "Invalid project type. Use 'package', 'web', or 'console'."
+        exit 1
+        ;;
+esac
+
+# Create the Dart project
+dart create --template=$PROJECT_TYPE $PROJECT_NAME
+
+# Check if the project was created successfully
+if [ $? -eq 0 ]; then
+    echo "Dart $PROJECT_TYPE project '$PROJECT_NAME' created successfully in $PACKAGES_DIR/$PROJECT_NAME"
+else
+    echo "Failed to create the Dart project."
+    exit 1
+fi
+
+# Change into the project directory
+cd "$PROJECT_NAME"
