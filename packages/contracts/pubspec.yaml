@@ -1,5 +1,5 @@
 name: protevus_contracts
-description: The Contracts Package for the Protevus Platform
+description: This package defines the Laravel API
 version: 0.0.1
 homepage: https://protevus.com
 documentation: https://docs.protevus.com
