@@ -1,9 +1,6 @@
 [submodule "stubs/protevus"]
 	path = stubs/protevus
 	url = https://git.protevus.com/protevus/protevus.git
-[submodule "stubs/mobile"]
-	path = stubs/mobile
-	url = https://git.protevus.com/protevus/mobile.git
 [submodule "stubs/service"]
 	path = stubs/service
 	url = https://git.protevus.com/protevus/service.git
