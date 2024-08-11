@@ -10,6 +10,3 @@
 [submodule "stubs/web"]
 	path = stubs/web
 	url = https://git.protevus.com/protevus/web.git
-[submodule "stubs/ignition"]
-	path = stubs/ignition
-	url = https://git.protevus.com/protevus/ignition.git
