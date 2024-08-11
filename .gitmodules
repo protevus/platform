@@ -4,9 +4,6 @@
 [submodule "stubs/mobile"]
 	path = stubs/mobile
 	url = https://git.protevus.com/protevus/mobile.git
-[submodule "stubs/IoT"]
-	path = stubs/IoT
-	url = https://git.protevus.com/protevus/IoT.git
 [submodule "stubs/console"]
 	path = stubs/console
 	url = https://git.protevus.com/protevus/console.git
