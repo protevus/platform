@@ -7,9 +7,6 @@
 [submodule "stubs/service"]
 	path = stubs/service
 	url = https://git.protevus.com/protevus/service.git
-[submodule "stubs/desktop"]
-	path = stubs/desktop
-	url = https://git.protevus.com/protevus/desktop.git
 [submodule "stubs/web"]
 	path = stubs/web
 	url = https://git.protevus.com/protevus/web.git
