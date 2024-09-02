@@ -10,19 +10,7 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
-  async: ^2.5.0
-  circular_buffer: ^0.11.0
-  collection: ^1.15.0
-  crypto: ^3.0.1
-  dart_console: ^4.0.0
-  ffi: ^2.1.0
-  logging: ^1.0.2
-  meta: ">=1.11.0 <2.0.0"
-  path: ^1.8.0
-  scope: ^4.0.0
-  stack_trace: ^1.10.0
-  uuid: ^4.1.0
-  validators2: ^5.0.0
+  # path: ^1.8.0
 
 dev_dependencies:
   lints: ^3.0.0
