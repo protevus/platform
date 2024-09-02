@@ -1,0 +1,35 @@
+name: ContainerConstraintValidatorFactory
+class_comment: '# * Uses a service container to create constraint validators.
+
+  # *
+
+  # * @author Kris Wallsmith <kris@symfony.com>'
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedTypeException
+- name: ValidatorException
+  type: class
+  source: Symfony\Component\Validator\Exception\ValidatorException
+properties: []
+methods:
+- name: getInstance
+  visibility: public
+  parameters:
+  - name: constraint
+  comment: "# * Uses a service container to create constraint validators.\n# *\n#\
+    \ * @author Kris Wallsmith <kris@symfony.com>\n# */\n# class ContainerConstraintValidatorFactory\
+    \ implements ConstraintValidatorFactoryInterface\n# {\n# private array $validators;\n\
+    # \n# public function __construct(\n# private ContainerInterface $container,\n\
+    # ) {\n# $this->validators = [];\n# }\n# \n# /**\n# * @throws ValidatorException\
+    \      When the validator class does not exist\n# * @throws UnexpectedTypeException\
+    \ When the validator is not an instance of ConstraintValidatorInterface"
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Component\Validator\Exception\UnexpectedTypeException
+- Symfony\Component\Validator\Exception\ValidatorException
+interfaces:
+- ConstraintValidatorFactoryInterface

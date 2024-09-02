@@ -1,0 +1,43 @@
+name: LdapFactoryTrait
+class_comment: null
+dependencies:
+- name: InvalidConfigurationException
+  type: class
+  source: Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: CheckLdapCredentialsListener
+  type: class
+  source: Symfony\Component\Ldap\Security\CheckLdapCredentialsListener
+- name: LdapAuthenticator
+  type: class
+  source: Symfony\Component\Ldap\Security\LdapAuthenticator
+properties: []
+methods:
+- name: getKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: createAuthenticator
+  visibility: public
+  parameters:
+  - name: container
+  - name: firewallName
+  - name: config
+  - name: userProviderId
+  comment: null
+traits:
+- Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\Ldap\Security\CheckLdapCredentialsListener
+- Symfony\Component\Ldap\Security\LdapAuthenticator
+interfaces: []

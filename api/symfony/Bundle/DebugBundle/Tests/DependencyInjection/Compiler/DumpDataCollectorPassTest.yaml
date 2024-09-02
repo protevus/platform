@@ -1,0 +1,59 @@
+name: DumpDataCollectorPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: DumpDataCollectorPass
+  type: class
+  source: Symfony\Bundle\DebugBundle\DependencyInjection\Compiler\DumpDataCollectorPass
+- name: WebDebugToolbarListener
+  type: class
+  source: Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+- name: DumpDataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\DumpDataCollector
+properties: []
+methods:
+- name: testProcessWithoutFileLinkFormatParameter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWithToolbarEnabledAndVirtualRequestStackPresent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWithToolbarEnabledAndVirtualRequestStackNotPresent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWithToolbarDisabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWithoutToolbar
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\DebugBundle\DependencyInjection\Compiler\DumpDataCollectorPass
+- Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\HttpFoundation\RequestStack
+- Symfony\Component\HttpKernel\DataCollector\DumpDataCollector
+interfaces: []

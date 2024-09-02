@@ -1,0 +1,29 @@
+name: HostRequestMatcherTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: HostRequestMatcher
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestMatcher\HostRequestMatcher
+properties: []
+methods:
+- name: test
+  visibility: public
+  parameters:
+  - name: pattern
+  - name: isMatch
+  comment: '# * @dataProvider getData'
+- name: getData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestMatcher\HostRequestMatcher
+interfaces: []

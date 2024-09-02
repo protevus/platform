@@ -1,0 +1,374 @@
+name: HasEvents
+class_comment: null
+dependencies:
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: ObservedBy
+  type: class
+  source: Illuminate\Database\Eloquent\Attributes\ObservedBy
+- name: NullDispatcher
+  type: class
+  source: Illuminate\Events\NullDispatcher
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+- name: ReflectionClass
+  type: class
+  source: ReflectionClass
+properties:
+- name: dispatchesEvents
+  visibility: protected
+  comment: '# * The event map for the model.
+
+    # *
+
+    # * Allows for object-based events for native Eloquent events.
+
+    # *
+
+    # * @var array'
+- name: observables
+  visibility: protected
+  comment: '# * User exposed observable events.
+
+    # *
+
+    # * These are extra user-defined events observers may subscribe to.
+
+    # *
+
+    # * @var array'
+methods:
+- name: bootHasEvents
+  visibility: public
+  parameters: []
+  comment: "# * The event map for the model.\n# *\n# * Allows for object-based events\
+    \ for native Eloquent events.\n# *\n# * @var array\n# */\n# protected $dispatchesEvents\
+    \ = [];\n# \n# /**\n# * User exposed observable events.\n# *\n# * These are extra\
+    \ user-defined events observers may subscribe to.\n# *\n# * @var array\n# */\n\
+    # protected $observables = [];\n# \n# /**\n# * Boot the has event trait for a\
+    \ model.\n# *\n# * @return void"
+- name: resolveObserveAttributes
+  visibility: public
+  parameters: []
+  comment: '# * Resolve the observe class names from the attributes.
+
+    # *
+
+    # * @return array'
+- name: observe
+  visibility: public
+  parameters:
+  - name: classes
+  comment: '# * Register observers with the model.
+
+    # *
+
+    # * @param  object|array|string  $classes
+
+    # * @return void
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: registerObserver
+  visibility: protected
+  parameters:
+  - name: class
+  comment: '# * Register a single observer with the model.
+
+    # *
+
+    # * @param  object|string  $class
+
+    # * @return void
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: resolveObserverClassName
+  visibility: private
+  parameters:
+  - name: class
+  comment: '# * Resolve the observer''s class name from an object or string.
+
+    # *
+
+    # * @param  object|string  $class
+
+    # * @return string
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: getObservableEvents
+  visibility: public
+  parameters: []
+  comment: '# * Get the observable event names.
+
+    # *
+
+    # * @return array'
+- name: setObservableEvents
+  visibility: public
+  parameters:
+  - name: observables
+  comment: '# * Set the observable event names.
+
+    # *
+
+    # * @param  array  $observables
+
+    # * @return $this'
+- name: addObservableEvents
+  visibility: public
+  parameters:
+  - name: observables
+  comment: '# * Add an observable event name.
+
+    # *
+
+    # * @param  array|mixed  $observables
+
+    # * @return void'
+- name: removeObservableEvents
+  visibility: public
+  parameters:
+  - name: observables
+  comment: '# * Remove an observable event name.
+
+    # *
+
+    # * @param  array|mixed  $observables
+
+    # * @return void'
+- name: registerModelEvent
+  visibility: protected
+  parameters:
+  - name: event
+  - name: callback
+  comment: '# * Register a model event with the dispatcher.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @param  \Illuminate\Events\QueuedClosure|\Closure|string|array  $callback
+
+    # * @return void'
+- name: fireModelEvent
+  visibility: protected
+  parameters:
+  - name: event
+  - name: halt
+    default: 'true'
+  comment: '# * Fire the given event for the model.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @param  bool  $halt
+
+    # * @return mixed'
+- name: fireCustomModelEvent
+  visibility: protected
+  parameters:
+  - name: event
+  - name: method
+  comment: '# * Fire a custom model event for the given event.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @param  string  $method
+
+    # * @return mixed|null'
+- name: filterModelEventResults
+  visibility: protected
+  parameters:
+  - name: result
+  comment: '# * Filter the model event results.
+
+    # *
+
+    # * @param  mixed  $result
+
+    # * @return mixed'
+- name: retrieved
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a retrieved model event with the dispatcher.
+
+    # *
+
+    # * @param  \Illuminate\Events\QueuedClosure|\Closure|string|array  $callback
+
+    # * @return void'
+- name: saving
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a saving model event with the dispatcher.
+
+    # *
+
+    # * @param  \Illuminate\Events\QueuedClosure|\Closure|string|array  $callback
+
+    # * @return void'
+- name: saved
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a saved model event with the dispatcher.
+
+    # *
+
+    # * @param  \Illuminate\Events\QueuedClosure|\Closure|string|array  $callback
+
+    # * @return void'
+- name: updating
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register an updating model event with the dispatcher.
+
+    # *
+
+    # * @param  \Illuminate\Events\QueuedClosure|\Closure|string|array  $callback
+
+    # * @return void'
+- name: updated
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register an updated model event with the dispatcher.
+
+    # *
+
+    # * @param  \Illuminate\Events\QueuedClosure|\Closure|string|array  $callback
+
+    # * @return void'
+- name: creating
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a creating model event with the dispatcher.
+
+    # *
+
+    # * @param  \Illuminate\Events\QueuedClosure|\Closure|string|array  $callback
+
+    # * @return void'
+- name: created
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a created model event with the dispatcher.
+
+    # *
+
+    # * @param  \Illuminate\Events\QueuedClosure|\Closure|string|array  $callback
+
+    # * @return void'
+- name: replicating
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a replicating model event with the dispatcher.
+
+    # *
+
+    # * @param  \Illuminate\Events\QueuedClosure|\Closure|string|array  $callback
+
+    # * @return void'
+- name: deleting
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a deleting model event with the dispatcher.
+
+    # *
+
+    # * @param  \Illuminate\Events\QueuedClosure|\Closure|string|array  $callback
+
+    # * @return void'
+- name: deleted
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a deleted model event with the dispatcher.
+
+    # *
+
+    # * @param  \Illuminate\Events\QueuedClosure|\Closure|string|array  $callback
+
+    # * @return void'
+- name: flushEventListeners
+  visibility: public
+  parameters: []
+  comment: '# * Remove all the event listeners for the model.
+
+    # *
+
+    # * @return void'
+- name: dispatchesEvents
+  visibility: public
+  parameters: []
+  comment: '# * Get the event map for the model.
+
+    # *
+
+    # * @return array'
+- name: getEventDispatcher
+  visibility: public
+  parameters: []
+  comment: '# * Get the event dispatcher instance.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Events\Dispatcher'
+- name: setEventDispatcher
+  visibility: public
+  parameters:
+  - name: dispatcher
+  comment: '# * Set the event dispatcher instance.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Events\Dispatcher  $dispatcher
+
+    # * @return void'
+- name: unsetEventDispatcher
+  visibility: public
+  parameters: []
+  comment: '# * Unset the event dispatcher for models.
+
+    # *
+
+    # * @return void'
+- name: withoutEvents
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Execute a callback without firing any model events for any model type.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return mixed'
+traits:
+- Illuminate\Contracts\Events\Dispatcher
+- Illuminate\Database\Eloquent\Attributes\ObservedBy
+- Illuminate\Events\NullDispatcher
+- Illuminate\Support\Arr
+- InvalidArgumentException
+- ReflectionClass
+interfaces: []

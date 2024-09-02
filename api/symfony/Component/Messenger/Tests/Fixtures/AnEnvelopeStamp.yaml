@@ -1,0 +1,12 @@
+name: AnEnvelopeStamp
+class_comment: null
+dependencies:
+- name: StampInterface
+  type: class
+  source: Symfony\Component\Messenger\Stamp\StampInterface
+properties: []
+methods: []
+traits:
+- Symfony\Component\Messenger\Stamp\StampInterface
+interfaces:
+- StampInterface

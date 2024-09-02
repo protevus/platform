@@ -1,0 +1,65 @@
+name: ArrayObject
+class_comment: '# * @template TKey of array-key
+
+  # * @template TItem
+
+  # *
+
+  # * @extends  \ArrayObject<TKey, TItem>'
+dependencies:
+- name: BaseArrayObject
+  type: class
+  source: ArrayObject
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: JsonSerializable
+  type: class
+  source: JsonSerializable
+properties: []
+methods:
+- name: collect
+  visibility: public
+  parameters: []
+  comment: '# * @template TKey of array-key
+
+    # * @template TItem
+
+    # *
+
+    # * @extends  \ArrayObject<TKey, TItem>
+
+    # */
+
+    # class ArrayObject extends BaseArrayObject implements Arrayable, JsonSerializable
+
+    # {
+
+    # /**
+
+    # * Get a collection containing the underlying array.
+
+    # *
+
+    # * @return \Illuminate\Support\Collection'
+- name: toArray
+  visibility: public
+  parameters: []
+  comment: '# * Get the instance as an array.
+
+    # *
+
+    # * @return array'
+- name: jsonSerialize
+  visibility: public
+  parameters: []
+  comment: '# * Get the array that should be JSON serialized.
+
+    # *
+
+    # * @return array'
+traits:
+- Illuminate\Contracts\Support\Arrayable
+- JsonSerializable
+interfaces:
+- Arrayable

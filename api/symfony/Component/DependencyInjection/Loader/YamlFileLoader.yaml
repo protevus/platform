@@ -1,0 +1,256 @@
+name: YamlFileLoader
+class_comment: '# * YamlFileLoader loads YAML files service definitions.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: Alias
+  type: class
+  source: Symfony\Component\DependencyInjection\Alias
+- name: AbstractArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\AbstractArgument
+- name: BoundArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\BoundArgument
+- name: IteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- name: ServiceClosureArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- name: ServiceLocatorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- name: TaggedIteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\LogicException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: ExtensionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: Expression
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Expression
+- name: ParseException
+  type: class
+  source: Symfony\Component\Yaml\Exception\ParseException
+- name: YamlParser
+  type: class
+  source: Symfony\Component\Yaml\Parser
+- name: TaggedValue
+  type: class
+  source: Symfony\Component\Yaml\Tag\TaggedValue
+- name: Yaml
+  type: class
+  source: Symfony\Component\Yaml\Yaml
+properties: []
+methods:
+- name: parseDefaults
+  visibility: private
+  parameters:
+  - name: '&$content'
+  - name: file
+  comment: "# * YamlFileLoader loads YAML files service definitions.\n# *\n# * @author\
+    \ Fabien Potencier <fabien@symfony.com>\n# */\n# class YamlFileLoader extends\
+    \ FileLoader\n# {\n# private const SERVICE_KEYWORDS = [\n# 'alias' => 'alias',\n\
+    # 'parent' => 'parent',\n# 'class' => 'class',\n# 'shared' => 'shared',\n# 'synthetic'\
+    \ => 'synthetic',\n# 'lazy' => 'lazy',\n# 'public' => 'public',\n# 'abstract'\
+    \ => 'abstract',\n# 'deprecated' => 'deprecated',\n# 'factory' => 'factory',\n\
+    # 'file' => 'file',\n# 'arguments' => 'arguments',\n# 'properties' => 'properties',\n\
+    # 'configurator' => 'configurator',\n# 'calls' => 'calls',\n# 'tags' => 'tags',\n\
+    # 'decorates' => 'decorates',\n# 'decoration_inner_name' => 'decoration_inner_name',\n\
+    # 'decoration_priority' => 'decoration_priority',\n# 'decoration_on_invalid' =>\
+    \ 'decoration_on_invalid',\n# 'autowire' => 'autowire',\n# 'autoconfigure' =>\
+    \ 'autoconfigure',\n# 'bind' => 'bind',\n# 'constructor' => 'constructor',\n#\
+    \ ];\n# \n# private const PROTOTYPE_KEYWORDS = [\n# 'resource' => 'resource',\n\
+    # 'namespace' => 'namespace',\n# 'exclude' => 'exclude',\n# 'parent' => 'parent',\n\
+    # 'shared' => 'shared',\n# 'lazy' => 'lazy',\n# 'public' => 'public',\n# 'abstract'\
+    \ => 'abstract',\n# 'deprecated' => 'deprecated',\n# 'factory' => 'factory',\n\
+    # 'arguments' => 'arguments',\n# 'properties' => 'properties',\n# 'configurator'\
+    \ => 'configurator',\n# 'calls' => 'calls',\n# 'tags' => 'tags',\n# 'autowire'\
+    \ => 'autowire',\n# 'autoconfigure' => 'autoconfigure',\n# 'bind' => 'bind',\n\
+    # 'constructor' => 'constructor',\n# ];\n# \n# private const INSTANCEOF_KEYWORDS\
+    \ = [\n# 'shared' => 'shared',\n# 'lazy' => 'lazy',\n# 'public' => 'public',\n\
+    # 'properties' => 'properties',\n# 'configurator' => 'configurator',\n# 'calls'\
+    \ => 'calls',\n# 'tags' => 'tags',\n# 'autowire' => 'autowire',\n# 'bind' => 'bind',\n\
+    # 'constructor' => 'constructor',\n# ];\n# \n# private const DEFAULTS_KEYWORDS\
+    \ = [\n# 'public' => 'public',\n# 'tags' => 'tags',\n# 'autowire' => 'autowire',\n\
+    # 'autoconfigure' => 'autoconfigure',\n# 'bind' => 'bind',\n# ];\n# \n# protected\
+    \ bool $autoRegisterAliasesForSinglyImplementedInterfaces = false;\n# \n# private\
+    \ YamlParser $yamlParser;\n# private int $anonymousServicesCount;\n# private string\
+    \ $anonymousServicesSuffix;\n# \n# public function load(mixed $resource, ?string\
+    \ $type = null): mixed\n# {\n# $path = $this->locator->locate($resource);\n# \n\
+    # $content = $this->loadFile($path);\n# \n# $this->container->fileExists($path);\n\
+    # \n# // empty file\n# if (null === $content) {\n# return null;\n# }\n# \n# ++$this->importing;\n\
+    # try {\n# $this->loadContent($content, $path);\n# \n# // per-env configuration\n\
+    # if ($this->env && isset($content['when@'.$this->env])) {\n# if (!\\is_array($content['when@'.$this->env]))\
+    \ {\n# throw new InvalidArgumentException(\\sprintf('The \"when@%s\" key should\
+    \ contain an array in \"%s\". Check your YAML syntax.', $this->env, $path));\n\
+    # }\n# \n# $env = $this->env;\n# $this->env = null;\n# try {\n# $this->loadContent($content['when@'.$env],\
+    \ $path);\n# } finally {\n# $this->env = $env;\n# }\n# }\n# } finally {\n# --$this->importing;\n\
+    # }\n# $this->loadExtensionConfigs();\n# \n# return null;\n# }\n# \n# private\
+    \ function loadContent(array $content, string $path): void\n# {\n# // imports\n\
+    # $this->parseImports($content, $path);\n# \n# // parameters\n# if (isset($content['parameters']))\
+    \ {\n# if (!\\is_array($content['parameters'])) {\n# throw new InvalidArgumentException(\\\
+    sprintf('The \"parameters\" key should contain an array in \"%s\". Check your\
+    \ YAML syntax.', $path));\n# }\n# \n# foreach ($content['parameters'] as $key\
+    \ => $value) {\n# $this->container->setParameter($key, $this->resolveServices($value,\
+    \ $path, true));\n# }\n# }\n# \n# // extensions\n# $this->loadFromExtensions($content);\n\
+    # \n# // services\n# $this->anonymousServicesCount = 0;\n# $this->anonymousServicesSuffix\
+    \ = '~'.ContainerBuilder::hash($path);\n# $this->setCurrentDir(\\dirname($path));\n\
+    # try {\n# $this->parseDefinitions($content, $path);\n# } finally {\n# $this->instanceof\
+    \ = [];\n# $this->registerAliasesForSinglyImplementedInterfaces();\n# }\n# }\n\
+    # \n# public function supports(mixed $resource, ?string $type = null): bool\n\
+    # {\n# if (!\\is_string($resource)) {\n# return false;\n# }\n# \n# if (null ===\
+    \ $type && \\in_array(pathinfo($resource, \\PATHINFO_EXTENSION), ['yaml', 'yml'],\
+    \ true)) {\n# return true;\n# }\n# \n# return \\in_array($type, ['yaml', 'yml'],\
+    \ true);\n# }\n# \n# private function parseImports(array $content, string $file):\
+    \ void\n# {\n# if (!isset($content['imports'])) {\n# return;\n# }\n# \n# if (!\\\
+    is_array($content['imports'])) {\n# throw new InvalidArgumentException(\\sprintf('The\
+    \ \"imports\" key should contain an array in \"%s\". Check your YAML syntax.',\
+    \ $file));\n# }\n# \n# $defaultDirectory = \\dirname($file);\n# foreach ($content['imports']\
+    \ as $import) {\n# if (!\\is_array($import)) {\n# $import = ['resource' => $import];\n\
+    # }\n# if (!isset($import['resource'])) {\n# throw new InvalidArgumentException(\\\
+    sprintf('An import should provide a resource in \"%s\". Check your YAML syntax.',\
+    \ $file));\n# }\n# \n# $this->setCurrentDir($defaultDirectory);\n# $this->import($import['resource'],\
+    \ $import['type'] ?? null, $import['ignore_errors'] ?? false, $file);\n# }\n#\
+    \ }\n# \n# private function parseDefinitions(array $content, string $file, bool\
+    \ $trackBindings = true): void\n# {\n# if (!isset($content['services'])) {\n#\
+    \ return;\n# }\n# \n# if (!\\is_array($content['services'])) {\n# throw new InvalidArgumentException(\\\
+    sprintf('The \"services\" key should contain an array in \"%s\". Check your YAML\
+    \ syntax.', $file));\n# }\n# \n# if (\\array_key_exists('_instanceof', $content['services']))\
+    \ {\n# $instanceof = $content['services']['_instanceof'];\n# unset($content['services']['_instanceof']);\n\
+    # \n# if (!\\is_array($instanceof)) {\n# throw new InvalidArgumentException(\\\
+    sprintf('Service \"_instanceof\" key must be an array, \"%s\" given in \"%s\"\
+    .', get_debug_type($instanceof), $file));\n# }\n# $this->instanceof = [];\n# $this->isLoadingInstanceof\
+    \ = true;\n# foreach ($instanceof as $id => $service) {\n# if (!$service || !\\\
+    is_array($service)) {\n# throw new InvalidArgumentException(\\sprintf('Type definition\
+    \ \"%s\" must be a non-empty array within \"_instanceof\" in \"%s\". Check your\
+    \ YAML syntax.', $id, $file));\n# }\n# if (\\is_string($service) && str_starts_with($service,\
+    \ '@')) {\n# throw new InvalidArgumentException(\\sprintf('Type definition \"\
+    %s\" cannot be an alias within \"_instanceof\" in \"%s\". Check your YAML syntax.',\
+    \ $id, $file));\n# }\n# $this->parseDefinition($id, $service, $file, [], false,\
+    \ $trackBindings);\n# }\n# }\n# \n# $this->isLoadingInstanceof = false;\n# $defaults\
+    \ = $this->parseDefaults($content, $file);\n# foreach ($content['services'] as\
+    \ $id => $service) {\n# $this->parseDefinition($id, $service, $file, $defaults,\
+    \ false, $trackBindings);\n# }\n# }\n# \n# /**\n# * @throws InvalidArgumentException"
+- name: isUsingShortSyntax
+  visibility: private
+  parameters:
+  - name: service
+  comment: null
+- name: parseDefinition
+  visibility: private
+  parameters:
+  - name: id
+  - name: service
+  - name: file
+  - name: defaults
+  - name: return
+    default: 'false'
+  - name: trackBindings
+    default: 'true'
+  comment: '# * @throws InvalidArgumentException When tags are invalid'
+- name: parseCallable
+  visibility: private
+  parameters:
+  - name: callable
+  - name: parameter
+  - name: id
+  - name: file
+  comment: '# * @throws InvalidArgumentException When errors occur'
+- name: loadFile
+  visibility: protected
+  parameters:
+  - name: file
+  comment: '# * Loads a YAML file.
+
+    # *
+
+    # * @throws InvalidArgumentException when the given file is not a local file or
+    when it does not exist'
+- name: validate
+  visibility: private
+  parameters:
+  - name: content
+  - name: file
+  comment: '# * Validates a YAML file.
+
+    # *
+
+    # * @throws InvalidArgumentException When service file is not valid'
+- name: resolveServices
+  visibility: private
+  parameters:
+  - name: value
+  - name: file
+  - name: isParameter
+    default: 'false'
+  comment: null
+- name: loadFromExtensions
+  visibility: private
+  parameters:
+  - name: content
+  comment: null
+- name: checkDefinition
+  visibility: private
+  parameters:
+  - name: id
+  - name: definition
+  - name: file
+  comment: null
+- name: validateAttributes
+  visibility: private
+  parameters:
+  - name: message
+  - name: attributes
+  - name: path
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Alias
+- Symfony\Component\DependencyInjection\Argument\AbstractArgument
+- Symfony\Component\DependencyInjection\Argument\BoundArgument
+- Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Exception\LogicException
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\ExpressionLanguage\Expression
+- Symfony\Component\Yaml\Exception\ParseException
+- Symfony\Component\Yaml\Tag\TaggedValue
+- Symfony\Component\Yaml\Yaml
+interfaces: []

@@ -1,0 +1,31 @@
+name: SyncTransportFactoryTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: MessageBusInterface
+  type: class
+  source: Symfony\Component\Messenger\MessageBusInterface
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+- name: SyncTransport
+  type: class
+  source: Symfony\Component\Messenger\Transport\Sync\SyncTransport
+- name: SyncTransportFactory
+  type: class
+  source: Symfony\Component\Messenger\Transport\Sync\SyncTransportFactory
+properties: []
+methods:
+- name: testCreateTransport
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\MessageBusInterface
+- Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+- Symfony\Component\Messenger\Transport\Sync\SyncTransport
+- Symfony\Component\Messenger\Transport\Sync\SyncTransportFactory
+interfaces: []

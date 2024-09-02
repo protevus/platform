@@ -1,0 +1,15 @@
+name: identity_translator
+class_comment: null
+dependencies:
+- name: IdentityTranslator
+  type: class
+  source: Symfony\Component\Translation\IdentityTranslator
+- name: TranslatorInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatorInterface
+properties: []
+methods: []
+traits:
+- Symfony\Component\Translation\IdentityTranslator
+- Symfony\Contracts\Translation\TranslatorInterface
+interfaces: []

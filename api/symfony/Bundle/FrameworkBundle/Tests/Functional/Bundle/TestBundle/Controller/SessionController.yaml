@@ -1,0 +1,55 @@
+name: SessionController
+class_comment: null
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: RedirectResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\RedirectResponse
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: welcomeAction
+  visibility: public
+  parameters:
+  - name: request
+  - name: name
+    default: 'null'
+  comment: null
+- name: cacheableAction
+  visibility: public
+  parameters: []
+  comment: null
+- name: logoutAction
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+- name: setFlashAction
+  visibility: public
+  parameters:
+  - name: request
+  - name: message
+  comment: null
+- name: showFlashAction
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\HttpFoundation\RedirectResponse
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+interfaces: []

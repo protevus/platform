@@ -1,0 +1,34 @@
+name: AbstractDummyFirstChild
+class_comment: null
+dependencies:
+- name: DummyFirstChildQuux
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\DummyFirstChildQuux
+properties:
+- name: bar
+  visibility: public
+  comment: null
+- name: quux
+  visibility: public
+  comment: '# @var DummyFirstChildQuux|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+    default: 'null'
+  - name: bar
+    default: 'null'
+  comment: null
+- name: getQuux
+  visibility: public
+  parameters: []
+  comment: null
+- name: setQuux
+  visibility: public
+  parameters:
+  - name: quux
+  comment: null
+traits:
+- Symfony\Component\Serializer\Tests\Fixtures\DummyFirstChildQuux
+interfaces: []

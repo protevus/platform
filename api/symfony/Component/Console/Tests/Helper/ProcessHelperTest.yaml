@@ -1,0 +1,57 @@
+name: ProcessHelperTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: DebugFormatterHelper
+  type: class
+  source: Symfony\Component\Console\Helper\DebugFormatterHelper
+- name: HelperSet
+  type: class
+  source: Symfony\Component\Console\Helper\HelperSet
+- name: ProcessHelper
+  type: class
+  source: Symfony\Component\Console\Helper\ProcessHelper
+- name: StreamOutput
+  type: class
+  source: Symfony\Component\Console\Output\StreamOutput
+- name: Process
+  type: class
+  source: Symfony\Component\Process\Process
+properties: []
+methods:
+- name: testVariousProcessRuns
+  visibility: public
+  parameters:
+  - name: expected
+  - name: cmd
+  - name: verbosity
+  - name: error
+  comment: '# * @dataProvider provideCommandsAndOutput'
+- name: testPassedCallbackIsExecuted
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideCommandsAndOutput
+  visibility: public
+  parameters: []
+  comment: null
+- name: getOutputStream
+  visibility: private
+  parameters:
+  - name: verbosity
+  comment: null
+- name: getOutput
+  visibility: private
+  parameters:
+  - name: output
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Helper\DebugFormatterHelper
+- Symfony\Component\Console\Helper\HelperSet
+- Symfony\Component\Console\Helper\ProcessHelper
+- Symfony\Component\Console\Output\StreamOutput
+- Symfony\Component\Process\Process
+interfaces: []

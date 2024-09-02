@@ -1,0 +1,31 @@
+name: ResponseHeaderSameTest
+class_comment: null
+dependencies:
+- name: ExpectationFailedException
+  type: class
+  source: PHPUnit\Framework\ExpectationFailedException
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: TestFailure
+  type: class
+  source: PHPUnit\Framework\TestFailure
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: ResponseHeaderSame
+  type: class
+  source: Symfony\Component\HttpFoundation\Test\Constraint\ResponseHeaderSame
+properties: []
+methods:
+- name: testConstraint
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\ExpectationFailedException
+- PHPUnit\Framework\TestCase
+- PHPUnit\Framework\TestFailure
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpFoundation\Test\Constraint\ResponseHeaderSame
+interfaces: []

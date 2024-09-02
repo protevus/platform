@@ -1,0 +1,29 @@
+name: FooTypeBarExtension
+class_comment: null
+dependencies:
+- name: AbstractTypeExtension
+  type: class
+  source: Symfony\Component\Form\AbstractTypeExtension
+- name: FormBuilderInterface
+  type: class
+  source: Symfony\Component\Form\FormBuilderInterface
+properties: []
+methods:
+- name: buildForm
+  visibility: public
+  parameters:
+  - name: builder
+  - name: options
+  comment: null
+- name: getAllowedOptionValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: getExtendedTypes
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\AbstractTypeExtension
+- Symfony\Component\Form\FormBuilderInterface
+interfaces: []

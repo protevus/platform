@@ -1,0 +1,31 @@
+name: Suggestion
+class_comment: '# * Represents a single suggested value.
+
+  # *
+
+  # * @author Wouter de Jong <wouter@wouterj.nl>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: value
+  - name: description
+    default: ''''''
+  comment: null
+- name: getValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDescription
+  visibility: public
+  parameters: []
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces:
+- \Stringable

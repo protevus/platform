@@ -1,0 +1,25 @@
+name: RelativePath
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+- name: PropertyPath
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyPath
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: root
+  - name: propertyPath
+  comment: null
+- name: getRoot
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\FormInterface
+- Symfony\Component\PropertyAccess\PropertyPath
+interfaces: []

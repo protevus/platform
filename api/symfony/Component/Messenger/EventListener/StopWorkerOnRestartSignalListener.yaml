@@ -1,0 +1,52 @@
+name: StopWorkerOnRestartSignalListener
+class_comment: '# * @author Ryan Weaver <ryan@symfonycasts.com>'
+dependencies:
+- name: CacheItemPoolInterface
+  type: class
+  source: Psr\Cache\CacheItemPoolInterface
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: WorkerRunningEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerRunningEvent
+- name: WorkerStartedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerStartedEvent
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: cachePool
+  - name: logger
+    default: 'null'
+  comment: null
+- name: onWorkerStarted
+  visibility: public
+  parameters: []
+  comment: null
+- name: onWorkerRunning
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: shouldRestart
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Psr\Cache\CacheItemPoolInterface
+- Psr\Log\LoggerInterface
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\Messenger\Event\WorkerRunningEvent
+- Symfony\Component\Messenger\Event\WorkerStartedEvent
+interfaces:
+- EventSubscriberInterface

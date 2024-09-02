@@ -1,0 +1,31 @@
+name: FileTypeFilterIterator
+class_comment: '# * FileTypeFilterIterator only keeps files, directories, or both.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @extends \FilterIterator<string, \SplFileInfo>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: iterator
+  - name: mode
+  comment: "# * FileTypeFilterIterator only keeps files, directories, or both.\n#\
+    \ *\n# * @author Fabien Potencier <fabien@symfony.com>\n# *\n# * @extends \\FilterIterator<string,\
+    \ \\SplFileInfo>\n# */\n# class FileTypeFilterIterator extends \\FilterIterator\n\
+    # {\n# public const ONLY_FILES = 1;\n# public const ONLY_DIRECTORIES = 2;\n# \n\
+    # /**\n# * @param \\Iterator<string, \\SplFileInfo> $iterator The Iterator to\
+    \ filter\n# * @param int                             $mode     The mode (self::ONLY_FILES\
+    \ or self::ONLY_DIRECTORIES)"
+- name: accept
+  visibility: public
+  parameters: []
+  comment: '# * Filters the iterator values.'
+traits: []
+interfaces: []

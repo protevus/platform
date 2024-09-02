@@ -1,0 +1,29 @@
+name: MaxDepthTest
+class_comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>"
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: MaxDepth
+  type: class
+  source: Symfony\Component\Serializer\Attribute\MaxDepth
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Serializer\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: testNotAnIntMaxDepthParameter
+  visibility: public
+  parameters:
+  - name: value
+  comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# */\n# class MaxDepthTest\
+    \ extends TestCase\n# {\n# /**\n# * @testWith    [-4]\n# *              [0]"
+- name: testMaxDepthParameters
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Attribute\MaxDepth
+- Symfony\Component\Serializer\Exception\InvalidArgumentException
+interfaces: []

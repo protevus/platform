@@ -1,0 +1,46 @@
+name: AnonymousComponent
+class_comment: null
+dependencies: []
+properties:
+- name: view
+  visibility: protected
+  comment: '# * The component view.
+
+    # *
+
+    # * @var string'
+- name: data
+  visibility: protected
+  comment: '# * The component data.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: view
+  - name: data
+  comment: "# * The component view.\n# *\n# * @var string\n# */\n# protected $view;\n\
+    # \n# /**\n# * The component data.\n# *\n# * @var array\n# */\n# protected $data\
+    \ = [];\n# \n# /**\n# * Create a new anonymous component instance.\n# *\n# * @param\
+    \  string  $view\n# * @param  array  $data\n# * @return void"
+- name: render
+  visibility: public
+  parameters: []
+  comment: '# * Get the view / view contents that represent the component.
+
+    # *
+
+    # * @return string'
+- name: data
+  visibility: public
+  parameters: []
+  comment: '# * Get the data that should be supplied to the view.
+
+    # *
+
+    # * @return array'
+traits: []
+interfaces: []

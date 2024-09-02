@@ -1,0 +1,44 @@
+name: UuidV6
+class_comment: '# * A v6 UUID is lexicographically sortable and contains a 60-bit
+  timestamp and 62 extra unique bits.
+
+  # *
+
+  # * Unlike UUIDv1, this implementation of UUIDv6 doesn''t leak the MAC address of
+  the host.
+
+  # *
+
+  # * @author Nicolas Grekas <p@tchwork.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: uuid
+    default: 'null'
+  comment: null
+- name: getDateTime
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNode
+  visibility: public
+  parameters: []
+  comment: null
+- name: toV7
+  visibility: public
+  parameters: []
+  comment: null
+- name: generate
+  visibility: public
+  parameters:
+  - name: time
+    default: 'null'
+  - name: node
+    default: 'null'
+  comment: null
+traits: []
+interfaces:
+- TimeBasedUidInterface

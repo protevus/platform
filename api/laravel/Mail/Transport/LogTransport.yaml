@@ -1,0 +1,84 @@
+name: LogTransport
+class_comment: null
+dependencies:
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: Stringable
+  type: class
+  source: Stringable
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: SentMessage
+  type: class
+  source: Symfony\Component\Mailer\SentMessage
+- name: TransportInterface
+  type: class
+  source: Symfony\Component\Mailer\Transport\TransportInterface
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+properties:
+- name: logger
+  visibility: protected
+  comment: '# * The Logger instance.
+
+    # *
+
+    # * @var \Psr\Log\LoggerInterface'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: logger
+  comment: "# * The Logger instance.\n# *\n# * @var \\Psr\\Log\\LoggerInterface\n\
+    # */\n# protected $logger;\n# \n# /**\n# * Create a new log transport instance.\n\
+    # *\n# * @param  \\Psr\\Log\\LoggerInterface  $logger\n# * @return void"
+- name: send
+  visibility: public
+  parameters:
+  - name: message
+  - name: envelope
+    default: 'null'
+  comment: '# * {@inheritdoc}'
+- name: decodeQuotedPrintableContent
+  visibility: protected
+  parameters:
+  - name: part
+  comment: '# * Decode the given quoted printable content.
+
+    # *
+
+    # * @param  string  $part
+
+    # * @return string'
+- name: logger
+  visibility: public
+  parameters: []
+  comment: '# * Get the logger for the LogTransport instance.
+
+    # *
+
+    # * @return \Psr\Log\LoggerInterface'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Get the string representation of the transport.
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Support\Str
+- Psr\Log\LoggerInterface
+- Stringable
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mailer\SentMessage
+- Symfony\Component\Mailer\Transport\TransportInterface
+- Symfony\Component\Mime\RawMessage
+interfaces:
+- Stringable

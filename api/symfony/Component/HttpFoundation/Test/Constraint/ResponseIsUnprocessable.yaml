@@ -1,0 +1,41 @@
+name: ResponseIsUnprocessable
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: PHPUnit\Framework\Constraint\Constraint
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: verbose
+    default: 'true'
+  comment: '# * @param bool $verbose If true, the entire response is printed on failure.
+    If false, the response body is omitted.'
+- name: toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: matches
+  visibility: protected
+  parameters:
+  - name: other
+  comment: '# * @param Response $other'
+- name: failureDescription
+  visibility: protected
+  parameters:
+  - name: other
+  comment: '# * @param Response $other'
+- name: additionalFailureDescription
+  visibility: protected
+  parameters:
+  - name: response
+  comment: '# * @param Response $response'
+traits:
+- PHPUnit\Framework\Constraint\Constraint
+- Symfony\Component\HttpFoundation\Response
+interfaces: []

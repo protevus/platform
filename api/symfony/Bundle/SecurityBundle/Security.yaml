@@ -1,0 +1,148 @@
+name: Security
+class_comment: "# * Helper class for commonly-needed security tasks.\n# *\n# * @author\
+  \ Ryan Weaver <ryan@symfonycasts.com>\n# * @author Robin Chalas <robin.chalas@gmail.com>\n\
+  # * @author Arnaud Fr\xE9zet <arnaud@larriereguichet.fr>\n# *\n# * @final"
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: FirewallConfig
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Security\FirewallConfig
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: TokenStorageInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+- name: TokenInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\TokenInterface
+- name: AuthorizationCheckerInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
+- name: LogicException
+  type: class
+  source: Symfony\Component\Security\Core\Exception\LogicException
+- name: LogoutException
+  type: class
+  source: Symfony\Component\Security\Core\Exception\LogoutException
+- name: UserInterface
+  type: class
+  source: Symfony\Component\Security\Core\User\UserInterface
+- name: CsrfToken
+  type: class
+  source: Symfony\Component\Security\Csrf\CsrfToken
+- name: AuthenticatorInterface
+  type: class
+  source: Symfony\Component\Security\Http\Authenticator\AuthenticatorInterface
+- name: BadgeInterface
+  type: class
+  source: Symfony\Component\Security\Http\Authenticator\Passport\Badge\BadgeInterface
+- name: LogoutEvent
+  type: class
+  source: Symfony\Component\Security\Http\Event\LogoutEvent
+- name: ParameterBagUtils
+  type: class
+  source: Symfony\Component\Security\Http\ParameterBagUtils
+- name: ServiceProviderInterface
+  type: class
+  source: Symfony\Contracts\Service\ServiceProviderInterface
+properties: []
+methods:
+- name: isGranted
+  visibility: public
+  parameters:
+  - name: attributes
+  - name: subject
+    default: 'null'
+  comment: "# * Helper class for commonly-needed security tasks.\n# *\n# * @author\
+    \ Ryan Weaver <ryan@symfonycasts.com>\n# * @author Robin Chalas <robin.chalas@gmail.com>\n\
+    # * @author Arnaud Fr\xE9zet <arnaud@larriereguichet.fr>\n# *\n# * @final\n# */\n\
+    # class Security implements AuthorizationCheckerInterface\n# {\n# public function\
+    \ __construct(\n# private readonly ContainerInterface $container,\n# private readonly\
+    \ array $authenticators = [],\n# ) {\n# }\n# \n# public function getUser(): ?UserInterface\n\
+    # {\n# if (!$token = $this->getToken()) {\n# return null;\n# }\n# \n# return $token->getUser();\n\
+    # }\n# \n# /**\n# * Checks if the attributes are granted against the current authentication\
+    \ token and optionally supplied subject."
+- name: getToken
+  visibility: public
+  parameters: []
+  comment: null
+- name: getFirewallConfig
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+- name: login
+  visibility: public
+  parameters:
+  - name: user
+  - name: authenticatorName
+    default: 'null'
+  - name: firewallName
+    default: 'null'
+  - name: badges
+    default: '[]'
+  comment: '# * @param UserInterface    $user              The user to authenticate
+
+    # * @param string|null      $authenticatorName The authenticator name (e.g. "form_login")
+    or service id (e.g. SomeApiKeyAuthenticator::class) - required only if multiple
+    authenticators are configured
+
+    # * @param string|null      $firewallName      The firewall name - required only
+    if multiple firewalls are configured
+
+    # * @param BadgeInterface[] $badges            Badges to add to the user''s passport
+
+    # *
+
+    # * @return Response|null The authenticator success response if any'
+- name: logout
+  visibility: public
+  parameters:
+  - name: validateCsrfToken
+    default: 'true'
+  comment: '# * Logout the current user by dispatching the LogoutEvent.
+
+    # *
+
+    # * @param bool $validateCsrfToken Whether to look for a valid CSRF token based
+    on the `logout` listener configuration
+
+    # *
+
+    # * @return Response|null The LogoutEvent''s Response if any
+
+    # *
+
+    # * @throws LogoutException When $validateCsrfToken is true and the CSRF token
+    is not found or invalid'
+- name: getAuthenticator
+  visibility: private
+  parameters:
+  - name: authenticatorName
+  - name: firewallName
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Bundle\SecurityBundle\Security\FirewallConfig
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+- Symfony\Component\Security\Core\Authentication\Token\TokenInterface
+- Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
+- Symfony\Component\Security\Core\Exception\LogicException
+- Symfony\Component\Security\Core\Exception\LogoutException
+- Symfony\Component\Security\Core\User\UserInterface
+- Symfony\Component\Security\Csrf\CsrfToken
+- Symfony\Component\Security\Http\Authenticator\AuthenticatorInterface
+- Symfony\Component\Security\Http\Authenticator\Passport\Badge\BadgeInterface
+- Symfony\Component\Security\Http\Event\LogoutEvent
+- Symfony\Component\Security\Http\ParameterBagUtils
+- Symfony\Contracts\Service\ServiceProviderInterface
+interfaces:
+- AuthorizationCheckerInterface

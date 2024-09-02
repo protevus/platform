@@ -1,0 +1,11 @@
+name: form_csrf
+class_comment: null
+dependencies:
+- name: FormTypeCsrfExtension
+  type: class
+  source: Symfony\Component\Form\Extension\Csrf\Type\FormTypeCsrfExtension
+properties: []
+methods: []
+traits:
+- Symfony\Component\Form\Extension\Csrf\Type\FormTypeCsrfExtension
+interfaces: []

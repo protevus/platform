@@ -1,0 +1,81 @@
+name: SesApiAsyncAwsTransport
+class_comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>"
+dependencies:
+- name: SendEmailRequest
+  type: class
+  source: AsyncAws\Ses\Input\SendEmailRequest
+- name: Content
+  type: class
+  source: AsyncAws\Ses\ValueObject\Content
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: LogicException
+  type: class
+  source: Symfony\Component\Mailer\Exception\LogicException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Mailer\Exception\RuntimeException
+- name: MetadataHeader
+  type: class
+  source: Symfony\Component\Mailer\Header\MetadataHeader
+- name: SentMessage
+  type: class
+  source: Symfony\Component\Mailer\SentMessage
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+- name: Headers
+  type: class
+  source: Symfony\Component\Mime\Header\Headers
+- name: MessageConverter
+  type: class
+  source: Symfony\Component\Mime\MessageConverter
+properties: []
+methods:
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRequest
+  visibility: protected
+  parameters:
+  - name: message
+  comment: null
+- name: getRecipients
+  visibility: private
+  parameters:
+  - name: email
+  - name: envelope
+  comment: null
+- name: stringifyAddresses
+  visibility: protected
+  parameters:
+  - name: addresses
+  comment: null
+- name: stringifyAddress
+  visibility: protected
+  parameters:
+  - name: a
+  comment: null
+- name: getSenderFromHeaders
+  visibility: private
+  parameters:
+  - name: headers
+  comment: null
+traits:
+- AsyncAws\Ses\Input\SendEmailRequest
+- AsyncAws\Ses\ValueObject\Content
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mailer\Exception\LogicException
+- Symfony\Component\Mailer\Exception\RuntimeException
+- Symfony\Component\Mailer\Header\MetadataHeader
+- Symfony\Component\Mailer\SentMessage
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Email
+- Symfony\Component\Mime\Header\Headers
+- Symfony\Component\Mime\MessageConverter
+interfaces: []

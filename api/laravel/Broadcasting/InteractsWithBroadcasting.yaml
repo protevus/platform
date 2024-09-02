@@ -1,0 +1,35 @@
+name: InteractsWithBroadcasting
+class_comment: null
+dependencies:
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+properties:
+- name: broadcastConnection
+  visibility: protected
+  comment: '# * The broadcaster connection to use to broadcast the event.
+
+    # *
+
+    # * @var array'
+methods:
+- name: broadcastVia
+  visibility: public
+  parameters:
+  - name: connection
+    default: 'null'
+  comment: "# * The broadcaster connection to use to broadcast the event.\n# *\n#\
+    \ * @var array\n# */\n# protected $broadcastConnection = [null];\n# \n# /**\n\
+    # * Broadcast the event using a specific broadcaster.\n# *\n# * @param  array|string|null\
+    \  $connection\n# * @return $this"
+- name: broadcastConnections
+  visibility: public
+  parameters: []
+  comment: '# * Get the broadcaster connections the event should be broadcast on.
+
+    # *
+
+    # * @return array'
+traits:
+- Illuminate\Support\Arr
+interfaces: []

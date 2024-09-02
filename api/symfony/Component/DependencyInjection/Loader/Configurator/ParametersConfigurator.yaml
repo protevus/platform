@@ -1,0 +1,36 @@
+name: ParametersConfigurator
+class_comment: '# * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: Expression
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Expression
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: set
+  visibility: public
+  parameters:
+  - name: name
+  - name: value
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: name
+  - name: value
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\ExpressionLanguage\Expression
+interfaces: []

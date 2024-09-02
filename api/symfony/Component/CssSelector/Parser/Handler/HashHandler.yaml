@@ -1,0 +1,43 @@
+name: HashHandler
+class_comment: "# * CSS selector comment handler.\n# *\n# * This component is a port\
+  \ of the Python cssselect library,\n# * which is copyright Ian Bicking, @see https://github.com/SimonSapin/cssselect.\n\
+  # *\n# * @author Jean-Fran\xE7ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n\
+  # * @internal"
+dependencies:
+- name: Reader
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Reader
+- name: Token
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Token
+- name: TokenizerEscaping
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Tokenizer\TokenizerEscaping
+- name: TokenizerPatterns
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Tokenizer\TokenizerPatterns
+- name: TokenStream
+  type: class
+  source: Symfony\Component\CssSelector\Parser\TokenStream
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: patterns
+  - name: escaping
+  comment: null
+- name: handle
+  visibility: public
+  parameters:
+  - name: reader
+  - name: stream
+  comment: null
+traits:
+- Symfony\Component\CssSelector\Parser\Reader
+- Symfony\Component\CssSelector\Parser\Token
+- Symfony\Component\CssSelector\Parser\Tokenizer\TokenizerEscaping
+- Symfony\Component\CssSelector\Parser\Tokenizer\TokenizerPatterns
+- Symfony\Component\CssSelector\Parser\TokenStream
+interfaces:
+- HandlerInterface

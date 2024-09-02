@@ -1,0 +1,173 @@
+name: PendingDispatch
+class_comment: null
+dependencies:
+- name: UniqueLock
+  type: class
+  source: Illuminate\Bus\UniqueLock
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Bus\Dispatcher
+- name: Cache
+  type: class
+  source: Illuminate\Contracts\Cache\Repository
+- name: ShouldBeUnique
+  type: class
+  source: Illuminate\Contracts\Queue\ShouldBeUnique
+properties:
+- name: job
+  visibility: protected
+  comment: '# * The job.
+
+    # *
+
+    # * @var mixed'
+- name: afterResponse
+  visibility: protected
+  comment: '# * Indicates if the job should be dispatched immediately after sending
+    the response.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: job
+  comment: "# * The job.\n# *\n# * @var mixed\n# */\n# protected $job;\n# \n# /**\n\
+    # * Indicates if the job should be dispatched immediately after sending the response.\n\
+    # *\n# * @var bool\n# */\n# protected $afterResponse = false;\n# \n# /**\n# *\
+    \ Create a new pending job dispatch.\n# *\n# * @param  mixed  $job\n# * @return\
+    \ void"
+- name: onConnection
+  visibility: public
+  parameters:
+  - name: connection
+  comment: '# * Set the desired connection for the job.
+
+    # *
+
+    # * @param  string|null  $connection
+
+    # * @return $this'
+- name: onQueue
+  visibility: public
+  parameters:
+  - name: queue
+  comment: '# * Set the desired queue for the job.
+
+    # *
+
+    # * @param  string|null  $queue
+
+    # * @return $this'
+- name: allOnConnection
+  visibility: public
+  parameters:
+  - name: connection
+  comment: '# * Set the desired connection for the chain.
+
+    # *
+
+    # * @param  string|null  $connection
+
+    # * @return $this'
+- name: allOnQueue
+  visibility: public
+  parameters:
+  - name: queue
+  comment: '# * Set the desired queue for the chain.
+
+    # *
+
+    # * @param  string|null  $queue
+
+    # * @return $this'
+- name: delay
+  visibility: public
+  parameters:
+  - name: delay
+  comment: '# * Set the desired delay in seconds for the job.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int|null  $delay
+
+    # * @return $this'
+- name: afterCommit
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the job should be dispatched after all database transactions
+    have committed.
+
+    # *
+
+    # * @return $this'
+- name: beforeCommit
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the job should not wait until database transactions
+    have been committed before dispatching.
+
+    # *
+
+    # * @return $this'
+- name: chain
+  visibility: public
+  parameters:
+  - name: chain
+  comment: '# * Set the jobs that should run if this job is successful.
+
+    # *
+
+    # * @param  array  $chain
+
+    # * @return $this'
+- name: afterResponse
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the job should be dispatched after the response is sent
+    to the browser.
+
+    # *
+
+    # * @return $this'
+- name: shouldDispatch
+  visibility: protected
+  parameters: []
+  comment: '# * Determine if the job should be dispatched.
+
+    # *
+
+    # * @return bool'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically proxy methods to the underlying job.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return $this'
+- name: __destruct
+  visibility: public
+  parameters: []
+  comment: '# * Handle the object''s destruction.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Bus\UniqueLock
+- Illuminate\Container\Container
+- Illuminate\Contracts\Bus\Dispatcher
+- Illuminate\Contracts\Queue\ShouldBeUnique
+interfaces: []

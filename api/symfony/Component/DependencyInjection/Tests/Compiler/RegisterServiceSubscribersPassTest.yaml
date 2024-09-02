@@ -1,0 +1,255 @@
+name: RegisterServiceSubscribersPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: PsrContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: ServiceClosureArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- name: ServiceLocatorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- name: TaggedIteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- name: Autowire
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\Autowire
+- name: AutowireDecorated
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\AutowireDecorated
+- name: TaggedIterator
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\TaggedIterator
+- name: TaggedLocator
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\TaggedLocator
+- name: Target
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\Target
+- name: AutowirePass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\AutowirePass
+- name: RegisterServiceSubscribersPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\RegisterServiceSubscribersPass
+- name: ResolveBindingsPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ResolveBindingsPass
+- name: ResolveServiceSubscribersPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ResolveServiceSubscribersPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: ServiceLocator
+  type: class
+  source: Symfony\Component\DependencyInjection\ServiceLocator
+- name: CustomDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CustomDefinition
+- name: TestDefinition1
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\TestDefinition1
+- name: TestDefinition2
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\TestDefinition2
+- name: TestDefinition3
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\TestDefinition3
+- name: TestServiceSubscriber
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\TestServiceSubscriber
+- name: TestServiceSubscriberChild
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\TestServiceSubscriberChild
+- name: TestServiceSubscriberIntersection
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\TestServiceSubscriberIntersection
+- name: TestServiceSubscriberIntersectionWithTrait
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\TestServiceSubscriberIntersectionWithTrait
+- name: TestServiceSubscriberParent
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\TestServiceSubscriberParent
+- name: TestServiceSubscriberUnion
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\TestServiceSubscriberUnion
+- name: TestServiceSubscriberUnionWithTrait
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\TestServiceSubscriberUnionWithTrait
+- name: TypedReference
+  type: class
+  source: Symfony\Component\DependencyInjection\TypedReference
+- name: SubscribedService
+  type: class
+  source: Symfony\Contracts\Service\Attribute\SubscribedService
+- name: ServiceMethodsSubscriberTrait
+  type: class
+  source: Symfony\Contracts\Service\ServiceMethodsSubscriberTrait
+- name: ServiceSubscriberInterface
+  type: class
+  source: Symfony\Contracts\Service\ServiceSubscriberInterface
+- name: ServiceMethodsSubscriberTrait
+  type: class
+  source: ServiceMethodsSubscriberTrait
+- name: ServiceMethodsSubscriberTrait
+  type: class
+  source: ServiceMethodsSubscriberTrait
+- name: ServiceMethodsSubscriberTrait
+  type: class
+  source: ServiceMethodsSubscriberTrait
+properties: []
+methods:
+- name: testInvalidClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnionServices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIntersectionServices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtraServiceSubscriber
+  visibility: public
+  parameters: []
+  comment: null
+- name: testServiceMethodsSubscriberTraitWithSubscribedServiceAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testServiceMethodsSubscriberTraitWithSubscribedServiceAttributeOnStaticMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: method
+  visibility: public
+  parameters: []
+  comment: null
+- name: testServiceMethodsSubscriberTraitWithSubscribedServiceAttributeOnMethodWithRequiredParameters
+  visibility: public
+  parameters: []
+  comment: null
+- name: method
+  visibility: public
+  parameters:
+  - name: param1
+  - name: param2
+    default: 'null'
+  comment: null
+- name: testServiceMethodsSubscriberTraitWithSubscribedServiceAttributeOnMethodMissingReturnType
+  visibility: public
+  parameters: []
+  comment: null
+- name: method
+  visibility: public
+  parameters: []
+  comment: null
+- name: testServiceMethodsSubscriberTraitWithUnionReturnType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testServiceMethodsSubscriberTraitWithIntersectionReturnType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testServiceSubscriberWithSemanticId
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSubscribedServices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubscribedServiceWithAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSubscribedServices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubscribedServiceWithLegacyAttributes
+  visibility: public
+  parameters: []
+  comment: '# * @group legacy'
+- name: getSubscribedServices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBinding
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- Symfony\Component\DependencyInjection\Attribute\Autowire
+- Symfony\Component\DependencyInjection\Attribute\AutowireDecorated
+- Symfony\Component\DependencyInjection\Attribute\TaggedIterator
+- Symfony\Component\DependencyInjection\Attribute\TaggedLocator
+- Symfony\Component\DependencyInjection\Attribute\Target
+- Symfony\Component\DependencyInjection\Compiler\AutowirePass
+- Symfony\Component\DependencyInjection\Compiler\RegisterServiceSubscribersPass
+- Symfony\Component\DependencyInjection\Compiler\ResolveBindingsPass
+- Symfony\Component\DependencyInjection\Compiler\ResolveServiceSubscribersPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\DependencyInjection\ServiceLocator
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CustomDefinition
+- Symfony\Component\DependencyInjection\Tests\Fixtures\TestDefinition1
+- Symfony\Component\DependencyInjection\Tests\Fixtures\TestDefinition2
+- Symfony\Component\DependencyInjection\Tests\Fixtures\TestDefinition3
+- Symfony\Component\DependencyInjection\Tests\Fixtures\TestServiceSubscriber
+- Symfony\Component\DependencyInjection\Tests\Fixtures\TestServiceSubscriberChild
+- Symfony\Component\DependencyInjection\Tests\Fixtures\TestServiceSubscriberIntersection
+- Symfony\Component\DependencyInjection\Tests\Fixtures\TestServiceSubscriberIntersectionWithTrait
+- Symfony\Component\DependencyInjection\Tests\Fixtures\TestServiceSubscriberParent
+- Symfony\Component\DependencyInjection\Tests\Fixtures\TestServiceSubscriberUnion
+- Symfony\Component\DependencyInjection\Tests\Fixtures\TestServiceSubscriberUnionWithTrait
+- Symfony\Component\DependencyInjection\TypedReference
+- Symfony\Contracts\Service\Attribute\SubscribedService
+- Symfony\Contracts\Service\ServiceMethodsSubscriberTrait
+- Symfony\Contracts\Service\ServiceSubscriberInterface
+- ServiceMethodsSubscriberTrait
+- ServiceMethodsSubscriberTrait
+- ServiceMethodsSubscriberTrait
+interfaces:
+- ServiceSubscriberInterface
+- ServiceSubscriberInterface
+- ServiceSubscriberInterface
+- ServiceSubscriberInterface
+- ServiceSubscriberInterface
+- ServiceSubscriberInterface

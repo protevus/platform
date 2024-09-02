@@ -1,0 +1,43 @@
+name: AbstractStaticOption
+class_comment: null
+dependencies:
+- name: CachingFactoryDecorator
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\CachingFactoryDecorator
+- name: ChoiceLoaderInterface
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface
+- name: ChoiceType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+- name: FormTypeExtensionInterface
+  type: class
+  source: Symfony\Component\Form\FormTypeExtensionInterface
+- name: FormTypeInterface
+  type: class
+  source: Symfony\Component\Form\FormTypeInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: formType
+  - name: option
+  - name: vary
+    default: 'null'
+  comment: null
+- name: getOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\ChoiceList\Factory\CachingFactoryDecorator
+- Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface
+- Symfony\Component\Form\Extension\Core\Type\ChoiceType
+- Symfony\Component\Form\FormTypeExtensionInterface
+- Symfony\Component\Form\FormTypeInterface
+interfaces: []

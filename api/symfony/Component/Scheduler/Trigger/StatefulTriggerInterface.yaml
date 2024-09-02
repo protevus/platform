@@ -1,0 +1,12 @@
+name: StatefulTriggerInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: continue
+  visibility: public
+  parameters:
+  - name: startedAt
+  comment: null
+traits: []
+interfaces: []

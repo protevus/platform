@@ -1,0 +1,40 @@
+name: GenrbCompiler
+class_comment: '# * Compiles .txt resource bundles to binary .res files.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Intl\Exception\RuntimeException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: genrb
+    default: '''genrb'''
+  - name: envVars
+    default: ''''''
+  comment: "# * Compiles .txt resource bundles to binary .res files.\n# *\n# * @author\
+    \ Bernhard Schussek <bschussek@gmail.com>\n# *\n# * @internal\n# */\n# class GenrbCompiler\
+    \ implements BundleCompilerInterface\n# {\n# private string $genrb;\n# \n# /**\n\
+    # * Creates a new compiler based on the \"genrb\" executable.\n# *\n# * @param\
+    \ string $genrb   Optional. The path to the \"genrb\" executable\n# * @param string\
+    \ $envVars Optional. Environment variables to be loaded when running \"genrb\"\
+    .\n# *\n# * @throws RuntimeException if the \"genrb\" cannot be found"
+- name: compile
+  visibility: public
+  parameters:
+  - name: sourcePath
+  - name: targetDir
+  comment: null
+traits:
+- Symfony\Component\Intl\Exception\RuntimeException
+interfaces:
+- BundleCompilerInterface

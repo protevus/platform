@@ -1,0 +1,90 @@
+name: PropertyPath
+class_comment: '# * Default implementation of {@link PropertyPathInterface}.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @implements \IteratorAggregate<int, string>'
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\InvalidArgumentException
+- name: InvalidPropertyPathException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException
+- name: OutOfBoundsException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\OutOfBoundsException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: propertyPath
+  comment: "# * Default implementation of {@link PropertyPathInterface}.\n# *\n# *\
+    \ @author Bernhard Schussek <bschussek@gmail.com>\n# *\n# * @implements \\IteratorAggregate<int,\
+    \ string>\n# */\n# class PropertyPath implements \\IteratorAggregate, PropertyPathInterface\n\
+    # {\n# /**\n# * Character used for separating between plural and singular of an\
+    \ element.\n# */\n# public const SINGULAR_SEPARATOR = '|';\n# \n# /**\n# * The\
+    \ elements of the property path.\n# *\n# * @var list<string>\n# */\n# private\
+    \ array $elements = [];\n# \n# /**\n# * The number of elements in the property\
+    \ path.\n# */\n# private int $length;\n# \n# /**\n# * Contains a Boolean for each\
+    \ property in $elements denoting whether this\n# * element is an index. It is\
+    \ a property otherwise.\n# *\n# * @var array<bool>\n# */\n# private array $isIndex\
+    \ = [];\n# \n# /**\n# * Contains a Boolean for each property in $elements denoting\
+    \ whether this\n# * element is optional or not.\n# *\n# * @var array<bool>\n#\
+    \ */\n# private array $isNullSafe = [];\n# \n# /**\n# * String representation\
+    \ of the path.\n# */\n# private string $pathAsString;\n# \n# /**\n# * Constructs\
+    \ a property path from a string.\n# *\n# * @throws InvalidArgumentException  \
+    \   If the given path is not a string\n# * @throws InvalidPropertyPathException\
+    \ If the syntax of the property path is not valid"
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: getLength
+  visibility: public
+  parameters: []
+  comment: null
+- name: getParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: getIterator
+  visibility: public
+  parameters: []
+  comment: '# * Returns a new iterator for this path.'
+- name: getElements
+  visibility: public
+  parameters: []
+  comment: null
+- name: getElement
+  visibility: public
+  parameters:
+  - name: index
+  comment: null
+- name: isProperty
+  visibility: public
+  parameters:
+  - name: index
+  comment: null
+- name: isIndex
+  visibility: public
+  parameters:
+  - name: index
+  comment: null
+- name: isNullSafe
+  visibility: public
+  parameters:
+  - name: index
+  comment: null
+traits:
+- Symfony\Component\PropertyAccess\Exception\InvalidArgumentException
+- Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException
+- Symfony\Component\PropertyAccess\Exception\OutOfBoundsException
+interfaces:
+- \IteratorAggregate
+- \IteratorAggregate

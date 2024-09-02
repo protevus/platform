@@ -1,0 +1,53 @@
+name: ExcludeDirectoryFilterIterator
+class_comment: '# * ExcludeDirectoryFilterIterator filters out directories.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @extends \FilterIterator<string, SplFileInfo>
+
+  # *
+
+  # * @implements \RecursiveIterator<string, SplFileInfo>'
+dependencies:
+- name: SplFileInfo
+  type: class
+  source: Symfony\Component\Finder\SplFileInfo
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: iterator
+  - name: directories
+  comment: "# * ExcludeDirectoryFilterIterator filters out directories.\n# *\n# *\
+    \ @author Fabien Potencier <fabien@symfony.com>\n# *\n# * @extends \\FilterIterator<string,\
+    \ SplFileInfo>\n# *\n# * @implements \\RecursiveIterator<string, SplFileInfo>\n\
+    # */\n# class ExcludeDirectoryFilterIterator extends \\FilterIterator implements\
+    \ \\RecursiveIterator\n# {\n# /** @var \\Iterator<string, SplFileInfo> */\n# private\
+    \ \\Iterator $iterator;\n# private bool $isRecursive;\n# /** @var array<string,\
+    \ true> */\n# private array $excludedDirs = [];\n# private ?string $excludedPattern\
+    \ = null;\n# /** @var list<callable(SplFileInfo):bool> */\n# private array $pruneFilters\
+    \ = [];\n# \n# /**\n# * @param \\Iterator<string, SplFileInfo>          $iterator\
+    \    The Iterator to filter\n# * @param list<string|callable(SplFileInfo):bool>\
+    \ $directories An array of directories to exclude"
+- name: accept
+  visibility: public
+  parameters: []
+  comment: '# * Filters the iterator values.'
+- name: hasChildren
+  visibility: public
+  parameters: []
+  comment: null
+- name: getChildren
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Finder\SplFileInfo
+interfaces:
+- \RecursiveIterator
+- \RecursiveIterator

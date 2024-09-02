@@ -1,0 +1,21 @@
+name: UndefinedTransitionException
+class_comment: "# * Thrown by Workflow when an undefined transition is applied on\
+  \ a subject.\n# *\n# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>"
+dependencies:
+- name: WorkflowInterface
+  type: class
+  source: Symfony\Component\Workflow\WorkflowInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: subject
+  - name: transitionName
+  - name: workflow
+  - name: context
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\Workflow\WorkflowInterface
+interfaces: []

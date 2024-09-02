@@ -1,0 +1,20 @@
+name: SubjectWithType
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getMarking
+  visibility: public
+  parameters: []
+  comment: null
+- name: setMarking
+  visibility: public
+  parameters:
+  - name: type
+  comment: null
+- name: getMarking2
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

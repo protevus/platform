@@ -1,0 +1,294 @@
+name: GeneratorCommand
+class_comment: null
+dependencies:
+- name: CreatesMatchingTest
+  type: class
+  source: Illuminate\Console\Concerns\CreatesMatchingTest
+- name: PromptsForMissingInput
+  type: class
+  source: Illuminate\Contracts\Console\PromptsForMissingInput
+- name: Filesystem
+  type: class
+  source: Illuminate\Filesystem\Filesystem
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: Finder
+  type: class
+  source: Symfony\Component\Finder\Finder
+properties:
+- name: files
+  visibility: protected
+  comment: '# * The filesystem instance.
+
+    # *
+
+    # * @var \Illuminate\Filesystem\Filesystem'
+- name: type
+  visibility: protected
+  comment: '# * The type of class being generated.
+
+    # *
+
+    # * @var string'
+- name: reservedNames
+  visibility: protected
+  comment: '# * Reserved names that cannot be used for generation.
+
+    # *
+
+    # * @var string[]'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: files
+  comment: "# * The filesystem instance.\n# *\n# * @var \\Illuminate\\Filesystem\\\
+    Filesystem\n# */\n# protected $files;\n# \n# /**\n# * The type of class being\
+    \ generated.\n# *\n# * @var string\n# */\n# protected $type;\n# \n# /**\n# * Reserved\
+    \ names that cannot be used for generation.\n# *\n# * @var string[]\n# */\n# protected\
+    \ $reservedNames = [\n# '__halt_compiler',\n# 'abstract',\n# 'and',\n# 'array',\n\
+    # 'as',\n# 'break',\n# 'callable',\n# 'case',\n# 'catch',\n# 'class',\n# 'clone',\n\
+    # 'const',\n# 'continue',\n# 'declare',\n# 'default',\n# 'die',\n# 'do',\n# 'echo',\n\
+    # 'else',\n# 'elseif',\n# 'empty',\n# 'enddeclare',\n# 'endfor',\n# 'endforeach',\n\
+    # 'endif',\n# 'endswitch',\n# 'endwhile',\n# 'enum',\n# 'eval',\n# 'exit',\n#\
+    \ 'extends',\n# 'false',\n# 'final',\n# 'finally',\n# 'fn',\n# 'for',\n# 'foreach',\n\
+    # 'function',\n# 'global',\n# 'goto',\n# 'if',\n# 'implements',\n# 'include',\n\
+    # 'include_once',\n# 'instanceof',\n# 'insteadof',\n# 'interface',\n# 'isset',\n\
+    # 'list',\n# 'match',\n# 'namespace',\n# 'new',\n# 'or',\n# 'parent',\n# 'print',\n\
+    # 'private',\n# 'protected',\n# 'public',\n# 'readonly',\n# 'require',\n# 'require_once',\n\
+    # 'return',\n# 'self',\n# 'static',\n# 'switch',\n# 'throw',\n# 'trait',\n# 'true',\n\
+    # 'try',\n# 'unset',\n# 'use',\n# 'var',\n# 'while',\n# 'xor',\n# 'yield',\n#\
+    \ '__CLASS__',\n# '__DIR__',\n# '__FILE__',\n# '__FUNCTION__',\n# '__LINE__',\n\
+    # '__METHOD__',\n# '__NAMESPACE__',\n# '__TRAIT__',\n# ];\n# \n# /**\n# * Create\
+    \ a new generator command instance.\n# *\n# * @param  \\Illuminate\\Filesystem\\\
+    Filesystem  $files\n# * @return void"
+- name: handle
+  visibility: public
+  parameters: []
+  comment: "# * Get the stub file for the generator.\n# *\n# * @return string\n# */\n\
+    # abstract protected function getStub();\n# \n# /**\n# * Execute the console command.\n\
+    # *\n# * @return bool|null\n# *\n# * @throws \\Illuminate\\Contracts\\Filesystem\\\
+    FileNotFoundException"
+- name: qualifyClass
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Parse the class name and format according to the root namespace.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string'
+- name: qualifyModel
+  visibility: protected
+  parameters:
+  - name: model
+  comment: '# * Qualify the given model class base name.
+
+    # *
+
+    # * @param  string  $model
+
+    # * @return string'
+- name: possibleModels
+  visibility: protected
+  parameters: []
+  comment: '# * Get a list of possible model names.
+
+    # *
+
+    # * @return array<int, string>'
+- name: possibleEvents
+  visibility: protected
+  parameters: []
+  comment: '# * Get a list of possible event names.
+
+    # *
+
+    # * @return array<int, string>'
+- name: getDefaultNamespace
+  visibility: protected
+  parameters:
+  - name: rootNamespace
+  comment: '# * Get the default namespace for the class.
+
+    # *
+
+    # * @param  string  $rootNamespace
+
+    # * @return string'
+- name: alreadyExists
+  visibility: protected
+  parameters:
+  - name: rawName
+  comment: '# * Determine if the class already exists.
+
+    # *
+
+    # * @param  string  $rawName
+
+    # * @return bool'
+- name: getPath
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Get the destination class path.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string'
+- name: makeDirectory
+  visibility: protected
+  parameters:
+  - name: path
+  comment: '# * Build the directory for the class if necessary.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: buildClass
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Build the class with the given name.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException'
+- name: replaceNamespace
+  visibility: protected
+  parameters:
+  - name: '&$stub'
+  - name: name
+  comment: '# * Replace the namespace for the given stub.
+
+    # *
+
+    # * @param  string  $stub
+
+    # * @param  string  $name
+
+    # * @return $this'
+- name: getNamespace
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Get the full namespace for a given class, without the class name.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string'
+- name: replaceClass
+  visibility: protected
+  parameters:
+  - name: stub
+  - name: name
+  comment: '# * Replace the class name for the given stub.
+
+    # *
+
+    # * @param  string  $stub
+
+    # * @param  string  $name
+
+    # * @return string'
+- name: sortImports
+  visibility: protected
+  parameters:
+  - name: stub
+  comment: '# * Alphabetically sorts the imports for the given stub.
+
+    # *
+
+    # * @param  string  $stub
+
+    # * @return string'
+- name: getNameInput
+  visibility: protected
+  parameters: []
+  comment: '# * Get the desired class name from the input.
+
+    # *
+
+    # * @return string'
+- name: rootNamespace
+  visibility: protected
+  parameters: []
+  comment: '# * Get the root namespace for the class.
+
+    # *
+
+    # * @return string'
+- name: userProviderModel
+  visibility: protected
+  parameters: []
+  comment: '# * Get the model for the default guard''s user provider.
+
+    # *
+
+    # * @return string|null'
+- name: isReservedName
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Checks whether the given name is reserved.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return bool'
+- name: viewPath
+  visibility: protected
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the first view directory path from the application configuration.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: getArguments
+  visibility: protected
+  parameters: []
+  comment: '# * Get the console command arguments.
+
+    # *
+
+    # * @return array'
+- name: promptForMissingArgumentsUsing
+  visibility: protected
+  parameters: []
+  comment: '# * Prompt for missing input arguments using the returned questions.
+
+    # *
+
+    # * @return array'
+traits:
+- Illuminate\Console\Concerns\CreatesMatchingTest
+- Illuminate\Contracts\Console\PromptsForMissingInput
+- Illuminate\Filesystem\Filesystem
+- Illuminate\Support\Str
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Finder\Finder
+interfaces:
+- PromptsForMissingInput

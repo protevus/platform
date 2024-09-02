@@ -1,0 +1,130 @@
+name: DoctrineReceiverTest
+class_comment: null
+dependencies:
+- name: Exception
+  type: class
+  source: Doctrine\DBAL\Driver\PDO\Exception
+- name: DeadlockException
+  type: class
+  source: Doctrine\DBAL\Exception\DeadlockException
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: DummyMessage
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Doctrine\Tests\Fixtures\DummyMessage
+- name: Connection
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Doctrine\Transport\Connection
+- name: DoctrineReceivedStamp
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Doctrine\Transport\DoctrineReceivedStamp
+- name: DoctrineReceiver
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Doctrine\Transport\DoctrineReceiver
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: MessageDecodingFailedException
+  type: class
+  source: Symfony\Component\Messenger\Exception\MessageDecodingFailedException
+- name: TransportException
+  type: class
+  source: Symfony\Component\Messenger\Exception\TransportException
+- name: TransportMessageIdStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\TransportMessageIdStamp
+- name: PhpSerializer
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\PhpSerializer
+- name: Serializer
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\Serializer
+- name: SerializerComponent
+  type: class
+  source: Symfony\Component\Serializer
+- name: JsonEncoder
+  type: class
+  source: Symfony\Component\Serializer\Encoder\JsonEncoder
+- name: ObjectNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+properties: []
+methods:
+- name: testItReturnsTheDecodedMessageToTheHandler
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItRejectTheMessageIfThereIsAMessageDecodingFailedException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOccursRetryableExceptionFromConnection
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAll
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFind
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAck
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAckThrowsRetryableException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAckThrowsRetryableExceptionAndRetriesFail
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAckThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRejectThrowsRetryableException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRejectThrowsRetryableExceptionAndRetriesFail
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRejectThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: createDoctrineEnvelope
+  visibility: private
+  parameters: []
+  comment: null
+- name: createSerializer
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Doctrine\DBAL\Driver\PDO\Exception
+- Doctrine\DBAL\Exception\DeadlockException
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Bridge\Doctrine\Tests\Fixtures\DummyMessage
+- Symfony\Component\Messenger\Bridge\Doctrine\Transport\Connection
+- Symfony\Component\Messenger\Bridge\Doctrine\Transport\DoctrineReceivedStamp
+- Symfony\Component\Messenger\Bridge\Doctrine\Transport\DoctrineReceiver
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Exception\MessageDecodingFailedException
+- Symfony\Component\Messenger\Exception\TransportException
+- Symfony\Component\Messenger\Stamp\TransportMessageIdStamp
+- Symfony\Component\Messenger\Transport\Serialization\PhpSerializer
+- Symfony\Component\Messenger\Transport\Serialization\Serializer
+- Symfony\Component\Serializer\Encoder\JsonEncoder
+- Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+interfaces: []

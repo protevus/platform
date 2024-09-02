@@ -1,0 +1,200 @@
+name: EventDispatcherTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: Event
+  type: class
+  source: Symfony\Contracts\EventDispatcher\Event
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: createEventDispatcher
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testInitialState
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddListener
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetListenersSortsByPriority
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetAllListenersSortsByPriority
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetListenerPriority
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDispatch
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDispatchForClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStopEventPropagation
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDispatchByPriority
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemoveListener
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddSubscriber
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddSubscriberWithPriorities
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddSubscriberWithMultipleListeners
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemoveSubscriber
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemoveSubscriberWithPriorities
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemoveSubscriberWithMultipleListeners
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEventReceivesTheDispatcherInstanceAsArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkaroundForPhpBug62976
+  visibility: public
+  parameters: []
+  comment: '# * @see https://bugs.php.net/62976
+
+    # *
+
+    # * This bug affects:
+
+    # *  - The PHP 5.3 branch for versions < 5.3.18
+
+    # *  - The PHP 5.4 branch for versions < 5.4.8
+
+    # *  - The PHP 5.5 branch is not affected'
+- name: testHasListenersWhenAddedCallbackListenerIsRemoved
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetListenersWhenAddedCallbackListenerIsRemoved
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasListenersWithoutEventsReturnsFalseAfterHasListenersWithEventHasBeenCalled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasListenersIsLazy
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDispatchLazyListener
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemoveFindsLazyListeners
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPriorityFindsLazyListeners
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetLazyListeners
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMutatingWhilePropagationIsStopped
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNamedClosures
+  visibility: public
+  parameters: []
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters: []
+  comment: null
+- name: preFoo
+  visibility: public
+  parameters:
+  - name: e
+  comment: null
+- name: postFoo
+  visibility: public
+  parameters:
+  - name: e
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters: []
+  comment: null
+- name: foo
+  visibility: public
+  parameters:
+  - name: e
+  - name: name
+  - name: dispatcher
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: e
+  - name: name
+  - name: dispatcher
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Contracts\EventDispatcher\Event
+interfaces:
+- EventSubscriberInterface
+- EventSubscriberInterface
+- EventSubscriberInterface

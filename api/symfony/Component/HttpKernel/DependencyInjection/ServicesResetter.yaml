@@ -1,0 +1,62 @@
+name: ServicesResetter
+class_comment: '# * Resets provided services.
+
+  # *
+
+  # * @author Alexander M. Turek <me@derrabus.de>
+
+  # * @author Nicolas Grekas <p@tchwork.com>
+
+  # *
+
+  # * @final since Symfony 7.2'
+dependencies:
+- name: LazyLoadingInterface
+  type: class
+  source: ProxyManager\Proxy\LazyLoadingInterface
+- name: LazyObjectInterface
+  type: class
+  source: Symfony\Component\VarExporter\LazyObjectInterface
+- name: ResetInterface
+  type: class
+  source: Symfony\Contracts\Service\ResetInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: resettableServices
+  - name: resetMethods
+  comment: '# * Resets provided services.
+
+    # *
+
+    # * @author Alexander M. Turek <me@derrabus.de>
+
+    # * @author Nicolas Grekas <p@tchwork.com>
+
+    # *
+
+    # * @final since Symfony 7.2
+
+    # */
+
+    # class ServicesResetter implements ResetInterface
+
+    # {
+
+    # /**
+
+    # * @param \Traversable<string, object>   $resettableServices
+
+    # * @param array<string, string|string[]> $resetMethods'
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- ProxyManager\Proxy\LazyLoadingInterface
+- Symfony\Component\VarExporter\LazyObjectInterface
+- Symfony\Contracts\Service\ResetInterface
+interfaces:
+- ResetInterface

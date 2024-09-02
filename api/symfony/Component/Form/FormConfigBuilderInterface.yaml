@@ -1,0 +1,371 @@
+name: FormConfigBuilderInterface
+class_comment: null
+dependencies:
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: PropertyPathInterface
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyPathInterface
+properties: []
+methods:
+- name: addEventListener
+  visibility: public
+  parameters:
+  - name: eventName
+  - name: listener
+  - name: priority
+    default: '0'
+  comment: '# * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # interface FormConfigBuilderInterface extends FormConfigInterface
+
+    # {
+
+    # /**
+
+    # * Adds an event listener to an event on this form.
+
+    # *
+
+    # * @param int $priority The priority of the listener. Listeners
+
+    # *                      with a higher priority are called before
+
+    # *                      listeners with a lower priority.
+
+    # *
+
+    # * @return $this'
+- name: addEventSubscriber
+  visibility: public
+  parameters:
+  - name: subscriber
+  comment: '# * Adds an event subscriber for events on this form.
+
+    # *
+
+    # * @return $this'
+- name: addViewTransformer
+  visibility: public
+  parameters:
+  - name: viewTransformer
+  - name: forcePrepend
+    default: 'false'
+  comment: '# * Appends / prepends a transformer to the view transformer chain.
+
+    # *
+
+    # * The transform method of the transformer is used to convert data from the
+
+    # * normalized to the view format.
+
+    # * The reverseTransform method of the transformer is used to convert from the
+
+    # * view to the normalized format.
+
+    # *
+
+    # * @param bool $forcePrepend If set to true, prepend instead of appending
+
+    # *
+
+    # * @return $this'
+- name: resetViewTransformers
+  visibility: public
+  parameters: []
+  comment: '# * Clears the view transformers.
+
+    # *
+
+    # * @return $this'
+- name: addModelTransformer
+  visibility: public
+  parameters:
+  - name: modelTransformer
+  - name: forceAppend
+    default: 'false'
+  comment: '# * Prepends / appends a transformer to the normalization transformer
+    chain.
+
+    # *
+
+    # * The transform method of the transformer is used to convert data from the
+
+    # * model to the normalized format.
+
+    # * The reverseTransform method of the transformer is used to convert from the
+
+    # * normalized to the model format.
+
+    # *
+
+    # * @param bool $forceAppend If set to true, append instead of prepending
+
+    # *
+
+    # * @return $this'
+- name: resetModelTransformers
+  visibility: public
+  parameters: []
+  comment: '# * Clears the normalization transformers.
+
+    # *
+
+    # * @return $this'
+- name: setAttribute
+  visibility: public
+  parameters:
+  - name: name
+  - name: value
+  comment: '# * Sets the value for an attribute.
+
+    # *
+
+    # * @param mixed $value The value of the attribute
+
+    # *
+
+    # * @return $this'
+- name: setAttributes
+  visibility: public
+  parameters:
+  - name: attributes
+  comment: '# * Sets the attributes.
+
+    # *
+
+    # * @return $this'
+- name: setDataMapper
+  visibility: public
+  parameters:
+  - name: dataMapper
+  comment: '# * Sets the data mapper used by the form.
+
+    # *
+
+    # * @return $this'
+- name: setDisabled
+  visibility: public
+  parameters:
+  - name: disabled
+  comment: '# * Sets whether the form is disabled.
+
+    # *
+
+    # * @return $this'
+- name: setEmptyData
+  visibility: public
+  parameters:
+  - name: emptyData
+  comment: '# * Sets the data used for the client data when no value is submitted.
+
+    # *
+
+    # * @param mixed $emptyData The empty data
+
+    # *
+
+    # * @return $this'
+- name: setErrorBubbling
+  visibility: public
+  parameters:
+  - name: errorBubbling
+  comment: '# * Sets whether errors bubble up to the parent.
+
+    # *
+
+    # * @return $this'
+- name: setRequired
+  visibility: public
+  parameters:
+  - name: required
+  comment: '# * Sets whether this field is required to be filled out when submitted.
+
+    # *
+
+    # * @return $this'
+- name: setPropertyPath
+  visibility: public
+  parameters:
+  - name: propertyPath
+  comment: '# * Sets the property path that the form should be mapped to.
+
+    # *
+
+    # * @param string|PropertyPathInterface|null $propertyPath The property path or
+    null if the path should be set
+
+    # *                                                        automatically based
+    on the form''s name
+
+    # *
+
+    # * @return $this'
+- name: setMapped
+  visibility: public
+  parameters:
+  - name: mapped
+  comment: '# * Sets whether the form should be mapped to an element of its
+
+    # * parent''s data.
+
+    # *
+
+    # * @return $this'
+- name: setByReference
+  visibility: public
+  parameters:
+  - name: byReference
+  comment: '# * Sets whether the form''s data should be modified by reference.
+
+    # *
+
+    # * @return $this'
+- name: setInheritData
+  visibility: public
+  parameters:
+  - name: inheritData
+  comment: '# * Sets whether the form should read and write the data of its parent.
+
+    # *
+
+    # * @return $this'
+- name: setCompound
+  visibility: public
+  parameters:
+  - name: compound
+  comment: '# * Sets whether the form should be compound.
+
+    # *
+
+    # * @return $this
+
+    # *
+
+    # * @see FormConfigInterface::getCompound()'
+- name: setType
+  visibility: public
+  parameters:
+  - name: type
+  comment: '# * Sets the resolved type.
+
+    # *
+
+    # * @return $this'
+- name: setData
+  visibility: public
+  parameters:
+  - name: data
+  comment: '# * Sets the initial data of the form.
+
+    # *
+
+    # * @param mixed $data The data of the form in model format
+
+    # *
+
+    # * @return $this'
+- name: setDataLocked
+  visibility: public
+  parameters:
+  - name: locked
+  comment: '# * Locks the form''s data to the data passed in the configuration.
+
+    # *
+
+    # * A form with locked data is restricted to the data passed in
+
+    # * this configuration. The data can only be modified then by
+
+    # * submitting the form or using PRE_SET_DATA event.
+
+    # *
+
+    # * It means data passed to a factory method or mapped from the
+
+    # * parent will be ignored.
+
+    # *
+
+    # * @return $this'
+- name: setFormFactory
+  visibility: public
+  parameters:
+  - name: formFactory
+  comment: '# * Sets the form factory used for creating new forms.
+
+    # *
+
+    # * @return $this'
+- name: setAction
+  visibility: public
+  parameters:
+  - name: action
+  comment: '# * Sets the target URL of the form.
+
+    # *
+
+    # * @return $this'
+- name: setMethod
+  visibility: public
+  parameters:
+  - name: method
+  comment: '# * Sets the HTTP method used by the form.
+
+    # *
+
+    # * @return $this'
+- name: setRequestHandler
+  visibility: public
+  parameters:
+  - name: requestHandler
+  comment: '# * Sets the request handler used by the form.
+
+    # *
+
+    # * @return $this'
+- name: setAutoInitialize
+  visibility: public
+  parameters:
+  - name: initialize
+  comment: '# * Sets whether the form should be initialized automatically.
+
+    # *
+
+    # * Should be set to true only for root forms.
+
+    # *
+
+    # * @param bool $initialize True to initialize the form automatically,
+
+    # *                         false to suppress automatic initialization.
+
+    # *                         In the second case, you need to call
+
+    # *                         {@link FormInterface::initialize()} manually.
+
+    # *
+
+    # * @return $this'
+- name: getFormConfig
+  visibility: public
+  parameters: []
+  comment: '# * Builds and returns the form configuration.'
+- name: setIsEmptyCallback
+  visibility: public
+  parameters:
+  - name: isEmptyCallback
+  comment: '# * Sets the callback that will be called to determine if the model
+
+    # * data of the form is empty or not.
+
+    # *
+
+    # * @return $this'
+traits:
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\PropertyAccess\PropertyPathInterface
+interfaces: []

@@ -1,0 +1,149 @@
+name: Connection
+class_comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n# *\n# *\
+  \ @internal\n# *\n# * @final"
+dependencies:
+- name: MessageSystemAttributeName
+  type: class
+  source: AsyncAws\Sqs\Enum\MessageSystemAttributeName
+- name: QueueAttributeName
+  type: class
+  source: AsyncAws\Sqs\Enum\QueueAttributeName
+- name: ReceiveMessageResult
+  type: class
+  source: AsyncAws\Sqs\Result\ReceiveMessageResult
+- name: SqsClient
+  type: class
+  source: AsyncAws\Sqs\SqsClient
+- name: MessageAttributeValue
+  type: class
+  source: AsyncAws\Sqs\ValueObject\MessageAttributeValue
+- name: MessageSystemAttributeValue
+  type: class
+  source: AsyncAws\Sqs\ValueObject\MessageSystemAttributeValue
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Messenger\Exception\InvalidArgumentException
+- name: TransportException
+  type: class
+  source: Symfony\Component\Messenger\Exception\TransportException
+- name: HttpClientInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\HttpClientInterface
+properties: []
+methods:
+- name: fromDsn
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: options
+    default: '[]'
+  - name: client
+    default: 'null'
+  - name: logger
+    default: 'null'
+  comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n# *\n# * @internal\n\
+    # *\n# * @final\n# */\n# class Connection\n# {\n# private const AWS_SQS_FIFO_SUFFIX\
+    \ = '.fifo';\n# private const MESSAGE_ATTRIBUTE_NAME = 'X-Symfony-Messenger';\n\
+    # \n# private const DEFAULT_OPTIONS = [\n# 'buffer_size' => 9,\n# 'wait_time'\
+    \ => 20,\n# 'poll_timeout' => 0.1,\n# 'visibility_timeout' => null,\n# 'auto_setup'\
+    \ => true,\n# 'access_key' => null,\n# 'secret_key' => null,\n# 'session_token'\
+    \ => null,\n# 'endpoint' => 'https://sqs.eu-west-1.amazonaws.com',\n# 'region'\
+    \ => 'eu-west-1',\n# 'queue_name' => 'messages',\n# 'account' => null,\n# 'sslmode'\
+    \ => null,\n# 'debug' => null,\n# ];\n# \n# private array $configuration;\n# private\
+    \ SqsClient $client;\n# private ?ReceiveMessageResult $currentResponse = null;\n\
+    # /** @var array[] */\n# private array $buffer = [];\n# \n# public function __construct(\n\
+    # array $configuration,\n# ?SqsClient $client = null,\n# private ?string $queueUrl\
+    \ = null,\n# ) {\n# $this->configuration = array_replace_recursive(self::DEFAULT_OPTIONS,\
+    \ $configuration);\n# $this->client = $client ?? new SqsClient([]);\n# }\n# \n\
+    # public function __sleep(): array\n# {\n# throw new \\BadMethodCallException('Cannot\
+    \ serialize '.__CLASS__);\n# }\n# \n# public function __wakeup(): void\n# {\n\
+    # throw new \\BadMethodCallException('Cannot unserialize '.__CLASS__);\n# }\n\
+    # \n# public function __destruct()\n# {\n# $this->reset();\n# }\n# \n# /**\n#\
+    \ * Creates a connection based on the DSN and options.\n# *\n# * Available options:\n\
+    # *\n# * * endpoint: absolute URL to the SQS service (Default: https://sqs.eu-west-1.amazonaws.com)\n\
+    # * * region: name of the AWS region (Default: eu-west-1)\n# * * queue_name: name\
+    \ of the queue (Default: messages)\n# * * account: identifier of the AWS account\n\
+    # * * access_key: AWS access key\n# * * secret_key: AWS secret key\n# * * session_token:\
+    \ AWS session token (required only when using temporary credentials)\n# * * buffer_size:\
+    \ number of messages to prefetch (Default: 9)\n# * * wait_time: long polling duration\
+    \ in seconds (Default: 20)\n# * * poll_timeout: amount of seconds the transport\
+    \ should wait for new message\n# * * visibility_timeout: amount of seconds the\
+    \ message won't be visible\n# * * sslmode: Can be \"disable\" to use http for\
+    \ a custom endpoint\n# * * auto_setup: Whether the queue should be created automatically\
+    \ during send / get (Default: true)\n# * * debug: Log all HTTP requests and responses\
+    \ as LoggerInterface::DEBUG (Default: false)"
+- name: get
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNextMessages
+  visibility: private
+  parameters: []
+  comment: '# * @return \Generator<int, array>'
+- name: getPendingMessages
+  visibility: private
+  parameters: []
+  comment: '# * @return \Generator<int, array>'
+- name: getNewMessages
+  visibility: private
+  parameters: []
+  comment: '# * @return \Generator<int, array>'
+- name: fetchMessage
+  visibility: private
+  parameters: []
+  comment: null
+- name: setup
+  visibility: public
+  parameters: []
+  comment: null
+- name: delete
+  visibility: public
+  parameters:
+  - name: id
+  comment: null
+- name: getMessageCount
+  visibility: public
+  parameters: []
+  comment: null
+- name: send
+  visibility: public
+  parameters:
+  - name: body
+  - name: headers
+  - name: delay
+    default: '0'
+  - name: messageGroupId
+    default: 'null'
+  - name: messageDeduplicationId
+    default: 'null'
+  - name: xrayTraceId
+    default: 'null'
+  comment: null
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+- name: getQueueUrl
+  visibility: private
+  parameters: []
+  comment: null
+- name: isFifoQueue
+  visibility: private
+  parameters:
+  - name: queueName
+  comment: null
+traits:
+- AsyncAws\Sqs\Enum\MessageSystemAttributeName
+- AsyncAws\Sqs\Enum\QueueAttributeName
+- AsyncAws\Sqs\Result\ReceiveMessageResult
+- AsyncAws\Sqs\SqsClient
+- AsyncAws\Sqs\ValueObject\MessageAttributeValue
+- AsyncAws\Sqs\ValueObject\MessageSystemAttributeValue
+- Psr\Log\LoggerInterface
+- Symfony\Component\Messenger\Exception\InvalidArgumentException
+- Symfony\Component\Messenger\Exception\TransportException
+- Symfony\Contracts\HttpClient\HttpClientInterface
+interfaces: []

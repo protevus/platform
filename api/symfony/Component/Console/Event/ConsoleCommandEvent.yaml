@@ -1,0 +1,27 @@
+name: ConsoleCommandEvent
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: disableCommand
+  visibility: public
+  parameters: []
+  comment: "# * Allows to do things before the command is executed, like skipping\
+    \ the command or executing code before the command is\n# * going to be executed.\n\
+    # *\n# * Changing the input arguments will have no effect.\n# *\n# * @author Fabien\
+    \ Potencier <fabien@symfony.com>\n# */\n# final class ConsoleCommandEvent extends\
+    \ ConsoleEvent\n# {\n# /**\n# * The return code for skipped commands, this will\
+    \ also be passed into the terminate event.\n# */\n# public const RETURN_CODE_DISABLED\
+    \ = 113;\n# \n# /**\n# * Indicates if the command should be run or skipped.\n\
+    # */\n# private bool $commandShouldRun = true;\n# \n# /**\n# * Disables the command,\
+    \ so it won't be run."
+- name: enableCommand
+  visibility: public
+  parameters: []
+  comment: null
+- name: commandShouldRun
+  visibility: public
+  parameters: []
+  comment: '# * Returns true if the command is runnable, false otherwise.'
+traits: []
+interfaces: []

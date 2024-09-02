@@ -1,0 +1,80 @@
+name: TimeValidatorTest
+class_comment: null
+dependencies:
+- name: Time
+  type: class
+  source: Symfony\Component\Validator\Constraints\Time
+- name: TimeValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\TimeValidator
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+properties: []
+methods:
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testNullIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDefaultWithSeconds
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEmptyStringIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExpectsStringCompatibleType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidTimes
+  visibility: public
+  parameters:
+  - name: time
+  comment: '# * @dataProvider getValidTimes'
+- name: getValidTimes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidTimesWithoutSeconds
+  visibility: public
+  parameters:
+  - name: time
+  comment: '# * @dataProvider getValidTimesWithoutSeconds'
+- name: getValidTimesWithoutSeconds
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidTimesWithoutSeconds
+  visibility: public
+  parameters:
+  - name: time
+  comment: '# * @dataProvider getInvalidTimesWithoutSeconds'
+- name: getInvalidTimesWithoutSeconds
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidTimes
+  visibility: public
+  parameters:
+  - name: time
+  - name: code
+  comment: '# * @dataProvider getInvalidTimes'
+- name: getInvalidTimes
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\Time
+- Symfony\Component\Validator\Constraints\TimeValidator
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

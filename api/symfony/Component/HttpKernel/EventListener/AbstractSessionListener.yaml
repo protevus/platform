@@ -1,0 +1,103 @@
+name: AbstractSessionListener
+class_comment: null
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: Cookie
+  type: class
+  source: Symfony\Component\HttpFoundation\Cookie
+- name: Session
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Session
+- name: SessionInterface
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\SessionInterface
+- name: SessionUtils
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\SessionUtils
+- name: RequestEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\RequestEvent
+- name: ResponseEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ResponseEvent
+- name: UnexpectedSessionUsageException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\UnexpectedSessionUsageException
+- name: KernelEvents
+  type: class
+  source: Symfony\Component\HttpKernel\KernelEvents
+- name: ResetInterface
+  type: class
+  source: Symfony\Contracts\Service\ResetInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+    default: 'null'
+  - name: debug
+    default: 'false'
+  - name: sessionOptions
+    default: '[]'
+  comment: "# * Sets the session onto the request on the \"kernel.request\" event\
+    \ and saves\n# * it on the \"kernel.response\" event.\n# *\n# * In addition, if\
+    \ the session has been started it overrides the Cache-Control\n# * header in such\
+    \ a way that all caching is disabled in that case.\n# * If you have a scenario\
+    \ where caching responses with session information in\n# * them makes sense, you\
+    \ can disable this behaviour by setting the header\n# * AbstractSessionListener::NO_AUTO_CACHE_CONTROL_HEADER\
+    \ on the response.\n# *\n# * @author Johannes M. Schmitt <schmittjoh@gmail.com>\n\
+    # * @author Tobias Schultze <http://tobion.de>\n# */\n# abstract class AbstractSessionListener\
+    \ implements EventSubscriberInterface, ResetInterface\n# {\n# public const NO_AUTO_CACHE_CONTROL_HEADER\
+    \ = 'Symfony-Session-NoAutoCacheControl';\n# \n# /**\n# * @param array<string,\
+    \ mixed> $sessionOptions\n# *\n# * @internal"
+- name: onKernelRequest
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * @internal'
+- name: onKernelResponse
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * @internal'
+- name: onSessionUsage
+  visibility: public
+  parameters: []
+  comment: '# * @internal'
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: '# * @internal'
+- name: reset
+  visibility: public
+  parameters: []
+  comment: '# * @internal'
+- name: getSession
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getSessionOptions
+  visibility: private
+  parameters:
+  - name: sessionOptions
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\HttpFoundation\Cookie
+- Symfony\Component\HttpFoundation\Session\Session
+- Symfony\Component\HttpFoundation\Session\SessionInterface
+- Symfony\Component\HttpFoundation\Session\SessionUtils
+- Symfony\Component\HttpKernel\Event\RequestEvent
+- Symfony\Component\HttpKernel\Event\ResponseEvent
+- Symfony\Component\HttpKernel\Exception\UnexpectedSessionUsageException
+- Symfony\Component\HttpKernel\KernelEvents
+- Symfony\Contracts\Service\ResetInterface
+interfaces:
+- EventSubscriberInterface

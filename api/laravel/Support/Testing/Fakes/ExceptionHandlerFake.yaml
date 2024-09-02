@@ -1,0 +1,235 @@
+name: ExceptionHandlerFake
+class_comment: '# * @mixin \Illuminate\Foundation\Exceptions\Handler'
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: ExceptionHandler
+  type: class
+  source: Illuminate\Contracts\Debug\ExceptionHandler
+- name: WithoutExceptionHandlingHandler
+  type: class
+  source: Illuminate\Foundation\Testing\Concerns\WithoutExceptionHandlingHandler
+- name: ForwardsCalls
+  type: class
+  source: Illuminate\Support\Traits\ForwardsCalls
+- name: ReflectsClosures
+  type: class
+  source: Illuminate\Support\Traits\ReflectsClosures
+- name: Assert
+  type: class
+  source: Illuminate\Testing\Assert
+- name: PHPUnit
+  type: class
+  source: PHPUnit\Framework\Assert
+- name: ExpectationFailedException
+  type: class
+  source: PHPUnit\Framework\ExpectationFailedException
+- name: Throwable
+  type: class
+  source: Throwable
+properties:
+- name: reported
+  visibility: protected
+  comment: "# * @mixin \\Illuminate\\Foundation\\Exceptions\\Handler\n# */\n# class\
+    \ ExceptionHandlerFake implements ExceptionHandler, Fake\n# {\n# use ForwardsCalls,\
+    \ ReflectsClosures;\n# \n# /**\n# * All of the exceptions that have been reported.\n\
+    # *\n# * @var array<int, \\Throwable>"
+- name: throwOnReport
+  visibility: protected
+  comment: '# * If the fake should throw exceptions when they are reported.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: handler
+  - name: exceptions
+    default: '[]'
+  comment: "# * @mixin \\Illuminate\\Foundation\\Exceptions\\Handler\n# */\n# class\
+    \ ExceptionHandlerFake implements ExceptionHandler, Fake\n# {\n# use ForwardsCalls,\
+    \ ReflectsClosures;\n# \n# /**\n# * All of the exceptions that have been reported.\n\
+    # *\n# * @var array<int, \\Throwable>\n# */\n# protected $reported = [];\n# \n\
+    # /**\n# * If the fake should throw exceptions when they are reported.\n# *\n\
+    # * @var bool\n# */\n# protected $throwOnReport = false;\n# \n# /**\n# * Create\
+    \ a new exception handler fake.\n# *\n# * @param  \\Illuminate\\Contracts\\Debug\\\
+    ExceptionHandler  $handler\n# * @param  array<int, class-string<\\Throwable>>\
+    \  $exceptions\n# * @return void"
+- name: handler
+  visibility: public
+  parameters: []
+  comment: '# * Get the underlying handler implementation.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Debug\ExceptionHandler'
+- name: assertReported
+  visibility: public
+  parameters:
+  - name: exception
+  comment: '# * Assert if an exception of the given type has been reported.
+
+    # *
+
+    # * @param  \Closure|string  $exception
+
+    # * @return void'
+- name: assertReportedCount
+  visibility: public
+  parameters:
+  - name: count
+  comment: '# * Assert the number of exceptions that have been reported.
+
+    # *
+
+    # * @param  int  $count
+
+    # * @return void'
+- name: assertNotReported
+  visibility: public
+  parameters:
+  - name: exception
+  comment: '# * Assert if an exception of the given type has not been reported.
+
+    # *
+
+    # * @param  \Closure|string  $exception
+
+    # * @return void'
+- name: assertNothingReported
+  visibility: public
+  parameters: []
+  comment: '# * Assert nothing has been reported.
+
+    # *
+
+    # * @return void'
+- name: report
+  visibility: public
+  parameters:
+  - name: e
+  comment: '# * Report or log an exception.
+
+    # *
+
+    # * @param  \Throwable  $e
+
+    # * @return void'
+- name: isFakedException
+  visibility: protected
+  parameters:
+  - name: e
+  comment: '# * Determine if the given exception is faked.
+
+    # *
+
+    # * @param  \Throwable  $e
+
+    # * @return bool'
+- name: shouldReport
+  visibility: public
+  parameters:
+  - name: e
+  comment: '# * Determine if the exception should be reported.
+
+    # *
+
+    # * @param  \Throwable  $e
+
+    # * @return bool'
+- name: runningWithoutExceptionHandling
+  visibility: protected
+  parameters: []
+  comment: '# * Determine if the handler is running without exception handling.
+
+    # *
+
+    # * @return bool'
+- name: render
+  visibility: public
+  parameters:
+  - name: request
+  - name: e
+  comment: '# * Render an exception into an HTTP response.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  \Throwable  $e
+
+    # * @return \Symfony\Component\HttpFoundation\Response'
+- name: renderForConsole
+  visibility: public
+  parameters:
+  - name: output
+  - name: e
+  comment: '# * Render an exception to the console.
+
+    # *
+
+    # * @param  \Symfony\Component\Console\Output\OutputInterface  $output
+
+    # * @param  \Throwable  $e
+
+    # * @return void'
+- name: throwOnReport
+  visibility: public
+  parameters: []
+  comment: '# * Throw exceptions when they are reported.
+
+    # *
+
+    # * @return $this'
+- name: throwFirstReported
+  visibility: public
+  parameters: []
+  comment: '# * Throw the first reported exception.
+
+    # *
+
+    # * @return $this
+
+    # *
+
+    # * @throws \Throwable'
+- name: setHandler
+  visibility: public
+  parameters:
+  - name: handler
+  comment: '# * Set the "original" handler that should be used by the fake.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Debug\ExceptionHandler  $handler
+
+    # * @return $this'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Handle dynamic method calls to the mailer.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array<string, mixed>  $parameters
+
+    # * @return mixed'
+traits:
+- Closure
+- Illuminate\Contracts\Debug\ExceptionHandler
+- Illuminate\Foundation\Testing\Concerns\WithoutExceptionHandlingHandler
+- Illuminate\Support\Traits\ForwardsCalls
+- Illuminate\Support\Traits\ReflectsClosures
+- Illuminate\Testing\Assert
+- PHPUnit\Framework\ExpectationFailedException
+- Throwable
+- ForwardsCalls
+interfaces:
+- ExceptionHandler

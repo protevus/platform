@@ -1,0 +1,25 @@
+name: ClickableInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: isClicked
+  visibility: public
+  parameters: []
+  comment: '# * A clickable form element.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # interface ClickableInterface
+
+    # {
+
+    # /**
+
+    # * Returns whether this element was clicked.'
+traits: []
+interfaces: []

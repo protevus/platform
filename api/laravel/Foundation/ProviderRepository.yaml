@@ -1,0 +1,148 @@
+name: ProviderRepository
+class_comment: null
+dependencies:
+- name: Exception
+  type: class
+  source: Exception
+- name: ApplicationContract
+  type: class
+  source: Illuminate\Contracts\Foundation\Application
+- name: Filesystem
+  type: class
+  source: Illuminate\Filesystem\Filesystem
+properties:
+- name: app
+  visibility: protected
+  comment: '# * The application implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Foundation\Application'
+- name: files
+  visibility: protected
+  comment: '# * The filesystem instance.
+
+    # *
+
+    # * @var \Illuminate\Filesystem\Filesystem'
+- name: manifestPath
+  visibility: protected
+  comment: '# * The path to the manifest file.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: app
+  - name: files
+  - name: manifestPath
+  comment: "# * The application implementation.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Foundation\\Application\n# */\n# protected $app;\n# \n# /**\n# * The filesystem\
+    \ instance.\n# *\n# * @var \\Illuminate\\Filesystem\\Filesystem\n# */\n# protected\
+    \ $files;\n# \n# /**\n# * The path to the manifest file.\n# *\n# * @var string\n\
+    # */\n# protected $manifestPath;\n# \n# /**\n# * Create a new service repository\
+    \ instance.\n# *\n# * @param  \\Illuminate\\Contracts\\Foundation\\Application\
+    \  $app\n# * @param  \\Illuminate\\Filesystem\\Filesystem  $files\n# * @param\
+    \  string  $manifestPath\n# * @return void"
+- name: load
+  visibility: public
+  parameters:
+  - name: providers
+  comment: '# * Register the application service providers.
+
+    # *
+
+    # * @param  array  $providers
+
+    # * @return void'
+- name: loadManifest
+  visibility: public
+  parameters: []
+  comment: '# * Load the service provider manifest JSON file.
+
+    # *
+
+    # * @return array|null'
+- name: shouldRecompile
+  visibility: public
+  parameters:
+  - name: manifest
+  - name: providers
+  comment: '# * Determine if the manifest should be compiled.
+
+    # *
+
+    # * @param  array  $manifest
+
+    # * @param  array  $providers
+
+    # * @return bool'
+- name: registerLoadEvents
+  visibility: protected
+  parameters:
+  - name: provider
+  - name: events
+  comment: '# * Register the load events for the given provider.
+
+    # *
+
+    # * @param  string  $provider
+
+    # * @param  array  $events
+
+    # * @return void'
+- name: compileManifest
+  visibility: protected
+  parameters:
+  - name: providers
+  comment: '# * Compile the application service manifest file.
+
+    # *
+
+    # * @param  array  $providers
+
+    # * @return array'
+- name: freshManifest
+  visibility: protected
+  parameters:
+  - name: providers
+  comment: '# * Create a fresh service manifest data structure.
+
+    # *
+
+    # * @param  array  $providers
+
+    # * @return array'
+- name: writeManifest
+  visibility: public
+  parameters:
+  - name: manifest
+  comment: '# * Write the service manifest file to disk.
+
+    # *
+
+    # * @param  array  $manifest
+
+    # * @return array
+
+    # *
+
+    # * @throws \Exception'
+- name: createProvider
+  visibility: public
+  parameters:
+  - name: provider
+  comment: '# * Create a new provider instance.
+
+    # *
+
+    # * @param  string  $provider
+
+    # * @return \Illuminate\Support\ServiceProvider'
+traits:
+- Exception
+- Illuminate\Filesystem\Filesystem
+interfaces: []

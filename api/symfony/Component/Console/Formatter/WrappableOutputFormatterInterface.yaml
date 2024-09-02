@@ -1,0 +1,28 @@
+name: WrappableOutputFormatterInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: formatAndWrap
+  visibility: public
+  parameters:
+  - name: message
+  - name: width
+  comment: '# * Formatter interface for console output that supports word wrapping.
+
+    # *
+
+    # * @author Roland Franssen <franssen.roland@gmail.com>
+
+    # */
+
+    # interface WrappableOutputFormatterInterface extends OutputFormatterInterface
+
+    # {
+
+    # /**
+
+    # * Formats a message according to the given styles, wrapping at `$width` (0 means
+    no wrapping).'
+traits: []
+interfaces: []

@@ -1,0 +1,63 @@
+name: WeekToArrayTransformerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+- name: WeekToArrayTransformer
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataTransformer\WeekToArrayTransformer
+properties: []
+methods:
+- name: testTransform
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransformEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransformationFailures
+  visibility: public
+  parameters:
+  - name: input
+  - name: message
+  comment: '# * @dataProvider transformationFailuresProvider'
+- name: transformationFailuresProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransform
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransformCompletelyEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransformNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransformEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransformFailures
+  visibility: public
+  parameters:
+  - name: input
+  - name: message
+  comment: '# * @dataProvider reverseTransformationFailuresProvider'
+- name: reverseTransformationFailuresProvider
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\Exception\TransformationFailedException
+- Symfony\Component\Form\Extension\Core\DataTransformer\WeekToArrayTransformer
+interfaces: []

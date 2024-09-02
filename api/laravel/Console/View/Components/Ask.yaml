@@ -1,0 +1,30 @@
+name: Ask
+class_comment: null
+dependencies:
+- name: Question
+  type: class
+  source: Symfony\Component\Console\Question\Question
+properties: []
+methods:
+- name: render
+  visibility: public
+  parameters:
+  - name: question
+  - name: default
+    default: 'null'
+  - name: multiline
+    default: 'false'
+  comment: '# * Renders the component using the given arguments.
+
+    # *
+
+    # * @param  string  $question
+
+    # * @param  string  $default
+
+    # * @param  bool  $multiline
+
+    # * @return mixed'
+traits:
+- Symfony\Component\Console\Question\Question
+interfaces: []

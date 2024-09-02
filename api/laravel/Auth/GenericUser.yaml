@@ -1,0 +1,131 @@
+name: GenericUser
+class_comment: null
+dependencies:
+- name: UserContract
+  type: class
+  source: Illuminate\Contracts\Auth\Authenticatable
+properties:
+- name: attributes
+  visibility: protected
+  comment: '# * All of the user''s attributes.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: attributes
+  comment: "# * All of the user's attributes.\n# *\n# * @var array\n# */\n# protected\
+    \ $attributes;\n# \n# /**\n# * Create a new generic User object.\n# *\n# * @param\
+    \  array  $attributes\n# * @return void"
+- name: getAuthIdentifierName
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the unique identifier for the user.
+
+    # *
+
+    # * @return string'
+- name: getAuthIdentifier
+  visibility: public
+  parameters: []
+  comment: '# * Get the unique identifier for the user.
+
+    # *
+
+    # * @return mixed'
+- name: getAuthPasswordName
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the password attribute for the user.
+
+    # *
+
+    # * @return string'
+- name: getAuthPassword
+  visibility: public
+  parameters: []
+  comment: '# * Get the password for the user.
+
+    # *
+
+    # * @return string'
+- name: getRememberToken
+  visibility: public
+  parameters: []
+  comment: '# * Get the "remember me" token value.
+
+    # *
+
+    # * @return string'
+- name: setRememberToken
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Set the "remember me" token value.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return void'
+- name: getRememberTokenName
+  visibility: public
+  parameters: []
+  comment: '# * Get the column name for the "remember me" token.
+
+    # *
+
+    # * @return string'
+- name: __get
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Dynamically access the user''s attributes.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed'
+- name: __set
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Dynamically set an attribute on the user.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return void'
+- name: __isset
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Dynamically check if a value is set on the user.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: __unset
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Dynamically unset a value on the user.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return void'
+traits: []
+interfaces:
+- UserContract

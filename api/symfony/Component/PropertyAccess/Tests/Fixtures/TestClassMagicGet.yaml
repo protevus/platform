@@ -1,0 +1,34 @@
+name: TestClassMagicGet
+class_comment: null
+dependencies: []
+properties:
+- name: magicProperty
+  visibility: private
+  comment: null
+- name: publicProperty
+  visibility: public
+  comment: null
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: value
+  comment: null
+- name: __set
+  visibility: public
+  parameters:
+  - name: property
+  - name: value
+  comment: null
+- name: __get
+  visibility: public
+  parameters:
+  - name: property
+  comment: null
+- name: __isset
+  visibility: public
+  parameters:
+  - name: property
+  comment: null
+traits: []
+interfaces: []

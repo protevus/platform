@@ -1,0 +1,246 @@
+name: TableTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Console\Exception\InvalidArgumentException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Console\Exception\RuntimeException
+- name: OutputFormatter
+  type: class
+  source: Symfony\Component\Console\Formatter\OutputFormatter
+- name: Table
+  type: class
+  source: Symfony\Component\Console\Helper\Table
+- name: TableCell
+  type: class
+  source: Symfony\Component\Console\Helper\TableCell
+- name: TableCellStyle
+  type: class
+  source: Symfony\Component\Console\Helper\TableCellStyle
+- name: TableSeparator
+  type: class
+  source: Symfony\Component\Console\Helper\TableSeparator
+- name: TableStyle
+  type: class
+  source: Symfony\Component\Console\Helper\TableStyle
+- name: ConsoleSectionOutput
+  type: class
+  source: Symfony\Component\Console\Output\ConsoleSectionOutput
+- name: StreamOutput
+  type: class
+  source: Symfony\Component\Console\Output\StreamOutput
+properties:
+- name: stream
+  visibility: protected
+  comment: '# @var resource'
+methods:
+- name: testRender
+  visibility: public
+  parameters:
+  - name: headers
+  - name: rows
+  - name: style
+  - name: expected
+  - name: decorated
+    default: 'false'
+  comment: "# @var resource */\n# protected $stream;\n# \n# protected function setUp():\
+    \ void\n# {\n# $this->stream = fopen('php://memory', 'r+');\n# }\n# \n# protected\
+    \ function tearDown(): void\n# {\n# unset($this->stream);\n# }\n# \n# /**\n# *\
+    \ @dataProvider renderProvider"
+- name: testRenderAddRows
+  visibility: public
+  parameters:
+  - name: headers
+  - name: rows
+  - name: style
+  - name: expected
+  - name: decorated
+    default: 'false'
+  comment: '# * @dataProvider renderProvider'
+- name: testRenderAddRowsOneByOne
+  visibility: public
+  parameters:
+  - name: headers
+  - name: rows
+  - name: style
+  - name: expected
+  - name: decorated
+    default: 'false'
+  comment: '# * @dataProvider renderProvider'
+- name: renderProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderMultiByte
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTableCellWithNumericIntValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTableCellWithNumericFloatValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStyle
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRowSeparator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderMultiCalls
+  visibility: public
+  parameters: []
+  comment: null
+- name: testColumnStyle
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowsWhenTheCellInAnArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testColumnWidth
+  visibility: public
+  parameters: []
+  comment: null
+- name: testColumnWidths
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSectionOutput
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSectionOutputDoesntClearIfTableIsntRendered
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSectionOutputWithoutDecoration
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAppendRowWithoutSectionOutput
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSectionOutputHandlesZeroRowsAfterRender
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsNotDefinedStyleException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetStyleDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetTitle
+  visibility: public
+  parameters:
+  - name: headerTitle
+  - name: footerTitle
+  - name: style
+  - name: expected
+  comment: '# * @dataProvider renderSetTitle'
+- name: renderSetTitle
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetTitleWithoutHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testColumnMaxWidths
+  visibility: public
+  parameters: []
+  comment: null
+- name: testColumnMaxWidthsHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testColumnMaxWidthsWithTrailingBackslash
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBoxedStyleWithColspan
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideRenderHorizontalTests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderHorizontal
+  visibility: public
+  parameters:
+  - name: headers
+  - name: rows
+  - name: expected
+  comment: '# * @dataProvider provideRenderHorizontalTests'
+- name: getOutputStream
+  visibility: protected
+  parameters:
+  - name: decorated
+    default: 'false'
+  comment: null
+- name: getOutputContent
+  visibility: protected
+  parameters:
+  - name: output
+  comment: null
+- name: testWithColspanAndMaxWith
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideRenderVerticalTests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testVerticalRender
+  visibility: public
+  parameters:
+  - name: expectedOutput
+  - name: headers
+  - name: rows
+  - name: style
+    default: '''default'''
+  - name: headerTitle
+    default: ''''''
+  - name: footerTitle
+    default: ''''''
+  comment: '# * @dataProvider provideRenderVerticalTests'
+- name: testWithHyperlinkAndMaxWidth
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGithubIssue52101HorizontalTrue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGithubIssue52101HorizontalFalse
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Exception\InvalidArgumentException
+- Symfony\Component\Console\Exception\RuntimeException
+- Symfony\Component\Console\Formatter\OutputFormatter
+- Symfony\Component\Console\Helper\Table
+- Symfony\Component\Console\Helper\TableCell
+- Symfony\Component\Console\Helper\TableCellStyle
+- Symfony\Component\Console\Helper\TableSeparator
+- Symfony\Component\Console\Helper\TableStyle
+- Symfony\Component\Console\Output\ConsoleSectionOutput
+- Symfony\Component\Console\Output\StreamOutput
+interfaces: []

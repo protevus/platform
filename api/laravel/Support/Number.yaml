@@ -1,0 +1,277 @@
+name: Number
+class_comment: null
+dependencies:
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: NumberFormatter
+  type: class
+  source: NumberFormatter
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: Macroable
+  type: class
+  source: Macroable
+properties:
+- name: locale
+  visibility: protected
+  comment: '# * The current default locale.
+
+    # *
+
+    # * @var string'
+methods:
+- name: format
+  visibility: public
+  parameters:
+  - name: number
+  - name: precision
+    default: 'null'
+  - name: maxPrecision
+    default: 'null'
+  - name: locale
+    default: 'null'
+  comment: "# * The current default locale.\n# *\n# * @var string\n# */\n# protected\
+    \ static $locale = 'en';\n# \n# /**\n# * Format the given number according to\
+    \ the current locale.\n# *\n# * @param  int|float  $number\n# * @param  int|null\
+    \  $precision\n# * @param  int|null  $maxPrecision\n# * @param  string|null  $locale\n\
+    # * @return string|false"
+- name: spell
+  visibility: public
+  parameters:
+  - name: number
+  - name: locale
+    default: 'null'
+  - name: after
+    default: 'null'
+  - name: until
+    default: 'null'
+  comment: '# * Spell out the given number in the given locale.
+
+    # *
+
+    # * @param  int|float  $number
+
+    # * @param  string|null  $locale
+
+    # * @param  int|null  $after
+
+    # * @param  int|null  $until
+
+    # * @return string'
+- name: ordinal
+  visibility: public
+  parameters:
+  - name: number
+  - name: locale
+    default: 'null'
+  comment: '# * Convert the given number to ordinal form.
+
+    # *
+
+    # * @param  int|float  $number
+
+    # * @param  string|null  $locale
+
+    # * @return string'
+- name: percentage
+  visibility: public
+  parameters:
+  - name: number
+  - name: precision
+    default: '0'
+  - name: maxPrecision
+    default: 'null'
+  - name: locale
+    default: 'null'
+  comment: '# * Convert the given number to its percentage equivalent.
+
+    # *
+
+    # * @param  int|float  $number
+
+    # * @param  int  $precision
+
+    # * @param  int|null  $maxPrecision
+
+    # * @param  string|null  $locale
+
+    # * @return string|false'
+- name: currency
+  visibility: public
+  parameters:
+  - name: number
+  - name: in
+    default: '''USD'''
+  - name: locale
+    default: 'null'
+  comment: '# * Convert the given number to its currency equivalent.
+
+    # *
+
+    # * @param  int|float  $number
+
+    # * @param  string  $in
+
+    # * @param  string|null  $locale
+
+    # * @return string|false'
+- name: fileSize
+  visibility: public
+  parameters:
+  - name: bytes
+  - name: precision
+    default: '0'
+  - name: maxPrecision
+    default: 'null'
+  comment: '# * Convert the given number to its file size equivalent.
+
+    # *
+
+    # * @param  int|float  $bytes
+
+    # * @param  int  $precision
+
+    # * @param  int|null  $maxPrecision
+
+    # * @return string'
+- name: abbreviate
+  visibility: public
+  parameters:
+  - name: number
+  - name: precision
+    default: '0'
+  - name: maxPrecision
+    default: 'null'
+  comment: '# * Convert the number to its human-readable equivalent.
+
+    # *
+
+    # * @param  int|float  $number
+
+    # * @param  int  $precision
+
+    # * @param  int|null  $maxPrecision
+
+    # * @return bool|string'
+- name: forHumans
+  visibility: public
+  parameters:
+  - name: number
+  - name: precision
+    default: '0'
+  - name: maxPrecision
+    default: 'null'
+  - name: abbreviate
+    default: 'false'
+  comment: '# * Convert the number to its human-readable equivalent.
+
+    # *
+
+    # * @param  int|float  $number
+
+    # * @param  int  $precision
+
+    # * @param  int|null  $maxPrecision
+
+    # * @param  bool  $abbreviate
+
+    # * @return bool|string'
+- name: summarize
+  visibility: protected
+  parameters:
+  - name: number
+  - name: precision
+    default: '0'
+  - name: maxPrecision
+    default: 'null'
+  - name: units
+    default: '[]'
+  comment: '# * Convert the number to its human-readable equivalent.
+
+    # *
+
+    # * @param  int|float  $number
+
+    # * @param  int  $precision
+
+    # * @param  int|null  $maxPrecision
+
+    # * @param  array  $units
+
+    # * @return string|false'
+- name: clamp
+  visibility: public
+  parameters:
+  - name: number
+  - name: min
+  - name: max
+  comment: '# * Clamp the given number between the given minimum and maximum.
+
+    # *
+
+    # * @param  int|float  $number
+
+    # * @param  int|float  $min
+
+    # * @param  int|float  $max
+
+    # * @return int|float'
+- name: pairs
+  visibility: public
+  parameters:
+  - name: to
+  - name: by
+  - name: offset
+    default: '1'
+  comment: '# * Split the given number into pairs of min/max values.
+
+    # *
+
+    # * @param  int|float  $to
+
+    # * @param  int|float  $by
+
+    # * @param  int|float  $offset
+
+    # * @return array'
+- name: withLocale
+  visibility: public
+  parameters:
+  - name: locale
+  - name: callback
+  comment: '# * Execute the given callback using the given locale.
+
+    # *
+
+    # * @param  string  $locale
+
+    # * @param  callable  $callback
+
+    # * @return mixed'
+- name: useLocale
+  visibility: public
+  parameters:
+  - name: locale
+  comment: '# * Set the default locale.
+
+    # *
+
+    # * @param  string  $locale
+
+    # * @return void'
+- name: ensureIntlExtensionIsInstalled
+  visibility: protected
+  parameters: []
+  comment: '# * Ensure the "intl" PHP extension is installed.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Support\Traits\Macroable
+- NumberFormatter
+- RuntimeException
+- Macroable
+interfaces: []

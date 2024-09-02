@@ -1,0 +1,127 @@
+name: Application
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: BaseApplication
+  type: class
+  source: Symfony\Component\Console\Application
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: ListCommand
+  type: class
+  source: Symfony\Component\Console\Command\ListCommand
+- name: TraceableCommand
+  type: class
+  source: Symfony\Component\Console\Command\TraceableCommand
+- name: CliRequest
+  type: class
+  source: Symfony\Component\Console\Debug\CliRequest
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: ConsoleOutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\ConsoleOutputInterface
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+- name: Bundle
+  type: class
+  source: Symfony\Component\HttpKernel\Bundle\Bundle
+- name: Kernel
+  type: class
+  source: Symfony\Component\HttpKernel\Kernel
+- name: KernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\KernelInterface
+properties: []
+methods:
+- name: getKernel
+  visibility: public
+  parameters: []
+  comment: "# * @author Fabien Potencier <fabien@symfony.com>\n# */\n# class Application\
+    \ extends BaseApplication\n# {\n# private bool $commandsRegistered = false;\n\
+    # private array $registrationErrors = [];\n# \n# public function __construct(\n\
+    # private KernelInterface $kernel,\n# ) {\n# parent::__construct('Symfony', Kernel::VERSION);\n\
+    # \n# $inputDefinition = $this->getDefinition();\n# $inputDefinition->addOption(new\
+    \ InputOption('--env', '-e', InputOption::VALUE_REQUIRED, 'The Environment name.',\
+    \ $kernel->getEnvironment()));\n# $inputDefinition->addOption(new InputOption('--no-debug',\
+    \ null, InputOption::VALUE_NONE, 'Switch off debug mode.'));\n# $inputDefinition->addOption(new\
+    \ InputOption('--profile', null, InputOption::VALUE_NONE, 'Enables profiling (requires\
+    \ debug).'));\n# }\n# \n# /**\n# * Gets the Kernel associated with this Console."
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+- name: doRun
+  visibility: public
+  parameters:
+  - name: input
+  - name: output
+  comment: '# * Runs the current application.
+
+    # *
+
+    # * @return int 0 if everything went fine, or an error code'
+- name: doRunCommand
+  visibility: protected
+  parameters:
+  - name: command
+  - name: input
+  - name: output
+  comment: null
+- name: find
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: get
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: all
+  visibility: public
+  parameters:
+  - name: namespace
+    default: 'null'
+  comment: null
+- name: getLongVersion
+  visibility: public
+  parameters: []
+  comment: null
+- name: add
+  visibility: public
+  parameters:
+  - name: command
+  comment: null
+- name: registerCommands
+  visibility: protected
+  parameters: []
+  comment: null
+- name: renderRegistrationErrors
+  visibility: private
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+traits:
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Command\ListCommand
+- Symfony\Component\Console\Command\TraceableCommand
+- Symfony\Component\Console\Debug\CliRequest
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Output\ConsoleOutputInterface
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Style\SymfonyStyle
+- Symfony\Component\HttpKernel\Bundle\Bundle
+- Symfony\Component\HttpKernel\Kernel
+- Symfony\Component\HttpKernel\KernelInterface
+interfaces: []

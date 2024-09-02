@@ -1,0 +1,104 @@
+name: PropertyPathAccessor
+class_comment: '# * Writes and reads values to/from an object or array using property
+  path.
+
+  # *
+
+  # * @author Yonel Ceruto <yonelceruto@gmail.com>
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: DataAccessorInterface
+  type: class
+  source: Symfony\Component\Form\DataAccessorInterface
+- name: DataMapperInterface
+  type: class
+  source: Symfony\Component\Form\DataMapperInterface
+- name: AccessException
+  type: class
+  source: Symfony\Component\Form\Exception\AccessException
+- name: DataMapper
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataMapper\DataMapper
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+- name: PropertyAccessException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\AccessException
+- name: NoSuchIndexException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\NoSuchIndexException
+- name: NoSuchPropertyException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException
+- name: UninitializedPropertyException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\UninitializedPropertyException
+- name: PropertyAccess
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccess
+- name: PropertyAccessorInterface
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccessorInterface
+- name: PropertyPathInterface
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyPathInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: propertyAccessor
+    default: 'null'
+  comment: null
+- name: getValue
+  visibility: public
+  parameters:
+  - name: data
+  - name: form
+  comment: null
+- name: setValue
+  visibility: public
+  parameters:
+  - name: '&$data'
+  - name: value
+  - name: form
+  comment: null
+- name: isReadable
+  visibility: public
+  parameters:
+  - name: data
+  - name: form
+  comment: null
+- name: isWritable
+  visibility: public
+  parameters:
+  - name: data
+  - name: form
+  comment: null
+- name: getPropertyValue
+  visibility: private
+  parameters:
+  - name: data
+  - name: propertyPath
+  comment: null
+- name: getDataMapper
+  visibility: private
+  parameters:
+  - name: form
+  comment: null
+traits:
+- Symfony\Component\Form\DataAccessorInterface
+- Symfony\Component\Form\DataMapperInterface
+- Symfony\Component\Form\Exception\AccessException
+- Symfony\Component\Form\Extension\Core\DataMapper\DataMapper
+- Symfony\Component\Form\FormInterface
+- Symfony\Component\PropertyAccess\Exception\NoSuchIndexException
+- Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException
+- Symfony\Component\PropertyAccess\Exception\UninitializedPropertyException
+- Symfony\Component\PropertyAccess\PropertyAccess
+- Symfony\Component\PropertyAccess\PropertyAccessorInterface
+- Symfony\Component\PropertyAccess\PropertyPathInterface
+interfaces:
+- DataAccessorInterface

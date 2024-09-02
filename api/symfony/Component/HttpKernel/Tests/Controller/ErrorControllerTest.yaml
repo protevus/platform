@@ -1,0 +1,55 @@
+name: ErrorControllerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: HtmlErrorRenderer
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: ErrorController
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ErrorController
+- name: HttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\HttpException
+- name: NotFoundHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+properties: []
+methods:
+- name: testInvokeController
+  visibility: public
+  parameters:
+  - name: request
+  - name: exception
+  - name: statusCode
+  - name: content
+  comment: '# * @dataProvider getInvokeControllerDataProvider'
+- name: getInvokeControllerDataProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPreviewController
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Controller\ErrorController
+- Symfony\Component\HttpKernel\Exception\HttpException
+- Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- Symfony\Component\HttpKernel\HttpKernelInterface
+interfaces: []

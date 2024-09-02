@@ -1,0 +1,59 @@
+name: Isbn
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: type
+    default: 'null'
+  - name: message
+    default: 'null'
+  - name: isbn10Message
+    default: 'null'
+  - name: isbn13Message
+    default: 'null'
+  - name: bothIsbnMessage
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: "# * Validates that a value is a valid ISBN according to ISBN-10 or ISBN-13\
+    \ formats.\n# *\n# * @see https://en.wikipedia.org/wiki/ISBN\n# *\n# * @author\
+    \ The Whole Life To Learn <thewholelifetolearn@gmail.com>\n# * @author Manuel\
+    \ Reinhard <manu@sprain.ch>\n# * @author Bernhard Schussek <bschussek@gmail.com>\n\
+    # */\n# #[\\Attribute(\\Attribute::TARGET_PROPERTY | \\Attribute::TARGET_METHOD\
+    \ | \\Attribute::IS_REPEATABLE)]\n# class Isbn extends Constraint\n# {\n# public\
+    \ const ISBN_10 = 'isbn10';\n# public const ISBN_13 = 'isbn13';\n# \n# public\
+    \ const TOO_SHORT_ERROR = '949acbb0-8ef5-43ed-a0e9-032dfd08ae45';\n# public const\
+    \ TOO_LONG_ERROR = '3171387d-f80a-47b3-bd6e-60598545316a';\n# public const INVALID_CHARACTERS_ERROR\
+    \ = '23d21cea-da99-453d-98b1-a7d916fbb339';\n# public const CHECKSUM_FAILED_ERROR\
+    \ = '2881c032-660f-46b6-8153-d352d9706640';\n# public const TYPE_NOT_RECOGNIZED_ERROR\
+    \ = 'fa54a457-f042-441f-89c4-066ee5bdd3e1';\n# \n# protected const ERROR_NAMES\
+    \ = [\n# self::TOO_SHORT_ERROR => 'TOO_SHORT_ERROR',\n# self::TOO_LONG_ERROR =>\
+    \ 'TOO_LONG_ERROR',\n# self::INVALID_CHARACTERS_ERROR => 'INVALID_CHARACTERS_ERROR',\n\
+    # self::CHECKSUM_FAILED_ERROR => 'CHECKSUM_FAILED_ERROR',\n# self::TYPE_NOT_RECOGNIZED_ERROR\
+    \ => 'TYPE_NOT_RECOGNIZED_ERROR',\n# ];\n# \n# public string $isbn10Message =\
+    \ 'This value is not a valid ISBN-10.';\n# public string $isbn13Message = 'This\
+    \ value is not a valid ISBN-13.';\n# public string $bothIsbnMessage = 'This value\
+    \ is neither a valid ISBN-10 nor a valid ISBN-13.';\n# public ?string $type =\
+    \ null;\n# public ?string $message = null;\n# \n# /**\n# * @param self::ISBN_*|array<string,mixed>|null\
+    \ $type    The type of ISBN to validate (i.e. {@see Isbn::ISBN_10}, {@see Isbn::ISBN_13}\
+    \ or null to accept both, defaults to null)\n# * @param string|null          \
+    \                 $message If defined, this message has priority over the others\n\
+    # * @param string[]|null                         $groups\n# * @param array<string,mixed>\
+    \                   $options"
+- name: getDefaultOption
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+interfaces: []

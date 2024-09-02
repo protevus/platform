@@ -1,0 +1,12 @@
+name: ConstructorWithMandatoryArgumentsContainer
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: mandatoryArgument
+  comment: null
+traits: []
+interfaces: []

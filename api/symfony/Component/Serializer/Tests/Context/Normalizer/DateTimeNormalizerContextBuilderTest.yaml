@@ -1,0 +1,44 @@
+name: DateTimeNormalizerContextBuilderTest
+class_comment: '# * @author Mathias Arlaud <mathias.arlaud@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: DateTimeNormalizerContextBuilder
+  type: class
+  source: Symfony\Component\Serializer\Context\Normalizer\DateTimeNormalizerContextBuilder
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Serializer\Exception\InvalidArgumentException
+- name: DateTimeNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DateTimeNormalizer
+properties: []
+methods:
+- name: testWithers
+  visibility: public
+  parameters:
+  - name: values
+  comment: "# * @author Mathias Arlaud <mathias.arlaud@gmail.com>\n# */\n# class DateTimeNormalizerContextBuilderTest\
+    \ extends TestCase\n# {\n# private DateTimeNormalizerContextBuilder $contextBuilder;\n\
+    # \n# protected function setUp(): void\n# {\n# $this->contextBuilder = new DateTimeNormalizerContextBuilder();\n\
+    # }\n# \n# /**\n# * @dataProvider withersDataProvider\n# *\n# * @param array<string,\
+    \ mixed> $values"
+- name: withersDataProvider
+  visibility: public
+  parameters: []
+  comment: '# * @return iterable<array{0: array<string, mixed>}>'
+- name: testCastTimezoneStringToTimezone
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCannotSetInvalidTimezone
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Context\Normalizer\DateTimeNormalizerContextBuilder
+- Symfony\Component\Serializer\Exception\InvalidArgumentException
+- Symfony\Component\Serializer\Normalizer\DateTimeNormalizer
+interfaces: []

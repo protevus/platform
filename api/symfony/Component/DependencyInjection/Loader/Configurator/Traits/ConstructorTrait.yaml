@@ -1,0 +1,12 @@
+name: ConstructorTrait
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: constructor
+  visibility: public
+  parameters:
+  - name: constructor
+  comment: null
+traits: []
+interfaces: []

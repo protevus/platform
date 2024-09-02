@@ -1,0 +1,182 @@
+name: SecurityTest
+class_comment: null
+dependencies:
+- name: Security
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Security
+- name: FirewallConfig
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Security\FirewallConfig
+- name: ArrayUserProvider
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Tests\Functional\Bundle\SecuredPageBundle\Security\Core\User\ArrayUserProvider
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcherInterface
+- name: JsonResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\JsonResponse
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: RequestEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\RequestEvent
+- name: KernelEvents
+  type: class
+  source: Symfony\Component\HttpKernel\KernelEvents
+- name: UsernamePasswordToken
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken
+- name: InMemoryUser
+  type: class
+  source: Symfony\Component\Security\Core\User\InMemoryUser
+- name: PasswordAuthenticatedUserInterface
+  type: class
+  source: Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface
+- name: UserInterface
+  type: class
+  source: Symfony\Component\Security\Core\User\UserInterface
+properties: []
+methods:
+- name: testServiceIsFunctional
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUserWillBeMarkedAsChangedIfRolesHasChanged
+  visibility: public
+  parameters:
+  - name: userWithAdminRole
+  - name: userWithoutAdminRole
+  comment: '# * @dataProvider userWillBeMarkedAsChangedIfRolesHasChangedProvider'
+- name: testLogin
+  visibility: public
+  parameters:
+  - name: authenticator
+  comment: "# @var ArrayUserProvider $userProvider */\n# $userProvider = static::$kernel->getContainer()->get('security.user.provider.array');\n\
+    # $userProvider->addUser($userWithAdminRole);\n# \n# $client->request('POST',\
+    \ '/login', [\n# '_username' => 'user1',\n# '_password' => 'test',\n# ]);\n# \n\
+    # // user1 has ROLE_ADMIN and can visit secure page\n# $client->request('GET',\
+    \ '/admin');\n# $this->assertEquals(200, $client->getResponse()->getStatusCode());\n\
+    # \n# // updating user provider with same user but revoked ROLE_ADMIN from user1\n\
+    # $userProvider->setUser('user1', $userWithoutAdminRole);\n# \n# // user1 has\
+    \ lost ROLE_ADMIN and MUST be redirected away from secure page\n# $client->request('GET',\
+    \ '/admin');\n# $this->assertEquals(302, $client->getResponse()->getStatusCode());\n\
+    # }\n# \n# public static function userWillBeMarkedAsChangedIfRolesHasChangedProvider():\
+    \ array\n# {\n# return [\n# [\n# new InMemoryUser('user1', 'test', ['ROLE_ADMIN']),\n\
+    # new InMemoryUser('user1', 'test', ['ROLE_USER']),\n# ],\n# [\n# new UserWithoutEquatable('user1',\
+    \ 'test', ['ROLE_ADMIN']),\n# new UserWithoutEquatable('user1', 'test', ['ROLE_USER']),\n\
+    # ],\n# ];\n# }\n# \n# /**\n# * @testWith    [\"form_login\"]\n# *           \
+    \   [\"Symfony\\\\Bundle\\\\SecurityBundle\\\\Tests\\\\Functional\\\\Bundle\\\\\
+    AuthenticatorBundle\\\\ApiAuthenticator\"]"
+- name: testLogout
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLogoutWithCsrf
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLogoutBypassCsrf
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: username
+  - name: password
+  - name: roles
+    default: '[]'
+  - name: enabled
+    default: 'true'
+  - name: userNonExpired
+    default: 'true'
+  - name: credentialsNonExpired
+    default: 'true'
+  - name: userNonLocked
+    default: 'true'
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRoles
+  visibility: public
+  parameters: []
+  comment: null
+- name: getPassword
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSalt
+  visibility: public
+  parameters: []
+  comment: null
+- name: getUserIdentifier
+  visibility: public
+  parameters: []
+  comment: null
+- name: isAccountNonExpired
+  visibility: public
+  parameters: []
+  comment: null
+- name: isAccountNonLocked
+  visibility: public
+  parameters: []
+  comment: null
+- name: isCredentialsNonExpired
+  visibility: public
+  parameters: []
+  comment: null
+- name: isEnabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: eraseCredentials
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: security
+  comment: null
+- name: welcome
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: security
+  comment: null
+- name: logout
+  visibility: public
+  parameters:
+  - name: user
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: user
+  comment: null
+traits:
+- Symfony\Bundle\SecurityBundle\Security
+- Symfony\Bundle\SecurityBundle\Security\FirewallConfig
+- Symfony\Bundle\SecurityBundle\Tests\Functional\Bundle\SecuredPageBundle\Security\Core\User\ArrayUserProvider
+- Symfony\Component\EventDispatcher\EventDispatcherInterface
+- Symfony\Component\HttpFoundation\JsonResponse
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Event\RequestEvent
+- Symfony\Component\HttpKernel\KernelEvents
+- Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken
+- Symfony\Component\Security\Core\User\InMemoryUser
+- Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface
+- Symfony\Component\Security\Core\User\UserInterface
+interfaces:
+- UserInterface

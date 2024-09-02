@@ -1,0 +1,114 @@
+name: SoftDeletingScope
+class_comment: null
+dependencies: []
+properties:
+- name: extensions
+  visibility: protected
+  comment: '# * All of the extensions to be added to the builder.
+
+    # *
+
+    # * @var string[]'
+methods:
+- name: apply
+  visibility: public
+  parameters:
+  - name: builder
+  - name: model
+  comment: "# * All of the extensions to be added to the builder.\n# *\n# * @var string[]\n\
+    # */\n# protected $extensions = ['Restore', 'RestoreOrCreate', 'CreateOrRestore',\
+    \ 'WithTrashed', 'WithoutTrashed', 'OnlyTrashed'];\n# \n# /**\n# * Apply the scope\
+    \ to a given Eloquent query builder.\n# *\n# * @template TModel of \\Illuminate\\\
+    Database\\Eloquent\\Model\n# *\n# * @param  \\Illuminate\\Database\\Eloquent\\\
+    Builder<TModel>  $builder\n# * @param  TModel  $model\n# * @return void"
+- name: extend
+  visibility: public
+  parameters:
+  - name: builder
+  comment: '# * Extend the query builder with the needed functions.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Builder<*>  $builder
+
+    # * @return void'
+- name: getDeletedAtColumn
+  visibility: protected
+  parameters:
+  - name: builder
+  comment: '# * Get the "deleted at" column for the builder.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Builder<*>  $builder
+
+    # * @return string'
+- name: addRestore
+  visibility: protected
+  parameters:
+  - name: builder
+  comment: '# * Add the restore extension to the builder.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Builder<*>  $builder
+
+    # * @return void'
+- name: addRestoreOrCreate
+  visibility: protected
+  parameters:
+  - name: builder
+  comment: '# * Add the restore-or-create extension to the builder.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Builder<*>  $builder
+
+    # * @return void'
+- name: addCreateOrRestore
+  visibility: protected
+  parameters:
+  - name: builder
+  comment: '# * Add the create-or-restore extension to the builder.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Builder<*>  $builder
+
+    # * @return void'
+- name: addWithTrashed
+  visibility: protected
+  parameters:
+  - name: builder
+  comment: '# * Add the with-trashed extension to the builder.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Builder<*>  $builder
+
+    # * @return void'
+- name: addWithoutTrashed
+  visibility: protected
+  parameters:
+  - name: builder
+  comment: '# * Add the without-trashed extension to the builder.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Builder<*>  $builder
+
+    # * @return void'
+- name: addOnlyTrashed
+  visibility: protected
+  parameters:
+  - name: builder
+  comment: '# * Add the only-trashed extension to the builder.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Builder<*>  $builder
+
+    # * @return void'
+traits: []
+interfaces:
+- Scope

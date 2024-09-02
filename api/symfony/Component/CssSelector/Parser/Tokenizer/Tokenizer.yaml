@@ -1,0 +1,41 @@
+name: Tokenizer
+class_comment: "# * CSS selector tokenizer.\n# *\n# * This component is a port of\
+  \ the Python cssselect library,\n# * which is copyright Ian Bicking, @see https://github.com/SimonSapin/cssselect.\n\
+  # *\n# * @author Jean-Fran\xE7ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n\
+  # * @internal"
+dependencies:
+- name: Handler
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Handler
+- name: Reader
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Reader
+- name: Token
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Token
+- name: TokenStream
+  type: class
+  source: Symfony\Component\CssSelector\Parser\TokenStream
+properties: []
+methods:
+- name: tokenize
+  visibility: public
+  parameters:
+  - name: reader
+  comment: "# * CSS selector tokenizer.\n# *\n# * This component is a port of the\
+    \ Python cssselect library,\n# * which is copyright Ian Bicking, @see https://github.com/SimonSapin/cssselect.\n\
+    # *\n# * @author Jean-Fran\xE7ois Simon <jeanfrancois.simon@sensiolabs.com>\n\
+    # *\n# * @internal\n# */\n# class Tokenizer\n# {\n# /**\n# * @var Handler\\HandlerInterface[]\n\
+    # */\n# private array $handlers;\n# \n# public function __construct()\n# {\n#\
+    \ $patterns = new TokenizerPatterns();\n# $escaping = new TokenizerEscaping($patterns);\n\
+    # \n# $this->handlers = [\n# new Handler\\WhitespaceHandler(),\n# new Handler\\\
+    IdentifierHandler($patterns, $escaping),\n# new Handler\\HashHandler($patterns,\
+    \ $escaping),\n# new Handler\\StringHandler($patterns, $escaping),\n# new Handler\\\
+    NumberHandler($patterns),\n# new Handler\\CommentHandler(),\n# ];\n# }\n# \n#\
+    \ /**\n# * Tokenize selector source code."
+traits:
+- Symfony\Component\CssSelector\Parser\Handler
+- Symfony\Component\CssSelector\Parser\Reader
+- Symfony\Component\CssSelector\Parser\Token
+- Symfony\Component\CssSelector\Parser\TokenStream
+interfaces: []

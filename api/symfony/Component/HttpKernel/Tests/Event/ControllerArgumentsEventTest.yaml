@@ -1,0 +1,59 @@
+name: ControllerArgumentsEventTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: ControllerArgumentsEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent
+- name: ControllerEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ControllerEvent
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+- name: Bar
+  type: class
+  source: Symfony\Component\HttpKernel\Tests\Fixtures\Attribute\Bar
+- name: Baz
+  type: class
+  source: Symfony\Component\HttpKernel\Tests\Fixtures\Attribute\Baz
+- name: AttributeController
+  type: class
+  source: Symfony\Component\HttpKernel\Tests\Fixtures\Controller\AttributeController
+- name: TestHttpKernel
+  type: class
+  source: Symfony\Component\HttpKernel\Tests\TestHttpKernel
+properties: []
+methods:
+- name: testControllerArgumentsEvent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetAttributesByClassName
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent
+- Symfony\Component\HttpKernel\Event\ControllerEvent
+- Symfony\Component\HttpKernel\HttpKernelInterface
+- Symfony\Component\HttpKernel\Tests\Fixtures\Attribute\Bar
+- Symfony\Component\HttpKernel\Tests\Fixtures\Attribute\Baz
+- Symfony\Component\HttpKernel\Tests\Fixtures\Controller\AttributeController
+- Symfony\Component\HttpKernel\Tests\TestHttpKernel
+interfaces: []

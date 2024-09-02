@@ -1,0 +1,36 @@
+name: CheckReferenceValidityPass
+class_comment: '# * Checks the validity of references.
+
+  # *
+
+  # * The following checks are performed by this pass:
+
+  # * - target definitions are not abstract
+
+  # *
+
+  # * @author Johannes M. Schmitt <schmittjoh@gmail.com>'
+dependencies:
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+properties: []
+methods:
+- name: processValue
+  visibility: protected
+  parameters:
+  - name: value
+  - name: isRoot
+    default: 'false'
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Reference
+interfaces: []

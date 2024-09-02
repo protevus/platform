@@ -1,0 +1,33 @@
+name: DisallowRobotsIndexingListener
+class_comment: '# * Ensures that the application is not indexed by search engines.
+
+  # *
+
+  # * @author Gary PEGEOT <garypegeot@gmail.com>'
+dependencies:
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: ResponseEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ResponseEvent
+- name: KernelEvents
+  type: class
+  source: Symfony\Component\HttpKernel\KernelEvents
+properties: []
+methods:
+- name: onResponse
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\HttpKernel\Event\ResponseEvent
+- Symfony\Component\HttpKernel\KernelEvents
+interfaces:
+- EventSubscriberInterface

@@ -1,0 +1,26 @@
+name: ExternalMessageSerializer
+class_comment: null
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+properties: []
+methods:
+- name: decode
+  visibility: public
+  parameters:
+  - name: encodedEnvelope
+  comment: null
+- name: encode
+  visibility: public
+  parameters:
+  - name: envelope
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+interfaces:
+- SerializerInterface

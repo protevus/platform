@@ -1,0 +1,36 @@
+name: NumberComparatorTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: NumberComparator
+  type: class
+  source: Symfony\Component\Finder\Comparator\NumberComparator
+properties: []
+methods:
+- name: testConstructor
+  visibility: public
+  parameters:
+  - name: successes
+  - name: failures
+  comment: '# * @dataProvider getConstructorTestData'
+- name: testTest
+  visibility: public
+  parameters:
+  - name: test
+  - name: match
+  - name: noMatch
+  comment: '# * @dataProvider getTestData'
+- name: getTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getConstructorTestData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Finder\Comparator\NumberComparator
+interfaces: []

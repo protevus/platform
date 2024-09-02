@@ -1,0 +1,41 @@
+name: ResponseListener
+class_comment: '# * ResponseListener fixes the Response headers based on the Request.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: ResponseEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ResponseEvent
+- name: KernelEvents
+  type: class
+  source: Symfony\Component\HttpKernel\KernelEvents
+properties: []
+methods:
+- name: onKernelResponse
+  visibility: public
+  parameters:
+  - name: event
+  comment: "# * ResponseListener fixes the Response headers based on the Request.\n\
+    # *\n# * @author Fabien Potencier <fabien@symfony.com>\n# *\n# * @final\n# */\n\
+    # class ResponseListener implements EventSubscriberInterface\n# {\n# public function\
+    \ __construct(\n# private string $charset,\n# private bool $addContentLanguageHeader\
+    \ = false,\n# ) {\n# }\n# \n# /**\n# * Filters the Response."
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\HttpKernel\Event\ResponseEvent
+- Symfony\Component\HttpKernel\KernelEvents
+interfaces:
+- EventSubscriberInterface

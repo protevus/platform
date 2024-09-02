@@ -1,0 +1,84 @@
+name: ArrayLoader
+class_comment: null
+dependencies:
+- name: Loader
+  type: class
+  source: Illuminate\Contracts\Translation\Loader
+properties:
+- name: messages
+  visibility: protected
+  comment: '# * All of the translation messages.
+
+    # *
+
+    # * @var array'
+methods:
+- name: load
+  visibility: public
+  parameters:
+  - name: locale
+  - name: group
+  - name: namespace
+    default: 'null'
+  comment: "# * All of the translation messages.\n# *\n# * @var array\n# */\n# protected\
+    \ $messages = [];\n# \n# /**\n# * Load the messages for the given locale.\n# *\n\
+    # * @param  string  $locale\n# * @param  string  $group\n# * @param  string|null\
+    \  $namespace\n# * @return array"
+- name: addNamespace
+  visibility: public
+  parameters:
+  - name: namespace
+  - name: hint
+  comment: '# * Add a new namespace to the loader.
+
+    # *
+
+    # * @param  string  $namespace
+
+    # * @param  string  $hint
+
+    # * @return void'
+- name: addJsonPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Add a new JSON path to the loader.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return void'
+- name: addMessages
+  visibility: public
+  parameters:
+  - name: locale
+  - name: group
+  - name: messages
+  - name: namespace
+    default: 'null'
+  comment: '# * Add messages to the loader.
+
+    # *
+
+    # * @param  string  $locale
+
+    # * @param  string  $group
+
+    # * @param  array  $messages
+
+    # * @param  string|null  $namespace
+
+    # * @return $this'
+- name: namespaces
+  visibility: public
+  parameters: []
+  comment: '# * Get an array of all the registered namespaces.
+
+    # *
+
+    # * @return array'
+traits:
+- Illuminate\Contracts\Translation\Loader
+interfaces:
+- Loader

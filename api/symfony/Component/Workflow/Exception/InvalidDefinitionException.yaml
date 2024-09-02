@@ -1,0 +1,12 @@
+name: InvalidDefinitionException
+class_comment: '# * Thrown by the DefinitionValidatorInterface when the definition
+  is invalid.
+
+  # *
+
+  # * @author Tobias Nyholm <tobias.nyholm@gmail.com>'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces: []

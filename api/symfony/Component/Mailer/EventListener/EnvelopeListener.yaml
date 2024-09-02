@@ -1,0 +1,50 @@
+name: EnvelopeListener
+class_comment: "# * Manipulates the Envelope of a Message.\n# *\n# * @author Fabien\
+  \ Potencier <fabien@symfony.com>\n# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>"
+dependencies:
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: MessageEvent
+  type: class
+  source: Symfony\Component\Mailer\Event\MessageEvent
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: Message
+  type: class
+  source: Symfony\Component\Mime\Message
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: sender
+    default: 'null'
+  - name: recipients
+    default: 'null'
+  - name: allowedRecipients
+    default: '[]'
+  comment: "# * Manipulates the Envelope of a Message.\n# *\n# * @author Fabien Potencier\
+    \ <fabien@symfony.com>\n# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>\n\
+    # */\n# class EnvelopeListener implements EventSubscriberInterface\n# {\n# private\
+    \ ?Address $sender = null;\n# \n# /**\n# * @var Address[]|null\n# */\n# private\
+    \ ?array $recipients = null;\n# \n# /**\n# * @param array<Address|string> $recipients\n\
+    # * @param string[]              $allowedRecipients An array of regex to match\
+    \ the allowed recipients"
+- name: onMessage
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\Mailer\Event\MessageEvent
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Message
+interfaces:
+- EventSubscriberInterface

@@ -1,0 +1,31 @@
+name: StopWorkersCommandTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CacheItemInterface
+  type: class
+  source: Psr\Cache\CacheItemInterface
+- name: CacheItemPoolInterface
+  type: class
+  source: Psr\Cache\CacheItemPoolInterface
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+- name: StopWorkersCommand
+  type: class
+  source: Symfony\Component\Messenger\Command\StopWorkersCommand
+properties: []
+methods:
+- name: testItSetsCacheItem
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Psr\Cache\CacheItemInterface
+- Psr\Cache\CacheItemPoolInterface
+- Symfony\Component\Console\Tester\CommandTester
+- Symfony\Component\Messenger\Command\StopWorkersCommand
+interfaces: []

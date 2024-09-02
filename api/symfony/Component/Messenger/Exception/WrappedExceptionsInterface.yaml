@@ -1,0 +1,30 @@
+name: WrappedExceptionsInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getWrappedExceptions
+  visibility: public
+  parameters:
+  - name: class
+    default: 'null'
+  - name: recursive
+    default: 'false'
+  comment: '# * Exception that holds multiple exceptions thrown by one or more handlers
+    and/or messages.
+
+    # *
+
+    # * @author Jeroen <https://github.com/Jeroeny>
+
+    # */
+
+    # interface WrappedExceptionsInterface extends \Throwable
+
+    # {
+
+    # /**
+
+    # * @return \Throwable[]'
+traits: []
+interfaces: []

@@ -1,0 +1,258 @@
+name: QueueServiceProvider
+class_comment: null
+dependencies:
+- name: DynamoDbClient
+  type: class
+  source: Aws\DynamoDb\DynamoDbClient
+- name: ExceptionHandler
+  type: class
+  source: Illuminate\Contracts\Debug\ExceptionHandler
+- name: DeferrableProvider
+  type: class
+  source: Illuminate\Contracts\Support\DeferrableProvider
+- name: BeanstalkdConnector
+  type: class
+  source: Illuminate\Queue\Connectors\BeanstalkdConnector
+- name: DatabaseConnector
+  type: class
+  source: Illuminate\Queue\Connectors\DatabaseConnector
+- name: NullConnector
+  type: class
+  source: Illuminate\Queue\Connectors\NullConnector
+- name: RedisConnector
+  type: class
+  source: Illuminate\Queue\Connectors\RedisConnector
+- name: SqsConnector
+  type: class
+  source: Illuminate\Queue\Connectors\SqsConnector
+- name: SyncConnector
+  type: class
+  source: Illuminate\Queue\Connectors\SyncConnector
+- name: DatabaseFailedJobProvider
+  type: class
+  source: Illuminate\Queue\Failed\DatabaseFailedJobProvider
+- name: DatabaseUuidFailedJobProvider
+  type: class
+  source: Illuminate\Queue\Failed\DatabaseUuidFailedJobProvider
+- name: DynamoDbFailedJobProvider
+  type: class
+  source: Illuminate\Queue\Failed\DynamoDbFailedJobProvider
+- name: FileFailedJobProvider
+  type: class
+  source: Illuminate\Queue\Failed\FileFailedJobProvider
+- name: NullFailedJobProvider
+  type: class
+  source: Illuminate\Queue\Failed\NullFailedJobProvider
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Facade
+  type: class
+  source: Illuminate\Support\Facades\Facade
+- name: ServiceProvider
+  type: class
+  source: Illuminate\Support\ServiceProvider
+- name: SerializableClosure
+  type: class
+  source: Laravel\SerializableClosure\SerializableClosure
+- name: SerializesAndRestoresModelIdentifiers
+  type: class
+  source: SerializesAndRestoresModelIdentifiers
+properties: []
+methods:
+- name: register
+  visibility: public
+  parameters: []
+  comment: '# * Register the service provider.
+
+    # *
+
+    # * @return void'
+- name: configureSerializableClosureUses
+  visibility: protected
+  parameters: []
+  comment: '# * Configure serializable closures uses.
+
+    # *
+
+    # * @return void'
+- name: registerManager
+  visibility: protected
+  parameters: []
+  comment: '# * Register the queue manager.
+
+    # *
+
+    # * @return void'
+- name: registerConnection
+  visibility: protected
+  parameters: []
+  comment: '# * Register the default queue connection binding.
+
+    # *
+
+    # * @return void'
+- name: registerConnectors
+  visibility: public
+  parameters:
+  - name: manager
+  comment: '# * Register the connectors on the queue manager.
+
+    # *
+
+    # * @param  \Illuminate\Queue\QueueManager  $manager
+
+    # * @return void'
+- name: registerNullConnector
+  visibility: protected
+  parameters:
+  - name: manager
+  comment: '# * Register the Null queue connector.
+
+    # *
+
+    # * @param  \Illuminate\Queue\QueueManager  $manager
+
+    # * @return void'
+- name: registerSyncConnector
+  visibility: protected
+  parameters:
+  - name: manager
+  comment: '# * Register the Sync queue connector.
+
+    # *
+
+    # * @param  \Illuminate\Queue\QueueManager  $manager
+
+    # * @return void'
+- name: registerDatabaseConnector
+  visibility: protected
+  parameters:
+  - name: manager
+  comment: '# * Register the database queue connector.
+
+    # *
+
+    # * @param  \Illuminate\Queue\QueueManager  $manager
+
+    # * @return void'
+- name: registerRedisConnector
+  visibility: protected
+  parameters:
+  - name: manager
+  comment: '# * Register the Redis queue connector.
+
+    # *
+
+    # * @param  \Illuminate\Queue\QueueManager  $manager
+
+    # * @return void'
+- name: registerBeanstalkdConnector
+  visibility: protected
+  parameters:
+  - name: manager
+  comment: '# * Register the Beanstalkd queue connector.
+
+    # *
+
+    # * @param  \Illuminate\Queue\QueueManager  $manager
+
+    # * @return void'
+- name: registerSqsConnector
+  visibility: protected
+  parameters:
+  - name: manager
+  comment: '# * Register the Amazon SQS queue connector.
+
+    # *
+
+    # * @param  \Illuminate\Queue\QueueManager  $manager
+
+    # * @return void'
+- name: registerWorker
+  visibility: protected
+  parameters: []
+  comment: '# * Register the queue worker.
+
+    # *
+
+    # * @return void'
+- name: registerListener
+  visibility: protected
+  parameters: []
+  comment: '# * Register the queue listener.
+
+    # *
+
+    # * @return void'
+- name: registerFailedJobServices
+  visibility: protected
+  parameters: []
+  comment: '# * Register the failed job services.
+
+    # *
+
+    # * @return void'
+- name: databaseFailedJobProvider
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Create a new database failed job provider.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Queue\Failed\DatabaseFailedJobProvider'
+- name: databaseUuidFailedJobProvider
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Create a new database failed job provider that uses UUIDs as IDs.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Queue\Failed\DatabaseUuidFailedJobProvider'
+- name: dynamoFailedJobProvider
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Create a new DynamoDb failed job provider.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Queue\Failed\DynamoDbFailedJobProvider'
+- name: provides
+  visibility: public
+  parameters: []
+  comment: '# * Get the services provided by the provider.
+
+    # *
+
+    # * @return array'
+traits:
+- Aws\DynamoDb\DynamoDbClient
+- Illuminate\Contracts\Debug\ExceptionHandler
+- Illuminate\Contracts\Support\DeferrableProvider
+- Illuminate\Queue\Connectors\BeanstalkdConnector
+- Illuminate\Queue\Connectors\DatabaseConnector
+- Illuminate\Queue\Connectors\NullConnector
+- Illuminate\Queue\Connectors\RedisConnector
+- Illuminate\Queue\Connectors\SqsConnector
+- Illuminate\Queue\Connectors\SyncConnector
+- Illuminate\Queue\Failed\DatabaseFailedJobProvider
+- Illuminate\Queue\Failed\DatabaseUuidFailedJobProvider
+- Illuminate\Queue\Failed\DynamoDbFailedJobProvider
+- Illuminate\Queue\Failed\FileFailedJobProvider
+- Illuminate\Queue\Failed\NullFailedJobProvider
+- Illuminate\Support\Arr
+- Illuminate\Support\Facades\Facade
+- Illuminate\Support\ServiceProvider
+- Laravel\SerializableClosure\SerializableClosure
+- SerializesAndRestoresModelIdentifiers
+interfaces:
+- DeferrableProvider

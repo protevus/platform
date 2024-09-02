@@ -1,0 +1,75 @@
+name: MiddlewareMakeCommand
+class_comment: null
+dependencies:
+- name: CreatesMatchingTest
+  type: class
+  source: Illuminate\Console\Concerns\CreatesMatchingTest
+- name: GeneratorCommand
+  type: class
+  source: Illuminate\Console\GeneratorCommand
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: CreatesMatchingTest
+  type: class
+  source: CreatesMatchingTest
+properties:
+- name: name
+  visibility: protected
+  comment: '# * The console command name.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+- name: type
+  visibility: protected
+  comment: '# * The type of class being generated.
+
+    # *
+
+    # * @var string'
+methods:
+- name: getStub
+  visibility: protected
+  parameters: []
+  comment: "# * The console command name.\n# *\n# * @var string\n# */\n# protected\
+    \ $name = 'make:middleware';\n# \n# /**\n# * The console command description.\n\
+    # *\n# * @var string\n# */\n# protected $description = 'Create a new middleware\
+    \ class';\n# \n# /**\n# * The type of class being generated.\n# *\n# * @var string\n\
+    # */\n# protected $type = 'Middleware';\n# \n# /**\n# * Get the stub file for\
+    \ the generator.\n# *\n# * @return string"
+- name: resolveStubPath
+  visibility: protected
+  parameters:
+  - name: stub
+  comment: '# * Resolve the fully-qualified path to the stub.
+
+    # *
+
+    # * @param  string  $stub
+
+    # * @return string'
+- name: getDefaultNamespace
+  visibility: protected
+  parameters:
+  - name: rootNamespace
+  comment: '# * Get the default namespace for the class.
+
+    # *
+
+    # * @param  string  $rootNamespace
+
+    # * @return string'
+traits:
+- Illuminate\Console\Concerns\CreatesMatchingTest
+- Illuminate\Console\GeneratorCommand
+- Symfony\Component\Console\Attribute\AsCommand
+- CreatesMatchingTest
+interfaces: []

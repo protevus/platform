@@ -1,0 +1,118 @@
+name: Translator
+class_comment: "# * XPath expression translator interface.\n# *\n# * This component\
+  \ is a port of the Python cssselect library,\n# * which is copyright Ian Bicking,\
+  \ @see https://github.com/SimonSapin/cssselect.\n# *\n# * @author Jean-Fran\xE7\
+  ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n# * @internal"
+dependencies:
+- name: ExpressionErrorException
+  type: class
+  source: Symfony\Component\CssSelector\Exception\ExpressionErrorException
+- name: FunctionNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\FunctionNode
+- name: NodeInterface
+  type: class
+  source: Symfony\Component\CssSelector\Node\NodeInterface
+- name: SelectorNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\SelectorNode
+- name: Parser
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Parser
+- name: ParserInterface
+  type: class
+  source: Symfony\Component\CssSelector\Parser\ParserInterface
+properties: []
+methods:
+- name: registerExtension
+  visibility: public
+  parameters:
+  - name: extension
+  comment: "# * XPath expression translator interface.\n# *\n# * This component is\
+    \ a port of the Python cssselect library,\n# * which is copyright Ian Bicking,\
+    \ @see https://github.com/SimonSapin/cssselect.\n# *\n# * @author Jean-Fran\xE7\
+    ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n# * @internal\n# */\n# class\
+    \ Translator implements TranslatorInterface\n# {\n# private ParserInterface $mainParser;\n\
+    # \n# /**\n# * @var ParserInterface[]\n# */\n# private array $shortcutParsers\
+    \ = [];\n# \n# /**\n# * @var Extension\\ExtensionInterface[]\n# */\n# private\
+    \ array $extensions = [];\n# \n# private array $nodeTranslators = [];\n# private\
+    \ array $combinationTranslators = [];\n# private array $functionTranslators =\
+    \ [];\n# private array $pseudoClassTranslators = [];\n# private array $attributeMatchingTranslators\
+    \ = [];\n# \n# public function __construct(?ParserInterface $parser = null)\n\
+    # {\n# $this->mainParser = $parser ?? new Parser();\n# \n# $this\n# ->registerExtension(new\
+    \ Extension\\NodeExtension())\n# ->registerExtension(new Extension\\CombinationExtension())\n\
+    # ->registerExtension(new Extension\\FunctionExtension())\n# ->registerExtension(new\
+    \ Extension\\PseudoClassExtension())\n# ->registerExtension(new Extension\\AttributeMatchingExtension())\n\
+    # ;\n# }\n# \n# public static function getXpathLiteral(string $element): string\n\
+    # {\n# if (!str_contains($element, \"'\")) {\n# return \"'\".$element.\"'\";\n\
+    # }\n# \n# if (!str_contains($element, '\"')) {\n# return '\"'.$element.'\"';\n\
+    # }\n# \n# $string = $element;\n# $parts = [];\n# while (true) {\n# if (false\
+    \ !== $pos = strpos($string, \"'\")) {\n# $parts[] = \\sprintf(\"'%s'\", substr($string,\
+    \ 0, $pos));\n# $parts[] = \"\\\"'\\\"\";\n# $string = substr($string, $pos +\
+    \ 1);\n# } else {\n# $parts[] = \"'$string'\";\n# break;\n# }\n# }\n# \n# return\
+    \ \\sprintf('concat(%s)', implode(', ', $parts));\n# }\n# \n# public function\
+    \ cssToXPath(string $cssExpr, string $prefix = 'descendant-or-self::'): string\n\
+    # {\n# $selectors = $this->parseSelectors($cssExpr);\n# \n# /** @var SelectorNode\
+    \ $selector */\n# foreach ($selectors as $index => $selector) {\n# if (null !==\
+    \ $selector->getPseudoElement()) {\n# throw new ExpressionErrorException('Pseudo-elements\
+    \ are not supported.');\n# }\n# \n# $selectors[$index] = $this->selectorToXPath($selector,\
+    \ $prefix);\n# }\n# \n# return implode(' | ', $selectors);\n# }\n# \n# public\
+    \ function selectorToXPath(SelectorNode $selector, string $prefix = 'descendant-or-self::'):\
+    \ string\n# {\n# return ($prefix ?: '').$this->nodeToXPath($selector);\n# }\n\
+    # \n# /**\n# * @return $this"
+- name: getExtension
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * @throws ExpressionErrorException'
+- name: registerParserShortcut
+  visibility: public
+  parameters:
+  - name: shortcut
+  comment: '# * @return $this'
+- name: nodeToXPath
+  visibility: public
+  parameters:
+  - name: node
+  comment: '# * @throws ExpressionErrorException'
+- name: addCombination
+  visibility: public
+  parameters:
+  - name: combiner
+  - name: xpath
+  - name: combinedXpath
+  comment: '# * @throws ExpressionErrorException'
+- name: addFunction
+  visibility: public
+  parameters:
+  - name: xpath
+  - name: function
+  comment: '# * @throws ExpressionErrorException'
+- name: addPseudoClass
+  visibility: public
+  parameters:
+  - name: xpath
+  - name: pseudoClass
+  comment: '# * @throws ExpressionErrorException'
+- name: addAttributeMatching
+  visibility: public
+  parameters:
+  - name: xpath
+  - name: operator
+  - name: attribute
+  - name: value
+  comment: '# * @throws ExpressionErrorException'
+- name: parseSelectors
+  visibility: private
+  parameters:
+  - name: css
+  comment: '# * @return SelectorNode[]'
+traits:
+- Symfony\Component\CssSelector\Exception\ExpressionErrorException
+- Symfony\Component\CssSelector\Node\FunctionNode
+- Symfony\Component\CssSelector\Node\NodeInterface
+- Symfony\Component\CssSelector\Node\SelectorNode
+- Symfony\Component\CssSelector\Parser\Parser
+- Symfony\Component\CssSelector\Parser\ParserInterface
+interfaces:
+- TranslatorInterface

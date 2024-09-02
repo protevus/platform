@@ -1,0 +1,99 @@
+name: NotSoftDeletedInDatabase
+class_comment: null
+dependencies:
+- name: Connection
+  type: class
+  source: Illuminate\Database\Connection
+- name: Constraint
+  type: class
+  source: PHPUnit\Framework\Constraint\Constraint
+properties:
+- name: show
+  visibility: protected
+  comment: '# * Number of records that will be shown in the console in case of failure.
+
+    # *
+
+    # * @var int'
+- name: database
+  visibility: protected
+  comment: '# * The database connection.
+
+    # *
+
+    # * @var \Illuminate\Database\Connection'
+- name: data
+  visibility: protected
+  comment: '# * The data that will be used to narrow the search in the database table.
+
+    # *
+
+    # * @var array'
+- name: deletedAtColumn
+  visibility: protected
+  comment: '# * The name of the column that indicates soft deletion has occurred.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: database
+  - name: data
+  - name: deletedAtColumn
+  comment: "# * Number of records that will be shown in the console in case of failure.\n\
+    # *\n# * @var int\n# */\n# protected $show = 3;\n# \n# /**\n# * The database connection.\n\
+    # *\n# * @var \\Illuminate\\Database\\Connection\n# */\n# protected $database;\n\
+    # \n# /**\n# * The data that will be used to narrow the search in the database\
+    \ table.\n# *\n# * @var array\n# */\n# protected $data;\n# \n# /**\n# * The name\
+    \ of the column that indicates soft deletion has occurred.\n# *\n# * @var string\n\
+    # */\n# protected $deletedAtColumn;\n# \n# /**\n# * Create a new constraint instance.\n\
+    # *\n# * @param  \\Illuminate\\Database\\Connection  $database\n# * @param  array\
+    \  $data\n# * @param  string  $deletedAtColumn\n# * @return void"
+- name: matches
+  visibility: public
+  parameters:
+  - name: table
+  comment: '# * Check if the data is found in the given table.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @return bool'
+- name: failureDescription
+  visibility: public
+  parameters:
+  - name: table
+  comment: '# * Get the description of the failure.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @return string'
+- name: getAdditionalInfo
+  visibility: protected
+  parameters:
+  - name: table
+  comment: '# * Get additional info about the records found in the database table.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @return string'
+- name: toString
+  visibility: public
+  parameters: []
+  comment: '# * Get a string representation of the object.
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Database\Connection
+- PHPUnit\Framework\Constraint\Constraint
+interfaces: []

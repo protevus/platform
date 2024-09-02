@@ -1,0 +1,71 @@
+name: ArrayLock
+class_comment: null
+dependencies:
+- name: Carbon
+  type: class
+  source: Illuminate\Support\Carbon
+properties:
+- name: store
+  visibility: protected
+  comment: '# * The parent array cache store.
+
+    # *
+
+    # * @var \Illuminate\Cache\ArrayStore'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: store
+  - name: name
+  - name: seconds
+  - name: owner
+    default: 'null'
+  comment: "# * The parent array cache store.\n# *\n# * @var \\Illuminate\\Cache\\\
+    ArrayStore\n# */\n# protected $store;\n# \n# /**\n# * Create a new lock instance.\n\
+    # *\n# * @param  \\Illuminate\\Cache\\ArrayStore  $store\n# * @param  string \
+    \ $name\n# * @param  int  $seconds\n# * @param  string|null  $owner\n# * @return\
+    \ void"
+- name: acquire
+  visibility: public
+  parameters: []
+  comment: '# * Attempt to acquire the lock.
+
+    # *
+
+    # * @return bool'
+- name: exists
+  visibility: protected
+  parameters: []
+  comment: '# * Determine if the current lock exists.
+
+    # *
+
+    # * @return bool'
+- name: release
+  visibility: public
+  parameters: []
+  comment: '# * Release the lock.
+
+    # *
+
+    # * @return bool'
+- name: getCurrentOwner
+  visibility: protected
+  parameters: []
+  comment: '# * Returns the owner value written into the driver for this lock.
+
+    # *
+
+    # * @return string'
+- name: forceRelease
+  visibility: public
+  parameters: []
+  comment: '# * Releases this lock in disregard of ownership.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Support\Carbon
+interfaces: []

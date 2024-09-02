@@ -1,0 +1,151 @@
+name: GenericMetadata
+class_comment: '# * A generic container of {@link Constraint} objects.
+
+  # *
+
+  # * This class supports serialization and cloning.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: Cascade
+  type: class
+  source: Symfony\Component\Validator\Constraints\Cascade
+- name: DisableAutoMapping
+  type: class
+  source: Symfony\Component\Validator\Constraints\DisableAutoMapping
+- name: EnableAutoMapping
+  type: class
+  source: Symfony\Component\Validator\Constraints\EnableAutoMapping
+- name: Traverse
+  type: class
+  source: Symfony\Component\Validator\Constraints\Traverse
+- name: Valid
+  type: class
+  source: Symfony\Component\Validator\Constraints\Valid
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+properties: []
+methods:
+- name: __sleep
+  visibility: public
+  parameters: []
+  comment: "# * A generic container of {@link Constraint} objects.\n# *\n# * This\
+    \ class supports serialization and cloning.\n# *\n# * @author Bernhard Schussek\
+    \ <bschussek@gmail.com>\n# */\n# class GenericMetadata implements MetadataInterface\n\
+    # {\n# /**\n# * @var Constraint[]\n# *\n# * @internal This property is public\
+    \ in order to reduce the size of the\n# *           class' serialized representation.\
+    \ Do not access it. Use\n# *           {@link getConstraints()} and {@link findConstraints()}\
+    \ instead.\n# */\n# public array $constraints = [];\n# \n# /**\n# * @var array<string,\
+    \ Constraint[]>\n# *\n# * @internal This property is public in order to reduce\
+    \ the size of the\n# *           class' serialized representation. Do not access\
+    \ it. Use\n# *           {@link findConstraints()} instead.\n# */\n# public array\
+    \ $constraintsByGroup = [];\n# \n# /**\n# * The strategy for cascading objects.\n\
+    # *\n# * By default, objects are not cascaded.\n# *\n# * @var CascadingStrategy::*\n\
+    # *\n# * @internal This property is public in order to reduce the size of the\n\
+    # *           class' serialized representation. Do not access it. Use\n# *   \
+    \        {@link getCascadingStrategy()} instead.\n# */\n# public int $cascadingStrategy\
+    \ = CascadingStrategy::NONE;\n# \n# /**\n# * The strategy for traversing traversable\
+    \ objects.\n# *\n# * By default, traversable objects are not traversed.\n# *\n\
+    # * @var TraversalStrategy::*\n# *\n# * @internal This property is public in order\
+    \ to reduce the size of the\n# *           class' serialized representation. Do\
+    \ not access it. Use\n# *           {@link getTraversalStrategy()} instead.\n\
+    # */\n# public int $traversalStrategy = TraversalStrategy::NONE;\n# \n# /**\n\
+    # * Is auto-mapping enabled?\n# *\n# * @var AutoMappingStrategy::*\n# *\n# * @internal\
+    \ This property is public in order to reduce the size of the\n# *           class'\
+    \ serialized representation. Do not access it. Use\n# *           {@link getAutoMappingStrategy()}\
+    \ instead.\n# */\n# public int $autoMappingStrategy = AutoMappingStrategy::NONE;\n\
+    # \n# /**\n# * Returns the names of the properties that should be serialized.\n\
+    # *\n# * @return string[]"
+- name: __clone
+  visibility: public
+  parameters: []
+  comment: '# * Clones this object.'
+- name: addConstraint
+  visibility: public
+  parameters:
+  - name: constraint
+  comment: '# * Adds a constraint.
+
+    # *
+
+    # * If the constraint {@link Valid} is added, the cascading strategy will be
+
+    # * changed to {@link CascadingStrategy::CASCADE}. Depending on the
+
+    # * $traverse property of that constraint, the traversal strategy
+
+    # * will be set to one of the following:
+
+    # *
+
+    # *  - {@link TraversalStrategy::IMPLICIT} if $traverse is enabled
+
+    # *  - {@link TraversalStrategy::NONE} if $traverse is disabled
+
+    # *
+
+    # * @return $this
+
+    # *
+
+    # * @throws ConstraintDefinitionException When trying to add the {@link Cascade}
+
+    # *                                       or {@link Traverse} constraint'
+- name: addConstraints
+  visibility: public
+  parameters:
+  - name: constraints
+  comment: '# * Adds an list of constraints.
+
+    # *
+
+    # * @param Constraint[] $constraints The constraints to add
+
+    # *
+
+    # * @return $this'
+- name: getConstraints
+  visibility: public
+  parameters: []
+  comment: '# * @return Constraint[]'
+- name: hasConstraints
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether this element has any constraints.'
+- name: findConstraints
+  visibility: public
+  parameters:
+  - name: group
+  comment: '# * Aware of the global group (* group).
+
+    # *
+
+    # * @return Constraint[]'
+- name: getCascadingStrategy
+  visibility: public
+  parameters: []
+  comment: null
+- name: getTraversalStrategy
+  visibility: public
+  parameters: []
+  comment: null
+- name: getAutoMappingStrategy
+  visibility: public
+  parameters: []
+  comment: '# * @see AutoMappingStrategy'
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Constraints\Cascade
+- Symfony\Component\Validator\Constraints\DisableAutoMapping
+- Symfony\Component\Validator\Constraints\EnableAutoMapping
+- Symfony\Component\Validator\Constraints\Traverse
+- Symfony\Component\Validator\Constraints\Valid
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+interfaces:
+- MetadataInterface

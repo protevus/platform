@@ -1,0 +1,111 @@
+name: RedisTaggedCache
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: add
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  - name: ttl
+    default: 'null'
+  comment: '# * Store an item in the cache if the key does not exist.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
+
+    # * @return bool'
+- name: put
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  - name: ttl
+    default: 'null'
+  comment: '# * Store an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
+
+    # * @return bool'
+- name: increment
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: '1'
+  comment: '# * Increment the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return int|bool'
+- name: decrement
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: '1'
+  comment: '# * Decrement the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return int|bool'
+- name: forever
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Store an item in the cache indefinitely.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return bool'
+- name: flush
+  visibility: public
+  parameters: []
+  comment: '# * Remove all items from the cache.
+
+    # *
+
+    # * @return bool'
+- name: flushValues
+  visibility: protected
+  parameters: []
+  comment: '# * Flush the individual cache entries for the tags.
+
+    # *
+
+    # * @return void'
+- name: flushStale
+  visibility: public
+  parameters: []
+  comment: '# * Remove all stale reference entries from the tag set.
+
+    # *
+
+    # * @return bool'
+traits: []
+interfaces: []

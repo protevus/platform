@@ -1,0 +1,122 @@
+name: WebDebugToolbarListener
+class_comment: '# * WebDebugToolbarListener injects the Web Debug Toolbar.
+
+  # *
+
+  # * The onKernelResponse method must be connected to the kernel.response event.
+
+  # *
+
+  # * The WDT is only injected on well-formed HTML (with a proper </body> tag).
+
+  # * This means that the WDT is never included in sub-requests or ESI requests.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: FullStack
+  type: class
+  source: Symfony\Bundle\FullStack
+- name: ContentSecurityPolicyHandler
+  type: class
+  source: Symfony\Bundle\WebProfilerBundle\Csp\ContentSecurityPolicyHandler
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: AutoExpireFlashBag
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Flash\AutoExpireFlashBag
+- name: DumpDataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\DumpDataCollector
+- name: ResponseEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ResponseEvent
+- name: KernelEvents
+  type: class
+  source: Symfony\Component\HttpKernel\KernelEvents
+- name: UrlGeneratorInterface
+  type: class
+  source: Symfony\Component\Routing\Generator\UrlGeneratorInterface
+- name: Environment
+  type: class
+  source: Twig\Environment
+properties: []
+methods:
+- name: injectToolbar
+  visibility: protected
+  parameters:
+  - name: response
+  - name: request
+  - name: nonces
+  comment: "# * WebDebugToolbarListener injects the Web Debug Toolbar.\n# *\n# * The\
+    \ onKernelResponse method must be connected to the kernel.response event.\n# *\n\
+    # * The WDT is only injected on well-formed HTML (with a proper </body> tag).\n\
+    # * This means that the WDT is never included in sub-requests or ESI requests.\n\
+    # *\n# * @author Fabien Potencier <fabien@symfony.com>\n# *\n# * @final\n# */\n\
+    # class WebDebugToolbarListener implements EventSubscriberInterface\n# {\n# public\
+    \ const DISABLED = 1;\n# public const ENABLED = 2;\n# \n# public function __construct(\n\
+    # private Environment $twig,\n# private bool $interceptRedirects = false,\n# private\
+    \ int $mode = self::ENABLED,\n# private ?UrlGeneratorInterface $urlGenerator =\
+    \ null,\n# private string $excludedAjaxPaths = '^/bundles|^/_wdt',\n# private\
+    \ ?ContentSecurityPolicyHandler $cspHandler = null,\n# private ?DumpDataCollector\
+    \ $dumpDataCollector = null,\n# ) {\n# }\n# \n# public function isEnabled(): bool\n\
+    # {\n# return self::DISABLED !== $this->mode;\n# }\n# \n# public function setMode(int\
+    \ $mode): void\n# {\n# if (self::DISABLED !== $mode && self::ENABLED !== $mode)\
+    \ {\n# throw new \\InvalidArgumentException(\\sprintf('Invalid value provided\
+    \ for mode, use one of \"%s::DISABLED\" or \"%s::ENABLED\".', self::class, self::class));\n\
+    # }\n# \n# $this->mode = $mode;\n# }\n# \n# public function onKernelResponse(ResponseEvent\
+    \ $event): void\n# {\n# $response = $event->getResponse();\n# $request = $event->getRequest();\n\
+    # \n# if ($response->headers->has('X-Debug-Token') && null !== $this->urlGenerator)\
+    \ {\n# try {\n# $response->headers->set(\n# 'X-Debug-Token-Link',\n# $this->urlGenerator->generate('_profiler',\
+    \ ['token' => $response->headers->get('X-Debug-Token')], UrlGeneratorInterface::ABSOLUTE_URL)\n\
+    # );\n# } catch (\\Exception $e) {\n# $response->headers->set('X-Debug-Error',\
+    \ $e::class.': '.preg_replace('/\\s+/', ' ', $e->getMessage()));\n# }\n# }\n#\
+    \ \n# if (!$event->isMainRequest()) {\n# return;\n# }\n# \n# $nonces = [];\n#\
+    \ if ($this->cspHandler) {\n# if ($this->dumpDataCollector?->getDumpsCount() >\
+    \ 0) {\n# $this->cspHandler->disableCsp();\n# }\n# \n# $nonces = $this->cspHandler->updateResponseHeaders($request,\
+    \ $response);\n# }\n# \n# // do not capture redirects or modify XML HTTP Requests\n\
+    # if ($request->isXmlHttpRequest()) {\n# return;\n# }\n# \n# if ($response->headers->has('X-Debug-Token')\
+    \ && $response->isRedirect() && $this->interceptRedirects && 'html' === $request->getRequestFormat())\
+    \ {\n# if ($request->hasSession() && ($session = $request->getSession())->isStarted()\
+    \ && $session->getFlashBag() instanceof AutoExpireFlashBag) {\n# // keep current\
+    \ flashes for one more request if using AutoExpireFlashBag\n# $session->getFlashBag()->setAll($session->getFlashBag()->peekAll());\n\
+    # }\n# \n# $response->setContent($this->twig->render('@WebProfiler/Profiler/toolbar_redirect.html.twig',\
+    \ ['location' => $response->headers->get('Location'), 'host' => $request->getSchemeAndHttpHost()]));\n\
+    # $response->setStatusCode(200);\n# $response->headers->remove('Location');\n\
+    # }\n# \n# if (self::DISABLED === $this->mode\n# || !$response->headers->has('X-Debug-Token')\n\
+    # || $response->isRedirection()\n# || ($response->headers->has('Content-Type')\
+    \ && !str_contains($response->headers->get('Content-Type') ?? '', 'html'))\n#\
+    \ || 'html' !== $request->getRequestFormat()\n# || false !== stripos($response->headers->get('Content-Disposition',\
+    \ ''), 'attachment;')\n# ) {\n# return;\n# }\n# \n# $this->injectToolbar($response,\
+    \ $request, $nonces);\n# }\n# \n# /**\n# * Injects the web debug toolbar into\
+    \ the given Response."
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Bundle\FullStack
+- Symfony\Bundle\WebProfilerBundle\Csp\ContentSecurityPolicyHandler
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpFoundation\Session\Flash\AutoExpireFlashBag
+- Symfony\Component\HttpKernel\DataCollector\DumpDataCollector
+- Symfony\Component\HttpKernel\Event\ResponseEvent
+- Symfony\Component\HttpKernel\KernelEvents
+- Symfony\Component\Routing\Generator\UrlGeneratorInterface
+- Twig\Environment
+interfaces:
+- EventSubscriberInterface

@@ -1,0 +1,103 @@
+name: CsvEncoder
+class_comment: "# * Encodes CSV data.\n# *\n# * @author K\xE9vin Dunglas <dunglas@gmail.com>\n\
+  # * @author Oliver Hoff <oliver@hofff.com>"
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Serializer\Exception\InvalidArgumentException
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Serializer\Exception\UnexpectedValueException
+properties: []
+methods:
+- name: flatten
+  visibility: private
+  parameters:
+  - name: array
+  - name: '&$result'
+  - name: keySeparator
+  - name: parentKey
+    default: ''''''
+  - name: escapeFormulas
+    default: 'false'
+  comment: "# * Encodes CSV data.\n# *\n# * @author K\xE9vin Dunglas <dunglas@gmail.com>\n\
+    # * @author Oliver Hoff <oliver@hofff.com>\n# */\n# class CsvEncoder implements\
+    \ EncoderInterface, DecoderInterface\n# {\n# public const FORMAT = 'csv';\n# public\
+    \ const DELIMITER_KEY = 'csv_delimiter';\n# public const ENCLOSURE_KEY = 'csv_enclosure';\n\
+    # public const ESCAPE_CHAR_KEY = 'csv_escape_char';\n# public const KEY_SEPARATOR_KEY\
+    \ = 'csv_key_separator';\n# public const HEADERS_KEY = 'csv_headers';\n# public\
+    \ const ESCAPE_FORMULAS_KEY = 'csv_escape_formulas';\n# public const AS_COLLECTION_KEY\
+    \ = 'as_collection';\n# public const NO_HEADERS_KEY = 'no_headers';\n# public\
+    \ const END_OF_LINE = 'csv_end_of_line';\n# public const OUTPUT_UTF8_BOM_KEY =\
+    \ 'output_utf8_bom';\n# \n# private const UTF8_BOM = \"\\xEF\\xBB\\xBF\";\n# \n\
+    # private const FORMULAS_START_CHARACTERS = ['=', '-', '+', '@', \"\\t\", \"\\\
+    r\"];\n# \n# private array $defaultContext = [\n# self::DELIMITER_KEY => ',',\n\
+    # self::ENCLOSURE_KEY => '\"',\n# self::ESCAPE_CHAR_KEY => '',\n# self::END_OF_LINE\
+    \ => \"\\n\",\n# self::ESCAPE_FORMULAS_KEY => false,\n# self::HEADERS_KEY => [],\n\
+    # self::KEY_SEPARATOR_KEY => '.',\n# self::NO_HEADERS_KEY => false,\n# self::AS_COLLECTION_KEY\
+    \ => true,\n# self::OUTPUT_UTF8_BOM_KEY => false,\n# ];\n# \n# public function\
+    \ __construct(array $defaultContext = [])\n# {\n# $this->defaultContext = array_merge($this->defaultContext,\
+    \ $defaultContext);\n# }\n# \n# public function encode(mixed $data, string $format,\
+    \ array $context = []): string\n# {\n# $handle = fopen('php://temp,', 'w+');\n\
+    # \n# if (!is_iterable($data)) {\n# $data = [[$data]];\n# } elseif (!$data) {\n\
+    # $data = [[]];\n# } else {\n# // Sequential arrays of arrays are considered as\
+    \ collections\n# $i = 0;\n# foreach ($data as $key => $value) {\n# if ($i !==\
+    \ $key || !\\is_array($value)) {\n# $data = [$data];\n# break;\n# }\n# \n# ++$i;\n\
+    # }\n# }\n# \n# [$delimiter, $enclosure, $escapeChar, $keySeparator, $headers,\
+    \ $escapeFormulas, $outputBom] = $this->getCsvOptions($context);\n# \n# foreach\
+    \ ($data as &$value) {\n# $flattened = [];\n# $this->flatten($value, $flattened,\
+    \ $keySeparator, '', $escapeFormulas);\n# $value = $flattened;\n# }\n# unset($value);\n\
+    # \n# $headers = array_merge(array_values($headers), array_diff($this->extractHeaders($data),\
+    \ $headers));\n# $endOfLine = $context[self::END_OF_LINE] ?? $this->defaultContext[self::END_OF_LINE];\n\
+    # \n# if (!($context[self::NO_HEADERS_KEY] ?? $this->defaultContext[self::NO_HEADERS_KEY]))\
+    \ {\n# fputcsv($handle, $headers, $delimiter, $enclosure, $escapeChar);\n# if\
+    \ (\"\\n\" !== $endOfLine && 0 === fseek($handle, -1, \\SEEK_CUR)) {\n# fwrite($handle,\
+    \ $endOfLine);\n# }\n# }\n# \n# $headers = array_fill_keys($headers, '');\n# foreach\
+    \ ($data as $row) {\n# fputcsv($handle, array_replace($headers, $row), $delimiter,\
+    \ $enclosure, $escapeChar);\n# if (\"\\n\" !== $endOfLine && 0 === fseek($handle,\
+    \ -1, \\SEEK_CUR)) {\n# fwrite($handle, $endOfLine);\n# }\n# }\n# \n# rewind($handle);\n\
+    # $value = stream_get_contents($handle);\n# fclose($handle);\n# \n# if ($outputBom)\
+    \ {\n# if (!preg_match('//u', $value)) {\n# throw new UnexpectedValueException('You\
+    \ are trying to add a UTF-8 BOM to a non UTF-8 text.');\n# }\n# \n# $value = self::UTF8_BOM.$value;\n\
+    # }\n# \n# return $value;\n# }\n# \n# public function supportsEncoding(string\
+    \ $format): bool\n# {\n# return self::FORMAT === $format;\n# }\n# \n# public function\
+    \ decode(string $data, string $format, array $context = []): mixed\n# {\n# $handle\
+    \ = fopen('php://temp', 'r+');\n# fwrite($handle, $data);\n# rewind($handle);\n\
+    # \n# if (str_starts_with($data, self::UTF8_BOM)) {\n# fseek($handle, \\strlen(self::UTF8_BOM));\n\
+    # }\n# \n# $headers = null;\n# $nbHeaders = 0;\n# $headerCount = [];\n# $result\
+    \ = [];\n# \n# [$delimiter, $enclosure, $escapeChar, $keySeparator, , , , $asCollection]\
+    \ = $this->getCsvOptions($context);\n# \n# while (false !== ($cols = fgetcsv($handle,\
+    \ 0, $delimiter, $enclosure, $escapeChar))) {\n# $nbCols = \\count($cols);\n#\
+    \ \n# if (null === $headers) {\n# $nbHeaders = $nbCols;\n# \n# if ($context[self::NO_HEADERS_KEY]\
+    \ ?? $this->defaultContext[self::NO_HEADERS_KEY]) {\n# for ($i = 0; $i < $nbCols;\
+    \ ++$i) {\n# $headers[] = [$i];\n# }\n# $headerCount = array_fill(0, $nbCols,\
+    \ 1);\n# } else {\n# foreach ($cols as $col) {\n# $header = explode($keySeparator,\
+    \ $col ?? '');\n# $headers[] = $header;\n# $headerCount[] = \\count($header);\n\
+    # }\n# \n# continue;\n# }\n# }\n# \n# $item = [];\n# for ($i = 0; ($i < $nbCols)\
+    \ && ($i < $nbHeaders); ++$i) {\n# $depth = $headerCount[$i];\n# $arr = &$item;\n\
+    # for ($j = 0; $j < $depth; ++$j) {\n# $headerName = $headers[$i][$j];\n# \n#\
+    \ if ('' === $headerName) {\n# $headerName = $i;\n# }\n# \n# // Handle nested\
+    \ arrays\n# if ($j === ($depth - 1)) {\n# $arr[$headerName] = $cols[$i];\n# \n\
+    # continue;\n# }\n# \n# if (!isset($arr[$headerName])) {\n# $arr[$headerName]\
+    \ = [];\n# }\n# \n# $arr = &$arr[$headerName];\n# }\n# }\n# \n# $result[] = $item;\n\
+    # }\n# fclose($handle);\n# \n# if ($asCollection) {\n# return $result;\n# }\n\
+    # \n# if (!$result || isset($result[1])) {\n# return $result;\n# }\n# \n# // If\
+    \ there is only one data line in the document, return it (the line), the result\
+    \ is not considered as a collection\n# return $result[0];\n# }\n# \n# public function\
+    \ supportsDecoding(string $format): bool\n# {\n# return self::FORMAT === $format;\n\
+    # }\n# \n# /**\n# * Flattens an array and generates keys including the path."
+- name: getCsvOptions
+  visibility: private
+  parameters:
+  - name: context
+  comment: null
+- name: extractHeaders
+  visibility: private
+  parameters:
+  - name: data
+  comment: '# * @return string[]'
+traits:
+- Symfony\Component\Serializer\Exception\InvalidArgumentException
+- Symfony\Component\Serializer\Exception\UnexpectedValueException
+interfaces:
+- EncoderInterface

@@ -1,0 +1,113 @@
+name: Authorize
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Gate
+  type: class
+  source: Illuminate\Contracts\Auth\Access\Gate
+- name: Model
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+properties:
+- name: gate
+  visibility: protected
+  comment: '# * The gate instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Auth\Access\Gate'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: gate
+  comment: "# * The gate instance.\n# *\n# * @var \\Illuminate\\Contracts\\Auth\\\
+    Access\\Gate\n# */\n# protected $gate;\n# \n# /**\n# * Create a new middleware\
+    \ instance.\n# *\n# * @param  \\Illuminate\\Contracts\\Auth\\Access\\Gate  $gate\n\
+    # * @return void"
+- name: using
+  visibility: public
+  parameters:
+  - name: ability
+  - name: '...$models'
+  comment: '# * Specify the ability and models for the middleware.
+
+    # *
+
+    # * @param  string  $ability
+
+    # * @param  string  ...$models
+
+    # * @return string'
+- name: handle
+  visibility: public
+  parameters:
+  - name: request
+  - name: next
+  - name: ability
+  - name: '...$models'
+  comment: '# * Handle an incoming request.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  \Closure  $next
+
+    # * @param  string  $ability
+
+    # * @param  array|null  ...$models
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Illuminate\Auth\AuthenticationException
+
+    # * @throws \Illuminate\Auth\Access\AuthorizationException'
+- name: getGateArguments
+  visibility: protected
+  parameters:
+  - name: request
+  - name: models
+  comment: '# * Get the arguments parameter for the gate.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  array|null  $models
+
+    # * @return array'
+- name: getModel
+  visibility: protected
+  parameters:
+  - name: request
+  - name: model
+  comment: '# * Get the model to authorize.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  string  $model
+
+    # * @return \Illuminate\Database\Eloquent\Model|string'
+- name: isClassName
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Checks if the given string looks like a fully qualified class name.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return bool'
+traits:
+- Closure
+- Illuminate\Contracts\Auth\Access\Gate
+- Illuminate\Database\Eloquent\Model
+interfaces: []

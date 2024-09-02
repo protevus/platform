@@ -1,0 +1,15 @@
+name: ShouldBroadcast
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: broadcastOn
+  visibility: public
+  parameters: []
+  comment: '# * Get the channels the event should broadcast on.
+
+    # *
+
+    # * @return \Illuminate\Broadcasting\Channel|\Illuminate\Broadcasting\Channel[]|string[]|string'
+traits: []
+interfaces: []

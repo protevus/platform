@@ -1,0 +1,41 @@
+name: CompiledAssetMapperConfigReader
+class_comment: '# * Reads and writes compiled configuration files for asset mapper.'
+dependencies:
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: Path
+  type: class
+  source: Symfony\Component\Filesystem\Path
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: directory
+  comment: null
+- name: configExists
+  visibility: public
+  parameters:
+  - name: filename
+  comment: null
+- name: loadConfig
+  visibility: public
+  parameters:
+  - name: filename
+  comment: null
+- name: saveConfig
+  visibility: public
+  parameters:
+  - name: filename
+  - name: data
+  comment: null
+- name: removeConfig
+  visibility: public
+  parameters:
+  - name: filename
+  comment: null
+traits:
+- Symfony\Component\Filesystem\Filesystem
+- Symfony\Component\Filesystem\Path
+interfaces: []

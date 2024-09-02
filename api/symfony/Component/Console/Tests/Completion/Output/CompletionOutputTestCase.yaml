@@ -1,0 +1,51 @@
+name: CompletionOutputTestCase
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CompletionSuggestions
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionSuggestions
+- name: CompletionOutputInterface
+  type: class
+  source: Symfony\Component\Console\Completion\Output\CompletionOutputInterface
+- name: Suggestion
+  type: class
+  source: Symfony\Component\Console\Completion\Suggestion
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: StreamOutput
+  type: class
+  source: Symfony\Component\Console\Output\StreamOutput
+properties: []
+methods:
+- name: getCompletionOutput
+  visibility: public
+  parameters: []
+  comment: null
+- name: getExpectedOptionsOutput
+  visibility: public
+  parameters: []
+  comment: null
+- name: getExpectedValuesOutput
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOptionsOutput
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValuesOutput
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Completion\CompletionSuggestions
+- Symfony\Component\Console\Completion\Output\CompletionOutputInterface
+- Symfony\Component\Console\Completion\Suggestion
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Output\StreamOutput
+interfaces: []

@@ -1,0 +1,49 @@
+name: RelayExtIntegrationTest
+class_comment: '# * @requires extension relay
+
+  # *
+
+  # * @group time-sensitive
+
+  # * @group integration'
+dependencies:
+- name: Relay
+  type: class
+  source: Relay\Relay
+properties: []
+methods:
+- name: createRedisClient
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testConnectionSendAndGetDelayed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConnectionSendDelayedMessagesWithSameContent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLazy
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDbIndex
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetNonBlocking
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetAfterReject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testJsonError
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Relay\Relay
+interfaces: []

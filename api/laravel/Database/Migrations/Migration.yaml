@@ -1,0 +1,29 @@
+name: Migration
+class_comment: null
+dependencies: []
+properties:
+- name: connection
+  visibility: protected
+  comment: '# * The name of the database connection to use.
+
+    # *
+
+    # * @var string|null'
+- name: withinTransaction
+  visibility: public
+  comment: '# * Enables, if supported, wrapping the migration within a transaction.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: getConnection
+  visibility: public
+  parameters: []
+  comment: "# * The name of the database connection to use.\n# *\n# * @var string|null\n\
+    # */\n# protected $connection;\n# \n# /**\n# * Enables, if supported, wrapping\
+    \ the migration within a transaction.\n# *\n# * @var bool\n# */\n# public $withinTransaction\
+    \ = true;\n# \n# /**\n# * Get the migration connection name.\n# *\n# * @return\
+    \ string|null"
+traits: []
+interfaces: []

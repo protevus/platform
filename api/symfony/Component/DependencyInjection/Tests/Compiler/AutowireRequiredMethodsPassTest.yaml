@@ -1,0 +1,43 @@
+name: AutowireRequiredMethodsPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AutowireRequiredMethodsPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\AutowireRequiredMethodsPass
+- name: ResolveClassPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ResolveClassPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: WitherStaticReturnType
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\WitherStaticReturnType
+properties: []
+methods:
+- name: testSetterInjectionWithAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExplicitMethodInjectionAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWitherWithStaticReturnTypeInjection
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWitherInjectionWithAttribute
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Compiler\AutowireRequiredMethodsPass
+- Symfony\Component\DependencyInjection\Compiler\ResolveClassPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Tests\Fixtures\WitherStaticReturnType
+interfaces: []

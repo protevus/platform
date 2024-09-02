@@ -1,0 +1,15 @@
+name: HasLocalePreference
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: preferredLocale
+  visibility: public
+  parameters: []
+  comment: '# * Get the preferred locale of the entity.
+
+    # *
+
+    # * @return string|null'
+traits: []
+interfaces: []

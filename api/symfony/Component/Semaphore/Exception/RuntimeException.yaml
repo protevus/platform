@@ -1,0 +1,8 @@
+name: RuntimeException
+class_comment: "# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>"
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- ExceptionInterface

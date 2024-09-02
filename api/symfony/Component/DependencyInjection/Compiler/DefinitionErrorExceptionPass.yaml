@@ -1,0 +1,54 @@
+name: DefinitionErrorExceptionPass
+class_comment: '# * Throws an exception for any Definitions that have errors and still
+  exist.
+
+  # *
+
+  # * @author Ryan Weaver <ryan@knpuniversity.com>'
+dependencies:
+- name: ArgumentInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ArgumentInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: processValue
+  visibility: protected
+  parameters:
+  - name: value
+  - name: isRoot
+    default: 'false'
+  comment: null
+- name: isErrorForRuntime
+  visibility: private
+  parameters:
+  - name: id
+  - name: '&$visitedIds'
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Argument\ArgumentInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Reference
+interfaces: []

@@ -1,0 +1,37 @@
+name: ReflectionPropertyTypeResolver
+class_comment: null
+dependencies:
+- name: UnsupportedException
+  type: class
+  source: Symfony\Component\TypeInfo\Exception\UnsupportedException
+- name: Type
+  type: class
+  source: Symfony\Component\TypeInfo\Type
+- name: TypeContext
+  type: class
+  source: Symfony\Component\TypeInfo\TypeContext\TypeContext
+- name: TypeContextFactory
+  type: class
+  source: Symfony\Component\TypeInfo\TypeContext\TypeContextFactory
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: reflectionTypeResolver
+  - name: typeContextFactory
+  comment: null
+- name: resolve
+  visibility: public
+  parameters:
+  - name: subject
+  - name: typeContext
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\TypeInfo\Exception\UnsupportedException
+- Symfony\Component\TypeInfo\Type
+- Symfony\Component\TypeInfo\TypeContext\TypeContext
+- Symfony\Component\TypeInfo\TypeContext\TypeContextFactory
+interfaces:
+- TypeResolverInterface

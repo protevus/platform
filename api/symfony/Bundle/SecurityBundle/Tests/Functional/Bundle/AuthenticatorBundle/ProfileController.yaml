@@ -1,0 +1,15 @@
+name: ProfileController
+class_comment: null
+dependencies:
+- name: AbstractController
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Controller\AbstractController
+properties: []
+methods:
+- name: __invoke
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Bundle\FrameworkBundle\Controller\AbstractController
+interfaces: []

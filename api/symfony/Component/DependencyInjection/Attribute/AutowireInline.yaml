@@ -1,0 +1,42 @@
+name: AutowireInline
+class_comment: null
+dependencies:
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: LogicException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\LogicException
+- name: YamlFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\YamlFileLoader
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: class
+    default: 'null'
+  - name: arguments
+    default: '[]'
+  - name: calls
+    default: '[]'
+  - name: properties
+    default: '[]'
+  - name: parent
+    default: 'null'
+  - name: lazy
+    default: 'false'
+  comment: null
+- name: buildDefinition
+  visibility: public
+  parameters:
+  - name: value
+  - name: type
+  - name: parameter
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\LogicException
+- Symfony\Component\DependencyInjection\Loader\YamlFileLoader
+interfaces: []

@@ -1,0 +1,29 @@
+name: XOAuth2Authenticator
+class_comment: '# * Handles XOAUTH2 authentication.
+
+  # *
+
+  # * @author xu.li<AthenaLightenedMyPath@gmail.com>
+
+  # *
+
+  # * @see https://developers.google.com/google-apps/gmail/xoauth2_protocol'
+dependencies:
+- name: EsmtpTransport
+  type: class
+  source: Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport
+properties: []
+methods:
+- name: authenticate
+  visibility: public
+  parameters:
+  - name: client
+  comment: "# * Handles XOAUTH2 authentication.\n# *\n# * @author xu.li<AthenaLightenedMyPath@gmail.com>\n\
+    # *\n# * @see https://developers.google.com/google-apps/gmail/xoauth2_protocol\n\
+    # */\n# class XOAuth2Authenticator implements AuthenticatorInterface\n# {\n# public\
+    \ function getAuthKeyword(): string\n# {\n# return 'XOAUTH2';\n# }\n# \n# /**\n\
+    # * @see https://developers.google.com/google-apps/gmail/xoauth2_protocol#the_sasl_xoauth2_mechanism"
+traits:
+- Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport
+interfaces:
+- AuthenticatorInterface

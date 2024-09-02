@@ -1,0 +1,26 @@
+name: UriResolverTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: UriResolver
+  type: class
+  source: Symfony\Component\DomCrawler\UriResolver
+properties: []
+methods:
+- name: testResolver
+  visibility: public
+  parameters:
+  - name: uri
+  - name: baseUri
+  - name: expected
+  comment: '# * @dataProvider provideResolverTests'
+- name: provideResolverTests
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DomCrawler\UriResolver
+interfaces: []

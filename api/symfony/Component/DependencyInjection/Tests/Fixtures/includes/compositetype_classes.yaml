@@ -1,0 +1,17 @@
+name: compositetype_classes
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: (CollisionInterface&AnotherInterface
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: (CollisionInterface&AnotherInterface
+  comment: null
+traits: []
+interfaces: []

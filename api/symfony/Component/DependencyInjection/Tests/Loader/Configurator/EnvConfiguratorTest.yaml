@@ -1,0 +1,29 @@
+name: EnvConfiguratorTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: EnvConfigurator
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\Configurator\EnvConfigurator
+- name: StringBackedEnum
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\StringBackedEnum
+properties: []
+methods:
+- name: test
+  visibility: public
+  parameters:
+  - name: expected
+  - name: envConfigurator
+  comment: '# * @dataProvider provide'
+- name: provide
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Loader\Configurator\EnvConfigurator
+- Symfony\Component\DependencyInjection\Tests\Fixtures\StringBackedEnum
+interfaces: []

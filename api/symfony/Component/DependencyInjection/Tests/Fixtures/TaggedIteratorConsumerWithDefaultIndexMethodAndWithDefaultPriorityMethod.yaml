@@ -1,0 +1,22 @@
+name: TaggedIteratorConsumerWithDefaultIndexMethodAndWithDefaultPriorityMethod
+class_comment: null
+dependencies:
+- name: AutowireIterator
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\AutowireIterator
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: '#[AutowireIterator(''foo_bar'''
+  - name: '''getDefaultFooName'''
+  - name: '''getPriority'''
+  comment: null
+- name: getParam
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Attribute\AutowireIterator
+interfaces: []

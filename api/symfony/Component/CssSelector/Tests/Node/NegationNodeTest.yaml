@@ -1,0 +1,27 @@
+name: NegationNodeTest
+class_comment: null
+dependencies:
+- name: ClassNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\ClassNode
+- name: ElementNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\ElementNode
+- name: NegationNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\NegationNode
+properties: []
+methods:
+- name: getToStringConversionTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSpecificityValueTestData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\CssSelector\Node\ClassNode
+- Symfony\Component\CssSelector\Node\ElementNode
+- Symfony\Component\CssSelector\Node\NegationNode
+interfaces: []

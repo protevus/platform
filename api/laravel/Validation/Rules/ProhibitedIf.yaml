@@ -1,0 +1,43 @@
+name: ProhibitedIf
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+- name: Stringable
+  type: class
+  source: Stringable
+properties:
+- name: condition
+  visibility: public
+  comment: '# * The condition that validates the attribute.
+
+    # *
+
+    # * @var \Closure|bool'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: condition
+  comment: "# * The condition that validates the attribute.\n# *\n# * @var \\Closure|bool\n\
+    # */\n# public $condition;\n# \n# /**\n# * Create a new prohibited validation\
+    \ rule based on a condition.\n# *\n# * @param  \\Closure|bool  $condition\n# *\
+    \ @return void\n# *\n# * @throws \\InvalidArgumentException"
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Convert the rule to a validation string.
+
+    # *
+
+    # * @return string'
+traits:
+- Closure
+- InvalidArgumentException
+- Stringable
+interfaces:
+- Stringable

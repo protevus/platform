@@ -1,0 +1,31 @@
+name: CascadeTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Cascade
+  type: class
+  source: Symfony\Component\Validator\Constraints\Cascade
+- name: CascadingStrategy
+  type: class
+  source: Symfony\Component\Validator\Mapping\CascadingStrategy
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+- name: AttributeLoader
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\AttributeLoader
+properties: []
+methods:
+- name: testCascadeAttribute
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\Constraints\Cascade
+- Symfony\Component\Validator\Mapping\CascadingStrategy
+- Symfony\Component\Validator\Mapping\ClassMetadata
+- Symfony\Component\Validator\Mapping\Loader\AttributeLoader
+interfaces: []

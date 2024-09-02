@@ -1,0 +1,920 @@
+name: ArtisanServiceProvider
+class_comment: null
+dependencies:
+- name: ClearResetsCommand
+  type: class
+  source: Illuminate\Auth\Console\ClearResetsCommand
+- name: CacheTableCommand
+  type: class
+  source: Illuminate\Cache\Console\CacheTableCommand
+- name: CacheClearCommand
+  type: class
+  source: Illuminate\Cache\Console\ClearCommand
+- name: CacheForgetCommand
+  type: class
+  source: Illuminate\Cache\Console\ForgetCommand
+- name: PruneStaleTagsCommand
+  type: class
+  source: Illuminate\Cache\Console\PruneStaleTagsCommand
+- name: ScheduleClearCacheCommand
+  type: class
+  source: Illuminate\Console\Scheduling\ScheduleClearCacheCommand
+- name: ScheduleFinishCommand
+  type: class
+  source: Illuminate\Console\Scheduling\ScheduleFinishCommand
+- name: ScheduleInterruptCommand
+  type: class
+  source: Illuminate\Console\Scheduling\ScheduleInterruptCommand
+- name: ScheduleListCommand
+  type: class
+  source: Illuminate\Console\Scheduling\ScheduleListCommand
+- name: ScheduleRunCommand
+  type: class
+  source: Illuminate\Console\Scheduling\ScheduleRunCommand
+- name: ScheduleTestCommand
+  type: class
+  source: Illuminate\Console\Scheduling\ScheduleTestCommand
+- name: ScheduleWorkCommand
+  type: class
+  source: Illuminate\Console\Scheduling\ScheduleWorkCommand
+- name: Signals
+  type: class
+  source: Illuminate\Console\Signals
+- name: DeferrableProvider
+  type: class
+  source: Illuminate\Contracts\Support\DeferrableProvider
+- name: DbCommand
+  type: class
+  source: Illuminate\Database\Console\DbCommand
+- name: DumpCommand
+  type: class
+  source: Illuminate\Database\Console\DumpCommand
+- name: FactoryMakeCommand
+  type: class
+  source: Illuminate\Database\Console\Factories\FactoryMakeCommand
+- name: DatabaseMonitorCommand
+  type: class
+  source: Illuminate\Database\Console\MonitorCommand
+- name: PruneCommand
+  type: class
+  source: Illuminate\Database\Console\PruneCommand
+- name: SeedCommand
+  type: class
+  source: Illuminate\Database\Console\Seeds\SeedCommand
+- name: SeederMakeCommand
+  type: class
+  source: Illuminate\Database\Console\Seeds\SeederMakeCommand
+- name: ShowCommand
+  type: class
+  source: Illuminate\Database\Console\ShowCommand
+- name: ShowModelCommand
+  type: class
+  source: Illuminate\Database\Console\ShowModelCommand
+- name: DatabaseTableCommand
+  type: class
+  source: Illuminate\Database\Console\TableCommand
+- name: WipeCommand
+  type: class
+  source: Illuminate\Database\Console\WipeCommand
+- name: AboutCommand
+  type: class
+  source: Illuminate\Foundation\Console\AboutCommand
+- name: ApiInstallCommand
+  type: class
+  source: Illuminate\Foundation\Console\ApiInstallCommand
+- name: BroadcastingInstallCommand
+  type: class
+  source: Illuminate\Foundation\Console\BroadcastingInstallCommand
+- name: CastMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\CastMakeCommand
+- name: ChannelListCommand
+  type: class
+  source: Illuminate\Foundation\Console\ChannelListCommand
+- name: ChannelMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\ChannelMakeCommand
+- name: ClassMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\ClassMakeCommand
+- name: ClearCompiledCommand
+  type: class
+  source: Illuminate\Foundation\Console\ClearCompiledCommand
+- name: ComponentMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\ComponentMakeCommand
+- name: ConfigCacheCommand
+  type: class
+  source: Illuminate\Foundation\Console\ConfigCacheCommand
+- name: ConfigClearCommand
+  type: class
+  source: Illuminate\Foundation\Console\ConfigClearCommand
+- name: ConfigPublishCommand
+  type: class
+  source: Illuminate\Foundation\Console\ConfigPublishCommand
+- name: ConfigShowCommand
+  type: class
+  source: Illuminate\Foundation\Console\ConfigShowCommand
+- name: ConsoleMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\ConsoleMakeCommand
+- name: DocsCommand
+  type: class
+  source: Illuminate\Foundation\Console\DocsCommand
+- name: DownCommand
+  type: class
+  source: Illuminate\Foundation\Console\DownCommand
+- name: EnumMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\EnumMakeCommand
+- name: EnvironmentCommand
+  type: class
+  source: Illuminate\Foundation\Console\EnvironmentCommand
+- name: EnvironmentDecryptCommand
+  type: class
+  source: Illuminate\Foundation\Console\EnvironmentDecryptCommand
+- name: EnvironmentEncryptCommand
+  type: class
+  source: Illuminate\Foundation\Console\EnvironmentEncryptCommand
+- name: EventCacheCommand
+  type: class
+  source: Illuminate\Foundation\Console\EventCacheCommand
+- name: EventClearCommand
+  type: class
+  source: Illuminate\Foundation\Console\EventClearCommand
+- name: EventGenerateCommand
+  type: class
+  source: Illuminate\Foundation\Console\EventGenerateCommand
+- name: EventListCommand
+  type: class
+  source: Illuminate\Foundation\Console\EventListCommand
+- name: EventMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\EventMakeCommand
+- name: ExceptionMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\ExceptionMakeCommand
+- name: InterfaceMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\InterfaceMakeCommand
+- name: JobMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\JobMakeCommand
+- name: KeyGenerateCommand
+  type: class
+  source: Illuminate\Foundation\Console\KeyGenerateCommand
+- name: LangPublishCommand
+  type: class
+  source: Illuminate\Foundation\Console\LangPublishCommand
+- name: ListenerMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\ListenerMakeCommand
+- name: MailMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\MailMakeCommand
+- name: ModelMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\ModelMakeCommand
+- name: NotificationMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\NotificationMakeCommand
+- name: ObserverMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\ObserverMakeCommand
+- name: OptimizeClearCommand
+  type: class
+  source: Illuminate\Foundation\Console\OptimizeClearCommand
+- name: OptimizeCommand
+  type: class
+  source: Illuminate\Foundation\Console\OptimizeCommand
+- name: PackageDiscoverCommand
+  type: class
+  source: Illuminate\Foundation\Console\PackageDiscoverCommand
+- name: PolicyMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\PolicyMakeCommand
+- name: ProviderMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\ProviderMakeCommand
+- name: RequestMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\RequestMakeCommand
+- name: ResourceMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\ResourceMakeCommand
+- name: RouteCacheCommand
+  type: class
+  source: Illuminate\Foundation\Console\RouteCacheCommand
+- name: RouteClearCommand
+  type: class
+  source: Illuminate\Foundation\Console\RouteClearCommand
+- name: RouteListCommand
+  type: class
+  source: Illuminate\Foundation\Console\RouteListCommand
+- name: RuleMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\RuleMakeCommand
+- name: ScopeMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\ScopeMakeCommand
+- name: ServeCommand
+  type: class
+  source: Illuminate\Foundation\Console\ServeCommand
+- name: StorageLinkCommand
+  type: class
+  source: Illuminate\Foundation\Console\StorageLinkCommand
+- name: StorageUnlinkCommand
+  type: class
+  source: Illuminate\Foundation\Console\StorageUnlinkCommand
+- name: StubPublishCommand
+  type: class
+  source: Illuminate\Foundation\Console\StubPublishCommand
+- name: TestMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\TestMakeCommand
+- name: TraitMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\TraitMakeCommand
+- name: UpCommand
+  type: class
+  source: Illuminate\Foundation\Console\UpCommand
+- name: VendorPublishCommand
+  type: class
+  source: Illuminate\Foundation\Console\VendorPublishCommand
+- name: ViewCacheCommand
+  type: class
+  source: Illuminate\Foundation\Console\ViewCacheCommand
+- name: ViewClearCommand
+  type: class
+  source: Illuminate\Foundation\Console\ViewClearCommand
+- name: ViewMakeCommand
+  type: class
+  source: Illuminate\Foundation\Console\ViewMakeCommand
+- name: NotificationTableCommand
+  type: class
+  source: Illuminate\Notifications\Console\NotificationTableCommand
+- name: BatchesTableCommand
+  type: class
+  source: Illuminate\Queue\Console\BatchesTableCommand
+- name: QueueClearCommand
+  type: class
+  source: Illuminate\Queue\Console\ClearCommand
+- name: FailedTableCommand
+  type: class
+  source: Illuminate\Queue\Console\FailedTableCommand
+- name: FlushFailedQueueCommand
+  type: class
+  source: Illuminate\Queue\Console\FlushFailedCommand
+- name: ForgetFailedQueueCommand
+  type: class
+  source: Illuminate\Queue\Console\ForgetFailedCommand
+- name: QueueListenCommand
+  type: class
+  source: Illuminate\Queue\Console\ListenCommand
+- name: ListFailedQueueCommand
+  type: class
+  source: Illuminate\Queue\Console\ListFailedCommand
+- name: QueueMonitorCommand
+  type: class
+  source: Illuminate\Queue\Console\MonitorCommand
+- name: QueuePruneBatchesCommand
+  type: class
+  source: Illuminate\Queue\Console\PruneBatchesCommand
+- name: QueuePruneFailedJobsCommand
+  type: class
+  source: Illuminate\Queue\Console\PruneFailedJobsCommand
+- name: QueueRestartCommand
+  type: class
+  source: Illuminate\Queue\Console\RestartCommand
+- name: QueueRetryBatchCommand
+  type: class
+  source: Illuminate\Queue\Console\RetryBatchCommand
+- name: QueueRetryCommand
+  type: class
+  source: Illuminate\Queue\Console\RetryCommand
+- name: TableCommand
+  type: class
+  source: Illuminate\Queue\Console\TableCommand
+- name: QueueWorkCommand
+  type: class
+  source: Illuminate\Queue\Console\WorkCommand
+- name: ControllerMakeCommand
+  type: class
+  source: Illuminate\Routing\Console\ControllerMakeCommand
+- name: MiddlewareMakeCommand
+  type: class
+  source: Illuminate\Routing\Console\MiddlewareMakeCommand
+- name: SessionTableCommand
+  type: class
+  source: Illuminate\Session\Console\SessionTableCommand
+- name: ServiceProvider
+  type: class
+  source: Illuminate\Support\ServiceProvider
+properties:
+- name: commands
+  visibility: protected
+  comment: '# * The commands to be registered.
+
+    # *
+
+    # * @var array'
+- name: devCommands
+  visibility: protected
+  comment: '# * The commands to be registered.
+
+    # *
+
+    # * @var array'
+methods:
+- name: register
+  visibility: public
+  parameters: []
+  comment: "# * The commands to be registered.\n# *\n# * @var array\n# */\n# protected\
+    \ $commands = [\n# 'About' => AboutCommand::class,\n# 'CacheClear' => CacheClearCommand::class,\n\
+    # 'CacheForget' => CacheForgetCommand::class,\n# 'ClearCompiled' => ClearCompiledCommand::class,\n\
+    # 'ClearResets' => ClearResetsCommand::class,\n# 'ConfigCache' => ConfigCacheCommand::class,\n\
+    # 'ConfigClear' => ConfigClearCommand::class,\n# 'ConfigShow' => ConfigShowCommand::class,\n\
+    # 'Db' => DbCommand::class,\n# 'DbMonitor' => DatabaseMonitorCommand::class,\n\
+    # 'DbPrune' => PruneCommand::class,\n# 'DbShow' => ShowCommand::class,\n# 'DbTable'\
+    \ => DatabaseTableCommand::class,\n# 'DbWipe' => WipeCommand::class,\n# 'Down'\
+    \ => DownCommand::class,\n# 'Environment' => EnvironmentCommand::class,\n# 'EnvironmentDecrypt'\
+    \ => EnvironmentDecryptCommand::class,\n# 'EnvironmentEncrypt' => EnvironmentEncryptCommand::class,\n\
+    # 'EventCache' => EventCacheCommand::class,\n# 'EventClear' => EventClearCommand::class,\n\
+    # 'EventList' => EventListCommand::class,\n# 'KeyGenerate' => KeyGenerateCommand::class,\n\
+    # 'Optimize' => OptimizeCommand::class,\n# 'OptimizeClear' => OptimizeClearCommand::class,\n\
+    # 'PackageDiscover' => PackageDiscoverCommand::class,\n# 'PruneStaleTagsCommand'\
+    \ => PruneStaleTagsCommand::class,\n# 'QueueClear' => QueueClearCommand::class,\n\
+    # 'QueueFailed' => ListFailedQueueCommand::class,\n# 'QueueFlush' => FlushFailedQueueCommand::class,\n\
+    # 'QueueForget' => ForgetFailedQueueCommand::class,\n# 'QueueListen' => QueueListenCommand::class,\n\
+    # 'QueueMonitor' => QueueMonitorCommand::class,\n# 'QueuePruneBatches' => QueuePruneBatchesCommand::class,\n\
+    # 'QueuePruneFailedJobs' => QueuePruneFailedJobsCommand::class,\n# 'QueueRestart'\
+    \ => QueueRestartCommand::class,\n# 'QueueRetry' => QueueRetryCommand::class,\n\
+    # 'QueueRetryBatch' => QueueRetryBatchCommand::class,\n# 'QueueWork' => QueueWorkCommand::class,\n\
+    # 'RouteCache' => RouteCacheCommand::class,\n# 'RouteClear' => RouteClearCommand::class,\n\
+    # 'RouteList' => RouteListCommand::class,\n# 'SchemaDump' => DumpCommand::class,\n\
+    # 'Seed' => SeedCommand::class,\n# 'ScheduleFinish' => ScheduleFinishCommand::class,\n\
+    # 'ScheduleList' => ScheduleListCommand::class,\n# 'ScheduleRun' => ScheduleRunCommand::class,\n\
+    # 'ScheduleClearCache' => ScheduleClearCacheCommand::class,\n# 'ScheduleTest'\
+    \ => ScheduleTestCommand::class,\n# 'ScheduleWork' => ScheduleWorkCommand::class,\n\
+    # 'ScheduleInterrupt' => ScheduleInterruptCommand::class,\n# 'ShowModel' => ShowModelCommand::class,\n\
+    # 'StorageLink' => StorageLinkCommand::class,\n# 'StorageUnlink' => StorageUnlinkCommand::class,\n\
+    # 'Up' => UpCommand::class,\n# 'ViewCache' => ViewCacheCommand::class,\n# 'ViewClear'\
+    \ => ViewClearCommand::class,\n# ];\n# \n# /**\n# * The commands to be registered.\n\
+    # *\n# * @var array\n# */\n# protected $devCommands = [\n# 'ApiInstall' => ApiInstallCommand::class,\n\
+    # 'BroadcastingInstall' => BroadcastingInstallCommand::class,\n# 'CacheTable'\
+    \ => CacheTableCommand::class,\n# 'CastMake' => CastMakeCommand::class,\n# 'ChannelList'\
+    \ => ChannelListCommand::class,\n# 'ChannelMake' => ChannelMakeCommand::class,\n\
+    # 'ClassMake' => ClassMakeCommand::class,\n# 'ComponentMake' => ComponentMakeCommand::class,\n\
+    # 'ConfigPublish' => ConfigPublishCommand::class,\n# 'ConsoleMake' => ConsoleMakeCommand::class,\n\
+    # 'ControllerMake' => ControllerMakeCommand::class,\n# 'Docs' => DocsCommand::class,\n\
+    # 'EnumMake' => EnumMakeCommand::class,\n# 'EventGenerate' => EventGenerateCommand::class,\n\
+    # 'EventMake' => EventMakeCommand::class,\n# 'ExceptionMake' => ExceptionMakeCommand::class,\n\
+    # 'FactoryMake' => FactoryMakeCommand::class,\n# 'InterfaceMake' => InterfaceMakeCommand::class,\n\
+    # 'JobMake' => JobMakeCommand::class,\n# 'LangPublish' => LangPublishCommand::class,\n\
+    # 'ListenerMake' => ListenerMakeCommand::class,\n# 'MailMake' => MailMakeCommand::class,\n\
+    # 'MiddlewareMake' => MiddlewareMakeCommand::class,\n# 'ModelMake' => ModelMakeCommand::class,\n\
+    # 'NotificationMake' => NotificationMakeCommand::class,\n# 'NotificationTable'\
+    \ => NotificationTableCommand::class,\n# 'ObserverMake' => ObserverMakeCommand::class,\n\
+    # 'PolicyMake' => PolicyMakeCommand::class,\n# 'ProviderMake' => ProviderMakeCommand::class,\n\
+    # 'QueueFailedTable' => FailedTableCommand::class,\n# 'QueueTable' => TableCommand::class,\n\
+    # 'QueueBatchesTable' => BatchesTableCommand::class,\n# 'RequestMake' => RequestMakeCommand::class,\n\
+    # 'ResourceMake' => ResourceMakeCommand::class,\n# 'RuleMake' => RuleMakeCommand::class,\n\
+    # 'ScopeMake' => ScopeMakeCommand::class,\n# 'SeederMake' => SeederMakeCommand::class,\n\
+    # 'SessionTable' => SessionTableCommand::class,\n# 'Serve' => ServeCommand::class,\n\
+    # 'StubPublish' => StubPublishCommand::class,\n# 'TestMake' => TestMakeCommand::class,\n\
+    # 'TraitMake' => TraitMakeCommand::class,\n# 'VendorPublish' => VendorPublishCommand::class,\n\
+    # 'ViewMake' => ViewMakeCommand::class,\n# ];\n# \n# /**\n# * Register the service\
+    \ provider.\n# *\n# * @return void"
+- name: registerCommands
+  visibility: protected
+  parameters:
+  - name: commands
+  comment: '# * Register the given commands.
+
+    # *
+
+    # * @param  array  $commands
+
+    # * @return void'
+- name: registerAboutCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerCacheClearCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerCacheForgetCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerCacheTableCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerCastMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerChannelMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerClassMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerComponentMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerConfigCacheCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerConfigClearCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerConfigPublishCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerConsoleMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerControllerMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerEnumMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerEventMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerExceptionMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerFactoryMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerEventClearCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerInterfaceMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerJobMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerListenerMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerMailMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerMiddlewareMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerModelMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerNotificationMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerNotificationTableCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerObserverMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerPolicyMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerProviderMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerQueueForgetCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerQueueListenCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerQueueMonitorCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerQueuePruneBatchesCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerQueuePruneFailedJobsCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerQueueRestartCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerQueueWorkCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerQueueFailedTableCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerQueueTableCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerQueueBatchesTableCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerRequestMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerResourceMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerRuleMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerScopeMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerSeederMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerSessionTableCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerRouteCacheCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerRouteClearCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerRouteListCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerSeedCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerTestMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerTraitMakeCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerVendorPublishCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: registerViewClearCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Register the command.
+
+    # *
+
+    # * @return void'
+- name: provides
+  visibility: public
+  parameters: []
+  comment: '# * Get the services provided by the provider.
+
+    # *
+
+    # * @return array'
+traits:
+- Illuminate\Auth\Console\ClearResetsCommand
+- Illuminate\Cache\Console\CacheTableCommand
+- Illuminate\Cache\Console\PruneStaleTagsCommand
+- Illuminate\Console\Scheduling\ScheduleClearCacheCommand
+- Illuminate\Console\Scheduling\ScheduleFinishCommand
+- Illuminate\Console\Scheduling\ScheduleInterruptCommand
+- Illuminate\Console\Scheduling\ScheduleListCommand
+- Illuminate\Console\Scheduling\ScheduleRunCommand
+- Illuminate\Console\Scheduling\ScheduleTestCommand
+- Illuminate\Console\Scheduling\ScheduleWorkCommand
+- Illuminate\Console\Signals
+- Illuminate\Contracts\Support\DeferrableProvider
+- Illuminate\Database\Console\DbCommand
+- Illuminate\Database\Console\DumpCommand
+- Illuminate\Database\Console\Factories\FactoryMakeCommand
+- Illuminate\Database\Console\PruneCommand
+- Illuminate\Database\Console\Seeds\SeedCommand
+- Illuminate\Database\Console\Seeds\SeederMakeCommand
+- Illuminate\Database\Console\ShowCommand
+- Illuminate\Database\Console\ShowModelCommand
+- Illuminate\Database\Console\WipeCommand
+- Illuminate\Foundation\Console\AboutCommand
+- Illuminate\Foundation\Console\ApiInstallCommand
+- Illuminate\Foundation\Console\BroadcastingInstallCommand
+- Illuminate\Foundation\Console\CastMakeCommand
+- Illuminate\Foundation\Console\ChannelListCommand
+- Illuminate\Foundation\Console\ChannelMakeCommand
+- Illuminate\Foundation\Console\ClassMakeCommand
+- Illuminate\Foundation\Console\ClearCompiledCommand
+- Illuminate\Foundation\Console\ComponentMakeCommand
+- Illuminate\Foundation\Console\ConfigCacheCommand
+- Illuminate\Foundation\Console\ConfigClearCommand
+- Illuminate\Foundation\Console\ConfigPublishCommand
+- Illuminate\Foundation\Console\ConfigShowCommand
+- Illuminate\Foundation\Console\ConsoleMakeCommand
+- Illuminate\Foundation\Console\DocsCommand
+- Illuminate\Foundation\Console\DownCommand
+- Illuminate\Foundation\Console\EnumMakeCommand
+- Illuminate\Foundation\Console\EnvironmentCommand
+- Illuminate\Foundation\Console\EnvironmentDecryptCommand
+- Illuminate\Foundation\Console\EnvironmentEncryptCommand
+- Illuminate\Foundation\Console\EventCacheCommand
+- Illuminate\Foundation\Console\EventClearCommand
+- Illuminate\Foundation\Console\EventGenerateCommand
+- Illuminate\Foundation\Console\EventListCommand
+- Illuminate\Foundation\Console\EventMakeCommand
+- Illuminate\Foundation\Console\ExceptionMakeCommand
+- Illuminate\Foundation\Console\InterfaceMakeCommand
+- Illuminate\Foundation\Console\JobMakeCommand
+- Illuminate\Foundation\Console\KeyGenerateCommand
+- Illuminate\Foundation\Console\LangPublishCommand
+- Illuminate\Foundation\Console\ListenerMakeCommand
+- Illuminate\Foundation\Console\MailMakeCommand
+- Illuminate\Foundation\Console\ModelMakeCommand
+- Illuminate\Foundation\Console\NotificationMakeCommand
+- Illuminate\Foundation\Console\ObserverMakeCommand
+- Illuminate\Foundation\Console\OptimizeClearCommand
+- Illuminate\Foundation\Console\OptimizeCommand
+- Illuminate\Foundation\Console\PackageDiscoverCommand
+- Illuminate\Foundation\Console\PolicyMakeCommand
+- Illuminate\Foundation\Console\ProviderMakeCommand
+- Illuminate\Foundation\Console\RequestMakeCommand
+- Illuminate\Foundation\Console\ResourceMakeCommand
+- Illuminate\Foundation\Console\RouteCacheCommand
+- Illuminate\Foundation\Console\RouteClearCommand
+- Illuminate\Foundation\Console\RouteListCommand
+- Illuminate\Foundation\Console\RuleMakeCommand
+- Illuminate\Foundation\Console\ScopeMakeCommand
+- Illuminate\Foundation\Console\ServeCommand
+- Illuminate\Foundation\Console\StorageLinkCommand
+- Illuminate\Foundation\Console\StorageUnlinkCommand
+- Illuminate\Foundation\Console\StubPublishCommand
+- Illuminate\Foundation\Console\TestMakeCommand
+- Illuminate\Foundation\Console\TraitMakeCommand
+- Illuminate\Foundation\Console\UpCommand
+- Illuminate\Foundation\Console\VendorPublishCommand
+- Illuminate\Foundation\Console\ViewCacheCommand
+- Illuminate\Foundation\Console\ViewClearCommand
+- Illuminate\Foundation\Console\ViewMakeCommand
+- Illuminate\Notifications\Console\NotificationTableCommand
+- Illuminate\Queue\Console\BatchesTableCommand
+- Illuminate\Queue\Console\FailedTableCommand
+- Illuminate\Queue\Console\TableCommand
+- Illuminate\Routing\Console\ControllerMakeCommand
+- Illuminate\Routing\Console\MiddlewareMakeCommand
+- Illuminate\Session\Console\SessionTableCommand
+- Illuminate\Support\ServiceProvider
+interfaces:
+- DeferrableProvider

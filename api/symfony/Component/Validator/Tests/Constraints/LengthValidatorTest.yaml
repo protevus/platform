@@ -1,0 +1,148 @@
+name: LengthValidatorTest
+class_comment: null
+dependencies:
+- name: Length
+  type: class
+  source: Symfony\Component\Validator\Constraints\Length
+- name: LengthValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\LengthValidator
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+properties: []
+methods:
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testNullIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEmptyStringIsInvalid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExpectsStringCompatibleType
+  visibility: public
+  parameters: []
+  comment: null
+- name: getThreeOrLessCharacters
+  visibility: public
+  parameters: []
+  comment: null
+- name: getFourCharacters
+  visibility: public
+  parameters: []
+  comment: null
+- name: getFiveOrMoreCharacters
+  visibility: public
+  parameters: []
+  comment: null
+- name: getOneCharset
+  visibility: public
+  parameters: []
+  comment: null
+- name: getThreeCharactersWithWhitespaces
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidValuesMin
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider getFiveOrMoreCharacters'
+- name: testValidValuesMax
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider getThreeOrLessCharacters'
+- name: testValidValuesExact
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider getFourCharacters'
+- name: testValidNormalizedValues
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider getThreeCharactersWithWhitespaces'
+- name: testValidGraphemesValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidCodepointsValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidBytesValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidValuesMin
+  visibility: public
+  parameters:
+  - name: value
+  - name: valueLength
+  comment: '# * @dataProvider getThreeOrLessCharacters'
+- name: testInvalidValuesMinNamed
+  visibility: public
+  parameters:
+  - name: value
+  - name: valueLength
+  comment: '# * @dataProvider getThreeOrLessCharacters'
+- name: testInvalidValuesMax
+  visibility: public
+  parameters:
+  - name: value
+  - name: valueLength
+  comment: '# * @dataProvider getFiveOrMoreCharacters'
+- name: testInvalidValuesMaxNamed
+  visibility: public
+  parameters:
+  - name: value
+  - name: valueLength
+  comment: '# * @dataProvider getFiveOrMoreCharacters'
+- name: testInvalidValuesExactLessThanFour
+  visibility: public
+  parameters:
+  - name: value
+  - name: valueLength
+  comment: '# * @dataProvider getThreeOrLessCharacters'
+- name: testInvalidValuesExactLessThanFourNamed
+  visibility: public
+  parameters:
+  - name: value
+  - name: valueLength
+  comment: '# * @dataProvider getThreeOrLessCharacters'
+- name: testInvalidValuesExactMoreThanFour
+  visibility: public
+  parameters:
+  - name: value
+  - name: valueLength
+  comment: '# * @dataProvider getFiveOrMoreCharacters'
+- name: testOneCharset
+  visibility: public
+  parameters:
+  - name: value
+  - name: charset
+  - name: isValid
+  comment: '# * @dataProvider getOneCharset'
+- name: testInvalidValuesExactDefaultCountUnitWithGraphemeInput
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidValuesExactBytesCountUnitWithGraphemeInput
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\Length
+- Symfony\Component\Validator\Constraints\LengthValidator
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

@@ -1,0 +1,12 @@
+name: InvalidArgumentException
+class_comment: '# * Base InvalidArgumentException for the Form component.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- ExceptionInterface

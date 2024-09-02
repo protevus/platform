@@ -1,0 +1,53 @@
+name: OutputFormatterStyleStack
+class_comment: "# * @author Jean-Fran\xE7ois Simon <contact@jfsimon.fr>"
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Console\Exception\InvalidArgumentException
+- name: ResetInterface
+  type: class
+  source: Symfony\Contracts\Service\ResetInterface
+properties: []
+methods:
+- name: reset
+  visibility: public
+  parameters: []
+  comment: "# * @author Jean-Fran\xE7ois Simon <contact@jfsimon.fr>\n# */\n# class\
+    \ OutputFormatterStyleStack implements ResetInterface\n# {\n# /**\n# * @var OutputFormatterStyleInterface[]\n\
+    # */\n# private array $styles = [];\n# \n# private OutputFormatterStyleInterface\
+    \ $emptyStyle;\n# \n# public function __construct(?OutputFormatterStyleInterface\
+    \ $emptyStyle = null)\n# {\n# $this->emptyStyle = $emptyStyle ?? new OutputFormatterStyle();\n\
+    # $this->reset();\n# }\n# \n# /**\n# * Resets stack (ie. empty internal arrays)."
+- name: push
+  visibility: public
+  parameters:
+  - name: style
+  comment: '# * Pushes a style in the stack.'
+- name: pop
+  visibility: public
+  parameters:
+  - name: style
+    default: 'null'
+  comment: '# * Pops a style from the stack.
+
+    # *
+
+    # * @throws InvalidArgumentException When style tags incorrectly nested'
+- name: getCurrent
+  visibility: public
+  parameters: []
+  comment: '# * Computes current style with stacks top codes.'
+- name: setEmptyStyle
+  visibility: public
+  parameters:
+  - name: emptyStyle
+  comment: '# * @return $this'
+- name: getEmptyStyle
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Console\Exception\InvalidArgumentException
+- Symfony\Contracts\Service\ResetInterface
+interfaces:
+- ResetInterface

@@ -1,0 +1,15 @@
+name: DummyConstraint
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+properties: []
+methods:
+- name: validatedBy
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+interfaces: []

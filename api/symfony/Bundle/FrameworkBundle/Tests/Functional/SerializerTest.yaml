@@ -1,0 +1,82 @@
+name: SerializerTest
+class_comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>"
+dependencies:
+- name: TranslatableBackedEnum
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Fixtures\TranslatableBackedEnum
+- name: AppKernel
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Functional\app\AppKernel
+- name: CompilerPassInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+properties:
+- name: bars
+  visibility: public
+  comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# */\n# class SerializerTest\
+    \ extends AbstractWebTestCase\n# {\n# public function testDeserializeArrayOfObject()\n\
+    # {\n# static::bootKernel(['test_case' => 'Serializer']);\n# \n# $result = static::getContainer()->get('serializer.alias')->deserialize('{\"\
+    bars\": [{\"id\": 1}, {\"id\": 2}]}', Foo::class, 'json');\n# \n# $bar1 = new\
+    \ Bar();\n# $bar1->id = 1;\n# $bar2 = new Bar();\n# $bar2->id = 2;\n# \n# $expected\
+    \ = new Foo();\n# $expected->bars = [$bar1, $bar2];\n# \n# $this->assertEquals($expected,\
+    \ $result);\n# }\n# \n# public function testNormalizersAndEncodersUseDefaultContextConfigOption()\n\
+    # {\n# /** @var SerializerKernel $kernel */\n# $kernel = static::bootKernel(['test_case'\
+    \ => 'Serializer', 'root_config' => 'default_context.yaml']);\n# \n# foreach ($kernel->normalizersAndEncoders\
+    \ as $normalizerOrEncoderId) {\n# if (!static::getContainer()->has($normalizerOrEncoderId))\
+    \ {\n# continue;\n# }\n# \n# $normalizerOrEncoder = static::getContainer()->get($normalizerOrEncoderId);\n\
+    # \n# $reflectionObject = new \\ReflectionObject($normalizerOrEncoder);\n# $property\
+    \ = $reflectionObject->getProperty('defaultContext');\n# \n# $defaultContext =\
+    \ $property->getValue($normalizerOrEncoder);\n# \n# self::assertArrayHasKey('fake_context_option',\
+    \ $defaultContext);\n# self::assertEquals('foo', $defaultContext['fake_context_option']);\n\
+    # }\n# }\n# \n# protected static function getKernelClass(): string\n# {\n# return\
+    \ SerializerKernel::class;\n# }\n# }\n# \n# class SerializerKernel extends AppKernel\
+    \ implements CompilerPassInterface\n# {\n# public $normalizersAndEncoders = [\n\
+    # 'serializer.normalizer.property.alias', // Special case as this normalizer isn't\
+    \ tagged\n# ];\n# \n# public function process(ContainerBuilder $container): void\n\
+    # {\n# $services = array_merge(\n# $container->findTaggedServiceIds('serializer.normalizer'),\n\
+    # $container->findTaggedServiceIds('serializer.encoder')\n# );\n# foreach ($services\
+    \ as $serviceId => $attributes) {\n# $class = $container->getDefinition($serviceId)->getClass();\n\
+    # if (null === $reflectionConstructor = (new \\ReflectionClass($class))->getConstructor())\
+    \ {\n# continue;\n# }\n# foreach ($reflectionConstructor->getParameters() as $reflectionParam)\
+    \ {\n# if ('array $defaultContext' === $reflectionParam->getType()->getName().'\
+    \ $'.$reflectionParam->getName()) {\n# $this->normalizersAndEncoders[] = $serviceId.'.alias';\n\
+    # break;\n# }\n# }\n# }\n# }\n# \n# public function testSerializeTranslatableBackedEnum()\n\
+    # {\n# static::bootKernel(['test_case' => 'Serializer']);\n# \n# $serializer =\
+    \ static::getContainer()->get('serializer.alias');\n# \n# $this->assertEquals('GET',\
+    \ $serializer->serialize(TranslatableBackedEnum::Get, 'yaml'));\n# }\n# }\n# \n\
+    # class Foo\n# {\n# /**\n# * @var Bar[]"
+- name: id
+  visibility: public
+  comment: '# * @var int'
+methods:
+- name: testDeserializeArrayOfObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalizersAndEncodersUseDefaultContextConfigOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: getKernelClass
+  visibility: protected
+  parameters: []
+  comment: null
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: testSerializeTranslatableBackedEnum
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Bundle\FrameworkBundle\Tests\Fixtures\TranslatableBackedEnum
+- Symfony\Bundle\FrameworkBundle\Tests\Functional\app\AppKernel
+- Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+interfaces:
+- CompilerPassInterface

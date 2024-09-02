@@ -1,0 +1,43 @@
+name: TypeResolverTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: UnsupportedException
+  type: class
+  source: Symfony\Component\TypeInfo\Exception\UnsupportedException
+- name: Dummy
+  type: class
+  source: Symfony\Component\TypeInfo\Tests\Fixtures\Dummy
+- name: Type
+  type: class
+  source: Symfony\Component\TypeInfo\Type
+- name: TypeResolver
+  type: class
+  source: Symfony\Component\TypeInfo\TypeResolver\TypeResolver
+- name: TypeResolverInterface
+  type: class
+  source: Symfony\Component\TypeInfo\TypeResolver\TypeResolverInterface
+properties: []
+methods:
+- name: testResolve
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCannotFindResolver
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUseProperResolver
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\TypeInfo\Exception\UnsupportedException
+- Symfony\Component\TypeInfo\Tests\Fixtures\Dummy
+- Symfony\Component\TypeInfo\Type
+- Symfony\Component\TypeInfo\TypeResolver\TypeResolver
+- Symfony\Component\TypeInfo\TypeResolver\TypeResolverInterface
+interfaces: []

@@ -1,0 +1,66 @@
+name: DataAccessorInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getValue
+  visibility: public
+  parameters:
+  - name: viewData
+  - name: form
+  comment: '# * Writes and reads values to/from an object or array bound to a form.
+
+    # *
+
+    # * @author Yonel Ceruto <yonelceruto@gmail.com>
+
+    # */
+
+    # interface DataAccessorInterface
+
+    # {
+
+    # /**
+
+    # * Returns the value at the end of the property of the object graph.
+
+    # *
+
+    # * @throws Exception\AccessException If unable to read from the given form data'
+- name: setValue
+  visibility: public
+  parameters:
+  - name: '&$viewData'
+  - name: value
+  - name: form
+  comment: '# * Sets the value at the end of the property of the object graph.
+
+    # *
+
+    # * @throws Exception\AccessException If unable to write the given value'
+- name: isReadable
+  visibility: public
+  parameters:
+  - name: viewData
+  - name: form
+  comment: '# * Returns whether a value can be read from an object graph.
+
+    # *
+
+    # * Whenever this method returns true, {@link getValue()} is guaranteed not
+
+    # * to throw an exception when called with the same arguments.'
+- name: isWritable
+  visibility: public
+  parameters:
+  - name: viewData
+  - name: form
+  comment: '# * Returns whether a value can be written at a given object graph.
+
+    # *
+
+    # * Whenever this method returns true, {@link setValue()} is guaranteed not
+
+    # * to throw an exception when called with the same arguments.'
+traits: []
+interfaces: []

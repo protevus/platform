@@ -1,0 +1,28 @@
+name: SharedLockInterface
+class_comment: null
+dependencies:
+- name: LockAcquiringException
+  type: class
+  source: Symfony\Component\Lock\Exception\LockAcquiringException
+- name: LockConflictedException
+  type: class
+  source: Symfony\Component\Lock\Exception\LockConflictedException
+properties: []
+methods:
+- name: acquireRead
+  visibility: public
+  parameters:
+  - name: blocking
+    default: 'false'
+  comment: "# * SharedLockInterface defines an interface to manipulate the status\
+    \ of a shared lock.\n# *\n# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n\
+    # */\n# interface SharedLockInterface extends LockInterface\n# {\n# /**\n# * Acquires\
+    \ the lock for reading. If the lock is acquired by someone else in write mode,\
+    \ the parameter `blocking`\n# * determines whether or not the call should block\
+    \ until the release of the lock.\n# *\n# * @throws LockConflictedException If\
+    \ the lock is acquired by someone else in blocking mode\n# * @throws LockAcquiringException\
+    \  If the lock cannot be acquired"
+traits:
+- Symfony\Component\Lock\Exception\LockAcquiringException
+- Symfony\Component\Lock\Exception\LockConflictedException
+interfaces: []

@@ -1,0 +1,13 @@
+name: AbstractTrait
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: abstract
+  visibility: public
+  parameters:
+  - name: abstract
+    default: 'true'
+  comment: null
+traits: []
+interfaces: []

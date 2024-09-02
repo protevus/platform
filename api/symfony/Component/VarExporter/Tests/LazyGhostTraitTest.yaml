@@ -1,0 +1,160 @@
+name: LazyGhostTraitTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ClassMetadataFactory
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory
+- name: AttributeLoader
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Loader\AttributeLoader
+- name: ObjectNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+- name: ProxyHelper
+  type: class
+  source: Symfony\Component\VarExporter\ProxyHelper
+- name: ChildMagicClass
+  type: class
+  source: Symfony\Component\VarExporter\Tests\Fixtures\LazyGhost\ChildMagicClass
+- name: ChildStdClass
+  type: class
+  source: Symfony\Component\VarExporter\Tests\Fixtures\LazyGhost\ChildStdClass
+- name: ChildTestClass
+  type: class
+  source: Symfony\Component\VarExporter\Tests\Fixtures\LazyGhost\ChildTestClass
+- name: ClassWithUninitializedObjectProperty
+  type: class
+  source: Symfony\Component\VarExporter\Tests\Fixtures\LazyGhost\ClassWithUninitializedObjectProperty
+- name: LazyClass
+  type: class
+  source: Symfony\Component\VarExporter\Tests\Fixtures\LazyGhost\LazyClass
+- name: MagicClass
+  type: class
+  source: Symfony\Component\VarExporter\Tests\Fixtures\LazyGhost\MagicClass
+- name: ReadOnlyClass
+  type: class
+  source: Symfony\Component\VarExporter\Tests\Fixtures\LazyGhost\ReadOnlyClass
+- name: TestClass
+  type: class
+  source: Symfony\Component\VarExporter\Tests\Fixtures\LazyGhost\TestClass
+- name: SimpleObject
+  type: class
+  source: Symfony\Component\VarExporter\Tests\Fixtures\SimpleObject
+properties: []
+methods:
+- name: testGetPublic
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPrivate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIssetPublic
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnsetPublic
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetPublic
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetPrivate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClone
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSerialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMagicClass
+  visibility: public
+  parameters:
+  - name: instance
+  comment: '# * @dataProvider provideMagicClass'
+- name: provideMagicClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResetLazyGhost
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFullInitialization
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetStdClassProperty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLazyClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReflectionPropertyGetValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIndirectModification
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReadOnlyClass
+  visibility: public
+  parameters: []
+  comment: '# * @requires PHP 8.3'
+- name: testAccessingUninializedPropertyWithoutLazyGhost
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAccessingUninializedPropertyWithLazyGhost
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalization
+  visibility: public
+  parameters: []
+  comment: null
+- name: createLazyGhost
+  visibility: private
+  parameters:
+  - name: class
+  - name: initializer
+  - name: skippedProperties
+    default: 'null'
+  comment: '# * @template T
+
+    # *
+
+    # * @param class-string<T> $class
+
+    # *
+
+    # * @return T'
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory
+- Symfony\Component\Serializer\Mapping\Loader\AttributeLoader
+- Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+- Symfony\Component\VarExporter\ProxyHelper
+- Symfony\Component\VarExporter\Tests\Fixtures\LazyGhost\ChildMagicClass
+- Symfony\Component\VarExporter\Tests\Fixtures\LazyGhost\ChildStdClass
+- Symfony\Component\VarExporter\Tests\Fixtures\LazyGhost\ChildTestClass
+- Symfony\Component\VarExporter\Tests\Fixtures\LazyGhost\ClassWithUninitializedObjectProperty
+- Symfony\Component\VarExporter\Tests\Fixtures\LazyGhost\LazyClass
+- Symfony\Component\VarExporter\Tests\Fixtures\LazyGhost\MagicClass
+- Symfony\Component\VarExporter\Tests\Fixtures\LazyGhost\ReadOnlyClass
+- Symfony\Component\VarExporter\Tests\Fixtures\LazyGhost\TestClass
+- Symfony\Component\VarExporter\Tests\Fixtures\SimpleObject
+interfaces: []

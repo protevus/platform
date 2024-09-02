@@ -1,0 +1,29 @@
+name: SubmitButtonBuilder
+class_comment: '# * A builder for {@link SubmitButton} instances.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies: []
+properties: []
+methods:
+- name: getForm
+  visibility: public
+  parameters: []
+  comment: '# * A builder for {@link SubmitButton} instances.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # class SubmitButtonBuilder extends ButtonBuilder
+
+    # {
+
+    # /**
+
+    # * Creates the button.'
+traits: []
+interfaces: []

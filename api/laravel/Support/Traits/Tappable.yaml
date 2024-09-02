@@ -1,0 +1,19 @@
+name: Tappable
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: tap
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Call the given Closure with this instance then return the instance.
+
+    # *
+
+    # * @param  (callable($this): mixed)|null  $callback
+
+    # * @return ($callback is null ? \Illuminate\Support\HigherOrderTapProxy : $this)'
+traits: []
+interfaces: []

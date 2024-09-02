@@ -1,0 +1,65 @@
+name: Email
+class_comment: null
+dependencies:
+- name: StrictEmailValidator
+  type: class
+  source: Egulias\EmailValidator\EmailValidator
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Validator\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\Validator\Exception\LogicException
+properties:
+- name: normalizer
+  visibility: public
+  comment: "# * Validates that a value is a valid email address.\n# *\n# * @author\
+    \ Bernhard Schussek <bschussek@gmail.com>\n# */\n# #[\\Attribute(\\Attribute::TARGET_PROPERTY\
+    \ | \\Attribute::TARGET_METHOD | \\Attribute::IS_REPEATABLE)]\n# class Email extends\
+    \ Constraint\n# {\n# public const VALIDATION_MODE_HTML5_ALLOW_NO_TLD = 'html5-allow-no-tld';\n\
+    # public const VALIDATION_MODE_HTML5 = 'html5';\n# public const VALIDATION_MODE_STRICT\
+    \ = 'strict';\n# \n# public const INVALID_FORMAT_ERROR = 'bd79c0ab-ddba-46cc-a703-a7a4b08de310';\n\
+    # \n# public const VALIDATION_MODES = [\n# self::VALIDATION_MODE_HTML5_ALLOW_NO_TLD,\n\
+    # self::VALIDATION_MODE_HTML5,\n# self::VALIDATION_MODE_STRICT,\n# ];\n# \n# protected\
+    \ const ERROR_NAMES = [\n# self::INVALID_FORMAT_ERROR => 'INVALID_FORMAT_ERROR',\n\
+    # ];\n# \n# public string $message = 'This value is not a valid email address.';\n\
+    # public ?string $mode = null;\n# /** @var callable|null"
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: options
+    default: 'null'
+  - name: message
+    default: 'null'
+  - name: mode
+    default: 'null'
+  - name: normalizer
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  comment: "# * Validates that a value is a valid email address.\n# *\n# * @author\
+    \ Bernhard Schussek <bschussek@gmail.com>\n# */\n# #[\\Attribute(\\Attribute::TARGET_PROPERTY\
+    \ | \\Attribute::TARGET_METHOD | \\Attribute::IS_REPEATABLE)]\n# class Email extends\
+    \ Constraint\n# {\n# public const VALIDATION_MODE_HTML5_ALLOW_NO_TLD = 'html5-allow-no-tld';\n\
+    # public const VALIDATION_MODE_HTML5 = 'html5';\n# public const VALIDATION_MODE_STRICT\
+    \ = 'strict';\n# \n# public const INVALID_FORMAT_ERROR = 'bd79c0ab-ddba-46cc-a703-a7a4b08de310';\n\
+    # \n# public const VALIDATION_MODES = [\n# self::VALIDATION_MODE_HTML5_ALLOW_NO_TLD,\n\
+    # self::VALIDATION_MODE_HTML5,\n# self::VALIDATION_MODE_STRICT,\n# ];\n# \n# protected\
+    \ const ERROR_NAMES = [\n# self::INVALID_FORMAT_ERROR => 'INVALID_FORMAT_ERROR',\n\
+    # ];\n# \n# public string $message = 'This value is not a valid email address.';\n\
+    # public ?string $mode = null;\n# /** @var callable|null */\n# public $normalizer;\n\
+    # \n# /**\n# * @param array<string,mixed>|null     $options\n# * @param self::VALIDATION_MODE_*|null\
+    \ $mode    The pattern used to validate the email address; pass null to use the\
+    \ default mode configured for the EmailValidator\n# * @param string[]|null   \
+    \             $groups"
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Exception\InvalidArgumentException
+- Symfony\Component\Validator\Exception\LogicException
+interfaces: []

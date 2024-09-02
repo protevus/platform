@@ -1,0 +1,34 @@
+name: TrimmedBufferOutput
+class_comment: "# * A BufferedOutput that keeps only the last N chars.\n# *\n# * @author\
+  \ J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>"
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Console\Exception\InvalidArgumentException
+- name: OutputFormatterInterface
+  type: class
+  source: Symfony\Component\Console\Formatter\OutputFormatterInterface
+properties: []
+methods:
+- name: fetch
+  visibility: public
+  parameters: []
+  comment: "# * A BufferedOutput that keeps only the last N chars.\n# *\n# * @author\
+    \ J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n# */\n# class TrimmedBufferOutput\
+    \ extends Output\n# {\n# private int $maxLength;\n# private string $buffer = '';\n\
+    # \n# public function __construct(int $maxLength, ?int $verbosity = self::VERBOSITY_NORMAL,\
+    \ bool $decorated = false, ?OutputFormatterInterface $formatter = null)\n# {\n\
+    # if ($maxLength <= 0) {\n# throw new InvalidArgumentException(\\sprintf('\"%s()\"\
+    \ expects a strictly positive maxLength. Got %d.', __METHOD__, $maxLength));\n\
+    # }\n# \n# parent::__construct($verbosity, $decorated, $formatter);\n# $this->maxLength\
+    \ = $maxLength;\n# }\n# \n# /**\n# * Empties buffer and returns its content."
+- name: doWrite
+  visibility: protected
+  parameters:
+  - name: message
+  - name: newline
+  comment: null
+traits:
+- Symfony\Component\Console\Exception\InvalidArgumentException
+- Symfony\Component\Console\Formatter\OutputFormatterInterface
+interfaces: []

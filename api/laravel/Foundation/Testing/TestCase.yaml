@@ -1,0 +1,63 @@
+name: TestCase
+class_comment: null
+dependencies:
+- name: Kernel
+  type: class
+  source: Illuminate\Contracts\Console\Kernel
+- name: Application
+  type: class
+  source: Illuminate\Foundation\Application
+- name: BaseTestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+properties: []
+methods:
+- name: createApplication
+  visibility: public
+  parameters: []
+  comment: '# * Creates the application.
+
+    # *
+
+    # * @return \Illuminate\Foundation\Application'
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: '# * Setup the test environment.
+
+    # *
+
+    # * @return void'
+- name: refreshApplication
+  visibility: protected
+  parameters: []
+  comment: '# * Refresh the application instance.
+
+    # *
+
+    # * @return void'
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: '# * Clean up the testing environment before the next test.
+
+    # *
+
+    # * @return void
+
+    # *
+
+    # * @throws \Mockery\Exception\InvalidCountException'
+- name: tearDownAfterClass
+  visibility: public
+  parameters: []
+  comment: '# * Clean up the testing environment before the next test case.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Contracts\Console\Kernel
+- Illuminate\Foundation\Application
+- Concerns\InteractsWithContainer
+interfaces: []

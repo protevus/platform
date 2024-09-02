@@ -1,0 +1,154 @@
+name: FormDataExtractorTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: CallbackTransformer
+  type: class
+  source: Symfony\Component\Form\CallbackTransformer
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+- name: DataMapper
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataMapper\DataMapper
+- name: HiddenType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\HiddenType
+- name: FormDataExtractor
+  type: class
+  source: Symfony\Component\Form\Extension\DataCollector\FormDataExtractor
+- name: FormBuilder
+  type: class
+  source: Symfony\Component\Form\FormBuilder
+- name: FormError
+  type: class
+  source: Symfony\Component\Form\FormError
+- name: FormFactory
+  type: class
+  source: Symfony\Component\Form\FormFactory
+- name: FormRegistry
+  type: class
+  source: Symfony\Component\Form\FormRegistry
+- name: FormView
+  type: class
+  source: Symfony\Component\Form\FormView
+- name: ResolvedFormType
+  type: class
+  source: Symfony\Component\Form\ResolvedFormType
+- name: ResolvedFormTypeFactory
+  type: class
+  source: Symfony\Component\Form\ResolvedFormTypeFactory
+- name: FixedDataTransformer
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\FixedDataTransformer
+- name: WordCount
+  type: class
+  source: Symfony\Component\Validator\Constraints\WordCount
+- name: ConstraintViolation
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolation
+- name: VarDumperTestTrait
+  type: class
+  source: Symfony\Component\VarDumper\Test\VarDumperTestTrait
+- name: VarDumperTestTrait
+  type: class
+  source: VarDumperTestTrait
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testExtractConfiguration
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtractConfigurationSortsPassedOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtractConfigurationSortsResolvedOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtractConfigurationBuildsIdRecursively
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtractDefaultData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtractDefaultDataStoresModelDataIfDifferent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtractDefaultDataStoresViewDataIfDifferent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtractSubmittedData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtractSubmittedDataStoresModelDataIfDifferent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtractSubmittedDataStoresViewDataIfDifferent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtractSubmittedDataStoresErrors
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtractSubmittedDataStoresErrorOrigin
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtractSubmittedDataStoresErrorCause
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtractSubmittedDataRemembersIfNonSynchronized
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtractViewVariables
+  visibility: public
+  parameters: []
+  comment: null
+- name: createBuilder
+  visibility: private
+  parameters:
+  - name: name
+  - name: options
+    default: '[]'
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\Form\CallbackTransformer
+- Symfony\Component\Form\Exception\TransformationFailedException
+- Symfony\Component\Form\Extension\Core\DataMapper\DataMapper
+- Symfony\Component\Form\Extension\Core\Type\HiddenType
+- Symfony\Component\Form\Extension\DataCollector\FormDataExtractor
+- Symfony\Component\Form\FormBuilder
+- Symfony\Component\Form\FormError
+- Symfony\Component\Form\FormFactory
+- Symfony\Component\Form\FormRegistry
+- Symfony\Component\Form\FormView
+- Symfony\Component\Form\ResolvedFormType
+- Symfony\Component\Form\ResolvedFormTypeFactory
+- Symfony\Component\Form\Tests\Fixtures\FixedDataTransformer
+- Symfony\Component\Validator\Constraints\WordCount
+- Symfony\Component\Validator\ConstraintViolation
+- Symfony\Component\VarDumper\Test\VarDumperTestTrait
+- VarDumperTestTrait
+interfaces: []

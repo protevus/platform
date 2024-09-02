@@ -1,0 +1,27 @@
+name: PhpBundleWriter
+class_comment: '# * Writes .php resource bundles.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: VarExporter
+  type: class
+  source: Symfony\Component\VarExporter\VarExporter
+properties: []
+methods:
+- name: write
+  visibility: public
+  parameters:
+  - name: path
+  - name: locale
+  - name: data
+  comment: null
+traits:
+- Symfony\Component\VarExporter\VarExporter
+interfaces:
+- BundleWriterInterface

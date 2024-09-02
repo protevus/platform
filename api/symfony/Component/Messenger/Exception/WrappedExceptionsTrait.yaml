@@ -1,0 +1,30 @@
+name: WrappedExceptionsTrait
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getWrappedExceptions
+  visibility: public
+  parameters:
+  - name: class
+    default: 'null'
+  - name: recursive
+    default: 'false'
+  comment: "# * @author Jeroen <https://github.com/Jeroeny>\n# *\n# * @internal\n\
+    # */\n# trait WrappedExceptionsTrait\n# {\n# private array $exceptions;\n# \n\
+    # /**\n# * @return \\Throwable[]"
+- name: getWrappedExceptionsRecursively
+  visibility: private
+  parameters:
+  - name: class
+  - name: recursive
+  - name: exceptions
+  comment: '# * @param class-string<\Throwable>|null $class
+
+    # * @param iterable<\Throwable>          $exceptions
+
+    # *
+
+    # * @return \Throwable[]'
+traits: []
+interfaces: []

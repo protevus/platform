@@ -1,0 +1,44 @@
+name: NullDumper
+class_comment: '# * Null dumper, negates any proxy code generation for any given service
+  definition.
+
+  # *
+
+  # * @author Marco Pivetta <ocramius@gmail.com>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+properties: []
+methods:
+- name: isProxyCandidate
+  visibility: public
+  parameters:
+  - name: definition
+  - name: '&$asGhostObject'
+    default: 'null'
+  - name: id
+    default: 'null'
+  comment: null
+- name: getProxyFactoryCode
+  visibility: public
+  parameters:
+  - name: definition
+  - name: id
+  - name: factoryCode
+  comment: null
+- name: getProxyCode
+  visibility: public
+  parameters:
+  - name: definition
+  - name: id
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Definition
+interfaces:
+- DumperInterface

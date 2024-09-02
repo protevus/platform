@@ -1,0 +1,382 @@
+name: RecursiveContextualValidator
+class_comment: '# * Recursive implementation of {@link ContextualValidatorInterface}.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: Composite
+  type: class
+  source: Symfony\Component\Validator\Constraints\Composite
+- name: Existence
+  type: class
+  source: Symfony\Component\Validator\Constraints\Existence
+- name: GroupSequence
+  type: class
+  source: Symfony\Component\Validator\Constraints\GroupSequence
+- name: Valid
+  type: class
+  source: Symfony\Component\Validator\Constraints\Valid
+- name: ConstraintValidatorFactoryInterface
+  type: class
+  source: Symfony\Component\Validator\ConstraintValidatorFactoryInterface
+- name: ConstraintViolationListInterface
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolationListInterface
+- name: ExecutionContext
+  type: class
+  source: Symfony\Component\Validator\Context\ExecutionContext
+- name: ExecutionContextInterface
+  type: class
+  source: Symfony\Component\Validator\Context\ExecutionContextInterface
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- name: NoSuchMetadataException
+  type: class
+  source: Symfony\Component\Validator\Exception\NoSuchMetadataException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Validator\Exception\RuntimeException
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+- name: UnsupportedMetadataException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnsupportedMetadataException
+- name: ValidatorException
+  type: class
+  source: Symfony\Component\Validator\Exception\ValidatorException
+- name: CascadingStrategy
+  type: class
+  source: Symfony\Component\Validator\Mapping\CascadingStrategy
+- name: ClassMetadataInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadataInterface
+- name: MetadataFactoryInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface
+- name: GenericMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\GenericMetadata
+- name: GetterMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\GetterMetadata
+- name: MetadataInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\MetadataInterface
+- name: PropertyMetadataInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\PropertyMetadataInterface
+- name: TraversalStrategy
+  type: class
+  source: Symfony\Component\Validator\Mapping\TraversalStrategy
+- name: ObjectInitializerInterface
+  type: class
+  source: Symfony\Component\Validator\ObjectInitializerInterface
+- name: PropertyPath
+  type: class
+  source: Symfony\Component\Validator\Util\PropertyPath
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: context
+  - name: metadataFactory
+  - name: validatorFactory
+  - name: objectInitializers
+    default: '[]'
+  - name: groupProviderLocator
+    default: 'null'
+  comment: "# * Recursive implementation of {@link ContextualValidatorInterface}.\n\
+    # *\n# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# class RecursiveContextualValidator\
+    \ implements ContextualValidatorInterface\n# {\n# private string $defaultPropertyPath;\n\
+    # private array $defaultGroups;\n# \n# /**\n# * Creates a validator for the given\
+    \ context.\n# *\n# * @param ObjectInitializerInterface[] $objectInitializers The\
+    \ object initializers"
+- name: atPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: null
+- name: validate
+  visibility: public
+  parameters:
+  - name: value
+  - name: constraints
+    default: 'null'
+  - name: groups
+    default: 'null'
+  comment: null
+- name: validateProperty
+  visibility: public
+  parameters:
+  - name: object
+  - name: propertyName
+  - name: groups
+    default: 'null'
+  comment: null
+- name: validatePropertyValue
+  visibility: public
+  parameters:
+  - name: objectOrClass
+  - name: propertyName
+  - name: value
+  - name: groups
+    default: 'null'
+  comment: null
+- name: getViolations
+  visibility: public
+  parameters: []
+  comment: null
+- name: normalizeGroups
+  visibility: protected
+  parameters:
+  - name: groups
+  comment: '# * Normalizes the given group or list of groups to an array.
+
+    # *
+
+    # * @param string|GroupSequence|array<string|GroupSequence> $groups The groups
+    to normalize
+
+    # *
+
+    # * @return array<string|GroupSequence>'
+- name: validateObject
+  visibility: private
+  parameters:
+  - name: object
+  - name: propertyPath
+  - name: groups
+  - name: traversalStrategy
+  - name: context
+  comment: '# * Validates an object against the constraints defined for its class.
+
+    # *
+
+    # * If no metadata is available for the class, but the class is an instance
+
+    # * of {@link \Traversable} and the selected traversal strategy allows
+
+    # * traversal, the object will be iterated and each nested object will be
+
+    # * validated instead.
+
+    # *
+
+    # * @throws NoSuchMetadataException      If the object has no associated metadata
+
+    # *                                      and does not implement {@link \Traversable}
+
+    # *                                      or if traversal is disabled via the
+
+    # *                                      $traversalStrategy argument
+
+    # * @throws UnsupportedMetadataException If the metadata returned by the
+
+    # *                                      metadata factory does not implement
+
+    # *                                      {@link ClassMetadataInterface}'
+- name: validateEachObjectIn
+  visibility: private
+  parameters:
+  - name: collection
+  - name: propertyPath
+  - name: groups
+  - name: context
+  comment: '# * Validates each object in a collection against the constraints defined
+
+    # * for their classes.
+
+    # *
+
+    # * Nested arrays are also iterated.'
+- name: validateClassNode
+  visibility: private
+  parameters:
+  - name: object
+  - name: cacheKey
+  - name: metadata
+  - name: propertyPath
+  - name: groups
+  - name: cascadedGroups
+  - name: traversalStrategy
+  - name: context
+  comment: '# * Validates a class node.
+
+    # *
+
+    # * A class node is a combination of an object with a {@link ClassMetadataInterface}
+
+    # * instance. Each class node (conceptually) has zero or more succeeding
+
+    # * property nodes:
+
+    # *
+
+    # *     (Article:class node)
+
+    # *                \
+
+    # *        ($title:property node)
+
+    # *
+
+    # * This method validates the passed objects against all constraints defined
+
+    # * at class level. It furthermore triggers the validation of each of the
+
+    # * class'' properties against the constraints for that property.
+
+    # *
+
+    # * If the selected traversal strategy allows traversal, the object is
+
+    # * iterated and each nested object is validated against its own constraints.
+
+    # * The object is not traversed if traversal is disabled in the class
+
+    # * metadata.
+
+    # *
+
+    # * If the passed groups contain the group "Default", the validator will
+
+    # * check whether the "Default" group has been replaced by a group sequence
+
+    # * in the class metadata. If this is the case, the group sequence is
+
+    # * validated instead.
+
+    # *
+
+    # * @throws UnsupportedMetadataException  If a property metadata does not
+
+    # *                                       implement {@link PropertyMetadataInterface}
+
+    # * @throws ConstraintDefinitionException If traversal was enabled but the
+
+    # *                                       object does not implement
+
+    # *                                       {@link \Traversable}
+
+    # *
+
+    # * @see TraversalStrategy'
+- name: validateGenericNode
+  visibility: private
+  parameters:
+  - name: value
+  - name: object
+  - name: cacheKey
+  - name: metadata
+  - name: propertyPath
+  - name: groups
+  - name: cascadedGroups
+  - name: traversalStrategy
+  - name: context
+  comment: '# * Validates a node that is not a class node.
+
+    # *
+
+    # * Currently, two such node types exist:
+
+    # *
+
+    # *  - property nodes, which consist of the value of an object''s
+
+    # *    property together with a {@link PropertyMetadataInterface} instance
+
+    # *  - generic nodes, which consist of a value and some arbitrary
+
+    # *    constraints defined in a {@link MetadataInterface} container
+
+    # *
+
+    # * In both cases, the value is validated against all constraints defined
+
+    # * in the passed metadata object. Then, if the value is an instance of
+
+    # * {@link \Traversable} and the selected traversal strategy permits it,
+
+    # * the value is traversed and each nested object validated against its own
+
+    # * constraints. If the value is an array, it is traversed regardless of
+
+    # * the given strategy.
+
+    # *
+
+    # * @see TraversalStrategy'
+- name: stepThroughGroupSequence
+  visibility: private
+  parameters:
+  - name: value
+  - name: object
+  - name: cacheKey
+  - name: metadata
+  - name: propertyPath
+  - name: traversalStrategy
+  - name: groupSequence
+  - name: cascadedGroup
+  - name: context
+  comment: '# * Sequentially validates a node''s value in each group of a group sequence.
+
+    # *
+
+    # * If any of the constraints generates a violation, subsequent groups in the
+
+    # * group sequence are skipped.'
+- name: validateInGroup
+  visibility: private
+  parameters:
+  - name: value
+  - name: cacheKey
+  - name: metadata
+  - name: group
+  - name: context
+  comment: '# * Validates a node''s value against all constraints in the given group.'
+- name: generateCacheKey
+  visibility: private
+  parameters:
+  - name: object
+  - name: dependsOnPropertyPath
+    default: 'false'
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Constraints\Composite
+- Symfony\Component\Validator\Constraints\Existence
+- Symfony\Component\Validator\Constraints\GroupSequence
+- Symfony\Component\Validator\Constraints\Valid
+- Symfony\Component\Validator\ConstraintValidatorFactoryInterface
+- Symfony\Component\Validator\ConstraintViolationListInterface
+- Symfony\Component\Validator\Context\ExecutionContext
+- Symfony\Component\Validator\Context\ExecutionContextInterface
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- Symfony\Component\Validator\Exception\NoSuchMetadataException
+- Symfony\Component\Validator\Exception\RuntimeException
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+- Symfony\Component\Validator\Exception\UnsupportedMetadataException
+- Symfony\Component\Validator\Exception\ValidatorException
+- Symfony\Component\Validator\Mapping\CascadingStrategy
+- Symfony\Component\Validator\Mapping\ClassMetadataInterface
+- Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface
+- Symfony\Component\Validator\Mapping\GenericMetadata
+- Symfony\Component\Validator\Mapping\GetterMetadata
+- Symfony\Component\Validator\Mapping\MetadataInterface
+- Symfony\Component\Validator\Mapping\PropertyMetadataInterface
+- Symfony\Component\Validator\Mapping\TraversalStrategy
+- Symfony\Component\Validator\ObjectInitializerInterface
+- Symfony\Component\Validator\Util\PropertyPath
+interfaces:
+- ContextualValidatorInterface

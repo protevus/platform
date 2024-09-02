@@ -1,0 +1,26 @@
+name: SetRequestForConsole
+class_comment: null
+dependencies:
+- name: Application
+  type: class
+  source: Illuminate\Contracts\Foundation\Application
+- name: Request
+  type: class
+  source: Illuminate\Http\Request
+properties: []
+methods:
+- name: bootstrap
+  visibility: public
+  parameters:
+  - name: app
+  comment: '# * Bootstrap the given application.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Foundation\Application  $app
+
+    # * @return void'
+traits:
+- Illuminate\Contracts\Foundation\Application
+- Illuminate\Http\Request
+interfaces: []

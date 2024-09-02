@@ -1,0 +1,11 @@
+name: request
+class_comment: null
+dependencies:
+- name: AddRequestFormatsListener
+  type: class
+  source: Symfony\Component\HttpKernel\EventListener\AddRequestFormatsListener
+properties: []
+methods: []
+traits:
+- Symfony\Component\HttpKernel\EventListener\AddRequestFormatsListener
+interfaces: []

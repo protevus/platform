@@ -1,0 +1,89 @@
+name: AuthServiceProvider
+class_comment: null
+dependencies:
+- name: Gate
+  type: class
+  source: Illuminate\Auth\Access\Gate
+- name: RequirePassword
+  type: class
+  source: Illuminate\Auth\Middleware\RequirePassword
+- name: GateContract
+  type: class
+  source: Illuminate\Contracts\Auth\Access\Gate
+- name: AuthenticatableContract
+  type: class
+  source: Illuminate\Contracts\Auth\Authenticatable
+- name: ResponseFactory
+  type: class
+  source: Illuminate\Contracts\Routing\ResponseFactory
+- name: UrlGenerator
+  type: class
+  source: Illuminate\Contracts\Routing\UrlGenerator
+- name: ServiceProvider
+  type: class
+  source: Illuminate\Support\ServiceProvider
+properties: []
+methods:
+- name: register
+  visibility: public
+  parameters: []
+  comment: '# * Register the service provider.
+
+    # *
+
+    # * @return void'
+- name: registerAuthenticator
+  visibility: protected
+  parameters: []
+  comment: '# * Register the authenticator services.
+
+    # *
+
+    # * @return void'
+- name: registerUserResolver
+  visibility: protected
+  parameters: []
+  comment: '# * Register a resolver for the authenticated user.
+
+    # *
+
+    # * @return void'
+- name: registerAccessGate
+  visibility: protected
+  parameters: []
+  comment: '# * Register the access gate service.
+
+    # *
+
+    # * @return void'
+- name: registerRequirePassword
+  visibility: protected
+  parameters: []
+  comment: '# * Register a resolver for the authenticated user.
+
+    # *
+
+    # * @return void'
+- name: registerRequestRebindHandler
+  visibility: protected
+  parameters: []
+  comment: '# * Handle the re-binding of the request binding.
+
+    # *
+
+    # * @return void'
+- name: registerEventRebindHandler
+  visibility: protected
+  parameters: []
+  comment: '# * Handle the re-binding of the event dispatcher binding.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Auth\Access\Gate
+- Illuminate\Auth\Middleware\RequirePassword
+- Illuminate\Contracts\Routing\ResponseFactory
+- Illuminate\Contracts\Routing\UrlGenerator
+- Illuminate\Support\ServiceProvider
+interfaces: []

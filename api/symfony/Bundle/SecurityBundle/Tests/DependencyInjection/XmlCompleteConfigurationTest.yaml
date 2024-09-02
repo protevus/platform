@@ -1,0 +1,32 @@
+name: XmlCompleteConfigurationTest
+class_comment: null
+dependencies:
+- name: FileLocator
+  type: class
+  source: Symfony\Component\Config\FileLocator
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: XmlFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\XmlFileLoader
+properties: []
+methods:
+- name: testFirewallPatterns
+  visibility: public
+  parameters: []
+  comment: null
+- name: getLoader
+  visibility: protected
+  parameters:
+  - name: container
+  comment: null
+- name: getFileExtension
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Config\FileLocator
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Loader\XmlFileLoader
+interfaces: []

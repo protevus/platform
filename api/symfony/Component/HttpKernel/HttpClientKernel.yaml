@@ -1,0 +1,73 @@
+name: HttpClientKernel
+class_comment: null
+dependencies:
+- name: HttpClient
+  type: class
+  source: Symfony\Component\HttpClient\HttpClient
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: ResponseHeaderBag
+  type: class
+  source: Symfony\Component\HttpFoundation\ResponseHeaderBag
+- name: AbstractPart
+  type: class
+  source: Symfony\Component\Mime\Part\AbstractPart
+- name: DataPart
+  type: class
+  source: Symfony\Component\Mime\Part\DataPart
+- name: FormDataPart
+  type: class
+  source: Symfony\Component\Mime\Part\Multipart\FormDataPart
+- name: TextPart
+  type: class
+  source: Symfony\Component\Mime\Part\TextPart
+- name: HttpClientInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\HttpClientInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: client
+    default: 'null'
+  comment: null
+- name: handle
+  visibility: public
+  parameters:
+  - name: request
+  - name: type
+    default: HttpKernelInterface::MAIN_REQUEST
+  - name: catch
+    default: 'true'
+  comment: null
+- name: computeCacheControlValue
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getBody
+  visibility: private
+  parameters:
+  - name: request
+  comment: null
+- name: getHeaders
+  visibility: private
+  parameters:
+  - name: request
+  comment: null
+traits:
+- Symfony\Component\HttpClient\HttpClient
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpFoundation\ResponseHeaderBag
+- Symfony\Component\Mime\Part\AbstractPart
+- Symfony\Component\Mime\Part\DataPart
+- Symfony\Component\Mime\Part\Multipart\FormDataPart
+- Symfony\Component\Mime\Part\TextPart
+- Symfony\Contracts\HttpClient\HttpClientInterface
+interfaces:
+- HttpKernelInterface

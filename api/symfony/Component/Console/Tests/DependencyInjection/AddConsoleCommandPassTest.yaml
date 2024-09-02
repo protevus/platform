@@ -1,0 +1,112 @@
+name: AddConsoleCommandPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: LazyCommand
+  type: class
+  source: Symfony\Component\Console\Command\LazyCommand
+- name: ContainerCommandLoader
+  type: class
+  source: Symfony\Component\Console\CommandLoader\ContainerCommandLoader
+- name: AddConsoleCommandPass
+  type: class
+  source: Symfony\Component\Console\DependencyInjection\AddConsoleCommandPass
+- name: ServiceClosureArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: PassConfig
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\PassConfig
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: TypedReference
+  type: class
+  source: Symfony\Component\DependencyInjection\TypedReference
+properties: []
+methods:
+- name: testProcess
+  visibility: public
+  parameters:
+  - name: public
+  comment: '# * @dataProvider visibilityProvider'
+- name: testProcessRegistersLazyCommands
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessFallsBackToDefaultName
+  visibility: public
+  parameters: []
+  comment: null
+- name: visibilityProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessFallsBackToDefaultDescription
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEscapesDefaultFromPhp
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessThrowAnExceptionIfTheServiceIsAbstract
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessThrowAnExceptionIfTheServiceIsNotASubclassOfCommand
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessPrivateServicesWithSameCommand
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessOnChildDefinitionWithClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessOnChildDefinitionWithParentClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessOnChildDefinitionWithoutClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Command\LazyCommand
+- Symfony\Component\Console\CommandLoader\ContainerCommandLoader
+- Symfony\Component\Console\DependencyInjection\AddConsoleCommandPass
+- Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\Compiler\PassConfig
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\DependencyInjection\TypedReference
+interfaces: []

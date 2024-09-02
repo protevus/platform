@@ -1,0 +1,255 @@
+name: EmailTest
+class_comment: null
+dependencies:
+- name: ExpectationFailedException
+  type: class
+  source: PHPUnit\Framework\ExpectationFailedException
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+- name: LogicException
+  type: class
+  source: Symfony\Component\Mime\Exception\LogicException
+- name: DataPart
+  type: class
+  source: Symfony\Component\Mime\Part\DataPart
+- name: File
+  type: class
+  source: Symfony\Component\Mime\Part\File
+- name: AlternativePart
+  type: class
+  source: Symfony\Component\Mime\Part\Multipart\AlternativePart
+- name: MixedPart
+  type: class
+  source: Symfony\Component\Mime\Part\Multipart\MixedPart
+- name: RelatedPart
+  type: class
+  source: Symfony\Component\Mime\Part\Multipart\RelatedPart
+- name: TextPart
+  type: class
+  source: Symfony\Component\Mime\Part\TextPart
+- name: EmailHeaderSame
+  type: class
+  source: Symfony\Component\Mime\Test\Constraint\EmailHeaderSame
+- name: PhpDocExtractor
+  type: class
+  source: Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor
+- name: JsonEncoder
+  type: class
+  source: Symfony\Component\Serializer\Encoder\JsonEncoder
+- name: ArrayDenormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ArrayDenormalizer
+- name: MimeMessageNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\MimeMessageNormalizer
+- name: ObjectNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+- name: PropertyNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\PropertyNormalizer
+- name: Serializer
+  type: class
+  source: Symfony\Component\Serializer\Serializer
+properties: []
+methods:
+- name: testSubject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReturnPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSender
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromWithNoAddress
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFrom
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReplyTo
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTo
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCc
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBcc
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPriority
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateBodyThrowsWhenEmptyBody
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetBody
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateBodyWithTextOnly
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateBodyWithHtmlOnly
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateBodyWithTextAndHtml
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateBodyWithTextAndHtmlNotUtf8
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateBodyWithTextContentAndAttachedFile
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateBodyWithHtmlContentAndAttachedFile
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateBodyWithHtmlContentAndInlineImageNotreferenced
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateBodyWithAttachedFileOnly
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateBodyWithInlineImageOnly
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateBodyWithEmbeddedImageOnly
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateBodyWithTextAndHtmlContentAndAttachedFile
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateBodyWithTextAndHtmlAndAttachedFileAndAttachedImageNotReferenced
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateBodyWithTextAndAttachedFileAndAttachedImageNotReferenced
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateBodyWithTextAndHtmlAndAttachedFileAndAttachedImageNotReferencedViaCid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateBodyWithTextAndHtmlAndAttachedFileAndAttachedImageReferencedViaCid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateBodyWithTextAndHtmlAndAttachedFileAndAttachedImageReferencedViaCidAndContentId
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateBodyWithHtmlAndInlinedImageTwiceReferencedViaCid
+  visibility: public
+  parameters: []
+  comment: null
+- name: generateSomeParts
+  visibility: private
+  parameters: []
+  comment: null
+- name: testAttachments
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSerialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSymfonySerialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMissingHeaderDoesNotThrowError
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHtmlBodyExpectStringOrResourceOrNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHtmlBodyAcceptedTypes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTextBodyExpectStringOrResourceOrNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTextBodyAcceptedTypes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBodyCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAttachmentBodyIsPartOfTheSerializationEmailPayloadWhenUsingAttachMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAttachmentBodyIsNotPartOfTheSerializationEmailPayloadWhenUsingAttachFromPathMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEmailsWithAttachmentsWhichAreAFileInstanceCanBeUnserialized
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\ExpectationFailedException
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Email
+- Symfony\Component\Mime\Exception\LogicException
+- Symfony\Component\Mime\Part\DataPart
+- Symfony\Component\Mime\Part\File
+- Symfony\Component\Mime\Part\Multipart\AlternativePart
+- Symfony\Component\Mime\Part\Multipart\MixedPart
+- Symfony\Component\Mime\Part\Multipart\RelatedPart
+- Symfony\Component\Mime\Part\TextPart
+- Symfony\Component\Mime\Test\Constraint\EmailHeaderSame
+- Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor
+- Symfony\Component\Serializer\Encoder\JsonEncoder
+- Symfony\Component\Serializer\Normalizer\ArrayDenormalizer
+- Symfony\Component\Serializer\Normalizer\MimeMessageNormalizer
+- Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+- Symfony\Component\Serializer\Normalizer\PropertyNormalizer
+- Symfony\Component\Serializer\Serializer
+interfaces: []

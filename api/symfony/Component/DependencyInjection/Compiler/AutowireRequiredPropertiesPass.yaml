@@ -1,0 +1,37 @@
+name: AutowireRequiredPropertiesPass
+class_comment: '# * Looks for definitions with autowiring enabled and registers their
+  corresponding "#[Required]" properties.
+
+  # *
+
+  # * @author Sebastien Morel (Plopix) <morel.seb@gmail.com>
+
+  # * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: TypedReference
+  type: class
+  source: Symfony\Component\DependencyInjection\TypedReference
+- name: Required
+  type: class
+  source: Symfony\Contracts\Service\Attribute\Required
+properties: []
+methods:
+- name: processValue
+  visibility: protected
+  parameters:
+  - name: value
+  - name: isRoot
+    default: 'false'
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\TypedReference
+- Symfony\Contracts\Service\Attribute\Required
+interfaces: []

@@ -1,0 +1,67 @@
+name: TraceableMessageBusTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: MessageBusInterface
+  type: class
+  source: Symfony\Component\Messenger\MessageBusInterface
+- name: DelayStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\DelayStamp
+- name: HandledStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\HandledStamp
+- name: AnEnvelopeStamp
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\AnEnvelopeStamp
+- name: DummyMessage
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\DummyMessage
+- name: TestTracesWithHandleTraitAction
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\TestTracesWithHandleTraitAction
+- name: TraceableMessageBus
+  type: class
+  source: Symfony\Component\Messenger\TraceableMessageBus
+properties: []
+methods:
+- name: testItTracesDispatch
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItTracesDispatchWhenHandleTraitIsUsed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItTracesDispatchWithEnvelope
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItCollectsStampsAddedDuringDispatch
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItTracesExceptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItTracesExceptionsWhenMessageBusIsFiredFromArrayCallback
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\MessageBusInterface
+- Symfony\Component\Messenger\Stamp\DelayStamp
+- Symfony\Component\Messenger\Stamp\HandledStamp
+- Symfony\Component\Messenger\Tests\Fixtures\AnEnvelopeStamp
+- Symfony\Component\Messenger\Tests\Fixtures\DummyMessage
+- Symfony\Component\Messenger\Tests\Fixtures\TestTracesWithHandleTraitAction
+- Symfony\Component\Messenger\TraceableMessageBus
+interfaces: []

@@ -1,0 +1,38 @@
+name: EmailTextBodyContains
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: PHPUnit\Framework\Constraint\Constraint
+- name: Message
+  type: class
+  source: Symfony\Component\Mime\Message
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: expectedText
+  comment: null
+- name: toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: matches
+  visibility: protected
+  parameters:
+  - name: message
+  comment: '# * @param RawMessage $message'
+- name: failureDescription
+  visibility: protected
+  parameters:
+  - name: message
+  comment: '# * @param RawMessage $message'
+traits:
+- PHPUnit\Framework\Constraint\Constraint
+- Symfony\Component\Mime\Message
+- Symfony\Component\Mime\RawMessage
+interfaces: []

@@ -1,0 +1,61 @@
+name: PhpBridgeSessionStorageTest
+class_comment: '# * Test class for PhpSessionStorage.
+
+  # *
+
+  # * @author Drak <drak@zikula.org>
+
+  # *
+
+  # * These tests require separate processes.
+
+  # *
+
+  # * @runTestsInSeparateProcesses
+
+  # *
+
+  # * @preserveGlobalState disabled'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AttributeBag
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag
+- name: PhpBridgeSessionStorage
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage
+properties:
+- name: initialSessionSaveHandler
+  visibility: private
+  comment: null
+- name: initialSessionSavePath
+  visibility: private
+  comment: null
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getStorage
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testPhpSession
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClear
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag
+- Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage
+interfaces: []

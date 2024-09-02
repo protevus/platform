@@ -1,0 +1,19 @@
+name: TestServiceMethodsSubscriberTrait
+class_comment: null
+dependencies:
+- name: SubscribedService
+  type: class
+  source: Symfony\Contracts\Service\Attribute\SubscribedService
+properties: []
+methods:
+- name: protectedFunction1
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testDefinition4
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Symfony\Contracts\Service\Attribute\SubscribedService
+interfaces: []

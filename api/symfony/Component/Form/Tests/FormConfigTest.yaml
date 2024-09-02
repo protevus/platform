@@ -1,0 +1,84 @@
+name: FormConfigTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: FormConfigBuilder
+  type: class
+  source: Symfony\Component\Form\FormConfigBuilder
+- name: NativeRequestHandler
+  type: class
+  source: Symfony\Component\Form\NativeRequestHandler
+properties: []
+methods:
+- name: testNameAcceptsOnlyNamesValidAsIdsInHtml4
+  visibility: public
+  parameters:
+  - name: name
+  - name: expectedException
+    default: 'null'
+  comment: "# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# class FormConfigTest\
+    \ extends TestCase\n# {\n# public static function getHtml4Ids()\n# {\n# return\
+    \ [\n# ['z0'],\n# ['A0'],\n# ['A9'],\n# ['Z0'],\n# ['#', 'Symfony\\Component\\\
+    Form\\Exception\\InvalidArgumentException'],\n# ['a#', 'Symfony\\Component\\Form\\\
+    Exception\\InvalidArgumentException'],\n# ['a$', 'Symfony\\Component\\Form\\Exception\\\
+    InvalidArgumentException'],\n# ['a%', 'Symfony\\Component\\Form\\Exception\\InvalidArgumentException'],\n\
+    # ['a ', 'Symfony\\Component\\Form\\Exception\\InvalidArgumentException'],\n#\
+    \ [\"a\\t\", 'Symfony\\Component\\Form\\Exception\\InvalidArgumentException'],\n\
+    # [\"a\\n\", 'Symfony\\Component\\Form\\Exception\\InvalidArgumentException'],\n\
+    # ['a-'],\n# ['a_'],\n# ['a:'],\n# // Periods are allowed by the HTML4 spec, but\
+    \ disallowed by us\n# // because they break the generated property paths\n# ['a.',\
+    \ 'Symfony\\Component\\Form\\Exception\\InvalidArgumentException'],\n# // Contrary\
+    \ to the HTML4 spec, we allow names starting with a\n# // number, otherwise naming\
+    \ fields by collection indices is not\n# // possible.\n# // For root forms, leading\
+    \ digits will be stripped from the\n# // \"id\" attribute to produce valid HTML4.\n\
+    # ['0'],\n# ['9'],\n# // Contrary to the HTML4 spec, we allow names starting with\
+    \ an\n# // underscore, since this is already a widely used practice in\n# // Symfony.\n\
+    # // For root forms, leading underscores will be stripped from the\n# // \"id\"\
+    \ attribute to produce valid HTML4.\n# ['_'],\n# // Integers are allowed\n# [0],\n\
+    # [123],\n# // NULL is allowed\n# [null],\n# ];\n# }\n# \n# /**\n# * @dataProvider\
+    \ getHtml4Ids"
+- name: testGetRequestHandlerCreatesNativeRequestHandlerIfNotSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetRequestHandlerReusesNativeRequestHandlerInstance
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetMethodAllowsGet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetMethodAllowsPost
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetMethodAllowsPut
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetMethodAllowsDelete
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetMethodAllowsPatch
+  visibility: public
+  parameters: []
+  comment: null
+- name: getConfigBuilder
+  visibility: private
+  parameters:
+  - name: name
+    default: '''name'''
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\Form\FormConfigBuilder
+- Symfony\Component\Form\NativeRequestHandler
+interfaces: []

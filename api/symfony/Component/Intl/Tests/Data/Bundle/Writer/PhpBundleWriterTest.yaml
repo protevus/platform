@@ -1,0 +1,33 @@
+name: PhpBundleWriterTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: PhpBundleWriter
+  type: class
+  source: Symfony\Component\Intl\Data\Bundle\Writer\PhpBundleWriter
+properties: []
+methods:
+- name: testWriteResourceBundle
+  visibility: public
+  parameters: []
+  comment: "# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# class PhpBundleWriterTest\
+    \ extends TestCase\n# {\n# private PhpBundleWriter $writer;\n# private string\
+    \ $directory;\n# private Filesystem $filesystem;\n# \n# protected function setUp():\
+    \ void\n# {\n# $this->writer = new PhpBundleWriter();\n# $this->directory = sys_get_temp_dir().'/PhpBundleWriterTest/'.mt_rand(1000,\
+    \ 9999);\n# $this->filesystem = new Filesystem();\n# \n# $this->filesystem->mkdir($this->directory);\n\
+    # }\n# \n# protected function tearDown(): void\n# {\n# $this->filesystem->remove($this->directory);\n\
+    # }\n# \n# public function testWrite()\n# {\n# $this->writer->write($this->directory,\
+    \ 'en', [\n# 'Entry1' => [\n# 'Array' => ['foo', 'bar'],\n# 'Integer' => 5,\n\
+    # 'Boolean' => false,\n# 'Float' => 1.23,\n# ],\n# 'Entry2' => 'String',\n# 'Traversable'\
+    \ => new \\ArrayIterator([\n# 'Foo' => 'Bar',\n# ]),\n# ]);\n# \n# $this->assertFileEquals(__DIR__.'/Fixtures/en.php',\
+    \ $this->directory.'/en.php');\n# }\n# \n# /**\n# * @requires extension intl"
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Filesystem\Filesystem
+- Symfony\Component\Intl\Data\Bundle\Writer\PhpBundleWriter
+interfaces: []

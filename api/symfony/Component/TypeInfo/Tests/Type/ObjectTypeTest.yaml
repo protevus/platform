@@ -1,0 +1,35 @@
+name: ObjectTypeTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ObjectType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\ObjectType
+- name: TypeIdentifier
+  type: class
+  source: Symfony\Component\TypeInfo\TypeIdentifier
+properties: []
+methods:
+- name: testToString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsNullable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetBaseType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsA
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\TypeInfo\Type\ObjectType
+- Symfony\Component\TypeInfo\TypeIdentifier
+interfaces: []

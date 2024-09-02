@@ -1,0 +1,77 @@
+name: FileBag
+class_comment: '# * FileBag is a container for uploaded files.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # * @author Bulat Shakirzyanov <mallluhuct@gmail.com>'
+dependencies:
+- name: UploadedFile
+  type: class
+  source: Symfony\Component\HttpFoundation\File\UploadedFile
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: parameters
+    default: '[]'
+  comment: "# * FileBag is a container for uploaded files.\n# *\n# * @author Fabien\
+    \ Potencier <fabien@symfony.com>\n# * @author Bulat Shakirzyanov <mallluhuct@gmail.com>\n\
+    # */\n# class FileBag extends ParameterBag\n# {\n# private const FILE_KEYS = ['error',\
+    \ 'full_path', 'name', 'size', 'tmp_name', 'type'];\n# \n# /**\n# * @param array|UploadedFile[]\
+    \ $parameters An array of HTTP files"
+- name: replace
+  visibility: public
+  parameters:
+  - name: files
+    default: '[]'
+  comment: null
+- name: set
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: null
+- name: add
+  visibility: public
+  parameters:
+  - name: files
+    default: '[]'
+  comment: null
+- name: convertFileInformation
+  visibility: protected
+  parameters:
+  - name: file
+  comment: '# * Converts uploaded files to UploadedFile instances.
+
+    # *
+
+    # * @return UploadedFile[]|UploadedFile|null'
+- name: fixPhpFilesArray
+  visibility: protected
+  parameters:
+  - name: data
+  comment: '# * Fixes a malformed PHP $_FILES array.
+
+    # *
+
+    # * PHP has a bug that the format of the $_FILES array differs, depending on
+
+    # * whether the uploaded file fields had normal field names or array-like
+
+    # * field names ("normal" vs. "parent[child]").
+
+    # *
+
+    # * This method fixes the array to look like the "normal" $_FILES array.
+
+    # *
+
+    # * It''s safe to pass an already converted array, in which case this method
+
+    # * just returns the original array unmodified.'
+traits:
+- Symfony\Component\HttpFoundation\File\UploadedFile
+interfaces: []

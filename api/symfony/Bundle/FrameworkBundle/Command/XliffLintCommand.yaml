@@ -1,0 +1,22 @@
+name: XliffLintCommand
+class_comment: null
+dependencies:
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: BaseLintCommand
+  type: class
+  source: Symfony\Component\Translation\Command\XliffLintCommand
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters: []
+  comment: null
+- name: configure
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Console\Attribute\AsCommand
+interfaces: []

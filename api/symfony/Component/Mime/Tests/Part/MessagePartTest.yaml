@@ -1,0 +1,43 @@
+name: MessagePartTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+- name: Headers
+  type: class
+  source: Symfony\Component\Mime\Header\Headers
+- name: ParameterizedHeader
+  type: class
+  source: Symfony\Component\Mime\Header\ParameterizedHeader
+- name: UnstructuredHeader
+  type: class
+  source: Symfony\Component\Mime\Header\UnstructuredHeader
+- name: MessagePart
+  type: class
+  source: Symfony\Component\Mime\Part\MessagePart
+properties: []
+methods:
+- name: testConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSerialize
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mime\Email
+- Symfony\Component\Mime\Header\Headers
+- Symfony\Component\Mime\Header\ParameterizedHeader
+- Symfony\Component\Mime\Header\UnstructuredHeader
+- Symfony\Component\Mime\Part\MessagePart
+interfaces: []

@@ -1,0 +1,11 @@
+name: rate_limiter
+class_comment: null
+dependencies:
+- name: RateLimiterFactory
+  type: class
+  source: Symfony\Component\RateLimiter\RateLimiterFactory
+properties: []
+methods: []
+traits:
+- Symfony\Component\RateLimiter\RateLimiterFactory
+interfaces: []

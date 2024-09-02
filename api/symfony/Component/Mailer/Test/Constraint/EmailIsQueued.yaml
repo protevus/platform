@@ -1,0 +1,29 @@
+name: EmailIsQueued
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: PHPUnit\Framework\Constraint\Constraint
+- name: MessageEvent
+  type: class
+  source: Symfony\Component\Mailer\Event\MessageEvent
+properties: []
+methods:
+- name: toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: matches
+  visibility: protected
+  parameters:
+  - name: event
+  comment: '# * @param MessageEvent $event'
+- name: failureDescription
+  visibility: protected
+  parameters:
+  - name: event
+  comment: '# * @param MessageEvent $event'
+traits:
+- PHPUnit\Framework\Constraint\Constraint
+- Symfony\Component\Mailer\Event\MessageEvent
+interfaces: []

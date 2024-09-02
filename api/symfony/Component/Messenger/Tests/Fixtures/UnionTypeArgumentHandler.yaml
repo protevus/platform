@@ -1,0 +1,12 @@
+name: UnionTypeArgumentHandler
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: message
+  comment: null
+traits: []
+interfaces: []

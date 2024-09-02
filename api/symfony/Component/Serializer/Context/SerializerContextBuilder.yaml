@@ -1,0 +1,34 @@
+name: SerializerContextBuilder
+class_comment: null
+dependencies:
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- name: Serializer
+  type: class
+  source: Symfony\Component\Serializer\Serializer
+- name: ContextBuilderTrait
+  type: class
+  source: ContextBuilderTrait
+properties: []
+methods:
+- name: withEmptyArrayAsObject
+  visibility: public
+  parameters:
+  - name: emptyArrayAsObject
+  comment: "# * A helper providing autocompletion for available Serializer options.\n\
+    # *\n# * @author Mathias Arlaud <mathias.arlaud@gmail.com>\n# */\n# final class\
+    \ SerializerContextBuilder implements ContextBuilderInterface\n# {\n# use ContextBuilderTrait;\n\
+    # \n# /**\n# * Configures whether an empty array should be transformed to an\n\
+    # * object (in JSON: {}) or to a list (in JSON: [])."
+- name: withCollectDenormalizationErrors
+  visibility: public
+  parameters:
+  - name: collectDenormalizationErrors
+  comment: null
+traits:
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- Symfony\Component\Serializer\Serializer
+- ContextBuilderTrait
+interfaces:
+- ContextBuilderInterface

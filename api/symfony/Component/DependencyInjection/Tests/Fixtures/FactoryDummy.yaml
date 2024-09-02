@@ -1,0 +1,27 @@
+name: FactoryDummy
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: createFactory
+  visibility: public
+  parameters: []
+  comment: null
+- name: create
+  visibility: public
+  parameters: []
+  comment: null
+- name: createBuiltin
+  visibility: public
+  parameters: []
+  comment: null
+- name: createSelf
+  visibility: public
+  parameters: []
+  comment: null
+- name: createParent
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

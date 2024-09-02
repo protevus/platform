@@ -1,0 +1,23 @@
+name: Image
+class_comment: '# * Image represents an HTML image (an HTML img tag).'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: node
+  - name: currentUri
+    default: 'null'
+  comment: null
+- name: getRawUri
+  visibility: protected
+  parameters: []
+  comment: null
+- name: setNode
+  visibility: protected
+  parameters:
+  - name: node
+  comment: null
+traits: []
+interfaces: []

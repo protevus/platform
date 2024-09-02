@@ -1,0 +1,55 @@
+name: SurrogateListenerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: ResponseEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ResponseEvent
+- name: SurrogateListener
+  type: class
+  source: Symfony\Component\HttpKernel\EventListener\SurrogateListener
+- name: Esi
+  type: class
+  source: Symfony\Component\HttpKernel\HttpCache\Esi
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+- name: KernelEvents
+  type: class
+  source: Symfony\Component\HttpKernel\KernelEvents
+properties: []
+methods:
+- name: testFilterDoesNothingForSubRequests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFilterWhenThereIsSomeEsiIncludes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFilterWhenThereIsNoEsiIncludes
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Event\ResponseEvent
+- Symfony\Component\HttpKernel\EventListener\SurrogateListener
+- Symfony\Component\HttpKernel\HttpCache\Esi
+- Symfony\Component\HttpKernel\HttpKernelInterface
+- Symfony\Component\HttpKernel\KernelEvents
+interfaces: []

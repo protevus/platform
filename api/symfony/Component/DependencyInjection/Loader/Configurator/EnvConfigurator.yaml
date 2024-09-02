@@ -1,0 +1,105 @@
+name: EnvConfigurator
+class_comment: null
+dependencies:
+- name: ParamConfigurator
+  type: class
+  source: Symfony\Component\Config\Loader\ParamConfigurator
+properties: []
+methods:
+- name: __call
+  visibility: public
+  parameters:
+  - name: name
+  - name: arguments
+  comment: "# * @var string[]\n# */\n# private array $stack;\n# \n# public function\
+    \ __construct(string $name)\n# {\n# $this->stack = explode(':', $name);\n# }\n\
+    # \n# public function __toString(): string\n# {\n# return '%env('.implode(':',\
+    \ $this->stack).')%';\n# }\n# \n# /**\n# * @return $this"
+- name: custom
+  visibility: public
+  parameters:
+  - name: processor
+  - name: '...$args'
+  comment: '# * @return $this'
+- name: base64
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: bool
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: not
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: const
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: csv
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: file
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: float
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: int
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: json
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: key
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * @return $this'
+- name: url
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: queryString
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: resolve
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: default
+  visibility: public
+  parameters:
+  - name: fallbackParam
+  comment: '# * @return $this'
+- name: string
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: trim
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: require
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: enum
+  visibility: public
+  parameters:
+  - name: backedEnumClassName
+  comment: '# * @param class-string<\BackedEnum> $backedEnumClassName
+
+    # *
+
+    # * @return $this'
+traits:
+- Symfony\Component\Config\Loader\ParamConfigurator
+interfaces: []

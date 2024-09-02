@@ -1,0 +1,285 @@
+name: AuthManager
+class_comment: '# * @mixin \Illuminate\Contracts\Auth\Guard
+
+  # * @mixin \Illuminate\Contracts\Auth\StatefulGuard'
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: FactoryContract
+  type: class
+  source: Illuminate\Contracts\Auth\Factory
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+- name: CreatesUserProviders
+  type: class
+  source: CreatesUserProviders
+properties:
+- name: app
+  visibility: protected
+  comment: "# * @mixin \\Illuminate\\Contracts\\Auth\\Guard\n# * @mixin \\Illuminate\\\
+    Contracts\\Auth\\StatefulGuard\n# */\n# class AuthManager implements FactoryContract\n\
+    # {\n# use CreatesUserProviders;\n# \n# /**\n# * The application instance.\n#\
+    \ *\n# * @var \\Illuminate\\Contracts\\Foundation\\Application"
+- name: customCreators
+  visibility: protected
+  comment: '# * The registered custom driver creators.
+
+    # *
+
+    # * @var array'
+- name: guards
+  visibility: protected
+  comment: '# * The array of created "drivers".
+
+    # *
+
+    # * @var array'
+- name: userResolver
+  visibility: protected
+  comment: '# * The user resolver shared by various services.
+
+    # *
+
+    # * Determines the default user for Gate, Request, and the Authenticatable contract.
+
+    # *
+
+    # * @var \Closure'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: app
+  comment: "# * @mixin \\Illuminate\\Contracts\\Auth\\Guard\n# * @mixin \\Illuminate\\\
+    Contracts\\Auth\\StatefulGuard\n# */\n# class AuthManager implements FactoryContract\n\
+    # {\n# use CreatesUserProviders;\n# \n# /**\n# * The application instance.\n#\
+    \ *\n# * @var \\Illuminate\\Contracts\\Foundation\\Application\n# */\n# protected\
+    \ $app;\n# \n# /**\n# * The registered custom driver creators.\n# *\n# * @var\
+    \ array\n# */\n# protected $customCreators = [];\n# \n# /**\n# * The array of\
+    \ created \"drivers\".\n# *\n# * @var array\n# */\n# protected $guards = [];\n\
+    # \n# /**\n# * The user resolver shared by various services.\n# *\n# * Determines\
+    \ the default user for Gate, Request, and the Authenticatable contract.\n# *\n\
+    # * @var \\Closure\n# */\n# protected $userResolver;\n# \n# /**\n# * Create a\
+    \ new Auth manager instance.\n# *\n# * @param  \\Illuminate\\Contracts\\Foundation\\\
+    Application  $app\n# * @return void"
+- name: guard
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Attempt to get the guard from the local cache.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @return \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard'
+- name: resolve
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Resolve the given guard.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: callCustomCreator
+  visibility: protected
+  parameters:
+  - name: name
+  - name: config
+  comment: '# * Call a custom driver creator.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  array  $config
+
+    # * @return mixed'
+- name: createSessionDriver
+  visibility: public
+  parameters:
+  - name: name
+  - name: config
+  comment: '# * Create a session based authentication guard.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Auth\SessionGuard'
+- name: createTokenDriver
+  visibility: public
+  parameters:
+  - name: name
+  - name: config
+  comment: '# * Create a token based authentication guard.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Auth\TokenGuard'
+- name: getConfig
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Get the guard configuration.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return array'
+- name: getDefaultDriver
+  visibility: public
+  parameters: []
+  comment: '# * Get the default authentication driver name.
+
+    # *
+
+    # * @return string'
+- name: shouldUse
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Set the default guard driver the factory should serve.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return void'
+- name: setDefaultDriver
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Set the default authentication driver name.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return void'
+- name: viaRequest
+  visibility: public
+  parameters:
+  - name: driver
+  - name: callback
+  comment: '# * Register a new callback based request guard.
+
+    # *
+
+    # * @param  string  $driver
+
+    # * @param  callable  $callback
+
+    # * @return $this'
+- name: userResolver
+  visibility: public
+  parameters: []
+  comment: '# * Get the user resolver callback.
+
+    # *
+
+    # * @return \Closure'
+- name: resolveUsersUsing
+  visibility: public
+  parameters:
+  - name: userResolver
+  comment: '# * Set the callback to be used to resolve users.
+
+    # *
+
+    # * @param  \Closure  $userResolver
+
+    # * @return $this'
+- name: extend
+  visibility: public
+  parameters:
+  - name: driver
+  - name: callback
+  comment: '# * Register a custom driver creator Closure.
+
+    # *
+
+    # * @param  string  $driver
+
+    # * @param  \Closure  $callback
+
+    # * @return $this'
+- name: provider
+  visibility: public
+  parameters:
+  - name: name
+  - name: callback
+  comment: '# * Register a custom provider creator Closure.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  \Closure  $callback
+
+    # * @return $this'
+- name: hasResolvedGuards
+  visibility: public
+  parameters: []
+  comment: '# * Determines if any guards have already been resolved.
+
+    # *
+
+    # * @return bool'
+- name: forgetGuards
+  visibility: public
+  parameters: []
+  comment: '# * Forget all of the resolved guard instances.
+
+    # *
+
+    # * @return $this'
+- name: setApplication
+  visibility: public
+  parameters:
+  - name: app
+  comment: '# * Set the application instance used by the manager.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Foundation\Application  $app
+
+    # * @return $this'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically call the default driver instance.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+traits:
+- Closure
+- InvalidArgumentException
+- CreatesUserProviders
+interfaces:
+- FactoryContract
+- a

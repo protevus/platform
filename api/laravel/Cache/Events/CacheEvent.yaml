@@ -1,0 +1,52 @@
+name: CacheEvent
+class_comment: null
+dependencies: []
+properties:
+- name: storeName
+  visibility: public
+  comment: '# * The name of the cache store.
+
+    # *
+
+    # * @var string|null'
+- name: key
+  visibility: public
+  comment: '# * The key of the event.
+
+    # *
+
+    # * @var string'
+- name: tags
+  visibility: public
+  comment: '# * The tags that were assigned to the key.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: storeName
+  - name: key
+  - name: tags
+    default: '[]'
+  comment: "# * The name of the cache store.\n# *\n# * @var string|null\n# */\n# public\
+    \ $storeName;\n# \n# /**\n# * The key of the event.\n# *\n# * @var string\n# */\n\
+    # public $key;\n# \n# /**\n# * The tags that were assigned to the key.\n# *\n\
+    # * @var array\n# */\n# public $tags;\n# \n# /**\n# * Create a new event instance.\n\
+    # *\n# * @param  string|null  $storeName\n# * @param  string  $key\n# * @param\
+    \  array  $tags\n# * @return void"
+- name: setTags
+  visibility: public
+  parameters:
+  - name: tags
+  comment: '# * Set the tags for the cache event.
+
+    # *
+
+    # * @param  array  $tags
+
+    # * @return $this'
+traits: []
+interfaces: []

@@ -1,0 +1,289 @@
+name: QueueManager
+class_comment: '# * @mixin \Illuminate\Contracts\Queue\Queue'
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: FactoryContract
+  type: class
+  source: Illuminate\Contracts\Queue\Factory
+- name: MonitorContract
+  type: class
+  source: Illuminate\Contracts\Queue\Monitor
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties:
+- name: app
+  visibility: protected
+  comment: '# * @mixin \Illuminate\Contracts\Queue\Queue
+
+    # */
+
+    # class QueueManager implements FactoryContract, MonitorContract
+
+    # {
+
+    # /**
+
+    # * The application instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Foundation\Application'
+- name: connections
+  visibility: protected
+  comment: '# * The array of resolved queue connections.
+
+    # *
+
+    # * @var array'
+- name: connectors
+  visibility: protected
+  comment: '# * The array of resolved queue connectors.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: app
+  comment: "# * @mixin \\Illuminate\\Contracts\\Queue\\Queue\n# */\n# class QueueManager\
+    \ implements FactoryContract, MonitorContract\n# {\n# /**\n# * The application\
+    \ instance.\n# *\n# * @var \\Illuminate\\Contracts\\Foundation\\Application\n\
+    # */\n# protected $app;\n# \n# /**\n# * The array of resolved queue connections.\n\
+    # *\n# * @var array\n# */\n# protected $connections = [];\n# \n# /**\n# * The\
+    \ array of resolved queue connectors.\n# *\n# * @var array\n# */\n# protected\
+    \ $connectors = [];\n# \n# /**\n# * Create a new queue manager instance.\n# *\n\
+    # * @param  \\Illuminate\\Contracts\\Foundation\\Application  $app\n# * @return\
+    \ void"
+- name: before
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register an event listener for the before job event.
+
+    # *
+
+    # * @param  mixed  $callback
+
+    # * @return void'
+- name: after
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register an event listener for the after job event.
+
+    # *
+
+    # * @param  mixed  $callback
+
+    # * @return void'
+- name: exceptionOccurred
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register an event listener for the exception occurred job event.
+
+    # *
+
+    # * @param  mixed  $callback
+
+    # * @return void'
+- name: looping
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register an event listener for the daemon queue loop.
+
+    # *
+
+    # * @param  mixed  $callback
+
+    # * @return void'
+- name: failing
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register an event listener for the failed job event.
+
+    # *
+
+    # * @param  mixed  $callback
+
+    # * @return void'
+- name: stopping
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register an event listener for the daemon queue stopping.
+
+    # *
+
+    # * @param  mixed  $callback
+
+    # * @return void'
+- name: connected
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Determine if the driver is connected.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @return bool'
+- name: connection
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Resolve a queue connection instance.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @return \Illuminate\Contracts\Queue\Queue'
+- name: resolve
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Resolve a queue connection.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return \Illuminate\Contracts\Queue\Queue
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: getConnector
+  visibility: protected
+  parameters:
+  - name: driver
+  comment: '# * Get the connector for a given driver.
+
+    # *
+
+    # * @param  string  $driver
+
+    # * @return \Illuminate\Queue\Connectors\ConnectorInterface
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: extend
+  visibility: public
+  parameters:
+  - name: driver
+  - name: resolver
+  comment: '# * Add a queue connection resolver.
+
+    # *
+
+    # * @param  string  $driver
+
+    # * @param  \Closure  $resolver
+
+    # * @return void'
+- name: addConnector
+  visibility: public
+  parameters:
+  - name: driver
+  - name: resolver
+  comment: '# * Add a queue connection resolver.
+
+    # *
+
+    # * @param  string  $driver
+
+    # * @param  \Closure  $resolver
+
+    # * @return void'
+- name: getConfig
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Get the queue connection configuration.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return array|null'
+- name: getDefaultDriver
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the default queue connection.
+
+    # *
+
+    # * @return string'
+- name: setDefaultDriver
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Set the name of the default queue connection.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return void'
+- name: getName
+  visibility: public
+  parameters:
+  - name: connection
+    default: 'null'
+  comment: '# * Get the full name for the given connection.
+
+    # *
+
+    # * @param  string|null  $connection
+
+    # * @return string'
+- name: getApplication
+  visibility: public
+  parameters: []
+  comment: '# * Get the application instance used by the manager.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Foundation\Application'
+- name: setApplication
+  visibility: public
+  parameters:
+  - name: app
+  comment: '# * Set the application instance used by the manager.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Foundation\Application  $app
+
+    # * @return $this'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically pass calls to the default connection.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+traits:
+- Closure
+- InvalidArgumentException
+interfaces:
+- FactoryContract

@@ -1,0 +1,27 @@
+name: SQLiteConnector
+class_comment: null
+dependencies:
+- name: SQLiteDatabaseDoesNotExistException
+  type: class
+  source: Illuminate\Database\SQLiteDatabaseDoesNotExistException
+properties: []
+methods:
+- name: connect
+  visibility: public
+  parameters:
+  - name: config
+  comment: '# * Establish a database connection.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return \PDO
+
+    # *
+
+    # * @throws \Illuminate\Database\SQLiteDatabaseDoesNotExistException'
+traits:
+- Illuminate\Database\SQLiteDatabaseDoesNotExistException
+interfaces:
+- ConnectorInterface

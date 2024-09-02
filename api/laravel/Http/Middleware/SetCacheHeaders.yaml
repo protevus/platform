@@ -1,0 +1,71 @@
+name: SetCacheHeaders
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Carbon
+  type: class
+  source: Illuminate\Support\Carbon
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: BinaryFileResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\BinaryFileResponse
+- name: StreamedResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\StreamedResponse
+properties: []
+methods:
+- name: using
+  visibility: public
+  parameters:
+  - name: options
+  comment: '# * Specify the options for the middleware.
+
+    # *
+
+    # * @param  array|string  $options
+
+    # * @return string'
+- name: handle
+  visibility: public
+  parameters:
+  - name: request
+  - name: next
+  - name: options
+    default: '[]'
+  comment: '# * Add cache related HTTP headers.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  \Closure  $next
+
+    # * @param  string|array  $options
+
+    # * @return \Symfony\Component\HttpFoundation\Response
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: parseOptions
+  visibility: protected
+  parameters:
+  - name: options
+  comment: '# * Parse the given header options.
+
+    # *
+
+    # * @param  string  $options
+
+    # * @return array'
+traits:
+- Closure
+- Illuminate\Support\Carbon
+- Illuminate\Support\Str
+- Symfony\Component\HttpFoundation\BinaryFileResponse
+- Symfony\Component\HttpFoundation\StreamedResponse
+interfaces: []

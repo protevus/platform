@@ -1,0 +1,62 @@
+name: CssSelectorConverter
+class_comment: '# * CssSelectorConverter is the main entry point of the component
+  and can convert CSS
+
+  # * selectors to XPath expressions.
+
+  # *
+
+  # * @author Christophe Coevoet <stof@notk.org>'
+dependencies:
+- name: ClassParser
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Shortcut\ClassParser
+- name: ElementParser
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Shortcut\ElementParser
+- name: EmptyStringParser
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Shortcut\EmptyStringParser
+- name: HashParser
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Shortcut\HashParser
+- name: HtmlExtension
+  type: class
+  source: Symfony\Component\CssSelector\XPath\Extension\HtmlExtension
+- name: Translator
+  type: class
+  source: Symfony\Component\CssSelector\XPath\Translator
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: html
+    default: 'true'
+  comment: "# * CssSelectorConverter is the main entry point of the component and\
+    \ can convert CSS\n# * selectors to XPath expressions.\n# *\n# * @author Christophe\
+    \ Coevoet <stof@notk.org>\n# */\n# class CssSelectorConverter\n# {\n# private\
+    \ Translator $translator;\n# private array $cache;\n# \n# private static array\
+    \ $xmlCache = [];\n# private static array $htmlCache = [];\n# \n# /**\n# * @param\
+    \ bool $html Whether HTML support should be enabled. Disable it for XML documents"
+- name: toXPath
+  visibility: public
+  parameters:
+  - name: cssExpr
+  - name: prefix
+    default: '''descendant-or-self::'''
+  comment: '# * Translates a CSS expression to its XPath equivalent.
+
+    # *
+
+    # * Optionally, a prefix can be added to the resulting XPath
+
+    # * expression with the $prefix parameter.'
+traits:
+- Symfony\Component\CssSelector\Parser\Shortcut\ClassParser
+- Symfony\Component\CssSelector\Parser\Shortcut\ElementParser
+- Symfony\Component\CssSelector\Parser\Shortcut\EmptyStringParser
+- Symfony\Component\CssSelector\Parser\Shortcut\HashParser
+- Symfony\Component\CssSelector\XPath\Extension\HtmlExtension
+- Symfony\Component\CssSelector\XPath\Translator
+interfaces: []

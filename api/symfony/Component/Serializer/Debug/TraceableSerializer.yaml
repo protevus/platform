@@ -1,0 +1,106 @@
+name: TraceableSerializer
+class_comment: '# * Collects some data about serialization.
+
+  # *
+
+  # * @author Mathias Arlaud <mathias.arlaud@gmail.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: SerializerDataCollector
+  type: class
+  source: Symfony\Component\Serializer\DataCollector\SerializerDataCollector
+- name: DecoderInterface
+  type: class
+  source: Symfony\Component\Serializer\Encoder\DecoderInterface
+- name: EncoderInterface
+  type: class
+  source: Symfony\Component\Serializer\Encoder\EncoderInterface
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- name: NormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\NormalizerInterface
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Serializer\SerializerInterface
+properties: []
+methods:
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: arguments
+  comment: "# * Collects some data about serialization.\n# *\n# * @author Mathias\
+    \ Arlaud <mathias.arlaud@gmail.com>\n# *\n# * @internal\n# */\n# class TraceableSerializer\
+    \ implements SerializerInterface, NormalizerInterface, DenormalizerInterface,\
+    \ EncoderInterface, DecoderInterface\n# {\n# public const DEBUG_TRACE_ID = 'debug_trace_id';\n\
+    # \n# public function __construct(\n# private SerializerInterface&NormalizerInterface&DenormalizerInterface&EncoderInterface&DecoderInterface\
+    \ $serializer,\n# private SerializerDataCollector $dataCollector,\n# ) {\n# }\n\
+    # \n# public function serialize(mixed $data, string $format, array $context =\
+    \ []): string\n# {\n# $context[self::DEBUG_TRACE_ID] = $traceId = bin2hex(random_bytes(4));\n\
+    # \n# $startTime = microtime(true);\n# $result = $this->serializer->serialize($data,\
+    \ $format, $context);\n# $time = microtime(true) - $startTime;\n# \n# $caller\
+    \ = $this->getCaller(__FUNCTION__, SerializerInterface::class);\n# \n# $this->dataCollector->collectSerialize($traceId,\
+    \ $data, $format, $context, $time, $caller);\n# \n# return $result;\n# }\n# \n\
+    # public function deserialize(mixed $data, string $type, string $format, array\
+    \ $context = []): mixed\n# {\n# $context[self::DEBUG_TRACE_ID] = $traceId = bin2hex(random_bytes(4));\n\
+    # \n# $startTime = microtime(true);\n# $result = $this->serializer->deserialize($data,\
+    \ $type, $format, $context);\n# $time = microtime(true) - $startTime;\n# \n# $caller\
+    \ = $this->getCaller(__FUNCTION__, SerializerInterface::class);\n# \n# $this->dataCollector->collectDeserialize($traceId,\
+    \ $data, $type, $format, $context, $time, $caller);\n# \n# return $result;\n#\
+    \ }\n# \n# public function normalize(mixed $object, ?string $format = null, array\
+    \ $context = []): array|string|int|float|bool|\\ArrayObject|null\n# {\n# $context[self::DEBUG_TRACE_ID]\
+    \ = $traceId = bin2hex(random_bytes(4));\n# \n# $startTime = microtime(true);\n\
+    # $result = $this->serializer->normalize($object, $format, $context);\n# $time\
+    \ = microtime(true) - $startTime;\n# \n# $caller = $this->getCaller(__FUNCTION__,\
+    \ NormalizerInterface::class);\n# \n# $this->dataCollector->collectNormalize($traceId,\
+    \ $object, $format, $context, $time, $caller);\n# \n# return $result;\n# }\n#\
+    \ \n# public function denormalize(mixed $data, string $type, ?string $format =\
+    \ null, array $context = []): mixed\n# {\n# $context[self::DEBUG_TRACE_ID] = $traceId\
+    \ = bin2hex(random_bytes(4));\n# \n# $startTime = microtime(true);\n# $result\
+    \ = $this->serializer->denormalize($data, $type, $format, $context);\n# $time\
+    \ = microtime(true) - $startTime;\n# \n# $caller = $this->getCaller(__FUNCTION__,\
+    \ DenormalizerInterface::class);\n# \n# $this->dataCollector->collectDenormalize($traceId,\
+    \ $data, $type, $format, $context, $time, $caller);\n# \n# return $result;\n#\
+    \ }\n# \n# public function encode(mixed $data, string $format, array $context\
+    \ = []): string\n# {\n# $context[self::DEBUG_TRACE_ID] = $traceId = bin2hex(random_bytes(4));\n\
+    # \n# $startTime = microtime(true);\n# $result = $this->serializer->encode($data,\
+    \ $format, $context);\n# $time = microtime(true) - $startTime;\n# \n# $caller\
+    \ = $this->getCaller(__FUNCTION__, EncoderInterface::class);\n# \n# $this->dataCollector->collectEncode($traceId,\
+    \ $data, $format, $context, $time, $caller);\n# \n# return $result;\n# }\n# \n\
+    # public function decode(string $data, string $format, array $context = []): mixed\n\
+    # {\n# $context[self::DEBUG_TRACE_ID] = $traceId = bin2hex(random_bytes(4));\n\
+    # \n# $startTime = microtime(true);\n# $result = $this->serializer->decode($data,\
+    \ $format, $context);\n# $time = microtime(true) - $startTime;\n# \n# $caller\
+    \ = $this->getCaller(__FUNCTION__, DecoderInterface::class);\n# \n# $this->dataCollector->collectDecode($traceId,\
+    \ $data, $format, $context, $time, $caller);\n# \n# return $result;\n# }\n# \n\
+    # public function getSupportedTypes(?string $format): array\n# {\n# return $this->serializer->getSupportedTypes($format);\n\
+    # }\n# \n# public function supportsNormalization(mixed $data, ?string $format\
+    \ = null, array $context = []): bool\n# {\n# return $this->serializer->supportsNormalization($data,\
+    \ $format, $context);\n# }\n# \n# public function supportsDenormalization(mixed\
+    \ $data, string $type, ?string $format = null, array $context = []): bool\n# {\n\
+    # return $this->serializer->supportsDenormalization($data, $type, $format, $context);\n\
+    # }\n# \n# public function supportsEncoding(string $format, array $context = []):\
+    \ bool\n# {\n# return $this->serializer->supportsEncoding($format, $context);\n\
+    # }\n# \n# public function supportsDecoding(string $format, array $context = []):\
+    \ bool\n# {\n# return $this->serializer->supportsDecoding($format, $context);\n\
+    # }\n# \n# /**\n# * Proxies all method calls to the original serializer."
+- name: getCaller
+  visibility: private
+  parameters:
+  - name: method
+  - name: interface
+  comment: null
+traits:
+- Symfony\Component\Serializer\DataCollector\SerializerDataCollector
+- Symfony\Component\Serializer\Encoder\DecoderInterface
+- Symfony\Component\Serializer\Encoder\EncoderInterface
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- Symfony\Component\Serializer\Normalizer\NormalizerInterface
+- Symfony\Component\Serializer\SerializerInterface
+interfaces:
+- SerializerInterface

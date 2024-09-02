@@ -1,0 +1,51 @@
+name: DecoratorServicePass
+class_comment: '# * Overwrites a service but keeps the overridden one.
+
+  # *
+
+  # * @author Christophe Coevoet <stof@notk.org>
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # * @author Diego Saint Esteben <diego@saintesteben.me>'
+dependencies:
+- name: Alias
+  type: class
+  source: Symfony\Component\DependencyInjection\Alias
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: ServiceNotFoundException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: processValue
+  visibility: protected
+  parameters:
+  - name: value
+  - name: isRoot
+    default: 'false'
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Alias
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+- Symfony\Component\DependencyInjection\Reference
+interfaces: []

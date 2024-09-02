@@ -1,0 +1,39 @@
+name: MailboxHeaderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: MailboxHeader
+  type: class
+  source: Symfony\Component\Mime\Header\MailboxHeader
+properties: []
+methods:
+- name: testConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddress
+  visibility: public
+  parameters: []
+  comment: null
+- name: testgetBodyAsString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUtf8CharsInLocalPart
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Header\MailboxHeader
+interfaces: []

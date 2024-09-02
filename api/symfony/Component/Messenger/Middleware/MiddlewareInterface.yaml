@@ -1,0 +1,31 @@
+name: MiddlewareInterface
+class_comment: null
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: ExceptionInterface
+  type: class
+  source: Symfony\Component\Messenger\Exception\ExceptionInterface
+properties: []
+methods:
+- name: handle
+  visibility: public
+  parameters:
+  - name: envelope
+  - name: stack
+  comment: '# * @author Samuel Roze <samuel.roze@gmail.com>
+
+    # */
+
+    # interface MiddlewareInterface
+
+    # {
+
+    # /**
+
+    # * @throws ExceptionInterface'
+traits:
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Exception\ExceptionInterface
+interfaces: []

@@ -1,0 +1,11 @@
+name: NegativeOrZero
+class_comment: null
+dependencies:
+- name: ZeroComparisonConstraintTrait
+  type: class
+  source: ZeroComparisonConstraintTrait
+properties: []
+methods: []
+traits:
+- ZeroComparisonConstraintTrait
+interfaces: []

@@ -1,0 +1,36 @@
+name: AsTaggedItem
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: index
+    default: 'null'
+  - name: priority
+    default: 'null'
+  comment: '# * An attribute to tell under which index and priority a service class
+    should be found in tagged iterators/locators.
+
+    # *
+
+    # * @author Nicolas Grekas <p@tchwork.com>
+
+    # */
+
+    # #[\Attribute(\Attribute::TARGET_CLASS)]
+
+    # class AsTaggedItem
+
+    # {
+
+    # /**
+
+    # * @param string|null $index    The property or method to use to index the item
+    in the locator
+
+    # * @param int|null    $priority The priority of the item; the higher the number,
+    the earlier the tagged service will be located in the locator'
+traits: []
+interfaces: []

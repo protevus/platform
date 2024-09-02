@@ -1,0 +1,109 @@
+name: MailerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: EventDispatcherInterface
+  type: class
+  source: Psr\EventDispatcher\EventDispatcherInterface
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: MailerEnvelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: MessageEvent
+  type: class
+  source: Symfony\Component\Mailer\Event\MessageEvent
+- name: LogicException
+  type: class
+  source: Symfony\Component\Mailer\Exception\LogicException
+- name: Mailer
+  type: class
+  source: Symfony\Component\Mailer\Mailer
+- name: SentMessage
+  type: class
+  source: Symfony\Component\Mailer\SentMessage
+- name: AbstractTransport
+  type: class
+  source: Symfony\Component\Mailer\Transport\AbstractTransport
+- name: NullTransport
+  type: class
+  source: Symfony\Component\Mailer\Transport\NullTransport
+- name: TransportInterface
+  type: class
+  source: Symfony\Component\Mailer\Transport\TransportInterface
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: MessageBusInterface
+  type: class
+  source: Symfony\Component\Messenger\MessageBusInterface
+- name: StampInterface
+  type: class
+  source: Symfony\Component\Messenger\Stamp\StampInterface
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+properties: []
+methods:
+- name: testSendingRawMessages
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendMessageToBus
+  visibility: public
+  parameters: []
+  comment: null
+- name: dispatch
+  visibility: public
+  parameters:
+  - name: message
+  - name: stamps
+    default: '[]'
+  comment: null
+- name: testRejectMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: dispatcher
+  - name: test
+  comment: null
+- name: doSend
+  visibility: protected
+  parameters:
+  - name: message
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Psr\EventDispatcher\EventDispatcherInterface
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\Mailer\Event\MessageEvent
+- Symfony\Component\Mailer\Exception\LogicException
+- Symfony\Component\Mailer\Mailer
+- Symfony\Component\Mailer\SentMessage
+- Symfony\Component\Mailer\Transport\AbstractTransport
+- Symfony\Component\Mailer\Transport\NullTransport
+- Symfony\Component\Mailer\Transport\TransportInterface
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\MessageBusInterface
+- Symfony\Component\Messenger\Stamp\StampInterface
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Email
+- Symfony\Component\Mime\RawMessage
+interfaces:
+- MessageBusInterface

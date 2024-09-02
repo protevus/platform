@@ -1,0 +1,50 @@
+name: GetAttrNode
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: Compiler
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Compiler
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: node
+  - name: attribute
+  - name: arguments
+  - name: type
+  comment: "# * @author Fabien Potencier <fabien@symfony.com>\n# *\n# * @internal\n\
+    # */\n# class GetAttrNode extends Node\n# {\n# public const PROPERTY_CALL = 1;\n\
+    # public const METHOD_CALL = 2;\n# public const ARRAY_CALL = 3;\n# \n# /**\n#\
+    \ * @param self::* $type"
+- name: compile
+  visibility: public
+  parameters:
+  - name: compiler
+  comment: null
+- name: evaluate
+  visibility: public
+  parameters:
+  - name: functions
+  - name: values
+  comment: null
+- name: isShortCircuited
+  visibility: private
+  parameters: []
+  comment: null
+- name: toArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: __unserialize
+  visibility: public
+  parameters:
+  - name: data
+  comment: '# * Provides BC with instances serialized before v6.2.'
+traits:
+- Symfony\Component\ExpressionLanguage\Compiler
+interfaces: []

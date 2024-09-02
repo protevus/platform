@@ -1,0 +1,39 @@
+name: SubmitTypeTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: SubmitButton
+  type: class
+  source: Symfony\Component\Form\SubmitButton
+properties: []
+methods:
+- name: testCreateSubmitButtonInstances
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotClickedByDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotClickedIfSubmittedWithNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClickedIfSubmittedWithEmptyString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClickedIfSubmittedWithUnemptyString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitCanBeAddedToForm
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFormNoValidate
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\SubmitButton
+interfaces: []

@@ -1,0 +1,331 @@
+name: MorphTo
+class_comment: '# * @template TRelatedModel of \Illuminate\Database\Eloquent\Model
+
+  # * @template TDeclaringModel of \Illuminate\Database\Eloquent\Model
+
+  # *
+
+  # * @extends \Illuminate\Database\Eloquent\Relations\BelongsTo<TRelatedModel, TDeclaringModel>'
+dependencies:
+- name: BadMethodCallException
+  type: class
+  source: BadMethodCallException
+- name: Builder
+  type: class
+  source: Illuminate\Database\Eloquent\Builder
+- name: Collection
+  type: class
+  source: Illuminate\Database\Eloquent\Collection
+- name: Model
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+- name: InteractsWithDictionary
+  type: class
+  source: Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithDictionary
+- name: InteractsWithDictionary
+  type: class
+  source: InteractsWithDictionary
+properties:
+- name: morphType
+  visibility: protected
+  comment: "# * @template TRelatedModel of \\Illuminate\\Database\\Eloquent\\Model\n\
+    # * @template TDeclaringModel of \\Illuminate\\Database\\Eloquent\\Model\n# *\n\
+    # * @extends \\Illuminate\\Database\\Eloquent\\Relations\\BelongsTo<TRelatedModel,\
+    \ TDeclaringModel>\n# */\n# class MorphTo extends BelongsTo\n# {\n# use InteractsWithDictionary;\n\
+    # \n# /**\n# * The type of the polymorphic relation.\n# *\n# * @var string"
+- name: models
+  visibility: protected
+  comment: '# * The models whose relations are being eager loaded.
+
+    # *
+
+    # * @var \Illuminate\Database\Eloquent\Collection<int, TDeclaringModel>'
+- name: dictionary
+  visibility: protected
+  comment: '# * All of the models keyed by ID.
+
+    # *
+
+    # * @var array'
+- name: macroBuffer
+  visibility: protected
+  comment: '# * A buffer of dynamic calls to query macros.
+
+    # *
+
+    # * @var array'
+- name: morphableEagerLoads
+  visibility: protected
+  comment: '# * A map of relations to load for each individual morph type.
+
+    # *
+
+    # * @var array'
+- name: morphableEagerLoadCounts
+  visibility: protected
+  comment: '# * A map of relationship counts to load for each individual morph type.
+
+    # *
+
+    # * @var array'
+- name: morphableConstraints
+  visibility: protected
+  comment: '# * A map of constraints to apply for each individual morph type.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: query
+  - name: parent
+  - name: foreignKey
+  - name: ownerKey
+  - name: type
+  - name: relation
+  comment: "# * @template TRelatedModel of \\Illuminate\\Database\\Eloquent\\Model\n\
+    # * @template TDeclaringModel of \\Illuminate\\Database\\Eloquent\\Model\n# *\n\
+    # * @extends \\Illuminate\\Database\\Eloquent\\Relations\\BelongsTo<TRelatedModel,\
+    \ TDeclaringModel>\n# */\n# class MorphTo extends BelongsTo\n# {\n# use InteractsWithDictionary;\n\
+    # \n# /**\n# * The type of the polymorphic relation.\n# *\n# * @var string\n#\
+    \ */\n# protected $morphType;\n# \n# /**\n# * The models whose relations are being\
+    \ eager loaded.\n# *\n# * @var \\Illuminate\\Database\\Eloquent\\Collection<int,\
+    \ TDeclaringModel>\n# */\n# protected $models;\n# \n# /**\n# * All of the models\
+    \ keyed by ID.\n# *\n# * @var array\n# */\n# protected $dictionary = [];\n# \n\
+    # /**\n# * A buffer of dynamic calls to query macros.\n# *\n# * @var array\n#\
+    \ */\n# protected $macroBuffer = [];\n# \n# /**\n# * A map of relations to load\
+    \ for each individual morph type.\n# *\n# * @var array\n# */\n# protected $morphableEagerLoads\
+    \ = [];\n# \n# /**\n# * A map of relationship counts to load for each individual\
+    \ morph type.\n# *\n# * @var array\n# */\n# protected $morphableEagerLoadCounts\
+    \ = [];\n# \n# /**\n# * A map of constraints to apply for each individual morph\
+    \ type.\n# *\n# * @var array\n# */\n# protected $morphableConstraints = [];\n\
+    # \n# /**\n# * Create a new morph to relationship instance.\n# *\n# * @param \
+    \ \\Illuminate\\Database\\Eloquent\\Builder<TRelatedModel>  $query\n# * @param\
+    \  TDeclaringModel  $parent\n# * @param  string  $foreignKey\n# * @param  string\
+    \  $ownerKey\n# * @param  string  $type\n# * @param  string  $relation\n# * @return\
+    \ void"
+- name: addEagerConstraints
+  visibility: public
+  parameters:
+  - name: models
+  comment: '# @inheritDoc'
+- name: buildDictionary
+  visibility: protected
+  parameters:
+  - name: models
+  comment: '# * Build a dictionary with the models.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Collection<int, TRelatedModel>  $models
+
+    # * @return void'
+- name: getEager
+  visibility: public
+  parameters: []
+  comment: '# * Get the results of the relationship.
+
+    # *
+
+    # * Called via eager load method of Eloquent query builder.
+
+    # *
+
+    # * @return \Illuminate\Database\Eloquent\Collection<int, TDeclaringModel>'
+- name: getResultsByType
+  visibility: protected
+  parameters:
+  - name: type
+  comment: '# * Get all of the relation results for a type.
+
+    # *
+
+    # * @param  string  $type
+
+    # * @return \Illuminate\Database\Eloquent\Collection<int, TRelatedModel>'
+- name: gatherKeysByType
+  visibility: protected
+  parameters:
+  - name: type
+  - name: keyType
+  comment: '# * Gather all of the foreign keys for a given type.
+
+    # *
+
+    # * @param  string  $type
+
+    # * @param  string  $keyType
+
+    # * @return array'
+- name: createModelByType
+  visibility: public
+  parameters:
+  - name: type
+  comment: '# * Create a new model instance by type.
+
+    # *
+
+    # * @param  string  $type
+
+    # * @return TRelatedModel'
+- name: match
+  visibility: public
+  parameters:
+  - name: models
+  - name: results
+  - name: relation
+  comment: '# @inheritDoc'
+- name: matchToMorphParents
+  visibility: protected
+  parameters:
+  - name: type
+  - name: results
+  comment: '# * Match the results for a given type to their parents.
+
+    # *
+
+    # * @param  string  $type
+
+    # * @param  \Illuminate\Database\Eloquent\Collection<int, TRelatedModel>  $results
+
+    # * @return void'
+- name: associate
+  visibility: public
+  parameters:
+  - name: model
+  comment: '# * Associate the model instance to the given parent.
+
+    # *
+
+    # * @param  TRelatedModel|null  $model
+
+    # * @return TDeclaringModel'
+- name: dissociate
+  visibility: public
+  parameters: []
+  comment: '# * Dissociate previously associated model from the given parent.
+
+    # *
+
+    # * @return TDeclaringModel'
+- name: touch
+  visibility: public
+  parameters: []
+  comment: '# * Touch all of the related models for the relationship.
+
+    # *
+
+    # * @return void'
+- name: newRelatedInstanceFor
+  visibility: protected
+  parameters:
+  - name: parent
+  comment: '# @inheritDoc'
+- name: getMorphType
+  visibility: public
+  parameters: []
+  comment: '# * Get the foreign key "type" name.
+
+    # *
+
+    # * @return string'
+- name: getDictionary
+  visibility: public
+  parameters: []
+  comment: '# * Get the dictionary used by the relationship.
+
+    # *
+
+    # * @return array'
+- name: morphWith
+  visibility: public
+  parameters:
+  - name: with
+  comment: '# * Specify which relations to load for a given morph type.
+
+    # *
+
+    # * @param  array  $with
+
+    # * @return $this'
+- name: morphWithCount
+  visibility: public
+  parameters:
+  - name: withCount
+  comment: '# * Specify which relationship counts to load for a given morph type.
+
+    # *
+
+    # * @param  array  $withCount
+
+    # * @return $this'
+- name: constrain
+  visibility: public
+  parameters:
+  - name: callbacks
+  comment: '# * Specify constraints on the query for a given morph type.
+
+    # *
+
+    # * @param  array  $callbacks
+
+    # * @return $this'
+- name: withTrashed
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that soft deleted models should be included in the results.
+
+    # *
+
+    # * @return $this'
+- name: withoutTrashed
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that soft deleted models should not be included in the results.
+
+    # *
+
+    # * @return $this'
+- name: onlyTrashed
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that only soft deleted models should be included in the results.
+
+    # *
+
+    # * @return $this'
+- name: replayMacros
+  visibility: protected
+  parameters:
+  - name: query
+  comment: '# * Replay stored macro calls on the actual related instance.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Builder<TRelatedModel>  $query
+
+    # * @return \Illuminate\Database\Eloquent\Builder<TRelatedModel>'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Handle dynamic method calls to the relationship.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+traits:
+- BadMethodCallException
+- Illuminate\Database\Eloquent\Builder
+- Illuminate\Database\Eloquent\Collection
+- Illuminate\Database\Eloquent\Model
+- Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithDictionary
+- InteractsWithDictionary
+interfaces: []

@@ -1,0 +1,22 @@
+name: ScopedBy
+class_comment: null
+dependencies:
+- name: Attribute
+  type: class
+  source: Attribute
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: classes
+  comment: '# * Create a new attribute instance.
+
+    # *
+
+    # * @param  array|string  $classes
+
+    # * @return void'
+traits:
+- Attribute
+interfaces: []

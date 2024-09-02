@@ -1,0 +1,31 @@
+name: MandrillSmtpTransportTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: MandrillSmtpTransport
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Mailchimp\Transport\MandrillSmtpTransport
+- name: MetadataHeader
+  type: class
+  source: Symfony\Component\Mailer\Header\MetadataHeader
+- name: TagHeader
+  type: class
+  source: Symfony\Component\Mailer\Header\TagHeader
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+properties: []
+methods:
+- name: testTagAndMetadataHeaders
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mailer\Bridge\Mailchimp\Transport\MandrillSmtpTransport
+- Symfony\Component\Mailer\Header\MetadataHeader
+- Symfony\Component\Mailer\Header\TagHeader
+- Symfony\Component\Mime\Email
+interfaces: []

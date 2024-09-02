@@ -1,0 +1,19 @@
+name: TableCellStyleTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: TableCellStyle
+  type: class
+  source: Symfony\Component\Console\Helper\TableCellStyle
+properties: []
+methods:
+- name: testCreateTableCellStyle
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Helper\TableCellStyle
+interfaces: []

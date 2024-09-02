@@ -1,0 +1,338 @@
+name: HtmlSanitizerConfig
+class_comment: '# * @author Titouan Galopin <galopintitouan@gmail.com>'
+dependencies:
+- name: W3CReference
+  type: class
+  source: Symfony\Component\HtmlSanitizer\Reference\W3CReference
+- name: AttributeSanitizerInterface
+  type: class
+  source: Symfony\Component\HtmlSanitizer\Visitor\AttributeSanitizer\AttributeSanitizerInterface
+properties: []
+methods:
+- name: defaultAction
+  visibility: public
+  parameters:
+  - name: action
+  comment: "# * @author Titouan Galopin <galopintitouan@gmail.com>\n# */\n# class\
+    \ HtmlSanitizerConfig\n# {\n# private HtmlSanitizerAction $defaultAction = HtmlSanitizerAction::Drop;\n\
+    # \n# /**\n# * Elements that should be removed.\n# *\n# * @var array<string, true>\n\
+    # */\n# private array $droppedElements = [];\n# \n# /**\n# * Elements that should\
+    \ be removed but their children should be retained.\n# *\n# * @var array<string,\
+    \ true>\n# */\n# private array $blockedElements = [];\n# \n# /**\n# * Elements\
+    \ that should be retained, with their allowed attributes.\n# *\n# * @var array<string,\
+    \ array<string, true>>\n# */\n# private array $allowedElements = [];\n# \n# /**\n\
+    # * Attributes that should always be added to certain elements.\n# *\n# * @var\
+    \ array<string, array<string, string>>\n# */\n# private array $forcedAttributes\
+    \ = [];\n# \n# /**\n# * Links schemes that should be retained, other being dropped.\n\
+    # *\n# * @var list<string>\n# */\n# private array $allowedLinkSchemes = ['http',\
+    \ 'https', 'mailto', 'tel'];\n# \n# /**\n# * Links hosts that should be retained\
+    \ (by default, all hosts are allowed).\n# *\n# * @var list<string>|null\n# */\n\
+    # private ?array $allowedLinkHosts = null;\n# \n# /**\n# * Should the sanitizer\
+    \ allow relative links (by default, they are dropped).\n# */\n# private bool $allowRelativeLinks\
+    \ = false;\n# \n# /**\n# * Image/Audio/Video schemes that should be retained,\
+    \ other being dropped.\n# *\n# * @var list<string>\n# */\n# private array $allowedMediaSchemes\
+    \ = ['http', 'https', 'data'];\n# \n# /**\n# * Image/Audio/Video hosts that should\
+    \ be retained (by default, all hosts are allowed).\n# *\n# * @var list<string>|null\n\
+    # */\n# private ?array $allowedMediaHosts = null;\n# \n# /**\n# * Should the sanitizer\
+    \ allow relative media URL (by default, they are dropped).\n# */\n# private bool\
+    \ $allowRelativeMedias = false;\n# \n# /**\n# * Should the URL in the sanitized\
+    \ document be transformed to HTTPS if they are using HTTP.\n# */\n# private bool\
+    \ $forceHttpsUrls = false;\n# \n# /**\n# * Sanitizers that should be applied to\
+    \ specific attributes in addition to standard sanitization.\n# *\n# * @var list<AttributeSanitizerInterface>\n\
+    # */\n# private array $attributeSanitizers;\n# \n# private int $maxInputLength\
+    \ = 20_000;\n# \n# public function __construct()\n# {\n# $this->attributeSanitizers\
+    \ = [\n# new Visitor\\AttributeSanitizer\\UrlAttributeSanitizer(),\n# ];\n# }\n\
+    # \n# /**\n# * Sets the default action for elements which are not otherwise specifically\
+    \ allowed or blocked.\n# *\n# * Note that a default action of Allow will allow\
+    \ all tags but they will not have any attributes."
+- name: allowStaticElements
+  visibility: public
+  parameters: []
+  comment: '# * Allows all static elements and attributes from the W3C Sanitizer API
+    standard.
+
+    # *
+
+    # * All scripts will be removed but the output may still contain other dangerous
+
+    # * behaviors like CSS injection (click-jacking), CSS expressions, ...'
+- name: allowSafeElements
+  visibility: public
+  parameters: []
+  comment: '# * Allows "safe" elements and attributes.
+
+    # *
+
+    # * All scripts will be removed, as well as other dangerous behaviors like CSS
+    injection.'
+- name: allowLinkSchemes
+  visibility: public
+  parameters:
+  - name: allowLinkSchemes
+  comment: '# * Allows only a given list of schemes to be used in links href attributes.
+
+    # *
+
+    # * All other schemes will be dropped.
+
+    # *
+
+    # * @param list<string> $allowLinkSchemes'
+- name: allowLinkHosts
+  visibility: public
+  parameters:
+  - name: allowLinkHosts
+  comment: '# * Allows only a given list of hosts to be used in links href attributes.
+
+    # *
+
+    # * All other hosts will be dropped. By default all hosts are allowed
+
+    # * ($allowedLinkHosts = null).
+
+    # *
+
+    # * @param list<string>|null $allowLinkHosts'
+- name: allowRelativeLinks
+  visibility: public
+  parameters:
+  - name: allowRelativeLinks
+    default: 'true'
+  comment: '# * Allows relative URLs to be used in links href attributes.'
+- name: allowMediaSchemes
+  visibility: public
+  parameters:
+  - name: allowMediaSchemes
+  comment: '# * Allows only a given list of schemes to be used in media source attributes
+    (img, audio, video, ...).
+
+    # *
+
+    # * All other schemes will be dropped.
+
+    # *
+
+    # * @param list<string> $allowMediaSchemes'
+- name: allowMediaHosts
+  visibility: public
+  parameters:
+  - name: allowMediaHosts
+  comment: '# * Allows only a given list of hosts to be used in media source attributes
+    (img, audio, video, ...).
+
+    # *
+
+    # * All other hosts will be dropped. By default all hosts are allowed
+
+    # * ($allowMediaHosts = null).
+
+    # *
+
+    # * @param list<string>|null $allowMediaHosts'
+- name: allowRelativeMedias
+  visibility: public
+  parameters:
+  - name: allowRelativeMedias
+    default: 'true'
+  comment: '# * Allows relative URLs to be used in media source attributes (img, audio,
+    video, ...).'
+- name: forceHttpsUrls
+  visibility: public
+  parameters:
+  - name: forceHttpsUrls
+    default: 'true'
+  comment: '# * Transforms URLs using the HTTP scheme to use the HTTPS scheme instead.'
+- name: allowElement
+  visibility: public
+  parameters:
+  - name: element
+  - name: allowedAttributes
+    default: '[]'
+  comment: '# * Configures the given element as allowed.
+
+    # *
+
+    # * Allowed elements are elements the sanitizer should retain from the input.
+
+    # *
+
+    # * A list of allowed attributes for this element can be passed as a second argument.
+
+    # * Passing "*" will allow all standard attributes on this element. By default,
+    no
+
+    # * attributes are allowed on the element.
+
+    # *
+
+    # * @param list<string>|string $allowedAttributes'
+- name: blockElement
+  visibility: public
+  parameters:
+  - name: element
+  comment: '# * Configures the given element as blocked.
+
+    # *
+
+    # * Blocked elements are elements the sanitizer should remove from the input,
+    but retain
+
+    # * their children.'
+- name: dropElement
+  visibility: public
+  parameters:
+  - name: element
+  comment: '# * Configures the given element as dropped.
+
+    # *
+
+    # * Dropped elements are elements the sanitizer should remove from the input,
+    including
+
+    # * their children.
+
+    # *
+
+    # * Note: when using an empty configuration, all unknown elements are dropped
+
+    # * automatically. This method let you drop elements that were allowed earlier
+
+    # * in the configuration, or explicitly drop some if you changed the default action.'
+- name: allowAttribute
+  visibility: public
+  parameters:
+  - name: attribute
+  - name: allowedElements
+  comment: '# * Configures the given attribute as allowed.
+
+    # *
+
+    # * Allowed attributes are attributes the sanitizer should retain from the input.
+
+    # *
+
+    # * A list of allowed elements for this attribute can be passed as a second argument.
+
+    # * Passing "*" will allow all currently allowed elements to use this attribute.
+
+    # *
+
+    # * @param list<string>|string $allowedElements'
+- name: dropAttribute
+  visibility: public
+  parameters:
+  - name: attribute
+  - name: droppedElements
+  comment: '# * Configures the given attribute as dropped.
+
+    # *
+
+    # * Dropped attributes are attributes the sanitizer should remove from the input.
+
+    # *
+
+    # * A list of elements on which to drop this attribute can be passed as a second
+    argument.
+
+    # * Passing "*" will drop this attribute from all currently allowed elements.
+
+    # *
+
+    # * Note: when using an empty configuration, all unknown attributes are dropped
+
+    # * automatically. This method let you drop attributes that were allowed earlier
+
+    # * in the configuration.
+
+    # *
+
+    # * @param list<string>|string $droppedElements'
+- name: forceAttribute
+  visibility: public
+  parameters:
+  - name: element
+  - name: attribute
+  - name: value
+  comment: '# * Forcefully set the value of a given attribute on a given element.
+
+    # *
+
+    # * The attribute will be created on the nodes if it didn''t exist.'
+- name: withAttributeSanitizer
+  visibility: public
+  parameters:
+  - name: sanitizer
+  comment: '# * Registers a custom attribute sanitizer.'
+- name: withoutAttributeSanitizer
+  visibility: public
+  parameters:
+  - name: sanitizer
+  comment: '# * Unregisters a custom attribute sanitizer.'
+- name: withMaxInputLength
+  visibility: public
+  parameters:
+  - name: maxInputLength
+  comment: '# * @param int $maxInputLength The maximum length of the input string
+    in bytes
+
+    # *                            -1 means no limit'
+- name: getMaxInputLength
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDefaultAction
+  visibility: public
+  parameters: []
+  comment: null
+- name: getAllowedElements
+  visibility: public
+  parameters: []
+  comment: '# * @return array<string, array<string, true>>'
+- name: getBlockedElements
+  visibility: public
+  parameters: []
+  comment: '# * @return array<string, true>'
+- name: getDroppedElements
+  visibility: public
+  parameters: []
+  comment: '# * @return array<string, true>'
+- name: getForcedAttributes
+  visibility: public
+  parameters: []
+  comment: '# * @return array<string, array<string, string>>'
+- name: getAllowedLinkSchemes
+  visibility: public
+  parameters: []
+  comment: '# * @return list<string>'
+- name: getAllowedLinkHosts
+  visibility: public
+  parameters: []
+  comment: '# * @return list<string>|null'
+- name: getAllowRelativeLinks
+  visibility: public
+  parameters: []
+  comment: null
+- name: getAllowedMediaSchemes
+  visibility: public
+  parameters: []
+  comment: '# * @return list<string>'
+- name: getAllowedMediaHosts
+  visibility: public
+  parameters: []
+  comment: '# * @return list<string>|null'
+- name: getAllowRelativeMedias
+  visibility: public
+  parameters: []
+  comment: null
+- name: getForceHttpsUrls
+  visibility: public
+  parameters: []
+  comment: null
+- name: getAttributeSanitizers
+  visibility: public
+  parameters: []
+  comment: '# * @return list<AttributeSanitizerInterface>'
+traits:
+- Symfony\Component\HtmlSanitizer\Reference\W3CReference
+- Symfony\Component\HtmlSanitizer\Visitor\AttributeSanitizer\AttributeSanitizerInterface
+interfaces: []

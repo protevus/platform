@@ -1,0 +1,160 @@
+name: MailMakeCommand
+class_comment: null
+dependencies:
+- name: CreatesMatchingTest
+  type: class
+  source: Illuminate\Console\Concerns\CreatesMatchingTest
+- name: GeneratorCommand
+  type: class
+  source: Illuminate\Console\GeneratorCommand
+- name: Inspiring
+  type: class
+  source: Illuminate\Foundation\Inspiring
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: CreatesMatchingTest
+  type: class
+  source: CreatesMatchingTest
+properties:
+- name: name
+  visibility: protected
+  comment: '# * The console command name.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+- name: type
+  visibility: protected
+  comment: '# * The type of class being generated.
+
+    # *
+
+    # * @var string'
+methods:
+- name: handle
+  visibility: public
+  parameters: []
+  comment: "# * The console command name.\n# *\n# * @var string\n# */\n# protected\
+    \ $name = 'make:mail';\n# \n# /**\n# * The console command description.\n# *\n\
+    # * @var string\n# */\n# protected $description = 'Create a new email class';\n\
+    # \n# /**\n# * The type of class being generated.\n# *\n# * @var string\n# */\n\
+    # protected $type = 'Mailable';\n# \n# /**\n# * Execute the console command.\n\
+    # *\n# * @return void"
+- name: writeMarkdownTemplate
+  visibility: protected
+  parameters: []
+  comment: '# * Write the Markdown template for the mailable.
+
+    # *
+
+    # * @return void'
+- name: writeView
+  visibility: protected
+  parameters: []
+  comment: '# * Write the Blade template for the mailable.
+
+    # *
+
+    # * @return void'
+- name: buildClass
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Build the class with the given name.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string'
+- name: getView
+  visibility: protected
+  parameters: []
+  comment: '# * Get the view name.
+
+    # *
+
+    # * @return string'
+- name: getStub
+  visibility: protected
+  parameters: []
+  comment: '# * Get the stub file for the generator.
+
+    # *
+
+    # * @return string'
+- name: resolveStubPath
+  visibility: protected
+  parameters:
+  - name: stub
+  comment: '# * Resolve the fully-qualified path to the stub.
+
+    # *
+
+    # * @param  string  $stub
+
+    # * @return string'
+- name: getDefaultNamespace
+  visibility: protected
+  parameters:
+  - name: rootNamespace
+  comment: '# * Get the default namespace for the class.
+
+    # *
+
+    # * @param  string  $rootNamespace
+
+    # * @return string'
+- name: getOptions
+  visibility: protected
+  parameters: []
+  comment: '# * Get the console command options.
+
+    # *
+
+    # * @return array'
+- name: afterPromptingForMissingArguments
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: '# * Interact further with the user if they were prompted for missing arguments.
+
+    # *
+
+    # * @param  \Symfony\Component\Console\Input\InputInterface  $input
+
+    # * @param  \Symfony\Component\Console\Output\OutputInterface  $output
+
+    # * @return void'
+traits:
+- Illuminate\Console\Concerns\CreatesMatchingTest
+- Illuminate\Console\GeneratorCommand
+- Illuminate\Foundation\Inspiring
+- Illuminate\Support\Str
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Output\OutputInterface
+- CreatesMatchingTest
+interfaces: []

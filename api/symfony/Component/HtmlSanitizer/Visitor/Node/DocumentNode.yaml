@@ -1,0 +1,21 @@
+name: DocumentNode
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: addChild
+  visibility: public
+  parameters:
+  - name: node
+  comment: null
+- name: getParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: render
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces:
+- NodeInterface

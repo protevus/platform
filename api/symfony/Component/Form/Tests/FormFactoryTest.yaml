@@ -1,0 +1,165 @@
+name: FormFactoryTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: PasswordType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\PasswordType
+- name: TextType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\TextType
+- name: FormFactory
+  type: class
+  source: Symfony\Component\Form\FormFactory
+- name: FormRegistry
+  type: class
+  source: Symfony\Component\Form\FormRegistry
+- name: FormTypeGuesserChain
+  type: class
+  source: Symfony\Component\Form\FormTypeGuesserChain
+- name: FormTypeGuesserInterface
+  type: class
+  source: Symfony\Component\Form\FormTypeGuesserInterface
+- name: Guess
+  type: class
+  source: Symfony\Component\Form\Guess\Guess
+- name: TypeGuess
+  type: class
+  source: Symfony\Component\Form\Guess\TypeGuess
+- name: ValueGuess
+  type: class
+  source: Symfony\Component\Form\Guess\ValueGuess
+- name: PreloadedExtension
+  type: class
+  source: Symfony\Component\Form\PreloadedExtension
+- name: ResolvedFormTypeFactory
+  type: class
+  source: Symfony\Component\Form\ResolvedFormTypeFactory
+- name: ConfigurableFormType
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\ConfigurableFormType
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testCreateNamedBuilderWithTypeName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateNamedBuilderFillsDataOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateNamedBuilderDoesNotOverrideExistingDataOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateUsesBlockPrefixIfTypeGivenAsString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateNamed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateBuilderForPropertyWithoutTypeGuesser
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateBuilderForPropertyCreatesFormWithHighestConfidence
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateBuilderCreatesTextFormIfNoGuess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOptionsCanBeOverridden
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateBuilderUsesMaxLengthIfFound
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateBuilderUsesMaxLengthAndPattern
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateBuilderUsesRequiredSettingWithHighestConfidence
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateBuilderUsesPatternIfFound
+  visibility: public
+  parameters: []
+  comment: null
+- name: guessType
+  visibility: public
+  parameters:
+  - name: class
+  - name: property
+  comment: null
+- name: guessRequired
+  visibility: public
+  parameters:
+  - name: class
+  - name: property
+  comment: null
+- name: guessMaxLength
+  visibility: public
+  parameters:
+  - name: class
+  - name: property
+  comment: null
+- name: guessPattern
+  visibility: public
+  parameters:
+  - name: class
+  - name: property
+  comment: null
+- name: configureTypeGuess
+  visibility: public
+  parameters:
+  - name: type
+  - name: options
+  - name: confidence
+  comment: null
+- name: configureRequiredGuess
+  visibility: public
+  parameters:
+  - name: required
+  - name: confidence
+  comment: null
+- name: configureMaxLengthGuess
+  visibility: public
+  parameters:
+  - name: maxLength
+  - name: confidence
+  comment: null
+- name: configurePatternGuess
+  visibility: public
+  parameters:
+  - name: pattern
+  - name: confidence
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\Extension\Core\Type\PasswordType
+- Symfony\Component\Form\Extension\Core\Type\TextType
+- Symfony\Component\Form\FormFactory
+- Symfony\Component\Form\FormRegistry
+- Symfony\Component\Form\FormTypeGuesserChain
+- Symfony\Component\Form\FormTypeGuesserInterface
+- Symfony\Component\Form\Guess\Guess
+- Symfony\Component\Form\Guess\TypeGuess
+- Symfony\Component\Form\Guess\ValueGuess
+- Symfony\Component\Form\PreloadedExtension
+- Symfony\Component\Form\ResolvedFormTypeFactory
+- Symfony\Component\Form\Tests\Fixtures\ConfigurableFormType
+interfaces:
+- FormTypeGuesserInterface

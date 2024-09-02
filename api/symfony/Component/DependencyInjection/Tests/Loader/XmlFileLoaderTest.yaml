@@ -1,0 +1,421 @@
+name: XmlFileLoaderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: FileLocatorFileNotFoundException
+  type: class
+  source: Symfony\Component\Config\Exception\FileLocatorFileNotFoundException
+- name: LoaderLoadException
+  type: class
+  source: Symfony\Component\Config\Exception\LoaderLoadException
+- name: FileLocator
+  type: class
+  source: Symfony\Component\Config\FileLocator
+- name: LoaderResolver
+  type: class
+  source: Symfony\Component\Config\Loader\LoaderResolver
+- name: FileResource
+  type: class
+  source: Symfony\Component\Config\Resource\FileResource
+- name: GlobResource
+  type: class
+  source: Symfony\Component\Config\Resource\GlobResource
+- name: XmlParsingException
+  type: class
+  source: Symfony\Component\Config\Util\Exception\XmlParsingException
+- name: AbstractArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\AbstractArgument
+- name: BoundArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\BoundArgument
+- name: IteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- name: ServiceClosureArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- name: ServiceLocatorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- name: TaggedIteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- name: ResolveBindingsPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ResolveBindingsPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: PhpDumper
+  type: class
+  source: Symfony\Component\DependencyInjection\Dumper\PhpDumper
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\LogicException
+- name: IniFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\IniFileLoader
+- name: XmlFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\XmlFileLoader
+- name: YamlFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\YamlFileLoader
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: Bar
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\Bar
+- name: BarInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\BarInterface
+- name: CaseSensitiveClass
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CaseSensitiveClass
+- name: FooClassWithEnumAttribute
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\FooClassWithEnumAttribute
+- name: FooUnitEnum
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\FooUnitEnum
+- name: FooWithAbstractArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\FooWithAbstractArgument
+- name: NamedArgumentsDummy
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\NamedArgumentsDummy
+- name: Prototype
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype
+- name: Expression
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Expression
+properties: []
+methods:
+- name: setUpBeforeClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoad
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParseFile
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadWithExternalEntitiesDisabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadParameters
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadImports
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadWithEnvironment
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadAnonymousServices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadAnonymousServicesWithoutId
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadAnonymousNestedServices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadServices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParsesIteratorArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParsesTags
+  visibility: public
+  parameters:
+  - name: tag
+  comment: '# * @testWith ["foo_tag"]
+
+    # *           ["bar_tag"]'
+- name: testParseTaggedArgumentsWithIndexBy
+  visibility: public
+  parameters: []
+  comment: null
+- name: testServiceWithServiceLocatorArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParseServiceClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParseServiceTagsWithArrayAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParseTagsWithoutNameThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParseTagWithEmptyNameThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDeprecated
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDeprecatedAliases
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConvertDomElementToArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtensions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPrependExtensionConfig
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtensionInPhar
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupports
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoNamingConflictsForAnonymousServices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDocTypeIsNotAllowed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testXmlNamespaces
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadIndexedArguments
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadInlinedServices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAutowire
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClassFromId
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPrototype
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPrototypeExcludeWithArray
+  visibility: public
+  parameters:
+  - name: fileName
+  comment: '# * @dataProvider prototypeExcludeWithArrayDataProvider'
+- name: prototypeExcludeWithArrayDataProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPrototypeExcludeWithArrayWithEmptyNode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAliasDefinitionContainsUnsupportedElements
+  visibility: public
+  parameters: []
+  comment: null
+- name: testArgumentWithKeyOutsideCollection
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDefaults
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNamedArguments
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInstanceof
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEnumeration
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidEnumeration
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInstanceOfAndChildDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAutoConfigureAndChildDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDefaultsAndChildDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAutoConfigureInstanceof
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCaseSensitivity
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBindings
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFqcnLazyProxy
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTsantosContainer
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOverriddenDefaultsBindings
+  visibility: public
+  parameters: []
+  comment: '# * The pass may throw an exception, which will cause the test to fail.'
+- name: testReturnsClone
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSinglyImplementedInterfacesInMultipleResources
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotSinglyImplementedInterfacesInMultipleResources
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotSinglyImplementedInterfacesInMultipleResourcesWithPreviouslyRegisteredAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotSinglyImplementedInterfacesInMultipleResourcesWithPreviouslyRegisteredAlias2
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadServiceWithAbstractArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStack
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWhenEnv
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBindingsAndInnerCollections
+  visibility: public
+  parameters:
+  - name: bindName
+  - name: expected
+  comment: '# * @dataProvider dataForBindingsAndInnerCollections'
+- name: dataForBindingsAndInnerCollections
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTagNameAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromCallable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStaticConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStaticConstructorWithFactoryThrows
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Config\Exception\FileLocatorFileNotFoundException
+- Symfony\Component\Config\Exception\LoaderLoadException
+- Symfony\Component\Config\FileLocator
+- Symfony\Component\Config\Loader\LoaderResolver
+- Symfony\Component\Config\Resource\FileResource
+- Symfony\Component\Config\Resource\GlobResource
+- Symfony\Component\Config\Util\Exception\XmlParsingException
+- Symfony\Component\DependencyInjection\Argument\AbstractArgument
+- Symfony\Component\DependencyInjection\Argument\BoundArgument
+- Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- Symfony\Component\DependencyInjection\Compiler\ResolveBindingsPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Dumper\PhpDumper
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Exception\LogicException
+- Symfony\Component\DependencyInjection\Loader\IniFileLoader
+- Symfony\Component\DependencyInjection\Loader\XmlFileLoader
+- Symfony\Component\DependencyInjection\Loader\YamlFileLoader
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\DependencyInjection\Tests\Fixtures\Bar
+- Symfony\Component\DependencyInjection\Tests\Fixtures\BarInterface
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CaseSensitiveClass
+- Symfony\Component\DependencyInjection\Tests\Fixtures\FooClassWithEnumAttribute
+- Symfony\Component\DependencyInjection\Tests\Fixtures\FooUnitEnum
+- Symfony\Component\DependencyInjection\Tests\Fixtures\FooWithAbstractArgument
+- Symfony\Component\DependencyInjection\Tests\Fixtures\NamedArgumentsDummy
+- Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype
+- Symfony\Component\ExpressionLanguage\Expression
+interfaces: []

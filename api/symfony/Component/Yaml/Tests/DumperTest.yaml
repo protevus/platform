@@ -1,0 +1,278 @@
+name: DumperTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Dumper
+  type: class
+  source: Symfony\Component\Yaml\Dumper
+- name: DumpException
+  type: class
+  source: Symfony\Component\Yaml\Exception\DumpException
+- name: ParseException
+  type: class
+  source: Symfony\Component\Yaml\Exception\ParseException
+- name: Parser
+  type: class
+  source: Symfony\Component\Yaml\Parser
+- name: TaggedValue
+  type: class
+  source: Symfony\Component\Yaml\Tag\TaggedValue
+- name: Yaml
+  type: class
+  source: Symfony\Component\Yaml\Yaml
+properties:
+- name: parser
+  visibility: protected
+  comment: null
+- name: dumper
+  visibility: protected
+  comment: null
+- name: path
+  visibility: protected
+  comment: null
+- name: array
+  visibility: protected
+  comment: null
+- name: a
+  visibility: public
+  comment: null
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testIndentationInConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSpecifications
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInlineLevel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testObjectSupportEnabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testObjectSupportDisabledButNoExceptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testObjectSupportDisabledWithExceptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEscapedEscapeSequencesInQuotedScalar
+  visibility: public
+  parameters:
+  - name: input
+  - name: expected
+  comment: '# * @dataProvider getEscapeSequences'
+- name: getEscapeSequences
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBinaryDataIsDumpedBase64Encoded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNonUtf8DataIsDumpedBase64Encoded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpObjectAsMap
+  visibility: public
+  parameters:
+  - name: object
+  - name: expected
+  comment: '# * @dataProvider objectAsMapProvider'
+- name: objectAsMapProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingArrayObjectInstancesRespectsInlineLevel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingArrayObjectInstancesWithNumericKeysInlined
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingArrayObjectInstancesWithNumericKeysRespectsInlineLevel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpEmptyArrayObjectInstanceAsMap
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpEmptyStdClassInstanceAsMap
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingStdClassInstancesRespectsInlineLevel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingTaggedValueSequenceRespectsInlineLevel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingTaggedValueTopLevelScalar
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingTaggedValueTopLevelAssocInline
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingTaggedValueTopLevelAssoc
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingTaggedValueTopLevelMultiLine
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingTaggedValueSpecialCharsInTag
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingTaggedValueSequenceWithInlinedTagValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingTaggedValueMapRespectsInlineLevel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingTaggedValueMapWithInlinedTagValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingNotInlinedScalarTaggedValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingNotInlinedNullTaggedValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingMultiLineStringAsScalarBlockTaggedValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingTaggedMultiLineInList
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingTaggedMultiLineTrailingNewlinesInMap
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingTaggedMultiLineTrailingNewlinesInList
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpingInlinedMultiLineIfRnBreakLineInTaggedValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpMultiLineStringAsScalarBlock
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpMultiLineStringAsScalarBlockWhenFirstLineHasLeadingSpace
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpMultiLineStringAsScalarBlockWhenFirstLineIsEmptyAndSecondLineHasLeadingSpace
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpMultiLineStringAsScalarBlockWhenFirstLineHasOnlySpaces
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCarriageReturnFollowedByNewlineIsMaintainedWhenDumpingAsMultiLineLiteralBlock
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCarriageReturnNotFollowedByNewlineIsPreservedWhenDumpingAsMultiLineLiteralBlock
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoExtraTrailingNewlineWhenDumpingAsMultiLineLiteralBlock
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTopLevelMultiLineStringLiteral
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpTrailingNewlineInMultiLineLiteralBlocks
+  visibility: public
+  parameters: []
+  comment: null
+- name: testZeroIndentationThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNegativeIndentationThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpNullAsTilde
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpInlineNumericKeyAsString
+  visibility: public
+  parameters:
+  - name: input
+  - name: inline
+  - name: flags
+  - name: expected
+  comment: '# * @dataProvider getNumericKeyData'
+- name: getNumericKeyData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpIdeographicSpaces
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpDateTime
+  visibility: public
+  parameters:
+  - name: input
+  - name: expected
+  comment: '# * @dataProvider getDateTimeData'
+- name: getDateTimeData
+  visibility: public
+  parameters: []
+  comment: null
+- name: assertSameData
+  visibility: private
+  parameters:
+  - name: expected
+  - name: actual
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Yaml\Dumper
+- Symfony\Component\Yaml\Exception\DumpException
+- Symfony\Component\Yaml\Exception\ParseException
+- Symfony\Component\Yaml\Parser
+- Symfony\Component\Yaml\Tag\TaggedValue
+- Symfony\Component\Yaml\Yaml
+interfaces: []

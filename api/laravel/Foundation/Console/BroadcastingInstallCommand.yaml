@@ -1,0 +1,94 @@
+name: BroadcastingInstallCommand
+class_comment: null
+dependencies:
+- name: InstalledVersions
+  type: class
+  source: Composer\InstalledVersions
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+- name: Filesystem
+  type: class
+  source: Illuminate\Filesystem\Filesystem
+- name: Process
+  type: class
+  source: Illuminate\Support\Facades\Process
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: PhpExecutableFinder
+  type: class
+  source: Symfony\Component\Process\PhpExecutableFinder
+- name: InteractsWithComposerPackages
+  type: class
+  source: InteractsWithComposerPackages
+properties:
+- name: signature
+  visibility: protected
+  comment: '# * The name and signature of the console command.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+methods:
+- name: handle
+  visibility: public
+  parameters: []
+  comment: "# * The name and signature of the console command.\n# *\n# * @var string\n\
+    # */\n# protected $signature = 'install:broadcasting\n# {--composer=global : Absolute\
+    \ path to the Composer binary which should be used to install packages}\n# {--force\
+    \ : Overwrite any existing broadcasting routes file}\n# {--without-reverb : Do\
+    \ not prompt to install Laravel Reverb}\n# {--without-node : Do not prompt to\
+    \ install Node dependencies}';\n# \n# /**\n# * The console command description.\n\
+    # *\n# * @var string\n# */\n# protected $description = 'Create a broadcasting\
+    \ channel routes file';\n# \n# /**\n# * Execute the console command.\n# *\n# *\
+    \ @return int"
+- name: uncommentChannelsRoutesFile
+  visibility: protected
+  parameters: []
+  comment: '# * Uncomment the "channels" routes file in the application bootstrap
+    file.
+
+    # *
+
+    # * @return void'
+- name: enableBroadcastServiceProvider
+  visibility: protected
+  parameters: []
+  comment: '# * Uncomment the "BroadcastServiceProvider" in the application configuration.
+
+    # *
+
+    # * @return void'
+- name: installReverb
+  visibility: protected
+  parameters: []
+  comment: '# * Install Laravel Reverb into the application if desired.
+
+    # *
+
+    # * @return void'
+- name: installNodeDependencies
+  visibility: protected
+  parameters: []
+  comment: '# * Install and build Node dependencies.
+
+    # *
+
+    # * @return void'
+traits:
+- Composer\InstalledVersions
+- Illuminate\Console\Command
+- Illuminate\Filesystem\Filesystem
+- Illuminate\Support\Facades\Process
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Process\PhpExecutableFinder
+- InteractsWithComposerPackages
+interfaces: []

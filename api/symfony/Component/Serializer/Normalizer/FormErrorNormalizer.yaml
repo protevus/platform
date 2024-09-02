@@ -1,0 +1,45 @@
+name: FormErrorNormalizer
+class_comment: null
+dependencies:
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+properties: []
+methods:
+- name: normalize
+  visibility: public
+  parameters:
+  - name: object
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: getSupportedTypes
+  visibility: public
+  parameters:
+  - name: format
+  comment: null
+- name: supportsNormalization
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: convertFormErrorsToArray
+  visibility: private
+  parameters:
+  - name: data
+  comment: null
+- name: convertFormChildrenToArray
+  visibility: private
+  parameters:
+  - name: data
+  comment: null
+traits:
+- Symfony\Component\Form\FormInterface
+interfaces:
+- NormalizerInterface

@@ -1,0 +1,48 @@
+name: ComparesRelatedModels
+class_comment: null
+dependencies:
+- name: SupportsPartialRelations
+  type: class
+  source: Illuminate\Contracts\Database\Eloquent\SupportsPartialRelations
+- name: Model
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+properties: []
+methods:
+- name: is
+  visibility: public
+  parameters:
+  - name: model
+  comment: '# * Determine if the model is the related instance of the relationship.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Model|null  $model
+
+    # * @return bool'
+- name: isNot
+  visibility: public
+  parameters:
+  - name: model
+  comment: '# * Determine if the model is not the related instance of the relationship.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Model|null  $model
+
+    # * @return bool'
+- name: compareKeys
+  visibility: protected
+  parameters:
+  - name: parentKey
+  - name: relatedKey
+  comment: "# * Get the value of the parent model's key.\n# *\n# * @return mixed\n\
+    # */\n# abstract public function getParentKey();\n# \n# /**\n# * Get the value\
+    \ of the model's related key.\n# *\n# * @param  \\Illuminate\\Database\\Eloquent\\\
+    Model  $model\n# * @return mixed\n# */\n# abstract protected function getRelatedKeyFrom(Model\
+    \ $model);\n# \n# /**\n# * Compare the parent key with the related key.\n# *\n\
+    # * @param  mixed  $parentKey\n# * @param  mixed  $relatedKey\n# * @return bool"
+traits:
+- Illuminate\Contracts\Database\Eloquent\SupportsPartialRelations
+- Illuminate\Database\Eloquent\Model
+interfaces: []

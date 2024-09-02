@@ -1,0 +1,14 @@
+name: BundleWriterInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: write
+  visibility: public
+  parameters:
+  - name: path
+  - name: locale
+  - name: data
+  comment: null
+traits: []
+interfaces: []

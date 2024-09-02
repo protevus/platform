@@ -1,0 +1,111 @@
+name: AbstractDescriptorTestCase
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputDefinition
+  type: class
+  source: Symfony\Component\Console\Input\InputDefinition
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: BufferedOutput
+  type: class
+  source: Symfony\Component\Console\Output\BufferedOutput
+properties: []
+methods:
+- name: testDescribeInputArgument
+  visibility: public
+  parameters:
+  - name: argument
+  - name: expectedDescription
+  comment: '# @dataProvider getDescribeInputArgumentTestData'
+- name: testDescribeInputOption
+  visibility: public
+  parameters:
+  - name: option
+  - name: expectedDescription
+  comment: '# @dataProvider getDescribeInputOptionTestData'
+- name: testDescribeInputDefinition
+  visibility: public
+  parameters:
+  - name: definition
+  - name: expectedDescription
+  comment: '# @dataProvider getDescribeInputDefinitionTestData'
+- name: testDescribeCommand
+  visibility: public
+  parameters:
+  - name: command
+  - name: expectedDescription
+  comment: '# @dataProvider getDescribeCommandTestData'
+- name: testDescribeApplication
+  visibility: public
+  parameters:
+  - name: application
+  - name: expectedDescription
+  comment: '# @dataProvider getDescribeApplicationTestData'
+- name: getDescribeInputArgumentTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDescribeInputOptionTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDescribeInputDefinitionTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDescribeCommandTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDescribeApplicationTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDescriptor
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getFormat
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getDescriptionTestData
+  visibility: protected
+  parameters:
+  - name: objects
+  comment: null
+- name: assertDescription
+  visibility: protected
+  parameters:
+  - name: expectedDescription
+  - name: describedObject
+  - name: options
+    default: '[]'
+  comment: null
+- name: normalizeOutput
+  visibility: protected
+  parameters:
+  - name: output
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Application
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputDefinition
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Output\BufferedOutput
+interfaces: []

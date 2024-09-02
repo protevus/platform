@@ -1,0 +1,130 @@
+name: DebugCommandTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Console\Exception\InvalidArgumentException
+- name: CommandCompletionTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandCompletionTester
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+- name: AbstractType
+  type: class
+  source: Symfony\Component\Form\AbstractType
+- name: DebugCommand
+  type: class
+  source: Symfony\Component\Form\Command\DebugCommand
+- name: CoreExtension
+  type: class
+  source: Symfony\Component\Form\Extension\Core\CoreExtension
+- name: TextType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\TextType
+- name: FormRegistry
+  type: class
+  source: Symfony\Component\Form\FormRegistry
+- name: FormTypeInterface
+  type: class
+  source: Symfony\Component\Form\FormTypeInterface
+- name: ResolvedFormTypeFactory
+  type: class
+  source: Symfony\Component\Form\ResolvedFormTypeFactory
+- name: Options
+  type: class
+  source: Symfony\Component\OptionsResolver\Options
+- name: OptionsResolver
+  type: class
+  source: Symfony\Component\OptionsResolver\OptionsResolver
+properties: []
+methods:
+- name: testDebugDefaults
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDebugDeprecatedDefaults
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDebugSingleFormType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDebugDateTimeType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDebugFormTypeOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDebugSingleFormTypeNotFound
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDebugAmbiguousFormType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDebugAmbiguousFormTypeInteractive
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDebugInvalidFormType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDebugCustomFormTypeOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testComplete
+  visibility: public
+  parameters:
+  - name: input
+  - name: expectedSuggestions
+  comment: '# * @dataProvider provideCompletionSuggestions'
+- name: provideCompletionSuggestions
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCoreTypes
+  visibility: private
+  parameters: []
+  comment: null
+- name: createCommandTester
+  visibility: private
+  parameters:
+  - name: namespaces
+    default: '[''Symfony\Component\Form\Extension\Core\Type'']'
+  - name: types
+    default: '[]'
+  comment: null
+- name: configureOptions
+  visibility: public
+  parameters:
+  - name: resolver
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Application
+- Symfony\Component\Console\Exception\InvalidArgumentException
+- Symfony\Component\Console\Tester\CommandCompletionTester
+- Symfony\Component\Console\Tester\CommandTester
+- Symfony\Component\Form\AbstractType
+- Symfony\Component\Form\Command\DebugCommand
+- Symfony\Component\Form\Extension\Core\CoreExtension
+- Symfony\Component\Form\Extension\Core\Type\TextType
+- Symfony\Component\Form\FormRegistry
+- Symfony\Component\Form\FormTypeInterface
+- Symfony\Component\Form\ResolvedFormTypeFactory
+- Symfony\Component\OptionsResolver\Options
+- Symfony\Component\OptionsResolver\OptionsResolver
+interfaces: []

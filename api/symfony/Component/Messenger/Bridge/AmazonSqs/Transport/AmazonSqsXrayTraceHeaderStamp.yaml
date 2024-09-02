@@ -1,0 +1,21 @@
+name: AmazonSqsXrayTraceHeaderStamp
+class_comment: null
+dependencies:
+- name: NonSendableStampInterface
+  type: class
+  source: Symfony\Component\Messenger\Stamp\NonSendableStampInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: traceId
+  comment: null
+- name: getTraceId
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Messenger\Stamp\NonSendableStampInterface
+interfaces:
+- NonSendableStampInterface

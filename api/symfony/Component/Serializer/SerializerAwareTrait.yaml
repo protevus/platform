@@ -1,0 +1,12 @@
+name: SerializerAwareTrait
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: setSerializer
+  visibility: public
+  parameters:
+  - name: serializer
+  comment: null
+traits: []
+interfaces: []

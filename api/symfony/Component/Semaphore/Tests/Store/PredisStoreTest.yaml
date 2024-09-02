@@ -1,0 +1,15 @@
+name: PredisStoreTest
+class_comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>"
+dependencies: []
+properties: []
+methods:
+- name: setUpBeforeClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRedisConnection
+  visibility: protected
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

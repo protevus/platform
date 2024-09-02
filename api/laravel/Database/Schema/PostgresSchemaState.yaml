@@ -1,0 +1,55 @@
+name: PostgresSchemaState
+class_comment: null
+dependencies:
+- name: Connection
+  type: class
+  source: Illuminate\Database\Connection
+properties: []
+methods:
+- name: dump
+  visibility: public
+  parameters:
+  - name: connection
+  - name: path
+  comment: '# * Dump the database''s schema into a file.
+
+    # *
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @param  string  $path
+
+    # * @return void'
+- name: load
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Load the given schema file into the database.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return void'
+- name: baseDumpCommand
+  visibility: protected
+  parameters: []
+  comment: '# * Get the base dump command arguments for PostgreSQL as a string.
+
+    # *
+
+    # * @return string'
+- name: baseVariables
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Get the base variables for a dump / load command.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return array'
+traits:
+- Illuminate\Database\Connection
+interfaces: []

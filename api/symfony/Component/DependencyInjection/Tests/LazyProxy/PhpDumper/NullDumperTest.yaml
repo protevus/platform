@@ -1,0 +1,27 @@
+name: NullDumperTest
+class_comment: '# * Tests for {@see NullDumper}.
+
+  # *
+
+  # * @author Marco Pivetta <ocramius@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: NullDumper
+  type: class
+  source: Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\NullDumper
+properties: []
+methods:
+- name: testNullDumper
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\NullDumper
+interfaces: []

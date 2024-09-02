@@ -1,0 +1,136 @@
+name: IcuVersion
+class_comment: '# * Facilitates the comparison of ICU version strings.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies: []
+properties: []
+methods:
+- name: compare
+  visibility: public
+  parameters:
+  - name: version1
+  - name: version2
+  - name: operator
+  - name: precision
+    default: 'null'
+  comment: '# * Facilitates the comparison of ICU version strings.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # class IcuVersion
+
+    # {
+
+    # /**
+
+    # * Compares two ICU versions with an operator.
+
+    # *
+
+    # * This method is identical to {@link version_compare()}, except that you
+
+    # * can pass the number of regarded version components in the last argument
+
+    # * $precision.
+
+    # *
+
+    # * Also, a single digit release version and a single digit major version
+
+    # * are contracted to a two digit release version. If no major version
+
+    # * is given, it is substituted by zero.
+
+    # *
+
+    # * Examples:
+
+    # *
+
+    # *     IcuVersion::compare(''1.2.3'', ''1.2.4'', ''=='')
+
+    # *     // => false
+
+    # *
+
+    # *     IcuVersion::compare(''1.2.3'', ''1.2.4'', ''=='', 2)
+
+    # *     // => true
+
+    # *
+
+    # *     IcuVersion::compare(''1.2.3'', ''12.3'', ''=='')
+
+    # *     // => true
+
+    # *
+
+    # *     IcuVersion::compare(''1'', ''10'', ''=='')
+
+    # *     // => true
+
+    # *
+
+    # * @param int|null $precision The number of components to compare. Pass
+
+    # *                            NULL to compare the versions unchanged.
+
+    # *
+
+    # * @see normalize()'
+- name: normalize
+  visibility: public
+  parameters:
+  - name: version
+  - name: precision
+  comment: '# * Normalizes a version string to the number of components given in the
+
+    # * parameter $precision.
+
+    # *
+
+    # * A single digit release version and a single digit major version are
+
+    # * contracted to a two digit release version. If no major version is given,
+
+    # * it is substituted by zero.
+
+    # *
+
+    # * Examples:
+
+    # *
+
+    # *     IcuVersion::normalize(''1.2.3.4'');
+
+    # *     // => ''12.3.4''
+
+    # *
+
+    # *     IcuVersion::normalize(''1.2.3.4'', 1);
+
+    # *     // => ''12''
+
+    # *
+
+    # *     IcuVersion::normalize(''1.2.3.4'', 2);
+
+    # *     // => ''12.3''
+
+    # *
+
+    # * @param int|null $precision The number of components to include. Pass
+
+    # *                            NULL to return the version unchanged.'
+- name: __construct
+  visibility: private
+  parameters: []
+  comment: '# * Must not be instantiated.'
+traits: []
+interfaces: []

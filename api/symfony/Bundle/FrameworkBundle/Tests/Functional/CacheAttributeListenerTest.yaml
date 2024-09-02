@@ -1,0 +1,71 @@
+name: CacheAttributeListenerTest
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: Cache
+  type: class
+  source: Symfony\Component\HttpKernel\Attribute\Cache
+- name: ValueResolverInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ValueResolverInterface
+- name: ArgumentMetadata
+  type: class
+  source: Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata
+- name: InMemoryUser
+  type: class
+  source: Symfony\Component\Security\Core\User\InMemoryUser
+- name: IsGranted
+  type: class
+  source: Symfony\Component\Security\Http\Attribute\IsGranted
+properties: []
+methods:
+- name: testAnonimousUserWithEtag
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAnonimousUserWithoutEtag
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoggedInUserWithEtag
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoggedInUserWithoutEtag
+  visibility: public
+  parameters: []
+  comment: null
+- name: resolve
+  visibility: public
+  parameters:
+  - name: request
+  - name: argument
+  comment: null
+- name: getId
+  visibility: public
+  parameters: []
+  comment: null
+- name: getEtag
+  visibility: public
+  parameters: []
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: post
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Attribute\Cache
+- Symfony\Component\HttpKernel\Controller\ValueResolverInterface
+- Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata
+- Symfony\Component\Security\Core\User\InMemoryUser
+- Symfony\Component\Security\Http\Attribute\IsGranted
+interfaces:
+- ValueResolverInterface

@@ -1,0 +1,56 @@
+name: ExtensionCompilerPassTest
+class_comment: '# * @author Wouter J <wouter@wouterj.nl>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CompilerPassInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- name: ExtensionCompilerPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ExtensionCompilerPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Extension
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\Extension
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testProcess
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: alias
+  comment: null
+- name: getAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: container
+  comment: null
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- Symfony\Component\DependencyInjection\Compiler\ExtensionCompilerPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Extension\Extension
+interfaces:
+- CompilerPassInterface

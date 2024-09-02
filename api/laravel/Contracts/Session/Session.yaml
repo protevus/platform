@@ -1,0 +1,268 @@
+name: Session
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getName
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the session.
+
+    # *
+
+    # * @return string'
+- name: setName
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Set the name of the session.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return void'
+- name: getId
+  visibility: public
+  parameters: []
+  comment: '# * Get the current session ID.
+
+    # *
+
+    # * @return string'
+- name: setId
+  visibility: public
+  parameters:
+  - name: id
+  comment: '# * Set the session ID.
+
+    # *
+
+    # * @param  string  $id
+
+    # * @return void'
+- name: start
+  visibility: public
+  parameters: []
+  comment: '# * Start the session, reading the data from a handler.
+
+    # *
+
+    # * @return bool'
+- name: save
+  visibility: public
+  parameters: []
+  comment: '# * Save the session data to storage.
+
+    # *
+
+    # * @return void'
+- name: all
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the session data.
+
+    # *
+
+    # * @return array'
+- name: exists
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Checks if a key exists.
+
+    # *
+
+    # * @param  string|array  $key
+
+    # * @return bool'
+- name: has
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Checks if a key is present and not null.
+
+    # *
+
+    # * @param  string|array  $key
+
+    # * @return bool'
+- name: get
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Get an item from the session.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $default
+
+    # * @return mixed'
+- name: pull
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Get the value of a given key and then forget it.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $default
+
+    # * @return mixed'
+- name: put
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: 'null'
+  comment: '# * Put a key / value pair or array of key / value pairs in the session.
+
+    # *
+
+    # * @param  string|array  $key
+
+    # * @param  mixed  $value
+
+    # * @return void'
+- name: token
+  visibility: public
+  parameters: []
+  comment: '# * Get the CSRF token value.
+
+    # *
+
+    # * @return string'
+- name: regenerateToken
+  visibility: public
+  parameters: []
+  comment: '# * Regenerate the CSRF token value.
+
+    # *
+
+    # * @return void'
+- name: remove
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Remove an item from the session, returning its value.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed'
+- name: forget
+  visibility: public
+  parameters:
+  - name: keys
+  comment: '# * Remove one or many items from the session.
+
+    # *
+
+    # * @param  string|array  $keys
+
+    # * @return void'
+- name: flush
+  visibility: public
+  parameters: []
+  comment: '# * Remove all of the items from the session.
+
+    # *
+
+    # * @return void'
+- name: invalidate
+  visibility: public
+  parameters: []
+  comment: '# * Flush the session data and regenerate the ID.
+
+    # *
+
+    # * @return bool'
+- name: regenerate
+  visibility: public
+  parameters:
+  - name: destroy
+    default: 'false'
+  comment: '# * Generate a new session identifier.
+
+    # *
+
+    # * @param  bool  $destroy
+
+    # * @return bool'
+- name: migrate
+  visibility: public
+  parameters:
+  - name: destroy
+    default: 'false'
+  comment: '# * Generate a new session ID for the session.
+
+    # *
+
+    # * @param  bool  $destroy
+
+    # * @return bool'
+- name: isStarted
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the session has been started.
+
+    # *
+
+    # * @return bool'
+- name: previousUrl
+  visibility: public
+  parameters: []
+  comment: '# * Get the previous URL from the session.
+
+    # *
+
+    # * @return string|null'
+- name: setPreviousUrl
+  visibility: public
+  parameters:
+  - name: url
+  comment: '# * Set the "previous" URL in the session.
+
+    # *
+
+    # * @param  string  $url
+
+    # * @return void'
+- name: getHandler
+  visibility: public
+  parameters: []
+  comment: '# * Get the session handler instance.
+
+    # *
+
+    # * @return \SessionHandlerInterface'
+- name: handlerNeedsRequest
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the session handler needs a request.
+
+    # *
+
+    # * @return bool'
+- name: setRequestOnHandler
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Set the request on the handler instance.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return void'
+traits: []
+interfaces: []

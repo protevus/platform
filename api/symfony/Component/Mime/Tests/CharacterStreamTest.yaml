@@ -1,0 +1,39 @@
+name: CharacterStreamTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CharacterStream
+  type: class
+  source: Symfony\Component\Mime\CharacterStream
+properties: []
+methods:
+- name: testReadCharactersAreInTact
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCharactersCanBeReadAsByteArrays
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRequestingLargeCharCountPastEndOfStream
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRequestingByteArrayCountPastEndOfStream
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPointerOffsetCanBeSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAlgorithmWithFixedWidthCharsets
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mime\CharacterStream
+interfaces: []

@@ -1,0 +1,82 @@
+name: DateTimeNormalizer
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Serializer\Exception\InvalidArgumentException
+- name: NotNormalizableValueException
+  type: class
+  source: Symfony\Component\Serializer\Exception\NotNormalizableValueException
+properties: []
+methods:
+- name: normalize
+  visibility: public
+  parameters:
+  - name: object
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: "# * Normalizes an object implementing the {@see \\DateTimeInterface} to\
+    \ a date string.\n# * Denormalizes a date string to an instance of {@see \\DateTime}\
+    \ or {@see \\DateTimeImmutable}.\n# *\n# * @author K\xE9vin Dunglas <dunglas@gmail.com>\n\
+    # */\n# final class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface\n\
+    # {\n# public const FORMAT_KEY = 'datetime_format';\n# public const TIMEZONE_KEY\
+    \ = 'datetime_timezone';\n# public const CAST_KEY = 'datetime_cast';\n# \n# private\
+    \ array $defaultContext = [\n# self::FORMAT_KEY => \\DateTimeInterface::RFC3339,\n\
+    # self::TIMEZONE_KEY => null,\n# self::CAST_KEY => null,\n# ];\n# \n# private\
+    \ const SUPPORTED_TYPES = [\n# \\DateTimeInterface::class => true,\n# \\DateTimeImmutable::class\
+    \ => true,\n# \\DateTime::class => true,\n# ];\n# \n# public function __construct(array\
+    \ $defaultContext = [])\n# {\n# $this->setDefaultContext($defaultContext);\n#\
+    \ }\n# \n# public function setDefaultContext(array $defaultContext): void\n# {\n\
+    # $this->defaultContext = array_merge($this->defaultContext, $defaultContext);\n\
+    # }\n# \n# public function getSupportedTypes(?string $format): array\n# {\n# return\
+    \ self::SUPPORTED_TYPES;\n# }\n# \n# /**\n# * @throws InvalidArgumentException"
+- name: supportsNormalization
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: denormalize
+  visibility: public
+  parameters:
+  - name: data
+  - name: type
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: '# * @throws NotNormalizableValueException'
+- name: supportsDenormalization
+  visibility: public
+  parameters:
+  - name: data
+  - name: type
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: formatDateTimeErrors
+  visibility: private
+  parameters:
+  - name: errors
+  comment: '# * Formats datetime errors.
+
+    # *
+
+    # * @return string[]'
+- name: getTimezone
+  visibility: private
+  parameters:
+  - name: context
+  comment: null
+traits:
+- Symfony\Component\Serializer\Exception\InvalidArgumentException
+- Symfony\Component\Serializer\Exception\NotNormalizableValueException
+interfaces:
+- NormalizerInterface

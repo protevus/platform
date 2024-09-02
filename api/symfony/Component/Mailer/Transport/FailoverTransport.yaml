@@ -1,0 +1,23 @@
+name: FailoverTransport
+class_comment: '# * Uses several Transports using a failover algorithm.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies: []
+properties: []
+methods:
+- name: getNextTransport
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getInitialCursor
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getNameSymbol
+  visibility: protected
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

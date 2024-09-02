@@ -1,0 +1,55 @@
+name: Timebox
+class_comment: null
+dependencies:
+- name: Throwable
+  type: class
+  source: Throwable
+properties:
+- name: earlyReturn
+  visibility: public
+  comment: '# * Indicates if the timebox is allowed to return early.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: call
+  visibility: public
+  parameters:
+  - name: callback
+  - name: microseconds
+  comment: "# * Indicates if the timebox is allowed to return early.\n# *\n# * @var\
+    \ bool\n# */\n# public $earlyReturn = false;\n# \n# /**\n# * Invoke the given\
+    \ callback within the specified timebox minimum.\n# *\n# * @template TCallReturnType\n\
+    # *\n# * @param  (callable($this): TCallReturnType)  $callback\n# * @param  int\
+    \  $microseconds\n# * @return TCallReturnType\n# *\n# * @throws \\Throwable"
+- name: returnEarly
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the timebox can return early.
+
+    # *
+
+    # * @return $this'
+- name: dontReturnEarly
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the timebox cannot return early.
+
+    # *
+
+    # * @return $this'
+- name: usleep
+  visibility: protected
+  parameters:
+  - name: microseconds
+  comment: '# * Sleep for the specified number of microseconds.
+
+    # *
+
+    # * @param  int  $microseconds
+
+    # * @return void'
+traits:
+- Throwable
+interfaces: []

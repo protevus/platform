@@ -1,0 +1,36 @@
+name: CheckpointInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: acquire
+  visibility: public
+  parameters:
+  - name: now
+  comment: null
+- name: from
+  visibility: public
+  parameters: []
+  comment: null
+- name: time
+  visibility: public
+  parameters: []
+  comment: null
+- name: index
+  visibility: public
+  parameters: []
+  comment: null
+- name: save
+  visibility: public
+  parameters:
+  - name: time
+  - name: index
+  comment: null
+- name: release
+  visibility: public
+  parameters:
+  - name: now
+  - name: nextTime
+  comment: null
+traits: []
+interfaces: []

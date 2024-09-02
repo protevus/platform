@@ -1,0 +1,25 @@
+name: BatchDispatched
+class_comment: null
+dependencies:
+- name: Batch
+  type: class
+  source: Illuminate\Bus\Batch
+properties:
+- name: batch
+  visibility: public
+  comment: '# * The batch instance.
+
+    # *
+
+    # * @var \Illuminate\Bus\Batch'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: batch
+  comment: "# * The batch instance.\n# *\n# * @var \\Illuminate\\Bus\\Batch\n# */\n\
+    # public $batch;\n# \n# /**\n# * Create a new event instance.\n# *\n# * @param\
+    \  \\Illuminate\\Bus\\Batch  $batch\n# * @return void"
+traits:
+- Illuminate\Bus\Batch
+interfaces: []

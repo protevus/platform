@@ -1,0 +1,46 @@
+name: StateMachineGraphvizDumper
+class_comment: null
+dependencies:
+- name: Definition
+  type: class
+  source: Symfony\Component\Workflow\Definition
+- name: Marking
+  type: class
+  source: Symfony\Component\Workflow\Marking
+properties: []
+methods:
+- name: dump
+  visibility: public
+  parameters:
+  - name: definition
+  - name: marking
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: '# * Dumps the workflow as a graphviz graph.
+
+    # *
+
+    # * Available options:
+
+    # *
+
+    # *  * graph: The default options for the whole graph
+
+    # *  * node: The default options for nodes (places)
+
+    # *  * edge: The default options for edges'
+- name: findEdges
+  visibility: protected
+  parameters:
+  - name: definition
+  comment: '# * @internal'
+- name: addEdges
+  visibility: protected
+  parameters:
+  - name: edges
+  comment: '# * @internal'
+traits:
+- Symfony\Component\Workflow\Definition
+- Symfony\Component\Workflow\Marking
+interfaces: []

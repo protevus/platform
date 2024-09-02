@@ -1,0 +1,41 @@
+name: ComparatorTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Comparator
+  type: class
+  source: Symfony\Component\Finder\Comparator\Comparator
+properties: []
+methods:
+- name: testInvalidOperator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTestSucceeds
+  visibility: public
+  parameters:
+  - name: operator
+  - name: target
+  - name: testedValue
+  comment: '# * @dataProvider provideMatches'
+- name: provideMatches
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTestFails
+  visibility: public
+  parameters:
+  - name: operator
+  - name: target
+  - name: testedValue
+  comment: '# * @dataProvider provideNonMatches'
+- name: provideNonMatches
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Finder\Comparator\Comparator
+interfaces: []

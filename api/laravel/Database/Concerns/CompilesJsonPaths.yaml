@@ -1,0 +1,49 @@
+name: CompilesJsonPaths
+class_comment: null
+dependencies:
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+properties: []
+methods:
+- name: wrapJsonFieldAndPath
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Split the given JSON selector into the field and the optional path
+    and wrap them separately.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return array'
+- name: wrapJsonPath
+  visibility: protected
+  parameters:
+  - name: value
+  - name: delimiter
+    default: '''->'''
+  comment: '# * Wrap the given JSON path.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @param  string  $delimiter
+
+    # * @return string'
+- name: wrapJsonPathSegment
+  visibility: protected
+  parameters:
+  - name: segment
+  comment: '# * Wrap the given JSON path segment.
+
+    # *
+
+    # * @param  string  $segment
+
+    # * @return string'
+traits:
+- Illuminate\Support\Str
+interfaces: []

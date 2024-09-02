@@ -1,0 +1,146 @@
+name: ParameterBagTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ExpectUserDeprecationMessageTrait
+  type: class
+  source: Symfony\Bridge\PhpUnit\ExpectUserDeprecationMessageTrait
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: ParameterCircularReferenceException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException
+- name: ParameterNotFoundException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: ParameterBag
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- name: ExpectUserDeprecationMessageTrait
+  type: class
+  source: ExpectUserDeprecationMessageTrait
+properties: []
+methods:
+- name: testConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClear
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemove
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemoveWithDeprecation
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetNumericName
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * @testWith [1001]
+
+    # *           [10.0]'
+- name: testConstructorNumericName
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * @testWith [1001]
+
+    # *           [10.0]'
+- name: testGetThrowParameterNotFoundException
+  visibility: public
+  parameters:
+  - name: parameterKey
+  - name: exceptionMessage
+  comment: '# * @dataProvider provideGetThrowParameterNotFoundExceptionData'
+- name: provideGetThrowParameterNotFoundExceptionData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDeprecate
+  visibility: public
+  parameters: []
+  comment: '# * The test should be kept in the group as it always expects a deprecation.
+
+    # *
+
+    # * @group legacy'
+- name: testDeprecateWithMessage
+  visibility: public
+  parameters: []
+  comment: '# * The test should be kept in the group as it always expects a deprecation.
+
+    # *
+
+    # * @group legacy'
+- name: testDeprecationIsTriggeredWhenResolved
+  visibility: public
+  parameters: []
+  comment: '# * The test should be kept in the group as it always expects a deprecation.
+
+    # *
+
+    # * @group legacy'
+- name: testDeprecateThrowsWhenParameterIsUndefined
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHas
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMixedCase
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResolveValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResolveIndicatesWhyAParameterIsNeeded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResolveUnescapesValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEscapeValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResolveStringWithSpacesReturnsString
+  visibility: public
+  parameters:
+  - name: expected
+  - name: test
+  - name: description
+  comment: '# * @dataProvider stringsWithSpacesProvider'
+- name: stringsWithSpacesProvider
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bridge\PhpUnit\ExpectUserDeprecationMessageTrait
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException
+- Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- ExpectUserDeprecationMessageTrait
+interfaces: []

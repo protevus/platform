@@ -1,0 +1,16 @@
+name: Dummy
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getId
+  visibility: public
+  parameters: []
+  comment: null
+- name: setId
+  visibility: public
+  parameters:
+  - name: id
+  comment: null
+traits: []
+interfaces: []

@@ -1,0 +1,43 @@
+name: Country
+class_comment: null
+dependencies:
+- name: Countries
+  type: class
+  source: Symfony\Component\Intl\Countries
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: LogicException
+  type: class
+  source: Symfony\Component\Validator\Exception\LogicException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: options
+    default: 'null'
+  - name: message
+    default: 'null'
+  - name: alpha3
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  comment: "# * Validates a value is a valid ISO 3166-1 alpha-2 country code.\n# *\n\
+    # * @see https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes\n# *\n# * @author\
+    \ Bernhard Schussek <bschussek@gmail.com>\n# */\n# #[\\Attribute(\\Attribute::TARGET_PROPERTY\
+    \ | \\Attribute::TARGET_METHOD | \\Attribute::IS_REPEATABLE)]\n# class Country\
+    \ extends Constraint\n# {\n# public const NO_SUCH_COUNTRY_ERROR = '8f900c12-61bd-455d-9398-996cd040f7f0';\n\
+    # \n# protected const ERROR_NAMES = [\n# self::NO_SUCH_COUNTRY_ERROR => 'NO_SUCH_COUNTRY_ERROR',\n\
+    # ];\n# \n# public string $message = 'This value is not a valid country.';\n#\
+    \ public bool $alpha3 = false;\n# \n# /**\n# * @param array<string,mixed>|null\
+    \ $options\n# * @param bool|null                $alpha3  Whether to check for\
+    \ alpha-3 codes instead of alpha-2 (defaults to false)\n# * @param string[]|null\
+    \            $groups\n# *\n# * @see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3#Current_codes"
+traits:
+- Symfony\Component\Intl\Countries
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Exception\LogicException
+interfaces: []

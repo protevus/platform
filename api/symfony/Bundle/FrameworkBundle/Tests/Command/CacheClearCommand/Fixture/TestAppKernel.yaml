@@ -1,0 +1,61 @@
+name: TestAppKernel
+class_comment: null
+dependencies:
+- name: NullLogger
+  type: class
+  source: Psr\Log\NullLogger
+- name: FrameworkBundle
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\FrameworkBundle
+- name: LoaderInterface
+  type: class
+  source: Symfony\Component\Config\Loader\LoaderInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: CacheWarmerInterface
+  type: class
+  source: Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface
+- name: Kernel
+  type: class
+  source: Symfony\Component\HttpKernel\Kernel
+properties: []
+methods:
+- name: registerBundles
+  visibility: public
+  parameters: []
+  comment: null
+- name: getProjectDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: registerContainerConfiguration
+  visibility: public
+  parameters:
+  - name: loader
+  comment: null
+- name: build
+  visibility: protected
+  parameters:
+  - name: container
+  comment: null
+- name: isOptional
+  visibility: public
+  parameters: []
+  comment: null
+- name: warmUp
+  visibility: public
+  parameters:
+  - name: cacheDir
+  - name: buildDir
+    default: 'null'
+  comment: null
+traits:
+- Psr\Log\NullLogger
+- Symfony\Bundle\FrameworkBundle\FrameworkBundle
+- Symfony\Component\Config\Loader\LoaderInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface
+- Symfony\Component\HttpKernel\Kernel
+interfaces:
+- CacheWarmerInterface

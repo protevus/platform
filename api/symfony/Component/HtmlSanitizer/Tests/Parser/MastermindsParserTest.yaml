@@ -1,0 +1,19 @@
+name: MastermindsParserTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: MastermindsParser
+  type: class
+  source: Symfony\Component\HtmlSanitizer\Parser\MastermindsParser
+properties: []
+methods:
+- name: testParseValid
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HtmlSanitizer\Parser\MastermindsParser
+interfaces: []

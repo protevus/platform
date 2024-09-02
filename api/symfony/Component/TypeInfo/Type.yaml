@@ -1,0 +1,49 @@
+name: Type
+class_comment: null
+dependencies:
+- name: LogicException
+  type: class
+  source: Symfony\Component\TypeInfo\Exception\LogicException
+- name: BuiltinType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\BuiltinType
+- name: ObjectType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\ObjectType
+- name: TypeFactoryTrait
+  type: class
+  source: TypeFactoryTrait
+properties: []
+methods:
+- name: is
+  visibility: public
+  parameters:
+  - name: callable
+  comment: "# * @author Mathias Arlaud <mathias.arlaud@gmail.com>\n# * @author Baptiste\
+    \ Leduc <baptiste.leduc@gmail.com>\n# *\n# * @experimental\n# */\n# abstract class\
+    \ Type implements \\Stringable\n# {\n# use TypeFactoryTrait;\n# \n# abstract public\
+    \ function getBaseType(): BuiltinType|ObjectType;\n# \n# /**\n# * @param TypeIdentifier|class-string\
+    \ $subject\n# */\n# abstract public function isA(TypeIdentifier|string $subject):\
+    \ bool;\n# \n# abstract public function asNonNullable(): self;\n# \n# /**\n# *\
+    \ @param callable(Type): bool $callable"
+- name: isNullable
+  visibility: public
+  parameters: []
+  comment: null
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: arguments
+  comment: '# * Graceful fallback for unexisting methods.
+
+    # *
+
+    # * @param list<mixed> $arguments'
+traits:
+- Symfony\Component\TypeInfo\Exception\LogicException
+- Symfony\Component\TypeInfo\Type\BuiltinType
+- Symfony\Component\TypeInfo\Type\ObjectType
+- TypeFactoryTrait
+interfaces:
+- \Stringable

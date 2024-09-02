@@ -1,0 +1,39 @@
+name: CanBePrecognitive
+class_comment: null
+dependencies:
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+properties: []
+methods:
+- name: filterPrecognitiveRules
+  visibility: public
+  parameters:
+  - name: rules
+  comment: '# * Filter the given array of rules into an array of rules that are included
+    in precognitive headers.
+
+    # *
+
+    # * @param  array  $rules
+
+    # * @return array'
+- name: isAttemptingPrecognition
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the request is attempting to be precognitive.
+
+    # *
+
+    # * @return bool'
+- name: isPrecognitive
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the request is precognitive.
+
+    # *
+
+    # * @return bool'
+traits:
+- Illuminate\Support\Collection
+interfaces: []

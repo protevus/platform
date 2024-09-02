@@ -1,0 +1,91 @@
+name: FlashBag
+class_comment: '# * FlashBag flash message container.
+
+  # *
+
+  # * @author Drak <drak@zikula.org>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: storageKey
+    default: '''_symfony_flashes'''
+  comment: "# * FlashBag flash message container.\n# *\n# * @author Drak <drak@zikula.org>\n\
+    # */\n# class FlashBag implements FlashBagInterface\n# {\n# private string $name\
+    \ = 'flashes';\n# private array $flashes = [];\n# \n# /**\n# * @param string $storageKey\
+    \ The key used to store flashes in the session"
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: setName
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: initialize
+  visibility: public
+  parameters:
+  - name: '&$flashes'
+  comment: null
+- name: add
+  visibility: public
+  parameters:
+  - name: type
+  - name: message
+  comment: null
+- name: peek
+  visibility: public
+  parameters:
+  - name: type
+  - name: default
+    default: '[]'
+  comment: null
+- name: peekAll
+  visibility: public
+  parameters: []
+  comment: null
+- name: get
+  visibility: public
+  parameters:
+  - name: type
+  - name: default
+    default: '[]'
+  comment: null
+- name: all
+  visibility: public
+  parameters: []
+  comment: null
+- name: set
+  visibility: public
+  parameters:
+  - name: type
+  - name: messages
+  comment: null
+- name: setAll
+  visibility: public
+  parameters:
+  - name: messages
+  comment: null
+- name: has
+  visibility: public
+  parameters:
+  - name: type
+  comment: null
+- name: keys
+  visibility: public
+  parameters: []
+  comment: null
+- name: getStorageKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: clear
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces:
+- FlashBagInterface

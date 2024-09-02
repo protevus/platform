@@ -1,0 +1,33 @@
+name: Extension
+class_comment: null
+dependencies:
+- name: BaseExtension
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\Extension
+properties: []
+methods:
+- name: getAnnotatedClassesToCompile
+  visibility: public
+  parameters: []
+  comment: "# * Allow adding classes to the class cache.\n# *\n# * @author Fabien\
+    \ Potencier <fabien@symfony.com>\n# *\n# * @internal since Symfony 7.1, to be\
+    \ deprecated in 8.1; use Symfony\\Component\\DependencyInjection\\Extension\\\
+    Extension instead\n# */\n# abstract class Extension extends BaseExtension\n# {\n\
+    # private array $annotatedClasses = [];\n# \n# /**\n# * Gets the annotated classes\
+    \ to cache.\n# *\n# * @return string[]\n# *\n# * @deprecated since Symfony 7.1,\
+    \ to be removed in 8.0"
+- name: addAnnotatedClassesToCompile
+  visibility: public
+  parameters:
+  - name: annotatedClasses
+  comment: '# * Adds annotated classes to the class cache.
+
+    # *
+
+    # * @param string[] $annotatedClasses An array of class patterns
+
+    # *
+
+    # * @deprecated since Symfony 7.1, to be removed in 8.0'
+traits: []
+interfaces: []

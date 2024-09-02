@@ -1,0 +1,42 @@
+name: GenericLinkProvider
+class_comment: null
+dependencies:
+- name: EvolvableLinkProviderInterface
+  type: class
+  source: Psr\Link\EvolvableLinkProviderInterface
+- name: LinkInterface
+  type: class
+  source: Psr\Link\LinkInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: links
+    default: '[]'
+  comment: "# * @var LinkInterface[]\n# */\n# private array $links = [];\n# \n# /**\n\
+    # * @param LinkInterface[] $links"
+- name: getLinks
+  visibility: public
+  parameters: []
+  comment: null
+- name: getLinksByRel
+  visibility: public
+  parameters:
+  - name: rel
+  comment: null
+- name: withLink
+  visibility: public
+  parameters:
+  - name: link
+  comment: null
+- name: withoutLink
+  visibility: public
+  parameters:
+  - name: link
+  comment: null
+traits:
+- Psr\Link\EvolvableLinkProviderInterface
+- Psr\Link\LinkInterface
+interfaces:
+- EvolvableLinkProviderInterface

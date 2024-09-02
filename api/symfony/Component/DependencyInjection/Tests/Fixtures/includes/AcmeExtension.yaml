@@ -1,0 +1,34 @@
+name: AcmeExtension
+class_comment: null
+dependencies:
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ExtensionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+properties: []
+methods:
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: configuration
+  comment: null
+- name: getXsdValidationBasePath
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNamespace
+  visibility: public
+  parameters: []
+  comment: null
+- name: getAlias
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+interfaces:
+- ExtensionInterface

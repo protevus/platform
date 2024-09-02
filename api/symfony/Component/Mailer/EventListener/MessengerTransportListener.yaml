@@ -1,0 +1,33 @@
+name: MessengerTransportListener
+class_comment: null
+dependencies:
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: MessageEvent
+  type: class
+  source: Symfony\Component\Mailer\Event\MessageEvent
+- name: TransportNamesStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\TransportNamesStamp
+- name: Message
+  type: class
+  source: Symfony\Component\Mime\Message
+properties: []
+methods:
+- name: onMessage
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\Mailer\Event\MessageEvent
+- Symfony\Component\Messenger\Stamp\TransportNamesStamp
+- Symfony\Component\Mime\Message
+interfaces:
+- EventSubscriberInterface

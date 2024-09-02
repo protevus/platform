@@ -1,0 +1,435 @@
+name: AutowirePassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: NullLogger
+  type: class
+  source: Psr\Log\NullLogger
+- name: ClassExistsMock
+  type: class
+  source: Symfony\Bridge\PhpUnit\ClassExistsMock
+- name: FileLocator
+  type: class
+  source: Symfony\Component\Config\FileLocator
+- name: ClassExistenceResource
+  type: class
+  source: Symfony\Component\Config\Resource\ClassExistenceResource
+- name: ServiceLocatorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- name: TaggedIteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- name: Autowire
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\Autowire
+- name: AutowireAsDecoratorPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\AutowireAsDecoratorPass
+- name: AutowirePass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\AutowirePass
+- name: AutowireRequiredMethodsPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\AutowireRequiredMethodsPass
+- name: DecoratorServicePass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\DecoratorServicePass
+- name: ResolveClassPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ResolveClassPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: AutowiringFailedException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\AutowiringFailedException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: XmlFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\XmlFileLoader
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: BarInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\BarInterface
+- name: CaseSensitiveClass
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CaseSensitiveClass
+- name: FooVariadic
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\includes\FooVariadic
+- name: OptionalParameter
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\OptionalParameter
+- name: WithTarget
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\WithTarget
+- name: WithTargetAnonymous
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\WithTargetAnonymous
+- name: TypedReference
+  type: class
+  source: Symfony\Component\DependencyInjection\TypedReference
+- name: Expression
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Expression
+properties: []
+methods:
+- name: setUpBeforeClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessNotExistingActionParam
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessVariadic
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessAutowireParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessAutowireInterface
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompleteExistingDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompleteExistingDefinitionWithNotDefinedArguments
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPrivateConstructorThrowsAutowireException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTypeCollision
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTypeNotGuessable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTypeNotGuessableWithSubclass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTypeNotGuessableNoServicesFound
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTypeNotGuessableUnionType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGuessableUnionType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTypeNotGuessableIntersectionType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTypeNotGuessableCompositeType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGuessableIntersectionType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTypeNotGuessableWithTypeSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithTypeSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testServicesAreNotAutoCreated
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResolveParameter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOptionalParameter
+  visibility: public
+  parameters: []
+  comment: '# * @group legacy'
+- name: testParameterWithNullUnionIsSkipped
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParameterWithNullableIntersectionIsSkipped
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParameterWithNullUnionIsAutowired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDontTriggerAutowiring
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClassNotFoundThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParentClassNotFoundThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParentClassNotFoundThrowsExceptionWithoutConfigComponent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDontUseAbstractServices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSomeSpecificArgumentsAreSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testScalarArgsCannotBeAutowired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnionScalarArgsCannotBeAutowired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoTypeArgsCannotBeAutowired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOptionalScalarArgsDontMessUpOrder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOptionalScalarArgsNotPassedIfLast
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOptionalArgsNoRequiredForCoreClasses
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetterInjectionWithAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithNonExistingSetterAndAutowiring
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExplicitMethodInjectionAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCreateResourceTests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIgnoreServiceWithClassNotExisting
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetterInjectionFromAttributeCollisionThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInterfaceWithNoImplementationSuggestToWriteOne
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessDoesNotTriggerDeprecations
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEmptyStringIsKept
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithFactory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotWireableCalls
+  visibility: public
+  parameters:
+  - name: method
+  - name: expectedMsg
+  comment: '# * @dataProvider provideNotWireableCalls'
+- name: provideNotWireableCalls
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSuggestRegisteredServicesWithSimilarCase
+  visibility: public
+  parameters: []
+  comment: null
+- name: testByIdAlternative
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExceptionWhenAliasExists
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExceptionWhenAliasDoesNotExist
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInlineServicesAreNotCandidates
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAutowireDecorator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAutowireDecoratorChain
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAutowireDecoratorRenamedId
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDoNotAutowireDecoratorWhenSeveralArgumentOfTheType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testErroredServiceLocator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNamedArgumentAliasResolveCollisions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testArgumentWithTarget
+  visibility: public
+  parameters: []
+  comment: null
+- name: testArgumentWithTypoTarget
+  visibility: public
+  parameters: []
+  comment: null
+- name: testArgumentWithTypoTargetAnonymous
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDecorationWithServiceAndAliasedInterface
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAutowireWithNamedArgs
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAutowireUnderscoreNamedArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAutowireDefaultValueParametersLike
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAutowireAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAutowireAttributeNullFallbackTestRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAutowireAttributeNullFallbackTestOptional
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAsDecoratorAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTypeSymbolExcluded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTypeNamespaceExcluded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNestedAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLazyServiceAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLazyNotCompatibleWithAutowire
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAutowireAttributeWithEnvVar
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Psr\Log\LoggerInterface
+- Psr\Log\NullLogger
+- Symfony\Bridge\PhpUnit\ClassExistsMock
+- Symfony\Component\Config\FileLocator
+- Symfony\Component\Config\Resource\ClassExistenceResource
+- Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- Symfony\Component\DependencyInjection\Attribute\Autowire
+- Symfony\Component\DependencyInjection\Compiler\AutowireAsDecoratorPass
+- Symfony\Component\DependencyInjection\Compiler\AutowirePass
+- Symfony\Component\DependencyInjection\Compiler\AutowireRequiredMethodsPass
+- Symfony\Component\DependencyInjection\Compiler\DecoratorServicePass
+- Symfony\Component\DependencyInjection\Compiler\ResolveClassPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Exception\AutowiringFailedException
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Loader\XmlFileLoader
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\DependencyInjection\Tests\Fixtures\BarInterface
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CaseSensitiveClass
+- Symfony\Component\DependencyInjection\Tests\Fixtures\includes\FooVariadic
+- Symfony\Component\DependencyInjection\Tests\Fixtures\OptionalParameter
+- Symfony\Component\DependencyInjection\Tests\Fixtures\WithTarget
+- Symfony\Component\DependencyInjection\Tests\Fixtures\WithTargetAnonymous
+- Symfony\Component\DependencyInjection\TypedReference
+- Symfony\Component\ExpressionLanguage\Expression
+interfaces:
+- this
+- this

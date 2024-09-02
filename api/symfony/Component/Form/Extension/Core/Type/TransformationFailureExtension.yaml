@@ -1,0 +1,39 @@
+name: TransformationFailureExtension
+class_comment: '# * @author Christian Flothmann <christian.flothmann@sensiolabs.de>'
+dependencies:
+- name: AbstractTypeExtension
+  type: class
+  source: Symfony\Component\Form\AbstractTypeExtension
+- name: TransformationFailureListener
+  type: class
+  source: Symfony\Component\Form\Extension\Core\EventListener\TransformationFailureListener
+- name: FormBuilderInterface
+  type: class
+  source: Symfony\Component\Form\FormBuilderInterface
+- name: TranslatorInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatorInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: translator
+    default: 'null'
+  comment: null
+- name: buildForm
+  visibility: public
+  parameters:
+  - name: builder
+  - name: options
+  comment: null
+- name: getExtendedTypes
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\AbstractTypeExtension
+- Symfony\Component\Form\Extension\Core\EventListener\TransformationFailureListener
+- Symfony\Component\Form\FormBuilderInterface
+- Symfony\Contracts\Translation\TranslatorInterface
+interfaces: []

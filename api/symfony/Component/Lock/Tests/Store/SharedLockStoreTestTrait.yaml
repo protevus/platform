@@ -1,0 +1,43 @@
+name: SharedLockStoreTestTrait
+class_comment: null
+dependencies:
+- name: LockConflictedException
+  type: class
+  source: Symfony\Component\Lock\Exception\LockConflictedException
+- name: Key
+  type: class
+  source: Symfony\Component\Lock\Key
+- name: PersistingStoreInterface
+  type: class
+  source: Symfony\Component\Lock\PersistingStoreInterface
+properties: []
+methods:
+- name: getStore
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testSharedLockReadFirst
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSharedLockWriteFirst
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSharedLockPromote
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSharedLockPromoteAllowed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSharedLockDemote
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Lock\Exception\LockConflictedException
+- Symfony\Component\Lock\Key
+- Symfony\Component\Lock\PersistingStoreInterface
+interfaces: []

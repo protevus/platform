@@ -1,0 +1,35 @@
+name: MapUploadedFile
+class_comment: null
+dependencies:
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: RequestPayloadValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestPayloadValueResolver
+- name: ArgumentMetadata
+  type: class
+  source: Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: constraints
+    default: 'null'
+  - name: name
+    default: 'null'
+  - name: resolver
+    default: RequestPayloadValueResolver::class
+  - name: validationFailedStatusCode
+    default: Response::HTTP_UNPROCESSABLE_ENTITY
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestPayloadValueResolver
+- Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata
+- Symfony\Component\Validator\Constraint
+interfaces: []

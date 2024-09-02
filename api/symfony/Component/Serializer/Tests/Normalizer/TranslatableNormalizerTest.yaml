@@ -1,0 +1,47 @@
+name: TranslatableNormalizerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: TranslatableNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\TranslatableNormalizer
+- name: TranslatableInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatableInterface
+- name: TranslatorInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatorInterface
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testSupportsNormalization
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalizeWithNormalizationLocalePassedInConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: trans
+  visibility: public
+  parameters:
+  - name: translator
+  - name: locale
+    default: 'null'
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Normalizer\TranslatableNormalizer
+- Symfony\Contracts\Translation\TranslatableInterface
+- Symfony\Contracts\Translation\TranslatorInterface
+interfaces:
+- TranslatableInterface

@@ -1,0 +1,58 @@
+name: UniqueLock
+class_comment: null
+dependencies:
+- name: Cache
+  type: class
+  source: Illuminate\Contracts\Cache\Repository
+properties:
+- name: cache
+  visibility: protected
+  comment: '# * The cache repository implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Cache\Repository'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: cache
+  comment: "# * The cache repository implementation.\n# *\n# * @var \\Illuminate\\\
+    Contracts\\Cache\\Repository\n# */\n# protected $cache;\n# \n# /**\n# * Create\
+    \ a new unique lock manager instance.\n# *\n# * @param  \\Illuminate\\Contracts\\\
+    Cache\\Repository  $cache\n# * @return void"
+- name: acquire
+  visibility: public
+  parameters:
+  - name: job
+  comment: '# * Attempt to acquire a lock for the given job.
+
+    # *
+
+    # * @param  mixed  $job
+
+    # * @return bool'
+- name: release
+  visibility: public
+  parameters:
+  - name: job
+  comment: '# * Release the lock for the given job.
+
+    # *
+
+    # * @param  mixed  $job
+
+    # * @return void'
+- name: getKey
+  visibility: protected
+  parameters:
+  - name: job
+  comment: '# * Generate the lock key for the given job.
+
+    # *
+
+    # * @param  mixed  $job
+
+    # * @return string'
+traits: []
+interfaces: []

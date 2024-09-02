@@ -1,0 +1,43 @@
+name: LoaderChain
+class_comment: "# * Calls multiple {@link LoaderInterface} instances in a chain.\n\
+  # *\n# * This class accepts multiple instances of LoaderInterface to be passed to\
+  \ the\n# * constructor. When {@link loadClassMetadata()} is called, the same method\
+  \ is called\n# * in <em>all</em> of these loaders, regardless of whether any of\
+  \ them was\n# * successful or not.\n# *\n# * @author Bernhard Schussek <bschussek@gmail.com>\n\
+  # * @author K\xE9vin Dunglas <dunglas@gmail.com>"
+dependencies:
+- name: MappingException
+  type: class
+  source: Symfony\Component\Serializer\Exception\MappingException
+- name: ClassMetadataInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassMetadataInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: loaders
+  comment: "# * Calls multiple {@link LoaderInterface} instances in a chain.\n# *\n\
+    # * This class accepts multiple instances of LoaderInterface to be passed to the\n\
+    # * constructor. When {@link loadClassMetadata()} is called, the same method is\
+    \ called\n# * in <em>all</em> of these loaders, regardless of whether any of them\
+    \ was\n# * successful or not.\n# *\n# * @author Bernhard Schussek <bschussek@gmail.com>\n\
+    # * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# */\n# class LoaderChain implements\
+    \ LoaderInterface\n# {\n# /**\n# * Accepts a list of LoaderInterface instances.\n\
+    # *\n# * @param LoaderInterface[] $loaders An array of LoaderInterface instances\n\
+    # *\n# * @throws MappingException If any of the loaders does not implement LoaderInterface"
+- name: loadClassMetadata
+  visibility: public
+  parameters:
+  - name: metadata
+  comment: null
+- name: getLoaders
+  visibility: public
+  parameters: []
+  comment: '# * @return LoaderInterface[]'
+traits:
+- Symfony\Component\Serializer\Exception\MappingException
+- Symfony\Component\Serializer\Mapping\ClassMetadataInterface
+interfaces:
+- LoaderInterface

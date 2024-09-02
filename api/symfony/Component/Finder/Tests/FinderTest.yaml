@@ -1,0 +1,332 @@
+name: FinderTest
+class_comment: null
+dependencies:
+- name: DirectoryNotFoundException
+  type: class
+  source: Symfony\Component\Finder\Exception\DirectoryNotFoundException
+- name: Finder
+  type: class
+  source: Symfony\Component\Finder\Finder
+- name: VfsIteratorTestTrait
+  type: class
+  source: Iterator\VfsIteratorTestTrait
+properties: []
+methods:
+- name: testCreate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDirectories
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFiles
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemoveTrailingSlash
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSymlinksNotResolved
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBackPathNotNormalized
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDepth
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDepthWithArrayParam
+  visibility: public
+  parameters: []
+  comment: null
+- name: testName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNameWithArrayParam
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotNameWithArrayParam
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRegexName
+  visibility: public
+  parameters:
+  - name: regex
+  comment: '# * @dataProvider getRegexNameTestData'
+- name: testSize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSizeWithArrayParam
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDateWithArrayParam
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExclude
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIgnoreVCS
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIgnoreVCSIgnored
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIgnoreVCSIgnoredUpToFirstGitRepositoryRoot
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIgnoreVCSCanBeDisabledAfterFirstIteration
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIgnoreDotFiles
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIgnoreDotFilesCanBeDisabledAfterFirstIteration
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSortByName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSortByType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSortByAccessedTime
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSortByChangedTime
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSortByModifiedTime
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseSorting
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSortByNameNatural
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSortByNameCaseInsensitive
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSort
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSortAcrossDirectories
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFilter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFilterPrune
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFollowLinks
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIn
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInWithNonExistentDirectory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInWithNonExistentDirectoryLegacyException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInWithGlob
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInWithNonDirectoryGlob
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInWithGlobBrace
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetIteratorWithoutIn
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetIterator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRelativePath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRelativePathname
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetFilenameWithoutExtension
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAppendWithAFinder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAppendWithAnArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAppendReturnsAFinder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAppendDoesNotRequireIn
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMultipleAppendCallsWithSorting
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCountDirectories
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCountFiles
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCountWithoutIn
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasResults
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoResults
+  visibility: public
+  parameters: []
+  comment: null
+- name: testContains
+  visibility: public
+  parameters:
+  - name: matchPatterns
+  - name: noMatchPatterns
+  - name: expected
+  comment: '# * @dataProvider getContainsTestData'
+- name: testContainsOnDirectory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotContainsOnDirectory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMultipleLocations
+  visibility: public
+  parameters: []
+  comment: '# * Searching in multiple locations involves AppendIterator which does
+    an unnecessary rewind which leaves FilterIterator
+
+    # * with inner FilesystemIterator in an invalid state.
+
+    # *
+
+    # * @see https://bugs.php.net/68557'
+- name: testMultipleLocationsWithSubDirectories
+  visibility: public
+  parameters: []
+  comment: '# * Searching in multiple locations with sub directories involves
+
+    # * AppendIterator which does an unnecessary rewind which leaves
+
+    # * FilterIterator with inner FilesystemIterator in an invalid state.
+
+    # *
+
+    # * @see https://bugs.php.net/68557'
+- name: testIteratorKeys
+  visibility: public
+  parameters: []
+  comment: '# * Iterator keys must be the file pathname.'
+- name: testRegexSpecialCharsLocationWithPathRestrictionContainingStartFlag
+  visibility: public
+  parameters: []
+  comment: null
+- name: getContainsTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRegexNameTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPath
+  visibility: public
+  parameters:
+  - name: matchPatterns
+  - name: noMatchPatterns
+  - name: expected
+  comment: '# * @dataProvider getTestPathData'
+- name: getTestPathData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAccessDeniedException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIgnoredAccessDeniedException
+  visibility: public
+  parameters: []
+  comment: null
+- name: buildFinder
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Finder\Exception\DirectoryNotFoundException
+- Symfony\Component\Finder\Finder
+- Iterator\VfsIteratorTestTrait
+interfaces:
+- the
+- the
+- the

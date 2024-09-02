@@ -1,0 +1,35 @@
+name: ProcessTimedOutException
+class_comment: null
+dependencies:
+- name: ProcessResult
+  type: class
+  source: Illuminate\Contracts\Process\ProcessResult
+- name: SymfonyTimeoutException
+  type: class
+  source: Symfony\Component\Process\Exception\ProcessTimedOutException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Process\Exception\RuntimeException
+properties:
+- name: result
+  visibility: public
+  comment: '# * The process result instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Process\ProcessResult'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: original
+  - name: result
+  comment: "# * The process result instance.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Process\\ProcessResult\n# */\n# public $result;\n# \n# /**\n# * Create a new exception\
+    \ instance.\n# *\n# * @param  \\Symfony\\Component\\Process\\Exception\\ProcessTimedOutException\
+    \  $original\n# * @param  \\Illuminate\\Contracts\\Process\\ProcessResult  $result\n\
+    # * @return void"
+traits:
+- Illuminate\Contracts\Process\ProcessResult
+- Symfony\Component\Process\Exception\RuntimeException
+interfaces: []

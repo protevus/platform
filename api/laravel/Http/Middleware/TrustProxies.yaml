@@ -1,0 +1,153 @@
+name: TrustProxies
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Request
+  type: class
+  source: Illuminate\Http\Request
+properties:
+- name: proxies
+  visibility: protected
+  comment: '# * The trusted proxies for the application.
+
+    # *
+
+    # * @var array<int, string>|string|null'
+- name: headers
+  visibility: protected
+  comment: '# * The trusted proxies headers for the application.
+
+    # *
+
+    # * @var int'
+- name: alwaysTrustProxies
+  visibility: protected
+  comment: '# * The proxies that have been configured to always be trusted.
+
+    # *
+
+    # * @var array<int, string>|string|null'
+- name: alwaysTrustHeaders
+  visibility: protected
+  comment: '# * The proxies headers that have been configured to always be trusted.
+
+    # *
+
+    # * @var int|null'
+methods:
+- name: handle
+  visibility: public
+  parameters:
+  - name: request
+  - name: next
+  comment: "# * The trusted proxies for the application.\n# *\n# * @var array<int,\
+    \ string>|string|null\n# */\n# protected $proxies;\n# \n# /**\n# * The trusted\
+    \ proxies headers for the application.\n# *\n# * @var int\n# */\n# protected $headers\
+    \ = Request::HEADER_X_FORWARDED_FOR |\n# Request::HEADER_X_FORWARDED_HOST |\n\
+    # Request::HEADER_X_FORWARDED_PORT |\n# Request::HEADER_X_FORWARDED_PROTO |\n\
+    # Request::HEADER_X_FORWARDED_AWS_ELB;\n# \n# /**\n# * The proxies that have been\
+    \ configured to always be trusted.\n# *\n# * @var array<int, string>|string|null\n\
+    # */\n# protected static $alwaysTrustProxies;\n# \n# /**\n# * The proxies headers\
+    \ that have been configured to always be trusted.\n# *\n# * @var int|null\n# */\n\
+    # protected static $alwaysTrustHeaders;\n# \n# /**\n# * Handle an incoming request.\n\
+    # *\n# * @param  \\Illuminate\\Http\\Request  $request\n# * @param  \\Closure\
+    \  $next\n# * @return mixed\n# *\n# * @throws \\Symfony\\Component\\HttpKernel\\\
+    Exception\\HttpException"
+- name: setTrustedProxyIpAddresses
+  visibility: protected
+  parameters:
+  - name: request
+  comment: '# * Sets the trusted proxies on the request.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return void'
+- name: setTrustedProxyIpAddressesToSpecificIps
+  visibility: protected
+  parameters:
+  - name: request
+  - name: trustedIps
+  comment: '# * Specify the IP addresses to trust explicitly.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  array  $trustedIps
+
+    # * @return void'
+- name: setTrustedProxyIpAddressesToTheCallingIp
+  visibility: protected
+  parameters:
+  - name: request
+  comment: '# * Set the trusted proxy to be the IP address calling this servers.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return void'
+- name: getTrustedHeaderNames
+  visibility: protected
+  parameters: []
+  comment: '# * Retrieve trusted header name(s), falling back to defaults if config
+    not set.
+
+    # *
+
+    # * @return int A bit field of Request::HEADER_*, to set which headers to trust
+    from your proxies.'
+- name: headers
+  visibility: protected
+  parameters: []
+  comment: '# * Get the trusted headers.
+
+    # *
+
+    # * @return int'
+- name: proxies
+  visibility: protected
+  parameters: []
+  comment: '# * Get the trusted proxies.
+
+    # *
+
+    # * @return array|string|null'
+- name: at
+  visibility: public
+  parameters:
+  - name: proxies
+  comment: '# * Specify the IP addresses of proxies that should always be trusted.
+
+    # *
+
+    # * @param  array|string  $proxies
+
+    # * @return void'
+- name: withHeaders
+  visibility: public
+  parameters:
+  - name: headers
+  comment: '# * Specify the proxy headers that should always be trusted.
+
+    # *
+
+    # * @param  int  $headers
+
+    # * @return void'
+- name: flushState
+  visibility: public
+  parameters: []
+  comment: '# * Flush the state of the middleware.
+
+    # *
+
+    # * @return void'
+traits:
+- Closure
+- Illuminate\Http\Request
+interfaces: []

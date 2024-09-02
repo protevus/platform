@@ -1,0 +1,13 @@
+name: AutowireTrait
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: autowire
+  visibility: public
+  parameters:
+  - name: autowired
+    default: 'true'
+  comment: null
+traits: []
+interfaces: []

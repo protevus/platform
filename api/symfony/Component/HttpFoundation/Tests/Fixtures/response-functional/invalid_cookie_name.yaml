@@ -1,0 +1,11 @@
+name: invalid_cookie_name
+class_comment: null
+dependencies:
+- name: Cookie
+  type: class
+  source: Symfony\Component\HttpFoundation\Cookie
+properties: []
+methods: []
+traits:
+- Symfony\Component\HttpFoundation\Cookie
+interfaces: []

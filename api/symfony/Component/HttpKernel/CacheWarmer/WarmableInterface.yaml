@@ -1,0 +1,39 @@
+name: WarmableInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: warmUp
+  visibility: public
+  parameters:
+  - name: cacheDir
+  - name: buildDir
+    default: 'null'
+  comment: '# * Interface for classes that support warming their cache.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # interface WarmableInterface
+
+    # {
+
+    # /**
+
+    # * Warms up the cache.
+
+    # *
+
+    # * @param string      $cacheDir Where warm-up artifacts should be stored
+
+    # * @param string|null $buildDir Where read-only artifacts should go; null when
+    called after compile-time
+
+    # *
+
+    # * @return string[] A list of classes or files to preload'
+traits: []
+interfaces: []

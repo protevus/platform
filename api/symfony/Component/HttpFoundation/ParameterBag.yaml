@@ -1,0 +1,177 @@
+name: ParameterBag
+class_comment: '# * ParameterBag is a container for key/value pairs.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @implements \IteratorAggregate<string, mixed>'
+dependencies:
+- name: BadRequestException
+  type: class
+  source: Symfony\Component\HttpFoundation\Exception\BadRequestException
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\HttpFoundation\Exception\UnexpectedValueException
+properties: []
+methods:
+- name: all
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  comment: "# * ParameterBag is a container for key/value pairs.\n# *\n# * @author\
+    \ Fabien Potencier <fabien@symfony.com>\n# *\n# * @implements \\IteratorAggregate<string,\
+    \ mixed>\n# */\n# class ParameterBag implements \\IteratorAggregate, \\Countable\n\
+    # {\n# public function __construct(\n# protected array $parameters = [],\n# )\
+    \ {\n# }\n# \n# /**\n# * Returns the parameters.\n# *\n# * @param string|null\
+    \ $key The name of the parameter to return or null to get them all"
+- name: keys
+  visibility: public
+  parameters: []
+  comment: '# * Returns the parameter keys.'
+- name: replace
+  visibility: public
+  parameters:
+  - name: parameters
+    default: '[]'
+  comment: '# * Replaces the current parameters by a new set.'
+- name: add
+  visibility: public
+  parameters:
+  - name: parameters
+    default: '[]'
+  comment: '# * Adds parameters.'
+- name: get
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: null
+- name: set
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: null
+- name: has
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Returns true if the parameter is defined.'
+- name: remove
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Removes a parameter.'
+- name: getAlpha
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: ''''''
+  comment: '# * Returns the alphabetic characters of the parameter value.'
+- name: getAlnum
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: ''''''
+  comment: '# * Returns the alphabetic characters and digits of the parameter value.'
+- name: getDigits
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: ''''''
+  comment: '# * Returns the digits of the parameter value.'
+- name: getString
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: ''''''
+  comment: '# * Returns the parameter as string.'
+- name: getInt
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: '0'
+  comment: '# * Returns the parameter value converted to integer.'
+- name: getBoolean
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'false'
+  comment: '# * Returns the parameter value converted to boolean.'
+- name: getEnum
+  visibility: public
+  parameters:
+  - name: key
+  - name: class
+  - name: default
+    default: 'null'
+  comment: '# * Returns the parameter value converted to an enum.
+
+    # *
+
+    # * @template T of \BackedEnum
+
+    # *
+
+    # * @param class-string<T> $class
+
+    # * @param ?T              $default
+
+    # *
+
+    # * @return ?T
+
+    # *
+
+    # * @psalm-return ($default is null ? T|null : T)'
+- name: filter
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  - name: filter
+    default: \FILTER_DEFAULT
+  - name: options
+    default: '[]'
+  comment: '# * Filter key.
+
+    # *
+
+    # * @param int                                     $filter  FILTER_* constant
+
+    # * @param int|array{flags?: int, options?: array} $options Flags from FILTER_*
+    constants
+
+    # *
+
+    # * @see https://php.net/filter-var'
+- name: getIterator
+  visibility: public
+  parameters: []
+  comment: '# * Returns an iterator for parameters.
+
+    # *
+
+    # * @return \ArrayIterator<string, mixed>'
+- name: count
+  visibility: public
+  parameters: []
+  comment: '# * Returns the number of parameters.'
+traits:
+- Symfony\Component\HttpFoundation\Exception\BadRequestException
+- Symfony\Component\HttpFoundation\Exception\UnexpectedValueException
+interfaces:
+- \IteratorAggregate
+- \IteratorAggregate

@@ -1,0 +1,113 @@
+name: Logger
+class_comment: "# * Minimalist PSR-3 logger designed to write in stderr or any other\
+  \ stream.\n# *\n# * @author K\xE9vin Dunglas <dunglas@gmail.com>"
+dependencies:
+- name: AbstractLogger
+  type: class
+  source: Psr\Log\AbstractLogger
+- name: InvalidArgumentException
+  type: class
+  source: Psr\Log\InvalidArgumentException
+- name: LogLevel
+  type: class
+  source: Psr\Log\LogLevel
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+properties:
+- name: handle
+  visibility: private
+  comment: "# * Minimalist PSR-3 logger designed to write in stderr or any other stream.\n\
+    # *\n# * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# */\n# class Logger extends\
+    \ AbstractLogger implements DebugLoggerInterface\n# {\n# private const LEVELS\
+    \ = [\n# LogLevel::DEBUG => 0,\n# LogLevel::INFO => 1,\n# LogLevel::NOTICE =>\
+    \ 2,\n# LogLevel::WARNING => 3,\n# LogLevel::ERROR => 4,\n# LogLevel::CRITICAL\
+    \ => 5,\n# LogLevel::ALERT => 6,\n# LogLevel::EMERGENCY => 7,\n# ];\n# private\
+    \ const PRIORITIES = [\n# LogLevel::DEBUG => 100,\n# LogLevel::INFO => 200,\n\
+    # LogLevel::NOTICE => 250,\n# LogLevel::WARNING => 300,\n# LogLevel::ERROR =>\
+    \ 400,\n# LogLevel::CRITICAL => 500,\n# LogLevel::ALERT => 550,\n# LogLevel::EMERGENCY\
+    \ => 600,\n# ];\n# \n# private int $minLevelIndex;\n# private \\Closure $formatter;\n\
+    # private bool $debug = false;\n# private array $logs = [];\n# private array $errorCount\
+    \ = [];\n# \n# /** @var resource|null"
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: minLevel
+    default: 'null'
+  - name: output
+    default: 'null'
+  - name: formatter
+    default: 'null'
+  - name: requestStack
+    default: 'null'
+  - name: debug
+    default: 'false'
+  comment: "# * Minimalist PSR-3 logger designed to write in stderr or any other stream.\n\
+    # *\n# * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# */\n# class Logger extends\
+    \ AbstractLogger implements DebugLoggerInterface\n# {\n# private const LEVELS\
+    \ = [\n# LogLevel::DEBUG => 0,\n# LogLevel::INFO => 1,\n# LogLevel::NOTICE =>\
+    \ 2,\n# LogLevel::WARNING => 3,\n# LogLevel::ERROR => 4,\n# LogLevel::CRITICAL\
+    \ => 5,\n# LogLevel::ALERT => 6,\n# LogLevel::EMERGENCY => 7,\n# ];\n# private\
+    \ const PRIORITIES = [\n# LogLevel::DEBUG => 100,\n# LogLevel::INFO => 200,\n\
+    # LogLevel::NOTICE => 250,\n# LogLevel::WARNING => 300,\n# LogLevel::ERROR =>\
+    \ 400,\n# LogLevel::CRITICAL => 500,\n# LogLevel::ALERT => 550,\n# LogLevel::EMERGENCY\
+    \ => 600,\n# ];\n# \n# private int $minLevelIndex;\n# private \\Closure $formatter;\n\
+    # private bool $debug = false;\n# private array $logs = [];\n# private array $errorCount\
+    \ = [];\n# \n# /** @var resource|null */\n# private $handle;\n# \n# /**\n# * @param\
+    \ string|resource|null $output"
+- name: enableDebug
+  visibility: public
+  parameters: []
+  comment: null
+- name: log
+  visibility: public
+  parameters:
+  - name: level
+  - name: message
+  - name: context
+    default: '[]'
+  comment: null
+- name: getLogs
+  visibility: public
+  parameters:
+  - name: request
+    default: 'null'
+  comment: null
+- name: countErrors
+  visibility: public
+  parameters:
+  - name: request
+    default: 'null'
+  comment: null
+- name: clear
+  visibility: public
+  parameters: []
+  comment: null
+- name: format
+  visibility: private
+  parameters:
+  - name: level
+  - name: message
+  - name: context
+  - name: prefixDate
+    default: 'true'
+  comment: null
+- name: record
+  visibility: private
+  parameters:
+  - name: level
+  - name: message
+  - name: context
+  comment: null
+traits:
+- Psr\Log\AbstractLogger
+- Psr\Log\InvalidArgumentException
+- Psr\Log\LogLevel
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestStack
+interfaces:
+- DebugLoggerInterface

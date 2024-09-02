@@ -1,0 +1,96 @@
+name: DataUriNormalizerTest
+class_comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>"
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: File
+  type: class
+  source: Symfony\Component\HttpFoundation\File\File
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Serializer\Exception\UnexpectedValueException
+- name: DataUriNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DataUriNormalizer
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- name: NormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\NormalizerInterface
+properties: []
+methods:
+- name: testNormalizeHttpFoundationFile
+  visibility: public
+  parameters: []
+  comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# */\n# class DataUriNormalizerTest\
+    \ extends TestCase\n# {\n# private const TEST_GIF_DATA = 'data:image/gif;base64,R0lGODdhAQABAIAAAP///////ywAAAAAAQABAAACAkQBADs=';\n\
+    # private const TEST_TXT_DATA = 'data:text/plain,K%C3%A9vin%20Dunglas%0A';\n#\
+    \ private const TEST_TXT_CONTENT = \"K\xE9vin Dunglas\\n\";\n# \n# private DataUriNormalizer\
+    \ $normalizer;\n# \n# protected function setUp(): void\n# {\n# $this->normalizer\
+    \ = new DataUriNormalizer();\n# }\n# \n# public function testInterface()\n# {\n\
+    # $this->assertInstanceOf(NormalizerInterface::class, $this->normalizer);\n# $this->assertInstanceOf(DenormalizerInterface::class,\
+    \ $this->normalizer);\n# }\n# \n# public function testSupportNormalization()\n\
+    # {\n# $this->assertFalse($this->normalizer->supportsNormalization(new \\stdClass()));\n\
+    # $this->assertTrue($this->normalizer->supportsNormalization(new \\SplFileObject('data:,Hello%2C%20World!')));\n\
+    # }\n# \n# /**\n# * @requires extension fileinfo"
+- name: testNormalizeSplFileInfo
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension fileinfo'
+- name: testNormalizeText
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension fileinfo'
+- name: testSupportsDenormalization
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalizeSplFileInfo
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalizeSplFileObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalizeHttpFoundationFile
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGiveNotAccessToLocalFiles
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidData
+  visibility: public
+  parameters:
+  - name: uri
+  comment: '# * @dataProvider invalidUriProvider'
+- name: invalidUriProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidData
+  visibility: public
+  parameters:
+  - name: uri
+  comment: '# * @dataProvider validUriProvider'
+- name: validUriProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: getContent
+  visibility: private
+  parameters:
+  - name: file
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\File\File
+- Symfony\Component\Serializer\Exception\UnexpectedValueException
+- Symfony\Component\Serializer\Normalizer\DataUriNormalizer
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- Symfony\Component\Serializer\Normalizer\NormalizerInterface
+interfaces: []

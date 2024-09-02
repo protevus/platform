@@ -1,0 +1,35 @@
+name: fragment_renderer
+class_comment: null
+dependencies:
+- name: LazyLoadingFragmentHandler
+  type: class
+  source: Symfony\Component\HttpKernel\DependencyInjection\LazyLoadingFragmentHandler
+- name: EsiFragmentRenderer
+  type: class
+  source: Symfony\Component\HttpKernel\Fragment\EsiFragmentRenderer
+- name: FragmentUriGenerator
+  type: class
+  source: Symfony\Component\HttpKernel\Fragment\FragmentUriGenerator
+- name: FragmentUriGeneratorInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Fragment\FragmentUriGeneratorInterface
+- name: HIncludeFragmentRenderer
+  type: class
+  source: Symfony\Component\HttpKernel\Fragment\HIncludeFragmentRenderer
+- name: InlineFragmentRenderer
+  type: class
+  source: Symfony\Component\HttpKernel\Fragment\InlineFragmentRenderer
+- name: SsiFragmentRenderer
+  type: class
+  source: Symfony\Component\HttpKernel\Fragment\SsiFragmentRenderer
+properties: []
+methods: []
+traits:
+- Symfony\Component\HttpKernel\DependencyInjection\LazyLoadingFragmentHandler
+- Symfony\Component\HttpKernel\Fragment\EsiFragmentRenderer
+- Symfony\Component\HttpKernel\Fragment\FragmentUriGenerator
+- Symfony\Component\HttpKernel\Fragment\FragmentUriGeneratorInterface
+- Symfony\Component\HttpKernel\Fragment\HIncludeFragmentRenderer
+- Symfony\Component\HttpKernel\Fragment\InlineFragmentRenderer
+- Symfony\Component\HttpKernel\Fragment\SsiFragmentRenderer
+interfaces: []

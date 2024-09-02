@@ -1,0 +1,1619 @@
+name: Stringable
+class_comment: null
+dependencies:
+- name: ArrayAccess
+  type: class
+  source: ArrayAccess
+- name: Closure
+  type: class
+  source: Closure
+- name: Date
+  type: class
+  source: Illuminate\Support\Facades\Date
+- name: Conditionable
+  type: class
+  source: Illuminate\Support\Traits\Conditionable
+- name: Dumpable
+  type: class
+  source: Illuminate\Support\Traits\Dumpable
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: Tappable
+  type: class
+  source: Illuminate\Support\Traits\Tappable
+- name: JsonSerializable
+  type: class
+  source: JsonSerializable
+- name: BaseStringable
+  type: class
+  source: Stringable
+properties:
+- name: value
+  visibility: protected
+  comment: '# * The underlying string value.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: value
+    default: ''''''
+  comment: "# * The underlying string value.\n# *\n# * @var string\n# */\n# protected\
+    \ $value;\n# \n# /**\n# * Create a new instance of the class.\n# *\n# * @param\
+    \  string  $value\n# * @return void"
+- name: after
+  visibility: public
+  parameters:
+  - name: search
+  comment: '# * Return the remainder of a string after the first occurrence of a given
+    value.
+
+    # *
+
+    # * @param  string  $search
+
+    # * @return static'
+- name: afterLast
+  visibility: public
+  parameters:
+  - name: search
+  comment: '# * Return the remainder of a string after the last occurrence of a given
+    value.
+
+    # *
+
+    # * @param  string  $search
+
+    # * @return static'
+- name: append
+  visibility: public
+  parameters:
+  - name: '...$values'
+  comment: '# * Append the given values to the string.
+
+    # *
+
+    # * @param  array|string  ...$values
+
+    # * @return static'
+- name: newLine
+  visibility: public
+  parameters:
+  - name: count
+    default: '1'
+  comment: '# * Append a new line to the string.
+
+    # *
+
+    # * @param  int  $count
+
+    # * @return $this'
+- name: ascii
+  visibility: public
+  parameters:
+  - name: language
+    default: '''en'''
+  comment: '# * Transliterate a UTF-8 value to ASCII.
+
+    # *
+
+    # * @param  string  $language
+
+    # * @return static'
+- name: basename
+  visibility: public
+  parameters:
+  - name: suffix
+    default: ''''''
+  comment: '# * Get the trailing name component of the path.
+
+    # *
+
+    # * @param  string  $suffix
+
+    # * @return static'
+- name: charAt
+  visibility: public
+  parameters:
+  - name: index
+  comment: '# * Get the character at the specified index.
+
+    # *
+
+    # * @param  int  $index
+
+    # * @return string|false'
+- name: chopStart
+  visibility: public
+  parameters:
+  - name: needle
+  comment: '# * Remove the given string if it exists at the start of the current string.
+
+    # *
+
+    # * @param  string|array  $needle
+
+    # * @return static'
+- name: chopEnd
+  visibility: public
+  parameters:
+  - name: needle
+  comment: '# * Remove the given string if it exists at the end of the current string.
+
+    # *
+
+    # * @param  string|array  $needle
+
+    # * @return static'
+- name: classBasename
+  visibility: public
+  parameters: []
+  comment: '# * Get the basename of the class path.
+
+    # *
+
+    # * @return static'
+- name: before
+  visibility: public
+  parameters:
+  - name: search
+  comment: '# * Get the portion of a string before the first occurrence of a given
+    value.
+
+    # *
+
+    # * @param  string  $search
+
+    # * @return static'
+- name: beforeLast
+  visibility: public
+  parameters:
+  - name: search
+  comment: '# * Get the portion of a string before the last occurrence of a given
+    value.
+
+    # *
+
+    # * @param  string  $search
+
+    # * @return static'
+- name: between
+  visibility: public
+  parameters:
+  - name: from
+  - name: to
+  comment: '# * Get the portion of a string between two given values.
+
+    # *
+
+    # * @param  string  $from
+
+    # * @param  string  $to
+
+    # * @return static'
+- name: betweenFirst
+  visibility: public
+  parameters:
+  - name: from
+  - name: to
+  comment: '# * Get the smallest possible portion of a string between two given values.
+
+    # *
+
+    # * @param  string  $from
+
+    # * @param  string  $to
+
+    # * @return static'
+- name: camel
+  visibility: public
+  parameters: []
+  comment: '# * Convert a value to camel case.
+
+    # *
+
+    # * @return static'
+- name: contains
+  visibility: public
+  parameters:
+  - name: needles
+  - name: ignoreCase
+    default: 'false'
+  comment: '# * Determine if a given string contains a given substring.
+
+    # *
+
+    # * @param  string|iterable<string>  $needles
+
+    # * @param  bool  $ignoreCase
+
+    # * @return bool'
+- name: containsAll
+  visibility: public
+  parameters:
+  - name: needles
+  - name: ignoreCase
+    default: 'false'
+  comment: '# * Determine if a given string contains all array values.
+
+    # *
+
+    # * @param  iterable<string>  $needles
+
+    # * @param  bool  $ignoreCase
+
+    # * @return bool'
+- name: convertCase
+  visibility: public
+  parameters:
+  - name: mode
+    default: MB_CASE_FOLD
+  - name: encoding
+    default: '''UTF-8'''
+  comment: '# * Convert the case of a string.
+
+    # *
+
+    # * @param  int  $mode
+
+    # * @param  string|null  $encoding
+
+    # * @return static'
+- name: dirname
+  visibility: public
+  parameters:
+  - name: levels
+    default: '1'
+  comment: '# * Get the parent directory''s path.
+
+    # *
+
+    # * @param  int  $levels
+
+    # * @return static'
+- name: endsWith
+  visibility: public
+  parameters:
+  - name: needles
+  comment: '# * Determine if a given string ends with a given substring.
+
+    # *
+
+    # * @param  string|iterable<string>  $needles
+
+    # * @return bool'
+- name: exactly
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Determine if the string is an exact match with the given value.
+
+    # *
+
+    # * @param  \Illuminate\Support\Stringable|string  $value
+
+    # * @return bool'
+- name: excerpt
+  visibility: public
+  parameters:
+  - name: phrase
+    default: ''''''
+  - name: options
+    default: '[]'
+  comment: '# * Extracts an excerpt from text that matches the first instance of a
+    phrase.
+
+    # *
+
+    # * @param  string  $phrase
+
+    # * @param  array  $options
+
+    # * @return string|null'
+- name: explode
+  visibility: public
+  parameters:
+  - name: delimiter
+  - name: limit
+    default: PHP_INT_MAX
+  comment: '# * Explode the string into an array.
+
+    # *
+
+    # * @param  string  $delimiter
+
+    # * @param  int  $limit
+
+    # * @return \Illuminate\Support\Collection<int, string>'
+- name: split
+  visibility: public
+  parameters:
+  - name: pattern
+  - name: limit
+    default: '-1'
+  - name: flags
+    default: '0'
+  comment: '# * Split a string using a regular expression or by length.
+
+    # *
+
+    # * @param  string|int  $pattern
+
+    # * @param  int  $limit
+
+    # * @param  int  $flags
+
+    # * @return \Illuminate\Support\Collection<int, string>'
+- name: finish
+  visibility: public
+  parameters:
+  - name: cap
+  comment: '# * Cap a string with a single instance of a given value.
+
+    # *
+
+    # * @param  string  $cap
+
+    # * @return static'
+- name: is
+  visibility: public
+  parameters:
+  - name: pattern
+  comment: '# * Determine if a given string matches a given pattern.
+
+    # *
+
+    # * @param  string|iterable<string>  $pattern
+
+    # * @return bool'
+- name: isAscii
+  visibility: public
+  parameters: []
+  comment: '# * Determine if a given string is 7 bit ASCII.
+
+    # *
+
+    # * @return bool'
+- name: isJson
+  visibility: public
+  parameters: []
+  comment: '# * Determine if a given string is valid JSON.
+
+    # *
+
+    # * @return bool'
+- name: isUrl
+  visibility: public
+  parameters: []
+  comment: '# * Determine if a given value is a valid URL.
+
+    # *
+
+    # * @return bool'
+- name: isUuid
+  visibility: public
+  parameters: []
+  comment: '# * Determine if a given string is a valid UUID.
+
+    # *
+
+    # * @return bool'
+- name: isUlid
+  visibility: public
+  parameters: []
+  comment: '# * Determine if a given string is a valid ULID.
+
+    # *
+
+    # * @return bool'
+- name: isEmpty
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the given string is empty.
+
+    # *
+
+    # * @return bool'
+- name: isNotEmpty
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the given string is not empty.
+
+    # *
+
+    # * @return bool'
+- name: kebab
+  visibility: public
+  parameters: []
+  comment: '# * Convert a string to kebab case.
+
+    # *
+
+    # * @return static'
+- name: length
+  visibility: public
+  parameters:
+  - name: encoding
+    default: 'null'
+  comment: '# * Return the length of the given string.
+
+    # *
+
+    # * @param  string|null  $encoding
+
+    # * @return int'
+- name: limit
+  visibility: public
+  parameters:
+  - name: limit
+    default: '100'
+  - name: end
+    default: '''...'''
+  comment: '# * Limit the number of characters in a string.
+
+    # *
+
+    # * @param  int  $limit
+
+    # * @param  string  $end
+
+    # * @return static'
+- name: lower
+  visibility: public
+  parameters: []
+  comment: '# * Convert the given string to lower-case.
+
+    # *
+
+    # * @return static'
+- name: markdown
+  visibility: public
+  parameters:
+  - name: options
+    default: '[]'
+  - name: extensions
+    default: '[]'
+  comment: '# * Convert GitHub flavored Markdown into HTML.
+
+    # *
+
+    # * @param  array  $options
+
+    # * @param  array  $extensions
+
+    # * @return static'
+- name: inlineMarkdown
+  visibility: public
+  parameters:
+  - name: options
+    default: '[]'
+  comment: '# * Convert inline Markdown into HTML.
+
+    # *
+
+    # * @param  array  $options
+
+    # * @return static'
+- name: mask
+  visibility: public
+  parameters:
+  - name: character
+  - name: index
+  - name: length
+    default: 'null'
+  - name: encoding
+    default: '''UTF-8'''
+  comment: '# * Masks a portion of a string with a repeated character.
+
+    # *
+
+    # * @param  string  $character
+
+    # * @param  int  $index
+
+    # * @param  int|null  $length
+
+    # * @param  string  $encoding
+
+    # * @return static'
+- name: match
+  visibility: public
+  parameters:
+  - name: pattern
+  comment: '# * Get the string matching the given pattern.
+
+    # *
+
+    # * @param  string  $pattern
+
+    # * @return static'
+- name: isMatch
+  visibility: public
+  parameters:
+  - name: pattern
+  comment: '# * Determine if a given string matches a given pattern.
+
+    # *
+
+    # * @param  string|iterable<string>  $pattern
+
+    # * @return bool'
+- name: matchAll
+  visibility: public
+  parameters:
+  - name: pattern
+  comment: '# * Get the string matching the given pattern.
+
+    # *
+
+    # * @param  string  $pattern
+
+    # * @return \Illuminate\Support\Collection'
+- name: test
+  visibility: public
+  parameters:
+  - name: pattern
+  comment: '# * Determine if the string matches the given pattern.
+
+    # *
+
+    # * @param  string  $pattern
+
+    # * @return bool'
+- name: numbers
+  visibility: public
+  parameters: []
+  comment: '# * Remove all non-numeric characters from a string.
+
+    # *
+
+    # * @return static'
+- name: padBoth
+  visibility: public
+  parameters:
+  - name: length
+  - name: pad
+    default: ''' '''
+  comment: '# * Pad both sides of the string with another.
+
+    # *
+
+    # * @param  int  $length
+
+    # * @param  string  $pad
+
+    # * @return static'
+- name: padLeft
+  visibility: public
+  parameters:
+  - name: length
+  - name: pad
+    default: ''' '''
+  comment: '# * Pad the left side of the string with another.
+
+    # *
+
+    # * @param  int  $length
+
+    # * @param  string  $pad
+
+    # * @return static'
+- name: padRight
+  visibility: public
+  parameters:
+  - name: length
+  - name: pad
+    default: ''' '''
+  comment: '# * Pad the right side of the string with another.
+
+    # *
+
+    # * @param  int  $length
+
+    # * @param  string  $pad
+
+    # * @return static'
+- name: parseCallback
+  visibility: public
+  parameters:
+  - name: default
+    default: 'null'
+  comment: '# * Parse a Class@method style callback into class and method.
+
+    # *
+
+    # * @param  string|null  $default
+
+    # * @return array<int, string|null>'
+- name: pipe
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Call the given callback and return a new string.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return static'
+- name: plural
+  visibility: public
+  parameters:
+  - name: count
+    default: '2'
+  comment: '# * Get the plural form of an English word.
+
+    # *
+
+    # * @param  int|array|\Countable  $count
+
+    # * @return static'
+- name: pluralStudly
+  visibility: public
+  parameters:
+  - name: count
+    default: '2'
+  comment: '# * Pluralize the last word of an English, studly caps case string.
+
+    # *
+
+    # * @param  int|array|\Countable  $count
+
+    # * @return static'
+- name: position
+  visibility: public
+  parameters:
+  - name: needle
+  - name: offset
+    default: '0'
+  - name: encoding
+    default: 'null'
+  comment: '# * Find the multi-byte safe position of the first occurrence of the given
+    substring.
+
+    # *
+
+    # * @param  string  $needle
+
+    # * @param  int  $offset
+
+    # * @param  string|null  $encoding
+
+    # * @return int|false'
+- name: prepend
+  visibility: public
+  parameters:
+  - name: '...$values'
+  comment: '# * Prepend the given values to the string.
+
+    # *
+
+    # * @param  string  ...$values
+
+    # * @return static'
+- name: remove
+  visibility: public
+  parameters:
+  - name: search
+  - name: caseSensitive
+    default: 'true'
+  comment: '# * Remove any occurrence of the given string in the subject.
+
+    # *
+
+    # * @param  string|iterable<string>  $search
+
+    # * @param  bool  $caseSensitive
+
+    # * @return static'
+- name: reverse
+  visibility: public
+  parameters: []
+  comment: '# * Reverse the string.
+
+    # *
+
+    # * @return static'
+- name: repeat
+  visibility: public
+  parameters:
+  - name: times
+  comment: '# * Repeat the string.
+
+    # *
+
+    # * @param  int  $times
+
+    # * @return static'
+- name: replace
+  visibility: public
+  parameters:
+  - name: search
+  - name: replace
+  - name: caseSensitive
+    default: 'true'
+  comment: '# * Replace the given value in the given string.
+
+    # *
+
+    # * @param  string|iterable<string>  $search
+
+    # * @param  string|iterable<string>  $replace
+
+    # * @param  bool  $caseSensitive
+
+    # * @return static'
+- name: replaceArray
+  visibility: public
+  parameters:
+  - name: search
+  - name: replace
+  comment: '# * Replace a given value in the string sequentially with an array.
+
+    # *
+
+    # * @param  string  $search
+
+    # * @param  iterable<string>  $replace
+
+    # * @return static'
+- name: replaceFirst
+  visibility: public
+  parameters:
+  - name: search
+  - name: replace
+  comment: '# * Replace the first occurrence of a given value in the string.
+
+    # *
+
+    # * @param  string  $search
+
+    # * @param  string  $replace
+
+    # * @return static'
+- name: replaceStart
+  visibility: public
+  parameters:
+  - name: search
+  - name: replace
+  comment: '# * Replace the first occurrence of the given value if it appears at the
+    start of the string.
+
+    # *
+
+    # * @param  string  $search
+
+    # * @param  string  $replace
+
+    # * @return static'
+- name: replaceLast
+  visibility: public
+  parameters:
+  - name: search
+  - name: replace
+  comment: '# * Replace the last occurrence of a given value in the string.
+
+    # *
+
+    # * @param  string  $search
+
+    # * @param  string  $replace
+
+    # * @return static'
+- name: replaceEnd
+  visibility: public
+  parameters:
+  - name: search
+  - name: replace
+  comment: '# * Replace the last occurrence of a given value if it appears at the
+    end of the string.
+
+    # *
+
+    # * @param  string  $search
+
+    # * @param  string  $replace
+
+    # * @return static'
+- name: replaceMatches
+  visibility: public
+  parameters:
+  - name: pattern
+  - name: replace
+  - name: limit
+    default: '-1'
+  comment: '# * Replace the patterns matching the given regular expression.
+
+    # *
+
+    # * @param  array|string  $pattern
+
+    # * @param  \Closure|string[]|string  $replace
+
+    # * @param  int  $limit
+
+    # * @return static'
+- name: scan
+  visibility: public
+  parameters:
+  - name: format
+  comment: '# * Parse input from a string to a collection, according to a format.
+
+    # *
+
+    # * @param  string  $format
+
+    # * @return \Illuminate\Support\Collection'
+- name: squish
+  visibility: public
+  parameters: []
+  comment: '# * Remove all "extra" blank space from the given string.
+
+    # *
+
+    # * @return static'
+- name: start
+  visibility: public
+  parameters:
+  - name: prefix
+  comment: '# * Begin a string with a single instance of a given value.
+
+    # *
+
+    # * @param  string  $prefix
+
+    # * @return static'
+- name: stripTags
+  visibility: public
+  parameters:
+  - name: allowedTags
+    default: 'null'
+  comment: '# * Strip HTML and PHP tags from the given string.
+
+    # *
+
+    # * @param  string[]|string|null  $allowedTags
+
+    # * @return static'
+- name: upper
+  visibility: public
+  parameters: []
+  comment: '# * Convert the given string to upper-case.
+
+    # *
+
+    # * @return static'
+- name: title
+  visibility: public
+  parameters: []
+  comment: '# * Convert the given string to proper case.
+
+    # *
+
+    # * @return static'
+- name: headline
+  visibility: public
+  parameters: []
+  comment: '# * Convert the given string to proper case for each word.
+
+    # *
+
+    # * @return static'
+- name: apa
+  visibility: public
+  parameters: []
+  comment: '# * Convert the given string to APA-style title case.
+
+    # *
+
+    # * @return static'
+- name: transliterate
+  visibility: public
+  parameters:
+  - name: unknown
+    default: '''?'''
+  - name: strict
+    default: 'false'
+  comment: '# * Transliterate a string to its closest ASCII representation.
+
+    # *
+
+    # * @param  string|null  $unknown
+
+    # * @param  bool|null  $strict
+
+    # * @return static'
+- name: singular
+  visibility: public
+  parameters: []
+  comment: '# * Get the singular form of an English word.
+
+    # *
+
+    # * @return static'
+- name: slug
+  visibility: public
+  parameters:
+  - name: separator
+    default: '''-'''
+  - name: language
+    default: '''en'''
+  - name: dictionary
+    default: '[''@'''
+  comment: '# * Generate a URL friendly "slug" from a given string.
+
+    # *
+
+    # * @param  string  $separator
+
+    # * @param  string|null  $language
+
+    # * @param  array<string, string>  $dictionary
+
+    # * @return static'
+- name: snake
+  visibility: public
+  parameters:
+  - name: delimiter
+    default: '''_'''
+  comment: '# * Convert a string to snake case.
+
+    # *
+
+    # * @param  string  $delimiter
+
+    # * @return static'
+- name: startsWith
+  visibility: public
+  parameters:
+  - name: needles
+  comment: '# * Determine if a given string starts with a given substring.
+
+    # *
+
+    # * @param  string|iterable<string>  $needles
+
+    # * @return bool'
+- name: studly
+  visibility: public
+  parameters: []
+  comment: '# * Convert a value to studly caps case.
+
+    # *
+
+    # * @return static'
+- name: substr
+  visibility: public
+  parameters:
+  - name: start
+  - name: length
+    default: 'null'
+  - name: encoding
+    default: '''UTF-8'''
+  comment: '# * Returns the portion of the string specified by the start and length
+    parameters.
+
+    # *
+
+    # * @param  int  $start
+
+    # * @param  int|null  $length
+
+    # * @param  string  $encoding
+
+    # * @return static'
+- name: substrCount
+  visibility: public
+  parameters:
+  - name: needle
+  - name: offset
+    default: '0'
+  - name: length
+    default: 'null'
+  comment: '# * Returns the number of substring occurrences.
+
+    # *
+
+    # * @param  string  $needle
+
+    # * @param  int  $offset
+
+    # * @param  int|null  $length
+
+    # * @return int'
+- name: substrReplace
+  visibility: public
+  parameters:
+  - name: replace
+  - name: offset
+    default: '0'
+  - name: length
+    default: 'null'
+  comment: '# * Replace text within a portion of a string.
+
+    # *
+
+    # * @param  string|string[]  $replace
+
+    # * @param  int|int[]  $offset
+
+    # * @param  int|int[]|null  $length
+
+    # * @return static'
+- name: swap
+  visibility: public
+  parameters:
+  - name: map
+  comment: '# * Swap multiple keywords in a string with other keywords.
+
+    # *
+
+    # * @param  array  $map
+
+    # * @return static'
+- name: take
+  visibility: public
+  parameters:
+  - name: limit
+  comment: '# * Take the first or last {$limit} characters.
+
+    # *
+
+    # * @param  int  $limit
+
+    # * @return static'
+- name: trim
+  visibility: public
+  parameters:
+  - name: characters
+    default: 'null'
+  comment: '# * Trim the string of the given characters.
+
+    # *
+
+    # * @param  string  $characters
+
+    # * @return static'
+- name: ltrim
+  visibility: public
+  parameters:
+  - name: characters
+    default: 'null'
+  comment: '# * Left trim the string of the given characters.
+
+    # *
+
+    # * @param  string  $characters
+
+    # * @return static'
+- name: rtrim
+  visibility: public
+  parameters:
+  - name: characters
+    default: 'null'
+  comment: '# * Right trim the string of the given characters.
+
+    # *
+
+    # * @param  string  $characters
+
+    # * @return static'
+- name: lcfirst
+  visibility: public
+  parameters: []
+  comment: '# * Make a string''s first character lowercase.
+
+    # *
+
+    # * @return static'
+- name: ucfirst
+  visibility: public
+  parameters: []
+  comment: '# * Make a string''s first character uppercase.
+
+    # *
+
+    # * @return static'
+- name: ucsplit
+  visibility: public
+  parameters: []
+  comment: '# * Split a string by uppercase characters.
+
+    # *
+
+    # * @return \Illuminate\Support\Collection<int, string>'
+- name: whenContains
+  visibility: public
+  parameters:
+  - name: needles
+  - name: callback
+  - name: default
+    default: 'null'
+  comment: '# * Execute the given callback if the string contains a given substring.
+
+    # *
+
+    # * @param  string|iterable<string>  $needles
+
+    # * @param  callable  $callback
+
+    # * @param  callable|null  $default
+
+    # * @return static'
+- name: whenContainsAll
+  visibility: public
+  parameters:
+  - name: needles
+  - name: callback
+  - name: default
+    default: 'null'
+  comment: '# * Execute the given callback if the string contains all array values.
+
+    # *
+
+    # * @param  iterable<string>  $needles
+
+    # * @param  callable  $callback
+
+    # * @param  callable|null  $default
+
+    # * @return static'
+- name: whenEmpty
+  visibility: public
+  parameters:
+  - name: callback
+  - name: default
+    default: 'null'
+  comment: '# * Execute the given callback if the string is empty.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @param  callable|null  $default
+
+    # * @return static'
+- name: whenNotEmpty
+  visibility: public
+  parameters:
+  - name: callback
+  - name: default
+    default: 'null'
+  comment: '# * Execute the given callback if the string is not empty.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @param  callable|null  $default
+
+    # * @return static'
+- name: whenEndsWith
+  visibility: public
+  parameters:
+  - name: needles
+  - name: callback
+  - name: default
+    default: 'null'
+  comment: '# * Execute the given callback if the string ends with a given substring.
+
+    # *
+
+    # * @param  string|iterable<string>  $needles
+
+    # * @param  callable  $callback
+
+    # * @param  callable|null  $default
+
+    # * @return static'
+- name: whenExactly
+  visibility: public
+  parameters:
+  - name: value
+  - name: callback
+  - name: default
+    default: 'null'
+  comment: '# * Execute the given callback if the string is an exact match with the
+    given value.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @param  callable  $callback
+
+    # * @param  callable|null  $default
+
+    # * @return static'
+- name: whenNotExactly
+  visibility: public
+  parameters:
+  - name: value
+  - name: callback
+  - name: default
+    default: 'null'
+  comment: '# * Execute the given callback if the string is not an exact match with
+    the given value.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @param  callable  $callback
+
+    # * @param  callable|null  $default
+
+    # * @return static'
+- name: whenIs
+  visibility: public
+  parameters:
+  - name: pattern
+  - name: callback
+  - name: default
+    default: 'null'
+  comment: '# * Execute the given callback if the string matches a given pattern.
+
+    # *
+
+    # * @param  string|iterable<string>  $pattern
+
+    # * @param  callable  $callback
+
+    # * @param  callable|null  $default
+
+    # * @return static'
+- name: whenIsAscii
+  visibility: public
+  parameters:
+  - name: callback
+  - name: default
+    default: 'null'
+  comment: '# * Execute the given callback if the string is 7 bit ASCII.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @param  callable|null  $default
+
+    # * @return static'
+- name: whenIsUuid
+  visibility: public
+  parameters:
+  - name: callback
+  - name: default
+    default: 'null'
+  comment: '# * Execute the given callback if the string is a valid UUID.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @param  callable|null  $default
+
+    # * @return static'
+- name: whenIsUlid
+  visibility: public
+  parameters:
+  - name: callback
+  - name: default
+    default: 'null'
+  comment: '# * Execute the given callback if the string is a valid ULID.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @param  callable|null  $default
+
+    # * @return static'
+- name: whenStartsWith
+  visibility: public
+  parameters:
+  - name: needles
+  - name: callback
+  - name: default
+    default: 'null'
+  comment: '# * Execute the given callback if the string starts with a given substring.
+
+    # *
+
+    # * @param  string|iterable<string>  $needles
+
+    # * @param  callable  $callback
+
+    # * @param  callable|null  $default
+
+    # * @return static'
+- name: whenTest
+  visibility: public
+  parameters:
+  - name: pattern
+  - name: callback
+  - name: default
+    default: 'null'
+  comment: '# * Execute the given callback if the string matches the given pattern.
+
+    # *
+
+    # * @param  string  $pattern
+
+    # * @param  callable  $callback
+
+    # * @param  callable|null  $default
+
+    # * @return static'
+- name: words
+  visibility: public
+  parameters:
+  - name: words
+    default: '100'
+  - name: end
+    default: '''...'''
+  comment: '# * Limit the number of words in a string.
+
+    # *
+
+    # * @param  int  $words
+
+    # * @param  string  $end
+
+    # * @return static'
+- name: wordCount
+  visibility: public
+  parameters:
+  - name: characters
+    default: 'null'
+  comment: '# * Get the number of words a string contains.
+
+    # *
+
+    # * @param  string|null  $characters
+
+    # * @return int'
+- name: wordWrap
+  visibility: public
+  parameters:
+  - name: characters
+    default: '75'
+  - name: break
+    default: '"\n"'
+  - name: cutLongWords
+    default: 'false'
+  comment: '# * Wrap a string to a given number of characters.
+
+    # *
+
+    # * @param  int  $characters
+
+    # * @param  string  $break
+
+    # * @param  bool  $cutLongWords
+
+    # * @return static'
+- name: wrap
+  visibility: public
+  parameters:
+  - name: before
+  - name: after
+    default: 'null'
+  comment: '# * Wrap the string with the given strings.
+
+    # *
+
+    # * @param  string  $before
+
+    # * @param  string|null  $after
+
+    # * @return static'
+- name: unwrap
+  visibility: public
+  parameters:
+  - name: before
+  - name: after
+    default: 'null'
+  comment: '# * Unwrap the string with the given strings.
+
+    # *
+
+    # * @param  string  $before
+
+    # * @param  string|null  $after
+
+    # * @return static'
+- name: toHtmlString
+  visibility: public
+  parameters: []
+  comment: '# * Convert the string into a `HtmlString` instance.
+
+    # *
+
+    # * @return \Illuminate\Support\HtmlString'
+- name: toBase64
+  visibility: public
+  parameters: []
+  comment: '# * Convert the string to Base64 encoding.
+
+    # *
+
+    # * @return static'
+- name: fromBase64
+  visibility: public
+  parameters:
+  - name: strict
+    default: 'false'
+  comment: '# * Decode the Base64 encoded string.
+
+    # *
+
+    # * @param  bool  $strict
+
+    # * @return static'
+- name: dump
+  visibility: public
+  parameters:
+  - name: '...$args'
+  comment: '# * Dump the string.
+
+    # *
+
+    # * @param  mixed  ...$args
+
+    # * @return $this'
+- name: value
+  visibility: public
+  parameters: []
+  comment: '# * Get the underlying string value.
+
+    # *
+
+    # * @return string'
+- name: toString
+  visibility: public
+  parameters: []
+  comment: '# * Get the underlying string value.
+
+    # *
+
+    # * @return string'
+- name: toInteger
+  visibility: public
+  parameters:
+  - name: base
+    default: '10'
+  comment: '# * Get the underlying string value as an integer.
+
+    # *
+
+    # * @param  int  $base
+
+    # * @return int'
+- name: toFloat
+  visibility: public
+  parameters: []
+  comment: '# * Get the underlying string value as a float.
+
+    # *
+
+    # * @return float'
+- name: toBoolean
+  visibility: public
+  parameters: []
+  comment: '# * Get the underlying string value as a boolean.
+
+    # *
+
+    # * Returns true when value is "1", "true", "on", and "yes". Otherwise, returns
+    false.
+
+    # *
+
+    # * @return bool'
+- name: toDate
+  visibility: public
+  parameters:
+  - name: format
+    default: 'null'
+  - name: tz
+    default: 'null'
+  comment: '# * Get the underlying string value as a Carbon instance.
+
+    # *
+
+    # * @param  string|null  $format
+
+    # * @param  string|null  $tz
+
+    # * @return \Illuminate\Support\Carbon
+
+    # *
+
+    # * @throws \Carbon\Exceptions\InvalidFormatException'
+- name: jsonSerialize
+  visibility: public
+  parameters: []
+  comment: '# * Convert the object to a string when JSON encoded.
+
+    # *
+
+    # * @return string'
+- name: offsetExists
+  visibility: public
+  parameters:
+  - name: offset
+  comment: '# * Determine if the given offset exists.
+
+    # *
+
+    # * @param  mixed  $offset
+
+    # * @return bool'
+- name: offsetGet
+  visibility: public
+  parameters:
+  - name: offset
+  comment: '# * Get the value at the given offset.
+
+    # *
+
+    # * @param  mixed  $offset
+
+    # * @return string'
+- name: offsetSet
+  visibility: public
+  parameters:
+  - name: offset
+  - name: value
+  comment: '# * Set the value at the given offset.
+
+    # *
+
+    # * @param  mixed  $offset
+
+    # * @return void'
+- name: offsetUnset
+  visibility: public
+  parameters:
+  - name: offset
+  comment: '# * Unset the value at the given offset.
+
+    # *
+
+    # * @param  mixed  $offset
+
+    # * @return void'
+- name: __get
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Proxy dynamic properties onto methods.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Get the raw string value.
+
+    # *
+
+    # * @return string'
+traits:
+- ArrayAccess
+- Closure
+- Illuminate\Support\Facades\Date
+- Illuminate\Support\Traits\Conditionable
+- Illuminate\Support\Traits\Dumpable
+- Illuminate\Support\Traits\Macroable
+- Illuminate\Support\Traits\Tappable
+- JsonSerializable
+- Conditionable
+interfaces:
+- JsonSerializable

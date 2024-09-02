@@ -1,0 +1,72 @@
+name: DkimSignerTest
+class_comment: '# * @group time-sensitive
+
+  # *
+
+  # * @requires extension openssl'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ClockMock
+  type: class
+  source: Symfony\Bridge\PhpUnit\ClockMock
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: DkimSigner
+  type: class
+  source: Symfony\Component\Mime\Crypto\DkimSigner
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+- name: Message
+  type: class
+  source: Symfony\Component\Mime\Message
+properties: []
+methods:
+- name: testSign
+  visibility: public
+  parameters:
+  - name: time
+  - name: bodyCanon
+  - name: headerCanon
+  - name: header
+  comment: "# * @group time-sensitive\n# *\n# * @requires extension openssl\n# */\n\
+    # class DkimSignerTest extends TestCase\n# {\n# private static string $pk = <<<EOF\n\
+    # -----BEGIN RSA PRIVATE KEY-----\n# MIICXAIBAAKBgQC6lQYNOMaboSOE/c2KNl8Rwk61zoMXrEmXC926an3/jHrtj9wB\n\
+    # ndP2DY2nUyz0vpmJlcDOjDwTGs8U/C7zn7PDdZ8EuuxlAa7oNo/38YYV+5Oki93m\n# io6rGV8zLMGLLygAB1sJaJVP5W9wm0RLY776YFL4V/nekA5ZTnA4+KaIYwIDAQAB\n\
+    # AoGAJLhjgoKkA8kI1omkxAjDWRlmqD1Ga4hKy2FYd/GxbnPVVZ+0atUG/Cvarw2d\n# kWVZjkxcr8nFoPTrwHOJQgUyOXWLuIuirznoTtDKzC+4JlDsZJd8hkVohqwKfdPA\n\
+    # v4iYceN6V0YRQpsLVwKJinr5k6oHpCGs3sNffpHQzrXc24ECQQDb0JLiMm5OZoYZ\n# G3739DsYVycUmYmYJtXuUBHTIwBAaOyo0yEmeQ8Li4H5dSSWqeOO0XrfP7cQ3TOm\n\
+    # 6LuSrIXDAkEA2Uv2PuteQXGSzOEuQbDbYeR0Le0drDUFJkXBM4oS3XB3wx2+umD+\n# WqpfLEIXWV3/hkuottTmlsQuuAP3Xv+o4QJAf5FyTRfbcGCLnnKYoyn4Sc36fjgE\n\
+    # 5GpVaXLKhXAgq0C5Z9jvujYzhw21pqJXU6DQ0Ye8+WcuxPi7Czix8xNwpQJBAMm1\n# vexCSMivSPpuvaW1KrEAhOhtB/JndVRFxEa3kTOFx2aUIgyZJQO8y4QmBc6rdxuO\n\
+    # +BpgH30st8GRzPuej4ECQAsLon/QgsyhkfquBMLDC1uhO027K59C/aYRlufPyHkq\n# HIyrMg2pQ46h2ybEuB50Cs+xF19KwBuGafBtRjkvXdU=\n\
+    # -----END RSA PRIVATE KEY-----\n# EOF;\n# \n# /**\n# * @dataProvider getSignData"
+- name: getSignData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSignWithUnsupportedAlgorithm
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCanonicalizeHeader
+  visibility: public
+  parameters:
+  - name: bodyCanon
+  - name: canonBody
+  - name: body
+  - name: maxLength
+  comment: '# * @dataProvider getCanonicalizeHeaderData'
+- name: getCanonicalizeHeaderData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bridge\PhpUnit\ClockMock
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Crypto\DkimSigner
+- Symfony\Component\Mime\Email
+- Symfony\Component\Mime\Message
+interfaces: []

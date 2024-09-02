@@ -1,0 +1,43 @@
+name: EmojiTransliterator
+class_comment: null
+dependencies:
+- name: GzipStreamWrapper
+  type: class
+  source: Symfony\Component\Emoji\Util\GzipStreamWrapper
+properties: []
+methods:
+- name: create
+  visibility: public
+  parameters:
+  - name: id
+  - name: direction
+    default: self::FORWARD
+  comment: null
+- name: createInverse
+  visibility: public
+  parameters: []
+  comment: null
+- name: getErrorCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: getErrorMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: listIDs
+  visibility: public
+  parameters: []
+  comment: null
+- name: transliterate
+  visibility: public
+  parameters:
+  - name: string
+  - name: start
+    default: '0'
+  - name: end
+    default: '-1'
+  comment: null
+traits:
+- Symfony\Component\Emoji\Util\GzipStreamWrapper
+interfaces: []

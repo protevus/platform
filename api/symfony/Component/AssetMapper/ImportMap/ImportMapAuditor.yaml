@@ -1,0 +1,36 @@
+name: ImportMapAuditor
+class_comment: null
+dependencies:
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\AssetMapper\Exception\RuntimeException
+- name: HttpClient
+  type: class
+  source: Symfony\Component\HttpClient\HttpClient
+- name: HttpClientInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\HttpClientInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: configReader
+  - name: httpClient
+    default: 'null'
+  comment: null
+- name: audit
+  visibility: public
+  parameters: []
+  comment: '# * @return list<ImportMapPackageAudit>'
+- name: versionMatches
+  visibility: private
+  parameters:
+  - name: version
+  - name: ranges
+  comment: null
+traits:
+- Symfony\Component\AssetMapper\Exception\RuntimeException
+- Symfony\Component\HttpClient\HttpClient
+- Symfony\Contracts\HttpClient\HttpClientInterface
+interfaces: []

@@ -1,0 +1,116 @@
+name: Composite
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: options
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  comment: '# * A constraint that is composed of other constraints.
+
+    # *
+
+    # * You should never use the nested constraint instances anywhere else, because
+
+    # * their groups are adapted when passed to the constructor of this class.
+
+    # *
+
+    # * If you want to create your own composite constraint, extend this class and
+
+    # * let {@link getCompositeOption()} return the name of the property which
+
+    # * contains the nested constraints.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # abstract class Composite extends Constraint
+
+    # {
+
+    # /**
+
+    # * The groups of the composite and its nested constraints are made
+
+    # * consistent using the following strategy:
+
+    # *
+
+    # *   - If groups are passed explicitly to the composite constraint, but
+
+    # *     not to the nested constraints, the options of the composite
+
+    # *     constraint are copied to the nested constraints;
+
+    # *
+
+    # *   - If groups are passed explicitly to the nested constraints, but not
+
+    # *     to the composite constraint, the groups of all nested constraints
+
+    # *     are merged and used as groups for the composite constraint;
+
+    # *
+
+    # *   - If groups are passed explicitly to both the composite and its nested
+
+    # *     constraints, the groups of the nested constraints must be a subset
+
+    # *     of the groups of the composite constraint. If not, a
+
+    # *     {@link ConstraintDefinitionException} is thrown.
+
+    # *
+
+    # * All this is done in the constructor, because constraints can then be
+
+    # * cached. When constraints are loaded from the cache, no more group
+
+    # * checks need to be done.'
+- name: addImplicitGroupName
+  visibility: public
+  parameters:
+  - name: group
+  comment: '# * Implicit group names are forwarded to nested constraints.'
+- name: getNestedConstraints
+  visibility: public
+  parameters: []
+  comment: "# @var Constraint[] $nestedConstraints */\n# $nestedConstraints = $this->{$this->getCompositeOption()};\n\
+    # \n# foreach ($nestedConstraints as $constraint) {\n# $constraint->addImplicitGroupName($group);\n\
+    # }\n# }\n# \n# /**\n# * Returns the name of the property that contains the nested\
+    \ constraints.\n# */\n# abstract protected function getCompositeOption(): string;\n\
+    # \n# /**\n# * @internal Used by metadata\n# *\n# * @return Constraint[]"
+- name: initializeNestedConstraints
+  visibility: protected
+  parameters: []
+  comment: '# * Initializes the nested constraints.
+
+    # *
+
+    # * This method can be overwritten in subclasses to clean up the nested
+
+    # * constraints passed to the constructor.
+
+    # *
+
+    # * @see Collection::initializeNestedConstraints()'
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+interfaces: []

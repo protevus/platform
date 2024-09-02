@@ -1,0 +1,39 @@
+name: WorkflowBuilderTrait
+class_comment: null
+dependencies:
+- name: Definition
+  type: class
+  source: Symfony\Component\Workflow\Definition
+- name: InMemoryMetadataStore
+  type: class
+  source: Symfony\Component\Workflow\Metadata\InMemoryMetadataStore
+- name: Transition
+  type: class
+  source: Symfony\Component\Workflow\Transition
+properties: []
+methods:
+- name: createComplexWorkflowDefinition
+  visibility: private
+  parameters: []
+  comment: null
+- name: createSimpleWorkflowDefinition
+  visibility: private
+  parameters: []
+  comment: null
+- name: createWorkflowWithSameNameTransition
+  visibility: private
+  parameters: []
+  comment: null
+- name: createComplexStateMachineDefinition
+  visibility: private
+  parameters: []
+  comment: null
+- name: createWorkflowWithSameNameBackTransition
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Workflow\Definition
+- Symfony\Component\Workflow\Metadata\InMemoryMetadataStore
+- Symfony\Component\Workflow\Transition
+interfaces: []

@@ -1,0 +1,145 @@
+name: WebDebugToolbarListenerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ContentSecurityPolicyHandler
+  type: class
+  source: Symfony\Bundle\WebProfilerBundle\Csp\ContentSecurityPolicyHandler
+- name: WebDebugToolbarListener
+  type: class
+  source: Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: DumpDataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\DumpDataCollector
+- name: ResponseEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ResponseEvent
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+- name: Kernel
+  type: class
+  source: Symfony\Component\HttpKernel\Kernel
+- name: UrlGeneratorInterface
+  type: class
+  source: Symfony\Component\Routing\Generator\UrlGeneratorInterface
+- name: Environment
+  type: class
+  source: Twig\Environment
+properties: []
+methods:
+- name: testInjectToolbar
+  visibility: public
+  parameters:
+  - name: content
+  - name: expected
+  comment: '# * @dataProvider getInjectToolbarTests'
+- name: getInjectToolbarTests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHtmlRedirectionIsIntercepted
+  visibility: public
+  parameters:
+  - name: statusCode
+  comment: '# * @dataProvider provideRedirects'
+- name: testNonHtmlRedirectionIsNotIntercepted
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToolbarIsInjected
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToolbarIsNotInjectedOnNonHtmlContentType
+  visibility: public
+  parameters: []
+  comment: '# * @depends testToolbarIsInjected'
+- name: testToolbarIsNotInjectedOnContentDispositionAttachment
+  visibility: public
+  parameters: []
+  comment: '# * @depends testToolbarIsInjected'
+- name: testToolbarIsNotInjectedOnRedirection
+  visibility: public
+  parameters:
+  - name: statusCode
+  comment: '# * @depends testToolbarIsInjected
+
+    # *
+
+    # * @dataProvider provideRedirects'
+- name: provideRedirects
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToolbarIsNotInjectedWhenThereIsNoNoXDebugTokenResponseHeader
+  visibility: public
+  parameters: []
+  comment: '# * @depends testToolbarIsInjected'
+- name: testToolbarIsNotInjectedWhenOnSubRequest
+  visibility: public
+  parameters: []
+  comment: '# * @depends testToolbarIsInjected'
+- name: testToolbarIsNotInjectedOnIncompleteHtmlResponses
+  visibility: public
+  parameters: []
+  comment: '# * @depends testToolbarIsInjected'
+- name: testToolbarIsNotInjectedOnXmlHttpRequests
+  visibility: public
+  parameters: []
+  comment: '# * @depends testToolbarIsInjected'
+- name: testToolbarIsNotInjectedOnNonHtmlRequests
+  visibility: public
+  parameters: []
+  comment: '# * @depends testToolbarIsInjected'
+- name: testXDebugUrlHeader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowingUrlGenerator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowingErrorCleanup
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCspIsDisabledIfDumperWasUsed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCspIsKeptEnabledIfDumperWasNotUsed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNullContentTypeWithNoDebugEnv
+  visibility: public
+  parameters: []
+  comment: null
+- name: getTwigMock
+  visibility: protected
+  parameters:
+  - name: render
+    default: '''WDT'''
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\WebProfilerBundle\Csp\ContentSecurityPolicyHandler
+- Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\DataCollector\DumpDataCollector
+- Symfony\Component\HttpKernel\Event\ResponseEvent
+- Symfony\Component\HttpKernel\HttpKernelInterface
+- Symfony\Component\HttpKernel\Kernel
+- Symfony\Component\Routing\Generator\UrlGeneratorInterface
+- Twig\Environment
+interfaces: []

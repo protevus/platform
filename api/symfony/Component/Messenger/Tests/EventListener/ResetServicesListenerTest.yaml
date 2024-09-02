@@ -1,0 +1,44 @@
+name: ResetServicesListenerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ServicesResetter
+  type: class
+  source: Symfony\Component\HttpKernel\DependencyInjection\ServicesResetter
+- name: WorkerRunningEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerRunningEvent
+- name: WorkerStoppedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerStoppedEvent
+- name: ResetServicesListener
+  type: class
+  source: Symfony\Component\Messenger\EventListener\ResetServicesListener
+- name: Worker
+  type: class
+  source: Symfony\Component\Messenger\Worker
+properties: []
+methods:
+- name: provideResetServices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResetServices
+  visibility: public
+  parameters:
+  - name: shouldReset
+  comment: '# * @dataProvider provideResetServices'
+- name: testResetServicesAtStop
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpKernel\DependencyInjection\ServicesResetter
+- Symfony\Component\Messenger\Event\WorkerRunningEvent
+- Symfony\Component\Messenger\Event\WorkerStoppedEvent
+- Symfony\Component\Messenger\EventListener\ResetServicesListener
+- Symfony\Component\Messenger\Worker
+interfaces: []

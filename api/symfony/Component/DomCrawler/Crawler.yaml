@@ -1,0 +1,682 @@
+name: Crawler
+class_comment: '# * Crawler eases navigation of a list of \DOMNode objects.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @implements \IteratorAggregate<int, \DOMNode>'
+dependencies:
+- name: HTML5
+  type: class
+  source: Masterminds\HTML5
+- name: CssSelectorConverter
+  type: class
+  source: Symfony\Component\CssSelector\CssSelectorConverter
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: node
+    default: 'null'
+  - name: uri
+    default: 'null'
+  - name: baseHref
+    default: 'null'
+  - name: useHtml5Parser
+    default: 'true'
+  comment: "# * Crawler eases navigation of a list of \\DOMNode objects.\n# *\n# *\
+    \ @author Fabien Potencier <fabien@symfony.com>\n# *\n# * @implements \\IteratorAggregate<int,\
+    \ \\DOMNode>\n# */\n# class Crawler implements \\Countable, \\IteratorAggregate\n\
+    # {\n# /**\n# * The default namespace prefix to be used with XPath and CSS expressions.\n\
+    # */\n# private string $defaultNamespacePrefix = 'default';\n# \n# /**\n# * A\
+    \ map of manually registered namespaces.\n# *\n# * @var array<string, string>\n\
+    # */\n# private array $namespaces = [];\n# \n# /**\n# * A map of cached namespaces.\n\
+    # */\n# private \\ArrayObject $cachedNamespaces;\n# \n# private ?string $baseHref;\n\
+    # private ?\\DOMDocument $document = null;\n# \n# /**\n# * @var list<\\DOMNode>\n\
+    # */\n# private array $nodes = [];\n# \n# /**\n# * Whether the Crawler contains\
+    \ HTML or XML content (used when converting CSS to XPath).\n# */\n# private bool\
+    \ $isHtml = true;\n# \n# private ?HTML5 $html5Parser = null;\n# \n# /**\n# * @param\
+    \ \\DOMNodeList|\\DOMNode|\\DOMNode[]|string|null $node A Node to use as the base\
+    \ for the crawling"
+- name: getUri
+  visibility: public
+  parameters: []
+  comment: '# * Returns the current URI.'
+- name: getBaseHref
+  visibility: public
+  parameters: []
+  comment: '# * Returns base href.'
+- name: clear
+  visibility: public
+  parameters: []
+  comment: '# * Removes all the nodes.'
+- name: add
+  visibility: public
+  parameters:
+  - name: node
+  comment: '# * Adds a node to the current list of nodes.
+
+    # *
+
+    # * This method uses the appropriate specialized add*() method based
+
+    # * on the type of the argument.
+
+    # *
+
+    # * @param \DOMNodeList|\DOMNode|\DOMNode[]|string|null $node A node
+
+    # *
+
+    # * @throws \InvalidArgumentException when node is not the expected type'
+- name: addContent
+  visibility: public
+  parameters:
+  - name: content
+  - name: type
+    default: 'null'
+  comment: '# * Adds HTML/XML content.
+
+    # *
+
+    # * If the charset is not set via the content type, it is assumed to be UTF-8,
+
+    # * or ISO-8859-1 as a fallback, which is the default charset defined by the
+
+    # * HTTP 1.1 specification.'
+- name: addHtmlContent
+  visibility: public
+  parameters:
+  - name: content
+  - name: charset
+    default: '''UTF-8'''
+  comment: '# * Adds an HTML content to the list of nodes.
+
+    # *
+
+    # * The libxml errors are disabled when the content is parsed.
+
+    # *
+
+    # * If you want to get parsing errors, be sure to enable
+
+    # * internal errors via libxml_use_internal_errors(true)
+
+    # * and then, get the errors via libxml_get_errors(). Be
+
+    # * sure to clear errors with libxml_clear_errors() afterward.'
+- name: addXmlContent
+  visibility: public
+  parameters:
+  - name: content
+  - name: charset
+    default: '''UTF-8'''
+  - name: options
+    default: \LIBXML_NONET
+  comment: '# * Adds an XML content to the list of nodes.
+
+    # *
+
+    # * The libxml errors are disabled when the content is parsed.
+
+    # *
+
+    # * If you want to get parsing errors, be sure to enable
+
+    # * internal errors via libxml_use_internal_errors(true)
+
+    # * and then, get the errors via libxml_get_errors(). Be
+
+    # * sure to clear errors with libxml_clear_errors() afterward.
+
+    # *
+
+    # * @param int $options Bitwise OR of the libxml option constants
+
+    # *                     LIBXML_PARSEHUGE is dangerous, see
+
+    # *                     http://symfony.com/blog/security-release-symfony-2-0-17-released'
+- name: addDocument
+  visibility: public
+  parameters:
+  - name: dom
+  comment: '# * Adds a \DOMDocument to the list of nodes.
+
+    # *
+
+    # * @param \DOMDocument $dom A \DOMDocument instance'
+- name: addNodeList
+  visibility: public
+  parameters:
+  - name: nodes
+  comment: '# * Adds a \DOMNodeList to the list of nodes.
+
+    # *
+
+    # * @param \DOMNodeList $nodes A \DOMNodeList instance'
+- name: addNodes
+  visibility: public
+  parameters:
+  - name: nodes
+  comment: '# * Adds an array of \DOMNode instances to the list of nodes.
+
+    # *
+
+    # * @param \DOMNode[] $nodes An array of \DOMNode instances'
+- name: addNode
+  visibility: public
+  parameters:
+  - name: node
+  comment: '# * Adds a \DOMNode instance to the list of nodes.
+
+    # *
+
+    # * @param \DOMNode $node A \DOMNode instance'
+- name: eq
+  visibility: public
+  parameters:
+  - name: position
+  comment: '# * Returns a node given its position in the node list.'
+- name: each
+  visibility: public
+  parameters:
+  - name: closure
+  comment: '# * Calls an anonymous function on each node of the list.
+
+    # *
+
+    # * The anonymous function receives the position and the node wrapped
+
+    # * in a Crawler instance as arguments.
+
+    # *
+
+    # * Example:
+
+    # *
+
+    # *     $crawler->filter(''h1'')->each(function ($node, $i) {
+
+    # *         return $node->text();
+
+    # *     });
+
+    # *
+
+    # * @param \Closure $closure An anonymous function
+
+    # *
+
+    # * @return array An array of values returned by the anonymous function'
+- name: slice
+  visibility: public
+  parameters:
+  - name: offset
+    default: '0'
+  - name: length
+    default: 'null'
+  comment: '# * Slices the list of nodes by $offset and $length.'
+- name: reduce
+  visibility: public
+  parameters:
+  - name: closure
+  comment: '# * Reduces the list of nodes by calling an anonymous function.
+
+    # *
+
+    # * To remove a node from the list, the anonymous function must return false.
+
+    # *
+
+    # * @param \Closure $closure An anonymous function'
+- name: first
+  visibility: public
+  parameters: []
+  comment: '# * Returns the first node of the current selection.'
+- name: last
+  visibility: public
+  parameters: []
+  comment: '# * Returns the last node of the current selection.'
+- name: siblings
+  visibility: public
+  parameters: []
+  comment: '# * Returns the siblings nodes of the current selection.
+
+    # *
+
+    # * @throws \InvalidArgumentException When current node is empty'
+- name: matches
+  visibility: public
+  parameters:
+  - name: selector
+  comment: null
+- name: closest
+  visibility: public
+  parameters:
+  - name: selector
+  comment: '# * Return first parents (heading toward the document root) of the Element
+    that matches the provided selector.
+
+    # *
+
+    # * @see https://developer.mozilla.org/en-US/docs/Web/API/Element/closest#Polyfill
+
+    # *
+
+    # * @throws \InvalidArgumentException When current node is empty'
+- name: nextAll
+  visibility: public
+  parameters: []
+  comment: '# * Returns the next siblings nodes of the current selection.
+
+    # *
+
+    # * @throws \InvalidArgumentException When current node is empty'
+- name: previousAll
+  visibility: public
+  parameters: []
+  comment: '# * Returns the previous sibling nodes of the current selection.
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: ancestors
+  visibility: public
+  parameters: []
+  comment: '# * Returns the ancestors of the current selection.
+
+    # *
+
+    # * @throws \InvalidArgumentException When the current node is empty'
+- name: children
+  visibility: public
+  parameters:
+  - name: selector
+    default: 'null'
+  comment: '# * Returns the children nodes of the current selection.
+
+    # *
+
+    # * @throws \InvalidArgumentException When current node is empty
+
+    # * @throws \RuntimeException         If the CssSelector Component is not available
+    and $selector is provided'
+- name: attr
+  visibility: public
+  parameters:
+  - name: attribute
+  - name: default
+    default: 'null'
+  comment: '# * Returns the attribute value of the first node of the list.
+
+    # *
+
+    # * @param string|null $default When not null: the value to return when the node
+    or attribute is empty
+
+    # *
+
+    # * @throws \InvalidArgumentException When current node is empty'
+- name: nodeName
+  visibility: public
+  parameters: []
+  comment: '# * Returns the node name of the first node of the list.
+
+    # *
+
+    # * @throws \InvalidArgumentException When current node is empty'
+- name: text
+  visibility: public
+  parameters:
+  - name: default
+    default: 'null'
+  - name: normalizeWhitespace
+    default: 'true'
+  comment: '# * Returns the text of the first node of the list.
+
+    # *
+
+    # * Pass true as the second argument to normalize whitespaces.
+
+    # *
+
+    # * @param string|null $default             When not null: the value to return
+    when the current node is empty
+
+    # * @param bool        $normalizeWhitespace Whether whitespaces should be trimmed
+    and normalized to single spaces
+
+    # *
+
+    # * @throws \InvalidArgumentException When current node is empty'
+- name: innerText
+  visibility: public
+  parameters:
+  - name: normalizeWhitespace
+    default: 'true'
+  comment: '# * Returns only the inner text that is the direct descendent of the current
+    node, excluding any child nodes.
+
+    # *
+
+    # * @param bool $normalizeWhitespace Whether whitespaces should be trimmed and
+    normalized to single spaces'
+- name: html
+  visibility: public
+  parameters:
+  - name: default
+    default: 'null'
+  comment: '# * Returns the first node of the list as HTML.
+
+    # *
+
+    # * @param string|null $default When not null: the value to return when the current
+    node is empty
+
+    # *
+
+    # * @throws \InvalidArgumentException When current node is empty'
+- name: outerHtml
+  visibility: public
+  parameters: []
+  comment: null
+- name: evaluate
+  visibility: public
+  parameters:
+  - name: xpath
+  comment: '# * Evaluates an XPath expression.
+
+    # *
+
+    # * Since an XPath expression might evaluate to either a simple type or a \DOMNodeList,
+
+    # * this method will return either an array of simple types or a new Crawler instance.'
+- name: extract
+  visibility: public
+  parameters:
+  - name: attributes
+  comment: '# * Extracts information from the list of nodes.
+
+    # *
+
+    # * You can extract attributes or/and the node value (_text).
+
+    # *
+
+    # * Example:
+
+    # *
+
+    # *     $crawler->filter(''h1 a'')->extract([''_text'', ''href'']);'
+- name: filterXPath
+  visibility: public
+  parameters:
+  - name: xpath
+  comment: '# * Filters the list of nodes with an XPath expression.
+
+    # *
+
+    # * The XPath expression is evaluated in the context of the crawler, which
+
+    # * is considered as a fake parent of the elements inside it.
+
+    # * This means that a child selector "div" or "./div" will match only
+
+    # * the div elements of the current crawler, not their children.'
+- name: filter
+  visibility: public
+  parameters:
+  - name: selector
+  comment: '# * Filters the list of nodes with a CSS selector.
+
+    # *
+
+    # * This method only works if you have installed the CssSelector Symfony Component.
+
+    # *
+
+    # * @throws \LogicException if the CssSelector Component is not available'
+- name: selectLink
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Selects links by name or alt value for clickable images.'
+- name: selectImage
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Selects images by alt value.'
+- name: selectButton
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Selects a button by name or alt value for images.'
+- name: link
+  visibility: public
+  parameters:
+  - name: method
+    default: '''get'''
+  comment: '# * Returns a Link object for the first node in the list.
+
+    # *
+
+    # * @throws \InvalidArgumentException If the current node list is empty or the
+    selected node is not instance of DOMElement'
+- name: links
+  visibility: public
+  parameters: []
+  comment: '# * Returns an array of Link objects for the nodes in the list.
+
+    # *
+
+    # * @return Link[]
+
+    # *
+
+    # * @throws \InvalidArgumentException If the current node list contains non-DOMElement
+    instances'
+- name: image
+  visibility: public
+  parameters: []
+  comment: '# * Returns an Image object for the first node in the list.
+
+    # *
+
+    # * @throws \InvalidArgumentException If the current node list is empty'
+- name: images
+  visibility: public
+  parameters: []
+  comment: '# * Returns an array of Image objects for the nodes in the list.
+
+    # *
+
+    # * @return Image[]'
+- name: form
+  visibility: public
+  parameters:
+  - name: values
+    default: 'null'
+  - name: method
+    default: 'null'
+  comment: '# * Returns a Form object for the first node in the list.
+
+    # *
+
+    # * @throws \InvalidArgumentException If the current node list is empty or the
+    selected node is not instance of DOMElement'
+- name: setDefaultNamespacePrefix
+  visibility: public
+  parameters:
+  - name: prefix
+  comment: '# * Overloads a default namespace prefix to be used with XPath and CSS
+    expressions.'
+- name: registerNamespace
+  visibility: public
+  parameters:
+  - name: prefix
+  - name: namespace
+  comment: null
+- name: xpathLiteral
+  visibility: public
+  parameters:
+  - name: s
+  comment: '# * Converts string for XPath expressions.
+
+    # *
+
+    # * Escaped characters are: quotes (") and apostrophe ('').
+
+    # *
+
+    # *  Examples:
+
+    # *
+
+    # *     echo Crawler::xpathLiteral(''foo " bar'');
+
+    # *     //prints ''foo " bar''
+
+    # *
+
+    # *     echo Crawler::xpathLiteral("foo '' bar");
+
+    # *     //prints "foo '' bar"
+
+    # *
+
+    # *     echo Crawler::xpathLiteral(''a\''b"c'');
+
+    # *     //prints concat(''a'', "''", ''b"c'')'
+- name: filterRelativeXPath
+  visibility: private
+  parameters:
+  - name: xpath
+  comment: '# * Filters the list of nodes with an XPath expression.
+
+    # *
+
+    # * The XPath expression should already be processed to apply it in the context
+    of each node.'
+- name: relativize
+  visibility: private
+  parameters:
+  - name: xpath
+  comment: '# * Make the XPath relative to the current context.
+
+    # *
+
+    # * The returned XPath will match elements matching the XPath inside the current
+    crawler
+
+    # * when running in the context of a node of the crawler.'
+- name: getNode
+  visibility: public
+  parameters:
+  - name: position
+  comment: null
+- name: count
+  visibility: public
+  parameters: []
+  comment: null
+- name: getIterator
+  visibility: public
+  parameters: []
+  comment: '# * @return \ArrayIterator<int, \DOMNode>'
+- name: sibling
+  visibility: protected
+  parameters:
+  - name: node
+  - name: siblingDir
+    default: '''nextSibling'''
+  comment: null
+- name: parseHtml5
+  visibility: private
+  parameters:
+  - name: htmlContent
+  - name: charset
+    default: '''UTF-8'''
+  comment: null
+- name: supportsEncoding
+  visibility: private
+  parameters:
+  - name: encoding
+  comment: null
+- name: parseXhtml
+  visibility: private
+  parameters:
+  - name: htmlContent
+  - name: charset
+    default: '''UTF-8'''
+  comment: null
+- name: convertToHtmlEntities
+  visibility: private
+  parameters:
+  - name: htmlContent
+  - name: charset
+    default: '''UTF-8'''
+  comment: '# * Converts charset to HTML-entities to ensure valid parsing.'
+- name: createDOMXPath
+  visibility: private
+  parameters:
+  - name: document
+  - name: prefixes
+    default: '[]'
+  comment: '# * @throws \InvalidArgumentException'
+- name: discoverNamespace
+  visibility: private
+  parameters:
+  - name: domxpath
+  - name: prefix
+  comment: '# * @throws \InvalidArgumentException'
+- name: findNamespacePrefixes
+  visibility: private
+  parameters:
+  - name: xpath
+  comment: null
+- name: createSubCrawler
+  visibility: private
+  parameters:
+  - name: nodes
+  comment: '# * Creates a crawler for some subnodes.
+
+    # *
+
+    # * @param \DOMNodeList|\DOMNode|\DOMNode[]|string|null $nodes'
+- name: createCssSelectorConverter
+  visibility: private
+  parameters: []
+  comment: '# * @throws \LogicException If the CssSelector Component is not available'
+- name: parseHtmlString
+  visibility: private
+  parameters:
+  - name: content
+  - name: charset
+  comment: '# * Parse string into DOMDocument object using HTML5 parser if the content
+    is HTML5 and the library is available.
+
+    # * Use libxml parser otherwise.'
+- name: canParseHtml5String
+  visibility: private
+  parameters:
+  - name: content
+  comment: null
+- name: isValidHtml5Heading
+  visibility: private
+  parameters:
+  - name: heading
+  comment: null
+- name: normalizeWhitespace
+  visibility: private
+  parameters:
+  - name: string
+  comment: null
+traits:
+- Masterminds\HTML5
+- Symfony\Component\CssSelector\CssSelectorConverter
+interfaces:
+- \IteratorAggregate
+- \Countable

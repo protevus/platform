@@ -1,0 +1,15 @@
+name: RecursiveFormTypeFoo
+class_comment: null
+dependencies:
+- name: AbstractType
+  type: class
+  source: Symfony\Component\Form\AbstractType
+properties: []
+methods:
+- name: getParent
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\AbstractType
+interfaces: []

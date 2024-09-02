@@ -1,0 +1,94 @@
+name: MailjetApiTransportTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: MockHttpClient
+  type: class
+  source: Symfony\Component\HttpClient\MockHttpClient
+- name: MockResponse
+  type: class
+  source: Symfony\Component\HttpClient\Response\MockResponse
+- name: MailjetApiTransport
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Mailjet\Transport\MailjetApiTransport
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: HttpTransportException
+  type: class
+  source: Symfony\Component\Mailer\Exception\HttpTransportException
+- name: SentMessage
+  type: class
+  source: Symfony\Component\Mailer\SentMessage
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+properties: []
+methods:
+- name: testToString
+  visibility: public
+  parameters:
+  - name: transport
+  - name: expected
+  comment: '# * @dataProvider getTransportData'
+- name: getTransportData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPayloadFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendSuccess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendWithDecodingException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendWithTransportException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendWithBadRequestResponse
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendWithNoErrorMessageBadRequestResponse
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendWithMalformedResponse
+  visibility: public
+  parameters:
+  - name: body
+  comment: '# * @dataProvider getMalformedResponse'
+- name: getMalformedResponse
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReplyTo
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHeaderToMessage
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpClient\MockHttpClient
+- Symfony\Component\HttpClient\Response\MockResponse
+- Symfony\Component\Mailer\Bridge\Mailjet\Transport\MailjetApiTransport
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mailer\Exception\HttpTransportException
+- Symfony\Component\Mailer\SentMessage
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Email
+interfaces: []

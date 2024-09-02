@@ -1,0 +1,11 @@
+name: MixManifestNotFoundException
+class_comment: null
+dependencies:
+- name: Exception
+  type: class
+  source: Exception
+properties: []
+methods: []
+traits:
+- Exception
+interfaces: []

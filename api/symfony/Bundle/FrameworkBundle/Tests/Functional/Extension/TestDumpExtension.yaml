@@ -1,0 +1,40 @@
+name: TestDumpExtension
+class_comment: null
+dependencies:
+- name: TreeBuilder
+  type: class
+  source: Symfony\Component\Config\Definition\Builder\TreeBuilder
+- name: ConfigurationInterface
+  type: class
+  source: Symfony\Component\Config\Definition\ConfigurationInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Extension
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\Extension
+properties: []
+methods:
+- name: getConfigTreeBuilder
+  visibility: public
+  parameters: []
+  comment: null
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: container
+  comment: null
+- name: getConfiguration
+  visibility: public
+  parameters:
+  - name: config
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\Config\Definition\Builder\TreeBuilder
+- Symfony\Component\Config\Definition\ConfigurationInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Extension\Extension
+interfaces:
+- ConfigurationInterface

@@ -1,0 +1,11 @@
+name: remote_event
+class_comment: null
+dependencies:
+- name: ConsumeRemoteEventHandler
+  type: class
+  source: Symfony\Component\RemoteEvent\Messenger\ConsumeRemoteEventHandler
+properties: []
+methods: []
+traits:
+- Symfony\Component\RemoteEvent\Messenger\ConsumeRemoteEventHandler
+interfaces: []

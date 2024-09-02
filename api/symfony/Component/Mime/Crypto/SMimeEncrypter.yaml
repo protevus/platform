@@ -1,0 +1,32 @@
+name: SMimeEncrypter
+class_comment: null
+dependencies:
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Mime\Exception\RuntimeException
+- name: Message
+  type: class
+  source: Symfony\Component\Mime\Message
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: certificate
+  - name: cipher
+    default: 'null'
+  comment: "# * @author Sebastiaan Stok <s.stok@rollerscapes.net>\n# */\n# final class\
+    \ SMimeEncrypter extends SMime\n# {\n# private string|array $certs;\n# private\
+    \ int $cipher;\n# \n# /**\n# * @param string|string[] $certificate The path (or\
+    \ array of paths) of the file(s) containing the X.509 certificate(s)\n# * @param\
+    \ int|null        $cipher      A set of algorithms used to encrypt the message.\
+    \ Must be one of these PHP constants: https://www.php.net/manual/en/openssl.ciphers.php"
+- name: encrypt
+  visibility: public
+  parameters:
+  - name: message
+  comment: null
+traits:
+- Symfony\Component\Mime\Exception\RuntimeException
+- Symfony\Component\Mime\Message
+interfaces: []

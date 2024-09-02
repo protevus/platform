@@ -1,0 +1,40 @@
+name: ResendRequestParserTest
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: ResendPayloadConverter
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Resend\RemoteEvent\ResendPayloadConverter
+- name: ResendRequestParser
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Resend\Webhook\ResendRequestParser
+- name: RequestParserInterface
+  type: class
+  source: Symfony\Component\Webhook\Client\RequestParserInterface
+- name: AbstractRequestParserTestCase
+  type: class
+  source: Symfony\Component\Webhook\Test\AbstractRequestParserTestCase
+properties: []
+methods:
+- name: createRequestParser
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getSecret
+  visibility: protected
+  parameters: []
+  comment: null
+- name: createRequest
+  visibility: protected
+  parameters:
+  - name: payload
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\Mailer\Bridge\Resend\RemoteEvent\ResendPayloadConverter
+- Symfony\Component\Mailer\Bridge\Resend\Webhook\ResendRequestParser
+- Symfony\Component\Webhook\Client\RequestParserInterface
+- Symfony\Component\Webhook\Test\AbstractRequestParserTestCase
+interfaces: []

@@ -1,0 +1,83 @@
+name: StopwatchEventTest
+class_comment: '# * StopwatchEventTest.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @group time-sensitive'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: StopwatchEvent
+  type: class
+  source: Symfony\Component\Stopwatch\StopwatchEvent
+properties: []
+methods:
+- name: testGetOrigin
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetCategory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPeriods
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLap
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDuration
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDurationBeforeStop
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDurationWithMultipleStarts
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStopWithoutStart
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsStarted
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsNotStarted
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEnsureStopped
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStartTime
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStartTimeWhenStartedLater
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHumanRepresentation
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetName
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Stopwatch\StopwatchEvent
+interfaces: []

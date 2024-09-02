@@ -1,0 +1,143 @@
+name: ResizeFormListenerTest
+class_comment: null
+dependencies:
+- name: ArrayCollection
+  type: class
+  source: Doctrine\Common\Collections\ArrayCollection
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Form\Exception\UnexpectedTypeException
+- name: DataMapper
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataMapper\DataMapper
+- name: ResizeFormListener
+  type: class
+  source: Symfony\Component\Form\Extension\Core\EventListener\ResizeFormListener
+- name: TextType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\TextType
+- name: FormBuilder
+  type: class
+  source: Symfony\Component\Form\FormBuilder
+- name: FormEvent
+  type: class
+  source: Symfony\Component\Form\FormEvent
+- name: FormFactoryBuilder
+  type: class
+  source: Symfony\Component\Form\FormFactoryBuilder
+- name: FormFactoryInterface
+  type: class
+  source: Symfony\Component\Form\FormFactoryInterface
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getBuilder
+  visibility: protected
+  parameters:
+  - name: name
+    default: '''name'''
+  comment: null
+- name: getForm
+  visibility: protected
+  parameters:
+  - name: name
+    default: '''name'''
+  comment: null
+- name: testPreSetDataResizesForm
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPreSetDataRequiresArrayOrTraversable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPreSetDataDealsWithNullData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPreSubmitResizesUpIfAllowAdd
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPreSubmitResizesDownIfAllowDelete
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPreSubmitRemovesZeroKeys
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPreSubmitDoesNothingIfNotAllowAddNorAllowDelete
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPreSubmitDealsWithNoArrayOrTraversable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPreSubmitDealsWithNullData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPreSubmitDealsWithEmptyData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOnSubmitNormDataRemovesEntriesMissingInTheFormIfAllowDelete
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOnSubmitNormDataDoesNothingIfNotAllowDelete
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOnSubmitNormDataRequiresArrayOrTraversable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOnSubmitNormDataDealsWithNullData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOnSubmitDealsWithObjectBackedIteratorAggregate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOnSubmitDealsWithArrayBackedIteratorAggregate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOnSubmitDeleteEmptyNotCompoundEntriesIfAllowDelete
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOnSubmitDeleteEmptyCompoundEntriesIfAllowDelete
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Doctrine\Common\Collections\ArrayCollection
+- PHPUnit\Framework\TestCase
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\Form\Exception\UnexpectedTypeException
+- Symfony\Component\Form\Extension\Core\DataMapper\DataMapper
+- Symfony\Component\Form\Extension\Core\EventListener\ResizeFormListener
+- Symfony\Component\Form\Extension\Core\Type\TextType
+- Symfony\Component\Form\FormBuilder
+- Symfony\Component\Form\FormEvent
+- Symfony\Component\Form\FormFactoryBuilder
+- Symfony\Component\Form\FormFactoryInterface
+- Symfony\Component\Form\FormInterface
+interfaces: []

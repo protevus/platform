@@ -1,0 +1,39 @@
+name: UrlSanitizerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: UrlSanitizer
+  type: class
+  source: Symfony\Component\HtmlSanitizer\TextSanitizer\UrlSanitizer
+properties: []
+methods:
+- name: testSanitize
+  visibility: public
+  parameters:
+  - name: input
+  - name: allowedSchemes
+  - name: allowedHosts
+  - name: forceHttps
+  - name: allowRelative
+  - name: expected
+  comment: '# * @dataProvider provideSanitize'
+- name: provideSanitize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParse
+  visibility: public
+  parameters:
+  - name: url
+  - name: expected
+  comment: '# * @dataProvider provideParse'
+- name: provideParse
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HtmlSanitizer\TextSanitizer\UrlSanitizer
+interfaces: []

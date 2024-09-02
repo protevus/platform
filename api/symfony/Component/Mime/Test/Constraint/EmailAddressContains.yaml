@@ -1,0 +1,43 @@
+name: EmailAddressContains
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: PHPUnit\Framework\Constraint\Constraint
+- name: MailboxHeader
+  type: class
+  source: Symfony\Component\Mime\Header\MailboxHeader
+- name: MailboxListHeader
+  type: class
+  source: Symfony\Component\Mime\Header\MailboxListHeader
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: headerName
+  - name: expectedValue
+  comment: null
+- name: toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: matches
+  visibility: protected
+  parameters:
+  - name: message
+  comment: '# * @param RawMessage $message'
+- name: failureDescription
+  visibility: protected
+  parameters:
+  - name: message
+  comment: '# * @param RawMessage $message'
+traits:
+- PHPUnit\Framework\Constraint\Constraint
+- Symfony\Component\Mime\Header\MailboxHeader
+- Symfony\Component\Mime\Header\MailboxListHeader
+- Symfony\Component\Mime\RawMessage
+interfaces: []

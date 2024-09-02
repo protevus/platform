@@ -1,0 +1,49 @@
+name: LexerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Lexer
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Lexer
+- name: SyntaxError
+  type: class
+  source: Symfony\Component\ExpressionLanguage\SyntaxError
+- name: Token
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Token
+- name: TokenStream
+  type: class
+  source: Symfony\Component\ExpressionLanguage\TokenStream
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testTokenize
+  visibility: public
+  parameters:
+  - name: tokens
+  - name: expression
+  comment: '# * @dataProvider getTokenizeData'
+- name: testTokenizeThrowsErrorWithMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTokenizeThrowsErrorOnUnclosedBrace
+  visibility: public
+  parameters: []
+  comment: null
+- name: getTokenizeData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\ExpressionLanguage\Lexer
+- Symfony\Component\ExpressionLanguage\SyntaxError
+- Symfony\Component\ExpressionLanguage\Token
+- Symfony\Component\ExpressionLanguage\TokenStream
+interfaces: []

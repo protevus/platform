@@ -1,0 +1,53 @@
+name: ExpiringStoreTestTrait
+class_comment: null
+dependencies:
+- name: LockExpiredException
+  type: class
+  source: Symfony\Component\Lock\Exception\LockExpiredException
+- name: Key
+  type: class
+  source: Symfony\Component\Lock\Key
+- name: PersistingStoreInterface
+  type: class
+  source: Symfony\Component\Lock\PersistingStoreInterface
+properties: []
+methods:
+- name: testExpiration
+  visibility: public
+  parameters: []
+  comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n# */\n# trait\
+    \ ExpiringStoreTestTrait\n# {\n# /**\n# * Amount of microseconds used as a delay\
+    \ to test expiration. Should be\n# * small enough not to slow the test suite too\
+    \ much, and high enough not to\n# * fail because of race conditions.\n# */\n#\
+    \ abstract protected function getClockDelay(): int;\n# \n# /**\n# * @see AbstractStoreTestCase::getStore()\n\
+    # */\n# abstract protected function getStore();\n# \n# /**\n# * Tests the store\
+    \ automatically delete the key when it expire.\n# *\n# * This test is time-sensitive:\
+    \ the $clockDelay could be adjusted."
+- name: testAbortAfterExpiration
+  visibility: public
+  parameters: []
+  comment: "# @var PersistingStoreInterface $store */\n# $store = $this->getStore();\n\
+    # \n# $store->save($key);\n# $store->putOffExpiration($key, 2 * $clockDelay /\
+    \ 1000000);\n# $this->assertTrue($store->exists($key));\n# \n# usleep(3 * $clockDelay);\n\
+    # $this->assertFalse($store->exists($key));\n# }\n# \n# /**\n# * Tests the store\
+    \ thrown exception when TTL expires."
+- name: testRefreshLock
+  visibility: public
+  parameters: []
+  comment: "# @var PersistingStoreInterface $store */\n# $store = $this->getStore();\n\
+    # \n# $store->save($key);\n# $store->putOffExpiration($key, 1 / 1000000);\n# }\n\
+    # \n# /**\n# * Tests the refresh can push the limits to the expiration.\n# *\n\
+    # * This test is time-sensitive: the $clockDelay could be adjusted."
+- name: testSetExpiration
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExpiredLockCleaned
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Lock\Exception\LockExpiredException
+- Symfony\Component\Lock\Key
+- Symfony\Component\Lock\PersistingStoreInterface
+interfaces: []

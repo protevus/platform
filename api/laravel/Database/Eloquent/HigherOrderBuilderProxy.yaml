@@ -1,0 +1,56 @@
+name: HigherOrderBuilderProxy
+class_comment: '# * @mixin \Illuminate\Database\Eloquent\Builder'
+dependencies: []
+properties:
+- name: builder
+  visibility: protected
+  comment: '# * @mixin \Illuminate\Database\Eloquent\Builder
+
+    # */
+
+    # class HigherOrderBuilderProxy
+
+    # {
+
+    # /**
+
+    # * The collection being operated on.
+
+    # *
+
+    # * @var \Illuminate\Database\Eloquent\Builder<*>'
+- name: method
+  visibility: protected
+  comment: '# * The method being proxied.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: builder
+  - name: method
+  comment: "# * @mixin \\Illuminate\\Database\\Eloquent\\Builder\n# */\n# class HigherOrderBuilderProxy\n\
+    # {\n# /**\n# * The collection being operated on.\n# *\n# * @var \\Illuminate\\\
+    Database\\Eloquent\\Builder<*>\n# */\n# protected $builder;\n# \n# /**\n# * The\
+    \ method being proxied.\n# *\n# * @var string\n# */\n# protected $method;\n# \n\
+    # /**\n# * Create a new proxy instance.\n# *\n# * @param  \\Illuminate\\Database\\\
+    Eloquent\\Builder<*>  $builder\n# * @param  string  $method\n# * @return void"
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Proxy a scope call onto the query builder.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+traits: []
+interfaces: []

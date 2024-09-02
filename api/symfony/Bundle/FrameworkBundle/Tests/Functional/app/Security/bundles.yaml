@@ -1,0 +1,19 @@
+name: bundles
+class_comment: null
+dependencies:
+- name: FrameworkBundle
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\FrameworkBundle
+- name: TestBundle
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\TestBundle\TestBundle
+- name: SecurityBundle
+  type: class
+  source: Symfony\Bundle\SecurityBundle\SecurityBundle
+properties: []
+methods: []
+traits:
+- Symfony\Bundle\FrameworkBundle\FrameworkBundle
+- Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\TestBundle\TestBundle
+- Symfony\Bundle\SecurityBundle\SecurityBundle
+interfaces: []

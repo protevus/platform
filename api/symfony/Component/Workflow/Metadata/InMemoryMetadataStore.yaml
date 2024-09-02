@@ -1,0 +1,43 @@
+name: InMemoryMetadataStore
+class_comment: null
+dependencies:
+- name: Transition
+  type: class
+  source: Symfony\Component\Workflow\Transition
+- name: GetMetadataTrait
+  type: class
+  source: GetMetadataTrait
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: workflowMetadata
+    default: '[]'
+  - name: placesMetadata
+    default: '[]'
+  - name: transitionsMetadata
+    default: 'null'
+  comment: "# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>\n# */\n# final class\
+    \ InMemoryMetadataStore implements MetadataStoreInterface\n# {\n# use GetMetadataTrait;\n\
+    # \n# private \\SplObjectStorage $transitionsMetadata;\n# \n# /**\n# * @param\
+    \ \\SplObjectStorage<Transition, array>|null $transitionsMetadata"
+- name: getWorkflowMetadata
+  visibility: public
+  parameters: []
+  comment: null
+- name: getPlaceMetadata
+  visibility: public
+  parameters:
+  - name: place
+  comment: null
+- name: getTransitionMetadata
+  visibility: public
+  parameters:
+  - name: transition
+  comment: null
+traits:
+- Symfony\Component\Workflow\Transition
+- GetMetadataTrait
+interfaces:
+- MetadataStoreInterface

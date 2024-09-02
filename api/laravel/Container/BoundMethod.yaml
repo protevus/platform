@@ -1,0 +1,181 @@
+name: BoundMethod
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: BindingResolutionException
+  type: class
+  source: Illuminate\Contracts\Container\BindingResolutionException
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+- name: ReflectionFunction
+  type: class
+  source: ReflectionFunction
+- name: ReflectionMethod
+  type: class
+  source: ReflectionMethod
+properties: []
+methods:
+- name: call
+  visibility: public
+  parameters:
+  - name: container
+  - name: callback
+  - name: parameters
+    default: '[]'
+  - name: defaultMethod
+    default: 'null'
+  comment: '# * Call the given Closure / class@method and inject its dependencies.
+
+    # *
+
+    # * @param  \Illuminate\Container\Container  $container
+
+    # * @param  callable|string  $callback
+
+    # * @param  array  $parameters
+
+    # * @param  string|null  $defaultMethod
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \ReflectionException
+
+    # * @throws \InvalidArgumentException'
+- name: callClass
+  visibility: protected
+  parameters:
+  - name: container
+  - name: target
+  - name: parameters
+    default: '[]'
+  - name: defaultMethod
+    default: 'null'
+  comment: '# * Call a string reference to a class using Class@method syntax.
+
+    # *
+
+    # * @param  \Illuminate\Container\Container  $container
+
+    # * @param  string  $target
+
+    # * @param  array  $parameters
+
+    # * @param  string|null  $defaultMethod
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: callBoundMethod
+  visibility: protected
+  parameters:
+  - name: container
+  - name: callback
+  - name: default
+  comment: '# * Call a method that has been bound to the container.
+
+    # *
+
+    # * @param  \Illuminate\Container\Container  $container
+
+    # * @param  callable  $callback
+
+    # * @param  mixed  $default
+
+    # * @return mixed'
+- name: normalizeMethod
+  visibility: protected
+  parameters:
+  - name: callback
+  comment: '# * Normalize the given callback into a Class@method string.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return string'
+- name: getMethodDependencies
+  visibility: protected
+  parameters:
+  - name: container
+  - name: callback
+  - name: parameters
+    default: '[]'
+  comment: '# * Get all dependencies for a given method.
+
+    # *
+
+    # * @param  \Illuminate\Container\Container  $container
+
+    # * @param  callable|string  $callback
+
+    # * @param  array  $parameters
+
+    # * @return array
+
+    # *
+
+    # * @throws \ReflectionException'
+- name: getCallReflector
+  visibility: protected
+  parameters:
+  - name: callback
+  comment: '# * Get the proper reflection instance for the given callback.
+
+    # *
+
+    # * @param  callable|string  $callback
+
+    # * @return \ReflectionFunctionAbstract
+
+    # *
+
+    # * @throws \ReflectionException'
+- name: addDependencyForCallParameter
+  visibility: protected
+  parameters:
+  - name: container
+  - name: parameter
+  - name: '&$parameters'
+  - name: '&$dependencies'
+  comment: '# * Get the dependency for the given call parameter.
+
+    # *
+
+    # * @param  \Illuminate\Container\Container  $container
+
+    # * @param  \ReflectionParameter  $parameter
+
+    # * @param  array  $parameters
+
+    # * @param  array  $dependencies
+
+    # * @return void
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Container\BindingResolutionException'
+- name: isCallableWithAtSign
+  visibility: protected
+  parameters:
+  - name: callback
+  comment: '# * Determine if the given string is in Class@method syntax.
+
+    # *
+
+    # * @param  mixed  $callback
+
+    # * @return bool'
+traits:
+- Closure
+- Illuminate\Contracts\Container\BindingResolutionException
+- InvalidArgumentException
+- ReflectionFunction
+- ReflectionMethod
+interfaces: []

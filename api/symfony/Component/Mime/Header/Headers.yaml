@@ -1,0 +1,161 @@
+name: Headers
+class_comment: null
+dependencies:
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: LogicException
+  type: class
+  source: Symfony\Component\Mime\Exception\LogicException
+properties: []
+methods:
+- name: addMailboxListHeader
+  visibility: public
+  parameters:
+  - name: name
+  - name: addresses
+  comment: "# * A collection of headers.\n# *\n# * @author Fabien Potencier <fabien@symfony.com>\n\
+    # */\n# final class Headers\n# {\n# private const UNIQUE_HEADERS = [\n# 'date',\
+    \ 'from', 'sender', 'reply-to', 'to', 'cc', 'bcc',\n# 'message-id', 'in-reply-to',\
+    \ 'references', 'subject',\n# ];\n# private const HEADER_CLASS_MAP = [\n# 'date'\
+    \ => DateHeader::class,\n# 'from' => MailboxListHeader::class,\n# 'sender' =>\
+    \ MailboxHeader::class,\n# 'reply-to' => MailboxListHeader::class,\n# 'to' =>\
+    \ MailboxListHeader::class,\n# 'cc' => MailboxListHeader::class,\n# 'bcc' => MailboxListHeader::class,\n\
+    # 'message-id' => IdentificationHeader::class,\n# 'in-reply-to' => [UnstructuredHeader::class,\
+    \ IdentificationHeader::class], // `In-Reply-To` and `References` are less strict\
+    \ than RFC 2822 (3.6.4) to allow users entering the original email's ...\n# 'references'\
+    \ => [UnstructuredHeader::class, IdentificationHeader::class], // ... `Message-ID`,\
+    \ even if that is no valid `msg-id`\n# 'return-path' => PathHeader::class,\n#\
+    \ ];\n# \n# /**\n# * @var HeaderInterface[][]\n# */\n# private array $headers\
+    \ = [];\n# private int $lineLength = 76;\n# \n# public function __construct(HeaderInterface\
+    \ ...$headers)\n# {\n# foreach ($headers as $header) {\n# $this->add($header);\n\
+    # }\n# }\n# \n# public function __clone()\n# {\n# foreach ($this->headers as $name\
+    \ => $collection) {\n# foreach ($collection as $i => $header) {\n# $this->headers[$name][$i]\
+    \ = clone $header;\n# }\n# }\n# }\n# \n# public function setMaxLineLength(int\
+    \ $lineLength): void\n# {\n# $this->lineLength = $lineLength;\n# foreach ($this->all()\
+    \ as $header) {\n# $header->setMaxLineLength($lineLength);\n# }\n# }\n# \n# public\
+    \ function getMaxLineLength(): int\n# {\n# return $this->lineLength;\n# }\n# \n\
+    # /**\n# * @param array<Address|string> $addresses\n# *\n# * @return $this"
+- name: addMailboxHeader
+  visibility: public
+  parameters:
+  - name: name
+  - name: address
+  comment: '# * @return $this'
+- name: addIdHeader
+  visibility: public
+  parameters:
+  - name: name
+  - name: ids
+  comment: '# * @return $this'
+- name: addPathHeader
+  visibility: public
+  parameters:
+  - name: name
+  - name: path
+  comment: '# * @return $this'
+- name: addDateHeader
+  visibility: public
+  parameters:
+  - name: name
+  - name: dateTime
+  comment: '# * @return $this'
+- name: addTextHeader
+  visibility: public
+  parameters:
+  - name: name
+  - name: value
+  comment: '# * @return $this'
+- name: addParameterizedHeader
+  visibility: public
+  parameters:
+  - name: name
+  - name: value
+  - name: params
+    default: '[]'
+  comment: '# * @return $this'
+- name: addHeader
+  visibility: public
+  parameters:
+  - name: name
+  - name: argument
+  - name: more
+    default: '[]'
+  comment: '# * @return $this'
+- name: has
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: add
+  visibility: public
+  parameters:
+  - name: header
+  comment: '# * @return $this'
+- name: get
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: all
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: null
+- name: getNames
+  visibility: public
+  parameters: []
+  comment: null
+- name: remove
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: isUniqueHeader
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: checkHeaderClass
+  visibility: public
+  parameters:
+  - name: header
+  comment: '# * @throws LogicException if the header name and class are not compatible'
+- name: toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: toArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: getHeaderBody
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: setHeaderBody
+  visibility: public
+  parameters:
+  - name: type
+  - name: name
+  - name: body
+  comment: '# * @internal'
+- name: getHeaderParameter
+  visibility: public
+  parameters:
+  - name: name
+  - name: parameter
+  comment: null
+- name: setHeaderParameter
+  visibility: public
+  parameters:
+  - name: name
+  - name: parameter
+  - name: value
+  comment: '# * @internal'
+traits:
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Exception\LogicException
+interfaces: []

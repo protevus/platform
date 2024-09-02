@@ -1,0 +1,47 @@
+name: InstantiatorInterface
+class_comment: null
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+properties: []
+methods:
+- name: instantiateProxy
+  visibility: public
+  parameters:
+  - name: container
+  - name: definition
+  - name: id
+  - name: realInstantiator
+  comment: '# * Lazy proxy instantiator, capable of instantiating a proxy given a
+    container, the
+
+    # * service definitions and a callback that produces the real service instance.
+
+    # *
+
+    # * @author Marco Pivetta <ocramius@gmail.com>
+
+    # */
+
+    # interface InstantiatorInterface
+
+    # {
+
+    # /**
+
+    # * Instantiates a proxy object.
+
+    # *
+
+    # * @param string            $id               Identifier of the requested service
+
+    # * @param callable(object=) $realInstantiator A callback that is capable of producing
+    the real service instance'
+traits:
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Definition
+interfaces: []

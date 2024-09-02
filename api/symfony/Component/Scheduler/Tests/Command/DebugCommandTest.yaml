@@ -1,0 +1,51 @@
+name: DebugCommandTest
+class_comment: '# * @author Max Beckers <beckers.maximilian@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+- name: DebugCommand
+  type: class
+  source: Symfony\Component\Scheduler\Command\DebugCommand
+- name: RecurringMessage
+  type: class
+  source: Symfony\Component\Scheduler\RecurringMessage
+- name: Schedule
+  type: class
+  source: Symfony\Component\Scheduler\Schedule
+- name: CallbackTrigger
+  type: class
+  source: Symfony\Component\Scheduler\Trigger\CallbackTrigger
+- name: ServiceProviderInterface
+  type: class
+  source: Symfony\Contracts\Service\ServiceProviderInterface
+properties: []
+methods:
+- name: testExecuteWithoutSchedules
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExecuteWithScheduleWithoutTriggerDoesNotDisplayMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExecuteWithScheduleWithoutTriggerShowingNoNextRunWithAllOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExecuteWithSchedule
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Tester\CommandTester
+- Symfony\Component\Scheduler\Command\DebugCommand
+- Symfony\Component\Scheduler\RecurringMessage
+- Symfony\Component\Scheduler\Schedule
+- Symfony\Component\Scheduler\Trigger\CallbackTrigger
+- Symfony\Contracts\Service\ServiceProviderInterface
+interfaces: []

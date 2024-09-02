@@ -1,0 +1,284 @@
+name: ConnectionInterface
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+properties: []
+methods:
+- name: table
+  visibility: public
+  parameters:
+  - name: table
+  - name: as
+    default: 'null'
+  comment: '# * Begin a fluent query against a database table.
+
+    # *
+
+    # * @param  \Closure|\Illuminate\Database\Query\Builder|string  $table
+
+    # * @param  string|null  $as
+
+    # * @return \Illuminate\Database\Query\Builder'
+- name: raw
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Get a new raw query expression.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return \Illuminate\Contracts\Database\Query\Expression'
+- name: selectOne
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  - name: useReadPdo
+    default: 'true'
+  comment: '# * Run a select statement and return a single result.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @param  bool  $useReadPdo
+
+    # * @return mixed'
+- name: scalar
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  - name: useReadPdo
+    default: 'true'
+  comment: '# * Run a select statement and return the first column of the first row.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @param  bool  $useReadPdo
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Illuminate\Database\MultipleColumnsSelectedException'
+- name: select
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  - name: useReadPdo
+    default: 'true'
+  comment: '# * Run a select statement against the database.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @param  bool  $useReadPdo
+
+    # * @return array'
+- name: cursor
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  - name: useReadPdo
+    default: 'true'
+  comment: '# * Run a select statement against the database and returns a generator.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @param  bool  $useReadPdo
+
+    # * @return \Generator'
+- name: insert
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  comment: '# * Run an insert statement against the database.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @return bool'
+- name: update
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  comment: '# * Run an update statement against the database.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @return int'
+- name: delete
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  comment: '# * Run a delete statement against the database.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @return int'
+- name: statement
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  comment: '# * Execute an SQL statement and return the boolean result.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @return bool'
+- name: affectingStatement
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  comment: '# * Run an SQL statement and get the number of rows affected.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @return int'
+- name: unprepared
+  visibility: public
+  parameters:
+  - name: query
+  comment: '# * Run a raw, unprepared query against the PDO connection.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @return bool'
+- name: prepareBindings
+  visibility: public
+  parameters:
+  - name: bindings
+  comment: '# * Prepare the query bindings for execution.
+
+    # *
+
+    # * @param  array  $bindings
+
+    # * @return array'
+- name: transaction
+  visibility: public
+  parameters:
+  - name: callback
+  - name: attempts
+    default: '1'
+  comment: '# * Execute a Closure within a transaction.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @param  int  $attempts
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Throwable'
+- name: beginTransaction
+  visibility: public
+  parameters: []
+  comment: '# * Start a new database transaction.
+
+    # *
+
+    # * @return void'
+- name: commit
+  visibility: public
+  parameters: []
+  comment: '# * Commit the active database transaction.
+
+    # *
+
+    # * @return void'
+- name: rollBack
+  visibility: public
+  parameters: []
+  comment: '# * Rollback the active database transaction.
+
+    # *
+
+    # * @return void'
+- name: transactionLevel
+  visibility: public
+  parameters: []
+  comment: '# * Get the number of active transactions.
+
+    # *
+
+    # * @return int'
+- name: pretend
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Execute the given callback in "dry run" mode.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return array'
+- name: getDatabaseName
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the connected database.
+
+    # *
+
+    # * @return string'
+traits:
+- Closure
+interfaces: []

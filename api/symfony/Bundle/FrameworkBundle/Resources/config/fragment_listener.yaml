@@ -1,0 +1,11 @@
+name: fragment_listener
+class_comment: null
+dependencies:
+- name: FragmentListener
+  type: class
+  source: Symfony\Component\HttpKernel\EventListener\FragmentListener
+properties: []
+methods: []
+traits:
+- Symfony\Component\HttpKernel\EventListener\FragmentListener
+interfaces: []

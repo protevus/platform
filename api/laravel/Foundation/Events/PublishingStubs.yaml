@@ -1,0 +1,39 @@
+name: PublishingStubs
+class_comment: null
+dependencies:
+- name: Dispatchable
+  type: class
+  source: Dispatchable
+properties:
+- name: stubs
+  visibility: public
+  comment: '# * The stubs being published.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: stubs
+  comment: "# * The stubs being published.\n# *\n# * @var array\n# */\n# public $stubs\
+    \ = [];\n# \n# /**\n# * Create a new event instance.\n# *\n# * @param  array \
+    \ $stubs\n# * @return void"
+- name: add
+  visibility: public
+  parameters:
+  - name: path
+  - name: name
+  comment: '# * Add a new stub to be published.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  string  $name
+
+    # * @return $this'
+traits:
+- Dispatchable
+interfaces: []

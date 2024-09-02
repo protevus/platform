@@ -1,0 +1,71 @@
+name: FormFactoryBuilder
+class_comment: '# * The default implementation of FormFactoryBuilderInterface.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: CoreExtension
+  type: class
+  source: Symfony\Component\Form\Extension\Core\CoreExtension
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: forceCoreExtension
+    default: 'false'
+  comment: null
+- name: setResolvedTypeFactory
+  visibility: public
+  parameters:
+  - name: resolvedTypeFactory
+  comment: null
+- name: addExtension
+  visibility: public
+  parameters:
+  - name: extension
+  comment: null
+- name: addExtensions
+  visibility: public
+  parameters:
+  - name: extensions
+  comment: null
+- name: addType
+  visibility: public
+  parameters:
+  - name: type
+  comment: null
+- name: addTypes
+  visibility: public
+  parameters:
+  - name: types
+  comment: null
+- name: addTypeExtension
+  visibility: public
+  parameters:
+  - name: typeExtension
+  comment: null
+- name: addTypeExtensions
+  visibility: public
+  parameters:
+  - name: typeExtensions
+  comment: null
+- name: addTypeGuesser
+  visibility: public
+  parameters:
+  - name: typeGuesser
+  comment: null
+- name: addTypeGuessers
+  visibility: public
+  parameters:
+  - name: typeGuessers
+  comment: null
+- name: getFormFactory
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\Extension\Core\CoreExtension
+interfaces:
+- FormFactoryBuilderInterface

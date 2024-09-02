@@ -1,0 +1,43 @@
+name: AbstractComparison
+class_comment: null
+dependencies:
+- name: PropertyAccess
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccess
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- name: LogicException
+  type: class
+  source: Symfony\Component\Validator\Exception\LogicException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: value
+    default: 'null'
+  - name: propertyPath
+    default: 'null'
+  - name: message
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: null
+- name: getDefaultOption
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\PropertyAccess\PropertyAccess
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- Symfony\Component\Validator\Exception\LogicException
+interfaces: []

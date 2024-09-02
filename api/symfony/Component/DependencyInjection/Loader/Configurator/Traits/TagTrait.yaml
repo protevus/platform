@@ -1,0 +1,26 @@
+name: TagTrait
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: tag
+  visibility: public
+  parameters:
+  - name: name
+  - name: attributes
+    default: '[]'
+  comment: null
+- name: validateAttributes
+  visibility: private
+  parameters:
+  - name: tag
+  - name: attributes
+  - name: path
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+interfaces: []

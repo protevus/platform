@@ -1,0 +1,12 @@
+name: RedisArraySessionHandlerTest
+class_comment: '# * @group integration'
+dependencies: []
+properties: []
+methods:
+- name: createRedisClient
+  visibility: protected
+  parameters:
+  - name: host
+  comment: null
+traits: []
+interfaces: []

@@ -1,0 +1,36 @@
+name: StackMiddleware
+class_comment: '# * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: middlewareIterator
+    default: 'null'
+  comment: "# * @author Nicolas Grekas <p@tchwork.com>\n# */\n# class StackMiddleware\
+    \ implements MiddlewareInterface, StackInterface\n# {\n# private MiddlewareStack\
+    \ $stack;\n# private int $offset = 0;\n# \n# /**\n# * @param iterable<mixed, MiddlewareInterface>|MiddlewareInterface|null\
+    \ $middlewareIterator"
+- name: next
+  visibility: public
+  parameters: []
+  comment: null
+- name: handle
+  visibility: public
+  parameters:
+  - name: envelope
+  - name: stack
+  comment: null
+- name: next
+  visibility: public
+  parameters:
+  - name: offset
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+interfaces:
+- MiddlewareInterface

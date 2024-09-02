@@ -1,0 +1,414 @@
+name: autowiring_classes
+class_comment: null
+dependencies:
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: Autowire
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\Autowire
+- name: Required
+  type: class
+  source: Symfony\Contracts\Service\Attribute\Required
+properties:
+- name: foo
+  visibility: public
+  comment: null
+methods:
+- name: cloneFoo
+  visibility: public
+  parameters:
+  - name: bar
+    default: 'null'
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: create
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: a
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: d
+  - name: e
+  - name: i
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: b
+  - name: d
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: a
+  - name: d
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: d
+    default: 'null'
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: i
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: i
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: collision
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: l
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: j
+  - name: k
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: k
+  - name: r
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: k
+  - name: r
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: k
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: k
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: k
+  - name: foo
+  - name: dunglas
+  - name: bar
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: a
+  - name: foo
+    default: '''default_val'''
+  - name: lille
+    default: 'null'
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: a
+  - name: lille
+  - name: foo
+    default: '''some_val'''
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: now_datetime
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+  - name: bar
+    default: 'null'
+  comment: null
+- name: setBar
+  visibility: public
+  parameters:
+  - name: bar
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+  - name: bar
+  - name: baz
+  comment: null
+- name: setMultipleInstancesForOneArg
+  visibility: public
+  parameters:
+  - name: collision
+  comment: null
+- name: setFoo
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: withFoo1
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: withFoo2
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: setDependencies
+  visibility: public
+  parameters:
+  - name: foo
+  - name: a
+  comment: null
+- name: notASetter
+  visibility: public
+  parameters:
+  - name: a
+  comment: null
+- name: setWithCallsConfigured
+  visibility: public
+  parameters:
+  - name: a
+  comment: null
+- name: setChildMethodWithoutDocBlock
+  visibility: public
+  parameters:
+  - name: a
+  comment: null
+- name: setFoo
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: setDependencies
+  visibility: public
+  parameters:
+  - name: foo
+  - name: a
+  comment: null
+- name: setWithCallsConfigured
+  visibility: public
+  parameters:
+  - name: a
+  comment: null
+- name: notASetter
+  visibility: public
+  parameters:
+  - name: a
+  comment: null
+- name: setNotAutowireable
+  visibility: public
+  parameters:
+  - name: n
+  comment: null
+- name: setNotAutowireableBecauseOfATypo
+  visibility: public
+  parameters:
+  - name: sam
+  comment: null
+- name: setBar
+  visibility: public
+  parameters: []
+  comment: null
+- name: setOptionalNotAutowireable
+  visibility: public
+  parameters:
+  - name: n
+    default: 'null'
+  comment: null
+- name: setDifferentNamespace
+  visibility: public
+  parameters:
+  - name: n
+  comment: null
+- name: setOptionalNoTypeHint
+  visibility: public
+  parameters:
+  - name: foo
+    default: 'null'
+  comment: null
+- name: setOptionalArgNoAutowireable
+  visibility: public
+  parameters:
+  - name: other
+    default: '''default_val'''
+  comment: null
+- name: setProtectedMethod
+  visibility: protected
+  parameters:
+  - name: a
+  comment: null
+- name: __construct
+  visibility: private
+  parameters: []
+  comment: null
+- name: setDefaultLocale
+  visibility: public
+  parameters:
+  - name: defaultLocale
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: quz
+    default: 'null'
+  - name: nonExistent
+    default: 'null'
+  - name: decorated
+    default: 'null'
+  - name: foo
+    default: '[]'
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: logger
+  - name: decorated
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: decorator
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: logger
+  - name: decorated1
+  - name: decorated2
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: notExisting
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: parameterLike
+    default: '''%not%one%parameter%here%'''
+  - name: willBeSetToKeepFirstArgumentDefaultValue
+    default: '''ok'''
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: bar
+  comment: null
+- name: getBar
+  visibility: public
+  parameters: []
+  comment: null
+- name: create
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: '''foo'''
+  - name: 'true'
+  comment: null
+- name: theMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: someParam
+    default: 'null'
+  comment: null
+- name: someMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: someMethod1
+  visibility: public
+  parameters: []
+  comment: null
+- name: someMethod2
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSomeParam
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters: []
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: someParam
+    default: 'null'
+  comment: null
+- name: createFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: createFooWithParam
+  visibility: public
+  parameters:
+  - name: someParam
+  comment: null
+- name: staticCreateFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: staticCreateFooWithParam
+  visibility: public
+  parameters:
+  - name: someParam
+  comment: null
+traits:
+- Psr\Log\LoggerInterface
+- Symfony\Component\DependencyInjection\Attribute\Autowire
+- Symfony\Contracts\Service\Attribute\Required
+interfaces:
+- AInterface
+- IInterface
+- EInterface
+- CollisionInterface
+- CollisionInterface
+- DecoratorInterface
+- DecoratorInterface
+- DecoratorInterface
+- DecoratorInterface
+- DecoratorInterface

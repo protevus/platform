@@ -1,0 +1,32 @@
+name: SerializedPath
+class_comment: null
+dependencies:
+- name: InvalidPropertyPathException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException
+- name: PropertyPath
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyPath
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Serializer\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: serializedPath
+  comment: "# * @author Tobias B\xF6nner <tobi@boenner.family>\n# */\n# #[\\Attribute(\\\
+    Attribute::TARGET_METHOD | \\Attribute::TARGET_PROPERTY)]\n# class SerializedPath\n\
+    # {\n# private PropertyPath $serializedPath;\n# \n# /**\n# * @param string $serializedPath\
+    \ A path using a valid PropertyAccess syntax where the value is stored in a normalized\
+    \ representation"
+- name: getSerializedPath
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException
+- Symfony\Component\PropertyAccess\PropertyPath
+- Symfony\Component\Serializer\Exception\InvalidArgumentException
+interfaces: []

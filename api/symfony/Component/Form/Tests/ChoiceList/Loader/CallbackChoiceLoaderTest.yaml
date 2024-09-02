@@ -1,0 +1,47 @@
+name: CallbackChoiceLoaderTest
+class_comment: '# * @author Jules Pietri <jules@heahprod.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ChoiceListInterface
+  type: class
+  source: Symfony\Component\Form\ChoiceList\ChoiceListInterface
+- name: LazyChoiceList
+  type: class
+  source: Symfony\Component\Form\ChoiceList\LazyChoiceList
+- name: CallbackChoiceLoader
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader
+properties: []
+methods:
+- name: setUpBeforeClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadChoiceList
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadChoicesOnlyOnce
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadChoicesForValuesLoadsChoiceListOnFirstCall
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadValuesForChoicesCastsCallbackItemsToString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadValuesForChoicesLoadsChoiceListOnFirstCall
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\ChoiceList\ChoiceListInterface
+- Symfony\Component\Form\ChoiceList\LazyChoiceList
+- Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader
+interfaces: []

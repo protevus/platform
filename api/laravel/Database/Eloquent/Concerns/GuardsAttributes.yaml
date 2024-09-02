@@ -1,0 +1,191 @@
+name: GuardsAttributes
+class_comment: null
+dependencies: []
+properties:
+- name: fillable
+  visibility: protected
+  comment: '# * The attributes that are mass assignable.
+
+    # *
+
+    # * @var array<int, string>'
+- name: guarded
+  visibility: protected
+  comment: '# * The attributes that aren''t mass assignable.
+
+    # *
+
+    # * @var array<string>|bool'
+- name: unguarded
+  visibility: protected
+  comment: '# * Indicates if all mass assignment is enabled.
+
+    # *
+
+    # * @var bool'
+- name: guardableColumns
+  visibility: protected
+  comment: '# * The actual columns that exist on the database and can be guarded.
+
+    # *
+
+    # * @var array<string>'
+methods:
+- name: getFillable
+  visibility: public
+  parameters: []
+  comment: "# * The attributes that are mass assignable.\n# *\n# * @var array<int,\
+    \ string>\n# */\n# protected $fillable = [];\n# \n# /**\n# * The attributes that\
+    \ aren't mass assignable.\n# *\n# * @var array<string>|bool\n# */\n# protected\
+    \ $guarded = ['*'];\n# \n# /**\n# * Indicates if all mass assignment is enabled.\n\
+    # *\n# * @var bool\n# */\n# protected static $unguarded = false;\n# \n# /**\n\
+    # * The actual columns that exist on the database and can be guarded.\n# *\n#\
+    \ * @var array<string>\n# */\n# protected static $guardableColumns = [];\n# \n\
+    # /**\n# * Get the fillable attributes for the model.\n# *\n# * @return array<string>"
+- name: fillable
+  visibility: public
+  parameters:
+  - name: fillable
+  comment: '# * Set the fillable attributes for the model.
+
+    # *
+
+    # * @param  array<string>  $fillable
+
+    # * @return $this'
+- name: mergeFillable
+  visibility: public
+  parameters:
+  - name: fillable
+  comment: '# * Merge new fillable attributes with existing fillable attributes on
+    the model.
+
+    # *
+
+    # * @param  array<string>  $fillable
+
+    # * @return $this'
+- name: getGuarded
+  visibility: public
+  parameters: []
+  comment: '# * Get the guarded attributes for the model.
+
+    # *
+
+    # * @return array<string>'
+- name: guard
+  visibility: public
+  parameters:
+  - name: guarded
+  comment: '# * Set the guarded attributes for the model.
+
+    # *
+
+    # * @param  array<string>  $guarded
+
+    # * @return $this'
+- name: mergeGuarded
+  visibility: public
+  parameters:
+  - name: guarded
+  comment: '# * Merge new guarded attributes with existing guarded attributes on the
+    model.
+
+    # *
+
+    # * @param  array<string>  $guarded
+
+    # * @return $this'
+- name: unguard
+  visibility: public
+  parameters:
+  - name: state
+    default: 'true'
+  comment: '# * Disable all mass assignable restrictions.
+
+    # *
+
+    # * @param  bool  $state
+
+    # * @return void'
+- name: reguard
+  visibility: public
+  parameters: []
+  comment: '# * Enable the mass assignment restrictions.
+
+    # *
+
+    # * @return void'
+- name: isUnguarded
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the current state is "unguarded".
+
+    # *
+
+    # * @return bool'
+- name: unguarded
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Run the given callable while being unguarded.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return mixed'
+- name: isFillable
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Determine if the given attribute may be mass assigned.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: isGuarded
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Determine if the given key is guarded.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: isGuardableColumn
+  visibility: protected
+  parameters:
+  - name: key
+  comment: '# * Determine if the given column is a valid, guardable column.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: totallyGuarded
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the model is totally guarded.
+
+    # *
+
+    # * @return bool'
+- name: fillableFromArray
+  visibility: protected
+  parameters:
+  - name: attributes
+  comment: '# * Get the fillable attributes of a given array.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @return array'
+traits: []
+interfaces: []

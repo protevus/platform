@@ -1,0 +1,23 @@
+name: FileBinaryMimeTypeGuesserTest
+class_comment: null
+dependencies:
+- name: FileBinaryMimeTypeGuesser
+  type: class
+  source: Symfony\Component\Mime\FileBinaryMimeTypeGuesser
+- name: MimeTypeGuesserInterface
+  type: class
+  source: Symfony\Component\Mime\MimeTypeGuesserInterface
+properties: []
+methods:
+- name: getGuesser
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testGuessWithDuplicatedFileType
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Mime\FileBinaryMimeTypeGuesser
+- Symfony\Component\Mime\MimeTypeGuesserInterface
+interfaces: []

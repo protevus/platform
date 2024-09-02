@@ -1,0 +1,12 @@
+name: DummyWithNotNormalizable
+class_comment: '# * @author Jeroen <github.com/Jeroeny>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: value
+  comment: null
+traits: []
+interfaces: []

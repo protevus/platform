@@ -1,0 +1,60 @@
+name: FirewallListener
+class_comment: '# * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>'
+dependencies:
+- name: FirewallMap
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Security\FirewallMap
+- name: FinishRequestEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\FinishRequestEvent
+- name: RequestEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\RequestEvent
+- name: KernelEvents
+  type: class
+  source: Symfony\Component\HttpKernel\KernelEvents
+- name: Firewall
+  type: class
+  source: Symfony\Component\Security\Http\Firewall
+- name: FirewallMapInterface
+  type: class
+  source: Symfony\Component\Security\Http\FirewallMapInterface
+- name: LogoutUrlGenerator
+  type: class
+  source: Symfony\Component\Security\Http\Logout\LogoutUrlGenerator
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: map
+  - name: dispatcher
+  - name: logoutUrlGenerator
+  comment: null
+- name: configureLogoutUrlGenerator
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: onKernelFinishRequest
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Bundle\SecurityBundle\Security\FirewallMap
+- Symfony\Component\HttpKernel\Event\FinishRequestEvent
+- Symfony\Component\HttpKernel\Event\RequestEvent
+- Symfony\Component\HttpKernel\KernelEvents
+- Symfony\Component\Security\Http\Firewall
+- Symfony\Component\Security\Http\FirewallMapInterface
+- Symfony\Component\Security\Http\Logout\LogoutUrlGenerator
+- Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+interfaces: []

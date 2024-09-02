@@ -1,0 +1,31 @@
+name: JobProcessed
+class_comment: null
+dependencies: []
+properties:
+- name: connectionName
+  visibility: public
+  comment: '# * The connection name.
+
+    # *
+
+    # * @var string'
+- name: job
+  visibility: public
+  comment: '# * The job instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Queue\Job'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: connectionName
+  - name: job
+  comment: "# * The connection name.\n# *\n# * @var string\n# */\n# public $connectionName;\n\
+    # \n# /**\n# * The job instance.\n# *\n# * @var \\Illuminate\\Contracts\\Queue\\\
+    Job\n# */\n# public $job;\n# \n# /**\n# * Create a new event instance.\n# *\n\
+    # * @param  string  $connectionName\n# * @param  \\Illuminate\\Contracts\\Queue\\\
+    Job  $job\n# * @return void"
+traits: []
+interfaces: []

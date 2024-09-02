@@ -1,0 +1,85 @@
+name: Envelope
+class_comment: null
+dependencies:
+- name: StampInterface
+  type: class
+  source: Symfony\Component\Messenger\Stamp\StampInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: message
+  - name: stamps
+    default: '[]'
+  comment: "# * A message wrapped in an envelope with stamps (configurations, markers,\
+    \ ...).\n# *\n# * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>\n\
+    # */\n# final class Envelope\n# {\n# /**\n# * @var array<class-string<StampInterface>,\
+    \ list<StampInterface>>\n# */\n# private array $stamps = [];\n# \n# /**\n# * @param\
+    \ object|Envelope  $message\n# * @param StampInterface[] $stamps"
+- name: wrap
+  visibility: public
+  parameters:
+  - name: message
+  - name: stamps
+    default: '[]'
+  comment: '# * Makes sure the message is in an Envelope and adds the given stamps.
+
+    # *
+
+    # * @param StampInterface[] $stamps'
+- name: with
+  visibility: public
+  parameters:
+  - name: '...$stamps'
+  comment: '# * Adds one or more stamps.'
+- name: withoutAll
+  visibility: public
+  parameters:
+  - name: stampFqcn
+  comment: '# * Removes all stamps of the given class.'
+- name: withoutStampsOfType
+  visibility: public
+  parameters:
+  - name: type
+  comment: '# * Removes all stamps that implement the given type.'
+- name: last
+  visibility: public
+  parameters:
+  - name: stampFqcn
+  comment: '# * @template TStamp of StampInterface
+
+    # *
+
+    # * @param class-string<TStamp> $stampFqcn
+
+    # *
+
+    # * @return TStamp|null'
+- name: all
+  visibility: public
+  parameters:
+  - name: stampFqcn
+    default: 'null'
+  comment: '# * @template TStamp of StampInterface
+
+    # *
+
+    # * @param class-string<TStamp>|null $stampFqcn
+
+    # *
+
+    # * @return StampInterface[]|StampInterface[][] The stamps for the specified FQCN,
+    or all stamps by their class name
+
+    # *
+
+    # * @psalm-return ($stampFqcn is string : array<class-string<StampInterface>,
+    list<StampInterface>> ? list<TStamp>)'
+- name: getMessage
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Messenger\Stamp\StampInterface
+interfaces: []

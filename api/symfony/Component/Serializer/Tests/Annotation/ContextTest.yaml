@@ -1,0 +1,60 @@
+name: ContextTest
+class_comment: '# * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Context
+  type: class
+  source: Symfony\Component\Serializer\Attribute\Context
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Serializer\Exception\InvalidArgumentException
+- name: CliDumper
+  type: class
+  source: Symfony\Component\VarDumper\Dumper\CliDumper
+- name: VarDumperTestTrait
+  type: class
+  source: Symfony\Component\VarDumper\Test\VarDumperTestTrait
+- name: VarDumperTestTrait
+  type: class
+  source: VarDumperTestTrait
+properties: []
+methods:
+- name: testValidInputs
+  visibility: public
+  parameters:
+  - name: factory
+  - name: expectedDump
+  comment: "# * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>\n# */\n\
+    # class ContextTest extends TestCase\n# {\n# use VarDumperTestTrait;\n# \n# protected\
+    \ function setUp(): void\n# {\n# $this->setUpVarDumper([], CliDumper::DUMP_LIGHT_ARRAY\
+    \ | CliDumper::DUMP_TRAILING_COMMA);\n# }\n# \n# public function testThrowsOnEmptyContext()\n\
+    # {\n# $this->expectException(InvalidArgumentException::class);\n# $this->expectExceptionMessage('At\
+    \ least one of the \"context\", \"normalizationContext\", or \"denormalizationContext\"\
+    \ options must be provided as a non-empty array to \"Symfony\\Component\\Serializer\\\
+    Attribute\\Context\".');\n# \n# new Context();\n# }\n# \n# public function testInvalidGroupOption()\n\
+    # {\n# $this->expectException(InvalidArgumentException::class);\n# $this->expectExceptionMessage(\\\
+    sprintf('Parameter \"groups\" given to \"%s\" must be a string or an array of\
+    \ strings, \"stdClass\" given', Context::class));\n# \n# new Context(context:\
+    \ ['foo' => 'bar'], groups: ['fine', new \\stdClass()]);\n# }\n# \n# public function\
+    \ testAsFirstArg()\n# {\n# $context = new Context(['foo' => 'bar']);\n# \n# self::assertSame(['foo'\
+    \ => 'bar'], $context->getContext());\n# self::assertEmpty($context->getNormalizationContext());\n\
+    # self::assertEmpty($context->getDenormalizationContext());\n# self::assertEmpty($context->getGroups());\n\
+    # }\n# \n# public function testAsContextArg()\n# {\n# $context = new Context(context:\
+    \ ['foo' => 'bar']);\n# \n# self::assertSame(['foo' => 'bar'], $context->getContext());\n\
+    # self::assertEmpty($context->getNormalizationContext());\n# self::assertEmpty($context->getDenormalizationContext());\n\
+    # self::assertEmpty($context->getGroups());\n# }\n# \n# /**\n# * @dataProvider\
+    \ provideValidInputs"
+- name: provideValidInputs
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Attribute\Context
+- Symfony\Component\Serializer\Exception\InvalidArgumentException
+- Symfony\Component\VarDumper\Dumper\CliDumper
+- Symfony\Component\VarDumper\Test\VarDumperTestTrait
+- VarDumperTestTrait
+interfaces: []

@@ -1,0 +1,54 @@
+name: CamelCaseToSnakeCaseNameConverterTest
+class_comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# * @author Aur\xE9\
+  lien Pillevesse <aurelienpillevesse@hotmail.fr>"
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: UnexpectedPropertyException
+  type: class
+  source: Symfony\Component\Serializer\Exception\UnexpectedPropertyException
+- name: CamelCaseToSnakeCaseNameConverter
+  type: class
+  source: Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
+- name: NameConverterInterface
+  type: class
+  source: Symfony\Component\Serializer\NameConverter\NameConverterInterface
+properties: []
+methods:
+- name: testNormalize
+  visibility: public
+  parameters:
+  - name: underscored
+  - name: camelCased
+  - name: useLowerCamelCase
+  comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# * @author Aur\xE9\
+    lien Pillevesse <aurelienpillevesse@hotmail.fr>\n# */\n# class CamelCaseToSnakeCaseNameConverterTest\
+    \ extends TestCase\n# {\n# public function testInterface()\n# {\n# $attributeMetadata\
+    \ = new CamelCaseToSnakeCaseNameConverter();\n# $this->assertInstanceOf(NameConverterInterface::class,\
+    \ $attributeMetadata);\n# }\n# \n# /**\n# * @dataProvider attributeProvider"
+- name: testDenormalize
+  visibility: public
+  parameters:
+  - name: underscored
+  - name: camelCased
+  - name: useLowerCamelCase
+  comment: '# * @dataProvider attributeProvider'
+- name: attributeProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalizeWithContext
+  visibility: public
+  parameters: []
+  comment: null
+- name: testErrorDenormalizeWithContext
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Exception\UnexpectedPropertyException
+- Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
+- Symfony\Component\Serializer\NameConverter\NameConverterInterface
+interfaces: []

@@ -1,0 +1,133 @@
+name: SqlServerConnection
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Exception
+  type: class
+  source: Exception
+- name: QueryGrammar
+  type: class
+  source: Illuminate\Database\Query\Grammars\SqlServerGrammar
+- name: SqlServerProcessor
+  type: class
+  source: Illuminate\Database\Query\Processors\SqlServerProcessor
+- name: SchemaGrammar
+  type: class
+  source: Illuminate\Database\Schema\Grammars\SqlServerGrammar
+- name: SqlServerBuilder
+  type: class
+  source: Illuminate\Database\Schema\SqlServerBuilder
+- name: Filesystem
+  type: class
+  source: Illuminate\Filesystem\Filesystem
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: Throwable
+  type: class
+  source: Throwable
+properties: []
+methods:
+- name: transaction
+  visibility: public
+  parameters:
+  - name: callback
+  - name: attempts
+    default: '1'
+  comment: '# * Execute a Closure within a transaction.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @param  int  $attempts
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Throwable'
+- name: escapeBinary
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Escape a binary value for safe SQL embedding.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: isUniqueConstraintError
+  visibility: protected
+  parameters:
+  - name: exception
+  comment: '# * Determine if the given database exception was caused by a unique constraint
+    violation.
+
+    # *
+
+    # * @param  \Exception  $exception
+
+    # * @return bool'
+- name: getDefaultQueryGrammar
+  visibility: protected
+  parameters: []
+  comment: '# * Get the default query grammar instance.
+
+    # *
+
+    # * @return \Illuminate\Database\Query\Grammars\SqlServerGrammar'
+- name: getSchemaBuilder
+  visibility: public
+  parameters: []
+  comment: '# * Get a schema builder instance for the connection.
+
+    # *
+
+    # * @return \Illuminate\Database\Schema\SqlServerBuilder'
+- name: getDefaultSchemaGrammar
+  visibility: protected
+  parameters: []
+  comment: '# * Get the default schema grammar instance.
+
+    # *
+
+    # * @return \Illuminate\Database\Schema\Grammars\SqlServerGrammar'
+- name: getSchemaState
+  visibility: public
+  parameters:
+  - name: files
+    default: 'null'
+  - name: processFactory
+    default: 'null'
+  comment: '# * Get the schema state for the connection.
+
+    # *
+
+    # * @param  \Illuminate\Filesystem\Filesystem|null  $files
+
+    # * @param  callable|null  $processFactory
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: getDefaultPostProcessor
+  visibility: protected
+  parameters: []
+  comment: '# * Get the default post processor instance.
+
+    # *
+
+    # * @return \Illuminate\Database\Query\Processors\SqlServerProcessor'
+traits:
+- Closure
+- Exception
+- Illuminate\Database\Query\Processors\SqlServerProcessor
+- Illuminate\Database\Schema\SqlServerBuilder
+- Illuminate\Filesystem\Filesystem
+- RuntimeException
+- Throwable
+interfaces: []

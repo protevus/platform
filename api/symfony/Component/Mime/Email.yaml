@@ -1,0 +1,367 @@
+name: Email
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: LogicException
+  type: class
+  source: Symfony\Component\Mime\Exception\LogicException
+- name: AbstractPart
+  type: class
+  source: Symfony\Component\Mime\Part\AbstractPart
+- name: DataPart
+  type: class
+  source: Symfony\Component\Mime\Part\DataPart
+- name: File
+  type: class
+  source: Symfony\Component\Mime\Part\File
+- name: AlternativePart
+  type: class
+  source: Symfony\Component\Mime\Part\Multipart\AlternativePart
+- name: MixedPart
+  type: class
+  source: Symfony\Component\Mime\Part\Multipart\MixedPart
+- name: RelatedPart
+  type: class
+  source: Symfony\Component\Mime\Part\Multipart\RelatedPart
+- name: TextPart
+  type: class
+  source: Symfony\Component\Mime\Part\TextPart
+properties:
+- name: text
+  visibility: private
+  comment: "# * @author Fabien Potencier <fabien@symfony.com>\n# */\n# class Email\
+    \ extends Message\n# {\n# public const PRIORITY_HIGHEST = 1;\n# public const PRIORITY_HIGH\
+    \ = 2;\n# public const PRIORITY_NORMAL = 3;\n# public const PRIORITY_LOW = 4;\n\
+    # public const PRIORITY_LOWEST = 5;\n# \n# private const PRIORITY_MAP = [\n# self::PRIORITY_HIGHEST\
+    \ => 'Highest',\n# self::PRIORITY_HIGH => 'High',\n# self::PRIORITY_NORMAL =>\
+    \ 'Normal',\n# self::PRIORITY_LOW => 'Low',\n# self::PRIORITY_LOWEST => 'Lowest',\n\
+    # ];\n# \n# /**\n# * @var resource|string|null"
+- name: html
+  visibility: private
+  comment: '# * @var resource|string|null'
+methods:
+- name: subject
+  visibility: public
+  parameters:
+  - name: subject
+  comment: "# * @author Fabien Potencier <fabien@symfony.com>\n# */\n# class Email\
+    \ extends Message\n# {\n# public const PRIORITY_HIGHEST = 1;\n# public const PRIORITY_HIGH\
+    \ = 2;\n# public const PRIORITY_NORMAL = 3;\n# public const PRIORITY_LOW = 4;\n\
+    # public const PRIORITY_LOWEST = 5;\n# \n# private const PRIORITY_MAP = [\n# self::PRIORITY_HIGHEST\
+    \ => 'Highest',\n# self::PRIORITY_HIGH => 'High',\n# self::PRIORITY_NORMAL =>\
+    \ 'Normal',\n# self::PRIORITY_LOW => 'Low',\n# self::PRIORITY_LOWEST => 'Lowest',\n\
+    # ];\n# \n# /**\n# * @var resource|string|null\n# */\n# private $text;\n# \n#\
+    \ private ?string $textCharset = null;\n# \n# /**\n# * @var resource|string|null\n\
+    # */\n# private $html;\n# \n# private ?string $htmlCharset = null;\n# private\
+    \ array $attachments = [];\n# private ?AbstractPart $cachedBody = null; // Used\
+    \ to avoid wrong body hash in DKIM signatures with multiple parts (e.g. HTML +\
+    \ TEXT) due to multiple boundaries.\n# \n# /**\n# * @return $this"
+- name: getSubject
+  visibility: public
+  parameters: []
+  comment: null
+- name: date
+  visibility: public
+  parameters:
+  - name: dateTime
+  comment: '# * @return $this'
+- name: getDate
+  visibility: public
+  parameters: []
+  comment: null
+- name: returnPath
+  visibility: public
+  parameters:
+  - name: address
+  comment: '# * @return $this'
+- name: getReturnPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: sender
+  visibility: public
+  parameters:
+  - name: address
+  comment: '# * @return $this'
+- name: getSender
+  visibility: public
+  parameters: []
+  comment: null
+- name: addFrom
+  visibility: public
+  parameters:
+  - name: '...$addresses'
+  comment: '# * @return $this'
+- name: from
+  visibility: public
+  parameters:
+  - name: '...$addresses'
+  comment: '# * @return $this'
+- name: getFrom
+  visibility: public
+  parameters: []
+  comment: '# * @return Address[]'
+- name: addReplyTo
+  visibility: public
+  parameters:
+  - name: '...$addresses'
+  comment: '# * @return $this'
+- name: replyTo
+  visibility: public
+  parameters:
+  - name: '...$addresses'
+  comment: '# * @return $this'
+- name: getReplyTo
+  visibility: public
+  parameters: []
+  comment: '# * @return Address[]'
+- name: addTo
+  visibility: public
+  parameters:
+  - name: '...$addresses'
+  comment: '# * @return $this'
+- name: to
+  visibility: public
+  parameters:
+  - name: '...$addresses'
+  comment: '# * @return $this'
+- name: getTo
+  visibility: public
+  parameters: []
+  comment: '# * @return Address[]'
+- name: addCc
+  visibility: public
+  parameters:
+  - name: '...$addresses'
+  comment: '# * @return $this'
+- name: cc
+  visibility: public
+  parameters:
+  - name: '...$addresses'
+  comment: '# * @return $this'
+- name: getCc
+  visibility: public
+  parameters: []
+  comment: '# * @return Address[]'
+- name: addBcc
+  visibility: public
+  parameters:
+  - name: '...$addresses'
+  comment: '# * @return $this'
+- name: bcc
+  visibility: public
+  parameters:
+  - name: '...$addresses'
+  comment: '# * @return $this'
+- name: getBcc
+  visibility: public
+  parameters: []
+  comment: '# * @return Address[]'
+- name: priority
+  visibility: public
+  parameters:
+  - name: priority
+  comment: '# * Sets the priority of this message.
+
+    # *
+
+    # * The value is an integer where 1 is the highest priority and 5 is the lowest.
+
+    # *
+
+    # * @return $this'
+- name: getPriority
+  visibility: public
+  parameters: []
+  comment: '# * Get the priority of this message.
+
+    # *
+
+    # * The returned value is an integer where 1 is the highest priority and 5
+
+    # * is the lowest.'
+- name: text
+  visibility: public
+  parameters:
+  - name: body
+  - name: charset
+    default: '''utf-8'''
+  comment: '# * @param resource|string|null $body
+
+    # *
+
+    # * @return $this'
+- name: getTextBody
+  visibility: public
+  parameters: []
+  comment: '# * @return resource|string|null'
+- name: getTextCharset
+  visibility: public
+  parameters: []
+  comment: null
+- name: html
+  visibility: public
+  parameters:
+  - name: body
+  - name: charset
+    default: '''utf-8'''
+  comment: '# * @param resource|string|null $body
+
+    # *
+
+    # * @return $this'
+- name: getHtmlBody
+  visibility: public
+  parameters: []
+  comment: '# * @return resource|string|null'
+- name: getHtmlCharset
+  visibility: public
+  parameters: []
+  comment: null
+- name: attach
+  visibility: public
+  parameters:
+  - name: body
+  - name: name
+    default: 'null'
+  - name: contentType
+    default: 'null'
+  comment: '# * @param resource|string $body
+
+    # *
+
+    # * @return $this'
+- name: attachFromPath
+  visibility: public
+  parameters:
+  - name: path
+  - name: name
+    default: 'null'
+  - name: contentType
+    default: 'null'
+  comment: '# * @return $this'
+- name: embed
+  visibility: public
+  parameters:
+  - name: body
+  - name: name
+    default: 'null'
+  - name: contentType
+    default: 'null'
+  comment: '# * @param resource|string $body
+
+    # *
+
+    # * @return $this'
+- name: embedFromPath
+  visibility: public
+  parameters:
+  - name: path
+  - name: name
+    default: 'null'
+  - name: contentType
+    default: 'null'
+  comment: '# * @return $this'
+- name: addPart
+  visibility: public
+  parameters:
+  - name: part
+  comment: '# * @return $this'
+- name: getAttachments
+  visibility: public
+  parameters: []
+  comment: '# * @return DataPart[]'
+- name: getBody
+  visibility: public
+  parameters: []
+  comment: null
+- name: ensureValidity
+  visibility: public
+  parameters: []
+  comment: null
+- name: ensureBodyValid
+  visibility: private
+  parameters: []
+  comment: null
+- name: generateBody
+  visibility: private
+  parameters: []
+  comment: '# * Generates an AbstractPart based on the raw body of a message.
+
+    # *
+
+    # * The most "complex" part generated by this method is when there is text and
+    HTML bodies
+
+    # * with related images for the HTML part and some attachments:
+
+    # *
+
+    # * multipart/mixed
+
+    # *         |
+
+    # *         |------------> multipart/related
+
+    # *         |                      |
+
+    # *         |                      |------------> multipart/alternative
+
+    # *         |                      |                      |
+
+    # *         |                      |                       ------------> text/plain
+    (with content)
+
+    # *         |                      |                      |
+
+    # *         |                      |                       ------------> text/html
+    (with content)
+
+    # *         |                      |
+
+    # *         |                       ------------> image/png (with content)
+
+    # *         |
+
+    # *          ------------> application/pdf (with content)'
+- name: prepareParts
+  visibility: private
+  parameters: []
+  comment: null
+- name: setHeaderBody
+  visibility: private
+  parameters:
+  - name: type
+  - name: name
+  - name: body
+  comment: '# * @return $this'
+- name: addListAddressHeaderBody
+  visibility: private
+  parameters:
+  - name: name
+  - name: addresses
+  comment: '# * @return $this'
+- name: setListAddressHeaderBody
+  visibility: private
+  parameters:
+  - name: name
+  - name: addresses
+  comment: '# * @return $this'
+- name: __serialize
+  visibility: public
+  parameters: []
+  comment: '# * @internal'
+- name: __unserialize
+  visibility: public
+  parameters:
+  - name: data
+  comment: '# * @internal'
+traits:
+- Symfony\Component\Mime\Exception\LogicException
+- Symfony\Component\Mime\Part\AbstractPart
+- Symfony\Component\Mime\Part\DataPart
+- Symfony\Component\Mime\Part\File
+- Symfony\Component\Mime\Part\Multipart\AlternativePart
+- Symfony\Component\Mime\Part\Multipart\MixedPart
+- Symfony\Component\Mime\Part\Multipart\RelatedPart
+- Symfony\Component\Mime\Part\TextPart
+interfaces: []

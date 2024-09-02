@@ -1,0 +1,102 @@
+name: Extension
+class_comment: null
+dependencies:
+- name: ConfigurationInterface
+  type: class
+  source: Symfony\Component\Config\Definition\ConfigurationInterface
+- name: Processor
+  type: class
+  source: Symfony\Component\Config\Definition\Processor
+- name: Container
+  type: class
+  source: Symfony\Component\DependencyInjection\Container
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: BadMethodCallException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\BadMethodCallException
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\LogicException
+properties: []
+methods:
+- name: getXsdValidationBasePath
+  visibility: public
+  parameters: []
+  comment: "# * Provides useful features shared by many extensions.\n# *\n# * @author\
+    \ Fabien Potencier <fabien@symfony.com>\n# */\n# abstract class Extension implements\
+    \ ExtensionInterface, ConfigurationExtensionInterface\n# {\n# private array $processedConfigs\
+    \ = [];\n# \n# /**\n# * @return string|false"
+- name: getNamespace
+  visibility: public
+  parameters: []
+  comment: '# * @return string'
+- name: getAlias
+  visibility: public
+  parameters: []
+  comment: '# * Returns the recommended alias to use in XML.
+
+    # *
+
+    # * This alias is also the mandatory prefix to use when using YAML.
+
+    # *
+
+    # * This convention is to remove the "Extension" postfix from the class
+
+    # * name and then lowercase and underscore the result. So:
+
+    # *
+
+    # *     AcmeHelloExtension
+
+    # *
+
+    # * becomes
+
+    # *
+
+    # *     acme_hello
+
+    # *
+
+    # * This can be overridden in a sub-class to specify the alias manually.
+
+    # *
+
+    # * @throws BadMethodCallException When the extension name does not follow conventions'
+- name: getConfiguration
+  visibility: public
+  parameters:
+  - name: config
+  - name: container
+  comment: '# * @return ConfigurationInterface|null'
+- name: processConfiguration
+  visibility: protected
+  parameters:
+  - name: configuration
+  - name: configs
+  comment: null
+- name: isConfigEnabled
+  visibility: protected
+  parameters:
+  - name: container
+  - name: config
+  comment: "# * @internal\n# */\n# final public function getProcessedConfigs(): array\n\
+    # {\n# try {\n# return $this->processedConfigs;\n# } finally {\n# $this->processedConfigs\
+    \ = [];\n# }\n# }\n# \n# /**\n# * @throws InvalidArgumentException When the config\
+    \ is not enableable"
+traits:
+- Symfony\Component\Config\Definition\ConfigurationInterface
+- Symfony\Component\Config\Definition\Processor
+- Symfony\Component\DependencyInjection\Container
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\BadMethodCallException
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Exception\LogicException
+interfaces:
+- ExtensionInterface

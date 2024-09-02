@@ -1,0 +1,145 @@
+name: Parser
+class_comment: '# * Parses a token stream.
+
+  # *
+
+  # * This parser implements a "Precedence climbing" algorithm.
+
+  # *
+
+  # * @see http://www.engr.mun.ca/~theo/Misc/exp_parsing.htm
+
+  # * @see http://en.wikipedia.org/wiki/Operator-precedence_parser
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies: []
+properties: []
+methods:
+- name: parse
+  visibility: public
+  parameters:
+  - name: stream
+  - name: names
+    default: '[]'
+  - name: flags
+    default: '0'
+  comment: "# * Parses a token stream.\n# *\n# * This parser implements a \"Precedence\
+    \ climbing\" algorithm.\n# *\n# * @see http://www.engr.mun.ca/~theo/Misc/exp_parsing.htm\n\
+    # * @see http://en.wikipedia.org/wiki/Operator-precedence_parser\n# *\n# * @author\
+    \ Fabien Potencier <fabien@symfony.com>\n# */\n# class Parser\n# {\n# public const\
+    \ OPERATOR_LEFT = 1;\n# public const OPERATOR_RIGHT = 2;\n# \n# public const IGNORE_UNKNOWN_VARIABLES\
+    \ = 1;\n# public const IGNORE_UNKNOWN_FUNCTIONS = 2;\n# \n# private TokenStream\
+    \ $stream;\n# private array $unaryOperators;\n# private array $binaryOperators;\n\
+    # private array $names;\n# private int $flags = 0;\n# \n# public function __construct(\n\
+    # private array $functions,\n# ) {\n# $this->unaryOperators = [\n# 'not' => ['precedence'\
+    \ => 50],\n# '!' => ['precedence' => 50],\n# '-' => ['precedence' => 500],\n#\
+    \ '+' => ['precedence' => 500],\n# ];\n# $this->binaryOperators = [\n# 'or' =>\
+    \ ['precedence' => 10, 'associativity' => self::OPERATOR_LEFT],\n# '||' => ['precedence'\
+    \ => 10, 'associativity' => self::OPERATOR_LEFT],\n# 'and' => ['precedence' =>\
+    \ 15, 'associativity' => self::OPERATOR_LEFT],\n# '&&' => ['precedence' => 15,\
+    \ 'associativity' => self::OPERATOR_LEFT],\n# '|' => ['precedence' => 16, 'associativity'\
+    \ => self::OPERATOR_LEFT],\n# '^' => ['precedence' => 17, 'associativity' => self::OPERATOR_LEFT],\n\
+    # '&' => ['precedence' => 18, 'associativity' => self::OPERATOR_LEFT],\n# '=='\
+    \ => ['precedence' => 20, 'associativity' => self::OPERATOR_LEFT],\n# '===' =>\
+    \ ['precedence' => 20, 'associativity' => self::OPERATOR_LEFT],\n# '!=' => ['precedence'\
+    \ => 20, 'associativity' => self::OPERATOR_LEFT],\n# '!==' => ['precedence' =>\
+    \ 20, 'associativity' => self::OPERATOR_LEFT],\n# '<' => ['precedence' => 20,\
+    \ 'associativity' => self::OPERATOR_LEFT],\n# '>' => ['precedence' => 20, 'associativity'\
+    \ => self::OPERATOR_LEFT],\n# '>=' => ['precedence' => 20, 'associativity' =>\
+    \ self::OPERATOR_LEFT],\n# '<=' => ['precedence' => 20, 'associativity' => self::OPERATOR_LEFT],\n\
+    # 'not in' => ['precedence' => 20, 'associativity' => self::OPERATOR_LEFT],\n\
+    # 'in' => ['precedence' => 20, 'associativity' => self::OPERATOR_LEFT],\n# 'contains'\
+    \ => ['precedence' => 20, 'associativity' => self::OPERATOR_LEFT],\n# 'starts\
+    \ with' => ['precedence' => 20, 'associativity' => self::OPERATOR_LEFT],\n# 'ends\
+    \ with' => ['precedence' => 20, 'associativity' => self::OPERATOR_LEFT],\n# 'matches'\
+    \ => ['precedence' => 20, 'associativity' => self::OPERATOR_LEFT],\n# '..' =>\
+    \ ['precedence' => 25, 'associativity' => self::OPERATOR_LEFT],\n# '+' => ['precedence'\
+    \ => 30, 'associativity' => self::OPERATOR_LEFT],\n# '-' => ['precedence' => 30,\
+    \ 'associativity' => self::OPERATOR_LEFT],\n# '~' => ['precedence' => 40, 'associativity'\
+    \ => self::OPERATOR_LEFT],\n# '*' => ['precedence' => 60, 'associativity' => self::OPERATOR_LEFT],\n\
+    # '/' => ['precedence' => 60, 'associativity' => self::OPERATOR_LEFT],\n# '%'\
+    \ => ['precedence' => 60, 'associativity' => self::OPERATOR_LEFT],\n# '**' =>\
+    \ ['precedence' => 200, 'associativity' => self::OPERATOR_RIGHT],\n# ];\n# }\n\
+    # \n# /**\n# * Converts a token stream to a node tree.\n# *\n# * The valid names\
+    \ is an array where the values\n# * are the names that the user can use in an\
+    \ expression.\n# *\n# * If the variable name in the compiled PHP code must be\n\
+    # * different, define it as the key.\n# *\n# * For instance, ['this' => 'container']\
+    \ means that the\n# * variable 'container' can be used in the expression\n# *\
+    \ but the compiled code will use 'this'.\n# *\n# * @param int-mask-of<Parser::IGNORE_*>\
+    \ $flags\n# *\n# * @throws SyntaxError"
+- name: lint
+  visibility: public
+  parameters:
+  - name: stream
+  - name: names
+    default: '[]'
+  - name: flags
+    default: '0'
+  comment: '# * Validates the syntax of an expression.
+
+    # *
+
+    # * The syntax of the passed expression will be checked, but not parsed.
+
+    # * If you want to skip checking dynamic variable names, pass `Parser::IGNORE_UNKNOWN_VARIABLES`
+    instead of the array.
+
+    # *
+
+    # * @param int-mask-of<Parser::IGNORE_*> $flags
+
+    # *
+
+    # * @throws SyntaxError When the passed expression is invalid'
+- name: doParse
+  visibility: private
+  parameters:
+  - name: stream
+  - name: names
+  - name: flags
+  comment: '# * @param int-mask-of<Parser::IGNORE_*> $flags
+
+    # *
+
+    # * @throws SyntaxError'
+- name: parseExpression
+  visibility: public
+  parameters:
+  - name: precedence
+    default: '0'
+  comment: null
+- name: getPrimary
+  visibility: protected
+  parameters: []
+  comment: null
+- name: parseConditionalExpression
+  visibility: protected
+  parameters:
+  - name: expr
+  comment: null
+- name: parsePrimaryExpression
+  visibility: public
+  parameters: []
+  comment: null
+- name: parseArrayExpression
+  visibility: public
+  parameters: []
+  comment: null
+- name: parseHashExpression
+  visibility: public
+  parameters: []
+  comment: null
+- name: parsePostfixExpression
+  visibility: public
+  parameters:
+  - name: node
+  comment: null
+- name: parseArguments
+  visibility: public
+  parameters: []
+  comment: '# * Parses arguments.'
+traits: []
+interfaces:
+- a

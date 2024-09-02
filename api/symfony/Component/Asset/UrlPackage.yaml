@@ -1,0 +1,97 @@
+name: UrlPackage
+class_comment: '# * Package that adds a base URL to asset URLs in addition to a version.
+
+  # *
+
+  # * The package allows to use more than one base URLs in which case
+
+  # * it randomly chooses one for each asset; it also guarantees that
+
+  # * any given path will always use the same base URL to be nice with
+
+  # * HTTP caching mechanisms.
+
+  # *
+
+  # * When the request context is available, this package can choose the
+
+  # * best base URL to use based on the current request scheme:
+
+  # *
+
+  # *  * For HTTP request, it chooses between all base URLs;
+
+  # *  * For HTTPs requests, it chooses between HTTPs base URLs and relative protocol
+  URLs
+
+  # *    or falls back to any base URL if no secure ones are available.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: ContextInterface
+  type: class
+  source: Symfony\Component\Asset\Context\ContextInterface
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Asset\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\Asset\Exception\LogicException
+- name: VersionStrategyInterface
+  type: class
+  source: Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: baseUrls
+  - name: versionStrategy
+  - name: context
+    default: 'null'
+  comment: "# * Package that adds a base URL to asset URLs in addition to a version.\n\
+    # *\n# * The package allows to use more than one base URLs in which case\n# *\
+    \ it randomly chooses one for each asset; it also guarantees that\n# * any given\
+    \ path will always use the same base URL to be nice with\n# * HTTP caching mechanisms.\n\
+    # *\n# * When the request context is available, this package can choose the\n\
+    # * best base URL to use based on the current request scheme:\n# *\n# *  * For\
+    \ HTTP request, it chooses between all base URLs;\n# *  * For HTTPs requests,\
+    \ it chooses between HTTPs base URLs and relative protocol URLs\n# *    or falls\
+    \ back to any base URL if no secure ones are available.\n# *\n# * @author Fabien\
+    \ Potencier <fabien@symfony.com>\n# */\n# class UrlPackage extends Package\n#\
+    \ {\n# private array $baseUrls = [];\n# private ?self $sslPackage = null;\n# \n\
+    # /**\n# * @param string|string[] $baseUrls Base asset URLs"
+- name: getUrl
+  visibility: public
+  parameters:
+  - name: path
+  comment: null
+- name: getBaseUrl
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Returns the base URL for a path.'
+- name: chooseBaseUrl
+  visibility: protected
+  parameters:
+  - name: path
+  comment: '# * Determines which base URL to use for the given path.
+
+    # *
+
+    # * Override this method to change the default distribution strategy.
+
+    # * This method should always return the same base URL index for a given path.'
+- name: getSslUrls
+  visibility: private
+  parameters:
+  - name: urls
+  comment: null
+traits:
+- Symfony\Component\Asset\Context\ContextInterface
+- Symfony\Component\Asset\Exception\InvalidArgumentException
+- Symfony\Component\Asset\Exception\LogicException
+- Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface
+interfaces: []

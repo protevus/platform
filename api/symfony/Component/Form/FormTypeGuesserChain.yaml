@@ -1,0 +1,71 @@
+name: FormTypeGuesserChain
+class_comment: null
+dependencies:
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Form\Exception\UnexpectedTypeException
+- name: Guess
+  type: class
+  source: Symfony\Component\Form\Guess\Guess
+- name: TypeGuess
+  type: class
+  source: Symfony\Component\Form\Guess\TypeGuess
+- name: ValueGuess
+  type: class
+  source: Symfony\Component\Form\Guess\ValueGuess
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: guessers
+  comment: '# * @param FormTypeGuesserInterface[] $guessers
+
+    # *
+
+    # * @throws UnexpectedTypeException if any guesser does not implement FormTypeGuesserInterface'
+- name: guessType
+  visibility: public
+  parameters:
+  - name: class
+  - name: property
+  comment: null
+- name: guessRequired
+  visibility: public
+  parameters:
+  - name: class
+  - name: property
+  comment: null
+- name: guessMaxLength
+  visibility: public
+  parameters:
+  - name: class
+  - name: property
+  comment: null
+- name: guessPattern
+  visibility: public
+  parameters:
+  - name: class
+  - name: property
+  comment: null
+- name: guess
+  visibility: private
+  parameters:
+  - name: closure
+  comment: '# * Executes a closure for each guesser and returns the best guess from
+    the
+
+    # * return values.
+
+    # *
+
+    # * @param \Closure $closure The closure to execute. Accepts a guesser
+
+    # *                          as argument and should return a Guess instance'
+traits:
+- Symfony\Component\Form\Exception\UnexpectedTypeException
+- Symfony\Component\Form\Guess\Guess
+- Symfony\Component\Form\Guess\TypeGuess
+- Symfony\Component\Form\Guess\ValueGuess
+interfaces:
+- FormTypeGuesserInterface

@@ -1,0 +1,45 @@
+name: DkimOptions
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: algorithm
+  visibility: public
+  parameters:
+  - name: algo
+  comment: "# * A helper providing autocompletion for available DkimSigner options.\n\
+    # *\n# * @author Fabien Potencier <fabien@symfony.com>\n# */\n# final class DkimOptions\n\
+    # {\n# private array $options = [];\n# \n# public function toArray(): array\n\
+    # {\n# return $this->options;\n# }\n# \n# /**\n# * @return $this"
+- name: signatureExpirationDelay
+  visibility: public
+  parameters:
+  - name: show
+  comment: '# * @return $this'
+- name: bodyMaxLength
+  visibility: public
+  parameters:
+  - name: max
+  comment: '# * @return $this'
+- name: bodyShowLength
+  visibility: public
+  parameters:
+  - name: show
+  comment: '# * @return $this'
+- name: headerCanon
+  visibility: public
+  parameters:
+  - name: canon
+  comment: '# * @return $this'
+- name: bodyCanon
+  visibility: public
+  parameters:
+  - name: canon
+  comment: '# * @return $this'
+- name: headersToIgnore
+  visibility: public
+  parameters:
+  - name: headers
+  comment: '# * @return $this'
+traits: []
+interfaces: []

@@ -1,0 +1,28 @@
+name: MarkingStoreInterface
+class_comment: null
+dependencies:
+- name: Marking
+  type: class
+  source: Symfony\Component\Workflow\Marking
+properties: []
+methods:
+- name: getMarking
+  visibility: public
+  parameters:
+  - name: subject
+  comment: "# * MarkingStoreInterface is the interface between the Workflow Component\
+    \ and a\n# * plain old PHP object: the subject.\n# *\n# * It converts the Marking\
+    \ into something understandable by the subject and vice\n# * versa.\n# *\n# *\
+    \ @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>\n# */\n# interface MarkingStoreInterface\n\
+    # {\n# /**\n# * Gets a Marking from a subject."
+- name: setMarking
+  visibility: public
+  parameters:
+  - name: subject
+  - name: marking
+  - name: context
+    default: '[]'
+  comment: '# * Sets a Marking to a subject.'
+traits:
+- Symfony\Component\Workflow\Marking
+interfaces: []

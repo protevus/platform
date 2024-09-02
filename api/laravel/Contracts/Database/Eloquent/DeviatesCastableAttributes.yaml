@@ -1,0 +1,47 @@
+name: DeviatesCastableAttributes
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: increment
+  visibility: public
+  parameters:
+  - name: model
+  - name: key
+  - name: value
+  - name: attributes
+  comment: '# * Increment the attribute.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Model  $model
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  array  $attributes
+
+    # * @return mixed'
+- name: decrement
+  visibility: public
+  parameters:
+  - name: model
+  - name: key
+  - name: value
+  - name: attributes
+  comment: '# * Decrement the attribute.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Model  $model
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  array  $attributes
+
+    # * @return mixed'
+traits: []
+interfaces: []

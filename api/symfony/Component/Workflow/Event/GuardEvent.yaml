@@ -1,0 +1,60 @@
+name: GuardEvent
+class_comment: null
+dependencies:
+- name: Marking
+  type: class
+  source: Symfony\Component\Workflow\Marking
+- name: Transition
+  type: class
+  source: Symfony\Component\Workflow\Transition
+- name: TransitionBlocker
+  type: class
+  source: Symfony\Component\Workflow\TransitionBlocker
+- name: TransitionBlockerList
+  type: class
+  source: Symfony\Component\Workflow\TransitionBlockerList
+- name: WorkflowInterface
+  type: class
+  source: Symfony\Component\Workflow\WorkflowInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: subject
+  - name: marking
+  - name: transition
+  - name: workflow
+    default: 'null'
+  comment: null
+- name: getTransition
+  visibility: public
+  parameters: []
+  comment: null
+- name: isBlocked
+  visibility: public
+  parameters: []
+  comment: null
+- name: setBlocked
+  visibility: public
+  parameters:
+  - name: blocked
+  - name: message
+    default: 'null'
+  comment: null
+- name: getTransitionBlockerList
+  visibility: public
+  parameters: []
+  comment: null
+- name: addTransitionBlocker
+  visibility: public
+  parameters:
+  - name: transitionBlocker
+  comment: null
+traits:
+- Symfony\Component\Workflow\Marking
+- Symfony\Component\Workflow\Transition
+- Symfony\Component\Workflow\TransitionBlocker
+- Symfony\Component\Workflow\TransitionBlockerList
+- Symfony\Component\Workflow\WorkflowInterface
+interfaces: []

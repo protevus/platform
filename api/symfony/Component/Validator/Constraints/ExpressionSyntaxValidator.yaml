@@ -1,0 +1,43 @@
+name: ExpressionSyntaxValidator
+class_comment: '# * @author Andrey Sevastianov <mrpkmail@gmail.com>'
+dependencies:
+- name: ExpressionLanguage
+  type: class
+  source: Symfony\Component\ExpressionLanguage\ExpressionLanguage
+- name: SyntaxError
+  type: class
+  source: Symfony\Component\ExpressionLanguage\SyntaxError
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: ConstraintValidator
+  type: class
+  source: Symfony\Component\Validator\ConstraintValidator
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedTypeException
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: expressionLanguage
+    default: 'null'
+  comment: null
+- name: validate
+  visibility: public
+  parameters:
+  - name: expression
+  - name: constraint
+  comment: null
+traits:
+- Symfony\Component\ExpressionLanguage\ExpressionLanguage
+- Symfony\Component\ExpressionLanguage\SyntaxError
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\ConstraintValidator
+- Symfony\Component\Validator\Exception\UnexpectedTypeException
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+interfaces: []

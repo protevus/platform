@@ -1,0 +1,22 @@
+name: CompilesJs
+class_comment: null
+dependencies:
+- name: Js
+  type: class
+  source: Illuminate\Support\Js
+properties: []
+methods:
+- name: compileJs
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the "@js" directive into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+traits:
+- Illuminate\Support\Js
+interfaces: []

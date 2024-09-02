@@ -1,0 +1,37 @@
+name: ProfilerPass
+class_comment: '# * Adds tagged data_collector services to profiler service.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: TemplateAwareDataCollectorInterface
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DataCollector\TemplateAwareDataCollectorInterface
+- name: CompilerPassInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Bundle\FrameworkBundle\DataCollector\TemplateAwareDataCollectorInterface
+- Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Reference
+interfaces:
+- CompilerPassInterface

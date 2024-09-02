@@ -1,0 +1,173 @@
+name: CollectionTypeTest
+class_comment: null
+dependencies:
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Form\Exception\UnexpectedTypeException
+- name: ChoiceType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+- name: Form
+  type: class
+  source: Symfony\Component\Form\Form
+- name: Author
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\Author
+- name: AuthorType
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\AuthorType
+- name: BlockPrefixedFooTextType
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\BlockPrefixedFooTextType
+properties: []
+methods:
+- name: testContainsNoChildByDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetDataAdjustsSize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowsExceptionIfObjectIsNotTraversable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotResizedIfSubmittedWithMissingData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResizedDownIfSubmittedWithMissingDataAndAllowDelete
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResizedDownIfSubmittedWithEmptyDataAndDeleteEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResizedDownWithDeleteEmptyCallable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResizedDownIfSubmittedWithCompoundEmptyDataDeleteEmptyAndNoDataClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDontAddEmptyDataIfDeleteEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoDeleteEmptyIfDeleteNotAllowed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResizedDownIfSubmittedWithCompoundEmptyDataAndDeleteEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotDeleteEmptyIfInvalid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotResizedIfSubmittedWithExtraData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResizedUpIfSubmittedWithExtraDataAndAllowAdd
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllowAddButNoPrototype
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPrototypeMultipartPropagation
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetDataDoesNotContainsPrototypeNameBeforeDataAreSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetDataDoesNotContainsPrototypeNameAfterDataAreSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPrototypeNameOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPrototypeDefaultLabel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPrototypeData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPrototypeDefaultRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPrototypeSetNotRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPrototypeSetNotRequiredIfParentNotRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPrototypeNotOverrideRequiredByEntryOptionsInFavorOfParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPrototypeOptionsOverrideEntryOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPrototypeOptionsAppliedToNewFields
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEntriesBlockPrefixes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEntriesBlockPrefixesWithCustomBlockPrefix
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEntriesBlockPrefixesWithCustomBlockPrefixedType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPrototypeBlockPrefixesWithCustomBlockPrefix
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNull
+  visibility: public
+  parameters:
+  - name: expected
+    default: 'null'
+  - name: norm
+    default: 'null'
+  - name: view
+    default: 'null'
+  comment: null
+- name: testSubmitNullUsesDefaultEmptyData
+  visibility: public
+  parameters:
+  - name: emptyData
+    default: '[]'
+  - name: expectedData
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\Form\Exception\UnexpectedTypeException
+- Symfony\Component\Form\Extension\Core\Type\ChoiceType
+- Symfony\Component\Form\Form
+- Symfony\Component\Form\Tests\Fixtures\Author
+- Symfony\Component\Form\Tests\Fixtures\AuthorType
+- Symfony\Component\Form\Tests\Fixtures\BlockPrefixedFooTextType
+interfaces: []

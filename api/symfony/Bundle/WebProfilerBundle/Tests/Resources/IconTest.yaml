@@ -1,0 +1,20 @@
+name: IconTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+properties: []
+methods:
+- name: testIconFileContents
+  visibility: public
+  parameters:
+  - name: iconFilePath
+  comment: '# * @dataProvider provideIconFilePaths'
+- name: provideIconFilePaths
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+interfaces: []

@@ -1,0 +1,88 @@
+name: TraceableNormalizer
+class_comment: '# * Collects some data about normalization.
+
+  # *
+
+  # * @author Mathias Arlaud <mathias.arlaud@gmail.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: SerializerDataCollector
+  type: class
+  source: Symfony\Component\Serializer\DataCollector\SerializerDataCollector
+- name: DenormalizerAwareInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- name: NormalizerAwareInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface
+- name: NormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\NormalizerInterface
+- name: SerializerAwareInterface
+  type: class
+  source: Symfony\Component\Serializer\SerializerAwareInterface
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Serializer\SerializerInterface
+properties: []
+methods:
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: arguments
+  comment: "# * Collects some data about normalization.\n# *\n# * @author Mathias\
+    \ Arlaud <mathias.arlaud@gmail.com>\n# *\n# * @internal\n# */\n# class TraceableNormalizer\
+    \ implements NormalizerInterface, DenormalizerInterface, SerializerAwareInterface,\
+    \ NormalizerAwareInterface, DenormalizerAwareInterface\n# {\n# public function\
+    \ __construct(\n# private NormalizerInterface|DenormalizerInterface $normalizer,\n\
+    # private SerializerDataCollector $dataCollector,\n# ) {\n# }\n# \n# public function\
+    \ getSupportedTypes(?string $format): array\n# {\n# return $this->normalizer->getSupportedTypes($format);\n\
+    # }\n# \n# public function normalize(mixed $object, ?string $format = null, array\
+    \ $context = []): array|string|int|float|bool|\\ArrayObject|null\n# {\n# if (!$this->normalizer\
+    \ instanceof NormalizerInterface) {\n# throw new \\BadMethodCallException(\\sprintf('The\
+    \ \"%s()\" method cannot be called as nested normalizer doesn\\'t implements \"\
+    %s\".', __METHOD__, NormalizerInterface::class));\n# }\n# \n# $startTime = microtime(true);\n\
+    # $normalized = $this->normalizer->normalize($object, $format, $context);\n# $time\
+    \ = microtime(true) - $startTime;\n# \n# if ($traceId = ($context[TraceableSerializer::DEBUG_TRACE_ID]\
+    \ ?? null)) {\n# $this->dataCollector->collectNormalization($traceId, $this->normalizer::class,\
+    \ $time);\n# }\n# \n# return $normalized;\n# }\n# \n# public function supportsNormalization(mixed\
+    \ $data, ?string $format = null, array $context = []): bool\n# {\n# if (!$this->normalizer\
+    \ instanceof NormalizerInterface) {\n# return false;\n# }\n# \n# return $this->normalizer->supportsNormalization($data,\
+    \ $format, $context);\n# }\n# \n# public function denormalize(mixed $data, string\
+    \ $type, ?string $format = null, array $context = []): mixed\n# {\n# if (!$this->normalizer\
+    \ instanceof DenormalizerInterface) {\n# throw new \\BadMethodCallException(\\\
+    sprintf('The \"%s()\" method cannot be called as nested normalizer doesn\\'t implements\
+    \ \"%s\".', __METHOD__, DenormalizerInterface::class));\n# }\n# \n# $startTime\
+    \ = microtime(true);\n# $denormalized = $this->normalizer->denormalize($data,\
+    \ $type, $format, $context);\n# $time = microtime(true) - $startTime;\n# \n# if\
+    \ ($traceId = ($context[TraceableSerializer::DEBUG_TRACE_ID] ?? null)) {\n# $this->dataCollector->collectDenormalization($traceId,\
+    \ $this->normalizer::class, $time);\n# }\n# \n# return $denormalized;\n# }\n#\
+    \ \n# public function supportsDenormalization(mixed $data, string $type, ?string\
+    \ $format = null, array $context = []): bool\n# {\n# if (!$this->normalizer instanceof\
+    \ DenormalizerInterface) {\n# return false;\n# }\n# \n# return $this->normalizer->supportsDenormalization($data,\
+    \ $type, $format, $context);\n# }\n# \n# public function setSerializer(SerializerInterface\
+    \ $serializer): void\n# {\n# if (!$this->normalizer instanceof SerializerAwareInterface)\
+    \ {\n# return;\n# }\n# \n# $this->normalizer->setSerializer($serializer);\n# }\n\
+    # \n# public function setNormalizer(NormalizerInterface $normalizer): void\n#\
+    \ {\n# if (!$this->normalizer instanceof NormalizerAwareInterface) {\n# return;\n\
+    # }\n# \n# $this->normalizer->setNormalizer($normalizer);\n# }\n# \n# public function\
+    \ setDenormalizer(DenormalizerInterface $denormalizer): void\n# {\n# if (!$this->normalizer\
+    \ instanceof DenormalizerAwareInterface) {\n# return;\n# }\n# \n# $this->normalizer->setDenormalizer($denormalizer);\n\
+    # }\n# \n# /**\n# * Proxies all method calls to the original normalizer."
+traits:
+- Symfony\Component\Serializer\DataCollector\SerializerDataCollector
+- Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface
+- Symfony\Component\Serializer\Normalizer\NormalizerInterface
+- Symfony\Component\Serializer\SerializerAwareInterface
+- Symfony\Component\Serializer\SerializerInterface
+interfaces:
+- NormalizerInterface

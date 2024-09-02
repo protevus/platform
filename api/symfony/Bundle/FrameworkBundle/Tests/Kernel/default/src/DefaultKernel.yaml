@@ -1,0 +1,39 @@
+name: DefaultKernel
+class_comment: null
+dependencies:
+- name: MicroKernelTrait
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: Kernel
+  type: class
+  source: Symfony\Component\HttpKernel\Kernel
+- name: MicroKernelTrait
+  type: class
+  source: MicroKernelTrait
+properties: []
+methods:
+- name: __invoke
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCacheDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: getLogDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: getProjectDir
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Kernel
+- MicroKernelTrait
+interfaces: []

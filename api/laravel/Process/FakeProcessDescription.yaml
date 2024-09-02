@@ -1,0 +1,166 @@
+name: FakeProcessDescription
+class_comment: null
+dependencies:
+- name: Process
+  type: class
+  source: Symfony\Component\Process\Process
+properties:
+- name: processId
+  visibility: public
+  comment: '# * The process'' ID.
+
+    # *
+
+    # * @var int|null'
+- name: output
+  visibility: public
+  comment: '# * All of the process'' output in the order it was described.
+
+    # *
+
+    # * @var array'
+- name: exitCode
+  visibility: public
+  comment: '# * The process'' exit code.
+
+    # *
+
+    # * @var int'
+- name: runIterations
+  visibility: public
+  comment: '# * The number of times the process should indicate that it is "running".
+
+    # *
+
+    # * @var int'
+methods:
+- name: id
+  visibility: public
+  parameters:
+  - name: processId
+  comment: "# * The process' ID.\n# *\n# * @var int|null\n# */\n# public $processId\
+    \ = 1000;\n# \n# /**\n# * All of the process' output in the order it was described.\n\
+    # *\n# * @var array\n# */\n# public $output = [];\n# \n# /**\n# * The process'\
+    \ exit code.\n# *\n# * @var int\n# */\n# public $exitCode = 0;\n# \n# /**\n# *\
+    \ The number of times the process should indicate that it is \"running\".\n# *\n\
+    # * @var int\n# */\n# public $runIterations = 0;\n# \n# /**\n# * Specify the process\
+    \ ID that should be assigned to the process.\n# *\n# * @param  int  $processId\n\
+    # * @return $this"
+- name: output
+  visibility: public
+  parameters:
+  - name: output
+  comment: '# * Describe a line of standard output.
+
+    # *
+
+    # * @param  array|string  $output
+
+    # * @return $this'
+- name: errorOutput
+  visibility: public
+  parameters:
+  - name: output
+  comment: '# * Describe a line of error output.
+
+    # *
+
+    # * @param  array|string  $output
+
+    # * @return $this'
+- name: replaceOutput
+  visibility: public
+  parameters:
+  - name: output
+  comment: '# * Replace the entire output buffer with the given string.
+
+    # *
+
+    # * @param  string  $output
+
+    # * @return $this'
+- name: replaceErrorOutput
+  visibility: public
+  parameters:
+  - name: output
+  comment: '# * Replace the entire error output buffer with the given string.
+
+    # *
+
+    # * @param  string  $output
+
+    # * @return $this'
+- name: exitCode
+  visibility: public
+  parameters:
+  - name: exitCode
+  comment: '# * Specify the process exit code.
+
+    # *
+
+    # * @param  int  $exitCode
+
+    # * @return $this'
+- name: iterations
+  visibility: public
+  parameters:
+  - name: iterations
+  comment: '# * Specify how many times the "isRunning" method should return "true".
+
+    # *
+
+    # * @param  int  $iterations
+
+    # * @return $this'
+- name: runsFor
+  visibility: public
+  parameters:
+  - name: iterations
+  comment: '# * Specify how many times the "isRunning" method should return "true".
+
+    # *
+
+    # * @param  int  $iterations
+
+    # * @return $this'
+- name: toSymfonyProcess
+  visibility: public
+  parameters:
+  - name: command
+  comment: '# * Turn the fake process description into an actual process.
+
+    # *
+
+    # * @param  string  $command
+
+    # * @return \Symfony\Component\Process\Process'
+- name: toProcessResult
+  visibility: public
+  parameters:
+  - name: command
+  comment: '# * Convert the process description into a process result.
+
+    # *
+
+    # * @param  string  $command
+
+    # * @return \Illuminate\Contracts\Process\ProcessResult'
+- name: resolveOutput
+  visibility: protected
+  parameters: []
+  comment: '# * Resolve the standard output as a string.
+
+    # *
+
+    # * @return string'
+- name: resolveErrorOutput
+  visibility: protected
+  parameters: []
+  comment: '# * Resolve the error output as a string.
+
+    # *
+
+    # * @return string'
+traits:
+- Symfony\Component\Process\Process
+interfaces: []

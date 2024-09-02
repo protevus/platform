@@ -1,0 +1,116 @@
+name: QueryParameterValueResolverTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: MapQueryParameter
+  type: class
+  source: Symfony\Component\HttpKernel\Attribute\MapQueryParameter
+- name: QueryParameterValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\QueryParameterValueResolver
+- name: ValueResolverInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ValueResolverInterface
+- name: ArgumentMetadata
+  type: class
+  source: Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata
+- name: BadRequestHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\BadRequestHttpException
+- name: HttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\HttpException
+- name: NotFoundHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- name: Suit
+  type: class
+  source: Symfony\Component\HttpKernel\Tests\Fixtures\Suit
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testSkipWhenNoAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResolvingSuccessfully
+  visibility: public
+  parameters:
+  - name: request
+  - name: metadata
+  - name: expected
+  comment: '# * @dataProvider validDataProvider'
+- name: testResolvingWithInvalidArgumentType
+  visibility: public
+  parameters:
+  - name: request
+  - name: metadata
+  - name: exceptionMessage
+  comment: '# * @dataProvider invalidArgumentTypeProvider'
+- name: testResolvingWithInvalidOrMissingArgument
+  visibility: public
+  parameters:
+  - name: request
+  - name: metadata
+  - name: expectedException
+  comment: '# * @dataProvider invalidOrMissingArgumentProvider'
+- name: validDataProvider
+  visibility: public
+  parameters: []
+  comment: '# * @return iterable<string, array{
+
+    # *   Request,
+
+    # *   ArgumentMetadata,
+
+    # *   array<mixed>,
+
+    # * }>'
+- name: invalidArgumentTypeProvider
+  visibility: public
+  parameters: []
+  comment: '# * @return iterable<string, array{
+
+    # *   Request,
+
+    # *   ArgumentMetadata,
+
+    # *   string,
+
+    # * }>'
+- name: invalidOrMissingArgumentProvider
+  visibility: public
+  parameters: []
+  comment: '# * @return iterable<string, array{
+
+    # *   Request,
+
+    # *   ArgumentMetadata,
+
+    # *   HttpException,
+
+    # * }>'
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Attribute\MapQueryParameter
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\QueryParameterValueResolver
+- Symfony\Component\HttpKernel\Controller\ValueResolverInterface
+- Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata
+- Symfony\Component\HttpKernel\Exception\BadRequestHttpException
+- Symfony\Component\HttpKernel\Exception\HttpException
+- Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- Symfony\Component\HttpKernel\Tests\Fixtures\Suit
+interfaces: []

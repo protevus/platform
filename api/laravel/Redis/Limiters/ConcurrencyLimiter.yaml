@@ -1,0 +1,149 @@
+name: ConcurrencyLimiter
+class_comment: null
+dependencies:
+- name: LimiterTimeoutException
+  type: class
+  source: Illuminate\Contracts\Redis\LimiterTimeoutException
+- name: Sleep
+  type: class
+  source: Illuminate\Support\Sleep
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: Throwable
+  type: class
+  source: Throwable
+properties:
+- name: redis
+  visibility: protected
+  comment: '# * The Redis factory implementation.
+
+    # *
+
+    # * @var \Illuminate\Redis\Connections\Connection'
+- name: name
+  visibility: protected
+  comment: '# * The name of the limiter.
+
+    # *
+
+    # * @var string'
+- name: maxLocks
+  visibility: protected
+  comment: '# * The allowed number of concurrent tasks.
+
+    # *
+
+    # * @var int'
+- name: releaseAfter
+  visibility: protected
+  comment: '# * The number of seconds a slot should be maintained.
+
+    # *
+
+    # * @var int'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: redis
+  - name: name
+  - name: maxLocks
+  - name: releaseAfter
+  comment: "# * The Redis factory implementation.\n# *\n# * @var \\Illuminate\\Redis\\\
+    Connections\\Connection\n# */\n# protected $redis;\n# \n# /**\n# * The name of\
+    \ the limiter.\n# *\n# * @var string\n# */\n# protected $name;\n# \n# /**\n# *\
+    \ The allowed number of concurrent tasks.\n# *\n# * @var int\n# */\n# protected\
+    \ $maxLocks;\n# \n# /**\n# * The number of seconds a slot should be maintained.\n\
+    # *\n# * @var int\n# */\n# protected $releaseAfter;\n# \n# /**\n# * Create a new\
+    \ concurrency limiter instance.\n# *\n# * @param  \\Illuminate\\Redis\\Connections\\\
+    Connection  $redis\n# * @param  string  $name\n# * @param  int  $maxLocks\n# *\
+    \ @param  int  $releaseAfter\n# * @return void"
+- name: block
+  visibility: public
+  parameters:
+  - name: timeout
+  - name: callback
+    default: 'null'
+  - name: sleep
+    default: '250'
+  comment: '# * Attempt to acquire the lock for the given number of seconds.
+
+    # *
+
+    # * @param  int  $timeout
+
+    # * @param  callable|null  $callback
+
+    # * @param  int  $sleep
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Redis\LimiterTimeoutException
+
+    # * @throws \Throwable'
+- name: acquire
+  visibility: protected
+  parameters:
+  - name: id
+  comment: '# * Attempt to acquire the lock.
+
+    # *
+
+    # * @param  string  $id  A unique identifier for this lock
+
+    # * @return mixed'
+- name: lockScript
+  visibility: protected
+  parameters: []
+  comment: '# * Get the Lua script for acquiring a lock.
+
+    # *
+
+    # * KEYS    - The keys that represent available slots
+
+    # * ARGV[1] - The limiter name
+
+    # * ARGV[2] - The number of seconds the slot should be reserved
+
+    # * ARGV[3] - The unique identifier for this lock
+
+    # *
+
+    # * @return string'
+- name: release
+  visibility: protected
+  parameters:
+  - name: key
+  - name: id
+  comment: '# * Release the lock.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  string  $id
+
+    # * @return void'
+- name: releaseScript
+  visibility: protected
+  parameters: []
+  comment: '# * Get the Lua script to atomically release a lock.
+
+    # *
+
+    # * KEYS[1] - The name of the lock
+
+    # * ARGV[1] - The unique identifier for this lock
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Contracts\Redis\LimiterTimeoutException
+- Illuminate\Support\Sleep
+- Illuminate\Support\Str
+- Throwable
+interfaces: []

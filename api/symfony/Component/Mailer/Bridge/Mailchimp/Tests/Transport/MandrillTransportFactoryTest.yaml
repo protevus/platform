@@ -1,0 +1,63 @@
+name: MandrillTransportFactoryTest
+class_comment: null
+dependencies:
+- name: NullLogger
+  type: class
+  source: Psr\Log\NullLogger
+- name: MockHttpClient
+  type: class
+  source: Symfony\Component\HttpClient\MockHttpClient
+- name: MandrillApiTransport
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Mailchimp\Transport\MandrillApiTransport
+- name: MandrillHttpTransport
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Mailchimp\Transport\MandrillHttpTransport
+- name: MandrillSmtpTransport
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Mailchimp\Transport\MandrillSmtpTransport
+- name: MandrillTransportFactory
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Mailchimp\Transport\MandrillTransportFactory
+- name: TransportFactoryTestCase
+  type: class
+  source: Symfony\Component\Mailer\Test\TransportFactoryTestCase
+- name: Dsn
+  type: class
+  source: Symfony\Component\Mailer\Transport\Dsn
+- name: TransportFactoryInterface
+  type: class
+  source: Symfony\Component\Mailer\Transport\TransportFactoryInterface
+properties: []
+methods:
+- name: getFactory
+  visibility: public
+  parameters: []
+  comment: null
+- name: supportsProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: createProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: unsupportedSchemeProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: incompleteDsnProvider
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Psr\Log\NullLogger
+- Symfony\Component\HttpClient\MockHttpClient
+- Symfony\Component\Mailer\Bridge\Mailchimp\Transport\MandrillApiTransport
+- Symfony\Component\Mailer\Bridge\Mailchimp\Transport\MandrillHttpTransport
+- Symfony\Component\Mailer\Bridge\Mailchimp\Transport\MandrillSmtpTransport
+- Symfony\Component\Mailer\Bridge\Mailchimp\Transport\MandrillTransportFactory
+- Symfony\Component\Mailer\Test\TransportFactoryTestCase
+- Symfony\Component\Mailer\Transport\Dsn
+- Symfony\Component\Mailer\Transport\TransportFactoryInterface
+interfaces: []

@@ -1,0 +1,11 @@
+name: PreSubmitEvent
+class_comment: null
+dependencies:
+- name: FormEvent
+  type: class
+  source: Symfony\Component\Form\FormEvent
+properties: []
+methods: []
+traits:
+- Symfony\Component\Form\FormEvent
+interfaces: []

@@ -1,0 +1,13 @@
+name: TriggerInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getNextRunDate
+  visibility: public
+  parameters:
+  - name: run
+  comment: '# * Returns the next run date; if null is returned, this method won''t
+    be called again.'
+traits: []
+interfaces: []

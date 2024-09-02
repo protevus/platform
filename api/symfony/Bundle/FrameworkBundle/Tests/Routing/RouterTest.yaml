@@ -1,0 +1,206 @@
+name: RouterTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: Router
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Routing\Router
+- name: FileLocator
+  type: class
+  source: Symfony\Component\Config\FileLocator
+- name: LoaderInterface
+  type: class
+  source: Symfony\Component\Config\Loader\LoaderInterface
+- name: ResourceCheckerConfigCache
+  type: class
+  source: Symfony\Component\Config\ResourceCheckerConfigCache
+- name: ResourceCheckerConfigCacheFactory
+  type: class
+  source: Symfony\Component\Config\ResourceCheckerConfigCacheFactory
+- name: ContainerParametersResource
+  type: class
+  source: Symfony\Component\DependencyInjection\Config\ContainerParametersResource
+- name: ContainerParametersResourceChecker
+  type: class
+  source: Symfony\Component\DependencyInjection\Config\ContainerParametersResourceChecker
+- name: Container
+  type: class
+  source: Symfony\Component\DependencyInjection\Container
+- name: ParameterNotFoundException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: ContainerBag
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\ContainerBag
+- name: ParameterBag
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- name: YamlFileLoader
+  type: class
+  source: Symfony\Component\Routing\Loader\YamlFileLoader
+- name: Route
+  type: class
+  source: Symfony\Component\Routing\Route
+- name: RouteCollection
+  type: class
+  source: Symfony\Component\Routing\RouteCollection
+properties: []
+methods:
+- name: testConstructThrowsOnNonSymfonyNorPsr11Container
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateWithServiceParam
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateWithServiceParamWithSfContainer
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateWithDefaultLocale
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDefaultsPlaceholders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDefaultsPlaceholdersWithSfContainer
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRequirementsPlaceholders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRequirementsPlaceholdersWithSfContainer
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPatternPlaceholders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPatternPlaceholdersWithSfContainer
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEnvPlaceholders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEnvPlaceholdersWithSfContainer
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIndirectEnvPlaceholders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHostPlaceholders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHostPlaceholdersWithSfContainer
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExceptionOnNonExistentParameterWithSfContainer
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExceptionOnNonStringParameter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExceptionOnNonStringParameterWithSfContainer
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDefaultValuesAsNonStrings
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider getNonStringValues'
+- name: testDefaultValuesAsNonStringsWithSfContainer
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider getNonStringValues'
+- name: testGetRouteCollectionAddsContainerParametersResource
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetRouteCollectionAddsContainerParametersResourceWithSfContainer
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBooleanContainerParametersWithinRouteCondition
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNonStringValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCacheValidityWithContainerParameters
+  visibility: public
+  parameters:
+  - name: parameter
+  comment: '# * @dataProvider getContainerParameterForRoute'
+- name: testResolvingSchemes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResolvingMethods
+  visibility: public
+  parameters: []
+  comment: null
+- name: getContainerParameterForRoute
+  visibility: public
+  parameters: []
+  comment: null
+- name: getServiceContainer
+  visibility: private
+  parameters:
+  - name: routes
+  comment: null
+- name: getPsr11ServiceContainer
+  visibility: private
+  parameters:
+  - name: routes
+  comment: null
+- name: getParameterBag
+  visibility: private
+  parameters:
+  - name: params
+    default: '[]'
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Psr\Container\ContainerInterface
+- Symfony\Bundle\FrameworkBundle\Routing\Router
+- Symfony\Component\Config\FileLocator
+- Symfony\Component\Config\Loader\LoaderInterface
+- Symfony\Component\Config\ResourceCheckerConfigCache
+- Symfony\Component\Config\ResourceCheckerConfigCacheFactory
+- Symfony\Component\DependencyInjection\Config\ContainerParametersResource
+- Symfony\Component\DependencyInjection\Config\ContainerParametersResourceChecker
+- Symfony\Component\DependencyInjection\Container
+- Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\ParameterBag\ContainerBag
+- Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- Symfony\Component\Routing\Loader\YamlFileLoader
+- Symfony\Component\Routing\Route
+- Symfony\Component\Routing\RouteCollection
+interfaces: []

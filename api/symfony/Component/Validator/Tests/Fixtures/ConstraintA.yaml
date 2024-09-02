@@ -1,0 +1,25 @@
+name: ConstraintA
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+properties:
+- name: property1
+  visibility: public
+  comment: null
+- name: property2
+  visibility: public
+  comment: null
+methods:
+- name: getDefaultOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: getTargets
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+interfaces: []

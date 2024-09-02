@@ -1,0 +1,15 @@
+name: translation_debug
+class_comment: null
+dependencies:
+- name: TranslationDataCollector
+  type: class
+  source: Symfony\Component\Translation\DataCollector\TranslationDataCollector
+- name: DataCollectorTranslator
+  type: class
+  source: Symfony\Component\Translation\DataCollectorTranslator
+properties: []
+methods: []
+traits:
+- Symfony\Component\Translation\DataCollector\TranslationDataCollector
+- Symfony\Component\Translation\DataCollectorTranslator
+interfaces: []

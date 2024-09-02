@@ -1,0 +1,32 @@
+name: FormPerformanceTestCase
+class_comment: null
+dependencies:
+- name: VersionAwareTest
+  type: class
+  source: Symfony\Component\Form\Tests\VersionAwareTest
+- name: VersionAwareTest
+  type: class
+  source: VersionAwareTest
+properties: []
+methods:
+- name: setMaxRunningTime
+  visibility: public
+  parameters:
+  - name: maxRunningTime
+  comment: "# * Base class for performance tests.\n# *\n# * Copied from Doctrine 2's\
+    \ OrmPerformanceTestCase.\n# *\n# * @author robo\n# * @author Bernhard Schussek\
+    \ <bschussek@gmail.com>\n# */\n# abstract class FormPerformanceTestCase extends\
+    \ FormIntegrationTestCase\n# {\n# use VersionAwareTest;\n# \n# protected int $maxRunningTime\
+    \ = 0;\n# \n# protected function runTest(): mixed\n# {\n# $s = microtime(true);\n\
+    # $result = parent::runTest();\n# $time = microtime(true) - $s;\n# \n# if (0 !=\
+    \ $this->maxRunningTime && $time > $this->maxRunningTime) {\n# $this->fail(\\\
+    sprintf('expected running time: <= %s but was: %s', $this->maxRunningTime, $time));\n\
+    # }\n# \n# return $result;\n# }\n# \n# /**\n# * @throws \\InvalidArgumentException"
+- name: getMaxRunningTime
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\Tests\VersionAwareTest
+- VersionAwareTest
+interfaces: []

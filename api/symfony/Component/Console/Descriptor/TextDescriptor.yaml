@@ -1,0 +1,149 @@
+name: TextDescriptor
+class_comment: "# * Text descriptor.\n# *\n# * @author Jean-Fran\xE7ois Simon <contact@jfsimon.fr>\n\
+  # *\n# * @internal"
+dependencies:
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: OutputFormatter
+  type: class
+  source: Symfony\Component\Console\Formatter\OutputFormatter
+- name: Helper
+  type: class
+  source: Symfony\Component\Console\Helper\Helper
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputDefinition
+  type: class
+  source: Symfony\Component\Console\Input\InputDefinition
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+properties: []
+methods:
+- name: getCommandAliasesText
+  visibility: private
+  parameters:
+  - name: command
+  comment: "# * Text descriptor.\n# *\n# * @author Jean-Fran\xE7ois Simon <contact@jfsimon.fr>\n\
+    # *\n# * @internal\n# */\n# class TextDescriptor extends Descriptor\n# {\n# protected\
+    \ function describeInputArgument(InputArgument $argument, array $options = []):\
+    \ void\n# {\n# if (null !== $argument->getDefault() && (!\\is_array($argument->getDefault())\
+    \ || \\count($argument->getDefault()))) {\n# $default = \\sprintf('<comment> [default:\
+    \ %s]</comment>', $this->formatDefaultValue($argument->getDefault()));\n# } else\
+    \ {\n# $default = '';\n# }\n# \n# $totalWidth = $options['total_width'] ?? Helper::width($argument->getName());\n\
+    # $spacingWidth = $totalWidth - \\strlen($argument->getName());\n# \n# $this->writeText(\\\
+    sprintf('  <info>%s</info>  %s%s%s',\n# $argument->getName(),\n# str_repeat('\
+    \ ', $spacingWidth),\n# // + 4 = 2 spaces before <info>, 2 spaces after </info>\n\
+    # preg_replace('/\\s*[\\r\\n]\\s*/', \"\\n\".str_repeat(' ', $totalWidth + 4),\
+    \ $argument->getDescription()),\n# $default\n# ), $options);\n# }\n# \n# protected\
+    \ function describeInputOption(InputOption $option, array $options = []): void\n\
+    # {\n# if ($option->acceptValue() && null !== $option->getDefault() && (!\\is_array($option->getDefault())\
+    \ || \\count($option->getDefault()))) {\n# $default = \\sprintf('<comment> [default:\
+    \ %s]</comment>', $this->formatDefaultValue($option->getDefault()));\n# } else\
+    \ {\n# $default = '';\n# }\n# \n# $value = '';\n# if ($option->acceptValue())\
+    \ {\n# $value = '='.strtoupper($option->getName());\n# \n# if ($option->isValueOptional())\
+    \ {\n# $value = '['.$value.']';\n# }\n# }\n# \n# $totalWidth = $options['total_width']\
+    \ ?? $this->calculateTotalWidthForOptions([$option]);\n# $synopsis = \\sprintf('%s%s',\n\
+    # $option->getShortcut() ? \\sprintf('-%s, ', $option->getShortcut()) : '    ',\n\
+    # \\sprintf($option->isNegatable() ? '--%1$s|--no-%1$s' : '--%1$s%2$s', $option->getName(),\
+    \ $value)\n# );\n# \n# $spacingWidth = $totalWidth - Helper::width($synopsis);\n\
+    # \n# $this->writeText(\\sprintf('  <info>%s</info>  %s%s%s%s',\n# $synopsis,\n\
+    # str_repeat(' ', $spacingWidth),\n# // + 4 = 2 spaces before <info>, 2 spaces\
+    \ after </info>\n# preg_replace('/\\s*[\\r\\n]\\s*/', \"\\n\".str_repeat(' ',\
+    \ $totalWidth + 4), $option->getDescription()),\n# $default,\n# $option->isArray()\
+    \ ? '<comment> (multiple values allowed)</comment>' : ''\n# ), $options);\n# }\n\
+    # \n# protected function describeInputDefinition(InputDefinition $definition,\
+    \ array $options = []): void\n# {\n# $totalWidth = $this->calculateTotalWidthForOptions($definition->getOptions());\n\
+    # foreach ($definition->getArguments() as $argument) {\n# $totalWidth = max($totalWidth,\
+    \ Helper::width($argument->getName()));\n# }\n# \n# if ($definition->getArguments())\
+    \ {\n# $this->writeText('<comment>Arguments:</comment>', $options);\n# $this->writeText(\"\
+    \\n\");\n# foreach ($definition->getArguments() as $argument) {\n# $this->describeInputArgument($argument,\
+    \ array_merge($options, ['total_width' => $totalWidth]));\n# $this->writeText(\"\
+    \\n\");\n# }\n# }\n# \n# if ($definition->getArguments() && $definition->getOptions())\
+    \ {\n# $this->writeText(\"\\n\");\n# }\n# \n# if ($definition->getOptions()) {\n\
+    # $laterOptions = [];\n# \n# $this->writeText('<comment>Options:</comment>', $options);\n\
+    # foreach ($definition->getOptions() as $option) {\n# if (\\strlen($option->getShortcut()\
+    \ ?? '') > 1) {\n# $laterOptions[] = $option;\n# continue;\n# }\n# $this->writeText(\"\
+    \\n\");\n# $this->describeInputOption($option, array_merge($options, ['total_width'\
+    \ => $totalWidth]));\n# }\n# foreach ($laterOptions as $option) {\n# $this->writeText(\"\
+    \\n\");\n# $this->describeInputOption($option, array_merge($options, ['total_width'\
+    \ => $totalWidth]));\n# }\n# }\n# }\n# \n# protected function describeCommand(Command\
+    \ $command, array $options = []): void\n# {\n# $command->mergeApplicationDefinition(false);\n\
+    # \n# if ($description = $command->getDescription()) {\n# $this->writeText('<comment>Description:</comment>',\
+    \ $options);\n# $this->writeText(\"\\n\");\n# $this->writeText('  '.$description);\n\
+    # $this->writeText(\"\\n\\n\");\n# }\n# \n# $this->writeText('<comment>Usage:</comment>',\
+    \ $options);\n# foreach (array_merge([$command->getSynopsis(true)], $command->getAliases(),\
+    \ $command->getUsages()) as $usage) {\n# $this->writeText(\"\\n\");\n# $this->writeText('\
+    \  '.OutputFormatter::escape($usage), $options);\n# }\n# $this->writeText(\"\\\
+    n\");\n# \n# $definition = $command->getDefinition();\n# if ($definition->getOptions()\
+    \ || $definition->getArguments()) {\n# $this->writeText(\"\\n\");\n# $this->describeInputDefinition($definition,\
+    \ $options);\n# $this->writeText(\"\\n\");\n# }\n# \n# $help = $command->getProcessedHelp();\n\
+    # if ($help && $help !== $description) {\n# $this->writeText(\"\\n\");\n# $this->writeText('<comment>Help:</comment>',\
+    \ $options);\n# $this->writeText(\"\\n\");\n# $this->writeText('  '.str_replace(\"\
+    \\n\", \"\\n  \", $help), $options);\n# $this->writeText(\"\\n\");\n# }\n# }\n\
+    # \n# protected function describeApplication(Application $application, array $options\
+    \ = []): void\n# {\n# $describedNamespace = $options['namespace'] ?? null;\n#\
+    \ $description = new ApplicationDescription($application, $describedNamespace);\n\
+    # \n# if (isset($options['raw_text']) && $options['raw_text']) {\n# $width = $this->getColumnWidth($description->getCommands());\n\
+    # \n# foreach ($description->getCommands() as $command) {\n# $this->writeText(\\\
+    sprintf(\"%-{$width}s %s\", $command->getName(), $command->getDescription()),\
+    \ $options);\n# $this->writeText(\"\\n\");\n# }\n# } else {\n# if ('' != $help\
+    \ = $application->getHelp()) {\n# $this->writeText(\"$help\\n\\n\", $options);\n\
+    # }\n# \n# $this->writeText(\"<comment>Usage:</comment>\\n\", $options);\n# $this->writeText(\"\
+    \  command [options] [arguments]\\n\\n\", $options);\n# \n# $this->describeInputDefinition(new\
+    \ InputDefinition($application->getDefinition()->getOptions()), $options);\n#\
+    \ \n# $this->writeText(\"\\n\");\n# $this->writeText(\"\\n\");\n# \n# $commands\
+    \ = $description->getCommands();\n# $namespaces = $description->getNamespaces();\n\
+    # if ($describedNamespace && $namespaces) {\n# // make sure all alias commands\
+    \ are included when describing a specific namespace\n# $describedNamespaceInfo\
+    \ = reset($namespaces);\n# foreach ($describedNamespaceInfo['commands'] as $name)\
+    \ {\n# $commands[$name] = $description->getCommand($name);\n# }\n# }\n# \n# //\
+    \ calculate max. width based on available commands per namespace\n# $width = $this->getColumnWidth(array_merge(...array_values(array_map(fn\
+    \ ($namespace) => array_intersect($namespace['commands'], array_keys($commands)),\
+    \ array_values($namespaces)))));\n# \n# if ($describedNamespace) {\n# $this->writeText(\\\
+    sprintf('<comment>Available commands for the \"%s\" namespace:</comment>', $describedNamespace),\
+    \ $options);\n# } else {\n# $this->writeText('<comment>Available commands:</comment>',\
+    \ $options);\n# }\n# \n# foreach ($namespaces as $namespace) {\n# $namespace['commands']\
+    \ = array_filter($namespace['commands'], fn ($name) => isset($commands[$name]));\n\
+    # \n# if (!$namespace['commands']) {\n# continue;\n# }\n# \n# if (!$describedNamespace\
+    \ && ApplicationDescription::GLOBAL_NAMESPACE !== $namespace['id']) {\n# $this->writeText(\"\
+    \\n\");\n# $this->writeText(' <comment>'.$namespace['id'].'</comment>', $options);\n\
+    # }\n# \n# foreach ($namespace['commands'] as $name) {\n# $this->writeText(\"\\\
+    n\");\n# $spacingWidth = $width - Helper::width($name);\n# $command = $commands[$name];\n\
+    # $commandAliases = $name === $command->getName() ? $this->getCommandAliasesText($command)\
+    \ : '';\n# $this->writeText(\\sprintf('  <info>%s</info>%s%s', $name, str_repeat('\
+    \ ', $spacingWidth), $commandAliases.$command->getDescription()), $options);\n\
+    # }\n# }\n# \n# $this->writeText(\"\\n\");\n# }\n# }\n# \n# private function writeText(string\
+    \ $content, array $options = []): void\n# {\n# $this->write(\n# isset($options['raw_text'])\
+    \ && $options['raw_text'] ? strip_tags($content) : $content,\n# isset($options['raw_output'])\
+    \ ? !$options['raw_output'] : true\n# );\n# }\n# \n# /**\n# * Formats command\
+    \ aliases to show them in the command description."
+- name: formatDefaultValue
+  visibility: private
+  parameters:
+  - name: default
+  comment: '# * Formats input option/argument default value.'
+- name: getColumnWidth
+  visibility: private
+  parameters:
+  - name: commands
+  comment: '# * @param array<Command|string> $commands'
+- name: calculateTotalWidthForOptions
+  visibility: private
+  parameters:
+  - name: options
+  comment: '# * @param InputOption[] $options'
+traits:
+- Symfony\Component\Console\Application
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Formatter\OutputFormatter
+- Symfony\Component\Console\Helper\Helper
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputDefinition
+- Symfony\Component\Console\Input\InputOption
+interfaces: []

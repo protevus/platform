@@ -1,0 +1,59 @@
+name: PredisConnector
+class_comment: null
+dependencies:
+- name: Connector
+  type: class
+  source: Illuminate\Contracts\Redis\Connector
+- name: PredisClusterConnection
+  type: class
+  source: Illuminate\Redis\Connections\PredisClusterConnection
+- name: PredisConnection
+  type: class
+  source: Illuminate\Redis\Connections\PredisConnection
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Client
+  type: class
+  source: Predis\Client
+properties: []
+methods:
+- name: connect
+  visibility: public
+  parameters:
+  - name: config
+  - name: options
+  comment: '# * Create a new connection.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @param  array  $options
+
+    # * @return \Illuminate\Redis\Connections\PredisConnection'
+- name: connectToCluster
+  visibility: public
+  parameters:
+  - name: config
+  - name: clusterOptions
+  - name: options
+  comment: '# * Create a new clustered Predis connection.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @param  array  $clusterOptions
+
+    # * @param  array  $options
+
+    # * @return \Illuminate\Redis\Connections\PredisClusterConnection'
+traits:
+- Illuminate\Contracts\Redis\Connector
+- Illuminate\Redis\Connections\PredisClusterConnection
+- Illuminate\Redis\Connections\PredisConnection
+- Illuminate\Support\Arr
+- Predis\Client
+interfaces:
+- Connector

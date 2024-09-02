@@ -1,0 +1,18 @@
+name: ClearableQueue
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: clear
+  visibility: public
+  parameters:
+  - name: queue
+  comment: '# * Delete all of the jobs from the queue.
+
+    # *
+
+    # * @param  string  $queue
+
+    # * @return int'
+traits: []
+interfaces: []

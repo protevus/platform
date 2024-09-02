@@ -1,0 +1,50 @@
+name: AttributeLoader
+class_comment: '# * Loads validation metadata using PHP attributes.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # * @author Alexander M. Turek <me@derrabus.de>
+
+  # * @author Alexandre Daubois <alex.daubois@gmail.com>'
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: Callback
+  type: class
+  source: Symfony\Component\Validator\Constraints\Callback
+- name: GroupSequence
+  type: class
+  source: Symfony\Component\Validator\Constraints\GroupSequence
+- name: GroupSequenceProvider
+  type: class
+  source: Symfony\Component\Validator\Constraints\GroupSequenceProvider
+- name: MappingException
+  type: class
+  source: Symfony\Component\Validator\Exception\MappingException
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+properties: []
+methods:
+- name: loadClassMetadata
+  visibility: public
+  parameters:
+  - name: metadata
+  comment: null
+- name: getAttributes
+  visibility: private
+  parameters:
+  - name: reflection
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Constraints\Callback
+- Symfony\Component\Validator\Constraints\GroupSequence
+- Symfony\Component\Validator\Constraints\GroupSequenceProvider
+- Symfony\Component\Validator\Exception\MappingException
+- Symfony\Component\Validator\Mapping\ClassMetadata
+interfaces:
+- LoaderInterface

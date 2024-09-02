@@ -1,0 +1,19 @@
+name: TestClass
+class_comment: null
+dependencies:
+- name: LazyGhostTrait
+  type: class
+  source: Symfony\Component\VarExporter\LazyGhostTrait
+- name: LazyGhostTrait
+  type: class
+  source: LazyGhostTrait
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\VarExporter\LazyGhostTrait
+- LazyGhostTrait
+interfaces: []

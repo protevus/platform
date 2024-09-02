@@ -1,0 +1,23 @@
+name: Base64ContentEncoder
+class_comment: null
+dependencies:
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Mime\Exception\RuntimeException
+properties: []
+methods:
+- name: encodeByteStream
+  visibility: public
+  parameters:
+  - name: stream
+  - name: maxLineLength
+    default: '0'
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Mime\Exception\RuntimeException
+interfaces:
+- ContentEncoderInterface

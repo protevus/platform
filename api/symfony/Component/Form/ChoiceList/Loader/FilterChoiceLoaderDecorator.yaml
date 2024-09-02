@@ -1,0 +1,36 @@
+name: FilterChoiceLoaderDecorator
+class_comment: '# * A decorator to filter choices only when they are loaded or partially
+  loaded.
+
+  # *
+
+  # * @author Jules Pietri <jules@heahprod.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: loader
+  - name: filter
+  comment: null
+- name: loadChoices
+  visibility: protected
+  parameters: []
+  comment: null
+- name: loadChoicesForValues
+  visibility: public
+  parameters:
+  - name: values
+  - name: value
+    default: 'null'
+  comment: null
+- name: loadValuesForChoices
+  visibility: public
+  parameters:
+  - name: choices
+  - name: value
+    default: 'null'
+  comment: null
+traits: []
+interfaces: []

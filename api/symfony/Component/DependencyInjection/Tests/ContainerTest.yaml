@@ -1,0 +1,254 @@
+name: ContainerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Container
+  type: class
+  source: Symfony\Component\DependencyInjection\Container
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: EnvVarProcessor
+  type: class
+  source: Symfony\Component\DependencyInjection\EnvVarProcessor
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: ServiceCircularReferenceException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+- name: ServiceNotFoundException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+- name: FrozenParameterBag
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag
+- name: ParameterBag
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- name: ServiceLocator
+  type: class
+  source: Symfony\Component\DependencyInjection\ServiceLocator
+- name: ResetInterface
+  type: class
+  source: Symfony\Contracts\Service\ResetInterface
+properties:
+- name: __bar
+  visibility: public
+  comment: null
+- name: __foo_bar
+  visibility: public
+  comment: null
+- name: __foo_baz
+  visibility: public
+  comment: null
+- name: __internal
+  visibility: public
+  comment: null
+methods:
+- name: testConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCamelize
+  visibility: public
+  parameters:
+  - name: id
+  - name: expected
+  comment: '# * @dataProvider dataForTestCamelize'
+- name: dataForTestCamelize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnderscore
+  visibility: public
+  parameters:
+  - name: id
+  - name: expected
+  comment: '# * @dataProvider dataForTestUnderscore'
+- name: dataForTestUnderscore
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompile
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsCompiled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsCompiledWithFrozenParameters
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetParameterBag
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetSetParameter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetSetParameterWithMixedCase
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetServiceIds
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetWithNullResetTheService
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetReplacesAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetWithNullOnInitializedPredefinedService
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetWithNullOnUninitializedPredefinedService
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCaseSensitivity
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetThrowServiceNotFoundException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetCircularReference
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetSyntheticServiceThrows
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetRemovedServiceThrows
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHas
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInitialized
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInitializedWithPrivateService
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReset
+  visibility: public
+  parameters: []
+  comment: null
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetThrowsExceptionOnServiceConfiguration
+  visibility: public
+  parameters: []
+  comment: null
+- name: getField
+  visibility: protected
+  parameters:
+  - name: obj
+  - name: field
+  comment: null
+- name: testAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThatCloningIsNotSupported
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCheckExistenceOfAnInternalPrivateService
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRequestAnInternalSharedPrivateService
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetEnvDoesNotAutoCastNullWithDefaultEnvVarProcessor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetEnvDoesNotAutoCastNullWithEnvVarProcessorsLocatorReturningDefaultEnvVarProcessor
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters: []
+  comment: null
+- name: getInternalService
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getBarService
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getFooBarService
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getFoo_BazService
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getCircularService
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getThrowExceptionService
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getThrowsExceptionOnServiceConfigurationService
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getInternalDependencyService
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Container
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\EnvVarProcessor
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+- Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+- Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag
+- Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- Symfony\Component\DependencyInjection\ServiceLocator
+- Symfony\Contracts\Service\ResetInterface
+interfaces:
+- ResetInterface

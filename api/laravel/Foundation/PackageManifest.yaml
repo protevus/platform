@@ -1,0 +1,147 @@
+name: PackageManifest
+class_comment: null
+dependencies:
+- name: Exception
+  type: class
+  source: Exception
+- name: Filesystem
+  type: class
+  source: Illuminate\Filesystem\Filesystem
+- name: Env
+  type: class
+  source: Illuminate\Support\Env
+properties:
+- name: files
+  visibility: public
+  comment: '# * The filesystem instance.
+
+    # *
+
+    # * @var \Illuminate\Filesystem\Filesystem'
+- name: basePath
+  visibility: public
+  comment: '# * The base path.
+
+    # *
+
+    # * @var string'
+- name: vendorPath
+  visibility: public
+  comment: '# * The vendor path.
+
+    # *
+
+    # * @var string'
+- name: manifestPath
+  visibility: public
+  comment: '# * The manifest path.
+
+    # *
+
+    # * @var string|null'
+- name: manifest
+  visibility: public
+  comment: '# * The loaded manifest array.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: files
+  - name: basePath
+  - name: manifestPath
+  comment: "# * The filesystem instance.\n# *\n# * @var \\Illuminate\\Filesystem\\\
+    Filesystem\n# */\n# public $files;\n# \n# /**\n# * The base path.\n# *\n# * @var\
+    \ string\n# */\n# public $basePath;\n# \n# /**\n# * The vendor path.\n# *\n# *\
+    \ @var string\n# */\n# public $vendorPath;\n# \n# /**\n# * The manifest path.\n\
+    # *\n# * @var string|null\n# */\n# public $manifestPath;\n# \n# /**\n# * The loaded\
+    \ manifest array.\n# *\n# * @var array\n# */\n# public $manifest;\n# \n# /**\n\
+    # * Create a new package manifest instance.\n# *\n# * @param  \\Illuminate\\Filesystem\\\
+    Filesystem  $files\n# * @param  string  $basePath\n# * @param  string  $manifestPath\n\
+    # * @return void"
+- name: providers
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the service provider class names for all packages.
+
+    # *
+
+    # * @return array'
+- name: aliases
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the aliases for all packages.
+
+    # *
+
+    # * @return array'
+- name: config
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Get all of the values for all packages for the given configuration
+    name.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return array'
+- name: getManifest
+  visibility: protected
+  parameters: []
+  comment: '# * Get the current package manifest.
+
+    # *
+
+    # * @return array'
+- name: build
+  visibility: public
+  parameters: []
+  comment: '# * Build the manifest and write it to disk.
+
+    # *
+
+    # * @return void'
+- name: format
+  visibility: protected
+  parameters:
+  - name: package
+  comment: '# * Format the given package name.
+
+    # *
+
+    # * @param  string  $package
+
+    # * @return string'
+- name: packagesToIgnore
+  visibility: protected
+  parameters: []
+  comment: '# * Get all of the package names that should be ignored.
+
+    # *
+
+    # * @return array'
+- name: write
+  visibility: protected
+  parameters:
+  - name: manifest
+  comment: '# * Write the given manifest array to disk.
+
+    # *
+
+    # * @param  array  $manifest
+
+    # * @return void
+
+    # *
+
+    # * @throws \Exception'
+traits:
+- Exception
+- Illuminate\Filesystem\Filesystem
+- Illuminate\Support\Env
+interfaces: []

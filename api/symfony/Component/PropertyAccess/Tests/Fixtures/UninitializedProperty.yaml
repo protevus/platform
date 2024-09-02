@@ -1,0 +1,16 @@
+name: UninitializedProperty
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getPrivateUninitialized
+  visibility: public
+  parameters: []
+  comment: null
+- name: setPrivateUninitialized
+  visibility: public
+  parameters:
+  - name: privateUninitialized
+  comment: null
+traits: []
+interfaces: []

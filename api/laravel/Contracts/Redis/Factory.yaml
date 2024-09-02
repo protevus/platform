@@ -1,0 +1,19 @@
+name: Factory
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: connection
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Get a Redis connection by name.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @return \Illuminate\Redis\Connections\Connection'
+traits: []
+interfaces: []

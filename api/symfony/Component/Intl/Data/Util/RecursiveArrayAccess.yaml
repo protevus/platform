@@ -1,0 +1,25 @@
+name: RecursiveArrayAccess
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: OutOfBoundsException
+  type: class
+  source: Symfony\Component\Intl\Exception\OutOfBoundsException
+properties: []
+methods:
+- name: get
+  visibility: public
+  parameters:
+  - name: array
+  - name: indices
+  comment: null
+- name: __construct
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Intl\Exception\OutOfBoundsException
+interfaces: []

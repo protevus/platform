@@ -1,0 +1,12 @@
+name: NamedEnumArgumentDummy
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: bar
+  comment: null
+traits: []
+interfaces: []

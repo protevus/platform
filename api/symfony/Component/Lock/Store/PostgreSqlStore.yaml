@@ -1,0 +1,118 @@
+name: PostgreSqlStore
+class_comment: "# * PostgreSqlStore is a PersistingStoreInterface implementation using\n\
+  # * PostgreSql advisory locks.\n# *\n# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>"
+dependencies:
+- name: BlockingSharedLockStoreInterface
+  type: class
+  source: Symfony\Component\Lock\BlockingSharedLockStoreInterface
+- name: BlockingStoreInterface
+  type: class
+  source: Symfony\Component\Lock\BlockingStoreInterface
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Lock\Exception\InvalidArgumentException
+- name: LockConflictedException
+  type: class
+  source: Symfony\Component\Lock\Exception\LockConflictedException
+- name: Key
+  type: class
+  source: Symfony\Component\Lock\Key
+- name: SharedLockStoreInterface
+  type: class
+  source: Symfony\Component\Lock\SharedLockStoreInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: connOrDsn
+  - name: options
+    default: '[]'
+  comment: "# * PostgreSqlStore is a PersistingStoreInterface implementation using\n\
+    # * PostgreSql advisory locks.\n# *\n# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n\
+    # */\n# class PostgreSqlStore implements BlockingSharedLockStoreInterface, BlockingStoreInterface\n\
+    # {\n# private \\PDO $conn;\n# private string $dsn;\n# private ?string $username\
+    \ = null;\n# private ?string $password = null;\n# private array $connectionOptions\
+    \ = [];\n# private static array $storeRegistry = [];\n# \n# /**\n# * You can either\
+    \ pass an existing database connection as PDO instance or\n# * a DSN string that\
+    \ will be used to lazy-connect to the database when the\n# * lock is actually\
+    \ used.\n# *\n# * List of available options:\n# *  * db_username: The username\
+    \ when lazy-connect [default: '']\n# *  * db_password: The password when lazy-connect\
+    \ [default: '']\n# *  * db_connection_options: An array of driver-specific connection\
+    \ options [default: []]\n# *\n# * @param array $options An associative array of\
+    \ options\n# *\n# * @throws InvalidArgumentException When first argument is not\
+    \ PDO nor Connection nor string\n# * @throws InvalidArgumentException When PDO\
+    \ error mode is not PDO::ERRMODE_EXCEPTION\n# * @throws InvalidArgumentException\
+    \ When namespace contains invalid characters"
+- name: save
+  visibility: public
+  parameters:
+  - name: key
+  comment: null
+- name: saveRead
+  visibility: public
+  parameters:
+  - name: key
+  comment: null
+- name: putOffExpiration
+  visibility: public
+  parameters:
+  - name: key
+  - name: ttl
+  comment: null
+- name: delete
+  visibility: public
+  parameters:
+  - name: key
+  comment: null
+- name: exists
+  visibility: public
+  parameters:
+  - name: key
+  comment: null
+- name: waitAndSave
+  visibility: public
+  parameters:
+  - name: key
+  comment: null
+- name: waitAndSaveRead
+  visibility: public
+  parameters:
+  - name: key
+  comment: null
+- name: getHashedKey
+  visibility: private
+  parameters:
+  - name: key
+  comment: '# * Returns a hashed version of the key.'
+- name: unlock
+  visibility: private
+  parameters:
+  - name: key
+  comment: null
+- name: unlockShared
+  visibility: private
+  parameters:
+  - name: key
+  comment: null
+- name: getConnection
+  visibility: private
+  parameters: []
+  comment: null
+- name: checkDriver
+  visibility: private
+  parameters: []
+  comment: null
+- name: getInternalStore
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Lock\BlockingSharedLockStoreInterface
+- Symfony\Component\Lock\BlockingStoreInterface
+- Symfony\Component\Lock\Exception\InvalidArgumentException
+- Symfony\Component\Lock\Exception\LockConflictedException
+- Symfony\Component\Lock\Key
+- Symfony\Component\Lock\SharedLockStoreInterface
+interfaces:
+- BlockingSharedLockStoreInterface

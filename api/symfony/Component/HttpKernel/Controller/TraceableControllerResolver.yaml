@@ -1,0 +1,27 @@
+name: TraceableControllerResolver
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Stopwatch
+  type: class
+  source: Symfony\Component\Stopwatch\Stopwatch
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: resolver
+  - name: stopwatch
+  comment: null
+- name: getController
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\Stopwatch\Stopwatch
+interfaces:
+- ControllerResolverInterface

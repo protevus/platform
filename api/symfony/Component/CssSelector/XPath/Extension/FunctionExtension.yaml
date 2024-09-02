@@ -1,0 +1,86 @@
+name: FunctionExtension
+class_comment: "# * XPath expression translator function extension.\n# *\n# * This\
+  \ component is a port of the Python cssselect library,\n# * which is copyright Ian\
+  \ Bicking, @see https://github.com/SimonSapin/cssselect.\n# *\n# * @author Jean-Fran\xE7\
+  ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n# * @internal"
+dependencies:
+- name: ExpressionErrorException
+  type: class
+  source: Symfony\Component\CssSelector\Exception\ExpressionErrorException
+- name: SyntaxErrorException
+  type: class
+  source: Symfony\Component\CssSelector\Exception\SyntaxErrorException
+- name: FunctionNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\FunctionNode
+- name: Parser
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Parser
+- name: Translator
+  type: class
+  source: Symfony\Component\CssSelector\XPath\Translator
+- name: XPathExpr
+  type: class
+  source: Symfony\Component\CssSelector\XPath\XPathExpr
+properties: []
+methods:
+- name: translateNthChild
+  visibility: public
+  parameters:
+  - name: xpath
+  - name: function
+  - name: last
+    default: 'false'
+  - name: addNameTest
+    default: 'true'
+  comment: "# * XPath expression translator function extension.\n# *\n# * This component\
+    \ is a port of the Python cssselect library,\n# * which is copyright Ian Bicking,\
+    \ @see https://github.com/SimonSapin/cssselect.\n# *\n# * @author Jean-Fran\xE7\
+    ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n# * @internal\n# */\n# class\
+    \ FunctionExtension extends AbstractExtension\n# {\n# public function getFunctionTranslators():\
+    \ array\n# {\n# return [\n# 'nth-child' => $this->translateNthChild(...),\n# 'nth-last-child'\
+    \ => $this->translateNthLastChild(...),\n# 'nth-of-type' => $this->translateNthOfType(...),\n\
+    # 'nth-last-of-type' => $this->translateNthLastOfType(...),\n# 'contains' => $this->translateContains(...),\n\
+    # 'lang' => $this->translateLang(...),\n# ];\n# }\n# \n# /**\n# * @throws ExpressionErrorException"
+- name: translateNthLastChild
+  visibility: public
+  parameters:
+  - name: xpath
+  - name: function
+  comment: null
+- name: translateNthOfType
+  visibility: public
+  parameters:
+  - name: xpath
+  - name: function
+  comment: null
+- name: translateNthLastOfType
+  visibility: public
+  parameters:
+  - name: xpath
+  - name: function
+  comment: '# * @throws ExpressionErrorException'
+- name: translateContains
+  visibility: public
+  parameters:
+  - name: xpath
+  - name: function
+  comment: '# * @throws ExpressionErrorException'
+- name: translateLang
+  visibility: public
+  parameters:
+  - name: xpath
+  - name: function
+  comment: '# * @throws ExpressionErrorException'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\CssSelector\Exception\ExpressionErrorException
+- Symfony\Component\CssSelector\Exception\SyntaxErrorException
+- Symfony\Component\CssSelector\Node\FunctionNode
+- Symfony\Component\CssSelector\Parser\Parser
+- Symfony\Component\CssSelector\XPath\Translator
+- Symfony\Component\CssSelector\XPath\XPathExpr
+interfaces: []

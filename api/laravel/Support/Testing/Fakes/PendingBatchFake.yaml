@@ -1,0 +1,47 @@
+name: PendingBatchFake
+class_comment: null
+dependencies:
+- name: PendingBatch
+  type: class
+  source: Illuminate\Bus\PendingBatch
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+properties:
+- name: bus
+  visibility: protected
+  comment: '# * The fake bus instance.
+
+    # *
+
+    # * @var \Illuminate\Support\Testing\Fakes\BusFake'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: bus
+  - name: jobs
+  comment: "# * The fake bus instance.\n# *\n# * @var \\Illuminate\\Support\\Testing\\\
+    Fakes\\BusFake\n# */\n# protected $bus;\n# \n# /**\n# * Create a new pending batch\
+    \ instance.\n# *\n# * @param  \\Illuminate\\Support\\Testing\\Fakes\\BusFake \
+    \ $bus\n# * @param  \\Illuminate\\Support\\Collection  $jobs\n# * @return void"
+- name: dispatch
+  visibility: public
+  parameters: []
+  comment: '# * Dispatch the batch.
+
+    # *
+
+    # * @return \Illuminate\Bus\Batch'
+- name: dispatchAfterResponse
+  visibility: public
+  parameters: []
+  comment: '# * Dispatch the batch after the response is sent to the browser.
+
+    # *
+
+    # * @return \Illuminate\Bus\Batch'
+traits:
+- Illuminate\Bus\PendingBatch
+- Illuminate\Support\Collection
+interfaces: []

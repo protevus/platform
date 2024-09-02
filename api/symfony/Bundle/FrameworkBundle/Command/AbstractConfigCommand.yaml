@@ -1,0 +1,60 @@
+name: AbstractConfigCommand
+class_comment: null
+dependencies:
+- name: ConfigurationInterface
+  type: class
+  source: Symfony\Component\Config\Definition\ConfigurationInterface
+- name: LogicException
+  type: class
+  source: Symfony\Component\Console\Exception\LogicException
+- name: Table
+  type: class
+  source: Symfony\Component\Console\Helper\Table
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: StyleInterface
+  type: class
+  source: Symfony\Component\Console\Style\StyleInterface
+- name: ConfigurationExtensionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface
+- name: ExtensionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+properties: []
+methods:
+- name: listBundles
+  visibility: protected
+  parameters:
+  - name: output
+  comment: null
+- name: listNonBundleExtensions
+  visibility: protected
+  parameters:
+  - name: output
+  comment: null
+- name: findExtension
+  visibility: protected
+  parameters:
+  - name: name
+  comment: null
+- name: validateConfiguration
+  visibility: public
+  parameters:
+  - name: extension
+  - name: configuration
+  comment: null
+- name: initializeBundles
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Config\Definition\ConfigurationInterface
+- Symfony\Component\Console\Exception\LogicException
+- Symfony\Component\Console\Helper\Table
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Style\StyleInterface
+- Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface
+- Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+interfaces: []

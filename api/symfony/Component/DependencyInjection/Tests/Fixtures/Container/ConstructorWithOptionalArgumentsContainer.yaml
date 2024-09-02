@@ -1,0 +1,13 @@
+name: ConstructorWithOptionalArgumentsContainer
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: optionalArgument
+    default: '''foo'''
+  comment: null
+traits: []
+interfaces: []

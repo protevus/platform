@@ -1,0 +1,31 @@
+name: NumberHandlerTest
+class_comment: null
+dependencies:
+- name: NumberHandler
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Handler\NumberHandler
+- name: Token
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Token
+- name: TokenizerPatterns
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Tokenizer\TokenizerPatterns
+properties: []
+methods:
+- name: getHandleValueTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDontHandleValueTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: generateHandler
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\CssSelector\Parser\Handler\NumberHandler
+- Symfony\Component\CssSelector\Parser\Token
+- Symfony\Component\CssSelector\Parser\Tokenizer\TokenizerPatterns
+interfaces: []

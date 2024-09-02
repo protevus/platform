@@ -1,0 +1,43 @@
+name: FormTypeHttpFoundationExtension
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: AbstractTypeExtension
+  type: class
+  source: Symfony\Component\Form\AbstractTypeExtension
+- name: FormType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\FormType
+- name: HttpFoundationRequestHandler
+  type: class
+  source: Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationRequestHandler
+- name: FormBuilderInterface
+  type: class
+  source: Symfony\Component\Form\FormBuilderInterface
+- name: RequestHandlerInterface
+  type: class
+  source: Symfony\Component\Form\RequestHandlerInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: requestHandler
+    default: 'null'
+  comment: null
+- name: buildForm
+  visibility: public
+  parameters:
+  - name: builder
+  - name: options
+  comment: null
+- name: getExtendedTypes
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\AbstractTypeExtension
+- Symfony\Component\Form\Extension\Core\Type\FormType
+- Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationRequestHandler
+- Symfony\Component\Form\FormBuilderInterface
+- Symfony\Component\Form\RequestHandlerInterface
+interfaces: []

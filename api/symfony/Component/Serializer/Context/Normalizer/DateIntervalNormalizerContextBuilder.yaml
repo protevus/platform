@@ -1,0 +1,33 @@
+name: DateIntervalNormalizerContextBuilder
+class_comment: null
+dependencies:
+- name: ContextBuilderInterface
+  type: class
+  source: Symfony\Component\Serializer\Context\ContextBuilderInterface
+- name: ContextBuilderTrait
+  type: class
+  source: Symfony\Component\Serializer\Context\ContextBuilderTrait
+- name: DateIntervalNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DateIntervalNormalizer
+- name: ContextBuilderTrait
+  type: class
+  source: ContextBuilderTrait
+properties: []
+methods:
+- name: withFormat
+  visibility: public
+  parameters:
+  - name: format
+  comment: "# * A helper providing autocompletion for available DateIntervalNormalizer\
+    \ options.\n# *\n# * @author Mathias Arlaud <mathias.arlaud@gmail.com>\n# */\n\
+    # final class DateIntervalNormalizerContextBuilder implements ContextBuilderInterface\n\
+    # {\n# use ContextBuilderTrait;\n# \n# /**\n# * Configures the format of the interval.\n\
+    # *\n# * @see https://php.net/manual/en/dateinterval.format.php"
+traits:
+- Symfony\Component\Serializer\Context\ContextBuilderInterface
+- Symfony\Component\Serializer\Context\ContextBuilderTrait
+- Symfony\Component\Serializer\Normalizer\DateIntervalNormalizer
+- ContextBuilderTrait
+interfaces:
+- ContextBuilderInterface

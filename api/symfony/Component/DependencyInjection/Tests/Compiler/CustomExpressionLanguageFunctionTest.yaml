@@ -1,0 +1,40 @@
+name: CustomExpressionLanguageFunctionTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: PhpDumper
+  type: class
+  source: Symfony\Component\DependencyInjection\Dumper\PhpDumper
+- name: Expression
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Expression
+- name: ExpressionFunction
+  type: class
+  source: Symfony\Component\ExpressionLanguage\ExpressionFunction
+- name: ExpressionFunctionProviderInterface
+  type: class
+  source: Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface
+properties: []
+methods:
+- name: testDump
+  visibility: public
+  parameters: []
+  comment: null
+- name: getFunctions
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Dumper\PhpDumper
+- Symfony\Component\ExpressionLanguage\Expression
+- Symfony\Component\ExpressionLanguage\ExpressionFunction
+- Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface
+interfaces:
+- ExpressionFunctionProviderInterface

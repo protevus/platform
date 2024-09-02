@@ -1,0 +1,69 @@
+name: CreatesUserProviders
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties:
+- name: customProviderCreators
+  visibility: protected
+  comment: '# * The registered custom provider creators.
+
+    # *
+
+    # * @var array'
+methods:
+- name: createUserProvider
+  visibility: public
+  parameters:
+  - name: provider
+    default: 'null'
+  comment: "# * The registered custom provider creators.\n# *\n# * @var array\n# */\n\
+    # protected $customProviderCreators = [];\n# \n# /**\n# * Create the user provider\
+    \ implementation for the driver.\n# *\n# * @param  string|null  $provider\n# *\
+    \ @return \\Illuminate\\Contracts\\Auth\\UserProvider|null\n# *\n# * @throws \\\
+    InvalidArgumentException"
+- name: getProviderConfiguration
+  visibility: protected
+  parameters:
+  - name: provider
+  comment: '# * Get the user provider configuration.
+
+    # *
+
+    # * @param  string|null  $provider
+
+    # * @return array|null'
+- name: createDatabaseProvider
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Create an instance of the database user provider.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Auth\DatabaseUserProvider'
+- name: createEloquentProvider
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Create an instance of the Eloquent user provider.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Auth\EloquentUserProvider'
+- name: getDefaultUserProvider
+  visibility: public
+  parameters: []
+  comment: '# * Get the default user provider name.
+
+    # *
+
+    # * @return string'
+traits:
+- InvalidArgumentException
+interfaces: []

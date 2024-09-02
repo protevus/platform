@@ -1,0 +1,87 @@
+name: ParameterizedHeaderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ParameterizedHeader
+  type: class
+  source: Symfony\Component\Mime\Header\ParameterizedHeader
+properties: []
+methods:
+- name: testValueIsReturnedVerbatim
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParametersAreAppended
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSpaceInParamResultsInQuotedString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFormDataResultsInQuotedString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFormDataUtf8
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLongParamsAreBrokenIntoMultipleAttributeStrings
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEncodedParamDataIncludesCharsetAndLanguage
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMultipleEncodedParamLinesAreFormattedCorrectly
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValueCanBeEncodedIfNonAscii
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValueAndParamCanBeEncodedIfNonAscii
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParamsAreEncodedIfNonAscii
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParamsAreEncodedWithLegacyEncodingEnabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLanguageInformationAppearsInEncodedWords
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetBody
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetBody
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetParameter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetParameter
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mime\Header\ParameterizedHeader
+interfaces: []

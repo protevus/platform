@@ -1,0 +1,103 @@
+name: UrlHelperTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+- name: UrlHelper
+  type: class
+  source: Symfony\Component\HttpFoundation\UrlHelper
+- name: RequestContext
+  type: class
+  source: Symfony\Component\Routing\RequestContext
+- name: RequestContextAwareInterface
+  type: class
+  source: Symfony\Component\Routing\RequestContextAwareInterface
+properties: []
+methods:
+- name: testGenerateAbsoluteUrl
+  visibility: public
+  parameters:
+  - name: expected
+  - name: path
+  - name: pathinfo
+  comment: '# * @dataProvider getGenerateAbsoluteUrlData'
+- name: getGenerateAbsoluteUrlData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateAbsoluteUrlWithRequestContext
+  visibility: public
+  parameters:
+  - name: path
+  - name: baseUrl
+  - name: host
+  - name: scheme
+  - name: httpPort
+  - name: httpsPort
+  - name: expected
+  comment: '# * @dataProvider getGenerateAbsoluteUrlRequestContextData'
+- name: testGenerateAbsoluteUrlWithRequestContextAwareInterface
+  visibility: public
+  parameters:
+  - name: path
+  - name: baseUrl
+  - name: host
+  - name: scheme
+  - name: httpPort
+  - name: httpsPort
+  - name: expected
+  comment: '# * @dataProvider getGenerateAbsoluteUrlRequestContextData'
+- name: __construct
+  visibility: public
+  parameters:
+  - name: requestContext
+  comment: null
+- name: setContext
+  visibility: public
+  parameters:
+  - name: context
+  comment: null
+- name: getContext
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateAbsoluteUrlWithoutRequestAndRequestContext
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * @dataProvider getGenerateAbsoluteUrlRequestContextData'
+- name: getGenerateAbsoluteUrlRequestContextData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateAbsoluteUrlWithScriptFileName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateRelativePath
+  visibility: public
+  parameters:
+  - name: expected
+  - name: path
+  - name: pathinfo
+  comment: '# * @dataProvider getGenerateRelativePathData'
+- name: getGenerateRelativePathData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestStack
+- Symfony\Component\HttpFoundation\UrlHelper
+- Symfony\Component\Routing\RequestContext
+- Symfony\Component\Routing\RequestContextAwareInterface
+interfaces:
+- RequestContextAwareInterface

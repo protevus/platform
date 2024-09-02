@@ -1,0 +1,26 @@
+name: ExcludesPaths
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: inExceptArray
+  visibility: protected
+  parameters:
+  - name: request
+  comment: '# * Determine if the request has a URI that should be excluded.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return bool'
+- name: getExcludedPaths
+  visibility: public
+  parameters: []
+  comment: '# * Get the URIs that should be excluded.
+
+    # *
+
+    # * @return array'
+traits: []
+interfaces: []

@@ -1,0 +1,489 @@
+name: Form
+class_comment: '# * Form represents a form.
+
+  # *
+
+  # * To implement your own form fields, you need to have a thorough understanding
+
+  # * of the data flow within a form. A form stores its data in three different
+
+  # * representations:
+
+  # *
+
+  # *   (1) the "model" format required by the form''s object
+
+  # *   (2) the "normalized" format for internal processing
+
+  # *   (3) the "view" format used for display simple fields
+
+  # *       or map children model data for compound fields
+
+  # *
+
+  # * A date field, for example, may store a date as "Y-m-d" string (1) in the
+
+  # * object. To facilitate processing in the field, this value is normalized
+
+  # * to a DateTime object (2). In the HTML representation of your form, a
+
+  # * localized string (3) may be presented to and modified by the user, or it could
+  be an array of values
+
+  # * to be mapped to choices fields.
+
+  # *
+
+  # * In most cases, format (1) and format (2) will be the same. For example,
+
+  # * a checkbox field uses a Boolean value for both internal processing and
+
+  # * storage in the object. In these cases you need to set a view transformer
+
+  # * to convert between formats (2) and (3). You can do this by calling
+
+  # * addViewTransformer().
+
+  # *
+
+  # * In some cases though it makes sense to make format (1) configurable. To
+
+  # * demonstrate this, let''s extend our above date field to store the value
+
+  # * either as "Y-m-d" string or as timestamp. Internally we still want to
+
+  # * use a DateTime object for processing. To convert the data from string/integer
+
+  # * to DateTime you can set a model transformer by calling
+
+  # * addModelTransformer(). The normalized data is then converted to the displayed
+
+  # * data as described before.
+
+  # *
+
+  # * The conversions (1) -> (2) -> (3) use the transform methods of the transformers.
+
+  # * The conversions (3) -> (2) -> (1) use the reverseTransform methods of the transformers.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @implements \IteratorAggregate<string, FormInterface>'
+dependencies:
+- name: PostSetDataEvent
+  type: class
+  source: Symfony\Component\Form\Event\PostSetDataEvent
+- name: PostSubmitEvent
+  type: class
+  source: Symfony\Component\Form\Event\PostSubmitEvent
+- name: PreSetDataEvent
+  type: class
+  source: Symfony\Component\Form\Event\PreSetDataEvent
+- name: PreSubmitEvent
+  type: class
+  source: Symfony\Component\Form\Event\PreSubmitEvent
+- name: SubmitEvent
+  type: class
+  source: Symfony\Component\Form\Event\SubmitEvent
+- name: AlreadySubmittedException
+  type: class
+  source: Symfony\Component\Form\Exception\AlreadySubmittedException
+- name: LogicException
+  type: class
+  source: Symfony\Component\Form\Exception\LogicException
+- name: OutOfBoundsException
+  type: class
+  source: Symfony\Component\Form\Exception\OutOfBoundsException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Form\Exception\RuntimeException
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+- name: TextType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\TextType
+- name: FormUtil
+  type: class
+  source: Symfony\Component\Form\Util\FormUtil
+- name: InheritDataAwareIterator
+  type: class
+  source: Symfony\Component\Form\Util\InheritDataAwareIterator
+- name: OrderedHashMap
+  type: class
+  source: Symfony\Component\Form\Util\OrderedHashMap
+- name: PropertyPath
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyPath
+- name: PropertyPathInterface
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyPathInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: config
+  comment: "# * Form represents a form.\n# *\n# * To implement your own form fields,\
+    \ you need to have a thorough understanding\n# * of the data flow within a form.\
+    \ A form stores its data in three different\n# * representations:\n# *\n# *  \
+    \ (1) the \"model\" format required by the form's object\n# *   (2) the \"normalized\"\
+    \ format for internal processing\n# *   (3) the \"view\" format used for display\
+    \ simple fields\n# *       or map children model data for compound fields\n# *\n\
+    # * A date field, for example, may store a date as \"Y-m-d\" string (1) in the\n\
+    # * object. To facilitate processing in the field, this value is normalized\n\
+    # * to a DateTime object (2). In the HTML representation of your form, a\n# *\
+    \ localized string (3) may be presented to and modified by the user, or it could\
+    \ be an array of values\n# * to be mapped to choices fields.\n# *\n# * In most\
+    \ cases, format (1) and format (2) will be the same. For example,\n# * a checkbox\
+    \ field uses a Boolean value for both internal processing and\n# * storage in\
+    \ the object. In these cases you need to set a view transformer\n# * to convert\
+    \ between formats (2) and (3). You can do this by calling\n# * addViewTransformer().\n\
+    # *\n# * In some cases though it makes sense to make format (1) configurable.\
+    \ To\n# * demonstrate this, let's extend our above date field to store the value\n\
+    # * either as \"Y-m-d\" string or as timestamp. Internally we still want to\n\
+    # * use a DateTime object for processing. To convert the data from string/integer\n\
+    # * to DateTime you can set a model transformer by calling\n# * addModelTransformer().\
+    \ The normalized data is then converted to the displayed\n# * data as described\
+    \ before.\n# *\n# * The conversions (1) -> (2) -> (3) use the transform methods\
+    \ of the transformers.\n# * The conversions (3) -> (2) -> (1) use the reverseTransform\
+    \ methods of the transformers.\n# *\n# * @author Fabien Potencier <fabien@symfony.com>\n\
+    # * @author Bernhard Schussek <bschussek@gmail.com>\n# *\n# * @implements \\IteratorAggregate<string,\
+    \ FormInterface>\n# */\n# class Form implements \\IteratorAggregate, FormInterface,\
+    \ ClearableErrorsInterface\n# {\n# private ?FormInterface $parent = null;\n# \n\
+    # /**\n# * A map of FormInterface instances.\n# *\n# * @var OrderedHashMap<FormInterface>\n\
+    # */\n# private OrderedHashMap $children;\n# \n# /**\n# * @var FormError[]\n#\
+    \ */\n# private array $errors = [];\n# \n# private bool $submitted = false;\n\
+    # \n# /**\n# * The button that was used to submit the form.\n# */\n# private FormInterface|ClickableInterface|null\
+    \ $clickedButton = null;\n# \n# private mixed $modelData = null;\n# private mixed\
+    \ $normData = null;\n# private mixed $viewData = null;\n# \n# /**\n# * The submitted\
+    \ values that don't belong to any children.\n# */\n# private array $extraData\
+    \ = [];\n# \n# /**\n# * The transformation failure generated during submission,\
+    \ if any.\n# */\n# private ?TransformationFailedException $transformationFailure\
+    \ = null;\n# \n# /**\n# * Whether the form's data has been initialized.\n# *\n\
+    # * When the data is initialized with its default value, that default value\n\
+    # * is passed through the transformer chain in order to synchronize the\n# * model,\
+    \ normalized and view format for the first time. This is done\n# * lazily in order\
+    \ to save performance when {@link setData()} is called\n# * manually, making the\
+    \ initialization with the configured default value\n# * superfluous.\n# */\n#\
+    \ private bool $defaultDataSet = false;\n# \n# /**\n# * Whether setData() is currently\
+    \ being called.\n# */\n# private bool $lockSetData = false;\n# \n# private string\
+    \ $name = '';\n# \n# /**\n# * Whether the form inherits its underlying data from\
+    \ its parent.\n# */\n# private bool $inheritData;\n# \n# private ?PropertyPathInterface\
+    \ $propertyPath = null;\n# \n# /**\n# * @throws LogicException if a data mapper\
+    \ is not provided for a compound form"
+- name: __clone
+  visibility: public
+  parameters: []
+  comment: null
+- name: getConfig
+  visibility: public
+  parameters: []
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: getPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: isRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: isDisabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: setParent
+  visibility: public
+  parameters:
+  - name: parent
+  comment: null
+- name: getParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRoot
+  visibility: public
+  parameters: []
+  comment: null
+- name: isRoot
+  visibility: public
+  parameters: []
+  comment: null
+- name: setData
+  visibility: public
+  parameters:
+  - name: modelData
+  comment: null
+- name: getData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNormData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getViewData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getExtraData
+  visibility: public
+  parameters: []
+  comment: null
+- name: initialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: handleRequest
+  visibility: public
+  parameters:
+  - name: request
+    default: 'null'
+  comment: null
+- name: submit
+  visibility: public
+  parameters:
+  - name: submittedData
+  - name: clearMissing
+    default: 'true'
+  comment: null
+- name: addError
+  visibility: public
+  parameters:
+  - name: error
+  comment: null
+- name: isSubmitted
+  visibility: public
+  parameters: []
+  comment: null
+- name: isSynchronized
+  visibility: public
+  parameters: []
+  comment: null
+- name: getTransformationFailure
+  visibility: public
+  parameters: []
+  comment: null
+- name: isEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: isValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: getClickedButton
+  visibility: public
+  parameters: []
+  comment: '# * Returns the button that was used to submit the form.'
+- name: getErrors
+  visibility: public
+  parameters:
+  - name: deep
+    default: 'false'
+  - name: flatten
+    default: 'true'
+  comment: null
+- name: offsetExists
+  visibility: public
+  parameters:
+  - name: name
+  comment: "# @var FormInterface $child */\n# if ($child->isSubmitted() && $child->isValid())\
+    \ {\n# continue;\n# }\n# \n# $iterator = $child->getErrors(true, $flatten);\n\
+    # \n# if (0 === \\count($iterator)) {\n# continue;\n# }\n# \n# if ($flatten) {\n\
+    # foreach ($iterator as $error) {\n# $errors[] = $error;\n# }\n# } else {\n# $errors[]\
+    \ = $iterator;\n# }\n# }\n# }\n# \n# return new FormErrorIterator($this, $errors);\n\
+    # }\n# \n# public function clearErrors(bool $deep = false): static\n# {\n# $this->errors\
+    \ = [];\n# \n# if ($deep) {\n# // Clear errors from children\n# foreach ($this\
+    \ as $child) {\n# if ($child instanceof ClearableErrorsInterface) {\n# $child->clearErrors(true);\n\
+    # }\n# }\n# }\n# \n# return $this;\n# }\n# \n# public function all(): array\n\
+    # {\n# return iterator_to_array($this->children);\n# }\n# \n# public function\
+    \ add(FormInterface|string $child, ?string $type = null, array $options = []):\
+    \ static\n# {\n# if ($this->submitted) {\n# throw new AlreadySubmittedException('You\
+    \ cannot add children to a submitted form.');\n# }\n# \n# if (!$this->config->getCompound())\
+    \ {\n# throw new LogicException('You cannot add children to a simple form. Maybe\
+    \ you should set the option \"compound\" to true?');\n# }\n# \n# if (!$child instanceof\
+    \ FormInterface) {\n# // Never initialize child forms automatically\n# $options['auto_initialize']\
+    \ = false;\n# \n# if (null === $type && null === $this->config->getDataClass())\
+    \ {\n# $type = TextType::class;\n# }\n# \n# if (null === $type) {\n# $child =\
+    \ $this->config->getFormFactory()->createForProperty($this->config->getDataClass(),\
+    \ $child, null, $options);\n# } else {\n# $child = $this->config->getFormFactory()->createNamed($child,\
+    \ $type, null, $options);\n# }\n# } elseif ($child->getConfig()->getAutoInitialize())\
+    \ {\n# throw new RuntimeException(\\sprintf('Automatic initialization is only\
+    \ supported on root forms. You should set the \"auto_initialize\" option to false\
+    \ on the field \"%s\".', $child->getName()));\n# }\n# \n# $this->children[$child->getName()]\
+    \ = $child;\n# \n# $child->setParent($this);\n# \n# // If setData() is currently\
+    \ being called, there is no need to call\n# // mapDataToForms() here, as mapDataToForms()\
+    \ is called at the end\n# // of setData() anyway. Not doing this check leads to\
+    \ an endless\n# // recursion when initializing the form lazily and an event listener\n\
+    # // (such as ResizeFormListener) adds fields depending on the data:\n# //\n#\
+    \ //  * setData() is called, the form is not initialized yet\n# //  * add() is\
+    \ called by the listener (setData() is not complete, so\n# //    the form is still\
+    \ not initialized)\n# //  * getViewData() is called\n# //  * setData() is called\
+    \ since the form is not initialized yet\n# //  * ... endless recursion ...\n#\
+    \ //\n# // Also skip data mapping if setData() has not been called yet.\n# //\
+    \ setData() will be called upon form initialization and data mapping\n# // will\
+    \ take place by then.\n# if (!$this->lockSetData && $this->defaultDataSet && !$this->inheritData)\
+    \ {\n# $viewData = $this->getViewData();\n# $this->config->getDataMapper()->mapDataToForms(\n\
+    # $viewData,\n# new \\RecursiveIteratorIterator(new InheritDataAwareIterator(new\
+    \ \\ArrayIterator([$child->getName() => $child])))\n# );\n# }\n# \n# return $this;\n\
+    # }\n# \n# public function remove(string $name): static\n# {\n# if ($this->submitted)\
+    \ {\n# throw new AlreadySubmittedException('You cannot remove children from a\
+    \ submitted form.');\n# }\n# \n# if (isset($this->children[$name])) {\n# if (!$this->children[$name]->isSubmitted())\
+    \ {\n# $this->children[$name]->setParent(null);\n# }\n# \n# unset($this->children[$name]);\n\
+    # }\n# \n# return $this;\n# }\n# \n# public function has(string $name): bool\n\
+    # {\n# return isset($this->children[$name]);\n# }\n# \n# public function get(string\
+    \ $name): FormInterface\n# {\n# if (isset($this->children[$name])) {\n# return\
+    \ $this->children[$name];\n# }\n# \n# throw new OutOfBoundsException(\\sprintf('Child\
+    \ \"%s\" does not exist.', $name));\n# }\n# \n# /**\n# * Returns whether a child\
+    \ with the given name exists (implements the \\ArrayAccess interface).\n# *\n\
+    # * @param string $name The name of the child"
+- name: offsetGet
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Returns the child with the given name (implements the \ArrayAccess
+    interface).
+
+    # *
+
+    # * @param string $name The name of the child
+
+    # *
+
+    # * @throws OutOfBoundsException if the named child does not exist'
+- name: offsetSet
+  visibility: public
+  parameters:
+  - name: name
+  - name: child
+  comment: '# * Adds a child to the form (implements the \ArrayAccess interface).
+
+    # *
+
+    # * @param string        $name  Ignored. The name of the child is used
+
+    # * @param FormInterface $child The child to be added
+
+    # *
+
+    # * @throws AlreadySubmittedException if the form has already been submitted
+
+    # * @throws LogicException            when trying to add a child to a non-compound
+    form
+
+    # *
+
+    # * @see self::add()'
+- name: offsetUnset
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Removes the child with the given name from the form (implements the
+    \ArrayAccess interface).
+
+    # *
+
+    # * @param string $name The name of the child to remove
+
+    # *
+
+    # * @throws AlreadySubmittedException if the form has already been submitted'
+- name: getIterator
+  visibility: public
+  parameters: []
+  comment: '# * Returns the iterator for this group.
+
+    # *
+
+    # * @return \Traversable<string, FormInterface>'
+- name: count
+  visibility: public
+  parameters: []
+  comment: '# * Returns the number of form children (implements the \Countable interface).'
+- name: createView
+  visibility: public
+  parameters:
+  - name: parent
+    default: 'null'
+  comment: null
+- name: sort
+  visibility: private
+  parameters:
+  - name: '&$children'
+  comment: '# * Sorts view fields based on their priority value.'
+- name: modelToNorm
+  visibility: private
+  parameters:
+  - name: value
+  comment: '# * Normalizes the underlying data if a model transformer is set.
+
+    # *
+
+    # * @throws TransformationFailedException If the underlying data cannot be transformed
+    to "normalized" format'
+- name: normToModel
+  visibility: private
+  parameters:
+  - name: value
+  comment: '# * Reverse transforms a value if a model transformer is set.
+
+    # *
+
+    # * @throws TransformationFailedException If the value cannot be transformed to
+    "model" format'
+- name: normToView
+  visibility: private
+  parameters:
+  - name: value
+  comment: '# * Transforms the value if a view transformer is set.
+
+    # *
+
+    # * @throws TransformationFailedException If the normalized value cannot be transformed
+    to "view" format'
+- name: viewToNorm
+  visibility: private
+  parameters:
+  - name: value
+  comment: '# * Reverse transforms a value if a view transformer is set.
+
+    # *
+
+    # * @throws TransformationFailedException If the submitted value cannot be transformed
+    to "normalized" format'
+traits:
+- Symfony\Component\Form\Event\PostSetDataEvent
+- Symfony\Component\Form\Event\PostSubmitEvent
+- Symfony\Component\Form\Event\PreSetDataEvent
+- Symfony\Component\Form\Event\PreSubmitEvent
+- Symfony\Component\Form\Event\SubmitEvent
+- Symfony\Component\Form\Exception\AlreadySubmittedException
+- Symfony\Component\Form\Exception\LogicException
+- Symfony\Component\Form\Exception\OutOfBoundsException
+- Symfony\Component\Form\Exception\RuntimeException
+- Symfony\Component\Form\Exception\TransformationFailedException
+- Symfony\Component\Form\Extension\Core\Type\TextType
+- Symfony\Component\Form\Util\FormUtil
+- Symfony\Component\Form\Util\InheritDataAwareIterator
+- Symfony\Component\Form\Util\OrderedHashMap
+- Symfony\Component\PropertyAccess\PropertyPath
+- Symfony\Component\PropertyAccess\PropertyPathInterface
+interfaces:
+- \IteratorAggregate
+- \IteratorAggregate
+- the
+- the
+- the
+- the
+- the

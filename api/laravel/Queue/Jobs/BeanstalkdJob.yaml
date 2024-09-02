@@ -1,0 +1,122 @@
+name: BeanstalkdJob
+class_comment: null
+dependencies:
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: JobContract
+  type: class
+  source: Illuminate\Contracts\Queue\Job
+- name: JobIdInterface
+  type: class
+  source: Pheanstalk\Contract\JobIdInterface
+- name: Pheanstalk
+  type: class
+  source: Pheanstalk\Pheanstalk
+properties:
+- name: pheanstalk
+  visibility: protected
+  comment: '# * The Pheanstalk instance.
+
+    # *
+
+    # * @var \Pheanstalk\Contract\PheanstalkManagerInterface&\Pheanstalk\Contract\PheanstalkPublisherInterface&\Pheanstalk\Contract\PheanstalkSubscriberInterface'
+- name: job
+  visibility: protected
+  comment: '# * The Pheanstalk job instance.
+
+    # *
+
+    # * @var \Pheanstalk\Job'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+  - name: pheanstalk
+  - name: job
+  - name: connectionName
+  - name: queue
+  comment: "# * The Pheanstalk instance.\n# *\n# * @var \\Pheanstalk\\Contract\\PheanstalkManagerInterface&\\\
+    Pheanstalk\\Contract\\PheanstalkPublisherInterface&\\Pheanstalk\\Contract\\PheanstalkSubscriberInterface\n\
+    # */\n# protected $pheanstalk;\n# \n# /**\n# * The Pheanstalk job instance.\n\
+    # *\n# * @var \\Pheanstalk\\Job\n# */\n# protected $job;\n# \n# /**\n# * Create\
+    \ a new job instance.\n# *\n# * @param  \\Illuminate\\Container\\Container  $container\n\
+    # * @param  \\Pheanstalk\\Contract\\PheanstalkManagerInterface&\\Pheanstalk\\\
+    Contract\\PheanstalkPublisherInterface&\\Pheanstalk\\Contract\\PheanstalkSubscriberInterface\
+    \  $pheanstalk\n# * @param  \\Pheanstalk\\Contract\\JobIdInterface  $job\n# *\
+    \ @param  string  $connectionName\n# * @param  string  $queue\n# * @return void"
+- name: release
+  visibility: public
+  parameters:
+  - name: delay
+    default: '0'
+  comment: '# * Release the job back into the queue after (n) seconds.
+
+    # *
+
+    # * @param  int  $delay
+
+    # * @return void'
+- name: bury
+  visibility: public
+  parameters: []
+  comment: '# * Bury the job in the queue.
+
+    # *
+
+    # * @return void'
+- name: delete
+  visibility: public
+  parameters: []
+  comment: '# * Delete the job from the queue.
+
+    # *
+
+    # * @return void'
+- name: attempts
+  visibility: public
+  parameters: []
+  comment: '# * Get the number of times the job has been attempted.
+
+    # *
+
+    # * @return int'
+- name: getJobId
+  visibility: public
+  parameters: []
+  comment: '# * Get the job identifier.
+
+    # *
+
+    # * @return int'
+- name: getRawBody
+  visibility: public
+  parameters: []
+  comment: '# * Get the raw body string for the job.
+
+    # *
+
+    # * @return string'
+- name: getPheanstalk
+  visibility: public
+  parameters: []
+  comment: '# * Get the underlying Pheanstalk instance.
+
+    # *
+
+    # * @return \Pheanstalk\Contract\PheanstalkManagerInterface&\Pheanstalk\Contract\PheanstalkPublisherInterface&\Pheanstalk\Contract\PheanstalkSubscriberInterface'
+- name: getPheanstalkJob
+  visibility: public
+  parameters: []
+  comment: '# * Get the underlying Pheanstalk job.
+
+    # *
+
+    # * @return \Pheanstalk\Contract\JobIdInterface'
+traits:
+- Illuminate\Container\Container
+- Pheanstalk\Contract\JobIdInterface
+- Pheanstalk\Pheanstalk
+interfaces:
+- JobContract

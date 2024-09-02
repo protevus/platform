@@ -1,0 +1,119 @@
+name: ProcessHelper
+class_comment: '# * The ProcessHelper class provides helpers to run external processes.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: ConsoleOutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\ConsoleOutputInterface
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: ProcessFailedException
+  type: class
+  source: Symfony\Component\Process\Exception\ProcessFailedException
+- name: Process
+  type: class
+  source: Symfony\Component\Process\Process
+properties: []
+methods:
+- name: run
+  visibility: public
+  parameters:
+  - name: output
+  - name: cmd
+  - name: error
+    default: 'null'
+  - name: callback
+    default: 'null'
+  - name: verbosity
+    default: OutputInterface::VERBOSITY_VERY_VERBOSE
+  comment: '# * The ProcessHelper class provides helpers to run external processes.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # *
+
+    # * @final
+
+    # */
+
+    # class ProcessHelper extends Helper
+
+    # {
+
+    # /**
+
+    # * Runs an external process.
+
+    # *
+
+    # * @param array|Process $cmd      An instance of Process or an array of the command
+    and arguments
+
+    # * @param callable|null $callback A PHP callback to run whenever there is some
+
+    # *                                output available on STDOUT or STDERR'
+- name: mustRun
+  visibility: public
+  parameters:
+  - name: output
+  - name: cmd
+  - name: error
+    default: 'null'
+  - name: callback
+    default: 'null'
+  comment: '# * Runs the process.
+
+    # *
+
+    # * This is identical to run() except that an exception is thrown if the process
+
+    # * exits with a non-zero exit code.
+
+    # *
+
+    # * @param array|Process $cmd      An instance of Process or a command to run
+
+    # * @param callable|null $callback A PHP callback to run whenever there is some
+
+    # *                                output available on STDOUT or STDERR
+
+    # *
+
+    # * @throws ProcessFailedException
+
+    # *
+
+    # * @see run()'
+- name: wrapCallback
+  visibility: public
+  parameters:
+  - name: output
+  - name: process
+  - name: callback
+    default: 'null'
+  comment: '# * Wraps a Process callback to add debugging output.'
+- name: escapeString
+  visibility: private
+  parameters:
+  - name: str
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Console\Output\ConsoleOutputInterface
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Process\Exception\ProcessFailedException
+- Symfony\Component\Process\Process
+interfaces: []

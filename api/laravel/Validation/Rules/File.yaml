@@ -1,0 +1,319 @@
+name: File
+class_comment: null
+dependencies:
+- name: DataAwareRule
+  type: class
+  source: Illuminate\Contracts\Validation\DataAwareRule
+- name: Rule
+  type: class
+  source: Illuminate\Contracts\Validation\Rule
+- name: ValidatorAwareRule
+  type: class
+  source: Illuminate\Contracts\Validation\ValidatorAwareRule
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Validator
+  type: class
+  source: Illuminate\Support\Facades\Validator
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: Conditionable
+  type: class
+  source: Illuminate\Support\Traits\Conditionable
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties:
+- name: allowedMimetypes
+  visibility: protected
+  comment: '# * The MIME types that the given file should match. This array may also
+    contain file extensions.
+
+    # *
+
+    # * @var array'
+- name: allowedExtensions
+  visibility: protected
+  comment: '# * The extensions that the given file should match.
+
+    # *
+
+    # * @var array'
+- name: minimumFileSize
+  visibility: protected
+  comment: '# * The minimum size in kilobytes that the file can be.
+
+    # *
+
+    # * @var null|int'
+- name: maximumFileSize
+  visibility: protected
+  comment: '# * The maximum size in kilobytes that the file can be.
+
+    # *
+
+    # * @var null|int'
+- name: customRules
+  visibility: protected
+  comment: '# * An array of custom rules that will be merged into the validation rules.
+
+    # *
+
+    # * @var array'
+- name: messages
+  visibility: protected
+  comment: '# * The error message after validation, if any.
+
+    # *
+
+    # * @var array'
+- name: data
+  visibility: protected
+  comment: '# * The data under validation.
+
+    # *
+
+    # * @var array'
+- name: validator
+  visibility: protected
+  comment: '# * The validator performing the validation.
+
+    # *
+
+    # * @var \Illuminate\Validation\Validator'
+- name: defaultCallback
+  visibility: public
+  comment: '# * The callback that will generate the "default" version of the file
+    rule.
+
+    # *
+
+    # * @var string|array|callable|null'
+methods:
+- name: defaults
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: "# * The MIME types that the given file should match. This array may also\
+    \ contain file extensions.\n# *\n# * @var array\n# */\n# protected $allowedMimetypes\
+    \ = [];\n# \n# /**\n# * The extensions that the given file should match.\n# *\n\
+    # * @var array\n# */\n# protected $allowedExtensions = [];\n# \n# /**\n# * The\
+    \ minimum size in kilobytes that the file can be.\n# *\n# * @var null|int\n# */\n\
+    # protected $minimumFileSize = null;\n# \n# /**\n# * The maximum size in kilobytes\
+    \ that the file can be.\n# *\n# * @var null|int\n# */\n# protected $maximumFileSize\
+    \ = null;\n# \n# /**\n# * An array of custom rules that will be merged into the\
+    \ validation rules.\n# *\n# * @var array\n# */\n# protected $customRules = [];\n\
+    # \n# /**\n# * The error message after validation, if any.\n# *\n# * @var array\n\
+    # */\n# protected $messages = [];\n# \n# /**\n# * The data under validation.\n\
+    # *\n# * @var array\n# */\n# protected $data;\n# \n# /**\n# * The validator performing\
+    \ the validation.\n# *\n# * @var \\Illuminate\\Validation\\Validator\n# */\n#\
+    \ protected $validator;\n# \n# /**\n# * The callback that will generate the \"\
+    default\" version of the file rule.\n# *\n# * @var string|array|callable|null\n\
+    # */\n# public static $defaultCallback;\n# \n# /**\n# * Set the default callback\
+    \ to be used for determining the file default rules.\n# *\n# * If no arguments\
+    \ are passed, the default file rule configuration will be returned.\n# *\n# *\
+    \ @param  static|callable|null  $callback\n# * @return static|null"
+- name: default
+  visibility: public
+  parameters: []
+  comment: '# * Get the default configuration of the file rule.
+
+    # *
+
+    # * @return static'
+- name: image
+  visibility: public
+  parameters: []
+  comment: '# * Limit the uploaded file to only image types.
+
+    # *
+
+    # * @return ImageFile'
+- name: types
+  visibility: public
+  parameters:
+  - name: mimetypes
+  comment: '# * Limit the uploaded file to the given MIME types or file extensions.
+
+    # *
+
+    # * @param  string|array<int, string>  $mimetypes
+
+    # * @return static'
+- name: extensions
+  visibility: public
+  parameters:
+  - name: extensions
+  comment: '# * Limit the uploaded file to the given file extensions.
+
+    # *
+
+    # * @param  string|array<int, string>  $extensions
+
+    # * @return $this'
+- name: size
+  visibility: public
+  parameters:
+  - name: size
+  comment: '# * Indicate that the uploaded file should be exactly a certain size in
+    kilobytes.
+
+    # *
+
+    # * @param  string|int  $size
+
+    # * @return $this'
+- name: between
+  visibility: public
+  parameters:
+  - name: minSize
+  - name: maxSize
+  comment: '# * Indicate that the uploaded file should be between a minimum and maximum
+    size in kilobytes.
+
+    # *
+
+    # * @param  string|int  $minSize
+
+    # * @param  string|int  $maxSize
+
+    # * @return $this'
+- name: min
+  visibility: public
+  parameters:
+  - name: size
+  comment: '# * Indicate that the uploaded file should be no less than the given number
+    of kilobytes.
+
+    # *
+
+    # * @param  string|int  $size
+
+    # * @return $this'
+- name: max
+  visibility: public
+  parameters:
+  - name: size
+  comment: '# * Indicate that the uploaded file should be no more than the given number
+    of kilobytes.
+
+    # *
+
+    # * @param  string|int  $size
+
+    # * @return $this'
+- name: toKilobytes
+  visibility: protected
+  parameters:
+  - name: size
+  comment: '# * Convert a potentially human-friendly file size to kilobytes.
+
+    # *
+
+    # * @param  string|int  $size
+
+    # * @return mixed'
+- name: rules
+  visibility: public
+  parameters:
+  - name: rules
+  comment: '# * Specify additional validation rules that should be merged with the
+    default rules during validation.
+
+    # *
+
+    # * @param  string|array  $rules
+
+    # * @return $this'
+- name: passes
+  visibility: public
+  parameters:
+  - name: attribute
+  - name: value
+  comment: '# * Determine if the validation rule passes.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  mixed  $value
+
+    # * @return bool'
+- name: buildValidationRules
+  visibility: protected
+  parameters: []
+  comment: '# * Build the array of underlying validation rules based on the current
+    state.
+
+    # *
+
+    # * @return array'
+- name: buildMimetypes
+  visibility: protected
+  parameters: []
+  comment: '# * Separate the given mimetypes from extensions and return an array of
+    correct rules to validate against.
+
+    # *
+
+    # * @return array'
+- name: fail
+  visibility: protected
+  parameters:
+  - name: messages
+  comment: '# * Adds the given failures, and return false.
+
+    # *
+
+    # * @param  array|string  $messages
+
+    # * @return bool'
+- name: message
+  visibility: public
+  parameters: []
+  comment: '# * Get the validation error message.
+
+    # *
+
+    # * @return array'
+- name: setValidator
+  visibility: public
+  parameters:
+  - name: validator
+  comment: '# * Set the current validator.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Validation\Validator  $validator
+
+    # * @return $this'
+- name: setData
+  visibility: public
+  parameters:
+  - name: data
+  comment: '# * Set the current data under validation.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return $this'
+traits:
+- Illuminate\Contracts\Validation\DataAwareRule
+- Illuminate\Contracts\Validation\Rule
+- Illuminate\Contracts\Validation\ValidatorAwareRule
+- Illuminate\Support\Arr
+- Illuminate\Support\Facades\Validator
+- Illuminate\Support\Str
+- Illuminate\Support\Traits\Conditionable
+- Illuminate\Support\Traits\Macroable
+- InvalidArgumentException
+- Conditionable
+interfaces:
+- Rule

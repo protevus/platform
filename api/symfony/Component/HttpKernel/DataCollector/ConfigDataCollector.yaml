@@ -1,0 +1,158 @@
+name: ConfigDataCollector
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: Kernel
+  type: class
+  source: Symfony\Component\HttpKernel\Kernel
+- name: KernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\KernelInterface
+- name: ClassStub
+  type: class
+  source: Symfony\Component\VarDumper\Caster\ClassStub
+- name: Data
+  type: class
+  source: Symfony\Component\VarDumper\Cloner\Data
+properties: []
+methods:
+- name: setKernel
+  visibility: public
+  parameters:
+  - name: kernel
+  comment: "# * @author Fabien Potencier <fabien@symfony.com>\n# *\n# * @final\n#\
+    \ */\n# class ConfigDataCollector extends DataCollector implements LateDataCollectorInterface\n\
+    # {\n# private KernelInterface $kernel;\n# \n# /**\n# * Sets the Kernel associated\
+    \ with this Request."
+- name: collect
+  visibility: public
+  parameters:
+  - name: request
+  - name: response
+  - name: exception
+    default: 'null'
+  comment: null
+- name: lateCollect
+  visibility: public
+  parameters: []
+  comment: null
+- name: getToken
+  visibility: public
+  parameters: []
+  comment: '# * Gets the token.'
+- name: getSymfonyVersion
+  visibility: public
+  parameters: []
+  comment: '# * Gets the Symfony version.'
+- name: getSymfonyState
+  visibility: public
+  parameters: []
+  comment: '# * Returns the state of the current Symfony release
+
+    # * as one of: unknown, dev, stable, eom, eol.'
+- name: getSymfonyMinorVersion
+  visibility: public
+  parameters: []
+  comment: '# * Returns the minor Symfony version used (without patch numbers of extra
+
+    # * suffix like "RC", "beta", etc.).'
+- name: isSymfonyLts
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSymfonyEom
+  visibility: public
+  parameters: []
+  comment: '# * Returns the human readable date when this Symfony version ends its
+
+    # * maintenance period.'
+- name: getSymfonyEol
+  visibility: public
+  parameters: []
+  comment: '# * Returns the human readable date when this Symfony version reaches
+    its
+
+    # * "end of life" and won''t receive bugs or security fixes.'
+- name: getPhpVersion
+  visibility: public
+  parameters: []
+  comment: '# * Gets the PHP version.'
+- name: getPhpVersionExtra
+  visibility: public
+  parameters: []
+  comment: '# * Gets the PHP version extra part.'
+- name: getPhpArchitecture
+  visibility: public
+  parameters: []
+  comment: null
+- name: getPhpIntlLocale
+  visibility: public
+  parameters: []
+  comment: null
+- name: getPhpTimezone
+  visibility: public
+  parameters: []
+  comment: null
+- name: getEnv
+  visibility: public
+  parameters: []
+  comment: '# * Gets the environment.'
+- name: isDebug
+  visibility: public
+  parameters: []
+  comment: '# * Returns true if the debug is enabled.
+
+    # *
+
+    # * @return bool|string true if debug is enabled, false otherwise or a string
+    if no kernel was set'
+- name: hasXdebug
+  visibility: public
+  parameters: []
+  comment: '# * Returns true if the Xdebug is enabled.'
+- name: hasXdebugInfo
+  visibility: public
+  parameters: []
+  comment: '# * Returns true if the function xdebug_info is available.'
+- name: hasApcu
+  visibility: public
+  parameters: []
+  comment: '# * Returns true if APCu is enabled.'
+- name: hasZendOpcache
+  visibility: public
+  parameters: []
+  comment: '# * Returns true if Zend OPcache is enabled.'
+- name: getBundles
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSapiName
+  visibility: public
+  parameters: []
+  comment: '# * Gets the PHP SAPI name.'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: determineSymfonyState
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Kernel
+- Symfony\Component\HttpKernel\KernelInterface
+- Symfony\Component\VarDumper\Caster\ClassStub
+- Symfony\Component\VarDumper\Cloner\Data
+interfaces:
+- LateDataCollectorInterface

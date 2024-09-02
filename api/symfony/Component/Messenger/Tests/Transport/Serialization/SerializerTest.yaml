@@ -1,0 +1,118 @@
+name: SerializerTest
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: PHPUnit\Framework\Constraint\Constraint
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: MessageDecodingFailedException
+  type: class
+  source: Symfony\Component\Messenger\Exception\MessageDecodingFailedException
+- name: NonSendableStampInterface
+  type: class
+  source: Symfony\Component\Messenger\Stamp\NonSendableStampInterface
+- name: SerializedMessageStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\SerializedMessageStamp
+- name: SerializerStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\SerializerStamp
+- name: ValidationStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\ValidationStamp
+- name: DummyMessage
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\DummyMessage
+- name: Serializer
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\Serializer
+- name: ObjectNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+- name: SerializerComponentInterface
+  type: class
+  source: Symfony\Component\Serializer\SerializerInterface
+properties: []
+methods:
+- name: testEncodedIsDecodable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEncodedWithStampsIsDecodable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSerializedMessageStampIsUsedForEncoding
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEncodedIsHavingTheBodyAndTypeHeader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUsesTheCustomFormatAndContext
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEncodedWithSymfonySerializerForStamps
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDecodeWithSymfonySerializerStamp
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDecodingFailsWithBadFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDecodingFailsWithMissingKeys
+  visibility: public
+  parameters:
+  - name: data
+  - name: expectedMessage
+  comment: '# * @dataProvider getMissingKeyTests'
+- name: getMissingKeyTests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDecodingFailsWithBadClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEncodedSkipsNonEncodeableStamps
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDecodingFailedConstructorDeserialization
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDecodingStampFailedDeserialization
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: missingArgument
+  comment: null
+traits:
+- PHPUnit\Framework\Constraint\Constraint
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Exception\MessageDecodingFailedException
+- Symfony\Component\Messenger\Stamp\NonSendableStampInterface
+- Symfony\Component\Messenger\Stamp\SerializedMessageStamp
+- Symfony\Component\Messenger\Stamp\SerializerStamp
+- Symfony\Component\Messenger\Stamp\ValidationStamp
+- Symfony\Component\Messenger\Tests\Fixtures\DummyMessage
+- Symfony\Component\Messenger\Transport\Serialization\Serializer
+- Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+interfaces:
+- NonSendableStampInterface

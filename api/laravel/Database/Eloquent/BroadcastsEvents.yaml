@@ -1,0 +1,156 @@
+name: BroadcastsEvents
+class_comment: null
+dependencies:
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+properties: []
+methods:
+- name: bootBroadcastsEvents
+  visibility: public
+  parameters: []
+  comment: '# * Boot the event broadcasting trait.
+
+    # *
+
+    # * @return void'
+- name: broadcastCreated
+  visibility: public
+  parameters:
+  - name: channels
+    default: 'null'
+  comment: '# * Broadcast that the model was created.
+
+    # *
+
+    # * @param  \Illuminate\Broadcasting\Channel|\Illuminate\Contracts\Broadcasting\HasBroadcastChannel|array|null  $channels
+
+    # * @return \Illuminate\Broadcasting\PendingBroadcast'
+- name: broadcastUpdated
+  visibility: public
+  parameters:
+  - name: channels
+    default: 'null'
+  comment: '# * Broadcast that the model was updated.
+
+    # *
+
+    # * @param  \Illuminate\Broadcasting\Channel|\Illuminate\Contracts\Broadcasting\HasBroadcastChannel|array|null  $channels
+
+    # * @return \Illuminate\Broadcasting\PendingBroadcast'
+- name: broadcastTrashed
+  visibility: public
+  parameters:
+  - name: channels
+    default: 'null'
+  comment: '# * Broadcast that the model was trashed.
+
+    # *
+
+    # * @param  \Illuminate\Broadcasting\Channel|\Illuminate\Contracts\Broadcasting\HasBroadcastChannel|array|null  $channels
+
+    # * @return \Illuminate\Broadcasting\PendingBroadcast'
+- name: broadcastRestored
+  visibility: public
+  parameters:
+  - name: channels
+    default: 'null'
+  comment: '# * Broadcast that the model was restored.
+
+    # *
+
+    # * @param  \Illuminate\Broadcasting\Channel|\Illuminate\Contracts\Broadcasting\HasBroadcastChannel|array|null  $channels
+
+    # * @return \Illuminate\Broadcasting\PendingBroadcast'
+- name: broadcastDeleted
+  visibility: public
+  parameters:
+  - name: channels
+    default: 'null'
+  comment: '# * Broadcast that the model was deleted.
+
+    # *
+
+    # * @param  \Illuminate\Broadcasting\Channel|\Illuminate\Contracts\Broadcasting\HasBroadcastChannel|array|null  $channels
+
+    # * @return \Illuminate\Broadcasting\PendingBroadcast'
+- name: broadcastIfBroadcastChannelsExistForEvent
+  visibility: protected
+  parameters:
+  - name: instance
+  - name: event
+  - name: channels
+    default: 'null'
+  comment: '# * Broadcast the given event instance if channels are configured for
+    the model event.
+
+    # *
+
+    # * @param  mixed  $instance
+
+    # * @param  string  $event
+
+    # * @param  mixed  $channels
+
+    # * @return \Illuminate\Broadcasting\PendingBroadcast|null'
+- name: newBroadcastableModelEvent
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Create a new broadcastable model event event.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @return mixed'
+- name: newBroadcastableEvent
+  visibility: protected
+  parameters:
+  - name: event
+  comment: '# * Create a new broadcastable model event for the model.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @return \Illuminate\Database\Eloquent\BroadcastableModelEventOccurred'
+- name: broadcastOn
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Get the channels that model events should broadcast on.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @return \Illuminate\Broadcasting\Channel|array'
+- name: broadcastConnection
+  visibility: public
+  parameters: []
+  comment: '# * Get the queue connection that should be used to broadcast model events.
+
+    # *
+
+    # * @return string|null'
+- name: broadcastQueue
+  visibility: public
+  parameters: []
+  comment: '# * Get the queue that should be used to broadcast model events.
+
+    # *
+
+    # * @return string|null'
+- name: broadcastAfterCommit
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the model event broadcast queued job should be dispatched
+    after all transactions are committed.
+
+    # *
+
+    # * @return bool'
+traits:
+- Illuminate\Support\Arr
+interfaces: []

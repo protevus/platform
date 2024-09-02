@@ -1,0 +1,54 @@
+name: VcsIgnoredFilterIteratorTest
+class_comment: null
+dependencies:
+- name: Finder
+  type: class
+  source: Symfony\Component\Finder\Finder
+- name: VcsIgnoredFilterIterator
+  type: class
+  source: Symfony\Component\Finder\Iterator\VcsIgnoredFilterIterator
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testAccept
+  visibility: public
+  parameters:
+  - name: gitIgnoreFiles
+  - name: otherFileNames
+  - name: expectedResult
+  - name: baseDir
+    default: ''''''
+  comment: '# * @param array<string, string> $gitIgnoreFiles
+
+    # *
+
+    # * @dataProvider getAcceptData'
+- name: getAcceptData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAcceptAtRootDirectory
+  visibility: public
+  parameters: []
+  comment: null
+- name: toAbsolute
+  visibility: private
+  parameters:
+  - name: files
+  comment: null
+- name: removeDirectory
+  visibility: private
+  parameters:
+  - name: dir
+  comment: null
+traits:
+- Symfony\Component\Finder\Finder
+- Symfony\Component\Finder\Iterator\VcsIgnoredFilterIterator
+interfaces: []

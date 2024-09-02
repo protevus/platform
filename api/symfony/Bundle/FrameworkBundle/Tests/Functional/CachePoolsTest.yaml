@@ -1,0 +1,63 @@
+name: CachePoolsTest
+class_comment: null
+dependencies:
+- name: AdapterInterface
+  type: class
+  source: Symfony\Component\Cache\Adapter\AdapterInterface
+- name: RedisAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\RedisAdapter
+- name: TagAwareAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\TagAwareAdapter
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Cache\Exception\InvalidArgumentException
+- name: KernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\KernelInterface
+properties: []
+methods:
+- name: testCachePools
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRedisCachePools
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension redis
+
+    # *
+
+    # * @group integration'
+- name: testRedisCustomCachePools
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension redis
+
+    # *
+
+    # * @group integration'
+- name: doTestCachePools
+  visibility: private
+  parameters:
+  - name: options
+  - name: adapterClass
+  comment: null
+- name: createKernel
+  visibility: protected
+  parameters:
+  - name: options
+    default: '[]'
+  comment: null
+- name: skipIfRedisUnavailable
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Cache\Adapter\AdapterInterface
+- Symfony\Component\Cache\Adapter\RedisAdapter
+- Symfony\Component\Cache\Adapter\TagAwareAdapter
+- Symfony\Component\Cache\Exception\InvalidArgumentException
+- Symfony\Component\HttpKernel\KernelInterface
+interfaces: []

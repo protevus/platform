@@ -1,0 +1,30 @@
+name: Factory
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: guard
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Get a guard instance by name.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @return \Illuminate\Contracts\Auth\Guard|\Illuminate\Contracts\Auth\StatefulGuard'
+- name: shouldUse
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Set the default guard the factory should serve.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return void'
+traits: []
+interfaces: []

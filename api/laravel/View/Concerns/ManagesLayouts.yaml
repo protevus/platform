@@ -1,0 +1,213 @@
+name: ManagesLayouts
+class_comment: null
+dependencies:
+- name: View
+  type: class
+  source: Illuminate\Contracts\View\View
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties:
+- name: sections
+  visibility: protected
+  comment: '# * All of the finished, captured sections.
+
+    # *
+
+    # * @var array'
+- name: sectionStack
+  visibility: protected
+  comment: '# * The stack of in-progress sections.
+
+    # *
+
+    # * @var array'
+- name: parentPlaceholder
+  visibility: protected
+  comment: '# * The parent placeholder for the request.
+
+    # *
+
+    # * @var mixed'
+- name: parentPlaceholderSalt
+  visibility: protected
+  comment: '# * The parent placeholder salt for the request.
+
+    # *
+
+    # * @var string'
+methods:
+- name: startSection
+  visibility: public
+  parameters:
+  - name: section
+  - name: content
+    default: 'null'
+  comment: "# * All of the finished, captured sections.\n# *\n# * @var array\n# */\n\
+    # protected $sections = [];\n# \n# /**\n# * The stack of in-progress sections.\n\
+    # *\n# * @var array\n# */\n# protected $sectionStack = [];\n# \n# /**\n# * The\
+    \ parent placeholder for the request.\n# *\n# * @var mixed\n# */\n# protected\
+    \ static $parentPlaceholder = [];\n# \n# /**\n# * The parent placeholder salt\
+    \ for the request.\n# *\n# * @var string\n# */\n# protected static $parentPlaceholderSalt;\n\
+    # \n# /**\n# * Start injecting content into a section.\n# *\n# * @param  string\
+    \  $section\n# * @param  string|null  $content\n# * @return void"
+- name: inject
+  visibility: public
+  parameters:
+  - name: section
+  - name: content
+  comment: '# * Inject inline content into a section.
+
+    # *
+
+    # * @param  string  $section
+
+    # * @param  string  $content
+
+    # * @return void'
+- name: yieldSection
+  visibility: public
+  parameters: []
+  comment: '# * Stop injecting content into a section and return its contents.
+
+    # *
+
+    # * @return string'
+- name: stopSection
+  visibility: public
+  parameters:
+  - name: overwrite
+    default: 'false'
+  comment: '# * Stop injecting content into a section.
+
+    # *
+
+    # * @param  bool  $overwrite
+
+    # * @return string
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: appendSection
+  visibility: public
+  parameters: []
+  comment: '# * Stop injecting content into a section and append it.
+
+    # *
+
+    # * @return string
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: extendSection
+  visibility: protected
+  parameters:
+  - name: section
+  - name: content
+  comment: '# * Append content to a given section.
+
+    # *
+
+    # * @param  string  $section
+
+    # * @param  string  $content
+
+    # * @return void'
+- name: yieldContent
+  visibility: public
+  parameters:
+  - name: section
+  - name: default
+    default: ''''''
+  comment: '# * Get the string contents of a section.
+
+    # *
+
+    # * @param  string  $section
+
+    # * @param  string  $default
+
+    # * @return string'
+- name: parentPlaceholder
+  visibility: public
+  parameters:
+  - name: section
+    default: ''''''
+  comment: '# * Get the parent placeholder for the current request.
+
+    # *
+
+    # * @param  string  $section
+
+    # * @return string'
+- name: parentPlaceholderSalt
+  visibility: protected
+  parameters: []
+  comment: '# * Get the parent placeholder salt.
+
+    # *
+
+    # * @return string'
+- name: hasSection
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Check if section exists.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return bool'
+- name: sectionMissing
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Check if section does not exist.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return bool'
+- name: getSection
+  visibility: public
+  parameters:
+  - name: name
+  - name: default
+    default: 'null'
+  comment: '# * Get the contents of a section.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|null  $default
+
+    # * @return mixed'
+- name: getSections
+  visibility: public
+  parameters: []
+  comment: '# * Get the entire array of sections.
+
+    # *
+
+    # * @return array'
+- name: flushSections
+  visibility: public
+  parameters: []
+  comment: '# * Flush all of the sections.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Contracts\View\View
+- Illuminate\Support\Str
+- InvalidArgumentException
+interfaces: []

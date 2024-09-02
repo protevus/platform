@@ -1,0 +1,23 @@
+name: CountableFailedJobProvider
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: count
+  visibility: public
+  parameters:
+  - name: connection
+    default: 'null'
+  - name: queue
+    default: 'null'
+  comment: '# * Count the failed jobs.
+
+    # *
+
+    # * @param  string|null  $connection
+
+    # * @param  string|null  $queue
+
+    # * @return int'
+traits: []
+interfaces: []

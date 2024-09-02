@@ -1,0 +1,8 @@
+name: BadRequestException
+class_comment: '# * Raised when a user sends a malformed request.'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- RequestExceptionInterface

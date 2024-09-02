@@ -1,0 +1,23 @@
+name: PartialDenormalizationException
+class_comment: "# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>"
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: data
+  - name: errors
+  comment: "# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>\n# */\n# class PartialDenormalizationException\
+    \ extends UnexpectedValueException\n# {\n# /**\n# * @param NotNormalizableValueException[]\
+    \ $errors"
+- name: getData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getErrors
+  visibility: public
+  parameters: []
+  comment: '# * @return NotNormalizableValueException[]'
+traits: []
+interfaces: []

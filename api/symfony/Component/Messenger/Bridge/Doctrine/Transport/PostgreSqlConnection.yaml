@@ -1,0 +1,55 @@
+name: PostgreSqlConnection
+class_comment: null
+dependencies:
+- name: Table
+  type: class
+  source: Doctrine\DBAL\Schema\Table
+properties: []
+methods:
+- name: getExtraSetupSqlForTable
+  visibility: public
+  parameters:
+  - name: createdTable
+  comment: "# * Uses PostgreSQL LISTEN/NOTIFY to push messages to workers.\n# *\n\
+    # * If you do not want to use the LISTEN mechanism, set the `use_notify` option\
+    \ to `false` when calling DoctrineTransportFactory::createTransport.\n# *\n# *\
+    \ @internal\n# *\n# * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# */\n# final\
+    \ class PostgreSqlConnection extends Connection\n# {\n# /**\n# * * check_delayed_interval:\
+    \ The interval to check for delayed messages, in milliseconds. Set to 0 to disable\
+    \ checks. Default: 60000 (1 minute)\n# * * get_notify_timeout: The length of time\
+    \ to wait for a response when calling PDO::pgsqlGetNotify, in milliseconds. Default:\
+    \ 0.\n# */\n# protected const DEFAULT_OPTIONS = parent::DEFAULT_OPTIONS + [\n\
+    # 'check_delayed_interval' => 60000,\n# 'get_notify_timeout' => 0,\n# ];\n# \n\
+    # public function __sleep(): array\n# {\n# throw new \\BadMethodCallException('Cannot\
+    \ serialize '.__CLASS__);\n# }\n# \n# public function __wakeup(): void\n# {\n\
+    # throw new \\BadMethodCallException('Cannot unserialize '.__CLASS__);\n# }\n\
+    # \n# public function __destruct()\n# {\n# $this->unlisten();\n# }\n# \n# public\
+    \ function reset(): void\n# {\n# parent::reset();\n# $this->unlisten();\n# }\n\
+    # \n# public function get(): ?array\n# {\n# if (null === $this->queueEmptiedAt)\
+    \ {\n# return parent::get();\n# }\n# \n# // This is secure because the table name\
+    \ must be a valid identifier:\n# // https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-IDENTIFIERS\n\
+    # $this->executeStatement(\\sprintf('LISTEN \"%s\"', $this->configuration['table_name']));\n\
+    # \n# /** @var \\PDO $nativeConnection */\n# $nativeConnection = $this->driverConnection->getNativeConnection();\n\
+    # \n# $notification = $nativeConnection->pgsqlGetNotify(\\PDO::FETCH_ASSOC, $this->configuration['get_notify_timeout']);\n\
+    # if (\n# // no notifications, or for another table or queue\n# (false === $notification\
+    \ || $notification['message'] !== $this->configuration['table_name'] || $notification['payload']\
+    \ !== $this->configuration['queue_name'])\n# // delayed messages\n# && (microtime(true)\
+    \ * 1000 - $this->queueEmptiedAt < $this->configuration['check_delayed_interval'])\n\
+    # ) {\n# usleep(1000);\n# \n# return null;\n# }\n# \n# return parent::get();\n\
+    # }\n# \n# public function setup(): void\n# {\n# parent::setup();\n# \n# $this->executeStatement(implode(\"\
+    \\n\", $this->getTriggerSql()));\n# }\n# \n# /**\n# * @return string[]"
+- name: getTriggerSql
+  visibility: private
+  parameters: []
+  comment: null
+- name: createTriggerFunctionName
+  visibility: private
+  parameters: []
+  comment: null
+- name: unlisten
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Doctrine\DBAL\Schema\Table
+interfaces: []

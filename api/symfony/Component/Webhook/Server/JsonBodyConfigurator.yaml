@@ -1,0 +1,32 @@
+name: JsonBodyConfigurator
+class_comment: null
+dependencies:
+- name: HttpOptions
+  type: class
+  source: Symfony\Component\HttpClient\HttpOptions
+- name: RemoteEvent
+  type: class
+  source: Symfony\Component\RemoteEvent\RemoteEvent
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Serializer\SerializerInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: serializer
+  comment: null
+- name: configure
+  visibility: public
+  parameters:
+  - name: event
+  - name: secret
+  - name: options
+  comment: null
+traits:
+- Symfony\Component\HttpClient\HttpOptions
+- Symfony\Component\RemoteEvent\RemoteEvent
+- Symfony\Component\Serializer\SerializerInterface
+interfaces:
+- RequestConfiguratorInterface

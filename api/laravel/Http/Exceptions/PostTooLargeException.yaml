@@ -1,0 +1,39 @@
+name: PostTooLargeException
+class_comment: null
+dependencies:
+- name: HttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\HttpException
+- name: Throwable
+  type: class
+  source: Throwable
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: message
+    default: ''''''
+  - name: previous
+    default: 'null'
+  - name: headers
+    default: '[]'
+  - name: code
+    default: '0'
+  comment: '# * Create a new "post too large" exception instance.
+
+    # *
+
+    # * @param  string  $message
+
+    # * @param  \Throwable|null  $previous
+
+    # * @param  array  $headers
+
+    # * @param  int  $code
+
+    # * @return void'
+traits:
+- Symfony\Component\HttpKernel\Exception\HttpException
+- Throwable
+interfaces: []

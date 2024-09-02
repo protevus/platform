@@ -1,0 +1,30 @@
+name: IndexHint
+class_comment: null
+dependencies: []
+properties:
+- name: type
+  visibility: public
+  comment: '# * The type of query hint.
+
+    # *
+
+    # * @var string'
+- name: index
+  visibility: public
+  comment: '# * The name of the index.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: type
+  - name: index
+  comment: "# * The type of query hint.\n# *\n# * @var string\n# */\n# public $type;\n\
+    # \n# /**\n# * The name of the index.\n# *\n# * @var string\n# */\n# public $index;\n\
+    # \n# /**\n# * Create a new index hint instance.\n# *\n# * @param  string  $type\n\
+    # * @param  string  $index\n# * @return void"
+traits: []
+interfaces: []

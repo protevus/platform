@@ -1,0 +1,38 @@
+name: Transport
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: HttpOptions
+  type: class
+  source: Symfony\Component\HttpClient\HttpOptions
+- name: RemoteEvent
+  type: class
+  source: Symfony\Component\RemoteEvent\RemoteEvent
+- name: Subscriber
+  type: class
+  source: Symfony\Component\Webhook\Subscriber
+- name: HttpClientInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\HttpClientInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: client
+  - name: headers
+  - name: body
+  - name: signer
+  comment: null
+- name: send
+  visibility: public
+  parameters:
+  - name: subscriber
+  - name: event
+  comment: null
+traits:
+- Symfony\Component\HttpClient\HttpOptions
+- Symfony\Component\RemoteEvent\RemoteEvent
+- Symfony\Component\Webhook\Subscriber
+- Symfony\Contracts\HttpClient\HttpClientInterface
+interfaces:
+- TransportInterface

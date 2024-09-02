@@ -1,0 +1,98 @@
+name: CollectionTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Collection
+  type: class
+  source: Symfony\Component\Validator\Constraints\Collection
+- name: Email
+  type: class
+  source: Symfony\Component\Validator\Constraints\Email
+- name: Optional
+  type: class
+  source: Symfony\Component\Validator\Constraints\Optional
+- name: Required
+  type: class
+  source: Symfony\Component\Validator\Constraints\Required
+- name: Valid
+  type: class
+  source: Symfony\Component\Validator\Constraints\Valid
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- name: InvalidOptionsException
+  type: class
+  source: Symfony\Component\Validator\Exception\InvalidOptionsException
+properties: []
+methods:
+- name: testEmptyConstraintListForField
+  visibility: public
+  parameters:
+  - name: fieldConstraint
+  comment: "# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# class CollectionTest\
+    \ extends TestCase\n# {\n# public function testRejectNonConstraints()\n# {\n#\
+    \ $this->expectException(InvalidOptionsException::class);\n# new Collection([\n\
+    # 'foo' => 'bar',\n# ]);\n# }\n# \n# public function testRejectValidConstraint()\n\
+    # {\n# $this->expectException(ConstraintDefinitionException::class);\n# new Collection([\n\
+    # 'foo' => new Valid(),\n# ]);\n# }\n# \n# public function testRejectValidConstraintWithinOptional()\n\
+    # {\n# $this->expectException(ConstraintDefinitionException::class);\n# new Collection([\n\
+    # 'foo' => new Optional(new Valid()),\n# ]);\n# }\n# \n# public function testRejectValidConstraintWithinRequired()\n\
+    # {\n# $this->expectException(ConstraintDefinitionException::class);\n# new Collection([\n\
+    # 'foo' => new Required(new Valid()),\n# ]);\n# }\n# \n# public function testAcceptOptionalConstraintAsOneElementArray()\n\
+    # {\n# $collection1 = new Collection([\n# 'fields' => [\n# 'alternate_email' =>\
+    \ [\n# new Optional(new Email()),\n# ],\n# ],\n# ]);\n# \n# $collection2 = new\
+    \ Collection([\n# 'fields' => [\n# 'alternate_email' => new Optional(new Email()),\n\
+    # ],\n# ]);\n# \n# $this->assertEquals($collection1, $collection2);\n# }\n# \n\
+    # public function testAcceptRequiredConstraintAsOneElementArray()\n# {\n# $collection1\
+    \ = new Collection([\n# 'fields' => [\n# 'alternate_email' => [\n# new Required(new\
+    \ Email()),\n# ],\n# ],\n# ]);\n# \n# $collection2 = new Collection([\n# 'fields'\
+    \ => [\n# 'alternate_email' => new Required(new Email()),\n# ],\n# ]);\n# \n#\
+    \ $this->assertEquals($collection1, $collection2);\n# }\n# \n# public function\
+    \ testConstraintHasDefaultGroupWithOptionalValues()\n# {\n# $constraint = new\
+    \ Collection([\n# 'foo' => new Required(),\n# 'bar' => new Optional(),\n# ]);\n\
+    # \n# $this->assertEquals(['Default'], $constraint->groups);\n# $this->assertEquals(['Default'],\
+    \ $constraint->fields['foo']->groups);\n# $this->assertEquals(['Default'], $constraint->fields['bar']->groups);\n\
+    # }\n# \n# public function testOnlySomeKeysAreKnowOptions()\n# {\n# $constraint\
+    \ = new Collection([\n# 'fields' => [new Required()],\n# 'properties' => [new\
+    \ Required()],\n# 'catalog' => [new Optional()],\n# ]);\n# \n# $this->assertArrayHasKey('fields',\
+    \ $constraint->fields);\n# $this->assertInstanceOf(Required::class, $constraint->fields['fields']);\n\
+    # $this->assertArrayHasKey('properties', $constraint->fields);\n# $this->assertInstanceOf(Required::class,\
+    \ $constraint->fields['properties']);\n# $this->assertArrayHasKey('catalog', $constraint->fields);\n\
+    # $this->assertInstanceOf(Optional::class, $constraint->fields['catalog']);\n\
+    # }\n# \n# public function testAllKeysAreKnowOptions()\n# {\n# $constraint = new\
+    \ Collection([\n# 'fields' => [\n# 'fields' => [new Required()],\n# 'properties'\
+    \ => [new Required()],\n# 'catalog' => [new Optional()],\n# ],\n# 'allowExtraFields'\
+    \ => true,\n# 'extraFieldsMessage' => 'foo bar baz',\n# ]);\n# \n# $this->assertArrayHasKey('fields',\
+    \ $constraint->fields);\n# $this->assertInstanceOf(Required::class, $constraint->fields['fields']);\n\
+    # $this->assertArrayHasKey('properties', $constraint->fields);\n# $this->assertInstanceOf(Required::class,\
+    \ $constraint->fields['properties']);\n# $this->assertArrayHasKey('catalog', $constraint->fields);\n\
+    # $this->assertInstanceOf(Optional::class, $constraint->fields['catalog']);\n\
+    # \n# $this->assertTrue($constraint->allowExtraFields);\n# $this->assertSame('foo\
+    \ bar baz', $constraint->extraFieldsMessage);\n# }\n# \n# public function testEmptyFields()\n\
+    # {\n# $constraint = new Collection([], [], null, true, null, 'foo bar baz');\n\
+    # \n# $this->assertTrue($constraint->allowExtraFields);\n# $this->assertSame('foo\
+    \ bar baz', $constraint->extraFieldsMessage);\n# }\n# \n# public function testEmptyFieldsInOptions()\n\
+    # {\n# $constraint = new Collection([\n# 'fields' => [],\n# 'allowExtraFields'\
+    \ => true,\n# 'extraFieldsMessage' => 'foo bar baz',\n# ]);\n# \n# $this->assertSame([],\
+    \ $constraint->fields);\n# $this->assertTrue($constraint->allowExtraFields);\n\
+    # $this->assertSame('foo bar baz', $constraint->extraFieldsMessage);\n# }\n# \n\
+    # /**\n# * @testWith [[]]\n# *           [null]"
+- name: testEmptyConstraintListForFieldInOptions
+  visibility: public
+  parameters:
+  - name: fieldConstraint
+  comment: '# * @testWith [[]]
+
+    # *           [null]'
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\Constraints\Collection
+- Symfony\Component\Validator\Constraints\Email
+- Symfony\Component\Validator\Constraints\Optional
+- Symfony\Component\Validator\Constraints\Required
+- Symfony\Component\Validator\Constraints\Valid
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- Symfony\Component\Validator\Exception\InvalidOptionsException
+interfaces: []

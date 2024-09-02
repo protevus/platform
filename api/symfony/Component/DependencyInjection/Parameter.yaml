@@ -1,0 +1,20 @@
+name: Parameter
+class_comment: '# * Parameter represents a parameter reference.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: id
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

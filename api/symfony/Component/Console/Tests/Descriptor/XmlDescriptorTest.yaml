@@ -1,0 +1,19 @@
+name: XmlDescriptorTest
+class_comment: null
+dependencies:
+- name: XmlDescriptor
+  type: class
+  source: Symfony\Component\Console\Descriptor\XmlDescriptor
+properties: []
+methods:
+- name: getDescriptor
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getFormat
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Console\Descriptor\XmlDescriptor
+interfaces: []

@@ -1,0 +1,31 @@
+name: EntryPointStub
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: AuthenticationException
+  type: class
+  source: Symfony\Component\Security\Core\Exception\AuthenticationException
+- name: AuthenticationEntryPointInterface
+  type: class
+  source: Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface
+properties: []
+methods:
+- name: start
+  visibility: public
+  parameters:
+  - name: request
+  - name: authException
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\Security\Core\Exception\AuthenticationException
+- Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface
+interfaces:
+- AuthenticationEntryPointInterface

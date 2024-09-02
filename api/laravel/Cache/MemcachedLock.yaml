@@ -1,0 +1,58 @@
+name: MemcachedLock
+class_comment: null
+dependencies: []
+properties:
+- name: memcached
+  visibility: protected
+  comment: '# * The Memcached instance.
+
+    # *
+
+    # * @var \Memcached'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: memcached
+  - name: name
+  - name: seconds
+  - name: owner
+    default: 'null'
+  comment: "# * The Memcached instance.\n# *\n# * @var \\Memcached\n# */\n# protected\
+    \ $memcached;\n# \n# /**\n# * Create a new lock instance.\n# *\n# * @param  \\\
+    Memcached  $memcached\n# * @param  string  $name\n# * @param  int  $seconds\n\
+    # * @param  string|null  $owner\n# * @return void"
+- name: acquire
+  visibility: public
+  parameters: []
+  comment: '# * Attempt to acquire the lock.
+
+    # *
+
+    # * @return bool'
+- name: release
+  visibility: public
+  parameters: []
+  comment: '# * Release the lock.
+
+    # *
+
+    # * @return bool'
+- name: forceRelease
+  visibility: public
+  parameters: []
+  comment: '# * Releases this lock in disregard of ownership.
+
+    # *
+
+    # * @return void'
+- name: getCurrentOwner
+  visibility: protected
+  parameters: []
+  comment: '# * Returns the owner value written into the driver for this lock.
+
+    # *
+
+    # * @return mixed'
+traits: []
+interfaces: []

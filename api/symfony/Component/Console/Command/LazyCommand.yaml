@@ -1,0 +1,152 @@
+name: LazyCommand
+class_comment: null
+dependencies:
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+- name: CompletionInput
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionInput
+- name: CompletionSuggestions
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionSuggestions
+- name: Suggestion
+  type: class
+  source: Symfony\Component\Console\Completion\Suggestion
+- name: HelperInterface
+  type: class
+  source: Symfony\Component\Console\Helper\HelperInterface
+- name: HelperSet
+  type: class
+  source: Symfony\Component\Console\Helper\HelperSet
+- name: InputDefinition
+  type: class
+  source: Symfony\Component\Console\Input\InputDefinition
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+properties: []
+methods:
+- name: mergeApplicationDefinition
+  visibility: public
+  parameters:
+  - name: mergeArgs
+    default: 'true'
+  comment: "# * @author Nicolas Grekas <p@tchwork.com>\n# */\n# final class LazyCommand\
+    \ extends Command\n# {\n# private \\Closure|Command $command;\n# \n# public function\
+    \ __construct(\n# string $name,\n# array $aliases,\n# string $description,\n#\
+    \ bool $isHidden,\n# \\Closure $commandFactory,\n# private ?bool $isEnabled =\
+    \ true,\n# ) {\n# $this->setName($name)\n# ->setAliases($aliases)\n# ->setHidden($isHidden)\n\
+    # ->setDescription($description);\n# \n# $this->command = $commandFactory;\n#\
+    \ }\n# \n# public function ignoreValidationErrors(): void\n# {\n# $this->getCommand()->ignoreValidationErrors();\n\
+    # }\n# \n# public function setApplication(?Application $application): void\n#\
+    \ {\n# if ($this->command instanceof parent) {\n# $this->command->setApplication($application);\n\
+    # }\n# \n# parent::setApplication($application);\n# }\n# \n# public function setHelperSet(HelperSet\
+    \ $helperSet): void\n# {\n# if ($this->command instanceof parent) {\n# $this->command->setHelperSet($helperSet);\n\
+    # }\n# \n# parent::setHelperSet($helperSet);\n# }\n# \n# public function isEnabled():\
+    \ bool\n# {\n# return $this->isEnabled ?? $this->getCommand()->isEnabled();\n\
+    # }\n# \n# public function run(InputInterface $input, OutputInterface $output):\
+    \ int\n# {\n# return $this->getCommand()->run($input, $output);\n# }\n# \n# public\
+    \ function complete(CompletionInput $input, CompletionSuggestions $suggestions):\
+    \ void\n# {\n# $this->getCommand()->complete($input, $suggestions);\n# }\n# \n\
+    # public function setCode(callable $code): static\n# {\n# $this->getCommand()->setCode($code);\n\
+    # \n# return $this;\n# }\n# \n# /**\n# * @internal"
+- name: setDefinition
+  visibility: public
+  parameters:
+  - name: definition
+  comment: null
+- name: getDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNativeDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: addArgument
+  visibility: public
+  parameters:
+  - name: name
+  - name: mode
+    default: 'null'
+  - name: description
+    default: ''''''
+  - name: default
+    default: 'null'
+  - name: suggestedValues
+    default: '[]'
+  comment: '# * @param array|\Closure(CompletionInput,CompletionSuggestions):list<string|Suggestion>
+    $suggestedValues The values used for input completion'
+- name: addOption
+  visibility: public
+  parameters:
+  - name: name
+  - name: shortcut
+    default: 'null'
+  - name: mode
+    default: 'null'
+  - name: description
+    default: ''''''
+  - name: default
+    default: 'null'
+  - name: suggestedValues
+    default: '[]'
+  comment: '# * @param array|\Closure(CompletionInput,CompletionSuggestions):list<string|Suggestion>
+    $suggestedValues The values used for input completion'
+- name: setProcessTitle
+  visibility: public
+  parameters:
+  - name: title
+  comment: null
+- name: setHelp
+  visibility: public
+  parameters:
+  - name: help
+  comment: null
+- name: getHelp
+  visibility: public
+  parameters: []
+  comment: null
+- name: getProcessedHelp
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSynopsis
+  visibility: public
+  parameters:
+  - name: short
+    default: 'false'
+  comment: null
+- name: addUsage
+  visibility: public
+  parameters:
+  - name: usage
+  comment: null
+- name: getUsages
+  visibility: public
+  parameters: []
+  comment: null
+- name: getHelper
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: getCommand
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Console\Application
+- Symfony\Component\Console\Completion\CompletionInput
+- Symfony\Component\Console\Completion\CompletionSuggestions
+- Symfony\Component\Console\Completion\Suggestion
+- Symfony\Component\Console\Helper\HelperInterface
+- Symfony\Component\Console\Helper\HelperSet
+- Symfony\Component\Console\Input\InputDefinition
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Output\OutputInterface
+interfaces: []

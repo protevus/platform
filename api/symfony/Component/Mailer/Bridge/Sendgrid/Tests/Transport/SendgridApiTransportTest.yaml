@@ -1,0 +1,89 @@
+name: SendgridApiTransportTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: SendgridApiTransport
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Sendgrid\Transport\SendgridApiTransport
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: MetadataHeader
+  type: class
+  source: Symfony\Component\Mailer\Header\MetadataHeader
+- name: TagHeader
+  type: class
+  source: Symfony\Component\Mailer\Header\TagHeader
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+- name: DataPart
+  type: class
+  source: Symfony\Component\Mime\Part\DataPart
+- name: HttpClientInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\HttpClientInterface
+- name: ResponseInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\ResponseInterface
+properties: []
+methods:
+- name: testToString
+  visibility: public
+  parameters:
+  - name: transport
+  - name: expected
+  comment: '# * @dataProvider getTransportData'
+- name: getTransportData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSend
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLineBreaksInEncodedAttachment
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCustomHeader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReplyTo
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEnvelopeSenderAndRecipients
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTagAndMetadataHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInlineWithCustomContentId
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInlineWithoutCustomContentId
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mailer\Bridge\Sendgrid\Transport\SendgridApiTransport
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mailer\Header\MetadataHeader
+- Symfony\Component\Mailer\Header\TagHeader
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Email
+- Symfony\Component\Mime\Part\DataPart
+- Symfony\Contracts\HttpClient\HttpClientInterface
+- Symfony\Contracts\HttpClient\ResponseInterface
+interfaces: []

@@ -1,0 +1,33 @@
+name: PublicAssetsFilesystemInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: write
+  visibility: public
+  parameters:
+  - name: path
+  - name: contents
+  comment: '# * Writes asset files to their public location.
+
+    # */
+
+    # interface PublicAssetsFilesystemInterface
+
+    # {
+
+    # /**
+
+    # * Write the contents of a file to the public location.'
+- name: copy
+  visibility: public
+  parameters:
+  - name: originPath
+  - name: path
+  comment: '# * Copy a local file to the public location.'
+- name: getDestinationPath
+  visibility: public
+  parameters: []
+  comment: '# * A string representation of the public directory, used for feedback.'
+traits: []
+interfaces: []

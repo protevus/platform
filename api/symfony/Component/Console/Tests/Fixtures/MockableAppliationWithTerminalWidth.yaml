@@ -1,0 +1,15 @@
+name: MockableAppliationWithTerminalWidth
+class_comment: null
+dependencies:
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+properties: []
+methods:
+- name: getTerminalWidth
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Console\Application
+interfaces: []

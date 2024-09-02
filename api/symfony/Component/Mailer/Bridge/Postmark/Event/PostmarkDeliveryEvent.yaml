@@ -1,0 +1,34 @@
+name: PostmarkDeliveryEvent
+class_comment: null
+dependencies:
+- name: Headers
+  type: class
+  source: Symfony\Component\Mime\Header\Headers
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: message
+  - name: errorCode
+  - name: headers
+  comment: null
+- name: getErrorCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: getHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: getMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: getMessageId
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Mime\Header\Headers
+interfaces: []

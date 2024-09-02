@@ -1,0 +1,89 @@
+name: AnonymousEvent
+class_comment: null
+dependencies:
+- name: ShouldBroadcast
+  type: class
+  source: Illuminate\Contracts\Broadcasting\ShouldBroadcast
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: Dispatchable
+  type: class
+  source: Illuminate\Foundation\Events\Dispatchable
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: channels
+  comment: "# * The connection the event should be broadcast on.\n# */\n# protected\
+    \ ?string $connection = null;\n# \n# /**\n# * The name the event should be broadcast\
+    \ as.\n# */\n# protected ?string $name = null;\n# \n# /**\n# * The payload the\
+    \ event should be broadcast with.\n# */\n# protected array $payload = [];\n# \n\
+    # /**\n# * Should the broadcast include the current user.\n# */\n# protected bool\
+    \ $includeCurrentUser = true;\n# \n# /**\n# * Indicates if the event should be\
+    \ broadcast synchronously.\n# */\n# protected bool $shouldBroadcastNow = false;\n\
+    # \n# /**\n# * Create a new anonymous broadcastable event instance.\n# *\n# *\
+    \ @return void"
+- name: via
+  visibility: public
+  parameters:
+  - name: connection
+  comment: '# * Set the connection the event should be broadcast on.'
+- name: as
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Set the name the event should be broadcast as.'
+- name: with
+  visibility: public
+  parameters:
+  - name: payload
+  comment: '# * Set the payload the event should be broadcast with.'
+- name: toOthers
+  visibility: public
+  parameters: []
+  comment: '# * Broadcast the event to everyone except the current user.'
+- name: sendNow
+  visibility: public
+  parameters: []
+  comment: '# * Broadcast the event.'
+- name: send
+  visibility: public
+  parameters: []
+  comment: '# * Broadcast the event.'
+- name: broadcastAs
+  visibility: public
+  parameters: []
+  comment: '# * Get the name the event should broadcast as.'
+- name: broadcastWith
+  visibility: public
+  parameters: []
+  comment: '# * Get the payload the event should broadcast with.
+
+    # *
+
+    # * @return array<string, mixed>'
+- name: broadcastOn
+  visibility: public
+  parameters: []
+  comment: '# * Get the channels the event should broadcast on.
+
+    # *
+
+    # * @return \Illuminate\Broadcasting\Channel|\Illuminate\Broadcasting\Channel[]|string[]|string'
+- name: shouldBroadcastNow
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the event should be broadcast synchronously.'
+traits:
+- Illuminate\Contracts\Broadcasting\ShouldBroadcast
+- Illuminate\Contracts\Support\Arrayable
+- Illuminate\Foundation\Events\Dispatchable
+- Illuminate\Support\Arr
+- Dispatchable
+interfaces:
+- ShouldBroadcast

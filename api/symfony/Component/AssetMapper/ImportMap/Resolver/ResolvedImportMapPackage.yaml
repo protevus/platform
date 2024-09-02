@@ -1,0 +1,22 @@
+name: ResolvedImportMapPackage
+class_comment: null
+dependencies:
+- name: ImportMapType
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapType
+- name: PackageRequireOptions
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\PackageRequireOptions
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: requireOptions
+  - name: version
+  - name: type
+  comment: null
+traits:
+- Symfony\Component\AssetMapper\ImportMap\ImportMapType
+- Symfony\Component\AssetMapper\ImportMap\PackageRequireOptions
+interfaces: []

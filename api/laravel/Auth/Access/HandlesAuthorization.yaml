@@ -1,0 +1,74 @@
+name: HandlesAuthorization
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: allow
+  visibility: protected
+  parameters:
+  - name: message
+    default: 'null'
+  - name: code
+    default: 'null'
+  comment: '# * Create a new access response.
+
+    # *
+
+    # * @param  string|null  $message
+
+    # * @param  mixed  $code
+
+    # * @return \Illuminate\Auth\Access\Response'
+- name: deny
+  visibility: protected
+  parameters:
+  - name: message
+    default: 'null'
+  - name: code
+    default: 'null'
+  comment: '# * Throws an unauthorized exception.
+
+    # *
+
+    # * @param  string|null  $message
+
+    # * @param  mixed|null  $code
+
+    # * @return \Illuminate\Auth\Access\Response'
+- name: denyWithStatus
+  visibility: public
+  parameters:
+  - name: status
+  - name: message
+    default: 'null'
+  - name: code
+    default: 'null'
+  comment: '# * Deny with a HTTP status code.
+
+    # *
+
+    # * @param  int  $status
+
+    # * @param  string|null  $message
+
+    # * @param  int|null  $code
+
+    # * @return \Illuminate\Auth\Access\Response'
+- name: denyAsNotFound
+  visibility: public
+  parameters:
+  - name: message
+    default: 'null'
+  - name: code
+    default: 'null'
+  comment: '# * Deny with a 404 HTTP status code.
+
+    # *
+
+    # * @param  string|null  $message
+
+    # * @param  int|null  $code
+
+    # * @return \Illuminate\Auth\Access\Response'
+traits: []
+interfaces: []

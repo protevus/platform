@@ -1,0 +1,77 @@
+name: RegisterControllerArgumentLocatorsPass
+class_comment: '# * Creates the service-locators required by ServiceValueResolver.
+
+  # *
+
+  # * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: Autowire
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\Autowire
+- name: AutowireCallable
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\AutowireCallable
+- name: Target
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\Target
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: CompilerPassInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- name: ServiceLocatorTagPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: TypedReference
+  type: class
+  source: Symfony\Component\DependencyInjection\TypedReference
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: SessionInterface
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\SessionInterface
+- name: ProxyHelper
+  type: class
+  source: Symfony\Component\VarExporter\ProxyHelper
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Attribute\Autowire
+- Symfony\Component\DependencyInjection\Attribute\AutowireCallable
+- Symfony\Component\DependencyInjection\Attribute\Target
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\DependencyInjection\TypedReference
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpFoundation\Session\SessionInterface
+- Symfony\Component\VarExporter\ProxyHelper
+interfaces:
+- CompilerPassInterface

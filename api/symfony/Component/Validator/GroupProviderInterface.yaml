@@ -1,0 +1,36 @@
+name: GroupProviderInterface
+class_comment: null
+dependencies:
+- name: GroupSequence
+  type: class
+  source: Symfony\Component\Validator\Constraints\GroupSequence
+properties: []
+methods:
+- name: getGroups
+  visibility: public
+  parameters:
+  - name: object
+  comment: '# * Defines the interface for a validation group provider.
+
+    # *
+
+    # * @author Yonel Ceruto <yonelceruto@gmail.com>
+
+    # */
+
+    # interface GroupProviderInterface
+
+    # {
+
+    # /**
+
+    # * Returns which validation groups should be used for a certain state
+
+    # * of the object.
+
+    # *
+
+    # * @return string[]|string[][]|GroupSequence'
+traits:
+- Symfony\Component\Validator\Constraints\GroupSequence
+interfaces: []

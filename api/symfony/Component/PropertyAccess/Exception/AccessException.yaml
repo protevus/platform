@@ -1,0 +1,8 @@
+name: AccessException
+class_comment: "# * Thrown when a property path is not available.\n# *\n# * @author\
+  \ St\xE9phane Escandell <stephane.escandell@gmail.com>"
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces: []

@@ -1,0 +1,36 @@
+name: ResponseEvent
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: kernel
+  - name: request
+  - name: requestType
+  - name: response
+  comment: null
+- name: getResponse
+  visibility: public
+  parameters: []
+  comment: null
+- name: setResponse
+  visibility: public
+  parameters:
+  - name: response
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\HttpKernelInterface
+interfaces: []

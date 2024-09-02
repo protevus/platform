@@ -1,0 +1,48 @@
+name: RedisTransportFactoryTest
+class_comment: '# * @requires extension redis'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Connection
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Redis\Transport\Connection
+- name: RedisTransport
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Redis\Transport\RedisTransport
+- name: RedisTransportFactory
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Redis\Transport\RedisTransportFactory
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+properties: []
+methods:
+- name: testCreateTransport
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: options
+    default: '[]'
+  comment: "# * @requires extension redis\n# */\n# class RedisTransportFactoryTest\
+    \ extends TestCase\n# {\n# public function testSupportsOnlyRedisTransports()\n\
+    # {\n# $factory = new RedisTransportFactory();\n# \n# $this->assertTrue($factory->supports('redis://localhost',\
+    \ []));\n# $this->assertTrue($factory->supports('rediss://localhost', []));\n\
+    # $this->assertTrue($factory->supports('redis:?host[host1:5000]&host[host2:5000]&host[host3:5000]&sentinel_master=test&dbindex=0',\
+    \ []));\n# $this->assertFalse($factory->supports('sqs://localhost', []));\n# $this->assertFalse($factory->supports('invalid-dsn',\
+    \ []));\n# }\n# \n# /**\n# * @group integration\n# *\n# * @dataProvider createTransportProvider"
+- name: createTransportProvider
+  visibility: public
+  parameters: []
+  comment: '# * @return iterable<array{0: string, 1: array}>'
+- name: skipIfRedisUnavailable
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Bridge\Redis\Transport\Connection
+- Symfony\Component\Messenger\Bridge\Redis\Transport\RedisTransport
+- Symfony\Component\Messenger\Bridge\Redis\Transport\RedisTransportFactory
+- Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+interfaces: []

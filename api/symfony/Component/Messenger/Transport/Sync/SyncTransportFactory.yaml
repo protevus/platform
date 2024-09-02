@@ -1,0 +1,47 @@
+name: SyncTransportFactory
+class_comment: '# * @author Ryan Weaver <ryan@symfonycasts.com>
+
+  # *
+
+  # * @implements TransportFactoryInterface<SyncTransport>'
+dependencies:
+- name: MessageBusInterface
+  type: class
+  source: Symfony\Component\Messenger\MessageBusInterface
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+- name: TransportFactoryInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\TransportFactoryInterface
+- name: TransportInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\TransportInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: messageBus
+  comment: null
+- name: createTransport
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: options
+  - name: serializer
+  comment: null
+- name: supports
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: options
+  comment: null
+traits:
+- Symfony\Component\Messenger\MessageBusInterface
+- Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+- Symfony\Component\Messenger\Transport\TransportFactoryInterface
+- Symfony\Component\Messenger\Transport\TransportInterface
+interfaces:
+- TransportFactoryInterface
+- TransportFactoryInterface

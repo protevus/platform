@@ -1,0 +1,35 @@
+name: StateMachineGraphvizDumperTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: StateMachineGraphvizDumper
+  type: class
+  source: Symfony\Component\Workflow\Dumper\StateMachineGraphvizDumper
+- name: Marking
+  type: class
+  source: Symfony\Component\Workflow\Marking
+- name: WorkflowBuilderTrait
+  type: class
+  source: Symfony\Component\Workflow\Tests\WorkflowBuilderTrait
+- name: WorkflowBuilderTrait
+  type: class
+  source: WorkflowBuilderTrait
+properties: []
+methods:
+- name: testDumpWithoutMarking
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpWithMarking
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Workflow\Dumper\StateMachineGraphvizDumper
+- Symfony\Component\Workflow\Marking
+- Symfony\Component\Workflow\Tests\WorkflowBuilderTrait
+- WorkflowBuilderTrait
+interfaces: []

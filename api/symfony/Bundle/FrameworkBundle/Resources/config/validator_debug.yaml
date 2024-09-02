@@ -1,0 +1,15 @@
+name: validator_debug
+class_comment: null
+dependencies:
+- name: ValidatorDataCollector
+  type: class
+  source: Symfony\Component\Validator\DataCollector\ValidatorDataCollector
+- name: TraceableValidator
+  type: class
+  source: Symfony\Component\Validator\Validator\TraceableValidator
+properties: []
+methods: []
+traits:
+- Symfony\Component\Validator\DataCollector\ValidatorDataCollector
+- Symfony\Component\Validator\Validator\TraceableValidator
+interfaces: []

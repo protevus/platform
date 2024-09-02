@@ -1,0 +1,373 @@
+name: MessageBag
+class_comment: null
+dependencies:
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: Jsonable
+  type: class
+  source: Illuminate\Contracts\Support\Jsonable
+- name: MessageBagContract
+  type: class
+  source: Illuminate\Contracts\Support\MessageBag
+- name: MessageProvider
+  type: class
+  source: Illuminate\Contracts\Support\MessageProvider
+- name: JsonSerializable
+  type: class
+  source: JsonSerializable
+- name: Stringable
+  type: class
+  source: Stringable
+properties:
+- name: messages
+  visibility: protected
+  comment: '# * All of the registered messages.
+
+    # *
+
+    # * @var array'
+- name: format
+  visibility: protected
+  comment: '# * Default format for message output.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: messages
+    default: '[]'
+  comment: "# * All of the registered messages.\n# *\n# * @var array\n# */\n# protected\
+    \ $messages = [];\n# \n# /**\n# * Default format for message output.\n# *\n# *\
+    \ @var string\n# */\n# protected $format = ':message';\n# \n# /**\n# * Create\
+    \ a new message bag instance.\n# *\n# * @param  array  $messages\n# * @return\
+    \ void"
+- name: keys
+  visibility: public
+  parameters: []
+  comment: '# * Get the keys present in the message bag.
+
+    # *
+
+    # * @return array'
+- name: add
+  visibility: public
+  parameters:
+  - name: key
+  - name: message
+  comment: '# * Add a message to the message bag.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  string  $message
+
+    # * @return $this'
+- name: addIf
+  visibility: public
+  parameters:
+  - name: boolean
+  - name: key
+  - name: message
+  comment: '# * Add a message to the message bag if the given conditional is "true".
+
+    # *
+
+    # * @param  bool  $boolean
+
+    # * @param  string  $key
+
+    # * @param  string  $message
+
+    # * @return $this'
+- name: isUnique
+  visibility: protected
+  parameters:
+  - name: key
+  - name: message
+  comment: '# * Determine if a key and message combination already exists.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  string  $message
+
+    # * @return bool'
+- name: merge
+  visibility: public
+  parameters:
+  - name: messages
+  comment: '# * Merge a new array of messages into the message bag.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Support\MessageProvider|array  $messages
+
+    # * @return $this'
+- name: has
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Determine if messages exist for all of the given keys.
+
+    # *
+
+    # * @param  array|string|null  $key
+
+    # * @return bool'
+- name: hasAny
+  visibility: public
+  parameters:
+  - name: keys
+    default: '[]'
+  comment: '# * Determine if messages exist for any of the given keys.
+
+    # *
+
+    # * @param  array|string|null  $keys
+
+    # * @return bool'
+- name: missing
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Determine if messages don''t exist for all of the given keys.
+
+    # *
+
+    # * @param  array|string|null  $key
+
+    # * @return bool'
+- name: first
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  - name: format
+    default: 'null'
+  comment: '# * Get the first message from the message bag for a given key.
+
+    # *
+
+    # * @param  string|null  $key
+
+    # * @param  string|null  $format
+
+    # * @return string'
+- name: get
+  visibility: public
+  parameters:
+  - name: key
+  - name: format
+    default: 'null'
+  comment: '# * Get all of the messages from the message bag for a given key.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  string|null  $format
+
+    # * @return array'
+- name: getMessagesForWildcardKey
+  visibility: protected
+  parameters:
+  - name: key
+  - name: format
+  comment: '# * Get the messages for a wildcard key.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  string|null  $format
+
+    # * @return array'
+- name: all
+  visibility: public
+  parameters:
+  - name: format
+    default: 'null'
+  comment: '# * Get all of the messages for every key in the message bag.
+
+    # *
+
+    # * @param  string|null  $format
+
+    # * @return array'
+- name: unique
+  visibility: public
+  parameters:
+  - name: format
+    default: 'null'
+  comment: '# * Get all of the unique messages for every key in the message bag.
+
+    # *
+
+    # * @param  string|null  $format
+
+    # * @return array'
+- name: forget
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Remove a message from the message bag.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return $this'
+- name: transform
+  visibility: protected
+  parameters:
+  - name: messages
+  - name: format
+  - name: messageKey
+  comment: '# * Format an array of messages.
+
+    # *
+
+    # * @param  array  $messages
+
+    # * @param  string  $format
+
+    # * @param  string  $messageKey
+
+    # * @return array'
+- name: checkFormat
+  visibility: protected
+  parameters:
+  - name: format
+  comment: '# * Get the appropriate format based on the given format.
+
+    # *
+
+    # * @param  string  $format
+
+    # * @return string'
+- name: messages
+  visibility: public
+  parameters: []
+  comment: '# * Get the raw messages in the message bag.
+
+    # *
+
+    # * @return array'
+- name: getMessages
+  visibility: public
+  parameters: []
+  comment: '# * Get the raw messages in the message bag.
+
+    # *
+
+    # * @return array'
+- name: getMessageBag
+  visibility: public
+  parameters: []
+  comment: '# * Get the messages for the instance.
+
+    # *
+
+    # * @return \Illuminate\Support\MessageBag'
+- name: getFormat
+  visibility: public
+  parameters: []
+  comment: '# * Get the default message format.
+
+    # *
+
+    # * @return string'
+- name: setFormat
+  visibility: public
+  parameters:
+  - name: format
+    default: ''':message'''
+  comment: '# * Set the default message format.
+
+    # *
+
+    # * @param  string  $format
+
+    # * @return \Illuminate\Support\MessageBag'
+- name: isEmpty
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the message bag has any messages.
+
+    # *
+
+    # * @return bool'
+- name: isNotEmpty
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the message bag has any messages.
+
+    # *
+
+    # * @return bool'
+- name: any
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the message bag has any messages.
+
+    # *
+
+    # * @return bool'
+- name: count
+  visibility: public
+  parameters: []
+  comment: '# * Get the number of messages in the message bag.
+
+    # *
+
+    # * @return int'
+- name: toArray
+  visibility: public
+  parameters: []
+  comment: '# * Get the instance as an array.
+
+    # *
+
+    # * @return array'
+- name: jsonSerialize
+  visibility: public
+  parameters: []
+  comment: '# * Convert the object into something JSON serializable.
+
+    # *
+
+    # * @return array'
+- name: toJson
+  visibility: public
+  parameters:
+  - name: options
+    default: '0'
+  comment: '# * Convert the object to its JSON representation.
+
+    # *
+
+    # * @param  int  $options
+
+    # * @return string'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Convert the message bag to its string representation.
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Contracts\Support\Arrayable
+- Illuminate\Contracts\Support\Jsonable
+- Illuminate\Contracts\Support\MessageProvider
+- JsonSerializable
+- Stringable
+interfaces:
+- Jsonable

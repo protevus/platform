@@ -1,0 +1,59 @@
+name: UlidToStringTransformerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+- name: UlidToStringTransformer
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataTransformer\UlidToStringTransformer
+- name: Ulid
+  type: class
+  source: Symfony\Component\Uid\Ulid
+properties: []
+methods:
+- name: provideValidUlid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransform
+  visibility: public
+  parameters:
+  - name: output
+  - name: input
+  comment: '# * @dataProvider provideValidUlid'
+- name: testTransformEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransformExpectsUlid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransform
+  visibility: public
+  parameters:
+  - name: input
+  - name: output
+  comment: '# * @dataProvider provideValidUlid'
+- name: testReverseTransformEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransformExpectsString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransformExpectsValidUlidString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\Exception\TransformationFailedException
+- Symfony\Component\Form\Extension\Core\DataTransformer\UlidToStringTransformer
+- Symfony\Component\Uid\Ulid
+interfaces: []

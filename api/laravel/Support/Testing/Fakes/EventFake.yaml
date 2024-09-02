@@ -1,0 +1,380 @@
+name: EventFake
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: ShouldDispatchAfterCommit
+  type: class
+  source: Illuminate\Contracts\Events\ShouldDispatchAfterCommit
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: ForwardsCalls
+  type: class
+  source: Illuminate\Support\Traits\ForwardsCalls
+- name: ReflectsClosures
+  type: class
+  source: Illuminate\Support\Traits\ReflectsClosures
+- name: PHPUnit
+  type: class
+  source: PHPUnit\Framework\Assert
+- name: ReflectionFunction
+  type: class
+  source: ReflectionFunction
+properties:
+- name: dispatcher
+  visibility: public
+  comment: '# * The original event dispatcher.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Events\Dispatcher'
+- name: eventsToFake
+  visibility: protected
+  comment: '# * The event types that should be intercepted instead of dispatched.
+
+    # *
+
+    # * @var array'
+- name: eventsToDispatch
+  visibility: protected
+  comment: '# * The event types that should be dispatched instead of intercepted.
+
+    # *
+
+    # * @var array'
+- name: events
+  visibility: protected
+  comment: '# * All of the events that have been intercepted keyed by type.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: dispatcher
+  - name: eventsToFake
+    default: '[]'
+  comment: "# * The original event dispatcher.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Events\\Dispatcher\n# */\n# public $dispatcher;\n# \n# /**\n# * The event types\
+    \ that should be intercepted instead of dispatched.\n# *\n# * @var array\n# */\n\
+    # protected $eventsToFake = [];\n# \n# /**\n# * The event types that should be\
+    \ dispatched instead of intercepted.\n# *\n# * @var array\n# */\n# protected $eventsToDispatch\
+    \ = [];\n# \n# /**\n# * All of the events that have been intercepted keyed by\
+    \ type.\n# *\n# * @var array\n# */\n# protected $events = [];\n# \n# /**\n# *\
+    \ Create a new event fake instance.\n# *\n# * @param  \\Illuminate\\Contracts\\\
+    Events\\Dispatcher  $dispatcher\n# * @param  array|string  $eventsToFake\n# *\
+    \ @return void"
+- name: except
+  visibility: public
+  parameters:
+  - name: eventsToDispatch
+  comment: '# * Specify the events that should be dispatched instead of faked.
+
+    # *
+
+    # * @param  array|string  $eventsToDispatch
+
+    # * @return $this'
+- name: assertListening
+  visibility: public
+  parameters:
+  - name: expectedEvent
+  - name: expectedListener
+  comment: '# * Assert if an event has a listener attached to it.
+
+    # *
+
+    # * @param  string  $expectedEvent
+
+    # * @param  string|array  $expectedListener
+
+    # * @return void'
+- name: assertDispatched
+  visibility: public
+  parameters:
+  - name: event
+  - name: callback
+    default: 'null'
+  comment: '# * Assert if an event was dispatched based on a truth-test callback.
+
+    # *
+
+    # * @param  string|\Closure  $event
+
+    # * @param  callable|int|null  $callback
+
+    # * @return void'
+- name: assertDispatchedTimes
+  visibility: public
+  parameters:
+  - name: event
+  - name: times
+    default: '1'
+  comment: '# * Assert if an event was dispatched a number of times.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @param  int  $times
+
+    # * @return void'
+- name: assertNotDispatched
+  visibility: public
+  parameters:
+  - name: event
+  - name: callback
+    default: 'null'
+  comment: '# * Determine if an event was dispatched based on a truth-test callback.
+
+    # *
+
+    # * @param  string|\Closure  $event
+
+    # * @param  callable|null  $callback
+
+    # * @return void'
+- name: assertNothingDispatched
+  visibility: public
+  parameters: []
+  comment: '# * Assert that no events were dispatched.
+
+    # *
+
+    # * @return void'
+- name: dispatched
+  visibility: public
+  parameters:
+  - name: event
+  - name: callback
+    default: 'null'
+  comment: '# * Get all of the events matching a truth-test callback.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @param  callable|null  $callback
+
+    # * @return \Illuminate\Support\Collection'
+- name: hasDispatched
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Determine if the given event has been dispatched.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @return bool'
+- name: listen
+  visibility: public
+  parameters:
+  - name: events
+  - name: listener
+    default: 'null'
+  comment: '# * Register an event listener with the dispatcher.
+
+    # *
+
+    # * @param  \Closure|string|array  $events
+
+    # * @param  mixed  $listener
+
+    # * @return void'
+- name: hasListeners
+  visibility: public
+  parameters:
+  - name: eventName
+  comment: '# * Determine if a given event has listeners.
+
+    # *
+
+    # * @param  string  $eventName
+
+    # * @return bool'
+- name: push
+  visibility: public
+  parameters:
+  - name: event
+  - name: payload
+    default: '[]'
+  comment: '# * Register an event and payload to be dispatched later.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @param  array  $payload
+
+    # * @return void'
+- name: subscribe
+  visibility: public
+  parameters:
+  - name: subscriber
+  comment: '# * Register an event subscriber with the dispatcher.
+
+    # *
+
+    # * @param  object|string  $subscriber
+
+    # * @return void'
+- name: flush
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Flush a set of pushed events.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @return void'
+- name: dispatch
+  visibility: public
+  parameters:
+  - name: event
+  - name: payload
+    default: '[]'
+  - name: halt
+    default: 'false'
+  comment: '# * Fire an event and call the listeners.
+
+    # *
+
+    # * @param  string|object  $event
+
+    # * @param  mixed  $payload
+
+    # * @param  bool  $halt
+
+    # * @return array|null'
+- name: shouldFakeEvent
+  visibility: protected
+  parameters:
+  - name: eventName
+  - name: payload
+  comment: '# * Determine if an event should be faked or actually dispatched.
+
+    # *
+
+    # * @param  string  $eventName
+
+    # * @param  mixed  $payload
+
+    # * @return bool'
+- name: fakeEvent
+  visibility: protected
+  parameters:
+  - name: event
+  - name: name
+  - name: arguments
+  comment: '# * Push the event onto the fake events array immediately or after the
+    next database transaction.
+
+    # *
+
+    # * @param  string|object  $event
+
+    # * @param  string  $name
+
+    # * @param  array  $arguments
+
+    # * @return void'
+- name: shouldDispatchEvent
+  visibility: protected
+  parameters:
+  - name: eventName
+  - name: payload
+  comment: '# * Determine whether an event should be dispatched or not.
+
+    # *
+
+    # * @param  string  $eventName
+
+    # * @param  mixed  $payload
+
+    # * @return bool'
+- name: forget
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Remove a set of listeners from the dispatcher.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @return void'
+- name: forgetPushed
+  visibility: public
+  parameters: []
+  comment: '# * Forget all of the queued listeners.
+
+    # *
+
+    # * @return void'
+- name: until
+  visibility: public
+  parameters:
+  - name: event
+  - name: payload
+    default: '[]'
+  comment: '# * Dispatch an event and call the listeners.
+
+    # *
+
+    # * @param  string|object  $event
+
+    # * @param  mixed  $payload
+
+    # * @return mixed'
+- name: dispatchedEvents
+  visibility: public
+  parameters: []
+  comment: '# * Get the events that have been dispatched.
+
+    # *
+
+    # * @return array'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Handle dynamic method calls to the dispatcher.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+traits:
+- Closure
+- Illuminate\Container\Container
+- Illuminate\Contracts\Events\Dispatcher
+- Illuminate\Contracts\Events\ShouldDispatchAfterCommit
+- Illuminate\Support\Arr
+- Illuminate\Support\Str
+- Illuminate\Support\Traits\ForwardsCalls
+- Illuminate\Support\Traits\ReflectsClosures
+- ReflectionFunction
+- ForwardsCalls
+interfaces:
+- Dispatcher

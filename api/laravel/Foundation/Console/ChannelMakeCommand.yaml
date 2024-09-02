@@ -1,0 +1,77 @@
+name: ChannelMakeCommand
+class_comment: null
+dependencies:
+- name: GeneratorCommand
+  type: class
+  source: Illuminate\Console\GeneratorCommand
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+properties:
+- name: name
+  visibility: protected
+  comment: '# * The console command name.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+- name: type
+  visibility: protected
+  comment: '# * The type of class being generated.
+
+    # *
+
+    # * @var string'
+methods:
+- name: buildClass
+  visibility: protected
+  parameters:
+  - name: name
+  comment: "# * The console command name.\n# *\n# * @var string\n# */\n# protected\
+    \ $name = 'make:channel';\n# \n# /**\n# * The console command description.\n#\
+    \ *\n# * @var string\n# */\n# protected $description = 'Create a new channel class';\n\
+    # \n# /**\n# * The type of class being generated.\n# *\n# * @var string\n# */\n\
+    # protected $type = 'Channel';\n# \n# /**\n# * Build the class with the given\
+    \ name.\n# *\n# * @param  string  $name\n# * @return string"
+- name: getStub
+  visibility: protected
+  parameters: []
+  comment: '# * Get the stub file for the generator.
+
+    # *
+
+    # * @return string'
+- name: getDefaultNamespace
+  visibility: protected
+  parameters:
+  - name: rootNamespace
+  comment: '# * Get the default namespace for the class.
+
+    # *
+
+    # * @param  string  $rootNamespace
+
+    # * @return string'
+- name: getOptions
+  visibility: protected
+  parameters: []
+  comment: '# * Get the console command arguments.
+
+    # *
+
+    # * @return array'
+traits:
+- Illuminate\Console\GeneratorCommand
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Input\InputOption
+interfaces: []

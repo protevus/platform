@@ -1,0 +1,39 @@
+name: ExtensionPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AppVariable
+  type: class
+  source: Symfony\Bridge\Twig\AppVariable
+- name: ExtensionPass
+  type: class
+  source: Symfony\Bundle\TwigBundle\DependencyInjection\Compiler\ExtensionPass
+- name: TemplateIterator
+  type: class
+  source: Symfony\Bundle\TwigBundle\TemplateIterator
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: FilesystemLoader
+  type: class
+  source: Twig\Loader\FilesystemLoader
+properties: []
+methods:
+- name: testProcessDoesNotDropExistingFileLoaderMethodCalls
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bridge\Twig\AppVariable
+- Symfony\Bundle\TwigBundle\DependencyInjection\Compiler\ExtensionPass
+- Symfony\Bundle\TwigBundle\TemplateIterator
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Twig\Loader\FilesystemLoader
+interfaces: []

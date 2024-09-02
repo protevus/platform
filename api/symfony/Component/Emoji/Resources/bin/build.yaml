@@ -1,0 +1,70 @@
+name: build
+class_comment: null
+dependencies:
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: Finder
+  type: class
+  source: Symfony\Component\Finder\Finder
+- name: VarExporter
+  type: class
+  source: Symfony\Component\VarExporter\VarExporter
+properties: []
+methods:
+- name: getEmojisCodePoints
+  visibility: public
+  parameters: []
+  comment: null
+- name: buildRules
+  visibility: public
+  parameters:
+  - name: emojisCodePoints
+  comment: null
+- name: buildGitHubMaps
+  visibility: public
+  parameters:
+  - name: emojisCodePoints
+  comment: null
+- name: buildGitlabMaps
+  visibility: public
+  parameters:
+  - name: emojisCodePoints
+  comment: null
+- name: buildSlackMaps
+  visibility: public
+  parameters:
+  - name: emojisCodePoints
+  comment: null
+- name: buildTextRules
+  visibility: public
+  parameters:
+  - name: emojiCodePoints
+  - name: locales
+  comment: null
+- name: buildStripRules
+  visibility: public
+  parameters:
+  - name: emojisCodePoints
+  comment: null
+- name: cleanTarget
+  visibility: public
+  parameters: []
+  comment: null
+- name: saveRules
+  visibility: public
+  parameters:
+  - name: rulesByLocale
+  comment: null
+- name: createRules
+  visibility: public
+  parameters:
+  - name: maps
+  - name: reverse
+    default: 'false'
+  comment: null
+traits:
+- Symfony\Component\Filesystem\Filesystem
+- Symfony\Component\Finder\Finder
+- Symfony\Component\VarExporter\VarExporter
+interfaces: []

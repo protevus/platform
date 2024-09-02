@@ -1,0 +1,48 @@
+name: Guess
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Form\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: getBestGuess
+  visibility: public
+  parameters:
+  - name: guesses
+  comment: "# * Base class for guesses made by TypeGuesserInterface implementation.\n\
+    # *\n# * Each instance contains a confidence value about the correctness of the\
+    \ guess.\n# * Thus an instance with confidence HIGH_CONFIDENCE is more likely\
+    \ to be\n# * correct than an instance with confidence LOW_CONFIDENCE.\n# *\n#\
+    \ * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# abstract class Guess\n\
+    # {\n# /**\n# * Marks an instance with a value that is extremely likely to be\
+    \ correct.\n# */\n# public const VERY_HIGH_CONFIDENCE = 3;\n# \n# /**\n# * Marks\
+    \ an instance with a value that is very likely to be correct.\n# */\n# public\
+    \ const HIGH_CONFIDENCE = 2;\n# \n# /**\n# * Marks an instance with a value that\
+    \ is likely to be correct.\n# */\n# public const MEDIUM_CONFIDENCE = 1;\n# \n\
+    # /**\n# * Marks an instance with a value that may be correct.\n# */\n# public\
+    \ const LOW_CONFIDENCE = 0;\n# \n# /**\n# * The confidence about the correctness\
+    \ of the value.\n# *\n# * One of VERY_HIGH_CONFIDENCE, HIGH_CONFIDENCE, MEDIUM_CONFIDENCE\n\
+    # * and LOW_CONFIDENCE.\n# */\n# private int $confidence;\n# \n# /**\n# * Returns\
+    \ the guess most likely to be correct from a list of guesses.\n# *\n# * If there\
+    \ are multiple guesses with the same, highest confidence, the\n# * returned guess\
+    \ is any of them.\n# *\n# * @param static[] $guesses An array of guesses"
+- name: __construct
+  visibility: public
+  parameters:
+  - name: confidence
+  comment: '# * @throws InvalidArgumentException if the given value of confidence
+    is unknown'
+- name: getConfidence
+  visibility: public
+  parameters: []
+  comment: '# * Returns the confidence that the guessed value is correct.
+
+    # *
+
+    # * @return int One of the constants VERY_HIGH_CONFIDENCE, HIGH_CONFIDENCE,
+
+    # *             MEDIUM_CONFIDENCE and LOW_CONFIDENCE'
+traits:
+- Symfony\Component\Form\Exception\InvalidArgumentException
+interfaces: []

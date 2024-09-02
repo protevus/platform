@@ -1,0 +1,19 @@
+name: Jsonable
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: toJson
+  visibility: public
+  parameters:
+  - name: options
+    default: '0'
+  comment: '# * Convert the object to its JSON representation.
+
+    # *
+
+    # * @param  int  $options
+
+    # * @return string'
+traits: []
+interfaces: []

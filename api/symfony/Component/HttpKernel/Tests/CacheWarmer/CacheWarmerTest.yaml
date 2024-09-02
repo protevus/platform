@@ -1,0 +1,47 @@
+name: CacheWarmerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CacheWarmer
+  type: class
+  source: Symfony\Component\HttpKernel\CacheWarmer\CacheWarmer
+properties: []
+methods:
+- name: setUpBeforeClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: tearDownAfterClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWriteCacheFileCreatesTheFile
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWriteNonWritableCacheFileThrowsARuntimeException
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: file
+  comment: null
+- name: warmUp
+  visibility: public
+  parameters:
+  - name: cacheDir
+  - name: buildDir
+    default: 'null'
+  comment: null
+- name: isOptional
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpKernel\CacheWarmer\CacheWarmer
+interfaces: []

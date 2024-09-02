@@ -1,0 +1,14 @@
+name: File
+class_comment: null
+dependencies:
+- name: SymfonyFile
+  type: class
+  source: Symfony\Component\HttpFoundation\File\File
+- name: FileHelpers
+  type: class
+  source: FileHelpers
+properties: []
+methods: []
+traits:
+- FileHelpers
+interfaces: []

@@ -1,0 +1,21 @@
+name: FiltersControllerMiddleware
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: methodExcludedByOptions
+  visibility: public
+  parameters:
+  - name: method
+  - name: options
+  comment: '# * Determine if the given options exclude a particular method.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $options
+
+    # * @return bool'
+traits: []
+interfaces: []

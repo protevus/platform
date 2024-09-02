@@ -1,0 +1,27 @@
+name: ConsoleSupportServiceProvider
+class_comment: null
+dependencies:
+- name: DeferrableProvider
+  type: class
+  source: Illuminate\Contracts\Support\DeferrableProvider
+- name: MigrationServiceProvider
+  type: class
+  source: Illuminate\Database\MigrationServiceProvider
+- name: AggregateServiceProvider
+  type: class
+  source: Illuminate\Support\AggregateServiceProvider
+properties:
+- name: providers
+  visibility: protected
+  comment: '# * The provider class names.
+
+    # *
+
+    # * @var string[]'
+methods: []
+traits:
+- Illuminate\Contracts\Support\DeferrableProvider
+- Illuminate\Database\MigrationServiceProvider
+- Illuminate\Support\AggregateServiceProvider
+interfaces:
+- DeferrableProvider

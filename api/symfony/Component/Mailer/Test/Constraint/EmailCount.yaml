@@ -1,0 +1,43 @@
+name: EmailCount
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: PHPUnit\Framework\Constraint\Constraint
+- name: MessageEvents
+  type: class
+  source: Symfony\Component\Mailer\Event\MessageEvents
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: expectedValue
+  - name: transport
+    default: 'null'
+  - name: queued
+    default: 'false'
+  comment: null
+- name: toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: matches
+  visibility: protected
+  parameters:
+  - name: events
+  comment: '# * @param MessageEvents $events'
+- name: failureDescription
+  visibility: protected
+  parameters:
+  - name: events
+  comment: '# * @param MessageEvents $events'
+- name: countEmails
+  visibility: private
+  parameters:
+  - name: events
+  comment: null
+traits:
+- PHPUnit\Framework\Constraint\Constraint
+- Symfony\Component\Mailer\Event\MessageEvents
+interfaces: []

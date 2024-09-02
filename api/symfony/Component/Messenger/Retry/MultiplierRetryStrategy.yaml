@@ -1,0 +1,117 @@
+name: MultiplierRetryStrategy
+class_comment: '# * A retry strategy with a constant or exponential retry delay.
+
+  # *
+
+  # * For example, if $delayMilliseconds=10000 & $multiplier=1 (default),
+
+  # * each retry will wait exactly 10 seconds.
+
+  # *
+
+  # * But if $delayMilliseconds=10000 & $multiplier=2:
+
+  # *      * Retry 1: 10 second delay
+
+  # *      * Retry 2: 20 second delay (10000 * 2 = 20000)
+
+  # *      * Retry 3: 40 second delay (20000 * 2 = 40000)
+
+  # *
+
+  # * @author Ryan Weaver <ryan@symfonycasts.com>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Messenger\Exception\InvalidArgumentException
+- name: RedeliveryStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\RedeliveryStamp
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: maxRetries
+    default: '3'
+  - name: delayMilliseconds
+    default: '1000'
+  - name: multiplier
+    default: '1'
+  - name: maxDelayMilliseconds
+    default: '0'
+  - name: jitter
+    default: '0.1'
+  comment: '# * A retry strategy with a constant or exponential retry delay.
+
+    # *
+
+    # * For example, if $delayMilliseconds=10000 & $multiplier=1 (default),
+
+    # * each retry will wait exactly 10 seconds.
+
+    # *
+
+    # * But if $delayMilliseconds=10000 & $multiplier=2:
+
+    # *      * Retry 1: 10 second delay
+
+    # *      * Retry 2: 20 second delay (10000 * 2 = 20000)
+
+    # *      * Retry 3: 40 second delay (20000 * 2 = 40000)
+
+    # *
+
+    # * @author Ryan Weaver <ryan@symfonycasts.com>
+
+    # *
+
+    # * @final
+
+    # */
+
+    # class MultiplierRetryStrategy implements RetryStrategyInterface
+
+    # {
+
+    # /**
+
+    # * @param int   $maxRetries           The maximum number of times to retry
+
+    # * @param int   $delayMilliseconds    Amount of time to delay (or the initial
+    value when multiplier is used)
+
+    # * @param float $multiplier           Multiplier to apply to the delay each time
+    a retry occurs
+
+    # * @param int   $maxDelayMilliseconds Maximum delay to allow (0 means no maximum)
+
+    # * @param float $jitter               Randomness to apply to the delay (between
+    0 and 1)'
+- name: isRetryable
+  visibility: public
+  parameters:
+  - name: message
+  - name: throwable
+    default: 'null'
+  comment: '# * @param \Throwable|null $throwable The cause of the failed handling'
+- name: getWaitingTime
+  visibility: public
+  parameters:
+  - name: message
+  - name: throwable
+    default: 'null'
+  comment: '# * @param \Throwable|null $throwable The cause of the failed handling'
+traits:
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Exception\InvalidArgumentException
+- Symfony\Component\Messenger\Stamp\RedeliveryStamp
+interfaces:
+- RetryStrategyInterface

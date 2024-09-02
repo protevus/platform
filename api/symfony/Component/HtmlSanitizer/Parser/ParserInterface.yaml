@@ -1,0 +1,30 @@
+name: ParserInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: parse
+  visibility: public
+  parameters:
+  - name: html
+  comment: '# * Transforms an untrusted HTML input string into a DOM tree.
+
+    # *
+
+    # * @author Titouan Galopin <galopintitouan@gmail.com>
+
+    # */
+
+    # interface ParserInterface
+
+    # {
+
+    # /**
+
+    # * Parse a given string and returns a DOMNode tree.
+
+    # *
+
+    # * This method must return null if the string cannot be parsed as HTML.'
+traits: []
+interfaces: []

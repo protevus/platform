@@ -1,0 +1,25 @@
+name: RemoveEmptyControllerArgumentLocatorsPass
+class_comment: '# * Removes empty service-locators registered for ServiceValueResolver.
+
+  # *
+
+  # * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: CompilerPassInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+interfaces:
+- CompilerPassInterface

@@ -1,0 +1,52 @@
+name: AbstractProxy
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getSaveHandlerName
+  visibility: public
+  parameters: []
+  comment: "# * @author Drak <drak@zikula.org>\n# */\n# abstract class AbstractProxy\n\
+    # {\n# protected bool $wrapper = false;\n# \n# protected ?string $saveHandlerName\
+    \ = null;\n# \n# /**\n# * Gets the session.save_handler name."
+- name: isSessionHandlerInterface
+  visibility: public
+  parameters: []
+  comment: '# * Is this proxy handler and instance of \SessionHandlerInterface.'
+- name: isWrapper
+  visibility: public
+  parameters: []
+  comment: '# * Returns true if this handler wraps an internal PHP session save handler
+    using \SessionHandler.'
+- name: isActive
+  visibility: public
+  parameters: []
+  comment: '# * Has a session started?'
+- name: getId
+  visibility: public
+  parameters: []
+  comment: '# * Gets the session ID.'
+- name: setId
+  visibility: public
+  parameters:
+  - name: id
+  comment: '# * Sets the session ID.
+
+    # *
+
+    # * @throws \LogicException'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: '# * Gets the session name.'
+- name: setName
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Sets the session name.
+
+    # *
+
+    # * @throws \LogicException'
+traits: []
+interfaces: []

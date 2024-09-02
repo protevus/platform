@@ -1,0 +1,30 @@
+name: SkipUninitializedValuesTestTrait
+class_comment: null
+dependencies:
+- name: UninitializedPropertyException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\UninitializedPropertyException
+- name: AbstractObjectNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer
+properties: []
+methods:
+- name: testSkipUninitializedValues
+  visibility: public
+  parameters:
+  - name: context
+  comment: "# * Test AbstractObjectNormalizer::SKIP_UNINITIALIZED_VALUES.\n# */\n\
+    # trait SkipUninitializedValuesTestTrait\n# {\n# abstract protected function getNormalizerForSkipUninitializedValues():\
+    \ AbstractObjectNormalizer;\n# \n# /**\n# * @dataProvider skipUninitializedValuesFlagProvider"
+- name: skipUninitializedValuesFlagProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithoutSkipUninitializedValues
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\PropertyAccess\Exception\UninitializedPropertyException
+- Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer
+interfaces: []

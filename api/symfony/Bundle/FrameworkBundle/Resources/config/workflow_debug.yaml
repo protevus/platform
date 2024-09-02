@@ -1,0 +1,11 @@
+name: workflow_debug
+class_comment: null
+dependencies:
+- name: WorkflowDataCollector
+  type: class
+  source: Symfony\Component\Workflow\DataCollector\WorkflowDataCollector
+properties: []
+methods: []
+traits:
+- Symfony\Component\Workflow\DataCollector\WorkflowDataCollector
+interfaces: []

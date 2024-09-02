@@ -1,0 +1,101 @@
+name: EsiTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: Esi
+  type: class
+  source: Symfony\Component\HttpKernel\HttpCache\Esi
+- name: HttpCache
+  type: class
+  source: Symfony\Component\HttpKernel\HttpCache\HttpCache
+properties: []
+methods:
+- name: testHasSurrogateEsiCapability
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddSurrogateEsiCapability
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddSurrogateControl
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNeedsEsiParsing
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderIncludeTag
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessDoesNothingIfContentTypeIsNotHtml
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMultilineEsiRemoveTagsAreRemoved
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCommentTagsAreRemoved
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessEscapesPhpTags
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWhenNoSrcInAnEsi
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessRemoveSurrogateControlHeader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHandle
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHandleWhenResponseIsNot200
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHandleWhenResponseIsNot200AndErrorsAreIgnored
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHandleWhenResponseIsNot200AndAltIsPresent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHandleWhenResponseIsNotModified
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCache
+  visibility: protected
+  parameters:
+  - name: request
+  - name: response
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\HttpCache\Esi
+- Symfony\Component\HttpKernel\HttpCache\HttpCache
+interfaces: []

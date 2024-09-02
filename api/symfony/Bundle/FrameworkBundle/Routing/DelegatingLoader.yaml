@@ -1,0 +1,53 @@
+name: DelegatingLoader
+class_comment: '# * DelegatingLoader delegates route loading to other loaders using
+  a loader resolver.
+
+  # *
+
+  # * This implementation resolves the _controller attribute from the short notation
+
+  # * to the fully-qualified form (from a:b:c to class::method).
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: LoaderLoadException
+  type: class
+  source: Symfony\Component\Config\Exception\LoaderLoadException
+- name: BaseDelegatingLoader
+  type: class
+  source: Symfony\Component\Config\Loader\DelegatingLoader
+- name: LoaderResolverInterface
+  type: class
+  source: Symfony\Component\Config\Loader\LoaderResolverInterface
+- name: RouteCollection
+  type: class
+  source: Symfony\Component\Routing\RouteCollection
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: resolver
+  - name: defaultOptions
+    default: '[]'
+  - name: defaultRequirements
+    default: '[]'
+  comment: null
+- name: load
+  visibility: public
+  parameters:
+  - name: resource
+  - name: type
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\Config\Exception\LoaderLoadException
+- Symfony\Component\Config\Loader\LoaderResolverInterface
+- Symfony\Component\Routing\RouteCollection
+interfaces: []

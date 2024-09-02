@@ -1,0 +1,13 @@
+name: WorkerMessageReceivedEvent
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: shouldHandle
+  visibility: public
+  parameters:
+  - name: shouldHandle
+    default: 'null'
+  comment: null
+traits: []
+interfaces: []

@@ -1,0 +1,194 @@
+name: XmlEncoder
+class_comment: "# * @author Jordi Boggiano <j.boggiano@seld.be>\n# * @author John\
+  \ Wards <jwards@whiteoctober.co.uk>\n# * @author Fabian Vogler <fabian@equivalence.ch>\n\
+  # * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# * @author Dany Maillard <danymaillard93b@gmail.com>"
+dependencies:
+- name: BadMethodCallException
+  type: class
+  source: Symfony\Component\Serializer\Exception\BadMethodCallException
+- name: NotEncodableValueException
+  type: class
+  source: Symfony\Component\Serializer\Exception\NotEncodableValueException
+- name: SerializerAwareInterface
+  type: class
+  source: Symfony\Component\Serializer\SerializerAwareInterface
+- name: SerializerAwareTrait
+  type: class
+  source: Symfony\Component\Serializer\SerializerAwareTrait
+- name: SerializerAwareTrait
+  type: class
+  source: SerializerAwareTrait
+properties: []
+methods:
+- name: parseXml
+  visibility: private
+  parameters:
+  - name: node
+  - name: context
+    default: '[]'
+  comment: "# * @author Jordi Boggiano <j.boggiano@seld.be>\n# * @author John Wards\
+    \ <jwards@whiteoctober.co.uk>\n# * @author Fabian Vogler <fabian@equivalence.ch>\n\
+    # * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# * @author Dany Maillard <danymaillard93b@gmail.com>\n\
+    # */\n# class XmlEncoder implements EncoderInterface, DecoderInterface, NormalizationAwareInterface,\
+    \ SerializerAwareInterface\n# {\n# use SerializerAwareTrait;\n# \n# public const\
+    \ FORMAT = 'xml';\n# \n# public const AS_COLLECTION = 'as_collection';\n# \n#\
+    \ /**\n# * An array of ignored XML node types while decoding, each one of the\
+    \ DOM Predefined XML_* constants.\n# */\n# public const DECODER_IGNORED_NODE_TYPES\
+    \ = 'decoder_ignored_node_types';\n# \n# /**\n# * An array of ignored XML node\
+    \ types while encoding, each one of the DOM Predefined XML_* constants.\n# */\n\
+    # public const ENCODER_IGNORED_NODE_TYPES = 'encoder_ignored_node_types';\n# public\
+    \ const ENCODING = 'xml_encoding';\n# public const FORMAT_OUTPUT = 'xml_format_output';\n\
+    # \n# /**\n# * A bit field of LIBXML_* constants for loading XML documents.\n\
+    # */\n# public const LOAD_OPTIONS = 'load_options';\n# \n# /**\n# * A bit field\
+    \ of LIBXML_* constants for saving XML documents.\n# */\n# public const SAVE_OPTIONS\
+    \ = 'save_options';\n# \n# public const REMOVE_EMPTY_TAGS = 'remove_empty_tags';\n\
+    # public const ROOT_NODE_NAME = 'xml_root_node_name';\n# public const STANDALONE\
+    \ = 'xml_standalone';\n# public const TYPE_CAST_ATTRIBUTES = 'xml_type_cast_attributes';\n\
+    # public const VERSION = 'xml_version';\n# public const CDATA_WRAPPING = 'cdata_wrapping';\n\
+    # public const CDATA_WRAPPING_PATTERN = 'cdata_wrapping_pattern';\n# \n# private\
+    \ array $defaultContext = [\n# self::AS_COLLECTION => false,\n# self::DECODER_IGNORED_NODE_TYPES\
+    \ => [\\XML_PI_NODE, \\XML_COMMENT_NODE],\n# self::ENCODER_IGNORED_NODE_TYPES\
+    \ => [],\n# self::LOAD_OPTIONS => \\LIBXML_NONET | \\LIBXML_NOBLANKS,\n# self::SAVE_OPTIONS\
+    \ => 0,\n# self::REMOVE_EMPTY_TAGS => false,\n# self::ROOT_NODE_NAME => 'response',\n\
+    # self::TYPE_CAST_ATTRIBUTES => true,\n# self::CDATA_WRAPPING => true,\n# self::CDATA_WRAPPING_PATTERN\
+    \ => '/[<>&]/',\n# ];\n# \n# public function __construct(array $defaultContext\
+    \ = [])\n# {\n# $this->defaultContext = array_merge($this->defaultContext, $defaultContext);\n\
+    # }\n# \n# public function encode(mixed $data, string $format, array $context\
+    \ = []): string\n# {\n# $encoderIgnoredNodeTypes = $context[self::ENCODER_IGNORED_NODE_TYPES]\
+    \ ?? $this->defaultContext[self::ENCODER_IGNORED_NODE_TYPES];\n# $ignorePiNode\
+    \ = \\in_array(\\XML_PI_NODE, $encoderIgnoredNodeTypes, true);\n# if ($data instanceof\
+    \ \\DOMDocument) {\n# return $this->saveXml($data, $ignorePiNode ? $data->documentElement\
+    \ : null);\n# }\n# \n# $xmlRootNodeName = $context[self::ROOT_NODE_NAME] ?? $this->defaultContext[self::ROOT_NODE_NAME];\n\
+    # \n# $dom = $this->createDomDocument($context);\n# \n# if (null !== $data &&\
+    \ !\\is_scalar($data)) {\n# $root = $dom->createElement($xmlRootNodeName);\n#\
+    \ $dom->appendChild($root);\n# $this->buildXml($root, $data, $format, $context,\
+    \ $xmlRootNodeName);\n# } else {\n# $this->appendNode($dom, $data, $format, $context,\
+    \ $xmlRootNodeName);\n# }\n# \n# return $this->saveXml($dom, $ignorePiNode ? $dom->documentElement\
+    \ : null, $context[self::SAVE_OPTIONS] ?? $this->defaultContext[self::SAVE_OPTIONS]);\n\
+    # }\n# \n# public function decode(string $data, string $format, array $context\
+    \ = []): mixed\n# {\n# if ('' === trim($data)) {\n# throw new NotEncodableValueException('Invalid\
+    \ XML data, it cannot be empty.');\n# }\n# \n# $internalErrors = libxml_use_internal_errors(true);\n\
+    # libxml_clear_errors();\n# \n# $dom = new \\DOMDocument();\n# $dom->loadXML($data,\
+    \ $context[self::LOAD_OPTIONS] ?? $this->defaultContext[self::LOAD_OPTIONS]);\n\
+    # \n# libxml_use_internal_errors($internalErrors);\n# \n# if ($error = libxml_get_last_error())\
+    \ {\n# libxml_clear_errors();\n# \n# throw new NotEncodableValueException($error->message);\n\
+    # }\n# \n# $rootNode = null;\n# $decoderIgnoredNodeTypes = $context[self::DECODER_IGNORED_NODE_TYPES]\
+    \ ?? $this->defaultContext[self::DECODER_IGNORED_NODE_TYPES];\n# foreach ($dom->childNodes\
+    \ as $child) {\n# if (\\in_array($child->nodeType, $decoderIgnoredNodeTypes, true))\
+    \ {\n# continue;\n# }\n# if (\\XML_DOCUMENT_TYPE_NODE === $child->nodeType) {\n\
+    # throw new NotEncodableValueException('Document types are not allowed.');\n#\
+    \ }\n# if (!$rootNode) {\n# $rootNode = $child;\n# }\n# }\n# \n# // todo: throw\
+    \ an exception if the root node name is not correctly configured (bc)\n# \n# if\
+    \ ($rootNode->hasChildNodes()) {\n# $data = $this->parseXml($rootNode, $context);\n\
+    # if (\\is_array($data)) {\n# $data = $this->addXmlNamespaces($data, $rootNode,\
+    \ $dom);\n# }\n# \n# return $data;\n# }\n# \n# if (!$rootNode->hasAttributes())\
+    \ {\n# return $rootNode->nodeValue;\n# }\n# \n# $data = array_merge($this->parseXmlAttributes($rootNode,\
+    \ $context), ['#' => $rootNode->nodeValue]);\n# \n# return $this->addXmlNamespaces($data,\
+    \ $rootNode, $dom);\n# }\n# \n# public function supportsEncoding(string $format):\
+    \ bool\n# {\n# return self::FORMAT === $format;\n# }\n# \n# public function supportsDecoding(string\
+    \ $format): bool\n# {\n# return self::FORMAT === $format;\n# }\n# \n# final protected\
+    \ function appendXMLString(\\DOMNode $node, string $val): bool\n# {\n# if (''\
+    \ !== $val) {\n# $frag = $node->ownerDocument->createDocumentFragment();\n# $frag->appendXML($val);\n\
+    # $node->appendChild($frag);\n# \n# return true;\n# }\n# \n# return false;\n#\
+    \ }\n# \n# final protected function appendText(\\DOMNode $node, string $val):\
+    \ bool\n# {\n# $nodeText = $node->ownerDocument->createTextNode($val);\n# $node->appendChild($nodeText);\n\
+    # \n# return true;\n# }\n# \n# final protected function appendCData(\\DOMNode\
+    \ $node, string $val): bool\n# {\n# $nodeText = $node->ownerDocument->createCDATASection($val);\n\
+    # $node->appendChild($nodeText);\n# \n# return true;\n# }\n# \n# final protected\
+    \ function appendDocumentFragment(\\DOMNode $node, \\DOMDocumentFragment $fragment):\
+    \ bool\n# {\n# $node->appendChild($fragment);\n# \n# return true;\n# }\n# \n#\
+    \ final protected function appendComment(\\DOMNode $node, string $data): bool\n\
+    # {\n# $node->appendChild($node->ownerDocument->createComment($data));\n# \n#\
+    \ return true;\n# }\n# \n# /**\n# * Checks the name is a valid xml element name.\n\
+    # */\n# final protected function isElementNameValid(string $name): bool\n# {\n\
+    # return $name\n# && !str_contains($name, ' ')\n# && preg_match('#^[\\pL_][\\\
+    pL0-9._:-]*$#ui', $name);\n# }\n# \n# /**\n# * Parse the input DOMNode into an\
+    \ array or a string."
+- name: parseXmlAttributes
+  visibility: private
+  parameters:
+  - name: node
+  - name: context
+    default: '[]'
+  comment: '# * Parse the input DOMNode attributes into an array.'
+- name: parseXmlValue
+  visibility: private
+  parameters:
+  - name: node
+  - name: context
+    default: '[]'
+  comment: '# * Parse the input DOMNode value (content and children) into an array
+    or a string.'
+- name: addXmlNamespaces
+  visibility: private
+  parameters:
+  - name: data
+  - name: node
+  - name: document
+  comment: null
+- name: buildXml
+  visibility: private
+  parameters:
+  - name: parentNode
+  - name: data
+  - name: format
+  - name: context
+  - name: xmlRootNodeName
+    default: 'null'
+  comment: '# * Parse the data and convert it to DOMElements.
+
+    # *
+
+    # * @throws NotEncodableValueException'
+- name: appendNode
+  visibility: private
+  parameters:
+  - name: parentNode
+  - name: data
+  - name: format
+  - name: context
+  - name: nodeName
+  - name: key
+    default: 'null'
+  comment: '# * Selects the type of node to create and appends it to the parent.'
+- name: needsCdataWrapping
+  visibility: private
+  parameters:
+  - name: val
+  - name: context
+  comment: '# * Checks if a value contains any characters which would require CDATA
+    wrapping.'
+- name: selectNodeType
+  visibility: private
+  parameters:
+  - name: node
+  - name: val
+  - name: format
+  - name: context
+  comment: '# * Tests the value being passed and decide what sort of element to create.
+
+    # *
+
+    # * @throws NotEncodableValueException'
+- name: createDomDocument
+  visibility: private
+  parameters:
+  - name: context
+  comment: '# * Create a DOM document, taking serializer options into account.'
+- name: saveXml
+  visibility: private
+  parameters:
+  - name: document
+  - name: node
+    default: 'null'
+  - name: options
+    default: 'null'
+  comment: '# * @throws NotEncodableValueException'
+traits:
+- Symfony\Component\Serializer\Exception\BadMethodCallException
+- Symfony\Component\Serializer\Exception\NotEncodableValueException
+- Symfony\Component\Serializer\SerializerAwareInterface
+- Symfony\Component\Serializer\SerializerAwareTrait
+- SerializerAwareTrait
+interfaces:
+- EncoderInterface

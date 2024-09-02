@@ -1,0 +1,136 @@
+name: DateIntervalTypeTest
+class_comment: null
+dependencies:
+- name: DateIntervalType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\DateIntervalType
+- name: FormError
+  type: class
+  source: Symfony\Component\Form\FormError
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+properties: []
+methods:
+- name: testSubmitDateInterval
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitWithoutMonths
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitWithTime
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitWithWeeks
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitWithInvert
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitStringSingleText
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitStringSingleTextWithSeconds
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitArrayInteger
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInitializeWithDateInterval
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassDefaultPlaceholderToViewIfNotRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassNoPlaceholderToViewIfRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassPlaceholderAsString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassPlaceholderAsArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassPlaceholderAsPartialArrayAddEmptyIfNotRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassPlaceholderAsPartialArrayAddNullIfRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDateTypeChoiceErrorsBubbleUp
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTranslationsAreDisabledForChoiceWidget
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvertDoesNotInheritRequiredOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCanChangeTimeFieldsLabels
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvertDefaultLabel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNull
+  visibility: public
+  parameters:
+  - name: expected
+    default: 'null'
+  - name: norm
+    default: 'null'
+  - name: view
+    default: 'null'
+  comment: null
+- name: testSubmitNullUsesDefaultEmptyData
+  visibility: public
+  parameters:
+  - name: emptyData
+    default: '[]'
+  - name: expectedData
+    default: 'null'
+  comment: null
+- name: testSubmitNullUsesDateEmptyData
+  visibility: public
+  parameters:
+  - name: widget
+  - name: emptyData
+  - name: expectedData
+  comment: '# * @dataProvider provideEmptyData'
+- name: provideEmptyData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\Extension\Core\Type\DateIntervalType
+- Symfony\Component\Form\FormError
+- Symfony\Component\Form\FormInterface
+interfaces: []

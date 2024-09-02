@@ -1,0 +1,129 @@
+name: DateTimeValueResolverTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: MockClock
+  type: class
+  source: Symfony\Component\Clock\MockClock
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: MapDateTime
+  type: class
+  source: Symfony\Component\HttpKernel\Attribute\MapDateTime
+- name: DateTimeValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\DateTimeValueResolver
+- name: ArgumentMetadata
+  type: class
+  source: Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata
+- name: NotFoundHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getTimeZones
+  visibility: public
+  parameters: []
+  comment: null
+- name: getClasses
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnsupportedArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFullDate
+  visibility: public
+  parameters:
+  - name: timezone
+  - name: withClock
+  comment: '# * @dataProvider getTimeZones'
+- name: testUnixTimestamp
+  visibility: public
+  parameters:
+  - name: timezone
+  - name: withClock
+  comment: '# * @dataProvider getTimeZones'
+- name: testNullableWithEmptyAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNow
+  visibility: public
+  parameters:
+  - name: class
+  comment: '# * @param class-string<\DateTimeInterface> $class
+
+    # *
+
+    # * @dataProvider getClasses'
+- name: testNowWithClock
+  visibility: public
+  parameters:
+  - name: class
+  comment: '# * @param class-string<\DateTimeInterface> $class
+
+    # *
+
+    # * @dataProvider getClasses'
+- name: testPreviouslyConvertedAttribute
+  visibility: public
+  parameters:
+  - name: class
+  comment: '# * @param class-string<\DateTimeInterface> $class
+
+    # *
+
+    # * @dataProvider getClasses'
+- name: testCustomClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDateTimeImmutable
+  visibility: public
+  parameters:
+  - name: timezone
+  - name: withClock
+  comment: '# * @dataProvider getTimeZones'
+- name: testWithFormat
+  visibility: public
+  parameters:
+  - name: timezone
+  - name: withClock
+  comment: '# * @dataProvider getTimeZones'
+- name: provideInvalidDates
+  visibility: public
+  parameters: []
+  comment: null
+- name: test404Exception
+  visibility: public
+  parameters:
+  - name: argument
+  - name: request
+  comment: '# * @dataProvider provideInvalidDates'
+- name: requestWithAttributes
+  visibility: private
+  parameters:
+  - name: attributes
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Clock\MockClock
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\Attribute\MapDateTime
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\DateTimeValueResolver
+- Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata
+- Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+interfaces: []

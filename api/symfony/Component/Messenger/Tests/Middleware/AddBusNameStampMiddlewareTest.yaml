@@ -1,0 +1,31 @@
+name: AddBusNameStampMiddlewareTest
+class_comment: null
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: AddBusNameStampMiddleware
+  type: class
+  source: Symfony\Component\Messenger\Middleware\AddBusNameStampMiddleware
+- name: BusNameStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\BusNameStamp
+- name: MiddlewareTestCase
+  type: class
+  source: Symfony\Component\Messenger\Test\Middleware\MiddlewareTestCase
+- name: DummyMessage
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\DummyMessage
+properties: []
+methods:
+- name: testItSendsTheMessageToAssignedSender
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Middleware\AddBusNameStampMiddleware
+- Symfony\Component\Messenger\Stamp\BusNameStamp
+- Symfony\Component\Messenger\Test\Middleware\MiddlewareTestCase
+- Symfony\Component\Messenger\Tests\Fixtures\DummyMessage
+interfaces: []

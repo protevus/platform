@@ -1,0 +1,35 @@
+name: GenericLinkProviderTest
+class_comment: '# * Test case borrowed from https://github.com/php-fig/link/.'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: GenericLinkProvider
+  type: class
+  source: Symfony\Component\WebLink\GenericLinkProvider
+- name: Link
+  type: class
+  source: Symfony\Component\WebLink\Link
+properties: []
+methods:
+- name: testCanAddLinksByMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCanAddLinksByConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCanGetLinksByRel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCanRemoveLinks
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\WebLink\GenericLinkProvider
+- Symfony\Component\WebLink\Link
+interfaces: []

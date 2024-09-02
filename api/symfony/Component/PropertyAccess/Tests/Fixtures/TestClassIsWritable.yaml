@@ -1,0 +1,19 @@
+name: TestClassIsWritable
+class_comment: null
+dependencies: []
+properties:
+- name: value
+  visibility: protected
+  comment: null
+methods:
+- name: getValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: value
+  comment: null
+traits: []
+interfaces: []

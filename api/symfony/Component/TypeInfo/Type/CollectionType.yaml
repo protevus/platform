@@ -1,0 +1,98 @@
+name: CollectionType
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\TypeInfo\Exception\InvalidArgumentException
+- name: Type
+  type: class
+  source: Symfony\Component\TypeInfo\Type
+- name: TypeIdentifier
+  type: class
+  source: Symfony\Component\TypeInfo\TypeIdentifier
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: type
+  - name: isList
+    default: 'false'
+  comment: '# * Represents a key/value collection type.
+
+    # *
+
+    # * It proxies every method to the main type and adds methods related to key and
+    value types.
+
+    # *
+
+    # * @author Mathias Arlaud <mathias.arlaud@gmail.com>
+
+    # * @author Baptiste Leduc <baptiste.leduc@gmail.com>
+
+    # *
+
+    # * @template T of BuiltinType<TypeIdentifier::ARRAY>|BuiltinType<TypeIdentifier::ITERABLE>|ObjectType|GenericType
+
+    # *
+
+    # * @experimental
+
+    # */
+
+    # final class CollectionType extends Type
+
+    # {
+
+    # /**
+
+    # * @param T $type'
+- name: getBaseType
+  visibility: public
+  parameters: []
+  comment: null
+- name: getType
+  visibility: public
+  parameters: []
+  comment: '# * @return T'
+- name: isA
+  visibility: public
+  parameters:
+  - name: subject
+  comment: null
+- name: isList
+  visibility: public
+  parameters: []
+  comment: null
+- name: asNonNullable
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCollectionKeyType
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCollectionValueType
+  visibility: public
+  parameters: []
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: arguments
+  comment: '# * Proxies all method calls to the original type.
+
+    # *
+
+    # * @param list<mixed> $arguments'
+traits:
+- Symfony\Component\TypeInfo\Exception\InvalidArgumentException
+- Symfony\Component\TypeInfo\Type
+- Symfony\Component\TypeInfo\TypeIdentifier
+interfaces: []

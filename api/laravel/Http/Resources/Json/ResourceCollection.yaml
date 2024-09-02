@@ -1,0 +1,140 @@
+name: ResourceCollection
+class_comment: null
+dependencies:
+- name: Countable
+  type: class
+  source: Countable
+- name: Request
+  type: class
+  source: Illuminate\Http\Request
+- name: CollectsResources
+  type: class
+  source: Illuminate\Http\Resources\CollectsResources
+- name: AbstractCursorPaginator
+  type: class
+  source: Illuminate\Pagination\AbstractCursorPaginator
+- name: AbstractPaginator
+  type: class
+  source: Illuminate\Pagination\AbstractPaginator
+- name: IteratorAggregate
+  type: class
+  source: IteratorAggregate
+- name: CollectsResources
+  type: class
+  source: CollectsResources
+properties:
+- name: collects
+  visibility: public
+  comment: '# * The resource that this resource collects.
+
+    # *
+
+    # * @var string'
+- name: collection
+  visibility: public
+  comment: '# * The mapped collection instance.
+
+    # *
+
+    # * @var \Illuminate\Support\Collection'
+- name: preserveAllQueryParameters
+  visibility: protected
+  comment: '# * Indicates if all existing request query parameters should be added
+    to pagination links.
+
+    # *
+
+    # * @var bool'
+- name: queryParameters
+  visibility: protected
+  comment: '# * The query parameters that should be added to the pagination links.
+
+    # *
+
+    # * @var array|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: resource
+  comment: "# * The resource that this resource collects.\n# *\n# * @var string\n\
+    # */\n# public $collects;\n# \n# /**\n# * The mapped collection instance.\n# *\n\
+    # * @var \\Illuminate\\Support\\Collection\n# */\n# public $collection;\n# \n\
+    # /**\n# * Indicates if all existing request query parameters should be added\
+    \ to pagination links.\n# *\n# * @var bool\n# */\n# protected $preserveAllQueryParameters\
+    \ = false;\n# \n# /**\n# * The query parameters that should be added to the pagination\
+    \ links.\n# *\n# * @var array|null\n# */\n# protected $queryParameters;\n# \n\
+    # /**\n# * Create a new resource instance.\n# *\n# * @param  mixed  $resource\n\
+    # * @return void"
+- name: preserveQuery
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that all current query parameters should be appended to pagination
+    links.
+
+    # *
+
+    # * @return $this'
+- name: withQuery
+  visibility: public
+  parameters:
+  - name: query
+  comment: '# * Specify the query string parameters that should be present on pagination
+    links.
+
+    # *
+
+    # * @param  array  $query
+
+    # * @return $this'
+- name: count
+  visibility: public
+  parameters: []
+  comment: '# * Return the count of items in the resource collection.
+
+    # *
+
+    # * @return int'
+- name: toArray
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Transform the resource into a JSON array.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable'
+- name: toResponse
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Create an HTTP response that represents the object.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return \Illuminate\Http\JsonResponse'
+- name: preparePaginatedResponse
+  visibility: protected
+  parameters:
+  - name: request
+  comment: '# * Create a paginate-aware HTTP response.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return \Illuminate\Http\JsonResponse'
+traits:
+- Countable
+- Illuminate\Http\Request
+- Illuminate\Http\Resources\CollectsResources
+- Illuminate\Pagination\AbstractCursorPaginator
+- Illuminate\Pagination\AbstractPaginator
+- IteratorAggregate
+- CollectsResources
+interfaces:
+- Countable

@@ -1,0 +1,52 @@
+name: AboutCommandTest
+class_comment: null
+dependencies:
+- name: AboutCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\AboutCommand
+- name: Application
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Console\Application
+- name: TestAppKernel
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Command\AboutCommand\Fixture\TestAppKernel
+- name: TestCase
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\TestCase
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+- name: IOException
+  type: class
+  source: Symfony\Component\Filesystem\Exception\IOException
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testAboutWithReadableFiles
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAboutWithUnreadableFiles
+  visibility: public
+  parameters: []
+  comment: null
+- name: createCommandTester
+  visibility: private
+  parameters:
+  - name: kernel
+  comment: null
+traits:
+- Symfony\Bundle\FrameworkBundle\Command\AboutCommand
+- Symfony\Bundle\FrameworkBundle\Console\Application
+- Symfony\Bundle\FrameworkBundle\Tests\Command\AboutCommand\Fixture\TestAppKernel
+- Symfony\Bundle\FrameworkBundle\Tests\TestCase
+- Symfony\Component\Console\Tester\CommandTester
+- Symfony\Component\Filesystem\Exception\IOException
+- Symfony\Component\Filesystem\Filesystem
+interfaces: []

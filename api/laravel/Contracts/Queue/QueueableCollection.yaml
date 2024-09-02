@@ -1,0 +1,39 @@
+name: QueueableCollection
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getQueueableClass
+  visibility: public
+  parameters: []
+  comment: '# * Get the type of the entities being queued.
+
+    # *
+
+    # * @return string|null'
+- name: getQueueableIds
+  visibility: public
+  parameters: []
+  comment: '# * Get the identifiers for all of the entities.
+
+    # *
+
+    # * @return array<int, mixed>'
+- name: getQueueableRelations
+  visibility: public
+  parameters: []
+  comment: '# * Get the relationships of the entities being queued.
+
+    # *
+
+    # * @return array<int, string>'
+- name: getQueueableConnection
+  visibility: public
+  parameters: []
+  comment: '# * Get the connection of the entities being queued.
+
+    # *
+
+    # * @return string|null'
+traits: []
+interfaces: []

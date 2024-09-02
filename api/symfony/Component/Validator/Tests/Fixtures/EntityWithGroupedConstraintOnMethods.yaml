@@ -1,0 +1,18 @@
+name: EntityWithGroupedConstraintOnMethods
+class_comment: null
+dependencies: []
+properties:
+- name: bar
+  visibility: public
+  comment: null
+methods:
+- name: isValidInFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: getBar
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

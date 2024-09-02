@@ -1,0 +1,23 @@
+name: EntityStaticVehicle
+class_comment: null
+dependencies:
+- name: Length
+  type: class
+  source: Symfony\Component\Validator\Constraints\Length
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+properties:
+- name: wheels
+  visibility: public
+  comment: null
+methods:
+- name: loadValidatorMetadata
+  visibility: public
+  parameters:
+  - name: metadata
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\Length
+- Symfony\Component\Validator\Mapping\ClassMetadata
+interfaces: []

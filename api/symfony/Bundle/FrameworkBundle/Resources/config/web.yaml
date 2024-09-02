@@ -1,0 +1,99 @@
+name: web
+class_comment: null
+dependencies:
+- name: AbstractController
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Controller\AbstractController
+- name: ControllerResolver
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver
+- name: TemplateController
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+- name: ArgumentResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver
+- name: BackedEnumValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\BackedEnumValueResolver
+- name: DateTimeValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\DateTimeValueResolver
+- name: DefaultValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver
+- name: QueryParameterValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\QueryParameterValueResolver
+- name: RequestAttributeValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestAttributeValueResolver
+- name: RequestPayloadValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestPayloadValueResolver
+- name: RequestValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver
+- name: ServiceValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver
+- name: SessionValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver
+- name: UidValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\UidValueResolver
+- name: VariadicValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver
+- name: ErrorController
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ErrorController
+- name: ArgumentMetadataFactory
+  type: class
+  source: Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory
+- name: CacheAttributeListener
+  type: class
+  source: Symfony\Component\HttpKernel\EventListener\CacheAttributeListener
+- name: DisallowRobotsIndexingListener
+  type: class
+  source: Symfony\Component\HttpKernel\EventListener\DisallowRobotsIndexingListener
+- name: ErrorListener
+  type: class
+  source: Symfony\Component\HttpKernel\EventListener\ErrorListener
+- name: LocaleListener
+  type: class
+  source: Symfony\Component\HttpKernel\EventListener\LocaleListener
+- name: ResponseListener
+  type: class
+  source: Symfony\Component\HttpKernel\EventListener\ResponseListener
+- name: ValidateRequestListener
+  type: class
+  source: Symfony\Component\HttpKernel\EventListener\ValidateRequestListener
+properties: []
+methods: []
+traits:
+- Symfony\Bundle\FrameworkBundle\Controller\AbstractController
+- Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver
+- Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\BackedEnumValueResolver
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\DateTimeValueResolver
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\QueryParameterValueResolver
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestAttributeValueResolver
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestPayloadValueResolver
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\UidValueResolver
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver
+- Symfony\Component\HttpKernel\Controller\ErrorController
+- Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory
+- Symfony\Component\HttpKernel\EventListener\CacheAttributeListener
+- Symfony\Component\HttpKernel\EventListener\DisallowRobotsIndexingListener
+- Symfony\Component\HttpKernel\EventListener\ErrorListener
+- Symfony\Component\HttpKernel\EventListener\LocaleListener
+- Symfony\Component\HttpKernel\EventListener\ResponseListener
+- Symfony\Component\HttpKernel\EventListener\ValidateRequestListener
+interfaces: []

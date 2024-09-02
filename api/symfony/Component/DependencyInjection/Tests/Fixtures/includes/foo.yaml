@@ -1,0 +1,65 @@
+name: foo
+class_comment: null
+dependencies: []
+properties:
+- name: qux
+  visibility: public
+  comment: null
+- name: foo
+  visibility: public
+  comment: null
+- name: moo
+  visibility: public
+  comment: null
+- name: otherInstances
+  visibility: public
+  comment: null
+- name: bar
+  visibility: public
+  comment: null
+- name: initialized
+  visibility: public
+  comment: null
+- name: configured
+  visibility: public
+  comment: null
+- name: called
+  visibility: public
+  comment: null
+- name: arguments
+  visibility: public
+  comment: null
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: arguments
+    default: '[]'
+  comment: null
+- name: getInstance
+  visibility: public
+  parameters:
+  - name: arguments
+    default: '[]'
+  comment: null
+- name: initialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: configure
+  visibility: public
+  parameters: []
+  comment: null
+- name: setBar
+  visibility: public
+  parameters:
+  - name: value
+    default: 'null'
+  comment: null
+- name: setOtherInstances
+  visibility: public
+  parameters:
+  - name: otherInstances
+  comment: null
+traits: []
+interfaces: []

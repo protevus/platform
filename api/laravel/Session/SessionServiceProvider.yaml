@@ -1,0 +1,42 @@
+name: SessionServiceProvider
+class_comment: null
+dependencies:
+- name: CacheFactory
+  type: class
+  source: Illuminate\Contracts\Cache\Factory
+- name: StartSession
+  type: class
+  source: Illuminate\Session\Middleware\StartSession
+- name: ServiceProvider
+  type: class
+  source: Illuminate\Support\ServiceProvider
+properties: []
+methods:
+- name: register
+  visibility: public
+  parameters: []
+  comment: '# * Register the service provider.
+
+    # *
+
+    # * @return void'
+- name: registerSessionManager
+  visibility: protected
+  parameters: []
+  comment: '# * Register the session manager instance.
+
+    # *
+
+    # * @return void'
+- name: registerSessionDriver
+  visibility: protected
+  parameters: []
+  comment: '# * Register the session driver instance.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Session\Middleware\StartSession
+- Illuminate\Support\ServiceProvider
+interfaces: []

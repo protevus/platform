@@ -1,0 +1,158 @@
+name: Limit
+class_comment: null
+dependencies: []
+properties:
+- name: key
+  visibility: public
+  comment: '# * The rate limit signature key.
+
+    # *
+
+    # * @var mixed'
+- name: maxAttempts
+  visibility: public
+  comment: '# * The maximum number of attempts allowed within the given number of
+    seconds.
+
+    # *
+
+    # * @var int'
+- name: decaySeconds
+  visibility: public
+  comment: '# * The number of seconds until the rate limit is reset.
+
+    # *
+
+    # * @var int'
+- name: responseCallback
+  visibility: public
+  comment: '# * The response generator callback.
+
+    # *
+
+    # * @var callable'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: key
+    default: ''''''
+  - name: maxAttempts
+    default: '60'
+  - name: decaySeconds
+    default: '60'
+  comment: "# * The rate limit signature key.\n# *\n# * @var mixed\n# */\n# public\
+    \ $key;\n# \n# /**\n# * The maximum number of attempts allowed within the given\
+    \ number of seconds.\n# *\n# * @var int\n# */\n# public $maxAttempts;\n# \n# /**\n\
+    # * The number of seconds until the rate limit is reset.\n# *\n# * @var int\n\
+    # */\n# public $decaySeconds;\n# \n# /**\n# * The response generator callback.\n\
+    # *\n# * @var callable\n# */\n# public $responseCallback;\n# \n# /**\n# * Create\
+    \ a new limit instance.\n# *\n# * @param  mixed  $key\n# * @param  int  $maxAttempts\n\
+    # * @param  int  $decaySeconds\n# * @return void"
+- name: perSecond
+  visibility: public
+  parameters:
+  - name: maxAttempts
+  - name: decaySeconds
+    default: '1'
+  comment: '# * Create a new rate limit.
+
+    # *
+
+    # * @param  int  $maxAttempts
+
+    # * @param  int  $decaySeconds
+
+    # * @return static'
+- name: perMinute
+  visibility: public
+  parameters:
+  - name: maxAttempts
+  - name: decayMinutes
+    default: '1'
+  comment: '# * Create a new rate limit.
+
+    # *
+
+    # * @param  int  $maxAttempts
+
+    # * @param  int  $decayMinutes
+
+    # * @return static'
+- name: perMinutes
+  visibility: public
+  parameters:
+  - name: decayMinutes
+  - name: maxAttempts
+  comment: '# * Create a new rate limit using minutes as decay time.
+
+    # *
+
+    # * @param  int  $decayMinutes
+
+    # * @param  int  $maxAttempts
+
+    # * @return static'
+- name: perHour
+  visibility: public
+  parameters:
+  - name: maxAttempts
+  - name: decayHours
+    default: '1'
+  comment: '# * Create a new rate limit using hours as decay time.
+
+    # *
+
+    # * @param  int  $maxAttempts
+
+    # * @param  int  $decayHours
+
+    # * @return static'
+- name: perDay
+  visibility: public
+  parameters:
+  - name: maxAttempts
+  - name: decayDays
+    default: '1'
+  comment: '# * Create a new rate limit using days as decay time.
+
+    # *
+
+    # * @param  int  $maxAttempts
+
+    # * @param  int  $decayDays
+
+    # * @return static'
+- name: none
+  visibility: public
+  parameters: []
+  comment: '# * Create a new unlimited rate limit.
+
+    # *
+
+    # * @return static'
+- name: by
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Set the key of the rate limit.
+
+    # *
+
+    # * @param  mixed  $key
+
+    # * @return $this'
+- name: response
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Set the callback that should generate the response when the limit
+    is exceeded.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return $this'
+traits: []
+interfaces: []

@@ -1,0 +1,17 @@
+name: CallbackClass
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: ExecutionContextInterface
+  type: class
+  source: Symfony\Component\Validator\Context\ExecutionContextInterface
+properties: []
+methods:
+- name: callback
+  visibility: public
+  parameters:
+  - name: object
+  - name: context
+  comment: null
+traits:
+- Symfony\Component\Validator\Context\ExecutionContextInterface
+interfaces: []

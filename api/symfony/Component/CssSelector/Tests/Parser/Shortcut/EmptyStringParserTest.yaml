@@ -1,0 +1,23 @@
+name: EmptyStringParserTest
+class_comment: "# * @author Jean-Fran\xE7ois Simon <jeanfrancois.simon@sensiolabs.com>"
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: SelectorNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\SelectorNode
+- name: EmptyStringParser
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Shortcut\EmptyStringParser
+properties: []
+methods:
+- name: testParse
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\CssSelector\Node\SelectorNode
+- Symfony\Component\CssSelector\Parser\Shortcut\EmptyStringParser
+interfaces: []

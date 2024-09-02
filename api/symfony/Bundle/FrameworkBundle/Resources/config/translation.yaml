@@ -1,0 +1,163 @@
+name: translation
+class_comment: null
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: TranslationsCacheWarmer
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\CacheWarmer\TranslationsCacheWarmer
+- name: Translator
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Translation\Translator
+- name: CsvFileDumper
+  type: class
+  source: Symfony\Component\Translation\Dumper\CsvFileDumper
+- name: IcuResFileDumper
+  type: class
+  source: Symfony\Component\Translation\Dumper\IcuResFileDumper
+- name: IniFileDumper
+  type: class
+  source: Symfony\Component\Translation\Dumper\IniFileDumper
+- name: JsonFileDumper
+  type: class
+  source: Symfony\Component\Translation\Dumper\JsonFileDumper
+- name: MoFileDumper
+  type: class
+  source: Symfony\Component\Translation\Dumper\MoFileDumper
+- name: PhpFileDumper
+  type: class
+  source: Symfony\Component\Translation\Dumper\PhpFileDumper
+- name: PoFileDumper
+  type: class
+  source: Symfony\Component\Translation\Dumper\PoFileDumper
+- name: QtFileDumper
+  type: class
+  source: Symfony\Component\Translation\Dumper\QtFileDumper
+- name: XliffFileDumper
+  type: class
+  source: Symfony\Component\Translation\Dumper\XliffFileDumper
+- name: YamlFileDumper
+  type: class
+  source: Symfony\Component\Translation\Dumper\YamlFileDumper
+- name: ChainExtractor
+  type: class
+  source: Symfony\Component\Translation\Extractor\ChainExtractor
+- name: ExtractorInterface
+  type: class
+  source: Symfony\Component\Translation\Extractor\ExtractorInterface
+- name: PhpAstExtractor
+  type: class
+  source: Symfony\Component\Translation\Extractor\PhpAstExtractor
+- name: ConstraintVisitor
+  type: class
+  source: Symfony\Component\Translation\Extractor\Visitor\ConstraintVisitor
+- name: TranslatableMessageVisitor
+  type: class
+  source: Symfony\Component\Translation\Extractor\Visitor\TranslatableMessageVisitor
+- name: TransMethodVisitor
+  type: class
+  source: Symfony\Component\Translation\Extractor\Visitor\TransMethodVisitor
+- name: MessageFormatter
+  type: class
+  source: Symfony\Component\Translation\Formatter\MessageFormatter
+- name: CsvFileLoader
+  type: class
+  source: Symfony\Component\Translation\Loader\CsvFileLoader
+- name: IcuDatFileLoader
+  type: class
+  source: Symfony\Component\Translation\Loader\IcuDatFileLoader
+- name: IcuResFileLoader
+  type: class
+  source: Symfony\Component\Translation\Loader\IcuResFileLoader
+- name: IniFileLoader
+  type: class
+  source: Symfony\Component\Translation\Loader\IniFileLoader
+- name: JsonFileLoader
+  type: class
+  source: Symfony\Component\Translation\Loader\JsonFileLoader
+- name: MoFileLoader
+  type: class
+  source: Symfony\Component\Translation\Loader\MoFileLoader
+- name: PhpFileLoader
+  type: class
+  source: Symfony\Component\Translation\Loader\PhpFileLoader
+- name: PoFileLoader
+  type: class
+  source: Symfony\Component\Translation\Loader\PoFileLoader
+- name: QtFileLoader
+  type: class
+  source: Symfony\Component\Translation\Loader\QtFileLoader
+- name: XliffFileLoader
+  type: class
+  source: Symfony\Component\Translation\Loader\XliffFileLoader
+- name: YamlFileLoader
+  type: class
+  source: Symfony\Component\Translation\Loader\YamlFileLoader
+- name: LocaleSwitcher
+  type: class
+  source: Symfony\Component\Translation\LocaleSwitcher
+- name: LoggingTranslator
+  type: class
+  source: Symfony\Component\Translation\LoggingTranslator
+- name: TranslationReader
+  type: class
+  source: Symfony\Component\Translation\Reader\TranslationReader
+- name: TranslationReaderInterface
+  type: class
+  source: Symfony\Component\Translation\Reader\TranslationReaderInterface
+- name: TranslationWriter
+  type: class
+  source: Symfony\Component\Translation\Writer\TranslationWriter
+- name: TranslationWriterInterface
+  type: class
+  source: Symfony\Component\Translation\Writer\TranslationWriterInterface
+- name: LocaleAwareInterface
+  type: class
+  source: Symfony\Contracts\Translation\LocaleAwareInterface
+- name: TranslatorInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatorInterface
+properties: []
+methods: []
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Bundle\FrameworkBundle\CacheWarmer\TranslationsCacheWarmer
+- Symfony\Bundle\FrameworkBundle\Translation\Translator
+- Symfony\Component\Translation\Dumper\CsvFileDumper
+- Symfony\Component\Translation\Dumper\IcuResFileDumper
+- Symfony\Component\Translation\Dumper\IniFileDumper
+- Symfony\Component\Translation\Dumper\JsonFileDumper
+- Symfony\Component\Translation\Dumper\MoFileDumper
+- Symfony\Component\Translation\Dumper\PhpFileDumper
+- Symfony\Component\Translation\Dumper\PoFileDumper
+- Symfony\Component\Translation\Dumper\QtFileDumper
+- Symfony\Component\Translation\Dumper\XliffFileDumper
+- Symfony\Component\Translation\Dumper\YamlFileDumper
+- Symfony\Component\Translation\Extractor\ChainExtractor
+- Symfony\Component\Translation\Extractor\ExtractorInterface
+- Symfony\Component\Translation\Extractor\PhpAstExtractor
+- Symfony\Component\Translation\Extractor\Visitor\ConstraintVisitor
+- Symfony\Component\Translation\Extractor\Visitor\TranslatableMessageVisitor
+- Symfony\Component\Translation\Extractor\Visitor\TransMethodVisitor
+- Symfony\Component\Translation\Formatter\MessageFormatter
+- Symfony\Component\Translation\Loader\CsvFileLoader
+- Symfony\Component\Translation\Loader\IcuDatFileLoader
+- Symfony\Component\Translation\Loader\IcuResFileLoader
+- Symfony\Component\Translation\Loader\IniFileLoader
+- Symfony\Component\Translation\Loader\JsonFileLoader
+- Symfony\Component\Translation\Loader\MoFileLoader
+- Symfony\Component\Translation\Loader\PhpFileLoader
+- Symfony\Component\Translation\Loader\PoFileLoader
+- Symfony\Component\Translation\Loader\QtFileLoader
+- Symfony\Component\Translation\Loader\XliffFileLoader
+- Symfony\Component\Translation\Loader\YamlFileLoader
+- Symfony\Component\Translation\LocaleSwitcher
+- Symfony\Component\Translation\LoggingTranslator
+- Symfony\Component\Translation\Reader\TranslationReader
+- Symfony\Component\Translation\Reader\TranslationReaderInterface
+- Symfony\Component\Translation\Writer\TranslationWriter
+- Symfony\Component\Translation\Writer\TranslationWriterInterface
+- Symfony\Contracts\Translation\LocaleAwareInterface
+- Symfony\Contracts\Translation\TranslatorInterface
+interfaces: []

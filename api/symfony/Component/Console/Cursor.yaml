@@ -1,0 +1,115 @@
+name: Cursor
+class_comment: null
+dependencies:
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+properties:
+- name: input
+  visibility: private
+  comment: '# * @author Pierre du Plessis <pdples@gmail.com>
+
+    # */
+
+    # final class Cursor
+
+    # {
+
+    # /** @var resource'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: output
+  - name: input
+    default: 'null'
+  comment: "# * @author Pierre du Plessis <pdples@gmail.com>\n# */\n# final class\
+    \ Cursor\n# {\n# /** @var resource */\n# private $input;\n# \n# /**\n# * @param\
+    \ resource|null $input"
+- name: moveUp
+  visibility: public
+  parameters:
+  - name: lines
+    default: '1'
+  comment: '# * @return $this'
+- name: moveDown
+  visibility: public
+  parameters:
+  - name: lines
+    default: '1'
+  comment: '# * @return $this'
+- name: moveRight
+  visibility: public
+  parameters:
+  - name: columns
+    default: '1'
+  comment: '# * @return $this'
+- name: moveLeft
+  visibility: public
+  parameters:
+  - name: columns
+    default: '1'
+  comment: '# * @return $this'
+- name: moveToColumn
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * @return $this'
+- name: moveToPosition
+  visibility: public
+  parameters:
+  - name: column
+  - name: row
+  comment: '# * @return $this'
+- name: savePosition
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: restorePosition
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: hide
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: show
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: clearLine
+  visibility: public
+  parameters: []
+  comment: '# * Clears all the output from the current line.
+
+    # *
+
+    # * @return $this'
+- name: clearLineAfter
+  visibility: public
+  parameters: []
+  comment: '# * Clears all the output from the current line after the current position.'
+- name: clearOutput
+  visibility: public
+  parameters: []
+  comment: '# * Clears all the output from the cursors'' current position to the end
+    of the screen.
+
+    # *
+
+    # * @return $this'
+- name: clearScreen
+  visibility: public
+  parameters: []
+  comment: '# * Clears the entire screen.
+
+    # *
+
+    # * @return $this'
+- name: getCurrentPosition
+  visibility: public
+  parameters: []
+  comment: '# * Returns the current cursor position as x,y coordinates.'
+traits:
+- Symfony\Component\Console\Output\OutputInterface
+interfaces: []

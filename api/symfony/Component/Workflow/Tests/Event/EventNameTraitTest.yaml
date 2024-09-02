@@ -1,0 +1,59 @@
+name: EventNameTraitTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AnnounceEvent
+  type: class
+  source: Symfony\Component\Workflow\Event\AnnounceEvent
+- name: CompletedEvent
+  type: class
+  source: Symfony\Component\Workflow\Event\CompletedEvent
+- name: EnteredEvent
+  type: class
+  source: Symfony\Component\Workflow\Event\EnteredEvent
+- name: EnterEvent
+  type: class
+  source: Symfony\Component\Workflow\Event\EnterEvent
+- name: GuardEvent
+  type: class
+  source: Symfony\Component\Workflow\Event\GuardEvent
+- name: LeaveEvent
+  type: class
+  source: Symfony\Component\Workflow\Event\LeaveEvent
+- name: TransitionEvent
+  type: class
+  source: Symfony\Component\Workflow\Event\TransitionEvent
+properties: []
+methods:
+- name: testEventNames
+  visibility: public
+  parameters:
+  - name: class
+  - name: workflowName
+  - name: transitionOrPlaceName
+  - name: expected
+  comment: '# * @dataProvider getEvents
+
+    # *
+
+    # * @param class-string $class'
+- name: getEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidArgumentExceptionIsThrownIfWorkflowNameIsMissing
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Workflow\Event\AnnounceEvent
+- Symfony\Component\Workflow\Event\CompletedEvent
+- Symfony\Component\Workflow\Event\EnteredEvent
+- Symfony\Component\Workflow\Event\EnterEvent
+- Symfony\Component\Workflow\Event\GuardEvent
+- Symfony\Component\Workflow\Event\LeaveEvent
+- Symfony\Component\Workflow\Event\TransitionEvent
+interfaces: []

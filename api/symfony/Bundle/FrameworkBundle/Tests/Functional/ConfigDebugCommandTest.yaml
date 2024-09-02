@@ -1,0 +1,171 @@
+name: ConfigDebugCommandTest
+class_comment: '# * @group functional'
+dependencies:
+- name: ConfigDebugCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\ConfigDebugCommand
+- name: Application
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Console\Application
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Console\Exception\InvalidArgumentException
+- name: ArrayInput
+  type: class
+  source: Symfony\Component\Console\Input\ArrayInput
+- name: NullOutput
+  type: class
+  source: Symfony\Component\Console\Output\NullOutput
+- name: CommandCompletionTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandCompletionTester
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+properties: []
+methods:
+- name: testShowList
+  visibility: public
+  parameters:
+  - name: debug
+  comment: '# * @group functional
+
+    # */
+
+    # class ConfigDebugCommandTest extends AbstractWebTestCase
+
+    # {
+
+    # /**
+
+    # * @testWith [true]
+
+    # *           [false]'
+- name: testDumpKernelExtension
+  visibility: public
+  parameters:
+  - name: debug
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testDumpBundleName
+  visibility: public
+  parameters:
+  - name: debug
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testDumpBundleOption
+  visibility: public
+  parameters:
+  - name: debug
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testDumpWithoutTitleIsValidJson
+  visibility: public
+  parameters:
+  - name: debug
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testDumpWithUnsupportedFormat
+  visibility: public
+  parameters:
+  - name: debug
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testParametersValuesAreResolved
+  visibility: public
+  parameters:
+  - name: debug
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testParametersValuesAreFullyResolved
+  visibility: public
+  parameters:
+  - name: debug
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testDefaultParameterValueIsResolvedIfConfigIsExisting
+  visibility: public
+  parameters:
+  - name: debug
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testDumpExtensionConfigWithoutBundle
+  visibility: public
+  parameters:
+  - name: debug
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testDumpUndefinedBundleOption
+  visibility: public
+  parameters:
+  - name: debug
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testDumpWithPrefixedEnv
+  visibility: public
+  parameters:
+  - name: debug
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testDumpFallsBackToDefaultConfigAndResolvesParameterValue
+  visibility: public
+  parameters:
+  - name: debug
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testDumpFallsBackToDefaultConfigAndResolvesEnvPlaceholder
+  visibility: public
+  parameters:
+  - name: debug
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testDumpThrowsExceptionWhenDefaultConfigFallbackIsImpossible
+  visibility: public
+  parameters:
+  - name: debug
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testComplete
+  visibility: public
+  parameters:
+  - name: debug
+  - name: input
+  - name: expectedSuggestions
+  comment: '# * @dataProvider provideCompletionSuggestions'
+- name: provideCompletionSuggestions
+  visibility: public
+  parameters: []
+  comment: null
+- name: createCommandTester
+  visibility: private
+  parameters:
+  - name: debug
+  comment: null
+- name: createApplication
+  visibility: private
+  parameters:
+  - name: debug
+  comment: null
+traits:
+- Symfony\Bundle\FrameworkBundle\Command\ConfigDebugCommand
+- Symfony\Bundle\FrameworkBundle\Console\Application
+- Symfony\Component\Console\Exception\InvalidArgumentException
+- Symfony\Component\Console\Input\ArrayInput
+- Symfony\Component\Console\Output\NullOutput
+- Symfony\Component\Console\Tester\CommandCompletionTester
+- Symfony\Component\Console\Tester\CommandTester
+interfaces: []

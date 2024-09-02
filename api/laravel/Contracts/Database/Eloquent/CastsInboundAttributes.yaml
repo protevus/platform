@@ -1,0 +1,31 @@
+name: CastsInboundAttributes
+class_comment: null
+dependencies:
+- name: Model
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+properties: []
+methods:
+- name: set
+  visibility: public
+  parameters:
+  - name: model
+  - name: key
+  - name: value
+  - name: attributes
+  comment: '# * Transform the attribute to its underlying model values.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Model  $model
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  array  $attributes
+
+    # * @return mixed'
+traits:
+- Illuminate\Database\Eloquent\Model
+interfaces: []

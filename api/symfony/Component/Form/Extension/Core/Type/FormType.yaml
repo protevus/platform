@@ -1,0 +1,102 @@
+name: FormType
+class_comment: null
+dependencies:
+- name: LogicException
+  type: class
+  source: Symfony\Component\Form\Exception\LogicException
+- name: CallbackAccessor
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataAccessor\CallbackAccessor
+- name: ChainAccessor
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataAccessor\ChainAccessor
+- name: PropertyPathAccessor
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataAccessor\PropertyPathAccessor
+- name: DataMapper
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataMapper\DataMapper
+- name: TrimListener
+  type: class
+  source: Symfony\Component\Form\Extension\Core\EventListener\TrimListener
+- name: FormBuilderInterface
+  type: class
+  source: Symfony\Component\Form\FormBuilderInterface
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+- name: FormView
+  type: class
+  source: Symfony\Component\Form\FormView
+- name: Options
+  type: class
+  source: Symfony\Component\OptionsResolver\Options
+- name: OptionsResolver
+  type: class
+  source: Symfony\Component\OptionsResolver\OptionsResolver
+- name: PropertyAccess
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccess
+- name: PropertyAccessorInterface
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccessorInterface
+- name: TranslatableInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatableInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: propertyAccessor
+    default: 'null'
+  comment: null
+- name: buildForm
+  visibility: public
+  parameters:
+  - name: builder
+  - name: options
+  comment: null
+- name: buildView
+  visibility: public
+  parameters:
+  - name: view
+  - name: form
+  - name: options
+  comment: null
+- name: finishView
+  visibility: public
+  parameters:
+  - name: view
+  - name: form
+  - name: options
+  comment: null
+- name: configureOptions
+  visibility: public
+  parameters:
+  - name: resolver
+  comment: null
+- name: getParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: getBlockPrefix
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\Exception\LogicException
+- Symfony\Component\Form\Extension\Core\DataAccessor\CallbackAccessor
+- Symfony\Component\Form\Extension\Core\DataAccessor\ChainAccessor
+- Symfony\Component\Form\Extension\Core\DataAccessor\PropertyPathAccessor
+- Symfony\Component\Form\Extension\Core\DataMapper\DataMapper
+- Symfony\Component\Form\Extension\Core\EventListener\TrimListener
+- Symfony\Component\Form\FormBuilderInterface
+- Symfony\Component\Form\FormInterface
+- Symfony\Component\Form\FormView
+- Symfony\Component\OptionsResolver\Options
+- Symfony\Component\OptionsResolver\OptionsResolver
+- Symfony\Component\PropertyAccess\PropertyAccess
+- Symfony\Component\PropertyAccess\PropertyAccessorInterface
+- Symfony\Contracts\Translation\TranslatableInterface
+interfaces: []

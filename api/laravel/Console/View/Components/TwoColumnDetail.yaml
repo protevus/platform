@@ -1,0 +1,30 @@
+name: TwoColumnDetail
+class_comment: null
+dependencies:
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+properties: []
+methods:
+- name: render
+  visibility: public
+  parameters:
+  - name: first
+  - name: second
+    default: 'null'
+  - name: verbosity
+    default: OutputInterface::VERBOSITY_NORMAL
+  comment: '# * Renders the component using the given arguments.
+
+    # *
+
+    # * @param  string  $first
+
+    # * @param  string|null  $second
+
+    # * @param  int  $verbosity
+
+    # * @return void'
+traits:
+- Symfony\Component\Console\Output\OutputInterface
+interfaces: []

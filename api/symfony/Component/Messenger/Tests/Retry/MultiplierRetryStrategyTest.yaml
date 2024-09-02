@@ -1,0 +1,63 @@
+name: MultiplierRetryStrategyTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: MultiplierRetryStrategy
+  type: class
+  source: Symfony\Component\Messenger\Retry\MultiplierRetryStrategy
+- name: RedeliveryStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\RedeliveryStamp
+properties: []
+methods:
+- name: testIsRetryable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsNotRetryable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsNotRetryableWithZeroMax
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsRetryableWithNoStamp
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetWaitTime
+  visibility: public
+  parameters:
+  - name: delay
+  - name: multiplier
+  - name: maxDelay
+  - name: previousRetries
+  - name: expectedDelay
+  comment: '# * @dataProvider getWaitTimeTests'
+- name: getWaitTimeTests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testJitter
+  visibility: public
+  parameters:
+  - name: jitter
+  - name: maxMin
+  - name: maxMax
+  comment: '# * @dataProvider getJitterTest'
+- name: getJitterTest
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Retry\MultiplierRetryStrategy
+- Symfony\Component\Messenger\Stamp\RedeliveryStamp
+interfaces: []

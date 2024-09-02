@@ -1,0 +1,53 @@
+name: InstantiatorTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ClassNotFoundException
+  type: class
+  source: Symfony\Component\VarExporter\Exception\ClassNotFoundException
+- name: NotInstantiableTypeException
+  type: class
+  source: Symfony\Component\VarExporter\Exception\NotInstantiableTypeException
+- name: Instantiator
+  type: class
+  source: Symfony\Component\VarExporter\Instantiator
+properties:
+- name: prot
+  visibility: protected
+  comment: null
+- name: priv
+  visibility: private
+  comment: null
+- name: priv
+  visibility: private
+  comment: null
+methods:
+- name: testNotFoundClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFailingInstantiation
+  visibility: public
+  parameters:
+  - name: class
+  comment: '# * @dataProvider provideFailingInstantiation'
+- name: provideFailingInstantiation
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInstantiate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPhpReferences
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\VarExporter\Exception\ClassNotFoundException
+- Symfony\Component\VarExporter\Exception\NotInstantiableTypeException
+- Symfony\Component\VarExporter\Instantiator
+interfaces: []

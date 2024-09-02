@@ -1,0 +1,65 @@
+name: ChoiceListView
+class_comment: '# * Represents a choice list in templates.
+
+  # *
+
+  # * A choice list contains choices and optionally preferred choices which are
+
+  # * displayed in the very beginning of the list. Both choices and preferred
+
+  # * choices may be grouped in {@link ChoiceGroupView} instances.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: choices
+    default: '[]'
+  - name: preferredChoices
+    default: '[]'
+  comment: '# * Represents a choice list in templates.
+
+    # *
+
+    # * A choice list contains choices and optionally preferred choices which are
+
+    # * displayed in the very beginning of the list. Both choices and preferred
+
+    # * choices may be grouped in {@link ChoiceGroupView} instances.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # class ChoiceListView
+
+    # {
+
+    # /**
+
+    # * Creates a new choice list view.
+
+    # *
+
+    # * @param array<ChoiceGroupView|ChoiceView> $choices          The choice views
+
+    # * @param array<ChoiceGroupView|ChoiceView> $preferredChoices the preferred choice
+    views'
+- name: hasPlaceholder
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether a placeholder is in the choices.
+
+    # *
+
+    # * A placeholder must be the first child element, not be in a group and have
+    an empty value.'
+traits: []
+interfaces: []

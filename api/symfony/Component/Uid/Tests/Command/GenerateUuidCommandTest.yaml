@@ -1,0 +1,148 @@
+name: GenerateUuidCommandTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+- name: CommandCompletionTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandCompletionTester
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+- name: GenerateUuidCommand
+  type: class
+  source: Symfony\Component\Uid\Command\GenerateUuidCommand
+- name: UuidFactory
+  type: class
+  source: Symfony\Component\Uid\Factory\UuidFactory
+- name: Uuid
+  type: class
+  source: Symfony\Component\Uid\Uuid
+- name: UuidV1
+  type: class
+  source: Symfony\Component\Uid\UuidV1
+- name: UuidV3
+  type: class
+  source: Symfony\Component\Uid\UuidV3
+- name: UuidV4
+  type: class
+  source: Symfony\Component\Uid\UuidV4
+- name: UuidV5
+  type: class
+  source: Symfony\Component\Uid\UuidV5
+- name: UuidV6
+  type: class
+  source: Symfony\Component\Uid\UuidV6
+properties: []
+methods:
+- name: testDefaults
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTimeBasedWithInvalidNode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTimeBasedWithUnparsableTimestamp
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTimeBasedWithTimestampBeforeUUIDEpoch
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTimeBased
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNameBasedWithInvalidNamespace
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNameBasedWithoutNamespace
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNameBased
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRandomBased
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidCombinationOfBasedOptions
+  visibility: public
+  parameters:
+  - name: input
+  comment: '# * @dataProvider provideInvalidCombinationOfBasedOptions'
+- name: provideInvalidCombinationOfBasedOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtraNodeOption
+  visibility: public
+  parameters:
+  - name: input
+  comment: '# * @dataProvider provideExtraNodeOption'
+- name: provideExtraNodeOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtraNamespaceOption
+  visibility: public
+  parameters:
+  - name: input
+  comment: '# * @dataProvider provideExtraNamespaceOption'
+- name: provideExtraNamespaceOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCount
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTimestampIncrementWhenGeneratingSeveralTimeBasedUuids
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNamespacePredefinedKeyword
+  visibility: public
+  parameters: []
+  comment: null
+- name: testComplete
+  visibility: public
+  parameters:
+  - name: input
+  - name: expectedSuggestions
+  comment: '# * @dataProvider provideCompletionSuggestions'
+- name: provideCompletionSuggestions
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Application
+- Symfony\Component\Console\Tester\CommandCompletionTester
+- Symfony\Component\Console\Tester\CommandTester
+- Symfony\Component\Uid\Command\GenerateUuidCommand
+- Symfony\Component\Uid\Factory\UuidFactory
+- Symfony\Component\Uid\Uuid
+- Symfony\Component\Uid\UuidV1
+- Symfony\Component\Uid\UuidV3
+- Symfony\Component\Uid\UuidV4
+- Symfony\Component\Uid\UuidV5
+- Symfony\Component\Uid\UuidV6
+interfaces: []

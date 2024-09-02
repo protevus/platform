@@ -1,0 +1,63 @@
+name: MetadataBagTest
+class_comment: '# * Test class for MetadataBag.
+
+  # *
+
+  # * @group time-sensitive'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: MetadataBag
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Storage\MetadataBag
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testInitialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetSetName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetStorageKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetLifetime
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetCreated
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetLastUsed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClear
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSkipLastUsedUpdate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDoesNotSkipLastUsedUpdate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLifetimeIsInt
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Session\Storage\MetadataBag
+interfaces: []

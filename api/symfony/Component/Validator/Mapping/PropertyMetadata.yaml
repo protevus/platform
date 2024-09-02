@@ -1,0 +1,83 @@
+name: PropertyMetadata
+class_comment: '# * Stores all metadata needed for validating a class property.
+
+  # *
+
+  # * The value of the property is obtained by directly accessing the property.
+
+  # * The property will be accessed by reflection, so the access of private and
+
+  # * protected properties is supported.
+
+  # *
+
+  # * This class supports serialization and cloning.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @see PropertyMetadataInterface'
+dependencies:
+- name: ValidatorException
+  type: class
+  source: Symfony\Component\Validator\Exception\ValidatorException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: class
+  - name: name
+  comment: '# * Stores all metadata needed for validating a class property.
+
+    # *
+
+    # * The value of the property is obtained by directly accessing the property.
+
+    # * The property will be accessed by reflection, so the access of private and
+
+    # * protected properties is supported.
+
+    # *
+
+    # * This class supports serialization and cloning.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # *
+
+    # * @see PropertyMetadataInterface
+
+    # */
+
+    # class PropertyMetadata extends MemberMetadata
+
+    # {
+
+    # /**
+
+    # * @param string $class The class this property is defined on
+
+    # * @param string $name  The name of this property
+
+    # *
+
+    # * @throws ValidatorException'
+- name: getPropertyValue
+  visibility: public
+  parameters:
+  - name: object
+  comment: null
+- name: newReflectionMember
+  visibility: protected
+  parameters:
+  - name: objectOrClassName
+  comment: null
+traits:
+- Symfony\Component\Validator\Exception\ValidatorException
+interfaces: []

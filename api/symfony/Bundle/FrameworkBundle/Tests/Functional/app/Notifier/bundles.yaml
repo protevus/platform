@@ -1,0 +1,19 @@
+name: bundles
+class_comment: null
+dependencies:
+- name: FrameworkBundle
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\FrameworkBundle
+- name: TestBundle
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\TestBundle\TestBundle
+- name: MercureBundle
+  type: class
+  source: Symfony\Bundle\MercureBundle\MercureBundle
+properties: []
+methods: []
+traits:
+- Symfony\Bundle\FrameworkBundle\FrameworkBundle
+- Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\TestBundle\TestBundle
+- Symfony\Bundle\MercureBundle\MercureBundle
+interfaces: []

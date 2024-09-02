@@ -1,0 +1,165 @@
+name: ResponseTrait
+class_comment: null
+dependencies:
+- name: HttpResponseException
+  type: class
+  source: Illuminate\Http\Exceptions\HttpResponseException
+- name: HeaderBag
+  type: class
+  source: Symfony\Component\HttpFoundation\HeaderBag
+- name: Throwable
+  type: class
+  source: Throwable
+properties:
+- name: original
+  visibility: public
+  comment: '# * The original content of the response.
+
+    # *
+
+    # * @var mixed'
+- name: exception
+  visibility: public
+  comment: '# * The exception that triggered the error response (if applicable).
+
+    # *
+
+    # * @var \Throwable|null'
+methods:
+- name: status
+  visibility: public
+  parameters: []
+  comment: "# * The original content of the response.\n# *\n# * @var mixed\n# */\n\
+    # public $original;\n# \n# /**\n# * The exception that triggered the error response\
+    \ (if applicable).\n# *\n# * @var \\Throwable|null\n# */\n# public $exception;\n\
+    # \n# /**\n# * Get the status code for the response.\n# *\n# * @return int"
+- name: statusText
+  visibility: public
+  parameters: []
+  comment: '# * Get the status text for the response.
+
+    # *
+
+    # * @return string'
+- name: content
+  visibility: public
+  parameters: []
+  comment: '# * Get the content of the response.
+
+    # *
+
+    # * @return string'
+- name: getOriginalContent
+  visibility: public
+  parameters: []
+  comment: '# * Get the original response content.
+
+    # *
+
+    # * @return mixed'
+- name: header
+  visibility: public
+  parameters:
+  - name: key
+  - name: values
+  - name: replace
+    default: 'true'
+  comment: '# * Set a header on the Response.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  array|string  $values
+
+    # * @param  bool  $replace
+
+    # * @return $this'
+- name: withHeaders
+  visibility: public
+  parameters:
+  - name: headers
+  comment: '# * Add an array of headers to the response.
+
+    # *
+
+    # * @param  \Symfony\Component\HttpFoundation\HeaderBag|array  $headers
+
+    # * @return $this'
+- name: cookie
+  visibility: public
+  parameters:
+  - name: cookie
+  comment: '# * Add a cookie to the response.
+
+    # *
+
+    # * @param  \Symfony\Component\HttpFoundation\Cookie|mixed  $cookie
+
+    # * @return $this'
+- name: withCookie
+  visibility: public
+  parameters:
+  - name: cookie
+  comment: '# * Add a cookie to the response.
+
+    # *
+
+    # * @param  \Symfony\Component\HttpFoundation\Cookie|mixed  $cookie
+
+    # * @return $this'
+- name: withoutCookie
+  visibility: public
+  parameters:
+  - name: cookie
+  - name: path
+    default: 'null'
+  - name: domain
+    default: 'null'
+  comment: '# * Expire a cookie when sending the response.
+
+    # *
+
+    # * @param  \Symfony\Component\HttpFoundation\Cookie|mixed  $cookie
+
+    # * @param  string|null  $path
+
+    # * @param  string|null  $domain
+
+    # * @return $this'
+- name: getCallback
+  visibility: public
+  parameters: []
+  comment: '# * Get the callback of the response.
+
+    # *
+
+    # * @return string|null'
+- name: withException
+  visibility: public
+  parameters:
+  - name: e
+  comment: '# * Set the exception to attach to the response.
+
+    # *
+
+    # * @param  \Throwable  $e
+
+    # * @return $this'
+- name: throwResponse
+  visibility: public
+  parameters: []
+  comment: '# * Throws the response in a HttpResponseException instance.
+
+    # *
+
+    # * @return void
+
+    # *
+
+    # * @throws \Illuminate\Http\Exceptions\HttpResponseException'
+traits:
+- Illuminate\Http\Exceptions\HttpResponseException
+- Symfony\Component\HttpFoundation\HeaderBag
+- Throwable
+interfaces: []

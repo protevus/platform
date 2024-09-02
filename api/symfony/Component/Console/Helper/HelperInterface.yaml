@@ -1,0 +1,34 @@
+name: HelperInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: setHelperSet
+  visibility: public
+  parameters:
+  - name: helperSet
+  comment: '# * HelperInterface is the interface all helpers must implement.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # interface HelperInterface
+
+    # {
+
+    # /**
+
+    # * Sets the helper set associated with this helper.'
+- name: getHelperSet
+  visibility: public
+  parameters: []
+  comment: '# * Gets the helper set associated with this helper.'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: '# * Returns the canonical name of this helper.'
+traits: []
+interfaces: []

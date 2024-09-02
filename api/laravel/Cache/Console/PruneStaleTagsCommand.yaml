@@ -1,0 +1,58 @@
+name: PruneStaleTagsCommand
+class_comment: null
+dependencies:
+- name: CacheManager
+  type: class
+  source: Illuminate\Cache\CacheManager
+- name: RedisStore
+  type: class
+  source: Illuminate\Cache\RedisStore
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+properties:
+- name: name
+  visibility: protected
+  comment: '# * The console command name.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+methods:
+- name: handle
+  visibility: public
+  parameters:
+  - name: cache
+  comment: "# * The console command name.\n# *\n# * @var string\n# */\n# protected\
+    \ $name = 'cache:prune-stale-tags';\n# \n# /**\n# * The console command description.\n\
+    # *\n# * @var string\n# */\n# protected $description = 'Prune stale cache tags\
+    \ from the cache (Redis only)';\n# \n# /**\n# * Execute the console command.\n\
+    # *\n# * @param  \\Illuminate\\Cache\\CacheManager  $cache\n# * @return int|null"
+- name: getArguments
+  visibility: protected
+  parameters: []
+  comment: '# * Get the console command arguments.
+
+    # *
+
+    # * @return array'
+traits:
+- Illuminate\Cache\CacheManager
+- Illuminate\Cache\RedisStore
+- Illuminate\Console\Command
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Input\InputArgument
+interfaces: []

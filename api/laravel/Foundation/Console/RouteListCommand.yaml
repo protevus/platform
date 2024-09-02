@@ -1,0 +1,328 @@
+name: RouteListCommand
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+- name: UrlGenerator
+  type: class
+  source: Illuminate\Contracts\Routing\UrlGenerator
+- name: Route
+  type: class
+  source: Illuminate\Routing\Route
+- name: Router
+  type: class
+  source: Illuminate\Routing\Router
+- name: ViewController
+  type: class
+  source: Illuminate\Routing\ViewController
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: ReflectionClass
+  type: class
+  source: ReflectionClass
+- name: ReflectionFunction
+  type: class
+  source: ReflectionFunction
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: Terminal
+  type: class
+  source: Symfony\Component\Console\Terminal
+properties:
+- name: name
+  visibility: protected
+  comment: '# * The console command name.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+- name: router
+  visibility: protected
+  comment: '# * The router instance.
+
+    # *
+
+    # * @var \Illuminate\Routing\Router'
+- name: headers
+  visibility: protected
+  comment: '# * The table headers for the command.
+
+    # *
+
+    # * @var string[]'
+- name: terminalWidthResolver
+  visibility: protected
+  comment: '# * The terminal width resolver callback.
+
+    # *
+
+    # * @var \Closure|null'
+- name: verbColors
+  visibility: protected
+  comment: '# * The verb colors for the command.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: router
+  comment: "# * The console command name.\n# *\n# * @var string\n# */\n# protected\
+    \ $name = 'route:list';\n# \n# /**\n# * The console command description.\n# *\n\
+    # * @var string\n# */\n# protected $description = 'List all registered routes';\n\
+    # \n# /**\n# * The router instance.\n# *\n# * @var \\Illuminate\\Routing\\Router\n\
+    # */\n# protected $router;\n# \n# /**\n# * The table headers for the command.\n\
+    # *\n# * @var string[]\n# */\n# protected $headers = ['Domain', 'Method', 'URI',\
+    \ 'Name', 'Action', 'Middleware'];\n# \n# /**\n# * The terminal width resolver\
+    \ callback.\n# *\n# * @var \\Closure|null\n# */\n# protected static $terminalWidthResolver;\n\
+    # \n# /**\n# * The verb colors for the command.\n# *\n# * @var array\n# */\n#\
+    \ protected $verbColors = [\n# 'ANY' => 'red',\n# 'GET' => 'blue',\n# 'HEAD' =>\
+    \ '#6C7280',\n# 'OPTIONS' => '#6C7280',\n# 'POST' => 'yellow',\n# 'PUT' => 'yellow',\n\
+    # 'PATCH' => 'yellow',\n# 'DELETE' => 'red',\n# ];\n# \n# /**\n# * Create a new\
+    \ route command instance.\n# *\n# * @param  \\Illuminate\\Routing\\Router  $router\n\
+    # * @return void"
+- name: handle
+  visibility: public
+  parameters: []
+  comment: '# * Execute the console command.
+
+    # *
+
+    # * @return void'
+- name: getRoutes
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the routes into a displayable format.
+
+    # *
+
+    # * @return array'
+- name: getRouteInformation
+  visibility: protected
+  parameters:
+  - name: route
+  comment: '# * Get the route information for a given route.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Route  $route
+
+    # * @return array'
+- name: sortRoutes
+  visibility: protected
+  parameters:
+  - name: sort
+  - name: routes
+  comment: '# * Sort the routes by a given element.
+
+    # *
+
+    # * @param  string  $sort
+
+    # * @param  array  $routes
+
+    # * @return array'
+- name: pluckColumns
+  visibility: protected
+  parameters:
+  - name: routes
+  comment: '# * Remove unnecessary columns from the routes.
+
+    # *
+
+    # * @param  array  $routes
+
+    # * @return array'
+- name: displayRoutes
+  visibility: protected
+  parameters:
+  - name: routes
+  comment: '# * Display the route information on the console.
+
+    # *
+
+    # * @param  array  $routes
+
+    # * @return void'
+- name: getMiddleware
+  visibility: protected
+  parameters:
+  - name: route
+  comment: '# * Get the middleware for the route.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Route  $route
+
+    # * @return string'
+- name: isVendorRoute
+  visibility: protected
+  parameters:
+  - name: route
+  comment: '# * Determine if the route has been defined outside of the application.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Route  $route
+
+    # * @return bool'
+- name: isFrameworkController
+  visibility: protected
+  parameters:
+  - name: route
+  comment: '# * Determine if the route uses a framework controller.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Route  $route
+
+    # * @return bool'
+- name: filterRoute
+  visibility: protected
+  parameters:
+  - name: route
+  comment: '# * Filter the route by URI and / or name.
+
+    # *
+
+    # * @param  array  $route
+
+    # * @return array|null'
+- name: getHeaders
+  visibility: protected
+  parameters: []
+  comment: '# * Get the table headers for the visible columns.
+
+    # *
+
+    # * @return array'
+- name: getColumns
+  visibility: protected
+  parameters: []
+  comment: '# * Get the column names to show (lowercase table headers).
+
+    # *
+
+    # * @return array'
+- name: parseColumns
+  visibility: protected
+  parameters:
+  - name: columns
+  comment: '# * Parse the column list.
+
+    # *
+
+    # * @param  array  $columns
+
+    # * @return array'
+- name: asJson
+  visibility: protected
+  parameters:
+  - name: routes
+  comment: '# * Convert the given routes to JSON.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection  $routes
+
+    # * @return string'
+- name: forCli
+  visibility: protected
+  parameters:
+  - name: routes
+  comment: '# * Convert the given routes to regular CLI output.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection  $routes
+
+    # * @return array'
+- name: formatActionForCli
+  visibility: protected
+  parameters:
+  - name: route
+  comment: '# * Get the formatted action for display on the CLI.
+
+    # *
+
+    # * @param  array  $route
+
+    # * @return string'
+- name: determineRouteCountOutput
+  visibility: protected
+  parameters:
+  - name: routes
+  - name: terminalWidth
+  comment: '# * Determine and return the output for displaying the number of routes
+    in the CLI output.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection  $routes
+
+    # * @param  int  $terminalWidth
+
+    # * @return string'
+- name: getTerminalWidth
+  visibility: public
+  parameters: []
+  comment: '# * Get the terminal width.
+
+    # *
+
+    # * @return int'
+- name: resolveTerminalWidthUsing
+  visibility: public
+  parameters:
+  - name: resolver
+  comment: '# * Set a callback that should be used when resolving the terminal width.
+
+    # *
+
+    # * @param  \Closure|null  $resolver
+
+    # * @return void'
+- name: getOptions
+  visibility: protected
+  parameters: []
+  comment: '# * Get the console command options.
+
+    # *
+
+    # * @return array'
+traits:
+- Closure
+- Illuminate\Console\Command
+- Illuminate\Contracts\Routing\UrlGenerator
+- Illuminate\Routing\Route
+- Illuminate\Routing\Router
+- Illuminate\Routing\ViewController
+- Illuminate\Support\Arr
+- Illuminate\Support\Str
+- ReflectionClass
+- ReflectionFunction
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Terminal
+interfaces: []

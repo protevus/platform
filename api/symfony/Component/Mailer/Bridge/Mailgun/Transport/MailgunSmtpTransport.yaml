@@ -1,0 +1,35 @@
+name: MailgunSmtpTransport
+class_comment: '# * @author Kevin Verschaeve'
+dependencies:
+- name: EventDispatcherInterface
+  type: class
+  source: Psr\EventDispatcher\EventDispatcherInterface
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: EsmtpTransport
+  type: class
+  source: Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport
+- name: MailgunHeadersTrait
+  type: class
+  source: MailgunHeadersTrait
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: username
+  - name: password
+  - name: region
+    default: 'null'
+  - name: dispatcher
+    default: 'null'
+  - name: logger
+    default: 'null'
+  comment: null
+traits:
+- Psr\EventDispatcher\EventDispatcherInterface
+- Psr\Log\LoggerInterface
+- Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport
+- MailgunHeadersTrait
+interfaces: []

@@ -1,0 +1,75 @@
+name: PropertyAccessorArrayAccessTestCase
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: NoSuchIndexException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\NoSuchIndexException
+- name: PropertyAccess
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccess
+- name: PropertyAccessor
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccessor
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getContainer
+  visibility: protected
+  parameters:
+  - name: array
+  comment: null
+- name: getValidPropertyPaths
+  visibility: public
+  parameters: []
+  comment: null
+- name: getInvalidPropertyPaths
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValue
+  visibility: public
+  parameters:
+  - name: collection
+  - name: path
+  - name: value
+  comment: '# * @dataProvider getValidPropertyPaths'
+- name: testGetValueFailsIfNoSuchIndex
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetValue
+  visibility: public
+  parameters:
+  - name: collection
+  - name: path
+  comment: '# * @dataProvider getValidPropertyPaths'
+- name: testIsReadable
+  visibility: public
+  parameters:
+  - name: collection
+  - name: path
+  comment: '# * @dataProvider getValidPropertyPaths'
+- name: testIsWritable
+  visibility: public
+  parameters:
+  - name: collection
+  - name: path
+  comment: '# * @dataProvider getValidPropertyPaths'
+- name: testIsNotWritable
+  visibility: public
+  parameters:
+  - name: collection
+  - name: path
+  comment: '# * @dataProvider getInvalidPropertyPaths'
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\PropertyAccess\Exception\NoSuchIndexException
+- Symfony\Component\PropertyAccess\PropertyAccess
+- Symfony\Component\PropertyAccess\PropertyAccessor
+interfaces: []

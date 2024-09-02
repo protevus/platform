@@ -1,0 +1,30 @@
+name: SendEmailMessage
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: message
+  - name: envelope
+    default: 'null'
+  comment: null
+- name: getMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: getEnvelope
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mime\RawMessage
+interfaces: []

@@ -1,0 +1,41 @@
+name: QueueingFactory
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: queue
+  visibility: public
+  parameters:
+  - name: '...$parameters'
+  comment: '# * Queue a cookie to send with the next response.
+
+    # *
+
+    # * @param  mixed  ...$parameters
+
+    # * @return void'
+- name: unqueue
+  visibility: public
+  parameters:
+  - name: name
+  - name: path
+    default: 'null'
+  comment: '# * Remove a cookie from the queue.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|null  $path
+
+    # * @return void'
+- name: getQueuedCookies
+  visibility: public
+  parameters: []
+  comment: '# * Get the cookies which have been queued for the next request.
+
+    # *
+
+    # * @return array'
+traits: []
+interfaces: []

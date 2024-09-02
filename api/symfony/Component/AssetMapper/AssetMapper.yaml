@@ -1,0 +1,46 @@
+name: AssetMapper
+class_comment: '# * Finds and returns assets in the pipeline.
+
+  # *
+
+  # * @final'
+dependencies:
+- name: MappedAssetFactoryInterface
+  type: class
+  source: Symfony\Component\AssetMapper\Factory\MappedAssetFactoryInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: mapperRepository
+  - name: mappedAssetFactory
+  - name: compiledConfigReader
+  comment: null
+- name: getAsset
+  visibility: public
+  parameters:
+  - name: logicalPath
+  comment: null
+- name: allAssets
+  visibility: public
+  parameters: []
+  comment: null
+- name: getAssetFromSourcePath
+  visibility: public
+  parameters:
+  - name: sourcePath
+  comment: null
+- name: getPublicPath
+  visibility: public
+  parameters:
+  - name: logicalPath
+  comment: null
+- name: loadManifest
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\AssetMapper\Factory\MappedAssetFactoryInterface
+interfaces:
+- AssetMapperInterface

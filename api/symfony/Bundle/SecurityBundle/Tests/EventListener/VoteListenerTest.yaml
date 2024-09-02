@@ -1,0 +1,31 @@
+name: VoteListenerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: VoteListener
+  type: class
+  source: Symfony\Bundle\SecurityBundle\EventListener\VoteListener
+- name: TraceableAccessDecisionManager
+  type: class
+  source: Symfony\Component\Security\Core\Authorization\TraceableAccessDecisionManager
+- name: VoterInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authorization\Voter\VoterInterface
+- name: VoteEvent
+  type: class
+  source: Symfony\Component\Security\Core\Event\VoteEvent
+properties: []
+methods:
+- name: testOnVoterVote
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\SecurityBundle\EventListener\VoteListener
+- Symfony\Component\Security\Core\Authorization\TraceableAccessDecisionManager
+- Symfony\Component\Security\Core\Authorization\Voter\VoterInterface
+- Symfony\Component\Security\Core\Event\VoteEvent
+interfaces: []

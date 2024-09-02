@@ -1,0 +1,561 @@
+name: Builder
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: Connection
+  type: class
+  source: Illuminate\Database\Connection
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+- name: LogicException
+  type: class
+  source: LogicException
+- name: Macroable
+  type: class
+  source: Macroable
+properties:
+- name: connection
+  visibility: protected
+  comment: '# * The database connection instance.
+
+    # *
+
+    # * @var \Illuminate\Database\Connection'
+- name: grammar
+  visibility: protected
+  comment: '# * The schema grammar instance.
+
+    # *
+
+    # * @var \Illuminate\Database\Schema\Grammars\Grammar'
+- name: resolver
+  visibility: protected
+  comment: '# * The Blueprint resolver callback.
+
+    # *
+
+    # * @var \Closure'
+- name: defaultStringLength
+  visibility: public
+  comment: '# * The default string length for migrations.
+
+    # *
+
+    # * @var int|null'
+- name: defaultMorphKeyType
+  visibility: public
+  comment: '# * The default relationship morph key type.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: connection
+  comment: "# * The database connection instance.\n# *\n# * @var \\Illuminate\\Database\\\
+    Connection\n# */\n# protected $connection;\n# \n# /**\n# * The schema grammar\
+    \ instance.\n# *\n# * @var \\Illuminate\\Database\\Schema\\Grammars\\Grammar\n\
+    # */\n# protected $grammar;\n# \n# /**\n# * The Blueprint resolver callback.\n\
+    # *\n# * @var \\Closure\n# */\n# protected $resolver;\n# \n# /**\n# * The default\
+    \ string length for migrations.\n# *\n# * @var int|null\n# */\n# public static\
+    \ $defaultStringLength = 255;\n# \n# /**\n# * The default relationship morph key\
+    \ type.\n# *\n# * @var string\n# */\n# public static $defaultMorphKeyType = 'int';\n\
+    # \n# /**\n# * Create a new database Schema manager.\n# *\n# * @param  \\Illuminate\\\
+    Database\\Connection  $connection\n# * @return void"
+- name: defaultStringLength
+  visibility: public
+  parameters:
+  - name: length
+  comment: '# * Set the default string length for migrations.
+
+    # *
+
+    # * @param  int  $length
+
+    # * @return void'
+- name: defaultMorphKeyType
+  visibility: public
+  parameters:
+  - name: type
+  comment: '# * Set the default morph key type for migrations.
+
+    # *
+
+    # * @param  string  $type
+
+    # * @return void
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: morphUsingUuids
+  visibility: public
+  parameters: []
+  comment: '# * Set the default morph key type for migrations to UUIDs.
+
+    # *
+
+    # * @return void'
+- name: morphUsingUlids
+  visibility: public
+  parameters: []
+  comment: '# * Set the default morph key type for migrations to ULIDs.
+
+    # *
+
+    # * @return void'
+- name: createDatabase
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Create a database in the schema.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return bool
+
+    # *
+
+    # * @throws \LogicException'
+- name: dropDatabaseIfExists
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Drop a database from the schema if the database exists.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return bool
+
+    # *
+
+    # * @throws \LogicException'
+- name: hasTable
+  visibility: public
+  parameters:
+  - name: table
+  comment: '# * Determine if the given table exists.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @return bool'
+- name: hasView
+  visibility: public
+  parameters:
+  - name: view
+  comment: '# * Determine if the given view exists.
+
+    # *
+
+    # * @param  string  $view
+
+    # * @return bool'
+- name: getTables
+  visibility: public
+  parameters: []
+  comment: '# * Get the tables that belong to the database.
+
+    # *
+
+    # * @return array'
+- name: getTableListing
+  visibility: public
+  parameters: []
+  comment: '# * Get the names of the tables that belong to the database.
+
+    # *
+
+    # * @return array'
+- name: getViews
+  visibility: public
+  parameters: []
+  comment: '# * Get the views that belong to the database.
+
+    # *
+
+    # * @return array'
+- name: getTypes
+  visibility: public
+  parameters: []
+  comment: '# * Get the user-defined types that belong to the database.
+
+    # *
+
+    # * @return array'
+- name: hasColumn
+  visibility: public
+  parameters:
+  - name: table
+  - name: column
+  comment: '# * Determine if the given table has a given column.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @param  string  $column
+
+    # * @return bool'
+- name: hasColumns
+  visibility: public
+  parameters:
+  - name: table
+  - name: columns
+  comment: '# * Determine if the given table has given columns.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @param  array  $columns
+
+    # * @return bool'
+- name: whenTableHasColumn
+  visibility: public
+  parameters:
+  - name: table
+  - name: column
+  - name: callback
+  comment: '# * Execute a table builder callback if the given table has a given column.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @param  string  $column
+
+    # * @param  \Closure  $callback
+
+    # * @return void'
+- name: whenTableDoesntHaveColumn
+  visibility: public
+  parameters:
+  - name: table
+  - name: column
+  - name: callback
+  comment: '# * Execute a table builder callback if the given table doesn''t have
+    a given column.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @param  string  $column
+
+    # * @param  \Closure  $callback
+
+    # * @return void'
+- name: getColumnType
+  visibility: public
+  parameters:
+  - name: table
+  - name: column
+  - name: fullDefinition
+    default: 'false'
+  comment: '# * Get the data type for the given column name.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @param  string  $column
+
+    # * @param  bool  $fullDefinition
+
+    # * @return string'
+- name: getColumnListing
+  visibility: public
+  parameters:
+  - name: table
+  comment: '# * Get the column listing for a given table.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @return array'
+- name: getColumns
+  visibility: public
+  parameters:
+  - name: table
+  comment: '# * Get the columns for a given table.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @return array'
+- name: getIndexes
+  visibility: public
+  parameters:
+  - name: table
+  comment: '# * Get the indexes for a given table.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @return array'
+- name: getIndexListing
+  visibility: public
+  parameters:
+  - name: table
+  comment: '# * Get the names of the indexes for a given table.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @return array'
+- name: hasIndex
+  visibility: public
+  parameters:
+  - name: table
+  - name: index
+  - name: type
+    default: 'null'
+  comment: '# * Determine if the given table has a given index.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @param  string|array  $index
+
+    # * @param  string|null  $type
+
+    # * @return bool'
+- name: getForeignKeys
+  visibility: public
+  parameters:
+  - name: table
+  comment: '# * Get the foreign keys for a given table.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @return array'
+- name: table
+  visibility: public
+  parameters:
+  - name: table
+  - name: callback
+  comment: '# * Modify a table on the schema.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @param  \Closure  $callback
+
+    # * @return void'
+- name: create
+  visibility: public
+  parameters:
+  - name: table
+  - name: callback
+  comment: '# * Create a new table on the schema.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @param  \Closure  $callback
+
+    # * @return void'
+- name: drop
+  visibility: public
+  parameters:
+  - name: table
+  comment: '# * Drop a table from the schema.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @return void'
+- name: dropIfExists
+  visibility: public
+  parameters:
+  - name: table
+  comment: '# * Drop a table from the schema if it exists.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @return void'
+- name: dropColumns
+  visibility: public
+  parameters:
+  - name: table
+  - name: columns
+  comment: '# * Drop columns from a table schema.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @param  string|array  $columns
+
+    # * @return void'
+- name: dropAllTables
+  visibility: public
+  parameters: []
+  comment: '# * Drop all tables from the database.
+
+    # *
+
+    # * @return void
+
+    # *
+
+    # * @throws \LogicException'
+- name: dropAllViews
+  visibility: public
+  parameters: []
+  comment: '# * Drop all views from the database.
+
+    # *
+
+    # * @return void
+
+    # *
+
+    # * @throws \LogicException'
+- name: dropAllTypes
+  visibility: public
+  parameters: []
+  comment: '# * Drop all types from the database.
+
+    # *
+
+    # * @return void
+
+    # *
+
+    # * @throws \LogicException'
+- name: rename
+  visibility: public
+  parameters:
+  - name: from
+  - name: to
+  comment: '# * Rename a table on the schema.
+
+    # *
+
+    # * @param  string  $from
+
+    # * @param  string  $to
+
+    # * @return void'
+- name: enableForeignKeyConstraints
+  visibility: public
+  parameters: []
+  comment: '# * Enable foreign key constraints.
+
+    # *
+
+    # * @return bool'
+- name: disableForeignKeyConstraints
+  visibility: public
+  parameters: []
+  comment: '# * Disable foreign key constraints.
+
+    # *
+
+    # * @return bool'
+- name: withoutForeignKeyConstraints
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Disable foreign key constraints during the execution of a callback.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return mixed'
+- name: build
+  visibility: protected
+  parameters:
+  - name: blueprint
+  comment: '# * Execute the blueprint to build / modify the table.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @return void'
+- name: createBlueprint
+  visibility: protected
+  parameters:
+  - name: table
+  - name: callback
+    default: 'null'
+  comment: '# * Create a new command set with a Closure.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @param  \Closure|null  $callback
+
+    # * @return \Illuminate\Database\Schema\Blueprint'
+- name: getConnection
+  visibility: public
+  parameters: []
+  comment: '# * Get the database connection instance.
+
+    # *
+
+    # * @return \Illuminate\Database\Connection'
+- name: setConnection
+  visibility: public
+  parameters:
+  - name: connection
+  comment: '# * Set the database connection instance.
+
+    # *
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @return $this'
+- name: blueprintResolver
+  visibility: public
+  parameters:
+  - name: resolver
+  comment: '# * Set the Schema Blueprint resolver callback.
+
+    # *
+
+    # * @param  \Closure  $resolver
+
+    # * @return void'
+traits:
+- Closure
+- Illuminate\Container\Container
+- Illuminate\Database\Connection
+- Illuminate\Support\Traits\Macroable
+- InvalidArgumentException
+- LogicException
+- Macroable
+interfaces: []

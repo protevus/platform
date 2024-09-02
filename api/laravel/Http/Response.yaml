@@ -1,0 +1,98 @@
+name: Response
+class_comment: null
+dependencies:
+- name: ArrayObject
+  type: class
+  source: ArrayObject
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: Jsonable
+  type: class
+  source: Illuminate\Contracts\Support\Jsonable
+- name: Renderable
+  type: class
+  source: Illuminate\Contracts\Support\Renderable
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+- name: JsonSerializable
+  type: class
+  source: JsonSerializable
+- name: SymfonyResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: ResponseHeaderBag
+  type: class
+  source: Symfony\Component\HttpFoundation\ResponseHeaderBag
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: content
+    default: ''''''
+  - name: status
+    default: '200'
+  - name: headers
+    default: '[]'
+  comment: '# * Create a new HTTP response.
+
+    # *
+
+    # * @param  mixed  $content
+
+    # * @param  int  $status
+
+    # * @param  array  $headers
+
+    # * @return void
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: shouldBeJson
+  visibility: protected
+  parameters:
+  - name: content
+  comment: "# * Set the content on the response.\n# *\n# * @param  mixed  $content\n\
+    # * @return $this\n# *\n# * @throws \\InvalidArgumentException\n# */\n# #[\\Override]\n\
+    # public function setContent(mixed $content): static\n# {\n# $this->original =\
+    \ $content;\n# \n# // If the content is \"JSONable\" we will set the appropriate\
+    \ header and convert\n# // the content to JSON. This is useful when returning\
+    \ something like models\n# // from routes that will be automatically transformed\
+    \ to their JSON form.\n# if ($this->shouldBeJson($content)) {\n# $this->header('Content-Type',\
+    \ 'application/json');\n# \n# $content = $this->morphToJson($content);\n# \n#\
+    \ if ($content === false) {\n# throw new InvalidArgumentException(json_last_error_msg());\n\
+    # }\n# }\n# \n# // If this content implements the \"Renderable\" interface then\
+    \ we will call the\n# // render method on the object so we will avoid any \"__toString\"\
+    \ exceptions\n# // that might be thrown and have their errors obscured by PHP's\
+    \ handling.\n# elseif ($content instanceof Renderable) {\n# $content = $content->render();\n\
+    # }\n# \n# parent::setContent($content);\n# \n# return $this;\n# }\n# \n# /**\n\
+    # * Determine if the given content should be turned into JSON.\n# *\n# * @param\
+    \  mixed  $content\n# * @return bool"
+- name: morphToJson
+  visibility: protected
+  parameters:
+  - name: content
+  comment: '# * Morph the given content into JSON.
+
+    # *
+
+    # * @param  mixed  $content
+
+    # * @return string|false'
+traits:
+- ArrayObject
+- Illuminate\Contracts\Support\Arrayable
+- Illuminate\Contracts\Support\Jsonable
+- Illuminate\Contracts\Support\Renderable
+- Illuminate\Support\Traits\Macroable
+- InvalidArgumentException
+- JsonSerializable
+- Symfony\Component\HttpFoundation\ResponseHeaderBag
+interfaces:
+- the

@@ -1,0 +1,53 @@
+name: MimeTypesTest
+class_comment: '# * @requires extension fileinfo'
+dependencies:
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Mime\Exception\RuntimeException
+- name: MimeTypeGuesserInterface
+  type: class
+  source: Symfony\Component\Mime\MimeTypeGuesserInterface
+- name: MimeTypes
+  type: class
+  source: Symfony\Component\Mime\MimeTypes
+properties: []
+methods:
+- name: getGuesser
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testUnsupportedGuesser
+  visibility: public
+  parameters: []
+  comment: null
+- name: isGuesserSupported
+  visibility: public
+  parameters: []
+  comment: null
+- name: guessMimeType
+  visibility: public
+  parameters:
+  - name: mimeType
+  comment: null
+- name: testGetExtensions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetMimeTypes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCustomMimeTypes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCsvExtension
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Mime\Exception\RuntimeException
+- Symfony\Component\Mime\MimeTypeGuesserInterface
+- Symfony\Component\Mime\MimeTypes
+interfaces:
+- MimeTypeGuesserInterface

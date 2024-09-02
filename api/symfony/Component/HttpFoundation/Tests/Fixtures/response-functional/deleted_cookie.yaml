@@ -1,0 +1,62 @@
+name: deleted_cookie
+class_comment: null
+dependencies:
+- name: Container
+  type: class
+  source: Symfony\Component\DependencyInjection\Container
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: SessionFactory
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\SessionFactory
+- name: NativeSessionStorageFactory
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorageFactory
+- name: RequestEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\RequestEvent
+- name: ResponseEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ResponseEvent
+- name: SessionListener
+  type: class
+  source: Symfony\Component\HttpKernel\EventListener\SessionListener
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: response
+  comment: null
+- name: handle
+  visibility: public
+  parameters:
+  - name: request
+  - name: type
+    default: self::MAIN_REQUEST
+  - name: catch
+    default: 'true'
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Container
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestStack
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpFoundation\Session\SessionFactory
+- Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorageFactory
+- Symfony\Component\HttpKernel\Event\RequestEvent
+- Symfony\Component\HttpKernel\Event\ResponseEvent
+- Symfony\Component\HttpKernel\EventListener\SessionListener
+- Symfony\Component\HttpKernel\HttpKernelInterface
+interfaces:
+- HttpKernelInterface

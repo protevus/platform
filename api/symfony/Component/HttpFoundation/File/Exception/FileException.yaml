@@ -1,0 +1,11 @@
+name: FileException
+class_comment: '# * Thrown when an error occurred in the component File.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces: []

@@ -1,0 +1,27 @@
+name: workflow
+class_comment: null
+dependencies:
+- name: ExpressionLanguage
+  type: class
+  source: Symfony\Component\Workflow\EventListener\ExpressionLanguage
+- name: MethodMarkingStore
+  type: class
+  source: Symfony\Component\Workflow\MarkingStore\MethodMarkingStore
+- name: Registry
+  type: class
+  source: Symfony\Component\Workflow\Registry
+- name: StateMachine
+  type: class
+  source: Symfony\Component\Workflow\StateMachine
+- name: Workflow
+  type: class
+  source: Symfony\Component\Workflow\Workflow
+properties: []
+methods: []
+traits:
+- Symfony\Component\Workflow\EventListener\ExpressionLanguage
+- Symfony\Component\Workflow\MarkingStore\MethodMarkingStore
+- Symfony\Component\Workflow\Registry
+- Symfony\Component\Workflow\StateMachine
+- Symfony\Component\Workflow\Workflow
+interfaces: []

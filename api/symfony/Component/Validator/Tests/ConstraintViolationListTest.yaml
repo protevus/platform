@@ -1,0 +1,76 @@
+name: ConstraintViolationListTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ConstraintViolation
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolation
+- name: ConstraintViolationList
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolationList
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testInit
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInitWithViolations
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAdd
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddAll
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIterator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testArrayAccess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindByCodes
+  visibility: public
+  parameters:
+  - name: code
+  - name: violationsCount
+  comment: '# * @dataProvider findByCodesProvider'
+- name: findByCodesProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: getViolation
+  visibility: protected
+  parameters:
+  - name: message
+  - name: root
+    default: 'null'
+  - name: propertyPath
+    default: 'null'
+  - name: code
+    default: 'null'
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\ConstraintViolation
+- Symfony\Component\Validator\ConstraintViolationList
+interfaces: []

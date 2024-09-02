@@ -1,0 +1,28 @@
+name: Subject
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: marking
+    default: 'null'
+  comment: null
+- name: getMarking
+  visibility: public
+  parameters: []
+  comment: null
+- name: setMarking
+  visibility: public
+  parameters:
+  - name: marking
+  - name: context
+    default: '[]'
+  comment: null
+- name: getContext
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

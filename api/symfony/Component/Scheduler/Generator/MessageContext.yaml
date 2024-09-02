@@ -1,0 +1,21 @@
+name: MessageContext
+class_comment: null
+dependencies:
+- name: TriggerInterface
+  type: class
+  source: Symfony\Component\Scheduler\Trigger\TriggerInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: name
+  - name: id
+  - name: trigger
+  - name: triggeredAt
+  - name: nextTriggerAt
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\Scheduler\Trigger\TriggerInterface
+interfaces: []

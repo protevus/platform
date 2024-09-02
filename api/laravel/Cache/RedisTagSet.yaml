@@ -1,0 +1,92 @@
+name: RedisTagSet
+class_comment: null
+dependencies:
+- name: Carbon
+  type: class
+  source: Illuminate\Support\Carbon
+- name: LazyCollection
+  type: class
+  source: Illuminate\Support\LazyCollection
+properties: []
+methods:
+- name: addEntry
+  visibility: public
+  parameters:
+  - name: key
+  - name: ttl
+    default: 'null'
+  - name: updateWhen
+    default: 'null'
+  comment: '# * Add a reference entry to the tag set''s underlying sorted set.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  int|null  $ttl
+
+    # * @param  string  $updateWhen
+
+    # * @return void'
+- name: entries
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the cache entry keys for the tag set.
+
+    # *
+
+    # * @return \Illuminate\Support\LazyCollection'
+- name: flushStaleEntries
+  visibility: public
+  parameters: []
+  comment: '# * Remove the stale entries from the tag set.
+
+    # *
+
+    # * @return void'
+- name: flushTag
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Flush the tag from the cache.
+
+    # *
+
+    # * @param  string  $name'
+- name: resetTag
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Reset the tag and return the new tag identifier.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string'
+- name: tagId
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Get the unique tag identifier for a given tag.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string'
+- name: tagKey
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Get the tag identifier key for a given tag.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string'
+traits:
+- Illuminate\Support\Carbon
+- Illuminate\Support\LazyCollection
+interfaces: []

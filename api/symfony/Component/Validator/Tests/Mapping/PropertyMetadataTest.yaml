@@ -1,0 +1,59 @@
+name: PropertyMetadataTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ValidatorException
+  type: class
+  source: Symfony\Component\Validator\Exception\ValidatorException
+- name: PropertyMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\PropertyMetadata
+- name: Entity_74
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\Entity_74
+- name: Entity_74_Proxy
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\Entity_74_Proxy
+- name: Entity
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\Entity
+- name: EntityParent
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\EntityParent
+properties: []
+methods:
+- name: testInvalidPropertyName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPropertyValueFromPrivateProperty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPropertyValueFromOverriddenPrivateProperty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPropertyValueFromRemovedProperty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPropertyValueFromUninitializedProperty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPropertyValueFromUninitializedPropertyShouldNotReturnNullIfMagicGetIsPresent
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\Exception\ValidatorException
+- Symfony\Component\Validator\Mapping\PropertyMetadata
+- Symfony\Component\Validator\Tests\Fixtures\Entity_74
+- Symfony\Component\Validator\Tests\Fixtures\Entity_74_Proxy
+- Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\Entity
+- Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\EntityParent
+interfaces: []

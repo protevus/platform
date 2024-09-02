@@ -1,0 +1,105 @@
+name: LazyGhostTrait
+class_comment: null
+dependencies:
+- name: Ignore
+  type: class
+  source: Symfony\Component\Serializer\Attribute\Ignore
+- name: Hydrator
+  type: class
+  source: Symfony\Component\VarExporter\Internal\Hydrator
+- name: Registry
+  type: class
+  source: Symfony\Component\VarExporter\Internal\LazyObjectRegistry
+- name: LazyObjectState
+  type: class
+  source: Symfony\Component\VarExporter\Internal\LazyObjectState
+- name: LazyObjectTrait
+  type: class
+  source: Symfony\Component\VarExporter\Internal\LazyObjectTrait
+- name: LazyObjectTrait
+  type: class
+  source: LazyObjectTrait
+properties: []
+methods:
+- name: createLazyGhost
+  visibility: public
+  parameters:
+  - name: initializer
+  - name: skippedProperties
+    default: 'null'
+  - name: instance
+    default: 'null'
+  comment: '# * Creates a lazy-loading ghost instance.
+
+    # *
+
+    # * Skipped properties should be indexed by their array-cast identifier, see
+
+    # * https://php.net/manual/language.types.array#language.types.array.casting
+
+    # *
+
+    # * @param (\Closure(static):void   $initializer       The closure should initialize
+    the object it receives as argument
+
+    # * @param array<string, true>|null $skippedProperties An array indexed by the
+    properties to skip, a.k.a. the ones
+
+    # *                                                    that the initializer doesn''t
+    initialize, if any
+
+    # * @param static|null              $instance'
+- name: initializeLazyObject
+  visibility: public
+  parameters: []
+  comment: "# * Returns whether the object is initialized.\n# *\n# * @param $partial\
+    \ Whether partially initialized objects should be considered as initialized\n\
+    # */\n# #[Ignore]\n# public function isLazyObjectInitialized(bool $partial = false):\
+    \ bool\n# {\n# if (!$state = $this->lazyObjectState ?? null) {\n# return true;\n\
+    # }\n# \n# return LazyObjectState::STATUS_INITIALIZED_FULL === $state->status;\n\
+    # }\n# \n# /**\n# * Forces initialization of a lazy object and returns it."
+- name: resetLazyObject
+  visibility: public
+  parameters: []
+  comment: '# * @return bool Returns false when the object cannot be reset, ie when
+    it''s not a lazy object'
+- name: __set
+  visibility: public
+  parameters:
+  - name: name
+  - name: value
+  comment: null
+- name: __isset
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: __unset
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: __clone
+  visibility: public
+  parameters: []
+  comment: null
+- name: __serialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: __destruct
+  visibility: public
+  parameters: []
+  comment: null
+- name: setLazyObjectAsInitialized
+  visibility: private
+  parameters:
+  - name: initialized
+  comment: null
+traits:
+- Symfony\Component\Serializer\Attribute\Ignore
+- Symfony\Component\VarExporter\Internal\Hydrator
+- Symfony\Component\VarExporter\Internal\LazyObjectState
+- Symfony\Component\VarExporter\Internal\LazyObjectTrait
+- LazyObjectTrait
+interfaces: []

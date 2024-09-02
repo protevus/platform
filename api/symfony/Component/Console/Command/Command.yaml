@@ -1,0 +1,549 @@
+name: Command
+class_comment: '# * Base class for all commands.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: CompletionInput
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionInput
+- name: CompletionSuggestions
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionSuggestions
+- name: Suggestion
+  type: class
+  source: Symfony\Component\Console\Completion\Suggestion
+- name: ExceptionInterface
+  type: class
+  source: Symfony\Component\Console\Exception\ExceptionInterface
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Console\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\Console\Exception\LogicException
+- name: HelperInterface
+  type: class
+  source: Symfony\Component\Console\Helper\HelperInterface
+- name: HelperSet
+  type: class
+  source: Symfony\Component\Console\Helper\HelperSet
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputDefinition
+  type: class
+  source: Symfony\Component\Console\Input\InputDefinition
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: "# * Base class for all commands.\n# *\n# * @author Fabien Potencier <fabien@symfony.com>\n\
+    # */\n# class Command\n# {\n# // see https://tldp.org/LDP/abs/html/exitcodes.html\n\
+    # public const SUCCESS = 0;\n# public const FAILURE = 1;\n# public const INVALID\
+    \ = 2;\n# \n# private ?Application $application = null;\n# private ?string $name\
+    \ = null;\n# private ?string $processTitle = null;\n# private array $aliases =\
+    \ [];\n# private InputDefinition $definition;\n# private bool $hidden = false;\n\
+    # private string $help = '';\n# private string $description = '';\n# private ?InputDefinition\
+    \ $fullDefinition = null;\n# private bool $ignoreValidationErrors = false;\n#\
+    \ private ?\\Closure $code = null;\n# private array $synopsis = [];\n# private\
+    \ array $usages = [];\n# private ?HelperSet $helperSet = null;\n# \n# public static\
+    \ function getDefaultName(): ?string\n# {\n# if ($attribute = (new \\ReflectionClass(static::class))->getAttributes(AsCommand::class))\
+    \ {\n# return $attribute[0]->newInstance()->name;\n# }\n# \n# return null;\n#\
+    \ }\n# \n# public static function getDefaultDescription(): ?string\n# {\n# if\
+    \ ($attribute = (new \\ReflectionClass(static::class))->getAttributes(AsCommand::class))\
+    \ {\n# return $attribute[0]->newInstance()->description;\n# }\n# \n# return null;\n\
+    # }\n# \n# /**\n# * @param string|null $name The name of the command; passing\
+    \ null means it must be set in configure()\n# *\n# * @throws LogicException When\
+    \ the command name is empty"
+- name: ignoreValidationErrors
+  visibility: public
+  parameters: []
+  comment: '# * Ignores validation errors.
+
+    # *
+
+    # * This is mainly useful for the help command.'
+- name: setApplication
+  visibility: public
+  parameters:
+  - name: application
+  comment: null
+- name: setHelperSet
+  visibility: public
+  parameters:
+  - name: helperSet
+  comment: null
+- name: getHelperSet
+  visibility: public
+  parameters: []
+  comment: '# * Gets the helper set.'
+- name: getApplication
+  visibility: public
+  parameters: []
+  comment: '# * Gets the application instance for this command.'
+- name: isEnabled
+  visibility: public
+  parameters: []
+  comment: '# * Checks whether the command is enabled or not in the current environment.
+
+    # *
+
+    # * Override this to check for x or y and return false if the command cannot
+
+    # * run properly under the current conditions.'
+- name: configure
+  visibility: protected
+  parameters: []
+  comment: '# * Configures the current command.
+
+    # *
+
+    # * @return void'
+- name: execute
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: '# * Executes the current command.
+
+    # *
+
+    # * This method is not abstract because you can use this class
+
+    # * as a concrete class. In this case, instead of defining the
+
+    # * execute() method, you set the code to execute by passing
+
+    # * a Closure to the setCode() method.
+
+    # *
+
+    # * @return int 0 if everything went fine, or an exit code
+
+    # *
+
+    # * @throws LogicException When this abstract method is not implemented
+
+    # *
+
+    # * @see setCode()'
+- name: interact
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: '# * Interacts with the user.
+
+    # *
+
+    # * This method is executed before the InputDefinition is validated.
+
+    # * This means that this is the only place where the command can
+
+    # * interactively ask for values of missing required arguments.
+
+    # *
+
+    # * @return void'
+- name: initialize
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: '# * Initializes the command after the input has been bound and before
+    the input
+
+    # * is validated.
+
+    # *
+
+    # * This is mainly useful when a lot of commands extends one main command
+
+    # * where some things need to be initialized based on the input arguments and
+    options.
+
+    # *
+
+    # * @see InputInterface::bind()
+
+    # * @see InputInterface::validate()
+
+    # *
+
+    # * @return void'
+- name: run
+  visibility: public
+  parameters:
+  - name: input
+  - name: output
+  comment: '# * Runs the command.
+
+    # *
+
+    # * The code to execute is either defined directly with the
+
+    # * setCode() method or by overriding the execute() method
+
+    # * in a sub-class.
+
+    # *
+
+    # * @return int The command exit code
+
+    # *
+
+    # * @throws ExceptionInterface When input binding fails. Bypass this by calling
+    {@link ignoreValidationErrors()}.
+
+    # *
+
+    # * @see setCode()
+
+    # * @see execute()'
+- name: complete
+  visibility: public
+  parameters:
+  - name: input
+  - name: suggestions
+  comment: '# * Supplies suggestions when resolving possible completion options for
+    input (e.g. option or argument).'
+- name: setCode
+  visibility: public
+  parameters:
+  - name: code
+  comment: '# * Sets the code to execute when running this command.
+
+    # *
+
+    # * If this method is used, it overrides the code defined
+
+    # * in the execute() method.
+
+    # *
+
+    # * @param callable $code A callable(InputInterface $input, OutputInterface $output)
+
+    # *
+
+    # * @return $this
+
+    # *
+
+    # * @throws InvalidArgumentException
+
+    # *
+
+    # * @see execute()'
+- name: mergeApplicationDefinition
+  visibility: public
+  parameters:
+  - name: mergeArgs
+    default: 'true'
+  comment: '# * Merges the application definition with the command definition.
+
+    # *
+
+    # * This method is not part of public API and should not be used directly.
+
+    # *
+
+    # * @param bool $mergeArgs Whether to merge or not the Application definition
+    arguments to Command definition arguments
+
+    # *
+
+    # * @internal'
+- name: setDefinition
+  visibility: public
+  parameters:
+  - name: definition
+  comment: '# * Sets an array of argument and option instances.
+
+    # *
+
+    # * @return $this'
+- name: getDefinition
+  visibility: public
+  parameters: []
+  comment: '# * Gets the InputDefinition attached to this Command.'
+- name: getNativeDefinition
+  visibility: public
+  parameters: []
+  comment: '# * Gets the InputDefinition to be used to create representations of this
+    Command.
+
+    # *
+
+    # * Can be overridden to provide the original command representation when it would
+    otherwise
+
+    # * be changed by merging with the application InputDefinition.
+
+    # *
+
+    # * This method is not part of public API and should not be used directly.'
+- name: addArgument
+  visibility: public
+  parameters:
+  - name: name
+  - name: mode
+    default: 'null'
+  - name: description
+    default: ''''''
+  - name: default
+    default: 'null'
+  - name: suggestedValues
+    default: '[]'
+  comment: '# * Adds an argument.
+
+    # *
+
+    # * @param                                                                               $mode            The
+    argument mode: InputArgument::REQUIRED or InputArgument::OPTIONAL
+
+    # * @param                                                                               $default         The
+    default value (for InputArgument::OPTIONAL mode only)
+
+    # * @param array|\Closure(CompletionInput,CompletionSuggestions):list<string|Suggestion>
+    $suggestedValues The values used for input completion
+
+    # *
+
+    # * @return $this
+
+    # *
+
+    # * @throws InvalidArgumentException When argument mode is not valid'
+- name: addOption
+  visibility: public
+  parameters:
+  - name: name
+  - name: shortcut
+    default: 'null'
+  - name: mode
+    default: 'null'
+  - name: description
+    default: ''''''
+  - name: default
+    default: 'null'
+  - name: suggestedValues
+    default: '[]'
+  comment: '# * Adds an option.
+
+    # *
+
+    # * @param                                                                               $shortcut        The
+    shortcuts, can be null, a string of shortcuts delimited by | or an array of shortcuts
+
+    # * @param                                                                               $mode            The
+    option mode: One of the InputOption::VALUE_* constants
+
+    # * @param                                                                               $default         The
+    default value (must be null for InputOption::VALUE_NONE)
+
+    # * @param array|\Closure(CompletionInput,CompletionSuggestions):list<string|Suggestion>
+    $suggestedValues The values used for input completion
+
+    # *
+
+    # * @return $this
+
+    # *
+
+    # * @throws InvalidArgumentException If option mode is invalid or incompatible'
+- name: setName
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Sets the name of the command.
+
+    # *
+
+    # * This method can set both the namespace and the name if
+
+    # * you separate them by a colon (:)
+
+    # *
+
+    # *     $command->setName(''foo:bar'');
+
+    # *
+
+    # * @return $this
+
+    # *
+
+    # * @throws InvalidArgumentException When the name is invalid'
+- name: setProcessTitle
+  visibility: public
+  parameters:
+  - name: title
+  comment: '# * Sets the process title of the command.
+
+    # *
+
+    # * This feature should be used only when creating a long process command,
+
+    # * like a daemon.
+
+    # *
+
+    # * @return $this'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: '# * Returns the command name.'
+- name: setHidden
+  visibility: public
+  parameters:
+  - name: hidden
+    default: 'true'
+  comment: '# * @param bool $hidden Whether or not the command should be hidden from
+    the list of commands
+
+    # *
+
+    # * @return $this'
+- name: isHidden
+  visibility: public
+  parameters: []
+  comment: '# * @return bool whether the command should be publicly shown or not'
+- name: setDescription
+  visibility: public
+  parameters:
+  - name: description
+  comment: '# * Sets the description for the command.
+
+    # *
+
+    # * @return $this'
+- name: getDescription
+  visibility: public
+  parameters: []
+  comment: '# * Returns the description for the command.'
+- name: setHelp
+  visibility: public
+  parameters:
+  - name: help
+  comment: '# * Sets the help for the command.
+
+    # *
+
+    # * @return $this'
+- name: getHelp
+  visibility: public
+  parameters: []
+  comment: '# * Returns the help for the command.'
+- name: getProcessedHelp
+  visibility: public
+  parameters: []
+  comment: '# * Returns the processed help for the command replacing the %command.name%
+    and
+
+    # * %command.full_name% patterns with the real values dynamically.'
+- name: setAliases
+  visibility: public
+  parameters:
+  - name: aliases
+  comment: '# * Sets the aliases for the command.
+
+    # *
+
+    # * @param string[] $aliases An array of aliases for the command
+
+    # *
+
+    # * @return $this
+
+    # *
+
+    # * @throws InvalidArgumentException When an alias is invalid'
+- name: getAliases
+  visibility: public
+  parameters: []
+  comment: '# * Returns the aliases for the command.'
+- name: getSynopsis
+  visibility: public
+  parameters:
+  - name: short
+    default: 'false'
+  comment: '# * Returns the synopsis for the command.
+
+    # *
+
+    # * @param bool $short Whether to show the short version of the synopsis (with
+    options folded) or not'
+- name: addUsage
+  visibility: public
+  parameters:
+  - name: usage
+  comment: '# * Add a command usage example, it''ll be prefixed with the command name.
+
+    # *
+
+    # * @return $this'
+- name: getUsages
+  visibility: public
+  parameters: []
+  comment: '# * Returns alternative usages of the command.'
+- name: getHelper
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Gets a helper instance by name.
+
+    # *
+
+    # * @throws LogicException           if no HelperSet is defined
+
+    # * @throws InvalidArgumentException if the helper is not defined'
+- name: validateName
+  visibility: private
+  parameters:
+  - name: name
+  comment: '# * Validates a command name.
+
+    # *
+
+    # * It must be non-empty and parts can optionally be separated by ":".
+
+    # *
+
+    # * @throws InvalidArgumentException When the name is invalid'
+traits:
+- Symfony\Component\Console\Application
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Completion\CompletionInput
+- Symfony\Component\Console\Completion\CompletionSuggestions
+- Symfony\Component\Console\Completion\Suggestion
+- Symfony\Component\Console\Exception\ExceptionInterface
+- Symfony\Component\Console\Exception\InvalidArgumentException
+- Symfony\Component\Console\Exception\LogicException
+- Symfony\Component\Console\Helper\HelperInterface
+- Symfony\Component\Console\Helper\HelperSet
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputDefinition
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Output\OutputInterface
+interfaces: []

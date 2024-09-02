@@ -1,0 +1,51 @@
+name: ChoiceGroupView
+class_comment: '# * Represents a group of choices in templates.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @implements \IteratorAggregate<array-key, ChoiceGroupView|ChoiceView>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: label
+  - name: choices
+    default: '[]'
+  comment: '# * Represents a group of choices in templates.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # *
+
+    # * @implements \IteratorAggregate<array-key, ChoiceGroupView|ChoiceView>
+
+    # */
+
+    # class ChoiceGroupView implements \IteratorAggregate
+
+    # {
+
+    # /**
+
+    # * Creates a new choice group view.
+
+    # *
+
+    # * @param array<ChoiceGroupView|ChoiceView> $choices the choice views in the
+    group'
+- name: getIterator
+  visibility: public
+  parameters: []
+  comment: '# * @return \Traversable<array-key, ChoiceGroupView|ChoiceView>'
+traits: []
+interfaces:
+- \IteratorAggregate
+- \IteratorAggregate

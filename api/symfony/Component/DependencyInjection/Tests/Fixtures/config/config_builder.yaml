@@ -1,0 +1,15 @@
+name: config_builder
+class_comment: null
+dependencies:
+- name: ContainerConfigurator
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator
+- name: AcmeConfig
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\AcmeConfig
+properties: []
+methods: []
+traits:
+- Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator
+- Symfony\Component\DependencyInjection\Tests\Fixtures\AcmeConfig
+interfaces: []

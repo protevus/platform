@@ -1,0 +1,94 @@
+name: XmlFileLoader
+class_comment: "# * Loads XML mapping files.\n# *\n# * @author K\xE9vin Dunglas <dunglas@gmail.com>"
+dependencies:
+- name: XmlUtils
+  type: class
+  source: Symfony\Component\Config\Util\XmlUtils
+- name: InvalidPropertyPathException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException
+- name: PropertyPath
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyPath
+- name: MappingException
+  type: class
+  source: Symfony\Component\Serializer\Exception\MappingException
+- name: AttributeMetadata
+  type: class
+  source: Symfony\Component\Serializer\Mapping\AttributeMetadata
+- name: ClassDiscriminatorMapping
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassDiscriminatorMapping
+- name: ClassMetadataInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassMetadataInterface
+properties: []
+methods:
+- name: getMappedClasses
+  visibility: public
+  parameters: []
+  comment: "# * Loads XML mapping files.\n# *\n# * @author K\xE9vin Dunglas <dunglas@gmail.com>\n\
+    # */\n# class XmlFileLoader extends FileLoader\n# {\n# /**\n# * An array of {@class\
+    \ \\SimpleXMLElement} instances.\n# *\n# * @var \\SimpleXMLElement[]|null\n# */\n\
+    # private ?array $classes = null;\n# \n# public function loadClassMetadata(ClassMetadataInterface\
+    \ $classMetadata): bool\n# {\n# if (!$this->classes ??= $this->getClassesFromXml())\
+    \ {\n# return false;\n# }\n# \n# $attributesMetadata = $classMetadata->getAttributesMetadata();\n\
+    # \n# if (isset($this->classes[$classMetadata->getName()])) {\n# $xml = $this->classes[$classMetadata->getName()];\n\
+    # \n# foreach ($xml->attribute as $attribute) {\n# $attributeName = (string) $attribute['name'];\n\
+    # \n# if (isset($attributesMetadata[$attributeName])) {\n# $attributeMetadata\
+    \ = $attributesMetadata[$attributeName];\n# } else {\n# $attributeMetadata = new\
+    \ AttributeMetadata($attributeName);\n# $classMetadata->addAttributeMetadata($attributeMetadata);\n\
+    # }\n# \n# foreach ($attribute->group as $group) {\n# $attributeMetadata->addGroup((string)\
+    \ $group);\n# }\n# \n# if (isset($attribute['max-depth'])) {\n# $attributeMetadata->setMaxDepth((int)\
+    \ $attribute['max-depth']);\n# }\n# \n# if (isset($attribute['serialized-name']))\
+    \ {\n# $attributeMetadata->setSerializedName((string) $attribute['serialized-name']);\n\
+    # }\n# \n# if (isset($attribute['serialized-path'])) {\n# try {\n# $attributeMetadata->setSerializedPath(new\
+    \ PropertyPath((string) $attribute['serialized-path']));\n# } catch (InvalidPropertyPathException)\
+    \ {\n# throw new MappingException(\\sprintf('The \"serialized-path\" value must\
+    \ be a valid property path for the attribute \"%s\" of the class \"%s\".', $attributeName,\
+    \ $classMetadata->getName()));\n# }\n# }\n# \n# if (isset($attribute['ignore']))\
+    \ {\n# $attributeMetadata->setIgnore(XmlUtils::phpize($attribute['ignore']));\n\
+    # }\n# \n# foreach ($attribute->context as $node) {\n# $groups = (array) $node->group;\n\
+    # $context = $this->parseContext($node->entry);\n# $attributeMetadata->setNormalizationContextForGroups($context,\
+    \ $groups);\n# $attributeMetadata->setDenormalizationContextForGroups($context,\
+    \ $groups);\n# }\n# \n# foreach ($attribute->normalization_context as $node) {\n\
+    # $groups = (array) $node->group;\n# $context = $this->parseContext($node->entry);\n\
+    # $attributeMetadata->setNormalizationContextForGroups($context, $groups);\n#\
+    \ }\n# \n# foreach ($attribute->denormalization_context as $node) {\n# $groups\
+    \ = (array) $node->group;\n# $context = $this->parseContext($node->entry);\n#\
+    \ $attributeMetadata->setDenormalizationContextForGroups($context, $groups);\n\
+    # }\n# }\n# \n# if (isset($xml->{'discriminator-map'})) {\n# $mapping = [];\n\
+    # foreach ($xml->{'discriminator-map'}->mapping as $element) {\n# $elementAttributes\
+    \ = $element->attributes();\n# $mapping[(string) $elementAttributes->type] = (string)\
+    \ $elementAttributes->class;\n# }\n# \n# $classMetadata->setClassDiscriminatorMapping(new\
+    \ ClassDiscriminatorMapping(\n# (string) $xml->{'discriminator-map'}->attributes()->{'type-property'},\n\
+    # $mapping\n# ));\n# }\n# \n# return true;\n# }\n# \n# return false;\n# }\n# \n\
+    # /**\n# * Return the names of the classes mapped in this file.\n# *\n# * @return\
+    \ string[]"
+- name: parseFile
+  visibility: private
+  parameters:
+  - name: file
+  comment: '# * Parses an XML File.
+
+    # *
+
+    # * @throws MappingException'
+- name: getClassesFromXml
+  visibility: private
+  parameters: []
+  comment: null
+- name: parseContext
+  visibility: private
+  parameters:
+  - name: nodes
+  comment: null
+traits:
+- Symfony\Component\Config\Util\XmlUtils
+- Symfony\Component\PropertyAccess\Exception\InvalidPropertyPathException
+- Symfony\Component\PropertyAccess\PropertyPath
+- Symfony\Component\Serializer\Exception\MappingException
+- Symfony\Component\Serializer\Mapping\AttributeMetadata
+- Symfony\Component\Serializer\Mapping\ClassDiscriminatorMapping
+- Symfony\Component\Serializer\Mapping\ClassMetadataInterface
+interfaces: []

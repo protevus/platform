@@ -1,0 +1,51 @@
+name: SymfonyQuestionHelper
+class_comment: '# * Symfony Style Guide compliant question helper.
+
+  # *
+
+  # * @author Kevin Bond <kevinbond@gmail.com>'
+dependencies:
+- name: OutputFormatter
+  type: class
+  source: Symfony\Component\Console\Formatter\OutputFormatter
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: ChoiceQuestion
+  type: class
+  source: Symfony\Component\Console\Question\ChoiceQuestion
+- name: ConfirmationQuestion
+  type: class
+  source: Symfony\Component\Console\Question\ConfirmationQuestion
+- name: Question
+  type: class
+  source: Symfony\Component\Console\Question\Question
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+properties: []
+methods:
+- name: writePrompt
+  visibility: protected
+  parameters:
+  - name: output
+  - name: question
+  comment: null
+- name: writeError
+  visibility: protected
+  parameters:
+  - name: output
+  - name: error
+  comment: null
+- name: getEofShortcut
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Console\Formatter\OutputFormatter
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Question\ChoiceQuestion
+- Symfony\Component\Console\Question\ConfirmationQuestion
+- Symfony\Component\Console\Question\Question
+- Symfony\Component\Console\Style\SymfonyStyle
+interfaces: []

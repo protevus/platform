@@ -1,0 +1,35 @@
+name: Rfc2231EncoderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Rfc2231Encoder
+  type: class
+  source: Symfony\Component\Mime\Encoder\Rfc2231Encoder
+properties: []
+methods:
+- name: testEncodingAsciiCharactersProducesValidToken
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEncodingNonAsciiCharactersProducesValidToken
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMaximumLineLengthCanBeSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFirstLineCanHaveShorterLength
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEncodingAndDecodingSamples
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mime\Encoder\Rfc2231Encoder
+interfaces: []

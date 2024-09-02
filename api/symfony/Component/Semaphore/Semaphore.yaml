@@ -1,0 +1,80 @@
+name: Semaphore
+class_comment: null
+dependencies:
+- name: LoggerAwareInterface
+  type: class
+  source: Psr\Log\LoggerAwareInterface
+- name: LoggerAwareTrait
+  type: class
+  source: Psr\Log\LoggerAwareTrait
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Semaphore\Exception\InvalidArgumentException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Semaphore\Exception\RuntimeException
+- name: SemaphoreAcquiringException
+  type: class
+  source: Symfony\Component\Semaphore\Exception\SemaphoreAcquiringException
+- name: SemaphoreExpiredException
+  type: class
+  source: Symfony\Component\Semaphore\Exception\SemaphoreExpiredException
+- name: SemaphoreReleasingException
+  type: class
+  source: Symfony\Component\Semaphore\Exception\SemaphoreReleasingException
+- name: LoggerAwareTrait
+  type: class
+  source: LoggerAwareTrait
+properties: []
+methods:
+- name: __destruct
+  visibility: public
+  parameters: []
+  comment: "# * Semaphore is the default implementation of the SemaphoreInterface.\n\
+    # *\n# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>\n# * @author J\xE9r\xE9\
+    my Deruss\xE9 <jeremy@derusse.com>\n# */\n# final class Semaphore implements SemaphoreInterface,\
+    \ LoggerAwareInterface\n# {\n# use LoggerAwareTrait;\n# \n# private bool $dirty\
+    \ = false;\n# \n# public function __construct(\n# private Key $key,\n# private\
+    \ PersistingStoreInterface $store,\n# private float $ttlInSecond = 300.0,\n# private\
+    \ bool $autoRelease = true,\n# ) {\n# }\n# \n# public function __sleep(): array\n\
+    # {\n# throw new \\BadMethodCallException('Cannot serialize '.__CLASS__);\n# }\n\
+    # \n# public function __wakeup(): void\n# {\n# throw new \\BadMethodCallException('Cannot\
+    \ unserialize '.__CLASS__);\n# }\n# \n# /**\n# * Automatically releases the underlying\
+    \ semaphore when the object is destructed."
+- name: acquire
+  visibility: public
+  parameters: []
+  comment: null
+- name: refresh
+  visibility: public
+  parameters:
+  - name: ttlInSecond
+    default: 'null'
+  comment: null
+- name: isAcquired
+  visibility: public
+  parameters: []
+  comment: null
+- name: release
+  visibility: public
+  parameters: []
+  comment: null
+- name: isExpired
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRemainingLifetime
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Psr\Log\LoggerAwareInterface
+- Psr\Log\LoggerAwareTrait
+- Symfony\Component\Semaphore\Exception\InvalidArgumentException
+- Symfony\Component\Semaphore\Exception\RuntimeException
+- Symfony\Component\Semaphore\Exception\SemaphoreAcquiringException
+- Symfony\Component\Semaphore\Exception\SemaphoreExpiredException
+- Symfony\Component\Semaphore\Exception\SemaphoreReleasingException
+- LoggerAwareTrait
+interfaces:
+- SemaphoreInterface

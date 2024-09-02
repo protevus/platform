@@ -1,0 +1,83 @@
+name: ViewCacheCommand
+class_comment: null
+dependencies:
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: Finder
+  type: class
+  source: Symfony\Component\Finder\Finder
+- name: SplFileInfo
+  type: class
+  source: Symfony\Component\Finder\SplFileInfo
+properties:
+- name: signature
+  visibility: protected
+  comment: '# * The name and signature of the console command.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+methods:
+- name: handle
+  visibility: public
+  parameters: []
+  comment: "# * The name and signature of the console command.\n# *\n# * @var string\n\
+    # */\n# protected $signature = 'view:cache';\n# \n# /**\n# * The console command\
+    \ description.\n# *\n# * @var string\n# */\n# protected $description = \"Compile\
+    \ all of the application's Blade templates\";\n# \n# /**\n# * Execute the console\
+    \ command.\n# *\n# * @return mixed"
+- name: compileViews
+  visibility: protected
+  parameters:
+  - name: views
+  comment: '# * Compile the given view files.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection  $views
+
+    # * @return void'
+- name: bladeFilesIn
+  visibility: protected
+  parameters:
+  - name: paths
+  comment: '# * Get the Blade files in the given path.
+
+    # *
+
+    # * @param  array  $paths
+
+    # * @return \Illuminate\Support\Collection'
+- name: paths
+  visibility: protected
+  parameters: []
+  comment: '# * Get all of the possible view paths.
+
+    # *
+
+    # * @return \Illuminate\Support\Collection'
+traits:
+- Illuminate\Console\Command
+- Illuminate\Support\Collection
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Finder\Finder
+- Symfony\Component\Finder\SplFileInfo
+interfaces: []

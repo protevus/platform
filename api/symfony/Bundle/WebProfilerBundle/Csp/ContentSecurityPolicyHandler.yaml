@@ -1,0 +1,115 @@
+name: ContentSecurityPolicyHandler
+class_comment: '# * Handles Content-Security-Policy HTTP header for the WebProfiler
+  Bundle.
+
+  # *
+
+  # * @author Romain Neutron <imprec@gmail.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+properties: []
+methods:
+- name: getNonces
+  visibility: public
+  parameters:
+  - name: request
+  - name: response
+  comment: "# * Handles Content-Security-Policy HTTP header for the WebProfiler Bundle.\n\
+    # *\n# * @author Romain Neutron <imprec@gmail.com>\n# *\n# * @internal\n# */\n\
+    # class ContentSecurityPolicyHandler\n# {\n# private bool $cspDisabled = false;\n\
+    # \n# public function __construct(\n# private NonceGenerator $nonceGenerator,\n\
+    # ) {\n# }\n# \n# /**\n# * Returns an array of nonces to be used in Twig templates\
+    \ and Content-Security-Policy headers.\n# *\n# * Nonce can be provided by;\n#\
+    \ *  - The request - In case HTML content is fetched via AJAX and inserted in\
+    \ DOM, it must use the same nonce as origin\n# *  - The response -  A call to\
+    \ getNonces() has already been done previously. Same nonce are returned\n# * \
+    \ - They are otherwise randomly generated"
+- name: disableCsp
+  visibility: public
+  parameters: []
+  comment: '# * Disables Content-Security-Policy.
+
+    # *
+
+    # * All related headers will be removed.'
+- name: updateResponseHeaders
+  visibility: public
+  parameters:
+  - name: request
+  - name: response
+  comment: '# * Cleanup temporary headers and updates Content-Security-Policy headers.
+
+    # *
+
+    # * @return array Nonces used by the bundle in Content-Security-Policy header'
+- name: cleanHeaders
+  visibility: private
+  parameters:
+  - name: response
+  comment: null
+- name: removeCspHeaders
+  visibility: private
+  parameters:
+  - name: response
+  comment: null
+- name: updateCspHeaders
+  visibility: private
+  parameters:
+  - name: response
+  - name: nonces
+    default: '[]'
+  comment: '# * Updates Content-Security-Policy headers in a response.'
+- name: generateNonce
+  visibility: private
+  parameters: []
+  comment: '# * Generates a valid Content-Security-Policy nonce.'
+- name: generateCspHeader
+  visibility: private
+  parameters:
+  - name: directives
+  comment: '# * Converts a directive set array into Content-Security-Policy header.'
+- name: parseDirectives
+  visibility: private
+  parameters:
+  - name: header
+  comment: '# * Converts a Content-Security-Policy header value into a directive set
+    array.'
+- name: authorizesInline
+  visibility: private
+  parameters:
+  - name: directivesSet
+  - name: type
+  comment: '# * Detects if the ''unsafe-inline'' is prevented for a directive within
+    the directive set.'
+- name: hasHashOrNonce
+  visibility: private
+  parameters:
+  - name: directives
+  comment: null
+- name: getDirectiveFallback
+  visibility: private
+  parameters:
+  - name: directiveSet
+  - name: type
+  comment: null
+- name: getCspHeaders
+  visibility: private
+  parameters:
+  - name: response
+  comment: '# * Retrieves the Content-Security-Policy headers (either X-Content-Security-Policy
+    or Content-Security-Policy) from
+
+    # * a response.'
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+interfaces: []

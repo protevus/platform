@@ -1,0 +1,71 @@
+name: EncryptedStore
+class_comment: null
+dependencies:
+- name: DecryptException
+  type: class
+  source: Illuminate\Contracts\Encryption\DecryptException
+- name: EncrypterContract
+  type: class
+  source: Illuminate\Contracts\Encryption\Encrypter
+- name: SessionHandlerInterface
+  type: class
+  source: SessionHandlerInterface
+properties:
+- name: encrypter
+  visibility: protected
+  comment: '# * The encrypter instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Encryption\Encrypter'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: name
+  - name: handler
+  - name: encrypter
+  - name: id
+    default: 'null'
+  - name: serialization
+    default: '''php'''
+  comment: "# * The encrypter instance.\n# *\n# * @var \\Illuminate\\Contracts\\Encryption\\\
+    Encrypter\n# */\n# protected $encrypter;\n# \n# /**\n# * Create a new session\
+    \ instance.\n# *\n# * @param  string  $name\n# * @param  \\SessionHandlerInterface\
+    \  $handler\n# * @param  \\Illuminate\\Contracts\\Encryption\\Encrypter  $encrypter\n\
+    # * @param  string|null  $id\n# * @param  string  $serialization\n# * @return\
+    \ void"
+- name: prepareForUnserialize
+  visibility: protected
+  parameters:
+  - name: data
+  comment: '# * Prepare the raw string data from the session for unserialization.
+
+    # *
+
+    # * @param  string  $data
+
+    # * @return string'
+- name: prepareForStorage
+  visibility: protected
+  parameters:
+  - name: data
+  comment: '# * Prepare the serialized session data for storage.
+
+    # *
+
+    # * @param  string  $data
+
+    # * @return string'
+- name: getEncrypter
+  visibility: public
+  parameters: []
+  comment: '# * Get the encrypter instance.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Encryption\Encrypter'
+traits:
+- Illuminate\Contracts\Encryption\DecryptException
+- SessionHandlerInterface
+interfaces: []

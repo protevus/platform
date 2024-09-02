@@ -1,0 +1,28 @@
+name: ValidationRule
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+properties: []
+methods:
+- name: validate
+  visibility: public
+  parameters:
+  - name: attribute
+  - name: value
+  - name: fail
+  comment: '# * Run the validation rule.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  mixed  $value
+
+    # * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+
+    # * @return void'
+traits:
+- Closure
+interfaces: []

@@ -1,0 +1,94 @@
+name: SetupTransportsCommandTest
+class_comment: null
+dependencies:
+- name: MockObject
+  type: class
+  source: PHPUnit\Framework\MockObject\MockObject
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CommandCompletionTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandCompletionTester
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+- name: ServiceLocator
+  type: class
+  source: Symfony\Component\DependencyInjection\ServiceLocator
+- name: SetupTransportsCommand
+  type: class
+  source: Symfony\Component\Messenger\Command\SetupTransportsCommand
+- name: SetupableTransportInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\SetupableTransportInterface
+- name: TransportInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\TransportInterface
+properties: []
+methods:
+- name: testReceiverNames
+  visibility: public
+  parameters: []
+  comment: null
+- name: testComplete
+  visibility: public
+  parameters:
+  - name: input
+  - name: expectedSuggestions
+  comment: "# @var MockObject&ServiceLocator $serviceLocator */\n# $serviceLocator\
+    \ = $this->createMock(ServiceLocator::class);\n# // get method must be call twice\
+    \ and will return consecutively a setup-able transport and a non setup-able transport\n\
+    # $serviceLocator->expects($this->exactly(2))\n# ->method('get')\n# ->willReturn(\n\
+    # $this->createMock(SetupableTransportInterface::class),\n# $this->createMock(TransportInterface::class)\n\
+    # );\n# $serviceLocator\n# ->method('has')\n# ->willReturn(true);\n# \n# $command\
+    \ = new SetupTransportsCommand($serviceLocator, ['amqp', 'other_transport']);\n\
+    # $tester = new CommandTester($command);\n# $tester->execute([]);\n# $display\
+    \ = $tester->getDisplay();\n# \n# $this->assertStringContainsString('The \"amqp\"\
+    \ transport was set up successfully.', $display);\n# $this->assertStringContainsString('The\
+    \ \"other_transport\" transport does not support setup.', $display);\n# }\n# \n\
+    # public function testReceiverNameArgument()\n# {\n# // mock a service locator\n\
+    # /** @var MockObject&ServiceLocator $serviceLocator */\n# $serviceLocator = $this->createMock(ServiceLocator::class);\n\
+    # // get method must be call twice and will return consecutively a setup-able\
+    \ transport and a non setup-able transport\n# $serviceLocator->expects($this->once())\n\
+    # ->method('get')\n# ->willReturn($this->createMock(SetupableTransportInterface::class));\n\
+    # $serviceLocator->expects($this->once())\n# ->method('has')\n# ->willReturn(true);\n\
+    # \n# $command = new SetupTransportsCommand($serviceLocator, ['amqp', 'other_transport']);\n\
+    # $tester = new CommandTester($command);\n# $tester->execute(['transport' => 'amqp']);\n\
+    # $display = $tester->getDisplay();\n# \n# $this->assertStringContainsString('The\
+    \ \"amqp\" transport was set up successfully.', $display);\n# }\n# \n# public\
+    \ function testReceiverNameArgumentNotFound()\n# {\n# // mock a service locator\n\
+    # /** @var MockObject&ServiceLocator $serviceLocator */\n# $serviceLocator = $this->createMock(ServiceLocator::class);\n\
+    # // get method must be call twice and will return consecutively a setup-able\
+    \ transport and a non setup-able transport\n# $serviceLocator->expects($this->exactly(0))\n\
+    # ->method('get');\n# $serviceLocator->expects($this->exactly(1))\n# ->method('has')\n\
+    # ->willReturn(false);\n# \n# $command = new SetupTransportsCommand($serviceLocator,\
+    \ ['amqp', 'other_transport']);\n# $tester = new CommandTester($command);\n# \n\
+    # $this->expectException(\\RuntimeException::class);\n# $this->expectExceptionMessage('The\
+    \ \"not_found\" transport does not exist.');\n# $tester->execute(['transport'\
+    \ => 'not_found']);\n# }\n# \n# public function testThrowsExceptionOnTransportSetup()\n\
+    # {\n# // mock a setupable-transport, that throws\n# $amqpTransport = $this->createMock(SetupableTransportInterface::class);\n\
+    # $amqpTransport->expects($this->exactly(1))\n# ->method('setup')\n# ->willThrowException(new\
+    \ \\RuntimeException('Server not found'));\n# \n# // mock a service locator\n\
+    # /** @var MockObject&ServiceLocator $serviceLocator */\n# $serviceLocator = $this->createMock(ServiceLocator::class);\n\
+    # $serviceLocator->expects($this->exactly(1))\n# ->method('get')\n# ->will($this->onConsecutiveCalls(\n\
+    # $amqpTransport\n# ));\n# $serviceLocator\n# ->method('has')\n# ->willReturn(true);\n\
+    # \n# $command = new SetupTransportsCommand($serviceLocator, ['amqp']);\n# $tester\
+    \ = new CommandTester($command);\n# \n# $this->expectException(\\RuntimeException::class);\n\
+    # $this->expectExceptionMessage('An error occurred while setting up the \"amqp\"\
+    \ transport: Server not found');\n# $tester->execute(['transport' => 'amqp']);\n\
+    # }\n# \n# /**\n# * @dataProvider provideCompletionSuggestions"
+- name: provideCompletionSuggestions
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\MockObject\MockObject
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Tester\CommandCompletionTester
+- Symfony\Component\Console\Tester\CommandTester
+- Symfony\Component\DependencyInjection\ServiceLocator
+- Symfony\Component\Messenger\Command\SetupTransportsCommand
+- Symfony\Component\Messenger\Transport\SetupableTransportInterface
+- Symfony\Component\Messenger\Transport\TransportInterface
+interfaces: []

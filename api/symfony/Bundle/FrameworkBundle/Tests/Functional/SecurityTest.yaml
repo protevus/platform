@@ -1,0 +1,34 @@
+name: SecurityTest
+class_comment: null
+dependencies:
+- name: InMemoryUser
+  type: class
+  source: Symfony\Component\Security\Core\User\InMemoryUser
+properties: []
+methods:
+- name: testLoginUser
+  visibility: public
+  parameters:
+  - name: username
+  - name: roles
+  - name: firewallContext
+  comment: '# * @dataProvider getUsers'
+- name: getUsers
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoginUserMultipleRequests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoginInBetweenRequests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoginUserMultipleTimes
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Security\Core\User\InMemoryUser
+interfaces: []

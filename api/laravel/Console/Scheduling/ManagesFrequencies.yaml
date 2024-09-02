@@ -1,0 +1,597 @@
+name: ManagesFrequencies
+class_comment: null
+dependencies:
+- name: Carbon
+  type: class
+  source: Illuminate\Support\Carbon
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties: []
+methods:
+- name: cron
+  visibility: public
+  parameters:
+  - name: expression
+  comment: '# * The Cron expression representing the event''s frequency.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return $this'
+- name: between
+  visibility: public
+  parameters:
+  - name: startTime
+  - name: endTime
+  comment: '# * Schedule the event to run between start and end time.
+
+    # *
+
+    # * @param  string  $startTime
+
+    # * @param  string  $endTime
+
+    # * @return $this'
+- name: unlessBetween
+  visibility: public
+  parameters:
+  - name: startTime
+  - name: endTime
+  comment: '# * Schedule the event to not run between start and end time.
+
+    # *
+
+    # * @param  string  $startTime
+
+    # * @param  string  $endTime
+
+    # * @return $this'
+- name: inTimeInterval
+  visibility: private
+  parameters:
+  - name: startTime
+  - name: endTime
+  comment: '# * Schedule the event to run between start and end time.
+
+    # *
+
+    # * @param  string  $startTime
+
+    # * @param  string  $endTime
+
+    # * @return \Closure'
+- name: everySecond
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run every second.
+
+    # *
+
+    # * @return $this'
+- name: everyTwoSeconds
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run every two seconds.
+
+    # *
+
+    # * @return $this'
+- name: everyFiveSeconds
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run every five seconds.
+
+    # *
+
+    # * @return $this'
+- name: everyTenSeconds
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run every ten seconds.
+
+    # *
+
+    # * @return $this'
+- name: everyFifteenSeconds
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run every fifteen seconds.
+
+    # *
+
+    # * @return $this'
+- name: everyTwentySeconds
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run every twenty seconds.
+
+    # *
+
+    # * @return $this'
+- name: everyThirtySeconds
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run every thirty seconds.
+
+    # *
+
+    # * @return $this'
+- name: repeatEvery
+  visibility: protected
+  parameters:
+  - name: seconds
+  comment: '# * Schedule the event to run multiple times per minute.
+
+    # *
+
+    # * @param  int  $seconds
+
+    # * @return $this'
+- name: everyMinute
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run every minute.
+
+    # *
+
+    # * @return $this'
+- name: everyTwoMinutes
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run every two minutes.
+
+    # *
+
+    # * @return $this'
+- name: everyThreeMinutes
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run every three minutes.
+
+    # *
+
+    # * @return $this'
+- name: everyFourMinutes
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run every four minutes.
+
+    # *
+
+    # * @return $this'
+- name: everyFiveMinutes
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run every five minutes.
+
+    # *
+
+    # * @return $this'
+- name: everyTenMinutes
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run every ten minutes.
+
+    # *
+
+    # * @return $this'
+- name: everyFifteenMinutes
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run every fifteen minutes.
+
+    # *
+
+    # * @return $this'
+- name: everyThirtyMinutes
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run every thirty minutes.
+
+    # *
+
+    # * @return $this'
+- name: hourly
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run hourly.
+
+    # *
+
+    # * @return $this'
+- name: hourlyAt
+  visibility: public
+  parameters:
+  - name: offset
+  comment: '# * Schedule the event to run hourly at a given offset in the hour.
+
+    # *
+
+    # * @param  array|string|int  $offset
+
+    # * @return $this'
+- name: everyOddHour
+  visibility: public
+  parameters:
+  - name: offset
+    default: '0'
+  comment: '# * Schedule the event to run every odd hour.
+
+    # *
+
+    # * @param  array|string|int  $offset
+
+    # * @return $this'
+- name: everyTwoHours
+  visibility: public
+  parameters:
+  - name: offset
+    default: '0'
+  comment: '# * Schedule the event to run every two hours.
+
+    # *
+
+    # * @param  array|string|int  $offset
+
+    # * @return $this'
+- name: everyThreeHours
+  visibility: public
+  parameters:
+  - name: offset
+    default: '0'
+  comment: '# * Schedule the event to run every three hours.
+
+    # *
+
+    # * @param  array|string|int  $offset
+
+    # * @return $this'
+- name: everyFourHours
+  visibility: public
+  parameters:
+  - name: offset
+    default: '0'
+  comment: '# * Schedule the event to run every four hours.
+
+    # *
+
+    # * @param  array|string|int  $offset
+
+    # * @return $this'
+- name: everySixHours
+  visibility: public
+  parameters:
+  - name: offset
+    default: '0'
+  comment: '# * Schedule the event to run every six hours.
+
+    # *
+
+    # * @param  array|string|int  $offset
+
+    # * @return $this'
+- name: daily
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run daily.
+
+    # *
+
+    # * @return $this'
+- name: at
+  visibility: public
+  parameters:
+  - name: time
+  comment: '# * Schedule the command at a given time.
+
+    # *
+
+    # * @param  string  $time
+
+    # * @return $this'
+- name: dailyAt
+  visibility: public
+  parameters:
+  - name: time
+  comment: '# * Schedule the event to run daily at a given time (10:00, 19:30, etc).
+
+    # *
+
+    # * @param  string  $time
+
+    # * @return $this'
+- name: twiceDaily
+  visibility: public
+  parameters:
+  - name: first
+    default: '1'
+  - name: second
+    default: '13'
+  comment: '# * Schedule the event to run twice daily.
+
+    # *
+
+    # * @param  int  $first
+
+    # * @param  int  $second
+
+    # * @return $this'
+- name: twiceDailyAt
+  visibility: public
+  parameters:
+  - name: first
+    default: '1'
+  - name: second
+    default: '13'
+  - name: offset
+    default: '0'
+  comment: '# * Schedule the event to run twice daily at a given offset.
+
+    # *
+
+    # * @param  int  $first
+
+    # * @param  int  $second
+
+    # * @param  int  $offset
+
+    # * @return $this'
+- name: hourBasedSchedule
+  visibility: protected
+  parameters:
+  - name: minutes
+  - name: hours
+  comment: '# * Schedule the event to run at the given minutes and hours.
+
+    # *
+
+    # * @param  array|string|int  $minutes
+
+    # * @param  array|string|int  $hours
+
+    # * @return $this'
+- name: weekdays
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run only on weekdays.
+
+    # *
+
+    # * @return $this'
+- name: weekends
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run only on weekends.
+
+    # *
+
+    # * @return $this'
+- name: mondays
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run only on Mondays.
+
+    # *
+
+    # * @return $this'
+- name: tuesdays
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run only on Tuesdays.
+
+    # *
+
+    # * @return $this'
+- name: wednesdays
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run only on Wednesdays.
+
+    # *
+
+    # * @return $this'
+- name: thursdays
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run only on Thursdays.
+
+    # *
+
+    # * @return $this'
+- name: fridays
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run only on Fridays.
+
+    # *
+
+    # * @return $this'
+- name: saturdays
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run only on Saturdays.
+
+    # *
+
+    # * @return $this'
+- name: sundays
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run only on Sundays.
+
+    # *
+
+    # * @return $this'
+- name: weekly
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run weekly.
+
+    # *
+
+    # * @return $this'
+- name: weeklyOn
+  visibility: public
+  parameters:
+  - name: dayOfWeek
+  - name: time
+    default: '''0:0'''
+  comment: '# * Schedule the event to run weekly on a given day and time.
+
+    # *
+
+    # * @param  array|mixed  $dayOfWeek
+
+    # * @param  string  $time
+
+    # * @return $this'
+- name: monthly
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run monthly.
+
+    # *
+
+    # * @return $this'
+- name: monthlyOn
+  visibility: public
+  parameters:
+  - name: dayOfMonth
+    default: '1'
+  - name: time
+    default: '''0:0'''
+  comment: '# * Schedule the event to run monthly on a given day and time.
+
+    # *
+
+    # * @param  int  $dayOfMonth
+
+    # * @param  string  $time
+
+    # * @return $this'
+- name: twiceMonthly
+  visibility: public
+  parameters:
+  - name: first
+    default: '1'
+  - name: second
+    default: '16'
+  - name: time
+    default: '''0:0'''
+  comment: '# * Schedule the event to run twice monthly at a given time.
+
+    # *
+
+    # * @param  int  $first
+
+    # * @param  int  $second
+
+    # * @param  string  $time
+
+    # * @return $this'
+- name: lastDayOfMonth
+  visibility: public
+  parameters:
+  - name: time
+    default: '''0:0'''
+  comment: '# * Schedule the event to run on the last day of the month.
+
+    # *
+
+    # * @param  string  $time
+
+    # * @return $this'
+- name: quarterly
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run quarterly.
+
+    # *
+
+    # * @return $this'
+- name: quarterlyOn
+  visibility: public
+  parameters:
+  - name: dayOfQuarter
+    default: '1'
+  - name: time
+    default: '''0:0'''
+  comment: '# * Schedule the event to run quarterly on a given day and time.
+
+    # *
+
+    # * @param  int  $dayOfQuarter
+
+    # * @param  string  $time
+
+    # * @return $this'
+- name: yearly
+  visibility: public
+  parameters: []
+  comment: '# * Schedule the event to run yearly.
+
+    # *
+
+    # * @return $this'
+- name: yearlyOn
+  visibility: public
+  parameters:
+  - name: month
+    default: '1'
+  - name: dayOfMonth
+    default: '1'
+  - name: time
+    default: '''0:0'''
+  comment: '# * Schedule the event to run yearly on a given month, day, and time.
+
+    # *
+
+    # * @param  int  $month
+
+    # * @param  int|string  $dayOfMonth
+
+    # * @param  string  $time
+
+    # * @return $this'
+- name: days
+  visibility: public
+  parameters:
+  - name: days
+  comment: '# * Set the days of the week the command should run on.
+
+    # *
+
+    # * @param  array|mixed  $days
+
+    # * @return $this'
+- name: timezone
+  visibility: public
+  parameters:
+  - name: timezone
+  comment: '# * Set the timezone the date should be evaluated on.
+
+    # *
+
+    # * @param  \DateTimeZone|string  $timezone
+
+    # * @return $this'
+- name: spliceIntoPosition
+  visibility: protected
+  parameters:
+  - name: position
+  - name: value
+  comment: '# * Splice the given value into the given position of the expression.
+
+    # *
+
+    # * @param  int  $position
+
+    # * @param  string  $value
+
+    # * @return $this'
+traits:
+- Illuminate\Support\Carbon
+- InvalidArgumentException
+interfaces: []

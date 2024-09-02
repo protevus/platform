@@ -1,0 +1,257 @@
+name: Facade
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Model
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Js
+  type: class
+  source: Illuminate\Support\Js
+- name: Number
+  type: class
+  source: Illuminate\Support\Number
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: Fake
+  type: class
+  source: Illuminate\Support\Testing\Fakes\Fake
+- name: Mockery
+  type: class
+  source: Mockery
+- name: LegacyMockInterface
+  type: class
+  source: Mockery\LegacyMockInterface
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+properties:
+- name: app
+  visibility: protected
+  comment: '# * The application instance being facaded.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Foundation\Application|null'
+- name: resolvedInstance
+  visibility: protected
+  comment: '# * The resolved object instances.
+
+    # *
+
+    # * @var array'
+- name: cached
+  visibility: protected
+  comment: '# * Indicates if the resolved instance should be cached.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: resolved
+  visibility: public
+  parameters:
+  - name: callback
+  comment: "# * The application instance being facaded.\n# *\n# * @var \\Illuminate\\\
+    Contracts\\Foundation\\Application|null\n# */\n# protected static $app;\n# \n\
+    # /**\n# * The resolved object instances.\n# *\n# * @var array\n# */\n# protected\
+    \ static $resolvedInstance;\n# \n# /**\n# * Indicates if the resolved instance\
+    \ should be cached.\n# *\n# * @var bool\n# */\n# protected static $cached = true;\n\
+    # \n# /**\n# * Run a Closure when the facade has been resolved.\n# *\n# * @param\
+    \  \\Closure  $callback\n# * @return void"
+- name: spy
+  visibility: public
+  parameters: []
+  comment: '# * Convert the facade into a Mockery spy.
+
+    # *
+
+    # * @return \Mockery\MockInterface'
+- name: partialMock
+  visibility: public
+  parameters: []
+  comment: '# * Initiate a partial mock on the facade.
+
+    # *
+
+    # * @return \Mockery\MockInterface'
+- name: shouldReceive
+  visibility: public
+  parameters: []
+  comment: '# * Initiate a mock expectation on the facade.
+
+    # *
+
+    # * @return \Mockery\Expectation'
+- name: expects
+  visibility: public
+  parameters: []
+  comment: '# * Initiate a mock expectation on the facade.
+
+    # *
+
+    # * @return \Mockery\Expectation'
+- name: createFreshMockInstance
+  visibility: protected
+  parameters: []
+  comment: '# * Create a fresh mock instance for the given class.
+
+    # *
+
+    # * @return \Mockery\MockInterface'
+- name: createMock
+  visibility: protected
+  parameters: []
+  comment: '# * Create a fresh mock instance for the given class.
+
+    # *
+
+    # * @return \Mockery\MockInterface'
+- name: isMock
+  visibility: protected
+  parameters: []
+  comment: '# * Determines whether a mock is set as the instance of the facade.
+
+    # *
+
+    # * @return bool'
+- name: getMockableClass
+  visibility: protected
+  parameters: []
+  comment: '# * Get the mockable class for the bound instance.
+
+    # *
+
+    # * @return string|null'
+- name: swap
+  visibility: public
+  parameters:
+  - name: instance
+  comment: '# * Hotswap the underlying instance behind the facade.
+
+    # *
+
+    # * @param  mixed  $instance
+
+    # * @return void'
+- name: isFake
+  visibility: protected
+  parameters: []
+  comment: '# * Determines whether a "fake" has been set as the facade instance.
+
+    # *
+
+    # * @return bool'
+- name: getFacadeRoot
+  visibility: public
+  parameters: []
+  comment: '# * Get the root object behind the facade.
+
+    # *
+
+    # * @return mixed'
+- name: getFacadeAccessor
+  visibility: protected
+  parameters: []
+  comment: '# * Get the registered name of the component.
+
+    # *
+
+    # * @return string
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: resolveFacadeInstance
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Resolve the facade root instance from the container.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return mixed'
+- name: clearResolvedInstance
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Clear a resolved facade instance.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return void'
+- name: clearResolvedInstances
+  visibility: public
+  parameters: []
+  comment: '# * Clear all of the resolved instances.
+
+    # *
+
+    # * @return void'
+- name: defaultAliases
+  visibility: public
+  parameters: []
+  comment: '# * Get the application default aliases.
+
+    # *
+
+    # * @return \Illuminate\Support\Collection'
+- name: getFacadeApplication
+  visibility: public
+  parameters: []
+  comment: '# * Get the application instance behind the facade.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Foundation\Application|null'
+- name: setFacadeApplication
+  visibility: public
+  parameters:
+  - name: app
+  comment: '# * Set the application instance.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Foundation\Application|null  $app
+
+    # * @return void'
+- name: __callStatic
+  visibility: public
+  parameters:
+  - name: method
+  - name: args
+  comment: '# * Handle dynamic, static calls to the object.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $args
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \RuntimeException'
+traits:
+- Closure
+- Illuminate\Database\Eloquent\Model
+- Illuminate\Support\Arr
+- Illuminate\Support\Js
+- Illuminate\Support\Number
+- Illuminate\Support\Str
+- Illuminate\Support\Testing\Fakes\Fake
+- Mockery
+- Mockery\LegacyMockInterface
+- RuntimeException
+interfaces: []

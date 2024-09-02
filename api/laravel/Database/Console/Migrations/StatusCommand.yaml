@@ -1,0 +1,93 @@
+name: StatusCommand
+class_comment: null
+dependencies:
+- name: Migrator
+  type: class
+  source: Illuminate\Database\Migrations\Migrator
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+properties:
+- name: name
+  visibility: protected
+  comment: '# * The console command name.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+- name: migrator
+  visibility: protected
+  comment: '# * The migrator instance.
+
+    # *
+
+    # * @var \Illuminate\Database\Migrations\Migrator'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: migrator
+  comment: "# * The console command name.\n# *\n# * @var string\n# */\n# protected\
+    \ $name = 'migrate:status';\n# \n# /**\n# * The console command description.\n\
+    # *\n# * @var string\n# */\n# protected $description = 'Show the status of each\
+    \ migration';\n# \n# /**\n# * The migrator instance.\n# *\n# * @var \\Illuminate\\\
+    Database\\Migrations\\Migrator\n# */\n# protected $migrator;\n# \n# /**\n# * Create\
+    \ a new migration rollback command instance.\n# *\n# * @param  \\Illuminate\\\
+    Database\\Migrations\\Migrator  $migrator\n# * @return void"
+- name: handle
+  visibility: public
+  parameters: []
+  comment: '# * Execute the console command.
+
+    # *
+
+    # * @return int|null'
+- name: getStatusFor
+  visibility: protected
+  parameters:
+  - name: ran
+  - name: batches
+  comment: '# * Get the status for the given run migrations.
+
+    # *
+
+    # * @param  array  $ran
+
+    # * @param  array  $batches
+
+    # * @return \Illuminate\Support\Collection'
+- name: getAllMigrationFiles
+  visibility: protected
+  parameters: []
+  comment: '# * Get an array of all of the migration files.
+
+    # *
+
+    # * @return array'
+- name: getOptions
+  visibility: protected
+  parameters: []
+  comment: '# * Get the console command options.
+
+    # *
+
+    # * @return array'
+traits:
+- Illuminate\Database\Migrations\Migrator
+- Illuminate\Support\Collection
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Input\InputOption
+interfaces: []

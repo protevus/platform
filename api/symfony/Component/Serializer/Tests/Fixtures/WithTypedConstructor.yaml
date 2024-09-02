@@ -1,0 +1,23 @@
+name: WithTypedConstructor
+class_comment: null
+dependencies: []
+properties:
+- name: string
+  visibility: public
+  comment: '# * @var string'
+- name: bool
+  visibility: public
+  comment: '# * @var bool'
+- name: int
+  visibility: public
+  comment: '# * @var int'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: string
+  - name: bool
+  - name: int
+  comment: null
+traits: []
+interfaces: []

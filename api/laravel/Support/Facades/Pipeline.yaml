@@ -1,0 +1,88 @@
+name: Pipeline
+class_comment: '# * @method static \Illuminate\Pipeline\Pipeline send(mixed $passable)
+
+  # * @method static \Illuminate\Pipeline\Pipeline through(array|mixed $pipes)
+
+  # * @method static \Illuminate\Pipeline\Pipeline pipe(array|mixed $pipes)
+
+  # * @method static \Illuminate\Pipeline\Pipeline via(string $method)
+
+  # * @method static mixed then(\Closure $destination)
+
+  # * @method static mixed thenReturn()
+
+  # * @method static \Illuminate\Pipeline\Pipeline setContainer(\Illuminate\Contracts\Container\Container
+  $container)
+
+  # * @method static \Illuminate\Pipeline\Pipeline|mixed when(\Closure|mixed|null
+  $value = null, callable|null $callback = null, callable|null $default = null)
+
+  # * @method static \Illuminate\Pipeline\Pipeline|mixed unless(\Closure|mixed|null
+  $value = null, callable|null $callback = null, callable|null $default = null)
+
+  # *
+
+  # * @see \Illuminate\Pipeline\Pipeline'
+dependencies: []
+properties:
+- name: cached
+  visibility: protected
+  comment: '# * @method static \Illuminate\Pipeline\Pipeline send(mixed $passable)
+
+    # * @method static \Illuminate\Pipeline\Pipeline through(array|mixed $pipes)
+
+    # * @method static \Illuminate\Pipeline\Pipeline pipe(array|mixed $pipes)
+
+    # * @method static \Illuminate\Pipeline\Pipeline via(string $method)
+
+    # * @method static mixed then(\Closure $destination)
+
+    # * @method static mixed thenReturn()
+
+    # * @method static \Illuminate\Pipeline\Pipeline setContainer(\Illuminate\Contracts\Container\Container
+    $container)
+
+    # * @method static \Illuminate\Pipeline\Pipeline|mixed when(\Closure|mixed|null
+    $value = null, callable|null $callback = null, callable|null $default = null)
+
+    # * @method static \Illuminate\Pipeline\Pipeline|mixed unless(\Closure|mixed|null
+    $value = null, callable|null $callback = null, callable|null $default = null)
+
+    # *
+
+    # * @see \Illuminate\Pipeline\Pipeline
+
+    # */
+
+    # class Pipeline extends Facade
+
+    # {
+
+    # /**
+
+    # * Indicates if the resolved instance should be cached.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: getFacadeAccessor
+  visibility: protected
+  parameters: []
+  comment: "# * @method static \\Illuminate\\Pipeline\\Pipeline send(mixed $passable)\n\
+    # * @method static \\Illuminate\\Pipeline\\Pipeline through(array|mixed $pipes)\n\
+    # * @method static \\Illuminate\\Pipeline\\Pipeline pipe(array|mixed $pipes)\n\
+    # * @method static \\Illuminate\\Pipeline\\Pipeline via(string $method)\n# * @method\
+    \ static mixed then(\\Closure $destination)\n# * @method static mixed thenReturn()\n\
+    # * @method static \\Illuminate\\Pipeline\\Pipeline setContainer(\\Illuminate\\\
+    Contracts\\Container\\Container $container)\n# * @method static \\Illuminate\\\
+    Pipeline\\Pipeline|mixed when(\\Closure|mixed|null $value = null, callable|null\
+    \ $callback = null, callable|null $default = null)\n# * @method static \\Illuminate\\\
+    Pipeline\\Pipeline|mixed unless(\\Closure|mixed|null $value = null, callable|null\
+    \ $callback = null, callable|null $default = null)\n# *\n# * @see \\Illuminate\\\
+    Pipeline\\Pipeline\n# */\n# class Pipeline extends Facade\n# {\n# /**\n# * Indicates\
+    \ if the resolved instance should be cached.\n# *\n# * @var bool\n# */\n# protected\
+    \ static $cached = false;\n# \n# /**\n# * Get the registered name of the component.\n\
+    # *\n# * @return string"
+traits: []
+interfaces: []

@@ -1,0 +1,31 @@
+name: OtherSerializedNameDummy
+class_comment: '# * @author Anthony GRASSIOT <antograssiot@free.fr>'
+dependencies:
+- name: Groups
+  type: class
+  source: Symfony\Component\Serializer\Attribute\Groups
+- name: SerializedName
+  type: class
+  source: Symfony\Component\Serializer\Attribute\SerializedName
+properties:
+- name: buz
+  visibility: private
+  comment: null
+methods:
+- name: setBuz
+  visibility: public
+  parameters:
+  - name: buz
+  comment: null
+- name: getBuz
+  visibility: public
+  parameters: []
+  comment: null
+- name: getBuzForExport
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Serializer\Attribute\Groups
+- Symfony\Component\Serializer\Attribute\SerializedName
+interfaces: []

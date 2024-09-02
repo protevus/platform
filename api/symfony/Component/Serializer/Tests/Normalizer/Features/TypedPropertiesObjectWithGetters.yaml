@@ -1,0 +1,34 @@
+name: TypedPropertiesObjectWithGetters
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getUnInitialized
+  visibility: public
+  parameters: []
+  comment: null
+- name: setUnInitialized
+  visibility: public
+  parameters:
+  - name: unInitialized
+  comment: null
+- name: getInitialized
+  visibility: public
+  parameters: []
+  comment: null
+- name: setInitialized
+  visibility: public
+  parameters:
+  - name: initialized
+  comment: null
+- name: getInitialized2
+  visibility: public
+  parameters: []
+  comment: null
+- name: setInitialized2
+  visibility: public
+  parameters:
+  - name: initialized2
+  comment: null
+traits: []
+interfaces: []

@@ -1,0 +1,39 @@
+name: BuildDebugContainerTrait
+class_comment: null
+dependencies:
+- name: ConfigCache
+  type: class
+  source: Symfony\Component\Config\ConfigCache
+- name: FileLocator
+  type: class
+  source: Symfony\Component\Config\FileLocator
+- name: ServiceLocatorTagPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: XmlFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\XmlFileLoader
+- name: KernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\KernelInterface
+properties: []
+methods:
+- name: getContainerBuilder
+  visibility: protected
+  parameters:
+  - name: kernel
+  comment: "# * @internal\n# *\n# * @author Robin Chalas <robin.chalas@gmail.com>\n\
+    # * @author Nicolas Grekas <p@tchwork.com>\n# */\n# trait BuildDebugContainerTrait\n\
+    # {\n# protected ContainerBuilder $container;\n# \n# /**\n# * Loads the ContainerBuilder\
+    \ from the cache.\n# *\n# * @throws \\LogicException"
+traits:
+- Symfony\Component\Config\ConfigCache
+- Symfony\Component\Config\FileLocator
+- Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Loader\XmlFileLoader
+- Symfony\Component\HttpKernel\KernelInterface
+interfaces: []

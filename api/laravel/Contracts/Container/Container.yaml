@@ -1,0 +1,354 @@
+name: Container
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+properties: []
+methods:
+- name: bound
+  visibility: public
+  parameters:
+  - name: abstract
+  comment: '# * Determine if the given abstract type has been bound.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @return bool'
+- name: alias
+  visibility: public
+  parameters:
+  - name: abstract
+  - name: alias
+  comment: '# * Alias a type to a different name.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @param  string  $alias
+
+    # * @return void
+
+    # *
+
+    # * @throws \LogicException'
+- name: tag
+  visibility: public
+  parameters:
+  - name: abstracts
+  - name: tags
+  comment: '# * Assign a set of tags to a given binding.
+
+    # *
+
+    # * @param  array|string  $abstracts
+
+    # * @param  array|mixed  ...$tags
+
+    # * @return void'
+- name: tagged
+  visibility: public
+  parameters:
+  - name: tag
+  comment: '# * Resolve all of the bindings for a given tag.
+
+    # *
+
+    # * @param  string  $tag
+
+    # * @return iterable'
+- name: bind
+  visibility: public
+  parameters:
+  - name: abstract
+  - name: concrete
+    default: 'null'
+  - name: shared
+    default: 'false'
+  comment: '# * Register a binding with the container.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @param  \Closure|string|null  $concrete
+
+    # * @param  bool  $shared
+
+    # * @return void'
+- name: bindMethod
+  visibility: public
+  parameters:
+  - name: method
+  - name: callback
+  comment: '# * Bind a callback to resolve with Container::call.
+
+    # *
+
+    # * @param  array|string  $method
+
+    # * @param  \Closure  $callback
+
+    # * @return void'
+- name: bindIf
+  visibility: public
+  parameters:
+  - name: abstract
+  - name: concrete
+    default: 'null'
+  - name: shared
+    default: 'false'
+  comment: '# * Register a binding if it hasn''t already been registered.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @param  \Closure|string|null  $concrete
+
+    # * @param  bool  $shared
+
+    # * @return void'
+- name: singleton
+  visibility: public
+  parameters:
+  - name: abstract
+  - name: concrete
+    default: 'null'
+  comment: '# * Register a shared binding in the container.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @param  \Closure|string|null  $concrete
+
+    # * @return void'
+- name: singletonIf
+  visibility: public
+  parameters:
+  - name: abstract
+  - name: concrete
+    default: 'null'
+  comment: '# * Register a shared binding if it hasn''t already been registered.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @param  \Closure|string|null  $concrete
+
+    # * @return void'
+- name: scoped
+  visibility: public
+  parameters:
+  - name: abstract
+  - name: concrete
+    default: 'null'
+  comment: '# * Register a scoped binding in the container.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @param  \Closure|string|null  $concrete
+
+    # * @return void'
+- name: scopedIf
+  visibility: public
+  parameters:
+  - name: abstract
+  - name: concrete
+    default: 'null'
+  comment: '# * Register a scoped binding if it hasn''t already been registered.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @param  \Closure|string|null  $concrete
+
+    # * @return void'
+- name: extend
+  visibility: public
+  parameters:
+  - name: abstract
+  - name: closure
+  comment: '# * "Extend" an abstract type in the container.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @param  \Closure  $closure
+
+    # * @return void
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: instance
+  visibility: public
+  parameters:
+  - name: abstract
+  - name: instance
+  comment: '# * Register an existing instance as shared in the container.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @param  mixed  $instance
+
+    # * @return mixed'
+- name: addContextualBinding
+  visibility: public
+  parameters:
+  - name: concrete
+  - name: abstract
+  - name: implementation
+  comment: '# * Add a contextual binding to the container.
+
+    # *
+
+    # * @param  string  $concrete
+
+    # * @param  string  $abstract
+
+    # * @param  \Closure|string  $implementation
+
+    # * @return void'
+- name: when
+  visibility: public
+  parameters:
+  - name: concrete
+  comment: '# * Define a contextual binding.
+
+    # *
+
+    # * @param  string|array  $concrete
+
+    # * @return \Illuminate\Contracts\Container\ContextualBindingBuilder'
+- name: factory
+  visibility: public
+  parameters:
+  - name: abstract
+  comment: '# * Get a closure to resolve the given type from the container.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @return \Closure'
+- name: flush
+  visibility: public
+  parameters: []
+  comment: '# * Flush the container of all bindings and resolved instances.
+
+    # *
+
+    # * @return void'
+- name: make
+  visibility: public
+  parameters:
+  - name: abstract
+  - name: parameters
+    default: '[]'
+  comment: '# * Resolve the given type from the container.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @param  array  $parameters
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Container\BindingResolutionException'
+- name: call
+  visibility: public
+  parameters:
+  - name: callback
+  - name: parameters
+    default: '[]'
+  - name: defaultMethod
+    default: 'null'
+  comment: '# * Call the given Closure / class@method and inject its dependencies.
+
+    # *
+
+    # * @param  callable|string  $callback
+
+    # * @param  array  $parameters
+
+    # * @param  string|null  $defaultMethod
+
+    # * @return mixed'
+- name: resolved
+  visibility: public
+  parameters:
+  - name: abstract
+  comment: '# * Determine if the given abstract type has been resolved.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @return bool'
+- name: beforeResolving
+  visibility: public
+  parameters:
+  - name: abstract
+  - name: callback
+    default: 'null'
+  comment: '# * Register a new before resolving callback.
+
+    # *
+
+    # * @param  \Closure|string  $abstract
+
+    # * @param  \Closure|null  $callback
+
+    # * @return void'
+- name: resolving
+  visibility: public
+  parameters:
+  - name: abstract
+  - name: callback
+    default: 'null'
+  comment: '# * Register a new resolving callback.
+
+    # *
+
+    # * @param  \Closure|string  $abstract
+
+    # * @param  \Closure|null  $callback
+
+    # * @return void'
+- name: afterResolving
+  visibility: public
+  parameters:
+  - name: abstract
+  - name: callback
+    default: 'null'
+  comment: '# * Register a new after resolving callback.
+
+    # *
+
+    # * @param  \Closure|string  $abstract
+
+    # * @param  \Closure|null  $callback
+
+    # * @return void'
+traits:
+- Closure
+- Psr\Container\ContainerInterface
+interfaces: []

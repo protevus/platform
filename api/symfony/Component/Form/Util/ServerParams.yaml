@@ -1,0 +1,30 @@
+name: ServerParams
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+properties: []
+methods:
+- name: hasPostMaxSizeBeenExceeded
+  visibility: public
+  parameters: []
+  comment: "# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# class ServerParams\n\
+    # {\n# public function __construct(\n# private ?RequestStack $requestStack = null,\n\
+    # ) {\n# }\n# \n# /**\n# * Returns true if the POST max size has been exceeded\
+    \ in the request."
+- name: getPostMaxSize
+  visibility: public
+  parameters: []
+  comment: '# * Returns maximum post size in bytes.'
+- name: getNormalizedIniPostMaxSize
+  visibility: public
+  parameters: []
+  comment: '# * Returns the normalized "post_max_size" ini setting.'
+- name: getContentLength
+  visibility: public
+  parameters: []
+  comment: '# * Returns the content length of the request.'
+traits:
+- Symfony\Component\HttpFoundation\RequestStack
+interfaces: []

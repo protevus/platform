@@ -1,0 +1,564 @@
+name: QueueFake
+class_comment: null
+dependencies:
+- name: BadMethodCallException
+  type: class
+  source: BadMethodCallException
+- name: Closure
+  type: class
+  source: Closure
+- name: Queue
+  type: class
+  source: Illuminate\Contracts\Queue\Queue
+- name: CallQueuedClosure
+  type: class
+  source: Illuminate\Queue\CallQueuedClosure
+- name: QueueManager
+  type: class
+  source: Illuminate\Queue\QueueManager
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+- name: ReflectsClosures
+  type: class
+  source: Illuminate\Support\Traits\ReflectsClosures
+- name: PHPUnit
+  type: class
+  source: PHPUnit\Framework\Assert
+- name: ReflectsClosures
+  type: class
+  source: ReflectsClosures
+properties:
+- name: queue
+  visibility: public
+  comment: '# * The original queue manager.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Queue\Queue'
+- name: jobsToFake
+  visibility: protected
+  comment: '# * The job types that should be intercepted instead of pushed to the
+    queue.
+
+    # *
+
+    # * @var \Illuminate\Support\Collection'
+- name: jobsToBeQueued
+  visibility: protected
+  comment: '# * The job types that should be pushed to the queue and not intercepted.
+
+    # *
+
+    # * @var \Illuminate\Support\Collection'
+- name: jobs
+  visibility: protected
+  comment: '# * All of the jobs that have been pushed.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: app
+  - name: jobsToFake
+    default: '[]'
+  - name: queue
+    default: 'null'
+  comment: "# * The original queue manager.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Queue\\Queue\n# */\n# public $queue;\n# \n# /**\n# * The job types that should\
+    \ be intercepted instead of pushed to the queue.\n# *\n# * @var \\Illuminate\\\
+    Support\\Collection\n# */\n# protected $jobsToFake;\n# \n# /**\n# * The job types\
+    \ that should be pushed to the queue and not intercepted.\n# *\n# * @var \\Illuminate\\\
+    Support\\Collection\n# */\n# protected $jobsToBeQueued;\n# \n# /**\n# * All of\
+    \ the jobs that have been pushed.\n# *\n# * @var array\n# */\n# protected $jobs\
+    \ = [];\n# \n# /**\n# * Indicates if items should be serialized and restored when\
+    \ pushed to the queue.\n# *\n# * @var bool\n# */\n# protected bool $serializeAndRestore\
+    \ = false;\n# \n# /**\n# * Create a new fake queue instance.\n# *\n# * @param\
+    \  \\Illuminate\\Contracts\\Foundation\\Application  $app\n# * @param  array \
+    \ $jobsToFake\n# * @param  \\Illuminate\\Queue\\QueueManager|null  $queue\n# *\
+    \ @return void"
+- name: except
+  visibility: public
+  parameters:
+  - name: jobsToBeQueued
+  comment: '# * Specify the jobs that should be queued instead of faked.
+
+    # *
+
+    # * @param  array|string  $jobsToBeQueued
+
+    # * @return $this'
+- name: assertPushed
+  visibility: public
+  parameters:
+  - name: job
+  - name: callback
+    default: 'null'
+  comment: '# * Assert if a job was pushed based on a truth-test callback.
+
+    # *
+
+    # * @param  string|\Closure  $job
+
+    # * @param  callable|int|null  $callback
+
+    # * @return void'
+- name: assertPushedTimes
+  visibility: protected
+  parameters:
+  - name: job
+  - name: times
+    default: '1'
+  comment: '# * Assert if a job was pushed a number of times.
+
+    # *
+
+    # * @param  string  $job
+
+    # * @param  int  $times
+
+    # * @return void'
+- name: assertPushedOn
+  visibility: public
+  parameters:
+  - name: queue
+  - name: job
+  - name: callback
+    default: 'null'
+  comment: '# * Assert if a job was pushed based on a truth-test callback.
+
+    # *
+
+    # * @param  string  $queue
+
+    # * @param  string|\Closure  $job
+
+    # * @param  callable|null  $callback
+
+    # * @return void'
+- name: assertPushedWithChain
+  visibility: public
+  parameters:
+  - name: job
+  - name: expectedChain
+    default: '[]'
+  - name: callback
+    default: 'null'
+  comment: '# * Assert if a job was pushed with chained jobs based on a truth-test
+    callback.
+
+    # *
+
+    # * @param  string  $job
+
+    # * @param  array  $expectedChain
+
+    # * @param  callable|null  $callback
+
+    # * @return void'
+- name: assertPushedWithoutChain
+  visibility: public
+  parameters:
+  - name: job
+  - name: callback
+    default: 'null'
+  comment: '# * Assert if a job was pushed with an empty chain based on a truth-test
+    callback.
+
+    # *
+
+    # * @param  string  $job
+
+    # * @param  callable|null  $callback
+
+    # * @return void'
+- name: assertPushedWithChainOfObjects
+  visibility: protected
+  parameters:
+  - name: job
+  - name: expectedChain
+  - name: callback
+  comment: '# * Assert if a job was pushed with chained jobs based on a truth-test
+    callback.
+
+    # *
+
+    # * @param  string  $job
+
+    # * @param  array  $expectedChain
+
+    # * @param  callable|null  $callback
+
+    # * @return void'
+- name: assertPushedWithChainOfClasses
+  visibility: protected
+  parameters:
+  - name: job
+  - name: expectedChain
+  - name: callback
+  comment: '# * Assert if a job was pushed with chained jobs based on a truth-test
+    callback.
+
+    # *
+
+    # * @param  string  $job
+
+    # * @param  array  $expectedChain
+
+    # * @param  callable|null  $callback
+
+    # * @return void'
+- name: assertClosurePushed
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Assert if a closure was pushed based on a truth-test callback.
+
+    # *
+
+    # * @param  callable|int|null  $callback
+
+    # * @return void'
+- name: assertClosureNotPushed
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Assert that a closure was not pushed based on a truth-test callback.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return void'
+- name: isChainOfObjects
+  visibility: protected
+  parameters:
+  - name: chain
+  comment: '# * Determine if the given chain is entirely composed of objects.
+
+    # *
+
+    # * @param  array  $chain
+
+    # * @return bool'
+- name: assertNotPushed
+  visibility: public
+  parameters:
+  - name: job
+  - name: callback
+    default: 'null'
+  comment: '# * Determine if a job was pushed based on a truth-test callback.
+
+    # *
+
+    # * @param  string|\Closure  $job
+
+    # * @param  callable|null  $callback
+
+    # * @return void'
+- name: assertCount
+  visibility: public
+  parameters:
+  - name: expectedCount
+  comment: '# * Assert the total count of jobs that were pushed.
+
+    # *
+
+    # * @param  int  $expectedCount
+
+    # * @return void'
+- name: assertNothingPushed
+  visibility: public
+  parameters: []
+  comment: '# * Assert that no jobs were pushed.
+
+    # *
+
+    # * @return void'
+- name: pushed
+  visibility: public
+  parameters:
+  - name: job
+  - name: callback
+    default: 'null'
+  comment: '# * Get all of the jobs matching a truth-test callback.
+
+    # *
+
+    # * @param  string  $job
+
+    # * @param  callable|null  $callback
+
+    # * @return \Illuminate\Support\Collection'
+- name: hasPushed
+  visibility: public
+  parameters:
+  - name: job
+  comment: '# * Determine if there are any stored jobs for a given class.
+
+    # *
+
+    # * @param  string  $job
+
+    # * @return bool'
+- name: connection
+  visibility: public
+  parameters:
+  - name: value
+    default: 'null'
+  comment: '# * Resolve a queue connection instance.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return \Illuminate\Contracts\Queue\Queue'
+- name: size
+  visibility: public
+  parameters:
+  - name: queue
+    default: 'null'
+  comment: '# * Get the size of the queue.
+
+    # *
+
+    # * @param  string|null  $queue
+
+    # * @return int'
+- name: push
+  visibility: public
+  parameters:
+  - name: job
+  - name: data
+    default: ''''''
+  - name: queue
+    default: 'null'
+  comment: '# * Push a new job onto the queue.
+
+    # *
+
+    # * @param  string|object  $job
+
+    # * @param  mixed  $data
+
+    # * @param  string|null  $queue
+
+    # * @return mixed'
+- name: shouldFakeJob
+  visibility: public
+  parameters:
+  - name: job
+  comment: '# * Determine if a job should be faked or actually dispatched.
+
+    # *
+
+    # * @param  object  $job
+
+    # * @return bool'
+- name: shouldDispatchJob
+  visibility: protected
+  parameters:
+  - name: job
+  comment: '# * Determine if a job should be pushed to the queue instead of faked.
+
+    # *
+
+    # * @param  object  $job
+
+    # * @return bool'
+- name: pushRaw
+  visibility: public
+  parameters:
+  - name: payload
+  - name: queue
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: '# * Push a raw payload onto the queue.
+
+    # *
+
+    # * @param  string  $payload
+
+    # * @param  string|null  $queue
+
+    # * @param  array  $options
+
+    # * @return mixed'
+- name: later
+  visibility: public
+  parameters:
+  - name: delay
+  - name: job
+  - name: data
+    default: ''''''
+  - name: queue
+    default: 'null'
+  comment: '# * Push a new job onto the queue after (n) seconds.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $delay
+
+    # * @param  string|object  $job
+
+    # * @param  mixed  $data
+
+    # * @param  string|null  $queue
+
+    # * @return mixed'
+- name: pushOn
+  visibility: public
+  parameters:
+  - name: queue
+  - name: job
+  - name: data
+    default: ''''''
+  comment: '# * Push a new job onto the queue.
+
+    # *
+
+    # * @param  string  $queue
+
+    # * @param  string|object  $job
+
+    # * @param  mixed  $data
+
+    # * @return mixed'
+- name: laterOn
+  visibility: public
+  parameters:
+  - name: queue
+  - name: delay
+  - name: job
+  - name: data
+    default: ''''''
+  comment: '# * Push a new job onto a specific queue after (n) seconds.
+
+    # *
+
+    # * @param  string  $queue
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $delay
+
+    # * @param  string|object  $job
+
+    # * @param  mixed  $data
+
+    # * @return mixed'
+- name: pop
+  visibility: public
+  parameters:
+  - name: queue
+    default: 'null'
+  comment: '# * Pop the next job off of the queue.
+
+    # *
+
+    # * @param  string|null  $queue
+
+    # * @return \Illuminate\Contracts\Queue\Job|null'
+- name: bulk
+  visibility: public
+  parameters:
+  - name: jobs
+  - name: data
+    default: ''''''
+  - name: queue
+    default: 'null'
+  comment: '# * Push an array of jobs onto the queue.
+
+    # *
+
+    # * @param  array  $jobs
+
+    # * @param  mixed  $data
+
+    # * @param  string|null  $queue
+
+    # * @return mixed'
+- name: pushedJobs
+  visibility: public
+  parameters: []
+  comment: '# * Get the jobs that have been pushed.
+
+    # *
+
+    # * @return array'
+- name: serializeAndRestore
+  visibility: public
+  parameters:
+  - name: serializeAndRestore
+    default: 'true'
+  comment: '# * Specify if jobs should be serialized and restored when being "pushed"
+    to the queue.
+
+    # *
+
+    # * @param  bool  $serializeAndRestore
+
+    # * @return $this'
+- name: serializeAndRestoreJob
+  visibility: protected
+  parameters:
+  - name: job
+  comment: '# * Serialize and unserialize the job to simulate the queueing process.
+
+    # *
+
+    # * @param  mixed  $job
+
+    # * @return mixed'
+- name: getConnectionName
+  visibility: public
+  parameters: []
+  comment: '# * Get the connection name for the queue.
+
+    # *
+
+    # * @return string'
+- name: setConnectionName
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Set the connection name for the queue.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return $this'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Override the QueueManager to prevent circular dependency.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \BadMethodCallException'
+traits:
+- BadMethodCallException
+- Closure
+- Illuminate\Contracts\Queue\Queue
+- Illuminate\Queue\CallQueuedClosure
+- Illuminate\Queue\QueueManager
+- Illuminate\Support\Collection
+- Illuminate\Support\Traits\ReflectsClosures
+- ReflectsClosures
+interfaces:
+- Fake

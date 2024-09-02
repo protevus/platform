@@ -1,0 +1,475 @@
+name: ExecutionContextInterface
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: ConstraintViolationListInterface
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolationListInterface
+- name: Mapping
+  type: class
+  source: Symfony\Component\Validator\Mapping
+- name: MetadataInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\MetadataInterface
+- name: ValidatorInterface
+  type: class
+  source: Symfony\Component\Validator\Validator\ValidatorInterface
+- name: ConstraintViolationBuilderInterface
+  type: class
+  source: Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface
+properties: []
+methods:
+- name: addViolation
+  visibility: public
+  parameters:
+  - name: message
+  - name: params
+    default: '[]'
+  comment: '# * The context of a validation run.
+
+    # *
+
+    # * The context collects all violations generated during the validation. By
+
+    # * default, validators execute all validations in a new context:
+
+    # *
+
+    # *     $violations = $validator->validate($object);
+
+    # *
+
+    # * When you make another call to the validator, while the validation is in
+
+    # * progress, the violations will be isolated from each other:
+
+    # *
+
+    # *     public function validate(mixed $value, Constraint $constraint): void
+
+    # *     {
+
+    # *         $validator = $this->context->getValidator();
+
+    # *
+
+    # *         // The violations are not added to $this->context
+
+    # *         $violations = $validator->validate($value);
+
+    # *     }
+
+    # *
+
+    # * However, if you want to add the violations to the current context, use the
+
+    # * {@link ValidatorInterface::inContext()} method:
+
+    # *
+
+    # *     public function validate(mixed $value, Constraint $constraint): void
+
+    # *     {
+
+    # *         $validator = $this->context->getValidator();
+
+    # *
+
+    # *         // The violations are added to $this->context
+
+    # *         $validator
+
+    # *             ->inContext($this->context)
+
+    # *             ->validate($value)
+
+    # *         ;
+
+    # *     }
+
+    # *
+
+    # * Additionally, the context provides information about the current state of
+
+    # * the validator, such as the currently validated class, the name of the
+
+    # * currently validated property and more. These values change over time, so you
+
+    # * cannot store a context and expect that the methods still return the same
+
+    # * results later on.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # interface ExecutionContextInterface
+
+    # {
+
+    # /**
+
+    # * Adds a violation at the current node of the validation graph.
+
+    # *
+
+    # * @param string|\Stringable $message The error message as a string or a stringable
+    object
+
+    # * @param array              $params  The parameters substituted in the error
+    message'
+- name: buildViolation
+  visibility: public
+  parameters:
+  - name: message
+  - name: parameters
+    default: '[]'
+  comment: '# * Returns a builder for adding a violation with extended information.
+
+    # *
+
+    # * Call {@link ConstraintViolationBuilderInterface::addViolation()} to
+
+    # * add the violation when you''re done with the configuration:
+
+    # *
+
+    # *     $context->buildViolation(''Please enter a number between %min% and %max%.'')
+
+    # *         ->setParameter(''%min%'', ''3'')
+
+    # *         ->setParameter(''%max%'', ''10'')
+
+    # *         ->setTranslationDomain(''number_validation'')
+
+    # *         ->addViolation();
+
+    # *
+
+    # * @param string|\Stringable $message    The error message as a string or a stringable
+    object
+
+    # * @param array              $parameters The parameters substituted in the error
+    message'
+- name: getValidator
+  visibility: public
+  parameters: []
+  comment: '# * Returns the validator.
+
+    # *
+
+    # * Useful if you want to validate additional constraints:
+
+    # *
+
+    # *     public function validate(mixed $value, Constraint $constraint): void
+
+    # *     {
+
+    # *         $validator = $this->context->getValidator();
+
+    # *
+
+    # *         $violations = $validator->validate($value, new Length([''min'' =>
+    3]));
+
+    # *
+
+    # *         if (count($violations) > 0) {
+
+    # *             // ...
+
+    # *         }
+
+    # *     }'
+- name: getObject
+  visibility: public
+  parameters: []
+  comment: '# * Returns the currently validated object.
+
+    # *
+
+    # * If the validator is currently validating a class constraint, the
+
+    # * object of that class is returned. If it is validating a property or
+
+    # * getter constraint, the object that the property/getter belongs to is
+
+    # * returned.
+
+    # *
+
+    # * In other cases, null is returned.'
+- name: setNode
+  visibility: public
+  parameters:
+  - name: value
+  - name: object
+  - name: metadata
+  - name: propertyPath
+  comment: '# * Warning: Should not be called by user code, to be used by the validator
+    engine only.
+
+    # *
+
+    # * @param object|null $object       The currently validated object
+
+    # * @param string      $propertyPath The property path to the current value'
+- name: setGroup
+  visibility: public
+  parameters:
+  - name: group
+  comment: '# * Warning: Should not be called by user code, to be used by the validator
+    engine only.
+
+    # *
+
+    # * @param string|null $group The validated group'
+- name: setConstraint
+  visibility: public
+  parameters:
+  - name: constraint
+  comment: '# * Warning: Should not be called by user code, to be used by the validator
+    engine only.'
+- name: markGroupAsValidated
+  visibility: public
+  parameters:
+  - name: cacheKey
+  - name: groupHash
+  comment: '# * Warning: Should not be called by user code, to be used by the validator
+    engine only.
+
+    # *
+
+    # * @param string $cacheKey  The hash of the object
+
+    # * @param string $groupHash The group''s name or hash, if it is group
+
+    # *                          sequence'
+- name: isGroupValidated
+  visibility: public
+  parameters:
+  - name: cacheKey
+  - name: groupHash
+  comment: '# * Warning: Should not be called by user code, to be used by the validator
+    engine only.
+
+    # *
+
+    # * @param string $cacheKey  The hash of the object
+
+    # * @param string $groupHash The group''s name or hash, if it is group
+
+    # *                          sequence'
+- name: markConstraintAsValidated
+  visibility: public
+  parameters:
+  - name: cacheKey
+  - name: constraintHash
+  comment: '# * Warning: Should not be called by user code, to be used by the validator
+    engine only.
+
+    # *
+
+    # * @param string $cacheKey       The hash of the object
+
+    # * @param string $constraintHash The hash of the constraint'
+- name: isConstraintValidated
+  visibility: public
+  parameters:
+  - name: cacheKey
+  - name: constraintHash
+  comment: '# * Warning: Should not be called by user code, to be used by the validator
+    engine only.
+
+    # *
+
+    # * @param string $cacheKey       The hash of the object
+
+    # * @param string $constraintHash The hash of the constraint'
+- name: markObjectAsInitialized
+  visibility: public
+  parameters:
+  - name: cacheKey
+  comment: '# * Warning: Should not be called by user code, to be used by the validator
+    engine only.
+
+    # *
+
+    # * @param string $cacheKey The hash of the object
+
+    # *
+
+    # * @see ObjectInitializerInterface'
+- name: isObjectInitialized
+  visibility: public
+  parameters:
+  - name: cacheKey
+  comment: '# * Warning: Should not be called by user code, to be used by the validator
+    engine only.
+
+    # *
+
+    # * @param string $cacheKey The hash of the object
+
+    # *
+
+    # * @see ObjectInitializerInterface'
+- name: getViolations
+  visibility: public
+  parameters: []
+  comment: '# * Returns the violations generated by the validator so far.'
+- name: getRoot
+  visibility: public
+  parameters: []
+  comment: '# * Returns the value at which validation was started in the object graph.
+
+    # *
+
+    # * The validator, when given an object, traverses the properties and
+
+    # * related objects and their properties. The root of the validation is the
+
+    # * object from which the traversal started.
+
+    # *
+
+    # * The current value is returned by {@link getValue}.'
+- name: getValue
+  visibility: public
+  parameters: []
+  comment: '# * Returns the value that the validator is currently validating.
+
+    # *
+
+    # * If you want to retrieve the object that was originally passed to the
+
+    # * validator, use {@link getRoot}.'
+- name: getMetadata
+  visibility: public
+  parameters: []
+  comment: '# * Returns the metadata for the currently validated value.
+
+    # *
+
+    # * With the core implementation, this method returns a
+
+    # * {@link Mapping\ClassMetadataInterface} instance if the current value is an
+    object,
+
+    # * a {@link Mapping\PropertyMetadata} instance if the current value is
+
+    # * the value of a property and a {@link Mapping\GetterMetadata} instance if
+
+    # * the validated value is the result of a getter method.
+
+    # *
+
+    # * If the validated value is neither of these, for example if the validator
+
+    # * has been called with a plain value and constraint, this method returns
+
+    # * null.'
+- name: getGroup
+  visibility: public
+  parameters: []
+  comment: '# * Returns the validation group that is currently being validated.'
+- name: getClassName
+  visibility: public
+  parameters: []
+  comment: '# * Returns the class name of the current node.
+
+    # *
+
+    # * If the metadata of the current node does not implement
+
+    # * {@link Mapping\ClassMetadataInterface} or if no metadata is available for
+    the
+
+    # * current node, this method returns null.'
+- name: getPropertyName
+  visibility: public
+  parameters: []
+  comment: '# * Returns the property name of the current node.
+
+    # *
+
+    # * If the metadata of the current node does not implement
+
+    # * {@link PropertyMetadataInterface} or if no metadata is available for the
+
+    # * current node, this method returns null.'
+- name: getPropertyPath
+  visibility: public
+  parameters:
+  - name: subPath
+    default: ''''''
+  comment: '# * Returns the property path to the value that the validator is currently
+
+    # * validating.
+
+    # *
+
+    # * For example, take the following object graph:
+
+    # *
+
+    # * <pre>
+
+    # * (Person)---($address: Address)---($street: string)
+
+    # * </pre>
+
+    # *
+
+    # * When the <tt>Person</tt> instance is passed to the validator, the
+
+    # * property path is initially empty. When the <tt>$address</tt> property
+
+    # * of that person is validated, the property path is "address". When
+
+    # * the <tt>$street</tt> property of the related <tt>Address</tt> instance
+
+    # * is validated, the property path is "address.street".
+
+    # *
+
+    # * Properties of objects are prefixed with a dot in the property path.
+
+    # * Indices of arrays or objects implementing the {@link \ArrayAccess}
+
+    # * interface are enclosed in brackets. For example, if the property in
+
+    # * the previous example is <tt>$addresses</tt> and contains an array
+
+    # * of <tt>Address</tt> instance, the property path generated for the
+
+    # * <tt>$street</tt> property of one of these addresses is for example
+
+    # * "addresses[0].street".
+
+    # *
+
+    # * @param string $subPath Optional. The suffix appended to the current
+
+    # *                        property path.
+
+    # *
+
+    # * @return string The current property path. The result may be an empty
+
+    # *                string if the validator is currently validating the
+
+    # *                root value of the validation graph.'
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\ConstraintViolationListInterface
+- Symfony\Component\Validator\Mapping
+- Symfony\Component\Validator\Mapping\MetadataInterface
+- Symfony\Component\Validator\Validator\ValidatorInterface
+- Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface
+interfaces: []

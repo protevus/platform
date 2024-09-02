@@ -1,0 +1,34 @@
+name: AppendableAttributeValue
+class_comment: null
+dependencies:
+- name: Stringable
+  type: class
+  source: Stringable
+properties:
+- name: value
+  visibility: public
+  comment: '# * The attribute value.
+
+    # *
+
+    # * @var mixed'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: value
+  comment: "# * The attribute value.\n# *\n# * @var mixed\n# */\n# public $value;\n\
+    # \n# /**\n# * Create a new appendable attribute value.\n# *\n# * @param  mixed\
+    \  $value\n# * @return void"
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Get the string value.
+
+    # *
+
+    # * @return string'
+traits:
+- Stringable
+interfaces:
+- Stringable

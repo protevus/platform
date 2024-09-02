@@ -1,0 +1,25 @@
+name: RequestRateLimiterInterface
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RateLimit
+  type: class
+  source: Symfony\Component\RateLimiter\RateLimit
+properties: []
+methods:
+- name: consume
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+- name: reset
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\RateLimiter\RateLimit
+interfaces: []

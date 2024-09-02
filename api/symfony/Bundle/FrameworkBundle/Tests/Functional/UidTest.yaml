@@ -1,0 +1,35 @@
+name: UidTest
+class_comment: null
+dependencies:
+- name: Ulid
+  type: class
+  source: Symfony\Component\Uid\Ulid
+- name: UuidV1
+  type: class
+  source: Symfony\Component\Uid\UuidV1
+- name: UuidV4
+  type: class
+  source: Symfony\Component\Uid\UuidV4
+- name: UuidV6
+  type: class
+  source: Symfony\Component\Uid\UuidV6
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testArgumentValueResolverDisabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testArgumentValueResolverEnabled
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Uid\Ulid
+- Symfony\Component\Uid\UuidV1
+- Symfony\Component\Uid\UuidV4
+- Symfony\Component\Uid\UuidV6
+interfaces: []

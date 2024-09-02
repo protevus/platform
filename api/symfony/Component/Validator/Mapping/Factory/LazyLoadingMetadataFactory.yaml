@@ -1,0 +1,106 @@
+name: LazyLoadingMetadataFactory
+class_comment: '# * Creates new {@link ClassMetadataInterface} instances.
+
+  # *
+
+  # * Whenever {@link getMetadataFor()} is called for the first time with a given
+
+  # * class name or object of that class, a new metadata instance is created and
+
+  # * returned. On subsequent requests for the same class, the same metadata
+
+  # * instance will be returned.
+
+  # *
+
+  # * You can optionally pass a {@link LoaderInterface} instance to the constructor.
+
+  # * Whenever a new metadata instance is created, it is passed to the loader,
+
+  # * which can configure the metadata based on configuration loaded from the
+
+  # * filesystem or a database. If you want to use multiple loaders, wrap them in
+  a
+
+  # * {@link LoaderChain}.
+
+  # *
+
+  # * You can also optionally pass a {@link CacheInterface} instance to the
+
+  # * constructor. This cache will be used for persisting the generated metadata
+
+  # * between multiple PHP requests.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: CacheItemPoolInterface
+  type: class
+  source: Psr\Cache\CacheItemPoolInterface
+- name: NoSuchMetadataException
+  type: class
+  source: Symfony\Component\Validator\Exception\NoSuchMetadataException
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+- name: LoaderInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\LoaderInterface
+- name: MetadataInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\MetadataInterface
+properties: []
+methods:
+- name: getMetadataFor
+  visibility: public
+  parameters:
+  - name: value
+  comment: "# * Creates new {@link ClassMetadataInterface} instances.\n# *\n# * Whenever\
+    \ {@link getMetadataFor()} is called for the first time with a given\n# * class\
+    \ name or object of that class, a new metadata instance is created and\n# * returned.\
+    \ On subsequent requests for the same class, the same metadata\n# * instance will\
+    \ be returned.\n# *\n# * You can optionally pass a {@link LoaderInterface} instance\
+    \ to the constructor.\n# * Whenever a new metadata instance is created, it is\
+    \ passed to the loader,\n# * which can configure the metadata based on configuration\
+    \ loaded from the\n# * filesystem or a database. If you want to use multiple loaders,\
+    \ wrap them in a\n# * {@link LoaderChain}.\n# *\n# * You can also optionally pass\
+    \ a {@link CacheInterface} instance to the\n# * constructor. This cache will be\
+    \ used for persisting the generated metadata\n# * between multiple PHP requests.\n\
+    # *\n# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# class LazyLoadingMetadataFactory\
+    \ implements MetadataFactoryInterface\n# {\n# /**\n# * The loaded metadata, indexed\
+    \ by class name.\n# *\n# * @var ClassMetadata[]\n# */\n# protected array $loadedClasses\
+    \ = [];\n# \n# public function __construct(\n# protected ?LoaderInterface $loader\
+    \ = null,\n# protected ?CacheItemPoolInterface $cache = null,\n# ) {\n# }\n# \n\
+    # /**\n# * If the method was called with the same class name (or an object of\
+    \ that\n# * class) before, the same metadata instance is returned.\n# *\n# * If\
+    \ the factory was configured with a cache, this method will first look\n# * for\
+    \ an existing metadata instance in the cache. If an existing instance\n# * is\
+    \ found, it will be returned without further ado.\n# *\n# * Otherwise, a new metadata\
+    \ instance is created. If the factory was\n# * configured with a loader, the metadata\
+    \ is passed to the\n# * {@link LoaderInterface::loadClassMetadata()} method for\
+    \ further\n# * configuration. At last, the new object is returned."
+- name: mergeConstraints
+  visibility: private
+  parameters:
+  - name: metadata
+  comment: null
+- name: hasMetadataFor
+  visibility: public
+  parameters:
+  - name: value
+  comment: null
+- name: escapeClassName
+  visibility: private
+  parameters:
+  - name: class
+  comment: '# * Replaces backslashes by dots in a class name.'
+traits:
+- Psr\Cache\CacheItemPoolInterface
+- Symfony\Component\Validator\Exception\NoSuchMetadataException
+- Symfony\Component\Validator\Mapping\ClassMetadata
+- Symfony\Component\Validator\Mapping\Loader\LoaderInterface
+- Symfony\Component\Validator\Mapping\MetadataInterface
+interfaces:
+- MetadataFactoryInterface

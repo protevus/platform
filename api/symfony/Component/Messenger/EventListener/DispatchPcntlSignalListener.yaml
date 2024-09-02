@@ -1,0 +1,24 @@
+name: DispatchPcntlSignalListener
+class_comment: '# * @author Tobias Schultze <http://tobion.de>'
+dependencies:
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: WorkerRunningEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerRunningEvent
+properties: []
+methods:
+- name: onWorkerRunning
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\Messenger\Event\WorkerRunningEvent
+interfaces:
+- EventSubscriberInterface

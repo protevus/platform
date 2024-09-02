@@ -1,0 +1,12 @@
+name: OutOfBoundsException
+class_comment: '# * Base OutOfBoundsException for the PropertyAccess component.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- ExceptionInterface

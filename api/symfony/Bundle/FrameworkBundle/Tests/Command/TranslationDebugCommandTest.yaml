@@ -1,0 +1,160 @@
+name: TranslationDebugCommandTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: TranslationDebugCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\TranslationDebugCommand
+- name: Application
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Console\Application
+- name: ExtensionWithoutConfigTestBundle
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\ExtensionWithoutConfigTestBundle\ExtensionWithoutConfigTestBundle
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: CommandCompletionTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandCompletionTester
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+- name: Container
+  type: class
+  source: Symfony\Component\DependencyInjection\Container
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: BundleInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Bundle\BundleInterface
+- name: KernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\KernelInterface
+- name: ExtractorInterface
+  type: class
+  source: Symfony\Component\Translation\Extractor\ExtractorInterface
+- name: TranslationReader
+  type: class
+  source: Symfony\Component\Translation\Reader\TranslationReader
+- name: Translator
+  type: class
+  source: Symfony\Component\Translation\Translator
+properties: []
+methods:
+- name: testDebugMissingMessages
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDebugUnusedMessages
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDebugFallbackMessages
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoDefinedMessages
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDebugDefaultDirectory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDebugDefaultRootDirectory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDebugCustomDirectory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDebugInvalidDirectory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoErrorWithOnlyMissingOptionAndNoResults
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoErrorWithOnlyUnusedOptionAndNoResults
+  visibility: public
+  parameters: []
+  comment: null
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: createCommandTester
+  visibility: private
+  parameters:
+  - name: extractedMessages
+    default: '[]'
+  - name: loadedMessages
+    default: '[]'
+  - name: kernel
+    default: 'null'
+  - name: transPaths
+    default: '[]'
+  - name: codePaths
+    default: '[]'
+  comment: null
+- name: createCommand
+  visibility: private
+  parameters:
+  - name: extractedMessages
+    default: '[]'
+  - name: loadedMessages
+    default: '[]'
+  - name: kernel
+    default: 'null'
+  - name: transPaths
+    default: '[]'
+  - name: codePaths
+    default: '[]'
+  - name: extractor
+    default: 'null'
+  - name: bundles
+    default: '[]'
+  - name: enabledLocales
+    default: '[]'
+  comment: null
+- name: getBundle
+  visibility: private
+  parameters:
+  - name: path
+  comment: null
+- name: testComplete
+  visibility: public
+  parameters:
+  - name: input
+  - name: expectedSuggestions
+  comment: '# * @dataProvider provideCompletionSuggestions'
+- name: provideCompletionSuggestions
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\FrameworkBundle\Command\TranslationDebugCommand
+- Symfony\Bundle\FrameworkBundle\Console\Application
+- Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\ExtensionWithoutConfigTestBundle\ExtensionWithoutConfigTestBundle
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Tester\CommandCompletionTester
+- Symfony\Component\Console\Tester\CommandTester
+- Symfony\Component\DependencyInjection\Container
+- Symfony\Component\Filesystem\Filesystem
+- Symfony\Component\HttpKernel\Bundle\BundleInterface
+- Symfony\Component\HttpKernel\KernelInterface
+- Symfony\Component\Translation\Extractor\ExtractorInterface
+- Symfony\Component\Translation\Reader\TranslationReader
+- Symfony\Component\Translation\Translator
+interfaces: []

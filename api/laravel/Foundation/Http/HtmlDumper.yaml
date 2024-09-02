@@ -1,0 +1,103 @@
+name: HtmlDumper
+class_comment: null
+dependencies:
+- name: ResolvesDumpSource
+  type: class
+  source: Illuminate\Foundation\Concerns\ResolvesDumpSource
+- name: ReflectionCaster
+  type: class
+  source: Symfony\Component\VarDumper\Caster\ReflectionCaster
+- name: Data
+  type: class
+  source: Symfony\Component\VarDumper\Cloner\Data
+- name: VarCloner
+  type: class
+  source: Symfony\Component\VarDumper\Cloner\VarCloner
+- name: BaseHtmlDumper
+  type: class
+  source: Symfony\Component\VarDumper\Dumper\HtmlDumper
+- name: VarDumper
+  type: class
+  source: Symfony\Component\VarDumper\VarDumper
+- name: ResolvesDumpSource
+  type: class
+  source: ResolvesDumpSource
+properties:
+- name: basePath
+  visibility: protected
+  comment: "# * Where the source should be placed on \"expanded\" kind of dumps.\n\
+    # *\n# * @var string\n# */\n# const EXPANDED_SEPARATOR = 'class=sf-dump-expanded>';\n\
+    # \n# /**\n# * Where the source should be placed on \"non expanded\" kind of dumps.\n\
+    # *\n# * @var string\n# */\n# const NON_EXPANDED_SEPARATOR = \"\\n</pre><script>\"\
+    ;\n# \n# /**\n# * The base path of the application.\n# *\n# * @var string"
+- name: compiledViewPath
+  visibility: protected
+  comment: '# * The compiled view path of the application.
+
+    # *
+
+    # * @var string'
+- name: dumping
+  visibility: protected
+  comment: '# * If the dumper is currently dumping.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: basePath
+  - name: compiledViewPath
+  comment: "# * Where the source should be placed on \"expanded\" kind of dumps.\n\
+    # *\n# * @var string\n# */\n# const EXPANDED_SEPARATOR = 'class=sf-dump-expanded>';\n\
+    # \n# /**\n# * Where the source should be placed on \"non expanded\" kind of dumps.\n\
+    # *\n# * @var string\n# */\n# const NON_EXPANDED_SEPARATOR = \"\\n</pre><script>\"\
+    ;\n# \n# /**\n# * The base path of the application.\n# *\n# * @var string\n# */\n\
+    # protected $basePath;\n# \n# /**\n# * The compiled view path of the application.\n\
+    # *\n# * @var string\n# */\n# protected $compiledViewPath;\n# \n# /**\n# * If\
+    \ the dumper is currently dumping.\n# *\n# * @var bool\n# */\n# protected $dumping\
+    \ = false;\n# \n# /**\n# * Create a new HTML dumper instance.\n# *\n# * @param\
+    \  string  $basePath\n# * @param  string  $compiledViewPath\n# * @return void"
+- name: register
+  visibility: public
+  parameters:
+  - name: basePath
+  - name: compiledViewPath
+  comment: '# * Create a new HTML dumper instance and register it as the default dumper.
+
+    # *
+
+    # * @param  string  $basePath
+
+    # * @param  string  $compiledViewPath
+
+    # * @return void'
+- name: dumpWithSource
+  visibility: public
+  parameters:
+  - name: data
+  comment: '# * Dump a variable with its source file / line.
+
+    # *
+
+    # * @param  \Symfony\Component\VarDumper\Cloner\Data  $data
+
+    # * @return void'
+- name: getDumpSourceContent
+  visibility: protected
+  parameters: []
+  comment: '# * Get the dump''s source HTML content.
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Foundation\Concerns\ResolvesDumpSource
+- Symfony\Component\VarDumper\Caster\ReflectionCaster
+- Symfony\Component\VarDumper\Cloner\Data
+- Symfony\Component\VarDumper\Cloner\VarCloner
+- Symfony\Component\VarDumper\VarDumper
+- ResolvesDumpSource
+interfaces: []

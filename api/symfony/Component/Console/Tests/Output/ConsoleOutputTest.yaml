@@ -1,0 +1,39 @@
+name: ConsoleOutputTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: OutputFormatter
+  type: class
+  source: Symfony\Component\Console\Formatter\OutputFormatter
+- name: ConsoleOutput
+  type: class
+  source: Symfony\Component\Console\Output\ConsoleOutput
+- name: Output
+  type: class
+  source: Symfony\Component\Console\Output\Output
+properties: []
+methods:
+- name: testConstructorWithoutFormatter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithFormatter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetFormatter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetVerbosity
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Formatter\OutputFormatter
+- Symfony\Component\Console\Output\ConsoleOutput
+- Symfony\Component\Console\Output\Output
+interfaces: []

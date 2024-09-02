@@ -1,0 +1,108 @@
+name: PropertyNormalizer
+class_comment: null
+dependencies:
+- name: UninitializedPropertyException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\UninitializedPropertyException
+- name: PropertyTypeExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface
+- name: ClassDiscriminatorResolverInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassDiscriminatorResolverInterface
+- name: ClassMetadataFactoryInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+- name: NameConverterInterface
+  type: class
+  source: Symfony\Component\Serializer\NameConverter\NameConverterInterface
+properties: []
+methods:
+- name: supports
+  visibility: private
+  parameters:
+  - name: class
+  comment: "# * Converts between objects and arrays by mapping properties.\n# *\n\
+    # * The normalization process looks for all the object's properties (public and\
+    \ private).\n# * The result is a map from property names to property values. Property\
+    \ values\n# * are normalized through the serializer.\n# *\n# * The denormalization\
+    \ first looks at the constructor of the given class to see\n# * if any of the\
+    \ parameters have the same name as one of the properties. The\n# * constructor\
+    \ is then called with all parameters or an exception is thrown if\n# * any required\
+    \ parameters were not present as properties. Then the denormalizer\n# * walks\
+    \ through the given map of property names to property values to see if a\n# *\
+    \ property with the corresponding name exists. If found, the property gets the\
+    \ value.\n# *\n# * @author Matthieu Napoli <matthieu@mnapoli.fr>\n# * @author\
+    \ K\xE9vin Dunglas <dunglas@gmail.com>\n# */\n# final class PropertyNormalizer\
+    \ extends AbstractObjectNormalizer\n# {\n# public const NORMALIZE_PUBLIC = 1;\n\
+    # public const NORMALIZE_PROTECTED = 2;\n# public const NORMALIZE_PRIVATE = 4;\n\
+    # \n# /**\n# * Flag to control whether fields should be output based on visibility.\n\
+    # */\n# public const NORMALIZE_VISIBILITY = 'normalize_visibility';\n# \n# public\
+    \ function __construct(?ClassMetadataFactoryInterface $classMetadataFactory =\
+    \ null, ?NameConverterInterface $nameConverter = null, ?PropertyTypeExtractorInterface\
+    \ $propertyTypeExtractor = null, ?ClassDiscriminatorResolverInterface $classDiscriminatorResolver\
+    \ = null, ?callable $objectClassResolver = null, array $defaultContext = [])\n\
+    # {\n# parent::__construct($classMetadataFactory, $nameConverter, $propertyTypeExtractor,\
+    \ $classDiscriminatorResolver, $objectClassResolver, $defaultContext);\n# \n#\
+    \ if (!isset($this->defaultContext[self::NORMALIZE_VISIBILITY])) {\n# $this->defaultContext[self::NORMALIZE_VISIBILITY]\
+    \ = self::NORMALIZE_PUBLIC | self::NORMALIZE_PROTECTED | self::NORMALIZE_PRIVATE;\n\
+    # }\n# }\n# \n# public function getSupportedTypes(?string $format): array\n# {\n\
+    # return ['object' => true];\n# }\n# \n# public function supportsNormalization(mixed\
+    \ $data, ?string $format = null, array $context = []): bool\n# {\n# return parent::supportsNormalization($data,\
+    \ $format) && $this->supports($data::class);\n# }\n# \n# public function supportsDenormalization(mixed\
+    \ $data, string $type, ?string $format = null, array $context = []): bool\n# {\n\
+    # return parent::supportsDenormalization($data, $type, $format) && $this->supports($type);\n\
+    # }\n# \n# /**\n# * Checks if the given class has any non-static property."
+- name: isAllowedAttribute
+  visibility: protected
+  parameters:
+  - name: classOrObject
+  - name: attribute
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: extractAttributes
+  visibility: protected
+  parameters:
+  - name: object
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: getAttributeValue
+  visibility: protected
+  parameters:
+  - name: object
+  - name: attribute
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: setAttributeValue
+  visibility: protected
+  parameters:
+  - name: object
+  - name: attribute
+  - name: value
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: getReflectionProperty
+  visibility: private
+  parameters:
+  - name: classOrObject
+  - name: attribute
+  comment: '# * @throws \ReflectionException'
+traits:
+- Symfony\Component\PropertyAccess\Exception\UninitializedPropertyException
+- Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface
+- Symfony\Component\Serializer\Mapping\ClassDiscriminatorResolverInterface
+- Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+- Symfony\Component\Serializer\NameConverter\NameConverterInterface
+interfaces: []

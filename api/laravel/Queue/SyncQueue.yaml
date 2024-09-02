@@ -1,0 +1,226 @@
+name: SyncQueue
+class_comment: null
+dependencies:
+- name: Job
+  type: class
+  source: Illuminate\Contracts\Queue\Job
+- name: QueueContract
+  type: class
+  source: Illuminate\Contracts\Queue\Queue
+- name: JobExceptionOccurred
+  type: class
+  source: Illuminate\Queue\Events\JobExceptionOccurred
+- name: JobProcessed
+  type: class
+  source: Illuminate\Queue\Events\JobProcessed
+- name: JobProcessing
+  type: class
+  source: Illuminate\Queue\Events\JobProcessing
+- name: SyncJob
+  type: class
+  source: Illuminate\Queue\Jobs\SyncJob
+- name: Throwable
+  type: class
+  source: Throwable
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: dispatchAfterCommit
+    default: 'false'
+  comment: '# * Create a new sync queue instance.
+
+    # *
+
+    # * @param  bool  $dispatchAfterCommit
+
+    # * @return void'
+- name: size
+  visibility: public
+  parameters:
+  - name: queue
+    default: 'null'
+  comment: '# * Get the size of the queue.
+
+    # *
+
+    # * @param  string|null  $queue
+
+    # * @return int'
+- name: push
+  visibility: public
+  parameters:
+  - name: job
+  - name: data
+    default: ''''''
+  - name: queue
+    default: 'null'
+  comment: '# * Push a new job onto the queue.
+
+    # *
+
+    # * @param  string  $job
+
+    # * @param  mixed  $data
+
+    # * @param  string|null  $queue
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Throwable'
+- name: executeJob
+  visibility: protected
+  parameters:
+  - name: job
+  - name: data
+    default: ''''''
+  - name: queue
+    default: 'null'
+  comment: '# * Execute a given job synchronously.
+
+    # *
+
+    # * @param  string  $job
+
+    # * @param  mixed  $data
+
+    # * @param  string|null  $queue
+
+    # * @return int
+
+    # *
+
+    # * @throws \Throwable'
+- name: resolveJob
+  visibility: protected
+  parameters:
+  - name: payload
+  - name: queue
+  comment: '# * Resolve a Sync job instance.
+
+    # *
+
+    # * @param  string  $payload
+
+    # * @param  string  $queue
+
+    # * @return \Illuminate\Queue\Jobs\SyncJob'
+- name: raiseBeforeJobEvent
+  visibility: protected
+  parameters:
+  - name: job
+  comment: '# * Raise the before queue job event.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Queue\Job  $job
+
+    # * @return void'
+- name: raiseAfterJobEvent
+  visibility: protected
+  parameters:
+  - name: job
+  comment: '# * Raise the after queue job event.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Queue\Job  $job
+
+    # * @return void'
+- name: raiseExceptionOccurredJobEvent
+  visibility: protected
+  parameters:
+  - name: job
+  - name: e
+  comment: '# * Raise the exception occurred queue job event.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Queue\Job  $job
+
+    # * @param  \Throwable  $e
+
+    # * @return void'
+- name: handleException
+  visibility: protected
+  parameters:
+  - name: queueJob
+  - name: e
+  comment: '# * Handle an exception that occurred while processing a job.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Queue\Job  $queueJob
+
+    # * @param  \Throwable  $e
+
+    # * @return void
+
+    # *
+
+    # * @throws \Throwable'
+- name: pushRaw
+  visibility: public
+  parameters:
+  - name: payload
+  - name: queue
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: '# * Push a raw payload onto the queue.
+
+    # *
+
+    # * @param  string  $payload
+
+    # * @param  string|null  $queue
+
+    # * @param  array  $options
+
+    # * @return mixed'
+- name: later
+  visibility: public
+  parameters:
+  - name: delay
+  - name: job
+  - name: data
+    default: ''''''
+  - name: queue
+    default: 'null'
+  comment: '# * Push a new job onto the queue after (n) seconds.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $delay
+
+    # * @param  string  $job
+
+    # * @param  mixed  $data
+
+    # * @param  string|null  $queue
+
+    # * @return mixed'
+- name: pop
+  visibility: public
+  parameters:
+  - name: queue
+    default: 'null'
+  comment: '# * Pop the next job off of the queue.
+
+    # *
+
+    # * @param  string|null  $queue
+
+    # * @return \Illuminate\Contracts\Queue\Job|null'
+traits:
+- Illuminate\Contracts\Queue\Job
+- Illuminate\Queue\Events\JobExceptionOccurred
+- Illuminate\Queue\Events\JobProcessed
+- Illuminate\Queue\Events\JobProcessing
+- Illuminate\Queue\Jobs\SyncJob
+- Throwable
+interfaces:
+- QueueContract

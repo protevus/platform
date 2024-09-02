@@ -1,0 +1,75 @@
+name: AcceptHeaderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AcceptHeader
+  type: class
+  source: Symfony\Component\HttpFoundation\AcceptHeader
+- name: AcceptHeaderItem
+  type: class
+  source: Symfony\Component\HttpFoundation\AcceptHeaderItem
+properties: []
+methods:
+- name: testFirst
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromString
+  visibility: public
+  parameters:
+  - name: string
+  - name: items
+  comment: '# * @dataProvider provideFromStringData'
+- name: provideFromStringData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToString
+  visibility: public
+  parameters:
+  - name: items
+  - name: string
+  comment: '# * @dataProvider provideToStringData'
+- name: provideToStringData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFilter
+  visibility: public
+  parameters:
+  - name: string
+  - name: filter
+  - name: values
+  comment: '# * @dataProvider provideFilterData'
+- name: provideFilterData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSorting
+  visibility: public
+  parameters:
+  - name: string
+  - name: values
+  comment: '# * @dataProvider provideSortingData'
+- name: provideSortingData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDefaultValue
+  visibility: public
+  parameters:
+  - name: acceptHeader
+  - name: value
+  - name: expectedQuality
+  comment: '# * @dataProvider provideDefaultValueData'
+- name: provideDefaultValueData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\AcceptHeader
+- Symfony\Component\HttpFoundation\AcceptHeaderItem
+interfaces: []

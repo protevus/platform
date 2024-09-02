@@ -1,0 +1,61 @@
+name: IdenticalToValidatorTest
+class_comment: '# * @author Daniel Holmes <daniel@danielholmes.org>'
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: IdenticalTo
+  type: class
+  source: Symfony\Component\Validator\Constraints\IdenticalTo
+- name: IdenticalToValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\IdenticalToValidator
+- name: IcuCompatibilityTrait
+  type: class
+  source: Symfony\Component\Validator\Tests\IcuCompatibilityTrait
+- name: IcuCompatibilityTrait
+  type: class
+  source: IcuCompatibilityTrait
+properties: []
+methods:
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+- name: createConstraint
+  visibility: protected
+  parameters:
+  - name: options
+    default: 'null'
+  comment: null
+- name: getErrorCode
+  visibility: protected
+  parameters: []
+  comment: null
+- name: provideAllValidComparisons
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideValidComparisons
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideValidComparisonsToPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideInvalidComparisons
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideComparisonsToNullValueAtPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Constraints\IdenticalTo
+- Symfony\Component\Validator\Constraints\IdenticalToValidator
+- Symfony\Component\Validator\Tests\IcuCompatibilityTrait
+- IcuCompatibilityTrait
+interfaces: []

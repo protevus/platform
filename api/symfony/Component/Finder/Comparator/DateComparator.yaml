@@ -1,0 +1,34 @@
+name: DateComparator
+class_comment: '# * DateCompare compiles date comparisons.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: test
+  comment: '# * DateCompare compiles date comparisons.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # class DateComparator extends Comparator
+
+    # {
+
+    # /**
+
+    # * @param string $test A comparison string
+
+    # *
+
+    # * @throws \InvalidArgumentException If the test is not understood'
+traits: []
+interfaces: []

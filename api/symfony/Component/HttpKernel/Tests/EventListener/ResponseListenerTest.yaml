@@ -1,0 +1,75 @@
+name: ResponseListenerTest
+class_comment: null
+dependencies:
+- name: MockObject
+  type: class
+  source: PHPUnit\Framework\MockObject\MockObject
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: ResponseEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ResponseEvent
+- name: ResponseListener
+  type: class
+  source: Symfony\Component\HttpKernel\EventListener\ResponseListener
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+- name: KernelEvents
+  type: class
+  source: Symfony\Component\HttpKernel\KernelEvents
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testFilterDoesNothingForSubRequests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFilterSetsNonDefaultCharsetIfNotOverridden
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFilterDoesNothingIfCharsetIsOverridden
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFiltersSetsNonDefaultCharsetIfNotOverriddenOnNonTextContentType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetContentLanguageHeaderWhenEmptyAndAtLeast2EnabledLocalesAreConfigured
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotOverrideContentLanguageHeaderWhenNotEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotSetContentLanguageHeaderWhenDisabled
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\MockObject\MockObject
+- PHPUnit\Framework\TestCase
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Event\ResponseEvent
+- Symfony\Component\HttpKernel\EventListener\ResponseListener
+- Symfony\Component\HttpKernel\HttpKernelInterface
+- Symfony\Component\HttpKernel\KernelEvents
+interfaces: []

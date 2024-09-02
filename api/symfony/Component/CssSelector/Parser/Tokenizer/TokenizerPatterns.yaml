@@ -1,0 +1,43 @@
+name: TokenizerPatterns
+class_comment: "# * CSS selector tokenizer patterns builder.\n# *\n# * This component\
+  \ is a port of the Python cssselect library,\n# * which is copyright Ian Bicking,\
+  \ @see https://github.com/SimonSapin/cssselect.\n# *\n# * @author Jean-Fran\xE7\
+  ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n# * @internal"
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNewLineEscapePattern
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSimpleEscapePattern
+  visibility: public
+  parameters: []
+  comment: null
+- name: getUnicodeEscapePattern
+  visibility: public
+  parameters: []
+  comment: null
+- name: getIdentifierPattern
+  visibility: public
+  parameters: []
+  comment: null
+- name: getHashPattern
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNumberPattern
+  visibility: public
+  parameters: []
+  comment: null
+- name: getQuotedStringPattern
+  visibility: public
+  parameters:
+  - name: quote
+  comment: null
+traits: []
+interfaces: []

@@ -1,0 +1,36 @@
+name: CsrfExtension
+class_comment: '# * This extension protects forms by using a CSRF token.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: AbstractExtension
+  type: class
+  source: Symfony\Component\Form\AbstractExtension
+- name: CsrfTokenManagerInterface
+  type: class
+  source: Symfony\Component\Security\Csrf\CsrfTokenManagerInterface
+- name: TranslatorInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatorInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: tokenManager
+  - name: translator
+    default: 'null'
+  - name: translationDomain
+    default: 'null'
+  comment: null
+- name: loadTypeExtensions
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\AbstractExtension
+- Symfony\Component\Security\Csrf\CsrfTokenManagerInterface
+- Symfony\Contracts\Translation\TranslatorInterface
+interfaces: []

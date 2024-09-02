@@ -1,0 +1,24 @@
+name: IgnoreDummyAdditionalGetterWithoutIgnoreAnnotations
+class_comment: null
+dependencies: []
+properties:
+- name: myValue
+  visibility: private
+  comment: null
+methods:
+- name: getIgnored2
+  visibility: public
+  parameters: []
+  comment: null
+- name: getExtraValue
+  visibility: public
+  parameters:
+  - name: parameter
+  comment: null
+- name: setExtraValue2
+  visibility: public
+  parameters:
+  - name: parameter
+  comment: null
+traits: []
+interfaces: []

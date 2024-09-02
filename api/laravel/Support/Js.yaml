@@ -1,0 +1,157 @@
+name: Js
+class_comment: null
+dependencies:
+- name: BackedEnum
+  type: class
+  source: BackedEnum
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: Htmlable
+  type: class
+  source: Illuminate\Contracts\Support\Htmlable
+- name: Jsonable
+  type: class
+  source: Illuminate\Contracts\Support\Jsonable
+- name: JsonSerializable
+  type: class
+  source: JsonSerializable
+- name: Stringable
+  type: class
+  source: Stringable
+properties:
+- name: js
+  visibility: protected
+  comment: '# * The JavaScript string.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: data
+  - name: flags
+    default: '0'
+  - name: depth
+    default: '512'
+  comment: "# * The JavaScript string.\n# *\n# * @var string\n# */\n# protected $js;\n\
+    # \n# /**\n# * Flags that should be used when encoding to JSON.\n# *\n# * @var\
+    \ int\n# */\n# protected const REQUIRED_FLAGS = JSON_HEX_TAG | JSON_HEX_APOS |\
+    \ JSON_HEX_AMP | JSON_HEX_QUOT | JSON_THROW_ON_ERROR;\n# \n# /**\n# * Create a\
+    \ new class instance.\n# *\n# * @param  mixed  $data\n# * @param  int|null  $flags\n\
+    # * @param  int  $depth\n# * @return void\n# *\n# * @throws \\JsonException"
+- name: from
+  visibility: public
+  parameters:
+  - name: data
+  - name: flags
+    default: '0'
+  - name: depth
+    default: '512'
+  comment: '# * Create a new JavaScript string from the given data.
+
+    # *
+
+    # * @param  mixed  $data
+
+    # * @param  int  $flags
+
+    # * @param  int  $depth
+
+    # * @return static
+
+    # *
+
+    # * @throws \JsonException'
+- name: convertDataToJavaScriptExpression
+  visibility: protected
+  parameters:
+  - name: data
+  - name: flags
+    default: '0'
+  - name: depth
+    default: '512'
+  comment: '# * Convert the given data to a JavaScript expression.
+
+    # *
+
+    # * @param  mixed  $data
+
+    # * @param  int  $flags
+
+    # * @param  int  $depth
+
+    # * @return string
+
+    # *
+
+    # * @throws \JsonException'
+- name: encode
+  visibility: public
+  parameters:
+  - name: data
+  - name: flags
+    default: '0'
+  - name: depth
+    default: '512'
+  comment: '# * Encode the given data as JSON.
+
+    # *
+
+    # * @param  mixed  $data
+
+    # * @param  int  $flags
+
+    # * @param  int  $depth
+
+    # * @return string
+
+    # *
+
+    # * @throws \JsonException'
+- name: convertJsonToJavaScriptExpression
+  visibility: protected
+  parameters:
+  - name: json
+  - name: flags
+    default: '0'
+  comment: '# * Convert the given JSON to a JavaScript expression.
+
+    # *
+
+    # * @param  string  $json
+
+    # * @param  int  $flags
+
+    # * @return string
+
+    # *
+
+    # * @throws \JsonException'
+- name: toHtml
+  visibility: public
+  parameters: []
+  comment: '# * Get the string representation of the data for use in HTML.
+
+    # *
+
+    # * @return string'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Get the string representation of the data for use in HTML.
+
+    # *
+
+    # * @return string'
+traits:
+- BackedEnum
+- Illuminate\Contracts\Support\Arrayable
+- Illuminate\Contracts\Support\Htmlable
+- Illuminate\Contracts\Support\Jsonable
+- JsonSerializable
+- Stringable
+interfaces:
+- Htmlable

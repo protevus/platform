@@ -1,0 +1,27 @@
+name: ObjectPropertyListExtractorTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: PropertyListExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyListExtractorInterface
+- name: ObjectPropertyListExtractor
+  type: class
+  source: Symfony\Component\Serializer\Extractor\ObjectPropertyListExtractor
+properties: []
+methods:
+- name: testGetPropertiesWithoutObjectClassResolver
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPropertiesWithObjectClassResolver
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\PropertyInfo\PropertyListExtractorInterface
+- Symfony\Component\Serializer\Extractor\ObjectPropertyListExtractor
+interfaces: []

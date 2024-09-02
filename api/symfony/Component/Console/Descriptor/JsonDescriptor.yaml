@@ -1,0 +1,80 @@
+name: JsonDescriptor
+class_comment: "# * JSON descriptor.\n# *\n# * @author Jean-Fran\xE7ois Simon <contact@jfsimon.fr>\n\
+  # *\n# * @internal"
+dependencies:
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputDefinition
+  type: class
+  source: Symfony\Component\Console\Input\InputDefinition
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+properties: []
+methods:
+- name: writeData
+  visibility: private
+  parameters:
+  - name: data
+  - name: options
+  comment: "# * JSON descriptor.\n# *\n# * @author Jean-Fran\xE7ois Simon <contact@jfsimon.fr>\n\
+    # *\n# * @internal\n# */\n# class JsonDescriptor extends Descriptor\n# {\n# protected\
+    \ function describeInputArgument(InputArgument $argument, array $options = []):\
+    \ void\n# {\n# $this->writeData($this->getInputArgumentData($argument), $options);\n\
+    # }\n# \n# protected function describeInputOption(InputOption $option, array $options\
+    \ = []): void\n# {\n# $this->writeData($this->getInputOptionData($option), $options);\n\
+    # if ($option->isNegatable()) {\n# $this->writeData($this->getInputOptionData($option,\
+    \ true), $options);\n# }\n# }\n# \n# protected function describeInputDefinition(InputDefinition\
+    \ $definition, array $options = []): void\n# {\n# $this->writeData($this->getInputDefinitionData($definition),\
+    \ $options);\n# }\n# \n# protected function describeCommand(Command $command,\
+    \ array $options = []): void\n# {\n# $this->writeData($this->getCommandData($command,\
+    \ $options['short'] ?? false), $options);\n# }\n# \n# protected function describeApplication(Application\
+    \ $application, array $options = []): void\n# {\n# $describedNamespace = $options['namespace']\
+    \ ?? null;\n# $description = new ApplicationDescription($application, $describedNamespace,\
+    \ true);\n# $commands = [];\n# \n# foreach ($description->getCommands() as $command)\
+    \ {\n# $commands[] = $this->getCommandData($command, $options['short'] ?? false);\n\
+    # }\n# \n# $data = [];\n# if ('UNKNOWN' !== $application->getName()) {\n# $data['application']['name']\
+    \ = $application->getName();\n# if ('UNKNOWN' !== $application->getVersion())\
+    \ {\n# $data['application']['version'] = $application->getVersion();\n# }\n# }\n\
+    # \n# $data['commands'] = $commands;\n# \n# if ($describedNamespace) {\n# $data['namespace']\
+    \ = $describedNamespace;\n# } else {\n# $data['namespaces'] = array_values($description->getNamespaces());\n\
+    # }\n# \n# $this->writeData($data, $options);\n# }\n# \n# /**\n# * Writes data\
+    \ as json."
+- name: getInputArgumentData
+  visibility: private
+  parameters:
+  - name: argument
+  comment: null
+- name: getInputOptionData
+  visibility: private
+  parameters:
+  - name: option
+  - name: negated
+    default: 'false'
+  comment: null
+- name: getInputDefinitionData
+  visibility: private
+  parameters:
+  - name: definition
+  comment: null
+- name: getCommandData
+  visibility: private
+  parameters:
+  - name: command
+  - name: short
+    default: 'false'
+  comment: null
+traits:
+- Symfony\Component\Console\Application
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputDefinition
+- Symfony\Component\Console\Input\InputOption
+interfaces: []

@@ -1,0 +1,114 @@
+name: UidNormalizerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: LogicException
+  type: class
+  source: Symfony\Component\Serializer\Exception\LogicException
+- name: UidNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\UidNormalizer
+- name: AbstractUid
+  type: class
+  source: Symfony\Component\Uid\AbstractUid
+- name: Ulid
+  type: class
+  source: Symfony\Component\Uid\Ulid
+- name: Uuid
+  type: class
+  source: Symfony\Component\Uid\Uuid
+- name: UuidV1
+  type: class
+  source: Symfony\Component\Uid\UuidV1
+- name: UuidV3
+  type: class
+  source: Symfony\Component\Uid\UuidV3
+- name: UuidV4
+  type: class
+  source: Symfony\Component\Uid\UuidV4
+- name: UuidV5
+  type: class
+  source: Symfony\Component\Uid\UuidV5
+- name: UuidV6
+  type: class
+  source: Symfony\Component\Uid\UuidV6
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testSupportsNormalization
+  visibility: public
+  parameters: []
+  comment: null
+- name: normalizeProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalize
+  visibility: public
+  parameters:
+  - name: expected
+  - name: uid
+  - name: uidFormat
+  comment: '# * @dataProvider normalizeProvider'
+- name: dataProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupportsDenormalization
+  visibility: public
+  parameters:
+  - name: uuidString
+  - name: class
+  comment: '# * @dataProvider dataProvider'
+- name: testSupportsDenormalizationForNonUid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupportOurAbstractUid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupportCustomAbstractUid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalize
+  visibility: public
+  parameters:
+  - name: uuidString
+  - name: class
+  comment: '# * @dataProvider dataProvider'
+- name: testDenormalizeOurAbstractUid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalizeCustomAbstractUid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalizeWithNormalizationFormatPassedInConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalizeWithNormalizationFormatNotValid
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Exception\LogicException
+- Symfony\Component\Serializer\Normalizer\UidNormalizer
+- Symfony\Component\Uid\AbstractUid
+- Symfony\Component\Uid\Ulid
+- Symfony\Component\Uid\Uuid
+- Symfony\Component\Uid\UuidV1
+- Symfony\Component\Uid\UuidV3
+- Symfony\Component\Uid\UuidV4
+- Symfony\Component\Uid\UuidV5
+- Symfony\Component\Uid\UuidV6
+interfaces: []

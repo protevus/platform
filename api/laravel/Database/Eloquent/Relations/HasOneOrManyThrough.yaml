@@ -1,0 +1,795 @@
+name: HasOneOrManyThrough
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: Builder
+  type: class
+  source: Illuminate\Database\Eloquent\Builder
+- name: Collection
+  type: class
+  source: Illuminate\Database\Eloquent\Collection
+- name: Model
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+- name: ModelNotFoundException
+  type: class
+  source: Illuminate\Database\Eloquent\ModelNotFoundException
+- name: InteractsWithDictionary
+  type: class
+  source: Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithDictionary
+- name: SoftDeletes
+  type: class
+  source: Illuminate\Database\Eloquent\SoftDeletes
+- name: MySqlGrammar
+  type: class
+  source: Illuminate\Database\Query\Grammars\MySqlGrammar
+- name: UniqueConstraintViolationException
+  type: class
+  source: Illuminate\Database\UniqueConstraintViolationException
+- name: InteractsWithDictionary
+  type: class
+  source: InteractsWithDictionary
+properties:
+- name: throughParent
+  visibility: protected
+  comment: "# * @template TRelatedModel of \\Illuminate\\Database\\Eloquent\\Model\n\
+    # * @template TIntermediateModel of \\Illuminate\\Database\\Eloquent\\Model\n\
+    # * @template TDeclaringModel of \\Illuminate\\Database\\Eloquent\\Model\n# *\
+    \ @template TResult\n# *\n# * @extends \\Illuminate\\Database\\Eloquent\\Relations\\\
+    Relation<TRelatedModel, TIntermediateModel, TResult>\n# */\n# abstract class HasOneOrManyThrough\
+    \ extends Relation\n# {\n# use InteractsWithDictionary;\n# \n# /**\n# * The \"\
+    through\" parent model instance.\n# *\n# * @var TIntermediateModel"
+- name: farParent
+  visibility: protected
+  comment: '# * The far parent model instance.
+
+    # *
+
+    # * @var TDeclaringModel'
+- name: firstKey
+  visibility: protected
+  comment: '# * The near key on the relationship.
+
+    # *
+
+    # * @var string'
+- name: secondKey
+  visibility: protected
+  comment: '# * The far key on the relationship.
+
+    # *
+
+    # * @var string'
+- name: localKey
+  visibility: protected
+  comment: '# * The local key on the relationship.
+
+    # *
+
+    # * @var string'
+- name: secondLocalKey
+  visibility: protected
+  comment: '# * The local key on the intermediary model.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: query
+  - name: farParent
+  - name: throughParent
+  - name: firstKey
+  - name: secondKey
+  - name: localKey
+  - name: secondLocalKey
+  comment: "# * @template TRelatedModel of \\Illuminate\\Database\\Eloquent\\Model\n\
+    # * @template TIntermediateModel of \\Illuminate\\Database\\Eloquent\\Model\n\
+    # * @template TDeclaringModel of \\Illuminate\\Database\\Eloquent\\Model\n# *\
+    \ @template TResult\n# *\n# * @extends \\Illuminate\\Database\\Eloquent\\Relations\\\
+    Relation<TRelatedModel, TIntermediateModel, TResult>\n# */\n# abstract class HasOneOrManyThrough\
+    \ extends Relation\n# {\n# use InteractsWithDictionary;\n# \n# /**\n# * The \"\
+    through\" parent model instance.\n# *\n# * @var TIntermediateModel\n# */\n# protected\
+    \ $throughParent;\n# \n# /**\n# * The far parent model instance.\n# *\n# * @var\
+    \ TDeclaringModel\n# */\n# protected $farParent;\n# \n# /**\n# * The near key\
+    \ on the relationship.\n# *\n# * @var string\n# */\n# protected $firstKey;\n#\
+    \ \n# /**\n# * The far key on the relationship.\n# *\n# * @var string\n# */\n\
+    # protected $secondKey;\n# \n# /**\n# * The local key on the relationship.\n#\
+    \ *\n# * @var string\n# */\n# protected $localKey;\n# \n# /**\n# * The local key\
+    \ on the intermediary model.\n# *\n# * @var string\n# */\n# protected $secondLocalKey;\n\
+    # \n# /**\n# * Create a new has many through relationship instance.\n# *\n# *\
+    \ @param  \\Illuminate\\Database\\Eloquent\\Builder<TRelatedModel>  $query\n#\
+    \ * @param  TDeclaringModel  $farParent\n# * @param  TIntermediateModel  $throughParent\n\
+    # * @param  string  $firstKey\n# * @param  string  $secondKey\n# * @param  string\
+    \  $localKey\n# * @param  string  $secondLocalKey\n# * @return void"
+- name: addConstraints
+  visibility: public
+  parameters: []
+  comment: '# * Set the base constraints on the relation query.
+
+    # *
+
+    # * @return void'
+- name: performJoin
+  visibility: protected
+  parameters:
+  - name: query
+    default: 'null'
+  comment: '# * Set the join clause on the query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Builder<TRelatedModel>|null  $query
+
+    # * @return void'
+- name: getQualifiedParentKeyName
+  visibility: public
+  parameters: []
+  comment: '# * Get the fully qualified parent key name.
+
+    # *
+
+    # * @return string'
+- name: throughParentSoftDeletes
+  visibility: public
+  parameters: []
+  comment: '# * Determine whether "through" parent of the relation uses Soft Deletes.
+
+    # *
+
+    # * @return bool'
+- name: withTrashedParents
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that trashed "through" parents should be included in the
+    query.
+
+    # *
+
+    # * @return $this'
+- name: addEagerConstraints
+  visibility: public
+  parameters:
+  - name: models
+  comment: '# @inheritDoc'
+- name: buildDictionary
+  visibility: protected
+  parameters:
+  - name: results
+  comment: '# * Build model dictionary keyed by the relation''s foreign key.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Collection<int, TRelatedModel>  $results
+
+    # * @return array<array<TRelatedModel>>'
+- name: firstOrNew
+  visibility: public
+  parameters:
+  - name: attributes
+    default: '[]'
+  - name: values
+    default: '[]'
+  comment: '# * Get the first related model record matching the attributes or instantiate
+    it.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @param  array  $values
+
+    # * @return TRelatedModel'
+- name: firstOrCreate
+  visibility: public
+  parameters:
+  - name: attributes
+    default: '[]'
+  - name: values
+    default: '[]'
+  comment: '# * Get the first record matching the attributes. If the record is not
+    found, create it.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @param  array  $values
+
+    # * @return TRelatedModel'
+- name: createOrFirst
+  visibility: public
+  parameters:
+  - name: attributes
+    default: '[]'
+  - name: values
+    default: '[]'
+  comment: '# * Attempt to create the record. If a unique constraint violation occurs,
+    attempt to find the matching record.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @param  array  $values
+
+    # * @return TRelatedModel'
+- name: updateOrCreate
+  visibility: public
+  parameters:
+  - name: attributes
+  - name: values
+    default: '[]'
+  comment: '# * Create or update a related record matching the attributes, and fill
+    it with values.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @param  array  $values
+
+    # * @return TRelatedModel'
+- name: firstWhere
+  visibility: public
+  parameters:
+  - name: column
+  - name: operator
+    default: 'null'
+  - name: value
+    default: 'null'
+  - name: boolean
+    default: '''and'''
+  comment: '# * Add a basic where clause to the query, and return the first result.
+
+    # *
+
+    # * @param  \Closure|string|array  $column
+
+    # * @param  mixed  $operator
+
+    # * @param  mixed  $value
+
+    # * @param  string  $boolean
+
+    # * @return TRelatedModel|null'
+- name: first
+  visibility: public
+  parameters:
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Execute the query and get the first related model.
+
+    # *
+
+    # * @param  array  $columns
+
+    # * @return TRelatedModel|null'
+- name: firstOrFail
+  visibility: public
+  parameters:
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Execute the query and get the first result or throw an exception.
+
+    # *
+
+    # * @param  array  $columns
+
+    # * @return TRelatedModel
+
+    # *
+
+    # * @throws \Illuminate\Database\Eloquent\ModelNotFoundException<TRelatedModel>'
+- name: firstOr
+  visibility: public
+  parameters:
+  - name: columns
+    default: '[''*'']'
+  - name: callback
+    default: 'null'
+  comment: '# * Execute the query and get the first result or call a callback.
+
+    # *
+
+    # * @template TValue
+
+    # *
+
+    # * @param  (\Closure(): TValue)|list<string>  $columns
+
+    # * @param  (\Closure(): TValue)|null  $callback
+
+    # * @return TRelatedModel|TValue'
+- name: find
+  visibility: public
+  parameters:
+  - name: id
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Find a related model by its primary key.
+
+    # *
+
+    # * @param  mixed  $id
+
+    # * @param  array  $columns
+
+    # * @return ($id is (\Illuminate\Contracts\Support\Arrayable<array-key, mixed>|array<mixed>)
+    ? \Illuminate\Database\Eloquent\Collection<int, TRelatedModel> : TRelatedModel|null)'
+- name: findMany
+  visibility: public
+  parameters:
+  - name: ids
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Find multiple related models by their primary keys.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Support\Arrayable|array  $ids
+
+    # * @param  array  $columns
+
+    # * @return \Illuminate\Database\Eloquent\Collection<int, TRelatedModel>'
+- name: findOrFail
+  visibility: public
+  parameters:
+  - name: id
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Find a related model by its primary key or throw an exception.
+
+    # *
+
+    # * @param  mixed  $id
+
+    # * @param  array  $columns
+
+    # * @return ($id is (\Illuminate\Contracts\Support\Arrayable<array-key, mixed>|array<mixed>)
+    ? \Illuminate\Database\Eloquent\Collection<int, TRelatedModel> : TRelatedModel)
+
+    # *
+
+    # * @throws \Illuminate\Database\Eloquent\ModelNotFoundException<TRelatedModel>'
+- name: findOr
+  visibility: public
+  parameters:
+  - name: id
+  - name: columns
+    default: '[''*'']'
+  - name: callback
+    default: 'null'
+  comment: '# * Find a related model by its primary key or call a callback.
+
+    # *
+
+    # * @template TValue
+
+    # *
+
+    # * @param  mixed  $id
+
+    # * @param  (\Closure(): TValue)|list<string>|string  $columns
+
+    # * @param  (\Closure(): TValue)|null  $callback
+
+    # * @return (
+
+    # *     $id is (\Illuminate\Contracts\Support\Arrayable<array-key, mixed>|array<mixed>)
+
+    # *     ? \Illuminate\Database\Eloquent\Collection<int, TRelatedModel>|TValue
+
+    # *     : TRelatedModel|TValue
+
+    # * )'
+- name: get
+  visibility: public
+  parameters:
+  - name: columns
+    default: '[''*'']'
+  comment: '# @inheritDoc'
+- name: paginate
+  visibility: public
+  parameters:
+  - name: perPage
+    default: 'null'
+  - name: columns
+    default: '[''*'']'
+  - name: pageName
+    default: '''page'''
+  - name: page
+    default: 'null'
+  comment: '# * Get a paginator for the "select" statement.
+
+    # *
+
+    # * @param  int|null  $perPage
+
+    # * @param  array  $columns
+
+    # * @param  string  $pageName
+
+    # * @param  int  $page
+
+    # * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator'
+- name: simplePaginate
+  visibility: public
+  parameters:
+  - name: perPage
+    default: 'null'
+  - name: columns
+    default: '[''*'']'
+  - name: pageName
+    default: '''page'''
+  - name: page
+    default: 'null'
+  comment: '# * Paginate the given query into a simple paginator.
+
+    # *
+
+    # * @param  int|null  $perPage
+
+    # * @param  array  $columns
+
+    # * @param  string  $pageName
+
+    # * @param  int|null  $page
+
+    # * @return \Illuminate\Contracts\Pagination\Paginator'
+- name: cursorPaginate
+  visibility: public
+  parameters:
+  - name: perPage
+    default: 'null'
+  - name: columns
+    default: '[''*'']'
+  - name: cursorName
+    default: '''cursor'''
+  - name: cursor
+    default: 'null'
+  comment: '# * Paginate the given query into a cursor paginator.
+
+    # *
+
+    # * @param  int|null  $perPage
+
+    # * @param  array  $columns
+
+    # * @param  string  $cursorName
+
+    # * @param  string|null  $cursor
+
+    # * @return \Illuminate\Contracts\Pagination\CursorPaginator'
+- name: shouldSelect
+  visibility: protected
+  parameters:
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Set the select clause for the relation query.
+
+    # *
+
+    # * @param  array  $columns
+
+    # * @return array'
+- name: chunk
+  visibility: public
+  parameters:
+  - name: count
+  - name: callback
+  comment: '# * Chunk the results of the query.
+
+    # *
+
+    # * @param  int  $count
+
+    # * @param  callable  $callback
+
+    # * @return bool'
+- name: chunkById
+  visibility: public
+  parameters:
+  - name: count
+  - name: callback
+  - name: column
+    default: 'null'
+  - name: alias
+    default: 'null'
+  comment: '# * Chunk the results of a query by comparing numeric IDs.
+
+    # *
+
+    # * @param  int  $count
+
+    # * @param  callable  $callback
+
+    # * @param  string|null  $column
+
+    # * @param  string|null  $alias
+
+    # * @return bool'
+- name: chunkByIdDesc
+  visibility: public
+  parameters:
+  - name: count
+  - name: callback
+  - name: column
+    default: 'null'
+  - name: alias
+    default: 'null'
+  comment: '# * Chunk the results of a query by comparing IDs in descending order.
+
+    # *
+
+    # * @param  int  $count
+
+    # * @param  callable  $callback
+
+    # * @param  string|null  $column
+
+    # * @param  string|null  $alias
+
+    # * @return bool'
+- name: eachById
+  visibility: public
+  parameters:
+  - name: callback
+  - name: count
+    default: '1000'
+  - name: column
+    default: 'null'
+  - name: alias
+    default: 'null'
+  comment: '# * Execute a callback over each item while chunking by ID.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @param  int  $count
+
+    # * @param  string|null  $column
+
+    # * @param  string|null  $alias
+
+    # * @return bool'
+- name: cursor
+  visibility: public
+  parameters: []
+  comment: '# * Get a generator for the given query.
+
+    # *
+
+    # * @return \Illuminate\Support\LazyCollection<int, TRelatedModel>'
+- name: each
+  visibility: public
+  parameters:
+  - name: callback
+  - name: count
+    default: '1000'
+  comment: '# * Execute a callback over each item while chunking.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @param  int  $count
+
+    # * @return bool'
+- name: lazy
+  visibility: public
+  parameters:
+  - name: chunkSize
+    default: '1000'
+  comment: '# * Query lazily, by chunks of the given size.
+
+    # *
+
+    # * @param  int  $chunkSize
+
+    # * @return \Illuminate\Support\LazyCollection<int, TRelatedModel>'
+- name: lazyById
+  visibility: public
+  parameters:
+  - name: chunkSize
+    default: '1000'
+  - name: column
+    default: 'null'
+  - name: alias
+    default: 'null'
+  comment: '# * Query lazily, by chunking the results of a query by comparing IDs.
+
+    # *
+
+    # * @param  int  $chunkSize
+
+    # * @param  string|null  $column
+
+    # * @param  string|null  $alias
+
+    # * @return \Illuminate\Support\LazyCollection<int, TRelatedModel>'
+- name: lazyByIdDesc
+  visibility: public
+  parameters:
+  - name: chunkSize
+    default: '1000'
+  - name: column
+    default: 'null'
+  - name: alias
+    default: 'null'
+  comment: '# * Query lazily, by chunking the results of a query by comparing IDs
+    in descending order.
+
+    # *
+
+    # * @param  int  $chunkSize
+
+    # * @param  string|null  $column
+
+    # * @param  string|null  $alias
+
+    # * @return \Illuminate\Support\LazyCollection<int, TRelatedModel>'
+- name: prepareQueryBuilder
+  visibility: protected
+  parameters:
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Prepare the query builder for query execution.
+
+    # *
+
+    # * @param  array  $columns
+
+    # * @return \Illuminate\Database\Eloquent\Builder<TRelatedModel>'
+- name: getRelationExistenceQuery
+  visibility: public
+  parameters:
+  - name: query
+  - name: parentQuery
+  - name: columns
+    default: '[''*'']'
+  comment: '# @inheritDoc'
+- name: getRelationExistenceQueryForSelfRelation
+  visibility: public
+  parameters:
+  - name: query
+  - name: parentQuery
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Add the constraints for a relationship query on the same table.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Builder<TRelatedModel>  $query
+
+    # * @param  \Illuminate\Database\Eloquent\Builder<TDeclaringModel>  $parentQuery
+
+    # * @param  array|mixed  $columns
+
+    # * @return \Illuminate\Database\Eloquent\Builder<TRelatedModel>'
+- name: getRelationExistenceQueryForThroughSelfRelation
+  visibility: public
+  parameters:
+  - name: query
+  - name: parentQuery
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Add the constraints for a relationship query on the same table as
+    the through parent.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Builder<TRelatedModel>  $query
+
+    # * @param  \Illuminate\Database\Eloquent\Builder<TDeclaringModel>  $parentQuery
+
+    # * @param  array|mixed  $columns
+
+    # * @return \Illuminate\Database\Eloquent\Builder<TRelatedModel>'
+- name: take
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Alias to set the "limit" value of the query.
+
+    # *
+
+    # * @param  int  $value
+
+    # * @return $this'
+- name: limit
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Set the "limit" value of the query.
+
+    # *
+
+    # * @param  int  $value
+
+    # * @return $this'
+- name: getQualifiedFarKeyName
+  visibility: public
+  parameters: []
+  comment: '# * Get the qualified foreign key on the related model.
+
+    # *
+
+    # * @return string'
+- name: getFirstKeyName
+  visibility: public
+  parameters: []
+  comment: '# * Get the foreign key on the "through" model.
+
+    # *
+
+    # * @return string'
+- name: getQualifiedFirstKeyName
+  visibility: public
+  parameters: []
+  comment: '# * Get the qualified foreign key on the "through" model.
+
+    # *
+
+    # * @return string'
+- name: getForeignKeyName
+  visibility: public
+  parameters: []
+  comment: '# * Get the foreign key on the related model.
+
+    # *
+
+    # * @return string'
+- name: getQualifiedForeignKeyName
+  visibility: public
+  parameters: []
+  comment: '# * Get the qualified foreign key on the related model.
+
+    # *
+
+    # * @return string'
+- name: getLocalKeyName
+  visibility: public
+  parameters: []
+  comment: '# * Get the local key on the far parent model.
+
+    # *
+
+    # * @return string'
+- name: getQualifiedLocalKeyName
+  visibility: public
+  parameters: []
+  comment: '# * Get the qualified local key on the far parent model.
+
+    # *
+
+    # * @return string'
+- name: getSecondLocalKeyName
+  visibility: public
+  parameters: []
+  comment: '# * Get the local key on the intermediary model.
+
+    # *
+
+    # * @return string'
+traits:
+- Closure
+- Illuminate\Contracts\Support\Arrayable
+- Illuminate\Database\Eloquent\Builder
+- Illuminate\Database\Eloquent\Collection
+- Illuminate\Database\Eloquent\Model
+- Illuminate\Database\Eloquent\ModelNotFoundException
+- Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithDictionary
+- Illuminate\Database\Eloquent\SoftDeletes
+- Illuminate\Database\Query\Grammars\MySqlGrammar
+- Illuminate\Database\UniqueConstraintViolationException
+- InteractsWithDictionary
+interfaces: []

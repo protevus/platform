@@ -1,0 +1,406 @@
+name: Response
+class_comment: null
+dependencies:
+- name: ArrayAccess
+  type: class
+  source: ArrayAccess
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: LogicException
+  type: class
+  source: LogicException
+- name: Stringable
+  type: class
+  source: Stringable
+properties:
+- name: response
+  visibility: protected
+  comment: '# * The underlying PSR response.
+
+    # *
+
+    # * @var \Psr\Http\Message\ResponseInterface'
+- name: decoded
+  visibility: protected
+  comment: '# * The decoded JSON response.
+
+    # *
+
+    # * @var array'
+- name: cookies
+  visibility: public
+  comment: '# * The request cookies.
+
+    # *
+
+    # * @var \GuzzleHttp\Cookie\CookieJar'
+- name: transferStats
+  visibility: public
+  comment: '# * The transfer stats for the request.
+
+    # *
+
+    # * @var \GuzzleHttp\TransferStats|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: response
+  comment: "# * The underlying PSR response.\n# *\n# * @var \\Psr\\Http\\Message\\\
+    ResponseInterface\n# */\n# protected $response;\n# \n# /**\n# * The decoded JSON\
+    \ response.\n# *\n# * @var array\n# */\n# protected $decoded;\n# \n# /**\n# *\
+    \ The request cookies.\n# *\n# * @var \\GuzzleHttp\\Cookie\\CookieJar\n# */\n\
+    # public $cookies;\n# \n# /**\n# * The transfer stats for the request.\n# *\n\
+    # * @var \\GuzzleHttp\\TransferStats|null\n# */\n# public $transferStats;\n# \n\
+    # /**\n# * Create a new response instance.\n# *\n# * @param  \\Psr\\Http\\Message\\\
+    MessageInterface  $response\n# * @return void"
+- name: body
+  visibility: public
+  parameters: []
+  comment: '# * Get the body of the response.
+
+    # *
+
+    # * @return string'
+- name: json
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  - name: default
+    default: 'null'
+  comment: '# * Get the JSON decoded body of the response as an array or scalar value.
+
+    # *
+
+    # * @param  string|null  $key
+
+    # * @param  mixed  $default
+
+    # * @return mixed'
+- name: object
+  visibility: public
+  parameters: []
+  comment: '# * Get the JSON decoded body of the response as an object.
+
+    # *
+
+    # * @return object|null'
+- name: collect
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  comment: '# * Get the JSON decoded body of the response as a collection.
+
+    # *
+
+    # * @param  string|null  $key
+
+    # * @return \Illuminate\Support\Collection'
+- name: header
+  visibility: public
+  parameters:
+  - name: header
+  comment: '# * Get a header from the response.
+
+    # *
+
+    # * @param  string  $header
+
+    # * @return string'
+- name: headers
+  visibility: public
+  parameters: []
+  comment: '# * Get the headers from the response.
+
+    # *
+
+    # * @return array'
+- name: status
+  visibility: public
+  parameters: []
+  comment: '# * Get the status code of the response.
+
+    # *
+
+    # * @return int'
+- name: reason
+  visibility: public
+  parameters: []
+  comment: '# * Get the reason phrase of the response.
+
+    # *
+
+    # * @return string'
+- name: effectiveUri
+  visibility: public
+  parameters: []
+  comment: '# * Get the effective URI of the response.
+
+    # *
+
+    # * @return \Psr\Http\Message\UriInterface|null'
+- name: successful
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the request was successful.
+
+    # *
+
+    # * @return bool'
+- name: redirect
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the response was a redirect.
+
+    # *
+
+    # * @return bool'
+- name: failed
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the response indicates a client or server error occurred.
+
+    # *
+
+    # * @return bool'
+- name: clientError
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the response indicates a client error occurred.
+
+    # *
+
+    # * @return bool'
+- name: serverError
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the response indicates a server error occurred.
+
+    # *
+
+    # * @return bool'
+- name: onError
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Execute the given callback if there was a server or client error.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return $this'
+- name: cookies
+  visibility: public
+  parameters: []
+  comment: '# * Get the response cookies.
+
+    # *
+
+    # * @return \GuzzleHttp\Cookie\CookieJar'
+- name: handlerStats
+  visibility: public
+  parameters: []
+  comment: '# * Get the handler stats of the response.
+
+    # *
+
+    # * @return array'
+- name: close
+  visibility: public
+  parameters: []
+  comment: '# * Close the stream and any underlying resources.
+
+    # *
+
+    # * @return $this'
+- name: toPsrResponse
+  visibility: public
+  parameters: []
+  comment: '# * Get the underlying PSR response for the response.
+
+    # *
+
+    # * @return \Psr\Http\Message\ResponseInterface'
+- name: toException
+  visibility: public
+  parameters: []
+  comment: '# * Create an exception if a server or client error occurred.
+
+    # *
+
+    # * @return \Illuminate\Http\Client\RequestException|null'
+- name: throw
+  visibility: public
+  parameters: []
+  comment: '# * Throw an exception if a server or client error occurred.
+
+    # *
+
+    # * @return $this
+
+    # *
+
+    # * @throws \Illuminate\Http\Client\RequestException'
+- name: throwIf
+  visibility: public
+  parameters:
+  - name: condition
+  comment: '# * Throw an exception if a server or client error occurred and the given
+    condition evaluates to true.
+
+    # *
+
+    # * @param  \Closure|bool  $condition
+
+    # * @return $this
+
+    # *
+
+    # * @throws \Illuminate\Http\Client\RequestException'
+- name: throwIfStatus
+  visibility: public
+  parameters:
+  - name: statusCode
+  comment: '# * Throw an exception if the response status code matches the given code.
+
+    # *
+
+    # * @param  callable|int  $statusCode
+
+    # * @return $this
+
+    # *
+
+    # * @throws \Illuminate\Http\Client\RequestException'
+- name: throwUnlessStatus
+  visibility: public
+  parameters:
+  - name: statusCode
+  comment: '# * Throw an exception unless the response status code matches the given
+    code.
+
+    # *
+
+    # * @param  callable|int  $statusCode
+
+    # * @return $this
+
+    # *
+
+    # * @throws \Illuminate\Http\Client\RequestException'
+- name: throwIfClientError
+  visibility: public
+  parameters: []
+  comment: '# * Throw an exception if the response status code is a 4xx level code.
+
+    # *
+
+    # * @return $this
+
+    # *
+
+    # * @throws \Illuminate\Http\Client\RequestException'
+- name: throwIfServerError
+  visibility: public
+  parameters: []
+  comment: '# * Throw an exception if the response status code is a 5xx level code.
+
+    # *
+
+    # * @return $this
+
+    # *
+
+    # * @throws \Illuminate\Http\Client\RequestException'
+- name: offsetExists
+  visibility: public
+  parameters:
+  - name: offset
+  comment: '# * Determine if the given offset exists.
+
+    # *
+
+    # * @param  string  $offset
+
+    # * @return bool'
+- name: offsetGet
+  visibility: public
+  parameters:
+  - name: offset
+  comment: '# * Get the value for a given offset.
+
+    # *
+
+    # * @param  string  $offset
+
+    # * @return mixed'
+- name: offsetSet
+  visibility: public
+  parameters:
+  - name: offset
+  - name: value
+  comment: '# * Set the value at the given offset.
+
+    # *
+
+    # * @param  string  $offset
+
+    # * @param  mixed  $value
+
+    # * @return void
+
+    # *
+
+    # * @throws \LogicException'
+- name: offsetUnset
+  visibility: public
+  parameters:
+  - name: offset
+  comment: '# * Unset the value at the given offset.
+
+    # *
+
+    # * @param  string  $offset
+
+    # * @return void
+
+    # *
+
+    # * @throws \LogicException'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Get the body of the response.
+
+    # *
+
+    # * @return string'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically proxy other methods to the underlying response.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+traits:
+- ArrayAccess
+- Illuminate\Support\Collection
+- Illuminate\Support\Traits\Macroable
+- LogicException
+- Stringable
+interfaces:
+- ArrayAccess

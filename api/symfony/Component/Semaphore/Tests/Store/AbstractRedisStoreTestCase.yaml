@@ -1,0 +1,27 @@
+name: AbstractRedisStoreTestCase
+class_comment: null
+dependencies:
+- name: Relay
+  type: class
+  source: Relay\Relay
+- name: PersistingStoreInterface
+  type: class
+  source: Symfony\Component\Semaphore\PersistingStoreInterface
+- name: RedisStore
+  type: class
+  source: Symfony\Component\Semaphore\Store\RedisStore
+properties: []
+methods:
+- name: getRedisConnection
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getStore
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Relay\Relay
+- Symfony\Component\Semaphore\PersistingStoreInterface
+- Symfony\Component\Semaphore\Store\RedisStore
+interfaces: []

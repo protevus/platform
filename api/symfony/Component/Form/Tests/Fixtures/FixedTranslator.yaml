@@ -1,0 +1,32 @@
+name: FixedTranslator
+class_comment: null
+dependencies:
+- name: TranslatorInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatorInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: translations
+  comment: null
+- name: trans
+  visibility: public
+  parameters:
+  - name: id
+  - name: parameters
+    default: '[]'
+  - name: domain
+    default: 'null'
+  - name: locale
+    default: 'null'
+  comment: null
+- name: getLocale
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Contracts\Translation\TranslatorInterface
+interfaces:
+- TranslatorInterface

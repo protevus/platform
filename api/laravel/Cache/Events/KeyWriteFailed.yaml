@@ -1,0 +1,37 @@
+name: KeyWriteFailed
+class_comment: null
+dependencies: []
+properties:
+- name: value
+  visibility: public
+  comment: '# * The value that would have been written.
+
+    # *
+
+    # * @var mixed'
+- name: seconds
+  visibility: public
+  comment: '# * The number of seconds the key should have been valid.
+
+    # *
+
+    # * @var int|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: storeName
+  - name: key
+  - name: value
+  - name: seconds
+    default: 'null'
+  - name: tags
+    default: '[]'
+  comment: "# * The value that would have been written.\n# *\n# * @var mixed\n# */\n\
+    # public $value;\n# \n# /**\n# * The number of seconds the key should have been\
+    \ valid.\n# *\n# * @var int|null\n# */\n# public $seconds;\n# \n# /**\n# * Create\
+    \ a new event instance.\n# *\n# * @param  string|null  $storeName\n# * @param\
+    \  string  $key\n# * @param  mixed  $value\n# * @param  int|null  $seconds\n#\
+    \ * @param  array  $tags\n# * @return void"
+traits: []
+interfaces: []

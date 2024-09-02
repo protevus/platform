@@ -1,0 +1,363 @@
+name: ProgressBar
+class_comment: null
+dependencies:
+- name: Cursor
+  type: class
+  source: Symfony\Component\Console\Cursor
+- name: LogicException
+  type: class
+  source: Symfony\Component\Console\Exception\LogicException
+- name: ConsoleOutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\ConsoleOutputInterface
+- name: ConsoleSectionOutput
+  type: class
+  source: Symfony\Component\Console\Output\ConsoleSectionOutput
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: Terminal
+  type: class
+  source: Symfony\Component\Console\Terminal
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: output
+  - name: max
+    default: '0'
+  - name: minSecondsBetweenRedraws
+    default: 1 / 25
+  comment: "# * The ProgressBar provides helpers to display progress output.\n# *\n\
+    # * @author Fabien Potencier <fabien@symfony.com>\n# * @author Chris Jones <leeked@gmail.com>\n\
+    # */\n# final class ProgressBar\n# {\n# public const FORMAT_VERBOSE = 'verbose';\n\
+    # public const FORMAT_VERY_VERBOSE = 'very_verbose';\n# public const FORMAT_DEBUG\
+    \ = 'debug';\n# public const FORMAT_NORMAL = 'normal';\n# \n# private const FORMAT_VERBOSE_NOMAX\
+    \ = 'verbose_nomax';\n# private const FORMAT_VERY_VERBOSE_NOMAX = 'very_verbose_nomax';\n\
+    # private const FORMAT_DEBUG_NOMAX = 'debug_nomax';\n# private const FORMAT_NORMAL_NOMAX\
+    \ = 'normal_nomax';\n# \n# private int $barWidth = 28;\n# private string $barChar;\n\
+    # private string $emptyBarChar = '-';\n# private string $progressChar = '>';\n\
+    # private ?string $format = null;\n# private ?string $internalFormat = null;\n\
+    # private ?int $redrawFreq = 1;\n# private int $writeCount = 0;\n# private float\
+    \ $lastWriteTime = 0;\n# private float $minSecondsBetweenRedraws = 0;\n# private\
+    \ float $maxSecondsBetweenRedraws = 1;\n# private OutputInterface $output;\n#\
+    \ private int $step = 0;\n# private int $startingStep = 0;\n# private ?int $max\
+    \ = null;\n# private int $startTime;\n# private int $stepWidth;\n# private float\
+    \ $percent = 0.0;\n# private array $messages = [];\n# private bool $overwrite\
+    \ = true;\n# private Terminal $terminal;\n# private ?string $previousMessage =\
+    \ null;\n# private Cursor $cursor;\n# private array $placeholders = [];\n# \n\
+    # private static array $formatters;\n# private static array $formats;\n# \n# /**\n\
+    # * @param int $max Maximum steps (0 if unknown)"
+- name: setPlaceholderFormatterDefinition
+  visibility: public
+  parameters:
+  - name: name
+  - name: callable
+  comment: '# * Sets a placeholder formatter for a given name, globally for all instances
+    of ProgressBar.
+
+    # *
+
+    # * This method also allow you to override an existing placeholder.
+
+    # *
+
+    # * @param string                       $name     The placeholder name (including
+    the delimiter char like %)
+
+    # * @param callable(ProgressBar):string $callable A PHP callable'
+- name: getPlaceholderFormatterDefinition
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Gets the placeholder formatter for a given name.
+
+    # *
+
+    # * @param string $name The placeholder name (including the delimiter char like
+    %)'
+- name: setPlaceholderFormatter
+  visibility: public
+  parameters:
+  - name: name
+  - name: callable
+  comment: '# * Sets a placeholder formatter for a given name, for this instance only.
+
+    # *
+
+    # * @param callable(ProgressBar):string $callable A PHP callable'
+- name: getPlaceholderFormatter
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Gets the placeholder formatter for a given name.
+
+    # *
+
+    # * @param string $name The placeholder name (including the delimiter char like
+    %)'
+- name: setFormatDefinition
+  visibility: public
+  parameters:
+  - name: name
+  - name: format
+  comment: '# * Sets a format for a given name.
+
+    # *
+
+    # * This method also allow you to override an existing format.
+
+    # *
+
+    # * @param string $name   The format name
+
+    # * @param string $format A format string'
+- name: getFormatDefinition
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Gets the format for a given name.
+
+    # *
+
+    # * @param string $name The format name'
+- name: setMessage
+  visibility: public
+  parameters:
+  - name: message
+  - name: name
+    default: '''message'''
+  comment: '# * Associates a text with a named placeholder.
+
+    # *
+
+    # * The text is displayed when the progress bar is rendered but only
+
+    # * when the corresponding placeholder is part of the custom format line
+
+    # * (by wrapping the name with %).
+
+    # *
+
+    # * @param string $message The text to associate with the placeholder
+
+    # * @param string $name    The name of the placeholder'
+- name: getMessage
+  visibility: public
+  parameters:
+  - name: name
+    default: '''message'''
+  comment: null
+- name: getStartTime
+  visibility: public
+  parameters: []
+  comment: null
+- name: getMaxSteps
+  visibility: public
+  parameters: []
+  comment: null
+- name: getProgress
+  visibility: public
+  parameters: []
+  comment: null
+- name: getStepWidth
+  visibility: private
+  parameters: []
+  comment: null
+- name: getProgressPercent
+  visibility: public
+  parameters: []
+  comment: null
+- name: getBarOffset
+  visibility: public
+  parameters: []
+  comment: null
+- name: getEstimated
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRemaining
+  visibility: public
+  parameters: []
+  comment: null
+- name: setBarWidth
+  visibility: public
+  parameters:
+  - name: size
+  comment: null
+- name: getBarWidth
+  visibility: public
+  parameters: []
+  comment: null
+- name: setBarCharacter
+  visibility: public
+  parameters:
+  - name: char
+  comment: null
+- name: getBarCharacter
+  visibility: public
+  parameters: []
+  comment: null
+- name: setEmptyBarCharacter
+  visibility: public
+  parameters:
+  - name: char
+  comment: null
+- name: getEmptyBarCharacter
+  visibility: public
+  parameters: []
+  comment: null
+- name: setProgressCharacter
+  visibility: public
+  parameters:
+  - name: char
+  comment: null
+- name: getProgressCharacter
+  visibility: public
+  parameters: []
+  comment: null
+- name: setFormat
+  visibility: public
+  parameters:
+  - name: format
+  comment: null
+- name: setRedrawFrequency
+  visibility: public
+  parameters:
+  - name: freq
+  comment: '# * Sets the redraw frequency.
+
+    # *
+
+    # * @param int|null $freq The frequency in steps'
+- name: minSecondsBetweenRedraws
+  visibility: public
+  parameters:
+  - name: seconds
+  comment: null
+- name: maxSecondsBetweenRedraws
+  visibility: public
+  parameters:
+  - name: seconds
+  comment: null
+- name: iterate
+  visibility: public
+  parameters:
+  - name: iterable
+  - name: max
+    default: 'null'
+  comment: '# * Returns an iterator that will automatically update the progress bar
+    when iterated.
+
+    # *
+
+    # * @template TKey
+
+    # * @template TValue
+
+    # *
+
+    # * @param iterable<TKey, TValue> $iterable
+
+    # * @param int|null               $max      Number of steps to complete the bar
+    (0 if indeterminate), if null it will be inferred from $iterable
+
+    # *
+
+    # * @return iterable<TKey, TValue>'
+- name: start
+  visibility: public
+  parameters:
+  - name: max
+    default: 'null'
+  - name: startAt
+    default: '0'
+  comment: '# * Starts the progress output.
+
+    # *
+
+    # * @param int|null $max     Number of steps to complete the bar (0 if indeterminate),
+    null to leave unchanged
+
+    # * @param int      $startAt The starting point of the bar (useful e.g. when resuming
+    a previously started bar)'
+- name: advance
+  visibility: public
+  parameters:
+  - name: step
+    default: '1'
+  comment: '# * Advances the progress output X steps.
+
+    # *
+
+    # * @param int $step Number of steps to advance'
+- name: setOverwrite
+  visibility: public
+  parameters:
+  - name: overwrite
+  comment: '# * Sets whether to overwrite the progressbar, false for new line.'
+- name: setProgress
+  visibility: public
+  parameters:
+  - name: step
+  comment: null
+- name: setMaxSteps
+  visibility: public
+  parameters:
+  - name: max
+  comment: null
+- name: finish
+  visibility: public
+  parameters: []
+  comment: '# * Finishes the progress output.'
+- name: display
+  visibility: public
+  parameters: []
+  comment: '# * Outputs the current progress string.'
+- name: clear
+  visibility: public
+  parameters: []
+  comment: '# * Removes the progress bar from the current line.
+
+    # *
+
+    # * This is useful if you wish to write some output
+
+    # * while a progress bar is running.
+
+    # * Call display() to show the progress bar again.'
+- name: setRealFormat
+  visibility: private
+  parameters:
+  - name: format
+  comment: null
+- name: overwrite
+  visibility: private
+  parameters:
+  - name: message
+  comment: '# * Overwrites a previous message to the output.'
+- name: determineBestFormat
+  visibility: private
+  parameters: []
+  comment: null
+- name: initPlaceholderFormatters
+  visibility: private
+  parameters: []
+  comment: null
+- name: initFormats
+  visibility: private
+  parameters: []
+  comment: null
+- name: buildLine
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Console\Cursor
+- Symfony\Component\Console\Exception\LogicException
+- Symfony\Component\Console\Output\ConsoleOutputInterface
+- Symfony\Component\Console\Output\ConsoleSectionOutput
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Terminal
+interfaces: []

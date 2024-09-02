@@ -1,0 +1,12 @@
+name: RuntimeException
+class_comment: '# * RuntimeException.
+
+  # *
+
+  # * @author Johannes M. Schmitt <schmittjoh@gmail.com>'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- ExceptionInterface

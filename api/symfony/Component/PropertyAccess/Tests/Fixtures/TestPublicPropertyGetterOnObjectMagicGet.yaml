@@ -1,0 +1,18 @@
+name: TestPublicPropertyGetterOnObjectMagicGet
+class_comment: null
+dependencies: []
+properties:
+- name: a
+  visibility: public
+  comment: null
+- name: b
+  visibility: private
+  comment: null
+methods:
+- name: __get
+  visibility: public
+  parameters:
+  - name: property
+  comment: null
+traits: []
+interfaces: []

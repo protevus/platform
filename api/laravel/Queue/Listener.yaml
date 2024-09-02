@@ -1,0 +1,206 @@
+name: Listener
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: PhpExecutableFinder
+  type: class
+  source: Symfony\Component\Process\PhpExecutableFinder
+- name: Process
+  type: class
+  source: Symfony\Component\Process\Process
+properties:
+- name: commandPath
+  visibility: protected
+  comment: '# * The command working path.
+
+    # *
+
+    # * @var string'
+- name: environment
+  visibility: protected
+  comment: '# * The environment the workers should run under.
+
+    # *
+
+    # * @var string'
+- name: sleep
+  visibility: protected
+  comment: '# * The amount of seconds to wait before polling the queue.
+
+    # *
+
+    # * @var int'
+- name: maxTries
+  visibility: protected
+  comment: '# * The number of times to try a job before logging it failed.
+
+    # *
+
+    # * @var int'
+- name: outputHandler
+  visibility: protected
+  comment: '# * The output handler callback.
+
+    # *
+
+    # * @var \Closure|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: commandPath
+  comment: "# * The command working path.\n# *\n# * @var string\n# */\n# protected\
+    \ $commandPath;\n# \n# /**\n# * The environment the workers should run under.\n\
+    # *\n# * @var string\n# */\n# protected $environment;\n# \n# /**\n# * The amount\
+    \ of seconds to wait before polling the queue.\n# *\n# * @var int\n# */\n# protected\
+    \ $sleep = 3;\n# \n# /**\n# * The number of times to try a job before logging\
+    \ it failed.\n# *\n# * @var int\n# */\n# protected $maxTries = 0;\n# \n# /**\n\
+    # * The output handler callback.\n# *\n# * @var \\Closure|null\n# */\n# protected\
+    \ $outputHandler;\n# \n# /**\n# * Create a new queue listener.\n# *\n# * @param\
+    \  string  $commandPath\n# * @return void"
+- name: phpBinary
+  visibility: protected
+  parameters: []
+  comment: '# * Get the PHP binary.
+
+    # *
+
+    # * @return string'
+- name: artisanBinary
+  visibility: protected
+  parameters: []
+  comment: '# * Get the Artisan binary.
+
+    # *
+
+    # * @return string'
+- name: listen
+  visibility: public
+  parameters:
+  - name: connection
+  - name: queue
+  - name: options
+  comment: '# * Listen to the given queue connection.
+
+    # *
+
+    # * @param  string  $connection
+
+    # * @param  string  $queue
+
+    # * @param  \Illuminate\Queue\ListenerOptions  $options
+
+    # * @return void'
+- name: makeProcess
+  visibility: public
+  parameters:
+  - name: connection
+  - name: queue
+  - name: options
+  comment: '# * Create a new Symfony process for the worker.
+
+    # *
+
+    # * @param  string  $connection
+
+    # * @param  string  $queue
+
+    # * @param  \Illuminate\Queue\ListenerOptions  $options
+
+    # * @return \Symfony\Component\Process\Process'
+- name: addEnvironment
+  visibility: protected
+  parameters:
+  - name: command
+  - name: options
+  comment: '# * Add the environment option to the given command.
+
+    # *
+
+    # * @param  array  $command
+
+    # * @param  \Illuminate\Queue\ListenerOptions  $options
+
+    # * @return array'
+- name: createCommand
+  visibility: protected
+  parameters:
+  - name: connection
+  - name: queue
+  - name: options
+  comment: '# * Create the command with the listener options.
+
+    # *
+
+    # * @param  string  $connection
+
+    # * @param  string  $queue
+
+    # * @param  \Illuminate\Queue\ListenerOptions  $options
+
+    # * @return array'
+- name: runProcess
+  visibility: public
+  parameters:
+  - name: process
+  - name: memory
+  comment: '# * Run the given process.
+
+    # *
+
+    # * @param  \Symfony\Component\Process\Process  $process
+
+    # * @param  int  $memory
+
+    # * @return void'
+- name: handleWorkerOutput
+  visibility: protected
+  parameters:
+  - name: type
+  - name: line
+  comment: '# * Handle output from the worker process.
+
+    # *
+
+    # * @param  int  $type
+
+    # * @param  string  $line
+
+    # * @return void'
+- name: memoryExceeded
+  visibility: public
+  parameters:
+  - name: memoryLimit
+  comment: '# * Determine if the memory limit has been exceeded.
+
+    # *
+
+    # * @param  int  $memoryLimit
+
+    # * @return bool'
+- name: stop
+  visibility: public
+  parameters: []
+  comment: '# * Stop listening and bail out of the script.
+
+    # *
+
+    # * @return never'
+- name: setOutputHandler
+  visibility: public
+  parameters:
+  - name: outputHandler
+  comment: '# * Set the output handler callback.
+
+    # *
+
+    # * @param  \Closure  $outputHandler
+
+    # * @return void'
+traits:
+- Closure
+- Symfony\Component\Process\PhpExecutableFinder
+- Symfony\Component\Process\Process
+interfaces: []

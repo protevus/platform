@@ -1,0 +1,92 @@
+name: TypeContextFactory
+class_comment: null
+dependencies:
+- name: TemplateTagValueNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\PhpDoc\TemplateTagValueNode
+- name: Lexer
+  type: class
+  source: PHPStan\PhpDocParser\Lexer\Lexer
+- name: ConstExprParser
+  type: class
+  source: PHPStan\PhpDocParser\Parser\ConstExprParser
+- name: PhpDocParser
+  type: class
+  source: PHPStan\PhpDocParser\Parser\PhpDocParser
+- name: TokenIterator
+  type: class
+  source: PHPStan\PhpDocParser\Parser\TokenIterator
+- name: TypeParser
+  type: class
+  source: PHPStan\PhpDocParser\Parser\TypeParser
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\TypeInfo\Exception\RuntimeException
+- name: UnsupportedException
+  type: class
+  source: Symfony\Component\TypeInfo\Exception\UnsupportedException
+- name: Type
+  type: class
+  source: Symfony\Component\TypeInfo\Type
+- name: StringTypeResolver
+  type: class
+  source: Symfony\Component\TypeInfo\TypeResolver\StringTypeResolver
+properties: []
+methods:
+- name: collectUses
+  visibility: private
+  parameters:
+  - name: reflection
+  comment: "# * Creates a type resolving context.\n# *\n# * @author Mathias Arlaud\
+    \ <mathias.arlaud@gmail.com>\n# * @author Baptiste Leduc <baptiste.leduc@gmail.com>\n\
+    # *\n# * @experimental\n# */\n# final class TypeContextFactory\n# {\n# /**\n#\
+    \ * @var array<class-string, \\ReflectionClass>\n# */\n# private static array\
+    \ $reflectionClassCache = [];\n# \n# private ?Lexer $phpstanLexer = null;\n# private\
+    \ ?PhpDocParser $phpstanParser = null;\n# \n# public function __construct(\n#\
+    \ private readonly ?StringTypeResolver $stringTypeResolver = null,\n# ) {\n# }\n\
+    # \n# public function createFromClassName(string $calledClassName, ?string $declaringClassName\
+    \ = null): TypeContext\n# {\n# $declaringClassName ??= $calledClassName;\n# \n\
+    # $calledClassPath = explode('\\\\', $calledClassName);\n# $declaringClassPath\
+    \ = explode('\\\\', $declaringClassName);\n# \n# $declaringClassReflection = self::$reflectionClassCache[$declaringClassName]\
+    \ ??= new \\ReflectionClass($declaringClassName);\n# \n# $typeContext = new TypeContext(\n\
+    # end($calledClassPath),\n# end($declaringClassPath),\n# trim($declaringClassReflection->getNamespaceName(),\
+    \ '\\\\'),\n# $this->collectUses($declaringClassReflection),\n# );\n# \n# return\
+    \ new TypeContext(\n# $typeContext->calledClassName,\n# $typeContext->declaringClassName,\n\
+    # $typeContext->namespace,\n# $typeContext->uses,\n# $this->collectTemplates($declaringClassReflection,\
+    \ $typeContext),\n# );\n# }\n# \n# public function createFromReflection(\\Reflector\
+    \ $reflection): ?TypeContext\n# {\n# $declaringClassReflection = match (true)\
+    \ {\n# $reflection instanceof \\ReflectionClass => $reflection,\n# $reflection\
+    \ instanceof \\ReflectionMethod => $reflection->getDeclaringClass(),\n# $reflection\
+    \ instanceof \\ReflectionProperty => $reflection->getDeclaringClass(),\n# $reflection\
+    \ instanceof \\ReflectionParameter => $reflection->getDeclaringClass(),\n# $reflection\
+    \ instanceof \\ReflectionFunctionAbstract => $reflection->getClosureScopeClass(),\n\
+    # default => null,\n# };\n# \n# if (null === $declaringClassReflection) {\n# return\
+    \ null;\n# }\n# \n# $typeContext = new TypeContext(\n# $declaringClassReflection->getShortName(),\n\
+    # $declaringClassReflection->getShortName(),\n# $declaringClassReflection->getNamespaceName(),\n\
+    # $this->collectUses($declaringClassReflection),\n# );\n# \n# $templates = match\
+    \ (true) {\n# $reflection instanceof \\ReflectionFunctionAbstract => $this->collectTemplates($reflection,\
+    \ $typeContext) + $this->collectTemplates($declaringClassReflection, $typeContext),\n\
+    # $reflection instanceof \\ReflectionParameter => $this->collectTemplates($reflection->getDeclaringFunction(),\
+    \ $typeContext) + $this->collectTemplates($declaringClassReflection, $typeContext),\n\
+    # default => $this->collectTemplates($declaringClassReflection, $typeContext),\n\
+    # };\n# \n# return new TypeContext(\n# $typeContext->calledClassName,\n# $typeContext->declaringClassName,\n\
+    # $typeContext->namespace,\n# $typeContext->uses,\n# $templates,\n# );\n# }\n\
+    # \n# /**\n# * @return array<string, string>"
+- name: collectTemplates
+  visibility: private
+  parameters:
+  - name: reflection
+  - name: typeContext
+  comment: '# * @return array<string, Type>'
+traits:
+- PHPStan\PhpDocParser\Ast\PhpDoc\TemplateTagValueNode
+- PHPStan\PhpDocParser\Lexer\Lexer
+- PHPStan\PhpDocParser\Parser\ConstExprParser
+- PHPStan\PhpDocParser\Parser\PhpDocParser
+- PHPStan\PhpDocParser\Parser\TokenIterator
+- PHPStan\PhpDocParser\Parser\TypeParser
+- Symfony\Component\TypeInfo\Exception\RuntimeException
+- Symfony\Component\TypeInfo\Exception\UnsupportedException
+- Symfony\Component\TypeInfo\Type
+- Symfony\Component\TypeInfo\TypeResolver\StringTypeResolver
+interfaces: []

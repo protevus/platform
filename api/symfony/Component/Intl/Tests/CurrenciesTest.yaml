@@ -1,0 +1,207 @@
+name: CurrenciesTest
+class_comment: '# * @group intl-data'
+dependencies:
+- name: Currencies
+  type: class
+  source: Symfony\Component\Intl\Currencies
+- name: MissingResourceException
+  type: class
+  source: Symfony\Component\Intl\Exception\MissingResourceException
+properties: []
+methods:
+- name: testGetNames
+  visibility: public
+  parameters:
+  - name: displayLocale
+  comment: "# * @group intl-data\n# */\n# class CurrenciesTest extends ResourceBundleTestCase\n\
+    # {\n# // The below arrays document the state of the ICU data bundled with this\
+    \ package.\n# \n# private const CURRENCIES = [\n# 'ADP',\n# 'AED',\n# 'AFA',\n\
+    # 'AFN',\n# 'ALK',\n# 'ALL',\n# 'AMD',\n# 'ANG',\n# 'AOA',\n# 'AOK',\n# 'AON',\n\
+    # 'AOR',\n# 'ARA',\n# 'ARL',\n# 'ARM',\n# 'ARP',\n# 'ARS',\n# 'ATS',\n# 'AUD',\n\
+    # 'AWG',\n# 'AZM',\n# 'AZN',\n# 'BAD',\n# 'BAM',\n# 'BAN',\n# 'BBD',\n# 'BDT',\n\
+    # 'BEC',\n# 'BEF',\n# 'BEL',\n# 'BGL',\n# 'BGM',\n# 'BGN',\n# 'BGO',\n# 'BHD',\n\
+    # 'BIF',\n# 'BMD',\n# 'BND',\n# 'BOB',\n# 'BOL',\n# 'BOP',\n# 'BOV',\n# 'BRB',\n\
+    # 'BRC',\n# 'BRE',\n# 'BRL',\n# 'BRN',\n# 'BRR',\n# 'BRZ',\n# 'BSD',\n# 'BTN',\n\
+    # 'BUK',\n# 'BWP',\n# 'BYB',\n# 'BYN',\n# 'BYR',\n# 'BZD',\n# 'CAD',\n# 'CDF',\n\
+    # 'CHE',\n# 'CHF',\n# 'CHW',\n# 'CLE',\n# 'CLF',\n# 'CLP',\n# 'CNH',\n# 'CNX',\n\
+    # 'CNY',\n# 'COP',\n# 'COU',\n# 'CRC',\n# 'CSD',\n# 'CSK',\n# 'CUC',\n# 'CUP',\n\
+    # 'CVE',\n# 'CYP',\n# 'CZK',\n# 'DDM',\n# 'DEM',\n# 'DJF',\n# 'DKK',\n# 'DOP',\n\
+    # 'DZD',\n# 'ECS',\n# 'ECV',\n# 'EEK',\n# 'EGP',\n# 'ERN',\n# 'ESA',\n# 'ESB',\n\
+    # 'ESP',\n# 'ETB',\n# 'EUR',\n# 'FIM',\n# 'FJD',\n# 'FKP',\n# 'FRF',\n# 'GBP',\n\
+    # 'GEK',\n# 'GEL',\n# 'GHC',\n# 'GHS',\n# 'GIP',\n# 'GMD',\n# 'GNF',\n# 'GNS',\n\
+    # 'GQE',\n# 'GRD',\n# 'GTQ',\n# 'GWE',\n# 'GWP',\n# 'GYD',\n# 'HKD',\n# 'HNL',\n\
+    # 'HRD',\n# 'HRK',\n# 'HTG',\n# 'HUF',\n# 'IDR',\n# 'IEP',\n# 'ILP',\n# 'ILR',\n\
+    # 'ILS',\n# 'INR',\n# 'IQD',\n# 'IRR',\n# 'ISJ',\n# 'ISK',\n# 'ITL',\n# 'JMD',\n\
+    # 'JOD',\n# 'JPY',\n# 'KES',\n# 'KGS',\n# 'KHR',\n# 'KMF',\n# 'KPW',\n# 'KRH',\n\
+    # 'KRO',\n# 'KRW',\n# 'KWD',\n# 'KYD',\n# 'KZT',\n# 'LAK',\n# 'LBP',\n# 'LKR',\n\
+    # 'LRD',\n# 'LSL',\n# 'LTL',\n# 'LTT',\n# 'LUC',\n# 'LUF',\n# 'LUL',\n# 'LVL',\n\
+    # 'LVR',\n# 'LYD',\n# 'MAD',\n# 'MAF',\n# 'MCF',\n# 'MDC',\n# 'MDL',\n# 'MGA',\n\
+    # 'MGF',\n# 'MKD',\n# 'MKN',\n# 'MLF',\n# 'MMK',\n# 'MNT',\n# 'MOP',\n# 'MRO',\n\
+    # 'MRU',\n# 'MTL',\n# 'MTP',\n# 'MUR',\n# 'MVP',\n# 'MVR',\n# 'MWK',\n# 'MXN',\n\
+    # 'MXP',\n# 'MXV',\n# 'MYR',\n# 'MZE',\n# 'MZM',\n# 'MZN',\n# 'NAD',\n# 'NGN',\n\
+    # 'NIC',\n# 'NIO',\n# 'NLG',\n# 'NOK',\n# 'NPR',\n# 'NZD',\n# 'OMR',\n# 'PAB',\n\
+    # 'PEI',\n# 'PEN',\n# 'PES',\n# 'PGK',\n# 'PHP',\n# 'PKR',\n# 'PLN',\n# 'PLZ',\n\
+    # 'PTE',\n# 'PYG',\n# 'QAR',\n# 'RHD',\n# 'ROL',\n# 'RON',\n# 'RSD',\n# 'RUB',\n\
+    # 'RUR',\n# 'RWF',\n# 'SAR',\n# 'SBD',\n# 'SCR',\n# 'SDD',\n# 'SDG',\n# 'SDP',\n\
+    # 'SEK',\n# 'SGD',\n# 'SHP',\n# 'SIT',\n# 'SKK',\n# 'SLE',\n# 'SLL',\n# 'SOS',\n\
+    # 'SRD',\n# 'SRG',\n# 'SSP',\n# 'STD',\n# 'STN',\n# 'SUR',\n# 'SVC',\n# 'SYP',\n\
+    # 'SZL',\n# 'THB',\n# 'TJR',\n# 'TJS',\n# 'TMM',\n# 'TMT',\n# 'TND',\n# 'TOP',\n\
+    # 'TPE',\n# 'TRL',\n# 'TRY',\n# 'TTD',\n# 'TWD',\n# 'TZS',\n# 'UAH',\n# 'UAK',\n\
+    # 'UGS',\n# 'UGX',\n# 'USD',\n# 'USN',\n# 'USS',\n# 'UYI',\n# 'UYP',\n# 'UYU',\n\
+    # 'UYW',\n# 'UZS',\n# 'VEB',\n# 'VED',\n# 'VEF',\n# 'VES',\n# 'VND',\n# 'VNN',\n\
+    # 'VUV',\n# 'WST',\n# 'XAF',\n# 'XCD',\n# 'XEU',\n# 'XFO',\n# 'XFU',\n# 'XOF',\n\
+    # 'XPF',\n# 'XRE',\n# 'YDD',\n# 'YER',\n# 'YUD',\n# 'YUM',\n# 'YUN',\n# 'YUR',\n\
+    # 'ZAL',\n# 'ZAR',\n# 'ZMK',\n# 'ZMW',\n# 'ZRN',\n# 'ZRZ',\n# 'ZWD',\n# 'ZWL',\n\
+    # 'ZWR',\n# ];\n# \n# private const ALPHA3_TO_NUMERIC = [\n# 'AFA' => 4,\n# 'ALK'\
+    \ => 8,\n# 'ALL' => 8,\n# 'DZD' => 12,\n# 'ADP' => 20,\n# 'AON' => 24,\n# 'AOK'\
+    \ => 24,\n# 'AZM' => 31,\n# 'ARA' => 32,\n# 'ARP' => 32,\n# 'ARS' => 32,\n# 'AUD'\
+    \ => 36,\n# 'ATS' => 40,\n# 'BSD' => 44,\n# 'BHD' => 48,\n# 'BDT' => 50,\n# 'AMD'\
+    \ => 51,\n# 'BBD' => 52,\n# 'BEF' => 56,\n# 'BMD' => 60,\n# 'BTN' => 64,\n# 'BOB'\
+    \ => 68,\n# 'BOP' => 68,\n# 'BAD' => 70,\n# 'BWP' => 72,\n# 'BRN' => 76,\n# 'BRE'\
+    \ => 76,\n# 'BRC' => 76,\n# 'BRB' => 76,\n# 'BZD' => 84,\n# 'SBD' => 90,\n# 'BND'\
+    \ => 96,\n# 'BGL' => 100,\n# 'MMK' => 104,\n# 'BUK' => 104,\n# 'BIF' => 108,\n\
+    # 'BYB' => 112,\n# 'KHR' => 116,\n# 'CAD' => 124,\n# 'CVE' => 132,\n# 'KYD' =>\
+    \ 136,\n# 'LKR' => 144,\n# 'CLP' => 152,\n# 'CNY' => 156,\n# 'COP' => 170,\n#\
+    \ 'KMF' => 174,\n# 'ZRZ' => 180,\n# 'ZRN' => 180,\n# 'CRC' => 188,\n# 'HRK' =>\
+    \ 191,\n# 'HRD' => 191,\n# 'CUP' => 192,\n# 'CYP' => 196,\n# 'CSK' => 200,\n#\
+    \ 'CZK' => 203,\n# 'DKK' => 208,\n# 'DOP' => 214,\n# 'ECS' => 218,\n# 'SVC' =>\
+    \ 222,\n# 'GQE' => 226,\n# 'ETB' => 230,\n# 'ERN' => 232,\n# 'EEK' => 233,\n#\
+    \ 'FKP' => 238,\n# 'FJD' => 242,\n# 'FIM' => 246,\n# 'FRF' => 250,\n# 'DJF' =>\
+    \ 262,\n# 'GEK' => 268,\n# 'GMD' => 270,\n# 'DEM' => 276,\n# 'DDM' => 278,\n#\
+    \ 'GHC' => 288,\n# 'GIP' => 292,\n# 'GRD' => 300,\n# 'GTQ' => 320,\n# 'GNS' =>\
+    \ 324,\n# 'GNF' => 324,\n# 'GYD' => 328,\n# 'HTG' => 332,\n# 'HNL' => 340,\n#\
+    \ 'HKD' => 344,\n# 'HUF' => 348,\n# 'ISJ' => 352,\n# 'ISK' => 352,\n# 'INR' =>\
+    \ 356,\n# 'IDR' => 360,\n# 'IRR' => 364,\n# 'IQD' => 368,\n# 'IEP' => 372,\n#\
+    \ 'ILP' => 376,\n# 'ILR' => 376,\n# 'ILS' => 376,\n# 'ITL' => 380,\n# 'JMD' =>\
+    \ 388,\n# 'JPY' => 392,\n# 'KZT' => 398,\n# 'JOD' => 400,\n# 'KES' => 404,\n#\
+    \ 'KPW' => 408,\n# 'KRW' => 410,\n# 'KWD' => 414,\n# 'KGS' => 417,\n# 'LAK' =>\
+    \ 418,\n# 'LBP' => 422,\n# 'LSL' => 426,\n# 'LVR' => 428,\n# 'LVL' => 428,\n#\
+    \ 'LRD' => 430,\n# 'LYD' => 434,\n# 'LTL' => 440,\n# 'LTT' => 440,\n# 'LUF' =>\
+    \ 442,\n# 'MOP' => 446,\n# 'MGF' => 450,\n# 'MWK' => 454,\n# 'MYR' => 458,\n#\
+    \ 'MVR' => 462,\n# 'MLF' => 466,\n# 'MTL' => 470,\n# 'MTP' => 470,\n# 'MRO' =>\
+    \ 478,\n# 'MUR' => 480,\n# 'MXP' => 484,\n# 'MXN' => 484,\n# 'MNT' => 496,\n#\
+    \ 'MDL' => 498,\n# 'MAD' => 504,\n# 'MZE' => 508,\n# 'MZM' => 508,\n# 'OMR' =>\
+    \ 512,\n# 'NAD' => 516,\n# 'NPR' => 524,\n# 'NLG' => 528,\n# 'ANG' => 532,\n#\
+    \ 'AWG' => 533,\n# 'VUV' => 548,\n# 'NZD' => 554,\n# 'NIC' => 558,\n# 'NIO' =>\
+    \ 558,\n# 'NGN' => 566,\n# 'NOK' => 578,\n# 'PKR' => 586,\n# 'PAB' => 590,\n#\
+    \ 'PGK' => 598,\n# 'PYG' => 600,\n# 'PEI' => 604,\n# 'PES' => 604,\n# 'PEN' =>\
+    \ 604,\n# 'PHP' => 608,\n# 'PLZ' => 616,\n# 'PTE' => 620,\n# 'GWP' => 624,\n#\
+    \ 'GWE' => 624,\n# 'TPE' => 626,\n# 'QAR' => 634,\n# 'ROL' => 642,\n# 'RUB' =>\
+    \ 643,\n# 'RWF' => 646,\n# 'SHP' => 654,\n# 'STD' => 678,\n# 'SAR' => 682,\n#\
+    \ 'SCR' => 690,\n# 'SLL' => 694,\n# 'SGD' => 702,\n# 'SKK' => 703,\n# 'VND' =>\
+    \ 704,\n# 'SIT' => 705,\n# 'SOS' => 706,\n# 'ZAR' => 710,\n# 'ZWD' => 716,\n#\
+    \ 'RHD' => 716,\n# 'YDD' => 720,\n# 'ESP' => 724,\n# 'SSP' => 728,\n# 'SDD' =>\
+    \ 736,\n# 'SDP' => 736,\n# 'SRG' => 740,\n# 'SZL' => 748,\n# 'SEK' => 752,\n#\
+    \ 'CHF' => 756,\n# 'SYP' => 760,\n# 'TJR' => 762,\n# 'THB' => 764,\n# 'TOP' =>\
+    \ 776,\n# 'TTD' => 780,\n# 'AED' => 784,\n# 'TND' => 788,\n# 'TRL' => 792,\n#\
+    \ 'TMM' => 795,\n# 'UGX' => 800,\n# 'UGS' => 800,\n# 'UAK' => 804,\n# 'MKD' =>\
+    \ 807,\n# 'RUR' => 810,\n# 'SUR' => 810,\n# 'EGP' => 818,\n# 'GBP' => 826,\n#\
+    \ 'TZS' => 834,\n# 'USD' => 840,\n# 'UYP' => 858,\n# 'UYU' => 858,\n# 'UZS' =>\
+    \ 860,\n# 'VEB' => 862,\n# 'WST' => 882,\n# 'YER' => 886,\n# 'YUN' => 890,\n#\
+    \ 'YUD' => 890,\n# 'YUM' => 891,\n# 'CSD' => 891,\n# 'ZMK' => 894,\n# 'TWD' =>\
+    \ 901,\n# 'SLE' => 925,\n# 'VED' => 926,\n# 'UYW' => 927,\n# 'VES' => 928,\n#\
+    \ 'MRU' => 929,\n# 'STN' => 930,\n# 'CUC' => 931,\n# 'ZWL' => 932,\n# 'BYN' =>\
+    \ 933,\n# 'TMT' => 934,\n# 'ZWR' => 935,\n# 'GHS' => 936,\n# 'VEF' => 937,\n#\
+    \ 'SDG' => 938,\n# 'UYI' => 940,\n# 'RSD' => 941,\n# 'MZN' => 943,\n# 'AZN' =>\
+    \ 944,\n# 'RON' => 946,\n# 'CHE' => 947,\n# 'CHW' => 948,\n# 'TRY' => 949,\n#\
+    \ 'XAF' => 950,\n# 'XCD' => 951,\n# 'XOF' => 952,\n# 'XPF' => 953,\n# 'XEU' =>\
+    \ 954,\n# 'ZMW' => 967,\n# 'SRD' => 968,\n# 'MGA' => 969,\n# 'COU' => 970,\n#\
+    \ 'AFN' => 971,\n# 'TJS' => 972,\n# 'AOA' => 973,\n# 'BYR' => 974,\n# 'BGN' =>\
+    \ 975,\n# 'CDF' => 976,\n# 'BAM' => 977,\n# 'EUR' => 978,\n# 'MXV' => 979,\n#\
+    \ 'UAH' => 980,\n# 'GEL' => 981,\n# 'AOR' => 982,\n# 'ECV' => 983,\n# 'BOV' =>\
+    \ 984,\n# 'PLN' => 985,\n# 'BRL' => 986,\n# 'BRR' => 987,\n# 'LUL' => 988,\n#\
+    \ 'LUC' => 989,\n# 'CLF' => 990,\n# 'ZAL' => 991,\n# 'BEL' => 992,\n# 'BEC' =>\
+    \ 993,\n# 'ESB' => 995,\n# 'ESA' => 996,\n# 'USN' => 997,\n# 'USS' => 998,\n#\
+    \ ];\n# \n# public function testGetCurrencyCodes()\n# {\n# $this->assertSame(self::CURRENCIES,\
+    \ Currencies::getCurrencyCodes());\n# }\n# \n# /**\n# * @dataProvider provideLocales"
+- name: testGetNamesDefaultLocale
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetNamesSupportsAliases
+  visibility: public
+  parameters:
+  - name: alias
+  - name: ofLocale
+  comment: '# * @dataProvider provideLocaleAliases'
+- name: testGetName
+  visibility: public
+  parameters:
+  - name: displayLocale
+  comment: '# * @dataProvider provideLocales'
+- name: testGetNameDefaultLocale
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetSymbol
+  visibility: public
+  parameters:
+  - name: displayLocale
+  comment: '# * @dataProvider provideLocales'
+- name: provideCurrencies
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetFractionDigits
+  visibility: public
+  parameters:
+  - name: currency
+  comment: '# * @dataProvider provideCurrencies'
+- name: testGetRoundingIncrement
+  visibility: public
+  parameters:
+  - name: currency
+  comment: '# * @dataProvider provideCurrencies'
+- name: provideCurrenciesWithNumericEquivalent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetNumericCode
+  visibility: public
+  parameters:
+  - name: currency
+  comment: '# * @dataProvider provideCurrenciesWithNumericEquivalent'
+- name: provideCurrenciesWithoutNumericEquivalent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetNumericCodeFailsIfNoNumericEquivalent
+  visibility: public
+  parameters:
+  - name: currency
+  comment: '# * @dataProvider provideCurrenciesWithoutNumericEquivalent'
+- name: provideValidNumericCodes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testForNumericCode
+  visibility: public
+  parameters:
+  - name: numeric
+  - name: expected
+  comment: '# * @dataProvider provideValidNumericCodes'
+- name: provideInvalidNumericCodes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testForNumericCodeFailsIfInvalidNumericCode
+  visibility: public
+  parameters:
+  - name: currency
+  comment: '# * @dataProvider provideInvalidNumericCodes'
+- name: testGetNameWithInvalidCurrencyCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExists
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNumericToAlpha3Mapping
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Intl\Currencies
+- Symfony\Component\Intl\Exception\MissingResourceException
+interfaces: []

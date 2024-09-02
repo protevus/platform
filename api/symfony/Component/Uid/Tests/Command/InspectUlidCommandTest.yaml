@@ -1,0 +1,23 @@
+name: InspectUlidCommandTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+- name: InspectUlidCommand
+  type: class
+  source: Symfony\Component\Uid\Command\InspectUlidCommand
+properties: []
+methods:
+- name: test
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Tester\CommandTester
+- Symfony\Component\Uid\Command\InspectUlidCommand
+interfaces: []

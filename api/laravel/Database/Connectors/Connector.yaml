@@ -1,0 +1,124 @@
+name: Connector
+class_comment: null
+dependencies:
+- name: Exception
+  type: class
+  source: Exception
+- name: DetectsLostConnections
+  type: class
+  source: Illuminate\Database\DetectsLostConnections
+- name: PDO
+  type: class
+  source: PDO
+- name: Throwable
+  type: class
+  source: Throwable
+- name: DetectsLostConnections
+  type: class
+  source: DetectsLostConnections
+properties:
+- name: options
+  visibility: protected
+  comment: '# * The default PDO connection options.
+
+    # *
+
+    # * @var array'
+methods:
+- name: createConnection
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: config
+  - name: options
+  comment: "# * The default PDO connection options.\n# *\n# * @var array\n# */\n#\
+    \ protected $options = [\n# PDO::ATTR_CASE => PDO::CASE_NATURAL,\n# PDO::ATTR_ERRMODE\
+    \ => PDO::ERRMODE_EXCEPTION,\n# PDO::ATTR_ORACLE_NULLS => PDO::NULL_NATURAL,\n\
+    # PDO::ATTR_STRINGIFY_FETCHES => false,\n# PDO::ATTR_EMULATE_PREPARES => false,\n\
+    # ];\n# \n# /**\n# * Create a new PDO connection.\n# *\n# * @param  string  $dsn\n\
+    # * @param  array  $config\n# * @param  array  $options\n# * @return \\PDO\n#\
+    \ *\n# * @throws \\Exception"
+- name: createPdoConnection
+  visibility: protected
+  parameters:
+  - name: dsn
+  - name: username
+  - name: password
+  - name: options
+  comment: '# * Create a new PDO connection instance.
+
+    # *
+
+    # * @param  string  $dsn
+
+    # * @param  string  $username
+
+    # * @param  string  $password
+
+    # * @param  array  $options
+
+    # * @return \PDO'
+- name: tryAgainIfCausedByLostConnection
+  visibility: protected
+  parameters:
+  - name: e
+  - name: dsn
+  - name: username
+  - name: password
+  - name: options
+  comment: '# * Handle an exception that occurred during connect execution.
+
+    # *
+
+    # * @param  \Throwable  $e
+
+    # * @param  string  $dsn
+
+    # * @param  string  $username
+
+    # * @param  string  $password
+
+    # * @param  array  $options
+
+    # * @return \PDO
+
+    # *
+
+    # * @throws \Throwable'
+- name: getOptions
+  visibility: public
+  parameters:
+  - name: config
+  comment: '# * Get the PDO options based on the configuration.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return array'
+- name: getDefaultOptions
+  visibility: public
+  parameters: []
+  comment: '# * Get the default PDO connection options.
+
+    # *
+
+    # * @return array'
+- name: setDefaultOptions
+  visibility: public
+  parameters:
+  - name: options
+  comment: '# * Set the default PDO connection options.
+
+    # *
+
+    # * @param  array  $options
+
+    # * @return void'
+traits:
+- Exception
+- Illuminate\Database\DetectsLostConnections
+- PDO
+- Throwable
+- DetectsLostConnections
+interfaces: []

@@ -1,0 +1,161 @@
+name: ChannelManager
+class_comment: null
+dependencies:
+- name: Bus
+  type: class
+  source: Illuminate\Contracts\Bus\Dispatcher
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: DispatcherContract
+  type: class
+  source: Illuminate\Contracts\Notifications\Dispatcher
+- name: FactoryContract
+  type: class
+  source: Illuminate\Contracts\Notifications\Factory
+- name: Manager
+  type: class
+  source: Illuminate\Support\Manager
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties:
+- name: defaultChannel
+  visibility: protected
+  comment: '# * The default channel used to deliver messages.
+
+    # *
+
+    # * @var string'
+- name: locale
+  visibility: protected
+  comment: '# * The locale used when sending notifications.
+
+    # *
+
+    # * @var string|null'
+methods:
+- name: send
+  visibility: public
+  parameters:
+  - name: notifiables
+  - name: notification
+  comment: "# * The default channel used to deliver messages.\n# *\n# * @var string\n\
+    # */\n# protected $defaultChannel = 'mail';\n# \n# /**\n# * The locale used when\
+    \ sending notifications.\n# *\n# * @var string|null\n# */\n# protected $locale;\n\
+    # \n# /**\n# * Send the given notification to the given notifiable entities.\n\
+    # *\n# * @param  \\Illuminate\\Support\\Collection|array|mixed  $notifiables\n\
+    # * @param  mixed  $notification\n# * @return void"
+- name: sendNow
+  visibility: public
+  parameters:
+  - name: notifiables
+  - name: notification
+  - name: channels
+    default: 'null'
+  comment: '# * Send the given notification immediately.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
+
+    # * @param  mixed  $notification
+
+    # * @param  array|null  $channels
+
+    # * @return void'
+- name: channel
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Get a channel instance.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @return mixed'
+- name: createDatabaseDriver
+  visibility: protected
+  parameters: []
+  comment: '# * Create an instance of the database driver.
+
+    # *
+
+    # * @return \Illuminate\Notifications\Channels\DatabaseChannel'
+- name: createBroadcastDriver
+  visibility: protected
+  parameters: []
+  comment: '# * Create an instance of the broadcast driver.
+
+    # *
+
+    # * @return \Illuminate\Notifications\Channels\BroadcastChannel'
+- name: createMailDriver
+  visibility: protected
+  parameters: []
+  comment: '# * Create an instance of the mail driver.
+
+    # *
+
+    # * @return \Illuminate\Notifications\Channels\MailChannel'
+- name: createDriver
+  visibility: protected
+  parameters:
+  - name: driver
+  comment: '# * Create a new driver instance.
+
+    # *
+
+    # * @param  string  $driver
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: getDefaultDriver
+  visibility: public
+  parameters: []
+  comment: '# * Get the default channel driver name.
+
+    # *
+
+    # * @return string'
+- name: deliversVia
+  visibility: public
+  parameters: []
+  comment: '# * Get the default channel driver name.
+
+    # *
+
+    # * @return string'
+- name: deliverVia
+  visibility: public
+  parameters:
+  - name: channel
+  comment: '# * Set the default channel driver name.
+
+    # *
+
+    # * @param  string  $channel
+
+    # * @return void'
+- name: locale
+  visibility: public
+  parameters:
+  - name: locale
+  comment: '# * Set the locale of notifications.
+
+    # *
+
+    # * @param  string  $locale
+
+    # * @return $this'
+traits:
+- Illuminate\Contracts\Events\Dispatcher
+- Illuminate\Support\Manager
+- InvalidArgumentException
+interfaces:
+- DispatcherContract

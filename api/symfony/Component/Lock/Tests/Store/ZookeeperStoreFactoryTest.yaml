@@ -1,0 +1,35 @@
+name: ZookeeperStoreFactoryTest
+class_comment: '# * @author Alexandre Daubois <alex.daubois@gmail.com>
+
+  # *
+
+  # * @requires extension zookeeper'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: StoreFactory
+  type: class
+  source: Symfony\Component\Lock\Store\StoreFactory
+- name: ZookeeperStore
+  type: class
+  source: Symfony\Component\Lock\Store\ZookeeperStore
+properties: []
+methods:
+- name: testCreateZooKeeperStore
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateZooKeeperStoreAsDsn
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateZooKeeperStoreWithMultipleHosts
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Lock\Store\StoreFactory
+- Symfony\Component\Lock\Store\ZookeeperStore
+interfaces: []

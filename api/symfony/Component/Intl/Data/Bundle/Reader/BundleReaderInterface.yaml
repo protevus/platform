@@ -1,0 +1,33 @@
+name: BundleReaderInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: read
+  visibility: public
+  parameters:
+  - name: path
+  - name: locale
+  comment: '# * Reads resource bundle files.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # *
+
+    # * @internal
+
+    # */
+
+    # interface BundleReaderInterface
+
+    # {
+
+    # /**
+
+    # * @return mixed returns an array or {@link \ArrayAccess} instance for
+
+    # *               complex data, a scalar value otherwise'
+traits: []
+interfaces: []

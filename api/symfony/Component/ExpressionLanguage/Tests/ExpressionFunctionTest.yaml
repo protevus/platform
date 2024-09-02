@@ -1,0 +1,27 @@
+name: ExpressionFunctionTest
+class_comment: '# * Tests ExpressionFunction.
+
+  # *
+
+  # * @author Dany Maillard <danymaillard93b@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ExpressionFunction
+  type: class
+  source: Symfony\Component\ExpressionLanguage\ExpressionFunction
+properties: []
+methods:
+- name: testFunctionDoesNotExist
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFunctionNamespaced
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\ExpressionLanguage\ExpressionFunction
+interfaces: []

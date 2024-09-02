@@ -1,0 +1,54 @@
+name: RetryBatchCommand
+class_comment: null
+dependencies:
+- name: BatchRepository
+  type: class
+  source: Illuminate\Bus\BatchRepository
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+- name: Isolatable
+  type: class
+  source: Illuminate\Contracts\Console\Isolatable
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+properties:
+- name: signature
+  visibility: protected
+  comment: '# * The console command signature.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+methods:
+- name: handle
+  visibility: public
+  parameters: []
+  comment: "# * The console command signature.\n# *\n# * @var string\n# */\n# protected\
+    \ $signature = 'queue:retry-batch {id : The ID of the batch whose failed jobs\
+    \ should be retried}';\n# \n# /**\n# * The console command description.\n# *\n\
+    # * @var string\n# */\n# protected $description = 'Retry the failed jobs for a\
+    \ batch';\n# \n# /**\n# * Execute the console command.\n# *\n# * @return int|null"
+- name: isolatableId
+  visibility: public
+  parameters: []
+  comment: '# * Get the custom mutex name for an isolated command.
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Bus\BatchRepository
+- Illuminate\Console\Command
+- Illuminate\Contracts\Console\Isolatable
+- Symfony\Component\Console\Attribute\AsCommand
+interfaces:
+- Isolatable

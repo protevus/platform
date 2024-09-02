@@ -1,0 +1,19 @@
+name: ExplainsQueries
+class_comment: null
+dependencies:
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+properties: []
+methods:
+- name: explain
+  visibility: public
+  parameters: []
+  comment: '# * Explains the query.
+
+    # *
+
+    # * @return \Illuminate\Support\Collection'
+traits:
+- Illuminate\Support\Collection
+interfaces: []

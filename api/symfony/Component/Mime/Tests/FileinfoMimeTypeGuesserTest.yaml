@@ -1,0 +1,19 @@
+name: FileinfoMimeTypeGuesserTest
+class_comment: '# * @requires extension fileinfo'
+dependencies:
+- name: FileinfoMimeTypeGuesser
+  type: class
+  source: Symfony\Component\Mime\FileinfoMimeTypeGuesser
+- name: MimeTypeGuesserInterface
+  type: class
+  source: Symfony\Component\Mime\MimeTypeGuesserInterface
+properties: []
+methods:
+- name: getGuesser
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Mime\FileinfoMimeTypeGuesser
+- Symfony\Component\Mime\MimeTypeGuesserInterface
+interfaces: []

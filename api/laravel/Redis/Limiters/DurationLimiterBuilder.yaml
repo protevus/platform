@@ -1,0 +1,142 @@
+name: DurationLimiterBuilder
+class_comment: null
+dependencies:
+- name: LimiterTimeoutException
+  type: class
+  source: Illuminate\Contracts\Redis\LimiterTimeoutException
+- name: InteractsWithTime
+  type: class
+  source: Illuminate\Support\InteractsWithTime
+- name: InteractsWithTime
+  type: class
+  source: InteractsWithTime
+properties:
+- name: connection
+  visibility: public
+  comment: '# * The Redis connection.
+
+    # *
+
+    # * @var \Illuminate\Redis\Connections\Connection'
+- name: name
+  visibility: public
+  comment: '# * The name of the lock.
+
+    # *
+
+    # * @var string'
+- name: maxLocks
+  visibility: public
+  comment: '# * The maximum number of locks that can be obtained per time window.
+
+    # *
+
+    # * @var int'
+- name: decay
+  visibility: public
+  comment: '# * The amount of time the lock window is maintained.
+
+    # *
+
+    # * @var int'
+- name: timeout
+  visibility: public
+  comment: '# * The amount of time to block until a lock is available.
+
+    # *
+
+    # * @var int'
+- name: sleep
+  visibility: public
+  comment: '# * The number of milliseconds to wait between attempts to acquire the
+    lock.
+
+    # *
+
+    # * @var int'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: connection
+  - name: name
+  comment: "# * The Redis connection.\n# *\n# * @var \\Illuminate\\Redis\\Connections\\\
+    Connection\n# */\n# public $connection;\n# \n# /**\n# * The name of the lock.\n\
+    # *\n# * @var string\n# */\n# public $name;\n# \n# /**\n# * The maximum number\
+    \ of locks that can be obtained per time window.\n# *\n# * @var int\n# */\n# public\
+    \ $maxLocks;\n# \n# /**\n# * The amount of time the lock window is maintained.\n\
+    # *\n# * @var int\n# */\n# public $decay;\n# \n# /**\n# * The amount of time to\
+    \ block until a lock is available.\n# *\n# * @var int\n# */\n# public $timeout\
+    \ = 3;\n# \n# /**\n# * The number of milliseconds to wait between attempts to\
+    \ acquire the lock.\n# *\n# * @var int\n# */\n# public $sleep = 750;\n# \n# /**\n\
+    # * Create a new builder instance.\n# *\n# * @param  \\Illuminate\\Redis\\Connections\\\
+    Connection  $connection\n# * @param  string  $name\n# * @return void"
+- name: allow
+  visibility: public
+  parameters:
+  - name: maxLocks
+  comment: '# * Set the maximum number of locks that can be obtained per time window.
+
+    # *
+
+    # * @param  int  $maxLocks
+
+    # * @return $this'
+- name: every
+  visibility: public
+  parameters:
+  - name: decay
+  comment: '# * Set the amount of time the lock window is maintained.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $decay
+
+    # * @return $this'
+- name: block
+  visibility: public
+  parameters:
+  - name: timeout
+  comment: '# * Set the amount of time to block until a lock is available.
+
+    # *
+
+    # * @param  int  $timeout
+
+    # * @return $this'
+- name: sleep
+  visibility: public
+  parameters:
+  - name: sleep
+  comment: '# * The number of milliseconds to wait between lock acquisition attempts.
+
+    # *
+
+    # * @param  int  $sleep
+
+    # * @return $this'
+- name: then
+  visibility: public
+  parameters:
+  - name: callback
+  - name: failure
+    default: 'null'
+  comment: '# * Execute the given callback if a lock is obtained, otherwise call the
+    failure callback.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @param  callable|null  $failure
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Redis\LimiterTimeoutException'
+traits:
+- Illuminate\Contracts\Redis\LimiterTimeoutException
+- Illuminate\Support\InteractsWithTime
+- InteractsWithTime
+interfaces: []

@@ -1,0 +1,69 @@
+name: VfsIteratorTestTrait
+class_comment: null
+dependencies: []
+properties:
+- name: context
+  visibility: public
+  comment: "# @var array<string, \\Closure(string, 'list_dir_open'|'list_dir_rewind'|'is_dir'):\
+    \ (list<string>|bool)> */\n# public static array $vfsProviders;\n# \n# protected\
+    \ string $vfsScheme;\n# \n# /** @var list<array{string, string, mixed}> */\n#\
+    \ protected array $vfsLog = [];\n# \n# protected function setUp(): void\n# {\n\
+    # parent::setUp();\n# \n# $this->vfsScheme = 'symfony-finder-vfs-test-'.++self::$vfsNextSchemeIndex;\n\
+    # \n# $vfsWrapperClass = \\get_class(new class {\n# /** @var array<string, \\\
+    Closure(string, 'list_dir_open'|'list_dir_rewind'|'is_dir'): (list<string>|bool)>\
+    \ */\n# public static array $vfsProviders = [];\n# \n# /** @var resource"
+methods:
+- name: stream_stat
+  visibility: public
+  parameters: []
+  comment: "# @var array<string, \\Closure(string, 'list_dir_open'|'list_dir_rewind'|'is_dir'):\
+    \ (list<string>|bool)> */\n# public static array $vfsProviders;\n# \n# protected\
+    \ string $vfsScheme;\n# \n# /** @var list<array{string, string, mixed}> */\n#\
+    \ protected array $vfsLog = [];\n# \n# protected function setUp(): void\n# {\n\
+    # parent::setUp();\n# \n# $this->vfsScheme = 'symfony-finder-vfs-test-'.++self::$vfsNextSchemeIndex;\n\
+    # \n# $vfsWrapperClass = \\get_class(new class {\n# /** @var array<string, \\\
+    Closure(string, 'list_dir_open'|'list_dir_rewind'|'is_dir'): (list<string>|bool)>\
+    \ */\n# public static array $vfsProviders = [];\n# \n# /** @var resource */\n\
+    # public $context;\n# \n# private string $scheme;\n# \n# private string $dirPath;\n\
+    # \n# /** @var list<string> */\n# private array $dirData;\n# \n# private function\
+    \ parsePathAndSetScheme(string $url): string\n# {\n# $urlArr = parse_url($url);\n\
+    # \\assert(\\is_array($urlArr));\n# \\assert(isset($urlArr['scheme']));\n# \\\
+    assert(isset($urlArr['host']));\n# \n# $this->scheme = $urlArr['scheme'];\n# \n\
+    # return str_replace(\\DIRECTORY_SEPARATOR, '/', $urlArr['host'].($urlArr['path']\
+    \ ?? ''));\n# }\n# \n# public function processListDir(bool $fromRewind): bool\n\
+    # {\n# $providerFx = self::$vfsProviders[$this->scheme];\n# $data = $providerFx($this->dirPath,\
+    \ 'list_dir'.($fromRewind ? '_rewind' : '_open'));\n# \\assert(\\is_array($data));\n\
+    # $this->dirData = $data;\n# \n# return true;\n# }\n# \n# public function dir_opendir(string\
+    \ $url): bool\n# {\n# $this->dirPath = $this->parsePathAndSetScheme($url);\n#\
+    \ \n# return $this->processListDir(false);\n# }\n# \n# public function dir_readdir():\
+    \ string|false\n# {\n# return array_shift($this->dirData) ?? false;\n# }\n# \n\
+    # public function dir_closedir(): bool\n# {\n# unset($this->dirPath);\n# unset($this->dirData);\n\
+    # \n# return true;\n# }\n# \n# public function dir_rewinddir(): bool\n# {\n# return\
+    \ $this->processListDir(true);\n# }\n# \n# /**\n# * @return array<string, mixed>"
+- name: url_stat
+  visibility: public
+  parameters:
+  - name: url
+  comment: '# * @return array<string, mixed>'
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: setupVfsProvider
+  visibility: protected
+  parameters:
+  - name: data
+  comment: '# * @param array<string, mixed> $data'
+- name: stripSchemeFromVfsPath
+  visibility: protected
+  parameters:
+  - name: url
+  comment: null
+- name: assertSameVfsIterator
+  visibility: protected
+  parameters:
+  - name: expected
+  - name: iterator
+  comment: null
+traits: []
+interfaces: []

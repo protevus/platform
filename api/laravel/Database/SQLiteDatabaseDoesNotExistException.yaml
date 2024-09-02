@@ -1,0 +1,25 @@
+name: SQLiteDatabaseDoesNotExistException
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties:
+- name: path
+  visibility: public
+  comment: '# * The path to the database.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: path
+  comment: "# * The path to the database.\n# *\n# * @var string\n# */\n# public $path;\n\
+    # \n# /**\n# * Create a new exception instance.\n# *\n# * @param  string  $path\n\
+    # * @return void"
+traits:
+- InvalidArgumentException
+interfaces: []

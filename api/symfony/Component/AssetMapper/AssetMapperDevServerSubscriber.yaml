@@ -1,0 +1,81 @@
+name: AssetMapperDevServerSubscriber
+class_comment: null
+dependencies:
+- name: CacheItemPoolInterface
+  type: class
+  source: Psr\Cache\CacheItemPoolInterface
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: BinaryFileResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\BinaryFileResponse
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: RequestEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\RequestEvent
+- name: ResponseEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ResponseEvent
+- name: NotFoundHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- name: KernelEvents
+  type: class
+  source: Symfony\Component\HttpKernel\KernelEvents
+- name: Profiler
+  type: class
+  source: Symfony\Component\HttpKernel\Profiler\Profiler
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: assetMapper
+  - name: publicPrefix
+    default: '''/assets/'''
+  - name: extensionsMap
+    default: '[]'
+  - name: cacheMapCache
+    default: 'null'
+  - name: profiler
+    default: 'null'
+  comment: null
+- name: onKernelRequest
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: onKernelResponse
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: getMediaType
+  visibility: private
+  parameters:
+  - name: path
+  comment: null
+- name: findAssetFromCache
+  visibility: private
+  parameters:
+  - name: pathInfo
+  comment: null
+traits:
+- Psr\Cache\CacheItemPoolInterface
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\HttpFoundation\BinaryFileResponse
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Event\RequestEvent
+- Symfony\Component\HttpKernel\Event\ResponseEvent
+- Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- Symfony\Component\HttpKernel\KernelEvents
+- Symfony\Component\HttpKernel\Profiler\Profiler
+interfaces:
+- EventSubscriberInterface

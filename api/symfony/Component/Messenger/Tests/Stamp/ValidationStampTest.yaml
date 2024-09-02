@@ -1,0 +1,27 @@
+name: ValidationStampTest
+class_comment: '# * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ValidationStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\ValidationStamp
+- name: GroupSequence
+  type: class
+  source: Symfony\Component\Validator\Constraints\GroupSequence
+properties: []
+methods:
+- name: testStamp
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSerializable
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Stamp\ValidationStamp
+- Symfony\Component\Validator\Constraints\GroupSequence
+interfaces: []

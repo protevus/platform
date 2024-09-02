@@ -1,0 +1,167 @@
+name: ManagesEvents
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: ViewContract
+  type: class
+  source: Illuminate\Contracts\View\View
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+properties: []
+methods:
+- name: creator
+  visibility: public
+  parameters:
+  - name: views
+  - name: callback
+  comment: '# * Register a view creator event.
+
+    # *
+
+    # * @param  array|string  $views
+
+    # * @param  \Closure|string  $callback
+
+    # * @return array'
+- name: composers
+  visibility: public
+  parameters:
+  - name: composers
+  comment: '# * Register multiple view composers via an array.
+
+    # *
+
+    # * @param  array  $composers
+
+    # * @return array'
+- name: composer
+  visibility: public
+  parameters:
+  - name: views
+  - name: callback
+  comment: '# * Register a view composer event.
+
+    # *
+
+    # * @param  array|string  $views
+
+    # * @param  \Closure|string  $callback
+
+    # * @return array'
+- name: addViewEvent
+  visibility: protected
+  parameters:
+  - name: view
+  - name: callback
+  - name: prefix
+    default: '''composing: '''
+  comment: '# * Add an event for a given view.
+
+    # *
+
+    # * @param  string  $view
+
+    # * @param  \Closure|string  $callback
+
+    # * @param  string  $prefix
+
+    # * @return \Closure|null'
+- name: addClassEvent
+  visibility: protected
+  parameters:
+  - name: view
+  - name: class
+  - name: prefix
+  comment: '# * Register a class based view composer.
+
+    # *
+
+    # * @param  string  $view
+
+    # * @param  string  $class
+
+    # * @param  string  $prefix
+
+    # * @return \Closure'
+- name: buildClassEventCallback
+  visibility: protected
+  parameters:
+  - name: class
+  - name: prefix
+  comment: '# * Build a class based container callback Closure.
+
+    # *
+
+    # * @param  string  $class
+
+    # * @param  string  $prefix
+
+    # * @return \Closure'
+- name: parseClassEvent
+  visibility: protected
+  parameters:
+  - name: class
+  - name: prefix
+  comment: '# * Parse a class based composer name.
+
+    # *
+
+    # * @param  string  $class
+
+    # * @param  string  $prefix
+
+    # * @return array'
+- name: classEventMethodForPrefix
+  visibility: protected
+  parameters:
+  - name: prefix
+  comment: '# * Determine the class event method based on the given prefix.
+
+    # *
+
+    # * @param  string  $prefix
+
+    # * @return string'
+- name: addEventListener
+  visibility: protected
+  parameters:
+  - name: name
+  - name: callback
+  comment: '# * Add a listener to the event dispatcher.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  \Closure  $callback
+
+    # * @return void'
+- name: callComposer
+  visibility: public
+  parameters:
+  - name: view
+  comment: '# * Call the composer for a given view.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\View\View  $view
+
+    # * @return void'
+- name: callCreator
+  visibility: public
+  parameters:
+  - name: view
+  comment: '# * Call the creator for a given view.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\View\View  $view
+
+    # * @return void'
+traits:
+- Closure
+- Illuminate\Support\Str
+interfaces: []

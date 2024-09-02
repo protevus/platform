@@ -1,0 +1,37 @@
+name: TransportFactoryInterface
+class_comment: null
+dependencies:
+- name: IncompleteDsnException
+  type: class
+  source: Symfony\Component\Mailer\Exception\IncompleteDsnException
+- name: UnsupportedSchemeException
+  type: class
+  source: Symfony\Component\Mailer\Exception\UnsupportedSchemeException
+properties: []
+methods:
+- name: create
+  visibility: public
+  parameters:
+  - name: dsn
+  comment: '# * @author Konstantin Myakshin <molodchick@gmail.com>
+
+    # */
+
+    # interface TransportFactoryInterface
+
+    # {
+
+    # /**
+
+    # * @throws UnsupportedSchemeException
+
+    # * @throws IncompleteDsnException'
+- name: supports
+  visibility: public
+  parameters:
+  - name: dsn
+  comment: null
+traits:
+- Symfony\Component\Mailer\Exception\IncompleteDsnException
+- Symfony\Component\Mailer\Exception\UnsupportedSchemeException
+interfaces: []

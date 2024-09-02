@@ -1,0 +1,47 @@
+name: GetterMetadataTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ValidatorException
+  type: class
+  source: Symfony\Component\Validator\Exception\ValidatorException
+- name: GetterMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\GetterMetadata
+- name: Entity
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\Entity
+properties: []
+methods:
+- name: testInvalidPropertyName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPropertyValueFromPublicGetter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPropertyValueFromOverriddenPublicGetter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPropertyValueFromIsser
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPropertyValueFromHasser
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUndefinedMethodNameThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\Exception\ValidatorException
+- Symfony\Component\Validator\Mapping\GetterMetadata
+- Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\Entity
+interfaces: []

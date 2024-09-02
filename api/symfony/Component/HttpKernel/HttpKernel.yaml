@@ -1,0 +1,185 @@
+name: HttpKernel
+class_comment: '# * HttpKernel notifies events to convert a Request object to a Response
+  one.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: RequestExceptionInterface
+  type: class
+  source: Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: StreamedResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\StreamedResponse
+- name: ArgumentResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver
+- name: ArgumentResolverInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface
+- name: ControllerResolverInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
+- name: ControllerArgumentsEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent
+- name: ControllerEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ControllerEvent
+- name: ExceptionEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ExceptionEvent
+- name: FinishRequestEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\FinishRequestEvent
+- name: RequestEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\RequestEvent
+- name: ResponseEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ResponseEvent
+- name: TerminateEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\TerminateEvent
+- name: ViewEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ViewEvent
+- name: BadRequestHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\BadRequestHttpException
+- name: ControllerDoesNotReturnResponseException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\ControllerDoesNotReturnResponseException
+- name: HttpExceptionInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\HttpExceptionInterface
+- name: NotFoundHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+properties: []
+methods:
+- name: terminateWithException
+  visibility: public
+  parameters:
+  - name: exception
+  - name: request
+    default: 'null'
+  comment: "# * HttpKernel notifies events to convert a Request object to a Response\
+    \ one.\n# *\n# * @author Fabien Potencier <fabien@symfony.com>\n# */\n# class\
+    \ HttpKernel implements HttpKernelInterface, TerminableInterface\n# {\n# protected\
+    \ RequestStack $requestStack;\n# private ArgumentResolverInterface $argumentResolver;\n\
+    # private bool $terminating = false;\n# \n# public function __construct(\n# protected\
+    \ EventDispatcherInterface $dispatcher,\n# protected ControllerResolverInterface\
+    \ $resolver,\n# ?RequestStack $requestStack = null,\n# ?ArgumentResolverInterface\
+    \ $argumentResolver = null,\n# private bool $handleAllThrowables = false,\n# )\
+    \ {\n# $this->requestStack = $requestStack ?? new RequestStack();\n# $this->argumentResolver\
+    \ = $argumentResolver ?? new ArgumentResolver();\n# }\n# \n# public function handle(Request\
+    \ $request, int $type = HttpKernelInterface::MAIN_REQUEST, bool $catch = true):\
+    \ Response\n# {\n# $request->headers->set('X-Php-Ob-Level', (string) ob_get_level());\n\
+    # \n# $this->requestStack->push($request);\n# $response = null;\n# try {\n# return\
+    \ $response = $this->handleRaw($request, $type);\n# } catch (\\Throwable $e) {\n\
+    # if ($e instanceof \\Error && !$this->handleAllThrowables) {\n# throw $e;\n#\
+    \ }\n# \n# if ($e instanceof RequestExceptionInterface) {\n# $e = new BadRequestHttpException($e->getMessage(),\
+    \ $e);\n# }\n# if (false === $catch) {\n# $this->finishRequest($request, $type);\n\
+    # \n# throw $e;\n# }\n# \n# return $response = $this->handleThrowable($e, $request,\
+    \ $type);\n# } finally {\n# $this->requestStack->pop();\n# \n# if ($response instanceof\
+    \ StreamedResponse && $callback = $response->getCallback()) {\n# $requestStack\
+    \ = $this->requestStack;\n# \n# $response->setCallback(static function () use\
+    \ ($request, $callback, $requestStack) {\n# $requestStack->push($request);\n#\
+    \ try {\n# $callback();\n# } finally {\n# $requestStack->pop();\n# }\n# });\n\
+    # }\n# }\n# }\n# \n# public function terminate(Request $request, Response $response):\
+    \ void\n# {\n# try {\n# $this->terminating = true;\n# $this->dispatcher->dispatch(new\
+    \ TerminateEvent($this, $request, $response), KernelEvents::TERMINATE);\n# } finally\
+    \ {\n# $this->terminating = false;\n# }\n# }\n# \n# /**\n# * @internal"
+- name: handleRaw
+  visibility: private
+  parameters:
+  - name: request
+  - name: type
+    default: self::MAIN_REQUEST
+  comment: '# * Handles a request to convert it to a response.
+
+    # *
+
+    # * Exceptions are not caught.
+
+    # *
+
+    # * @throws \LogicException       If one of the listener does not behave as expected
+
+    # * @throws NotFoundHttpException When controller cannot be found'
+- name: filterResponse
+  visibility: private
+  parameters:
+  - name: response
+  - name: request
+  - name: type
+  comment: '# * Filters a response object.
+
+    # *
+
+    # * @throws \RuntimeException if the passed object is not a Response instance'
+- name: finishRequest
+  visibility: private
+  parameters:
+  - name: request
+  - name: type
+  comment: '# * Publishes the finish request event, then pop the request from the
+    stack.
+
+    # *
+
+    # * Note that the order of the operations is important here, otherwise
+
+    # * operations such as {@link RequestStack::getParentRequest()} can lead to
+
+    # * weird results.'
+- name: handleThrowable
+  visibility: private
+  parameters:
+  - name: e
+  - name: request
+  - name: type
+  comment: '# * Handles a throwable by trying to convert it to a Response.'
+- name: varToString
+  visibility: private
+  parameters:
+  - name: var
+  comment: '# * Returns a human-readable string for the specified variable.'
+traits:
+- Symfony\Component\HttpFoundation\Exception\RequestExceptionInterface
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestStack
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpFoundation\StreamedResponse
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver
+- Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface
+- Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
+- Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent
+- Symfony\Component\HttpKernel\Event\ControllerEvent
+- Symfony\Component\HttpKernel\Event\ExceptionEvent
+- Symfony\Component\HttpKernel\Event\FinishRequestEvent
+- Symfony\Component\HttpKernel\Event\RequestEvent
+- Symfony\Component\HttpKernel\Event\ResponseEvent
+- Symfony\Component\HttpKernel\Event\TerminateEvent
+- Symfony\Component\HttpKernel\Event\ViewEvent
+- Symfony\Component\HttpKernel\Exception\BadRequestHttpException
+- Symfony\Component\HttpKernel\Exception\ControllerDoesNotReturnResponseException
+- Symfony\Component\HttpKernel\Exception\HttpExceptionInterface
+- Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+interfaces:
+- HttpKernelInterface

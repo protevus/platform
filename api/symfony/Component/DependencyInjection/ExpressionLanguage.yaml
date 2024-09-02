@@ -1,0 +1,34 @@
+name: ExpressionLanguage
+class_comment: '# * Adds some function to the default ExpressionLanguage.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @see ExpressionLanguageProvider'
+dependencies:
+- name: CacheItemPoolInterface
+  type: class
+  source: Psr\Cache\CacheItemPoolInterface
+- name: BaseExpressionLanguage
+  type: class
+  source: Symfony\Component\ExpressionLanguage\ExpressionLanguage
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: cache
+    default: 'null'
+  - name: providers
+    default: '[]'
+  - name: serviceCompiler
+    default: 'null'
+  - name: getEnv
+    default: 'null'
+  comment: null
+traits:
+- Psr\Cache\CacheItemPoolInterface
+interfaces: []

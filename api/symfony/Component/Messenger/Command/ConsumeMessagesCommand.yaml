@@ -1,0 +1,165 @@
+name: ConsumeMessagesCommand
+class_comment: null
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: SignalableCommandInterface
+  type: class
+  source: Symfony\Component\Console\Command\SignalableCommandInterface
+- name: CompletionInput
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionInput
+- name: CompletionSuggestions
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionSuggestions
+- name: InvalidOptionException
+  type: class
+  source: Symfony\Component\Console\Exception\InvalidOptionException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Console\Exception\RuntimeException
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: ConsoleOutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\ConsoleOutputInterface
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: ChoiceQuestion
+  type: class
+  source: Symfony\Component\Console\Question\ChoiceQuestion
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcherInterface
+- name: ResetServicesListener
+  type: class
+  source: Symfony\Component\Messenger\EventListener\ResetServicesListener
+- name: StopWorkerOnFailureLimitListener
+  type: class
+  source: Symfony\Component\Messenger\EventListener\StopWorkerOnFailureLimitListener
+- name: StopWorkerOnMemoryLimitListener
+  type: class
+  source: Symfony\Component\Messenger\EventListener\StopWorkerOnMemoryLimitListener
+- name: StopWorkerOnMessageLimitListener
+  type: class
+  source: Symfony\Component\Messenger\EventListener\StopWorkerOnMessageLimitListener
+- name: StopWorkerOnTimeLimitListener
+  type: class
+  source: Symfony\Component\Messenger\EventListener\StopWorkerOnTimeLimitListener
+- name: RoutableMessageBus
+  type: class
+  source: Symfony\Component\Messenger\RoutableMessageBus
+- name: SyncTransport
+  type: class
+  source: Symfony\Component\Messenger\Transport\Sync\SyncTransport
+- name: Worker
+  type: class
+  source: Symfony\Component\Messenger\Worker
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: routableBus
+  - name: receiverLocator
+  - name: eventDispatcher
+  - name: logger
+    default: 'null'
+  - name: receiverNames
+    default: '[]'
+  - name: resetServicesListener
+    default: 'null'
+  - name: busIds
+    default: '[]'
+  - name: rateLimiterLocator
+    default: 'null'
+  - name: signals
+    default: 'null'
+  comment: null
+- name: configure
+  visibility: protected
+  parameters: []
+  comment: null
+- name: interact
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+- name: execute
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+- name: complete
+  visibility: public
+  parameters:
+  - name: input
+  - name: suggestions
+  comment: null
+- name: getSubscribedSignals
+  visibility: public
+  parameters: []
+  comment: null
+- name: handleSignal
+  visibility: public
+  parameters:
+  - name: signal
+  - name: previousExitCode
+    default: '0'
+  comment: null
+- name: convertToBytes
+  visibility: private
+  parameters:
+  - name: memoryLimit
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Psr\Log\LoggerInterface
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Command\SignalableCommandInterface
+- Symfony\Component\Console\Completion\CompletionInput
+- Symfony\Component\Console\Completion\CompletionSuggestions
+- Symfony\Component\Console\Exception\InvalidOptionException
+- Symfony\Component\Console\Exception\RuntimeException
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Output\ConsoleOutputInterface
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Question\ChoiceQuestion
+- Symfony\Component\Console\Style\SymfonyStyle
+- Symfony\Component\EventDispatcher\EventDispatcherInterface
+- Symfony\Component\Messenger\EventListener\ResetServicesListener
+- Symfony\Component\Messenger\EventListener\StopWorkerOnFailureLimitListener
+- Symfony\Component\Messenger\EventListener\StopWorkerOnMemoryLimitListener
+- Symfony\Component\Messenger\EventListener\StopWorkerOnMessageLimitListener
+- Symfony\Component\Messenger\EventListener\StopWorkerOnTimeLimitListener
+- Symfony\Component\Messenger\RoutableMessageBus
+- Symfony\Component\Messenger\Transport\Sync\SyncTransport
+- Symfony\Component\Messenger\Worker
+interfaces:
+- SignalableCommandInterface

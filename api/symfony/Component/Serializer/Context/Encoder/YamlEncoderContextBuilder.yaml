@@ -1,0 +1,63 @@
+name: YamlEncoderContextBuilder
+class_comment: null
+dependencies:
+- name: ContextBuilderInterface
+  type: class
+  source: Symfony\Component\Serializer\Context\ContextBuilderInterface
+- name: ContextBuilderTrait
+  type: class
+  source: Symfony\Component\Serializer\Context\ContextBuilderTrait
+- name: YamlEncoder
+  type: class
+  source: Symfony\Component\Serializer\Encoder\YamlEncoder
+- name: ContextBuilderTrait
+  type: class
+  source: ContextBuilderTrait
+properties: []
+methods:
+- name: withInlineThreshold
+  visibility: public
+  parameters:
+  - name: inlineThreshold
+  comment: "# * A helper providing autocompletion for available YamlEncoder options.\n\
+    # *\n# * Note that the \"indentation\" setting is not offered in this builder\
+    \ because\n# * it can only be set during the construction of the YamlEncoder,\
+    \ but not per\n# * call.\n# *\n# * @author Mathias Arlaud <mathias.arlaud@gmail.com>\n\
+    # */\n# final class YamlEncoderContextBuilder implements ContextBuilderInterface\n\
+    # {\n# use ContextBuilderTrait;\n# \n# /**\n# * Configures the threshold to switch\
+    \ to inline YAML."
+- name: withIndentLevel
+  visibility: public
+  parameters:
+  - name: indentLevel
+  comment: '# * Configures the indentation level.
+
+    # *
+
+    # * Must be positive.
+
+    # *
+
+    # * @param int<0, max>|null $indentLevel'
+- name: withFlags
+  visibility: public
+  parameters:
+  - name: flags
+  comment: '# * Configures \Symfony\Component\Yaml\Dumper::dump flags bitmask.
+
+    # *
+
+    # * @see \Symfony\Component\Yaml\Yaml'
+- name: withPreservedEmptyObjects
+  visibility: public
+  parameters:
+  - name: preserveEmptyObjects
+  comment: '# * Configures whether to preserve empty objects "{}" or to convert them
+    to null.'
+traits:
+- Symfony\Component\Serializer\Context\ContextBuilderInterface
+- Symfony\Component\Serializer\Context\ContextBuilderTrait
+- Symfony\Component\Serializer\Encoder\YamlEncoder
+- ContextBuilderTrait
+interfaces:
+- ContextBuilderInterface

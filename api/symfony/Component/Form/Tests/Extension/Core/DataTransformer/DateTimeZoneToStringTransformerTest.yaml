@@ -1,0 +1,35 @@
+name: DateTimeZoneToStringTransformerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+- name: DateTimeZoneToStringTransformer
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeZoneToStringTransformer
+properties: []
+methods:
+- name: testSingle
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMultiple
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidTimezone
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnknownTimezone
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\Exception\TransformationFailedException
+- Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeZoneToStringTransformer
+interfaces: []

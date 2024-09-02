@@ -1,0 +1,16 @@
+name: UnexpectedPropertyException
+class_comment: "# * UnexpectedPropertyException.\n# *\n# * @author Aur\xE9lien Pillevesse\
+  \ <aurelienpillevesse@hotmail.fr>"
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: property
+  - name: previous
+    default: 'null'
+  comment: null
+traits: []
+interfaces:
+- ExceptionInterface

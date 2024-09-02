@@ -1,0 +1,11 @@
+name: toolbar
+class_comment: null
+dependencies:
+- name: WebDebugToolbarListener
+  type: class
+  source: Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener
+properties: []
+methods: []
+traits:
+- Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener
+interfaces: []

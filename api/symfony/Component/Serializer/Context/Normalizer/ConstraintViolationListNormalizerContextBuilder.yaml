@@ -1,0 +1,63 @@
+name: ConstraintViolationListNormalizerContextBuilder
+class_comment: null
+dependencies:
+- name: ContextBuilderInterface
+  type: class
+  source: Symfony\Component\Serializer\Context\ContextBuilderInterface
+- name: ContextBuilderTrait
+  type: class
+  source: Symfony\Component\Serializer\Context\ContextBuilderTrait
+- name: ConstraintViolationListNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ConstraintViolationListNormalizer
+- name: ContextBuilderTrait
+  type: class
+  source: ContextBuilderTrait
+properties: []
+methods:
+- name: withInstance
+  visibility: public
+  parameters:
+  - name: instance
+  comment: "# * A helper providing autocompletion for available ConstraintViolationList\
+    \ options.\n# *\n# * @author Mathias Arlaud <mathias.arlaud@gmail.com>\n# */\n\
+    # final class ConstraintViolationListNormalizerContextBuilder implements ContextBuilderInterface\n\
+    # {\n# use ContextBuilderTrait;\n# \n# /**\n# * Configure the instance field of\
+    \ normalized data."
+- name: withStatus
+  visibility: public
+  parameters:
+  - name: status
+  comment: '# * Configure the status field of normalized data.'
+- name: withTitle
+  visibility: public
+  parameters:
+  - name: title
+  comment: '# * Configure the title field of normalized data.'
+- name: withType
+  visibility: public
+  parameters:
+  - name: type
+  comment: '# * Configure the type field of normalized data.'
+- name: withPayloadFields
+  visibility: public
+  parameters:
+  - name: payloadFields
+  comment: '# * Configures the payload fields which will act as an allowlist
+
+    # * for the payload field of normalized data.
+
+    # *
+
+    # * Eg: [''foo'', ''bar'']
+
+    # *
+
+    # * @param list<string>|null $payloadFields'
+traits:
+- Symfony\Component\Serializer\Context\ContextBuilderInterface
+- Symfony\Component\Serializer\Context\ContextBuilderTrait
+- Symfony\Component\Serializer\Normalizer\ConstraintViolationListNormalizer
+- ContextBuilderTrait
+interfaces:
+- ContextBuilderInterface

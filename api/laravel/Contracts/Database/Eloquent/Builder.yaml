@@ -1,0 +1,10 @@
+name: Builder
+class_comment: null
+dependencies:
+- name: BaseContract
+  type: class
+  source: Illuminate\Contracts\Database\Query\Builder
+properties: []
+methods: []
+traits: []
+interfaces: []

@@ -1,0 +1,61 @@
+name: SentMessage
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: Message
+  type: class
+  source: Symfony\Component\Mime\Message
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: message
+  - name: envelope
+  comment: "# * @author Fabien Potencier <fabien@symfony.com>\n# */\n# class SentMessage\n\
+    # {\n# private RawMessage $original;\n# private RawMessage $raw;\n# private string\
+    \ $messageId;\n# private string $debug = '';\n# \n# /**\n# * @internal"
+- name: getMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: getOriginalMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: getEnvelope
+  visibility: public
+  parameters: []
+  comment: null
+- name: setMessageId
+  visibility: public
+  parameters:
+  - name: id
+  comment: null
+- name: getMessageId
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDebug
+  visibility: public
+  parameters: []
+  comment: null
+- name: appendDebug
+  visibility: public
+  parameters:
+  - name: debug
+  comment: null
+- name: toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: toIterable
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Mime\Message
+- Symfony\Component\Mime\RawMessage
+interfaces: []

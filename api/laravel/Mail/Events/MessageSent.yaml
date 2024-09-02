@@ -1,0 +1,85 @@
+name: MessageSent
+class_comment: '# * @property \Symfony\Component\Mime\Email $message'
+dependencies:
+- name: Exception
+  type: class
+  source: Exception
+- name: SentMessage
+  type: class
+  source: Illuminate\Mail\SentMessage
+properties:
+- name: sent
+  visibility: public
+  comment: '# * @property \Symfony\Component\Mime\Email $message
+
+    # */
+
+    # class MessageSent
+
+    # {
+
+    # /**
+
+    # * The message that was sent.
+
+    # *
+
+    # * @var \Illuminate\Mail\SentMessage'
+- name: data
+  visibility: public
+  comment: '# * The message data.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: message
+  - name: data
+    default: '[]'
+  comment: "# * @property \\Symfony\\Component\\Mime\\Email $message\n# */\n# class\
+    \ MessageSent\n# {\n# /**\n# * The message that was sent.\n# *\n# * @var \\Illuminate\\\
+    Mail\\SentMessage\n# */\n# public $sent;\n# \n# /**\n# * The message data.\n#\
+    \ *\n# * @var array\n# */\n# public $data;\n# \n# /**\n# * Create a new event\
+    \ instance.\n# *\n# * @param  \\Illuminate\\Mail\\SentMessage  $message\n# * @param\
+    \  array  $data\n# * @return void"
+- name: __serialize
+  visibility: public
+  parameters: []
+  comment: '# * Get the serializable representation of the object.
+
+    # *
+
+    # * @return array'
+- name: __unserialize
+  visibility: public
+  parameters:
+  - name: data
+  comment: '# * Marshal the object from its serialized data.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return void'
+- name: __get
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Dynamically get the original message.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Exception'
+traits:
+- Exception
+- Illuminate\Mail\SentMessage
+interfaces: []

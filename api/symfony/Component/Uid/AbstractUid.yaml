@@ -1,0 +1,103 @@
+name: AbstractUid
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: fromBinary
+  visibility: public
+  parameters:
+  - name: uid
+  comment: "# * @author Nicolas Grekas <p@tchwork.com>\n# */\n# abstract class AbstractUid\
+    \ implements \\JsonSerializable, \\Stringable, HashableInterface\n# {\n# /**\n\
+    # * The identifier in its canonic representation.\n# */\n# protected string $uid;\n\
+    # \n# /**\n# * Whether the passed value is valid for the constructor of the current\
+    \ class.\n# */\n# abstract public static function isValid(string $uid): bool;\n\
+    # \n# /**\n# * Creates an AbstractUid from an identifier represented in any of\
+    \ the supported formats.\n# *\n# * @throws \\InvalidArgumentException When the\
+    \ passed value is not valid\n# */\n# abstract public static function fromString(string\
+    \ $uid): static;\n# \n# /**\n# * @throws \\InvalidArgumentException When the passed\
+    \ value is not valid"
+- name: fromBase58
+  visibility: public
+  parameters:
+  - name: uid
+  comment: '# * @throws \InvalidArgumentException When the passed value is not valid'
+- name: fromBase32
+  visibility: public
+  parameters:
+  - name: uid
+  comment: '# * @throws \InvalidArgumentException When the passed value is not valid'
+- name: fromRfc4122
+  visibility: public
+  parameters:
+  - name: uid
+  comment: '# * @throws \InvalidArgumentException When the passed value is not valid'
+- name: toBase58
+  visibility: public
+  parameters: []
+  comment: "# * Returns the identifier as a raw binary string.\n# */\n# abstract public\
+    \ function toBinary(): string;\n# \n# /**\n# * Returns the identifier as a base58\
+    \ case-sensitive string.\n# *\n# * @example 2AifFTC3zXgZzK5fPrrprL (len=22)"
+- name: toBase32
+  visibility: public
+  parameters: []
+  comment: '# * Returns the identifier as a base32 case-insensitive string.
+
+    # *
+
+    # * @see https://tools.ietf.org/html/rfc4648#section-6
+
+    # *
+
+    # * @example 09EJ0S614A9FXVG9C5537Q9ZE1 (len=26)'
+- name: toRfc4122
+  visibility: public
+  parameters: []
+  comment: '# * Returns the identifier as a RFC4122 case-insensitive string.
+
+    # *
+
+    # * @see https://tools.ietf.org/html/rfc4122#section-3
+
+    # *
+
+    # * @example 09748193-048a-4bfb-b825-8528cf74fdc1 (len=36)'
+- name: toHex
+  visibility: public
+  parameters: []
+  comment: '# * Returns the identifier as a prefixed hexadecimal case insensitive
+    string.
+
+    # *
+
+    # * @example 0x09748193048a4bfbb8258528cf74fdc1 (len=34)'
+- name: equals
+  visibility: public
+  parameters:
+  - name: other
+  comment: '# * Returns whether the argument is an AbstractUid and contains the same
+    value as the current instance.'
+- name: hash
+  visibility: public
+  parameters: []
+  comment: null
+- name: compare
+  visibility: public
+  parameters:
+  - name: other
+  comment: null
+- name: toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: jsonSerialize
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces:
+- \JsonSerializable

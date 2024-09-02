@@ -1,0 +1,77 @@
+name: CacheSchedulingMutex
+class_comment: null
+dependencies:
+- name: DateTimeInterface
+  type: class
+  source: DateTimeInterface
+- name: Cache
+  type: class
+  source: Illuminate\Contracts\Cache\Factory
+properties:
+- name: cache
+  visibility: public
+  comment: '# * The cache factory implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Cache\Factory'
+- name: store
+  visibility: public
+  comment: '# * The cache store that should be used.
+
+    # *
+
+    # * @var string|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: cache
+  comment: "# * The cache factory implementation.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Cache\\Factory\n# */\n# public $cache;\n# \n# /**\n# * The cache store that should\
+    \ be used.\n# *\n# * @var string|null\n# */\n# public $store;\n# \n# /**\n# *\
+    \ Create a new scheduling strategy.\n# *\n# * @param  \\Illuminate\\Contracts\\\
+    Cache\\Factory  $cache\n# * @return void"
+- name: create
+  visibility: public
+  parameters:
+  - name: event
+  - name: time
+  comment: '# * Attempt to obtain a scheduling mutex for the given event.
+
+    # *
+
+    # * @param  \Illuminate\Console\Scheduling\Event  $event
+
+    # * @param  \DateTimeInterface  $time
+
+    # * @return bool'
+- name: exists
+  visibility: public
+  parameters:
+  - name: event
+  - name: time
+  comment: '# * Determine if a scheduling mutex exists for the given event.
+
+    # *
+
+    # * @param  \Illuminate\Console\Scheduling\Event  $event
+
+    # * @param  \DateTimeInterface  $time
+
+    # * @return bool'
+- name: useStore
+  visibility: public
+  parameters:
+  - name: store
+  comment: '# * Specify the cache store that should be used.
+
+    # *
+
+    # * @param  string  $store
+
+    # * @return $this'
+traits:
+- DateTimeInterface
+interfaces:
+- SchedulingMutex

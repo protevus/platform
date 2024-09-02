@@ -1,0 +1,1132 @@
+name: Route
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: HttpResponseException
+  type: class
+  source: Illuminate\Http\Exceptions\HttpResponseException
+- name: Request
+  type: class
+  source: Illuminate\Http\Request
+- name: CallableDispatcher
+  type: class
+  source: Illuminate\Routing\Contracts\CallableDispatcher
+- name: ControllerDispatcherContract
+  type: class
+  source: Illuminate\Routing\Contracts\ControllerDispatcher
+- name: HasMiddleware
+  type: class
+  source: Illuminate\Routing\Controllers\HasMiddleware
+- name: Middleware
+  type: class
+  source: Illuminate\Routing\Controllers\Middleware
+- name: HostValidator
+  type: class
+  source: Illuminate\Routing\Matching\HostValidator
+- name: MethodValidator
+  type: class
+  source: Illuminate\Routing\Matching\MethodValidator
+- name: SchemeValidator
+  type: class
+  source: Illuminate\Routing\Matching\SchemeValidator
+- name: UriValidator
+  type: class
+  source: Illuminate\Routing\Matching\UriValidator
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: SerializableClosure
+  type: class
+  source: Laravel\SerializableClosure\SerializableClosure
+- name: LogicException
+  type: class
+  source: LogicException
+- name: SymfonyRoute
+  type: class
+  source: Symfony\Component\Routing\Route
+properties:
+- name: uri
+  visibility: public
+  comment: '# * The URI pattern the route responds to.
+
+    # *
+
+    # * @var string'
+- name: methods
+  visibility: public
+  comment: '# * The HTTP methods the route responds to.
+
+    # *
+
+    # * @var array'
+- name: action
+  visibility: public
+  comment: '# * The route action array.
+
+    # *
+
+    # * @var array'
+- name: isFallback
+  visibility: public
+  comment: '# * Indicates whether the route is a fallback route.
+
+    # *
+
+    # * @var bool'
+- name: controller
+  visibility: public
+  comment: '# * The controller instance.
+
+    # *
+
+    # * @var mixed'
+- name: defaults
+  visibility: public
+  comment: '# * The default values for the route.
+
+    # *
+
+    # * @var array'
+- name: wheres
+  visibility: public
+  comment: '# * The regular expression requirements.
+
+    # *
+
+    # * @var array'
+- name: parameters
+  visibility: public
+  comment: '# * The array of matched parameters.
+
+    # *
+
+    # * @var array|null'
+- name: parameterNames
+  visibility: public
+  comment: '# * The parameter names for the route.
+
+    # *
+
+    # * @var array|null'
+- name: originalParameters
+  visibility: protected
+  comment: '# * The array of the matched parameters'' original values.
+
+    # *
+
+    # * @var array'
+- name: withTrashedBindings
+  visibility: protected
+  comment: '# * Indicates "trashed" models can be retrieved when resolving implicit
+    model bindings for this route.
+
+    # *
+
+    # * @var bool'
+- name: lockSeconds
+  visibility: protected
+  comment: '# * Indicates the maximum number of seconds the route should acquire a
+    session lock for.
+
+    # *
+
+    # * @var int|null'
+- name: waitSeconds
+  visibility: protected
+  comment: '# * Indicates the maximum number of seconds the route should wait while
+    attempting to acquire a session lock.
+
+    # *
+
+    # * @var int|null'
+- name: computedMiddleware
+  visibility: public
+  comment: '# * The computed gathered middleware.
+
+    # *
+
+    # * @var array|null'
+- name: compiled
+  visibility: public
+  comment: '# * The compiled version of the route.
+
+    # *
+
+    # * @var \Symfony\Component\Routing\CompiledRoute'
+- name: router
+  visibility: protected
+  comment: '# * The router instance used by the route.
+
+    # *
+
+    # * @var \Illuminate\Routing\Router'
+- name: container
+  visibility: protected
+  comment: '# * The container instance used by the route.
+
+    # *
+
+    # * @var \Illuminate\Container\Container'
+- name: bindingFields
+  visibility: protected
+  comment: '# * The fields that implicit binding should use for a given parameter.
+
+    # *
+
+    # * @var array'
+- name: validators
+  visibility: public
+  comment: '# * The validators used by the routes.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: methods
+  - name: uri
+  - name: action
+  comment: "# * The URI pattern the route responds to.\n# *\n# * @var string\n# */\n\
+    # public $uri;\n# \n# /**\n# * The HTTP methods the route responds to.\n# *\n\
+    # * @var array\n# */\n# public $methods;\n# \n# /**\n# * The route action array.\n\
+    # *\n# * @var array\n# */\n# public $action;\n# \n# /**\n# * Indicates whether\
+    \ the route is a fallback route.\n# *\n# * @var bool\n# */\n# public $isFallback\
+    \ = false;\n# \n# /**\n# * The controller instance.\n# *\n# * @var mixed\n# */\n\
+    # public $controller;\n# \n# /**\n# * The default values for the route.\n# *\n\
+    # * @var array\n# */\n# public $defaults = [];\n# \n# /**\n# * The regular expression\
+    \ requirements.\n# *\n# * @var array\n# */\n# public $wheres = [];\n# \n# /**\n\
+    # * The array of matched parameters.\n# *\n# * @var array|null\n# */\n# public\
+    \ $parameters;\n# \n# /**\n# * The parameter names for the route.\n# *\n# * @var\
+    \ array|null\n# */\n# public $parameterNames;\n# \n# /**\n# * The array of the\
+    \ matched parameters' original values.\n# *\n# * @var array\n# */\n# protected\
+    \ $originalParameters;\n# \n# /**\n# * Indicates \"trashed\" models can be retrieved\
+    \ when resolving implicit model bindings for this route.\n# *\n# * @var bool\n\
+    # */\n# protected $withTrashedBindings = false;\n# \n# /**\n# * Indicates the\
+    \ maximum number of seconds the route should acquire a session lock for.\n# *\n\
+    # * @var int|null\n# */\n# protected $lockSeconds;\n# \n# /**\n# * Indicates the\
+    \ maximum number of seconds the route should wait while attempting to acquire\
+    \ a session lock.\n# *\n# * @var int|null\n# */\n# protected $waitSeconds;\n#\
+    \ \n# /**\n# * The computed gathered middleware.\n# *\n# * @var array|null\n#\
+    \ */\n# public $computedMiddleware;\n# \n# /**\n# * The compiled version of the\
+    \ route.\n# *\n# * @var \\Symfony\\Component\\Routing\\CompiledRoute\n# */\n#\
+    \ public $compiled;\n# \n# /**\n# * The router instance used by the route.\n#\
+    \ *\n# * @var \\Illuminate\\Routing\\Router\n# */\n# protected $router;\n# \n\
+    # /**\n# * The container instance used by the route.\n# *\n# * @var \\Illuminate\\\
+    Container\\Container\n# */\n# protected $container;\n# \n# /**\n# * The fields\
+    \ that implicit binding should use for a given parameter.\n# *\n# * @var array\n\
+    # */\n# protected $bindingFields = [];\n# \n# /**\n# * The validators used by\
+    \ the routes.\n# *\n# * @var array\n# */\n# public static $validators;\n# \n#\
+    \ /**\n# * Create a new Route instance.\n# *\n# * @param  array|string  $methods\n\
+    # * @param  string  $uri\n# * @param  \\Closure|array  $action\n# * @return void"
+- name: parseAction
+  visibility: protected
+  parameters:
+  - name: action
+  comment: '# * Parse the route action into a standard array.
+
+    # *
+
+    # * @param  callable|array|null  $action
+
+    # * @return array
+
+    # *
+
+    # * @throws \UnexpectedValueException'
+- name: run
+  visibility: public
+  parameters: []
+  comment: '# * Run the route action and return the response.
+
+    # *
+
+    # * @return mixed'
+- name: isControllerAction
+  visibility: protected
+  parameters: []
+  comment: '# * Checks whether the route''s action is a controller.
+
+    # *
+
+    # * @return bool'
+- name: runCallable
+  visibility: protected
+  parameters: []
+  comment: '# * Run the route action and return the response.
+
+    # *
+
+    # * @return mixed'
+- name: isSerializedClosure
+  visibility: protected
+  parameters: []
+  comment: '# * Determine if the route action is a serialized Closure.
+
+    # *
+
+    # * @return bool'
+- name: runController
+  visibility: protected
+  parameters: []
+  comment: '# * Run the route action and return the response.
+
+    # *
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException'
+- name: getController
+  visibility: public
+  parameters: []
+  comment: '# * Get the controller instance for the route.
+
+    # *
+
+    # * @return mixed'
+- name: getControllerClass
+  visibility: public
+  parameters: []
+  comment: '# * Get the controller class used for the route.
+
+    # *
+
+    # * @return string|null'
+- name: getControllerMethod
+  visibility: protected
+  parameters: []
+  comment: '# * Get the controller method used for the route.
+
+    # *
+
+    # * @return string'
+- name: parseControllerCallback
+  visibility: protected
+  parameters: []
+  comment: '# * Parse the controller.
+
+    # *
+
+    # * @return array'
+- name: flushController
+  visibility: public
+  parameters: []
+  comment: '# * Flush the cached container instance on the route.
+
+    # *
+
+    # * @return void'
+- name: matches
+  visibility: public
+  parameters:
+  - name: request
+  - name: includingMethod
+    default: 'true'
+  comment: '# * Determine if the route matches a given request.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  bool  $includingMethod
+
+    # * @return bool'
+- name: compileRoute
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the route into a Symfony CompiledRoute instance.
+
+    # *
+
+    # * @return \Symfony\Component\Routing\CompiledRoute'
+- name: bind
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Bind the route to a given request for execution.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return $this'
+- name: hasParameters
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the route has parameters.
+
+    # *
+
+    # * @return bool'
+- name: hasParameter
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Determine a given parameter exists from the route.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return bool'
+- name: parameter
+  visibility: public
+  parameters:
+  - name: name
+  - name: default
+    default: 'null'
+  comment: '# * Get a given parameter from the route.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|object|null  $default
+
+    # * @return string|object|null'
+- name: originalParameter
+  visibility: public
+  parameters:
+  - name: name
+  - name: default
+    default: 'null'
+  comment: '# * Get original value of a given parameter from the route.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|null  $default
+
+    # * @return string|null'
+- name: setParameter
+  visibility: public
+  parameters:
+  - name: name
+  - name: value
+  comment: '# * Set a parameter to the given value.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|object|null  $value
+
+    # * @return void'
+- name: forgetParameter
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Unset a parameter on the route if it is set.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return void'
+- name: parameters
+  visibility: public
+  parameters: []
+  comment: '# * Get the key / value list of parameters for the route.
+
+    # *
+
+    # * @return array
+
+    # *
+
+    # * @throws \LogicException'
+- name: originalParameters
+  visibility: public
+  parameters: []
+  comment: '# * Get the key / value list of original parameters for the route.
+
+    # *
+
+    # * @return array
+
+    # *
+
+    # * @throws \LogicException'
+- name: parametersWithoutNulls
+  visibility: public
+  parameters: []
+  comment: '# * Get the key / value list of parameters without null values.
+
+    # *
+
+    # * @return array'
+- name: parameterNames
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the parameter names for the route.
+
+    # *
+
+    # * @return array'
+- name: compileParameterNames
+  visibility: protected
+  parameters: []
+  comment: '# * Get the parameter names for the route.
+
+    # *
+
+    # * @return array'
+- name: signatureParameters
+  visibility: public
+  parameters:
+  - name: conditions
+    default: '[]'
+  comment: '# * Get the parameters that are listed in the route / controller signature.
+
+    # *
+
+    # * @param  array  $conditions
+
+    # * @return array'
+- name: bindingFieldFor
+  visibility: public
+  parameters:
+  - name: parameter
+  comment: '# * Get the binding field for the given parameter.
+
+    # *
+
+    # * @param  string|int  $parameter
+
+    # * @return string|null'
+- name: bindingFields
+  visibility: public
+  parameters: []
+  comment: '# * Get the binding fields for the route.
+
+    # *
+
+    # * @return array'
+- name: setBindingFields
+  visibility: public
+  parameters:
+  - name: bindingFields
+  comment: '# * Set the binding fields for the route.
+
+    # *
+
+    # * @param  array  $bindingFields
+
+    # * @return $this'
+- name: parentOfParameter
+  visibility: public
+  parameters:
+  - name: parameter
+  comment: '# * Get the parent parameter of the given parameter.
+
+    # *
+
+    # * @param  string  $parameter
+
+    # * @return string|null'
+- name: withTrashed
+  visibility: public
+  parameters:
+  - name: withTrashed
+    default: 'true'
+  comment: '# * Allow "trashed" models to be retrieved when resolving implicit model
+    bindings for this route.
+
+    # *
+
+    # * @param  bool  $withTrashed
+
+    # * @return $this'
+- name: allowsTrashedBindings
+  visibility: public
+  parameters: []
+  comment: '# * Determines if the route allows "trashed" models to be retrieved when
+    resolving implicit model bindings.
+
+    # *
+
+    # * @return bool'
+- name: defaults
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Set a default value for the route.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return $this'
+- name: setDefaults
+  visibility: public
+  parameters:
+  - name: defaults
+  comment: '# * Set the default values for the route.
+
+    # *
+
+    # * @param  array  $defaults
+
+    # * @return $this'
+- name: where
+  visibility: public
+  parameters:
+  - name: name
+  - name: expression
+    default: 'null'
+  comment: '# * Set a regular expression requirement on the route.
+
+    # *
+
+    # * @param  array|string  $name
+
+    # * @param  string|null  $expression
+
+    # * @return $this'
+- name: parseWhere
+  visibility: protected
+  parameters:
+  - name: name
+  - name: expression
+  comment: '# * Parse arguments to the where method into an array.
+
+    # *
+
+    # * @param  array|string  $name
+
+    # * @param  string  $expression
+
+    # * @return array'
+- name: setWheres
+  visibility: public
+  parameters:
+  - name: wheres
+  comment: '# * Set a list of regular expression requirements on the route.
+
+    # *
+
+    # * @param  array  $wheres
+
+    # * @return $this'
+- name: fallback
+  visibility: public
+  parameters: []
+  comment: '# * Mark this route as a fallback route.
+
+    # *
+
+    # * @return $this'
+- name: setFallback
+  visibility: public
+  parameters:
+  - name: isFallback
+  comment: '# * Set the fallback value.
+
+    # *
+
+    # * @param  bool  $isFallback
+
+    # * @return $this'
+- name: methods
+  visibility: public
+  parameters: []
+  comment: '# * Get the HTTP verbs the route responds to.
+
+    # *
+
+    # * @return array'
+- name: httpOnly
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the route only responds to HTTP requests.
+
+    # *
+
+    # * @return bool'
+- name: httpsOnly
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the route only responds to HTTPS requests.
+
+    # *
+
+    # * @return bool'
+- name: secure
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the route only responds to HTTPS requests.
+
+    # *
+
+    # * @return bool'
+- name: domain
+  visibility: public
+  parameters:
+  - name: domain
+    default: 'null'
+  comment: '# * Get or set the domain for the route.
+
+    # *
+
+    # * @param  string|null  $domain
+
+    # * @return $this|string|null'
+- name: getDomain
+  visibility: public
+  parameters: []
+  comment: '# * Get the domain defined for the route.
+
+    # *
+
+    # * @return string|null'
+- name: getPrefix
+  visibility: public
+  parameters: []
+  comment: '# * Get the prefix of the route instance.
+
+    # *
+
+    # * @return string|null'
+- name: prefix
+  visibility: public
+  parameters:
+  - name: prefix
+  comment: '# * Add a prefix to the route URI.
+
+    # *
+
+    # * @param  string  $prefix
+
+    # * @return $this'
+- name: updatePrefixOnAction
+  visibility: protected
+  parameters:
+  - name: prefix
+  comment: '# * Update the "prefix" attribute on the action array.
+
+    # *
+
+    # * @param  string  $prefix
+
+    # * @return void'
+- name: uri
+  visibility: public
+  parameters: []
+  comment: '# * Get the URI associated with the route.
+
+    # *
+
+    # * @return string'
+- name: setUri
+  visibility: public
+  parameters:
+  - name: uri
+  comment: '# * Set the URI that the route responds to.
+
+    # *
+
+    # * @param  string  $uri
+
+    # * @return $this'
+- name: parseUri
+  visibility: protected
+  parameters:
+  - name: uri
+  comment: '# * Parse the route URI and normalize / store any implicit binding fields.
+
+    # *
+
+    # * @param  string  $uri
+
+    # * @return string'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the route instance.
+
+    # *
+
+    # * @return string|null'
+- name: name
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Add or change the route name.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return $this'
+- name: named
+  visibility: public
+  parameters:
+  - name: '...$patterns'
+  comment: '# * Determine whether the route''s name matches the given patterns.
+
+    # *
+
+    # * @param  mixed  ...$patterns
+
+    # * @return bool'
+- name: uses
+  visibility: public
+  parameters:
+  - name: action
+  comment: '# * Set the handler for the route.
+
+    # *
+
+    # * @param  \Closure|array|string  $action
+
+    # * @return $this'
+- name: addGroupNamespaceToStringUses
+  visibility: protected
+  parameters:
+  - name: action
+  comment: '# * Parse a string based action for the "uses" fluent method.
+
+    # *
+
+    # * @param  string  $action
+
+    # * @return string'
+- name: getActionName
+  visibility: public
+  parameters: []
+  comment: '# * Get the action name for the route.
+
+    # *
+
+    # * @return string'
+- name: getActionMethod
+  visibility: public
+  parameters: []
+  comment: '# * Get the method name of the route action.
+
+    # *
+
+    # * @return string'
+- name: getAction
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  comment: '# * Get the action array or one of its properties for the route.
+
+    # *
+
+    # * @param  string|null  $key
+
+    # * @return mixed'
+- name: setAction
+  visibility: public
+  parameters:
+  - name: action
+  comment: '# * Set the action array for the route.
+
+    # *
+
+    # * @param  array  $action
+
+    # * @return $this'
+- name: getMissing
+  visibility: public
+  parameters: []
+  comment: '# * Get the value of the action that should be taken on a missing model
+    exception.
+
+    # *
+
+    # * @return \Closure|null'
+- name: missing
+  visibility: public
+  parameters:
+  - name: missing
+  comment: '# * Define the callable that should be invoked on a missing model exception.
+
+    # *
+
+    # * @param  \Closure  $missing
+
+    # * @return $this'
+- name: gatherMiddleware
+  visibility: public
+  parameters: []
+  comment: '# * Get all middleware, including the ones from the controller.
+
+    # *
+
+    # * @return array'
+- name: middleware
+  visibility: public
+  parameters:
+  - name: middleware
+    default: 'null'
+  comment: '# * Get or set the middlewares attached to the route.
+
+    # *
+
+    # * @param  array|string|null  $middleware
+
+    # * @return $this|array'
+- name: can
+  visibility: public
+  parameters:
+  - name: ability
+  - name: models
+    default: '[]'
+  comment: '# * Specify that the "Authorize" / "can" middleware should be applied
+    to the route with the given options.
+
+    # *
+
+    # * @param  string  $ability
+
+    # * @param  array|string  $models
+
+    # * @return $this'
+- name: controllerMiddleware
+  visibility: public
+  parameters: []
+  comment: '# * Get the middleware for the route''s controller.
+
+    # *
+
+    # * @return array'
+- name: staticallyProvidedControllerMiddleware
+  visibility: protected
+  parameters:
+  - name: class
+  - name: method
+  comment: '# * Get the statically provided controller middleware for the given class
+    and method.
+
+    # *
+
+    # * @param  string  $class
+
+    # * @param  string  $method
+
+    # * @return array'
+- name: withoutMiddleware
+  visibility: public
+  parameters:
+  - name: middleware
+  comment: '# * Specify middleware that should be removed from the given route.
+
+    # *
+
+    # * @param  array|string  $middleware
+
+    # * @return $this'
+- name: excludedMiddleware
+  visibility: public
+  parameters: []
+  comment: '# * Get the middleware that should be removed from the route.
+
+    # *
+
+    # * @return array'
+- name: scopeBindings
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the route should enforce scoping of multiple implicit
+    Eloquent bindings.
+
+    # *
+
+    # * @return $this'
+- name: withoutScopedBindings
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the route should not enforce scoping of multiple implicit
+    Eloquent bindings.
+
+    # *
+
+    # * @return $this'
+- name: enforcesScopedBindings
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the route should enforce scoping of multiple implicit
+    Eloquent bindings.
+
+    # *
+
+    # * @return bool'
+- name: preventsScopedBindings
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the route should prevent scoping of multiple implicit
+    Eloquent bindings.
+
+    # *
+
+    # * @return bool'
+- name: block
+  visibility: public
+  parameters:
+  - name: lockSeconds
+    default: '10'
+  - name: waitSeconds
+    default: '10'
+  comment: '# * Specify that the route should not allow concurrent requests from the
+    same session.
+
+    # *
+
+    # * @param  int|null  $lockSeconds
+
+    # * @param  int|null  $waitSeconds
+
+    # * @return $this'
+- name: withoutBlocking
+  visibility: public
+  parameters: []
+  comment: '# * Specify that the route should allow concurrent requests from the same
+    session.
+
+    # *
+
+    # * @return $this'
+- name: locksFor
+  visibility: public
+  parameters: []
+  comment: '# * Get the maximum number of seconds the route''s session lock should
+    be held for.
+
+    # *
+
+    # * @return int|null'
+- name: waitsFor
+  visibility: public
+  parameters: []
+  comment: '# * Get the maximum number of seconds to wait while attempting to acquire
+    a session lock.
+
+    # *
+
+    # * @return int|null'
+- name: controllerDispatcher
+  visibility: public
+  parameters: []
+  comment: '# * Get the dispatcher for the route''s controller.
+
+    # *
+
+    # * @return \Illuminate\Routing\Contracts\ControllerDispatcher'
+- name: getValidators
+  visibility: public
+  parameters: []
+  comment: '# * Get the route validators for the instance.
+
+    # *
+
+    # * @return array'
+- name: toSymfonyRoute
+  visibility: public
+  parameters: []
+  comment: '# * Convert the route to a Symfony route.
+
+    # *
+
+    # * @return \Symfony\Component\Routing\Route'
+- name: getOptionalParameterNames
+  visibility: protected
+  parameters: []
+  comment: '# * Get the optional parameter names for the route.
+
+    # *
+
+    # * @return array'
+- name: getCompiled
+  visibility: public
+  parameters: []
+  comment: '# * Get the compiled version of the route.
+
+    # *
+
+    # * @return \Symfony\Component\Routing\CompiledRoute'
+- name: setRouter
+  visibility: public
+  parameters:
+  - name: router
+  comment: '# * Set the router instance on the route.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Router  $router
+
+    # * @return $this'
+- name: setContainer
+  visibility: public
+  parameters:
+  - name: container
+  comment: '# * Set the container instance on the route.
+
+    # *
+
+    # * @param  \Illuminate\Container\Container  $container
+
+    # * @return $this'
+- name: prepareForSerialization
+  visibility: public
+  parameters: []
+  comment: '# * Prepare the route instance for serialization.
+
+    # *
+
+    # * @return void
+
+    # *
+
+    # * @throws \LogicException'
+- name: __get
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Dynamically access route parameters.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed'
+traits:
+- Closure
+- Illuminate\Container\Container
+- Illuminate\Http\Exceptions\HttpResponseException
+- Illuminate\Http\Request
+- Illuminate\Routing\Contracts\CallableDispatcher
+- Illuminate\Routing\Controllers\HasMiddleware
+- Illuminate\Routing\Controllers\Middleware
+- Illuminate\Routing\Matching\HostValidator
+- Illuminate\Routing\Matching\MethodValidator
+- Illuminate\Routing\Matching\SchemeValidator
+- Illuminate\Routing\Matching\UriValidator
+- Illuminate\Support\Arr
+- Illuminate\Support\Str
+- Illuminate\Support\Traits\Macroable
+- Laravel\SerializableClosure\SerializableClosure
+- LogicException
+- CreatesRegularExpressionRouteConstraints
+interfaces: []

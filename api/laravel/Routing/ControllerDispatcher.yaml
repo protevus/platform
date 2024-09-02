@@ -1,0 +1,79 @@
+name: ControllerDispatcher
+class_comment: null
+dependencies:
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: ControllerDispatcherContract
+  type: class
+  source: Illuminate\Routing\Contracts\ControllerDispatcher
+properties:
+- name: container
+  visibility: protected
+  comment: '# * The container instance.
+
+    # *
+
+    # * @var \Illuminate\Container\Container'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+  comment: "# * The container instance.\n# *\n# * @var \\Illuminate\\Container\\Container\n\
+    # */\n# protected $container;\n# \n# /**\n# * Create a new controller dispatcher\
+    \ instance.\n# *\n# * @param  \\Illuminate\\Container\\Container  $container\n\
+    # * @return void"
+- name: dispatch
+  visibility: public
+  parameters:
+  - name: route
+  - name: controller
+  - name: method
+  comment: '# * Dispatch a request to a given controller and method.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Route  $route
+
+    # * @param  mixed  $controller
+
+    # * @param  string  $method
+
+    # * @return mixed'
+- name: resolveParameters
+  visibility: protected
+  parameters:
+  - name: route
+  - name: controller
+  - name: method
+  comment: '# * Resolve the parameters for the controller.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Route  $route
+
+    # * @param  mixed  $controller
+
+    # * @param  string  $method
+
+    # * @return array'
+- name: getMiddleware
+  visibility: public
+  parameters:
+  - name: controller
+  - name: method
+  comment: '# * Get the middleware for the controller instance.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Controller  $controller
+
+    # * @param  string  $method
+
+    # * @return array'
+traits:
+- Illuminate\Container\Container
+- FiltersControllerMiddleware
+interfaces:
+- ControllerDispatcherContract

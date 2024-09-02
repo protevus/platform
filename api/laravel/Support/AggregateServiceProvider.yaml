@@ -1,0 +1,36 @@
+name: AggregateServiceProvider
+class_comment: null
+dependencies: []
+properties:
+- name: providers
+  visibility: protected
+  comment: '# * The provider class names.
+
+    # *
+
+    # * @var array'
+- name: instances
+  visibility: protected
+  comment: '# * An array of the service provider instances.
+
+    # *
+
+    # * @var array'
+methods:
+- name: register
+  visibility: public
+  parameters: []
+  comment: "# * The provider class names.\n# *\n# * @var array\n# */\n# protected\
+    \ $providers = [];\n# \n# /**\n# * An array of the service provider instances.\n\
+    # *\n# * @var array\n# */\n# protected $instances = [];\n# \n# /**\n# * Register\
+    \ the service provider.\n# *\n# * @return void"
+- name: provides
+  visibility: public
+  parameters: []
+  comment: '# * Get the services provided by the provider.
+
+    # *
+
+    # * @return array'
+traits: []
+interfaces: []

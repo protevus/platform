@@ -1,0 +1,118 @@
+name: TagSet
+class_comment: null
+dependencies:
+- name: Store
+  type: class
+  source: Illuminate\Contracts\Cache\Store
+properties:
+- name: store
+  visibility: protected
+  comment: '# * The cache store implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Cache\Store'
+- name: names
+  visibility: protected
+  comment: '# * The tag names.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: store
+  - name: names
+    default: '[]'
+  comment: "# * The cache store implementation.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Cache\\Store\n# */\n# protected $store;\n# \n# /**\n# * The tag names.\n# *\n\
+    # * @var array\n# */\n# protected $names = [];\n# \n# /**\n# * Create a new TagSet\
+    \ instance.\n# *\n# * @param  \\Illuminate\\Contracts\\Cache\\Store  $store\n\
+    # * @param  array  $names\n# * @return void"
+- name: reset
+  visibility: public
+  parameters: []
+  comment: '# * Reset all tags in the set.
+
+    # *
+
+    # * @return void'
+- name: resetTag
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Reset the tag and return the new tag identifier.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string'
+- name: flush
+  visibility: public
+  parameters: []
+  comment: '# * Flush all the tags in the set.
+
+    # *
+
+    # * @return void'
+- name: flushTag
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Flush the tag from the cache.
+
+    # *
+
+    # * @param  string  $name'
+- name: getNamespace
+  visibility: public
+  parameters: []
+  comment: '# * Get a unique namespace that changes when any of the tags are flushed.
+
+    # *
+
+    # * @return string'
+- name: tagIds
+  visibility: protected
+  parameters: []
+  comment: '# * Get an array of tag identifiers for all of the tags in the set.
+
+    # *
+
+    # * @return array'
+- name: tagId
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Get the unique tag identifier for a given tag.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string'
+- name: tagKey
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Get the tag identifier key for a given tag.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string'
+- name: getNames
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the tag names in the set.
+
+    # *
+
+    # * @return array'
+traits:
+- Illuminate\Contracts\Cache\Store
+interfaces: []

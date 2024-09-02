@@ -1,0 +1,29 @@
+name: ConsumeRemoteEventHandler
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: ConsumerInterface
+  type: class
+  source: Symfony\Component\RemoteEvent\Consumer\ConsumerInterface
+- name: LogicException
+  type: class
+  source: Symfony\Component\RemoteEvent\Exception\LogicException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: consumers
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: message
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Component\RemoteEvent\Consumer\ConsumerInterface
+- Symfony\Component\RemoteEvent\Exception\LogicException
+interfaces: []

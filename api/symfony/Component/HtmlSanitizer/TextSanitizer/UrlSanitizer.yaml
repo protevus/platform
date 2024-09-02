@@ -1,0 +1,96 @@
+name: UrlSanitizer
+class_comment: null
+dependencies:
+- name: SyntaxError
+  type: class
+  source: League\Uri\Exceptions\SyntaxError
+- name: UriString
+  type: class
+  source: League\Uri\UriString
+properties: []
+methods:
+- name: sanitize
+  visibility: public
+  parameters:
+  - name: input
+  - name: allowedSchemes
+    default: 'null'
+  - name: forceHttps
+    default: 'false'
+  - name: allowedHosts
+    default: 'null'
+  - name: allowRelative
+    default: 'false'
+  comment: '# * @internal
+
+    # */
+
+    # final class UrlSanitizer
+
+    # {
+
+    # /**
+
+    # * Sanitizes a given URL string.
+
+    # *
+
+    # * In addition to ensuring $input is a valid URL, this sanitizer checks that:
+
+    # *   * the URL''s host is allowed ;
+
+    # *   * the URL''s scheme is allowed ;
+
+    # *   * the URL is allowed to be relative if it is ;
+
+    # *
+
+    # * It also transforms the URL to HTTPS if requested.'
+- name: parse
+  visibility: public
+  parameters:
+  - name: url
+  comment: '# * Parses a given URL and returns an array of its components.
+
+    # *
+
+    # * @return null|array{
+
+    # *     scheme:?string,
+
+    # *     user:?string,
+
+    # *     pass:?string,
+
+    # *     host:?string,
+
+    # *     port:?int,
+
+    # *     path:string,
+
+    # *     query:?string,
+
+    # *     fragment:?string
+
+    # * }'
+- name: isHostlessScheme
+  visibility: private
+  parameters:
+  - name: scheme
+  comment: null
+- name: isAllowedHost
+  visibility: private
+  parameters:
+  - name: host
+  - name: allowedHosts
+  comment: null
+- name: matchAllowedHostParts
+  visibility: private
+  parameters:
+  - name: uriParts
+  - name: trustedParts
+  comment: null
+traits:
+- League\Uri\Exceptions\SyntaxError
+- League\Uri\UriString
+interfaces: []

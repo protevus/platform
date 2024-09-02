@@ -1,0 +1,404 @@
+name: Factory
+class_comment: '# * @mixin \Illuminate\Http\Client\PendingRequest'
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Middleware
+  type: class
+  source: GuzzleHttp\Middleware
+- name: Create
+  type: class
+  source: GuzzleHttp\Promise\Create
+- name: PromiseInterface
+  type: class
+  source: GuzzleHttp\Promise\PromiseInterface
+- name: Psr7Response
+  type: class
+  source: GuzzleHttp\Psr7\Response
+- name: TransferStats
+  type: class
+  source: GuzzleHttp\TransferStats
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: PHPUnit
+  type: class
+  source: PHPUnit\Framework\Assert
+properties:
+- name: dispatcher
+  visibility: protected
+  comment: "# * @mixin \\Illuminate\\Http\\Client\\PendingRequest\n# */\n# class Factory\n\
+    # {\n# use Macroable {\n# __call as macroCall;\n# }\n# \n# /**\n# * The event\
+    \ dispatcher implementation.\n# *\n# * @var \\Illuminate\\Contracts\\Events\\\
+    Dispatcher|null"
+- name: globalMiddleware
+  visibility: protected
+  comment: '# * The middleware to apply to every request.
+
+    # *
+
+    # * @var array'
+- name: globalOptions
+  visibility: protected
+  comment: '# * The options to apply to every request.
+
+    # *
+
+    # * @var \Closure|array'
+- name: stubCallbacks
+  visibility: protected
+  comment: '# * The stub callables that will handle requests.
+
+    # *
+
+    # * @var \Illuminate\Support\Collection'
+- name: recording
+  visibility: protected
+  comment: '# * Indicates if the factory is recording requests and responses.
+
+    # *
+
+    # * @var bool'
+- name: recorded
+  visibility: protected
+  comment: '# * The recorded response array.
+
+    # *
+
+    # * @var array'
+- name: responseSequences
+  visibility: protected
+  comment: '# * All created response sequences.
+
+    # *
+
+    # * @var array'
+- name: preventStrayRequests
+  visibility: protected
+  comment: '# * Indicates that an exception should be thrown if any request is not
+    faked.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: dispatcher
+    default: 'null'
+  comment: "# * @mixin \\Illuminate\\Http\\Client\\PendingRequest\n# */\n# class Factory\n\
+    # {\n# use Macroable {\n# __call as macroCall;\n# }\n# \n# /**\n# * The event\
+    \ dispatcher implementation.\n# *\n# * @var \\Illuminate\\Contracts\\Events\\\
+    Dispatcher|null\n# */\n# protected $dispatcher;\n# \n# /**\n# * The middleware\
+    \ to apply to every request.\n# *\n# * @var array\n# */\n# protected $globalMiddleware\
+    \ = [];\n# \n# /**\n# * The options to apply to every request.\n# *\n# * @var\
+    \ \\Closure|array\n# */\n# protected $globalOptions = [];\n# \n# /**\n# * The\
+    \ stub callables that will handle requests.\n# *\n# * @var \\Illuminate\\Support\\\
+    Collection\n# */\n# protected $stubCallbacks;\n# \n# /**\n# * Indicates if the\
+    \ factory is recording requests and responses.\n# *\n# * @var bool\n# */\n# protected\
+    \ $recording = false;\n# \n# /**\n# * The recorded response array.\n# *\n# * @var\
+    \ array\n# */\n# protected $recorded = [];\n# \n# /**\n# * All created response\
+    \ sequences.\n# *\n# * @var array\n# */\n# protected $responseSequences = [];\n\
+    # \n# /**\n# * Indicates that an exception should be thrown if any request is\
+    \ not faked.\n# *\n# * @var bool\n# */\n# protected $preventStrayRequests = false;\n\
+    # \n# /**\n# * Create a new factory instance.\n# *\n# * @param  \\Illuminate\\\
+    Contracts\\Events\\Dispatcher|null  $dispatcher\n# * @return void"
+- name: globalMiddleware
+  visibility: public
+  parameters:
+  - name: middleware
+  comment: '# * Add middleware to apply to every request.
+
+    # *
+
+    # * @param  callable  $middleware
+
+    # * @return $this'
+- name: globalRequestMiddleware
+  visibility: public
+  parameters:
+  - name: middleware
+  comment: '# * Add request middleware to apply to every request.
+
+    # *
+
+    # * @param  callable  $middleware
+
+    # * @return $this'
+- name: globalResponseMiddleware
+  visibility: public
+  parameters:
+  - name: middleware
+  comment: '# * Add response middleware to apply to every request.
+
+    # *
+
+    # * @param  callable  $middleware
+
+    # * @return $this'
+- name: globalOptions
+  visibility: public
+  parameters:
+  - name: options
+  comment: '# * Set the options to apply to every request.
+
+    # *
+
+    # * @param  \Closure|array  $options
+
+    # * @return $this'
+- name: response
+  visibility: public
+  parameters:
+  - name: body
+    default: 'null'
+  - name: status
+    default: '200'
+  - name: headers
+    default: '[]'
+  comment: '# * Create a new response instance for use during stubbing.
+
+    # *
+
+    # * @param  array|string|null  $body
+
+    # * @param  int  $status
+
+    # * @param  array  $headers
+
+    # * @return \GuzzleHttp\Promise\PromiseInterface'
+- name: sequence
+  visibility: public
+  parameters:
+  - name: responses
+    default: '[]'
+  comment: '# * Get an invokable object that returns a sequence of responses in order
+    for use during stubbing.
+
+    # *
+
+    # * @param  array  $responses
+
+    # * @return \Illuminate\Http\Client\ResponseSequence'
+- name: fake
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Register a stub callable that will intercept requests and be able
+    to return stub responses.
+
+    # *
+
+    # * @param  callable|array|null  $callback
+
+    # * @return $this'
+- name: fakeSequence
+  visibility: public
+  parameters:
+  - name: url
+    default: '''*'''
+  comment: '# * Register a response sequence for the given URL pattern.
+
+    # *
+
+    # * @param  string  $url
+
+    # * @return \Illuminate\Http\Client\ResponseSequence'
+- name: stubUrl
+  visibility: public
+  parameters:
+  - name: url
+  - name: callback
+  comment: '# * Stub the given URL using the given callback.
+
+    # *
+
+    # * @param  string  $url
+
+    # * @param  \Illuminate\Http\Client\Response|\GuzzleHttp\Promise\PromiseInterface|callable  $callback
+
+    # * @return $this'
+- name: preventStrayRequests
+  visibility: public
+  parameters:
+  - name: prevent
+    default: 'true'
+  comment: '# * Indicate that an exception should be thrown if any request is not
+    faked.
+
+    # *
+
+    # * @param  bool  $prevent
+
+    # * @return $this'
+- name: allowStrayRequests
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that an exception should not be thrown if any request is
+    not faked.
+
+    # *
+
+    # * @return $this'
+- name: record
+  visibility: protected
+  parameters: []
+  comment: '# * Begin recording request / response pairs.
+
+    # *
+
+    # * @return $this'
+- name: recordRequestResponsePair
+  visibility: public
+  parameters:
+  - name: request
+  - name: response
+  comment: '# * Record a request response pair.
+
+    # *
+
+    # * @param  \Illuminate\Http\Client\Request  $request
+
+    # * @param  \Illuminate\Http\Client\Response  $response
+
+    # * @return void'
+- name: assertSent
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Assert that a request / response pair was recorded matching a given
+    truth test.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return void'
+- name: assertSentInOrder
+  visibility: public
+  parameters:
+  - name: callbacks
+  comment: '# * Assert that the given request was sent in the given order.
+
+    # *
+
+    # * @param  array  $callbacks
+
+    # * @return void'
+- name: assertNotSent
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Assert that a request / response pair was not recorded matching a
+    given truth test.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return void'
+- name: assertNothingSent
+  visibility: public
+  parameters: []
+  comment: '# * Assert that no request / response pair was recorded.
+
+    # *
+
+    # * @return void'
+- name: assertSentCount
+  visibility: public
+  parameters:
+  - name: count
+  comment: '# * Assert how many requests have been recorded.
+
+    # *
+
+    # * @param  int  $count
+
+    # * @return void'
+- name: assertSequencesAreEmpty
+  visibility: public
+  parameters: []
+  comment: '# * Assert that every created response sequence is empty.
+
+    # *
+
+    # * @return void'
+- name: recorded
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Get a collection of the request / response pairs matching the given
+    truth test.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return \Illuminate\Support\Collection'
+- name: createPendingRequest
+  visibility: public
+  parameters: []
+  comment: '# * Create a new pending request instance for this factory.
+
+    # *
+
+    # * @return \Illuminate\Http\Client\PendingRequest'
+- name: newPendingRequest
+  visibility: protected
+  parameters: []
+  comment: '# * Instantiate a new pending request instance for this factory.
+
+    # *
+
+    # * @return \Illuminate\Http\Client\PendingRequest'
+- name: getDispatcher
+  visibility: public
+  parameters: []
+  comment: '# * Get the current event dispatcher implementation.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Events\Dispatcher|null'
+- name: getGlobalMiddleware
+  visibility: public
+  parameters: []
+  comment: '# * Get the array of global middleware.
+
+    # *
+
+    # * @return array'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Execute a method against a new pending request instance.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+traits:
+- Closure
+- GuzzleHttp\Middleware
+- GuzzleHttp\Promise\Create
+- GuzzleHttp\Promise\PromiseInterface
+- GuzzleHttp\TransferStats
+- Illuminate\Contracts\Events\Dispatcher
+- Illuminate\Support\Str
+- Illuminate\Support\Traits\Macroable
+interfaces: []

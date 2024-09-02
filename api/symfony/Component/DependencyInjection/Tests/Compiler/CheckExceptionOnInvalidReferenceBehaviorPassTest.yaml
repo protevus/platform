@@ -1,0 +1,90 @@
+name: CheckExceptionOnInvalidReferenceBehaviorPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: BoundArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\BoundArgument
+- name: AnalyzeServiceReferencesPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass
+- name: CheckExceptionOnInvalidReferenceBehaviorPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CheckExceptionOnInvalidReferenceBehaviorPass
+- name: InlineServiceDefinitionsPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass
+- name: ServiceLocatorTagPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: ServiceNotFoundException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+properties: []
+methods:
+- name: testProcess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessThrowsExceptionOnInvalidReference
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessThrowsExceptionOnInvalidReferenceFromInlinedDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessDefinitionWithBindings
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithErroredServiceLocator
+  visibility: public
+  parameters:
+  - name: inline
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testWithErroredHiddenService
+  visibility: public
+  parameters:
+  - name: inline
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testProcessThrowsExceptionOnInvalidReferenceWithAlternatives
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCurrentIdIsExcludedFromAlternatives
+  visibility: public
+  parameters: []
+  comment: null
+- name: process
+  visibility: private
+  parameters:
+  - name: container
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Argument\BoundArgument
+- Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass
+- Symfony\Component\DependencyInjection\Compiler\CheckExceptionOnInvalidReferenceBehaviorPass
+- Symfony\Component\DependencyInjection\Compiler\InlineServiceDefinitionsPass
+- Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+- Symfony\Component\DependencyInjection\Reference
+interfaces: []

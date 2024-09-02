@@ -1,0 +1,273 @@
+name: AbstractDescriptorTestCase
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: FooUnitEnum
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Fixtures\FooUnitEnum
+- name: ArrayInput
+  type: class
+  source: Symfony\Component\Console\Input\ArrayInput
+- name: BufferedOutput
+  type: class
+  source: Symfony\Component\Console\Output\BufferedOutput
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+- name: Alias
+  type: class
+  source: Symfony\Component\DependencyInjection\Alias
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: ParameterBag
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: Route
+  type: class
+  source: Symfony\Component\Routing\Route
+- name: RouteCollection
+  type: class
+  source: Symfony\Component\Routing\RouteCollection
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testDescribeRouteCollection
+  visibility: public
+  parameters:
+  - name: routes
+  - name: expectedDescription
+  comment: '# @dataProvider getDescribeRouteCollectionTestData'
+- name: getDescribeRouteCollectionTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDescribeRoute
+  visibility: public
+  parameters:
+  - name: route
+  - name: expectedDescription
+  comment: '# @dataProvider getDescribeRouteTestData'
+- name: getDescribeRouteTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDescribeContainerParameters
+  visibility: public
+  parameters:
+  - name: parameters
+  - name: expectedDescription
+  comment: '# @dataProvider getDescribeContainerParametersTestData'
+- name: getDescribeContainerParametersTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDescribeContainerBuilder
+  visibility: public
+  parameters:
+  - name: builder
+  - name: expectedDescription
+  - name: options
+  comment: '# @dataProvider getDescribeContainerBuilderTestData'
+- name: getDescribeContainerBuilderTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDescribeContainerExistingClassDefinition
+  visibility: public
+  parameters:
+  - name: definition
+  - name: expectedDescription
+  comment: '# * @dataProvider getDescribeContainerExistingClassDefinitionTestData'
+- name: getDescribeContainerExistingClassDefinitionTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDescribeContainerDefinition
+  visibility: public
+  parameters:
+  - name: definition
+  - name: expectedDescription
+  comment: '# @dataProvider getDescribeContainerDefinitionTestData'
+- name: getDescribeContainerDefinitionTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDescribeContainerDefinitionWithArgumentsShown
+  visibility: public
+  parameters:
+  - name: definition
+  - name: expectedDescription
+  comment: '# @dataProvider getDescribeContainerDefinitionWithArgumentsShownTestData'
+- name: getDescribeContainerDefinitionWithArgumentsShownTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDescribeContainerAlias
+  visibility: public
+  parameters:
+  - name: alias
+  - name: expectedDescription
+  comment: '# @dataProvider getDescribeContainerAliasTestData'
+- name: getDescribeContainerAliasTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDescribeContainerDefinitionWhichIsAnAlias
+  visibility: public
+  parameters:
+  - name: alias
+  - name: expectedDescription
+  - name: builder
+  - name: options
+    default: '[]'
+  comment: '# @dataProvider getDescribeContainerDefinitionWhichIsAnAliasTestData'
+- name: getDescribeContainerDefinitionWhichIsAnAliasTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDescribeContainerParameter
+  visibility: public
+  parameters:
+  - name: parameter
+  - name: expectedDescription
+  - name: options
+  comment: '# * The legacy group must be kept as deprecations will always be raised.
+
+    # *
+
+    # * @group legacy
+
+    # *
+
+    # * @dataProvider getDescribeContainerParameterTestData'
+- name: getDescribeContainerParameterTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDescribeEventDispatcher
+  visibility: public
+  parameters:
+  - name: eventDispatcher
+  - name: expectedDescription
+  - name: options
+  comment: '# @dataProvider getDescribeEventDispatcherTestData'
+- name: getDescribeEventDispatcherTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDescribeCallable
+  visibility: public
+  parameters:
+  - name: callable
+  - name: expectedDescription
+  comment: '# @dataProvider getDescribeCallableTestData'
+- name: getDescribeCallableTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDescribeDeprecatedCallable
+  visibility: public
+  parameters:
+  - name: callable
+  - name: expectedDescription
+  comment: '# * @group legacy
+
+    # *
+
+    # * @dataProvider getDescribeDeprecatedCallableTestData'
+- name: getDescribeDeprecatedCallableTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetClassDescription
+  visibility: public
+  parameters:
+  - name: object
+  - name: expectedDescription
+  comment: '# @dataProvider getClassDescriptionTestData'
+- name: getClassDescriptionTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetDeprecations
+  visibility: public
+  parameters:
+  - name: builder
+  - name: expectedDescription
+  comment: '# * @dataProvider getDeprecationsTestData'
+- name: getDeprecationsTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDescriptor
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getFormat
+  visibility: protected
+  parameters: []
+  comment: null
+- name: assertDescription
+  visibility: private
+  parameters:
+  - name: expectedDescription
+  - name: describedObject
+  - name: options
+    default: '[]'
+  comment: null
+- name: getDescriptionTestData
+  visibility: private
+  parameters:
+  - name: objects
+  comment: null
+- name: getContainerBuilderDescriptionTestData
+  visibility: private
+  parameters:
+  - name: objects
+  comment: null
+- name: getEventDispatcherDescriptionTestData
+  visibility: private
+  parameters:
+  - name: objects
+  comment: null
+- name: testDescribeContainerBuilderWithPriorityTags
+  visibility: public
+  parameters:
+  - name: builder
+  - name: expectedDescription
+  - name: options
+  comment: '# @dataProvider getDescribeContainerBuilderWithPriorityTagsTestData'
+- name: getDescribeContainerBuilderWithPriorityTagsTestData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\FrameworkBundle\Tests\Fixtures\FooUnitEnum
+- Symfony\Component\Console\Input\ArrayInput
+- Symfony\Component\Console\Output\BufferedOutput
+- Symfony\Component\Console\Style\SymfonyStyle
+- Symfony\Component\DependencyInjection\Alias
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\Routing\Route
+- Symfony\Component\Routing\RouteCollection
+interfaces: []

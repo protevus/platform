@@ -1,0 +1,139 @@
+name: MongoDbSessionHandlerTest
+class_comment: '# * @author Markus Bachmann <markus.bachmann@bachi.biz>
+
+  # *
+
+  # * @group integration
+
+  # * @group time-sensitive
+
+  # *
+
+  # * @requires extension mongodb'
+dependencies:
+- name: Binary
+  type: class
+  source: MongoDB\BSON\Binary
+- name: UTCDateTime
+  type: class
+  source: MongoDB\BSON\UTCDateTime
+- name: Client
+  type: class
+  source: MongoDB\Client
+- name: BulkWrite
+  type: class
+  source: MongoDB\Driver\BulkWrite
+- name: Command
+  type: class
+  source: MongoDB\Driver\Command
+- name: CommandException
+  type: class
+  source: MongoDB\Driver\Exception\CommandException
+- name: ConnectionException
+  type: class
+  source: MongoDB\Driver\Exception\ConnectionException
+- name: Manager
+  type: class
+  source: MongoDB\Driver\Manager
+- name: Query
+  type: class
+  source: MongoDB\Driver\Query
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: MongoDbSessionHandler
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Storage\Handler\MongoDbSessionHandler
+properties: []
+methods:
+- name: testConstructorShouldThrowExceptionForMissingOptions
+  visibility: public
+  parameters:
+  - name: options
+  comment: "# * @author Markus Bachmann <markus.bachmann@bachi.biz>\n# *\n# * @group\
+    \ integration\n# * @group time-sensitive\n# *\n# * @requires extension mongodb\n\
+    # */\n# class MongoDbSessionHandlerTest extends TestCase\n# {\n# private const\
+    \ DABASE_NAME = 'sf-test';\n# private const COLLECTION_NAME = 'session-test';\n\
+    # \n# public array $options;\n# private Manager $manager;\n# private MongoDbSessionHandler\
+    \ $storage;\n# \n# protected function setUp(): void\n# {\n# parent::setUp();\n\
+    # \n# $this->manager = new Manager('mongodb://'.getenv('MONGODB_HOST'));\n# \n\
+    # try {\n# $this->manager->executeCommand(self::DABASE_NAME, new Command(['ping'\
+    \ => 1]));\n# } catch (ConnectionException $e) {\n# $this->markTestSkipped(\\\
+    sprintf('MongoDB Server \"%s\" not running: %s', getenv('MONGODB_HOST'), $e->getMessage()));\n\
+    # }\n# \n# $this->options = [\n# 'id_field' => '_id',\n# 'data_field' => 'data',\n\
+    # 'time_field' => 'time',\n# 'expiry_field' => 'expires_at',\n# 'database' =>\
+    \ self::DABASE_NAME,\n# 'collection' => self::COLLECTION_NAME,\n# ];\n# \n# $this->storage\
+    \ = new MongoDbSessionHandler($this->manager, $this->options);\n# }\n# \n# public\
+    \ function testCreateFromClient()\n# {\n# $client = $this->createMock(Client::class);\n\
+    # $client->expects($this->once())\n# ->method('getManager')\n# ->willReturn($this->manager);\n\
+    # \n# $this->storage = new MongoDbSessionHandler($client, $this->options);\n#\
+    \ $this->storage->write('foo', 'bar');\n# \n# $this->assertCount(1, $this->getSessions());\n\
+    # }\n# \n# protected function tearDown(): void\n# {\n# try {\n# $this->manager->executeCommand(self::DABASE_NAME,\
+    \ new Command(['drop' => self::COLLECTION_NAME]));\n# } catch (CommandException\
+    \ $e) {\n# // The server may return a NamespaceNotFound error if the collection\
+    \ does not exist\n# if (26 !== $e->getCode()) {\n# throw $e;\n# }\n# }\n# }\n\
+    # \n# /** @dataProvider provideInvalidOptions"
+- name: provideInvalidOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOpenMethodAlwaysReturnTrue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCloseMethodAlwaysReturnTrue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRead
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReadNotFound
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReadExpired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWrite
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReplaceSessionData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDestroy
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGc
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSessions
+  visibility: private
+  parameters: []
+  comment: '# * @return list<object{_id:string,data:Binary,time:UTCDateTime,expires_at:UTCDateTime>'
+- name: insertSession
+  visibility: private
+  parameters:
+  - name: sessionId
+  - name: data
+  - name: timeDiff
+  comment: null
+traits:
+- MongoDB\BSON\Binary
+- MongoDB\BSON\UTCDateTime
+- MongoDB\Client
+- MongoDB\Driver\BulkWrite
+- MongoDB\Driver\Command
+- MongoDB\Driver\Exception\CommandException
+- MongoDB\Driver\Exception\ConnectionException
+- MongoDB\Driver\Manager
+- MongoDB\Driver\Query
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Session\Storage\Handler\MongoDbSessionHandler
+interfaces: []

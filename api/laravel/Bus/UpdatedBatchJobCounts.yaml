@@ -1,0 +1,41 @@
+name: UpdatedBatchJobCounts
+class_comment: null
+dependencies: []
+properties:
+- name: pendingJobs
+  visibility: public
+  comment: '# * The number of pending jobs remaining for the batch.
+
+    # *
+
+    # * @var int'
+- name: failedJobs
+  visibility: public
+  comment: '# * The number of failed jobs that belong to the batch.
+
+    # *
+
+    # * @var int'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: pendingJobs
+    default: '0'
+  - name: failedJobs
+    default: '0'
+  comment: "# * The number of pending jobs remaining for the batch.\n# *\n# * @var\
+    \ int\n# */\n# public $pendingJobs;\n# \n# /**\n# * The number of failed jobs\
+    \ that belong to the batch.\n# *\n# * @var int\n# */\n# public $failedJobs;\n\
+    # \n# /**\n# * Create a new batch job counts object.\n# *\n# * @param  int  $pendingJobs\n\
+    # * @param  int  $failedJobs\n# * @return void"
+- name: allJobsHaveRanExactlyOnce
+  visibility: public
+  parameters: []
+  comment: '# * Determine if all jobs have run exactly once.
+
+    # *
+
+    # * @return bool'
+traits: []
+interfaces: []

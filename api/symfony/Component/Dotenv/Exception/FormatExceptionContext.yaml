@@ -1,0 +1,27 @@
+name: FormatExceptionContext
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: data
+  - name: path
+  - name: lineno
+  - name: cursor
+  comment: null
+- name: getPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: getLineno
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDetails
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

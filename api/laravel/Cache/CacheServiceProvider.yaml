@@ -1,0 +1,36 @@
+name: CacheServiceProvider
+class_comment: null
+dependencies:
+- name: DeferrableProvider
+  type: class
+  source: Illuminate\Contracts\Support\DeferrableProvider
+- name: ServiceProvider
+  type: class
+  source: Illuminate\Support\ServiceProvider
+- name: Psr16Adapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\Psr16Adapter
+properties: []
+methods:
+- name: register
+  visibility: public
+  parameters: []
+  comment: '# * Register the service provider.
+
+    # *
+
+    # * @return void'
+- name: provides
+  visibility: public
+  parameters: []
+  comment: '# * Get the services provided by the provider.
+
+    # *
+
+    # * @return array'
+traits:
+- Illuminate\Contracts\Support\DeferrableProvider
+- Illuminate\Support\ServiceProvider
+- Symfony\Component\Cache\Adapter\Psr16Adapter
+interfaces:
+- DeferrableProvider

@@ -1,0 +1,12 @@
+name: RuntimeException
+class_comment: '# * Base RuntimeException for the Workflow component.
+
+  # *
+
+  # * @author Alain Flaus <alain.flaus@gmail.com>'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- ExceptionInterface

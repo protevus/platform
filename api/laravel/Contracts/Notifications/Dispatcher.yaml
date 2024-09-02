@@ -1,0 +1,39 @@
+name: Dispatcher
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: send
+  visibility: public
+  parameters:
+  - name: notifiables
+  - name: notification
+  comment: '# * Send the given notification to the given notifiable entities.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
+
+    # * @param  mixed  $notification
+
+    # * @return void'
+- name: sendNow
+  visibility: public
+  parameters:
+  - name: notifiables
+  - name: notification
+  - name: channels
+    default: 'null'
+  comment: '# * Send the given notification immediately.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection|array|mixed  $notifiables
+
+    # * @param  mixed  $notification
+
+    # * @param  array|null  $channels
+
+    # * @return void'
+traits: []
+interfaces: []

@@ -1,0 +1,30 @@
+name: Verified
+class_comment: null
+dependencies:
+- name: SerializesModels
+  type: class
+  source: Illuminate\Queue\SerializesModels
+- name: SerializesModels
+  type: class
+  source: SerializesModels
+properties:
+- name: user
+  visibility: public
+  comment: '# * The verified user.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Auth\MustVerifyEmail'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: user
+  comment: "# * The verified user.\n# *\n# * @var \\Illuminate\\Contracts\\Auth\\\
+    MustVerifyEmail\n# */\n# public $user;\n# \n# /**\n# * Create a new event instance.\n\
+    # *\n# * @param  \\Illuminate\\Contracts\\Auth\\MustVerifyEmail  $user\n# * @return\
+    \ void"
+traits:
+- Illuminate\Queue\SerializesModels
+- SerializesModels
+interfaces: []

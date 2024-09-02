@@ -1,0 +1,16 @@
+name: PredisSessionHandlerTest
+class_comment: '# * @group integration'
+dependencies:
+- name: Client
+  type: class
+  source: Predis\Client
+properties: []
+methods:
+- name: createRedisClient
+  visibility: protected
+  parameters:
+  - name: host
+  comment: null
+traits:
+- Predis\Client
+interfaces: []

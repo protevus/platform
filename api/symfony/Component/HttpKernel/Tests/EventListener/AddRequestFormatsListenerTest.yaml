@@ -1,0 +1,51 @@
+name: AddRequestFormatsListenerTest
+class_comment: '# * @author Gildas Quemener <gildas.quemener@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\RequestEvent
+- name: AddRequestFormatsListener
+  type: class
+  source: Symfony\Component\HttpKernel\EventListener\AddRequestFormatsListener
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+- name: KernelEvents
+  type: class
+  source: Symfony\Component\HttpKernel\KernelEvents
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testIsAnEventSubscriber
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRegisteredEvent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetAdditionalFormats
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\Event\RequestEvent
+- Symfony\Component\HttpKernel\EventListener\AddRequestFormatsListener
+- Symfony\Component\HttpKernel\HttpKernelInterface
+- Symfony\Component\HttpKernel\KernelEvents
+interfaces: []

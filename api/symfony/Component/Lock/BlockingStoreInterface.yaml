@@ -1,0 +1,30 @@
+name: BlockingStoreInterface
+class_comment: null
+dependencies:
+- name: LockConflictedException
+  type: class
+  source: Symfony\Component\Lock\Exception\LockConflictedException
+properties: []
+methods:
+- name: waitAndSave
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * @author Hamza Amrouche <hamza.simperfit@gmail.com>
+
+    # */
+
+    # interface BlockingStoreInterface extends PersistingStoreInterface
+
+    # {
+
+    # /**
+
+    # * Waits until a key becomes free, then stores the resource.
+
+    # *
+
+    # * @throws LockConflictedException'
+traits:
+- Symfony\Component\Lock\Exception\LockConflictedException
+interfaces: []

@@ -1,0 +1,23 @@
+name: ExcludeTimeTriggerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ExcludeTimeTrigger
+  type: class
+  source: Symfony\Component\Scheduler\Trigger\ExcludeTimeTrigger
+- name: TriggerInterface
+  type: class
+  source: Symfony\Component\Scheduler\Trigger\TriggerInterface
+properties: []
+methods:
+- name: testGetNextRun
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Scheduler\Trigger\ExcludeTimeTrigger
+- Symfony\Component\Scheduler\Trigger\TriggerInterface
+interfaces: []

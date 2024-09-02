@@ -1,0 +1,51 @@
+name: DefinitionTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Definition
+  type: class
+  source: Symfony\Component\Workflow\Definition
+- name: LogicException
+  type: class
+  source: Symfony\Component\Workflow\Exception\LogicException
+- name: Transition
+  type: class
+  source: Symfony\Component\Workflow\Transition
+properties: []
+methods:
+- name: testAddPlaces
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetInitialPlace
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetInitialPlaces
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetInitialPlaceAndPlaceIsNotDefined
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddTransition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddTransitionAndFromPlaceIsNotDefined
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddTransitionAndToPlaceIsNotDefined
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Workflow\Definition
+- Symfony\Component\Workflow\Exception\LogicException
+- Symfony\Component\Workflow\Transition
+interfaces: []

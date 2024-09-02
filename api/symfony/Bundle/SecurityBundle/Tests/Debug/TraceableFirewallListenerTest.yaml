@@ -1,0 +1,98 @@
+name: TraceableFirewallListenerTest
+class_comment: '# * @group time-sensitive'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: TraceableFirewallListener
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener
+- name: FirewallMap
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Security\FirewallMap
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: RequestEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\RequestEvent
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+- name: TokenStorageInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+- name: TokenInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\TokenInterface
+- name: AuthenticatorManager
+  type: class
+  source: Symfony\Component\Security\Http\Authentication\AuthenticatorManager
+- name: TraceableAuthenticator
+  type: class
+  source: Symfony\Component\Security\Http\Authenticator\Debug\TraceableAuthenticator
+- name: TraceableAuthenticatorManagerListener
+  type: class
+  source: Symfony\Component\Security\Http\Authenticator\Debug\TraceableAuthenticatorManagerListener
+- name: InteractiveAuthenticatorInterface
+  type: class
+  source: Symfony\Component\Security\Http\Authenticator\InteractiveAuthenticatorInterface
+- name: UserBadge
+  type: class
+  source: Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge
+- name: Passport
+  type: class
+  source: Symfony\Component\Security\Http\Authenticator\Passport\Passport
+- name: SelfValidatingPassport
+  type: class
+  source: Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport
+- name: AuthenticatorManagerListener
+  type: class
+  source: Symfony\Component\Security\Http\Firewall\AuthenticatorManagerListener
+- name: LogoutUrlGenerator
+  type: class
+  source: Symfony\Component\Security\Http\Logout\LogoutUrlGenerator
+properties: []
+methods:
+- name: testOnKernelRequestRecordsListeners
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOnKernelRequestRecordsAuthenticatorsInfo
+  visibility: public
+  parameters: []
+  comment: null
+- name: createToken
+  visibility: public
+  parameters:
+  - name: passport
+  - name: firewallName
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener
+- Symfony\Bundle\SecurityBundle\Security\FirewallMap
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Event\RequestEvent
+- Symfony\Component\HttpKernel\HttpKernelInterface
+- Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+- Symfony\Component\Security\Core\Authentication\Token\TokenInterface
+- Symfony\Component\Security\Http\Authentication\AuthenticatorManager
+- Symfony\Component\Security\Http\Authenticator\Debug\TraceableAuthenticator
+- Symfony\Component\Security\Http\Authenticator\Debug\TraceableAuthenticatorManagerListener
+- Symfony\Component\Security\Http\Authenticator\InteractiveAuthenticatorInterface
+- Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge
+- Symfony\Component\Security\Http\Authenticator\Passport\Passport
+- Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport
+- Symfony\Component\Security\Http\Firewall\AuthenticatorManagerListener
+- Symfony\Component\Security\Http\Logout\LogoutUrlGenerator
+interfaces:
+- InteractiveAuthenticatorInterface

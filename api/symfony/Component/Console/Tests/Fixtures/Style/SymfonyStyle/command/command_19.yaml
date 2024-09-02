@@ -1,0 +1,23 @@
+name: command_19
+class_comment: null
+dependencies:
+- name: TableCell
+  type: class
+  source: Symfony\Component\Console\Helper\TableCell
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+properties: []
+methods: []
+traits:
+- Symfony\Component\Console\Helper\TableCell
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Style\SymfonyStyle
+interfaces: []

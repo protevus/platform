@@ -1,0 +1,1396 @@
+name: Connection
+class_comment: null
+dependencies:
+- name: CarbonInterval
+  type: class
+  source: Carbon\CarbonInterval
+- name: Closure
+  type: class
+  source: Closure
+- name: DateTimeInterface
+  type: class
+  source: DateTimeInterface
+- name: Exception
+  type: class
+  source: Exception
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: QueryExecuted
+  type: class
+  source: Illuminate\Database\Events\QueryExecuted
+- name: StatementPrepared
+  type: class
+  source: Illuminate\Database\Events\StatementPrepared
+- name: TransactionBeginning
+  type: class
+  source: Illuminate\Database\Events\TransactionBeginning
+- name: TransactionCommitted
+  type: class
+  source: Illuminate\Database\Events\TransactionCommitted
+- name: TransactionCommitting
+  type: class
+  source: Illuminate\Database\Events\TransactionCommitting
+- name: TransactionRolledBack
+  type: class
+  source: Illuminate\Database\Events\TransactionRolledBack
+- name: QueryBuilder
+  type: class
+  source: Illuminate\Database\Query\Builder
+- name: Expression
+  type: class
+  source: Illuminate\Database\Query\Expression
+- name: QueryGrammar
+  type: class
+  source: Illuminate\Database\Query\Grammars\Grammar
+- name: Processor
+  type: class
+  source: Illuminate\Database\Query\Processors\Processor
+- name: SchemaBuilder
+  type: class
+  source: Illuminate\Database\Schema\Builder
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: InteractsWithTime
+  type: class
+  source: Illuminate\Support\InteractsWithTime
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: PDO
+  type: class
+  source: PDO
+- name: PDOStatement
+  type: class
+  source: PDOStatement
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+properties:
+- name: pdo
+  visibility: protected
+  comment: '# * The active PDO connection.
+
+    # *
+
+    # * @var \PDO|\Closure'
+- name: readPdo
+  visibility: protected
+  comment: '# * The active PDO connection used for reads.
+
+    # *
+
+    # * @var \PDO|\Closure'
+- name: database
+  visibility: protected
+  comment: '# * The name of the connected database.
+
+    # *
+
+    # * @var string'
+- name: readWriteType
+  visibility: protected
+  comment: '# * The type of the connection.
+
+    # *
+
+    # * @var string|null'
+- name: tablePrefix
+  visibility: protected
+  comment: '# * The table prefix for the connection.
+
+    # *
+
+    # * @var string'
+- name: config
+  visibility: protected
+  comment: '# * The database connection configuration options.
+
+    # *
+
+    # * @var array'
+- name: reconnector
+  visibility: protected
+  comment: '# * The reconnector instance for the connection.
+
+    # *
+
+    # * @var callable'
+- name: queryGrammar
+  visibility: protected
+  comment: '# * The query grammar implementation.
+
+    # *
+
+    # * @var \Illuminate\Database\Query\Grammars\Grammar'
+- name: schemaGrammar
+  visibility: protected
+  comment: '# * The schema grammar implementation.
+
+    # *
+
+    # * @var \Illuminate\Database\Schema\Grammars\Grammar'
+- name: postProcessor
+  visibility: protected
+  comment: '# * The query post processor implementation.
+
+    # *
+
+    # * @var \Illuminate\Database\Query\Processors\Processor'
+- name: events
+  visibility: protected
+  comment: '# * The event dispatcher instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Events\Dispatcher'
+- name: fetchMode
+  visibility: protected
+  comment: '# * The default fetch mode of the connection.
+
+    # *
+
+    # * @var int'
+- name: transactions
+  visibility: protected
+  comment: '# * The number of active transactions.
+
+    # *
+
+    # * @var int'
+- name: transactionsManager
+  visibility: protected
+  comment: '# * The transaction manager instance.
+
+    # *
+
+    # * @var \Illuminate\Database\DatabaseTransactionsManager'
+- name: recordsModified
+  visibility: protected
+  comment: '# * Indicates if changes have been made to the database.
+
+    # *
+
+    # * @var bool'
+- name: readOnWriteConnection
+  visibility: protected
+  comment: '# * Indicates if the connection should use the "write" PDO connection.
+
+    # *
+
+    # * @var bool'
+- name: queryLog
+  visibility: protected
+  comment: '# * All of the queries run against the connection.
+
+    # *
+
+    # * @var array'
+- name: loggingQueries
+  visibility: protected
+  comment: '# * Indicates whether queries are being logged.
+
+    # *
+
+    # * @var bool'
+- name: totalQueryDuration
+  visibility: protected
+  comment: '# * The duration of all executed queries in milliseconds.
+
+    # *
+
+    # * @var float'
+- name: queryDurationHandlers
+  visibility: protected
+  comment: '# * All of the registered query duration handlers.
+
+    # *
+
+    # * @var array'
+- name: pretending
+  visibility: protected
+  comment: '# * Indicates if the connection is in a "dry run".
+
+    # *
+
+    # * @var bool'
+- name: beforeStartingTransaction
+  visibility: protected
+  comment: '# * All of the callbacks that should be invoked before a transaction is
+    started.
+
+    # *
+
+    # * @var \Closure[]'
+- name: beforeExecutingCallbacks
+  visibility: protected
+  comment: '# * All of the callbacks that should be invoked before a query is executed.
+
+    # *
+
+    # * @var \Closure[]'
+- name: resolvers
+  visibility: protected
+  comment: '# * The connection resolvers.
+
+    # *
+
+    # * @var \Closure[]'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: pdo
+  - name: database
+    default: ''''''
+  - name: tablePrefix
+    default: ''''''
+  - name: config
+    default: '[]'
+  comment: "# * The active PDO connection.\n# *\n# * @var \\PDO|\\Closure\n# */\n\
+    # protected $pdo;\n# \n# /**\n# * The active PDO connection used for reads.\n\
+    # *\n# * @var \\PDO|\\Closure\n# */\n# protected $readPdo;\n# \n# /**\n# * The\
+    \ name of the connected database.\n# *\n# * @var string\n# */\n# protected $database;\n\
+    # \n# /**\n# * The type of the connection.\n# *\n# * @var string|null\n# */\n\
+    # protected $readWriteType;\n# \n# /**\n# * The table prefix for the connection.\n\
+    # *\n# * @var string\n# */\n# protected $tablePrefix = '';\n# \n# /**\n# * The\
+    \ database connection configuration options.\n# *\n# * @var array\n# */\n# protected\
+    \ $config = [];\n# \n# /**\n# * The reconnector instance for the connection.\n\
+    # *\n# * @var callable\n# */\n# protected $reconnector;\n# \n# /**\n# * The query\
+    \ grammar implementation.\n# *\n# * @var \\Illuminate\\Database\\Query\\Grammars\\\
+    Grammar\n# */\n# protected $queryGrammar;\n# \n# /**\n# * The schema grammar implementation.\n\
+    # *\n# * @var \\Illuminate\\Database\\Schema\\Grammars\\Grammar\n# */\n# protected\
+    \ $schemaGrammar;\n# \n# /**\n# * The query post processor implementation.\n#\
+    \ *\n# * @var \\Illuminate\\Database\\Query\\Processors\\Processor\n# */\n# protected\
+    \ $postProcessor;\n# \n# /**\n# * The event dispatcher instance.\n# *\n# * @var\
+    \ \\Illuminate\\Contracts\\Events\\Dispatcher\n# */\n# protected $events;\n# \n\
+    # /**\n# * The default fetch mode of the connection.\n# *\n# * @var int\n# */\n\
+    # protected $fetchMode = PDO::FETCH_OBJ;\n# \n# /**\n# * The number of active\
+    \ transactions.\n# *\n# * @var int\n# */\n# protected $transactions = 0;\n# \n\
+    # /**\n# * The transaction manager instance.\n# *\n# * @var \\Illuminate\\Database\\\
+    DatabaseTransactionsManager\n# */\n# protected $transactionsManager;\n# \n# /**\n\
+    # * Indicates if changes have been made to the database.\n# *\n# * @var bool\n\
+    # */\n# protected $recordsModified = false;\n# \n# /**\n# * Indicates if the connection\
+    \ should use the \"write\" PDO connection.\n# *\n# * @var bool\n# */\n# protected\
+    \ $readOnWriteConnection = false;\n# \n# /**\n# * All of the queries run against\
+    \ the connection.\n# *\n# * @var array\n# */\n# protected $queryLog = [];\n# \n\
+    # /**\n# * Indicates whether queries are being logged.\n# *\n# * @var bool\n#\
+    \ */\n# protected $loggingQueries = false;\n# \n# /**\n# * The duration of all\
+    \ executed queries in milliseconds.\n# *\n# * @var float\n# */\n# protected $totalQueryDuration\
+    \ = 0.0;\n# \n# /**\n# * All of the registered query duration handlers.\n# *\n\
+    # * @var array\n# */\n# protected $queryDurationHandlers = [];\n# \n# /**\n# *\
+    \ Indicates if the connection is in a \"dry run\".\n# *\n# * @var bool\n# */\n\
+    # protected $pretending = false;\n# \n# /**\n# * All of the callbacks that should\
+    \ be invoked before a transaction is started.\n# *\n# * @var \\Closure[]\n# */\n\
+    # protected $beforeStartingTransaction = [];\n# \n# /**\n# * All of the callbacks\
+    \ that should be invoked before a query is executed.\n# *\n# * @var \\Closure[]\n\
+    # */\n# protected $beforeExecutingCallbacks = [];\n# \n# /**\n# * The connection\
+    \ resolvers.\n# *\n# * @var \\Closure[]\n# */\n# protected static $resolvers =\
+    \ [];\n# \n# /**\n# * Create a new database connection instance.\n# *\n# * @param\
+    \  \\PDO|\\Closure  $pdo\n# * @param  string  $database\n# * @param  string  $tablePrefix\n\
+    # * @param  array  $config\n# * @return void"
+- name: useDefaultQueryGrammar
+  visibility: public
+  parameters: []
+  comment: '# * Set the query grammar to the default implementation.
+
+    # *
+
+    # * @return void'
+- name: getDefaultQueryGrammar
+  visibility: protected
+  parameters: []
+  comment: '# * Get the default query grammar instance.
+
+    # *
+
+    # * @return \Illuminate\Database\Query\Grammars\Grammar'
+- name: useDefaultSchemaGrammar
+  visibility: public
+  parameters: []
+  comment: '# * Set the schema grammar to the default implementation.
+
+    # *
+
+    # * @return void'
+- name: getDefaultSchemaGrammar
+  visibility: protected
+  parameters: []
+  comment: '# * Get the default schema grammar instance.
+
+    # *
+
+    # * @return \Illuminate\Database\Schema\Grammars\Grammar|null'
+- name: useDefaultPostProcessor
+  visibility: public
+  parameters: []
+  comment: '# * Set the query post processor to the default implementation.
+
+    # *
+
+    # * @return void'
+- name: getDefaultPostProcessor
+  visibility: protected
+  parameters: []
+  comment: '# * Get the default post processor instance.
+
+    # *
+
+    # * @return \Illuminate\Database\Query\Processors\Processor'
+- name: getSchemaBuilder
+  visibility: public
+  parameters: []
+  comment: '# * Get a schema builder instance for the connection.
+
+    # *
+
+    # * @return \Illuminate\Database\Schema\Builder'
+- name: table
+  visibility: public
+  parameters:
+  - name: table
+  - name: as
+    default: 'null'
+  comment: '# * Begin a fluent query against a database table.
+
+    # *
+
+    # * @param  \Closure|\Illuminate\Database\Query\Builder|\Illuminate\Contracts\Database\Query\Expression|string  $table
+
+    # * @param  string|null  $as
+
+    # * @return \Illuminate\Database\Query\Builder'
+- name: query
+  visibility: public
+  parameters: []
+  comment: '# * Get a new query builder instance.
+
+    # *
+
+    # * @return \Illuminate\Database\Query\Builder'
+- name: selectOne
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  - name: useReadPdo
+    default: 'true'
+  comment: '# * Run a select statement and return a single result.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @param  bool  $useReadPdo
+
+    # * @return mixed'
+- name: scalar
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  - name: useReadPdo
+    default: 'true'
+  comment: '# * Run a select statement and return the first column of the first row.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @param  bool  $useReadPdo
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Illuminate\Database\MultipleColumnsSelectedException'
+- name: selectFromWriteConnection
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  comment: '# * Run a select statement against the database.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @return array'
+- name: select
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  - name: useReadPdo
+    default: 'true'
+  comment: '# * Run a select statement against the database.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @param  bool  $useReadPdo
+
+    # * @return array'
+- name: selectResultSets
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  - name: useReadPdo
+    default: 'true'
+  comment: '# * Run a select statement against the database and returns all of the
+    result sets.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @param  bool  $useReadPdo
+
+    # * @return array'
+- name: cursor
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  - name: useReadPdo
+    default: 'true'
+  comment: '# * Run a select statement against the database and returns a generator.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @param  bool  $useReadPdo
+
+    # * @return \Generator'
+- name: prepared
+  visibility: protected
+  parameters:
+  - name: statement
+  comment: '# * Configure the PDO prepared statement.
+
+    # *
+
+    # * @param  \PDOStatement  $statement
+
+    # * @return \PDOStatement'
+- name: getPdoForSelect
+  visibility: protected
+  parameters:
+  - name: useReadPdo
+    default: 'true'
+  comment: '# * Get the PDO connection to use for a select query.
+
+    # *
+
+    # * @param  bool  $useReadPdo
+
+    # * @return \PDO'
+- name: insert
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  comment: '# * Run an insert statement against the database.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @return bool'
+- name: update
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  comment: '# * Run an update statement against the database.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @return int'
+- name: delete
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  comment: '# * Run a delete statement against the database.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @return int'
+- name: statement
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  comment: '# * Execute an SQL statement and return the boolean result.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @return bool'
+- name: affectingStatement
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  comment: '# * Run an SQL statement and get the number of rows affected.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @return int'
+- name: unprepared
+  visibility: public
+  parameters:
+  - name: query
+  comment: '# * Run a raw, unprepared query against the PDO connection.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @return bool'
+- name: pretend
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Execute the given callback in "dry run" mode.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return array'
+- name: withoutPretending
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Execute the given callback without "pretending".
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return mixed'
+- name: withFreshQueryLog
+  visibility: protected
+  parameters:
+  - name: callback
+  comment: '# * Execute the given callback in "dry run" mode.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return array'
+- name: bindValues
+  visibility: public
+  parameters:
+  - name: statement
+  - name: bindings
+  comment: '# * Bind values to their parameters in the given statement.
+
+    # *
+
+    # * @param  \PDOStatement  $statement
+
+    # * @param  array  $bindings
+
+    # * @return void'
+- name: prepareBindings
+  visibility: public
+  parameters:
+  - name: bindings
+  comment: '# * Prepare the query bindings for execution.
+
+    # *
+
+    # * @param  array  $bindings
+
+    # * @return array'
+- name: run
+  visibility: protected
+  parameters:
+  - name: query
+  - name: bindings
+  - name: callback
+  comment: '# * Run a SQL statement and log its execution context.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @param  \Closure  $callback
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Illuminate\Database\QueryException'
+- name: runQueryCallback
+  visibility: protected
+  parameters:
+  - name: query
+  - name: bindings
+  - name: callback
+  comment: '# * Run a SQL statement.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @param  \Closure  $callback
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Illuminate\Database\QueryException'
+- name: isUniqueConstraintError
+  visibility: protected
+  parameters:
+  - name: exception
+  comment: '# * Determine if the given database exception was caused by a unique constraint
+    violation.
+
+    # *
+
+    # * @param  \Exception  $exception
+
+    # * @return bool'
+- name: logQuery
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+  - name: time
+    default: 'null'
+  comment: '# * Log a query in the connection''s query log.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @param  float|null  $time
+
+    # * @return void'
+- name: getElapsedTime
+  visibility: protected
+  parameters:
+  - name: start
+  comment: '# * Get the elapsed time since a given starting point.
+
+    # *
+
+    # * @param  int  $start
+
+    # * @return float'
+- name: whenQueryingForLongerThan
+  visibility: public
+  parameters:
+  - name: threshold
+  - name: handler
+  comment: '# * Register a callback to be invoked when the connection queries for
+    longer than a given amount of time.
+
+    # *
+
+    # * @param  \DateTimeInterface|\Carbon\CarbonInterval|float|int  $threshold
+
+    # * @param  callable  $handler
+
+    # * @return void'
+- name: allowQueryDurationHandlersToRunAgain
+  visibility: public
+  parameters: []
+  comment: '# * Allow all the query duration handlers to run again, even if they have
+    already run.
+
+    # *
+
+    # * @return void'
+- name: totalQueryDuration
+  visibility: public
+  parameters: []
+  comment: '# * Get the duration of all run queries in milliseconds.
+
+    # *
+
+    # * @return float'
+- name: resetTotalQueryDuration
+  visibility: public
+  parameters: []
+  comment: '# * Reset the duration of all run queries.
+
+    # *
+
+    # * @return void'
+- name: handleQueryException
+  visibility: protected
+  parameters:
+  - name: e
+  - name: query
+  - name: bindings
+  - name: callback
+  comment: '# * Handle a query exception.
+
+    # *
+
+    # * @param  \Illuminate\Database\QueryException  $e
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @param  \Closure  $callback
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Illuminate\Database\QueryException'
+- name: tryAgainIfCausedByLostConnection
+  visibility: protected
+  parameters:
+  - name: e
+  - name: query
+  - name: bindings
+  - name: callback
+  comment: '# * Handle a query exception that occurred during query execution.
+
+    # *
+
+    # * @param  \Illuminate\Database\QueryException  $e
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @param  \Closure  $callback
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Illuminate\Database\QueryException'
+- name: reconnect
+  visibility: public
+  parameters: []
+  comment: '# * Reconnect to the database.
+
+    # *
+
+    # * @return mixed|false
+
+    # *
+
+    # * @throws \Illuminate\Database\LostConnectionException'
+- name: reconnectIfMissingConnection
+  visibility: public
+  parameters: []
+  comment: '# * Reconnect to the database if a PDO connection is missing.
+
+    # *
+
+    # * @return void'
+- name: disconnect
+  visibility: public
+  parameters: []
+  comment: '# * Disconnect from the underlying PDO connection.
+
+    # *
+
+    # * @return void'
+- name: beforeStartingTransaction
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a hook to be run just before a database transaction is started.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return $this'
+- name: beforeExecuting
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a hook to be run just before a database query is executed.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return $this'
+- name: listen
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a database query listener with the connection.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return void'
+- name: fireConnectionEvent
+  visibility: protected
+  parameters:
+  - name: event
+  comment: '# * Fire an event for this connection.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @return array|null'
+- name: event
+  visibility: protected
+  parameters:
+  - name: event
+  comment: '# * Fire the given event if possible.
+
+    # *
+
+    # * @param  mixed  $event
+
+    # * @return void'
+- name: raw
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Get a new raw query expression.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return \Illuminate\Contracts\Database\Query\Expression'
+- name: escape
+  visibility: public
+  parameters:
+  - name: value
+  - name: binary
+    default: 'false'
+  comment: '# * Escape a value for safe SQL embedding.
+
+    # *
+
+    # * @param  string|float|int|bool|null  $value
+
+    # * @param  bool  $binary
+
+    # * @return string'
+- name: escapeString
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Escape a string value for safe SQL embedding.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: escapeBool
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Escape a boolean value for safe SQL embedding.
+
+    # *
+
+    # * @param  bool  $value
+
+    # * @return string'
+- name: escapeBinary
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Escape a binary value for safe SQL embedding.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: hasModifiedRecords
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the database connection has modified any database records.
+
+    # *
+
+    # * @return bool'
+- name: recordsHaveBeenModified
+  visibility: public
+  parameters:
+  - name: value
+    default: 'true'
+  comment: '# * Indicate if any records have been modified.
+
+    # *
+
+    # * @param  bool  $value
+
+    # * @return void'
+- name: setRecordModificationState
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Set the record modification state.
+
+    # *
+
+    # * @param  bool  $value
+
+    # * @return $this'
+- name: forgetRecordModificationState
+  visibility: public
+  parameters: []
+  comment: '# * Reset the record modification state.
+
+    # *
+
+    # * @return void'
+- name: useWriteConnectionWhenReading
+  visibility: public
+  parameters:
+  - name: value
+    default: 'true'
+  comment: '# * Indicate that the connection should use the write PDO connection for
+    reads.
+
+    # *
+
+    # * @param  bool  $value
+
+    # * @return $this'
+- name: getPdo
+  visibility: public
+  parameters: []
+  comment: '# * Get the current PDO connection.
+
+    # *
+
+    # * @return \PDO'
+- name: getRawPdo
+  visibility: public
+  parameters: []
+  comment: '# * Get the current PDO connection parameter without executing any reconnect
+    logic.
+
+    # *
+
+    # * @return \PDO|\Closure|null'
+- name: getReadPdo
+  visibility: public
+  parameters: []
+  comment: '# * Get the current PDO connection used for reading.
+
+    # *
+
+    # * @return \PDO'
+- name: getRawReadPdo
+  visibility: public
+  parameters: []
+  comment: '# * Get the current read PDO connection parameter without executing any
+    reconnect logic.
+
+    # *
+
+    # * @return \PDO|\Closure|null'
+- name: setPdo
+  visibility: public
+  parameters:
+  - name: pdo
+  comment: '# * Set the PDO connection.
+
+    # *
+
+    # * @param  \PDO|\Closure|null  $pdo
+
+    # * @return $this'
+- name: setReadPdo
+  visibility: public
+  parameters:
+  - name: pdo
+  comment: '# * Set the PDO connection used for reading.
+
+    # *
+
+    # * @param  \PDO|\Closure|null  $pdo
+
+    # * @return $this'
+- name: setReconnector
+  visibility: public
+  parameters:
+  - name: reconnector
+  comment: '# * Set the reconnect instance on the connection.
+
+    # *
+
+    # * @param  callable  $reconnector
+
+    # * @return $this'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: '# * Get the database connection name.
+
+    # *
+
+    # * @return string|null'
+- name: getNameWithReadWriteType
+  visibility: public
+  parameters: []
+  comment: '# * Get the database connection full name.
+
+    # *
+
+    # * @return string|null'
+- name: getConfig
+  visibility: public
+  parameters:
+  - name: option
+    default: 'null'
+  comment: '# * Get an option from the configuration options.
+
+    # *
+
+    # * @param  string|null  $option
+
+    # * @return mixed'
+- name: getDriverName
+  visibility: public
+  parameters: []
+  comment: '# * Get the PDO driver name.
+
+    # *
+
+    # * @return string'
+- name: getQueryGrammar
+  visibility: public
+  parameters: []
+  comment: '# * Get the query grammar used by the connection.
+
+    # *
+
+    # * @return \Illuminate\Database\Query\Grammars\Grammar'
+- name: setQueryGrammar
+  visibility: public
+  parameters:
+  - name: grammar
+  comment: '# * Set the query grammar used by the connection.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Grammars\Grammar  $grammar
+
+    # * @return $this'
+- name: getSchemaGrammar
+  visibility: public
+  parameters: []
+  comment: '# * Get the schema grammar used by the connection.
+
+    # *
+
+    # * @return \Illuminate\Database\Schema\Grammars\Grammar'
+- name: setSchemaGrammar
+  visibility: public
+  parameters:
+  - name: grammar
+  comment: '# * Set the schema grammar used by the connection.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Grammars\Grammar  $grammar
+
+    # * @return $this'
+- name: getPostProcessor
+  visibility: public
+  parameters: []
+  comment: '# * Get the query post processor used by the connection.
+
+    # *
+
+    # * @return \Illuminate\Database\Query\Processors\Processor'
+- name: setPostProcessor
+  visibility: public
+  parameters:
+  - name: processor
+  comment: '# * Set the query post processor used by the connection.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Processors\Processor  $processor
+
+    # * @return $this'
+- name: getEventDispatcher
+  visibility: public
+  parameters: []
+  comment: '# * Get the event dispatcher used by the connection.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Events\Dispatcher'
+- name: setEventDispatcher
+  visibility: public
+  parameters:
+  - name: events
+  comment: '# * Set the event dispatcher instance on the connection.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Events\Dispatcher  $events
+
+    # * @return $this'
+- name: unsetEventDispatcher
+  visibility: public
+  parameters: []
+  comment: '# * Unset the event dispatcher for this connection.
+
+    # *
+
+    # * @return void'
+- name: setTransactionManager
+  visibility: public
+  parameters:
+  - name: manager
+  comment: '# * Set the transaction manager instance on the connection.
+
+    # *
+
+    # * @param  \Illuminate\Database\DatabaseTransactionsManager  $manager
+
+    # * @return $this'
+- name: unsetTransactionManager
+  visibility: public
+  parameters: []
+  comment: '# * Unset the transaction manager for this connection.
+
+    # *
+
+    # * @return void'
+- name: pretending
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the connection is in a "dry run".
+
+    # *
+
+    # * @return bool'
+- name: getQueryLog
+  visibility: public
+  parameters: []
+  comment: '# * Get the connection query log.
+
+    # *
+
+    # * @return array'
+- name: getRawQueryLog
+  visibility: public
+  parameters: []
+  comment: '# * Get the connection query log with embedded bindings.
+
+    # *
+
+    # * @return array'
+- name: flushQueryLog
+  visibility: public
+  parameters: []
+  comment: '# * Clear the query log.
+
+    # *
+
+    # * @return void'
+- name: enableQueryLog
+  visibility: public
+  parameters: []
+  comment: '# * Enable the query log on the connection.
+
+    # *
+
+    # * @return void'
+- name: disableQueryLog
+  visibility: public
+  parameters: []
+  comment: '# * Disable the query log on the connection.
+
+    # *
+
+    # * @return void'
+- name: logging
+  visibility: public
+  parameters: []
+  comment: '# * Determine whether we''re logging queries.
+
+    # *
+
+    # * @return bool'
+- name: getDatabaseName
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the connected database.
+
+    # *
+
+    # * @return string'
+- name: setDatabaseName
+  visibility: public
+  parameters:
+  - name: database
+  comment: '# * Set the name of the connected database.
+
+    # *
+
+    # * @param  string  $database
+
+    # * @return $this'
+- name: setReadWriteType
+  visibility: public
+  parameters:
+  - name: readWriteType
+  comment: '# * Set the read / write type of the connection.
+
+    # *
+
+    # * @param  string|null  $readWriteType
+
+    # * @return $this'
+- name: getTablePrefix
+  visibility: public
+  parameters: []
+  comment: '# * Get the table prefix for the connection.
+
+    # *
+
+    # * @return string'
+- name: setTablePrefix
+  visibility: public
+  parameters:
+  - name: prefix
+  comment: '# * Set the table prefix in use by the connection.
+
+    # *
+
+    # * @param  string  $prefix
+
+    # * @return $this'
+- name: withTablePrefix
+  visibility: public
+  parameters:
+  - name: grammar
+  comment: '# * Set the table prefix and return the grammar.
+
+    # *
+
+    # * @param  \Illuminate\Database\Grammar  $grammar
+
+    # * @return \Illuminate\Database\Grammar'
+- name: getServerVersion
+  visibility: public
+  parameters: []
+  comment: '# * Get the server version for the connection.
+
+    # *
+
+    # * @return string'
+- name: resolverFor
+  visibility: public
+  parameters:
+  - name: driver
+  - name: callback
+  comment: '# * Register a connection resolver.
+
+    # *
+
+    # * @param  string  $driver
+
+    # * @param  \Closure  $callback
+
+    # * @return void'
+- name: getResolver
+  visibility: public
+  parameters:
+  - name: driver
+  comment: '# * Get the connection resolver for the given driver.
+
+    # *
+
+    # * @param  string  $driver
+
+    # * @return mixed'
+traits:
+- Carbon\CarbonInterval
+- Closure
+- DateTimeInterface
+- Exception
+- Illuminate\Contracts\Events\Dispatcher
+- Illuminate\Database\Events\QueryExecuted
+- Illuminate\Database\Events\StatementPrepared
+- Illuminate\Database\Events\TransactionBeginning
+- Illuminate\Database\Events\TransactionCommitted
+- Illuminate\Database\Events\TransactionCommitting
+- Illuminate\Database\Events\TransactionRolledBack
+- Illuminate\Database\Query\Expression
+- Illuminate\Database\Query\Processors\Processor
+- Illuminate\Support\Arr
+- Illuminate\Support\InteractsWithTime
+- Illuminate\Support\Traits\Macroable
+- PDO
+- PDOStatement
+- RuntimeException
+- DetectsConcurrencyErrors
+interfaces:
+- ConnectionInterface

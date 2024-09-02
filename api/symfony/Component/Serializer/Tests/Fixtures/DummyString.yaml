@@ -1,0 +1,37 @@
+name: DummyString
+class_comment: '# * @author Jeroen <github.com/Jeroeny>'
+dependencies:
+- name: DenormalizableInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizableInterface
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+properties:
+- name: value
+  visibility: public
+  comment: '# * @author Jeroen <github.com/Jeroeny>
+
+    # */
+
+    # class DummyString implements DenormalizableInterface
+
+    # {
+
+    # /** @var string $value'
+methods:
+- name: denormalize
+  visibility: public
+  parameters:
+  - name: denormalizer
+  - name: data
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\Serializer\Normalizer\DenormalizableInterface
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+interfaces:
+- DenormalizableInterface

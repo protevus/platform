@@ -1,0 +1,229 @@
+name: Cookie
+class_comment: '# * Represents a cookie.
+
+  # *
+
+  # * @author Johannes M. Schmitt <schmittjoh@gmail.com>'
+dependencies: []
+properties: []
+methods:
+- name: fromString
+  visibility: public
+  parameters:
+  - name: cookie
+  - name: decode
+    default: 'false'
+  comment: "# * Represents a cookie.\n# *\n# * @author Johannes M. Schmitt <schmittjoh@gmail.com>\n\
+    # */\n# class Cookie\n# {\n# public const SAMESITE_NONE = 'none';\n# public const\
+    \ SAMESITE_LAX = 'lax';\n# public const SAMESITE_STRICT = 'strict';\n# \n# protected\
+    \ int $expire;\n# protected string $path;\n# \n# private ?string $sameSite = null;\n\
+    # private bool $secureDefault = false;\n# \n# private const RESERVED_CHARS_LIST\
+    \ = \"=,; \\t\\r\\n\\v\\f\";\n# private const RESERVED_CHARS_FROM = ['=', ',',\
+    \ ';', ' ', \"\\t\", \"\\r\", \"\\n\", \"\\v\", \"\\f\"];\n# private const RESERVED_CHARS_TO\
+    \ = ['%3D', '%2C', '%3B', '%20', '%09', '%0D', '%0A', '%0B', '%0C'];\n# \n# /**\n\
+    # * Creates cookie from raw header string."
+- name: create
+  visibility: public
+  parameters:
+  - name: name
+  - name: value
+    default: 'null'
+  - name: expire
+    default: '0'
+  - name: path
+    default: '''/'''
+  - name: domain
+    default: 'null'
+  - name: secure
+    default: 'null'
+  - name: httpOnly
+    default: 'true'
+  - name: raw
+    default: 'false'
+  - name: sameSite
+    default: self::SAMESITE_LAX
+  - name: partitioned
+    default: 'false'
+  comment: '# * @see self::__construct
+
+    # *
+
+    # * @param self::SAMESITE_*|''''|null $sameSite'
+- name: __construct
+  visibility: public
+  parameters:
+  - name: name
+  - name: value
+    default: 'null'
+  - name: expire
+    default: '0'
+  - name: path
+    default: '''/'''
+  - name: domain
+    default: 'null'
+  - name: secure
+    default: 'null'
+  - name: httpOnly
+    default: 'true'
+  - name: raw
+    default: 'false'
+  - name: sameSite
+    default: self::SAMESITE_LAX
+  - name: partitioned
+    default: 'false'
+  comment: '# * @param string                        $name     The name of the cookie
+
+    # * @param string|null                   $value    The value of the cookie
+
+    # * @param int|string|\DateTimeInterface $expire   The time the cookie expires
+
+    # * @param string|null                   $path     The path on the server in which
+    the cookie will be available on
+
+    # * @param string|null                   $domain   The domain that the cookie
+    is available to
+
+    # * @param bool|null                     $secure   Whether the client should send
+    back the cookie only over HTTPS or null to auto-enable this when the request is
+    already using HTTPS
+
+    # * @param bool                          $httpOnly Whether the cookie will be
+    made accessible only through the HTTP protocol
+
+    # * @param bool                          $raw      Whether the cookie value should
+    be sent with no url encoding
+
+    # * @param self::SAMESITE_*|''''|null      $sameSite Whether the cookie will be
+    available for cross-site requests
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: withValue
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Creates a cookie copy with a new value.'
+- name: withDomain
+  visibility: public
+  parameters:
+  - name: domain
+  comment: '# * Creates a cookie copy with a new domain that the cookie is available
+    to.'
+- name: withExpires
+  visibility: public
+  parameters:
+  - name: expire
+    default: '0'
+  comment: '# * Creates a cookie copy with a new time the cookie expires.'
+- name: expiresTimestamp
+  visibility: private
+  parameters:
+  - name: expire
+    default: '0'
+  comment: '# * Converts expires formats to a unix timestamp.'
+- name: withPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Creates a cookie copy with a new path on the server in which the cookie
+    will be available on.'
+- name: withSecure
+  visibility: public
+  parameters:
+  - name: secure
+    default: 'true'
+  comment: '# * Creates a cookie copy that only be transmitted over a secure HTTPS
+    connection from the client.'
+- name: withHttpOnly
+  visibility: public
+  parameters:
+  - name: httpOnly
+    default: 'true'
+  comment: '# * Creates a cookie copy that be accessible only through the HTTP protocol.'
+- name: withRaw
+  visibility: public
+  parameters:
+  - name: raw
+    default: 'true'
+  comment: '# * Creates a cookie copy that uses no url encoding.'
+- name: withSameSite
+  visibility: public
+  parameters:
+  - name: sameSite
+  comment: '# * Creates a cookie copy with SameSite attribute.
+
+    # *
+
+    # * @param self::SAMESITE_*|''''|null $sameSite'
+- name: withPartitioned
+  visibility: public
+  parameters:
+  - name: partitioned
+    default: 'true'
+  comment: '# * Creates a cookie copy that is tied to the top-level site in cross-site
+    context.'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Returns the cookie as a string.'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: '# * Gets the name of the cookie.'
+- name: getValue
+  visibility: public
+  parameters: []
+  comment: '# * Gets the value of the cookie.'
+- name: getDomain
+  visibility: public
+  parameters: []
+  comment: '# * Gets the domain that the cookie is available to.'
+- name: getExpiresTime
+  visibility: public
+  parameters: []
+  comment: '# * Gets the time the cookie expires.'
+- name: getMaxAge
+  visibility: public
+  parameters: []
+  comment: '# * Gets the max-age attribute.'
+- name: getPath
+  visibility: public
+  parameters: []
+  comment: '# * Gets the path on the server in which the cookie will be available
+    on.'
+- name: isSecure
+  visibility: public
+  parameters: []
+  comment: '# * Checks whether the cookie should only be transmitted over a secure
+    HTTPS connection from the client.'
+- name: isHttpOnly
+  visibility: public
+  parameters: []
+  comment: '# * Checks whether the cookie will be made accessible only through the
+    HTTP protocol.'
+- name: isCleared
+  visibility: public
+  parameters: []
+  comment: '# * Whether this cookie is about to be cleared.'
+- name: isRaw
+  visibility: public
+  parameters: []
+  comment: '# * Checks if the cookie value should be sent with no url encoding.'
+- name: isPartitioned
+  visibility: public
+  parameters: []
+  comment: '# * Checks whether the cookie should be tied to the top-level site in
+    cross-site context.'
+- name: getSameSite
+  visibility: public
+  parameters: []
+  comment: '# * @return self::SAMESITE_*|null'
+- name: setSecureDefault
+  visibility: public
+  parameters:
+  - name: default
+  comment: '# * @param bool $default The default value of the "secure" flag when it
+    is set to null'
+traits: []
+interfaces: []

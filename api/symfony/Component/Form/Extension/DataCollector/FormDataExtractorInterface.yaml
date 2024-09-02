@@ -1,0 +1,49 @@
+name: FormDataExtractorInterface
+class_comment: null
+dependencies:
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+- name: FormView
+  type: class
+  source: Symfony\Component\Form\FormView
+properties: []
+methods:
+- name: extractConfiguration
+  visibility: public
+  parameters:
+  - name: form
+  comment: '# * Extracts arrays of information out of forms.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # interface FormDataExtractorInterface
+
+    # {
+
+    # /**
+
+    # * Extracts the configuration data of a form.'
+- name: extractDefaultData
+  visibility: public
+  parameters:
+  - name: form
+  comment: '# * Extracts the default data of a form.'
+- name: extractSubmittedData
+  visibility: public
+  parameters:
+  - name: form
+  comment: '# * Extracts the submitted data of a form.'
+- name: extractViewVariables
+  visibility: public
+  parameters:
+  - name: view
+  comment: '# * Extracts the view variables of a form.'
+traits:
+- Symfony\Component\Form\FormInterface
+- Symfony\Component\Form\FormView
+interfaces: []

@@ -1,0 +1,33 @@
+name: WorkerStopping
+class_comment: null
+dependencies: []
+properties:
+- name: status
+  visibility: public
+  comment: '# * The worker exit status.
+
+    # *
+
+    # * @var int'
+- name: workerOptions
+  visibility: public
+  comment: '# * The worker options.
+
+    # *
+
+    # * @var \Illuminate\Queue\WorkerOptions|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: status
+    default: '0'
+  - name: workerOptions
+    default: 'null'
+  comment: "# * The worker exit status.\n# *\n# * @var int\n# */\n# public $status;\n\
+    # \n# /**\n# * The worker options.\n# *\n# * @var \\Illuminate\\Queue\\WorkerOptions|null\n\
+    # */\n# public $workerOptions;\n# \n# /**\n# * Create a new event instance.\n\
+    # *\n# * @param  int  $status\n# * @param  \\Illuminate\\Queue\\WorkerOptions|null\
+    \  $workerOptions\n# * @return void"
+traits: []
+interfaces: []

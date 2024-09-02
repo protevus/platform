@@ -1,0 +1,47 @@
+name: DefinitionErrorExceptionPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: DefinitionErrorExceptionPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\DefinitionErrorExceptionPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+properties: []
+methods:
+- name: testThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoExceptionThrown
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSkipNestedErrors
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSkipErrorFromTag
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Compiler\DefinitionErrorExceptionPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Reference
+interfaces: []

@@ -1,0 +1,123 @@
+name: MessageGeneratorTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ArrayAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\ArrayAdapter
+- name: MockClock
+  type: class
+  source: Symfony\Component\Clock\MockClock
+- name: Checkpoint
+  type: class
+  source: Symfony\Component\Scheduler\Generator\Checkpoint
+- name: MessageContext
+  type: class
+  source: Symfony\Component\Scheduler\Generator\MessageContext
+- name: MessageGenerator
+  type: class
+  source: Symfony\Component\Scheduler\Generator\MessageGenerator
+- name: RecurringMessage
+  type: class
+  source: Symfony\Component\Scheduler\RecurringMessage
+- name: Schedule
+  type: class
+  source: Symfony\Component\Scheduler\Schedule
+- name: ScheduleProviderInterface
+  type: class
+  source: Symfony\Component\Scheduler\ScheduleProviderInterface
+- name: TriggerInterface
+  type: class
+  source: Symfony\Component\Scheduler\Trigger\TriggerInterface
+properties: []
+methods:
+- name: testGetMessagesFromSchedule
+  visibility: public
+  parameters:
+  - name: startTime
+  - name: runs
+  - name: schedule
+  comment: '# * @dataProvider messagesProvider'
+- name: testGetMessagesFromScheduleProvider
+  visibility: public
+  parameters:
+  - name: startTime
+  - name: runs
+  - name: schedule
+  comment: '# * @dataProvider messagesProvider'
+- name: __construct
+  visibility: public
+  parameters:
+  - name: schedule
+  comment: null
+- name: getSchedule
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetMessagesFromScheduleProviderWithRestart
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: schedule
+  comment: null
+- name: getSchedule
+  visibility: public
+  parameters: []
+  comment: null
+- name: add
+  visibility: public
+  parameters:
+  - name: message
+  comment: null
+- name: testYieldedContext
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCheckpointSavedInBrokenLoop
+  visibility: public
+  parameters: []
+  comment: null
+- name: messagesProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNextRunDate
+  visibility: public
+  parameters:
+  - name: run
+  comment: null
+- name: createMessage
+  visibility: private
+  parameters:
+  - name: message
+  - name: '...$runs'
+  comment: null
+- name: makeDateTime
+  visibility: private
+  parameters:
+  - name: time
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Cache\Adapter\ArrayAdapter
+- Symfony\Component\Clock\MockClock
+- Symfony\Component\Scheduler\Generator\Checkpoint
+- Symfony\Component\Scheduler\Generator\MessageContext
+- Symfony\Component\Scheduler\Generator\MessageGenerator
+- Symfony\Component\Scheduler\RecurringMessage
+- Symfony\Component\Scheduler\Schedule
+- Symfony\Component\Scheduler\ScheduleProviderInterface
+- Symfony\Component\Scheduler\Trigger\TriggerInterface
+interfaces:
+- ScheduleProviderInterface
+- ScheduleProviderInterface
+- TriggerInterface

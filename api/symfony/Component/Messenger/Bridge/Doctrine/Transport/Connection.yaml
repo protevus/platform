@@ -1,0 +1,241 @@
+name: Connection
+class_comment: "# * @internal\n# *\n# * @author Vincent Touzet <vincent.touzet@gmail.com>\n\
+  # * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# * @author Herberto Graca <herberto.graca@gmail.com>\n\
+  # * @author Alexander Malyk <shu.rick.ifmo@gmail.com>"
+dependencies:
+- name: DBALConnection
+  type: class
+  source: Doctrine\DBAL\Connection
+- name: DriverException
+  type: class
+  source: Doctrine\DBAL\Driver\Exception
+- name: DBALException
+  type: class
+  source: Doctrine\DBAL\Exception
+- name: TableNotFoundException
+  type: class
+  source: Doctrine\DBAL\Exception\TableNotFoundException
+- name: LockMode
+  type: class
+  source: Doctrine\DBAL\LockMode
+- name: AbstractMySQLPlatform
+  type: class
+  source: Doctrine\DBAL\Platforms\AbstractMySQLPlatform
+- name: OraclePlatform
+  type: class
+  source: Doctrine\DBAL\Platforms\OraclePlatform
+- name: PostgreSQLPlatform
+  type: class
+  source: Doctrine\DBAL\Platforms\PostgreSQLPlatform
+- name: ConflictResolutionMode
+  type: class
+  source: Doctrine\DBAL\Query\ForUpdate\ConflictResolutionMode
+- name: QueryBuilder
+  type: class
+  source: Doctrine\DBAL\Query\QueryBuilder
+- name: Result
+  type: class
+  source: Doctrine\DBAL\Result
+- name: AbstractAsset
+  type: class
+  source: Doctrine\DBAL\Schema\AbstractAsset
+- name: Schema
+  type: class
+  source: Doctrine\DBAL\Schema\Schema
+- name: Table
+  type: class
+  source: Doctrine\DBAL\Schema\Table
+- name: Types
+  type: class
+  source: Doctrine\DBAL\Types\Types
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Messenger\Exception\InvalidArgumentException
+- name: TransportException
+  type: class
+  source: Symfony\Component\Messenger\Exception\TransportException
+- name: ResetInterface
+  type: class
+  source: Symfony\Contracts\Service\ResetInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: configuration
+  - name: driverConnection
+  comment: "# * @internal\n# *\n# * @author Vincent Touzet <vincent.touzet@gmail.com>\n\
+    # * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# * @author Herberto Graca <herberto.graca@gmail.com>\n\
+    # * @author Alexander Malyk <shu.rick.ifmo@gmail.com>\n# */\n# class Connection\
+    \ implements ResetInterface\n# {\n# protected const TABLE_OPTION_NAME = '_symfony_messenger_table_name';\n\
+    # \n# protected const DEFAULT_OPTIONS = [\n# 'table_name' => 'messenger_messages',\n\
+    # 'queue_name' => 'default',\n# 'redeliver_timeout' => 3600,\n# 'auto_setup' =>\
+    \ true,\n# ];\n# \n# protected ?float $queueEmptiedAt = null;\n# \n# private bool\
+    \ $autoSetup;\n# private bool $doMysqlCleanup = false;\n# \n# /**\n# * Constructor.\n\
+    # *\n# * Available options:\n# *\n# * * table_name: name of the table\n# * * connection:\
+    \ name of the Doctrine's entity manager\n# * * queue_name: name of the queue\n\
+    # * * redeliver_timeout: Timeout before redeliver messages still in handling state\
+    \ (i.e: delivered_at is not null and message is still in table). Default: 3600\n\
+    # * * auto_setup: Whether the table should be created automatically during send\
+    \ / get. Default: true"
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+- name: getConfiguration
+  visibility: public
+  parameters: []
+  comment: null
+- name: buildConfiguration
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: options
+    default: '[]'
+  comment: null
+- name: send
+  visibility: public
+  parameters:
+  - name: body
+  - name: headers
+  - name: delay
+    default: '0'
+  comment: '# * @param int $delay The delay in milliseconds
+
+    # *
+
+    # * @return string The inserted id
+
+    # *
+
+    # * @throws DBALException'
+- name: get
+  visibility: public
+  parameters: []
+  comment: null
+- name: ack
+  visibility: public
+  parameters:
+  - name: id
+  comment: null
+- name: reject
+  visibility: public
+  parameters:
+  - name: id
+  comment: null
+- name: setup
+  visibility: public
+  parameters: []
+  comment: null
+- name: getMessageCount
+  visibility: public
+  parameters: []
+  comment: null
+- name: findAll
+  visibility: public
+  parameters:
+  - name: limit
+    default: 'null'
+  comment: null
+- name: find
+  visibility: public
+  parameters:
+  - name: id
+  comment: null
+- name: configureSchema
+  visibility: public
+  parameters:
+  - name: schema
+  - name: forConnection
+  - name: isSameDatabase
+  comment: '# * @internal'
+- name: getExtraSetupSqlForTable
+  visibility: public
+  parameters:
+  - name: createdTable
+  comment: '# * @internal'
+- name: createAvailableMessagesQueryBuilder
+  visibility: private
+  parameters: []
+  comment: null
+- name: createQueryBuilder
+  visibility: private
+  parameters:
+  - name: alias
+    default: '''m'''
+  comment: null
+- name: executeQuery
+  visibility: private
+  parameters:
+  - name: sql
+  - name: parameters
+    default: '[]'
+  - name: types
+    default: '[]'
+  comment: null
+- name: executeStatement
+  visibility: protected
+  parameters:
+  - name: sql
+  - name: parameters
+    default: '[]'
+  - name: types
+    default: '[]'
+  comment: null
+- name: executeInsert
+  visibility: private
+  parameters:
+  - name: sql
+  - name: parameters
+    default: '[]'
+  - name: types
+    default: '[]'
+  comment: null
+- name: getSchema
+  visibility: private
+  parameters: []
+  comment: null
+- name: addTableToSchema
+  visibility: private
+  parameters:
+  - name: schema
+  comment: null
+- name: decodeEnvelopeHeaders
+  visibility: private
+  parameters:
+  - name: doctrineEnvelope
+  comment: null
+- name: updateSchema
+  visibility: private
+  parameters: []
+  comment: null
+- name: addLockMode
+  visibility: private
+  parameters:
+  - name: query
+  - name: sql
+  comment: null
+- name: fallBackToForUpdate
+  visibility: private
+  parameters:
+  - name: query
+  - name: sql
+  comment: null
+traits:
+- Doctrine\DBAL\Exception\TableNotFoundException
+- Doctrine\DBAL\LockMode
+- Doctrine\DBAL\Platforms\AbstractMySQLPlatform
+- Doctrine\DBAL\Platforms\OraclePlatform
+- Doctrine\DBAL\Platforms\PostgreSQLPlatform
+- Doctrine\DBAL\Query\ForUpdate\ConflictResolutionMode
+- Doctrine\DBAL\Query\QueryBuilder
+- Doctrine\DBAL\Result
+- Doctrine\DBAL\Schema\AbstractAsset
+- Doctrine\DBAL\Schema\Schema
+- Doctrine\DBAL\Schema\Table
+- Doctrine\DBAL\Types\Types
+- Symfony\Component\Messenger\Exception\InvalidArgumentException
+- Symfony\Component\Messenger\Exception\TransportException
+- Symfony\Contracts\Service\ResetInterface
+interfaces:
+- ResetInterface

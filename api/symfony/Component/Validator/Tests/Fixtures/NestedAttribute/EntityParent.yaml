@@ -1,0 +1,36 @@
+name: EntityParent
+class_comment: null
+dependencies:
+- name: NotNull
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotNull
+- name: EntityInterfaceA
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\EntityInterfaceA
+properties:
+- name: firstName
+  visibility: protected
+  comment: null
+- name: internal
+  visibility: private
+  comment: null
+- name: data
+  visibility: private
+  comment: null
+- name: child
+  visibility: private
+  comment: null
+methods:
+- name: getData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getChild
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\NotNull
+- Symfony\Component\Validator\Tests\Fixtures\EntityInterfaceA
+interfaces:
+- EntityInterfaceA

@@ -1,0 +1,74 @@
+name: VarExporter
+class_comment: null
+dependencies:
+- name: ExceptionInterface
+  type: class
+  source: Symfony\Component\VarExporter\Exception\ExceptionInterface
+- name: Exporter
+  type: class
+  source: Symfony\Component\VarExporter\Internal\Exporter
+- name: Hydrator
+  type: class
+  source: Symfony\Component\VarExporter\Internal\Hydrator
+- name: Registry
+  type: class
+  source: Symfony\Component\VarExporter\Internal\Registry
+- name: Values
+  type: class
+  source: Symfony\Component\VarExporter\Internal\Values
+properties: []
+methods:
+- name: export
+  visibility: public
+  parameters:
+  - name: value
+  - name: '&$isStaticValue'
+    default: 'null'
+  - name: '&$foundClasses'
+    default: '[]'
+  comment: '# * Exports serializable PHP values to PHP code.
+
+    # *
+
+    # * VarExporter allows serializing PHP data structures to plain PHP code (like
+    var_export())
+
+    # * while preserving all the semantics associated with serialize() (unlike var_export()).
+
+    # *
+
+    # * By leveraging OPcache, the generated PHP code is faster than doing the same
+    with unserialize().
+
+    # *
+
+    # * @author Nicolas Grekas <p@tchwork.com>
+
+    # */
+
+    # final class VarExporter
+
+    # {
+
+    # /**
+
+    # * Exports a serializable PHP value to PHP code.
+
+    # *
+
+    # * @param bool  &$isStaticValue Set to true after execution if the provided value
+    is static, false otherwise
+
+    # * @param array &$foundClasses  Classes found in the value are added to this
+    list as both keys and values
+
+    # *
+
+    # * @throws ExceptionInterface When the provided value cannot be serialized'
+traits:
+- Symfony\Component\VarExporter\Exception\ExceptionInterface
+- Symfony\Component\VarExporter\Internal\Exporter
+- Symfony\Component\VarExporter\Internal\Hydrator
+- Symfony\Component\VarExporter\Internal\Registry
+- Symfony\Component\VarExporter\Internal\Values
+interfaces: []

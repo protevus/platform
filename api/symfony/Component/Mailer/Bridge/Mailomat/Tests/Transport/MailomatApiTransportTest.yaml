@@ -1,0 +1,57 @@
+name: MailomatApiTransportTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: MockHttpClient
+  type: class
+  source: Symfony\Component\HttpClient\MockHttpClient
+- name: JsonMockResponse
+  type: class
+  source: Symfony\Component\HttpClient\Response\JsonMockResponse
+- name: MailomatApiTransport
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Mailomat\Transport\MailomatApiTransport
+- name: HttpTransportException
+  type: class
+  source: Symfony\Component\Mailer\Exception\HttpTransportException
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+- name: ResponseInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\ResponseInterface
+properties: []
+methods:
+- name: testToString
+  visibility: public
+  parameters:
+  - name: transport
+  - name: expected
+  comment: '# * @dataProvider getTransportData'
+- name: getTransportData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSend
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendThrowsForErrorResponse
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpClient\MockHttpClient
+- Symfony\Component\HttpClient\Response\JsonMockResponse
+- Symfony\Component\Mailer\Bridge\Mailomat\Transport\MailomatApiTransport
+- Symfony\Component\Mailer\Exception\HttpTransportException
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Email
+- Symfony\Contracts\HttpClient\ResponseInterface
+interfaces: []

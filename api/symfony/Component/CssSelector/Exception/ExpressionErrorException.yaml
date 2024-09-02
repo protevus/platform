@@ -1,0 +1,10 @@
+name: ExpressionErrorException
+class_comment: "# * ParseException is thrown when a CSS selector syntax is not valid.\n\
+  # *\n# * This component is a port of the Python cssselect library,\n# * which is\
+  \ copyright Ian Bicking, @see https://github.com/SimonSapin/cssselect.\n# *\n# *\
+  \ @author Jean-Fran\xE7ois Simon <jeanfrancois.simon@sensiolabs.com>"
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces: []

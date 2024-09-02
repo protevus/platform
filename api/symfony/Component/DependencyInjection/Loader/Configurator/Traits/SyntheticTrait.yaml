@@ -1,0 +1,13 @@
+name: SyntheticTrait
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: synthetic
+  visibility: public
+  parameters:
+  - name: synthetic
+    default: 'true'
+  comment: null
+traits: []
+interfaces: []

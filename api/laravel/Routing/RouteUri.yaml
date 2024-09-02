@@ -1,0 +1,43 @@
+name: RouteUri
+class_comment: null
+dependencies: []
+properties:
+- name: uri
+  visibility: public
+  comment: '# * The route URI.
+
+    # *
+
+    # * @var string'
+- name: bindingFields
+  visibility: public
+  comment: '# * The fields that should be used when resolving bindings.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: uri
+  - name: bindingFields
+    default: '[]'
+  comment: "# * The route URI.\n# *\n# * @var string\n# */\n# public $uri;\n# \n#\
+    \ /**\n# * The fields that should be used when resolving bindings.\n# *\n# * @var\
+    \ array\n# */\n# public $bindingFields = [];\n# \n# /**\n# * Create a new route\
+    \ URI instance.\n# *\n# * @param  string  $uri\n# * @param  array  $bindingFields\n\
+    # * @return void"
+- name: parse
+  visibility: public
+  parameters:
+  - name: uri
+  comment: '# * Parse the given URI.
+
+    # *
+
+    # * @param  string  $uri
+
+    # * @return static'
+traits: []
+interfaces: []

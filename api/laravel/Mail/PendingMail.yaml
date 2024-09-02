@@ -1,0 +1,175 @@
+name: PendingMail
+class_comment: null
+dependencies:
+- name: MailableContract
+  type: class
+  source: Illuminate\Contracts\Mail\Mailable
+- name: MailerContract
+  type: class
+  source: Illuminate\Contracts\Mail\Mailer
+- name: HasLocalePreference
+  type: class
+  source: Illuminate\Contracts\Translation\HasLocalePreference
+- name: Conditionable
+  type: class
+  source: Illuminate\Support\Traits\Conditionable
+- name: Conditionable
+  type: class
+  source: Conditionable
+properties:
+- name: mailer
+  visibility: protected
+  comment: '# * The mailer instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Mail\Mailer'
+- name: locale
+  visibility: protected
+  comment: '# * The locale of the message.
+
+    # *
+
+    # * @var string'
+- name: to
+  visibility: protected
+  comment: '# * The "to" recipients of the message.
+
+    # *
+
+    # * @var array'
+- name: cc
+  visibility: protected
+  comment: '# * The "cc" recipients of the message.
+
+    # *
+
+    # * @var array'
+- name: bcc
+  visibility: protected
+  comment: '# * The "bcc" recipients of the message.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: mailer
+  comment: "# * The mailer instance.\n# *\n# * @var \\Illuminate\\Contracts\\Mail\\\
+    Mailer\n# */\n# protected $mailer;\n# \n# /**\n# * The locale of the message.\n\
+    # *\n# * @var string\n# */\n# protected $locale;\n# \n# /**\n# * The \"to\" recipients\
+    \ of the message.\n# *\n# * @var array\n# */\n# protected $to = [];\n# \n# /**\n\
+    # * The \"cc\" recipients of the message.\n# *\n# * @var array\n# */\n# protected\
+    \ $cc = [];\n# \n# /**\n# * The \"bcc\" recipients of the message.\n# *\n# * @var\
+    \ array\n# */\n# protected $bcc = [];\n# \n# /**\n# * Create a new mailable mailer\
+    \ instance.\n# *\n# * @param  \\Illuminate\\Contracts\\Mail\\Mailer  $mailer\n\
+    # * @return void"
+- name: locale
+  visibility: public
+  parameters:
+  - name: locale
+  comment: '# * Set the locale of the message.
+
+    # *
+
+    # * @param  string  $locale
+
+    # * @return $this'
+- name: to
+  visibility: public
+  parameters:
+  - name: users
+  comment: '# * Set the recipients of the message.
+
+    # *
+
+    # * @param  mixed  $users
+
+    # * @return $this'
+- name: cc
+  visibility: public
+  parameters:
+  - name: users
+  comment: '# * Set the recipients of the message.
+
+    # *
+
+    # * @param  mixed  $users
+
+    # * @return $this'
+- name: bcc
+  visibility: public
+  parameters:
+  - name: users
+  comment: '# * Set the recipients of the message.
+
+    # *
+
+    # * @param  mixed  $users
+
+    # * @return $this'
+- name: send
+  visibility: public
+  parameters:
+  - name: mailable
+  comment: '# * Send a new mailable message instance.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Mail\Mailable  $mailable
+
+    # * @return \Illuminate\Mail\SentMessage|null'
+- name: sendNow
+  visibility: public
+  parameters:
+  - name: mailable
+  comment: '# * Send a new mailable message instance synchronously.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Mail\Mailable  $mailable
+
+    # * @return \Illuminate\Mail\SentMessage|null'
+- name: queue
+  visibility: public
+  parameters:
+  - name: mailable
+  comment: '# * Push the given mailable onto the queue.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Mail\Mailable  $mailable
+
+    # * @return mixed'
+- name: later
+  visibility: public
+  parameters:
+  - name: delay
+  - name: mailable
+  comment: '# * Deliver the queued message after (n) seconds.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $delay
+
+    # * @param  \Illuminate\Contracts\Mail\Mailable  $mailable
+
+    # * @return mixed'
+- name: fill
+  visibility: protected
+  parameters:
+  - name: mailable
+  comment: '# * Populate the mailable with the addresses.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Mail\Mailable  $mailable
+
+    # * @return \Illuminate\Mail\Mailable'
+traits:
+- Illuminate\Contracts\Translation\HasLocalePreference
+- Illuminate\Support\Traits\Conditionable
+- Conditionable
+interfaces: []

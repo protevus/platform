@@ -1,0 +1,51 @@
+name: ErrorDetailsStamp
+class_comment: null
+dependencies:
+- name: FlattenException
+  type: class
+  source: Symfony\Component\ErrorHandler\Exception\FlattenException
+- name: HandlerFailedException
+  type: class
+  source: Symfony\Component\Messenger\Exception\HandlerFailedException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: exceptionClass
+  - name: exceptionCode
+  - name: exceptionMessage
+  - name: flattenException
+    default: 'null'
+  comment: null
+- name: create
+  visibility: public
+  parameters:
+  - name: throwable
+  comment: null
+- name: getExceptionClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: getExceptionCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: getExceptionMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: getFlattenException
+  visibility: public
+  parameters: []
+  comment: null
+- name: equals
+  visibility: public
+  parameters:
+  - name: that
+  comment: null
+traits:
+- Symfony\Component\ErrorHandler\Exception\FlattenException
+- Symfony\Component\Messenger\Exception\HandlerFailedException
+interfaces:
+- StampInterface

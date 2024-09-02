@@ -1,0 +1,161 @@
+name: classes
+class_comment: null
+dependencies:
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: DumperInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface
+properties:
+- name: baz
+  visibility: protected
+  comment: null
+- name: foo
+  visibility: public
+  comment: null
+- name: foo
+  visibility: protected
+  comment: null
+- name: foo
+  visibility: public
+  comment: null
+- name: bar
+  visibility: public
+  comment: null
+- name: simple
+  visibility: public
+  comment: null
+- name: complex
+  visibility: public
+  comment: null
+- name: callPassed
+  visibility: private
+  comment: null
+- name: lazyValues
+  visibility: public
+  comment: null
+- name: lazyEmptyValues
+  visibility: public
+  comment: null
+- name: services
+  visibility: public
+  comment: null
+- name: foo
+  visibility: public
+  comment: null
+- name: bar
+  visibility: public
+  comment: null
+- name: foobar
+  visibility: public
+  comment: null
+methods:
+- name: setBaz
+  visibility: public
+  parameters:
+  - name: baz
+  comment: null
+- name: getBaz
+  visibility: public
+  parameters: []
+  comment: null
+- name: setFoo
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: configure
+  visibility: public
+  parameters:
+  - name: instance
+  comment: null
+- name: getInstance
+  visibility: public
+  parameters: []
+  comment: null
+- name: configureStatic
+  visibility: public
+  parameters:
+  - name: instance
+  comment: null
+- name: configureStatic1
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: bar
+  comment: null
+- name: callMe
+  visibility: public
+  parameters: []
+  comment: null
+- name: callPassed
+  visibility: public
+  parameters: []
+  comment: null
+- name: isProxyCandidate
+  visibility: public
+  parameters:
+  - name: definition
+  - name: '&$asGhostObject'
+    default: 'null'
+  - name: id
+    default: 'null'
+  comment: null
+- name: getProxyFactoryCode
+  visibility: public
+  parameters:
+  - name: definition
+  - name: id
+  - name: factoryCode
+  comment: null
+- name: getProxyCode
+  visibility: public
+  parameters:
+  - name: definition
+  - name: id
+    default: 'null'
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: lazyValues
+  - name: lazyEmptyValues
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: services
+  comment: null
+- name: create
+  visibility: public
+  parameters: []
+  comment: null
+- name: create
+  visibility: public
+  parameters:
+  - name: config
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: bar
+  comment: null
+- name: addFoobar
+  visibility: public
+  parameters:
+  - name: foobar
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\LazyProxy\PhpDumper\DumperInterface
+interfaces:
+- DumperInterface

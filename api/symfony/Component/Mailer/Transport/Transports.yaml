@@ -1,0 +1,51 @@
+name: Transports
+class_comment: null
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Mailer\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\Mailer\Exception\LogicException
+- name: SentMessage
+  type: class
+  source: Symfony\Component\Mailer\SentMessage
+- name: Message
+  type: class
+  source: Symfony\Component\Mime\Message
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: transports
+  comment: "# * @author Fabien Potencier <fabien@symfony.com>\n# */\n# final class\
+    \ Transports implements TransportInterface\n# {\n# /**\n# * @var array<string,\
+    \ TransportInterface>\n# */\n# private array $transports = [];\n# private TransportInterface\
+    \ $default;\n# \n# /**\n# * @param iterable<string, TransportInterface> $transports"
+- name: send
+  visibility: public
+  parameters:
+  - name: message
+  - name: envelope
+    default: 'null'
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mailer\Exception\InvalidArgumentException
+- Symfony\Component\Mailer\Exception\LogicException
+- Symfony\Component\Mailer\SentMessage
+- Symfony\Component\Mime\Message
+- Symfony\Component\Mime\RawMessage
+interfaces:
+- TransportInterface

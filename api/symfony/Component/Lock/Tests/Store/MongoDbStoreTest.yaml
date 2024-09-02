@@ -1,0 +1,122 @@
+name: MongoDbStoreTest
+class_comment: '# * @author Joe Bennett <joe@assimtech.com>
+
+  # *
+
+  # * @requires extension mongodb
+
+  # *
+
+  # * @group integration'
+dependencies:
+- name: Client
+  type: class
+  source: MongoDB\Client
+- name: Collection
+  type: class
+  source: MongoDB\Collection
+- name: Database
+  type: class
+  source: MongoDB\Database
+- name: Command
+  type: class
+  source: MongoDB\Driver\Command
+- name: ConnectionTimeoutException
+  type: class
+  source: MongoDB\Driver\Exception\ConnectionTimeoutException
+- name: Manager
+  type: class
+  source: MongoDB\Driver\Manager
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Lock\Exception\InvalidArgumentException
+- name: Key
+  type: class
+  source: Symfony\Component\Lock\Key
+- name: PersistingStoreInterface
+  type: class
+  source: Symfony\Component\Lock\PersistingStoreInterface
+- name: MongoDbStore
+  type: class
+  source: Symfony\Component\Lock\Store\MongoDbStore
+- name: ExpiringStoreTestTrait
+  type: class
+  source: ExpiringStoreTestTrait
+properties: []
+methods:
+- name: testConstructionMethods
+  visibility: public
+  parameters:
+  - name: mongo
+  - name: options
+  comment: "# * @author Joe Bennett <joe@assimtech.com>\n# *\n# * @requires extension\
+    \ mongodb\n# *\n# * @group integration\n# */\n# class MongoDbStoreTest extends\
+    \ AbstractStoreTestCase\n# {\n# use ExpiringStoreTestTrait;\n# \n# public static\
+    \ function setUpBeforeClass(): void\n# {\n# $manager = self::getMongoManager();\n\
+    # try {\n# $server = $manager->selectServer();\n# $server->executeCommand('admin',\
+    \ new Command(['ping' => 1]));\n# } catch (ConnectionTimeoutException $e) {\n\
+    # self::markTestSkipped('MongoDB server not found.');\n# }\n# }\n# \n# private\
+    \ static function getMongoManager(): Manager\n# {\n# return new Manager('mongodb://'.getenv('MONGODB_HOST'));\n\
+    # }\n# \n# protected function getClockDelay(): int\n# {\n# return 250000;\n# }\n\
+    # \n# public function getStore(): PersistingStoreInterface\n# {\n# return new\
+    \ MongoDbStore(self::getMongoManager(), [\n# 'database' => 'test',\n# 'collection'\
+    \ => 'lock',\n# ]);\n# }\n# \n# public function testCreateIndex()\n# {\n# $store\
+    \ = $this->getStore();\n# $store->createTtlIndex();\n# \n# $manager = self::getMongoManager();\n\
+    # $result = $manager->executeReadCommand('test', new Command(['listIndexes' =>\
+    \ 'lock']));\n# \n# $indexes = [];\n# foreach ($result as $index) {\n# $indexes[]\
+    \ = $index->name;\n# }\n# $this->assertContains('expires_at_1', $indexes);\n#\
+    \ }\n# \n# /**\n# * @dataProvider provideConstructorArgs"
+- name: provideConstructorArgs
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructWithClient
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructWithDatabase
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructWithCollection
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUriPrecedence
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidConstructionMethods
+  visibility: public
+  parameters:
+  - name: mongo
+  - name: options
+  comment: '# * @dataProvider provideInvalidConstructorArgs'
+- name: provideInvalidConstructorArgs
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUriCollectionStrip
+  visibility: public
+  parameters:
+  - name: uri
+  - name: options
+  - name: driverUri
+  comment: '# * @dataProvider provideUriCollectionStripArgs'
+- name: provideUriCollectionStripArgs
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- MongoDB\Client
+- MongoDB\Collection
+- MongoDB\Database
+- MongoDB\Driver\Command
+- MongoDB\Driver\Exception\ConnectionTimeoutException
+- MongoDB\Driver\Manager
+- Symfony\Component\Lock\Exception\InvalidArgumentException
+- Symfony\Component\Lock\Key
+- Symfony\Component\Lock\PersistingStoreInterface
+- Symfony\Component\Lock\Store\MongoDbStore
+- ExpiringStoreTestTrait
+interfaces: []

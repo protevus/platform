@@ -1,0 +1,8 @@
+name: CircularReferenceException
+class_comment: "# * CircularReferenceException.\n# *\n# * @author K\xE9vin Dunglas\
+  \ <dunglas@gmail.com>"
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces: []

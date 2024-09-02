@@ -1,0 +1,81 @@
+name: ApiInstallCommand
+class_comment: null
+dependencies:
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+- name: Filesystem
+  type: class
+  source: Illuminate\Filesystem\Filesystem
+- name: Process
+  type: class
+  source: Illuminate\Support\Facades\Process
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: PhpExecutableFinder
+  type: class
+  source: Symfony\Component\Process\PhpExecutableFinder
+- name: InteractsWithComposerPackages
+  type: class
+  source: InteractsWithComposerPackages
+properties:
+- name: signature
+  visibility: protected
+  comment: '# * The name and signature of the console command.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+methods:
+- name: handle
+  visibility: public
+  parameters: []
+  comment: "# * The name and signature of the console command.\n# *\n# * @var string\n\
+    # */\n# protected $signature = 'install:api\n# {--composer=global : Absolute path\
+    \ to the Composer binary which should be used to install packages}\n# {--force\
+    \ : Overwrite any existing API routes file}\n# {--passport : Install Laravel Passport\
+    \ instead of Laravel Sanctum}\n# {--without-migration-prompt : Do not prompt to\
+    \ run pending migrations}';\n# \n# /**\n# * The console command description.\n\
+    # *\n# * @var string\n# */\n# protected $description = 'Create an API routes file\
+    \ and install Laravel Sanctum or Laravel Passport';\n# \n# /**\n# * Execute the\
+    \ console command.\n# *\n# * @return int"
+- name: uncommentApiRoutesFile
+  visibility: protected
+  parameters: []
+  comment: '# * Uncomment the API routes file in the application bootstrap file.
+
+    # *
+
+    # * @return void'
+- name: installSanctum
+  visibility: protected
+  parameters: []
+  comment: '# * Install Laravel Sanctum into the application.
+
+    # *
+
+    # * @return void'
+- name: installPassport
+  visibility: protected
+  parameters: []
+  comment: '# * Install Laravel Passport into the application.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Console\Command
+- Illuminate\Filesystem\Filesystem
+- Illuminate\Support\Facades\Process
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Process\PhpExecutableFinder
+- InteractsWithComposerPackages
+interfaces: []

@@ -1,0 +1,110 @@
+name: ImportMapGenerator
+class_comment: '# * Provides data needed to write the importmap & preloads.'
+dependencies:
+- name: AssetMapperInterface
+  type: class
+  source: Symfony\Component\AssetMapper\AssetMapperInterface
+- name: CompiledAssetMapperConfigReader
+  type: class
+  source: Symfony\Component\AssetMapper\CompiledAssetMapperConfigReader
+- name: LogicException
+  type: class
+  source: Symfony\Component\AssetMapper\Exception\LogicException
+- name: MappedAsset
+  type: class
+  source: Symfony\Component\AssetMapper\MappedAsset
+properties: []
+methods:
+- name: getEntrypointNames
+  visibility: public
+  parameters: []
+  comment: "# * Provides data needed to write the importmap & preloads.\n# */\n# class\
+    \ ImportMapGenerator\n# {\n# public const IMPORT_MAP_CACHE_FILENAME = 'importmap.json';\n\
+    # public const ENTRYPOINT_CACHE_FILENAME_PATTERN = 'entrypoint.%s.json';\n# \n\
+    # public function __construct(\n# private readonly AssetMapperInterface $assetMapper,\n\
+    # private readonly CompiledAssetMapperConfigReader $compiledConfigReader,\n# private\
+    \ readonly ImportMapConfigReader $importMapConfigReader,\n# ) {\n# }\n# \n# /**\n\
+    # * @internal"
+- name: getImportMapData
+  visibility: public
+  parameters:
+  - name: entrypointNames
+  comment: '# * @param string[] $entrypointNames
+
+    # *
+
+    # * @return array<string, array{path: string, type: string, preload?: bool}>
+
+    # *
+
+    # * @internal'
+- name: getRawImportMapData
+  visibility: public
+  parameters: []
+  comment: '# * @internal
+
+    # *
+
+    # * @return array<string, array{path: string, type: string}>'
+- name: findEagerEntrypointImports
+  visibility: public
+  parameters:
+  - name: entryName
+  comment: '# * Given an importmap entry name, finds all the non-lazy module imports
+    in its chain.
+
+    # *
+
+    # * @internal
+
+    # *
+
+    # * @return array<string> The array of import names'
+- name: addImplicitEntries
+  visibility: private
+  parameters:
+  - name: entry
+  - name: currentImportEntries
+  comment: '# * Adds "implicit" entries to the importmap.
+
+    # *
+
+    # * This recursively searches the dependencies of the given entry
+
+    # * (i.e. it looks for modules imported from other modules)
+
+    # * and adds them to the importmap.
+
+    # *
+
+    # * @param array<string, ImportMapEntry> $currentImportEntries
+
+    # *
+
+    # * @return array<string, ImportMapEntry>'
+- name: findAsset
+  visibility: private
+  parameters:
+  - name: path
+  comment: '# * Finds the MappedAsset allowing for a "logical path", relative or absolute
+    filesystem path.'
+- name: findEagerImports
+  visibility: private
+  parameters:
+  - name: asset
+  comment: '# * Finds recursively all the non-lazy modules imported by an asset.
+
+    # *
+
+    # * @return array<string> The array of deduplicated import names'
+- name: createMissingImportMapAssetException
+  visibility: private
+  parameters:
+  - name: entry
+  comment: null
+traits:
+- Symfony\Component\AssetMapper\AssetMapperInterface
+- Symfony\Component\AssetMapper\CompiledAssetMapperConfigReader
+- Symfony\Component\AssetMapper\Exception\LogicException
+- Symfony\Component\AssetMapper\MappedAsset
+interfaces: []

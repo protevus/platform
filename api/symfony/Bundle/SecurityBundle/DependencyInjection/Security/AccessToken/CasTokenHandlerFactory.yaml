@@ -1,0 +1,44 @@
+name: CasTokenHandlerFactory
+class_comment: null
+dependencies:
+- name: NodeBuilder
+  type: class
+  source: Symfony\Component\Config\Definition\Builder\NodeBuilder
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: Cas2Handler
+  type: class
+  source: Symfony\Component\Security\Http\AccessToken\Cas\Cas2Handler
+properties: []
+methods:
+- name: create
+  visibility: public
+  parameters:
+  - name: container
+  - name: id
+  - name: config
+  comment: null
+- name: getKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: addConfiguration
+  visibility: public
+  parameters:
+  - name: node
+  comment: null
+traits:
+- Symfony\Component\Config\Definition\Builder\NodeBuilder
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\Security\Http\AccessToken\Cas\Cas2Handler
+interfaces:
+- TokenHandlerFactoryInterface

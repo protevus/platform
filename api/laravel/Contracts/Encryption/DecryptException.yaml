@@ -1,0 +1,11 @@
+name: DecryptException
+class_comment: null
+dependencies:
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+properties: []
+methods: []
+traits:
+- RuntimeException
+interfaces: []

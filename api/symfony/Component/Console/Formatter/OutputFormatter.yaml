@@ -1,0 +1,110 @@
+name: OutputFormatter
+class_comment: '# * Formatter class for console output.
+
+  # *
+
+  # * @author Konstantin Kudryashov <ever.zet@gmail.com>
+
+  # * @author Roland Franssen <franssen.roland@gmail.com>'
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Console\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: escape
+  visibility: public
+  parameters:
+  - name: text
+  comment: "# * Formatter class for console output.\n# *\n# * @author Konstantin Kudryashov\
+    \ <ever.zet@gmail.com>\n# * @author Roland Franssen <franssen.roland@gmail.com>\n\
+    # */\n# class OutputFormatter implements WrappableOutputFormatterInterface\n#\
+    \ {\n# private array $styles = [];\n# private OutputFormatterStyleStack $styleStack;\n\
+    # \n# public function __clone()\n# {\n# $this->styleStack = clone $this->styleStack;\n\
+    # foreach ($this->styles as $key => $value) {\n# $this->styles[$key] = clone $value;\n\
+    # }\n# }\n# \n# /**\n# * Escapes \"<\" and \">\" special chars in given text."
+- name: escapeTrailingBackslash
+  visibility: public
+  parameters:
+  - name: text
+  comment: '# * Escapes trailing "\" in given text.
+
+    # *
+
+    # * @internal'
+- name: __construct
+  visibility: public
+  parameters:
+  - name: decorated
+    default: 'false'
+  - name: styles
+    default: '[]'
+  comment: '# * Initializes console output formatter.
+
+    # *
+
+    # * @param OutputFormatterStyleInterface[] $styles Array of "name => FormatterStyle"
+    instances'
+- name: setDecorated
+  visibility: public
+  parameters:
+  - name: decorated
+  comment: null
+- name: isDecorated
+  visibility: public
+  parameters: []
+  comment: null
+- name: setStyle
+  visibility: public
+  parameters:
+  - name: name
+  - name: style
+  comment: null
+- name: hasStyle
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: getStyle
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: format
+  visibility: public
+  parameters:
+  - name: message
+  comment: null
+- name: formatAndWrap
+  visibility: public
+  parameters:
+  - name: message
+  - name: width
+  comment: null
+- name: getStyleStack
+  visibility: public
+  parameters: []
+  comment: null
+- name: createStyleFromString
+  visibility: private
+  parameters:
+  - name: string
+  comment: '# * Tries to create new style instance from string.'
+- name: applyCurrentStyle
+  visibility: private
+  parameters:
+  - name: text
+  - name: current
+  - name: width
+  - name: '&$currentLineLength'
+  comment: '# * Applies current style from stack to text, if must be applied.'
+- name: addLineBreaks
+  visibility: private
+  parameters:
+  - name: text
+  - name: width
+  comment: null
+traits:
+- Symfony\Component\Console\Exception\InvalidArgumentException
+interfaces:
+- WrappableOutputFormatterInterface

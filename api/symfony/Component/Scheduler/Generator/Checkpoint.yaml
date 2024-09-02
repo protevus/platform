@@ -1,0 +1,58 @@
+name: Checkpoint
+class_comment: null
+dependencies:
+- name: LockInterface
+  type: class
+  source: Symfony\Component\Lock\LockInterface
+- name: CacheInterface
+  type: class
+  source: Symfony\Contracts\Cache\CacheInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: name
+  - name: lock
+    default: 'null'
+  - name: cache
+    default: 'null'
+  comment: null
+- name: acquire
+  visibility: public
+  parameters:
+  - name: now
+  comment: null
+- name: from
+  visibility: public
+  parameters: []
+  comment: null
+- name: time
+  visibility: public
+  parameters: []
+  comment: null
+- name: index
+  visibility: public
+  parameters: []
+  comment: null
+- name: save
+  visibility: public
+  parameters:
+  - name: time
+  - name: index
+  comment: null
+- name: release
+  visibility: public
+  parameters:
+  - name: now
+  - name: nextTime
+  comment: '# * Releases State, not Lock.
+
+    # *
+
+    # * It tries to keep a Lock as long as a Worker is alive.'
+traits:
+- Symfony\Component\Lock\LockInterface
+- Symfony\Contracts\Cache\CacheInterface
+interfaces:
+- CheckpointInterface

@@ -1,0 +1,266 @@
+name: XmlFileLoader
+class_comment: '# * XmlFileLoader loads XML files service definitions.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: XmlUtils
+  type: class
+  source: Symfony\Component\Config\Util\XmlUtils
+- name: Alias
+  type: class
+  source: Symfony\Component\DependencyInjection\Alias
+- name: AbstractArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\AbstractArgument
+- name: BoundArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\BoundArgument
+- name: IteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- name: ServiceClosureArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- name: ServiceLocatorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- name: TaggedIteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\LogicException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: ExtensionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: Expression
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Expression
+properties: []
+methods:
+- name: parseDefinition
+  visibility: private
+  parameters:
+  - name: service
+  - name: file
+  - name: defaults
+  comment: "# * XmlFileLoader loads XML files service definitions.\n# *\n# * @author\
+    \ Fabien Potencier <fabien@symfony.com>\n# */\n# class XmlFileLoader extends FileLoader\n\
+    # {\n# public const NS = 'http://symfony.com/schema/dic/services';\n# \n# protected\
+    \ bool $autoRegisterAliasesForSinglyImplementedInterfaces = false;\n# \n# public\
+    \ function load(mixed $resource, ?string $type = null): mixed\n# {\n# $path =\
+    \ $this->locator->locate($resource);\n# \n# $xml = $this->parseFileToDOM($path);\n\
+    # \n# $this->container->fileExists($path);\n# \n# $this->loadXml($xml, $path);\n\
+    # \n# if ($this->env) {\n# $xpath = new \\DOMXPath($xml);\n# $xpath->registerNamespace('container',\
+    \ self::NS);\n# foreach ($xpath->query(\\sprintf('//container:when[@env=\"%s\"\
+    ]', $this->env)) ?: [] as $root) {\n# $env = $this->env;\n# $this->env = null;\n\
+    # try {\n# $this->loadXml($xml, $path, $root);\n# } finally {\n# $this->env =\
+    \ $env;\n# }\n# }\n# }\n# \n# return null;\n# }\n# \n# private function loadXml(\\\
+    DOMDocument $xml, string $path, ?\\DOMNode $root = null): void\n# {\n# $defaults\
+    \ = $this->getServiceDefaults($xml, $path, $root);\n# \n# // anonymous services\n\
+    # $this->processAnonymousServices($xml, $path, $root);\n# \n# // imports\n# $this->parseImports($xml,\
+    \ $path, $root);\n# \n# // parameters\n# $this->parseParameters($xml, $path, $root);\n\
+    # \n# // extensions\n# $this->loadFromExtensions($xml, $root);\n# \n# // services\n\
+    # try {\n# $this->parseDefinitions($xml, $path, $defaults, $root);\n# } finally\
+    \ {\n# $this->instanceof = [];\n# $this->registerAliasesForSinglyImplementedInterfaces();\n\
+    # }\n# }\n# \n# public function supports(mixed $resource, ?string $type = null):\
+    \ bool\n# {\n# if (!\\is_string($resource)) {\n# return false;\n# }\n# \n# if\
+    \ (null === $type && 'xml' === pathinfo($resource, \\PATHINFO_EXTENSION)) {\n\
+    # return true;\n# }\n# \n# return 'xml' === $type;\n# }\n# \n# private function\
+    \ parseParameters(\\DOMDocument $xml, string $file, ?\\DOMNode $root = null):\
+    \ void\n# {\n# if ($parameters = $this->getChildren($root ?? $xml->documentElement,\
+    \ 'parameters')) {\n# $this->container->getParameterBag()->add($this->getArgumentsAsPhp($parameters[0],\
+    \ 'parameter', $file));\n# }\n# }\n# \n# private function parseImports(\\DOMDocument\
+    \ $xml, string $file, ?\\DOMNode $root = null): void\n# {\n# $xpath = new \\DOMXPath($xml);\n\
+    # $xpath->registerNamespace('container', self::NS);\n# \n# if (false === $imports\
+    \ = $xpath->query('.//container:imports/container:import', $root)) {\n# return;\n\
+    # }\n# \n# $defaultDirectory = \\dirname($file);\n# foreach ($imports as $import)\
+    \ {\n# $this->setCurrentDir($defaultDirectory);\n# $this->import($import->getAttribute('resource'),\
+    \ XmlUtils::phpize($import->getAttribute('type')) ?: null, XmlUtils::phpize($import->getAttribute('ignore-errors'))\
+    \ ?: false, $file);\n# }\n# }\n# \n# private function parseDefinitions(\\DOMDocument\
+    \ $xml, string $file, Definition $defaults, ?\\DOMNode $root = null): void\n#\
+    \ {\n# $xpath = new \\DOMXPath($xml);\n# $xpath->registerNamespace('container',\
+    \ self::NS);\n# \n# if (false === $services = $xpath->query('.//container:services/container:service|.//container:services/container:prototype|.//container:services/container:stack',\
+    \ $root)) {\n# return;\n# }\n# $this->setCurrentDir(\\dirname($file));\n# \n#\
+    \ $this->instanceof = [];\n# $this->isLoadingInstanceof = true;\n# $instanceof\
+    \ = $xpath->query('.//container:services/container:instanceof', $root);\n# foreach\
+    \ ($instanceof as $service) {\n# $this->setDefinition((string) $service->getAttribute('id'),\
+    \ $this->parseDefinition($service, $file, new Definition()));\n# }\n# \n# $this->isLoadingInstanceof\
+    \ = false;\n# foreach ($services as $service) {\n# if ('stack' === $service->tagName)\
+    \ {\n# $service->setAttribute('parent', '-');\n# $definition = $this->parseDefinition($service,\
+    \ $file, $defaults)\n# ->setTags(array_merge_recursive(['container.stack' => [[]]],\
+    \ $defaults->getTags()))\n# ;\n# $this->setDefinition($id = (string) $service->getAttribute('id'),\
+    \ $definition);\n# $stack = [];\n# \n# foreach ($this->getChildren($service, 'service')\
+    \ as $k => $frame) {\n# $k = $frame->getAttribute('id') ?: $k;\n# $frame->setAttribute('id',\
+    \ $id.'\" at index \"'.$k);\n# \n# if ($alias = $frame->getAttribute('alias'))\
+    \ {\n# $this->validateAlias($frame, $file);\n# $stack[$k] = new Reference($alias);\n\
+    # } else {\n# $stack[$k] = $this->parseDefinition($frame, $file, $defaults)\n\
+    # ->setInstanceofConditionals($this->instanceof);\n# }\n# }\n# \n# $definition->setArguments($stack);\n\
+    # } elseif (null !== $definition = $this->parseDefinition($service, $file, $defaults))\
+    \ {\n# if ('prototype' === $service->tagName) {\n# $excludes = array_column($this->getChildren($service,\
+    \ 'exclude'), 'nodeValue');\n# if ($service->hasAttribute('exclude')) {\n# if\
+    \ (\\count($excludes) > 0) {\n# throw new InvalidArgumentException('You cannot\
+    \ use both the attribute \"exclude\" and <exclude> tags at the same time.');\n\
+    # }\n# $excludes = [$service->getAttribute('exclude')];\n# }\n# $this->registerClasses($definition,\
+    \ (string) $service->getAttribute('namespace'), (string) $service->getAttribute('resource'),\
+    \ $excludes, $file);\n# } else {\n# $this->setDefinition((string) $service->getAttribute('id'),\
+    \ $definition);\n# }\n# }\n# }\n# }\n# \n# private function getServiceDefaults(\\\
+    DOMDocument $xml, string $file, ?\\DOMNode $root = null): Definition\n# {\n# $xpath\
+    \ = new \\DOMXPath($xml);\n# $xpath->registerNamespace('container', self::NS);\n\
+    # \n# if (null === $defaultsNode = $xpath->query('.//container:services/container:defaults',\
+    \ $root)->item(0)) {\n# return new Definition();\n# }\n# \n# $defaultsNode->setAttribute('id',\
+    \ '<defaults>');\n# \n# return $this->parseDefinition($defaultsNode, $file, new\
+    \ Definition());\n# }\n# \n# /**\n# * Parses an individual Definition."
+- name: parseFileToDOM
+  visibility: private
+  parameters:
+  - name: file
+  comment: '# * Parses an XML file to a \DOMDocument.
+
+    # *
+
+    # * @throws InvalidArgumentException When loading of XML file returns error'
+- name: processAnonymousServices
+  visibility: private
+  parameters:
+  - name: xml
+  - name: file
+  - name: root
+    default: 'null'
+  comment: '# * Processes anonymous services.'
+- name: getArgumentsAsPhp
+  visibility: private
+  parameters:
+  - name: node
+  - name: name
+  - name: file
+  - name: isChildDefinition
+    default: 'false'
+  comment: null
+- name: getChildren
+  visibility: private
+  parameters:
+  - name: node
+  - name: name
+  comment: '# * Get child elements by name.
+
+    # *
+
+    # * @return \DOMElement[]'
+- name: getTagAttributes
+  visibility: private
+  parameters:
+  - name: node
+  - name: missingName
+  comment: null
+- name: validateSchema
+  visibility: public
+  parameters:
+  - name: dom
+  comment: '# * Validates a documents XML schema.
+
+    # *
+
+    # * @throws RuntimeException When extension references a non-existent XSD file'
+- name: shouldEnableEntityLoader
+  visibility: private
+  parameters: []
+  comment: null
+- name: validateAlias
+  visibility: private
+  parameters:
+  - name: alias
+  - name: file
+  comment: null
+- name: validateExtensions
+  visibility: private
+  parameters:
+  - name: dom
+  - name: file
+  comment: '# * Validates an extension.
+
+    # *
+
+    # * @throws InvalidArgumentException When no extension is found corresponding
+    to a tag'
+- name: loadFromExtensions
+  visibility: private
+  parameters:
+  - name: xml
+  comment: '# * Loads from an extension.'
+- name: convertDomElementToArray
+  visibility: public
+  parameters:
+  - name: element
+  comment: '# * Converts a \DOMElement object to a PHP array.
+
+    # *
+
+    # * The following rules applies during the conversion:
+
+    # *
+
+    # *  * Each tag is converted to a key value or an array
+
+    # *    if there is more than one "value"
+
+    # *
+
+    # *  * The content of a tag is set under a "value" key (<foo>bar</foo>)
+
+    # *    if the tag also has some nested tags
+
+    # *
+
+    # *  * The attributes are converted to keys (<foo foo="bar"/>)
+
+    # *
+
+    # *  * The nested-tags are converted to keys (<foo><foo>bar</foo></foo>)
+
+    # *
+
+    # * @param \DOMElement $element A \DOMElement instance'
+traits:
+- Symfony\Component\Config\Util\XmlUtils
+- Symfony\Component\DependencyInjection\Alias
+- Symfony\Component\DependencyInjection\Argument\AbstractArgument
+- Symfony\Component\DependencyInjection\Argument\BoundArgument
+- Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Exception\LogicException
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\ExpressionLanguage\Expression
+interfaces: []

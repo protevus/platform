@@ -1,0 +1,163 @@
+name: Profiler
+class_comment: '# * Profiler.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: ConflictingHeadersException
+  type: class
+  source: Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: DataCollectorInterface
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface
+- name: LateDataCollectorInterface
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+- name: ResetInterface
+  type: class
+  source: Symfony\Contracts\Service\ResetInterface
+properties: []
+methods:
+- name: disable
+  visibility: public
+  parameters: []
+  comment: "# * Profiler.\n# *\n# * @author Fabien Potencier <fabien@symfony.com>\n\
+    # */\n# class Profiler implements ResetInterface\n# {\n# /**\n# * @var DataCollectorInterface[]\n\
+    # */\n# private array $collectors = [];\n# \n# private bool $initiallyEnabled\
+    \ = true;\n# \n# public function __construct(\n# private ProfilerStorageInterface\
+    \ $storage,\n# private ?LoggerInterface $logger = null,\n# private bool $enabled\
+    \ = true,\n# ) {\n# $this->initiallyEnabled = $enabled;\n# }\n# \n# /**\n# * Disables\
+    \ the profiler."
+- name: enable
+  visibility: public
+  parameters: []
+  comment: '# * Enables the profiler.'
+- name: isEnabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: loadProfileFromResponse
+  visibility: public
+  parameters:
+  - name: response
+  comment: '# * Loads the Profile for the given Response.'
+- name: loadProfile
+  visibility: public
+  parameters:
+  - name: token
+  comment: '# * Loads the Profile for the given token.'
+- name: saveProfile
+  visibility: public
+  parameters:
+  - name: profile
+  comment: '# * Saves a Profile.'
+- name: purge
+  visibility: public
+  parameters: []
+  comment: '# * Purges all data from the storage.'
+- name: find
+  visibility: public
+  parameters:
+  - name: ip
+  - name: url
+  - name: limit
+  - name: method
+  - name: start
+  - name: end
+  - name: statusCode
+    default: 'null'
+  - name: filter
+    default: 'null'
+  comment: '# * Finds profiler tokens for the given criteria.
+
+    # *
+
+    # * @param int|null      $limit  The maximum number of tokens to return
+
+    # * @param string|null   $start  The start date to search from
+
+    # * @param string|null   $end    The end date to search to
+
+    # * @param \Closure|null $filter A filter to apply on the list of tokens
+
+    # *
+
+    # * @see https://php.net/datetime.formats for the supported date/time formats'
+- name: collect
+  visibility: public
+  parameters:
+  - name: request
+  - name: response
+  - name: exception
+    default: 'null'
+  comment: '# * Collects data for the given Response.'
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+- name: all
+  visibility: public
+  parameters: []
+  comment: '# * Gets the Collectors associated with this profiler.'
+- name: set
+  visibility: public
+  parameters:
+  - name: collectors
+    default: '[]'
+  comment: '# * Sets the Collectors associated with this profiler.
+
+    # *
+
+    # * @param DataCollectorInterface[] $collectors An array of collectors'
+- name: add
+  visibility: public
+  parameters:
+  - name: collector
+  comment: '# * Adds a Collector.'
+- name: has
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Returns true if a Collector for the given name exists.
+
+    # *
+
+    # * @param string $name A collector name'
+- name: get
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Gets a Collector by name.
+
+    # *
+
+    # * @param string $name A collector name
+
+    # *
+
+    # * @throws \InvalidArgumentException if the collector does not exist'
+- name: getTimestamp
+  visibility: private
+  parameters:
+  - name: value
+  comment: null
+traits:
+- Psr\Log\LoggerInterface
+- Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface
+- Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+- Symfony\Contracts\Service\ResetInterface
+interfaces:
+- ResetInterface

@@ -1,0 +1,24 @@
+name: CallbackTransformer
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: transform
+  - name: reverseTransform
+  comment: null
+- name: transform
+  visibility: public
+  parameters:
+  - name: data
+  comment: null
+- name: reverseTransform
+  visibility: public
+  parameters:
+  - name: data
+  comment: null
+traits: []
+interfaces:
+- DataTransformerInterface

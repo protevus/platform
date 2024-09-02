@@ -1,0 +1,80 @@
+name: ScriptsTest
+class_comment: '# * @group intl-data'
+dependencies:
+- name: MissingResourceException
+  type: class
+  source: Symfony\Component\Intl\Exception\MissingResourceException
+- name: Scripts
+  type: class
+  source: Symfony\Component\Intl\Scripts
+properties: []
+methods:
+- name: testGetNames
+  visibility: public
+  parameters:
+  - name: displayLocale
+  comment: "# * @group intl-data\n# */\n# class ScriptsTest extends ResourceBundleTestCase\n\
+    # {\n# // The below arrays document the state of the ICU data bundled with this\
+    \ package.\n# \n# protected static array $scripts = [\n# 'Adlm',\n# 'Afak',\n\
+    # 'Aghb',\n# 'Ahom',\n# 'Arab',\n# 'Aran',\n# 'Armi',\n# 'Armn',\n# 'Avst',\n\
+    # 'Bali',\n# 'Bamu',\n# 'Bass',\n# 'Batk',\n# 'Beng',\n# 'Bhks',\n# 'Blis',\n\
+    # 'Bopo',\n# 'Brah',\n# 'Brai',\n# 'Bugi',\n# 'Buhd',\n# 'Cakm',\n# 'Cans',\n\
+    # 'Cari',\n# 'Cham',\n# 'Cher',\n# 'Chrs',\n# 'Cirt',\n# 'Copt',\n# 'Cpmn',\n\
+    # 'Cprt',\n# 'Cyrl',\n# 'Cyrs',\n# 'Deva',\n# 'Diak',\n# 'Dogr',\n# 'Dsrt',\n\
+    # 'Dupl',\n# 'Egyd',\n# 'Egyh',\n# 'Egyp',\n# 'Elba',\n# 'Elym',\n# 'Ethi',\n\
+    # 'Geok',\n# 'Geor',\n# 'Glag',\n# 'Gong',\n# 'Gonm',\n# 'Goth',\n# 'Gran',\n\
+    # 'Grek',\n# 'Gujr',\n# 'Guru',\n# 'Hanb',\n# 'Hang',\n# 'Hani',\n# 'Hano',\n\
+    # 'Hans',\n# 'Hant',\n# 'Hatr',\n# 'Hebr',\n# 'Hira',\n# 'Hluw',\n# 'Hmng',\n\
+    # 'Hmnp',\n# 'Hrkt',\n# 'Hung',\n# 'Inds',\n# 'Ital',\n# 'Jamo',\n# 'Java',\n\
+    # 'Jpan',\n# 'Jurc',\n# 'Kali',\n# 'Kana',\n# 'Kawi',\n# 'Khar',\n# 'Khmr',\n\
+    # 'Khoj',\n# 'Kits',\n# 'Knda',\n# 'Kore',\n# 'Kpel',\n# 'Kthi',\n# 'Lana',\n\
+    # 'Laoo',\n# 'Latf',\n# 'Latg',\n# 'Latn',\n# 'Lepc',\n# 'Limb',\n# 'Lina',\n\
+    # 'Linb',\n# 'Lisu',\n# 'Loma',\n# 'Lyci',\n# 'Lydi',\n# 'Mahj',\n# 'Maka',\n\
+    # 'Mand',\n# 'Mani',\n# 'Marc',\n# 'Maya',\n# 'Medf',\n# 'Mend',\n# 'Merc',\n\
+    # 'Mero',\n# 'Mlym',\n# 'Modi',\n# 'Mong',\n# 'Moon',\n# 'Mroo',\n# 'Mtei',\n\
+    # 'Mult',\n# 'Mymr',\n# 'Nagm',\n# 'Nand',\n# 'Narb',\n# 'Nbat',\n# 'Newa',\n\
+    # 'Nkgb',\n# 'Nkoo',\n# 'Nshu',\n# 'Ogam',\n# 'Olck',\n# 'Orkh',\n# 'Orya',\n\
+    # 'Osge',\n# 'Osma',\n# 'Ougr',\n# 'Palm',\n# 'Pauc',\n# 'Perm',\n# 'Phag',\n\
+    # 'Phli',\n# 'Phlp',\n# 'Phlv',\n# 'Phnx',\n# 'Plrd',\n# 'Prti',\n# 'Qaag',\n\
+    # 'Rjng',\n# 'Rohg',\n# 'Roro',\n# 'Runr',\n# 'Samr',\n# 'Sara',\n# 'Sarb',\n\
+    # 'Saur',\n# 'Sgnw',\n# 'Shaw',\n# 'Shrd',\n# 'Sidd',\n# 'Sind',\n# 'Sinh',\n\
+    # 'Sogd',\n# 'Sogo',\n# 'Sora',\n# 'Soyo',\n# 'Sund',\n# 'Sylo',\n# 'Syrc',\n\
+    # 'Syre',\n# 'Syrj',\n# 'Syrn',\n# 'Tagb',\n# 'Takr',\n# 'Tale',\n# 'Talu',\n\
+    # 'Taml',\n# 'Tang',\n# 'Tavt',\n# 'Telu',\n# 'Teng',\n# 'Tfng',\n# 'Tglg',\n\
+    # 'Thaa',\n# 'Thai',\n# 'Tibt',\n# 'Tirh',\n# 'Tnsa',\n# 'Toto',\n# 'Ugar',\n\
+    # 'Vaii',\n# 'Visp',\n# 'Vith',\n# 'Wara',\n# 'Wcho',\n# 'Wole',\n# 'Xpeo',\n\
+    # 'Xsux',\n# 'Yezi',\n# 'Yiii',\n# 'Zanb',\n# 'Zinh',\n# 'Zmth',\n# 'Zsye',\n\
+    # 'Zsym',\n# 'Zxxx',\n# 'Zyyy',\n# ];\n# \n# public function testGetScriptCodes()\n\
+    # {\n# $this->assertSame(self::$scripts, Scripts::getScriptCodes());\n# }\n# \n\
+    # /**\n# * @dataProvider provideLocales"
+- name: testGetNamesDefaultLocale
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetNamesSupportsAliases
+  visibility: public
+  parameters:
+  - name: alias
+  - name: ofLocale
+  comment: '# * @dataProvider provideLocaleAliases'
+- name: testGetName
+  visibility: public
+  parameters:
+  - name: displayLocale
+  comment: '# * @dataProvider provideLocales'
+- name: testGetNameDefaultLocale
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetNameWithInvalidScriptCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExists
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Intl\Exception\MissingResourceException
+- Symfony\Component\Intl\Scripts
+interfaces: []

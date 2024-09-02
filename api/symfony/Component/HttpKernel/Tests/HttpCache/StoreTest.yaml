@@ -1,0 +1,165 @@
+name: StoreTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Cookie
+  type: class
+  source: Symfony\Component\HttpFoundation\Cookie
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: HttpCache
+  type: class
+  source: Symfony\Component\HttpKernel\HttpCache\HttpCache
+- name: Store
+  type: class
+  source: Symfony\Component\HttpKernel\HttpCache\Store
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testReadsAnEmptyArrayWithReadWhenNothingCachedAtKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnlockFileThatDoesExist
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnlockFileThatDoesNotExist
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemovesEntriesForKeyWithPurge
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStoresACacheEntry
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetsTheXContentDigestResponseHeaderBeforeStoring
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDoesNotTrustXContentDigestFromUpstream
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWritesResponseEvenIfXContentDigestIsPresent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWritingARestoredResponseDoesNotCorruptCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindsAStoredEntryWithLookup
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDoesNotFindAnEntryWithLookupWhenNoneExists
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCanonizesUrlsForCacheKeys
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDoesNotFindAnEntryWithLookupWhenTheBodyDoesNotExist
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRestoresResponseHeadersProperlyWithLookup
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRestoresResponseContentFromEntityStoreWithLookup
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidatesMetaAndEntityStoreEntriesWithInvalidate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSucceedsQuietlyWhenInvalidateCalledWithNoMatchingEntries
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDoesNotReturnEntriesThatVaryWithLookup
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDoesNotReturnEntriesThatSlightlyVaryWithLookup
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStoresMultipleResponsesForEachVaryCombination
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOverwritesNonVaryingResponseWithStore
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLocking
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPurgeHttps
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPurgeHttpAndHttps
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDoesNotStorePrivateHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDiscardsInvalidBodyEval
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadsBodyEval
+  visibility: public
+  parameters: []
+  comment: null
+- name: storeSimpleEntry
+  visibility: protected
+  parameters:
+  - name: path
+    default: 'null'
+  - name: headers
+    default: '[]'
+  comment: null
+- name: getStoreMetadata
+  visibility: protected
+  parameters:
+  - name: key
+  comment: null
+- name: getStorePath
+  visibility: protected
+  parameters:
+  - name: key
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Cookie
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\HttpCache\HttpCache
+- Symfony\Component\HttpKernel\HttpCache\Store
+interfaces: []

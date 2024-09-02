@@ -1,0 +1,113 @@
+name: ConsoleOutput
+class_comment: '# * ConsoleOutput is the default class for all CLI output. It uses
+  STDOUT and STDERR.
+
+  # *
+
+  # * This class is a convenient wrapper around `StreamOutput` for both STDOUT and
+  STDERR.
+
+  # *
+
+  # *     $output = new ConsoleOutput();
+
+  # *
+
+  # * This is equivalent to:
+
+  # *
+
+  # *     $output = new StreamOutput(fopen(''php://stdout'', ''w''));
+
+  # *     $stdErr = new StreamOutput(fopen(''php://stderr'', ''w''));
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: OutputFormatterInterface
+  type: class
+  source: Symfony\Component\Console\Formatter\OutputFormatterInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: verbosity
+    default: self::VERBOSITY_NORMAL
+  - name: decorated
+    default: 'null'
+  - name: formatter
+    default: 'null'
+  comment: "# * ConsoleOutput is the default class for all CLI output. It uses STDOUT\
+    \ and STDERR.\n# *\n# * This class is a convenient wrapper around `StreamOutput`\
+    \ for both STDOUT and STDERR.\n# *\n# *     $output = new ConsoleOutput();\n#\
+    \ *\n# * This is equivalent to:\n# *\n# *     $output = new StreamOutput(fopen('php://stdout',\
+    \ 'w'));\n# *     $stdErr = new StreamOutput(fopen('php://stderr', 'w'));\n# *\n\
+    # * @author Fabien Potencier <fabien@symfony.com>\n# */\n# class ConsoleOutput\
+    \ extends StreamOutput implements ConsoleOutputInterface\n# {\n# private OutputInterface\
+    \ $stderr;\n# private array $consoleSectionOutputs = [];\n# \n# /**\n# * @param\
+    \ int                           $verbosity The verbosity level (one of the VERBOSITY\
+    \ constants in OutputInterface)\n# * @param bool|null                     $decorated\
+    \ Whether to decorate messages (null for auto-guessing)\n# * @param OutputFormatterInterface|null\
+    \ $formatter Output formatter instance (null to use default OutputFormatter)"
+- name: section
+  visibility: public
+  parameters: []
+  comment: '# * Creates a new output section.'
+- name: setDecorated
+  visibility: public
+  parameters:
+  - name: decorated
+  comment: null
+- name: setFormatter
+  visibility: public
+  parameters:
+  - name: formatter
+  comment: null
+- name: setVerbosity
+  visibility: public
+  parameters:
+  - name: level
+  comment: null
+- name: getErrorOutput
+  visibility: public
+  parameters: []
+  comment: null
+- name: setErrorOutput
+  visibility: public
+  parameters:
+  - name: error
+  comment: null
+- name: hasStdoutSupport
+  visibility: protected
+  parameters: []
+  comment: '# * Returns true if current environment supports writing console output
+    to
+
+    # * STDOUT.'
+- name: hasStderrSupport
+  visibility: protected
+  parameters: []
+  comment: '# * Returns true if current environment supports writing console output
+    to
+
+    # * STDERR.'
+- name: isRunningOS400
+  visibility: private
+  parameters: []
+  comment: '# * Checks if current executing environment is IBM iSeries (OS400), which
+
+    # * doesn''t properly convert character-encodings between ASCII to EBCDIC.'
+- name: openOutputStream
+  visibility: private
+  parameters: []
+  comment: '# * @return resource'
+- name: openErrorStream
+  visibility: private
+  parameters: []
+  comment: '# * @return resource'
+traits:
+- Symfony\Component\Console\Formatter\OutputFormatterInterface
+interfaces:
+- ConsoleOutputInterface

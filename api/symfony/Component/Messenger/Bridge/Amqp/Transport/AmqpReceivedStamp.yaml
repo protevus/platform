@@ -1,0 +1,26 @@
+name: AmqpReceivedStamp
+class_comment: '# * Stamp applied when a message is received from Amqp.'
+dependencies:
+- name: NonSendableStampInterface
+  type: class
+  source: Symfony\Component\Messenger\Stamp\NonSendableStampInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: amqpEnvelope
+  - name: queueName
+  comment: null
+- name: getAmqpEnvelope
+  visibility: public
+  parameters: []
+  comment: null
+- name: getQueueName
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Messenger\Stamp\NonSendableStampInterface
+interfaces:
+- NonSendableStampInterface

@@ -1,0 +1,53 @@
+name: YamlValidatorTest
+class_comment: '# * @author Kev <https://github.com/symfonyaml>'
+dependencies:
+- name: Yaml
+  type: class
+  source: Symfony\Component\Validator\Constraints\Yaml
+- name: YamlValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\YamlValidator
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+- name: YamlParser
+  type: class
+  source: Symfony\Component\Yaml\Yaml
+properties: []
+methods:
+- name: testYamlIsValid
+  visibility: public
+  parameters:
+  - name: value
+  comment: "# * @author Kev <https://github.com/symfonyaml>\n# */\n# class YamlValidatorTest\
+    \ extends ConstraintValidatorTestCase\n# {\n# protected function createValidator():\
+    \ YamlValidator\n# {\n# return new YamlValidator();\n# }\n# \n# /**\n# * @dataProvider\
+    \ getValidValues"
+- name: testYamlWithFlags
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidValues
+  visibility: public
+  parameters:
+  - name: value
+  - name: message
+  - name: line
+  comment: '# * @dataProvider getInvalidValues'
+- name: testInvalidFlags
+  visibility: public
+  parameters: []
+  comment: null
+- name: getValidValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: getInvalidValues
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\Yaml
+- Symfony\Component\Validator\Constraints\YamlValidator
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

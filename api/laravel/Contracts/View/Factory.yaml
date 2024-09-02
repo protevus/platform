@@ -1,0 +1,127 @@
+name: Factory
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: exists
+  visibility: public
+  parameters:
+  - name: view
+  comment: '# * Determine if a given view exists.
+
+    # *
+
+    # * @param  string  $view
+
+    # * @return bool'
+- name: file
+  visibility: public
+  parameters:
+  - name: path
+  - name: data
+    default: '[]'
+  - name: mergeData
+    default: '[]'
+  comment: '# * Get the evaluated view contents for the given path.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  \Illuminate\Contracts\Support\Arrayable|array  $data
+
+    # * @param  array  $mergeData
+
+    # * @return \Illuminate\Contracts\View\View'
+- name: make
+  visibility: public
+  parameters:
+  - name: view
+  - name: data
+    default: '[]'
+  - name: mergeData
+    default: '[]'
+  comment: '# * Get the evaluated view contents for the given view.
+
+    # *
+
+    # * @param  string  $view
+
+    # * @param  \Illuminate\Contracts\Support\Arrayable|array  $data
+
+    # * @param  array  $mergeData
+
+    # * @return \Illuminate\Contracts\View\View'
+- name: share
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: 'null'
+  comment: '# * Add a piece of shared data to the environment.
+
+    # *
+
+    # * @param  array|string  $key
+
+    # * @param  mixed  $value
+
+    # * @return mixed'
+- name: composer
+  visibility: public
+  parameters:
+  - name: views
+  - name: callback
+  comment: '# * Register a view composer event.
+
+    # *
+
+    # * @param  array|string  $views
+
+    # * @param  \Closure|string  $callback
+
+    # * @return array'
+- name: creator
+  visibility: public
+  parameters:
+  - name: views
+  - name: callback
+  comment: '# * Register a view creator event.
+
+    # *
+
+    # * @param  array|string  $views
+
+    # * @param  \Closure|string  $callback
+
+    # * @return array'
+- name: addNamespace
+  visibility: public
+  parameters:
+  - name: namespace
+  - name: hints
+  comment: '# * Add a new namespace to the loader.
+
+    # *
+
+    # * @param  string  $namespace
+
+    # * @param  string|array  $hints
+
+    # * @return $this'
+- name: replaceNamespace
+  visibility: public
+  parameters:
+  - name: namespace
+  - name: hints
+  comment: '# * Replace the namespace hints for the given namespace.
+
+    # *
+
+    # * @param  string  $namespace
+
+    # * @param  string|array  $hints
+
+    # * @return $this'
+traits: []
+interfaces: []

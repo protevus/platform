@@ -1,0 +1,51 @@
+name: Target
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\LogicException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * An attribute to tell how a dependency is used and hint named autowiring
+    aliases.
+
+    # *
+
+    # * @author Nicolas Grekas <p@tchwork.com>
+
+    # */
+
+    # #[\Attribute(\Attribute::TARGET_PARAMETER)]
+
+    # final class Target
+
+    # {
+
+    # /**
+
+    # * @param string|null $name The name of the target autowiring alias'
+- name: getParsedName
+  visibility: public
+  parameters: []
+  comment: null
+- name: parseName
+  visibility: public
+  parameters:
+  - name: parameter
+  - name: '&$attribute'
+    default: 'null'
+  - name: '&$parsedName'
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Exception\LogicException
+interfaces: []

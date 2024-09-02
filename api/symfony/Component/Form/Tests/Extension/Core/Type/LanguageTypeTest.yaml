@@ -1,0 +1,73 @@
+name: LanguageTypeTest
+class_comment: null
+dependencies:
+- name: ChoiceView
+  type: class
+  source: Symfony\Component\Form\ChoiceList\View\ChoiceView
+- name: LogicException
+  type: class
+  source: Symfony\Component\Form\Exception\LogicException
+- name: IntlTestHelper
+  type: class
+  source: Symfony\Component\Intl\Util\IntlTestHelper
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testCountriesAreSelectable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testChoiceTranslationLocaleOption
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension intl'
+- name: testAlpha3Option
+  visibility: public
+  parameters: []
+  comment: null
+- name: testChoiceTranslationLocaleAndAlpha3Option
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension intl'
+- name: testChoiceSelfTranslationOption
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension intl'
+- name: testChoiceSelfTranslationAndAlpha3Options
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension intl'
+- name: testSelfTranslationNotAllowedWithChoiceTranslation
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMultipleLanguagesIsNotIncluded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNull
+  visibility: public
+  parameters:
+  - name: expected
+    default: 'null'
+  - name: norm
+    default: 'null'
+  - name: view
+    default: 'null'
+  comment: null
+- name: testSubmitNullUsesDefaultEmptyData
+  visibility: public
+  parameters:
+  - name: emptyData
+    default: '''en'''
+  - name: expectedData
+    default: '''en'''
+  comment: null
+traits:
+- Symfony\Component\Form\ChoiceList\View\ChoiceView
+- Symfony\Component\Form\Exception\LogicException
+- Symfony\Component\Intl\Util\IntlTestHelper
+interfaces: []

@@ -1,0 +1,19 @@
+name: WithoutMiddleware
+class_comment: null
+dependencies:
+- name: Exception
+  type: class
+  source: Exception
+properties: []
+methods:
+- name: disableMiddlewareForAllTests
+  visibility: public
+  parameters: []
+  comment: '# * Prevent all middleware from being executed for this test class.
+
+    # *
+
+    # * @throws \Exception'
+traits:
+- Exception
+interfaces: []

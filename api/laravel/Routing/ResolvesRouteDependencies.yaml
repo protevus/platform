@@ -1,0 +1,114 @@
+name: ResolvesRouteDependencies
+class_comment: null
+dependencies:
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Reflector
+  type: class
+  source: Illuminate\Support\Reflector
+- name: ReflectionClass
+  type: class
+  source: ReflectionClass
+- name: ReflectionFunctionAbstract
+  type: class
+  source: ReflectionFunctionAbstract
+- name: ReflectionMethod
+  type: class
+  source: ReflectionMethod
+- name: ReflectionParameter
+  type: class
+  source: ReflectionParameter
+- name: stdClass
+  type: class
+  source: stdClass
+properties: []
+methods:
+- name: resolveClassMethodDependencies
+  visibility: protected
+  parameters:
+  - name: parameters
+  - name: instance
+  - name: method
+  comment: '# * Resolve the object method''s type-hinted dependencies.
+
+    # *
+
+    # * @param  array  $parameters
+
+    # * @param  object  $instance
+
+    # * @param  string  $method
+
+    # * @return array'
+- name: resolveMethodDependencies
+  visibility: public
+  parameters:
+  - name: parameters
+  - name: reflector
+  comment: '# * Resolve the given method''s type-hinted dependencies.
+
+    # *
+
+    # * @param  array  $parameters
+
+    # * @param  \ReflectionFunctionAbstract  $reflector
+
+    # * @return array'
+- name: transformDependency
+  visibility: protected
+  parameters:
+  - name: parameter
+  - name: parameters
+  - name: skippableValue
+  comment: '# * Attempt to transform the given parameter into a class instance.
+
+    # *
+
+    # * @param  \ReflectionParameter  $parameter
+
+    # * @param  array  $parameters
+
+    # * @param  object  $skippableValue
+
+    # * @return mixed'
+- name: alreadyInParameters
+  visibility: protected
+  parameters:
+  - name: class
+  - name: parameters
+  comment: '# * Determine if an object of the given class is in a list of parameters.
+
+    # *
+
+    # * @param  string  $class
+
+    # * @param  array  $parameters
+
+    # * @return bool'
+- name: spliceIntoParameters
+  visibility: protected
+  parameters:
+  - name: '&$parameters'
+  - name: offset
+  - name: value
+  comment: '# * Splice the given value into the parameter list.
+
+    # *
+
+    # * @param  array  $parameters
+
+    # * @param  string  $offset
+
+    # * @param  mixed  $value
+
+    # * @return void'
+traits:
+- Illuminate\Support\Arr
+- Illuminate\Support\Reflector
+- ReflectionClass
+- ReflectionFunctionAbstract
+- ReflectionMethod
+- ReflectionParameter
+- stdClass
+interfaces: []

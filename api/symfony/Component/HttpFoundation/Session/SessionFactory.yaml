@@ -1,0 +1,28 @@
+name: SessionFactory
+class_comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>"
+dependencies:
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+- name: SessionStorageFactoryInterface
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Storage\SessionStorageFactoryInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: requestStack
+  - name: storageFactory
+  - name: usageReporter
+    default: 'null'
+  comment: null
+- name: createSession
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\RequestStack
+- Symfony\Component\HttpFoundation\Session\Storage\SessionStorageFactoryInterface
+interfaces:
+- SessionFactoryInterface

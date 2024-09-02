@@ -1,0 +1,88 @@
+name: FileFactory
+class_comment: null
+dependencies:
+- name: LogicException
+  type: class
+  source: LogicException
+properties: []
+methods:
+- name: create
+  visibility: public
+  parameters:
+  - name: name
+  - name: kilobytes
+    default: '0'
+  - name: mimeType
+    default: 'null'
+  comment: '# * Create a new fake file.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|int  $kilobytes
+
+    # * @param  string|null  $mimeType
+
+    # * @return \Illuminate\Http\Testing\File'
+- name: createWithContent
+  visibility: public
+  parameters:
+  - name: name
+  - name: content
+  comment: '# * Create a new fake file with content.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string  $content
+
+    # * @return \Illuminate\Http\Testing\File'
+- name: image
+  visibility: public
+  parameters:
+  - name: name
+  - name: width
+    default: '10'
+  - name: height
+    default: '10'
+  comment: '# * Create a new fake image.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  int  $width
+
+    # * @param  int  $height
+
+    # * @return \Illuminate\Http\Testing\File
+
+    # *
+
+    # * @throws \LogicException'
+- name: generateImage
+  visibility: protected
+  parameters:
+  - name: width
+  - name: height
+  - name: extension
+  comment: '# * Generate a dummy image of the given width and height.
+
+    # *
+
+    # * @param  int  $width
+
+    # * @param  int  $height
+
+    # * @param  string  $extension
+
+    # * @return resource
+
+    # *
+
+    # * @throws \LogicException'
+traits:
+- LogicException
+interfaces: []

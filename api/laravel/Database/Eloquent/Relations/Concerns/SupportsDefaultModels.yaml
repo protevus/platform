@@ -1,0 +1,46 @@
+name: SupportsDefaultModels
+class_comment: null
+dependencies:
+- name: Model
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+properties:
+- name: withDefault
+  visibility: protected
+  comment: '# * Indicates if a default model instance should be used.
+
+    # *
+
+    # * Alternatively, may be a Closure or array.
+
+    # *
+
+    # * @var \Closure|array|bool'
+methods:
+- name: withDefault
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'true'
+  comment: "# * Indicates if a default model instance should be used.\n# *\n# * Alternatively,\
+    \ may be a Closure or array.\n# *\n# * @var \\Closure|array|bool\n# */\n# protected\
+    \ $withDefault;\n# \n# /**\n# * Make a new related instance for the given model.\n\
+    # *\n# * @param  \\Illuminate\\Database\\Eloquent\\Model  $parent\n# * @return\
+    \ \\Illuminate\\Database\\Eloquent\\Model\n# */\n# abstract protected function\
+    \ newRelatedInstanceFor(Model $parent);\n# \n# /**\n# * Return a new model instance\
+    \ in case the relationship does not exist.\n# *\n# * @param  \\Closure|array|bool\
+    \  $callback\n# * @return $this"
+- name: getDefaultFor
+  visibility: protected
+  parameters:
+  - name: parent
+  comment: '# * Get the default value for this relation.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Model  $parent
+
+    # * @return \Illuminate\Database\Eloquent\Model|null'
+traits:
+- Illuminate\Database\Eloquent\Model
+interfaces: []

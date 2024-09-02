@@ -1,0 +1,52 @@
+name: PersistingStoreInterface
+class_comment: null
+dependencies:
+- name: SemaphoreAcquiringException
+  type: class
+  source: Symfony\Component\Semaphore\Exception\SemaphoreAcquiringException
+- name: SemaphoreExpiredException
+  type: class
+  source: Symfony\Component\Semaphore\Exception\SemaphoreExpiredException
+- name: SemaphoreReleasingException
+  type: class
+  source: Symfony\Component\Semaphore\Exception\SemaphoreReleasingException
+properties: []
+methods:
+- name: save
+  visibility: public
+  parameters:
+  - name: key
+  - name: ttlInSecond
+  comment: "# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>\n# * @author J\xE9\
+    r\xE9my Deruss\xE9 <jeremy@derusse.com>\n# */\n# interface PersistingStoreInterface\n\
+    # {\n# /**\n# * Stores the resource if the semaphore is not full.\n# *\n# * @throws\
+    \ SemaphoreAcquiringException"
+- name: delete
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Removes a resource from the storage.
+
+    # *
+
+    # * @throws SemaphoreReleasingException'
+- name: exists
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Returns whether or not the resource exists in the storage.'
+- name: putOffExpiration
+  visibility: public
+  parameters:
+  - name: key
+  - name: ttlInSecond
+  comment: '# * Extends the TTL of a resource.
+
+    # *
+
+    # * @throws SemaphoreExpiredException'
+traits:
+- Symfony\Component\Semaphore\Exception\SemaphoreAcquiringException
+- Symfony\Component\Semaphore\Exception\SemaphoreExpiredException
+- Symfony\Component\Semaphore\Exception\SemaphoreReleasingException
+interfaces: []

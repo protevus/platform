@@ -1,0 +1,34 @@
+name: AckStamp
+class_comment: null
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: ack
+  comment: '# * Marker stamp for messages that can be ack/nack''ed.
+
+    # */
+
+    # final class AckStamp implements NonSendableStampInterface
+
+    # {
+
+    # /**
+
+    # * @param \Closure(Envelope, \Throwable|null) $ack'
+- name: ack
+  visibility: public
+  parameters:
+  - name: envelope
+  - name: e
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+interfaces:
+- NonSendableStampInterface

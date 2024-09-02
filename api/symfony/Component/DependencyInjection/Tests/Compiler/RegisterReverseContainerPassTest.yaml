@@ -1,0 +1,47 @@
+name: RegisterReverseContainerPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ServiceLocatorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- name: PassConfig
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\PassConfig
+- name: RegisterReverseContainerPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\RegisterReverseContainerPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: ReverseContainer
+  type: class
+  source: Symfony\Component\DependencyInjection\ReverseContainer
+properties: []
+methods:
+- name: testCompileRemovesUnusedServices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPublicServices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReversibleServices
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- Symfony\Component\DependencyInjection\Compiler\PassConfig
+- Symfony\Component\DependencyInjection\Compiler\RegisterReverseContainerPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\DependencyInjection\ReverseContainer
+interfaces: []

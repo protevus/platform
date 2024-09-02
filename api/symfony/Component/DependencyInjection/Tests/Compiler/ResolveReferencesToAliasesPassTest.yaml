@@ -1,0 +1,88 @@
+name: ResolveReferencesToAliasesPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ExpectUserDeprecationMessageTrait
+  type: class
+  source: Symfony\Bridge\PhpUnit\ExpectUserDeprecationMessageTrait
+- name: Alias
+  type: class
+  source: Symfony\Component\DependencyInjection\Alias
+- name: ResolveReferencesToAliasesPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ResolveReferencesToAliasesPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: ServiceCircularReferenceException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: ExpectUserDeprecationMessageTrait
+  type: class
+  source: ExpectUserDeprecationMessageTrait
+properties: []
+methods:
+- name: testProcess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessRecursively
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAliasCircularReference
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResolveFactory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDeprecationNoticeWhenReferencedByAlias
+  visibility: public
+  parameters: []
+  comment: '# * The test should be kept in the group as it always expects a deprecation.
+
+    # *
+
+    # * @group legacy'
+- name: testDeprecationNoticeWhenReferencedByDefinition
+  visibility: public
+  parameters: []
+  comment: '# * The test should be kept in the group as it always expects a deprecation.
+
+    # *
+
+    # * @group legacy'
+- name: testNoDeprecationNoticeWhenReferencedByDeprecatedAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoDeprecationNoticeWhenReferencedByDeprecatedDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: process
+  visibility: protected
+  parameters:
+  - name: container
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bridge\PhpUnit\ExpectUserDeprecationMessageTrait
+- Symfony\Component\DependencyInjection\Alias
+- Symfony\Component\DependencyInjection\Compiler\ResolveReferencesToAliasesPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+- Symfony\Component\DependencyInjection\Reference
+- ExpectUserDeprecationMessageTrait
+interfaces: []

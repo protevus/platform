@@ -1,0 +1,34 @@
+name: WhoopsExceptionRenderer
+class_comment: null
+dependencies:
+- name: ExceptionRenderer
+  type: class
+  source: Illuminate\Contracts\Foundation\ExceptionRenderer
+- name: Whoops
+  type: class
+  source: Whoops\Run
+properties: []
+methods:
+- name: render
+  visibility: public
+  parameters:
+  - name: throwable
+  comment: '# * Renders the given exception as HTML.
+
+    # *
+
+    # * @param  \Throwable  $throwable
+
+    # * @return string'
+- name: whoopsHandler
+  visibility: protected
+  parameters: []
+  comment: '# * Get the Whoops handler for the application.
+
+    # *
+
+    # * @return \Whoops\Handler\Handler'
+traits:
+- Illuminate\Contracts\Foundation\ExceptionRenderer
+interfaces:
+- ExceptionRenderer

@@ -1,0 +1,57 @@
+name: CssColor
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Validator\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: formats
+    default: '[]'
+  - name: message
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  - name: options
+    default: 'null'
+  comment: "# * Validates that a value is a valid CSS color.\n# *\n# * @author Mathieu\
+    \ Santostefano <msantostefano@protonmail.com>\n# */\n# #[\\Attribute(\\Attribute::TARGET_PROPERTY\
+    \ | \\Attribute::TARGET_METHOD | \\Attribute::IS_REPEATABLE)]\n# class CssColor\
+    \ extends Constraint\n# {\n# public const HEX_LONG = 'hex_long';\n# public const\
+    \ HEX_LONG_WITH_ALPHA = 'hex_long_with_alpha';\n# public const HEX_SHORT = 'hex_short';\n\
+    # public const HEX_SHORT_WITH_ALPHA = 'hex_short_with_alpha';\n# public const\
+    \ BASIC_NAMED_COLORS = 'basic_named_colors';\n# public const EXTENDED_NAMED_COLORS\
+    \ = 'extended_named_colors';\n# public const SYSTEM_COLORS = 'system_colors';\n\
+    # public const KEYWORDS = 'keywords';\n# public const RGB = 'rgb';\n# public const\
+    \ RGBA = 'rgba';\n# public const HSL = 'hsl';\n# public const HSLA = 'hsla';\n\
+    # public const INVALID_FORMAT_ERROR = '454ab47b-aacf-4059-8f26-184b2dc9d48d';\n\
+    # \n# protected const ERROR_NAMES = [\n# self::INVALID_FORMAT_ERROR => 'INVALID_FORMAT_ERROR',\n\
+    # ];\n# \n# /**\n# * @var string[]\n# */\n# private static array $validationModes\
+    \ = [\n# self::HEX_LONG,\n# self::HEX_LONG_WITH_ALPHA,\n# self::HEX_SHORT,\n#\
+    \ self::HEX_SHORT_WITH_ALPHA,\n# self::BASIC_NAMED_COLORS,\n# self::EXTENDED_NAMED_COLORS,\n\
+    # self::SYSTEM_COLORS,\n# self::KEYWORDS,\n# self::RGB,\n# self::RGBA,\n# self::HSL,\n\
+    # self::HSLA,\n# ];\n# \n# public string $message = 'This value is not a valid\
+    \ CSS color.';\n# public array|string $formats;\n# \n# /**\n# * @param string[]|string|array<string,mixed>\
+    \ $formats The types of CSS colors allowed ({@see https://symfony.com/doc/current/reference/constraints/CssColor.html#formats})\n\
+    # * @param string[]|null                       $groups\n# * @param array<string,mixed>|null\
+    \            $options"
+- name: getDefaultOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRequiredOptions
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Exception\InvalidArgumentException
+interfaces: []

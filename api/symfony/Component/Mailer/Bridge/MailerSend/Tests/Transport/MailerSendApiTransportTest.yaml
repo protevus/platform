@@ -1,0 +1,77 @@
+name: MailerSendApiTransportTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: MockHttpClient
+  type: class
+  source: Symfony\Component\HttpClient\MockHttpClient
+- name: JsonMockResponse
+  type: class
+  source: Symfony\Component\HttpClient\Response\JsonMockResponse
+- name: MockResponse
+  type: class
+  source: Symfony\Component\HttpClient\Response\MockResponse
+- name: MailerSendApiTransport
+  type: class
+  source: Symfony\Component\Mailer\Bridge\MailerSend\Transport\MailerSendApiTransport
+- name: HttpTransportException
+  type: class
+  source: Symfony\Component\Mailer\Exception\HttpTransportException
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+- name: DataPart
+  type: class
+  source: Symfony\Component\Mime\Part\DataPart
+- name: ResponseInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\ResponseInterface
+properties: []
+methods:
+- name: testToString
+  visibility: public
+  parameters:
+  - name: transport
+  - name: expected
+  comment: '# * @dataProvider getTransportData'
+- name: getTransportData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendBasicEmail
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendEmailWithAttachment
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendThrowsForErrorResponse
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendThrowsForAllSuppressed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendThrowsForBadResponse
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpClient\MockHttpClient
+- Symfony\Component\HttpClient\Response\JsonMockResponse
+- Symfony\Component\HttpClient\Response\MockResponse
+- Symfony\Component\Mailer\Bridge\MailerSend\Transport\MailerSendApiTransport
+- Symfony\Component\Mailer\Exception\HttpTransportException
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Email
+- Symfony\Component\Mime\Part\DataPart
+- Symfony\Contracts\HttpClient\ResponseInterface
+interfaces: []

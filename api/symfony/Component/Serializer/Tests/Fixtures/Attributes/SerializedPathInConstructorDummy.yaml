@@ -1,0 +1,16 @@
+name: SerializedPathInConstructorDummy
+class_comment: null
+dependencies:
+- name: SerializedPath
+  type: class
+  source: Symfony\Component\Serializer\Attribute\SerializedPath
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: '#[SerializedPath(''[one][two]'''
+  comment: null
+traits:
+- Symfony\Component\Serializer\Attribute\SerializedPath
+interfaces: []

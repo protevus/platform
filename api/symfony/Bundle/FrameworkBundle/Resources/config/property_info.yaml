@@ -1,0 +1,51 @@
+name: property_info
+class_comment: null
+dependencies:
+- name: ReflectionExtractor
+  type: class
+  source: Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor
+- name: PropertyAccessExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyAccessExtractorInterface
+- name: PropertyDescriptionExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyDescriptionExtractorInterface
+- name: PropertyInfoCacheExtractor
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyInfoCacheExtractor
+- name: PropertyInfoExtractor
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyInfoExtractor
+- name: PropertyInfoExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyInfoExtractorInterface
+- name: PropertyInitializableExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyInitializableExtractorInterface
+- name: PropertyListExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyListExtractorInterface
+- name: PropertyReadInfoExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyReadInfoExtractorInterface
+- name: PropertyTypeExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface
+- name: PropertyWriteInfoExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyWriteInfoExtractorInterface
+properties: []
+methods: []
+traits:
+- Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor
+- Symfony\Component\PropertyInfo\PropertyAccessExtractorInterface
+- Symfony\Component\PropertyInfo\PropertyDescriptionExtractorInterface
+- Symfony\Component\PropertyInfo\PropertyInfoCacheExtractor
+- Symfony\Component\PropertyInfo\PropertyInfoExtractor
+- Symfony\Component\PropertyInfo\PropertyInfoExtractorInterface
+- Symfony\Component\PropertyInfo\PropertyInitializableExtractorInterface
+- Symfony\Component\PropertyInfo\PropertyListExtractorInterface
+- Symfony\Component\PropertyInfo\PropertyReadInfoExtractorInterface
+- Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface
+- Symfony\Component\PropertyInfo\PropertyWriteInfoExtractorInterface
+interfaces: []

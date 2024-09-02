@@ -1,0 +1,43 @@
+name: ControllerMiddlewareOptions
+class_comment: null
+dependencies: []
+properties:
+- name: options
+  visibility: protected
+  comment: '# * The middleware options.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: '&$options'
+  comment: "# * The middleware options.\n# *\n# * @var array\n# */\n# protected $options;\n\
+    # \n# /**\n# * Create a new middleware option instance.\n# *\n# * @param  array\
+    \  $options\n# * @return void"
+- name: only
+  visibility: public
+  parameters:
+  - name: methods
+  comment: '# * Set the controller methods the middleware should apply to.
+
+    # *
+
+    # * @param  array|string|mixed  $methods
+
+    # * @return $this'
+- name: except
+  visibility: public
+  parameters:
+  - name: methods
+  comment: '# * Set the controller methods the middleware should exclude.
+
+    # *
+
+    # * @param  array|string|mixed  $methods
+
+    # * @return $this'
+traits: []
+interfaces: []

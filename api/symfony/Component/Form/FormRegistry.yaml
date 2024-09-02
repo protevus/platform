@@ -1,0 +1,65 @@
+name: FormRegistry
+class_comment: '# * The central registry of the Form component.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: ExceptionInterface
+  type: class
+  source: Symfony\Component\Form\Exception\ExceptionInterface
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Form\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\Form\Exception\LogicException
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Form\Exception\UnexpectedTypeException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: extensions
+  - name: resolvedTypeFactory
+  comment: "# * The central registry of the Form component.\n# *\n# * @author Bernhard\
+    \ Schussek <bschussek@gmail.com>\n# */\n# class FormRegistry implements FormRegistryInterface\n\
+    # {\n# /**\n# * @var FormExtensionInterface[]\n# */\n# private array $extensions\
+    \ = [];\n# \n# /**\n# * @var ResolvedFormTypeInterface[]\n# */\n# private array\
+    \ $types = [];\n# \n# private FormTypeGuesserInterface|false|null $guesser = false;\n\
+    # private array $checkedTypes = [];\n# \n# /**\n# * @param FormExtensionInterface[]\
+    \ $extensions\n# *\n# * @throws UnexpectedTypeException if any extension does\
+    \ not implement FormExtensionInterface"
+- name: getType
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: resolveType
+  visibility: private
+  parameters:
+  - name: type
+  comment: '# * Wraps a type into a ResolvedFormTypeInterface implementation and connects
+    it with its parent type.'
+- name: hasType
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: getTypeGuesser
+  visibility: public
+  parameters: []
+  comment: null
+- name: getExtensions
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\Exception\ExceptionInterface
+- Symfony\Component\Form\Exception\InvalidArgumentException
+- Symfony\Component\Form\Exception\LogicException
+- Symfony\Component\Form\Exception\UnexpectedTypeException
+interfaces:
+- FormRegistryInterface

@@ -1,0 +1,22 @@
+name: Entity45016
+class_comment: null
+dependencies:
+- name: Ignore
+  type: class
+  source: Symfony\Component\Serializer\Attribute\Ignore
+properties:
+- name: id
+  visibility: private
+  comment: '# * @var int'
+methods:
+- name: getId
+  visibility: public
+  parameters: []
+  comment: null
+- name: badIgnore
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Serializer\Attribute\Ignore
+interfaces: []

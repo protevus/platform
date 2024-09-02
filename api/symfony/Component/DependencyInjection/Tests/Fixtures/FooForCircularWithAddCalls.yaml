@@ -1,0 +1,12 @@
+name: FooForCircularWithAddCalls
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: call
+  visibility: public
+  parameters:
+  - name: argument
+  comment: null
+traits: []
+interfaces: []

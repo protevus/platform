@@ -1,0 +1,43 @@
+name: MessageBusInterface
+class_comment: null
+dependencies:
+- name: ExceptionInterface
+  type: class
+  source: Symfony\Component\Messenger\Exception\ExceptionInterface
+- name: StampInterface
+  type: class
+  source: Symfony\Component\Messenger\Stamp\StampInterface
+properties: []
+methods:
+- name: dispatch
+  visibility: public
+  parameters:
+  - name: message
+  - name: stamps
+    default: '[]'
+  comment: '# * @author Samuel Roze <samuel.roze@gmail.com>
+
+    # */
+
+    # interface MessageBusInterface
+
+    # {
+
+    # /**
+
+    # * Dispatches the given message.
+
+    # *
+
+    # * @param object|Envelope  $message The message or the message pre-wrapped in
+    an envelope
+
+    # * @param StampInterface[] $stamps
+
+    # *
+
+    # * @throws ExceptionInterface'
+traits:
+- Symfony\Component\Messenger\Exception\ExceptionInterface
+- Symfony\Component\Messenger\Stamp\StampInterface
+interfaces: []

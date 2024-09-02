@@ -1,0 +1,55 @@
+name: ObjectsProvider
+class_comment: "# * @author Jean-Fran\xE7ois Simon <contact@jfsimon.fr>"
+dependencies:
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputDefinition
+  type: class
+  source: Symfony\Component\Console\Input\InputDefinition
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: DescriptorApplication1
+  type: class
+  source: Symfony\Component\Console\Tests\Fixtures\DescriptorApplication1
+- name: DescriptorApplication2
+  type: class
+  source: Symfony\Component\Console\Tests\Fixtures\DescriptorApplication2
+- name: DescriptorCommand1
+  type: class
+  source: Symfony\Component\Console\Tests\Fixtures\DescriptorCommand1
+- name: DescriptorCommand2
+  type: class
+  source: Symfony\Component\Console\Tests\Fixtures\DescriptorCommand2
+properties: []
+methods:
+- name: getInputArguments
+  visibility: public
+  parameters: []
+  comment: null
+- name: getInputOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: getInputDefinitions
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCommands
+  visibility: public
+  parameters: []
+  comment: null
+- name: getApplications
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputDefinition
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Tests\Fixtures\DescriptorApplication1
+- Symfony\Component\Console\Tests\Fixtures\DescriptorApplication2
+- Symfony\Component\Console\Tests\Fixtures\DescriptorCommand1
+- Symfony\Component\Console\Tests\Fixtures\DescriptorCommand2
+interfaces: []

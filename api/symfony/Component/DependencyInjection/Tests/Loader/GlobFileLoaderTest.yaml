@@ -1,0 +1,48 @@
+name: GlobFileLoaderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: FileLocator
+  type: class
+  source: Symfony\Component\Config\FileLocator
+- name: GlobResource
+  type: class
+  source: Symfony\Component\Config\Resource\GlobResource
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: GlobFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\GlobFileLoader
+properties: []
+methods:
+- name: testSupports
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadAddsTheGlobResourceToTheContainer
+  visibility: public
+  parameters: []
+  comment: null
+- name: import
+  visibility: public
+  parameters:
+  - name: resource
+  - name: type
+    default: 'null'
+  - name: ignoreErrors
+    default: 'false'
+  - name: sourceResource
+    default: 'null'
+  - name: exclude
+    default: 'null'
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Config\FileLocator
+- Symfony\Component\Config\Resource\GlobResource
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Loader\GlobFileLoader
+interfaces: []

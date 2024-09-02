@@ -1,0 +1,130 @@
+name: ResponseCacheStrategy
+class_comment: '# * ResponseCacheStrategy knows how to compute the Response cache
+  HTTP header
+
+  # * based on the different response cache headers.
+
+  # *
+
+  # * This implementation changes the main response TTL to the smallest TTL received
+
+  # * or force validation if one of the surrogates has validation cache strategy.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+properties: []
+methods:
+- name: willMakeFinalResponseUncacheable
+  visibility: private
+  parameters:
+  - name: response
+  comment: "# * ResponseCacheStrategy knows how to compute the Response cache HTTP\
+    \ header\n# * based on the different response cache headers.\n# *\n# * This implementation\
+    \ changes the main response TTL to the smallest TTL received\n# * or force validation\
+    \ if one of the surrogates has validation cache strategy.\n# *\n# * @author Fabien\
+    \ Potencier <fabien@symfony.com>\n# */\n# class ResponseCacheStrategy implements\
+    \ ResponseCacheStrategyInterface\n# {\n# /**\n# * Cache-Control headers that are\
+    \ sent to the final response if they appear in ANY of the responses.\n# */\n#\
+    \ private const OVERRIDE_DIRECTIVES = ['private', 'no-cache', 'no-store', 'no-transform',\
+    \ 'must-revalidate', 'proxy-revalidate'];\n# \n# /**\n# * Cache-Control headers\
+    \ that are sent to the final response if they appear in ALL of the responses.\n\
+    # */\n# private const INHERIT_DIRECTIVES = ['public', 'immutable'];\n# \n# private\
+    \ int $embeddedResponses = 0;\n# private bool $isNotCacheableResponseEmbedded\
+    \ = false;\n# private int $age = 0;\n# private \\DateTimeInterface|false|null\
+    \ $lastModified = null;\n# private array $flagDirectives = [\n# 'no-cache' =>\
+    \ null,\n# 'no-store' => null,\n# 'no-transform' => null,\n# 'must-revalidate'\
+    \ => null,\n# 'proxy-revalidate' => null,\n# 'public' => null,\n# 'private' =>\
+    \ null,\n# 'immutable' => null,\n# ];\n# private array $ageDirectives = [\n# 'max-age'\
+    \ => null,\n# 's-maxage' => null,\n# 'expires' => null,\n# ];\n# \n# public function\
+    \ add(Response $response): void\n# {\n# ++$this->embeddedResponses;\n# \n# foreach\
+    \ (self::OVERRIDE_DIRECTIVES as $directive) {\n# if ($response->headers->hasCacheControlDirective($directive))\
+    \ {\n# $this->flagDirectives[$directive] = true;\n# }\n# }\n# \n# foreach (self::INHERIT_DIRECTIVES\
+    \ as $directive) {\n# if (false !== $this->flagDirectives[$directive]) {\n# $this->flagDirectives[$directive]\
+    \ = $response->headers->hasCacheControlDirective($directive);\n# }\n# }\n# \n\
+    # $age = $response->getAge();\n# $this->age = max($this->age, $age);\n# \n# if\
+    \ ($this->willMakeFinalResponseUncacheable($response)) {\n# $this->isNotCacheableResponseEmbedded\
+    \ = true;\n# \n# return;\n# }\n# \n# $isHeuristicallyCacheable = $response->headers->hasCacheControlDirective('public');\n\
+    # $maxAge = $response->headers->hasCacheControlDirective('max-age') ? (int) $response->headers->getCacheControlDirective('max-age')\
+    \ : null;\n# $this->storeRelativeAgeDirective('max-age', $maxAge, $age, $isHeuristicallyCacheable);\n\
+    # $sharedMaxAge = $response->headers->hasCacheControlDirective('s-maxage') ? (int)\
+    \ $response->headers->getCacheControlDirective('s-maxage') : $maxAge;\n# $this->storeRelativeAgeDirective('s-maxage',\
+    \ $sharedMaxAge, $age, $isHeuristicallyCacheable);\n# \n# $expires = $response->getExpires();\n\
+    # $expires = null !== $expires ? (int) $expires->format('U') - (int) $response->getDate()->format('U')\
+    \ : null;\n# $this->storeRelativeAgeDirective('expires', $expires >= 0 ? $expires\
+    \ : null, 0, $isHeuristicallyCacheable);\n# \n# if (false !== $this->lastModified)\
+    \ {\n# $lastModified = $response->getLastModified();\n# $this->lastModified =\
+    \ $lastModified ? max($this->lastModified, $lastModified) : false;\n# }\n# }\n\
+    # \n# public function update(Response $response): void\n# {\n# // if we have no\
+    \ embedded Response, do nothing\n# if (0 === $this->embeddedResponses) {\n# return;\n\
+    # }\n# \n# // Remove Etag since it cannot be merged from embedded responses.\n\
+    # $response->setEtag(null);\n# \n# $this->add($response);\n# \n# $response->headers->set('Age',\
+    \ $this->age);\n# \n# if ($this->isNotCacheableResponseEmbedded) {\n# $response->setLastModified(null);\n\
+    # \n# if ($this->flagDirectives['no-store']) {\n# $response->headers->set('Cache-Control',\
+    \ 'no-cache, no-store, must-revalidate');\n# } else {\n# $response->headers->set('Cache-Control',\
+    \ 'no-cache, must-revalidate');\n# }\n# \n# return;\n# }\n# \n# $response->setLastModified($this->lastModified\
+    \ ?: null);\n# \n# $flags = array_filter($this->flagDirectives);\n# \n# if (isset($flags['must-revalidate']))\
+    \ {\n# $flags['no-cache'] = true;\n# }\n# \n# $response->headers->set('Cache-Control',\
+    \ implode(', ', array_keys($flags)));\n# \n# $maxAge = null;\n# \n# if (is_numeric($this->ageDirectives['max-age']))\
+    \ {\n# $maxAge = $this->ageDirectives['max-age'] + $this->age;\n# $response->headers->addCacheControlDirective('max-age',\
+    \ $maxAge);\n# }\n# \n# if (is_numeric($this->ageDirectives['s-maxage'])) {\n\
+    # $sMaxage = $this->ageDirectives['s-maxage'] + $this->age;\n# \n# if ($maxAge\
+    \ !== $sMaxage) {\n# $response->headers->addCacheControlDirective('s-maxage',\
+    \ $sMaxage);\n# }\n# }\n# \n# if (is_numeric($this->ageDirectives['expires']))\
+    \ {\n# $date = clone $response->getDate();\n# $date = $date->modify('+'.($this->ageDirectives['expires']\
+    \ + $this->age).' seconds');\n# $response->setExpires($date);\n# }\n# }\n# \n\
+    # /**\n# * RFC2616, Section 13.4.\n# *\n# * @see https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13.4"
+- name: storeRelativeAgeDirective
+  visibility: private
+  parameters:
+  - name: directive
+  - name: value
+  - name: age
+  - name: isHeuristicallyCacheable
+  comment: '# * Store lowest max-age/s-maxage/expires for the final response.
+
+    # *
+
+    # * The response might have been stored in cache a while ago. To keep things comparable,
+
+    # * we have to subtract the age so that the value is normalized for an age of
+    0.
+
+    # *
+
+    # * If the value is lower than the currently stored value, we update the value,
+    to keep a rolling
+
+    # * minimal value of each instruction.
+
+    # *
+
+    # * If the value is NULL and the isHeuristicallyCacheable parameter is false,
+    the directive will
+
+    # * not be set on the final response. In this case, not all responses had the
+    directive set and no
+
+    # * value can be found that satisfies the requirements of all responses. The directive
+    will be dropped
+
+    # * from the final response.
+
+    # *
+
+    # * If the isHeuristicallyCacheable parameter is true, however, the current response
+    has been marked
+
+    # * as cacheable in a public (shared) cache, but did not provide an explicit lifetime
+    that would serve
+
+    # * as an upper bound. In this case, we can proceed and possibly keep the directive
+    on the final response.'
+traits:
+- Symfony\Component\HttpFoundation\Response
+interfaces:
+- ResponseCacheStrategyInterface

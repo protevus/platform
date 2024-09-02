@@ -1,0 +1,36 @@
+name: SendersLocatorInterface
+class_comment: null
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+properties: []
+methods:
+- name: getSenders
+  visibility: public
+  parameters:
+  - name: envelope
+  comment: '# * Maps a message to a list of senders.
+
+    # *
+
+    # * @author Samuel Roze <samuel.roze@gmail.com>
+
+    # * @author Tobias Schultze <http://tobion.de>
+
+    # */
+
+    # interface SendersLocatorInterface
+
+    # {
+
+    # /**
+
+    # * Gets the senders for the given message name.
+
+    # *
+
+    # * @return iterable<string, SenderInterface> Indexed by sender alias if available'
+traits:
+- Symfony\Component\Messenger\Envelope
+interfaces: []

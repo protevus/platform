@@ -1,0 +1,121 @@
+name: SmtpTransportTest
+class_comment: '# * @group time-sensitive'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: MessageEvent
+  type: class
+  source: Symfony\Component\Mailer\Event\MessageEvent
+- name: SentMessageEvent
+  type: class
+  source: Symfony\Component\Mailer\Event\SentMessageEvent
+- name: LogicException
+  type: class
+  source: Symfony\Component\Mailer\Exception\LogicException
+- name: TransportException
+  type: class
+  source: Symfony\Component\Mailer\Exception\TransportException
+- name: SmtpTransport
+  type: class
+  source: Symfony\Component\Mailer\Transport\Smtp\SmtpTransport
+- name: AbstractStream
+  type: class
+  source: Symfony\Component\Mailer\Transport\Smtp\Stream\AbstractStream
+- name: SocketStream
+  type: class
+  source: Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Mime\Exception\InvalidArgumentException
+- name: DataPart
+  type: class
+  source: Symfony\Component\Mime\Part\DataPart
+- name: File
+  type: class
+  source: Symfony\Component\Mime\Part\File
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+properties: []
+methods:
+- name: testToString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendDoesNotPingBelowThreshold
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendPingAfterTransportException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendDoesPingAboveThreshold
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendInvalidMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWriteEncodedRecipientAndSenderAddresses
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMessageIdFromServerIsEmbeddedInSentMessageEvent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertResponseCodeNoCodes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertResponseCodeWithEmptyResponse
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertResponseCodeWithNotValidCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: invokeAssertResponseCode
+  visibility: private
+  parameters:
+  - name: response
+  - name: codes
+  comment: null
+- name: testStop
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mailer\Event\MessageEvent
+- Symfony\Component\Mailer\Event\SentMessageEvent
+- Symfony\Component\Mailer\Exception\LogicException
+- Symfony\Component\Mailer\Exception\TransportException
+- Symfony\Component\Mailer\Transport\Smtp\SmtpTransport
+- Symfony\Component\Mailer\Transport\Smtp\Stream\AbstractStream
+- Symfony\Component\Mailer\Transport\Smtp\Stream\SocketStream
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Email
+- Symfony\Component\Mime\Exception\InvalidArgumentException
+- Symfony\Component\Mime\Part\DataPart
+- Symfony\Component\Mime\Part\File
+- Symfony\Component\Mime\RawMessage
+- Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+interfaces: []

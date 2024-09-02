@@ -1,0 +1,44 @@
+name: ExceptionPanelController
+class_comment: '# * Renders the exception panel.
+
+  # *
+
+  # * @author Yonel Ceruto <yonelceruto@gmail.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: HtmlErrorRenderer
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: NotFoundHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- name: Profiler
+  type: class
+  source: Symfony\Component\HttpKernel\Profiler\Profiler
+properties: []
+methods:
+- name: body
+  visibility: public
+  parameters:
+  - name: token
+  comment: "# * Renders the exception panel.\n# *\n# * @author Yonel Ceruto <yonelceruto@gmail.com>\n\
+    # *\n# * @internal\n# */\n# class ExceptionPanelController\n# {\n# public function\
+    \ __construct(\n# private HtmlErrorRenderer $errorRenderer,\n# private ?Profiler\
+    \ $profiler = null,\n# ) {\n# }\n# \n# /**\n# * Renders the exception panel stacktrace\
+    \ for the given token."
+- name: stylesheet
+  visibility: public
+  parameters: []
+  comment: '# * Renders the exception panel stylesheet.'
+traits:
+- Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- Symfony\Component\HttpKernel\Profiler\Profiler
+interfaces: []

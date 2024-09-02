@@ -1,0 +1,15 @@
+name: SubRequestsTest
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: testStateAfterSubRequest
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubRequestControllerServicesAreResolved
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

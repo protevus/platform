@@ -1,0 +1,20 @@
+name: PackageRequireOptions
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: packageModuleSpecifier
+  - name: versionConstraint
+    default: 'null'
+  - name: importName
+    default: 'null'
+  - name: path
+    default: 'null'
+  - name: entrypoint
+    default: 'false'
+  comment: null
+traits: []
+interfaces: []

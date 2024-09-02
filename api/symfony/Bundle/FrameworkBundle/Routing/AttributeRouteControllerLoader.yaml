@@ -1,0 +1,55 @@
+name: AttributeRouteControllerLoader
+class_comment: '# * AttributeRouteControllerLoader is an implementation of AttributeClassLoader
+
+  # * that sets the ''_controller'' default based on the class and method names.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # * @author Alexandre Daubois <alex.daubois@gmail.com>'
+dependencies:
+- name: AttributeClassLoader
+  type: class
+  source: Symfony\Component\Routing\Loader\AttributeClassLoader
+- name: Route
+  type: class
+  source: Symfony\Component\Routing\Route
+properties: []
+methods:
+- name: configureRoute
+  visibility: protected
+  parameters:
+  - name: route
+  - name: class
+  - name: method
+  - name: annot
+  comment: '# * AttributeRouteControllerLoader is an implementation of AttributeClassLoader
+
+    # * that sets the ''_controller'' default based on the class and method names.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # * @author Alexandre Daubois <alex.daubois@gmail.com>
+
+    # */
+
+    # class AttributeRouteControllerLoader extends AttributeClassLoader
+
+    # {
+
+    # /**
+
+    # * Configures the _controller default parameter of a given Route instance.'
+- name: getDefaultRouteName
+  visibility: protected
+  parameters:
+  - name: class
+  - name: method
+  comment: '# * Makes the default route name more sane by removing common keywords.'
+traits:
+- Symfony\Component\Routing\Loader\AttributeClassLoader
+- Symfony\Component\Routing\Route
+interfaces: []

@@ -1,0 +1,39 @@
+name: SchemaDumped
+class_comment: null
+dependencies: []
+properties:
+- name: connection
+  visibility: public
+  comment: '# * The database connection instance.
+
+    # *
+
+    # * @var \Illuminate\Database\Connection'
+- name: connectionName
+  visibility: public
+  comment: '# * The database connection name.
+
+    # *
+
+    # * @var string'
+- name: path
+  visibility: public
+  comment: '# * The path to the schema dump.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: connection
+  - name: path
+  comment: "# * The database connection instance.\n# *\n# * @var \\Illuminate\\Database\\\
+    Connection\n# */\n# public $connection;\n# \n# /**\n# * The database connection\
+    \ name.\n# *\n# * @var string\n# */\n# public $connectionName;\n# \n# /**\n# *\
+    \ The path to the schema dump.\n# *\n# * @var string\n# */\n# public $path;\n\
+    # \n# /**\n# * Create a new event instance.\n# *\n# * @param  \\Illuminate\\Database\\\
+    Connection  $connection\n# * @param  string  $path\n# * @return void"
+traits: []
+interfaces: []

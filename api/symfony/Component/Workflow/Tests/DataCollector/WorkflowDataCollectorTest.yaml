@@ -1,0 +1,71 @@
+name: WorkflowDataCollectorTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: FileLinkFormatter
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: AuthenticationTrustResolverInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface
+- name: TokenStorageInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+- name: AuthorizationCheckerInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
+- name: RoleHierarchyInterface
+  type: class
+  source: Symfony\Component\Security\Core\Role\RoleHierarchyInterface
+- name: ValidatorInterface
+  type: class
+  source: Symfony\Component\Validator\Validator\ValidatorInterface
+- name: WorkflowDataCollector
+  type: class
+  source: Symfony\Component\Workflow\DataCollector\WorkflowDataCollector
+- name: ExpressionLanguage
+  type: class
+  source: Symfony\Component\Workflow\EventListener\ExpressionLanguage
+- name: GuardListener
+  type: class
+  source: Symfony\Component\Workflow\EventListener\GuardListener
+- name: WorkflowBuilderTrait
+  type: class
+  source: Symfony\Component\Workflow\Tests\WorkflowBuilderTrait
+- name: Workflow
+  type: class
+  source: Symfony\Component\Workflow\Workflow
+- name: WorkflowBuilderTrait
+  type: class
+  source: WorkflowBuilderTrait
+properties: []
+methods:
+- name: test
+  visibility: public
+  parameters: []
+  comment: null
+- name: noop
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface
+- Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+- Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
+- Symfony\Component\Security\Core\Role\RoleHierarchyInterface
+- Symfony\Component\Validator\Validator\ValidatorInterface
+- Symfony\Component\Workflow\DataCollector\WorkflowDataCollector
+- Symfony\Component\Workflow\EventListener\ExpressionLanguage
+- Symfony\Component\Workflow\EventListener\GuardListener
+- Symfony\Component\Workflow\Tests\WorkflowBuilderTrait
+- Symfony\Component\Workflow\Workflow
+- WorkflowBuilderTrait
+interfaces: []

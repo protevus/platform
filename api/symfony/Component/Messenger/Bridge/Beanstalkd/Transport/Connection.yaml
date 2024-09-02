@@ -1,0 +1,104 @@
+name: Connection
+class_comment: '# * @author Antonio Pauletich <antonio.pauletich95@gmail.com>
+
+  # *
+
+  # * @internal
+
+  # *
+
+  # * @final'
+dependencies:
+- name: PheanstalkInterface
+  type: class
+  source: Pheanstalk\Contract\PheanstalkInterface
+- name: Exception
+  type: class
+  source: Pheanstalk\Exception
+- name: PheanstalkJob
+  type: class
+  source: Pheanstalk\Job
+- name: JobId
+  type: class
+  source: Pheanstalk\JobId
+- name: Pheanstalk
+  type: class
+  source: Pheanstalk\Pheanstalk
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Messenger\Exception\InvalidArgumentException
+- name: TransportException
+  type: class
+  source: Symfony\Component\Messenger\Exception\TransportException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: configuration
+  - name: client
+  comment: "# * @author Antonio Pauletich <antonio.pauletich95@gmail.com>\n# *\n#\
+    \ * @internal\n# *\n# * @final\n# */\n# class Connection\n# {\n# private const\
+    \ DEFAULT_OPTIONS = [\n# 'tube_name' => PheanstalkInterface::DEFAULT_TUBE,\n#\
+    \ 'timeout' => 0,\n# 'ttr' => 90,\n# ];\n# \n# private string $tube;\n# private\
+    \ int $timeout;\n# private int $ttr;\n# \n# /**\n# * Constructor.\n# *\n# * Available\
+    \ options:\n# *\n# * * tube_name: name of the tube\n# * * timeout: message reservation\
+    \ timeout (in seconds)\n# * * ttr: the message time to run before it is put back\
+    \ in the ready queue (in seconds)"
+- name: fromDsn
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: options
+    default: '[]'
+  comment: null
+- name: getConfiguration
+  visibility: public
+  parameters: []
+  comment: null
+- name: getTube
+  visibility: public
+  parameters: []
+  comment: null
+- name: send
+  visibility: public
+  parameters:
+  - name: body
+  - name: headers
+  - name: delay
+    default: '0'
+  comment: '# * @param int $delay The delay in milliseconds
+
+    # *
+
+    # * @return string The inserted id'
+- name: get
+  visibility: public
+  parameters: []
+  comment: null
+- name: getFromTube
+  visibility: private
+  parameters: []
+  comment: null
+- name: ack
+  visibility: public
+  parameters:
+  - name: id
+  comment: null
+- name: reject
+  visibility: public
+  parameters:
+  - name: id
+  comment: null
+- name: getMessageCount
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Pheanstalk\Contract\PheanstalkInterface
+- Pheanstalk\Exception
+- Pheanstalk\JobId
+- Pheanstalk\Pheanstalk
+- Symfony\Component\Messenger\Exception\InvalidArgumentException
+- Symfony\Component\Messenger\Exception\TransportException
+interfaces: []

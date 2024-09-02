@@ -1,0 +1,45 @@
+name: ChainCacheClearer
+class_comment: '# * ChainCacheClearer.
+
+  # *
+
+  # * @author Dustin Dobervich <ddobervich@gmail.com>
+
+  # *
+
+  # * @final'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: clearers
+    default: '[]'
+  comment: '# * ChainCacheClearer.
+
+    # *
+
+    # * @author Dustin Dobervich <ddobervich@gmail.com>
+
+    # *
+
+    # * @final
+
+    # */
+
+    # class ChainCacheClearer implements CacheClearerInterface
+
+    # {
+
+    # /**
+
+    # * @param iterable<mixed, CacheClearerInterface> $clearers'
+- name: clear
+  visibility: public
+  parameters:
+  - name: cacheDir
+  comment: null
+traits: []
+interfaces:
+- CacheClearerInterface

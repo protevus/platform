@@ -1,0 +1,242 @@
+name: TraceableCommand
+class_comment: null
+dependencies:
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+- name: CompletionInput
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionInput
+- name: CompletionSuggestions
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionSuggestions
+- name: HelperInterface
+  type: class
+  source: Symfony\Component\Console\Helper\HelperInterface
+- name: HelperSet
+  type: class
+  source: Symfony\Component\Console\Helper\HelperSet
+- name: InputDefinition
+  type: class
+  source: Symfony\Component\Console\Input\InputDefinition
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: ConsoleOutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\ConsoleOutputInterface
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: Stopwatch
+  type: class
+  source: Symfony\Component\Stopwatch\Stopwatch
+properties: []
+methods:
+- name: ignoreValidationErrors
+  visibility: public
+  parameters: []
+  comment: "# * @internal\n# *\n# * @author Jules Pietri <jules@heahprod.com>\n# */\n\
+    # final class TraceableCommand extends Command implements SignalableCommandInterface\n\
+    # {\n# public readonly Command $command;\n# public int $exitCode;\n# public ?int\
+    \ $interruptedBySignal = null;\n# public bool $ignoreValidation;\n# public bool\
+    \ $isInteractive = false;\n# public string $duration = 'n/a';\n# public string\
+    \ $maxMemoryUsage = 'n/a';\n# public InputInterface $input;\n# public OutputInterface\
+    \ $output;\n# /** @var array<string, mixed> */\n# public array $arguments;\n#\
+    \ /** @var array<string, mixed> */\n# public array $options;\n# /** @var array<string,\
+    \ mixed> */\n# public array $interactiveInputs = [];\n# public array $handledSignals\
+    \ = [];\n# \n# public function __construct(\n# Command $command,\n# private readonly\
+    \ Stopwatch $stopwatch,\n# ) {\n# if ($command instanceof LazyCommand) {\n# $command\
+    \ = $command->getCommand();\n# }\n# \n# $this->command = $command;\n# \n# // prevent\
+    \ call to self::getDefaultDescription()\n# $this->setDescription($command->getDescription());\n\
+    # \n# parent::__construct($command->getName());\n# \n# // init below enables calling\
+    \ {@see parent::run()}\n# [$code, $processTitle, $ignoreValidationErrors] = \\\
+    Closure::bind(function () {\n# return [$this->code, $this->processTitle, $this->ignoreValidationErrors];\n\
+    # }, $command, Command::class)();\n# \n# if (\\is_callable($code)) {\n# $this->setCode($code);\n\
+    # }\n# \n# if ($processTitle) {\n# parent::setProcessTitle($processTitle);\n#\
+    \ }\n# \n# if ($ignoreValidationErrors) {\n# parent::ignoreValidationErrors();\n\
+    # }\n# \n# $this->ignoreValidation = $ignoreValidationErrors;\n# }\n# \n# public\
+    \ function __call(string $name, array $arguments): mixed\n# {\n# return $this->command->{$name}(...$arguments);\n\
+    # }\n# \n# public function getSubscribedSignals(): array\n# {\n# return $this->command\
+    \ instanceof SignalableCommandInterface ? $this->command->getSubscribedSignals()\
+    \ : [];\n# }\n# \n# public function handleSignal(int $signal, int|false $previousExitCode\
+    \ = 0): int|false\n# {\n# if (!$this->command instanceof SignalableCommandInterface)\
+    \ {\n# return false;\n# }\n# \n# $event = $this->stopwatch->start($this->getName().'.handle_signal');\n\
+    # \n# $exit = $this->command->handleSignal($signal, $previousExitCode);\n# \n\
+    # $event->stop();\n# \n# if (!isset($this->handledSignals[$signal])) {\n# $this->handledSignals[$signal]\
+    \ = [\n# 'handled' => 0,\n# 'duration' => 0,\n# 'memory' => 0,\n# ];\n# }\n# \n\
+    # ++$this->handledSignals[$signal]['handled'];\n# $this->handledSignals[$signal]['duration']\
+    \ += $event->getDuration();\n# $this->handledSignals[$signal]['memory'] = max(\n\
+    # $this->handledSignals[$signal]['memory'],\n# $event->getMemory() >> 20\n# );\n\
+    # \n# return $exit;\n# }\n# \n# /**\n# * {@inheritdoc}\n# *\n# * Calling parent\
+    \ method is required to be used in {@see parent::run()}."
+- name: setApplication
+  visibility: public
+  parameters:
+  - name: application
+    default: 'null'
+  comment: null
+- name: getApplication
+  visibility: public
+  parameters: []
+  comment: null
+- name: setHelperSet
+  visibility: public
+  parameters:
+  - name: helperSet
+  comment: null
+- name: getHelperSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: isEnabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: complete
+  visibility: public
+  parameters:
+  - name: input
+  - name: suggestions
+  comment: null
+- name: setCode
+  visibility: public
+  parameters:
+  - name: code
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * Calling parent method is required to be used in {@see parent::run()}.'
+- name: mergeApplicationDefinition
+  visibility: public
+  parameters:
+  - name: mergeArgs
+    default: 'true'
+  comment: '# * @internal'
+- name: setDefinition
+  visibility: public
+  parameters:
+  - name: definition
+  comment: null
+- name: getDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNativeDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: addArgument
+  visibility: public
+  parameters:
+  - name: name
+  - name: mode
+    default: 'null'
+  - name: description
+    default: ''''''
+  - name: default
+    default: 'null'
+  - name: suggestedValues
+    default: '[]'
+  comment: null
+- name: addOption
+  visibility: public
+  parameters:
+  - name: name
+  - name: shortcut
+    default: 'null'
+  - name: mode
+    default: 'null'
+  - name: description
+    default: ''''''
+  - name: default
+    default: 'null'
+  - name: suggestedValues
+    default: '[]'
+  comment: null
+- name: setProcessTitle
+  visibility: public
+  parameters:
+  - name: title
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * Calling parent method is required to be used in {@see parent::run()}.'
+- name: setHelp
+  visibility: public
+  parameters:
+  - name: help
+  comment: null
+- name: getHelp
+  visibility: public
+  parameters: []
+  comment: null
+- name: getProcessedHelp
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSynopsis
+  visibility: public
+  parameters:
+  - name: short
+    default: 'false'
+  comment: null
+- name: addUsage
+  visibility: public
+  parameters:
+  - name: usage
+  comment: null
+- name: getUsages
+  visibility: public
+  parameters: []
+  comment: null
+- name: getHelper
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: run
+  visibility: public
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+- name: initialize
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+- name: interact
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+- name: execute
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+- name: extractInteractiveInputs
+  visibility: private
+  parameters:
+  - name: arguments
+  - name: options
+  comment: null
+traits:
+- Symfony\Component\Console\Application
+- Symfony\Component\Console\Completion\CompletionInput
+- Symfony\Component\Console\Completion\CompletionSuggestions
+- Symfony\Component\Console\Helper\HelperInterface
+- Symfony\Component\Console\Helper\HelperSet
+- Symfony\Component\Console\Input\InputDefinition
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Output\ConsoleOutputInterface
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Stopwatch\Stopwatch
+interfaces:
+- SignalableCommandInterface

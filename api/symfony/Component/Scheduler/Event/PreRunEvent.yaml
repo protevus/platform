@@ -1,0 +1,40 @@
+name: PreRunEvent
+class_comment: null
+dependencies:
+- name: MessageContext
+  type: class
+  source: Symfony\Component\Scheduler\Generator\MessageContext
+- name: ScheduleProviderInterface
+  type: class
+  source: Symfony\Component\Scheduler\ScheduleProviderInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: schedule
+  - name: messageContext
+  - name: message
+  comment: null
+- name: getMessageContext
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSchedule
+  visibility: public
+  parameters: []
+  comment: null
+- name: getMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: shouldCancel
+  visibility: public
+  parameters:
+  - name: shouldCancel
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\Scheduler\Generator\MessageContext
+- Symfony\Component\Scheduler\ScheduleProviderInterface
+interfaces: []

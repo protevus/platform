@@ -1,0 +1,50 @@
+name: PrecognitionControllerDispatcher
+class_comment: null
+dependencies:
+- name: ControllerDispatcher
+  type: class
+  source: Illuminate\Routing\ControllerDispatcher
+- name: Route
+  type: class
+  source: Illuminate\Routing\Route
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+properties: []
+methods:
+- name: dispatch
+  visibility: public
+  parameters:
+  - name: route
+  - name: controller
+  - name: method
+  comment: '# * Dispatch a request to a given controller and method.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Route  $route
+
+    # * @param  mixed  $controller
+
+    # * @param  string  $method
+
+    # * @return void'
+- name: ensureMethodExists
+  visibility: protected
+  parameters:
+  - name: controller
+  - name: method
+  comment: '# * Ensure that the given method exists on the controller.
+
+    # *
+
+    # * @param  object  $controller
+
+    # * @param  string  $method
+
+    # * @return $this'
+traits:
+- Illuminate\Routing\ControllerDispatcher
+- Illuminate\Routing\Route
+- RuntimeException
+interfaces: []

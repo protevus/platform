@@ -1,0 +1,29 @@
+name: CompilesRawPhp
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: compilePhp
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the raw PHP statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compileUnset
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the unset statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+traits: []
+interfaces: []

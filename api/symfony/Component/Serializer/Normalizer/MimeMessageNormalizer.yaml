@@ -1,0 +1,101 @@
+name: MimeMessageNormalizer
+class_comment: null
+dependencies:
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: HeaderInterface
+  type: class
+  source: Symfony\Component\Mime\Header\HeaderInterface
+- name: Headers
+  type: class
+  source: Symfony\Component\Mime\Header\Headers
+- name: UnstructuredHeader
+  type: class
+  source: Symfony\Component\Mime\Header\UnstructuredHeader
+- name: Message
+  type: class
+  source: Symfony\Component\Mime\Message
+- name: AbstractPart
+  type: class
+  source: Symfony\Component\Mime\Part\AbstractPart
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+- name: LogicException
+  type: class
+  source: Symfony\Component\Serializer\Exception\LogicException
+- name: SerializerAwareInterface
+  type: class
+  source: Symfony\Component\Serializer\SerializerAwareInterface
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Serializer\SerializerInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: normalizer
+  comment: null
+- name: getSupportedTypes
+  visibility: public
+  parameters:
+  - name: format
+  comment: null
+- name: setSerializer
+  visibility: public
+  parameters:
+  - name: serializer
+  comment: null
+- name: normalize
+  visibility: public
+  parameters:
+  - name: object
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: denormalize
+  visibility: public
+  parameters:
+  - name: data
+  - name: type
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: supportsNormalization
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: supportsDenormalization
+  visibility: public
+  parameters:
+  - name: data
+  - name: type
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Header\HeaderInterface
+- Symfony\Component\Mime\Header\Headers
+- Symfony\Component\Mime\Header\UnstructuredHeader
+- Symfony\Component\Mime\Message
+- Symfony\Component\Mime\Part\AbstractPart
+- Symfony\Component\Mime\RawMessage
+- Symfony\Component\Serializer\Exception\LogicException
+- Symfony\Component\Serializer\SerializerAwareInterface
+- Symfony\Component\Serializer\SerializerInterface
+interfaces:
+- NormalizerInterface

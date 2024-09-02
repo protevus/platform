@@ -1,0 +1,186 @@
+name: MigrateCommand
+class_comment: null
+dependencies:
+- name: ConfirmableTrait
+  type: class
+  source: Illuminate\Console\ConfirmableTrait
+- name: Isolatable
+  type: class
+  source: Illuminate\Contracts\Console\Isolatable
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: SchemaLoaded
+  type: class
+  source: Illuminate\Database\Events\SchemaLoaded
+- name: Migrator
+  type: class
+  source: Illuminate\Database\Migrations\Migrator
+- name: SQLiteDatabaseDoesNotExistException
+  type: class
+  source: Illuminate\Database\SQLiteDatabaseDoesNotExistException
+- name: SqlServerConnection
+  type: class
+  source: Illuminate\Database\SqlServerConnection
+- name: PDOException
+  type: class
+  source: PDOException
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Throwable
+  type: class
+  source: Throwable
+- name: ConfirmableTrait
+  type: class
+  source: ConfirmableTrait
+properties:
+- name: signature
+  visibility: protected
+  comment: '# * The name and signature of the console command.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+- name: migrator
+  visibility: protected
+  comment: '# * The migrator instance.
+
+    # *
+
+    # * @var \Illuminate\Database\Migrations\Migrator'
+- name: dispatcher
+  visibility: protected
+  comment: '# * The event dispatcher instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Events\Dispatcher'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: migrator
+  - name: dispatcher
+  comment: "# * The name and signature of the console command.\n# *\n# * @var string\n\
+    # */\n# protected $signature = 'migrate {--database= : The database connection\
+    \ to use}\n# {--force : Force the operation to run when in production}\n# {--path=*\
+    \ : The path(s) to the migrations files to be executed}\n# {--realpath : Indicate\
+    \ any provided migration file paths are pre-resolved absolute paths}\n# {--schema-path=\
+    \ : The path to a schema dump file}\n# {--pretend : Dump the SQL queries that\
+    \ would be run}\n# {--seed : Indicates if the seed task should be re-run}\n# {--seeder=\
+    \ : The class name of the root seeder}\n# {--step : Force the migrations to be\
+    \ run so they can be rolled back individually}\n# {--graceful : Return a successful\
+    \ exit code even if an error occurs}';\n# \n# /**\n# * The console command description.\n\
+    # *\n# * @var string\n# */\n# protected $description = 'Run the database migrations';\n\
+    # \n# /**\n# * The migrator instance.\n# *\n# * @var \\Illuminate\\Database\\\
+    Migrations\\Migrator\n# */\n# protected $migrator;\n# \n# /**\n# * The event dispatcher\
+    \ instance.\n# *\n# * @var \\Illuminate\\Contracts\\Events\\Dispatcher\n# */\n\
+    # protected $dispatcher;\n# \n# /**\n# * Create a new migration command instance.\n\
+    # *\n# * @param  \\Illuminate\\Database\\Migrations\\Migrator  $migrator\n# *\
+    \ @param  \\Illuminate\\Contracts\\Events\\Dispatcher  $dispatcher\n# * @return\
+    \ void"
+- name: handle
+  visibility: public
+  parameters: []
+  comment: '# * Execute the console command.
+
+    # *
+
+    # * @return int'
+- name: runMigrations
+  visibility: protected
+  parameters: []
+  comment: '# * Run the pending migrations.
+
+    # *
+
+    # * @return void'
+- name: prepareDatabase
+  visibility: protected
+  parameters: []
+  comment: '# * Prepare the migration database for running.
+
+    # *
+
+    # * @return void'
+- name: repositoryExists
+  visibility: protected
+  parameters: []
+  comment: '# * Determine if the migrator repository exists.
+
+    # *
+
+    # * @return bool'
+- name: createMissingSqliteDatabase
+  visibility: protected
+  parameters:
+  - name: path
+  comment: '# * Create a missing SQLite database.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return bool
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: createMissingMysqlDatabase
+  visibility: protected
+  parameters:
+  - name: connection
+  comment: '# * Create a missing MySQL database.
+
+    # *
+
+    # * @return bool
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: loadSchemaState
+  visibility: protected
+  parameters: []
+  comment: '# * Load the schema state to seed the initial database schema structure.
+
+    # *
+
+    # * @return void'
+- name: schemaPath
+  visibility: protected
+  parameters:
+  - name: connection
+  comment: '# * Get the path to the stored schema for the given connection.
+
+    # *
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @return string'
+traits:
+- Illuminate\Console\ConfirmableTrait
+- Illuminate\Contracts\Console\Isolatable
+- Illuminate\Contracts\Events\Dispatcher
+- Illuminate\Database\Events\SchemaLoaded
+- Illuminate\Database\Migrations\Migrator
+- Illuminate\Database\SQLiteDatabaseDoesNotExistException
+- Illuminate\Database\SqlServerConnection
+- PDOException
+- RuntimeException
+- Symfony\Component\Console\Attribute\AsCommand
+- Throwable
+- ConfirmableTrait
+interfaces:
+- Isolatable

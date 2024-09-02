@@ -1,0 +1,72 @@
+name: AnonymousNotifiable
+class_comment: null
+dependencies:
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Notifications\Dispatcher
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties:
+- name: routes
+  visibility: public
+  comment: '# * All of the notification routing information.
+
+    # *
+
+    # * @var array'
+methods:
+- name: route
+  visibility: public
+  parameters:
+  - name: channel
+  - name: route
+  comment: "# * All of the notification routing information.\n# *\n# * @var array\n\
+    # */\n# public $routes = [];\n# \n# /**\n# * Add routing information to the target.\n\
+    # *\n# * @param  string  $channel\n# * @param  mixed  $route\n# * @return $this\n\
+    # *\n# * @throws \\InvalidArgumentException"
+- name: notify
+  visibility: public
+  parameters:
+  - name: notification
+  comment: '# * Send the given notification.
+
+    # *
+
+    # * @param  mixed  $notification
+
+    # * @return void'
+- name: notifyNow
+  visibility: public
+  parameters:
+  - name: notification
+  comment: '# * Send the given notification immediately.
+
+    # *
+
+    # * @param  mixed  $notification
+
+    # * @return void'
+- name: routeNotificationFor
+  visibility: public
+  parameters:
+  - name: driver
+  comment: '# * Get the notification routing information for the given driver.
+
+    # *
+
+    # * @param  string  $driver
+
+    # * @return mixed'
+- name: getKey
+  visibility: public
+  parameters: []
+  comment: '# * Get the value of the notifiable''s primary key.
+
+    # *
+
+    # * @return mixed'
+traits:
+- Illuminate\Contracts\Notifications\Dispatcher
+- InvalidArgumentException
+interfaces: []

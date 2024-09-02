@@ -1,0 +1,35 @@
+name: translation_providers
+class_comment: null
+dependencies:
+- name: CrowdinProviderFactory
+  type: class
+  source: Symfony\Component\Translation\Bridge\Crowdin\CrowdinProviderFactory
+- name: LocoProviderFactory
+  type: class
+  source: Symfony\Component\Translation\Bridge\Loco\LocoProviderFactory
+- name: LokaliseProviderFactory
+  type: class
+  source: Symfony\Component\Translation\Bridge\Lokalise\LokaliseProviderFactory
+- name: PhraseProviderFactory
+  type: class
+  source: Symfony\Component\Translation\Bridge\Phrase\PhraseProviderFactory
+- name: NullProviderFactory
+  type: class
+  source: Symfony\Component\Translation\Provider\NullProviderFactory
+- name: TranslationProviderCollection
+  type: class
+  source: Symfony\Component\Translation\Provider\TranslationProviderCollection
+- name: TranslationProviderCollectionFactory
+  type: class
+  source: Symfony\Component\Translation\Provider\TranslationProviderCollectionFactory
+properties: []
+methods: []
+traits:
+- Symfony\Component\Translation\Bridge\Crowdin\CrowdinProviderFactory
+- Symfony\Component\Translation\Bridge\Loco\LocoProviderFactory
+- Symfony\Component\Translation\Bridge\Lokalise\LokaliseProviderFactory
+- Symfony\Component\Translation\Bridge\Phrase\PhraseProviderFactory
+- Symfony\Component\Translation\Provider\NullProviderFactory
+- Symfony\Component\Translation\Provider\TranslationProviderCollection
+- Symfony\Component\Translation\Provider\TranslationProviderCollectionFactory
+interfaces: []

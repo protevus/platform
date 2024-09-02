@@ -1,0 +1,73 @@
+name: RunCommandMessageHandlerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: RunCommandFailedException
+  type: class
+  source: Symfony\Component\Console\Exception\RunCommandFailedException
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: RunCommandMessage
+  type: class
+  source: Symfony\Component\Console\Messenger\RunCommandMessage
+- name: RunCommandMessageHandler
+  type: class
+  source: Symfony\Component\Console\Messenger\RunCommandMessageHandler
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+properties: []
+methods:
+- name: testExecutesCommand
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExecutesCommandThatThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExecutesCommandThatCatchesThrownException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowOnNonSuccess
+  visibility: public
+  parameters: []
+  comment: null
+- name: createApplicationWithCommand
+  visibility: private
+  parameters: []
+  comment: null
+- name: configure
+  visibility: public
+  parameters: []
+  comment: null
+- name: execute
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Application
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Exception\RunCommandFailedException
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Messenger\RunCommandMessage
+- Symfony\Component\Console\Messenger\RunCommandMessageHandler
+- Symfony\Component\Console\Output\OutputInterface
+interfaces: []

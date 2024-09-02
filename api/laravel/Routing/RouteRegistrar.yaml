@@ -1,0 +1,332 @@
+name: RouteRegistrar
+class_comment: '# * @method \Illuminate\Routing\Route any(string $uri, \Closure|array|string|null
+  $action = null)
+
+  # * @method \Illuminate\Routing\Route delete(string $uri, \Closure|array|string|null
+  $action = null)
+
+  # * @method \Illuminate\Routing\Route get(string $uri, \Closure|array|string|null
+  $action = null)
+
+  # * @method \Illuminate\Routing\Route options(string $uri, \Closure|array|string|null
+  $action = null)
+
+  # * @method \Illuminate\Routing\Route patch(string $uri, \Closure|array|string|null
+  $action = null)
+
+  # * @method \Illuminate\Routing\Route post(string $uri, \Closure|array|string|null
+  $action = null)
+
+  # * @method \Illuminate\Routing\Route put(string $uri, \Closure|array|string|null
+  $action = null)
+
+  # * @method \Illuminate\Routing\RouteRegistrar as(string $value)
+
+  # * @method \Illuminate\Routing\RouteRegistrar controller(string $controller)
+
+  # * @method \Illuminate\Routing\RouteRegistrar domain(string $value)
+
+  # * @method \Illuminate\Routing\RouteRegistrar middleware(array|string|null $middleware)
+
+  # * @method \Illuminate\Routing\RouteRegistrar missing(\Closure $missing)
+
+  # * @method \Illuminate\Routing\RouteRegistrar name(string $value)
+
+  # * @method \Illuminate\Routing\RouteRegistrar namespace(string|null $value)
+
+  # * @method \Illuminate\Routing\RouteRegistrar prefix(string $prefix)
+
+  # * @method \Illuminate\Routing\RouteRegistrar scopeBindings()
+
+  # * @method \Illuminate\Routing\RouteRegistrar where(array $where)
+
+  # * @method \Illuminate\Routing\RouteRegistrar withoutMiddleware(array|string $middleware)
+
+  # * @method \Illuminate\Routing\RouteRegistrar withoutScopedBindings()'
+dependencies:
+- name: BadMethodCallException
+  type: class
+  source: BadMethodCallException
+- name: Closure
+  type: class
+  source: Closure
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Reflector
+  type: class
+  source: Illuminate\Support\Reflector
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+- name: CreatesRegularExpressionRouteConstraints
+  type: class
+  source: CreatesRegularExpressionRouteConstraints
+properties:
+- name: router
+  visibility: protected
+  comment: "# * @method \\Illuminate\\Routing\\Route any(string $uri, \\Closure|array|string|null\
+    \ $action = null)\n# * @method \\Illuminate\\Routing\\Route delete(string $uri,\
+    \ \\Closure|array|string|null $action = null)\n# * @method \\Illuminate\\Routing\\\
+    Route get(string $uri, \\Closure|array|string|null $action = null)\n# * @method\
+    \ \\Illuminate\\Routing\\Route options(string $uri, \\Closure|array|string|null\
+    \ $action = null)\n# * @method \\Illuminate\\Routing\\Route patch(string $uri,\
+    \ \\Closure|array|string|null $action = null)\n# * @method \\Illuminate\\Routing\\\
+    Route post(string $uri, \\Closure|array|string|null $action = null)\n# * @method\
+    \ \\Illuminate\\Routing\\Route put(string $uri, \\Closure|array|string|null $action\
+    \ = null)\n# * @method \\Illuminate\\Routing\\RouteRegistrar as(string $value)\n\
+    # * @method \\Illuminate\\Routing\\RouteRegistrar controller(string $controller)\n\
+    # * @method \\Illuminate\\Routing\\RouteRegistrar domain(string $value)\n# * @method\
+    \ \\Illuminate\\Routing\\RouteRegistrar middleware(array|string|null $middleware)\n\
+    # * @method \\Illuminate\\Routing\\RouteRegistrar missing(\\Closure $missing)\n\
+    # * @method \\Illuminate\\Routing\\RouteRegistrar name(string $value)\n# * @method\
+    \ \\Illuminate\\Routing\\RouteRegistrar namespace(string|null $value)\n# * @method\
+    \ \\Illuminate\\Routing\\RouteRegistrar prefix(string $prefix)\n# * @method \\\
+    Illuminate\\Routing\\RouteRegistrar scopeBindings()\n# * @method \\Illuminate\\\
+    Routing\\RouteRegistrar where(array $where)\n# * @method \\Illuminate\\Routing\\\
+    RouteRegistrar withoutMiddleware(array|string $middleware)\n# * @method \\Illuminate\\\
+    Routing\\RouteRegistrar withoutScopedBindings()\n# */\n# class RouteRegistrar\n\
+    # {\n# use CreatesRegularExpressionRouteConstraints;\n# \n# /**\n# * The router\
+    \ instance.\n# *\n# * @var \\Illuminate\\Routing\\Router"
+- name: attributes
+  visibility: protected
+  comment: '# * The attributes to pass on to the router.
+
+    # *
+
+    # * @var array'
+- name: passthru
+  visibility: protected
+  comment: '# * The methods to dynamically pass through to the router.
+
+    # *
+
+    # * @var string[]'
+- name: allowedAttributes
+  visibility: protected
+  comment: '# * The attributes that can be set through this class.
+
+    # *
+
+    # * @var string[]'
+- name: aliases
+  visibility: protected
+  comment: '# * The attributes that are aliased.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: router
+  comment: "# * @method \\Illuminate\\Routing\\Route any(string $uri, \\Closure|array|string|null\
+    \ $action = null)\n# * @method \\Illuminate\\Routing\\Route delete(string $uri,\
+    \ \\Closure|array|string|null $action = null)\n# * @method \\Illuminate\\Routing\\\
+    Route get(string $uri, \\Closure|array|string|null $action = null)\n# * @method\
+    \ \\Illuminate\\Routing\\Route options(string $uri, \\Closure|array|string|null\
+    \ $action = null)\n# * @method \\Illuminate\\Routing\\Route patch(string $uri,\
+    \ \\Closure|array|string|null $action = null)\n# * @method \\Illuminate\\Routing\\\
+    Route post(string $uri, \\Closure|array|string|null $action = null)\n# * @method\
+    \ \\Illuminate\\Routing\\Route put(string $uri, \\Closure|array|string|null $action\
+    \ = null)\n# * @method \\Illuminate\\Routing\\RouteRegistrar as(string $value)\n\
+    # * @method \\Illuminate\\Routing\\RouteRegistrar controller(string $controller)\n\
+    # * @method \\Illuminate\\Routing\\RouteRegistrar domain(string $value)\n# * @method\
+    \ \\Illuminate\\Routing\\RouteRegistrar middleware(array|string|null $middleware)\n\
+    # * @method \\Illuminate\\Routing\\RouteRegistrar missing(\\Closure $missing)\n\
+    # * @method \\Illuminate\\Routing\\RouteRegistrar name(string $value)\n# * @method\
+    \ \\Illuminate\\Routing\\RouteRegistrar namespace(string|null $value)\n# * @method\
+    \ \\Illuminate\\Routing\\RouteRegistrar prefix(string $prefix)\n# * @method \\\
+    Illuminate\\Routing\\RouteRegistrar scopeBindings()\n# * @method \\Illuminate\\\
+    Routing\\RouteRegistrar where(array $where)\n# * @method \\Illuminate\\Routing\\\
+    RouteRegistrar withoutMiddleware(array|string $middleware)\n# * @method \\Illuminate\\\
+    Routing\\RouteRegistrar withoutScopedBindings()\n# */\n# class RouteRegistrar\n\
+    # {\n# use CreatesRegularExpressionRouteConstraints;\n# \n# /**\n# * The router\
+    \ instance.\n# *\n# * @var \\Illuminate\\Routing\\Router\n# */\n# protected $router;\n\
+    # \n# /**\n# * The attributes to pass on to the router.\n# *\n# * @var array\n\
+    # */\n# protected $attributes = [];\n# \n# /**\n# * The methods to dynamically\
+    \ pass through to the router.\n# *\n# * @var string[]\n# */\n# protected $passthru\
+    \ = [\n# 'get', 'post', 'put', 'patch', 'delete', 'options', 'any',\n# ];\n# \n\
+    # /**\n# * The attributes that can be set through this class.\n# *\n# * @var string[]\n\
+    # */\n# protected $allowedAttributes = [\n# 'as',\n# 'controller',\n# 'domain',\n\
+    # 'middleware',\n# 'missing',\n# 'name',\n# 'namespace',\n# 'prefix',\n# 'scopeBindings',\n\
+    # 'where',\n# 'withoutMiddleware',\n# ];\n# \n# /**\n# * The attributes that are\
+    \ aliased.\n# *\n# * @var array\n# */\n# protected $aliases = [\n# 'name' => 'as',\n\
+    # 'scopeBindings' => 'scope_bindings',\n# 'withoutMiddleware' => 'excluded_middleware',\n\
+    # ];\n# \n# /**\n# * Create a new route registrar instance.\n# *\n# * @param \
+    \ \\Illuminate\\Routing\\Router  $router\n# * @return void"
+- name: attribute
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Set the value for a given attribute.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return $this
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: resource
+  visibility: public
+  parameters:
+  - name: name
+  - name: controller
+  - name: options
+    default: '[]'
+  comment: '# * Route a resource to a controller.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string  $controller
+
+    # * @param  array  $options
+
+    # * @return \Illuminate\Routing\PendingResourceRegistration'
+- name: apiResource
+  visibility: public
+  parameters:
+  - name: name
+  - name: controller
+  - name: options
+    default: '[]'
+  comment: '# * Route an API resource to a controller.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string  $controller
+
+    # * @param  array  $options
+
+    # * @return \Illuminate\Routing\PendingResourceRegistration'
+- name: singleton
+  visibility: public
+  parameters:
+  - name: name
+  - name: controller
+  - name: options
+    default: '[]'
+  comment: '# * Route a singleton resource to a controller.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string  $controller
+
+    # * @param  array  $options
+
+    # * @return \Illuminate\Routing\PendingSingletonResourceRegistration'
+- name: apiSingleton
+  visibility: public
+  parameters:
+  - name: name
+  - name: controller
+  - name: options
+    default: '[]'
+  comment: '# * Route an API singleton resource to a controller.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string  $controller
+
+    # * @param  array  $options
+
+    # * @return \Illuminate\Routing\PendingSingletonResourceRegistration'
+- name: group
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Create a route group with shared attributes.
+
+    # *
+
+    # * @param  \Closure|array|string  $callback
+
+    # * @return $this'
+- name: match
+  visibility: public
+  parameters:
+  - name: methods
+  - name: uri
+  - name: action
+    default: 'null'
+  comment: '# * Register a new route with the given verbs.
+
+    # *
+
+    # * @param  array|string  $methods
+
+    # * @param  string  $uri
+
+    # * @param  \Closure|array|string|null  $action
+
+    # * @return \Illuminate\Routing\Route'
+- name: registerRoute
+  visibility: protected
+  parameters:
+  - name: method
+  - name: uri
+  - name: action
+    default: 'null'
+  comment: '# * Register a new route with the router.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  string  $uri
+
+    # * @param  \Closure|array|string|null  $action
+
+    # * @return \Illuminate\Routing\Route'
+- name: compileAction
+  visibility: protected
+  parameters:
+  - name: action
+  comment: '# * Compile the action into an array including the attributes.
+
+    # *
+
+    # * @param  \Closure|array|string|null  $action
+
+    # * @return array'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically handle calls into the route registrar.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return \Illuminate\Routing\Route|$this
+
+    # *
+
+    # * @throws \BadMethodCallException'
+traits:
+- BadMethodCallException
+- Closure
+- Illuminate\Support\Arr
+- Illuminate\Support\Reflector
+- InvalidArgumentException
+- CreatesRegularExpressionRouteConstraints
+interfaces: []

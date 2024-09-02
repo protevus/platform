@@ -1,0 +1,38 @@
+name: User
+class_comment: null
+dependencies:
+- name: Authenticatable
+  type: class
+  source: Illuminate\Auth\Authenticatable
+- name: MustVerifyEmail
+  type: class
+  source: Illuminate\Auth\MustVerifyEmail
+- name: CanResetPassword
+  type: class
+  source: Illuminate\Auth\Passwords\CanResetPassword
+- name: AuthorizableContract
+  type: class
+  source: Illuminate\Contracts\Auth\Access\Authorizable
+- name: AuthenticatableContract
+  type: class
+  source: Illuminate\Contracts\Auth\Authenticatable
+- name: CanResetPasswordContract
+  type: class
+  source: Illuminate\Contracts\Auth\CanResetPassword
+- name: Model
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+- name: Authorizable
+  type: class
+  source: Illuminate\Foundation\Auth\Access\Authorizable
+properties: []
+methods: []
+traits:
+- Illuminate\Auth\Authenticatable
+- Illuminate\Auth\MustVerifyEmail
+- Illuminate\Auth\Passwords\CanResetPassword
+- Illuminate\Database\Eloquent\Model
+- Illuminate\Foundation\Auth\Access\Authorizable
+- Authenticatable
+interfaces:
+- AuthenticatableContract

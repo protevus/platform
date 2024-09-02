@@ -1,0 +1,55 @@
+name: TraceableEncoderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: SerializerDataCollector
+  type: class
+  source: Symfony\Component\Serializer\DataCollector\SerializerDataCollector
+- name: TraceableEncoder
+  type: class
+  source: Symfony\Component\Serializer\Debug\TraceableEncoder
+- name: TraceableSerializer
+  type: class
+  source: Symfony\Component\Serializer\Debug\TraceableSerializer
+- name: DecoderInterface
+  type: class
+  source: Symfony\Component\Serializer\Encoder\DecoderInterface
+- name: EncoderInterface
+  type: class
+  source: Symfony\Component\Serializer\Encoder\EncoderInterface
+properties: []
+methods:
+- name: testForwardsToEncoder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCollectEncodingData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotCollectEncodingDataIfNoDebugTraceId
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCannotEncodeIfNotEncoder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCannotDecodeIfNotDecoder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupports
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\DataCollector\SerializerDataCollector
+- Symfony\Component\Serializer\Debug\TraceableEncoder
+- Symfony\Component\Serializer\Debug\TraceableSerializer
+- Symfony\Component\Serializer\Encoder\DecoderInterface
+- Symfony\Component\Serializer\Encoder\EncoderInterface
+interfaces: []

@@ -1,0 +1,33 @@
+name: FragmentUriGeneratorInterface
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: ControllerReference
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ControllerReference
+properties: []
+methods:
+- name: generate
+  visibility: public
+  parameters:
+  - name: controller
+  - name: request
+    default: 'null'
+  - name: absolute
+    default: 'false'
+  - name: strict
+    default: 'true'
+  - name: sign
+    default: 'true'
+  comment: "# * Interface implemented by rendering strategies able to generate a URL\
+    \ for a fragment.\n# *\n# * @author K\xE9vin Dunglas <kevin@dunglas.fr>\n# */\n\
+    # interface FragmentUriGeneratorInterface\n# {\n# /**\n# * Generates a fragment\
+    \ URI for a given controller.\n# *\n# * @param bool $absolute Whether to generate\
+    \ an absolute URL or not\n# * @param bool $strict   Whether to allow non-scalar\
+    \ attributes or not\n# * @param bool $sign     Whether to sign the URL or not"
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\Controller\ControllerReference
+interfaces: []

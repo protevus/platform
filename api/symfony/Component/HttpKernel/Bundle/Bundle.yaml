@@ -1,0 +1,92 @@
+name: Bundle
+class_comment: null
+dependencies:
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+- name: Container
+  type: class
+  source: Symfony\Component\DependencyInjection\Container
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: ExtensionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+properties: []
+methods:
+- name: boot
+  visibility: public
+  parameters: []
+  comment: "# * An implementation of BundleInterface that adds a few conventions for\
+    \ DependencyInjection extensions.\n# *\n# * @author Fabien Potencier <fabien@symfony.com>\n\
+    # */\n# abstract class Bundle implements BundleInterface\n# {\n# protected string\
+    \ $name;\n# protected ExtensionInterface|false|null $extension = null;\n# protected\
+    \ string $path;\n# protected ?ContainerInterface $container;\n# \n# private string\
+    \ $namespace;\n# \n# /**\n# * @return void"
+- name: shutdown
+  visibility: public
+  parameters: []
+  comment: '# * @return void'
+- name: build
+  visibility: public
+  parameters:
+  - name: container
+  comment: '# * This method can be overridden to register compilation passes,
+
+    # * other extensions, ...
+
+    # *
+
+    # * @return void'
+- name: getContainerExtension
+  visibility: public
+  parameters: []
+  comment: '# * Returns the bundle''s container extension.
+
+    # *
+
+    # * @throws \LogicException'
+- name: getNamespace
+  visibility: public
+  parameters: []
+  comment: null
+- name: getPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: registerCommands
+  visibility: public
+  parameters:
+  - name: application
+  comment: "# * Returns the bundle name (the class short name).\n# */\n# final public\
+    \ function getName(): string\n# {\n# if (!isset($this->name)) {\n# $this->parseClassName();\n\
+    # }\n# \n# return $this->name;\n# }\n# \n# /**\n# * @return void"
+- name: getContainerExtensionClass
+  visibility: protected
+  parameters: []
+  comment: '# * Returns the bundle''s container extension class.'
+- name: createContainerExtension
+  visibility: protected
+  parameters: []
+  comment: '# * Creates the bundle''s container extension.'
+- name: parseClassName
+  visibility: private
+  parameters: []
+  comment: null
+- name: setContainer
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\Console\Application
+- Symfony\Component\DependencyInjection\Container
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+interfaces:
+- BundleInterface

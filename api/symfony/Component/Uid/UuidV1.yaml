@@ -1,0 +1,39 @@
+name: UuidV1
+class_comment: "# * A v1 UUID contains a 60-bit timestamp and 62 extra unique bits.\n\
+  # *\n# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>"
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: uuid
+    default: 'null'
+  comment: null
+- name: getDateTime
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNode
+  visibility: public
+  parameters: []
+  comment: null
+- name: toV6
+  visibility: public
+  parameters: []
+  comment: null
+- name: toV7
+  visibility: public
+  parameters: []
+  comment: null
+- name: generate
+  visibility: public
+  parameters:
+  - name: time
+    default: 'null'
+  - name: node
+    default: 'null'
+  comment: null
+traits: []
+interfaces:
+- TimeBasedUidInterface

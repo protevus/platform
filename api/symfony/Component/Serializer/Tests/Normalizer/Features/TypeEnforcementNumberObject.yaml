@@ -1,0 +1,15 @@
+name: TypeEnforcementNumberObject
+class_comment: null
+dependencies: []
+properties:
+- name: number
+  visibility: public
+  comment: '# * @var float'
+methods:
+- name: setNumber
+  visibility: public
+  parameters:
+  - name: number
+  comment: null
+traits: []
+interfaces: []

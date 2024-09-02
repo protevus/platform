@@ -1,0 +1,14 @@
+name: RunCommandContext
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: message
+  - name: exitCode
+  - name: output
+  comment: null
+traits: []
+interfaces: []

@@ -1,0 +1,204 @@
+name: RegisterListenersPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ServiceClosureArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: AttributeAutoconfigurationPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\AttributeAutoconfigurationPass
+- name: ResolveInstanceofConditionalsPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ResolveInstanceofConditionalsPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: AsEventListener
+  type: class
+  source: Symfony\Component\EventDispatcher\Attribute\AsEventListener
+- name: AddEventAliasesPass
+  type: class
+  source: Symfony\Component\EventDispatcher\DependencyInjection\AddEventAliasesPass
+- name: RegisterListenersPass
+  type: class
+  source: Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: CustomEvent
+  type: class
+  source: Symfony\Component\EventDispatcher\Tests\Fixtures\CustomEvent
+- name: TaggedInvokableListener
+  type: class
+  source: Symfony\Component\EventDispatcher\Tests\Fixtures\TaggedInvokableListener
+- name: TaggedMultiListener
+  type: class
+  source: Symfony\Component\EventDispatcher\Tests\Fixtures\TaggedMultiListener
+properties: []
+methods:
+- name: testEventSubscriberWithoutInterface
+  visibility: public
+  parameters: []
+  comment: '# * Tests that event subscribers not implementing EventSubscriberInterface
+
+    # * trigger an exception.'
+- name: testValidEventSubscriber
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAliasedEventSubscriber
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAbstractEventListener
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAbstractEventSubscriber
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEventSubscriberResolvableClassName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHotPathEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoPreloadEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEventSubscriberUnresolvableClassName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvokableEventListener
+  visibility: public
+  parameters: []
+  comment: null
+- name: onFooBar
+  visibility: public
+  parameters: []
+  comment: null
+- name: onFooBarZar
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItThrowsAnExceptionIfTagIsMissingMethodAndClassHasNoValidMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTaggedInvokableEventListener
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTaggedMultiEventListener
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAliasedEventListener
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOmitEventNameOnTypedListener
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOmitEventNameOnUntypedListener
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOmitEventNameAndMethodOnUntypedListener
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOmitEventNameAndMethodOnGenericListener
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOmitEventNameOnSubscriber
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters: []
+  comment: null
+- name: onEvent
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: onEvent
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: onFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: onBar
+  visibility: public
+  parameters: []
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\Compiler\AttributeAutoconfigurationPass
+- Symfony\Component\DependencyInjection\Compiler\ResolveInstanceofConditionalsPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\EventDispatcher\Attribute\AsEventListener
+- Symfony\Component\EventDispatcher\DependencyInjection\AddEventAliasesPass
+- Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\EventDispatcher\Tests\Fixtures\CustomEvent
+- Symfony\Component\EventDispatcher\Tests\Fixtures\TaggedInvokableListener
+- Symfony\Component\EventDispatcher\Tests\Fixtures\TaggedMultiListener
+interfaces:
+- EventSubscriberInterface
+- EventSubscriberInterface
+- EventSubscriberInterface

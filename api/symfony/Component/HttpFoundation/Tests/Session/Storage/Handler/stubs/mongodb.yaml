@@ -1,0 +1,15 @@
+name: mongodb
+class_comment: null
+dependencies:
+- name: Manager
+  type: class
+  source: MongoDB\Driver\Manager
+properties: []
+methods:
+- name: getManager
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- MongoDB\Driver\Manager
+interfaces: []

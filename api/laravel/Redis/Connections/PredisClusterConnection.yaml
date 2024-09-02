@@ -1,0 +1,23 @@
+name: PredisClusterConnection
+class_comment: null
+dependencies:
+- name: FLUSHDB
+  type: class
+  source: Predis\Command\Redis\FLUSHDB
+- name: ServerFlushDatabase
+  type: class
+  source: Predis\Command\ServerFlushDatabase
+properties: []
+methods:
+- name: flushdb
+  visibility: public
+  parameters: []
+  comment: '# * Flush the selected Redis database on all cluster nodes.
+
+    # *
+
+    # * @return void'
+traits:
+- Predis\Command\Redis\FLUSHDB
+- Predis\Command\ServerFlushDatabase
+interfaces: []

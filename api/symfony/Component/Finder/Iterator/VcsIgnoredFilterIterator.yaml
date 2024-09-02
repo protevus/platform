@@ -1,0 +1,57 @@
+name: VcsIgnoredFilterIterator
+class_comment: null
+dependencies:
+- name: Gitignore
+  type: class
+  source: Symfony\Component\Finder\Gitignore
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: iterator
+  - name: baseDir
+  comment: "# * @extends \\FilterIterator<string, \\SplFileInfo>\n# */\n# final class\
+    \ VcsIgnoredFilterIterator extends \\FilterIterator\n# {\n# private string $baseDir;\n\
+    # \n# /**\n# * @var array<string, array{0: string, 1: string}|null>\n# */\n# private\
+    \ array $gitignoreFilesCache = [];\n# \n# /**\n# * @var array<string, bool>\n\
+    # */\n# private array $ignoredPathsCache = [];\n# \n# /**\n# * @param \\Iterator<string,\
+    \ \\SplFileInfo> $iterator"
+- name: accept
+  visibility: public
+  parameters: []
+  comment: null
+- name: isIgnored
+  visibility: private
+  parameters:
+  - name: fileRealPath
+  comment: null
+- name: parentDirectoriesUpwards
+  visibility: private
+  parameters:
+  - name: from
+  comment: '# * @return list<string>'
+- name: parentDirectoriesUpTo
+  visibility: private
+  parameters:
+  - name: from
+  - name: upTo
+  comment: null
+- name: parentDirectoriesDownwards
+  visibility: private
+  parameters:
+  - name: fileRealPath
+  comment: '# * @return list<string>'
+- name: readGitignoreFile
+  visibility: private
+  parameters:
+  - name: path
+  comment: '# * @return array{0: string, 1: string}|null'
+- name: normalizePath
+  visibility: private
+  parameters:
+  - name: path
+  comment: null
+traits:
+- Symfony\Component\Finder\Gitignore
+interfaces: []

@@ -1,0 +1,10 @@
+name: EnvelopedMessage
+class_comment: '# * @author Karoly Gossler <connor@connor.hu>'
+dependencies: []
+properties:
+- name: text
+  visibility: public
+  comment: null
+methods: []
+traits: []
+interfaces: []

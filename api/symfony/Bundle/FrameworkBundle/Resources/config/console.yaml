@@ -1,0 +1,194 @@
+name: console
+class_comment: null
+dependencies:
+- name: AboutCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\AboutCommand
+- name: AssetsInstallCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\AssetsInstallCommand
+- name: CacheClearCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\CacheClearCommand
+- name: CachePoolClearCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\CachePoolClearCommand
+- name: CachePoolDeleteCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\CachePoolDeleteCommand
+- name: CachePoolInvalidateTagsCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\CachePoolInvalidateTagsCommand
+- name: CachePoolListCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\CachePoolListCommand
+- name: CachePoolPruneCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\CachePoolPruneCommand
+- name: CacheWarmupCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\CacheWarmupCommand
+- name: ConfigDebugCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\ConfigDebugCommand
+- name: ConfigDumpReferenceCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\ConfigDumpReferenceCommand
+- name: ContainerDebugCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\ContainerDebugCommand
+- name: ContainerLintCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\ContainerLintCommand
+- name: DebugAutowiringCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\DebugAutowiringCommand
+- name: EventDispatcherDebugCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\EventDispatcherDebugCommand
+- name: RouterDebugCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\RouterDebugCommand
+- name: RouterMatchCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\RouterMatchCommand
+- name: SecretsDecryptToLocalCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\SecretsDecryptToLocalCommand
+- name: SecretsEncryptFromLocalCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\SecretsEncryptFromLocalCommand
+- name: SecretsGenerateKeysCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\SecretsGenerateKeysCommand
+- name: SecretsListCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\SecretsListCommand
+- name: SecretsRemoveCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\SecretsRemoveCommand
+- name: SecretsRevealCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\SecretsRevealCommand
+- name: SecretsSetCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\SecretsSetCommand
+- name: TranslationDebugCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\TranslationDebugCommand
+- name: TranslationUpdateCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\TranslationUpdateCommand
+- name: WorkflowDumpCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\WorkflowDumpCommand
+- name: YamlLintCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\YamlLintCommand
+- name: Application
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Console\Application
+- name: SuggestMissingPackageSubscriber
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\EventListener\SuggestMissingPackageSubscriber
+- name: ErrorListener
+  type: class
+  source: Symfony\Component\Console\EventListener\ErrorListener
+- name: RunCommandMessageHandler
+  type: class
+  source: Symfony\Component\Console\Messenger\RunCommandMessageHandler
+- name: DotenvDebugCommand
+  type: class
+  source: Symfony\Component\Dotenv\Command\DebugCommand
+- name: ConsumeMessagesCommand
+  type: class
+  source: Symfony\Component\Messenger\Command\ConsumeMessagesCommand
+- name: MessengerDebugCommand
+  type: class
+  source: Symfony\Component\Messenger\Command\DebugCommand
+- name: FailedMessagesRemoveCommand
+  type: class
+  source: Symfony\Component\Messenger\Command\FailedMessagesRemoveCommand
+- name: FailedMessagesRetryCommand
+  type: class
+  source: Symfony\Component\Messenger\Command\FailedMessagesRetryCommand
+- name: FailedMessagesShowCommand
+  type: class
+  source: Symfony\Component\Messenger\Command\FailedMessagesShowCommand
+- name: SetupTransportsCommand
+  type: class
+  source: Symfony\Component\Messenger\Command\SetupTransportsCommand
+- name: StatsCommand
+  type: class
+  source: Symfony\Component\Messenger\Command\StatsCommand
+- name: StopWorkersCommand
+  type: class
+  source: Symfony\Component\Messenger\Command\StopWorkersCommand
+- name: SchedulerDebugCommand
+  type: class
+  source: Symfony\Component\Scheduler\Command\DebugCommand
+- name: SerializerDebugCommand
+  type: class
+  source: Symfony\Component\Serializer\Command\DebugCommand
+- name: TranslationLintCommand
+  type: class
+  source: Symfony\Component\Translation\Command\TranslationLintCommand
+- name: TranslationPullCommand
+  type: class
+  source: Symfony\Component\Translation\Command\TranslationPullCommand
+- name: TranslationPushCommand
+  type: class
+  source: Symfony\Component\Translation\Command\TranslationPushCommand
+- name: XliffLintCommand
+  type: class
+  source: Symfony\Component\Translation\Command\XliffLintCommand
+- name: ValidatorDebugCommand
+  type: class
+  source: Symfony\Component\Validator\Command\DebugCommand
+properties: []
+methods: []
+traits:
+- Symfony\Bundle\FrameworkBundle\Command\AboutCommand
+- Symfony\Bundle\FrameworkBundle\Command\AssetsInstallCommand
+- Symfony\Bundle\FrameworkBundle\Command\CacheClearCommand
+- Symfony\Bundle\FrameworkBundle\Command\CachePoolClearCommand
+- Symfony\Bundle\FrameworkBundle\Command\CachePoolDeleteCommand
+- Symfony\Bundle\FrameworkBundle\Command\CachePoolInvalidateTagsCommand
+- Symfony\Bundle\FrameworkBundle\Command\CachePoolListCommand
+- Symfony\Bundle\FrameworkBundle\Command\CachePoolPruneCommand
+- Symfony\Bundle\FrameworkBundle\Command\CacheWarmupCommand
+- Symfony\Bundle\FrameworkBundle\Command\ConfigDebugCommand
+- Symfony\Bundle\FrameworkBundle\Command\ConfigDumpReferenceCommand
+- Symfony\Bundle\FrameworkBundle\Command\ContainerDebugCommand
+- Symfony\Bundle\FrameworkBundle\Command\ContainerLintCommand
+- Symfony\Bundle\FrameworkBundle\Command\DebugAutowiringCommand
+- Symfony\Bundle\FrameworkBundle\Command\EventDispatcherDebugCommand
+- Symfony\Bundle\FrameworkBundle\Command\RouterDebugCommand
+- Symfony\Bundle\FrameworkBundle\Command\RouterMatchCommand
+- Symfony\Bundle\FrameworkBundle\Command\SecretsDecryptToLocalCommand
+- Symfony\Bundle\FrameworkBundle\Command\SecretsEncryptFromLocalCommand
+- Symfony\Bundle\FrameworkBundle\Command\SecretsGenerateKeysCommand
+- Symfony\Bundle\FrameworkBundle\Command\SecretsListCommand
+- Symfony\Bundle\FrameworkBundle\Command\SecretsRemoveCommand
+- Symfony\Bundle\FrameworkBundle\Command\SecretsRevealCommand
+- Symfony\Bundle\FrameworkBundle\Command\SecretsSetCommand
+- Symfony\Bundle\FrameworkBundle\Command\TranslationDebugCommand
+- Symfony\Bundle\FrameworkBundle\Command\TranslationUpdateCommand
+- Symfony\Bundle\FrameworkBundle\Command\WorkflowDumpCommand
+- Symfony\Bundle\FrameworkBundle\Command\YamlLintCommand
+- Symfony\Bundle\FrameworkBundle\Console\Application
+- Symfony\Bundle\FrameworkBundle\EventListener\SuggestMissingPackageSubscriber
+- Symfony\Component\Console\EventListener\ErrorListener
+- Symfony\Component\Console\Messenger\RunCommandMessageHandler
+- Symfony\Component\Messenger\Command\ConsumeMessagesCommand
+- Symfony\Component\Messenger\Command\FailedMessagesRemoveCommand
+- Symfony\Component\Messenger\Command\FailedMessagesRetryCommand
+- Symfony\Component\Messenger\Command\FailedMessagesShowCommand
+- Symfony\Component\Messenger\Command\SetupTransportsCommand
+- Symfony\Component\Messenger\Command\StatsCommand
+- Symfony\Component\Messenger\Command\StopWorkersCommand
+- Symfony\Component\Translation\Command\TranslationLintCommand
+- Symfony\Component\Translation\Command\TranslationPullCommand
+- Symfony\Component\Translation\Command\TranslationPushCommand
+- Symfony\Component\Translation\Command\XliffLintCommand
+interfaces: []

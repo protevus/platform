@@ -1,0 +1,37 @@
+name: RegisterEntryPointPass
+class_comment: '# * @author Wouter de Jong <wouter@wouterj.nl>'
+dependencies:
+- name: InvalidConfigurationException
+  type: class
+  source: Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: CompilerPassInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: AuthenticationEntryPointInterface
+  type: class
+  source: Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface
+interfaces:
+- CompilerPassInterface

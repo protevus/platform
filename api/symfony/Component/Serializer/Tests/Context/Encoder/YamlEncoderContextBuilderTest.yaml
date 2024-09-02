@@ -1,0 +1,32 @@
+name: YamlEncoderContextBuilderTest
+class_comment: '# * @author Mathias Arlaud <mathias.arlaud@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: YamlEncoderContextBuilder
+  type: class
+  source: Symfony\Component\Serializer\Context\Encoder\YamlEncoderContextBuilder
+- name: YamlEncoder
+  type: class
+  source: Symfony\Component\Serializer\Encoder\YamlEncoder
+properties: []
+methods:
+- name: testWithers
+  visibility: public
+  parameters:
+  - name: values
+  comment: "# * @author Mathias Arlaud <mathias.arlaud@gmail.com>\n# */\n# class YamlEncoderContextBuilderTest\
+    \ extends TestCase\n# {\n# private YamlEncoderContextBuilder $contextBuilder;\n\
+    # \n# protected function setUp(): void\n# {\n# $this->contextBuilder = new YamlEncoderContextBuilder();\n\
+    # }\n# \n# /**\n# * @dataProvider withersDataProvider\n# *\n# * @param array<string,\
+    \ mixed> $values"
+- name: withersDataProvider
+  visibility: public
+  parameters: []
+  comment: '# * @return iterable<array{0: array<string, mixed>|}>'
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Context\Encoder\YamlEncoderContextBuilder
+- Symfony\Component\Serializer\Encoder\YamlEncoder
+interfaces: []

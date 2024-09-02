@@ -1,0 +1,39 @@
+name: FactoryCommandLoaderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: FactoryCommandLoader
+  type: class
+  source: Symfony\Component\Console\CommandLoader\FactoryCommandLoader
+- name: CommandNotFoundException
+  type: class
+  source: Symfony\Component\Console\Exception\CommandNotFoundException
+properties: []
+methods:
+- name: testHas
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetUnknownCommandThrows
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetCommandNames
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\CommandLoader\FactoryCommandLoader
+- Symfony\Component\Console\Exception\CommandNotFoundException
+interfaces: []

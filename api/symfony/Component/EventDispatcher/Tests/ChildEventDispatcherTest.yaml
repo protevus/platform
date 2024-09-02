@@ -1,0 +1,15 @@
+name: ChildEventDispatcherTest
+class_comment: null
+dependencies:
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+properties: []
+methods:
+- name: createEventDispatcher
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\EventDispatcher
+interfaces: []

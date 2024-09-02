@@ -1,0 +1,34 @@
+name: ViewEvent
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: kernel
+  - name: request
+  - name: requestType
+  - name: controllerResult
+  - name: controllerArgumentsEvent
+    default: 'null'
+  comment: null
+- name: getControllerResult
+  visibility: public
+  parameters: []
+  comment: null
+- name: setControllerResult
+  visibility: public
+  parameters:
+  - name: controllerResult
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\HttpKernelInterface
+interfaces: []

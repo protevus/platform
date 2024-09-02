@@ -1,0 +1,15 @@
+name: FileLock
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: acquire
+  visibility: public
+  parameters: []
+  comment: '# * Attempt to acquire the lock.
+
+    # *
+
+    # * @return bool'
+traits: []
+interfaces: []

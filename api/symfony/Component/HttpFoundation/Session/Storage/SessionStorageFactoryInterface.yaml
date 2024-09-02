@@ -1,0 +1,17 @@
+name: SessionStorageFactoryInterface
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+properties: []
+methods:
+- name: createStorage
+  visibility: public
+  parameters:
+  - name: request
+  comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n# */\n# interface\
+    \ SessionStorageFactoryInterface\n# {\n# /**\n# * Creates a new instance of SessionStorageInterface."
+traits:
+- Symfony\Component\HttpFoundation\Request
+interfaces: []

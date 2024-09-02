@@ -1,0 +1,12 @@
+name: BodyRendererInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: render
+  visibility: public
+  parameters:
+  - name: message
+  comment: null
+traits: []
+interfaces: []

@@ -1,0 +1,23 @@
+name: TranslatableTextAlign
+class_comment: null
+dependencies:
+- name: TranslatableInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatableInterface
+- name: TranslatorInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatorInterface
+properties: []
+methods:
+- name: trans
+  visibility: public
+  parameters:
+  - name: translator
+  - name: locale
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Contracts\Translation\TranslatableInterface
+- Symfony\Contracts\Translation\TranslatorInterface
+interfaces:
+- TranslatableInterface

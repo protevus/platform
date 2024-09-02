@@ -1,0 +1,44 @@
+name: AbstractNormalizerContextBuilderTest
+class_comment: '# * @author Mathias Arlaud <mathias.arlaud@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AbstractNormalizerContextBuilder
+  type: class
+  source: Symfony\Component\Serializer\Context\Normalizer\AbstractNormalizerContextBuilder
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Serializer\Exception\InvalidArgumentException
+- name: AbstractNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\AbstractNormalizer
+properties: []
+methods:
+- name: testWithers
+  visibility: public
+  parameters:
+  - name: values
+  comment: "# * @author Mathias Arlaud <mathias.arlaud@gmail.com>\n# */\n# class AbstractNormalizerContextBuilderTest\
+    \ extends TestCase\n# {\n# private AbstractNormalizerContextBuilder $contextBuilder;\n\
+    # \n# protected function setUp(): void\n# {\n# $this->contextBuilder = new class\
+    \ extends AbstractNormalizerContextBuilder {};\n# }\n# \n# /**\n# * @dataProvider\
+    \ withersDataProvider\n# *\n# * @param array<string, mixed> $values"
+- name: withersDataProvider
+  visibility: public
+  parameters: []
+  comment: '# * @return iterable<array{0: array<string, mixed>|}>'
+- name: testCastSingleGroupToArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCannotSetNonStringAttributes
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Context\Normalizer\AbstractNormalizerContextBuilder
+- Symfony\Component\Serializer\Exception\InvalidArgumentException
+- Symfony\Component\Serializer\Normalizer\AbstractNormalizer
+interfaces: []

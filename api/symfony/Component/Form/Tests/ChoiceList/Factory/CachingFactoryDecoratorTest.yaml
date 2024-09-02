@@ -1,0 +1,241 @@
+name: CachingFactoryDecoratorTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ArrayChoiceList
+  type: class
+  source: Symfony\Component\Form\ChoiceList\ArrayChoiceList
+- name: ChoiceList
+  type: class
+  source: Symfony\Component\Form\ChoiceList\ChoiceList
+- name: CachingFactoryDecorator
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\CachingFactoryDecorator
+- name: DefaultChoiceListFactory
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\DefaultChoiceListFactory
+- name: LazyChoiceList
+  type: class
+  source: Symfony\Component\Form\ChoiceList\LazyChoiceList
+- name: CallbackChoiceLoader
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader
+- name: FilterChoiceLoaderDecorator
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Loader\FilterChoiceLoaderDecorator
+- name: ChoiceListView
+  type: class
+  source: Symfony\Component\Form\ChoiceList\View\ChoiceListView
+- name: FormType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\FormType
+- name: ArrayChoiceLoader
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\ArrayChoiceLoader
+properties: []
+methods:
+- name: testCreateFromChoicesSameChoices
+  visibility: public
+  parameters:
+  - name: choice1
+  - name: choice2
+  comment: "# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# class CachingFactoryDecoratorTest\
+    \ extends TestCase\n# {\n# private CachingFactoryDecorator $factory;\n# \n# protected\
+    \ function setUp(): void\n# {\n# $this->factory = new CachingFactoryDecorator(new\
+    \ DefaultChoiceListFactory());\n# }\n# \n# public function testCreateFromChoicesEmpty()\n\
+    # {\n# $list1 = $this->factory->createListFromChoices([]);\n# $list2 = $this->factory->createListFromChoices([]);\n\
+    # \n# $this->assertSame($list1, $list2);\n# $this->assertEquals(new ArrayChoiceList([]),\
+    \ $list1);\n# $this->assertEquals(new ArrayChoiceList([]), $list2);\n# }\n# \n\
+    # public function testCreateFromChoicesComparesTraversableChoicesAsArray()\n#\
+    \ {\n# // The top-most traversable is converted to an array\n# $choices1 = new\
+    \ \\ArrayIterator(['A' => 'a']);\n# $choices2 = ['A' => 'a'];\n# \n# $list1 =\
+    \ $this->factory->createListFromChoices($choices1);\n# $list2 = $this->factory->createListFromChoices($choices2);\n\
+    # \n# $this->assertSame($list1, $list2);\n# $this->assertEquals(new ArrayChoiceList(['A'\
+    \ => 'a']), $list1);\n# $this->assertEquals(new ArrayChoiceList(['A' => 'a']),\
+    \ $list2);\n# }\n# \n# public function testCreateFromChoicesGroupedChoices()\n\
+    # {\n# $choices1 = ['key' => ['A' => 'a']];\n# $choices2 = ['A' => 'a'];\n# $list1\
+    \ = $this->factory->createListFromChoices($choices1);\n# $list2 = $this->factory->createListFromChoices($choices2);\n\
+    # \n# $this->assertNotSame($list1, $list2);\n# $this->assertEquals(new ArrayChoiceList(['key'\
+    \ => ['A' => 'a']]), $list1);\n# $this->assertEquals(new ArrayChoiceList(['A'\
+    \ => 'a']), $list2);\n# }\n# \n# /**\n# * @dataProvider provideSameChoices"
+- name: testCreateFromChoicesDifferentChoices
+  visibility: public
+  parameters:
+  - name: choice1
+  - name: choice2
+  comment: '# * @dataProvider provideDistinguishedChoices'
+- name: testCreateFromChoicesSameValueClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesSameValueClosureUseCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesDifferentValueClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesSameFilterClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesSameFilterClosureUseCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesDifferentFilterClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromLoaderSameLoader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromLoaderSameLoaderUseCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromLoaderDifferentLoader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromLoaderSameValueClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromLoaderSameValueClosureUseCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromLoaderDifferentValueClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromLoaderSameFilterClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromLoaderSameFilterClosureUseCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromLoaderDifferentFilterClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewSamePreferredChoices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewSamePreferredChoicesUseCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewDifferentPreferredChoices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewSamePreferredChoicesClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewSamePreferredChoicesClosureUseCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewDifferentPreferredChoicesClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewSameLabelClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewSameLabelClosureUseCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewDifferentLabelClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewSameIndexClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewSameIndexClosureUseCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewDifferentIndexClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewSameGroupByClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewSameGroupByClosureUseCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewDifferentGroupByClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewSameAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewSameAttributesUseCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewDifferentAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewSameAttributesClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewSameAttributesClosureUseCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewDifferentAttributesClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideSameChoices
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideDistinguishedChoices
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideSameKeyChoices
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideDistinguishedKeyChoices
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\ChoiceList\ArrayChoiceList
+- Symfony\Component\Form\ChoiceList\ChoiceList
+- Symfony\Component\Form\ChoiceList\Factory\CachingFactoryDecorator
+- Symfony\Component\Form\ChoiceList\Factory\DefaultChoiceListFactory
+- Symfony\Component\Form\ChoiceList\LazyChoiceList
+- Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader
+- Symfony\Component\Form\ChoiceList\Loader\FilterChoiceLoaderDecorator
+- Symfony\Component\Form\ChoiceList\View\ChoiceListView
+- Symfony\Component\Form\Extension\Core\Type\FormType
+- Symfony\Component\Form\Tests\Fixtures\ArrayChoiceLoader
+interfaces: []

@@ -1,0 +1,120 @@
+name: ConfigurationUrlParser
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties:
+- name: driverAliases
+  visibility: protected
+  comment: '# * The drivers aliases map.
+
+    # *
+
+    # * @var array'
+methods:
+- name: parseConfiguration
+  visibility: public
+  parameters:
+  - name: config
+  comment: "# * The drivers aliases map.\n# *\n# * @var array\n# */\n# protected static\
+    \ $driverAliases = [\n# 'mssql' => 'sqlsrv',\n# 'mysql2' => 'mysql', // RDS\n\
+    # 'postgres' => 'pgsql',\n# 'postgresql' => 'pgsql',\n# 'sqlite3' => 'sqlite',\n\
+    # 'redis' => 'tcp',\n# 'rediss' => 'tls',\n# ];\n# \n# /**\n# * Parse the database\
+    \ configuration, hydrating options using a database configuration URL if possible.\n\
+    # *\n# * @param  array|string  $config\n# * @return array"
+- name: getPrimaryOptions
+  visibility: protected
+  parameters:
+  - name: url
+  comment: '# * Get the primary database connection options.
+
+    # *
+
+    # * @param  array  $url
+
+    # * @return array'
+- name: getDriver
+  visibility: protected
+  parameters:
+  - name: url
+  comment: '# * Get the database driver from the URL.
+
+    # *
+
+    # * @param  array  $url
+
+    # * @return string|null'
+- name: getDatabase
+  visibility: protected
+  parameters:
+  - name: url
+  comment: '# * Get the database name from the URL.
+
+    # *
+
+    # * @param  array  $url
+
+    # * @return string|null'
+- name: getQueryOptions
+  visibility: protected
+  parameters:
+  - name: url
+  comment: '# * Get all of the additional database options from the query string.
+
+    # *
+
+    # * @param  array  $url
+
+    # * @return array'
+- name: parseUrl
+  visibility: protected
+  parameters:
+  - name: url
+  comment: '# * Parse the string URL to an array of components.
+
+    # *
+
+    # * @param  string  $url
+
+    # * @return array
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: parseStringsToNativeTypes
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Convert string casted values to their native types.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return mixed'
+- name: getDriverAliases
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the current drivers'' aliases.
+
+    # *
+
+    # * @return array'
+- name: addDriverAlias
+  visibility: public
+  parameters:
+  - name: alias
+  - name: driver
+  comment: '# * Add the given driver alias to the driver aliases array.
+
+    # *
+
+    # * @param  string  $alias
+
+    # * @param  string  $driver
+
+    # * @return void'
+traits:
+- InvalidArgumentException
+interfaces: []

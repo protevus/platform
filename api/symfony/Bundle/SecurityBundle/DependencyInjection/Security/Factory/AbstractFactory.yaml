@@ -1,0 +1,56 @@
+name: AbstractFactory
+class_comment: null
+dependencies:
+- name: NodeDefinition
+  type: class
+  source: Symfony\Component\Config\Definition\Builder\NodeDefinition
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+properties: []
+methods:
+- name: addOption
+  visibility: public
+  parameters:
+  - name: name
+  - name: default
+    default: 'null'
+  comment: null
+- name: addConfiguration
+  visibility: public
+  parameters:
+  - name: node
+  comment: null
+- name: createAuthenticationSuccessHandler
+  visibility: protected
+  parameters:
+  - name: container
+  - name: id
+  - name: config
+  comment: null
+- name: createAuthenticationFailureHandler
+  visibility: protected
+  parameters:
+  - name: container
+  - name: id
+  - name: config
+  comment: null
+- name: getSuccessHandlerId
+  visibility: protected
+  parameters:
+  - name: id
+  comment: null
+- name: getFailureHandlerId
+  visibility: protected
+  parameters:
+  - name: id
+  comment: null
+traits:
+- Symfony\Component\Config\Definition\Builder\NodeDefinition
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\ContainerBuilder
+interfaces:
+- AuthenticatorFactoryInterface

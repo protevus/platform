@@ -1,0 +1,63 @@
+name: CustomNormalizerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CustomNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\CustomNormalizer
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- name: NormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\NormalizerInterface
+- name: Serializer
+  type: class
+  source: Symfony\Component\Serializer\Serializer
+- name: SerializerAwareInterface
+  type: class
+  source: Symfony\Component\Serializer\SerializerAwareInterface
+- name: ScalarDummy
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\ScalarDummy
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testInterface
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSerialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDeserialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalizeWithObjectToPopulateUsesProvidedObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupportsNormalization
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupportsDenormalization
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Normalizer\CustomNormalizer
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- Symfony\Component\Serializer\Normalizer\NormalizerInterface
+- Symfony\Component\Serializer\Serializer
+- Symfony\Component\Serializer\SerializerAwareInterface
+- Symfony\Component\Serializer\Tests\Fixtures\ScalarDummy
+interfaces: []

@@ -1,0 +1,51 @@
+name: TraversalStrategy
+class_comment: '# * Specifies whether and how a traversable object should be traversed.
+
+  # *
+
+  # * If the node traverser traverses a node whose value is an instance of
+
+  # * {@link \Traversable}, and if that node is either a class node or if
+
+  # * cascading is enabled, then the node''s traversal strategy will be checked.
+
+  # * Depending on the requested traversal strategy, the node traverser will
+
+  # * iterate over the object and cascade each object or collection returned by
+
+  # * the iterator.
+
+  # *
+
+  # * The traversal strategy is ignored for arrays. Arrays are always iterated.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @see CascadingStrategy'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: private
+  parameters: []
+  comment: "# * Specifies whether and how a traversable object should be traversed.\n\
+    # *\n# * If the node traverser traverses a node whose value is an instance of\n\
+    # * {@link \\Traversable}, and if that node is either a class node or if\n# *\
+    \ cascading is enabled, then the node's traversal strategy will be checked.\n\
+    # * Depending on the requested traversal strategy, the node traverser will\n#\
+    \ * iterate over the object and cascade each object or collection returned by\n\
+    # * the iterator.\n# *\n# * The traversal strategy is ignored for arrays. Arrays\
+    \ are always iterated.\n# *\n# * @author Bernhard Schussek <bschussek@gmail.com>\n\
+    # *\n# * @see CascadingStrategy\n# */\n# class TraversalStrategy\n# {\n# /**\n\
+    # * Specifies that a node's value should be iterated only if it is an\n# * instance\
+    \ of {@link \\Traversable}.\n# */\n# public const IMPLICIT = 1;\n# \n# /**\n#\
+    \ * Specifies that a node's value should never be iterated.\n# */\n# public const\
+    \ NONE = 2;\n# \n# /**\n# * Specifies that a node's value should always be iterated.\
+    \ If the value is\n# * not an instance of {@link \\Traversable}, an exception\
+    \ should be thrown.\n# */\n# public const TRAVERSE = 4;\n# \n# /**\n# * Not instantiable."
+traits: []
+interfaces: []

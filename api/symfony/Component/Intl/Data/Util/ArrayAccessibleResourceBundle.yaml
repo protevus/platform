@@ -1,0 +1,73 @@
+name: ArrayAccessibleResourceBundle
+class_comment: '# * Work-around for a bug in PHP''s \ResourceBundle implementation.
+
+  # *
+
+  # * More information can be found on https://bugs.php.net/64356.
+
+  # * This class can be removed once that bug is fixed.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: BadMethodCallException
+  type: class
+  source: Symfony\Component\Intl\Exception\BadMethodCallException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: bundleImpl
+  comment: null
+- name: get
+  visibility: public
+  parameters:
+  - name: offset
+  comment: null
+- name: offsetExists
+  visibility: public
+  parameters:
+  - name: offset
+  comment: null
+- name: offsetGet
+  visibility: public
+  parameters:
+  - name: offset
+  comment: null
+- name: offsetSet
+  visibility: public
+  parameters:
+  - name: offset
+  - name: value
+  comment: null
+- name: offsetUnset
+  visibility: public
+  parameters:
+  - name: offset
+  comment: null
+- name: getIterator
+  visibility: public
+  parameters: []
+  comment: null
+- name: count
+  visibility: public
+  parameters: []
+  comment: null
+- name: getErrorCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: getErrorMessage
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Intl\Exception\BadMethodCallException
+interfaces:
+- \ArrayAccess

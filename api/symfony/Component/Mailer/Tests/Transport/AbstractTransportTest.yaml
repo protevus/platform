@@ -1,0 +1,106 @@
+name: AbstractTransportTest
+class_comment: '# * @group time-sensitive'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: BodyRenderer
+  type: class
+  source: Symfony\Bridge\Twig\Mime\BodyRenderer
+- name: TemplatedEmail
+  type: class
+  source: Symfony\Bridge\Twig\Mime\TemplatedEmail
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcherInterface
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: MessageEvent
+  type: class
+  source: Symfony\Component\Mailer\Event\MessageEvent
+- name: MessageListener
+  type: class
+  source: Symfony\Component\Mailer\EventListener\MessageListener
+- name: LogicException
+  type: class
+  source: Symfony\Component\Mailer\Exception\LogicException
+- name: SentMessage
+  type: class
+  source: Symfony\Component\Mailer\SentMessage
+- name: AbstractTransport
+  type: class
+  source: Symfony\Component\Mailer\Transport\AbstractTransport
+- name: NullTransport
+  type: class
+  source: Symfony\Component\Mailer\Transport\NullTransport
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+- name: Environment
+  type: class
+  source: Twig\Environment
+- name: ArrayLoader
+  type: class
+  source: Twig\Loader\ArrayLoader
+properties: []
+methods:
+- name: testThrottling
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendingRawMessages
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotRenderedTemplatedEmail
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderedTemplatedEmail
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRejectMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: dispatcher
+  - name: test
+  comment: null
+- name: doSend
+  visibility: protected
+  parameters:
+  - name: message
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bridge\Twig\Mime\BodyRenderer
+- Symfony\Bridge\Twig\Mime\TemplatedEmail
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\EventDispatcher\EventDispatcherInterface
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mailer\Event\MessageEvent
+- Symfony\Component\Mailer\EventListener\MessageListener
+- Symfony\Component\Mailer\Exception\LogicException
+- Symfony\Component\Mailer\SentMessage
+- Symfony\Component\Mailer\Transport\AbstractTransport
+- Symfony\Component\Mailer\Transport\NullTransport
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\RawMessage
+- Twig\Environment
+- Twig\Loader\ArrayLoader
+interfaces: []

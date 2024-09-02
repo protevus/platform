@@ -1,0 +1,47 @@
+name: ResolveTaggedIteratorArgumentPassTest
+class_comment: '# * @author Roland Franssen <franssen.roland@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: TaggedIteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- name: ResolveTaggedIteratorArgumentPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ResolveTaggedIteratorArgumentPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: TypedReference
+  type: class
+  source: Symfony\Component\DependencyInjection\TypedReference
+properties: []
+methods:
+- name: testProcess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWithIndexes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcesWithAutoExcludeReferencingService
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcesWithoutAutoExcludeReferencingService
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- Symfony\Component\DependencyInjection\Compiler\ResolveTaggedIteratorArgumentPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\DependencyInjection\TypedReference
+interfaces: []

@@ -1,0 +1,41 @@
+name: AliasDeprecatedPublicServicesPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AliasDeprecatedPublicServicesPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\AliasDeprecatedPublicServicesPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: testProcess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWithMissingAttribute
+  visibility: public
+  parameters:
+  - name: attribute
+  - name: attributes
+  comment: '# * @dataProvider processWithMissingAttributeProvider'
+- name: processWithMissingAttributeProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWithNonPublicService
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Compiler\AliasDeprecatedPublicServicesPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+interfaces: []

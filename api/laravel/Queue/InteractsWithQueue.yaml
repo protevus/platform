@@ -1,0 +1,142 @@
+name: InteractsWithQueue
+class_comment: null
+dependencies:
+- name: DateTimeInterface
+  type: class
+  source: DateTimeInterface
+- name: JobContract
+  type: class
+  source: Illuminate\Contracts\Queue\Job
+- name: FakeJob
+  type: class
+  source: Illuminate\Queue\Jobs\FakeJob
+- name: InteractsWithTime
+  type: class
+  source: Illuminate\Support\InteractsWithTime
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+- name: PHPUnit
+  type: class
+  source: PHPUnit\Framework\Assert
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: Throwable
+  type: class
+  source: Throwable
+- name: InteractsWithTime
+  type: class
+  source: InteractsWithTime
+properties:
+- name: job
+  visibility: public
+  comment: '# * The underlying queue job instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Queue\Job|null'
+methods:
+- name: attempts
+  visibility: public
+  parameters: []
+  comment: "# * The underlying queue job instance.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Queue\\Job|null\n# */\n# public $job;\n# \n# /**\n# * Get the number of times\
+    \ the job has been attempted.\n# *\n# * @return int"
+- name: delete
+  visibility: public
+  parameters: []
+  comment: '# * Delete the job from the queue.
+
+    # *
+
+    # * @return void'
+- name: fail
+  visibility: public
+  parameters:
+  - name: exception
+    default: 'null'
+  comment: '# * Fail the job from the queue.
+
+    # *
+
+    # * @param  \Throwable|string|null  $exception
+
+    # * @return void'
+- name: release
+  visibility: public
+  parameters:
+  - name: delay
+    default: '0'
+  comment: '# * Release the job back into the queue after (n) seconds.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $delay
+
+    # * @return void'
+- name: withFakeQueueInteractions
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that queue interactions like fail, delete, and release should
+    be faked.
+
+    # *
+
+    # * @return $this'
+- name: assertDeleted
+  visibility: public
+  parameters: []
+  comment: '# * Assert that the job was deleted from the queue.
+
+    # *
+
+    # * @return $this'
+- name: assertFailed
+  visibility: public
+  parameters: []
+  comment: '# * Assert that the job was manually failed.
+
+    # *
+
+    # * @return $this'
+- name: assertReleased
+  visibility: public
+  parameters:
+  - name: delay
+    default: 'null'
+  comment: '# * Assert that the job was released back onto the queue.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $delay
+
+    # * @return $this'
+- name: ensureQueueInteractionsHaveBeenFaked
+  visibility: private
+  parameters: []
+  comment: '# * Ensure that queue interactions have been faked.
+
+    # *
+
+    # * @return void'
+- name: setJob
+  visibility: public
+  parameters:
+  - name: job
+  comment: '# * Set the base queue job instance.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Queue\Job  $job
+
+    # * @return $this'
+traits:
+- DateTimeInterface
+- Illuminate\Queue\Jobs\FakeJob
+- Illuminate\Support\InteractsWithTime
+- InvalidArgumentException
+- RuntimeException
+- Throwable
+- InteractsWithTime
+interfaces: []

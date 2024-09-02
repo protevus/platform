@@ -1,0 +1,33 @@
+name: W3CReferenceTest
+class_comment: '# * Check that the W3CReference class is up to date with the standard
+  resources.
+
+  # *
+
+  # * @see https://github.com/WICG/sanitizer-api/blob/main/resources'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: W3CReference
+  type: class
+  source: Symfony\Component\HtmlSanitizer\Reference\W3CReference
+properties: []
+methods:
+- name: testElements
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: getResourceData
+  visibility: private
+  parameters:
+  - name: resource
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HtmlSanitizer\Reference\W3CReference
+interfaces: []

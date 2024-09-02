@@ -1,0 +1,67 @@
+name: Translator
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: get
+  visibility: public
+  parameters:
+  - name: key
+  - name: replace
+    default: '[]'
+  - name: locale
+    default: 'null'
+  comment: '# * Get the translation for a given key.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  array  $replace
+
+    # * @param  string|null  $locale
+
+    # * @return mixed'
+- name: choice
+  visibility: public
+  parameters:
+  - name: key
+  - name: number
+  - name: replace
+    default: '[]'
+  - name: locale
+    default: 'null'
+  comment: '# * Get a translation according to an integer value.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  \Countable|int|float|array  $number
+
+    # * @param  array  $replace
+
+    # * @param  string|null  $locale
+
+    # * @return string'
+- name: getLocale
+  visibility: public
+  parameters: []
+  comment: '# * Get the default locale being used.
+
+    # *
+
+    # * @return string'
+- name: setLocale
+  visibility: public
+  parameters:
+  - name: locale
+  comment: '# * Set the default locale.
+
+    # *
+
+    # * @param  string  $locale
+
+    # * @return void'
+traits: []
+interfaces: []

@@ -1,0 +1,43 @@
+name: IsNullValidatorTest
+class_comment: null
+dependencies:
+- name: IsNull
+  type: class
+  source: Symfony\Component\Validator\Constraints\IsNull
+- name: IsNullValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\IsNullValidator
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+properties: []
+methods:
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testNullIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidValues
+  visibility: public
+  parameters:
+  - name: value
+  - name: valueAsString
+  comment: '# * @dataProvider getInvalidValues'
+- name: testInvalidValuesNamed
+  visibility: public
+  parameters:
+  - name: value
+  - name: valueAsString
+  comment: '# * @dataProvider getInvalidValues'
+- name: getInvalidValues
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\IsNull
+- Symfony\Component\Validator\Constraints\IsNullValidator
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

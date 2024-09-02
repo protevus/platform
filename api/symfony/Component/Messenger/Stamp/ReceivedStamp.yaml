@@ -1,0 +1,21 @@
+name: ReceivedStamp
+class_comment: null
+dependencies:
+- name: SendMessageMiddleware
+  type: class
+  source: Symfony\Component\Messenger\Middleware\SendMessageMiddleware
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: transportName
+  comment: null
+- name: getTransportName
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Messenger\Middleware\SendMessageMiddleware
+interfaces:
+- NonSendableStampInterface

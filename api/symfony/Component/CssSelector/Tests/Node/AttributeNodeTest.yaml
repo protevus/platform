@@ -1,0 +1,23 @@
+name: AttributeNodeTest
+class_comment: null
+dependencies:
+- name: AttributeNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\AttributeNode
+- name: ElementNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\ElementNode
+properties: []
+methods:
+- name: getToStringConversionTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSpecificityValueTestData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\CssSelector\Node\AttributeNode
+- Symfony\Component\CssSelector\Node\ElementNode
+interfaces: []

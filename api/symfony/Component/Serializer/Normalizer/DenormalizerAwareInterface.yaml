@@ -1,0 +1,22 @@
+name: DenormalizerAwareInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: setDenormalizer
+  visibility: public
+  parameters:
+  - name: denormalizer
+  comment: '# * @author Joel Wurtz <joel.wurtz@gmail.com>
+
+    # */
+
+    # interface DenormalizerAwareInterface
+
+    # {
+
+    # /**
+
+    # * Sets the owning Denormalizer object.'
+traits: []
+interfaces: []

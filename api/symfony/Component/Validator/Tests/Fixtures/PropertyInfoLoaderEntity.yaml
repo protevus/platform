@@ -1,0 +1,50 @@
+name: PropertyInfoLoaderEntity
+class_comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>"
+dependencies:
+- name: Assert
+  type: class
+  source: Symfony\Component\Validator\Constraints
+properties:
+- name: nullableString
+  visibility: public
+  comment: null
+- name: string
+  visibility: public
+  comment: null
+- name: scalar
+  visibility: public
+  comment: null
+- name: object
+  visibility: public
+  comment: null
+- name: collection
+  visibility: public
+  comment: null
+- name: collectionOfUnknown
+  visibility: public
+  comment: null
+- name: alreadyMappedType
+  visibility: public
+  comment: null
+- name: alreadyMappedNotNull
+  visibility: public
+  comment: null
+- name: alreadyMappedNotBlank
+  visibility: public
+  comment: null
+- name: alreadyPartiallyMappedCollection
+  visibility: public
+  comment: null
+- name: readOnly
+  visibility: public
+  comment: null
+- name: noAutoMapping
+  visibility: public
+  comment: null
+methods:
+- name: setNonExistentField
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

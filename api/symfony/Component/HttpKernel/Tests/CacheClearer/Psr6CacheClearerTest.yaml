@@ -1,0 +1,31 @@
+name: Psr6CacheClearerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CacheItemPoolInterface
+  type: class
+  source: Psr\Cache\CacheItemPoolInterface
+- name: Psr6CacheClearer
+  type: class
+  source: Symfony\Component\HttpKernel\CacheClearer\Psr6CacheClearer
+properties: []
+methods:
+- name: testClearPoolsInjectedInConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClearPool
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClearPoolThrowsExceptionOnUnreferencedPool
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Psr\Cache\CacheItemPoolInterface
+- Symfony\Component\HttpKernel\CacheClearer\Psr6CacheClearer
+interfaces: []

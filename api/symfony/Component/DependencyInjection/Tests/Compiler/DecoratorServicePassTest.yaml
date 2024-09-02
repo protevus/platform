@@ -1,0 +1,96 @@
+name: DecoratorServicePassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Alias
+  type: class
+  source: Symfony\Component\DependencyInjection\Alias
+- name: DecoratorServicePass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\DecoratorServicePass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: ServiceNotFoundException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+properties: []
+methods:
+- name: testProcessWithoutAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWithAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWithPriority
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWithInvalidDecorated
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessNoInnerAliasWithInvalidDecorated
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWithInvalidDecoratedAndWrongBehavior
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessMovesTagsFromDecoratedDefinitionToDecoratingDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessMovesTagsFromDecoratedDefinitionToDecoratingDefinitionMultipleTimes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessLeavesServiceLocatorTagOnOriginalDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessLeavesServiceSubscriberTagOnOriginalDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessLeavesProxyTagOnOriginalDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCannotDecorateSyntheticService
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenericInnerReference
+  visibility: public
+  parameters: []
+  comment: null
+- name: process
+  visibility: protected
+  parameters:
+  - name: container
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Alias
+- Symfony\Component\DependencyInjection\Compiler\DecoratorServicePass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+- Symfony\Component\DependencyInjection\Reference
+interfaces: []

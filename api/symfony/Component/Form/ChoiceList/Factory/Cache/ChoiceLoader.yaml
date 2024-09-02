@@ -1,0 +1,44 @@
+name: ChoiceLoader
+class_comment: null
+dependencies:
+- name: ChoiceListInterface
+  type: class
+  source: Symfony\Component\Form\ChoiceList\ChoiceListInterface
+- name: ChoiceLoaderInterface
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface
+- name: FormTypeExtensionInterface
+  type: class
+  source: Symfony\Component\Form\FormTypeExtensionInterface
+- name: FormTypeInterface
+  type: class
+  source: Symfony\Component\Form\FormTypeInterface
+properties: []
+methods:
+- name: loadChoiceList
+  visibility: public
+  parameters:
+  - name: value
+    default: 'null'
+  comment: null
+- name: loadChoicesForValues
+  visibility: public
+  parameters:
+  - name: values
+  - name: value
+    default: 'null'
+  comment: null
+- name: loadValuesForChoices
+  visibility: public
+  parameters:
+  - name: choices
+  - name: value
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\Form\ChoiceList\ChoiceListInterface
+- Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface
+- Symfony\Component\Form\FormTypeExtensionInterface
+- Symfony\Component\Form\FormTypeInterface
+interfaces:
+- ChoiceLoaderInterface

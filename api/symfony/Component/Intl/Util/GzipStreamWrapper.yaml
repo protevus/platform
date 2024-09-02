@@ -1,0 +1,52 @@
+name: GzipStreamWrapper
+class_comment: '# * @internal'
+dependencies: []
+properties:
+- name: context
+  visibility: public
+  comment: '# * @internal
+
+    # */
+
+    # class GzipStreamWrapper
+
+    # {
+
+    # /** @var resource|null'
+- name: handle
+  visibility: private
+  comment: '# @var resource'
+methods:
+- name: require
+  visibility: public
+  parameters:
+  - name: path
+  comment: null
+- name: stream_open
+  visibility: public
+  parameters:
+  - name: path
+  - name: mode
+  comment: null
+- name: stream_read
+  visibility: public
+  parameters:
+  - name: count
+  comment: null
+- name: stream_eof
+  visibility: public
+  parameters: []
+  comment: null
+- name: stream_set_option
+  visibility: public
+  parameters:
+  - name: option
+  - name: arg1
+  - name: arg2
+  comment: null
+- name: stream_stat
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

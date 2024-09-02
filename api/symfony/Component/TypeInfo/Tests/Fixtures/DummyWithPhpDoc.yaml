@@ -1,0 +1,13 @@
+name: DummyWithPhpDoc
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getNextDummy
+  visibility: public
+  parameters:
+  - name: dummy
+  comment: "# * @var array<Dummy>\n# */\n# public mixed $arrayOfDummies = [];\n# \n\
+    # /**\n# * @param Dummy $dummy\n# *\n# * @return Dummy"
+traits: []
+interfaces: []

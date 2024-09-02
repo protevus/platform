@@ -1,0 +1,57 @@
+name: DebugExtension
+class_comment: '# * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: ServerLogCommand
+  type: class
+  source: Symfony\Bridge\Monolog\Command\ServerLogCommand
+- name: ServerDumpPlaceholderCommand
+  type: class
+  source: Symfony\Bundle\DebugBundle\Command\ServerDumpPlaceholderCommand
+- name: FileLocator
+  type: class
+  source: Symfony\Component\Config\FileLocator
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Extension
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\Extension
+- name: PhpFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: ReflectionCaster
+  type: class
+  source: Symfony\Component\VarDumper\Caster\ReflectionCaster
+properties: []
+methods:
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: container
+  comment: null
+- name: getXsdValidationBasePath
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNamespace
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Bridge\Monolog\Command\ServerLogCommand
+- Symfony\Bundle\DebugBundle\Command\ServerDumpPlaceholderCommand
+- Symfony\Component\Config\FileLocator
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Extension\Extension
+- Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\VarDumper\Caster\ReflectionCaster
+interfaces: []

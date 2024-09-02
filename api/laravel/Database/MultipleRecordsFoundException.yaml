@@ -1,0 +1,37 @@
+name: MultipleRecordsFoundException
+class_comment: null
+dependencies:
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+properties:
+- name: count
+  visibility: public
+  comment: '# * The number of records found.
+
+    # *
+
+    # * @var int'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: count
+  - name: code
+    default: '0'
+  - name: previous
+    default: 'null'
+  comment: "# * The number of records found.\n# *\n# * @var int\n# */\n# public $count;\n\
+    # \n# /**\n# * Create a new exception instance.\n# *\n# * @param  int  $count\n\
+    # * @param  int  $code\n# * @param  \\Throwable|null  $previous\n# * @return void"
+- name: getCount
+  visibility: public
+  parameters: []
+  comment: '# * Get the number of records found.
+
+    # *
+
+    # * @return int'
+traits:
+- RuntimeException
+interfaces: []

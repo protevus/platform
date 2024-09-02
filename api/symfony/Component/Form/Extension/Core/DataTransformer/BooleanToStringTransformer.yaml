@@ -1,0 +1,85 @@
+name: BooleanToStringTransformer
+class_comment: '# * Transforms between a Boolean and a string.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # * @author Florian Eckerstorfer <florian@eckerstorfer.org>
+
+  # *
+
+  # * @implements DataTransformerInterface<bool, string>'
+dependencies:
+- name: DataTransformerInterface
+  type: class
+  source: Symfony\Component\Form\DataTransformerInterface
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Form\Exception\InvalidArgumentException
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: trueValue
+  - name: falseValues
+    default: '[null]'
+  comment: '# * Transforms between a Boolean and a string.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # * @author Florian Eckerstorfer <florian@eckerstorfer.org>
+
+    # *
+
+    # * @implements DataTransformerInterface<bool, string>
+
+    # */
+
+    # class BooleanToStringTransformer implements DataTransformerInterface
+
+    # {
+
+    # /**
+
+    # * @param string $trueValue The value emitted upon transform if the input is
+    true'
+- name: transform
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Transforms a Boolean into a string.
+
+    # *
+
+    # * @param bool $value Boolean value
+
+    # *
+
+    # * @throws TransformationFailedException if the given value is not a Boolean'
+- name: reverseTransform
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Transforms a string into a Boolean.
+
+    # *
+
+    # * @param string $value String value
+
+    # *
+
+    # * @throws TransformationFailedException if the given value is not a string'
+traits:
+- Symfony\Component\Form\DataTransformerInterface
+- Symfony\Component\Form\Exception\InvalidArgumentException
+- Symfony\Component\Form\Exception\TransformationFailedException
+interfaces:
+- DataTransformerInterface
+- DataTransformerInterface

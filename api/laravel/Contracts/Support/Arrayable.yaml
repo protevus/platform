@@ -1,0 +1,27 @@
+name: Arrayable
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: toArray
+  visibility: public
+  parameters: []
+  comment: '# * @template TKey of array-key
+
+    # * @template TValue
+
+    # */
+
+    # interface Arrayable
+
+    # {
+
+    # /**
+
+    # * Get the instance as an array.
+
+    # *
+
+    # * @return array<TKey, TValue>'
+traits: []
+interfaces: []

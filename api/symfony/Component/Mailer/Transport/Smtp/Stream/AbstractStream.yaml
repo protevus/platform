@@ -1,0 +1,88 @@
+name: AbstractStream
+class_comment: null
+dependencies:
+- name: TransportException
+  type: class
+  source: Symfony\Component\Mailer\Exception\TransportException
+properties:
+- name: stream
+  visibility: protected
+  comment: '# * A stream supporting remote sockets and local processes.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # * @author Nicolas Grekas <p@tchwork.com>
+
+    # * @author Chris Corbyn
+
+    # *
+
+    # * @internal
+
+    # */
+
+    # abstract class AbstractStream
+
+    # {
+
+    # /** @var resource|null'
+- name: in
+  visibility: protected
+  comment: '# @var resource|null'
+- name: out
+  visibility: protected
+  comment: '# @var resource|null'
+- name: err
+  visibility: protected
+  comment: null
+methods:
+- name: flush
+  visibility: public
+  parameters: []
+  comment: "# * A stream supporting remote sockets and local processes.\n# *\n# *\
+    \ @author Fabien Potencier <fabien@symfony.com>\n# * @author Nicolas Grekas <p@tchwork.com>\n\
+    # * @author Chris Corbyn\n# *\n# * @internal\n# */\n# abstract class AbstractStream\n\
+    # {\n# /** @var resource|null */\n# protected $stream;\n# /** @var resource|null\
+    \ */\n# protected $in;\n# /** @var resource|null */\n# protected $out;\n# protected\
+    \ $err;\n# \n# private string $debug = '';\n# \n# public function write(string\
+    \ $bytes, bool $debug = true): void\n# {\n# if ($debug) {\n# $timestamp = date('c');\n\
+    # foreach (explode(\"\\n\", trim($bytes)) as $line) {\n# $this->debug .= \\sprintf(\"\
+    [%s] > %s\\n\", $timestamp, $line);\n# }\n# }\n# \n# $bytesToWrite = \\strlen($bytes);\n\
+    # $totalBytesWritten = 0;\n# while ($totalBytesWritten < $bytesToWrite) {\n# $bytesWritten\
+    \ = @fwrite($this->in, substr($bytes, $totalBytesWritten));\n# if (false === $bytesWritten\
+    \ || 0 === $bytesWritten) {\n# throw new TransportException('Unable to write bytes\
+    \ on the wire.');\n# }\n# \n# $totalBytesWritten += $bytesWritten;\n# }\n# }\n\
+    # \n# /**\n# * Flushes the contents of the stream (empty it) and set the internal\
+    \ pointer to the beginning."
+- name: initialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: terminate
+  visibility: public
+  parameters: []
+  comment: null
+- name: readLine
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDebug
+  visibility: public
+  parameters: []
+  comment: null
+- name: replace
+  visibility: public
+  parameters:
+  - name: from
+  - name: to
+  - name: chunks
+  comment: null
+- name: getReadConnectionDescription
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Mailer\Exception\TransportException
+interfaces: []

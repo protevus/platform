@@ -1,0 +1,350 @@
+name: FormValidatorTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: CallbackTransformer
+  type: class
+  source: Symfony\Component\Form\CallbackTransformer
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+- name: DataMapper
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataMapper\DataMapper
+- name: Form
+  type: class
+  source: Symfony\Component\Form\Extension\Validator\Constraints\Form
+- name: FormValidator
+  type: class
+  source: Symfony\Component\Form\Extension\Validator\Constraints\FormValidator
+- name: ValidatorExtension
+  type: class
+  source: Symfony\Component\Form\Extension\Validator\ValidatorExtension
+- name: FormBuilder
+  type: class
+  source: Symfony\Component\Form\FormBuilder
+- name: FormFactoryBuilder
+  type: class
+  source: Symfony\Component\Form\FormFactoryBuilder
+- name: FormFactoryInterface
+  type: class
+  source: Symfony\Component\Form\FormFactoryInterface
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+- name: SubmitButtonBuilder
+  type: class
+  source: Symfony\Component\Form\SubmitButtonBuilder
+- name: IdentityTranslator
+  type: class
+  source: Symfony\Component\Translation\IdentityTranslator
+- name: GroupSequence
+  type: class
+  source: Symfony\Component\Validator\Constraints\GroupSequence
+- name: Length
+  type: class
+  source: Symfony\Component\Validator\Constraints\Length
+- name: NotBlank
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotBlank
+- name: NotNull
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotNull
+- name: Valid
+  type: class
+  source: Symfony\Component\Validator\Constraints\Valid
+- name: ExecutionContext
+  type: class
+  source: Symfony\Component\Validator\Context\ExecutionContext
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+- name: Validation
+  type: class
+  source: Symfony\Component\Validator\Validation
+properties: []
+methods:
+- name: getValidationGroups
+  visibility: public
+  parameters:
+  - name: form
+  comment: "# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# class FormValidatorTest\
+    \ extends ConstraintValidatorTestCase\n# {\n# private EventDispatcher $dispatcher;\n\
+    # private FormFactoryInterface $factory;\n# \n# protected function setUp(): void\n\
+    # {\n# $this->dispatcher = new EventDispatcher();\n# $this->factory = (new FormFactoryBuilder())\n\
+    # ->addExtension(new ValidatorExtension(Validation::createValidator()))\n# ->getFormFactory();\n\
+    # \n# parent::setUp();\n# \n# $this->constraint = new Form();\n# }\n# \n# public\
+    \ function testValidate()\n# {\n# $object = new \\stdClass();\n# $options = ['validation_groups'\
+    \ => ['group1', 'group2']];\n# $form = $this->getCompoundForm($object, $options);\n\
+    # $form->submit([]);\n# \n# $this->expectValidateAt(0, 'data', $object, ['group1',\
+    \ 'group2']);\n# \n# $this->validator->validate($form, new Form());\n# \n# $this->assertNoViolation();\n\
+    # }\n# \n# public function testValidateConstraints()\n# {\n# $object = new \\\
+    stdClass();\n# $constraint1 = new NotNull(['groups' => ['group1', 'group2']]);\n\
+    # $constraint2 = new NotBlank(['groups' => 'group2']);\n# $constraint3 = new Length(['groups'\
+    \ => 'group2', 'min' => 3]);\n# \n# $options = [\n# 'validation_groups' => ['group1',\
+    \ 'group2'],\n# 'constraints' => [$constraint1, $constraint2, $constraint3],\n\
+    # ];\n# $form = $this->getCompoundForm($object, $options);\n# $form->submit([]);\n\
+    # \n# // First default constraints\n# $this->expectValidateAt(0, 'data', $object,\
+    \ ['group1', 'group2']);\n# \n# // Then custom constraints\n# $this->expectValidateValueAt(1,\
+    \ 'data', $object, [$constraint1], 'group1');\n# $this->expectValidateValueAt(2,\
+    \ 'data', $object, [$constraint2, $constraint3], 'group2');\n# \n# $this->validator->validate($form,\
+    \ new Form());\n# \n# $this->assertNoViolation();\n# }\n# \n# public function\
+    \ testValidateChildIfValidConstraint()\n# {\n# $object = new \\stdClass();\n#\
+    \ \n# $parent = $this->getBuilder('parent')\n# ->setCompound(true)\n# ->setDataMapper(new\
+    \ DataMapper())\n# ->getForm();\n# $options = [\n# 'validation_groups' => ['group1',\
+    \ 'group2'],\n# 'constraints' => [new Valid()],\n# ];\n# $form = $this->getCompoundForm($object,\
+    \ $options);\n# $parent->add($form);\n# $parent->submit([]);\n# \n# $this->expectValidateAt(0,\
+    \ 'data', $object, ['group1', 'group2']);\n# \n# $this->validator->validate($form,\
+    \ new Form());\n# \n# $this->assertNoViolation();\n# }\n# \n# public function\
+    \ testDontValidateIfParentWithoutValidConstraint()\n# {\n# $object = new \\stdClass();\n\
+    # \n# $parent = $this->getBuilder('parent', null)\n# ->setCompound(true)\n# ->setDataMapper(new\
+    \ DataMapper())\n# ->getForm();\n# $options = ['validation_groups' => ['group1',\
+    \ 'group2']];\n# $form = $this->getBuilder('name', '\\stdClass', $options)->getForm();\n\
+    # $parent->add($form);\n# \n# $form->setData($object);\n# $parent->submit([]);\n\
+    # \n# $this->assertTrue($form->isSubmitted());\n# $this->assertTrue($form->isSynchronized());\n\
+    # $this->expectNoValidate();\n# \n# $this->validator->validate($form, new Form());\n\
+    # \n# $this->assertNoViolation();\n# }\n# \n# public function testMissingConstraintIndex()\n\
+    # {\n# $object = new \\stdClass();\n# $form = $this->getCompoundForm($object);\n\
+    # $form->submit([]);\n# \n# $this->expectValidateAt(0, 'data', $object, ['Default']);\n\
+    # \n# $this->validator->validate($form, new Form());\n# \n# $this->assertNoViolation();\n\
+    # }\n# \n# public function testValidateConstraintsOptionEvenIfNoValidConstraint()\n\
+    # {\n# $object = new \\stdClass();\n# $constraint1 = new NotNull(['groups' =>\
+    \ ['group1', 'group2']]);\n# $constraint2 = new NotBlank(['groups' => 'group2']);\n\
+    # \n# $parent = $this->getBuilder('parent', null)\n# ->setCompound(true)\n# ->setDataMapper(new\
+    \ DataMapper())\n# ->getForm();\n# $options = [\n# 'validation_groups' => ['group1',\
+    \ 'group2'],\n# 'constraints' => [$constraint1, $constraint2],\n# ];\n# $form\
+    \ = $this->getCompoundForm($object, $options);\n# $parent->add($form);\n# $parent->submit([]);\n\
+    # \n# $this->expectValidateValueAt(0, 'data', $object, [$constraint1], 'group1');\n\
+    # $this->expectValidateValueAt(1, 'data', $object, [$constraint2], 'group2');\n\
+    # \n# $this->validator->validate($form, new Form());\n# \n# $this->assertNoViolation();\n\
+    # }\n# \n# public function testDontValidateIfNoValidationGroups()\n# {\n# $object\
+    \ = new \\stdClass();\n# \n# $form = $this->getBuilder('name', '\\stdClass', [\n\
+    # 'validation_groups' => [],\n# ])\n# ->setData($object)\n# ->setCompound(true)\n\
+    # ->setDataMapper(new DataMapper())\n# ->getForm();\n# \n# $form->setData($object);\n\
+    # $form->submit([]);\n# \n# $this->assertTrue($form->isSubmitted());\n# $this->assertTrue($form->isSynchronized());\n\
+    # $this->expectNoValidate();\n# \n# $this->validator->validate($form, new Form());\n\
+    # \n# $this->assertNoViolation();\n# }\n# \n# public function testDontValidateConstraintsIfNoValidationGroups()\n\
+    # {\n# $object = new \\stdClass();\n# \n# $options = [\n# 'validation_groups'\
+    \ => [],\n# 'constraints' => [new NotBlank(), new NotNull()],\n# ];\n# $form =\
+    \ $this->getBuilder('name', '\\stdClass', $options)\n# ->setData($object)\n# ->getForm();\n\
+    # \n# // Launch transformer\n# $form->submit('foo');\n# \n# $this->assertTrue($form->isSubmitted());\n\
+    # $this->assertTrue($form->isSynchronized());\n# $this->expectNoValidate();\n\
+    # \n# $this->validator->validate($form, new Form());\n# \n# $this->assertNoViolation();\n\
+    # }\n# \n# public function testDontValidateChildConstraintsIfCallableNoValidationGroups()\n\
+    # {\n# $formOptions = [\n# 'constraints' => [new Valid()],\n# 'validation_groups'\
+    \ => [],\n# ];\n# $form = $this->getBuilder('name', null, $formOptions)\n# ->setCompound(true)\n\
+    # ->setDataMapper(new DataMapper())\n# ->getForm();\n# $childOptions = ['constraints'\
+    \ => [new NotBlank()]];\n# $child = $this->getCompoundForm(new \\stdClass(), $childOptions);\n\
+    # $form->add($child);\n# $form->submit([]);\n# \n# $this->assertTrue($form->isSubmitted());\n\
+    # $this->assertTrue($form->isSynchronized());\n# $this->expectNoValidate();\n\
+    # \n# $this->validator->validate($form, new Form());\n# \n# $this->assertNoViolation();\n\
+    # }\n# \n# public function testDontValidateIfNotSynchronized()\n# {\n# $object\
+    \ = new \\stdClass();\n# \n# $form = $this->getBuilder('name', '\\stdClass', [\n\
+    # 'invalid_message' => 'invalid_message_key',\n# // Invalid message parameters\
+    \ must be supported, because the\n# // invalid message can be a translation key\n\
+    # // see https://github.com/symfony/symfony/issues/5144\n# 'invalid_message_parameters'\
+    \ => ['{{ foo }}' => 'bar'],\n# ])\n# ->setData($object)\n# ->addViewTransformer(new\
+    \ CallbackTransformer(\n# static fn ($data) => $data,\n# static fn () => throw\
+    \ new TransformationFailedException()\n# ))\n# ->getForm();\n# \n# // Launch transformer\n\
+    # $form->submit('foo');\n# \n# $this->assertTrue($form->isSubmitted());\n# $this->assertFalse($form->isSynchronized());\n\
+    # $this->expectNoValidate();\n# \n# $this->validator->validate($form, new Form());\n\
+    # \n# $this->buildViolation('invalid_message_key')\n# ->setParameter('{{ value\
+    \ }}', 'foo')\n# ->setParameter('{{ foo }}', 'bar')\n# ->setInvalidValue('foo')\n\
+    # ->setCode(Form::NOT_SYNCHRONIZED_ERROR)\n# ->setCause($form->getTransformationFailure())\n\
+    # ->assertRaised();\n# }\n# \n# public function testAddInvalidErrorEvenIfNoValidationGroups()\n\
+    # {\n# $object = new \\stdClass();\n# \n# $form = $this->getBuilder('name', '\\\
+    stdClass', [\n# 'invalid_message' => 'invalid_message_key',\n# // Invalid message\
+    \ parameters must be supported, because the\n# // invalid message can be a translation\
+    \ key\n# // see https://github.com/symfony/symfony/issues/5144\n# 'invalid_message_parameters'\
+    \ => ['{{ foo }}' => 'bar'],\n# 'validation_groups' => [],\n# ])\n# ->setData($object)\n\
+    # ->addViewTransformer(new CallbackTransformer(\n# static fn ($data) => $data,\n\
+    # static fn () => throw new TransformationFailedException()\n# ))\n# ->getForm();\n\
+    # \n# // Launch transformer\n# $form->submit('foo');\n# \n# $this->assertTrue($form->isSubmitted());\n\
+    # $this->assertFalse($form->isSynchronized());\n# $this->expectNoValidate();\n\
+    # \n# $this->validator->validate($form, new Form());\n# \n# $this->buildViolation('invalid_message_key')\n\
+    # ->setParameter('{{ value }}', 'foo')\n# ->setParameter('{{ foo }}', 'bar')\n\
+    # ->setInvalidValue('foo')\n# ->setCode(Form::NOT_SYNCHRONIZED_ERROR)\n# ->setCause($form->getTransformationFailure())\n\
+    # ->assertRaised();\n# }\n# \n# public function testDontValidateConstraintsIfNotSynchronized()\n\
+    # {\n# $object = new \\stdClass();\n# \n# $options = [\n# 'invalid_message' =>\
+    \ 'invalid_message_key',\n# 'validation_groups' => ['group1', 'group2'],\n# 'constraints'\
+    \ => [new NotBlank(), new NotBlank()],\n# ];\n# $form = $this->getBuilder('name',\
+    \ '\\stdClass', $options)\n# ->setData($object)\n# ->addViewTransformer(new CallbackTransformer(\n\
+    # static fn ($data) => $data,\n# static fn () => throw new TransformationFailedException()\n\
+    # ))\n# ->getForm();\n# \n# // Launch transformer\n# $form->submit('foo');\n#\
+    \ \n# $this->expectNoValidate();\n# \n# $this->validator->validate($form, new\
+    \ Form());\n# \n# $this->buildViolation('invalid_message_key')\n# ->setParameter('{{\
+    \ value }}', 'foo')\n# ->setInvalidValue('foo')\n# ->setCode(Form::NOT_SYNCHRONIZED_ERROR)\n\
+    # ->setCause($form->getTransformationFailure())\n# ->assertRaised();\n# }\n# \n\
+    # public function testTransformationFailedExceptionInvalidMessageIsUsed()\n# {\n\
+    # $object = new \\stdClass();\n# \n# $form = $this\n# ->getBuilder('name', '\\\
+    stdClass', [\n# 'invalid_message' => 'invalid_message_key',\n# 'invalid_message_parameters'\
+    \ => ['{{ foo }}' => 'foo'],\n# ])\n# ->setData($object)\n# ->addViewTransformer(new\
+    \ CallbackTransformer(\n# static fn ($data) => $data,\n# static function () {\n\
+    # $failure = new TransformationFailedException();\n# $failure->setInvalidMessage('safe\
+    \ message to be used', ['{{ bar }}' => 'bar']);\n# \n# throw $failure;\n# }\n\
+    # ))\n# ->getForm()\n# ;\n# \n# $form->submit('value');\n# \n# $this->expectNoValidate();\n\
+    # \n# $this->validator->validate($form, new Form());\n# \n# $this->buildViolation('safe\
+    \ message to be used')\n# ->setParameters([\n# '{{ value }}' => 'value',\n# '{{\
+    \ foo }}' => 'foo',\n# '{{ bar }}' => 'bar',\n# ])\n# ->setInvalidValue('value')\n\
+    # ->setCode(Form::NOT_SYNCHRONIZED_ERROR)\n# ->setCause($form->getTransformationFailure())\n\
+    # ->assertRaised()\n# ;\n# }\n# \n# public function testHandleGroupSequenceValidationGroups()\n\
+    # {\n# $object = new \\stdClass();\n# $options = ['validation_groups' => new GroupSequence(['group1',\
+    \ 'group2'])];\n# $form = $this->getCompoundForm($object, $options);\n# $form->submit([]);\n\
+    # \n# $this->expectValidateAt(0, 'data', $object, 'group1');\n# $this->expectValidateAt(1,\
+    \ 'data', $object, 'group2');\n# \n# $this->validator->validate($form, new Form());\n\
+    # \n# $this->assertNoViolation();\n# }\n# \n# public function testHandleCallbackValidationGroups()\n\
+    # {\n# $object = new \\stdClass();\n# $options = ['validation_groups' => $this->getValidationGroups(...)];\n\
+    # $form = $this->getCompoundForm($object, $options);\n# $form->submit([]);\n#\
+    \ \n# $this->expectValidateAt(0, 'data', $object, ['group1', 'group2']);\n# \n\
+    # $this->validator->validate($form, new Form());\n# \n# $this->assertNoViolation();\n\
+    # }\n# \n# public function testDontExecuteFunctionNames()\n# {\n# $object = new\
+    \ \\stdClass();\n# $options = ['validation_groups' => 'header'];\n# $form = $this->getCompoundForm($object,\
+    \ $options);\n# $form->submit([]);\n# \n# $this->expectValidateAt(0, 'data', $object,\
+    \ ['header']);\n# \n# $this->validator->validate($form, new Form());\n# \n# $this->assertNoViolation();\n\
+    # }\n# \n# public function testHandleClosureValidationGroups()\n# {\n# $object\
+    \ = new \\stdClass();\n# $options = ['validation_groups' => fn (FormInterface\
+    \ $form) => ['group1', 'group2']];\n# $form = $this->getCompoundForm($object,\
+    \ $options);\n# $form->submit([]);\n# \n# $this->expectValidateAt(0, 'data', $object,\
+    \ ['group1', 'group2']);\n# \n# $this->validator->validate($form, new Form());\n\
+    # \n# $this->assertNoViolation();\n# }\n# \n# public function testUseValidationGroupOfClickedButton()\n\
+    # {\n# $object = new \\stdClass();\n# \n# $parent = $this->getBuilder('parent')\n\
+    # ->setCompound(true)\n# ->setDataMapper(new DataMapper())\n# ->getForm();\n#\
+    \ $form = $this->getForm('name', '\\stdClass', [\n# 'validation_groups' => 'form_group',\n\
+    # 'constraints' => [new Valid()],\n# ]);\n# \n# $parent->add($form);\n# $parent->add($this->getSubmitButton('submit',\
+    \ [\n# 'validation_groups' => 'button_group',\n# ]));\n# \n# $parent->submit(['name'\
+    \ => $object, 'submit' => '']);\n# \n# $this->expectValidateAt(0, 'data', $object,\
+    \ ['button_group']);\n# \n# $this->validator->validate($form, new Form());\n#\
+    \ \n# $this->assertNoViolation();\n# }\n# \n# public function testDontUseValidationGroupOfUnclickedButton()\n\
+    # {\n# $object = new \\stdClass();\n# \n# $parent = $this->getBuilder('parent')\n\
+    # ->setCompound(true)\n# ->setDataMapper(new DataMapper())\n# ->getForm();\n#\
+    \ $form = $this->getCompoundForm($object, [\n# 'validation_groups' => 'form_group',\n\
+    # 'constraints' => [new Valid()],\n# ]);\n# \n# $parent->add($form);\n# $parent->add($this->getSubmitButton('submit',\
+    \ [\n# 'validation_groups' => 'button_group',\n# ]));\n# \n# $parent->submit([]);\n\
+    # \n# $this->expectValidateAt(0, 'data', $object, ['form_group']);\n# \n# $this->validator->validate($form,\
+    \ new Form());\n# \n# $this->assertNoViolation();\n# }\n# \n# public function\
+    \ testUseInheritedValidationGroup()\n# {\n# $object = new \\stdClass();\n# \n\
+    # $parentOptions = ['validation_groups' => 'group'];\n# $parent = $this->getBuilder('parent',\
+    \ null, $parentOptions)\n# ->setCompound(true)\n# ->setDataMapper(new DataMapper())\n\
+    # ->getForm();\n# $formOptions = ['constraints' => [new Valid()]];\n# $form =\
+    \ $this->getCompoundForm($object, $formOptions);\n# $parent->add($form);\n# $parent->submit([]);\n\
+    # \n# $this->expectValidateAt(0, 'data', $object, ['group']);\n# \n# $this->validator->validate($form,\
+    \ new Form());\n# \n# $this->assertNoViolation();\n# }\n# \n# public function\
+    \ testUseInheritedCallbackValidationGroup()\n# {\n# $object = new \\stdClass();\n\
+    # \n# $parentOptions = ['validation_groups' => $this->getValidationGroups(...)];\n\
+    # $parent = $this->getBuilder('parent', null, $parentOptions)\n# ->setCompound(true)\n\
+    # ->setDataMapper(new DataMapper())\n# ->getForm();\n# $formOptions = ['constraints'\
+    \ => [new Valid()]];\n# $form = $this->getCompoundForm($object, $formOptions);\n\
+    # $parent->add($form);\n# $parent->submit([]);\n# \n# $this->expectValidateAt(0,\
+    \ 'data', $object, ['group1', 'group2']);\n# \n# $this->validator->validate($form,\
+    \ new Form());\n# \n# $this->assertNoViolation();\n# }\n# \n# public function\
+    \ testUseInheritedClosureValidationGroup()\n# {\n# $object = new \\stdClass();\n\
+    # \n# $parentOptions = [\n# 'validation_groups' => fn () => ['group1', 'group2'],\n\
+    # ];\n# $parent = $this->getBuilder('parent', null, $parentOptions)\n# ->setCompound(true)\n\
+    # ->setDataMapper(new DataMapper())\n# ->getForm();\n# $formOptions = ['constraints'\
+    \ => [new Valid()]];\n# $form = $this->getCompoundForm($object, $formOptions);\n\
+    # $parent->add($form);\n# $parent->submit([]);\n# \n# $this->expectValidateAt(0,\
+    \ 'data', $object, ['group1', 'group2']);\n# \n# $this->validator->validate($form,\
+    \ new Form());\n# \n# $this->assertNoViolation();\n# }\n# \n# public function\
+    \ testAppendPropertyPath()\n# {\n# $object = new \\stdClass();\n# $form = $this->getCompoundForm($object);\n\
+    # $form->submit([]);\n# \n# $this->expectValidateAt(0, 'data', $object, ['Default']);\n\
+    # \n# $this->validator->validate($form, new Form());\n# \n# $this->assertNoViolation();\n\
+    # }\n# \n# public function testDontWalkScalars()\n# {\n# $form = $this->getBuilder()\n\
+    # ->setData('scalar')\n# ->getForm();\n# $form->submit('foo');\n# \n# $this->assertTrue($form->isSubmitted());\n\
+    # $this->assertTrue($form->isSynchronized());\n# $this->expectNoValidate();\n\
+    # \n# $this->validator->validate($form, new Form());\n# \n# $this->assertNoViolation();\n\
+    # }\n# \n# public function testViolationIfExtraData()\n# {\n# $form = $this->getBuilder('parent',\
+    \ null, ['extra_fields_message' => 'Extra!|Extras!'])\n# ->setCompound(true)\n\
+    # ->setDataMapper(new DataMapper())\n# ->add($this->getBuilder('child'))\n# ->getForm();\n\
+    # \n# $form->submit(['foo' => 'bar']);\n# \n# $this->assertTrue($form->isSubmitted());\n\
+    # $this->assertTrue($form->isSynchronized());\n# \n# $this->expectValidateValueAt(0,\
+    \ 'children[child]', $form->get('child'), new Form());\n# \n# $this->validator->validate($form,\
+    \ new Form());\n# \n# $this->buildViolation('Extra!|Extras!')\n# ->setParameter('{{\
+    \ extra_fields }}', '\"foo\"')\n# ->setInvalidValue(['foo' => 'bar'])\n# ->setPlural(1)\n\
+    # ->setCode(Form::NO_SUCH_FIELD_ERROR)\n# ->assertRaised();\n# }\n# \n# public\
+    \ function testViolationFormatIfMultipleExtraFields()\n# {\n# $form = $this->getBuilder('parent',\
+    \ null, ['extra_fields_message' => 'Extra!|Extras!!'])\n# ->setCompound(true)\n\
+    # ->setDataMapper(new DataMapper())\n# ->add($this->getBuilder('child'))\n# ->getForm();\n\
+    # \n# $form->submit(['foo' => 'bar', 'baz' => 'qux', 'quux' => 'quuz']);\n# \n\
+    # $this->assertTrue($form->isSubmitted());\n# $this->assertTrue($form->isSynchronized());\n\
+    # \n# $this->expectValidateValueAt(0, 'children[child]', $form->get('child'),\
+    \ new Form());\n# \n# $this->validator->validate($form, new Form());\n# \n# $this->buildViolation('Extra!|Extras!!')\n\
+    # ->setParameter('{{ extra_fields }}', '\"foo\", \"baz\", \"quux\"')\n# ->setInvalidValue(['foo'\
+    \ => 'bar', 'baz' => 'qux', 'quux' => 'quuz'])\n# ->setPlural(3)\n# ->setCode(Form::NO_SUCH_FIELD_ERROR)\n\
+    # ->assertRaised();\n# }\n# \n# public function testNoViolationIfAllowExtraData()\n\
+    # {\n# $form = $this\n# ->getBuilder('parent', null, ['allow_extra_fields' =>\
+    \ true])\n# ->setCompound(true)\n# ->setDataMapper(new DataMapper())\n# ->add($this->getBuilder('child'))\n\
+    # ->getForm();\n# \n# $context = new ExecutionContext(Validation::createValidator(),\
+    \ $form, new IdentityTranslator());\n# \n# $form->submit(['foo' => 'bar']);\n\
+    # \n# $this->validator->initialize($context);\n# $this->validator->validate($form,\
+    \ new Form());\n# \n# $this->assertCount(0, $context->getViolations());\n# }\n\
+    # \n# /**\n# * Access has to be public, as this method is called via callback\
+    \ array\n# * in {@link testValidateFormDataCanHandleCallbackValidationGroups()}\n\
+    # * and {@link testValidateFormDataUsesInheritedCallbackValidationGroup()}."
+- name: testCauseForNotAllowedExtraFieldsIsTheFormConstraint
+  visibility: public
+  parameters: []
+  comment: null
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getBuilder
+  visibility: private
+  parameters:
+  - name: name
+    default: '''name'''
+  - name: dataClass
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: null
+- name: getForm
+  visibility: private
+  parameters:
+  - name: name
+    default: '''name'''
+  - name: dataClass
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: null
+- name: getCompoundForm
+  visibility: private
+  parameters:
+  - name: data
+  - name: options
+    default: '[]'
+  comment: null
+- name: getSubmitButton
+  visibility: private
+  parameters:
+  - name: name
+    default: '''name'''
+  - name: options
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\Form\CallbackTransformer
+- Symfony\Component\Form\Exception\TransformationFailedException
+- Symfony\Component\Form\Extension\Core\DataMapper\DataMapper
+- Symfony\Component\Form\Extension\Validator\Constraints\Form
+- Symfony\Component\Form\Extension\Validator\Constraints\FormValidator
+- Symfony\Component\Form\Extension\Validator\ValidatorExtension
+- Symfony\Component\Form\FormBuilder
+- Symfony\Component\Form\FormFactoryBuilder
+- Symfony\Component\Form\FormFactoryInterface
+- Symfony\Component\Form\FormInterface
+- Symfony\Component\Form\SubmitButtonBuilder
+- Symfony\Component\Translation\IdentityTranslator
+- Symfony\Component\Validator\Constraints\GroupSequence
+- Symfony\Component\Validator\Constraints\Length
+- Symfony\Component\Validator\Constraints\NotBlank
+- Symfony\Component\Validator\Constraints\NotNull
+- Symfony\Component\Validator\Constraints\Valid
+- Symfony\Component\Validator\Context\ExecutionContext
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+- Symfony\Component\Validator\Validation
+interfaces: []

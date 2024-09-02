@@ -1,0 +1,23 @@
+name: ParseExceptionTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ParseException
+  type: class
+  source: Symfony\Component\Yaml\Exception\ParseException
+properties: []
+methods:
+- name: testGetMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetMessageWithUnicodeInFilename
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Yaml\Exception\ParseException
+interfaces: []

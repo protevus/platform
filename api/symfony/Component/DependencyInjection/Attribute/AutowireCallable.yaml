@@ -1,0 +1,57 @@
+name: AutowireCallable
+class_comment: null
+dependencies:
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: LogicException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\LogicException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: callable
+    default: 'null'
+  - name: service
+    default: 'null'
+  - name: method
+    default: 'null'
+  - name: lazy
+    default: 'false'
+  comment: '# * Attribute to tell which callable to give to an argument of type Closure.
+
+    # */
+
+    # #[\Attribute(\Attribute::TARGET_PARAMETER)]
+
+    # class AutowireCallable extends AutowireInline
+
+    # {
+
+    # /**
+
+    # * @param string|array|null $callable The callable to autowire
+
+    # * @param string|null       $service  The service containing the callable to
+    autowire
+
+    # * @param string|null       $method   The method name that will be autowired
+
+    # * @param bool|class-string $lazy     Whether to use lazy-loading for this argument'
+- name: buildDefinition
+  visibility: public
+  parameters:
+  - name: value
+  - name: type
+  - name: parameter
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\LogicException
+- Symfony\Component\DependencyInjection\Reference
+interfaces: []

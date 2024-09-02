@@ -1,0 +1,104 @@
+name: FormBuilder
+class_comment: '# * A builder for creating {@link Form} instances.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @implements \IteratorAggregate<string, FormBuilderInterface>'
+dependencies:
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcherInterface
+- name: BadMethodCallException
+  type: class
+  source: Symfony\Component\Form\Exception\BadMethodCallException
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Form\Exception\InvalidArgumentException
+- name: TextType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\TextType
+properties: []
+methods:
+- name: getIterator
+  visibility: public
+  parameters: []
+  comment: "# * A builder for creating {@link Form} instances.\n# *\n# * @author Bernhard\
+    \ Schussek <bschussek@gmail.com>\n# *\n# * @implements \\IteratorAggregate<string,\
+    \ FormBuilderInterface>\n# */\n# class FormBuilder extends FormConfigBuilder implements\
+    \ \\IteratorAggregate, FormBuilderInterface\n# {\n# /**\n# * The children of the\
+    \ form builder.\n# *\n# * @var FormBuilderInterface[]\n# */\n# private array $children\
+    \ = [];\n# \n# /**\n# * The data of children who haven't been converted to form\
+    \ builders yet.\n# */\n# private array $unresolvedChildren = [];\n# \n# public\
+    \ function __construct(?string $name, ?string $dataClass, EventDispatcherInterface\
+    \ $dispatcher, FormFactoryInterface $factory, array $options = [])\n# {\n# parent::__construct($name,\
+    \ $dataClass, $dispatcher, $options);\n# \n# $this->setFormFactory($factory);\n\
+    # }\n# \n# public function add(FormBuilderInterface|string $child, ?string $type\
+    \ = null, array $options = []): static\n# {\n# if ($this->locked) {\n# throw new\
+    \ BadMethodCallException('FormBuilder methods cannot be accessed anymore once\
+    \ the builder is turned into a FormConfigInterface instance.');\n# }\n# \n# if\
+    \ ($child instanceof FormBuilderInterface) {\n# $this->children[$child->getName()]\
+    \ = $child;\n# \n# // In case an unresolved child with the same name exists\n\
+    # unset($this->unresolvedChildren[$child->getName()]);\n# \n# return $this;\n\
+    # }\n# \n# // Add to \"children\" to maintain order\n# $this->children[$child]\
+    \ = null;\n# $this->unresolvedChildren[$child] = [$type, $options];\n# \n# return\
+    \ $this;\n# }\n# \n# public function create(string $name, ?string $type = null,\
+    \ array $options = []): FormBuilderInterface\n# {\n# if ($this->locked) {\n# throw\
+    \ new BadMethodCallException('FormBuilder methods cannot be accessed anymore once\
+    \ the builder is turned into a FormConfigInterface instance.');\n# }\n# \n# if\
+    \ (null === $type && null === $this->getDataClass()) {\n# $type = TextType::class;\n\
+    # }\n# \n# if (null !== $type) {\n# return $this->getFormFactory()->createNamedBuilder($name,\
+    \ $type, null, $options);\n# }\n# \n# return $this->getFormFactory()->createBuilderForProperty($this->getDataClass(),\
+    \ $name, null, $options);\n# }\n# \n# public function get(string $name): FormBuilderInterface\n\
+    # {\n# if ($this->locked) {\n# throw new BadMethodCallException('FormBuilder methods\
+    \ cannot be accessed anymore once the builder is turned into a FormConfigInterface\
+    \ instance.');\n# }\n# \n# if (isset($this->unresolvedChildren[$name])) {\n# return\
+    \ $this->resolveChild($name);\n# }\n# \n# if (isset($this->children[$name])) {\n\
+    # return $this->children[$name];\n# }\n# \n# throw new InvalidArgumentException(\\\
+    sprintf('The child with the name \"%s\" does not exist.', $name));\n# }\n# \n\
+    # public function remove(string $name): static\n# {\n# if ($this->locked) {\n\
+    # throw new BadMethodCallException('FormBuilder methods cannot be accessed anymore\
+    \ once the builder is turned into a FormConfigInterface instance.');\n# }\n# \n\
+    # unset($this->unresolvedChildren[$name], $this->children[$name]);\n# \n# return\
+    \ $this;\n# }\n# \n# public function has(string $name): bool\n# {\n# if ($this->locked)\
+    \ {\n# throw new BadMethodCallException('FormBuilder methods cannot be accessed\
+    \ anymore once the builder is turned into a FormConfigInterface instance.');\n\
+    # }\n# \n# return isset($this->unresolvedChildren[$name]) || isset($this->children[$name]);\n\
+    # }\n# \n# public function all(): array\n# {\n# if ($this->locked) {\n# throw\
+    \ new BadMethodCallException('FormBuilder methods cannot be accessed anymore once\
+    \ the builder is turned into a FormConfigInterface instance.');\n# }\n# \n# $this->resolveChildren();\n\
+    # \n# return $this->children;\n# }\n# \n# public function count(): int\n# {\n\
+    # if ($this->locked) {\n# throw new BadMethodCallException('FormBuilder methods\
+    \ cannot be accessed anymore once the builder is turned into a FormConfigInterface\
+    \ instance.');\n# }\n# \n# return \\count($this->children);\n# }\n# \n# public\
+    \ function getFormConfig(): FormConfigInterface\n# {\n# /** @var $config self\
+    \ */\n# $config = parent::getFormConfig();\n# \n# $config->children = [];\n# $config->unresolvedChildren\
+    \ = [];\n# \n# return $config;\n# }\n# \n# public function getForm(): FormInterface\n\
+    # {\n# if ($this->locked) {\n# throw new BadMethodCallException('FormBuilder methods\
+    \ cannot be accessed anymore once the builder is turned into a FormConfigInterface\
+    \ instance.');\n# }\n# \n# $this->resolveChildren();\n# \n# $form = new Form($this->getFormConfig());\n\
+    # \n# foreach ($this->children as $child) {\n# // Automatic initialization is\
+    \ only supported on root forms\n# $form->add($child->setAutoInitialize(false)->getForm());\n\
+    # }\n# \n# if ($this->getAutoInitialize()) {\n# // Automatically initialize the\
+    \ form if it is configured so\n# $form->initialize();\n# }\n# \n# return $form;\n\
+    # }\n# \n# /**\n# * @return \\Traversable<string, FormBuilderInterface>"
+- name: resolveChild
+  visibility: private
+  parameters:
+  - name: name
+  comment: '# * Converts an unresolved child into a {@link FormBuilderInterface} instance.'
+- name: resolveChildren
+  visibility: private
+  parameters: []
+  comment: '# * Converts all unresolved children into {@link FormBuilder} instances.'
+traits:
+- Symfony\Component\EventDispatcher\EventDispatcherInterface
+- Symfony\Component\Form\Exception\BadMethodCallException
+- Symfony\Component\Form\Exception\InvalidArgumentException
+- Symfony\Component\Form\Extension\Core\Type\TextType
+interfaces:
+- \IteratorAggregate
+- \IteratorAggregate

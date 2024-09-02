@@ -1,0 +1,28 @@
+name: BufferedBundleReader
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: RingBuffer
+  type: class
+  source: Symfony\Component\Intl\Data\Util\RingBuffer
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: reader
+  - name: bufferSize
+  comment: null
+- name: read
+  visibility: public
+  parameters:
+  - name: path
+  - name: locale
+  comment: null
+traits:
+- Symfony\Component\Intl\Data\Util\RingBuffer
+interfaces:
+- BundleReaderInterface

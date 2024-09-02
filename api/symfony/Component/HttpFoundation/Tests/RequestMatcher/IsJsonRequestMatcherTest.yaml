@@ -1,0 +1,29 @@
+name: IsJsonRequestMatcherTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: IsJsonRequestMatcher
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestMatcher\IsJsonRequestMatcher
+properties: []
+methods:
+- name: test
+  visibility: public
+  parameters:
+  - name: json
+  - name: isValid
+  comment: '# * @dataProvider getData'
+- name: getData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestMatcher\IsJsonRequestMatcher
+interfaces: []

@@ -1,0 +1,31 @@
+name: AllTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: All
+  type: class
+  source: Symfony\Component\Validator\Constraints\All
+- name: Valid
+  type: class
+  source: Symfony\Component\Validator\Constraints\Valid
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+properties: []
+methods:
+- name: testRejectNonConstraints
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRejectValidConstraint
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\Constraints\All
+- Symfony\Component\Validator\Constraints\Valid
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+interfaces: []

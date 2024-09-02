@@ -1,0 +1,91 @@
+name: BackedEnumNormalizerTest
+class_comment: '# * @author Alexandre Daubois <alex.daubois@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Serializer\Exception\InvalidArgumentException
+- name: NotNormalizableValueException
+  type: class
+  source: Symfony\Component\Serializer\Exception\NotNormalizableValueException
+- name: BackedEnumNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\BackedEnumNormalizer
+- name: IntegerBackedEnumDummy
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\IntegerBackedEnumDummy
+- name: StringBackedEnumDummy
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\StringBackedEnumDummy
+- name: UnitEnumDummy
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\UnitEnumDummy
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testSupportsNormalization
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalizeBadObjectTypeThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupportsDenormalization
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalizeNullValueThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalizeBooleanValueThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalizeObjectThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalizeBadBackingValueThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalizeShouldThrowExceptionForNonEnumObjects
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalizeShouldThrowExceptionForNonEnumObjects
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupportsNormalizationShouldFailOnAnyPHPVersionForNonEnumObjects
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItUsesTryFromIfContextIsPassed
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Exception\InvalidArgumentException
+- Symfony\Component\Serializer\Exception\NotNormalizableValueException
+- Symfony\Component\Serializer\Normalizer\BackedEnumNormalizer
+- Symfony\Component\Serializer\Tests\Fixtures\IntegerBackedEnumDummy
+- Symfony\Component\Serializer\Tests\Fixtures\StringBackedEnumDummy
+- Symfony\Component\Serializer\Tests\Fixtures\UnitEnumDummy
+interfaces: []

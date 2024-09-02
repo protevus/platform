@@ -1,0 +1,40 @@
+name: BeanstalkdSender
+class_comment: '# * @author Antonio Pauletich <antonio.pauletich95@gmail.com>'
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: DelayStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\DelayStamp
+- name: SenderInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Sender\SenderInterface
+- name: PhpSerializer
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\PhpSerializer
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: connection
+  - name: serializer
+    default: 'null'
+  comment: null
+- name: send
+  visibility: public
+  parameters:
+  - name: envelope
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Stamp\DelayStamp
+- Symfony\Component\Messenger\Transport\Sender\SenderInterface
+- Symfony\Component\Messenger\Transport\Serialization\PhpSerializer
+- Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+interfaces:
+- SenderInterface

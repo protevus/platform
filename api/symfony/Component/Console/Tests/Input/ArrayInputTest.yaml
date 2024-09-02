@@ -1,0 +1,70 @@
+name: ArrayInputTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ArrayInput
+  type: class
+  source: Symfony\Component\Console\Input\ArrayInput
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputDefinition
+  type: class
+  source: Symfony\Component\Console\Input\InputDefinition
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+properties: []
+methods:
+- name: testGetFirstArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasParameterOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetParameterOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParseArguments
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParseOptions
+  visibility: public
+  parameters:
+  - name: input
+  - name: options
+  - name: expectedOptions
+  - name: message
+  comment: '# * @dataProvider provideOptions'
+- name: provideOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParseInvalidInput
+  visibility: public
+  parameters:
+  - name: parameters
+  - name: definition
+  - name: expectedExceptionMessage
+  comment: '# * @dataProvider provideInvalidInput'
+- name: provideInvalidInput
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Input\ArrayInput
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputDefinition
+- Symfony\Component\Console\Input\InputOption
+interfaces: []

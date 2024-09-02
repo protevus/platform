@@ -1,0 +1,114 @@
+name: SchemaState
+class_comment: null
+dependencies:
+- name: Connection
+  type: class
+  source: Illuminate\Database\Connection
+- name: Filesystem
+  type: class
+  source: Illuminate\Filesystem\Filesystem
+- name: Process
+  type: class
+  source: Symfony\Component\Process\Process
+properties:
+- name: connection
+  visibility: protected
+  comment: '# * The connection instance.
+
+    # *
+
+    # * @var \Illuminate\Database\Connection'
+- name: files
+  visibility: protected
+  comment: '# * The filesystem instance.
+
+    # *
+
+    # * @var \Illuminate\Filesystem\Filesystem'
+- name: migrationTable
+  visibility: protected
+  comment: '# * The name of the application''s migration table.
+
+    # *
+
+    # * @var string'
+- name: processFactory
+  visibility: protected
+  comment: '# * The process factory callback.
+
+    # *
+
+    # * @var callable'
+- name: output
+  visibility: protected
+  comment: '# * The output callable instance.
+
+    # *
+
+    # * @var callable'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: connection
+  - name: files
+    default: 'null'
+  - name: processFactory
+    default: 'null'
+  comment: "# * The connection instance.\n# *\n# * @var \\Illuminate\\Database\\Connection\n\
+    # */\n# protected $connection;\n# \n# /**\n# * The filesystem instance.\n# *\n\
+    # * @var \\Illuminate\\Filesystem\\Filesystem\n# */\n# protected $files;\n# \n\
+    # /**\n# * The name of the application's migration table.\n# *\n# * @var string\n\
+    # */\n# protected $migrationTable = 'migrations';\n# \n# /**\n# * The process\
+    \ factory callback.\n# *\n# * @var callable\n# */\n# protected $processFactory;\n\
+    # \n# /**\n# * The output callable instance.\n# *\n# * @var callable\n# */\n#\
+    \ protected $output;\n# \n# /**\n# * Create a new dumper instance.\n# *\n# * @param\
+    \  \\Illuminate\\Database\\Connection  $connection\n# * @param  \\Illuminate\\\
+    Filesystem\\Filesystem|null  $files\n# * @param  callable|null  $processFactory\n\
+    # * @return void"
+- name: makeProcess
+  visibility: public
+  parameters:
+  - name: '...$arguments'
+  comment: "# * Dump the database's schema into a file.\n# *\n# * @param  \\Illuminate\\\
+    Database\\Connection  $connection\n# * @param  string  $path\n# * @return void\n\
+    # */\n# abstract public function dump(Connection $connection, $path);\n# \n# /**\n\
+    # * Load the given schema file into the database.\n# *\n# * @param  string  $path\n\
+    # * @return void\n# */\n# abstract public function load($path);\n# \n# /**\n#\
+    \ * Create a new process instance.\n# *\n# * @param  mixed  ...$arguments\n# *\
+    \ @return \\Symfony\\Component\\Process\\Process"
+- name: hasMigrationTable
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the current connection has a migration table.
+
+    # *
+
+    # * @return bool'
+- name: withMigrationTable
+  visibility: public
+  parameters:
+  - name: table
+  comment: '# * Specify the name of the application''s migration table.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @return $this'
+- name: handleOutputUsing
+  visibility: public
+  parameters:
+  - name: output
+  comment: '# * Specify the callback that should be used to handle process output.
+
+    # *
+
+    # * @param  callable  $output
+
+    # * @return $this'
+traits:
+- Illuminate\Database\Connection
+- Illuminate\Filesystem\Filesystem
+- Symfony\Component\Process\Process
+interfaces: []

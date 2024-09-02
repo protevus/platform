@@ -1,0 +1,46 @@
+name: CompositeTypeTrait
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\TypeInfo\Exception\InvalidArgumentException
+- name: Type
+  type: class
+  source: Symfony\Component\TypeInfo\Type
+- name: TypeIdentifier
+  type: class
+  source: Symfony\Component\TypeInfo\TypeIdentifier
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: '...$types'
+  comment: "# * @author Mathias Arlaud <mathias.arlaud@gmail.com>\n# * @author Baptiste\
+    \ Leduc <baptiste.leduc@gmail.com>\n# *\n# * @internal\n# *\n# * @template T of\
+    \ Type\n# */\n# trait CompositeTypeTrait\n# {\n# /**\n# * @var list<T>\n# */\n\
+    # private readonly array $types;\n# \n# /**\n# * @param list<T> $types"
+- name: isA
+  visibility: public
+  parameters:
+  - name: subject
+  comment: null
+- name: getTypes
+  visibility: public
+  parameters: []
+  comment: '# * @return list<T>'
+- name: atLeastOneTypeIs
+  visibility: public
+  parameters:
+  - name: callable
+  comment: '# * @param callable(T): bool $callable'
+- name: everyTypeIs
+  visibility: public
+  parameters:
+  - name: callable
+  comment: '# * @param callable(T): bool $callable'
+traits:
+- Symfony\Component\TypeInfo\Exception\InvalidArgumentException
+- Symfony\Component\TypeInfo\Type
+- Symfony\Component\TypeInfo\TypeIdentifier
+interfaces: []

@@ -1,0 +1,27 @@
+name: QpMimeHeaderEncoder
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: initSafeMap
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: encodeString
+  visibility: public
+  parameters:
+  - name: string
+  - name: charset
+    default: '''utf-8'''
+  - name: firstLineOffset
+    default: '0'
+  - name: maxLineLength
+    default: '0'
+  comment: null
+traits: []
+interfaces:
+- MimeHeaderEncoderInterface

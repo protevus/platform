@@ -1,0 +1,35 @@
+name: ValueGuess
+class_comment: '# * Contains a guessed value.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: value
+  - name: confidence
+  comment: '# * Contains a guessed value.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # class ValueGuess extends Guess
+
+    # {
+
+    # /**
+
+    # * @param int $confidence The confidence that the guessed class name is correct'
+- name: getValue
+  visibility: public
+  parameters: []
+  comment: '# * Returns the guessed value.'
+traits: []
+interfaces: []

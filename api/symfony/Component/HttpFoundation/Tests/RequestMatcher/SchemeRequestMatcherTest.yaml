@@ -1,0 +1,34 @@
+name: SchemeRequestMatcherTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: SchemeRequestMatcher
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestMatcher\SchemeRequestMatcher
+properties: []
+methods:
+- name: test
+  visibility: public
+  parameters:
+  - name: requestScheme
+  - name: matcherScheme
+  - name: isMatch
+  comment: '# * @dataProvider getData'
+- name: testAlwaysMatchesOnParamsHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: getData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestMatcher\SchemeRequestMatcher
+interfaces: []

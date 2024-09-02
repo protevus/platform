@@ -1,0 +1,55 @@
+name: ValidateRequestListener
+class_comment: '# * Validates Requests.
+
+  # *
+
+  # * @author Magnus Nordlander <magnus@fervo.se>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: RequestEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\RequestEvent
+- name: KernelEvents
+  type: class
+  source: Symfony\Component\HttpKernel\KernelEvents
+properties: []
+methods:
+- name: onKernelRequest
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Validates Requests.
+
+    # *
+
+    # * @author Magnus Nordlander <magnus@fervo.se>
+
+    # *
+
+    # * @final
+
+    # */
+
+    # class ValidateRequestListener implements EventSubscriberInterface
+
+    # {
+
+    # /**
+
+    # * Performs the validation.'
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\HttpKernel\Event\RequestEvent
+- Symfony\Component\HttpKernel\KernelEvents
+interfaces:
+- EventSubscriberInterface

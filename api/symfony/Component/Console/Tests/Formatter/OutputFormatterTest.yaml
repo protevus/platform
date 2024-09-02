@@ -1,0 +1,132 @@
+name: OutputFormatterTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: OutputFormatter
+  type: class
+  source: Symfony\Component\Console\Formatter\OutputFormatter
+- name: OutputFormatterStyle
+  type: class
+  source: Symfony\Component\Console\Formatter\OutputFormatterStyle
+properties: []
+methods:
+- name: testEmptyTag
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLGCharEscaping
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBundledStyles
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNestedStyles
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAdjacentStyles
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStyleMatchingNotGreedy
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStyleEscaping
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDeepNestedStyles
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNewStyle
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRedefineStyle
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInlineStyle
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInlineStyleOptions
+  visibility: public
+  parameters:
+  - name: tag
+  - name: expected
+    default: 'null'
+  - name: input
+    default: 'null'
+  - name: truecolor
+    default: 'false'
+  comment: '# * @dataProvider provideInlineStyleOptionsCases'
+- name: provideInlineStyleOptionsCases
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideInlineStyleTagsWithUnknownOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNonStyleTag
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFormatLongString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFormatToStringObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFormatterHasStyles
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotDecoratedFormatterOnJediTermEmulator
+  visibility: public
+  parameters:
+  - name: input
+  - name: expectedNonDecoratedOutput
+  - name: expectedDecoratedOutput
+  - name: shouldBeJediTerm
+    default: 'false'
+  comment: '# * @dataProvider provideDecoratedAndNonDecoratedOutput'
+- name: testNotDecoratedFormatterOnIDEALikeEnvironment
+  visibility: public
+  parameters:
+  - name: input
+  - name: expectedNonDecoratedOutput
+  - name: expectedDecoratedOutput
+  - name: expectsIDEALikeTerminal
+    default: 'false'
+  comment: '# * @dataProvider provideDecoratedAndNonDecoratedOutput'
+- name: provideDecoratedAndNonDecoratedOutput
+  visibility: public
+  parameters: []
+  comment: null
+- name: testContentWithLineBreaks
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFormatAndWrap
+  visibility: public
+  parameters: []
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Formatter\OutputFormatter
+- Symfony\Component\Console\Formatter\OutputFormatterStyle
+interfaces: []

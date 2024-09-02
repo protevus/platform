@@ -1,0 +1,19 @@
+name: TableGuesser
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: guess
+  visibility: public
+  parameters:
+  - name: migration
+  comment: '# * Attempt to guess the table name and "creation" status of the given
+    migration.
+
+    # *
+
+    # * @param  string  $migration
+
+    # * @return array'
+traits: []
+interfaces: []

@@ -1,0 +1,107 @@
+name: BroadcastNotificationCreated
+class_comment: null
+dependencies:
+- name: PrivateChannel
+  type: class
+  source: Illuminate\Broadcasting\PrivateChannel
+- name: Queueable
+  type: class
+  source: Illuminate\Bus\Queueable
+- name: ShouldBroadcast
+  type: class
+  source: Illuminate\Contracts\Broadcasting\ShouldBroadcast
+- name: AnonymousNotifiable
+  type: class
+  source: Illuminate\Notifications\AnonymousNotifiable
+- name: SerializesModels
+  type: class
+  source: Illuminate\Queue\SerializesModels
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+properties:
+- name: notifiable
+  visibility: public
+  comment: '# * The notifiable entity who received the notification.
+
+    # *
+
+    # * @var mixed'
+- name: notification
+  visibility: public
+  comment: '# * The notification instance.
+
+    # *
+
+    # * @var \Illuminate\Notifications\Notification'
+- name: data
+  visibility: public
+  comment: '# * The notification data.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: notifiable
+  - name: notification
+  - name: data
+  comment: "# * The notifiable entity who received the notification.\n# *\n# * @var\
+    \ mixed\n# */\n# public $notifiable;\n# \n# /**\n# * The notification instance.\n\
+    # *\n# * @var \\Illuminate\\Notifications\\Notification\n# */\n# public $notification;\n\
+    # \n# /**\n# * The notification data.\n# *\n# * @var array\n# */\n# public $data\
+    \ = [];\n# \n# /**\n# * Create a new event instance.\n# *\n# * @param  mixed \
+    \ $notifiable\n# * @param  \\Illuminate\\Notifications\\Notification  $notification\n\
+    # * @param  array  $data\n# * @return void"
+- name: broadcastOn
+  visibility: public
+  parameters: []
+  comment: '# * Get the channels the event should broadcast on.
+
+    # *
+
+    # * @return array'
+- name: channelName
+  visibility: protected
+  parameters: []
+  comment: '# * Get the broadcast channel name for the event.
+
+    # *
+
+    # * @return array|string'
+- name: broadcastWith
+  visibility: public
+  parameters: []
+  comment: '# * Get the data that should be sent with the broadcasted event.
+
+    # *
+
+    # * @return array'
+- name: broadcastType
+  visibility: public
+  parameters: []
+  comment: '# * Get the type of the notification being broadcast.
+
+    # *
+
+    # * @return string'
+- name: broadcastAs
+  visibility: public
+  parameters: []
+  comment: '# * Get the event name of the notification being broadcast.
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Broadcasting\PrivateChannel
+- Illuminate\Bus\Queueable
+- Illuminate\Contracts\Broadcasting\ShouldBroadcast
+- Illuminate\Notifications\AnonymousNotifiable
+- Illuminate\Queue\SerializesModels
+- Illuminate\Support\Arr
+- Queueable
+interfaces:
+- ShouldBroadcast

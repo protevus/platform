@@ -1,0 +1,90 @@
+name: DispatchSchedulerEventListenerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Container
+  type: class
+  source: Symfony\Component\DependencyInjection\Container
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: WorkerMessageFailedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerMessageFailedEvent
+- name: WorkerMessageHandledEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerMessageHandledEvent
+- name: WorkerMessageReceivedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerMessageReceivedEvent
+- name: FailureEvent
+  type: class
+  source: Symfony\Component\Scheduler\Event\FailureEvent
+- name: PostRunEvent
+  type: class
+  source: Symfony\Component\Scheduler\Event\PostRunEvent
+- name: PreRunEvent
+  type: class
+  source: Symfony\Component\Scheduler\Event\PreRunEvent
+- name: DispatchSchedulerEventListener
+  type: class
+  source: Symfony\Component\Scheduler\EventListener\DispatchSchedulerEventListener
+- name: MessageContext
+  type: class
+  source: Symfony\Component\Scheduler\Generator\MessageContext
+- name: ScheduledStamp
+  type: class
+  source: Symfony\Component\Scheduler\Messenger\ScheduledStamp
+- name: RecurringMessage
+  type: class
+  source: Symfony\Component\Scheduler\RecurringMessage
+- name: SomeScheduleProvider
+  type: class
+  source: Symfony\Component\Scheduler\Tests\Fixtures\SomeScheduleProvider
+- name: TriggerInterface
+  type: class
+  source: Symfony\Component\Scheduler\Trigger\TriggerInterface
+properties: []
+methods:
+- name: testDispatchSchedulerEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: preRun
+  visibility: public
+  parameters:
+  - name: e
+  comment: null
+- name: postRun
+  visibility: public
+  parameters:
+  - name: e
+  comment: null
+- name: onFailure
+  visibility: public
+  parameters:
+  - name: e
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Container
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Event\WorkerMessageFailedEvent
+- Symfony\Component\Messenger\Event\WorkerMessageHandledEvent
+- Symfony\Component\Messenger\Event\WorkerMessageReceivedEvent
+- Symfony\Component\Scheduler\Event\FailureEvent
+- Symfony\Component\Scheduler\Event\PostRunEvent
+- Symfony\Component\Scheduler\Event\PreRunEvent
+- Symfony\Component\Scheduler\EventListener\DispatchSchedulerEventListener
+- Symfony\Component\Scheduler\Generator\MessageContext
+- Symfony\Component\Scheduler\Messenger\ScheduledStamp
+- Symfony\Component\Scheduler\RecurringMessage
+- Symfony\Component\Scheduler\Tests\Fixtures\SomeScheduleProvider
+- Symfony\Component\Scheduler\Trigger\TriggerInterface
+interfaces: []

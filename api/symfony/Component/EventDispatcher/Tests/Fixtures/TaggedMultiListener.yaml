@@ -1,0 +1,28 @@
+name: TaggedMultiListener
+class_comment: null
+dependencies:
+- name: AsEventListener
+  type: class
+  source: Symfony\Component\EventDispatcher\Attribute\AsEventListener
+properties: []
+methods:
+- name: onCustomEvent
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: onFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: onBarEvent
+  visibility: public
+  parameters: []
+  comment: null
+- name: onBazEvent
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\Attribute\AsEventListener
+interfaces: []

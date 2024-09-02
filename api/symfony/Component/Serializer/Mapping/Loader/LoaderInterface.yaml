@@ -1,0 +1,16 @@
+name: LoaderInterface
+class_comment: null
+dependencies:
+- name: ClassMetadataInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassMetadataInterface
+properties: []
+methods:
+- name: loadClassMetadata
+  visibility: public
+  parameters:
+  - name: classMetadata
+  comment: null
+traits:
+- Symfony\Component\Serializer\Mapping\ClassMetadataInterface
+interfaces: []

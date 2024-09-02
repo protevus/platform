@@ -1,0 +1,354 @@
+name: Broadcaster
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Exception
+  type: class
+  source: Exception
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: BroadcasterContract
+  type: class
+  source: Illuminate\Contracts\Broadcasting\Broadcaster
+- name: HasBroadcastChannel
+  type: class
+  source: Illuminate\Contracts\Broadcasting\HasBroadcastChannel
+- name: BindingRegistrar
+  type: class
+  source: Illuminate\Contracts\Routing\BindingRegistrar
+- name: UrlRoutable
+  type: class
+  source: Illuminate\Contracts\Routing\UrlRoutable
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Reflector
+  type: class
+  source: Illuminate\Support\Reflector
+- name: ReflectionClass
+  type: class
+  source: ReflectionClass
+- name: ReflectionFunction
+  type: class
+  source: ReflectionFunction
+- name: AccessDeniedHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
+properties:
+- name: authenticatedUserCallback
+  visibility: protected
+  comment: '# * The callback to resolve the authenticated user information.
+
+    # *
+
+    # * @var \Closure|null'
+- name: channels
+  visibility: protected
+  comment: '# * The registered channel authenticators.
+
+    # *
+
+    # * @var array'
+- name: channelOptions
+  visibility: protected
+  comment: '# * The registered channel options.
+
+    # *
+
+    # * @var array'
+- name: bindingRegistrar
+  visibility: protected
+  comment: '# * The binding registrar instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Routing\BindingRegistrar'
+methods:
+- name: resolveAuthenticatedUser
+  visibility: public
+  parameters:
+  - name: request
+  comment: "# * The callback to resolve the authenticated user information.\n# *\n\
+    # * @var \\Closure|null\n# */\n# protected $authenticatedUserCallback = null;\n\
+    # \n# /**\n# * The registered channel authenticators.\n# *\n# * @var array\n#\
+    \ */\n# protected $channels = [];\n# \n# /**\n# * The registered channel options.\n\
+    # *\n# * @var array\n# */\n# protected $channelOptions = [];\n# \n# /**\n# * The\
+    \ binding registrar instance.\n# *\n# * @var \\Illuminate\\Contracts\\Routing\\\
+    BindingRegistrar\n# */\n# protected $bindingRegistrar;\n# \n# /**\n# * Resolve\
+    \ the authenticated user payload for the incoming connection request.\n# *\n#\
+    \ * See: https://pusher.com/docs/channels/library_auth_reference/auth-signatures/#user-authentication.\n\
+    # *\n# * @param  \\Illuminate\\Http\\Request  $request\n# * @return array|null"
+- name: resolveAuthenticatedUserUsing
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register the user retrieval callback used to authenticate connections.
+
+    # *
+
+    # * See: https://pusher.com/docs/channels/library_auth_reference/auth-signatures/#user-authentication.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return void'
+- name: channel
+  visibility: public
+  parameters:
+  - name: channel
+  - name: callback
+  - name: options
+    default: '[]'
+  comment: '# * Register a channel authenticator.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Broadcasting\HasBroadcastChannel|string  $channel
+
+    # * @param  callable|string  $callback
+
+    # * @param  array  $options
+
+    # * @return $this'
+- name: verifyUserCanAccessChannel
+  visibility: protected
+  parameters:
+  - name: request
+  - name: channel
+  comment: '# * Authenticate the incoming request for a given channel.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  string  $channel
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException'
+- name: extractAuthParameters
+  visibility: protected
+  parameters:
+  - name: pattern
+  - name: channel
+  - name: callback
+  comment: '# * Extract the parameters from the given pattern and channel.
+
+    # *
+
+    # * @param  string  $pattern
+
+    # * @param  string  $channel
+
+    # * @param  callable|string  $callback
+
+    # * @return array'
+- name: extractParameters
+  visibility: protected
+  parameters:
+  - name: callback
+  comment: '# * Extracts the parameters out of what the user passed to handle the
+    channel authentication.
+
+    # *
+
+    # * @param  callable|string  $callback
+
+    # * @return \ReflectionParameter[]
+
+    # *
+
+    # * @throws \Exception'
+- name: extractParametersFromClass
+  visibility: protected
+  parameters:
+  - name: callback
+  comment: '# * Extracts the parameters out of a class channel''s "join" method.
+
+    # *
+
+    # * @param  string  $callback
+
+    # * @return \ReflectionParameter[]
+
+    # *
+
+    # * @throws \Exception'
+- name: extractChannelKeys
+  visibility: protected
+  parameters:
+  - name: pattern
+  - name: channel
+  comment: '# * Extract the channel keys from the incoming channel name.
+
+    # *
+
+    # * @param  string  $pattern
+
+    # * @param  string  $channel
+
+    # * @return array'
+- name: resolveBinding
+  visibility: protected
+  parameters:
+  - name: key
+  - name: value
+  - name: callbackParameters
+  comment: '# * Resolve the given parameter binding.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  string  $value
+
+    # * @param  array  $callbackParameters
+
+    # * @return mixed'
+- name: resolveExplicitBindingIfPossible
+  visibility: protected
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Resolve an explicit parameter binding if applicable.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return mixed'
+- name: resolveImplicitBindingIfPossible
+  visibility: protected
+  parameters:
+  - name: key
+  - name: value
+  - name: callbackParameters
+  comment: '# * Resolve an implicit parameter binding if applicable.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  array  $callbackParameters
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException'
+- name: isImplicitlyBindable
+  visibility: protected
+  parameters:
+  - name: key
+  - name: parameter
+  comment: '# * Determine if a given key and parameter is implicitly bindable.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  \ReflectionParameter  $parameter
+
+    # * @return bool'
+- name: formatChannels
+  visibility: protected
+  parameters:
+  - name: channels
+  comment: '# * Format the channel array into an array of strings.
+
+    # *
+
+    # * @param  array  $channels
+
+    # * @return array'
+- name: binder
+  visibility: protected
+  parameters: []
+  comment: '# * Get the model binding registrar instance.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Routing\BindingRegistrar'
+- name: normalizeChannelHandlerToCallable
+  visibility: protected
+  parameters:
+  - name: callback
+  comment: '# * Normalize the given callback into a callable.
+
+    # *
+
+    # * @param  mixed  $callback
+
+    # * @return callable'
+- name: retrieveUser
+  visibility: protected
+  parameters:
+  - name: request
+  - name: channel
+  comment: '# * Retrieve the authenticated user using the configured guard (if any).
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  string  $channel
+
+    # * @return mixed'
+- name: retrieveChannelOptions
+  visibility: protected
+  parameters:
+  - name: channel
+  comment: '# * Retrieve options for a certain channel.
+
+    # *
+
+    # * @param  string  $channel
+
+    # * @return array'
+- name: channelNameMatchesPattern
+  visibility: protected
+  parameters:
+  - name: channel
+  - name: pattern
+  comment: '# * Check if the channel name from the request matches a pattern from
+    registered channels.
+
+    # *
+
+    # * @param  string  $channel
+
+    # * @param  string  $pattern
+
+    # * @return bool'
+- name: getChannels
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the registered channels.
+
+    # *
+
+    # * @return \Illuminate\Support\Collection'
+traits:
+- Closure
+- Exception
+- Illuminate\Container\Container
+- Illuminate\Contracts\Broadcasting\HasBroadcastChannel
+- Illuminate\Contracts\Routing\BindingRegistrar
+- Illuminate\Contracts\Routing\UrlRoutable
+- Illuminate\Support\Arr
+- Illuminate\Support\Reflector
+- ReflectionClass
+- ReflectionFunction
+- Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
+interfaces:
+- BroadcasterContract

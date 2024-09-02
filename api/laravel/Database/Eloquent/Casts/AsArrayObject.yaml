@@ -1,0 +1,53 @@
+name: AsArrayObject
+class_comment: null
+dependencies:
+- name: Castable
+  type: class
+  source: Illuminate\Contracts\Database\Eloquent\Castable
+- name: CastsAttributes
+  type: class
+  source: Illuminate\Contracts\Database\Eloquent\CastsAttributes
+properties: []
+methods:
+- name: castUsing
+  visibility: public
+  parameters:
+  - name: arguments
+  comment: '# * Get the caster class to use when casting from / to this cast target.
+
+    # *
+
+    # * @param  array  $arguments
+
+    # * @return \Illuminate\Contracts\Database\Eloquent\CastsAttributes<\Illuminate\Database\Eloquent\Casts\ArrayObject<array-key,
+    mixed>, iterable>'
+- name: get
+  visibility: public
+  parameters:
+  - name: model
+  - name: key
+  - name: value
+  - name: attributes
+  comment: null
+- name: set
+  visibility: public
+  parameters:
+  - name: model
+  - name: key
+  - name: value
+  - name: attributes
+  comment: null
+- name: serialize
+  visibility: public
+  parameters:
+  - name: model
+  - name: key
+  - name: value
+  - name: attributes
+  comment: null
+traits:
+- Illuminate\Contracts\Database\Eloquent\Castable
+- Illuminate\Contracts\Database\Eloquent\CastsAttributes
+interfaces:
+- Castable
+- CastsAttributes

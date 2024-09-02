@@ -1,0 +1,12 @@
+name: ConflictingHeadersException
+class_comment: '# * The HTTP request contains headers with conflicting information.
+
+  # *
+
+  # * @author Magnus Nordlander <magnus@fervo.se>'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- RequestExceptionInterface

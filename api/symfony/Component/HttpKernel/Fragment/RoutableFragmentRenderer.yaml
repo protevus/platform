@@ -1,0 +1,46 @@
+name: RoutableFragmentRenderer
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: ControllerReference
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ControllerReference
+- name: FragmentListener
+  type: class
+  source: Symfony\Component\HttpKernel\EventListener\FragmentListener
+properties: []
+methods:
+- name: setFragmentPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: "# * Adds the possibility to generate a fragment URI for a given Controller.\n\
+    # *\n# * @author Fabien Potencier <fabien@symfony.com>\n# */\n# abstract class\
+    \ RoutableFragmentRenderer implements FragmentRendererInterface\n# {\n# /**\n\
+    # * @internal\n# */\n# protected string $fragmentPath = '/_fragment';\n# \n# /**\n\
+    # * Sets the fragment path that triggers the fragment listener.\n# *\n# * @see\
+    \ FragmentListener"
+- name: generateFragmentUri
+  visibility: protected
+  parameters:
+  - name: reference
+  - name: request
+  - name: absolute
+    default: 'false'
+  - name: strict
+    default: 'true'
+  comment: '# * Generates a fragment URI for a given controller.
+
+    # *
+
+    # * @param bool $absolute Whether to generate an absolute URL or not
+
+    # * @param bool $strict   Whether to allow non-scalar attributes or not'
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\Controller\ControllerReference
+- Symfony\Component\HttpKernel\EventListener\FragmentListener
+interfaces:
+- FragmentRendererInterface

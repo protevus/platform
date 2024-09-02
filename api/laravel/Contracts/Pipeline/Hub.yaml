@@ -1,0 +1,22 @@
+name: Hub
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: pipe
+  visibility: public
+  parameters:
+  - name: object
+  - name: pipeline
+    default: 'null'
+  comment: '# * Send an object through one of the available pipelines.
+
+    # *
+
+    # * @param  mixed  $object
+
+    # * @param  string|null  $pipeline
+
+    # * @return mixed'
+traits: []
+interfaces: []

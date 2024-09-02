@@ -1,0 +1,17 @@
+name: RunCommandFailedException
+class_comment: null
+dependencies:
+- name: RunCommandContext
+  type: class
+  source: Symfony\Component\Console\Messenger\RunCommandContext
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: exception
+  - name: context
+  comment: null
+traits:
+- Symfony\Component\Console\Messenger\RunCommandContext
+interfaces: []

@@ -1,0 +1,95 @@
+name: DataTransformerChain
+class_comment: '# * Passes a value through multiple value transformers.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: DataTransformerInterface
+  type: class
+  source: Symfony\Component\Form\DataTransformerInterface
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: transformers
+  comment: '# * Passes a value through multiple value transformers.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # class DataTransformerChain implements DataTransformerInterface
+
+    # {
+
+    # /**
+
+    # * Uses the given value transformers to transform values.
+
+    # *
+
+    # * @param DataTransformerInterface[] $transformers'
+- name: transform
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Passes the value through the transform() method of all nested transformers.
+
+    # *
+
+    # * The transformers receive the value in the same order as they were passed
+
+    # * to the constructor. Each transformer receives the result of the previous
+
+    # * transformer as input. The output of the last transformer is returned
+
+    # * by this method.
+
+    # *
+
+    # * @param mixed $value The original value
+
+    # *
+
+    # * @throws TransformationFailedException'
+- name: reverseTransform
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Passes the value through the reverseTransform() method of all nested
+
+    # * transformers.
+
+    # *
+
+    # * The transformers receive the value in the reverse order as they were passed
+
+    # * to the constructor. Each transformer receives the result of the previous
+
+    # * transformer as input. The output of the last transformer is returned
+
+    # * by this method.
+
+    # *
+
+    # * @param mixed $value The transformed value
+
+    # *
+
+    # * @throws TransformationFailedException'
+- name: getTransformers
+  visibility: public
+  parameters: []
+  comment: '# * @return DataTransformerInterface[]'
+traits:
+- Symfony\Component\Form\DataTransformerInterface
+- Symfony\Component\Form\Exception\TransformationFailedException
+interfaces:
+- DataTransformerInterface

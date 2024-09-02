@@ -1,0 +1,68 @@
+name: Controller
+class_comment: null
+dependencies:
+- name: BadMethodCallException
+  type: class
+  source: BadMethodCallException
+properties:
+- name: middleware
+  visibility: protected
+  comment: '# * The middleware registered on the controller.
+
+    # *
+
+    # * @var array'
+methods:
+- name: middleware
+  visibility: public
+  parameters:
+  - name: middleware
+  - name: options
+    default: '[]'
+  comment: "# * The middleware registered on the controller.\n# *\n# * @var array\n\
+    # */\n# protected $middleware = [];\n# \n# /**\n# * Register middleware on the\
+    \ controller.\n# *\n# * @param  \\Closure|array|string  $middleware\n# * @param\
+    \  array  $options\n# * @return \\Illuminate\\Routing\\ControllerMiddlewareOptions"
+- name: getMiddleware
+  visibility: public
+  parameters: []
+  comment: '# * Get the middleware assigned to the controller.
+
+    # *
+
+    # * @return array'
+- name: callAction
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Execute an action on the controller.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return \Symfony\Component\HttpFoundation\Response'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Handle calls to missing methods on the controller.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \BadMethodCallException'
+traits:
+- BadMethodCallException
+interfaces: []

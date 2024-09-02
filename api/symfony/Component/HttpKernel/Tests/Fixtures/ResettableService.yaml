@@ -1,0 +1,14 @@
+name: ResettableService
+class_comment: null
+dependencies: []
+properties:
+- name: counter
+  visibility: public
+  comment: null
+methods:
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

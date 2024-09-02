@@ -1,0 +1,85 @@
+name: AutowireLocator
+class_comment: null
+dependencies:
+- name: ServiceLocatorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- name: TaggedIteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: TypedReference
+  type: class
+  source: Symfony\Component\DependencyInjection\TypedReference
+- name: SubscribedService
+  type: class
+  source: Symfony\Contracts\Service\Attribute\SubscribedService
+- name: ServiceSubscriberInterface
+  type: class
+  source: Symfony\Contracts\Service\ServiceSubscriberInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: services
+  - name: indexAttribute
+    default: 'null'
+  - name: defaultIndexMethod
+    default: 'null'
+  - name: defaultPriorityMethod
+    default: 'null'
+  - name: exclude
+    default: '[]'
+  - name: excludeSelf
+    default: 'true'
+  comment: '# * Autowires a service locator based on a tag name or an explicit list
+    of key => service-type pairs.
+
+    # */
+
+    # #[\Attribute(\Attribute::TARGET_PARAMETER)]
+
+    # class AutowireLocator extends Autowire
+
+    # {
+
+    # /**
+
+    # * @see ServiceSubscriberInterface::getSubscribedServices()
+
+    # *
+
+    # * @param string|array<string|SubscribedService> $services              A tag
+    name or an explicit list of service ids
+
+    # * @param string|null                            $indexAttribute        The name
+    of the attribute that defines the key referencing each service in the locator
+
+    # * @param string|null                            $defaultIndexMethod    The static
+    method that should be called to get each service''s key when their tag doesn''t
+    define the previous attribute
+
+    # * @param string|null                            $defaultPriorityMethod The static
+    method that should be called to get each service''s priority when their tag doesn''t
+    define the "priority" attribute
+
+    # * @param string|array                           $exclude               A service
+    id or a list of service ids to exclude
+
+    # * @param bool                                   $excludeSelf           Whether
+    to automatically exclude the referencing service from the locator'
+traits:
+- Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\TypedReference
+- Symfony\Contracts\Service\Attribute\SubscribedService
+- Symfony\Contracts\Service\ServiceSubscriberInterface
+interfaces: []

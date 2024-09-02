@@ -1,0 +1,61 @@
+name: RegisterCsrfFeaturesPass
+class_comment: '# * @author Christian Flothmann <christian.flothmann@sensiolabs.de>
+
+  # * @author Wouter de Jong <wouter@wouterj.nl>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: CompilerPassInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: ClearableTokenStorageInterface
+  type: class
+  source: Symfony\Component\Security\Csrf\TokenStorage\ClearableTokenStorageInterface
+- name: CsrfProtectionListener
+  type: class
+  source: Symfony\Component\Security\Http\EventListener\CsrfProtectionListener
+- name: CsrfTokenClearingLogoutListener
+  type: class
+  source: Symfony\Component\Security\Http\EventListener\CsrfTokenClearingLogoutListener
+- name: IsCsrfTokenValidAttributeListener
+  type: class
+  source: Symfony\Component\Security\Http\EventListener\IsCsrfTokenValidAttributeListener
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: registerCsrfProtectionListener
+  visibility: private
+  parameters:
+  - name: container
+  comment: null
+- name: registerLogoutHandler
+  visibility: protected
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\Security\Csrf\TokenStorage\ClearableTokenStorageInterface
+- Symfony\Component\Security\Http\EventListener\CsrfProtectionListener
+- Symfony\Component\Security\Http\EventListener\CsrfTokenClearingLogoutListener
+- Symfony\Component\Security\Http\EventListener\IsCsrfTokenValidAttributeListener
+interfaces:
+- CompilerPassInterface

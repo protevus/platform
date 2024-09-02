@@ -1,0 +1,97 @@
+name: CallsCommands
+class_comment: null
+dependencies:
+- name: ArrayInput
+  type: class
+  source: Symfony\Component\Console\Input\ArrayInput
+- name: NullOutput
+  type: class
+  source: Symfony\Component\Console\Output\NullOutput
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+properties: []
+methods:
+- name: call
+  visibility: public
+  parameters:
+  - name: command
+  - name: arguments
+    default: '[]'
+  comment: "# * Resolve the console command instance for the given command.\n# *\n\
+    # * @param  \\Symfony\\Component\\Console\\Command\\Command|string  $command\n\
+    # * @return \\Symfony\\Component\\Console\\Command\\Command\n# */\n# abstract\
+    \ protected function resolveCommand($command);\n# \n# /**\n# * Call another console\
+    \ command.\n# *\n# * @param  \\Symfony\\Component\\Console\\Command\\Command|string\
+    \  $command\n# * @param  array  $arguments\n# * @return int"
+- name: callSilent
+  visibility: public
+  parameters:
+  - name: command
+  - name: arguments
+    default: '[]'
+  comment: '# * Call another console command without output.
+
+    # *
+
+    # * @param  \Symfony\Component\Console\Command\Command|string  $command
+
+    # * @param  array  $arguments
+
+    # * @return int'
+- name: callSilently
+  visibility: public
+  parameters:
+  - name: command
+  - name: arguments
+    default: '[]'
+  comment: '# * Call another console command without output.
+
+    # *
+
+    # * @param  \Symfony\Component\Console\Command\Command|string  $command
+
+    # * @param  array  $arguments
+
+    # * @return int'
+- name: runCommand
+  visibility: protected
+  parameters:
+  - name: command
+  - name: arguments
+  - name: output
+  comment: '# * Run the given the console command.
+
+    # *
+
+    # * @param  \Symfony\Component\Console\Command\Command|string  $command
+
+    # * @param  array  $arguments
+
+    # * @param  \Symfony\Component\Console\Output\OutputInterface  $output
+
+    # * @return int'
+- name: createInputFromArguments
+  visibility: protected
+  parameters:
+  - name: arguments
+  comment: '# * Create an input instance from the given arguments.
+
+    # *
+
+    # * @param  array  $arguments
+
+    # * @return \Symfony\Component\Console\Input\ArrayInput'
+- name: context
+  visibility: protected
+  parameters: []
+  comment: '# * Get all of the context passed to the command.
+
+    # *
+
+    # * @return array'
+traits:
+- Symfony\Component\Console\Input\ArrayInput
+- Symfony\Component\Console\Output\NullOutput
+- Symfony\Component\Console\Output\OutputInterface
+interfaces: []

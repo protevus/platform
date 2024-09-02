@@ -1,0 +1,341 @@
+name: Application
+class_comment: null
+dependencies:
+- name: Container
+  type: class
+  source: Illuminate\Contracts\Container\Container
+properties: []
+methods:
+- name: version
+  visibility: public
+  parameters: []
+  comment: '# * Get the version number of the application.
+
+    # *
+
+    # * @return string'
+- name: basePath
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the base path of the Laravel installation.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: bootstrapPath
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the path to the bootstrap directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: configPath
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the path to the application configuration files.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: databasePath
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the path to the database directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: langPath
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the path to the language files.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: publicPath
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the path to the public directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: resourcePath
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the path to the resources directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: storagePath
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the path to the storage directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: environment
+  visibility: public
+  parameters:
+  - name: '...$environments'
+  comment: '# * Get or check the current application environment.
+
+    # *
+
+    # * @param  string|array  ...$environments
+
+    # * @return string|bool'
+- name: runningInConsole
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the application is running in the console.
+
+    # *
+
+    # * @return bool'
+- name: runningUnitTests
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the application is running unit tests.
+
+    # *
+
+    # * @return bool'
+- name: hasDebugModeEnabled
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the application is running with debug mode enabled.
+
+    # *
+
+    # * @return bool'
+- name: maintenanceMode
+  visibility: public
+  parameters: []
+  comment: '# * Get an instance of the maintenance mode manager implementation.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Foundation\MaintenanceMode'
+- name: isDownForMaintenance
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the application is currently down for maintenance.
+
+    # *
+
+    # * @return bool'
+- name: registerConfiguredProviders
+  visibility: public
+  parameters: []
+  comment: '# * Register all of the configured providers.
+
+    # *
+
+    # * @return void'
+- name: register
+  visibility: public
+  parameters:
+  - name: provider
+  - name: force
+    default: 'false'
+  comment: '# * Register a service provider with the application.
+
+    # *
+
+    # * @param  \Illuminate\Support\ServiceProvider|string  $provider
+
+    # * @param  bool  $force
+
+    # * @return \Illuminate\Support\ServiceProvider'
+- name: registerDeferredProvider
+  visibility: public
+  parameters:
+  - name: provider
+  - name: service
+    default: 'null'
+  comment: '# * Register a deferred provider and service.
+
+    # *
+
+    # * @param  string  $provider
+
+    # * @param  string|null  $service
+
+    # * @return void'
+- name: resolveProvider
+  visibility: public
+  parameters:
+  - name: provider
+  comment: '# * Resolve a service provider instance from the class name.
+
+    # *
+
+    # * @param  string  $provider
+
+    # * @return \Illuminate\Support\ServiceProvider'
+- name: boot
+  visibility: public
+  parameters: []
+  comment: '# * Boot the application''s service providers.
+
+    # *
+
+    # * @return void'
+- name: booting
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a new boot listener.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return void'
+- name: booted
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a new "booted" listener.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return void'
+- name: bootstrapWith
+  visibility: public
+  parameters:
+  - name: bootstrappers
+  comment: '# * Run the given array of bootstrap classes.
+
+    # *
+
+    # * @param  array  $bootstrappers
+
+    # * @return void'
+- name: getLocale
+  visibility: public
+  parameters: []
+  comment: '# * Get the current application locale.
+
+    # *
+
+    # * @return string'
+- name: getNamespace
+  visibility: public
+  parameters: []
+  comment: '# * Get the application namespace.
+
+    # *
+
+    # * @return string
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: getProviders
+  visibility: public
+  parameters:
+  - name: provider
+  comment: '# * Get the registered service provider instances if any exist.
+
+    # *
+
+    # * @param  \Illuminate\Support\ServiceProvider|string  $provider
+
+    # * @return array'
+- name: hasBeenBootstrapped
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the application has been bootstrapped before.
+
+    # *
+
+    # * @return bool'
+- name: loadDeferredProviders
+  visibility: public
+  parameters: []
+  comment: '# * Load and boot all of the remaining deferred providers.
+
+    # *
+
+    # * @return void'
+- name: setLocale
+  visibility: public
+  parameters:
+  - name: locale
+  comment: '# * Set the current application locale.
+
+    # *
+
+    # * @param  string  $locale
+
+    # * @return void'
+- name: shouldSkipMiddleware
+  visibility: public
+  parameters: []
+  comment: '# * Determine if middleware has been disabled for the application.
+
+    # *
+
+    # * @return bool'
+- name: terminating
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a terminating callback with the application.
+
+    # *
+
+    # * @param  callable|string  $callback
+
+    # * @return \Illuminate\Contracts\Foundation\Application'
+- name: terminate
+  visibility: public
+  parameters: []
+  comment: '# * Terminate the application.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Contracts\Container\Container
+interfaces: []

@@ -1,0 +1,57 @@
+name: ControllerArgumentValueResolverPass
+class_comment: '# * Gathers and configures the argument value resolvers.
+
+  # *
+
+  # * @author Iltar van der Berg <kjarli@gmail.com>'
+dependencies:
+- name: IteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- name: ServiceLocatorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- name: TaggedIteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- name: CompilerPassInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- name: PriorityTaggedServiceTrait
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: TraceableValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver
+- name: Stopwatch
+  type: class
+  source: Symfony\Component\Stopwatch\Stopwatch
+- name: PriorityTaggedServiceTrait
+  type: class
+  source: PriorityTaggedServiceTrait
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- Symfony\Component\DependencyInjection\Compiler\PriorityTaggedServiceTrait
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\TraceableValueResolver
+- Symfony\Component\Stopwatch\Stopwatch
+- PriorityTaggedServiceTrait
+interfaces:
+- CompilerPassInterface

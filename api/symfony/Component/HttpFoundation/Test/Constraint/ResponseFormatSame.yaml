@@ -1,0 +1,39 @@
+name: ResponseFormatSame
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: PHPUnit\Framework\Constraint\Constraint
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+properties: []
+methods:
+- name: matches
+  visibility: protected
+  parameters:
+  - name: response
+  comment: "# * Asserts that the response is in the given format.\n# *\n# * @author\
+    \ K\xE9vin Dunglas <dunglas@gmail.com>\n# */\n# final class ResponseFormatSame\
+    \ extends Constraint\n# {\n# public function __construct(\n# private Request $request,\n\
+    # private ?string $format,\n# private readonly bool $verbose = true,\n# ) {\n\
+    # }\n# \n# public function toString(): string\n# {\n# return 'format is '.($this->format\
+    \ ?? 'null');\n# }\n# \n# /**\n# * @param Response $response"
+- name: failureDescription
+  visibility: protected
+  parameters:
+  - name: response
+  comment: '# * @param Response $response'
+- name: additionalFailureDescription
+  visibility: protected
+  parameters:
+  - name: response
+  comment: '# * @param Response $response'
+traits:
+- PHPUnit\Framework\Constraint\Constraint
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+interfaces: []

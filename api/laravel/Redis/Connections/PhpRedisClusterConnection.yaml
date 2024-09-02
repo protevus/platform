@@ -1,0 +1,15 @@
+name: PhpRedisClusterConnection
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: flushdb
+  visibility: public
+  parameters: []
+  comment: '# * Flush the selected Redis database on all master nodes.
+
+    # *
+
+    # * @return mixed'
+traits: []
+interfaces: []

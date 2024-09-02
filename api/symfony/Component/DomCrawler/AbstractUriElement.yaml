@@ -1,0 +1,46 @@
+name: AbstractUriElement
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: node
+  - name: currentUri
+    default: 'null'
+  - name: method
+    default: '''GET'''
+  comment: "# * Any HTML element that can link to an URI.\n# *\n# * @author Fabien\
+    \ Potencier <fabien@symfony.com>\n# */\n# abstract class AbstractUriElement\n\
+    # {\n# protected \\DOMElement $node;\n# protected ?string $method;\n# \n# /**\n\
+    # * @param \\DOMElement $node       A \\DOMElement instance\n# * @param string|null\
+    \ $currentUri The URI of the page where the link is embedded (or the base href)\n\
+    # * @param string|null $method     The method to use for the link (GET by default)\n\
+    # *\n# * @throws \\InvalidArgumentException if the node is not a link"
+- name: getNode
+  visibility: public
+  parameters: []
+  comment: '# * Gets the node associated with this link.'
+- name: getMethod
+  visibility: public
+  parameters: []
+  comment: '# * Gets the method associated with this link.'
+- name: getUri
+  visibility: public
+  parameters: []
+  comment: '# * Gets the URI associated with this link.'
+- name: canonicalizePath
+  visibility: protected
+  parameters:
+  - name: path
+  comment: "# * Returns raw URI data.\n# */\n# abstract protected function getRawUri():\
+    \ string;\n# \n# /**\n# * Returns the canonicalized URI path (see RFC 3986, section\
+    \ 5.2.4).\n# *\n# * @param string $path URI path"
+- name: setNode
+  visibility: protected
+  parameters:
+  - name: node
+  comment: null
+traits: []
+interfaces: []

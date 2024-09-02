@@ -1,0 +1,25 @@
+name: ClassMorphViolationException
+class_comment: null
+dependencies:
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+properties:
+- name: model
+  visibility: public
+  comment: '# * The name of the affected Eloquent model.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: model
+  comment: "# * The name of the affected Eloquent model.\n# *\n# * @var string\n#\
+    \ */\n# public $model;\n# \n# /**\n# * Create a new exception instance.\n# *\n\
+    # * @param  object  $model"
+traits:
+- RuntimeException
+interfaces: []

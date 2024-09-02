@@ -1,0 +1,45 @@
+name: StopwatchPeriod
+class_comment: '# * Represents a Period for an Event.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: start
+  - name: end
+  - name: morePrecision
+    default: 'false'
+  comment: "# * Represents a Period for an Event.\n# *\n# * @author Fabien Potencier\
+    \ <fabien@symfony.com>\n# */\n# class StopwatchPeriod\n# {\n# private int|float\
+    \ $start;\n# private int|float $end;\n# private int $memory;\n# \n# /**\n# * @param\
+    \ int|float $start         The relative time of the start of the period (in milliseconds)\n\
+    # * @param int|float $end           The relative time of the end of the period\
+    \ (in milliseconds)\n# * @param bool      $morePrecision If true, time is stored\
+    \ as float to keep the original microsecond precision"
+- name: getStartTime
+  visibility: public
+  parameters: []
+  comment: '# * Gets the relative time of the start of the period in milliseconds.'
+- name: getEndTime
+  visibility: public
+  parameters: []
+  comment: '# * Gets the relative time of the end of the period in milliseconds.'
+- name: getDuration
+  visibility: public
+  parameters: []
+  comment: '# * Gets the time spent in this period in milliseconds.'
+- name: getMemory
+  visibility: public
+  parameters: []
+  comment: '# * Gets the memory usage in bytes.'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

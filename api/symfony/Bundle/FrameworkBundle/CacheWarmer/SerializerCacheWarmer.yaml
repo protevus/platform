@@ -1,0 +1,86 @@
+name: SerializerCacheWarmer
+class_comment: '# * Warms up XML and YAML serializer metadata.
+
+  # *
+
+  # * @author Titouan Galopin <galopintitouan@gmail.com>
+
+  # *
+
+  # * @final since Symfony 7.1'
+dependencies:
+- name: ArrayAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\ArrayAdapter
+- name: CacheClassMetadataFactory
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\CacheClassMetadataFactory
+- name: ClassMetadataFactory
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory
+- name: LoaderChain
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Loader\LoaderChain
+- name: LoaderInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Loader\LoaderInterface
+- name: XmlFileLoader
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Loader\XmlFileLoader
+- name: YamlFileLoader
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Loader\YamlFileLoader
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: loaders
+  - name: phpArrayFile
+  comment: '# * Warms up XML and YAML serializer metadata.
+
+    # *
+
+    # * @author Titouan Galopin <galopintitouan@gmail.com>
+
+    # *
+
+    # * @final since Symfony 7.1
+
+    # */
+
+    # class SerializerCacheWarmer extends AbstractPhpFileCacheWarmer
+
+    # {
+
+    # /**
+
+    # * @param LoaderInterface[] $loaders      The serializer metadata loaders
+
+    # * @param string            $phpArrayFile The PHP file where metadata are cached'
+- name: doWarmUp
+  visibility: protected
+  parameters:
+  - name: cacheDir
+  - name: arrayAdapter
+  - name: buildDir
+    default: 'null'
+  comment: null
+- name: extractSupportedLoaders
+  visibility: private
+  parameters:
+  - name: loaders
+  comment: '# * @param LoaderInterface[] $loaders
+
+    # *
+
+    # * @return XmlFileLoader[]|YamlFileLoader[]'
+traits:
+- Symfony\Component\Cache\Adapter\ArrayAdapter
+- Symfony\Component\Serializer\Mapping\Factory\CacheClassMetadataFactory
+- Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory
+- Symfony\Component\Serializer\Mapping\Loader\LoaderChain
+- Symfony\Component\Serializer\Mapping\Loader\LoaderInterface
+- Symfony\Component\Serializer\Mapping\Loader\XmlFileLoader
+- Symfony\Component\Serializer\Mapping\Loader\YamlFileLoader
+interfaces: []

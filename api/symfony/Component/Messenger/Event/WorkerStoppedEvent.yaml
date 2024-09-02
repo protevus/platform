@@ -1,0 +1,20 @@
+name: WorkerStoppedEvent
+class_comment: null
+dependencies:
+- name: Worker
+  type: class
+  source: Symfony\Component\Messenger\Worker
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: worker
+  comment: null
+- name: getWorker
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Messenger\Worker
+interfaces: []

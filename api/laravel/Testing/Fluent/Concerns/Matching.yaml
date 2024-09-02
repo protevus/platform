@@ -1,0 +1,132 @@
+name: Matching
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+- name: PHPUnit
+  type: class
+  source: PHPUnit\Framework\Assert
+properties: []
+methods:
+- name: where
+  visibility: public
+  parameters:
+  - name: key
+  - name: expected
+  comment: '# * Asserts that the property matches the expected value.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed|\Closure  $expected
+
+    # * @return $this'
+- name: whereNot
+  visibility: public
+  parameters:
+  - name: key
+  - name: expected
+  comment: '# * Asserts that the property does not match the expected value.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed|\Closure  $expected
+
+    # * @return $this'
+- name: whereAll
+  visibility: public
+  parameters:
+  - name: bindings
+  comment: '# * Asserts that all properties match their expected values.
+
+    # *
+
+    # * @param  array  $bindings
+
+    # * @return $this'
+- name: whereType
+  visibility: public
+  parameters:
+  - name: key
+  - name: expected
+  comment: '# * Asserts that the property is of the expected type.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  string|array  $expected
+
+    # * @return $this'
+- name: whereAllType
+  visibility: public
+  parameters:
+  - name: bindings
+  comment: '# * Asserts that all properties are of their expected types.
+
+    # *
+
+    # * @param  array  $bindings
+
+    # * @return $this'
+- name: whereContains
+  visibility: public
+  parameters:
+  - name: key
+  - name: expected
+  comment: '# * Asserts that the property contains the expected values.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $expected
+
+    # * @return $this'
+- name: ensureSorted
+  visibility: protected
+  parameters:
+  - name: '&$value'
+  comment: '# * Ensures that all properties are sorted the same way, recursively.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return void'
+- name: dotPath
+  visibility: protected
+  parameters:
+  - name: key
+    default: ''''''
+  comment: null
+- name: has
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: 'null'
+  - name: scope
+    default: 'null'
+  comment: null
+- name: prop
+  visibility: protected
+  parameters:
+  - name: key
+    default: 'null'
+  comment: null
+traits:
+- Closure
+- Illuminate\Contracts\Support\Arrayable
+- Illuminate\Support\Collection
+interfaces: []

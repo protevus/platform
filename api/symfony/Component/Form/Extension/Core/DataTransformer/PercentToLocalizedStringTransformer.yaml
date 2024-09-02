@@ -1,0 +1,95 @@
+name: PercentToLocalizedStringTransformer
+class_comment: '# * Transforms between a normalized format (integer or float) and
+  a percentage value.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # * @author Florian Eckerstorfer <florian@eckerstorfer.org>
+
+  # *
+
+  # * @implements DataTransformerInterface<int|float, string>'
+dependencies:
+- name: DataTransformerInterface
+  type: class
+  source: Symfony\Component\Form\DataTransformerInterface
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Form\Exception\UnexpectedTypeException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: scale
+    default: 'null'
+  - name: type
+    default: 'null'
+  - name: roundingMode
+    default: \NumberFormatter::ROUND_HALFUP
+  - name: html5Format
+    default: 'false'
+  comment: "# * Transforms between a normalized format (integer or float) and a percentage\
+    \ value.\n# *\n# * @author Bernhard Schussek <bschussek@gmail.com>\n# * @author\
+    \ Florian Eckerstorfer <florian@eckerstorfer.org>\n# *\n# * @implements DataTransformerInterface<int|float,\
+    \ string>\n# */\n# class PercentToLocalizedStringTransformer implements DataTransformerInterface\n\
+    # {\n# public const FRACTIONAL = 'fractional';\n# public const INTEGER = 'integer';\n\
+    # \n# protected static array $types = [\n# self::FRACTIONAL,\n# self::INTEGER,\n\
+    # ];\n# \n# private string $type;\n# private int $scale;\n# \n# /**\n# * @see\
+    \ self::$types for a list of supported types\n# *\n# * @param int  $roundingMode\
+    \ A value from \\NumberFormatter, such as \\NumberFormatter::ROUND_HALFUP\n# *\
+    \ @param bool $html5Format  Use an HTML5 specific format, see https://www.w3.org/TR/html51/sec-forms.html#date-time-and-number-formats\n\
+    # *\n# * @throws UnexpectedTypeException if the given value of type is unknown"
+- name: transform
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Transforms between a normalized format (integer or float) into a percentage
+    value.
+
+    # *
+
+    # * @param int|float $value Normalized value
+
+    # *
+
+    # * @throws TransformationFailedException if the given value is not numeric or
+
+    # *                                       if the value could not be transformed'
+- name: reverseTransform
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Transforms between a percentage value into a normalized format (integer
+    or float).
+
+    # *
+
+    # * @param string $value Percentage value
+
+    # *
+
+    # * @throws TransformationFailedException if the given value is not a string or
+
+    # *                                       if the value could not be transformed'
+- name: getNumberFormatter
+  visibility: protected
+  parameters: []
+  comment: '# * Returns a preconfigured \NumberFormatter instance.'
+- name: round
+  visibility: private
+  parameters:
+  - name: number
+  comment: '# * Rounds a number according to the configured scale and rounding mode.'
+traits:
+- Symfony\Component\Form\DataTransformerInterface
+- Symfony\Component\Form\Exception\TransformationFailedException
+- Symfony\Component\Form\Exception\UnexpectedTypeException
+interfaces:
+- DataTransformerInterface
+- DataTransformerInterface

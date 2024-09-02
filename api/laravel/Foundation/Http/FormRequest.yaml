@@ -1,0 +1,271 @@
+name: FormRequest
+class_comment: null
+dependencies:
+- name: AuthorizationException
+  type: class
+  source: Illuminate\Auth\Access\AuthorizationException
+- name: Response
+  type: class
+  source: Illuminate\Auth\Access\Response
+- name: Container
+  type: class
+  source: Illuminate\Contracts\Container\Container
+- name: ValidationFactory
+  type: class
+  source: Illuminate\Contracts\Validation\Factory
+- name: ValidatesWhenResolved
+  type: class
+  source: Illuminate\Contracts\Validation\ValidatesWhenResolved
+- name: Validator
+  type: class
+  source: Illuminate\Contracts\Validation\Validator
+- name: Request
+  type: class
+  source: Illuminate\Http\Request
+- name: Redirector
+  type: class
+  source: Illuminate\Routing\Redirector
+- name: ValidatesWhenResolvedTrait
+  type: class
+  source: Illuminate\Validation\ValidatesWhenResolvedTrait
+- name: ValidatesWhenResolvedTrait
+  type: class
+  source: ValidatesWhenResolvedTrait
+properties:
+- name: container
+  visibility: protected
+  comment: '# * The container instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Container\Container'
+- name: redirector
+  visibility: protected
+  comment: '# * The redirector instance.
+
+    # *
+
+    # * @var \Illuminate\Routing\Redirector'
+- name: redirect
+  visibility: protected
+  comment: '# * The URI to redirect to if validation fails.
+
+    # *
+
+    # * @var string'
+- name: redirectRoute
+  visibility: protected
+  comment: '# * The route to redirect to if validation fails.
+
+    # *
+
+    # * @var string'
+- name: redirectAction
+  visibility: protected
+  comment: '# * The controller action to redirect to if validation fails.
+
+    # *
+
+    # * @var string'
+- name: errorBag
+  visibility: protected
+  comment: '# * The key to be used for the view error bag.
+
+    # *
+
+    # * @var string'
+- name: stopOnFirstFailure
+  visibility: protected
+  comment: '# * Indicates whether validation should stop after the first rule failure.
+
+    # *
+
+    # * @var bool'
+- name: validator
+  visibility: protected
+  comment: '# * The validator instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Validation\Validator'
+methods:
+- name: getValidatorInstance
+  visibility: protected
+  parameters: []
+  comment: "# * The container instance.\n# *\n# * @var \\Illuminate\\Contracts\\Container\\\
+    Container\n# */\n# protected $container;\n# \n# /**\n# * The redirector instance.\n\
+    # *\n# * @var \\Illuminate\\Routing\\Redirector\n# */\n# protected $redirector;\n\
+    # \n# /**\n# * The URI to redirect to if validation fails.\n# *\n# * @var string\n\
+    # */\n# protected $redirect;\n# \n# /**\n# * The route to redirect to if validation\
+    \ fails.\n# *\n# * @var string\n# */\n# protected $redirectRoute;\n# \n# /**\n\
+    # * The controller action to redirect to if validation fails.\n# *\n# * @var string\n\
+    # */\n# protected $redirectAction;\n# \n# /**\n# * The key to be used for the\
+    \ view error bag.\n# *\n# * @var string\n# */\n# protected $errorBag = 'default';\n\
+    # \n# /**\n# * Indicates whether validation should stop after the first rule failure.\n\
+    # *\n# * @var bool\n# */\n# protected $stopOnFirstFailure = false;\n# \n# /**\n\
+    # * The validator instance.\n# *\n# * @var \\Illuminate\\Contracts\\Validation\\\
+    Validator\n# */\n# protected $validator;\n# \n# /**\n# * Get the validator instance\
+    \ for the request.\n# *\n# * @return \\Illuminate\\Contracts\\Validation\\Validator"
+- name: createDefaultValidator
+  visibility: protected
+  parameters:
+  - name: factory
+  comment: '# * Create the default validator instance.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Validation\Factory  $factory
+
+    # * @return \Illuminate\Contracts\Validation\Validator'
+- name: validationData
+  visibility: public
+  parameters: []
+  comment: '# * Get data to be validated from the request.
+
+    # *
+
+    # * @return array'
+- name: validationRules
+  visibility: protected
+  parameters: []
+  comment: '# * Get the validation rules for this form request.
+
+    # *
+
+    # * @return array'
+- name: failedValidation
+  visibility: protected
+  parameters:
+  - name: validator
+  comment: '# * Handle a failed validation attempt.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Validation\Validator  $validator
+
+    # * @return void
+
+    # *
+
+    # * @throws \Illuminate\Validation\ValidationException'
+- name: getRedirectUrl
+  visibility: protected
+  parameters: []
+  comment: '# * Get the URL to redirect to on a validation error.
+
+    # *
+
+    # * @return string'
+- name: passesAuthorization
+  visibility: protected
+  parameters: []
+  comment: '# * Determine if the request passes the authorization check.
+
+    # *
+
+    # * @return bool
+
+    # *
+
+    # * @throws \Illuminate\Auth\Access\AuthorizationException'
+- name: failedAuthorization
+  visibility: protected
+  parameters: []
+  comment: '# * Handle a failed authorization attempt.
+
+    # *
+
+    # * @return void
+
+    # *
+
+    # * @throws \Illuminate\Auth\Access\AuthorizationException'
+- name: safe
+  visibility: public
+  parameters:
+  - name: keys
+    default: 'null'
+  comment: '# * Get a validated input container for the validated input.
+
+    # *
+
+    # * @param  array|null  $keys
+
+    # * @return \Illuminate\Support\ValidatedInput|array'
+- name: validated
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  - name: default
+    default: 'null'
+  comment: '# * Get the validated data from the request.
+
+    # *
+
+    # * @param  array|int|string|null  $key
+
+    # * @param  mixed  $default
+
+    # * @return mixed'
+- name: messages
+  visibility: public
+  parameters: []
+  comment: '# * Get custom messages for validator errors.
+
+    # *
+
+    # * @return array'
+- name: attributes
+  visibility: public
+  parameters: []
+  comment: '# * Get custom attributes for validator errors.
+
+    # *
+
+    # * @return array'
+- name: setValidator
+  visibility: public
+  parameters:
+  - name: validator
+  comment: '# * Set the Validator instance.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Validation\Validator  $validator
+
+    # * @return $this'
+- name: setRedirector
+  visibility: public
+  parameters:
+  - name: redirector
+  comment: '# * Set the Redirector instance.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Redirector  $redirector
+
+    # * @return $this'
+- name: setContainer
+  visibility: public
+  parameters:
+  - name: container
+  comment: '# * Set the container implementation.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Container\Container  $container
+
+    # * @return $this'
+traits:
+- Illuminate\Auth\Access\AuthorizationException
+- Illuminate\Auth\Access\Response
+- Illuminate\Contracts\Container\Container
+- Illuminate\Contracts\Validation\ValidatesWhenResolved
+- Illuminate\Contracts\Validation\Validator
+- Illuminate\Http\Request
+- Illuminate\Routing\Redirector
+- Illuminate\Validation\ValidatesWhenResolvedTrait
+- ValidatesWhenResolvedTrait
+interfaces:
+- ValidatesWhenResolved

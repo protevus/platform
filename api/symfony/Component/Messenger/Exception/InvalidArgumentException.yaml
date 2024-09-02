@@ -1,0 +1,8 @@
+name: InvalidArgumentException
+class_comment: '# * @author Yonel Ceruto <yonelceruto@gmail.com>'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- ExceptionInterface

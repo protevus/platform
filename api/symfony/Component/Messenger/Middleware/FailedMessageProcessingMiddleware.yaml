@@ -1,0 +1,26 @@
+name: FailedMessageProcessingMiddleware
+class_comment: '# * @author Ryan Weaver <ryan@symfonycasts.com>'
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: ReceivedStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\ReceivedStamp
+- name: SentToFailureTransportStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\SentToFailureTransportStamp
+properties: []
+methods:
+- name: handle
+  visibility: public
+  parameters:
+  - name: envelope
+  - name: stack
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Stamp\ReceivedStamp
+- Symfony\Component\Messenger\Stamp\SentToFailureTransportStamp
+interfaces:
+- MiddlewareInterface

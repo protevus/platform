@@ -1,0 +1,63 @@
+name: ArrayDenormalizerTest
+class_comment: null
+dependencies:
+- name: MockObject
+  type: class
+  source: PHPUnit\Framework\MockObject\MockObject
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ArrayDenormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ArrayDenormalizer
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+properties:
+- name: foo
+  visibility: public
+  comment: null
+- name: bar
+  visibility: public
+  comment: null
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testDenormalize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupportsValidArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupportsInvalidArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupportsNoArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalizeWithoutDenormalizer
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupportsDenormalizationWithoutDenormalizer
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+  - name: bar
+  comment: null
+traits:
+- PHPUnit\Framework\MockObject\MockObject
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Normalizer\ArrayDenormalizer
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+interfaces: []

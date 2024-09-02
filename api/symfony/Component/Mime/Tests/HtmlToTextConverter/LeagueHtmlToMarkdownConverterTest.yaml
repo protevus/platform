@@ -1,0 +1,19 @@
+name: LeagueHtmlToMarkdownConverterTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: LeagueHtmlToMarkdownConverter
+  type: class
+  source: Symfony\Component\Mime\HtmlToTextConverter\LeagueHtmlToMarkdownConverter
+properties: []
+methods:
+- name: testConvert
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mime\HtmlToTextConverter\LeagueHtmlToMarkdownConverter
+interfaces: []

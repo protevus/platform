@@ -1,0 +1,71 @@
+name: mailer_webhook
+class_comment: null
+dependencies:
+- name: BrevoPayloadConverter
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Brevo\RemoteEvent\BrevoPayloadConverter
+- name: BrevoRequestParser
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Brevo\Webhook\BrevoRequestParser
+- name: MailerSendPayloadConverter
+  type: class
+  source: Symfony\Component\Mailer\Bridge\MailerSend\RemoteEvent\MailerSendPayloadConverter
+- name: MailerSendRequestParser
+  type: class
+  source: Symfony\Component\Mailer\Bridge\MailerSend\Webhook\MailerSendRequestParser
+- name: MailgunPayloadConverter
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Mailgun\RemoteEvent\MailgunPayloadConverter
+- name: MailgunRequestParser
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Mailgun\Webhook\MailgunRequestParser
+- name: MailjetPayloadConverter
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Mailjet\RemoteEvent\MailjetPayloadConverter
+- name: MailjetRequestParser
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Mailjet\Webhook\MailjetRequestParser
+- name: MailomatPayloadConverter
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Mailomat\RemoteEvent\MailomatPayloadConverter
+- name: MailomatRequestParser
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Mailomat\Webhook\MailomatRequestParser
+- name: PostmarkPayloadConverter
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Postmark\RemoteEvent\PostmarkPayloadConverter
+- name: PostmarkRequestParser
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Postmark\Webhook\PostmarkRequestParser
+- name: ResendPayloadConverter
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Resend\RemoteEvent\ResendPayloadConverter
+- name: ResendRequestParser
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Resend\Webhook\ResendRequestParser
+- name: SendgridPayloadConverter
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Sendgrid\RemoteEvent\SendgridPayloadConverter
+- name: SendgridRequestParser
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Sendgrid\Webhook\SendgridRequestParser
+properties: []
+methods: []
+traits:
+- Symfony\Component\Mailer\Bridge\Brevo\RemoteEvent\BrevoPayloadConverter
+- Symfony\Component\Mailer\Bridge\Brevo\Webhook\BrevoRequestParser
+- Symfony\Component\Mailer\Bridge\MailerSend\RemoteEvent\MailerSendPayloadConverter
+- Symfony\Component\Mailer\Bridge\MailerSend\Webhook\MailerSendRequestParser
+- Symfony\Component\Mailer\Bridge\Mailgun\RemoteEvent\MailgunPayloadConverter
+- Symfony\Component\Mailer\Bridge\Mailgun\Webhook\MailgunRequestParser
+- Symfony\Component\Mailer\Bridge\Mailjet\RemoteEvent\MailjetPayloadConverter
+- Symfony\Component\Mailer\Bridge\Mailjet\Webhook\MailjetRequestParser
+- Symfony\Component\Mailer\Bridge\Mailomat\RemoteEvent\MailomatPayloadConverter
+- Symfony\Component\Mailer\Bridge\Mailomat\Webhook\MailomatRequestParser
+- Symfony\Component\Mailer\Bridge\Postmark\RemoteEvent\PostmarkPayloadConverter
+- Symfony\Component\Mailer\Bridge\Postmark\Webhook\PostmarkRequestParser
+- Symfony\Component\Mailer\Bridge\Resend\RemoteEvent\ResendPayloadConverter
+- Symfony\Component\Mailer\Bridge\Resend\Webhook\ResendRequestParser
+- Symfony\Component\Mailer\Bridge\Sendgrid\RemoteEvent\SendgridPayloadConverter
+- Symfony\Component\Mailer\Bridge\Sendgrid\Webhook\SendgridRequestParser
+interfaces: []

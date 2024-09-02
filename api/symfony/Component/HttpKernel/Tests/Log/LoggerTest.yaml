@@ -1,0 +1,97 @@
+name: LoggerTest
+class_comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# * @author Jordi\
+  \ Boggiano <j.boggiano@seld.be>"
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: LogLevel
+  type: class
+  source: Psr\Log\LogLevel
+- name: Logger
+  type: class
+  source: Symfony\Component\HttpKernel\Log\Logger
+properties: []
+methods:
+- name: getLogs
+  visibility: public
+  parameters: []
+  comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# * @author Jordi Boggiano\
+    \ <j.boggiano@seld.be>\n# */\n# class LoggerTest extends TestCase\n# {\n# private\
+    \ Logger $logger;\n# private string $tmpFile;\n# \n# protected function setUp():\
+    \ void\n# {\n# $this->tmpFile = tempnam(sys_get_temp_dir(), 'log');\n# $this->logger\
+    \ = new Logger(LogLevel::DEBUG, $this->tmpFile);\n# }\n# \n# protected function\
+    \ tearDown(): void\n# {\n# if (!@unlink($this->tmpFile)) {\n# file_put_contents($this->tmpFile,\
+    \ '');\n# }\n# }\n# \n# public static function assertLogsMatch(array $expected,\
+    \ array $given)\n# {\n# foreach ($given as $k => $line) {\n# self::assertSame(1,\
+    \ preg_match('/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}[\\+-][0-9]{2}:[0-9]{2}\
+    \ '.preg_quote($expected[$k]).'/', $line), \"\\\"$line\\\" do not match expected\
+    \ pattern \\\"$expected[$k]\\\"\");\n# }\n# }\n# \n# /**\n# * Return the log messages\
+    \ in order.\n# *\n# * @return string[]"
+- name: testImplements
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLogsAtAllLevels
+  visibility: public
+  parameters:
+  - name: level
+  - name: message
+  comment: '# * @dataProvider provideLevelsAndMessages'
+- name: provideLevelsAndMessages
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLogLevelDisabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowsOnInvalidLevel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowsOnInvalidMinLevel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidOutput
+  visibility: public
+  parameters: []
+  comment: null
+- name: testContextReplacement
+  visibility: public
+  parameters: []
+  comment: null
+- name: testObjectCastToString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testContextCanContainAnything
+  visibility: public
+  parameters: []
+  comment: null
+- name: testContextExceptionKeyCanBeExceptionOrOtherValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFormatter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLogsWithoutOutput
+  visibility: public
+  parameters: []
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Psr\Log\LoggerInterface
+- Psr\Log\LogLevel
+- Symfony\Component\HttpKernel\Log\Logger
+interfaces: []

@@ -1,0 +1,68 @@
+name: GenericEventTest
+class_comment: '# * Test class for Event.'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: GenericEvent
+  type: class
+  source: Symfony\Component\EventDispatcher\GenericEvent
+properties: []
+methods:
+- name: testGetArguments
+  visibility: public
+  parameters: []
+  comment: "# * Test class for Event.\n# */\n# class GenericEventTest extends TestCase\n\
+    # {\n# private GenericEvent $event;\n# private \\stdClass $subject;\n# \n# protected\
+    \ function setUp(): void\n# {\n# $this->subject = new \\stdClass();\n# $this->event\
+    \ = new GenericEvent($this->subject, ['name' => 'Event']);\n# }\n# \n# public\
+    \ function testConstruct()\n# {\n# $this->assertEquals($this->event, new GenericEvent($this->subject,\
+    \ ['name' => 'Event']));\n# }\n# \n# /**\n# * Tests Event->getArgs()."
+- name: testSetArguments
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetArgException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOffsetGet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOffsetSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOffsetUnset
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOffsetIsset
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetSubject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasIterator
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\EventDispatcher\GenericEvent
+interfaces: []

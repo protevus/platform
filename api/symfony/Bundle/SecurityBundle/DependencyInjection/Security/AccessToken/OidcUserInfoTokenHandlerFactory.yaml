@@ -1,0 +1,48 @@
+name: OidcUserInfoTokenHandlerFactory
+class_comment: '# * Configures a token handler for an OIDC server.'
+dependencies:
+- name: NodeBuilder
+  type: class
+  source: Symfony\Component\Config\Definition\Builder\NodeBuilder
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: LogicException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\LogicException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: HttpClientInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\HttpClientInterface
+properties: []
+methods:
+- name: create
+  visibility: public
+  parameters:
+  - name: container
+  - name: id
+  - name: config
+  comment: null
+- name: getKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: addConfiguration
+  visibility: public
+  parameters:
+  - name: node
+  comment: null
+traits:
+- Symfony\Component\Config\Definition\Builder\NodeBuilder
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\LogicException
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Contracts\HttpClient\HttpClientInterface
+interfaces:
+- TokenHandlerFactoryInterface

@@ -1,0 +1,26 @@
+name: DetectsLostConnections
+class_comment: null
+dependencies:
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: Throwable
+  type: class
+  source: Throwable
+properties: []
+methods:
+- name: causedByLostConnection
+  visibility: protected
+  parameters:
+  - name: e
+  comment: '# * Determine if the given exception was caused by a lost connection.
+
+    # *
+
+    # * @param  \Throwable  $e
+
+    # * @return bool'
+traits:
+- Illuminate\Support\Str
+- Throwable
+interfaces: []

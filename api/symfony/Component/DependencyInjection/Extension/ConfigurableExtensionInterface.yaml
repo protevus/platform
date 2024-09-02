@@ -1,0 +1,42 @@
+name: ConfigurableExtensionInterface
+class_comment: null
+dependencies:
+- name: ConfigurableInterface
+  type: class
+  source: Symfony\Component\Config\Definition\ConfigurableInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerConfigurator
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator
+properties: []
+methods:
+- name: prependExtension
+  visibility: public
+  parameters:
+  - name: container
+  - name: builder
+  comment: '# * @author Yonel Ceruto <yonelceruto@gmail.com>
+
+    # */
+
+    # interface ConfigurableExtensionInterface extends ConfigurableInterface
+
+    # {
+
+    # /**
+
+    # * Allows an extension to prepend the extension configurations.'
+- name: loadExtension
+  visibility: public
+  parameters:
+  - name: config
+  - name: container
+  - name: builder
+  comment: '# * Loads a specific configuration.'
+traits:
+- Symfony\Component\Config\Definition\ConfigurableInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator
+interfaces: []

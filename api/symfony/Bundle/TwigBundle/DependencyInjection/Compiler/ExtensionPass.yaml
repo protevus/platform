@@ -1,0 +1,49 @@
+name: ExtensionPass
+class_comment: "# * @author Jean-Fran\xE7ois Simon <jeanfrancois.simon@sensiolabs.com>"
+dependencies:
+- name: Packages
+  type: class
+  source: Symfony\Component\Asset\Packages
+- name: Alias
+  type: class
+  source: Symfony\Component\DependencyInjection\Alias
+- name: CompilerPassInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: EmojiTransliterator
+  type: class
+  source: Symfony\Component\Emoji\EmojiTransliterator
+- name: Expression
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Expression
+- name: UrlGeneratorInterface
+  type: class
+  source: Symfony\Component\Routing\Generator\UrlGeneratorInterface
+- name: Workflow
+  type: class
+  source: Symfony\Component\Workflow\Workflow
+- name: Yaml
+  type: class
+  source: Symfony\Component\Yaml\Yaml
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\Asset\Packages
+- Symfony\Component\DependencyInjection\Alias
+- Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\Emoji\EmojiTransliterator
+- Symfony\Component\ExpressionLanguage\Expression
+- Symfony\Component\Routing\Generator\UrlGeneratorInterface
+- Symfony\Component\Workflow\Workflow
+- Symfony\Component\Yaml\Yaml
+interfaces:
+- CompilerPassInterface

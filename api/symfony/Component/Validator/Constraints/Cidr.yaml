@@ -1,0 +1,60 @@
+name: Cidr
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Validator\Exception\InvalidArgumentException
+properties:
+- name: normalizer
+  visibility: public
+  comment: "# * Validates that a value is a valid CIDR notation.\n# *\n# * @see https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\n\
+    # *\n# * @author Sorin Pop <popsorin15@gmail.com>\n# * @author Calin Bolea <calin.bolea@gmail.com>\n\
+    # * @author Ninos Ego <me@ninosego.de>\n# */\n# #[\\Attribute(\\Attribute::TARGET_PROPERTY\
+    \ | \\Attribute::TARGET_METHOD | \\Attribute::IS_REPEATABLE)]\n# class Cidr extends\
+    \ Constraint\n# {\n# public const INVALID_CIDR_ERROR = '5649e53a-5afb-47c5-a360-ffbab3be8567';\n\
+    # public const OUT_OF_RANGE_ERROR = 'b9f14a51-acbd-401a-a078-8c6b204ab32f';\n\
+    # \n# protected const ERROR_NAMES = [\n# self::INVALID_CIDR_ERROR => 'INVALID_CIDR_ERROR',\n\
+    # self::OUT_OF_RANGE_ERROR => 'OUT_OF_RANGE_VIOLATION',\n# ];\n# \n# private const\
+    \ NET_MAXES = [\n# Ip::V4 => 32,\n# Ip::V6 => 128,\n# Ip::ALL => 128,\n# \n# Ip::V4_NO_PUBLIC\
+    \ => 32,\n# Ip::V6_NO_PUBLIC => 128,\n# Ip::ALL_NO_PUBLIC => 128,\n# \n# Ip::V4_NO_PRIVATE\
+    \ => 32,\n# Ip::V6_NO_PRIVATE => 128,\n# Ip::ALL_NO_PRIVATE => 128,\n# \n# Ip::V4_NO_RESERVED\
+    \ => 32,\n# Ip::V6_NO_RESERVED => 128,\n# Ip::ALL_NO_RESERVED => 128,\n# \n# Ip::V4_ONLY_PUBLIC\
+    \ => 32,\n# Ip::V6_ONLY_PUBLIC => 128,\n# Ip::ALL_ONLY_PUBLIC => 128,\n# \n# Ip::V4_ONLY_PRIVATE\
+    \ => 32,\n# Ip::V6_ONLY_PRIVATE => 128,\n# Ip::ALL_ONLY_PRIVATE => 128,\n# \n\
+    # Ip::V4_ONLY_RESERVED => 32,\n# Ip::V6_ONLY_RESERVED => 128,\n# Ip::ALL_ONLY_RESERVED\
+    \ => 128,\n# ];\n# \n# public string $version = Ip::ALL;\n# public string $message\
+    \ = 'This value is not a valid CIDR notation.';\n# public string $netmaskRangeViolationMessage\
+    \ = 'The value of the netmask should be between {{ min }} and {{ max }}.';\n#\
+    \ public int $netmaskMin = 0;\n# public int $netmaskMax;\n# \n# /** @var callable|null"
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: options
+    default: 'null'
+  - name: version
+    default: 'null'
+  - name: netmaskMin
+    default: 'null'
+  - name: netmaskMax
+    default: 'null'
+  - name: message
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  - name: normalizer
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- Symfony\Component\Validator\Exception\InvalidArgumentException
+interfaces: []

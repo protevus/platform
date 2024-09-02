@@ -1,0 +1,21 @@
+name: ContextBuilderTrait
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: withContext
+  visibility: public
+  parameters:
+  - name: context
+  comment: "# * @author Mathias Arlaud <mathias.arlaud@gmail.com>\n# */\n# trait ContextBuilderTrait\n\
+    # {\n# /**\n# * @var array<string, mixed>\n# */\n# private array $context = [];\n\
+    # \n# protected function with(string $key, mixed $value): static\n# {\n# $instance\
+    \ = new static();\n# $instance->context = array_merge($this->context, [$key =>\
+    \ $value]);\n# \n# return $instance;\n# }\n# \n# /**\n# * @param ContextBuilderInterface|array<string,\
+    \ mixed> $context"
+- name: toArray
+  visibility: public
+  parameters: []
+  comment: '# * @return array<string, mixed>'
+traits: []
+interfaces: []

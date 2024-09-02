@@ -1,0 +1,11 @@
+name: ReadOnlyClass
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: say
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

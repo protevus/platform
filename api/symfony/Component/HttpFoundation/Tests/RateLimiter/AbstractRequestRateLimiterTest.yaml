@@ -1,0 +1,41 @@
+name: AbstractRequestRateLimiterTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: LimiterInterface
+  type: class
+  source: Symfony\Component\RateLimiter\LimiterInterface
+- name: RateLimit
+  type: class
+  source: Symfony\Component\RateLimiter\RateLimit
+properties: []
+methods:
+- name: testConsume
+  visibility: public
+  parameters:
+  - name: rateLimits
+  - name: expected
+  comment: '# * @dataProvider provideRateLimits'
+- name: testConsumeWithoutLimiterAddsSpecialNoLimiter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResetLimiters
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideRateLimits
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\RateLimiter\LimiterInterface
+- Symfony\Component\RateLimiter\RateLimit
+interfaces: []

@@ -1,0 +1,22 @@
+name: CircularAssetsException
+class_comment: '# * Thrown when a circular reference is detected while creating an
+  asset.'
+dependencies:
+- name: MappedAsset
+  type: class
+  source: Symfony\Component\AssetMapper\MappedAsset
+properties: []
+methods:
+- name: getIncompleteMappedAsset
+  visibility: public
+  parameters: []
+  comment: "# * Thrown when a circular reference is detected while creating an asset.\n\
+    # */\n# class CircularAssetsException extends RuntimeException\n# {\n# public\
+    \ function __construct(private MappedAsset $mappedAsset, string $message = '',\
+    \ int $code = 0, ?\\Throwable $previous = null)\n# {\n# parent::__construct($message,\
+    \ $code, $previous);\n# }\n# \n# /**\n# * Returns the asset that was being created\
+    \ when the circular reference was detected.\n# *\n# * This asset will not be fully\
+    \ initialized: it will be missing some\n# * properties like digest and content."
+traits:
+- Symfony\Component\AssetMapper\MappedAsset
+interfaces: []

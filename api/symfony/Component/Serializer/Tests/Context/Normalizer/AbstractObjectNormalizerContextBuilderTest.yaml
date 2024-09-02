@@ -1,0 +1,46 @@
+name: AbstractObjectNormalizerContextBuilderTest
+class_comment: '# * @author Mathias Arlaud <mathias.arlaud@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AbstractObjectNormalizerContextBuilder
+  type: class
+  source: Symfony\Component\Serializer\Context\Normalizer\AbstractObjectNormalizerContextBuilder
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Serializer\Exception\InvalidArgumentException
+- name: AbstractObjectNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer
+properties: []
+methods:
+- name: testWithers
+  visibility: public
+  parameters:
+  - name: values
+  comment: "# * @author Mathias Arlaud <mathias.arlaud@gmail.com>\n# */\n# class AbstractObjectNormalizerContextBuilderTest\
+    \ extends TestCase\n# {\n# private AbstractObjectNormalizerContextBuilder $contextBuilder;\n\
+    # \n# protected function setUp(): void\n# {\n# $this->contextBuilder = new class\
+    \ extends AbstractObjectNormalizerContextBuilder {};\n# }\n# \n# /**\n# * @dataProvider\
+    \ withersDataProvider\n# *\n# * @param array<string, mixed> $values"
+- name: withersDataProvider
+  visibility: public
+  parameters: []
+  comment: '# * @return iterable<array{0: array<string, mixed>|}>'
+- name: testValidateDepthKeyPattern
+  visibility: public
+  parameters:
+  - name: pattern
+  - name: expectException
+  comment: '# * @dataProvider validateDepthKeyPatternDataProvider'
+- name: validateDepthKeyPatternDataProvider
+  visibility: public
+  parameters: []
+  comment: '# * @return iterable<array{0: string, 1: bool}>'
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Context\Normalizer\AbstractObjectNormalizerContextBuilder
+- Symfony\Component\Serializer\Exception\InvalidArgumentException
+- Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer
+interfaces: []

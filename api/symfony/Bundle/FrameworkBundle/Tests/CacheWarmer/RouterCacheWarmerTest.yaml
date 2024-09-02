@@ -1,0 +1,43 @@
+name: RouterCacheWarmerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: RouterCacheWarmer
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer
+- name: Container
+  type: class
+  source: Symfony\Component\DependencyInjection\Container
+- name: WarmableInterface
+  type: class
+  source: Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface
+- name: RouterInterface
+  type: class
+  source: Symfony\Component\Routing\RouterInterface
+properties: []
+methods:
+- name: testWarmUpWithWarmableInterfaceWithBuildDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWarmUpWithoutWarmableInterfaceWithBuildDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWarmUpWithWarmableInterfaceWithoutBuildDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWarmUpWithoutWarmableInterfaceWithoutBuildDir
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer
+- Symfony\Component\DependencyInjection\Container
+- Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface
+- Symfony\Component\Routing\RouterInterface
+interfaces: []

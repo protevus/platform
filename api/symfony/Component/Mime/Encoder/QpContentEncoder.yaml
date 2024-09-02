@@ -1,0 +1,23 @@
+name: QpContentEncoder
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: standardize
+  visibility: private
+  parameters:
+  - name: string
+  comment: "# * @author Lars Strojny\n# */\n# final class QpContentEncoder implements\
+    \ ContentEncoderInterface\n# {\n# public function encodeByteStream($stream, int\
+    \ $maxLineLength = 0): iterable\n# {\n# if (!\\is_resource($stream)) {\n# throw\
+    \ new \\TypeError(\\sprintf('Method \"%s\" takes a stream as a first argument.',\
+    \ __METHOD__));\n# }\n# \n# // we don't use PHP stream filters here as the content\
+    \ should be small enough\n# yield $this->encodeString(stream_get_contents($stream),\
+    \ 'utf-8', 0, $maxLineLength);\n# }\n# \n# public function getName(): string\n\
+    # {\n# return 'quoted-printable';\n# }\n# \n# public function encodeString(string\
+    \ $string, ?string $charset = 'utf-8', int $firstLineOffset = 0, int $maxLineLength\
+    \ = 0): string\n# {\n# return $this->standardize(quoted_printable_encode($string));\n\
+    # }\n# \n# /**\n# * Make sure CRLF is correct and HT/SPACE are in valid places."
+traits: []
+interfaces:
+- ContentEncoderInterface

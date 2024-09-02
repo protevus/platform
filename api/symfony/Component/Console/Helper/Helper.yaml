@@ -1,0 +1,61 @@
+name: Helper
+class_comment: null
+dependencies:
+- name: OutputFormatterInterface
+  type: class
+  source: Symfony\Component\Console\Formatter\OutputFormatterInterface
+- name: UnicodeString
+  type: class
+  source: Symfony\Component\String\UnicodeString
+properties: []
+methods:
+- name: width
+  visibility: public
+  parameters:
+  - name: string
+  comment: "# * Helper is the base class for all helper classes.\n# *\n# * @author\
+    \ Fabien Potencier <fabien@symfony.com>\n# */\n# abstract class Helper implements\
+    \ HelperInterface\n# {\n# protected ?HelperSet $helperSet = null;\n# \n# public\
+    \ function setHelperSet(?HelperSet $helperSet): void\n# {\n# $this->helperSet\
+    \ = $helperSet;\n# }\n# \n# public function getHelperSet(): ?HelperSet\n# {\n\
+    # return $this->helperSet;\n# }\n# \n# /**\n# * Returns the width of a string,\
+    \ using mb_strwidth if it is available.\n# * The width is how many characters\
+    \ positions the string will use."
+- name: length
+  visibility: public
+  parameters:
+  - name: string
+  comment: '# * Returns the length of a string, using mb_strlen if it is available.
+
+    # * The length is related to how many bytes the string will use.'
+- name: substr
+  visibility: public
+  parameters:
+  - name: string
+  - name: from
+  - name: length
+    default: 'null'
+  comment: '# * Returns the subset of a string, using mb_substr if it is available.'
+- name: formatTime
+  visibility: public
+  parameters:
+  - name: secs
+  - name: precision
+    default: '1'
+  comment: null
+- name: formatMemory
+  visibility: public
+  parameters:
+  - name: memory
+  comment: null
+- name: removeDecoration
+  visibility: public
+  parameters:
+  - name: formatter
+  - name: string
+  comment: null
+traits:
+- Symfony\Component\Console\Formatter\OutputFormatterInterface
+- Symfony\Component\String\UnicodeString
+interfaces:
+- HelperInterface

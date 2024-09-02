@@ -1,0 +1,59 @@
+name: InspectUuidCommandTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+- name: InspectUuidCommand
+  type: class
+  source: Symfony\Component\Uid\Command\InspectUuidCommand
+properties: []
+methods:
+- name: testInvalid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNil
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnknown
+  visibility: public
+  parameters: []
+  comment: null
+- name: testV1
+  visibility: public
+  parameters: []
+  comment: null
+- name: testV3
+  visibility: public
+  parameters: []
+  comment: null
+- name: testV4
+  visibility: public
+  parameters: []
+  comment: null
+- name: testV5
+  visibility: public
+  parameters: []
+  comment: null
+- name: testV6
+  visibility: public
+  parameters: []
+  comment: null
+- name: testV7
+  visibility: public
+  parameters: []
+  comment: null
+- name: testV8
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Tester\CommandTester
+- Symfony\Component\Uid\Command\InspectUuidCommand
+interfaces: []

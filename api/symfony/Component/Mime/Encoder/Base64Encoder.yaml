@@ -1,0 +1,37 @@
+name: Base64Encoder
+class_comment: '# * @author Chris Corbyn'
+dependencies: []
+properties: []
+methods:
+- name: encodeString
+  visibility: public
+  parameters:
+  - name: string
+  - name: charset
+    default: '''utf-8'''
+  - name: firstLineOffset
+    default: '0'
+  - name: maxLineLength
+    default: '0'
+  comment: '# * @author Chris Corbyn
+
+    # */
+
+    # class Base64Encoder implements EncoderInterface
+
+    # {
+
+    # /**
+
+    # * Takes an unencoded string and produces a Base64 encoded string from it.
+
+    # *
+
+    # * Base64 encoded strings have a maximum line length of 76 characters.
+
+    # * If the first line needs to be shorter, indicate the difference with
+
+    # * $firstLineOffset.'
+traits: []
+interfaces:
+- EncoderInterface

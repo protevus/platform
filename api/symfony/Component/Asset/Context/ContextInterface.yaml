@@ -1,0 +1,29 @@
+name: ContextInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getBasePath
+  visibility: public
+  parameters: []
+  comment: '# * Holds information about the current request.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # interface ContextInterface
+
+    # {
+
+    # /**
+
+    # * Gets the base path.'
+- name: isSecure
+  visibility: public
+  parameters: []
+  comment: '# * Checks whether the request is secure or not.'
+traits: []
+interfaces: []

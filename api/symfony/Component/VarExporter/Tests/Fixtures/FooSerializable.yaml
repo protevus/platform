@@ -1,0 +1,29 @@
+name: FooSerializable
+class_comment: null
+dependencies: []
+properties:
+- name: foo
+  visibility: private
+  comment: null
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: serialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: unserialize
+  visibility: public
+  parameters:
+  - name: str
+  comment: null
+traits: []
+interfaces:
+- \Serializable

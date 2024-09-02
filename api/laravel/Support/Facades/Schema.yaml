@@ -1,0 +1,257 @@
+name: Schema
+class_comment: '# * @method static void defaultStringLength(int $length)
+
+  # * @method static void defaultMorphKeyType(string $type)
+
+  # * @method static void morphUsingUuids()
+
+  # * @method static void morphUsingUlids()
+
+  # * @method static bool createDatabase(string $name)
+
+  # * @method static bool dropDatabaseIfExists(string $name)
+
+  # * @method static bool hasTable(string $table)
+
+  # * @method static bool hasView(string $view)
+
+  # * @method static array getTables()
+
+  # * @method static array getTableListing()
+
+  # * @method static array getViews()
+
+  # * @method static array getTypes()
+
+  # * @method static bool hasColumn(string $table, string $column)
+
+  # * @method static bool hasColumns(string $table, array $columns)
+
+  # * @method static void whenTableHasColumn(string $table, string $column, \Closure
+  $callback)
+
+  # * @method static void whenTableDoesntHaveColumn(string $table, string $column,
+  \Closure $callback)
+
+  # * @method static string getColumnType(string $table, string $column, bool $fullDefinition
+  = false)
+
+  # * @method static array getColumnListing(string $table)
+
+  # * @method static array getColumns(string $table)
+
+  # * @method static array getIndexes(string $table)
+
+  # * @method static array getIndexListing(string $table)
+
+  # * @method static bool hasIndex(string $table, string|array $index, string|null
+  $type = null)
+
+  # * @method static array getForeignKeys(string $table)
+
+  # * @method static void table(string $table, \Closure $callback)
+
+  # * @method static void create(string $table, \Closure $callback)
+
+  # * @method static void drop(string $table)
+
+  # * @method static void dropIfExists(string $table)
+
+  # * @method static void dropColumns(string $table, string|array $columns)
+
+  # * @method static void dropAllTables()
+
+  # * @method static void dropAllViews()
+
+  # * @method static void dropAllTypes()
+
+  # * @method static void rename(string $from, string $to)
+
+  # * @method static bool enableForeignKeyConstraints()
+
+  # * @method static bool disableForeignKeyConstraints()
+
+  # * @method static mixed withoutForeignKeyConstraints(\Closure $callback)
+
+  # * @method static \Illuminate\Database\Connection getConnection()
+
+  # * @method static \Illuminate\Database\Schema\Builder setConnection(\Illuminate\Database\Connection
+  $connection)
+
+  # * @method static void blueprintResolver(\Closure $resolver)
+
+  # * @method static void macro(string $name, object|callable $macro, object|callable
+  $macro = null)
+
+  # * @method static void mixin(object $mixin, bool $replace = true)
+
+  # * @method static bool hasMacro(string $name)
+
+  # * @method static void flushMacros()
+
+  # *
+
+  # * @see \Illuminate\Database\Schema\Builder'
+dependencies: []
+properties:
+- name: cached
+  visibility: protected
+  comment: '# * @method static void defaultStringLength(int $length)
+
+    # * @method static void defaultMorphKeyType(string $type)
+
+    # * @method static void morphUsingUuids()
+
+    # * @method static void morphUsingUlids()
+
+    # * @method static bool createDatabase(string $name)
+
+    # * @method static bool dropDatabaseIfExists(string $name)
+
+    # * @method static bool hasTable(string $table)
+
+    # * @method static bool hasView(string $view)
+
+    # * @method static array getTables()
+
+    # * @method static array getTableListing()
+
+    # * @method static array getViews()
+
+    # * @method static array getTypes()
+
+    # * @method static bool hasColumn(string $table, string $column)
+
+    # * @method static bool hasColumns(string $table, array $columns)
+
+    # * @method static void whenTableHasColumn(string $table, string $column, \Closure
+    $callback)
+
+    # * @method static void whenTableDoesntHaveColumn(string $table, string $column,
+    \Closure $callback)
+
+    # * @method static string getColumnType(string $table, string $column, bool $fullDefinition
+    = false)
+
+    # * @method static array getColumnListing(string $table)
+
+    # * @method static array getColumns(string $table)
+
+    # * @method static array getIndexes(string $table)
+
+    # * @method static array getIndexListing(string $table)
+
+    # * @method static bool hasIndex(string $table, string|array $index, string|null
+    $type = null)
+
+    # * @method static array getForeignKeys(string $table)
+
+    # * @method static void table(string $table, \Closure $callback)
+
+    # * @method static void create(string $table, \Closure $callback)
+
+    # * @method static void drop(string $table)
+
+    # * @method static void dropIfExists(string $table)
+
+    # * @method static void dropColumns(string $table, string|array $columns)
+
+    # * @method static void dropAllTables()
+
+    # * @method static void dropAllViews()
+
+    # * @method static void dropAllTypes()
+
+    # * @method static void rename(string $from, string $to)
+
+    # * @method static bool enableForeignKeyConstraints()
+
+    # * @method static bool disableForeignKeyConstraints()
+
+    # * @method static mixed withoutForeignKeyConstraints(\Closure $callback)
+
+    # * @method static \Illuminate\Database\Connection getConnection()
+
+    # * @method static \Illuminate\Database\Schema\Builder setConnection(\Illuminate\Database\Connection
+    $connection)
+
+    # * @method static void blueprintResolver(\Closure $resolver)
+
+    # * @method static void macro(string $name, object|callable $macro, object|callable
+    $macro = null)
+
+    # * @method static void mixin(object $mixin, bool $replace = true)
+
+    # * @method static bool hasMacro(string $name)
+
+    # * @method static void flushMacros()
+
+    # *
+
+    # * @see \Illuminate\Database\Schema\Builder
+
+    # */
+
+    # class Schema extends Facade
+
+    # {
+
+    # /**
+
+    # * Indicates if the resolved facade should be cached.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: connection
+  visibility: public
+  parameters:
+  - name: name
+  comment: "# * @method static void defaultStringLength(int $length)\n# * @method\
+    \ static void defaultMorphKeyType(string $type)\n# * @method static void morphUsingUuids()\n\
+    # * @method static void morphUsingUlids()\n# * @method static bool createDatabase(string\
+    \ $name)\n# * @method static bool dropDatabaseIfExists(string $name)\n# * @method\
+    \ static bool hasTable(string $table)\n# * @method static bool hasView(string\
+    \ $view)\n# * @method static array getTables()\n# * @method static array getTableListing()\n\
+    # * @method static array getViews()\n# * @method static array getTypes()\n# *\
+    \ @method static bool hasColumn(string $table, string $column)\n# * @method static\
+    \ bool hasColumns(string $table, array $columns)\n# * @method static void whenTableHasColumn(string\
+    \ $table, string $column, \\Closure $callback)\n# * @method static void whenTableDoesntHaveColumn(string\
+    \ $table, string $column, \\Closure $callback)\n# * @method static string getColumnType(string\
+    \ $table, string $column, bool $fullDefinition = false)\n# * @method static array\
+    \ getColumnListing(string $table)\n# * @method static array getColumns(string\
+    \ $table)\n# * @method static array getIndexes(string $table)\n# * @method static\
+    \ array getIndexListing(string $table)\n# * @method static bool hasIndex(string\
+    \ $table, string|array $index, string|null $type = null)\n# * @method static array\
+    \ getForeignKeys(string $table)\n# * @method static void table(string $table,\
+    \ \\Closure $callback)\n# * @method static void create(string $table, \\Closure\
+    \ $callback)\n# * @method static void drop(string $table)\n# * @method static\
+    \ void dropIfExists(string $table)\n# * @method static void dropColumns(string\
+    \ $table, string|array $columns)\n# * @method static void dropAllTables()\n# *\
+    \ @method static void dropAllViews()\n# * @method static void dropAllTypes()\n\
+    # * @method static void rename(string $from, string $to)\n# * @method static bool\
+    \ enableForeignKeyConstraints()\n# * @method static bool disableForeignKeyConstraints()\n\
+    # * @method static mixed withoutForeignKeyConstraints(\\Closure $callback)\n#\
+    \ * @method static \\Illuminate\\Database\\Connection getConnection()\n# * @method\
+    \ static \\Illuminate\\Database\\Schema\\Builder setConnection(\\Illuminate\\\
+    Database\\Connection $connection)\n# * @method static void blueprintResolver(\\\
+    Closure $resolver)\n# * @method static void macro(string $name, object|callable\
+    \ $macro, object|callable $macro = null)\n# * @method static void mixin(object\
+    \ $mixin, bool $replace = true)\n# * @method static bool hasMacro(string $name)\n\
+    # * @method static void flushMacros()\n# *\n# * @see \\Illuminate\\Database\\\
+    Schema\\Builder\n# */\n# class Schema extends Facade\n# {\n# /**\n# * Indicates\
+    \ if the resolved facade should be cached.\n# *\n# * @var bool\n# */\n# protected\
+    \ static $cached = false;\n# \n# /**\n# * Get a schema builder instance for a\
+    \ connection.\n# *\n# * @param  string|null  $name\n# * @return \\Illuminate\\\
+    Database\\Schema\\Builder"
+- name: getFacadeAccessor
+  visibility: protected
+  parameters: []
+  comment: '# * Get the registered name of the component.
+
+    # *
+
+    # * @return string'
+traits: []
+interfaces: []

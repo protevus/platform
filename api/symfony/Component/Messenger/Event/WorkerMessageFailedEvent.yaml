@@ -1,0 +1,30 @@
+name: WorkerMessageFailedEvent
+class_comment: null
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: envelope
+  - name: receiverName
+  - name: error
+  comment: null
+- name: getThrowable
+  visibility: public
+  parameters: []
+  comment: null
+- name: willRetry
+  visibility: public
+  parameters: []
+  comment: null
+- name: setForRetry
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+interfaces: []

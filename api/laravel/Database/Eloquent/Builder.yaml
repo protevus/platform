@@ -1,0 +1,1636 @@
+name: Builder
+class_comment: '# * @template TModel of \Illuminate\Database\Eloquent\Model
+
+  # *
+
+  # * @property-read HigherOrderBuilderProxy $orWhere
+
+  # * @property-read HigherOrderBuilderProxy $whereNot
+
+  # * @property-read HigherOrderBuilderProxy $orWhereNot
+
+  # *
+
+  # * @mixin \Illuminate\Database\Query\Builder'
+dependencies:
+- name: BadMethodCallException
+  type: class
+  source: BadMethodCallException
+- name: Closure
+  type: class
+  source: Closure
+- name: Exception
+  type: class
+  source: Exception
+- name: BuilderContract
+  type: class
+  source: Illuminate\Contracts\Database\Eloquent\Builder
+- name: Expression
+  type: class
+  source: Illuminate\Contracts\Database\Query\Expression
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: BuildsQueries
+  type: class
+  source: Illuminate\Database\Concerns\BuildsQueries
+- name: QueriesRelationships
+  type: class
+  source: Illuminate\Database\Eloquent\Concerns\QueriesRelationships
+- name: BelongsToMany
+  type: class
+  source: Illuminate\Database\Eloquent\Relations\BelongsToMany
+- name: Relation
+  type: class
+  source: Illuminate\Database\Eloquent\Relations\Relation
+- name: QueryBuilder
+  type: class
+  source: Illuminate\Database\Query\Builder
+- name: RecordsNotFoundException
+  type: class
+  source: Illuminate\Database\RecordsNotFoundException
+- name: UniqueConstraintViolationException
+  type: class
+  source: Illuminate\Database\UniqueConstraintViolationException
+- name: Paginator
+  type: class
+  source: Illuminate\Pagination\Paginator
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: ForwardsCalls
+  type: class
+  source: Illuminate\Support\Traits\ForwardsCalls
+- name: ReflectionClass
+  type: class
+  source: ReflectionClass
+- name: ReflectionMethod
+  type: class
+  source: ReflectionMethod
+properties:
+- name: query
+  visibility: protected
+  comment: "# * @template TModel of \\Illuminate\\Database\\Eloquent\\Model\n# *\n\
+    # * @property-read HigherOrderBuilderProxy $orWhere\n# * @property-read HigherOrderBuilderProxy\
+    \ $whereNot\n# * @property-read HigherOrderBuilderProxy $orWhereNot\n# *\n# *\
+    \ @mixin \\Illuminate\\Database\\Query\\Builder\n# */\n# class Builder implements\
+    \ BuilderContract\n# {\n# /** @use \\Illuminate\\Database\\Concerns\\BuildsQueries<TModel>\
+    \ */\n# use BuildsQueries, ForwardsCalls, QueriesRelationships {\n# BuildsQueries::sole\
+    \ as baseSole;\n# }\n# \n# /**\n# * The base query builder instance.\n# *\n# *\
+    \ @var \\Illuminate\\Database\\Query\\Builder"
+- name: model
+  visibility: protected
+  comment: '# * The model being queried.
+
+    # *
+
+    # * @var TModel'
+- name: eagerLoad
+  visibility: protected
+  comment: '# * The relationships that should be eager loaded.
+
+    # *
+
+    # * @var array'
+- name: macros
+  visibility: protected
+  comment: '# * All of the globally registered builder macros.
+
+    # *
+
+    # * @var array'
+- name: localMacros
+  visibility: protected
+  comment: '# * All of the locally registered builder macros.
+
+    # *
+
+    # * @var array'
+- name: onDelete
+  visibility: protected
+  comment: '# * A replacement for the typical delete function.
+
+    # *
+
+    # * @var \Closure'
+- name: propertyPassthru
+  visibility: protected
+  comment: '# * The properties that should be returned from query builder.
+
+    # *
+
+    # * @var string[]'
+- name: passthru
+  visibility: protected
+  comment: '# * The methods that should be returned from query builder.
+
+    # *
+
+    # * @var string[]'
+- name: scopes
+  visibility: protected
+  comment: '# * Applied global scopes.
+
+    # *
+
+    # * @var array'
+- name: removedScopes
+  visibility: protected
+  comment: '# * Removed global scopes.
+
+    # *
+
+    # * @var array'
+- name: afterQueryCallbacks
+  visibility: protected
+  comment: '# * The callbacks that should be invoked after retrieving data from the
+    database.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: query
+  comment: "# * @template TModel of \\Illuminate\\Database\\Eloquent\\Model\n# *\n\
+    # * @property-read HigherOrderBuilderProxy $orWhere\n# * @property-read HigherOrderBuilderProxy\
+    \ $whereNot\n# * @property-read HigherOrderBuilderProxy $orWhereNot\n# *\n# *\
+    \ @mixin \\Illuminate\\Database\\Query\\Builder\n# */\n# class Builder implements\
+    \ BuilderContract\n# {\n# /** @use \\Illuminate\\Database\\Concerns\\BuildsQueries<TModel>\
+    \ */\n# use BuildsQueries, ForwardsCalls, QueriesRelationships {\n# BuildsQueries::sole\
+    \ as baseSole;\n# }\n# \n# /**\n# * The base query builder instance.\n# *\n# *\
+    \ @var \\Illuminate\\Database\\Query\\Builder\n# */\n# protected $query;\n# \n\
+    # /**\n# * The model being queried.\n# *\n# * @var TModel\n# */\n# protected $model;\n\
+    # \n# /**\n# * The relationships that should be eager loaded.\n# *\n# * @var array\n\
+    # */\n# protected $eagerLoad = [];\n# \n# /**\n# * All of the globally registered\
+    \ builder macros.\n# *\n# * @var array\n# */\n# protected static $macros = [];\n\
+    # \n# /**\n# * All of the locally registered builder macros.\n# *\n# * @var array\n\
+    # */\n# protected $localMacros = [];\n# \n# /**\n# * A replacement for the typical\
+    \ delete function.\n# *\n# * @var \\Closure\n# */\n# protected $onDelete;\n# \n\
+    # /**\n# * The properties that should be returned from query builder.\n# *\n#\
+    \ * @var string[]\n# */\n# protected $propertyPassthru = [\n# 'from',\n# ];\n\
+    # \n# /**\n# * The methods that should be returned from query builder.\n# *\n\
+    # * @var string[]\n# */\n# protected $passthru = [\n# 'aggregate',\n# 'average',\n\
+    # 'avg',\n# 'count',\n# 'dd',\n# 'ddrawsql',\n# 'doesntexist',\n# 'doesntexistor',\n\
+    # 'dump',\n# 'dumprawsql',\n# 'exists',\n# 'existsor',\n# 'explain',\n# 'getbindings',\n\
+    # 'getconnection',\n# 'getgrammar',\n# 'getrawbindings',\n# 'implode',\n# 'insert',\n\
+    # 'insertgetid',\n# 'insertorignore',\n# 'insertusing',\n# 'insertorignoreusing',\n\
+    # 'max',\n# 'min',\n# 'raw',\n# 'rawvalue',\n# 'sum',\n# 'tosql',\n# 'torawsql',\n\
+    # ];\n# \n# /**\n# * Applied global scopes.\n# *\n# * @var array\n# */\n# protected\
+    \ $scopes = [];\n# \n# /**\n# * Removed global scopes.\n# *\n# * @var array\n\
+    # */\n# protected $removedScopes = [];\n# \n# /**\n# * The callbacks that should\
+    \ be invoked after retrieving data from the database.\n# *\n# * @var array\n#\
+    \ */\n# protected $afterQueryCallbacks = [];\n# \n# /**\n# * Create a new Eloquent\
+    \ query builder instance.\n# *\n# * @param  \\Illuminate\\Database\\Query\\Builder\
+    \  $query\n# * @return void"
+- name: make
+  visibility: public
+  parameters:
+  - name: attributes
+    default: '[]'
+  comment: '# * Create and return an un-saved model instance.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @return TModel'
+- name: withGlobalScope
+  visibility: public
+  parameters:
+  - name: identifier
+  - name: scope
+  comment: '# * Register a new global scope.
+
+    # *
+
+    # * @param  string  $identifier
+
+    # * @param  \Illuminate\Database\Eloquent\Scope|\Closure  $scope
+
+    # * @return $this'
+- name: withoutGlobalScope
+  visibility: public
+  parameters:
+  - name: scope
+  comment: '# * Remove a registered global scope.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Scope|string  $scope
+
+    # * @return $this'
+- name: withoutGlobalScopes
+  visibility: public
+  parameters:
+  - name: scopes
+    default: 'null'
+  comment: '# * Remove all or passed registered global scopes.
+
+    # *
+
+    # * @param  array|null  $scopes
+
+    # * @return $this'
+- name: removedScopes
+  visibility: public
+  parameters: []
+  comment: '# * Get an array of global scopes that were removed from the query.
+
+    # *
+
+    # * @return array'
+- name: whereKey
+  visibility: public
+  parameters:
+  - name: id
+  comment: '# * Add a where clause on the primary key to the query.
+
+    # *
+
+    # * @param  mixed  $id
+
+    # * @return $this'
+- name: whereKeyNot
+  visibility: public
+  parameters:
+  - name: id
+  comment: '# * Add a where clause on the primary key to the query.
+
+    # *
+
+    # * @param  mixed  $id
+
+    # * @return $this'
+- name: where
+  visibility: public
+  parameters:
+  - name: column
+  - name: operator
+    default: 'null'
+  - name: value
+    default: 'null'
+  - name: boolean
+    default: '''and'''
+  comment: '# * Add a basic where clause to the query.
+
+    # *
+
+    # * @param  (\Closure(static): mixed)|string|array|\Illuminate\Contracts\Database\Query\Expression  $column
+
+    # * @param  mixed  $operator
+
+    # * @param  mixed  $value
+
+    # * @param  string  $boolean
+
+    # * @return $this'
+- name: firstWhere
+  visibility: public
+  parameters:
+  - name: column
+  - name: operator
+    default: 'null'
+  - name: value
+    default: 'null'
+  - name: boolean
+    default: '''and'''
+  comment: '# * Add a basic where clause to the query, and return the first result.
+
+    # *
+
+    # * @param  (\Closure(static): mixed)|string|array|\Illuminate\Contracts\Database\Query\Expression  $column
+
+    # * @param  mixed  $operator
+
+    # * @param  mixed  $value
+
+    # * @param  string  $boolean
+
+    # * @return TModel|null'
+- name: orWhere
+  visibility: public
+  parameters:
+  - name: column
+  - name: operator
+    default: 'null'
+  - name: value
+    default: 'null'
+  comment: '# * Add an "or where" clause to the query.
+
+    # *
+
+    # * @param  (\Closure(static): mixed)|array|string|\Illuminate\Contracts\Database\Query\Expression  $column
+
+    # * @param  mixed  $operator
+
+    # * @param  mixed  $value
+
+    # * @return $this'
+- name: whereNot
+  visibility: public
+  parameters:
+  - name: column
+  - name: operator
+    default: 'null'
+  - name: value
+    default: 'null'
+  - name: boolean
+    default: '''and'''
+  comment: '# * Add a basic "where not" clause to the query.
+
+    # *
+
+    # * @param  (\Closure(static): mixed)|string|array|\Illuminate\Contracts\Database\Query\Expression  $column
+
+    # * @param  mixed  $operator
+
+    # * @param  mixed  $value
+
+    # * @param  string  $boolean
+
+    # * @return $this'
+- name: orWhereNot
+  visibility: public
+  parameters:
+  - name: column
+  - name: operator
+    default: 'null'
+  - name: value
+    default: 'null'
+  comment: '# * Add an "or where not" clause to the query.
+
+    # *
+
+    # * @param  (\Closure(static): mixed)|array|string|\Illuminate\Contracts\Database\Query\Expression  $column
+
+    # * @param  mixed  $operator
+
+    # * @param  mixed  $value
+
+    # * @return $this'
+- name: latest
+  visibility: public
+  parameters:
+  - name: column
+    default: 'null'
+  comment: '# * Add an "order by" clause for a timestamp to the query.
+
+    # *
+
+    # * @param  string|\Illuminate\Contracts\Database\Query\Expression  $column
+
+    # * @return $this'
+- name: oldest
+  visibility: public
+  parameters:
+  - name: column
+    default: 'null'
+  comment: '# * Add an "order by" clause for a timestamp to the query.
+
+    # *
+
+    # * @param  string|\Illuminate\Contracts\Database\Query\Expression  $column
+
+    # * @return $this'
+- name: hydrate
+  visibility: public
+  parameters:
+  - name: items
+  comment: '# * Create a collection of models from plain arrays.
+
+    # *
+
+    # * @param  array  $items
+
+    # * @return \Illuminate\Database\Eloquent\Collection<int, TModel>'
+- name: fromQuery
+  visibility: public
+  parameters:
+  - name: query
+  - name: bindings
+    default: '[]'
+  comment: '# * Create a collection of models from a raw query.
+
+    # *
+
+    # * @param  string  $query
+
+    # * @param  array  $bindings
+
+    # * @return \Illuminate\Database\Eloquent\Collection<int, TModel>'
+- name: find
+  visibility: public
+  parameters:
+  - name: id
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Find a model by its primary key.
+
+    # *
+
+    # * @param  mixed  $id
+
+    # * @param  array|string  $columns
+
+    # * @return ($id is (\Illuminate\Contracts\Support\Arrayable<array-key, mixed>|array<mixed>)
+    ? \Illuminate\Database\Eloquent\Collection<int, TModel> : TModel|null)'
+- name: findMany
+  visibility: public
+  parameters:
+  - name: ids
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Find multiple models by their primary keys.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Support\Arrayable|array  $ids
+
+    # * @param  array|string  $columns
+
+    # * @return \Illuminate\Database\Eloquent\Collection<int, TModel>'
+- name: findOrFail
+  visibility: public
+  parameters:
+  - name: id
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Find a model by its primary key or throw an exception.
+
+    # *
+
+    # * @param  mixed  $id
+
+    # * @param  array|string  $columns
+
+    # * @return ($id is (\Illuminate\Contracts\Support\Arrayable<array-key, mixed>|array<mixed>)
+    ? \Illuminate\Database\Eloquent\Collection<int, TModel> : TModel)
+
+    # *
+
+    # * @throws \Illuminate\Database\Eloquent\ModelNotFoundException<TModel>'
+- name: findOrNew
+  visibility: public
+  parameters:
+  - name: id
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Find a model by its primary key or return fresh model instance.
+
+    # *
+
+    # * @param  mixed  $id
+
+    # * @param  array|string  $columns
+
+    # * @return ($id is (\Illuminate\Contracts\Support\Arrayable<array-key, mixed>|array<mixed>)
+    ? \Illuminate\Database\Eloquent\Collection<int, TModel> : TModel)'
+- name: findOr
+  visibility: public
+  parameters:
+  - name: id
+  - name: columns
+    default: '[''*'']'
+  - name: callback
+    default: 'null'
+  comment: '# * Find a model by its primary key or call a callback.
+
+    # *
+
+    # * @template TValue
+
+    # *
+
+    # * @param  mixed  $id
+
+    # * @param  (\Closure(): TValue)|list<string>|string  $columns
+
+    # * @param  (\Closure(): TValue)|null  $callback
+
+    # * @return (
+
+    # *     $id is (\Illuminate\Contracts\Support\Arrayable<array-key, mixed>|array<mixed>)
+
+    # *     ? \Illuminate\Database\Eloquent\Collection<int, TModel>
+
+    # *     : TModel|TValue
+
+    # * )'
+- name: firstOrNew
+  visibility: public
+  parameters:
+  - name: attributes
+    default: '[]'
+  - name: values
+    default: '[]'
+  comment: '# * Get the first record matching the attributes or instantiate it.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @param  array  $values
+
+    # * @return TModel'
+- name: firstOrCreate
+  visibility: public
+  parameters:
+  - name: attributes
+    default: '[]'
+  - name: values
+    default: '[]'
+  comment: '# * Get the first record matching the attributes. If the record is not
+    found, create it.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @param  array  $values
+
+    # * @return TModel'
+- name: createOrFirst
+  visibility: public
+  parameters:
+  - name: attributes
+    default: '[]'
+  - name: values
+    default: '[]'
+  comment: '# * Attempt to create the record. If a unique constraint violation occurs,
+    attempt to find the matching record.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @param  array  $values
+
+    # * @return TModel'
+- name: updateOrCreate
+  visibility: public
+  parameters:
+  - name: attributes
+  - name: values
+    default: '[]'
+  comment: '# * Create or update a record matching the attributes, and fill it with
+    values.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @param  array  $values
+
+    # * @return TModel'
+- name: firstOrFail
+  visibility: public
+  parameters:
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Execute the query and get the first result or throw an exception.
+
+    # *
+
+    # * @param  array|string  $columns
+
+    # * @return TModel
+
+    # *
+
+    # * @throws \Illuminate\Database\Eloquent\ModelNotFoundException<TModel>'
+- name: firstOr
+  visibility: public
+  parameters:
+  - name: columns
+    default: '[''*'']'
+  - name: callback
+    default: 'null'
+  comment: '# * Execute the query and get the first result or call a callback.
+
+    # *
+
+    # * @template TValue
+
+    # *
+
+    # * @param  (\Closure(): TValue)|list<string>  $columns
+
+    # * @param  (\Closure(): TValue)|null  $callback
+
+    # * @return TModel|TValue'
+- name: sole
+  visibility: public
+  parameters:
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Execute the query and get the first result if it''s the sole matching
+    record.
+
+    # *
+
+    # * @param  array|string  $columns
+
+    # * @return TModel
+
+    # *
+
+    # * @throws \Illuminate\Database\Eloquent\ModelNotFoundException<TModel>
+
+    # * @throws \Illuminate\Database\MultipleRecordsFoundException'
+- name: value
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Get a single column''s value from the first result of a query.
+
+    # *
+
+    # * @param  string|\Illuminate\Contracts\Database\Query\Expression  $column
+
+    # * @return mixed'
+- name: soleValue
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Get a single column''s value from the first result of a query if it''s
+    the sole matching record.
+
+    # *
+
+    # * @param  string|\Illuminate\Contracts\Database\Query\Expression  $column
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Illuminate\Database\Eloquent\ModelNotFoundException<TModel>
+
+    # * @throws \Illuminate\Database\MultipleRecordsFoundException'
+- name: valueOrFail
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Get a single column''s value from the first result of the query or
+    throw an exception.
+
+    # *
+
+    # * @param  string|\Illuminate\Contracts\Database\Query\Expression  $column
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Illuminate\Database\Eloquent\ModelNotFoundException<TModel>'
+- name: get
+  visibility: public
+  parameters:
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Execute the query as a "select" statement.
+
+    # *
+
+    # * @param  array|string  $columns
+
+    # * @return \Illuminate\Database\Eloquent\Collection<int, TModel>'
+- name: getModels
+  visibility: public
+  parameters:
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Get the hydrated models without eager loading.
+
+    # *
+
+    # * @param  array|string  $columns
+
+    # * @return array<int, TModel>'
+- name: eagerLoadRelations
+  visibility: public
+  parameters:
+  - name: models
+  comment: '# * Eager load the relationships for the models.
+
+    # *
+
+    # * @param  array<int, TModel>  $models
+
+    # * @return array<int, TModel>'
+- name: eagerLoadRelation
+  visibility: protected
+  parameters:
+  - name: models
+  - name: name
+  - name: constraints
+  comment: '# * Eagerly load the relationship on a set of models.
+
+    # *
+
+    # * @param  array  $models
+
+    # * @param  string  $name
+
+    # * @param  \Closure  $constraints
+
+    # * @return array'
+- name: getRelation
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Get the relation instance for the given relation name.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return \Illuminate\Database\Eloquent\Relations\Relation<\Illuminate\Database\Eloquent\Model,
+    TModel, *>'
+- name: relationsNestedUnder
+  visibility: protected
+  parameters:
+  - name: relation
+  comment: '# * Get the deeply nested relations for a given top-level relation.
+
+    # *
+
+    # * @param  string  $relation
+
+    # * @return array'
+- name: isNestedUnder
+  visibility: protected
+  parameters:
+  - name: relation
+  - name: name
+  comment: '# * Determine if the relationship is nested.
+
+    # *
+
+    # * @param  string  $relation
+
+    # * @param  string  $name
+
+    # * @return bool'
+- name: afterQuery
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a closure to be invoked after the query is executed.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return $this'
+- name: applyAfterQueryCallbacks
+  visibility: public
+  parameters:
+  - name: result
+  comment: '# * Invoke the "after query" modification callbacks.
+
+    # *
+
+    # * @param  mixed  $result
+
+    # * @return mixed'
+- name: cursor
+  visibility: public
+  parameters: []
+  comment: '# * Get a lazy collection for the given query.
+
+    # *
+
+    # * @return \Illuminate\Support\LazyCollection<int, TModel>'
+- name: enforceOrderBy
+  visibility: protected
+  parameters: []
+  comment: '# * Add a generic "order by" clause if the query doesn''t already have
+    one.
+
+    # *
+
+    # * @return void'
+- name: pluck
+  visibility: public
+  parameters:
+  - name: column
+  - name: key
+    default: 'null'
+  comment: '# * Get a collection with the values of a given column.
+
+    # *
+
+    # * @param  string|\Illuminate\Contracts\Database\Query\Expression  $column
+
+    # * @param  string|null  $key
+
+    # * @return \Illuminate\Support\Collection<int|string, mixed>'
+- name: paginate
+  visibility: public
+  parameters:
+  - name: perPage
+    default: 'null'
+  - name: columns
+    default: '[''*'']'
+  - name: pageName
+    default: '''page'''
+  - name: page
+    default: 'null'
+  - name: total
+    default: 'null'
+  comment: '# * Paginate the given query.
+
+    # *
+
+    # * @param  int|null|\Closure  $perPage
+
+    # * @param  array|string  $columns
+
+    # * @param  string  $pageName
+
+    # * @param  int|null  $page
+
+    # * @param  \Closure|int|null  $total
+
+    # * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: simplePaginate
+  visibility: public
+  parameters:
+  - name: perPage
+    default: 'null'
+  - name: columns
+    default: '[''*'']'
+  - name: pageName
+    default: '''page'''
+  - name: page
+    default: 'null'
+  comment: '# * Paginate the given query into a simple paginator.
+
+    # *
+
+    # * @param  int|null  $perPage
+
+    # * @param  array|string  $columns
+
+    # * @param  string  $pageName
+
+    # * @param  int|null  $page
+
+    # * @return \Illuminate\Contracts\Pagination\Paginator'
+- name: cursorPaginate
+  visibility: public
+  parameters:
+  - name: perPage
+    default: 'null'
+  - name: columns
+    default: '[''*'']'
+  - name: cursorName
+    default: '''cursor'''
+  - name: cursor
+    default: 'null'
+  comment: '# * Paginate the given query into a cursor paginator.
+
+    # *
+
+    # * @param  int|null  $perPage
+
+    # * @param  array|string  $columns
+
+    # * @param  string  $cursorName
+
+    # * @param  \Illuminate\Pagination\Cursor|string|null  $cursor
+
+    # * @return \Illuminate\Contracts\Pagination\CursorPaginator'
+- name: ensureOrderForCursorPagination
+  visibility: protected
+  parameters:
+  - name: shouldReverse
+    default: 'false'
+  comment: '# * Ensure the proper order by required for cursor pagination.
+
+    # *
+
+    # * @param  bool  $shouldReverse
+
+    # * @return \Illuminate\Support\Collection'
+- name: create
+  visibility: public
+  parameters:
+  - name: attributes
+    default: '[]'
+  comment: '# * Save a new model and return the instance.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @return TModel'
+- name: forceCreate
+  visibility: public
+  parameters:
+  - name: attributes
+  comment: '# * Save a new model and return the instance. Allow mass-assignment.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @return TModel'
+- name: forceCreateQuietly
+  visibility: public
+  parameters:
+  - name: attributes
+    default: '[]'
+  comment: '# * Save a new model instance with mass assignment without raising model
+    events.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @return TModel'
+- name: update
+  visibility: public
+  parameters:
+  - name: values
+  comment: '# * Update records in the database.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @return int'
+- name: upsert
+  visibility: public
+  parameters:
+  - name: values
+  - name: uniqueBy
+  - name: update
+    default: 'null'
+  comment: '# * Insert new records or update the existing ones.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @param  array|string  $uniqueBy
+
+    # * @param  array|null  $update
+
+    # * @return int'
+- name: touch
+  visibility: public
+  parameters:
+  - name: column
+    default: 'null'
+  comment: '# * Update the column''s update timestamp.
+
+    # *
+
+    # * @param  string|null  $column
+
+    # * @return int|false'
+- name: increment
+  visibility: public
+  parameters:
+  - name: column
+  - name: amount
+    default: '1'
+  - name: extra
+    default: '[]'
+  comment: '# * Increment a column''s value by a given amount.
+
+    # *
+
+    # * @param  string|\Illuminate\Contracts\Database\Query\Expression  $column
+
+    # * @param  float|int  $amount
+
+    # * @param  array  $extra
+
+    # * @return int'
+- name: decrement
+  visibility: public
+  parameters:
+  - name: column
+  - name: amount
+    default: '1'
+  - name: extra
+    default: '[]'
+  comment: '# * Decrement a column''s value by a given amount.
+
+    # *
+
+    # * @param  string|\Illuminate\Contracts\Database\Query\Expression  $column
+
+    # * @param  float|int  $amount
+
+    # * @param  array  $extra
+
+    # * @return int'
+- name: addUpdatedAtColumn
+  visibility: protected
+  parameters:
+  - name: values
+  comment: '# * Add the "updated at" column to an array of values.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @return array'
+- name: addUniqueIdsToUpsertValues
+  visibility: protected
+  parameters:
+  - name: values
+  comment: '# * Add unique IDs to the inserted values.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @return array'
+- name: addTimestampsToUpsertValues
+  visibility: protected
+  parameters:
+  - name: values
+  comment: '# * Add timestamps to the inserted values.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @return array'
+- name: addUpdatedAtToUpsertColumns
+  visibility: protected
+  parameters:
+  - name: update
+  comment: '# * Add the "updated at" column to the updated columns.
+
+    # *
+
+    # * @param  array  $update
+
+    # * @return array'
+- name: delete
+  visibility: public
+  parameters: []
+  comment: '# * Delete records from the database.
+
+    # *
+
+    # * @return mixed'
+- name: forceDelete
+  visibility: public
+  parameters: []
+  comment: '# * Run the default delete function on the builder.
+
+    # *
+
+    # * Since we do not apply scopes here, the row will actually be deleted.
+
+    # *
+
+    # * @return mixed'
+- name: onDelete
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a replacement for the default delete function.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return void'
+- name: hasNamedScope
+  visibility: public
+  parameters:
+  - name: scope
+  comment: '# * Determine if the given model has a scope.
+
+    # *
+
+    # * @param  string  $scope
+
+    # * @return bool'
+- name: scopes
+  visibility: public
+  parameters:
+  - name: scopes
+  comment: '# * Call the given local model scopes.
+
+    # *
+
+    # * @param  array|string  $scopes
+
+    # * @return static|mixed'
+- name: applyScopes
+  visibility: public
+  parameters: []
+  comment: '# * Apply the scopes to the Eloquent builder instance and return it.
+
+    # *
+
+    # * @return static'
+- name: callScope
+  visibility: protected
+  parameters:
+  - name: scope
+  - name: parameters
+    default: '[]'
+  comment: '# * Apply the given scope on the current builder instance.
+
+    # *
+
+    # * @param  callable  $scope
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+- name: callNamedScope
+  visibility: protected
+  parameters:
+  - name: scope
+  - name: parameters
+    default: '[]'
+  comment: '# * Apply the given named scope on the current builder instance.
+
+    # *
+
+    # * @param  string  $scope
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+- name: addNewWheresWithinGroup
+  visibility: protected
+  parameters:
+  - name: query
+  - name: originalWhereCount
+  comment: '# * Nest where conditions by slicing them at the given where count.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  int  $originalWhereCount
+
+    # * @return void'
+- name: groupWhereSliceForScope
+  visibility: protected
+  parameters:
+  - name: query
+  - name: whereSlice
+  comment: '# * Slice where conditions at the given offset and add them to the query
+    as a nested condition.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $whereSlice
+
+    # * @return void'
+- name: createNestedWhere
+  visibility: protected
+  parameters:
+  - name: whereSlice
+  - name: boolean
+    default: '''and'''
+  comment: '# * Create a where array with nested where conditions.
+
+    # *
+
+    # * @param  array  $whereSlice
+
+    # * @param  string  $boolean
+
+    # * @return array'
+- name: with
+  visibility: public
+  parameters:
+  - name: relations
+  - name: callback
+    default: 'null'
+  comment: '# * Set the relationships that should be eager loaded.
+
+    # *
+
+    # * @param  string|array  $relations
+
+    # * @param  string|\Closure|null  $callback
+
+    # * @return $this'
+- name: without
+  visibility: public
+  parameters:
+  - name: relations
+  comment: '# * Prevent the specified relations from being eager loaded.
+
+    # *
+
+    # * @param  mixed  $relations
+
+    # * @return $this'
+- name: withOnly
+  visibility: public
+  parameters:
+  - name: relations
+  comment: '# * Set the relationships that should be eager loaded while removing any
+    previously added eager loading specifications.
+
+    # *
+
+    # * @param  mixed  $relations
+
+    # * @return $this'
+- name: newModelInstance
+  visibility: public
+  parameters:
+  - name: attributes
+    default: '[]'
+  comment: '# * Create a new instance of the model being queried.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @return TModel'
+- name: parseWithRelations
+  visibility: protected
+  parameters:
+  - name: relations
+  comment: '# * Parse a list of relations into individuals.
+
+    # *
+
+    # * @param  array  $relations
+
+    # * @return array'
+- name: prepareNestedWithRelationships
+  visibility: protected
+  parameters:
+  - name: relations
+  - name: prefix
+    default: ''''''
+  comment: '# * Prepare nested with relationships.
+
+    # *
+
+    # * @param  array  $relations
+
+    # * @param  string  $prefix
+
+    # * @return array'
+- name: combineConstraints
+  visibility: protected
+  parameters:
+  - name: constraints
+  comment: '# * Combine an array of constraints into a single constraint.
+
+    # *
+
+    # * @param  array  $constraints
+
+    # * @return \Closure'
+- name: parseNameAndAttributeSelectionConstraint
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Parse the attribute select constraints from the name.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return array'
+- name: createSelectWithConstraint
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Create a constraint to select the given columns for the relation.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return array'
+- name: addNestedWiths
+  visibility: protected
+  parameters:
+  - name: name
+  - name: results
+  comment: '# * Parse the nested relationships in a relation.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  array  $results
+
+    # * @return array'
+- name: withCasts
+  visibility: public
+  parameters:
+  - name: casts
+  comment: '# * Apply query-time casts to the model instance.
+
+    # *
+
+    # * @param  array  $casts
+
+    # * @return $this'
+- name: withSavepointIfNeeded
+  visibility: public
+  parameters:
+  - name: scope
+  comment: '# * Execute the given Closure within a transaction savepoint if needed.
+
+    # *
+
+    # * @template TModelValue
+
+    # *
+
+    # * @param  \Closure(): TModelValue  $scope
+
+    # * @return TModelValue'
+- name: getUnionBuilders
+  visibility: protected
+  parameters: []
+  comment: '# * Get the Eloquent builder instances that are used in the union of the
+    query.
+
+    # *
+
+    # * @return \Illuminate\Support\Collection'
+- name: getQuery
+  visibility: public
+  parameters: []
+  comment: '# * Get the underlying query builder instance.
+
+    # *
+
+    # * @return \Illuminate\Database\Query\Builder'
+- name: setQuery
+  visibility: public
+  parameters:
+  - name: query
+  comment: '# * Set the underlying query builder instance.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @return $this'
+- name: toBase
+  visibility: public
+  parameters: []
+  comment: '# * Get a base query builder instance.
+
+    # *
+
+    # * @return \Illuminate\Database\Query\Builder'
+- name: getEagerLoads
+  visibility: public
+  parameters: []
+  comment: '# * Get the relationships being eagerly loaded.
+
+    # *
+
+    # * @return array'
+- name: setEagerLoads
+  visibility: public
+  parameters:
+  - name: eagerLoad
+  comment: '# * Set the relationships being eagerly loaded.
+
+    # *
+
+    # * @param  array  $eagerLoad
+
+    # * @return $this'
+- name: withoutEagerLoad
+  visibility: public
+  parameters:
+  - name: relations
+  comment: '# * Indicate that the given relationships should not be eagerly loaded.
+
+    # *
+
+    # * @param  array  $relations
+
+    # * @return $this'
+- name: withoutEagerLoads
+  visibility: public
+  parameters: []
+  comment: '# * Flush the relationships being eagerly loaded.
+
+    # *
+
+    # * @return $this'
+- name: defaultKeyName
+  visibility: protected
+  parameters: []
+  comment: '# * Get the default key name of the table.
+
+    # *
+
+    # * @return string'
+- name: getModel
+  visibility: public
+  parameters: []
+  comment: '# * Get the model instance being queried.
+
+    # *
+
+    # * @return TModel'
+- name: setModel
+  visibility: public
+  parameters:
+  - name: model
+  comment: '# * Set a model instance for the model being queried.
+
+    # *
+
+    # * @template TModelNew of \Illuminate\Database\Eloquent\Model
+
+    # *
+
+    # * @param  TModelNew  $model
+
+    # * @return static<TModelNew>'
+- name: qualifyColumn
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Qualify the given column name by the model''s table.
+
+    # *
+
+    # * @param  string|\Illuminate\Contracts\Database\Query\Expression  $column
+
+    # * @return string'
+- name: qualifyColumns
+  visibility: public
+  parameters:
+  - name: columns
+  comment: '# * Qualify the given columns with the model''s table.
+
+    # *
+
+    # * @param  array|\Illuminate\Contracts\Database\Query\Expression  $columns
+
+    # * @return array'
+- name: getMacro
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Get the given macro by name.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return \Closure'
+- name: hasMacro
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Checks if a macro is registered.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return bool'
+- name: getGlobalMacro
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Get the given global macro by name.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return \Closure'
+- name: hasGlobalMacro
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Checks if a global macro is registered.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return bool'
+- name: __get
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Dynamically access builder proxies.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Exception'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically handle calls into the query instance.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+- name: __callStatic
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically handle calls into the query instance.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \BadMethodCallException'
+- name: registerMixin
+  visibility: protected
+  parameters:
+  - name: mixin
+  - name: replace
+  comment: '# * Register the given mixin with the builder.
+
+    # *
+
+    # * @param  string  $mixin
+
+    # * @param  bool  $replace
+
+    # * @return void'
+- name: clone
+  visibility: public
+  parameters: []
+  comment: '# * Clone the Eloquent query builder.
+
+    # *
+
+    # * @return static'
+- name: __clone
+  visibility: public
+  parameters: []
+  comment: '# * Force a clone of the underlying query builder when cloning.
+
+    # *
+
+    # * @return void'
+traits:
+- BadMethodCallException
+- Closure
+- Exception
+- Illuminate\Contracts\Database\Query\Expression
+- Illuminate\Contracts\Support\Arrayable
+- Illuminate\Database\Concerns\BuildsQueries
+- Illuminate\Database\Eloquent\Concerns\QueriesRelationships
+- Illuminate\Database\Eloquent\Relations\BelongsToMany
+- Illuminate\Database\Eloquent\Relations\Relation
+- Illuminate\Database\RecordsNotFoundException
+- Illuminate\Database\UniqueConstraintViolationException
+- Illuminate\Pagination\Paginator
+- Illuminate\Support\Arr
+- Illuminate\Support\Str
+- Illuminate\Support\Traits\ForwardsCalls
+- ReflectionClass
+- ReflectionMethod
+interfaces:
+- BuilderContract

@@ -1,0 +1,61 @@
+name: DatabaseChannel
+class_comment: null
+dependencies:
+- name: Notification
+  type: class
+  source: Illuminate\Notifications\Notification
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+properties: []
+methods:
+- name: send
+  visibility: public
+  parameters:
+  - name: notifiable
+  - name: notification
+  comment: '# * Send the given notification.
+
+    # *
+
+    # * @param  mixed  $notifiable
+
+    # * @param  \Illuminate\Notifications\Notification  $notification
+
+    # * @return \Illuminate\Database\Eloquent\Model'
+- name: buildPayload
+  visibility: protected
+  parameters:
+  - name: notifiable
+  - name: notification
+  comment: '# * Build an array payload for the DatabaseNotification Model.
+
+    # *
+
+    # * @param  mixed  $notifiable
+
+    # * @param  \Illuminate\Notifications\Notification  $notification
+
+    # * @return array'
+- name: getData
+  visibility: protected
+  parameters:
+  - name: notifiable
+  - name: notification
+  comment: '# * Get the data for the notification.
+
+    # *
+
+    # * @param  mixed  $notifiable
+
+    # * @param  \Illuminate\Notifications\Notification  $notification
+
+    # * @return array
+
+    # *
+
+    # * @throws \RuntimeException'
+traits:
+- Illuminate\Notifications\Notification
+- RuntimeException
+interfaces: []

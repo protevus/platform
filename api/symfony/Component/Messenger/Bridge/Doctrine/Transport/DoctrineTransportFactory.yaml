@@ -1,0 +1,54 @@
+name: DoctrineTransportFactory
+class_comment: '# * @author Vincent Touzet <vincent.touzet@gmail.com>
+
+  # *
+
+  # * @implements TransportFactoryInterface<DoctrineTransport>'
+dependencies:
+- name: PostgreSQLPlatform
+  type: class
+  source: Doctrine\DBAL\Platforms\PostgreSQLPlatform
+- name: ConnectionRegistry
+  type: class
+  source: Doctrine\Persistence\ConnectionRegistry
+- name: TransportException
+  type: class
+  source: Symfony\Component\Messenger\Exception\TransportException
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+- name: TransportFactoryInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\TransportFactoryInterface
+- name: TransportInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\TransportInterface
+properties: []
+methods:
+- name: createTransport
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: options
+  - name: serializer
+  comment: "# * @author Vincent Touzet <vincent.touzet@gmail.com>\n# *\n# * @implements\
+    \ TransportFactoryInterface<DoctrineTransport>\n# */\n# class DoctrineTransportFactory\
+    \ implements TransportFactoryInterface\n# {\n# public function __construct(\n\
+    # private ConnectionRegistry $registry,\n# ) {\n# }\n# \n# /**\n# * @param array\
+    \ $options You can set 'use_notify' to false to not use LISTEN/NOTIFY with postgresql"
+- name: supports
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: options
+  comment: null
+traits:
+- Doctrine\DBAL\Platforms\PostgreSQLPlatform
+- Doctrine\Persistence\ConnectionRegistry
+- Symfony\Component\Messenger\Exception\TransportException
+- Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+- Symfony\Component\Messenger\Transport\TransportFactoryInterface
+- Symfony\Component\Messenger\Transport\TransportInterface
+interfaces:
+- TransportFactoryInterface
+- TransportFactoryInterface

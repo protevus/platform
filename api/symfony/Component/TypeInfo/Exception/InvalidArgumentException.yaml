@@ -1,0 +1,14 @@
+name: InvalidArgumentException
+class_comment: '# * @author Mathias Arlaud <mathias.arlaud@gmail.com>
+
+  # * @author Baptiste Leduc <baptiste.leduc@gmail.com>
+
+  # *
+
+  # * @experimental'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- ExceptionInterface

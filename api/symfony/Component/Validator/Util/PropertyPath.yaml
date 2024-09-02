@@ -1,0 +1,55 @@
+name: PropertyPath
+class_comment: '# * Contains utility methods for dealing with property paths.
+
+  # *
+
+  # * For more extensive functionality, use Symfony''s PropertyAccess component.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies: []
+properties: []
+methods:
+- name: append
+  visibility: public
+  parameters:
+  - name: basePath
+  - name: subPath
+  comment: '# * Contains utility methods for dealing with property paths.
+
+    # *
+
+    # * For more extensive functionality, use Symfony''s PropertyAccess component.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # class PropertyPath
+
+    # {
+
+    # /**
+
+    # * Appends a path to a given property path.
+
+    # *
+
+    # * If the base path is empty, the appended path will be returned unchanged.
+
+    # * If the base path is not empty, and the appended path starts with a
+
+    # * squared opening bracket ("["), the concatenation of the two paths is
+
+    # * returned. Otherwise, the concatenation of the two paths is returned,
+
+    # * separated by a dot (".").'
+- name: __construct
+  visibility: private
+  parameters: []
+  comment: '# * Not instantiable.'
+traits: []
+interfaces: []

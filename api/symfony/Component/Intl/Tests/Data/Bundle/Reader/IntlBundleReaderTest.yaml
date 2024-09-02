@@ -1,0 +1,59 @@
+name: IntlBundleReaderTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @requires extension intl'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: IntlBundleReader
+  type: class
+  source: Symfony\Component\Intl\Data\Bundle\Reader\IntlBundleReader
+- name: ResourceBundleNotFoundException
+  type: class
+  source: Symfony\Component\Intl\Exception\ResourceBundleNotFoundException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Intl\Exception\RuntimeException
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testReadReturnsArrayAccess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReadFollowsAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReadDoesNotFollowFallback
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReadDoesNotFollowFallbackAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReadFailsIfNonExistingLocale
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReadFailsIfNonExistingFallbackLocale
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReadFailsIfNonExistingDirectory
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Intl\Data\Bundle\Reader\IntlBundleReader
+- Symfony\Component\Intl\Exception\ResourceBundleNotFoundException
+- Symfony\Component\Intl\Exception\RuntimeException
+interfaces: []

@@ -1,0 +1,158 @@
+name: LockableFile
+class_comment: null
+dependencies:
+- name: LockTimeoutException
+  type: class
+  source: Illuminate\Contracts\Filesystem\LockTimeoutException
+properties:
+- name: handle
+  visibility: protected
+  comment: '# * The file resource.
+
+    # *
+
+    # * @var resource'
+- name: path
+  visibility: protected
+  comment: '# * The file path.
+
+    # *
+
+    # * @var string'
+- name: isLocked
+  visibility: protected
+  comment: '# * Indicates if the file is locked.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: path
+  - name: mode
+  comment: "# * The file resource.\n# *\n# * @var resource\n# */\n# protected $handle;\n\
+    # \n# /**\n# * The file path.\n# *\n# * @var string\n# */\n# protected $path;\n\
+    # \n# /**\n# * Indicates if the file is locked.\n# *\n# * @var bool\n# */\n# protected\
+    \ $isLocked = false;\n# \n# /**\n# * Create a new File instance.\n# *\n# * @param\
+    \  string  $path\n# * @param  string  $mode\n# * @return void"
+- name: ensureDirectoryExists
+  visibility: protected
+  parameters:
+  - name: path
+  comment: '# * Create the file''s directory if necessary.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return void'
+- name: createResource
+  visibility: protected
+  parameters:
+  - name: path
+  - name: mode
+  comment: '# * Create the file resource.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  string  $mode
+
+    # * @return void
+
+    # *
+
+    # * @throws \Exception'
+- name: read
+  visibility: public
+  parameters:
+  - name: length
+    default: 'null'
+  comment: '# * Read the file contents.
+
+    # *
+
+    # * @param  int|null  $length
+
+    # * @return string'
+- name: size
+  visibility: public
+  parameters: []
+  comment: '# * Get the file size.
+
+    # *
+
+    # * @return int'
+- name: write
+  visibility: public
+  parameters:
+  - name: contents
+  comment: '# * Write to the file.
+
+    # *
+
+    # * @param  string  $contents
+
+    # * @return $this'
+- name: truncate
+  visibility: public
+  parameters: []
+  comment: '# * Truncate the file.
+
+    # *
+
+    # * @return $this'
+- name: getSharedLock
+  visibility: public
+  parameters:
+  - name: block
+    default: 'false'
+  comment: '# * Get a shared lock on the file.
+
+    # *
+
+    # * @param  bool  $block
+
+    # * @return $this
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Filesystem\LockTimeoutException'
+- name: getExclusiveLock
+  visibility: public
+  parameters:
+  - name: block
+    default: 'false'
+  comment: '# * Get an exclusive lock on the file.
+
+    # *
+
+    # * @param  bool  $block
+
+    # * @return $this
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Filesystem\LockTimeoutException'
+- name: releaseLock
+  visibility: public
+  parameters: []
+  comment: '# * Release the lock on the file.
+
+    # *
+
+    # * @return $this'
+- name: close
+  visibility: public
+  parameters: []
+  comment: '# * Close the file.
+
+    # *
+
+    # * @return bool'
+traits:
+- Illuminate\Contracts\Filesystem\LockTimeoutException
+interfaces: []

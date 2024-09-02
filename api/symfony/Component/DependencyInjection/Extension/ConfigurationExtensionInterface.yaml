@@ -1,0 +1,40 @@
+name: ConfigurationExtensionInterface
+class_comment: null
+dependencies:
+- name: ConfigurationInterface
+  type: class
+  source: Symfony\Component\Config\Definition\ConfigurationInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+properties: []
+methods:
+- name: getConfiguration
+  visibility: public
+  parameters:
+  - name: config
+  - name: container
+  comment: '# * ConfigurationExtensionInterface is the interface implemented by container
+    extension classes.
+
+    # *
+
+    # * @author Kevin Bond <kevinbond@gmail.com>
+
+    # */
+
+    # interface ConfigurationExtensionInterface
+
+    # {
+
+    # /**
+
+    # * Returns extension configuration.
+
+    # *
+
+    # * @return ConfigurationInterface|null'
+traits:
+- Symfony\Component\Config\Definition\ConfigurationInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+interfaces: []

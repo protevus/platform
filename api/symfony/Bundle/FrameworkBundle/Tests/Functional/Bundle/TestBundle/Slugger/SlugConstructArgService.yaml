@@ -1,0 +1,20 @@
+name: SlugConstructArgService
+class_comment: null
+dependencies:
+- name: SluggerInterface
+  type: class
+  source: Symfony\Component\String\Slugger\SluggerInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: slugger
+  comment: null
+- name: hello
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\String\Slugger\SluggerInterface
+interfaces: []

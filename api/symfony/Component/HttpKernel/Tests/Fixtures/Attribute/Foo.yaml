@@ -1,0 +1,15 @@
+name: Foo
+class_comment: null
+dependencies: []
+properties:
+- name: foo
+  visibility: private
+  comment: null
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+traits: []
+interfaces: []

@@ -1,0 +1,25 @@
+name: ParsedExpression
+class_comment: '# * Represents an already parsed expression.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: Node
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Node\Node
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: expression
+  - name: nodes
+  comment: null
+- name: getNodes
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\ExpressionLanguage\Node\Node
+interfaces: []

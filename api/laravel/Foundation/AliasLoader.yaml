@@ -1,0 +1,204 @@
+name: AliasLoader
+class_comment: null
+dependencies: []
+properties:
+- name: aliases
+  visibility: protected
+  comment: '# * The array of class aliases.
+
+    # *
+
+    # * @var array'
+- name: registered
+  visibility: protected
+  comment: '# * Indicates if a loader has been registered.
+
+    # *
+
+    # * @var bool'
+- name: facadeNamespace
+  visibility: protected
+  comment: '# * The namespace for all real-time facades.
+
+    # *
+
+    # * @var string'
+- name: instance
+  visibility: protected
+  comment: '# * The singleton instance of the loader.
+
+    # *
+
+    # * @var \Illuminate\Foundation\AliasLoader'
+methods:
+- name: __construct
+  visibility: private
+  parameters:
+  - name: aliases
+  comment: "# * The array of class aliases.\n# *\n# * @var array\n# */\n# protected\
+    \ $aliases;\n# \n# /**\n# * Indicates if a loader has been registered.\n# *\n\
+    # * @var bool\n# */\n# protected $registered = false;\n# \n# /**\n# * The namespace\
+    \ for all real-time facades.\n# *\n# * @var string\n# */\n# protected static $facadeNamespace\
+    \ = 'Facades\\\\';\n# \n# /**\n# * The singleton instance of the loader.\n# *\n\
+    # * @var \\Illuminate\\Foundation\\AliasLoader\n# */\n# protected static $instance;\n\
+    # \n# /**\n# * Create a new AliasLoader instance.\n# *\n# * @param  array  $aliases\n\
+    # * @return void"
+- name: getInstance
+  visibility: public
+  parameters:
+  - name: aliases
+    default: '[]'
+  comment: '# * Get or create the singleton alias loader instance.
+
+    # *
+
+    # * @param  array  $aliases
+
+    # * @return \Illuminate\Foundation\AliasLoader'
+- name: load
+  visibility: public
+  parameters:
+  - name: alias
+  comment: '# * Load a class alias if it is registered.
+
+    # *
+
+    # * @param  string  $alias
+
+    # * @return bool|null'
+- name: loadFacade
+  visibility: protected
+  parameters:
+  - name: alias
+  comment: '# * Load a real-time facade for the given alias.
+
+    # *
+
+    # * @param  string  $alias
+
+    # * @return void'
+- name: ensureFacadeExists
+  visibility: protected
+  parameters:
+  - name: alias
+  comment: '# * Ensure that the given alias has an existing real-time facade class.
+
+    # *
+
+    # * @param  string  $alias
+
+    # * @return string'
+- name: formatFacadeStub
+  visibility: protected
+  parameters:
+  - name: alias
+  - name: stub
+  comment: '# * Format the facade stub with the proper namespace and class.
+
+    # *
+
+    # * @param  string  $alias
+
+    # * @param  string  $stub
+
+    # * @return string'
+- name: alias
+  visibility: public
+  parameters:
+  - name: alias
+  - name: class
+  comment: '# * Add an alias to the loader.
+
+    # *
+
+    # * @param  string  $alias
+
+    # * @param  string  $class
+
+    # * @return void'
+- name: register
+  visibility: public
+  parameters: []
+  comment: '# * Register the loader on the auto-loader stack.
+
+    # *
+
+    # * @return void'
+- name: prependToLoaderStack
+  visibility: protected
+  parameters: []
+  comment: '# * Prepend the load method to the auto-loader stack.
+
+    # *
+
+    # * @return void'
+- name: getAliases
+  visibility: public
+  parameters: []
+  comment: '# * Get the registered aliases.
+
+    # *
+
+    # * @return array'
+- name: setAliases
+  visibility: public
+  parameters:
+  - name: aliases
+  comment: '# * Set the registered aliases.
+
+    # *
+
+    # * @param  array  $aliases
+
+    # * @return void'
+- name: isRegistered
+  visibility: public
+  parameters: []
+  comment: '# * Indicates if the loader has been registered.
+
+    # *
+
+    # * @return bool'
+- name: setRegistered
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Set the "registered" state of the loader.
+
+    # *
+
+    # * @param  bool  $value
+
+    # * @return void'
+- name: setFacadeNamespace
+  visibility: public
+  parameters:
+  - name: namespace
+  comment: '# * Set the real-time facade namespace.
+
+    # *
+
+    # * @param  string  $namespace
+
+    # * @return void'
+- name: setInstance
+  visibility: public
+  parameters:
+  - name: loader
+  comment: '# * Set the value of the singleton alias loader.
+
+    # *
+
+    # * @param  \Illuminate\Foundation\AliasLoader  $loader
+
+    # * @return void'
+- name: __clone
+  visibility: private
+  parameters: []
+  comment: '# * Clone method.
+
+    # *
+
+    # * @return void'
+traits: []
+interfaces: []

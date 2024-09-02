@@ -1,0 +1,19 @@
+name: Factory
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: mailer
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Get a mailer instance by name.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @return \Illuminate\Contracts\Mail\Mailer'
+traits: []
+interfaces: []

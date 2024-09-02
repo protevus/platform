@@ -1,0 +1,8 @@
+name: RuntimeException
+class_comment: '# * Base RuntimeException for the Asset component.'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- ExceptionInterface

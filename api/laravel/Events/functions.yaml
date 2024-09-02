@@ -1,0 +1,11 @@
+name: functions
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+properties: []
+methods: []
+traits:
+- Closure
+interfaces: []

@@ -1,0 +1,32 @@
+name: FakeFile
+class_comment: null
+dependencies:
+- name: OrigFile
+  type: class
+  source: Symfony\Component\HttpFoundation\File\File
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: realpath
+  - name: path
+  comment: null
+- name: isReadable
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRealpath
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSize
+  visibility: public
+  parameters: []
+  comment: null
+- name: getMTime
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

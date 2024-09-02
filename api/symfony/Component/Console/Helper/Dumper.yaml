@@ -1,0 +1,37 @@
+name: Dumper
+class_comment: null
+dependencies:
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: ClonerInterface
+  type: class
+  source: Symfony\Component\VarDumper\Cloner\ClonerInterface
+- name: VarCloner
+  type: class
+  source: Symfony\Component\VarDumper\Cloner\VarCloner
+- name: CliDumper
+  type: class
+  source: Symfony\Component\VarDumper\Dumper\CliDumper
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: output
+  - name: dumper
+    default: 'null'
+  - name: cloner
+    default: 'null'
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: var
+  comment: null
+traits:
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\VarDumper\Cloner\ClonerInterface
+- Symfony\Component\VarDumper\Cloner\VarCloner
+- Symfony\Component\VarDumper\Dumper\CliDumper
+interfaces: []

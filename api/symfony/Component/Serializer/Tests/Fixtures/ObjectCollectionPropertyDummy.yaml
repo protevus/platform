@@ -1,0 +1,14 @@
+name: ObjectCollectionPropertyDummy
+class_comment: null
+dependencies: []
+properties:
+- name: foo
+  visibility: public
+  comment: '# * @var FooImplementationDummy[]'
+methods:
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

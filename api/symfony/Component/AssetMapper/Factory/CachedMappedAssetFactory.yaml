@@ -1,0 +1,55 @@
+name: CachedMappedAssetFactory
+class_comment: '# * Decorates the asset factory to load MappedAssets from cache when
+  possible.'
+dependencies:
+- name: MappedAsset
+  type: class
+  source: Symfony\Component\AssetMapper\MappedAsset
+- name: ConfigCache
+  type: class
+  source: Symfony\Component\Config\ConfigCache
+- name: DirectoryResource
+  type: class
+  source: Symfony\Component\Config\Resource\DirectoryResource
+- name: FileExistenceResource
+  type: class
+  source: Symfony\Component\Config\Resource\FileExistenceResource
+- name: FileResource
+  type: class
+  source: Symfony\Component\Config\Resource\FileResource
+- name: ResourceInterface
+  type: class
+  source: Symfony\Component\Config\Resource\ResourceInterface
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+properties: []
+methods:
+- name: collectResourcesFromAsset
+  visibility: private
+  parameters:
+  - name: mappedAsset
+  comment: "# * Decorates the asset factory to load MappedAssets from cache when possible.\n\
+    # */\n# class CachedMappedAssetFactory implements MappedAssetFactoryInterface\n\
+    # {\n# public function __construct(\n# private readonly MappedAssetFactoryInterface\
+    \ $innerFactory,\n# private readonly string $cacheDir,\n# private readonly bool\
+    \ $debug,\n# ) {\n# }\n# \n# public function createMappedAsset(string $logicalPath,\
+    \ string $sourcePath): ?MappedAsset\n# {\n# $cachePath = $this->getCacheFilePath($logicalPath,\
+    \ $sourcePath);\n# $configCache = new ConfigCache($cachePath, $this->debug);\n\
+    # \n# if ($configCache->isFresh()) {\n# return unserialize((new Filesystem())->readFile($cachePath));\n\
+    # }\n# \n# $mappedAsset = $this->innerFactory->createMappedAsset($logicalPath,\
+    \ $sourcePath);\n# \n# if (!$mappedAsset) {\n# return null;\n# }\n# \n# $resources\
+    \ = $this->collectResourcesFromAsset($mappedAsset);\n# $configCache->write(serialize($mappedAsset),\
+    \ $resources);\n# \n# return $mappedAsset;\n# }\n# \n# private function getCacheFilePath(string\
+    \ $logicalPath, string $sourcePath): string\n# {\n# return $this->cacheDir.'/'.hash('xxh128',\
+    \ $logicalPath.':'.$sourcePath).'.php';\n# }\n# \n# /**\n# * @return ResourceInterface[]"
+traits:
+- Symfony\Component\AssetMapper\MappedAsset
+- Symfony\Component\Config\ConfigCache
+- Symfony\Component\Config\Resource\DirectoryResource
+- Symfony\Component\Config\Resource\FileExistenceResource
+- Symfony\Component\Config\Resource\FileResource
+- Symfony\Component\Config\Resource\ResourceInterface
+- Symfony\Component\Filesystem\Filesystem
+interfaces:
+- MappedAssetFactoryInterface

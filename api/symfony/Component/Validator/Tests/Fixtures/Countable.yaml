@@ -1,0 +1,20 @@
+name: Countable
+class_comment: null
+dependencies: []
+properties:
+- name: content
+  visibility: private
+  comment: null
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: content
+  comment: null
+- name: count
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces:
+- \Countable

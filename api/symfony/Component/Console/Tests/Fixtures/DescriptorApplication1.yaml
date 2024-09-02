@@ -1,0 +1,11 @@
+name: DescriptorApplication1
+class_comment: null
+dependencies:
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+properties: []
+methods: []
+traits:
+- Symfony\Component\Console\Application
+interfaces: []

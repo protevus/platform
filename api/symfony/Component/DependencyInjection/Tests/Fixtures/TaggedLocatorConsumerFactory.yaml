@@ -1,0 +1,21 @@
+name: TaggedLocatorConsumerFactory
+class_comment: null
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: AutowireLocator
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\AutowireLocator
+properties: []
+methods:
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: '#[AutowireLocator(''foo_bar'''
+  - name: '''key'''
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Component\DependencyInjection\Attribute\AutowireLocator
+interfaces: []

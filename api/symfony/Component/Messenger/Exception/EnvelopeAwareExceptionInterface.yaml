@@ -1,0 +1,15 @@
+name: EnvelopeAwareExceptionInterface
+class_comment: null
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+properties: []
+methods:
+- name: getEnvelope
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+interfaces: []

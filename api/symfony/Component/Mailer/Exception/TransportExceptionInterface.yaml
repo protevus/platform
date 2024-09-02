@@ -1,0 +1,16 @@
+name: TransportExceptionInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getDebug
+  visibility: public
+  parameters: []
+  comment: null
+- name: appendDebug
+  visibility: public
+  parameters:
+  - name: debug
+  comment: null
+traits: []
+interfaces: []

@@ -1,0 +1,70 @@
+name: FailoverTransportTest
+class_comment: '# * @group time-sensitive'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: TransportException
+  type: class
+  source: Symfony\Component\Mailer\Exception\TransportException
+- name: FailoverTransport
+  type: class
+  source: Symfony\Component\Mailer\Transport\FailoverTransport
+- name: RoundRobinTransport
+  type: class
+  source: Symfony\Component\Mailer\Transport\RoundRobinTransport
+- name: TransportInterface
+  type: class
+  source: Symfony\Component\Mailer\Transport\TransportInterface
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+properties: []
+methods:
+- name: testSendNoTransports
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendFirstWork
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendAllDead
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendOneDead
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendOneDeadAndRecoveryWithinRetryPeriod
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendAllDeadWithinRetryPeriod
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendOneDeadButRecover
+  visibility: public
+  parameters: []
+  comment: null
+- name: assertTransports
+  visibility: private
+  parameters:
+  - name: transport
+  - name: cursor
+  - name: deadTransports
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mailer\Exception\TransportException
+- Symfony\Component\Mailer\Transport\FailoverTransport
+- Symfony\Component\Mailer\Transport\RoundRobinTransport
+- Symfony\Component\Mailer\Transport\TransportInterface
+- Symfony\Component\Mime\RawMessage
+interfaces: []

@@ -1,0 +1,9 @@
+name: LockReleasingException
+class_comment: "# * LockReleasingException is thrown when an issue happens during\
+  \ the release of a lock.\n# *\n# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>"
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- ExceptionInterface

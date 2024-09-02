@@ -1,0 +1,58 @@
+name: MessageGenerator
+class_comment: null
+dependencies:
+- name: ClockInterface
+  type: class
+  source: Psr\Clock\ClockInterface
+- name: Clock
+  type: class
+  source: Symfony\Component\Clock\Clock
+- name: RecurringMessage
+  type: class
+  source: Symfony\Component\Scheduler\RecurringMessage
+- name: Schedule
+  type: class
+  source: Symfony\Component\Scheduler\Schedule
+- name: ScheduleProviderInterface
+  type: class
+  source: Symfony\Component\Scheduler\ScheduleProviderInterface
+- name: StatefulTriggerInterface
+  type: class
+  source: Symfony\Component\Scheduler\Trigger\StatefulTriggerInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: scheduleProvider
+  - name: name
+  - name: clock
+    default: new Clock(
+  comment: null
+- name: getMessages
+  visibility: public
+  parameters: []
+  comment: '# * @return \Generator<MessageContext, object>'
+- name: getSchedule
+  visibility: public
+  parameters: []
+  comment: null
+- name: heap
+  visibility: private
+  parameters:
+  - name: time
+  - name: startTime
+  comment: null
+- name: checkpoint
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Psr\Clock\ClockInterface
+- Symfony\Component\Clock\Clock
+- Symfony\Component\Scheduler\RecurringMessage
+- Symfony\Component\Scheduler\Schedule
+- Symfony\Component\Scheduler\ScheduleProviderInterface
+- Symfony\Component\Scheduler\Trigger\StatefulTriggerInterface
+interfaces:
+- MessageGeneratorInterface

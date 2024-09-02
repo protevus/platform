@@ -1,0 +1,23 @@
+name: ArgumentsNodeTest
+class_comment: null
+dependencies:
+- name: ArgumentsNode
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Node\ArgumentsNode
+properties: []
+methods:
+- name: getCompileData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDumpData
+  visibility: public
+  parameters: []
+  comment: null
+- name: createArrayNode
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\ExpressionLanguage\Node\ArgumentsNode
+interfaces: []

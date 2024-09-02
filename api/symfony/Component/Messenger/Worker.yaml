@@ -1,0 +1,167 @@
+name: Worker
+class_comment: '# * @author Samuel Roze <samuel.roze@gmail.com>
+
+  # * @author Tobias Schultze <http://tobion.de>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: EventDispatcherInterface
+  type: class
+  source: Psr\EventDispatcher\EventDispatcherInterface
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: Clock
+  type: class
+  source: Symfony\Component\Clock\Clock
+- name: ClockInterface
+  type: class
+  source: Symfony\Component\Clock\ClockInterface
+- name: WorkerMessageFailedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerMessageFailedEvent
+- name: WorkerMessageHandledEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerMessageHandledEvent
+- name: WorkerMessageReceivedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerMessageReceivedEvent
+- name: WorkerRateLimitedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerRateLimitedEvent
+- name: WorkerRunningEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerRunningEvent
+- name: WorkerStartedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerStartedEvent
+- name: WorkerStoppedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerStoppedEvent
+- name: EnvelopeAwareExceptionInterface
+  type: class
+  source: Symfony\Component\Messenger\Exception\EnvelopeAwareExceptionInterface
+- name: RejectRedeliveredMessageException
+  type: class
+  source: Symfony\Component\Messenger\Exception\RejectRedeliveredMessageException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Messenger\Exception\RuntimeException
+- name: AckStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\AckStamp
+- name: ConsumedByWorkerStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\ConsumedByWorkerStamp
+- name: FlushBatchHandlersStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\FlushBatchHandlersStamp
+- name: NoAutoAckStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\NoAutoAckStamp
+- name: ReceivedStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\ReceivedStamp
+- name: TransportMessageIdStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\TransportMessageIdStamp
+- name: QueueReceiverInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Receiver\QueueReceiverInterface
+- name: ReceiverInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface
+- name: LimiterInterface
+  type: class
+  source: Symfony\Component\RateLimiter\LimiterInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: receivers
+  - name: bus
+  - name: eventDispatcher
+    default: 'null'
+  - name: logger
+    default: 'null'
+  - name: rateLimiters
+    default: 'null'
+  - name: clock
+    default: new Clock(
+  comment: "# * @author Samuel Roze <samuel.roze@gmail.com>\n# * @author Tobias Schultze\
+    \ <http://tobion.de>\n# *\n# * @final\n# */\n# class Worker\n# {\n# private bool\
+    \ $shouldStop = false;\n# private WorkerMetadata $metadata;\n# private array $acks\
+    \ = [];\n# private \\SplObjectStorage $unacks;\n# \n# /**\n# * @param ReceiverInterface[]\
+    \ $receivers Where the key is the transport name"
+- name: run
+  visibility: public
+  parameters:
+  - name: options
+    default: '[]'
+  comment: '# * Receive the messages and dispatch them to the bus.
+
+    # *
+
+    # * Valid options are:
+
+    # *  * sleep (default: 1000000): Time in microseconds to sleep after no messages
+    are found
+
+    # *  * queues: The queue names to consume from, instead of consuming from all
+    queues. When this is used, all receivers must implement the QueueReceiverInterface'
+- name: handleMessage
+  visibility: private
+  parameters:
+  - name: envelope
+  - name: transportName
+  comment: null
+- name: ack
+  visibility: private
+  parameters: []
+  comment: null
+- name: rateLimit
+  visibility: private
+  parameters:
+  - name: transportName
+  comment: null
+- name: flush
+  visibility: private
+  parameters:
+  - name: force
+  comment: null
+- name: stop
+  visibility: public
+  parameters: []
+  comment: null
+- name: getMetadata
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Psr\EventDispatcher\EventDispatcherInterface
+- Psr\Log\LoggerInterface
+- Symfony\Component\Clock\Clock
+- Symfony\Component\Clock\ClockInterface
+- Symfony\Component\Messenger\Event\WorkerMessageFailedEvent
+- Symfony\Component\Messenger\Event\WorkerMessageHandledEvent
+- Symfony\Component\Messenger\Event\WorkerMessageReceivedEvent
+- Symfony\Component\Messenger\Event\WorkerRateLimitedEvent
+- Symfony\Component\Messenger\Event\WorkerRunningEvent
+- Symfony\Component\Messenger\Event\WorkerStartedEvent
+- Symfony\Component\Messenger\Event\WorkerStoppedEvent
+- Symfony\Component\Messenger\Exception\EnvelopeAwareExceptionInterface
+- Symfony\Component\Messenger\Exception\RejectRedeliveredMessageException
+- Symfony\Component\Messenger\Exception\RuntimeException
+- Symfony\Component\Messenger\Stamp\AckStamp
+- Symfony\Component\Messenger\Stamp\ConsumedByWorkerStamp
+- Symfony\Component\Messenger\Stamp\FlushBatchHandlersStamp
+- Symfony\Component\Messenger\Stamp\NoAutoAckStamp
+- Symfony\Component\Messenger\Stamp\ReceivedStamp
+- Symfony\Component\Messenger\Stamp\TransportMessageIdStamp
+- Symfony\Component\Messenger\Transport\Receiver\QueueReceiverInterface
+- Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface
+- Symfony\Component\RateLimiter\LimiterInterface
+interfaces: []

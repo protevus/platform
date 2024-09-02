@@ -1,0 +1,73 @@
+name: CachePruneCommandTest
+class_comment: null
+dependencies:
+- name: MockObject
+  type: class
+  source: PHPUnit\Framework\MockObject\MockObject
+- name: CachePoolPruneCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\CachePoolPruneCommand
+- name: Application
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Console\Application
+- name: TestCase
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\TestCase
+- name: PruneableInterface
+  type: class
+  source: Symfony\Component\Cache\PruneableInterface
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+- name: RewindableGenerator
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\RewindableGenerator
+- name: Container
+  type: class
+  source: Symfony\Component\DependencyInjection\Container
+- name: KernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\KernelInterface
+properties: []
+methods:
+- name: testCommandWithPools
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCommandWithNoPools
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRewindableGenerator
+  visibility: private
+  parameters: []
+  comment: null
+- name: getEmptyRewindableGenerator
+  visibility: private
+  parameters: []
+  comment: null
+- name: getKernel
+  visibility: private
+  parameters: []
+  comment: null
+- name: getPruneableInterfaceMock
+  visibility: private
+  parameters: []
+  comment: null
+- name: getCommandTester
+  visibility: private
+  parameters:
+  - name: kernel
+  - name: generator
+  comment: null
+traits:
+- PHPUnit\Framework\MockObject\MockObject
+- Symfony\Bundle\FrameworkBundle\Command\CachePoolPruneCommand
+- Symfony\Bundle\FrameworkBundle\Console\Application
+- Symfony\Bundle\FrameworkBundle\Tests\TestCase
+- Symfony\Component\Cache\PruneableInterface
+- Symfony\Component\Console\Tester\CommandTester
+- Symfony\Component\DependencyInjection\Argument\RewindableGenerator
+- Symfony\Component\DependencyInjection\Container
+- Symfony\Component\HttpKernel\KernelInterface
+interfaces: []

@@ -1,0 +1,20 @@
+name: ChildMagicClass
+class_comment: null
+dependencies:
+- name: LazyGhostTrait
+  type: class
+  source: Symfony\Component\VarExporter\LazyGhostTrait
+- name: LazyObjectInterface
+  type: class
+  source: Symfony\Component\VarExporter\LazyObjectInterface
+- name: LazyGhostTrait
+  type: class
+  source: LazyGhostTrait
+properties: []
+methods: []
+traits:
+- Symfony\Component\VarExporter\LazyGhostTrait
+- Symfony\Component\VarExporter\LazyObjectInterface
+- LazyGhostTrait
+interfaces:
+- LazyObjectInterface

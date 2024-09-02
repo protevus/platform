@@ -1,0 +1,190 @@
+name: ConnectionTest
+class_comment: null
+dependencies:
+- name: HttpException
+  type: class
+  source: AsyncAws\Core\Exception\Http\HttpException
+- name: ResultMockFactory
+  type: class
+  source: AsyncAws\Core\Test\ResultMockFactory
+- name: GetQueueUrlResult
+  type: class
+  source: AsyncAws\Sqs\Result\GetQueueUrlResult
+- name: ReceiveMessageResult
+  type: class
+  source: AsyncAws\Sqs\Result\ReceiveMessageResult
+- name: SqsClient
+  type: class
+  source: AsyncAws\Sqs\SqsClient
+- name: Message
+  type: class
+  source: AsyncAws\Sqs\ValueObject\Message
+- name: InstalledVersions
+  type: class
+  source: Composer\InstalledVersions
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: NullLogger
+  type: class
+  source: Psr\Log\NullLogger
+- name: MockHttpClient
+  type: class
+  source: Symfony\Component\HttpClient\MockHttpClient
+- name: MockResponse
+  type: class
+  source: Symfony\Component\HttpClient\Response\MockResponse
+- name: Connection
+  type: class
+  source: Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\Connection
+- name: HttpClientInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\HttpClientInterface
+properties: []
+methods:
+- name: testExtraOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtraParamsInQuery
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConfigureWithCredentials
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConfigureWithTemporaryCredentials
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromInvalidDsn
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsn
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDsnPrecedence
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsnWithRegion
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsnAsQueueUrl
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsnWithCustomEndpoint
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsnWithSslMode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsnWithSslModeOnDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsnWithCustomEndpointAndPort
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsnWithOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsnWithQueryOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsnWithQueueNameOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsnWithAccountAndEndpointOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsnWithInvalidQueryString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsnWithInvalidOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsnWithInvalidQueryStringAndOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testKeepGettingPendingMessages
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnexpectedSqsError
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInjectQueueUrl
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: queueUrl
+  comment: '# * @dataProvider provideQueueUrl'
+- name: provideQueueUrl
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotInjectQueueUrl
+  visibility: public
+  parameters:
+  - name: dsn
+  comment: '# * @dataProvider provideNotQueueUrl'
+- name: provideNotQueueUrl
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetQueueUrlNotCalled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoggerWithoutDebugOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoggerWithDebugOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: getMockedQueueUrlResponse
+  visibility: private
+  parameters: []
+  comment: null
+- name: getMockedReceiveMessageResponse
+  visibility: private
+  parameters: []
+  comment: null
+- name: isAsyncAwsSqsVersion2Installed
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- AsyncAws\Core\Exception\Http\HttpException
+- AsyncAws\Core\Test\ResultMockFactory
+- AsyncAws\Sqs\Result\GetQueueUrlResult
+- AsyncAws\Sqs\Result\ReceiveMessageResult
+- AsyncAws\Sqs\SqsClient
+- AsyncAws\Sqs\ValueObject\Message
+- Composer\InstalledVersions
+- PHPUnit\Framework\TestCase
+- Psr\Log\NullLogger
+- Symfony\Component\HttpClient\MockHttpClient
+- Symfony\Component\HttpClient\Response\MockResponse
+- Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\Connection
+- Symfony\Contracts\HttpClient\HttpClientInterface
+interfaces: []

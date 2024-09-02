@@ -1,0 +1,12 @@
+name: RuntimeException
+class_comment: '# * RuntimeException for the Intl component.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- ExceptionInterface

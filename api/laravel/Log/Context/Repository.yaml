@@ -1,0 +1,423 @@
+name: Repository
+class_comment: null
+dependencies:
+- name: __PHP_Incomplete_Class
+  type: class
+  source: __PHP_Incomplete_Class
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: ModelNotFoundException
+  type: class
+  source: Illuminate\Database\Eloquent\ModelNotFoundException
+- name: Dehydrating
+  type: class
+  source: Illuminate\Log\Context\Events\ContextDehydrating
+- name: Hydrated
+  type: class
+  source: Illuminate\Log\Context\Events\ContextHydrated
+- name: SerializesModels
+  type: class
+  source: Illuminate\Queue\SerializesModels
+- name: Conditionable
+  type: class
+  source: Illuminate\Support\Traits\Conditionable
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: Throwable
+  type: class
+  source: Throwable
+properties:
+- name: events
+  visibility: protected
+  comment: '# * The event dispatcher instance.
+
+    # *
+
+    # * @var \Illuminate\Events\Dispatcher'
+- name: data
+  visibility: protected
+  comment: '# * The contextual data.
+
+    # *
+
+    # * @var array<string, mixed>'
+- name: hidden
+  visibility: protected
+  comment: '# * The hidden contextual data.
+
+    # *
+
+    # * @var array<string, mixed>'
+- name: handleUnserializeExceptionsUsing
+  visibility: protected
+  comment: '# * The callback that should handle unserialize exceptions.
+
+    # *
+
+    # * @var callable|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: events
+  comment: "# * The event dispatcher instance.\n# *\n# * @var \\Illuminate\\Events\\\
+    Dispatcher\n# */\n# protected $events;\n# \n# /**\n# * The contextual data.\n\
+    # *\n# * @var array<string, mixed>\n# */\n# protected $data = [];\n# \n# /**\n\
+    # * The hidden contextual data.\n# *\n# * @var array<string, mixed>\n# */\n# protected\
+    \ $hidden = [];\n# \n# /**\n# * The callback that should handle unserialize exceptions.\n\
+    # *\n# * @var callable|null\n# */\n# protected static $handleUnserializeExceptionsUsing;\n\
+    # \n# /**\n# * Create a new Context instance."
+- name: has
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Determine if the given key exists.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: hasHidden
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Determine if the given key exists within the hidden context data.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: all
+  visibility: public
+  parameters: []
+  comment: '# * Retrieve all the context data.
+
+    # *
+
+    # * @return array<string, mixed>'
+- name: allHidden
+  visibility: public
+  parameters: []
+  comment: '# * Retrieve all the hidden context data.
+
+    # *
+
+    # * @return array<string, mixed>'
+- name: get
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Retrieve the given key''s value.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $default
+
+    # * @return mixed'
+- name: getHidden
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Retrieve the given key''s hidden value.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $default
+
+    # * @return mixed'
+- name: pull
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Retrieve the given key''s value and then forget it.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $default
+
+    # * @return mixed'
+- name: pullHidden
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Retrieve the given key''s hidden value and then forget it.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $default
+
+    # * @return mixed'
+- name: only
+  visibility: public
+  parameters:
+  - name: keys
+  comment: '# * Retrieve only the values of the given keys.
+
+    # *
+
+    # * @param  array<int, string>  $keys
+
+    # * @return array<string, mixed>'
+- name: onlyHidden
+  visibility: public
+  parameters:
+  - name: keys
+  comment: '# * Retrieve only the hidden values of the given keys.
+
+    # *
+
+    # * @param  array<int, string>  $keys
+
+    # * @return array<string, mixed>'
+- name: add
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: 'null'
+  comment: '# * Add a context value.
+
+    # *
+
+    # * @param  string|array<string, mixed>  $key
+
+    # * @param  mixed  $value
+
+    # * @return $this'
+- name: addHidden
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: 'null'
+  comment: '# * Add a hidden context value.
+
+    # *
+
+    # * @param  string|array<string, mixed>  $key
+
+    # * @param  mixed  $value
+
+    # * @return $this'
+- name: forget
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Forget the given context key.
+
+    # *
+
+    # * @param  string|array<int, string>  $key
+
+    # * @return $this'
+- name: forgetHidden
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Forget the given hidden context key.
+
+    # *
+
+    # * @param  string|array<int, string>  $key
+
+    # * @return $this'
+- name: addIf
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Add a context value if it does not exist yet.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return $this'
+- name: addHiddenIf
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Add a hidden context value if it does not exist yet.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return $this'
+- name: push
+  visibility: public
+  parameters:
+  - name: key
+  - name: '...$values'
+  comment: '# * Push the given values onto the key''s stack.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  ...$values
+
+    # * @return $this
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: pushHidden
+  visibility: public
+  parameters:
+  - name: key
+  - name: '...$values'
+  comment: '# * Push the given hidden values onto the key''s stack.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  ...$values
+
+    # * @return $this
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: isStackable
+  visibility: protected
+  parameters:
+  - name: key
+  comment: '# * Determine if a given key can be used as a stack.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: isHiddenStackable
+  visibility: protected
+  parameters:
+  - name: key
+  comment: '# * Determine if a given key can be used as a hidden stack.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: isEmpty
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the repository is empty.
+
+    # *
+
+    # * @return bool'
+- name: dehydrating
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Execute the given callback when context is about to be dehydrated.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return $this'
+- name: hydrated
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Execute the given callback when context has been hydrated.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return $this'
+- name: handleUnserializeExceptionsUsing
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Handle unserialize exceptions using the given callback.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return static'
+- name: flush
+  visibility: public
+  parameters: []
+  comment: '# * Flush all context data.
+
+    # *
+
+    # * @return $this'
+- name: dehydrate
+  visibility: public
+  parameters: []
+  comment: '# * Dehydrate the context data.
+
+    # *
+
+    # * @internal
+
+    # *
+
+    # * @return ?array'
+- name: hydrate
+  visibility: public
+  parameters:
+  - name: context
+  comment: '# * Hydrate the context instance.
+
+    # *
+
+    # * @internal
+
+    # *
+
+    # * @param  ?array  $context
+
+    # * @return $this
+
+    # *
+
+    # * @throws \RuntimeException'
+traits:
+- __PHP_Incomplete_Class
+- Illuminate\Contracts\Events\Dispatcher
+- Illuminate\Database\Eloquent\ModelNotFoundException
+- Illuminate\Queue\SerializesModels
+- Illuminate\Support\Traits\Conditionable
+- Illuminate\Support\Traits\Macroable
+- RuntimeException
+- Throwable
+- Conditionable
+interfaces: []

@@ -1,0 +1,64 @@
+name: CardSchemeValidatorTest
+class_comment: null
+dependencies:
+- name: CardScheme
+  type: class
+  source: Symfony\Component\Validator\Constraints\CardScheme
+- name: CardSchemeValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\CardSchemeValidator
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+- name: CardScheme
+  type: class
+  source: Symfony\Component\Validator\Constraints\CardScheme
+properties: []
+methods:
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testNullIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEmptyStringIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidNumbers
+  visibility: public
+  parameters:
+  - name: scheme
+  - name: number
+  comment: '# * @dataProvider getValidNumbers'
+- name: testValidNumberWithOrderedArguments
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidNumbers
+  visibility: public
+  parameters:
+  - name: scheme
+  - name: number
+  - name: code
+  comment: '# * @dataProvider getInvalidNumbers'
+- name: testInvalidNumberNamedArguments
+  visibility: public
+  parameters: []
+  comment: null
+- name: getValidNumbers
+  visibility: public
+  parameters: []
+  comment: null
+- name: getInvalidNumbers
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\CardScheme
+- Symfony\Component\Validator\Constraints\CardSchemeValidator
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+- Symfony\Component\Validator\Constraints\CardScheme
+interfaces: []

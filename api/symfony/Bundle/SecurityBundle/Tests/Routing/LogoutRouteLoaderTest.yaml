@@ -1,0 +1,31 @@
+name: LogoutRouteLoaderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: LogoutRouteLoader
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Routing\LogoutRouteLoader
+- name: ContainerParametersResource
+  type: class
+  source: Symfony\Component\DependencyInjection\Config\ContainerParametersResource
+- name: Route
+  type: class
+  source: Symfony\Component\Routing\Route
+- name: RouteCollection
+  type: class
+  source: Symfony\Component\Routing\RouteCollection
+properties: []
+methods:
+- name: testLoad
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\SecurityBundle\Routing\LogoutRouteLoader
+- Symfony\Component\DependencyInjection\Config\ContainerParametersResource
+- Symfony\Component\Routing\Route
+- Symfony\Component\Routing\RouteCollection
+interfaces: []

@@ -1,0 +1,15 @@
+name: LazilyRefreshDatabase
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: refreshDatabase
+  visibility: public
+  parameters: []
+  comment: '# * Define hooks to migrate the database before and after each test.
+
+    # *
+
+    # * @return void'
+traits: []
+interfaces: []

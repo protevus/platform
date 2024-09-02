@@ -1,0 +1,228 @@
+name: RouteCollection
+class_comment: null
+dependencies:
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: Request
+  type: class
+  source: Illuminate\Http\Request
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+properties:
+- name: routes
+  visibility: protected
+  comment: '# * An array of the routes keyed by method.
+
+    # *
+
+    # * @var array'
+- name: allRoutes
+  visibility: protected
+  comment: '# * A flattened array of all of the routes.
+
+    # *
+
+    # * @var \Illuminate\Routing\Route[]'
+- name: nameList
+  visibility: protected
+  comment: '# * A look-up table of routes by their names.
+
+    # *
+
+    # * @var \Illuminate\Routing\Route[]'
+- name: actionList
+  visibility: protected
+  comment: '# * A look-up table of routes by controller action.
+
+    # *
+
+    # * @var \Illuminate\Routing\Route[]'
+methods:
+- name: add
+  visibility: public
+  parameters:
+  - name: route
+  comment: "# * An array of the routes keyed by method.\n# *\n# * @var array\n# */\n\
+    # protected $routes = [];\n# \n# /**\n# * A flattened array of all of the routes.\n\
+    # *\n# * @var \\Illuminate\\Routing\\Route[]\n# */\n# protected $allRoutes = [];\n\
+    # \n# /**\n# * A look-up table of routes by their names.\n# *\n# * @var \\Illuminate\\\
+    Routing\\Route[]\n# */\n# protected $nameList = [];\n# \n# /**\n# * A look-up\
+    \ table of routes by controller action.\n# *\n# * @var \\Illuminate\\Routing\\\
+    Route[]\n# */\n# protected $actionList = [];\n# \n# /**\n# * Add a Route instance\
+    \ to the collection.\n# *\n# * @param  \\Illuminate\\Routing\\Route  $route\n\
+    # * @return \\Illuminate\\Routing\\Route"
+- name: addToCollections
+  visibility: protected
+  parameters:
+  - name: route
+  comment: '# * Add the given route to the arrays of routes.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Route  $route
+
+    # * @return void'
+- name: addLookups
+  visibility: protected
+  parameters:
+  - name: route
+  comment: '# * Add the route to any look-up tables if necessary.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Route  $route
+
+    # * @return void'
+- name: addToActionList
+  visibility: protected
+  parameters:
+  - name: action
+  - name: route
+  comment: '# * Add a route to the controller action dictionary.
+
+    # *
+
+    # * @param  array  $action
+
+    # * @param  \Illuminate\Routing\Route  $route
+
+    # * @return void'
+- name: refreshNameLookups
+  visibility: public
+  parameters: []
+  comment: '# * Refresh the name look-up table.
+
+    # *
+
+    # * This is done in case any names are fluently defined or if routes are overwritten.
+
+    # *
+
+    # * @return void'
+- name: refreshActionLookups
+  visibility: public
+  parameters: []
+  comment: '# * Refresh the action look-up table.
+
+    # *
+
+    # * This is done in case any actions are overwritten with new controllers.
+
+    # *
+
+    # * @return void'
+- name: match
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Find the first route matching a given request.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return \Illuminate\Routing\Route
+
+    # *
+
+    # * @throws \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException
+
+    # * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException'
+- name: get
+  visibility: public
+  parameters:
+  - name: method
+    default: 'null'
+  comment: '# * Get routes from the collection by method.
+
+    # *
+
+    # * @param  string|null  $method
+
+    # * @return \Illuminate\Routing\Route[]'
+- name: hasNamedRoute
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Determine if the route collection contains a given named route.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return bool'
+- name: getByName
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Get a route instance by its name.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return \Illuminate\Routing\Route|null'
+- name: getByAction
+  visibility: public
+  parameters:
+  - name: action
+  comment: '# * Get a route instance by its controller action.
+
+    # *
+
+    # * @param  string  $action
+
+    # * @return \Illuminate\Routing\Route|null'
+- name: getRoutes
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the routes in the collection.
+
+    # *
+
+    # * @return \Illuminate\Routing\Route[]'
+- name: getRoutesByMethod
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the routes keyed by their HTTP verb / method.
+
+    # *
+
+    # * @return array'
+- name: getRoutesByName
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the routes keyed by their name.
+
+    # *
+
+    # * @return \Illuminate\Routing\Route[]'
+- name: toSymfonyRouteCollection
+  visibility: public
+  parameters: []
+  comment: '# * Convert the collection to a Symfony RouteCollection instance.
+
+    # *
+
+    # * @return \Symfony\Component\Routing\RouteCollection'
+- name: toCompiledRouteCollection
+  visibility: public
+  parameters:
+  - name: router
+  - name: container
+  comment: '# * Convert the collection to a CompiledRouteCollection instance.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Router  $router
+
+    # * @param  \Illuminate\Container\Container  $container
+
+    # * @return \Illuminate\Routing\CompiledRouteCollection'
+traits:
+- Illuminate\Container\Container
+- Illuminate\Http\Request
+- Illuminate\Support\Arr
+interfaces: []

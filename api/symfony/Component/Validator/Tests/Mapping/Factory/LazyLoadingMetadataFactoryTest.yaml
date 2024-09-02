@@ -1,0 +1,103 @@
+name: LazyLoadingMetadataFactoryTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CacheItemPoolInterface
+  type: class
+  source: Psr\Cache\CacheItemPoolInterface
+- name: ArrayAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\ArrayAdapter
+- name: Callback
+  type: class
+  source: Symfony\Component\Validator\Constraints\Callback
+- name: NotBlank
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotBlank
+- name: NoSuchMetadataException
+  type: class
+  source: Symfony\Component\Validator\Exception\NoSuchMetadataException
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+- name: LazyLoadingMetadataFactory
+  type: class
+  source: Symfony\Component\Validator\Mapping\Factory\LazyLoadingMetadataFactory
+- name: LoaderInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\LoaderInterface
+- name: ConstraintA
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\ConstraintA
+- name: Entity
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\Entity
+- name: EntityParent
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\EntityParent
+- name: PropertyGetter
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\PropertyGetter
+- name: PropertyGetterInterface
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\PropertyGetterInterface
+properties: []
+methods:
+- name: testLoadClassMetadataWithInterface
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMergeParentConstraints
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCachedMetadata
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNonClassNameStringValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMetadataCacheWithRuntimeConstraint
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGroupsFromParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMultipathInterfaceConstraint
+  visibility: public
+  parameters: []
+  comment: null
+- name: loadClassMetadata
+  visibility: public
+  parameters:
+  - name: metadata
+  comment: null
+- name: loadClassMetadata
+  visibility: public
+  parameters:
+  - name: metadata
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Psr\Cache\CacheItemPoolInterface
+- Symfony\Component\Cache\Adapter\ArrayAdapter
+- Symfony\Component\Validator\Constraints\Callback
+- Symfony\Component\Validator\Constraints\NotBlank
+- Symfony\Component\Validator\Exception\NoSuchMetadataException
+- Symfony\Component\Validator\Mapping\ClassMetadata
+- Symfony\Component\Validator\Mapping\Factory\LazyLoadingMetadataFactory
+- Symfony\Component\Validator\Mapping\Loader\LoaderInterface
+- Symfony\Component\Validator\Tests\Fixtures\ConstraintA
+- Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\Entity
+- Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\EntityParent
+- Symfony\Component\Validator\Tests\Fixtures\PropertyGetter
+- Symfony\Component\Validator\Tests\Fixtures\PropertyGetterInterface
+interfaces:
+- LoaderInterface
+- LoaderInterface

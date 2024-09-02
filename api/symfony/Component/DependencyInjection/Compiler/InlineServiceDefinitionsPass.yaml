@@ -1,0 +1,86 @@
+name: InlineServiceDefinitionsPass
+class_comment: '# * Inline service definitions where this is possible.
+
+  # *
+
+  # * @author Johannes M. Schmitt <schmittjoh@gmail.com>'
+dependencies:
+- name: ArgumentInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ArgumentInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: ServiceCircularReferenceException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+properties: []
+methods:
+- name: isInlineableDefinition
+  visibility: private
+  parameters:
+  - name: id
+  - name: definition
+  comment: "# * Inline service definitions where this is possible.\n# *\n# * @author\
+    \ Johannes M. Schmitt <schmittjoh@gmail.com>\n# */\n# class InlineServiceDefinitionsPass\
+    \ extends AbstractRecursivePass\n# {\n# protected bool $skipScalars = true;\n\
+    # \n# private array $cloningIds = [];\n# private array $connectedIds = [];\n#\
+    \ private array $notInlinedIds = [];\n# private array $inlinedIds = [];\n# private\
+    \ array $notInlinableIds = [];\n# private ?ServiceReferenceGraph $graph = null;\n\
+    # \n# public function __construct(\n# private ?AnalyzeServiceReferencesPass $analyzingPass\
+    \ = null,\n# ) {\n# }\n# \n# public function process(ContainerBuilder $container):\
+    \ void\n# {\n# $this->container = $container;\n# if ($this->analyzingPass) {\n\
+    # $analyzedContainer = new ContainerBuilder();\n# $analyzedContainer->setAliases($container->getAliases());\n\
+    # $analyzedContainer->setDefinitions($container->getDefinitions());\n# foreach\
+    \ ($container->getExpressionLanguageProviders() as $provider) {\n# $analyzedContainer->addExpressionLanguageProvider($provider);\n\
+    # }\n# } else {\n# $analyzedContainer = $container;\n# }\n# try {\n# $notInlinableIds\
+    \ = [];\n# $remainingInlinedIds = [];\n# $this->connectedIds = $this->notInlinedIds\
+    \ = $container->getDefinitions();\n# do {\n# if ($this->analyzingPass) {\n# $analyzedContainer->setDefinitions(array_intersect_key($analyzedContainer->getDefinitions(),\
+    \ $this->connectedIds));\n# $this->analyzingPass->process($analyzedContainer);\n\
+    # }\n# $this->graph = $analyzedContainer->getCompiler()->getServiceReferenceGraph();\n\
+    # $notInlinedIds = $this->notInlinedIds;\n# $notInlinableIds += $this->notInlinableIds;\n\
+    # $this->connectedIds = $this->notInlinedIds = $this->inlinedIds = $this->notInlinableIds\
+    \ = [];\n# \n# foreach ($analyzedContainer->getDefinitions() as $id => $definition)\
+    \ {\n# if (!$this->graph->hasNode($id)) {\n# continue;\n# }\n# foreach ($this->graph->getNode($id)->getOutEdges()\
+    \ as $edge) {\n# if (isset($notInlinedIds[$edge->getSourceNode()->getId()])) {\n\
+    # $this->currentId = $id;\n# $this->processValue($definition, true);\n# break;\n\
+    # }\n# }\n# }\n# \n# foreach ($this->inlinedIds as $id => $isPublicOrNotShared)\
+    \ {\n# if ($isPublicOrNotShared) {\n# $remainingInlinedIds[$id] = $id;\n# } else\
+    \ {\n# $container->removeDefinition($id);\n# $analyzedContainer->removeDefinition($id);\n\
+    # }\n# }\n# } while ($this->inlinedIds && $this->analyzingPass);\n# \n# foreach\
+    \ ($remainingInlinedIds as $id) {\n# if (isset($notInlinableIds[$id])) {\n# continue;\n\
+    # }\n# \n# $definition = $container->getDefinition($id);\n# \n# if (!$definition->isShared()\
+    \ && !$definition->isPublic()) {\n# $container->removeDefinition($id);\n# }\n\
+    # }\n# } finally {\n# $this->container = null;\n# $this->connectedIds = $this->notInlinedIds\
+    \ = $this->inlinedIds = [];\n# $this->notInlinableIds = [];\n# $this->graph =\
+    \ null;\n# }\n# }\n# \n# protected function processValue(mixed $value, bool $isRoot\
+    \ = false): mixed\n# {\n# if ($value instanceof ArgumentInterface) {\n# // References\
+    \ found in ArgumentInterface::getValues() are not inlineable\n# return $value;\n\
+    # }\n# \n# if ($value instanceof Definition && $this->cloningIds) {\n# if ($value->isShared())\
+    \ {\n# return $value;\n# }\n# $value = clone $value;\n# }\n# \n# if (!$value instanceof\
+    \ Reference) {\n# return parent::processValue($value, $isRoot);\n# } elseif (!$this->container->hasDefinition($id\
+    \ = (string) $value)) {\n# return $value;\n# }\n# \n# $definition = $this->container->getDefinition($id);\n\
+    # \n# if (isset($this->notInlinableIds[$id]) || !$this->isInlineableDefinition($id,\
+    \ $definition)) {\n# if ($this->currentId !== $id) {\n# $this->notInlinableIds[$id]\
+    \ = true;\n# }\n# \n# return $value;\n# }\n# \n# $this->container->log($this,\
+    \ \\sprintf('Inlined service \"%s\" to \"%s\".', $id, $this->currentId));\n# $this->inlinedIds[$id]\
+    \ = $definition->isPublic() || !$definition->isShared();\n# $this->notInlinedIds[$this->currentId]\
+    \ = true;\n# \n# if ($definition->isShared()) {\n# return $definition;\n# }\n\
+    # \n# if (isset($this->cloningIds[$id])) {\n# $ids = array_keys($this->cloningIds);\n\
+    # $ids[] = $id;\n# \n# throw new ServiceCircularReferenceException($id, \\array_slice($ids,\
+    \ array_search($id, $ids)));\n# }\n# \n# $this->cloningIds[$id] = true;\n# try\
+    \ {\n# return $this->processValue($definition);\n# } finally {\n# unset($this->cloningIds[$id]);\n\
+    # }\n# }\n# \n# /**\n# * Checks if the definition is inlineable."
+traits:
+- Symfony\Component\DependencyInjection\Argument\ArgumentInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+- Symfony\Component\DependencyInjection\Reference
+interfaces: []

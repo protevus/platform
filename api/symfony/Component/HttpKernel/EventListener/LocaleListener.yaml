@@ -1,0 +1,90 @@
+name: LocaleListener
+class_comment: '# * Initializes the locale based on the current request.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+- name: FinishRequestEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\FinishRequestEvent
+- name: KernelEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\KernelEvent
+- name: RequestEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\RequestEvent
+- name: KernelEvents
+  type: class
+  source: Symfony\Component\HttpKernel\KernelEvents
+- name: RequestContextAwareInterface
+  type: class
+  source: Symfony\Component\Routing\RequestContextAwareInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: requestStack
+  - name: defaultLocale
+    default: '''en'''
+  - name: router
+    default: 'null'
+  - name: useAcceptLanguageHeader
+    default: 'false'
+  - name: enabledLocales
+    default: '[]'
+  comment: null
+- name: setDefaultLocale
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: onKernelRequest
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: onKernelFinishRequest
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: setLocale
+  visibility: private
+  parameters:
+  - name: request
+  comment: null
+- name: setRouterContext
+  visibility: private
+  parameters:
+  - name: request
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestStack
+- Symfony\Component\HttpKernel\Event\FinishRequestEvent
+- Symfony\Component\HttpKernel\Event\KernelEvent
+- Symfony\Component\HttpKernel\Event\RequestEvent
+- Symfony\Component\HttpKernel\KernelEvents
+- Symfony\Component\Routing\RequestContextAwareInterface
+interfaces:
+- EventSubscriberInterface

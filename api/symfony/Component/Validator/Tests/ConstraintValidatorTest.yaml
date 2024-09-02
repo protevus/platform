@@ -1,0 +1,55 @@
+name: ConstraintValidatorTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: ConstraintValidator
+  type: class
+  source: Symfony\Component\Validator\ConstraintValidator
+- name: TestEnum
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\TestEnum
+- name: IcuCompatibilityTrait
+  type: class
+  source: IcuCompatibilityTrait
+properties: []
+methods:
+- name: testFormatValue
+  visibility: public
+  parameters:
+  - name: expected
+  - name: value
+  - name: format
+    default: '0'
+  comment: '# * @dataProvider formatValueProvider'
+- name: formatValueProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: validate
+  visibility: public
+  parameters:
+  - name: value
+  - name: constraint
+  comment: null
+- name: formatValueProxy
+  visibility: public
+  parameters:
+  - name: value
+  - name: format
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\ConstraintValidator
+- Symfony\Component\Validator\Tests\Fixtures\TestEnum
+- IcuCompatibilityTrait
+interfaces: []

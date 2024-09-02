@@ -1,0 +1,8 @@
+name: DummyWithInterface
+class_comment: null
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- \NonExistentDummyInterface

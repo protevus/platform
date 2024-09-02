@@ -1,0 +1,39 @@
+name: All
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: constraints
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  comment: "# * When applied to an array (or Traversable object), this constraint\
+    \ allows you to apply\n# * a collection of constraints to each element of the\
+    \ array.\n# *\n# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# #[\\\
+    Attribute(\\Attribute::TARGET_PROPERTY | \\Attribute::TARGET_METHOD | \\Attribute::IS_REPEATABLE)]\n\
+    # class All extends Composite\n# {\n# public array|Constraint $constraints = [];\n\
+    # \n# /**\n# * @param array<Constraint>|array<string,mixed>|null $constraints\n\
+    # * @param string[]|null                              $groups"
+- name: getDefaultOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRequiredOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCompositeOption
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+interfaces: []

@@ -1,0 +1,68 @@
+name: ModelNotFoundException
+class_comment: '# * @template TModel of \Illuminate\Database\Eloquent\Model'
+dependencies:
+- name: RecordsNotFoundException
+  type: class
+  source: Illuminate\Database\RecordsNotFoundException
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+properties:
+- name: model
+  visibility: protected
+  comment: '# * @template TModel of \Illuminate\Database\Eloquent\Model
+
+    # */
+
+    # class ModelNotFoundException extends RecordsNotFoundException
+
+    # {
+
+    # /**
+
+    # * Name of the affected Eloquent model.
+
+    # *
+
+    # * @var class-string<TModel>'
+- name: ids
+  visibility: protected
+  comment: '# * The affected model IDs.
+
+    # *
+
+    # * @var array<int, int|string>'
+methods:
+- name: setModel
+  visibility: public
+  parameters:
+  - name: model
+  - name: ids
+    default: '[]'
+  comment: "# * @template TModel of \\Illuminate\\Database\\Eloquent\\Model\n# */\n\
+    # class ModelNotFoundException extends RecordsNotFoundException\n# {\n# /**\n\
+    # * Name of the affected Eloquent model.\n# *\n# * @var class-string<TModel>\n\
+    # */\n# protected $model;\n# \n# /**\n# * The affected model IDs.\n# *\n# * @var\
+    \ array<int, int|string>\n# */\n# protected $ids;\n# \n# /**\n# * Set the affected\
+    \ Eloquent model and instance ids.\n# *\n# * @param  class-string<TModel>  $model\n\
+    # * @param  array<int, int|string>|int|string  $ids\n# * @return $this"
+- name: getModel
+  visibility: public
+  parameters: []
+  comment: '# * Get the affected Eloquent model.
+
+    # *
+
+    # * @return class-string<TModel>'
+- name: getIds
+  visibility: public
+  parameters: []
+  comment: '# * Get the affected Eloquent model IDs.
+
+    # *
+
+    # * @return array<int, int|string>'
+traits:
+- Illuminate\Database\RecordsNotFoundException
+- Illuminate\Support\Arr
+interfaces: []

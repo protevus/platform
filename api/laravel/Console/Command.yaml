@@ -1,0 +1,211 @@
+name: Command
+class_comment: null
+dependencies:
+- name: Factory
+  type: class
+  source: Illuminate\Console\View\Components\Factory
+- name: Isolatable
+  type: class
+  source: Illuminate\Contracts\Console\Isolatable
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: SymfonyCommand
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: Throwable
+  type: class
+  source: Throwable
+properties:
+- name: laravel
+  visibility: protected
+  comment: '# * The Laravel application instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Foundation\Application'
+- name: signature
+  visibility: protected
+  comment: '# * The name and signature of the console command.
+
+    # *
+
+    # * @var string'
+- name: name
+  visibility: protected
+  comment: '# * The console command name.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string|null'
+- name: help
+  visibility: protected
+  comment: '# * The console command help text.
+
+    # *
+
+    # * @var string'
+- name: hidden
+  visibility: protected
+  comment: '# * Indicates whether the command should be shown in the Artisan command
+    list.
+
+    # *
+
+    # * @var bool'
+- name: isolated
+  visibility: protected
+  comment: '# * Indicates whether only one instance of the command can run at any
+    given time.
+
+    # *
+
+    # * @var bool'
+- name: isolatedExitCode
+  visibility: protected
+  comment: '# * The default exit code for isolated commands.
+
+    # *
+
+    # * @var int'
+- name: aliases
+  visibility: protected
+  comment: '# * The console command name aliases.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters: []
+  comment: "# * The Laravel application instance.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Foundation\\Application\n# */\n# protected $laravel;\n# \n# /**\n# * The name\
+    \ and signature of the console command.\n# *\n# * @var string\n# */\n# protected\
+    \ $signature;\n# \n# /**\n# * The console command name.\n# *\n# * @var string\n\
+    # */\n# protected $name;\n# \n# /**\n# * The console command description.\n# *\n\
+    # * @var string|null\n# */\n# protected $description;\n# \n# /**\n# * The console\
+    \ command help text.\n# *\n# * @var string\n# */\n# protected $help;\n# \n# /**\n\
+    # * Indicates whether the command should be shown in the Artisan command list.\n\
+    # *\n# * @var bool\n# */\n# protected $hidden = false;\n# \n# /**\n# * Indicates\
+    \ whether only one instance of the command can run at any given time.\n# *\n#\
+    \ * @var bool\n# */\n# protected $isolated = false;\n# \n# /**\n# * The default\
+    \ exit code for isolated commands.\n# *\n# * @var int\n# */\n# protected $isolatedExitCode\
+    \ = self::SUCCESS;\n# \n# /**\n# * The console command name aliases.\n# *\n# *\
+    \ @var array\n# */\n# protected $aliases;\n# \n# /**\n# * Create a new console\
+    \ command instance.\n# *\n# * @return void"
+- name: configureUsingFluentDefinition
+  visibility: protected
+  parameters: []
+  comment: '# * Configure the console command using a fluent definition.
+
+    # *
+
+    # * @return void'
+- name: configureIsolation
+  visibility: protected
+  parameters: []
+  comment: '# * Configure the console command for isolation.
+
+    # *
+
+    # * @return void'
+- name: commandIsolationMutex
+  visibility: protected
+  parameters: []
+  comment: "# * Run the console command.\n# *\n# * @param  \\Symfony\\Component\\\
+    Console\\Input\\InputInterface  $input\n# * @param  \\Symfony\\Component\\Console\\\
+    Output\\OutputInterface  $output\n# * @return int\n# */\n# #[\\Override]\n# public\
+    \ function run(InputInterface $input, OutputInterface $output): int\n# {\n# $this->output\
+    \ = $output instanceof OutputStyle ? $output : $this->laravel->make(\n# OutputStyle::class,\
+    \ ['input' => $input, 'output' => $output]\n# );\n# \n# $this->components = $this->laravel->make(Factory::class,\
+    \ ['output' => $this->output]);\n# \n# $this->configurePrompts($input);\n# \n\
+    # try {\n# return parent::run(\n# $this->input = $input, $this->output\n# );\n\
+    # } finally {\n# $this->untrap();\n# }\n# }\n# \n# /**\n# * Execute the console\
+    \ command.\n# *\n# * @param  \\Symfony\\Component\\Console\\Input\\InputInterface\
+    \  $input\n# * @param  \\Symfony\\Component\\Console\\Output\\OutputInterface\
+    \  $output\n# */\n# #[\\Override]\n# protected function execute(InputInterface\
+    \ $input, OutputInterface $output): int\n# {\n# if ($this instanceof Isolatable\
+    \ && $this->option('isolated') !== false &&\n# ! $this->commandIsolationMutex()->create($this))\
+    \ {\n# $this->comment(sprintf(\n# 'The [%s] command is already running.', $this->getName()\n\
+    # ));\n# \n# return (int) (is_numeric($this->option('isolated'))\n# ? $this->option('isolated')\n\
+    # : $this->isolatedExitCode);\n# }\n# \n# $method = method_exists($this, 'handle')\
+    \ ? 'handle' : '__invoke';\n# \n# try {\n# return (int) $this->laravel->call([$this,\
+    \ $method]);\n# } catch (ManuallyFailedException $e) {\n# $this->components->error($e->getMessage());\n\
+    # \n# return static::FAILURE;\n# } finally {\n# if ($this instanceof Isolatable\
+    \ && $this->option('isolated') !== false) {\n# $this->commandIsolationMutex()->forget($this);\n\
+    # }\n# }\n# }\n# \n# /**\n# * Get a command isolation mutex instance for the command.\n\
+    # *\n# * @return \\Illuminate\\Console\\CommandMutex"
+- name: resolveCommand
+  visibility: protected
+  parameters:
+  - name: command
+  comment: '# * Resolve the console command instance for the given command.
+
+    # *
+
+    # * @param  \Symfony\Component\Console\Command\Command|string  $command
+
+    # * @return \Symfony\Component\Console\Command\Command'
+- name: fail
+  visibility: public
+  parameters:
+  - name: exception
+    default: 'null'
+  comment: '# * Fail the command manually.
+
+    # *
+
+    # * @param  \Throwable|string|null  $exception
+
+    # * @return void
+
+    # *
+
+    # * @throws \Illuminate\Console\ManuallyFailedException|\Throwable'
+- name: getLaravel
+  visibility: public
+  parameters: []
+  comment: "# * {@inheritdoc}\n# *\n# * @return bool\n# */\n# #[\\Override]\n# public\
+    \ function isHidden(): bool\n# {\n# return $this->hidden;\n# }\n# \n# /**\n# *\
+    \ {@inheritdoc}\n# */\n# #[\\Override]\n# public function setHidden(bool $hidden\
+    \ = true): static\n# {\n# parent::setHidden($this->hidden = $hidden);\n# \n# return\
+    \ $this;\n# }\n# \n# /**\n# * Get the Laravel application instance.\n# *\n# *\
+    \ @return \\Illuminate\\Contracts\\Foundation\\Application"
+- name: setLaravel
+  visibility: public
+  parameters:
+  - name: laravel
+  comment: '# * Set the Laravel application instance.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Container\Container  $laravel
+
+    # * @return void'
+traits:
+- Illuminate\Console\View\Components\Factory
+- Illuminate\Contracts\Console\Isolatable
+- Illuminate\Support\Traits\Macroable
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Output\OutputInterface
+- Throwable
+- Concerns\CallsCommands
+interfaces: []

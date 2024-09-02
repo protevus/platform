@@ -1,0 +1,33 @@
+name: AutowireRequiredMethodsPass
+class_comment: '# * Looks for definitions with autowiring enabled and registers their
+  corresponding "#[Required]" methods as setters.
+
+  # *
+
+  # * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: Required
+  type: class
+  source: Symfony\Contracts\Service\Attribute\Required
+properties: []
+methods:
+- name: processValue
+  visibility: protected
+  parameters:
+  - name: value
+  - name: isRoot
+    default: 'false'
+  comment: null
+- name: isWither
+  visibility: private
+  parameters:
+  - name: reflectionMethod
+  - name: doc
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Contracts\Service\Attribute\Required
+interfaces: []

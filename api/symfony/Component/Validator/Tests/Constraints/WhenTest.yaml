@@ -1,0 +1,59 @@
+name: WhenTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Callback
+  type: class
+  source: Symfony\Component\Validator\Constraints\Callback
+- name: NotBlank
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotBlank
+- name: NotNull
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotNull
+- name: When
+  type: class
+  source: Symfony\Component\Validator\Constraints\When
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- name: MissingOptionsException
+  type: class
+  source: Symfony\Component\Validator\Exception\MissingOptionsException
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+- name: AttributeLoader
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\AttributeLoader
+- name: WhenTestWithAttributes
+  type: class
+  source: Symfony\Component\Validator\Tests\Constraints\Fixtures\WhenTestWithAttributes
+properties: []
+methods:
+- name: testMissingOptionsExceptionIsThrown
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNonConstraintsAreRejected
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAttributes
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\Constraints\Callback
+- Symfony\Component\Validator\Constraints\NotBlank
+- Symfony\Component\Validator\Constraints\NotNull
+- Symfony\Component\Validator\Constraints\When
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- Symfony\Component\Validator\Exception\MissingOptionsException
+- Symfony\Component\Validator\Mapping\ClassMetadata
+- Symfony\Component\Validator\Mapping\Loader\AttributeLoader
+- Symfony\Component\Validator\Tests\Constraints\Fixtures\WhenTestWithAttributes
+interfaces: []

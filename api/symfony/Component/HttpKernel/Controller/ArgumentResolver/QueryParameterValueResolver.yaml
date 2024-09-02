@@ -1,0 +1,34 @@
+name: QueryParameterValueResolver
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: MapQueryParameter
+  type: class
+  source: Symfony\Component\HttpKernel\Attribute\MapQueryParameter
+- name: ValueResolverInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ValueResolverInterface
+- name: ArgumentMetadata
+  type: class
+  source: Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata
+- name: HttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\HttpException
+properties: []
+methods:
+- name: resolve
+  visibility: public
+  parameters:
+  - name: request
+  - name: argument
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\Attribute\MapQueryParameter
+- Symfony\Component\HttpKernel\Controller\ValueResolverInterface
+- Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata
+- Symfony\Component\HttpKernel\Exception\HttpException
+interfaces:
+- ValueResolverInterface

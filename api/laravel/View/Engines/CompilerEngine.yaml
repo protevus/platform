@@ -1,0 +1,131 @@
+name: CompilerEngine
+class_comment: null
+dependencies:
+- name: RecordsNotFoundException
+  type: class
+  source: Illuminate\Database\RecordsNotFoundException
+- name: Filesystem
+  type: class
+  source: Illuminate\Filesystem\Filesystem
+- name: HttpResponseException
+  type: class
+  source: Illuminate\Http\Exceptions\HttpResponseException
+- name: CompilerInterface
+  type: class
+  source: Illuminate\View\Compilers\CompilerInterface
+- name: ViewException
+  type: class
+  source: Illuminate\View\ViewException
+- name: HttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\HttpException
+- name: Throwable
+  type: class
+  source: Throwable
+properties:
+- name: compiler
+  visibility: protected
+  comment: '# * The Blade compiler instance.
+
+    # *
+
+    # * @var \Illuminate\View\Compilers\CompilerInterface'
+- name: lastCompiled
+  visibility: protected
+  comment: '# * A stack of the last compiled templates.
+
+    # *
+
+    # * @var array'
+- name: compiledOrNotExpired
+  visibility: protected
+  comment: '# * The view paths that were compiled or are not expired, keyed by the
+    path.
+
+    # *
+
+    # * @var array<string, true>'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: compiler
+  - name: files
+    default: 'null'
+  comment: "# * The Blade compiler instance.\n# *\n# * @var \\Illuminate\\View\\Compilers\\\
+    CompilerInterface\n# */\n# protected $compiler;\n# \n# /**\n# * A stack of the\
+    \ last compiled templates.\n# *\n# * @var array\n# */\n# protected $lastCompiled\
+    \ = [];\n# \n# /**\n# * The view paths that were compiled or are not expired,\
+    \ keyed by the path.\n# *\n# * @var array<string, true>\n# */\n# protected $compiledOrNotExpired\
+    \ = [];\n# \n# /**\n# * Create a new compiler engine instance.\n# *\n# * @param\
+    \  \\Illuminate\\View\\Compilers\\CompilerInterface  $compiler\n# * @param  \\\
+    Illuminate\\Filesystem\\Filesystem|null  $files\n# * @return void"
+- name: get
+  visibility: public
+  parameters:
+  - name: path
+  - name: data
+    default: '[]'
+  comment: '# * Get the evaluated contents of the view.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  array  $data
+
+    # * @return string'
+- name: handleViewException
+  visibility: protected
+  parameters:
+  - name: e
+  - name: obLevel
+  comment: '# * Handle a view exception.
+
+    # *
+
+    # * @param  \Throwable  $e
+
+    # * @param  int  $obLevel
+
+    # * @return void
+
+    # *
+
+    # * @throws \Throwable'
+- name: getMessage
+  visibility: protected
+  parameters:
+  - name: e
+  comment: '# * Get the exception message for an exception.
+
+    # *
+
+    # * @param  \Throwable  $e
+
+    # * @return string'
+- name: getCompiler
+  visibility: public
+  parameters: []
+  comment: '# * Get the compiler implementation.
+
+    # *
+
+    # * @return \Illuminate\View\Compilers\CompilerInterface'
+- name: forgetCompiledOrNotExpired
+  visibility: public
+  parameters: []
+  comment: '# * Clear the cache of views that were compiled or not expired.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Database\RecordsNotFoundException
+- Illuminate\Filesystem\Filesystem
+- Illuminate\Http\Exceptions\HttpResponseException
+- Illuminate\View\Compilers\CompilerInterface
+- Illuminate\View\ViewException
+- Symfony\Component\HttpKernel\Exception\HttpException
+- Throwable
+interfaces: []

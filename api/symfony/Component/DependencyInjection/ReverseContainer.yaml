@@ -1,0 +1,34 @@
+name: ReverseContainer
+class_comment: null
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: ServiceNotFoundException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+properties: []
+methods:
+- name: getId
+  visibility: public
+  parameters:
+  - name: service
+  comment: "# * Turns public and \"container.reversible\" services back to their ids.\n\
+    # *\n# * @author Nicolas Grekas <p@tchwork.com>\n# */\n# final class ReverseContainer\n\
+    # {\n# private \\Closure $getServiceId;\n# \n# public function __construct(\n\
+    # private Container $serviceContainer,\n# private ContainerInterface $reversibleLocator,\n\
+    # private string $tagName = 'container.reversible',\n# ) {\n# $this->getServiceId\
+    \ = \\Closure::bind(fn (object $service): ?string => array_search($service, $this->services,\
+    \ true) ?: array_search($service, $this->privates, true) ?: null, $serviceContainer,\
+    \ Container::class);\n# }\n# \n# /**\n# * Returns the id of the passed object\
+    \ when it exists as a service.\n# *\n# * To be reversible, services need to be\
+    \ either public or be tagged with \"container.reversible\"."
+- name: getService
+  visibility: public
+  parameters:
+  - name: id
+  comment: '# * @throws ServiceNotFoundException When the service is not reversible'
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+interfaces: []

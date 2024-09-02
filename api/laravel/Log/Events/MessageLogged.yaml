@@ -1,0 +1,40 @@
+name: MessageLogged
+class_comment: null
+dependencies: []
+properties:
+- name: level
+  visibility: public
+  comment: '# * The log "level".
+
+    # *
+
+    # * @var string'
+- name: message
+  visibility: public
+  comment: '# * The log message.
+
+    # *
+
+    # * @var string'
+- name: context
+  visibility: public
+  comment: '# * The log context.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: level
+  - name: message
+  - name: context
+    default: '[]'
+  comment: "# * The log \"level\".\n# *\n# * @var string\n# */\n# public $level;\n\
+    # \n# /**\n# * The log message.\n# *\n# * @var string\n# */\n# public $message;\n\
+    # \n# /**\n# * The log context.\n# *\n# * @var array\n# */\n# public $context;\n\
+    # \n# /**\n# * Create a new event instance.\n# *\n# * @param  string  $level\n\
+    # * @param  string  $message\n# * @param  array  $context\n# * @return void"
+traits: []
+interfaces: []

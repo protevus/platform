@@ -1,0 +1,11 @@
+name: process
+class_comment: null
+dependencies:
+- name: RunProcessMessageHandler
+  type: class
+  source: Symfony\Component\Process\Messenger\RunProcessMessageHandler
+properties: []
+methods: []
+traits:
+- Symfony\Component\Process\Messenger\RunProcessMessageHandler
+interfaces: []

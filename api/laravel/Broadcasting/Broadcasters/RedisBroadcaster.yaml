@@ -1,0 +1,146 @@
+name: RedisBroadcaster
+class_comment: null
+dependencies:
+- name: BroadcastException
+  type: class
+  source: Illuminate\Broadcasting\BroadcastException
+- name: Redis
+  type: class
+  source: Illuminate\Contracts\Redis\Factory
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: ConnectionException
+  type: class
+  source: Predis\Connection\ConnectionException
+- name: RedisException
+  type: class
+  source: RedisException
+- name: AccessDeniedHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
+- name: UsePusherChannelConventions
+  type: class
+  source: UsePusherChannelConventions
+properties:
+- name: redis
+  visibility: protected
+  comment: '# * The Redis instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Redis\Factory'
+- name: connection
+  visibility: protected
+  comment: '# * The Redis connection to use for broadcasting.
+
+    # *
+
+    # * @var string|null'
+- name: prefix
+  visibility: protected
+  comment: '# * The Redis key prefix.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: redis
+  - name: connection
+    default: 'null'
+  - name: prefix
+    default: ''''''
+  comment: "# * The Redis instance.\n# *\n# * @var \\Illuminate\\Contracts\\Redis\\\
+    Factory\n# */\n# protected $redis;\n# \n# /**\n# * The Redis connection to use\
+    \ for broadcasting.\n# *\n# * @var string|null\n# */\n# protected $connection\
+    \ = null;\n# \n# /**\n# * The Redis key prefix.\n# *\n# * @var string\n# */\n\
+    # protected $prefix = '';\n# \n# /**\n# * Create a new broadcaster instance.\n\
+    # *\n# * @param  \\Illuminate\\Contracts\\Redis\\Factory  $redis\n# * @param \
+    \ string|null  $connection\n# * @param  string  $prefix\n# * @return void"
+- name: auth
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Authenticate the incoming request for a given channel.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException'
+- name: validAuthenticationResponse
+  visibility: public
+  parameters:
+  - name: request
+  - name: result
+  comment: '# * Return the valid authentication response.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  mixed  $result
+
+    # * @return mixed'
+- name: broadcast
+  visibility: public
+  parameters:
+  - name: channels
+  - name: event
+  - name: payload
+    default: '[]'
+  comment: '# * Broadcast the given event.
+
+    # *
+
+    # * @param  array  $channels
+
+    # * @param  string  $event
+
+    # * @param  array  $payload
+
+    # * @return void
+
+    # *
+
+    # * @throws \Illuminate\Broadcasting\BroadcastException'
+- name: broadcastMultipleChannelsScript
+  visibility: protected
+  parameters: []
+  comment: '# * Get the Lua script for broadcasting to multiple channels.
+
+    # *
+
+    # * ARGV[1] - The payload
+
+    # * ARGV[2...] - The channels
+
+    # *
+
+    # * @return string'
+- name: formatChannels
+  visibility: protected
+  parameters:
+  - name: channels
+  comment: '# * Format the channel array into an array of strings.
+
+    # *
+
+    # * @param  array  $channels
+
+    # * @return array'
+traits:
+- Illuminate\Broadcasting\BroadcastException
+- Illuminate\Support\Arr
+- Predis\Connection\ConnectionException
+- RedisException
+- Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
+- UsePusherChannelConventions
+interfaces: []

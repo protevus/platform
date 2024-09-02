@@ -1,0 +1,157 @@
+name: Manager
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Container
+  type: class
+  source: Illuminate\Contracts\Container\Container
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties:
+- name: container
+  visibility: protected
+  comment: '# * The container instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Container\Container'
+- name: config
+  visibility: protected
+  comment: '# * The configuration repository instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Config\Repository'
+- name: customCreators
+  visibility: protected
+  comment: '# * The registered custom driver creators.
+
+    # *
+
+    # * @var array'
+- name: drivers
+  visibility: protected
+  comment: '# * The array of created "drivers".
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+  comment: "# * The container instance.\n# *\n# * @var \\Illuminate\\Contracts\\Container\\\
+    Container\n# */\n# protected $container;\n# \n# /**\n# * The configuration repository\
+    \ instance.\n# *\n# * @var \\Illuminate\\Contracts\\Config\\Repository\n# */\n\
+    # protected $config;\n# \n# /**\n# * The registered custom driver creators.\n\
+    # *\n# * @var array\n# */\n# protected $customCreators = [];\n# \n# /**\n# * The\
+    \ array of created \"drivers\".\n# *\n# * @var array\n# */\n# protected $drivers\
+    \ = [];\n# \n# /**\n# * Create a new manager instance.\n# *\n# * @param  \\Illuminate\\\
+    Contracts\\Container\\Container  $container\n# * @return void"
+- name: driver
+  visibility: public
+  parameters:
+  - name: driver
+    default: 'null'
+  comment: "# * Get the default driver name.\n# *\n# * @return string\n# */\n# abstract\
+    \ public function getDefaultDriver();\n# \n# /**\n# * Get a driver instance.\n\
+    # *\n# * @param  string|null  $driver\n# * @return mixed\n# *\n# * @throws \\\
+    InvalidArgumentException"
+- name: createDriver
+  visibility: protected
+  parameters:
+  - name: driver
+  comment: '# * Create a new driver instance.
+
+    # *
+
+    # * @param  string  $driver
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: callCustomCreator
+  visibility: protected
+  parameters:
+  - name: driver
+  comment: '# * Call a custom driver creator.
+
+    # *
+
+    # * @param  string  $driver
+
+    # * @return mixed'
+- name: extend
+  visibility: public
+  parameters:
+  - name: driver
+  - name: callback
+  comment: '# * Register a custom driver creator Closure.
+
+    # *
+
+    # * @param  string  $driver
+
+    # * @param  \Closure  $callback
+
+    # * @return $this'
+- name: getDrivers
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the created "drivers".
+
+    # *
+
+    # * @return array'
+- name: getContainer
+  visibility: public
+  parameters: []
+  comment: '# * Get the container instance used by the manager.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Container\Container'
+- name: setContainer
+  visibility: public
+  parameters:
+  - name: container
+  comment: '# * Set the container instance used by the manager.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Container\Container  $container
+
+    # * @return $this'
+- name: forgetDrivers
+  visibility: public
+  parameters: []
+  comment: '# * Forget all of the resolved driver instances.
+
+    # *
+
+    # * @return $this'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically call the default driver instance.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+traits:
+- Closure
+- Illuminate\Contracts\Container\Container
+- InvalidArgumentException
+interfaces: []

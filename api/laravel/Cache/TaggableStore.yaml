@@ -1,0 +1,23 @@
+name: TaggableStore
+class_comment: null
+dependencies:
+- name: Store
+  type: class
+  source: Illuminate\Contracts\Cache\Store
+properties: []
+methods:
+- name: tags
+  visibility: public
+  parameters:
+  - name: names
+  comment: '# * Begin executing a new tags operation.
+
+    # *
+
+    # * @param  array|mixed  $names
+
+    # * @return \Illuminate\Cache\TaggedCache'
+traits:
+- Illuminate\Contracts\Cache\Store
+interfaces:
+- Store

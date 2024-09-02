@@ -1,0 +1,51 @@
+name: FragmentUriGenerator
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+- name: UriSigner
+  type: class
+  source: Symfony\Component\HttpFoundation\UriSigner
+- name: ControllerReference
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ControllerReference
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: fragmentPath
+  - name: signer
+    default: 'null'
+  - name: requestStack
+    default: 'null'
+  comment: null
+- name: generate
+  visibility: public
+  parameters:
+  - name: controller
+  - name: request
+    default: 'null'
+  - name: absolute
+    default: 'false'
+  - name: strict
+    default: 'true'
+  - name: sign
+    default: 'true'
+  comment: null
+- name: checkNonScalar
+  visibility: private
+  parameters:
+  - name: values
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestStack
+- Symfony\Component\HttpFoundation\UriSigner
+- Symfony\Component\HttpKernel\Controller\ControllerReference
+interfaces:
+- FragmentUriGeneratorInterface

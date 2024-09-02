@@ -1,0 +1,366 @@
+name: CompilesConditionals
+class_comment: null
+dependencies:
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+properties:
+- name: firstCaseInSwitch
+  visibility: protected
+  comment: '# * Identifier for the first case in the switch statement.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: compileAuth
+  visibility: protected
+  parameters:
+  - name: guard
+    default: 'null'
+  comment: "# * Identifier for the first case in the switch statement.\n# *\n# * @var\
+    \ bool\n# */\n# protected $firstCaseInSwitch = true;\n# \n# /**\n# * Compile the\
+    \ if-auth statements into valid PHP.\n# *\n# * @param  string|null  $guard\n#\
+    \ * @return string"
+- name: compileElseAuth
+  visibility: protected
+  parameters:
+  - name: guard
+    default: 'null'
+  comment: '# * Compile the else-auth statements into valid PHP.
+
+    # *
+
+    # * @param  string|null  $guard
+
+    # * @return string'
+- name: compileEndAuth
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the end-auth statements into valid PHP.
+
+    # *
+
+    # * @return string'
+- name: compileEnv
+  visibility: protected
+  parameters:
+  - name: environments
+  comment: '# * Compile the env statements into valid PHP.
+
+    # *
+
+    # * @param  string  $environments
+
+    # * @return string'
+- name: compileEndEnv
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the end-env statements into valid PHP.
+
+    # *
+
+    # * @return string'
+- name: compileProduction
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the production statements into valid PHP.
+
+    # *
+
+    # * @return string'
+- name: compileEndProduction
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the end-production statements into valid PHP.
+
+    # *
+
+    # * @return string'
+- name: compileGuest
+  visibility: protected
+  parameters:
+  - name: guard
+    default: 'null'
+  comment: '# * Compile the if-guest statements into valid PHP.
+
+    # *
+
+    # * @param  string|null  $guard
+
+    # * @return string'
+- name: compileElseGuest
+  visibility: protected
+  parameters:
+  - name: guard
+    default: 'null'
+  comment: '# * Compile the else-guest statements into valid PHP.
+
+    # *
+
+    # * @param  string|null  $guard
+
+    # * @return string'
+- name: compileEndGuest
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the end-guest statements into valid PHP.
+
+    # *
+
+    # * @return string'
+- name: compileHasSection
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the has-section statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compileSectionMissing
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the section-missing statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compileIf
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the if statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compileUnless
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the unless statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compileElseif
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the else-if statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compileElse
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the else statements into valid PHP.
+
+    # *
+
+    # * @return string'
+- name: compileEndif
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the end-if statements into valid PHP.
+
+    # *
+
+    # * @return string'
+- name: compileEndunless
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the end-unless statements into valid PHP.
+
+    # *
+
+    # * @return string'
+- name: compileIsset
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the if-isset statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compileEndIsset
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the end-isset statements into valid PHP.
+
+    # *
+
+    # * @return string'
+- name: compileSwitch
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the switch statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compileCase
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the case statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compileDefault
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the default statements in switch case into valid PHP.
+
+    # *
+
+    # * @return string'
+- name: compileEndSwitch
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the end switch statements into valid PHP.
+
+    # *
+
+    # * @return string'
+- name: compileOnce
+  visibility: protected
+  parameters:
+  - name: id
+    default: 'null'
+  comment: '# * Compile a once block into valid PHP.
+
+    # *
+
+    # * @param  string|null  $id
+
+    # * @return string'
+- name: compileEndOnce
+  visibility: public
+  parameters: []
+  comment: '# * Compile an end-once block into valid PHP.
+
+    # *
+
+    # * @return string'
+- name: compileSelected
+  visibility: protected
+  parameters:
+  - name: condition
+  comment: '# * Compile a selected block into valid PHP.
+
+    # *
+
+    # * @param  string  $condition
+
+    # * @return string'
+- name: compileChecked
+  visibility: protected
+  parameters:
+  - name: condition
+  comment: '# * Compile a checked block into valid PHP.
+
+    # *
+
+    # * @param  string  $condition
+
+    # * @return string'
+- name: compileDisabled
+  visibility: protected
+  parameters:
+  - name: condition
+  comment: '# * Compile a disabled block into valid PHP.
+
+    # *
+
+    # * @param  string  $condition
+
+    # * @return string'
+- name: compileRequired
+  visibility: protected
+  parameters:
+  - name: condition
+  comment: '# * Compile a required block into valid PHP.
+
+    # *
+
+    # * @param  string  $condition
+
+    # * @return string'
+- name: compileReadonly
+  visibility: protected
+  parameters:
+  - name: condition
+  comment: '# * Compile a readonly block into valid PHP.
+
+    # *
+
+    # * @param  string  $condition
+
+    # * @return string'
+- name: compilePushIf
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the push statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compileElsePushIf
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the else-if push statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compileElsePush
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the else push statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compileEndPushIf
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the end-push statements into valid PHP.
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Support\Str
+interfaces: []

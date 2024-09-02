@@ -1,0 +1,58 @@
+name: Benchmark
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+properties: []
+methods:
+- name: measure
+  visibility: public
+  parameters:
+  - name: benchmarkables
+  - name: iterations
+    default: '1'
+  comment: '# * Measure a callable or array of callables over the given number of
+    iterations.
+
+    # *
+
+    # * @param  \Closure|array  $benchmarkables
+
+    # * @param  int  $iterations
+
+    # * @return array|float'
+- name: value
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Measure a callable once and return the duration and result.
+
+    # *
+
+    # * @template TReturn of mixed
+
+    # *
+
+    # * @param  (callable(): TReturn)  $callback
+
+    # * @return array{0: TReturn, 1: float}'
+- name: dd
+  visibility: public
+  parameters:
+  - name: benchmarkables
+  - name: iterations
+    default: '1'
+  comment: '# * Measure a callable or array of callables over the given number of
+    iterations, then dump and die.
+
+    # *
+
+    # * @param  \Closure|array  $benchmarkables
+
+    # * @param  int  $iterations
+
+    # * @return never'
+traits:
+- Closure
+interfaces: []

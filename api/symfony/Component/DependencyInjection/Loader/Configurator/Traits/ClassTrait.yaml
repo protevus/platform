@@ -1,0 +1,12 @@
+name: ClassTrait
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: class
+  visibility: public
+  parameters:
+  - name: class
+  comment: null
+traits: []
+interfaces: []

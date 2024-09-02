@@ -1,0 +1,47 @@
+name: StaticTokenProvider
+class_comment: null
+dependencies:
+- name: PersistentTokenInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\RememberMe\PersistentTokenInterface
+- name: TokenProviderInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\RememberMe\TokenProviderInterface
+- name: TokenNotFoundException
+  type: class
+  source: Symfony\Component\Security\Core\Exception\TokenNotFoundException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: kernel
+  comment: null
+- name: loadTokenBySeries
+  visibility: public
+  parameters:
+  - name: series
+  comment: null
+- name: deleteTokenBySeries
+  visibility: public
+  parameters:
+  - name: series
+  comment: null
+- name: updateToken
+  visibility: public
+  parameters:
+  - name: series
+  - name: tokenValue
+  - name: lastUsed
+  comment: null
+- name: createNewToken
+  visibility: public
+  parameters:
+  - name: token
+  comment: null
+traits:
+- Symfony\Component\Security\Core\Authentication\RememberMe\PersistentTokenInterface
+- Symfony\Component\Security\Core\Authentication\RememberMe\TokenProviderInterface
+- Symfony\Component\Security\Core\Exception\TokenNotFoundException
+interfaces:
+- TokenProviderInterface

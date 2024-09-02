@@ -1,0 +1,41 @@
+name: SessionBagProxy
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: bag
+  - name: '&$data'
+  - name: '&$usageIndex'
+  - name: usageReporter
+  comment: null
+- name: getBag
+  visibility: public
+  parameters: []
+  comment: null
+- name: isEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: initialize
+  visibility: public
+  parameters:
+  - name: '&$array'
+  comment: null
+- name: getStorageKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: clear
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces:
+- SessionBagInterface

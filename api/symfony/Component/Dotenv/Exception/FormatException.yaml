@@ -1,0 +1,22 @@
+name: FormatException
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: message
+  - name: context
+  - name: code
+    default: '0'
+  - name: previous
+    default: 'null'
+  comment: null
+- name: getContext
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces:
+- ExceptionInterface

@@ -1,0 +1,143 @@
+name: OutputStyle
+class_comment: null
+dependencies:
+- name: NewLineAware
+  type: class
+  source: Illuminate\Console\Contracts\NewLineAware
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: Question
+  type: class
+  source: Symfony\Component\Console\Question\Question
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+properties:
+- name: output
+  visibility: private
+  comment: '# * The output instance.
+
+    # *
+
+    # * @var \Symfony\Component\Console\Output\OutputInterface'
+- name: newLinesWritten
+  visibility: protected
+  comment: '# * The number of trailing new lines written by the last output.
+
+    # *
+
+    # * This is initialized as 1 to account for the new line written by the shell
+    after executing a command.
+
+    # *
+
+    # * @var int'
+- name: newLineWritten
+  visibility: protected
+  comment: '# * If the last output written wrote a new line.
+
+    # *
+
+    # * @var bool
+
+    # *
+
+    # * @deprecated use $newLinesWritten'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: input
+  - name: output
+  comment: "# * The output instance.\n# *\n# * @var \\Symfony\\Component\\Console\\\
+    Output\\OutputInterface\n# */\n# private $output;\n# \n# /**\n# * The number of\
+    \ trailing new lines written by the last output.\n# *\n# * This is initialized\
+    \ as 1 to account for the new line written by the shell after executing a command.\n\
+    # *\n# * @var int\n# */\n# protected $newLinesWritten = 1;\n# \n# /**\n# * If\
+    \ the last output written wrote a new line.\n# *\n# * @var bool\n# *\n# * @deprecated\
+    \ use $newLinesWritten\n# */\n# protected $newLineWritten = false;\n# \n# /**\n\
+    # * Create a new Console OutputStyle instance.\n# *\n# * @param  \\Symfony\\Component\\\
+    Console\\Input\\InputInterface  $input\n# * @param  \\Symfony\\Component\\Console\\\
+    Output\\OutputInterface  $output\n# * @return void"
+- name: newLinesWritten
+  visibility: public
+  parameters: []
+  comment: "# * {@inheritdoc}\n# */\n# #[\\Override]\n# public function askQuestion(Question\
+    \ $question): mixed\n# {\n# try {\n# return parent::askQuestion($question);\n\
+    # } finally {\n# $this->newLinesWritten++;\n# }\n# }\n# \n# /**\n# * {@inheritdoc}\n\
+    # */\n# #[\\Override]\n# public function write(string|iterable $messages, bool\
+    \ $newline = false, int $options = 0): void\n# {\n# $this->newLinesWritten = $this->trailingNewLineCount($messages)\
+    \ + (int) $newline;\n# $this->newLineWritten = $this->newLinesWritten > 0;\n#\
+    \ \n# parent::write($messages, $newline, $options);\n# }\n# \n# /**\n# * {@inheritdoc}\n\
+    # */\n# #[\\Override]\n# public function writeln(string|iterable $messages, int\
+    \ $type = self::OUTPUT_NORMAL): void\n# {\n# $this->newLinesWritten = $this->trailingNewLineCount($messages)\
+    \ + 1;\n# $this->newLineWritten = true;\n# \n# parent::writeln($messages, $type);\n\
+    # }\n# \n# /**\n# * {@inheritdoc}\n# */\n# #[\\Override]\n# public function newLine(int\
+    \ $count = 1): void\n# {\n# $this->newLinesWritten += $count;\n# $this->newLineWritten\
+    \ = $this->newLinesWritten > 0;\n# \n# parent::newLine($count);\n# }\n# \n# /**\n\
+    # * {@inheritdoc}"
+- name: newLineWritten
+  visibility: public
+  parameters: []
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @deprecated use newLinesWritten'
+- name: trailingNewLineCount
+  visibility: protected
+  parameters:
+  - name: messages
+  comment: null
+- name: isQuiet
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether verbosity is quiet (-q).
+
+    # *
+
+    # * @return bool'
+- name: isVerbose
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether verbosity is verbose (-v).
+
+    # *
+
+    # * @return bool'
+- name: isVeryVerbose
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether verbosity is very verbose (-vv).
+
+    # *
+
+    # * @return bool'
+- name: isDebug
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether verbosity is debug (-vvv).
+
+    # *
+
+    # * @return bool'
+- name: getOutput
+  visibility: public
+  parameters: []
+  comment: '# * Get the underlying Symfony output implementation.
+
+    # *
+
+    # * @return \Symfony\Component\Console\Output\OutputInterface'
+traits:
+- Illuminate\Console\Contracts\NewLineAware
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Question\Question
+- Symfony\Component\Console\Style\SymfonyStyle
+interfaces:
+- NewLineAware

@@ -1,0 +1,77 @@
+name: PhpFrameworkExtensionTest
+class_comment: null
+dependencies:
+- name: InvalidConfigurationException
+  type: class
+  source: Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+- name: FileLocator
+  type: class
+  source: Symfony\Component\Config\FileLocator
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: LogicException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\LogicException
+- name: OutOfBoundsException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\OutOfBoundsException
+- name: PhpFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- name: InvalidDefinitionException
+  type: class
+  source: Symfony\Component\Workflow\Exception\InvalidDefinitionException
+properties: []
+methods:
+- name: loadFromFile
+  visibility: protected
+  parameters:
+  - name: container
+  - name: file
+  comment: null
+- name: testAssetsCannotHavePathAndUrl
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssetPackageCannotHavePathAndUrl
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkflowValidationPlacesIsArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkflowValidationTransitonsIsArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkflowValidationStateMachine
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkflowDefaultMarkingStoreDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRateLimiterWithLockFactory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRateLimiterLockFactory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRateLimiterIsTagged
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+- Symfony\Component\Config\FileLocator
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\LogicException
+- Symfony\Component\DependencyInjection\Exception\OutOfBoundsException
+- Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- Symfony\Component\Workflow\Exception\InvalidDefinitionException
+interfaces: []

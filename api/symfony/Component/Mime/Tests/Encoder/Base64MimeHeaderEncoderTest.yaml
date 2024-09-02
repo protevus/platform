@@ -1,0 +1,19 @@
+name: Base64MimeHeaderEncoderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Base64MimeHeaderEncoder
+  type: class
+  source: Symfony\Component\Mime\Encoder\Base64MimeHeaderEncoder
+properties: []
+methods:
+- name: testNameIsB
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mime\Encoder\Base64MimeHeaderEncoder
+interfaces: []

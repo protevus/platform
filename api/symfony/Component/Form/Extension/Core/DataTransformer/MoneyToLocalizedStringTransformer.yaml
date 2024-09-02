@@ -1,0 +1,49 @@
+name: MoneyToLocalizedStringTransformer
+class_comment: '# * Transforms between a normalized format and a localized money string.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # * @author Florian Eckerstorfer <florian@eckerstorfer.org>'
+dependencies:
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+properties: []
+methods:
+- name: transform
+  visibility: public
+  parameters:
+  - name: value
+  comment: "# * Transforms between a normalized format and a localized money string.\n\
+    # *\n# * @author Bernhard Schussek <bschussek@gmail.com>\n# * @author Florian\
+    \ Eckerstorfer <florian@eckerstorfer.org>\n# */\n# class MoneyToLocalizedStringTransformer\
+    \ extends NumberToLocalizedStringTransformer\n# {\n# private int $divisor;\n#\
+    \ \n# public function __construct(\n# ?int $scale = 2,\n# ?bool $grouping = true,\n\
+    # ?int $roundingMode = \\NumberFormatter::ROUND_HALFUP,\n# ?int $divisor = 1,\n\
+    # ?string $locale = null,\n# private readonly string $input = 'float',\n# ) {\n\
+    # parent::__construct($scale ?? 2, $grouping ?? true, $roundingMode, $locale);\n\
+    # \n# $this->divisor = $divisor ?? 1;\n# }\n# \n# /**\n# * Transforms a normalized\
+    \ format into a localized money string.\n# *\n# * @param int|float|null $value\
+    \ Normalized number\n# *\n# * @throws TransformationFailedException if the given\
+    \ value is not numeric or\n# *                                       if the value\
+    \ cannot be transformed"
+- name: reverseTransform
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Transforms a localized money string into a normalized format.
+
+    # *
+
+    # * @param string $value Localized money string
+
+    # *
+
+    # * @throws TransformationFailedException if the given value is not a string
+
+    # *                                       or if the value cannot be transformed'
+traits:
+- Symfony\Component\Form\Exception\TransformationFailedException
+interfaces: []

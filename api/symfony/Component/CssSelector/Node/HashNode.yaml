@@ -1,0 +1,32 @@
+name: HashNode
+class_comment: "# * Represents a \"<selector>#<id>\" node.\n# *\n# * This component\
+  \ is a port of the Python cssselect library,\n# * which is copyright Ian Bicking,\
+  \ @see https://github.com/SimonSapin/cssselect.\n# *\n# * @author Jean-Fran\xE7\
+  ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n# * @internal"
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: selector
+  - name: id
+  comment: null
+- name: getSelector
+  visibility: public
+  parameters: []
+  comment: null
+- name: getId
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSpecificity
+  visibility: public
+  parameters: []
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

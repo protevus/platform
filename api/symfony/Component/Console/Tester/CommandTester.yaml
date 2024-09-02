@@ -1,0 +1,42 @@
+name: CommandTester
+class_comment: '# * Eases the testing of console commands.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # * @author Robin Chalas <robin.chalas@gmail.com>'
+dependencies:
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: ArrayInput
+  type: class
+  source: Symfony\Component\Console\Input\ArrayInput
+- name: TesterTrait
+  type: class
+  source: TesterTrait
+properties: []
+methods:
+- name: execute
+  visibility: public
+  parameters:
+  - name: input
+  - name: options
+    default: '[]'
+  comment: "# * Eases the testing of console commands.\n# *\n# * @author Fabien Potencier\
+    \ <fabien@symfony.com>\n# * @author Robin Chalas <robin.chalas@gmail.com>\n# */\n\
+    # class CommandTester\n# {\n# use TesterTrait;\n# \n# public function __construct(\n\
+    # private Command $command,\n# ) {\n# }\n# \n# /**\n# * Executes the command.\n\
+    # *\n# * Available execution options:\n# *\n# *  * interactive:              \
+    \ Sets the input interactive flag\n# *  * decorated:                 Sets the\
+    \ output decorated flag\n# *  * verbosity:                 Sets the output verbosity\
+    \ flag\n# *  * capture_stderr_separately: Make output of stdOut and stdErr separately\
+    \ available\n# *\n# * @param array $input   An array of command arguments and\
+    \ options\n# * @param array $options An array of execution options\n# *\n# * @return\
+    \ int The command exit code"
+traits:
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Input\ArrayInput
+- TesterTrait
+interfaces: []

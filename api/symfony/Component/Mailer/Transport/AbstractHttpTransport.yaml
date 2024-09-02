@@ -1,0 +1,64 @@
+name: AbstractHttpTransport
+class_comment: null
+dependencies:
+- name: EventDispatcherInterface
+  type: class
+  source: Psr\EventDispatcher\EventDispatcherInterface
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: HttpClient
+  type: class
+  source: Symfony\Component\HttpClient\HttpClient
+- name: HttpTransportException
+  type: class
+  source: Symfony\Component\Mailer\Exception\HttpTransportException
+- name: SentMessage
+  type: class
+  source: Symfony\Component\Mailer\SentMessage
+- name: HttpClientInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\HttpClientInterface
+- name: ResponseInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\ResponseInterface
+properties: []
+methods:
+- name: setHost
+  visibility: public
+  parameters:
+  - name: host
+  comment: "# * @author Victor Bocharsky <victor@symfonycasts.com>\n# */\n# abstract\
+    \ class AbstractHttpTransport extends AbstractTransport\n# {\n# protected ?string\
+    \ $host = null;\n# protected ?int $port = null;\n# \n# public function __construct(\n\
+    # protected ?HttpClientInterface $client = null,\n# ?EventDispatcherInterface\
+    \ $dispatcher = null,\n# ?LoggerInterface $logger = null,\n# ) {\n# if (null ===\
+    \ $client) {\n# if (!class_exists(HttpClient::class)) {\n# throw new \\LogicException(\\\
+    sprintf('You cannot use \"%s\" as the HttpClient component is not installed. Try\
+    \ running \"composer require symfony/http-client\".', __CLASS__));\n# }\n# \n\
+    # $this->client = HttpClient::create();\n# }\n# \n# parent::__construct($dispatcher,\
+    \ $logger);\n# }\n# \n# /**\n# * @return $this"
+- name: setPort
+  visibility: public
+  parameters:
+  - name: port
+  comment: '# * @return $this'
+- name: doSendHttp
+  visibility: protected
+  parameters:
+  - name: message
+  comment: null
+- name: doSend
+  visibility: protected
+  parameters:
+  - name: message
+  comment: null
+traits:
+- Psr\EventDispatcher\EventDispatcherInterface
+- Psr\Log\LoggerInterface
+- Symfony\Component\HttpClient\HttpClient
+- Symfony\Component\Mailer\Exception\HttpTransportException
+- Symfony\Component\Mailer\SentMessage
+- Symfony\Contracts\HttpClient\HttpClientInterface
+- Symfony\Contracts\HttpClient\ResponseInterface
+interfaces: []

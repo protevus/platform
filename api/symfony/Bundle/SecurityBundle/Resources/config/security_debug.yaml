@@ -1,0 +1,19 @@
+name: security_debug
+class_comment: null
+dependencies:
+- name: TraceableFirewallListener
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener
+- name: VoteListener
+  type: class
+  source: Symfony\Bundle\SecurityBundle\EventListener\VoteListener
+- name: TraceableAccessDecisionManager
+  type: class
+  source: Symfony\Component\Security\Core\Authorization\TraceableAccessDecisionManager
+properties: []
+methods: []
+traits:
+- Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener
+- Symfony\Bundle\SecurityBundle\EventListener\VoteListener
+- Symfony\Component\Security\Core\Authorization\TraceableAccessDecisionManager
+interfaces: []

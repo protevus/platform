@@ -1,0 +1,425 @@
+name: ResponseFactory
+class_comment: null
+dependencies:
+- name: FactoryContract
+  type: class
+  source: Illuminate\Contracts\Routing\ResponseFactory
+- name: ViewFactory
+  type: class
+  source: Illuminate\Contracts\View\Factory
+- name: JsonResponse
+  type: class
+  source: Illuminate\Http\JsonResponse
+- name: Response
+  type: class
+  source: Illuminate\Http\Response
+- name: StreamedResponseException
+  type: class
+  source: Illuminate\Routing\Exceptions\StreamedResponseException
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: BinaryFileResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\BinaryFileResponse
+- name: StreamedJsonResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\StreamedJsonResponse
+- name: StreamedResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\StreamedResponse
+- name: Throwable
+  type: class
+  source: Throwable
+- name: Macroable
+  type: class
+  source: Macroable
+properties:
+- name: view
+  visibility: protected
+  comment: '# * The view factory instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\View\Factory'
+- name: redirector
+  visibility: protected
+  comment: '# * The redirector instance.
+
+    # *
+
+    # * @var \Illuminate\Routing\Redirector'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: view
+  - name: redirector
+  comment: "# * The view factory instance.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    View\\Factory\n# */\n# protected $view;\n# \n# /**\n# * The redirector instance.\n\
+    # *\n# * @var \\Illuminate\\Routing\\Redirector\n# */\n# protected $redirector;\n\
+    # \n# /**\n# * Create a new response factory instance.\n# *\n# * @param  \\Illuminate\\\
+    Contracts\\View\\Factory  $view\n# * @param  \\Illuminate\\Routing\\Redirector\
+    \  $redirector\n# * @return void"
+- name: make
+  visibility: public
+  parameters:
+  - name: content
+    default: ''''''
+  - name: status
+    default: '200'
+  - name: headers
+    default: '[]'
+  comment: '# * Create a new response instance.
+
+    # *
+
+    # * @param  mixed  $content
+
+    # * @param  int  $status
+
+    # * @param  array  $headers
+
+    # * @return \Illuminate\Http\Response'
+- name: noContent
+  visibility: public
+  parameters:
+  - name: status
+    default: '204'
+  - name: headers
+    default: '[]'
+  comment: '# * Create a new "no content" response.
+
+    # *
+
+    # * @param  int  $status
+
+    # * @param  array  $headers
+
+    # * @return \Illuminate\Http\Response'
+- name: view
+  visibility: public
+  parameters:
+  - name: view
+  - name: data
+    default: '[]'
+  - name: status
+    default: '200'
+  - name: headers
+    default: '[]'
+  comment: '# * Create a new response for a given view.
+
+    # *
+
+    # * @param  string|array  $view
+
+    # * @param  array  $data
+
+    # * @param  int  $status
+
+    # * @param  array  $headers
+
+    # * @return \Illuminate\Http\Response'
+- name: json
+  visibility: public
+  parameters:
+  - name: data
+    default: '[]'
+  - name: status
+    default: '200'
+  - name: headers
+    default: '[]'
+  - name: options
+    default: '0'
+  comment: '# * Create a new JSON response instance.
+
+    # *
+
+    # * @param  mixed  $data
+
+    # * @param  int  $status
+
+    # * @param  array  $headers
+
+    # * @param  int  $options
+
+    # * @return \Illuminate\Http\JsonResponse'
+- name: jsonp
+  visibility: public
+  parameters:
+  - name: callback
+  - name: data
+    default: '[]'
+  - name: status
+    default: '200'
+  - name: headers
+    default: '[]'
+  - name: options
+    default: '0'
+  comment: '# * Create a new JSONP response instance.
+
+    # *
+
+    # * @param  string  $callback
+
+    # * @param  mixed  $data
+
+    # * @param  int  $status
+
+    # * @param  array  $headers
+
+    # * @param  int  $options
+
+    # * @return \Illuminate\Http\JsonResponse'
+- name: stream
+  visibility: public
+  parameters:
+  - name: callback
+  - name: status
+    default: '200'
+  - name: headers
+    default: '[]'
+  comment: '# * Create a new streamed response instance.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @param  int  $status
+
+    # * @param  array  $headers
+
+    # * @return \Symfony\Component\HttpFoundation\StreamedResponse'
+- name: streamJson
+  visibility: public
+  parameters:
+  - name: data
+  - name: status
+    default: '200'
+  - name: headers
+    default: '[]'
+  - name: encodingOptions
+    default: JsonResponse::DEFAULT_ENCODING_OPTIONS
+  comment: '# * Create a new streamed response instance.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @param  int  $status
+
+    # * @param  array  $headers
+
+    # * @param  int  $encodingOptions
+
+    # * @return \Symfony\Component\HttpFoundation\StreamedJsonResponse'
+- name: streamDownload
+  visibility: public
+  parameters:
+  - name: callback
+  - name: name
+    default: 'null'
+  - name: headers
+    default: '[]'
+  - name: disposition
+    default: '''attachment'''
+  comment: '# * Create a new streamed response instance as a file download.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @param  string|null  $name
+
+    # * @param  array  $headers
+
+    # * @param  string|null  $disposition
+
+    # * @return \Symfony\Component\HttpFoundation\StreamedResponse
+
+    # *
+
+    # * @throws \Illuminate\Routing\Exceptions\StreamedResponseException'
+- name: download
+  visibility: public
+  parameters:
+  - name: file
+  - name: name
+    default: 'null'
+  - name: headers
+    default: '[]'
+  - name: disposition
+    default: '''attachment'''
+  comment: '# * Create a new file download response.
+
+    # *
+
+    # * @param  \SplFileInfo|string  $file
+
+    # * @param  string|null  $name
+
+    # * @param  array  $headers
+
+    # * @param  string|null  $disposition
+
+    # * @return \Symfony\Component\HttpFoundation\BinaryFileResponse'
+- name: fallbackName
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Convert the string to ASCII characters that are equivalent to the
+    given name.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string'
+- name: file
+  visibility: public
+  parameters:
+  - name: file
+  - name: headers
+    default: '[]'
+  comment: '# * Return the raw contents of a binary file.
+
+    # *
+
+    # * @param  \SplFileInfo|string  $file
+
+    # * @param  array  $headers
+
+    # * @return \Symfony\Component\HttpFoundation\BinaryFileResponse'
+- name: redirectTo
+  visibility: public
+  parameters:
+  - name: path
+  - name: status
+    default: '302'
+  - name: headers
+    default: '[]'
+  - name: secure
+    default: 'null'
+  comment: '# * Create a new redirect response to the given path.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  int  $status
+
+    # * @param  array  $headers
+
+    # * @param  bool|null  $secure
+
+    # * @return \Illuminate\Http\RedirectResponse'
+- name: redirectToRoute
+  visibility: public
+  parameters:
+  - name: route
+  - name: parameters
+    default: '[]'
+  - name: status
+    default: '302'
+  - name: headers
+    default: '[]'
+  comment: '# * Create a new redirect response to a named route.
+
+    # *
+
+    # * @param  string  $route
+
+    # * @param  mixed  $parameters
+
+    # * @param  int  $status
+
+    # * @param  array  $headers
+
+    # * @return \Illuminate\Http\RedirectResponse'
+- name: redirectToAction
+  visibility: public
+  parameters:
+  - name: action
+  - name: parameters
+    default: '[]'
+  - name: status
+    default: '302'
+  - name: headers
+    default: '[]'
+  comment: '# * Create a new redirect response to a controller action.
+
+    # *
+
+    # * @param  array|string  $action
+
+    # * @param  mixed  $parameters
+
+    # * @param  int  $status
+
+    # * @param  array  $headers
+
+    # * @return \Illuminate\Http\RedirectResponse'
+- name: redirectGuest
+  visibility: public
+  parameters:
+  - name: path
+  - name: status
+    default: '302'
+  - name: headers
+    default: '[]'
+  - name: secure
+    default: 'null'
+  comment: '# * Create a new redirect response, while putting the current URL in the
+    session.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  int  $status
+
+    # * @param  array  $headers
+
+    # * @param  bool|null  $secure
+
+    # * @return \Illuminate\Http\RedirectResponse'
+- name: redirectToIntended
+  visibility: public
+  parameters:
+  - name: default
+    default: '''/'''
+  - name: status
+    default: '302'
+  - name: headers
+    default: '[]'
+  - name: secure
+    default: 'null'
+  comment: '# * Create a new redirect response to the previously intended location.
+
+    # *
+
+    # * @param  string  $default
+
+    # * @param  int  $status
+
+    # * @param  array  $headers
+
+    # * @param  bool|null  $secure
+
+    # * @return \Illuminate\Http\RedirectResponse'
+traits:
+- Illuminate\Http\JsonResponse
+- Illuminate\Http\Response
+- Illuminate\Routing\Exceptions\StreamedResponseException
+- Illuminate\Support\Str
+- Illuminate\Support\Traits\Macroable
+- Symfony\Component\HttpFoundation\BinaryFileResponse
+- Symfony\Component\HttpFoundation\StreamedJsonResponse
+- Symfony\Component\HttpFoundation\StreamedResponse
+- Throwable
+- Macroable
+interfaces:
+- FactoryContract

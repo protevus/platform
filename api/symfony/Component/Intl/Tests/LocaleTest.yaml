@@ -1,0 +1,37 @@
+name: LocaleTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Locale
+  type: class
+  source: Symfony\Component\Intl\Locale
+properties: []
+methods:
+- name: provideGetFallbackTests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetFallback
+  visibility: public
+  parameters:
+  - name: expected
+  - name: locale
+  comment: '# * @dataProvider provideGetFallbackTests'
+- name: testNoDefaultFallback
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDefaultRootFallback
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLongLocaleFallback
+  visibility: public
+  parameters: []
+  comment: '# * @requires function locale_parse'
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Intl\Locale
+interfaces: []

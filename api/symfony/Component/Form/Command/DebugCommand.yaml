@@ -1,0 +1,174 @@
+name: DebugCommand
+class_comment: null
+dependencies:
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: CompletionInput
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionInput
+- name: CompletionSuggestions
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionSuggestions
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Console\Exception\InvalidArgumentException
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+- name: FileLinkFormatter
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter
+- name: DescriptorHelper
+  type: class
+  source: Symfony\Component\Form\Console\Helper\DescriptorHelper
+- name: CoreExtension
+  type: class
+  source: Symfony\Component\Form\Extension\Core\CoreExtension
+- name: FormRegistryInterface
+  type: class
+  source: Symfony\Component\Form\FormRegistryInterface
+- name: FormTypeInterface
+  type: class
+  source: Symfony\Component\Form\FormTypeInterface
+properties: []
+methods:
+- name: getAvailableFormatOptions
+  visibility: private
+  parameters: []
+  comment: "# * A console command for retrieving information about form types.\n#\
+    \ *\n# * @author Yonel Ceruto <yonelceruto@gmail.com>\n# */\n# #[AsCommand(name:\
+    \ 'debug:form', description: 'Display form type information')]\n# class DebugCommand\
+    \ extends Command\n# {\n# public function __construct(\n# private FormRegistryInterface\
+    \ $formRegistry,\n# private array $namespaces = ['Symfony\\Component\\Form\\Extension\\\
+    Core\\Type'],\n# private array $types = [],\n# private array $extensions = [],\n\
+    # private array $guessers = [],\n# private ?FileLinkFormatter $fileLinkFormatter\
+    \ = null,\n# ) {\n# parent::__construct();\n# }\n# \n# protected function configure():\
+    \ void\n# {\n# $this\n# ->setDefinition([\n# new InputArgument('class', InputArgument::OPTIONAL,\
+    \ 'The form type class'),\n# new InputArgument('option', InputArgument::OPTIONAL,\
+    \ 'The form type option'),\n# new InputOption('show-deprecated', null, InputOption::VALUE_NONE,\
+    \ 'Display deprecated options in form types'),\n# new InputOption('format', null,\
+    \ InputOption::VALUE_REQUIRED, \\sprintf('The output format (\"%s\")', implode('\"\
+    , \"', $this->getAvailableFormatOptions())), 'txt'),\n# ])\n# ->setHelp(<<<'EOF'\n\
+    # The <info>%command.name%</info> command displays information about form types.\n\
+    # \n# <info>php %command.full_name%</info>\n# \n# The command lists all built-in\
+    \ types, services types, type extensions and\n# guessers currently available.\n\
+    # \n# <info>php %command.full_name% Symfony\\Component\\Form\\Extension\\Core\\\
+    Type\\ChoiceType</info>\n# <info>php %command.full_name% ChoiceType</info>\n#\
+    \ \n# The command lists all defined options that contains the given form type,\n\
+    # as well as their parents and type extensions.\n# \n# <info>php %command.full_name%\
+    \ ChoiceType choice_value</info>\n# \n# Use the <info>--show-deprecated</info>\
+    \ option to display form types with\n# deprecated options or the deprecated options\
+    \ of the given form type:\n# \n# <info>php %command.full_name% --show-deprecated</info>\n\
+    # <info>php %command.full_name% ChoiceType --show-deprecated</info>\n# \n# The\
+    \ command displays the definition of the given option name.\n# \n# <info>php %command.full_name%\
+    \ --format=json</info>\n# \n# The command lists everything in a machine readable\
+    \ json format.\n# EOF\n# )\n# ;\n# }\n# \n# protected function execute(InputInterface\
+    \ $input, OutputInterface $output): int\n# {\n# $io = new SymfonyStyle($input,\
+    \ $output);\n# \n# if (null === $class = $input->getArgument('class')) {\n# $object\
+    \ = null;\n# $options['core_types'] = $this->getCoreTypes();\n# $options['service_types']\
+    \ = array_values(array_diff($this->types, $options['core_types']));\n# if ($input->getOption('show-deprecated'))\
+    \ {\n# $options['core_types'] = $this->filterTypesByDeprecated($options['core_types']);\n\
+    # $options['service_types'] = $this->filterTypesByDeprecated($options['service_types']);\n\
+    # }\n# $options['extensions'] = $this->extensions;\n# $options['guessers'] = $this->guessers;\n\
+    # foreach ($options as $k => $list) {\n# sort($options[$k]);\n# }\n# } else {\n\
+    # if (!class_exists($class) || !is_subclass_of($class, FormTypeInterface::class))\
+    \ {\n# $class = $this->getFqcnTypeClass($input, $io, $class);\n# }\n# $resolvedType\
+    \ = $this->formRegistry->getType($class);\n# \n# if ($option = $input->getArgument('option'))\
+    \ {\n# $object = $resolvedType->getOptionsResolver();\n# \n# if (!$object->isDefined($option))\
+    \ {\n# $message = \\sprintf('Option \"%s\" is not defined in \"%s\".', $option,\
+    \ $resolvedType->getInnerType()::class);\n# \n# if ($alternatives = $this->findAlternatives($option,\
+    \ $object->getDefinedOptions())) {\n# if (1 === \\count($alternatives)) {\n# $message\
+    \ .= \"\\n\\nDid you mean this?\\n    \";\n# } else {\n# $message .= \"\\n\\nDid\
+    \ you mean one of these?\\n    \";\n# }\n# $message .= implode(\"\\n    \", $alternatives);\n\
+    # }\n# \n# throw new InvalidArgumentException($message);\n# }\n# \n# $options['type']\
+    \ = $resolvedType->getInnerType();\n# $options['option'] = $option;\n# } else\
+    \ {\n# $object = $resolvedType;\n# }\n# }\n# \n# $helper = new DescriptorHelper($this->fileLinkFormatter);\n\
+    # $options['format'] = $input->getOption('format');\n# $options['show_deprecated']\
+    \ = $input->getOption('show-deprecated');\n# $helper->describe($io, $object, $options);\n\
+    # \n# return 0;\n# }\n# \n# private function getFqcnTypeClass(InputInterface $input,\
+    \ SymfonyStyle $io, string $shortClassName): string\n# {\n# $classes = $this->getFqcnTypeClasses($shortClassName);\n\
+    # \n# if (0 === $count = \\count($classes)) {\n# $message = \\sprintf(\"Could\
+    \ not find type \\\"%s\\\" into the following namespaces:\\n    %s\", $shortClassName,\
+    \ implode(\"\\n    \", $this->namespaces));\n# \n# $allTypes = array_merge($this->getCoreTypes(),\
+    \ $this->types);\n# if ($alternatives = $this->findAlternatives($shortClassName,\
+    \ $allTypes)) {\n# if (1 === \\count($alternatives)) {\n# $message .= \"\\n\\\
+    nDid you mean this?\\n    \";\n# } else {\n# $message .= \"\\n\\nDid you mean\
+    \ one of these?\\n    \";\n# }\n# $message .= implode(\"\\n    \", $alternatives);\n\
+    # }\n# \n# throw new InvalidArgumentException($message);\n# }\n# if (1 === $count)\
+    \ {\n# return $classes[0];\n# }\n# if (!$input->isInteractive()) {\n# throw new\
+    \ InvalidArgumentException(\\sprintf(\"The type \\\"%s\\\" is ambiguous.\\n\\\
+    nDid you mean one of these?\\n    %s.\", $shortClassName, implode(\"\\n    \"\
+    , $classes)));\n# }\n# \n# return $io->choice(\\sprintf(\"The type \\\"%s\\\"\
+    \ is ambiguous.\\n\\nSelect one of the following form types to display its information:\"\
+    , $shortClassName), $classes, $classes[0]);\n# }\n# \n# private function getFqcnTypeClasses(string\
+    \ $shortClassName): array\n# {\n# $classes = [];\n# sort($this->namespaces);\n\
+    # foreach ($this->namespaces as $namespace) {\n# if (class_exists($fqcn = $namespace.'\\\
+    \\'.$shortClassName)) {\n# $classes[] = $fqcn;\n# } elseif (class_exists($fqcn\
+    \ = $namespace.'\\\\'.ucfirst($shortClassName))) {\n# $classes[] = $fqcn;\n# }\
+    \ elseif (class_exists($fqcn = $namespace.'\\\\'.ucfirst($shortClassName).'Type'))\
+    \ {\n# $classes[] = $fqcn;\n# } elseif (str_ends_with($shortClassName, 'type')\
+    \ && class_exists($fqcn = $namespace.'\\\\'.ucfirst(substr($shortClassName, 0,\
+    \ -4).'Type'))) {\n# $classes[] = $fqcn;\n# }\n# }\n# \n# return $classes;\n#\
+    \ }\n# \n# private function getCoreTypes(): array\n# {\n# $coreExtension = new\
+    \ CoreExtension();\n# $loadTypesRefMethod = (new \\ReflectionObject($coreExtension))->getMethod('loadTypes');\n\
+    # $coreTypes = $loadTypesRefMethod->invoke($coreExtension);\n# $coreTypes = array_map(static\
+    \ fn (FormTypeInterface $type) => $type::class, $coreTypes);\n# sort($coreTypes);\n\
+    # \n# return $coreTypes;\n# }\n# \n# private function filterTypesByDeprecated(array\
+    \ $types): array\n# {\n# $typesWithDeprecatedOptions = [];\n# foreach ($types\
+    \ as $class) {\n# $optionsResolver = $this->formRegistry->getType($class)->getOptionsResolver();\n\
+    # foreach ($optionsResolver->getDefinedOptions() as $option) {\n# if ($optionsResolver->isDeprecated($option))\
+    \ {\n# $typesWithDeprecatedOptions[] = $class;\n# break;\n# }\n# }\n# }\n# \n\
+    # return $typesWithDeprecatedOptions;\n# }\n# \n# private function findAlternatives(string\
+    \ $name, array $collection): array\n# {\n# $alternatives = [];\n# foreach ($collection\
+    \ as $item) {\n# $lev = levenshtein($name, $item);\n# if ($lev <= \\strlen($name)\
+    \ / 3 || str_contains($item, $name)) {\n# $alternatives[$item] = isset($alternatives[$item])\
+    \ ? $alternatives[$item] - $lev : $lev;\n# }\n# }\n# \n# $threshold = 1e3;\n#\
+    \ $alternatives = array_filter($alternatives, static fn ($lev) => $lev < 2 * $threshold);\n\
+    # ksort($alternatives, \\SORT_NATURAL | \\SORT_FLAG_CASE);\n# \n# return array_keys($alternatives);\n\
+    # }\n# \n# public function complete(CompletionInput $input, CompletionSuggestions\
+    \ $suggestions): void\n# {\n# if ($input->mustSuggestArgumentValuesFor('class'))\
+    \ {\n# $suggestions->suggestValues(array_merge($this->getCoreTypes(), $this->types));\n\
+    # \n# return;\n# }\n# \n# if ($input->mustSuggestArgumentValuesFor('option') &&\
+    \ null !== $class = $input->getArgument('class')) {\n# $this->completeOptions($class,\
+    \ $suggestions);\n# \n# return;\n# }\n# \n# if ($input->mustSuggestOptionValuesFor('format'))\
+    \ {\n# $suggestions->suggestValues($this->getAvailableFormatOptions());\n# }\n\
+    # }\n# \n# private function completeOptions(string $class, CompletionSuggestions\
+    \ $suggestions): void\n# {\n# if (!class_exists($class) || !is_subclass_of($class,\
+    \ FormTypeInterface::class)) {\n# $classes = $this->getFqcnTypeClasses($class);\n\
+    # \n# if (1 === \\count($classes)) {\n# $class = $classes[0];\n# }\n# }\n# \n\
+    # if (!$this->formRegistry->hasType($class)) {\n# return;\n# }\n# \n# $resolvedType\
+    \ = $this->formRegistry->getType($class);\n# $suggestions->suggestValues($resolvedType->getOptionsResolver()->getDefinedOptions());\n\
+    # }\n# \n# /** @return string[]"
+traits:
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Completion\CompletionInput
+- Symfony\Component\Console\Completion\CompletionSuggestions
+- Symfony\Component\Console\Exception\InvalidArgumentException
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Style\SymfonyStyle
+- Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter
+- Symfony\Component\Form\Console\Helper\DescriptorHelper
+- Symfony\Component\Form\Extension\Core\CoreExtension
+- Symfony\Component\Form\FormRegistryInterface
+- Symfony\Component\Form\FormTypeInterface
+interfaces: []

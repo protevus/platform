@@ -1,0 +1,135 @@
+name: AbstractExtensionTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ConfigurableInterface
+  type: class
+  source: Symfony\Component\Config\Definition\ConfigurableInterface
+- name: Configuration
+  type: class
+  source: Symfony\Component\Config\Definition\Configuration
+- name: DefinitionConfigurator
+  type: class
+  source: Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator
+- name: Processor
+  type: class
+  source: Symfony\Component\Config\Definition\Processor
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: AbstractExtension
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\AbstractExtension
+- name: ExtensionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+- name: PrependExtensionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface
+- name: ContainerConfigurator
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator
+- name: ParameterBag
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+properties: []
+methods:
+- name: testConfiguration
+  visibility: public
+  parameters: []
+  comment: null
+- name: configure
+  visibility: public
+  parameters:
+  - name: definition
+  comment: null
+- name: testPrependExtensionConfig
+  visibility: public
+  parameters: []
+  comment: null
+- name: configure
+  visibility: public
+  parameters:
+  - name: definition
+  comment: null
+- name: prependExtension
+  visibility: public
+  parameters:
+  - name: container
+  - name: builder
+  comment: null
+- name: loadExtension
+  visibility: public
+  parameters:
+  - name: config
+  - name: container
+  - name: builder
+  comment: null
+- name: getAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadExtension
+  visibility: public
+  parameters: []
+  comment: null
+- name: configure
+  visibility: public
+  parameters:
+  - name: definition
+  comment: null
+- name: loadExtension
+  visibility: public
+  parameters:
+  - name: config
+  - name: container
+  - name: builder
+  comment: null
+- name: getAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: processConfiguration
+  visibility: protected
+  parameters:
+  - name: configurable
+  comment: null
+- name: processPrependExtension
+  visibility: protected
+  parameters:
+  - name: extension
+  comment: null
+- name: configure
+  visibility: public
+  parameters:
+  - name: definition
+  comment: null
+- name: getAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: processLoadExtension
+  visibility: protected
+  parameters:
+  - name: extension
+  - name: configs
+  comment: null
+- name: createContainerBuilder
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Config\Definition\ConfigurableInterface
+- Symfony\Component\Config\Definition\Configuration
+- Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator
+- Symfony\Component\Config\Definition\Processor
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Extension\AbstractExtension
+- Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+- Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface
+- Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator
+- Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+interfaces: []

@@ -1,0 +1,15 @@
+name: EsiFragmentRenderer
+class_comment: '# * Implements the ESI rendering strategy.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies: []
+properties: []
+methods:
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

@@ -1,0 +1,43 @@
+name: profiler
+class_comment: null
+dependencies:
+- name: ExceptionPanelController
+  type: class
+  source: Symfony\Bundle\WebProfilerBundle\Controller\ExceptionPanelController
+- name: ProfilerController
+  type: class
+  source: Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController
+- name: RouterController
+  type: class
+  source: Symfony\Bundle\WebProfilerBundle\Controller\RouterController
+- name: ContentSecurityPolicyHandler
+  type: class
+  source: Symfony\Bundle\WebProfilerBundle\Csp\ContentSecurityPolicyHandler
+- name: NonceGenerator
+  type: class
+  source: Symfony\Bundle\WebProfilerBundle\Csp\NonceGenerator
+- name: CodeExtension
+  type: class
+  source: Symfony\Bundle\WebProfilerBundle\Profiler\CodeExtension
+- name: WebProfilerExtension
+  type: class
+  source: Symfony\Bundle\WebProfilerBundle\Twig\WebProfilerExtension
+- name: FileLinkFormatter
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter
+- name: HtmlDumper
+  type: class
+  source: Symfony\Component\VarDumper\Dumper\HtmlDumper
+properties: []
+methods: []
+traits:
+- Symfony\Bundle\WebProfilerBundle\Controller\ExceptionPanelController
+- Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController
+- Symfony\Bundle\WebProfilerBundle\Controller\RouterController
+- Symfony\Bundle\WebProfilerBundle\Csp\ContentSecurityPolicyHandler
+- Symfony\Bundle\WebProfilerBundle\Csp\NonceGenerator
+- Symfony\Bundle\WebProfilerBundle\Profiler\CodeExtension
+- Symfony\Bundle\WebProfilerBundle\Twig\WebProfilerExtension
+- Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter
+- Symfony\Component\VarDumper\Dumper\HtmlDumper
+interfaces: []

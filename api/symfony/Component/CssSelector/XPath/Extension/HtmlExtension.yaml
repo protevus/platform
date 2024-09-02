@@ -1,0 +1,93 @@
+name: HtmlExtension
+class_comment: "# * XPath expression translator HTML extension.\n# *\n# * This component\
+  \ is a port of the Python cssselect library,\n# * which is copyright Ian Bicking,\
+  \ @see https://github.com/SimonSapin/cssselect.\n# *\n# * @author Jean-Fran\xE7\
+  ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n# * @internal"
+dependencies:
+- name: ExpressionErrorException
+  type: class
+  source: Symfony\Component\CssSelector\Exception\ExpressionErrorException
+- name: FunctionNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\FunctionNode
+- name: Translator
+  type: class
+  source: Symfony\Component\CssSelector\XPath\Translator
+- name: XPathExpr
+  type: class
+  source: Symfony\Component\CssSelector\XPath\XPathExpr
+properties: []
+methods:
+- name: translateLang
+  visibility: public
+  parameters:
+  - name: xpath
+  - name: function
+  comment: "# * XPath expression translator HTML extension.\n# *\n# * This component\
+    \ is a port of the Python cssselect library,\n# * which is copyright Ian Bicking,\
+    \ @see https://github.com/SimonSapin/cssselect.\n# *\n# * @author Jean-Fran\xE7\
+    ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n# * @internal\n# */\n# class\
+    \ HtmlExtension extends AbstractExtension\n# {\n# public function __construct(Translator\
+    \ $translator)\n# {\n# $translator\n# ->getExtension('node')\n# ->setFlag(NodeExtension::ELEMENT_NAME_IN_LOWER_CASE,\
+    \ true)\n# ->setFlag(NodeExtension::ATTRIBUTE_NAME_IN_LOWER_CASE, true);\n# }\n\
+    # \n# public function getPseudoClassTranslators(): array\n# {\n# return [\n# 'checked'\
+    \ => $this->translateChecked(...),\n# 'link' => $this->translateLink(...),\n#\
+    \ 'disabled' => $this->translateDisabled(...),\n# 'enabled' => $this->translateEnabled(...),\n\
+    # 'selected' => $this->translateSelected(...),\n# 'invalid' => $this->translateInvalid(...),\n\
+    # 'hover' => $this->translateHover(...),\n# 'visited' => $this->translateVisited(...),\n\
+    # ];\n# }\n# \n# public function getFunctionTranslators(): array\n# {\n# return\
+    \ [\n# 'lang' => $this->translateLang(...),\n# ];\n# }\n# \n# public function\
+    \ translateChecked(XPathExpr $xpath): XPathExpr\n# {\n# return $xpath->addCondition(\n\
+    # '(@checked '\n# .\"and (name(.) = 'input' or name(.) = 'command')\"\n# .\"and\
+    \ (@type = 'checkbox' or @type = 'radio'))\"\n# );\n# }\n# \n# public function\
+    \ translateLink(XPathExpr $xpath): XPathExpr\n# {\n# return $xpath->addCondition(\"\
+    @href and (name(.) = 'a' or name(.) = 'link' or name(.) = 'area')\");\n# }\n#\
+    \ \n# public function translateDisabled(XPathExpr $xpath): XPathExpr\n# {\n# return\
+    \ $xpath->addCondition(\n# '('\n# .'@disabled and'\n# .'('\n# .\"(name(.) = 'input'\
+    \ and @type != 'hidden')\"\n# .\" or name(.) = 'button'\"\n# .\" or name(.) =\
+    \ 'select'\"\n# .\" or name(.) = 'textarea'\"\n# .\" or name(.) = 'command'\"\n\
+    # .\" or name(.) = 'fieldset'\"\n# .\" or name(.) = 'optgroup'\"\n# .\" or name(.)\
+    \ = 'option'\"\n# .')'\n# .') or ('\n# .\"(name(.) = 'input' and @type != 'hidden')\"\
+    \n# .\" or name(.) = 'button'\"\n# .\" or name(.) = 'select'\"\n# .\" or name(.)\
+    \ = 'textarea'\"\n# .')'\n# .' and ancestor::fieldset[@disabled]'\n# );\n# //\
+    \ todo: in the second half, add \"and is not a descendant of that fieldset element's\
+    \ first legend element child, if any.\"\n# }\n# \n# public function translateEnabled(XPathExpr\
+    \ $xpath): XPathExpr\n# {\n# return $xpath->addCondition(\n# '('\n# .'@href and\
+    \ ('\n# .\"name(.) = 'a'\"\n# .\" or name(.) = 'link'\"\n# .\" or name(.) = 'area'\"\
+    \n# .')'\n# .') or ('\n# .'('\n# .\"name(.) = 'command'\"\n# .\" or name(.) =\
+    \ 'fieldset'\"\n# .\" or name(.) = 'optgroup'\"\n# .')'\n# .' and not(@disabled)'\n\
+    # .') or ('\n# .'('\n# .\"(name(.) = 'input' and @type != 'hidden')\"\n# .\" or\
+    \ name(.) = 'button'\"\n# .\" or name(.) = 'select'\"\n# .\" or name(.) = 'textarea'\"\
+    \n# .\" or name(.) = 'keygen'\"\n# .')'\n# .' and not (@disabled or ancestor::fieldset[@disabled])'\n\
+    # .') or ('\n# .\"name(.) = 'option' and not(\"\n# .'@disabled or ancestor::optgroup[@disabled]'\n\
+    # .')'\n# .')'\n# );\n# }\n# \n# /**\n# * @throws ExpressionErrorException"
+- name: translateSelected
+  visibility: public
+  parameters:
+  - name: xpath
+  comment: null
+- name: translateInvalid
+  visibility: public
+  parameters:
+  - name: xpath
+  comment: null
+- name: translateHover
+  visibility: public
+  parameters:
+  - name: xpath
+  comment: null
+- name: translateVisited
+  visibility: public
+  parameters:
+  - name: xpath
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\CssSelector\Exception\ExpressionErrorException
+- Symfony\Component\CssSelector\Node\FunctionNode
+- Symfony\Component\CssSelector\XPath\Translator
+- Symfony\Component\CssSelector\XPath\XPathExpr
+interfaces: []

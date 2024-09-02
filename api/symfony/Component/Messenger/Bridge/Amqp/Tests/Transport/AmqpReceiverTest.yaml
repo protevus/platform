@@ -1,0 +1,70 @@
+name: AmqpReceiverTest
+class_comment: '# * @requires extension amqp'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: DummyMessage
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Amqp\Tests\Fixtures\DummyMessage
+- name: AmqpReceivedStamp
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpReceivedStamp
+- name: AmqpReceiver
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpReceiver
+- name: Connection
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Amqp\Transport\Connection
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: TransportException
+  type: class
+  source: Symfony\Component\Messenger\Exception\TransportException
+- name: Serializer
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\Serializer
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+- name: SerializerComponent
+  type: class
+  source: Symfony\Component\Serializer
+- name: JsonEncoder
+  type: class
+  source: Symfony\Component\Serializer\Encoder\JsonEncoder
+- name: ObjectNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+properties: []
+methods:
+- name: testItReturnsTheDecodedMessageToTheHandler
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItThrowsATransportExceptionIfItCannotAcknowledgeMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItThrowsATransportExceptionIfItCannotRejectMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: createAMQPEnvelope
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Bridge\Amqp\Tests\Fixtures\DummyMessage
+- Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpReceivedStamp
+- Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpReceiver
+- Symfony\Component\Messenger\Bridge\Amqp\Transport\Connection
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Exception\TransportException
+- Symfony\Component\Messenger\Transport\Serialization\Serializer
+- Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+- Symfony\Component\Serializer\Encoder\JsonEncoder
+- Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+interfaces: []

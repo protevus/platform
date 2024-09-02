@@ -1,0 +1,57 @@
+name: AtLeastOneOf
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: constraints
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  - name: message
+    default: 'null'
+  - name: messageCollection
+    default: 'null'
+  - name: includeInternalMessages
+    default: 'null'
+  comment: "# * Checks that at least one of the given constraint is satisfied.\n#\
+    \ *\n# * @author Przemys\u0142aw Bogusz <przemyslaw.bogusz@tubotax.pl>\n# */\n\
+    # #[\\Attribute(\\Attribute::TARGET_PROPERTY | \\Attribute::TARGET_METHOD | \\\
+    Attribute::IS_REPEATABLE)]\n# class AtLeastOneOf extends Composite\n# {\n# public\
+    \ const AT_LEAST_ONE_OF_ERROR = 'f27e6d6c-261a-4056-b391-6673a623531c';\n# \n\
+    # protected const ERROR_NAMES = [\n# self::AT_LEAST_ONE_OF_ERROR => 'AT_LEAST_ONE_OF_ERROR',\n\
+    # ];\n# \n# public array|Constraint $constraints = [];\n# public string $message\
+    \ = 'This value should satisfy at least one of the following constraints:';\n\
+    # public string $messageCollection = 'Each element of this collection should satisfy\
+    \ its own set of constraints.';\n# public bool $includeInternalMessages = true;\n\
+    # \n# /**\n# * @param array<Constraint>|array<string,mixed>|null $constraints\
+    \             An array of validation constraints\n# * @param string[]|null   \
+    \                           $groups\n# * @param string|null                  \
+    \              $message                 Intro of the failure message that will\
+    \ be followed by the failed constraint(s) message(s)\n# * @param string|null \
+    \                               $messageCollection       Failure message for All\
+    \ and Collection inner constraints\n# * @param bool|null                     \
+    \             $includeInternalMessages Whether to include inner constraint messages\
+    \ (defaults to true)"
+- name: getDefaultOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRequiredOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCompositeOption
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+interfaces: []

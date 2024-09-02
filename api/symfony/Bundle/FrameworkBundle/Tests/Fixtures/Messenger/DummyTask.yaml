@@ -1,0 +1,27 @@
+name: DummyTask
+class_comment: null
+dependencies:
+- name: AsCronTask
+  type: class
+  source: Symfony\Component\Scheduler\Attribute\AsCronTask
+- name: AsPeriodicTask
+  type: class
+  source: Symfony\Component\Scheduler\Attribute\AsPeriodicTask
+properties: []
+methods:
+- name: attributesOnMethod
+  visibility: public
+  parameters:
+  - name: a
+  - name: b
+  comment: null
+- name: __call
+  visibility: public
+  parameters:
+  - name: name
+  - name: arguments
+  comment: null
+traits:
+- Symfony\Component\Scheduler\Attribute\AsCronTask
+- Symfony\Component\Scheduler\Attribute\AsPeriodicTask
+interfaces: []

@@ -1,0 +1,51 @@
+name: ImportMapEntries
+class_comment: '# * Holds the collection of importmap entries defined in importmap.php.
+
+  # *
+
+  # * @template-implements \IteratorAggregate<ImportMapEntry>
+
+  # *
+
+  # * @author Ryan Weaver <ryan@symfonycasts.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: entries
+    default: '[]'
+  comment: "# * Holds the collection of importmap entries defined in importmap.php.\n\
+    # *\n# * @template-implements \\IteratorAggregate<ImportMapEntry>\n# *\n# * @author\
+    \ Ryan Weaver <ryan@symfonycasts.com>\n# */\n# class ImportMapEntries implements\
+    \ \\IteratorAggregate\n# {\n# private array $entries = [];\n# \n# /**\n# * @param\
+    \ ImportMapEntry[] $entries"
+- name: add
+  visibility: public
+  parameters:
+  - name: entry
+  comment: null
+- name: has
+  visibility: public
+  parameters:
+  - name: importName
+  comment: null
+- name: get
+  visibility: public
+  parameters:
+  - name: importName
+  comment: null
+- name: getIterator
+  visibility: public
+  parameters: []
+  comment: '# * @return \Traversable<ImportMapEntry>'
+- name: remove
+  visibility: public
+  parameters:
+  - name: packageName
+  comment: null
+traits: []
+interfaces:
+- \IteratorAggregate
+- \IteratorAggregate

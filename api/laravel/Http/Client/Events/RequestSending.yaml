@@ -1,0 +1,25 @@
+name: RequestSending
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Illuminate\Http\Client\Request
+properties:
+- name: request
+  visibility: public
+  comment: '# * The request instance.
+
+    # *
+
+    # * @var \Illuminate\Http\Client\Request'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: request
+  comment: "# * The request instance.\n# *\n# * @var \\Illuminate\\Http\\Client\\\
+    Request\n# */\n# public $request;\n# \n# /**\n# * Create a new event instance.\n\
+    # *\n# * @param  \\Illuminate\\Http\\Client\\Request  $request\n# * @return void"
+traits:
+- Illuminate\Http\Client\Request
+interfaces: []

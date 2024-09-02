@@ -1,0 +1,37 @@
+name: UidNormalizerContextBuilder
+class_comment: null
+dependencies:
+- name: ContextBuilderInterface
+  type: class
+  source: Symfony\Component\Serializer\Context\ContextBuilderInterface
+- name: ContextBuilderTrait
+  type: class
+  source: Symfony\Component\Serializer\Context\ContextBuilderTrait
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Serializer\Exception\InvalidArgumentException
+- name: UidNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\UidNormalizer
+- name: ContextBuilderTrait
+  type: class
+  source: ContextBuilderTrait
+properties: []
+methods:
+- name: withNormalizationFormat
+  visibility: public
+  parameters:
+  - name: normalizationFormat
+  comment: "# * A helper providing autocompletion for available UidNormalizer options.\n\
+    # *\n# * @author Mathias Arlaud <mathias.arlaud@gmail.com>\n# */\n# final class\
+    \ UidNormalizerContextBuilder implements ContextBuilderInterface\n# {\n# use ContextBuilderTrait;\n\
+    # \n# /**\n# * Configures the uuid format for normalization.\n# *\n# * @throws\
+    \ InvalidArgumentException"
+traits:
+- Symfony\Component\Serializer\Context\ContextBuilderInterface
+- Symfony\Component\Serializer\Context\ContextBuilderTrait
+- Symfony\Component\Serializer\Exception\InvalidArgumentException
+- Symfony\Component\Serializer\Normalizer\UidNormalizer
+- ContextBuilderTrait
+interfaces:
+- ContextBuilderInterface

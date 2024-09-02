@@ -1,0 +1,25 @@
+name: ExcludeDirectoryFilterIteratorTest
+class_comment: null
+dependencies:
+- name: ExcludeDirectoryFilterIterator
+  type: class
+  source: Symfony\Component\Finder\Iterator\ExcludeDirectoryFilterIterator
+- name: RecursiveDirectoryIterator
+  type: class
+  source: Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator
+properties: []
+methods:
+- name: testAccept
+  visibility: public
+  parameters:
+  - name: directories
+  - name: expected
+  comment: '# * @dataProvider getAcceptData'
+- name: getAcceptData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Finder\Iterator\ExcludeDirectoryFilterIterator
+- Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator
+interfaces: []

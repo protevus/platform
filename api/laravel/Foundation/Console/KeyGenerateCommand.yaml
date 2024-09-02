@@ -1,0 +1,88 @@
+name: KeyGenerateCommand
+class_comment: null
+dependencies:
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+- name: ConfirmableTrait
+  type: class
+  source: Illuminate\Console\ConfirmableTrait
+- name: Encrypter
+  type: class
+  source: Illuminate\Encryption\Encrypter
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: ConfirmableTrait
+  type: class
+  source: ConfirmableTrait
+properties:
+- name: signature
+  visibility: protected
+  comment: '# * The name and signature of the console command.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+methods:
+- name: handle
+  visibility: public
+  parameters: []
+  comment: "# * The name and signature of the console command.\n# *\n# * @var string\n\
+    # */\n# protected $signature = 'key:generate\n# {--show : Display the key instead\
+    \ of modifying files}\n# {--force : Force the operation to run when in production}';\n\
+    # \n# /**\n# * The console command description.\n# *\n# * @var string\n# */\n\
+    # protected $description = 'Set the application key';\n# \n# /**\n# * Execute\
+    \ the console command.\n# *\n# * @return void"
+- name: generateRandomKey
+  visibility: protected
+  parameters: []
+  comment: '# * Generate a random key for the application.
+
+    # *
+
+    # * @return string'
+- name: setKeyInEnvironmentFile
+  visibility: protected
+  parameters:
+  - name: key
+  comment: '# * Set the application key in the environment file.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: writeNewEnvironmentFileWith
+  visibility: protected
+  parameters:
+  - name: key
+  comment: '# * Write a new environment file with the given key.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: keyReplacementPattern
+  visibility: protected
+  parameters: []
+  comment: '# * Get a regex pattern that will match env APP_KEY with any random key.
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Console\Command
+- Illuminate\Console\ConfirmableTrait
+- Illuminate\Encryption\Encrypter
+- Symfony\Component\Console\Attribute\AsCommand
+- ConfirmableTrait
+interfaces: []

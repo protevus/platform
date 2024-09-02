@@ -1,0 +1,35 @@
+name: StringHandlerTest
+class_comment: null
+dependencies:
+- name: StringHandler
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Handler\StringHandler
+- name: Token
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Token
+- name: TokenizerEscaping
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Tokenizer\TokenizerEscaping
+- name: TokenizerPatterns
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Tokenizer\TokenizerPatterns
+properties: []
+methods:
+- name: getHandleValueTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDontHandleValueTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: generateHandler
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\CssSelector\Parser\Handler\StringHandler
+- Symfony\Component\CssSelector\Parser\Token
+- Symfony\Component\CssSelector\Parser\Tokenizer\TokenizerEscaping
+- Symfony\Component\CssSelector\Parser\Tokenizer\TokenizerPatterns
+interfaces: []

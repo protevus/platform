@@ -1,0 +1,30 @@
+name: IntlBundleReader
+class_comment: '# * Reads binary .res resource bundles.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: ArrayAccessibleResourceBundle
+  type: class
+  source: Symfony\Component\Intl\Data\Util\ArrayAccessibleResourceBundle
+- name: ResourceBundleNotFoundException
+  type: class
+  source: Symfony\Component\Intl\Exception\ResourceBundleNotFoundException
+properties: []
+methods:
+- name: read
+  visibility: public
+  parameters:
+  - name: path
+  - name: locale
+  comment: null
+traits:
+- Symfony\Component\Intl\Data\Util\ArrayAccessibleResourceBundle
+- Symfony\Component\Intl\Exception\ResourceBundleNotFoundException
+interfaces:
+- BundleReaderInterface

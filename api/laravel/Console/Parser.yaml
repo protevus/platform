@@ -1,0 +1,93 @@
+name: Parser
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+properties: []
+methods:
+- name: parse
+  visibility: public
+  parameters:
+  - name: expression
+  comment: '# * Parse the given console command definition into an array.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return array
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: name
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Extract the name of the command from the expression.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: parameters
+  visibility: protected
+  parameters:
+  - name: tokens
+  comment: '# * Extract all parameters from the tokens.
+
+    # *
+
+    # * @param  array  $tokens
+
+    # * @return array'
+- name: parseArgument
+  visibility: protected
+  parameters:
+  - name: token
+  comment: '# * Parse an argument expression.
+
+    # *
+
+    # * @param  string  $token
+
+    # * @return \Symfony\Component\Console\Input\InputArgument'
+- name: parseOption
+  visibility: protected
+  parameters:
+  - name: token
+  comment: '# * Parse an option expression.
+
+    # *
+
+    # * @param  string  $token
+
+    # * @return \Symfony\Component\Console\Input\InputOption'
+- name: extractDescription
+  visibility: protected
+  parameters:
+  - name: token
+  comment: '# * Parse the token into its token and description segments.
+
+    # *
+
+    # * @param  string  $token
+
+    # * @return array'
+traits:
+- InvalidArgumentException
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputOption
+interfaces: []

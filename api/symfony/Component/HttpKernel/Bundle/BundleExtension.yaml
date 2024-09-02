@@ -1,0 +1,75 @@
+name: BundleExtension
+class_comment: '# * @author Yonel Ceruto <yonelceruto@gmail.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: Configuration
+  type: class
+  source: Symfony\Component\Config\Definition\Configuration
+- name: ConfigurationInterface
+  type: class
+  source: Symfony\Component\Config\Definition\ConfigurationInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ConfigurableExtensionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\ConfigurableExtensionInterface
+- name: Extension
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\Extension
+- name: ExtensionTrait
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\ExtensionTrait
+- name: PrependExtensionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface
+- name: ContainerConfigurator
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator
+- name: ExtensionTrait
+  type: class
+  source: ExtensionTrait
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: subject
+  - name: alias
+  comment: null
+- name: getConfiguration
+  visibility: public
+  parameters:
+  - name: config
+  - name: container
+  comment: null
+- name: getAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: prepend
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\Config\Definition\Configuration
+- Symfony\Component\Config\Definition\ConfigurationInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Extension\ConfigurableExtensionInterface
+- Symfony\Component\DependencyInjection\Extension\Extension
+- Symfony\Component\DependencyInjection\Extension\ExtensionTrait
+- Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface
+- Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator
+- ExtensionTrait
+interfaces:
+- PrependExtensionInterface

@@ -1,0 +1,11 @@
+name: CustomDefinition
+class_comment: null
+dependencies:
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+properties: []
+methods: []
+traits:
+- Symfony\Component\DependencyInjection\Definition
+interfaces: []

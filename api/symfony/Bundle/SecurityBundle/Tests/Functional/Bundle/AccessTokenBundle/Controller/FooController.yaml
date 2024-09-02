@@ -1,0 +1,20 @@
+name: FooController
+class_comment: null
+dependencies:
+- name: JsonResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\JsonResponse
+- name: UserInterface
+  type: class
+  source: Symfony\Component\Security\Core\User\UserInterface
+properties: []
+methods:
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: user
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\JsonResponse
+- Symfony\Component\Security\Core\User\UserInterface
+interfaces: []

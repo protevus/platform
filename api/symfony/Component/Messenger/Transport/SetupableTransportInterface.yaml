@@ -1,0 +1,21 @@
+name: SetupableTransportInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: setup
+  visibility: public
+  parameters: []
+  comment: '# * @author Vincent Touzet <vincent.touzet@gmail.com>
+
+    # */
+
+    # interface SetupableTransportInterface
+
+    # {
+
+    # /**
+
+    # * Setup the transport.'
+traits: []
+interfaces: []

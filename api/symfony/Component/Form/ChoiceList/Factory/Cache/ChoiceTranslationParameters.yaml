@@ -1,0 +1,15 @@
+name: ChoiceTranslationParameters
+class_comment: null
+dependencies:
+- name: FormTypeExtensionInterface
+  type: class
+  source: Symfony\Component\Form\FormTypeExtensionInterface
+- name: FormTypeInterface
+  type: class
+  source: Symfony\Component\Form\FormTypeInterface
+properties: []
+methods: []
+traits:
+- Symfony\Component\Form\FormTypeExtensionInterface
+- Symfony\Component\Form\FormTypeInterface
+interfaces: []

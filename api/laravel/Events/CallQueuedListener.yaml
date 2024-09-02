@@ -1,0 +1,187 @@
+name: CallQueuedListener
+class_comment: null
+dependencies:
+- name: Queueable
+  type: class
+  source: Illuminate\Bus\Queueable
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: Job
+  type: class
+  source: Illuminate\Contracts\Queue\Job
+- name: ShouldQueue
+  type: class
+  source: Illuminate\Contracts\Queue\ShouldQueue
+- name: InteractsWithQueue
+  type: class
+  source: Illuminate\Queue\InteractsWithQueue
+properties:
+- name: class
+  visibility: public
+  comment: '# * The listener class name.
+
+    # *
+
+    # * @var string'
+- name: method
+  visibility: public
+  comment: '# * The listener method.
+
+    # *
+
+    # * @var string'
+- name: data
+  visibility: public
+  comment: '# * The data to be passed to the listener.
+
+    # *
+
+    # * @var array'
+- name: tries
+  visibility: public
+  comment: '# * The number of times the job may be attempted.
+
+    # *
+
+    # * @var int'
+- name: maxExceptions
+  visibility: public
+  comment: '# * The maximum number of exceptions allowed, regardless of attempts.
+
+    # *
+
+    # * @var int'
+- name: backoff
+  visibility: public
+  comment: '# * The number of seconds to wait before retrying a job that encountered
+    an uncaught exception.
+
+    # *
+
+    # * @var int'
+- name: retryUntil
+  visibility: public
+  comment: '# * The timestamp indicating when the job should timeout.
+
+    # *
+
+    # * @var int'
+- name: timeout
+  visibility: public
+  comment: '# * The number of seconds the job can run before timing out.
+
+    # *
+
+    # * @var int'
+- name: failOnTimeout
+  visibility: public
+  comment: '# * Indicates if the job should fail if the timeout is exceeded.
+
+    # *
+
+    # * @var bool'
+- name: shouldBeEncrypted
+  visibility: public
+  comment: '# * Indicates if the job should be encrypted.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: class
+  - name: method
+  - name: data
+  comment: "# * The listener class name.\n# *\n# * @var string\n# */\n# public $class;\n\
+    # \n# /**\n# * The listener method.\n# *\n# * @var string\n# */\n# public $method;\n\
+    # \n# /**\n# * The data to be passed to the listener.\n# *\n# * @var array\n#\
+    \ */\n# public $data;\n# \n# /**\n# * The number of times the job may be attempted.\n\
+    # *\n# * @var int\n# */\n# public $tries;\n# \n# /**\n# * The maximum number of\
+    \ exceptions allowed, regardless of attempts.\n# *\n# * @var int\n# */\n# public\
+    \ $maxExceptions;\n# \n# /**\n# * The number of seconds to wait before retrying\
+    \ a job that encountered an uncaught exception.\n# *\n# * @var int\n# */\n# public\
+    \ $backoff;\n# \n# /**\n# * The timestamp indicating when the job should timeout.\n\
+    # *\n# * @var int\n# */\n# public $retryUntil;\n# \n# /**\n# * The number of seconds\
+    \ the job can run before timing out.\n# *\n# * @var int\n# */\n# public $timeout;\n\
+    # \n# /**\n# * Indicates if the job should fail if the timeout is exceeded.\n\
+    # *\n# * @var bool\n# */\n# public $failOnTimeout = false;\n# \n# /**\n# * Indicates\
+    \ if the job should be encrypted.\n# *\n# * @var bool\n# */\n# public $shouldBeEncrypted\
+    \ = false;\n# \n# /**\n# * Create a new job instance.\n# *\n# * @param  string\
+    \  $class\n# * @param  string  $method\n# * @param  array  $data\n# * @return\
+    \ void"
+- name: handle
+  visibility: public
+  parameters:
+  - name: container
+  comment: '# * Handle the queued job.
+
+    # *
+
+    # * @param  \Illuminate\Container\Container  $container
+
+    # * @return void'
+- name: setJobInstanceIfNecessary
+  visibility: protected
+  parameters:
+  - name: job
+  - name: instance
+  comment: '# * Set the job instance of the given class if necessary.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Queue\Job  $job
+
+    # * @param  object  $instance
+
+    # * @return object'
+- name: failed
+  visibility: public
+  parameters:
+  - name: e
+  comment: '# * Call the failed method on the job instance.
+
+    # *
+
+    # * The event instance and the exception will be passed.
+
+    # *
+
+    # * @param  \Throwable  $e
+
+    # * @return void'
+- name: prepareData
+  visibility: protected
+  parameters: []
+  comment: '# * Unserialize the data if needed.
+
+    # *
+
+    # * @return void'
+- name: displayName
+  visibility: public
+  parameters: []
+  comment: '# * Get the display name for the queued job.
+
+    # *
+
+    # * @return string'
+- name: __clone
+  visibility: public
+  parameters: []
+  comment: '# * Prepare the instance for cloning.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Bus\Queueable
+- Illuminate\Container\Container
+- Illuminate\Contracts\Queue\Job
+- Illuminate\Contracts\Queue\ShouldQueue
+- Illuminate\Queue\InteractsWithQueue
+- InteractsWithQueue
+interfaces:
+- ShouldQueue

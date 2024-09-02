@@ -1,0 +1,59 @@
+name: CommandExecuted
+class_comment: null
+dependencies: []
+properties:
+- name: command
+  visibility: public
+  comment: '# * The Redis command that was executed.
+
+    # *
+
+    # * @var string'
+- name: parameters
+  visibility: public
+  comment: '# * The array of command parameters.
+
+    # *
+
+    # * @var array'
+- name: time
+  visibility: public
+  comment: '# * The number of milliseconds it took to execute the command.
+
+    # *
+
+    # * @var float'
+- name: connection
+  visibility: public
+  comment: '# * The Redis connection instance.
+
+    # *
+
+    # * @var \Illuminate\Redis\Connections\Connection'
+- name: connectionName
+  visibility: public
+  comment: '# * The Redis connection name.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: command
+  - name: parameters
+  - name: time
+  - name: connection
+  comment: "# * The Redis command that was executed.\n# *\n# * @var string\n# */\n\
+    # public $command;\n# \n# /**\n# * The array of command parameters.\n# *\n# *\
+    \ @var array\n# */\n# public $parameters;\n# \n# /**\n# * The number of milliseconds\
+    \ it took to execute the command.\n# *\n# * @var float\n# */\n# public $time;\n\
+    # \n# /**\n# * The Redis connection instance.\n# *\n# * @var \\Illuminate\\Redis\\\
+    Connections\\Connection\n# */\n# public $connection;\n# \n# /**\n# * The Redis\
+    \ connection name.\n# *\n# * @var string\n# */\n# public $connectionName;\n# \n\
+    # /**\n# * Create a new event instance.\n# *\n# * @param  string  $command\n#\
+    \ * @param  array  $parameters\n# * @param  float|null  $time\n# * @param  \\\
+    Illuminate\\Redis\\Connections\\Connection  $connection\n# * @return void"
+traits: []
+interfaces: []

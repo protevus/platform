@@ -1,0 +1,20 @@
+name: SyntaxError
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: message
+  - name: cursor
+    default: '0'
+  - name: expression
+    default: ''''''
+  - name: subject
+    default: 'null'
+  - name: proposals
+    default: 'null'
+  comment: null
+traits: []
+interfaces: []

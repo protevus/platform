@@ -1,0 +1,50 @@
+name: Inspiring
+class_comment: null
+dependencies:
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+properties: []
+methods:
+- name: quote
+  visibility: public
+  parameters: []
+  comment: '# * Get an inspiring quote.
+
+    # *
+
+    # * Taylor & Dayle made this commit from Jungfraujoch. (11,333 ft.)
+
+    # *
+
+    # * May McGinnis always control the board. #LaraconUS2015
+
+    # *
+
+    # * RIP Charlie - Feb 6, 2018
+
+    # *
+
+    # * @return string'
+- name: quotes
+  visibility: public
+  parameters: []
+  comment: '# * Get the collection of inspiring quotes.
+
+    # *
+
+    # * @return \Illuminate\Support\Collection'
+- name: formatForConsole
+  visibility: protected
+  parameters:
+  - name: quote
+  comment: '# * Formats the given quote for a pretty console output.
+
+    # *
+
+    # * @param  string  $quote
+
+    # * @return string'
+traits:
+- Illuminate\Support\Collection
+interfaces: []

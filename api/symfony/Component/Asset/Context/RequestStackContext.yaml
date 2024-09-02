@@ -1,0 +1,33 @@
+name: RequestStackContext
+class_comment: '# * Uses a RequestStack to populate the context.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: requestStack
+  - name: basePath
+    default: ''''''
+  - name: secure
+    default: 'false'
+  comment: null
+- name: getBasePath
+  visibility: public
+  parameters: []
+  comment: null
+- name: isSecure
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\RequestStack
+interfaces:
+- ContextInterface

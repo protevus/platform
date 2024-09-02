@@ -1,0 +1,62 @@
+name: When
+class_comment: null
+dependencies:
+- name: Expression
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Expression
+- name: ExpressionLanguage
+  type: class
+  source: Symfony\Component\ExpressionLanguage\ExpressionLanguage
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: LogicException
+  type: class
+  source: Symfony\Component\Validator\Exception\LogicException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: expression
+  - name: constraints
+    default: 'null'
+  - name: values
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: "# * Conditionally apply validation constraints based on an expression\
+    \ using the ExpressionLanguage syntax.\n# *\n# * @see https://symfony.com/doc/current/components/expression_language.html\n\
+    # */\n# #[\\Attribute(\\Attribute::TARGET_CLASS | \\Attribute::TARGET_PROPERTY\
+    \ | \\Attribute::TARGET_METHOD | \\Attribute::IS_REPEATABLE)]\n# class When extends\
+    \ Composite\n# {\n# public string|Expression $expression;\n# public array|Constraint\
+    \ $constraints = [];\n# public array $values = [];\n# \n# /**\n# * @param string|Expression|array<string,mixed>\
+    \ $expression  The condition to evaluate, written with the ExpressionLanguage\
+    \ syntax\n# * @param Constraint[]|Constraint|null          $constraints One or\
+    \ multiple constraints that are applied if the expression returns true\n# * @param\
+    \ array<string,mixed>|null              $values      The values of the custom\
+    \ variables used in the expression (defaults to [])\n# * @param string[]|null\
+    \                         $groups\n# * @param array<string,mixed>            \
+    \       $options"
+- name: getRequiredOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: getTargets
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCompositeOption
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\ExpressionLanguage\Expression
+- Symfony\Component\ExpressionLanguage\ExpressionLanguage
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Exception\LogicException
+interfaces: []

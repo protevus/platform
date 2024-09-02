@@ -1,0 +1,12 @@
+name: CountValidatorArrayTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies: []
+properties: []
+methods:
+- name: createCollection
+  visibility: protected
+  parameters:
+  - name: content
+  comment: null
+traits: []
+interfaces: []

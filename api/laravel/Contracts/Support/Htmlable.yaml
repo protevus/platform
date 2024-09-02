@@ -1,0 +1,15 @@
+name: Htmlable
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: toHtml
+  visibility: public
+  parameters: []
+  comment: '# * Get content as a string of HTML.
+
+    # *
+
+    # * @return string'
+traits: []
+interfaces: []

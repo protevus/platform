@@ -1,0 +1,72 @@
+name: TransitionBlocker
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: message
+  - name: code
+  - name: parameters
+    default: '[]'
+  comment: "# * A reason why a transition cannot be performed for a subject.\n# */\n\
+    # final class TransitionBlocker\n# {\n# public const BLOCKED_BY_MARKING = '19beefc8-6b1e-4716-9d07-a39bd6d16e34';\n\
+    # public const BLOCKED_BY_EXPRESSION_GUARD_LISTENER = '326a1e9c-0c12-11e8-ba89-0ed5f89f718b';\n\
+    # public const UNKNOWN = 'e8b5bbb9-5913-4b98-bfa6-65dbd228a82a';\n# \n# /**\n\
+    # * @param string $code       Code is a machine-readable string, usually an UUID\n\
+    # * @param array  $parameters This is useful if you would like to pass around\
+    \ the condition values, that\n# *                           blocked the transition.\
+    \ E.g. for a condition \"distance must be larger than\n# *                   \
+    \        5 miles\", you might want to pass around the value of 5."
+- name: createBlockedByMarking
+  visibility: public
+  parameters:
+  - name: marking
+  comment: '# * Create a blocker that says the transition cannot be made because it
+    is
+
+    # * not enabled.
+
+    # *
+
+    # * It means the subject is in wrong place (i.e. status):
+
+    # * * If the workflow is a state machine: the subject is not in the previous place
+    of the transition.
+
+    # * * If the workflow is a workflow: the subject is not in all previous places
+    of the transition.'
+- name: createBlockedByExpressionGuardListener
+  visibility: public
+  parameters:
+  - name: expression
+  comment: '# * Creates a blocker that says the transition cannot be made because
+    it has
+
+    # * been blocked by the expression guard listener.'
+- name: createUnknown
+  visibility: public
+  parameters:
+  - name: message
+    default: 'null'
+  - name: backtraceFrame
+    default: '2'
+  comment: '# * Creates a blocker that says the transition cannot be made because
+    of an
+
+    # * unknown reason.'
+- name: getMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: getParameters
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

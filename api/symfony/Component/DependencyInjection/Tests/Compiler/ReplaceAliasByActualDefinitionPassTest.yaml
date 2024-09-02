@@ -1,0 +1,40 @@
+name: ReplaceAliasByActualDefinitionPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ReplaceAliasByActualDefinitionPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ReplaceAliasByActualDefinitionPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+properties: []
+methods:
+- name: testProcess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWithInvalidAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: process
+  visibility: protected
+  parameters:
+  - name: container
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Compiler\ReplaceAliasByActualDefinitionPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Reference
+interfaces: []

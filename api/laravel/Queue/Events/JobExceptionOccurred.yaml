@@ -1,0 +1,40 @@
+name: JobExceptionOccurred
+class_comment: null
+dependencies: []
+properties:
+- name: connectionName
+  visibility: public
+  comment: '# * The connection name.
+
+    # *
+
+    # * @var string'
+- name: job
+  visibility: public
+  comment: '# * The job instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Queue\Job'
+- name: exception
+  visibility: public
+  comment: '# * The exception instance.
+
+    # *
+
+    # * @var \Throwable'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: connectionName
+  - name: job
+  - name: exception
+  comment: "# * The connection name.\n# *\n# * @var string\n# */\n# public $connectionName;\n\
+    # \n# /**\n# * The job instance.\n# *\n# * @var \\Illuminate\\Contracts\\Queue\\\
+    Job\n# */\n# public $job;\n# \n# /**\n# * The exception instance.\n# *\n# * @var\
+    \ \\Throwable\n# */\n# public $exception;\n# \n# /**\n# * Create a new event instance.\n\
+    # *\n# * @param  string  $connectionName\n# * @param  \\Illuminate\\Contracts\\\
+    Queue\\Job  $job\n# * @param  \\Throwable  $exception\n# * @return void"
+traits: []
+interfaces: []

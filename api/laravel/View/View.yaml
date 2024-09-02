@@ -1,0 +1,466 @@
+name: View
+class_comment: null
+dependencies:
+- name: ArrayAccess
+  type: class
+  source: ArrayAccess
+- name: BadMethodCallException
+  type: class
+  source: BadMethodCallException
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: Htmlable
+  type: class
+  source: Illuminate\Contracts\Support\Htmlable
+- name: MessageProvider
+  type: class
+  source: Illuminate\Contracts\Support\MessageProvider
+- name: Renderable
+  type: class
+  source: Illuminate\Contracts\Support\Renderable
+- name: Engine
+  type: class
+  source: Illuminate\Contracts\View\Engine
+- name: ViewContract
+  type: class
+  source: Illuminate\Contracts\View\View
+- name: MessageBag
+  type: class
+  source: Illuminate\Support\MessageBag
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: ViewErrorBag
+  type: class
+  source: Illuminate\Support\ViewErrorBag
+- name: Stringable
+  type: class
+  source: Stringable
+- name: Throwable
+  type: class
+  source: Throwable
+properties:
+- name: factory
+  visibility: protected
+  comment: '# * The view factory instance.
+
+    # *
+
+    # * @var \Illuminate\View\Factory'
+- name: engine
+  visibility: protected
+  comment: '# * The engine implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\View\Engine'
+- name: view
+  visibility: protected
+  comment: '# * The name of the view.
+
+    # *
+
+    # * @var string'
+- name: data
+  visibility: protected
+  comment: '# * The array of view data.
+
+    # *
+
+    # * @var array'
+- name: path
+  visibility: protected
+  comment: '# * The path to the view file.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: factory
+  - name: engine
+  - name: view
+  - name: path
+  - name: data
+    default: '[]'
+  comment: "# * The view factory instance.\n# *\n# * @var \\Illuminate\\View\\Factory\n\
+    # */\n# protected $factory;\n# \n# /**\n# * The engine implementation.\n# *\n\
+    # * @var \\Illuminate\\Contracts\\View\\Engine\n# */\n# protected $engine;\n#\
+    \ \n# /**\n# * The name of the view.\n# *\n# * @var string\n# */\n# protected\
+    \ $view;\n# \n# /**\n# * The array of view data.\n# *\n# * @var array\n# */\n\
+    # protected $data;\n# \n# /**\n# * The path to the view file.\n# *\n# * @var string\n\
+    # */\n# protected $path;\n# \n# /**\n# * Create a new view instance.\n# *\n# *\
+    \ @param  \\Illuminate\\View\\Factory  $factory\n# * @param  \\Illuminate\\Contracts\\\
+    View\\Engine  $engine\n# * @param  string  $view\n# * @param  string  $path\n\
+    # * @param  mixed  $data\n# * @return void"
+- name: fragment
+  visibility: public
+  parameters:
+  - name: fragment
+  comment: '# * Get the evaluated contents of a given fragment.
+
+    # *
+
+    # * @param  string  $fragment
+
+    # * @return string'
+- name: fragments
+  visibility: public
+  parameters:
+  - name: fragments
+    default: 'null'
+  comment: '# * Get the evaluated contents for a given array of fragments or return
+    all fragments.
+
+    # *
+
+    # * @param  array|null  $fragments
+
+    # * @return string'
+- name: fragmentIf
+  visibility: public
+  parameters:
+  - name: boolean
+  - name: fragment
+  comment: '# * Get the evaluated contents of a given fragment if the given condition
+    is true.
+
+    # *
+
+    # * @param  bool  $boolean
+
+    # * @param  string  $fragment
+
+    # * @return string'
+- name: fragmentsIf
+  visibility: public
+  parameters:
+  - name: boolean
+  - name: fragments
+    default: 'null'
+  comment: '# * Get the evaluated contents for a given array of fragments if the given
+    condition is true.
+
+    # *
+
+    # * @param  bool  $boolean
+
+    # * @param  array|null  $fragments
+
+    # * @return string'
+- name: allFragments
+  visibility: protected
+  parameters: []
+  comment: '# * Get all fragments as a single string.
+
+    # *
+
+    # * @return string'
+- name: render
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Get the string contents of the view.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return string
+
+    # *
+
+    # * @throws \Throwable'
+- name: renderContents
+  visibility: protected
+  parameters: []
+  comment: '# * Get the contents of the view instance.
+
+    # *
+
+    # * @return string'
+- name: getContents
+  visibility: protected
+  parameters: []
+  comment: '# * Get the evaluated contents of the view.
+
+    # *
+
+    # * @return string'
+- name: gatherData
+  visibility: public
+  parameters: []
+  comment: '# * Get the data bound to the view instance.
+
+    # *
+
+    # * @return array'
+- name: renderSections
+  visibility: public
+  parameters: []
+  comment: '# * Get the sections of the rendered view.
+
+    # *
+
+    # * @return array
+
+    # *
+
+    # * @throws \Throwable'
+- name: with
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: 'null'
+  comment: '# * Add a piece of data to the view.
+
+    # *
+
+    # * @param  string|array  $key
+
+    # * @param  mixed  $value
+
+    # * @return $this'
+- name: nest
+  visibility: public
+  parameters:
+  - name: key
+  - name: view
+  - name: data
+    default: '[]'
+  comment: '# * Add a view instance to the view data.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  string  $view
+
+    # * @param  array  $data
+
+    # * @return $this'
+- name: withErrors
+  visibility: public
+  parameters:
+  - name: provider
+  - name: bag
+    default: '''default'''
+  comment: '# * Add validation errors to the view.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Support\MessageProvider|array  $provider
+
+    # * @param  string  $bag
+
+    # * @return $this'
+- name: formatErrors
+  visibility: protected
+  parameters:
+  - name: provider
+  comment: '# * Parse the given errors into an appropriate value.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Support\MessageProvider|array|string  $provider
+
+    # * @return \Illuminate\Support\MessageBag'
+- name: name
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the view.
+
+    # *
+
+    # * @return string'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the view.
+
+    # *
+
+    # * @return string'
+- name: getData
+  visibility: public
+  parameters: []
+  comment: '# * Get the array of view data.
+
+    # *
+
+    # * @return array'
+- name: getPath
+  visibility: public
+  parameters: []
+  comment: '# * Get the path to the view file.
+
+    # *
+
+    # * @return string'
+- name: setPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Set the path to the view.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return void'
+- name: getFactory
+  visibility: public
+  parameters: []
+  comment: '# * Get the view factory instance.
+
+    # *
+
+    # * @return \Illuminate\View\Factory'
+- name: getEngine
+  visibility: public
+  parameters: []
+  comment: '# * Get the view''s rendering engine.
+
+    # *
+
+    # * @return \Illuminate\Contracts\View\Engine'
+- name: offsetExists
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Determine if a piece of data is bound.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: offsetGet
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Get a piece of bound data to the view.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed'
+- name: offsetSet
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Set a piece of data on the view.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return void'
+- name: offsetUnset
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Unset a piece of data from the view.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return void'
+- name: __set
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: "# * Get a piece of data from the view.\n# *\n# * @param  string  $key\n\
+    # * @return mixed\n# */\n# public function &__get($key)\n# {\n# return $this->data[$key];\n\
+    # }\n# \n# /**\n# * Set a piece of data on the view.\n# *\n# * @param  string\
+    \  $key\n# * @param  mixed  $value\n# * @return void"
+- name: __isset
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Check if a piece of data is bound to the view.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: __unset
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Remove a piece of bound data from the view.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return void'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically bind parameters to the view.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return \Illuminate\View\View
+
+    # *
+
+    # * @throws \BadMethodCallException'
+- name: toHtml
+  visibility: public
+  parameters: []
+  comment: '# * Get content as a string of HTML.
+
+    # *
+
+    # * @return string'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Get the string contents of the view.
+
+    # *
+
+    # * @return string
+
+    # *
+
+    # * @throws \Throwable'
+traits:
+- ArrayAccess
+- BadMethodCallException
+- Illuminate\Contracts\Support\Arrayable
+- Illuminate\Contracts\Support\Htmlable
+- Illuminate\Contracts\Support\MessageProvider
+- Illuminate\Contracts\Support\Renderable
+- Illuminate\Contracts\View\Engine
+- Illuminate\Support\MessageBag
+- Illuminate\Support\Str
+- Illuminate\Support\Traits\Macroable
+- Illuminate\Support\ViewErrorBag
+- Stringable
+- Throwable
+interfaces:
+- ArrayAccess

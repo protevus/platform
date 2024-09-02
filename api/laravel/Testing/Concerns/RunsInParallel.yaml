@@ -1,0 +1,157 @@
+name: RunsInParallel
+class_comment: null
+dependencies:
+- name: Kernel
+  type: class
+  source: Illuminate\Contracts\Console\Kernel
+- name: Application
+  type: class
+  source: Illuminate\Foundation\Application
+- name: ParallelTesting
+  type: class
+  source: Illuminate\Support\Facades\ParallelTesting
+- name: ParallelConsoleOutput
+  type: class
+  source: Illuminate\Testing\ParallelConsoleOutput
+- name: PhpHandler
+  type: class
+  source: PHPUnit\TextUI\Configuration\PhpHandler
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: ConsoleOutput
+  type: class
+  source: Symfony\Component\Console\Output\ConsoleOutput
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: CreatesApplication
+  type: class
+  source: \Tests\CreatesApplication
+properties:
+- name: applicationResolver
+  visibility: protected
+  comment: '# * The application resolver callback.
+
+    # *
+
+    # * @var \Closure|null'
+- name: runnerResolver
+  visibility: protected
+  comment: '# * The runner resolver callback.
+
+    # *
+
+    # * @var \Closure|null'
+- name: options
+  visibility: protected
+  comment: '# * The original test runner options.
+
+    # *
+
+    # * @var \ParaTest\Runners\PHPUnit\Options|\ParaTest\Options'
+- name: output
+  visibility: protected
+  comment: '# * The output instance.
+
+    # *
+
+    # * @var \Symfony\Component\Console\Output\OutputInterface'
+- name: runner
+  visibility: protected
+  comment: '# * The original test runner.
+
+    # *
+
+    # * @var \ParaTest\Runners\PHPUnit\RunnerInterface|\ParaTest\RunnerInterface'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: options
+  - name: output
+  comment: "# * The application resolver callback.\n# *\n# * @var \\Closure|null\n\
+    # */\n# protected static $applicationResolver;\n# \n# /**\n# * The runner resolver\
+    \ callback.\n# *\n# * @var \\Closure|null\n# */\n# protected static $runnerResolver;\n\
+    # \n# /**\n# * The original test runner options.\n# *\n# * @var \\ParaTest\\Runners\\\
+    PHPUnit\\Options|\\ParaTest\\Options\n# */\n# protected $options;\n# \n# /**\n\
+    # * The output instance.\n# *\n# * @var \\Symfony\\Component\\Console\\Output\\\
+    OutputInterface\n# */\n# protected $output;\n# \n# /**\n# * The original test\
+    \ runner.\n# *\n# * @var \\ParaTest\\Runners\\PHPUnit\\RunnerInterface|\\ParaTest\\\
+    RunnerInterface\n# */\n# protected $runner;\n# \n# /**\n# * Creates a new test\
+    \ runner instance.\n# *\n# * @param  \\ParaTest\\Runners\\PHPUnit\\Options|\\\
+    ParaTest\\Options  $options\n# * @param  \\Symfony\\Component\\Console\\Output\\\
+    OutputInterface  $output\n# * @return void"
+- name: resolveApplicationUsing
+  visibility: public
+  parameters:
+  - name: resolver
+  comment: '# * Set the application resolver callback.
+
+    # *
+
+    # * @param  \Closure|null  $resolver
+
+    # * @return void'
+- name: resolveRunnerUsing
+  visibility: public
+  parameters:
+  - name: resolver
+  comment: '# * Set the runner resolver callback.
+
+    # *
+
+    # * @param  \Closure|null  $resolver
+
+    # * @return void'
+- name: execute
+  visibility: public
+  parameters: []
+  comment: '# * Runs the test suite.
+
+    # *
+
+    # * @return int'
+- name: getExitCode
+  visibility: public
+  parameters: []
+  comment: '# * Returns the highest exit code encountered throughout the course of
+    test execution.
+
+    # *
+
+    # * @return int'
+- name: forEachProcess
+  visibility: protected
+  parameters:
+  - name: callback
+  comment: '# * Apply the given callback for each process.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return void'
+- name: createApplication
+  visibility: protected
+  parameters: []
+  comment: '# * Creates the application.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Foundation\Application
+
+    # *
+
+    # * @throws \RuntimeException'
+traits:
+- Illuminate\Contracts\Console\Kernel
+- Illuminate\Foundation\Application
+- Illuminate\Support\Facades\ParallelTesting
+- Illuminate\Testing\ParallelConsoleOutput
+- PHPUnit\TextUI\Configuration\PhpHandler
+- RuntimeException
+- Symfony\Component\Console\Output\ConsoleOutput
+- Symfony\Component\Console\Output\OutputInterface
+- \Tests\CreatesApplication
+interfaces: []

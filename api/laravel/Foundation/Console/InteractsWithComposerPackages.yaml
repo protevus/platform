@@ -1,0 +1,37 @@
+name: InteractsWithComposerPackages
+class_comment: null
+dependencies:
+- name: PhpExecutableFinder
+  type: class
+  source: Symfony\Component\Process\PhpExecutableFinder
+- name: Process
+  type: class
+  source: Symfony\Component\Process\Process
+properties: []
+methods:
+- name: requireComposerPackages
+  visibility: protected
+  parameters:
+  - name: composer
+  - name: packages
+  comment: '# * Installs the given Composer Packages into the application.
+
+    # *
+
+    # * @param  string  $composer
+
+    # * @param  array  $packages
+
+    # * @return bool'
+- name: phpBinary
+  visibility: protected
+  parameters: []
+  comment: '# * Get the path to the appropriate PHP binary.
+
+    # *
+
+    # * @return string'
+traits:
+- Symfony\Component\Process\PhpExecutableFinder
+- Symfony\Component\Process\Process
+interfaces: []

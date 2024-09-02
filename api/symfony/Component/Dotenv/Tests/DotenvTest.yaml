@@ -1,0 +1,107 @@
+name: DotenvTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Dotenv
+  type: class
+  source: Symfony\Component\Dotenv\Dotenv
+- name: FormatException
+  type: class
+  source: Symfony\Component\Dotenv\Exception\FormatException
+- name: PathException
+  type: class
+  source: Symfony\Component\Dotenv\Exception\PathException
+properties: []
+methods:
+- name: testParseWithFormatError
+  visibility: public
+  parameters:
+  - name: data
+  - name: error
+  comment: '# * @dataProvider getEnvDataWithFormatErrors'
+- name: getEnvDataWithFormatErrors
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParse
+  visibility: public
+  parameters:
+  - name: data
+  - name: expected
+  comment: '# * @dataProvider getEnvData'
+- name: getEnvData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoad
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadEnv
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOverload
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadDirectory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testServerSuperglobalIsNotOverridden
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEnvVarIsNotOverridden
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHttpVarIsPartiallyOverridden
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEnvVarIsOverridden
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMemorizingLoadedVarsNamesInSpecialVar
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOverridingEnvVarsWithNamesMemorizedInSpecialVar
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetVariablesValueFromEnvFirst
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetVariablesValueFromGetenv
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoDeprecationWarning
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDoNotUsePutenv
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSERVERVarsDuplicationInENV
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBootEnv
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Dotenv\Dotenv
+- Symfony\Component\Dotenv\Exception\FormatException
+- Symfony\Component\Dotenv\Exception\PathException
+interfaces: []

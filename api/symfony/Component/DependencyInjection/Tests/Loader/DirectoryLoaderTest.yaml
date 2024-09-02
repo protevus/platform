@@ -1,0 +1,63 @@
+name: DirectoryLoaderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: FileLocator
+  type: class
+  source: Symfony\Component\Config\FileLocator
+- name: LoaderResolver
+  type: class
+  source: Symfony\Component\Config\Loader\LoaderResolver
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: DirectoryLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\DirectoryLoader
+- name: IniFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\IniFileLoader
+- name: PhpFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- name: YamlFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\YamlFileLoader
+properties: []
+methods:
+- name: setUpBeforeClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testDirectoryCanBeLoadedRecursively
+  visibility: public
+  parameters: []
+  comment: null
+- name: testImports
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExceptionIsRaisedWhenDirectoryDoesNotExist
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupports
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Config\FileLocator
+- Symfony\Component\Config\Loader\LoaderResolver
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Loader\DirectoryLoader
+- Symfony\Component\DependencyInjection\Loader\IniFileLoader
+- Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- Symfony\Component\DependencyInjection\Loader\YamlFileLoader
+interfaces: []

@@ -1,0 +1,50 @@
+name: TransportNamesStampTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: TransportNamesStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\TransportNamesStamp
+- name: Serializer
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\Serializer
+- name: JsonEncoder
+  type: class
+  source: Symfony\Component\Serializer\Encoder\JsonEncoder
+- name: ArrayDenormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ArrayDenormalizer
+- name: ObjectNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+- name: SymfonySerializer
+  type: class
+  source: Symfony\Component\Serializer\Serializer
+properties: []
+methods:
+- name: testGetSenders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDeserialization
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetIndividualSender
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Stamp\TransportNamesStamp
+- Symfony\Component\Messenger\Transport\Serialization\Serializer
+- Symfony\Component\Serializer\Encoder\JsonEncoder
+- Symfony\Component\Serializer\Normalizer\ArrayDenormalizer
+- Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+interfaces: []

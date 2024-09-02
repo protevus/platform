@@ -1,0 +1,22 @@
+name: Engine
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: get
+  visibility: public
+  parameters:
+  - name: path
+  - name: data
+    default: '[]'
+  comment: '# * Get the evaluated contents of the view.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  array  $data
+
+    # * @return string'
+traits: []
+interfaces: []

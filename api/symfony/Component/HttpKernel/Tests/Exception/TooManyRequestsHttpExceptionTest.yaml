@@ -1,0 +1,40 @@
+name: TooManyRequestsHttpExceptionTest
+class_comment: null
+dependencies:
+- name: HttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\HttpException
+- name: TooManyRequestsHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException
+properties: []
+methods:
+- name: testHeadersDefaultRertyAfter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithHeaderConstruct
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHeadersSetter
+  visibility: public
+  parameters:
+  - name: headers
+  comment: '# * @dataProvider headerDataProvider'
+- name: createException
+  visibility: protected
+  parameters:
+  - name: message
+    default: ''''''
+  - name: previous
+    default: 'null'
+  - name: code
+    default: '0'
+  - name: headers
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\HttpKernel\Exception\HttpException
+- Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException
+interfaces: []

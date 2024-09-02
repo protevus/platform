@@ -1,0 +1,24 @@
+name: NullableConstructorArgumentDummy
+class_comment: null
+dependencies: []
+properties:
+- name: foo
+  visibility: private
+  comment: null
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: setFoo
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

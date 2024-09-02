@@ -1,0 +1,25 @@
+name: SomeScheduleProvider
+class_comment: null
+dependencies:
+- name: Schedule
+  type: class
+  source: Symfony\Component\Scheduler\Schedule
+- name: ScheduleProviderInterface
+  type: class
+  source: Symfony\Component\Scheduler\ScheduleProviderInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: messages
+  comment: null
+- name: getSchedule
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Scheduler\Schedule
+- Symfony\Component\Scheduler\ScheduleProviderInterface
+interfaces:
+- ScheduleProviderInterface

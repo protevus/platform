@@ -1,0 +1,37 @@
+name: SecurityController
+class_comment: null
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: TokenStorageInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+- name: ServiceSubscriberInterface
+  type: class
+  source: Symfony\Contracts\Service\ServiceSubscriberInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: profileAction
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSubscribedServices
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+- Symfony\Contracts\Service\ServiceSubscriberInterface
+interfaces:
+- ServiceSubscriberInterface

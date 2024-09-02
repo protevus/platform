@@ -1,0 +1,11 @@
+name: when_env
+class_comment: null
+dependencies:
+- name: When
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\When
+properties: []
+methods: []
+traits:
+- Symfony\Component\DependencyInjection\Attribute\When
+interfaces: []

@@ -1,0 +1,19 @@
+name: FirewallAwareTrait
+class_comment: null
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+properties: []
+methods:
+- name: getForFirewall
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Component\HttpFoundation\RequestStack
+interfaces: []

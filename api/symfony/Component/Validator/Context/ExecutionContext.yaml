@@ -1,0 +1,226 @@
+name: ExecutionContext
+class_comment: '# * The context used and created by {@link ExecutionContextFactory}.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @see ExecutionContextInterface
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: ConstraintViolation
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolation
+- name: ConstraintViolationList
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolationList
+- name: ConstraintViolationListInterface
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolationListInterface
+- name: ClassMetadataInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadataInterface
+- name: MemberMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\MemberMetadata
+- name: MetadataInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\MetadataInterface
+- name: PropertyMetadataInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\PropertyMetadataInterface
+- name: PropertyPath
+  type: class
+  source: Symfony\Component\Validator\Util\PropertyPath
+- name: LazyProperty
+  type: class
+  source: Symfony\Component\Validator\Validator\LazyProperty
+- name: ValidatorInterface
+  type: class
+  source: Symfony\Component\Validator\Validator\ValidatorInterface
+- name: ConstraintViolationBuilder
+  type: class
+  source: Symfony\Component\Validator\Violation\ConstraintViolationBuilder
+- name: ConstraintViolationBuilderInterface
+  type: class
+  source: Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface
+- name: TranslatorInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatorInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: validator
+  - name: root
+  - name: translator
+  - name: translationDomain
+    default: 'null'
+  comment: "# * The context used and created by {@link ExecutionContextFactory}.\n\
+    # *\n# * @author Bernhard Schussek <bschussek@gmail.com>\n# *\n# * @see ExecutionContextInterface\n\
+    # *\n# * @internal\n# */\n# class ExecutionContext implements ExecutionContextInterface\n\
+    # {\n# /**\n# * The violations generated in the current context.\n# */\n# private\
+    \ ConstraintViolationList $violations;\n# \n# /**\n# * The currently validated\
+    \ value.\n# */\n# private mixed $value = null;\n# \n# /**\n# * The currently validated\
+    \ object.\n# */\n# private ?object $object = null;\n# \n# /**\n# * The property\
+    \ path leading to the current value.\n# */\n# private string $propertyPath = '';\n\
+    # \n# /**\n# * The current validation metadata.\n# */\n# private ?MetadataInterface\
+    \ $metadata = null;\n# \n# /**\n# * The currently validated group.\n# */\n# private\
+    \ ?string $group = null;\n# \n# /**\n# * The currently validated constraint.\n\
+    # */\n# private ?Constraint $constraint = null;\n# \n# /**\n# * Stores which objects\
+    \ have been validated in which group.\n# *\n# * @var bool[][]\n# */\n# private\
+    \ array $validatedObjects = [];\n# \n# /**\n# * Stores which class constraint\
+    \ has been validated for which object.\n# *\n# * @var bool[]\n# */\n# private\
+    \ array $validatedConstraints = [];\n# \n# /**\n# * Stores which objects have\
+    \ been initialized.\n# *\n# * @var bool[]\n# */\n# private array $initializedObjects\
+    \ = [];\n# \n# /**\n# * @var \\SplObjectStorage<object, string>\n# */\n# private\
+    \ \\SplObjectStorage $cachedObjectsRefs;\n# \n# /**\n# * @internal Called by {@link\
+    \ ExecutionContextFactory}. Should not be used in user code.\n# *\n# * @param\
+    \ mixed $root the root value of the validated object graph"
+- name: setNode
+  visibility: public
+  parameters:
+  - name: value
+  - name: object
+  - name: metadata
+  - name: propertyPath
+  comment: null
+- name: setGroup
+  visibility: public
+  parameters:
+  - name: group
+  comment: null
+- name: setConstraint
+  visibility: public
+  parameters:
+  - name: constraint
+  comment: null
+- name: addViolation
+  visibility: public
+  parameters:
+  - name: message
+  - name: parameters
+    default: '[]'
+  comment: null
+- name: buildViolation
+  visibility: public
+  parameters:
+  - name: message
+  - name: parameters
+    default: '[]'
+  comment: null
+- name: getViolations
+  visibility: public
+  parameters: []
+  comment: null
+- name: getValidator
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRoot
+  visibility: public
+  parameters: []
+  comment: null
+- name: getValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: getObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: getMetadata
+  visibility: public
+  parameters: []
+  comment: null
+- name: getGroup
+  visibility: public
+  parameters: []
+  comment: null
+- name: getConstraint
+  visibility: public
+  parameters: []
+  comment: null
+- name: getClassName
+  visibility: public
+  parameters: []
+  comment: null
+- name: getPropertyName
+  visibility: public
+  parameters: []
+  comment: null
+- name: getPropertyPath
+  visibility: public
+  parameters:
+  - name: subPath
+    default: ''''''
+  comment: null
+- name: markGroupAsValidated
+  visibility: public
+  parameters:
+  - name: cacheKey
+  - name: groupHash
+  comment: null
+- name: isGroupValidated
+  visibility: public
+  parameters:
+  - name: cacheKey
+  - name: groupHash
+  comment: null
+- name: markConstraintAsValidated
+  visibility: public
+  parameters:
+  - name: cacheKey
+  - name: constraintHash
+  comment: null
+- name: isConstraintValidated
+  visibility: public
+  parameters:
+  - name: cacheKey
+  - name: constraintHash
+  comment: null
+- name: markObjectAsInitialized
+  visibility: public
+  parameters:
+  - name: cacheKey
+  comment: null
+- name: isObjectInitialized
+  visibility: public
+  parameters:
+  - name: cacheKey
+  comment: null
+- name: generateCacheKey
+  visibility: public
+  parameters:
+  - name: object
+  comment: '# * @internal'
+- name: __clone
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\ConstraintViolation
+- Symfony\Component\Validator\ConstraintViolationList
+- Symfony\Component\Validator\ConstraintViolationListInterface
+- Symfony\Component\Validator\Mapping\ClassMetadataInterface
+- Symfony\Component\Validator\Mapping\MemberMetadata
+- Symfony\Component\Validator\Mapping\MetadataInterface
+- Symfony\Component\Validator\Mapping\PropertyMetadataInterface
+- Symfony\Component\Validator\Util\PropertyPath
+- Symfony\Component\Validator\Validator\LazyProperty
+- Symfony\Component\Validator\Validator\ValidatorInterface
+- Symfony\Component\Validator\Violation\ConstraintViolationBuilder
+- Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface
+- Symfony\Contracts\Translation\TranslatorInterface
+interfaces:
+- ExecutionContextInterface

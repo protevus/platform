@@ -1,0 +1,97 @@
+name: Dispatchable
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Bus\Dispatcher
+- name: Fluent
+  type: class
+  source: Illuminate\Support\Fluent
+properties: []
+methods:
+- name: dispatch
+  visibility: public
+  parameters:
+  - name: '...$arguments'
+  comment: '# * Dispatch the job with the given arguments.
+
+    # *
+
+    # * @param  mixed  ...$arguments
+
+    # * @return \Illuminate\Foundation\Bus\PendingDispatch'
+- name: dispatchIf
+  visibility: public
+  parameters:
+  - name: boolean
+  - name: '...$arguments'
+  comment: '# * Dispatch the job with the given arguments if the given truth test
+    passes.
+
+    # *
+
+    # * @param  bool|\Closure  $boolean
+
+    # * @param  mixed  ...$arguments
+
+    # * @return \Illuminate\Foundation\Bus\PendingDispatch|\Illuminate\Support\Fluent'
+- name: dispatchUnless
+  visibility: public
+  parameters:
+  - name: boolean
+  - name: '...$arguments'
+  comment: '# * Dispatch the job with the given arguments unless the given truth test
+    passes.
+
+    # *
+
+    # * @param  bool|\Closure  $boolean
+
+    # * @param  mixed  ...$arguments
+
+    # * @return \Illuminate\Foundation\Bus\PendingDispatch|\Illuminate\Support\Fluent'
+- name: dispatchSync
+  visibility: public
+  parameters:
+  - name: '...$arguments'
+  comment: '# * Dispatch a command to its appropriate handler in the current process.
+
+    # *
+
+    # * Queueable jobs will be dispatched to the "sync" queue.
+
+    # *
+
+    # * @param  mixed  ...$arguments
+
+    # * @return mixed'
+- name: dispatchAfterResponse
+  visibility: public
+  parameters:
+  - name: '...$arguments'
+  comment: '# * Dispatch a command to its appropriate handler after the current process.
+
+    # *
+
+    # * @param  mixed  ...$arguments
+
+    # * @return mixed'
+- name: withChain
+  visibility: public
+  parameters:
+  - name: chain
+  comment: '# * Set the jobs that should run if this job is successful.
+
+    # *
+
+    # * @param  array  $chain
+
+    # * @return \Illuminate\Foundation\Bus\PendingChain'
+traits:
+- Closure
+- Illuminate\Contracts\Bus\Dispatcher
+- Illuminate\Support\Fluent
+interfaces: []

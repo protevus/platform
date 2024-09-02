@@ -1,0 +1,23 @@
+name: ConfigurableExtension
+class_comment: null
+dependencies:
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+properties: []
+methods:
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: container
+  comment: null
+- name: loadInternal
+  visibility: protected
+  parameters:
+  - name: mergedConfig
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\ContainerBuilder
+interfaces: []

@@ -1,0 +1,24 @@
+name: HasBroadcastChannel
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: broadcastChannelRoute
+  visibility: public
+  parameters: []
+  comment: '# * Get the broadcast channel route definition that is associated with
+    the given entity.
+
+    # *
+
+    # * @return string'
+- name: broadcastChannel
+  visibility: public
+  parameters: []
+  comment: '# * Get the broadcast channel name that is associated with the given entity.
+
+    # *
+
+    # * @return string'
+traits: []
+interfaces: []

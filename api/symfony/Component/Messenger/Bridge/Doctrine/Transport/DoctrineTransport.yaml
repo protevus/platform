@@ -1,0 +1,80 @@
+name: DoctrineTransport
+class_comment: '# * @author Vincent Touzet <vincent.touzet@gmail.com>'
+dependencies:
+- name: DbalConnection
+  type: class
+  source: Doctrine\DBAL\Connection
+- name: Schema
+  type: class
+  source: Doctrine\DBAL\Schema\Schema
+- name: Table
+  type: class
+  source: Doctrine\DBAL\Schema\Table
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: ListableReceiverInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Receiver\ListableReceiverInterface
+- name: MessageCountAwareInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Receiver\MessageCountAwareInterface
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+- name: SetupableTransportInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\SetupableTransportInterface
+- name: TransportInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\TransportInterface
+properties: []
+methods:
+- name: configureSchema
+  visibility: public
+  parameters:
+  - name: schema
+  - name: forConnection
+  - name: isSameDatabase
+  comment: "# * @author Vincent Touzet <vincent.touzet@gmail.com>\n# */\n# class DoctrineTransport\
+    \ implements TransportInterface, SetupableTransportInterface, MessageCountAwareInterface,\
+    \ ListableReceiverInterface\n# {\n# private DoctrineReceiver $receiver;\n# private\
+    \ DoctrineSender $sender;\n# \n# public function __construct(\n# private Connection\
+    \ $connection,\n# private SerializerInterface $serializer,\n# ) {\n# }\n# \n#\
+    \ public function get(): iterable\n# {\n# return $this->getReceiver()->get();\n\
+    # }\n# \n# public function ack(Envelope $envelope): void\n# {\n# $this->getReceiver()->ack($envelope);\n\
+    # }\n# \n# public function reject(Envelope $envelope): void\n# {\n# $this->getReceiver()->reject($envelope);\n\
+    # }\n# \n# public function getMessageCount(): int\n# {\n# return $this->getReceiver()->getMessageCount();\n\
+    # }\n# \n# public function all(?int $limit = null): iterable\n# {\n# return $this->getReceiver()->all($limit);\n\
+    # }\n# \n# public function find(mixed $id): ?Envelope\n# {\n# return $this->getReceiver()->find($id);\n\
+    # }\n# \n# public function send(Envelope $envelope): Envelope\n# {\n# return $this->getSender()->send($envelope);\n\
+    # }\n# \n# public function setup(): void\n# {\n# $this->connection->setup();\n\
+    # }\n# \n# /**\n# * Adds the Table to the Schema if this transport uses this connection."
+- name: getExtraSetupSqlForTable
+  visibility: public
+  parameters:
+  - name: createdTable
+  comment: '# * Adds extra SQL if the given table was created by the Connection.
+
+    # *
+
+    # * @return string[]'
+- name: getReceiver
+  visibility: private
+  parameters: []
+  comment: null
+- name: getSender
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Doctrine\DBAL\Schema\Schema
+- Doctrine\DBAL\Schema\Table
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Transport\Receiver\ListableReceiverInterface
+- Symfony\Component\Messenger\Transport\Receiver\MessageCountAwareInterface
+- Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+- Symfony\Component\Messenger\Transport\SetupableTransportInterface
+- Symfony\Component\Messenger\Transport\TransportInterface
+interfaces:
+- TransportInterface

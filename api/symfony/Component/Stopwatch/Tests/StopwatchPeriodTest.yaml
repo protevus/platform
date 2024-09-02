@@ -1,0 +1,45 @@
+name: StopwatchPeriodTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: StopwatchPeriod
+  type: class
+  source: Symfony\Component\Stopwatch\StopwatchPeriod
+properties: []
+methods:
+- name: testGetStartTime
+  visibility: public
+  parameters:
+  - name: start
+  - name: useMorePrecision
+  - name: expected
+  comment: '# * @dataProvider provideTimeValues'
+- name: testGetEndTime
+  visibility: public
+  parameters:
+  - name: end
+  - name: useMorePrecision
+  - name: expected
+  comment: '# * @dataProvider provideTimeValues'
+- name: testGetDuration
+  visibility: public
+  parameters:
+  - name: start
+  - name: end
+  - name: useMorePrecision
+  - name: duration
+  comment: '# * @dataProvider provideDurationValues'
+- name: provideTimeValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideDurationValues
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Stopwatch\StopwatchPeriod
+interfaces: []

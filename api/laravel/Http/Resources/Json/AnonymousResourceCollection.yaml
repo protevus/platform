@@ -1,0 +1,31 @@
+name: AnonymousResourceCollection
+class_comment: null
+dependencies: []
+properties:
+- name: collects
+  visibility: public
+  comment: '# * The name of the resource being collected.
+
+    # *
+
+    # * @var string'
+- name: preserveKeys
+  visibility: public
+  comment: '# * Indicates if the collection keys should be preserved.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: resource
+  - name: collects
+  comment: "# * The name of the resource being collected.\n# *\n# * @var string\n\
+    # */\n# public $collects;\n# \n# /**\n# * Indicates if the collection keys should\
+    \ be preserved.\n# *\n# * @var bool\n# */\n# public $preserveKeys = false;\n#\
+    \ \n# /**\n# * Create a new anonymous resource collection.\n# *\n# * @param  mixed\
+    \  $resource\n# * @param  string  $collects\n# * @return void"
+traits: []
+interfaces: []

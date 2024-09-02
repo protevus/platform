@@ -1,0 +1,55 @@
+name: QpEncoderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: QpEncoder
+  type: class
+  source: Symfony\Component\Mime\Encoder\QpEncoder
+properties: []
+methods:
+- name: testPermittedCharactersAreNotEncoded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWhiteSpaceAtLineEndingIsEncoded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCRLFIsLeftAlone
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLinesLongerThan76CharactersAreSoftBroken
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMaxLineLengthCanBeSpecified
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBytesBelowPermittedRangeAreEncoded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDecimalByte61IsEncoded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBytesAbovePermittedRangeAreEncoded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFirstLineLengthCanBeDifferent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTextIsPreWrapped
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mime\Encoder\QpEncoder
+interfaces: []

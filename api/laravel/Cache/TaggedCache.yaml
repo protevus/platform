@@ -1,0 +1,115 @@
+name: TaggedCache
+class_comment: null
+dependencies:
+- name: Store
+  type: class
+  source: Illuminate\Contracts\Cache\Store
+properties:
+- name: tags
+  visibility: protected
+  comment: '# * The tag set instance.
+
+    # *
+
+    # * @var \Illuminate\Cache\TagSet'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: store
+  - name: tags
+  comment: "# * The tag set instance.\n# *\n# * @var \\Illuminate\\Cache\\TagSet\n\
+    # */\n# protected $tags;\n# \n# /**\n# * Create a new tagged cache instance.\n\
+    # *\n# * @param  \\Illuminate\\Contracts\\Cache\\Store  $store\n# * @param  \\\
+    Illuminate\\Cache\\TagSet  $tags\n# * @return void"
+- name: putMany
+  visibility: public
+  parameters:
+  - name: values
+  - name: ttl
+    default: 'null'
+  comment: '# * Store multiple items in the cache for a given number of seconds.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @param  int|null  $ttl
+
+    # * @return bool'
+- name: increment
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: '1'
+  comment: '# * Increment the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return int|bool'
+- name: decrement
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: '1'
+  comment: '# * Decrement the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return int|bool'
+- name: flush
+  visibility: public
+  parameters: []
+  comment: '# * Remove all items from the cache.
+
+    # *
+
+    # * @return bool'
+- name: itemKey
+  visibility: protected
+  parameters:
+  - name: key
+  comment: '# * {@inheritdoc}'
+- name: taggedItemKey
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Get a fully qualified key for a tagged item.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return string'
+- name: event
+  visibility: protected
+  parameters:
+  - name: event
+  comment: '# * Fire an event for this cache instance.
+
+    # *
+
+    # * @param  \Illuminate\Cache\Events\CacheEvent  $event
+
+    # * @return void'
+- name: getTags
+  visibility: public
+  parameters: []
+  comment: '# * Get the tag set instance.
+
+    # *
+
+    # * @return \Illuminate\Cache\TagSet'
+traits:
+- Illuminate\Contracts\Cache\Store
+interfaces: []

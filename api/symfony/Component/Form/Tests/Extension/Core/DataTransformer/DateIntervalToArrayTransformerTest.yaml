@@ -1,0 +1,95 @@
+name: DateIntervalToArrayTransformerTest
+class_comment: "# * @author Steffen Ro\xDFkamp <steffen.rosskamp@gimmickmedia.de>"
+dependencies:
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Form\Exception\UnexpectedTypeException
+- name: DateIntervalToArrayTransformer
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataTransformer\DateIntervalToArrayTransformer
+properties: []
+methods:
+- name: testTransform
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransformEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransformEmptyWithFields
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransformWithFields
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransformWithWeek
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransformWithZeroWeek
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransformDaysToWeeks
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransformDaysNotOverflowingToWeeks
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransformWithInvert
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransformWithPadding
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransformWithFieldsAndPadding
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransformRequiresDateTime
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransformWithUnsetFields
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransformWithEmptyFields
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransformWithWrongInvertType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransform
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransformWithWeek
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransformWithFields
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBothTransformsWithWeek
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\Exception\TransformationFailedException
+- Symfony\Component\Form\Exception\UnexpectedTypeException
+- Symfony\Component\Form\Extension\Core\DataTransformer\DateIntervalToArrayTransformer
+interfaces: []

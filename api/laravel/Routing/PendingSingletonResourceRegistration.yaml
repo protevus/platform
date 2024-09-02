@@ -1,0 +1,205 @@
+name: PendingSingletonResourceRegistration
+class_comment: null
+dependencies:
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+properties:
+- name: registrar
+  visibility: protected
+  comment: '# * The resource registrar.
+
+    # *
+
+    # * @var \Illuminate\Routing\ResourceRegistrar'
+- name: name
+  visibility: protected
+  comment: '# * The resource name.
+
+    # *
+
+    # * @var string'
+- name: controller
+  visibility: protected
+  comment: '# * The resource controller.
+
+    # *
+
+    # * @var string'
+- name: options
+  visibility: protected
+  comment: '# * The resource options.
+
+    # *
+
+    # * @var array'
+- name: registered
+  visibility: protected
+  comment: '# * The resource''s registration status.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: registrar
+  - name: name
+  - name: controller
+  - name: options
+  comment: "# * The resource registrar.\n# *\n# * @var \\Illuminate\\Routing\\ResourceRegistrar\n\
+    # */\n# protected $registrar;\n# \n# /**\n# * The resource name.\n# *\n# * @var\
+    \ string\n# */\n# protected $name;\n# \n# /**\n# * The resource controller.\n\
+    # *\n# * @var string\n# */\n# protected $controller;\n# \n# /**\n# * The resource\
+    \ options.\n# *\n# * @var array\n# */\n# protected $options = [];\n# \n# /**\n\
+    # * The resource's registration status.\n# *\n# * @var bool\n# */\n# protected\
+    \ $registered = false;\n# \n# /**\n# * Create a new pending singleton resource\
+    \ registration instance.\n# *\n# * @param  \\Illuminate\\Routing\\ResourceRegistrar\
+    \  $registrar\n# * @param  string  $name\n# * @param  string  $controller\n# *\
+    \ @param  array  $options\n# * @return void"
+- name: only
+  visibility: public
+  parameters:
+  - name: methods
+  comment: '# * Set the methods the controller should apply to.
+
+    # *
+
+    # * @param  array|string|mixed  $methods
+
+    # * @return \Illuminate\Routing\PendingSingletonResourceRegistration'
+- name: except
+  visibility: public
+  parameters:
+  - name: methods
+  comment: '# * Set the methods the controller should exclude.
+
+    # *
+
+    # * @param  array|string|mixed  $methods
+
+    # * @return \Illuminate\Routing\PendingSingletonResourceRegistration'
+- name: creatable
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the resource should have creation and storage routes.
+
+    # *
+
+    # * @return $this'
+- name: destroyable
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the resource should have a deletion route.
+
+    # *
+
+    # * @return $this'
+- name: names
+  visibility: public
+  parameters:
+  - name: names
+  comment: '# * Set the route names for controller actions.
+
+    # *
+
+    # * @param  array|string  $names
+
+    # * @return \Illuminate\Routing\PendingSingletonResourceRegistration'
+- name: name
+  visibility: public
+  parameters:
+  - name: method
+  - name: name
+  comment: '# * Set the route name for a controller action.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  string  $name
+
+    # * @return \Illuminate\Routing\PendingSingletonResourceRegistration'
+- name: parameters
+  visibility: public
+  parameters:
+  - name: parameters
+  comment: '# * Override the route parameter names.
+
+    # *
+
+    # * @param  array|string  $parameters
+
+    # * @return \Illuminate\Routing\PendingSingletonResourceRegistration'
+- name: parameter
+  visibility: public
+  parameters:
+  - name: previous
+  - name: new
+  comment: '# * Override a route parameter''s name.
+
+    # *
+
+    # * @param  string  $previous
+
+    # * @param  string  $new
+
+    # * @return \Illuminate\Routing\PendingSingletonResourceRegistration'
+- name: middleware
+  visibility: public
+  parameters:
+  - name: middleware
+  comment: '# * Add middleware to the resource routes.
+
+    # *
+
+    # * @param  mixed  $middleware
+
+    # * @return \Illuminate\Routing\PendingSingletonResourceRegistration'
+- name: withoutMiddleware
+  visibility: public
+  parameters:
+  - name: middleware
+  comment: '# * Specify middleware that should be removed from the resource routes.
+
+    # *
+
+    # * @param  array|string  $middleware
+
+    # * @return $this|array'
+- name: where
+  visibility: public
+  parameters:
+  - name: wheres
+  comment: '# * Add "where" constraints to the resource routes.
+
+    # *
+
+    # * @param  mixed  $wheres
+
+    # * @return \Illuminate\Routing\PendingSingletonResourceRegistration'
+- name: register
+  visibility: public
+  parameters: []
+  comment: '# * Register the singleton resource route.
+
+    # *
+
+    # * @return \Illuminate\Routing\RouteCollection'
+- name: __destruct
+  visibility: public
+  parameters: []
+  comment: '# * Handle the object''s destruction.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Support\Arr
+- Illuminate\Support\Traits\Macroable
+- CreatesRegularExpressionRouteConstraints
+interfaces: []

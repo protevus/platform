@@ -1,0 +1,91 @@
+name: DebugAutowiringCommandTest
+class_comment: '# * @group functional'
+dependencies:
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: DebugAutowiringCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\DebugAutowiringCommand
+- name: Application
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Console\Application
+- name: ClassAliasExampleClass
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Fixtures\ClassAliasExampleClass
+- name: ApplicationTester
+  type: class
+  source: Symfony\Component\Console\Tester\ApplicationTester
+- name: CommandCompletionTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandCompletionTester
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+- name: RouterInterface
+  type: class
+  source: Symfony\Component\Routing\RouterInterface
+properties: []
+methods:
+- name: testComplete
+  visibility: public
+  parameters:
+  - name: input
+  - name: expectedSuggestions
+  comment: "# * @group functional\n# */\n# class DebugAutowiringCommandTest extends\
+    \ AbstractWebTestCase\n# {\n# public function testBasicFunctionality()\n# {\n\
+    # static::bootKernel(['test_case' => 'ContainerDebug', 'root_config' => 'config.yml']);\n\
+    # \n# $application = new Application(static::$kernel);\n# $application->setAutoExit(false);\n\
+    # \n# $tester = new ApplicationTester($application);\n# $tester->run(['command'\
+    \ => 'debug:autowiring'], ['decorated' => false]);\n# \n# $this->assertStringContainsString(HttpKernelInterface::class,\
+    \ $tester->getDisplay());\n# $this->assertStringContainsString('alias:http_kernel',\
+    \ $tester->getDisplay());\n# }\n# \n# public function testSearchArgument()\n#\
+    \ {\n# static::bootKernel(['test_case' => 'ContainerDebug', 'root_config' => 'config.yml']);\n\
+    # \n# $application = new Application(static::$kernel);\n# $application->setAutoExit(false);\n\
+    # \n# $tester = new ApplicationTester($application);\n# $tester->run(['command'\
+    \ => 'debug:autowiring', 'search' => 'kern']);\n# \n# $this->assertStringContainsString(HttpKernelInterface::class,\
+    \ $tester->getDisplay());\n# $this->assertStringNotContainsString(RouterInterface::class,\
+    \ $tester->getDisplay());\n# }\n# \n# public function testSearchIgnoreBackslashWhenFindingService()\n\
+    # {\n# static::bootKernel(['test_case' => 'ContainerDebug', 'root_config' => 'config.yml']);\n\
+    # \n# $application = new Application(static::$kernel);\n# $application->setAutoExit(false);\n\
+    # \n# $tester = new ApplicationTester($application);\n# $tester->run(['command'\
+    \ => 'debug:autowiring', 'search' => 'HttpKernelHttpKernelInterface']);\n# $this->assertStringContainsString(HttpKernelInterface::class,\
+    \ $tester->getDisplay());\n# }\n# \n# public function testSearchNoResults()\n\
+    # {\n# static::bootKernel(['test_case' => 'ContainerDebug', 'root_config' => 'config.yml']);\n\
+    # \n# $application = new Application(static::$kernel);\n# $application->setAutoExit(false);\n\
+    # \n# $tester = new ApplicationTester($application);\n# $tester->run(['command'\
+    \ => 'debug:autowiring', 'search' => 'foo_fake'], ['capture_stderr_separately'\
+    \ => true]);\n# \n# $this->assertStringContainsString('No autowirable classes\
+    \ or interfaces found matching \"foo_fake\"', $tester->getErrorOutput());\n# $this->assertEquals(1,\
+    \ $tester->getStatusCode());\n# }\n# \n# public function testSearchNotAliasedService()\n\
+    # {\n# static::bootKernel(['test_case' => 'ContainerDebug', 'root_config' => 'config.yml']);\n\
+    # \n# $application = new Application(static::$kernel);\n# $application->setAutoExit(false);\n\
+    # \n# $tester = new ApplicationTester($application);\n# $tester->run(['command'\
+    \ => 'debug:autowiring', 'search' => 'redirect']);\n# \n# $this->assertStringContainsString('\
+    \ more concrete service would be displayed when adding the \"--all\" option.',\
+    \ $tester->getDisplay());\n# }\n# \n# public function testSearchNotAliasedServiceWithAll()\n\
+    # {\n# static::bootKernel(['test_case' => 'ContainerDebug', 'root_config' => 'config.yml']);\n\
+    # \n# $application = new Application(static::$kernel);\n# $application->setAutoExit(false);\n\
+    # \n# $tester = new ApplicationTester($application);\n# $tester->run(['command'\
+    \ => 'debug:autowiring', 'search' => 'redirect', '--all' => true]);\n# $this->assertStringContainsString('Pro-tip:\
+    \ use interfaces in your type-hints instead of classes to benefit from the dependency\
+    \ inversion principle.', $tester->getDisplay());\n# }\n# \n# public function testNotConfusedByClassAliases()\n\
+    # {\n# static::bootKernel(['test_case' => 'ContainerDebug', 'root_config' => 'config.yml']);\n\
+    # \n# $application = new Application(static::$kernel);\n# $application->setAutoExit(false);\n\
+    # \n# $tester = new ApplicationTester($application);\n# $tester->run(['command'\
+    \ => 'debug:autowiring', 'search' => 'ClassAlias']);\n# $this->assertStringContainsString(ClassAliasExampleClass::class,\
+    \ $tester->getDisplay());\n# }\n# \n# /**\n# * @dataProvider provideCompletionSuggestions"
+- name: provideCompletionSuggestions
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Psr\Log\LoggerInterface
+- Symfony\Bundle\FrameworkBundle\Command\DebugAutowiringCommand
+- Symfony\Bundle\FrameworkBundle\Console\Application
+- Symfony\Bundle\FrameworkBundle\Tests\Fixtures\ClassAliasExampleClass
+- Symfony\Component\Console\Tester\ApplicationTester
+- Symfony\Component\Console\Tester\CommandCompletionTester
+- Symfony\Component\HttpKernel\HttpKernelInterface
+- Symfony\Component\Routing\RouterInterface
+interfaces: []

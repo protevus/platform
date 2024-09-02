@@ -1,0 +1,25 @@
+name: Exists
+class_comment: null
+dependencies:
+- name: Conditionable
+  type: class
+  source: Illuminate\Support\Traits\Conditionable
+- name: Stringable
+  type: class
+  source: Stringable
+properties: []
+methods:
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Convert the rule to a validation string.
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Support\Traits\Conditionable
+- Stringable
+- Conditionable
+interfaces:
+- Stringable

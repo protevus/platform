@@ -1,0 +1,45 @@
+name: FragmentRendererInterface
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: ControllerReference
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ControllerReference
+properties: []
+methods:
+- name: render
+  visibility: public
+  parameters:
+  - name: uri
+  - name: request
+  - name: options
+    default: '[]'
+  comment: '# * Interface implemented by all rendering strategies.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # interface FragmentRendererInterface
+
+    # {
+
+    # /**
+
+    # * Renders a URI and returns the Response content.'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: '# * Gets the name of the strategy.'
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Controller\ControllerReference
+interfaces: []

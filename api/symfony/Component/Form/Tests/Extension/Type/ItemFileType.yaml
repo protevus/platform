@@ -1,0 +1,29 @@
+name: ItemFileType
+class_comment: null
+dependencies:
+- name: AbstractType
+  type: class
+  source: Symfony\Component\Form\AbstractType
+- name: FileType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\FileType
+- name: TextType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\TextType
+- name: FormBuilderInterface
+  type: class
+  source: Symfony\Component\Form\FormBuilderInterface
+properties: []
+methods:
+- name: buildForm
+  visibility: public
+  parameters:
+  - name: builder
+  - name: options
+  comment: null
+traits:
+- Symfony\Component\Form\AbstractType
+- Symfony\Component\Form\Extension\Core\Type\FileType
+- Symfony\Component\Form\Extension\Core\Type\TextType
+- Symfony\Component\Form\FormBuilderInterface
+interfaces: []

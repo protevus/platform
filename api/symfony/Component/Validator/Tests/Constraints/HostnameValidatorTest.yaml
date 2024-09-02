@@ -1,0 +1,94 @@
+name: HostnameValidatorTest
+class_comment: '# * @author Dmitrii Poddubnyi <dpoddubny@gmail.com>'
+dependencies:
+- name: Hostname
+  type: class
+  source: Symfony\Component\Validator\Constraints\Hostname
+- name: HostnameValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\HostnameValidator
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+properties: []
+methods:
+- name: testValidTldDomainsPassValidationIfTldRequired
+  visibility: public
+  parameters:
+  - name: domain
+  comment: "# * @author Dmitrii Poddubnyi <dpoddubny@gmail.com>\n# */\n# class HostnameValidatorTest\
+    \ extends ConstraintValidatorTestCase\n# {\n# public function testNullIsValid()\n\
+    # {\n# $this->validator->validate(null, new Hostname());\n# \n# $this->assertNoViolation();\n\
+    # }\n# \n# public function testEmptyStringIsValid()\n# {\n# $this->validator->validate('',\
+    \ new Hostname());\n# \n# $this->assertNoViolation();\n# }\n# \n# public function\
+    \ testExpectsStringCompatibleType()\n# {\n# $this->expectException(UnexpectedValueException::class);\n\
+    # \n# $this->validator->validate(new \\stdClass(), new Hostname());\n# }\n# \n\
+    # /**\n# * @dataProvider getValidMultilevelDomains"
+- name: testValidTldDomainsPassValidationIfTldNotRequired
+  visibility: public
+  parameters:
+  - name: domain
+  comment: '# * @dataProvider getValidMultilevelDomains'
+- name: getValidMultilevelDomains
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidDomainsRaiseViolationIfTldRequired
+  visibility: public
+  parameters:
+  - name: domain
+  comment: '# * @dataProvider getInvalidDomains'
+- name: testInvalidDomainsRaiseViolationIfTldNotRequired
+  visibility: public
+  parameters:
+  - name: domain
+  comment: '# * @dataProvider getInvalidDomains'
+- name: getInvalidDomains
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReservedDomainsPassValidationIfTldNotRequired
+  visibility: public
+  parameters:
+  - name: domain
+  comment: '# * @dataProvider getReservedDomains'
+- name: testReservedDomainsRaiseViolationIfTldRequired
+  visibility: public
+  parameters:
+  - name: domain
+  comment: '# * @dataProvider getReservedDomains'
+- name: getReservedDomains
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReservedDomainsRaiseViolationIfTldRequiredNamed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTopLevelDomainsPassValidationIfTldNotRequired
+  visibility: public
+  parameters:
+  - name: domain
+  comment: '# * @dataProvider getTopLevelDomains'
+- name: testTopLevelDomainsRaiseViolationIfTldRequired
+  visibility: public
+  parameters:
+  - name: domain
+  comment: '# * @dataProvider getTopLevelDomains'
+- name: getTopLevelDomains
+  visibility: public
+  parameters: []
+  comment: null
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\Hostname
+- Symfony\Component\Validator\Constraints\HostnameValidator
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

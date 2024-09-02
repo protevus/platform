@@ -1,0 +1,61 @@
+name: CachePoolClearCommandTest
+class_comment: null
+dependencies:
+- name: MockObject
+  type: class
+  source: PHPUnit\Framework\MockObject\MockObject
+- name: CacheItemPoolInterface
+  type: class
+  source: Psr\Cache\CacheItemPoolInterface
+- name: CachePoolClearCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\CachePoolClearCommand
+- name: Application
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Console\Application
+- name: TestCase
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\TestCase
+- name: CommandCompletionTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandCompletionTester
+- name: Container
+  type: class
+  source: Symfony\Component\DependencyInjection\Container
+- name: Psr6CacheClearer
+  type: class
+  source: Symfony\Component\HttpKernel\CacheClearer\Psr6CacheClearer
+- name: KernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\KernelInterface
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testComplete
+  visibility: public
+  parameters:
+  - name: input
+  - name: expectedSuggestions
+  comment: '# * @dataProvider provideCompletionSuggestions'
+- name: provideCompletionSuggestions
+  visibility: public
+  parameters: []
+  comment: null
+- name: getKernel
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\MockObject\MockObject
+- Psr\Cache\CacheItemPoolInterface
+- Symfony\Bundle\FrameworkBundle\Command\CachePoolClearCommand
+- Symfony\Bundle\FrameworkBundle\Console\Application
+- Symfony\Bundle\FrameworkBundle\Tests\TestCase
+- Symfony\Component\Console\Tester\CommandCompletionTester
+- Symfony\Component\DependencyInjection\Container
+- Symfony\Component\HttpKernel\CacheClearer\Psr6CacheClearer
+- Symfony\Component\HttpKernel\KernelInterface
+interfaces: []

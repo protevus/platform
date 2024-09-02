@@ -1,0 +1,17 @@
+name: UnexpectedTypeException
+class_comment: '# * Thrown when a method argument had an unexpected type.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: value
+  - name: expectedType
+  comment: null
+traits: []
+interfaces: []

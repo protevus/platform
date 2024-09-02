@@ -1,0 +1,67 @@
+name: PostgreSqlConnectionTest
+class_comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>"
+dependencies:
+- name: ArrayResult
+  type: class
+  source: Doctrine\DBAL\Cache\ArrayResult
+- name: PostgreSQLPlatform
+  type: class
+  source: Doctrine\DBAL\Platforms\PostgreSQLPlatform
+- name: QueryBuilder
+  type: class
+  source: Doctrine\DBAL\Query\QueryBuilder
+- name: Result
+  type: class
+  source: Doctrine\DBAL\Result
+- name: Table
+  type: class
+  source: Doctrine\DBAL\Schema\Table
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: PostgreSqlConnection
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Doctrine\Transport\PostgreSqlConnection
+properties: []
+methods:
+- name: testSerialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnserialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testListenOnConnection
+  visibility: public
+  parameters: []
+  comment: null
+- name: pgsqlGetNotify
+  visibility: public
+  parameters: []
+  comment: null
+- name: countNotifyCalls
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetExtraSetupSql
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransformTableNameWithSchemaToValidProcedureName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetExtraSetupSqlWrongTable
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Doctrine\DBAL\Cache\ArrayResult
+- Doctrine\DBAL\Platforms\PostgreSQLPlatform
+- Doctrine\DBAL\Query\QueryBuilder
+- Doctrine\DBAL\Result
+- Doctrine\DBAL\Schema\Table
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Bridge\Doctrine\Transport\PostgreSqlConnection
+interfaces: []

@@ -1,0 +1,10 @@
+name: ConfigurationUrlParser
+class_comment: null
+dependencies:
+- name: BaseConfigurationUrlParser
+  type: class
+  source: Illuminate\Support\ConfigurationUrlParser
+properties: []
+methods: []
+traits: []
+interfaces: []

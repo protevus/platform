@@ -1,0 +1,16 @@
+name: PropertyAccessorNonTraversableArrayObjectTest
+class_comment: null
+dependencies:
+- name: NonTraversableArrayObject
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\NonTraversableArrayObject
+properties: []
+methods:
+- name: getContainer
+  visibility: protected
+  parameters:
+  - name: array
+  comment: null
+traits:
+- Symfony\Component\PropertyAccess\Tests\Fixtures\NonTraversableArrayObject
+interfaces: []

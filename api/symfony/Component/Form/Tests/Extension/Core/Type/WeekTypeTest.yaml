@@ -1,0 +1,120 @@
+name: WeekTypeTest
+class_comment: null
+dependencies:
+- name: FormError
+  type: class
+  source: Symfony\Component\Form\FormError
+properties: []
+methods:
+- name: testSubmitArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitStringSingleText
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassDefaultPlaceholderToViewIfNotRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassNoPlaceholderToViewIfRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassPlaceholderAsString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassPlaceholderAsArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassPlaceholderAsPartialArrayAddEmptyIfNotRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassPlaceholderAsPartialArrayAddNullIfRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassHtml5TypeIfSingleTextAndHtml5Format
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDontPassHtml5TypeIfHtml5NotAllowed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDontPassHtml5TypeIfNotSingleText
+  visibility: public
+  parameters: []
+  comment: null
+- name: testYearTypeChoiceErrorsBubbleUp
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWeekTypeChoiceErrorsBubbleUp
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassDefaultChoiceTranslationDomain
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassChoiceTranslationDomainAsString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassChoiceTranslationDomainAsArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNull
+  visibility: public
+  parameters:
+  - name: expected
+    default: 'null'
+  - name: norm
+    default: 'null'
+  - name: view
+    default: 'null'
+  comment: null
+- name: testSubmitFromChoiceEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNullWithText
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNullWithSingleText
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNullUsesDefaultEmptyData
+  visibility: public
+  parameters:
+  - name: emptyData
+    default: '[]'
+  - name: expectedData
+    default: 'null'
+  comment: null
+- name: testSubmitNullUsesDateEmptyDataString
+  visibility: public
+  parameters:
+  - name: widget
+  - name: emptyData
+  - name: expectedData
+  comment: '# * @dataProvider provideEmptyData'
+- name: provideEmptyData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\FormError
+interfaces: []

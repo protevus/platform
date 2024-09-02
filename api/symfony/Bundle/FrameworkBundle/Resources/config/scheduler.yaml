@@ -1,0 +1,19 @@
+name: scheduler
+class_comment: null
+dependencies:
+- name: DispatchSchedulerEventListener
+  type: class
+  source: Symfony\Component\Scheduler\EventListener\DispatchSchedulerEventListener
+- name: SchedulerTransportFactory
+  type: class
+  source: Symfony\Component\Scheduler\Messenger\SchedulerTransportFactory
+- name: ServiceCallMessageHandler
+  type: class
+  source: Symfony\Component\Scheduler\Messenger\ServiceCallMessageHandler
+properties: []
+methods: []
+traits:
+- Symfony\Component\Scheduler\EventListener\DispatchSchedulerEventListener
+- Symfony\Component\Scheduler\Messenger\SchedulerTransportFactory
+- Symfony\Component\Scheduler\Messenger\ServiceCallMessageHandler
+interfaces: []

@@ -1,0 +1,43 @@
+name: NormalizableTraversableDummy
+class_comment: null
+dependencies:
+- name: DenormalizableInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizableInterface
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- name: NormalizableInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\NormalizableInterface
+- name: NormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\NormalizerInterface
+properties: []
+methods:
+- name: normalize
+  visibility: public
+  parameters:
+  - name: normalizer
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: denormalize
+  visibility: public
+  parameters:
+  - name: denormalizer
+  - name: data
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\Serializer\Normalizer\DenormalizableInterface
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- Symfony\Component\Serializer\Normalizer\NormalizableInterface
+- Symfony\Component\Serializer\Normalizer\NormalizerInterface
+interfaces:
+- NormalizableInterface

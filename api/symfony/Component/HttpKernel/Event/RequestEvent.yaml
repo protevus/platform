@@ -1,0 +1,41 @@
+name: RequestEvent
+class_comment: '# * Allows to create a response for a request.
+
+  # *
+
+  # * Call setResponse() to set the response that will be returned for the
+
+  # * current request. The propagation of this event is stopped as soon as a
+
+  # * response is set.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+properties: []
+methods:
+- name: getResponse
+  visibility: public
+  parameters: []
+  comment: "# * Allows to create a response for a request.\n# *\n# * Call setResponse()\
+    \ to set the response that will be returned for the\n# * current request. The\
+    \ propagation of this event is stopped as soon as a\n# * response is set.\n# *\n\
+    # * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# class RequestEvent\
+    \ extends KernelEvent\n# {\n# private ?Response $response = null;\n# \n# /**\n\
+    # * Returns the response object."
+- name: setResponse
+  visibility: public
+  parameters:
+  - name: response
+  comment: '# * Sets a response and stops event propagation.'
+- name: hasResponse
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether a response was set.'
+traits:
+- Symfony\Component\HttpFoundation\Response
+interfaces: []

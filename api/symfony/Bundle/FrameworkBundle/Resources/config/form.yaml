@@ -1,0 +1,111 @@
+name: form
+class_comment: null
+dependencies:
+- name: CachingFactoryDecorator
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\CachingFactoryDecorator
+- name: DefaultChoiceListFactory
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\DefaultChoiceListFactory
+- name: PropertyAccessDecorator
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\PropertyAccessDecorator
+- name: ChoiceType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+- name: ColorType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\ColorType
+- name: FileType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\FileType
+- name: FormType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\FormType
+- name: SubmitType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\SubmitType
+- name: TextType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\TextType
+- name: TransformationFailureExtension
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\TransformationFailureExtension
+- name: DependencyInjectionExtension
+  type: class
+  source: Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension
+- name: TextTypeHtmlSanitizerExtension
+  type: class
+  source: Symfony\Component\Form\Extension\HtmlSanitizer\Type\TextTypeHtmlSanitizerExtension
+- name: HttpFoundationRequestHandler
+  type: class
+  source: Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationRequestHandler
+- name: FormTypeHttpFoundationExtension
+  type: class
+  source: Symfony\Component\Form\Extension\HttpFoundation\Type\FormTypeHttpFoundationExtension
+- name: FormTypeValidatorExtension
+  type: class
+  source: Symfony\Component\Form\Extension\Validator\Type\FormTypeValidatorExtension
+- name: RepeatedTypeValidatorExtension
+  type: class
+  source: Symfony\Component\Form\Extension\Validator\Type\RepeatedTypeValidatorExtension
+- name: SubmitTypeValidatorExtension
+  type: class
+  source: Symfony\Component\Form\Extension\Validator\Type\SubmitTypeValidatorExtension
+- name: UploadValidatorExtension
+  type: class
+  source: Symfony\Component\Form\Extension\Validator\Type\UploadValidatorExtension
+- name: ValidatorTypeGuesser
+  type: class
+  source: Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser
+- name: FormFactory
+  type: class
+  source: Symfony\Component\Form\FormFactory
+- name: FormFactoryInterface
+  type: class
+  source: Symfony\Component\Form\FormFactoryInterface
+- name: FormRegistry
+  type: class
+  source: Symfony\Component\Form\FormRegistry
+- name: FormRegistryInterface
+  type: class
+  source: Symfony\Component\Form\FormRegistryInterface
+- name: ResolvedFormTypeFactory
+  type: class
+  source: Symfony\Component\Form\ResolvedFormTypeFactory
+- name: ResolvedFormTypeFactoryInterface
+  type: class
+  source: Symfony\Component\Form\ResolvedFormTypeFactoryInterface
+- name: ServerParams
+  type: class
+  source: Symfony\Component\Form\Util\ServerParams
+properties: []
+methods: []
+traits:
+- Symfony\Component\Form\ChoiceList\Factory\CachingFactoryDecorator
+- Symfony\Component\Form\ChoiceList\Factory\DefaultChoiceListFactory
+- Symfony\Component\Form\ChoiceList\Factory\PropertyAccessDecorator
+- Symfony\Component\Form\Extension\Core\Type\ChoiceType
+- Symfony\Component\Form\Extension\Core\Type\ColorType
+- Symfony\Component\Form\Extension\Core\Type\FileType
+- Symfony\Component\Form\Extension\Core\Type\FormType
+- Symfony\Component\Form\Extension\Core\Type\SubmitType
+- Symfony\Component\Form\Extension\Core\Type\TextType
+- Symfony\Component\Form\Extension\Core\Type\TransformationFailureExtension
+- Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension
+- Symfony\Component\Form\Extension\HtmlSanitizer\Type\TextTypeHtmlSanitizerExtension
+- Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationRequestHandler
+- Symfony\Component\Form\Extension\HttpFoundation\Type\FormTypeHttpFoundationExtension
+- Symfony\Component\Form\Extension\Validator\Type\FormTypeValidatorExtension
+- Symfony\Component\Form\Extension\Validator\Type\RepeatedTypeValidatorExtension
+- Symfony\Component\Form\Extension\Validator\Type\SubmitTypeValidatorExtension
+- Symfony\Component\Form\Extension\Validator\Type\UploadValidatorExtension
+- Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser
+- Symfony\Component\Form\FormFactory
+- Symfony\Component\Form\FormFactoryInterface
+- Symfony\Component\Form\FormRegistry
+- Symfony\Component\Form\FormRegistryInterface
+- Symfony\Component\Form\ResolvedFormTypeFactory
+- Symfony\Component\Form\ResolvedFormTypeFactoryInterface
+- Symfony\Component\Form\Util\ServerParams
+interfaces: []

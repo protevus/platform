@@ -1,0 +1,51 @@
+name: collectors
+class_comment: null
+dependencies:
+- name: RouterDataCollector
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector
+- name: CommandDataCollector
+  type: class
+  source: Symfony\Component\Console\DataCollector\CommandDataCollector
+- name: AjaxDataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\AjaxDataCollector
+- name: ConfigDataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\ConfigDataCollector
+- name: EventDataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\EventDataCollector
+- name: ExceptionDataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\ExceptionDataCollector
+- name: LoggerDataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\LoggerDataCollector
+- name: MemoryDataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\MemoryDataCollector
+- name: RequestDataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\RequestDataCollector
+- name: TimeDataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\TimeDataCollector
+- name: KernelEvents
+  type: class
+  source: Symfony\Component\HttpKernel\KernelEvents
+properties: []
+methods: []
+traits:
+- Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector
+- Symfony\Component\Console\DataCollector\CommandDataCollector
+- Symfony\Component\HttpKernel\DataCollector\AjaxDataCollector
+- Symfony\Component\HttpKernel\DataCollector\ConfigDataCollector
+- Symfony\Component\HttpKernel\DataCollector\EventDataCollector
+- Symfony\Component\HttpKernel\DataCollector\ExceptionDataCollector
+- Symfony\Component\HttpKernel\DataCollector\LoggerDataCollector
+- Symfony\Component\HttpKernel\DataCollector\MemoryDataCollector
+- Symfony\Component\HttpKernel\DataCollector\RequestDataCollector
+- Symfony\Component\HttpKernel\DataCollector\TimeDataCollector
+- Symfony\Component\HttpKernel\KernelEvents
+interfaces: []

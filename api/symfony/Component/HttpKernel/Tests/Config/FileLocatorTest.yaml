@@ -1,0 +1,23 @@
+name: FileLocatorTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: FileLocator
+  type: class
+  source: Symfony\Component\HttpKernel\Config\FileLocator
+- name: KernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\KernelInterface
+properties: []
+methods:
+- name: testLocate
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpKernel\Config\FileLocator
+- Symfony\Component\HttpKernel\KernelInterface
+interfaces: []

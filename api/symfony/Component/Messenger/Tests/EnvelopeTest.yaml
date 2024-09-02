@@ -1,0 +1,84 @@
+name: EnvelopeTest
+class_comment: '# * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: DelayStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\DelayStamp
+- name: ReceivedStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\ReceivedStamp
+- name: StampInterface
+  type: class
+  source: Symfony\Component\Messenger\Stamp\StampInterface
+- name: ValidationStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\ValidationStamp
+- name: DummyMessage
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\DummyMessage
+properties: []
+methods:
+- name: testConstruct
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithReturnsNewInstance
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithoutAll
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithoutAllWithNonExistentStampClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithoutStampsOfType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithoutStampsOfTypeWithNonExistentStampClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLast
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLastWithNonExistentStampClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAll
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllWithNonExistentStampClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWrapWithMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWrapWithEnvelope
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Stamp\DelayStamp
+- Symfony\Component\Messenger\Stamp\ReceivedStamp
+- Symfony\Component\Messenger\Stamp\StampInterface
+- Symfony\Component\Messenger\Stamp\ValidationStamp
+- Symfony\Component\Messenger\Tests\Fixtures\DummyMessage
+interfaces:
+- DummyFooBarStampInterface

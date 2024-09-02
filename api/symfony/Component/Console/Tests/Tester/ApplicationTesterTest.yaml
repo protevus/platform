@@ -1,0 +1,63 @@
+name: ApplicationTesterTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+- name: QuestionHelper
+  type: class
+  source: Symfony\Component\Console\Helper\QuestionHelper
+- name: Output
+  type: class
+  source: Symfony\Component\Console\Output\Output
+- name: Question
+  type: class
+  source: Symfony\Component\Console\Question\Question
+- name: ApplicationTester
+  type: class
+  source: Symfony\Component\Console\Tester\ApplicationTester
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testRun
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetInput
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetOutput
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetDisplay
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetInputs
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetStatusCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testErrorOutput
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Application
+- Symfony\Component\Console\Helper\QuestionHelper
+- Symfony\Component\Console\Output\Output
+- Symfony\Component\Console\Question\Question
+- Symfony\Component\Console\Tester\ApplicationTester
+interfaces: []

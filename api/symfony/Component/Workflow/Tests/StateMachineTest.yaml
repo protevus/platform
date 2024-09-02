@@ -1,0 +1,59 @@
+name: StateMachineTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: GuardEvent
+  type: class
+  source: Symfony\Component\Workflow\Event\GuardEvent
+- name: NotEnabledTransitionException
+  type: class
+  source: Symfony\Component\Workflow\Exception\NotEnabledTransitionException
+- name: StateMachine
+  type: class
+  source: Symfony\Component\Workflow\StateMachine
+- name: TransitionBlocker
+  type: class
+  source: Symfony\Component\Workflow\TransitionBlocker
+- name: WorkflowBuilderTrait
+  type: class
+  source: WorkflowBuilderTrait
+properties: []
+methods:
+- name: testCan
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCanWithMultipleTransition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBuildTransitionBlockerList
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBuildTransitionBlockerListWithMultipleTransitions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBuildTransitionBlockerListReturnsExpectedReasonOnBranchMerge
+  visibility: public
+  parameters: []
+  comment: null
+- name: testApplyReturnsExpectedReasonOnBranchMerge
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\Workflow\Event\GuardEvent
+- Symfony\Component\Workflow\Exception\NotEnabledTransitionException
+- Symfony\Component\Workflow\StateMachine
+- Symfony\Component\Workflow\TransitionBlocker
+- WorkflowBuilderTrait
+interfaces: []

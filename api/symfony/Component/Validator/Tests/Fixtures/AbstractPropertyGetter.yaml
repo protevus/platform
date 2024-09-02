@@ -1,0 +1,15 @@
+name: AbstractPropertyGetter
+class_comment: null
+dependencies: []
+properties:
+- name: property
+  visibility: private
+  comment: null
+methods:
+- name: getProperty
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces:
+- PropertyGetterInterface

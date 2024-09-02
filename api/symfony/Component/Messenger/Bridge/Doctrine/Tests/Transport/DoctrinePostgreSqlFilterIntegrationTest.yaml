@@ -1,0 +1,85 @@
+name: DoctrinePostgreSqlFilterIntegrationTest
+class_comment: '# * This test checks on a postgres connection whether the doctrine
+  asset filter works as expected.
+
+  # *
+
+  # * @requires extension pdo_pgsql
+
+  # *
+
+  # * @group integration'
+dependencies:
+- name: Configuration
+  type: class
+  source: Doctrine\DBAL\Configuration
+- name: Connection
+  type: class
+  source: Doctrine\DBAL\Connection
+- name: DriverManager
+  type: class
+  source: Doctrine\DBAL\DriverManager
+- name: Column
+  type: class
+  source: Doctrine\DBAL\Schema\Column
+- name: DefaultSchemaManagerFactory
+  type: class
+  source: Doctrine\DBAL\Schema\DefaultSchemaManagerFactory
+- name: Sequence
+  type: class
+  source: Doctrine\DBAL\Schema\Sequence
+- name: Table
+  type: class
+  source: Doctrine\DBAL\Schema\Table
+- name: DsnParser
+  type: class
+  source: Doctrine\DBAL\Tools\DsnParser
+- name: Type
+  type: class
+  source: Doctrine\DBAL\Types\Type
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: PostgreSqlConnection
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Doctrine\Transport\PostgreSqlConnection
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testFilterAssets
+  visibility: public
+  parameters: []
+  comment: null
+- name: createAssets
+  visibility: private
+  parameters: []
+  comment: null
+- name: removeAssets
+  visibility: private
+  parameters: []
+  comment: null
+- name: hasSequence
+  visibility: private
+  parameters:
+  - name: name
+  comment: null
+traits:
+- Doctrine\DBAL\Configuration
+- Doctrine\DBAL\Connection
+- Doctrine\DBAL\DriverManager
+- Doctrine\DBAL\Schema\Column
+- Doctrine\DBAL\Schema\DefaultSchemaManagerFactory
+- Doctrine\DBAL\Schema\Sequence
+- Doctrine\DBAL\Schema\Table
+- Doctrine\DBAL\Tools\DsnParser
+- Doctrine\DBAL\Types\Type
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Bridge\Doctrine\Transport\PostgreSqlConnection
+interfaces: []

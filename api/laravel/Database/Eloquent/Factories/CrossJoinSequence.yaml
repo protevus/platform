@@ -1,0 +1,22 @@
+name: CrossJoinSequence
+class_comment: null
+dependencies:
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: '...$sequences'
+  comment: '# * Create a new cross join sequence instance.
+
+    # *
+
+    # * @param  array  ...$sequences
+
+    # * @return void'
+traits:
+- Illuminate\Support\Arr
+interfaces: []

@@ -1,0 +1,46 @@
+name: ArrayNode
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: Compiler
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Compiler
+properties: []
+methods:
+- name: compile
+  visibility: public
+  parameters:
+  - name: compiler
+  comment: "# * @author Fabien Potencier <fabien@symfony.com>\n# *\n# * @internal\n\
+    # */\n# class ArrayNode extends Node\n# {\n# protected int $index;\n# \n# public\
+    \ function __construct()\n# {\n# $this->index = -1;\n# }\n# \n# public function\
+    \ addElement(Node $value, ?Node $key = null): void\n# {\n# $key ??= new ConstantNode(++$this->index);\n\
+    # \n# array_push($this->nodes, $key, $value);\n# }\n# \n# /**\n# * Compiles the\
+    \ node to PHP."
+- name: evaluate
+  visibility: public
+  parameters:
+  - name: functions
+  - name: values
+  comment: null
+- name: toArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: getKeyValuePairs
+  visibility: protected
+  parameters: []
+  comment: null
+- name: compileArguments
+  visibility: protected
+  parameters:
+  - name: compiler
+  - name: withKeys
+    default: 'true'
+  comment: null
+traits:
+- Symfony\Component\ExpressionLanguage\Compiler
+interfaces: []

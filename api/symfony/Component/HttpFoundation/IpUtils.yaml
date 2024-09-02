@@ -1,0 +1,102 @@
+name: IpUtils
+class_comment: '# * Http utility functions.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: private
+  parameters: []
+  comment: "# * Http utility functions.\n# *\n# * @author Fabien Potencier <fabien@symfony.com>\n\
+    # */\n# class IpUtils\n# {\n# public const PRIVATE_SUBNETS = [\n# '127.0.0.0/8',\
+    \    // RFC1700 (Loopback)\n# '10.0.0.0/8',     // RFC1918\n# '192.168.0.0/16',\
+    \ // RFC1918\n# '172.16.0.0/12',  // RFC1918\n# '169.254.0.0/16', // RFC3927\n\
+    # '0.0.0.0/8',      // RFC5735\n# '240.0.0.0/4',    // RFC1112\n# '::1/128', \
+    \       // Loopback\n# 'fc00::/7',       // Unique Local Address\n# 'fe80::/10',\
+    \      // Link Local Address\n# '::ffff:0:0/96',  // IPv4 translations\n# '::/128',\
+    \         // Unspecified address\n# ];\n# \n# private static array $checkedIps\
+    \ = [];\n# \n# /**\n# * This class should not be instantiated."
+- name: checkIp
+  visibility: public
+  parameters:
+  - name: requestIp
+  - name: ips
+  comment: '# * Checks if an IPv4 or IPv6 address is contained in the list of given
+    IPs or subnets.
+
+    # *
+
+    # * @param string|array $ips List of IPs or subnets (can be a string if only a
+    single one)'
+- name: checkIp4
+  visibility: public
+  parameters:
+  - name: requestIp
+  - name: ip
+  comment: '# * Compares two IPv4 addresses.
+
+    # * In case a subnet is given, it checks if it contains the request IP.
+
+    # *
+
+    # * @param string $ip IPv4 address or subnet in CIDR notation
+
+    # *
+
+    # * @return bool Whether the request IP matches the IP, or whether the request
+    IP is within the CIDR subnet'
+- name: checkIp6
+  visibility: public
+  parameters:
+  - name: requestIp
+  - name: ip
+  comment: '# * Compares two IPv6 addresses.
+
+    # * In case a subnet is given, it checks if it contains the request IP.
+
+    # *
+
+    # * @author David Soria Parra <dsp at php dot net>
+
+    # *
+
+    # * @see https://github.com/dsp/v6tools
+
+    # *
+
+    # * @param string $ip IPv6 address or subnet in CIDR notation
+
+    # *
+
+    # * @throws \RuntimeException When IPV6 support is not enabled'
+- name: anonymize
+  visibility: public
+  parameters:
+  - name: ip
+  comment: '# * Anonymizes an IP/IPv6.
+
+    # *
+
+    # * Removes the last byte for v4 and the last 8 bytes for v6 IPs'
+- name: isPrivateIp
+  visibility: public
+  parameters:
+  - name: requestIp
+  comment: '# * Checks if an IPv4 or IPv6 address is contained in the list of private
+    IP subnets.'
+- name: getCacheResult
+  visibility: private
+  parameters:
+  - name: cacheKey
+  comment: null
+- name: setCacheResult
+  visibility: private
+  parameters:
+  - name: cacheKey
+  - name: result
+  comment: null
+traits: []
+interfaces: []

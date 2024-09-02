@@ -1,0 +1,30 @@
+name: PathRequestMatcher
+class_comment: '# * Checks the Request URL path info matches a regular expression.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestMatcherInterface
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestMatcherInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: regexp
+  comment: null
+- name: matches
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestMatcherInterface
+interfaces:
+- RequestMatcherInterface

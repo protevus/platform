@@ -1,0 +1,729 @@
+name: GetSetMethodNormalizerTest
+class_comment: null
+dependencies:
+- name: MockObject
+  type: class
+  source: PHPUnit\Framework\MockObject\MockObject
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: PhpDocExtractor
+  type: class
+  source: Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor
+- name: ReflectionExtractor
+  type: class
+  source: Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor
+- name: PropertyInfoExtractor
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyInfoExtractor
+- name: DiscriminatorMap
+  type: class
+  source: Symfony\Component\Serializer\Attribute\DiscriminatorMap
+- name: LogicException
+  type: class
+  source: Symfony\Component\Serializer\Exception\LogicException
+- name: ClassDiscriminatorFromClassMetadata
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassDiscriminatorFromClassMetadata
+- name: ClassMetadataFactory
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory
+- name: AttributeLoader
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Loader\AttributeLoader
+- name: CamelCaseToSnakeCaseNameConverter
+  type: class
+  source: Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
+- name: MetadataAwareNameConverter
+  type: class
+  source: Symfony\Component\Serializer\NameConverter\MetadataAwareNameConverter
+- name: AbstractNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\AbstractNormalizer
+- name: ArrayDenormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ArrayDenormalizer
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- name: GetSetMethodNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
+- name: NormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\NormalizerInterface
+- name: Serializer
+  type: class
+  source: Symfony\Component\Serializer\Serializer
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Serializer\SerializerInterface
+- name: ClassWithIgnoreAnnotation
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\Attributes\ClassWithIgnoreAnnotation
+- name: ClassWithIgnoreAttribute
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\Attributes\ClassWithIgnoreAttribute
+- name: GroupDummy
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\Attributes\GroupDummy
+- name: CircularReferenceDummy
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\CircularReferenceDummy
+- name: SiblingHolder
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\SiblingHolder
+- name: CacheableObjectAttributesTestTrait
+  type: class
+  source: Symfony\Component\Serializer\Tests\Normalizer\Features\CacheableObjectAttributesTestTrait
+- name: CallbacksTestTrait
+  type: class
+  source: Symfony\Component\Serializer\Tests\Normalizer\Features\CallbacksTestTrait
+- name: CircularReferenceTestTrait
+  type: class
+  source: Symfony\Component\Serializer\Tests\Normalizer\Features\CircularReferenceTestTrait
+- name: ConstructorArgumentsTestTrait
+  type: class
+  source: Symfony\Component\Serializer\Tests\Normalizer\Features\ConstructorArgumentsTestTrait
+- name: FilterBoolTestTrait
+  type: class
+  source: Symfony\Component\Serializer\Tests\Normalizer\Features\FilterBoolTestTrait
+- name: GroupsTestTrait
+  type: class
+  source: Symfony\Component\Serializer\Tests\Normalizer\Features\GroupsTestTrait
+- name: IgnoredAttributesTestTrait
+  type: class
+  source: Symfony\Component\Serializer\Tests\Normalizer\Features\IgnoredAttributesTestTrait
+- name: MaxDepthTestTrait
+  type: class
+  source: Symfony\Component\Serializer\Tests\Normalizer\Features\MaxDepthTestTrait
+- name: ObjectToPopulateTestTrait
+  type: class
+  source: Symfony\Component\Serializer\Tests\Normalizer\Features\ObjectToPopulateTestTrait
+- name: SkipUninitializedValuesTestTrait
+  type: class
+  source: Symfony\Component\Serializer\Tests\Normalizer\Features\SkipUninitializedValuesTestTrait
+- name: TypedPropertiesObjectWithGetters
+  type: class
+  source: Symfony\Component\Serializer\Tests\Normalizer\Features\TypedPropertiesObjectWithGetters
+- name: TypeEnforcementTestTrait
+  type: class
+  source: Symfony\Component\Serializer\Tests\Normalizer\Features\TypeEnforcementTestTrait
+- name: CacheableObjectAttributesTestTrait
+  type: class
+  source: CacheableObjectAttributesTestTrait
+- name: CallbacksTestTrait
+  type: class
+  source: CallbacksTestTrait
+- name: CircularReferenceTestTrait
+  type: class
+  source: CircularReferenceTestTrait
+- name: ConstructorArgumentsTestTrait
+  type: class
+  source: ConstructorArgumentsTestTrait
+- name: FilterBoolTestTrait
+  type: class
+  source: FilterBoolTestTrait
+- name: GroupsTestTrait
+  type: class
+  source: GroupsTestTrait
+- name: IgnoredAttributesTestTrait
+  type: class
+  source: IgnoredAttributesTestTrait
+- name: MaxDepthTestTrait
+  type: class
+  source: MaxDepthTestTrait
+- name: ObjectToPopulateTestTrait
+  type: class
+  source: ObjectToPopulateTestTrait
+- name: SkipUninitializedValuesTestTrait
+  type: class
+  source: SkipUninitializedValuesTestTrait
+- name: TypeEnforcementTestTrait
+  type: class
+  source: TypeEnforcementTestTrait
+properties:
+- name: foo
+  visibility: protected
+  comment: null
+- name: bar
+  visibility: private
+  comment: null
+- name: baz
+  visibility: private
+  comment: null
+- name: camelCase
+  visibility: protected
+  comment: null
+- name: object
+  visibility: protected
+  comment: null
+- name: staticObject
+  visibility: private
+  comment: null
+- name: foo
+  visibility: protected
+  comment: null
+- name: bar
+  visibility: private
+  comment: null
+- name: baz
+  visibility: private
+  comment: null
+- name: foo
+  visibility: protected
+  comment: null
+- name: bar
+  visibility: private
+  comment: null
+- name: baz
+  visibility: private
+  comment: null
+- name: foo
+  visibility: protected
+  comment: null
+- name: bar
+  visibility: protected
+  comment: null
+- name: foo
+  visibility: private
+  comment: null
+- name: foo
+  visibility: private
+  comment: null
+- name: foo
+  visibility: private
+  comment: null
+- name: foo
+  visibility: private
+  comment: null
+- name: active
+  visibility: private
+  comment: null
+- name: url
+  visibility: private
+  comment: null
+- name: url
+  visibility: private
+  comment: null
+- name: foo
+  visibility: private
+  comment: null
+- name: foo
+  visibility: private
+  comment: null
+- name: bar
+  visibility: private
+  comment: null
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: createNormalizer
+  visibility: private
+  parameters:
+  - name: defaultContext
+    default: '[]'
+  comment: null
+- name: testInterface
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIgnoredAttributesInContext
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalizeWithObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalizeNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorDenormalize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorDenormalizeWithNullArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorDenormalizeWithMissingOptionalArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorDenormalizeWithOptionalDefaultArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorDenormalizeWithVariadicArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorDenormalizeWithMissingVariadicArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithObjectDenormalize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWArgWithPrivateMutator
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNormalizerForCallbacksWithPropertyTypeExtractor
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getNormalizerForCallbacks
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getNormalizerForCircularReference
+  visibility: protected
+  parameters:
+  - name: defaultContext
+  comment: null
+- name: getSelfReferencingModel
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getDenormalizerForConstructArguments
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getNormalizerForGroups
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getDenormalizerForGroups
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getNormalizerForFilterBool
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testGroupsNormalizeWithNameConverter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGroupsDenormalizeWithNameConverter
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNormalizerForMaxDepth
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getDenormalizerForObjectToPopulate
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getDenormalizerForTypeEnforcement
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testRejectInvalidKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNormalizerForIgnoredAttributes
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getDenormalizerForIgnoredAttributes
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testUnableToNormalizeObjectAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSiblingReference
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalizeNonExistingAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalizeShouldNotSetStaticAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoTraversableSupport
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoStaticGetSetSupport
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotIgnoredMethodSupport
+  visibility: public
+  parameters:
+  - name: class
+  comment: '# * @param class-string $class
+
+    # *
+
+    # * @dataProvider provideNotIgnoredMethodSupport'
+- name: provideNotIgnoredMethodSupport
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPrivateSetter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasGetterDenormalize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasGetterNormalize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCallMagicMethodDenormalize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCallMagicMethodNormalize
+  visibility: public
+  parameters: []
+  comment: null
+- name: getObjectCollectionWithExpectedArray
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getNormalizerForCacheableObjectAttributesTest
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getNormalizerForSkipUninitializedValues
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testNormalizeWithDiscriminator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalizeWithDiscriminator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupportsAndNormalizeWithOnlyParentGetter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupportsAndDenormalizeWithOnlyParentSetter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupportsAndDenormalizeWithOptionalSetterArgument
+  visibility: public
+  parameters:
+  - name: data
+  - name: method
+  - name: expected
+  comment: '# * @testWith [{"foo":"foo"}, "getFoo", "foo"]
+
+    # *           [{"bar":"bar"}, "getBar", "bar"]'
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: setFoo
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: getBar
+  visibility: public
+  parameters: []
+  comment: null
+- name: setBar
+  visibility: public
+  parameters:
+  - name: bar
+  comment: null
+- name: isBaz
+  visibility: public
+  parameters: []
+  comment: null
+- name: setBaz
+  visibility: public
+  parameters:
+  - name: baz
+  comment: null
+- name: getFooBar
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCamelCase
+  visibility: public
+  parameters: []
+  comment: null
+- name: setCamelCase
+  visibility: public
+  parameters:
+  - name: camelCase
+  comment: null
+- name: otherMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: setObject
+  visibility: public
+  parameters:
+  - name: object
+  comment: null
+- name: getObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: getStaticObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: setStaticObject
+  visibility: public
+  parameters:
+  - name: object
+  comment: null
+- name: getPrivate
+  visibility: protected
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+  - name: bar
+  - name: baz
+  comment: null
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: getBar
+  visibility: public
+  parameters: []
+  comment: null
+- name: isBaz
+  visibility: public
+  parameters: []
+  comment: null
+- name: otherMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+  - name: bar
+    default: '[]'
+  - name: baz
+    default: '[]'
+  comment: null
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: getBar
+  visibility: public
+  parameters: []
+  comment: null
+- name: getBaz
+  visibility: public
+  parameters: []
+  comment: null
+- name: otherMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+    default: '[]'
+  - name: bar
+    default: 'null'
+  comment: null
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: getBar
+  visibility: public
+  parameters: []
+  comment: null
+- name: otherMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: setFoo
+  visibility: private
+  parameters:
+  - name: foo
+  comment: null
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: setFoo
+  visibility: private
+  parameters:
+  - name: foo
+  comment: null
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: setFoo
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: setFoo
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: hasFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: isActive
+  visibility: public
+  parameters: []
+  comment: null
+- name: __call
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: null
+- name: getUrl
+  visibility: public
+  parameters: []
+  comment: null
+- name: setUrl
+  visibility: public
+  parameters:
+  - name: url
+  comment: null
+- name: getUrl
+  visibility: public
+  parameters: []
+  comment: null
+- name: setUrl
+  visibility: public
+  parameters:
+  - name: url
+  comment: null
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: setFoo
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: setFoo
+  visibility: public
+  parameters:
+  - name: foo
+    default: 'null'
+  comment: null
+- name: getBar
+  visibility: public
+  parameters: []
+  comment: null
+- name: setBar
+  visibility: public
+  parameters:
+  - name: bar
+    default: 'null'
+  - name: other
+    default: 'true'
+  comment: null
+traits:
+- PHPUnit\Framework\MockObject\MockObject
+- PHPUnit\Framework\TestCase
+- Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor
+- Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor
+- Symfony\Component\PropertyInfo\PropertyInfoExtractor
+- Symfony\Component\Serializer\Attribute\DiscriminatorMap
+- Symfony\Component\Serializer\Exception\LogicException
+- Symfony\Component\Serializer\Mapping\ClassDiscriminatorFromClassMetadata
+- Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory
+- Symfony\Component\Serializer\Mapping\Loader\AttributeLoader
+- Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
+- Symfony\Component\Serializer\NameConverter\MetadataAwareNameConverter
+- Symfony\Component\Serializer\Normalizer\AbstractNormalizer
+- Symfony\Component\Serializer\Normalizer\ArrayDenormalizer
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
+- Symfony\Component\Serializer\Normalizer\NormalizerInterface
+- Symfony\Component\Serializer\Serializer
+- Symfony\Component\Serializer\SerializerInterface
+- Symfony\Component\Serializer\Tests\Fixtures\Attributes\ClassWithIgnoreAnnotation
+- Symfony\Component\Serializer\Tests\Fixtures\Attributes\ClassWithIgnoreAttribute
+- Symfony\Component\Serializer\Tests\Fixtures\Attributes\GroupDummy
+- Symfony\Component\Serializer\Tests\Fixtures\CircularReferenceDummy
+- Symfony\Component\Serializer\Tests\Fixtures\SiblingHolder
+- Symfony\Component\Serializer\Tests\Normalizer\Features\CacheableObjectAttributesTestTrait
+- Symfony\Component\Serializer\Tests\Normalizer\Features\CallbacksTestTrait
+- Symfony\Component\Serializer\Tests\Normalizer\Features\CircularReferenceTestTrait
+- Symfony\Component\Serializer\Tests\Normalizer\Features\ConstructorArgumentsTestTrait
+- Symfony\Component\Serializer\Tests\Normalizer\Features\FilterBoolTestTrait
+- Symfony\Component\Serializer\Tests\Normalizer\Features\GroupsTestTrait
+- Symfony\Component\Serializer\Tests\Normalizer\Features\IgnoredAttributesTestTrait
+- Symfony\Component\Serializer\Tests\Normalizer\Features\MaxDepthTestTrait
+- Symfony\Component\Serializer\Tests\Normalizer\Features\ObjectToPopulateTestTrait
+- Symfony\Component\Serializer\Tests\Normalizer\Features\SkipUninitializedValuesTestTrait
+- Symfony\Component\Serializer\Tests\Normalizer\Features\TypedPropertiesObjectWithGetters
+- Symfony\Component\Serializer\Tests\Normalizer\Features\TypeEnforcementTestTrait
+- CacheableObjectAttributesTestTrait
+- CallbacksTestTrait
+- CircularReferenceTestTrait
+- ConstructorArgumentsTestTrait
+- FilterBoolTestTrait
+- GroupsTestTrait
+- IgnoredAttributesTestTrait
+- MaxDepthTestTrait
+- ObjectToPopulateTestTrait
+- SkipUninitializedValuesTestTrait
+- TypeEnforcementTestTrait
+interfaces:
+- SerializerInterface
+- GetSetMethodDummyInterface
+- GetSetMethodDummyInterface

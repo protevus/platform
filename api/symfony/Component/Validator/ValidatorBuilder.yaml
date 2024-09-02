@@ -1,0 +1,263 @@
+name: ValidatorBuilder
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: CacheItemPoolInterface
+  type: class
+  source: Psr\Cache\CacheItemPoolInterface
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: ExecutionContextFactory
+  type: class
+  source: Symfony\Component\Validator\Context\ExecutionContextFactory
+- name: ValidatorException
+  type: class
+  source: Symfony\Component\Validator\Exception\ValidatorException
+- name: LazyLoadingMetadataFactory
+  type: class
+  source: Symfony\Component\Validator\Mapping\Factory\LazyLoadingMetadataFactory
+- name: MetadataFactoryInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface
+- name: AttributeLoader
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\AttributeLoader
+- name: LoaderChain
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\LoaderChain
+- name: LoaderInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\LoaderInterface
+- name: StaticMethodLoader
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader
+- name: XmlFileLoader
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\XmlFileLoader
+- name: YamlFileLoader
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\YamlFileLoader
+- name: RecursiveValidator
+  type: class
+  source: Symfony\Component\Validator\Validator\RecursiveValidator
+- name: ValidatorInterface
+  type: class
+  source: Symfony\Component\Validator\Validator\ValidatorInterface
+- name: LocaleAwareInterface
+  type: class
+  source: Symfony\Contracts\Translation\LocaleAwareInterface
+- name: TranslatorInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatorInterface
+- name: TranslatorTrait
+  type: class
+  source: Symfony\Contracts\Translation\TranslatorTrait
+- name: TranslatorTrait
+  type: class
+  source: TranslatorTrait
+properties: []
+methods:
+- name: addObjectInitializer
+  visibility: public
+  parameters:
+  - name: initializer
+  comment: "# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# class ValidatorBuilder\n\
+    # {\n# private array $initializers = [];\n# private array $loaders = [];\n# private\
+    \ array $xmlMappings = [];\n# private array $yamlMappings = [];\n# private array\
+    \ $methodMappings = [];\n# private bool $enableAttributeMapping = false;\n# private\
+    \ ?MetadataFactoryInterface $metadataFactory = null;\n# private ConstraintValidatorFactoryInterface\
+    \ $validatorFactory;\n# private ?ContainerInterface $groupProviderLocator = null;\n\
+    # private ?CacheItemPoolInterface $mappingCache = null;\n# private ?TranslatorInterface\
+    \ $translator = null;\n# private ?string $translationDomain = null;\n# \n# /**\n\
+    # * Adds an object initializer to the validator.\n# *\n# * @return $this"
+- name: addObjectInitializers
+  visibility: public
+  parameters:
+  - name: initializers
+  comment: '# * Adds a list of object initializers to the validator.
+
+    # *
+
+    # * @param ObjectInitializerInterface[] $initializers
+
+    # *
+
+    # * @return $this'
+- name: addXmlMapping
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Adds an XML constraint mapping file to the validator.
+
+    # *
+
+    # * @return $this'
+- name: addXmlMappings
+  visibility: public
+  parameters:
+  - name: paths
+  comment: '# * Adds a list of XML constraint mapping files to the validator.
+
+    # *
+
+    # * @param string[] $paths The paths to the mapping files
+
+    # *
+
+    # * @return $this'
+- name: addYamlMapping
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Adds a YAML constraint mapping file to the validator.
+
+    # *
+
+    # * @param string $path The path to the mapping file
+
+    # *
+
+    # * @return $this'
+- name: addYamlMappings
+  visibility: public
+  parameters:
+  - name: paths
+  comment: '# * Adds a list of YAML constraint mappings file to the validator.
+
+    # *
+
+    # * @param string[] $paths The paths to the mapping files
+
+    # *
+
+    # * @return $this'
+- name: addMethodMapping
+  visibility: public
+  parameters:
+  - name: methodName
+  comment: '# * Enables constraint mapping using the given static method.
+
+    # *
+
+    # * @return $this'
+- name: addMethodMappings
+  visibility: public
+  parameters:
+  - name: methodNames
+  comment: '# * Enables constraint mapping using the given static methods.
+
+    # *
+
+    # * @param string[] $methodNames The names of the methods
+
+    # *
+
+    # * @return $this'
+- name: enableAttributeMapping
+  visibility: public
+  parameters: []
+  comment: '# * Enables attribute-based constraint mapping.
+
+    # *
+
+    # * @return $this'
+- name: disableAttributeMapping
+  visibility: public
+  parameters: []
+  comment: '# * Disables attribute-based constraint mapping.
+
+    # *
+
+    # * @return $this'
+- name: setMetadataFactory
+  visibility: public
+  parameters:
+  - name: metadataFactory
+  comment: '# * Sets the class metadata factory used by the validator.
+
+    # *
+
+    # * @return $this'
+- name: setMappingCache
+  visibility: public
+  parameters:
+  - name: cache
+  comment: '# * Sets the cache for caching class metadata.
+
+    # *
+
+    # * @return $this'
+- name: setConstraintValidatorFactory
+  visibility: public
+  parameters:
+  - name: validatorFactory
+  comment: '# * Sets the constraint validator factory used by the validator.
+
+    # *
+
+    # * @return $this'
+- name: setGroupProviderLocator
+  visibility: public
+  parameters:
+  - name: groupProviderLocator
+  comment: '# * @return $this'
+- name: setTranslator
+  visibility: public
+  parameters:
+  - name: translator
+  comment: '# * Sets the translator used for translating violation messages.
+
+    # *
+
+    # * @return $this'
+- name: setTranslationDomain
+  visibility: public
+  parameters:
+  - name: translationDomain
+  comment: '# * Sets the default translation domain of violation messages.
+
+    # *
+
+    # * The same message can have different translations in different domains.
+
+    # * Pass the domain that is used for violation messages by default to this
+
+    # * method.
+
+    # *
+
+    # * @return $this'
+- name: addLoader
+  visibility: public
+  parameters:
+  - name: loader
+  comment: '# * @return $this'
+- name: getLoaders
+  visibility: public
+  parameters: []
+  comment: '# * @return LoaderInterface[]'
+- name: getValidator
+  visibility: public
+  parameters: []
+  comment: '# * Builds and returns a new validator object.'
+traits:
+- Psr\Cache\CacheItemPoolInterface
+- Psr\Container\ContainerInterface
+- Symfony\Component\Validator\Context\ExecutionContextFactory
+- Symfony\Component\Validator\Exception\ValidatorException
+- Symfony\Component\Validator\Mapping\Factory\LazyLoadingMetadataFactory
+- Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface
+- Symfony\Component\Validator\Mapping\Loader\AttributeLoader
+- Symfony\Component\Validator\Mapping\Loader\LoaderChain
+- Symfony\Component\Validator\Mapping\Loader\LoaderInterface
+- Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader
+- Symfony\Component\Validator\Mapping\Loader\XmlFileLoader
+- Symfony\Component\Validator\Mapping\Loader\YamlFileLoader
+- Symfony\Component\Validator\Validator\RecursiveValidator
+- Symfony\Component\Validator\Validator\ValidatorInterface
+- Symfony\Contracts\Translation\LocaleAwareInterface
+- Symfony\Contracts\Translation\TranslatorInterface
+- Symfony\Contracts\Translation\TranslatorTrait
+- TranslatorTrait
+interfaces:
+- TranslatorInterface

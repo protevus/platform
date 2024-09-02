@@ -1,0 +1,50 @@
+name: StreamOutputTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Output
+  type: class
+  source: Symfony\Component\Console\Output\Output
+- name: StreamOutput
+  type: class
+  source: Symfony\Component\Console\Output\StreamOutput
+properties:
+- name: stream
+  visibility: protected
+  comment: '# @var resource'
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStreamIsRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetStream
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDoWrite
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDoWriteOnFailure
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Output\Output
+- Symfony\Component\Console\Output\StreamOutput
+interfaces: []

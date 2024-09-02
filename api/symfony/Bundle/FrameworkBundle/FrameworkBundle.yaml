@@ -1,0 +1,274 @@
+name: FrameworkBundle
+class_comment: '# * Bundle.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: AddDebugLogProcessorPass
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\AddDebugLogProcessorPass
+- name: AssetsContextPass
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\AssetsContextPass
+- name: ContainerBuilderDebugDumpPass
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\ContainerBuilderDebugDumpPass
+- name: ErrorLoggerCompilerPass
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\ErrorLoggerCompilerPass
+- name: ProfilerPass
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\ProfilerPass
+- name: RemoveUnusedSessionMarshallingHandlerPass
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\RemoveUnusedSessionMarshallingHandlerPass
+- name: TestServiceContainerRealRefPass
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\TestServiceContainerRealRefPass
+- name: TestServiceContainerWeakRefPass
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\TestServiceContainerWeakRefPass
+- name: UnusedTagsPass
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\UnusedTagsPass
+- name: VirtualRequestStackPass
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DependencyInjection\VirtualRequestStackPass
+- name: ApcuAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\ApcuAdapter
+- name: ArrayAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\ArrayAdapter
+- name: ChainAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\ChainAdapter
+- name: PhpArrayAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\PhpArrayAdapter
+- name: PhpFilesAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\PhpFilesAdapter
+- name: CacheCollectorPass
+  type: class
+  source: Symfony\Component\Cache\DependencyInjection\CacheCollectorPass
+- name: CachePoolClearerPass
+  type: class
+  source: Symfony\Component\Cache\DependencyInjection\CachePoolClearerPass
+- name: CachePoolPass
+  type: class
+  source: Symfony\Component\Cache\DependencyInjection\CachePoolPass
+- name: CachePoolPrunerPass
+  type: class
+  source: Symfony\Component\Cache\DependencyInjection\CachePoolPrunerPass
+- name: ClassExistenceResource
+  type: class
+  source: Symfony\Component\Config\Resource\ClassExistenceResource
+- name: ConsoleEvents
+  type: class
+  source: Symfony\Component\Console\ConsoleEvents
+- name: AddConsoleCommandPass
+  type: class
+  source: Symfony\Component\Console\DependencyInjection\AddConsoleCommandPass
+- name: PassConfig
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\PassConfig
+- name: RegisterReverseContainerPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\RegisterReverseContainerPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Dotenv
+  type: class
+  source: Symfony\Component\Dotenv\Dotenv
+- name: ErrorHandler
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorHandler
+- name: RegisterListenersPass
+  type: class
+  source: Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass
+- name: FormPass
+  type: class
+  source: Symfony\Component\Form\DependencyInjection\FormPass
+- name: HttpClientPass
+  type: class
+  source: Symfony\Component\HttpClient\DependencyInjection\HttpClientPass
+- name: BinaryFileResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\BinaryFileResponse
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Bundle
+  type: class
+  source: Symfony\Component\HttpKernel\Bundle\Bundle
+- name: ControllerArgumentValueResolverPass
+  type: class
+  source: Symfony\Component\HttpKernel\DependencyInjection\ControllerArgumentValueResolverPass
+- name: FragmentRendererPass
+  type: class
+  source: Symfony\Component\HttpKernel\DependencyInjection\FragmentRendererPass
+- name: LoggerPass
+  type: class
+  source: Symfony\Component\HttpKernel\DependencyInjection\LoggerPass
+- name: RegisterControllerArgumentLocatorsPass
+  type: class
+  source: Symfony\Component\HttpKernel\DependencyInjection\RegisterControllerArgumentLocatorsPass
+- name: RegisterLocaleAwareServicesPass
+  type: class
+  source: Symfony\Component\HttpKernel\DependencyInjection\RegisterLocaleAwareServicesPass
+- name: RemoveEmptyControllerArgumentLocatorsPass
+  type: class
+  source: Symfony\Component\HttpKernel\DependencyInjection\RemoveEmptyControllerArgumentLocatorsPass
+- name: ResettableServicePass
+  type: class
+  source: Symfony\Component\HttpKernel\DependencyInjection\ResettableServicePass
+- name: KernelEvents
+  type: class
+  source: Symfony\Component\HttpKernel\KernelEvents
+- name: MessengerPass
+  type: class
+  source: Symfony\Component\Messenger\DependencyInjection\MessengerPass
+- name: AddMimeTypeGuesserPass
+  type: class
+  source: Symfony\Component\Mime\DependencyInjection\AddMimeTypeGuesserPass
+- name: PropertyInfoPass
+  type: class
+  source: Symfony\Component\PropertyInfo\DependencyInjection\PropertyInfoPass
+- name: AddExpressionLanguageProvidersPass
+  type: class
+  source: Symfony\Component\Routing\DependencyInjection\AddExpressionLanguageProvidersPass
+- name: RoutingResolverPass
+  type: class
+  source: Symfony\Component\Routing\DependencyInjection\RoutingResolverPass
+- name: AddScheduleMessengerPass
+  type: class
+  source: Symfony\Component\Scheduler\DependencyInjection\AddScheduleMessengerPass
+- name: SerializerPass
+  type: class
+  source: Symfony\Component\Serializer\DependencyInjection\SerializerPass
+- name: DataCollectorTranslatorPass
+  type: class
+  source: Symfony\Component\Translation\DependencyInjection\DataCollectorTranslatorPass
+- name: LoggingTranslatorPass
+  type: class
+  source: Symfony\Component\Translation\DependencyInjection\LoggingTranslatorPass
+- name: TranslationDumperPass
+  type: class
+  source: Symfony\Component\Translation\DependencyInjection\TranslationDumperPass
+- name: TranslationExtractorPass
+  type: class
+  source: Symfony\Component\Translation\DependencyInjection\TranslationExtractorPass
+- name: TranslatorPass
+  type: class
+  source: Symfony\Component\Translation\DependencyInjection\TranslatorPass
+- name: TranslatorPathsPass
+  type: class
+  source: Symfony\Component\Translation\DependencyInjection\TranslatorPathsPass
+- name: AddAutoMappingConfigurationPass
+  type: class
+  source: Symfony\Component\Validator\DependencyInjection\AddAutoMappingConfigurationPass
+- name: AddConstraintValidatorsPass
+  type: class
+  source: Symfony\Component\Validator\DependencyInjection\AddConstraintValidatorsPass
+- name: AddValidatorInitializersPass
+  type: class
+  source: Symfony\Component\Validator\DependencyInjection\AddValidatorInitializersPass
+- name: Hydrator
+  type: class
+  source: Symfony\Component\VarExporter\Internal\Hydrator
+- name: Registry
+  type: class
+  source: Symfony\Component\VarExporter\Internal\Registry
+- name: WorkflowDebugPass
+  type: class
+  source: Symfony\Component\Workflow\DependencyInjection\WorkflowDebugPass
+- name: WorkflowGuardListenerPass
+  type: class
+  source: Symfony\Component\Workflow\DependencyInjection\WorkflowGuardListenerPass
+properties: []
+methods:
+- name: boot
+  visibility: public
+  parameters: []
+  comment: null
+- name: build
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: addCompilerPassIfExists
+  visibility: private
+  parameters:
+  - name: container
+  - name: class
+  - name: type
+    default: PassConfig::TYPE_BEFORE_OPTIMIZATION
+  - name: priority
+    default: '0'
+  comment: null
+traits:
+- Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\AddDebugLogProcessorPass
+- Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\AssetsContextPass
+- Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\ContainerBuilderDebugDumpPass
+- Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\ErrorLoggerCompilerPass
+- Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\ProfilerPass
+- Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\RemoveUnusedSessionMarshallingHandlerPass
+- Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\TestServiceContainerRealRefPass
+- Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\TestServiceContainerWeakRefPass
+- Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\UnusedTagsPass
+- Symfony\Bundle\FrameworkBundle\DependencyInjection\VirtualRequestStackPass
+- Symfony\Component\Cache\Adapter\ApcuAdapter
+- Symfony\Component\Cache\Adapter\ArrayAdapter
+- Symfony\Component\Cache\Adapter\ChainAdapter
+- Symfony\Component\Cache\Adapter\PhpArrayAdapter
+- Symfony\Component\Cache\Adapter\PhpFilesAdapter
+- Symfony\Component\Cache\DependencyInjection\CacheCollectorPass
+- Symfony\Component\Cache\DependencyInjection\CachePoolClearerPass
+- Symfony\Component\Cache\DependencyInjection\CachePoolPass
+- Symfony\Component\Cache\DependencyInjection\CachePoolPrunerPass
+- Symfony\Component\Config\Resource\ClassExistenceResource
+- Symfony\Component\Console\ConsoleEvents
+- Symfony\Component\Console\DependencyInjection\AddConsoleCommandPass
+- Symfony\Component\DependencyInjection\Compiler\PassConfig
+- Symfony\Component\DependencyInjection\Compiler\RegisterReverseContainerPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\Dotenv\Dotenv
+- Symfony\Component\ErrorHandler\ErrorHandler
+- Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass
+- Symfony\Component\Form\DependencyInjection\FormPass
+- Symfony\Component\HttpClient\DependencyInjection\HttpClientPass
+- Symfony\Component\HttpFoundation\BinaryFileResponse
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\Bundle\Bundle
+- Symfony\Component\HttpKernel\DependencyInjection\ControllerArgumentValueResolverPass
+- Symfony\Component\HttpKernel\DependencyInjection\FragmentRendererPass
+- Symfony\Component\HttpKernel\DependencyInjection\LoggerPass
+- Symfony\Component\HttpKernel\DependencyInjection\RegisterControllerArgumentLocatorsPass
+- Symfony\Component\HttpKernel\DependencyInjection\RegisterLocaleAwareServicesPass
+- Symfony\Component\HttpKernel\DependencyInjection\RemoveEmptyControllerArgumentLocatorsPass
+- Symfony\Component\HttpKernel\DependencyInjection\ResettableServicePass
+- Symfony\Component\HttpKernel\KernelEvents
+- Symfony\Component\Messenger\DependencyInjection\MessengerPass
+- Symfony\Component\Mime\DependencyInjection\AddMimeTypeGuesserPass
+- Symfony\Component\PropertyInfo\DependencyInjection\PropertyInfoPass
+- Symfony\Component\Routing\DependencyInjection\AddExpressionLanguageProvidersPass
+- Symfony\Component\Routing\DependencyInjection\RoutingResolverPass
+- Symfony\Component\Scheduler\DependencyInjection\AddScheduleMessengerPass
+- Symfony\Component\Serializer\DependencyInjection\SerializerPass
+- Symfony\Component\Translation\DependencyInjection\DataCollectorTranslatorPass
+- Symfony\Component\Translation\DependencyInjection\LoggingTranslatorPass
+- Symfony\Component\Translation\DependencyInjection\TranslationDumperPass
+- Symfony\Component\Translation\DependencyInjection\TranslationExtractorPass
+- Symfony\Component\Translation\DependencyInjection\TranslatorPass
+- Symfony\Component\Translation\DependencyInjection\TranslatorPathsPass
+- Symfony\Component\Validator\DependencyInjection\AddAutoMappingConfigurationPass
+- Symfony\Component\Validator\DependencyInjection\AddConstraintValidatorsPass
+- Symfony\Component\Validator\DependencyInjection\AddValidatorInitializersPass
+- Symfony\Component\VarExporter\Internal\Hydrator
+- Symfony\Component\VarExporter\Internal\Registry
+- Symfony\Component\Workflow\DependencyInjection\WorkflowDebugPass
+- Symfony\Component\Workflow\DependencyInjection\WorkflowGuardListenerPass
+interfaces: []

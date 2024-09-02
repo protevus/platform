@@ -1,0 +1,52 @@
+name: ResolveFactoryClassPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ResolveFactoryClassPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ResolveFactoryClassPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+properties: []
+methods:
+- name: testProcess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInlinedDefinitionFactoryIsProcessed
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideFulfilledFactories
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIgnoresFulfilledFactories
+  visibility: public
+  parameters:
+  - name: factory
+  comment: '# * @dataProvider provideFulfilledFactories'
+- name: testNotAnyClassThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Compiler\ResolveFactoryClassPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Reference
+interfaces: []

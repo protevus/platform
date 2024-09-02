@@ -1,0 +1,23 @@
+name: GuessTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Guess
+  type: class
+  source: Symfony\Component\Form\Guess\Guess
+properties: []
+methods:
+- name: testGetBestGuessReturnsGuessWithHighestConfidence
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGuessExpectsValidConfidence
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\Guess\Guess
+interfaces: []

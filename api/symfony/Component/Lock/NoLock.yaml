@@ -1,0 +1,42 @@
+name: NoLock
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: acquireRead
+  visibility: public
+  parameters:
+  - name: blocking
+    default: 'false'
+  comment: null
+- name: acquire
+  visibility: public
+  parameters:
+  - name: blocking
+    default: 'false'
+  comment: null
+- name: refresh
+  visibility: public
+  parameters:
+  - name: ttl
+    default: 'null'
+  comment: null
+- name: isAcquired
+  visibility: public
+  parameters: []
+  comment: null
+- name: release
+  visibility: public
+  parameters: []
+  comment: null
+- name: isExpired
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRemainingLifetime
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces:
+- SharedLockInterface

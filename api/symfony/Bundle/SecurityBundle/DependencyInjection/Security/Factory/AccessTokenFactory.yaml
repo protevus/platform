@@ -1,0 +1,77 @@
+name: AccessTokenFactory
+class_comment: null
+dependencies:
+- name: TokenHandlerFactoryInterface
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\AccessToken\TokenHandlerFactoryInterface
+- name: NodeDefinition
+  type: class
+  source: Symfony\Component\Config\Definition\Builder\NodeDefinition
+- name: InvalidConfigurationException
+  type: class
+  source: Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: tokenHandlerFactories
+  comment: "# * AccessTokenFactory creates services for Access Token authentication.\n\
+    # *\n# * @author Florent Morselli <florent.morselli@spomky-labs.com>\n# *\n# *\
+    \ @internal\n# */\n# final class AccessTokenFactory extends AbstractFactory implements\
+    \ StatelessAuthenticatorFactoryInterface\n# {\n# private const PRIORITY = -40;\n\
+    # \n# /**\n# * @param array<TokenHandlerFactoryInterface> $tokenHandlerFactories"
+- name: addConfiguration
+  visibility: public
+  parameters:
+  - name: node
+  comment: null
+- name: getPriority
+  visibility: public
+  parameters: []
+  comment: null
+- name: getKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: createAuthenticator
+  visibility: public
+  parameters:
+  - name: container
+  - name: firewallName
+  - name: config
+  - name: userProviderId
+  comment: null
+- name: createExtractor
+  visibility: private
+  parameters:
+  - name: container
+  - name: firewallName
+  - name: extractors
+  comment: '# * @param array<string> $extractors'
+- name: createTokenHandler
+  visibility: private
+  parameters:
+  - name: container
+  - name: firewallName
+  - name: config
+  - name: userProviderId
+  comment: null
+traits:
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\AccessToken\TokenHandlerFactoryInterface
+- Symfony\Component\Config\Definition\Builder\NodeDefinition
+- Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Reference
+interfaces:
+- StatelessAuthenticatorFactoryInterface

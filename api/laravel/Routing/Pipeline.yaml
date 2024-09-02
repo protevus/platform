@@ -1,0 +1,75 @@
+name: Pipeline
+class_comment: '# * This extended pipeline catches any exceptions that occur during
+  each slice.
+
+  # *
+
+  # * The exceptions are converted to HTTP responses for proper middleware handling.'
+dependencies:
+- name: ExceptionHandler
+  type: class
+  source: Illuminate\Contracts\Debug\ExceptionHandler
+- name: Responsable
+  type: class
+  source: Illuminate\Contracts\Support\Responsable
+- name: Request
+  type: class
+  source: Illuminate\Http\Request
+- name: BasePipeline
+  type: class
+  source: Illuminate\Pipeline\Pipeline
+- name: Throwable
+  type: class
+  source: Throwable
+properties: []
+methods:
+- name: handleCarry
+  visibility: protected
+  parameters:
+  - name: carry
+  comment: '# * This extended pipeline catches any exceptions that occur during each
+    slice.
+
+    # *
+
+    # * The exceptions are converted to HTTP responses for proper middleware handling.
+
+    # */
+
+    # class Pipeline extends BasePipeline
+
+    # {
+
+    # /**
+
+    # * Handles the value returned from each pipe before passing it to the next.
+
+    # *
+
+    # * @param  mixed  $carry
+
+    # * @return mixed'
+- name: handleException
+  visibility: protected
+  parameters:
+  - name: passable
+  - name: e
+  comment: '# * Handle the given exception.
+
+    # *
+
+    # * @param  mixed  $passable
+
+    # * @param  \Throwable  $e
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Throwable'
+traits:
+- Illuminate\Contracts\Debug\ExceptionHandler
+- Illuminate\Contracts\Support\Responsable
+- Illuminate\Http\Request
+- Throwable
+interfaces: []

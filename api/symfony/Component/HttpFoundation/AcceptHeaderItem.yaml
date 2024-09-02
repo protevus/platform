@@ -1,0 +1,88 @@
+name: AcceptHeaderItem
+class_comment: "# * Represents an Accept-* header item.\n# *\n# * @author Jean-Fran\xE7\
+  ois Simon <contact@jfsimon.fr>"
+dependencies: []
+properties: []
+methods:
+- name: fromString
+  visibility: public
+  parameters:
+  - name: itemValue
+  comment: "# * Represents an Accept-* header item.\n# *\n# * @author Jean-Fran\xE7\
+    ois Simon <contact@jfsimon.fr>\n# */\n# class AcceptHeaderItem\n# {\n# private\
+    \ float $quality = 1.0;\n# private int $index = 0;\n# private array $attributes\
+    \ = [];\n# \n# public function __construct(\n# private string $value,\n# array\
+    \ $attributes = [],\n# ) {\n# foreach ($attributes as $name => $value) {\n# $this->setAttribute($name,\
+    \ $value);\n# }\n# }\n# \n# /**\n# * Builds an AcceptHeaderInstance instance from\
+    \ a string."
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Returns header value''s string representation.'
+- name: setValue
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Set the item value.
+
+    # *
+
+    # * @return $this'
+- name: getValue
+  visibility: public
+  parameters: []
+  comment: '# * Returns the item value.'
+- name: setQuality
+  visibility: public
+  parameters:
+  - name: quality
+  comment: '# * Set the item quality.
+
+    # *
+
+    # * @return $this'
+- name: getQuality
+  visibility: public
+  parameters: []
+  comment: '# * Returns the item quality.'
+- name: setIndex
+  visibility: public
+  parameters:
+  - name: index
+  comment: '# * Set the item index.
+
+    # *
+
+    # * @return $this'
+- name: getIndex
+  visibility: public
+  parameters: []
+  comment: '# * Returns the item index.'
+- name: hasAttribute
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Tests if an attribute exists.'
+- name: getAttribute
+  visibility: public
+  parameters:
+  - name: name
+  - name: default
+    default: 'null'
+  comment: '# * Returns an attribute by its name.'
+- name: getAttributes
+  visibility: public
+  parameters: []
+  comment: '# * Returns all attributes.'
+- name: setAttribute
+  visibility: public
+  parameters:
+  - name: name
+  - name: value
+  comment: '# * Set an attribute.
+
+    # *
+
+    # * @return $this'
+traits: []
+interfaces: []

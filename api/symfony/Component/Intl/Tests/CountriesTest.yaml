@@ -1,0 +1,248 @@
+name: CountriesTest
+class_comment: '# * @group intl-data'
+dependencies:
+- name: Countries
+  type: class
+  source: Symfony\Component\Intl\Countries
+- name: MissingResourceException
+  type: class
+  source: Symfony\Component\Intl\Exception\MissingResourceException
+properties: []
+methods:
+- name: testGetNames
+  visibility: public
+  parameters:
+  - name: displayLocale
+  comment: "# * @group intl-data\n# */\n# class CountriesTest extends ResourceBundleTestCase\n\
+    # {\n# // The below arrays document the state of the ICU data bundled with this\
+    \ package.\n# \n# private const COUNTRIES = [\n# 'AD',\n# 'AE',\n# 'AF',\n# 'AG',\n\
+    # 'AI',\n# 'AL',\n# 'AM',\n# 'AO',\n# 'AQ',\n# 'AR',\n# 'AS',\n# 'AT',\n# 'AU',\n\
+    # 'AW',\n# 'AX',\n# 'AZ',\n# 'BA',\n# 'BB',\n# 'BD',\n# 'BE',\n# 'BF',\n# 'BG',\n\
+    # 'BH',\n# 'BI',\n# 'BJ',\n# 'BL',\n# 'BM',\n# 'BN',\n# 'BO',\n# 'BQ',\n# 'BR',\n\
+    # 'BS',\n# 'BT',\n# 'BV',\n# 'BW',\n# 'BY',\n# 'BZ',\n# 'CA',\n# 'CC',\n# 'CD',\n\
+    # 'CF',\n# 'CG',\n# 'CH',\n# 'CI',\n# 'CK',\n# 'CL',\n# 'CM',\n# 'CN',\n# 'CO',\n\
+    # 'CR',\n# 'CU',\n# 'CV',\n# 'CW',\n# 'CX',\n# 'CY',\n# 'CZ',\n# 'DE',\n# 'DJ',\n\
+    # 'DK',\n# 'DM',\n# 'DO',\n# 'DZ',\n# 'EC',\n# 'EE',\n# 'EG',\n# 'EH',\n# 'ER',\n\
+    # 'ES',\n# 'ET',\n# 'FI',\n# 'FJ',\n# 'FK',\n# 'FM',\n# 'FO',\n# 'FR',\n# 'GA',\n\
+    # 'GB',\n# 'GD',\n# 'GE',\n# 'GF',\n# 'GG',\n# 'GH',\n# 'GI',\n# 'GL',\n# 'GM',\n\
+    # 'GN',\n# 'GP',\n# 'GQ',\n# 'GR',\n# 'GS',\n# 'GT',\n# 'GU',\n# 'GW',\n# 'GY',\n\
+    # 'HK',\n# 'HM',\n# 'HN',\n# 'HR',\n# 'HT',\n# 'HU',\n# 'ID',\n# 'IE',\n# 'IL',\n\
+    # 'IM',\n# 'IN',\n# 'IO',\n# 'IQ',\n# 'IR',\n# 'IS',\n# 'IT',\n# 'JE',\n# 'JM',\n\
+    # 'JO',\n# 'JP',\n# 'KE',\n# 'KG',\n# 'KH',\n# 'KI',\n# 'KM',\n# 'KN',\n# 'KP',\n\
+    # 'KR',\n# 'KW',\n# 'KY',\n# 'KZ',\n# 'LA',\n# 'LB',\n# 'LC',\n# 'LI',\n# 'LK',\n\
+    # 'LR',\n# 'LS',\n# 'LT',\n# 'LU',\n# 'LV',\n# 'LY',\n# 'MA',\n# 'MC',\n# 'MD',\n\
+    # 'ME',\n# 'MF',\n# 'MG',\n# 'MH',\n# 'MK',\n# 'ML',\n# 'MM',\n# 'MN',\n# 'MO',\n\
+    # 'MP',\n# 'MQ',\n# 'MR',\n# 'MS',\n# 'MT',\n# 'MU',\n# 'MV',\n# 'MW',\n# 'MX',\n\
+    # 'MY',\n# 'MZ',\n# 'NA',\n# 'NC',\n# 'NE',\n# 'NF',\n# 'NG',\n# 'NI',\n# 'NL',\n\
+    # 'NO',\n# 'NP',\n# 'NR',\n# 'NU',\n# 'NZ',\n# 'OM',\n# 'PA',\n# 'PE',\n# 'PF',\n\
+    # 'PG',\n# 'PH',\n# 'PK',\n# 'PL',\n# 'PM',\n# 'PN',\n# 'PR',\n# 'PS',\n# 'PT',\n\
+    # 'PW',\n# 'PY',\n# 'QA',\n# 'RE',\n# 'RO',\n# 'RS',\n# 'RU',\n# 'RW',\n# 'SA',\n\
+    # 'SB',\n# 'SC',\n# 'SD',\n# 'SE',\n# 'SG',\n# 'SH',\n# 'SI',\n# 'SJ',\n# 'SK',\n\
+    # 'SL',\n# 'SM',\n# 'SN',\n# 'SO',\n# 'SR',\n# 'SS',\n# 'ST',\n# 'SV',\n# 'SX',\n\
+    # 'SY',\n# 'SZ',\n# 'TC',\n# 'TD',\n# 'TF',\n# 'TG',\n# 'TH',\n# 'TJ',\n# 'TK',\n\
+    # 'TL',\n# 'TM',\n# 'TN',\n# 'TO',\n# 'TR',\n# 'TT',\n# 'TV',\n# 'TW',\n# 'TZ',\n\
+    # 'UA',\n# 'UG',\n# 'UM',\n# 'US',\n# 'UY',\n# 'UZ',\n# 'VA',\n# 'VC',\n# 'VE',\n\
+    # 'VG',\n# 'VI',\n# 'VN',\n# 'VU',\n# 'WF',\n# 'WS',\n# 'YE',\n# 'YT',\n# 'ZA',\n\
+    # 'ZM',\n# 'ZW',\n# ];\n# \n# private const ALPHA2_TO_ALPHA3 = [\n# 'AW' => 'ABW',\n\
+    # 'AF' => 'AFG',\n# 'AO' => 'AGO',\n# 'AI' => 'AIA',\n# 'AX' => 'ALA',\n# 'AL'\
+    \ => 'ALB',\n# 'AD' => 'AND',\n# 'AE' => 'ARE',\n# 'AR' => 'ARG',\n# 'AM' => 'ARM',\n\
+    # 'AS' => 'ASM',\n# 'AQ' => 'ATA',\n# 'TF' => 'ATF',\n# 'AG' => 'ATG',\n# 'AU'\
+    \ => 'AUS',\n# 'AT' => 'AUT',\n# 'AZ' => 'AZE',\n# 'BI' => 'BDI',\n# 'BE' => 'BEL',\n\
+    # 'BJ' => 'BEN',\n# 'BQ' => 'BES',\n# 'BF' => 'BFA',\n# 'BD' => 'BGD',\n# 'BG'\
+    \ => 'BGR',\n# 'BH' => 'BHR',\n# 'BS' => 'BHS',\n# 'BA' => 'BIH',\n# 'BL' => 'BLM',\n\
+    # 'BY' => 'BLR',\n# 'BZ' => 'BLZ',\n# 'BM' => 'BMU',\n# 'BO' => 'BOL',\n# 'BR'\
+    \ => 'BRA',\n# 'BB' => 'BRB',\n# 'BN' => 'BRN',\n# 'BT' => 'BTN',\n# 'BV' => 'BVT',\n\
+    # 'BW' => 'BWA',\n# 'CF' => 'CAF',\n# 'CA' => 'CAN',\n# 'CC' => 'CCK',\n# 'CH'\
+    \ => 'CHE',\n# 'CL' => 'CHL',\n# 'CN' => 'CHN',\n# 'CI' => 'CIV',\n# 'CM' => 'CMR',\n\
+    # 'CD' => 'COD',\n# 'CG' => 'COG',\n# 'CK' => 'COK',\n# 'CO' => 'COL',\n# 'KM'\
+    \ => 'COM',\n# 'CV' => 'CPV',\n# 'CR' => 'CRI',\n# 'CU' => 'CUB',\n# 'CW' => 'CUW',\n\
+    # 'CX' => 'CXR',\n# 'KY' => 'CYM',\n# 'CY' => 'CYP',\n# 'CZ' => 'CZE',\n# 'DE'\
+    \ => 'DEU',\n# 'DJ' => 'DJI',\n# 'DM' => 'DMA',\n# 'DK' => 'DNK',\n# 'DO' => 'DOM',\n\
+    # 'DZ' => 'DZA',\n# 'EC' => 'ECU',\n# 'EG' => 'EGY',\n# 'ER' => 'ERI',\n# 'EH'\
+    \ => 'ESH',\n# 'ES' => 'ESP',\n# 'EE' => 'EST',\n# 'ET' => 'ETH',\n# 'FI' => 'FIN',\n\
+    # 'FJ' => 'FJI',\n# 'FK' => 'FLK',\n# 'FR' => 'FRA',\n# 'FO' => 'FRO',\n# 'FM'\
+    \ => 'FSM',\n# 'GA' => 'GAB',\n# 'GB' => 'GBR',\n# 'GE' => 'GEO',\n# 'GG' => 'GGY',\n\
+    # 'GH' => 'GHA',\n# 'GI' => 'GIB',\n# 'GN' => 'GIN',\n# 'GP' => 'GLP',\n# 'GM'\
+    \ => 'GMB',\n# 'GW' => 'GNB',\n# 'GQ' => 'GNQ',\n# 'GR' => 'GRC',\n# 'GD' => 'GRD',\n\
+    # 'GL' => 'GRL',\n# 'GT' => 'GTM',\n# 'GF' => 'GUF',\n# 'GU' => 'GUM',\n# 'GY'\
+    \ => 'GUY',\n# 'HK' => 'HKG',\n# 'HM' => 'HMD',\n# 'HN' => 'HND',\n# 'HR' => 'HRV',\n\
+    # 'HT' => 'HTI',\n# 'HU' => 'HUN',\n# 'ID' => 'IDN',\n# 'IM' => 'IMN',\n# 'IN'\
+    \ => 'IND',\n# 'IO' => 'IOT',\n# 'IE' => 'IRL',\n# 'IR' => 'IRN',\n# 'IQ' => 'IRQ',\n\
+    # 'IS' => 'ISL',\n# 'IL' => 'ISR',\n# 'IT' => 'ITA',\n# 'JM' => 'JAM',\n# 'JE'\
+    \ => 'JEY',\n# 'JO' => 'JOR',\n# 'JP' => 'JPN',\n# 'KZ' => 'KAZ',\n# 'KE' => 'KEN',\n\
+    # 'KG' => 'KGZ',\n# 'KH' => 'KHM',\n# 'KI' => 'KIR',\n# 'KN' => 'KNA',\n# 'KR'\
+    \ => 'KOR',\n# 'KW' => 'KWT',\n# 'LA' => 'LAO',\n# 'LB' => 'LBN',\n# 'LR' => 'LBR',\n\
+    # 'LY' => 'LBY',\n# 'LC' => 'LCA',\n# 'LI' => 'LIE',\n# 'LK' => 'LKA',\n# 'LS'\
+    \ => 'LSO',\n# 'LT' => 'LTU',\n# 'LU' => 'LUX',\n# 'LV' => 'LVA',\n# 'MO' => 'MAC',\n\
+    # 'MF' => 'MAF',\n# 'MA' => 'MAR',\n# 'MC' => 'MCO',\n# 'MD' => 'MDA',\n# 'MG'\
+    \ => 'MDG',\n# 'MV' => 'MDV',\n# 'MX' => 'MEX',\n# 'MH' => 'MHL',\n# 'MK' => 'MKD',\n\
+    # 'ML' => 'MLI',\n# 'MT' => 'MLT',\n# 'MM' => 'MMR',\n# 'ME' => 'MNE',\n# 'MN'\
+    \ => 'MNG',\n# 'MP' => 'MNP',\n# 'MZ' => 'MOZ',\n# 'MR' => 'MRT',\n# 'MS' => 'MSR',\n\
+    # 'MQ' => 'MTQ',\n# 'MU' => 'MUS',\n# 'MW' => 'MWI',\n# 'MY' => 'MYS',\n# 'YT'\
+    \ => 'MYT',\n# 'NA' => 'NAM',\n# 'NC' => 'NCL',\n# 'NE' => 'NER',\n# 'NF' => 'NFK',\n\
+    # 'NG' => 'NGA',\n# 'NI' => 'NIC',\n# 'NU' => 'NIU',\n# 'NL' => 'NLD',\n# 'NO'\
+    \ => 'NOR',\n# 'NP' => 'NPL',\n# 'NR' => 'NRU',\n# 'NZ' => 'NZL',\n# 'OM' => 'OMN',\n\
+    # 'PK' => 'PAK',\n# 'PA' => 'PAN',\n# 'PN' => 'PCN',\n# 'PE' => 'PER',\n# 'PH'\
+    \ => 'PHL',\n# 'PW' => 'PLW',\n# 'PG' => 'PNG',\n# 'PL' => 'POL',\n# 'PR' => 'PRI',\n\
+    # 'KP' => 'PRK',\n# 'PT' => 'PRT',\n# 'PY' => 'PRY',\n# 'PS' => 'PSE',\n# 'PF'\
+    \ => 'PYF',\n# 'QA' => 'QAT',\n# 'RE' => 'REU',\n# 'RO' => 'ROU',\n# 'RU' => 'RUS',\n\
+    # 'RW' => 'RWA',\n# 'SA' => 'SAU',\n# 'SD' => 'SDN',\n# 'SN' => 'SEN',\n# 'SG'\
+    \ => 'SGP',\n# 'GS' => 'SGS',\n# 'SH' => 'SHN',\n# 'SJ' => 'SJM',\n# 'SB' => 'SLB',\n\
+    # 'SL' => 'SLE',\n# 'SV' => 'SLV',\n# 'SM' => 'SMR',\n# 'SO' => 'SOM',\n# 'PM'\
+    \ => 'SPM',\n# 'RS' => 'SRB',\n# 'SS' => 'SSD',\n# 'ST' => 'STP',\n# 'SR' => 'SUR',\n\
+    # 'SK' => 'SVK',\n# 'SI' => 'SVN',\n# 'SE' => 'SWE',\n# 'SZ' => 'SWZ',\n# 'SX'\
+    \ => 'SXM',\n# 'SC' => 'SYC',\n# 'SY' => 'SYR',\n# 'TC' => 'TCA',\n# 'TD' => 'TCD',\n\
+    # 'TG' => 'TGO',\n# 'TH' => 'THA',\n# 'TJ' => 'TJK',\n# 'TK' => 'TKL',\n# 'TM'\
+    \ => 'TKM',\n# 'TL' => 'TLS',\n# 'TO' => 'TON',\n# 'TT' => 'TTO',\n# 'TN' => 'TUN',\n\
+    # 'TR' => 'TUR',\n# 'TV' => 'TUV',\n# 'TW' => 'TWN',\n# 'TZ' => 'TZA',\n# 'UG'\
+    \ => 'UGA',\n# 'UA' => 'UKR',\n# 'UM' => 'UMI',\n# 'UY' => 'URY',\n# 'US' => 'USA',\n\
+    # 'UZ' => 'UZB',\n# 'VA' => 'VAT',\n# 'VC' => 'VCT',\n# 'VE' => 'VEN',\n# 'VG'\
+    \ => 'VGB',\n# 'VI' => 'VIR',\n# 'VN' => 'VNM',\n# 'VU' => 'VUT',\n# 'WF' => 'WLF',\n\
+    # 'WS' => 'WSM',\n# 'YE' => 'YEM',\n# 'ZA' => 'ZAF',\n# 'ZM' => 'ZMB',\n# 'ZW'\
+    \ => 'ZWE',\n# ];\n# \n# private const ALPHA2_TO_NUMERIC = [\n# 'AA' => '958',\n\
+    # 'AD' => '020',\n# 'AE' => '784',\n# 'AF' => '004',\n# 'AG' => '028',\n# 'AI'\
+    \ => '660',\n# 'AL' => '008',\n# 'AM' => '051',\n# 'AO' => '024',\n# 'AQ' => '010',\n\
+    # 'AR' => '032',\n# 'AS' => '016',\n# 'AT' => '040',\n# 'AU' => '036',\n# 'AW'\
+    \ => '533',\n# 'AX' => '248',\n# 'AZ' => '031',\n# 'BA' => '070',\n# 'BB' => '052',\n\
+    # 'BD' => '050',\n# 'BE' => '056',\n# 'BF' => '854',\n# 'BG' => '100',\n# 'BH'\
+    \ => '048',\n# 'BI' => '108',\n# 'BJ' => '204',\n# 'BL' => '652',\n# 'BM' => '060',\n\
+    # 'BN' => '096',\n# 'BO' => '068',\n# 'BQ' => '535',\n# 'BR' => '076',\n# 'BS'\
+    \ => '044',\n# 'BT' => '064',\n# 'BV' => '074',\n# 'BW' => '072',\n# 'BY' => '112',\n\
+    # 'BZ' => '084',\n# 'CA' => '124',\n# 'CC' => '166',\n# 'CD' => '180',\n# 'CF'\
+    \ => '140',\n# 'CG' => '178',\n# 'CH' => '756',\n# 'CI' => '384',\n# 'CK' => '184',\n\
+    # 'CL' => '152',\n# 'CM' => '120',\n# 'CN' => '156',\n# 'CO' => '170',\n# 'CR'\
+    \ => '188',\n# 'CU' => '192',\n# 'CV' => '132',\n# 'CW' => '531',\n# 'CX' => '162',\n\
+    # 'CY' => '196',\n# 'CZ' => '203',\n# 'DE' => '276',\n# 'DJ' => '262',\n# 'DK'\
+    \ => '208',\n# 'DM' => '212',\n# 'DO' => '214',\n# 'DZ' => '012',\n# 'EC' => '218',\n\
+    # 'EE' => '233',\n# 'EG' => '818',\n# 'EH' => '732',\n# 'ER' => '232',\n# 'ES'\
+    \ => '724',\n# 'ET' => '231',\n# 'FI' => '246',\n# 'FJ' => '242',\n# 'FK' => '238',\n\
+    # 'FM' => '583',\n# 'FO' => '234',\n# 'FR' => '250',\n# 'GA' => '266',\n# 'GB'\
+    \ => '826',\n# 'GD' => '308',\n# 'GE' => '268',\n# 'GF' => '254',\n# 'GG' => '831',\n\
+    # 'GH' => '288',\n# 'GI' => '292',\n# 'GL' => '304',\n# 'GM' => '270',\n# 'GN'\
+    \ => '324',\n# 'GP' => '312',\n# 'GQ' => '226',\n# 'GR' => '300',\n# 'GS' => '239',\n\
+    # 'GT' => '320',\n# 'GU' => '316',\n# 'GW' => '624',\n# 'GY' => '328',\n# 'HK'\
+    \ => '344',\n# 'HM' => '334',\n# 'HN' => '340',\n# 'HR' => '191',\n# 'HT' => '332',\n\
+    # 'HU' => '348',\n# 'ID' => '360',\n# 'IE' => '372',\n# 'IL' => '376',\n# 'IM'\
+    \ => '833',\n# 'IN' => '356',\n# 'IO' => '086',\n# 'IQ' => '368',\n# 'IR' => '364',\n\
+    # 'IS' => '352',\n# 'IT' => '380',\n# 'JE' => '832',\n# 'JM' => '388',\n# 'JO'\
+    \ => '400',\n# 'JP' => '392',\n# 'KE' => '404',\n# 'KG' => '417',\n# 'KH' => '116',\n\
+    # 'KI' => '296',\n# 'KM' => '174',\n# 'KN' => '659',\n# 'KP' => '408',\n# 'KR'\
+    \ => '410',\n# 'KW' => '414',\n# 'KY' => '136',\n# 'KZ' => '398',\n# 'LA' => '418',\n\
+    # 'LB' => '422',\n# 'LC' => '662',\n# 'LI' => '438',\n# 'LK' => '144',\n# 'LR'\
+    \ => '430',\n# 'LS' => '426',\n# 'LT' => '440',\n# 'LU' => '442',\n# 'LV' => '428',\n\
+    # 'LY' => '434',\n# 'MA' => '504',\n# 'MC' => '492',\n# 'MD' => '498',\n# 'ME'\
+    \ => '499',\n# 'MF' => '663',\n# 'MG' => '450',\n# 'MH' => '584',\n# 'MK' => '807',\n\
+    # 'ML' => '466',\n# 'MM' => '104',\n# 'MN' => '496',\n# 'MO' => '446',\n# 'MP'\
+    \ => '580',\n# 'MQ' => '474',\n# 'MR' => '478',\n# 'MS' => '500',\n# 'MT' => '470',\n\
+    # 'MU' => '480',\n# 'MV' => '462',\n# 'MW' => '454',\n# 'MX' => '484',\n# 'MY'\
+    \ => '458',\n# 'MZ' => '508',\n# 'NA' => '516',\n# 'NC' => '540',\n# 'NE' => '562',\n\
+    # 'NF' => '574',\n# 'NG' => '566',\n# 'NI' => '558',\n# 'NL' => '528',\n# 'NO'\
+    \ => '578',\n# 'NP' => '524',\n# 'NR' => '520',\n# 'NU' => '570',\n# 'NZ' => '554',\n\
+    # 'OM' => '512',\n# 'PA' => '591',\n# 'PE' => '604',\n# 'PF' => '258',\n# 'PG'\
+    \ => '598',\n# 'PH' => '608',\n# 'PK' => '586',\n# 'PL' => '616',\n# 'PM' => '666',\n\
+    # 'PN' => '612',\n# 'PR' => '630',\n# 'PS' => '275',\n# 'PT' => '620',\n# 'PW'\
+    \ => '585',\n# 'PY' => '600',\n# 'QA' => '634',\n# 'QM' => '959',\n# 'QN' => '960',\n\
+    # 'QP' => '962',\n# 'QQ' => '963',\n# 'QR' => '964',\n# 'QS' => '965',\n# 'QT'\
+    \ => '966',\n# 'QV' => '968',\n# 'QW' => '969',\n# 'QX' => '970',\n# 'QY' => '971',\n\
+    # 'QZ' => '972',\n# 'RE' => '638',\n# 'RO' => '642',\n# 'RS' => '688',\n# 'RU'\
+    \ => '643',\n# 'RW' => '646',\n# 'SA' => '682',\n# 'SB' => '090',\n# 'SC' => '690',\n\
+    # 'SD' => '729',\n# 'SE' => '752',\n# 'SG' => '702',\n# 'SH' => '654',\n# 'SI'\
+    \ => '705',\n# 'SJ' => '744',\n# 'SK' => '703',\n# 'SL' => '694',\n# 'SM' => '674',\n\
+    # 'SN' => '686',\n# 'SO' => '706',\n# 'SR' => '740',\n# 'SS' => '728',\n# 'ST'\
+    \ => '678',\n# 'SV' => '222',\n# 'SX' => '534',\n# 'SY' => '760',\n# 'SZ' => '748',\n\
+    # 'TC' => '796',\n# 'TD' => '148',\n# 'TF' => '260',\n# 'TG' => '768',\n# 'TH'\
+    \ => '764',\n# 'TJ' => '762',\n# 'TK' => '772',\n# 'TL' => '626',\n# 'TM' => '795',\n\
+    # 'TN' => '788',\n# 'TO' => '776',\n# 'TR' => '792',\n# 'TT' => '780',\n# 'TV'\
+    \ => '798',\n# 'TW' => '158',\n# 'TZ' => '834',\n# 'UA' => '804',\n# 'UG' => '800',\n\
+    # 'UM' => '581',\n# 'US' => '840',\n# 'UY' => '858',\n# 'UZ' => '860',\n# 'VA'\
+    \ => '336',\n# 'VC' => '670',\n# 'VE' => '862',\n# 'VG' => '092',\n# 'VI' => '850',\n\
+    # 'VN' => '704',\n# 'VU' => '548',\n# 'WF' => '876',\n# 'WS' => '882',\n# 'XC'\
+    \ => '975',\n# 'XD' => '976',\n# 'XE' => '977',\n# 'XF' => '978',\n# 'XG' => '979',\n\
+    # 'XH' => '980',\n# 'XI' => '981',\n# 'XJ' => '982',\n# 'XL' => '984',\n# 'XM'\
+    \ => '985',\n# 'XN' => '986',\n# 'XO' => '987',\n# 'XP' => '988',\n# 'XQ' => '989',\n\
+    # 'XR' => '990',\n# 'XS' => '991',\n# 'XT' => '992',\n# 'XU' => '993',\n# 'XV'\
+    \ => '994',\n# 'XW' => '995',\n# 'XX' => '996',\n# 'XY' => '997',\n# 'XZ' => '998',\n\
+    # 'YE' => '887',\n# 'YT' => '175',\n# 'ZA' => '710',\n# 'ZM' => '894',\n# 'ZW'\
+    \ => '716',\n# ];\n# \n# public function testGetCountryCodes()\n# {\n# $this->assertSame(self::COUNTRIES,\
+    \ Countries::getCountryCodes());\n# }\n# \n# /**\n# * @dataProvider provideLocales"
+- name: testGetNamesDefaultLocale
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetNamesSupportsAliases
+  visibility: public
+  parameters:
+  - name: alias
+  - name: ofLocale
+  comment: '# * @dataProvider provideLocaleAliases'
+- name: testGetName
+  visibility: public
+  parameters:
+  - name: displayLocale
+  comment: '# * @dataProvider provideLocales'
+- name: testLocaleAliasesAreLoaded
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension intl'
+- name: testGetNameWithInvalidCountryCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExists
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetAlpha3Codes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetAlpha3Code
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetAlpha2Code
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAlpha3CodeExists
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetAlpha3Name
+  visibility: public
+  parameters:
+  - name: displayLocale
+  comment: '# * @dataProvider provideLocales'
+- name: testGetAlpha3NameWithInvalidCountryCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetAlpha3Names
+  visibility: public
+  parameters:
+  - name: displayLocale
+  comment: '# * @dataProvider provideLocales'
+- name: testGetNumericCodes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetNumericCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNumericCodeExists
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetAlpha2FromNumeric
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNumericCodesDoNotContainDenyListItems
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Intl\Countries
+- Symfony\Component\Intl\Exception\MissingResourceException
+interfaces: []

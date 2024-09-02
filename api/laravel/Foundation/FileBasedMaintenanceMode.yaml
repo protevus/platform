@@ -1,0 +1,56 @@
+name: FileBasedMaintenanceMode
+class_comment: null
+dependencies:
+- name: MaintenanceModeContract
+  type: class
+  source: Illuminate\Contracts\Foundation\MaintenanceMode
+properties: []
+methods:
+- name: activate
+  visibility: public
+  parameters:
+  - name: payload
+  comment: '# * Take the application down for maintenance.
+
+    # *
+
+    # * @param  array  $payload
+
+    # * @return void'
+- name: deactivate
+  visibility: public
+  parameters: []
+  comment: '# * Take the application out of maintenance.
+
+    # *
+
+    # * @return void'
+- name: active
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the application is currently down for maintenance.
+
+    # *
+
+    # * @return bool'
+- name: data
+  visibility: public
+  parameters: []
+  comment: '# * Get the data array which was provided when the application was placed
+    into maintenance.
+
+    # *
+
+    # * @return array'
+- name: path
+  visibility: protected
+  parameters: []
+  comment: '# * Get the path where the file is stored that signals that the application
+    is down for maintenance.
+
+    # *
+
+    # * @return string'
+traits: []
+interfaces:
+- MaintenanceModeContract

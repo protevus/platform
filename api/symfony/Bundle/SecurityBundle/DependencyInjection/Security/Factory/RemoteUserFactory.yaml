@@ -1,0 +1,55 @@
+name: RemoteUserFactory
+class_comment: '# * RemoteUserFactory creates services for REMOTE_USER based authentication.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # * @author Maxime Douailin <maxime.douailin@gmail.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: NodeDefinition
+  type: class
+  source: Symfony\Component\Config\Definition\Builder\NodeDefinition
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+properties: []
+methods:
+- name: createAuthenticator
+  visibility: public
+  parameters:
+  - name: container
+  - name: firewallName
+  - name: config
+  - name: userProviderId
+  comment: null
+- name: getPriority
+  visibility: public
+  parameters: []
+  comment: null
+- name: getKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: addConfiguration
+  visibility: public
+  parameters:
+  - name: node
+  comment: null
+traits:
+- Symfony\Component\Config\Definition\Builder\NodeDefinition
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Reference
+interfaces:
+- AuthenticatorFactoryInterface

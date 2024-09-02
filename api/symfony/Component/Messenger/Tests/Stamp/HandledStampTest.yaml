@@ -1,0 +1,31 @@
+name: HandledStampTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: HandlerDescriptor
+  type: class
+  source: Symfony\Component\Messenger\Handler\HandlerDescriptor
+- name: HandledStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\HandledStamp
+- name: DummyCommandHandler
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\DummyCommandHandler
+properties: []
+methods:
+- name: testConstruct
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDescriptor
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Handler\HandlerDescriptor
+- Symfony\Component\Messenger\Stamp\HandledStamp
+- Symfony\Component\Messenger\Tests\Fixtures\DummyCommandHandler
+interfaces: []

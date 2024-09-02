@@ -1,0 +1,27 @@
+name: DumperInterface
+class_comment: null
+dependencies:
+- name: Definition
+  type: class
+  source: Symfony\Component\Workflow\Definition
+- name: Marking
+  type: class
+  source: Symfony\Component\Workflow\Marking
+properties: []
+methods:
+- name: dump
+  visibility: public
+  parameters:
+  - name: definition
+  - name: marking
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: "# * DumperInterface is the interface implemented by workflow dumper classes.\n\
+    # *\n# * @author Fabien Potencier <fabien@symfony.com>\n# * @author Gr\xE9goire\
+    \ Pineau <lyrixx@lyrixx.info>\n# */\n# interface DumperInterface\n# {\n# /**\n\
+    # * Dumps a workflow definition."
+traits:
+- Symfony\Component\Workflow\Definition
+- Symfony\Component\Workflow\Marking
+interfaces: []

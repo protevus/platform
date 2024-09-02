@@ -1,0 +1,42 @@
+name: TestDenormalizer
+class_comment: '# * Provides a test Normalizer which only implements the DenormalizerInterface.
+
+  # *
+
+  # * @author Lin Clark <lin@lin-clark.com>'
+dependencies:
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+properties: []
+methods:
+- name: denormalize
+  visibility: public
+  parameters:
+  - name: data
+  - name: type
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: getSupportedTypes
+  visibility: public
+  parameters:
+  - name: format
+  comment: null
+- name: supportsDenormalization
+  visibility: public
+  parameters:
+  - name: data
+  - name: type
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+interfaces:
+- the
+- DenormalizerInterface

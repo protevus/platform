@@ -1,0 +1,82 @@
+name: CachedMappedAssetFactoryTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CachedMappedAssetFactory
+  type: class
+  source: Symfony\Component\AssetMapper\Factory\CachedMappedAssetFactory
+- name: MappedAssetFactoryInterface
+  type: class
+  source: Symfony\Component\AssetMapper\Factory\MappedAssetFactoryInterface
+- name: JavaScriptImport
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\JavaScriptImport
+- name: MappedAsset
+  type: class
+  source: Symfony\Component\AssetMapper\MappedAsset
+- name: ConfigCache
+  type: class
+  source: Symfony\Component\Config\ConfigCache
+- name: DirectoryResource
+  type: class
+  source: Symfony\Component\Config\Resource\DirectoryResource
+- name: FileExistenceResource
+  type: class
+  source: Symfony\Component\Config\Resource\FileExistenceResource
+- name: FileResource
+  type: class
+  source: Symfony\Component\Config\Resource\FileResource
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testCreateMappedAssetCallsInsideWhenNoCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssetIsNotBuiltWhenCached
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssetConfigCacheResourceContainsDependencies
+  visibility: public
+  parameters: []
+  comment: null
+- name: loadConfigCacheMetadataFor
+  visibility: private
+  parameters:
+  - name: mappedAsset
+  comment: null
+- name: saveConfigCache
+  visibility: private
+  parameters:
+  - name: mappedAsset
+  comment: null
+- name: getConfigCachePath
+  visibility: private
+  parameters:
+  - name: mappedAsset
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\AssetMapper\Factory\CachedMappedAssetFactory
+- Symfony\Component\AssetMapper\Factory\MappedAssetFactoryInterface
+- Symfony\Component\AssetMapper\ImportMap\JavaScriptImport
+- Symfony\Component\AssetMapper\MappedAsset
+- Symfony\Component\Config\ConfigCache
+- Symfony\Component\Config\Resource\DirectoryResource
+- Symfony\Component\Config\Resource\FileExistenceResource
+- Symfony\Component\Config\Resource\FileResource
+- Symfony\Component\Filesystem\Filesystem
+interfaces: []

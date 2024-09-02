@@ -1,0 +1,124 @@
+name: HtmlSanitizerConfigTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: HtmlSanitizerConfig
+  type: class
+  source: Symfony\Component\HtmlSanitizer\HtmlSanitizerConfig
+- name: AttributeSanitizerInterface
+  type: class
+  source: Symfony\Component\HtmlSanitizer\Visitor\AttributeSanitizer\AttributeSanitizerInterface
+properties: []
+methods:
+- name: testCreateEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSimpleOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllowElement
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllowElementTwiceOverridesIt
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllowBlockedElementUnblocksIt
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllowElementNoAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllowElementStandardAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllowElementStringAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBlockElement
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBlockElementDisallowsIt
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDropAllowedElement
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDropBlockedElement
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllowAttributeNoElement
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllowAttributeAllowedElement
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllowAttributeAllElements
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllowAttributeElementsArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllowAttributeElementsString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllowAttributeOverridesIt
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDropAllowedAttributeAllowedElementsArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDropAllowedAttributeAllowedElementString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDropAllowedAttributeAllElements
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithWithoutAttributeSanitizer
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSupportedElements
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSupportedAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: sanitizeAttribute
+  visibility: public
+  parameters:
+  - name: element
+  - name: attribute
+  - name: value
+  - name: config
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HtmlSanitizer\HtmlSanitizerConfig
+- Symfony\Component\HtmlSanitizer\Visitor\AttributeSanitizer\AttributeSanitizerInterface
+interfaces:
+- AttributeSanitizerInterface

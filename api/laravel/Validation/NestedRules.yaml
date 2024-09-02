@@ -1,0 +1,47 @@
+name: NestedRules
+class_comment: null
+dependencies:
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+properties:
+- name: callback
+  visibility: protected
+  comment: '# * The callback to execute.
+
+    # *
+
+    # * @var callable'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: callback
+  comment: "# * The callback to execute.\n# *\n# * @var callable\n# */\n# protected\
+    \ $callback;\n# \n# /**\n# * Create a new nested rule instance.\n# *\n# * @param\
+    \  callable  $callback\n# * @return void"
+- name: compile
+  visibility: public
+  parameters:
+  - name: attribute
+  - name: value
+  - name: data
+    default: 'null'
+  - name: context
+    default: 'null'
+  comment: '# * Compile the callback into an array of rules.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  mixed  $value
+
+    # * @param  mixed  $data
+
+    # * @param  mixed  $context
+
+    # * @return \stdClass'
+traits:
+- Illuminate\Support\Arr
+interfaces: []

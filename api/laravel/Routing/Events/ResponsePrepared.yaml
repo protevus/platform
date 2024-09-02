@@ -1,0 +1,32 @@
+name: ResponsePrepared
+class_comment: null
+dependencies: []
+properties:
+- name: request
+  visibility: public
+  comment: '# * The request instance.
+
+    # *
+
+    # * @var \Symfony\Component\HttpFoundation\Request'
+- name: response
+  visibility: public
+  comment: '# * The response instance.
+
+    # *
+
+    # * @var \Symfony\Component\HttpFoundation\Response'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: request
+  - name: response
+  comment: "# * The request instance.\n# *\n# * @var \\Symfony\\Component\\HttpFoundation\\\
+    Request\n# */\n# public $request;\n# \n# /**\n# * The response instance.\n# *\n\
+    # * @var \\Symfony\\Component\\HttpFoundation\\Response\n# */\n# public $response;\n\
+    # \n# /**\n# * Create a new event instance.\n# *\n# * @param  \\Symfony\\Component\\\
+    HttpFoundation\\Request  $request\n# * @param  \\Symfony\\Component\\HttpFoundation\\\
+    Response  $response\n# * @return void"
+traits: []
+interfaces: []

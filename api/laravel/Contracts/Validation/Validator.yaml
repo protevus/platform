@@ -1,0 +1,87 @@
+name: Validator
+class_comment: null
+dependencies:
+- name: MessageProvider
+  type: class
+  source: Illuminate\Contracts\Support\MessageProvider
+properties: []
+methods:
+- name: validate
+  visibility: public
+  parameters: []
+  comment: '# * Run the validator''s rules against its data.
+
+    # *
+
+    # * @return array
+
+    # *
+
+    # * @throws \Illuminate\Validation\ValidationException'
+- name: validated
+  visibility: public
+  parameters: []
+  comment: '# * Get the attributes and values that were validated.
+
+    # *
+
+    # * @return array
+
+    # *
+
+    # * @throws \Illuminate\Validation\ValidationException'
+- name: fails
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the data fails the validation rules.
+
+    # *
+
+    # * @return bool'
+- name: failed
+  visibility: public
+  parameters: []
+  comment: '# * Get the failed validation rules.
+
+    # *
+
+    # * @return array'
+- name: sometimes
+  visibility: public
+  parameters:
+  - name: attribute
+  - name: rules
+  - name: callback
+  comment: '# * Add conditions to a given field based on a Closure.
+
+    # *
+
+    # * @param  string|array  $attribute
+
+    # * @param  string|array  $rules
+
+    # * @param  callable  $callback
+
+    # * @return $this'
+- name: after
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Add an after validation callback.
+
+    # *
+
+    # * @param  callable|string  $callback
+
+    # * @return $this'
+- name: errors
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the validation error messages.
+
+    # *
+
+    # * @return \Illuminate\Support\MessageBag'
+traits:
+- Illuminate\Contracts\Support\MessageProvider
+interfaces: []

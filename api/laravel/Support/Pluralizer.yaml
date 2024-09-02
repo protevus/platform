@@ -1,0 +1,105 @@
+name: Pluralizer
+class_comment: null
+dependencies:
+- name: InflectorFactory
+  type: class
+  source: Doctrine\Inflector\InflectorFactory
+properties:
+- name: inflector
+  visibility: protected
+  comment: '# * The cached inflector instance.
+
+    # *
+
+    # * @var static'
+- name: language
+  visibility: protected
+  comment: '# * The language that should be used by the inflector.
+
+    # *
+
+    # * @var string'
+- name: uncountable
+  visibility: public
+  comment: '# * Uncountable non-nouns word forms.
+
+    # *
+
+    # * Contains words supported by Doctrine/Inflector/Rules/English/Uninflected.php
+
+    # *
+
+    # * @var string[]'
+methods:
+- name: plural
+  visibility: public
+  parameters:
+  - name: value
+  - name: count
+    default: '2'
+  comment: "# * The cached inflector instance.\n# *\n# * @var static\n# */\n# protected\
+    \ static $inflector;\n# \n# /**\n# * The language that should be used by the inflector.\n\
+    # *\n# * @var string\n# */\n# protected static $language = 'english';\n# \n# /**\n\
+    # * Uncountable non-nouns word forms.\n# *\n# * Contains words supported by Doctrine/Inflector/Rules/English/Uninflected.php\n\
+    # *\n# * @var string[]\n# */\n# public static $uncountable = [\n# 'recommended',\n\
+    # 'related',\n# ];\n# \n# /**\n# * Get the plural form of an English word.\n#\
+    \ *\n# * @param  string  $value\n# * @param  int|array|\\Countable  $count\n#\
+    \ * @return string"
+- name: singular
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Get the singular form of an English word.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: uncountable
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Determine if the given value is uncountable.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return bool'
+- name: matchCase
+  visibility: protected
+  parameters:
+  - name: value
+  - name: comparison
+  comment: '# * Attempt to match the case on two strings.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @param  string  $comparison
+
+    # * @return string'
+- name: inflector
+  visibility: public
+  parameters: []
+  comment: '# * Get the inflector instance.
+
+    # *
+
+    # * @return \Doctrine\Inflector\Inflector'
+- name: useLanguage
+  visibility: public
+  parameters:
+  - name: language
+  comment: '# * Specify the language that should be used by the inflector.
+
+    # *
+
+    # * @param  string  $language
+
+    # * @return void'
+traits:
+- Doctrine\Inflector\InflectorFactory
+interfaces: []

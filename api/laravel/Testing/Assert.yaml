@@ -1,0 +1,55 @@
+name: Assert
+class_comment: null
+dependencies:
+- name: ArrayAccess
+  type: class
+  source: ArrayAccess
+- name: ArraySubset
+  type: class
+  source: Illuminate\Testing\Constraints\ArraySubset
+- name: InvalidArgumentException
+  type: class
+  source: Illuminate\Testing\Exceptions\InvalidArgumentException
+- name: PHPUnit
+  type: class
+  source: PHPUnit\Framework\Assert
+properties: []
+methods:
+- name: assertArraySubset
+  visibility: public
+  parameters:
+  - name: subset
+  - name: array
+  - name: checkForIdentity
+    default: 'false'
+  - name: msg
+    default: ''''''
+  comment: '# * @internal This class is not meant to be used or overwritten outside
+    the framework itself.
+
+    # */
+
+    # abstract class Assert extends PHPUnit
+
+    # {
+
+    # /**
+
+    # * Asserts that an array has a specified subset.
+
+    # *
+
+    # * @param  \ArrayAccess|array  $subset
+
+    # * @param  \ArrayAccess|array  $array
+
+    # * @param  bool  $checkForIdentity
+
+    # * @param  string  $msg
+
+    # * @return void'
+traits:
+- ArrayAccess
+- Illuminate\Testing\Constraints\ArraySubset
+- Illuminate\Testing\Exceptions\InvalidArgumentException
+interfaces: []

@@ -1,0 +1,113 @@
+name: InputBagTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: BadRequestException
+  type: class
+  source: Symfony\Component\HttpFoundation\Exception\BadRequestException
+- name: InputBag
+  type: class
+  source: Symfony\Component\HttpFoundation\InputBag
+- name: FooEnum
+  type: class
+  source: Symfony\Component\HttpFoundation\Tests\Fixtures\FooEnum
+properties: []
+methods:
+- name: testGet
+  visibility: public
+  parameters: []
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetIntError
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetBooleanError
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetString
+  visibility: public
+  parameters: []
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetStringExceptionWithArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetDoesNotUseDeepByDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFilterArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFilterCallback
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFilterClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetWithNonScalarOrArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGettingANonStringValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetWithNonStringDefaultValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFilterArrayWithoutArrayFlag
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAdd
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReplace
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetEnum
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetEnumThrowsExceptionWithInvalidValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetAlnumExceptionWithArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetAlphaExceptionWithArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetDigitsExceptionWithArray
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Exception\BadRequestException
+- Symfony\Component\HttpFoundation\InputBag
+- Symfony\Component\HttpFoundation\Tests\Fixtures\FooEnum
+interfaces:
+- \Stringable
+- \Stringable

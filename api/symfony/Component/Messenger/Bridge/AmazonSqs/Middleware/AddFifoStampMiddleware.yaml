@@ -1,0 +1,38 @@
+name: AddFifoStampMiddleware
+class_comment: null
+dependencies:
+- name: MessageDeduplicationAwareInterface
+  type: class
+  source: Symfony\Component\Messenger\Bridge\AmazonSqs\MessageDeduplicationAwareInterface
+- name: MessageGroupAwareInterface
+  type: class
+  source: Symfony\Component\Messenger\Bridge\AmazonSqs\MessageGroupAwareInterface
+- name: AmazonSqsFifoStamp
+  type: class
+  source: Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\AmazonSqsFifoStamp
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: MiddlewareInterface
+  type: class
+  source: Symfony\Component\Messenger\Middleware\MiddlewareInterface
+- name: StackInterface
+  type: class
+  source: Symfony\Component\Messenger\Middleware\StackInterface
+properties: []
+methods:
+- name: handle
+  visibility: public
+  parameters:
+  - name: envelope
+  - name: stack
+  comment: null
+traits:
+- Symfony\Component\Messenger\Bridge\AmazonSqs\MessageDeduplicationAwareInterface
+- Symfony\Component\Messenger\Bridge\AmazonSqs\MessageGroupAwareInterface
+- Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\AmazonSqsFifoStamp
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Middleware\MiddlewareInterface
+- Symfony\Component\Messenger\Middleware\StackInterface
+interfaces:
+- MiddlewareInterface

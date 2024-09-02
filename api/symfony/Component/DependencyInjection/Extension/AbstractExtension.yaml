@@ -1,0 +1,67 @@
+name: AbstractExtension
+class_comment: null
+dependencies:
+- name: Configuration
+  type: class
+  source: Symfony\Component\Config\Definition\Configuration
+- name: ConfigurationInterface
+  type: class
+  source: Symfony\Component\Config\Definition\ConfigurationInterface
+- name: DefinitionConfigurator
+  type: class
+  source: Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerConfigurator
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator
+- name: ExtensionTrait
+  type: class
+  source: ExtensionTrait
+properties: []
+methods:
+- name: configure
+  visibility: public
+  parameters:
+  - name: definition
+  comment: null
+- name: prependExtension
+  visibility: public
+  parameters:
+  - name: container
+  - name: builder
+  comment: null
+- name: loadExtension
+  visibility: public
+  parameters:
+  - name: config
+  - name: container
+  - name: builder
+  comment: null
+- name: getConfiguration
+  visibility: public
+  parameters:
+  - name: config
+  - name: container
+  comment: null
+- name: prepend
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\Config\Definition\Configuration
+- Symfony\Component\Config\Definition\ConfigurationInterface
+- Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator
+- ExtensionTrait
+interfaces:
+- ConfigurableExtensionInterface

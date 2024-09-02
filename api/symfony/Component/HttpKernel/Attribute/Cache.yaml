@@ -1,0 +1,12 @@
+name: Cache
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: strtotime(
+  comment: null
+traits: []
+interfaces: []

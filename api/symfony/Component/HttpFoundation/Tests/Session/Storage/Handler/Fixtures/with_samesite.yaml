@@ -1,0 +1,11 @@
+name: with_samesite
+class_comment: null
+dependencies:
+- name: NativeSessionStorage
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage
+properties: []
+methods: []
+traits:
+- Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage
+interfaces: []

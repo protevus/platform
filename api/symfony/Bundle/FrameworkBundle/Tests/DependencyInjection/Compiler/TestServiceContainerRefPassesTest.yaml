@@ -1,0 +1,47 @@
+name: TestServiceContainerRefPassesTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: TestServiceContainerRealRefPass
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\TestServiceContainerRealRefPass
+- name: TestServiceContainerWeakRefPass
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\TestServiceContainerWeakRefPass
+- name: ServiceClosureArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- name: PassConfig
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\PassConfig
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: ServiceLocator
+  type: class
+  source: Symfony\Component\DependencyInjection\ServiceLocator
+properties: []
+methods:
+- name: testProcess
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Psr\Container\ContainerInterface
+- Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\TestServiceContainerRealRefPass
+- Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\TestServiceContainerWeakRefPass
+- Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- Symfony\Component\DependencyInjection\Compiler\PassConfig
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\DependencyInjection\ServiceLocator
+interfaces: []

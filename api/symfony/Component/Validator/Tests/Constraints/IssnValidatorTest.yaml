@@ -1,0 +1,71 @@
+name: IssnValidatorTest
+class_comment: '# * @see https://en.wikipedia.org/wiki/Issn'
+dependencies:
+- name: Issn
+  type: class
+  source: Symfony\Component\Validator\Constraints\Issn
+- name: IssnValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\IssnValidator
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+properties: []
+methods:
+- name: testCaseSensitiveIssns
+  visibility: public
+  parameters:
+  - name: issn
+  comment: "# * @see https://en.wikipedia.org/wiki/Issn\n# */\n# class IssnValidatorTest\
+    \ extends ConstraintValidatorTestCase\n# {\n# protected function createValidator():\
+    \ IssnValidator\n# {\n# return new IssnValidator();\n# }\n# \n# public static\
+    \ function getValidLowerCasedIssn()\n# {\n# return [\n# ['2162-321x'],\n# ['2160-200x'],\n\
+    # ['1537-453x'],\n# ['1937-710x'],\n# ['0002-922x'],\n# ['1553-345x'],\n# ['1553-619x'],\n\
+    # ];\n# }\n# \n# public static function getValidNonHyphenatedIssn()\n# {\n# return\
+    \ [\n# ['2162321X'],\n# ['01896016'],\n# ['15744647'],\n# ['14350645'],\n# ['07174055'],\n\
+    # ['20905076'],\n# ['14401592'],\n# ];\n# }\n# \n# public static function getFullValidIssn()\n\
+    # {\n# return [\n# ['1550-7416'],\n# ['1539-8560'],\n# ['2156-5376'],\n# ['1119-023X'],\n\
+    # ['1684-5315'],\n# ['1996-0786'],\n# ['1684-5374'],\n# ['1996-0794'],\n# ];\n\
+    # }\n# \n# public static function getValidIssn()\n# {\n# return array_merge(\n\
+    # self::getValidLowerCasedIssn(),\n# self::getValidNonHyphenatedIssn(),\n# self::getFullValidIssn()\n\
+    # );\n# }\n# \n# public static function getInvalidIssn()\n# {\n# return [\n# [0,\
+    \ Issn::TOO_SHORT_ERROR],\n# ['1539', Issn::TOO_SHORT_ERROR],\n# ['2156-537A',\
+    \ Issn::INVALID_CHARACTERS_ERROR],\n# ['1119-0231', Issn::CHECKSUM_FAILED_ERROR],\n\
+    # ['1684-5312', Issn::CHECKSUM_FAILED_ERROR],\n# ['1996-0783', Issn::CHECKSUM_FAILED_ERROR],\n\
+    # ['1684-537X', Issn::CHECKSUM_FAILED_ERROR],\n# ['1996-0795', Issn::CHECKSUM_FAILED_ERROR],\n\
+    # ];\n# }\n# \n# public function testNullIsValid()\n# {\n# $constraint = new Issn();\n\
+    # \n# $this->validator->validate(null, $constraint);\n# \n# $this->assertNoViolation();\n\
+    # }\n# \n# public function testEmptyStringIsValid()\n# {\n# $constraint = new\
+    \ Issn();\n# \n# $this->validator->validate('', $constraint);\n# \n# $this->assertNoViolation();\n\
+    # }\n# \n# public function testExpectsStringCompatibleType()\n# {\n# $this->expectException(UnexpectedValueException::class);\n\
+    # $constraint = new Issn();\n# $this->validator->validate(new \\stdClass(), $constraint);\n\
+    # }\n# \n# /**\n# * @dataProvider getValidLowerCasedIssn"
+- name: testRequireHyphenIssns
+  visibility: public
+  parameters:
+  - name: issn
+  comment: '# * @dataProvider getValidNonHyphenatedIssn'
+- name: testValidIssn
+  visibility: public
+  parameters:
+  - name: issn
+  comment: '# * @dataProvider getValidIssn'
+- name: testInvalidIssn
+  visibility: public
+  parameters:
+  - name: issn
+  - name: code
+  comment: '# * @dataProvider getInvalidIssn'
+- name: testNamedArguments
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\Issn
+- Symfony\Component\Validator\Constraints\IssnValidator
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

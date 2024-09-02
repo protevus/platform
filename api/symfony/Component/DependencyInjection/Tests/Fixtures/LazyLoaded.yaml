@@ -1,0 +1,11 @@
+name: LazyLoaded
+class_comment: null
+dependencies:
+- name: Lazy
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\Lazy
+properties: []
+methods: []
+traits:
+- Symfony\Component\DependencyInjection\Attribute\Lazy
+interfaces: []

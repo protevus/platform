@@ -1,0 +1,149 @@
+name: DumpDataCollector
+class_comment: '# * @author Nicolas Grekas <p@tchwork.com>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: FileLinkFormatter
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: Stopwatch
+  type: class
+  source: Symfony\Component\Stopwatch\Stopwatch
+- name: Data
+  type: class
+  source: Symfony\Component\VarDumper\Cloner\Data
+- name: VarCloner
+  type: class
+  source: Symfony\Component\VarDumper\Cloner\VarCloner
+- name: CliDumper
+  type: class
+  source: Symfony\Component\VarDumper\Dumper\CliDumper
+- name: SourceContextProvider
+  type: class
+  source: Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider
+- name: DataDumperInterface
+  type: class
+  source: Symfony\Component\VarDumper\Dumper\DataDumperInterface
+- name: HtmlDumper
+  type: class
+  source: Symfony\Component\VarDumper\Dumper\HtmlDumper
+- name: Connection
+  type: class
+  source: Symfony\Component\VarDumper\Server\Connection
+properties: []
+methods:
+- name: __sleep
+  visibility: public
+  parameters: []
+  comment: "# * @author Nicolas Grekas <p@tchwork.com>\n# *\n# * @final\n# */\n# class\
+    \ DumpDataCollector extends DataCollector implements DataDumperInterface\n# {\n\
+    # private string|FileLinkFormatter|false $fileLinkFormat;\n# private int $dataCount\
+    \ = 0;\n# private bool $isCollected = true;\n# private int $clonesCount = 0;\n\
+    # private int $clonesIndex = 0;\n# private array $rootRefs;\n# private string\
+    \ $charset;\n# private mixed $sourceContextProvider;\n# private bool $webMode;\n\
+    # \n# public function __construct(\n# private ?Stopwatch $stopwatch = null,\n\
+    # string|FileLinkFormatter|null $fileLinkFormat = null,\n# ?string $charset =\
+    \ null,\n# private ?RequestStack $requestStack = null,\n# private DataDumperInterface|Connection|null\
+    \ $dumper = null,\n# ?bool $webMode = null,\n# ) {\n# $fileLinkFormat = $fileLinkFormat\
+    \ ?: \\ini_get('xdebug.file_link_format') ?: get_cfg_var('xdebug.file_link_format');\n\
+    # $this->fileLinkFormat = $fileLinkFormat instanceof FileLinkFormatter && false\
+    \ === $fileLinkFormat->format('', 0) ? false : $fileLinkFormat;\n# $this->charset\
+    \ = $charset ?: \\ini_get('php.output_encoding') ?: \\ini_get('default_charset')\
+    \ ?: 'UTF-8';\n# $this->webMode = $webMode ?? !\\in_array(\\PHP_SAPI, ['cli',\
+    \ 'phpdbg', 'embed'], true);\n# \n# // All clones share these properties by reference:\n\
+    # $this->rootRefs = [\n# &$this->data,\n# &$this->dataCount,\n# &$this->isCollected,\n\
+    # &$this->clonesCount,\n# ];\n# \n# $this->sourceContextProvider = $dumper instanceof\
+    \ Connection && isset($dumper->getContextProviders()['source']) ? $dumper->getContextProviders()['source']\
+    \ : new SourceContextProvider($this->charset);\n# }\n# \n# public function __clone()\n\
+    # {\n# $this->clonesIndex = ++$this->clonesCount;\n# }\n# \n# public function\
+    \ dump(Data $data): ?string\n# {\n# $this->stopwatch?->start('dump');\n# \n# ['name'\
+    \ => $name, 'file' => $file, 'line' => $line, 'file_excerpt' => $fileExcerpt]\
+    \ = $this->sourceContextProvider->getContext();\n# \n# if (!$this->dumper || $this->dumper\
+    \ instanceof Connection && !$this->dumper->write($data)) {\n# $this->isCollected\
+    \ = false;\n# }\n# \n# $context = $data->getContext();\n# $label = $context['label']\
+    \ ?? '';\n# unset($context['label']);\n# $data = $data->withContext($context);\n\
+    # \n# if ($this->dumper && !$this->dumper instanceof Connection) {\n# $this->doDump($this->dumper,\
+    \ $data, $name, $file, $line, $label);\n# }\n# \n# if (!$this->dataCount) {\n\
+    # $this->data = [];\n# }\n# $this->data[] = compact('data', 'name', 'file', 'line',\
+    \ 'fileExcerpt', 'label');\n# ++$this->dataCount;\n# \n# $this->stopwatch?->stop('dump');\n\
+    # \n# return null;\n# }\n# \n# public function collect(Request $request, Response\
+    \ $response, ?\\Throwable $exception = null): void\n# {\n# if (!$this->dataCount)\
+    \ {\n# $this->data = [];\n# }\n# \n# // Sub-requests and programmatic calls stay\
+    \ in the collected profile.\n# if ($this->dumper || ($this->requestStack && $this->requestStack->getMainRequest()\
+    \ !== $request) || $request->isXmlHttpRequest() || $request->headers->has('Origin'))\
+    \ {\n# return;\n# }\n# \n# // In all other conditions that remove the web debug\
+    \ toolbar, dumps are written on the output.\n# if (!$this->requestStack\n# ||\
+    \ !$response->headers->has('X-Debug-Token')\n# || $response->isRedirection()\n\
+    # || ($response->headers->has('Content-Type') && !str_contains($response->headers->get('Content-Type')\
+    \ ?? '', 'html'))\n# || 'html' !== $request->getRequestFormat()\n# || false ===\
+    \ strripos($response->getContent(), '</body>')\n# ) {\n# if ($response->headers->has('Content-Type')\
+    \ && str_contains($response->headers->get('Content-Type') ?? '', 'html')) {\n\
+    # $dumper = new HtmlDumper('php://output', $this->charset);\n# $dumper->setDisplayOptions(['fileLinkFormat'\
+    \ => $this->fileLinkFormat]);\n# } else {\n# $dumper = new CliDumper('php://output',\
+    \ $this->charset);\n# $dumper->setDisplayOptions(['fileLinkFormat' => $this->fileLinkFormat]);\n\
+    # }\n# \n# foreach ($this->data as $dump) {\n# $this->doDump($dumper, $dump['data'],\
+    \ $dump['name'], $dump['file'], $dump['line'], $dump['label'] ?? '');\n# }\n#\
+    \ }\n# }\n# \n# public function reset(): void\n# {\n# $this->stopwatch?->reset();\n\
+    # parent::reset();\n# $this->dataCount = 0;\n# $this->isCollected = true;\n# $this->clonesCount\
+    \ = 0;\n# $this->clonesIndex = 0;\n# }\n# \n# /**\n# * @internal"
+- name: __wakeup
+  visibility: public
+  parameters: []
+  comment: '# * @internal'
+- name: getDumpsCount
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDumps
+  visibility: public
+  parameters:
+  - name: format
+  - name: maxDepthLimit
+    default: '-1'
+  - name: maxItemsPerDepth
+    default: '-1'
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: __destruct
+  visibility: public
+  parameters: []
+  comment: null
+- name: doDump
+  visibility: private
+  parameters:
+  - name: dumper
+  - name: data
+  - name: name
+  - name: file
+  - name: line
+  - name: label
+  comment: null
+traits:
+- Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestStack
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\Stopwatch\Stopwatch
+- Symfony\Component\VarDumper\Cloner\Data
+- Symfony\Component\VarDumper\Cloner\VarCloner
+- Symfony\Component\VarDumper\Dumper\CliDumper
+- Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider
+- Symfony\Component\VarDumper\Dumper\DataDumperInterface
+- Symfony\Component\VarDumper\Dumper\HtmlDumper
+- Symfony\Component\VarDumper\Server\Connection
+interfaces:
+- DataDumperInterface

@@ -1,0 +1,12 @@
+name: NamedIterableArgumentDummy
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: items
+  comment: null
+traits: []
+interfaces: []

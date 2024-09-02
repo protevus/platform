@@ -1,0 +1,91 @@
+name: XmlFileLoader
+class_comment: '# * Loads validation metadata from an XML file.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: XmlUtils
+  type: class
+  source: Symfony\Component\Config\Util\XmlUtils
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: MappingException
+  type: class
+  source: Symfony\Component\Validator\Exception\MappingException
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+properties: []
+methods:
+- name: getMappedClasses
+  visibility: public
+  parameters: []
+  comment: "# * Loads validation metadata from an XML file.\n# *\n# * @author Bernhard\
+    \ Schussek <bschussek@gmail.com>\n# */\n# class XmlFileLoader extends FileLoader\n\
+    # {\n# /**\n# * The XML nodes of the mapping file.\n# *\n# * @var \\SimpleXMLElement[]\n\
+    # */\n# protected array $classes;\n# \n# public function __construct(string $file)\n\
+    # {\n# $this->file = $file;\n# }\n# \n# public function loadClassMetadata(ClassMetadata\
+    \ $metadata): bool\n# {\n# if (!isset($this->classes)) {\n# $this->loadClassesFromXml();\n\
+    # }\n# \n# if (isset($this->classes[$metadata->getClassName()])) {\n# $classDescription\
+    \ = $this->classes[$metadata->getClassName()];\n# \n# $this->loadClassMetadataFromXml($metadata,\
+    \ $classDescription);\n# \n# return true;\n# }\n# \n# return false;\n# }\n# \n\
+    # /**\n# * Return the names of the classes mapped in this file.\n# *\n# * @return\
+    \ string[]"
+- name: parseConstraints
+  visibility: protected
+  parameters:
+  - name: nodes
+  comment: '# * Parses a collection of "constraint" XML nodes.
+
+    # *
+
+    # * @param \SimpleXMLElement $nodes The XML nodes
+
+    # *
+
+    # * @return Constraint[]'
+- name: parseValues
+  visibility: protected
+  parameters:
+  - name: nodes
+  comment: '# * Parses a collection of "value" XML nodes.
+
+    # *
+
+    # * @param \SimpleXMLElement $nodes The XML nodes'
+- name: parseOptions
+  visibility: protected
+  parameters:
+  - name: nodes
+  comment: '# * Parses a collection of "option" XML nodes.
+
+    # *
+
+    # * @param \SimpleXMLElement $nodes The XML nodes'
+- name: parseFile
+  visibility: protected
+  parameters:
+  - name: path
+  comment: '# * Loads the XML class descriptions from the given file.
+
+    # *
+
+    # * @throws MappingException If the file could not be loaded'
+- name: loadClassesFromXml
+  visibility: private
+  parameters: []
+  comment: null
+- name: loadClassMetadataFromXml
+  visibility: private
+  parameters:
+  - name: metadata
+  - name: classDescription
+  comment: null
+traits:
+- Symfony\Component\Config\Util\XmlUtils
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Exception\MappingException
+- Symfony\Component\Validator\Mapping\ClassMetadata
+interfaces: []

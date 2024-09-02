@@ -1,0 +1,73 @@
+name: TimezoneTypeTest
+class_comment: null
+dependencies:
+- name: ChoiceView
+  type: class
+  source: Symfony\Component\Form\ChoiceList\View\ChoiceView
+- name: LogicException
+  type: class
+  source: Symfony\Component\Form\Exception\LogicException
+- name: IntlTestHelper
+  type: class
+  source: Symfony\Component\Intl\Util\IntlTestHelper
+properties: []
+methods:
+- name: testTimezonesAreSelectable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNull
+  visibility: public
+  parameters:
+  - name: expected
+    default: 'null'
+  - name: norm
+    default: 'null'
+  - name: view
+    default: 'null'
+  comment: null
+- name: testSubmitNullUsesDefaultEmptyData
+  visibility: public
+  parameters:
+  - name: emptyData
+    default: '''Africa/Kinshasa'''
+  - name: expectedData
+    default: '''Africa/Kinshasa'''
+  comment: null
+- name: testDateTimeZoneInput
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDateTimeZoneInputWithBc
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIntlTimeZoneInput
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension intl'
+- name: testIntlTimeZoneInputWithBc
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension intl'
+- name: testIntlTimeZoneInputWithBcAndIntl
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension intl'
+- name: testTimezonesAreSelectableWithIntl
+  visibility: public
+  parameters: []
+  comment: null
+- name: testChoiceTranslationLocaleOptionWithIntl
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension intl'
+- name: testChoiceTranslationLocaleOptionWithoutIntl
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\ChoiceList\View\ChoiceView
+- Symfony\Component\Form\Exception\LogicException
+- Symfony\Component\Intl\Util\IntlTestHelper
+interfaces: []

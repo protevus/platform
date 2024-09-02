@@ -1,0 +1,479 @@
+name: SqlServerGrammar
+class_comment: null
+dependencies:
+- name: Builder
+  type: class
+  source: Illuminate\Database\Query\Builder
+- name: JoinLateralClause
+  type: class
+  source: Illuminate\Database\Query\JoinLateralClause
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+properties:
+- name: operators
+  visibility: protected
+  comment: '# * All of the available clause operators.
+
+    # *
+
+    # * @var string[]'
+- name: selectComponents
+  visibility: protected
+  comment: '# * The components that make up a select clause.
+
+    # *
+
+    # * @var string[]'
+methods:
+- name: compileSelect
+  visibility: public
+  parameters:
+  - name: query
+  comment: "# * All of the available clause operators.\n# *\n# * @var string[]\n#\
+    \ */\n# protected $operators = [\n# '=', '<', '>', '<=', '>=', '!<', '!>', '<>',\
+    \ '!=',\n# 'like', 'not like', 'ilike',\n# '&', '&=', '|', '|=', '^', '^=',\n\
+    # ];\n# \n# /**\n# * The components that make up a select clause.\n# *\n# * @var\
+    \ string[]\n# */\n# protected $selectComponents = [\n# 'aggregate',\n# 'columns',\n\
+    # 'from',\n# 'indexHint',\n# 'joins',\n# 'wheres',\n# 'groups',\n# 'havings',\n\
+    # 'orders',\n# 'offset',\n# 'limit',\n# 'lock',\n# ];\n# \n# /**\n# * Compile\
+    \ a select query into SQL.\n# *\n# * @param  \\Illuminate\\Database\\Query\\Builder\
+    \  $query\n# * @return string"
+- name: compileColumns
+  visibility: protected
+  parameters:
+  - name: query
+  - name: columns
+  comment: '# * Compile the "select *" portion of the query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $columns
+
+    # * @return string|null'
+- name: compileFrom
+  visibility: protected
+  parameters:
+  - name: query
+  - name: table
+  comment: '# * Compile the "from" portion of the query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  string  $table
+
+    # * @return string'
+- name: compileIndexHint
+  visibility: protected
+  parameters:
+  - name: query
+  - name: indexHint
+  comment: '# * Compile the index hints for the query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  \Illuminate\Database\Query\IndexHint  $indexHint
+
+    # * @return string'
+- name: whereBitwise
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereDate
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where date" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereTime
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where time" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: compileJsonContains
+  visibility: protected
+  parameters:
+  - name: column
+  - name: value
+  comment: '# * Compile a "JSON contains" statement into SQL.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: prepareBindingForJsonContains
+  visibility: public
+  parameters:
+  - name: binding
+  comment: '# * Prepare the binding for a "JSON contains" statement.
+
+    # *
+
+    # * @param  mixed  $binding
+
+    # * @return string'
+- name: compileJsonContainsKey
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Compile a "JSON contains key" statement into SQL.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return string'
+- name: compileJsonLength
+  visibility: protected
+  parameters:
+  - name: column
+  - name: operator
+  - name: value
+  comment: '# * Compile a "JSON length" statement into SQL.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  string  $operator
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: compileJsonValueCast
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Compile a "JSON value cast" statement into SQL.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: compileHaving
+  visibility: protected
+  parameters:
+  - name: having
+  comment: '# * Compile a single having clause.
+
+    # *
+
+    # * @param  array  $having
+
+    # * @return string'
+- name: compileHavingBitwise
+  visibility: protected
+  parameters:
+  - name: having
+  comment: '# * Compile a having clause involving a bitwise operator.
+
+    # *
+
+    # * @param  array  $having
+
+    # * @return string'
+- name: compileDeleteWithoutJoins
+  visibility: protected
+  parameters:
+  - name: query
+  - name: table
+  - name: where
+  comment: '# * Compile a delete statement without joins into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  string  $table
+
+    # * @param  string  $where
+
+    # * @return string'
+- name: compileRandom
+  visibility: public
+  parameters:
+  - name: seed
+  comment: '# * Compile the random statement into SQL.
+
+    # *
+
+    # * @param  string|int  $seed
+
+    # * @return string'
+- name: compileLimit
+  visibility: protected
+  parameters:
+  - name: query
+  - name: limit
+  comment: '# * Compile the "limit" portions of the query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  int  $limit
+
+    # * @return string'
+- name: compileRowNumber
+  visibility: protected
+  parameters:
+  - name: partition
+  - name: orders
+  comment: '# * Compile a row number clause.
+
+    # *
+
+    # * @param  string  $partition
+
+    # * @param  string  $orders
+
+    # * @return string'
+- name: compileOffset
+  visibility: protected
+  parameters:
+  - name: query
+  - name: offset
+  comment: '# * Compile the "offset" portions of the query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  int  $offset
+
+    # * @return string'
+- name: compileLock
+  visibility: protected
+  parameters:
+  - name: query
+  - name: value
+  comment: '# * Compile the lock into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  bool|string  $value
+
+    # * @return string'
+- name: wrapUnion
+  visibility: protected
+  parameters:
+  - name: sql
+  comment: '# * Wrap a union subquery in parentheses.
+
+    # *
+
+    # * @param  string  $sql
+
+    # * @return string'
+- name: compileExists
+  visibility: public
+  parameters:
+  - name: query
+  comment: '# * Compile an exists statement into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @return string'
+- name: compileUpdateWithJoins
+  visibility: protected
+  parameters:
+  - name: query
+  - name: table
+  - name: columns
+  - name: where
+  comment: '# * Compile an update statement with joins into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  string  $table
+
+    # * @param  string  $columns
+
+    # * @param  string  $where
+
+    # * @return string'
+- name: compileUpsert
+  visibility: public
+  parameters:
+  - name: query
+  - name: values
+  - name: uniqueBy
+  - name: update
+  comment: '# * Compile an "upsert" statement into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $values
+
+    # * @param  array  $uniqueBy
+
+    # * @param  array  $update
+
+    # * @return string'
+- name: prepareBindingsForUpdate
+  visibility: public
+  parameters:
+  - name: bindings
+  - name: values
+  comment: '# * Prepare the bindings for an update statement.
+
+    # *
+
+    # * @param  array  $bindings
+
+    # * @param  array  $values
+
+    # * @return array'
+- name: compileJoinLateral
+  visibility: public
+  parameters:
+  - name: join
+  - name: expression
+  comment: '# * Compile a "lateral join" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\JoinLateralClause  $join
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compileSavepoint
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Compile the SQL statement to define a savepoint.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string'
+- name: compileSavepointRollBack
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Compile the SQL statement to execute a savepoint rollback.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string'
+- name: getDateFormat
+  visibility: public
+  parameters: []
+  comment: '# * Get the format for database stored dates.
+
+    # *
+
+    # * @return string'
+- name: wrapValue
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Wrap a single string in keyword identifiers.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: wrapJsonSelector
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Wrap the given JSON selector.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: wrapJsonBooleanValue
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Wrap the given JSON boolean value.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: wrapTable
+  visibility: public
+  parameters:
+  - name: table
+  comment: '# * Wrap a table in keyword identifiers.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Database\Query\Expression|string  $table
+
+    # * @return string'
+- name: wrapTableValuedFunction
+  visibility: protected
+  parameters:
+  - name: table
+  comment: '# * Wrap a table in keyword identifiers.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @return string'
+traits:
+- Illuminate\Database\Query\Builder
+- Illuminate\Database\Query\JoinLateralClause
+- Illuminate\Support\Arr
+- Illuminate\Support\Str
+interfaces: []

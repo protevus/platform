@@ -1,0 +1,53 @@
+name: ExtensionInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getNodeTranslators
+  visibility: public
+  parameters: []
+  comment: "# * XPath expression translator extension interface.\n# *\n# * This component\
+    \ is a port of the Python cssselect library,\n# * which is copyright Ian Bicking,\
+    \ @see https://github.com/SimonSapin/cssselect.\n# *\n# * @author Jean-Fran\xE7\
+    ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n# * @internal\n# */\n# interface\
+    \ ExtensionInterface\n# {\n# /**\n# * Returns node translators.\n# *\n# * These\
+    \ callables will receive the node as first argument and the translator as second\
+    \ argument.\n# *\n# * @return callable[]"
+- name: getCombinationTranslators
+  visibility: public
+  parameters: []
+  comment: '# * Returns combination translators.
+
+    # *
+
+    # * @return callable[]'
+- name: getFunctionTranslators
+  visibility: public
+  parameters: []
+  comment: '# * Returns function translators.
+
+    # *
+
+    # * @return callable[]'
+- name: getPseudoClassTranslators
+  visibility: public
+  parameters: []
+  comment: '# * Returns pseudo-class translators.
+
+    # *
+
+    # * @return callable[]'
+- name: getAttributeMatchingTranslators
+  visibility: public
+  parameters: []
+  comment: '# * Returns attribute operation translators.
+
+    # *
+
+    # * @return callable[]'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: '# * Returns extension name.'
+traits: []
+interfaces: []

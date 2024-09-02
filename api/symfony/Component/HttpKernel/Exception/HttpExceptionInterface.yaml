@@ -1,0 +1,29 @@
+name: HttpExceptionInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getStatusCode
+  visibility: public
+  parameters: []
+  comment: '# * Interface for HTTP error exceptions.
+
+    # *
+
+    # * @author Kris Wallsmith <kris@symfony.com>
+
+    # */
+
+    # interface HttpExceptionInterface extends \Throwable
+
+    # {
+
+    # /**
+
+    # * Returns the status code.'
+- name: getHeaders
+  visibility: public
+  parameters: []
+  comment: '# * Returns response headers.'
+traits: []
+interfaces: []

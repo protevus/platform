@@ -1,0 +1,62 @@
+name: HtmlSanitizer
+class_comment: null
+dependencies:
+- name: MastermindsParser
+  type: class
+  source: Symfony\Component\HtmlSanitizer\Parser\MastermindsParser
+- name: ParserInterface
+  type: class
+  source: Symfony\Component\HtmlSanitizer\Parser\ParserInterface
+- name: W3CReference
+  type: class
+  source: Symfony\Component\HtmlSanitizer\Reference\W3CReference
+- name: StringSanitizer
+  type: class
+  source: Symfony\Component\HtmlSanitizer\TextSanitizer\StringSanitizer
+- name: DomVisitor
+  type: class
+  source: Symfony\Component\HtmlSanitizer\Visitor\DomVisitor
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: config
+  - name: parser
+    default: 'null'
+  comment: null
+- name: sanitize
+  visibility: public
+  parameters:
+  - name: input
+  comment: null
+- name: sanitizeFor
+  visibility: public
+  parameters:
+  - name: element
+  - name: input
+  comment: null
+- name: sanitizeWithContext
+  visibility: private
+  parameters:
+  - name: context
+  - name: input
+  comment: null
+- name: isValidUtf8
+  visibility: private
+  parameters:
+  - name: html
+  comment: null
+- name: createDomVisitorForContext
+  visibility: private
+  parameters:
+  - name: context
+  comment: null
+traits:
+- Symfony\Component\HtmlSanitizer\Parser\MastermindsParser
+- Symfony\Component\HtmlSanitizer\Parser\ParserInterface
+- Symfony\Component\HtmlSanitizer\Reference\W3CReference
+- Symfony\Component\HtmlSanitizer\TextSanitizer\StringSanitizer
+- Symfony\Component\HtmlSanitizer\Visitor\DomVisitor
+interfaces:
+- HtmlSanitizerInterface

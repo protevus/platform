@@ -1,0 +1,9 @@
+name: InvalidArgumentException
+class_comment: "# * @author Fabien Potencier <fabien@symfony.com>\n# * @author Gr\xE9\
+  goire Pineau <lyrixx@lyrixx.info>"
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- ExceptionInterface

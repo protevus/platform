@@ -1,0 +1,143 @@
+name: FormRegistryTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Form\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\Form\Exception\LogicException
+- name: FormRegistry
+  type: class
+  source: Symfony\Component\Form\FormRegistry
+- name: FormTypeGuesserChain
+  type: class
+  source: Symfony\Component\Form\FormTypeGuesserChain
+- name: PreloadedExtension
+  type: class
+  source: Symfony\Component\Form\PreloadedExtension
+- name: ResolvedFormType
+  type: class
+  source: Symfony\Component\Form\ResolvedFormType
+- name: ResolvedFormTypeFactory
+  type: class
+  source: Symfony\Component\Form\ResolvedFormTypeFactory
+- name: FooSubType
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\FooSubType
+- name: FooType
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\FooType
+- name: FooTypeBarExtension
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\FooTypeBarExtension
+- name: FooTypeBazExtension
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\FooTypeBazExtension
+- name: FormWithSameParentType
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\FormWithSameParentType
+- name: NullFormTypeGuesser
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\NullFormTypeGuesser
+- name: RecursiveFormTypeBar
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\RecursiveFormTypeBar
+- name: RecursiveFormTypeBaz
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\RecursiveFormTypeBaz
+- name: RecursiveFormTypeFoo
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\RecursiveFormTypeFoo
+- name: TestExtension
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\TestExtension
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testGetTypeFromExtension
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadUnregisteredType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFailIfUnregisteredTypeNoClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFailIfUnregisteredTypeNoFormType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetTypeWithTypeExtensions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetTypeConnectsParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFormCannotHaveItselfAsAParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRecursiveFormDependencies
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetTypeThrowsExceptionIfTypeNotFound
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasTypeAfterLoadingFromExtension
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasTypeIfFQCN
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDoesNotHaveTypeIfNonExistingClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDoesNotHaveTypeIfNoFormType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetTypeGuesser
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetExtensions
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\Exception\InvalidArgumentException
+- Symfony\Component\Form\Exception\LogicException
+- Symfony\Component\Form\FormRegistry
+- Symfony\Component\Form\FormTypeGuesserChain
+- Symfony\Component\Form\PreloadedExtension
+- Symfony\Component\Form\ResolvedFormType
+- Symfony\Component\Form\ResolvedFormTypeFactory
+- Symfony\Component\Form\Tests\Fixtures\FooSubType
+- Symfony\Component\Form\Tests\Fixtures\FooType
+- Symfony\Component\Form\Tests\Fixtures\FooTypeBarExtension
+- Symfony\Component\Form\Tests\Fixtures\FooTypeBazExtension
+- Symfony\Component\Form\Tests\Fixtures\FormWithSameParentType
+- Symfony\Component\Form\Tests\Fixtures\NullFormTypeGuesser
+- Symfony\Component\Form\Tests\Fixtures\RecursiveFormTypeBar
+- Symfony\Component\Form\Tests\Fixtures\RecursiveFormTypeBaz
+- Symfony\Component\Form\Tests\Fixtures\RecursiveFormTypeFoo
+- Symfony\Component\Form\Tests\Fixtures\TestExtension
+interfaces: []

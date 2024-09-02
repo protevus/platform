@@ -1,0 +1,19 @@
+name: RegisterErrorViewPaths
+class_comment: null
+dependencies:
+- name: View
+  type: class
+  source: Illuminate\Support\Facades\View
+properties: []
+methods:
+- name: __invoke
+  visibility: public
+  parameters: []
+  comment: '# * Register the error view paths.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Support\Facades\View
+interfaces: []

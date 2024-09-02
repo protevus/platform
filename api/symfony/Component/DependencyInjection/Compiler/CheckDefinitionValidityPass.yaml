@@ -1,0 +1,89 @@
+name: CheckDefinitionValidityPass
+class_comment: '# * This pass validates each definition individually only taking the
+  information
+
+  # * into account which is contained in the definition itself.
+
+  # *
+
+  # * Later passes can rely on the following, and specifically do not need to
+
+  # * perform these checks themselves:
+
+  # *
+
+  # * - non synthetic, non abstract services always have a class set
+
+  # * - synthetic services are always public
+
+  # *
+
+  # * @author Johannes M. Schmitt <schmittjoh@gmail.com>'
+dependencies:
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: EnvParameterException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\EnvParameterException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: FileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\FileLoader
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: '# * This pass validates each definition individually only taking the information
+
+    # * into account which is contained in the definition itself.
+
+    # *
+
+    # * Later passes can rely on the following, and specifically do not need to
+
+    # * perform these checks themselves:
+
+    # *
+
+    # * - non synthetic, non abstract services always have a class set
+
+    # * - synthetic services are always public
+
+    # *
+
+    # * @author Johannes M. Schmitt <schmittjoh@gmail.com>
+
+    # */
+
+    # class CheckDefinitionValidityPass implements CompilerPassInterface
+
+    # {
+
+    # /**
+
+    # * Processes the ContainerBuilder to validate the Definition.
+
+    # *
+
+    # * @throws RuntimeException When the Definition is invalid'
+- name: validateAttributes
+  visibility: private
+  parameters:
+  - name: id
+  - name: tag
+  - name: attributes
+  - name: path
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\EnvParameterException
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Loader\FileLoader
+interfaces:
+- CompilerPassInterface

@@ -1,0 +1,66 @@
+name: AbstractLoader
+class_comment: null
+dependencies:
+- name: HasNamedArguments
+  type: class
+  source: Symfony\Component\Validator\Attribute\HasNamedArguments
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: MappingException
+  type: class
+  source: Symfony\Component\Validator\Exception\MappingException
+properties: []
+methods:
+- name: addNamespaceAlias
+  visibility: protected
+  parameters:
+  - name: alias
+  - name: namespace
+  comment: "# * Base loader for validation metadata.\n# *\n# * This loader supports\
+    \ the loading of constraints from Symfony's default\n# * namespace (see {@link\
+    \ DEFAULT_NAMESPACE}) using the short class names of\n# * those constraints. Constraints\
+    \ can also be loaded using their fully\n# * qualified class names. At last, namespace\
+    \ aliases can be defined to load\n# * constraints with the syntax \"alias:ShortName\"\
+    .\n# *\n# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# abstract\
+    \ class AbstractLoader implements LoaderInterface\n# {\n# /**\n# * The namespace\
+    \ to load constraints from by default.\n# */\n# public const DEFAULT_NAMESPACE\
+    \ = '\\\\Symfony\\\\Component\\\\Validator\\\\Constraints\\\\';\n# \n# protected\
+    \ array $namespaces = [];\n# \n# /**\n# * @var array<class-string, bool>\n# */\n\
+    # private array $namedArgumentsCache = [];\n# \n# /**\n# * Adds a namespace alias.\n\
+    # *\n# * The namespace alias can be used to reference constraints from specific\n\
+    # * namespaces in {@link newConstraint()}:\n# *\n# *     $this->addNamespaceAlias('mynamespace',\
+    \ '\\\\Acme\\\\Package\\\\Constraints\\\\');\n# *\n# *     $constraint = $this->newConstraint('mynamespace:NotNull');"
+- name: newConstraint
+  visibility: protected
+  parameters:
+  - name: name
+  - name: options
+    default: 'null'
+  comment: '# * Creates a new constraint instance for the given constraint name.
+
+    # *
+
+    # * @param string $name    The constraint name. Either a constraint relative
+
+    # *                        to the default constraint namespace, or a fully
+
+    # *                        qualified class name. Alternatively, the constraint
+
+    # *                        may be preceded by a namespace alias and a colon.
+
+    # *                        The namespace alias must have been defined using
+
+    # *                        {@link addNamespaceAlias()}.
+
+    # * @param mixed  $options The constraint options
+
+    # *
+
+    # * @throws MappingException If the namespace prefix is undefined'
+traits:
+- Symfony\Component\Validator\Attribute\HasNamedArguments
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Exception\MappingException
+interfaces:
+- LoaderInterface

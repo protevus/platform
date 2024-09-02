@@ -1,0 +1,80 @@
+name: CheckCircularReferencesPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: IteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- name: AnalyzeServiceReferencesPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass
+- name: CheckCircularReferencesPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CheckCircularReferencesPass
+- name: Compiler
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\Compiler
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ServiceCircularReferenceException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+properties: []
+methods:
+- name: testProcess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWithAliases
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWithFactory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessDetectsIndirectCircularReference
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessDetectsIndirectCircularReferenceWithFactory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDeepCircularReference
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessIgnoresMethodCalls
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessIgnoresLazyServices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessIgnoresIteratorArguments
+  visibility: public
+  parameters: []
+  comment: null
+- name: process
+  visibility: protected
+  parameters:
+  - name: container
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- Symfony\Component\DependencyInjection\Compiler\AnalyzeServiceReferencesPass
+- Symfony\Component\DependencyInjection\Compiler\CheckCircularReferencesPass
+- Symfony\Component\DependencyInjection\Compiler\Compiler
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+- Symfony\Component\DependencyInjection\Reference
+interfaces: []

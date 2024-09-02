@@ -1,0 +1,146 @@
+name: RedirectControllerTest
+class_comment: '# * @author Marcin Sikon <marcin.sikon@gmail.com>'
+dependencies:
+- name: RedirectController
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+- name: TestCase
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\TestCase
+- name: ParameterBag
+  type: class
+  source: Symfony\Component\HttpFoundation\ParameterBag
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: HttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\HttpException
+- name: UrlGeneratorInterface
+  type: class
+  source: Symfony\Component\Routing\Generator\UrlGeneratorInterface
+properties: []
+methods:
+- name: testRoute
+  visibility: public
+  parameters:
+  - name: permanent
+  - name: keepRequestMethod
+  - name: keepQueryParams
+  - name: ignoreAttributes
+  - name: expectedCode
+  - name: expectedAttributes
+  comment: "# * @author Marcin Sikon <marcin.sikon@gmail.com>\n# */\n# class RedirectControllerTest\
+    \ extends TestCase\n# {\n# public function testEmptyRoute()\n# {\n# $request =\
+    \ new Request();\n# $controller = new RedirectController();\n# \n# try {\n# $controller->redirectAction($request,\
+    \ '', true);\n# $this->fail('Expected Symfony\\Component\\HttpKernel\\Exception\\\
+    HttpException to be thrown');\n# } catch (HttpException $e) {\n# $this->assertSame(410,\
+    \ $e->getStatusCode());\n# }\n# \n# try {\n# $controller->redirectAction($request,\
+    \ '', false);\n# $this->fail('Expected Symfony\\Component\\HttpKernel\\Exception\\\
+    HttpException to be thrown');\n# } catch (HttpException $e) {\n# $this->assertSame(404,\
+    \ $e->getStatusCode());\n# }\n# \n# $request = new Request([], [], ['_route_params'\
+    \ => ['route' => '', 'permanent' => true]]);\n# try {\n# $controller($request);\n\
+    # $this->fail('Expected Symfony\\Component\\HttpKernel\\Exception\\HttpException\
+    \ to be thrown');\n# } catch (HttpException $e) {\n# $this->assertSame(410, $e->getStatusCode());\n\
+    # }\n# \n# $request = new Request([], [], ['_route_params' => ['route' => '',\
+    \ 'permanent' => false]]);\n# try {\n# $controller($request);\n# $this->fail('Expected\
+    \ Symfony\\Component\\HttpKernel\\Exception\\HttpException to be thrown');\n#\
+    \ } catch (HttpException $e) {\n# $this->assertSame(404, $e->getStatusCode());\n\
+    # }\n# }\n# \n# /**\n# * @dataProvider provider"
+- name: provider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEmptyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFullURL
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFullURLWithMethodKeep
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUrlRedirectDefaultPorts
+  visibility: public
+  parameters: []
+  comment: null
+- name: urlRedirectProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUrlRedirect
+  visibility: public
+  parameters:
+  - name: scheme
+  - name: httpPort
+  - name: httpsPort
+  - name: requestScheme
+  - name: requestPort
+  - name: expectedPort
+  comment: '# * @dataProvider urlRedirectProvider'
+- name: pathQueryParamsProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPathQueryParams
+  visibility: public
+  parameters:
+  - name: expectedUrl
+  - name: path
+  - name: queryString
+  comment: '# * @dataProvider pathQueryParamsProvider'
+- name: testRedirectWithQuery
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRedirectWithQueryWithRouteParamsOveriding
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMissingPathOrRouteParameter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAmbiguousPathAndRouteParameter
+  visibility: public
+  parameters: []
+  comment: null
+- name: createRequestObject
+  visibility: private
+  parameters:
+  - name: scheme
+  - name: host
+  - name: port
+  - name: baseUrl
+  - name: queryString
+    default: ''''''
+  comment: null
+- name: createRedirectController
+  visibility: private
+  parameters:
+  - name: httpPort
+    default: 'null'
+  - name: httpsPort
+    default: 'null'
+  comment: null
+- name: assertRedirectUrl
+  visibility: private
+  parameters:
+  - name: returnResponse
+  - name: expectedUrl
+  comment: null
+traits:
+- Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+- Symfony\Bundle\FrameworkBundle\Tests\TestCase
+- Symfony\Component\HttpFoundation\ParameterBag
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Exception\HttpException
+- Symfony\Component\Routing\Generator\UrlGeneratorInterface
+interfaces: []

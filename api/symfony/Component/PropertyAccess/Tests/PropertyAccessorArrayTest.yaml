@@ -1,0 +1,12 @@
+name: PropertyAccessorArrayTest
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getContainer
+  visibility: protected
+  parameters:
+  - name: array
+  comment: null
+traits: []
+interfaces: []

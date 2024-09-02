@@ -1,0 +1,107 @@
+name: FreshCommand
+class_comment: null
+dependencies:
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+- name: ConfirmableTrait
+  type: class
+  source: Illuminate\Console\ConfirmableTrait
+- name: Prohibitable
+  type: class
+  source: Illuminate\Console\Prohibitable
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: DatabaseRefreshed
+  type: class
+  source: Illuminate\Database\Events\DatabaseRefreshed
+- name: Migrator
+  type: class
+  source: Illuminate\Database\Migrations\Migrator
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+properties:
+- name: name
+  visibility: protected
+  comment: '# * The console command name.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+- name: migrator
+  visibility: protected
+  comment: '# * The migrator instance.
+
+    # *
+
+    # * @var \Illuminate\Database\Migrations\Migrator'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: migrator
+  comment: "# * The console command name.\n# *\n# * @var string\n# */\n# protected\
+    \ $name = 'migrate:fresh';\n# \n# /**\n# * The console command description.\n\
+    # *\n# * @var string\n# */\n# protected $description = 'Drop all tables and re-run\
+    \ all migrations';\n# \n# /**\n# * The migrator instance.\n# *\n# * @var \\Illuminate\\\
+    Database\\Migrations\\Migrator\n# */\n# protected $migrator;\n# \n# /**\n# * Create\
+    \ a new fresh command instance.\n# *\n# * @param  \\Illuminate\\Database\\Migrations\\\
+    Migrator  $migrator\n# * @return void"
+- name: handle
+  visibility: public
+  parameters: []
+  comment: '# * Execute the console command.
+
+    # *
+
+    # * @return int'
+- name: needsSeeding
+  visibility: protected
+  parameters: []
+  comment: '# * Determine if the developer has requested database seeding.
+
+    # *
+
+    # * @return bool'
+- name: runSeeder
+  visibility: protected
+  parameters:
+  - name: database
+  comment: '# * Run the database seeder command.
+
+    # *
+
+    # * @param  string  $database
+
+    # * @return void'
+- name: getOptions
+  visibility: protected
+  parameters: []
+  comment: '# * Get the console command options.
+
+    # *
+
+    # * @return array'
+traits:
+- Illuminate\Console\Command
+- Illuminate\Console\ConfirmableTrait
+- Illuminate\Console\Prohibitable
+- Illuminate\Contracts\Events\Dispatcher
+- Illuminate\Database\Events\DatabaseRefreshed
+- Illuminate\Database\Migrations\Migrator
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Input\InputOption
+- ConfirmableTrait
+interfaces: []

@@ -1,0 +1,63 @@
+name: AbstractNormalizerDummy
+class_comment: "# * Provides a dummy Normalizer which extends the AbstractNormalizer.\n\
+  # *\n# * @author Konstantin S. M. M\xF6llers <ksm.moellers@gmail.com>"
+dependencies:
+- name: AbstractNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\AbstractNormalizer
+properties: []
+methods:
+- name: getSupportedTypes
+  visibility: public
+  parameters:
+  - name: format
+  comment: null
+- name: getAllowedAttributes
+  visibility: public
+  parameters:
+  - name: classOrObject
+  - name: context
+  - name: attributesAsString
+    default: 'false'
+  comment: null
+- name: normalize
+  visibility: public
+  parameters:
+  - name: object
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: supportsNormalization
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: denormalize
+  visibility: public
+  parameters:
+  - name: data
+  - name: type
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: supportsDenormalization
+  visibility: public
+  parameters:
+  - name: data
+  - name: type
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\Serializer\Normalizer\AbstractNormalizer
+interfaces: []

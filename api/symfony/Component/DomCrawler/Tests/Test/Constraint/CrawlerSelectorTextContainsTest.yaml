@@ -1,0 +1,31 @@
+name: CrawlerSelectorTextContainsTest
+class_comment: null
+dependencies:
+- name: ExpectationFailedException
+  type: class
+  source: PHPUnit\Framework\ExpectationFailedException
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: TestFailure
+  type: class
+  source: PHPUnit\Framework\TestFailure
+- name: Crawler
+  type: class
+  source: Symfony\Component\DomCrawler\Crawler
+- name: CrawlerSelectorTextContains
+  type: class
+  source: Symfony\Component\DomCrawler\Test\Constraint\CrawlerSelectorTextContains
+properties: []
+methods:
+- name: testConstraint
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\ExpectationFailedException
+- PHPUnit\Framework\TestCase
+- PHPUnit\Framework\TestFailure
+- Symfony\Component\DomCrawler\Crawler
+- Symfony\Component\DomCrawler\Test\Constraint\CrawlerSelectorTextContains
+interfaces: []

@@ -1,0 +1,59 @@
+name: UlidValidatorTest
+class_comment: '# * @author Laurent Clouet <laurent35240@gmail.com>'
+dependencies:
+- name: Ulid
+  type: class
+  source: Symfony\Component\Validator\Constraints\Ulid
+- name: UlidValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\UlidValidator
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+properties: []
+methods:
+- name: testInvalidUlid
+  visibility: public
+  parameters:
+  - name: ulid
+  - name: code
+  comment: "# * @author Laurent Clouet <laurent35240@gmail.com>\n# */\n# class UlidValidatorTest\
+    \ extends ConstraintValidatorTestCase\n# {\n# protected function createValidator():\
+    \ UlidValidator\n# {\n# return new UlidValidator();\n# }\n# \n# public function\
+    \ testNullIsValid()\n# {\n# $this->validator->validate(null, new Ulid());\n# \n\
+    # $this->assertNoViolation();\n# }\n# \n# public function testEmptyStringIsValid()\n\
+    # {\n# $this->validator->validate('', new Ulid());\n# \n# $this->assertNoViolation();\n\
+    # }\n# \n# public function testExpectsStringCompatibleType()\n# {\n# $this->expectException(UnexpectedValueException::class);\n\
+    # $this->validator->validate(new \\stdClass(), new Ulid());\n# }\n# \n# public\
+    \ function testValidUlid()\n# {\n# $this->validator->validate('01ARZ3NDEKTSV4RRFFQ69G5FAV',\
+    \ new Ulid());\n# \n# $this->assertNoViolation();\n# }\n# \n# public function\
+    \ testValidUlidAsBase58()\n# {\n# $this->validator->validate('1CCD2w4mK2m455S2BAXFht',\
+    \ new Ulid(format: Ulid::FORMAT_BASE_58));\n# \n# $this->assertNoViolation();\n\
+    # }\n# \n# /**\n# * @dataProvider getInvalidUlids"
+- name: getInvalidUlids
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidBase58Ulid
+  visibility: public
+  parameters:
+  - name: ulid
+  - name: code
+  comment: '# * @dataProvider getInvalidBase58Ulids'
+- name: getInvalidBase58Ulids
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidUlidNamed
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\Ulid
+- Symfony\Component\Validator\Constraints\UlidValidator
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

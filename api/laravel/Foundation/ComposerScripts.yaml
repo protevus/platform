@@ -1,0 +1,52 @@
+name: ComposerScripts
+class_comment: null
+dependencies:
+- name: Event
+  type: class
+  source: Composer\Script\Event
+properties: []
+methods:
+- name: postInstall
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Handle the post-install Composer event.
+
+    # *
+
+    # * @param  \Composer\Script\Event  $event
+
+    # * @return void'
+- name: postUpdate
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Handle the post-update Composer event.
+
+    # *
+
+    # * @param  \Composer\Script\Event  $event
+
+    # * @return void'
+- name: postAutoloadDump
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Handle the post-autoload-dump Composer event.
+
+    # *
+
+    # * @param  \Composer\Script\Event  $event
+
+    # * @return void'
+- name: clearCompiled
+  visibility: protected
+  parameters: []
+  comment: '# * Clear the cached Laravel bootstrapping files.
+
+    # *
+
+    # * @return void'
+traits:
+- Composer\Script\Event
+interfaces: []

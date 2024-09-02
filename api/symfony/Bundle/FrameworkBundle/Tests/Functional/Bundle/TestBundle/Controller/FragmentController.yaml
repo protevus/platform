@@ -1,0 +1,63 @@
+name: FragmentController
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: ControllerReference
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ControllerReference
+- name: FragmentUriGeneratorInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Fragment\FragmentUriGeneratorInterface
+- name: Environment
+  type: class
+  source: Twig\Environment
+properties: []
+methods:
+- name: indexAction
+  visibility: public
+  parameters:
+  - name: twig
+  comment: null
+- name: inlinedAction
+  visibility: public
+  parameters:
+  - name: options
+  - name: _format
+  comment: null
+- name: customFormatAction
+  visibility: public
+  parameters:
+  - name: _format
+  comment: null
+- name: customLocaleAction
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+- name: forwardLocaleAction
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+- name: fragmentUriAction
+  visibility: public
+  parameters:
+  - name: request
+  - name: fragmentUriGenerator
+  comment: null
+- name: getBar
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Controller\ControllerReference
+- Symfony\Component\HttpKernel\Fragment\FragmentUriGeneratorInterface
+- Twig\Environment
+interfaces: []

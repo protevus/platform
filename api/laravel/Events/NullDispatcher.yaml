@@ -1,0 +1,164 @@
+name: NullDispatcher
+class_comment: null
+dependencies:
+- name: DispatcherContract
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: ForwardsCalls
+  type: class
+  source: Illuminate\Support\Traits\ForwardsCalls
+- name: ForwardsCalls
+  type: class
+  source: ForwardsCalls
+properties:
+- name: dispatcher
+  visibility: protected
+  comment: '# * The underlying event dispatcher instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Events\Dispatcher'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: dispatcher
+  comment: "# * The underlying event dispatcher instance.\n# *\n# * @var \\Illuminate\\\
+    Contracts\\Events\\Dispatcher\n# */\n# protected $dispatcher;\n# \n# /**\n# *\
+    \ Create a new event dispatcher instance that does not fire.\n# *\n# * @param\
+    \  \\Illuminate\\Contracts\\Events\\Dispatcher  $dispatcher\n# * @return void"
+- name: dispatch
+  visibility: public
+  parameters:
+  - name: event
+  - name: payload
+    default: '[]'
+  - name: halt
+    default: 'false'
+  comment: '# * Don''t fire an event.
+
+    # *
+
+    # * @param  string|object  $event
+
+    # * @param  mixed  $payload
+
+    # * @param  bool  $halt
+
+    # * @return void'
+- name: push
+  visibility: public
+  parameters:
+  - name: event
+  - name: payload
+    default: '[]'
+  comment: '# * Don''t register an event and payload to be fired later.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @param  array  $payload
+
+    # * @return void'
+- name: until
+  visibility: public
+  parameters:
+  - name: event
+  - name: payload
+    default: '[]'
+  comment: '# * Don''t dispatch an event.
+
+    # *
+
+    # * @param  string|object  $event
+
+    # * @param  mixed  $payload
+
+    # * @return mixed'
+- name: listen
+  visibility: public
+  parameters:
+  - name: events
+  - name: listener
+    default: 'null'
+  comment: '# * Register an event listener with the dispatcher.
+
+    # *
+
+    # * @param  \Closure|string|array  $events
+
+    # * @param  \Closure|string|array|null  $listener
+
+    # * @return void'
+- name: hasListeners
+  visibility: public
+  parameters:
+  - name: eventName
+  comment: '# * Determine if a given event has listeners.
+
+    # *
+
+    # * @param  string  $eventName
+
+    # * @return bool'
+- name: subscribe
+  visibility: public
+  parameters:
+  - name: subscriber
+  comment: '# * Register an event subscriber with the dispatcher.
+
+    # *
+
+    # * @param  object|string  $subscriber
+
+    # * @return void'
+- name: flush
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Flush a set of pushed events.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @return void'
+- name: forget
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Remove a set of listeners from the dispatcher.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @return void'
+- name: forgetPushed
+  visibility: public
+  parameters: []
+  comment: '# * Forget all of the queued listeners.
+
+    # *
+
+    # * @return void'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically pass method calls to the underlying dispatcher.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+traits:
+- Illuminate\Support\Traits\ForwardsCalls
+- ForwardsCalls
+interfaces:
+- DispatcherContract

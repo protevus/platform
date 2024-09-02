@@ -1,0 +1,137 @@
+name: WorkflowDataCollector
+class_comment: null
+dependencies:
+- name: FileLinkFormatter
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcherInterface
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: DataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\DataCollector
+- name: LateDataCollectorInterface
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+- name: Caster
+  type: class
+  source: Symfony\Component\VarDumper\Caster\Caster
+- name: Stub
+  type: class
+  source: Symfony\Component\VarDumper\Cloner\Stub
+- name: TraceableWorkflow
+  type: class
+  source: Symfony\Component\Workflow\Debug\TraceableWorkflow
+- name: MermaidDumper
+  type: class
+  source: Symfony\Component\Workflow\Dumper\MermaidDumper
+- name: GuardExpression
+  type: class
+  source: Symfony\Component\Workflow\EventListener\GuardExpression
+- name: GuardListener
+  type: class
+  source: Symfony\Component\Workflow\EventListener\GuardListener
+- name: Marking
+  type: class
+  source: Symfony\Component\Workflow\Marking
+- name: Transition
+  type: class
+  source: Symfony\Component\Workflow\Transition
+- name: TransitionBlocker
+  type: class
+  source: Symfony\Component\Workflow\TransitionBlocker
+- name: WorkflowInterface
+  type: class
+  source: Symfony\Component\Workflow\WorkflowInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: workflows
+  - name: eventDispatcher
+  - name: fileLinkFormatter
+  comment: null
+- name: collect
+  visibility: public
+  parameters:
+  - name: request
+  - name: response
+  - name: exception
+    default: 'null'
+  comment: null
+- name: lateCollect
+  visibility: public
+  parameters: []
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+- name: getWorkflows
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCallsCount
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCasters
+  visibility: protected
+  parameters: []
+  comment: null
+- name: hash
+  visibility: public
+  parameters:
+  - name: string
+  comment: null
+- name: getEventListeners
+  visibility: private
+  parameters:
+  - name: workflow
+  comment: null
+- name: summarizeListener
+  visibility: private
+  parameters:
+  - name: callable
+  - name: eventName
+    default: 'null'
+  - name: transition
+    default: 'null'
+  comment: null
+- name: extractGuardExpressions
+  visibility: private
+  parameters:
+  - name: listener
+  - name: eventName
+  - name: transition
+  comment: null
+traits:
+- Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter
+- Symfony\Component\EventDispatcher\EventDispatcherInterface
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\DataCollector\DataCollector
+- Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+- Symfony\Component\VarDumper\Caster\Caster
+- Symfony\Component\VarDumper\Cloner\Stub
+- Symfony\Component\Workflow\Debug\TraceableWorkflow
+- Symfony\Component\Workflow\Dumper\MermaidDumper
+- Symfony\Component\Workflow\EventListener\GuardExpression
+- Symfony\Component\Workflow\EventListener\GuardListener
+- Symfony\Component\Workflow\Marking
+- Symfony\Component\Workflow\Transition
+- Symfony\Component\Workflow\TransitionBlocker
+- Symfony\Component\Workflow\WorkflowInterface
+interfaces:
+- LateDataCollectorInterface

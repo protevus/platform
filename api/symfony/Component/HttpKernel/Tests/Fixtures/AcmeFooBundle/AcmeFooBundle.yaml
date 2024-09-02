@@ -1,0 +1,41 @@
+name: AcmeFooBundle
+class_comment: null
+dependencies:
+- name: DefinitionConfigurator
+  type: class
+  source: Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerConfigurator
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator
+- name: AbstractBundle
+  type: class
+  source: Symfony\Component\HttpKernel\Bundle\AbstractBundle
+properties: []
+methods:
+- name: configure
+  visibility: public
+  parameters:
+  - name: definition
+  comment: null
+- name: prependExtension
+  visibility: public
+  parameters:
+  - name: container
+  - name: builder
+  comment: null
+- name: loadExtension
+  visibility: public
+  parameters:
+  - name: config
+  - name: container
+  - name: builder
+  comment: null
+traits:
+- Symfony\Component\Config\Definition\Configurator\DefinitionConfigurator
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator
+- Symfony\Component\HttpKernel\Bundle\AbstractBundle
+interfaces: []

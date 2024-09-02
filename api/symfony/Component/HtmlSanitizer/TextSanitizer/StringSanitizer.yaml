@@ -1,0 +1,28 @@
+name: StringSanitizer
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: htmlLower
+  visibility: public
+  parameters:
+  - name: string
+  comment: "# * @internal\n# */\n# final class StringSanitizer\n# {\n# private const\
+    \ LOWERCASE = [\n# 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',\n# 'abcdefghijklmnopqrstuvwxyz',\n\
+    # ];\n# \n# private const REPLACEMENTS = [\n# [\n# // \"&#34;\" is shorter than\
+    \ \"&quot;\"\n# '&quot;',\n# \n# // Fix several potential issues in how browsers\
+    \ interpret attributes values\n# '+',\n# '=',\n# '@',\n# '`',\n# \n# // Some DB\
+    \ engines will transform UTF8 full-width characters their classical version\n\
+    # // if the data is saved in a non-UTF8 field\n# '\uFF1C',\n# '\uFF1E',\n# '\uFF0B\
+    ',\n# '\uFF1D',\n# '\uFF20',\n# '\uFF40',\n# ],\n# [\n# '&#34;',\n# \n# '&#43;',\n\
+    # '&#61;',\n# '&#64;',\n# '&#96;',\n# \n# '&#xFF1C;',\n# '&#xFF1E;',\n# '&#xFF0B;',\n\
+    # '&#xFF1D;',\n# '&#xFF20;',\n# '&#xFF40;',\n# ],\n# ];\n# \n# /**\n# * Applies\
+    \ a transformation to lowercase following W3C HTML Standard.\n# *\n# * @see https://w3c.github.io/html-reference/terminology.html#case-insensitive"
+- name: encodeHtmlEntities
+  visibility: public
+  parameters:
+  - name: string
+  comment: '# * Encodes the HTML entities in the given string for safe injection in
+    a document''s DOM.'
+traits: []
+interfaces: []

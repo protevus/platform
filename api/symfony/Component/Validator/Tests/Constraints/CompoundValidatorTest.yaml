@@ -1,0 +1,44 @@
+name: CompoundValidatorTest
+class_comment: null
+dependencies:
+- name: Compound
+  type: class
+  source: Symfony\Component\Validator\Constraints\Compound
+- name: CompoundValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\CompoundValidator
+- name: Length
+  type: class
+  source: Symfony\Component\Validator\Constraints\Length
+- name: NotBlank
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotBlank
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+properties: []
+methods:
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testValidValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidateWithConstraints
+  visibility: public
+  parameters: []
+  comment: null
+- name: getConstraints
+  visibility: protected
+  parameters:
+  - name: options
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\Compound
+- Symfony\Component\Validator\Constraints\CompoundValidator
+- Symfony\Component\Validator\Constraints\Length
+- Symfony\Component\Validator\Constraints\NotBlank
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

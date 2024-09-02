@@ -1,0 +1,34 @@
+name: EmailSubjectContains
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: PHPUnit\Framework\Constraint\Constraint
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: expectedSubjectValue
+  comment: null
+- name: toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: matches
+  visibility: protected
+  parameters:
+  - name: other
+  comment: null
+- name: failureDescription
+  visibility: protected
+  parameters:
+  - name: other
+  comment: null
+traits:
+- PHPUnit\Framework\Constraint\Constraint
+- Symfony\Component\Mime\Email
+interfaces: []

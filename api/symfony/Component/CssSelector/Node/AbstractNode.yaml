@@ -1,0 +1,12 @@
+name: AbstractNode
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getNodeName
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces:
+- NodeInterface

@@ -1,0 +1,19 @@
+name: form
+class_comment: null
+dependencies:
+- name: FormExtension
+  type: class
+  source: Symfony\Bridge\Twig\Extension\FormExtension
+- name: TwigRendererEngine
+  type: class
+  source: Symfony\Bridge\Twig\Form\TwigRendererEngine
+- name: FormRenderer
+  type: class
+  source: Symfony\Component\Form\FormRenderer
+properties: []
+methods: []
+traits:
+- Symfony\Bridge\Twig\Extension\FormExtension
+- Symfony\Bridge\Twig\Form\TwigRendererEngine
+- Symfony\Component\Form\FormRenderer
+interfaces: []

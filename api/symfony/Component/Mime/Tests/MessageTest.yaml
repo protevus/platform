@@ -1,0 +1,134 @@
+name: MessageTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: LogicException
+  type: class
+  source: Symfony\Component\Mime\Exception\LogicException
+- name: Headers
+  type: class
+  source: Symfony\Component\Mime\Header\Headers
+- name: MailboxListHeader
+  type: class
+  source: Symfony\Component\Mime\Header\MailboxListHeader
+- name: UnstructuredHeader
+  type: class
+  source: Symfony\Component\Mime\Header\UnstructuredHeader
+- name: Message
+  type: class
+  source: Symfony\Component\Mime\Message
+- name: DataPart
+  type: class
+  source: Symfony\Component\Mime\Part\DataPart
+- name: AlternativePart
+  type: class
+  source: Symfony\Component\Mime\Part\Multipart\AlternativePart
+- name: MixedPart
+  type: class
+  source: Symfony\Component\Mime\Part\Multipart\MixedPart
+- name: TextPart
+  type: class
+  source: Symfony\Component\Mime\Part\TextPart
+- name: PhpDocExtractor
+  type: class
+  source: Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor
+- name: JsonEncoder
+  type: class
+  source: Symfony\Component\Serializer\Encoder\JsonEncoder
+- name: ArrayDenormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ArrayDenormalizer
+- name: MimeMessageNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\MimeMessageNormalizer
+- name: ObjectNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+- name: PropertyNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\PropertyNormalizer
+- name: Serializer
+  type: class
+  source: Symfony\Component\Serializer\Serializer
+properties: []
+methods:
+- name: testConstruct
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPreparedHeadersThrowsWhenNoFrom
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPreparedHeadersCloneHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPreparedHeadersSetRequiredHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPreparedHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPreparedHeadersWithNoFrom
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPreparedHeadersWithNamedFrom
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPreparedHeadersHasSenderWhenNeeded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateMessageIdThrowsWhenHasFromButNoAddresses
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSymfonySerialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEnsureValidity
+  visibility: public
+  parameters:
+  - name: headers
+  - name: exceptionClass
+  - name: exceptionMessage
+  comment: '# * @dataProvider ensureValidityProvider'
+- name: ensureValidityProvider
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Exception\LogicException
+- Symfony\Component\Mime\Header\Headers
+- Symfony\Component\Mime\Header\MailboxListHeader
+- Symfony\Component\Mime\Header\UnstructuredHeader
+- Symfony\Component\Mime\Message
+- Symfony\Component\Mime\Part\DataPart
+- Symfony\Component\Mime\Part\Multipart\AlternativePart
+- Symfony\Component\Mime\Part\Multipart\MixedPart
+- Symfony\Component\Mime\Part\TextPart
+- Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor
+- Symfony\Component\Serializer\Encoder\JsonEncoder
+- Symfony\Component\Serializer\Normalizer\ArrayDenormalizer
+- Symfony\Component\Serializer\Normalizer\MimeMessageNormalizer
+- Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+- Symfony\Component\Serializer\Normalizer\PropertyNormalizer
+- Symfony\Component\Serializer\Serializer
+interfaces: []

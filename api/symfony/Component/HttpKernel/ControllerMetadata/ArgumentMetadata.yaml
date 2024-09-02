@@ -1,0 +1,99 @@
+name: ArgumentMetadata
+class_comment: '# * Responsible for storing metadata of an argument.
+
+  # *
+
+  # * @author Iltar van der Berg <kjarli@gmail.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: name
+  - name: type
+  - name: isVariadic
+  - name: hasDefaultValue
+  - name: defaultValue
+  - name: isNullable
+    default: 'false'
+  - name: attributes
+    default: '[]'
+  - name: controllerName
+    default: '''n/a'''
+  comment: "# * Responsible for storing metadata of an argument.\n# *\n# * @author\
+    \ Iltar van der Berg <kjarli@gmail.com>\n# */\n# class ArgumentMetadata\n# {\n\
+    # public const IS_INSTANCEOF = 2;\n# \n# /**\n# * @param object[] $attributes"
+- name: getName
+  visibility: public
+  parameters: []
+  comment: '# * Returns the name as given in PHP, $foo would yield "foo".'
+- name: getType
+  visibility: public
+  parameters: []
+  comment: '# * Returns the type of the argument.
+
+    # *
+
+    # * The type is the PHP class in 5.5+ and additionally the basic type in PHP 7.0+.'
+- name: isVariadic
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether the argument is defined as "...$variadic".'
+- name: hasDefaultValue
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether the argument has a default value.
+
+    # *
+
+    # * Implies whether an argument is optional.'
+- name: isNullable
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether the argument accepts null values.'
+- name: getDefaultValue
+  visibility: public
+  parameters: []
+  comment: '# * Returns the default value of the argument.
+
+    # *
+
+    # * @throws \LogicException if no default value is present; {@see self::hasDefaultValue()}'
+- name: getAttributes
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  - name: flags
+    default: '0'
+  comment: '# * @param class-string          $name
+
+    # * @param self::IS_INSTANCEOF|0 $flags
+
+    # *
+
+    # * @return array<object>'
+- name: getAttributesOfType
+  visibility: public
+  parameters:
+  - name: name
+  - name: flags
+    default: '0'
+  comment: '# * @template T of object
+
+    # *
+
+    # * @param class-string<T>       $name
+
+    # * @param self::IS_INSTANCEOF|0 $flags
+
+    # *
+
+    # * @return array<T>'
+- name: getControllerName
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

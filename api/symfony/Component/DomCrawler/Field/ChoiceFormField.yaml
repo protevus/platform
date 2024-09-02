@@ -1,0 +1,124 @@
+name: ChoiceFormField
+class_comment: '# * ChoiceFormField represents a choice form field.
+
+  # *
+
+  # * It is constructed from an HTML select tag, or an HTML checkbox, or radio inputs.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies: []
+properties: []
+methods:
+- name: hasValue
+  visibility: public
+  parameters: []
+  comment: "# * ChoiceFormField represents a choice form field.\n# *\n# * It is constructed\
+    \ from an HTML select tag, or an HTML checkbox, or radio inputs.\n# *\n# * @author\
+    \ Fabien Potencier <fabien@symfony.com>\n# */\n# class ChoiceFormField extends\
+    \ FormField\n# {\n# private string $type;\n# private bool $multiple;\n# private\
+    \ array $options;\n# private bool $validationDisabled = false;\n# \n# /**\n# *\
+    \ Returns true if the field should be included in the submitted values.\n# *\n\
+    # * @return bool true if the field should be included in the submitted values,\
+    \ false otherwise"
+- name: isDisabled
+  visibility: public
+  parameters: []
+  comment: '# * Check if the current selected option is disabled.'
+- name: select
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Sets the value of the field.'
+- name: tick
+  visibility: public
+  parameters: []
+  comment: '# * Ticks a checkbox.
+
+    # *
+
+    # * @throws \LogicException When the type provided is not correct'
+- name: untick
+  visibility: public
+  parameters: []
+  comment: '# * Unticks a checkbox.
+
+    # *
+
+    # * @throws \LogicException When the type provided is not correct'
+- name: setValue
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Sets the value of the field.
+
+    # *
+
+    # * @throws \InvalidArgumentException When value type provided is not correct'
+- name: addChoice
+  visibility: public
+  parameters:
+  - name: node
+  comment: '# * Adds a choice to the current ones.
+
+    # *
+
+    # * @throws \LogicException When choice provided is not multiple nor radio
+
+    # *
+
+    # * @internal'
+- name: getType
+  visibility: public
+  parameters: []
+  comment: '# * Returns the type of the choice field (radio, select, or checkbox).'
+- name: isMultiple
+  visibility: public
+  parameters: []
+  comment: '# * Returns true if the field accepts multiple values.'
+- name: initialize
+  visibility: protected
+  parameters: []
+  comment: '# * Initializes the form field.
+
+    # *
+
+    # * @throws \LogicException When node type is incorrect'
+- name: buildOptionValue
+  visibility: private
+  parameters:
+  - name: node
+  comment: '# * Returns option value with associated disabled flag.'
+- name: containsOption
+  visibility: public
+  parameters:
+  - name: optionValue
+  - name: options
+  comment: '# * Checks whether given value is in the existing options.
+
+    # *
+
+    # * @internal'
+- name: availableOptionValues
+  visibility: public
+  parameters: []
+  comment: '# * Returns list of available field options.
+
+    # *
+
+    # * @internal'
+- name: disableValidation
+  visibility: public
+  parameters: []
+  comment: '# * Disables the internal validation of the field.
+
+    # *
+
+    # * @internal
+
+    # *
+
+    # * @return $this'
+traits: []
+interfaces: []

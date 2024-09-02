@@ -1,0 +1,86 @@
+name: ContainerControllerResolverTest
+class_comment: null
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: Container
+  type: class
+  source: Symfony\Component\DependencyInjection\Container
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: ContainerControllerResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ContainerControllerResolver
+properties: []
+methods:
+- name: testGetControllerService
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetControllerInvokableService
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetControllerInvokableServiceWithClassNameAsName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInstantiateControllerWhenControllerStartsWithABackslash
+  visibility: public
+  parameters:
+  - name: controller
+  comment: '# * @dataProvider getControllers'
+- name: getControllers
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExceptionWhenUsingRemovedControllerServiceWithClassNameAsName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExceptionWhenUsingRemovedControllerService
+  visibility: public
+  parameters: []
+  comment: null
+- name: getUndefinedControllers
+  visibility: public
+  parameters: []
+  comment: null
+- name: createControllerResolver
+  visibility: protected
+  parameters:
+  - name: logger
+    default: 'null'
+  - name: container
+    default: 'null'
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: bar
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: action
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Psr\Log\LoggerInterface
+- Symfony\Component\DependencyInjection\Container
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\Controller\ContainerControllerResolver
+interfaces: []

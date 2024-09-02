@@ -1,0 +1,15 @@
+name: TextareaFormFieldTest
+class_comment: null
+dependencies:
+- name: TextareaFormField
+  type: class
+  source: Symfony\Component\DomCrawler\Field\TextareaFormField
+properties: []
+methods:
+- name: testInitialize
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\DomCrawler\Field\TextareaFormField
+interfaces: []

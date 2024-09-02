@@ -1,0 +1,39 @@
+name: GroupsTestTrait
+class_comment: null
+dependencies:
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- name: NormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\NormalizerInterface
+- name: GroupDummy
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\Attributes\GroupDummy
+properties: []
+methods:
+- name: getNormalizerForGroups
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getDenormalizerForGroups
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testGroupsNormalize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGroupsDenormalize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalizeNoPropertyInGroup
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- Symfony\Component\Serializer\Normalizer\NormalizerInterface
+- Symfony\Component\Serializer\Tests\Fixtures\Attributes\GroupDummy
+interfaces: []

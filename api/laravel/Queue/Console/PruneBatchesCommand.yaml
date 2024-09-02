@@ -1,0 +1,55 @@
+name: PruneBatchesCommand
+class_comment: null
+dependencies:
+- name: BatchRepository
+  type: class
+  source: Illuminate\Bus\BatchRepository
+- name: DatabaseBatchRepository
+  type: class
+  source: Illuminate\Bus\DatabaseBatchRepository
+- name: PrunableBatchRepository
+  type: class
+  source: Illuminate\Bus\PrunableBatchRepository
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+- name: Carbon
+  type: class
+  source: Illuminate\Support\Carbon
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+properties:
+- name: signature
+  visibility: protected
+  comment: '# * The console command signature.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+methods:
+- name: handle
+  visibility: public
+  parameters: []
+  comment: "# * The console command signature.\n# *\n# * @var string\n# */\n# protected\
+    \ $signature = 'queue:prune-batches\n# {--hours=24 : The number of hours to retain\
+    \ batch data}\n# {--unfinished= : The number of hours to retain unfinished batch\
+    \ data }\n# {--cancelled= : The number of hours to retain cancelled batch data\
+    \ }';\n# \n# /**\n# * The console command description.\n# *\n# * @var string\n\
+    # */\n# protected $description = 'Prune stale entries from the batches database';\n\
+    # \n# /**\n# * Execute the console command.\n# *\n# * @return void"
+traits:
+- Illuminate\Bus\BatchRepository
+- Illuminate\Bus\DatabaseBatchRepository
+- Illuminate\Bus\PrunableBatchRepository
+- Illuminate\Console\Command
+- Illuminate\Support\Carbon
+- Symfony\Component\Console\Attribute\AsCommand
+interfaces: []

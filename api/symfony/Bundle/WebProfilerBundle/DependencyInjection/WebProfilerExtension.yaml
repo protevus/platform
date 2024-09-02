@@ -1,0 +1,99 @@
+name: WebProfilerExtension
+class_comment: '# * WebProfilerExtension.
+
+  # *
+
+  # * Usage:
+
+  # *
+
+  # *     <webprofiler:config
+
+  # *        toolbar="true"
+
+  # *        intercept-redirects="true"
+
+  # *     />
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: WebDebugToolbarListener
+  type: class
+  source: Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener
+- name: FileLocator
+  type: class
+  source: Symfony\Component\Config\FileLocator
+- name: ServiceClosureArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Extension
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\Extension
+- name: PhpFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+properties: []
+methods:
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: container
+  comment: '# * WebProfilerExtension.
+
+    # *
+
+    # * Usage:
+
+    # *
+
+    # *     <webprofiler:config
+
+    # *        toolbar="true"
+
+    # *        intercept-redirects="true"
+
+    # *     />
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # class WebProfilerExtension extends Extension
+
+    # {
+
+    # /**
+
+    # * Loads the web profiler configuration.
+
+    # *
+
+    # * @param array $configs An array of configuration settings'
+- name: getXsdValidationBasePath
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNamespace
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Bundle\WebProfilerBundle\EventListener\WebDebugToolbarListener
+- Symfony\Component\Config\FileLocator
+- Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Extension\Extension
+- Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- Symfony\Component\DependencyInjection\Reference
+interfaces: []

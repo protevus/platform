@@ -1,0 +1,47 @@
+name: InMemoryMetadataStoreTest
+class_comment: "# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>"
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: InMemoryMetadataStore
+  type: class
+  source: Symfony\Component\Workflow\Metadata\InMemoryMetadataStore
+- name: Transition
+  type: class
+  source: Symfony\Component\Workflow\Transition
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testGetWorkflowMetadata
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetUnexistingPlaceMetadata
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetExistingPlaceMetadata
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetUnexistingTransitionMetadata
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetExistingTransitionMetadata
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetMetadata
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Workflow\Metadata\InMemoryMetadataStore
+- Symfony\Component\Workflow\Transition
+interfaces: []

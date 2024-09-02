@@ -1,0 +1,51 @@
+name: ValidationMiddlewareTest
+class_comment: null
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: ValidationFailedException
+  type: class
+  source: Symfony\Component\Messenger\Exception\ValidationFailedException
+- name: ValidationMiddleware
+  type: class
+  source: Symfony\Component\Messenger\Middleware\ValidationMiddleware
+- name: ValidationStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\ValidationStamp
+- name: MiddlewareTestCase
+  type: class
+  source: Symfony\Component\Messenger\Test\Middleware\MiddlewareTestCase
+- name: DummyMessage
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\DummyMessage
+- name: ConstraintViolationListInterface
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolationListInterface
+- name: ValidatorInterface
+  type: class
+  source: Symfony\Component\Validator\Validator\ValidatorInterface
+properties: []
+methods:
+- name: testValidateAndNextMiddleware
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidateWithStampAndNextMiddleware
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidationFailedException
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Exception\ValidationFailedException
+- Symfony\Component\Messenger\Middleware\ValidationMiddleware
+- Symfony\Component\Messenger\Stamp\ValidationStamp
+- Symfony\Component\Messenger\Test\Middleware\MiddlewareTestCase
+- Symfony\Component\Messenger\Tests\Fixtures\DummyMessage
+- Symfony\Component\Validator\ConstraintViolationListInterface
+- Symfony\Component\Validator\Validator\ValidatorInterface
+interfaces: []

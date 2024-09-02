@@ -1,0 +1,954 @@
+name: Event
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: CronExpression
+  type: class
+  source: Cron\CronExpression
+- name: HttpClient
+  type: class
+  source: GuzzleHttp\Client
+- name: HttpClientInterface
+  type: class
+  source: GuzzleHttp\ClientInterface
+- name: TransferException
+  type: class
+  source: GuzzleHttp\Exception\TransferException
+- name: Container
+  type: class
+  source: Illuminate\Contracts\Container\Container
+- name: ExceptionHandler
+  type: class
+  source: Illuminate\Contracts\Debug\ExceptionHandler
+- name: Mailer
+  type: class
+  source: Illuminate\Contracts\Mail\Mailer
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Date
+  type: class
+  source: Illuminate\Support\Facades\Date
+- name: Reflector
+  type: class
+  source: Illuminate\Support\Reflector
+- name: Stringable
+  type: class
+  source: Illuminate\Support\Stringable
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: ReflectsClosures
+  type: class
+  source: Illuminate\Support\Traits\ReflectsClosures
+- name: Tappable
+  type: class
+  source: Illuminate\Support\Traits\Tappable
+- name: ClientExceptionInterface
+  type: class
+  source: Psr\Http\Client\ClientExceptionInterface
+- name: Process
+  type: class
+  source: Symfony\Component\Process\Process
+- name: Throwable
+  type: class
+  source: Throwable
+properties:
+- name: command
+  visibility: public
+  comment: '# * The command string.
+
+    # *
+
+    # * @var string|null'
+- name: expression
+  visibility: public
+  comment: '# * The cron expression representing the event''s frequency.
+
+    # *
+
+    # * @var string'
+- name: repeatSeconds
+  visibility: public
+  comment: '# * How often to repeat the event during a minute.
+
+    # *
+
+    # * @var int|null'
+- name: timezone
+  visibility: public
+  comment: '# * The timezone the date should be evaluated on.
+
+    # *
+
+    # * @var \DateTimeZone|string'
+- name: user
+  visibility: public
+  comment: '# * The user the command should run as.
+
+    # *
+
+    # * @var string|null'
+- name: environments
+  visibility: public
+  comment: '# * The list of environments the command should run under.
+
+    # *
+
+    # * @var array'
+- name: evenInMaintenanceMode
+  visibility: public
+  comment: '# * Indicates if the command should run in maintenance mode.
+
+    # *
+
+    # * @var bool'
+- name: withoutOverlapping
+  visibility: public
+  comment: '# * Indicates if the command should not overlap itself.
+
+    # *
+
+    # * @var bool'
+- name: onOneServer
+  visibility: public
+  comment: '# * Indicates if the command should only be allowed to run on one server
+    for each cron expression.
+
+    # *
+
+    # * @var bool'
+- name: expiresAt
+  visibility: public
+  comment: '# * The number of minutes the mutex should be valid.
+
+    # *
+
+    # * @var int'
+- name: runInBackground
+  visibility: public
+  comment: '# * Indicates if the command should run in the background.
+
+    # *
+
+    # * @var bool'
+- name: filters
+  visibility: protected
+  comment: '# * The array of filter callbacks.
+
+    # *
+
+    # * @var array'
+- name: rejects
+  visibility: protected
+  comment: '# * The array of reject callbacks.
+
+    # *
+
+    # * @var array'
+- name: output
+  visibility: public
+  comment: '# * The location that output should be sent to.
+
+    # *
+
+    # * @var string'
+- name: shouldAppendOutput
+  visibility: public
+  comment: '# * Indicates whether output should be appended.
+
+    # *
+
+    # * @var bool'
+- name: beforeCallbacks
+  visibility: protected
+  comment: '# * The array of callbacks to be run before the event is started.
+
+    # *
+
+    # * @var array'
+- name: afterCallbacks
+  visibility: protected
+  comment: '# * The array of callbacks to be run after the event is finished.
+
+    # *
+
+    # * @var array'
+- name: description
+  visibility: public
+  comment: '# * The human readable description of the event.
+
+    # *
+
+    # * @var string|null'
+- name: mutex
+  visibility: public
+  comment: '# * The event mutex implementation.
+
+    # *
+
+    # * @var \Illuminate\Console\Scheduling\EventMutex'
+- name: mutexNameResolver
+  visibility: public
+  comment: '# * The mutex name resolver callback.
+
+    # *
+
+    # * @var \Closure|null'
+- name: lastChecked
+  visibility: protected
+  comment: '# * The last time the event was checked for eligibility to run.
+
+    # *
+
+    # * Utilized by sub-minute repeated events.
+
+    # *
+
+    # * @var \Illuminate\Support\Carbon|null'
+- name: exitCode
+  visibility: public
+  comment: '# * The exit status code of the command.
+
+    # *
+
+    # * @var int|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: mutex
+  - name: command
+  - name: timezone
+    default: 'null'
+  comment: "# * The command string.\n# *\n# * @var string|null\n# */\n# public $command;\n\
+    # \n# /**\n# * The cron expression representing the event's frequency.\n# *\n\
+    # * @var string\n# */\n# public $expression = '* * * * *';\n# \n# /**\n# * How\
+    \ often to repeat the event during a minute.\n# *\n# * @var int|null\n# */\n#\
+    \ public $repeatSeconds = null;\n# \n# /**\n# * The timezone the date should be\
+    \ evaluated on.\n# *\n# * @var \\DateTimeZone|string\n# */\n# public $timezone;\n\
+    # \n# /**\n# * The user the command should run as.\n# *\n# * @var string|null\n\
+    # */\n# public $user;\n# \n# /**\n# * The list of environments the command should\
+    \ run under.\n# *\n# * @var array\n# */\n# public $environments = [];\n# \n# /**\n\
+    # * Indicates if the command should run in maintenance mode.\n# *\n# * @var bool\n\
+    # */\n# public $evenInMaintenanceMode = false;\n# \n# /**\n# * Indicates if the\
+    \ command should not overlap itself.\n# *\n# * @var bool\n# */\n# public $withoutOverlapping\
+    \ = false;\n# \n# /**\n# * Indicates if the command should only be allowed to\
+    \ run on one server for each cron expression.\n# *\n# * @var bool\n# */\n# public\
+    \ $onOneServer = false;\n# \n# /**\n# * The number of minutes the mutex should\
+    \ be valid.\n# *\n# * @var int\n# */\n# public $expiresAt = 1440;\n# \n# /**\n\
+    # * Indicates if the command should run in the background.\n# *\n# * @var bool\n\
+    # */\n# public $runInBackground = false;\n# \n# /**\n# * The array of filter callbacks.\n\
+    # *\n# * @var array\n# */\n# protected $filters = [];\n# \n# /**\n# * The array\
+    \ of reject callbacks.\n# *\n# * @var array\n# */\n# protected $rejects = [];\n\
+    # \n# /**\n# * The location that output should be sent to.\n# *\n# * @var string\n\
+    # */\n# public $output = '/dev/null';\n# \n# /**\n# * Indicates whether output\
+    \ should be appended.\n# *\n# * @var bool\n# */\n# public $shouldAppendOutput\
+    \ = false;\n# \n# /**\n# * The array of callbacks to be run before the event is\
+    \ started.\n# *\n# * @var array\n# */\n# protected $beforeCallbacks = [];\n# \n\
+    # /**\n# * The array of callbacks to be run after the event is finished.\n# *\n\
+    # * @var array\n# */\n# protected $afterCallbacks = [];\n# \n# /**\n# * The human\
+    \ readable description of the event.\n# *\n# * @var string|null\n# */\n# public\
+    \ $description;\n# \n# /**\n# * The event mutex implementation.\n# *\n# * @var\
+    \ \\Illuminate\\Console\\Scheduling\\EventMutex\n# */\n# public $mutex;\n# \n\
+    # /**\n# * The mutex name resolver callback.\n# *\n# * @var \\Closure|null\n#\
+    \ */\n# public $mutexNameResolver;\n# \n# /**\n# * The last time the event was\
+    \ checked for eligibility to run.\n# *\n# * Utilized by sub-minute repeated events.\n\
+    # *\n# * @var \\Illuminate\\Support\\Carbon|null\n# */\n# protected $lastChecked;\n\
+    # \n# /**\n# * The exit status code of the command.\n# *\n# * @var int|null\n\
+    # */\n# public $exitCode;\n# \n# /**\n# * Create a new event instance.\n# *\n\
+    # * @param  \\Illuminate\\Console\\Scheduling\\EventMutex  $mutex\n# * @param\
+    \  string  $command\n# * @param  \\DateTimeZone|string|null  $timezone\n# * @return\
+    \ void"
+- name: getDefaultOutput
+  visibility: public
+  parameters: []
+  comment: '# * Get the default output depending on the OS.
+
+    # *
+
+    # * @return string'
+- name: run
+  visibility: public
+  parameters:
+  - name: container
+  comment: '# * Run the given event.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Container\Container  $container
+
+    # * @return void
+
+    # *
+
+    # * @throws \Throwable'
+- name: shouldSkipDueToOverlapping
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the event should skip because another process is overlapping.
+
+    # *
+
+    # * @return bool'
+- name: isRepeatable
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the event has been configured to repeat multiple times
+    per minute.
+
+    # *
+
+    # * @return bool'
+- name: shouldRepeatNow
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the event is ready to repeat.
+
+    # *
+
+    # * @return bool'
+- name: start
+  visibility: protected
+  parameters:
+  - name: container
+  comment: '# * Run the command process.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Container\Container  $container
+
+    # * @return int
+
+    # *
+
+    # * @throws \Throwable'
+- name: execute
+  visibility: protected
+  parameters:
+  - name: container
+  comment: '# * Run the command process.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Container\Container  $container
+
+    # * @return int'
+- name: finish
+  visibility: public
+  parameters:
+  - name: container
+  - name: exitCode
+  comment: '# * Mark the command process as finished and run callbacks/cleanup.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Container\Container  $container
+
+    # * @param  int  $exitCode
+
+    # * @return void'
+- name: callBeforeCallbacks
+  visibility: public
+  parameters:
+  - name: container
+  comment: '# * Call all of the "before" callbacks for the event.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Container\Container  $container
+
+    # * @return void'
+- name: callAfterCallbacks
+  visibility: public
+  parameters:
+  - name: container
+  comment: '# * Call all of the "after" callbacks for the event.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Container\Container  $container
+
+    # * @return void'
+- name: buildCommand
+  visibility: public
+  parameters: []
+  comment: '# * Build the command string.
+
+    # *
+
+    # * @return string'
+- name: isDue
+  visibility: public
+  parameters:
+  - name: app
+  comment: '# * Determine if the given event should run based on the Cron expression.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Foundation\Application  $app
+
+    # * @return bool'
+- name: runsInMaintenanceMode
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the event runs in maintenance mode.
+
+    # *
+
+    # * @return bool'
+- name: expressionPasses
+  visibility: protected
+  parameters: []
+  comment: '# * Determine if the Cron expression passes.
+
+    # *
+
+    # * @return bool'
+- name: runsInEnvironment
+  visibility: public
+  parameters:
+  - name: environment
+  comment: '# * Determine if the event runs in the given environment.
+
+    # *
+
+    # * @param  string  $environment
+
+    # * @return bool'
+- name: filtersPass
+  visibility: public
+  parameters:
+  - name: app
+  comment: '# * Determine if the filters pass for the event.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Foundation\Application  $app
+
+    # * @return bool'
+- name: storeOutput
+  visibility: public
+  parameters: []
+  comment: '# * Ensure that the output is stored on disk in a log file.
+
+    # *
+
+    # * @return $this'
+- name: sendOutputTo
+  visibility: public
+  parameters:
+  - name: location
+  - name: append
+    default: 'false'
+  comment: '# * Send the output of the command to a given location.
+
+    # *
+
+    # * @param  string  $location
+
+    # * @param  bool  $append
+
+    # * @return $this'
+- name: appendOutputTo
+  visibility: public
+  parameters:
+  - name: location
+  comment: '# * Append the output of the command to a given location.
+
+    # *
+
+    # * @param  string  $location
+
+    # * @return $this'
+- name: emailOutputTo
+  visibility: public
+  parameters:
+  - name: addresses
+  - name: onlyIfOutputExists
+    default: 'false'
+  comment: '# * E-mail the results of the scheduled operation.
+
+    # *
+
+    # * @param  array|mixed  $addresses
+
+    # * @param  bool  $onlyIfOutputExists
+
+    # * @return $this
+
+    # *
+
+    # * @throws \LogicException'
+- name: emailWrittenOutputTo
+  visibility: public
+  parameters:
+  - name: addresses
+  comment: '# * E-mail the results of the scheduled operation if it produces output.
+
+    # *
+
+    # * @param  array|mixed  $addresses
+
+    # * @return $this
+
+    # *
+
+    # * @throws \LogicException'
+- name: emailOutputOnFailure
+  visibility: public
+  parameters:
+  - name: addresses
+  comment: '# * E-mail the results of the scheduled operation if it fails.
+
+    # *
+
+    # * @param  array|mixed  $addresses
+
+    # * @return $this'
+- name: ensureOutputIsBeingCaptured
+  visibility: protected
+  parameters: []
+  comment: '# * Ensure that the command output is being captured.
+
+    # *
+
+    # * @return void'
+- name: emailOutput
+  visibility: protected
+  parameters:
+  - name: mailer
+  - name: addresses
+  - name: onlyIfOutputExists
+    default: 'false'
+  comment: '# * E-mail the output of the event to the recipients.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Mail\Mailer  $mailer
+
+    # * @param  array  $addresses
+
+    # * @param  bool  $onlyIfOutputExists
+
+    # * @return void'
+- name: getEmailSubject
+  visibility: protected
+  parameters: []
+  comment: '# * Get the e-mail subject line for output results.
+
+    # *
+
+    # * @return string'
+- name: pingBefore
+  visibility: public
+  parameters:
+  - name: url
+  comment: '# * Register a callback to ping a given URL before the job runs.
+
+    # *
+
+    # * @param  string  $url
+
+    # * @return $this'
+- name: pingBeforeIf
+  visibility: public
+  parameters:
+  - name: value
+  - name: url
+  comment: '# * Register a callback to ping a given URL before the job runs if the
+    given condition is true.
+
+    # *
+
+    # * @param  bool  $value
+
+    # * @param  string  $url
+
+    # * @return $this'
+- name: thenPing
+  visibility: public
+  parameters:
+  - name: url
+  comment: '# * Register a callback to ping a given URL after the job runs.
+
+    # *
+
+    # * @param  string  $url
+
+    # * @return $this'
+- name: thenPingIf
+  visibility: public
+  parameters:
+  - name: value
+  - name: url
+  comment: '# * Register a callback to ping a given URL after the job runs if the
+    given condition is true.
+
+    # *
+
+    # * @param  bool  $value
+
+    # * @param  string  $url
+
+    # * @return $this'
+- name: pingOnSuccess
+  visibility: public
+  parameters:
+  - name: url
+  comment: '# * Register a callback to ping a given URL if the operation succeeds.
+
+    # *
+
+    # * @param  string  $url
+
+    # * @return $this'
+- name: pingOnFailure
+  visibility: public
+  parameters:
+  - name: url
+  comment: '# * Register a callback to ping a given URL if the operation fails.
+
+    # *
+
+    # * @param  string  $url
+
+    # * @return $this'
+- name: pingCallback
+  visibility: protected
+  parameters:
+  - name: url
+  comment: '# * Get the callback that pings the given URL.
+
+    # *
+
+    # * @param  string  $url
+
+    # * @return \Closure'
+- name: getHttpClient
+  visibility: protected
+  parameters:
+  - name: container
+  comment: '# * Get the Guzzle HTTP client to use to send pings.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Container\Container  $container
+
+    # * @return \GuzzleHttp\ClientInterface'
+- name: runInBackground
+  visibility: public
+  parameters: []
+  comment: '# * State that the command should run in the background.
+
+    # *
+
+    # * @return $this'
+- name: user
+  visibility: public
+  parameters:
+  - name: user
+  comment: '# * Set which user the command should run as.
+
+    # *
+
+    # * @param  string  $user
+
+    # * @return $this'
+- name: environments
+  visibility: public
+  parameters:
+  - name: environments
+  comment: '# * Limit the environments the command should run in.
+
+    # *
+
+    # * @param  array|mixed  $environments
+
+    # * @return $this'
+- name: evenInMaintenanceMode
+  visibility: public
+  parameters: []
+  comment: '# * State that the command should run even in maintenance mode.
+
+    # *
+
+    # * @return $this'
+- name: withoutOverlapping
+  visibility: public
+  parameters:
+  - name: expiresAt
+    default: '1440'
+  comment: '# * Do not allow the event to overlap each other.
+
+    # *
+
+    # * The expiration time of the underlying cache lock may be specified in minutes.
+
+    # *
+
+    # * @param  int  $expiresAt
+
+    # * @return $this'
+- name: onOneServer
+  visibility: public
+  parameters: []
+  comment: '# * Allow the event to only run on one server for each cron expression.
+
+    # *
+
+    # * @return $this'
+- name: when
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a callback to further filter the schedule.
+
+    # *
+
+    # * @param  \Closure|bool  $callback
+
+    # * @return $this'
+- name: skip
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a callback to further filter the schedule.
+
+    # *
+
+    # * @param  \Closure|bool  $callback
+
+    # * @return $this'
+- name: before
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a callback to be called before the operation.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return $this'
+- name: after
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a callback to be called after the operation.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return $this'
+- name: then
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a callback to be called after the operation.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return $this'
+- name: thenWithOutput
+  visibility: public
+  parameters:
+  - name: callback
+  - name: onlyIfOutputExists
+    default: 'false'
+  comment: '# * Register a callback that uses the output after the job runs.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @param  bool  $onlyIfOutputExists
+
+    # * @return $this'
+- name: onSuccess
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a callback to be called if the operation succeeds.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return $this'
+- name: onSuccessWithOutput
+  visibility: public
+  parameters:
+  - name: callback
+  - name: onlyIfOutputExists
+    default: 'false'
+  comment: '# * Register a callback that uses the output if the operation succeeds.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @param  bool  $onlyIfOutputExists
+
+    # * @return $this'
+- name: onFailure
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a callback to be called if the operation fails.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return $this'
+- name: onFailureWithOutput
+  visibility: public
+  parameters:
+  - name: callback
+  - name: onlyIfOutputExists
+    default: 'false'
+  comment: '# * Register a callback that uses the output if the operation fails.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @param  bool  $onlyIfOutputExists
+
+    # * @return $this'
+- name: withOutputCallback
+  visibility: protected
+  parameters:
+  - name: callback
+  - name: onlyIfOutputExists
+    default: 'false'
+  comment: '# * Get a callback that provides output.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @param  bool  $onlyIfOutputExists
+
+    # * @return \Closure'
+- name: name
+  visibility: public
+  parameters:
+  - name: description
+  comment: '# * Set the human-friendly description of the event.
+
+    # *
+
+    # * @param  string  $description
+
+    # * @return $this'
+- name: description
+  visibility: public
+  parameters:
+  - name: description
+  comment: '# * Set the human-friendly description of the event.
+
+    # *
+
+    # * @param  string  $description
+
+    # * @return $this'
+- name: getSummaryForDisplay
+  visibility: public
+  parameters: []
+  comment: '# * Get the summary of the event for display.
+
+    # *
+
+    # * @return string'
+- name: nextRunDate
+  visibility: public
+  parameters:
+  - name: currentTime
+    default: '''now'''
+  - name: nth
+    default: '0'
+  - name: allowCurrentDate
+    default: 'false'
+  comment: '# * Determine the next due date for an event.
+
+    # *
+
+    # * @param  \DateTimeInterface|string  $currentTime
+
+    # * @param  int  $nth
+
+    # * @param  bool  $allowCurrentDate
+
+    # * @return \Illuminate\Support\Carbon'
+- name: getExpression
+  visibility: public
+  parameters: []
+  comment: '# * Get the Cron expression for the event.
+
+    # *
+
+    # * @return string'
+- name: preventOverlapsUsing
+  visibility: public
+  parameters:
+  - name: mutex
+  comment: '# * Set the event mutex implementation to be used.
+
+    # *
+
+    # * @param  \Illuminate\Console\Scheduling\EventMutex  $mutex
+
+    # * @return $this'
+- name: mutexName
+  visibility: public
+  parameters: []
+  comment: '# * Get the mutex name for the scheduled command.
+
+    # *
+
+    # * @return string'
+- name: createMutexNameUsing
+  visibility: public
+  parameters:
+  - name: mutexName
+  comment: '# * Set the mutex name or name resolver callback.
+
+    # *
+
+    # * @param  \Closure|string  $mutexName
+
+    # * @return $this'
+- name: removeMutex
+  visibility: protected
+  parameters: []
+  comment: '# * Delete the mutex for the event.
+
+    # *
+
+    # * @return void'
+traits:
+- Closure
+- Cron\CronExpression
+- GuzzleHttp\Exception\TransferException
+- Illuminate\Contracts\Container\Container
+- Illuminate\Contracts\Debug\ExceptionHandler
+- Illuminate\Contracts\Mail\Mailer
+- Illuminate\Support\Arr
+- Illuminate\Support\Facades\Date
+- Illuminate\Support\Reflector
+- Illuminate\Support\Stringable
+- Illuminate\Support\Traits\Macroable
+- Illuminate\Support\Traits\ReflectsClosures
+- Illuminate\Support\Traits\Tappable
+- Psr\Http\Client\ClientExceptionInterface
+- Symfony\Component\Process\Process
+- Throwable
+- Macroable
+interfaces: []

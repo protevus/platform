@@ -1,0 +1,17 @@
+name: DummyPrivatePropertyWithoutGetter
+class_comment: null
+dependencies: []
+properties:
+- name: foo
+  visibility: private
+  comment: null
+- name: bar
+  visibility: private
+  comment: null
+methods:
+- name: getBar
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

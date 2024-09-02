@@ -1,0 +1,81 @@
+name: SendgridRequestParser
+class_comment: null
+dependencies:
+- name: ChainRequestMatcher
+  type: class
+  source: Symfony\Component\HttpFoundation\ChainRequestMatcher
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: IsJsonRequestMatcher
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestMatcher\IsJsonRequestMatcher
+- name: MethodRequestMatcher
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestMatcher\MethodRequestMatcher
+- name: RequestMatcherInterface
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestMatcherInterface
+- name: SendgridPayloadConverter
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Sendgrid\RemoteEvent\SendgridPayloadConverter
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Mailer\Exception\InvalidArgumentException
+- name: AbstractMailerEvent
+  type: class
+  source: Symfony\Component\RemoteEvent\Event\Mailer\AbstractMailerEvent
+- name: ParseException
+  type: class
+  source: Symfony\Component\RemoteEvent\Exception\ParseException
+- name: AbstractRequestParser
+  type: class
+  source: Symfony\Component\Webhook\Client\AbstractRequestParser
+- name: RejectWebhookException
+  type: class
+  source: Symfony\Component\Webhook\Exception\RejectWebhookException
+properties: []
+methods:
+- name: validateSignature
+  visibility: private
+  parameters:
+  - name: signature
+  - name: timestamp
+  - name: payload
+  - name: secret
+  comment: "# * @author WoutervanderLoop.nl <info@woutervanderloop.nl>\n# */\n# final\
+    \ class SendgridRequestParser extends AbstractRequestParser\n# {\n# public function\
+    \ __construct(\n# private readonly SendgridPayloadConverter $converter,\n# ) {\n\
+    # }\n# \n# protected function getRequestMatcher(): RequestMatcherInterface\n#\
+    \ {\n# return new ChainRequestMatcher([\n# new MethodRequestMatcher('POST'),\n\
+    # new IsJsonRequestMatcher(),\n# ]);\n# }\n# \n# protected function doParse(Request\
+    \ $request, string $secret): ?AbstractMailerEvent\n# {\n# $content = $request->toArray();\n\
+    # if (\n# !isset($content[0]['email'])\n# || !isset($content[0]['timestamp'])\n\
+    # || !isset($content[0]['event'])\n# || !isset($content[0]['sg_message_id'])\n\
+    # ) {\n# throw new RejectWebhookException(406, 'Payload is malformed.');\n# }\n\
+    # \n# if ($secret) {\n# if (!$request->headers->get('X-Twilio-Email-Event-Webhook-Signature')\n\
+    # || !$request->headers->get('X-Twilio-Email-Event-Webhook-Timestamp')\n# ) {\n\
+    # throw new RejectWebhookException(406, 'Signature is required.');\n# }\n# \n\
+    # $this->validateSignature(\n# $request->headers->get('X-Twilio-Email-Event-Webhook-Signature'),\n\
+    # $request->headers->get('X-Twilio-Email-Event-Webhook-Timestamp'),\n# $request->getContent(),\n\
+    # $secret,\n# );\n# }\n# \n# try {\n# return $this->converter->convert($content[0]);\n\
+    # } catch (ParseException $e) {\n# throw new RejectWebhookException(406, $e->getMessage(),\
+    \ $e);\n# }\n# }\n# \n# /**\n# * Verify signed event webhook requests.\n# *\n\
+    # * @param string $signature value obtained from the\n# *                    \
+    \      'X-Twilio-Email-Event-Webhook-Signature' header\n# * @param string $timestamp\
+    \ value obtained from the\n# *                          'X-Twilio-Email-Event-Webhook-Timestamp'\
+    \ header\n# * @param string $payload   event payload in the request body\n# *\
+    \ @param string $secret    base64-encoded DER public key\n# *\n# * @see https://docs.sendgrid.com/for-developers/tracking-events/getting-started-event-webhook-security-features"
+traits:
+- Symfony\Component\HttpFoundation\ChainRequestMatcher
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestMatcher\IsJsonRequestMatcher
+- Symfony\Component\HttpFoundation\RequestMatcher\MethodRequestMatcher
+- Symfony\Component\HttpFoundation\RequestMatcherInterface
+- Symfony\Component\Mailer\Bridge\Sendgrid\RemoteEvent\SendgridPayloadConverter
+- Symfony\Component\Mailer\Exception\InvalidArgumentException
+- Symfony\Component\RemoteEvent\Event\Mailer\AbstractMailerEvent
+- Symfony\Component\RemoteEvent\Exception\ParseException
+- Symfony\Component\Webhook\Client\AbstractRequestParser
+- Symfony\Component\Webhook\Exception\RejectWebhookException
+interfaces: []

@@ -1,0 +1,35 @@
+name: ClassMetadataFactoryCompiler
+class_comment: null
+dependencies:
+- name: ClassMetadataInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassMetadataInterface
+- name: VarExporter
+  type: class
+  source: Symfony\Component\VarExporter\VarExporter
+properties: []
+methods:
+- name: compile
+  visibility: public
+  parameters:
+  - name: classMetadatas
+  comment: '# * @author Fabien Bourigault <bourigaultfabien@gmail.com>
+
+    # */
+
+    # final class ClassMetadataFactoryCompiler
+
+    # {
+
+    # /**
+
+    # * @param ClassMetadataInterface[] $classMetadatas'
+- name: generateDeclaredClassMetadata
+  visibility: private
+  parameters:
+  - name: classMetadatas
+  comment: '# * @param ClassMetadataInterface[] $classMetadatas'
+traits:
+- Symfony\Component\Serializer\Mapping\ClassMetadataInterface
+- Symfony\Component\VarExporter\VarExporter
+interfaces: []

@@ -1,0 +1,23 @@
+name: RelayStoreTest
+class_comment: '# * @requires extension relay'
+dependencies:
+- name: Relay
+  type: class
+  source: Relay\Relay
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: setUpBeforeClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRedisConnection
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Relay\Relay
+interfaces: []

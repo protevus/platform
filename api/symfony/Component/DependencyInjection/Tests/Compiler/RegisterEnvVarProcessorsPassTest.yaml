@@ -1,0 +1,55 @@
+name: RegisterEnvVarProcessorsPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: RegisterEnvVarProcessorsPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\RegisterEnvVarProcessorsPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: EnvVarProcessorInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\EnvVarProcessorInterface
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: testSimpleProcessor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoProcessor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBadProcessor
+  visibility: public
+  parameters: []
+  comment: null
+- name: getEnv
+  visibility: public
+  parameters:
+  - name: prefix
+  - name: name
+  - name: getEnv
+  comment: null
+- name: getProvidedTypes
+  visibility: public
+  parameters: []
+  comment: null
+- name: getProvidedTypes
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Compiler\RegisterEnvVarProcessorsPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\EnvVarProcessorInterface
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+interfaces:
+- EnvVarProcessorInterface

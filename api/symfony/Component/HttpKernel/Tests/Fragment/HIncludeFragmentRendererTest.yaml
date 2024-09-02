@@ -1,0 +1,59 @@
+name: HIncludeFragmentRendererTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: UriSigner
+  type: class
+  source: Symfony\Component\HttpFoundation\UriSigner
+- name: ControllerReference
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ControllerReference
+- name: HIncludeFragmentRenderer
+  type: class
+  source: Symfony\Component\HttpKernel\Fragment\HIncludeFragmentRenderer
+- name: Environment
+  type: class
+  source: Twig\Environment
+- name: ArrayLoader
+  type: class
+  source: Twig\Loader\ArrayLoader
+properties: []
+methods:
+- name: testRenderExceptionWhenControllerAndNoSigner
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderWithControllerAndSigner
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderWithUri
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderWithDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderWithAttributesOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderWithTwigAndDefaultText
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\UriSigner
+- Symfony\Component\HttpKernel\Controller\ControllerReference
+- Symfony\Component\HttpKernel\Fragment\HIncludeFragmentRenderer
+- Twig\Environment
+- Twig\Loader\ArrayLoader
+interfaces: []

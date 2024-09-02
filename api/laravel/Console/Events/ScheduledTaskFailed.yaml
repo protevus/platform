@@ -1,0 +1,39 @@
+name: ScheduledTaskFailed
+class_comment: null
+dependencies:
+- name: Event
+  type: class
+  source: Illuminate\Console\Scheduling\Event
+- name: Throwable
+  type: class
+  source: Throwable
+properties:
+- name: task
+  visibility: public
+  comment: '# * The scheduled event that failed.
+
+    # *
+
+    # * @var \Illuminate\Console\Scheduling\Event'
+- name: exception
+  visibility: public
+  comment: '# * The exception that was thrown.
+
+    # *
+
+    # * @var \Throwable'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: task
+  - name: exception
+  comment: "# * The scheduled event that failed.\n# *\n# * @var \\Illuminate\\Console\\\
+    Scheduling\\Event\n# */\n# public $task;\n# \n# /**\n# * The exception that was\
+    \ thrown.\n# *\n# * @var \\Throwable\n# */\n# public $exception;\n# \n# /**\n\
+    # * Create a new event instance.\n# *\n# * @param  \\Illuminate\\Console\\Scheduling\\\
+    Event  $task\n# * @param  \\Throwable  $exception\n# * @return void"
+traits:
+- Illuminate\Console\Scheduling\Event
+- Throwable
+interfaces: []

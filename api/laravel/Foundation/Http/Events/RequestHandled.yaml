@@ -1,0 +1,31 @@
+name: RequestHandled
+class_comment: null
+dependencies: []
+properties:
+- name: request
+  visibility: public
+  comment: '# * The request instance.
+
+    # *
+
+    # * @var \Illuminate\Http\Request'
+- name: response
+  visibility: public
+  comment: '# * The response instance.
+
+    # *
+
+    # * @var \Illuminate\Http\Response'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: request
+  - name: response
+  comment: "# * The request instance.\n# *\n# * @var \\Illuminate\\Http\\Request\n\
+    # */\n# public $request;\n# \n# /**\n# * The response instance.\n# *\n# * @var\
+    \ \\Illuminate\\Http\\Response\n# */\n# public $response;\n# \n# /**\n# * Create\
+    \ a new event instance.\n# *\n# * @param  \\Illuminate\\Http\\Request  $request\n\
+    # * @param  \\Illuminate\\Http\\Response  $response\n# * @return void"
+traits: []
+interfaces: []

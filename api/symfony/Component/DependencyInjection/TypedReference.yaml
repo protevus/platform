@@ -1,0 +1,42 @@
+name: TypedReference
+class_comment: '# * Represents a PHP type-hinted service reference.
+
+  # *
+
+  # * @author Nicolas Grekas <p@tchwork.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: id
+  - name: type
+  - name: invalidBehavior
+    default: ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE
+  - name: name
+    default: 'null'
+  - name: attributes
+    default: '[]'
+  comment: "# * Represents a PHP type-hinted service reference.\n# *\n# * @author\
+    \ Nicolas Grekas <p@tchwork.com>\n# */\n# class TypedReference extends Reference\n\
+    # {\n# private ?string $name;\n# \n# /**\n# * @param string      $id         \
+    \     The service identifier\n# * @param string      $type            The PHP\
+    \ type of the identified service\n# * @param int         $invalidBehavior The\
+    \ behavior when the service does not exist\n# * @param string|null $name     \
+    \       The name of the argument targeting the service\n# * @param array     \
+    \  $attributes      The attributes to be used"
+- name: getType
+  visibility: public
+  parameters: []
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: getAttributes
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

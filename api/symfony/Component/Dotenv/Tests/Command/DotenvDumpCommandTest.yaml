@@ -1,0 +1,47 @@
+name: DotenvDumpCommandTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+- name: DotenvDumpCommand
+  type: class
+  source: Symfony\Component\Dotenv\Command\DotenvDumpCommand
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testExecute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExecuteEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExecuteTestEnvs
+  visibility: public
+  parameters: []
+  comment: null
+- name: createCommand
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Application
+- Symfony\Component\Console\Tester\CommandTester
+- Symfony\Component\Dotenv\Command\DotenvDumpCommand
+interfaces: []

@@ -1,0 +1,75 @@
+name: Listener
+class_comment: null
+dependencies:
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: QueryExecuted
+  type: class
+  source: Illuminate\Database\Events\QueryExecuted
+- name: JobProcessed
+  type: class
+  source: Illuminate\Queue\Events\JobProcessed
+- name: JobProcessing
+  type: class
+  source: Illuminate\Queue\Events\JobProcessing
+- name: RequestReceived
+  type: class
+  source: Laravel\Octane\Events\RequestReceived
+- name: RequestTerminated
+  type: class
+  source: Laravel\Octane\Events\RequestTerminated
+- name: TaskReceived
+  type: class
+  source: Laravel\Octane\Events\TaskReceived
+- name: TickReceived
+  type: class
+  source: Laravel\Octane\Events\TickReceived
+properties:
+- name: queries
+  visibility: protected
+  comment: '# * The queries that have been executed.
+
+    # *
+
+    # * @var array<int, array{connectionName: string, time: float, sql: string, bindings:
+    array}>'
+methods:
+- name: registerListeners
+  visibility: public
+  parameters:
+  - name: events
+  comment: "# * The queries that have been executed.\n# *\n# * @var array<int, array{connectionName:\
+    \ string, time: float, sql: string, bindings: array}>\n# */\n# protected $queries\
+    \ = [];\n# \n# /**\n# * Register the appropriate listeners on the given event\
+    \ dispatcher.\n# *\n# * @param  \\Illuminate\\Contracts\\Events\\Dispatcher  $events\n\
+    # * @return void"
+- name: queries
+  visibility: public
+  parameters: []
+  comment: '# * Returns the queries that have been executed.
+
+    # *
+
+    # * @return array<int, array{sql: string, time: float}>'
+- name: onQueryExecuted
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Listens for the query executed event.
+
+    # *
+
+    # * @param  \Illuminate\Database\Events\QueryExecuted  $event
+
+    # * @return void'
+traits:
+- Illuminate\Contracts\Events\Dispatcher
+- Illuminate\Database\Events\QueryExecuted
+- Illuminate\Queue\Events\JobProcessed
+- Illuminate\Queue\Events\JobProcessing
+- Laravel\Octane\Events\RequestReceived
+- Laravel\Octane\Events\RequestTerminated
+- Laravel\Octane\Events\TaskReceived
+- Laravel\Octane\Events\TickReceived
+interfaces: []

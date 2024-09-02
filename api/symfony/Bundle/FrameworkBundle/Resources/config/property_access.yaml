@@ -1,0 +1,15 @@
+name: property_access
+class_comment: null
+dependencies:
+- name: PropertyAccessor
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccessor
+- name: PropertyAccessorInterface
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccessorInterface
+properties: []
+methods: []
+traits:
+- Symfony\Component\PropertyAccess\PropertyAccessor
+- Symfony\Component\PropertyAccess\PropertyAccessorInterface
+interfaces: []

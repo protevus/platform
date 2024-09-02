@@ -1,0 +1,281 @@
+name: MacAddressValidatorTest
+class_comment: '# * @author Ninos Ego <me@ninosego.de>'
+dependencies:
+- name: MacAddress
+  type: class
+  source: Symfony\Component\Validator\Constraints\MacAddress
+- name: MacAddressValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\MacAddressValidator
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+properties: []
+methods:
+- name: testValidMac
+  visibility: public
+  parameters:
+  - name: mac
+  comment: "# * @author Ninos Ego <me@ninosego.de>\n# */\n# class MacAddressValidatorTest\
+    \ extends ConstraintValidatorTestCase\n# {\n# protected function createValidator():\
+    \ MacAddressValidator\n# {\n# return new MacAddressValidator();\n# }\n# \n# public\
+    \ function testNullIsValid()\n# {\n# $this->validator->validate(null, new MacAddress());\n\
+    # \n# $this->assertNoViolation();\n# }\n# \n# public function testEmptyStringIsValid()\n\
+    # {\n# $this->validator->validate('', new MacAddress());\n# \n# $this->assertNoViolation();\n\
+    # }\n# \n# public function testExpectsStringCompatibleType()\n# {\n# $this->expectException(UnexpectedValueException::class);\n\
+    # $this->validator->validate(new \\stdClass(), new MacAddress());\n# }\n# \n#\
+    \ public function testInvalidValidatorType()\n# {\n# $this->expectException(ConstraintDefinitionException::class);\n\
+    # new MacAddress(type: 666);\n# }\n# \n# /**\n# * @dataProvider getValidMacs"
+- name: getValidMacs
+  visibility: public
+  parameters: []
+  comment: null
+- name: getValidLocalUnicastMacs
+  visibility: public
+  parameters: []
+  comment: null
+- name: getValidLocalMulticastMacs
+  visibility: public
+  parameters: []
+  comment: null
+- name: getValidUniversalUnicastMacs
+  visibility: public
+  parameters: []
+  comment: null
+- name: getValidUniversalMulticastMacs
+  visibility: public
+  parameters: []
+  comment: null
+- name: getValidBroadcastMacs
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidAllNoBroadcastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalUnicastMacs
+
+    # * @dataProvider getValidLocalMulticastMacs
+
+    # * @dataProvider getValidUniversalUnicastMacs
+
+    # * @dataProvider getValidUniversalMulticastMacs'
+- name: testInvalidAllNoBroadcastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidBroadcastMacs'
+- name: testValidLocalMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalUnicastMacs
+
+    # * @dataProvider getValidLocalMulticastMacs
+
+    # * @dataProvider getValidBroadcastMacs'
+- name: testInvalidLocalMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidUniversalUnicastMacs
+
+    # * @dataProvider getValidUniversalMulticastMacs'
+- name: testValidLocalNoBroadcastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalUnicastMacs
+
+    # * @dataProvider getValidLocalMulticastMacs'
+- name: testInvalidLocalNoBroadcastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidUniversalUnicastMacs
+
+    # * @dataProvider getValidUniversalMulticastMacs
+
+    # * @dataProvider getValidBroadcastMacs'
+- name: testValidLocalUnicastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalUnicastMacs'
+- name: testInvalidLocalUnicastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalMulticastMacs
+
+    # * @dataProvider getValidUniversalUnicastMacs
+
+    # * @dataProvider getValidUniversalMulticastMacs'
+- name: testValidLocalMulticastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalMulticastMacs
+
+    # * @dataProvider getValidBroadcastMacs'
+- name: testInvalidLocalMulticastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalUnicastMacs
+
+    # * @dataProvider getValidUniversalUnicastMacs
+
+    # * @dataProvider getValidUniversalMulticastMacs'
+- name: testValidLocalMulticastNoBroadcastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalMulticastMacs'
+- name: testInvalidLocalMulticastNoBroadcastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalUnicastMacs
+
+    # * @dataProvider getValidUniversalUnicastMacs
+
+    # * @dataProvider getValidUniversalMulticastMacs
+
+    # * @dataProvider getValidBroadcastMacs'
+- name: testValidUniversalMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidUniversalUnicastMacs
+
+    # * @dataProvider getValidUniversalMulticastMacs'
+- name: testInvalidUniversalMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalUnicastMacs
+
+    # * @dataProvider getValidLocalMulticastMacs'
+- name: testValidUniversalUnicastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidUniversalUnicastMacs'
+- name: testInvalidUniversalUnicastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalUnicastMacs
+
+    # * @dataProvider getValidLocalMulticastMacs
+
+    # * @dataProvider getValidUniversalMulticastMacs'
+- name: testValidUniversalMulticastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidUniversalMulticastMacs'
+- name: testInvalidUniversalMulticastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalUnicastMacs
+
+    # * @dataProvider getValidLocalMulticastMacs
+
+    # * @dataProvider getValidUniversalUnicastMacs'
+- name: testUnicastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalUnicastMacs
+
+    # * @dataProvider getValidUniversalUnicastMacs'
+- name: testInvalidUnicastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalMulticastMacs
+
+    # * @dataProvider getValidUniversalMulticastMacs'
+- name: testMulticastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalMulticastMacs
+
+    # * @dataProvider getValidUniversalMulticastMacs
+
+    # * @dataProvider getValidBroadcastMacs'
+- name: testInvalidMulticastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalUnicastMacs
+
+    # * @dataProvider getValidUniversalUnicastMacs'
+- name: testMulticastNoBroadcastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalMulticastMacs
+
+    # * @dataProvider getValidUniversalMulticastMacs'
+- name: testInvalidMulticastNoBroadcastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalUnicastMacs
+
+    # * @dataProvider getValidUniversalUnicastMacs
+
+    # * @dataProvider getValidBroadcastMacs'
+- name: testBroadcastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidBroadcastMacs'
+- name: testInvalidBroadcastMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidLocalUnicastMacs
+
+    # * @dataProvider getValidLocalMulticastMacs
+
+    # * @dataProvider getValidUniversalUnicastMacs
+
+    # * @dataProvider getValidUniversalMulticastMacs'
+- name: testValidMacsWithWhitespaces
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getValidMacsWithWhitespaces'
+- name: getValidMacsWithWhitespaces
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidMacs
+  visibility: public
+  parameters:
+  - name: mac
+  comment: '# * @dataProvider getInvalidMacs'
+- name: getInvalidMacs
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\MacAddress
+- Symfony\Component\Validator\Constraints\MacAddressValidator
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

@@ -1,0 +1,33 @@
+name: BatchHandlerTrait
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: handle
+  visibility: private
+  parameters:
+  - name: message
+  - name: ack
+  comment: "# * @author Nicolas Grekas <p@tchwork.com>\n# */\n# trait BatchHandlerTrait\n\
+    # {\n# private array $jobs = [];\n# \n# public function flush(bool $force): void\n\
+    # {\n# if ($jobs = $this->jobs) {\n# $this->jobs = [];\n# $this->process($jobs);\n\
+    # }\n# }\n# \n# /**\n# * @param Acknowledger|null $ack The function to call to\
+    \ ack/nack the $message.\n# *                               The message should\
+    \ be handled synchronously when null.\n# *\n# * @return mixed The number of pending\
+    \ messages in the batch if $ack is not null,\n# *               the result from\
+    \ handling the message otherwise"
+- name: shouldFlush
+  visibility: private
+  parameters: []
+  comment: null
+- name: process
+  visibility: private
+  parameters:
+  - name: jobs
+  comment: null
+- name: getBatchSize
+  visibility: private
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

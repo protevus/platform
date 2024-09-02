@@ -1,0 +1,15 @@
+name: TransportInterface
+class_comment: null
+dependencies:
+- name: ReceiverInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface
+- name: SenderInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Sender\SenderInterface
+properties: []
+methods: []
+traits:
+- Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface
+- Symfony\Component\Messenger\Transport\Sender\SenderInterface
+interfaces: []

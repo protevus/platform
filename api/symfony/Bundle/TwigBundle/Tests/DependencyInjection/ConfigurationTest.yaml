@@ -1,0 +1,35 @@
+name: ConfigurationTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Configuration
+  type: class
+  source: Symfony\Bundle\TwigBundle\DependencyInjection\Configuration
+- name: Processor
+  type: class
+  source: Symfony\Component\Config\Definition\Processor
+properties: []
+methods:
+- name: testDoNoDuplicateDefaultFormResources
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGlobalsAreNotNormalized
+  visibility: public
+  parameters: []
+  comment: null
+- name: testArrayKeysInGlobalsAreNotNormalized
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNullPathsAreConvertedToIterable
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\TwigBundle\DependencyInjection\Configuration
+- Symfony\Component\Config\Definition\Processor
+interfaces: []

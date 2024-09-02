@@ -1,0 +1,40 @@
+name: CompiledClassMetadataFactory
+class_comment: null
+dependencies:
+- name: AttributeMetadata
+  type: class
+  source: Symfony\Component\Serializer\Mapping\AttributeMetadata
+- name: ClassDiscriminatorMapping
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassDiscriminatorMapping
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassMetadata
+- name: ClassMetadataInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassMetadataInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: compiledClassMetadataFile
+  - name: classMetadataFactory
+  comment: null
+- name: getMetadataFor
+  visibility: public
+  parameters:
+  - name: value
+  comment: null
+- name: hasMetadataFor
+  visibility: public
+  parameters:
+  - name: value
+  comment: null
+traits:
+- Symfony\Component\Serializer\Mapping\AttributeMetadata
+- Symfony\Component\Serializer\Mapping\ClassDiscriminatorMapping
+- Symfony\Component\Serializer\Mapping\ClassMetadata
+- Symfony\Component\Serializer\Mapping\ClassMetadataInterface
+interfaces:
+- ClassMetadataFactoryInterface

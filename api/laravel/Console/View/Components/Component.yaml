@@ -1,0 +1,102 @@
+name: Component
+class_comment: null
+dependencies:
+- name: OutputStyle
+  type: class
+  source: Illuminate\Console\OutputStyle
+- name: QuestionHelper
+  type: class
+  source: Illuminate\Console\QuestionHelper
+- name: ReflectionClass
+  type: class
+  source: ReflectionClass
+- name: SymfonyQuestionHelper
+  type: class
+  source: Symfony\Component\Console\Helper\SymfonyQuestionHelper
+properties:
+- name: output
+  visibility: protected
+  comment: '# * The output style implementation.
+
+    # *
+
+    # * @var \Illuminate\Console\OutputStyle'
+- name: mutators
+  visibility: protected
+  comment: '# * The list of mutators to apply on the view data.
+
+    # *
+
+    # * @var array<int, callable(string): string>'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: output
+  comment: "# * The output style implementation.\n# *\n# * @var \\Illuminate\\Console\\\
+    OutputStyle\n# */\n# protected $output;\n# \n# /**\n# * The list of mutators to\
+    \ apply on the view data.\n# *\n# * @var array<int, callable(string): string>\n\
+    # */\n# protected $mutators;\n# \n# /**\n# * Creates a new component instance.\n\
+    # *\n# * @param  \\Illuminate\\Console\\OutputStyle  $output\n# * @return void"
+- name: renderView
+  visibility: protected
+  parameters:
+  - name: view
+  - name: data
+  - name: verbosity
+  comment: '# * Renders the given view.
+
+    # *
+
+    # * @param  string  $view
+
+    # * @param  \Illuminate\Contracts\Support\Arrayable|array  $data
+
+    # * @param  int  $verbosity
+
+    # * @return void'
+- name: compile
+  visibility: protected
+  parameters:
+  - name: view
+  - name: data
+  comment: '# * Compile the given view contents.
+
+    # *
+
+    # * @param  string  $view
+
+    # * @param  array  $data
+
+    # * @return void'
+- name: mutate
+  visibility: protected
+  parameters:
+  - name: data
+  - name: mutators
+  comment: '# * Mutates the given data with the given set of mutators.
+
+    # *
+
+    # * @param  array<int, string>|string  $data
+
+    # * @param  array<int, callable(string): string>  $mutators
+
+    # * @return array<int, string>|string'
+- name: usingQuestionHelper
+  visibility: protected
+  parameters:
+  - name: callable
+  comment: '# * Eventually performs a question using the component''s question helper.
+
+    # *
+
+    # * @param  callable  $callable
+
+    # * @return mixed'
+traits:
+- Illuminate\Console\OutputStyle
+- Illuminate\Console\QuestionHelper
+- ReflectionClass
+- Symfony\Component\Console\Helper\SymfonyQuestionHelper
+interfaces: []

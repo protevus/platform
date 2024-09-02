@@ -1,0 +1,79 @@
+name: StrictSessionHandlerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AbstractSessionHandler
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+- name: StrictSessionHandler
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler
+properties: []
+methods:
+- name: testOpen
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCloseSession
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidateIdOK
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidateIdKO
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRead
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReadWithValidateIdOK
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReadWithValidateIdMismatch
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUpdateTimestamp
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWrite
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWriteEmptyNewSession
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWriteEmptyExistingSession
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDestroy
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDestroyNewSession
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDestroyNonEmptyNewSession
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGc
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+- Symfony\Component\HttpFoundation\Session\Storage\Handler\StrictSessionHandler
+interfaces: []

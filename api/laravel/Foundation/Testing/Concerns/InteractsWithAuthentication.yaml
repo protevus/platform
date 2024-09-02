@@ -1,0 +1,136 @@
+name: InteractsWithAuthentication
+class_comment: null
+dependencies:
+- name: UserContract
+  type: class
+  source: Illuminate\Contracts\Auth\Authenticatable
+properties: []
+methods:
+- name: actingAs
+  visibility: public
+  parameters:
+  - name: user
+  - name: guard
+    default: 'null'
+  comment: '# * Set the currently logged in user for the application.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+
+    # * @param  string|null  $guard
+
+    # * @return $this'
+- name: be
+  visibility: public
+  parameters:
+  - name: user
+  - name: guard
+    default: 'null'
+  comment: '# * Set the currently logged in user for the application.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+
+    # * @param  string|null  $guard
+
+    # * @return $this'
+- name: assertAuthenticated
+  visibility: public
+  parameters:
+  - name: guard
+    default: 'null'
+  comment: '# * Assert that the user is authenticated.
+
+    # *
+
+    # * @param  string|null  $guard
+
+    # * @return $this'
+- name: assertGuest
+  visibility: public
+  parameters:
+  - name: guard
+    default: 'null'
+  comment: '# * Assert that the user is not authenticated.
+
+    # *
+
+    # * @param  string|null  $guard
+
+    # * @return $this'
+- name: isAuthenticated
+  visibility: protected
+  parameters:
+  - name: guard
+    default: 'null'
+  comment: '# * Return true if the user is authenticated, false otherwise.
+
+    # *
+
+    # * @param  string|null  $guard
+
+    # * @return bool'
+- name: assertAuthenticatedAs
+  visibility: public
+  parameters:
+  - name: user
+  - name: guard
+    default: 'null'
+  comment: '# * Assert that the user is authenticated as the given user.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+
+    # * @param  string|null  $guard
+
+    # * @return $this'
+- name: assertCredentials
+  visibility: public
+  parameters:
+  - name: credentials
+  - name: guard
+    default: 'null'
+  comment: '# * Assert that the given credentials are valid.
+
+    # *
+
+    # * @param  array  $credentials
+
+    # * @param  string|null  $guard
+
+    # * @return $this'
+- name: assertInvalidCredentials
+  visibility: public
+  parameters:
+  - name: credentials
+  - name: guard
+    default: 'null'
+  comment: '# * Assert that the given credentials are invalid.
+
+    # *
+
+    # * @param  array  $credentials
+
+    # * @param  string|null  $guard
+
+    # * @return $this'
+- name: hasCredentials
+  visibility: protected
+  parameters:
+  - name: credentials
+  - name: guard
+    default: 'null'
+  comment: '# * Return true if the credentials are valid, false otherwise.
+
+    # *
+
+    # * @param  array  $credentials
+
+    # * @param  string|null  $guard
+
+    # * @return bool'
+traits: []
+interfaces: []

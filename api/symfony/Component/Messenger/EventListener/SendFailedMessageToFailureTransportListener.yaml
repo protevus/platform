@@ -1,0 +1,56 @@
+name: SendFailedMessageToFailureTransportListener
+class_comment: '# * Sends a rejected message to a "failure transport".
+
+  # *
+
+  # * @author Ryan Weaver <ryan@symfonycasts.com>'
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: WorkerMessageFailedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerMessageFailedEvent
+- name: DelayStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\DelayStamp
+- name: RedeliveryStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\RedeliveryStamp
+- name: SentToFailureTransportStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\SentToFailureTransportStamp
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: failureSenders
+  - name: logger
+    default: 'null'
+  comment: null
+- name: onMessageFailed
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Psr\Log\LoggerInterface
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\Messenger\Event\WorkerMessageFailedEvent
+- Symfony\Component\Messenger\Stamp\DelayStamp
+- Symfony\Component\Messenger\Stamp\RedeliveryStamp
+- Symfony\Component\Messenger\Stamp\SentToFailureTransportStamp
+interfaces:
+- EventSubscriberInterface

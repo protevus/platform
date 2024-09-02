@@ -1,0 +1,157 @@
+name: CursorPaginator
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: url
+  visibility: public
+  parameters:
+  - name: cursor
+  comment: '# * Get the URL for a given cursor.
+
+    # *
+
+    # * @param  \Illuminate\Pagination\Cursor|null  $cursor
+
+    # * @return string'
+- name: appends
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: 'null'
+  comment: '# * Add a set of query string values to the paginator.
+
+    # *
+
+    # * @param  array|string|null  $key
+
+    # * @param  string|null  $value
+
+    # * @return $this'
+- name: fragment
+  visibility: public
+  parameters:
+  - name: fragment
+    default: 'null'
+  comment: '# * Get / set the URL fragment to be appended to URLs.
+
+    # *
+
+    # * @param  string|null  $fragment
+
+    # * @return $this|string|null'
+- name: withQueryString
+  visibility: public
+  parameters: []
+  comment: '# * Add all current query string values to the paginator.
+
+    # *
+
+    # * @return $this'
+- name: previousPageUrl
+  visibility: public
+  parameters: []
+  comment: '# * Get the URL for the previous page, or null.
+
+    # *
+
+    # * @return string|null'
+- name: nextPageUrl
+  visibility: public
+  parameters: []
+  comment: '# * The URL for the next page, or null.
+
+    # *
+
+    # * @return string|null'
+- name: items
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the items being paginated.
+
+    # *
+
+    # * @return array'
+- name: previousCursor
+  visibility: public
+  parameters: []
+  comment: '# * Get the "cursor" of the previous set of items.
+
+    # *
+
+    # * @return \Illuminate\Pagination\Cursor|null'
+- name: nextCursor
+  visibility: public
+  parameters: []
+  comment: '# * Get the "cursor" of the next set of items.
+
+    # *
+
+    # * @return \Illuminate\Pagination\Cursor|null'
+- name: perPage
+  visibility: public
+  parameters: []
+  comment: '# * Determine how many items are being shown per page.
+
+    # *
+
+    # * @return int'
+- name: cursor
+  visibility: public
+  parameters: []
+  comment: '# * Get the current cursor being paginated.
+
+    # *
+
+    # * @return \Illuminate\Pagination\Cursor|null'
+- name: hasPages
+  visibility: public
+  parameters: []
+  comment: '# * Determine if there are enough items to split into multiple pages.
+
+    # *
+
+    # * @return bool'
+- name: path
+  visibility: public
+  parameters: []
+  comment: '# * Get the base path for paginator generated URLs.
+
+    # *
+
+    # * @return string|null'
+- name: isEmpty
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the list of items is empty or not.
+
+    # *
+
+    # * @return bool'
+- name: isNotEmpty
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the list of items is not empty.
+
+    # *
+
+    # * @return bool'
+- name: render
+  visibility: public
+  parameters:
+  - name: view
+    default: 'null'
+  - name: data
+    default: '[]'
+  comment: '# * Render the paginator using a given view.
+
+    # *
+
+    # * @param  string|null  $view
+
+    # * @param  array  $data
+
+    # * @return string'
+traits: []
+interfaces: []

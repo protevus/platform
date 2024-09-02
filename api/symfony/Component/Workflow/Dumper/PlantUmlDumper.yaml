@@ -1,0 +1,97 @@
+name: PlantUmlDumper
+class_comment: "# * PlantUmlDumper dumps a workflow as a PlantUML file.\n# *\n# *\
+  \ You can convert the generated puml file with the plantuml.jar utility (http://plantuml.com/):\n\
+  # *\n# * php bin/console workflow:dump pull_request travis --dump-format=puml |\
+  \ java -jar plantuml.jar -p  > workflow.png\n# *\n# * @author S\xE9bastien Morel\
+  \ <morel.seb@gmail.com>"
+dependencies:
+- name: Definition
+  type: class
+  source: Symfony\Component\Workflow\Definition
+- name: Marking
+  type: class
+  source: Symfony\Component\Workflow\Marking
+- name: MetadataStoreInterface
+  type: class
+  source: Symfony\Component\Workflow\Metadata\MetadataStoreInterface
+- name: Transition
+  type: class
+  source: Symfony\Component\Workflow\Transition
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: transitionType
+  comment: null
+- name: dump
+  visibility: public
+  parameters:
+  - name: definition
+  - name: marking
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: null
+- name: isWorkflowTransitionType
+  visibility: private
+  parameters: []
+  comment: null
+- name: startPuml
+  visibility: private
+  parameters:
+  - name: options
+  comment: null
+- name: endPuml
+  visibility: private
+  parameters:
+  - name: options
+  comment: null
+- name: getLines
+  visibility: private
+  parameters:
+  - name: code
+  comment: null
+- name: initialize
+  visibility: private
+  parameters:
+  - name: options
+  - name: definition
+  comment: null
+- name: escape
+  visibility: private
+  parameters:
+  - name: string
+  comment: null
+- name: getState
+  visibility: private
+  parameters:
+  - name: place
+  - name: definition
+  - name: marking
+    default: 'null'
+  comment: null
+- name: getTransitionEscapedWithStyle
+  visibility: private
+  parameters:
+  - name: workflowMetadata
+  - name: transition
+  - name: to
+  comment: null
+- name: getTransitionColor
+  visibility: private
+  parameters:
+  - name: color
+  comment: null
+- name: getColorId
+  visibility: private
+  parameters:
+  - name: color
+  comment: null
+traits:
+- Symfony\Component\Workflow\Definition
+- Symfony\Component\Workflow\Marking
+- Symfony\Component\Workflow\Metadata\MetadataStoreInterface
+- Symfony\Component\Workflow\Transition
+interfaces:
+- DumperInterface

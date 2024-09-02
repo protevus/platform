@@ -1,0 +1,31 @@
+name: SerializedPathTest
+class_comment: "# * @author Tobias B\xF6nner <tobi@boenner.family>"
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: PropertyPath
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyPath
+- name: SerializedPath
+  type: class
+  source: Symfony\Component\Serializer\Attribute\SerializedPath
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Serializer\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: testEmptyStringSerializedPathParameter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSerializedPath
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\PropertyAccess\PropertyPath
+- Symfony\Component\Serializer\Attribute\SerializedPath
+- Symfony\Component\Serializer\Exception\InvalidArgumentException
+interfaces: []

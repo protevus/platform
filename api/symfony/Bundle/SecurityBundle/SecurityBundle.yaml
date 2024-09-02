@@ -1,0 +1,168 @@
+name: SecurityBundle
+class_comment: '# * Bundle.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: AddExpressionLanguageProvidersPass
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\AddExpressionLanguageProvidersPass
+- name: AddSecurityVotersPass
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\AddSecurityVotersPass
+- name: AddSessionDomainConstraintPass
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\AddSessionDomainConstraintPass
+- name: CleanRememberMeVerifierPass
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\CleanRememberMeVerifierPass
+- name: MakeFirewallsEventDispatcherTraceablePass
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\MakeFirewallsEventDispatcherTraceablePass
+- name: RegisterCsrfFeaturesPass
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\RegisterCsrfFeaturesPass
+- name: RegisterEntryPointPass
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\RegisterEntryPointPass
+- name: RegisterGlobalSecurityEventListenersPass
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\RegisterGlobalSecurityEventListenersPass
+- name: RegisterLdapLocatorPass
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\RegisterLdapLocatorPass
+- name: RegisterTokenUsageTrackingPass
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\RegisterTokenUsageTrackingPass
+- name: ReplaceDecoratedRememberMeHandlerPass
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\ReplaceDecoratedRememberMeHandlerPass
+- name: SortFirewallListenersPass
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\SortFirewallListenersPass
+- name: CasTokenHandlerFactory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\AccessToken\CasTokenHandlerFactory
+- name: OidcTokenHandlerFactory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\AccessToken\OidcTokenHandlerFactory
+- name: OidcUserInfoTokenHandlerFactory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\AccessToken\OidcUserInfoTokenHandlerFactory
+- name: ServiceTokenHandlerFactory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\AccessToken\ServiceTokenHandlerFactory
+- name: AccessTokenFactory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\AccessTokenFactory
+- name: CustomAuthenticatorFactory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\CustomAuthenticatorFactory
+- name: FormLoginFactory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\FormLoginFactory
+- name: FormLoginLdapFactory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\FormLoginLdapFactory
+- name: HttpBasicFactory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\HttpBasicFactory
+- name: HttpBasicLdapFactory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\HttpBasicLdapFactory
+- name: JsonLoginFactory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\JsonLoginFactory
+- name: JsonLoginLdapFactory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\JsonLoginLdapFactory
+- name: LoginLinkFactory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\LoginLinkFactory
+- name: LoginThrottlingFactory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\LoginThrottlingFactory
+- name: RememberMeFactory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\RememberMeFactory
+- name: RemoteUserFactory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\RemoteUserFactory
+- name: X509Factory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\X509Factory
+- name: InMemoryFactory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\UserProvider\InMemoryFactory
+- name: LdapFactory
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Security\UserProvider\LdapFactory
+- name: SecurityExtension
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension
+- name: PassConfig
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\PassConfig
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: AddEventAliasesPass
+  type: class
+  source: Symfony\Component\EventDispatcher\DependencyInjection\AddEventAliasesPass
+- name: Bundle
+  type: class
+  source: Symfony\Component\HttpKernel\Bundle\Bundle
+- name: AuthenticationEvents
+  type: class
+  source: Symfony\Component\Security\Core\AuthenticationEvents
+- name: SecurityEvents
+  type: class
+  source: Symfony\Component\Security\Http\SecurityEvents
+properties: []
+methods:
+- name: build
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\AddExpressionLanguageProvidersPass
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\AddSecurityVotersPass
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\AddSessionDomainConstraintPass
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\CleanRememberMeVerifierPass
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\MakeFirewallsEventDispatcherTraceablePass
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\RegisterCsrfFeaturesPass
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\RegisterEntryPointPass
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\RegisterGlobalSecurityEventListenersPass
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\RegisterLdapLocatorPass
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\RegisterTokenUsageTrackingPass
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\ReplaceDecoratedRememberMeHandlerPass
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\SortFirewallListenersPass
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\AccessToken\CasTokenHandlerFactory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\AccessToken\OidcTokenHandlerFactory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\AccessToken\OidcUserInfoTokenHandlerFactory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\AccessToken\ServiceTokenHandlerFactory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\AccessTokenFactory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\CustomAuthenticatorFactory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\FormLoginFactory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\FormLoginLdapFactory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\HttpBasicFactory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\HttpBasicLdapFactory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\JsonLoginFactory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\JsonLoginLdapFactory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\LoginLinkFactory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\LoginThrottlingFactory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\RememberMeFactory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\RemoteUserFactory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\X509Factory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\UserProvider\InMemoryFactory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Security\UserProvider\LdapFactory
+- Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension
+- Symfony\Component\DependencyInjection\Compiler\PassConfig
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\EventDispatcher\DependencyInjection\AddEventAliasesPass
+- Symfony\Component\HttpKernel\Bundle\Bundle
+- Symfony\Component\Security\Core\AuthenticationEvents
+- Symfony\Component\Security\Http\SecurityEvents
+interfaces: []

@@ -1,0 +1,386 @@
+name: FormTypeTest
+class_comment: null
+dependencies:
+- name: CallbackTransformer
+  type: class
+  source: Symfony\Component\Form\CallbackTransformer
+- name: DataMapperInterface
+  type: class
+  source: Symfony\Component\Form\DataMapperInterface
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Form\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\Form\Exception\LogicException
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+- name: CurrencyType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\CurrencyType
+- name: FormType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\FormType
+- name: TextType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\TextType
+- name: ValidatorExtension
+  type: class
+  source: Symfony\Component\Form\Extension\Validator\ValidatorExtension
+- name: Form
+  type: class
+  source: Symfony\Component\Form\Form
+- name: FormBuilderInterface
+  type: class
+  source: Symfony\Component\Form\FormBuilderInterface
+- name: FormError
+  type: class
+  source: Symfony\Component\Form\FormError
+- name: Forms
+  type: class
+  source: Symfony\Component\Form\Forms
+- name: Author
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\Author
+- name: FixedDataTransformer
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\FixedDataTransformer
+- name: InvalidOptionsException
+  type: class
+  source: Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+- name: PropertyPath
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyPath
+- name: Validation
+  type: class
+  source: Symfony\Component\Validator\Validation
+properties:
+- name: reference
+  visibility: protected
+  comment: null
+- name: referenceCopy
+  visibility: protected
+  comment: null
+- name: amount
+  visibility: private
+  comment: null
+- name: currency
+  visibility: private
+  comment: null
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: reference
+  comment: null
+- name: getReference
+  visibility: public
+  parameters: []
+  comment: null
+- name: getReferenceCopy
+  visibility: public
+  parameters: []
+  comment: null
+- name: setReferenceCopy
+  visibility: public
+  parameters:
+  - name: reference
+  comment: null
+- name: testCreateFormInstances
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassRequiredAsOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmittedDataIsTrimmedBeforeTransforming
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmittedDataIsNotTrimmedBeforeTransformingIfNoTrimming
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNonReadOnlyFormWithReadOnlyParentIsReadOnly
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReadOnlyFormWithNonReadOnlyParentIsReadOnly
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNonReadOnlyFormWithNonReadOnlyParentIsNotReadOnly
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassMaxLengthToView
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDataClassMayBeNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDataClassMayBeAbstractClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDataClassMayBeInterface
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDataClassMustBeValidClassOrInterface
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNullUsesDefaultEmptyData
+  visibility: public
+  parameters:
+  - name: emptyData
+    default: '[]'
+  - name: expectedData
+    default: '[]'
+  comment: null
+- name: testSubmitWithEmptyDataCreatesObjectIfClassAvailable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitWithDefaultDataDontCreateObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitWithEmptyDataCreatesArrayIfDataClassIsNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitEmptyWithEmptyDataDontCreateObjectIfNotRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitEmptyWithEmptyDataCreatesObjectIfRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitWithEmptyDataStoresArrayIfNoClassAvailable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitWithEmptyDataPassesEmptyStringToTransformerIfNotCompound
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitWithEmptyDataUsesEmptyDataOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAttributesException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testActionCannotBeNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNameCanBeEmptyString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubformDoesntCallSettersForReferences
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubformCallsSettersIfTheObjectChanged
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubformCallsSettersIfByReferenceIsFalse
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubformCallsSettersIfReferenceIsScalar
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubformAlwaysInsertsIntoArrays
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassMultipartTrueIfAnyChildIsMultipartToView
+  visibility: public
+  parameters: []
+  comment: null
+- name: testViewIsNotRenderedByDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testErrorBubblingIfCompound
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoErrorBubblingIfNotCompound
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOverrideErrorBubbling
+  visibility: public
+  parameters: []
+  comment: null
+- name: testErrorBubblingForCompoundFieldsIsDisabledByDefaultIfInheritDataIsEnabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPropertyPathNullImpliesDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotMapped
+  visibility: public
+  parameters: []
+  comment: null
+- name: testViewValidNotSubmitted
+  visibility: public
+  parameters: []
+  comment: null
+- name: testViewNotValidSubmitted
+  visibility: public
+  parameters: []
+  comment: null
+- name: testViewSubmittedNotSubmitted
+  visibility: public
+  parameters: []
+  comment: null
+- name: testViewSubmittedSubmitted
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDataOptionSupersedesSetDataCalls
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassedDataSupersedesSetDataCalls
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDataOptionSupersedesSetDataCallsIfNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormDataIsPassedToView
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDataMapperTransformationFailedExceptionInvalidMessageIsUsed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassZeroLabelToView
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNull
+  visibility: public
+  parameters:
+  - name: expected
+    default: 'null'
+  - name: norm
+    default: 'null'
+  - name: view
+    default: 'null'
+  comment: null
+- name: testPassBlockPrefixToViewWithParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDefaultHelpTranslationParameters
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassHelpTranslationParametersToView
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInheritHelpTranslationParametersFromParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPreferOwnHelpTranslationParameters
+  visibility: public
+  parameters: []
+  comment: null
+- name: testErrorBubblingDoesNotSkipCompoundFieldsWithInheritDataConfigured
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFormAttrOnRoot
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFormAttrOnChild
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFormAttrAsBoolWithNoId
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFormAttrAsStringWithNoId
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSortingViewChildrenBasedOnPriorityOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: amount
+  - name: currency
+  comment: null
+- name: getAmount
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCurrency
+  visibility: public
+  parameters: []
+  comment: null
+- name: mapDataToForms
+  visibility: public
+  parameters:
+  - name: viewData
+  - name: forms
+  comment: null
+- name: mapFormsToData
+  visibility: public
+  parameters:
+  - name: forms
+  - name: '&$viewData'
+  comment: null
+traits:
+- Symfony\Component\Form\CallbackTransformer
+- Symfony\Component\Form\DataMapperInterface
+- Symfony\Component\Form\Exception\InvalidArgumentException
+- Symfony\Component\Form\Exception\LogicException
+- Symfony\Component\Form\Exception\TransformationFailedException
+- Symfony\Component\Form\Extension\Core\Type\CurrencyType
+- Symfony\Component\Form\Extension\Core\Type\FormType
+- Symfony\Component\Form\Extension\Core\Type\TextType
+- Symfony\Component\Form\Extension\Validator\ValidatorExtension
+- Symfony\Component\Form\Form
+- Symfony\Component\Form\FormBuilderInterface
+- Symfony\Component\Form\FormError
+- Symfony\Component\Form\Forms
+- Symfony\Component\Form\Tests\Fixtures\Author
+- Symfony\Component\Form\Tests\Fixtures\FixedDataTransformer
+- Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+- Symfony\Component\PropertyAccess\PropertyPath
+- Symfony\Component\Validator\Validation
+interfaces:
+- DataMapperInterface

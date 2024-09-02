@@ -1,0 +1,188 @@
+name: FakeInvokedProcess
+class_comment: null
+dependencies:
+- name: InvokedProcessContract
+  type: class
+  source: Illuminate\Contracts\Process\InvokedProcess
+properties:
+- name: command
+  visibility: protected
+  comment: '# * The command being faked.
+
+    # *
+
+    # * @var string'
+- name: process
+  visibility: protected
+  comment: '# * The underlying process description.
+
+    # *
+
+    # * @var \Illuminate\Process\FakeProcessDescription'
+- name: receivedSignals
+  visibility: protected
+  comment: '# * The signals that have been received.
+
+    # *
+
+    # * @var array'
+- name: remainingRunIterations
+  visibility: protected
+  comment: '# * The number of times the process should indicate that it is "running".
+
+    # *
+
+    # * @var int|null'
+- name: outputHandler
+  visibility: protected
+  comment: '# * The general output handler callback.
+
+    # *
+
+    # * @var callable|null'
+- name: nextOutputIndex
+  visibility: protected
+  comment: '# * The current output''s index.
+
+    # *
+
+    # * @var int'
+- name: nextErrorOutputIndex
+  visibility: protected
+  comment: '# * The current error output''s index.
+
+    # *
+
+    # * @var int'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: command
+  - name: process
+  comment: "# * The command being faked.\n# *\n# * @var string\n# */\n# protected\
+    \ $command;\n# \n# /**\n# * The underlying process description.\n# *\n# * @var\
+    \ \\Illuminate\\Process\\FakeProcessDescription\n# */\n# protected $process;\n\
+    # \n# /**\n# * The signals that have been received.\n# *\n# * @var array\n# */\n\
+    # protected $receivedSignals = [];\n# \n# /**\n# * The number of times the process\
+    \ should indicate that it is \"running\".\n# *\n# * @var int|null\n# */\n# protected\
+    \ $remainingRunIterations;\n# \n# /**\n# * The general output handler callback.\n\
+    # *\n# * @var callable|null\n# */\n# protected $outputHandler;\n# \n# /**\n# *\
+    \ The current output's index.\n# *\n# * @var int\n# */\n# protected $nextOutputIndex\
+    \ = 0;\n# \n# /**\n# * The current error output's index.\n# *\n# * @var int\n\
+    # */\n# protected $nextErrorOutputIndex = 0;\n# \n# /**\n# * Create a new invoked\
+    \ process instance.\n# *\n# * @param  string  $command\n# * @param  \\Illuminate\\\
+    Process\\FakeProcessDescription  $process\n# * @return void"
+- name: id
+  visibility: public
+  parameters: []
+  comment: '# * Get the process ID if the process is still running.
+
+    # *
+
+    # * @return int|null'
+- name: signal
+  visibility: public
+  parameters:
+  - name: signal
+  comment: '# * Send a signal to the process.
+
+    # *
+
+    # * @param  int  $signal
+
+    # * @return $this'
+- name: hasReceivedSignal
+  visibility: public
+  parameters:
+  - name: signal
+  comment: '# * Determine if the process has received the given signal.
+
+    # *
+
+    # * @param  int  $signal
+
+    # * @return bool'
+- name: running
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the process is still running.
+
+    # *
+
+    # * @return bool'
+- name: invokeOutputHandlerWithNextLineOfOutput
+  visibility: protected
+  parameters: []
+  comment: '# * Invoke the asynchronous output handler with the next single line of
+    output if necessary.
+
+    # *
+
+    # * @return array|false'
+- name: output
+  visibility: public
+  parameters: []
+  comment: '# * Get the standard output for the process.
+
+    # *
+
+    # * @return string'
+- name: errorOutput
+  visibility: public
+  parameters: []
+  comment: '# * Get the error output for the process.
+
+    # *
+
+    # * @return string'
+- name: latestOutput
+  visibility: public
+  parameters: []
+  comment: '# * Get the latest standard output for the process.
+
+    # *
+
+    # * @return string'
+- name: latestErrorOutput
+  visibility: public
+  parameters: []
+  comment: '# * Get the latest error output for the process.
+
+    # *
+
+    # * @return string'
+- name: wait
+  visibility: public
+  parameters:
+  - name: output
+    default: 'null'
+  comment: '# * Wait for the process to finish.
+
+    # *
+
+    # * @param  callable|null  $output
+
+    # * @return \Illuminate\Contracts\Process\ProcessResult'
+- name: predictProcessResult
+  visibility: public
+  parameters: []
+  comment: '# * Get the ultimate process result that will be returned by this "process".
+
+    # *
+
+    # * @return \Illuminate\Contracts\Process\ProcessResult'
+- name: withOutputHandler
+  visibility: public
+  parameters:
+  - name: outputHandler
+  comment: '# * Set the general output handler for the fake invoked process.
+
+    # *
+
+    # * @param  callable|null  $outputHandler
+
+    # * @return $this'
+traits: []
+interfaces:
+- InvokedProcessContract

@@ -1,0 +1,39 @@
+name: ExpressionRequestMatcher
+class_comment: '# * ExpressionRequestMatcher uses an expression to match a Request.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: Expression
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Expression
+- name: ExpressionLanguage
+  type: class
+  source: Symfony\Component\ExpressionLanguage\ExpressionLanguage
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestMatcherInterface
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestMatcherInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: language
+  - name: expression
+  comment: null
+- name: matches
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+traits:
+- Symfony\Component\ExpressionLanguage\Expression
+- Symfony\Component\ExpressionLanguage\ExpressionLanguage
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestMatcherInterface
+interfaces:
+- RequestMatcherInterface

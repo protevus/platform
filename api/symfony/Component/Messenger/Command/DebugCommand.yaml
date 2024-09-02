@@ -1,0 +1,74 @@
+name: DebugCommand
+class_comment: null
+dependencies:
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: CompletionInput
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionInput
+- name: CompletionSuggestions
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionSuggestions
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Console\Exception\RuntimeException
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: mapping
+  comment: null
+- name: configure
+  visibility: protected
+  parameters: []
+  comment: null
+- name: execute
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+- name: formatConditions
+  visibility: private
+  parameters:
+  - name: options
+  comment: null
+- name: getClassDescription
+  visibility: private
+  parameters:
+  - name: class
+  comment: null
+- name: complete
+  visibility: public
+  parameters:
+  - name: input
+  - name: suggestions
+  comment: null
+traits:
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Completion\CompletionInput
+- Symfony\Component\Console\Completion\CompletionSuggestions
+- Symfony\Component\Console\Exception\RuntimeException
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Style\SymfonyStyle
+interfaces: []

@@ -1,0 +1,187 @@
+name: FileFailedJobProvider
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: DateTimeInterface
+  type: class
+  source: DateTimeInterface
+- name: Date
+  type: class
+  source: Illuminate\Support\Facades\Date
+properties:
+- name: path
+  visibility: protected
+  comment: '# * The file path where the failed job file should be stored.
+
+    # *
+
+    # * @var string'
+- name: limit
+  visibility: protected
+  comment: '# * The maximum number of failed jobs to retain.
+
+    # *
+
+    # * @var int'
+- name: lockProviderResolver
+  visibility: protected
+  comment: '# * The lock provider resolver.
+
+    # *
+
+    # * @var \Closure'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: path
+  - name: limit
+    default: '100'
+  - name: lockProviderResolver
+    default: 'null'
+  comment: "# * The file path where the failed job file should be stored.\n# *\n#\
+    \ * @var string\n# */\n# protected $path;\n# \n# /**\n# * The maximum number of\
+    \ failed jobs to retain.\n# *\n# * @var int\n# */\n# protected $limit;\n# \n#\
+    \ /**\n# * The lock provider resolver.\n# *\n# * @var \\Closure\n# */\n# protected\
+    \ $lockProviderResolver;\n# \n# /**\n# * Create a new database failed job provider.\n\
+    # *\n# * @param  string  $path\n# * @param  int  $limit\n# * @param  \\Closure|null\
+    \  $lockProviderResolver\n# * @return void"
+- name: log
+  visibility: public
+  parameters:
+  - name: connection
+  - name: queue
+  - name: payload
+  - name: exception
+  comment: '# * Log a failed job into storage.
+
+    # *
+
+    # * @param  string  $connection
+
+    # * @param  string  $queue
+
+    # * @param  string  $payload
+
+    # * @param  \Throwable  $exception
+
+    # * @return int|null'
+- name: ids
+  visibility: public
+  parameters:
+  - name: queue
+    default: 'null'
+  comment: '# * Get the IDs of all of the failed jobs.
+
+    # *
+
+    # * @param  string|null  $queue
+
+    # * @return array'
+- name: all
+  visibility: public
+  parameters: []
+  comment: '# * Get a list of all of the failed jobs.
+
+    # *
+
+    # * @return array'
+- name: find
+  visibility: public
+  parameters:
+  - name: id
+  comment: '# * Get a single failed job.
+
+    # *
+
+    # * @param  mixed  $id
+
+    # * @return object|null'
+- name: forget
+  visibility: public
+  parameters:
+  - name: id
+  comment: '# * Delete a single failed job from storage.
+
+    # *
+
+    # * @param  mixed  $id
+
+    # * @return bool'
+- name: flush
+  visibility: public
+  parameters:
+  - name: hours
+    default: 'null'
+  comment: '# * Flush all of the failed jobs from storage.
+
+    # *
+
+    # * @param  int|null  $hours
+
+    # * @return void'
+- name: prune
+  visibility: public
+  parameters:
+  - name: before
+  comment: '# * Prune all of the entries older than the given date.
+
+    # *
+
+    # * @param  \DateTimeInterface  $before
+
+    # * @return int'
+- name: lock
+  visibility: protected
+  parameters:
+  - name: callback
+  comment: '# * Execute the given callback while holding a lock.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return mixed'
+- name: read
+  visibility: protected
+  parameters: []
+  comment: '# * Read the failed jobs file.
+
+    # *
+
+    # * @return array'
+- name: write
+  visibility: protected
+  parameters:
+  - name: jobs
+  comment: '# * Write the given array of jobs to the failed jobs file.
+
+    # *
+
+    # * @param  array  $jobs
+
+    # * @return void'
+- name: count
+  visibility: public
+  parameters:
+  - name: connection
+    default: 'null'
+  - name: queue
+    default: 'null'
+  comment: '# * Count the failed jobs.
+
+    # *
+
+    # * @param  string|null  $connection
+
+    # * @param  string|null  $queue
+
+    # * @return int'
+traits:
+- Closure
+- DateTimeInterface
+- Illuminate\Support\Facades\Date
+interfaces:
+- CountableFailedJobProvider

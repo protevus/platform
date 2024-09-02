@@ -1,0 +1,45 @@
+name: FailureEvent
+class_comment: null
+dependencies:
+- name: MessageContext
+  type: class
+  source: Symfony\Component\Scheduler\Generator\MessageContext
+- name: ScheduleProviderInterface
+  type: class
+  source: Symfony\Component\Scheduler\ScheduleProviderInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: schedule
+  - name: messageContext
+  - name: message
+  - name: error
+  comment: null
+- name: getMessageContext
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSchedule
+  visibility: public
+  parameters: []
+  comment: null
+- name: getMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: getError
+  visibility: public
+  parameters: []
+  comment: null
+- name: shouldIgnore
+  visibility: public
+  parameters:
+  - name: shouldIgnore
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\Scheduler\Generator\MessageContext
+- Symfony\Component\Scheduler\ScheduleProviderInterface
+interfaces: []

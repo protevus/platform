@@ -1,0 +1,54 @@
+name: MailerTestCommand
+class_comment: null
+dependencies:
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: TransportInterface
+  type: class
+  source: Symfony\Component\Mailer\Transport\TransportInterface
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: transport
+  comment: null
+- name: configure
+  visibility: protected
+  parameters: []
+  comment: null
+- name: execute
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+traits:
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Mailer\Transport\TransportInterface
+- Symfony\Component\Mime\Email
+interfaces: []

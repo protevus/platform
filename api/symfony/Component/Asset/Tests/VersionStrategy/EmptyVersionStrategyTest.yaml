@@ -1,0 +1,23 @@
+name: EmptyVersionStrategyTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: EmptyVersionStrategy
+  type: class
+  source: Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy
+properties: []
+methods:
+- name: testGetVersion
+  visibility: public
+  parameters: []
+  comment: null
+- name: testApplyVersion
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy
+interfaces: []

@@ -1,0 +1,37 @@
+name: ClassDiscriminatorFromClassMetadata
+class_comment: '# * @author Samuel Roze <samuel.roze@gmail.com>'
+dependencies:
+- name: ClassMetadataFactoryInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: classMetadataFactory
+  comment: null
+- name: getMappingForClass
+  visibility: public
+  parameters:
+  - name: class
+  comment: null
+- name: getMappingForMappedObject
+  visibility: public
+  parameters:
+  - name: object
+  comment: null
+- name: getTypeForMappedObject
+  visibility: public
+  parameters:
+  - name: object
+  comment: null
+- name: resolveMappingForMappedObject
+  visibility: private
+  parameters:
+  - name: object
+  comment: null
+traits:
+- Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+interfaces:
+- ClassDiscriminatorResolverInterface

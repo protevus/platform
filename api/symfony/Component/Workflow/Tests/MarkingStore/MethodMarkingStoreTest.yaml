@@ -1,0 +1,57 @@
+name: MethodMarkingStoreTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: MethodMarkingStore
+  type: class
+  source: Symfony\Component\Workflow\MarkingStore\MethodMarkingStore
+- name: Subject
+  type: class
+  source: Symfony\Component\Workflow\Tests\Subject
+properties: []
+methods:
+- name: testGetSetMarkingWithMultipleState
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetSetMarkingWithSingleState
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetSetMarkingWithSingleStateAndAlmostEmptyPlaceName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetMarkingWithValueObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetMarkingWithUninitializedProperty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetMarkingWithUninitializedProperty2
+  visibility: public
+  parameters: []
+  comment: null
+- name: createValueObject
+  visibility: private
+  parameters:
+  - name: markingValue
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: markingValue
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Workflow\MarkingStore\MethodMarkingStore
+- Symfony\Component\Workflow\Tests\Subject
+interfaces: []

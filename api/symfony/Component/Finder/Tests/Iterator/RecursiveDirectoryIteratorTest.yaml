@@ -1,0 +1,23 @@
+name: RecursiveDirectoryIteratorTest
+class_comment: null
+dependencies:
+- name: RecursiveDirectoryIterator
+  type: class
+  source: Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testRewindOnFtp
+  visibility: public
+  parameters: []
+  comment: '# * @group network'
+- name: testSeekOnFtp
+  visibility: public
+  parameters: []
+  comment: '# * @group network'
+traits:
+- Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator
+interfaces: []

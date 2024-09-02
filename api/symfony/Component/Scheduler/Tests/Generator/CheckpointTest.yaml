@@ -1,0 +1,103 @@
+name: CheckpointTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ArrayAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\ArrayAdapter
+- name: Key
+  type: class
+  source: Symfony\Component\Lock\Key
+- name: Lock
+  type: class
+  source: Symfony\Component\Lock\Lock
+- name: LockInterface
+  type: class
+  source: Symfony\Component\Lock\LockInterface
+- name: NoLock
+  type: class
+  source: Symfony\Component\Lock\NoLock
+- name: InMemoryStore
+  type: class
+  source: Symfony\Component\Lock\Store\InMemoryStore
+- name: Checkpoint
+  type: class
+  source: Symfony\Component\Scheduler\Generator\Checkpoint
+properties: []
+methods:
+- name: testWithoutLockAndWithoutState
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithStateInitStateOnFirstAcquiring
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithStateLoadStateOnAcquiring
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithLockInitStateOnFirstAcquiring
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithLockLoadStateOnAcquiring
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithLockCannotAcquireIfAlreadyAcquired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithCacheSave
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithLockSave
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithLockAndCacheSave
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithCacheFullCycle
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithLockResetStateAfterLockedAcquiring
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithLockResetStateAfterLockedAcquiringCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithLockKeepLock
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithLockReleaseLock
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithLockRefreshLock
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithLockFullCycle
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Cache\Adapter\ArrayAdapter
+- Symfony\Component\Lock\Key
+- Symfony\Component\Lock\Lock
+- Symfony\Component\Lock\LockInterface
+- Symfony\Component\Lock\NoLock
+- Symfony\Component\Lock\Store\InMemoryStore
+- Symfony\Component\Scheduler\Generator\Checkpoint
+interfaces: []

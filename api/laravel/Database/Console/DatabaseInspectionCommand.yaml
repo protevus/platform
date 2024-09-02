@@ -1,0 +1,89 @@
+name: DatabaseInspectionCommand
+class_comment: null
+dependencies:
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+- name: ConnectionInterface
+  type: class
+  source: Illuminate\Database\ConnectionInterface
+- name: MariaDbConnection
+  type: class
+  source: Illuminate\Database\MariaDbConnection
+- name: MySqlConnection
+  type: class
+  source: Illuminate\Database\MySqlConnection
+- name: PostgresConnection
+  type: class
+  source: Illuminate\Database\PostgresConnection
+- name: SQLiteConnection
+  type: class
+  source: Illuminate\Database\SQLiteConnection
+- name: SqlServerConnection
+  type: class
+  source: Illuminate\Database\SqlServerConnection
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+properties: []
+methods:
+- name: getConnectionName
+  visibility: protected
+  parameters:
+  - name: connection
+  - name: database
+  comment: '# * Get a human-readable name for the given connection.
+
+    # *
+
+    # * @param  \Illuminate\Database\ConnectionInterface  $connection
+
+    # * @param  string  $database
+
+    # * @return string'
+- name: getConnectionCount
+  visibility: protected
+  parameters:
+  - name: connection
+  comment: '# * Get the number of open connections for a database.
+
+    # *
+
+    # * @param  \Illuminate\Database\ConnectionInterface  $connection
+
+    # * @return int|null'
+- name: getConfigFromDatabase
+  visibility: protected
+  parameters:
+  - name: database
+  comment: '# * Get the connection configuration details for the given connection.
+
+    # *
+
+    # * @param  string  $database
+
+    # * @return array'
+- name: withoutTablePrefix
+  visibility: protected
+  parameters:
+  - name: connection
+  - name: table
+  comment: '# * Remove the table prefix from a table name, if it exists.
+
+    # *
+
+    # * @param  \Illuminate\Database\ConnectionInterface  $connection
+
+    # * @param  string  $table
+
+    # * @return string'
+traits:
+- Illuminate\Console\Command
+- Illuminate\Database\ConnectionInterface
+- Illuminate\Database\MariaDbConnection
+- Illuminate\Database\MySqlConnection
+- Illuminate\Database\PostgresConnection
+- Illuminate\Database\SQLiteConnection
+- Illuminate\Database\SqlServerConnection
+- Illuminate\Support\Arr
+interfaces: []

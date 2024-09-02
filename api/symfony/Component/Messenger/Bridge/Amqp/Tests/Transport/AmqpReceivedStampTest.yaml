@@ -1,0 +1,19 @@
+name: AmqpReceivedStampTest
+class_comment: '# * @requires extension amqp'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AmqpReceivedStamp
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpReceivedStamp
+properties: []
+methods:
+- name: testStamp
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpReceivedStamp
+interfaces: []

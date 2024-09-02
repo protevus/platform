@@ -1,0 +1,60 @@
+name: NotificationSent
+class_comment: null
+dependencies:
+- name: Queueable
+  type: class
+  source: Illuminate\Bus\Queueable
+- name: SerializesModels
+  type: class
+  source: Illuminate\Queue\SerializesModels
+properties:
+- name: notifiable
+  visibility: public
+  comment: '# * The notifiable entity who received the notification.
+
+    # *
+
+    # * @var mixed'
+- name: notification
+  visibility: public
+  comment: '# * The notification instance.
+
+    # *
+
+    # * @var \Illuminate\Notifications\Notification'
+- name: channel
+  visibility: public
+  comment: '# * The channel name.
+
+    # *
+
+    # * @var string'
+- name: response
+  visibility: public
+  comment: '# * The channel''s response.
+
+    # *
+
+    # * @var mixed'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: notifiable
+  - name: notification
+  - name: channel
+  - name: response
+    default: 'null'
+  comment: "# * The notifiable entity who received the notification.\n# *\n# * @var\
+    \ mixed\n# */\n# public $notifiable;\n# \n# /**\n# * The notification instance.\n\
+    # *\n# * @var \\Illuminate\\Notifications\\Notification\n# */\n# public $notification;\n\
+    # \n# /**\n# * The channel name.\n# *\n# * @var string\n# */\n# public $channel;\n\
+    # \n# /**\n# * The channel's response.\n# *\n# * @var mixed\n# */\n# public $response;\n\
+    # \n# /**\n# * Create a new event instance.\n# *\n# * @param  mixed  $notifiable\n\
+    # * @param  \\Illuminate\\Notifications\\Notification  $notification\n# * @param\
+    \  string  $channel\n# * @param  mixed  $response\n# * @return void"
+traits:
+- Illuminate\Bus\Queueable
+- Illuminate\Queue\SerializesModels
+- Queueable
+interfaces: []

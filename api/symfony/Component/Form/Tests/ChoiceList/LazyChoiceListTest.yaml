@@ -1,0 +1,47 @@
+name: LazyChoiceListTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: LazyChoiceList
+  type: class
+  source: Symfony\Component\Form\ChoiceList\LazyChoiceList
+- name: ArrayChoiceLoader
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\ArrayChoiceLoader
+properties: []
+methods:
+- name: testGetChoiceLoadersLoadsLoadedListOnFirstCall
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValuesLoadsLoadedListOnFirstCall
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetStructuredValuesLoadsLoadedListOnFirstCall
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetOriginalKeysLoadsLoadedListOnFirstCall
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetChoicesForValuesForwardsCallIfListNotLoaded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetChoicesForValuesUsesLoadedList
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValuesForChoicesUsesLoadedList
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\ChoiceList\LazyChoiceList
+- Symfony\Component\Form\Tests\Fixtures\ArrayChoiceLoader
+interfaces: []

@@ -1,0 +1,11 @@
+name: DeadlockException
+class_comment: null
+dependencies:
+- name: PDOException
+  type: class
+  source: PDOException
+properties: []
+methods: []
+traits:
+- PDOException
+interfaces: []

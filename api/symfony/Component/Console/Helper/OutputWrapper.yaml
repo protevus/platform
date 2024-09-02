@@ -1,0 +1,21 @@
+name: OutputWrapper
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: allowCutUrls
+    default: 'false'
+  comment: null
+- name: wrap
+  visibility: public
+  parameters:
+  - name: text
+  - name: width
+  - name: break
+    default: '"\n"'
+  comment: null
+traits: []
+interfaces: []

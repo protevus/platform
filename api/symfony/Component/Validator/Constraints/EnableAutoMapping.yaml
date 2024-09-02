@@ -1,0 +1,30 @@
+name: EnableAutoMapping
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: options
+    default: 'null'
+  comment: "# * Enables auto mapping.\n# *\n# * Using the attribute on a property\
+    \ has higher precedence than using it on a class,\n# * which has higher precedence\
+    \ than any configuration that might be defined outside the class.\n# *\n# * @author\
+    \ K\xE9vin Dunglas <dunglas@gmail.com>\n# */\n# #[\\Attribute(\\Attribute::TARGET_PROPERTY\
+    \ | \\Attribute::TARGET_METHOD | \\Attribute::TARGET_CLASS)]\n# class EnableAutoMapping\
+    \ extends Constraint\n# {\n# /**\n# * @param array<string,mixed>|null $options"
+- name: getTargets
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+interfaces: []

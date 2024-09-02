@@ -1,0 +1,128 @@
+name: HashManager
+class_comment: '# * @mixin \Illuminate\Contracts\Hashing\Hasher'
+dependencies:
+- name: Hasher
+  type: class
+  source: Illuminate\Contracts\Hashing\Hasher
+- name: Manager
+  type: class
+  source: Illuminate\Support\Manager
+properties: []
+methods:
+- name: createBcryptDriver
+  visibility: public
+  parameters: []
+  comment: '# * @mixin \Illuminate\Contracts\Hashing\Hasher
+
+    # */
+
+    # class HashManager extends Manager implements Hasher
+
+    # {
+
+    # /**
+
+    # * Create an instance of the Bcrypt hash Driver.
+
+    # *
+
+    # * @return \Illuminate\Hashing\BcryptHasher'
+- name: createArgonDriver
+  visibility: public
+  parameters: []
+  comment: '# * Create an instance of the Argon2i hash Driver.
+
+    # *
+
+    # * @return \Illuminate\Hashing\ArgonHasher'
+- name: createArgon2idDriver
+  visibility: public
+  parameters: []
+  comment: '# * Create an instance of the Argon2id hash Driver.
+
+    # *
+
+    # * @return \Illuminate\Hashing\Argon2IdHasher'
+- name: info
+  visibility: public
+  parameters:
+  - name: hashedValue
+  comment: '# * Get information about the given hashed value.
+
+    # *
+
+    # * @param  string  $hashedValue
+
+    # * @return array'
+- name: make
+  visibility: public
+  parameters:
+  - name: value
+  - name: options
+    default: '[]'
+  comment: '# * Hash the given value.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @param  array  $options
+
+    # * @return string'
+- name: check
+  visibility: public
+  parameters:
+  - name: value
+  - name: hashedValue
+  - name: options
+    default: '[]'
+  comment: '# * Check the given plain value against a hash.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @param  string  $hashedValue
+
+    # * @param  array  $options
+
+    # * @return bool'
+- name: needsRehash
+  visibility: public
+  parameters:
+  - name: hashedValue
+  - name: options
+    default: '[]'
+  comment: '# * Check if the given hash has been hashed using the given options.
+
+    # *
+
+    # * @param  string  $hashedValue
+
+    # * @param  array  $options
+
+    # * @return bool'
+- name: isHashed
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Determine if a given string is already hashed.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return bool'
+- name: getDefaultDriver
+  visibility: public
+  parameters: []
+  comment: '# * Get the default driver name.
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Contracts\Hashing\Hasher
+- Illuminate\Support\Manager
+interfaces:
+- Hasher

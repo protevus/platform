@@ -1,0 +1,99 @@
+name: CacheBasedMaintenanceMode
+class_comment: null
+dependencies:
+- name: Factory
+  type: class
+  source: Illuminate\Contracts\Cache\Factory
+- name: Repository
+  type: class
+  source: Illuminate\Contracts\Cache\Repository
+- name: MaintenanceMode
+  type: class
+  source: Illuminate\Contracts\Foundation\MaintenanceMode
+properties:
+- name: cache
+  visibility: protected
+  comment: '# * The cache factory.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Cache\Factory'
+- name: store
+  visibility: protected
+  comment: '# * The cache store that should be utilized.
+
+    # *
+
+    # * @var string'
+- name: key
+  visibility: protected
+  comment: '# * The cache key to use when storing maintenance mode information.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: cache
+  - name: store
+  - name: key
+  comment: "# * The cache factory.\n# *\n# * @var \\Illuminate\\Contracts\\Cache\\\
+    Factory\n# */\n# protected $cache;\n# \n# /**\n# * The cache store that should\
+    \ be utilized.\n# *\n# * @var string\n# */\n# protected $store;\n# \n# /**\n#\
+    \ * The cache key to use when storing maintenance mode information.\n# *\n# *\
+    \ @var string\n# */\n# protected $key;\n# \n# /**\n# * Create a new cache based\
+    \ maintenance mode implementation.\n# *\n# * @param  \\Illuminate\\Contracts\\\
+    Cache\\Factory  $cache\n# * @param  string  $store\n# * @param  string  $key\n\
+    # * @return void"
+- name: activate
+  visibility: public
+  parameters:
+  - name: payload
+  comment: '# * Take the application down for maintenance.
+
+    # *
+
+    # * @param  array  $payload
+
+    # * @return void'
+- name: deactivate
+  visibility: public
+  parameters: []
+  comment: '# * Take the application out of maintenance.
+
+    # *
+
+    # * @return void'
+- name: active
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the application is currently down for maintenance.
+
+    # *
+
+    # * @return bool'
+- name: data
+  visibility: public
+  parameters: []
+  comment: '# * Get the data array which was provided when the application was placed
+    into maintenance.
+
+    # *
+
+    # * @return array'
+- name: getStore
+  visibility: protected
+  parameters: []
+  comment: '# * Get the cache store to use.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Cache\Repository'
+traits:
+- Illuminate\Contracts\Cache\Factory
+- Illuminate\Contracts\Cache\Repository
+- Illuminate\Contracts\Foundation\MaintenanceMode
+interfaces:
+- MaintenanceMode

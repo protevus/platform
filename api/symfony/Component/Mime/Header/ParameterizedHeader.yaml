@@ -1,0 +1,67 @@
+name: ParameterizedHeader
+class_comment: null
+dependencies:
+- name: Rfc2231Encoder
+  type: class
+  source: Symfony\Component\Mime\Encoder\Rfc2231Encoder
+properties: []
+methods:
+- name: setParameters
+  visibility: public
+  parameters:
+  - name: parameters
+  comment: "# * @author Chris Corbyn\n# */\n# final class ParameterizedHeader extends\
+    \ UnstructuredHeader\n# {\n# /**\n# * RFC 2231's definition of a token.\n# *\n\
+    # * @var string\n# */\n# public const TOKEN_REGEX = '(?:[\\x21\\x23-\\x27\\x2A\\\
+    x2B\\x2D\\x2E\\x30-\\x39\\x41-\\x5A\\x5E-\\x7E]+)';\n# \n# private ?Rfc2231Encoder\
+    \ $encoder = null;\n# private array $parameters = [];\n# \n# public function __construct(string\
+    \ $name, string $value, array $parameters = [])\n# {\n# parent::__construct($name,\
+    \ $value);\n# \n# foreach ($parameters as $k => $v) {\n# $this->setParameter($k,\
+    \ $v);\n# }\n# \n# if ('content-type' !== strtolower($name)) {\n# $this->encoder\
+    \ = new Rfc2231Encoder();\n# }\n# }\n# \n# public function setParameter(string\
+    \ $parameter, ?string $value): void\n# {\n# $this->setParameters(array_merge($this->getParameters(),\
+    \ [$parameter => $value]));\n# }\n# \n# public function getParameter(string $parameter):\
+    \ string\n# {\n# return $this->getParameters()[$parameter] ?? '';\n# }\n# \n#\
+    \ /**\n# * @param string[] $parameters"
+- name: getParameters
+  visibility: public
+  parameters: []
+  comment: '# * @return string[]'
+- name: getBodyAsString
+  visibility: public
+  parameters: []
+  comment: null
+- name: toTokens
+  visibility: protected
+  parameters:
+  - name: string
+    default: 'null'
+  comment: '# * Generate a list of all tokens in the final header.
+
+    # *
+
+    # * This doesn''t need to be overridden in theory, but it is for implementation
+
+    # * reasons to prevent potential breakage of attributes.'
+- name: createParameter
+  visibility: private
+  parameters:
+  - name: name
+  - name: value
+  comment: '# * Render an RFC 2047 compliant header parameter from the $name and $value.'
+- name: getEndOfParameterValue
+  visibility: private
+  parameters:
+  - name: value
+  - name: encoded
+    default: 'false'
+  - name: firstLine
+    default: 'false'
+  comment: '# * Returns the parameter value from the "=" and beyond.
+
+    # *
+
+    # * @param string $value to append'
+traits:
+- Symfony\Component\Mime\Encoder\Rfc2231Encoder
+interfaces: []

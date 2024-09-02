@@ -1,0 +1,39 @@
+name: FormRequestServiceProvider
+class_comment: null
+dependencies:
+- name: ValidatesWhenResolved
+  type: class
+  source: Illuminate\Contracts\Validation\ValidatesWhenResolved
+- name: FormRequest
+  type: class
+  source: Illuminate\Foundation\Http\FormRequest
+- name: Redirector
+  type: class
+  source: Illuminate\Routing\Redirector
+- name: ServiceProvider
+  type: class
+  source: Illuminate\Support\ServiceProvider
+properties: []
+methods:
+- name: register
+  visibility: public
+  parameters: []
+  comment: '# * Register the service provider.
+
+    # *
+
+    # * @return void'
+- name: boot
+  visibility: public
+  parameters: []
+  comment: '# * Bootstrap the application services.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Contracts\Validation\ValidatesWhenResolved
+- Illuminate\Foundation\Http\FormRequest
+- Illuminate\Routing\Redirector
+- Illuminate\Support\ServiceProvider
+interfaces: []

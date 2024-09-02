@@ -1,0 +1,20 @@
+name: AutowiredServices
+class_comment: null
+dependencies:
+- name: AccessDecisionManagerInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: accessDecisionManager
+  comment: null
+- name: getAccessDecisionManager
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface
+interfaces: []

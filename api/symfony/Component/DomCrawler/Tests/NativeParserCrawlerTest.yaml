@@ -1,0 +1,19 @@
+name: NativeParserCrawlerTest
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getDoctype
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddHtmlContentWithErrors
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddXmlContentWithErrors
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

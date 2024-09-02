@@ -1,0 +1,15 @@
+name: IdnAddressEncoderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+properties: []
+methods:
+- name: testEncodeString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+interfaces: []

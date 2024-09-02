@@ -1,0 +1,138 @@
+name: MorphOne
+class_comment: '# * @template TRelatedModel of \Illuminate\Database\Eloquent\Model
+
+  # * @template TDeclaringModel of \Illuminate\Database\Eloquent\Model
+
+  # *
+
+  # * @extends \Illuminate\Database\Eloquent\Relations\MorphOneOrMany<TRelatedModel,
+  TDeclaringModel, ?TRelatedModel>'
+dependencies:
+- name: SupportsPartialRelations
+  type: class
+  source: Illuminate\Contracts\Database\Eloquent\SupportsPartialRelations
+- name: Builder
+  type: class
+  source: Illuminate\Database\Eloquent\Builder
+- name: Collection
+  type: class
+  source: Illuminate\Database\Eloquent\Collection
+- name: Model
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+- name: CanBeOneOfMany
+  type: class
+  source: Illuminate\Database\Eloquent\Relations\Concerns\CanBeOneOfMany
+- name: ComparesRelatedModels
+  type: class
+  source: Illuminate\Database\Eloquent\Relations\Concerns\ComparesRelatedModels
+- name: SupportsDefaultModels
+  type: class
+  source: Illuminate\Database\Eloquent\Relations\Concerns\SupportsDefaultModels
+- name: JoinClause
+  type: class
+  source: Illuminate\Database\Query\JoinClause
+properties: []
+methods:
+- name: getResults
+  visibility: public
+  parameters: []
+  comment: "# * @template TRelatedModel of \\Illuminate\\Database\\Eloquent\\Model\n\
+    # * @template TDeclaringModel of \\Illuminate\\Database\\Eloquent\\Model\n# *\n\
+    # * @extends \\Illuminate\\Database\\Eloquent\\Relations\\MorphOneOrMany<TRelatedModel,\
+    \ TDeclaringModel, ?TRelatedModel>\n# */\n# class MorphOne extends MorphOneOrMany\
+    \ implements SupportsPartialRelations\n# {\n# use CanBeOneOfMany, ComparesRelatedModels,\
+    \ SupportsDefaultModels;\n# \n# /** @inheritDoc"
+- name: initRelation
+  visibility: public
+  parameters:
+  - name: models
+  - name: relation
+  comment: '# @inheritDoc'
+- name: match
+  visibility: public
+  parameters:
+  - name: models
+  - name: results
+  - name: relation
+  comment: '# @inheritDoc'
+- name: getRelationExistenceQuery
+  visibility: public
+  parameters:
+  - name: query
+  - name: parentQuery
+  - name: columns
+    default: '[''*'']'
+  comment: '# @inheritDoc'
+- name: addOneOfManySubQueryConstraints
+  visibility: public
+  parameters:
+  - name: query
+  - name: column
+    default: 'null'
+  - name: aggregate
+    default: 'null'
+  comment: '# * Add constraints for inner join subselect for one of many relationships.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Builder<TRelatedModel>  $query
+
+    # * @param  string|null  $column
+
+    # * @param  string|null  $aggregate
+
+    # * @return void'
+- name: getOneOfManySubQuerySelectColumns
+  visibility: public
+  parameters: []
+  comment: '# * Get the columns that should be selected by the one of many subquery.
+
+    # *
+
+    # * @return array|string'
+- name: addOneOfManyJoinSubQueryConstraints
+  visibility: public
+  parameters:
+  - name: join
+  comment: '# * Add join query constraints for one of many relationships.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\JoinClause  $join
+
+    # * @return void'
+- name: newRelatedInstanceFor
+  visibility: public
+  parameters:
+  - name: parent
+  comment: '# * Make a new related instance for the given model.
+
+    # *
+
+    # * @param  TDeclaringModel  $parent
+
+    # * @return TRelatedModel'
+- name: getRelatedKeyFrom
+  visibility: protected
+  parameters:
+  - name: model
+  comment: '# * Get the value of the model''s foreign key.
+
+    # *
+
+    # * @param  TRelatedModel  $model
+
+    # * @return int|string'
+traits:
+- Illuminate\Contracts\Database\Eloquent\SupportsPartialRelations
+- Illuminate\Database\Eloquent\Builder
+- Illuminate\Database\Eloquent\Collection
+- Illuminate\Database\Eloquent\Model
+- Illuminate\Database\Eloquent\Relations\Concerns\CanBeOneOfMany
+- Illuminate\Database\Eloquent\Relations\Concerns\ComparesRelatedModels
+- Illuminate\Database\Eloquent\Relations\Concerns\SupportsDefaultModels
+- Illuminate\Database\Query\JoinClause
+- CanBeOneOfMany
+interfaces:
+- SupportsPartialRelations

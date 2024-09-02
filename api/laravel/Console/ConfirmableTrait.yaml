@@ -1,0 +1,35 @@
+name: ConfirmableTrait
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: confirmToProceed
+  visibility: public
+  parameters:
+  - name: warning
+    default: '''Application In Production'''
+  - name: callback
+    default: 'null'
+  comment: '# * Confirm before proceeding with the action.
+
+    # *
+
+    # * This method only asks for confirmation in production.
+
+    # *
+
+    # * @param  string  $warning
+
+    # * @param  \Closure|bool|null  $callback
+
+    # * @return bool'
+- name: getDefaultConfirmCallback
+  visibility: protected
+  parameters: []
+  comment: '# * Get the default confirmation callback.
+
+    # *
+
+    # * @return \Closure'
+traits: []
+interfaces: []

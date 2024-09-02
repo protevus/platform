@@ -1,0 +1,15 @@
+name: LazyAutoconfigured
+class_comment: null
+dependencies:
+- name: Autoconfigure
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\Autoconfigure
+- name: Lazy
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\Lazy
+properties: []
+methods: []
+traits:
+- Symfony\Component\DependencyInjection\Attribute\Autoconfigure
+- Symfony\Component\DependencyInjection\Attribute\Lazy
+interfaces: []

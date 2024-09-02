@@ -1,0 +1,95 @@
+name: EnvelopeTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Mailer\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\Mailer\Exception\LogicException
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: Headers
+  type: class
+  source: Symfony\Component\Mime\Header\Headers
+- name: PathHeader
+  type: class
+  source: Symfony\Component\Mime\Header\PathHeader
+- name: Message
+  type: class
+  source: Symfony\Component\Mime\Message
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+properties: []
+methods:
+- name: testConstructorWithAddressSender
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithAddressSenderAndNonAsciiCharactersInLocalPartOfAddress
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithNamedAddressSender
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithAddressRecipients
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithNoRecipients
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithWrongRecipients
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSenderFromHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSenderFromHeadersFailsWithNonAsciiCharactersInLocalPart
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSenderFromHeadersWithoutFrom
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSenderFromHeadersWithMulitpleHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRecipientsFromHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRecipientsFromHeadersWithNames
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromRawMessages
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mailer\Exception\InvalidArgumentException
+- Symfony\Component\Mailer\Exception\LogicException
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Header\Headers
+- Symfony\Component\Mime\Header\PathHeader
+- Symfony\Component\Mime\Message
+- Symfony\Component\Mime\RawMessage
+interfaces: []

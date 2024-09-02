@@ -1,0 +1,81 @@
+name: TimeDataCollector
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: KernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\KernelInterface
+- name: Stopwatch
+  type: class
+  source: Symfony\Component\Stopwatch\Stopwatch
+- name: StopwatchEvent
+  type: class
+  source: Symfony\Component\Stopwatch\StopwatchEvent
+properties: []
+methods:
+- name: setEvents
+  visibility: public
+  parameters:
+  - name: events
+  comment: "# * @author Fabien Potencier <fabien@symfony.com>\n# *\n# * @final\n#\
+    \ */\n# class TimeDataCollector extends DataCollector implements LateDataCollectorInterface\n\
+    # {\n# public function __construct(\n# private readonly ?KernelInterface $kernel\
+    \ = null,\n# private readonly ?Stopwatch $stopwatch = null,\n# ) {\n# $this->data\
+    \ = ['events' => [], 'stopwatch_installed' => false, 'start_time' => 0];\n# }\n\
+    # \n# public function collect(Request $request, Response $response, ?\\Throwable\
+    \ $exception = null): void\n# {\n# if (null !== $this->kernel) {\n# $startTime\
+    \ = $this->kernel->getStartTime();\n# } else {\n# $startTime = $request->server->get('REQUEST_TIME_FLOAT');\n\
+    # }\n# \n# $this->data = [\n# 'token' => $request->attributes->get('_stopwatch_token'),\n\
+    # 'start_time' => $startTime * 1000,\n# 'events' => [],\n# 'stopwatch_installed'\
+    \ => class_exists(Stopwatch::class, false),\n# ];\n# }\n# \n# public function\
+    \ reset(): void\n# {\n# $this->data = ['events' => [], 'stopwatch_installed' =>\
+    \ false, 'start_time' => 0];\n# \n# $this->stopwatch?->reset();\n# }\n# \n# public\
+    \ function lateCollect(): void\n# {\n# if (null !== $this->stopwatch && isset($this->data['token']))\
+    \ {\n# $this->setEvents($this->stopwatch->getSectionEvents($this->data['token']));\n\
+    # }\n# unset($this->data['token']);\n# }\n# \n# /**\n# * @param StopwatchEvent[]\
+    \ $events The request events"
+- name: getEvents
+  visibility: public
+  parameters: []
+  comment: '# * @return StopwatchEvent[]'
+- name: getDuration
+  visibility: public
+  parameters: []
+  comment: '# * Gets the request elapsed time.'
+- name: getInitTime
+  visibility: public
+  parameters: []
+  comment: '# * Gets the initialization time.
+
+    # *
+
+    # * This is the time spent until the beginning of the request handling.'
+- name: getStartTime
+  visibility: public
+  parameters: []
+  comment: null
+- name: isStopwatchInstalled
+  visibility: public
+  parameters: []
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\KernelInterface
+- Symfony\Component\Stopwatch\Stopwatch
+- Symfony\Component\Stopwatch\StopwatchEvent
+interfaces:
+- LateDataCollectorInterface

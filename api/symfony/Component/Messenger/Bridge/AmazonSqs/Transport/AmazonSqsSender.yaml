@@ -1,0 +1,56 @@
+name: AmazonSqsSender
+class_comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>"
+dependencies:
+- name: HttpException
+  type: class
+  source: AsyncAws\Core\Exception\Http\HttpException
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: TransportException
+  type: class
+  source: Symfony\Component\Messenger\Exception\TransportException
+- name: DelayStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\DelayStamp
+- name: SenderInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Sender\SenderInterface
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+properties: []
+methods:
+- name: complyWithAmazonSqsRequirements
+  visibility: private
+  parameters:
+  - name: encodedMessage
+  comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n# */\n# class\
+    \ AmazonSqsSender implements SenderInterface\n# {\n# public function __construct(\n\
+    # private Connection $connection,\n# private SerializerInterface $serializer,\n\
+    # ) {\n# }\n# \n# public function send(Envelope $envelope): Envelope\n# {\n# $encodedMessage\
+    \ = $this->serializer->encode($envelope);\n# $encodedMessage = $this->complyWithAmazonSqsRequirements($encodedMessage);\n\
+    # \n# /** @var DelayStamp|null $delayStamp */\n# $delayStamp = $envelope->last(DelayStamp::class);\n\
+    # $delay = null !== $delayStamp ? (int) ceil($delayStamp->getDelay() / 1000) :\
+    \ 0;\n# \n# $messageGroupId = null;\n# $messageDeduplicationId = null;\n# \n#\
+    \ /** @var AmazonSqsFifoStamp|null $amazonSqsFifoStamp */\n# $amazonSqsFifoStamp\
+    \ = $envelope->last(AmazonSqsFifoStamp::class);\n# if (null !== $amazonSqsFifoStamp)\
+    \ {\n# $messageGroupId = $amazonSqsFifoStamp->getMessageGroupId();\n# $messageDeduplicationId\
+    \ = $amazonSqsFifoStamp->getMessageDeduplicationId();\n# }\n# \n# /** @var AmazonSqsXrayTraceHeaderStamp|null\
+    \ $amazonSqsXrayTraceHeaderStamp */\n# $amazonSqsXrayTraceHeaderStamp = $envelope->last(AmazonSqsXrayTraceHeaderStamp::class);\n\
+    # $xrayTraceId = $amazonSqsXrayTraceHeaderStamp?->getTraceId();\n# \n# try {\n\
+    # $this->connection->send(\n# $encodedMessage['body'],\n# $encodedMessage['headers']\
+    \ ?? [],\n# $delay,\n# $messageGroupId,\n# $messageDeduplicationId,\n# $xrayTraceId\n\
+    # );\n# } catch (HttpException $e) {\n# throw new TransportException($e->getMessage(),\
+    \ 0, $e);\n# }\n# \n# return $envelope;\n# }\n# \n# /**\n# * @see https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_SendMessage.html\n\
+    # *\n# * @param array{body: string, headers?: array<string>} $encodedMessage\n\
+    # *\n# * @return array{body: string, headers?: array<string>}"
+traits:
+- AsyncAws\Core\Exception\Http\HttpException
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Exception\TransportException
+- Symfony\Component\Messenger\Stamp\DelayStamp
+- Symfony\Component\Messenger\Transport\Sender\SenderInterface
+- Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+interfaces:
+- SenderInterface

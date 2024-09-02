@@ -1,0 +1,35 @@
+name: ChoiceLoaderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ArrayChoiceList
+  type: class
+  source: Symfony\Component\Form\ChoiceList\ArrayChoiceList
+- name: ChoiceLoader
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceLoader
+- name: CallbackChoiceLoader
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader
+- name: FormType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\FormType
+- name: ArrayChoiceLoader
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\ArrayChoiceLoader
+properties: []
+methods:
+- name: testSameFormTypeUseCachedLoader
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\ChoiceList\ArrayChoiceList
+- Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceLoader
+- Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader
+- Symfony\Component\Form\Extension\Core\Type\FormType
+- Symfony\Component\Form\Tests\Fixtures\ArrayChoiceLoader
+interfaces: []

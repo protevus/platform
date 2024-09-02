@@ -1,0 +1,55 @@
+name: Unescaper
+class_comment: '# * Unescaper encapsulates unescaping rules for single and double-quoted
+
+  # * YAML strings.
+
+  # *
+
+  # * @author Matthew Lewinski <matthew@lewinski.org>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: ParseException
+  type: class
+  source: Symfony\Component\Yaml\Exception\ParseException
+properties: []
+methods:
+- name: unescapeSingleQuotedString
+  visibility: public
+  parameters:
+  - name: value
+  comment: "# * Unescaper encapsulates unescaping rules for single and double-quoted\n\
+    # * YAML strings.\n# *\n# * @author Matthew Lewinski <matthew@lewinski.org>\n\
+    # *\n# * @internal\n# */\n# class Unescaper\n# {\n# /**\n# * Regex fragment that\
+    \ matches an escaped character in a double quoted string.\n# */\n# public const\
+    \ REGEX_ESCAPED_CHARACTER = '\\\\\\\\(x[0-9a-fA-F]{2}|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8}|.)';\n\
+    # \n# /**\n# * Unescapes a single quoted string.\n# *\n# * @param string $value\
+    \ A single quoted string"
+- name: unescapeDoubleQuotedString
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Unescapes a double quoted string.
+
+    # *
+
+    # * @param string $value A double quoted string'
+- name: unescapeCharacter
+  visibility: private
+  parameters:
+  - name: value
+  comment: '# * Unescapes a character that was found in a double-quoted string.
+
+    # *
+
+    # * @param string $value An escaped character'
+- name: utf8chr
+  visibility: private
+  parameters:
+  - name: c
+  comment: '# * Get the UTF-8 character for the given code point.'
+traits:
+- Symfony\Component\Yaml\Exception\ParseException
+interfaces: []

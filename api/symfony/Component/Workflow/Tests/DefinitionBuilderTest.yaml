@@ -1,0 +1,39 @@
+name: DefinitionBuilderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: DefinitionBuilder
+  type: class
+  source: Symfony\Component\Workflow\DefinitionBuilder
+- name: InMemoryMetadataStore
+  type: class
+  source: Symfony\Component\Workflow\Metadata\InMemoryMetadataStore
+- name: Transition
+  type: class
+  source: Symfony\Component\Workflow\Transition
+properties: []
+methods:
+- name: testSetInitialPlaces
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddTransition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddPlace
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetMetadataStore
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Workflow\DefinitionBuilder
+- Symfony\Component\Workflow\Metadata\InMemoryMetadataStore
+- Symfony\Component\Workflow\Transition
+interfaces: []

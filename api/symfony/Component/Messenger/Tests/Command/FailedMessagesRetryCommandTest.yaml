@@ -1,0 +1,71 @@
+name: FailedMessagesRetryCommandTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CommandCompletionTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandCompletionTester
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+- name: ServiceLocator
+  type: class
+  source: Symfony\Component\DependencyInjection\ServiceLocator
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: FailedMessagesRetryCommand
+  type: class
+  source: Symfony\Component\Messenger\Command\FailedMessagesRetryCommand
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: MessageBusInterface
+  type: class
+  source: Symfony\Component\Messenger\MessageBusInterface
+- name: TransportMessageIdStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\TransportMessageIdStamp
+- name: ListableReceiverInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Receiver\ListableReceiverInterface
+properties: []
+methods:
+- name: testBasicRunWithServiceLocator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBasicRunWithServiceLocatorMultipleFailedTransportsDefined
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBasicRunWithServiceLocatorWithSpecificFailureTransport
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompletingTransport
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompleteId
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompleteIdWithSpecifiedTransport
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Tester\CommandCompletionTester
+- Symfony\Component\Console\Tester\CommandTester
+- Symfony\Component\DependencyInjection\ServiceLocator
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\Messenger\Command\FailedMessagesRetryCommand
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\MessageBusInterface
+- Symfony\Component\Messenger\Stamp\TransportMessageIdStamp
+- Symfony\Component\Messenger\Transport\Receiver\ListableReceiverInterface
+interfaces: []

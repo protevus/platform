@@ -1,0 +1,64 @@
+name: NotTaggedControllerValueResolverTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: ServiceLocator
+  type: class
+  source: Symfony\Component\DependencyInjection\ServiceLocator
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: NotTaggedControllerValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver
+- name: ArgumentMetadata
+  type: class
+  source: Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata
+properties: []
+methods:
+- name: testDoNotSupportWhenControllerExists
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDoNotSupportEmptyController
+  visibility: public
+  parameters: []
+  comment: null
+- name: testController
+  visibility: public
+  parameters: []
+  comment: null
+- name: testControllerWithATrailingBackSlash
+  visibility: public
+  parameters: []
+  comment: null
+- name: testControllerWithMethodNameStartUppercase
+  visibility: public
+  parameters: []
+  comment: null
+- name: testControllerNameIsAnArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvokableController
+  visibility: public
+  parameters: []
+  comment: null
+- name: requestWithAttributes
+  visibility: private
+  parameters:
+  - name: attributes
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\ServiceLocator
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver
+- Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadata
+interfaces: []

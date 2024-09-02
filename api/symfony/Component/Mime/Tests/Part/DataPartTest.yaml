@@ -1,0 +1,107 @@
+name: DataPartTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Mime\Exception\InvalidArgumentException
+- name: Headers
+  type: class
+  source: Symfony\Component\Mime\Header\Headers
+- name: IdentificationHeader
+  type: class
+  source: Symfony\Component\Mime\Header\IdentificationHeader
+- name: ParameterizedHeader
+  type: class
+  source: Symfony\Component\Mime\Header\ParameterizedHeader
+- name: UnstructuredHeader
+  type: class
+  source: Symfony\Component\Mime\Header\UnstructuredHeader
+- name: DataPart
+  type: class
+  source: Symfony\Component\Mime\Part\DataPart
+- name: PhpExecutableFinder
+  type: class
+  source: Symfony\Component\Process\PhpExecutableFinder
+- name: Process
+  type: class
+  source: Symfony\Component\Process\Process
+properties: []
+methods:
+- name: testConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithResource
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithNonStringOrResource
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAsInline
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAsInlineWithCID
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromPathWithMeta
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromPathWithNotAFile
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromPathWithUrl
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasContentId
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetContentId
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetContentIdInvalid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetFilename
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetContentType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSerialize
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mime\Exception\InvalidArgumentException
+- Symfony\Component\Mime\Header\Headers
+- Symfony\Component\Mime\Header\IdentificationHeader
+- Symfony\Component\Mime\Header\ParameterizedHeader
+- Symfony\Component\Mime\Header\UnstructuredHeader
+- Symfony\Component\Mime\Part\DataPart
+- Symfony\Component\Process\PhpExecutableFinder
+- Symfony\Component\Process\Process
+interfaces: []

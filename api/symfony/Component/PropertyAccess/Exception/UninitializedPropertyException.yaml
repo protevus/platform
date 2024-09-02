@@ -1,0 +1,11 @@
+name: UninitializedPropertyException
+class_comment: '# * Thrown when a property is not initialized.
+
+  # *
+
+  # * @author Jules Pietri <jules@heahprod.com>'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces: []

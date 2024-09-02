@@ -1,0 +1,60 @@
+name: SpecificityAdjustmentNode
+class_comment: '# * Represents a "<selector>:where(<subSelectorList>)" node.
+
+  # *
+
+  # * This component is a port of the Python cssselect library,
+
+  # * which is copyright Ian Bicking, @see https://github.com/SimonSapin/cssselect.
+
+  # *
+
+  # * @author Hubert Lenoir <lenoir.hubert@gmail.com>
+
+  # *
+
+  # * @internal'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: selector
+  - name: arguments
+    default: '[]'
+  comment: '# * Represents a "<selector>:where(<subSelectorList>)" node.
+
+    # *
+
+    # * This component is a port of the Python cssselect library,
+
+    # * which is copyright Ian Bicking, @see https://github.com/SimonSapin/cssselect.
+
+    # *
+
+    # * @author Hubert Lenoir <lenoir.hubert@gmail.com>
+
+    # *
+
+    # * @internal
+
+    # */
+
+    # class SpecificityAdjustmentNode extends AbstractNode
+
+    # {
+
+    # /**
+
+    # * @param array<NodeInterface> $arguments'
+- name: getSpecificity
+  visibility: public
+  parameters: []
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

@@ -1,0 +1,154 @@
+name: FormRenderer
+class_comment: '# * Renders a form into HTML using a rendering engine.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: BadMethodCallException
+  type: class
+  source: Symfony\Component\Form\Exception\BadMethodCallException
+- name: LogicException
+  type: class
+  source: Symfony\Component\Form\Exception\LogicException
+- name: CsrfTokenManagerInterface
+  type: class
+  source: Symfony\Component\Security\Csrf\CsrfTokenManagerInterface
+- name: Environment
+  type: class
+  source: Twig\Environment
+properties: []
+methods:
+- name: encodeCurrency
+  visibility: public
+  parameters:
+  - name: environment
+  - name: text
+  - name: widget
+    default: ''''''
+  comment: "# * Renders a form into HTML using a rendering engine.\n# *\n# * @author\
+    \ Bernhard Schussek <bschussek@gmail.com>\n# */\n# class FormRenderer implements\
+    \ FormRendererInterface\n# {\n# public const CACHE_KEY_VAR = 'unique_block_prefix';\n\
+    # \n# private array $blockNameHierarchyMap = [];\n# private array $hierarchyLevelMap\
+    \ = [];\n# private array $variableStack = [];\n# \n# public function __construct(\n\
+    # private FormRendererEngineInterface $engine,\n# private ?CsrfTokenManagerInterface\
+    \ $csrfTokenManager = null,\n# ) {\n# }\n# \n# public function getEngine(): FormRendererEngineInterface\n\
+    # {\n# return $this->engine;\n# }\n# \n# public function setTheme(FormView $view,\
+    \ mixed $themes, bool $useDefaultThemes = true): void\n# {\n# $this->engine->setTheme($view,\
+    \ $themes, $useDefaultThemes);\n# }\n# \n# public function renderCsrfToken(string\
+    \ $tokenId): string\n# {\n# if (null === $this->csrfTokenManager) {\n# throw new\
+    \ BadMethodCallException('CSRF tokens can only be generated if a CsrfTokenManagerInterface\
+    \ is injected in FormRenderer::__construct(). Try running \"composer require symfony/security-csrf\"\
+    .');\n# }\n# \n# return $this->csrfTokenManager->getToken($tokenId)->getValue();\n\
+    # }\n# \n# public function renderBlock(FormView $view, string $blockName, array\
+    \ $variables = []): string\n# {\n# $resource = $this->engine->getResourceForBlockName($view,\
+    \ $blockName);\n# \n# if (!$resource) {\n# throw new LogicException(\\sprintf('No\
+    \ block \"%s\" found while rendering the form.', $blockName));\n# }\n# \n# $viewCacheKey\
+    \ = $view->vars[self::CACHE_KEY_VAR];\n# \n# // The variables are cached globally\
+    \ for a view (instead of for the\n# // current suffix)\n# if (!isset($this->variableStack[$viewCacheKey]))\
+    \ {\n# $this->variableStack[$viewCacheKey] = [];\n# \n# // The default variable\
+    \ scope contains all view variables, merged with\n# // the variables passed explicitly\
+    \ to the helper\n# $scopeVariables = $view->vars;\n# \n# $varInit = true;\n# }\
+    \ else {\n# // Reuse the current scope and merge it with the explicitly passed\
+    \ variables\n# $scopeVariables = end($this->variableStack[$viewCacheKey]);\n#\
+    \ \n# $varInit = false;\n# }\n# \n# // Merge the passed with the existing attributes\n\
+    # if (isset($variables['attr']) && isset($scopeVariables['attr'])) {\n# $variables['attr']\
+    \ = array_replace($scopeVariables['attr'], $variables['attr']);\n# }\n# \n# //\
+    \ Merge the passed with the exist *label* attributes\n# if (isset($variables['label_attr'])\
+    \ && isset($scopeVariables['label_attr'])) {\n# $variables['label_attr'] = array_replace($scopeVariables['label_attr'],\
+    \ $variables['label_attr']);\n# }\n# \n# // Do not use array_replace_recursive(),\
+    \ otherwise array variables\n# // cannot be overwritten\n# $variables = array_replace($scopeVariables,\
+    \ $variables);\n# \n# $this->variableStack[$viewCacheKey][] = $variables;\n# \n\
+    # // Do the rendering\n# $html = $this->engine->renderBlock($view, $resource,\
+    \ $blockName, $variables);\n# \n# // Clear the stack\n# array_pop($this->variableStack[$viewCacheKey]);\n\
+    # \n# if ($varInit) {\n# unset($this->variableStack[$viewCacheKey]);\n# }\n# \n\
+    # return $html;\n# }\n# \n# public function searchAndRenderBlock(FormView $view,\
+    \ string $blockNameSuffix, array $variables = []): string\n# {\n# $renderOnlyOnce\
+    \ = 'row' === $blockNameSuffix || 'widget' === $blockNameSuffix;\n# \n# if ($renderOnlyOnce\
+    \ && $view->isRendered()) {\n# // This is not allowed, because it would result\
+    \ in rendering same IDs multiple times, which is not valid.\n# throw new BadMethodCallException(\\\
+    sprintf('Field \"%s\" has already been rendered, save the result of previous render\
+    \ call to a variable and output that instead.', $view->vars['name']));\n# }\n\
+    # \n# // The cache key for storing the variables and types\n# $viewCacheKey =\
+    \ $view->vars[self::CACHE_KEY_VAR];\n# $viewAndSuffixCacheKey = $viewCacheKey.$blockNameSuffix;\n\
+    # \n# // In templates, we have to deal with two kinds of block hierarchies:\n\
+    # //\n# //   +---------+          +---------+\n# //   | Theme B | -------> | Theme\
+    \ A |\n# //   +---------+          +---------+\n# //\n# //   form_widget ------->\
+    \ form_widget\n# //       ^\n# //       |\n# //  choice_widget -----> choice_widget\n\
+    # //\n# // The first kind of hierarchy is the theme hierarchy. This allows to\n\
+    # // override the block \"choice_widget\" from Theme A in the extending\n# //\
+    \ Theme B. This kind of inheritance needs to be supported by the\n# // template\
+    \ engine and, for example, offers \"parent()\" or similar\n# // functions to fall\
+    \ back from the custom to the parent implementation.\n# //\n# // The second kind\
+    \ of hierarchy is the form type hierarchy. This allows\n# // to implement a custom\
+    \ \"choice_widget\" block (no matter in which theme),\n# // or to fallback to\
+    \ the block of the parent type, which would be\n# // \"form_widget\" in this example\
+    \ (again, no matter in which theme).\n# // If the designer wants to explicitly\
+    \ fallback to \"form_widget\" in their\n# // custom \"choice_widget\", for example\
+    \ because they only want to wrap\n# // a <div> around the original implementation,\
+    \ they can call the\n# // widget() function again to render the block for the\
+    \ parent type.\n# //\n# // The second kind is implemented in the following blocks.\n\
+    # if (!isset($this->blockNameHierarchyMap[$viewAndSuffixCacheKey])) {\n# // INITIAL\
+    \ CALL\n# // Calculate the hierarchy of template blocks and start on\n# // the\
+    \ bottom level of the hierarchy (= \"_<id>_<section>\" block)\n# $blockNameHierarchy\
+    \ = [];\n# foreach ($view->vars['block_prefixes'] as $blockNamePrefix) {\n# $blockNameHierarchy[]\
+    \ = $blockNamePrefix.'_'.$blockNameSuffix;\n# }\n# $hierarchyLevel = \\count($blockNameHierarchy)\
+    \ - 1;\n# \n# $hierarchyInit = true;\n# } else {\n# // RECURSIVE CALL\n# // If\
+    \ a block recursively calls searchAndRenderBlock() again, resume rendering\n#\
+    \ // using the parent type in the hierarchy.\n# $blockNameHierarchy = $this->blockNameHierarchyMap[$viewAndSuffixCacheKey];\n\
+    # $hierarchyLevel = $this->hierarchyLevelMap[$viewAndSuffixCacheKey] - 1;\n# \n\
+    # $hierarchyInit = false;\n# }\n# \n# // The variables are cached globally for\
+    \ a view (instead of for the\n# // current suffix)\n# if (!isset($this->variableStack[$viewCacheKey]))\
+    \ {\n# $this->variableStack[$viewCacheKey] = [];\n# \n# // The default variable\
+    \ scope contains all view variables, merged with\n# // the variables passed explicitly\
+    \ to the helper\n# $scopeVariables = $view->vars;\n# \n# $varInit = true;\n# }\
+    \ else {\n# // Reuse the current scope and merge it with the explicitly passed\
+    \ variables\n# $scopeVariables = end($this->variableStack[$viewCacheKey]);\n#\
+    \ \n# $varInit = false;\n# }\n# \n# // Load the resource where this block can\
+    \ be found\n# $resource = $this->engine->getResourceForBlockNameHierarchy($view,\
+    \ $blockNameHierarchy, $hierarchyLevel);\n# \n# // Update the current hierarchy\
+    \ level to the one at which the resource was\n# // found. For example, if looking\
+    \ for \"choice_widget\", but only a resource\n# // is found for its parent \"\
+    form_widget\", then the level is updated here\n# // to the parent level.\n# $hierarchyLevel\
+    \ = $this->engine->getResourceHierarchyLevel($view, $blockNameHierarchy, $hierarchyLevel);\n\
+    # \n# // The actually existing block name in $resource\n# $blockName = $blockNameHierarchy[$hierarchyLevel];\n\
+    # \n# // Escape if no resource exists for this block\n# if (!$resource) {\n# if\
+    \ (\\count($blockNameHierarchy) !== \\count(array_unique($blockNameHierarchy)))\
+    \ {\n# throw new LogicException(\\sprintf('Unable to render the form because the\
+    \ block names array contains duplicates: \"%s\".', implode('\", \"', array_reverse($blockNameHierarchy))));\n\
+    # }\n# \n# throw new LogicException(\\sprintf('Unable to render the form as none\
+    \ of the following blocks exist: \"%s\".', implode('\", \"', array_reverse($blockNameHierarchy))));\n\
+    # }\n# \n# // Merge the passed with the existing attributes\n# if (isset($variables['attr'])\
+    \ && isset($scopeVariables['attr'])) {\n# $variables['attr'] = array_replace($scopeVariables['attr'],\
+    \ $variables['attr']);\n# }\n# \n# // Merge the passed with the exist *label*\
+    \ attributes\n# if (isset($variables['label_attr']) && isset($scopeVariables['label_attr']))\
+    \ {\n# $variables['label_attr'] = array_replace($scopeVariables['label_attr'],\
+    \ $variables['label_attr']);\n# }\n# \n# // Do not use array_replace_recursive(),\
+    \ otherwise array variables\n# // cannot be overwritten\n# $variables = array_replace($scopeVariables,\
+    \ $variables);\n# \n# // In order to make recursive calls possible, we need to\
+    \ store the block hierarchy,\n# // the current level of the hierarchy and the\
+    \ variables so that this method can\n# // resume rendering one level higher of\
+    \ the hierarchy when it is called recursively.\n# //\n# // We need to store these\
+    \ values in maps (associative arrays) because within a\n# // call to widget()\
+    \ another call to widget() can be made, but for a different view\n# // object.\
+    \ These nested calls should not override each other.\n# $this->blockNameHierarchyMap[$viewAndSuffixCacheKey]\
+    \ = $blockNameHierarchy;\n# $this->hierarchyLevelMap[$viewAndSuffixCacheKey] =\
+    \ $hierarchyLevel;\n# \n# // We also need to store the variables for the view\
+    \ so that we can render other\n# // blocks for the same view using the same variables\
+    \ as in the outer block.\n# $this->variableStack[$viewCacheKey][] = $variables;\n\
+    # \n# // Do the rendering\n# $html = $this->engine->renderBlock($view, $resource,\
+    \ $blockName, $variables);\n# \n# // Clear the stack\n# array_pop($this->variableStack[$viewCacheKey]);\n\
+    # \n# // Clear the caches if they were filled for the first time within\n# //\
+    \ this function call\n# if ($hierarchyInit) {\n# unset($this->blockNameHierarchyMap[$viewAndSuffixCacheKey],\
+    \ $this->hierarchyLevelMap[$viewAndSuffixCacheKey]);\n# }\n# \n# if ($varInit)\
+    \ {\n# unset($this->variableStack[$viewCacheKey]);\n# }\n# \n# if ($renderOnlyOnce)\
+    \ {\n# $view->setRendered();\n# }\n# \n# return $html;\n# }\n# \n# public function\
+    \ humanize(string $text): string\n# {\n# return ucfirst(strtolower(trim(preg_replace(['/([A-Z])/',\
+    \ '/[_\\s]+/'], ['_$1', ' '], $text))));\n# }\n# \n# /**\n# * @internal"
+traits:
+- Symfony\Component\Form\Exception\BadMethodCallException
+- Symfony\Component\Form\Exception\LogicException
+- Symfony\Component\Security\Csrf\CsrfTokenManagerInterface
+- Twig\Environment
+interfaces:
+- FormRendererInterface

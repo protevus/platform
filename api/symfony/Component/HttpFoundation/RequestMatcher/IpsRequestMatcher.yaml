@@ -1,0 +1,38 @@
+name: IpsRequestMatcher
+class_comment: '# * Checks the client IP of a Request.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: IpUtils
+  type: class
+  source: Symfony\Component\HttpFoundation\IpUtils
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestMatcherInterface
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestMatcherInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: ips
+  comment: "# * Checks the client IP of a Request.\n# *\n# * @author Fabien Potencier\
+    \ <fabien@symfony.com>\n# */\n# class IpsRequestMatcher implements RequestMatcherInterface\n\
+    # {\n# private array $ips;\n# \n# /**\n# * @param string[]|string $ips A specific\
+    \ IP address or a range specified using IP/netmask like 192.168.1.0/24\n# *  \
+    \                           Strings can contain a comma-delimited list of IPs/ranges"
+- name: matches
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\IpUtils
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestMatcherInterface
+interfaces:
+- RequestMatcherInterface

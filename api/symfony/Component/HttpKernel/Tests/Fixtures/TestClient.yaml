@@ -1,0 +1,16 @@
+name: TestClient
+class_comment: null
+dependencies:
+- name: HttpKernelBrowser
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelBrowser
+properties: []
+methods:
+- name: getScript
+  visibility: protected
+  parameters:
+  - name: request
+  comment: null
+traits:
+- Symfony\Component\HttpKernel\HttpKernelBrowser
+interfaces: []

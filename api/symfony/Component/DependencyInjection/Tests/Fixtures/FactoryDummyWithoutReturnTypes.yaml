@@ -1,0 +1,11 @@
+name: FactoryDummyWithoutReturnTypes
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: createTestDefinition1
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

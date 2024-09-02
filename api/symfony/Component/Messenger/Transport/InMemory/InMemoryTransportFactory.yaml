@@ -1,0 +1,61 @@
+name: InMemoryTransportFactory
+class_comment: '# * @author Gary PEGEOT <garypegeot@gmail.com>
+
+  # *
+
+  # * @implements TransportFactoryInterface<InMemoryTransport>'
+dependencies:
+- name: ClockInterface
+  type: class
+  source: Psr\Clock\ClockInterface
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+- name: TransportFactoryInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\TransportFactoryInterface
+- name: TransportInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\TransportInterface
+- name: ResetInterface
+  type: class
+  source: Symfony\Contracts\Service\ResetInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: clock
+    default: 'null'
+  comment: null
+- name: createTransport
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: options
+  - name: serializer
+  comment: null
+- name: supports
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: options
+  comment: null
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+- name: parseDsn
+  visibility: private
+  parameters:
+  - name: dsn
+  comment: null
+traits:
+- Psr\Clock\ClockInterface
+- Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+- Symfony\Component\Messenger\Transport\TransportFactoryInterface
+- Symfony\Component\Messenger\Transport\TransportInterface
+- Symfony\Contracts\Service\ResetInterface
+interfaces:
+- TransportFactoryInterface
+- TransportFactoryInterface

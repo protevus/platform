@@ -1,0 +1,364 @@
+name: RedisStore
+class_comment: null
+dependencies:
+- name: LockProvider
+  type: class
+  source: Illuminate\Contracts\Cache\LockProvider
+- name: Redis
+  type: class
+  source: Illuminate\Contracts\Redis\Factory
+- name: PhpRedisConnection
+  type: class
+  source: Illuminate\Redis\Connections\PhpRedisConnection
+- name: PredisConnection
+  type: class
+  source: Illuminate\Redis\Connections\PredisConnection
+- name: LazyCollection
+  type: class
+  source: Illuminate\Support\LazyCollection
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+properties:
+- name: redis
+  visibility: protected
+  comment: '# * The Redis factory implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Redis\Factory'
+- name: prefix
+  visibility: protected
+  comment: '# * A string that should be prepended to keys.
+
+    # *
+
+    # * @var string'
+- name: connection
+  visibility: protected
+  comment: '# * The Redis connection instance that should be used to manage locks.
+
+    # *
+
+    # * @var string'
+- name: lockConnection
+  visibility: protected
+  comment: '# * The name of the connection that should be used for locks.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: redis
+  - name: prefix
+    default: ''''''
+  - name: connection
+    default: '''default'''
+  comment: "# * The Redis factory implementation.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Redis\\Factory\n# */\n# protected $redis;\n# \n# /**\n# * A string that should\
+    \ be prepended to keys.\n# *\n# * @var string\n# */\n# protected $prefix;\n# \n\
+    # /**\n# * The Redis connection instance that should be used to manage locks.\n\
+    # *\n# * @var string\n# */\n# protected $connection;\n# \n# /**\n# * The name\
+    \ of the connection that should be used for locks.\n# *\n# * @var string\n# */\n\
+    # protected $lockConnection;\n# \n# /**\n# * Create a new Redis store.\n# *\n\
+    # * @param  \\Illuminate\\Contracts\\Redis\\Factory  $redis\n# * @param  string\
+    \  $prefix\n# * @param  string  $connection\n# * @return void"
+- name: get
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Retrieve an item from the cache by key.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed'
+- name: many
+  visibility: public
+  parameters:
+  - name: keys
+  comment: '# * Retrieve multiple items from the cache by key.
+
+    # *
+
+    # * Items not found in the cache will have a null value.
+
+    # *
+
+    # * @param  array  $keys
+
+    # * @return array'
+- name: put
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  - name: seconds
+  comment: '# * Store an item in the cache for a given number of seconds.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  int  $seconds
+
+    # * @return bool'
+- name: putMany
+  visibility: public
+  parameters:
+  - name: values
+  - name: seconds
+  comment: '# * Store multiple items in the cache for a given number of seconds.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @param  int  $seconds
+
+    # * @return bool'
+- name: add
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  - name: seconds
+  comment: '# * Store an item in the cache if the key doesn''t exist.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  int  $seconds
+
+    # * @return bool'
+- name: increment
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: '1'
+  comment: '# * Increment the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return int'
+- name: decrement
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: '1'
+  comment: '# * Decrement the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return int'
+- name: forever
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Store an item in the cache indefinitely.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return bool'
+- name: lock
+  visibility: public
+  parameters:
+  - name: name
+  - name: seconds
+    default: '0'
+  - name: owner
+    default: 'null'
+  comment: '# * Get a lock instance.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  int  $seconds
+
+    # * @param  string|null  $owner
+
+    # * @return \Illuminate\Contracts\Cache\Lock'
+- name: restoreLock
+  visibility: public
+  parameters:
+  - name: name
+  - name: owner
+  comment: '# * Restore a lock instance using the owner identifier.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string  $owner
+
+    # * @return \Illuminate\Contracts\Cache\Lock'
+- name: forget
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Remove an item from the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: flush
+  visibility: public
+  parameters: []
+  comment: '# * Remove all items from the cache.
+
+    # *
+
+    # * @return bool'
+- name: flushStaleTags
+  visibility: public
+  parameters: []
+  comment: '# * Remove all expired tag set entries.
+
+    # *
+
+    # * @return void'
+- name: tags
+  visibility: public
+  parameters:
+  - name: names
+  comment: '# * Begin executing a new tags operation.
+
+    # *
+
+    # * @param  array|mixed  $names
+
+    # * @return \Illuminate\Cache\RedisTaggedCache'
+- name: currentTags
+  visibility: protected
+  parameters:
+  - name: chunkSize
+    default: '1000'
+  comment: '# * Get a collection of all of the cache tags currently being used.
+
+    # *
+
+    # * @param  int  $chunkSize
+
+    # * @return \Illuminate\Support\LazyCollection'
+- name: connection
+  visibility: public
+  parameters: []
+  comment: '# * Get the Redis connection instance.
+
+    # *
+
+    # * @return \Illuminate\Redis\Connections\Connection'
+- name: lockConnection
+  visibility: public
+  parameters: []
+  comment: '# * Get the Redis connection instance that should be used to manage locks.
+
+    # *
+
+    # * @return \Illuminate\Redis\Connections\Connection'
+- name: setConnection
+  visibility: public
+  parameters:
+  - name: connection
+  comment: '# * Specify the name of the connection that should be used to store data.
+
+    # *
+
+    # * @param  string  $connection
+
+    # * @return void'
+- name: setLockConnection
+  visibility: public
+  parameters:
+  - name: connection
+  comment: '# * Specify the name of the connection that should be used to manage locks.
+
+    # *
+
+    # * @param  string  $connection
+
+    # * @return $this'
+- name: getRedis
+  visibility: public
+  parameters: []
+  comment: '# * Get the Redis database instance.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Redis\Factory'
+- name: getPrefix
+  visibility: public
+  parameters: []
+  comment: '# * Get the cache key prefix.
+
+    # *
+
+    # * @return string'
+- name: setPrefix
+  visibility: public
+  parameters:
+  - name: prefix
+  comment: '# * Set the cache key prefix.
+
+    # *
+
+    # * @param  string  $prefix
+
+    # * @return void'
+- name: serialize
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Serialize the value.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return mixed'
+- name: unserialize
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Unserialize the value.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return mixed'
+traits:
+- Illuminate\Contracts\Cache\LockProvider
+- Illuminate\Redis\Connections\PhpRedisConnection
+- Illuminate\Redis\Connections\PredisConnection
+- Illuminate\Support\LazyCollection
+- Illuminate\Support\Str
+interfaces:
+- LockProvider

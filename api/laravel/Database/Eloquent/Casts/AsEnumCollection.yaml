@@ -1,0 +1,89 @@
+name: AsEnumCollection
+class_comment: null
+dependencies:
+- name: BackedEnum
+  type: class
+  source: BackedEnum
+- name: Castable
+  type: class
+  source: Illuminate\Contracts\Database\Eloquent\Castable
+- name: CastsAttributes
+  type: class
+  source: Illuminate\Contracts\Database\Eloquent\CastsAttributes
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+properties:
+- name: arguments
+  visibility: protected
+  comment: null
+methods:
+- name: castUsing
+  visibility: public
+  parameters:
+  - name: arguments
+  comment: '# * Get the caster class to use when casting from / to this cast target.
+
+    # *
+
+    # * @template TEnum of \UnitEnum|\BackedEnum
+
+    # *
+
+    # * @param  array{class-string<TEnum>}  $arguments
+
+    # * @return \Illuminate\Contracts\Database\Eloquent\CastsAttributes<\Illuminate\Support\Collection<array-key,
+    TEnum>, iterable<TEnum>>'
+- name: __construct
+  visibility: public
+  parameters:
+  - name: arguments
+  comment: null
+- name: get
+  visibility: public
+  parameters:
+  - name: model
+  - name: key
+  - name: value
+  - name: attributes
+  comment: null
+- name: set
+  visibility: public
+  parameters:
+  - name: model
+  - name: key
+  - name: value
+  - name: attributes
+  comment: null
+- name: serialize
+  visibility: public
+  parameters:
+  - name: model
+  - name: key
+  - name: value
+  - name: attributes
+  comment: null
+- name: getStorableEnumValue
+  visibility: protected
+  parameters:
+  - name: enum
+  comment: null
+- name: of
+  visibility: public
+  parameters:
+  - name: class
+  comment: '# * Specify the Enum for the cast.
+
+    # *
+
+    # * @param  class-string  $class
+
+    # * @return string'
+traits:
+- BackedEnum
+- Illuminate\Contracts\Database\Eloquent\Castable
+- Illuminate\Contracts\Database\Eloquent\CastsAttributes
+- Illuminate\Support\Collection
+interfaces:
+- Castable
+- CastsAttributes

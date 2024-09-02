@@ -1,0 +1,36 @@
+name: PhpRedisLock
+class_comment: null
+dependencies:
+- name: PhpRedisConnection
+  type: class
+  source: Illuminate\Redis\Connections\PhpRedisConnection
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: redis
+  - name: name
+  - name: seconds
+  - name: owner
+    default: 'null'
+  comment: '# * Create a new phpredis lock instance.
+
+    # *
+
+    # * @param  \Illuminate\Redis\Connections\PhpRedisConnection  $redis
+
+    # * @param  string  $name
+
+    # * @param  int  $seconds
+
+    # * @param  string|null  $owner
+
+    # * @return void'
+- name: release
+  visibility: public
+  parameters: []
+  comment: '# * {@inheritDoc}'
+traits:
+- Illuminate\Redis\Connections\PhpRedisConnection
+interfaces: []

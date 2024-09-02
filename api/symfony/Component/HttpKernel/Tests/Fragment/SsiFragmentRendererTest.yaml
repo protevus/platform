@@ -1,0 +1,65 @@
+name: SsiFragmentRendererTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: UriSigner
+  type: class
+  source: Symfony\Component\HttpFoundation\UriSigner
+- name: ControllerReference
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ControllerReference
+- name: InlineFragmentRenderer
+  type: class
+  source: Symfony\Component\HttpKernel\Fragment\InlineFragmentRenderer
+- name: SsiFragmentRenderer
+  type: class
+  source: Symfony\Component\HttpKernel\Fragment\SsiFragmentRenderer
+- name: Ssi
+  type: class
+  source: Symfony\Component\HttpKernel\HttpCache\Ssi
+properties: []
+methods:
+- name: testRenderFallbackToInlineStrategyIfSsiNotSupported
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRender
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderControllerReference
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderControllerReferenceWithAbsoluteUri
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderControllerReferenceWithoutSignerThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderAltControllerReferenceWithoutSignerThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: getInlineStrategy
+  visibility: private
+  parameters:
+  - name: called
+    default: 'false'
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\UriSigner
+- Symfony\Component\HttpKernel\Controller\ControllerReference
+- Symfony\Component\HttpKernel\Fragment\InlineFragmentRenderer
+- Symfony\Component\HttpKernel\Fragment\SsiFragmentRenderer
+- Symfony\Component\HttpKernel\HttpCache\Ssi
+interfaces: []

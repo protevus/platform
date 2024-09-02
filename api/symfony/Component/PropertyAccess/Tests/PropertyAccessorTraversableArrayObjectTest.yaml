@@ -1,0 +1,16 @@
+name: PropertyAccessorTraversableArrayObjectTest
+class_comment: null
+dependencies:
+- name: TraversableArrayObject
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\TraversableArrayObject
+properties: []
+methods:
+- name: getContainer
+  visibility: protected
+  parameters:
+  - name: array
+  comment: null
+traits:
+- Symfony\Component\PropertyAccess\Tests\Fixtures\TraversableArrayObject
+interfaces: []

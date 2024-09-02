@@ -1,0 +1,45 @@
+name: InputFormField
+class_comment: '# * InputFormField represents an input form field (an HTML input tag).
+
+  # *
+
+  # * For inputs with type of file, checkbox, or radio, there are other more
+
+  # * specialized classes (cf. FileFormField and ChoiceFormField).
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies: []
+properties: []
+methods:
+- name: initialize
+  visibility: protected
+  parameters: []
+  comment: '# * InputFormField represents an input form field (an HTML input tag).
+
+    # *
+
+    # * For inputs with type of file, checkbox, or radio, there are other more
+
+    # * specialized classes (cf. FileFormField and ChoiceFormField).
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # class InputFormField extends FormField
+
+    # {
+
+    # /**
+
+    # * Initializes the form field.
+
+    # *
+
+    # * @throws \LogicException When node type is incorrect'
+traits: []
+interfaces: []

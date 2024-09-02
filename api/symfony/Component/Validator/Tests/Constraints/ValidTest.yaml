@@ -1,0 +1,44 @@
+name: ValidTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Valid
+  type: class
+  source: Symfony\Component\Validator\Constraints\Valid
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+- name: AttributeLoader
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\AttributeLoader
+properties:
+- name: a
+  visibility: private
+  comment: null
+- name: b
+  visibility: private
+  comment: null
+- name: c
+  visibility: private
+  comment: null
+methods:
+- name: testGroupsCanBeSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGroupsAreNullByDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAttributes
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\Constraints\Valid
+- Symfony\Component\Validator\Mapping\ClassMetadata
+- Symfony\Component\Validator\Mapping\Loader\AttributeLoader
+interfaces: []

@@ -1,0 +1,45 @@
+name: ExceptionEvent
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+properties: []
+methods:
+- name: setThrowable
+  visibility: public
+  parameters:
+  - name: exception
+  comment: "# * Allows to create a response for a thrown exception.\n# *\n# * Call\
+    \ setResponse() to set the response that will be returned for the\n# * current\
+    \ request. The propagation of this event is stopped as soon as a\n# * response\
+    \ is set.\n# *\n# * You can also call setThrowable() to replace the thrown exception.\
+    \ This\n# * exception will be thrown if no response is set during processing of\
+    \ this\n# * event.\n# *\n# * @author Bernhard Schussek <bschussek@gmail.com>\n\
+    # */\n# final class ExceptionEvent extends RequestEvent\n# {\n# private \\Throwable\
+    \ $throwable;\n# private bool $allowCustomResponseCode = false;\n# \n# public\
+    \ function __construct(\n# HttpKernelInterface $kernel,\n# Request $request,\n\
+    # int $requestType,\n# \\Throwable $e,\n# private bool $isKernelTerminating =\
+    \ false,\n# ) {\n# parent::__construct($kernel, $request, $requestType);\n# \n\
+    # $this->setThrowable($e);\n# }\n# \n# public function getThrowable(): \\Throwable\n\
+    # {\n# return $this->throwable;\n# }\n# \n# /**\n# * Replaces the thrown exception.\n\
+    # *\n# * This exception will be thrown if no response is set in the event."
+- name: allowCustomResponseCode
+  visibility: public
+  parameters: []
+  comment: '# * Mark the event as allowing a custom response code.'
+- name: isAllowingCustomResponseCode
+  visibility: public
+  parameters: []
+  comment: '# * Returns true if the event allows a custom response code.'
+- name: isKernelTerminating
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\HttpKernelInterface
+interfaces: []

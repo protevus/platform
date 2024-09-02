@@ -1,0 +1,37 @@
+name: ImageValidator
+class_comment: '# * Validates whether a value is a valid image file and is valid
+
+  # * against minWidth, maxWidth, minHeight and maxHeight constraints.
+
+  # *
+
+  # * @author Benjamin Dulau <benjamin.dulau@gmail.com>
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- name: LogicException
+  type: class
+  source: Symfony\Component\Validator\Exception\LogicException
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedTypeException
+properties: []
+methods:
+- name: validate
+  visibility: public
+  parameters:
+  - name: value
+  - name: constraint
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- Symfony\Component\Validator\Exception\LogicException
+- Symfony\Component\Validator\Exception\UnexpectedTypeException
+interfaces: []

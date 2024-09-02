@@ -1,0 +1,28 @@
+name: WrappedListener
+class_comment: null
+dependencies:
+- name: RequestEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\RequestEvent
+- name: TraceableListenerTrait
+  type: class
+  source: TraceableListenerTrait
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: listener
+  comment: "# * Wraps a security listener for calls record.\n# *\n# * @author Robin\
+    \ Chalas <robin.chalas@gmail.com>\n# *\n# * @internal\n# */\n# final class WrappedListener\n\
+    # {\n# use TraceableListenerTrait;\n# \n# /**\n# * @param callable(RequestEvent):void\
+    \ $listener"
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+traits:
+- Symfony\Component\HttpKernel\Event\RequestEvent
+- TraceableListenerTrait
+interfaces: []

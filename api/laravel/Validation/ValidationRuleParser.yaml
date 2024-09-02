@@ -1,0 +1,246 @@
+name: ValidationRuleParser
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: InvokableRule
+  type: class
+  source: Illuminate\Contracts\Validation\InvokableRule
+- name: RuleContract
+  type: class
+  source: Illuminate\Contracts\Validation\Rule
+- name: ValidationRule
+  type: class
+  source: Illuminate\Contracts\Validation\ValidationRule
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: Exists
+  type: class
+  source: Illuminate\Validation\Rules\Exists
+- name: Unique
+  type: class
+  source: Illuminate\Validation\Rules\Unique
+properties:
+- name: data
+  visibility: public
+  comment: '# * The data being validated.
+
+    # *
+
+    # * @var array'
+- name: implicitAttributes
+  visibility: public
+  comment: '# * The implicit attributes.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: data
+  comment: "# * The data being validated.\n# *\n# * @var array\n# */\n# public $data;\n\
+    # \n# /**\n# * The implicit attributes.\n# *\n# * @var array\n# */\n# public $implicitAttributes\
+    \ = [];\n# \n# /**\n# * Create a new validation rule parser.\n# *\n# * @param\
+    \  array  $data\n# * @return void"
+- name: explode
+  visibility: public
+  parameters:
+  - name: rules
+  comment: '# * Parse the human-friendly rules into a full rules array for the validator.
+
+    # *
+
+    # * @param  array  $rules
+
+    # * @return \stdClass'
+- name: explodeRules
+  visibility: protected
+  parameters:
+  - name: rules
+  comment: '# * Explode the rules into an array of explicit rules.
+
+    # *
+
+    # * @param  array  $rules
+
+    # * @return array'
+- name: explodeExplicitRule
+  visibility: protected
+  parameters:
+  - name: rule
+  - name: attribute
+  comment: '# * Explode the explicit rule into an array if necessary.
+
+    # *
+
+    # * @param  mixed  $rule
+
+    # * @param  string  $attribute
+
+    # * @return array'
+- name: prepareRule
+  visibility: protected
+  parameters:
+  - name: rule
+  - name: attribute
+  comment: '# * Prepare the given rule for the Validator.
+
+    # *
+
+    # * @param  mixed  $rule
+
+    # * @param  string  $attribute
+
+    # * @return mixed'
+- name: explodeWildcardRules
+  visibility: protected
+  parameters:
+  - name: results
+  - name: attribute
+  - name: rules
+  comment: '# * Define a set of rules that apply to each element in an array attribute.
+
+    # *
+
+    # * @param  array  $results
+
+    # * @param  string  $attribute
+
+    # * @param  string|array  $rules
+
+    # * @return array'
+- name: mergeRules
+  visibility: public
+  parameters:
+  - name: results
+  - name: attribute
+  - name: rules
+    default: '[]'
+  comment: '# * Merge additional rules into a given attribute(s).
+
+    # *
+
+    # * @param  array  $results
+
+    # * @param  string|array  $attribute
+
+    # * @param  string|array  $rules
+
+    # * @return array'
+- name: mergeRulesForAttribute
+  visibility: protected
+  parameters:
+  - name: results
+  - name: attribute
+  - name: rules
+  comment: '# * Merge additional rules into a given attribute.
+
+    # *
+
+    # * @param  array  $results
+
+    # * @param  string  $attribute
+
+    # * @param  string|array  $rules
+
+    # * @return array'
+- name: parse
+  visibility: public
+  parameters:
+  - name: rule
+  comment: '# * Extract the rule name and parameters from a rule.
+
+    # *
+
+    # * @param  array|string  $rule
+
+    # * @return array'
+- name: parseArrayRule
+  visibility: protected
+  parameters:
+  - name: rule
+  comment: '# * Parse an array based rule.
+
+    # *
+
+    # * @param  array  $rule
+
+    # * @return array'
+- name: parseStringRule
+  visibility: protected
+  parameters:
+  - name: rule
+  comment: '# * Parse a string based rule.
+
+    # *
+
+    # * @param  string  $rule
+
+    # * @return array'
+- name: parseParameters
+  visibility: protected
+  parameters:
+  - name: rule
+  - name: parameter
+  comment: '# * Parse a parameter list.
+
+    # *
+
+    # * @param  string  $rule
+
+    # * @param  string  $parameter
+
+    # * @return array'
+- name: ruleIsRegex
+  visibility: protected
+  parameters:
+  - name: rule
+  comment: '# * Determine if the rule is a regular expression.
+
+    # *
+
+    # * @param  string  $rule
+
+    # * @return bool'
+- name: normalizeRule
+  visibility: protected
+  parameters:
+  - name: rule
+  comment: '# * Normalizes a rule so that we can accept short types.
+
+    # *
+
+    # * @param  string  $rule
+
+    # * @return string'
+- name: filterConditionalRules
+  visibility: public
+  parameters:
+  - name: rules
+  - name: data
+    default: '[]'
+  comment: '# * Expand the conditional rules in the given array of rules.
+
+    # *
+
+    # * @param  array  $rules
+
+    # * @param  array  $data
+
+    # * @return array'
+traits:
+- Closure
+- Illuminate\Contracts\Validation\InvokableRule
+- Illuminate\Contracts\Validation\ValidationRule
+- Illuminate\Support\Arr
+- Illuminate\Support\Str
+- Illuminate\Validation\Rules\Exists
+- Illuminate\Validation\Rules\Unique
+interfaces: []

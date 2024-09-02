@@ -1,0 +1,75 @@
+name: DebugExtensionTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: DebugBundle
+  type: class
+  source: Symfony\Bundle\DebugBundle\DebugBundle
+- name: DebugExtension
+  type: class
+  source: Symfony\Bundle\DebugBundle\DependencyInjection\DebugExtension
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ParameterBag
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+- name: ReflectionCaster
+  type: class
+  source: Symfony\Component\VarDumper\Caster\ReflectionCaster
+- name: CliDumper
+  type: class
+  source: Symfony\Component\VarDumper\Dumper\CliDumper
+- name: Connection
+  type: class
+  source: Symfony\Component\VarDumper\Server\Connection
+- name: DumpServer
+  type: class
+  source: Symfony\Component\VarDumper\Server\DumpServer
+properties: []
+methods:
+- name: testLoadWithoutConfiguration
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnsetClosureFileInfoShouldBeRegisteredInVarCloner
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideServicesUsingDumpDestinationCreation
+  visibility: public
+  parameters: []
+  comment: null
+- name: testServicesUsingDumpDestinationCreation
+  visibility: public
+  parameters:
+  - name: dumpDestination
+  - name: expectedHost
+  - name: expectedOutput
+  comment: '# * @dataProvider provideServicesUsingDumpDestinationCreation'
+- name: createContainer
+  visibility: private
+  parameters: []
+  comment: null
+- name: compileContainer
+  visibility: private
+  parameters:
+  - name: container
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\DebugBundle\DebugBundle
+- Symfony\Bundle\DebugBundle\DependencyInjection\DebugExtension
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- Symfony\Component\HttpFoundation\RequestStack
+- Symfony\Component\VarDumper\Caster\ReflectionCaster
+- Symfony\Component\VarDumper\Dumper\CliDumper
+- Symfony\Component\VarDumper\Server\Connection
+- Symfony\Component\VarDumper\Server\DumpServer
+interfaces: []

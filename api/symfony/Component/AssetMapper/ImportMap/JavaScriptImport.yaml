@@ -1,0 +1,35 @@
+name: JavaScriptImport
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: importName
+  - name: assetLogicalPath
+  - name: assetSourcePath
+  - name: isLazy
+    default: 'false'
+  - name: addImplicitlyToImportMap
+    default: 'false'
+  comment: '# * Represents a module that was imported by a JavaScript file.
+
+    # */
+
+    # final class JavaScriptImport
+
+    # {
+
+    # /**
+
+    # * @param string $importName               The name of the import needed in the
+    importmap, e.g. "/foo.js" or "react"
+
+    # * @param string $assetLogicalPath         Logical path to the mapped ass that
+    was imported
+
+    # * @param bool   $addImplicitlyToImportMap Whether this import should be added
+    to the importmap automatically'
+traits: []
+interfaces: []

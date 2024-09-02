@@ -1,0 +1,44 @@
+name: AuditTrailListener
+class_comment: "# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>"
+dependencies:
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: Event
+  type: class
+  source: Symfony\Component\Workflow\Event\Event
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: logger
+  comment: null
+- name: onLeave
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: onTransition
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: onEnter
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Psr\Log\LoggerInterface
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\Workflow\Event\Event
+interfaces:
+- EventSubscriberInterface

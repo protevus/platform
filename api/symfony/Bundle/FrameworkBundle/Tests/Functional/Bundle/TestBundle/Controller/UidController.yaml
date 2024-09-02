@@ -1,0 +1,44 @@
+name: UidController
+class_comment: null
+dependencies:
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: Route
+  type: class
+  source: Symfony\Component\Routing\Attribute\Route
+- name: Ulid
+  type: class
+  source: Symfony\Component\Uid\Ulid
+- name: UuidV1
+  type: class
+  source: Symfony\Component\Uid\UuidV1
+properties: []
+methods:
+- name: anyFormat
+  visibility: public
+  parameters:
+  - name: userId
+  comment: null
+- name: specificFormatInAttribute
+  visibility: public
+  parameters:
+  - name: id
+  comment: null
+- name: specificFormatInPath
+  visibility: public
+  parameters:
+  - name: id
+  comment: null
+- name: manyUids
+  visibility: public
+  parameters:
+  - name: postId
+  - name: commentId
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\Routing\Attribute\Route
+- Symfony\Component\Uid\Ulid
+- Symfony\Component\Uid\UuidV1
+interfaces: []

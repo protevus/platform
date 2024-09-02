@@ -1,0 +1,65 @@
+name: TemplateIterator
+class_comment: '# * Iterator for all templates in bundles and in the application Resources
+  directory.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @internal
+
+  # *
+
+  # * @implements \IteratorAggregate<int, string>'
+dependencies:
+- name: Finder
+  type: class
+  source: Symfony\Component\Finder\Finder
+- name: KernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\KernelInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: kernel
+  - name: paths
+    default: '[]'
+  - name: defaultPath
+    default: 'null'
+  - name: namePatterns
+    default: '[]'
+  comment: "# * Iterator for all templates in bundles and in the application Resources\
+    \ directory.\n# *\n# * @author Fabien Potencier <fabien@symfony.com>\n# *\n# *\
+    \ @internal\n# *\n# * @implements \\IteratorAggregate<int, string>\n# */\n# class\
+    \ TemplateIterator implements \\IteratorAggregate\n# {\n# private \\Traversable\
+    \ $templates;\n# \n# /**\n# * @param array       $paths        Additional Twig\
+    \ paths to warm\n# * @param string|null $defaultPath  The directory where global\
+    \ templates can be stored\n# * @param string[]    $namePatterns Pattern of file\
+    \ names"
+- name: getIterator
+  visibility: public
+  parameters: []
+  comment: null
+- name: findTemplatesInDirectory
+  visibility: private
+  parameters:
+  - name: dir
+  - name: namespace
+    default: 'null'
+  - name: excludeDirs
+    default: '[]'
+  comment: '# * Find templates in the given directory.
+
+    # *
+
+    # * @return string[]'
+traits:
+- Symfony\Component\Finder\Finder
+- Symfony\Component\HttpKernel\KernelInterface
+interfaces:
+- \IteratorAggregate
+- \IteratorAggregate

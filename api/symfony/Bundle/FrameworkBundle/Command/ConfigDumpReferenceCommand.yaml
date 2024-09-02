@@ -1,0 +1,101 @@
+name: ConfigDumpReferenceCommand
+class_comment: null
+dependencies:
+- name: ConfigurationInterface
+  type: class
+  source: Symfony\Component\Config\Definition\ConfigurationInterface
+- name: XmlReferenceDumper
+  type: class
+  source: Symfony\Component\Config\Definition\Dumper\XmlReferenceDumper
+- name: YamlReferenceDumper
+  type: class
+  source: Symfony\Component\Config\Definition\Dumper\YamlReferenceDumper
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: CompletionInput
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionInput
+- name: CompletionSuggestions
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionSuggestions
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Console\Exception\InvalidArgumentException
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+- name: Yaml
+  type: class
+  source: Symfony\Component\Yaml\Yaml
+properties: []
+methods:
+- name: execute
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: "# * A console command for dumping available configuration reference.\n\
+    # *\n# * @author Kevin Bond <kevinbond@gmail.com>\n# * @author Wouter J <waldio.webdesign@gmail.com>\n\
+    # * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>\n# *\n# * @final\n# */\n#\
+    \ #[AsCommand(name: 'config:dump-reference', description: 'Dump the default configuration\
+    \ for an extension')]\n# class ConfigDumpReferenceCommand extends AbstractConfigCommand\n\
+    # {\n# protected function configure(): void\n# {\n# $this\n# ->setDefinition([\n\
+    # new InputArgument('name', InputArgument::OPTIONAL, 'The Bundle name or the extension\
+    \ alias'),\n# new InputArgument('path', InputArgument::OPTIONAL, 'The configuration\
+    \ option path'),\n# new InputOption('format', null, InputOption::VALUE_REQUIRED,\
+    \ \\sprintf('The output format (\"%s\")', implode('\", \"', $this->getAvailableFormatOptions())),\
+    \ 'yaml'),\n# ])\n# ->setHelp(<<<EOF\n# The <info>%command.name%</info> command\
+    \ dumps the default configuration for an\n# extension/bundle.\n# \n# Either the\
+    \ extension alias or bundle name can be used:\n# \n# <info>php %command.full_name%\
+    \ framework</info>\n# <info>php %command.full_name% FrameworkBundle</info>\n#\
+    \ \n# The <info>--format</info> option specifies the format of the command output:\n\
+    # \n# <info>php %command.full_name% FrameworkBundle --format=json</info>\n# \n\
+    # For dumping a specific option, add its path as second argument (only available\
+    \ for the yaml format):\n# \n# <info>php %command.full_name% framework http_client.default_options</info>\n\
+    # \n# EOF\n# )\n# ;\n# }\n# \n# /**\n# * @throws \\LogicException"
+- name: complete
+  visibility: public
+  parameters:
+  - name: input
+  - name: suggestions
+  comment: null
+- name: getAvailableExtensions
+  visibility: private
+  parameters: []
+  comment: null
+- name: getAvailableBundles
+  visibility: private
+  parameters: []
+  comment: null
+- name: getAvailableFormatOptions
+  visibility: private
+  parameters: []
+  comment: '# @return string[]'
+traits:
+- Symfony\Component\Config\Definition\ConfigurationInterface
+- Symfony\Component\Config\Definition\Dumper\XmlReferenceDumper
+- Symfony\Component\Config\Definition\Dumper\YamlReferenceDumper
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Completion\CompletionInput
+- Symfony\Component\Console\Completion\CompletionSuggestions
+- Symfony\Component\Console\Exception\InvalidArgumentException
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Style\SymfonyStyle
+- Symfony\Component\Yaml\Yaml
+interfaces: []

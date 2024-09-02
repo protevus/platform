@@ -1,0 +1,54 @@
+name: ThrottlesExceptionsWithRedis
+class_comment: null
+dependencies:
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: Redis
+  type: class
+  source: Illuminate\Contracts\Redis\Factory
+- name: DurationLimiter
+  type: class
+  source: Illuminate\Redis\Limiters\DurationLimiter
+- name: InteractsWithTime
+  type: class
+  source: Illuminate\Support\InteractsWithTime
+- name: Throwable
+  type: class
+  source: Throwable
+- name: InteractsWithTime
+  type: class
+  source: InteractsWithTime
+properties:
+- name: redis
+  visibility: protected
+  comment: '# * The Redis factory implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Redis\Factory'
+- name: limiter
+  visibility: protected
+  comment: '# * The rate limiter instance.
+
+    # *
+
+    # * @var \Illuminate\Redis\Limiters\DurationLimiter'
+methods:
+- name: handle
+  visibility: public
+  parameters:
+  - name: job
+  - name: next
+  comment: "# * The Redis factory implementation.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Redis\\Factory\n# */\n# protected $redis;\n# \n# /**\n# * The rate limiter instance.\n\
+    # *\n# * @var \\Illuminate\\Redis\\Limiters\\DurationLimiter\n# */\n# protected\
+    \ $limiter;\n# \n# /**\n# * Process the job.\n# *\n# * @param  mixed  $job\n#\
+    \ * @param  callable  $next\n# * @return mixed"
+traits:
+- Illuminate\Container\Container
+- Illuminate\Redis\Limiters\DurationLimiter
+- Illuminate\Support\InteractsWithTime
+- Throwable
+- InteractsWithTime
+interfaces: []

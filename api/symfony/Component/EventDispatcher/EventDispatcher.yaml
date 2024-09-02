@@ -1,0 +1,123 @@
+name: EventDispatcher
+class_comment: '# * The EventDispatcherInterface is the central point of Symfony''s
+  event listener system.
+
+  # *
+
+  # * Listeners are registered on the manager and events are dispatched through the
+
+  # * manager.
+
+  # *
+
+  # * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
+
+  # * @author Jonathan Wage <jonwage@gmail.com>
+
+  # * @author Roman Borschel <roman@code-factory.org>
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # * @author Jordi Boggiano <j.boggiano@seld.be>
+
+  # * @author Jordan Alliot <jordan.alliot@gmail.com>
+
+  # * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: StoppableEventInterface
+  type: class
+  source: Psr\EventDispatcher\StoppableEventInterface
+- name: WrappedListener
+  type: class
+  source: Symfony\Component\EventDispatcher\Debug\WrappedListener
+properties: []
+methods:
+- name: callListeners
+  visibility: protected
+  parameters:
+  - name: listeners
+  - name: eventName
+  - name: event
+  comment: "# * The EventDispatcherInterface is the central point of Symfony's event\
+    \ listener system.\n# *\n# * Listeners are registered on the manager and events\
+    \ are dispatched through the\n# * manager.\n# *\n# * @author Guilherme Blanco\
+    \ <guilhermeblanco@hotmail.com>\n# * @author Jonathan Wage <jonwage@gmail.com>\n\
+    # * @author Roman Borschel <roman@code-factory.org>\n# * @author Bernhard Schussek\
+    \ <bschussek@gmail.com>\n# * @author Fabien Potencier <fabien@symfony.com>\n#\
+    \ * @author Jordi Boggiano <j.boggiano@seld.be>\n# * @author Jordan Alliot <jordan.alliot@gmail.com>\n\
+    # * @author Nicolas Grekas <p@tchwork.com>\n# */\n# class EventDispatcher implements\
+    \ EventDispatcherInterface\n# {\n# private array $listeners = [];\n# private array\
+    \ $sorted = [];\n# private array $optimized;\n# \n# public function __construct()\n\
+    # {\n# if (__CLASS__ === static::class) {\n# $this->optimized = [];\n# }\n# }\n\
+    # \n# public function dispatch(object $event, ?string $eventName = null): object\n\
+    # {\n# $eventName ??= $event::class;\n# \n# if (isset($this->optimized)) {\n#\
+    \ $listeners = $this->optimized[$eventName] ?? (empty($this->listeners[$eventName])\
+    \ ? [] : $this->optimizeListeners($eventName));\n# } else {\n# $listeners = $this->getListeners($eventName);\n\
+    # }\n# \n# if ($listeners) {\n# $this->callListeners($listeners, $eventName, $event);\n\
+    # }\n# \n# return $event;\n# }\n# \n# public function getListeners(?string $eventName\
+    \ = null): array\n# {\n# if (null !== $eventName) {\n# if (empty($this->listeners[$eventName]))\
+    \ {\n# return [];\n# }\n# \n# if (!isset($this->sorted[$eventName])) {\n# $this->sortListeners($eventName);\n\
+    # }\n# \n# return $this->sorted[$eventName];\n# }\n# \n# foreach ($this->listeners\
+    \ as $eventName => $eventListeners) {\n# if (!isset($this->sorted[$eventName]))\
+    \ {\n# $this->sortListeners($eventName);\n# }\n# }\n# \n# return array_filter($this->sorted);\n\
+    # }\n# \n# public function getListenerPriority(string $eventName, callable|array\
+    \ $listener): ?int\n# {\n# if (empty($this->listeners[$eventName])) {\n# return\
+    \ null;\n# }\n# \n# if (\\is_array($listener) && isset($listener[0]) && $listener[0]\
+    \ instanceof \\Closure && 2 >= \\count($listener)) {\n# $listener[0] = $listener[0]();\n\
+    # $listener[1] ??= '__invoke';\n# }\n# \n# foreach ($this->listeners[$eventName]\
+    \ as $priority => &$listeners) {\n# foreach ($listeners as &$v) {\n# if ($v !==\
+    \ $listener && \\is_array($v) && isset($v[0]) && $v[0] instanceof \\Closure &&\
+    \ 2 >= \\count($v)) {\n# $v[0] = $v[0]();\n# $v[1] ??= '__invoke';\n# }\n# if\
+    \ ($v === $listener || ($listener instanceof \\Closure && $v == $listener)) {\n\
+    # return $priority;\n# }\n# }\n# }\n# \n# return null;\n# }\n# \n# public function\
+    \ hasListeners(?string $eventName = null): bool\n# {\n# if (null !== $eventName)\
+    \ {\n# return !empty($this->listeners[$eventName]);\n# }\n# \n# foreach ($this->listeners\
+    \ as $eventListeners) {\n# if ($eventListeners) {\n# return true;\n# }\n# }\n\
+    # \n# return false;\n# }\n# \n# public function addListener(string $eventName,\
+    \ callable|array $listener, int $priority = 0): void\n# {\n# $this->listeners[$eventName][$priority][]\
+    \ = $listener;\n# unset($this->sorted[$eventName], $this->optimized[$eventName]);\n\
+    # }\n# \n# public function removeListener(string $eventName, callable|array $listener):\
+    \ void\n# {\n# if (empty($this->listeners[$eventName])) {\n# return;\n# }\n# \n\
+    # if (\\is_array($listener) && isset($listener[0]) && $listener[0] instanceof\
+    \ \\Closure && 2 >= \\count($listener)) {\n# $listener[0] = $listener[0]();\n\
+    # $listener[1] ??= '__invoke';\n# }\n# \n# foreach ($this->listeners[$eventName]\
+    \ as $priority => &$listeners) {\n# foreach ($listeners as $k => &$v) {\n# if\
+    \ ($v !== $listener && \\is_array($v) && isset($v[0]) && $v[0] instanceof \\Closure\
+    \ && 2 >= \\count($v)) {\n# $v[0] = $v[0]();\n# $v[1] ??= '__invoke';\n# }\n#\
+    \ if ($v === $listener || ($listener instanceof \\Closure && $v == $listener))\
+    \ {\n# unset($listeners[$k], $this->sorted[$eventName], $this->optimized[$eventName]);\n\
+    # }\n# }\n# \n# if (!$listeners) {\n# unset($this->listeners[$eventName][$priority]);\n\
+    # }\n# }\n# }\n# \n# public function addSubscriber(EventSubscriberInterface $subscriber):\
+    \ void\n# {\n# foreach ($subscriber->getSubscribedEvents() as $eventName => $params)\
+    \ {\n# if (\\is_string($params)) {\n# $this->addListener($eventName, [$subscriber,\
+    \ $params]);\n# } elseif (\\is_string($params[0])) {\n# $this->addListener($eventName,\
+    \ [$subscriber, $params[0]], $params[1] ?? 0);\n# } else {\n# foreach ($params\
+    \ as $listener) {\n# $this->addListener($eventName, [$subscriber, $listener[0]],\
+    \ $listener[1] ?? 0);\n# }\n# }\n# }\n# }\n# \n# public function removeSubscriber(EventSubscriberInterface\
+    \ $subscriber): void\n# {\n# foreach ($subscriber->getSubscribedEvents() as $eventName\
+    \ => $params) {\n# if (\\is_array($params) && \\is_array($params[0])) {\n# foreach\
+    \ ($params as $listener) {\n# $this->removeListener($eventName, [$subscriber,\
+    \ $listener[0]]);\n# }\n# } else {\n# $this->removeListener($eventName, [$subscriber,\
+    \ \\is_string($params) ? $params : $params[0]]);\n# }\n# }\n# }\n# \n# /**\n#\
+    \ * Triggers the listeners of an event.\n# *\n# * This method can be overridden\
+    \ to add functionality that is executed\n# * for each listener.\n# *\n# * @param\
+    \ callable[] $listeners The event listeners\n# * @param string     $eventName\
+    \ The name of the event to dispatch\n# * @param object     $event     The event\
+    \ object to pass to the event handlers/listeners"
+- name: sortListeners
+  visibility: private
+  parameters:
+  - name: eventName
+  comment: '# * Sorts the internal list of listeners for the given event by priority.'
+- name: optimizeListeners
+  visibility: private
+  parameters:
+  - name: eventName
+  comment: '# * Optimizes the internal list of listeners for the given event by priority.'
+traits:
+- Psr\EventDispatcher\StoppableEventInterface
+- Symfony\Component\EventDispatcher\Debug\WrappedListener
+interfaces:
+- EventDispatcherInterface

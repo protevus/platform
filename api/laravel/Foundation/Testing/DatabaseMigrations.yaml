@@ -1,0 +1,53 @@
+name: DatabaseMigrations
+class_comment: null
+dependencies:
+- name: Kernel
+  type: class
+  source: Illuminate\Contracts\Console\Kernel
+- name: CanConfigureMigrationCommands
+  type: class
+  source: Illuminate\Foundation\Testing\Traits\CanConfigureMigrationCommands
+- name: CanConfigureMigrationCommands
+  type: class
+  source: CanConfigureMigrationCommands
+properties: []
+methods:
+- name: runDatabaseMigrations
+  visibility: public
+  parameters: []
+  comment: '# * Define hooks to migrate the database before and after each test.
+
+    # *
+
+    # * @return void'
+- name: refreshTestDatabase
+  visibility: protected
+  parameters: []
+  comment: '# * Refresh a conventional test database.
+
+    # *
+
+    # * @return void'
+- name: beforeRefreshingDatabase
+  visibility: protected
+  parameters: []
+  comment: '# * Perform any work that should take place before the database has started
+    refreshing.
+
+    # *
+
+    # * @return void'
+- name: afterRefreshingDatabase
+  visibility: protected
+  parameters: []
+  comment: '# * Perform any work that should take place once the database has finished
+    refreshing.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Contracts\Console\Kernel
+- Illuminate\Foundation\Testing\Traits\CanConfigureMigrationCommands
+- CanConfigureMigrationCommands
+interfaces: []

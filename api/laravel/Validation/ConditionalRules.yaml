@@ -1,0 +1,92 @@
+name: ConditionalRules
+class_comment: null
+dependencies:
+- name: Fluent
+  type: class
+  source: Illuminate\Support\Fluent
+properties:
+- name: condition
+  visibility: protected
+  comment: '# * The boolean condition indicating if the rules should be added to the
+    attribute.
+
+    # *
+
+    # * @var callable|bool'
+- name: rules
+  visibility: protected
+  comment: '# * The rules to be added to the attribute.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Validation\ValidationRule|\Illuminate\Contracts\Validation\InvokableRule|\Illuminate\Contracts\Validation\Rule|\Closure|array|string'
+- name: defaultRules
+  visibility: protected
+  comment: '# * The rules to be added to the attribute if the condition fails.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Validation\ValidationRule|\Illuminate\Contracts\Validation\InvokableRule|\Illuminate\Contracts\Validation\Rule|\Closure|array|string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: condition
+  - name: rules
+  - name: defaultRules
+    default: '[]'
+  comment: "# * The boolean condition indicating if the rules should be added to the\
+    \ attribute.\n# *\n# * @var callable|bool\n# */\n# protected $condition;\n# \n\
+    # /**\n# * The rules to be added to the attribute.\n# *\n# * @var \\Illuminate\\\
+    Contracts\\Validation\\ValidationRule|\\Illuminate\\Contracts\\Validation\\InvokableRule|\\\
+    Illuminate\\Contracts\\Validation\\Rule|\\Closure|array|string\n# */\n# protected\
+    \ $rules;\n# \n# /**\n# * The rules to be added to the attribute if the condition\
+    \ fails.\n# *\n# * @var \\Illuminate\\Contracts\\Validation\\ValidationRule|\\\
+    Illuminate\\Contracts\\Validation\\InvokableRule|\\Illuminate\\Contracts\\Validation\\\
+    Rule|\\Closure|array|string\n# */\n# protected $defaultRules;\n# \n# /**\n# *\
+    \ Create a new conditional rules instance.\n# *\n# * @param  callable|bool  $condition\n\
+    # * @param  \\Illuminate\\Contracts\\Validation\\ValidationRule|\\Illuminate\\\
+    Contracts\\Validation\\InvokableRule|\\Illuminate\\Contracts\\Validation\\Rule|\\\
+    Closure|array|string  $rules\n# * @param  \\Illuminate\\Contracts\\Validation\\\
+    ValidationRule|\\Illuminate\\Contracts\\Validation\\InvokableRule|\\Illuminate\\\
+    Contracts\\Validation\\Rule|\\Closure|array|string  $defaultRules\n# * @return\
+    \ void"
+- name: passes
+  visibility: public
+  parameters:
+  - name: data
+    default: '[]'
+  comment: '# * Determine if the conditional rules should be added.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return bool'
+- name: rules
+  visibility: public
+  parameters:
+  - name: data
+    default: '[]'
+  comment: '# * Get the rules.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return array'
+- name: defaultRules
+  visibility: public
+  parameters:
+  - name: data
+    default: '[]'
+  comment: '# * Get the default rules.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return array'
+traits:
+- Illuminate\Support\Fluent
+interfaces: []

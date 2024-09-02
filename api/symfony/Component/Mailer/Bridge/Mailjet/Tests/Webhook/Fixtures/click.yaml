@@ -1,0 +1,11 @@
+name: click
+class_comment: null
+dependencies:
+- name: MailerEngagementEvent
+  type: class
+  source: Symfony\Component\RemoteEvent\Event\Mailer\MailerEngagementEvent
+properties: []
+methods: []
+traits:
+- Symfony\Component\RemoteEvent\Event\Mailer\MailerEngagementEvent
+interfaces: []

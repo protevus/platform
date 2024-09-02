@@ -1,0 +1,266 @@
+name: UuidTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: MaxUuid
+  type: class
+  source: Symfony\Component\Uid\MaxUuid
+- name: NilUuid
+  type: class
+  source: Symfony\Component\Uid\NilUuid
+- name: CustomUuid
+  type: class
+  source: Symfony\Component\Uid\Tests\Fixtures\CustomUuid
+- name: Ulid
+  type: class
+  source: Symfony\Component\Uid\Ulid
+- name: Uuid
+  type: class
+  source: Symfony\Component\Uid\Uuid
+- name: UuidV1
+  type: class
+  source: Symfony\Component\Uid\UuidV1
+- name: UuidV3
+  type: class
+  source: Symfony\Component\Uid\UuidV3
+- name: UuidV4
+  type: class
+  source: Symfony\Component\Uid\UuidV4
+- name: UuidV5
+  type: class
+  source: Symfony\Component\Uid\UuidV5
+- name: UuidV6
+  type: class
+  source: Symfony\Component\Uid\UuidV6
+- name: UuidV7
+  type: class
+  source: Symfony\Component\Uid\UuidV7
+properties: []
+methods:
+- name: testConstructorWithInvalidUuid
+  visibility: public
+  parameters:
+  - name: uuid
+  comment: '# * @dataProvider provideInvalidUuids'
+- name: provideInvalidUuids
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidVariant
+  visibility: public
+  parameters:
+  - name: uuid
+  comment: '# * @dataProvider provideInvalidVariant'
+- name: provideInvalidVariant
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithValidUuid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testV1
+  visibility: public
+  parameters: []
+  comment: null
+- name: testV3
+  visibility: public
+  parameters: []
+  comment: null
+- name: testV4
+  visibility: public
+  parameters: []
+  comment: null
+- name: testV5
+  visibility: public
+  parameters: []
+  comment: null
+- name: testV6
+  visibility: public
+  parameters: []
+  comment: null
+- name: testV6IsSeeded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testV7
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBinary
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHex
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromUlid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBase58
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsValidWithNilUuid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsValidWithMaxUuid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEquals
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEqualsAgainstOtherType
+  visibility: public
+  parameters:
+  - name: other
+  comment: '# * @dataProvider provideInvalidEqualType'
+- name: provideInvalidEqualType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHashable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDsCompatibility
+  visibility: public
+  parameters: []
+  comment: '# @requires extension ds'
+- name: testCompare
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNilUuid
+  visibility: public
+  parameters:
+  - name: uuid
+  comment: '# * @testWith    ["00000000-0000-0000-0000-000000000000"]
+
+    # *              ["1111111111111111111111"]
+
+    # *              ["00000000000000000000000000"]'
+- name: testNewNilUuid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMaxUuid
+  visibility: public
+  parameters:
+  - name: uuid
+  comment: '# * @testWith    ["ffffffff-ffff-ffff-ffff-ffffffffffff"]
+
+    # *              ["7zzzzzzzzzzzzzzzzzzzzzzzzz"]'
+- name: testNewMaxUuid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromBinary
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromBinaryInvalidFormat
+  visibility: public
+  parameters:
+  - name: ulid
+  comment: '# * @dataProvider provideInvalidBinaryFormat'
+- name: provideInvalidBinaryFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromBase58
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromBase58InvalidFormat
+  visibility: public
+  parameters:
+  - name: ulid
+  comment: '# * @dataProvider provideInvalidBase58Format'
+- name: provideInvalidBase58Format
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromBase32
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromBase32InvalidFormat
+  visibility: public
+  parameters:
+  - name: ulid
+  comment: '# * @dataProvider provideInvalidBase32Format'
+- name: provideInvalidBase32Format
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromRfc4122
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromRfc4122InvalidFormat
+  visibility: public
+  parameters:
+  - name: ulid
+  comment: '# * @dataProvider provideInvalidRfc4122Format'
+- name: provideInvalidRfc4122Format
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromStringOnExtendedClassReturnsStatic
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetDateTime
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromStringBase58Padding
+  visibility: public
+  parameters: []
+  comment: null
+- name: testV1ToV6
+  visibility: public
+  parameters: []
+  comment: null
+- name: testV1ToV7BeforeUnixEpochThrows
+  visibility: public
+  parameters: []
+  comment: null
+- name: testV1ToV7
+  visibility: public
+  parameters: []
+  comment: null
+- name: testV1ToV7WhenExtraTimeEntropyOverflows
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Uid\MaxUuid
+- Symfony\Component\Uid\NilUuid
+- Symfony\Component\Uid\Tests\Fixtures\CustomUuid
+- Symfony\Component\Uid\Ulid
+- Symfony\Component\Uid\Uuid
+- Symfony\Component\Uid\UuidV1
+- Symfony\Component\Uid\UuidV3
+- Symfony\Component\Uid\UuidV4
+- Symfony\Component\Uid\UuidV5
+- Symfony\Component\Uid\UuidV6
+- Symfony\Component\Uid\UuidV7
+interfaces: []

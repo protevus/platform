@@ -1,0 +1,11 @@
+name: WithoutRelations
+class_comment: null
+dependencies:
+- name: Attribute
+  type: class
+  source: Attribute
+properties: []
+methods: []
+traits:
+- Attribute
+interfaces: []

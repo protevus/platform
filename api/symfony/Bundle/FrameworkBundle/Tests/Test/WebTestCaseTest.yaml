@@ -1,0 +1,225 @@
+name: WebTestCaseTest
+class_comment: null
+dependencies:
+- name: AssertionFailedError
+  type: class
+  source: PHPUnit\Framework\AssertionFailedError
+- name: ExpectationFailedException
+  type: class
+  source: PHPUnit\Framework\ExpectationFailedException
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: KernelBrowser
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\KernelBrowser
+- name: WebTestAssertionsTrait
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Test\WebTestAssertionsTrait
+- name: WebTestCase
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Test\WebTestCase
+- name: Cookie
+  type: class
+  source: Symfony\Component\BrowserKit\Cookie
+- name: CookieJar
+  type: class
+  source: Symfony\Component\BrowserKit\CookieJar
+- name: Crawler
+  type: class
+  source: Symfony\Component\DomCrawler\Crawler
+- name: HttpFoundationCookie
+  type: class
+  source: Symfony\Component\HttpFoundation\Cookie
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+properties: []
+methods:
+- name: testAssertResponseIsSuccessful
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertResponseStatusCodeSame
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertResponseRedirects
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertResponseRedirectsWithLocation
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertResponseRedirectsWithLocationWithoutHost
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertResponseRedirectsWithLocationWithoutScheme
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertResponseRedirectsWithStatusCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertResponseRedirectsWithLocationAndStatusCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertResponseFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertResponseHasHeader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertResponseNotHasHeader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertResponseHeaderSame
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertResponseHeaderNotSame
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertResponseHasCookie
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertResponseNotHasCookie
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertResponseCookieValueSame
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertBrowserHasCookie
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertBrowserNotHasCookie
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertBrowserCookieValueSame
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertSelectorExists
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertSelectorNotExists
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertSelectorCount
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertSelectorTextNotContains
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertAnySelectorTextContains
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertAnySelectorTextSame
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertAnySelectorTextNotContains
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertPageTitleSame
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertPageTitleContains
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertInputValueSame
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertInputValueNotSame
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertCheckboxChecked
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertCheckboxNotChecked
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertFormValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertNoFormValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertRequestAttributeValueSame
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAssertRouteSame
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExceptionOnServerError
+  visibility: public
+  parameters: []
+  comment: null
+- name: getResponseTester
+  visibility: private
+  parameters:
+  - name: response
+  comment: null
+- name: getCrawlerTester
+  visibility: private
+  parameters:
+  - name: crawler
+  comment: null
+- name: getClientTester
+  visibility: private
+  parameters: []
+  comment: null
+- name: getRequestTester
+  visibility: private
+  parameters: []
+  comment: null
+- name: getTester
+  visibility: private
+  parameters:
+  - name: client
+  comment: null
+traits:
+- PHPUnit\Framework\AssertionFailedError
+- PHPUnit\Framework\ExpectationFailedException
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\FrameworkBundle\KernelBrowser
+- Symfony\Bundle\FrameworkBundle\Test\WebTestAssertionsTrait
+- Symfony\Bundle\FrameworkBundle\Test\WebTestCase
+- Symfony\Component\BrowserKit\Cookie
+- Symfony\Component\BrowserKit\CookieJar
+- Symfony\Component\DomCrawler\Crawler
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+interfaces: []

@@ -1,0 +1,36 @@
+name: TestAbstractController
+class_comment: null
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: AbstractController
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Controller\AbstractController
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: throwOnUnexpectedService
+    default: 'true'
+  comment: null
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: arguments
+  comment: null
+- name: setContainer
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: fooAction
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Bundle\FrameworkBundle\Controller\AbstractController
+interfaces: []

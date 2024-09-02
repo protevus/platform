@@ -1,0 +1,21 @@
+name: User
+class_comment: null
+dependencies:
+- name: PasswordAuthenticatedUserInterface
+  type: class
+  source: Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface
+properties: []
+methods:
+- name: getPassword
+  visibility: public
+  parameters: []
+  comment: null
+- name: setPassword
+  visibility: public
+  parameters:
+  - name: password
+  comment: null
+traits:
+- Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface
+interfaces:
+- PasswordAuthenticatedUserInterface

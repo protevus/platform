@@ -1,0 +1,128 @@
+name: CollectionValidatorTestCase
+class_comment: null
+dependencies:
+- name: Collection
+  type: class
+  source: Symfony\Component\Validator\Constraints\Collection
+- name: CollectionValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\CollectionValidator
+- name: NotNull
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotNull
+- name: Optional
+  type: class
+  source: Symfony\Component\Validator\Constraints\Optional
+- name: Range
+  type: class
+  source: Symfony\Component\Validator\Constraints\Range
+- name: Required
+  type: class
+  source: Symfony\Component\Validator\Constraints\Required
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+properties: []
+methods:
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+- name: prepareTestData
+  visibility: protected
+  parameters:
+  - name: contents
+  comment: null
+- name: testNullIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFieldsAsDefaultOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowsExceptionIfNotTraversable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWalkSingleConstraint
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWalkMultipleConstraints
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtraFieldsDisallowed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtraFieldsDisallowedWithOptionalValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNullNotConsideredExtraField
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtraFieldsAllowed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMissingFieldsDisallowed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMissingFieldsAllowed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOptionalFieldPresent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOptionalFieldNotPresent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOptionalFieldSingleConstraint
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOptionalFieldMultipleConstraints
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRequiredFieldPresent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRequiredFieldNotPresent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRequiredFieldSingleConstraint
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRequiredFieldMultipleConstraints
+  visibility: public
+  parameters: []
+  comment: null
+- name: testObjectShouldBeLeftUnchanged
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\Collection
+- Symfony\Component\Validator\Constraints\CollectionValidator
+- Symfony\Component\Validator\Constraints\NotNull
+- Symfony\Component\Validator\Constraints\Optional
+- Symfony\Component\Validator\Constraints\Range
+- Symfony\Component\Validator\Constraints\Required
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

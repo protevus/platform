@@ -1,0 +1,64 @@
+name: InlineServiceConfigurator
+class_comment: '# * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: ArgumentTrait
+  type: class
+  source: Traits\ArgumentTrait
+- name: AutowireTrait
+  type: class
+  source: Traits\AutowireTrait
+- name: BindTrait
+  type: class
+  source: Traits\BindTrait
+- name: CallTrait
+  type: class
+  source: Traits\CallTrait
+- name: ConfiguratorTrait
+  type: class
+  source: Traits\ConfiguratorTrait
+- name: ConstructorTrait
+  type: class
+  source: Traits\ConstructorTrait
+- name: FactoryTrait
+  type: class
+  source: Traits\FactoryTrait
+- name: FileTrait
+  type: class
+  source: Traits\FileTrait
+- name: LazyTrait
+  type: class
+  source: Traits\LazyTrait
+- name: ParentTrait
+  type: class
+  source: Traits\ParentTrait
+- name: PropertyTrait
+  type: class
+  source: Traits\PropertyTrait
+- name: TagTrait
+  type: class
+  source: Traits\TagTrait
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: definition
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Definition
+- Traits\ArgumentTrait
+- Traits\AutowireTrait
+- Traits\BindTrait
+- Traits\CallTrait
+- Traits\ConfiguratorTrait
+- Traits\ConstructorTrait
+- Traits\FactoryTrait
+- Traits\FileTrait
+- Traits\LazyTrait
+- Traits\ParentTrait
+- Traits\PropertyTrait
+- Traits\TagTrait
+interfaces: []

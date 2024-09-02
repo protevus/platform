@@ -1,0 +1,52 @@
+name: ConfigDataCollectorTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: LoaderInterface
+  type: class
+  source: Symfony\Component\Config\Loader\LoaderInterface
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: ConfigDataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\ConfigDataCollector
+- name: Kernel
+  type: class
+  source: Symfony\Component\HttpKernel\Kernel
+properties: []
+methods:
+- name: testCollect
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCollectWithoutKernel
+  visibility: public
+  parameters: []
+  comment: null
+- name: registerBundles
+  visibility: public
+  parameters: []
+  comment: null
+- name: getBundles
+  visibility: public
+  parameters: []
+  comment: null
+- name: registerContainerConfiguration
+  visibility: public
+  parameters:
+  - name: loader
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Config\Loader\LoaderInterface
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\DataCollector\ConfigDataCollector
+- Symfony\Component\HttpKernel\Kernel
+interfaces: []

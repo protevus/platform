@@ -1,0 +1,66 @@
+name: UserAuthenticator
+class_comment: '# * A decorator that delegates all method calls to the authenticator
+
+  # * manager of the current firewall.
+
+  # *
+
+  # * @author Wouter de Jong <wouter@wouterj.nl>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: UserInterface
+  type: class
+  source: Symfony\Component\Security\Core\User\UserInterface
+- name: UserAuthenticatorInterface
+  type: class
+  source: Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface
+- name: AuthenticatorInterface
+  type: class
+  source: Symfony\Component\Security\Http\Authenticator\AuthenticatorInterface
+- name: FirewallAwareTrait
+  type: class
+  source: FirewallAwareTrait
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: firewallMap
+  - name: userAuthenticators
+  - name: requestStack
+  comment: null
+- name: authenticateUser
+  visibility: public
+  parameters:
+  - name: user
+  - name: authenticator
+  - name: request
+  - name: badges
+    default: '[]'
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestStack
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\Security\Core\User\UserInterface
+- Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface
+- Symfony\Component\Security\Http\Authenticator\AuthenticatorInterface
+- FirewallAwareTrait
+interfaces:
+- UserAuthenticatorInterface

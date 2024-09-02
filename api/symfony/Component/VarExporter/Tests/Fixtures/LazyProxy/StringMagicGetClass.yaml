@@ -1,0 +1,12 @@
+name: StringMagicGetClass
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __get
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+traits: []
+interfaces: []

@@ -1,0 +1,89 @@
+name: ValidatorDataCollector
+class_comment: '# * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: DataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\DataCollector
+- name: LateDataCollectorInterface
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+- name: TraceableValidator
+  type: class
+  source: Symfony\Component\Validator\Validator\TraceableValidator
+- name: Caster
+  type: class
+  source: Symfony\Component\VarDumper\Caster\Caster
+- name: ClassStub
+  type: class
+  source: Symfony\Component\VarDumper\Caster\ClassStub
+- name: Data
+  type: class
+  source: Symfony\Component\VarDumper\Cloner\Data
+- name: Stub
+  type: class
+  source: Symfony\Component\VarDumper\Cloner\Stub
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: validator
+  comment: null
+- name: collect
+  visibility: public
+  parameters:
+  - name: request
+  - name: response
+  - name: exception
+    default: 'null'
+  comment: null
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+- name: lateCollect
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCalls
+  visibility: public
+  parameters: []
+  comment: null
+- name: getViolationsCount
+  visibility: public
+  parameters: []
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCasters
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\FormInterface
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\DataCollector\DataCollector
+- Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+- Symfony\Component\Validator\Validator\TraceableValidator
+- Symfony\Component\VarDumper\Caster\Caster
+- Symfony\Component\VarDumper\Caster\ClassStub
+- Symfony\Component\VarDumper\Cloner\Data
+- Symfony\Component\VarDumper\Cloner\Stub
+interfaces:
+- LateDataCollectorInterface

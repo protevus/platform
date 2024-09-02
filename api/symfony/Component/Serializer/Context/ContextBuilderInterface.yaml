@@ -1,0 +1,32 @@
+name: ContextBuilderInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: withContext
+  visibility: public
+  parameters:
+  - name: context
+  comment: '# * Common interface for context builders.
+
+    # *
+
+    # * @author Mathias Arlaud <mathias.arlaud@gmail.com>
+
+    # * @author Robin Chalas <robin.chalas@gmail.com>
+
+    # */
+
+    # interface ContextBuilderInterface
+
+    # {
+
+    # /**
+
+    # * @param self|array<string, mixed> $context'
+- name: toArray
+  visibility: public
+  parameters: []
+  comment: '# * @return array<string, mixed>'
+traits: []
+interfaces: []

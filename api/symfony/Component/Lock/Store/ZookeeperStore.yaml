@@ -1,0 +1,85 @@
+name: ZookeeperStore
+class_comment: '# * ZookeeperStore is a PersistingStoreInterface implementation using
+  Zookeeper as store engine.
+
+  # *
+
+  # * @author Ganesh Chandrasekaran <gchandrasekaran@wayfair.com>'
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Lock\Exception\InvalidArgumentException
+- name: LockAcquiringException
+  type: class
+  source: Symfony\Component\Lock\Exception\LockAcquiringException
+- name: LockConflictedException
+  type: class
+  source: Symfony\Component\Lock\Exception\LockConflictedException
+- name: LockReleasingException
+  type: class
+  source: Symfony\Component\Lock\Exception\LockReleasingException
+- name: Key
+  type: class
+  source: Symfony\Component\Lock\Key
+- name: PersistingStoreInterface
+  type: class
+  source: Symfony\Component\Lock\PersistingStoreInterface
+- name: ExpiringStoreTrait
+  type: class
+  source: ExpiringStoreTrait
+properties: []
+methods:
+- name: createNewLock
+  visibility: private
+  parameters:
+  - name: node
+  - name: value
+  comment: "# * ZookeeperStore is a PersistingStoreInterface implementation using\
+    \ Zookeeper as store engine.\n# *\n# * @author Ganesh Chandrasekaran <gchandrasekaran@wayfair.com>\n\
+    # */\n# class ZookeeperStore implements PersistingStoreInterface\n# {\n# use ExpiringStoreTrait;\n\
+    # \n# public function __construct(\n# private \\Zookeeper $zookeeper,\n# ) {\n\
+    # }\n# \n# public static function createConnection(#[\\SensitiveParameter] string\
+    \ $dsn): \\Zookeeper\n# {\n# if (!str_starts_with($dsn, 'zookeeper:')) {\n# throw\
+    \ new InvalidArgumentException('Unsupported DSN for Zookeeper.');\n# }\n# \n#\
+    \ if (false === $params = parse_url($dsn)) {\n# throw new InvalidArgumentException('Invalid\
+    \ Zookeeper DSN.');\n# }\n# \n# $host = $params['host'] ?? '';\n# $hosts = explode(',',\
+    \ $host);\n# \n# foreach ($hosts as $index => $host) {\n# if (isset($params['port']))\
+    \ {\n# $hosts[$index] = $host.':'.$params['port'];\n# }\n# }\n# \n# return new\
+    \ \\Zookeeper(implode(',', $hosts));\n# }\n# \n# public function save(Key $key):\
+    \ void\n# {\n# if ($this->exists($key)) {\n# return;\n# }\n# \n# $resource = $this->getKeyResource($key);\n\
+    # $token = $this->getUniqueToken($key);\n# \n# $this->createNewLock($resource,\
+    \ $token);\n# $key->markUnserializable();\n# \n# $this->checkNotExpired($key);\n\
+    # }\n# \n# public function delete(Key $key): void\n# {\n# if (!$this->exists($key))\
+    \ {\n# return;\n# }\n# $resource = $this->getKeyResource($key);\n# try {\n# $this->zookeeper->delete($resource);\n\
+    # } catch (\\ZookeeperException $exception) {\n# // For Zookeeper Ephemeral Nodes,\
+    \ the node will be deleted upon session death. But, if we want to unlock\n# //\
+    \ the lock before proceeding further in the session, the client should be aware\
+    \ of this\n# throw new LockReleasingException($exception);\n# }\n# }\n# \n# public\
+    \ function exists(Key $key): bool\n# {\n# $resource = $this->getKeyResource($key);\n\
+    # try {\n# return $this->zookeeper->get($resource) === $this->getUniqueToken($key);\n\
+    # } catch (\\ZookeeperException) {\n# return false;\n# }\n# }\n# \n# public function\
+    \ putOffExpiration(Key $key, float $ttl): void\n# {\n# // do nothing, zookeeper\
+    \ locks forever.\n# }\n# \n# /**\n# * Creates a zookeeper node.\n# *\n# * @param\
+    \ string $node  The node which needs to be created\n# * @param string $value The\
+    \ value to be assigned to a zookeeper node\n# *\n# * @throws LockConflictedException\n\
+    # * @throws LockAcquiringException"
+- name: getKeyResource
+  visibility: private
+  parameters:
+  - name: key
+  comment: null
+- name: getUniqueToken
+  visibility: private
+  parameters:
+  - name: key
+  comment: null
+traits:
+- Symfony\Component\Lock\Exception\InvalidArgumentException
+- Symfony\Component\Lock\Exception\LockAcquiringException
+- Symfony\Component\Lock\Exception\LockConflictedException
+- Symfony\Component\Lock\Exception\LockReleasingException
+- Symfony\Component\Lock\Key
+- Symfony\Component\Lock\PersistingStoreInterface
+- ExpiringStoreTrait
+interfaces:
+- PersistingStoreInterface

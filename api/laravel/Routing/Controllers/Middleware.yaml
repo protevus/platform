@@ -1,0 +1,52 @@
+name: Middleware
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: middleware
+  - name: only
+    default: 'null'
+  - name: except
+    default: 'null'
+  comment: '# * Create a new controller middleware definition.
+
+    # *
+
+    # * @param  \Closure|string|array  $middleware
+
+    # * @return void'
+- name: only
+  visibility: public
+  parameters:
+  - name: only
+  comment: '# * Specify the only controller methods the middleware should apply to.
+
+    # *
+
+    # * @param  array|string  $only
+
+    # * @return $this'
+- name: except
+  visibility: public
+  parameters:
+  - name: except
+  comment: '# * Specify the controller methods the middleware should not apply to.
+
+    # *
+
+    # * @param  array|string  $except
+
+    # * @return $this'
+traits:
+- Closure
+- Illuminate\Support\Arr
+interfaces: []

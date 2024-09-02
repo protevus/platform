@@ -1,0 +1,16 @@
+name: TaggedInvokableListener
+class_comment: null
+dependencies:
+- name: AsEventListener
+  type: class
+  source: Symfony\Component\EventDispatcher\Attribute\AsEventListener
+properties: []
+methods:
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\Attribute\AsEventListener
+interfaces: []

@@ -1,0 +1,169 @@
+name: AssetsInstallCommand
+class_comment: null
+dependencies:
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Console\Exception\InvalidArgumentException
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: IOException
+  type: class
+  source: Symfony\Component\Filesystem\Exception\IOException
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: Finder
+  type: class
+  source: Symfony\Component\Finder\Finder
+- name: BundleInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Bundle\BundleInterface
+- name: KernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\KernelInterface
+properties: []
+methods:
+- name: relativeSymlinkWithFallback
+  visibility: private
+  parameters:
+  - name: originDir
+  - name: targetDir
+  comment: "# * Command that places bundle web assets into a given directory.\n# *\n\
+    # * @author Fabien Potencier <fabien@symfony.com>\n# * @author G\xE1bor Egyed\
+    \ <gabor.egyed@gmail.com>\n# *\n# * @final\n# */\n# #[AsCommand(name: 'assets:install',\
+    \ description: 'Install bundle\\'s web assets under a public directory')]\n# class\
+    \ AssetsInstallCommand extends Command\n# {\n# public const METHOD_COPY = 'copy';\n\
+    # public const METHOD_ABSOLUTE_SYMLINK = 'absolute symlink';\n# public const METHOD_RELATIVE_SYMLINK\
+    \ = 'relative symlink';\n# \n# public function __construct(\n# private Filesystem\
+    \ $filesystem,\n# private string $projectDir,\n# ) {\n# parent::__construct();\n\
+    # }\n# \n# protected function configure(): void\n# {\n# $this\n# ->setDefinition([\n\
+    # new InputArgument('target', InputArgument::OPTIONAL, 'The target directory',\
+    \ null),\n# ])\n# ->addOption('symlink', null, InputOption::VALUE_NONE, 'Symlink\
+    \ the assets instead of copying them')\n# ->addOption('relative', null, InputOption::VALUE_NONE,\
+    \ 'Make relative symlinks')\n# ->addOption('no-cleanup', null, InputOption::VALUE_NONE,\
+    \ 'Do not remove the assets of the bundles that no longer exist')\n# ->setHelp(<<<'EOT'\n\
+    # The <info>%command.name%</info> command installs bundle assets into a given\n\
+    # directory (e.g. the <comment>public</comment> directory).\n# \n# <info>php %command.full_name%\
+    \ public</info>\n# \n# A \"bundles\" directory will be created inside the target\
+    \ directory and the\n# \"Resources/public\" directory of each bundle will be copied\
+    \ into it.\n# \n# To create a symlink to each bundle instead of copying its assets,\
+    \ use the\n# <info>--symlink</info> option (will fall back to hard copies when\
+    \ symbolic links aren't possible:\n# \n# <info>php %command.full_name% public\
+    \ --symlink</info>\n# \n# To make symlink relative, add the <info>--relative</info>\
+    \ option:\n# \n# <info>php %command.full_name% public --symlink --relative</info>\n\
+    # \n# EOT\n# )\n# ;\n# }\n# \n# protected function execute(InputInterface $input,\
+    \ OutputInterface $output): int\n# {\n# /** @var KernelInterface $kernel */\n\
+    # $kernel = $this->getApplication()->getKernel();\n# $targetArg = rtrim($input->getArgument('target')\
+    \ ?? '', '/');\n# if (!$targetArg) {\n# $targetArg = $this->getPublicDirectory($kernel->getContainer());\n\
+    # }\n# \n# if (!is_dir($targetArg)) {\n# $targetArg = $kernel->getProjectDir().'/'.$targetArg;\n\
+    # \n# if (!is_dir($targetArg)) {\n# throw new InvalidArgumentException(\\sprintf('The\
+    \ target directory \"%s\" does not exist.', $targetArg));\n# }\n# }\n# \n# $bundlesDir\
+    \ = $targetArg.'/bundles/';\n# \n# $io = new SymfonyStyle($input, $output);\n\
+    # $io->newLine();\n# \n# if ($input->getOption('relative')) {\n# $expectedMethod\
+    \ = self::METHOD_RELATIVE_SYMLINK;\n# $io->text('Trying to install assets as <info>relative\
+    \ symbolic links</info>.');\n# } elseif ($input->getOption('symlink')) {\n# $expectedMethod\
+    \ = self::METHOD_ABSOLUTE_SYMLINK;\n# $io->text('Trying to install assets as <info>absolute\
+    \ symbolic links</info>.');\n# } else {\n# $expectedMethod = self::METHOD_COPY;\n\
+    # $io->text('Installing assets as <info>hard copies</info>.');\n# }\n# \n# $io->newLine();\n\
+    # \n# $rows = [];\n# $copyUsed = false;\n# $exitCode = 0;\n# $validAssetDirs =\
+    \ [];\n# /** @var BundleInterface $bundle */\n# foreach ($kernel->getBundles()\
+    \ as $bundle) {\n# if (!is_dir($originDir = $bundle->getPath().'/Resources/public')\
+    \ && !is_dir($originDir = $bundle->getPath().'/public')) {\n# continue;\n# }\n\
+    # \n# $assetDir = preg_replace('/bundle$/', '', strtolower($bundle->getName()));\n\
+    # $targetDir = $bundlesDir.$assetDir;\n# $validAssetDirs[] = $assetDir;\n# \n\
+    # if (OutputInterface::VERBOSITY_VERBOSE <= $output->getVerbosity()) {\n# $message\
+    \ = \\sprintf(\"%s\\n-> %s\", $bundle->getName(), $targetDir);\n# } else {\n#\
+    \ $message = $bundle->getName();\n# }\n# \n# try {\n# $this->filesystem->remove($targetDir);\n\
+    # \n# if (self::METHOD_RELATIVE_SYMLINK === $expectedMethod) {\n# $method = $this->relativeSymlinkWithFallback($originDir,\
+    \ $targetDir);\n# } elseif (self::METHOD_ABSOLUTE_SYMLINK === $expectedMethod)\
+    \ {\n# $method = $this->absoluteSymlinkWithFallback($originDir, $targetDir);\n\
+    # } else {\n# $method = $this->hardCopy($originDir, $targetDir);\n# }\n# \n# if\
+    \ (self::METHOD_COPY === $method) {\n# $copyUsed = true;\n# }\n# \n# if ($method\
+    \ === $expectedMethod) {\n# $rows[] = [\\sprintf('<fg=green;options=bold>%s</>',\
+    \ '\\\\' === \\DIRECTORY_SEPARATOR ? 'OK' : \"\\xE2\\x9C\\x94\" /* HEAVY CHECK\
+    \ MARK (U+2714) */), $message, $method];\n# } else {\n# $rows[] = [\\sprintf('<fg=yellow;options=bold>%s</>',\
+    \ '\\\\' === \\DIRECTORY_SEPARATOR ? 'WARNING' : '!'), $message, $method];\n#\
+    \ }\n# } catch (\\Exception $e) {\n# $exitCode = 1;\n# $rows[] = [\\sprintf('<fg=red;options=bold>%s</>',\
+    \ '\\\\' === \\DIRECTORY_SEPARATOR ? 'ERROR' : \"\\xE2\\x9C\\x98\" /* HEAVY BALLOT\
+    \ X (U+2718) */), $message, $e->getMessage()];\n# }\n# }\n# // remove the assets\
+    \ of the bundles that no longer exist\n# if (!$input->getOption('no-cleanup')\
+    \ && is_dir($bundlesDir)) {\n# $dirsToRemove = Finder::create()->depth(0)->directories()->exclude($validAssetDirs)->in($bundlesDir);\n\
+    # $this->filesystem->remove($dirsToRemove);\n# }\n# \n# if ($rows) {\n# $io->table(['',\
+    \ 'Bundle', 'Method / Error'], $rows);\n# }\n# \n# if (0 !== $exitCode) {\n# $io->error('Some\
+    \ errors occurred while installing assets.');\n# } else {\n# if ($copyUsed) {\n\
+    # $io->note('Some assets were installed via copy. If you make changes to these\
+    \ assets you have to run this command again.');\n# }\n# $io->success($rows ? 'All\
+    \ assets were successfully installed.' : 'No assets were provided by any bundle.');\n\
+    # }\n# \n# return $exitCode;\n# }\n# \n# /**\n# * Try to create relative symlink.\n\
+    # *\n# * Falling back to absolute symlink and finally hard copy."
+- name: absoluteSymlinkWithFallback
+  visibility: private
+  parameters:
+  - name: originDir
+  - name: targetDir
+  comment: '# * Try to create absolute symlink.
+
+    # *
+
+    # * Falling back to hard copy.'
+- name: symlink
+  visibility: private
+  parameters:
+  - name: originDir
+  - name: targetDir
+  - name: relative
+    default: 'false'
+  comment: '# * Creates symbolic link.
+
+    # *
+
+    # * @throws IOException if link cannot be created'
+- name: hardCopy
+  visibility: private
+  parameters:
+  - name: originDir
+  - name: targetDir
+  comment: '# * Copies origin to target.'
+- name: getPublicDirectory
+  visibility: private
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Exception\InvalidArgumentException
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Style\SymfonyStyle
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\Filesystem\Exception\IOException
+- Symfony\Component\Filesystem\Filesystem
+- Symfony\Component\Finder\Finder
+- Symfony\Component\HttpKernel\Bundle\BundleInterface
+- Symfony\Component\HttpKernel\KernelInterface
+interfaces: []

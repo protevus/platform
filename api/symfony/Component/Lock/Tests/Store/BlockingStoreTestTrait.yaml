@@ -1,0 +1,29 @@
+name: BlockingStoreTestTrait
+class_comment: null
+dependencies:
+- name: LockConflictedException
+  type: class
+  source: Symfony\Component\Lock\Exception\LockConflictedException
+- name: Key
+  type: class
+  source: Symfony\Component\Lock\Key
+- name: PersistingStoreInterface
+  type: class
+  source: Symfony\Component\Lock\PersistingStoreInterface
+properties: []
+methods:
+- name: testBlockingLocks
+  visibility: public
+  parameters: []
+  comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n# */\n# trait\
+    \ BlockingStoreTestTrait\n# {\n# /**\n# * @see AbstractStoreTestCase::getStore()\n\
+    # */\n# abstract protected function getStore(): PersistingStoreInterface;\n# \n\
+    # /**\n# * Tests blocking locks thanks to pcntl.\n# *\n# * This test is time sensible:\
+    \ the $clockDelay could be adjust.\n# *\n# * It also fails when run with the global\
+    \ ./phpunit test suite.\n# *\n# * @group transient\n# *\n# * @requires extension\
+    \ pcntl\n# * @requires extension posix\n# * @requires function pcntl_sigwaitinfo"
+traits:
+- Symfony\Component\Lock\Exception\LockConflictedException
+- Symfony\Component\Lock\Key
+- Symfony\Component\Lock\PersistingStoreInterface
+interfaces: []

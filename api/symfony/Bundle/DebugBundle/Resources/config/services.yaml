@@ -1,0 +1,79 @@
+name: services
+class_comment: null
+dependencies:
+- name: FormatterInterface
+  type: class
+  source: Monolog\Formatter\FormatterInterface
+- name: ServerLogCommand
+  type: class
+  source: Symfony\Bridge\Monolog\Command\ServerLogCommand
+- name: ConsoleFormatter
+  type: class
+  source: Symfony\Bridge\Monolog\Formatter\ConsoleFormatter
+- name: DumpExtension
+  type: class
+  source: Symfony\Bridge\Twig\Extension\DumpExtension
+- name: DumpDataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\DumpDataCollector
+- name: DumpListener
+  type: class
+  source: Symfony\Component\HttpKernel\EventListener\DumpListener
+- name: VarCloner
+  type: class
+  source: Symfony\Component\VarDumper\Cloner\VarCloner
+- name: CliDescriptor
+  type: class
+  source: Symfony\Component\VarDumper\Command\Descriptor\CliDescriptor
+- name: HtmlDescriptor
+  type: class
+  source: Symfony\Component\VarDumper\Command\Descriptor\HtmlDescriptor
+- name: ServerDumpCommand
+  type: class
+  source: Symfony\Component\VarDumper\Command\ServerDumpCommand
+- name: CliDumper
+  type: class
+  source: Symfony\Component\VarDumper\Dumper\CliDumper
+- name: CliContextProvider
+  type: class
+  source: Symfony\Component\VarDumper\Dumper\ContextProvider\CliContextProvider
+- name: RequestContextProvider
+  type: class
+  source: Symfony\Component\VarDumper\Dumper\ContextProvider\RequestContextProvider
+- name: SourceContextProvider
+  type: class
+  source: Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider
+- name: ContextualizedDumper
+  type: class
+  source: Symfony\Component\VarDumper\Dumper\ContextualizedDumper
+- name: HtmlDumper
+  type: class
+  source: Symfony\Component\VarDumper\Dumper\HtmlDumper
+- name: Connection
+  type: class
+  source: Symfony\Component\VarDumper\Server\Connection
+- name: DumpServer
+  type: class
+  source: Symfony\Component\VarDumper\Server\DumpServer
+properties: []
+methods: []
+traits:
+- Monolog\Formatter\FormatterInterface
+- Symfony\Bridge\Monolog\Command\ServerLogCommand
+- Symfony\Bridge\Monolog\Formatter\ConsoleFormatter
+- Symfony\Bridge\Twig\Extension\DumpExtension
+- Symfony\Component\HttpKernel\DataCollector\DumpDataCollector
+- Symfony\Component\HttpKernel\EventListener\DumpListener
+- Symfony\Component\VarDumper\Cloner\VarCloner
+- Symfony\Component\VarDumper\Command\Descriptor\CliDescriptor
+- Symfony\Component\VarDumper\Command\Descriptor\HtmlDescriptor
+- Symfony\Component\VarDumper\Command\ServerDumpCommand
+- Symfony\Component\VarDumper\Dumper\CliDumper
+- Symfony\Component\VarDumper\Dumper\ContextProvider\CliContextProvider
+- Symfony\Component\VarDumper\Dumper\ContextProvider\RequestContextProvider
+- Symfony\Component\VarDumper\Dumper\ContextProvider\SourceContextProvider
+- Symfony\Component\VarDumper\Dumper\ContextualizedDumper
+- Symfony\Component\VarDumper\Dumper\HtmlDumper
+- Symfony\Component\VarDumper\Server\Connection
+- Symfony\Component\VarDumper\Server\DumpServer
+interfaces: []

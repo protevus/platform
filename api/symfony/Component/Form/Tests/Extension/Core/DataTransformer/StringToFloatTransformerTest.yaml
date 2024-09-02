@@ -1,0 +1,53 @@
+name: StringToFloatTransformerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+- name: StringToFloatTransformer
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataTransformer\StringToFloatTransformer
+properties: []
+methods:
+- name: provideTransformations
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransform
+  visibility: public
+  parameters:
+  - name: from
+  - name: to
+  comment: '# * @dataProvider provideTransformations'
+- name: testFailIfTransformingANonString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFailIfTransformingANonNumericString
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideReverseTransformations
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransform
+  visibility: public
+  parameters:
+  - name: from
+  - name: to
+  - name: scale
+    default: 'null'
+  comment: '# * @dataProvider provideReverseTransformations'
+- name: testFailIfReverseTransformingANonNumeric
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\Exception\TransformationFailedException
+- Symfony\Component\Form\Extension\Core\DataTransformer\StringToFloatTransformer
+interfaces: []

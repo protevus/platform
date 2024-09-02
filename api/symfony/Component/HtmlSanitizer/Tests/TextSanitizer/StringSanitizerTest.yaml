@@ -1,0 +1,35 @@
+name: StringSanitizerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: StringSanitizer
+  type: class
+  source: Symfony\Component\HtmlSanitizer\TextSanitizer\StringSanitizer
+properties: []
+methods:
+- name: provideHtmlLower
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHtmlLower
+  visibility: public
+  parameters:
+  - name: input
+  - name: expected
+  comment: '# * @dataProvider provideHtmlLower'
+- name: provideEncodeHtmlEntites
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEncodeHtmlEntites
+  visibility: public
+  parameters:
+  - name: input
+  - name: expected
+  comment: '# * @dataProvider provideEncodeHtmlEntites'
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HtmlSanitizer\TextSanitizer\StringSanitizer
+interfaces: []

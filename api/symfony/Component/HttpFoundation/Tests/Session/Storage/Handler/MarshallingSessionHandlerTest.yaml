@@ -1,0 +1,63 @@
+name: MarshallingSessionHandlerTest
+class_comment: '# * @author Ahmed TAILOULOUTE <ahmed.tailouloute@gmail.com>'
+dependencies:
+- name: MockObject
+  type: class
+  source: PHPUnit\Framework\MockObject\MockObject
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: MarshallerInterface
+  type: class
+  source: Symfony\Component\Cache\Marshaller\MarshallerInterface
+- name: AbstractSessionHandler
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+- name: MarshallingSessionHandler
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Storage\Handler\MarshallingSessionHandler
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testOpen
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClose
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDestroy
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGc
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRead
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWrite
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidateId
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUpdateTimestamp
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\MockObject\MockObject
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Cache\Marshaller\MarshallerInterface
+- Symfony\Component\HttpFoundation\Session\Storage\Handler\AbstractSessionHandler
+- Symfony\Component\HttpFoundation\Session\Storage\Handler\MarshallingSessionHandler
+interfaces: []

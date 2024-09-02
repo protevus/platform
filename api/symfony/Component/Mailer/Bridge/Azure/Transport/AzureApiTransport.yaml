@@ -1,0 +1,139 @@
+name: AzureApiTransport
+class_comment: null
+dependencies:
+- name: EventDispatcherInterface
+  type: class
+  source: Psr\EventDispatcher\EventDispatcherInterface
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: HttpTransportException
+  type: class
+  source: Symfony\Component\Mailer\Exception\HttpTransportException
+- name: SentMessage
+  type: class
+  source: Symfony\Component\Mailer\SentMessage
+- name: AbstractApiTransport
+  type: class
+  source: Symfony\Component\Mailer\Transport\AbstractApiTransport
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+- name: DecodingExceptionInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface
+- name: TransportExceptionInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+- name: HttpClientInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\HttpClientInterface
+- name: ResponseInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\ResponseInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: key
+  - name: resourceName
+  - name: disableTracking
+    default: 'false'
+  - name: apiVersion
+    default: '''2023-03-31'''
+  - name: client
+    default: 'null'
+  - name: dispatcher
+    default: 'null'
+  - name: logger
+    default: 'null'
+  comment: '# * @param string $key             User Access Key from Azure Communication
+    Service (Primary or Secondary key)
+
+    # * @param string $resourceName    The endpoint API URL to which to POST emails
+    to Azure https://{acsResourceName}.communication.azure.com/
+
+    # * @param bool   $disableTracking Indicates whether user engagement tracking
+    should be disabled
+
+    # * @param string $apiVersion      The version of API to invoke'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: doSendApi
+  visibility: protected
+  parameters:
+  - name: sentMessage
+  - name: email
+  - name: envelope
+  comment: '# * Queues an email message to be sent to one or more recipients.'
+- name: getPayload
+  visibility: private
+  parameters:
+  - name: email
+  - name: envelope
+  comment: '# * Get the message request body.'
+- name: getMessageAttachments
+  visibility: private
+  parameters:
+  - name: email
+  comment: '# * List of attachments. Please note that the service limits the total
+    size
+
+    # * of an email request (which includes attachments) to 10 MB.'
+- name: getAzureCSEndpoint
+  visibility: private
+  parameters: []
+  comment: '# * The communication domain host, for example my-acs-resource-name.communication.azure.com.'
+- name: generateContentHash
+  visibility: private
+  parameters:
+  - name: content
+  comment: null
+- name: generateAuthenticationSignature
+  visibility: private
+  parameters:
+  - name: content
+  comment: '# * Generate sha256 hash and encode to base64 to produces the digest string.'
+- name: getSignedHeaders
+  visibility: private
+  parameters:
+  - name: payload
+  - name: message
+  comment: '# * Get authenticated headers for signed request,.'
+- name: generateMessageId
+  visibility: private
+  parameters: []
+  comment: '# * Can be used to identify the long running operation.'
+- name: getMessageCustomHeaders
+  visibility: private
+  parameters:
+  - name: email
+  comment: null
+- name: getPriorityLevel
+  visibility: private
+  parameters:
+  - name: priority
+  comment: null
+traits:
+- Psr\EventDispatcher\EventDispatcherInterface
+- Psr\Log\LoggerInterface
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mailer\Exception\HttpTransportException
+- Symfony\Component\Mailer\SentMessage
+- Symfony\Component\Mailer\Transport\AbstractApiTransport
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Email
+- Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface
+- Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+- Symfony\Contracts\HttpClient\HttpClientInterface
+- Symfony\Contracts\HttpClient\ResponseInterface
+interfaces: []

@@ -1,0 +1,232 @@
+name: CssColorValidatorTest
+class_comment: null
+dependencies:
+- name: CssColor
+  type: class
+  source: Symfony\Component\Validator\Constraints\CssColor
+- name: CssColorValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\CssColorValidator
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+- name: StringableValue
+  type: class
+  source: Symfony\Component\Validator\Tests\Constraints\Fixtures\StringableValue
+properties: []
+methods:
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testNullIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEmptyStringIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExpectsStringCompatibleType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidAnyColor
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getValidAnyColor'
+- name: getValidAnyColor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidHexLongColors
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getValidHexLongColors'
+- name: getValidHexLongColors
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidHexLongColorsWithAlpha
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getValidHexLongColorsWithAlpha'
+- name: getValidHexLongColorsWithAlpha
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidHexShortColors
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getValidHexShortColors'
+- name: getValidHexShortColors
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidHexShortColorsWithAlpha
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getValidHexShortColorsWithAlpha'
+- name: getValidHexShortColorsWithAlpha
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidBasicNamedColors
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getValidBasicNamedColors'
+- name: getValidBasicNamedColors
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidExtendedNamedColors
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getValidExtendedNamedColors'
+- name: getValidExtendedNamedColors
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidSystemColors
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getValidSystemColors'
+- name: getValidSystemColors
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidKeywords
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getValidKeywords'
+- name: getValidKeywords
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidRGB
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getValidRGB'
+- name: getValidRGB
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidRGBA
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getValidRGBA'
+- name: getValidRGBA
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidHSL
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getValidHSL'
+- name: getValidHSL
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidHSLA
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getValidHSLA'
+- name: getValidHSLA
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidHexColors
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getInvalidHexColors'
+- name: getInvalidHexColors
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidShortHexColors
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getInvalidShortHexColors'
+- name: getInvalidShortHexColors
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidNamedColors
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getInvalidNamedColors'
+- name: getInvalidNamedColors
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidRGB
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getInvalidRGB'
+- name: getInvalidRGB
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidRGBA
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getInvalidRGBA'
+- name: getInvalidRGBA
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidHSL
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getInvalidHSL'
+- name: getInvalidHSL
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidHSLA
+  visibility: public
+  parameters:
+  - name: cssColor
+  comment: '# * @dataProvider getInvalidHSLA'
+- name: getInvalidHSLA
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnknownFormatAsStringThrowsException
+  visibility: public
+  parameters:
+  - name: formats
+  comment: '# * @dataProvider getInvalidFormats'
+- name: getInvalidFormats
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\CssColor
+- Symfony\Component\Validator\Constraints\CssColorValidator
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+- Symfony\Component\Validator\Tests\Constraints\Fixtures\StringableValue
+interfaces: []

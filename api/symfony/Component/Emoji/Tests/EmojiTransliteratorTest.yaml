@@ -1,0 +1,73 @@
+name: EmojiTransliteratorTest
+class_comment: '# * @requires extension intl'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: EmojiTransliterator
+  type: class
+  source: Symfony\Component\Emoji\EmojiTransliterator
+- name: Finder
+  type: class
+  source: Symfony\Component\Finder\Finder
+properties: []
+methods:
+- name: testTransliterate
+  visibility: public
+  parameters:
+  - name: locale
+  - name: input
+  - name: expected
+  comment: '# * @requires extension intl
+
+    # */
+
+    # class EmojiTransliteratorTest extends TestCase
+
+    # {
+
+    # /**
+
+    # * @dataProvider provideTransliterateTests'
+- name: provideTransliterateTests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllTransliterator
+  visibility: public
+  parameters:
+  - name: locale
+  comment: '# * @dataProvider provideLocaleTest'
+- name: provideLocaleTest
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransliterateWithInvalidLocale
+  visibility: public
+  parameters: []
+  comment: null
+- name: testListIds
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSlice
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotUtf8
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBadOffsets
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverse
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Emoji\EmojiTransliterator
+- Symfony\Component\Finder\Finder
+interfaces: []

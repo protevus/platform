@@ -1,0 +1,110 @@
+name: TrustHosts
+class_comment: null
+dependencies:
+- name: Application
+  type: class
+  source: Illuminate\Contracts\Foundation\Application
+- name: Request
+  type: class
+  source: Illuminate\Http\Request
+properties:
+- name: app
+  visibility: protected
+  comment: '# * The application instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Foundation\Application'
+- name: alwaysTrust
+  visibility: protected
+  comment: '# * The trusted hosts that have been configured to always be trusted.
+
+    # *
+
+    # * @var array<int, string>|(callable(): array<int, string>)|null'
+- name: subdomains
+  visibility: protected
+  comment: '# * Indicates whether subdomains of the application URL should be trusted.
+
+    # *
+
+    # * @var bool|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: app
+  comment: "# * The application instance.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Foundation\\Application\n# */\n# protected $app;\n# \n# /**\n# * The trusted hosts\
+    \ that have been configured to always be trusted.\n# *\n# * @var array<int, string>|(callable():\
+    \ array<int, string>)|null\n# */\n# protected static $alwaysTrust;\n# \n# /**\n\
+    # * Indicates whether subdomains of the application URL should be trusted.\n#\
+    \ *\n# * @var bool|null\n# */\n# protected static $subdomains;\n# \n# /**\n# *\
+    \ Create a new middleware instance.\n# *\n# * @param  \\Illuminate\\Contracts\\\
+    Foundation\\Application  $app\n# * @return void"
+- name: hosts
+  visibility: public
+  parameters: []
+  comment: '# * Get the host patterns that should be trusted.
+
+    # *
+
+    # * @return array'
+- name: handle
+  visibility: public
+  parameters:
+  - name: request
+  - name: next
+  comment: '# * Handle the incoming request.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  \Closure  $next
+
+    # * @return \Illuminate\Http\Response'
+- name: at
+  visibility: public
+  parameters:
+  - name: hosts
+  - name: subdomains
+    default: 'true'
+  comment: '# * Specify the hosts that should always be trusted.
+
+    # *
+
+    # * @param  array<int, string>|(callable(): array<int, string>)  $hosts
+
+    # * @param  bool  $subdomains
+
+    # * @return void'
+- name: shouldSpecifyTrustedHosts
+  visibility: protected
+  parameters: []
+  comment: '# * Determine if the application should specify trusted hosts.
+
+    # *
+
+    # * @return bool'
+- name: allSubdomainsOfApplicationUrl
+  visibility: protected
+  parameters: []
+  comment: '# * Get a regular expression matching the application URL and all of its
+    subdomains.
+
+    # *
+
+    # * @return string|null'
+- name: flushState
+  visibility: public
+  parameters: []
+  comment: '# * Flush the state of the middleware.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Contracts\Foundation\Application
+- Illuminate\Http\Request
+interfaces: []

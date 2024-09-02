@@ -1,0 +1,234 @@
+name: CanBeOneOfMany
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Builder
+  type: class
+  source: Illuminate\Database\Eloquent\Builder
+- name: JoinClause
+  type: class
+  source: Illuminate\Database\Query\JoinClause
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties:
+- name: isOneOfMany
+  visibility: protected
+  comment: '# * Determines whether the relationship is one-of-many.
+
+    # *
+
+    # * @var bool'
+- name: relationName
+  visibility: protected
+  comment: '# * The name of the relationship.
+
+    # *
+
+    # * @var string'
+- name: oneOfManySubQuery
+  visibility: protected
+  comment: '# * The one of many inner join subselect query builder instance.
+
+    # *
+
+    # * @var \Illuminate\Database\Eloquent\Builder<*>|null'
+methods:
+- name: ofMany
+  visibility: public
+  parameters:
+  - name: column
+    default: '''id'''
+  - name: aggregate
+    default: '''MAX'''
+  - name: relation
+    default: 'null'
+  comment: "# * Determines whether the relationship is one-of-many.\n# *\n# * @var\
+    \ bool\n# */\n# protected $isOneOfMany = false;\n# \n# /**\n# * The name of the\
+    \ relationship.\n# *\n# * @var string\n# */\n# protected $relationName;\n# \n\
+    # /**\n# * The one of many inner join subselect query builder instance.\n# *\n\
+    # * @var \\Illuminate\\Database\\Eloquent\\Builder<*>|null\n# */\n# protected\
+    \ $oneOfManySubQuery;\n# \n# /**\n# * Add constraints for inner join subselect\
+    \ for one of many relationships.\n# *\n# * @param  \\Illuminate\\Database\\Eloquent\\\
+    Builder<*>  $query\n# * @param  string|null  $column\n# * @param  string|null\
+    \  $aggregate\n# * @return void\n# */\n# abstract public function addOneOfManySubQueryConstraints(Builder\
+    \ $query, $column = null, $aggregate = null);\n# \n# /**\n# * Get the columns\
+    \ the determine the relationship groups.\n# *\n# * @return array|string\n# */\n\
+    # abstract public function getOneOfManySubQuerySelectColumns();\n# \n# /**\n#\
+    \ * Add join query constraints for one of many relationships.\n# *\n# * @param\
+    \  \\Illuminate\\Database\\Query\\JoinClause  $join\n# * @return void\n# */\n\
+    # abstract public function addOneOfManyJoinSubQueryConstraints(JoinClause $join);\n\
+    # \n# /**\n# * Indicate that the relation is a single result of a larger one-to-many\
+    \ relationship.\n# *\n# * @param  string|array|null  $column\n# * @param  string|\\\
+    Closure|null  $aggregate\n# * @param  string|null  $relation\n# * @return $this\n\
+    # *\n# * @throws \\InvalidArgumentException"
+- name: latestOfMany
+  visibility: public
+  parameters:
+  - name: column
+    default: '''id'''
+  - name: relation
+    default: 'null'
+  comment: '# * Indicate that the relation is the latest single result of a larger
+    one-to-many relationship.
+
+    # *
+
+    # * @param  string|array|null  $column
+
+    # * @param  string|null  $relation
+
+    # * @return $this'
+- name: oldestOfMany
+  visibility: public
+  parameters:
+  - name: column
+    default: '''id'''
+  - name: relation
+    default: 'null'
+  comment: '# * Indicate that the relation is the oldest single result of a larger
+    one-to-many relationship.
+
+    # *
+
+    # * @param  string|array|null  $column
+
+    # * @param  string|null  $relation
+
+    # * @return $this'
+- name: getDefaultOneOfManyJoinAlias
+  visibility: protected
+  parameters:
+  - name: relation
+  comment: '# * Get the default alias for the one of many inner join clause.
+
+    # *
+
+    # * @param  string  $relation
+
+    # * @return string'
+- name: newOneOfManySubQuery
+  visibility: protected
+  parameters:
+  - name: groupBy
+  - name: columns
+    default: 'null'
+  - name: aggregate
+    default: 'null'
+  comment: '# * Get a new query for the related model, grouping the query by the given
+    column, often the foreign key of the relationship.
+
+    # *
+
+    # * @param  string|array  $groupBy
+
+    # * @param  array<string>|null  $columns
+
+    # * @param  string|null  $aggregate
+
+    # * @return \Illuminate\Database\Eloquent\Builder<*>'
+- name: addOneOfManyJoinSubQuery
+  visibility: protected
+  parameters:
+  - name: parent
+  - name: subQuery
+  - name: 'on'
+  comment: '# * Add the join subquery to the given query on the given column and the
+    relationship''s foreign key.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Builder<*>  $parent
+
+    # * @param  \Illuminate\Database\Eloquent\Builder<*>  $subQuery
+
+    # * @param  array<string>  $on
+
+    # * @return void'
+- name: mergeOneOfManyJoinsTo
+  visibility: protected
+  parameters:
+  - name: query
+  comment: '# * Merge the relationship query joins to the given query builder.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Builder<*>  $query
+
+    # * @return void'
+- name: getRelationQuery
+  visibility: protected
+  parameters: []
+  comment: '# * Get the query builder that will contain the relationship constraints.
+
+    # *
+
+    # * @return \Illuminate\Database\Eloquent\Builder<*>'
+- name: getOneOfManySubQuery
+  visibility: public
+  parameters: []
+  comment: '# * Get the one of many inner join subselect builder instance.
+
+    # *
+
+    # * @return \Illuminate\Database\Eloquent\Builder<*>|void'
+- name: qualifySubSelectColumn
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Get the qualified column name for the one-of-many relationship using
+    the subselect join query''s alias.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return string'
+- name: qualifyRelatedColumn
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Qualify related column using the related table name if it is not already
+    qualified.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return string'
+- name: guessRelationship
+  visibility: protected
+  parameters: []
+  comment: '# * Guess the "hasOne" relationship''s name via backtrace.
+
+    # *
+
+    # * @return string'
+- name: isOneOfMany
+  visibility: public
+  parameters: []
+  comment: '# * Determine whether the relationship is a one-of-many relationship.
+
+    # *
+
+    # * @return bool'
+- name: getRelationName
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the relationship.
+
+    # *
+
+    # * @return string'
+traits:
+- Closure
+- Illuminate\Database\Eloquent\Builder
+- Illuminate\Database\Query\JoinClause
+- Illuminate\Support\Arr
+- InvalidArgumentException
+interfaces: []

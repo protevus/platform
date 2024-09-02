@@ -1,0 +1,1196 @@
+name: TestResponse
+class_comment: '# * @mixin \Illuminate\Http\Response'
+dependencies:
+- name: ArrayAccess
+  type: class
+  source: ArrayAccess
+- name: Closure
+  type: class
+  source: Closure
+- name: MessageBag
+  type: class
+  source: Illuminate\Contracts\Support\MessageBag
+- name: View
+  type: class
+  source: Illuminate\Contracts\View\View
+- name: CookieValuePrefix
+  type: class
+  source: Illuminate\Cookie\CookieValuePrefix
+- name: EloquentCollection
+  type: class
+  source: Illuminate\Database\Eloquent\Collection
+- name: Model
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+- name: Request
+  type: class
+  source: Illuminate\Http\Request
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Carbon
+  type: class
+  source: Illuminate\Support\Carbon
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: Conditionable
+  type: class
+  source: Illuminate\Support\Traits\Conditionable
+- name: Dumpable
+  type: class
+  source: Illuminate\Support\Traits\Dumpable
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: Tappable
+  type: class
+  source: Illuminate\Support\Traits\Tappable
+- name: ViewErrorBag
+  type: class
+  source: Illuminate\Support\ViewErrorBag
+- name: SeeInOrder
+  type: class
+  source: Illuminate\Testing\Constraints\SeeInOrder
+- name: AssertableJson
+  type: class
+  source: Illuminate\Testing\Fluent\AssertableJson
+- name: PHPUnit
+  type: class
+  source: Illuminate\Testing\TestResponseAssert
+- name: LogicException
+  type: class
+  source: LogicException
+- name: Cookie
+  type: class
+  source: Symfony\Component\HttpFoundation\Cookie
+- name: StreamedJsonResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\StreamedJsonResponse
+- name: StreamedResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\StreamedResponse
+properties:
+- name: baseRequest
+  visibility: public
+  comment: "# * @mixin \\Illuminate\\Http\\Response\n# */\n# class TestResponse implements\
+    \ ArrayAccess\n# {\n# use Concerns\\AssertsStatusCodes, Conditionable, Dumpable,\
+    \ Tappable, Macroable {\n# __call as macroCall;\n# }\n# \n# /**\n# * The original\
+    \ request.\n# *\n# * @var \\Illuminate\\Http\\Request|null"
+- name: baseResponse
+  visibility: public
+  comment: '# * The response to delegate to.
+
+    # *
+
+    # * @var \Illuminate\Http\Response'
+- name: exceptions
+  visibility: public
+  comment: '# * The collection of logged exceptions for the request.
+
+    # *
+
+    # * @var \Illuminate\Support\Collection'
+- name: streamedContent
+  visibility: protected
+  comment: '# * The streamed content of the response.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: response
+  - name: request
+    default: 'null'
+  comment: "# * @mixin \\Illuminate\\Http\\Response\n# */\n# class TestResponse implements\
+    \ ArrayAccess\n# {\n# use Concerns\\AssertsStatusCodes, Conditionable, Dumpable,\
+    \ Tappable, Macroable {\n# __call as macroCall;\n# }\n# \n# /**\n# * The original\
+    \ request.\n# *\n# * @var \\Illuminate\\Http\\Request|null\n# */\n# public $baseRequest;\n\
+    # \n# /**\n# * The response to delegate to.\n# *\n# * @var \\Illuminate\\Http\\\
+    Response\n# */\n# public $baseResponse;\n# \n# /**\n# * The collection of logged\
+    \ exceptions for the request.\n# *\n# * @var \\Illuminate\\Support\\Collection\n\
+    # */\n# public $exceptions;\n# \n# /**\n# * The streamed content of the response.\n\
+    # *\n# * @var string\n# */\n# protected $streamedContent;\n# \n# /**\n# * Create\
+    \ a new test response instance.\n# *\n# * @param  \\Illuminate\\Http\\Response\
+    \  $response\n# * @param  \\Illuminate\\Http\\Request|null  $request\n# * @return\
+    \ void"
+- name: fromBaseResponse
+  visibility: public
+  parameters:
+  - name: response
+  - name: request
+    default: 'null'
+  comment: '# * Create a new TestResponse from another response.
+
+    # *
+
+    # * @param  \Illuminate\Http\Response  $response
+
+    # * @param  \Illuminate\Http\Request|null  $request
+
+    # * @return static'
+- name: assertSuccessful
+  visibility: public
+  parameters: []
+  comment: '# * Assert that the response has a successful status code.
+
+    # *
+
+    # * @return $this'
+- name: assertSuccessfulPrecognition
+  visibility: public
+  parameters: []
+  comment: '# * Assert that the Precognition request was successful.
+
+    # *
+
+    # * @return $this'
+- name: assertServerError
+  visibility: public
+  parameters: []
+  comment: '# * Assert that the response is a server error.
+
+    # *
+
+    # * @return $this'
+- name: assertStatus
+  visibility: public
+  parameters:
+  - name: status
+  comment: '# * Assert that the response has the given status code.
+
+    # *
+
+    # * @param  int  $status
+
+    # * @return $this'
+- name: statusMessageWithDetails
+  visibility: protected
+  parameters:
+  - name: expected
+  - name: actual
+  comment: '# * Get an assertion message for a status assertion containing extra details
+    when available.
+
+    # *
+
+    # * @param  string|int  $expected
+
+    # * @param  string|int  $actual
+
+    # * @return string'
+- name: assertRedirect
+  visibility: public
+  parameters:
+  - name: uri
+    default: 'null'
+  comment: '# * Assert whether the response is redirecting to a given URI.
+
+    # *
+
+    # * @param  string|null  $uri
+
+    # * @return $this'
+- name: assertRedirectContains
+  visibility: public
+  parameters:
+  - name: uri
+  comment: '# * Assert whether the response is redirecting to a URI that contains
+    the given URI.
+
+    # *
+
+    # * @param  string  $uri
+
+    # * @return $this'
+- name: assertRedirectToRoute
+  visibility: public
+  parameters:
+  - name: name
+  - name: parameters
+    default: '[]'
+  comment: '# * Assert whether the response is redirecting to a given route.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  mixed  $parameters
+
+    # * @return $this'
+- name: assertRedirectToSignedRoute
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  - name: parameters
+    default: '[]'
+  comment: '# * Assert whether the response is redirecting to a given signed route.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @param  mixed  $parameters
+
+    # * @return $this'
+- name: assertHeader
+  visibility: public
+  parameters:
+  - name: headerName
+  - name: value
+    default: 'null'
+  comment: '# * Asserts that the response contains the given header and equals the
+    optional value.
+
+    # *
+
+    # * @param  string  $headerName
+
+    # * @param  mixed  $value
+
+    # * @return $this'
+- name: assertHeaderMissing
+  visibility: public
+  parameters:
+  - name: headerName
+  comment: '# * Asserts that the response does not contain the given header.
+
+    # *
+
+    # * @param  string  $headerName
+
+    # * @return $this'
+- name: assertLocation
+  visibility: public
+  parameters:
+  - name: uri
+  comment: '# * Assert that the current location header matches the given URI.
+
+    # *
+
+    # * @param  string  $uri
+
+    # * @return $this'
+- name: assertDownload
+  visibility: public
+  parameters:
+  - name: filename
+    default: 'null'
+  comment: '# * Assert that the response offers a file download.
+
+    # *
+
+    # * @param  string|null  $filename
+
+    # * @return $this'
+- name: assertPlainCookie
+  visibility: public
+  parameters:
+  - name: cookieName
+  - name: value
+    default: 'null'
+  comment: '# * Asserts that the response contains the given cookie and equals the
+    optional value.
+
+    # *
+
+    # * @param  string  $cookieName
+
+    # * @param  mixed  $value
+
+    # * @return $this'
+- name: assertCookie
+  visibility: public
+  parameters:
+  - name: cookieName
+  - name: value
+    default: 'null'
+  - name: encrypted
+    default: 'true'
+  - name: unserialize
+    default: 'false'
+  comment: '# * Asserts that the response contains the given cookie and equals the
+    optional value.
+
+    # *
+
+    # * @param  string  $cookieName
+
+    # * @param  mixed  $value
+
+    # * @param  bool  $encrypted
+
+    # * @param  bool  $unserialize
+
+    # * @return $this'
+- name: assertCookieExpired
+  visibility: public
+  parameters:
+  - name: cookieName
+  comment: '# * Asserts that the response contains the given cookie and is expired.
+
+    # *
+
+    # * @param  string  $cookieName
+
+    # * @return $this'
+- name: assertCookieNotExpired
+  visibility: public
+  parameters:
+  - name: cookieName
+  comment: '# * Asserts that the response contains the given cookie and is not expired.
+
+    # *
+
+    # * @param  string  $cookieName
+
+    # * @return $this'
+- name: assertCookieMissing
+  visibility: public
+  parameters:
+  - name: cookieName
+  comment: '# * Asserts that the response does not contain the given cookie.
+
+    # *
+
+    # * @param  string  $cookieName
+
+    # * @return $this'
+- name: getCookie
+  visibility: public
+  parameters:
+  - name: cookieName
+  - name: decrypt
+    default: 'true'
+  - name: unserialize
+    default: 'false'
+  comment: '# * Get the given cookie from the response.
+
+    # *
+
+    # * @param  string  $cookieName
+
+    # * @param  bool  $decrypt
+
+    # * @param  bool  $unserialize
+
+    # * @return \Symfony\Component\HttpFoundation\Cookie|null'
+- name: assertContent
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Assert that the given string matches the response content.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return $this'
+- name: assertStreamedContent
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Assert that the given string matches the streamed response content.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return $this'
+- name: assertStreamedJsonContent
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Assert that the given array matches the streamed JSON response content.
+
+    # *
+
+    # * @param  array  $value
+
+    # * @return $this'
+- name: assertSee
+  visibility: public
+  parameters:
+  - name: value
+  - name: escape
+    default: 'true'
+  comment: '# * Assert that the given string or array of strings are contained within
+    the response.
+
+    # *
+
+    # * @param  string|array  $value
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: assertSeeInOrder
+  visibility: public
+  parameters:
+  - name: values
+  - name: escape
+    default: 'true'
+  comment: '# * Assert that the given strings are contained in order within the response.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: assertSeeText
+  visibility: public
+  parameters:
+  - name: value
+  - name: escape
+    default: 'true'
+  comment: '# * Assert that the given string or array of strings are contained within
+    the response text.
+
+    # *
+
+    # * @param  string|array  $value
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: assertSeeTextInOrder
+  visibility: public
+  parameters:
+  - name: values
+  - name: escape
+    default: 'true'
+  comment: '# * Assert that the given strings are contained in order within the response
+    text.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: assertDontSee
+  visibility: public
+  parameters:
+  - name: value
+  - name: escape
+    default: 'true'
+  comment: '# * Assert that the given string or array of strings are not contained
+    within the response.
+
+    # *
+
+    # * @param  string|array  $value
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: assertDontSeeText
+  visibility: public
+  parameters:
+  - name: value
+  - name: escape
+    default: 'true'
+  comment: '# * Assert that the given string or array of strings are not contained
+    within the response text.
+
+    # *
+
+    # * @param  string|array  $value
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: assertJson
+  visibility: public
+  parameters:
+  - name: value
+  - name: strict
+    default: 'false'
+  comment: '# * Assert that the response is a superset of the given JSON.
+
+    # *
+
+    # * @param  array|callable  $value
+
+    # * @param  bool  $strict
+
+    # * @return $this'
+- name: assertJsonPath
+  visibility: public
+  parameters:
+  - name: path
+  - name: expect
+  comment: '# * Assert that the expected value and type exists at the given path in
+    the response.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  mixed  $expect
+
+    # * @return $this'
+- name: assertJsonPathCanonicalizing
+  visibility: public
+  parameters:
+  - name: path
+  - name: expect
+  comment: '# * Assert that the given path in the response contains all of the expected
+    values without looking at the order.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  array  $expect
+
+    # * @return $this'
+- name: assertExactJson
+  visibility: public
+  parameters:
+  - name: data
+  comment: '# * Assert that the response has the exact given JSON.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return $this'
+- name: assertSimilarJson
+  visibility: public
+  parameters:
+  - name: data
+  comment: '# * Assert that the response has the similar JSON as given.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return $this'
+- name: assertJsonFragment
+  visibility: public
+  parameters:
+  - name: data
+  comment: '# * Assert that the response contains the given JSON fragment.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return $this'
+- name: assertJsonMissing
+  visibility: public
+  parameters:
+  - name: data
+  - name: exact
+    default: 'false'
+  comment: '# * Assert that the response does not contain the given JSON fragment.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @param  bool  $exact
+
+    # * @return $this'
+- name: assertJsonMissingExact
+  visibility: public
+  parameters:
+  - name: data
+  comment: '# * Assert that the response does not contain the exact JSON fragment.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return $this'
+- name: assertJsonMissingPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Assert that the response does not contain the given path.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return $this'
+- name: assertJsonStructure
+  visibility: public
+  parameters:
+  - name: structure
+    default: 'null'
+  - name: responseData
+    default: 'null'
+  comment: '# * Assert that the response has a given JSON structure.
+
+    # *
+
+    # * @param  array|null  $structure
+
+    # * @param  array|null  $responseData
+
+    # * @return $this'
+- name: assertJsonCount
+  visibility: public
+  parameters:
+  - name: count
+  - name: key
+    default: 'null'
+  comment: '# * Assert that the response JSON has the expected count of items at the
+    given key.
+
+    # *
+
+    # * @param  int  $count
+
+    # * @param  string|null  $key
+
+    # * @return $this'
+- name: assertJsonValidationErrors
+  visibility: public
+  parameters:
+  - name: errors
+  - name: responseKey
+    default: '''errors'''
+  comment: '# * Assert that the response has the given JSON validation errors.
+
+    # *
+
+    # * @param  string|array  $errors
+
+    # * @param  string  $responseKey
+
+    # * @return $this'
+- name: assertJsonValidationErrorFor
+  visibility: public
+  parameters:
+  - name: key
+  - name: responseKey
+    default: '''errors'''
+  comment: '# * Assert the response has any JSON validation errors for the given key.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  string  $responseKey
+
+    # * @return $this'
+- name: assertJsonMissingValidationErrors
+  visibility: public
+  parameters:
+  - name: keys
+    default: 'null'
+  - name: responseKey
+    default: '''errors'''
+  comment: '# * Assert that the response has no JSON validation errors for the given
+    keys.
+
+    # *
+
+    # * @param  string|array|null  $keys
+
+    # * @param  string  $responseKey
+
+    # * @return $this'
+- name: assertJsonIsArray
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  comment: '# * Assert that the given key is a JSON array.
+
+    # *
+
+    # * @param  string|null  $key
+
+    # * @return $this'
+- name: assertJsonIsObject
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  comment: '# * Assert that the given key is a JSON object.
+
+    # *
+
+    # * @param  string|null  $key
+
+    # * @return $this'
+- name: decodeResponseJson
+  visibility: public
+  parameters: []
+  comment: '# * Validate and return the decoded response JSON.
+
+    # *
+
+    # * @return \Illuminate\Testing\AssertableJsonString
+
+    # *
+
+    # * @throws \Throwable'
+- name: json
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  comment: '# * Validate and return the decoded response JSON.
+
+    # *
+
+    # * @param  string|null  $key
+
+    # * @return mixed'
+- name: collect
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  comment: '# * Get the JSON decoded body of the response as a collection.
+
+    # *
+
+    # * @param  string|null  $key
+
+    # * @return \Illuminate\Support\Collection'
+- name: assertViewIs
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Assert that the response view equals the given value.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return $this'
+- name: assertViewHas
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: 'null'
+  comment: '# * Assert that the response view has a given piece of bound data.
+
+    # *
+
+    # * @param  string|array  $key
+
+    # * @param  mixed  $value
+
+    # * @return $this'
+- name: assertViewHasAll
+  visibility: public
+  parameters:
+  - name: bindings
+  comment: '# * Assert that the response view has a given list of bound data.
+
+    # *
+
+    # * @param  array  $bindings
+
+    # * @return $this'
+- name: viewData
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Get a piece of data from the original view.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed'
+- name: assertViewMissing
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Assert that the response view is missing a piece of bound data.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return $this'
+- name: ensureResponseHasView
+  visibility: protected
+  parameters: []
+  comment: '# * Ensure that the response has a view as its original content.
+
+    # *
+
+    # * @return $this'
+- name: responseHasView
+  visibility: protected
+  parameters: []
+  comment: '# * Determine if the original response is a view.
+
+    # *
+
+    # * @return bool'
+- name: assertValid
+  visibility: public
+  parameters:
+  - name: keys
+    default: 'null'
+  - name: errorBag
+    default: '''default'''
+  - name: responseKey
+    default: '''errors'''
+  comment: '# * Assert that the given keys do not have validation errors.
+
+    # *
+
+    # * @param  string|array|null  $keys
+
+    # * @param  string  $errorBag
+
+    # * @param  string  $responseKey
+
+    # * @return $this'
+- name: assertInvalid
+  visibility: public
+  parameters:
+  - name: errors
+    default: 'null'
+  - name: errorBag
+    default: '''default'''
+  - name: responseKey
+    default: '''errors'''
+  comment: '# * Assert that the response has the given validation errors.
+
+    # *
+
+    # * @param  string|array|null  $errors
+
+    # * @param  string  $errorBag
+
+    # * @param  string  $responseKey
+
+    # * @return $this'
+- name: assertSessionHas
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: 'null'
+  comment: '# * Assert that the session has a given value.
+
+    # *
+
+    # * @param  string|array  $key
+
+    # * @param  mixed  $value
+
+    # * @return $this'
+- name: assertSessionHasAll
+  visibility: public
+  parameters:
+  - name: bindings
+  comment: '# * Assert that the session has a given list of values.
+
+    # *
+
+    # * @param  array  $bindings
+
+    # * @return $this'
+- name: assertSessionHasInput
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: 'null'
+  comment: '# * Assert that the session has a given value in the flashed input array.
+
+    # *
+
+    # * @param  string|array  $key
+
+    # * @param  mixed  $value
+
+    # * @return $this'
+- name: assertSessionHasErrors
+  visibility: public
+  parameters:
+  - name: keys
+    default: '[]'
+  - name: format
+    default: 'null'
+  - name: errorBag
+    default: '''default'''
+  comment: '# * Assert that the session has the given errors.
+
+    # *
+
+    # * @param  string|array  $keys
+
+    # * @param  mixed  $format
+
+    # * @param  string  $errorBag
+
+    # * @return $this'
+- name: assertSessionDoesntHaveErrors
+  visibility: public
+  parameters:
+  - name: keys
+    default: '[]'
+  - name: format
+    default: 'null'
+  - name: errorBag
+    default: '''default'''
+  comment: '# * Assert that the session is missing the given errors.
+
+    # *
+
+    # * @param  string|array  $keys
+
+    # * @param  string|null  $format
+
+    # * @param  string  $errorBag
+
+    # * @return $this'
+- name: assertSessionHasNoErrors
+  visibility: public
+  parameters: []
+  comment: '# * Assert that the session has no errors.
+
+    # *
+
+    # * @return $this'
+- name: assertSessionHasErrorsIn
+  visibility: public
+  parameters:
+  - name: errorBag
+  - name: keys
+    default: '[]'
+  - name: format
+    default: 'null'
+  comment: '# * Assert that the session has the given errors.
+
+    # *
+
+    # * @param  string  $errorBag
+
+    # * @param  string|array  $keys
+
+    # * @param  mixed  $format
+
+    # * @return $this'
+- name: assertSessionMissing
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Assert that the session does not have a given key.
+
+    # *
+
+    # * @param  string|array  $key
+
+    # * @return $this'
+- name: session
+  visibility: protected
+  parameters: []
+  comment: '# * Get the current session store.
+
+    # *
+
+    # * @return \Illuminate\Session\Store'
+- name: ddHeaders
+  visibility: public
+  parameters: []
+  comment: '# * Dump the headers from the response and end the script.
+
+    # *
+
+    # * @return never'
+- name: ddSession
+  visibility: public
+  parameters:
+  - name: keys
+    default: '[]'
+  comment: '# * Dump the session from the response and end the script.
+
+    # *
+
+    # * @param  string|array  $keys
+
+    # * @return never'
+- name: dump
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  comment: '# * Dump the content from the response.
+
+    # *
+
+    # * @param  string|null  $key
+
+    # * @return $this'
+- name: dumpHeaders
+  visibility: public
+  parameters: []
+  comment: '# * Dump the headers from the response.
+
+    # *
+
+    # * @return $this'
+- name: dumpSession
+  visibility: public
+  parameters:
+  - name: keys
+    default: '[]'
+  comment: '# * Dump the session from the response.
+
+    # *
+
+    # * @param  string|array  $keys
+
+    # * @return $this'
+- name: streamedContent
+  visibility: public
+  parameters: []
+  comment: '# * Get the streamed content from the response.
+
+    # *
+
+    # * @return string'
+- name: withExceptions
+  visibility: public
+  parameters:
+  - name: exceptions
+  comment: '# * Set the previous exceptions on the response.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection  $exceptions
+
+    # * @return $this'
+- name: __get
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Dynamically access base response parameters.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed'
+- name: __isset
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Proxy isset() checks to the underlying base response.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: offsetExists
+  visibility: public
+  parameters:
+  - name: offset
+  comment: '# * Determine if the given offset exists.
+
+    # *
+
+    # * @param  string  $offset
+
+    # * @return bool'
+- name: offsetGet
+  visibility: public
+  parameters:
+  - name: offset
+  comment: '# * Get the value for a given offset.
+
+    # *
+
+    # * @param  string  $offset
+
+    # * @return mixed'
+- name: offsetSet
+  visibility: public
+  parameters:
+  - name: offset
+  - name: value
+  comment: '# * Set the value at the given offset.
+
+    # *
+
+    # * @param  string  $offset
+
+    # * @param  mixed  $value
+
+    # * @return void
+
+    # *
+
+    # * @throws \LogicException'
+- name: offsetUnset
+  visibility: public
+  parameters:
+  - name: offset
+  comment: '# * Unset the value at the given offset.
+
+    # *
+
+    # * @param  string  $offset
+
+    # * @return void
+
+    # *
+
+    # * @throws \LogicException'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: args
+  comment: '# * Handle dynamic calls into macros or pass missing methods to the base
+    response.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $args
+
+    # * @return mixed'
+traits:
+- ArrayAccess
+- Closure
+- Illuminate\Contracts\Support\MessageBag
+- Illuminate\Contracts\View\View
+- Illuminate\Cookie\CookieValuePrefix
+- Illuminate\Database\Eloquent\Model
+- Illuminate\Http\Request
+- Illuminate\Support\Arr
+- Illuminate\Support\Carbon
+- Illuminate\Support\Collection
+- Illuminate\Support\Str
+- Illuminate\Support\Traits\Conditionable
+- Illuminate\Support\Traits\Dumpable
+- Illuminate\Support\Traits\Macroable
+- Illuminate\Support\Traits\Tappable
+- Illuminate\Support\ViewErrorBag
+- Illuminate\Testing\Constraints\SeeInOrder
+- Illuminate\Testing\Fluent\AssertableJson
+- LogicException
+- Symfony\Component\HttpFoundation\Cookie
+- Symfony\Component\HttpFoundation\StreamedJsonResponse
+- Symfony\Component\HttpFoundation\StreamedResponse
+interfaces:
+- ArrayAccess

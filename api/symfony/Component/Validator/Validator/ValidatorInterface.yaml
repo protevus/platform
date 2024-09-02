@@ -1,0 +1,154 @@
+name: ValidatorInterface
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: GroupSequence
+  type: class
+  source: Symfony\Component\Validator\Constraints\GroupSequence
+- name: ConstraintViolationListInterface
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolationListInterface
+- name: ExecutionContextInterface
+  type: class
+  source: Symfony\Component\Validator\Context\ExecutionContextInterface
+- name: MetadataFactoryInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface
+properties: []
+methods:
+- name: validate
+  visibility: public
+  parameters:
+  - name: value
+  - name: constraints
+    default: 'null'
+  - name: groups
+    default: 'null'
+  comment: '# * Validates PHP values against constraints.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # interface ValidatorInterface extends MetadataFactoryInterface
+
+    # {
+
+    # /**
+
+    # * Validates a value against a constraint or a list of constraints.
+
+    # *
+
+    # * If no constraint is passed, the constraint
+
+    # * {@link \Symfony\Component\Validator\Constraints\Valid} is assumed.
+
+    # *
+
+    # * @param Constraint|Constraint[]                               $constraints
+    The constraint(s) to validate against
+
+    # * @param string|GroupSequence|array<string|GroupSequence>|null $groups      The
+    validation groups to validate. If none is given, "Default" is assumed
+
+    # *
+
+    # * @return ConstraintViolationListInterface A list of constraint violations
+
+    # *                                          If the list is empty, validation
+
+    # *                                          succeeded'
+- name: validateProperty
+  visibility: public
+  parameters:
+  - name: object
+  - name: propertyName
+  - name: groups
+    default: 'null'
+  comment: '# * Validates a property of an object against the constraints specified
+
+    # * for this property.
+
+    # *
+
+    # * @param string                                                $propertyName
+    The name of the validated property
+
+    # * @param string|GroupSequence|array<string|GroupSequence>|null $groups       The
+    validation groups to validate. If none is given, "Default" is assumed
+
+    # *
+
+    # * @return ConstraintViolationListInterface A list of constraint violations
+
+    # *                                          If the list is empty, validation
+
+    # *                                          succeeded'
+- name: validatePropertyValue
+  visibility: public
+  parameters:
+  - name: objectOrClass
+  - name: propertyName
+  - name: value
+  - name: groups
+    default: 'null'
+  comment: '# * Validates a value against the constraints specified for an object''s
+
+    # * property.
+
+    # *
+
+    # * @param object|string                                         $objectOrClass
+    The object or its class name
+
+    # * @param string                                                $propertyName  The
+    name of the property
+
+    # * @param mixed                                                 $value         The
+    value to validate against the property''s constraints
+
+    # * @param string|GroupSequence|array<string|GroupSequence>|null $groups        The
+    validation groups to validate. If none is given, "Default" is assumed
+
+    # *
+
+    # * @return ConstraintViolationListInterface A list of constraint violations
+
+    # *                                          If the list is empty, validation
+
+    # *                                          succeeded'
+- name: startContext
+  visibility: public
+  parameters: []
+  comment: '# * Starts a new validation context and returns a validator for that context.
+
+    # *
+
+    # * The returned validator collects all violations generated within its
+
+    # * context. You can access these violations with the
+
+    # * {@link ContextualValidatorInterface::getViolations()} method.'
+- name: inContext
+  visibility: public
+  parameters:
+  - name: context
+  comment: '# * Returns a validator in the given execution context.
+
+    # *
+
+    # * The returned validator adds all generated violations to the given
+
+    # * context.'
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Constraints\GroupSequence
+- Symfony\Component\Validator\ConstraintViolationListInterface
+- Symfony\Component\Validator\Context\ExecutionContextInterface
+- Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface
+interfaces: []

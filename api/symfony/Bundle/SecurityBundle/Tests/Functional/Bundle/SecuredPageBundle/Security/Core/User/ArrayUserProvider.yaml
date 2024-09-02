@@ -1,0 +1,68 @@
+name: ArrayUserProvider
+class_comment: null
+dependencies:
+- name: UserWithoutEquatable
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Tests\Functional\UserWithoutEquatable
+- name: UnsupportedUserException
+  type: class
+  source: Symfony\Component\Security\Core\Exception\UnsupportedUserException
+- name: UserNotFoundException
+  type: class
+  source: Symfony\Component\Security\Core\Exception\UserNotFoundException
+- name: InMemoryUser
+  type: class
+  source: Symfony\Component\Security\Core\User\InMemoryUser
+- name: UserInterface
+  type: class
+  source: Symfony\Component\Security\Core\User\UserInterface
+- name: UserProviderInterface
+  type: class
+  source: Symfony\Component\Security\Core\User\UserProviderInterface
+properties: []
+methods:
+- name: addUser
+  visibility: public
+  parameters:
+  - name: user
+  comment: null
+- name: setUser
+  visibility: public
+  parameters:
+  - name: username
+  - name: user
+  comment: null
+- name: getUser
+  visibility: public
+  parameters:
+  - name: username
+  comment: null
+- name: loadUserByUsername
+  visibility: public
+  parameters:
+  - name: username
+  comment: null
+- name: loadUserByIdentifier
+  visibility: public
+  parameters:
+  - name: identifier
+  comment: null
+- name: refreshUser
+  visibility: public
+  parameters:
+  - name: user
+  comment: null
+- name: supportsClass
+  visibility: public
+  parameters:
+  - name: class
+  comment: null
+traits:
+- Symfony\Bundle\SecurityBundle\Tests\Functional\UserWithoutEquatable
+- Symfony\Component\Security\Core\Exception\UnsupportedUserException
+- Symfony\Component\Security\Core\Exception\UserNotFoundException
+- Symfony\Component\Security\Core\User\InMemoryUser
+- Symfony\Component\Security\Core\User\UserInterface
+- Symfony\Component\Security\Core\User\UserProviderInterface
+interfaces:
+- UserProviderInterface

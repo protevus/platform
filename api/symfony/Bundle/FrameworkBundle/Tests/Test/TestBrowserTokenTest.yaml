@@ -1,0 +1,19 @@
+name: TestBrowserTokenTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: TestBrowserToken
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Test\TestBrowserToken
+properties: []
+methods:
+- name: testCanBeSerializedAndUnserialized
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\FrameworkBundle\Test\TestBrowserToken
+interfaces: []

@@ -1,0 +1,48 @@
+name: GeneratorConfig
+class_comment: '# * Stores contextual information for resource bundle generation.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: BundleWriterInterface
+  type: class
+  source: Symfony\Component\Intl\Data\Bundle\Writer\BundleWriterInterface
+properties: []
+methods:
+- name: addBundleWriter
+  visibility: public
+  parameters:
+  - name: targetDir
+  - name: writer
+  comment: "# * Stores contextual information for resource bundle generation.\n# *\n\
+    # * @author Bernhard Schussek <bschussek@gmail.com>\n# *\n# * @internal\n# */\n\
+    # class GeneratorConfig\n# {\n# /**\n# * @var BundleWriterInterface[]\n# */\n\
+    # private array $bundleWriters = [];\n# \n# public function __construct(\n# private\
+    \ string $sourceDir,\n# private string $icuVersion,\n# ) {\n# }\n# \n# /**\n#\
+    \ * Adds a writer to be used during the data conversion."
+- name: getBundleWriters
+  visibility: public
+  parameters: []
+  comment: '# * Returns the writers indexed by their output directories.
+
+    # *
+
+    # * @return BundleWriterInterface[]'
+- name: getSourceDir
+  visibility: public
+  parameters: []
+  comment: '# * Returns the directory where the source versions of the resource bundles
+
+    # * are stored.'
+- name: getIcuVersion
+  visibility: public
+  parameters: []
+  comment: '# * Returns the ICU version of the bundles being converted.'
+traits:
+- Symfony\Component\Intl\Data\Bundle\Writer\BundleWriterInterface
+interfaces: []

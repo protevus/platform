@@ -1,0 +1,32 @@
+name: TraceableMessageBus
+class_comment: '# * @author Samuel Roze <samuel.roze@gmail.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: decoratedBus
+  comment: null
+- name: dispatch
+  visibility: public
+  parameters:
+  - name: message
+  - name: stamps
+    default: '[]'
+  comment: null
+- name: getDispatchedMessages
+  visibility: public
+  parameters: []
+  comment: null
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCaller
+  visibility: private
+  parameters: []
+  comment: null
+traits: []
+interfaces:
+- MessageBusInterface

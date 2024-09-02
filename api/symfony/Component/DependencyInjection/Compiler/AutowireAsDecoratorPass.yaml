@@ -1,0 +1,36 @@
+name: AutowireAsDecoratorPass
+class_comment: null
+dependencies:
+- name: AsDecorator
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\AsDecorator
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: accept
+  visibility: private
+  parameters:
+  - name: definition
+  comment: null
+- name: processClass
+  visibility: private
+  parameters:
+  - name: definition
+  - name: reflectionClass
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Attribute\AsDecorator
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+interfaces:
+- CompilerPassInterface

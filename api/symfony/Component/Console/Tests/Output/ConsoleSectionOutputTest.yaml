@@ -1,0 +1,110 @@
+name: ConsoleSectionOutputTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: OutputFormatter
+  type: class
+  source: Symfony\Component\Console\Formatter\OutputFormatter
+- name: QuestionHelper
+  type: class
+  source: Symfony\Component\Console\Helper\QuestionHelper
+- name: StreamableInputInterface
+  type: class
+  source: Symfony\Component\Console\Input\StreamableInputInterface
+- name: ConsoleSectionOutput
+  type: class
+  source: Symfony\Component\Console\Output\ConsoleSectionOutput
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: StreamOutput
+  type: class
+  source: Symfony\Component\Console\Output\StreamOutput
+- name: Question
+  type: class
+  source: Symfony\Component\Console\Question\Question
+properties:
+- name: stream
+  visibility: private
+  comment: '# @var resource'
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testClearAll
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClearNumberOfLines
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClearNumberOfLinesWithMultipleSections
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClearPreservingEmptyLines
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOverwrite
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMaxHeight
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMaxHeightMultipleSections
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMaxHeightWithoutNewLine
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOverwriteMultipleLines
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddingMultipleSections
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMultipleSectionsOutput
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMultipleSectionsOutputWithoutNewline
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClearAfterOverwriteClearsCorrectNumberOfLines
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClearSectionContainingQuestion
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWriteWithoutNewLine
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Formatter\OutputFormatter
+- Symfony\Component\Console\Helper\QuestionHelper
+- Symfony\Component\Console\Input\StreamableInputInterface
+- Symfony\Component\Console\Output\ConsoleSectionOutput
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Output\StreamOutput
+- Symfony\Component\Console\Question\Question
+interfaces: []

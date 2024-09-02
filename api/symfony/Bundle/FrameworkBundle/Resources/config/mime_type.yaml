@@ -1,0 +1,19 @@
+name: mime_type
+class_comment: null
+dependencies:
+- name: MimeTypeGuesserInterface
+  type: class
+  source: Symfony\Component\Mime\MimeTypeGuesserInterface
+- name: MimeTypes
+  type: class
+  source: Symfony\Component\Mime\MimeTypes
+- name: MimeTypesInterface
+  type: class
+  source: Symfony\Component\Mime\MimeTypesInterface
+properties: []
+methods: []
+traits:
+- Symfony\Component\Mime\MimeTypeGuesserInterface
+- Symfony\Component\Mime\MimeTypes
+- Symfony\Component\Mime\MimeTypesInterface
+interfaces: []

@@ -1,0 +1,100 @@
+name: ImportMapConfigReaderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ExpectUserDeprecationMessageTrait
+  type: class
+  source: Symfony\Bridge\PhpUnit\ExpectUserDeprecationMessageTrait
+- name: ImportMapConfigReader
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapConfigReader
+- name: ImportMapEntries
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapEntries
+- name: ImportMapEntry
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapEntry
+- name: ImportMapType
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapType
+- name: RemotePackageStorage
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\RemotePackageStorage
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: ExpectUserDeprecationMessageTrait
+  type: class
+  source: ExpectUserDeprecationMessageTrait
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testGetEntriesAndWriteEntries
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConvertPathToFilesystemPath
+  visibility: public
+  parameters:
+  - name: path
+  - name: expectedPath
+  comment: "# @var ImportMapEntry[] $allEntries */\n# $allEntries = iterator_to_array($entries);\n\
+    # $this->assertCount(5, $allEntries);\n# \n# $remotePackageEntry = $allEntries[0];\n\
+    # $this->assertSame('remote_package', $remotePackageEntry->importName);\n# $this->assertSame('/path/to/vendor/remote_package.js',\
+    \ $remotePackageEntry->path);\n# $this->assertSame('3.2.1', $remotePackageEntry->version);\n\
+    # $this->assertSame('js', $remotePackageEntry->type->value);\n# $this->assertFalse($remotePackageEntry->isEntrypoint);\n\
+    # $this->assertSame('remote_package', $remotePackageEntry->packageModuleSpecifier);\n\
+    # \n# $localPackageEntry = $allEntries[1];\n# $this->assertFalse($localPackageEntry->isRemotePackage());\n\
+    # $this->assertSame('app.js', $localPackageEntry->path);\n# \n# $typeCssEntry\
+    \ = $allEntries[2];\n# $this->assertSame('css', $typeCssEntry->type->value);\n\
+    # \n# $packageWithFileEntry = $allEntries[4];\n# $this->assertSame('package/with_file.js',\
+    \ $packageWithFileEntry->packageModuleSpecifier);\n# \n# // now save the original\
+    \ raw data from importmap.php and delete the file\n# $originalImportMapData =\
+    \ (static fn () => eval('?>'.file_get_contents(__DIR__.'/../Fixtures/importmap_config_reader/importmap.php')))();\n\
+    # unlink(__DIR__.'/../Fixtures/importmap_config_reader/importmap.php');\n# //\
+    \ dump the entries back to the file\n# $reader->writeEntries($entries);\n# $newImportMapData\
+    \ = (static fn () => eval('?>'.file_get_contents(__DIR__.'/../Fixtures/importmap_config_reader/importmap.php')))();\n\
+    # \n# $this->assertSame($originalImportMapData, $newImportMapData);\n# }\n# \n\
+    # /**\n# * @dataProvider getPathToFilesystemPathTests"
+- name: getPathToFilesystemPathTests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConvertFilesystemPathToPath
+  visibility: public
+  parameters:
+  - name: path
+  - name: expectedPath
+  comment: '# * @dataProvider getFilesystemPathToPathTests'
+- name: getFilesystemPathToPathTests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindRootImportMapEntry
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDeprecatedMethodTriggerDeprecation
+  visibility: public
+  parameters: []
+  comment: '# * @group legacy'
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bridge\PhpUnit\ExpectUserDeprecationMessageTrait
+- Symfony\Component\AssetMapper\ImportMap\ImportMapConfigReader
+- Symfony\Component\AssetMapper\ImportMap\ImportMapEntries
+- Symfony\Component\AssetMapper\ImportMap\ImportMapEntry
+- Symfony\Component\AssetMapper\ImportMap\ImportMapType
+- Symfony\Component\AssetMapper\ImportMap\RemotePackageStorage
+- Symfony\Component\Filesystem\Filesystem
+- ExpectUserDeprecationMessageTrait
+interfaces: []

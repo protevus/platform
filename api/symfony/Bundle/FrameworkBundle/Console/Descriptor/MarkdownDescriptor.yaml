@@ -1,0 +1,151 @@
+name: MarkdownDescriptor
+class_comment: "# * @author Jean-Fran\xE7ois Simon <jeanfrancois.simon@sensiolabs.com>\n\
+  # *\n# * @internal"
+dependencies:
+- name: LogicException
+  type: class
+  source: Symfony\Component\Console\Exception\LogicException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Console\Exception\RuntimeException
+- name: Alias
+  type: class
+  source: Symfony\Component\DependencyInjection\Alias
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: ParameterBag
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcherInterface
+- name: Route
+  type: class
+  source: Symfony\Component\Routing\Route
+- name: RouteCollection
+  type: class
+  source: Symfony\Component\Routing\RouteCollection
+properties: []
+methods:
+- name: describeRouteCollection
+  visibility: protected
+  parameters:
+  - name: routes
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeRoute
+  visibility: protected
+  parameters:
+  - name: route
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeContainerParameters
+  visibility: protected
+  parameters:
+  - name: parameters
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeContainerTags
+  visibility: protected
+  parameters:
+  - name: container
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeContainerService
+  visibility: protected
+  parameters:
+  - name: service
+  - name: options
+    default: '[]'
+  - name: container
+    default: 'null'
+  comment: null
+- name: describeContainerDeprecations
+  visibility: protected
+  parameters:
+  - name: container
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeContainerServices
+  visibility: protected
+  parameters:
+  - name: container
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeContainerDefinition
+  visibility: protected
+  parameters:
+  - name: definition
+  - name: options
+    default: '[]'
+  - name: container
+    default: 'null'
+  comment: null
+- name: describeContainerAlias
+  visibility: protected
+  parameters:
+  - name: alias
+  - name: options
+    default: '[]'
+  - name: container
+    default: 'null'
+  comment: null
+- name: describeContainerParameter
+  visibility: protected
+  parameters:
+  - name: parameter
+  - name: deprecation
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeContainerEnvVars
+  visibility: protected
+  parameters:
+  - name: envs
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeEventDispatcherListeners
+  visibility: protected
+  parameters:
+  - name: eventDispatcher
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeCallable
+  visibility: protected
+  parameters:
+  - name: callable
+  - name: options
+    default: '[]'
+  comment: null
+- name: formatRouterConfig
+  visibility: private
+  parameters:
+  - name: array
+  comment: null
+traits:
+- Symfony\Component\Console\Exception\LogicException
+- Symfony\Component\Console\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Alias
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\EventDispatcher\EventDispatcherInterface
+- Symfony\Component\Routing\Route
+- Symfony\Component\Routing\RouteCollection
+interfaces: []

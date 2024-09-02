@@ -1,0 +1,90 @@
+name: FakeJob
+class_comment: null
+dependencies:
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+properties:
+- name: releaseDelay
+  visibility: public
+  comment: '# * The number of seconds the released job was delayed.
+
+    # *
+
+    # * @var int'
+- name: attempts
+  visibility: public
+  comment: '# * The number of attempts made to process the job.
+
+    # *
+
+    # * @var int'
+- name: failedWith
+  visibility: public
+  comment: '# * The exception the job failed with.
+
+    # *
+
+    # * @var \Throwable'
+methods:
+- name: getJobId
+  visibility: public
+  parameters: []
+  comment: "# * The number of seconds the released job was delayed.\n# *\n# * @var\
+    \ int\n# */\n# public $releaseDelay;\n# \n# /**\n# * The number of attempts made\
+    \ to process the job.\n# *\n# * @var int\n# */\n# public $attempts = 1;\n# \n\
+    # /**\n# * The exception the job failed with.\n# *\n# * @var \\Throwable\n# */\n\
+    # public $failedWith;\n# \n# /**\n# * Get the job identifier.\n# *\n# * @return\
+    \ string"
+- name: getRawBody
+  visibility: public
+  parameters: []
+  comment: '# * Get the raw body of the job.
+
+    # *
+
+    # * @return string'
+- name: release
+  visibility: public
+  parameters:
+  - name: delay
+    default: '0'
+  comment: '# * Release the job back into the queue after (n) seconds.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $delay
+
+    # * @return void'
+- name: attempts
+  visibility: public
+  parameters: []
+  comment: '# * Get the number of times the job has been attempted.
+
+    # *
+
+    # * @return int'
+- name: delete
+  visibility: public
+  parameters: []
+  comment: '# * Delete the job from the queue.
+
+    # *
+
+    # * @return void'
+- name: fail
+  visibility: public
+  parameters:
+  - name: exception
+    default: 'null'
+  comment: '# * Delete the job, call the "failed" method, and raise the failed job
+    event.
+
+    # *
+
+    # * @param  \Throwable|null  $exception
+
+    # * @return void'
+traits:
+- Illuminate\Support\Str
+interfaces: []

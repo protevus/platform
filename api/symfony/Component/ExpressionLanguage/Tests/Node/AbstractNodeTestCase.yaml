@@ -1,0 +1,51 @@
+name: AbstractNodeTestCase
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Compiler
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Compiler
+properties: []
+methods:
+- name: testEvaluate
+  visibility: public
+  parameters:
+  - name: expected
+  - name: node
+  - name: variables
+    default: '[]'
+  - name: functions
+    default: '[]'
+  comment: '# * @dataProvider getEvaluateData'
+- name: getEvaluateData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompile
+  visibility: public
+  parameters:
+  - name: expected
+  - name: node
+  - name: functions
+    default: '[]'
+  comment: '# * @dataProvider getCompileData'
+- name: getCompileData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDump
+  visibility: public
+  parameters:
+  - name: expected
+  - name: node
+  comment: '# * @dataProvider getDumpData'
+- name: getDumpData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\ExpressionLanguage\Compiler
+interfaces: []

@@ -1,0 +1,71 @@
+name: Authorizable
+class_comment: null
+dependencies:
+- name: Gate
+  type: class
+  source: Illuminate\Contracts\Auth\Access\Gate
+properties: []
+methods:
+- name: can
+  visibility: public
+  parameters:
+  - name: abilities
+  - name: arguments
+    default: '[]'
+  comment: '# * Determine if the entity has the given abilities.
+
+    # *
+
+    # * @param  iterable|string  $abilities
+
+    # * @param  array|mixed  $arguments
+
+    # * @return bool'
+- name: canAny
+  visibility: public
+  parameters:
+  - name: abilities
+  - name: arguments
+    default: '[]'
+  comment: '# * Determine if the entity has any of the given abilities.
+
+    # *
+
+    # * @param  iterable|string  $abilities
+
+    # * @param  array|mixed  $arguments
+
+    # * @return bool'
+- name: cant
+  visibility: public
+  parameters:
+  - name: abilities
+  - name: arguments
+    default: '[]'
+  comment: '# * Determine if the entity does not have the given abilities.
+
+    # *
+
+    # * @param  iterable|string  $abilities
+
+    # * @param  array|mixed  $arguments
+
+    # * @return bool'
+- name: cannot
+  visibility: public
+  parameters:
+  - name: abilities
+  - name: arguments
+    default: '[]'
+  comment: '# * Determine if the entity does not have the given abilities.
+
+    # *
+
+    # * @param  iterable|string  $abilities
+
+    # * @param  array|mixed  $arguments
+
+    # * @return bool'
+traits:
+- Illuminate\Contracts\Auth\Access\Gate
+interfaces: []

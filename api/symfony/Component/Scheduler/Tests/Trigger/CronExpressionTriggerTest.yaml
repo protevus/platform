@@ -1,0 +1,45 @@
+name: CronExpressionTriggerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Randomizer
+  type: class
+  source: Random\Randomizer
+- name: CronExpressionTrigger
+  type: class
+  source: Symfony\Component\Scheduler\Trigger\CronExpressionTrigger
+properties: []
+methods:
+- name: testHashedExpressionParsing
+  visibility: public
+  parameters:
+  - name: input
+  - name: expected
+  comment: '# * @dataProvider hashedExpressionProvider'
+- name: hashedExpressionProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHashFieldsAreRandomizedIndependently
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromHashWithStandardExpression
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDefaultTimezone
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTimezoneIsUsed
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Random\Randomizer
+- Symfony\Component\Scheduler\Trigger\CronExpressionTrigger
+interfaces: []

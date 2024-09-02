@@ -1,0 +1,12 @@
+name: ObjectInitializerInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: initialize
+  visibility: public
+  parameters:
+  - name: object
+  comment: null
+traits: []
+interfaces: []

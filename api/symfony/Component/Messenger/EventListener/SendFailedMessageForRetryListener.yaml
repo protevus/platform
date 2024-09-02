@@ -1,0 +1,128 @@
+name: SendFailedMessageForRetryListener
+class_comment: '# * @author Tobias Schultze <http://tobion.de>'
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: EventDispatcherInterface
+  type: class
+  source: Psr\EventDispatcher\EventDispatcherInterface
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: WorkerMessageFailedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerMessageFailedEvent
+- name: WorkerMessageRetriedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerMessageRetriedEvent
+- name: HandlerFailedException
+  type: class
+  source: Symfony\Component\Messenger\Exception\HandlerFailedException
+- name: RecoverableExceptionInterface
+  type: class
+  source: Symfony\Component\Messenger\Exception\RecoverableExceptionInterface
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Messenger\Exception\RuntimeException
+- name: UnrecoverableExceptionInterface
+  type: class
+  source: Symfony\Component\Messenger\Exception\UnrecoverableExceptionInterface
+- name: RetryStrategyInterface
+  type: class
+  source: Symfony\Component\Messenger\Retry\RetryStrategyInterface
+- name: DelayStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\DelayStamp
+- name: RedeliveryStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\RedeliveryStamp
+- name: StampInterface
+  type: class
+  source: Symfony\Component\Messenger\Stamp\StampInterface
+- name: TransportMessageIdStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\TransportMessageIdStamp
+- name: SenderInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Sender\SenderInterface
+properties: []
+methods:
+- name: withLimitedHistory
+  visibility: private
+  parameters:
+  - name: envelope
+  - name: '...$stamps'
+  comment: "# * @author Tobias Schultze <http://tobion.de>\n# */\n# class SendFailedMessageForRetryListener\
+    \ implements EventSubscriberInterface\n# {\n# public function __construct(\n#\
+    \ private ContainerInterface $sendersLocator,\n# private ContainerInterface $retryStrategyLocator,\n\
+    # private ?LoggerInterface $logger = null,\n# private ?EventDispatcherInterface\
+    \ $eventDispatcher = null,\n# private int $historySize = 10,\n# ) {\n# }\n# \n\
+    # public function onMessageFailed(WorkerMessageFailedEvent $event): void\n# {\n\
+    # $retryStrategy = $this->getRetryStrategyForTransport($event->getReceiverName());\n\
+    # $envelope = $event->getEnvelope();\n# $throwable = $event->getThrowable();\n\
+    # \n# $message = $envelope->getMessage();\n# $context = [\n# 'class' => $message::class,\n\
+    # 'message_id' => $envelope->last(TransportMessageIdStamp::class)?->getId(),\n\
+    # ];\n# \n# $shouldRetry = $retryStrategy && $this->shouldRetry($throwable, $envelope,\
+    \ $retryStrategy);\n# \n# $retryCount = RedeliveryStamp::getRetryCountFromEnvelope($envelope);\n\
+    # if ($shouldRetry) {\n# $event->setForRetry();\n# \n# ++$retryCount;\n# \n# $delay\
+    \ = $retryStrategy->getWaitingTime($envelope, $throwable);\n# \n# $this->logger?->warning('Error\
+    \ thrown while handling message {class}. Sending for retry #{retryCount} using\
+    \ {delay} ms delay. Error: \"{error}\"', $context + ['retryCount' => $retryCount,\
+    \ 'delay' => $delay, 'error' => $throwable->getMessage(), 'exception' => $throwable]);\n\
+    # \n# // add the delay and retry stamp info\n# $retryEnvelope = $this->withLimitedHistory($envelope,\
+    \ new DelayStamp($delay), new RedeliveryStamp($retryCount));\n# \n# // re-send\
+    \ the message for retry\n# $retryEnvelope = $this->getSenderForTransport($event->getReceiverName())->send($retryEnvelope);\n\
+    # \n# $this->eventDispatcher?->dispatch(new WorkerMessageRetriedEvent($retryEnvelope,\
+    \ $event->getReceiverName()));\n# } else {\n# $this->logger?->critical('Error\
+    \ thrown while handling message {class}. Removing from transport after {retryCount}\
+    \ retries. Error: \"{error}\"', $context + ['retryCount' => $retryCount, 'error'\
+    \ => $throwable->getMessage(), 'exception' => $throwable]);\n# }\n# }\n# \n# /**\n\
+    # * Adds stamps to the envelope by keeping only the First + Last N stamps."
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: shouldRetry
+  visibility: private
+  parameters:
+  - name: e
+  - name: envelope
+  - name: retryStrategy
+  comment: null
+- name: getRetryStrategyForTransport
+  visibility: private
+  parameters:
+  - name: alias
+  comment: null
+- name: getSenderForTransport
+  visibility: private
+  parameters:
+  - name: alias
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Psr\EventDispatcher\EventDispatcherInterface
+- Psr\Log\LoggerInterface
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Event\WorkerMessageFailedEvent
+- Symfony\Component\Messenger\Event\WorkerMessageRetriedEvent
+- Symfony\Component\Messenger\Exception\HandlerFailedException
+- Symfony\Component\Messenger\Exception\RecoverableExceptionInterface
+- Symfony\Component\Messenger\Exception\RuntimeException
+- Symfony\Component\Messenger\Exception\UnrecoverableExceptionInterface
+- Symfony\Component\Messenger\Retry\RetryStrategyInterface
+- Symfony\Component\Messenger\Stamp\DelayStamp
+- Symfony\Component\Messenger\Stamp\RedeliveryStamp
+- Symfony\Component\Messenger\Stamp\StampInterface
+- Symfony\Component\Messenger\Stamp\TransportMessageIdStamp
+- Symfony\Component\Messenger\Transport\Sender\SenderInterface
+interfaces:
+- EventSubscriberInterface

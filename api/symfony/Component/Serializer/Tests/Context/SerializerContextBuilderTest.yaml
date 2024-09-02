@@ -1,0 +1,36 @@
+name: SerializerContextBuilderTest
+class_comment: '# * @author Mathias Arlaud <mathias.arlaud@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: SerializerContextBuilder
+  type: class
+  source: Symfony\Component\Serializer\Context\SerializerContextBuilder
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- name: Serializer
+  type: class
+  source: Symfony\Component\Serializer\Serializer
+properties: []
+methods:
+- name: testWithers
+  visibility: public
+  parameters:
+  - name: values
+  comment: "# * @author Mathias Arlaud <mathias.arlaud@gmail.com>\n# */\n# class SerializerContextBuilderTest\
+    \ extends TestCase\n# {\n# private SerializerContextBuilder $contextBuilder;\n\
+    # \n# protected function setUp(): void\n# {\n# $this->contextBuilder = new SerializerContextBuilder();\n\
+    # }\n# \n# /**\n# * @dataProvider withersDataProvider\n# *\n# * @param array<string,\
+    \ mixed> $values"
+- name: withersDataProvider
+  visibility: public
+  parameters: []
+  comment: '# * @return iterable<array{0: array<string, mixed>}>'
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Context\SerializerContextBuilder
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- Symfony\Component\Serializer\Serializer
+interfaces: []

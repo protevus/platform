@@ -1,0 +1,27 @@
+name: BrevoRequestParserTest
+class_comment: null
+dependencies:
+- name: BrevoPayloadConverter
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Brevo\RemoteEvent\BrevoPayloadConverter
+- name: BrevoRequestParser
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Brevo\Webhook\BrevoRequestParser
+- name: RequestParserInterface
+  type: class
+  source: Symfony\Component\Webhook\Client\RequestParserInterface
+- name: AbstractRequestParserTestCase
+  type: class
+  source: Symfony\Component\Webhook\Test\AbstractRequestParserTestCase
+properties: []
+methods:
+- name: createRequestParser
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Mailer\Bridge\Brevo\RemoteEvent\BrevoPayloadConverter
+- Symfony\Component\Mailer\Bridge\Brevo\Webhook\BrevoRequestParser
+- Symfony\Component\Webhook\Client\RequestParserInterface
+- Symfony\Component\Webhook\Test\AbstractRequestParserTestCase
+interfaces: []

@@ -1,0 +1,27 @@
+name: form_debug
+class_comment: null
+dependencies:
+- name: FormDataCollector
+  type: class
+  source: Symfony\Component\Form\Extension\DataCollector\FormDataCollector
+- name: FormDataExtractor
+  type: class
+  source: Symfony\Component\Form\Extension\DataCollector\FormDataExtractor
+- name: ResolvedTypeFactoryDataCollectorProxy
+  type: class
+  source: Symfony\Component\Form\Extension\DataCollector\Proxy\ResolvedTypeFactoryDataCollectorProxy
+- name: DataCollectorTypeExtension
+  type: class
+  source: Symfony\Component\Form\Extension\DataCollector\Type\DataCollectorTypeExtension
+- name: ResolvedFormTypeFactory
+  type: class
+  source: Symfony\Component\Form\ResolvedFormTypeFactory
+properties: []
+methods: []
+traits:
+- Symfony\Component\Form\Extension\DataCollector\FormDataCollector
+- Symfony\Component\Form\Extension\DataCollector\FormDataExtractor
+- Symfony\Component\Form\Extension\DataCollector\Proxy\ResolvedTypeFactoryDataCollectorProxy
+- Symfony\Component\Form\Extension\DataCollector\Type\DataCollectorTypeExtension
+- Symfony\Component\Form\ResolvedFormTypeFactory
+interfaces: []

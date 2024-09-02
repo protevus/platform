@@ -1,0 +1,101 @@
+name: ConsoleSectionOutput
+class_comment: "# * @author Pierre du Plessis <pdples@gmail.com>\n# * @author Gabriel\
+  \ Ostroluck\xFD <gabriel.ostrolucky@gmail.com>"
+dependencies:
+- name: OutputFormatterInterface
+  type: class
+  source: Symfony\Component\Console\Formatter\OutputFormatterInterface
+- name: Helper
+  type: class
+  source: Symfony\Component\Console\Helper\Helper
+- name: Terminal
+  type: class
+  source: Symfony\Component\Console\Terminal
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: stream
+  - name: '&$sections'
+  - name: verbosity
+  - name: decorated
+  - name: formatter
+  comment: "# * @author Pierre du Plessis <pdples@gmail.com>\n# * @author Gabriel\
+    \ Ostroluck\xFD <gabriel.ostrolucky@gmail.com>\n# */\n# class ConsoleSectionOutput\
+    \ extends StreamOutput\n# {\n# private array $content = [];\n# private int $lines\
+    \ = 0;\n# private array $sections;\n# private Terminal $terminal;\n# private int\
+    \ $maxHeight = 0;\n# \n# /**\n# * @param resource               $stream\n# * @param\
+    \ ConsoleSectionOutput[] $sections"
+- name: setMaxHeight
+  visibility: public
+  parameters:
+  - name: maxHeight
+  comment: '# * Defines a maximum number of lines for this section.
+
+    # *
+
+    # * When more lines are added, the section will automatically scroll to the
+
+    # * end (i.e. remove the first lines to comply with the max height).'
+- name: clear
+  visibility: public
+  parameters:
+  - name: lines
+    default: 'null'
+  comment: '# * Clears previous output for this section.
+
+    # *
+
+    # * @param int $lines Number of lines to clear. If null, then the entire output
+    of this section is cleared'
+- name: overwrite
+  visibility: public
+  parameters:
+  - name: message
+  comment: '# * Overwrites the previous output with a new message.'
+- name: getContent
+  visibility: public
+  parameters: []
+  comment: null
+- name: getVisibleContent
+  visibility: public
+  parameters: []
+  comment: null
+- name: addContent
+  visibility: public
+  parameters:
+  - name: input
+  - name: newline
+    default: 'true'
+  comment: '# * @internal'
+- name: addNewLineOfInputSubmit
+  visibility: public
+  parameters: []
+  comment: '# * @internal'
+- name: doWrite
+  visibility: protected
+  parameters:
+  - name: message
+  - name: newline
+  comment: null
+- name: popStreamContentUntilCurrentSection
+  visibility: private
+  parameters:
+  - name: numberOfLinesToClearFromCurrentSection
+    default: '0'
+  comment: '# * At initial stage, cursor is at the end of stream output. This method
+    makes cursor crawl upwards until it hits
+
+    # * current section. Then it erases content it crawled through. Optionally, it
+    erases part of current section too.'
+- name: getDisplayLength
+  visibility: private
+  parameters:
+  - name: text
+  comment: null
+traits:
+- Symfony\Component\Console\Formatter\OutputFormatterInterface
+- Symfony\Component\Console\Helper\Helper
+- Symfony\Component\Console\Terminal
+interfaces: []

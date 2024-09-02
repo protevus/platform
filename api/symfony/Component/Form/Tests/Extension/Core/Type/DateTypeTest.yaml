@@ -1,0 +1,360 @@
+name: DateTypeTest
+class_comment: null
+dependencies:
+- name: ChoiceView
+  type: class
+  source: Symfony\Component\Form\ChoiceList\View\ChoiceView
+- name: LogicException
+  type: class
+  source: Symfony\Component\Form\Exception\LogicException
+- name: FormError
+  type: class
+  source: Symfony\Component\Form\FormError
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+- name: Intl
+  type: class
+  source: Symfony\Component\Intl\Intl
+- name: IntlTestHelper
+  type: class
+  source: Symfony\Component\Intl\Util\IntlTestHelper
+- name: InvalidOptionsException
+  type: class
+  source: Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testInvalidWidgetOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidInputOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitFromSingleTextDateTimeWithDefaultFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitFromSingleTextDateTimeWithCustomFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitFromSingleTextDateTime
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitFromSingleTextDateTimeImmutable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitFromSingleTextString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitFromSingleTextTimestamp
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitFromSingleTextRaw
+  visibility: public
+  parameters: []
+  comment: null
+- name: testArrayDateWithReferenceDoesUseReferenceTimeOnZero
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitFromText
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitFromChoice
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitFromChoiceEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitFromInputDateTimeDifferentPattern
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitFromInputStringDifferentPattern
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitFromInputTimestampDifferentPattern
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitFromInputRawDifferentPattern
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDatePatternWithFormatOption
+  visibility: public
+  parameters:
+  - name: format
+  - name: pattern
+  comment: '# * @dataProvider provideDateFormats'
+- name: provideDateFormats
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowExceptionIfFormatIsNoPattern
+  visibility: public
+  parameters: []
+  comment: '# * This test is to check that the strings ''0'', ''1'', ''2'', ''3''
+    are not accepted
+
+    # * as valid IntlDateFormatter constants for FULL, LONG, MEDIUM or SHORT respectively.'
+- name: testThrowExceptionIfFormatDoesNotContainYearMonthAndDay
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowExceptionIfFormatMissesYearMonthAndDayWithSingleTextWidget
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowExceptionIfFormatIsNoConstant
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowExceptionIfFormatIsInvalid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowExceptionIfYearsIsInvalid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowExceptionIfMonthsIsInvalid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowExceptionIfDaysIsInvalid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetDataWithNegativeTimezoneOffsetStringInput
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetDataWithNegativeTimezoneOffsetDateTimeInput
+  visibility: public
+  parameters: []
+  comment: null
+- name: testYearsOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMonthsOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMonthsOptionShortFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMonthsOptionLongFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMonthsOptionLongFormatWithDifferentTimezone
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsDayWithinRangeReturnsTrueIfWithin
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsSynchronizedReturnsTrueIfChoiceAndCompletelyEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsSynchronizedReturnsTrueIfChoiceAndCompletelyFilled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsSynchronizedReturnsFalseIfChoiceAndDayEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassDatePatternToView
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassDatePatternToViewDifferentFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassDatePatternToViewDifferentPattern
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassDatePatternToViewDifferentPatternWithSeparators
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDontPassDatePatternIfText
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDatePatternFormatWithQuotedStrings
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassWidgetToView
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInitializeWithDateTime
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSingleTextWidgetShouldUseTheRightInputType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassDefaultPlaceholderToViewIfNotRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassNoPlaceholderToViewIfRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassPlaceholderAsString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassPlaceholderAsArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassPlaceholderAsPartialArrayAddEmptyIfNotRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassPlaceholderAsPartialArrayAddNullIfRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassHtml5TypeIfSingleTextAndHtml5Format
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDontPassHtml5TypeIfHtml5NotAllowed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDontPassHtml5TypeIfNotHtml5Format
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDontPassHtml5TypeIfNotSingleText
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideCompoundWidgets
+  visibility: public
+  parameters: []
+  comment: null
+- name: testYearErrorsBubbleUp
+  visibility: public
+  parameters:
+  - name: widget
+  comment: '# * @dataProvider provideCompoundWidgets'
+- name: testMonthErrorsBubbleUp
+  visibility: public
+  parameters:
+  - name: widget
+  comment: '# * @dataProvider provideCompoundWidgets'
+- name: testDayErrorsBubbleUp
+  visibility: public
+  parameters:
+  - name: widget
+  comment: '# * @dataProvider provideCompoundWidgets'
+- name: testYears
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassDefaultChoiceTranslationDomain
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassChoiceTranslationDomainAsString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassChoiceTranslationDomainAsArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNull
+  visibility: public
+  parameters:
+  - name: expected
+    default: 'null'
+  - name: norm
+    default: 'null'
+  - name: view
+    default: 'null'
+  comment: null
+- name: testSubmitNullWithSingleText
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNullUsesDefaultEmptyData
+  visibility: public
+  parameters:
+  - name: emptyData
+    default: '[]'
+  - name: expectedData
+    default: 'null'
+  comment: null
+- name: testSubmitNullUsesDateEmptyData
+  visibility: public
+  parameters:
+  - name: widget
+  - name: emptyData
+  - name: expectedData
+  comment: '# * @dataProvider provideEmptyData'
+- name: provideEmptyData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitStringWithCustomInputFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDateTimeInputTimezoneNotMatchingModelTimezone
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDateTimeImmutableInputTimezoneNotMatchingModelTimezone
+  visibility: public
+  parameters: []
+  comment: null
+- name: getTestOptions
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\ChoiceList\View\ChoiceView
+- Symfony\Component\Form\Exception\LogicException
+- Symfony\Component\Form\FormError
+- Symfony\Component\Form\FormInterface
+- Symfony\Component\Intl\Intl
+- Symfony\Component\Intl\Util\IntlTestHelper
+- Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+interfaces: []

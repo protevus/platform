@@ -1,0 +1,82 @@
+name: RegexTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Regex
+  type: class
+  source: Symfony\Component\Validator\Constraints\Regex
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Validator\Exception\InvalidArgumentException
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+- name: AttributeLoader
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\AttributeLoader
+properties:
+- name: a
+  visibility: private
+  comment: null
+- name: b
+  visibility: private
+  comment: null
+- name: c
+  visibility: private
+  comment: null
+methods:
+- name: testGetHtmlPattern
+  visibility: public
+  parameters:
+  - name: pattern
+  - name: htmlPattern
+  - name: match
+    default: 'true'
+  comment: "# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# class RegexTest\
+    \ extends TestCase\n# {\n# public function testConstraintGetDefaultOption()\n\
+    # {\n# $constraint = new Regex('/^[0-9]+$/');\n# \n# $this->assertSame('/^[0-9]+$/',\
+    \ $constraint->pattern);\n# }\n# \n# public static function provideHtmlPatterns()\n\
+    # {\n# return [\n# // HTML5 wraps the pattern in ^(?:pattern)$\n# ['/^[0-9]+$/',\
+    \ '[0-9]+'],\n# ['/[0-9]+$/', '.*[0-9]+'],\n# ['/^[0-9]+/', '[0-9]+.*'],\n# ['/[0-9]+/',\
+    \ '.*[0-9]+.*'],\n# // We need a smart way to allow matching of patterns that\
+    \ contain\n# // ^ and $ at various sub-clauses of an or-clause\n# // .*(pattern).*\
+    \ seems to work correctly\n# ['/[0-9]$|[a-z]+/', '.*([0-9]$|[a-z]+).*'],\n# ['/[0-9]$|^[a-z]+/',\
+    \ '.*([0-9]$|^[a-z]+).*'],\n# ['/^[0-9]|[a-z]+$/', '.*(^[0-9]|[a-z]+$).*'],\n\
+    # // Unescape escaped delimiters\n# ['/^[0-9]+\\/$/', '[0-9]+/'],\n# ['#^[0-9]+\\\
+    #$#', '[0-9]+#'],\n# // Cannot be converted\n# ['/^[0-9]+$/i', null],\n# \n# //\
+    \ Inverse matches are simple, just wrap in\n# // ((?!pattern).)*\n# ['/^[0-9]+$/',\
+    \ '((?!^[0-9]+$).)*', false],\n# ['/[0-9]+$/', '((?![0-9]+$).)*', false],\n# ['/^[0-9]+/',\
+    \ '((?!^[0-9]+).)*', false],\n# ['/[0-9]+/', '((?![0-9]+).)*', false],\n# ['/[0-9]$|[a-z]+/',\
+    \ '((?![0-9]$|[a-z]+).)*', false],\n# ['/[0-9]$|^[a-z]+/', '((?![0-9]$|^[a-z]+).)*',\
+    \ false],\n# ['/^[0-9]|[a-z]+$/', '((?!^[0-9]|[a-z]+$).)*', false],\n# ['/^[0-9]+\\\
+    /$/', '((?!^[0-9]+/$).)*', false],\n# ['#^[0-9]+\\#$#', '((?!^[0-9]+#$).)*', false],\n\
+    # ['/^[0-9]+$/i', null, false],\n# ];\n# }\n# \n# /**\n# * @dataProvider provideHtmlPatterns"
+- name: testGetCustomHtmlPattern
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalizerCanBeSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidNormalizerThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidNormalizerObjectThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAttributes
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\Constraints\Regex
+- Symfony\Component\Validator\Exception\InvalidArgumentException
+- Symfony\Component\Validator\Mapping\ClassMetadata
+- Symfony\Component\Validator\Mapping\Loader\AttributeLoader
+interfaces: []

@@ -1,0 +1,44 @@
+name: FakeMetadataFactory
+class_comment: null
+dependencies:
+- name: NoSuchMetadataException
+  type: class
+  source: Symfony\Component\Validator\Exception\NoSuchMetadataException
+- name: MetadataFactoryInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface
+- name: MetadataInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\MetadataInterface
+properties:
+- name: metadatas
+  visibility: protected
+  comment: null
+methods:
+- name: getMetadataFor
+  visibility: public
+  parameters:
+  - name: class
+  comment: null
+- name: hasMetadataFor
+  visibility: public
+  parameters:
+  - name: class
+  comment: null
+- name: addMetadata
+  visibility: public
+  parameters:
+  - name: metadata
+  comment: null
+- name: addMetadataForValue
+  visibility: public
+  parameters:
+  - name: value
+  - name: metadata
+  comment: null
+traits:
+- Symfony\Component\Validator\Exception\NoSuchMetadataException
+- Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface
+- Symfony\Component\Validator\Mapping\MetadataInterface
+interfaces:
+- MetadataFactoryInterface

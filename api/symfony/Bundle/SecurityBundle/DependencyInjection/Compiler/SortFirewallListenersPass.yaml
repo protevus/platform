@@ -1,0 +1,58 @@
+name: SortFirewallListenersPass
+class_comment: '# * Sorts firewall listeners based on the execution order provided
+  by FirewallListenerInterface::getPriority().
+
+  # *
+
+  # * @author Christian Scheb <me@christianscheb.de>'
+dependencies:
+- name: IteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- name: CompilerPassInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: FirewallListenerInterface
+  type: class
+  source: Symfony\Component\Security\Http\Firewall\FirewallListenerInterface
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: sortFirewallContextListeners
+  visibility: private
+  parameters:
+  - name: definition
+  - name: container
+  comment: null
+- name: getListenerPriorities
+  visibility: private
+  parameters:
+  - name: listeners
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\Security\Http\Firewall\FirewallListenerInterface
+interfaces:
+- CompilerPassInterface

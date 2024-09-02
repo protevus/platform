@@ -1,0 +1,46 @@
+name: Node
+class_comment: null
+dependencies:
+- name: StringSanitizer
+  type: class
+  source: Symfony\Component\HtmlSanitizer\TextSanitizer\StringSanitizer
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: parent
+  - name: tagName
+  comment: null
+- name: getParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: getAttribute
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: setAttribute
+  visibility: public
+  parameters:
+  - name: name
+  - name: value
+  comment: null
+- name: addChild
+  visibility: public
+  parameters:
+  - name: node
+  comment: null
+- name: render
+  visibility: public
+  parameters: []
+  comment: null
+- name: renderAttributes
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HtmlSanitizer\TextSanitizer\StringSanitizer
+interfaces:
+- NodeInterface

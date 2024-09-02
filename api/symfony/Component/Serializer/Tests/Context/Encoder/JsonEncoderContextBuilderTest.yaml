@@ -1,0 +1,36 @@
+name: JsonEncoderContextBuilderTest
+class_comment: '# * @author Mathias Arlaud <mathias.arlaud@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: JsonEncoderContextBuilder
+  type: class
+  source: Symfony\Component\Serializer\Context\Encoder\JsonEncoderContextBuilder
+- name: JsonDecode
+  type: class
+  source: Symfony\Component\Serializer\Encoder\JsonDecode
+- name: JsonEncode
+  type: class
+  source: Symfony\Component\Serializer\Encoder\JsonEncode
+properties: []
+methods:
+- name: testWithers
+  visibility: public
+  parameters:
+  - name: values
+  comment: "# * @author Mathias Arlaud <mathias.arlaud@gmail.com>\n# */\n# class JsonEncoderContextBuilderTest\
+    \ extends TestCase\n# {\n# private JsonEncoderContextBuilder $contextBuilder;\n\
+    # \n# protected function setUp(): void\n# {\n# $this->contextBuilder = new JsonEncoderContextBuilder();\n\
+    # }\n# \n# /**\n# * @dataProvider withersDataProvider\n# *\n# * @param array<string,\
+    \ mixed> $values"
+- name: withersDataProvider
+  visibility: public
+  parameters: []
+  comment: '# * @return iterable<array{0: array<string, mixed>|}>'
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Context\Encoder\JsonEncoderContextBuilder
+- Symfony\Component\Serializer\Encoder\JsonDecode
+- Symfony\Component\Serializer\Encoder\JsonEncode
+interfaces: []

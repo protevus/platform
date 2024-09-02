@@ -1,0 +1,32 @@
+name: CircularReferenceTestTrait
+class_comment: null
+dependencies:
+- name: CircularReferenceException
+  type: class
+  source: Symfony\Component\Serializer\Exception\CircularReferenceException
+- name: NormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\NormalizerInterface
+properties: []
+methods:
+- name: testUnableToNormalizeCircularReference
+  visibility: public
+  parameters:
+  - name: defaultContext
+  - name: context
+  - name: expectedLimit
+  comment: "# * Test AbstractNormalizer::CIRCULAR_REFERENCE_LIMIT and AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER.\n\
+    # */\n# trait CircularReferenceTestTrait\n# {\n# abstract protected function getNormalizerForCircularReference(array\
+    \ $defaultContext): NormalizerInterface;\n# \n# abstract protected function getSelfReferencingModel();\n\
+    # \n# public static function provideUnableToNormalizeCircularReference(): array\n\
+    # {\n# return [\n# [[], [], 1],\n# [['circular_reference_limit' => 2], [], 2],\n\
+    # [['circular_reference_limit' => 2], ['circular_reference_limit' => 3], 3],\n\
+    # ];\n# }\n# \n# /**\n# * @dataProvider provideUnableToNormalizeCircularReference"
+- name: testCircularReferenceHandler
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Serializer\Exception\CircularReferenceException
+- Symfony\Component\Serializer\Normalizer\NormalizerInterface
+interfaces: []

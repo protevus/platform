@@ -1,0 +1,34 @@
+name: MergeCollectionListenerArrayObjectTest
+class_comment: null
+dependencies:
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: FormBuilder
+  type: class
+  source: Symfony\Component\Form\FormBuilder
+- name: FormBuilderInterface
+  type: class
+  source: Symfony\Component\Form\FormBuilderInterface
+- name: FormFactoryBuilder
+  type: class
+  source: Symfony\Component\Form\FormFactoryBuilder
+properties: []
+methods:
+- name: getData
+  visibility: protected
+  parameters:
+  - name: data
+  comment: null
+- name: getBuilder
+  visibility: protected
+  parameters:
+  - name: name
+    default: '''name'''
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\Form\FormBuilder
+- Symfony\Component\Form\FormBuilderInterface
+- Symfony\Component\Form\FormFactoryBuilder
+interfaces: []

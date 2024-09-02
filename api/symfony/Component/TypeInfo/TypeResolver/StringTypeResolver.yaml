@@ -1,0 +1,157 @@
+name: StringTypeResolver
+class_comment: null
+dependencies:
+- name: ConstExprArrayNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayNode
+- name: ConstExprFalseNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprFalseNode
+- name: ConstExprFloatNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprFloatNode
+- name: ConstExprIntegerNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprIntegerNode
+- name: ConstExprNullNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNullNode
+- name: ConstExprStringNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprStringNode
+- name: ConstExprTrueNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprTrueNode
+- name: ArrayShapeNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode
+- name: ArrayTypeNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode
+- name: CallableTypeNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\Type\CallableTypeNode
+- name: ConstTypeNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\Type\ConstTypeNode
+- name: GenericTypeNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\Type\GenericTypeNode
+- name: IdentifierTypeNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode
+- name: IntersectionTypeNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode
+- name: NullableTypeNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\Type\NullableTypeNode
+- name: ObjectShapeNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\Type\ObjectShapeNode
+- name: ThisTypeNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\Type\ThisTypeNode
+- name: TypeNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\Type\TypeNode
+- name: UnionTypeNode
+  type: class
+  source: PHPStan\PhpDocParser\Ast\Type\UnionTypeNode
+- name: Lexer
+  type: class
+  source: PHPStan\PhpDocParser\Lexer\Lexer
+- name: ConstExprParser
+  type: class
+  source: PHPStan\PhpDocParser\Parser\ConstExprParser
+- name: TokenIterator
+  type: class
+  source: PHPStan\PhpDocParser\Parser\TokenIterator
+- name: TypeParser
+  type: class
+  source: PHPStan\PhpDocParser\Parser\TypeParser
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\TypeInfo\Exception\InvalidArgumentException
+- name: UnsupportedException
+  type: class
+  source: Symfony\Component\TypeInfo\Exception\UnsupportedException
+- name: Type
+  type: class
+  source: Symfony\Component\TypeInfo\Type
+- name: CollectionType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\CollectionType
+- name: GenericType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\GenericType
+- name: ObjectType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\ObjectType
+- name: TypeContext
+  type: class
+  source: Symfony\Component\TypeInfo\TypeContext\TypeContext
+- name: TypeIdentifier
+  type: class
+  source: Symfony\Component\TypeInfo\TypeIdentifier
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: lexer
+    default: new Lexer(
+  comment: null
+- name: resolve
+  visibility: public
+  parameters:
+  - name: subject
+  - name: typeContext
+    default: 'null'
+  comment: null
+- name: getTypeFromNode
+  visibility: private
+  parameters:
+  - name: node
+  - name: typeContext
+  comment: null
+- name: resolveCustomIdentifier
+  visibility: private
+  parameters:
+  - name: identifier
+  - name: typeContext
+  comment: null
+traits:
+- PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprArrayNode
+- PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprFalseNode
+- PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprFloatNode
+- PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprIntegerNode
+- PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprNullNode
+- PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprStringNode
+- PHPStan\PhpDocParser\Ast\ConstExpr\ConstExprTrueNode
+- PHPStan\PhpDocParser\Ast\Type\ArrayShapeNode
+- PHPStan\PhpDocParser\Ast\Type\ArrayTypeNode
+- PHPStan\PhpDocParser\Ast\Type\CallableTypeNode
+- PHPStan\PhpDocParser\Ast\Type\ConstTypeNode
+- PHPStan\PhpDocParser\Ast\Type\GenericTypeNode
+- PHPStan\PhpDocParser\Ast\Type\IdentifierTypeNode
+- PHPStan\PhpDocParser\Ast\Type\IntersectionTypeNode
+- PHPStan\PhpDocParser\Ast\Type\NullableTypeNode
+- PHPStan\PhpDocParser\Ast\Type\ObjectShapeNode
+- PHPStan\PhpDocParser\Ast\Type\ThisTypeNode
+- PHPStan\PhpDocParser\Ast\Type\TypeNode
+- PHPStan\PhpDocParser\Ast\Type\UnionTypeNode
+- PHPStan\PhpDocParser\Lexer\Lexer
+- PHPStan\PhpDocParser\Parser\ConstExprParser
+- PHPStan\PhpDocParser\Parser\TokenIterator
+- PHPStan\PhpDocParser\Parser\TypeParser
+- Symfony\Component\TypeInfo\Exception\InvalidArgumentException
+- Symfony\Component\TypeInfo\Exception\UnsupportedException
+- Symfony\Component\TypeInfo\Type
+- Symfony\Component\TypeInfo\Type\CollectionType
+- Symfony\Component\TypeInfo\Type\GenericType
+- Symfony\Component\TypeInfo\Type\ObjectType
+- Symfony\Component\TypeInfo\TypeContext\TypeContext
+- Symfony\Component\TypeInfo\TypeIdentifier
+interfaces:
+- TypeResolverInterface

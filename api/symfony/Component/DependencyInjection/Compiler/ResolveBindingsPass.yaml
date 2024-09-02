@@ -1,0 +1,72 @@
+name: ResolveBindingsPass
+class_comment: '# * @author Guilhem Niot <guilhem.niot@gmail.com>'
+dependencies:
+- name: BoundArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\BoundArgument
+- name: ServiceLocatorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- name: TaggedIteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- name: Autowire
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\Autowire
+- name: Target
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\Target
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: TypedReference
+  type: class
+  source: Symfony\Component\DependencyInjection\TypedReference
+- name: ProxyHelper
+  type: class
+  source: Symfony\Component\VarExporter\ProxyHelper
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: processValue
+  visibility: protected
+  parameters:
+  - name: value
+  - name: isRoot
+    default: 'false'
+  comment: null
+- name: getBindingValue
+  visibility: private
+  parameters:
+  - name: binding
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Argument\BoundArgument
+- Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- Symfony\Component\DependencyInjection\Attribute\Autowire
+- Symfony\Component\DependencyInjection\Attribute\Target
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\DependencyInjection\TypedReference
+- Symfony\Component\VarExporter\ProxyHelper
+interfaces: []

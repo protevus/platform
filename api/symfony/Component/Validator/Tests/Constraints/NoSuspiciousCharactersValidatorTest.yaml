@@ -1,0 +1,53 @@
+name: NoSuspiciousCharactersValidatorTest
+class_comment: '# * @requires extension intl
+
+  # *
+
+  # * @extends ConstraintValidatorTestCase<NoSuspiciousCharactersValidator>'
+dependencies:
+- name: NoSuspiciousCharacters
+  type: class
+  source: Symfony\Component\Validator\Constraints\NoSuspiciousCharacters
+- name: NoSuspiciousCharactersValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\NoSuspiciousCharactersValidator
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+properties: []
+methods:
+- name: testNonSuspiciousStrings
+  visibility: public
+  parameters:
+  - name: string
+  - name: options
+    default: '[]'
+  comment: "# * @requires extension intl\n# *\n# * @extends ConstraintValidatorTestCase<NoSuspiciousCharactersValidator>\n\
+    # */\n# class NoSuspiciousCharactersValidatorTest extends ConstraintValidatorTestCase\n\
+    # {\n# protected function createValidator(): NoSuspiciousCharactersValidator\n\
+    # {\n# return new NoSuspiciousCharactersValidator();\n# }\n# \n# /**\n# * @dataProvider\
+    \ provideNonSuspiciousStrings"
+- name: provideNonSuspiciousStrings
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSuspiciousStrings
+  visibility: public
+  parameters:
+  - name: string
+  - name: options
+  - name: errors
+  comment: '# * @dataProvider provideSuspiciousStrings'
+- name: provideSuspiciousStrings
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstants
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\NoSuspiciousCharacters
+- Symfony\Component\Validator\Constraints\NoSuspiciousCharactersValidator
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

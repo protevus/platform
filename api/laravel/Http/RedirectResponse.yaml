@@ -1,0 +1,224 @@
+name: RedirectResponse
+class_comment: null
+dependencies:
+- name: MessageProvider
+  type: class
+  source: Illuminate\Contracts\Support\MessageProvider
+- name: SessionStore
+  type: class
+  source: Illuminate\Session\Store
+- name: MessageBag
+  type: class
+  source: Illuminate\Support\MessageBag
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: ForwardsCalls
+  type: class
+  source: Illuminate\Support\Traits\ForwardsCalls
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: ViewErrorBag
+  type: class
+  source: Illuminate\Support\ViewErrorBag
+- name: SymfonyUploadedFile
+  type: class
+  source: Symfony\Component\HttpFoundation\File\UploadedFile
+- name: BaseRedirectResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\RedirectResponse
+properties:
+- name: request
+  visibility: protected
+  comment: '# * The request instance.
+
+    # *
+
+    # * @var \Illuminate\Http\Request'
+- name: session
+  visibility: protected
+  comment: '# * The session store instance.
+
+    # *
+
+    # * @var \Illuminate\Session\Store'
+methods:
+- name: with
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: 'null'
+  comment: "# * The request instance.\n# *\n# * @var \\Illuminate\\Http\\Request\n\
+    # */\n# protected $request;\n# \n# /**\n# * The session store instance.\n# *\n\
+    # * @var \\Illuminate\\Session\\Store\n# */\n# protected $session;\n# \n# /**\n\
+    # * Flash a piece of data to the session.\n# *\n# * @param  string|array  $key\n\
+    # * @param  mixed  $value\n# * @return $this"
+- name: withCookies
+  visibility: public
+  parameters:
+  - name: cookies
+  comment: '# * Add multiple cookies to the response.
+
+    # *
+
+    # * @param  array  $cookies
+
+    # * @return $this'
+- name: withInput
+  visibility: public
+  parameters:
+  - name: input
+    default: 'null'
+  comment: '# * Flash an array of input to the session.
+
+    # *
+
+    # * @param  array|null  $input
+
+    # * @return $this'
+- name: removeFilesFromInput
+  visibility: protected
+  parameters:
+  - name: input
+  comment: '# * Remove all uploaded files form the given input array.
+
+    # *
+
+    # * @param  array  $input
+
+    # * @return array'
+- name: onlyInput
+  visibility: public
+  parameters: []
+  comment: '# * Flash an array of input to the session.
+
+    # *
+
+    # * @return $this'
+- name: exceptInput
+  visibility: public
+  parameters: []
+  comment: '# * Flash an array of input to the session.
+
+    # *
+
+    # * @return $this'
+- name: withErrors
+  visibility: public
+  parameters:
+  - name: provider
+  - name: key
+    default: '''default'''
+  comment: '# * Flash a container of errors to the session.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Support\MessageProvider|array|string  $provider
+
+    # * @param  string  $key
+
+    # * @return $this'
+- name: parseErrors
+  visibility: protected
+  parameters:
+  - name: provider
+  comment: '# * Parse the given errors into an appropriate value.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Support\MessageProvider|array|string  $provider
+
+    # * @return \Illuminate\Support\MessageBag'
+- name: withFragment
+  visibility: public
+  parameters:
+  - name: fragment
+  comment: '# * Add a fragment identifier to the URL.
+
+    # *
+
+    # * @param  string  $fragment
+
+    # * @return $this'
+- name: withoutFragment
+  visibility: public
+  parameters: []
+  comment: '# * Remove any fragment identifier from the response URL.
+
+    # *
+
+    # * @return $this'
+- name: getOriginalContent
+  visibility: public
+  parameters: []
+  comment: '# * Get the original response content.
+
+    # *
+
+    # * @return null'
+- name: getRequest
+  visibility: public
+  parameters: []
+  comment: '# * Get the request instance.
+
+    # *
+
+    # * @return \Illuminate\Http\Request|null'
+- name: setRequest
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Set the request instance.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return void'
+- name: getSession
+  visibility: public
+  parameters: []
+  comment: '# * Get the session store instance.
+
+    # *
+
+    # * @return \Illuminate\Session\Store|null'
+- name: setSession
+  visibility: public
+  parameters:
+  - name: session
+  comment: '# * Set the session store instance.
+
+    # *
+
+    # * @param  \Illuminate\Session\Store  $session
+
+    # * @return void'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically bind flash data in the session.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \BadMethodCallException'
+traits:
+- Illuminate\Contracts\Support\MessageProvider
+- Illuminate\Support\MessageBag
+- Illuminate\Support\Str
+- Illuminate\Support\Traits\ForwardsCalls
+- Illuminate\Support\Traits\Macroable
+- Illuminate\Support\ViewErrorBag
+interfaces: []

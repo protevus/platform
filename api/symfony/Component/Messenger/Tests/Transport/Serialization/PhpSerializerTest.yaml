@@ -1,0 +1,68 @@
+name: PhpSerializerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: MessageDecodingFailedException
+  type: class
+  source: Symfony\Component\Messenger\Exception\MessageDecodingFailedException
+- name: NonSendableStampInterface
+  type: class
+  source: Symfony\Component\Messenger\Stamp\NonSendableStampInterface
+- name: DummyMessage
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\DummyMessage
+- name: PhpSerializer
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\PhpSerializer
+properties: []
+methods:
+- name: testEncodedIsDecodable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDecodingFailsWithMissingBodyKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDecodingFailsWithBadFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDecodingFailsWithBadBase64Body
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDecodingFailsWithBadClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDecodingFailsForPropertyTypeMismatch
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEncodedSkipsNonEncodeableStamps
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNonUtf8IsBase64Encoded
+  visibility: public
+  parameters: []
+  comment: null
+- name: createPhpSerializer
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Exception\MessageDecodingFailedException
+- Symfony\Component\Messenger\Stamp\NonSendableStampInterface
+- Symfony\Component\Messenger\Tests\Fixtures\DummyMessage
+- Symfony\Component\Messenger\Transport\Serialization\PhpSerializer
+interfaces:
+- NonSendableStampInterface

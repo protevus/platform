@@ -1,0 +1,17 @@
+name: HandlerArgumentsStamp
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: additionalArguments
+  comment: null
+- name: getAdditionalArguments
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces:
+- NonSendableStampInterface

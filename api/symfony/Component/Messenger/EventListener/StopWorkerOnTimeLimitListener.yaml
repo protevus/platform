@@ -1,0 +1,50 @@
+name: StopWorkerOnTimeLimitListener
+class_comment: '# * @author Simon Delicata <simon.delicata@free.fr>
+
+  # * @author Tobias Schultze <http://tobion.de>'
+dependencies:
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: WorkerRunningEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerRunningEvent
+- name: WorkerStartedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerStartedEvent
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Messenger\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: timeLimitInSeconds
+  - name: logger
+    default: 'null'
+  comment: null
+- name: onWorkerStarted
+  visibility: public
+  parameters: []
+  comment: null
+- name: onWorkerRunning
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Psr\Log\LoggerInterface
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\Messenger\Event\WorkerRunningEvent
+- Symfony\Component\Messenger\Event\WorkerStartedEvent
+- Symfony\Component\Messenger\Exception\InvalidArgumentException
+interfaces:
+- EventSubscriberInterface

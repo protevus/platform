@@ -1,0 +1,81 @@
+name: ChainEncoderTest
+class_comment: null
+dependencies:
+- name: MockObject
+  type: class
+  source: PHPUnit\Framework\MockObject\MockObject
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: TraceableEncoder
+  type: class
+  source: Symfony\Component\Serializer\Debug\TraceableEncoder
+- name: ChainEncoder
+  type: class
+  source: Symfony\Component\Serializer\Encoder\ChainEncoder
+- name: ContextAwareEncoderInterface
+  type: class
+  source: Symfony\Component\Serializer\Encoder\ContextAwareEncoderInterface
+- name: EncoderInterface
+  type: class
+  source: Symfony\Component\Serializer\Encoder\EncoderInterface
+- name: NormalizationAwareInterface
+  type: class
+  source: Symfony\Component\Serializer\Encoder\NormalizationAwareInterface
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Serializer\Exception\RuntimeException
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testSupportsEncoding
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEncode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEncodeUnsupportedFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNeedsNormalizationBasic
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNeedsNormalizationNormalizationAware
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNeedsNormalizationTraceableEncoder
+  visibility: public
+  parameters: []
+  comment: null
+- name: supportsEncoding
+  visibility: public
+  parameters:
+  - name: format
+  comment: null
+- name: encode
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+  - name: context
+    default: '[]'
+  comment: null
+traits:
+- PHPUnit\Framework\MockObject\MockObject
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Debug\TraceableEncoder
+- Symfony\Component\Serializer\Encoder\ChainEncoder
+- Symfony\Component\Serializer\Encoder\ContextAwareEncoderInterface
+- Symfony\Component\Serializer\Encoder\EncoderInterface
+- Symfony\Component\Serializer\Encoder\NormalizationAwareInterface
+- Symfony\Component\Serializer\Exception\RuntimeException
+interfaces:
+- EncoderInterface

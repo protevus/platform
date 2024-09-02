@@ -1,0 +1,67 @@
+name: RoutableFragmentRendererTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: ControllerReference
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ControllerReference
+- name: RoutableFragmentRenderer
+  type: class
+  source: Symfony\Component\HttpKernel\Fragment\RoutableFragmentRenderer
+properties:
+- name: foo
+  visibility: public
+  comment: null
+methods:
+- name: testGenerateFragmentUri
+  visibility: public
+  parameters:
+  - name: uri
+  - name: controller
+  comment: '# * @dataProvider getGenerateFragmentUriData'
+- name: testGenerateAbsoluteFragmentUri
+  visibility: public
+  parameters:
+  - name: uri
+  - name: controller
+  comment: '# * @dataProvider getGenerateFragmentUriData'
+- name: getGenerateFragmentUriData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateFragmentUriWithARequest
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateFragmentUriWithNonScalar
+  visibility: public
+  parameters:
+  - name: controller
+  comment: '# * @dataProvider getGenerateFragmentUriDataWithNonScalar'
+- name: getGenerateFragmentUriDataWithNonScalar
+  visibility: public
+  parameters: []
+  comment: null
+- name: callGenerateFragmentUriMethod
+  visibility: private
+  parameters:
+  - name: reference
+  - name: request
+  - name: absolute
+    default: 'false'
+  comment: null
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\Controller\ControllerReference
+- Symfony\Component\HttpKernel\Fragment\RoutableFragmentRenderer
+interfaces: []

@@ -1,0 +1,17 @@
+name: SentToFailureTransportStamp
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: originalReceiverName
+  comment: null
+- name: getOriginalReceiverName
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces:
+- StampInterface

@@ -1,0 +1,261 @@
+name: CompiledRouteCollection
+class_comment: null
+dependencies:
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: Request
+  type: class
+  source: Illuminate\Http\Request
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+- name: MethodNotAllowedHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException
+- name: NotFoundHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- name: MethodNotAllowedException
+  type: class
+  source: Symfony\Component\Routing\Exception\MethodNotAllowedException
+- name: ResourceNotFoundException
+  type: class
+  source: Symfony\Component\Routing\Exception\ResourceNotFoundException
+- name: CompiledUrlMatcher
+  type: class
+  source: Symfony\Component\Routing\Matcher\CompiledUrlMatcher
+- name: RequestContext
+  type: class
+  source: Symfony\Component\Routing\RequestContext
+properties:
+- name: compiled
+  visibility: protected
+  comment: '# * The compiled routes collection.
+
+    # *
+
+    # * @var array'
+- name: attributes
+  visibility: protected
+  comment: '# * An array of the route attributes keyed by name.
+
+    # *
+
+    # * @var array'
+- name: routes
+  visibility: protected
+  comment: '# * The dynamically added routes that were added after loading the cached,
+    compiled routes.
+
+    # *
+
+    # * @var \Illuminate\Routing\RouteCollection|null'
+- name: router
+  visibility: protected
+  comment: '# * The router instance used by the route.
+
+    # *
+
+    # * @var \Illuminate\Routing\Router'
+- name: container
+  visibility: protected
+  comment: '# * The container instance used by the route.
+
+    # *
+
+    # * @var \Illuminate\Container\Container'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: compiled
+  - name: attributes
+  comment: "# * The compiled routes collection.\n# *\n# * @var array\n# */\n# protected\
+    \ $compiled = [];\n# \n# /**\n# * An array of the route attributes keyed by name.\n\
+    # *\n# * @var array\n# */\n# protected $attributes = [];\n# \n# /**\n# * The dynamically\
+    \ added routes that were added after loading the cached, compiled routes.\n# *\n\
+    # * @var \\Illuminate\\Routing\\RouteCollection|null\n# */\n# protected $routes;\n\
+    # \n# /**\n# * The router instance used by the route.\n# *\n# * @var \\Illuminate\\\
+    Routing\\Router\n# */\n# protected $router;\n# \n# /**\n# * The container instance\
+    \ used by the route.\n# *\n# * @var \\Illuminate\\Container\\Container\n# */\n\
+    # protected $container;\n# \n# /**\n# * Create a new CompiledRouteCollection instance.\n\
+    # *\n# * @param  array  $compiled\n# * @param  array  $attributes\n# * @return\
+    \ void"
+- name: add
+  visibility: public
+  parameters:
+  - name: route
+  comment: '# * Add a Route instance to the collection.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Route  $route
+
+    # * @return \Illuminate\Routing\Route'
+- name: refreshNameLookups
+  visibility: public
+  parameters: []
+  comment: '# * Refresh the name look-up table.
+
+    # *
+
+    # * This is done in case any names are fluently defined or if routes are overwritten.
+
+    # *
+
+    # * @return void'
+- name: refreshActionLookups
+  visibility: public
+  parameters: []
+  comment: '# * Refresh the action look-up table.
+
+    # *
+
+    # * This is done in case any actions are overwritten with new controllers.
+
+    # *
+
+    # * @return void'
+- name: match
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Find the first route matching a given request.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return \Illuminate\Routing\Route
+
+    # *
+
+    # * @throws \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException
+
+    # * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException'
+- name: requestWithoutTrailingSlash
+  visibility: protected
+  parameters:
+  - name: request
+  comment: '# * Get a cloned instance of the given request without any trailing slash
+    on the URI.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return \Illuminate\Http\Request'
+- name: get
+  visibility: public
+  parameters:
+  - name: method
+    default: 'null'
+  comment: '# * Get routes from the collection by method.
+
+    # *
+
+    # * @param  string|null  $method
+
+    # * @return \Illuminate\Routing\Route[]'
+- name: hasNamedRoute
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Determine if the route collection contains a given named route.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return bool'
+- name: getByName
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Get a route instance by its name.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return \Illuminate\Routing\Route|null'
+- name: getByAction
+  visibility: public
+  parameters:
+  - name: action
+  comment: '# * Get a route instance by its controller action.
+
+    # *
+
+    # * @param  string  $action
+
+    # * @return \Illuminate\Routing\Route|null'
+- name: getRoutes
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the routes in the collection.
+
+    # *
+
+    # * @return \Illuminate\Routing\Route[]'
+- name: getRoutesByMethod
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the routes keyed by their HTTP verb / method.
+
+    # *
+
+    # * @return array'
+- name: getRoutesByName
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the routes keyed by their name.
+
+    # *
+
+    # * @return \Illuminate\Routing\Route[]'
+- name: newRoute
+  visibility: protected
+  parameters:
+  - name: attributes
+  comment: '# * Resolve an array of attributes to a Route instance.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @return \Illuminate\Routing\Route'
+- name: setRouter
+  visibility: public
+  parameters:
+  - name: router
+  comment: '# * Set the router instance on the route.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Router  $router
+
+    # * @return $this'
+- name: setContainer
+  visibility: public
+  parameters:
+  - name: container
+  comment: '# * Set the container instance on the route.
+
+    # *
+
+    # * @param  \Illuminate\Container\Container  $container
+
+    # * @return $this'
+traits:
+- Illuminate\Container\Container
+- Illuminate\Http\Request
+- Illuminate\Support\Collection
+- Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException
+- Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- Symfony\Component\Routing\Exception\MethodNotAllowedException
+- Symfony\Component\Routing\Exception\ResourceNotFoundException
+- Symfony\Component\Routing\Matcher\CompiledUrlMatcher
+- Symfony\Component\Routing\RequestContext
+interfaces: []

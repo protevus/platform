@@ -1,0 +1,101 @@
+name: Descriptor
+class_comment: null
+dependencies:
+- name: DescriptorInterface
+  type: class
+  source: Symfony\Component\Console\Descriptor\DescriptorInterface
+- name: ArrayInput
+  type: class
+  source: Symfony\Component\Console\Input\ArrayInput
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: OutputStyle
+  type: class
+  source: Symfony\Component\Console\Style\OutputStyle
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+- name: ResolvedFormTypeInterface
+  type: class
+  source: Symfony\Component\Form\ResolvedFormTypeInterface
+- name: OptionsResolverWrapper
+  type: class
+  source: Symfony\Component\Form\Util\OptionsResolverWrapper
+- name: OptionsResolverIntrospector
+  type: class
+  source: Symfony\Component\OptionsResolver\Debug\OptionsResolverIntrospector
+- name: NoConfigurationException
+  type: class
+  source: Symfony\Component\OptionsResolver\Exception\NoConfigurationException
+- name: OptionsResolver
+  type: class
+  source: Symfony\Component\OptionsResolver\OptionsResolver
+properties: []
+methods:
+- name: describe
+  visibility: public
+  parameters:
+  - name: output
+  - name: object
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeDefaults
+  visibility: protected
+  parameters:
+  - name: options
+  comment: null
+- name: describeResolvedFormType
+  visibility: protected
+  parameters:
+  - name: resolvedFormType
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeOption
+  visibility: protected
+  parameters:
+  - name: optionsResolver
+  - name: options
+  comment: null
+- name: collectOptions
+  visibility: protected
+  parameters:
+  - name: type
+  comment: null
+- name: getOptionDefinition
+  visibility: protected
+  parameters:
+  - name: optionsResolver
+  - name: option
+  comment: null
+- name: filterOptionsByDeprecated
+  visibility: protected
+  parameters:
+  - name: type
+  comment: null
+- name: getParentOptionsResolver
+  visibility: private
+  parameters:
+  - name: type
+  comment: null
+- name: collectTypeExtensionsOptions
+  visibility: private
+  parameters:
+  - name: type
+  - name: optionsResolver
+  comment: null
+traits:
+- Symfony\Component\Console\Descriptor\DescriptorInterface
+- Symfony\Component\Console\Input\ArrayInput
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Style\OutputStyle
+- Symfony\Component\Console\Style\SymfonyStyle
+- Symfony\Component\Form\ResolvedFormTypeInterface
+- Symfony\Component\Form\Util\OptionsResolverWrapper
+- Symfony\Component\OptionsResolver\Debug\OptionsResolverIntrospector
+- Symfony\Component\OptionsResolver\Exception\NoConfigurationException
+- Symfony\Component\OptionsResolver\OptionsResolver
+interfaces:
+- DescriptorInterface

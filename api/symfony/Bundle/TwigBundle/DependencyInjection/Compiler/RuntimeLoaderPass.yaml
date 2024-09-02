@@ -1,0 +1,29 @@
+name: RuntimeLoaderPass
+class_comment: '# * Registers Twig runtime services.'
+dependencies:
+- name: CompilerPassInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- name: ServiceLocatorTagPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Reference
+interfaces:
+- CompilerPassInterface

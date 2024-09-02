@@ -1,0 +1,47 @@
+name: DummyReceiver
+class_comment: null
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: ReceiverInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: deliveriesOfEnvelopes
+  comment: '# * @param Envelope[][] $deliveriesOfEnvelopes'
+- name: get
+  visibility: public
+  parameters: []
+  comment: null
+- name: ack
+  visibility: public
+  parameters:
+  - name: envelope
+  comment: null
+- name: reject
+  visibility: public
+  parameters:
+  - name: envelope
+  comment: null
+- name: getAcknowledgeCount
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRejectCount
+  visibility: public
+  parameters: []
+  comment: null
+- name: getAcknowledgedEnvelopes
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface
+interfaces:
+- ReceiverInterface

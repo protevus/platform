@@ -1,0 +1,54 @@
+name: Connection
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+properties: []
+methods:
+- name: subscribe
+  visibility: public
+  parameters:
+  - name: channels
+  - name: callback
+  comment: '# * Subscribe to a set of given channels for messages.
+
+    # *
+
+    # * @param  array|string  $channels
+
+    # * @param  \Closure  $callback
+
+    # * @return void'
+- name: psubscribe
+  visibility: public
+  parameters:
+  - name: channels
+  - name: callback
+  comment: '# * Subscribe to a set of given channels with wildcards.
+
+    # *
+
+    # * @param  array|string  $channels
+
+    # * @param  \Closure  $callback
+
+    # * @return void'
+- name: command
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+    default: '[]'
+  comment: '# * Run a command against the Redis database.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+traits:
+- Closure
+interfaces: []

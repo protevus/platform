@@ -1,0 +1,19 @@
+name: debug_prod
+class_comment: null
+dependencies:
+- name: FileLinkFormatter
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter
+- name: ErrorHandlerConfigurator
+  type: class
+  source: Symfony\Component\HttpKernel\Debug\ErrorHandlerConfigurator
+- name: DebugHandlersListener
+  type: class
+  source: Symfony\Component\HttpKernel\EventListener\DebugHandlersListener
+properties: []
+methods: []
+traits:
+- Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter
+- Symfony\Component\HttpKernel\Debug\ErrorHandlerConfigurator
+- Symfony\Component\HttpKernel\EventListener\DebugHandlersListener
+interfaces: []

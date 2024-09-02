@@ -1,0 +1,103 @@
+name: TypeFactoryTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: DummyBackedEnum
+  type: class
+  source: Symfony\Component\TypeInfo\Tests\Fixtures\DummyBackedEnum
+- name: DummyEnum
+  type: class
+  source: Symfony\Component\TypeInfo\Tests\Fixtures\DummyEnum
+- name: Type
+  type: class
+  source: Symfony\Component\TypeInfo\Type
+- name: BackedEnumType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\BackedEnumType
+- name: BuiltinType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\BuiltinType
+- name: CollectionType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\CollectionType
+- name: EnumType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\EnumType
+- name: GenericType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\GenericType
+- name: IntersectionType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\IntersectionType
+- name: ObjectType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\ObjectType
+- name: TemplateType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\TemplateType
+- name: UnionType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\UnionType
+- name: TypeIdentifier
+  type: class
+  source: Symfony\Component\TypeInfo\TypeIdentifier
+properties: []
+methods:
+- name: testCreateBuiltin
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateIterable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateEnum
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateGeneric
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateTemplate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateUnion
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateIntersection
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateNullable
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\TypeInfo\Tests\Fixtures\DummyBackedEnum
+- Symfony\Component\TypeInfo\Tests\Fixtures\DummyEnum
+- Symfony\Component\TypeInfo\Type
+- Symfony\Component\TypeInfo\Type\BackedEnumType
+- Symfony\Component\TypeInfo\Type\BuiltinType
+- Symfony\Component\TypeInfo\Type\CollectionType
+- Symfony\Component\TypeInfo\Type\EnumType
+- Symfony\Component\TypeInfo\Type\GenericType
+- Symfony\Component\TypeInfo\Type\IntersectionType
+- Symfony\Component\TypeInfo\Type\ObjectType
+- Symfony\Component\TypeInfo\Type\TemplateType
+- Symfony\Component\TypeInfo\Type\UnionType
+- Symfony\Component\TypeInfo\TypeIdentifier
+interfaces: []

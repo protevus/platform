@@ -1,0 +1,71 @@
+name: CompilesHelpers
+class_comment: null
+dependencies:
+- name: Vite
+  type: class
+  source: Illuminate\Foundation\Vite
+properties: []
+methods:
+- name: compileCsrf
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the CSRF statements into valid PHP.
+
+    # *
+
+    # * @return string'
+- name: compileDd
+  visibility: protected
+  parameters:
+  - name: arguments
+  comment: '# * Compile the "dd" statements into valid PHP.
+
+    # *
+
+    # * @param  string  $arguments
+
+    # * @return string'
+- name: compileDump
+  visibility: protected
+  parameters:
+  - name: arguments
+  comment: '# * Compile the "dump" statements into valid PHP.
+
+    # *
+
+    # * @param  string  $arguments
+
+    # * @return string'
+- name: compileMethod
+  visibility: protected
+  parameters:
+  - name: method
+  comment: '# * Compile the method statements into valid PHP.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @return string'
+- name: compileVite
+  visibility: protected
+  parameters:
+  - name: arguments
+  comment: '# * Compile the "vite" statements into valid PHP.
+
+    # *
+
+    # * @param  string|null  $arguments
+
+    # * @return string'
+- name: compileViteReactRefresh
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the "viteReactRefresh" statements into valid PHP.
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Foundation\Vite
+interfaces: []

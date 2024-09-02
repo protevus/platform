@@ -1,0 +1,113 @@
+name: Macroable
+class_comment: null
+dependencies:
+- name: BadMethodCallException
+  type: class
+  source: BadMethodCallException
+- name: Closure
+  type: class
+  source: Closure
+- name: ReflectionClass
+  type: class
+  source: ReflectionClass
+- name: ReflectionMethod
+  type: class
+  source: ReflectionMethod
+properties:
+- name: macros
+  visibility: protected
+  comment: '# * The registered string macros.
+
+    # *
+
+    # * @var array'
+methods:
+- name: macro
+  visibility: public
+  parameters:
+  - name: name
+  - name: macro
+  comment: "# * The registered string macros.\n# *\n# * @var array\n# */\n# protected\
+    \ static $macros = [];\n# \n# /**\n# * Register a custom macro.\n# *\n# * @param\
+    \  string  $name\n# * @param  object|callable  $macro\n# *\n# * @param-closure-this\
+    \ static  $macro\n# *\n# * @return void"
+- name: mixin
+  visibility: public
+  parameters:
+  - name: mixin
+  - name: replace
+    default: 'true'
+  comment: '# * Mix another object into the class.
+
+    # *
+
+    # * @param  object  $mixin
+
+    # * @param  bool  $replace
+
+    # * @return void
+
+    # *
+
+    # * @throws \ReflectionException'
+- name: hasMacro
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Checks if macro is registered.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return bool'
+- name: flushMacros
+  visibility: public
+  parameters: []
+  comment: '# * Flush the existing macros.
+
+    # *
+
+    # * @return void'
+- name: __callStatic
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically handle calls to the class.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \BadMethodCallException'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically handle calls to the class.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \BadMethodCallException'
+traits:
+- BadMethodCallException
+- Closure
+- ReflectionClass
+- ReflectionMethod
+interfaces: []

@@ -1,0 +1,32 @@
+name: RedeliveryStamp
+class_comment: null
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: retryCount
+  - name: redeliveredAt
+    default: 'null'
+  comment: null
+- name: getRetryCountFromEnvelope
+  visibility: public
+  parameters:
+  - name: envelope
+  comment: null
+- name: getRetryCount
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRedeliveredAt
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+interfaces:
+- StampInterface

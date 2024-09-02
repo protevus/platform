@@ -1,0 +1,90 @@
+name: WipeCommand
+class_comment: null
+dependencies:
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+- name: ConfirmableTrait
+  type: class
+  source: Illuminate\Console\ConfirmableTrait
+- name: Prohibitable
+  type: class
+  source: Illuminate\Console\Prohibitable
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+properties:
+- name: name
+  visibility: protected
+  comment: '# * The console command name.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+methods:
+- name: handle
+  visibility: public
+  parameters: []
+  comment: "# * The console command name.\n# *\n# * @var string\n# */\n# protected\
+    \ $name = 'db:wipe';\n# \n# /**\n# * The console command description.\n# *\n#\
+    \ * @var string\n# */\n# protected $description = 'Drop all tables, views, and\
+    \ types';\n# \n# /**\n# * Execute the console command.\n# *\n# * @return int"
+- name: dropAllTables
+  visibility: protected
+  parameters:
+  - name: database
+  comment: '# * Drop all of the database tables.
+
+    # *
+
+    # * @param  string  $database
+
+    # * @return void'
+- name: dropAllViews
+  visibility: protected
+  parameters:
+  - name: database
+  comment: '# * Drop all of the database views.
+
+    # *
+
+    # * @param  string  $database
+
+    # * @return void'
+- name: dropAllTypes
+  visibility: protected
+  parameters:
+  - name: database
+  comment: '# * Drop all of the database types.
+
+    # *
+
+    # * @param  string  $database
+
+    # * @return void'
+- name: getOptions
+  visibility: protected
+  parameters: []
+  comment: '# * Get the console command options.
+
+    # *
+
+    # * @return array'
+traits:
+- Illuminate\Console\Command
+- Illuminate\Console\ConfirmableTrait
+- Illuminate\Console\Prohibitable
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Input\InputOption
+- ConfirmableTrait
+interfaces: []

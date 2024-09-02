@@ -1,0 +1,112 @@
+name: InvokedProcess
+class_comment: null
+dependencies:
+- name: InvokedProcessContract
+  type: class
+  source: Illuminate\Contracts\Process\InvokedProcess
+- name: ProcessTimedOutException
+  type: class
+  source: Illuminate\Process\Exceptions\ProcessTimedOutException
+- name: SymfonyTimeoutException
+  type: class
+  source: Symfony\Component\Process\Exception\ProcessTimedOutException
+- name: Process
+  type: class
+  source: Symfony\Component\Process\Process
+properties:
+- name: process
+  visibility: protected
+  comment: '# * The underlying process instance.
+
+    # *
+
+    # * @var \Symfony\Component\Process\Process'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: process
+  comment: "# * The underlying process instance.\n# *\n# * @var \\Symfony\\Component\\\
+    Process\\Process\n# */\n# protected $process;\n# \n# /**\n# * Create a new invoked\
+    \ process instance.\n# *\n# * @param  \\Symfony\\Component\\Process\\Process \
+    \ $process\n# * @return void"
+- name: id
+  visibility: public
+  parameters: []
+  comment: '# * Get the process ID if the process is still running.
+
+    # *
+
+    # * @return int|null'
+- name: signal
+  visibility: public
+  parameters:
+  - name: signal
+  comment: '# * Send a signal to the process.
+
+    # *
+
+    # * @param  int  $signal
+
+    # * @return $this'
+- name: running
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the process is still running.
+
+    # *
+
+    # * @return bool'
+- name: output
+  visibility: public
+  parameters: []
+  comment: '# * Get the standard output for the process.
+
+    # *
+
+    # * @return string'
+- name: errorOutput
+  visibility: public
+  parameters: []
+  comment: '# * Get the error output for the process.
+
+    # *
+
+    # * @return string'
+- name: latestOutput
+  visibility: public
+  parameters: []
+  comment: '# * Get the latest standard output for the process.
+
+    # *
+
+    # * @return string'
+- name: latestErrorOutput
+  visibility: public
+  parameters: []
+  comment: '# * Get the latest error output for the process.
+
+    # *
+
+    # * @return string'
+- name: wait
+  visibility: public
+  parameters:
+  - name: output
+    default: 'null'
+  comment: '# * Wait for the process to finish.
+
+    # *
+
+    # * @param  callable|null  $output
+
+    # * @return \Illuminate\Process\ProcessResult
+
+    # *
+
+    # * @throws \Illuminate\Process\Exceptions\ProcessTimedOutException'
+traits:
+- Illuminate\Process\Exceptions\ProcessTimedOutException
+- Symfony\Component\Process\Process
+interfaces:
+- InvokedProcessContract

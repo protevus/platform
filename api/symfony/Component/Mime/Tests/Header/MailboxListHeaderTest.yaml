@@ -1,0 +1,87 @@
+name: MailboxListHeaderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: MailboxListHeader
+  type: class
+  source: Symfony\Component\Mime\Header\MailboxListHeader
+properties: []
+methods:
+- name: testMailboxIsSetForAddress
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMailboxIsRenderedForNameAddress
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddressCanBeReturnedForAddress
+  visibility: public
+  parameters: []
+  comment: null
+- name: testQuotesInNameAreQuoted
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEscapeCharsInNameAreQuoted
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParenthesesInNameAreQuoted
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUtf8CharsInDomainAreIdnEncoded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUtf8CharsInLocalPart
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetMailboxesReturnsNameValuePairs
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMultipleAddressesAsMailboxStrings
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNameIsEncodedIfNonAscii
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEncodingLineLengthCalculations
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueReturnsMailboxStringValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueReturnsMailboxStringValueForMultipleMailboxes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetBody
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetBody
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Header\MailboxListHeader
+interfaces: []

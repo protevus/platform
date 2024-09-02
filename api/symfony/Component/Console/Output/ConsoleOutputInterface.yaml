@@ -1,0 +1,23 @@
+name: ConsoleOutputInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getErrorOutput
+  visibility: public
+  parameters: []
+  comment: "# * ConsoleOutputInterface is the interface implemented by ConsoleOutput\
+    \ class.\n# * This adds information about stderr and section output stream.\n\
+    # *\n# * @author Dariusz G\xF3recki <darek.krk@gmail.com>\n# */\n# interface ConsoleOutputInterface\
+    \ extends OutputInterface\n# {\n# /**\n# * Gets the OutputInterface for errors."
+- name: setErrorOutput
+  visibility: public
+  parameters:
+  - name: error
+  comment: null
+- name: section
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

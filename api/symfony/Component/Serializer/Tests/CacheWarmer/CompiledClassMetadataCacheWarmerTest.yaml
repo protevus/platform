@@ -1,0 +1,43 @@
+name: CompiledClassMetadataCacheWarmerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: CacheWarmerInterface
+  type: class
+  source: Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface
+- name: CompiledClassMetadataCacheWarmer
+  type: class
+  source: Symfony\Component\Serializer\CacheWarmer\CompiledClassMetadataCacheWarmer
+- name: ClassMetadataFactoryCompiler
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryCompiler
+- name: ClassMetadataFactoryInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+properties: []
+methods:
+- name: testItImplementsCacheWarmerInterface
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItIsAnOptionalCacheWarmer
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItDumpCompiledClassMetadatas
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Filesystem\Filesystem
+- Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface
+- Symfony\Component\Serializer\CacheWarmer\CompiledClassMetadataCacheWarmer
+- Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryCompiler
+- Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+interfaces: []

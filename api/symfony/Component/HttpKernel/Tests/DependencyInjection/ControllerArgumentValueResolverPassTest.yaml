@@ -1,0 +1,55 @@
+name: ControllerArgumentValueResolverPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: ArgumentResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver
+- name: ControllerArgumentValueResolverPass
+  type: class
+  source: Symfony\Component\HttpKernel\DependencyInjection\ControllerArgumentValueResolverPass
+- name: Stopwatch
+  type: class
+  source: Symfony\Component\Stopwatch\Stopwatch
+properties: []
+methods:
+- name: testServicesAreOrderedAccordingToPriority
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInDebugWithStopWatchDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInDebugWithouStopWatchDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReturningEmptyArrayWhenNoService
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoArgumentResolver
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver
+- Symfony\Component\HttpKernel\DependencyInjection\ControllerArgumentValueResolverPass
+- Symfony\Component\Stopwatch\Stopwatch
+interfaces: []

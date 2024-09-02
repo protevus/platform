@@ -1,0 +1,39 @@
+name: NodeInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: addChild
+  visibility: public
+  parameters:
+  - name: node
+  comment: '# * Represents the sanitized version of a DOM node in the sanitized tree.
+
+    # *
+
+    # * Once the sanitization is done, nodes are rendered into the final output string.
+
+    # *
+
+    # * @author Titouan Galopin <galopintitouan@gmail.com>
+
+    # */
+
+    # interface NodeInterface
+
+    # {
+
+    # /**
+
+    # * Add a child node to this node.'
+- name: getParent
+  visibility: public
+  parameters: []
+  comment: '# * Return the parent node of this node, or null if it has no parent node.'
+- name: render
+  visibility: public
+  parameters: []
+  comment: '# * Render this node as a string, recursively rendering its children as
+    well.'
+traits: []
+interfaces: []

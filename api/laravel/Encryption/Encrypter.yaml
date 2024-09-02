@@ -1,0 +1,288 @@
+name: Encrypter
+class_comment: null
+dependencies:
+- name: DecryptException
+  type: class
+  source: Illuminate\Contracts\Encryption\DecryptException
+- name: EncrypterContract
+  type: class
+  source: Illuminate\Contracts\Encryption\Encrypter
+- name: EncryptException
+  type: class
+  source: Illuminate\Contracts\Encryption\EncryptException
+- name: StringEncrypter
+  type: class
+  source: Illuminate\Contracts\Encryption\StringEncrypter
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+properties:
+- name: key
+  visibility: protected
+  comment: '# * The encryption key.
+
+    # *
+
+    # * @var string'
+- name: previousKeys
+  visibility: protected
+  comment: '# * The previous / legacy encryption keys.
+
+    # *
+
+    # * @var array'
+- name: cipher
+  visibility: protected
+  comment: '# * The algorithm used for encryption.
+
+    # *
+
+    # * @var string'
+- name: supportedCiphers
+  visibility: private
+  comment: '# * The supported cipher algorithms and their properties.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: key
+  - name: cipher
+    default: '''aes-128-cbc'''
+  comment: "# * The encryption key.\n# *\n# * @var string\n# */\n# protected $key;\n\
+    # \n# /**\n# * The previous / legacy encryption keys.\n# *\n# * @var array\n#\
+    \ */\n# protected $previousKeys = [];\n# \n# /**\n# * The algorithm used for encryption.\n\
+    # *\n# * @var string\n# */\n# protected $cipher;\n# \n# /**\n# * The supported\
+    \ cipher algorithms and their properties.\n# *\n# * @var array\n# */\n# private\
+    \ static $supportedCiphers = [\n# 'aes-128-cbc' => ['size' => 16, 'aead' => false],\n\
+    # 'aes-256-cbc' => ['size' => 32, 'aead' => false],\n# 'aes-128-gcm' => ['size'\
+    \ => 16, 'aead' => true],\n# 'aes-256-gcm' => ['size' => 32, 'aead' => true],\n\
+    # ];\n# \n# /**\n# * Create a new encrypter instance.\n# *\n# * @param  string\
+    \  $key\n# * @param  string  $cipher\n# * @return void\n# *\n# * @throws \\RuntimeException"
+- name: supported
+  visibility: public
+  parameters:
+  - name: key
+  - name: cipher
+  comment: '# * Determine if the given key and cipher combination is valid.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  string  $cipher
+
+    # * @return bool'
+- name: generateKey
+  visibility: public
+  parameters:
+  - name: cipher
+  comment: '# * Create a new encryption key for the given cipher.
+
+    # *
+
+    # * @param  string  $cipher
+
+    # * @return string'
+- name: encrypt
+  visibility: public
+  parameters:
+  - name: value
+  - name: serialize
+    default: 'true'
+  comment: '# * Encrypt the given value.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @param  bool  $serialize
+
+    # * @return string
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Encryption\EncryptException'
+- name: encryptString
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Encrypt a string without serialization.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Encryption\EncryptException'
+- name: decrypt
+  visibility: public
+  parameters:
+  - name: payload
+  - name: unserialize
+    default: 'true'
+  comment: '# * Decrypt the given value.
+
+    # *
+
+    # * @param  string  $payload
+
+    # * @param  bool  $unserialize
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Encryption\DecryptException'
+- name: decryptString
+  visibility: public
+  parameters:
+  - name: payload
+  comment: '# * Decrypt the given string without unserialization.
+
+    # *
+
+    # * @param  string  $payload
+
+    # * @return string
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Encryption\DecryptException'
+- name: hash
+  visibility: protected
+  parameters:
+  - name: iv
+  - name: value
+  - name: key
+  comment: '# * Create a MAC for the given value.
+
+    # *
+
+    # * @param  string  $iv
+
+    # * @param  mixed  $value
+
+    # * @param  string  $key
+
+    # * @return string'
+- name: getJsonPayload
+  visibility: protected
+  parameters:
+  - name: payload
+  comment: '# * Get the JSON array from the given payload.
+
+    # *
+
+    # * @param  string  $payload
+
+    # * @return array
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Encryption\DecryptException'
+- name: validPayload
+  visibility: protected
+  parameters:
+  - name: payload
+  comment: '# * Verify that the encryption payload is valid.
+
+    # *
+
+    # * @param  mixed  $payload
+
+    # * @return bool'
+- name: validMac
+  visibility: protected
+  parameters:
+  - name: payload
+  comment: '# * Determine if the MAC for the given payload is valid for the primary
+    key.
+
+    # *
+
+    # * @param  array  $payload
+
+    # * @return bool'
+- name: validMacForKey
+  visibility: protected
+  parameters:
+  - name: payload
+  - name: key
+  comment: '# * Determine if the MAC is valid for the given payload and key.
+
+    # *
+
+    # * @param  array  $payload
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: ensureTagIsValid
+  visibility: protected
+  parameters:
+  - name: tag
+  comment: '# * Ensure the given tag is a valid tag given the selected cipher.
+
+    # *
+
+    # * @param  string  $tag
+
+    # * @return void'
+- name: shouldValidateMac
+  visibility: protected
+  parameters: []
+  comment: '# * Determine if we should validate the MAC while decrypting.
+
+    # *
+
+    # * @return bool'
+- name: getKey
+  visibility: public
+  parameters: []
+  comment: '# * Get the encryption key that the encrypter is currently using.
+
+    # *
+
+    # * @return string'
+- name: getAllKeys
+  visibility: public
+  parameters: []
+  comment: '# * Get the current encryption key and all previous encryption keys.
+
+    # *
+
+    # * @return array'
+- name: getPreviousKeys
+  visibility: public
+  parameters: []
+  comment: '# * Get the previous encryption keys.
+
+    # *
+
+    # * @return array'
+- name: previousKeys
+  visibility: public
+  parameters:
+  - name: keys
+  comment: '# * Set the previous / legacy encryption keys that should be utilized
+    if decryption fails.
+
+    # *
+
+    # * @param  array  $keys
+
+    # * @return $this'
+traits:
+- Illuminate\Contracts\Encryption\DecryptException
+- Illuminate\Contracts\Encryption\EncryptException
+- Illuminate\Contracts\Encryption\StringEncrypter
+- RuntimeException
+interfaces:
+- EncrypterContract

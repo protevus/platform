@@ -1,0 +1,36 @@
+name: Variable
+class_comment: '# * Represents a variable.
+
+  # *
+
+  # *     $var = new Variable(''a'');
+
+  # *
+
+  # * will be dumped as
+
+  # *
+
+  # *     $a
+
+  # *
+
+  # * by the PHP dumper.
+
+  # *
+
+  # * @author Johannes M. Schmitt <schmittjoh@gmail.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

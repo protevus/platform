@@ -1,0 +1,31 @@
+name: GroupSequenceProviderInterface
+class_comment: null
+dependencies:
+- name: GroupSequence
+  type: class
+  source: Symfony\Component\Validator\Constraints\GroupSequence
+properties: []
+methods:
+- name: getGroupSequence
+  visibility: public
+  parameters: []
+  comment: '# * Defines the interface for a group sequence provider.
+
+    # */
+
+    # interface GroupSequenceProviderInterface
+
+    # {
+
+    # /**
+
+    # * Returns which validation groups should be used for a certain state
+
+    # * of the object.
+
+    # *
+
+    # * @return string[]|string[][]|GroupSequence'
+traits:
+- Symfony\Component\Validator\Constraints\GroupSequence
+interfaces: []

@@ -1,0 +1,15 @@
+name: UnusedTagsPassUtils
+class_comment: null
+dependencies:
+- name: Finder
+  type: class
+  source: Symfony\Component\Finder\Finder
+properties: []
+methods:
+- name: getDefinedTags
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Finder\Finder
+interfaces: []

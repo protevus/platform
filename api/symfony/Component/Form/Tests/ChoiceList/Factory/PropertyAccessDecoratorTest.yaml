@@ -1,0 +1,127 @@
+name: PropertyAccessDecoratorTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ArrayChoiceList
+  type: class
+  source: Symfony\Component\Form\ChoiceList\ArrayChoiceList
+- name: DefaultChoiceListFactory
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\DefaultChoiceListFactory
+- name: PropertyAccessDecorator
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\PropertyAccessDecorator
+- name: ChoiceGroupView
+  type: class
+  source: Symfony\Component\Form\ChoiceList\View\ChoiceGroupView
+- name: ChoiceView
+  type: class
+  source: Symfony\Component\Form\ChoiceList\View\ChoiceView
+- name: ArrayChoiceLoader
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\ArrayChoiceLoader
+- name: PropertyPath
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyPath
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesPropertyPathInstance
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesFilterPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesFilterPropertyPathInstance
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromLoaderPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromLoaderFilterPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesAssumeNullIfValuePropertyPathUnreadable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoiceLoaderAssumeNullIfValuePropertyPathUnreadable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromLoaderPropertyPathInstance
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewPreferredChoicesAsPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewPreferredChoicesAsPropertyPathInstance
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewAssumeNullIfPreferredChoicesPropertyPathUnreadable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewLabelsAsPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewLabelsAsPropertyPathInstance
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewIndicesAsPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewIndicesAsPropertyPathInstance
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewGroupsAsPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewGroupsAsPropertyPathInstance
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewAssumeNullIfGroupsPropertyPathUnreadable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewAttrAsPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewAttrAsPropertyPathInstance
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\ChoiceList\ArrayChoiceList
+- Symfony\Component\Form\ChoiceList\Factory\DefaultChoiceListFactory
+- Symfony\Component\Form\ChoiceList\Factory\PropertyAccessDecorator
+- Symfony\Component\Form\ChoiceList\View\ChoiceGroupView
+- Symfony\Component\Form\ChoiceList\View\ChoiceView
+- Symfony\Component\Form\Tests\Fixtures\ArrayChoiceLoader
+- Symfony\Component\PropertyAccess\PropertyPath
+interfaces: []

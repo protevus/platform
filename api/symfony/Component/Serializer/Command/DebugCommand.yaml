@@ -1,0 +1,74 @@
+name: DebugCommand
+class_comment: null
+dependencies:
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: Dumper
+  type: class
+  source: Symfony\Component\Console\Helper\Dumper
+- name: Table
+  type: class
+  source: Symfony\Component\Console\Helper\Table
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+- name: ClassMetadataInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassMetadataInterface
+- name: ClassMetadataFactoryInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+properties: []
+methods:
+- name: getAttributesData
+  visibility: private
+  parameters:
+  - name: classMetadata
+  comment: "# * A console command to debug Serializer information.\n# *\n# * @author\
+    \ Lo\xEFc Fr\xE9mont <lc.fremont@gmail.com>\n# */\n# #[AsCommand(name: 'debug:serializer',\
+    \ description: 'Display serialization information for classes')]\n# class DebugCommand\
+    \ extends Command\n# {\n# public function __construct(private readonly ClassMetadataFactoryInterface\
+    \ $serializer)\n# {\n# parent::__construct();\n# }\n# \n# protected function configure():\
+    \ void\n# {\n# $this\n# ->addArgument('class', InputArgument::REQUIRED, 'A fully\
+    \ qualified class name')\n# ->setHelp(\"The <info>%command.name% 'App\\Entity\\\
+    Dummy'</info> command dumps the serializer groups for the dummy class.\")\n# ;\n\
+    # }\n# \n# protected function execute(InputInterface $input, OutputInterface $output):\
+    \ int\n# {\n# $class = $input->getArgument('class');\n# \n# if (!class_exists($class))\
+    \ {\n# $io = new SymfonyStyle($input, $output);\n# $io->error(\\sprintf('Class\
+    \ \"%s\" was not found.', $class));\n# \n# return Command::FAILURE;\n# }\n# \n\
+    # $this->dumpSerializerDataForClass($input, $output, $class);\n# \n# return Command::SUCCESS;\n\
+    # }\n# \n# private function dumpSerializerDataForClass(InputInterface $input,\
+    \ OutputInterface $output, string $class): void\n# {\n# $io = new SymfonyStyle($input,\
+    \ $output);\n# $title = \\sprintf('<info>%s</info>', $class);\n# $rows = [];\n\
+    # $dump = new Dumper($output);\n# \n# $classMetadata = $this->serializer->getMetadataFor($class);\n\
+    # \n# foreach ($this->getAttributesData($classMetadata) as $propertyName => $data)\
+    \ {\n# $rows[] = [\n# $propertyName,\n# $dump($data),\n# ];\n# }\n# \n# if (!$rows)\
+    \ {\n# $io->section($title);\n# $io->text('No Serializer data were found for this\
+    \ class.');\n# \n# return;\n# }\n# \n# $io->section($title);\n# \n# $table = new\
+    \ Table($output);\n# $table->setHeaders(['Property', 'Options']);\n# $table->setRows($rows);\n\
+    # $table->render();\n# }\n# \n# /**\n# * @return array<string, array<string, mixed>>"
+traits:
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Helper\Dumper
+- Symfony\Component\Console\Helper\Table
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Style\SymfonyStyle
+- Symfony\Component\Serializer\Mapping\ClassMetadataInterface
+- Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+interfaces: []

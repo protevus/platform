@@ -1,0 +1,14 @@
+name: DefaultHtmlToTextConverter
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>'
+dependencies: []
+properties: []
+methods:
+- name: convert
+  visibility: public
+  parameters:
+  - name: html
+  - name: charset
+  comment: null
+traits: []
+interfaces:
+- HtmlToTextConverterInterface

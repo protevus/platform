@@ -1,0 +1,230 @@
+name: AbstractRouteCollection
+class_comment: null
+dependencies:
+- name: ArrayIterator
+  type: class
+  source: ArrayIterator
+- name: Countable
+  type: class
+  source: Countable
+- name: Request
+  type: class
+  source: Illuminate\Http\Request
+- name: Response
+  type: class
+  source: Illuminate\Http\Response
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: IteratorAggregate
+  type: class
+  source: IteratorAggregate
+- name: LogicException
+  type: class
+  source: LogicException
+- name: MethodNotAllowedHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException
+- name: NotFoundHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- name: CompiledUrlMatcherDumper
+  type: class
+  source: Symfony\Component\Routing\Matcher\Dumper\CompiledUrlMatcherDumper
+- name: SymfonyRouteCollection
+  type: class
+  source: Symfony\Component\Routing\RouteCollection
+- name: Traversable
+  type: class
+  source: Traversable
+properties: []
+methods:
+- name: handleMatchedRoute
+  visibility: protected
+  parameters:
+  - name: request
+  - name: route
+  comment: '# * Handle the matched route.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  \Illuminate\Routing\Route|null  $route
+
+    # * @return \Illuminate\Routing\Route
+
+    # *
+
+    # * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException'
+- name: checkForAlternateVerbs
+  visibility: protected
+  parameters:
+  - name: request
+  comment: '# * Determine if any routes match on another HTTP verb.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return array'
+- name: matchAgainstRoutes
+  visibility: protected
+  parameters:
+  - name: routes
+  - name: request
+  - name: includingMethod
+    default: 'true'
+  comment: '# * Determine if a route in the array matches the request.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Route[]  $routes
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  bool  $includingMethod
+
+    # * @return \Illuminate\Routing\Route|null'
+- name: getRouteForMethods
+  visibility: protected
+  parameters:
+  - name: request
+  - name: methods
+  comment: '# * Get a route (if necessary) that responds when other available methods
+    are present.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  string[]  $methods
+
+    # * @return \Illuminate\Routing\Route
+
+    # *
+
+    # * @throws \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException'
+- name: requestMethodNotAllowed
+  visibility: protected
+  parameters:
+  - name: request
+  - name: others
+  - name: method
+  comment: '# * Throw a method not allowed HTTP exception.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  array  $others
+
+    # * @param  string  $method
+
+    # * @return void
+
+    # *
+
+    # * @throws \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException'
+- name: methodNotAllowed
+  visibility: protected
+  parameters:
+  - name: others
+  - name: method
+  comment: '# * Throw a method not allowed HTTP exception.
+
+    # *
+
+    # * @param  array  $others
+
+    # * @param  string  $method
+
+    # * @return void
+
+    # *
+
+    # * @deprecated use requestMethodNotAllowed
+
+    # *
+
+    # * @throws \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException'
+- name: compile
+  visibility: public
+  parameters: []
+  comment: '# * Compile the routes for caching.
+
+    # *
+
+    # * @return array'
+- name: dumper
+  visibility: public
+  parameters: []
+  comment: '# * Return the CompiledUrlMatcherDumper instance for the route collection.
+
+    # *
+
+    # * @return \Symfony\Component\Routing\Matcher\Dumper\CompiledUrlMatcherDumper'
+- name: toSymfonyRouteCollection
+  visibility: public
+  parameters: []
+  comment: '# * Convert the collection to a Symfony RouteCollection instance.
+
+    # *
+
+    # * @return \Symfony\Component\Routing\RouteCollection'
+- name: addToSymfonyRoutesCollection
+  visibility: protected
+  parameters:
+  - name: symfonyRoutes
+  - name: route
+  comment: '# * Add a route to the SymfonyRouteCollection instance.
+
+    # *
+
+    # * @param  \Symfony\Component\Routing\RouteCollection  $symfonyRoutes
+
+    # * @param  \Illuminate\Routing\Route  $route
+
+    # * @return \Symfony\Component\Routing\RouteCollection
+
+    # *
+
+    # * @throws \LogicException'
+- name: generateRouteName
+  visibility: protected
+  parameters: []
+  comment: '# * Get a randomly generated route name.
+
+    # *
+
+    # * @return string'
+- name: getIterator
+  visibility: public
+  parameters: []
+  comment: '# * Get an iterator for the items.
+
+    # *
+
+    # * @return \ArrayIterator'
+- name: count
+  visibility: public
+  parameters: []
+  comment: '# * Count the number of items in the collection.
+
+    # *
+
+    # * @return int'
+traits:
+- ArrayIterator
+- Countable
+- Illuminate\Http\Request
+- Illuminate\Http\Response
+- Illuminate\Support\Str
+- IteratorAggregate
+- LogicException
+- Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException
+- Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- Symfony\Component\Routing\Matcher\Dumper\CompiledUrlMatcherDumper
+- Traversable
+interfaces:
+- Countable

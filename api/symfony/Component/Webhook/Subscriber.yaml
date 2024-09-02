@@ -1,0 +1,25 @@
+name: Subscriber
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Webhook\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: url
+  - name: secret
+  comment: null
+- name: getUrl
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSecret
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Webhook\Exception\InvalidArgumentException
+interfaces: []

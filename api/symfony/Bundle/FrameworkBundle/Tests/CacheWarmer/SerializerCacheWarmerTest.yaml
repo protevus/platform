@@ -1,0 +1,61 @@
+name: SerializerCacheWarmerTest
+class_comment: null
+dependencies:
+- name: SerializerCacheWarmer
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\CacheWarmer\SerializerCacheWarmer
+- name: TestCase
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\TestCase
+- name: NullAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\NullAdapter
+- name: PhpArrayAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\PhpArrayAdapter
+- name: LoaderChain
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Loader\LoaderChain
+- name: XmlFileLoader
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Loader\XmlFileLoader
+- name: YamlFileLoader
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Loader\YamlFileLoader
+properties: []
+methods:
+- name: testWarmUp
+  visibility: public
+  parameters:
+  - name: loaders
+  comment: '# * @dataProvider loaderProvider'
+- name: loaderProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWarmUpWithoutLoader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClassAutoloadException
+  visibility: public
+  parameters: []
+  comment: '# * Test that the cache warming process is not broken if a class loader
+
+    # * throws an exception (on class / file not found for example).'
+- name: testClassAutoloadExceptionWithUnrelatedException
+  visibility: public
+  parameters: []
+  comment: '# * Test that the cache warming process is broken if a class loader throws
+    an
+
+    # * exception but that is unrelated to the class load.'
+traits:
+- Symfony\Bundle\FrameworkBundle\CacheWarmer\SerializerCacheWarmer
+- Symfony\Bundle\FrameworkBundle\Tests\TestCase
+- Symfony\Component\Cache\Adapter\NullAdapter
+- Symfony\Component\Cache\Adapter\PhpArrayAdapter
+- Symfony\Component\Serializer\Mapping\Loader\LoaderChain
+- Symfony\Component\Serializer\Mapping\Loader\XmlFileLoader
+- Symfony\Component\Serializer\Mapping\Loader\YamlFileLoader
+interfaces: []

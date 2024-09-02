@@ -1,0 +1,41 @@
+name: BlankValidatorTest
+class_comment: null
+dependencies:
+- name: Blank
+  type: class
+  source: Symfony\Component\Validator\Constraints\Blank
+- name: BlankValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\BlankValidator
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+properties: []
+methods:
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testNullIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBlankIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidValues
+  visibility: public
+  parameters:
+  - name: value
+  - name: valueAsString
+  comment: '# * @dataProvider getInvalidValues'
+- name: getInvalidValues
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\Blank
+- Symfony\Component\Validator\Constraints\BlankValidator
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

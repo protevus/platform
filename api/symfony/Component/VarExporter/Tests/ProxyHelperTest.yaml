@@ -1,0 +1,247 @@
+name: ProxyHelperTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: LogicException
+  type: class
+  source: Symfony\Component\VarExporter\Exception\LogicException
+- name: ProxyHelper
+  type: class
+  source: Symfony\Component\VarExporter\ProxyHelper
+- name: Php82NullStandaloneReturnType
+  type: class
+  source: Symfony\Component\VarExporter\Tests\Fixtures\LazyProxy\Php82NullStandaloneReturnType
+- name: StringMagicGetClass
+  type: class
+  source: Symfony\Component\VarExporter\Tests\Fixtures\LazyProxy\StringMagicGetClass
+- name: LazyProxyTrait
+  type: class
+  source: \Symfony\Component\VarExporter\LazyProxyTrait
+- name: LazyProxyTrait
+  type: class
+  source: \Symfony\Component\VarExporter\LazyProxyTrait
+- name: LazyProxyTrait
+  type: class
+  source: \Symfony\Component\VarExporter\LazyProxyTrait
+properties: []
+methods:
+- name: testExportSignature
+  visibility: public
+  parameters:
+  - name: expected
+  - name: method
+  comment: '# * @dataProvider provideExportSignature'
+- name: provideExportSignature
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExportSignatureFQ
+  visibility: public
+  parameters: []
+  comment: null
+- name: bar
+  visibility: public
+  parameters:
+  - name: a
+    default: \Symfony\Component\VarExporter\Tests\Bar::BAZ
+  - name: b
+    default: new \Symfony\Component\VarExporter\Tests\Bar(\Symfony\Component\VarExporter\Tests\Bar::BAZ
+  - name: \Symfony\Component\VarExporter\Tests\Bar::BAZ
+  comment: null
+- name: testGenerateLazyProxy
+  visibility: public
+  parameters: []
+  comment: null
+- name: foo1
+  visibility: public
+  parameters: []
+  comment: null
+- name: foo4
+  visibility: public
+  parameters:
+  - name: b
+  - name: '&$d'
+  comment: null
+- name: foo7
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testGenerateLazyProxyForInterfaces
+  visibility: public
+  parameters: []
+  comment: null
+- name: initializeLazyObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: foo1
+  visibility: public
+  parameters: []
+  comment: null
+- name: foo2
+  visibility: public
+  parameters:
+  - name: b
+  - name: '...$d'
+  comment: null
+- name: foo3
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateLazyProxyForClassWithUnserializeMagicMethod
+  visibility: public
+  parameters:
+  - name: obj
+  - name: expected
+  comment: '# * @dataProvider classWithUnserializeMagicMethodProvider'
+- name: classWithUnserializeMagicMethodProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: __unserialize
+  visibility: public
+  parameters:
+  - name: array
+  comment: null
+- name: __unserialize
+  visibility: public
+  parameters:
+  - name: data
+  comment: null
+- name: __unserialize
+  visibility: public
+  parameters:
+  - name: array
+  comment: null
+- name: testAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: foo
+  visibility: public
+  parameters:
+  - name: a
+  comment: null
+- name: foo
+  visibility: public
+  parameters:
+  - name: '#[\SensitiveParameter'
+  - name: a
+  comment: null
+- name: testCannotGenerateGhostForStringMagicGet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNullStandaloneReturnType
+  visibility: public
+  parameters: []
+  comment: '# * @requires PHP 8.2'
+- name: foo
+  visibility: public
+  parameters: []
+  comment: null
+- name: foo1
+  visibility: public
+  parameters: []
+  comment: null
+- name: foo2
+  visibility: public
+  parameters:
+  - name: b
+  - name: '...$d'
+  comment: null
+- name: foo4
+  visibility: public
+  parameters:
+  - name: b
+  - name: '&$d'
+  comment: null
+- name: foo5
+  visibility: public
+  parameters:
+  - name: b
+    default: new \stdClass([0
+  comment: null
+- name: foo6
+  visibility: protected
+  parameters:
+  - name: b
+    default: 'null'
+  - name: c
+    default: \PHP_EOL
+  - name: d
+    default: '[\PHP_EOL]'
+  - name: e
+    default: '[false'
+  - name: 'true'
+  - name: null]
+  comment: null
+- name: foo7
+  visibility: protected
+  parameters: []
+  comment: null
+- name: foo8
+  visibility: public
+  parameters: []
+  comment: null
+- name: foo9
+  visibility: public
+  parameters:
+  - name: a
+    default: self::BOB
+  - name: b
+    default: '[''$a'''
+  - name: '''$a\n'''
+  - name: '"\$a\n"]'
+  - name: c
+    default: '[''$a'''
+  - name: '''$a\n'''
+  - name: '"\$a\n"'
+  - name: \stdClass(
+  comment: null
+- name: foo10
+  visibility: public
+  parameters:
+  - name: a
+    default: '[namespace\M_PI'
+  - name: M_PI(
+  comment: null
+- name: foo1
+  visibility: public
+  parameters: []
+  comment: null
+- name: foo2
+  visibility: public
+  parameters:
+  - name: b
+  - name: '...$d'
+  comment: null
+- name: foo3
+  visibility: public
+  parameters: []
+  comment: null
+- name: bar
+  visibility: public
+  parameters:
+  - name: a
+    default: Bar::BAZ
+  - name: b
+    default: new Bar(Bar::BAZ
+  - name: Bar::BAZ
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\VarExporter\Exception\LogicException
+- Symfony\Component\VarExporter\ProxyHelper
+- Symfony\Component\VarExporter\Tests\Fixtures\LazyProxy\Php82NullStandaloneReturnType
+- Symfony\Component\VarExporter\Tests\Fixtures\LazyProxy\StringMagicGetClass
+- \Symfony\Component\VarExporter\LazyProxyTrait
+- \Symfony\Component\VarExporter\LazyProxyTrait
+- \Symfony\Component\VarExporter\LazyProxyTrait
+interfaces:
+- \Symfony\Component\VarExporter\LazyObjectInterface
+- \Symfony\Component\VarExporter\Tests\TestForProxyHelperInterface1
+- \Symfony\Component\VarExporter\LazyObjectInterface
+- \Symfony\Component\VarExporter\LazyObjectInterface

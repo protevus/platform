@@ -1,0 +1,37 @@
+name: Isin
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: options
+    default: 'null'
+  - name: message
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  comment: "# * Validates that a value is a valid International Securities Identification\
+    \ Number (ISIN).\n# *\n# * @see https://en.wikipedia.org/wiki/International_Securities_Identification_Number\n\
+    # *\n# * @author Laurent Masforn\xE9 <l.masforne@gmail.com>\n# */\n# #[\\Attribute(\\\
+    Attribute::TARGET_PROPERTY | \\Attribute::TARGET_METHOD | \\Attribute::IS_REPEATABLE)]\n\
+    # class Isin extends Constraint\n# {\n# public const VALIDATION_LENGTH = 12;\n\
+    # public const VALIDATION_PATTERN = '/[A-Z]{2}[A-Z0-9]{9}[0-9]{1}/';\n# \n# public\
+    \ const INVALID_LENGTH_ERROR = '88738dfc-9ed5-ba1e-aebe-402a2a9bf58e';\n# public\
+    \ const INVALID_PATTERN_ERROR = '3d08ce0-ded9-a93d-9216-17ac21265b65e';\n# public\
+    \ const INVALID_CHECKSUM_ERROR = '32089b-0ee1-93ba-399e-aa232e62f2d29d';\n# \n\
+    # protected const ERROR_NAMES = [\n# self::INVALID_LENGTH_ERROR => 'INVALID_LENGTH_ERROR',\n\
+    # self::INVALID_PATTERN_ERROR => 'INVALID_PATTERN_ERROR',\n# self::INVALID_CHECKSUM_ERROR\
+    \ => 'INVALID_CHECKSUM_ERROR',\n# ];\n# \n# public string $message = 'This value\
+    \ is not a valid International Securities Identification Number (ISIN).';\n# \n\
+    # /**\n# * @param array<string,mixed>|null $options\n# * @param string[]|null\
+    \            $groups"
+traits:
+- Symfony\Component\Validator\Constraint
+interfaces: []

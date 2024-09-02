@@ -1,0 +1,95 @@
+name: LanguageValidatorTest
+class_comment: null
+dependencies:
+- name: IntlTestHelper
+  type: class
+  source: Symfony\Component\Intl\Util\IntlTestHelper
+- name: Language
+  type: class
+  source: Symfony\Component\Validator\Constraints\Language
+- name: LanguageValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\LanguageValidator
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testNullIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEmptyStringIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExpectsStringCompatibleType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidLanguages
+  visibility: public
+  parameters:
+  - name: language
+  comment: '# * @dataProvider getValidLanguages'
+- name: getValidLanguages
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidLanguages
+  visibility: public
+  parameters:
+  - name: language
+  comment: '# * @dataProvider getInvalidLanguages'
+- name: getInvalidLanguages
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidAlpha3Languages
+  visibility: public
+  parameters:
+  - name: language
+  comment: '# * @dataProvider getValidAlpha3Languages'
+- name: getValidAlpha3Languages
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidAlpha3Languages
+  visibility: public
+  parameters:
+  - name: language
+  comment: '# * @dataProvider getInvalidAlpha3Languages'
+- name: getInvalidAlpha3Languages
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidAlpha3LanguageNamed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidateUsingCountrySpecificLocale
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Intl\Util\IntlTestHelper
+- Symfony\Component\Validator\Constraints\Language
+- Symfony\Component\Validator\Constraints\LanguageValidator
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

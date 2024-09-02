@@ -1,0 +1,23 @@
+name: MockClientCallback
+class_comment: null
+dependencies:
+- name: MockResponse
+  type: class
+  source: Symfony\Component\HttpClient\Response\MockResponse
+- name: ResponseInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\ResponseInterface
+properties: []
+methods:
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: method
+  - name: url
+  - name: options
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\HttpClient\Response\MockResponse
+- Symfony\Contracts\HttpClient\ResponseInterface
+interfaces: []

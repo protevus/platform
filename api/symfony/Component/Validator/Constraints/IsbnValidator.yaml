@@ -1,0 +1,58 @@
+name: IsbnValidator
+class_comment: '# * Validates whether the value is a valid ISBN-10 or ISBN-13.
+
+  # *
+
+  # * @author The Whole Life To Learn <thewholelifetolearn@gmail.com>
+
+  # * @author Manuel Reinhard <manu@sprain.ch>
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @see https://en.wikipedia.org/wiki/Isbn'
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: ConstraintValidator
+  type: class
+  source: Symfony\Component\Validator\ConstraintValidator
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedTypeException
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+properties: []
+methods:
+- name: validate
+  visibility: public
+  parameters:
+  - name: value
+  - name: constraint
+  comment: null
+- name: validateIsbn10
+  visibility: protected
+  parameters:
+  - name: isbn
+  comment: null
+- name: validateIsbn13
+  visibility: protected
+  parameters:
+  - name: isbn
+  comment: null
+- name: getMessage
+  visibility: protected
+  parameters:
+  - name: constraint
+  - name: type
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\ConstraintValidator
+- Symfony\Component\Validator\Exception\UnexpectedTypeException
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+interfaces: []

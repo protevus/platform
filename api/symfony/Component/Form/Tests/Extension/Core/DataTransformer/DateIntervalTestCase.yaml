@@ -1,0 +1,17 @@
+name: DateIntervalTestCase
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+properties: []
+methods:
+- name: assertDateIntervalEquals
+  visibility: public
+  parameters:
+  - name: expected
+  - name: actual
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+interfaces: []

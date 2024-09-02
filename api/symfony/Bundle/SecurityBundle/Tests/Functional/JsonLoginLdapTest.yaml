@@ -1,0 +1,15 @@
+name: JsonLoginLdapTest
+class_comment: null
+dependencies:
+- name: Kernel
+  type: class
+  source: Symfony\Component\HttpKernel\Kernel
+properties: []
+methods:
+- name: testKernelBoot
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpKernel\Kernel
+interfaces: []

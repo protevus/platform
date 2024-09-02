@@ -1,0 +1,372 @@
+name: DynamoDbStore
+class_comment: null
+dependencies:
+- name: DynamoDbClient
+  type: class
+  source: Aws\DynamoDb\DynamoDbClient
+- name: DynamoDbException
+  type: class
+  source: Aws\DynamoDb\Exception\DynamoDbException
+- name: LockProvider
+  type: class
+  source: Illuminate\Contracts\Cache\LockProvider
+- name: Store
+  type: class
+  source: Illuminate\Contracts\Cache\Store
+- name: Carbon
+  type: class
+  source: Illuminate\Support\Carbon
+- name: InteractsWithTime
+  type: class
+  source: Illuminate\Support\InteractsWithTime
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: InteractsWithTime
+  type: class
+  source: InteractsWithTime
+properties:
+- name: dynamo
+  visibility: protected
+  comment: '# * The DynamoDB client instance.
+
+    # *
+
+    # * @var \Aws\DynamoDb\DynamoDbClient'
+- name: table
+  visibility: protected
+  comment: '# * The table name.
+
+    # *
+
+    # * @var string'
+- name: keyAttribute
+  visibility: protected
+  comment: '# * The name of the attribute that should hold the key.
+
+    # *
+
+    # * @var string'
+- name: valueAttribute
+  visibility: protected
+  comment: '# * The name of the attribute that should hold the value.
+
+    # *
+
+    # * @var string'
+- name: expirationAttribute
+  visibility: protected
+  comment: '# * The name of the attribute that should hold the expiration timestamp.
+
+    # *
+
+    # * @var string'
+- name: prefix
+  visibility: protected
+  comment: '# * A string that should be prepended to keys.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: dynamo
+  - name: table
+  - name: keyAttribute
+    default: '''key'''
+  - name: valueAttribute
+    default: '''value'''
+  - name: expirationAttribute
+    default: '''expires_at'''
+  - name: prefix
+    default: ''''''
+  comment: "# * The DynamoDB client instance.\n# *\n# * @var \\Aws\\DynamoDb\\DynamoDbClient\n\
+    # */\n# protected $dynamo;\n# \n# /**\n# * The table name.\n# *\n# * @var string\n\
+    # */\n# protected $table;\n# \n# /**\n# * The name of the attribute that should\
+    \ hold the key.\n# *\n# * @var string\n# */\n# protected $keyAttribute;\n# \n\
+    # /**\n# * The name of the attribute that should hold the value.\n# *\n# * @var\
+    \ string\n# */\n# protected $valueAttribute;\n# \n# /**\n# * The name of the attribute\
+    \ that should hold the expiration timestamp.\n# *\n# * @var string\n# */\n# protected\
+    \ $expirationAttribute;\n# \n# /**\n# * A string that should be prepended to keys.\n\
+    # *\n# * @var string\n# */\n# protected $prefix;\n# \n# /**\n# * Create a new\
+    \ store instance.\n# *\n# * @param  \\Aws\\DynamoDb\\DynamoDbClient  $dynamo\n\
+    # * @param  string  $table\n# * @param  string  $keyAttribute\n# * @param  string\
+    \  $valueAttribute\n# * @param  string  $expirationAttribute\n# * @param  string\
+    \  $prefix\n# * @return void"
+- name: get
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Retrieve an item from the cache by key.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed'
+- name: many
+  visibility: public
+  parameters:
+  - name: keys
+  comment: '# * Retrieve multiple items from the cache by key.
+
+    # *
+
+    # * Items not found in the cache will have a null value.
+
+    # *
+
+    # * @param  array  $keys
+
+    # * @return array'
+- name: isExpired
+  visibility: protected
+  parameters:
+  - name: item
+  - name: expiration
+    default: 'null'
+  comment: '# * Determine if the given item is expired.
+
+    # *
+
+    # * @param  array  $item
+
+    # * @param  \DateTimeInterface|null  $expiration
+
+    # * @return bool'
+- name: put
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  - name: seconds
+  comment: '# * Store an item in the cache for a given number of seconds.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  int  $seconds
+
+    # * @return bool'
+- name: putMany
+  visibility: public
+  parameters:
+  - name: values
+  - name: seconds
+  comment: '# * Store multiple items in the cache for a given number of seconds.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @param  int  $seconds
+
+    # * @return bool'
+- name: add
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  - name: seconds
+  comment: '# * Store an item in the cache if the key doesn''t exist.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  int  $seconds
+
+    # * @return bool'
+- name: increment
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: '1'
+  comment: '# * Increment the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return int|false'
+- name: decrement
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: '1'
+  comment: '# * Decrement the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return int|false'
+- name: forever
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Store an item in the cache indefinitely.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return bool'
+- name: lock
+  visibility: public
+  parameters:
+  - name: name
+  - name: seconds
+    default: '0'
+  - name: owner
+    default: 'null'
+  comment: '# * Get a lock instance.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  int  $seconds
+
+    # * @param  string|null  $owner
+
+    # * @return \Illuminate\Contracts\Cache\Lock'
+- name: restoreLock
+  visibility: public
+  parameters:
+  - name: name
+  - name: owner
+  comment: '# * Restore a lock instance using the owner identifier.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string  $owner
+
+    # * @return \Illuminate\Contracts\Cache\Lock'
+- name: forget
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Remove an item from the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: flush
+  visibility: public
+  parameters: []
+  comment: '# * Remove all items from the cache.
+
+    # *
+
+    # * @return bool
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: toTimestamp
+  visibility: protected
+  parameters:
+  - name: seconds
+  comment: '# * Get the UNIX timestamp for the given number of seconds.
+
+    # *
+
+    # * @param  int  $seconds
+
+    # * @return int'
+- name: serialize
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Serialize the value.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return mixed'
+- name: unserialize
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Unserialize the value.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return mixed'
+- name: type
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Get the DynamoDB type for the given value.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return string'
+- name: getPrefix
+  visibility: public
+  parameters: []
+  comment: '# * Get the cache key prefix.
+
+    # *
+
+    # * @return string'
+- name: setPrefix
+  visibility: public
+  parameters:
+  - name: prefix
+  comment: '# * Set the cache key prefix.
+
+    # *
+
+    # * @param  string  $prefix
+
+    # * @return void'
+- name: getClient
+  visibility: public
+  parameters: []
+  comment: '# * Get the DynamoDb Client instance.
+
+    # *
+
+    # * @return \Aws\DynamoDb\DynamoDbClient'
+traits:
+- Aws\DynamoDb\DynamoDbClient
+- Aws\DynamoDb\Exception\DynamoDbException
+- Illuminate\Contracts\Cache\LockProvider
+- Illuminate\Contracts\Cache\Store
+- Illuminate\Support\Carbon
+- Illuminate\Support\InteractsWithTime
+- Illuminate\Support\Str
+- RuntimeException
+- InteractsWithTime
+interfaces:
+- LockProvider

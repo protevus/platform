@@ -1,0 +1,212 @@
+name: AblyBroadcaster
+class_comment: '# * @author Matthew Hall (matthall28@gmail.com)
+
+  # * @author Taylor Otwell (taylor@laravel.com)'
+dependencies:
+- name: AblyRest
+  type: class
+  source: Ably\AblyRest
+- name: AblyException
+  type: class
+  source: Ably\Exceptions\AblyException
+- name: AblyMessage
+  type: class
+  source: Ably\Models\Message
+- name: BroadcastException
+  type: class
+  source: Illuminate\Broadcasting\BroadcastException
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: AccessDeniedHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
+properties:
+- name: ably
+  visibility: protected
+  comment: '# * @author Matthew Hall (matthall28@gmail.com)
+
+    # * @author Taylor Otwell (taylor@laravel.com)
+
+    # */
+
+    # class AblyBroadcaster extends Broadcaster
+
+    # {
+
+    # /**
+
+    # * The AblyRest SDK instance.
+
+    # *
+
+    # * @var \Ably\AblyRest'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: ably
+  comment: "# * @author Matthew Hall (matthall28@gmail.com)\n# * @author Taylor Otwell\
+    \ (taylor@laravel.com)\n# */\n# class AblyBroadcaster extends Broadcaster\n# {\n\
+    # /**\n# * The AblyRest SDK instance.\n# *\n# * @var \\Ably\\AblyRest\n# */\n\
+    # protected $ably;\n# \n# /**\n# * Create a new broadcaster instance.\n# *\n#\
+    \ * @param  \\Ably\\AblyRest  $ably\n# * @return void"
+- name: auth
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Authenticate the incoming request for a given channel.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException'
+- name: validAuthenticationResponse
+  visibility: public
+  parameters:
+  - name: request
+  - name: result
+  comment: '# * Return the valid authentication response.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  mixed  $result
+
+    # * @return mixed'
+- name: generateAblySignature
+  visibility: public
+  parameters:
+  - name: channelName
+  - name: socketId
+  - name: userData
+    default: 'null'
+  comment: '# * Generate the signature needed for Ably authentication headers.
+
+    # *
+
+    # * @param  string  $channelName
+
+    # * @param  string  $socketId
+
+    # * @param  array|null  $userData
+
+    # * @return string'
+- name: broadcast
+  visibility: public
+  parameters:
+  - name: channels
+  - name: event
+  - name: payload
+    default: '[]'
+  comment: '# * Broadcast the given event.
+
+    # *
+
+    # * @param  array  $channels
+
+    # * @param  string  $event
+
+    # * @param  array  $payload
+
+    # * @return void
+
+    # *
+
+    # * @throws \Illuminate\Broadcasting\BroadcastException'
+- name: buildAblyMessage
+  visibility: protected
+  parameters:
+  - name: event
+  - name: payload
+    default: '[]'
+  comment: '# * Build an Ably message object for broadcasting.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @param  array  $payload
+
+    # * @return \Ably\Models\Message'
+- name: isGuardedChannel
+  visibility: public
+  parameters:
+  - name: channel
+  comment: '# * Return true if the channel is protected by authentication.
+
+    # *
+
+    # * @param  string  $channel
+
+    # * @return bool'
+- name: normalizeChannelName
+  visibility: public
+  parameters:
+  - name: channel
+  comment: '# * Remove prefix from channel name.
+
+    # *
+
+    # * @param  string  $channel
+
+    # * @return string'
+- name: formatChannels
+  visibility: protected
+  parameters:
+  - name: channels
+  comment: '# * Format the channel array into an array of strings.
+
+    # *
+
+    # * @param  array  $channels
+
+    # * @return array'
+- name: getPublicToken
+  visibility: protected
+  parameters: []
+  comment: '# * Get the public token value from the Ably key.
+
+    # *
+
+    # * @return string'
+- name: getPrivateToken
+  visibility: protected
+  parameters: []
+  comment: '# * Get the private token value from the Ably key.
+
+    # *
+
+    # * @return string'
+- name: getAbly
+  visibility: public
+  parameters: []
+  comment: '# * Get the underlying Ably SDK instance.
+
+    # *
+
+    # * @return \Ably\AblyRest'
+- name: setAbly
+  visibility: public
+  parameters:
+  - name: ably
+  comment: '# * Set the underlying Ably SDK instance.
+
+    # *
+
+    # * @param  \Ably\AblyRest  $ably
+
+    # * @return void'
+traits:
+- Ably\AblyRest
+- Ably\Exceptions\AblyException
+- Illuminate\Broadcasting\BroadcastException
+- Illuminate\Support\Str
+- Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
+interfaces: []

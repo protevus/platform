@@ -1,0 +1,17 @@
+name: ArrayChoiceLoader
+class_comment: null
+dependencies:
+- name: CallbackChoiceLoader
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: choices
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader
+interfaces: []

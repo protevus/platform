@@ -1,0 +1,167 @@
+name: TraceableEventDispatcher
+class_comment: '# * Collects some data about event listeners.
+
+  # *
+
+  # * This event dispatcher delegates the dispatching to another one.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: StoppableEventInterface
+  type: class
+  source: Psr\EventDispatcher\StoppableEventInterface
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcherInterface
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+- name: Stopwatch
+  type: class
+  source: Symfony\Component\Stopwatch\Stopwatch
+- name: ResetInterface
+  type: class
+  source: Symfony\Contracts\Service\ResetInterface
+properties: []
+methods:
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: arguments
+  comment: "# * Collects some data about event listeners.\n# *\n# * This event dispatcher\
+    \ delegates the dispatching to another one.\n# *\n# * @author Fabien Potencier\
+    \ <fabien@symfony.com>\n# */\n# class TraceableEventDispatcher implements EventDispatcherInterface,\
+    \ ResetInterface\n# {\n# /**\n# * @var \\SplObjectStorage<WrappedListener, array{string,\
+    \ string}>|null\n# */\n# private ?\\SplObjectStorage $callStack = null;\n# private\
+    \ array $wrappedListeners = [];\n# private array $orphanedEvents = [];\n# private\
+    \ string $currentRequestHash = '';\n# \n# public function __construct(\n# private\
+    \ EventDispatcherInterface $dispatcher,\n# protected Stopwatch $stopwatch,\n#\
+    \ protected ?LoggerInterface $logger = null,\n# private ?RequestStack $requestStack\
+    \ = null,\n# ) {\n# }\n# \n# public function addListener(string $eventName, callable|array\
+    \ $listener, int $priority = 0): void\n# {\n# $this->dispatcher->addListener($eventName,\
+    \ $listener, $priority);\n# }\n# \n# public function addSubscriber(EventSubscriberInterface\
+    \ $subscriber): void\n# {\n# $this->dispatcher->addSubscriber($subscriber);\n\
+    # }\n# \n# public function removeListener(string $eventName, callable|array $listener):\
+    \ void\n# {\n# if (isset($this->wrappedListeners[$eventName])) {\n# foreach ($this->wrappedListeners[$eventName]\
+    \ as $index => $wrappedListener) {\n# if ($wrappedListener->getWrappedListener()\
+    \ === $listener || ($listener instanceof \\Closure && $wrappedListener->getWrappedListener()\
+    \ == $listener)) {\n# $listener = $wrappedListener;\n# unset($this->wrappedListeners[$eventName][$index]);\n\
+    # break;\n# }\n# }\n# }\n# \n# $this->dispatcher->removeListener($eventName, $listener);\n\
+    # }\n# \n# public function removeSubscriber(EventSubscriberInterface $subscriber):\
+    \ void\n# {\n# $this->dispatcher->removeSubscriber($subscriber);\n# }\n# \n# public\
+    \ function getListeners(?string $eventName = null): array\n# {\n# return $this->dispatcher->getListeners($eventName);\n\
+    # }\n# \n# public function getListenerPriority(string $eventName, callable|array\
+    \ $listener): ?int\n# {\n# // we might have wrapped listeners for the event (if\
+    \ called while dispatching)\n# // in that case get the priority by wrapper\n#\
+    \ if (isset($this->wrappedListeners[$eventName])) {\n# foreach ($this->wrappedListeners[$eventName]\
+    \ as $wrappedListener) {\n# if ($wrappedListener->getWrappedListener() === $listener\
+    \ || ($listener instanceof \\Closure && $wrappedListener->getWrappedListener()\
+    \ == $listener)) {\n# return $this->dispatcher->getListenerPriority($eventName,\
+    \ $wrappedListener);\n# }\n# }\n# }\n# \n# return $this->dispatcher->getListenerPriority($eventName,\
+    \ $listener);\n# }\n# \n# public function hasListeners(?string $eventName = null):\
+    \ bool\n# {\n# return $this->dispatcher->hasListeners($eventName);\n# }\n# \n\
+    # public function dispatch(object $event, ?string $eventName = null): object\n\
+    # {\n# $eventName ??= $event::class;\n# \n# $this->callStack ??= new \\SplObjectStorage();\n\
+    # \n# $currentRequestHash = $this->currentRequestHash = $this->requestStack &&\
+    \ ($request = $this->requestStack->getCurrentRequest()) ? spl_object_hash($request)\
+    \ : '';\n# \n# if (null !== $this->logger && $event instanceof StoppableEventInterface\
+    \ && $event->isPropagationStopped()) {\n# $this->logger->debug(\\sprintf('The\
+    \ \"%s\" event is already stopped. No listeners have been called.', $eventName));\n\
+    # }\n# \n# $this->preProcess($eventName);\n# try {\n# $this->beforeDispatch($eventName,\
+    \ $event);\n# try {\n# $e = $this->stopwatch->start($eventName, 'section');\n\
+    # try {\n# $this->dispatcher->dispatch($event, $eventName);\n# } finally {\n#\
+    \ if ($e->isStarted()) {\n# $e->stop();\n# }\n# }\n# } finally {\n# $this->afterDispatch($eventName,\
+    \ $event);\n# }\n# } finally {\n# $this->currentRequestHash = $currentRequestHash;\n\
+    # $this->postProcess($eventName);\n# }\n# \n# return $event;\n# }\n# \n# public\
+    \ function getCalledListeners(?Request $request = null): array\n# {\n# if (null\
+    \ === $this->callStack) {\n# return [];\n# }\n# \n# $hash = $request ? spl_object_hash($request)\
+    \ : null;\n# $called = [];\n# foreach ($this->callStack as $listener) {\n# [$eventName,\
+    \ $requestHash] = $this->callStack->getInfo();\n# if (null === $hash || $hash\
+    \ === $requestHash) {\n# $called[] = $listener->getInfo($eventName);\n# }\n# }\n\
+    # \n# return $called;\n# }\n# \n# public function getNotCalledListeners(?Request\
+    \ $request = null): array\n# {\n# try {\n# $allListeners = $this->dispatcher instanceof\
+    \ EventDispatcher ? $this->getListenersWithPriority() : $this->getListenersWithoutPriority();\n\
+    # } catch (\\Exception $e) {\n# $this->logger?->info('An exception was thrown\
+    \ while getting the uncalled listeners.', ['exception' => $e]);\n# \n# // unable\
+    \ to retrieve the uncalled listeners\n# return [];\n# }\n# \n# $hash = $request\
+    \ ? spl_object_hash($request) : null;\n# $calledListeners = [];\n# \n# if (null\
+    \ !== $this->callStack) {\n# foreach ($this->callStack as $calledListener) {\n\
+    # [, $requestHash] = $this->callStack->getInfo();\n# \n# if (null === $hash ||\
+    \ $hash === $requestHash) {\n# $calledListeners[] = $calledListener->getWrappedListener();\n\
+    # }\n# }\n# }\n# \n# $notCalled = [];\n# \n# foreach ($allListeners as $eventName\
+    \ => $listeners) {\n# foreach ($listeners as [$listener, $priority]) {\n# if (!\\\
+    in_array($listener, $calledListeners, true)) {\n# if (!$listener instanceof WrappedListener)\
+    \ {\n# $listener = new WrappedListener($listener, null, $this->stopwatch, $this,\
+    \ $priority);\n# }\n# $notCalled[] = $listener->getInfo($eventName);\n# }\n# }\n\
+    # }\n# \n# uasort($notCalled, $this->sortNotCalledListeners(...));\n# \n# return\
+    \ $notCalled;\n# }\n# \n# public function getOrphanedEvents(?Request $request\
+    \ = null): array\n# {\n# if ($request) {\n# return $this->orphanedEvents[spl_object_hash($request)]\
+    \ ?? [];\n# }\n# \n# if (!$this->orphanedEvents) {\n# return [];\n# }\n# \n# return\
+    \ array_merge(...array_values($this->orphanedEvents));\n# }\n# \n# public function\
+    \ reset(): void\n# {\n# $this->callStack = null;\n# $this->orphanedEvents = [];\n\
+    # $this->currentRequestHash = '';\n# }\n# \n# /**\n# * Proxies all method calls\
+    \ to the original event dispatcher.\n# *\n# * @param string $method    The method\
+    \ name\n# * @param array  $arguments The method arguments"
+- name: beforeDispatch
+  visibility: protected
+  parameters:
+  - name: eventName
+  - name: event
+  comment: '# * Called before dispatching the event.'
+- name: afterDispatch
+  visibility: protected
+  parameters:
+  - name: eventName
+  - name: event
+  comment: '# * Called after dispatching the event.'
+- name: preProcess
+  visibility: private
+  parameters:
+  - name: eventName
+  comment: null
+- name: postProcess
+  visibility: private
+  parameters:
+  - name: eventName
+  comment: null
+- name: sortNotCalledListeners
+  visibility: private
+  parameters:
+  - name: a
+  - name: b
+  comment: null
+- name: getListenersWithPriority
+  visibility: private
+  parameters: []
+  comment: null
+- name: getListenersWithoutPriority
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Psr\EventDispatcher\StoppableEventInterface
+- Psr\Log\LoggerInterface
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\EventDispatcher\EventDispatcherInterface
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestStack
+- Symfony\Component\Stopwatch\Stopwatch
+- Symfony\Contracts\Service\ResetInterface
+interfaces:
+- EventDispatcherInterface

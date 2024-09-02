@@ -1,0 +1,32 @@
+name: DescriptorHelper
+class_comment: '# * @author Yonel Ceruto <yonelceruto@gmail.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: BaseDescriptorHelper
+  type: class
+  source: Symfony\Component\Console\Helper\DescriptorHelper
+- name: FileLinkFormatter
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter
+- name: JsonDescriptor
+  type: class
+  source: Symfony\Component\Form\Console\Descriptor\JsonDescriptor
+- name: TextDescriptor
+  type: class
+  source: Symfony\Component\Form\Console\Descriptor\TextDescriptor
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: fileLinkFormatter
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter
+- Symfony\Component\Form\Console\Descriptor\JsonDescriptor
+- Symfony\Component\Form\Console\Descriptor\TextDescriptor
+interfaces: []

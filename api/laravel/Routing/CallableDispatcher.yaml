@@ -1,0 +1,66 @@
+name: CallableDispatcher
+class_comment: null
+dependencies:
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: CallableDispatcherContract
+  type: class
+  source: Illuminate\Routing\Contracts\CallableDispatcher
+- name: ReflectionFunction
+  type: class
+  source: ReflectionFunction
+- name: ResolvesRouteDependencies
+  type: class
+  source: ResolvesRouteDependencies
+properties:
+- name: container
+  visibility: protected
+  comment: '# * The container instance.
+
+    # *
+
+    # * @var \Illuminate\Container\Container'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+  comment: "# * The container instance.\n# *\n# * @var \\Illuminate\\Container\\Container\n\
+    # */\n# protected $container;\n# \n# /**\n# * Create a new callable dispatcher\
+    \ instance.\n# *\n# * @param  \\Illuminate\\Container\\Container  $container\n\
+    # * @return void"
+- name: dispatch
+  visibility: public
+  parameters:
+  - name: route
+  - name: callable
+  comment: '# * Dispatch a request to a given callable.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Route  $route
+
+    # * @param  callable  $callable
+
+    # * @return mixed'
+- name: resolveParameters
+  visibility: protected
+  parameters:
+  - name: route
+  - name: callable
+  comment: '# * Resolve the parameters for the callable.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Route  $route
+
+    # * @param  callable  $callable
+
+    # * @return array'
+traits:
+- Illuminate\Container\Container
+- ReflectionFunction
+- ResolvesRouteDependencies
+interfaces:
+- CallableDispatcherContract

@@ -1,0 +1,141 @@
+name: EnumTypeTest
+class_comment: null
+dependencies:
+- name: EnumType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\EnumType
+- name: BaseTypeTestCase
+  type: class
+  source: Symfony\Component\Form\Tests\Extension\Core\Type\BaseTypeTestCase
+- name: Answer
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\Answer
+- name: Number
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\Number
+- name: Suit
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\Suit
+- name: TranslatableTextAlign
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\TranslatableTextAlign
+- name: InvalidOptionsException
+  type: class
+  source: Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+- name: MissingOptionsException
+  type: class
+  source: Symfony\Component\OptionsResolver\Exception\MissingOptionsException
+- name: IdentityTranslator
+  type: class
+  source: Symfony\Component\Translation\IdentityTranslator
+- name: TranslatableInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatableInterface
+properties: []
+methods:
+- name: testClassOptionIsRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidClassOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidClassOptionType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitSingleNonExpanded
+  visibility: public
+  parameters:
+  - name: class
+  - name: submittedData
+  - name: expectedData
+  comment: '# * @dataProvider provideSingleSubmitData'
+- name: testSubmitSingleExpanded
+  visibility: public
+  parameters:
+  - name: class
+  - name: submittedData
+  - name: expectedData
+  comment: '# * @dataProvider provideSingleSubmitData'
+- name: provideSingleSubmitData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitSingleNonExpandedInvalidChoice
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNull
+  visibility: public
+  parameters:
+  - name: expected
+    default: 'null'
+  - name: norm
+    default: 'null'
+  - name: view
+    default: 'null'
+  comment: null
+- name: testSubmitNullUsesDefaultEmptyData
+  visibility: public
+  parameters:
+  - name: emptyData
+    default: '''empty'''
+  - name: expectedData
+    default: 'null'
+  comment: null
+- name: testSubmitMultipleChoiceWithEmptyData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitSingleChoiceExpandedWithEmptyData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitMultipleChoiceExpandedWithEmptyData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitMultipleNonExpanded
+  visibility: public
+  parameters:
+  - name: class
+  - name: submittedValues
+  - name: expectedValues
+  comment: '# * @dataProvider provideMultiSubmitData'
+- name: testSubmitMultipleExpanded
+  visibility: public
+  parameters:
+  - name: class
+  - name: submittedValues
+  - name: expectedValues
+  comment: '# * @dataProvider provideMultiSubmitData'
+- name: provideMultiSubmitData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testChoiceLabel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testChoiceLabelTranslatable
+  visibility: public
+  parameters: []
+  comment: null
+- name: getTestOptions
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\Extension\Core\Type\EnumType
+- Symfony\Component\Form\Tests\Extension\Core\Type\BaseTypeTestCase
+- Symfony\Component\Form\Tests\Fixtures\Answer
+- Symfony\Component\Form\Tests\Fixtures\Number
+- Symfony\Component\Form\Tests\Fixtures\Suit
+- Symfony\Component\Form\Tests\Fixtures\TranslatableTextAlign
+- Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+- Symfony\Component\OptionsResolver\Exception\MissingOptionsException
+- Symfony\Component\Translation\IdentityTranslator
+- Symfony\Contracts\Translation\TranslatableInterface
+interfaces: []

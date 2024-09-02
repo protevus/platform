@@ -1,0 +1,33 @@
+name: SignalMapTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: SignalMap
+  type: class
+  source: Symfony\Component\Console\SignalRegistry\SignalMap
+properties: []
+methods:
+- name: testSignalExists
+  visibility: public
+  parameters:
+  - name: signal
+  - name: expected
+  comment: '# * @requires extension pcntl
+
+    # *
+
+    # * @testWith [2, "SIGINT"]
+
+    # *           [9, "SIGKILL"]
+
+    # *           [15, "SIGTERM"]'
+- name: testSignalDoesNotExist
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\SignalRegistry\SignalMap
+interfaces: []

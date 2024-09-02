@@ -1,0 +1,251 @@
+name: ValidatorTypeGuesser
+class_comment: null
+dependencies:
+- name: CheckboxType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+- name: CollectionType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\CollectionType
+- name: CountryType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\CountryType
+- name: CurrencyType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\CurrencyType
+- name: DateTimeType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\DateTimeType
+- name: DateType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\DateType
+- name: EmailType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\EmailType
+- name: FileType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\FileType
+- name: IntegerType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\IntegerType
+- name: LanguageType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\LanguageType
+- name: LocaleType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\LocaleType
+- name: NumberType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\NumberType
+- name: TextType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\TextType
+- name: TimeType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\TimeType
+- name: UrlType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\UrlType
+- name: FormTypeGuesserInterface
+  type: class
+  source: Symfony\Component\Form\FormTypeGuesserInterface
+- name: Guess
+  type: class
+  source: Symfony\Component\Form\Guess\Guess
+- name: TypeGuess
+  type: class
+  source: Symfony\Component\Form\Guess\TypeGuess
+- name: ValueGuess
+  type: class
+  source: Symfony\Component\Form\Guess\ValueGuess
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: Count
+  type: class
+  source: Symfony\Component\Validator\Constraints\Count
+- name: Country
+  type: class
+  source: Symfony\Component\Validator\Constraints\Country
+- name: Currency
+  type: class
+  source: Symfony\Component\Validator\Constraints\Currency
+- name: Date
+  type: class
+  source: Symfony\Component\Validator\Constraints\Date
+- name: DateTime
+  type: class
+  source: Symfony\Component\Validator\Constraints\DateTime
+- name: Email
+  type: class
+  source: Symfony\Component\Validator\Constraints\Email
+- name: File
+  type: class
+  source: Symfony\Component\Validator\Constraints\File
+- name: Image
+  type: class
+  source: Symfony\Component\Validator\Constraints\Image
+- name: Ip
+  type: class
+  source: Symfony\Component\Validator\Constraints\Ip
+- name: IsFalse
+  type: class
+  source: Symfony\Component\Validator\Constraints\IsFalse
+- name: IsTrue
+  type: class
+  source: Symfony\Component\Validator\Constraints\IsTrue
+- name: Language
+  type: class
+  source: Symfony\Component\Validator\Constraints\Language
+- name: Length
+  type: class
+  source: Symfony\Component\Validator\Constraints\Length
+- name: Locale
+  type: class
+  source: Symfony\Component\Validator\Constraints\Locale
+- name: NotBlank
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotBlank
+- name: NotNull
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotNull
+- name: Range
+  type: class
+  source: Symfony\Component\Validator\Constraints\Range
+- name: Regex
+  type: class
+  source: Symfony\Component\Validator\Constraints\Regex
+- name: Time
+  type: class
+  source: Symfony\Component\Validator\Constraints\Time
+- name: Type
+  type: class
+  source: Symfony\Component\Validator\Constraints\Type
+- name: Url
+  type: class
+  source: Symfony\Component\Validator\Constraints\Url
+- name: ClassMetadataInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadataInterface
+- name: MetadataFactoryInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: metadataFactory
+  comment: null
+- name: guessType
+  visibility: public
+  parameters:
+  - name: class
+  - name: property
+  comment: null
+- name: guessRequired
+  visibility: public
+  parameters:
+  - name: class
+  - name: property
+  comment: null
+- name: guessMaxLength
+  visibility: public
+  parameters:
+  - name: class
+  - name: property
+  comment: null
+- name: guessPattern
+  visibility: public
+  parameters:
+  - name: class
+  - name: property
+  comment: null
+- name: guessTypeForConstraint
+  visibility: public
+  parameters:
+  - name: constraint
+  comment: '# * Guesses a field class name for a given constraint.'
+- name: guessRequiredForConstraint
+  visibility: public
+  parameters:
+  - name: constraint
+  comment: '# * Guesses whether a field is required based on the given constraint.'
+- name: guessMaxLengthForConstraint
+  visibility: public
+  parameters:
+  - name: constraint
+  comment: '# * Guesses a field''s maximum length based on the given constraint.'
+- name: guessPatternForConstraint
+  visibility: public
+  parameters:
+  - name: constraint
+  comment: '# * Guesses a field''s pattern based on the given constraint.'
+- name: guess
+  visibility: protected
+  parameters:
+  - name: class
+  - name: property
+  - name: closure
+  - name: defaultValue
+    default: 'null'
+  comment: '# * Iterates over the constraints of a property, executes a constraints
+    on
+
+    # * them and returns the best guess.
+
+    # *
+
+    # * @param \Closure $closure      The closure that returns a guess
+
+    # *                               for a given constraint
+
+    # * @param mixed    $defaultValue The default value assumed if no other value
+
+    # *                               can be guessed'
+traits:
+- Symfony\Component\Form\Extension\Core\Type\CheckboxType
+- Symfony\Component\Form\Extension\Core\Type\CollectionType
+- Symfony\Component\Form\Extension\Core\Type\CountryType
+- Symfony\Component\Form\Extension\Core\Type\CurrencyType
+- Symfony\Component\Form\Extension\Core\Type\DateTimeType
+- Symfony\Component\Form\Extension\Core\Type\DateType
+- Symfony\Component\Form\Extension\Core\Type\EmailType
+- Symfony\Component\Form\Extension\Core\Type\FileType
+- Symfony\Component\Form\Extension\Core\Type\IntegerType
+- Symfony\Component\Form\Extension\Core\Type\LanguageType
+- Symfony\Component\Form\Extension\Core\Type\LocaleType
+- Symfony\Component\Form\Extension\Core\Type\NumberType
+- Symfony\Component\Form\Extension\Core\Type\TextType
+- Symfony\Component\Form\Extension\Core\Type\TimeType
+- Symfony\Component\Form\Extension\Core\Type\UrlType
+- Symfony\Component\Form\FormTypeGuesserInterface
+- Symfony\Component\Form\Guess\Guess
+- Symfony\Component\Form\Guess\TypeGuess
+- Symfony\Component\Form\Guess\ValueGuess
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Constraints\Count
+- Symfony\Component\Validator\Constraints\Country
+- Symfony\Component\Validator\Constraints\Currency
+- Symfony\Component\Validator\Constraints\Date
+- Symfony\Component\Validator\Constraints\DateTime
+- Symfony\Component\Validator\Constraints\Email
+- Symfony\Component\Validator\Constraints\File
+- Symfony\Component\Validator\Constraints\Image
+- Symfony\Component\Validator\Constraints\Ip
+- Symfony\Component\Validator\Constraints\IsFalse
+- Symfony\Component\Validator\Constraints\IsTrue
+- Symfony\Component\Validator\Constraints\Language
+- Symfony\Component\Validator\Constraints\Length
+- Symfony\Component\Validator\Constraints\Locale
+- Symfony\Component\Validator\Constraints\NotBlank
+- Symfony\Component\Validator\Constraints\NotNull
+- Symfony\Component\Validator\Constraints\Range
+- Symfony\Component\Validator\Constraints\Regex
+- Symfony\Component\Validator\Constraints\Time
+- Symfony\Component\Validator\Constraints\Type
+- Symfony\Component\Validator\Constraints\Url
+- Symfony\Component\Validator\Mapping\ClassMetadataInterface
+- Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface
+interfaces:
+- FormTypeGuesserInterface

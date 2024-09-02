@@ -1,0 +1,104 @@
+name: Attribute
+class_comment: null
+dependencies: []
+properties:
+- name: get
+  visibility: public
+  comment: '# * The attribute accessor.
+
+    # *
+
+    # * @var callable'
+- name: set
+  visibility: public
+  comment: '# * The attribute mutator.
+
+    # *
+
+    # * @var callable'
+- name: withCaching
+  visibility: public
+  comment: '# * Indicates if caching is enabled for this attribute.
+
+    # *
+
+    # * @var bool'
+- name: withObjectCaching
+  visibility: public
+  comment: '# * Indicates if caching of objects is enabled for this attribute.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: get
+    default: 'null'
+  - name: set
+    default: 'null'
+  comment: "# * The attribute accessor.\n# *\n# * @var callable\n# */\n# public $get;\n\
+    # \n# /**\n# * The attribute mutator.\n# *\n# * @var callable\n# */\n# public\
+    \ $set;\n# \n# /**\n# * Indicates if caching is enabled for this attribute.\n\
+    # *\n# * @var bool\n# */\n# public $withCaching = false;\n# \n# /**\n# * Indicates\
+    \ if caching of objects is enabled for this attribute.\n# *\n# * @var bool\n#\
+    \ */\n# public $withObjectCaching = true;\n# \n# /**\n# * Create a new attribute\
+    \ accessor / mutator.\n# *\n# * @param  callable|null  $get\n# * @param  callable|null\
+    \  $set\n# * @return void"
+- name: make
+  visibility: public
+  parameters:
+  - name: get
+    default: 'null'
+  - name: set
+    default: 'null'
+  comment: '# * Create a new attribute accessor / mutator.
+
+    # *
+
+    # * @param  callable|null  $get
+
+    # * @param  callable|null  $set
+
+    # * @return static'
+- name: get
+  visibility: public
+  parameters:
+  - name: get
+  comment: '# * Create a new attribute accessor.
+
+    # *
+
+    # * @param  callable  $get
+
+    # * @return static'
+- name: set
+  visibility: public
+  parameters:
+  - name: set
+  comment: '# * Create a new attribute mutator.
+
+    # *
+
+    # * @param  callable  $set
+
+    # * @return static'
+- name: withoutObjectCaching
+  visibility: public
+  parameters: []
+  comment: '# * Disable object caching for the attribute.
+
+    # *
+
+    # * @return static'
+- name: shouldCache
+  visibility: public
+  parameters: []
+  comment: '# * Enable caching for the attribute.
+
+    # *
+
+    # * @return static'
+traits: []
+interfaces: []

@@ -1,0 +1,55 @@
+name: Pipeline
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+properties: []
+methods:
+- name: send
+  visibility: public
+  parameters:
+  - name: traveler
+  comment: '# * Set the traveler object being sent on the pipeline.
+
+    # *
+
+    # * @param  mixed  $traveler
+
+    # * @return $this'
+- name: through
+  visibility: public
+  parameters:
+  - name: stops
+  comment: '# * Set the stops of the pipeline.
+
+    # *
+
+    # * @param  dynamic|array  $stops
+
+    # * @return $this'
+- name: via
+  visibility: public
+  parameters:
+  - name: method
+  comment: '# * Set the method to call on the stops.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @return $this'
+- name: then
+  visibility: public
+  parameters:
+  - name: destination
+  comment: '# * Run the pipeline with a final destination callback.
+
+    # *
+
+    # * @param  \Closure  $destination
+
+    # * @return mixed'
+traits:
+- Closure
+interfaces: []

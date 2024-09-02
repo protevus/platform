@@ -1,0 +1,150 @@
+name: AbstractHeader
+class_comment: null
+dependencies:
+- name: QpMimeHeaderEncoder
+  type: class
+  source: Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder
+properties: []
+methods:
+- name: setLanguage
+  visibility: public
+  parameters:
+  - name: lang
+  comment: "# * An abstract base MIME Header.\n# *\n# * @author Chris Corbyn\n# */\n\
+    # abstract class AbstractHeader implements HeaderInterface\n# {\n# public const\
+    \ PHRASE_PATTERN = '(?:(?:(?:(?:(?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?(\\((?:(?:(?:[\
+    \ \\t]*(?:\\r\\n))?[ \\t])|(?:(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x19\\x7F]|[\\x21-\\\
+    x27\\x2A-\\x5B\\x5D-\\x7E])|(?:\\\\[\\x00-\\x08\\x0B\\x0C\\x0E-\\x7F])|(?1)))*(?:(?:[\
+    \ \\t]*(?:\\r\\n))?[ \\t])?\\)))*(?:(?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?(\\((?:(?:(?:[\
+    \ \\t]*(?:\\r\\n))?[ \\t])|(?:(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x19\\x7F]|[\\x21-\\\
+    x27\\x2A-\\x5B\\x5D-\\x7E])|(?:\\\\[\\x00-\\x08\\x0B\\x0C\\x0E-\\x7F])|(?1)))*(?:(?:[\
+    \ \\t]*(?:\\r\\n))?[ \\t])?\\)))|(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])))?[a-zA-Z0-9!#\\\
+    $%&\\'\\*\\+\\-\\/=\\?\\^_`\\{\\}\\|~]+(?:(?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?(\\\
+    ((?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])|(?:(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x19\\\
+    x7F]|[\\x21-\\x27\\x2A-\\x5B\\x5D-\\x7E])|(?:\\\\[\\x00-\\x08\\x0B\\x0C\\x0E-\\\
+    x7F])|(?1)))*(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?\\)))*(?:(?:(?:(?:[ \\t]*(?:\\r\\\
+    n))?[ \\t])?(\\((?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])|(?:(?:[\\x01-\\x08\\x0B\\\
+    x0C\\x0E-\\x19\\x7F]|[\\x21-\\x27\\x2A-\\x5B\\x5D-\\x7E])|(?:\\\\[\\x00-\\x08\\\
+    x0B\\x0C\\x0E-\\x7F])|(?1)))*(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?\\)))|(?:(?:[ \\\
+    t]*(?:\\r\\n))?[ \\t])))?)|(?:(?:(?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?(\\((?:(?:(?:[\
+    \ \\t]*(?:\\r\\n))?[ \\t])|(?:(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x19\\x7F]|[\\x21-\\\
+    x27\\x2A-\\x5B\\x5D-\\x7E])|(?:\\\\[\\x00-\\x08\\x0B\\x0C\\x0E-\\x7F])|(?1)))*(?:(?:[\
+    \ \\t]*(?:\\r\\n))?[ \\t])?\\)))*(?:(?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?(\\((?:(?:(?:[\
+    \ \\t]*(?:\\r\\n))?[ \\t])|(?:(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x19\\x7F]|[\\x21-\\\
+    x27\\x2A-\\x5B\\x5D-\\x7E])|(?:\\\\[\\x00-\\x08\\x0B\\x0C\\x0E-\\x7F])|(?1)))*(?:(?:[\
+    \ \\t]*(?:\\r\\n))?[ \\t])?\\)))|(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])))?\"((?:(?:[\
+    \ \\t]*(?:\\r\\n))?[ \\t])?(?:(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x19\\x7F]|[\\x21\\\
+    x23-\\x5B\\x5D-\\x7E])|(?:\\\\[\\x00-\\x08\\x0B\\x0C\\x0E-\\x7F])))*(?:(?:[ \\\
+    t]*(?:\\r\\n))?[ \\t])?\"(?:(?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?(\\((?:(?:(?:[\
+    \ \\t]*(?:\\r\\n))?[ \\t])|(?:(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x19\\x7F]|[\\x21-\\\
+    x27\\x2A-\\x5B\\x5D-\\x7E])|(?:\\\\[\\x00-\\x08\\x0B\\x0C\\x0E-\\x7F])|(?1)))*(?:(?:[\
+    \ \\t]*(?:\\r\\n))?[ \\t])?\\)))*(?:(?:(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])?(\\((?:(?:(?:[\
+    \ \\t]*(?:\\r\\n))?[ \\t])|(?:(?:[\\x01-\\x08\\x0B\\x0C\\x0E-\\x19\\x7F]|[\\x21-\\\
+    x27\\x2A-\\x5B\\x5D-\\x7E])|(?:\\\\[\\x00-\\x08\\x0B\\x0C\\x0E-\\x7F])|(?1)))*(?:(?:[\
+    \ \\t]*(?:\\r\\n))?[ \\t])?\\)))|(?:(?:[ \\t]*(?:\\r\\n))?[ \\t])))?))+?)';\n\
+    # \n# private static QpMimeHeaderEncoder $encoder;\n# \n# private string $name;\n\
+    # private int $lineLength = 76;\n# private ?string $lang = null;\n# private string\
+    \ $charset = 'utf-8';\n# \n# public function __construct(string $name)\n# {\n\
+    # $this->name = $name;\n# }\n# \n# public function setCharset(string $charset):\
+    \ void\n# {\n# $this->charset = $charset;\n# }\n# \n# public function getCharset():\
+    \ ?string\n# {\n# return $this->charset;\n# }\n# \n# /**\n# * Set the language\
+    \ used in this Header.\n# *\n# * For example, for US English, 'en-us'."
+- name: getLanguage
+  visibility: public
+  parameters: []
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: setMaxLineLength
+  visibility: public
+  parameters:
+  - name: lineLength
+  comment: null
+- name: getMaxLineLength
+  visibility: public
+  parameters: []
+  comment: null
+- name: toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: createPhrase
+  visibility: protected
+  parameters:
+  - name: header
+  - name: string
+  - name: charset
+  - name: shorten
+    default: 'false'
+  comment: '# * Produces a compliant, formatted RFC 2822 ''phrase'' based on the string
+    given.
+
+    # *
+
+    # * @param string $string  as displayed
+
+    # * @param bool   $shorten the first line to make remove for header name'
+- name: encodeWords
+  visibility: protected
+  parameters:
+  - name: header
+  - name: input
+  - name: usedLength
+    default: '-1'
+  comment: '# * Encode needed word tokens within a string of input.'
+- name: tokenNeedsEncoding
+  visibility: protected
+  parameters:
+  - name: token
+  comment: null
+- name: getEncodableWordTokens
+  visibility: protected
+  parameters:
+  - name: string
+  comment: '# * Splits a string into tokens in blocks of words which can be encoded
+    quickly.
+
+    # *
+
+    # * @return string[]'
+- name: getTokenAsEncodedWord
+  visibility: protected
+  parameters:
+  - name: token
+  - name: firstLineOffset
+    default: '0'
+  comment: '# * Get a token as an encoded word for safe insertion into headers.'
+- name: generateTokenLines
+  visibility: protected
+  parameters:
+  - name: token
+  comment: '# * Generates tokens from the given string which include CRLF as individual
+    tokens.
+
+    # *
+
+    # * @return string[]'
+- name: toTokens
+  visibility: protected
+  parameters:
+  - name: string
+    default: 'null'
+  comment: '# * Generate a list of all tokens in the final header.'
+- name: tokensToString
+  visibility: private
+  parameters:
+  - name: tokens
+  comment: '# * Takes an array of tokens which appear in the header and turns them
+    into
+
+    # * an RFC 2822 compliant string, adding FWSP where needed.
+
+    # *
+
+    # * @param string[] $tokens'
+traits:
+- Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder
+interfaces:
+- HeaderInterface

@@ -1,0 +1,42 @@
+name: LockableTrait
+class_comment: null
+dependencies:
+- name: LogicException
+  type: class
+  source: Symfony\Component\Console\Exception\LogicException
+- name: LockFactory
+  type: class
+  source: Symfony\Component\Lock\LockFactory
+- name: LockInterface
+  type: class
+  source: Symfony\Component\Lock\LockInterface
+- name: FlockStore
+  type: class
+  source: Symfony\Component\Lock\Store\FlockStore
+- name: SemaphoreStore
+  type: class
+  source: Symfony\Component\Lock\Store\SemaphoreStore
+properties: []
+methods:
+- name: lock
+  visibility: private
+  parameters:
+  - name: name
+    default: 'null'
+  - name: blocking
+    default: 'false'
+  comment: "# * Basic lock feature for commands.\n# *\n# * @author Geoffrey Brier\
+    \ <geoffrey.brier@gmail.com>\n# */\n# trait LockableTrait\n# {\n# private ?LockInterface\
+    \ $lock = null;\n# \n# private ?LockFactory $lockFactory = null;\n# \n# /**\n\
+    # * Locks a command."
+- name: release
+  visibility: private
+  parameters: []
+  comment: '# * Releases the command lock if there is one.'
+traits:
+- Symfony\Component\Console\Exception\LogicException
+- Symfony\Component\Lock\LockFactory
+- Symfony\Component\Lock\LockInterface
+- Symfony\Component\Lock\Store\FlockStore
+- Symfony\Component\Lock\Store\SemaphoreStore
+interfaces: []

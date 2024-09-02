@@ -1,0 +1,102 @@
+name: DatabaseTruncation
+class_comment: null
+dependencies:
+- name: Kernel
+  type: class
+  source: Illuminate\Contracts\Console\Kernel
+- name: ConnectionInterface
+  type: class
+  source: Illuminate\Database\ConnectionInterface
+- name: CanConfigureMigrationCommands
+  type: class
+  source: Illuminate\Foundation\Testing\Traits\CanConfigureMigrationCommands
+- name: CanConfigureMigrationCommands
+  type: class
+  source: CanConfigureMigrationCommands
+properties: []
+methods:
+- name: truncateDatabaseTables
+  visibility: protected
+  parameters: []
+  comment: "# * The cached names of the database tables for each connection.\n# *\n\
+    # * @var array\n# */\n# protected static array $allTables;\n# \n# /**\n# * Truncate\
+    \ the database tables for all configured connections.\n# *\n# * @return void"
+- name: truncateTablesForAllConnections
+  visibility: protected
+  parameters: []
+  comment: '# * Truncate the database tables for all configured connections.
+
+    # *
+
+    # * @return void'
+- name: truncateTablesForConnection
+  visibility: protected
+  parameters:
+  - name: connection
+  - name: name
+  comment: '# * Truncate the database tables for the given database connection.
+
+    # *
+
+    # * @param  \Illuminate\Database\ConnectionInterface  $connection
+
+    # * @param  string|null  $name
+
+    # * @return void'
+- name: withoutTablePrefix
+  visibility: protected
+  parameters:
+  - name: connection
+  - name: table
+  comment: '# * Remove the table prefix from a table name, if it exists.
+
+    # *
+
+    # * @param  \Illuminate\Database\ConnectionInterface  $connection
+
+    # * @param  string  $table
+
+    # * @return string'
+- name: connectionsToTruncate
+  visibility: protected
+  parameters: []
+  comment: '# * The database connections that should have their tables truncated.
+
+    # *
+
+    # * @return array'
+- name: exceptTables
+  visibility: protected
+  parameters:
+  - name: connectionName
+  comment: '# * Get the tables that should not be truncated.
+
+    # *
+
+    # * @param  string|null  $connectionName
+
+    # * @return array'
+- name: beforeTruncatingDatabase
+  visibility: protected
+  parameters: []
+  comment: '# * Perform any work that should take place before the database has started
+    truncating.
+
+    # *
+
+    # * @return void'
+- name: afterTruncatingDatabase
+  visibility: protected
+  parameters: []
+  comment: '# * Perform any work that should take place once the database has finished
+    truncating.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Contracts\Console\Kernel
+- Illuminate\Database\ConnectionInterface
+- Illuminate\Foundation\Testing\Traits\CanConfigureMigrationCommands
+- CanConfigureMigrationCommands
+interfaces: []

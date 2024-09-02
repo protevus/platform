@@ -1,0 +1,47 @@
+name: AnsiColorModeTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Console\Exception\InvalidArgumentException
+- name: AnsiColorMode
+  type: class
+  source: Symfony\Component\Console\Output\AnsiColorMode
+properties: []
+methods:
+- name: testColorsConversionToAnsi4
+  visibility: public
+  parameters:
+  - name: corlorHex
+  - name: expected
+  comment: '# * @dataProvider provideColorsConversion'
+- name: testColorsConversionToAnsi8
+  visibility: public
+  parameters:
+  - name: corlorHex
+  - name: expected
+  comment: '# * @dataProvider provideColorsConversion'
+- name: provideColorsConversion
+  visibility: public
+  parameters: []
+  comment: null
+- name: testColorsConversionWithoutSharp
+  visibility: public
+  parameters: []
+  comment: null
+- name: testColorsConversionWithout3Characters
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidHexCode
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Exception\InvalidArgumentException
+- Symfony\Component\Console\Output\AnsiColorMode
+interfaces: []

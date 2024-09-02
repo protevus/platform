@@ -1,0 +1,33 @@
+name: CallbackValidator
+class_comment: '# * Validator for Callback constraint.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: ConstraintValidator
+  type: class
+  source: Symfony\Component\Validator\ConstraintValidator
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedTypeException
+properties: []
+methods:
+- name: validate
+  visibility: public
+  parameters:
+  - name: object
+  - name: constraint
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\ConstraintValidator
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- Symfony\Component\Validator\Exception\UnexpectedTypeException
+interfaces: []

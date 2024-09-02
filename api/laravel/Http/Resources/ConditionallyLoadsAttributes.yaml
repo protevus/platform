@@ -1,0 +1,366 @@
+name: ConditionallyLoadsAttributes
+class_comment: null
+dependencies:
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+properties: []
+methods:
+- name: filter
+  visibility: protected
+  parameters:
+  - name: data
+  comment: '# * Filter the given data, removing any optional values.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return array'
+- name: mergeData
+  visibility: protected
+  parameters:
+  - name: data
+  - name: index
+  - name: merge
+  - name: numericKeys
+  comment: '# * Merge the given data in at the given index.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @param  int  $index
+
+    # * @param  array  $merge
+
+    # * @param  bool  $numericKeys
+
+    # * @return array'
+- name: removeMissingValues
+  visibility: protected
+  parameters:
+  - name: data
+  comment: '# * Remove the missing values from the filtered data.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return array'
+- name: when
+  visibility: protected
+  parameters:
+  - name: condition
+  - name: value
+  - name: default
+    default: 'null'
+  comment: '# * Retrieve a value if the given "condition" is truthy.
+
+    # *
+
+    # * @param  bool  $condition
+
+    # * @param  mixed  $value
+
+    # * @param  mixed  $default
+
+    # * @return \Illuminate\Http\Resources\MissingValue|mixed'
+- name: unless
+  visibility: public
+  parameters:
+  - name: condition
+  - name: value
+  - name: default
+    default: 'null'
+  comment: '# * Retrieve a value if the given "condition" is falsy.
+
+    # *
+
+    # * @param  bool  $condition
+
+    # * @param  mixed  $value
+
+    # * @param  mixed  $default
+
+    # * @return \Illuminate\Http\Resources\MissingValue|mixed'
+- name: merge
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Merge a value into the array.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return \Illuminate\Http\Resources\MergeValue|mixed'
+- name: mergeWhen
+  visibility: protected
+  parameters:
+  - name: condition
+  - name: value
+  - name: default
+    default: 'null'
+  comment: '# * Merge a value if the given condition is truthy.
+
+    # *
+
+    # * @param  bool  $condition
+
+    # * @param  mixed  $value
+
+    # * @param  mixed  $default
+
+    # * @return \Illuminate\Http\Resources\MergeValue|mixed'
+- name: mergeUnless
+  visibility: protected
+  parameters:
+  - name: condition
+  - name: value
+  - name: default
+    default: 'null'
+  comment: '# * Merge a value unless the given condition is truthy.
+
+    # *
+
+    # * @param  bool  $condition
+
+    # * @param  mixed  $value
+
+    # * @param  mixed  $default
+
+    # * @return \Illuminate\Http\Resources\MergeValue|mixed'
+- name: attributes
+  visibility: protected
+  parameters:
+  - name: attributes
+  comment: '# * Merge the given attributes.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @return \Illuminate\Http\Resources\MergeValue'
+- name: whenHas
+  visibility: public
+  parameters:
+  - name: attribute
+  - name: value
+    default: 'null'
+  - name: default
+    default: 'null'
+  comment: '# * Retrieve an attribute if it exists on the resource.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  mixed  $value
+
+    # * @param  mixed  $default
+
+    # * @return \Illuminate\Http\Resources\MissingValue|mixed'
+- name: whenNull
+  visibility: protected
+  parameters:
+  - name: value
+  - name: default
+    default: 'null'
+  comment: '# * Retrieve a model attribute if it is null.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @param  mixed  $default
+
+    # * @return \Illuminate\Http\Resources\MissingValue|mixed'
+- name: whenNotNull
+  visibility: protected
+  parameters:
+  - name: value
+  - name: default
+    default: 'null'
+  comment: '# * Retrieve a model attribute if it is not null.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @param  mixed  $default
+
+    # * @return \Illuminate\Http\Resources\MissingValue|mixed'
+- name: whenAppended
+  visibility: protected
+  parameters:
+  - name: attribute
+  - name: value
+    default: 'null'
+  - name: default
+    default: 'null'
+  comment: '# * Retrieve an accessor when it has been appended.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  mixed  $value
+
+    # * @param  mixed  $default
+
+    # * @return \Illuminate\Http\Resources\MissingValue|mixed'
+- name: whenLoaded
+  visibility: protected
+  parameters:
+  - name: relationship
+  - name: value
+    default: 'null'
+  - name: default
+    default: 'null'
+  comment: '# * Retrieve a relationship if it has been loaded.
+
+    # *
+
+    # * @param  string  $relationship
+
+    # * @param  mixed  $value
+
+    # * @param  mixed  $default
+
+    # * @return \Illuminate\Http\Resources\MissingValue|mixed'
+- name: whenCounted
+  visibility: public
+  parameters:
+  - name: relationship
+  - name: value
+    default: 'null'
+  - name: default
+    default: 'null'
+  comment: '# * Retrieve a relationship count if it exists.
+
+    # *
+
+    # * @param  string  $relationship
+
+    # * @param  mixed  $value
+
+    # * @param  mixed  $default
+
+    # * @return \Illuminate\Http\Resources\MissingValue|mixed'
+- name: whenAggregated
+  visibility: public
+  parameters:
+  - name: relationship
+  - name: column
+  - name: aggregate
+  - name: value
+    default: 'null'
+  - name: default
+    default: 'null'
+  comment: '# * Retrieve a relationship aggregated value if it exists.
+
+    # *
+
+    # * @param  string  $relationship
+
+    # * @param  string  $column
+
+    # * @param  string  $aggregate
+
+    # * @param  mixed  $value
+
+    # * @param  mixed  $default
+
+    # * @return \Illuminate\Http\Resources\MissingValue|mixed'
+- name: whenPivotLoaded
+  visibility: protected
+  parameters:
+  - name: table
+  - name: value
+  - name: default
+    default: 'null'
+  comment: '# * Execute a callback if the given pivot table has been loaded.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @param  mixed  $value
+
+    # * @param  mixed  $default
+
+    # * @return \Illuminate\Http\Resources\MissingValue|mixed'
+- name: whenPivotLoadedAs
+  visibility: protected
+  parameters:
+  - name: accessor
+  - name: table
+  - name: value
+  - name: default
+    default: 'null'
+  comment: '# * Execute a callback if the given pivot table with a custom accessor
+    has been loaded.
+
+    # *
+
+    # * @param  string  $accessor
+
+    # * @param  string  $table
+
+    # * @param  mixed  $value
+
+    # * @param  mixed  $default
+
+    # * @return \Illuminate\Http\Resources\MissingValue|mixed'
+- name: hasPivotLoaded
+  visibility: protected
+  parameters:
+  - name: table
+  comment: '# * Determine if the resource has the specified pivot table loaded.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @return bool'
+- name: hasPivotLoadedAs
+  visibility: protected
+  parameters:
+  - name: accessor
+  - name: table
+  comment: '# * Determine if the resource has the specified pivot table loaded with
+    a custom accessor.
+
+    # *
+
+    # * @param  string  $accessor
+
+    # * @param  string  $table
+
+    # * @return bool'
+- name: transform
+  visibility: protected
+  parameters:
+  - name: value
+  - name: callback
+  - name: default
+    default: 'null'
+  comment: '# * Transform the given value if it is present.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @param  callable  $callback
+
+    # * @param  mixed  $default
+
+    # * @return mixed'
+traits:
+- Illuminate\Support\Arr
+- Illuminate\Support\Str
+interfaces: []

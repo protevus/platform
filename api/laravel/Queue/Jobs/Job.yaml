@@ -1,0 +1,321 @@
+name: Job
+class_comment: null
+dependencies:
+- name: Batchable
+  type: class
+  source: Illuminate\Bus\Batchable
+- name: BatchRepository
+  type: class
+  source: Illuminate\Bus\BatchRepository
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: JobFailed
+  type: class
+  source: Illuminate\Queue\Events\JobFailed
+- name: ManuallyFailedException
+  type: class
+  source: Illuminate\Queue\ManuallyFailedException
+- name: TimeoutExceededException
+  type: class
+  source: Illuminate\Queue\TimeoutExceededException
+- name: InteractsWithTime
+  type: class
+  source: Illuminate\Support\InteractsWithTime
+- name: Throwable
+  type: class
+  source: Throwable
+- name: InteractsWithTime
+  type: class
+  source: InteractsWithTime
+properties:
+- name: instance
+  visibility: protected
+  comment: '# * The job handler instance.
+
+    # *
+
+    # * @var mixed'
+- name: container
+  visibility: protected
+  comment: '# * The IoC container instance.
+
+    # *
+
+    # * @var \Illuminate\Container\Container'
+- name: deleted
+  visibility: protected
+  comment: '# * Indicates if the job has been deleted.
+
+    # *
+
+    # * @var bool'
+- name: released
+  visibility: protected
+  comment: '# * Indicates if the job has been released.
+
+    # *
+
+    # * @var bool'
+- name: failed
+  visibility: protected
+  comment: '# * Indicates if the job has failed.
+
+    # *
+
+    # * @var bool'
+- name: connectionName
+  visibility: protected
+  comment: '# * The name of the connection the job belongs to.
+
+    # *
+
+    # * @var string'
+- name: queue
+  visibility: protected
+  comment: '# * The name of the queue the job belongs to.
+
+    # *
+
+    # * @var string'
+methods:
+- name: uuid
+  visibility: public
+  parameters: []
+  comment: "# * The job handler instance.\n# *\n# * @var mixed\n# */\n# protected\
+    \ $instance;\n# \n# /**\n# * The IoC container instance.\n# *\n# * @var \\Illuminate\\\
+    Container\\Container\n# */\n# protected $container;\n# \n# /**\n# * Indicates\
+    \ if the job has been deleted.\n# *\n# * @var bool\n# */\n# protected $deleted\
+    \ = false;\n# \n# /**\n# * Indicates if the job has been released.\n# *\n# * @var\
+    \ bool\n# */\n# protected $released = false;\n# \n# /**\n# * Indicates if the\
+    \ job has failed.\n# *\n# * @var bool\n# */\n# protected $failed = false;\n# \n\
+    # /**\n# * The name of the connection the job belongs to.\n# *\n# * @var string\n\
+    # */\n# protected $connectionName;\n# \n# /**\n# * The name of the queue the job\
+    \ belongs to.\n# *\n# * @var string\n# */\n# protected $queue;\n# \n# /**\n# *\
+    \ Get the job identifier.\n# *\n# * @return string\n# */\n# abstract public function\
+    \ getJobId();\n# \n# /**\n# * Get the raw body of the job.\n# *\n# * @return string\n\
+    # */\n# abstract public function getRawBody();\n# \n# /**\n# * Get the UUID of\
+    \ the job.\n# *\n# * @return string|null"
+- name: fire
+  visibility: public
+  parameters: []
+  comment: '# * Fire the job.
+
+    # *
+
+    # * @return void'
+- name: delete
+  visibility: public
+  parameters: []
+  comment: '# * Delete the job from the queue.
+
+    # *
+
+    # * @return void'
+- name: isDeleted
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the job has been deleted.
+
+    # *
+
+    # * @return bool'
+- name: release
+  visibility: public
+  parameters:
+  - name: delay
+    default: '0'
+  comment: '# * Release the job back into the queue after (n) seconds.
+
+    # *
+
+    # * @param  int  $delay
+
+    # * @return void'
+- name: isReleased
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the job was released back into the queue.
+
+    # *
+
+    # * @return bool'
+- name: isDeletedOrReleased
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the job has been deleted or released.
+
+    # *
+
+    # * @return bool'
+- name: hasFailed
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the job has been marked as a failure.
+
+    # *
+
+    # * @return bool'
+- name: markAsFailed
+  visibility: public
+  parameters: []
+  comment: '# * Mark the job as "failed".
+
+    # *
+
+    # * @return void'
+- name: fail
+  visibility: public
+  parameters:
+  - name: e
+    default: 'null'
+  comment: '# * Delete the job, call the "failed" method, and raise the failed job
+    event.
+
+    # *
+
+    # * @param  \Throwable|null  $e
+
+    # * @return void'
+- name: failed
+  visibility: protected
+  parameters:
+  - name: e
+  comment: '# * Process an exception that caused the job to fail.
+
+    # *
+
+    # * @param  \Throwable|null  $e
+
+    # * @return void'
+- name: resolve
+  visibility: protected
+  parameters:
+  - name: class
+  comment: '# * Resolve the given class.
+
+    # *
+
+    # * @param  string  $class
+
+    # * @return mixed'
+- name: getResolvedJob
+  visibility: public
+  parameters: []
+  comment: '# * Get the resolved job handler instance.
+
+    # *
+
+    # * @return mixed'
+- name: payload
+  visibility: public
+  parameters: []
+  comment: '# * Get the decoded body of the job.
+
+    # *
+
+    # * @return array'
+- name: maxTries
+  visibility: public
+  parameters: []
+  comment: '# * Get the number of times to attempt a job.
+
+    # *
+
+    # * @return int|null'
+- name: maxExceptions
+  visibility: public
+  parameters: []
+  comment: '# * Get the number of times to attempt a job after an exception.
+
+    # *
+
+    # * @return int|null'
+- name: shouldFailOnTimeout
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the job should fail when it timeouts.
+
+    # *
+
+    # * @return bool'
+- name: backoff
+  visibility: public
+  parameters: []
+  comment: '# * The number of seconds to wait before retrying a job that encountered
+    an uncaught exception.
+
+    # *
+
+    # * @return int|int[]|null'
+- name: timeout
+  visibility: public
+  parameters: []
+  comment: '# * Get the number of seconds the job can run.
+
+    # *
+
+    # * @return int|null'
+- name: retryUntil
+  visibility: public
+  parameters: []
+  comment: '# * Get the timestamp indicating when the job should timeout.
+
+    # *
+
+    # * @return int|null'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the queued job class.
+
+    # *
+
+    # * @return string'
+- name: resolveName
+  visibility: public
+  parameters: []
+  comment: '# * Get the resolved name of the queued job class.
+
+    # *
+
+    # * Resolves the name of "wrapped" jobs such as class-based handlers.
+
+    # *
+
+    # * @return string'
+- name: getConnectionName
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the connection the job belongs to.
+
+    # *
+
+    # * @return string'
+- name: getQueue
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the queue the job belongs to.
+
+    # *
+
+    # * @return string'
+- name: getContainer
+  visibility: public
+  parameters: []
+  comment: '# * Get the service container instance.
+
+    # *
+
+    # * @return \Illuminate\Container\Container'
+traits:
+- Illuminate\Bus\Batchable
+- Illuminate\Bus\BatchRepository
+- Illuminate\Contracts\Events\Dispatcher
+- Illuminate\Queue\Events\JobFailed
+- Illuminate\Queue\ManuallyFailedException
+- Illuminate\Queue\TimeoutExceededException
+- Illuminate\Support\InteractsWithTime
+- Throwable
+- InteractsWithTime
+interfaces: []

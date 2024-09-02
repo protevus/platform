@@ -1,0 +1,39 @@
+name: Php74Full
+class_comment: null
+dependencies:
+- name: Uuid
+  type: class
+  source: Symfony\Component\Uid\Uuid
+properties:
+- name: anotherCollection
+  visibility: public
+  comment: '# @var Php74Full[] */
+
+    # public array $collection;
+
+    # public Php74FullWithConstructor $php74FullWithConstructor;
+
+    # public Php74FullWithTypedConstructor $php74FullWithTypedConstructor;
+
+    # public DummyMessageInterface $dummyMessage;
+
+    # /** @var TestFoo[] $nestedArray */
+
+    # public TestFoo $nestedObject;
+
+    # /** @var Php74Full[]'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: constructorArgument
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: something
+  - name: somethingElse
+  comment: null
+traits:
+- Symfony\Component\Uid\Uuid
+interfaces: []

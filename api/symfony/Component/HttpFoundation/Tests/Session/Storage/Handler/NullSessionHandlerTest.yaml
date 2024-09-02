@@ -1,0 +1,51 @@
+name: NullSessionHandlerTest
+class_comment: '# * Test class for NullSessionHandler.
+
+  # *
+
+  # * @author Drak <drak@zikula.org>
+
+  # *
+
+  # * @runTestsInSeparateProcesses
+
+  # *
+
+  # * @preserveGlobalState disabled'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Session
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Session
+- name: NullSessionHandler
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Storage\Handler\NullSessionHandler
+- name: NativeSessionStorage
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage
+properties: []
+methods:
+- name: testSaveHandlers
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSession
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNothingIsPersisted
+  visibility: public
+  parameters: []
+  comment: null
+- name: getStorage
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Session\Session
+- Symfony\Component\HttpFoundation\Session\Storage\Handler\NullSessionHandler
+- Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage
+interfaces: []

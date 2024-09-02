@@ -1,0 +1,158 @@
+name: UploadedFile
+class_comment: null
+dependencies:
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: FilesystemFactory
+  type: class
+  source: Illuminate\Contracts\Filesystem\Factory
+- name: FileNotFoundException
+  type: class
+  source: Illuminate\Contracts\Filesystem\FileNotFoundException
+- name: FileFactory
+  type: class
+  source: Illuminate\Http\Testing\FileFactory
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: SymfonyUploadedFile
+  type: class
+  source: Symfony\Component\HttpFoundation\File\UploadedFile
+properties: []
+methods:
+- name: fake
+  visibility: public
+  parameters: []
+  comment: '# * Begin creating a new file fake.
+
+    # *
+
+    # * @return \Illuminate\Http\Testing\FileFactory'
+- name: store
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  - name: options
+    default: '[]'
+  comment: '# * Store the uploaded file on a filesystem disk.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  array|string  $options
+
+    # * @return string|false'
+- name: storePublicly
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  - name: options
+    default: '[]'
+  comment: '# * Store the uploaded file on a filesystem disk with public visibility.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  array|string  $options
+
+    # * @return string|false'
+- name: storePubliclyAs
+  visibility: public
+  parameters:
+  - name: path
+  - name: name
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: '# * Store the uploaded file on a filesystem disk with public visibility.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  string  $name
+
+    # * @param  array|string  $options
+
+    # * @return string|false'
+- name: storeAs
+  visibility: public
+  parameters:
+  - name: path
+  - name: name
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: '# * Store the uploaded file on a filesystem disk.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  string|array  $name
+
+    # * @param  array|string  $options
+
+    # * @return string|false'
+- name: get
+  visibility: public
+  parameters: []
+  comment: '# * Get the contents of the uploaded file.
+
+    # *
+
+    # * @return false|string
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException'
+- name: clientExtension
+  visibility: public
+  parameters: []
+  comment: '# * Get the file''s extension supplied by the client.
+
+    # *
+
+    # * @return string'
+- name: createFromBase
+  visibility: public
+  parameters:
+  - name: file
+  - name: test
+    default: 'false'
+  comment: '# * Create a new file instance from a base instance.
+
+    # *
+
+    # * @param  \Symfony\Component\HttpFoundation\File\UploadedFile  $file
+
+    # * @param  bool  $test
+
+    # * @return static'
+- name: parseOptions
+  visibility: protected
+  parameters:
+  - name: options
+  comment: '# * Parse and format the given options.
+
+    # *
+
+    # * @param  array|string  $options
+
+    # * @return array'
+traits:
+- Illuminate\Container\Container
+- Illuminate\Contracts\Filesystem\FileNotFoundException
+- Illuminate\Http\Testing\FileFactory
+- Illuminate\Support\Arr
+- Illuminate\Support\Traits\Macroable
+- FileHelpers
+interfaces: []

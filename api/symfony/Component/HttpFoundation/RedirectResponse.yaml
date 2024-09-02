@@ -1,0 +1,46 @@
+name: RedirectResponse
+class_comment: '# * RedirectResponse represents an HTTP response doing a redirect.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: url
+  - name: status
+    default: '302'
+  - name: headers
+    default: '[]'
+  comment: "# * RedirectResponse represents an HTTP response doing a redirect.\n#\
+    \ *\n# * @author Fabien Potencier <fabien@symfony.com>\n# */\n# class RedirectResponse\
+    \ extends Response\n# {\n# protected string $targetUrl;\n# \n# /**\n# * Creates\
+    \ a redirect response so that it conforms to the rules defined for a redirect\
+    \ status code.\n# *\n# * @param string $url     The URL to redirect to. The URL\
+    \ should be a full URL, with schema etc.,\n# *                        but practically\
+    \ every browser redirects on paths only as well\n# * @param int    $status  The\
+    \ HTTP status code (302 \"Found\" by default)\n# * @param array  $headers The\
+    \ headers (Location is always set to the given URL)\n# *\n# * @throws \\InvalidArgumentException\n\
+    # *\n# * @see https://tools.ietf.org/html/rfc2616#section-10.3"
+- name: getTargetUrl
+  visibility: public
+  parameters: []
+  comment: '# * Returns the target URL.'
+- name: setTargetUrl
+  visibility: public
+  parameters:
+  - name: url
+  comment: '# * Sets the redirect target of this response.
+
+    # *
+
+    # * @return $this
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+traits: []
+interfaces: []

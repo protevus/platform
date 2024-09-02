@@ -1,0 +1,15 @@
+name: esi
+class_comment: null
+dependencies:
+- name: SurrogateListener
+  type: class
+  source: Symfony\Component\HttpKernel\EventListener\SurrogateListener
+- name: Esi
+  type: class
+  source: Symfony\Component\HttpKernel\HttpCache\Esi
+properties: []
+methods: []
+traits:
+- Symfony\Component\HttpKernel\EventListener\SurrogateListener
+- Symfony\Component\HttpKernel\HttpCache\Esi
+interfaces: []

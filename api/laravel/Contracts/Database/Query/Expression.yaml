@@ -1,0 +1,22 @@
+name: Expression
+class_comment: null
+dependencies:
+- name: Grammar
+  type: class
+  source: Illuminate\Database\Grammar
+properties: []
+methods:
+- name: getValue
+  visibility: public
+  parameters:
+  - name: grammar
+  comment: '# * Get the value of the expression.
+
+    # *
+
+    # * @param  \Illuminate\Database\Grammar  $grammar
+
+    # * @return string|int|float'
+traits:
+- Illuminate\Database\Grammar
+interfaces: []

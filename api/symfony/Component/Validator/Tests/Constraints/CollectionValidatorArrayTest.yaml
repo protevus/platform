@@ -1,0 +1,12 @@
+name: CollectionValidatorArrayTest
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: prepareTestData
+  visibility: public
+  parameters:
+  - name: contents
+  comment: null
+traits: []
+interfaces: []

@@ -1,0 +1,118 @@
+name: CompilesEchos
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+properties:
+- name: echoHandlers
+  visibility: protected
+  comment: '# * Custom rendering callbacks for stringable objects.
+
+    # *
+
+    # * @var array'
+methods:
+- name: stringable
+  visibility: public
+  parameters:
+  - name: class
+  - name: handler
+    default: 'null'
+  comment: "# * Custom rendering callbacks for stringable objects.\n# *\n# * @var\
+    \ array\n# */\n# protected $echoHandlers = [];\n# \n# /**\n# * Add a handler to\
+    \ be executed before echoing a given class.\n# *\n# * @param  string|callable\
+    \  $class\n# * @param  callable|null  $handler\n# * @return void"
+- name: compileEchos
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Compile Blade echos into valid PHP.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: getEchoMethods
+  visibility: protected
+  parameters: []
+  comment: '# * Get the echo methods in the proper order for compilation.
+
+    # *
+
+    # * @return array'
+- name: compileRawEchos
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Compile the "raw" echo statements.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: compileRegularEchos
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Compile the "regular" echo statements.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: compileEscapedEchos
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Compile the escaped echo statements.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: addBladeCompilerVariable
+  visibility: protected
+  parameters:
+  - name: result
+  comment: '# * Add an instance of the blade echo handler to the start of the compiled
+    string.
+
+    # *
+
+    # * @param  string  $result
+
+    # * @return string'
+- name: wrapInEchoHandler
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Wrap the echoable value in an echo handler if applicable.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: applyEchoHandler
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Apply the echo handler for the value if it exists.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+traits:
+- Closure
+- Illuminate\Support\Str
+interfaces: []

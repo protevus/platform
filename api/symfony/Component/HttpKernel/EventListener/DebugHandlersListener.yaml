@@ -1,0 +1,76 @@
+name: DebugHandlersListener
+class_comment: '# * Sets an exception handler.
+
+  # *
+
+  # * @author Nicolas Grekas <p@tchwork.com>
+
+  # *
+
+  # * @final
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: ConsoleEvents
+  type: class
+  source: Symfony\Component\Console\ConsoleEvents
+- name: ConsoleEvent
+  type: class
+  source: Symfony\Component\Console\Event\ConsoleEvent
+- name: ConsoleOutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\ConsoleOutputInterface
+- name: ErrorHandler
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorHandler
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: KernelEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\KernelEvent
+- name: KernelEvents
+  type: class
+  source: Symfony\Component\HttpKernel\KernelEvents
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: exceptionHandler
+    default: 'null'
+  - name: webMode
+    default: 'null'
+  comment: "# * Sets an exception handler.\n# *\n# * @author Nicolas Grekas <p@tchwork.com>\n\
+    # *\n# * @final\n# *\n# * @internal\n# */\n# class DebugHandlersListener implements\
+    \ EventSubscriberInterface\n# {\n# private string|object|null $earlyHandler;\n\
+    # private ?\\Closure $exceptionHandler;\n# private bool $webMode;\n# private bool\
+    \ $firstCall = true;\n# private bool $hasTerminatedWithException = false;\n# \n\
+    # /**\n# * @param bool          $webMode\n# * @param callable|null $exceptionHandler\
+    \ A handler that must support \\Throwable instances that will be called on Exception"
+- name: configure
+  visibility: public
+  parameters:
+  - name: event
+    default: 'null'
+  comment: '# * Configures the error handler.'
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Psr\Log\LoggerInterface
+- Symfony\Component\Console\ConsoleEvents
+- Symfony\Component\Console\Event\ConsoleEvent
+- Symfony\Component\Console\Output\ConsoleOutputInterface
+- Symfony\Component\ErrorHandler\ErrorHandler
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\HttpKernel\Event\KernelEvent
+- Symfony\Component\HttpKernel\KernelEvents
+interfaces:
+- EventSubscriberInterface

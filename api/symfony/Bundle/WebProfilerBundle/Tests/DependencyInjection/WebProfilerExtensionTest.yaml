@@ -1,0 +1,124 @@
+name: WebProfilerExtensionTest
+class_comment: null
+dependencies:
+- name: MockObject
+  type: class
+  source: PHPUnit\Framework\MockObject\MockObject
+- name: WebProfilerExtension
+  type: class
+  source: Symfony\Bundle\WebProfilerBundle\DependencyInjection\WebProfilerExtension
+- name: TestCase
+  type: class
+  source: Symfony\Bundle\WebProfilerBundle\Tests\TestCase
+- name: Container
+  type: class
+  source: Symfony\Component\DependencyInjection\Container
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: HtmlErrorRenderer
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer
+- name: RegisterListenersPass
+  type: class
+  source: Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: DumpDataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\DumpDataCollector
+- name: KernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\KernelInterface
+- name: Profiler
+  type: class
+  source: Symfony\Component\HttpKernel\Profiler\Profiler
+- name: ProfilerStorageInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Profiler\ProfilerStorageInterface
+- name: RouterInterface
+  type: class
+  source: Symfony\Component\Routing\RouterInterface
+- name: Environment
+  type: class
+  source: Twig\Environment
+- name: ArrayLoader
+  type: class
+  source: Twig\Loader\ArrayLoader
+properties: []
+methods:
+- name: assertSaneContainer
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testDefaultConfig
+  visibility: public
+  parameters:
+  - name: debug
+  comment: '# * @dataProvider getDebugModes'
+- name: getDebugModes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToolbarConfig
+  visibility: public
+  parameters:
+  - name: toolbarEnabled
+  - name: listenerInjected
+  - name: listenerEnabled
+  comment: '# * @dataProvider getToolbarConfig'
+- name: getToolbarConfig
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToolbarConfigUsingInterceptRedirects
+  visibility: public
+  parameters:
+  - name: toolbarEnabled
+  - name: interceptRedirects
+  - name: listenerInjected
+  - name: listenerEnabled
+  comment: '# * @dataProvider getInterceptRedirectsToolbarConfig'
+- name: getInterceptRedirectsToolbarConfig
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCompiledContainer
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\MockObject\MockObject
+- Symfony\Bundle\WebProfilerBundle\DependencyInjection\WebProfilerExtension
+- Symfony\Bundle\WebProfilerBundle\Tests\TestCase
+- Symfony\Component\DependencyInjection\Container
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer
+- Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\HttpKernel\DataCollector\DumpDataCollector
+- Symfony\Component\HttpKernel\KernelInterface
+- Symfony\Component\HttpKernel\Profiler\Profiler
+- Symfony\Component\HttpKernel\Profiler\ProfilerStorageInterface
+- Symfony\Component\Routing\RouterInterface
+- Twig\Environment
+- Twig\Loader\ArrayLoader
+interfaces: []

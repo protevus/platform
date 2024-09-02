@@ -1,0 +1,634 @@
+name: Mailer
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: MailableContract
+  type: class
+  source: Illuminate\Contracts\Mail\Mailable
+- name: MailerContract
+  type: class
+  source: Illuminate\Contracts\Mail\Mailer
+- name: MailQueueContract
+  type: class
+  source: Illuminate\Contracts\Mail\MailQueue
+- name: QueueContract
+  type: class
+  source: Illuminate\Contracts\Queue\Factory
+- name: ShouldQueue
+  type: class
+  source: Illuminate\Contracts\Queue\ShouldQueue
+- name: Htmlable
+  type: class
+  source: Illuminate\Contracts\Support\Htmlable
+- name: Factory
+  type: class
+  source: Illuminate\Contracts\View\Factory
+- name: MessageSending
+  type: class
+  source: Illuminate\Mail\Events\MessageSending
+- name: MessageSent
+  type: class
+  source: Illuminate\Mail\Events\MessageSent
+- name: Address
+  type: class
+  source: Illuminate\Mail\Mailables\Address
+- name: HtmlString
+  type: class
+  source: Illuminate\Support\HtmlString
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: TransportInterface
+  type: class
+  source: Symfony\Component\Mailer\Transport\TransportInterface
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+- name: Macroable
+  type: class
+  source: Macroable
+properties:
+- name: name
+  visibility: protected
+  comment: '# * The name that is configured for the mailer.
+
+    # *
+
+    # * @var string'
+- name: views
+  visibility: protected
+  comment: '# * The view factory instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\View\Factory'
+- name: transport
+  visibility: protected
+  comment: '# * The Symfony Transport instance.
+
+    # *
+
+    # * @var \Symfony\Component\Mailer\Transport\TransportInterface'
+- name: events
+  visibility: protected
+  comment: '# * The event dispatcher instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Events\Dispatcher|null'
+- name: from
+  visibility: protected
+  comment: '# * The global from address and name.
+
+    # *
+
+    # * @var array'
+- name: replyTo
+  visibility: protected
+  comment: '# * The global reply-to address and name.
+
+    # *
+
+    # * @var array'
+- name: returnPath
+  visibility: protected
+  comment: '# * The global return path address.
+
+    # *
+
+    # * @var array'
+- name: to
+  visibility: protected
+  comment: '# * The global to address and name.
+
+    # *
+
+    # * @var array'
+- name: queue
+  visibility: protected
+  comment: '# * The queue factory implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Queue\Factory'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: name
+  - name: views
+  - name: transport
+  - name: events
+    default: 'null'
+  comment: "# * The name that is configured for the mailer.\n# *\n# * @var string\n\
+    # */\n# protected $name;\n# \n# /**\n# * The view factory instance.\n# *\n# *\
+    \ @var \\Illuminate\\Contracts\\View\\Factory\n# */\n# protected $views;\n# \n\
+    # /**\n# * The Symfony Transport instance.\n# *\n# * @var \\Symfony\\Component\\\
+    Mailer\\Transport\\TransportInterface\n# */\n# protected $transport;\n# \n# /**\n\
+    # * The event dispatcher instance.\n# *\n# * @var \\Illuminate\\Contracts\\Events\\\
+    Dispatcher|null\n# */\n# protected $events;\n# \n# /**\n# * The global from address\
+    \ and name.\n# *\n# * @var array\n# */\n# protected $from;\n# \n# /**\n# * The\
+    \ global reply-to address and name.\n# *\n# * @var array\n# */\n# protected $replyTo;\n\
+    # \n# /**\n# * The global return path address.\n# *\n# * @var array\n# */\n# protected\
+    \ $returnPath;\n# \n# /**\n# * The global to address and name.\n# *\n# * @var\
+    \ array\n# */\n# protected $to;\n# \n# /**\n# * The queue factory implementation.\n\
+    # *\n# * @var \\Illuminate\\Contracts\\Queue\\Factory\n# */\n# protected $queue;\n\
+    # \n# /**\n# * Create a new Mailer instance.\n# *\n# * @param  string  $name\n\
+    # * @param  \\Illuminate\\Contracts\\View\\Factory  $views\n# * @param  \\Symfony\\\
+    Component\\Mailer\\Transport\\TransportInterface  $transport\n# * @param  \\Illuminate\\\
+    Contracts\\Events\\Dispatcher|null  $events\n# * @return void"
+- name: alwaysFrom
+  visibility: public
+  parameters:
+  - name: address
+  - name: name
+    default: 'null'
+  comment: '# * Set the global from address and name.
+
+    # *
+
+    # * @param  string  $address
+
+    # * @param  string|null  $name
+
+    # * @return void'
+- name: alwaysReplyTo
+  visibility: public
+  parameters:
+  - name: address
+  - name: name
+    default: 'null'
+  comment: '# * Set the global reply-to address and name.
+
+    # *
+
+    # * @param  string  $address
+
+    # * @param  string|null  $name
+
+    # * @return void'
+- name: alwaysReturnPath
+  visibility: public
+  parameters:
+  - name: address
+  comment: '# * Set the global return path address.
+
+    # *
+
+    # * @param  string  $address
+
+    # * @return void'
+- name: alwaysTo
+  visibility: public
+  parameters:
+  - name: address
+  - name: name
+    default: 'null'
+  comment: '# * Set the global to address and name.
+
+    # *
+
+    # * @param  string  $address
+
+    # * @param  string|null  $name
+
+    # * @return void'
+- name: to
+  visibility: public
+  parameters:
+  - name: users
+  - name: name
+    default: 'null'
+  comment: '# * Begin the process of mailing a mailable class instance.
+
+    # *
+
+    # * @param  mixed  $users
+
+    # * @param  string|null  $name
+
+    # * @return \Illuminate\Mail\PendingMail'
+- name: cc
+  visibility: public
+  parameters:
+  - name: users
+  - name: name
+    default: 'null'
+  comment: '# * Begin the process of mailing a mailable class instance.
+
+    # *
+
+    # * @param  mixed  $users
+
+    # * @param  string|null  $name
+
+    # * @return \Illuminate\Mail\PendingMail'
+- name: bcc
+  visibility: public
+  parameters:
+  - name: users
+  - name: name
+    default: 'null'
+  comment: '# * Begin the process of mailing a mailable class instance.
+
+    # *
+
+    # * @param  mixed  $users
+
+    # * @param  string|null  $name
+
+    # * @return \Illuminate\Mail\PendingMail'
+- name: html
+  visibility: public
+  parameters:
+  - name: html
+  - name: callback
+  comment: '# * Send a new message with only an HTML part.
+
+    # *
+
+    # * @param  string  $html
+
+    # * @param  mixed  $callback
+
+    # * @return \Illuminate\Mail\SentMessage|null'
+- name: raw
+  visibility: public
+  parameters:
+  - name: text
+  - name: callback
+  comment: '# * Send a new message with only a raw text part.
+
+    # *
+
+    # * @param  string  $text
+
+    # * @param  mixed  $callback
+
+    # * @return \Illuminate\Mail\SentMessage|null'
+- name: plain
+  visibility: public
+  parameters:
+  - name: view
+  - name: data
+  - name: callback
+  comment: '# * Send a new message with only a plain part.
+
+    # *
+
+    # * @param  string  $view
+
+    # * @param  array  $data
+
+    # * @param  mixed  $callback
+
+    # * @return \Illuminate\Mail\SentMessage|null'
+- name: render
+  visibility: public
+  parameters:
+  - name: view
+  - name: data
+    default: '[]'
+  comment: '# * Render the given message as a view.
+
+    # *
+
+    # * @param  string|array  $view
+
+    # * @param  array  $data
+
+    # * @return string'
+- name: replaceEmbeddedAttachments
+  visibility: protected
+  parameters:
+  - name: renderedView
+  - name: attachments
+  comment: '# * Replace the embedded image attachments with raw, inline image data
+    for browser rendering.
+
+    # *
+
+    # * @param  string  $renderedView
+
+    # * @param  array  $attachments
+
+    # * @return string'
+- name: send
+  visibility: public
+  parameters:
+  - name: view
+  - name: data
+    default: '[]'
+  - name: callback
+    default: 'null'
+  comment: '# * Send a new message using a view.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Mail\Mailable|string|array  $view
+
+    # * @param  array  $data
+
+    # * @param  \Closure|string|null  $callback
+
+    # * @return \Illuminate\Mail\SentMessage|null'
+- name: sendMailable
+  visibility: protected
+  parameters:
+  - name: mailable
+  comment: '# * Send the given mailable.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Mail\Mailable  $mailable
+
+    # * @return \Illuminate\Mail\SentMessage|null'
+- name: sendNow
+  visibility: public
+  parameters:
+  - name: mailable
+  - name: data
+    default: '[]'
+  - name: callback
+    default: 'null'
+  comment: '# * Send a new message synchronously using a view.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Mail\Mailable|string|array  $mailable
+
+    # * @param  array  $data
+
+    # * @param  \Closure|string|null  $callback
+
+    # * @return \Illuminate\Mail\SentMessage|null'
+- name: parseView
+  visibility: protected
+  parameters:
+  - name: view
+  comment: '# * Parse the given view name or array.
+
+    # *
+
+    # * @param  \Closure|array|string  $view
+
+    # * @return array
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: addContent
+  visibility: protected
+  parameters:
+  - name: message
+  - name: view
+  - name: plain
+  - name: raw
+  - name: data
+  comment: '# * Add the content to a given message.
+
+    # *
+
+    # * @param  \Illuminate\Mail\Message  $message
+
+    # * @param  string  $view
+
+    # * @param  string  $plain
+
+    # * @param  string  $raw
+
+    # * @param  array  $data
+
+    # * @return void'
+- name: renderView
+  visibility: protected
+  parameters:
+  - name: view
+  - name: data
+  comment: '# * Render the given view.
+
+    # *
+
+    # * @param  \Closure|string  $view
+
+    # * @param  array  $data
+
+    # * @return string'
+- name: setGlobalToAndRemoveCcAndBcc
+  visibility: protected
+  parameters:
+  - name: message
+  comment: '# * Set the global "to" address on the given message.
+
+    # *
+
+    # * @param  \Illuminate\Mail\Message  $message
+
+    # * @return void'
+- name: queue
+  visibility: public
+  parameters:
+  - name: view
+  - name: queue
+    default: 'null'
+  comment: '# * Queue a new mail message for sending.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Mail\Mailable|string|array  $view
+
+    # * @param  string|null  $queue
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: onQueue
+  visibility: public
+  parameters:
+  - name: queue
+  - name: view
+  comment: '# * Queue a new mail message for sending on the given queue.
+
+    # *
+
+    # * @param  string  $queue
+
+    # * @param  \Illuminate\Contracts\Mail\Mailable  $view
+
+    # * @return mixed'
+- name: queueOn
+  visibility: public
+  parameters:
+  - name: queue
+  - name: view
+  comment: '# * Queue a new mail message for sending on the given queue.
+
+    # *
+
+    # * This method didn''t match rest of framework''s "onQueue" phrasing. Added "onQueue".
+
+    # *
+
+    # * @param  string  $queue
+
+    # * @param  \Illuminate\Contracts\Mail\Mailable  $view
+
+    # * @return mixed'
+- name: later
+  visibility: public
+  parameters:
+  - name: delay
+  - name: view
+  - name: queue
+    default: 'null'
+  comment: '# * Queue a new mail message for sending after (n) seconds.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $delay
+
+    # * @param  \Illuminate\Contracts\Mail\Mailable  $view
+
+    # * @param  string|null  $queue
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: laterOn
+  visibility: public
+  parameters:
+  - name: queue
+  - name: delay
+  - name: view
+  comment: '# * Queue a new mail message for sending after (n) seconds on the given
+    queue.
+
+    # *
+
+    # * @param  string  $queue
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $delay
+
+    # * @param  \Illuminate\Contracts\Mail\Mailable  $view
+
+    # * @return mixed'
+- name: createMessage
+  visibility: protected
+  parameters: []
+  comment: '# * Create a new message instance.
+
+    # *
+
+    # * @return \Illuminate\Mail\Message'
+- name: sendSymfonyMessage
+  visibility: protected
+  parameters:
+  - name: message
+  comment: '# * Send a Symfony Email instance.
+
+    # *
+
+    # * @param  \Symfony\Component\Mime\Email  $message
+
+    # * @return \Symfony\Component\Mailer\SentMessage|null'
+- name: shouldSendMessage
+  visibility: protected
+  parameters:
+  - name: message
+  - name: data
+    default: '[]'
+  comment: '# * Determines if the email can be sent.
+
+    # *
+
+    # * @param  \Symfony\Component\Mime\Email  $message
+
+    # * @param  array  $data
+
+    # * @return bool'
+- name: dispatchSentEvent
+  visibility: protected
+  parameters:
+  - name: message
+  - name: data
+    default: '[]'
+  comment: '# * Dispatch the message sent event.
+
+    # *
+
+    # * @param  \Illuminate\Mail\SentMessage  $message
+
+    # * @param  array  $data
+
+    # * @return void'
+- name: getSymfonyTransport
+  visibility: public
+  parameters: []
+  comment: '# * Get the Symfony Transport instance.
+
+    # *
+
+    # * @return \Symfony\Component\Mailer\Transport\TransportInterface'
+- name: getViewFactory
+  visibility: public
+  parameters: []
+  comment: '# * Get the view factory instance.
+
+    # *
+
+    # * @return \Illuminate\Contracts\View\Factory'
+- name: setSymfonyTransport
+  visibility: public
+  parameters:
+  - name: transport
+  comment: '# * Set the Symfony Transport instance.
+
+    # *
+
+    # * @param  \Symfony\Component\Mailer\Transport\TransportInterface  $transport
+
+    # * @return void'
+- name: setQueue
+  visibility: public
+  parameters:
+  - name: queue
+  comment: '# * Set the queue manager instance.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Queue\Factory  $queue
+
+    # * @return $this'
+traits:
+- Closure
+- Illuminate\Contracts\Events\Dispatcher
+- Illuminate\Contracts\Queue\ShouldQueue
+- Illuminate\Contracts\Support\Htmlable
+- Illuminate\Contracts\View\Factory
+- Illuminate\Mail\Events\MessageSending
+- Illuminate\Mail\Events\MessageSent
+- Illuminate\Mail\Mailables\Address
+- Illuminate\Support\HtmlString
+- Illuminate\Support\Traits\Macroable
+- InvalidArgumentException
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mailer\Transport\TransportInterface
+- Symfony\Component\Mime\Email
+- Macroable
+interfaces:
+- MailerContract

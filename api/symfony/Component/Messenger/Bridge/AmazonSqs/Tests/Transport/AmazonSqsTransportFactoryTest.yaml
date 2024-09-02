@@ -1,0 +1,19 @@
+name: AmazonSqsTransportFactoryTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AmazonSqsTransportFactory
+  type: class
+  source: Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\AmazonSqsTransportFactory
+properties: []
+methods:
+- name: testSupportsOnlySqsTransports
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\AmazonSqsTransportFactory
+interfaces: []

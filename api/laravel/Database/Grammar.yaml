@@ -1,0 +1,257 @@
+name: Grammar
+class_comment: null
+dependencies:
+- name: Expression
+  type: class
+  source: Illuminate\Contracts\Database\Query\Expression
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: Macroable
+  type: class
+  source: Macroable
+properties:
+- name: connection
+  visibility: protected
+  comment: '# * The connection used for escaping values.
+
+    # *
+
+    # * @var \Illuminate\Database\Connection'
+- name: tablePrefix
+  visibility: protected
+  comment: '# * The grammar table prefix.
+
+    # *
+
+    # * @var string'
+methods:
+- name: wrapArray
+  visibility: public
+  parameters:
+  - name: values
+  comment: "# * The connection used for escaping values.\n# *\n# * @var \\Illuminate\\\
+    Database\\Connection\n# */\n# protected $connection;\n# \n# /**\n# * The grammar\
+    \ table prefix.\n# *\n# * @var string\n# */\n# protected $tablePrefix = '';\n\
+    # \n# /**\n# * Wrap an array of values.\n# *\n# * @param  array  $values\n# *\
+    \ @return array"
+- name: wrapTable
+  visibility: public
+  parameters:
+  - name: table
+  comment: '# * Wrap a table in keyword identifiers.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Database\Query\Expression|string  $table
+
+    # * @return string'
+- name: wrap
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Wrap a value in keyword identifiers.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Database\Query\Expression|string  $value
+
+    # * @return string'
+- name: wrapAliasedValue
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Wrap a value that has an alias.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: wrapAliasedTable
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Wrap a table that has an alias.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: wrapSegments
+  visibility: protected
+  parameters:
+  - name: segments
+  comment: '# * Wrap the given value segments.
+
+    # *
+
+    # * @param  array  $segments
+
+    # * @return string'
+- name: wrapValue
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Wrap a single string in keyword identifiers.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: wrapJsonSelector
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Wrap the given JSON selector.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: isJsonSelector
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Determine if the given string is a JSON selector.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return bool'
+- name: columnize
+  visibility: public
+  parameters:
+  - name: columns
+  comment: '# * Convert an array of column names into a delimited string.
+
+    # *
+
+    # * @param  array  $columns
+
+    # * @return string'
+- name: parameterize
+  visibility: public
+  parameters:
+  - name: values
+  comment: '# * Create query parameter place-holders for an array.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @return string'
+- name: parameter
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Get the appropriate query parameter place-holder for a value.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return string'
+- name: quoteString
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Quote the given string literal.
+
+    # *
+
+    # * @param  string|array  $value
+
+    # * @return string'
+- name: escape
+  visibility: public
+  parameters:
+  - name: value
+  - name: binary
+    default: 'false'
+  comment: '# * Escapes a value for safe SQL embedding.
+
+    # *
+
+    # * @param  string|float|int|bool|null  $value
+
+    # * @param  bool  $binary
+
+    # * @return string'
+- name: isExpression
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Determine if the given value is a raw expression.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return bool'
+- name: getValue
+  visibility: public
+  parameters:
+  - name: expression
+  comment: '# * Transforms expressions to their scalar types.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Database\Query\Expression|string|int|float  $expression
+
+    # * @return string|int|float'
+- name: getDateFormat
+  visibility: public
+  parameters: []
+  comment: '# * Get the format for database stored dates.
+
+    # *
+
+    # * @return string'
+- name: getTablePrefix
+  visibility: public
+  parameters: []
+  comment: '# * Get the grammar''s table prefix.
+
+    # *
+
+    # * @return string'
+- name: setTablePrefix
+  visibility: public
+  parameters:
+  - name: prefix
+  comment: '# * Set the grammar''s table prefix.
+
+    # *
+
+    # * @param  string  $prefix
+
+    # * @return $this'
+- name: setConnection
+  visibility: public
+  parameters:
+  - name: connection
+  comment: '# * Set the grammar''s database connection.
+
+    # *
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @return $this'
+traits:
+- Illuminate\Contracts\Database\Query\Expression
+- Illuminate\Support\Traits\Macroable
+- RuntimeException
+- Macroable
+interfaces: []

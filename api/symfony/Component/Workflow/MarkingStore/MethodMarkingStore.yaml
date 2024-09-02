@@ -1,0 +1,68 @@
+name: MethodMarkingStore
+class_comment: null
+dependencies:
+- name: LogicException
+  type: class
+  source: Symfony\Component\Workflow\Exception\LogicException
+- name: Marking
+  type: class
+  source: Symfony\Component\Workflow\Marking
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: singleState
+    default: 'false'
+  - name: property
+    default: '''marking'''
+  comment: "# * MethodMarkingStore stores the marking with a subject's public method\n\
+    # * or public property.\n# *\n# * This store deals with a \"single state\" or\
+    \ \"multiple state\" marking.\n# *\n# * \"single state\" marking means a subject\
+    \ can be in one and only one state at\n# * the same time. Use it with state machine.\
+    \ It uses a string to store the\n# * marking.\n# *\n# * \"multiple state\" marking\
+    \ means a subject can be in many states at the same\n# * time. Use it with workflow.\
+    \ It uses an array of strings to store the marking.\n# *\n# * @author Gr\xE9goire\
+    \ Pineau <lyrixx@lyrixx.info>\n# */\n# final class MethodMarkingStore implements\
+    \ MarkingStoreInterface\n# {\n# /** @var array<class-string, MarkingStoreMethod>\
+    \ */\n# private array $getters = [];\n# /** @var array<class-string, MarkingStoreMethod>\
+    \ */\n# private array $setters = [];\n# \n# /**\n# * @param string $property Used\
+    \ to determine methods or property to call\n# *                         The `getMarking`\
+    \ method will use `$subject->getProperty()` or `$subject->property`\n# *     \
+    \                    The `setMarking` method will use `$subject->setProperty(string|array\
+    \ $places, array $context = [])` or `$subject->property = string|array $places`"
+- name: getMarking
+  visibility: public
+  parameters:
+  - name: subject
+  comment: null
+- name: setMarking
+  visibility: public
+  parameters:
+  - name: subject
+  - name: marking
+  - name: context
+    default: '[]'
+  comment: null
+- name: getGetter
+  visibility: private
+  parameters:
+  - name: subject
+  comment: null
+- name: getSetter
+  visibility: private
+  parameters:
+  - name: subject
+  comment: null
+- name: getType
+  visibility: private
+  parameters:
+  - name: subject
+  - name: property
+  - name: method
+  comment: null
+traits:
+- Symfony\Component\Workflow\Exception\LogicException
+- Symfony\Component\Workflow\Marking
+interfaces:
+- MarkingStoreInterface

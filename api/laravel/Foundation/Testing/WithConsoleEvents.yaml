@@ -1,0 +1,18 @@
+name: WithConsoleEvents
+class_comment: null
+dependencies:
+- name: ConsoleKernel
+  type: class
+  source: Illuminate\Contracts\Console\Kernel
+properties: []
+methods:
+- name: setUpWithConsoleEvents
+  visibility: protected
+  parameters: []
+  comment: '# * Register console events.
+
+    # *
+
+    # * @return void'
+traits: []
+interfaces: []

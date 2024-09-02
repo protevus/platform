@@ -1,0 +1,33 @@
+name: RedirectController
+class_comment: null
+dependencies:
+- name: RedirectResponse
+  type: class
+  source: Illuminate\Http\RedirectResponse
+- name: Request
+  type: class
+  source: Illuminate\Http\Request
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+properties: []
+methods:
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: request
+  - name: url
+  comment: '# * Invoke the controller method.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  \Illuminate\Routing\UrlGenerator  $url
+
+    # * @return \Illuminate\Http\RedirectResponse'
+traits:
+- Illuminate\Http\RedirectResponse
+- Illuminate\Http\Request
+- Illuminate\Support\Str
+interfaces: []

@@ -1,0 +1,83 @@
+name: FormFieldRegistry
+class_comment: '# * This is an internal class that must not be used directly.
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: FormField
+  type: class
+  source: Symfony\Component\DomCrawler\Field\FormField
+properties: []
+methods:
+- name: add
+  visibility: public
+  parameters:
+  - name: field
+  comment: "# * This is an internal class that must not be used directly.\n# *\n#\
+    \ * @internal\n# */\n# class FormFieldRegistry\n# {\n# private array $fields =\
+    \ [];\n# private string $base = '';\n# \n# /**\n# * Adds a field to the registry."
+- name: remove
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Removes a field based on the fully qualified name and its children
+    from the registry.'
+- name: has
+  visibility: public
+  parameters:
+  - name: name
+  comment: "# * Returns the value of the field based on the fully qualified name and\
+    \ its children.\n# *\n# * @return FormField|FormField[]|FormField[][]\n# *\n#\
+    \ * @throws \\InvalidArgumentException if the field does not exist\n# */\n# public\
+    \ function &get(string $name): FormField|array\n# {\n# $segments = $this->getSegments($name);\n\
+    # $target = &$this->fields;\n# while ($segments) {\n# $path = array_shift($segments);\n\
+    # if (!\\is_array($target) || !\\array_key_exists($path, $target)) {\n# throw\
+    \ new \\InvalidArgumentException(\\sprintf('Unreachable field \"%s\".', $path));\n\
+    # }\n# $target = &$target[$path];\n# }\n# \n# return $target;\n# }\n# \n# /**\n\
+    # * Tests whether the form has the given field based on the fully qualified name."
+- name: set
+  visibility: public
+  parameters:
+  - name: name
+  - name: value
+  comment: '# * Set the value of a field based on the fully qualified name and its
+    children.
+
+    # *
+
+    # * @throws \InvalidArgumentException if the field does not exist'
+- name: all
+  visibility: public
+  parameters: []
+  comment: '# * Returns the list of field with their value.
+
+    # *
+
+    # * @return FormField[] The list of fields as [string] Fully qualified name =>
+    (mixed) value)'
+- name: walk
+  visibility: private
+  parameters:
+  - name: array
+  - name: base
+    default: ''''''
+  - name: '&$output'
+    default: '[]'
+  comment: '# * Transforms a PHP array in a list of fully qualified name / value.'
+- name: getSegments
+  visibility: private
+  parameters:
+  - name: name
+  comment: '# * Splits a field name into segments as a web browser would do.
+
+    # *
+
+    # *     getSegments(''base[foo][3][]'') = [''base'', ''foo, ''3'', ''''];
+
+    # *
+
+    # * @return string[]'
+traits:
+- Symfony\Component\DomCrawler\Field\FormField
+interfaces: []

@@ -1,0 +1,42 @@
+name: DatabaseConnector
+class_comment: null
+dependencies:
+- name: ConnectionResolverInterface
+  type: class
+  source: Illuminate\Database\ConnectionResolverInterface
+- name: DatabaseQueue
+  type: class
+  source: Illuminate\Queue\DatabaseQueue
+properties:
+- name: connections
+  visibility: protected
+  comment: '# * Database connections.
+
+    # *
+
+    # * @var \Illuminate\Database\ConnectionResolverInterface'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: connections
+  comment: "# * Database connections.\n# *\n# * @var \\Illuminate\\Database\\ConnectionResolverInterface\n\
+    # */\n# protected $connections;\n# \n# /**\n# * Create a new connector instance.\n\
+    # *\n# * @param  \\Illuminate\\Database\\ConnectionResolverInterface  $connections\n\
+    # * @return void"
+- name: connect
+  visibility: public
+  parameters:
+  - name: config
+  comment: '# * Establish a queue connection.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Contracts\Queue\Queue'
+traits:
+- Illuminate\Database\ConnectionResolverInterface
+- Illuminate\Queue\DatabaseQueue
+interfaces:
+- ConnectorInterface

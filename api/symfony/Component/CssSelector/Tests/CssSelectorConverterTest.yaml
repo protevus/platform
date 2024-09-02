@@ -1,0 +1,41 @@
+name: CssSelectorConverterTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CssSelectorConverter
+  type: class
+  source: Symfony\Component\CssSelector\CssSelectorConverter
+- name: ParseException
+  type: class
+  source: Symfony\Component\CssSelector\Exception\ParseException
+properties: []
+methods:
+- name: testCssToXPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCssToXPathXml
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParseExceptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCssToXPathWithoutPrefix
+  visibility: public
+  parameters:
+  - name: css
+  - name: xpath
+  comment: '# @dataProvider getCssToXPathWithoutPrefixTestData'
+- name: getCssToXPathWithoutPrefixTestData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\CssSelector\CssSelectorConverter
+- Symfony\Component\CssSelector\Exception\ParseException
+interfaces: []

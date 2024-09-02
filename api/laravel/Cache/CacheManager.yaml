@@ -1,0 +1,364 @@
+name: CacheManager
+class_comment: '# * @mixin \Illuminate\Cache\Repository
+
+  # * @mixin \Illuminate\Contracts\Cache\LockProvider'
+dependencies:
+- name: DynamoDbClient
+  type: class
+  source: Aws\DynamoDb\DynamoDbClient
+- name: Closure
+  type: class
+  source: Closure
+- name: FactoryContract
+  type: class
+  source: Illuminate\Contracts\Cache\Factory
+- name: Store
+  type: class
+  source: Illuminate\Contracts\Cache\Store
+- name: DispatcherContract
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties:
+- name: app
+  visibility: protected
+  comment: '# * @mixin \Illuminate\Cache\Repository
+
+    # * @mixin \Illuminate\Contracts\Cache\LockProvider
+
+    # */
+
+    # class CacheManager implements FactoryContract
+
+    # {
+
+    # /**
+
+    # * The application instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Foundation\Application'
+- name: stores
+  visibility: protected
+  comment: '# * The array of resolved cache stores.
+
+    # *
+
+    # * @var array'
+- name: customCreators
+  visibility: protected
+  comment: '# * The registered custom driver creators.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: app
+  comment: "# * @mixin \\Illuminate\\Cache\\Repository\n# * @mixin \\Illuminate\\\
+    Contracts\\Cache\\LockProvider\n# */\n# class CacheManager implements FactoryContract\n\
+    # {\n# /**\n# * The application instance.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Foundation\\Application\n# */\n# protected $app;\n# \n# /**\n# * The array of\
+    \ resolved cache stores.\n# *\n# * @var array\n# */\n# protected $stores = [];\n\
+    # \n# /**\n# * The registered custom driver creators.\n# *\n# * @var array\n#\
+    \ */\n# protected $customCreators = [];\n# \n# /**\n# * Create a new Cache manager\
+    \ instance.\n# *\n# * @param  \\Illuminate\\Contracts\\Foundation\\Application\
+    \  $app\n# * @return void"
+- name: store
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Get a cache store instance by name, wrapped in a repository.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @return \Illuminate\Contracts\Cache\Repository'
+- name: driver
+  visibility: public
+  parameters:
+  - name: driver
+    default: 'null'
+  comment: '# * Get a cache driver instance.
+
+    # *
+
+    # * @param  string|null  $driver
+
+    # * @return \Illuminate\Contracts\Cache\Repository'
+- name: resolve
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Resolve the given store.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return \Illuminate\Contracts\Cache\Repository
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: callCustomCreator
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Call a custom driver creator.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return mixed'
+- name: createApcDriver
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Create an instance of the APC cache driver.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Cache\Repository'
+- name: createArrayDriver
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Create an instance of the array cache driver.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Cache\Repository'
+- name: createFileDriver
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Create an instance of the file cache driver.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Cache\Repository'
+- name: createMemcachedDriver
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Create an instance of the Memcached cache driver.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Cache\Repository'
+- name: createNullDriver
+  visibility: protected
+  parameters: []
+  comment: '# * Create an instance of the Null cache driver.
+
+    # *
+
+    # * @return \Illuminate\Cache\Repository'
+- name: createRedisDriver
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Create an instance of the Redis cache driver.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Cache\Repository'
+- name: createDatabaseDriver
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Create an instance of the database cache driver.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Cache\Repository'
+- name: createDynamodbDriver
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Create an instance of the DynamoDB cache driver.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Cache\Repository'
+- name: newDynamodbClient
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Create new DynamoDb Client instance.
+
+    # *
+
+    # * @return \Aws\DynamoDb\DynamoDbClient'
+- name: repository
+  visibility: public
+  parameters:
+  - name: store
+  - name: config
+    default: '[]'
+  comment: '# * Create a new cache repository with the given implementation.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Cache\Store  $store
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Cache\Repository'
+- name: setEventDispatcher
+  visibility: protected
+  parameters:
+  - name: repository
+  comment: '# * Set the event dispatcher on the given repository instance.
+
+    # *
+
+    # * @param  \Illuminate\Cache\Repository  $repository
+
+    # * @return void'
+- name: refreshEventDispatcher
+  visibility: public
+  parameters: []
+  comment: '# * Re-set the event dispatcher on all resolved cache repositories.
+
+    # *
+
+    # * @return void'
+- name: getPrefix
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Get the cache prefix.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return string'
+- name: getConfig
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Get the cache connection configuration.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return array|null'
+- name: getDefaultDriver
+  visibility: public
+  parameters: []
+  comment: '# * Get the default cache driver name.
+
+    # *
+
+    # * @return string'
+- name: setDefaultDriver
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Set the default cache driver name.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return void'
+- name: forgetDriver
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Unset the given driver instances.
+
+    # *
+
+    # * @param  array|string|null  $name
+
+    # * @return $this'
+- name: purge
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Disconnect the given driver and remove from local cache.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @return void'
+- name: extend
+  visibility: public
+  parameters:
+  - name: driver
+  - name: callback
+  comment: '# * Register a custom driver creator Closure.
+
+    # *
+
+    # * @param  string  $driver
+
+    # * @param  \Closure  $callback
+
+    # * @return $this'
+- name: setApplication
+  visibility: public
+  parameters:
+  - name: app
+  comment: '# * Set the application instance used by the manager.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Foundation\Application  $app
+
+    # * @return $this'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically call the default driver instance.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+traits:
+- Aws\DynamoDb\DynamoDbClient
+- Closure
+- Illuminate\Contracts\Cache\Store
+- Illuminate\Support\Arr
+- InvalidArgumentException
+interfaces:
+- FactoryContract

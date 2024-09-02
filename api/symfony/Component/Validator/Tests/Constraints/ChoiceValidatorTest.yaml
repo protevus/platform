@@ -1,0 +1,150 @@
+name: ChoiceValidatorTest
+class_comment: null
+dependencies:
+- name: Choice
+  type: class
+  source: Symfony\Component\Validator\Constraints\Choice
+- name: ChoiceValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\ChoiceValidator
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+properties: []
+methods:
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+- name: staticCallback
+  visibility: public
+  parameters: []
+  comment: null
+- name: objectMethodCallback
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExpectArrayIfMultipleIsTrue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNullIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testChoicesOrCallbackExpected
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidCallbackExpected
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidChoiceArray
+  visibility: public
+  parameters:
+  - name: constraint
+  comment: '# * @dataProvider provideConstraintsWithChoicesArray'
+- name: provideConstraintsWithChoicesArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidChoiceCallbackFunction
+  visibility: public
+  parameters:
+  - name: constraint
+  comment: '# * @dataProvider provideConstraintsWithCallbackFunction'
+- name: provideConstraintsWithCallbackFunction
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidChoiceCallbackContextMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidChoiceCallbackContextObjectMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMultipleChoices
+  visibility: public
+  parameters:
+  - name: constraint
+  comment: '# * @dataProvider provideConstraintsWithMultipleTrue'
+- name: provideConstraintsWithMultipleTrue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidChoice
+  visibility: public
+  parameters:
+  - name: constraint
+  comment: '# * @dataProvider provideConstraintsWithMessage'
+- name: provideConstraintsWithMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidChoiceEmptyChoices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidChoiceMultiple
+  visibility: public
+  parameters:
+  - name: constraint
+  comment: '# * @dataProvider provideConstraintsWithMultipleMessage'
+- name: provideConstraintsWithMultipleMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTooFewChoices
+  visibility: public
+  parameters:
+  - name: constraint
+  comment: '# * @dataProvider provideConstraintsWithMin'
+- name: provideConstraintsWithMin
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTooManyChoices
+  visibility: public
+  parameters:
+  - name: constraint
+  comment: '# * @dataProvider provideConstraintsWithMax'
+- name: provideConstraintsWithMax
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStrictAllowsExactValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStrictDisallowsDifferentType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStrictWithMultipleChoices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMatchFalse
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMatchFalseWithMultiple
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\Choice
+- Symfony\Component\Validator\Constraints\ChoiceValidator
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

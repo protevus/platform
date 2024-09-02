@@ -1,0 +1,16 @@
+name: ContainerDumpTest
+class_comment: '# * Checks that the container compiles correctly when all the bundle
+  features are enabled.'
+dependencies: []
+properties: []
+methods:
+- name: testContainerCompilationInDebug
+  visibility: public
+  parameters: []
+  comment: null
+- name: testContainerCompilation
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

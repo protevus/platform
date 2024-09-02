@@ -1,0 +1,936 @@
+name: SqlServerGrammar
+class_comment: null
+dependencies:
+- name: Connection
+  type: class
+  source: Illuminate\Database\Connection
+- name: Expression
+  type: class
+  source: Illuminate\Database\Query\Expression
+- name: Blueprint
+  type: class
+  source: Illuminate\Database\Schema\Blueprint
+- name: Fluent
+  type: class
+  source: Illuminate\Support\Fluent
+properties:
+- name: transactions
+  visibility: protected
+  comment: '# * If this Grammar supports schema changes wrapped in a transaction.
+
+    # *
+
+    # * @var bool'
+- name: modifiers
+  visibility: protected
+  comment: '# * The possible column modifiers.
+
+    # *
+
+    # * @var string[]'
+- name: serials
+  visibility: protected
+  comment: '# * The columns available as serials.
+
+    # *
+
+    # * @var string[]'
+- name: fluentCommands
+  visibility: protected
+  comment: '# * The commands to be executed outside of create or alter command.
+
+    # *
+
+    # * @var string[]'
+methods:
+- name: compileDefaultSchema
+  visibility: public
+  parameters: []
+  comment: "# * If this Grammar supports schema changes wrapped in a transaction.\n\
+    # *\n# * @var bool\n# */\n# protected $transactions = true;\n# \n# /**\n# * The\
+    \ possible column modifiers.\n# *\n# * @var string[]\n# */\n# protected $modifiers\
+    \ = ['Collate', 'Nullable', 'Default', 'Persisted', 'Increment'];\n# \n# /**\n\
+    # * The columns available as serials.\n# *\n# * @var string[]\n# */\n# protected\
+    \ $serials = ['tinyInteger', 'smallInteger', 'mediumInteger', 'integer', 'bigInteger'];\n\
+    # \n# /**\n# * The commands to be executed outside of create or alter command.\n\
+    # *\n# * @var string[]\n# */\n# protected $fluentCommands = ['Default'];\n# \n\
+    # /**\n# * Compile a query to determine the name of the default schema.\n# *\n\
+    # * @return string"
+- name: compileCreateDatabase
+  visibility: public
+  parameters:
+  - name: name
+  - name: connection
+  comment: '# * Compile a create database command.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @return string'
+- name: compileDropDatabaseIfExists
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Compile a drop database if exists command.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string'
+- name: compileTables
+  visibility: public
+  parameters: []
+  comment: '# * Compile the query to determine the tables.
+
+    # *
+
+    # * @return string'
+- name: compileViews
+  visibility: public
+  parameters: []
+  comment: '# * Compile the query to determine the views.
+
+    # *
+
+    # * @return string'
+- name: compileColumns
+  visibility: public
+  parameters:
+  - name: schema
+  - name: table
+  comment: '# * Compile the query to determine the columns.
+
+    # *
+
+    # * @param  string  $schema
+
+    # * @param  string  $table
+
+    # * @return string'
+- name: compileIndexes
+  visibility: public
+  parameters:
+  - name: schema
+  - name: table
+  comment: '# * Compile the query to determine the indexes.
+
+    # *
+
+    # * @param  string  $schema
+
+    # * @param  string  $table
+
+    # * @return string'
+- name: compileForeignKeys
+  visibility: public
+  parameters:
+  - name: schema
+  - name: table
+  comment: '# * Compile the query to determine the foreign keys.
+
+    # *
+
+    # * @param  string  $schema
+
+    # * @param  string  $table
+
+    # * @return string'
+- name: compileCreate
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  comment: '# * Compile a create table command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @return string'
+- name: compileAdd
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  comment: '# * Compile a column addition table command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @return string'
+- name: compileRenameColumn
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  - name: connection
+  comment: '# * Compile a rename column command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @return array|string'
+- name: compileChange
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  - name: connection
+  comment: '# * Compile a change column command into a series of SQL statements.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @return array|string
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: compilePrimary
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  comment: '# * Compile a primary key command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @return string'
+- name: compileUnique
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  comment: '# * Compile a unique key command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @return string'
+- name: compileIndex
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  comment: '# * Compile a plain index key command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @return string'
+- name: compileSpatialIndex
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  comment: '# * Compile a spatial index key command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @return string'
+- name: compileDefault
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  comment: '# * Compile a default command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @return string|null'
+- name: compileDrop
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  comment: '# * Compile a drop table command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @return string'
+- name: compileDropIfExists
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  comment: '# * Compile a drop table (if exists) command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @return string'
+- name: compileDropAllTables
+  visibility: public
+  parameters: []
+  comment: '# * Compile the SQL needed to drop all tables.
+
+    # *
+
+    # * @return string'
+- name: compileDropColumn
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  comment: '# * Compile a drop column command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @return string'
+- name: compileDropDefaultConstraint
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  comment: '# * Compile a drop default constraint command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @return string'
+- name: compileDropPrimary
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  comment: '# * Compile a drop primary key command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @return string'
+- name: compileDropUnique
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  comment: '# * Compile a drop unique key command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @return string'
+- name: compileDropIndex
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  comment: '# * Compile a drop index command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @return string'
+- name: compileDropSpatialIndex
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  comment: '# * Compile a drop spatial index command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @return string'
+- name: compileDropForeign
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  comment: '# * Compile a drop foreign key command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @return string'
+- name: compileRename
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  comment: '# * Compile a rename table command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @return string'
+- name: compileRenameIndex
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: command
+  comment: '# * Compile a rename index command.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $command
+
+    # * @return string'
+- name: compileEnableForeignKeyConstraints
+  visibility: public
+  parameters: []
+  comment: '# * Compile the command to enable foreign key constraints.
+
+    # *
+
+    # * @return string'
+- name: compileDisableForeignKeyConstraints
+  visibility: public
+  parameters: []
+  comment: '# * Compile the command to disable foreign key constraints.
+
+    # *
+
+    # * @return string'
+- name: compileDropAllForeignKeys
+  visibility: public
+  parameters: []
+  comment: '# * Compile the command to drop all foreign keys.
+
+    # *
+
+    # * @return string'
+- name: compileDropAllViews
+  visibility: public
+  parameters: []
+  comment: '# * Compile the command to drop all views.
+
+    # *
+
+    # * @return string'
+- name: typeChar
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a char type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeString
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a string type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeTinyText
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a tiny text type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeText
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a text type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeMediumText
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a medium text type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeLongText
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a long text type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeInteger
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for an integer type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeBigInteger
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a big integer type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeMediumInteger
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a medium integer type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeTinyInteger
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a tiny integer type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeSmallInteger
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a small integer type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeFloat
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a float type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeDouble
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a double type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeDecimal
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a decimal type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeBoolean
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a boolean type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeEnum
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for an enumeration type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeJson
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a json type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeJsonb
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a jsonb type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeDate
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a date type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeDateTime
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a date-time type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeDateTimeTz
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a date-time (with time zone) type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeTime
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a time type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeTimeTz
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a time (with time zone) type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeTimestamp
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a timestamp type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeTimestampTz
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a timestamp (with time zone) type.
+
+    # *
+
+    # * @link https://docs.microsoft.com/en-us/sql/t-sql/data-types/datetimeoffset-transact-sql?view=sql-server-ver15
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeYear
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a year type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeBinary
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a binary type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeUuid
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a uuid type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeIpAddress
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for an IP address type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeMacAddress
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a MAC address type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeGeometry
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a spatial Geometry type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeGeography
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a spatial Geography type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string'
+- name: typeComputed
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Create the column definition for a generated, computed column type.
+
+    # *
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string|null'
+- name: modifyCollate
+  visibility: protected
+  parameters:
+  - name: blueprint
+  - name: column
+  comment: '# * Get the SQL for a collation column modifier.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string|null'
+- name: modifyNullable
+  visibility: protected
+  parameters:
+  - name: blueprint
+  - name: column
+  comment: '# * Get the SQL for a nullable column modifier.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string|null'
+- name: modifyDefault
+  visibility: protected
+  parameters:
+  - name: blueprint
+  - name: column
+  comment: '# * Get the SQL for a default column modifier.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string|null'
+- name: modifyIncrement
+  visibility: protected
+  parameters:
+  - name: blueprint
+  - name: column
+  comment: '# * Get the SQL for an auto-increment column modifier.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string|null'
+- name: modifyPersisted
+  visibility: protected
+  parameters:
+  - name: blueprint
+  - name: column
+  comment: '# * Get the SQL for a generated stored column modifier.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint  $blueprint
+
+    # * @param  \Illuminate\Support\Fluent  $column
+
+    # * @return string|null'
+- name: wrapTable
+  visibility: public
+  parameters:
+  - name: table
+  comment: '# * Wrap a table in keyword identifiers.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\Blueprint|\Illuminate\Contracts\Database\Query\Expression|string  $table
+
+    # * @return string'
+- name: quoteString
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Quote the given string literal.
+
+    # *
+
+    # * @param  string|array  $value
+
+    # * @return string'
+traits:
+- Illuminate\Database\Connection
+- Illuminate\Database\Query\Expression
+- Illuminate\Database\Schema\Blueprint
+- Illuminate\Support\Fluent
+interfaces: []

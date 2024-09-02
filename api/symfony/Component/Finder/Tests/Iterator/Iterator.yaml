@@ -1,0 +1,39 @@
+name: Iterator
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: values
+    default: '[]'
+  comment: null
+- name: attach
+  visibility: public
+  parameters:
+  - name: fileinfo
+  comment: null
+- name: rewind
+  visibility: public
+  parameters: []
+  comment: null
+- name: valid
+  visibility: public
+  parameters: []
+  comment: null
+- name: next
+  visibility: public
+  parameters: []
+  comment: null
+- name: current
+  visibility: public
+  parameters: []
+  comment: null
+- name: key
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces:
+- \Iterator

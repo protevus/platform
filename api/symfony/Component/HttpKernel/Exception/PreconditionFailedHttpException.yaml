@@ -1,0 +1,19 @@
+name: PreconditionFailedHttpException
+class_comment: '# * @author Ben Ramsey <ben@benramsey.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: message
+    default: ''''''
+  - name: previous
+    default: 'null'
+  - name: code
+    default: '0'
+  - name: headers
+    default: '[]'
+  comment: null
+traits: []
+interfaces: []

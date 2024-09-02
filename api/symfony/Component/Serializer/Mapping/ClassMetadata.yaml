@@ -1,0 +1,66 @@
+name: ClassMetadata
+class_comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>"
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: class
+  - name: classDiscriminatorMapping
+    default: 'null'
+  comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# */\n# class ClassMetadata\
+    \ implements ClassMetadataInterface\n# {\n# /**\n# * @internal This property is\
+    \ public in order to reduce the size of the\n# *           class' serialized representation.\
+    \ Do not access it. Use\n# *           {@link getName()} instead.\n# */\n# public\
+    \ string $name;\n# \n# /**\n# * @var AttributeMetadataInterface[]\n# *\n# * @internal\
+    \ This property is public in order to reduce the size of the\n# *           class'\
+    \ serialized representation. Do not access it. Use\n# *           {@link getAttributesMetadata()}\
+    \ instead.\n# */\n# public array $attributesMetadata = [];\n# \n# private ?\\\
+    ReflectionClass $reflClass = null;\n# \n# /**\n# * @internal This property is\
+    \ public in order to reduce the size of the\n# *           class' serialized representation.\
+    \ Do not access it. Use\n# *           {@link getClassDiscriminatorMapping()}\
+    \ instead.\n# */\n# public ?ClassDiscriminatorMapping $classDiscriminatorMapping\
+    \ = null;\n# \n# /**\n# * Constructs a metadata for the given class."
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: addAttributeMetadata
+  visibility: public
+  parameters:
+  - name: attributeMetadata
+  comment: null
+- name: getAttributesMetadata
+  visibility: public
+  parameters: []
+  comment: null
+- name: merge
+  visibility: public
+  parameters:
+  - name: classMetadata
+  comment: null
+- name: getReflectionClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: getClassDiscriminatorMapping
+  visibility: public
+  parameters: []
+  comment: null
+- name: setClassDiscriminatorMapping
+  visibility: public
+  parameters:
+  - name: mapping
+  comment: null
+- name: __sleep
+  visibility: public
+  parameters: []
+  comment: '# * Returns the names of the properties that should be serialized.
+
+    # *
+
+    # * @return string[]'
+traits: []
+interfaces:
+- ClassMetadataInterface

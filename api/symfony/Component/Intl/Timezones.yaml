@@ -1,0 +1,86 @@
+name: Timezones
+class_comment: null
+dependencies:
+- name: MissingResourceException
+  type: class
+  source: Symfony\Component\Intl\Exception\MissingResourceException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Intl\Exception\RuntimeException
+properties: []
+methods:
+- name: getIds
+  visibility: public
+  parameters: []
+  comment: '# * Gives access to timezone-related ICU data.
+
+    # *
+
+    # * @author Roland Franssen <franssen.roland@gmail.com>
+
+    # */
+
+    # final class Timezones extends ResourceBundle
+
+    # {
+
+    # /**
+
+    # * @return string[]'
+- name: exists
+  visibility: public
+  parameters:
+  - name: timezone
+  comment: null
+- name: getName
+  visibility: public
+  parameters:
+  - name: timezone
+  - name: displayLocale
+    default: 'null'
+  comment: '# * @throws MissingResourceException if the timezone identifier does not
+    exist or is an alias'
+- name: getNames
+  visibility: public
+  parameters:
+  - name: displayLocale
+    default: 'null'
+  comment: '# * @return string[]'
+- name: getRawOffset
+  visibility: public
+  parameters:
+  - name: timezone
+  - name: timestamp
+    default: 'null'
+  comment: '# * @throws \Exception       if the timezone identifier does not exist
+
+    # * @throws RuntimeException if there''s no timezone DST transition information
+    available'
+- name: getGmtOffset
+  visibility: public
+  parameters:
+  - name: timezone
+  - name: timestamp
+    default: 'null'
+  - name: displayLocale
+    default: 'null'
+  comment: null
+- name: getCountryCode
+  visibility: public
+  parameters:
+  - name: timezone
+  comment: '# * @throws MissingResourceException if the timezone identifier has no
+    associated country code'
+- name: forCountryCode
+  visibility: public
+  parameters:
+  - name: country
+  comment: '# * @throws MissingResourceException if the country code does not exist'
+- name: getPath
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Intl\Exception\MissingResourceException
+- Symfony\Component\Intl\Exception\RuntimeException
+interfaces: []

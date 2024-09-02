@@ -1,0 +1,13 @@
+name: DateTimeEqualsTrait
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: assertDateTimeEquals
+  visibility: public
+  parameters:
+  - name: expected
+  - name: actual
+  comment: null
+traits: []
+interfaces: []

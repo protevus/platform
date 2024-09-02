@@ -1,0 +1,35 @@
+name: BaseCommand
+class_comment: null
+dependencies:
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+properties: []
+methods:
+- name: getMigrationPaths
+  visibility: protected
+  parameters: []
+  comment: '# * Get all of the migration paths.
+
+    # *
+
+    # * @return string[]'
+- name: usingRealPath
+  visibility: protected
+  parameters: []
+  comment: '# * Determine if the given path(s) are pre-resolved "real" paths.
+
+    # *
+
+    # * @return bool'
+- name: getMigrationPath
+  visibility: protected
+  parameters: []
+  comment: '# * Get the path to the migration directory.
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Console\Command
+interfaces: []

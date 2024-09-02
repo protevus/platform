@@ -1,0 +1,11 @@
+name: collectors
+class_comment: null
+dependencies:
+- name: SecurityDataCollector
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DataCollector\SecurityDataCollector
+properties: []
+methods: []
+traits:
+- Symfony\Bundle\SecurityBundle\DataCollector\SecurityDataCollector
+interfaces: []

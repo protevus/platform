@@ -1,0 +1,60 @@
+name: CommandFinished
+class_comment: null
+dependencies:
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+properties:
+- name: command
+  visibility: public
+  comment: '# * The command name.
+
+    # *
+
+    # * @var string'
+- name: input
+  visibility: public
+  comment: '# * The console input implementation.
+
+    # *
+
+    # * @var \Symfony\Component\Console\Input\InputInterface|null'
+- name: output
+  visibility: public
+  comment: '# * The command output implementation.
+
+    # *
+
+    # * @var \Symfony\Component\Console\Output\OutputInterface|null'
+- name: exitCode
+  visibility: public
+  comment: '# * The command exit code.
+
+    # *
+
+    # * @var int'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: command
+  - name: input
+  - name: output
+  - name: exitCode
+  comment: "# * The command name.\n# *\n# * @var string\n# */\n# public $command;\n\
+    # \n# /**\n# * The console input implementation.\n# *\n# * @var \\Symfony\\Component\\\
+    Console\\Input\\InputInterface|null\n# */\n# public $input;\n# \n# /**\n# * The\
+    \ command output implementation.\n# *\n# * @var \\Symfony\\Component\\Console\\\
+    Output\\OutputInterface|null\n# */\n# public $output;\n# \n# /**\n# * The command\
+    \ exit code.\n# *\n# * @var int\n# */\n# public $exitCode;\n# \n# /**\n# * Create\
+    \ a new event instance.\n# *\n# * @param  string  $command\n# * @param  \\Symfony\\\
+    Component\\Console\\Input\\InputInterface  $input\n# * @param  \\Symfony\\Component\\\
+    Console\\Output\\OutputInterface  $output\n# * @param  int  $exitCode\n# * @return\
+    \ void"
+traits:
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Output\OutputInterface
+interfaces: []

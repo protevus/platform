@@ -1,0 +1,34 @@
+name: InteractsWithDictionary
+class_comment: null
+dependencies:
+- name: BackedEnum
+  type: class
+  source: BackedEnum
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+- name: UnitEnum
+  type: class
+  source: UnitEnum
+properties: []
+methods:
+- name: getDictionaryKey
+  visibility: protected
+  parameters:
+  - name: attribute
+  comment: '# * Get a dictionary key attribute - casting it to a string if necessary.
+
+    # *
+
+    # * @param  mixed  $attribute
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+traits:
+- BackedEnum
+- InvalidArgumentException
+- UnitEnum
+interfaces: []

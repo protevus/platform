@@ -1,0 +1,53 @@
+name: CheckExceptionOnInvalidReferenceBehaviorPass
+class_comment: '# * Checks that all references are pointing to a valid service.
+
+  # *
+
+  # * @author Johannes M. Schmitt <schmittjoh@gmail.com>'
+dependencies:
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: ServiceNotFoundException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: processValue
+  visibility: protected
+  parameters:
+  - name: value
+  - name: isRoot
+    default: 'false'
+  comment: null
+- name: throwServiceNotFoundException
+  visibility: private
+  parameters:
+  - name: ref
+  - name: sourceId
+  - name: value
+  comment: null
+- name: processValue
+  visibility: public
+  parameters:
+  - name: value
+  - name: isRoot
+    default: 'false'
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+- Symfony\Component\DependencyInjection\Reference
+interfaces: []

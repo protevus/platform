@@ -1,0 +1,164 @@
+name: ValidateEnvPlaceholdersPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: TreeBuilder
+  type: class
+  source: Symfony\Component\Config\Definition\Builder\TreeBuilder
+- name: ConfigurationInterface
+  type: class
+  source: Symfony\Component\Config\Definition\ConfigurationInterface
+- name: InvalidConfigurationException
+  type: class
+  source: Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+- name: InvalidTypeException
+  type: class
+  source: Symfony\Component\Config\Definition\Exception\InvalidTypeException
+- name: MergeExtensionConfigurationPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationPass
+- name: RegisterEnvVarProcessorsPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\RegisterEnvVarProcessorsPass
+- name: ValidateEnvPlaceholdersPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ValidateEnvPlaceholdersPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: Extension
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\Extension
+properties: []
+methods:
+- name: testEnvsAreValidatedInConfig
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDefaultEnvIsValidatedInConfig
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDefaultEnvWithoutPrefixIsValidatedInConfig
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEnvsAreValidatedInConfigWithInvalidPlaceholder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidEnvInConfig
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNulledEnvInConfig
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidateEnvOnMerge
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConcatenatedEnvInConfig
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSurroundedEnvInConfig
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEnvIsIncompatibleWithArrayNode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalizedEnvIsCompatibleWithArrayNode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEnvIsNotUnset
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEmptyEnvWhichCannotBeEmptyForScalarNode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEmptyEnvWhichCannotBeEmptyForScalarNodeWithValidation
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPartialEnvWhichCannotBeEmptyForScalarNode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEnvWithVariableNode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEmptyConfigFromMoreThanOneSource
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDiscardedEnvInConfig
+  visibility: public
+  parameters: []
+  comment: null
+- name: doProcess
+  visibility: private
+  parameters:
+  - name: container
+  comment: null
+- name: getConfigTreeBuilder
+  visibility: public
+  parameters: []
+  comment: null
+- name: getConfigTreeBuilder
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: configuration
+    default: 'null'
+  comment: null
+- name: getAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: getConfiguration
+  visibility: public
+  parameters:
+  - name: config
+  - name: container
+  comment: null
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: container
+  comment: null
+- name: getConfig
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Config\Definition\Builder\TreeBuilder
+- Symfony\Component\Config\Definition\ConfigurationInterface
+- Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+- Symfony\Component\Config\Definition\Exception\InvalidTypeException
+- Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationPass
+- Symfony\Component\DependencyInjection\Compiler\RegisterEnvVarProcessorsPass
+- Symfony\Component\DependencyInjection\Compiler\ValidateEnvPlaceholdersPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Extension\Extension
+interfaces:
+- ConfigurationInterface
+- ConfigurationInterface

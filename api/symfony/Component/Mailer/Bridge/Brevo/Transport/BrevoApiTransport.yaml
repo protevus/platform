@@ -1,0 +1,115 @@
+name: BrevoApiTransport
+class_comment: null
+dependencies:
+- name: EventDispatcherInterface
+  type: class
+  source: Psr\EventDispatcher\EventDispatcherInterface
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: HttpTransportException
+  type: class
+  source: Symfony\Component\Mailer\Exception\HttpTransportException
+- name: MetadataHeader
+  type: class
+  source: Symfony\Component\Mailer\Header\MetadataHeader
+- name: TagHeader
+  type: class
+  source: Symfony\Component\Mailer\Header\TagHeader
+- name: SentMessage
+  type: class
+  source: Symfony\Component\Mailer\SentMessage
+- name: AbstractApiTransport
+  type: class
+  source: Symfony\Component\Mailer\Transport\AbstractApiTransport
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+- name: Headers
+  type: class
+  source: Symfony\Component\Mime\Header\Headers
+- name: DecodingExceptionInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface
+- name: TransportExceptionInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+- name: HttpClientInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\HttpClientInterface
+- name: ResponseInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\ResponseInterface
+properties: []
+methods:
+- name: formatAddresses
+  visibility: private
+  parameters:
+  - name: addresses
+  comment: "# * @author Pierre TANGUY\n# */\n# final class BrevoApiTransport extends\
+    \ AbstractApiTransport\n# {\n# public function __construct(\n# #[\\SensitiveParameter]\
+    \ private string $key,\n# ?HttpClientInterface $client = null,\n# ?EventDispatcherInterface\
+    \ $dispatcher = null,\n# ?LoggerInterface $logger = null,\n# ) {\n# parent::__construct($client,\
+    \ $dispatcher, $logger);\n# }\n# \n# public function __toString(): string\n# {\n\
+    # return \\sprintf('brevo+api://%s', $this->getEndpoint());\n# }\n# \n# protected\
+    \ function doSendApi(SentMessage $sentMessage, Email $email, Envelope $envelope):\
+    \ ResponseInterface\n# {\n# $response = $this->client->request('POST', 'https://'.$this->getEndpoint().'/v3/smtp/email',\
+    \ [\n# 'json' => $this->getPayload($email, $envelope),\n# 'headers' => [\n# 'api-key'\
+    \ => $this->key,\n# ],\n# ]);\n# \n# try {\n# $statusCode = $response->getStatusCode();\n\
+    # $result = $response->toArray(false);\n# } catch (DecodingExceptionInterface)\
+    \ {\n# throw new HttpTransportException('Unable to send an email: '.$response->getContent(false).\\\
+    sprintf(' (code %d).', $statusCode), $response);\n# } catch (TransportExceptionInterface\
+    \ $e) {\n# throw new HttpTransportException('Could not reach the remote Brevo\
+    \ server.', $response, 0, $e);\n# }\n# \n# if (201 !== $statusCode) {\n# throw\
+    \ new HttpTransportException('Unable to send an email: '.($result['message'] ??\
+    \ $response->getContent(false)).\\sprintf(' (code %d).', $statusCode), $response);\n\
+    # }\n# \n# $sentMessage->setMessageId($result['messageId']);\n# \n# return $response;\n\
+    # }\n# \n# /**\n# * @return list<array{email: string, name?: string}>"
+- name: getPayload
+  visibility: private
+  parameters:
+  - name: email
+  - name: envelope
+  comment: null
+- name: prepareAttachments
+  visibility: private
+  parameters:
+  - name: email
+  comment: null
+- name: prepareHeadersAndTags
+  visibility: private
+  parameters:
+  - name: headers
+  comment: null
+- name: formatAddress
+  visibility: private
+  parameters:
+  - name: address
+  comment: null
+- name: getEndpoint
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Psr\EventDispatcher\EventDispatcherInterface
+- Psr\Log\LoggerInterface
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mailer\Exception\HttpTransportException
+- Symfony\Component\Mailer\Header\MetadataHeader
+- Symfony\Component\Mailer\Header\TagHeader
+- Symfony\Component\Mailer\SentMessage
+- Symfony\Component\Mailer\Transport\AbstractApiTransport
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Email
+- Symfony\Component\Mime\Header\Headers
+- Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface
+- Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+- Symfony\Contracts\HttpClient\HttpClientInterface
+- Symfony\Contracts\HttpClient\ResponseInterface
+interfaces: []

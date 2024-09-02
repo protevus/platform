@@ -1,0 +1,218 @@
+name: ClassMetadataTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: Cascade
+  type: class
+  source: Symfony\Component\Validator\Constraints\Cascade
+- name: Composite
+  type: class
+  source: Symfony\Component\Validator\Constraints\Composite
+- name: GroupSequence
+  type: class
+  source: Symfony\Component\Validator\Constraints\GroupSequence
+- name: Valid
+  type: class
+  source: Symfony\Component\Validator\Constraints\Valid
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- name: GroupDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\GroupDefinitionException
+- name: CascadingStrategy
+  type: class
+  source: Symfony\Component\Validator\Mapping\CascadingStrategy
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+- name: CascadingEntity
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\CascadingEntity
+- name: CascadingEntityIntersection
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\CascadingEntityIntersection
+- name: CascadingEntityUnion
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\CascadingEntityUnion
+- name: ClassConstraint
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\ClassConstraint
+- name: ConstraintA
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\ConstraintA
+- name: ConstraintB
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\ConstraintB
+- name: GroupSequenceProviderChildEntity
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\GroupSequenceProviderChildEntity
+- name: Entity
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\Entity
+- name: EntityParent
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\EntityParent
+- name: GroupSequenceProviderEntity
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\GroupSequenceProviderEntity
+- name: PropertyConstraint
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\PropertyConstraint
+properties:
+- name: nested
+  visibility: public
+  comment: null
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testAddConstraintDoesNotAcceptValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddConstraintRequiresClassConstraints
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddCompositeConstraintRejectsNestedPropertyConstraints
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddCompositeConstraintAcceptsNestedClassConstraints
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddPropertyConstraints
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddMultiplePropertyConstraints
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddGetterConstraints
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddMultipleGetterConstraints
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMergeConstraintsMergesClassConstraints
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMergeConstraintsMergesMemberConstraints
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMemberMetadatas
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMergeConstraintsKeepsPrivateMembersSeparate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetReflectionClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSerialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGroupSequencesWorkIfContainingDefaultGroup
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGroupSequencesFailIfNotContainingDefaultGroup
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGroupSequencesFailIfContainingDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGroupSequenceFailsIfGroupSequenceProviderIsSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGroupSequenceProviderFailsIfGroupSequenceIsSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGroupSequenceProviderFailsIfDomainClassIsInvalid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGroupSequenceProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMergeConstraintsMergesGroupSequenceProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPropertyMetadataReturnsEmptyArrayWithoutConfiguredMetadata
+  visibility: public
+  parameters: []
+  comment: '# * https://github.com/symfony/symfony/issues/11604.'
+- name: testCascadeConstraint
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCascadeConstraintWithUnionTypeProperties
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCascadeConstraintWithIntersectionTypeProperties
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCascadeConstraintWithExcludedProperties
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDefaultOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCompositeOption
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getTargets
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Constraints\Cascade
+- Symfony\Component\Validator\Constraints\Composite
+- Symfony\Component\Validator\Constraints\GroupSequence
+- Symfony\Component\Validator\Constraints\Valid
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- Symfony\Component\Validator\Exception\GroupDefinitionException
+- Symfony\Component\Validator\Mapping\CascadingStrategy
+- Symfony\Component\Validator\Mapping\ClassMetadata
+- Symfony\Component\Validator\Tests\Fixtures\CascadingEntity
+- Symfony\Component\Validator\Tests\Fixtures\CascadingEntityIntersection
+- Symfony\Component\Validator\Tests\Fixtures\CascadingEntityUnion
+- Symfony\Component\Validator\Tests\Fixtures\ClassConstraint
+- Symfony\Component\Validator\Tests\Fixtures\ConstraintA
+- Symfony\Component\Validator\Tests\Fixtures\ConstraintB
+- Symfony\Component\Validator\Tests\Fixtures\GroupSequenceProviderChildEntity
+- Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\Entity
+- Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\EntityParent
+- Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\GroupSequenceProviderEntity
+- Symfony\Component\Validator\Tests\Fixtures\PropertyConstraint
+interfaces: []

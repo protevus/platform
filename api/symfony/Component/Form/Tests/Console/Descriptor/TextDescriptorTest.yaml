@@ -1,0 +1,19 @@
+name: TextDescriptorTest
+class_comment: null
+dependencies:
+- name: TextDescriptor
+  type: class
+  source: Symfony\Component\Form\Console\Descriptor\TextDescriptor
+properties: []
+methods:
+- name: getDescriptor
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getFormat
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\Console\Descriptor\TextDescriptor
+interfaces: []

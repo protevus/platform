@@ -1,0 +1,30 @@
+name: IsNull
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: options
+    default: 'null'
+  - name: message
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  comment: "# * Validates that a value is exactly equal to null.\n# *\n# * @author\
+    \ Bernhard Schussek <bschussek@gmail.com>\n# */\n# #[\\Attribute(\\Attribute::TARGET_PROPERTY\
+    \ | \\Attribute::TARGET_METHOD | \\Attribute::IS_REPEATABLE)]\n# class IsNull\
+    \ extends Constraint\n# {\n# public const NOT_NULL_ERROR = '60d2f30b-8cfa-4372-b155-9656634de120';\n\
+    # \n# protected const ERROR_NAMES = [\n# self::NOT_NULL_ERROR => 'NOT_NULL_ERROR',\n\
+    # ];\n# \n# public string $message = 'This value should be null.';\n# \n# /**\n\
+    # * @param array<string,mixed>|null $options\n# * @param string[]|null       \
+    \     $groups"
+traits:
+- Symfony\Component\Validator\Constraint
+interfaces: []

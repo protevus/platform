@@ -1,0 +1,67 @@
+name: ResettableServicePassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: IteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: ResettableServicePass
+  type: class
+  source: Symfony\Component\HttpKernel\DependencyInjection\ResettableServicePass
+- name: ServicesResetter
+  type: class
+  source: Symfony\Component\HttpKernel\DependencyInjection\ServicesResetter
+- name: ClearableService
+  type: class
+  source: Symfony\Component\HttpKernel\Tests\Fixtures\ClearableService
+- name: MultiResettableService
+  type: class
+  source: Symfony\Component\HttpKernel\Tests\Fixtures\MultiResettableService
+- name: ResettableService
+  type: class
+  source: Symfony\Component\HttpKernel\Tests\Fixtures\ResettableService
+properties: []
+methods:
+- name: testCompilerPass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMissingMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIgnoreInvalidMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompilerPassWithoutResetters
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\HttpKernel\DependencyInjection\ResettableServicePass
+- Symfony\Component\HttpKernel\DependencyInjection\ServicesResetter
+- Symfony\Component\HttpKernel\Tests\Fixtures\ClearableService
+- Symfony\Component\HttpKernel\Tests\Fixtures\MultiResettableService
+- Symfony\Component\HttpKernel\Tests\Fixtures\ResettableService
+interfaces: []

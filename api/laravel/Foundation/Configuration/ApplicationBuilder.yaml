@@ -1,0 +1,315 @@
+name: ApplicationBuilder
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Artisan
+  type: class
+  source: Illuminate\Console\Application
+- name: Schedule
+  type: class
+  source: Illuminate\Console\Scheduling\Schedule
+- name: ConsoleKernel
+  type: class
+  source: Illuminate\Contracts\Console\Kernel
+- name: HttpKernel
+  type: class
+  source: Illuminate\Contracts\Http\Kernel
+- name: Application
+  type: class
+  source: Illuminate\Foundation\Application
+- name: RegisterProviders
+  type: class
+  source: Illuminate\Foundation\Bootstrap\RegisterProviders
+- name: DiagnosingHealth
+  type: class
+  source: Illuminate\Foundation\Events\DiagnosingHealth
+- name: AppEventServiceProvider
+  type: class
+  source: Illuminate\Foundation\Support\Providers\EventServiceProvider
+- name: AppRouteServiceProvider
+  type: class
+  source: Illuminate\Foundation\Support\Providers\RouteServiceProvider
+- name: Broadcast
+  type: class
+  source: Illuminate\Support\Facades\Broadcast
+- name: Event
+  type: class
+  source: Illuminate\Support\Facades\Event
+- name: Route
+  type: class
+  source: Illuminate\Support\Facades\Route
+- name: View
+  type: class
+  source: Illuminate\Support\Facades\View
+- name: Folio
+  type: class
+  source: Laravel\Folio\Folio
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: app
+  comment: "# * The service provider that are marked for registration.\n# *\n# * @var\
+    \ array\n# */\n# protected array $pendingProviders = [];\n# \n# /**\n# * The Folio\
+    \ / page middleware that have been defined by the user.\n# *\n# * @var array\n\
+    # */\n# protected array $pageMiddleware = [];\n# \n# /**\n# * Create a new application\
+    \ builder instance."
+- name: withKernels
+  visibility: public
+  parameters: []
+  comment: '# * Register the standard kernel classes for the application.
+
+    # *
+
+    # * @return $this'
+- name: withProviders
+  visibility: public
+  parameters:
+  - name: providers
+    default: '[]'
+  - name: withBootstrapProviders
+    default: 'true'
+  comment: '# * Register additional service providers.
+
+    # *
+
+    # * @param  array  $providers
+
+    # * @param  bool  $withBootstrapProviders
+
+    # * @return $this'
+- name: withEvents
+  visibility: public
+  parameters:
+  - name: discover
+    default: '[]'
+  comment: '# * Register the core event service provider for the application.
+
+    # *
+
+    # * @param  array|bool  $discover
+
+    # * @return $this'
+- name: withBroadcasting
+  visibility: public
+  parameters:
+  - name: channels
+  - name: attributes
+    default: '[]'
+  comment: '# * Register the broadcasting services for the application.
+
+    # *
+
+    # * @param  string  $channels
+
+    # * @param  array  $attributes
+
+    # * @return $this'
+- name: withRouting
+  visibility: public
+  parameters:
+  - name: using
+    default: 'null'
+  - name: web
+    default: 'null'
+  - name: api
+    default: 'null'
+  - name: commands
+    default: 'null'
+  - name: channels
+    default: 'null'
+  - name: pages
+    default: 'null'
+  - name: health
+    default: 'null'
+  - name: apiPrefix
+    default: '''api'''
+  - name: then
+    default: 'null'
+  comment: '# * Register the routing services for the application.
+
+    # *
+
+    # * @param  \Closure|null  $using
+
+    # * @param  array|string|null  $web
+
+    # * @param  array|string|null  $api
+
+    # * @param  string|null  $commands
+
+    # * @param  string|null  $channels
+
+    # * @param  string|null  $pages
+
+    # * @param  string  $apiPrefix
+
+    # * @param  callable|null  $then
+
+    # * @return $this'
+- name: buildRoutingCallback
+  visibility: protected
+  parameters:
+  - name: web
+  - name: api
+  - name: pages
+  - name: health
+  - name: apiPrefix
+  - name: then
+  comment: '# * Create the routing callback for the application.
+
+    # *
+
+    # * @param  array|string|null  $web
+
+    # * @param  array|string|null  $api
+
+    # * @param  string|null  $pages
+
+    # * @param  string|null  $health
+
+    # * @param  string  $apiPrefix
+
+    # * @param  callable|null  $then
+
+    # * @return \Closure'
+- name: withMiddleware
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Register the global middleware, middleware groups, and middleware
+    aliases for the application.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return $this'
+- name: withCommands
+  visibility: public
+  parameters:
+  - name: commands
+    default: '[]'
+  comment: '# * Register additional Artisan commands with the application.
+
+    # *
+
+    # * @param  array  $commands
+
+    # * @return $this'
+- name: withCommandRouting
+  visibility: protected
+  parameters:
+  - name: paths
+  comment: '# * Register additional Artisan route paths.
+
+    # *
+
+    # * @param  array  $paths
+
+    # * @return $this'
+- name: withSchedule
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register the scheduled tasks for the application.
+
+    # *
+
+    # * @param  callable(\Illuminate\Console\Scheduling\Schedule $schedule): void  $callback
+
+    # * @return $this'
+- name: withExceptions
+  visibility: public
+  parameters:
+  - name: using
+    default: 'null'
+  comment: '# * Register and configure the application''s exception handler.
+
+    # *
+
+    # * @param  callable|null  $using
+
+    # * @return $this'
+- name: withBindings
+  visibility: public
+  parameters:
+  - name: bindings
+  comment: '# * Register an array of container bindings to be bound when the application
+    is booting.
+
+    # *
+
+    # * @param  array  $bindings
+
+    # * @return $this'
+- name: withSingletons
+  visibility: public
+  parameters:
+  - name: singletons
+  comment: '# * Register an array of singleton container bindings to be bound when
+    the application is booting.
+
+    # *
+
+    # * @param  array  $singletons
+
+    # * @return $this'
+- name: registered
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a callback to be invoked when the application''s service
+    providers are registered.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return $this'
+- name: booting
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a callback to be invoked when the application is "booting".
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return $this'
+- name: booted
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a callback to be invoked when the application is "booted".
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return $this'
+- name: create
+  visibility: public
+  parameters: []
+  comment: '# * Get the application instance.
+
+    # *
+
+    # * @return \Illuminate\Foundation\Application'
+traits:
+- Closure
+- Illuminate\Console\Scheduling\Schedule
+- Illuminate\Foundation\Application
+- Illuminate\Foundation\Bootstrap\RegisterProviders
+- Illuminate\Foundation\Events\DiagnosingHealth
+- Illuminate\Support\Facades\Broadcast
+- Illuminate\Support\Facades\Event
+- Illuminate\Support\Facades\Route
+- Illuminate\Support\Facades\View
+- Laravel\Folio\Folio
+interfaces: []

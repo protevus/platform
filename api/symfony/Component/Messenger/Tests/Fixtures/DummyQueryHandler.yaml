@@ -1,0 +1,12 @@
+name: DummyQueryHandler
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: query
+  comment: null
+traits: []
+interfaces: []

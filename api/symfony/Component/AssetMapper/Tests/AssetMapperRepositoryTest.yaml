@@ -1,0 +1,59 @@
+name: AssetMapperRepositoryTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AssetMapperRepository
+  type: class
+  source: Symfony\Component\AssetMapper\AssetMapperRepository
+- name: Glob
+  type: class
+  source: Symfony\Component\Finder\Glob
+properties: []
+methods:
+- name: testFindWithAbsolutePaths
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindWithRelativePaths
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindWithMovingPaths
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindWithNamespaces
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindLogicalPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAll
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllWithNamespaces
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExcludedPaths
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDotFilesExcluded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDotFilesNotExcluded
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\AssetMapper\AssetMapperRepository
+- Symfony\Component\Finder\Glob
+interfaces: []

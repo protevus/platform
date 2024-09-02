@@ -1,0 +1,21 @@
+name: ProfilerTest
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: testProfilerIsDisabled
+  visibility: public
+  parameters:
+  - name: insulate
+  comment: '# * @dataProvider getConfigs'
+- name: testProfilerCollectParameter
+  visibility: public
+  parameters:
+  - name: insulate
+  comment: '# * @dataProvider getConfigs'
+- name: getConfigs
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

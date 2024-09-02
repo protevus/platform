@@ -1,0 +1,31 @@
+name: RealServiceInstantiatorTest
+class_comment: '# * Tests for {@see RealServiceInstantiator}.
+
+  # *
+
+  # * @author Marco Pivetta <ocramius@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Container
+  type: class
+  source: Symfony\Component\DependencyInjection\Container
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: RealServiceInstantiator
+  type: class
+  source: Symfony\Component\DependencyInjection\LazyProxy\Instantiator\RealServiceInstantiator
+properties: []
+methods:
+- name: testInstantiateProxy
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Container
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\LazyProxy\Instantiator\RealServiceInstantiator
+interfaces: []

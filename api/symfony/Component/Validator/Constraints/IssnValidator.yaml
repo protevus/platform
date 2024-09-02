@@ -1,0 +1,31 @@
+name: IssnValidator
+class_comment: "# * Validates whether the value is a valid ISSN.\n# *\n# * @author\
+  \ Antonio J. Garc\xEDa Lagar <aj@garcialagar.es>\n# * @author Bernhard Schussek\
+  \ <bschussek@gmail.com>\n# *\n# * @see https://en.wikipedia.org/wiki/Issn"
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: ConstraintValidator
+  type: class
+  source: Symfony\Component\Validator\ConstraintValidator
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedTypeException
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+properties: []
+methods:
+- name: validate
+  visibility: public
+  parameters:
+  - name: value
+  - name: constraint
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\ConstraintValidator
+- Symfony\Component\Validator\Exception\UnexpectedTypeException
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+interfaces: []

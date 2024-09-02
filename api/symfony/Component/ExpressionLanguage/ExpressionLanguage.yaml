@@ -1,0 +1,125 @@
+name: ExpressionLanguage
+class_comment: '# * Allows to compile and evaluate expressions written in your own
+  DSL.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: CacheItemPoolInterface
+  type: class
+  source: Psr\Cache\CacheItemPoolInterface
+- name: ArrayAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\ArrayAdapter
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: cache
+    default: 'null'
+  - name: providers
+    default: '[]'
+  comment: "# * Allows to compile and evaluate expressions written in your own DSL.\n\
+    # *\n# * @author Fabien Potencier <fabien@symfony.com>\n# */\n# class ExpressionLanguage\n\
+    # {\n# private CacheItemPoolInterface $cache;\n# private Lexer $lexer;\n# private\
+    \ Parser $parser;\n# private Compiler $compiler;\n# \n# protected array $functions\
+    \ = [];\n# \n# /**\n# * @param iterable<ExpressionFunctionProviderInterface> $providers"
+- name: compile
+  visibility: public
+  parameters:
+  - name: expression
+  - name: names
+    default: '[]'
+  comment: '# * Compiles an expression source code.'
+- name: evaluate
+  visibility: public
+  parameters:
+  - name: expression
+  - name: values
+    default: '[]'
+  comment: '# * Evaluate an expression.'
+- name: parse
+  visibility: public
+  parameters:
+  - name: expression
+  - name: names
+  - name: flags
+    default: '0'
+  comment: '# * Parses an expression.
+
+    # *
+
+    # * @param int-mask-of<Parser::IGNORE_*> $flags'
+- name: lint
+  visibility: public
+  parameters:
+  - name: expression
+  - name: names
+  - name: flags
+    default: '0'
+  comment: '# * Validates the syntax of an expression.
+
+    # *
+
+    # * @param array|null                    $names The list of acceptable variable
+    names in the expression
+
+    # * @param int-mask-of<Parser::IGNORE_*> $flags
+
+    # *
+
+    # * @throws SyntaxError When the passed expression is invalid'
+- name: register
+  visibility: public
+  parameters:
+  - name: name
+  - name: compiler
+  - name: evaluator
+  comment: '# * Registers a function.
+
+    # *
+
+    # * @param callable $compiler  A callable able to compile the function
+
+    # * @param callable $evaluator A callable able to evaluate the function
+
+    # *
+
+    # * @throws \LogicException when registering a function after calling evaluate(),
+    compile() or parse()
+
+    # *
+
+    # * @see ExpressionFunction'
+- name: addFunction
+  visibility: public
+  parameters:
+  - name: function
+  comment: null
+- name: registerProvider
+  visibility: public
+  parameters:
+  - name: provider
+  comment: null
+- name: registerFunctions
+  visibility: protected
+  parameters: []
+  comment: '# * @return void'
+- name: getLexer
+  visibility: private
+  parameters: []
+  comment: null
+- name: getParser
+  visibility: private
+  parameters: []
+  comment: null
+- name: getCompiler
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Psr\Cache\CacheItemPoolInterface
+- Symfony\Component\Cache\Adapter\ArrayAdapter
+interfaces: []

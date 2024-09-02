@@ -1,0 +1,78 @@
+name: RegisterListenersPass
+class_comment: '# * Compiler pass to register tagged services for an event dispatcher.'
+dependencies:
+- name: ServiceClosureArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- name: CompilerPassInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: Event
+  type: class
+  source: Symfony\Contracts\EventDispatcher\Event
+properties: []
+methods:
+- name: setHotPathEvents
+  visibility: public
+  parameters:
+  - name: hotPathEvents
+  comment: "# * Compiler pass to register tagged services for an event dispatcher.\n\
+    # */\n# class RegisterListenersPass implements CompilerPassInterface\n# {\n# private\
+    \ array $hotPathEvents = [];\n# private array $noPreloadEvents = [];\n# \n# /**\n\
+    # * @return $this"
+- name: setNoPreloadEvents
+  visibility: public
+  parameters:
+  - name: noPreloadEvents
+  comment: '# * @return $this'
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: getEventFromTypeDeclaration
+  visibility: private
+  parameters:
+  - name: container
+  - name: id
+  - name: method
+  comment: null
+- name: addListener
+  visibility: public
+  parameters:
+  - name: eventName
+  - name: listener
+  - name: priority
+    default: '0'
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Contracts\EventDispatcher\Event
+interfaces:
+- CompilerPassInterface
+- EventSubscriberInterface

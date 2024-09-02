@@ -1,0 +1,15 @@
+name: Renderable
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: render
+  visibility: public
+  parameters: []
+  comment: '# * Get the evaluated contents of the object.
+
+    # *
+
+    # * @return string'
+traits: []
+interfaces: []

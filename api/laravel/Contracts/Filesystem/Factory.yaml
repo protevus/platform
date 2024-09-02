@@ -1,0 +1,19 @@
+name: Factory
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: disk
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Get a filesystem implementation.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @return \Illuminate\Contracts\Filesystem\Filesystem'
+traits: []
+interfaces: []

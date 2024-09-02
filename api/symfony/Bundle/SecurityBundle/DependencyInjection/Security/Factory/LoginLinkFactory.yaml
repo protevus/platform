@@ -1,0 +1,64 @@
+name: LoginLinkFactory
+class_comment: '# * @internal'
+dependencies:
+- name: NodeBuilder
+  type: class
+  source: Symfony\Component\Config\Definition\Builder\NodeBuilder
+- name: NodeDefinition
+  type: class
+  source: Symfony\Component\Config\Definition\Builder\NodeDefinition
+- name: FileLocator
+  type: class
+  source: Symfony\Component\Config\FileLocator
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: PhpFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: AuthenticationFailureHandlerInterface
+  type: class
+  source: Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface
+- name: AuthenticationSuccessHandlerInterface
+  type: class
+  source: Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface
+properties: []
+methods:
+- name: addConfiguration
+  visibility: public
+  parameters:
+  - name: node
+  comment: null
+- name: getKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: createAuthenticator
+  visibility: public
+  parameters:
+  - name: container
+  - name: firewallName
+  - name: config
+  - name: userProviderId
+  comment: null
+- name: getPriority
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Config\Definition\Builder\NodeBuilder
+- Symfony\Component\Config\Definition\Builder\NodeDefinition
+- Symfony\Component\Config\FileLocator
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface
+- Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerInterface
+interfaces: []

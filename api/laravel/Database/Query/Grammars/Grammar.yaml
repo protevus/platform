@@ -1,0 +1,1362 @@
+name: Grammar
+class_comment: null
+dependencies:
+- name: Expression
+  type: class
+  source: Illuminate\Contracts\Database\Query\Expression
+- name: CompilesJsonPaths
+  type: class
+  source: Illuminate\Database\Concerns\CompilesJsonPaths
+- name: BaseGrammar
+  type: class
+  source: Illuminate\Database\Grammar
+- name: Builder
+  type: class
+  source: Illuminate\Database\Query\Builder
+- name: JoinClause
+  type: class
+  source: Illuminate\Database\Query\JoinClause
+- name: JoinLateralClause
+  type: class
+  source: Illuminate\Database\Query\JoinLateralClause
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: CompilesJsonPaths
+  type: class
+  source: CompilesJsonPaths
+properties:
+- name: operators
+  visibility: protected
+  comment: '# * The grammar specific operators.
+
+    # *
+
+    # * @var array'
+- name: bitwiseOperators
+  visibility: protected
+  comment: '# * The grammar specific bitwise operators.
+
+    # *
+
+    # * @var array'
+- name: selectComponents
+  visibility: protected
+  comment: '# * The components that make up a select clause.
+
+    # *
+
+    # * @var string[]'
+methods:
+- name: compileSelect
+  visibility: public
+  parameters:
+  - name: query
+  comment: "# * The grammar specific operators.\n# *\n# * @var array\n# */\n# protected\
+    \ $operators = [];\n# \n# /**\n# * The grammar specific bitwise operators.\n#\
+    \ *\n# * @var array\n# */\n# protected $bitwiseOperators = [];\n# \n# /**\n# *\
+    \ The components that make up a select clause.\n# *\n# * @var string[]\n# */\n\
+    # protected $selectComponents = [\n# 'aggregate',\n# 'columns',\n# 'from',\n#\
+    \ 'indexHint',\n# 'joins',\n# 'wheres',\n# 'groups',\n# 'havings',\n# 'orders',\n\
+    # 'limit',\n# 'offset',\n# 'lock',\n# ];\n# \n# /**\n# * Compile a select query\
+    \ into SQL.\n# *\n# * @param  \\Illuminate\\Database\\Query\\Builder  $query\n\
+    # * @return string"
+- name: compileComponents
+  visibility: protected
+  parameters:
+  - name: query
+  comment: '# * Compile the components necessary for a select clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @return array'
+- name: compileAggregate
+  visibility: protected
+  parameters:
+  - name: query
+  - name: aggregate
+  comment: '# * Compile an aggregated select clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $aggregate
+
+    # * @return string'
+- name: compileColumns
+  visibility: protected
+  parameters:
+  - name: query
+  - name: columns
+  comment: '# * Compile the "select *" portion of the query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $columns
+
+    # * @return string|null'
+- name: compileFrom
+  visibility: protected
+  parameters:
+  - name: query
+  - name: table
+  comment: '# * Compile the "from" portion of the query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  string  $table
+
+    # * @return string'
+- name: compileJoins
+  visibility: protected
+  parameters:
+  - name: query
+  - name: joins
+  comment: '# * Compile the "join" portions of the query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $joins
+
+    # * @return string'
+- name: compileJoinLateral
+  visibility: public
+  parameters:
+  - name: join
+  - name: expression
+  comment: '# * Compile a "lateral join" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\JoinLateralClause  $join
+
+    # * @param  string  $expression
+
+    # * @return string
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: compileWheres
+  visibility: public
+  parameters:
+  - name: query
+  comment: '# * Compile the "where" portions of the query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @return string'
+- name: compileWheresToArray
+  visibility: protected
+  parameters:
+  - name: query
+  comment: '# * Get an array of all the where clauses for the query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @return array'
+- name: concatenateWhereClauses
+  visibility: protected
+  parameters:
+  - name: query
+  - name: sql
+  comment: '# * Format the where clause statements into one string.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $sql
+
+    # * @return string'
+- name: whereRaw
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a raw where clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereBasic
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a basic where clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereBitwise
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a bitwise operator where clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereIn
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where in" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereNotIn
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where not in" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereNotInRaw
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where not in raw" clause.
+
+    # *
+
+    # * For safety, whereIntegerInRaw ensures this method is only used with integer
+    values.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereInRaw
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where in raw" clause.
+
+    # *
+
+    # * For safety, whereIntegerInRaw ensures this method is only used with integer
+    values.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereNull
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where null" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereNotNull
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where not null" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereBetween
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "between" where clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereBetweenColumns
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "between" where clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereDate
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where date" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereTime
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where time" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereDay
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where day" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereMonth
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where month" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereYear
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where year" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: dateBasedWhere
+  visibility: protected
+  parameters:
+  - name: type
+  - name: query
+  - name: where
+  comment: '# * Compile a date based where clause.
+
+    # *
+
+    # * @param  string  $type
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereColumn
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a where clause comparing two columns.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereNested
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a nested where clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereSub
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a where condition with a sub-select.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereExists
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a where exists clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereNotExists
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a where exists clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereRowValues
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a where row values condition.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereJsonBoolean
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where JSON boolean" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereJsonContains
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where JSON contains" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: compileJsonContains
+  visibility: protected
+  parameters:
+  - name: column
+  - name: value
+  comment: '# * Compile a "JSON contains" statement into SQL.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  string  $value
+
+    # * @return string
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: whereJsonOverlaps
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where JSON overlaps" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: compileJsonOverlaps
+  visibility: protected
+  parameters:
+  - name: column
+  - name: value
+  comment: '# * Compile a "JSON overlaps" statement into SQL.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  string  $value
+
+    # * @return string
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: prepareBindingForJsonContains
+  visibility: public
+  parameters:
+  - name: binding
+  comment: '# * Prepare the binding for a "JSON contains" statement.
+
+    # *
+
+    # * @param  mixed  $binding
+
+    # * @return string'
+- name: whereJsonContainsKey
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where JSON contains key" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: compileJsonContainsKey
+  visibility: protected
+  parameters:
+  - name: column
+  comment: '# * Compile a "JSON contains key" statement into SQL.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return string
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: whereJsonLength
+  visibility: protected
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where JSON length" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: compileJsonLength
+  visibility: protected
+  parameters:
+  - name: column
+  - name: operator
+  - name: value
+  comment: '# * Compile a "JSON length" statement into SQL.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  string  $operator
+
+    # * @param  string  $value
+
+    # * @return string
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: compileJsonValueCast
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Compile a "JSON value cast" statement into SQL.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: whereFullText
+  visibility: public
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a "where fulltext" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: whereExpression
+  visibility: public
+  parameters:
+  - name: query
+  - name: where
+  comment: '# * Compile a clause based on an expression.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $where
+
+    # * @return string'
+- name: compileGroups
+  visibility: protected
+  parameters:
+  - name: query
+  - name: groups
+  comment: '# * Compile the "group by" portions of the query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $groups
+
+    # * @return string'
+- name: compileHavings
+  visibility: protected
+  parameters:
+  - name: query
+  comment: '# * Compile the "having" portions of the query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @return string'
+- name: compileHaving
+  visibility: protected
+  parameters:
+  - name: having
+  comment: '# * Compile a single having clause.
+
+    # *
+
+    # * @param  array  $having
+
+    # * @return string'
+- name: compileBasicHaving
+  visibility: protected
+  parameters:
+  - name: having
+  comment: '# * Compile a basic having clause.
+
+    # *
+
+    # * @param  array  $having
+
+    # * @return string'
+- name: compileHavingBetween
+  visibility: protected
+  parameters:
+  - name: having
+  comment: '# * Compile a "between" having clause.
+
+    # *
+
+    # * @param  array  $having
+
+    # * @return string'
+- name: compileHavingNull
+  visibility: protected
+  parameters:
+  - name: having
+  comment: '# * Compile a having null clause.
+
+    # *
+
+    # * @param  array  $having
+
+    # * @return string'
+- name: compileHavingNotNull
+  visibility: protected
+  parameters:
+  - name: having
+  comment: '# * Compile a having not null clause.
+
+    # *
+
+    # * @param  array  $having
+
+    # * @return string'
+- name: compileHavingBit
+  visibility: protected
+  parameters:
+  - name: having
+  comment: '# * Compile a having clause involving a bit operator.
+
+    # *
+
+    # * @param  array  $having
+
+    # * @return string'
+- name: compileHavingExpression
+  visibility: protected
+  parameters:
+  - name: having
+  comment: '# * Compile a having clause involving an expression.
+
+    # *
+
+    # * @param  array  $having
+
+    # * @return string'
+- name: compileNestedHavings
+  visibility: protected
+  parameters:
+  - name: having
+  comment: '# * Compile a nested having clause.
+
+    # *
+
+    # * @param  array  $having
+
+    # * @return string'
+- name: compileOrders
+  visibility: protected
+  parameters:
+  - name: query
+  - name: orders
+  comment: '# * Compile the "order by" portions of the query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $orders
+
+    # * @return string'
+- name: compileOrdersToArray
+  visibility: protected
+  parameters:
+  - name: query
+  - name: orders
+  comment: '# * Compile the query orders to an array.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $orders
+
+    # * @return array'
+- name: compileRandom
+  visibility: public
+  parameters:
+  - name: seed
+  comment: '# * Compile the random statement into SQL.
+
+    # *
+
+    # * @param  string|int  $seed
+
+    # * @return string'
+- name: compileLimit
+  visibility: protected
+  parameters:
+  - name: query
+  - name: limit
+  comment: '# * Compile the "limit" portions of the query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  int  $limit
+
+    # * @return string'
+- name: compileGroupLimit
+  visibility: protected
+  parameters:
+  - name: query
+  comment: '# * Compile a group limit clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @return string'
+- name: compileRowNumber
+  visibility: protected
+  parameters:
+  - name: partition
+  - name: orders
+  comment: '# * Compile a row number clause.
+
+    # *
+
+    # * @param  string  $partition
+
+    # * @param  string  $orders
+
+    # * @return string'
+- name: compileOffset
+  visibility: protected
+  parameters:
+  - name: query
+  - name: offset
+  comment: '# * Compile the "offset" portions of the query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  int  $offset
+
+    # * @return string'
+- name: compileUnions
+  visibility: protected
+  parameters:
+  - name: query
+  comment: '# * Compile the "union" queries attached to the main query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @return string'
+- name: compileUnion
+  visibility: protected
+  parameters:
+  - name: union
+  comment: '# * Compile a single union statement.
+
+    # *
+
+    # * @param  array  $union
+
+    # * @return string'
+- name: wrapUnion
+  visibility: protected
+  parameters:
+  - name: sql
+  comment: '# * Wrap a union subquery in parentheses.
+
+    # *
+
+    # * @param  string  $sql
+
+    # * @return string'
+- name: compileUnionAggregate
+  visibility: protected
+  parameters:
+  - name: query
+  comment: '# * Compile a union aggregate query into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @return string'
+- name: compileExists
+  visibility: public
+  parameters:
+  - name: query
+  comment: '# * Compile an exists statement into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @return string'
+- name: compileInsert
+  visibility: public
+  parameters:
+  - name: query
+  - name: values
+  comment: '# * Compile an insert statement into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $values
+
+    # * @return string'
+- name: compileInsertOrIgnore
+  visibility: public
+  parameters:
+  - name: query
+  - name: values
+  comment: '# * Compile an insert ignore statement into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $values
+
+    # * @return string
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: compileInsertGetId
+  visibility: public
+  parameters:
+  - name: query
+  - name: values
+  - name: sequence
+  comment: '# * Compile an insert and get ID statement into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $values
+
+    # * @param  string  $sequence
+
+    # * @return string'
+- name: compileInsertUsing
+  visibility: public
+  parameters:
+  - name: query
+  - name: columns
+  - name: sql
+  comment: '# * Compile an insert statement using a subquery into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $columns
+
+    # * @param  string  $sql
+
+    # * @return string'
+- name: compileInsertOrIgnoreUsing
+  visibility: public
+  parameters:
+  - name: query
+  - name: columns
+  - name: sql
+  comment: '# * Compile an insert ignore statement using a subquery into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $columns
+
+    # * @param  string  $sql
+
+    # * @return string
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: compileUpdate
+  visibility: public
+  parameters:
+  - name: query
+  - name: values
+  comment: '# * Compile an update statement into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $values
+
+    # * @return string'
+- name: compileUpdateColumns
+  visibility: protected
+  parameters:
+  - name: query
+  - name: values
+  comment: '# * Compile the columns for an update statement.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $values
+
+    # * @return string'
+- name: compileUpdateWithoutJoins
+  visibility: protected
+  parameters:
+  - name: query
+  - name: table
+  - name: columns
+  - name: where
+  comment: '# * Compile an update statement without joins into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  string  $table
+
+    # * @param  string  $columns
+
+    # * @param  string  $where
+
+    # * @return string'
+- name: compileUpdateWithJoins
+  visibility: protected
+  parameters:
+  - name: query
+  - name: table
+  - name: columns
+  - name: where
+  comment: '# * Compile an update statement with joins into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  string  $table
+
+    # * @param  string  $columns
+
+    # * @param  string  $where
+
+    # * @return string'
+- name: compileUpsert
+  visibility: public
+  parameters:
+  - name: query
+  - name: values
+  - name: uniqueBy
+  - name: update
+  comment: '# * Compile an "upsert" statement into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $values
+
+    # * @param  array  $uniqueBy
+
+    # * @param  array  $update
+
+    # * @return string
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: prepareBindingsForUpdate
+  visibility: public
+  parameters:
+  - name: bindings
+  - name: values
+  comment: '# * Prepare the bindings for an update statement.
+
+    # *
+
+    # * @param  array  $bindings
+
+    # * @param  array  $values
+
+    # * @return array'
+- name: compileDelete
+  visibility: public
+  parameters:
+  - name: query
+  comment: '# * Compile a delete statement into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @return string'
+- name: compileDeleteWithoutJoins
+  visibility: protected
+  parameters:
+  - name: query
+  - name: table
+  - name: where
+  comment: '# * Compile a delete statement without joins into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  string  $table
+
+    # * @param  string  $where
+
+    # * @return string'
+- name: compileDeleteWithJoins
+  visibility: protected
+  parameters:
+  - name: query
+  - name: table
+  - name: where
+  comment: '# * Compile a delete statement with joins into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  string  $table
+
+    # * @param  string  $where
+
+    # * @return string'
+- name: prepareBindingsForDelete
+  visibility: public
+  parameters:
+  - name: bindings
+  comment: '# * Prepare the bindings for a delete statement.
+
+    # *
+
+    # * @param  array  $bindings
+
+    # * @return array'
+- name: compileTruncate
+  visibility: public
+  parameters:
+  - name: query
+  comment: '# * Compile a truncate table statement into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @return array'
+- name: compileLock
+  visibility: protected
+  parameters:
+  - name: query
+  - name: value
+  comment: '# * Compile the lock into SQL.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  bool|string  $value
+
+    # * @return string'
+- name: supportsSavepoints
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the grammar supports savepoints.
+
+    # *
+
+    # * @return bool'
+- name: compileSavepoint
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Compile the SQL statement to define a savepoint.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string'
+- name: compileSavepointRollBack
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Compile the SQL statement to execute a savepoint rollback.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string'
+- name: wrapJsonBooleanSelector
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Wrap the given JSON selector for boolean values.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: wrapJsonBooleanValue
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Wrap the given JSON boolean value.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: concatenate
+  visibility: protected
+  parameters:
+  - name: segments
+  comment: '# * Concatenate an array of segments, removing empties.
+
+    # *
+
+    # * @param  array  $segments
+
+    # * @return string'
+- name: removeLeadingBoolean
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Remove the leading boolean from a statement.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: substituteBindingsIntoRawSql
+  visibility: public
+  parameters:
+  - name: sql
+  - name: bindings
+  comment: '# * Substitute the given bindings into the given raw SQL query.
+
+    # *
+
+    # * @param  string  $sql
+
+    # * @param  array  $bindings
+
+    # * @return string'
+- name: getOperators
+  visibility: public
+  parameters: []
+  comment: '# * Get the grammar specific operators.
+
+    # *
+
+    # * @return array'
+- name: getBitwiseOperators
+  visibility: public
+  parameters: []
+  comment: '# * Get the grammar specific bitwise operators.
+
+    # *
+
+    # * @return array'
+traits:
+- Illuminate\Contracts\Database\Query\Expression
+- Illuminate\Database\Concerns\CompilesJsonPaths
+- Illuminate\Database\Query\Builder
+- Illuminate\Database\Query\JoinClause
+- Illuminate\Database\Query\JoinLateralClause
+- Illuminate\Support\Arr
+- RuntimeException
+- CompilesJsonPaths
+interfaces: []

@@ -1,0 +1,66 @@
+name: ImmutableEventDispatcher
+class_comment: '# * A read-only proxy for an event dispatcher.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: dispatcher
+  comment: null
+- name: dispatch
+  visibility: public
+  parameters:
+  - name: event
+  - name: eventName
+    default: 'null'
+  comment: null
+- name: addListener
+  visibility: public
+  parameters:
+  - name: eventName
+  - name: listener
+  - name: priority
+    default: '0'
+  comment: null
+- name: addSubscriber
+  visibility: public
+  parameters:
+  - name: subscriber
+  comment: null
+- name: removeListener
+  visibility: public
+  parameters:
+  - name: eventName
+  - name: listener
+  comment: null
+- name: removeSubscriber
+  visibility: public
+  parameters:
+  - name: subscriber
+  comment: null
+- name: getListeners
+  visibility: public
+  parameters:
+  - name: eventName
+    default: 'null'
+  comment: null
+- name: getListenerPriority
+  visibility: public
+  parameters:
+  - name: eventName
+  - name: listener
+  comment: null
+- name: hasListeners
+  visibility: public
+  parameters:
+  - name: eventName
+    default: 'null'
+  comment: null
+traits: []
+interfaces:
+- EventDispatcherInterface

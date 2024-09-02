@@ -1,0 +1,73 @@
+name: HttpFoundationRequestHandler
+class_comment: '# * A request processor using the {@link Request} class of the HttpFoundation
+
+  # * component.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Form\Exception\UnexpectedTypeException
+- name: FormError
+  type: class
+  source: Symfony\Component\Form\FormError
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+- name: RequestHandlerInterface
+  type: class
+  source: Symfony\Component\Form\RequestHandlerInterface
+- name: FormUtil
+  type: class
+  source: Symfony\Component\Form\Util\FormUtil
+- name: ServerParams
+  type: class
+  source: Symfony\Component\Form\Util\ServerParams
+- name: File
+  type: class
+  source: Symfony\Component\HttpFoundation\File\File
+- name: UploadedFile
+  type: class
+  source: Symfony\Component\HttpFoundation\File\UploadedFile
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: serverParams
+    default: 'null'
+  comment: null
+- name: handleRequest
+  visibility: public
+  parameters:
+  - name: form
+  - name: request
+    default: 'null'
+  comment: null
+- name: isFileUpload
+  visibility: public
+  parameters:
+  - name: data
+  comment: null
+- name: getUploadFileError
+  visibility: public
+  parameters:
+  - name: data
+  comment: null
+traits:
+- Symfony\Component\Form\Exception\UnexpectedTypeException
+- Symfony\Component\Form\FormError
+- Symfony\Component\Form\FormInterface
+- Symfony\Component\Form\RequestHandlerInterface
+- Symfony\Component\Form\Util\FormUtil
+- Symfony\Component\Form\Util\ServerParams
+- Symfony\Component\HttpFoundation\File\File
+- Symfony\Component\HttpFoundation\File\UploadedFile
+- Symfony\Component\HttpFoundation\Request
+interfaces:
+- RequestHandlerInterface

@@ -1,0 +1,103 @@
+name: ForeignKeyDefinition
+class_comment: '# * @method ForeignKeyDefinition deferrable(bool $value = true) Set
+  the foreign key as deferrable (PostgreSQL)
+
+  # * @method ForeignKeyDefinition initiallyImmediate(bool $value = true) Set the
+  default time to check the constraint (PostgreSQL)
+
+  # * @method ForeignKeyDefinition on(string $table) Specify the referenced table
+
+  # * @method ForeignKeyDefinition onDelete(string $action) Add an ON DELETE action
+
+  # * @method ForeignKeyDefinition onUpdate(string $action) Add an ON UPDATE action
+
+  # * @method ForeignKeyDefinition references(string|array $columns) Specify the referenced
+  column(s)'
+dependencies:
+- name: Fluent
+  type: class
+  source: Illuminate\Support\Fluent
+properties: []
+methods:
+- name: cascadeOnUpdate
+  visibility: public
+  parameters: []
+  comment: '# * @method ForeignKeyDefinition deferrable(bool $value = true) Set the
+    foreign key as deferrable (PostgreSQL)
+
+    # * @method ForeignKeyDefinition initiallyImmediate(bool $value = true) Set the
+    default time to check the constraint (PostgreSQL)
+
+    # * @method ForeignKeyDefinition on(string $table) Specify the referenced table
+
+    # * @method ForeignKeyDefinition onDelete(string $action) Add an ON DELETE action
+
+    # * @method ForeignKeyDefinition onUpdate(string $action) Add an ON UPDATE action
+
+    # * @method ForeignKeyDefinition references(string|array $columns) Specify the
+    referenced column(s)
+
+    # */
+
+    # class ForeignKeyDefinition extends Fluent
+
+    # {
+
+    # /**
+
+    # * Indicate that updates should cascade.
+
+    # *
+
+    # * @return $this'
+- name: restrictOnUpdate
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that updates should be restricted.
+
+    # *
+
+    # * @return $this'
+- name: noActionOnUpdate
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that updates should have "no action".
+
+    # *
+
+    # * @return $this'
+- name: cascadeOnDelete
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that deletes should cascade.
+
+    # *
+
+    # * @return $this'
+- name: restrictOnDelete
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that deletes should be restricted.
+
+    # *
+
+    # * @return $this'
+- name: nullOnDelete
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that deletes should set the foreign key value to null.
+
+    # *
+
+    # * @return $this'
+- name: noActionOnDelete
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that deletes should have "no action".
+
+    # *
+
+    # * @return $this'
+traits:
+- Illuminate\Support\Fluent
+interfaces: []

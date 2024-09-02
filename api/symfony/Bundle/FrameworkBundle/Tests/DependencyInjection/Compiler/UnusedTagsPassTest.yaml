@@ -1,0 +1,31 @@
+name: UnusedTagsPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: UnusedTagsPass
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\UnusedTagsPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+properties: []
+methods:
+- name: testProcess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMissingKnownTags
+  visibility: public
+  parameters: []
+  comment: null
+- name: getKnownTags
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\UnusedTagsPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+interfaces: []

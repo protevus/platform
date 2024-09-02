@@ -1,0 +1,64 @@
+name: SplFileInfo
+class_comment: '# * Extends \SplFileInfo to support relative paths.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: file
+  - name: relativePath
+  - name: relativePathname
+  comment: '# * Extends \SplFileInfo to support relative paths.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # class SplFileInfo extends \SplFileInfo
+
+    # {
+
+    # /**
+
+    # * @param string $file             The file name
+
+    # * @param string $relativePath     The relative path
+
+    # * @param string $relativePathname The relative path name'
+- name: getRelativePath
+  visibility: public
+  parameters: []
+  comment: '# * Returns the relative path.
+
+    # *
+
+    # * This path does not contain the file name.'
+- name: getRelativePathname
+  visibility: public
+  parameters: []
+  comment: '# * Returns the relative path name.
+
+    # *
+
+    # * This path contains the file name.'
+- name: getFilenameWithoutExtension
+  visibility: public
+  parameters: []
+  comment: null
+- name: getContents
+  visibility: public
+  parameters: []
+  comment: '# * Returns the contents of the file.
+
+    # *
+
+    # * @throws \RuntimeException'
+traits: []
+interfaces: []

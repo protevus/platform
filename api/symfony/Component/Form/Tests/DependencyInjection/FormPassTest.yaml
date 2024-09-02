@@ -1,0 +1,135 @@
+name: FormPassTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: IteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- name: ServiceClosureArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: ServiceLocator
+  type: class
+  source: Symfony\Component\DependencyInjection\ServiceLocator
+- name: AbstractTypeExtension
+  type: class
+  source: Symfony\Component\Form\AbstractTypeExtension
+- name: DebugCommand
+  type: class
+  source: Symfony\Component\Form\Command\DebugCommand
+- name: FormPass
+  type: class
+  source: Symfony\Component\Form\DependencyInjection\FormPass
+- name: FormRegistry
+  type: class
+  source: Symfony\Component\Form\FormRegistry
+properties: []
+methods:
+- name: testAddTaggedTypeExtensions
+  visibility: public
+  parameters:
+  - name: extensions
+  - name: expectedRegisteredExtensions
+  - name: parameters
+    default: '[]'
+  comment: "# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# class FormPassTest\
+    \ extends TestCase\n# {\n# public function testDoNothingIfFormExtensionNotLoaded()\n\
+    # {\n# $container = $this->createContainerBuilder();\n# \n# $container->compile();\n\
+    # \n# $this->assertFalse($container->hasDefinition('form.extension'));\n# }\n\
+    # \n# public function testDoNothingIfDebugCommandNotLoaded()\n# {\n# $container\
+    \ = $this->createContainerBuilder();\n# \n# $container->compile();\n# \n# $this->assertFalse($container->hasDefinition('console.command.form_debug'));\n\
+    # }\n# \n# public function testAddTaggedTypes()\n# {\n# $container = $this->createContainerBuilder();\n\
+    # \n# $container->setDefinition('form.extension', $this->createExtensionDefinition());\n\
+    # $container->register('my.type1', __CLASS__.'_Type1')->addTag('form.type')->setPublic(true);\n\
+    # $container->register('my.type2', __CLASS__.'_Type2')->addTag('form.type')->setPublic(true);\n\
+    # \n# $container->compile();\n# \n# $extDefinition = $container->getDefinition('form.extension');\n\
+    # \n# $locator = $extDefinition->getArgument(0);\n# $this->assertTrue(!$locator->isPublic()\
+    \ || $locator->isPrivate());\n# $this->assertEquals(\n# (new Definition(ServiceLocator::class,\
+    \ [[\n# __CLASS__.'_Type1' => new ServiceClosureArgument(new Reference('my.type1')),\n\
+    # __CLASS__.'_Type2' => new ServiceClosureArgument(new Reference('my.type2')),\n\
+    # ]]))->addTag('container.service_locator'),\n# $locator\n# );\n# }\n# \n# public\
+    \ function testAddTaggedTypesToDebugCommand()\n# {\n# $container = $this->createContainerBuilder();\n\
+    # \n# $container->register('form.registry', FormRegistry::class);\n# $commandDefinition\
+    \ = new Definition(DebugCommand::class, [new Reference('form.registry')]);\n#\
+    \ $commandDefinition->setPublic(true);\n# \n# $container->setDefinition('form.extension',\
+    \ $this->createExtensionDefinition());\n# $container->setDefinition('console.command.form_debug',\
+    \ $commandDefinition);\n# $container->register('my.type1', __CLASS__.'_Type1')->addTag('form.type')->setPublic(true);\n\
+    # $container->register('my.type2', __CLASS__.'_Type2')->addTag('form.type')->setPublic(true);\n\
+    # \n# $container->compile();\n# \n# $cmdDefinition = $container->getDefinition('console.command.form_debug');\n\
+    # \n# $this->assertEquals(\n# [\n# 'Symfony\\Component\\Form\\Extension\\Core\\\
+    Type',\n# __NAMESPACE__,\n# ],\n# $cmdDefinition->getArgument(1)\n# );\n# }\n\
+    # \n# /**\n# * @dataProvider addTaggedTypeExtensionsDataProvider"
+- name: addTaggedTypeExtensionsDataProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddTaggedFormTypeExtensionWithoutExtendingAnyType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddTaggedGuessers
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPrivateTaggedServices
+  visibility: public
+  parameters:
+  - name: id
+  - name: class
+  - name: tagName
+  - name: assertion
+  - name: tagAttributes
+    default: '[]'
+  comment: '# * @dataProvider privateTaggedServicesProvider'
+- name: privateTaggedServicesProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: createExtensionDefinition
+  visibility: private
+  parameters: []
+  comment: null
+- name: createContainerBuilder
+  visibility: private
+  parameters: []
+  comment: null
+- name: getExtendedTypes
+  visibility: public
+  parameters: []
+  comment: null
+- name: getExtendedTypes
+  visibility: public
+  parameters: []
+  comment: null
+- name: getExtendedTypes
+  visibility: public
+  parameters: []
+  comment: null
+- name: getExtendedTypes
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\DependencyInjection\ServiceLocator
+- Symfony\Component\Form\AbstractTypeExtension
+- Symfony\Component\Form\Command\DebugCommand
+- Symfony\Component\Form\DependencyInjection\FormPass
+- Symfony\Component\Form\FormRegistry
+interfaces: []

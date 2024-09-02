@@ -1,0 +1,34 @@
+name: NotNormalizableDummy
+class_comment: '# * @author Jeroen <github.com/Jeroeny>'
+dependencies:
+- name: NotNormalizableValueException
+  type: class
+  source: Symfony\Component\Serializer\Exception\NotNormalizableValueException
+- name: DenormalizableInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizableInterface
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters: []
+  comment: null
+- name: denormalize
+  visibility: public
+  parameters:
+  - name: denormalizer
+  - name: data
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\Serializer\Exception\NotNormalizableValueException
+- Symfony\Component\Serializer\Normalizer\DenormalizableInterface
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+interfaces:
+- DenormalizableInterface

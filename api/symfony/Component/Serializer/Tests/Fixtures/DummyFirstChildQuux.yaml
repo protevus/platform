@@ -1,0 +1,19 @@
+name: DummyFirstChildQuux
+class_comment: null
+dependencies: []
+properties:
+- name: value
+  visibility: private
+  comment: '# * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: value
+  comment: null
+- name: getValue
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

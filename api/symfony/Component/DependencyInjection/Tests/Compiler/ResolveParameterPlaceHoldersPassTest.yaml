@@ -1,0 +1,79 @@
+name: ResolveParameterPlaceHoldersPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ResolveParameterPlaceHoldersPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ResolveParameterPlaceHoldersPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: ParameterNotFoundException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testClassParametersShouldBeResolved
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFactoryParametersShouldBeResolved
+  visibility: public
+  parameters: []
+  comment: null
+- name: testArgumentParametersShouldBeResolved
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMethodCallParametersShouldBeResolved
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPropertyParametersShouldBeResolved
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFileParametersShouldBeResolved
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAliasParametersShouldBeResolved
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBindingsShouldBeResolved
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParameterNotFoundExceptionsIsThrown
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParameterNotFoundExceptionsIsNotThrown
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOnlyProxyTagIsResolved
+  visibility: public
+  parameters: []
+  comment: null
+- name: createContainerBuilder
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Compiler\ResolveParameterPlaceHoldersPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException
+interfaces: []

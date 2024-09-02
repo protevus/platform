@@ -1,0 +1,36 @@
+name: RouterContextMiddleware
+class_comment: "# * Restore the Router context when processing the message.\n# *\n\
+  # * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>"
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: ConsumedByWorkerStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\ConsumedByWorkerStamp
+- name: RouterContextStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\RouterContextStamp
+- name: RequestContextAwareInterface
+  type: class
+  source: Symfony\Component\Routing\RequestContextAwareInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: router
+  comment: null
+- name: handle
+  visibility: public
+  parameters:
+  - name: envelope
+  - name: stack
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Stamp\ConsumedByWorkerStamp
+- Symfony\Component\Messenger\Stamp\RouterContextStamp
+- Symfony\Component\Routing\RequestContextAwareInterface
+interfaces:
+- MiddlewareInterface

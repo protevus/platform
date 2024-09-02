@@ -1,0 +1,65 @@
+name: Count
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: MissingOptionsException
+  type: class
+  source: Symfony\Component\Validator\Exception\MissingOptionsException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: exactly
+    default: 'null'
+  - name: min
+    default: 'null'
+  - name: max
+    default: 'null'
+  - name: divisibleBy
+    default: 'null'
+  - name: exactMessage
+    default: 'null'
+  - name: minMessage
+    default: 'null'
+  - name: maxMessage
+    default: 'null'
+  - name: divisibleByMessage
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: "# * Validates a collection's element count.\n# *\n# * @author Bernhard\
+    \ Schussek <bschussek@gmail.com>\n# */\n# #[\\Attribute(\\Attribute::TARGET_PROPERTY\
+    \ | \\Attribute::TARGET_METHOD | \\Attribute::IS_REPEATABLE)]\n# class Count extends\
+    \ Constraint\n# {\n# public const TOO_FEW_ERROR = 'bef8e338-6ae5-4caf-b8e2-50e7b0579e69';\n\
+    # public const TOO_MANY_ERROR = '756b1212-697c-468d-a9ad-50dd783bb169';\n# public\
+    \ const NOT_EQUAL_COUNT_ERROR = '9fe5d43f-3784-4ece-a0e1-473fc02dadbc';\n# public\
+    \ const NOT_DIVISIBLE_BY_ERROR = DivisibleBy::NOT_DIVISIBLE_BY;\n# \n# protected\
+    \ const ERROR_NAMES = [\n# self::TOO_FEW_ERROR => 'TOO_FEW_ERROR',\n# self::TOO_MANY_ERROR\
+    \ => 'TOO_MANY_ERROR',\n# self::NOT_EQUAL_COUNT_ERROR => 'NOT_EQUAL_COUNT_ERROR',\n\
+    # self::NOT_DIVISIBLE_BY_ERROR => 'NOT_DIVISIBLE_BY_ERROR',\n# ];\n# \n# public\
+    \ string $minMessage = 'This collection should contain {{ limit }} element or\
+    \ more.|This collection should contain {{ limit }} elements or more.';\n# public\
+    \ string $maxMessage = 'This collection should contain {{ limit }} element or\
+    \ less.|This collection should contain {{ limit }} elements or less.';\n# public\
+    \ string $exactMessage = 'This collection should contain exactly {{ limit }} element.|This\
+    \ collection should contain exactly {{ limit }} elements.';\n# public string $divisibleByMessage\
+    \ = 'The number of elements in this collection should be a multiple of {{ compared_value\
+    \ }}.';\n# public ?int $min = null;\n# public ?int $max = null;\n# public ?int\
+    \ $divisibleBy = null;\n# \n# /**\n# * @param int|array<string,mixed>|null $exactly\
+    \     The exact expected number of elements\n# * @param int|null             \
+    \        $min         Minimum expected number of elements\n# * @param int|null\
+    \                     $max         Maximum expected number of elements\n# * @param\
+    \ int|null                     $divisibleBy The number the collection count should\
+    \ be divisible by\n# * @param string[]|null                $groups\n# * @param\
+    \ array<mixed,string>          $options"
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Exception\MissingOptionsException
+interfaces: []

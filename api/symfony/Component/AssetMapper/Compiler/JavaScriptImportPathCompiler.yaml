@@ -1,0 +1,108 @@
+name: JavaScriptImportPathCompiler
+class_comment: null
+dependencies:
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: AssetMapperInterface
+  type: class
+  source: Symfony\Component\AssetMapper\AssetMapperInterface
+- name: CircularAssetsException
+  type: class
+  source: Symfony\Component\AssetMapper\Exception\CircularAssetsException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\AssetMapper\Exception\RuntimeException
+- name: ImportMapConfigReader
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapConfigReader
+- name: JavaScriptImport
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\JavaScriptImport
+- name: MappedAsset
+  type: class
+  source: Symfony\Component\AssetMapper\MappedAsset
+- name: Path
+  type: class
+  source: Symfony\Component\Filesystem\Path
+properties: []
+methods:
+- name: isCommentedOut
+  visibility: private
+  parameters:
+  - name: offsetStart
+  - name: fullContent
+  comment: "# * Resolves import paths in JS files.\n# *\n# * @author Ryan Weaver <ryan@symfonycasts.com>\n\
+    # */\n# final class JavaScriptImportPathCompiler implements AssetCompilerInterface\n\
+    # {\n# /**\n# * @see https://regex101.com/r/1iBAIb/2\n# */\n# private const IMPORT_PATTERN\
+    \ = '/\n# ^(?:\\/\\/.*)                     # Lines that start with comments\n\
+    # |\n# (?:\n# \\'(?:[^\\'\\\\\\\\\\n]|\\\\\\\\.)*+\\'   # Strings enclosed in\
+    \ single quotes\n# |\n# \"(?:[^\"\\\\\\\\\\n]|\\\\\\\\.)*+\"      # Strings enclosed\
+    \ in double quotes\n# )\n# |\n# (?:                            # Import statements\
+    \ (script captured)\n# import\\s*\n# (?:\n# (?:\\*\\s*as\\s+\\w+|\\s+[\\w\\s{},*]+)\n\
+    # \\s*from\\s*\n# )?\n# |\n# \\bimport\\(\n# )\n# \\s*[\\'\"`](\\.\\/[^\\'\"`\\\
+    n]++|(\\.\\.\\/)*+[^\\'\"`\\n]++)[\\'\"`]\\s*[;\\)]\n# ?\n# /mx';\n# \n# public\
+    \ function __construct(\n# private readonly ImportMapConfigReader $importMapConfigReader,\n\
+    # private readonly string $missingImportMode = self::MISSING_IMPORT_WARN,\n# private\
+    \ readonly ?LoggerInterface $logger = null,\n# ) {\n# }\n# \n# public function\
+    \ compile(string $content, MappedAsset $asset, AssetMapperInterface $assetMapper):\
+    \ string\n# {\n# return preg_replace_callback(self::IMPORT_PATTERN, function ($matches)\
+    \ use ($asset, $assetMapper, $content) {\n# $fullImportString = $matches[0][0];\n\
+    # \n# // Ignore matches that did not capture import statements\n# if (!isset($matches[1][0]))\
+    \ {\n# return $fullImportString;\n# }\n# \n# if ($this->isCommentedOut($matches[0][1],\
+    \ $content)) {\n# return $fullImportString;\n# }\n# \n# $importedModule = $matches[1][0];\n\
+    # \n# // we don't support absolute paths, so ignore completely\n# if (str_starts_with($importedModule,\
+    \ '/')) {\n# return $fullImportString;\n# }\n# \n# $isRelativeImport = str_starts_with($importedModule,\
+    \ '.');\n# if (!$isRelativeImport) {\n# // URL or /absolute imports will also\
+    \ go here, but will be ignored\n# $dependentAsset = $this->findAssetForBareImport($importedModule,\
+    \ $assetMapper);\n# } else {\n# $dependentAsset = $this->findAssetForRelativeImport($importedModule,\
+    \ $asset, $assetMapper);\n# }\n# \n# if (!$dependentAsset) {\n# return $fullImportString;\n\
+    # }\n# \n# // List as a JavaScript import.\n# // This will cause the asset to\
+    \ be included in the importmap (for relative imports)\n# // and will be used to\
+    \ generate the preloads in the importmap.\n# $isLazy = str_contains($fullImportString,\
+    \ 'import(');\n# $addToImportMap = $isRelativeImport;\n# $asset->addJavaScriptImport(new\
+    \ JavaScriptImport(\n# $addToImportMap ? $dependentAsset->publicPathWithoutDigest\
+    \ : $importedModule,\n# $dependentAsset->logicalPath,\n# $dependentAsset->sourcePath,\n\
+    # $isLazy,\n# $addToImportMap,\n# ));\n# \n# if (!$addToImportMap) {\n# // only\
+    \ (potentially) adjust for automatic relative imports\n# return $fullImportString;\n\
+    # }\n# \n# // support possibility where the final public files have moved relative\
+    \ to each other\n# $relativeImportPath = Path::makeRelative($dependentAsset->publicPathWithoutDigest,\
+    \ \\dirname($asset->publicPathWithoutDigest));\n# $relativeImportPath = $this->makeRelativeForJavaScript($relativeImportPath);\n\
+    # \n# return str_replace($importedModule, $relativeImportPath, $fullImportString);\n\
+    # }, $content, -1, $count, \\PREG_OFFSET_CAPTURE) ?? throw new RuntimeException(\\\
+    sprintf('Failed to compile JavaScript import paths in \"%s\". Error: \"%s\".',\
+    \ $asset->sourcePath, preg_last_error_msg()));\n# }\n# \n# public function supports(MappedAsset\
+    \ $asset): bool\n# {\n# return 'js' === $asset->publicExtension;\n# }\n# \n# private\
+    \ function makeRelativeForJavaScript(string $path): string\n# {\n# if (str_starts_with($path,\
+    \ '../')) {\n# return $path;\n# }\n# \n# return './'.$path;\n# }\n# \n# private\
+    \ function handleMissingImport(string $message, ?\\Throwable $e = null): void\n\
+    # {\n# match ($this->missingImportMode) {\n# AssetCompilerInterface::MISSING_IMPORT_IGNORE\
+    \ => null,\n# AssetCompilerInterface::MISSING_IMPORT_WARN => $this->logger?->warning($message),\n\
+    # AssetCompilerInterface::MISSING_IMPORT_STRICT => throw new RuntimeException($message,\
+    \ 0, $e),\n# };\n# }\n# \n# /**\n# * Simple check for the most common types of\
+    \ comments.\n# *\n# * This is not a full parser, but should be good enough for\
+    \ most cases."
+- name: findAssetForBareImport
+  visibility: private
+  parameters:
+  - name: importedModule
+  - name: assetMapper
+  comment: null
+- name: findAssetForRelativeImport
+  visibility: private
+  parameters:
+  - name: importedModule
+  - name: asset
+  - name: assetMapper
+  comment: null
+traits:
+- Psr\Log\LoggerInterface
+- Symfony\Component\AssetMapper\AssetMapperInterface
+- Symfony\Component\AssetMapper\Exception\CircularAssetsException
+- Symfony\Component\AssetMapper\Exception\RuntimeException
+- Symfony\Component\AssetMapper\ImportMap\ImportMapConfigReader
+- Symfony\Component\AssetMapper\ImportMap\JavaScriptImport
+- Symfony\Component\AssetMapper\MappedAsset
+- Symfony\Component\Filesystem\Path
+interfaces:
+- AssetCompilerInterface

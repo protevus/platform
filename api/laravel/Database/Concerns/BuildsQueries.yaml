@@ -1,0 +1,452 @@
+name: BuildsQueries
+class_comment: null
+dependencies:
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: Builder
+  type: class
+  source: Illuminate\Database\Eloquent\Builder
+- name: MultipleRecordsFoundException
+  type: class
+  source: Illuminate\Database\MultipleRecordsFoundException
+- name: Expression
+  type: class
+  source: Illuminate\Database\Query\Expression
+- name: RecordsNotFoundException
+  type: class
+  source: Illuminate\Database\RecordsNotFoundException
+- name: Cursor
+  type: class
+  source: Illuminate\Pagination\Cursor
+- name: CursorPaginator
+  type: class
+  source: Illuminate\Pagination\CursorPaginator
+- name: LengthAwarePaginator
+  type: class
+  source: Illuminate\Pagination\LengthAwarePaginator
+- name: Paginator
+  type: class
+  source: Illuminate\Pagination\Paginator
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+- name: LazyCollection
+  type: class
+  source: Illuminate\Support\LazyCollection
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: Conditionable
+  type: class
+  source: Illuminate\Support\Traits\Conditionable
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: Conditionable
+  type: class
+  source: Conditionable
+properties: []
+methods:
+- name: chunk
+  visibility: public
+  parameters:
+  - name: count
+  - name: callback
+  comment: "# * @template TValue\n# *\n# * @mixin \\Illuminate\\Database\\Eloquent\\\
+    Builder\n# * @mixin \\Illuminate\\Database\\Query\\Builder\n# */\n# trait BuildsQueries\n\
+    # {\n# use Conditionable;\n# \n# /**\n# * Chunk the results of the query.\n# *\n\
+    # * @param  int  $count\n# * @param  callable(\\Illuminate\\Support\\Collection<int,\
+    \ TValue>, int): mixed  $callback\n# * @return bool"
+- name: chunkMap
+  visibility: public
+  parameters:
+  - name: callback
+  - name: count
+    default: '1000'
+  comment: '# * Run a map over each item while chunking.
+
+    # *
+
+    # * @template TReturn
+
+    # *
+
+    # * @param  callable(TValue): TReturn  $callback
+
+    # * @param  int  $count
+
+    # * @return \Illuminate\Support\Collection<int, TReturn>'
+- name: each
+  visibility: public
+  parameters:
+  - name: callback
+  - name: count
+    default: '1000'
+  comment: '# * Execute a callback over each item while chunking.
+
+    # *
+
+    # * @param  callable(TValue, int): mixed  $callback
+
+    # * @param  int  $count
+
+    # * @return bool
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: chunkById
+  visibility: public
+  parameters:
+  - name: count
+  - name: callback
+  - name: column
+    default: 'null'
+  - name: alias
+    default: 'null'
+  comment: '# * Chunk the results of a query by comparing IDs.
+
+    # *
+
+    # * @param  int  $count
+
+    # * @param  callable(\Illuminate\Support\Collection<int, TValue>, int): mixed  $callback
+
+    # * @param  string|null  $column
+
+    # * @param  string|null  $alias
+
+    # * @return bool'
+- name: chunkByIdDesc
+  visibility: public
+  parameters:
+  - name: count
+  - name: callback
+  - name: column
+    default: 'null'
+  - name: alias
+    default: 'null'
+  comment: '# * Chunk the results of a query by comparing IDs in descending order.
+
+    # *
+
+    # * @param  int  $count
+
+    # * @param  callable(\Illuminate\Support\Collection<int, TValue>, int): mixed  $callback
+
+    # * @param  string|null  $column
+
+    # * @param  string|null  $alias
+
+    # * @return bool'
+- name: orderedChunkById
+  visibility: public
+  parameters:
+  - name: count
+  - name: callback
+  - name: column
+    default: 'null'
+  - name: alias
+    default: 'null'
+  - name: descending
+    default: 'false'
+  comment: '# * Chunk the results of a query by comparing IDs in a given order.
+
+    # *
+
+    # * @param  int  $count
+
+    # * @param  callable(\Illuminate\Support\Collection<int, TValue>, int): mixed  $callback
+
+    # * @param  string|null  $column
+
+    # * @param  string|null  $alias
+
+    # * @param  bool  $descending
+
+    # * @return bool
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: eachById
+  visibility: public
+  parameters:
+  - name: callback
+  - name: count
+    default: '1000'
+  - name: column
+    default: 'null'
+  - name: alias
+    default: 'null'
+  comment: '# * Execute a callback over each item while chunking by ID.
+
+    # *
+
+    # * @param  callable(TValue, int): mixed  $callback
+
+    # * @param  int  $count
+
+    # * @param  string|null  $column
+
+    # * @param  string|null  $alias
+
+    # * @return bool'
+- name: lazy
+  visibility: public
+  parameters:
+  - name: chunkSize
+    default: '1000'
+  comment: '# * Query lazily, by chunks of the given size.
+
+    # *
+
+    # * @param  int  $chunkSize
+
+    # * @return \Illuminate\Support\LazyCollection
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: lazyById
+  visibility: public
+  parameters:
+  - name: chunkSize
+    default: '1000'
+  - name: column
+    default: 'null'
+  - name: alias
+    default: 'null'
+  comment: '# * Query lazily, by chunking the results of a query by comparing IDs.
+
+    # *
+
+    # * @param  int  $chunkSize
+
+    # * @param  string|null  $column
+
+    # * @param  string|null  $alias
+
+    # * @return \Illuminate\Support\LazyCollection
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: lazyByIdDesc
+  visibility: public
+  parameters:
+  - name: chunkSize
+    default: '1000'
+  - name: column
+    default: 'null'
+  - name: alias
+    default: 'null'
+  comment: '# * Query lazily, by chunking the results of a query by comparing IDs
+    in descending order.
+
+    # *
+
+    # * @param  int  $chunkSize
+
+    # * @param  string|null  $column
+
+    # * @param  string|null  $alias
+
+    # * @return \Illuminate\Support\LazyCollection
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: orderedLazyById
+  visibility: protected
+  parameters:
+  - name: chunkSize
+    default: '1000'
+  - name: column
+    default: 'null'
+  - name: alias
+    default: 'null'
+  - name: descending
+    default: 'false'
+  comment: '# * Query lazily, by chunking the results of a query by comparing IDs
+    in a given order.
+
+    # *
+
+    # * @param  int  $chunkSize
+
+    # * @param  string|null  $column
+
+    # * @param  string|null  $alias
+
+    # * @param  bool  $descending
+
+    # * @return \Illuminate\Support\LazyCollection
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: first
+  visibility: public
+  parameters:
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Execute the query and get the first result.
+
+    # *
+
+    # * @param  array|string  $columns
+
+    # * @return TValue|null'
+- name: sole
+  visibility: public
+  parameters:
+  - name: columns
+    default: '[''*'']'
+  comment: '# * Execute the query and get the first result if it''s the sole matching
+    record.
+
+    # *
+
+    # * @param  array|string  $columns
+
+    # * @return TValue
+
+    # *
+
+    # * @throws \Illuminate\Database\RecordsNotFoundException
+
+    # * @throws \Illuminate\Database\MultipleRecordsFoundException'
+- name: paginateUsingCursor
+  visibility: protected
+  parameters:
+  - name: perPage
+  - name: columns
+    default: '[''*'']'
+  - name: cursorName
+    default: '''cursor'''
+  - name: cursor
+    default: 'null'
+  comment: '# * Paginate the given query using a cursor paginator.
+
+    # *
+
+    # * @param  int  $perPage
+
+    # * @param  array|string  $columns
+
+    # * @param  string  $cursorName
+
+    # * @param  \Illuminate\Pagination\Cursor|string|null  $cursor
+
+    # * @return \Illuminate\Contracts\Pagination\CursorPaginator'
+- name: getOriginalColumnNameForCursorPagination
+  visibility: protected
+  parameters:
+  - name: builder
+  - name: parameter
+  comment: '# * Get the original column name of the given column, without any aliasing.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder<*>  $builder
+
+    # * @param  string  $parameter
+
+    # * @return string'
+- name: paginator
+  visibility: protected
+  parameters:
+  - name: items
+  - name: total
+  - name: perPage
+  - name: currentPage
+  - name: options
+  comment: '# * Create a new length-aware paginator instance.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection  $items
+
+    # * @param  int  $total
+
+    # * @param  int  $perPage
+
+    # * @param  int  $currentPage
+
+    # * @param  array  $options
+
+    # * @return \Illuminate\Pagination\LengthAwarePaginator'
+- name: simplePaginator
+  visibility: protected
+  parameters:
+  - name: items
+  - name: perPage
+  - name: currentPage
+  - name: options
+  comment: '# * Create a new simple paginator instance.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection  $items
+
+    # * @param  int  $perPage
+
+    # * @param  int  $currentPage
+
+    # * @param  array  $options
+
+    # * @return \Illuminate\Pagination\Paginator'
+- name: cursorPaginator
+  visibility: protected
+  parameters:
+  - name: items
+  - name: perPage
+  - name: cursor
+  - name: options
+  comment: '# * Create a new cursor paginator instance.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection  $items
+
+    # * @param  int  $perPage
+
+    # * @param  \Illuminate\Pagination\Cursor  $cursor
+
+    # * @param  array  $options
+
+    # * @return \Illuminate\Pagination\CursorPaginator'
+- name: tap
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Pass the query to a given callback.
+
+    # *
+
+    # * @param  callable($this): mixed  $callback
+
+    # * @return $this'
+traits:
+- Illuminate\Container\Container
+- Illuminate\Database\Eloquent\Builder
+- Illuminate\Database\MultipleRecordsFoundException
+- Illuminate\Database\Query\Expression
+- Illuminate\Database\RecordsNotFoundException
+- Illuminate\Pagination\Cursor
+- Illuminate\Pagination\CursorPaginator
+- Illuminate\Pagination\LengthAwarePaginator
+- Illuminate\Pagination\Paginator
+- Illuminate\Support\Collection
+- Illuminate\Support\LazyCollection
+- Illuminate\Support\Str
+- Illuminate\Support\Traits\Conditionable
+- InvalidArgumentException
+- RuntimeException
+- Conditionable
+interfaces: []

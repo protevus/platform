@@ -1,0 +1,77 @@
+name: MoneyTypeTest
+class_comment: null
+dependencies:
+- name: IntlTestHelper
+  type: class
+  source: Symfony\Component\Intl\Util\IntlTestHelper
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testPassMoneyPatternToView
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMoneyPatternWorksForYen
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassDifferentPatternsForDifferentCurrencies
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNull
+  visibility: public
+  parameters:
+  - name: expected
+    default: 'null'
+  - name: norm
+    default: 'null'
+  - name: view
+    default: 'null'
+  comment: null
+- name: testMoneyPatternWithoutCurrency
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNullUsesDefaultEmptyData
+  visibility: public
+  parameters:
+  - name: emptyData
+    default: '''10.00'''
+  - name: expectedData
+    default: '10.0'
+  comment: null
+- name: testDefaultFormattingWithDefaultRounding
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDefaultFormattingWithSpecifiedRounding
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHtml5EnablesSpecificFormatting
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDefaultInput
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIntegerInput
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIntegerInputWithoutDivisor
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Intl\Util\IntlTestHelper
+interfaces: []

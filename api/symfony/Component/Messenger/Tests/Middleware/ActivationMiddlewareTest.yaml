@@ -1,0 +1,43 @@
+name: ActivationMiddlewareTest
+class_comment: '# * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>'
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: ActivationMiddleware
+  type: class
+  source: Symfony\Component\Messenger\Middleware\ActivationMiddleware
+- name: MiddlewareInterface
+  type: class
+  source: Symfony\Component\Messenger\Middleware\MiddlewareInterface
+- name: MiddlewareTestCase
+  type: class
+  source: Symfony\Component\Messenger\Test\Middleware\MiddlewareTestCase
+- name: DummyMessage
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\DummyMessage
+properties: []
+methods:
+- name: testExecuteMiddlewareOnActivated
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExecuteMiddlewareOnActivatedWithCallable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExecuteMiddlewareOnDeactivated
+  visibility: public
+  parameters: []
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Middleware\ActivationMiddleware
+- Symfony\Component\Messenger\Middleware\MiddlewareInterface
+- Symfony\Component\Messenger\Test\Middleware\MiddlewareTestCase
+- Symfony\Component\Messenger\Tests\Fixtures\DummyMessage
+interfaces: []

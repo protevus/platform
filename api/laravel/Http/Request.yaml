@@ -1,0 +1,623 @@
+name: Request
+class_comment: '# * @method array validate(array $rules, ...$params)
+
+  # * @method array validateWithBag(string $errorBag, array $rules, ...$params)
+
+  # * @method bool hasValidSignature(bool $absolute = true)'
+dependencies:
+- name: ArrayAccess
+  type: class
+  source: ArrayAccess
+- name: Closure
+  type: class
+  source: Closure
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: SymfonySessionDecorator
+  type: class
+  source: Illuminate\Session\SymfonySessionDecorator
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: SessionNotFoundException
+  type: class
+  source: Symfony\Component\HttpFoundation\Exception\SessionNotFoundException
+- name: InputBag
+  type: class
+  source: Symfony\Component\HttpFoundation\InputBag
+- name: SymfonyRequest
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: SessionInterface
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\SessionInterface
+properties:
+- name: json
+  visibility: protected
+  comment: "# * @method array validate(array $rules, ...$params)\n# * @method array\
+    \ validateWithBag(string $errorBag, array $rules, ...$params)\n# * @method bool\
+    \ hasValidSignature(bool $absolute = true)\n# */\n# class Request extends SymfonyRequest\
+    \ implements Arrayable, ArrayAccess\n# {\n# use Concerns\\CanBePrecognitive,\n\
+    # Concerns\\InteractsWithContentTypes,\n# Concerns\\InteractsWithFlashData,\n\
+    # Concerns\\InteractsWithInput,\n# Macroable;\n# \n# /**\n# * The decoded JSON\
+    \ content for the request.\n# *\n# * @var \\Symfony\\Component\\HttpFoundation\\\
+    InputBag|null"
+- name: convertedFiles
+  visibility: protected
+  comment: '# * All of the converted files for the request.
+
+    # *
+
+    # * @var array'
+- name: userResolver
+  visibility: protected
+  comment: '# * The user resolver callback.
+
+    # *
+
+    # * @var \Closure'
+- name: routeResolver
+  visibility: protected
+  comment: '# * The route resolver callback.
+
+    # *
+
+    # * @var \Closure'
+methods:
+- name: capture
+  visibility: public
+  parameters: []
+  comment: "# * @method array validate(array $rules, ...$params)\n# * @method array\
+    \ validateWithBag(string $errorBag, array $rules, ...$params)\n# * @method bool\
+    \ hasValidSignature(bool $absolute = true)\n# */\n# class Request extends SymfonyRequest\
+    \ implements Arrayable, ArrayAccess\n# {\n# use Concerns\\CanBePrecognitive,\n\
+    # Concerns\\InteractsWithContentTypes,\n# Concerns\\InteractsWithFlashData,\n\
+    # Concerns\\InteractsWithInput,\n# Macroable;\n# \n# /**\n# * The decoded JSON\
+    \ content for the request.\n# *\n# * @var \\Symfony\\Component\\HttpFoundation\\\
+    InputBag|null\n# */\n# protected $json;\n# \n# /**\n# * All of the converted files\
+    \ for the request.\n# *\n# * @var array\n# */\n# protected $convertedFiles;\n\
+    # \n# /**\n# * The user resolver callback.\n# *\n# * @var \\Closure\n# */\n# protected\
+    \ $userResolver;\n# \n# /**\n# * The route resolver callback.\n# *\n# * @var \\\
+    Closure\n# */\n# protected $routeResolver;\n# \n# /**\n# * Create a new Illuminate\
+    \ HTTP request from server variables.\n# *\n# * @return static"
+- name: instance
+  visibility: public
+  parameters: []
+  comment: '# * Return the Request instance.
+
+    # *
+
+    # * @return $this'
+- name: method
+  visibility: public
+  parameters: []
+  comment: '# * Get the request method.
+
+    # *
+
+    # * @return string'
+- name: root
+  visibility: public
+  parameters: []
+  comment: '# * Get the root URL for the application.
+
+    # *
+
+    # * @return string'
+- name: url
+  visibility: public
+  parameters: []
+  comment: '# * Get the URL (no query string) for the request.
+
+    # *
+
+    # * @return string'
+- name: fullUrl
+  visibility: public
+  parameters: []
+  comment: '# * Get the full URL for the request.
+
+    # *
+
+    # * @return string'
+- name: fullUrlWithQuery
+  visibility: public
+  parameters:
+  - name: query
+  comment: '# * Get the full URL for the request with the added query string parameters.
+
+    # *
+
+    # * @param  array  $query
+
+    # * @return string'
+- name: fullUrlWithoutQuery
+  visibility: public
+  parameters:
+  - name: keys
+  comment: '# * Get the full URL for the request without the given query string parameters.
+
+    # *
+
+    # * @param  array|string  $keys
+
+    # * @return string'
+- name: path
+  visibility: public
+  parameters: []
+  comment: '# * Get the current path info for the request.
+
+    # *
+
+    # * @return string'
+- name: decodedPath
+  visibility: public
+  parameters: []
+  comment: '# * Get the current decoded path info for the request.
+
+    # *
+
+    # * @return string'
+- name: segment
+  visibility: public
+  parameters:
+  - name: index
+  - name: default
+    default: 'null'
+  comment: '# * Get a segment from the URI (1 based index).
+
+    # *
+
+    # * @param  int  $index
+
+    # * @param  string|null  $default
+
+    # * @return string|null'
+- name: segments
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the segments for the request path.
+
+    # *
+
+    # * @return array'
+- name: is
+  visibility: public
+  parameters:
+  - name: '...$patterns'
+  comment: '# * Determine if the current request URI matches a pattern.
+
+    # *
+
+    # * @param  mixed  ...$patterns
+
+    # * @return bool'
+- name: routeIs
+  visibility: public
+  parameters:
+  - name: '...$patterns'
+  comment: '# * Determine if the route name matches a given pattern.
+
+    # *
+
+    # * @param  mixed  ...$patterns
+
+    # * @return bool'
+- name: fullUrlIs
+  visibility: public
+  parameters:
+  - name: '...$patterns'
+  comment: '# * Determine if the current request URL and query string match a pattern.
+
+    # *
+
+    # * @param  mixed  ...$patterns
+
+    # * @return bool'
+- name: host
+  visibility: public
+  parameters: []
+  comment: '# * Get the host name.
+
+    # *
+
+    # * @return string'
+- name: httpHost
+  visibility: public
+  parameters: []
+  comment: '# * Get the HTTP host being requested.
+
+    # *
+
+    # * @return string'
+- name: schemeAndHttpHost
+  visibility: public
+  parameters: []
+  comment: '# * Get the scheme and HTTP host.
+
+    # *
+
+    # * @return string'
+- name: ajax
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the request is the result of an AJAX call.
+
+    # *
+
+    # * @return bool'
+- name: pjax
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the request is the result of a PJAX call.
+
+    # *
+
+    # * @return bool'
+- name: prefetch
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the request is the result of a prefetch call.
+
+    # *
+
+    # * @return bool'
+- name: secure
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the request is over HTTPS.
+
+    # *
+
+    # * @return bool'
+- name: ip
+  visibility: public
+  parameters: []
+  comment: '# * Get the client IP address.
+
+    # *
+
+    # * @return string|null'
+- name: ips
+  visibility: public
+  parameters: []
+  comment: '# * Get the client IP addresses.
+
+    # *
+
+    # * @return array'
+- name: userAgent
+  visibility: public
+  parameters: []
+  comment: '# * Get the client user agent.
+
+    # *
+
+    # * @return string|null'
+- name: merge
+  visibility: public
+  parameters:
+  - name: input
+  comment: '# * Merge new input into the current request''s input array.
+
+    # *
+
+    # * @param  array  $input
+
+    # * @return $this'
+- name: mergeIfMissing
+  visibility: public
+  parameters:
+  - name: input
+  comment: '# * Merge new input into the request''s input, but only when that key
+    is missing from the request.
+
+    # *
+
+    # * @param  array  $input
+
+    # * @return $this'
+- name: replace
+  visibility: public
+  parameters:
+  - name: input
+  comment: '# * Replace the input values for the current request.
+
+    # *
+
+    # * @param  array  $input
+
+    # * @return $this'
+- name: json
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  - name: default
+    default: 'null'
+  comment: "# * This method belongs to Symfony HttpFoundation and is not usually needed\
+    \ when using Laravel.\n# *\n# * Instead, you may use the \"input\" method.\n#\
+    \ *\n# * @param  string  $key\n# * @param  mixed  $default\n# * @return mixed\n\
+    # */\n# #[\\Override]\n# public function get(string $key, mixed $default = null):\
+    \ mixed\n# {\n# return parent::get($key, $default);\n# }\n# \n# /**\n# * Get the\
+    \ JSON payload for the request.\n# *\n# * @param  string|null  $key\n# * @param\
+    \  mixed  $default\n# * @return \\Symfony\\Component\\HttpFoundation\\InputBag|mixed"
+- name: getInputSource
+  visibility: protected
+  parameters: []
+  comment: '# * Get the input source for the request.
+
+    # *
+
+    # * @return \Symfony\Component\HttpFoundation\InputBag'
+- name: createFrom
+  visibility: public
+  parameters:
+  - name: from
+  - name: to
+    default: 'null'
+  comment: '# * Create a new request instance from the given Laravel request.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $from
+
+    # * @param  \Illuminate\Http\Request|null  $to
+
+    # * @return static'
+- name: createFromBase
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Create an Illuminate request from a Symfony instance.
+
+    # *
+
+    # * @param  \Symfony\Component\HttpFoundation\Request  $request
+
+    # * @return static'
+- name: filterFiles
+  visibility: protected
+  parameters:
+  - name: files
+  comment: "# * {@inheritdoc}\n# *\n# * @return static\n# */\n# #[\\Override]\n# public\
+    \ function duplicate(?array $query = null, ?array $request = null, ?array $attributes\
+    \ = null, ?array $cookies = null, ?array $files = null, ?array $server = null):\
+    \ static\n# {\n# return parent::duplicate($query, $request, $attributes, $cookies,\
+    \ $this->filterFiles($files), $server);\n# }\n# \n# /**\n# * Filter the given\
+    \ array of files, removing any empty values.\n# *\n# * @param  mixed  $files\n\
+    # * @return mixed"
+- name: session
+  visibility: public
+  parameters: []
+  comment: "# * {@inheritdoc}\n# */\n# #[\\Override]\n# public function hasSession(bool\
+    \ $skipIfUninitialized = false): bool\n# {\n# return $this->session instanceof\
+    \ SymfonySessionDecorator;\n# }\n# \n# /**\n# * {@inheritdoc}\n# */\n# #[\\Override]\n\
+    # public function getSession(): SessionInterface\n# {\n# return $this->hasSession()\n\
+    # ? $this->session\n# : throw new SessionNotFoundException;\n# }\n# \n# /**\n\
+    # * Get the session associated with the request.\n# *\n# * @return \\Illuminate\\\
+    Contracts\\Session\\Session\n# *\n# * @throws \\RuntimeException"
+- name: setLaravelSession
+  visibility: public
+  parameters:
+  - name: session
+  comment: '# * Set the session instance on the request.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Session\Session  $session
+
+    # * @return void'
+- name: setRequestLocale
+  visibility: public
+  parameters:
+  - name: locale
+  comment: '# * Set the locale for the request instance.
+
+    # *
+
+    # * @param  string  $locale
+
+    # * @return void'
+- name: setDefaultRequestLocale
+  visibility: public
+  parameters:
+  - name: locale
+  comment: '# * Set the default locale for the request instance.
+
+    # *
+
+    # * @param  string  $locale
+
+    # * @return void'
+- name: user
+  visibility: public
+  parameters:
+  - name: guard
+    default: 'null'
+  comment: '# * Get the user making the request.
+
+    # *
+
+    # * @param  string|null  $guard
+
+    # * @return mixed'
+- name: route
+  visibility: public
+  parameters:
+  - name: param
+    default: 'null'
+  - name: default
+    default: 'null'
+  comment: '# * Get the route handling the request.
+
+    # *
+
+    # * @param  string|null  $param
+
+    # * @param  mixed  $default
+
+    # * @return \Illuminate\Routing\Route|object|string|null'
+- name: fingerprint
+  visibility: public
+  parameters: []
+  comment: '# * Get a unique fingerprint for the request / route / IP address.
+
+    # *
+
+    # * @return string
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: setJson
+  visibility: public
+  parameters:
+  - name: json
+  comment: '# * Set the JSON payload for the request.
+
+    # *
+
+    # * @param  \Symfony\Component\HttpFoundation\InputBag  $json
+
+    # * @return $this'
+- name: getUserResolver
+  visibility: public
+  parameters: []
+  comment: '# * Get the user resolver callback.
+
+    # *
+
+    # * @return \Closure'
+- name: setUserResolver
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Set the user resolver callback.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return $this'
+- name: getRouteResolver
+  visibility: public
+  parameters: []
+  comment: '# * Get the route resolver callback.
+
+    # *
+
+    # * @return \Closure'
+- name: setRouteResolver
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Set the route resolver callback.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return $this'
+- name: toArray
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the input and files for the request.
+
+    # *
+
+    # * @return array'
+- name: offsetExists
+  visibility: public
+  parameters:
+  - name: offset
+  comment: '# * Determine if the given offset exists.
+
+    # *
+
+    # * @param  string  $offset
+
+    # * @return bool'
+- name: offsetGet
+  visibility: public
+  parameters:
+  - name: offset
+  comment: '# * Get the value at the given offset.
+
+    # *
+
+    # * @param  string  $offset
+
+    # * @return mixed'
+- name: offsetSet
+  visibility: public
+  parameters:
+  - name: offset
+  - name: value
+  comment: '# * Set the value at the given offset.
+
+    # *
+
+    # * @param  string  $offset
+
+    # * @param  mixed  $value
+
+    # * @return void'
+- name: offsetUnset
+  visibility: public
+  parameters:
+  - name: offset
+  comment: '# * Remove the value at the given offset.
+
+    # *
+
+    # * @param  string  $offset
+
+    # * @return void'
+- name: __isset
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Check if an input element is set on the request.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: __get
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Get an input element from the request.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed'
+traits:
+- ArrayAccess
+- Closure
+- Illuminate\Contracts\Support\Arrayable
+- Illuminate\Session\SymfonySessionDecorator
+- Illuminate\Support\Arr
+- Illuminate\Support\Str
+- Illuminate\Support\Traits\Macroable
+- RuntimeException
+- Symfony\Component\HttpFoundation\Exception\SessionNotFoundException
+- Symfony\Component\HttpFoundation\InputBag
+- Symfony\Component\HttpFoundation\Session\SessionInterface
+- Concerns\CanBePrecognitive
+interfaces:
+- Arrayable

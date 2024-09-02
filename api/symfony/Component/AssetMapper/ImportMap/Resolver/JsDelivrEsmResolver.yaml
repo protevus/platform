@@ -1,0 +1,105 @@
+name: JsDelivrEsmResolver
+class_comment: null
+dependencies:
+- name: CssAssetUrlCompiler
+  type: class
+  source: Symfony\Component\AssetMapper\Compiler\CssAssetUrlCompiler
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\AssetMapper\Exception\RuntimeException
+- name: ImportMapEntry
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapEntry
+- name: ImportMapType
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapType
+- name: PackageRequireOptions
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\PackageRequireOptions
+- name: Path
+  type: class
+  source: Symfony\Component\Filesystem\Path
+- name: HttpClient
+  type: class
+  source: Symfony\Component\HttpClient\HttpClient
+- name: HttpExceptionInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface
+- name: HttpClientInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\HttpClientInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: httpClient
+    default: 'null'
+  comment: null
+- name: resolvePackages
+  visibility: public
+  parameters:
+  - name: packagesToRequire
+  comment: null
+- name: downloadPackages
+  visibility: public
+  parameters:
+  - name: importMapEntries
+  - name: progressCallback
+    default: 'null'
+  comment: '# * @param ImportMapEntry[] $importMapEntries
+
+    # *
+
+    # * @return array<string, array{content: string, dependencies: string[], extraFiles:
+    array<string, string>}>'
+- name: fetchPackageRequirementsFromImports
+  visibility: private
+  parameters:
+  - name: content
+  comment: '# * Parses the very specific import syntax used by jsDelivr.
+
+    # *
+
+    # * Replaces those with normal import "package/name" statements and
+
+    # * records the package as a dependency, so it can be downloaded and
+
+    # * added to the importmap.
+
+    # *
+
+    # * @return PackageRequireOptions[]'
+- name: makeImportsBare
+  visibility: private
+  parameters:
+  - name: content
+  - name: '&$dependencies'
+  - name: '&$extraFiles'
+  - name: type
+  - name: sourceFilePath
+  comment: '# * Parses the very specific import syntax used by jsDelivr.
+
+    # *
+
+    # * Replaces those with normal import "package/name" statements.'
+- name: resolveUrlPattern
+  visibility: private
+  parameters:
+  - name: packageName
+  - name: path
+  - name: type
+    default: 'null'
+  comment: '# * Determine the URL pattern to be used by the HTTP Client.'
+traits:
+- Symfony\Component\AssetMapper\Compiler\CssAssetUrlCompiler
+- Symfony\Component\AssetMapper\Exception\RuntimeException
+- Symfony\Component\AssetMapper\ImportMap\ImportMapEntry
+- Symfony\Component\AssetMapper\ImportMap\ImportMapType
+- Symfony\Component\AssetMapper\ImportMap\PackageRequireOptions
+- Symfony\Component\Filesystem\Path
+- Symfony\Component\HttpClient\HttpClient
+- Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface
+- Symfony\Contracts\HttpClient\HttpClientInterface
+interfaces:
+- PackageResolverInterface

@@ -1,0 +1,19 @@
+name: anonymous
+class_comment: null
+dependencies:
+- name: FooClass
+  type: class
+  source: Bar\FooClass
+- name: stdClass
+  type: class
+  source: stdClass
+- name: StdClassDecorator
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\StdClassDecorator
+properties: []
+methods: []
+traits:
+- Bar\FooClass
+- stdClass
+- Symfony\Component\DependencyInjection\Tests\Fixtures\StdClassDecorator
+interfaces: []

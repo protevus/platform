@@ -1,0 +1,349 @@
+name: ShowModelCommand
+class_comment: null
+dependencies:
+- name: BackedEnum
+  type: class
+  source: BackedEnum
+- name: BindingResolutionException
+  type: class
+  source: Illuminate\Contracts\Container\BindingResolutionException
+- name: Model
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+- name: Relation
+  type: class
+  source: Illuminate\Database\Eloquent\Relations\Relation
+- name: Gate
+  type: class
+  source: Illuminate\Support\Facades\Gate
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: ReflectionClass
+  type: class
+  source: ReflectionClass
+- name: ReflectionMethod
+  type: class
+  source: ReflectionMethod
+- name: ReflectionNamedType
+  type: class
+  source: ReflectionNamedType
+- name: SplFileObject
+  type: class
+  source: SplFileObject
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: UnitEnum
+  type: class
+  source: UnitEnum
+properties:
+- name: name
+  visibility: protected
+  comment: '# * The console command name.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+- name: signature
+  visibility: protected
+  comment: '# * The console command signature.
+
+    # *
+
+    # * @var string'
+- name: relationMethods
+  visibility: protected
+  comment: '# * The methods that can be called in a model to indicate a relation.
+
+    # *
+
+    # * @var array'
+methods:
+- name: handle
+  visibility: public
+  parameters: []
+  comment: "# * The console command name.\n# *\n# * @var string\n# */\n# protected\
+    \ $name = 'model:show {model}';\n# \n# /**\n# * The console command description.\n\
+    # *\n# * @var string\n# */\n# protected $description = 'Show information about\
+    \ an Eloquent model';\n# \n# /**\n# * The console command signature.\n# *\n# *\
+    \ @var string\n# */\n# protected $signature = 'model:show {model : The model to\
+    \ show}\n# {--database= : The database connection to use}\n# {--json : Output\
+    \ the model as JSON}';\n# \n# /**\n# * The methods that can be called in a model\
+    \ to indicate a relation.\n# *\n# * @var array\n# */\n# protected $relationMethods\
+    \ = [\n# 'hasMany',\n# 'hasManyThrough',\n# 'hasOneThrough',\n# 'belongsToMany',\n\
+    # 'hasOne',\n# 'belongsTo',\n# 'morphOne',\n# 'morphTo',\n# 'morphMany',\n# 'morphToMany',\n\
+    # 'morphedByMany',\n# ];\n# \n# /**\n# * Execute the console command.\n# *\n#\
+    \ * @return int"
+- name: getPolicy
+  visibility: protected
+  parameters:
+  - name: model
+  comment: '# * Get the first policy associated with this model.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Model  $model
+
+    # * @return string'
+- name: getAttributes
+  visibility: protected
+  parameters:
+  - name: model
+  comment: '# * Get the column attributes for the given model.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Model  $model
+
+    # * @return \Illuminate\Support\Collection'
+- name: getVirtualAttributes
+  visibility: protected
+  parameters:
+  - name: model
+  - name: columns
+  comment: '# * Get the virtual (non-column) attributes for the given model.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Model  $model
+
+    # * @param  array  $columns
+
+    # * @return \Illuminate\Support\Collection'
+- name: getRelations
+  visibility: protected
+  parameters:
+  - name: model
+  comment: '# * Get the relations from the given model.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Model  $model
+
+    # * @return \Illuminate\Support\Collection'
+- name: getEvents
+  visibility: protected
+  parameters:
+  - name: model
+  comment: '# * Get the Events that the model dispatches.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Model  $model
+
+    # * @return \Illuminate\Support\Collection'
+- name: getObservers
+  visibility: protected
+  parameters:
+  - name: model
+  comment: '# * Get the Observers watching this model.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Model  $model
+
+    # * @return \Illuminate\Support\Collection'
+- name: display
+  visibility: protected
+  parameters:
+  - name: class
+  - name: database
+  - name: table
+  - name: policy
+  - name: attributes
+  - name: relations
+  - name: events
+  - name: observers
+  comment: '# * Render the model information.
+
+    # *
+
+    # * @param  string  $class
+
+    # * @param  string  $database
+
+    # * @param  string  $table
+
+    # * @param  string  $policy
+
+    # * @param  \Illuminate\Support\Collection  $attributes
+
+    # * @param  \Illuminate\Support\Collection  $relations
+
+    # * @param  \Illuminate\Support\Collection  $events
+
+    # * @param  \Illuminate\Support\Collection  $observers
+
+    # * @return void'
+- name: displayJson
+  visibility: protected
+  parameters:
+  - name: class
+  - name: database
+  - name: table
+  - name: policy
+  - name: attributes
+  - name: relations
+  - name: events
+  - name: observers
+  comment: '# * Render the model information as JSON.
+
+    # *
+
+    # * @param  string  $class
+
+    # * @param  string  $database
+
+    # * @param  string  $table
+
+    # * @param  string  $policy
+
+    # * @param  \Illuminate\Support\Collection  $attributes
+
+    # * @param  \Illuminate\Support\Collection  $relations
+
+    # * @param  \Illuminate\Support\Collection  $events
+
+    # * @param  \Illuminate\Support\Collection  $observers
+
+    # * @return void'
+- name: displayCli
+  visibility: protected
+  parameters:
+  - name: class
+  - name: database
+  - name: table
+  - name: policy
+  - name: attributes
+  - name: relations
+  - name: events
+  - name: observers
+  comment: '# * Render the model information for the CLI.
+
+    # *
+
+    # * @param  string  $class
+
+    # * @param  string  $database
+
+    # * @param  string  $table
+
+    # * @param  string  $policy
+
+    # * @param  \Illuminate\Support\Collection  $attributes
+
+    # * @param  \Illuminate\Support\Collection  $relations
+
+    # * @param  \Illuminate\Support\Collection  $events
+
+    # * @param  \Illuminate\Support\Collection  $observers
+
+    # * @return void'
+- name: getCastType
+  visibility: protected
+  parameters:
+  - name: column
+  - name: model
+  comment: '# * Get the cast type for the given column.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  \Illuminate\Database\Eloquent\Model  $model
+
+    # * @return string|null'
+- name: getCastsWithDates
+  visibility: protected
+  parameters:
+  - name: model
+  comment: '# * Get the model casts, including any date casts.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Model  $model
+
+    # * @return \Illuminate\Support\Collection'
+- name: getColumnDefault
+  visibility: protected
+  parameters:
+  - name: column
+  - name: model
+  comment: '# * Get the default value for the given column.
+
+    # *
+
+    # * @param  array  $column
+
+    # * @param  \Illuminate\Database\Eloquent\Model  $model
+
+    # * @return mixed|null'
+- name: attributeIsHidden
+  visibility: protected
+  parameters:
+  - name: attribute
+  - name: model
+  comment: '# * Determine if the given attribute is hidden.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  \Illuminate\Database\Eloquent\Model  $model
+
+    # * @return bool'
+- name: columnIsUnique
+  visibility: protected
+  parameters:
+  - name: column
+  - name: indexes
+  comment: '# * Determine if the given attribute is unique.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  array  $indexes
+
+    # * @return bool'
+- name: qualifyModel
+  visibility: protected
+  parameters:
+  - name: model
+  comment: '# * Qualify the given model class base name.
+
+    # *
+
+    # * @param  string  $model
+
+    # * @return string
+
+    # *
+
+    # * @see \Illuminate\Console\GeneratorCommand'
+traits:
+- BackedEnum
+- Illuminate\Contracts\Container\BindingResolutionException
+- Illuminate\Database\Eloquent\Model
+- Illuminate\Database\Eloquent\Relations\Relation
+- Illuminate\Support\Facades\Gate
+- Illuminate\Support\Str
+- ReflectionClass
+- ReflectionMethod
+- ReflectionNamedType
+- SplFileObject
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Output\OutputInterface
+- UnitEnum
+interfaces: []

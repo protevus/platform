@@ -1,0 +1,41 @@
+name: TraceableControllerResolverTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: ControllerResolverInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
+- name: TraceableControllerResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\TraceableControllerResolver
+- name: Stopwatch
+  type: class
+  source: Symfony\Component\Stopwatch\Stopwatch
+- name: StopwatchEvent
+  type: class
+  source: Symfony\Component\Stopwatch\StopwatchEvent
+properties: []
+methods:
+- name: testStopwatchEventIsStoppedWhenResolverThrows
+  visibility: public
+  parameters: []
+  comment: null
+- name: getController
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
+- Symfony\Component\HttpKernel\Controller\TraceableControllerResolver
+- Symfony\Component\Stopwatch\Stopwatch
+- Symfony\Component\Stopwatch\StopwatchEvent
+interfaces:
+- ControllerResolverInterface

@@ -1,0 +1,91 @@
+name: AbstractRecursivePass
+class_comment: null
+dependencies:
+- name: ArgumentInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ArgumentInterface
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: LogicException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\LogicException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: ExpressionLanguage
+  type: class
+  source: Symfony\Component\DependencyInjection\ExpressionLanguage
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: Expression
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Expression
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: "# * @author Nicolas Grekas <p@tchwork.com>\n# */\n# abstract class AbstractRecursivePass\
+    \ implements CompilerPassInterface\n# {\n# protected ?ContainerBuilder $container;\n\
+    # protected ?string $currentId = null;\n# protected bool $skipScalars = false;\n\
+    # \n# private bool $processExpressions = false;\n# private ExpressionLanguage\
+    \ $expressionLanguage;\n# private bool $inExpression = false;\n# \n# /**\n# *\
+    \ @return void"
+- name: enableExpressionProcessing
+  visibility: protected
+  parameters: []
+  comment: null
+- name: inExpression
+  visibility: protected
+  parameters:
+  - name: reset
+    default: 'true'
+  comment: null
+- name: processValue
+  visibility: protected
+  parameters:
+  - name: value
+  - name: isRoot
+    default: 'false'
+  comment: '# * Processes a value found in a definition tree.
+
+    # *
+
+    # * @return mixed'
+- name: getConstructor
+  visibility: protected
+  parameters:
+  - name: definition
+  - name: required
+  comment: '# * @throws RuntimeException'
+- name: getReflectionMethod
+  visibility: protected
+  parameters:
+  - name: definition
+  - name: method
+  comment: '# * @throws RuntimeException'
+- name: getExpressionLanguage
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Argument\ArgumentInterface
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\LogicException
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\ExpressionLanguage
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\ExpressionLanguage\Expression
+interfaces:
+- CompilerPassInterface

@@ -1,0 +1,703 @@
+name: BusFake
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: BatchRepository
+  type: class
+  source: Illuminate\Bus\BatchRepository
+- name: ChainedBatch
+  type: class
+  source: Illuminate\Bus\ChainedBatch
+- name: PendingBatch
+  type: class
+  source: Illuminate\Bus\PendingBatch
+- name: QueueingDispatcher
+  type: class
+  source: Illuminate\Contracts\Bus\QueueingDispatcher
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+- name: ReflectsClosures
+  type: class
+  source: Illuminate\Support\Traits\ReflectsClosures
+- name: PHPUnit
+  type: class
+  source: PHPUnit\Framework\Assert
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: ReflectsClosures
+  type: class
+  source: ReflectsClosures
+properties:
+- name: dispatcher
+  visibility: public
+  comment: '# * The original Bus dispatcher implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Bus\QueueingDispatcher'
+- name: jobsToFake
+  visibility: protected
+  comment: '# * The job types that should be intercepted instead of dispatched.
+
+    # *
+
+    # * @var array'
+- name: jobsToDispatch
+  visibility: protected
+  comment: '# * The job types that should be dispatched instead of faked.
+
+    # *
+
+    # * @var array'
+- name: batchRepository
+  visibility: protected
+  comment: '# * The fake repository to track batched jobs.
+
+    # *
+
+    # * @var \Illuminate\Bus\BatchRepository'
+- name: commands
+  visibility: protected
+  comment: '# * The commands that have been dispatched.
+
+    # *
+
+    # * @var array'
+- name: commandsSync
+  visibility: protected
+  comment: '# * The commands that have been dispatched synchronously.
+
+    # *
+
+    # * @var array'
+- name: commandsAfterResponse
+  visibility: protected
+  comment: '# * The commands that have been dispatched after the response has been
+    sent.
+
+    # *
+
+    # * @var array'
+- name: batches
+  visibility: protected
+  comment: '# * The batches that have been dispatched.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: dispatcher
+  - name: jobsToFake
+    default: '[]'
+  - name: batchRepository
+    default: 'null'
+  comment: "# * The original Bus dispatcher implementation.\n# *\n# * @var \\Illuminate\\\
+    Contracts\\Bus\\QueueingDispatcher\n# */\n# public $dispatcher;\n# \n# /**\n#\
+    \ * The job types that should be intercepted instead of dispatched.\n# *\n# *\
+    \ @var array\n# */\n# protected $jobsToFake = [];\n# \n# /**\n# * The job types\
+    \ that should be dispatched instead of faked.\n# *\n# * @var array\n# */\n# protected\
+    \ $jobsToDispatch = [];\n# \n# /**\n# * The fake repository to track batched jobs.\n\
+    # *\n# * @var \\Illuminate\\Bus\\BatchRepository\n# */\n# protected $batchRepository;\n\
+    # \n# /**\n# * The commands that have been dispatched.\n# *\n# * @var array\n\
+    # */\n# protected $commands = [];\n# \n# /**\n# * The commands that have been\
+    \ dispatched synchronously.\n# *\n# * @var array\n# */\n# protected $commandsSync\
+    \ = [];\n# \n# /**\n# * The commands that have been dispatched after the response\
+    \ has been sent.\n# *\n# * @var array\n# */\n# protected $commandsAfterResponse\
+    \ = [];\n# \n# /**\n# * The batches that have been dispatched.\n# *\n# * @var\
+    \ array\n# */\n# protected $batches = [];\n# \n# /**\n# * Indicates if commands\
+    \ should be serialized and restored when pushed to the Bus.\n# *\n# * @var bool\n\
+    # */\n# protected bool $serializeAndRestore = false;\n# \n# /**\n# * Create a\
+    \ new bus fake instance.\n# *\n# * @param  \\Illuminate\\Contracts\\Bus\\QueueingDispatcher\
+    \  $dispatcher\n# * @param  array|string  $jobsToFake\n# * @param  \\Illuminate\\\
+    Bus\\BatchRepository|null  $batchRepository\n# * @return void"
+- name: except
+  visibility: public
+  parameters:
+  - name: jobsToDispatch
+  comment: '# * Specify the jobs that should be dispatched instead of faked.
+
+    # *
+
+    # * @param  array|string  $jobsToDispatch
+
+    # * @return $this'
+- name: assertDispatched
+  visibility: public
+  parameters:
+  - name: command
+  - name: callback
+    default: 'null'
+  comment: '# * Assert if a job was dispatched based on a truth-test callback.
+
+    # *
+
+    # * @param  string|\Closure  $command
+
+    # * @param  callable|int|null  $callback
+
+    # * @return void'
+- name: assertDispatchedTimes
+  visibility: public
+  parameters:
+  - name: command
+  - name: times
+    default: '1'
+  comment: '# * Assert if a job was pushed a number of times.
+
+    # *
+
+    # * @param  string|\Closure  $command
+
+    # * @param  int  $times
+
+    # * @return void'
+- name: assertNotDispatched
+  visibility: public
+  parameters:
+  - name: command
+  - name: callback
+    default: 'null'
+  comment: '# * Determine if a job was dispatched based on a truth-test callback.
+
+    # *
+
+    # * @param  string|\Closure  $command
+
+    # * @param  callable|null  $callback
+
+    # * @return void'
+- name: assertNothingDispatched
+  visibility: public
+  parameters: []
+  comment: '# * Assert that no jobs were dispatched.
+
+    # *
+
+    # * @return void'
+- name: assertDispatchedSync
+  visibility: public
+  parameters:
+  - name: command
+  - name: callback
+    default: 'null'
+  comment: '# * Assert if a job was explicitly dispatched synchronously based on a
+    truth-test callback.
+
+    # *
+
+    # * @param  string|\Closure  $command
+
+    # * @param  callable|int|null  $callback
+
+    # * @return void'
+- name: assertDispatchedSyncTimes
+  visibility: public
+  parameters:
+  - name: command
+  - name: times
+    default: '1'
+  comment: '# * Assert if a job was pushed synchronously a number of times.
+
+    # *
+
+    # * @param  string|\Closure  $command
+
+    # * @param  int  $times
+
+    # * @return void'
+- name: assertNotDispatchedSync
+  visibility: public
+  parameters:
+  - name: command
+  - name: callback
+    default: 'null'
+  comment: '# * Determine if a job was dispatched based on a truth-test callback.
+
+    # *
+
+    # * @param  string|\Closure  $command
+
+    # * @param  callable|null  $callback
+
+    # * @return void'
+- name: assertDispatchedAfterResponse
+  visibility: public
+  parameters:
+  - name: command
+  - name: callback
+    default: 'null'
+  comment: '# * Assert if a job was dispatched after the response was sent based on
+    a truth-test callback.
+
+    # *
+
+    # * @param  string|\Closure  $command
+
+    # * @param  callable|int|null  $callback
+
+    # * @return void'
+- name: assertDispatchedAfterResponseTimes
+  visibility: public
+  parameters:
+  - name: command
+  - name: times
+    default: '1'
+  comment: '# * Assert if a job was pushed after the response was sent a number of
+    times.
+
+    # *
+
+    # * @param  string|\Closure  $command
+
+    # * @param  int  $times
+
+    # * @return void'
+- name: assertNotDispatchedAfterResponse
+  visibility: public
+  parameters:
+  - name: command
+  - name: callback
+    default: 'null'
+  comment: '# * Determine if a job was dispatched based on a truth-test callback.
+
+    # *
+
+    # * @param  string|\Closure  $command
+
+    # * @param  callable|null  $callback
+
+    # * @return void'
+- name: assertChained
+  visibility: public
+  parameters:
+  - name: expectedChain
+  comment: '# * Assert if a chain of jobs was dispatched.
+
+    # *
+
+    # * @param  array  $expectedChain
+
+    # * @return void'
+- name: resetChainPropertiesToDefaults
+  visibility: protected
+  parameters:
+  - name: job
+  comment: '# * Reset the chain properties to their default values on the job.
+
+    # *
+
+    # * @param  mixed  $job
+
+    # * @return mixed'
+- name: assertDispatchedWithoutChain
+  visibility: public
+  parameters:
+  - name: command
+  - name: callback
+    default: 'null'
+  comment: '# * Assert if a job was dispatched with an empty chain based on a truth-test
+    callback.
+
+    # *
+
+    # * @param  string|\Closure  $command
+
+    # * @param  callable|null  $callback
+
+    # * @return void'
+- name: assertDispatchedWithChainOfObjects
+  visibility: protected
+  parameters:
+  - name: command
+  - name: expectedChain
+  - name: callback
+  comment: '# * Assert if a job was dispatched with chained jobs based on a truth-test
+    callback.
+
+    # *
+
+    # * @param  string  $command
+
+    # * @param  array  $expectedChain
+
+    # * @param  callable|null  $callback
+
+    # * @return void'
+- name: chainedBatch
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Create a new assertion about a chained batch.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return \Illuminate\Support\Testing\Fakes\ChainedBatchTruthTest'
+- name: assertBatched
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Assert if a batch was dispatched based on a truth-test callback.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return void'
+- name: assertBatchCount
+  visibility: public
+  parameters:
+  - name: count
+  comment: '# * Assert the number of batches that have been dispatched.
+
+    # *
+
+    # * @param  int  $count
+
+    # * @return void'
+- name: assertNothingBatched
+  visibility: public
+  parameters: []
+  comment: '# * Assert that no batched jobs were dispatched.
+
+    # *
+
+    # * @return void'
+- name: dispatched
+  visibility: public
+  parameters:
+  - name: command
+  - name: callback
+    default: 'null'
+  comment: '# * Get all of the jobs matching a truth-test callback.
+
+    # *
+
+    # * @param  string  $command
+
+    # * @param  callable|null  $callback
+
+    # * @return \Illuminate\Support\Collection'
+- name: dispatchedSync
+  visibility: public
+  parameters:
+  - name: command
+  - name: callback
+    default: 'null'
+  comment: '# * Get all of the jobs dispatched synchronously matching a truth-test
+    callback.
+
+    # *
+
+    # * @param  string  $command
+
+    # * @param  callable|null  $callback
+
+    # * @return \Illuminate\Support\Collection'
+- name: dispatchedAfterResponse
+  visibility: public
+  parameters:
+  - name: command
+  - name: callback
+    default: 'null'
+  comment: '# * Get all of the jobs dispatched after the response was sent matching
+    a truth-test callback.
+
+    # *
+
+    # * @param  string  $command
+
+    # * @param  callable|null  $callback
+
+    # * @return \Illuminate\Support\Collection'
+- name: batched
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Get all of the pending batches matching a truth-test callback.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return \Illuminate\Support\Collection'
+- name: hasDispatched
+  visibility: public
+  parameters:
+  - name: command
+  comment: '# * Determine if there are any stored commands for a given class.
+
+    # *
+
+    # * @param  string  $command
+
+    # * @return bool'
+- name: hasDispatchedSync
+  visibility: public
+  parameters:
+  - name: command
+  comment: '# * Determine if there are any stored commands for a given class.
+
+    # *
+
+    # * @param  string  $command
+
+    # * @return bool'
+- name: hasDispatchedAfterResponse
+  visibility: public
+  parameters:
+  - name: command
+  comment: '# * Determine if there are any stored commands for a given class.
+
+    # *
+
+    # * @param  string  $command
+
+    # * @return bool'
+- name: dispatch
+  visibility: public
+  parameters:
+  - name: command
+  comment: '# * Dispatch a command to its appropriate handler.
+
+    # *
+
+    # * @param  mixed  $command
+
+    # * @return mixed'
+- name: dispatchSync
+  visibility: public
+  parameters:
+  - name: command
+  - name: handler
+    default: 'null'
+  comment: '# * Dispatch a command to its appropriate handler in the current process.
+
+    # *
+
+    # * Queueable jobs will be dispatched to the "sync" queue.
+
+    # *
+
+    # * @param  mixed  $command
+
+    # * @param  mixed  $handler
+
+    # * @return mixed'
+- name: dispatchNow
+  visibility: public
+  parameters:
+  - name: command
+  - name: handler
+    default: 'null'
+  comment: '# * Dispatch a command to its appropriate handler in the current process.
+
+    # *
+
+    # * @param  mixed  $command
+
+    # * @param  mixed  $handler
+
+    # * @return mixed'
+- name: dispatchToQueue
+  visibility: public
+  parameters:
+  - name: command
+  comment: '# * Dispatch a command to its appropriate handler behind a queue.
+
+    # *
+
+    # * @param  mixed  $command
+
+    # * @return mixed'
+- name: dispatchAfterResponse
+  visibility: public
+  parameters:
+  - name: command
+  comment: '# * Dispatch a command to its appropriate handler.
+
+    # *
+
+    # * @param  mixed  $command
+
+    # * @return mixed'
+- name: chain
+  visibility: public
+  parameters:
+  - name: jobs
+  comment: '# * Create a new chain of queueable jobs.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection|array  $jobs
+
+    # * @return \Illuminate\Foundation\Bus\PendingChain'
+- name: findBatch
+  visibility: public
+  parameters:
+  - name: batchId
+  comment: '# * Attempt to find the batch with the given ID.
+
+    # *
+
+    # * @param  string  $batchId
+
+    # * @return \Illuminate\Bus\Batch|null'
+- name: batch
+  visibility: public
+  parameters:
+  - name: jobs
+  comment: '# * Create a new batch of queueable jobs.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection|array  $jobs
+
+    # * @return \Illuminate\Bus\PendingBatch'
+- name: dispatchFakeBatch
+  visibility: public
+  parameters:
+  - name: name
+    default: ''''''
+  comment: '# * Dispatch an empty job batch for testing.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return \Illuminate\Bus\Batch'
+- name: recordPendingBatch
+  visibility: public
+  parameters:
+  - name: pendingBatch
+  comment: '# * Record the fake pending batch dispatch.
+
+    # *
+
+    # * @param  \Illuminate\Bus\PendingBatch  $pendingBatch
+
+    # * @return \Illuminate\Bus\Batch'
+- name: shouldFakeJob
+  visibility: protected
+  parameters:
+  - name: command
+  comment: '# * Determine if a command should be faked or actually dispatched.
+
+    # *
+
+    # * @param  mixed  $command
+
+    # * @return bool'
+- name: shouldDispatchCommand
+  visibility: protected
+  parameters:
+  - name: command
+  comment: '# * Determine if a command should be dispatched or not.
+
+    # *
+
+    # * @param  mixed  $command
+
+    # * @return bool'
+- name: serializeAndRestore
+  visibility: public
+  parameters:
+  - name: serializeAndRestore
+    default: 'true'
+  comment: '# * Specify if commands should be serialized and restored when being batched.
+
+    # *
+
+    # * @param  bool  $serializeAndRestore
+
+    # * @return $this'
+- name: serializeAndRestoreCommand
+  visibility: protected
+  parameters:
+  - name: command
+  comment: '# * Serialize and unserialize the command to simulate the queueing process.
+
+    # *
+
+    # * @param  mixed  $command
+
+    # * @return mixed'
+- name: getCommandRepresentation
+  visibility: protected
+  parameters:
+  - name: command
+  comment: '# * Return the command representation that should be stored.
+
+    # *
+
+    # * @param  mixed  $command
+
+    # * @return mixed'
+- name: pipeThrough
+  visibility: public
+  parameters:
+  - name: pipes
+  comment: '# * Set the pipes commands should be piped through before dispatching.
+
+    # *
+
+    # * @param  array  $pipes
+
+    # * @return $this'
+- name: hasCommandHandler
+  visibility: public
+  parameters:
+  - name: command
+  comment: '# * Determine if the given command has a handler.
+
+    # *
+
+    # * @param  mixed  $command
+
+    # * @return bool'
+- name: getCommandHandler
+  visibility: public
+  parameters:
+  - name: command
+  comment: '# * Retrieve the handler for a command.
+
+    # *
+
+    # * @param  mixed  $command
+
+    # * @return mixed'
+- name: map
+  visibility: public
+  parameters:
+  - name: map
+  comment: '# * Map a command to a handler.
+
+    # *
+
+    # * @param  array  $map
+
+    # * @return $this'
+traits:
+- Closure
+- Illuminate\Bus\BatchRepository
+- Illuminate\Bus\ChainedBatch
+- Illuminate\Bus\PendingBatch
+- Illuminate\Contracts\Bus\QueueingDispatcher
+- Illuminate\Support\Arr
+- Illuminate\Support\Collection
+- Illuminate\Support\Traits\ReflectsClosures
+- RuntimeException
+- ReflectsClosures
+interfaces:
+- Fake

@@ -1,0 +1,31 @@
+name: QueueableEntity
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getQueueableId
+  visibility: public
+  parameters: []
+  comment: '# * Get the queueable identity for the entity.
+
+    # *
+
+    # * @return mixed'
+- name: getQueueableRelations
+  visibility: public
+  parameters: []
+  comment: '# * Get the relationships for the entity.
+
+    # *
+
+    # * @return array'
+- name: getQueueableConnection
+  visibility: public
+  parameters: []
+  comment: '# * Get the connection of the entity.
+
+    # *
+
+    # * @return string|null'
+traits: []
+interfaces: []

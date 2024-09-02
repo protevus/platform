@@ -1,0 +1,28 @@
+name: TestClassSetValue
+class_comment: null
+dependencies: []
+properties:
+- name: value
+  visibility: protected
+  comment: null
+methods:
+- name: getValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: setValue
+  visibility: public
+  parameters:
+  - name: value
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: value
+  comment: null
+- name: setFoo
+  visibility: private
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

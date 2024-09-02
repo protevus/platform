@@ -1,0 +1,52 @@
+name: AliasTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Alias
+  type: class
+  source: Symfony\Component\DependencyInjection\Alias
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: testConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCanConstructANonPublicAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCanConstructAPrivateAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCanSetPublic
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCanDeprecateAnAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReturnsCorrectDeprecation
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCannotDeprecateWithAnInvalidTemplate
+  visibility: public
+  parameters:
+  - name: message
+  comment: '# * @dataProvider invalidDeprecationMessageProvider'
+- name: invalidDeprecationMessageProvider
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Alias
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+interfaces: []

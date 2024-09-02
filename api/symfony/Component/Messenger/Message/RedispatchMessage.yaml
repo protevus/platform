@@ -1,0 +1,27 @@
+name: RedispatchMessage
+class_comment: null
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: envelope
+  - name: transportNames
+    default: '[]'
+  comment: '# * @param object|Envelope $envelope       The message or the message
+    pre-wrapped in an envelope
+
+    # * @param string[]|string $transportNames Transport names to be used for the
+    message'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+interfaces:
+- \Stringable

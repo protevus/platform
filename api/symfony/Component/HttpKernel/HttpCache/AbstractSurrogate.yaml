@@ -1,0 +1,86 @@
+name: AbstractSurrogate
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: contentTypes
+    default: '[''text/html'''
+  - name: '''text/xml'''
+  - name: '''application/xhtml+xml'''
+  - name: '''application/xml'']'
+  comment: '# * Abstract class implementing Surrogate capabilities to Request and
+    Response instances.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # * @author Robin Chalas <robin.chalas@gmail.com>
+
+    # */
+
+    # abstract class AbstractSurrogate implements SurrogateInterface
+
+    # {
+
+    # /**
+
+    # * @param array $contentTypes An array of content-type that should be parsed
+    for Surrogate information
+
+    # *                            (default: text/html, text/xml, application/xhtml+xml,
+    and application/xml)'
+- name: createCacheStrategy
+  visibility: public
+  parameters: []
+  comment: '# * Returns a new cache strategy instance.'
+- name: hasSurrogateCapability
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+- name: addSurrogateCapability
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+- name: needsParsing
+  visibility: public
+  parameters:
+  - name: response
+  comment: null
+- name: handle
+  visibility: public
+  parameters:
+  - name: cache
+  - name: uri
+  - name: alt
+  - name: ignoreErrors
+  comment: null
+- name: removeFromControl
+  visibility: protected
+  parameters:
+  - name: response
+  comment: '# * Remove the Surrogate from the Surrogate-Control header.'
+- name: generateBodyEvalBoundary
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\HttpKernelInterface
+interfaces:
+- SurrogateInterface

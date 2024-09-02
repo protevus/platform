@@ -1,0 +1,78 @@
+name: ProblemNormalizerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: FlattenException
+  type: class
+  source: Symfony\Component\ErrorHandler\Exception\FlattenException
+- name: HttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\HttpException
+- name: MessageValidationFailedException
+  type: class
+  source: Symfony\Component\Messenger\Exception\ValidationFailedException
+- name: NotNormalizableValueException
+  type: class
+  source: Symfony\Component\Serializer\Exception\NotNormalizableValueException
+- name: PartialDenormalizationException
+  type: class
+  source: Symfony\Component\Serializer\Exception\PartialDenormalizationException
+- name: ConstraintViolationListNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ConstraintViolationListNormalizer
+- name: ProblemNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ProblemNormalizer
+- name: Serializer
+  type: class
+  source: Symfony\Component\Serializer\Serializer
+- name: ConstraintViolation
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolation
+- name: ConstraintViolationList
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolationList
+- name: ValidationFailedException
+  type: class
+  source: Symfony\Component\Validator\Exception\ValidationFailedException
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testSupportNormalization
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalizePartialDenormalizationException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalizeValidationFailedException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalizeMessageValidationFailedException
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\ErrorHandler\Exception\FlattenException
+- Symfony\Component\HttpKernel\Exception\HttpException
+- Symfony\Component\Serializer\Exception\NotNormalizableValueException
+- Symfony\Component\Serializer\Exception\PartialDenormalizationException
+- Symfony\Component\Serializer\Normalizer\ConstraintViolationListNormalizer
+- Symfony\Component\Serializer\Normalizer\ProblemNormalizer
+- Symfony\Component\Serializer\Serializer
+- Symfony\Component\Validator\ConstraintViolation
+- Symfony\Component\Validator\ConstraintViolationList
+- Symfony\Component\Validator\Exception\ValidationFailedException
+interfaces: []

@@ -1,0 +1,29 @@
+name: ContextDummyPromotedProperties
+class_comment: '# * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>'
+dependencies:
+- name: Context
+  type: class
+  source: Symfony\Component\Serializer\Attribute\Context
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: '#[Context([''foo'''
+    default: '> ''value'''
+  - name: '''bar'''
+    default: '> ''value'''
+  - name: '''nested'''
+    default: "> [\n            'nested_key'"
+  - name: ']'
+  - name: '''array'''
+    default: '> [''first'''
+  - name: '''second'']]'
+  comment: null
+- name: getMethodWithContext
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Serializer\Attribute\Context
+interfaces: []

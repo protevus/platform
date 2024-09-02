@@ -1,0 +1,119 @@
+name: GuardHelpers
+class_comment: null
+dependencies:
+- name: AuthenticatableContract
+  type: class
+  source: Illuminate\Contracts\Auth\Authenticatable
+- name: UserProvider
+  type: class
+  source: Illuminate\Contracts\Auth\UserProvider
+properties:
+- name: user
+  visibility: protected
+  comment: '# * These methods are typically the same across all guards.
+
+    # */
+
+    # trait GuardHelpers
+
+    # {
+
+    # /**
+
+    # * The currently authenticated user.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Auth\Authenticatable|null'
+- name: provider
+  visibility: protected
+  comment: '# * The user provider implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Auth\UserProvider'
+methods:
+- name: authenticate
+  visibility: public
+  parameters: []
+  comment: "# * These methods are typically the same across all guards.\n# */\n# trait\
+    \ GuardHelpers\n# {\n# /**\n# * The currently authenticated user.\n# *\n# * @var\
+    \ \\Illuminate\\Contracts\\Auth\\Authenticatable|null\n# */\n# protected $user;\n\
+    # \n# /**\n# * The user provider implementation.\n# *\n# * @var \\Illuminate\\\
+    Contracts\\Auth\\UserProvider\n# */\n# protected $provider;\n# \n# /**\n# * Determine\
+    \ if the current user is authenticated. If not, throw an exception.\n# *\n# *\
+    \ @return \\Illuminate\\Contracts\\Auth\\Authenticatable\n# *\n# * @throws \\\
+    Illuminate\\Auth\\AuthenticationException"
+- name: hasUser
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the guard has a user instance.
+
+    # *
+
+    # * @return bool'
+- name: check
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the current user is authenticated.
+
+    # *
+
+    # * @return bool'
+- name: guest
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the current user is a guest.
+
+    # *
+
+    # * @return bool'
+- name: id
+  visibility: public
+  parameters: []
+  comment: '# * Get the ID for the currently authenticated user.
+
+    # *
+
+    # * @return int|string|null'
+- name: setUser
+  visibility: public
+  parameters:
+  - name: user
+  comment: '# * Set the current user.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+
+    # * @return $this'
+- name: forgetUser
+  visibility: public
+  parameters: []
+  comment: '# * Forget the current user.
+
+    # *
+
+    # * @return $this'
+- name: getProvider
+  visibility: public
+  parameters: []
+  comment: '# * Get the user provider used by the guard.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Auth\UserProvider'
+- name: setProvider
+  visibility: public
+  parameters:
+  - name: provider
+  comment: '# * Set the user provider used by the guard.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Auth\UserProvider  $provider
+
+    # * @return void'
+traits:
+- Illuminate\Contracts\Auth\UserProvider
+interfaces: []

@@ -1,0 +1,41 @@
+name: ValueToDuplicatesTransformer
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @implements DataTransformerInterface<mixed, array>'
+dependencies:
+- name: DataTransformerInterface
+  type: class
+  source: Symfony\Component\Form\DataTransformerInterface
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+properties: []
+methods:
+- name: transform
+  visibility: public
+  parameters:
+  - name: value
+  comment: "# * @author Bernhard Schussek <bschussek@gmail.com>\n# *\n# * @implements\
+    \ DataTransformerInterface<mixed, array>\n# */\n# class ValueToDuplicatesTransformer\
+    \ implements DataTransformerInterface\n# {\n# public function __construct(\n#\
+    \ private array $keys,\n# ) {\n# }\n# \n# /**\n# * Duplicates the given value\
+    \ through the array."
+- name: reverseTransform
+  visibility: public
+  parameters:
+  - name: array
+  comment: '# * Extracts the duplicated value from an array.
+
+    # *
+
+    # * @throws TransformationFailedException if the given value is not an array or
+
+    # *                                       if the given array cannot be transformed'
+traits:
+- Symfony\Component\Form\DataTransformerInterface
+- Symfony\Component\Form\Exception\TransformationFailedException
+interfaces:
+- DataTransformerInterface
+- DataTransformerInterface

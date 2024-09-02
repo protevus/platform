@@ -1,0 +1,25 @@
+name: StubbedTranslator
+class_comment: '# * @author Iltar van der Berg <kjarli@gmail.com>'
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: addResource
+  visibility: public
+  parameters:
+  - name: format
+  - name: resource
+  - name: locale
+  - name: domain
+    default: 'null'
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+interfaces: []

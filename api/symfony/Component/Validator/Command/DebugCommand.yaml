@@ -1,0 +1,127 @@
+name: DebugCommand
+class_comment: null
+dependencies:
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: Dumper
+  type: class
+  source: Symfony\Component\Console\Helper\Dumper
+- name: Table
+  type: class
+  source: Symfony\Component\Console\Helper\Table
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+- name: DirectoryNotFoundException
+  type: class
+  source: Symfony\Component\Finder\Exception\DirectoryNotFoundException
+- name: Finder
+  type: class
+  source: Symfony\Component\Finder\Finder
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: AutoMappingStrategy
+  type: class
+  source: Symfony\Component\Validator\Mapping\AutoMappingStrategy
+- name: CascadingStrategy
+  type: class
+  source: Symfony\Component\Validator\Mapping\CascadingStrategy
+- name: ClassMetadataInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadataInterface
+- name: MetadataFactoryInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface
+- name: GenericMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\GenericMetadata
+- name: TraversalStrategy
+  type: class
+  source: Symfony\Component\Validator\Mapping\TraversalStrategy
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: validator
+  comment: null
+- name: configure
+  visibility: protected
+  parameters: []
+  comment: null
+- name: execute
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+- name: dumpValidatorsForClass
+  visibility: private
+  parameters:
+  - name: input
+  - name: output
+  - name: class
+  comment: null
+- name: getClassConstraintsData
+  visibility: private
+  parameters:
+  - name: classMetadata
+  comment: null
+- name: getConstrainedPropertiesData
+  visibility: private
+  parameters:
+  - name: classMetadata
+  comment: null
+- name: getPropertyData
+  visibility: private
+  parameters:
+  - name: classMetadata
+  - name: constrainedProperty
+  comment: null
+- name: getConstraintOptions
+  visibility: private
+  parameters:
+  - name: constraint
+  comment: null
+- name: getResourcesByPath
+  visibility: private
+  parameters:
+  - name: path
+  comment: null
+traits:
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Helper\Dumper
+- Symfony\Component\Console\Helper\Table
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Style\SymfonyStyle
+- Symfony\Component\Finder\Exception\DirectoryNotFoundException
+- Symfony\Component\Finder\Finder
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Mapping\AutoMappingStrategy
+- Symfony\Component\Validator\Mapping\CascadingStrategy
+- Symfony\Component\Validator\Mapping\ClassMetadataInterface
+- Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface
+- Symfony\Component\Validator\Mapping\GenericMetadata
+- Symfony\Component\Validator\Mapping\TraversalStrategy
+interfaces: []

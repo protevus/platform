@@ -1,0 +1,563 @@
+name: Definition
+class_comment: '# * Definition represents a service definition.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: BoundArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\BoundArgument
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: OutOfBoundsException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\OutOfBoundsException
+properties: []
+methods:
+- name: getChanges
+  visibility: public
+  parameters: []
+  comment: "# * Definition represents a service definition.\n# *\n# * @author Fabien\
+    \ Potencier <fabien@symfony.com>\n# */\n# class Definition\n# {\n# private const\
+    \ DEFAULT_DEPRECATION_TEMPLATE = 'The \"%service_id%\" service is deprecated.\
+    \ You should stop using it, as it will be removed in the future.';\n# \n# private\
+    \ ?string $class = null;\n# private ?string $file = null;\n# private string|array|null\
+    \ $factory = null;\n# private bool $shared = true;\n# private array $deprecation\
+    \ = [];\n# private array $properties = [];\n# private array $calls = [];\n# private\
+    \ array $instanceof = [];\n# private bool $autoconfigured = false;\n# private\
+    \ string|array|null $configurator = null;\n# private array $tags = [];\n# private\
+    \ bool $public = false;\n# private bool $synthetic = false;\n# private bool $abstract\
+    \ = false;\n# private bool $lazy = false;\n# private ?array $decoratedService\
+    \ = null;\n# private bool $autowired = false;\n# private array $changes = [];\n\
+    # private array $bindings = [];\n# private array $errors = [];\n# \n# protected\
+    \ array $arguments = [];\n# \n# /**\n# * @internal\n# *\n# * Used to store the\
+    \ name of the inner id when using service decoration together with autowiring\n\
+    # */\n# public ?string $innerServiceId = null;\n# \n# /**\n# * @internal\n# *\n\
+    # * Used to store the behavior to follow when using service decoration and the\
+    \ decorated service is invalid\n# */\n# public ?int $decorationOnInvalid = null;\n\
+    # \n# public function __construct(?string $class = null, array $arguments = [])\n\
+    # {\n# if (null !== $class) {\n# $this->setClass($class);\n# }\n# $this->arguments\
+    \ = $arguments;\n# }\n# \n# /**\n# * Returns all changes tracked for the Definition\
+    \ object."
+- name: setChanges
+  visibility: public
+  parameters:
+  - name: changes
+  comment: '# * Sets the tracked changes for the Definition object.
+
+    # *
+
+    # * @param array $changes An array of changes for this Definition
+
+    # *
+
+    # * @return $this'
+- name: setFactory
+  visibility: public
+  parameters:
+  - name: factory
+  comment: '# * Sets a factory.
+
+    # *
+
+    # * @param string|array|Reference|null $factory A PHP function, reference or an
+    array containing a class/Reference and a method to call
+
+    # *
+
+    # * @return $this'
+- name: getFactory
+  visibility: public
+  parameters: []
+  comment: '# * Gets the factory.
+
+    # *
+
+    # * @return string|array|null The PHP function or an array containing a class/Reference
+    and a method to call'
+- name: setDecoratedService
+  visibility: public
+  parameters:
+  - name: id
+  - name: renamedId
+    default: 'null'
+  - name: priority
+    default: '0'
+  - name: invalidBehavior
+    default: ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE
+  comment: '# * Sets the service that this service is decorating.
+
+    # *
+
+    # * @param string|null $id        The decorated service id, use null to remove
+    decoration
+
+    # * @param string|null $renamedId The new decorated service id
+
+    # *
+
+    # * @return $this
+
+    # *
+
+    # * @throws InvalidArgumentException in case the decorated service id and the
+    new decorated service id are equals'
+- name: getDecoratedService
+  visibility: public
+  parameters: []
+  comment: '# * Gets the service that this service is decorating.
+
+    # *
+
+    # * @return array|null An array composed of the decorated service id, the new
+    id for it and the priority of decoration, null if no service is decorated'
+- name: setClass
+  visibility: public
+  parameters:
+  - name: class
+  comment: '# * Sets the service class.
+
+    # *
+
+    # * @return $this'
+- name: getClass
+  visibility: public
+  parameters: []
+  comment: '# * Gets the service class.
+
+    # *
+
+    # * @return class-string|null'
+- name: setArguments
+  visibility: public
+  parameters:
+  - name: arguments
+  comment: '# * Sets the arguments to pass to the service constructor/factory method.
+
+    # *
+
+    # * @return $this'
+- name: setProperties
+  visibility: public
+  parameters:
+  - name: properties
+  comment: '# * Sets the properties to define when creating the service.
+
+    # *
+
+    # * @return $this'
+- name: getProperties
+  visibility: public
+  parameters: []
+  comment: '# * Gets the properties to define when creating the service.'
+- name: setProperty
+  visibility: public
+  parameters:
+  - name: name
+  - name: value
+  comment: '# * Sets a specific property.
+
+    # *
+
+    # * @return $this'
+- name: addArgument
+  visibility: public
+  parameters:
+  - name: argument
+  comment: '# * Adds an argument to pass to the service constructor/factory method.
+
+    # *
+
+    # * @return $this'
+- name: replaceArgument
+  visibility: public
+  parameters:
+  - name: index
+  - name: argument
+  comment: '# * Replaces a specific argument.
+
+    # *
+
+    # * @return $this
+
+    # *
+
+    # * @throws OutOfBoundsException When the replaced argument does not exist'
+- name: setArgument
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Sets a specific argument.
+
+    # *
+
+    # * @return $this'
+- name: getArguments
+  visibility: public
+  parameters: []
+  comment: '# * Gets the arguments to pass to the service constructor/factory method.'
+- name: getArgument
+  visibility: public
+  parameters:
+  - name: index
+  comment: '# * Gets an argument to pass to the service constructor/factory method.
+
+    # *
+
+    # * @throws OutOfBoundsException When the argument does not exist'
+- name: setMethodCalls
+  visibility: public
+  parameters:
+  - name: calls
+    default: '[]'
+  comment: '# * Sets the methods to call after service initialization.
+
+    # *
+
+    # * @return $this'
+- name: addMethodCall
+  visibility: public
+  parameters:
+  - name: method
+  - name: arguments
+    default: '[]'
+  - name: returnsClone
+    default: 'false'
+  comment: '# * Adds a method to call after service initialization.
+
+    # *
+
+    # * @param string $method       The method name to call
+
+    # * @param array  $arguments    An array of arguments to pass to the method call
+
+    # * @param bool   $returnsClone Whether the call returns the service instance
+    or not
+
+    # *
+
+    # * @return $this
+
+    # *
+
+    # * @throws InvalidArgumentException on empty $method param'
+- name: removeMethodCall
+  visibility: public
+  parameters:
+  - name: method
+  comment: '# * Removes a method to call after service initialization.
+
+    # *
+
+    # * @return $this'
+- name: hasMethodCall
+  visibility: public
+  parameters:
+  - name: method
+  comment: '# * Check if the current definition has a given method to call after service
+    initialization.'
+- name: getMethodCalls
+  visibility: public
+  parameters: []
+  comment: '# * Gets the methods to call after service initialization.'
+- name: setInstanceofConditionals
+  visibility: public
+  parameters:
+  - name: instanceof
+  comment: '# * Sets the definition templates to conditionally apply on the current
+    definition, keyed by parent interface/class.
+
+    # *
+
+    # * @param ChildDefinition[] $instanceof
+
+    # *
+
+    # * @return $this'
+- name: getInstanceofConditionals
+  visibility: public
+  parameters: []
+  comment: '# * Gets the definition templates to conditionally apply on the current
+    definition, keyed by parent interface/class.
+
+    # *
+
+    # * @return ChildDefinition[]'
+- name: setAutoconfigured
+  visibility: public
+  parameters:
+  - name: autoconfigured
+  comment: '# * Sets whether or not instanceof conditionals should be prepended with
+    a global set.
+
+    # *
+
+    # * @return $this'
+- name: isAutoconfigured
+  visibility: public
+  parameters: []
+  comment: null
+- name: setTags
+  visibility: public
+  parameters:
+  - name: tags
+  comment: '# * Sets tags for this definition.
+
+    # *
+
+    # * @return $this'
+- name: getTags
+  visibility: public
+  parameters: []
+  comment: '# * Returns all tags.'
+- name: getTag
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Gets a tag by name.'
+- name: addTag
+  visibility: public
+  parameters:
+  - name: name
+  - name: attributes
+    default: '[]'
+  comment: '# * Adds a tag for this definition.
+
+    # *
+
+    # * @return $this'
+- name: hasTag
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Whether this definition has a tag with the given name.'
+- name: clearTag
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Clears all tags for a given name.
+
+    # *
+
+    # * @return $this'
+- name: clearTags
+  visibility: public
+  parameters: []
+  comment: '# * Clears the tags for this definition.
+
+    # *
+
+    # * @return $this'
+- name: setFile
+  visibility: public
+  parameters:
+  - name: file
+  comment: '# * Sets a file to require before creating the service.
+
+    # *
+
+    # * @return $this'
+- name: getFile
+  visibility: public
+  parameters: []
+  comment: '# * Gets the file to require before creating the service.'
+- name: setShared
+  visibility: public
+  parameters:
+  - name: shared
+  comment: '# * Sets if the service must be shared or not.
+
+    # *
+
+    # * @return $this'
+- name: isShared
+  visibility: public
+  parameters: []
+  comment: '# * Whether this service is shared.'
+- name: setPublic
+  visibility: public
+  parameters:
+  - name: boolean
+  comment: '# * Sets the visibility of this service.
+
+    # *
+
+    # * @return $this'
+- name: isPublic
+  visibility: public
+  parameters: []
+  comment: '# * Whether this service is public facing.'
+- name: isPrivate
+  visibility: public
+  parameters: []
+  comment: '# * Whether this service is private.'
+- name: setLazy
+  visibility: public
+  parameters:
+  - name: lazy
+  comment: '# * Sets the lazy flag of this service.
+
+    # *
+
+    # * @return $this'
+- name: isLazy
+  visibility: public
+  parameters: []
+  comment: '# * Whether this service is lazy.'
+- name: setSynthetic
+  visibility: public
+  parameters:
+  - name: boolean
+  comment: '# * Sets whether this definition is synthetic, that is not constructed
+    by the
+
+    # * container, but dynamically injected.
+
+    # *
+
+    # * @return $this'
+- name: isSynthetic
+  visibility: public
+  parameters: []
+  comment: '# * Whether this definition is synthetic, that is not constructed by the
+
+    # * container, but dynamically injected.'
+- name: setAbstract
+  visibility: public
+  parameters:
+  - name: boolean
+  comment: '# * Whether this definition is abstract, that means it merely serves as
+    a
+
+    # * template for other definitions.
+
+    # *
+
+    # * @return $this'
+- name: isAbstract
+  visibility: public
+  parameters: []
+  comment: '# * Whether this definition is abstract, that means it merely serves as
+    a
+
+    # * template for other definitions.'
+- name: setDeprecated
+  visibility: public
+  parameters:
+  - name: package
+  - name: version
+  - name: message
+  comment: '# * Whether this definition is deprecated, that means it should not be
+    called
+
+    # * anymore.
+
+    # *
+
+    # * @param string $package The name of the composer package that is triggering
+    the deprecation
+
+    # * @param string $version The version of the package that introduced the deprecation
+
+    # * @param string $message The deprecation message to use
+
+    # *
+
+    # * @return $this
+
+    # *
+
+    # * @throws InvalidArgumentException when the message template is invalid'
+- name: isDeprecated
+  visibility: public
+  parameters: []
+  comment: '# * Whether this definition is deprecated, that means it should not be
+    called
+
+    # * anymore.'
+- name: getDeprecation
+  visibility: public
+  parameters:
+  - name: id
+  comment: '# * @param string $id Service id relying on this definition'
+- name: setConfigurator
+  visibility: public
+  parameters:
+  - name: configurator
+  comment: '# * Sets a configurator to call after the service is fully initialized.
+
+    # *
+
+    # * @param string|array|Reference|null $configurator A PHP function, reference
+    or an array containing a class/Reference and a method to call
+
+    # *
+
+    # * @return $this'
+- name: getConfigurator
+  visibility: public
+  parameters: []
+  comment: '# * Gets the configurator to call after the service is fully initialized.'
+- name: isAutowired
+  visibility: public
+  parameters: []
+  comment: '# * Is the definition autowired?'
+- name: setAutowired
+  visibility: public
+  parameters:
+  - name: autowired
+  comment: '# * Enables/disables autowiring.
+
+    # *
+
+    # * @return $this'
+- name: getBindings
+  visibility: public
+  parameters: []
+  comment: '# * Gets bindings.
+
+    # *
+
+    # * @return BoundArgument[]'
+- name: setBindings
+  visibility: public
+  parameters:
+  - name: bindings
+  comment: '# * Sets bindings.
+
+    # *
+
+    # * Bindings map $named or FQCN arguments to values that should be
+
+    # * injected in the matching parameters (of the constructor, of methods
+
+    # * called and of controller actions).
+
+    # *
+
+    # * @return $this'
+- name: addError
+  visibility: public
+  parameters:
+  - name: error
+  comment: '# * Add an error that occurred when building this Definition.
+
+    # *
+
+    # * @return $this'
+- name: getErrors
+  visibility: public
+  parameters: []
+  comment: '# * Returns any errors that occurred while building this Definition.'
+- name: hasErrors
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Argument\BoundArgument
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Exception\OutOfBoundsException
+interfaces: []

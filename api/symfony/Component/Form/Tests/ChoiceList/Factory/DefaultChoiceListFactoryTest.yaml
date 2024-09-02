@@ -1,0 +1,386 @@
+name: DefaultChoiceListFactoryTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ArrayChoiceList
+  type: class
+  source: Symfony\Component\Form\ChoiceList\ArrayChoiceList
+- name: ChoiceListInterface
+  type: class
+  source: Symfony\Component\Form\ChoiceList\ChoiceListInterface
+- name: DefaultChoiceListFactory
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\DefaultChoiceListFactory
+- name: LazyChoiceList
+  type: class
+  source: Symfony\Component\Form\ChoiceList\LazyChoiceList
+- name: FilterChoiceLoaderDecorator
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Loader\FilterChoiceLoaderDecorator
+- name: ChoiceGroupView
+  type: class
+  source: Symfony\Component\Form\ChoiceList\View\ChoiceGroupView
+- name: ChoiceListView
+  type: class
+  source: Symfony\Component\Form\ChoiceList\View\ChoiceListView
+- name: ChoiceView
+  type: class
+  source: Symfony\Component\Form\ChoiceList\View\ChoiceView
+- name: ArrayChoiceLoader
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\ArrayChoiceLoader
+- name: TranslatableMessage
+  type: class
+  source: Symfony\Component\Translation\TranslatableMessage
+- name: TranslatableInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatableInterface
+- name: TranslatorInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatorInterface
+properties: []
+methods:
+- name: getValue
+  visibility: public
+  parameters:
+  - name: object
+  comment: null
+- name: getScalarValue
+  visibility: public
+  parameters:
+  - name: choice
+  comment: null
+- name: getLabel
+  visibility: public
+  parameters:
+  - name: object
+  comment: null
+- name: getFormIndex
+  visibility: public
+  parameters:
+  - name: object
+  comment: null
+- name: isPreferred
+  visibility: public
+  parameters:
+  - name: object
+  comment: null
+- name: getAttr
+  visibility: public
+  parameters:
+  - name: object
+  comment: null
+- name: getLabelTranslationParameters
+  visibility: public
+  parameters:
+  - name: object
+  comment: null
+- name: getGroup
+  visibility: public
+  parameters:
+  - name: object
+  comment: null
+- name: getGroupArray
+  visibility: public
+  parameters:
+  - name: object
+  comment: null
+- name: getGroupAsObject
+  visibility: public
+  parameters:
+  - name: object
+  comment: null
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesFlat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesFlatTraversable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesFlatValuesAsCallable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesFlatValuesAsClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesGrouped
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesGroupedTraversable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesGroupedValuesAsCallable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesGroupedValuesAsClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromFilteredChoices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesGroupedAndFiltered
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromChoicesGroupedAndFilteredTraversable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromLoader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromLoaderWithValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromLoaderWithFilter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatPreferredChoices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatPreferredChoicesSameOrder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatPreferredChoiceGroupsSameOrder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatPreferredChoicesEmptyArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatPreferredChoicesAsCallable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatPreferredChoicesAsClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatPreferredChoicesClosureReceivesKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatPreferredChoicesClosureReceivesValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatLabelAsCallable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatLabelAsClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatLabelClosureReceivesKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatLabelClosureReceivesValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatIndexAsCallable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatIndexAsClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatIndexClosureReceivesKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatIndexClosureReceivesValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatGroupByOriginalStructure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatGroupByEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatGroupByAsCallable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatGroupByAsCallableReturnsArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatGroupByObjectThatCanBeCastToString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatGroupByAsClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatGroupByClosureReceivesKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatGroupByClosureReceivesValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatAttrAsArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatAttrEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatAttrAsCallable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatAttrAsClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatAttrClosureReceivesKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatAttrClosureReceivesValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassTranslatableMessageAsLabelDoesntCastItToString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassTranslatableInterfaceAsLabelDoesntCastItToString
+  visibility: public
+  parameters: []
+  comment: null
+- name: trans
+  visibility: public
+  parameters:
+  - name: translator
+  - name: locale
+    default: 'null'
+  comment: null
+- name: testCreateViewFlatLabelTranslationParametersAsArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatlabelTranslationParametersEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatlabelTranslationParametersAsCallable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatlabelTranslationParametersAsClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatlabelTranslationParametersClosureReceivesKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewFlatlabelTranslationParametersClosureReceivesValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: assertObjectListWithGeneratedValues
+  visibility: private
+  parameters:
+  - name: list
+  comment: null
+- name: assertObjectListWithCustomValues
+  visibility: private
+  parameters:
+  - name: list
+  comment: null
+- name: assertFlatView
+  visibility: private
+  parameters:
+  - name: view
+  comment: null
+- name: assertFlatViewWithCustomIndices
+  visibility: private
+  parameters:
+  - name: view
+  comment: null
+- name: assertFlatViewWithAttr
+  visibility: private
+  parameters:
+  - name: view
+  comment: null
+- name: assertFlatViewWithlabelTranslationParameters
+  visibility: private
+  parameters:
+  - name: view
+  comment: null
+- name: assertGroupedView
+  visibility: private
+  parameters:
+  - name: view
+  comment: null
+- name: assertGroupedViewWithChoiceDuplication
+  visibility: private
+  parameters:
+  - name: view
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: property
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\ChoiceList\ArrayChoiceList
+- Symfony\Component\Form\ChoiceList\ChoiceListInterface
+- Symfony\Component\Form\ChoiceList\Factory\DefaultChoiceListFactory
+- Symfony\Component\Form\ChoiceList\LazyChoiceList
+- Symfony\Component\Form\ChoiceList\Loader\FilterChoiceLoaderDecorator
+- Symfony\Component\Form\ChoiceList\View\ChoiceGroupView
+- Symfony\Component\Form\ChoiceList\View\ChoiceListView
+- Symfony\Component\Form\ChoiceList\View\ChoiceView
+- Symfony\Component\Form\Tests\Fixtures\ArrayChoiceLoader
+- Symfony\Component\Translation\TranslatableMessage
+- Symfony\Contracts\Translation\TranslatableInterface
+- Symfony\Contracts\Translation\TranslatorInterface
+interfaces:
+- TranslatableInterface

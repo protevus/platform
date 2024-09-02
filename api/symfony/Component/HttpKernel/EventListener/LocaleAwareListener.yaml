@@ -1,0 +1,76 @@
+name: LocaleAwareListener
+class_comment: '# * Pass the current locale to the provided services.
+
+  # *
+
+  # * @author Pierre Bobiet <pierrebobiet@gmail.com>'
+dependencies:
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+- name: FinishRequestEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\FinishRequestEvent
+- name: RequestEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\RequestEvent
+- name: KernelEvents
+  type: class
+  source: Symfony\Component\HttpKernel\KernelEvents
+- name: LocaleAwareInterface
+  type: class
+  source: Symfony\Contracts\Translation\LocaleAwareInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: localeAwareServices
+  - name: requestStack
+  comment: '# * Pass the current locale to the provided services.
+
+    # *
+
+    # * @author Pierre Bobiet <pierrebobiet@gmail.com>
+
+    # */
+
+    # class LocaleAwareListener implements EventSubscriberInterface
+
+    # {
+
+    # /**
+
+    # * @param iterable<mixed, LocaleAwareInterface> $localeAwareServices'
+- name: onKernelRequest
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: onKernelFinishRequest
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: setLocale
+  visibility: private
+  parameters:
+  - name: locale
+  - name: defaultLocale
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\HttpFoundation\RequestStack
+- Symfony\Component\HttpKernel\Event\FinishRequestEvent
+- Symfony\Component\HttpKernel\Event\RequestEvent
+- Symfony\Component\HttpKernel\KernelEvents
+- Symfony\Contracts\Translation\LocaleAwareInterface
+interfaces:
+- EventSubscriberInterface

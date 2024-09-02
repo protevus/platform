@@ -1,0 +1,35 @@
+name: ValidationMiddleware
+class_comment: '# * @author Tobias Nyholm <tobias.nyholm@gmail.com>'
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: ValidationFailedException
+  type: class
+  source: Symfony\Component\Messenger\Exception\ValidationFailedException
+- name: ValidationStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\ValidationStamp
+- name: ValidatorInterface
+  type: class
+  source: Symfony\Component\Validator\Validator\ValidatorInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: validator
+  comment: null
+- name: handle
+  visibility: public
+  parameters:
+  - name: envelope
+  - name: stack
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Exception\ValidationFailedException
+- Symfony\Component\Messenger\Stamp\ValidationStamp
+- Symfony\Component\Validator\Validator\ValidatorInterface
+interfaces:
+- MiddlewareInterface

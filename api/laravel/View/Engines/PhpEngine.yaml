@@ -1,0 +1,82 @@
+name: PhpEngine
+class_comment: null
+dependencies:
+- name: Engine
+  type: class
+  source: Illuminate\Contracts\View\Engine
+- name: Filesystem
+  type: class
+  source: Illuminate\Filesystem\Filesystem
+- name: Throwable
+  type: class
+  source: Throwable
+properties:
+- name: files
+  visibility: protected
+  comment: '# * The filesystem instance.
+
+    # *
+
+    # * @var \Illuminate\Filesystem\Filesystem'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: files
+  comment: "# * The filesystem instance.\n# *\n# * @var \\Illuminate\\Filesystem\\\
+    Filesystem\n# */\n# protected $files;\n# \n# /**\n# * Create a new file engine\
+    \ instance.\n# *\n# * @param  \\Illuminate\\Filesystem\\Filesystem  $files\n#\
+    \ * @return void"
+- name: get
+  visibility: public
+  parameters:
+  - name: path
+  - name: data
+    default: '[]'
+  comment: '# * Get the evaluated contents of the view.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  array  $data
+
+    # * @return string'
+- name: evaluatePath
+  visibility: protected
+  parameters:
+  - name: path
+  - name: data
+  comment: '# * Get the evaluated contents of the view at the given path.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  array  $data
+
+    # * @return string'
+- name: handleViewException
+  visibility: protected
+  parameters:
+  - name: e
+  - name: obLevel
+  comment: '# * Handle a view exception.
+
+    # *
+
+    # * @param  \Throwable  $e
+
+    # * @param  int  $obLevel
+
+    # * @return void
+
+    # *
+
+    # * @throws \Throwable'
+traits:
+- Illuminate\Contracts\View\Engine
+- Illuminate\Filesystem\Filesystem
+- Throwable
+interfaces:
+- Engine

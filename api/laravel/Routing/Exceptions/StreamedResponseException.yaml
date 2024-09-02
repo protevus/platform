@@ -1,0 +1,49 @@
+name: StreamedResponseException
+class_comment: null
+dependencies:
+- name: Response
+  type: class
+  source: Illuminate\Http\Response
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: Throwable
+  type: class
+  source: Throwable
+properties:
+- name: originalException
+  visibility: public
+  comment: '# * The actual exception thrown during the stream.
+
+    # *
+
+    # * @var \Throwable'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: originalException
+  comment: "# * The actual exception thrown during the stream.\n# *\n# * @var \\Throwable\n\
+    # */\n# public $originalException;\n# \n# /**\n# * Create a new exception instance.\n\
+    # *\n# * @param  \\Throwable  $originalException\n# * @return void"
+- name: render
+  visibility: public
+  parameters: []
+  comment: '# * Render the exception.
+
+    # *
+
+    # * @return \Illuminate\Http\Response'
+- name: getInnerException
+  visibility: public
+  parameters: []
+  comment: '# * Get the actual exception thrown during the stream.
+
+    # *
+
+    # * @return \Throwable'
+traits:
+- Illuminate\Http\Response
+- RuntimeException
+- Throwable
+interfaces: []

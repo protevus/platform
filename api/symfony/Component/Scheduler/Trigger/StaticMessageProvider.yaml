@@ -1,0 +1,34 @@
+name: StaticMessageProvider
+class_comment: null
+dependencies:
+- name: MessageContext
+  type: class
+  source: Symfony\Component\Scheduler\Generator\MessageContext
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: messages
+  - name: id
+    default: ''''''
+  - name: description
+    default: ''''''
+  comment: '# * @param array<object> $messages'
+- name: getMessages
+  visibility: public
+  parameters:
+  - name: context
+  comment: null
+- name: getId
+  visibility: public
+  parameters: []
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Scheduler\Generator\MessageContext
+interfaces:
+- MessageProviderInterface

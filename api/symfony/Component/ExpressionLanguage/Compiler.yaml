@@ -1,0 +1,70 @@
+name: Compiler
+class_comment: '# * Compiles a node to PHP code.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: ResetInterface
+  type: class
+  source: Symfony\Contracts\Service\ResetInterface
+properties: []
+methods:
+- name: getSource
+  visibility: public
+  parameters: []
+  comment: "# * Compiles a node to PHP code.\n# *\n# * @author Fabien Potencier <fabien@symfony.com>\n\
+    # */\n# class Compiler implements ResetInterface\n# {\n# private string $source\
+    \ = '';\n# \n# public function __construct(\n# private array $functions,\n# )\
+    \ {\n# }\n# \n# public function getFunction(string $name): array\n# {\n# return\
+    \ $this->functions[$name];\n# }\n# \n# /**\n# * Gets the current PHP code after\
+    \ compilation."
+- name: reset
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: compile
+  visibility: public
+  parameters:
+  - name: node
+  comment: '# * Compiles a node.
+
+    # *
+
+    # * @return $this'
+- name: subcompile
+  visibility: public
+  parameters:
+  - name: node
+  comment: null
+- name: raw
+  visibility: public
+  parameters:
+  - name: string
+  comment: '# * Adds a raw string to the compiled code.
+
+    # *
+
+    # * @return $this'
+- name: string
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Adds a quoted string to the compiled code.
+
+    # *
+
+    # * @return $this'
+- name: repr
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Returns a PHP representation of a given value.
+
+    # *
+
+    # * @return $this'
+traits:
+- Symfony\Contracts\Service\ResetInterface
+interfaces:
+- ResetInterface

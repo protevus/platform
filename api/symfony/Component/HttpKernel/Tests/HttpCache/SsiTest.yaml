@@ -1,0 +1,89 @@
+name: SsiTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: HttpCache
+  type: class
+  source: Symfony\Component\HttpKernel\HttpCache\HttpCache
+- name: Ssi
+  type: class
+  source: Symfony\Component\HttpKernel\HttpCache\Ssi
+properties: []
+methods:
+- name: testHasSurrogateSsiCapability
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddSurrogateSsiCapability
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddSurrogateControl
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNeedsSsiParsing
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderIncludeTag
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessDoesNothingIfContentTypeIsNotHtml
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessEscapesPhpTags
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWhenNoSrcInAnSsi
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessRemoveSurrogateControlHeader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHandle
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHandleWhenResponseIsNot200
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHandleWhenResponseIsNot200AndErrorsAreIgnored
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHandleWhenResponseIsNot200AndAltIsPresent
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCache
+  visibility: protected
+  parameters:
+  - name: request
+  - name: response
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\HttpCache\HttpCache
+- Symfony\Component\HttpKernel\HttpCache\Ssi
+interfaces: []

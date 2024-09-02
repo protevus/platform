@@ -1,0 +1,74 @@
+name: SesHttpAsyncAwsTransport
+class_comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>"
+dependencies:
+- name: HttpException
+  type: class
+  source: AsyncAws\Core\Exception\Http\HttpException
+- name: SendEmailRequest
+  type: class
+  source: AsyncAws\Ses\Input\SendEmailRequest
+- name: SesClient
+  type: class
+  source: AsyncAws\Ses\SesClient
+- name: Destination
+  type: class
+  source: AsyncAws\Ses\ValueObject\Destination
+- name: EventDispatcherInterface
+  type: class
+  source: Psr\EventDispatcher\EventDispatcherInterface
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: HttpTransportException
+  type: class
+  source: Symfony\Component\Mailer\Exception\HttpTransportException
+- name: MetadataHeader
+  type: class
+  source: Symfony\Component\Mailer\Header\MetadataHeader
+- name: SentMessage
+  type: class
+  source: Symfony\Component\Mailer\SentMessage
+- name: AbstractTransport
+  type: class
+  source: Symfony\Component\Mailer\Transport\AbstractTransport
+- name: Message
+  type: class
+  source: Symfony\Component\Mime\Message
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: sesClient
+  - name: dispatcher
+    default: 'null'
+  - name: logger
+    default: 'null'
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: doSend
+  visibility: protected
+  parameters:
+  - name: message
+  comment: null
+- name: getRequest
+  visibility: protected
+  parameters:
+  - name: message
+  comment: null
+traits:
+- AsyncAws\Core\Exception\Http\HttpException
+- AsyncAws\Ses\Input\SendEmailRequest
+- AsyncAws\Ses\SesClient
+- AsyncAws\Ses\ValueObject\Destination
+- Psr\EventDispatcher\EventDispatcherInterface
+- Psr\Log\LoggerInterface
+- Symfony\Component\Mailer\Exception\HttpTransportException
+- Symfony\Component\Mailer\Header\MetadataHeader
+- Symfony\Component\Mailer\SentMessage
+- Symfony\Component\Mailer\Transport\AbstractTransport
+- Symfony\Component\Mime\Message
+interfaces: []

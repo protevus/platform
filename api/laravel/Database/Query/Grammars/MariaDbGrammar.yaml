@@ -1,0 +1,59 @@
+name: MariaDbGrammar
+class_comment: null
+dependencies:
+- name: Builder
+  type: class
+  source: Illuminate\Database\Query\Builder
+- name: JoinLateralClause
+  type: class
+  source: Illuminate\Database\Query\JoinLateralClause
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+properties: []
+methods:
+- name: compileJoinLateral
+  visibility: public
+  parameters:
+  - name: join
+  - name: expression
+  comment: '# * Compile a "lateral join" clause.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\JoinLateralClause  $join
+
+    # * @param  string  $expression
+
+    # * @return string
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: compileJsonValueCast
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Compile a "JSON value cast" statement into SQL.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: useLegacyGroupLimit
+  visibility: public
+  parameters:
+  - name: query
+  comment: '# * Determine whether to use a legacy group limit clause for MySQL < 8.0.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @return bool'
+traits:
+- Illuminate\Database\Query\Builder
+- Illuminate\Database\Query\JoinLateralClause
+- RuntimeException
+interfaces: []

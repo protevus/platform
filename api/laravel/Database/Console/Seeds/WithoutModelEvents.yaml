@@ -1,0 +1,22 @@
+name: WithoutModelEvents
+class_comment: null
+dependencies:
+- name: Model
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+properties: []
+methods:
+- name: withoutModelEvents
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Prevent model events from being dispatched by the given callback.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return callable'
+traits:
+- Illuminate\Database\Eloquent\Model
+interfaces: []

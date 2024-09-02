@@ -1,0 +1,35 @@
+name: LocalPublicAssetsFilesystemTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: LocalPublicAssetsFilesystem
+  type: class
+  source: Symfony\Component\AssetMapper\Path\LocalPublicAssetsFilesystem
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testWrite
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCopy
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\AssetMapper\Path\LocalPublicAssetsFilesystem
+- Symfony\Component\Filesystem\Filesystem
+interfaces: []

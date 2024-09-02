@@ -1,0 +1,69 @@
+name: Encrypter
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: encrypt
+  visibility: public
+  parameters:
+  - name: value
+  - name: serialize
+    default: 'true'
+  comment: '# * Encrypt the given value.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @param  bool  $serialize
+
+    # * @return string
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Encryption\EncryptException'
+- name: decrypt
+  visibility: public
+  parameters:
+  - name: payload
+  - name: unserialize
+    default: 'true'
+  comment: '# * Decrypt the given value.
+
+    # *
+
+    # * @param  string  $payload
+
+    # * @param  bool  $unserialize
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Encryption\DecryptException'
+- name: getKey
+  visibility: public
+  parameters: []
+  comment: '# * Get the encryption key that the encrypter is currently using.
+
+    # *
+
+    # * @return string'
+- name: getAllKeys
+  visibility: public
+  parameters: []
+  comment: '# * Get the current encryption key and all previous encryption keys.
+
+    # *
+
+    # * @return array'
+- name: getPreviousKeys
+  visibility: public
+  parameters: []
+  comment: '# * Get the previous encryption keys.
+
+    # *
+
+    # * @return array'
+traits: []
+interfaces: []

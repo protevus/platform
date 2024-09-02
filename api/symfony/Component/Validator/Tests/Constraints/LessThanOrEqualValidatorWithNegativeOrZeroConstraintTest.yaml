@@ -1,0 +1,86 @@
+name: LessThanOrEqualValidatorWithNegativeOrZeroConstraintTest
+class_comment: "# * @author Jan Sch\xE4dlich <jan.schaedlich@sensiolabs.de>"
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: NegativeOrZero
+  type: class
+  source: Symfony\Component\Validator\Constraints\NegativeOrZero
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+properties: []
+methods:
+- name: testThrowsConstraintExceptionIfNoValueOrPropertyPath
+  visibility: public
+  parameters:
+  - name: options
+  comment: "# * @author Jan Sch\xE4dlich <jan.schaedlich@sensiolabs.de>\n# */\n# class\
+    \ LessThanOrEqualValidatorWithNegativeOrZeroConstraintTest extends LessThanOrEqualValidatorTest\n\
+    # {\n# protected static function createConstraint(?array $options = null): Constraint\n\
+    # {\n# return new NegativeOrZero($options);\n# }\n# \n# public static function\
+    \ provideValidComparisons(): array\n# {\n# return [\n# [0, 0],\n# [-1, 0],\n#\
+    \ [-2, 0],\n# [-2.5, 0],\n# [null, 0],\n# ];\n# }\n# \n# public static function\
+    \ provideInvalidComparisons(): array\n# {\n# return [\n# [2, '2', 0, '0', 'int'],\n\
+    # [2.5, '2.5', 0, '0', 'int'],\n# [333, '333', 0, '0', 'int'],\n# ];\n# }\n# \n\
+    # public function testThrowsConstraintExceptionIfPropertyPath()\n# {\n# $this->expectException(ConstraintDefinitionException::class);\n\
+    # $this->expectExceptionMessage('The \"propertyPath\" option of the \"Symfony\\\
+    Component\\Validator\\Constraints\\NegativeOrZero\" constraint cannot be set.');\n\
+    # \n# return new NegativeOrZero(['propertyPath' => 'field']);\n# }\n# \n# public\
+    \ function testThrowsConstraintExceptionIfValue()\n# {\n# $this->expectException(ConstraintDefinitionException::class);\n\
+    # $this->expectExceptionMessage('The \"value\" option of the \"Symfony\\Component\\\
+    Validator\\Constraints\\NegativeOrZero\" constraint cannot be set.');\n# \n# return\
+    \ new NegativeOrZero(['value' => 0]);\n# }\n# \n# /**\n# * @dataProvider provideInvalidConstraintOptions"
+- name: testThrowsConstraintExceptionIfBothValueAndPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoViolationOnNullObjectWithPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidValuePath
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideAllValidComparisons
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidComparisonToPropertyPath
+  visibility: public
+  parameters:
+  - name: comparedValue
+  comment: '# * @dataProvider provideValidComparisonsToPropertyPath'
+- name: testInvalidComparisonToPropertyPathAddsPathAsParameter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompareWithNullValueAtPropertyAt
+  visibility: public
+  parameters:
+  - name: dirtyValue
+  - name: dirtyValueAsString
+  - name: isValid
+  comment: '# * @dataProvider provideComparisonsToNullValueAtPropertyPath'
+- name: testCompareWithUninitializedPropertyAtPropertyPath
+  visibility: public
+  parameters:
+  - name: dirtyValue
+  - name: dirtyValueAsString
+  - name: isValid
+  comment: '# * @dataProvider provideComparisonsToNullValueAtPropertyPath'
+- name: throwsOnInvalidStringDatesProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideAllInvalidComparisons
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Constraints\NegativeOrZero
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+interfaces: []

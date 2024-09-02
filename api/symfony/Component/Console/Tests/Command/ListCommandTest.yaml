@@ -1,0 +1,57 @@
+name: ListCommandTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+- name: CommandCompletionTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandCompletionTester
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+properties: []
+methods:
+- name: testExecuteListsCommands
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExecuteListsCommandsWithXmlOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExecuteListsCommandsWithRawOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExecuteListsCommandsWithNamespaceArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExecuteListsCommandsOrder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExecuteListsCommandsOrderRaw
+  visibility: public
+  parameters: []
+  comment: null
+- name: testComplete
+  visibility: public
+  parameters:
+  - name: input
+  - name: expectedSuggestions
+  comment: '# * @dataProvider provideCompletionSuggestions'
+- name: provideCompletionSuggestions
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Application
+- Symfony\Component\Console\Tester\CommandCompletionTester
+- Symfony\Component\Console\Tester\CommandTester
+interfaces: []

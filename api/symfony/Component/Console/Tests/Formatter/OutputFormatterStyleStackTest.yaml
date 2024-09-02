@@ -1,0 +1,39 @@
+name: OutputFormatterStyleStackTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: OutputFormatterStyle
+  type: class
+  source: Symfony\Component\Console\Formatter\OutputFormatterStyle
+- name: OutputFormatterStyleStack
+  type: class
+  source: Symfony\Component\Console\Formatter\OutputFormatterStyleStack
+properties: []
+methods:
+- name: testPush
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPop
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPopEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPopNotLast
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidPop
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Formatter\OutputFormatterStyle
+- Symfony\Component\Console\Formatter\OutputFormatterStyleStack
+interfaces: []

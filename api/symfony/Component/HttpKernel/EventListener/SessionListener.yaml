@@ -1,0 +1,37 @@
+name: SessionListener
+class_comment: '# * Sets the session in the request.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: SessionInterface
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\SessionInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+    default: 'null'
+  - name: debug
+    default: 'false'
+  - name: sessionOptions
+    default: '[]'
+  comment: null
+- name: getSession
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Component\HttpFoundation\Session\SessionInterface
+interfaces: []

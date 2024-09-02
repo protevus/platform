@@ -1,0 +1,259 @@
+name: MailChannel
+class_comment: null
+dependencies:
+- name: ConfigRepository
+  type: class
+  source: Illuminate\Config\Repository
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: MailFactory
+  type: class
+  source: Illuminate\Contracts\Mail\Factory
+- name: Mailable
+  type: class
+  source: Illuminate\Contracts\Mail\Mailable
+- name: ShouldQueue
+  type: class
+  source: Illuminate\Contracts\Queue\ShouldQueue
+- name: Markdown
+  type: class
+  source: Illuminate\Mail\Markdown
+- name: Notification
+  type: class
+  source: Illuminate\Notifications\Notification
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: MetadataHeader
+  type: class
+  source: Symfony\Component\Mailer\Header\MetadataHeader
+- name: TagHeader
+  type: class
+  source: Symfony\Component\Mailer\Header\TagHeader
+properties:
+- name: mailer
+  visibility: protected
+  comment: '# * The mailer implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Mail\Factory'
+- name: markdown
+  visibility: protected
+  comment: '# * The markdown implementation.
+
+    # *
+
+    # * @var \Illuminate\Mail\Markdown'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: mailer
+  - name: markdown
+  comment: "# * The mailer implementation.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Mail\\Factory\n# */\n# protected $mailer;\n# \n# /**\n# * The markdown implementation.\n\
+    # *\n# * @var \\Illuminate\\Mail\\Markdown\n# */\n# protected $markdown;\n# \n\
+    # /**\n# * Create a new mail channel instance.\n# *\n# * @param  \\Illuminate\\\
+    Contracts\\Mail\\Factory  $mailer\n# * @param  \\Illuminate\\Mail\\Markdown  $markdown\n\
+    # * @return void"
+- name: send
+  visibility: public
+  parameters:
+  - name: notifiable
+  - name: notification
+  comment: '# * Send the given notification.
+
+    # *
+
+    # * @param  mixed  $notifiable
+
+    # * @param  \Illuminate\Notifications\Notification  $notification
+
+    # * @return \Illuminate\Mail\SentMessage|null'
+- name: messageBuilder
+  visibility: protected
+  parameters:
+  - name: notifiable
+  - name: notification
+  - name: message
+  comment: '# * Get the mailer Closure for the message.
+
+    # *
+
+    # * @param  mixed  $notifiable
+
+    # * @param  \Illuminate\Notifications\Notification  $notification
+
+    # * @param  \Illuminate\Notifications\Messages\MailMessage  $message
+
+    # * @return \Closure'
+- name: buildView
+  visibility: protected
+  parameters:
+  - name: message
+  comment: '# * Build the notification''s view.
+
+    # *
+
+    # * @param  \Illuminate\Notifications\Messages\MailMessage  $message
+
+    # * @return string|array'
+- name: buildMarkdownHtml
+  visibility: protected
+  parameters:
+  - name: message
+  comment: '# * Build the HTML view for a Markdown message.
+
+    # *
+
+    # * @param  \Illuminate\Notifications\Messages\MailMessage  $message
+
+    # * @return \Closure'
+- name: buildMarkdownText
+  visibility: protected
+  parameters:
+  - name: message
+  comment: '# * Build the text view for a Markdown message.
+
+    # *
+
+    # * @param  \Illuminate\Notifications\Messages\MailMessage  $message
+
+    # * @return \Closure'
+- name: markdownRenderer
+  visibility: protected
+  parameters:
+  - name: message
+  comment: '# * Get the Markdown implementation.
+
+    # *
+
+    # * @param  \Illuminate\Notifications\Messages\MailMessage  $message
+
+    # * @return \Illuminate\Mail\Markdown'
+- name: additionalMessageData
+  visibility: protected
+  parameters:
+  - name: notification
+  comment: '# * Get additional meta-data to pass along with the view data.
+
+    # *
+
+    # * @param  \Illuminate\Notifications\Notification  $notification
+
+    # * @return array'
+- name: buildMessage
+  visibility: protected
+  parameters:
+  - name: mailMessage
+  - name: notifiable
+  - name: notification
+  - name: message
+  comment: '# * Build the mail message.
+
+    # *
+
+    # * @param  \Illuminate\Mail\Message  $mailMessage
+
+    # * @param  mixed  $notifiable
+
+    # * @param  \Illuminate\Notifications\Notification  $notification
+
+    # * @param  \Illuminate\Notifications\Messages\MailMessage  $message
+
+    # * @return void'
+- name: addressMessage
+  visibility: protected
+  parameters:
+  - name: mailMessage
+  - name: notifiable
+  - name: notification
+  - name: message
+  comment: '# * Address the mail message.
+
+    # *
+
+    # * @param  \Illuminate\Mail\Message  $mailMessage
+
+    # * @param  mixed  $notifiable
+
+    # * @param  \Illuminate\Notifications\Notification  $notification
+
+    # * @param  \Illuminate\Notifications\Messages\MailMessage  $message
+
+    # * @return void'
+- name: addSender
+  visibility: protected
+  parameters:
+  - name: mailMessage
+  - name: message
+  comment: '# * Add the "from" and "reply to" addresses to the message.
+
+    # *
+
+    # * @param  \Illuminate\Mail\Message  $mailMessage
+
+    # * @param  \Illuminate\Notifications\Messages\MailMessage  $message
+
+    # * @return void'
+- name: getRecipients
+  visibility: protected
+  parameters:
+  - name: notifiable
+  - name: notification
+  - name: message
+  comment: '# * Get the recipients of the given message.
+
+    # *
+
+    # * @param  mixed  $notifiable
+
+    # * @param  \Illuminate\Notifications\Notification  $notification
+
+    # * @param  \Illuminate\Notifications\Messages\MailMessage  $message
+
+    # * @return mixed'
+- name: addAttachments
+  visibility: protected
+  parameters:
+  - name: mailMessage
+  - name: message
+  comment: '# * Add the attachments to the message.
+
+    # *
+
+    # * @param  \Illuminate\Mail\Message  $mailMessage
+
+    # * @param  \Illuminate\Notifications\Messages\MailMessage  $message
+
+    # * @return void'
+- name: runCallbacks
+  visibility: protected
+  parameters:
+  - name: mailMessage
+  - name: message
+  comment: '# * Run the callbacks for the message.
+
+    # *
+
+    # * @param  \Illuminate\Mail\Message  $mailMessage
+
+    # * @param  \Illuminate\Notifications\Messages\MailMessage  $message
+
+    # * @return $this'
+traits:
+- Illuminate\Container\Container
+- Illuminate\Contracts\Mail\Mailable
+- Illuminate\Contracts\Queue\ShouldQueue
+- Illuminate\Mail\Markdown
+- Illuminate\Notifications\Notification
+- Illuminate\Support\Arr
+- Illuminate\Support\Str
+- Symfony\Component\Mailer\Header\MetadataHeader
+- Symfony\Component\Mailer\Header\TagHeader
+interfaces: []

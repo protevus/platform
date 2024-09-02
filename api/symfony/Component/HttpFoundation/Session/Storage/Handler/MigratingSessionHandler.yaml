@@ -1,0 +1,69 @@
+name: MigratingSessionHandler
+class_comment: '# * Migrating session handler for migrating from one handler to another.
+  It reads
+
+  # * from the current handler and writes both the current and new ones.
+
+  # *
+
+  # * It ignores errors from the new handler.
+
+  # *
+
+  # * @author Ross Motley <ross.motley@amara.com>
+
+  # * @author Oliver Radwell <oliver.radwell@amara.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: currentHandler
+  - name: writeOnlyHandler
+  comment: null
+- name: close
+  visibility: public
+  parameters: []
+  comment: null
+- name: destroy
+  visibility: public
+  parameters:
+  - name: sessionId
+  comment: null
+- name: gc
+  visibility: public
+  parameters:
+  - name: maxlifetime
+  comment: null
+- name: open
+  visibility: public
+  parameters:
+  - name: savePath
+  - name: sessionName
+  comment: null
+- name: read
+  visibility: public
+  parameters:
+  - name: sessionId
+  comment: null
+- name: write
+  visibility: public
+  parameters:
+  - name: sessionId
+  - name: sessionData
+  comment: null
+- name: validateId
+  visibility: public
+  parameters:
+  - name: sessionId
+  comment: null
+- name: updateTimestamp
+  visibility: public
+  parameters:
+  - name: sessionId
+  - name: sessionData
+  comment: null
+traits: []
+interfaces:
+- \SessionHandlerInterface

@@ -1,0 +1,14 @@
+name: Php80WithPromotedTypedConstructor
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: bool
+  - name: string
+  - name: int
+  comment: null
+traits: []
+interfaces: []

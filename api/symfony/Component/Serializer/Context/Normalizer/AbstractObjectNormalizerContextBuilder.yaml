@@ -1,0 +1,127 @@
+name: AbstractObjectNormalizerContextBuilder
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Serializer\Exception\InvalidArgumentException
+- name: AbstractObjectNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer
+properties: []
+methods:
+- name: withEnableMaxDepth
+  visibility: public
+  parameters:
+  - name: enableMaxDepth
+  comment: '# * A helper providing autocompletion for available AbstractObjectNormalizer
+    options.
+
+    # *
+
+    # * @author Mathias Arlaud <mathias.arlaud@gmail.com>
+
+    # */
+
+    # abstract class AbstractObjectNormalizerContextBuilder extends AbstractNormalizerContextBuilder
+
+    # {
+
+    # /**
+
+    # * Configures whether to respect the max depth metadata on fields.'
+- name: withDepthKeyPattern
+  visibility: public
+  parameters:
+  - name: depthKeyPattern
+  comment: '# * Configures a pattern to keep track of the current depth.
+
+    # *
+
+    # * Must contain exactly two string placeholders.
+
+    # *
+
+    # * @throws InvalidArgumentException'
+- name: withDisableTypeEnforcement
+  visibility: public
+  parameters:
+  - name: disableTypeEnforcement
+  comment: '# * Configures whether verifying types match during denormalization.'
+- name: withSkipNullValues
+  visibility: public
+  parameters:
+  - name: skipNullValues
+  comment: '# * Configures whether fields with the value `null` should be output during
+    normalization.'
+- name: withSkipUninitializedValues
+  visibility: public
+  parameters:
+  - name: skipUninitializedValues
+  comment: '# * Configures whether uninitialized typed class properties should be
+    excluded during normalization.'
+- name: withMaxDepthHandler
+  visibility: public
+  parameters:
+  - name: maxDepthHandler
+  comment: '# * Configures a callback to allow to set a value for an attribute when
+    the max depth has
+
+    # * been reached.
+
+    # *
+
+    # * If no callback is given, the attribute is skipped. If a callable is
+
+    # * given, its return value is used (even if null).
+
+    # *
+
+    # * The arguments are:
+
+    # *
+
+    # * - mixed                 $attributeValue value of this field
+
+    # * - object                $object         the whole object being normalized
+
+    # * - string                $attributeName  name of the attribute being normalized
+
+    # * - string                $format         the requested format
+
+    # * - array<string, mixed>  $context        the serialization context'
+- name: withExcludeFromCacheKeys
+  visibility: public
+  parameters:
+  - name: excludeFromCacheKeys
+  comment: '# * Configures which context key are not relevant to determine which attributes
+
+    # * of an object to (de)normalize.
+
+    # *
+
+    # * @param list<string>|null $excludeFromCacheKeys'
+- name: withDeepObjectToPopulate
+  visibility: public
+  parameters:
+  - name: deepObjectToPopulate
+  comment: '# * Configures whether to tell the denormalizer to also populate existing
+    objects on
+
+    # * attributes of the main object.
+
+    # *
+
+    # * Setting this to true is only useful if you also specify the root object
+
+    # * in AbstractNormalizer::OBJECT_TO_POPULATE.'
+- name: withPreserveEmptyObjects
+  visibility: public
+  parameters:
+  - name: preserveEmptyObjects
+  comment: '# * Configures whether an empty object should be kept as an object (in
+
+    # * JSON: {}) or converted to a list (in JSON: []).'
+traits:
+- Symfony\Component\Serializer\Exception\InvalidArgumentException
+- Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer
+interfaces: []

@@ -1,0 +1,68 @@
+name: FormDataPart
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Mime\Exception\InvalidArgumentException
+- name: AbstractMultipartPart
+  type: class
+  source: Symfony\Component\Mime\Part\AbstractMultipartPart
+- name: DataPart
+  type: class
+  source: Symfony\Component\Mime\Part\DataPart
+- name: TextPart
+  type: class
+  source: Symfony\Component\Mime\Part\TextPart
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: fields
+    default: '[]'
+  comment: '# * Implements RFC 7578.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # final class FormDataPart extends AbstractMultipartPart
+
+    # {
+
+    # /**
+
+    # * @param array<string|array|DataPart> $fields'
+- name: getMediaSubtype
+  visibility: public
+  parameters: []
+  comment: null
+- name: getParts
+  visibility: public
+  parameters: []
+  comment: null
+- name: prepareFields
+  visibility: private
+  parameters:
+  - name: fields
+  comment: null
+- name: preparePart
+  visibility: private
+  parameters:
+  - name: name
+  - name: value
+  comment: null
+- name: configurePart
+  visibility: private
+  parameters:
+  - name: name
+  - name: part
+  comment: null
+traits:
+- Symfony\Component\Mime\Exception\InvalidArgumentException
+- Symfony\Component\Mime\Part\AbstractMultipartPart
+- Symfony\Component\Mime\Part\DataPart
+- Symfony\Component\Mime\Part\TextPart
+interfaces: []

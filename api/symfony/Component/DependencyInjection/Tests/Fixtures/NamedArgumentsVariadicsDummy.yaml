@@ -1,0 +1,13 @@
+name: NamedArgumentsVariadicsDummy
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: class
+  - name: '...$variadics'
+  comment: null
+traits: []
+interfaces: []

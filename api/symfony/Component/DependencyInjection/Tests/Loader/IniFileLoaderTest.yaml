@@ -1,0 +1,76 @@
+name: IniFileLoaderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: FileLocator
+  type: class
+  source: Symfony\Component\Config\FileLocator
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: IniFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\IniFileLoader
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testIniFileCanBeLoaded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTypeConversions
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  - name: supported
+  comment: '# * @dataProvider getTypeConversions'
+- name: testTypeConversionsWithNativePhp
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  - name: supported
+  comment: '# * @dataProvider getTypeConversions
+
+    # * This test illustrates where our conversions differs from INI_SCANNER_TYPED
+    introduced in PHP 5.6.1'
+- name: getTypeConversions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExceptionIsRaisedWhenIniFileDoesNotExist
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExceptionIsRaisedWhenIniFileCannotBeParsed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExceptionIsRaisedWhenIniFileIsAlmostValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupports
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWhenEnv
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Config\FileLocator
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Loader\IniFileLoader
+interfaces: []

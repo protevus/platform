@@ -1,0 +1,91 @@
+name: Exporter
+class_comment: '# * @author Nicolas Grekas <p@tchwork.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: NotInstantiableTypeException
+  type: class
+  source: Symfony\Component\VarExporter\Exception\NotInstantiableTypeException
+properties: []
+methods:
+- name: prepare
+  visibility: public
+  parameters:
+  - name: values
+  - name: objectsPool
+  - name: '&$refsPool'
+  - name: '&$objectsCount'
+  - name: '&$valuesAreStatic'
+  comment: '# * @author Nicolas Grekas <p@tchwork.com>
+
+    # *
+
+    # * @internal
+
+    # */
+
+    # class Exporter
+
+    # {
+
+    # /**
+
+    # * Prepares an array of values for VarExporter.
+
+    # *
+
+    # * For performance this method is public and has no type-hints.
+
+    # *
+
+    # * @param array             &$values
+
+    # * @param \SplObjectStorage $objectsPool
+
+    # * @param array             &$refsPool
+
+    # * @param int               &$objectsCount
+
+    # * @param bool              &$valuesAreStatic
+
+    # *
+
+    # * @return array
+
+    # *
+
+    # * @throws NotInstantiableTypeException When a value cannot be serialized'
+- name: export
+  visibility: public
+  parameters:
+  - name: value
+  - name: indent
+    default: ''''''
+  comment: null
+- name: exportRegistry
+  visibility: private
+  parameters:
+  - name: value
+  - name: indent
+  - name: subIndent
+  comment: null
+- name: exportHydrator
+  visibility: private
+  parameters:
+  - name: value
+  - name: indent
+  - name: subIndent
+  comment: null
+- name: getArrayObjectProperties
+  visibility: private
+  parameters:
+  - name: value
+  - name: proto
+  comment: '# * @param \ArrayIterator|\ArrayObject $value
+
+    # * @param \ArrayIterator|\ArrayObject $proto'
+traits:
+- Symfony\Component\VarExporter\Exception\NotInstantiableTypeException
+interfaces: []

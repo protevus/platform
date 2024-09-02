@@ -1,0 +1,16 @@
+name: ConsumerInterface
+class_comment: null
+dependencies:
+- name: RemoteEvent
+  type: class
+  source: Symfony\Component\RemoteEvent\RemoteEvent
+properties: []
+methods:
+- name: consume
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+traits:
+- Symfony\Component\RemoteEvent\RemoteEvent
+interfaces: []

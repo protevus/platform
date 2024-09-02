@@ -1,0 +1,27 @@
+name: PassConfigTest
+class_comment: '# * @author Guilhem N <egetick@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CompilerPassInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- name: PassConfig
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\PassConfig
+properties: []
+methods:
+- name: testPassOrdering
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassOrderingWithoutPasses
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- Symfony\Component\DependencyInjection\Compiler\PassConfig
+interfaces: []

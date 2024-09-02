@@ -1,0 +1,54 @@
+name: EmailValidator
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: EguliasEmailValidator
+  type: class
+  source: Egulias\EmailValidator\EmailValidator
+- name: EmailValidation
+  type: class
+  source: Egulias\EmailValidator\Validation\EmailValidation
+- name: NoRFCWarningsValidation
+  type: class
+  source: Egulias\EmailValidator\Validation\NoRFCWarningsValidation
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: ConstraintValidator
+  type: class
+  source: Symfony\Component\Validator\ConstraintValidator
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Validator\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\Validator\Exception\LogicException
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedTypeException
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: defaultMode
+    default: Email::VALIDATION_MODE_HTML5
+  comment: null
+- name: validate
+  visibility: public
+  parameters:
+  - name: value
+  - name: constraint
+  comment: null
+traits:
+- Egulias\EmailValidator\Validation\EmailValidation
+- Egulias\EmailValidator\Validation\NoRFCWarningsValidation
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\ConstraintValidator
+- Symfony\Component\Validator\Exception\InvalidArgumentException
+- Symfony\Component\Validator\Exception\LogicException
+- Symfony\Component\Validator\Exception\UnexpectedTypeException
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+interfaces: []

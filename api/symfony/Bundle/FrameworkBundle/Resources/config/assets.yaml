@@ -1,0 +1,39 @@
+name: assets
+class_comment: null
+dependencies:
+- name: RequestStackContext
+  type: class
+  source: Symfony\Component\Asset\Context\RequestStackContext
+- name: Package
+  type: class
+  source: Symfony\Component\Asset\Package
+- name: Packages
+  type: class
+  source: Symfony\Component\Asset\Packages
+- name: PathPackage
+  type: class
+  source: Symfony\Component\Asset\PathPackage
+- name: UrlPackage
+  type: class
+  source: Symfony\Component\Asset\UrlPackage
+- name: EmptyVersionStrategy
+  type: class
+  source: Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy
+- name: JsonManifestVersionStrategy
+  type: class
+  source: Symfony\Component\Asset\VersionStrategy\JsonManifestVersionStrategy
+- name: StaticVersionStrategy
+  type: class
+  source: Symfony\Component\Asset\VersionStrategy\StaticVersionStrategy
+properties: []
+methods: []
+traits:
+- Symfony\Component\Asset\Context\RequestStackContext
+- Symfony\Component\Asset\Package
+- Symfony\Component\Asset\Packages
+- Symfony\Component\Asset\PathPackage
+- Symfony\Component\Asset\UrlPackage
+- Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy
+- Symfony\Component\Asset\VersionStrategy\JsonManifestVersionStrategy
+- Symfony\Component\Asset\VersionStrategy\StaticVersionStrategy
+interfaces: []

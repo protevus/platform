@@ -1,0 +1,39 @@
+name: WebProfilerExtensionTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: WebProfilerExtension
+  type: class
+  source: Symfony\Bundle\WebProfilerBundle\Twig\WebProfilerExtension
+- name: VarCloner
+  type: class
+  source: Symfony\Component\VarDumper\Cloner\VarCloner
+- name: Environment
+  type: class
+  source: Twig\Environment
+- name: ArrayLoader
+  type: class
+  source: Twig\Loader\ArrayLoader
+properties: []
+methods:
+- name: testDumpHeaderIsDisplayed
+  visibility: public
+  parameters:
+  - name: message
+  - name: context
+  - name: dump1HasHeader
+  - name: dump2HasHeader
+  comment: '# * @dataProvider provideMessages'
+- name: provideMessages
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\WebProfilerBundle\Twig\WebProfilerExtension
+- Symfony\Component\VarDumper\Cloner\VarCloner
+- Twig\Environment
+- Twig\Loader\ArrayLoader
+interfaces: []

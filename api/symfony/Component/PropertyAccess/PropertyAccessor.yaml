@@ -1,0 +1,265 @@
+name: PropertyAccessor
+class_comment: "# * Default implementation of {@link PropertyAccessorInterface}.\n\
+  # *\n# * @author Bernhard Schussek <bschussek@gmail.com>\n# * @author K\xE9vin Dunglas\
+  \ <dunglas@gmail.com>\n# * @author Nicolas Grekas <p@tchwork.com>"
+dependencies:
+- name: CacheItemPoolInterface
+  type: class
+  source: Psr\Cache\CacheItemPoolInterface
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: NullLogger
+  type: class
+  source: Psr\Log\NullLogger
+- name: AdapterInterface
+  type: class
+  source: Symfony\Component\Cache\Adapter\AdapterInterface
+- name: ApcuAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\ApcuAdapter
+- name: NullAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\NullAdapter
+- name: AccessException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\AccessException
+- name: InvalidTypeException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\InvalidTypeException
+- name: NoSuchIndexException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\NoSuchIndexException
+- name: NoSuchPropertyException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\UnexpectedTypeException
+- name: UninitializedPropertyException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\UninitializedPropertyException
+- name: ReflectionExtractor
+  type: class
+  source: Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor
+- name: PropertyReadInfo
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyReadInfo
+- name: PropertyReadInfoExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyReadInfoExtractorInterface
+- name: PropertyWriteInfo
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyWriteInfo
+- name: PropertyWriteInfoExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyWriteInfoExtractorInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: magicMethodsFlags
+    default: self::MAGIC_GET | self::MAGIC_SET
+  - name: throw
+    default: self::THROW_ON_INVALID_PROPERTY_PATH
+  - name: cacheItemPool
+    default: 'null'
+  - name: readInfoExtractor
+    default: 'null'
+  - name: writeInfoExtractor
+    default: 'null'
+  comment: "# * Default implementation of {@link PropertyAccessorInterface}.\n# *\n\
+    # * @author Bernhard Schussek <bschussek@gmail.com>\n# * @author K\xE9vin Dunglas\
+    \ <dunglas@gmail.com>\n# * @author Nicolas Grekas <p@tchwork.com>\n# */\n# class\
+    \ PropertyAccessor implements PropertyAccessorInterface\n# {\n# /** @var int Allow\
+    \ none of the magic methods */\n# public const DISALLOW_MAGIC_METHODS = ReflectionExtractor::DISALLOW_MAGIC_METHODS;\n\
+    # /** @var int Allow magic __get methods */\n# public const MAGIC_GET = ReflectionExtractor::ALLOW_MAGIC_GET;\n\
+    # /** @var int Allow magic __set methods */\n# public const MAGIC_SET = ReflectionExtractor::ALLOW_MAGIC_SET;\n\
+    # /** @var int Allow magic __call methods */\n# public const MAGIC_CALL = ReflectionExtractor::ALLOW_MAGIC_CALL;\n\
+    # \n# public const DO_NOT_THROW = 0;\n# public const THROW_ON_INVALID_INDEX =\
+    \ 1;\n# public const THROW_ON_INVALID_PROPERTY_PATH = 2;\n# \n# private const\
+    \ VALUE = 0;\n# private const REF = 1;\n# private const IS_REF_CHAINED = 2;\n\
+    # private const CACHE_PREFIX_READ = 'r';\n# private const CACHE_PREFIX_WRITE =\
+    \ 'w';\n# private const CACHE_PREFIX_PROPERTY_PATH = 'p';\n# private const RESULT_PROTO\
+    \ = [self::VALUE => null];\n# \n# private bool $ignoreInvalidIndices;\n# private\
+    \ bool $ignoreInvalidProperty;\n# private ?CacheItemPoolInterface $cacheItemPool;\n\
+    # private array $propertyPathCache = [];\n# private PropertyReadInfoExtractorInterface\
+    \ $readInfoExtractor;\n# private PropertyWriteInfoExtractorInterface $writeInfoExtractor;\n\
+    # private array $readPropertyCache = [];\n# private array $writePropertyCache\
+    \ = [];\n# \n# /**\n# * Should not be used by application code. Use\n# * {@link\
+    \ PropertyAccess::createPropertyAccessor()} instead.\n# *\n# * @param int $magicMethods\
+    \ A bitwise combination of the MAGIC_* constants\n# *                        \
+    \  to specify the allowed magic methods (__get, __set, __call)\n# *          \
+    \                or self::DISALLOW_MAGIC_METHODS for none\n# * @param int $throw\
+    \        A bitwise combination of the THROW_* constants\n# *                 \
+    \         to specify when exceptions should be thrown"
+- name: getValue
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: propertyPath
+  comment: null
+- name: setValue
+  visibility: public
+  parameters:
+  - name: '&$objectOrArray'
+  - name: propertyPath
+  - name: value
+  comment: null
+- name: throwInvalidArgumentException
+  visibility: private
+  parameters:
+  - name: message
+  - name: trace
+  - name: i
+  - name: propertyPath
+  - name: previous
+    default: 'null'
+  comment: null
+- name: isReadable
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: propertyPath
+  comment: null
+- name: isWritable
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: propertyPath
+  comment: null
+- name: readPropertiesUntil
+  visibility: private
+  parameters:
+  - name: zval
+  - name: propertyPath
+  - name: lastIndex
+  - name: ignoreInvalidIndices
+    default: 'true'
+  comment: '# * Reads the path from an object up to a given path index.
+
+    # *
+
+    # * @throws UnexpectedTypeException if a value within the path is neither object
+    nor array
+
+    # * @throws NoSuchIndexException    If a non-existing index is accessed'
+- name: readIndex
+  visibility: private
+  parameters:
+  - name: zval
+  - name: index
+  comment: '# * Reads a key from an array-like structure.
+
+    # *
+
+    # * @throws NoSuchIndexException If the array does not implement \ArrayAccess
+    or it is not an array'
+- name: readProperty
+  visibility: private
+  parameters:
+  - name: zval
+  - name: property
+  - name: ignoreInvalidProperty
+    default: 'false'
+  - name: isNullSafe
+    default: 'false'
+  comment: '# * Reads the value of a property from an object.
+
+    # *
+
+    # * @throws NoSuchPropertyException If $ignoreInvalidProperty is false and the
+    property does not exist or is not public'
+- name: getReadInfo
+  visibility: private
+  parameters:
+  - name: class
+  - name: property
+  comment: '# * Guesses how to read the property value.'
+- name: writeIndex
+  visibility: private
+  parameters:
+  - name: zval
+  - name: index
+  - name: value
+  comment: '# * Sets the value of an index in a given array-accessible value.
+
+    # *
+
+    # * @throws NoSuchIndexException If the array does not implement \ArrayAccess
+    or it is not an array'
+- name: writeProperty
+  visibility: private
+  parameters:
+  - name: zval
+  - name: property
+  - name: value
+  - name: recursive
+    default: 'false'
+  comment: '# * Sets the value of a property in the given object.
+
+    # *
+
+    # * @throws NoSuchPropertyException if the property does not exist or is not public'
+- name: writeCollection
+  visibility: private
+  parameters:
+  - name: zval
+  - name: property
+  - name: collection
+  - name: addMethod
+  - name: removeMethod
+  comment: '# * Adjusts a collection-valued property by calling add*() and remove*()
+    methods.'
+- name: getWriteInfo
+  visibility: private
+  parameters:
+  - name: class
+  - name: property
+  - name: value
+  comment: null
+- name: isPropertyWritable
+  visibility: private
+  parameters:
+  - name: object
+  - name: property
+  comment: '# * Returns whether a property is writable in the given object.'
+- name: getPropertyPath
+  visibility: private
+  parameters:
+  - name: propertyPath
+  comment: '# * Gets a PropertyPath instance and caches it.'
+- name: createCache
+  visibility: public
+  parameters:
+  - name: namespace
+  - name: defaultLifetime
+  - name: version
+  - name: logger
+    default: 'null'
+  comment: '# * Creates the APCu adapter if applicable.
+
+    # *
+
+    # * @throws \LogicException When the Cache Component isn''t available'
+traits:
+- Psr\Cache\CacheItemPoolInterface
+- Psr\Log\LoggerInterface
+- Psr\Log\NullLogger
+- Symfony\Component\Cache\Adapter\AdapterInterface
+- Symfony\Component\Cache\Adapter\ApcuAdapter
+- Symfony\Component\Cache\Adapter\NullAdapter
+- Symfony\Component\PropertyAccess\Exception\AccessException
+- Symfony\Component\PropertyAccess\Exception\InvalidTypeException
+- Symfony\Component\PropertyAccess\Exception\NoSuchIndexException
+- Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException
+- Symfony\Component\PropertyAccess\Exception\UnexpectedTypeException
+- Symfony\Component\PropertyAccess\Exception\UninitializedPropertyException
+- Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor
+- Symfony\Component\PropertyInfo\PropertyReadInfo
+- Symfony\Component\PropertyInfo\PropertyReadInfoExtractorInterface
+- Symfony\Component\PropertyInfo\PropertyWriteInfo
+- Symfony\Component\PropertyInfo\PropertyWriteInfoExtractorInterface
+interfaces:
+- PropertyAccessorInterface

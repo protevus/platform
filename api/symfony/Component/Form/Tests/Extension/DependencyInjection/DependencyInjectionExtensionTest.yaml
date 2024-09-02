@@ -1,0 +1,59 @@
+name: DependencyInjectionExtensionTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: AbstractTypeExtension
+  type: class
+  source: Symfony\Component\Form\AbstractTypeExtension
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Form\Exception\InvalidArgumentException
+- name: DependencyInjectionExtension
+  type: class
+  source: Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension
+- name: FormTypeGuesserChain
+  type: class
+  source: Symfony\Component\Form\FormTypeGuesserChain
+properties: []
+methods:
+- name: testGetTypeExtensions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowExceptionForInvalidExtendedType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetTypeGuesser
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetTypeGuesserReturnsNullWhenNoTypeGuessersHaveBeenConfigured
+  visibility: public
+  parameters: []
+  comment: null
+- name: getExtendedTypes
+  visibility: public
+  parameters: []
+  comment: null
+- name: getExtendedTypes
+  visibility: public
+  parameters: []
+  comment: null
+- name: getExtendedTypes
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\Form\AbstractTypeExtension
+- Symfony\Component\Form\Exception\InvalidArgumentException
+- Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension
+- Symfony\Component\Form\FormTypeGuesserChain
+interfaces: []

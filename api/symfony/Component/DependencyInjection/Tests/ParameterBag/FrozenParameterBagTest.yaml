@@ -1,0 +1,55 @@
+name: FrozenParameterBagTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ExpectUserDeprecationMessageTrait
+  type: class
+  source: Symfony\Bridge\PhpUnit\ExpectUserDeprecationMessageTrait
+- name: FrozenParameterBag
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag
+- name: ExpectUserDeprecationMessageTrait
+  type: class
+  source: ExpectUserDeprecationMessageTrait
+properties: []
+methods:
+- name: testConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClear
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAdd
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemove
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDeprecate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetDeprecated
+  visibility: public
+  parameters: []
+  comment: '# * The test should be kept in the group as it always expects a deprecation.
+
+    # *
+
+    # * @group legacy'
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bridge\PhpUnit\ExpectUserDeprecationMessageTrait
+- Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag
+- ExpectUserDeprecationMessageTrait
+interfaces: []

@@ -1,0 +1,123 @@
+name: PriorityTaggedServiceTrait
+class_comment: "# * Trait that allows a generic method to find and sort service by\
+  \ priority option in the tag.\n# *\n# * @author Iltar van der Berg <kjarli@gmail.com>\n\
+  # */\n# trait PriorityTaggedServiceTrait\n# {\n# /**\n# * Finds all services with\
+  \ the given tag name and order them by their priority.\n# *\n# * The order of additions\
+  \ must be respected for services having the same priority,\n# * and knowing that\
+  \ the \\SplPriorityQueue class does not respect the FIFO method,\n# * we should\
+  \ not use that class.\n# *\n# * @see https://bugs.php.net/53710\n# * @see https://bugs.php.net/60926\n\
+  # *\n# * @return Reference[]\n# */\n# private function findAndSortTaggedServices(string|TaggedIteratorArgument\
+  \ $tagName, ContainerBuilder $container, array $exclude = []): array\n# {\n# $indexAttribute\
+  \ = $defaultIndexMethod = $needsIndexes = $defaultPriorityMethod = null;\n# \n#\
+  \ if ($tagName instanceof TaggedIteratorArgument) {\n# $indexAttribute = $tagName->getIndexAttribute();\n\
+  # $defaultIndexMethod = $tagName->getDefaultIndexMethod();\n# $needsIndexes = $tagName->needsIndexes();\n\
+  # $defaultPriorityMethod = $tagName->getDefaultPriorityMethod() ?? 'getDefaultPriority';\n\
+  # $exclude = array_merge($exclude, $tagName->getExclude());\n# $tagName = $tagName->getTag();\n\
+  # }\n# \n# $i = 0;\n# $services = [];\n# \n# foreach ($container->findTaggedServiceIds($tagName,\
+  \ true) as $serviceId => $attributes) {\n# if (\\in_array($serviceId, $exclude,\
+  \ true)) {\n# continue;\n# }\n# \n# $defaultPriority = null;\n# $defaultIndex =\
+  \ null;\n# $definition = $container->getDefinition($serviceId);\n# $class = $definition->getClass();\n\
+  # $class = $container->getParameterBag()->resolveValue($class) ?: null;\n# $checkTaggedItem\
+  \ = !$definition->hasTag($definition->isAutoconfigured() ? 'container.ignore_attributes'\
+  \ : $tagName);\n# \n# foreach ($attributes as $attribute) {\n# $index = $priority\
+  \ = null;\n# \n# if (isset($attribute['priority'])) {\n# $priority = $attribute['priority'];\n\
+  # } elseif (null === $defaultPriority && $defaultPriorityMethod && $class) {\n#\
+  \ $defaultPriority = PriorityTaggedServiceUtil::getDefault($container, $serviceId,\
+  \ $class, $defaultPriorityMethod, $tagName, 'priority', $checkTaggedItem);\n# }\n\
+  # $priority ??= $defaultPriority ??= 0;\n# \n# if (null === $indexAttribute && !$defaultIndexMethod\
+  \ && !$needsIndexes) {\n# $services[] = [$priority, ++$i, null, $serviceId, null];\n\
+  # continue 2;\n# }\n# \n# if (null !== $indexAttribute && isset($attribute[$indexAttribute]))\
+  \ {\n# $index = $attribute[$indexAttribute];\n# } elseif (null === $defaultIndex\
+  \ && $defaultPriorityMethod && $class) {\n# $defaultIndex = PriorityTaggedServiceUtil::getDefault($container,\
+  \ $serviceId, $class, $defaultIndexMethod ?? 'getDefaultName', $tagName, $indexAttribute,\
+  \ $checkTaggedItem);\n# }\n# $index ??= $defaultIndex ??= $serviceId;\n# \n# $services[]\
+  \ = [$priority, ++$i, $index, $serviceId, $class];\n# }\n# }\n# \n# uasort($services,\
+  \ static fn ($a, $b) => $b[0] <=> $a[0] ?: $a[1] <=> $b[1]);\n# \n# $refs = [];\n\
+  # foreach ($services as [, , $index, $serviceId, $class]) {\n# if (!$class) {\n\
+  # $reference = new Reference($serviceId);\n# } elseif ($index === $serviceId) {\n\
+  # $reference = new TypedReference($serviceId, $class);\n# } else {\n# $reference\
+  \ = new TypedReference($serviceId, $class, ContainerBuilder::EXCEPTION_ON_INVALID_REFERENCE,\
+  \ $index);\n# }\n# \n# if (null === $index) {\n# $refs[] = $reference;\n# } else\
+  \ {\n# $refs[$index] = $reference;\n# }\n# }\n# \n# return $refs;\n# }\n# }\n# \n\
+  # /**\n# * @internal"
+dependencies:
+- name: TaggedIteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- name: AsTaggedItem
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\AsTaggedItem
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: TypedReference
+  type: class
+  source: Symfony\Component\DependencyInjection\TypedReference
+properties: []
+methods:
+- name: findAndSortTaggedServices
+  visibility: private
+  parameters:
+  - name: tagName
+  - name: container
+  - name: exclude
+    default: '[]'
+  comment: '# * Trait that allows a generic method to find and sort service by priority
+    option in the tag.
+
+    # *
+
+    # * @author Iltar van der Berg <kjarli@gmail.com>
+
+    # */
+
+    # trait PriorityTaggedServiceTrait
+
+    # {
+
+    # /**
+
+    # * Finds all services with the given tag name and order them by their priority.
+
+    # *
+
+    # * The order of additions must be respected for services having the same priority,
+
+    # * and knowing that the \SplPriorityQueue class does not respect the FIFO method,
+
+    # * we should not use that class.
+
+    # *
+
+    # * @see https://bugs.php.net/53710
+
+    # * @see https://bugs.php.net/60926
+
+    # *
+
+    # * @return Reference[]'
+- name: getDefault
+  visibility: public
+  parameters:
+  - name: container
+  - name: serviceId
+  - name: class
+  - name: defaultMethod
+  - name: tagName
+  - name: indexAttribute
+  - name: checkTaggedItem
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- Symfony\Component\DependencyInjection\Attribute\AsTaggedItem
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\DependencyInjection\TypedReference
+interfaces: []

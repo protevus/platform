@@ -1,0 +1,8 @@
+name: LogicException
+class_comment: "# * @author J\xE9r\xF4me Tamarelle <jerome@tamarelle.net>"
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- ExceptionInterface

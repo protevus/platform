@@ -1,0 +1,256 @@
+name: Repository
+class_comment: null
+dependencies:
+- name: ArrayAccess
+  type: class
+  source: ArrayAccess
+- name: ConfigContract
+  type: class
+  source: Illuminate\Contracts\Config\Repository
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+- name: Macroable
+  type: class
+  source: Macroable
+properties:
+- name: items
+  visibility: protected
+  comment: '# * All of the configuration items.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: items
+    default: '[]'
+  comment: "# * All of the configuration items.\n# *\n# * @var array\n# */\n# protected\
+    \ $items = [];\n# \n# /**\n# * Create a new configuration repository.\n# *\n#\
+    \ * @param  array  $items\n# * @return void"
+- name: has
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Determine if the given configuration value exists.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: get
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Get the specified configuration value.
+
+    # *
+
+    # * @param  array|string  $key
+
+    # * @param  mixed  $default
+
+    # * @return mixed'
+- name: getMany
+  visibility: public
+  parameters:
+  - name: keys
+  comment: '# * Get many configuration values.
+
+    # *
+
+    # * @param  array  $keys
+
+    # * @return array'
+- name: string
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Get the specified string configuration value.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  (\Closure():(string|null))|string|null  $default
+
+    # * @return string'
+- name: integer
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Get the specified integer configuration value.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  (\Closure():(int|null))|int|null  $default
+
+    # * @return int'
+- name: float
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Get the specified float configuration value.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  (\Closure():(float|null))|float|null  $default
+
+    # * @return float'
+- name: boolean
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Get the specified boolean configuration value.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  (\Closure():(bool|null))|bool|null  $default
+
+    # * @return bool'
+- name: array
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Get the specified array configuration value.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  (\Closure():(array<array-key, mixed>|null))|array<array-key, mixed>|null  $default
+
+    # * @return array<array-key, mixed>'
+- name: set
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: 'null'
+  comment: '# * Set a given configuration value.
+
+    # *
+
+    # * @param  array|string  $key
+
+    # * @param  mixed  $value
+
+    # * @return void'
+- name: prepend
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Prepend a value onto an array configuration value.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return void'
+- name: push
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Push a value onto an array configuration value.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return void'
+- name: all
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the configuration items for the application.
+
+    # *
+
+    # * @return array'
+- name: offsetExists
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Determine if the given configuration option exists.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: offsetGet
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Get a configuration option.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed'
+- name: offsetSet
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Set a configuration option.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return void'
+- name: offsetUnset
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Unset a configuration option.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return void'
+traits:
+- ArrayAccess
+- Illuminate\Support\Arr
+- Illuminate\Support\Traits\Macroable
+- InvalidArgumentException
+- Macroable
+interfaces:
+- ArrayAccess

@@ -1,0 +1,47 @@
+name: ResourceBundle
+class_comment: null
+dependencies:
+- name: BufferedBundleReader
+  type: class
+  source: Symfony\Component\Intl\Data\Bundle\Reader\BufferedBundleReader
+- name: BundleEntryReader
+  type: class
+  source: Symfony\Component\Intl\Data\Bundle\Reader\BundleEntryReader
+- name: BundleEntryReaderInterface
+  type: class
+  source: Symfony\Component\Intl\Data\Bundle\Reader\BundleEntryReaderInterface
+- name: PhpBundleReader
+  type: class
+  source: Symfony\Component\Intl\Data\Bundle\Reader\PhpBundleReader
+properties: []
+methods:
+- name: getPath
+  visibility: protected
+  parameters: []
+  comment: null
+- name: readEntry
+  visibility: protected
+  parameters:
+  - name: indices
+  - name: locale
+    default: 'null'
+  - name: fallback
+    default: 'true'
+  comment: null
+- name: asort
+  visibility: protected
+  parameters:
+  - name: list
+  - name: locale
+    default: 'null'
+  comment: null
+- name: __construct
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Intl\Data\Bundle\Reader\BufferedBundleReader
+- Symfony\Component\Intl\Data\Bundle\Reader\BundleEntryReader
+- Symfony\Component\Intl\Data\Bundle\Reader\BundleEntryReaderInterface
+- Symfony\Component\Intl\Data\Bundle\Reader\PhpBundleReader
+interfaces: []

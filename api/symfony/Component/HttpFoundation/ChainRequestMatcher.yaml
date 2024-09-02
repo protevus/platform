@@ -1,0 +1,38 @@
+name: ChainRequestMatcher
+class_comment: '# * ChainRequestMatcher verifies that all checks match against a Request
+  instance.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: matchers
+  comment: '# * ChainRequestMatcher verifies that all checks match against a Request
+    instance.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # class ChainRequestMatcher implements RequestMatcherInterface
+
+    # {
+
+    # /**
+
+    # * @param iterable<RequestMatcherInterface> $matchers'
+- name: matches
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+traits: []
+interfaces:
+- RequestMatcherInterface

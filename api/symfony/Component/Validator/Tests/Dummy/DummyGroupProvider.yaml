@@ -1,0 +1,21 @@
+name: DummyGroupProvider
+class_comment: null
+dependencies:
+- name: GroupSequence
+  type: class
+  source: Symfony\Component\Validator\Constraints\GroupSequence
+- name: GroupProviderInterface
+  type: class
+  source: Symfony\Component\Validator\GroupProviderInterface
+properties: []
+methods:
+- name: getGroups
+  visibility: public
+  parameters:
+  - name: object
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\GroupSequence
+- Symfony\Component\Validator\GroupProviderInterface
+interfaces:
+- GroupProviderInterface

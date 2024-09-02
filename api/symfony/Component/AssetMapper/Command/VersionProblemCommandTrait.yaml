@@ -1,0 +1,21 @@
+name: VersionProblemCommandTrait
+class_comment: null
+dependencies:
+- name: ImportMapVersionChecker
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapVersionChecker
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+properties: []
+methods:
+- name: renderVersionProblems
+  visibility: private
+  parameters:
+  - name: importMapVersionChecker
+  - name: output
+  comment: null
+traits:
+- Symfony\Component\AssetMapper\ImportMap\ImportMapVersionChecker
+- Symfony\Component\Console\Output\OutputInterface
+interfaces: []

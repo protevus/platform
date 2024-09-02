@@ -1,0 +1,51 @@
+name: NoSuspiciousCharactersValidator
+class_comment: '# * @author Mathieu Lechat <math.lechat@gmail.com>'
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: ConstraintValidator
+  type: class
+  source: Symfony\Component\Validator\ConstraintValidator
+- name: LogicException
+  type: class
+  source: Symfony\Component\Validator\Exception\LogicException
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedTypeException
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: defaultLocales
+    default: '[]'
+  comment: "# * @author Mathieu Lechat <math.lechat@gmail.com>\n# */\n# class NoSuspiciousCharactersValidator\
+    \ extends ConstraintValidator\n# {\n# private const CHECK_RESTRICTION_LEVEL =\
+    \ 16;\n# private const CHECK_SINGLE_SCRIPT = 16;\n# private const CHECK_CHAR_LIMIT\
+    \ = 64;\n# \n# private const CHECK_ERROR = [\n# self::CHECK_RESTRICTION_LEVEL\
+    \ => [\n# 'code' => NoSuspiciousCharacters::RESTRICTION_LEVEL_ERROR,\n# 'messageProperty'\
+    \ => 'restrictionLevelMessage',\n# ],\n# NoSuspiciousCharacters::CHECK_INVISIBLE\
+    \ => [\n# 'code' => NoSuspiciousCharacters::INVISIBLE_ERROR,\n# 'messageProperty'\
+    \ => 'invisibleMessage',\n# ],\n# self::CHECK_CHAR_LIMIT => [\n# 'code' => NoSuspiciousCharacters::RESTRICTION_LEVEL_ERROR,\n\
+    # 'messageProperty' => 'restrictionLevelMessage',\n# ],\n# NoSuspiciousCharacters::CHECK_MIXED_NUMBERS\
+    \ => [\n# 'code' => NoSuspiciousCharacters::MIXED_NUMBERS_ERROR,\n# 'messageProperty'\
+    \ => 'mixedNumbersMessage',\n# ],\n# NoSuspiciousCharacters::CHECK_HIDDEN_OVERLAY\
+    \ => [\n# 'code' => NoSuspiciousCharacters::HIDDEN_OVERLAY_ERROR,\n# 'messageProperty'\
+    \ => 'hiddenOverlayMessage',\n# ],\n# ];\n# \n# /**\n# * @param string[] $defaultLocales"
+- name: validate
+  visibility: public
+  parameters:
+  - name: value
+  - name: constraint
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\ConstraintValidator
+- Symfony\Component\Validator\Exception\LogicException
+- Symfony\Component\Validator\Exception\UnexpectedTypeException
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+interfaces: []

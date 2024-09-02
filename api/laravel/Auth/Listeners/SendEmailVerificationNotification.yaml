@@ -1,0 +1,26 @@
+name: SendEmailVerificationNotification
+class_comment: null
+dependencies:
+- name: Registered
+  type: class
+  source: Illuminate\Auth\Events\Registered
+- name: MustVerifyEmail
+  type: class
+  source: Illuminate\Contracts\Auth\MustVerifyEmail
+properties: []
+methods:
+- name: handle
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Handle the event.
+
+    # *
+
+    # * @param  \Illuminate\Auth\Events\Registered  $event
+
+    # * @return void'
+traits:
+- Illuminate\Auth\Events\Registered
+- Illuminate\Contracts\Auth\MustVerifyEmail
+interfaces: []

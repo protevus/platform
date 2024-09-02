@@ -1,0 +1,66 @@
+name: MorphMany
+class_comment: '# * @template TRelatedModel of \Illuminate\Database\Eloquent\Model
+
+  # * @template TDeclaringModel of \Illuminate\Database\Eloquent\Model
+
+  # *
+
+  # * @extends \Illuminate\Database\Eloquent\Relations\MorphOneOrMany<TRelatedModel,
+  TDeclaringModel, \Illuminate\Database\Eloquent\Collection<int, TRelatedModel>>'
+dependencies:
+- name: Collection
+  type: class
+  source: Illuminate\Database\Eloquent\Collection
+properties: []
+methods:
+- name: one
+  visibility: public
+  parameters: []
+  comment: '# * @template TRelatedModel of \Illuminate\Database\Eloquent\Model
+
+    # * @template TDeclaringModel of \Illuminate\Database\Eloquent\Model
+
+    # *
+
+    # * @extends \Illuminate\Database\Eloquent\Relations\MorphOneOrMany<TRelatedModel,
+    TDeclaringModel, \Illuminate\Database\Eloquent\Collection<int, TRelatedModel>>
+
+    # */
+
+    # class MorphMany extends MorphOneOrMany
+
+    # {
+
+    # /**
+
+    # * Convert the relationship to a "morph one" relationship.
+
+    # *
+
+    # * @return \Illuminate\Database\Eloquent\Relations\MorphOne<TRelatedModel, TDeclaringModel>'
+- name: getResults
+  visibility: public
+  parameters: []
+  comment: '# @inheritDoc'
+- name: initRelation
+  visibility: public
+  parameters:
+  - name: models
+  - name: relation
+  comment: '# @inheritDoc'
+- name: match
+  visibility: public
+  parameters:
+  - name: models
+  - name: results
+  - name: relation
+  comment: '# @inheritDoc'
+- name: forceCreate
+  visibility: public
+  parameters:
+  - name: attributes
+    default: '[]'
+  comment: '# @inheritDoc'
+traits:
+- Illuminate\Database\Eloquent\Collection
+interfaces: []

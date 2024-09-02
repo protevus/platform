@@ -1,0 +1,100 @@
+name: PrototypeConfigurator
+class_comment: '# * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: PhpFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- name: AbstractTrait
+  type: class
+  source: Traits\AbstractTrait
+- name: ArgumentTrait
+  type: class
+  source: Traits\ArgumentTrait
+- name: AutoconfigureTrait
+  type: class
+  source: Traits\AutoconfigureTrait
+- name: AutowireTrait
+  type: class
+  source: Traits\AutowireTrait
+- name: BindTrait
+  type: class
+  source: Traits\BindTrait
+- name: CallTrait
+  type: class
+  source: Traits\CallTrait
+- name: ConfiguratorTrait
+  type: class
+  source: Traits\ConfiguratorTrait
+- name: ConstructorTrait
+  type: class
+  source: Traits\ConstructorTrait
+- name: DeprecateTrait
+  type: class
+  source: Traits\DeprecateTrait
+- name: FactoryTrait
+  type: class
+  source: Traits\FactoryTrait
+- name: LazyTrait
+  type: class
+  source: Traits\LazyTrait
+- name: ParentTrait
+  type: class
+  source: Traits\ParentTrait
+- name: PropertyTrait
+  type: class
+  source: Traits\PropertyTrait
+- name: PublicTrait
+  type: class
+  source: Traits\PublicTrait
+- name: ShareTrait
+  type: class
+  source: Traits\ShareTrait
+- name: TagTrait
+  type: class
+  source: Traits\TagTrait
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: parent
+  - name: loader
+  - name: defaults
+  - name: namespace
+  - name: resource
+  - name: allowParent
+  - name: path
+    default: 'null'
+  comment: null
+- name: __destruct
+  visibility: public
+  parameters: []
+  comment: null
+- name: exclude
+  visibility: public
+  parameters:
+  - name: excludes
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- Traits\AbstractTrait
+- Traits\ArgumentTrait
+- Traits\AutoconfigureTrait
+- Traits\AutowireTrait
+- Traits\BindTrait
+- Traits\CallTrait
+- Traits\ConfiguratorTrait
+- Traits\ConstructorTrait
+- Traits\DeprecateTrait
+- Traits\FactoryTrait
+- Traits\LazyTrait
+- Traits\ParentTrait
+- Traits\PropertyTrait
+- Traits\PublicTrait
+- Traits\ShareTrait
+- Traits\TagTrait
+interfaces: []

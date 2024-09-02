@@ -1,0 +1,81 @@
+name: Currencies
+class_comment: null
+dependencies:
+- name: MissingResourceException
+  type: class
+  source: Symfony\Component\Intl\Exception\MissingResourceException
+properties: []
+methods:
+- name: getCurrencyCodes
+  visibility: public
+  parameters: []
+  comment: "# * Gives access to currency-related ICU data.\n# *\n# * @author Bernhard\
+    \ Schussek <bschussek@gmail.com>\n# * @author Roland Franssen <franssen.roland@gmail.com>\n\
+    # */\n# final class Currencies extends ResourceBundle\n# {\n# private const INDEX_SYMBOL\
+    \ = 0;\n# private const INDEX_NAME = 1;\n# private const INDEX_FRACTION_DIGITS\
+    \ = 0;\n# private const INDEX_ROUNDING_INCREMENT = 1;\n# private const INDEX_CASH_FRACTION_DIGITS\
+    \ = 2;\n# private const INDEX_CASH_ROUNDING_INCREMENT = 3;\n# \n# /**\n# * @return\
+    \ string[]"
+- name: exists
+  visibility: public
+  parameters:
+  - name: currency
+  comment: null
+- name: getName
+  visibility: public
+  parameters:
+  - name: currency
+  - name: displayLocale
+    default: 'null'
+  comment: '# * @throws MissingResourceException if the currency code does not exist'
+- name: getNames
+  visibility: public
+  parameters:
+  - name: displayLocale
+    default: 'null'
+  comment: '# * @return string[]'
+- name: getSymbol
+  visibility: public
+  parameters:
+  - name: currency
+  - name: displayLocale
+    default: 'null'
+  comment: '# * @throws MissingResourceException if the currency code does not exist'
+- name: getFractionDigits
+  visibility: public
+  parameters:
+  - name: currency
+  comment: null
+- name: getRoundingIncrement
+  visibility: public
+  parameters:
+  - name: currency
+  comment: null
+- name: getCashFractionDigits
+  visibility: public
+  parameters:
+  - name: currency
+  comment: null
+- name: getCashRoundingIncrement
+  visibility: public
+  parameters:
+  - name: currency
+  comment: null
+- name: getNumericCode
+  visibility: public
+  parameters:
+  - name: currency
+  comment: '# * @throws MissingResourceException if the currency code has no numeric
+    code'
+- name: forNumericCode
+  visibility: public
+  parameters:
+  - name: numericCode
+  comment: '# * @throws MissingResourceException if the numeric code does not exist'
+- name: getPath
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Intl\Exception\MissingResourceException
+interfaces: []

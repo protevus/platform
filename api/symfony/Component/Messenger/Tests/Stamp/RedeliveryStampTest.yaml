@@ -1,0 +1,27 @@
+name: RedeliveryStampTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: RedeliveryStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\RedeliveryStamp
+properties: []
+methods:
+- name: testGetters
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSerialization
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRedeliveryAt
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Stamp\RedeliveryStamp
+interfaces: []

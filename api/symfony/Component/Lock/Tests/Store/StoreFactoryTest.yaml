@@ -1,0 +1,74 @@
+name: StoreFactoryTest
+class_comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>"
+dependencies:
+- name: Connection
+  type: class
+  source: Doctrine\DBAL\Connection
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AbstractAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\AbstractAdapter
+- name: MemcachedAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\MemcachedAdapter
+- name: DoctrineDbalPostgreSqlStore
+  type: class
+  source: Symfony\Component\Lock\Store\DoctrineDbalPostgreSqlStore
+- name: DoctrineDbalStore
+  type: class
+  source: Symfony\Component\Lock\Store\DoctrineDbalStore
+- name: FlockStore
+  type: class
+  source: Symfony\Component\Lock\Store\FlockStore
+- name: InMemoryStore
+  type: class
+  source: Symfony\Component\Lock\Store\InMemoryStore
+- name: MemcachedStore
+  type: class
+  source: Symfony\Component\Lock\Store\MemcachedStore
+- name: PdoStore
+  type: class
+  source: Symfony\Component\Lock\Store\PdoStore
+- name: PostgreSqlStore
+  type: class
+  source: Symfony\Component\Lock\Store\PostgreSqlStore
+- name: RedisStore
+  type: class
+  source: Symfony\Component\Lock\Store\RedisStore
+- name: SemaphoreStore
+  type: class
+  source: Symfony\Component\Lock\Store\SemaphoreStore
+- name: StoreFactory
+  type: class
+  source: Symfony\Component\Lock\Store\StoreFactory
+properties: []
+methods:
+- name: testCreateStore
+  visibility: public
+  parameters:
+  - name: connection
+  - name: expectedStoreClass
+  comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n# */\n# class\
+    \ StoreFactoryTest extends TestCase\n# {\n# /**\n# * @dataProvider validConnections"
+- name: validConnections
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Doctrine\DBAL\Connection
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Cache\Adapter\AbstractAdapter
+- Symfony\Component\Cache\Adapter\MemcachedAdapter
+- Symfony\Component\Lock\Store\DoctrineDbalPostgreSqlStore
+- Symfony\Component\Lock\Store\DoctrineDbalStore
+- Symfony\Component\Lock\Store\FlockStore
+- Symfony\Component\Lock\Store\InMemoryStore
+- Symfony\Component\Lock\Store\MemcachedStore
+- Symfony\Component\Lock\Store\PdoStore
+- Symfony\Component\Lock\Store\PostgreSqlStore
+- Symfony\Component\Lock\Store\RedisStore
+- Symfony\Component\Lock\Store\SemaphoreStore
+- Symfony\Component\Lock\Store\StoreFactory
+interfaces: []

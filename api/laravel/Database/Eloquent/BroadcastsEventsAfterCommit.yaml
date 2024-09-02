@@ -1,0 +1,20 @@
+name: BroadcastsEventsAfterCommit
+class_comment: null
+dependencies:
+- name: BroadcastsEvents
+  type: class
+  source: BroadcastsEvents
+properties: []
+methods:
+- name: broadcastAfterCommit
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the model event broadcast queued job should be dispatched
+    after all transactions are committed.
+
+    # *
+
+    # * @return bool'
+traits:
+- BroadcastsEvents
+interfaces: []

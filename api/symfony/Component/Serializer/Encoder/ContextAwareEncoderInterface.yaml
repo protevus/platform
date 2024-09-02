@@ -1,0 +1,17 @@
+name: ContextAwareEncoderInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: supportsEncoding
+  visibility: public
+  parameters:
+  - name: format
+  - name: context
+    default: '[]'
+  comment: "# * Adds the support of an extra $context parameter for the supportsEncoding\
+    \ method.\n# *\n# * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# */\n# interface\
+    \ ContextAwareEncoderInterface extends EncoderInterface\n# {\n# /**\n# * @param\
+    \ array $context options that encoders have access to"
+traits: []
+interfaces: []

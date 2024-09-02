@@ -1,0 +1,137 @@
+name: BroadcastEvent
+class_comment: null
+dependencies:
+- name: Queueable
+  type: class
+  source: Illuminate\Bus\Queueable
+- name: BroadcastingFactory
+  type: class
+  source: Illuminate\Contracts\Broadcasting\Factory
+- name: ShouldQueue
+  type: class
+  source: Illuminate\Contracts\Queue\ShouldQueue
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: ReflectionClass
+  type: class
+  source: ReflectionClass
+- name: ReflectionProperty
+  type: class
+  source: ReflectionProperty
+- name: Queueable
+  type: class
+  source: Queueable
+properties:
+- name: event
+  visibility: public
+  comment: '# * The event instance.
+
+    # *
+
+    # * @var mixed'
+- name: tries
+  visibility: public
+  comment: '# * The number of times the job may be attempted.
+
+    # *
+
+    # * @var int'
+- name: timeout
+  visibility: public
+  comment: '# * The number of seconds the job can run before timing out.
+
+    # *
+
+    # * @var int'
+- name: backoff
+  visibility: public
+  comment: '# * The number of seconds to wait before retrying the job when encountering
+    an uncaught exception.
+
+    # *
+
+    # * @var int'
+- name: maxExceptions
+  visibility: public
+  comment: '# * The maximum number of unhandled exceptions to allow before failing.
+
+    # *
+
+    # * @var int'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: event
+  comment: "# * The event instance.\n# *\n# * @var mixed\n# */\n# public $event;\n\
+    # \n# /**\n# * The number of times the job may be attempted.\n# *\n# * @var int\n\
+    # */\n# public $tries;\n# \n# /**\n# * The number of seconds the job can run before\
+    \ timing out.\n# *\n# * @var int\n# */\n# public $timeout;\n# \n# /**\n# * The\
+    \ number of seconds to wait before retrying the job when encountering an uncaught\
+    \ exception.\n# *\n# * @var int\n# */\n# public $backoff;\n# \n# /**\n# * The\
+    \ maximum number of unhandled exceptions to allow before failing.\n# *\n# * @var\
+    \ int\n# */\n# public $maxExceptions;\n# \n# /**\n# * Create a new job handler\
+    \ instance.\n# *\n# * @param  mixed  $event\n# * @return void"
+- name: handle
+  visibility: public
+  parameters:
+  - name: manager
+  comment: '# * Handle the queued job.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Broadcasting\Factory  $manager
+
+    # * @return void'
+- name: getPayloadFromEvent
+  visibility: protected
+  parameters:
+  - name: event
+  comment: '# * Get the payload for the given event.
+
+    # *
+
+    # * @param  mixed  $event
+
+    # * @return array'
+- name: formatProperty
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Format the given value for a property.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return mixed'
+- name: displayName
+  visibility: public
+  parameters: []
+  comment: '# * Get the display name for the queued job.
+
+    # *
+
+    # * @return string'
+- name: __clone
+  visibility: public
+  parameters: []
+  comment: '# * Prepare the instance for cloning.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Bus\Queueable
+- Illuminate\Contracts\Queue\ShouldQueue
+- Illuminate\Contracts\Support\Arrayable
+- Illuminate\Support\Arr
+- ReflectionClass
+- ReflectionProperty
+- Queueable
+interfaces:
+- ShouldQueue

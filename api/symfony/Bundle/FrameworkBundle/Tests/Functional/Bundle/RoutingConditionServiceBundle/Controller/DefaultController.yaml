@@ -1,0 +1,43 @@
+name: DefaultController
+class_comment: null
+dependencies:
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: Route
+  type: class
+  source: Symfony\Component\Routing\Attribute\Route
+properties: []
+methods:
+- name: allowedByManuallyTagged
+  visibility: public
+  parameters: []
+  comment: null
+- name: allowedByAutoConfigured
+  visibility: public
+  parameters: []
+  comment: null
+- name: allowedByAutoConfiguredNonAliased
+  visibility: public
+  parameters: []
+  comment: null
+- name: deniedByManuallyTagged
+  visibility: public
+  parameters: []
+  comment: null
+- name: deniedByAutoConfigured
+  visibility: public
+  parameters: []
+  comment: null
+- name: deniedByAutoConfiguredNonAliased
+  visibility: public
+  parameters: []
+  comment: null
+- name: deniedByOverriddenAlias
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\Routing\Attribute\Route
+interfaces: []

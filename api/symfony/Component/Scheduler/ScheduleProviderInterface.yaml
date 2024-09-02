@@ -1,0 +1,11 @@
+name: ScheduleProviderInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getSchedule
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

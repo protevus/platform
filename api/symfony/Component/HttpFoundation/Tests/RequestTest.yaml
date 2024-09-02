@@ -1,0 +1,652 @@
+name: RequestTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ConflictingHeadersException
+  type: class
+  source: Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException
+- name: JsonException
+  type: class
+  source: Symfony\Component\HttpFoundation\Exception\JsonException
+- name: SuspiciousOperationException
+  type: class
+  source: Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException
+- name: InputBag
+  type: class
+  source: Symfony\Component\HttpFoundation\InputBag
+- name: ParameterBag
+  type: class
+  source: Symfony\Component\HttpFoundation\ParameterBag
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Session
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Session
+- name: MockArraySessionStorage
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage
+properties: []
+methods:
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testInitialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetLocale
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetUser
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPassword
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsNoCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetContentTypeFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetDefaultLocale
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateWithRequestUri
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetRequestUri
+  visibility: public
+  parameters:
+  - name: serverRequestUri
+  - name: expected
+  - name: message
+  comment: '# * @dataProvider getRequestUriData'
+- name: getRequestUriData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetRequestUriWithoutRequiredHeader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateCheckPrecedence
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDuplicate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDuplicateWithFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPreferredFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetFormatFromMimeType
+  visibility: public
+  parameters:
+  - name: format
+  - name: mimeTypes
+  comment: '# * @dataProvider getFormatToMimeTypeMapProvider'
+- name: testGetFormatFromMimeTypeWithParameters
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetMimeTypeFromFormat
+  visibility: public
+  parameters:
+  - name: format
+  - name: mimeTypes
+  comment: '# * @dataProvider getFormatToMimeTypeMapProvider'
+- name: testGetMimeTypesFromFormat
+  visibility: public
+  parameters:
+  - name: format
+  - name: mimeTypes
+  comment: '# * @dataProvider getFormatToMimeTypeMapProvider'
+- name: testGetMimeTypesFromInexistentFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetFormatWithCustomMimeType
+  visibility: public
+  parameters: []
+  comment: null
+- name: getFormatToMimeTypeMapProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetUri
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetUriForPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetRelativeUriForPath
+  visibility: public
+  parameters:
+  - name: expected
+  - name: pathinfo
+  - name: path
+  comment: '# * @dataProvider getRelativeUriForPathData'
+- name: getRelativeUriForPathData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetUserInfo
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetSchemeAndHttpHost
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetQueryString
+  visibility: public
+  parameters:
+  - name: query
+  - name: expectedQuery
+  - name: msg
+  comment: '# * @dataProvider getQueryStringNormalizationData'
+- name: getQueryStringNormalizationData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetQueryStringReturnsNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetHost
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPort
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetHostWithFakeHttpHostValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetSetMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetClientIp
+  visibility: public
+  parameters:
+  - name: expected
+  - name: remoteAddr
+  - name: httpForwardedFor
+  - name: trustedProxies
+  comment: '# * @dataProvider getClientIpsProvider'
+- name: testGetClientIps
+  visibility: public
+  parameters:
+  - name: expected
+  - name: remoteAddr
+  - name: httpForwardedFor
+  - name: trustedProxies
+  comment: '# * @dataProvider getClientIpsProvider'
+- name: testGetClientIpsForwarded
+  visibility: public
+  parameters:
+  - name: expected
+  - name: remoteAddr
+  - name: httpForwarded
+  - name: trustedProxies
+  comment: '# * @dataProvider getClientIpsForwardedProvider'
+- name: getClientIpsForwardedProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: getClientIpsProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetClientIpsWithConflictingHeaders
+  visibility: public
+  parameters:
+  - name: httpForwarded
+  - name: httpXForwardedFor
+  comment: '# * @dataProvider getClientIpsWithConflictingHeadersProvider'
+- name: testGetClientIpsOnlyXHttpForwardedForTrusted
+  visibility: public
+  parameters:
+  - name: httpForwarded
+  - name: httpXForwardedFor
+  comment: '# * @dataProvider getClientIpsWithConflictingHeadersProvider'
+- name: getClientIpsWithConflictingHeadersProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetClientIpsWithAgreeingHeaders
+  visibility: public
+  parameters:
+  - name: httpForwarded
+  - name: httpXForwardedFor
+  - name: expectedIps
+  comment: '# * @dataProvider getClientIpsWithAgreeingHeadersProvider'
+- name: getClientIpsWithAgreeingHeadersProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetContentWorksTwiceInDefaultMode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetContentReturnsResource
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetContentReturnsResourceWhenContentSetInConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testContentAsResource
+  visibility: public
+  parameters: []
+  comment: null
+- name: getContentCantBeCalledTwiceWithResourcesProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetContentCanBeCalledTwiceWithResources
+  visibility: public
+  parameters:
+  - name: first
+  - name: second
+  comment: '# * @dataProvider getContentCanBeCalledTwiceWithResourcesProvider'
+- name: getContentCanBeCalledTwiceWithResourcesProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideOverloadedMethods
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToArrayEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToArrayNonJson
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPayload
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromGlobals
+  visibility: public
+  parameters:
+  - name: method
+  comment: '# * @dataProvider provideOverloadedMethods'
+- name: testOverrideGlobals
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetScriptName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetBasePath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPathInfo
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetParameterPrecedence
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPreferredLanguage
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPreferredLanguageWithLocales
+  visibility: public
+  parameters:
+  - name: expectedLocale
+  - name: acceptLanguage
+  - name: locales
+  comment: '# * @dataProvider providePreferredLanguage'
+- name: providePreferredLanguage
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsXmlHttpRequest
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIntlLocale
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension intl'
+- name: testGetCharsets
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetEncodings
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetAcceptableContentTypes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetLanguages
+  visibility: public
+  parameters:
+  - name: expectedLocales
+  - name: acceptLanguage
+  comment: '# * @dataProvider provideLanguages'
+- name: provideLanguages
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetAcceptHeadersReturnString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetRequestFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasSession
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetSession
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasPreviousSession
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetBaseUrl
+  visibility: public
+  parameters:
+  - name: uri
+  - name: server
+  - name: expectedBaseUrl
+  - name: expectedPathInfo
+  comment: '# * @dataProvider getBaseUrlData'
+- name: getBaseUrlData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBaseUriDetectionOnIisWithRewrite
+  visibility: public
+  parameters:
+  - name: server
+  - name: expectedBaseUrl
+  - name: expectedPathInfo
+  comment: '# * @dataProvider baseUriDetectionOnIisWithRewriteData'
+- name: baseUriDetectionOnIisWithRewriteData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUrlencodedStringPrefix
+  visibility: public
+  parameters:
+  - name: string
+  - name: prefix
+  - name: expect
+  comment: '# * @dataProvider urlencodedStringPrefixData'
+- name: urlencodedStringPrefixData
+  visibility: public
+  parameters: []
+  comment: null
+- name: disableHttpMethodParameterOverride
+  visibility: private
+  parameters: []
+  comment: null
+- name: getRequestInstanceForClientIpTests
+  visibility: private
+  parameters:
+  - name: remoteAddr
+  - name: httpForwardedFor
+  - name: trustedProxies
+  comment: null
+- name: getRequestInstanceForClientIpsForwardedTests
+  visibility: private
+  parameters:
+  - name: remoteAddr
+  - name: httpForwarded
+  - name: trustedProxies
+  comment: null
+- name: testTrustedProxiesXForwardedFor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTrustedProxiesForwarded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIISRequestUri
+  visibility: public
+  parameters:
+  - name: headers
+  - name: server
+  - name: expectedRequestUri
+  comment: '# * @dataProvider iisRequestUriProvider'
+- name: iisRequestUriProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTrustedHosts
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetTrustedHostsDoesNotBreakOnSpecialCharacters
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFactory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFactoryCallable
+  visibility: public
+  parameters: []
+  comment: null
+- name: createRequest
+  visibility: public
+  parameters: []
+  comment: null
+- name: testVeryLongHosts
+  visibility: public
+  parameters:
+  - name: host
+  comment: '# * @dataProvider getLongHostNames'
+- name: testHostValidity
+  visibility: public
+  parameters:
+  - name: host
+  - name: isValid
+  - name: expectedHost
+    default: 'null'
+  - name: expectedPort
+    default: 'null'
+  comment: '# * @dataProvider getHostValidities'
+- name: getHostValidities
+  visibility: public
+  parameters: []
+  comment: null
+- name: getLongHostNames
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMethodIdempotent
+  visibility: public
+  parameters:
+  - name: method
+  - name: idempotent
+  comment: '# * @dataProvider methodIdempotentProvider'
+- name: methodIdempotentProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMethodSafe
+  visibility: public
+  parameters:
+  - name: method
+  - name: safe
+  comment: '# * @dataProvider methodSafeProvider'
+- name: methodSafeProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMethodCacheable
+  visibility: public
+  parameters:
+  - name: method
+  - name: cacheable
+  comment: '# * @dataProvider methodCacheableProvider'
+- name: methodCacheableProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProtocolVersion
+  visibility: public
+  parameters:
+  - name: serverProtocol
+  - name: trustedProxy
+  - name: via
+  - name: expected
+  comment: '# * @dataProvider protocolVersionProvider'
+- name: protocolVersionProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: nonstandardRequestsData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNonstandardRequests
+  visibility: public
+  parameters:
+  - name: requestUri
+  - name: queryString
+  - name: expectedPathInfo
+  - name: expectedUri
+  - name: expectedBasePath
+    default: ''''''
+  - name: expectedBaseUrl
+    default: 'null'
+  comment: '# * @dataProvider nonstandardRequestsData'
+- name: testTrustedHost
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTrustedPrefix
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTrustedPrefixWithSubdir
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTrustedPrefixEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTrustedPort
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTrustedPortDoesNotDefaultToZero
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTrustedProxiesRemoteAddr
+  visibility: public
+  parameters:
+  - name: serverRemoteAddr
+  - name: trustedProxies
+  - name: result
+  comment: '# * @dataProvider trustedProxiesRemoteAddr'
+- name: testTrustedValuesCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: trustedProxiesRemoteAddr
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPreferSafeContent
+  visibility: public
+  parameters:
+  - name: server
+  - name: safePreferenceExpected
+  comment: '# * @dataProvider preferSafeContentData'
+- name: preferSafeContentData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReservedFlags
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMalformedUriCreationException
+  visibility: public
+  parameters: []
+  comment: null
+- name: getContent
+  visibility: public
+  parameters:
+  - name: asResource
+    default: 'false'
+  comment: null
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Exception\ConflictingHeadersException
+- Symfony\Component\HttpFoundation\Exception\JsonException
+- Symfony\Component\HttpFoundation\Exception\SuspiciousOperationException
+- Symfony\Component\HttpFoundation\InputBag
+- Symfony\Component\HttpFoundation\ParameterBag
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Session\Session
+- Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage
+interfaces: []

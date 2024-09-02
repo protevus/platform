@@ -1,0 +1,205 @@
+name: DatabaseRule
+class_comment: null
+dependencies:
+- name: BackedEnum
+  type: class
+  source: BackedEnum
+- name: Closure
+  type: class
+  source: Closure
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: Model
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+properties:
+- name: table
+  visibility: protected
+  comment: '# * The table to run the query against.
+
+    # *
+
+    # * @var string'
+- name: column
+  visibility: protected
+  comment: '# * The column to check on.
+
+    # *
+
+    # * @var string'
+- name: wheres
+  visibility: protected
+  comment: '# * The extra where clauses for the query.
+
+    # *
+
+    # * @var array'
+- name: using
+  visibility: protected
+  comment: '# * The array of custom query callbacks.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: table
+  - name: column
+    default: '''NULL'''
+  comment: "# * The table to run the query against.\n# *\n# * @var string\n# */\n\
+    # protected $table;\n# \n# /**\n# * The column to check on.\n# *\n# * @var string\n\
+    # */\n# protected $column;\n# \n# /**\n# * The extra where clauses for the query.\n\
+    # *\n# * @var array\n# */\n# protected $wheres = [];\n# \n# /**\n# * The array\
+    \ of custom query callbacks.\n# *\n# * @var array\n# */\n# protected $using =\
+    \ [];\n# \n# /**\n# * Create a new rule instance.\n# *\n# * @param  string  $table\n\
+    # * @param  string  $column\n# * @return void"
+- name: resolveTableName
+  visibility: public
+  parameters:
+  - name: table
+  comment: '# * Resolves the name of the table from the given string.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @return string'
+- name: where
+  visibility: public
+  parameters:
+  - name: column
+  - name: value
+    default: 'null'
+  comment: '# * Set a "where" constraint on the query.
+
+    # *
+
+    # * @param  \Closure|string  $column
+
+    # * @param  \Illuminate\Contracts\Support\Arrayable|\BackedEnum|\Closure|array|string|int|bool|null  $value
+
+    # * @return $this'
+- name: whereNot
+  visibility: public
+  parameters:
+  - name: column
+  - name: value
+  comment: '# * Set a "where not" constraint on the query.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  \Illuminate\Contracts\Support\Arrayable|\BackedEnum|array|string  $value
+
+    # * @return $this'
+- name: whereNull
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Set a "where null" constraint on the query.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return $this'
+- name: whereNotNull
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Set a "where not null" constraint on the query.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return $this'
+- name: whereIn
+  visibility: public
+  parameters:
+  - name: column
+  - name: values
+  comment: '# * Set a "where in" constraint on the query.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  \Illuminate\Contracts\Support\Arrayable|\BackedEnum|array  $values
+
+    # * @return $this'
+- name: whereNotIn
+  visibility: public
+  parameters:
+  - name: column
+  - name: values
+  comment: '# * Set a "where not in" constraint on the query.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  \Illuminate\Contracts\Support\Arrayable|\BackedEnum|array  $values
+
+    # * @return $this'
+- name: withoutTrashed
+  visibility: public
+  parameters:
+  - name: deletedAtColumn
+    default: '''deleted_at'''
+  comment: '# * Ignore soft deleted models during the existence check.
+
+    # *
+
+    # * @param  string  $deletedAtColumn
+
+    # * @return $this'
+- name: onlyTrashed
+  visibility: public
+  parameters:
+  - name: deletedAtColumn
+    default: '''deleted_at'''
+  comment: '# * Only include soft deleted models during the existence check.
+
+    # *
+
+    # * @param  string  $deletedAtColumn
+
+    # * @return $this'
+- name: using
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a custom query callback.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return $this'
+- name: queryCallbacks
+  visibility: public
+  parameters: []
+  comment: '# * Get the custom query callbacks for the rule.
+
+    # *
+
+    # * @return array'
+- name: formatWheres
+  visibility: protected
+  parameters: []
+  comment: '# * Format the where clauses.
+
+    # *
+
+    # * @return string'
+traits:
+- BackedEnum
+- Closure
+- Illuminate\Contracts\Support\Arrayable
+- Illuminate\Database\Eloquent\Model
+interfaces: []

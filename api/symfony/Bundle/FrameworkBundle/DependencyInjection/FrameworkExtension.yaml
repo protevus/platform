@@ -1,0 +1,1093 @@
+name: FrameworkExtension
+class_comment: '# * Process the configuration and prepare the dependency injection
+  container with
+
+  # * parameters and services.'
+dependencies:
+- name: InstalledVersions
+  type: class
+  source: Composer\InstalledVersions
+- name: HttpAsyncClient
+  type: class
+  source: Http\Client\HttpAsyncClient
+- name: HttpClient
+  type: class
+  source: Http\Client\HttpClient
+- name: DocBlockFactoryInterface
+  type: class
+  source: phpDocumentor\Reflection\DocBlockFactoryInterface
+- name: ContextFactory
+  type: class
+  source: phpDocumentor\Reflection\Types\ContextFactory
+- name: Parser
+  type: class
+  source: PhpParser\Parser
+- name: PhpDocParser
+  type: class
+  source: PHPStan\PhpDocParser\Parser\PhpDocParser
+- name: CacheItemPoolInterface
+  type: class
+  source: Psr\Cache\CacheItemPoolInterface
+- name: PsrClockInterface
+  type: class
+  source: Psr\Clock\ClockInterface
+- name: PsrContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: ClientInterface
+  type: class
+  source: Psr\Http\Client\ClientInterface
+- name: LoggerAwareInterface
+  type: class
+  source: Psr\Log\LoggerAwareInterface
+- name: DebugProcessor
+  type: class
+  source: Symfony\Bridge\Monolog\Processor\DebugProcessor
+- name: CsrfExtension
+  type: class
+  source: Symfony\Bridge\Twig\Extension\CsrfExtension
+- name: AbstractController
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Controller\AbstractController
+- name: RouteLoaderInterface
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Routing\RouteLoaderInterface
+- name: FullStack
+  type: class
+  source: Symfony\Bundle\FullStack
+- name: MercureBundle
+  type: class
+  source: Symfony\Bundle\MercureBundle\MercureBundle
+- name: PackageInterface
+  type: class
+  source: Symfony\Component\Asset\PackageInterface
+- name: AssetMapper
+  type: class
+  source: Symfony\Component\AssetMapper\AssetMapper
+- name: AssetCompilerInterface
+  type: class
+  source: Symfony\Component\AssetMapper\Compiler\AssetCompilerInterface
+- name: AbstractBrowser
+  type: class
+  source: Symfony\Component\BrowserKit\AbstractBrowser
+- name: AdapterInterface
+  type: class
+  source: Symfony\Component\Cache\Adapter\AdapterInterface
+- name: ArrayAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\ArrayAdapter
+- name: ChainAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\ChainAdapter
+- name: TagAwareAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\TagAwareAdapter
+- name: CachePoolPass
+  type: class
+  source: Symfony\Component\Cache\DependencyInjection\CachePoolPass
+- name: MarshallerInterface
+  type: class
+  source: Symfony\Component\Cache\Marshaller\MarshallerInterface
+- name: ResettableInterface
+  type: class
+  source: Symfony\Component\Cache\ResettableInterface
+- name: ClockInterface
+  type: class
+  source: Symfony\Component\Clock\ClockInterface
+- name: ConfigurationInterface
+  type: class
+  source: Symfony\Component\Config\Definition\ConfigurationInterface
+- name: FileLocator
+  type: class
+  source: Symfony\Component\Config\FileLocator
+- name: LoaderInterface
+  type: class
+  source: Symfony\Component\Config\Loader\LoaderInterface
+- name: DirectoryResource
+  type: class
+  source: Symfony\Component\Config\Resource\DirectoryResource
+- name: FileResource
+  type: class
+  source: Symfony\Component\Config\Resource\FileResource
+- name: ResourceCheckerInterface
+  type: class
+  source: Symfony\Component\Config\ResourceCheckerInterface
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: CommandDataCollector
+  type: class
+  source: Symfony\Component\Console\DataCollector\CommandDataCollector
+- name: CliRequest
+  type: class
+  source: Symfony\Component\Console\Debug\CliRequest
+- name: RunCommandMessageHandler
+  type: class
+  source: Symfony\Component\Console\Messenger\RunCommandMessageHandler
+- name: Alias
+  type: class
+  source: Symfony\Component\DependencyInjection\Alias
+- name: ServiceLocatorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ServiceLocatorTagPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: EnvVarLoaderInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\EnvVarLoaderInterface
+- name: EnvVarProcessorInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\EnvVarProcessorInterface
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\LogicException
+- name: PhpFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- name: Parameter
+  type: class
+  source: Symfony\Component\DependencyInjection\Parameter
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: ServiceLocator
+  type: class
+  source: Symfony\Component\DependencyInjection\ServiceLocator
+- name: DebugCommand
+  type: class
+  source: Symfony\Component\Dotenv\Command\DebugCommand
+- name: AsEventListener
+  type: class
+  source: Symfony\Component\EventDispatcher\Attribute\AsEventListener
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: ExpressionLanguage
+  type: class
+  source: Symfony\Component\ExpressionLanguage\ExpressionLanguage
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: Finder
+  type: class
+  source: Symfony\Component\Finder\Finder
+- name: Glob
+  type: class
+  source: Symfony\Component\Finder\Glob
+- name: TextTypeHtmlSanitizerExtension
+  type: class
+  source: Symfony\Component\Form\Extension\HtmlSanitizer\Type\TextTypeHtmlSanitizerExtension
+- name: Form
+  type: class
+  source: Symfony\Component\Form\Form
+- name: FormTypeExtensionInterface
+  type: class
+  source: Symfony\Component\Form\FormTypeExtensionInterface
+- name: FormTypeGuesserInterface
+  type: class
+  source: Symfony\Component\Form\FormTypeGuesserInterface
+- name: FormTypeInterface
+  type: class
+  source: Symfony\Component\Form\FormTypeInterface
+- name: HtmlSanitizer
+  type: class
+  source: Symfony\Component\HtmlSanitizer\HtmlSanitizer
+- name: HtmlSanitizerConfig
+  type: class
+  source: Symfony\Component\HtmlSanitizer\HtmlSanitizerConfig
+- name: HtmlSanitizerInterface
+  type: class
+  source: Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface
+- name: PingWebhookMessageHandler
+  type: class
+  source: Symfony\Component\HttpClient\Messenger\PingWebhookMessageHandler
+- name: MockHttpClient
+  type: class
+  source: Symfony\Component\HttpClient\MockHttpClient
+- name: GenericRetryStrategy
+  type: class
+  source: Symfony\Component\HttpClient\Retry\GenericRetryStrategy
+- name: RetryableHttpClient
+  type: class
+  source: Symfony\Component\HttpClient\RetryableHttpClient
+- name: ScopingHttpClient
+  type: class
+  source: Symfony\Component\HttpClient\ScopingHttpClient
+- name: ThrottlingHttpClient
+  type: class
+  source: Symfony\Component\HttpClient\ThrottlingHttpClient
+- name: UriTemplateHttpClient
+  type: class
+  source: Symfony\Component\HttpClient\UriTemplateHttpClient
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: AsController
+  type: class
+  source: Symfony\Component\HttpKernel\Attribute\AsController
+- name: AsTargetedValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Attribute\AsTargetedValueResolver
+- name: CacheClearerInterface
+  type: class
+  source: Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface
+- name: CacheWarmerInterface
+  type: class
+  source: Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface
+- name: ValueResolverInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ValueResolverInterface
+- name: DataCollectorInterface
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface
+- name: Extension
+  type: class
+  source: Symfony\Component\HttpKernel\DependencyInjection\Extension
+- name: DebugLoggerConfigurator
+  type: class
+  source: Symfony\Component\HttpKernel\Log\DebugLoggerConfigurator
+- name: LockFactory
+  type: class
+  source: Symfony\Component\Lock\LockFactory
+- name: LockInterface
+  type: class
+  source: Symfony\Component\Lock\LockInterface
+- name: PersistingStoreInterface
+  type: class
+  source: Symfony\Component\Lock\PersistingStoreInterface
+- name: StoreFactory
+  type: class
+  source: Symfony\Component\Lock\Store\StoreFactory
+- name: MailerBridge
+  type: class
+  source: Symfony\Component\Mailer\Bridge
+- name: MailerTestCommand
+  type: class
+  source: Symfony\Component\Mailer\Command\MailerTestCommand
+- name: MessengerTransportListener
+  type: class
+  source: Symfony\Component\Mailer\EventListener\MessengerTransportListener
+- name: Mailer
+  type: class
+  source: Symfony\Component\Mailer\Mailer
+- name: HubRegistry
+  type: class
+  source: Symfony\Component\Mercure\HubRegistry
+- name: AsMessageHandler
+  type: class
+  source: Symfony\Component\Messenger\Attribute\AsMessageHandler
+- name: MessengerBridge
+  type: class
+  source: Symfony\Component\Messenger\Bridge
+- name: BatchHandlerInterface
+  type: class
+  source: Symfony\Component\Messenger\Handler\BatchHandlerInterface
+- name: MessageBus
+  type: class
+  source: Symfony\Component\Messenger\MessageBus
+- name: MessageBusInterface
+  type: class
+  source: Symfony\Component\Messenger\MessageBusInterface
+- name: RouterContextMiddleware
+  type: class
+  source: Symfony\Component\Messenger\Middleware\RouterContextMiddleware
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+- name: MessengerTransportFactoryInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\TransportFactoryInterface
+- name: TransportInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\TransportInterface
+- name: Headers
+  type: class
+  source: Symfony\Component\Mime\Header\Headers
+- name: MimeTypeGuesserInterface
+  type: class
+  source: Symfony\Component\Mime\MimeTypeGuesserInterface
+- name: MimeTypes
+  type: class
+  source: Symfony\Component\Mime\MimeTypes
+- name: NotifierBridge
+  type: class
+  source: Symfony\Component\Notifier\Bridge
+- name: ChatterInterface
+  type: class
+  source: Symfony\Component\Notifier\ChatterInterface
+- name: Notifier
+  type: class
+  source: Symfony\Component\Notifier\Notifier
+- name: Recipient
+  type: class
+  source: Symfony\Component\Notifier\Recipient\Recipient
+- name: TexterInterface
+  type: class
+  source: Symfony\Component\Notifier\TexterInterface
+- name: NotifierTransportFactoryInterface
+  type: class
+  source: Symfony\Component\Notifier\Transport\TransportFactoryInterface
+- name: RunProcessMessageHandler
+  type: class
+  source: Symfony\Component\Process\Messenger\RunProcessMessageHandler
+- name: PropertyAccessor
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccessor
+- name: PhpDocExtractor
+  type: class
+  source: Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor
+- name: PhpStanExtractor
+  type: class
+  source: Symfony\Component\PropertyInfo\Extractor\PhpStanExtractor
+- name: PropertyAccessExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyAccessExtractorInterface
+- name: PropertyDescriptionExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyDescriptionExtractorInterface
+- name: PropertyInfoExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyInfoExtractorInterface
+- name: PropertyInitializableExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyInitializableExtractorInterface
+- name: PropertyListExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyListExtractorInterface
+- name: PropertyReadInfoExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyReadInfoExtractorInterface
+- name: PropertyTypeExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface
+- name: PropertyWriteInfoExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyWriteInfoExtractorInterface
+- name: LimiterInterface
+  type: class
+  source: Symfony\Component\RateLimiter\LimiterInterface
+- name: RateLimiterFactory
+  type: class
+  source: Symfony\Component\RateLimiter\RateLimiterFactory
+- name: CacheStorage
+  type: class
+  source: Symfony\Component\RateLimiter\Storage\CacheStorage
+- name: AsRemoteEventConsumer
+  type: class
+  source: Symfony\Component\RemoteEvent\Attribute\AsRemoteEventConsumer
+- name: RemoteEvent
+  type: class
+  source: Symfony\Component\RemoteEvent\RemoteEvent
+- name: AsCronTask
+  type: class
+  source: Symfony\Component\Scheduler\Attribute\AsCronTask
+- name: AsPeriodicTask
+  type: class
+  source: Symfony\Component\Scheduler\Attribute\AsPeriodicTask
+- name: AsSchedule
+  type: class
+  source: Symfony\Component\Scheduler\Attribute\AsSchedule
+- name: SchedulerTransportFactory
+  type: class
+  source: Symfony\Component\Scheduler\Messenger\SchedulerTransportFactory
+- name: AuthenticationEvents
+  type: class
+  source: Symfony\Component\Security\Core\AuthenticationEvents
+- name: AuthenticationException
+  type: class
+  source: Symfony\Component\Security\Core\Exception\AuthenticationException
+- name: CsrfTokenManagerInterface
+  type: class
+  source: Symfony\Component\Security\Csrf\CsrfTokenManagerInterface
+- name: SemaphoreStoreInterface
+  type: class
+  source: Symfony\Component\Semaphore\PersistingStoreInterface
+- name: Semaphore
+  type: class
+  source: Symfony\Component\Semaphore\Semaphore
+- name: SemaphoreFactory
+  type: class
+  source: Symfony\Component\Semaphore\SemaphoreFactory
+- name: SemaphoreStoreFactory
+  type: class
+  source: Symfony\Component\Semaphore\Store\StoreFactory
+- name: DecoderInterface
+  type: class
+  source: Symfony\Component\Serializer\Encoder\DecoderInterface
+- name: EncoderInterface
+  type: class
+  source: Symfony\Component\Serializer\Encoder\EncoderInterface
+- name: AttributeLoader
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Loader\AttributeLoader
+- name: XmlFileLoader
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Loader\XmlFileLoader
+- name: YamlFileLoader
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Loader\YamlFileLoader
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- name: NormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\NormalizerInterface
+- name: Serializer
+  type: class
+  source: Symfony\Component\Serializer\Serializer
+- name: Stopwatch
+  type: class
+  source: Symfony\Component\Stopwatch\Stopwatch
+- name: LazyString
+  type: class
+  source: Symfony\Component\String\LazyString
+- name: SluggerInterface
+  type: class
+  source: Symfony\Component\String\Slugger\SluggerInterface
+- name: TranslationBridge
+  type: class
+  source: Symfony\Component\Translation\Bridge
+- name: BaseTranslationLintCommand
+  type: class
+  source: Symfony\Component\Translation\Command\TranslationLintCommand
+- name: BaseXliffLintCommand
+  type: class
+  source: Symfony\Component\Translation\Command\XliffLintCommand
+- name: PhpAstExtractor
+  type: class
+  source: Symfony\Component\Translation\Extractor\PhpAstExtractor
+- name: LocaleSwitcher
+  type: class
+  source: Symfony\Component\Translation\LocaleSwitcher
+- name: PseudoLocalizationTranslator
+  type: class
+  source: Symfony\Component\Translation\PseudoLocalizationTranslator
+- name: Translator
+  type: class
+  source: Symfony\Component\Translation\Translator
+- name: Type
+  type: class
+  source: Symfony\Component\TypeInfo\Type
+- name: PhpDocAwareReflectionTypeResolver
+  type: class
+  source: Symfony\Component\TypeInfo\TypeResolver\PhpDocAwareReflectionTypeResolver
+- name: StringTypeResolver
+  type: class
+  source: Symfony\Component\TypeInfo\TypeResolver\StringTypeResolver
+- name: UuidFactory
+  type: class
+  source: Symfony\Component\Uid\Factory\UuidFactory
+- name: UuidV4
+  type: class
+  source: Symfony\Component\Uid\UuidV4
+- name: ExpressionLanguageProvider
+  type: class
+  source: Symfony\Component\Validator\Constraints\ExpressionLanguageProvider
+- name: ConstraintValidatorInterface
+  type: class
+  source: Symfony\Component\Validator\ConstraintValidatorInterface
+- name: GroupProviderInterface
+  type: class
+  source: Symfony\Component\Validator\GroupProviderInterface
+- name: PropertyInfoLoader
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\PropertyInfoLoader
+- name: ObjectInitializerInterface
+  type: class
+  source: Symfony\Component\Validator\ObjectInitializerInterface
+- name: Validation
+  type: class
+  source: Symfony\Component\Validator\Validation
+- name: WebhookController
+  type: class
+  source: Symfony\Component\Webhook\Controller\WebhookController
+- name: HttpHeaderSerializer
+  type: class
+  source: Symfony\Component\WebLink\HttpHeaderSerializer
+- name: Workflow
+  type: class
+  source: Symfony\Component\Workflow
+- name: WorkflowInterface
+  type: class
+  source: Symfony\Component\Workflow\WorkflowInterface
+- name: BaseYamlLintCommand
+  type: class
+  source: Symfony\Component\Yaml\Command\LintCommand
+- name: Yaml
+  type: class
+  source: Symfony\Component\Yaml\Yaml
+- name: CacheInterface
+  type: class
+  source: Symfony\Contracts\Cache\CacheInterface
+- name: CallbackInterface
+  type: class
+  source: Symfony\Contracts\Cache\CallbackInterface
+- name: TagAwareCacheInterface
+  type: class
+  source: Symfony\Contracts\Cache\TagAwareCacheInterface
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+- name: HttpClientInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\HttpClientInterface
+- name: ResetInterface
+  type: class
+  source: Symfony\Contracts\Service\ResetInterface
+- name: ServiceSubscriberInterface
+  type: class
+  source: Symfony\Contracts\Service\ServiceSubscriberInterface
+- name: LocaleAwareInterface
+  type: class
+  source: Symfony\Contracts\Translation\LocaleAwareInterface
+properties: []
+methods:
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: container
+  comment: "# * Process the configuration and prepare the dependency injection container\
+    \ with\n# * parameters and services.\n# */\n# class FrameworkExtension extends\
+    \ Extension\n# {\n# private array $configsEnabled = [];\n# \n# /**\n# * Responds\
+    \ to the app.config configuration parameter.\n# *\n# * @throws LogicException"
+- name: getConfiguration
+  visibility: public
+  parameters:
+  - name: config
+  - name: container
+  comment: null
+- name: hasConsole
+  visibility: protected
+  parameters: []
+  comment: null
+- name: registerFormConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerHttpCacheConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: httpMethodOverride
+  comment: null
+- name: registerEsiConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerSsiConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerFragmentsConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerProfilerConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerWorkflowConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerDebugConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerRouterConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  - name: enabledLocales
+    default: '[]'
+  comment: null
+- name: registerSessionConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerRequestConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerAssetsConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerAssetMapperConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  - name: assetEnabled
+  - name: httpClientEnabled
+  comment: null
+- name: createPackageDefinition
+  visibility: private
+  parameters:
+  - name: basePath
+  - name: baseUrls
+  - name: version
+  comment: '# * Returns a definition for an asset package.'
+- name: createVersion
+  visibility: private
+  parameters:
+  - name: container
+  - name: version
+  - name: format
+  - name: jsonManifestPath
+  - name: name
+  - name: strictMode
+  comment: null
+- name: registerTranslatorConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  - name: defaultLocale
+  - name: enabledLocales
+  comment: null
+- name: registerValidationConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  - name: propertyInfoEnabled
+  comment: null
+- name: registerValidatorMapping
+  visibility: private
+  parameters:
+  - name: container
+  - name: config
+  - name: '&$files'
+  comment: null
+- name: registerMappingFilesFromDir
+  visibility: private
+  parameters:
+  - name: dir
+  - name: fileRecorder
+  comment: null
+- name: registerMappingFilesFromConfig
+  visibility: private
+  parameters:
+  - name: container
+  - name: config
+  - name: fileRecorder
+  comment: null
+- name: registerPropertyAccessConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerSecretsConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  - name: secret
+  comment: null
+- name: registerSecurityCsrfConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerSerializerConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerPropertyInfoConfiguration
+  visibility: private
+  parameters:
+  - name: container
+  - name: loader
+  comment: null
+- name: registerTypeInfoConfiguration
+  visibility: private
+  parameters:
+  - name: container
+  - name: loader
+  comment: null
+- name: registerLockConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerSemaphoreConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerSchedulerConfiguration
+  visibility: private
+  parameters:
+  - name: container
+  - name: loader
+  comment: null
+- name: registerMessengerConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  - name: validationEnabled
+  comment: null
+- name: registerCacheConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  comment: null
+- name: registerHttpClientConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerThrottlingHttpClient
+  visibility: private
+  parameters:
+  - name: rateLimiter
+  - name: name
+  - name: container
+  comment: null
+- name: registerRetryableHttpClient
+  visibility: private
+  parameters:
+  - name: options
+  - name: name
+  - name: container
+  comment: null
+- name: registerMailerConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  - name: webhookEnabled
+  comment: null
+- name: registerNotifierConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  - name: webhookEnabled
+  comment: null
+- name: registerWebhookConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerRemoteEventConfiguration
+  visibility: private
+  parameters:
+  - name: loader
+  comment: null
+- name: registerRateLimiterConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerUidConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: registerHtmlSanitizerConfiguration
+  visibility: private
+  parameters:
+  - name: config
+  - name: container
+  - name: loader
+  comment: null
+- name: resolveTrustedHeaders
+  visibility: private
+  parameters:
+  - name: headers
+  comment: null
+- name: getXsdValidationBasePath
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNamespace
+  visibility: public
+  parameters: []
+  comment: null
+- name: isConfigEnabled
+  visibility: protected
+  parameters:
+  - name: container
+  - name: config
+  comment: null
+- name: isInitializedConfigEnabled
+  visibility: private
+  parameters:
+  - name: path
+  comment: null
+- name: readConfigEnabled
+  visibility: private
+  parameters:
+  - name: path
+  - name: container
+  - name: config
+  comment: null
+- name: writeConfigEnabled
+  visibility: private
+  parameters:
+  - name: path
+  - name: value
+  - name: '&$config'
+  comment: null
+- name: getPublicDirectory
+  visibility: private
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Composer\InstalledVersions
+- Http\Client\HttpAsyncClient
+- Http\Client\HttpClient
+- phpDocumentor\Reflection\DocBlockFactoryInterface
+- phpDocumentor\Reflection\Types\ContextFactory
+- PhpParser\Parser
+- PHPStan\PhpDocParser\Parser\PhpDocParser
+- Psr\Cache\CacheItemPoolInterface
+- Psr\Http\Client\ClientInterface
+- Psr\Log\LoggerAwareInterface
+- Symfony\Bridge\Monolog\Processor\DebugProcessor
+- Symfony\Bridge\Twig\Extension\CsrfExtension
+- Symfony\Bundle\FrameworkBundle\Controller\AbstractController
+- Symfony\Bundle\FrameworkBundle\Routing\RouteLoaderInterface
+- Symfony\Bundle\FullStack
+- Symfony\Bundle\MercureBundle\MercureBundle
+- Symfony\Component\Asset\PackageInterface
+- Symfony\Component\AssetMapper\AssetMapper
+- Symfony\Component\AssetMapper\Compiler\AssetCompilerInterface
+- Symfony\Component\BrowserKit\AbstractBrowser
+- Symfony\Component\Cache\Adapter\AdapterInterface
+- Symfony\Component\Cache\Adapter\ArrayAdapter
+- Symfony\Component\Cache\Adapter\ChainAdapter
+- Symfony\Component\Cache\Adapter\TagAwareAdapter
+- Symfony\Component\Cache\DependencyInjection\CachePoolPass
+- Symfony\Component\Cache\Marshaller\MarshallerInterface
+- Symfony\Component\Cache\ResettableInterface
+- Symfony\Component\Clock\ClockInterface
+- Symfony\Component\Config\Definition\ConfigurationInterface
+- Symfony\Component\Config\FileLocator
+- Symfony\Component\Config\Loader\LoaderInterface
+- Symfony\Component\Config\Resource\DirectoryResource
+- Symfony\Component\Config\Resource\FileResource
+- Symfony\Component\Config\ResourceCheckerInterface
+- Symfony\Component\Console\Application
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\DataCollector\CommandDataCollector
+- Symfony\Component\Console\Debug\CliRequest
+- Symfony\Component\Console\Messenger\RunCommandMessageHandler
+- Symfony\Component\DependencyInjection\Alias
+- Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\EnvVarLoaderInterface
+- Symfony\Component\DependencyInjection\EnvVarProcessorInterface
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Exception\LogicException
+- Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- Symfony\Component\DependencyInjection\Parameter
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\DependencyInjection\ServiceLocator
+- Symfony\Component\Dotenv\Command\DebugCommand
+- Symfony\Component\EventDispatcher\Attribute\AsEventListener
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\ExpressionLanguage\ExpressionLanguage
+- Symfony\Component\Filesystem\Filesystem
+- Symfony\Component\Finder\Finder
+- Symfony\Component\Finder\Glob
+- Symfony\Component\Form\Extension\HtmlSanitizer\Type\TextTypeHtmlSanitizerExtension
+- Symfony\Component\Form\Form
+- Symfony\Component\Form\FormTypeExtensionInterface
+- Symfony\Component\Form\FormTypeGuesserInterface
+- Symfony\Component\Form\FormTypeInterface
+- Symfony\Component\HtmlSanitizer\HtmlSanitizer
+- Symfony\Component\HtmlSanitizer\HtmlSanitizerConfig
+- Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface
+- Symfony\Component\HttpClient\Messenger\PingWebhookMessageHandler
+- Symfony\Component\HttpClient\MockHttpClient
+- Symfony\Component\HttpClient\Retry\GenericRetryStrategy
+- Symfony\Component\HttpClient\RetryableHttpClient
+- Symfony\Component\HttpClient\ScopingHttpClient
+- Symfony\Component\HttpClient\ThrottlingHttpClient
+- Symfony\Component\HttpClient\UriTemplateHttpClient
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\Attribute\AsController
+- Symfony\Component\HttpKernel\Attribute\AsTargetedValueResolver
+- Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface
+- Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface
+- Symfony\Component\HttpKernel\Controller\ValueResolverInterface
+- Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface
+- Symfony\Component\HttpKernel\DependencyInjection\Extension
+- Symfony\Component\HttpKernel\Log\DebugLoggerConfigurator
+- Symfony\Component\Lock\LockFactory
+- Symfony\Component\Lock\LockInterface
+- Symfony\Component\Lock\PersistingStoreInterface
+- Symfony\Component\Lock\Store\StoreFactory
+- Symfony\Component\Mailer\Command\MailerTestCommand
+- Symfony\Component\Mailer\EventListener\MessengerTransportListener
+- Symfony\Component\Mailer\Mailer
+- Symfony\Component\Mercure\HubRegistry
+- Symfony\Component\Messenger\Attribute\AsMessageHandler
+- Symfony\Component\Messenger\Handler\BatchHandlerInterface
+- Symfony\Component\Messenger\MessageBus
+- Symfony\Component\Messenger\MessageBusInterface
+- Symfony\Component\Messenger\Middleware\RouterContextMiddleware
+- Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+- Symfony\Component\Messenger\Transport\TransportInterface
+- Symfony\Component\Mime\Header\Headers
+- Symfony\Component\Mime\MimeTypeGuesserInterface
+- Symfony\Component\Mime\MimeTypes
+- Symfony\Component\Notifier\ChatterInterface
+- Symfony\Component\Notifier\Notifier
+- Symfony\Component\Notifier\Recipient\Recipient
+- Symfony\Component\Notifier\TexterInterface
+- Symfony\Component\Process\Messenger\RunProcessMessageHandler
+- Symfony\Component\PropertyAccess\PropertyAccessor
+- Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor
+- Symfony\Component\PropertyInfo\Extractor\PhpStanExtractor
+- Symfony\Component\PropertyInfo\PropertyAccessExtractorInterface
+- Symfony\Component\PropertyInfo\PropertyDescriptionExtractorInterface
+- Symfony\Component\PropertyInfo\PropertyInfoExtractorInterface
+- Symfony\Component\PropertyInfo\PropertyInitializableExtractorInterface
+- Symfony\Component\PropertyInfo\PropertyListExtractorInterface
+- Symfony\Component\PropertyInfo\PropertyReadInfoExtractorInterface
+- Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface
+- Symfony\Component\PropertyInfo\PropertyWriteInfoExtractorInterface
+- Symfony\Component\RateLimiter\LimiterInterface
+- Symfony\Component\RateLimiter\RateLimiterFactory
+- Symfony\Component\RateLimiter\Storage\CacheStorage
+- Symfony\Component\RemoteEvent\Attribute\AsRemoteEventConsumer
+- Symfony\Component\RemoteEvent\RemoteEvent
+- Symfony\Component\Scheduler\Attribute\AsCronTask
+- Symfony\Component\Scheduler\Attribute\AsPeriodicTask
+- Symfony\Component\Scheduler\Attribute\AsSchedule
+- Symfony\Component\Scheduler\Messenger\SchedulerTransportFactory
+- Symfony\Component\Security\Core\AuthenticationEvents
+- Symfony\Component\Security\Core\Exception\AuthenticationException
+- Symfony\Component\Security\Csrf\CsrfTokenManagerInterface
+- Symfony\Component\Semaphore\Semaphore
+- Symfony\Component\Semaphore\SemaphoreFactory
+- Symfony\Component\Serializer\Encoder\DecoderInterface
+- Symfony\Component\Serializer\Encoder\EncoderInterface
+- Symfony\Component\Serializer\Mapping\Loader\AttributeLoader
+- Symfony\Component\Serializer\Mapping\Loader\XmlFileLoader
+- Symfony\Component\Serializer\Mapping\Loader\YamlFileLoader
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- Symfony\Component\Serializer\Normalizer\NormalizerInterface
+- Symfony\Component\Serializer\Serializer
+- Symfony\Component\Stopwatch\Stopwatch
+- Symfony\Component\String\LazyString
+- Symfony\Component\String\Slugger\SluggerInterface
+- Symfony\Component\Translation\Extractor\PhpAstExtractor
+- Symfony\Component\Translation\LocaleSwitcher
+- Symfony\Component\Translation\PseudoLocalizationTranslator
+- Symfony\Component\Translation\Translator
+- Symfony\Component\TypeInfo\Type
+- Symfony\Component\TypeInfo\TypeResolver\PhpDocAwareReflectionTypeResolver
+- Symfony\Component\TypeInfo\TypeResolver\StringTypeResolver
+- Symfony\Component\Uid\Factory\UuidFactory
+- Symfony\Component\Uid\UuidV4
+- Symfony\Component\Validator\Constraints\ExpressionLanguageProvider
+- Symfony\Component\Validator\ConstraintValidatorInterface
+- Symfony\Component\Validator\GroupProviderInterface
+- Symfony\Component\Validator\Mapping\Loader\PropertyInfoLoader
+- Symfony\Component\Validator\ObjectInitializerInterface
+- Symfony\Component\Validator\Validation
+- Symfony\Component\Webhook\Controller\WebhookController
+- Symfony\Component\WebLink\HttpHeaderSerializer
+- Symfony\Component\Workflow
+- Symfony\Component\Workflow\WorkflowInterface
+- Symfony\Component\Yaml\Yaml
+- Symfony\Contracts\Cache\CacheInterface
+- Symfony\Contracts\Cache\CallbackInterface
+- Symfony\Contracts\Cache\TagAwareCacheInterface
+- Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+- Symfony\Contracts\HttpClient\HttpClientInterface
+- Symfony\Contracts\Service\ResetInterface
+- Symfony\Contracts\Service\ServiceSubscriberInterface
+- Symfony\Contracts\Translation\LocaleAwareInterface
+interfaces: []

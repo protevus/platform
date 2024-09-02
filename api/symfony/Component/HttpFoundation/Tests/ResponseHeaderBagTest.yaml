@@ -1,0 +1,101 @@
+name: ResponseHeaderBagTest
+class_comment: '# * @group time-sensitive'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Cookie
+  type: class
+  source: Symfony\Component\HttpFoundation\Cookie
+- name: ResponseHeaderBag
+  type: class
+  source: Symfony\Component\HttpFoundation\ResponseHeaderBag
+properties: []
+methods:
+- name: testAllPreserveCase
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCacheControlHeader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCacheControlClone
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToStringIncludesCookieHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClearCookieSecureNotHttpOnly
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClearCookieSamesite
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClearCookiePartitioned
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReplace
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReplaceWithRemove
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCookiesWithSameNames
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemoveCookie
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemoveCookieWithNullRemove
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetCookieHeader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetCookiesWithInvalidArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToStringDoesntMessUpHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDateHeaderAddedOnCreation
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDateHeaderCanBeSetOnCreation
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDateHeaderWillBeRecreatedWhenRemoved
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDateHeaderWillBeRecreatedWhenHeadersAreReplaced
+  visibility: public
+  parameters: []
+  comment: null
+- name: assertSetCookieHeader
+  visibility: private
+  parameters:
+  - name: expected
+  - name: actual
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Cookie
+- Symfony\Component\HttpFoundation\ResponseHeaderBag
+interfaces: []

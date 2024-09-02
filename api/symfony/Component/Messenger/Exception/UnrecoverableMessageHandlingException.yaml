@@ -1,0 +1,13 @@
+name: UnrecoverableMessageHandlingException
+class_comment: '# * A concrete implementation of UnrecoverableExceptionInterface that
+  can be used directly.
+
+  # *
+
+  # * @author Frederic Bouchery <frederic@bouchery.fr>'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- UnrecoverableExceptionInterface

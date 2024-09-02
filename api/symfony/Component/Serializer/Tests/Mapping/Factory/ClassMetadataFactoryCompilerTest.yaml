@@ -1,0 +1,55 @@
+name: ClassMetadataFactoryCompilerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ClassMetadataFactory
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory
+- name: ClassMetadataFactoryCompiler
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryCompiler
+- name: AttributeLoader
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Loader\AttributeLoader
+- name: MaxDepthDummy
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\Attributes\MaxDepthDummy
+- name: SerializedNameDummy
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\Attributes\SerializedNameDummy
+- name: SerializedPathDummy
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\Attributes\SerializedPathDummy
+- name: SerializedPathInConstructorDummy
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\Attributes\SerializedPathInConstructorDummy
+- name: Dummy
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\Dummy
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testItDumpMetadata
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory
+- Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryCompiler
+- Symfony\Component\Serializer\Mapping\Loader\AttributeLoader
+- Symfony\Component\Serializer\Tests\Fixtures\Attributes\MaxDepthDummy
+- Symfony\Component\Serializer\Tests\Fixtures\Attributes\SerializedNameDummy
+- Symfony\Component\Serializer\Tests\Fixtures\Attributes\SerializedPathDummy
+- Symfony\Component\Serializer\Tests\Fixtures\Attributes\SerializedPathInConstructorDummy
+- Symfony\Component\Serializer\Tests\Fixtures\Dummy
+interfaces: []

@@ -1,0 +1,76 @@
+name: LazyChoiceList
+class_comment: '# * A choice list that loads its choices lazily.
+
+  # *
+
+  # * The choices are fetched using a {@link ChoiceLoaderInterface} instance.
+
+  # * If only {@link getChoicesForValues()} or {@link getValuesForChoices()} is
+
+  # * called, the choice list is only loaded partially for improved performance.
+
+  # *
+
+  # * Once {@link getChoices()} or {@link getValues()} is called, the list is
+
+  # * loaded fully.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: ChoiceLoaderInterface
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: loader
+  - name: value
+    default: 'null'
+  comment: "# * A choice list that loads its choices lazily.\n# *\n# * The choices\
+    \ are fetched using a {@link ChoiceLoaderInterface} instance.\n# * If only {@link\
+    \ getChoicesForValues()} or {@link getValuesForChoices()} is\n# * called, the\
+    \ choice list is only loaded partially for improved performance.\n# *\n# * Once\
+    \ {@link getChoices()} or {@link getValues()} is called, the list is\n# * loaded\
+    \ fully.\n# *\n# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# class\
+    \ LazyChoiceList implements ChoiceListInterface\n# {\n# /**\n# * The callable\
+    \ creating string values for each choice.\n# *\n# * If null, choices are cast\
+    \ to strings.\n# */\n# private ?\\Closure $value;\n# \n# /**\n# * Creates a lazily-loaded\
+    \ list using the given loader.\n# *\n# * Optionally, a callable can be passed\
+    \ for generating the choice values.\n# * The callable receives the choice as first\
+    \ and the array key as the second\n# * argument.\n# *\n# * @param callable|null\
+    \ $value The callable creating string values for each choice.\n# *           \
+    \                  If null, choices are cast to strings."
+- name: getChoices
+  visibility: public
+  parameters: []
+  comment: null
+- name: getValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: getStructuredValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: getOriginalKeys
+  visibility: public
+  parameters: []
+  comment: null
+- name: getChoicesForValues
+  visibility: public
+  parameters:
+  - name: values
+  comment: null
+- name: getValuesForChoices
+  visibility: public
+  parameters:
+  - name: choices
+  comment: null
+traits:
+- Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface
+interfaces:
+- ChoiceListInterface

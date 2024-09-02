@@ -1,0 +1,76 @@
+name: DummyStream
+class_comment: null
+dependencies:
+- name: TransportException
+  type: class
+  source: Symfony\Component\Mailer\Exception\TransportException
+- name: AbstractStream
+  type: class
+  source: Symfony\Component\Mailer\Transport\Smtp\Stream\AbstractStream
+properties: []
+methods:
+- name: initialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: disableTls
+  visibility: public
+  parameters: []
+  comment: null
+- name: isTLS
+  visibility: public
+  parameters: []
+  comment: null
+- name: setHost
+  visibility: public
+  parameters:
+  - name: host
+  comment: null
+- name: setPort
+  visibility: public
+  parameters:
+  - name: port
+  comment: null
+- name: write
+  visibility: public
+  parameters:
+  - name: bytes
+  - name: debug
+    default: 'true'
+  comment: null
+- name: readLine
+  visibility: public
+  parameters: []
+  comment: null
+- name: flush
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCommands
+  visibility: public
+  parameters: []
+  comment: '# * @return string[]'
+- name: clearCommands
+  visibility: public
+  parameters: []
+  comment: null
+- name: getReadConnectionDescription
+  visibility: protected
+  parameters: []
+  comment: null
+- name: close
+  visibility: public
+  parameters: []
+  comment: null
+- name: isClosed
+  visibility: public
+  parameters: []
+  comment: null
+- name: terminate
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Mailer\Exception\TransportException
+- Symfony\Component\Mailer\Transport\Smtp\Stream\AbstractStream
+interfaces: []

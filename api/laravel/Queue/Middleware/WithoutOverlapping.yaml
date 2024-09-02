@@ -1,0 +1,153 @@
+name: WithoutOverlapping
+class_comment: null
+dependencies:
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: Cache
+  type: class
+  source: Illuminate\Contracts\Cache\Repository
+- name: InteractsWithTime
+  type: class
+  source: Illuminate\Support\InteractsWithTime
+- name: InteractsWithTime
+  type: class
+  source: InteractsWithTime
+properties:
+- name: key
+  visibility: public
+  comment: '# * The job''s unique key used for preventing overlaps.
+
+    # *
+
+    # * @var string'
+- name: releaseAfter
+  visibility: public
+  comment: '# * The number of seconds before a job should be available again if no
+    lock was acquired.
+
+    # *
+
+    # * @var \DateTimeInterface|int|null'
+- name: expiresAfter
+  visibility: public
+  comment: '# * The number of seconds before the lock should expire.
+
+    # *
+
+    # * @var int'
+- name: prefix
+  visibility: public
+  comment: '# * The prefix of the lock key.
+
+    # *
+
+    # * @var string'
+- name: shareKey
+  visibility: public
+  comment: '# * Share the key across different jobs.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: key
+    default: ''''''
+  - name: releaseAfter
+    default: '0'
+  - name: expiresAfter
+    default: '0'
+  comment: "# * The job's unique key used for preventing overlaps.\n# *\n# * @var\
+    \ string\n# */\n# public $key;\n# \n# /**\n# * The number of seconds before a\
+    \ job should be available again if no lock was acquired.\n# *\n# * @var \\DateTimeInterface|int|null\n\
+    # */\n# public $releaseAfter;\n# \n# /**\n# * The number of seconds before the\
+    \ lock should expire.\n# *\n# * @var int\n# */\n# public $expiresAfter;\n# \n\
+    # /**\n# * The prefix of the lock key.\n# *\n# * @var string\n# */\n# public $prefix\
+    \ = 'laravel-queue-overlap:';\n# \n# /**\n# * Share the key across different jobs.\n\
+    # *\n# * @var bool\n# */\n# public $shareKey = false;\n# \n# /**\n# * Create a\
+    \ new middleware instance.\n# *\n# * @param  string  $key\n# * @param  \\DateTimeInterface|int|null\
+    \  $releaseAfter\n# * @param  \\DateTimeInterface|int  $expiresAfter\n# * @return\
+    \ void"
+- name: handle
+  visibility: public
+  parameters:
+  - name: job
+  - name: next
+  comment: '# * Process the job.
+
+    # *
+
+    # * @param  mixed  $job
+
+    # * @param  callable  $next
+
+    # * @return mixed'
+- name: releaseAfter
+  visibility: public
+  parameters:
+  - name: releaseAfter
+  comment: '# * Set the delay (in seconds) to release the job back to the queue.
+
+    # *
+
+    # * @param  \DateTimeInterface|int  $releaseAfter
+
+    # * @return $this'
+- name: dontRelease
+  visibility: public
+  parameters: []
+  comment: '# * Do not release the job back to the queue if no lock can be acquired.
+
+    # *
+
+    # * @return $this'
+- name: expireAfter
+  visibility: public
+  parameters:
+  - name: expiresAfter
+  comment: '# * Set the maximum number of seconds that can elapse before the lock
+    is released.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $expiresAfter
+
+    # * @return $this'
+- name: withPrefix
+  visibility: public
+  parameters:
+  - name: prefix
+  comment: '# * Set the prefix of the lock key.
+
+    # *
+
+    # * @param  string  $prefix
+
+    # * @return $this'
+- name: shared
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the lock key should be shared across job classes.
+
+    # *
+
+    # * @return $this'
+- name: getLockKey
+  visibility: public
+  parameters:
+  - name: job
+  comment: '# * Get the lock key for the given job.
+
+    # *
+
+    # * @param  mixed  $job
+
+    # * @return string'
+traits:
+- Illuminate\Container\Container
+- Illuminate\Support\InteractsWithTime
+- InteractsWithTime
+interfaces: []

@@ -1,0 +1,142 @@
+name: DatabasePresenceVerifier
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: ConnectionResolverInterface
+  type: class
+  source: Illuminate\Database\ConnectionResolverInterface
+properties:
+- name: db
+  visibility: protected
+  comment: '# * The database connection instance.
+
+    # *
+
+    # * @var \Illuminate\Database\ConnectionResolverInterface'
+- name: connection
+  visibility: protected
+  comment: '# * The database connection to use.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: db
+  comment: "# * The database connection instance.\n# *\n# * @var \\Illuminate\\Database\\\
+    ConnectionResolverInterface\n# */\n# protected $db;\n# \n# /**\n# * The database\
+    \ connection to use.\n# *\n# * @var string\n# */\n# protected $connection;\n#\
+    \ \n# /**\n# * Create a new database presence verifier.\n# *\n# * @param  \\Illuminate\\\
+    Database\\ConnectionResolverInterface  $db\n# * @return void"
+- name: getCount
+  visibility: public
+  parameters:
+  - name: collection
+  - name: column
+  - name: value
+  - name: excludeId
+    default: 'null'
+  - name: idColumn
+    default: 'null'
+  - name: extra
+    default: '[]'
+  comment: '# * Count the number of objects in a collection having the given value.
+
+    # *
+
+    # * @param  string  $collection
+
+    # * @param  string  $column
+
+    # * @param  string  $value
+
+    # * @param  int|null  $excludeId
+
+    # * @param  string|null  $idColumn
+
+    # * @param  array  $extra
+
+    # * @return int'
+- name: getMultiCount
+  visibility: public
+  parameters:
+  - name: collection
+  - name: column
+  - name: values
+  - name: extra
+    default: '[]'
+  comment: '# * Count the number of objects in a collection with the given values.
+
+    # *
+
+    # * @param  string  $collection
+
+    # * @param  string  $column
+
+    # * @param  array  $values
+
+    # * @param  array  $extra
+
+    # * @return int'
+- name: addConditions
+  visibility: protected
+  parameters:
+  - name: query
+  - name: conditions
+  comment: '# * Add the given conditions to the query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  array  $conditions
+
+    # * @return \Illuminate\Database\Query\Builder'
+- name: addWhere
+  visibility: protected
+  parameters:
+  - name: query
+  - name: key
+  - name: extraValue
+  comment: '# * Add a "where" clause to the given query.
+
+    # *
+
+    # * @param  \Illuminate\Database\Query\Builder  $query
+
+    # * @param  string  $key
+
+    # * @param  string  $extraValue
+
+    # * @return void'
+- name: table
+  visibility: protected
+  parameters:
+  - name: table
+  comment: '# * Get a query builder for the given table.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @return \Illuminate\Database\Query\Builder'
+- name: setConnection
+  visibility: public
+  parameters:
+  - name: connection
+  comment: '# * Set the connection to be used.
+
+    # *
+
+    # * @param  string  $connection
+
+    # * @return void'
+traits:
+- Closure
+- Illuminate\Database\ConnectionResolverInterface
+interfaces:
+- DatabasePresenceVerifierInterface

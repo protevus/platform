@@ -1,0 +1,108 @@
+name: InteractsWithContentTypes
+class_comment: null
+dependencies:
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+properties: []
+methods:
+- name: isJson
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the request is sending JSON.
+
+    # *
+
+    # * @return bool'
+- name: expectsJson
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the current request probably expects a JSON response.
+
+    # *
+
+    # * @return bool'
+- name: wantsJson
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the current request is asking for JSON.
+
+    # *
+
+    # * @return bool'
+- name: accepts
+  visibility: public
+  parameters:
+  - name: contentTypes
+  comment: '# * Determines whether the current requests accepts a given content type.
+
+    # *
+
+    # * @param  string|array  $contentTypes
+
+    # * @return bool'
+- name: prefers
+  visibility: public
+  parameters:
+  - name: contentTypes
+  comment: '# * Return the most suitable content type from the given array based on
+    content negotiation.
+
+    # *
+
+    # * @param  string|array  $contentTypes
+
+    # * @return string|null'
+- name: acceptsAnyContentType
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the current request accepts any content type.
+
+    # *
+
+    # * @return bool'
+- name: acceptsJson
+  visibility: public
+  parameters: []
+  comment: '# * Determines whether a request accepts JSON.
+
+    # *
+
+    # * @return bool'
+- name: acceptsHtml
+  visibility: public
+  parameters: []
+  comment: '# * Determines whether a request accepts HTML.
+
+    # *
+
+    # * @return bool'
+- name: matchesType
+  visibility: public
+  parameters:
+  - name: actual
+  - name: type
+  comment: '# * Determine if the given content types match.
+
+    # *
+
+    # * @param  string  $actual
+
+    # * @param  string  $type
+
+    # * @return bool'
+- name: format
+  visibility: public
+  parameters:
+  - name: default
+    default: '''html'''
+  comment: '# * Get the data format expected in the response.
+
+    # *
+
+    # * @param  string  $default
+
+    # * @return string'
+traits:
+- Illuminate\Support\Str
+interfaces: []

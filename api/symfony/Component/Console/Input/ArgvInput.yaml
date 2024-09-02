@@ -1,0 +1,178 @@
+name: ArgvInput
+class_comment: '# * ArgvInput represents an input coming from the CLI arguments.
+
+  # *
+
+  # * Usage:
+
+  # *
+
+  # *     $input = new ArgvInput();
+
+  # *
+
+  # * By default, the `$_SERVER[''argv'']` array is used for the input values.
+
+  # *
+
+  # * This can be overridden by explicitly passing the input values in the constructor:
+
+  # *
+
+  # *     $input = new ArgvInput($_SERVER[''argv'']);
+
+  # *
+
+  # * If you pass it yourself, don''t forget that the first element of the array
+
+  # * is the name of the running application.
+
+  # *
+
+  # * When passing an argument to the constructor, be sure that it respects
+
+  # * the same rules as the argv one. It''s almost always better to use the
+
+  # * `StringInput` when you want to provide your own input.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @see http://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html
+
+  # * @see http://www.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap12.html#tag_12_02'
+dependencies:
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Console\Exception\RuntimeException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: argv
+    default: 'null'
+  - name: definition
+    default: 'null'
+  comment: "# * ArgvInput represents an input coming from the CLI arguments.\n# *\n\
+    # * Usage:\n# *\n# *     $input = new ArgvInput();\n# *\n# * By default, the `$_SERVER['argv']`\
+    \ array is used for the input values.\n# *\n# * This can be overridden by explicitly\
+    \ passing the input values in the constructor:\n# *\n# *     $input = new ArgvInput($_SERVER['argv']);\n\
+    # *\n# * If you pass it yourself, don't forget that the first element of the array\n\
+    # * is the name of the running application.\n# *\n# * When passing an argument\
+    \ to the constructor, be sure that it respects\n# * the same rules as the argv\
+    \ one. It's almost always better to use the\n# * `StringInput` when you want to\
+    \ provide your own input.\n# *\n# * @author Fabien Potencier <fabien@symfony.com>\n\
+    # *\n# * @see http://www.gnu.org/software/libc/manual/html_node/Argument-Syntax.html\n\
+    # * @see http://www.opengroup.org/onlinepubs/009695399/basedefs/xbd_chap12.html#tag_12_02\n\
+    # */\n# class ArgvInput extends Input\n# {\n# /** @var list<string> */\n# private\
+    \ array $tokens;\n# private array $parsed;\n# \n# /** @param list<string>|null\
+    \ $argv"
+- name: setTokens
+  visibility: protected
+  parameters:
+  - name: tokens
+  comment: '# @param list<string> $tokens'
+- name: parse
+  visibility: protected
+  parameters: []
+  comment: null
+- name: parseToken
+  visibility: protected
+  parameters:
+  - name: token
+  - name: parseOptions
+  comment: null
+- name: parseShortOption
+  visibility: private
+  parameters:
+  - name: token
+  comment: '# * Parses a short option.'
+- name: parseShortOptionSet
+  visibility: private
+  parameters:
+  - name: name
+  comment: '# * Parses a short option set.
+
+    # *
+
+    # * @throws RuntimeException When option given doesn''t exist'
+- name: parseLongOption
+  visibility: private
+  parameters:
+  - name: token
+  comment: '# * Parses a long option.'
+- name: parseArgument
+  visibility: private
+  parameters:
+  - name: token
+  comment: '# * Parses an argument.
+
+    # *
+
+    # * @throws RuntimeException When too many arguments are given'
+- name: addShortOption
+  visibility: private
+  parameters:
+  - name: shortcut
+  - name: value
+  comment: '# * Adds a short option value.
+
+    # *
+
+    # * @throws RuntimeException When option given doesn''t exist'
+- name: addLongOption
+  visibility: private
+  parameters:
+  - name: name
+  - name: value
+  comment: '# * Adds a long option value.
+
+    # *
+
+    # * @throws RuntimeException When option given doesn''t exist'
+- name: getFirstArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: hasParameterOption
+  visibility: public
+  parameters:
+  - name: values
+  - name: onlyParams
+    default: 'false'
+  comment: null
+- name: getParameterOption
+  visibility: public
+  parameters:
+  - name: values
+  - name: default
+    default: 'false'
+  - name: onlyParams
+    default: 'false'
+  comment: null
+- name: getRawTokens
+  visibility: public
+  parameters:
+  - name: strip
+    default: 'false'
+  comment: '# * Returns un-parsed and not validated tokens.
+
+    # *
+
+    # * @param bool $strip Whether to return the raw parameters (false) or the values
+    after the command name (true)
+
+    # *
+
+    # * @return list<string>'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Returns a stringified representation of the args passed to the command.'
+traits:
+- Symfony\Component\Console\Exception\RuntimeException
+interfaces: []

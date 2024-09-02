@@ -1,0 +1,55 @@
+name: MakeFirewallsEventDispatcherTraceablePassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: SecurityExtension
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension
+- name: SecurityBundle
+  type: class
+  source: Symfony\Bundle\SecurityBundle\SecurityBundle
+- name: DecoratorServicePass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\DecoratorServicePass
+- name: PassConfig
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\PassConfig
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: TraceableEventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: Stopwatch
+  type: class
+  source: Symfony\Component\Stopwatch\Stopwatch
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testEventDispatcherIsDecoratedOnDebugMode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEventDispatcherIsNotDecoratedOnNonDebugMode
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension
+- Symfony\Bundle\SecurityBundle\SecurityBundle
+- Symfony\Component\DependencyInjection\Compiler\DecoratorServicePass
+- Symfony\Component\DependencyInjection\Compiler\PassConfig
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\Stopwatch\Stopwatch
+interfaces: []

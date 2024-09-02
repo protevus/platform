@@ -1,0 +1,37 @@
+name: SubRequestServiceResolutionController
+class_comment: null
+dependencies:
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: indexAction
+  visibility: public
+  parameters: []
+  comment: null
+- name: fragmentAction
+  visibility: public
+  parameters:
+  - name: logger
+  comment: null
+traits:
+- Psr\Log\LoggerInterface
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\HttpKernelInterface
+interfaces: []

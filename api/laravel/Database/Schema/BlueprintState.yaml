@@ -1,0 +1,130 @@
+name: BlueprintState
+class_comment: null
+dependencies:
+- name: Connection
+  type: class
+  source: Illuminate\Database\Connection
+- name: Expression
+  type: class
+  source: Illuminate\Database\Query\Expression
+- name: Grammar
+  type: class
+  source: Illuminate\Database\Schema\Grammars\Grammar
+- name: Fluent
+  type: class
+  source: Illuminate\Support\Fluent
+properties:
+- name: blueprint
+  visibility: protected
+  comment: '# * The blueprint instance.
+
+    # *
+
+    # * @var \Illuminate\Database\Schema\Blueprint'
+- name: connection
+  visibility: protected
+  comment: '# * The connection instance.
+
+    # *
+
+    # * @var \Illuminate\Database\Connection'
+- name: grammar
+  visibility: protected
+  comment: '# * The grammar instance.
+
+    # *
+
+    # * @var \Illuminate\Database\Schema\Grammars\Grammar'
+- name: columns
+  visibility: private
+  comment: '# * The columns.
+
+    # *
+
+    # * @var \Illuminate\Database\Schema\ColumnDefinition[]'
+- name: primaryKey
+  visibility: private
+  comment: '# * The primary key.
+
+    # *
+
+    # * @var \Illuminate\Database\Schema\IndexDefinition|null'
+- name: indexes
+  visibility: private
+  comment: '# * The indexes.
+
+    # *
+
+    # * @var \Illuminate\Database\Schema\IndexDefinition[]'
+- name: foreignKeys
+  visibility: private
+  comment: '# * The foreign keys.
+
+    # *
+
+    # * @var \Illuminate\Database\Schema\ForeignKeyDefinition[]'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: connection
+  - name: grammar
+  comment: "# * The blueprint instance.\n# *\n# * @var \\Illuminate\\Database\\Schema\\\
+    Blueprint\n# */\n# protected $blueprint;\n# \n# /**\n# * The connection instance.\n\
+    # *\n# * @var \\Illuminate\\Database\\Connection\n# */\n# protected $connection;\n\
+    # \n# /**\n# * The grammar instance.\n# *\n# * @var \\Illuminate\\Database\\Schema\\\
+    Grammars\\Grammar\n# */\n# protected $grammar;\n# \n# /**\n# * The columns.\n\
+    # *\n# * @var \\Illuminate\\Database\\Schema\\ColumnDefinition[]\n# */\n# private\
+    \ $columns;\n# \n# /**\n# * The primary key.\n# *\n# * @var \\Illuminate\\Database\\\
+    Schema\\IndexDefinition|null\n# */\n# private $primaryKey;\n# \n# /**\n# * The\
+    \ indexes.\n# *\n# * @var \\Illuminate\\Database\\Schema\\IndexDefinition[]\n\
+    # */\n# private $indexes;\n# \n# /**\n# * The foreign keys.\n# *\n# * @var \\\
+    Illuminate\\Database\\Schema\\ForeignKeyDefinition[]\n# */\n# private $foreignKeys;\n\
+    # \n# /**\n# * Create a new blueprint state instance.\n# *\n# * @param  \\Illuminate\\\
+    Database\\Schema\\Blueprint  $blueprint\n# * @param  \\Illuminate\\Database\\\
+    Connection  $connection\n# * @param  \\Illuminate\\Database\\Schema\\Grammars\\\
+    Grammar  $grammar\n# * @return void"
+- name: getPrimaryKey
+  visibility: public
+  parameters: []
+  comment: '# * Get the primary key.
+
+    # *
+
+    # * @return \Illuminate\Database\Schema\IndexDefinition|null'
+- name: getColumns
+  visibility: public
+  parameters: []
+  comment: '# * Get the columns.
+
+    # *
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition[]'
+- name: getIndexes
+  visibility: public
+  parameters: []
+  comment: '# * Get the indexes.
+
+    # *
+
+    # * @return \Illuminate\Database\Schema\IndexDefinition[]'
+- name: getForeignKeys
+  visibility: public
+  parameters: []
+  comment: '# * Get the foreign keys.
+
+    # *
+
+    # * @return \Illuminate\Database\Schema\ForeignKeyDefinition[]'
+- name: update
+  visibility: public
+  parameters:
+  - name: command
+  comment: null
+traits:
+- Illuminate\Database\Connection
+- Illuminate\Database\Query\Expression
+- Illuminate\Database\Schema\Grammars\Grammar
+- Illuminate\Support\Fluent
+interfaces: []

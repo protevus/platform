@@ -1,0 +1,17 @@
+name: InvalidOptionsException
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: message
+  - name: options
+  comment: null
+- name: getOptions
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

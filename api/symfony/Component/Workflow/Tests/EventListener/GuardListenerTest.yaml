@@ -1,0 +1,139 @@
+name: GuardListenerTest
+class_comment: null
+dependencies:
+- name: MockObject
+  type: class
+  source: PHPUnit\Framework\MockObject\MockObject
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AuthenticationTrustResolverInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface
+- name: TokenStorageInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+- name: UsernamePasswordToken
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken
+- name: AuthorizationCheckerInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
+- name: RoleHierarchy
+  type: class
+  source: Symfony\Component\Security\Core\Role\RoleHierarchy
+- name: InMemoryUser
+  type: class
+  source: Symfony\Component\Security\Core\User\InMemoryUser
+- name: ConstraintViolation
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolation
+- name: ConstraintViolationList
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolationList
+- name: ValidatorInterface
+  type: class
+  source: Symfony\Component\Validator\Validator\ValidatorInterface
+- name: GuardEvent
+  type: class
+  source: Symfony\Component\Workflow\Event\GuardEvent
+- name: ExpressionLanguage
+  type: class
+  source: Symfony\Component\Workflow\EventListener\ExpressionLanguage
+- name: GuardExpression
+  type: class
+  source: Symfony\Component\Workflow\EventListener\GuardExpression
+- name: GuardListener
+  type: class
+  source: Symfony\Component\Workflow\EventListener\GuardListener
+- name: Marking
+  type: class
+  source: Symfony\Component\Workflow\Marking
+- name: Subject
+  type: class
+  source: Symfony\Component\Workflow\Tests\Subject
+- name: Transition
+  type: class
+  source: Symfony\Component\Workflow\Transition
+- name: WorkflowInterface
+  type: class
+  source: Symfony\Component\Workflow\WorkflowInterface
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testWithNotSupportedEvent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithSecuritySupportedEventAndReject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithSecuritySupportedEventAndAccept
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithValidatorSupportedEventAndReject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithValidatorSupportedEventAndAccept
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithGuardExpressionWithNotSupportedTransition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithGuardExpressionWithSupportedTransition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGuardExpressionBlocks
+  visibility: public
+  parameters: []
+  comment: null
+- name: createEvent
+  visibility: private
+  parameters:
+  - name: transition
+    default: 'null'
+  comment: null
+- name: configureAuthenticationChecker
+  visibility: private
+  parameters:
+  - name: isUsed
+  - name: granted
+    default: 'true'
+  comment: null
+- name: configureValidator
+  visibility: private
+  parameters:
+  - name: isUsed
+  - name: valid
+    default: 'true'
+  comment: null
+traits:
+- PHPUnit\Framework\MockObject\MockObject
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface
+- Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+- Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken
+- Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
+- Symfony\Component\Security\Core\Role\RoleHierarchy
+- Symfony\Component\Security\Core\User\InMemoryUser
+- Symfony\Component\Validator\ConstraintViolation
+- Symfony\Component\Validator\ConstraintViolationList
+- Symfony\Component\Validator\Validator\ValidatorInterface
+- Symfony\Component\Workflow\Event\GuardEvent
+- Symfony\Component\Workflow\EventListener\ExpressionLanguage
+- Symfony\Component\Workflow\EventListener\GuardExpression
+- Symfony\Component\Workflow\EventListener\GuardListener
+- Symfony\Component\Workflow\Marking
+- Symfony\Component\Workflow\Tests\Subject
+- Symfony\Component\Workflow\Transition
+- Symfony\Component\Workflow\WorkflowInterface
+interfaces: []

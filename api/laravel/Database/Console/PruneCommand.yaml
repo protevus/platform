@@ -1,0 +1,132 @@
+name: PruneCommand
+class_comment: null
+dependencies:
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: MassPrunable
+  type: class
+  source: Illuminate\Database\Eloquent\MassPrunable
+- name: Prunable
+  type: class
+  source: Illuminate\Database\Eloquent\Prunable
+- name: SoftDeletes
+  type: class
+  source: Illuminate\Database\Eloquent\SoftDeletes
+- name: ModelPruningFinished
+  type: class
+  source: Illuminate\Database\Events\ModelPruningFinished
+- name: ModelPruningStarting
+  type: class
+  source: Illuminate\Database\Events\ModelPruningStarting
+- name: ModelsPruned
+  type: class
+  source: Illuminate\Database\Events\ModelsPruned
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Finder
+  type: class
+  source: Symfony\Component\Finder\Finder
+properties:
+- name: signature
+  visibility: protected
+  comment: '# * The console command name.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+methods:
+- name: handle
+  visibility: public
+  parameters:
+  - name: events
+  comment: "# * The console command name.\n# *\n# * @var string\n# */\n# protected\
+    \ $signature = 'model:prune\n# {--model=* : Class names of the models to be pruned}\n\
+    # {--except=* : Class names of the models to be excluded from pruning}\n# {--path=*\
+    \ : Absolute path(s) to directories where models are located}\n# {--chunk=1000\
+    \ : The number of models to retrieve per chunk of models to be deleted}\n# {--pretend\
+    \ : Display the number of prunable records found instead of deleting them}';\n\
+    # \n# /**\n# * The console command description.\n# *\n# * @var string\n# */\n\
+    # protected $description = 'Prune models that are no longer needed';\n# \n# /**\n\
+    # * Execute the console command.\n# *\n# * @param  \\Illuminate\\Contracts\\Events\\\
+    Dispatcher  $events\n# * @return void"
+- name: pruneModel
+  visibility: protected
+  parameters:
+  - name: model
+  comment: '# * Prune the given model.
+
+    # *
+
+    # * @param  string  $model
+
+    # * @return void'
+- name: models
+  visibility: protected
+  parameters: []
+  comment: '# * Determine the models that should be pruned.
+
+    # *
+
+    # * @return \Illuminate\Support\Collection'
+- name: getPath
+  visibility: protected
+  parameters: []
+  comment: '# * Get the path where models are located.
+
+    # *
+
+    # * @return string[]|string'
+- name: isPrunable
+  visibility: protected
+  parameters:
+  - name: model
+  comment: '# * Determine if the given model class is prunable.
+
+    # *
+
+    # * @param  string  $model
+
+    # * @return bool'
+- name: pretendToPrune
+  visibility: protected
+  parameters:
+  - name: model
+  comment: '# * Display how many models will be pruned.
+
+    # *
+
+    # * @param  string  $model
+
+    # * @return void'
+traits:
+- Illuminate\Console\Command
+- Illuminate\Contracts\Events\Dispatcher
+- Illuminate\Database\Eloquent\MassPrunable
+- Illuminate\Database\Eloquent\Prunable
+- Illuminate\Database\Eloquent\SoftDeletes
+- Illuminate\Database\Events\ModelPruningFinished
+- Illuminate\Database\Events\ModelPruningStarting
+- Illuminate\Database\Events\ModelsPruned
+- Illuminate\Support\Str
+- InvalidArgumentException
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Finder\Finder
+interfaces: []

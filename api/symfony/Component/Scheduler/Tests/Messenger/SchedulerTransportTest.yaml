@@ -1,0 +1,63 @@
+name: SchedulerTransportTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: RedispatchMessage
+  type: class
+  source: Symfony\Component\Messenger\Message\RedispatchMessage
+- name: LogicException
+  type: class
+  source: Symfony\Component\Scheduler\Exception\LogicException
+- name: MessageContext
+  type: class
+  source: Symfony\Component\Scheduler\Generator\MessageContext
+- name: MessageGeneratorInterface
+  type: class
+  source: Symfony\Component\Scheduler\Generator\MessageGeneratorInterface
+- name: ScheduledStamp
+  type: class
+  source: Symfony\Component\Scheduler\Messenger\ScheduledStamp
+- name: SchedulerTransport
+  type: class
+  source: Symfony\Component\Scheduler\Messenger\SchedulerTransport
+- name: TriggerInterface
+  type: class
+  source: Symfony\Component\Scheduler\Trigger\TriggerInterface
+properties: []
+methods:
+- name: testGetFromIterator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddsStampToInnerRedispatchMessageEnvelope
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAckIgnored
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRejectException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendException
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Message\RedispatchMessage
+- Symfony\Component\Scheduler\Exception\LogicException
+- Symfony\Component\Scheduler\Generator\MessageContext
+- Symfony\Component\Scheduler\Generator\MessageGeneratorInterface
+- Symfony\Component\Scheduler\Messenger\ScheduledStamp
+- Symfony\Component\Scheduler\Messenger\SchedulerTransport
+- Symfony\Component\Scheduler\Trigger\TriggerInterface
+interfaces: []

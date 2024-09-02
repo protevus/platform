@@ -1,0 +1,47 @@
+name: ValidationListener
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: Form
+  type: class
+  source: Symfony\Component\Form\Extension\Validator\Constraints\Form
+- name: ViolationMapperInterface
+  type: class
+  source: Symfony\Component\Form\Extension\Validator\ViolationMapper\ViolationMapperInterface
+- name: FormEvent
+  type: class
+  source: Symfony\Component\Form\FormEvent
+- name: FormEvents
+  type: class
+  source: Symfony\Component\Form\FormEvents
+- name: ValidatorInterface
+  type: class
+  source: Symfony\Component\Validator\Validator\ValidatorInterface
+properties: []
+methods:
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: validator
+  - name: violationMapper
+  comment: null
+- name: validateForm
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\Form\Extension\Validator\Constraints\Form
+- Symfony\Component\Form\Extension\Validator\ViolationMapper\ViolationMapperInterface
+- Symfony\Component\Form\FormEvent
+- Symfony\Component\Form\FormEvents
+- Symfony\Component\Validator\Validator\ValidatorInterface
+interfaces:
+- EventSubscriberInterface

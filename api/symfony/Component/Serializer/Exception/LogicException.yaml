@@ -1,0 +1,12 @@
+name: LogicException
+class_comment: '# * LogicException.
+
+  # *
+
+  # * @author Lukas Kahwe Smith <smith@pooteeweet.org>'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- ExceptionInterface

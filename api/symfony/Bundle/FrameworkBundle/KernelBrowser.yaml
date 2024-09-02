@@ -1,0 +1,134 @@
+name: KernelBrowser
+class_comment: '# * Simulates a browser and makes requests to a Kernel object.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: TestBrowserToken
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Test\TestBrowserToken
+- name: Cookie
+  type: class
+  source: Symfony\Component\BrowserKit\Cookie
+- name: CookieJar
+  type: class
+  source: Symfony\Component\BrowserKit\CookieJar
+- name: History
+  type: class
+  source: Symfony\Component\BrowserKit\History
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: HttpKernelBrowser
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelBrowser
+- name: KernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\KernelInterface
+- name: HttpProfile
+  type: class
+  source: Symfony\Component\HttpKernel\Profiler\Profile
+- name: UserInterface
+  type: class
+  source: Symfony\Component\Security\Core\User\UserInterface
+properties: []
+methods:
+- name: getProfile
+  visibility: public
+  parameters: []
+  comment: "# * Simulates a browser and makes requests to a Kernel object.\n# *\n\
+    # * @author Fabien Potencier <fabien@symfony.com>\n# */\n# class KernelBrowser\
+    \ extends HttpKernelBrowser\n# {\n# private bool $hasPerformedRequest = false;\n\
+    # private bool $profiler = false;\n# private bool $reboot = true;\n# \n# public\
+    \ function __construct(KernelInterface $kernel, array $server = [], ?History $history\
+    \ = null, ?CookieJar $cookieJar = null)\n# {\n# parent::__construct($kernel, $server,\
+    \ $history, $cookieJar);\n# }\n# \n# public function getContainer(): ContainerInterface\n\
+    # {\n# $container = $this->kernel->getContainer();\n# \n# return $container->has('test.service_container')\
+    \ ? $container->get('test.service_container') : $container;\n# }\n# \n# public\
+    \ function getKernel(): KernelInterface\n# {\n# return $this->kernel;\n# }\n#\
+    \ \n# /**\n# * Gets the profile associated with the current Response."
+- name: enableProfiler
+  visibility: public
+  parameters: []
+  comment: '# * Enables the profiler for the very next request.
+
+    # *
+
+    # * If the profiler is not enabled, the call to this method does nothing.'
+- name: disableReboot
+  visibility: public
+  parameters: []
+  comment: '# * Disables kernel reboot between requests.
+
+    # *
+
+    # * By default, the Client reboots the Kernel for each request. This method
+
+    # * allows to keep the same kernel across requests.'
+- name: enableReboot
+  visibility: public
+  parameters: []
+  comment: '# * Enables kernel reboot between requests.'
+- name: loginUser
+  visibility: public
+  parameters:
+  - name: user
+  - name: firewallContext
+    default: '''main'''
+  - name: tokenAttributes
+    default: '[]'
+  comment: '# * @param UserInterface        $user
+
+    # * @param array<string, mixed> $tokenAttributes
+
+    # *
+
+    # * @return $this'
+- name: doRequest
+  visibility: protected
+  parameters:
+  - name: request
+  comment: '# * @param Request $request'
+- name: doRequestInProcess
+  visibility: protected
+  parameters:
+  - name: request
+  comment: '# * @param Request $request'
+- name: getScript
+  visibility: protected
+  parameters:
+  - name: request
+  comment: '# * Returns the script to execute when the request must be insulated.
+
+    # *
+
+    # * It assumes that the autoloader is named ''autoload.php'' and that it is
+
+    # * stored in the same directory as the kernel (this is the case for the
+
+    # * Symfony Standard Edition). If this is not your case, create your own
+
+    # * client and override this method.
+
+    # *
+
+    # * @param Request $request'
+traits:
+- Symfony\Bundle\FrameworkBundle\Test\TestBrowserToken
+- Symfony\Component\BrowserKit\Cookie
+- Symfony\Component\BrowserKit\CookieJar
+- Symfony\Component\BrowserKit\History
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\HttpKernelBrowser
+- Symfony\Component\HttpKernel\KernelInterface
+- Symfony\Component\Security\Core\User\UserInterface
+interfaces: []

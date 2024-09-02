@@ -1,0 +1,21 @@
+name: MultiResettableService
+class_comment: null
+dependencies: []
+properties:
+- name: resetFirstCounter
+  visibility: public
+  comment: null
+- name: resetSecondCounter
+  visibility: public
+  comment: null
+methods:
+- name: resetFirst
+  visibility: public
+  parameters: []
+  comment: null
+- name: resetSecond
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

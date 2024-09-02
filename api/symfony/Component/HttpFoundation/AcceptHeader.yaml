@@ -1,0 +1,67 @@
+name: AcceptHeader
+class_comment: "# * Represents an Accept-* header.\n# *\n# * An accept header is compound\
+  \ with a list of items,\n# * sorted by descending quality.\n# *\n# * @author Jean-Fran\xE7\
+  ois Simon <contact@jfsimon.fr>"
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: items
+  comment: "# * Represents an Accept-* header.\n# *\n# * An accept header is compound\
+    \ with a list of items,\n# * sorted by descending quality.\n# *\n# * @author Jean-Fran\xE7\
+    ois Simon <contact@jfsimon.fr>\n# */\n# class AcceptHeader\n# {\n# /**\n# * @var\
+    \ AcceptHeaderItem[]\n# */\n# private array $items = [];\n# \n# private bool $sorted\
+    \ = true;\n# \n# /**\n# * @param AcceptHeaderItem[] $items"
+- name: fromString
+  visibility: public
+  parameters:
+  - name: headerValue
+  comment: '# * Builds an AcceptHeader instance from a string.'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Returns header value''s string representation.'
+- name: has
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Tests if header has given value.'
+- name: get
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Returns given value''s item, if exists.'
+- name: add
+  visibility: public
+  parameters:
+  - name: item
+  comment: '# * Adds an item.
+
+    # *
+
+    # * @return $this'
+- name: all
+  visibility: public
+  parameters: []
+  comment: '# * Returns all items.
+
+    # *
+
+    # * @return AcceptHeaderItem[]'
+- name: filter
+  visibility: public
+  parameters:
+  - name: pattern
+  comment: '# * Filters items on their value using given regex.'
+- name: first
+  visibility: public
+  parameters: []
+  comment: '# * Returns first item.'
+- name: sort
+  visibility: private
+  parameters: []
+  comment: '# * Sorts items by descending quality.'
+traits: []
+interfaces: []

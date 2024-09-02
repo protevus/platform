@@ -1,0 +1,20 @@
+name: TestClass
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: dep
+  comment: null
+- name: getDep
+  visibility: public
+  parameters: []
+  comment: null
+- name: __destruct
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

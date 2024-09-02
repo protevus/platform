@@ -1,0 +1,91 @@
+name: DiscoverEvents
+class_comment: null
+dependencies:
+- name: Reflector
+  type: class
+  source: Illuminate\Support\Reflector
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: ReflectionClass
+  type: class
+  source: ReflectionClass
+- name: ReflectionException
+  type: class
+  source: ReflectionException
+- name: ReflectionMethod
+  type: class
+  source: ReflectionMethod
+- name: SplFileInfo
+  type: class
+  source: SplFileInfo
+- name: Finder
+  type: class
+  source: Symfony\Component\Finder\Finder
+properties:
+- name: guessClassNamesUsingCallback
+  visibility: public
+  comment: '# * The callback to be used to guess class names.
+
+    # *
+
+    # * @var callable(SplFileInfo, string): string|null'
+methods:
+- name: within
+  visibility: public
+  parameters:
+  - name: listenerPath
+  - name: basePath
+  comment: "# * The callback to be used to guess class names.\n# *\n# * @var callable(SplFileInfo,\
+    \ string): string|null\n# */\n# public static $guessClassNamesUsingCallback;\n\
+    # \n# /**\n# * Get all of the events and listeners by searching the given listener\
+    \ directory.\n# *\n# * @param  string  $listenerPath\n# * @param  string  $basePath\n\
+    # * @return array"
+- name: getListenerEvents
+  visibility: protected
+  parameters:
+  - name: listeners
+  - name: basePath
+  comment: '# * Get all of the listeners and their corresponding events.
+
+    # *
+
+    # * @param  iterable  $listeners
+
+    # * @param  string  $basePath
+
+    # * @return array'
+- name: classFromFile
+  visibility: protected
+  parameters:
+  - name: file
+  - name: basePath
+  comment: '# * Extract the class name from the given file path.
+
+    # *
+
+    # * @param  \SplFileInfo  $file
+
+    # * @param  string  $basePath
+
+    # * @return string'
+- name: guessClassNamesUsing
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Specify a callback to be used to guess class names.
+
+    # *
+
+    # * @param  callable(SplFileInfo, string): string  $callback
+
+    # * @return void'
+traits:
+- Illuminate\Support\Reflector
+- Illuminate\Support\Str
+- ReflectionClass
+- ReflectionException
+- ReflectionMethod
+- SplFileInfo
+- Symfony\Component\Finder\Finder
+interfaces: []

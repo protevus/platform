@@ -1,0 +1,15 @@
+name: PublicTrait
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: public
+  visibility: public
+  parameters: []
+  comment: null
+- name: private
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

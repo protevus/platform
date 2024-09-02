@@ -1,0 +1,25 @@
+name: RejectWebhookException
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: HttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\HttpException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: statusCode
+    default: '406'
+  - name: message
+    default: ''''''
+  - name: previous
+    default: 'null'
+  - name: headers
+    default: '[]'
+  - name: code
+    default: '0'
+  comment: null
+traits:
+- Symfony\Component\HttpKernel\Exception\HttpException
+interfaces: []

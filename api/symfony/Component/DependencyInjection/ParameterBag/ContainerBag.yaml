@@ -1,0 +1,31 @@
+name: ContainerBag
+class_comment: '# * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: Container
+  type: class
+  source: Symfony\Component\DependencyInjection\Container
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: all
+  visibility: public
+  parameters: []
+  comment: null
+- name: get
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: has
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Container
+interfaces:
+- ContainerBagInterface

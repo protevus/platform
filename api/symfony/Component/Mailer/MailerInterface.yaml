@@ -1,0 +1,40 @@
+name: MailerInterface
+class_comment: null
+dependencies:
+- name: TransportExceptionInterface
+  type: class
+  source: Symfony\Component\Mailer\Exception\TransportExceptionInterface
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+properties: []
+methods:
+- name: send
+  visibility: public
+  parameters:
+  - name: message
+  - name: envelope
+    default: 'null'
+  comment: '# * Interface for mailers able to send emails synchronously and/or asynchronously.
+
+    # *
+
+    # * Implementations must support synchronous and asynchronous sending.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # interface MailerInterface
+
+    # {
+
+    # /**
+
+    # * @throws TransportExceptionInterface'
+traits:
+- Symfony\Component\Mailer\Exception\TransportExceptionInterface
+- Symfony\Component\Mime\RawMessage
+interfaces: []

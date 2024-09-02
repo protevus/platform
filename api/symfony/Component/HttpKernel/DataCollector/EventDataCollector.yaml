@@ -1,0 +1,126 @@
+name: EventDataCollector
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @see TraceableEventDispatcher
+
+  # *
+
+  # * @final'
+dependencies:
+- name: TraceableEventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: Data
+  type: class
+  source: Symfony\Component\VarDumper\Cloner\Data
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+- name: ResetInterface
+  type: class
+  source: Symfony\Contracts\Service\ResetInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: dispatchers
+    default: 'null'
+  - name: requestStack
+    default: 'null'
+  - name: defaultDispatcher
+    default: '''event_dispatcher'''
+  comment: "# * @author Fabien Potencier <fabien@symfony.com>\n# *\n# * @see TraceableEventDispatcher\n\
+    # *\n# * @final\n# */\n# class EventDataCollector extends DataCollector implements\
+    \ LateDataCollectorInterface\n# {\n# /** @var iterable<EventDispatcherInterface>\
+    \ */\n# private iterable $dispatchers;\n# private ?Request $currentRequest = null;\n\
+    # \n# /**\n# * @param iterable<EventDispatcherInterface>|EventDispatcherInterface|null\
+    \ $dispatchers"
+- name: collect
+  visibility: public
+  parameters:
+  - name: request
+  - name: response
+  - name: exception
+    default: 'null'
+  comment: null
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+- name: lateCollect
+  visibility: public
+  parameters: []
+  comment: null
+- name: getData
+  visibility: public
+  parameters: []
+  comment: null
+- name: setCalledListeners
+  visibility: public
+  parameters:
+  - name: listeners
+  - name: dispatcher
+    default: 'null'
+  comment: '# * @see TraceableEventDispatcher'
+- name: getCalledListeners
+  visibility: public
+  parameters:
+  - name: dispatcher
+    default: 'null'
+  comment: '# * @see TraceableEventDispatcher'
+- name: setNotCalledListeners
+  visibility: public
+  parameters:
+  - name: listeners
+  - name: dispatcher
+    default: 'null'
+  comment: '# * @see TraceableEventDispatcher'
+- name: getNotCalledListeners
+  visibility: public
+  parameters:
+  - name: dispatcher
+    default: 'null'
+  comment: '# * @see TraceableEventDispatcher'
+- name: setOrphanedEvents
+  visibility: public
+  parameters:
+  - name: events
+  - name: dispatcher
+    default: 'null'
+  comment: '# * @param array $events An array of orphaned events
+
+    # *
+
+    # * @see TraceableEventDispatcher'
+- name: getOrphanedEvents
+  visibility: public
+  parameters:
+  - name: dispatcher
+    default: 'null'
+  comment: '# * @see TraceableEventDispatcher'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestStack
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\VarDumper\Cloner\Data
+- Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+- Symfony\Contracts\Service\ResetInterface
+interfaces:
+- LateDataCollectorInterface

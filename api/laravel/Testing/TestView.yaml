@@ -1,0 +1,213 @@
+name: TestView
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Collection
+  type: class
+  source: Illuminate\Database\Eloquent\Collection
+- name: Model
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: PHPUnit
+  type: class
+  source: Illuminate\Testing\Assert
+- name: SeeInOrder
+  type: class
+  source: Illuminate\Testing\Constraints\SeeInOrder
+- name: View
+  type: class
+  source: Illuminate\View\View
+- name: Stringable
+  type: class
+  source: Stringable
+- name: Macroable
+  type: class
+  source: Macroable
+properties:
+- name: view
+  visibility: protected
+  comment: '# * The original view.
+
+    # *
+
+    # * @var \Illuminate\View\View'
+- name: rendered
+  visibility: protected
+  comment: '# * The rendered view contents.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: view
+  comment: "# * The original view.\n# *\n# * @var \\Illuminate\\View\\View\n# */\n\
+    # protected $view;\n# \n# /**\n# * The rendered view contents.\n# *\n# * @var\
+    \ string\n# */\n# protected $rendered;\n# \n# /**\n# * Create a new test view\
+    \ instance.\n# *\n# * @param  \\Illuminate\\View\\View  $view\n# * @return void"
+- name: assertViewHas
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: 'null'
+  comment: '# * Assert that the response view has a given piece of bound data.
+
+    # *
+
+    # * @param  string|array  $key
+
+    # * @param  mixed  $value
+
+    # * @return $this'
+- name: assertViewHasAll
+  visibility: public
+  parameters:
+  - name: bindings
+  comment: '# * Assert that the response view has a given list of bound data.
+
+    # *
+
+    # * @param  array  $bindings
+
+    # * @return $this'
+- name: assertViewMissing
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Assert that the response view is missing a piece of bound data.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return $this'
+- name: assertViewEmpty
+  visibility: public
+  parameters: []
+  comment: '# * Assert that the view''s rendered content is empty.
+
+    # *
+
+    # * @return $this'
+- name: assertSee
+  visibility: public
+  parameters:
+  - name: value
+  - name: escape
+    default: 'true'
+  comment: '# * Assert that the given string is contained within the view.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: assertSeeInOrder
+  visibility: public
+  parameters:
+  - name: values
+  - name: escape
+    default: 'true'
+  comment: '# * Assert that the given strings are contained in order within the view.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: assertSeeText
+  visibility: public
+  parameters:
+  - name: value
+  - name: escape
+    default: 'true'
+  comment: '# * Assert that the given string is contained within the view text.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: assertSeeTextInOrder
+  visibility: public
+  parameters:
+  - name: values
+  - name: escape
+    default: 'true'
+  comment: '# * Assert that the given strings are contained in order within the view
+    text.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: assertDontSee
+  visibility: public
+  parameters:
+  - name: value
+  - name: escape
+    default: 'true'
+  comment: '# * Assert that the given string is not contained within the view.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: assertDontSeeText
+  visibility: public
+  parameters:
+  - name: value
+  - name: escape
+    default: 'true'
+  comment: '# * Assert that the given string is not contained within the view text.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Get the string contents of the rendered view.
+
+    # *
+
+    # * @return string'
+traits:
+- Closure
+- Illuminate\Database\Eloquent\Collection
+- Illuminate\Database\Eloquent\Model
+- Illuminate\Support\Arr
+- Illuminate\Support\Traits\Macroable
+- Illuminate\Testing\Constraints\SeeInOrder
+- Illuminate\View\View
+- Stringable
+- Macroable
+interfaces:
+- Stringable

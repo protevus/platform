@@ -1,0 +1,66 @@
+name: BinaryNodeTest
+class_comment: null
+dependencies:
+- name: Compiler
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Compiler
+- name: ArrayNode
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Node\ArrayNode
+- name: BinaryNode
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Node\BinaryNode
+- name: ConstantNode
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Node\ConstantNode
+- name: NameNode
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Node\NameNode
+- name: SyntaxError
+  type: class
+  source: Symfony\Component\ExpressionLanguage\SyntaxError
+properties: []
+methods:
+- name: getEvaluateData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCompileData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDumpData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEvaluateMatchesWithInvalidRegexp
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEvaluateMatchesWithInvalidRegexpAsExpression
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompileMatchesWithInvalidRegexp
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompileMatchesWithInvalidRegexpAsExpression
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInOperatorStrictness
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @testWith [1]
+
+    # *           ["true"]'
+traits:
+- Symfony\Component\ExpressionLanguage\Compiler
+- Symfony\Component\ExpressionLanguage\Node\ArrayNode
+- Symfony\Component\ExpressionLanguage\Node\BinaryNode
+- Symfony\Component\ExpressionLanguage\Node\ConstantNode
+- Symfony\Component\ExpressionLanguage\Node\NameNode
+- Symfony\Component\ExpressionLanguage\SyntaxError
+interfaces: []

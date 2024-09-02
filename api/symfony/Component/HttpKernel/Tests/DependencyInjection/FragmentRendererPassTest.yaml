@@ -1,0 +1,67 @@
+name: FragmentRendererPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ServiceClosureArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: ServiceLocator
+  type: class
+  source: Symfony\Component\DependencyInjection\ServiceLocator
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: FragmentRendererPass
+  type: class
+  source: Symfony\Component\HttpKernel\DependencyInjection\FragmentRendererPass
+- name: FragmentRendererInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface
+properties: []
+methods:
+- name: testContentRendererWithoutInterface
+  visibility: public
+  parameters: []
+  comment: '# * Tests that content rendering not implementing FragmentRendererInterface
+
+    # * triggers an exception.'
+- name: testValidContentRenderer
+  visibility: public
+  parameters: []
+  comment: null
+- name: render
+  visibility: public
+  parameters:
+  - name: uri
+  - name: request
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\DependencyInjection\ServiceLocator
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\DependencyInjection\FragmentRendererPass
+- Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface
+interfaces:
+- FragmentRendererInterface

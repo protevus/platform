@@ -1,0 +1,35 @@
+name: SizeRangeFilterIterator
+class_comment: '# * SizeRangeFilterIterator filters out files that are not in the
+  given size range.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @extends \FilterIterator<string, \SplFileInfo>'
+dependencies:
+- name: NumberComparator
+  type: class
+  source: Symfony\Component\Finder\Comparator\NumberComparator
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: iterator
+  - name: comparators
+  comment: "# * SizeRangeFilterIterator filters out files that are not in the given\
+    \ size range.\n# *\n# * @author Fabien Potencier <fabien@symfony.com>\n# *\n#\
+    \ * @extends \\FilterIterator<string, \\SplFileInfo>\n# */\n# class SizeRangeFilterIterator\
+    \ extends \\FilterIterator\n# {\n# private array $comparators = [];\n# \n# /**\n\
+    # * @param \\Iterator<string, \\SplFileInfo> $iterator\n# * @param NumberComparator[]\
+    \              $comparators"
+- name: accept
+  visibility: public
+  parameters: []
+  comment: '# * Filters the iterator values.'
+traits:
+- Symfony\Component\Finder\Comparator\NumberComparator
+interfaces: []

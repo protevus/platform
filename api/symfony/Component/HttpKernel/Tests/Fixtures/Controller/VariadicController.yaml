@@ -1,0 +1,13 @@
+name: VariadicController
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: action
+  visibility: public
+  parameters:
+  - name: foo
+  - name: '...$bar'
+  comment: null
+traits: []
+interfaces: []

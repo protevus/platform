@@ -1,0 +1,389 @@
+name: Envelope
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Conditionable
+  type: class
+  source: Illuminate\Support\Traits\Conditionable
+- name: Conditionable
+  type: class
+  source: Conditionable
+properties:
+- name: from
+  visibility: public
+  comment: '# * The address sending the message.
+
+    # *
+
+    # * @var \Illuminate\Mail\Mailables\Address|string|null'
+- name: to
+  visibility: public
+  comment: '# * The recipients of the message.
+
+    # *
+
+    # * @var array'
+- name: cc
+  visibility: public
+  comment: '# * The recipients receiving a copy of the message.
+
+    # *
+
+    # * @var array'
+- name: bcc
+  visibility: public
+  comment: '# * The recipients receiving a blind copy of the message.
+
+    # *
+
+    # * @var array'
+- name: replyTo
+  visibility: public
+  comment: '# * The recipients that should be replied to.
+
+    # *
+
+    # * @var array'
+- name: subject
+  visibility: public
+  comment: '# * The subject of the message.
+
+    # *
+
+    # * @var string|null'
+- name: tags
+  visibility: public
+  comment: '# * The message''s tags.
+
+    # *
+
+    # * @var array'
+- name: metadata
+  visibility: public
+  comment: '# * The message''s meta data.
+
+    # *
+
+    # * @var array'
+- name: using
+  visibility: public
+  comment: '# * The message''s Symfony Message customization callbacks.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: from
+    default: 'null'
+  - name: to
+    default: '[]'
+  - name: cc
+    default: '[]'
+  - name: bcc
+    default: '[]'
+  - name: replyTo
+    default: '[]'
+  - name: subject
+    default: 'null'
+  - name: tags
+    default: '[]'
+  - name: metadata
+    default: '[]'
+  - name: using
+    default: '[]'
+  comment: "# * The address sending the message.\n# *\n# * @var \\Illuminate\\Mail\\\
+    Mailables\\Address|string|null\n# */\n# public $from;\n# \n# /**\n# * The recipients\
+    \ of the message.\n# *\n# * @var array\n# */\n# public $to;\n# \n# /**\n# * The\
+    \ recipients receiving a copy of the message.\n# *\n# * @var array\n# */\n# public\
+    \ $cc;\n# \n# /**\n# * The recipients receiving a blind copy of the message.\n\
+    # *\n# * @var array\n# */\n# public $bcc;\n# \n# /**\n# * The recipients that\
+    \ should be replied to.\n# *\n# * @var array\n# */\n# public $replyTo;\n# \n#\
+    \ /**\n# * The subject of the message.\n# *\n# * @var string|null\n# */\n# public\
+    \ $subject;\n# \n# /**\n# * The message's tags.\n# *\n# * @var array\n# */\n#\
+    \ public $tags = [];\n# \n# /**\n# * The message's meta data.\n# *\n# * @var array\n\
+    # */\n# public $metadata = [];\n# \n# /**\n# * The message's Symfony Message customization\
+    \ callbacks.\n# *\n# * @var array\n# */\n# public $using = [];\n# \n# /**\n# *\
+    \ Create a new message envelope instance.\n# *\n# * @param  \\Illuminate\\Mail\\\
+    Mailables\\Address|string|null  $from\n# * @param  array<int, \\Illuminate\\Mail\\\
+    Mailables\\Address|string>  $to\n# * @param  array<int, \\Illuminate\\Mail\\Mailables\\\
+    Address|string>  $cc\n# * @param  array<int, \\Illuminate\\Mail\\Mailables\\Address|string>\
+    \  $bcc\n# * @param  array<int, \\Illuminate\\Mail\\Mailables\\Address|string>\
+    \  $replyTo\n# * @param  string|null  $subject\n# * @param  array  $tags\n# *\
+    \ @param  array  $metadata\n# * @param  \\Closure|array  $using\n# * @return void\n\
+    # *\n# * @named-arguments-supported"
+- name: normalizeAddresses
+  visibility: protected
+  parameters:
+  - name: addresses
+  comment: '# * Normalize the given array of addresses.
+
+    # *
+
+    # * @param  array<int, \Illuminate\Mail\Mailables\Address|string>  $addresses
+
+    # * @return array<int, \Illuminate\Mail\Mailables\Address>'
+- name: from
+  visibility: public
+  parameters:
+  - name: address
+  - name: name
+    default: 'null'
+  comment: '# * Specify who the message will be "from".
+
+    # *
+
+    # * @param  \Illuminate\Mail\Mailables\Address|string  $address
+
+    # * @param  string|null  $name
+
+    # * @return $this'
+- name: to
+  visibility: public
+  parameters:
+  - name: address
+  - name: name
+    default: 'null'
+  comment: '# * Add a "to" recipient to the message envelope.
+
+    # *
+
+    # * @param  \Illuminate\Mail\Mailables\Address|array<int, \Illuminate\Mail\Mailables\Address|string>|string  $address
+
+    # * @param  string|null  $name
+
+    # * @return $this'
+- name: cc
+  visibility: public
+  parameters:
+  - name: address
+  - name: name
+    default: 'null'
+  comment: '# * Add a "cc" recipient to the message envelope.
+
+    # *
+
+    # * @param  \Illuminate\Mail\Mailables\Address|array<int, \Illuminate\Mail\Mailables\Address|string>|string  $address
+
+    # * @param  string|null  $name
+
+    # * @return $this'
+- name: bcc
+  visibility: public
+  parameters:
+  - name: address
+  - name: name
+    default: 'null'
+  comment: '# * Add a "bcc" recipient to the message envelope.
+
+    # *
+
+    # * @param  \Illuminate\Mail\Mailables\Address|array<int, \Illuminate\Mail\Mailables\Address|string>|string  $address
+
+    # * @param  string|null  $name
+
+    # * @return $this'
+- name: replyTo
+  visibility: public
+  parameters:
+  - name: address
+  - name: name
+    default: 'null'
+  comment: '# * Add a "reply to" recipient to the message envelope.
+
+    # *
+
+    # * @param  \Illuminate\Mail\Mailables\Address|array<int, \Illuminate\Mail\Mailables\Address|string>|string  $address
+
+    # * @param  string|null  $name
+
+    # * @return $this'
+- name: subject
+  visibility: public
+  parameters:
+  - name: subject
+  comment: '# * Set the subject of the message.
+
+    # *
+
+    # * @param  string  $subject
+
+    # * @return $this'
+- name: tags
+  visibility: public
+  parameters:
+  - name: tags
+  comment: '# * Add "tags" to the message.
+
+    # *
+
+    # * @param  array  $tags
+
+    # * @return $this'
+- name: tag
+  visibility: public
+  parameters:
+  - name: tag
+  comment: '# * Add a "tag" to the message.
+
+    # *
+
+    # * @param  string  $tag
+
+    # * @return $this'
+- name: metadata
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Add metadata to the message.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  string|int  $value
+
+    # * @return $this'
+- name: using
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Add a Symfony Message customization callback to the message.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return $this'
+- name: isFrom
+  visibility: public
+  parameters:
+  - name: address
+  - name: name
+    default: 'null'
+  comment: '# * Determine if the message is from the given address.
+
+    # *
+
+    # * @param  string  $address
+
+    # * @param  string|null  $name
+
+    # * @return bool'
+- name: hasTo
+  visibility: public
+  parameters:
+  - name: address
+  - name: name
+    default: 'null'
+  comment: '# * Determine if the message has the given address as a recipient.
+
+    # *
+
+    # * @param  string  $address
+
+    # * @param  string|null  $name
+
+    # * @return bool'
+- name: hasCc
+  visibility: public
+  parameters:
+  - name: address
+  - name: name
+    default: 'null'
+  comment: '# * Determine if the message has the given address as a "cc" recipient.
+
+    # *
+
+    # * @param  string  $address
+
+    # * @param  string|null  $name
+
+    # * @return bool'
+- name: hasBcc
+  visibility: public
+  parameters:
+  - name: address
+  - name: name
+    default: 'null'
+  comment: '# * Determine if the message has the given address as a "bcc" recipient.
+
+    # *
+
+    # * @param  string  $address
+
+    # * @param  string|null  $name
+
+    # * @return bool'
+- name: hasReplyTo
+  visibility: public
+  parameters:
+  - name: address
+  - name: name
+    default: 'null'
+  comment: '# * Determine if the message has the given address as a "reply to" recipient.
+
+    # *
+
+    # * @param  string  $address
+
+    # * @param  string|null  $name
+
+    # * @return bool'
+- name: hasRecipient
+  visibility: protected
+  parameters:
+  - name: recipients
+  - name: address
+  - name: name
+    default: 'null'
+  comment: '# * Determine if the message has the given recipient.
+
+    # *
+
+    # * @param  array  $recipients
+
+    # * @param  string  $address
+
+    # * @param  string|null  $name
+
+    # * @return bool'
+- name: hasSubject
+  visibility: public
+  parameters:
+  - name: subject
+  comment: '# * Determine if the message has the given subject.
+
+    # *
+
+    # * @param  string  $subject
+
+    # * @return bool'
+- name: hasMetadata
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Determine if the message has the given metadata.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  string  $value
+
+    # * @return bool'
+traits:
+- Closure
+- Illuminate\Support\Arr
+- Illuminate\Support\Traits\Conditionable
+- Conditionable
+interfaces: []

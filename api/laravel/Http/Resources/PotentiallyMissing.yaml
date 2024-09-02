@@ -1,0 +1,15 @@
+name: PotentiallyMissing
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: isMissing
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the object should be considered "missing".
+
+    # *
+
+    # * @return bool'
+traits: []
+interfaces: []

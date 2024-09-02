@@ -1,0 +1,146 @@
+name: ApcStore
+class_comment: null
+dependencies:
+- name: RetrievesMultipleKeys
+  type: class
+  source: RetrievesMultipleKeys
+properties:
+- name: apc
+  visibility: protected
+  comment: '# * The APC wrapper instance.
+
+    # *
+
+    # * @var \Illuminate\Cache\ApcWrapper'
+- name: prefix
+  visibility: protected
+  comment: '# * A string that should be prepended to keys.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: apc
+  - name: prefix
+    default: ''''''
+  comment: "# * The APC wrapper instance.\n# *\n# * @var \\Illuminate\\Cache\\ApcWrapper\n\
+    # */\n# protected $apc;\n# \n# /**\n# * A string that should be prepended to keys.\n\
+    # *\n# * @var string\n# */\n# protected $prefix;\n# \n# /**\n# * Create a new\
+    \ APC store.\n# *\n# * @param  \\Illuminate\\Cache\\ApcWrapper  $apc\n# * @param\
+    \  string  $prefix\n# * @return void"
+- name: get
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Retrieve an item from the cache by key.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed'
+- name: put
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  - name: seconds
+  comment: '# * Store an item in the cache for a given number of seconds.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  int  $seconds
+
+    # * @return bool'
+- name: increment
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: '1'
+  comment: '# * Increment the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return int|bool'
+- name: decrement
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: '1'
+  comment: '# * Decrement the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return int|bool'
+- name: forever
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Store an item in the cache indefinitely.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return bool'
+- name: forget
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Remove an item from the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: flush
+  visibility: public
+  parameters: []
+  comment: '# * Remove all items from the cache.
+
+    # *
+
+    # * @return bool'
+- name: getPrefix
+  visibility: public
+  parameters: []
+  comment: '# * Get the cache key prefix.
+
+    # *
+
+    # * @return string'
+- name: setPrefix
+  visibility: public
+  parameters:
+  - name: prefix
+  comment: '# * Set the cache key prefix.
+
+    # *
+
+    # * @param  string  $prefix
+
+    # * @return void'
+traits:
+- RetrievesMultipleKeys
+interfaces: []

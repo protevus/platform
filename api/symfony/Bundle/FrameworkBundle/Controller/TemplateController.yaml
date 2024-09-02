@@ -1,0 +1,64 @@
+name: TemplateController
+class_comment: '# * TemplateController.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: Environment
+  type: class
+  source: Twig\Environment
+properties: []
+methods:
+- name: templateAction
+  visibility: public
+  parameters:
+  - name: template
+  - name: maxAge
+    default: 'null'
+  - name: sharedAge
+    default: 'null'
+  - name: private
+    default: 'null'
+  - name: context
+    default: '[]'
+  - name: statusCode
+    default: '200'
+  - name: headers
+    default: '[]'
+  comment: "# * TemplateController.\n# *\n# * @author Fabien Potencier <fabien@symfony.com>\n\
+    # *\n# * @final\n# */\n# class TemplateController\n# {\n# public function __construct(\n\
+    # private ?Environment $twig = null,\n# ) {\n# }\n# \n# /**\n# * Renders a template.\n\
+    # *\n# * @param string    $template   The template name\n# * @param int|null \
+    \ $maxAge     Max age for client caching\n# * @param int|null  $sharedAge  Max\
+    \ age for shared (proxy) caching\n# * @param bool|null $private    Whether or\
+    \ not caching should apply for client caches only\n# * @param array     $context\
+    \    The context (arguments) of the template\n# * @param int       $statusCode\
+    \ The HTTP status code to return with the response (200 \"OK\" by default)\n#\
+    \ * @param array     $headers    The HTTP headers to add to the response"
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: template
+  - name: maxAge
+    default: 'null'
+  - name: sharedAge
+    default: 'null'
+  - name: private
+    default: 'null'
+  - name: context
+    default: '[]'
+  - name: statusCode
+    default: '200'
+  comment: '# * @param int $statusCode The HTTP status code (200 "OK" by default)'
+traits:
+- Symfony\Component\HttpFoundation\Response
+- Twig\Environment
+interfaces: []

@@ -1,0 +1,60 @@
+name: ParsesLogConfiguration
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+- name: Level
+  type: class
+  source: Monolog\Level
+properties:
+- name: levels
+  visibility: protected
+  comment: '# * The Log levels.
+
+    # *
+
+    # * @var array'
+methods:
+- name: level
+  visibility: protected
+  parameters:
+  - name: config
+  comment: "# * The Log levels.\n# *\n# * @var array\n# */\n# protected $levels =\
+    \ [\n# 'debug' => Level::Debug,\n# 'info' => Level::Info,\n# 'notice' => Level::Notice,\n\
+    # 'warning' => Level::Warning,\n# 'error' => Level::Error,\n# 'critical' => Level::Critical,\n\
+    # 'alert' => Level::Alert,\n# 'emergency' => Level::Emergency,\n# ];\n# \n# /**\n\
+    # * Get fallback log channel name.\n# *\n# * @return string\n# */\n# abstract\
+    \ protected function getFallbackChannelName();\n# \n# /**\n# * Parse the string\
+    \ level into a Monolog constant.\n# *\n# * @param  array  $config\n# * @return\
+    \ int\n# *\n# * @throws \\InvalidArgumentException"
+- name: actionLevel
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Parse the action level from the given configuration.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return int
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: parseChannel
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Extract the log channel from the given configuration.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return string'
+traits:
+- InvalidArgumentException
+- Monolog\Level
+interfaces: []

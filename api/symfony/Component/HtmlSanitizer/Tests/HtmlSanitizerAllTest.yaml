@@ -1,0 +1,59 @@
+name: HtmlSanitizerAllTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: HtmlSanitizer
+  type: class
+  source: Symfony\Component\HtmlSanitizer\HtmlSanitizer
+- name: HtmlSanitizerAction
+  type: class
+  source: Symfony\Component\HtmlSanitizer\HtmlSanitizerAction
+- name: HtmlSanitizerConfig
+  type: class
+  source: Symfony\Component\HtmlSanitizer\HtmlSanitizerConfig
+properties: []
+methods:
+- name: createSanitizer
+  visibility: private
+  parameters: []
+  comment: null
+- name: testSanitizeHead
+  visibility: public
+  parameters:
+  - name: input
+  - name: expected
+  comment: '# * @dataProvider provideSanitizeHead'
+- name: provideSanitizeHead
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSanitizeBody
+  visibility: public
+  parameters:
+  - name: input
+  - name: expected
+  comment: '# * @dataProvider provideSanitizeBody'
+- name: provideSanitizeBody
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnlimitedLength
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBlockByDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllowByDefault
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HtmlSanitizer\HtmlSanitizer
+- Symfony\Component\HtmlSanitizer\HtmlSanitizerAction
+- Symfony\Component\HtmlSanitizer\HtmlSanitizerConfig
+interfaces: []

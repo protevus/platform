@@ -1,0 +1,16 @@
+name: MailerDeliveryEvent
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: setReason
+  visibility: public
+  parameters:
+  - name: reason
+  comment: null
+- name: getReason
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

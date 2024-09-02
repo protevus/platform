@@ -1,0 +1,15 @@
+name: FooTagClass
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getDefaultFooName
+  visibility: public
+  parameters: []
+  comment: null
+- name: getPriority
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

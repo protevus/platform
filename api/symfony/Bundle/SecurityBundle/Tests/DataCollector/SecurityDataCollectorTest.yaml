@@ -1,0 +1,178 @@
+name: SecurityDataCollectorTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: SecurityDataCollector
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DataCollector\SecurityDataCollector
+- name: TraceableFirewallListener
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener
+- name: MainConfiguration
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\MainConfiguration
+- name: FirewallConfig
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Security\FirewallConfig
+- name: FirewallMap
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Security\FirewallMap
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: RequestEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\RequestEvent
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+- name: TokenStorage
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
+- name: SwitchUserToken
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\SwitchUserToken
+- name: TokenInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\TokenInterface
+- name: UsernamePasswordToken
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken
+- name: TraceableAccessDecisionManager
+  type: class
+  source: Symfony\Component\Security\Core\Authorization\TraceableAccessDecisionManager
+- name: TraceableVoter
+  type: class
+  source: Symfony\Component\Security\Core\Authorization\Voter\TraceableVoter
+- name: VoterInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authorization\Voter\VoterInterface
+- name: RoleHierarchy
+  type: class
+  source: Symfony\Component\Security\Core\Role\RoleHierarchy
+- name: InMemoryUser
+  type: class
+  source: Symfony\Component\Security\Core\User\InMemoryUser
+- name: FirewallMapInterface
+  type: class
+  source: Symfony\Component\Security\Http\FirewallMapInterface
+- name: LogoutUrlGenerator
+  type: class
+  source: Symfony\Component\Security\Http\Logout\LogoutUrlGenerator
+- name: ClassStub
+  type: class
+  source: Symfony\Component\VarDumper\Caster\ClassStub
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+properties: []
+methods:
+- name: testCollectWhenSecurityIsDisabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCollectWhenAuthenticationTokenIsNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCollectAuthenticationTokenAndRoles
+  visibility: public
+  parameters:
+  - name: roles
+  - name: normalizedRoles
+  - name: inheritedRoles
+  comment: '# @dataProvider provideRoles'
+- name: testCollectSwitchUserToken
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetFirewall
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetFirewallReturnsNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetListeners
+  visibility: public
+  parameters: []
+  comment: '# * @group time-sensitive'
+- name: testCollectCollectsDecisionLogWhenStrategyIsAffirmative
+  visibility: public
+  parameters: []
+  comment: null
+- name: dispatch
+  visibility: public
+  parameters:
+  - name: event
+  - name: eventName
+    default: 'null'
+  comment: null
+- name: testCollectCollectsDecisionLogWhenStrategyIsUnanimous
+  visibility: public
+  parameters: []
+  comment: null
+- name: dispatch
+  visibility: public
+  parameters:
+  - name: event
+  - name: eventName
+    default: 'null'
+  comment: null
+- name: testGetVotersIfAccessDecisionManagerHasNoVoters
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideRoles
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRoleHierarchy
+  visibility: private
+  parameters: []
+  comment: null
+- name: vote
+  visibility: public
+  parameters:
+  - name: token
+  - name: subject
+  - name: attributes
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\SecurityBundle\DataCollector\SecurityDataCollector
+- Symfony\Bundle\SecurityBundle\Debug\TraceableFirewallListener
+- Symfony\Bundle\SecurityBundle\DependencyInjection\MainConfiguration
+- Symfony\Bundle\SecurityBundle\Security\FirewallConfig
+- Symfony\Bundle\SecurityBundle\Security\FirewallMap
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Event\RequestEvent
+- Symfony\Component\HttpKernel\HttpKernelInterface
+- Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
+- Symfony\Component\Security\Core\Authentication\Token\SwitchUserToken
+- Symfony\Component\Security\Core\Authentication\Token\TokenInterface
+- Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken
+- Symfony\Component\Security\Core\Authorization\TraceableAccessDecisionManager
+- Symfony\Component\Security\Core\Authorization\Voter\TraceableVoter
+- Symfony\Component\Security\Core\Authorization\Voter\VoterInterface
+- Symfony\Component\Security\Core\Role\RoleHierarchy
+- Symfony\Component\Security\Core\User\InMemoryUser
+- Symfony\Component\Security\Http\FirewallMapInterface
+- Symfony\Component\Security\Http\Logout\LogoutUrlGenerator
+- Symfony\Component\VarDumper\Caster\ClassStub
+- Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+interfaces:
+- EventDispatcherInterface
+- EventDispatcherInterface
+- VoterInterface

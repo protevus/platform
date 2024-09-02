@@ -1,0 +1,178 @@
+name: RedisExtIntegrationTest
+class_comment: '# * @requires extension redis
+
+  # *
+
+  # * @group time-sensitive
+
+  # * @group integration'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Relay
+  type: class
+  source: Relay\Relay
+- name: DummyMessage
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Redis\Tests\Fixtures\DummyMessage
+- name: Connection
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Redis\Transport\Connection
+- name: RedisReceiver
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Redis\Transport\RedisReceiver
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: TransportException
+  type: class
+  source: Symfony\Component\Messenger\Exception\TransportException
+- name: Serializer
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\Serializer
+properties: []
+methods:
+- name: testSentinel
+  visibility: public
+  parameters:
+  - name: sentinelOptionName
+  comment: "# * @requires extension redis\n# *\n# * @group time-sensitive\n# * @group\
+    \ integration\n# */\n# class RedisExtIntegrationTest extends TestCase\n# {\n#\
+    \ private \\Redis|Relay|null $redis = null;\n# private ?Connection $connection\
+    \ = null;\n# \n# protected function setUp(): void\n# {\n# if (!getenv('MESSENGER_REDIS_DSN'))\
+    \ {\n# $this->markTestSkipped('The \"MESSENGER_REDIS_DSN\" environment variable\
+    \ is required.');\n# }\n# \n# try {\n# $this->redis = $this->createRedisClient();\n\
+    # $this->connection = Connection::fromDsn(getenv('MESSENGER_REDIS_DSN'), ['sentinel_master'\
+    \ => getenv('MESSENGER_REDIS_SENTINEL_MASTER') ?: null], $this->redis);\n# $this->connection->cleanup();\n\
+    # $this->connection->setup();\n# } catch (\\Exception $e) {\n# self::markTestSkipped($e->getMessage());\n\
+    # }\n# }\n# \n# public function testConnectionSendAndGet()\n# {\n# $this->connection->add('{\"\
+    message\": \"Hi\"}', ['type' => DummyMessage::class]);\n# $message = $this->connection->get();\n\
+    # $this->assertEquals([\n# 'message' => json_encode([\n# 'body' => '{\"message\"\
+    : \"Hi\"}',\n# 'headers' => ['type' => DummyMessage::class],\n# ]),\n# ], $message['data']);\n\
+    # }\n# \n# public function testGetTheFirstAvailableMessage()\n# {\n# $this->connection->add('{\"\
+    message\": \"Hi1\"}', ['type' => DummyMessage::class]);\n# $this->connection->add('{\"\
+    message\": \"Hi2\"}', ['type' => DummyMessage::class]);\n# $message = $this->connection->get();\n\
+    # $this->assertEquals([\n# 'message' => json_encode([\n# 'body' => '{\"message\"\
+    : \"Hi1\"}',\n# 'headers' => ['type' => DummyMessage::class],\n# ]),\n# ], $message['data']);\n\
+    # $message = $this->connection->get();\n# $this->assertEquals([\n# 'message' =>\
+    \ json_encode([\n# 'body' => '{\"message\": \"Hi2\"}',\n# 'headers' => ['type'\
+    \ => DummyMessage::class],\n# ]),\n# ], $message['data']);\n# }\n# \n# public\
+    \ function testConnectionSendWithSameContent()\n# {\n# $body = '{\"message\":\
+    \ \"Hi\"}';\n# $headers = ['type' => DummyMessage::class];\n# \n# $this->connection->add($body,\
+    \ $headers);\n# $this->connection->add($body, $headers);\n# \n# $message = $this->connection->get();\n\
+    # $this->assertEquals([\n# 'message' => json_encode([\n# 'body' => $body,\n# 'headers'\
+    \ => $headers,\n# ]),\n# ], $message['data']);\n# \n# $message = $this->connection->get();\n\
+    # $this->assertEquals([\n# 'message' => json_encode([\n# 'body' => $body,\n# 'headers'\
+    \ => $headers,\n# ]),\n# ], $message['data']);\n# }\n# \n# public function testConnectionSendAndGetDelayed()\n\
+    # {\n# $this->connection->add('{\"message\": \"Hi\"}', ['type' => DummyMessage::class],\
+    \ 500);\n# $message = $this->connection->get();\n# $this->assertNull($message);\n\
+    # sleep(2);\n# $message = $this->connection->get();\n# $this->assertEquals([\n\
+    # 'message' => json_encode([\n# 'body' => '{\"message\": \"Hi\"}',\n# 'headers'\
+    \ => ['type' => DummyMessage::class],\n# ]),\n# ], $message['data']);\n# }\n#\
+    \ \n# public function testConnectionSendDelayedMessagesWithSameContent()\n# {\n\
+    # $body = '{\"message\": \"Hi\"}';\n# $headers = ['type' => DummyMessage::class];\n\
+    # \n# $this->connection->add($body, $headers, 500);\n# $this->connection->add($body,\
+    \ $headers, 500);\n# sleep(2);\n# $message = $this->connection->get();\n# $this->assertEquals([\n\
+    # 'message' => json_encode([\n# 'body' => $body,\n# 'headers' => $headers,\n#\
+    \ ]),\n# ], $message['data']);\n# \n# $message = $this->connection->get();\n#\
+    \ $this->assertEquals([\n# 'message' => json_encode([\n# 'body' => $body,\n# 'headers'\
+    \ => $headers,\n# ]),\n# ], $message['data']);\n# }\n# \n# public function testConnectionBelowRedeliverTimeout()\n\
+    # {\n# // lower redeliver timeout and claim interval\n# $connection = Connection::fromDsn(getenv('MESSENGER_REDIS_DSN'),\
+    \ ['sentinel_master' => getenv('MESSENGER_REDIS_SENTINEL_MASTER') ?: null], $this->redis);\n\
+    # \n# $connection->cleanup();\n# $connection->setup();\n# \n# $body = '{\"message\"\
+    : \"Hi\"}';\n# $headers = ['type' => DummyMessage::class];\n# \n# // Add two messages\n\
+    # $connection->add($body, $headers);\n# \n# // Read first message with other consumer\n\
+    # $this->redis->xreadgroup(\n# $this->getConnectionGroup($connection),\n# 'other-consumer2',\n\
+    # [$this->getConnectionStream($connection) => '>'],\n# 1\n# );\n# \n# // Queue\
+    \ will not have any messages yet\n# $this->assertNull($connection->get());\n#\
+    \ }\n# \n# public function testConnectionClaimAndRedeliver()\n# {\n# // lower\
+    \ redeliver timeout and claim interval\n# $connection = Connection::fromDsn(\n\
+    # getenv('MESSENGER_REDIS_DSN'),\n# ['redeliver_timeout' => 0, 'claim_interval'\
+    \ => 500, 'sentinel_master' => getenv('MESSENGER_REDIS_SENTINEL_MASTER') ?: null],\n\
+    # \n# $this->redis\n# );\n# \n# $connection->cleanup();\n# $connection->setup();\n\
+    # \n# $body1 = '{\"message\": \"Hi\"}';\n# $body2 = '{\"message\": \"Bye\"}';\n\
+    # $headers = ['type' => DummyMessage::class];\n# \n# // Add two messages\n# $connection->add($body1,\
+    \ $headers);\n# $connection->add($body2, $headers);\n# \n# // Read first message\
+    \ with other consumer\n# $this->redis->xreadgroup(\n# $this->getConnectionGroup($connection),\n\
+    # 'other-consumer2',\n# [$this->getConnectionStream($connection) => '>'],\n# 1\n\
+    # );\n# \n# // Queue will return the pending message first because redeliver_timeout\
+    \ = 0\n# $message = $connection->get();\n# $this->assertEquals([\n# 'message'\
+    \ => json_encode([\n# 'body' => $body1,\n# 'headers' => $headers,\n# ]),\n# ],\
+    \ $message['data']);\n# $connection->ack($message['id']);\n# \n# // Queue will\
+    \ return the second message\n# $message = $connection->get();\n# $this->assertEquals([\n\
+    # 'message' => json_encode([\n# 'body' => $body2,\n# 'headers' => $headers,\n\
+    # ]),\n# ], $message['data']);\n# $connection->ack($message['id']);\n# }\n# \n\
+    # /**\n# * @dataProvider sentinelOptionNames"
+- name: sentinelOptionNames
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLazySentinel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLazyCluster
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLazy
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDbIndex
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsnWithMultipleHosts
+  visibility: public
+  parameters: []
+  comment: null
+- name: testJsonError
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetNonBlocking
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetAfterReject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItProperlyHandlesEmptyMessages
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItCountMessages
+  visibility: public
+  parameters: []
+  comment: null
+- name: getConnectionGroup
+  visibility: private
+  parameters:
+  - name: connection
+  comment: null
+- name: getConnectionStream
+  visibility: private
+  parameters:
+  - name: connection
+  comment: null
+- name: skipIfRedisClusterUnavailable
+  visibility: private
+  parameters: []
+  comment: null
+- name: createRedisClient
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Relay\Relay
+- Symfony\Component\Messenger\Bridge\Redis\Tests\Fixtures\DummyMessage
+- Symfony\Component\Messenger\Bridge\Redis\Transport\Connection
+- Symfony\Component\Messenger\Bridge\Redis\Transport\RedisReceiver
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Exception\TransportException
+- Symfony\Component\Messenger\Transport\Serialization\Serializer
+interfaces: []

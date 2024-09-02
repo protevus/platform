@@ -1,0 +1,16 @@
+name: EntryNotFoundException
+class_comment: null
+dependencies:
+- name: Exception
+  type: class
+  source: Exception
+- name: NotFoundExceptionInterface
+  type: class
+  source: Psr\Container\NotFoundExceptionInterface
+properties: []
+methods: []
+traits:
+- Exception
+- Psr\Container\NotFoundExceptionInterface
+interfaces:
+- NotFoundExceptionInterface

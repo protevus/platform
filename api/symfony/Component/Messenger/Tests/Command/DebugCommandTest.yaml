@@ -1,0 +1,123 @@
+name: DebugCommandTest
+class_comment: '# * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Console\Exception\RuntimeException
+- name: CommandCompletionTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandCompletionTester
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+- name: DebugCommand
+  type: class
+  source: Symfony\Component\Messenger\Command\DebugCommand
+- name: DummyCommand
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\DummyCommand
+- name: DummyCommandHandler
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\DummyCommandHandler
+- name: DummyCommandWithDescription
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\DummyCommandWithDescription
+- name: DummyCommandWithDescriptionHandler
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\DummyCommandWithDescriptionHandler
+- name: DummyQuery
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\DummyQuery
+- name: DummyQueryHandler
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\DummyQueryHandler
+- name: MultipleBusesMessage
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\MultipleBusesMessage
+- name: MultipleBusesMessageHandler
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\MultipleBusesMessageHandler
+properties: []
+methods:
+- name: testComplete
+  visibility: public
+  parameters:
+  - name: input
+  - name: expectedSuggestions
+  comment: "# * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>\n# */\n\
+    # class DebugCommandTest extends TestCase\n# {\n# private string|false $colSize;\n\
+    # \n# protected function setUp(): void\n# {\n# $this->colSize = getenv('COLUMNS');\n\
+    # putenv('COLUMNS='.(119 + \\strlen(\\PHP_EOL)));\n# }\n# \n# protected function\
+    \ tearDown(): void\n# {\n# putenv($this->colSize ? 'COLUMNS='.$this->colSize :\
+    \ 'COLUMNS');\n# }\n# \n# public function testOutput()\n# {\n# $command = new\
+    \ DebugCommand([\n# 'command_bus' => [\n# DummyCommand::class => [[DummyCommandHandler::class,\
+    \ ['option1' => '1', 'option2' => '2']]],\n# DummyCommandWithDescription::class\
+    \ => [[DummyCommandWithDescriptionHandler::class, []]],\n# MultipleBusesMessage::class\
+    \ => [[MultipleBusesMessageHandler::class, []]],\n# ],\n# 'query_bus' => [\n#\
+    \ DummyQuery::class => [[DummyQueryHandler::class, []]],\n# MultipleBusesMessage::class\
+    \ => [[MultipleBusesMessageHandler::class, []]],\n# ],\n# ]);\n# \n# $tester =\
+    \ new CommandTester($command);\n# $tester->execute([], ['decorated' => false]);\n\
+    # \n# $this->assertSame(<<<TXT\n# \n# Messenger\n# =========\n# \n# command_bus\n\
+    # -----------\n# \n# The following messages can be dispatched:\n# \n# -----------------------------------------------------------------------------------------------------------\n\
+    # Symfony\\Component\\Messenger\\Tests\\Fixtures\\DummyCommand\n# handled by Symfony\\\
+    Component\\Messenger\\Tests\\Fixtures\\DummyCommandHandler (when option1=1, option2=2)\n\
+    # \n# Used whenever a test needs to show a message with a class description.\n\
+    # Symfony\\Component\\Messenger\\Tests\\Fixtures\\DummyCommandWithDescription\n\
+    # handled by Symfony\\Component\\Messenger\\Tests\\Fixtures\\DummyCommandWithDescriptionHandler\n\
+    # Used whenever a test needs to show a message handler with a class description.\n\
+    # \n# Symfony\\Component\\Messenger\\Tests\\Fixtures\\MultipleBusesMessage\n#\
+    \ handled by Symfony\\Component\\Messenger\\Tests\\Fixtures\\MultipleBusesMessageHandler\n\
+    # \n# -----------------------------------------------------------------------------------------------------------\n\
+    # \n# query_bus\n# ---------\n# \n# The following messages can be dispatched:\n\
+    # \n# ---------------------------------------------------------------------------------------\n\
+    # Symfony\\Component\\Messenger\\Tests\\Fixtures\\DummyQuery\n# handled by Symfony\\\
+    Component\\Messenger\\Tests\\Fixtures\\DummyQueryHandler\n# \n# Symfony\\Component\\\
+    Messenger\\Tests\\Fixtures\\MultipleBusesMessage\n# handled by Symfony\\Component\\\
+    Messenger\\Tests\\Fixtures\\MultipleBusesMessageHandler\n# \n# ---------------------------------------------------------------------------------------\n\
+    # \n# \n# TXT\n# , $tester->getDisplay(true)\n# );\n# \n# $tester->execute(['bus'\
+    \ => 'query_bus'], ['decorated' => false]);\n# \n# $this->assertSame(<<<TXT\n\
+    # \n# Messenger\n# =========\n# \n# query_bus\n# ---------\n# \n# The following\
+    \ messages can be dispatched:\n# \n# ---------------------------------------------------------------------------------------\n\
+    # Symfony\\Component\\Messenger\\Tests\\Fixtures\\DummyQuery\n# handled by Symfony\\\
+    Component\\Messenger\\Tests\\Fixtures\\DummyQueryHandler\n# \n# Symfony\\Component\\\
+    Messenger\\Tests\\Fixtures\\MultipleBusesMessage\n# handled by Symfony\\Component\\\
+    Messenger\\Tests\\Fixtures\\MultipleBusesMessageHandler\n# \n# ---------------------------------------------------------------------------------------\n\
+    # \n# \n# TXT\n# , $tester->getDisplay(true)\n# );\n# }\n# \n# public function\
+    \ testOutputWithoutMessages()\n# {\n# $command = new DebugCommand(['command_bus'\
+    \ => [], 'query_bus' => []]);\n# \n# $tester = new CommandTester($command);\n\
+    # $tester->execute([], ['decorated' => false]);\n# \n# $this->assertSame(<<<TXT\n\
+    # \n# Messenger\n# =========\n# \n# command_bus\n# -----------\n# \n# [WARNING]\
+    \ No handled message found in bus \"command_bus\".\n# \n# query_bus\n# ---------\n\
+    # \n# [WARNING] No handled message found in bus \"query_bus\".\n# \n# \n# TXT\n\
+    # , $tester->getDisplay(true)\n# );\n# }\n# \n# public function testExceptionOnUnknownBusArgument()\n\
+    # {\n# $this->expectException(RuntimeException::class);\n# $this->expectExceptionMessage('Bus\
+    \ \"unknown_bus\" does not exist. Known buses are \"command_bus\", \"query_bus\"\
+    .');\n# $command = new DebugCommand(['command_bus' => [], 'query_bus' => []]);\n\
+    # \n# $tester = new CommandTester($command);\n# $tester->execute(['bus' => 'unknown_bus'],\
+    \ ['decorated' => false]);\n# }\n# \n# /**\n# * @dataProvider provideCompletionSuggestions"
+- name: provideCompletionSuggestions
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Application
+- Symfony\Component\Console\Exception\RuntimeException
+- Symfony\Component\Console\Tester\CommandCompletionTester
+- Symfony\Component\Console\Tester\CommandTester
+- Symfony\Component\Messenger\Command\DebugCommand
+- Symfony\Component\Messenger\Tests\Fixtures\DummyCommand
+- Symfony\Component\Messenger\Tests\Fixtures\DummyCommandHandler
+- Symfony\Component\Messenger\Tests\Fixtures\DummyCommandWithDescription
+- Symfony\Component\Messenger\Tests\Fixtures\DummyCommandWithDescriptionHandler
+- Symfony\Component\Messenger\Tests\Fixtures\DummyQuery
+- Symfony\Component\Messenger\Tests\Fixtures\DummyQueryHandler
+- Symfony\Component\Messenger\Tests\Fixtures\MultipleBusesMessage
+- Symfony\Component\Messenger\Tests\Fixtures\MultipleBusesMessageHandler
+interfaces: []

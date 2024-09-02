@@ -1,0 +1,21 @@
+name: RememberMeCookieTest
+class_comment: null
+dependencies:
+- name: ResponseHeaderBag
+  type: class
+  source: Symfony\Component\HttpFoundation\ResponseHeaderBag
+properties: []
+methods:
+- name: testSessionRememberMeSecureCookieFlagAuto
+  visibility: public
+  parameters:
+  - name: https
+  - name: expectedSecureFlag
+  comment: '# @dataProvider getSessionRememberMeSecureCookieFlagAutoHttpsMap'
+- name: getSessionRememberMeSecureCookieFlagAutoHttpsMap
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\ResponseHeaderBag
+interfaces: []

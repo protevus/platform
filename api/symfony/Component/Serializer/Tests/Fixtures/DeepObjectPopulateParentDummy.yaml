@@ -1,0 +1,20 @@
+name: DeepObjectPopulateParentDummy
+class_comment: "# * @author J\xE9r\xF4me Desjardin <jewome62@gmail.com>"
+dependencies: []
+properties:
+- name: child
+  visibility: private
+  comment: "# * @author J\xE9r\xF4me Desjardin <jewome62@gmail.com>\n# */\n# class\
+    \ DeepObjectPopulateParentDummy\n# {\n# /**\n# * @var DeepObjectPopulateChildDummy|null"
+methods:
+- name: setChild
+  visibility: public
+  parameters:
+  - name: child
+  comment: null
+- name: getChild
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

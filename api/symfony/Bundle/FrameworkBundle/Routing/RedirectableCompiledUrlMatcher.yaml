@@ -1,0 +1,28 @@
+name: RedirectableCompiledUrlMatcher
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: CompiledUrlMatcher
+  type: class
+  source: Symfony\Component\Routing\Matcher\CompiledUrlMatcher
+- name: RedirectableUrlMatcherInterface
+  type: class
+  source: Symfony\Component\Routing\Matcher\RedirectableUrlMatcherInterface
+properties: []
+methods:
+- name: redirect
+  visibility: public
+  parameters:
+  - name: path
+  - name: route
+  - name: scheme
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\Routing\Matcher\CompiledUrlMatcher
+- Symfony\Component\Routing\Matcher\RedirectableUrlMatcherInterface
+interfaces:
+- RedirectableUrlMatcherInterface

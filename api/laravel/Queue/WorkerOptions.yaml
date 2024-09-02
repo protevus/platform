@@ -1,0 +1,131 @@
+name: WorkerOptions
+class_comment: null
+dependencies: []
+properties:
+- name: name
+  visibility: public
+  comment: '# * The name of the worker.
+
+    # *
+
+    # * @var string'
+- name: backoff
+  visibility: public
+  comment: '# * The number of seconds to wait before retrying a job that encountered
+    an uncaught exception.
+
+    # *
+
+    # * @var int|int[]'
+- name: memory
+  visibility: public
+  comment: '# * The maximum amount of RAM the worker may consume.
+
+    # *
+
+    # * @var int'
+- name: timeout
+  visibility: public
+  comment: '# * The maximum number of seconds a child worker may run.
+
+    # *
+
+    # * @var int'
+- name: sleep
+  visibility: public
+  comment: '# * The number of seconds to wait in between polling the queue.
+
+    # *
+
+    # * @var int'
+- name: rest
+  visibility: public
+  comment: '# * The number of seconds to rest between jobs.
+
+    # *
+
+    # * @var int'
+- name: maxTries
+  visibility: public
+  comment: '# * The maximum number of times a job may be attempted.
+
+    # *
+
+    # * @var int'
+- name: force
+  visibility: public
+  comment: '# * Indicates if the worker should run in maintenance mode.
+
+    # *
+
+    # * @var bool'
+- name: stopWhenEmpty
+  visibility: public
+  comment: '# * Indicates if the worker should stop when the queue is empty.
+
+    # *
+
+    # * @var bool'
+- name: maxJobs
+  visibility: public
+  comment: '# * The maximum number of jobs to run.
+
+    # *
+
+    # * @var int'
+- name: maxTime
+  visibility: public
+  comment: '# * The maximum number of seconds a worker may live.
+
+    # *
+
+    # * @var int'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: name
+    default: '''default'''
+  - name: backoff
+    default: '0'
+  - name: memory
+    default: '128'
+  - name: timeout
+    default: '60'
+  - name: sleep
+    default: '3'
+  - name: maxTries
+    default: '1'
+  - name: force
+    default: 'false'
+  - name: stopWhenEmpty
+    default: 'false'
+  - name: maxJobs
+    default: '0'
+  - name: maxTime
+    default: '0'
+  - name: rest
+    default: '0'
+  comment: "# * The name of the worker.\n# *\n# * @var string\n# */\n# public $name;\n\
+    # \n# /**\n# * The number of seconds to wait before retrying a job that encountered\
+    \ an uncaught exception.\n# *\n# * @var int|int[]\n# */\n# public $backoff;\n\
+    # \n# /**\n# * The maximum amount of RAM the worker may consume.\n# *\n# * @var\
+    \ int\n# */\n# public $memory;\n# \n# /**\n# * The maximum number of seconds a\
+    \ child worker may run.\n# *\n# * @var int\n# */\n# public $timeout;\n# \n# /**\n\
+    # * The number of seconds to wait in between polling the queue.\n# *\n# * @var\
+    \ int\n# */\n# public $sleep;\n# \n# /**\n# * The number of seconds to rest between\
+    \ jobs.\n# *\n# * @var int\n# */\n# public $rest;\n# \n# /**\n# * The maximum\
+    \ number of times a job may be attempted.\n# *\n# * @var int\n# */\n# public $maxTries;\n\
+    # \n# /**\n# * Indicates if the worker should run in maintenance mode.\n# *\n\
+    # * @var bool\n# */\n# public $force;\n# \n# /**\n# * Indicates if the worker\
+    \ should stop when the queue is empty.\n# *\n# * @var bool\n# */\n# public $stopWhenEmpty;\n\
+    # \n# /**\n# * The maximum number of jobs to run.\n# *\n# * @var int\n# */\n#\
+    \ public $maxJobs;\n# \n# /**\n# * The maximum number of seconds a worker may\
+    \ live.\n# *\n# * @var int\n# */\n# public $maxTime;\n# \n# /**\n# * Create a\
+    \ new worker options instance.\n# *\n# * @param  string  $name\n# * @param  int|int[]\
+    \  $backoff\n# * @param  int  $memory\n# * @param  int  $timeout\n# * @param \
+    \ int  $sleep\n# * @param  int  $maxTries\n# * @param  bool  $force\n# * @param\
+    \  bool  $stopWhenEmpty\n# * @param  int  $maxJobs\n# * @param  int  $maxTime\n\
+    # * @param  int  $rest\n# * @return void"
+traits: []
+interfaces: []

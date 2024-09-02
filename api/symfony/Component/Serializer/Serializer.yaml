@@ -1,0 +1,231 @@
+name: Serializer
+class_comment: "# * Serializer serializes and deserializes data.\n# *\n# * objects\
+  \ are turned into arrays by normalizers.\n# * arrays are turned into various output\
+  \ formats by encoders.\n# *\n# *     $serializer->serialize($obj, 'xml')\n# *  \
+  \   $serializer->decode($data, 'xml')\n# *     $serializer->denormalize($data, 'Class',\
+  \ 'xml')\n# *\n# * @author Jordi Boggiano <j.boggiano@seld.be>\n# * @author Johannes\
+  \ M. Schmitt <schmittjoh@gmail.com>\n# * @author Lukas Kahwe Smith <smith@pooteeweet.org>\n\
+  # * @author K\xE9vin Dunglas <dunglas@gmail.com>"
+dependencies:
+- name: ChainDecoder
+  type: class
+  source: Symfony\Component\Serializer\Encoder\ChainDecoder
+- name: ChainEncoder
+  type: class
+  source: Symfony\Component\Serializer\Encoder\ChainEncoder
+- name: ContextAwareDecoderInterface
+  type: class
+  source: Symfony\Component\Serializer\Encoder\ContextAwareDecoderInterface
+- name: ContextAwareEncoderInterface
+  type: class
+  source: Symfony\Component\Serializer\Encoder\ContextAwareEncoderInterface
+- name: DecoderInterface
+  type: class
+  source: Symfony\Component\Serializer\Encoder\DecoderInterface
+- name: EncoderInterface
+  type: class
+  source: Symfony\Component\Serializer\Encoder\EncoderInterface
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Serializer\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\Serializer\Exception\LogicException
+- name: NotNormalizableValueException
+  type: class
+  source: Symfony\Component\Serializer\Exception\NotNormalizableValueException
+- name: PartialDenormalizationException
+  type: class
+  source: Symfony\Component\Serializer\Exception\PartialDenormalizationException
+- name: UnsupportedFormatException
+  type: class
+  source: Symfony\Component\Serializer\Exception\UnsupportedFormatException
+- name: AbstractObjectNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer
+- name: DenormalizerAwareInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- name: NormalizerAwareInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface
+- name: NormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\NormalizerInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: normalizers
+    default: '[]'
+  - name: encoders
+    default: '[]'
+  comment: "# * Serializer serializes and deserializes data.\n# *\n# * objects are\
+    \ turned into arrays by normalizers.\n# * arrays are turned into various output\
+    \ formats by encoders.\n# *\n# *     $serializer->serialize($obj, 'xml')\n# *\
+    \     $serializer->decode($data, 'xml')\n# *     $serializer->denormalize($data,\
+    \ 'Class', 'xml')\n# *\n# * @author Jordi Boggiano <j.boggiano@seld.be>\n# * @author\
+    \ Johannes M. Schmitt <schmittjoh@gmail.com>\n# * @author Lukas Kahwe Smith <smith@pooteeweet.org>\n\
+    # * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# */\n# class Serializer implements\
+    \ SerializerInterface, NormalizerInterface, DenormalizerInterface, ContextAwareEncoderInterface,\
+    \ ContextAwareDecoderInterface\n# {\n# /**\n# * Flag to control whether an empty\
+    \ array should be transformed to an\n# * object (in JSON: {}) or to a list (in\
+    \ JSON: []).\n# */\n# public const EMPTY_ARRAY_AS_OBJECT = 'empty_array_as_object';\n\
+    # \n# private const SCALAR_TYPES = [\n# 'int' => true,\n# 'bool' => true,\n# 'float'\
+    \ => true,\n# 'string' => true,\n# ];\n# \n# protected ChainEncoder $encoder;\n\
+    # \n# protected ChainDecoder $decoder;\n# \n# /**\n# * @var array<string, array<string,\
+    \ array<bool>>>\n# */\n# private array $denormalizerCache = [];\n# \n# /**\n#\
+    \ * @var array<string, array<string, array<bool>>>\n# */\n# private array $normalizerCache\
+    \ = [];\n# \n# /**\n# * @param array<NormalizerInterface|DenormalizerInterface>\
+    \ $normalizers\n# * @param array<EncoderInterface|DecoderInterface>         $encoders"
+- name: serialize
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+  - name: context
+    default: '[]'
+  comment: null
+- name: deserialize
+  visibility: public
+  parameters:
+  - name: data
+  - name: type
+  - name: format
+  - name: context
+    default: '[]'
+  comment: null
+- name: normalize
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: denormalize
+  visibility: public
+  parameters:
+  - name: data
+  - name: type
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: '# * @throws NotNormalizableValueException
+
+    # * @throws PartialDenormalizationException Occurs when one or more properties
+    of $type fails to denormalize'
+- name: getSupportedTypes
+  visibility: public
+  parameters:
+  - name: format
+  comment: null
+- name: supportsNormalization
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: supportsDenormalization
+  visibility: public
+  parameters:
+  - name: data
+  - name: type
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: getNormalizer
+  visibility: private
+  parameters:
+  - name: data
+  - name: format
+  - name: context
+  comment: '# * Returns a matching normalizer.
+
+    # *
+
+    # * @param mixed       $data    Data to get the serializer for
+
+    # * @param string|null $format  Format name, present to give the option to normalizers
+    to act differently based on formats
+
+    # * @param array       $context Options available to the normalizer'
+- name: getDenormalizer
+  visibility: private
+  parameters:
+  - name: data
+  - name: class
+  - name: format
+  - name: context
+  comment: '# * Returns a matching denormalizer.
+
+    # *
+
+    # * @param mixed       $data    Data to restore
+
+    # * @param string      $class   The expected class to instantiate
+
+    # * @param string|null $format  Format name, present to give the option to normalizers
+    to act differently based on formats
+
+    # * @param array       $context Options available to the denormalizer'
+- name: encode
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+  - name: context
+    default: '[]'
+  comment: null
+- name: decode
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+  - name: context
+    default: '[]'
+  comment: null
+- name: supportsEncoding
+  visibility: public
+  parameters:
+  - name: format
+  - name: context
+    default: '[]'
+  comment: null
+- name: supportsDecoding
+  visibility: public
+  parameters:
+  - name: format
+  - name: context
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\Serializer\Encoder\ChainDecoder
+- Symfony\Component\Serializer\Encoder\ChainEncoder
+- Symfony\Component\Serializer\Encoder\ContextAwareDecoderInterface
+- Symfony\Component\Serializer\Encoder\ContextAwareEncoderInterface
+- Symfony\Component\Serializer\Encoder\DecoderInterface
+- Symfony\Component\Serializer\Encoder\EncoderInterface
+- Symfony\Component\Serializer\Exception\InvalidArgumentException
+- Symfony\Component\Serializer\Exception\LogicException
+- Symfony\Component\Serializer\Exception\NotNormalizableValueException
+- Symfony\Component\Serializer\Exception\PartialDenormalizationException
+- Symfony\Component\Serializer\Exception\UnsupportedFormatException
+- Symfony\Component\Serializer\Normalizer\AbstractObjectNormalizer
+- Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface
+- Symfony\Component\Serializer\Normalizer\NormalizerInterface
+interfaces:
+- SerializerInterface

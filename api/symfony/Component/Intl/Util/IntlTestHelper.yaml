@@ -1,0 +1,87 @@
+name: IntlTestHelper
+class_comment: '# * Helper class for preparing test cases that rely on the Intl component.
+
+  # *
+
+  # * Any test that tests functionality relying on either the intl classes or
+
+  # * the resource bundle data should call either of the methods
+
+  # * {@link requireIntl()} or {@link requireFullIntl()}. Calling
+
+  # * {@link requireFullIntl()} is only necessary if you use functionality in the
+
+  # * test that is not provided by the stub intl implementation.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Intl
+  type: class
+  source: Symfony\Component\Intl\Intl
+properties: []
+methods:
+- name: requireIntl
+  visibility: public
+  parameters:
+  - name: testCase
+  - name: minimumIcuVersion
+    default: 'null'
+  comment: '# * Helper class for preparing test cases that rely on the Intl component.
+
+    # *
+
+    # * Any test that tests functionality relying on either the intl classes or
+
+    # * the resource bundle data should call either of the methods
+
+    # * {@link requireIntl()} or {@link requireFullIntl()}. Calling
+
+    # * {@link requireFullIntl()} is only necessary if you use functionality in the
+
+    # * test that is not provided by the stub intl implementation.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # class IntlTestHelper
+
+    # {
+
+    # /**
+
+    # * Should be called before tests that work fine with the stub implementation.'
+- name: requireFullIntl
+  visibility: public
+  parameters:
+  - name: testCase
+  - name: minimumIcuVersion
+    default: 'null'
+  comment: '# * Should be called before tests that require a feature-complete intl
+
+    # * implementation.'
+- name: require32Bit
+  visibility: public
+  parameters:
+  - name: testCase
+  comment: '# * Skips the test unless the current system has a 32bit architecture.'
+- name: require64Bit
+  visibility: public
+  parameters:
+  - name: testCase
+  comment: '# * Skips the test unless the current system has a 64bit architecture.'
+- name: __construct
+  visibility: private
+  parameters: []
+  comment: '# * Must not be instantiated.'
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Intl\Intl
+interfaces: []

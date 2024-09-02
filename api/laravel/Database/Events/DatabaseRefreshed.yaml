@@ -1,0 +1,27 @@
+name: DatabaseRefreshed
+class_comment: null
+dependencies:
+- name: MigrationEventContract
+  type: class
+  source: Illuminate\Contracts\Database\Events\MigrationEvent
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: database
+    default: 'null'
+  - name: seeding
+    default: 'false'
+  comment: '# * Create a new event instance.
+
+    # *
+
+    # * @param  string|null  $database
+
+    # * @param  bool  $seeding
+
+    # * @return void'
+traits: []
+interfaces:
+- MigrationEventContract

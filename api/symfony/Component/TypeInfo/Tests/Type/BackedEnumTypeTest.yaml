@@ -1,0 +1,47 @@
+name: BackedEnumTypeTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: DummyBackedEnum
+  type: class
+  source: Symfony\Component\TypeInfo\Tests\Fixtures\DummyBackedEnum
+- name: Type
+  type: class
+  source: Symfony\Component\TypeInfo\Type
+- name: BackedEnumType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\BackedEnumType
+- name: TypeIdentifier
+  type: class
+  source: Symfony\Component\TypeInfo\TypeIdentifier
+properties: []
+methods:
+- name: testToString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsNullable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetBaseType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAsNonNullable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsA
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\TypeInfo\Tests\Fixtures\DummyBackedEnum
+- Symfony\Component\TypeInfo\Type
+- Symfony\Component\TypeInfo\Type\BackedEnumType
+- Symfony\Component\TypeInfo\TypeIdentifier
+interfaces: []

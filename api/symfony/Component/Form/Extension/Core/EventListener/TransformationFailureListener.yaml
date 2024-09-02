@@ -1,0 +1,43 @@
+name: TransformationFailureListener
+class_comment: '# * @author Christian Flothmann <christian.flothmann@sensiolabs.de>'
+dependencies:
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: FormError
+  type: class
+  source: Symfony\Component\Form\FormError
+- name: FormEvent
+  type: class
+  source: Symfony\Component\Form\FormEvent
+- name: FormEvents
+  type: class
+  source: Symfony\Component\Form\FormEvents
+- name: TranslatorInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatorInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: translator
+    default: 'null'
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: convertTransformationFailureToFormError
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\Form\FormError
+- Symfony\Component\Form\FormEvent
+- Symfony\Component\Form\FormEvents
+- Symfony\Contracts\Translation\TranslatorInterface
+interfaces:
+- EventSubscriberInterface

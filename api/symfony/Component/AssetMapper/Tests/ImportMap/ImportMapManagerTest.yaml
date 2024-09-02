@@ -1,0 +1,150 @@
+name: ImportMapManagerTest
+class_comment: null
+dependencies:
+- name: MockObject
+  type: class
+  source: PHPUnit\Framework\MockObject\MockObject
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AssetMapperInterface
+  type: class
+  source: Symfony\Component\AssetMapper\AssetMapperInterface
+- name: ImportMapConfigReader
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapConfigReader
+- name: ImportMapEntries
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapEntries
+- name: ImportMapEntry
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapEntry
+- name: ImportMapManager
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapManager
+- name: ImportMapType
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapType
+- name: PackageRequireOptions
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\PackageRequireOptions
+- name: RemotePackageDownloader
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\RemotePackageDownloader
+- name: PackageResolverInterface
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\Resolver\PackageResolverInterface
+- name: ResolvedImportMapPackage
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\Resolver\ResolvedImportMapPackage
+- name: MappedAsset
+  type: class
+  source: Symfony\Component\AssetMapper\MappedAsset
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testRequire
+  visibility: public
+  parameters:
+  - name: packages
+  - name: expectedProviderPackageArgumentCount
+  - name: resolvedPackages
+  - name: expectedImportMap
+  comment: '# * @dataProvider getRequirePackageTests'
+- name: getRequirePackageTests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemove
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUpdateAll
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUpdateWithSpecificPackages
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParsePackageName
+  visibility: public
+  parameters:
+  - name: packageName
+  - name: expectedReturn
+  comment: '# * @dataProvider getPackageNameTests'
+- name: getPackageNameTests
+  visibility: public
+  parameters: []
+  comment: null
+- name: createImportMapManager
+  visibility: private
+  parameters: []
+  comment: null
+- name: resolvedPackage
+  visibility: private
+  parameters:
+  - name: packageName
+  - name: version
+  - name: type
+    default: ImportMapType::JS
+  comment: null
+- name: mockImportMap
+  visibility: private
+  parameters:
+  - name: importMapEntries
+  comment: null
+- name: writeFile
+  visibility: private
+  parameters:
+  - name: filename
+  - name: content
+  comment: null
+- name: createLocalEntry
+  visibility: private
+  parameters:
+  - name: importName
+  - name: path
+  - name: type
+    default: ImportMapType::JS
+  - name: isEntrypoint
+    default: 'false'
+  comment: null
+- name: createRemoteEntry
+  visibility: private
+  parameters:
+  - name: importName
+  - name: version
+  - name: path
+    default: 'null'
+  - name: type
+    default: ImportMapType::JS
+  - name: packageSpecifier
+    default: 'null'
+  comment: null
+traits:
+- PHPUnit\Framework\MockObject\MockObject
+- PHPUnit\Framework\TestCase
+- Symfony\Component\AssetMapper\AssetMapperInterface
+- Symfony\Component\AssetMapper\ImportMap\ImportMapConfigReader
+- Symfony\Component\AssetMapper\ImportMap\ImportMapEntries
+- Symfony\Component\AssetMapper\ImportMap\ImportMapEntry
+- Symfony\Component\AssetMapper\ImportMap\ImportMapManager
+- Symfony\Component\AssetMapper\ImportMap\ImportMapType
+- Symfony\Component\AssetMapper\ImportMap\PackageRequireOptions
+- Symfony\Component\AssetMapper\ImportMap\RemotePackageDownloader
+- Symfony\Component\AssetMapper\ImportMap\Resolver\PackageResolverInterface
+- Symfony\Component\AssetMapper\ImportMap\Resolver\ResolvedImportMapPackage
+- Symfony\Component\AssetMapper\MappedAsset
+- Symfony\Component\Filesystem\Filesystem
+interfaces: []

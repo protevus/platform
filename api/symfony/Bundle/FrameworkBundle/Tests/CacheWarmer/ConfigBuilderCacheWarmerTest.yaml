@@ -1,0 +1,374 @@
+name: ConfigBuilderCacheWarmerTest
+class_comment: null
+dependencies:
+- name: ConfigBuilderCacheWarmer
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\CacheWarmer\ConfigBuilderCacheWarmer
+- name: FrameworkBundle
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\FrameworkBundle
+- name: TestCase
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\TestCase
+- name: NodeDefinition
+  type: class
+  source: Symfony\Component\Config\Definition\Builder\NodeDefinition
+- name: TreeBuilder
+  type: class
+  source: Symfony\Component\Config\Definition\Builder\TreeBuilder
+- name: ConfigurationInterface
+  type: class
+  source: Symfony\Component\Config\Definition\ConfigurationInterface
+- name: LoaderInterface
+  type: class
+  source: Symfony\Component\Config\Loader\LoaderInterface
+- name: CompilerPassInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: Extension
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\Extension
+- name: ExtensionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: Bundle
+  type: class
+  source: Symfony\Component\HttpKernel\Bundle\Bundle
+- name: BundleInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Bundle\BundleInterface
+- name: Kernel
+  type: class
+  source: Symfony\Component\HttpKernel\Kernel
+- name: KernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\KernelInterface
+properties:
+- name: varDir
+  visibility: private
+  comment: null
+- name: factories
+  visibility: private
+  comment: "# @var TestSecurityExtension $extension */\n# $extension = $container->getExtension('test_security');\n\
+    # $extension->addAuthenticatorFactory(new class implements TestAuthenticatorFactoryInterface\
+    \ {\n# public function getKey(): string\n# {\n# return 'token';\n# }\n# \n# public\
+    \ function addConfiguration(NodeDefinition $node): void\n# {\n# }\n# });\n# }\n\
+    # \n# public function registerBundles(): iterable\n# {\n# yield from parent::registerBundles();\n\
+    # \n# yield new class extends Bundle {\n# public function getContainerExtension():\
+    \ ExtensionInterface\n# {\n# return new TestSecurityExtension();\n# }\n# };\n\
+    # \n# yield new class extends Bundle {\n# public function build(ContainerBuilder\
+    \ $container): void\n# {\n# /** @var TestSecurityExtension $extension */\n# $extension\
+    \ = $container->getExtension('test_security');\n# $extension->addAuthenticatorFactory(new\
+    \ class implements TestAuthenticatorFactoryInterface {\n# public function getKey():\
+    \ string\n# {\n# return 'form-login';\n# }\n# \n# public function addConfiguration(NodeDefinition\
+    \ $node): void\n# {\n# $node\n# ->children()\n# ->scalarNode('provider')->end()\n\
+    # ->end()\n# ;\n# }\n# });\n# }\n# };\n# }\n# };\n# $kernel->boot();\n# \n# $warmer\
+    \ = new ConfigBuilderCacheWarmer($kernel);\n# $warmer->warmUp($kernel->getCacheDir(),\
+    \ $kernel->getBuildDir());\n# \n# self::assertFileExists($kernel->getBuildDir().'/Symfony/Config/FrameworkConfig.php');\n\
+    # self::assertFileExists($kernel->getBuildDir().'/Symfony/Config/SecurityConfig.php');\n\
+    # self::assertFileExists($kernel->getBuildDir().'/Symfony/Config/Security/FirewallConfig.php');\n\
+    # self::assertFileExists($kernel->getBuildDir().'/Symfony/Config/Security/FirewallConfig/FormLoginConfig.php');\n\
+    # self::assertFileExists($kernel->getBuildDir().'/Symfony/Config/Security/FirewallConfig/TokenConfig.php');\n\
+    # }\n# }\n# \n# class TestKernel extends Kernel implements CompilerPassInterface\n\
+    # {\n# private $varDir;\n# \n# public function __construct(string $varDir)\n#\
+    \ {\n# parent::__construct('test', false);\n# \n# $this->varDir = $varDir;\n#\
+    \ }\n# \n# public function registerBundles(): iterable\n# {\n# yield new FrameworkBundle();\n\
+    # }\n# \n# public function getBuildDir(): string\n# {\n# return $this->varDir.'/build';\n\
+    # }\n# \n# public function getCacheDir(): string\n# {\n# return $this->varDir.'/cache';\n\
+    # }\n# \n# public function registerContainerConfiguration(LoaderInterface $loader):\
+    \ void\n# {\n# $loader->load(static function (ContainerBuilder $container) {\n\
+    # $container->loadFromExtension('framework', [\n# 'annotations' => false,\n# 'handle_all_throwables'\
+    \ => true,\n# 'http_method_override' => false,\n# 'php_errors' => ['log' => true],\n\
+    # ]);\n# });\n# }\n# \n# public function process(ContainerBuilder $container):\
+    \ void\n# {\n# $container->removeDefinition('config_builder.warmer');\n# }\n#\
+    \ }\n# \n# interface TestAuthenticatorFactoryInterface\n# {\n# public function\
+    \ getKey(): string;\n# \n# public function addConfiguration(NodeDefinition $builder):\
+    \ void;\n# }\n# \n# class TestSecurityExtension extends Extension implements ConfigurationInterface\n\
+    # {\n# /** @var TestAuthenticatorFactoryInterface[]"
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testBuildDirIsUsedAsConfigBuilderOutputDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithCustomKernelImplementation
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: varDir
+  comment: null
+- name: handle
+  visibility: public
+  parameters:
+  - name: request
+  - name: type
+    default: self::MAIN_REQUEST
+  - name: catch
+    default: 'true'
+  comment: null
+- name: registerBundles
+  visibility: public
+  parameters: []
+  comment: null
+- name: registerContainerConfiguration
+  visibility: public
+  parameters:
+  - name: loader
+  comment: null
+- name: boot
+  visibility: public
+  parameters: []
+  comment: null
+- name: shutdown
+  visibility: public
+  parameters: []
+  comment: null
+- name: getBundles
+  visibility: public
+  parameters: []
+  comment: null
+- name: getBundle
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: locateResource
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: getEnvironment
+  visibility: public
+  parameters: []
+  comment: null
+- name: isDebug
+  visibility: public
+  parameters: []
+  comment: null
+- name: getProjectDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: getContainer
+  visibility: public
+  parameters: []
+  comment: null
+- name: getStartTime
+  visibility: public
+  parameters: []
+  comment: null
+- name: getBuildDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCacheDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: getLogDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCharset
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtensionAddedInKernel
+  visibility: public
+  parameters: []
+  comment: null
+- name: build
+  visibility: protected
+  parameters:
+  - name: container
+  comment: null
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: container
+  comment: null
+- name: getConfigTreeBuilder
+  visibility: public
+  parameters: []
+  comment: null
+- name: getAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: testKernelAsExtension
+  visibility: public
+  parameters: []
+  comment: null
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: container
+  comment: null
+- name: getXsdValidationBasePath
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNamespace
+  visibility: public
+  parameters: []
+  comment: null
+- name: getAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: getConfigTreeBuilder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtensionsExtendedInBuildMethods
+  visibility: public
+  parameters: []
+  comment: null
+- name: build
+  visibility: protected
+  parameters:
+  - name: container
+  comment: null
+- name: getKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: addConfiguration
+  visibility: public
+  parameters:
+  - name: node
+  comment: null
+- name: registerBundles
+  visibility: public
+  parameters: []
+  comment: null
+- name: getContainerExtension
+  visibility: public
+  parameters: []
+  comment: null
+- name: build
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: getKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: addConfiguration
+  visibility: public
+  parameters:
+  - name: node
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: varDir
+  comment: null
+- name: registerBundles
+  visibility: public
+  parameters: []
+  comment: null
+- name: getBuildDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCacheDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: registerContainerConfiguration
+  visibility: public
+  parameters:
+  - name: loader
+  comment: null
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: getKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: addConfiguration
+  visibility: public
+  parameters:
+  - name: builder
+  comment: null
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: container
+  comment: null
+- name: getConfiguration
+  visibility: public
+  parameters:
+  - name: config
+  - name: container
+  comment: null
+- name: addAuthenticatorFactory
+  visibility: public
+  parameters:
+  - name: factory
+  comment: null
+- name: getConfigTreeBuilder
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Bundle\FrameworkBundle\CacheWarmer\ConfigBuilderCacheWarmer
+- Symfony\Bundle\FrameworkBundle\FrameworkBundle
+- Symfony\Bundle\FrameworkBundle\Tests\TestCase
+- Symfony\Component\Config\Definition\Builder\NodeDefinition
+- Symfony\Component\Config\Definition\Builder\TreeBuilder
+- Symfony\Component\Config\Definition\ConfigurationInterface
+- Symfony\Component\Config\Loader\LoaderInterface
+- Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Extension\Extension
+- Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+- Symfony\Component\Filesystem\Filesystem
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Bundle\Bundle
+- Symfony\Component\HttpKernel\Bundle\BundleInterface
+- Symfony\Component\HttpKernel\Kernel
+- Symfony\Component\HttpKernel\KernelInterface
+interfaces:
+- KernelInterface
+- ConfigurationInterface
+- ExtensionInterface
+- TestAuthenticatorFactoryInterface
+- TestAuthenticatorFactoryInterface
+- CompilerPassInterface
+- ConfigurationInterface

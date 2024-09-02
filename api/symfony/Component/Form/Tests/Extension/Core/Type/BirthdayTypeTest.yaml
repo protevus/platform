@@ -1,0 +1,15 @@
+name: BirthdayTypeTest
+class_comment: '# * @author Stepan Anchugov <kixxx1@gmail.com>'
+dependencies:
+- name: InvalidOptionsException
+  type: class
+  source: Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+properties: []
+methods:
+- name: testSetInvalidYearsOption
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+interfaces: []

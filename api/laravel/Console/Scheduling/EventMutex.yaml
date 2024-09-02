@@ -1,0 +1,40 @@
+name: EventMutex
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: create
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Attempt to obtain an event mutex for the given event.
+
+    # *
+
+    # * @param  \Illuminate\Console\Scheduling\Event  $event
+
+    # * @return bool'
+- name: exists
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Determine if an event mutex exists for the given event.
+
+    # *
+
+    # * @param  \Illuminate\Console\Scheduling\Event  $event
+
+    # * @return bool'
+- name: forget
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Clear the event mutex for the given event.
+
+    # *
+
+    # * @param  \Illuminate\Console\Scheduling\Event  $event
+
+    # * @return void'
+traits: []
+interfaces: []

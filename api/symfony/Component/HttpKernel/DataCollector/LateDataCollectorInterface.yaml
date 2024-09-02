@@ -1,0 +1,29 @@
+name: LateDataCollectorInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: lateCollect
+  visibility: public
+  parameters: []
+  comment: '# * LateDataCollectorInterface.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # interface LateDataCollectorInterface
+
+    # {
+
+    # /**
+
+    # * Collects data as late as possible.
+
+    # *
+
+    # * @return void'
+traits: []
+interfaces: []

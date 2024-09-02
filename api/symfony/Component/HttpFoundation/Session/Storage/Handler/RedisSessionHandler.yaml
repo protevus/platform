@@ -1,0 +1,63 @@
+name: RedisSessionHandler
+class_comment: "# * Redis based session storage handler based on the Redis class\n\
+  # * provided by the PHP redis extension.\n# *\n# * @author Dalibor Karlovi\u0107\
+  \ <dalibor@flexolabs.io>"
+dependencies:
+- name: ErrorInterface
+  type: class
+  source: Predis\Response\ErrorInterface
+- name: Relay
+  type: class
+  source: Relay\Relay
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: redis
+  - name: options
+    default: '[]'
+  comment: "# * Redis based session storage handler based on the Redis class\n# *\
+    \ provided by the PHP redis extension.\n# *\n# * @author Dalibor Karlovi\u0107\
+    \ <dalibor@flexolabs.io>\n# */\n# class RedisSessionHandler extends AbstractSessionHandler\n\
+    # {\n# /**\n# * Key prefix for shared environments.\n# */\n# private string $prefix;\n\
+    # \n# /**\n# * Time to live in seconds.\n# */\n# private int|\\Closure|null $ttl;\n\
+    # \n# /**\n# * List of available options:\n# *  * prefix: The prefix to use for\
+    \ the keys in order to avoid collision on the Redis server\n# *  * ttl: The time\
+    \ to live in seconds.\n# *\n# * @throws \\InvalidArgumentException When unsupported\
+    \ client or options are passed"
+- name: doRead
+  visibility: protected
+  parameters:
+  - name: sessionId
+  comment: null
+- name: doWrite
+  visibility: protected
+  parameters:
+  - name: sessionId
+  - name: data
+  comment: null
+- name: doDestroy
+  visibility: protected
+  parameters:
+  - name: sessionId
+  comment: null
+- name: close
+  visibility: public
+  parameters: []
+  comment: null
+- name: gc
+  visibility: public
+  parameters:
+  - name: maxlifetime
+  comment: null
+- name: updateTimestamp
+  visibility: public
+  parameters:
+  - name: sessionId
+  - name: data
+  comment: null
+traits:
+- Predis\Response\ErrorInterface
+- Relay\Relay
+interfaces: []

@@ -1,0 +1,78 @@
+name: DateTimeToStringTransformer
+class_comment: '# * Transforms between a date string and a DateTime object.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # * @author Florian Eckerstorfer <florian@eckerstorfer.org>
+
+  # *
+
+  # * @extends BaseDateTimeTransformer<string>'
+dependencies:
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: inputTimezone
+    default: 'null'
+  - name: outputTimezone
+    default: 'null'
+  - name: format
+    default: '''Y-m-d H:i:s'''
+  - name: parseFormat
+    default: 'null'
+  comment: "# * Transforms between a date string and a DateTime object.\n# *\n# *\
+    \ @author Bernhard Schussek <bschussek@gmail.com>\n# * @author Florian Eckerstorfer\
+    \ <florian@eckerstorfer.org>\n# *\n# * @extends BaseDateTimeTransformer<string>\n\
+    # */\n# class DateTimeToStringTransformer extends BaseDateTimeTransformer\n# {\n\
+    # /**\n# * Format used for generating strings.\n# */\n# private string $generateFormat;\n\
+    # \n# /**\n# * Format used for parsing strings.\n# *\n# * Different than the {@link\
+    \ $generateFormat} because formats for parsing\n# * support additional characters\
+    \ in PHP that are not supported for\n# * generating strings.\n# */\n# private\
+    \ string $parseFormat;\n# \n# /**\n# * Transforms a \\DateTime instance to a string.\n\
+    # *\n# * @see \\DateTime::format() for supported formats\n# *\n# * @param string|null\
+    \ $inputTimezone  The name of the input timezone\n# * @param string|null $outputTimezone\
+    \ The name of the output timezone\n# * @param string      $format         The\
+    \ date format\n# * @param string|null $parseFormat    The parse format when different\
+    \ from $format"
+- name: transform
+  visibility: public
+  parameters:
+  - name: dateTime
+  comment: '# * Transforms a DateTime object into a date string with the configured
+    format
+
+    # * and timezone.
+
+    # *
+
+    # * @param \DateTimeInterface $dateTime A DateTimeInterface object
+
+    # *
+
+    # * @throws TransformationFailedException If the given value is not a \DateTimeInterface'
+- name: reverseTransform
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Transforms a date string in the configured timezone into a DateTime
+    object.
+
+    # *
+
+    # * @param string $value A value as produced by PHP''s date() function
+
+    # *
+
+    # * @throws TransformationFailedException If the given value is not a string,
+
+    # *                                       or could not be transformed'
+traits:
+- Symfony\Component\Form\Exception\TransformationFailedException
+interfaces: []

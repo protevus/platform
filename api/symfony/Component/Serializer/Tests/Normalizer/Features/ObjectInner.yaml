@@ -1,0 +1,31 @@
+name: ObjectInner
+class_comment: null
+dependencies: []
+properties:
+- name: foo
+  visibility: public
+  comment: null
+- name: bar
+  visibility: public
+  comment: null
+methods:
+- name: getBar
+  visibility: public
+  parameters: []
+  comment: null
+- name: setBar
+  visibility: public
+  parameters:
+  - name: bar
+  comment: null
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: setFoo
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+traits: []
+interfaces: []

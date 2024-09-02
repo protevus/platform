@@ -1,0 +1,88 @@
+name: ConnectionResolver
+class_comment: null
+dependencies: []
+properties:
+- name: connections
+  visibility: protected
+  comment: '# * All of the registered connections.
+
+    # *
+
+    # * @var \Illuminate\Database\ConnectionInterface[]'
+- name: default
+  visibility: protected
+  comment: '# * The default connection name.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: connections
+    default: '[]'
+  comment: "# * All of the registered connections.\n# *\n# * @var \\Illuminate\\Database\\\
+    ConnectionInterface[]\n# */\n# protected $connections = [];\n# \n# /**\n# * The\
+    \ default connection name.\n# *\n# * @var string\n# */\n# protected $default;\n\
+    # \n# /**\n# * Create a new connection resolver instance.\n# *\n# * @param  array<string,\
+    \ \\Illuminate\\Database\\ConnectionInterface>  $connections\n# * @return void"
+- name: connection
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Get a database connection instance.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @return \Illuminate\Database\ConnectionInterface'
+- name: addConnection
+  visibility: public
+  parameters:
+  - name: name
+  - name: connection
+  comment: '# * Add a connection to the resolver.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  \Illuminate\Database\ConnectionInterface  $connection
+
+    # * @return void'
+- name: hasConnection
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Check if a connection has been registered.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return bool'
+- name: getDefaultConnection
+  visibility: public
+  parameters: []
+  comment: '# * Get the default connection name.
+
+    # *
+
+    # * @return string'
+- name: setDefaultConnection
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Set the default connection name.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return void'
+traits: []
+interfaces:
+- ConnectionResolverInterface

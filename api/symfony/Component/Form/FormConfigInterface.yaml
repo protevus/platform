@@ -1,0 +1,207 @@
+name: FormConfigInterface
+class_comment: null
+dependencies:
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcherInterface
+- name: PropertyPathInterface
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyPathInterface
+properties: []
+methods:
+- name: getEventDispatcher
+  visibility: public
+  parameters: []
+  comment: '# * The configuration of a {@link Form} object.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # interface FormConfigInterface
+
+    # {
+
+    # /**
+
+    # * Returns the event dispatcher used to dispatch form events.'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: '# * Returns the name of the form used as HTTP parameter.'
+- name: getPropertyPath
+  visibility: public
+  parameters: []
+  comment: '# * Returns the property path that the form should be mapped to.'
+- name: getMapped
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether the form should be mapped to an element of its
+
+    # * parent''s data.'
+- name: getByReference
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether the form''s data should be modified by reference.'
+- name: getInheritData
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether the form should read and write the data of its parent.'
+- name: getCompound
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether the form is compound.
+
+    # *
+
+    # * This property is independent of whether the form actually has
+
+    # * children. A form can be compound and have no children at all, like
+
+    # * for example an empty collection form.
+
+    # * The contrary is not possible, a form which is not compound
+
+    # * cannot have any children.'
+- name: getType
+  visibility: public
+  parameters: []
+  comment: '# * Returns the resolved form type used to construct the form.'
+- name: getViewTransformers
+  visibility: public
+  parameters: []
+  comment: '# * Returns the view transformers of the form.
+
+    # *
+
+    # * @return DataTransformerInterface[]'
+- name: getModelTransformers
+  visibility: public
+  parameters: []
+  comment: '# * Returns the model transformers of the form.
+
+    # *
+
+    # * @return DataTransformerInterface[]'
+- name: getDataMapper
+  visibility: public
+  parameters: []
+  comment: '# * Returns the data mapper of the compound form or null for a simple
+    form.'
+- name: getRequired
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether the form is required.'
+- name: getDisabled
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether the form is disabled.'
+- name: getErrorBubbling
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether errors attached to the form will bubble to its parent.'
+- name: getEmptyData
+  visibility: public
+  parameters: []
+  comment: '# * Used when the view data is empty on submission.
+
+    # *
+
+    # * When the form is compound it will also be used to map the
+
+    # * children data.
+
+    # *
+
+    # * The empty data must match the view format as it will passed to the first view
+    transformer''s
+
+    # * "reverseTransform" method.'
+- name: getAttributes
+  visibility: public
+  parameters: []
+  comment: '# * Returns additional attributes of the form.'
+- name: hasAttribute
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Returns whether the attribute with the given name exists.'
+- name: getAttribute
+  visibility: public
+  parameters:
+  - name: name
+  - name: default
+    default: 'null'
+  comment: '# * Returns the value of the given attribute.'
+- name: getData
+  visibility: public
+  parameters: []
+  comment: '# * Returns the initial data of the form.'
+- name: getDataClass
+  visibility: public
+  parameters: []
+  comment: '# * Returns the class of the view data or null if the data is scalar or
+    an array.'
+- name: getDataLocked
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether the form''s data is locked.
+
+    # *
+
+    # * A form with locked data is restricted to the data passed in
+
+    # * this configuration. The data can only be modified then by
+
+    # * submitting the form.'
+- name: getFormFactory
+  visibility: public
+  parameters: []
+  comment: '# * Returns the form factory used for creating new forms.'
+- name: getAction
+  visibility: public
+  parameters: []
+  comment: '# * Returns the target URL of the form.'
+- name: getMethod
+  visibility: public
+  parameters: []
+  comment: '# * Returns the HTTP method used by the form.'
+- name: getRequestHandler
+  visibility: public
+  parameters: []
+  comment: '# * Returns the request handler used by the form.'
+- name: getAutoInitialize
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether the form should be initialized upon creation.'
+- name: getOptions
+  visibility: public
+  parameters: []
+  comment: '# * Returns all options passed during the construction of the form.
+
+    # *
+
+    # * @return array<string, mixed> The passed options'
+- name: hasOption
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Returns whether a specific option exists.'
+- name: getOption
+  visibility: public
+  parameters:
+  - name: name
+  - name: default
+    default: 'null'
+  comment: '# * Returns the value of a specific option.'
+- name: getIsEmptyCallback
+  visibility: public
+  parameters: []
+  comment: '# * Returns a callable that takes the model data as argument and that
+    returns if it is empty or not.'
+traits:
+- Symfony\Component\EventDispatcher\EventDispatcherInterface
+- Symfony\Component\PropertyAccess\PropertyPathInterface
+interfaces: []

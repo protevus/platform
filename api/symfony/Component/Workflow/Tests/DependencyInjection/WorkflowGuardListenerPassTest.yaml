@@ -1,0 +1,71 @@
+name: WorkflowGuardListenerPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: LogicException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\LogicException
+- name: AuthenticationTrustResolverInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface
+- name: TokenStorageInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+- name: AuthorizationCheckerInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
+- name: RoleHierarchy
+  type: class
+  source: Symfony\Component\Security\Core\Role\RoleHierarchy
+- name: ValidatorInterface
+  type: class
+  source: Symfony\Component\Validator\Validator\ValidatorInterface
+- name: WorkflowGuardListenerPass
+  type: class
+  source: Symfony\Component\Workflow\DependencyInjection\WorkflowGuardListenerPass
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testNoExeptionIfParameterIsNotSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoExeptionIfAllDependenciesArePresent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExceptionIfTheTokenStorageServiceIsNotPresent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExceptionIfTheAuthorizationCheckerServiceIsNotPresent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExceptionIfTheAuthenticationTrustResolverServiceIsNotPresent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExceptionIfTheRoleHierarchyServiceIsNotPresent
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\LogicException
+- Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface
+- Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+- Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
+- Symfony\Component\Security\Core\Role\RoleHierarchy
+- Symfony\Component\Validator\Validator\ValidatorInterface
+- Symfony\Component\Workflow\DependencyInjection\WorkflowGuardListenerPass
+interfaces: []

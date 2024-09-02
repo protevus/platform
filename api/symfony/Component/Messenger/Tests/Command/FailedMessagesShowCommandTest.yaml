@@ -1,0 +1,123 @@
+name: FailedMessagesShowCommandTest
+class_comment: '# * @group time-sensitive'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: CommandCompletionTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandCompletionTester
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+- name: ServiceLocator
+  type: class
+  source: Symfony\Component\DependencyInjection\ServiceLocator
+- name: FailedMessagesShowCommand
+  type: class
+  source: Symfony\Component\Messenger\Command\FailedMessagesShowCommand
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: ErrorDetailsStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\ErrorDetailsStamp
+- name: RedeliveryStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\RedeliveryStamp
+- name: SentToFailureTransportStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\SentToFailureTransportStamp
+- name: TransportMessageIdStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\TransportMessageIdStamp
+- name: ListableReceiverInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Receiver\ListableReceiverInterface
+- name: ReceiverInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testBasicRunWithServiceLocator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMultipleRedeliveryFailsWithServiceLocator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReceiverShouldBeListableWithServiceLocator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testListMessagesWithServiceLocator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testListMessagesReturnsNoMessagesFoundWithServiceLocator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testListMessagesReturnsPaginatedMessagesWithServiceLocator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testListMessagesReturnsFilteredByClassMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: testListMessagesReturnsCountByClassName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidMessagesThrowsExceptionWithServiceLocator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testVeryVerboseOutputForSingleMessageContainsExceptionWithTraceWithServiceLocator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testListMessagesWithServiceLocatorFromSpecificTransport
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompletingTransport
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompleteId
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompleteIdWithSpecifiedTransport
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Tester\CommandCompletionTester
+- Symfony\Component\Console\Tester\CommandTester
+- Symfony\Component\DependencyInjection\ServiceLocator
+- Symfony\Component\Messenger\Command\FailedMessagesShowCommand
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Stamp\ErrorDetailsStamp
+- Symfony\Component\Messenger\Stamp\RedeliveryStamp
+- Symfony\Component\Messenger\Stamp\SentToFailureTransportStamp
+- Symfony\Component\Messenger\Stamp\TransportMessageIdStamp
+- Symfony\Component\Messenger\Transport\Receiver\ListableReceiverInterface
+- Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface
+interfaces: []

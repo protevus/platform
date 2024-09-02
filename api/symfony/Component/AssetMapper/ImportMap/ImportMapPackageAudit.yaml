@@ -1,0 +1,20 @@
+name: ImportMapPackageAudit
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: package
+  - name: version
+  - name: vulnerabilities
+    default: '[]'
+  comment: null
+- name: withVulnerability
+  visibility: public
+  parameters:
+  - name: vulnerability
+  comment: null
+traits: []
+interfaces: []

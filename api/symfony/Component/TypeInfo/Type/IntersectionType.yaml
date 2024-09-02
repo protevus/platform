@@ -1,0 +1,35 @@
+name: IntersectionType
+class_comment: null
+dependencies:
+- name: LogicException
+  type: class
+  source: Symfony\Component\TypeInfo\Exception\LogicException
+- name: Type
+  type: class
+  source: Symfony\Component\TypeInfo\Type
+- name: CompositeTypeTrait
+  type: class
+  source: CompositeTypeTrait
+properties: []
+methods:
+- name: getBaseType
+  visibility: public
+  parameters: []
+  comment: "# * @author Mathias Arlaud <mathias.arlaud@gmail.com>\n# * @author Baptiste\
+    \ Leduc <baptiste.leduc@gmail.com>\n# *\n# * @template T of Type\n# *\n# * @experimental\n\
+    # */\n# final class IntersectionType extends Type\n# {\n# /**\n# * @use CompositeTypeTrait<T>\n\
+    # */\n# use CompositeTypeTrait;\n# \n# public function is(callable $callable):\
+    \ bool\n# {\n# return $this->everyTypeIs($callable);\n# }\n# \n# public function\
+    \ __toString(): string\n# {\n# $string = '';\n# $glue = '';\n# \n# foreach ($this->types\
+    \ as $t) {\n# $string .= $glue.($t instanceof UnionType ? '('.((string) $t).')'\
+    \ : ((string) $t));\n# $glue = '&';\n# }\n# \n# return $string;\n# }\n# \n# /**\n\
+    # * @throws LogicException"
+- name: asNonNullable
+  visibility: public
+  parameters: []
+  comment: '# * @throws LogicException'
+traits:
+- Symfony\Component\TypeInfo\Exception\LogicException
+- Symfony\Component\TypeInfo\Type
+- CompositeTypeTrait
+interfaces: []

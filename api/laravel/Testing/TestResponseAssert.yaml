@@ -1,0 +1,144 @@
+name: TestResponseAssert
+class_comment: '# * @internal
+
+  # *
+
+  # * @mixin Assert'
+dependencies:
+- name: RedirectResponse
+  type: class
+  source: Illuminate\Http\RedirectResponse
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: ExpectationFailedException
+  type: class
+  source: PHPUnit\Framework\ExpectationFailedException
+- name: ReflectionProperty
+  type: class
+  source: ReflectionProperty
+properties: []
+methods:
+- name: __construct
+  visibility: private
+  parameters:
+  - name: response
+  comment: '# * @internal
+
+    # *
+
+    # * @mixin Assert
+
+    # */
+
+    # class TestResponseAssert
+
+    # {
+
+    # /**
+
+    # * Create a new TestResponse assertion helper.'
+- name: withResponse
+  visibility: public
+  parameters:
+  - name: response
+  comment: '# * Create a new TestResponse assertion helper.'
+- name: __call
+  visibility: public
+  parameters:
+  - name: name
+  - name: arguments
+  comment: '# * Pass method calls to the Assert class and decorate the exception message.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  array  $arguments
+
+    # * @return void
+
+    # *
+
+    # * @throws \PHPUnit\Framework\ExpectationFailedException'
+- name: __callStatic
+  visibility: public
+  parameters:
+  - name: name
+  - name: arguments
+  comment: '# * Pass static method calls to the Assert class.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  array  $arguments
+
+    # * @return void
+
+    # *
+
+    # * @throws \PHPUnit\Framework\ExpectationFailedException'
+- name: injectResponseContext
+  visibility: protected
+  parameters:
+  - name: exception
+  comment: '# * Inject additional context from the response into the exception message.
+
+    # *
+
+    # * @param  \PHPUnit\Framework\ExpectationFailedException  $exception
+
+    # * @return \PHPUnit\Framework\ExpectationFailedException'
+- name: appendExceptionToException
+  visibility: protected
+  parameters:
+  - name: exceptionToAppend
+  - name: exception
+  comment: '# * Append an exception to the message of another exception.
+
+    # *
+
+    # * @param  \Throwable  $exceptionToAppend
+
+    # * @param  \PHPUnit\Framework\ExpectationFailedException  $exception
+
+    # * @return \PHPUnit\Framework\ExpectationFailedException'
+- name: appendErrorsToException
+  visibility: protected
+  parameters:
+  - name: errors
+  - name: exception
+  - name: json
+    default: 'false'
+  comment: '# * Append errors to an exception message.
+
+    # *
+
+    # * @param  array  $errors
+
+    # * @param  \PHPUnit\Framework\ExpectationFailedException  $exception
+
+    # * @param  bool  $json
+
+    # * @return \PHPUnit\Framework\ExpectationFailedException'
+- name: appendMessageToException
+  visibility: protected
+  parameters:
+  - name: message
+  - name: exception
+  comment: '# * Append a message to an exception.
+
+    # *
+
+    # * @param  string  $message
+
+    # * @param  \PHPUnit\Framework\ExpectationFailedException  $exception
+
+    # * @return \PHPUnit\Framework\ExpectationFailedException'
+traits:
+- Illuminate\Http\RedirectResponse
+- Illuminate\Support\Arr
+- PHPUnit\Framework\ExpectationFailedException
+- ReflectionProperty
+interfaces: []

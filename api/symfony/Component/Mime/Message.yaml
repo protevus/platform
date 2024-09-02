@@ -1,0 +1,76 @@
+name: Message
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: LogicException
+  type: class
+  source: Symfony\Component\Mime\Exception\LogicException
+- name: Headers
+  type: class
+  source: Symfony\Component\Mime\Header\Headers
+- name: AbstractPart
+  type: class
+  source: Symfony\Component\Mime\Part\AbstractPart
+- name: TextPart
+  type: class
+  source: Symfony\Component\Mime\Part\TextPart
+properties: []
+methods:
+- name: setBody
+  visibility: public
+  parameters:
+  - name: body
+  comment: "# * @author Fabien Potencier <fabien@symfony.com>\n# */\n# class Message\
+    \ extends RawMessage\n# {\n# private Headers $headers;\n# \n# public function\
+    \ __construct(\n# ?Headers $headers = null,\n# private ?AbstractPart $body = null,\n\
+    # ) {\n# $this->headers = $headers ? clone $headers : new Headers();\n# }\n# \n\
+    # public function __clone()\n# {\n# $this->headers = clone $this->headers;\n#\
+    \ \n# if (null !== $this->body) {\n# $this->body = clone $this->body;\n# }\n#\
+    \ }\n# \n# /**\n# * @return $this"
+- name: getBody
+  visibility: public
+  parameters: []
+  comment: null
+- name: setHeaders
+  visibility: public
+  parameters:
+  - name: headers
+  comment: '# * @return $this'
+- name: getHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: getPreparedHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: toIterable
+  visibility: public
+  parameters: []
+  comment: null
+- name: ensureValidity
+  visibility: public
+  parameters: []
+  comment: null
+- name: generateMessageId
+  visibility: public
+  parameters: []
+  comment: null
+- name: __serialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: __unserialize
+  visibility: public
+  parameters:
+  - name: data
+  comment: null
+traits:
+- Symfony\Component\Mime\Exception\LogicException
+- Symfony\Component\Mime\Header\Headers
+- Symfony\Component\Mime\Part\AbstractPart
+- Symfony\Component\Mime\Part\TextPart
+interfaces: []

@@ -1,0 +1,29 @@
+name: DumpCompletionCommandTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: DumpCompletionCommand
+  type: class
+  source: Symfony\Component\Console\Command\DumpCompletionCommand
+- name: CommandCompletionTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandCompletionTester
+properties: []
+methods:
+- name: testComplete
+  visibility: public
+  parameters:
+  - name: input
+  - name: expectedSuggestions
+  comment: '# * @dataProvider provideCompletionSuggestions'
+- name: provideCompletionSuggestions
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Command\DumpCompletionCommand
+- Symfony\Component\Console\Tester\CommandCompletionTester
+interfaces: []

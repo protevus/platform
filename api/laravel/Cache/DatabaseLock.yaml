@@ -1,0 +1,114 @@
+name: DatabaseLock
+class_comment: null
+dependencies:
+- name: Connection
+  type: class
+  source: Illuminate\Database\Connection
+- name: QueryException
+  type: class
+  source: Illuminate\Database\QueryException
+properties:
+- name: connection
+  visibility: protected
+  comment: '# * The database connection instance.
+
+    # *
+
+    # * @var \Illuminate\Database\Connection'
+- name: table
+  visibility: protected
+  comment: '# * The database table name.
+
+    # *
+
+    # * @var string'
+- name: lottery
+  visibility: protected
+  comment: '# * The prune probability odds.
+
+    # *
+
+    # * @var array'
+- name: defaultTimeoutInSeconds
+  visibility: protected
+  comment: '# * The default number of seconds that a lock should be held.
+
+    # *
+
+    # * @var int'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: connection
+  - name: table
+  - name: name
+  - name: seconds
+  - name: owner
+    default: 'null'
+  - name: lottery
+    default: '[2'
+  - name: 100]
+  - name: defaultTimeoutInSeconds
+    default: '86400'
+  comment: "# * The database connection instance.\n# *\n# * @var \\Illuminate\\Database\\\
+    Connection\n# */\n# protected $connection;\n# \n# /**\n# * The database table\
+    \ name.\n# *\n# * @var string\n# */\n# protected $table;\n# \n# /**\n# * The prune\
+    \ probability odds.\n# *\n# * @var array\n# */\n# protected $lottery;\n# \n# /**\n\
+    # * The default number of seconds that a lock should be held.\n# *\n# * @var int\n\
+    # */\n# protected $defaultTimeoutInSeconds;\n# \n# /**\n# * Create a new lock\
+    \ instance.\n# *\n# * @param  \\Illuminate\\Database\\Connection  $connection\n\
+    # * @param  string  $table\n# * @param  string  $name\n# * @param  int  $seconds\n\
+    # * @param  string|null  $owner\n# * @param  array  $lottery\n# * @return void"
+- name: acquire
+  visibility: public
+  parameters: []
+  comment: '# * Attempt to acquire the lock.
+
+    # *
+
+    # * @return bool'
+- name: expiresAt
+  visibility: protected
+  parameters: []
+  comment: '# * Get the UNIX timestamp indicating when the lock should expire.
+
+    # *
+
+    # * @return int'
+- name: release
+  visibility: public
+  parameters: []
+  comment: '# * Release the lock.
+
+    # *
+
+    # * @return bool'
+- name: forceRelease
+  visibility: public
+  parameters: []
+  comment: '# * Releases this lock in disregard of ownership.
+
+    # *
+
+    # * @return void'
+- name: getCurrentOwner
+  visibility: protected
+  parameters: []
+  comment: '# * Returns the owner value written into the driver for this lock.
+
+    # *
+
+    # * @return string'
+- name: getConnectionName
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the database connection being used to manage the lock.
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Database\Connection
+- Illuminate\Database\QueryException
+interfaces: []

@@ -1,0 +1,25 @@
+name: FrameGuard
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+properties: []
+methods:
+- name: handle
+  visibility: public
+  parameters:
+  - name: request
+  - name: next
+  comment: '# * Handle the given request and get the response.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  \Closure  $next
+
+    # * @return \Symfony\Component\HttpFoundation\Response'
+traits:
+- Closure
+interfaces: []

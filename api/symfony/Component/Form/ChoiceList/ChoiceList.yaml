@@ -1,0 +1,234 @@
+name: ChoiceList
+class_comment: null
+dependencies:
+- name: ChoiceAttr
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceAttr
+- name: ChoiceFieldName
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceFieldName
+- name: ChoiceFilter
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceFilter
+- name: ChoiceLabel
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceLabel
+- name: ChoiceLoader
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceLoader
+- name: ChoiceTranslationParameters
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceTranslationParameters
+- name: ChoiceValue
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceValue
+- name: GroupBy
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\Cache\GroupBy
+- name: PreferredChoice
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Factory\Cache\PreferredChoice
+- name: CallbackChoiceLoader
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader
+- name: ChoiceLoaderInterface
+  type: class
+  source: Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface
+- name: FormTypeExtensionInterface
+  type: class
+  source: Symfony\Component\Form\FormTypeExtensionInterface
+- name: FormTypeInterface
+  type: class
+  source: Symfony\Component\Form\FormTypeInterface
+properties: []
+methods:
+- name: lazy
+  visibility: public
+  parameters:
+  - name: formType
+  - name: choices
+  - name: vary
+    default: 'null'
+  comment: '# * A set of convenient static methods to create cacheable choice list
+    options.
+
+    # *
+
+    # * @author Jules Pietri <jules@heahprod.com>
+
+    # */
+
+    # final class ChoiceList
+
+    # {
+
+    # /**
+
+    # * Creates a cacheable loader from any callable providing iterable choices.
+
+    # *
+
+    # * @param callable $choices A callable that must return iterable choices or grouped
+    choices
+
+    # * @param mixed    $vary    Dynamic data used to compute a unique hash when caching
+    the loader'
+- name: loader
+  visibility: public
+  parameters:
+  - name: formType
+  - name: loader
+  - name: vary
+    default: 'null'
+  comment: '# * Decorates a loader to make it cacheable.
+
+    # *
+
+    # * @param ChoiceLoaderInterface $loader A loader responsible for creating loading
+    choices or grouped choices
+
+    # * @param mixed                 $vary   Dynamic data used to compute a unique
+    hash when caching the loader'
+- name: value
+  visibility: public
+  parameters:
+  - name: formType
+  - name: value
+  - name: vary
+    default: 'null'
+  comment: '# * Decorates a "choice_value" callback to make it cacheable.
+
+    # *
+
+    # * @param callable|array $value Any pseudo callable to create a unique string
+    value from a choice
+
+    # * @param mixed          $vary  Dynamic data used to compute a unique hash when
+    caching the callback'
+- name: filter
+  visibility: public
+  parameters:
+  - name: formType
+  - name: filter
+  - name: vary
+    default: 'null'
+  comment: '# * @param callable|array $filter Any pseudo callable to filter a choice
+    list
+
+    # * @param mixed          $vary   Dynamic data used to compute a unique hash when
+    caching the callback'
+- name: label
+  visibility: public
+  parameters:
+  - name: formType
+  - name: label
+  - name: vary
+    default: 'null'
+  comment: '# * Decorates a "choice_label" option to make it cacheable.
+
+    # *
+
+    # * @param callable|false $label Any pseudo callable to create a label from a
+    choice or false to discard it
+
+    # * @param mixed          $vary  Dynamic data used to compute a unique hash when
+    caching the option'
+- name: fieldName
+  visibility: public
+  parameters:
+  - name: formType
+  - name: fieldName
+  - name: vary
+    default: 'null'
+  comment: '# * Decorates a "choice_name" callback to make it cacheable.
+
+    # *
+
+    # * @param callable|array $fieldName Any pseudo callable to create a field name
+    from a choice
+
+    # * @param mixed          $vary      Dynamic data used to compute a unique hash
+    when caching the callback'
+- name: attr
+  visibility: public
+  parameters:
+  - name: formType
+  - name: attr
+  - name: vary
+    default: 'null'
+  comment: '# * Decorates a "choice_attr" option to make it cacheable.
+
+    # *
+
+    # * @param callable|array $attr Any pseudo callable or array to create html attributes
+    from a choice
+
+    # * @param mixed          $vary Dynamic data used to compute a unique hash when
+    caching the option'
+- name: translationParameters
+  visibility: public
+  parameters:
+  - name: formType
+  - name: translationParameters
+  - name: vary
+    default: 'null'
+  comment: '# * Decorates a "choice_translation_parameters" option to make it cacheable.
+
+    # *
+
+    # * @param callable|array $translationParameters Any pseudo callable or array
+    to create translation parameters from a choice
+
+    # * @param mixed          $vary                  Dynamic data used to compute
+    a unique hash when caching the option'
+- name: groupBy
+  visibility: public
+  parameters:
+  - name: formType
+  - name: groupBy
+  - name: vary
+    default: 'null'
+  comment: '# * Decorates a "group_by" callback to make it cacheable.
+
+    # *
+
+    # * @param callable|array $groupBy Any pseudo callable to return a group name
+    from a choice
+
+    # * @param mixed          $vary    Dynamic data used to compute a unique hash
+    when caching the callback'
+- name: preferred
+  visibility: public
+  parameters:
+  - name: formType
+  - name: preferred
+  - name: vary
+    default: 'null'
+  comment: '# * Decorates a "preferred_choices" option to make it cacheable.
+
+    # *
+
+    # * @param callable|array $preferred Any pseudo callable or array to return a
+    group name from a choice
+
+    # * @param mixed          $vary      Dynamic data used to compute a unique hash
+    when caching the option'
+- name: __construct
+  visibility: private
+  parameters: []
+  comment: '# * Should not be instantiated.'
+traits:
+- Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceAttr
+- Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceFieldName
+- Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceFilter
+- Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceLabel
+- Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceLoader
+- Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceTranslationParameters
+- Symfony\Component\Form\ChoiceList\Factory\Cache\ChoiceValue
+- Symfony\Component\Form\ChoiceList\Factory\Cache\GroupBy
+- Symfony\Component\Form\ChoiceList\Factory\Cache\PreferredChoice
+- Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader
+- Symfony\Component\Form\ChoiceList\Loader\ChoiceLoaderInterface
+- Symfony\Component\Form\FormTypeExtensionInterface
+- Symfony\Component\Form\FormTypeInterface
+interfaces: []

@@ -1,0 +1,171 @@
+name: TestComponent
+class_comment: null
+dependencies:
+- name: PHPUnit
+  type: class
+  source: Illuminate\Testing\Assert
+- name: SeeInOrder
+  type: class
+  source: Illuminate\Testing\Constraints\SeeInOrder
+- name: Stringable
+  type: class
+  source: Stringable
+properties:
+- name: component
+  visibility: public
+  comment: '# * The original component.
+
+    # *
+
+    # * @var \Illuminate\View\Component'
+- name: rendered
+  visibility: protected
+  comment: '# * The rendered component contents.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: component
+  - name: view
+  comment: "# * The original component.\n# *\n# * @var \\Illuminate\\View\\Component\n\
+    # */\n# public $component;\n# \n# /**\n# * The rendered component contents.\n\
+    # *\n# * @var string\n# */\n# protected $rendered;\n# \n# /**\n# * Create a new\
+    \ test component instance.\n# *\n# * @param  \\Illuminate\\View\\Component  $component\n\
+    # * @param  \\Illuminate\\View\\View  $view\n# * @return void"
+- name: assertSee
+  visibility: public
+  parameters:
+  - name: value
+  - name: escape
+    default: 'true'
+  comment: '# * Assert that the given string is contained within the rendered component.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: assertSeeInOrder
+  visibility: public
+  parameters:
+  - name: values
+  - name: escape
+    default: 'true'
+  comment: '# * Assert that the given strings are contained in order within the rendered
+    component.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: assertSeeText
+  visibility: public
+  parameters:
+  - name: value
+  - name: escape
+    default: 'true'
+  comment: '# * Assert that the given string is contained within the rendered component
+    text.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: assertSeeTextInOrder
+  visibility: public
+  parameters:
+  - name: values
+  - name: escape
+    default: 'true'
+  comment: '# * Assert that the given strings are contained in order within the rendered
+    component text.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: assertDontSee
+  visibility: public
+  parameters:
+  - name: value
+  - name: escape
+    default: 'true'
+  comment: '# * Assert that the given string is not contained within the rendered
+    component.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: assertDontSeeText
+  visibility: public
+  parameters:
+  - name: value
+  - name: escape
+    default: 'true'
+  comment: '# * Assert that the given string is not contained within the rendered
+    component text.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Get the string contents of the rendered component.
+
+    # *
+
+    # * @return string'
+- name: __get
+  visibility: public
+  parameters:
+  - name: attribute
+  comment: '# * Dynamically access properties on the underlying component.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @return mixed'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically call methods on the underlying component.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+traits:
+- Illuminate\Testing\Constraints\SeeInOrder
+- Stringable
+interfaces:
+- Stringable

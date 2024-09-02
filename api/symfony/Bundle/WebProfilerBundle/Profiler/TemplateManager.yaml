@@ -1,0 +1,43 @@
+name: TemplateManager
+class_comment: "# * @author Fabien Potencier <fabien@symfony.com>\n# * @author Artur\
+  \ Wielog\xF3rski <wodor@wodor.net>\n# *\n# * @internal"
+dependencies:
+- name: NotFoundHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- name: Profile
+  type: class
+  source: Symfony\Component\HttpKernel\Profiler\Profile
+- name: Profiler
+  type: class
+  source: Symfony\Component\HttpKernel\Profiler\Profiler
+- name: Environment
+  type: class
+  source: Twig\Environment
+properties: []
+methods:
+- name: getName
+  visibility: public
+  parameters:
+  - name: profile
+  - name: panel
+  comment: "# * @author Fabien Potencier <fabien@symfony.com>\n# * @author Artur Wielog\xF3\
+    rski <wodor@wodor.net>\n# *\n# * @internal\n# */\n# class TemplateManager\n# {\n\
+    # public function __construct(\n# protected Profiler $profiler,\n# protected Environment\
+    \ $twig,\n# protected array $templates,\n# ) {\n# }\n# \n# /**\n# * Gets the template\
+    \ name for a given panel.\n# *\n# * @throws NotFoundHttpException"
+- name: getNames
+  visibility: public
+  parameters:
+  - name: profile
+  comment: '# * Gets template names of templates that are present in the viewed profile.
+
+    # *
+
+    # * @throws \UnexpectedValueException'
+traits:
+- Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- Symfony\Component\HttpKernel\Profiler\Profile
+- Symfony\Component\HttpKernel\Profiler\Profiler
+- Twig\Environment
+interfaces: []

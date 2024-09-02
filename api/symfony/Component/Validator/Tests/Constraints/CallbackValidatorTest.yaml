@@ -1,0 +1,120 @@
+name: CallbackValidatorTest
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: Callback
+  type: class
+  source: Symfony\Component\Validator\Constraints\Callback
+- name: CallbackValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\CallbackValidator
+- name: ExecutionContextInterface
+  type: class
+  source: Symfony\Component\Validator\Context\ExecutionContextInterface
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+properties: []
+methods:
+- name: validateCallback
+  visibility: public
+  parameters:
+  - name: object
+  - name: context
+  comment: null
+- name: validate
+  visibility: public
+  parameters:
+  - name: context
+  comment: null
+- name: validateStatic
+  visibility: public
+  parameters:
+  - name: object
+  - name: context
+  comment: null
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testNullIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSingleMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSingleMethodExplicitName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSingleStaticMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClosureNullObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClosureExplicitName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testArrayCallable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testArrayCallableNullObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testArrayCallableExplicitName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExpectValidMethods
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExpectValidCallbacks
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstraintGetTargets
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoConstructorArguments
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAttributeInvocationSingleValued
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAttributeInvocationMultiValued
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPayloadIsPassedToCallback
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Constraints\Callback
+- Symfony\Component\Validator\Constraints\CallbackValidator
+- Symfony\Component\Validator\Context\ExecutionContextInterface
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

@@ -1,0 +1,25 @@
+name: AutoAliasServicePass
+class_comment: '# * Sets a service to be an alias of another one, given a format pattern.'
+dependencies:
+- name: Alias
+  type: class
+  source: Symfony\Component\DependencyInjection\Alias
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Alias
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+interfaces:
+- CompilerPassInterface

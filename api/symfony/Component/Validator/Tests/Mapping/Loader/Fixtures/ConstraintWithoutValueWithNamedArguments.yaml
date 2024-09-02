@@ -1,0 +1,25 @@
+name: ConstraintWithoutValueWithNamedArguments
+class_comment: null
+dependencies:
+- name: HasNamedArguments
+  type: class
+  source: Symfony\Component\Validator\Attribute\HasNamedArguments
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: groups
+    default: 'null'
+  comment: null
+- name: getTargets
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Attribute\HasNamedArguments
+- Symfony\Component\Validator\Constraint
+interfaces: []

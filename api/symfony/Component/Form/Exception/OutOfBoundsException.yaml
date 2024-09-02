@@ -1,0 +1,12 @@
+name: OutOfBoundsException
+class_comment: '# * Base OutOfBoundsException for Form component.
+
+  # *
+
+  # * @author Alexander Kotynia <aleksander.kot@gmail.com>'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- ExceptionInterface

@@ -1,0 +1,71 @@
+name: NullOutputTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: NullOutputFormatter
+  type: class
+  source: Symfony\Component\Console\Formatter\NullOutputFormatter
+- name: OutputFormatter
+  type: class
+  source: Symfony\Component\Console\Formatter\OutputFormatter
+- name: NullOutput
+  type: class
+  source: Symfony\Component\Console\Output\NullOutput
+- name: Output
+  type: class
+  source: Symfony\Component\Console\Output\Output
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+properties: []
+methods:
+- name: testConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testVerbosity
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetFormatter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetFormatter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetVerbosity
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetDecorated
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsQuiet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsVerbose
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsVeryVerbose
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsDebug
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Formatter\NullOutputFormatter
+- Symfony\Component\Console\Formatter\OutputFormatter
+- Symfony\Component\Console\Output\NullOutput
+- Symfony\Component\Console\Output\Output
+- Symfony\Component\Console\Output\OutputInterface
+interfaces: []

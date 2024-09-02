@@ -1,0 +1,43 @@
+name: ConsoleEvent
+class_comment: '# * Allows to inspect input and output of a command.
+
+  # *
+
+  # * @author Francesco Levorato <git@flevour.net>'
+dependencies:
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: Event
+  type: class
+  source: Symfony\Contracts\EventDispatcher\Event
+properties: []
+methods:
+- name: getCommand
+  visibility: public
+  parameters: []
+  comment: "# * Allows to inspect input and output of a command.\n# *\n# * @author\
+    \ Francesco Levorato <git@flevour.net>\n# */\n# class ConsoleEvent extends Event\n\
+    # {\n# public function __construct(\n# protected ?Command $command,\n# private\
+    \ InputInterface $input,\n# private OutputInterface $output,\n# ) {\n# }\n# \n\
+    # /**\n# * Gets the command that is executed."
+- name: getInput
+  visibility: public
+  parameters: []
+  comment: '# * Gets the input instance.'
+- name: getOutput
+  visibility: public
+  parameters: []
+  comment: '# * Gets the output instance.'
+traits:
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Contracts\EventDispatcher\Event
+interfaces: []

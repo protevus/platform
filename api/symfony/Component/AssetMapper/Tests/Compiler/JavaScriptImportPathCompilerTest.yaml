@@ -1,0 +1,108 @@
+name: JavaScriptImportPathCompilerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: AssetMapperInterface
+  type: class
+  source: Symfony\Component\AssetMapper\AssetMapperInterface
+- name: AssetCompilerInterface
+  type: class
+  source: Symfony\Component\AssetMapper\Compiler\AssetCompilerInterface
+- name: JavaScriptImportPathCompiler
+  type: class
+  source: Symfony\Component\AssetMapper\Compiler\JavaScriptImportPathCompiler
+- name: CircularAssetsException
+  type: class
+  source: Symfony\Component\AssetMapper\Exception\CircularAssetsException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\AssetMapper\Exception\RuntimeException
+- name: ImportMapConfigReader
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapConfigReader
+- name: ImportMapEntry
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapEntry
+- name: ImportMapType
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapType
+- name: MappedAsset
+  type: class
+  source: Symfony\Component\AssetMapper\MappedAsset
+properties: []
+methods:
+- name: testCompileFindsCorrectImports
+  visibility: public
+  parameters:
+  - name: input
+  - name: expectedJavaScriptImports
+  comment: '# * @dataProvider provideCompileTests'
+- name: provideCompileTests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompileFindsRelativePathsViaSourcePath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompileFindsRelativePathsWithWindowsPathsViaSourcePath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testImportPathsCanUpdateForDifferentPublicPath
+  visibility: public
+  parameters:
+  - name: input
+  - name: inputAssetPublicPath
+  - name: importedPublicPath
+  - name: expectedOutput
+  comment: '# * @dataProvider providePathsCanUpdateTests'
+- name: providePathsCanUpdateTests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompileHandlesCircularRelativeAssets
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompileHandlesCircularBareImportAssets
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMissingImportMode
+  visibility: public
+  parameters:
+  - name: sourceLogicalName
+  - name: input
+  - name: expectedExceptionMessage
+  comment: '# * @dataProvider provideMissingImportModeTests'
+- name: provideMissingImportModeTests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testErrorMessageAvoidsCircularException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompilerThrowsExceptionOnPcreError
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Psr\Log\LoggerInterface
+- Symfony\Component\AssetMapper\AssetMapperInterface
+- Symfony\Component\AssetMapper\Compiler\AssetCompilerInterface
+- Symfony\Component\AssetMapper\Compiler\JavaScriptImportPathCompiler
+- Symfony\Component\AssetMapper\Exception\CircularAssetsException
+- Symfony\Component\AssetMapper\Exception\RuntimeException
+- Symfony\Component\AssetMapper\ImportMap\ImportMapConfigReader
+- Symfony\Component\AssetMapper\ImportMap\ImportMapEntry
+- Symfony\Component\AssetMapper\ImportMap\ImportMapType
+- Symfony\Component\AssetMapper\MappedAsset
+interfaces: []

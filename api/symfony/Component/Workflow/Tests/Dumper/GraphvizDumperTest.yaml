@@ -1,0 +1,82 @@
+name: GraphvizDumperTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: GraphvizDumper
+  type: class
+  source: Symfony\Component\Workflow\Dumper\GraphvizDumper
+- name: Marking
+  type: class
+  source: Symfony\Component\Workflow\Marking
+- name: WorkflowBuilderTrait
+  type: class
+  source: Symfony\Component\Workflow\Tests\WorkflowBuilderTrait
+- name: WorkflowBuilderTrait
+  type: class
+  source: WorkflowBuilderTrait
+properties: []
+methods:
+- name: testDumpWithoutMarking
+  visibility: public
+  parameters:
+  - name: definition
+  - name: expected
+  - name: withMetadata
+  comment: '# * @dataProvider provideWorkflowDefinitionWithoutMarking'
+- name: testDumpWithMarking
+  visibility: public
+  parameters:
+  - name: definition
+  - name: marking
+  - name: expected
+  - name: withMetadata
+  comment: '# * @dataProvider provideWorkflowDefinitionWithMarking'
+- name: provideWorkflowDefinitionWithoutMarking
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideWorkflowDefinitionWithMarking
+  visibility: public
+  parameters: []
+  comment: null
+- name: createComplexWorkflowDefinitionDumpWithMarking
+  visibility: public
+  parameters: []
+  comment: null
+- name: createComplexWorkflowDefinitionDumpWithMarkingAndMetadata
+  visibility: public
+  parameters: []
+  comment: null
+- name: createSimpleWorkflowDumpWithMarking
+  visibility: public
+  parameters: []
+  comment: null
+- name: createSimpleWorkflowDumpWithMarkingAndMetadata
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideComplexWorkflowDumpWithoutMarking
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideComplexWorkflowDumpWithoutMarkingWithMetadata
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideSimpleWorkflowDumpWithoutMarking
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideSimpleWorkflowDumpWithoutMarkingWithMetadata
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Workflow\Dumper\GraphvizDumper
+- Symfony\Component\Workflow\Marking
+- Symfony\Component\Workflow\Tests\WorkflowBuilderTrait
+- WorkflowBuilderTrait
+interfaces: []

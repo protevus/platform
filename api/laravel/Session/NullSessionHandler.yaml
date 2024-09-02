@@ -1,0 +1,67 @@
+name: NullSessionHandler
+class_comment: null
+dependencies:
+- name: SessionHandlerInterface
+  type: class
+  source: SessionHandlerInterface
+properties: []
+methods:
+- name: open
+  visibility: public
+  parameters:
+  - name: savePath
+  - name: sessionName
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return bool'
+- name: close
+  visibility: public
+  parameters: []
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return bool'
+- name: read
+  visibility: public
+  parameters:
+  - name: sessionId
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return string'
+- name: write
+  visibility: public
+  parameters:
+  - name: sessionId
+  - name: data
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return bool'
+- name: destroy
+  visibility: public
+  parameters:
+  - name: sessionId
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return bool'
+- name: gc
+  visibility: public
+  parameters:
+  - name: lifetime
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return int'
+traits:
+- SessionHandlerInterface
+interfaces:
+- SessionHandlerInterface

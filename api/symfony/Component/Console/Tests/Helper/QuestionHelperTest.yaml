@@ -1,0 +1,417 @@
+name: QuestionHelperTest
+class_comment: '# * @group tty'
+dependencies:
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Console\Exception\InvalidArgumentException
+- name: MissingInputException
+  type: class
+  source: Symfony\Component\Console\Exception\MissingInputException
+- name: OutputFormatter
+  type: class
+  source: Symfony\Component\Console\Formatter\OutputFormatter
+- name: FormatterHelper
+  type: class
+  source: Symfony\Component\Console\Helper\FormatterHelper
+- name: HelperSet
+  type: class
+  source: Symfony\Component\Console\Helper\HelperSet
+- name: QuestionHelper
+  type: class
+  source: Symfony\Component\Console\Helper\QuestionHelper
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: StreamOutput
+  type: class
+  source: Symfony\Component\Console\Output\StreamOutput
+- name: ChoiceQuestion
+  type: class
+  source: Symfony\Component\Console\Question\ChoiceQuestion
+- name: ConfirmationQuestion
+  type: class
+  source: Symfony\Component\Console\Question\ConfirmationQuestion
+- name: Question
+  type: class
+  source: Symfony\Component\Console\Question\Question
+- name: Terminal
+  type: class
+  source: Symfony\Component\Console\Terminal
+- name: ApplicationTester
+  type: class
+  source: Symfony\Component\Console\Tester\ApplicationTester
+properties: []
+methods:
+- name: testAskWithAutocompleteWithMultiByteCharacter
+  visibility: public
+  parameters:
+  - name: character
+  comment: "# * @group tty\n# */\n# class QuestionHelperTest extends AbstractQuestionHelperTestCase\n\
+    # {\n# public function testAskChoice()\n# {\n# $questionHelper = new QuestionHelper();\n\
+    # \n# $helperSet = new HelperSet([new FormatterHelper()]);\n# $questionHelper->setHelperSet($helperSet);\n\
+    # \n# $heroes = ['Superman', 'Batman', 'Spiderman'];\n# \n# $inputStream = $this->getInputStream(\"\
+    \\n1\\n  1  \\nFabien\\n1\\nFabien\\n1\\n0,2\\n 0 , 2  \\n\\n\\n\");\n# \n# $question\
+    \ = new ChoiceQuestion('What is your favorite superhero?', $heroes, '2');\n# $question->setMaxAttempts(1);\n\
+    # // first answer is an empty answer, we're supposed to receive the default value\n\
+    # $this->assertEquals('Spiderman', $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# \n# $question = new ChoiceQuestion('What\
+    \ is your favorite superhero?', $heroes);\n# $question->setMaxAttempts(1);\n#\
+    \ $this->assertEquals('Batman', $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# $this->assertEquals('Batman',\
+    \ $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# \n# $question = new ChoiceQuestion('What\
+    \ is your favorite superhero?', $heroes);\n# $question->setErrorMessage('Input\
+    \ \"%s\" is not a superhero!');\n# $question->setMaxAttempts(2);\n# $this->assertEquals('Batman',\
+    \ $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $output = $this->createOutputInterface(), $question));\n# \n# rewind($output->getStream());\n\
+    # $stream = stream_get_contents($output->getStream());\n# $this->assertStringContainsString('Input\
+    \ \"Fabien\" is not a superhero!', $stream);\n# \n# try {\n# $question = new ChoiceQuestion('What\
+    \ is your favorite superhero?', $heroes, '1');\n# $question->setMaxAttempts(1);\n\
+    # $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $output = $this->createOutputInterface(), $question);\n# $this->fail();\n# }\
+    \ catch (\\InvalidArgumentException $e) {\n# $this->assertEquals('Value \"Fabien\"\
+    \ is invalid', $e->getMessage());\n# }\n# \n# $question = new ChoiceQuestion('What\
+    \ is your favorite superhero?', $heroes, null);\n# $question->setMaxAttempts(1);\n\
+    # $question->setMultiselect(true);\n# \n# $this->assertEquals(['Batman'], $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# $this->assertEquals(['Superman',\
+    \ 'Spiderman'], $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# $this->assertEquals(['Superman',\
+    \ 'Spiderman'], $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# \n# $question = new ChoiceQuestion('What\
+    \ is your favorite superhero?', $heroes, '0,1');\n# $question->setMaxAttempts(1);\n\
+    # $question->setMultiselect(true);\n# \n# $this->assertEquals(['Superman', 'Batman'],\
+    \ $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# \n# $question = new ChoiceQuestion('What\
+    \ is your favorite superhero?', $heroes, ' 0 , 1 ');\n# $question->setMaxAttempts(1);\n\
+    # $question->setMultiselect(true);\n# \n# $this->assertEquals(['Superman', 'Batman'],\
+    \ $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# \n# $question = new ChoiceQuestion('What\
+    \ is your favorite superhero?', $heroes, 0);\n# // We are supposed to get the\
+    \ default value since we are not in interactive mode\n# $this->assertEquals('Superman',\
+    \ $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream,\
+    \ true), $this->createOutputInterface(), $question));\n# }\n# \n# public function\
+    \ testAskChoiceNonInteractive()\n# {\n# $questionHelper = new QuestionHelper();\n\
+    # \n# $helperSet = new HelperSet([new FormatterHelper()]);\n# $questionHelper->setHelperSet($helperSet);\n\
+    # $inputStream = $this->getInputStream(\"\\n1\\n  1  \\nFabien\\n1\\nFabien\\\
+    n1\\n0,2\\n 0 , 2  \\n\\n\\n\");\n# \n# $heroes = ['Superman', 'Batman', 'Spiderman'];\n\
+    # \n# $question = new ChoiceQuestion('What is your favorite superhero?', $heroes,\
+    \ '0');\n# \n# $this->assertSame('Superman', $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream,\
+    \ false), $this->createOutputInterface(), $question));\n# \n# $question = new\
+    \ ChoiceQuestion('What is your favorite superhero?', $heroes, 'Batman');\n# $this->assertSame('Batman',\
+    \ $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream,\
+    \ false), $this->createOutputInterface(), $question));\n# \n# $question = new\
+    \ ChoiceQuestion('What is your favorite superhero?', $heroes, null);\n# $this->assertNull($questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream,\
+    \ false), $this->createOutputInterface(), $question));\n# \n# $question = new\
+    \ ChoiceQuestion('What is your favorite superhero?', $heroes, '0');\n# $question->setValidator(null);\n\
+    # $this->assertSame('Superman', $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream,\
+    \ false), $this->createOutputInterface(), $question));\n# \n# try {\n# $question\
+    \ = new ChoiceQuestion('What is your favorite superhero?', $heroes, null);\n#\
+    \ $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream,\
+    \ false), $this->createOutputInterface(), $question);\n# } catch (\\InvalidArgumentException\
+    \ $e) {\n# $this->assertSame('Value \"\" is invalid', $e->getMessage());\n# }\n\
+    # \n# $question = new ChoiceQuestion('Who are your favorite superheros?', $heroes,\
+    \ '0, 1');\n# $question->setMultiselect(true);\n# $this->assertSame(['Superman',\
+    \ 'Batman'], $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream,\
+    \ false), $this->createOutputInterface(), $question));\n# \n# $question = new\
+    \ ChoiceQuestion('Who are your favorite superheros?', $heroes, '0, 1');\n# $question->setMultiselect(true);\n\
+    # $question->setValidator(null);\n# $this->assertSame(['Superman', 'Batman'],\
+    \ $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream,\
+    \ false), $this->createOutputInterface(), $question));\n# \n# $question = new\
+    \ ChoiceQuestion('Who are your favorite superheros?', $heroes, '0, Batman');\n\
+    # $question->setMultiselect(true);\n# $this->assertSame(['Superman', 'Batman'],\
+    \ $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream,\
+    \ false), $this->createOutputInterface(), $question));\n# \n# $question = new\
+    \ ChoiceQuestion('Who are your favorite superheros?', $heroes, null);\n# $question->setMultiselect(true);\n\
+    # $this->assertNull($questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream,\
+    \ false), $this->createOutputInterface(), $question));\n# \n# $question = new\
+    \ ChoiceQuestion('Who are your favorite superheros?', ['a' => 'Batman', 'b' =>\
+    \ 'Superman'], 'a');\n# $this->assertSame('a', $questionHelper->ask($this->createStreamableInputInterfaceMock('',\
+    \ false), $this->createOutputInterface(), $question), 'ChoiceQuestion validator\
+    \ returns the key if it\\'s a string');\n# \n# try {\n# $question = new ChoiceQuestion('Who\
+    \ are your favorite superheros?', $heroes, '');\n# $question->setMultiselect(true);\n\
+    # $questionHelper->ask($this->createStreamableInputInterfaceMock($inputStream,\
+    \ false), $this->createOutputInterface(), $question);\n# } catch (\\InvalidArgumentException\
+    \ $e) {\n# $this->assertSame('Value \"\" is invalid', $e->getMessage());\n# }\n\
+    # }\n# \n# public function testAsk()\n# {\n# $dialog = new QuestionHelper();\n\
+    # \n# $inputStream = $this->getInputStream(\"\\n8AM\\n\");\n# \n# $question =\
+    \ new Question('What time is it?', '2PM');\n# $this->assertEquals('2PM', $dialog->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# \n# $question = new Question('What\
+    \ time is it?', '2PM');\n# $this->assertEquals('8AM', $dialog->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $output = $this->createOutputInterface(), $question));\n# \n# rewind($output->getStream());\n\
+    # $this->assertEquals('What time is it?', stream_get_contents($output->getStream()));\n\
+    # }\n# \n# public function testAskNonTrimmed()\n# {\n# $dialog = new QuestionHelper();\n\
+    # \n# $inputStream = $this->getInputStream(' 8AM ');\n# \n# $question = new Question('What\
+    \ time is it?', '2PM');\n# $question->setTrimmable(false);\n# $this->assertEquals('\
+    \ 8AM ', $dialog->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $output = $this->createOutputInterface(), $question));\n# \n# rewind($output->getStream());\n\
+    # $this->assertEquals('What time is it?', stream_get_contents($output->getStream()));\n\
+    # }\n# \n# public function testAskWithAutocomplete()\n# {\n# if (!Terminal::hasSttyAvailable())\
+    \ {\n# $this->markTestSkipped('`stty` is required to test autocomplete functionality');\n\
+    # }\n# \n# // Acm<NEWLINE>\n# // Ac<BACKSPACE><BACKSPACE>s<TAB>Test<NEWLINE>\n\
+    # // <NEWLINE>\n# // <UP ARROW><UP ARROW><UP ARROW><NEWLINE>\n# // <UP ARROW><UP\
+    \ ARROW><UP ARROW><UP ARROW><UP ARROW><UP ARROW><UP ARROW><TAB>Test<NEWLINE>\n\
+    # // <DOWN ARROW><NEWLINE>\n# // S<BACKSPACE><BACKSPACE><DOWN ARROW><DOWN ARROW><NEWLINE>\n\
+    # // F00<BACKSPACE><BACKSPACE>oo<TAB><NEWLINE>\n# // F\u2B50<TAB><BACKSPACE><BACKSPACE>\u2B50\
+    <TAB><NEWLINE>\n# $inputStream = $this->getInputStream(\"Acm\\nAc\\177\\177s\\\
+    tTest\\n\\n\\033[A\\033[A\\033[A\\n\\033[A\\033[A\\033[A\\033[A\\033[A\\033[A\\\
+    033[A\\tTest\\n\\033[B\\nS\\177\\177\\033[B\\033[B\\nF00\\177\\177oo\\t\\nF\u2B50\
+    \\t\\177\\177\u2B50\\t\\n\");\n# \n# $dialog = new QuestionHelper();\n# $helperSet\
+    \ = new HelperSet([new FormatterHelper()]);\n# $dialog->setHelperSet($helperSet);\n\
+    # \n# $question = new Question('Please select a bundle', 'FrameworkBundle');\n\
+    # $question->setAutocompleterValues(['AcmeDemoBundle', 'AsseticBundle', 'SecurityBundle',\
+    \ 'FooBundle', 'F\u2B50Y']);\n# \n# $this->assertEquals('AcmeDemoBundle', $dialog->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# $this->assertEquals('AsseticBundleTest',\
+    \ $dialog->ask($this->createStreamableInputInterfaceMock($inputStream), $this->createOutputInterface(),\
+    \ $question));\n# $this->assertEquals('FrameworkBundle', $dialog->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# $this->assertEquals('SecurityBundle',\
+    \ $dialog->ask($this->createStreamableInputInterfaceMock($inputStream), $this->createOutputInterface(),\
+    \ $question));\n# $this->assertEquals('FooBundleTest', $dialog->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# $this->assertEquals('AcmeDemoBundle',\
+    \ $dialog->ask($this->createStreamableInputInterfaceMock($inputStream), $this->createOutputInterface(),\
+    \ $question));\n# $this->assertEquals('AsseticBundle', $dialog->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# $this->assertEquals('FooBundle',\
+    \ $dialog->ask($this->createStreamableInputInterfaceMock($inputStream), $this->createOutputInterface(),\
+    \ $question));\n# $this->assertEquals('F\u2B50Y', $dialog->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# }\n# \n# public function testAskWithAutocompleteTrimmable()\n\
+    # {\n# if (!Terminal::hasSttyAvailable()) {\n# $this->markTestSkipped('`stty`\
+    \ is required to test autocomplete functionality');\n# }\n# \n# // Acm<NEWLINE>\n\
+    # // Ac<BACKSPACE><BACKSPACE>s<TAB>Test<NEWLINE>\n# // <NEWLINE>\n# // <UP ARROW><UP\
+    \ ARROW><NEWLINE>\n# // <UP ARROW><UP ARROW><UP ARROW><UP ARROW><UP ARROW><TAB>Test<NEWLINE>\n\
+    # // <DOWN ARROW><NEWLINE>\n# // S<BACKSPACE><BACKSPACE><DOWN ARROW><DOWN ARROW><NEWLINE>\n\
+    # // F00<BACKSPACE><BACKSPACE>oo<TAB><NEWLINE>\n# $inputStream = $this->getInputStream(\"\
+    Acm\\nAc\\177\\177s\\tTest\\n\\n\\033[A\\033[A\\n\\033[A\\033[A\\033[A\\033[A\\\
+    033[A\\tTest\\n\\033[B\\nS\\177\\177\\033[B\\033[B\\nF00\\177\\177oo\\t\\n\");\n\
+    # \n# $dialog = new QuestionHelper();\n# $helperSet = new HelperSet([new FormatterHelper()]);\n\
+    # $dialog->setHelperSet($helperSet);\n# \n# $question = new Question('Please select\
+    \ a bundle', 'FrameworkBundle');\n# $question->setAutocompleterValues(['AcmeDemoBundle\
+    \ ', 'AsseticBundle', ' SecurityBundle ', 'FooBundle']);\n# $question->setTrimmable(false);\n\
+    # \n# $this->assertEquals('AcmeDemoBundle ', $dialog->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# $this->assertEquals('AsseticBundleTest',\
+    \ $dialog->ask($this->createStreamableInputInterfaceMock($inputStream), $this->createOutputInterface(),\
+    \ $question));\n# $this->assertEquals('FrameworkBundle', $dialog->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# $this->assertEquals(' SecurityBundle\
+    \ ', $dialog->ask($this->createStreamableInputInterfaceMock($inputStream), $this->createOutputInterface(),\
+    \ $question));\n# $this->assertEquals('FooBundleTest', $dialog->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# $this->assertEquals('AcmeDemoBundle\
+    \ ', $dialog->ask($this->createStreamableInputInterfaceMock($inputStream), $this->createOutputInterface(),\
+    \ $question));\n# $this->assertEquals('AsseticBundle', $dialog->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# $this->assertEquals('FooBundle',\
+    \ $dialog->ask($this->createStreamableInputInterfaceMock($inputStream), $this->createOutputInterface(),\
+    \ $question));\n# }\n# \n# public function testAskWithAutocompleteCallback()\n\
+    # {\n# if (!Terminal::hasSttyAvailable()) {\n# $this->markTestSkipped('`stty`\
+    \ is required to test autocomplete functionality');\n# }\n# \n# // Po<TAB>Cr<TAB>P<DOWN\
+    \ ARROW><DOWN ARROW><NEWLINE>\n# $inputStream = $this->getInputStream(\"Pa\\177\\\
+    177o\\tCr\\tP\\033[A\\033[A\\n\");\n# \n# $dialog = new QuestionHelper();\n# $helperSet\
+    \ = new HelperSet([new FormatterHelper()]);\n# $dialog->setHelperSet($helperSet);\n\
+    # \n# $question = new Question('What\\'s for dinner?');\n# \n# // A simple test\
+    \ callback - return an array containing the words the\n# // user has already completed,\
+    \ suffixed with all known words.\n# //\n# // Eg: If the user inputs \"Potato C\"\
+    , the return will be:\n# //\n# //     [\"Potato Carrot \", \"Potato Creme \",\
+    \ \"Potato Curry \", ...]\n# //\n# // No effort is made to avoid irrelevant suggestions,\
+    \ as this is handled\n# // by the autocomplete function.\n# $callback = function\
+    \ ($input) {\n# $knownWords = ['Carrot', 'Creme', 'Curry', 'Parsnip', 'Pie', 'Potato',\
+    \ 'Tart'];\n# $inputWords = explode(' ', $input);\n# array_pop($inputWords);\n\
+    # $suggestionBase = $inputWords ? implode(' ', $inputWords).' ' : '';\n# \n# return\
+    \ array_map(\n# fn ($word) => $suggestionBase.$word.' ',\n# $knownWords\n# );\n\
+    # };\n# \n# $question->setAutocompleterCallback($callback);\n# \n# $this->assertSame('Potato\
+    \ Creme Pie', $dialog->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# }\n# \n# public function testAskWithAutocompleteWithNonSequentialKeys()\n\
+    # {\n# if (!Terminal::hasSttyAvailable()) {\n# $this->markTestSkipped('`stty`\
+    \ is required to test autocomplete functionality');\n# }\n# \n# // <UP ARROW><UP\
+    \ ARROW><NEWLINE><DOWN ARROW><DOWN ARROW><NEWLINE>\n# $inputStream = $this->getInputStream(\"\
+    \\033[A\\033[A\\n\\033[B\\033[B\\n\");\n# \n# $dialog = new QuestionHelper();\n\
+    # $dialog->setHelperSet(new HelperSet([new FormatterHelper()]));\n# \n# $question\
+    \ = new ChoiceQuestion('Please select a bundle', [1 => 'AcmeDemoBundle', 4 =>\
+    \ 'AsseticBundle']);\n# $question->setMaxAttempts(1);\n# \n# $this->assertEquals('AcmeDemoBundle',\
+    \ $dialog->ask($this->createStreamableInputInterfaceMock($inputStream), $this->createOutputInterface(),\
+    \ $question));\n# $this->assertEquals('AsseticBundle', $dialog->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# }\n# \n# public function testAskWithAutocompleteWithExactMatch()\n\
+    # {\n# if (!Terminal::hasSttyAvailable()) {\n# $this->markTestSkipped('`stty`\
+    \ is required to test autocomplete functionality');\n# }\n# \n# $inputStream =\
+    \ $this->getInputStream(\"b\\n\");\n# \n# $possibleChoices = [\n# 'a' => 'berlin',\n\
+    # 'b' => 'copenhagen',\n# 'c' => 'amsterdam',\n# ];\n# \n# $dialog = new QuestionHelper();\n\
+    # $dialog->setHelperSet(new HelperSet([new FormatterHelper()]));\n# \n# $question\
+    \ = new ChoiceQuestion('Please select a city', $possibleChoices);\n# $question->setMaxAttempts(1);\n\
+    # \n# $this->assertSame('b', $dialog->ask($this->createStreamableInputInterfaceMock($inputStream),\
+    \ $this->createOutputInterface(), $question));\n# }\n# \n# public static function\
+    \ getInputs()\n# {\n# return [\n# ['$'], // 1 byte character\n# ['\xA2'], // 2\
+    \ bytes character\n# ['\u20AC'], // 3 bytes character\n# ['\U00010348'], // 4\
+    \ bytes character\n# ];\n# }\n# \n# /**\n# * @dataProvider getInputs"
+- name: testAutocompleteWithTrailingBackslash
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAskHiddenResponse
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAskHiddenResponseNotTrimmed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAskMultilineResponseWithEOF
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAskMultilineResponseWithSingleNewline
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAskMultilineResponseWithDataAfterNewline
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAskMultilineResponseWithMultipleNewlinesAtEnd
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAskMultilineResponseWithWithCursorInMiddleOfSeekableInputStream
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAskConfirmation
+  visibility: public
+  parameters:
+  - name: question
+  - name: expected
+  - name: default
+    default: 'true'
+  comment: '# * @dataProvider getAskConfirmationData'
+- name: getAskConfirmationData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAskConfirmationWithCustomTrueAnswer
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAskAndValidate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSelectChoiceFromSimpleChoices
+  visibility: public
+  parameters:
+  - name: providedAnswer
+  - name: expectedValue
+  comment: '# * @dataProvider simpleAnswerProvider'
+- name: simpleAnswerProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSpecialCharacterChoiceFromMultipleChoiceList
+  visibility: public
+  parameters:
+  - name: providedAnswer
+  - name: expectedValue
+  comment: '# * @dataProvider specialCharacterInMultipleChoice'
+- name: specialCharacterInMultipleChoice
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSelectChoiceFromChoiceList
+  visibility: public
+  parameters:
+  - name: providedAnswer
+  - name: expectedValue
+  comment: '# * @dataProvider answerProvider'
+- name: testAmbiguousChoiceFromChoicelist
+  visibility: public
+  parameters: []
+  comment: null
+- name: answerProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoInteraction
+  visibility: public
+  parameters: []
+  comment: null
+- name: testChoiceOutputFormattingQuestionForUtf8Keys
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAskThrowsExceptionOnMissingInput
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAskThrowsExceptionOnMissingInputForChoiceQuestion
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAskThrowsExceptionOnMissingInputWithValidator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testQuestionValidatorRepeatsThePrompt
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEmptyChoices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTraversableAutocomplete
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDisableStty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTraversableMultiselectAutocomplete
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAutocompleteMoveCursorBackwards
+  visibility: public
+  parameters: []
+  comment: null
+- name: getInputStream
+  visibility: protected
+  parameters:
+  - name: input
+  comment: null
+- name: createOutputInterface
+  visibility: protected
+  parameters: []
+  comment: null
+- name: createInputInterfaceMock
+  visibility: protected
+  parameters:
+  - name: interactive
+    default: 'true'
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: values
+  comment: null
+- name: getIterator
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Console\Application
+- Symfony\Component\Console\Exception\InvalidArgumentException
+- Symfony\Component\Console\Exception\MissingInputException
+- Symfony\Component\Console\Formatter\OutputFormatter
+- Symfony\Component\Console\Helper\FormatterHelper
+- Symfony\Component\Console\Helper\HelperSet
+- Symfony\Component\Console\Helper\QuestionHelper
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Output\StreamOutput
+- Symfony\Component\Console\Question\ChoiceQuestion
+- Symfony\Component\Console\Question\ConfirmationQuestion
+- Symfony\Component\Console\Question\Question
+- Symfony\Component\Console\Terminal
+- Symfony\Component\Console\Tester\ApplicationTester
+interfaces:
+- \IteratorAggregate

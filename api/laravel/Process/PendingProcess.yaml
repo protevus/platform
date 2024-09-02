@@ -1,0 +1,361 @@
+name: PendingProcess
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: ProcessTimedOutException
+  type: class
+  source: Illuminate\Process\Exceptions\ProcessTimedOutException
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: Conditionable
+  type: class
+  source: Illuminate\Support\Traits\Conditionable
+- name: LogicException
+  type: class
+  source: LogicException
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: SymfonyTimeoutException
+  type: class
+  source: Symfony\Component\Process\Exception\ProcessTimedOutException
+- name: Process
+  type: class
+  source: Symfony\Component\Process\Process
+- name: Conditionable
+  type: class
+  source: Conditionable
+properties:
+- name: factory
+  visibility: protected
+  comment: '# * The process factory instance.
+
+    # *
+
+    # * @var \Illuminate\Process\Factory'
+- name: command
+  visibility: public
+  comment: '# * The command to invoke the process.
+
+    # *
+
+    # * @var array<array-key, string>|string|null'
+- name: path
+  visibility: public
+  comment: '# * The working directory of the process.
+
+    # *
+
+    # * @var string|null'
+- name: timeout
+  visibility: public
+  comment: '# * The maximum number of seconds the process may run.
+
+    # *
+
+    # * @var int|null'
+- name: idleTimeout
+  visibility: public
+  comment: '# * The maximum number of seconds the process may go without returning
+    output.
+
+    # *
+
+    # * @var int'
+- name: environment
+  visibility: public
+  comment: '# * The additional environment variables for the process.
+
+    # *
+
+    # * @var array'
+- name: input
+  visibility: public
+  comment: '# * The standard input data that should be piped into the command.
+
+    # *
+
+    # * @var string|int|float|bool|resource|\Traversable|null'
+- name: quietly
+  visibility: public
+  comment: '# * Indicates whether output should be disabled for the process.
+
+    # *
+
+    # * @var bool'
+- name: tty
+  visibility: public
+  comment: '# * Indicates if TTY mode should be enabled.
+
+    # *
+
+    # * @var bool'
+- name: options
+  visibility: public
+  comment: '# * The options that will be passed to "proc_open".
+
+    # *
+
+    # * @var array'
+- name: fakeHandlers
+  visibility: protected
+  comment: '# * The registered fake handler callbacks.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: factory
+  comment: "# * The process factory instance.\n# *\n# * @var \\Illuminate\\Process\\\
+    Factory\n# */\n# protected $factory;\n# \n# /**\n# * The command to invoke the\
+    \ process.\n# *\n# * @var array<array-key, string>|string|null\n# */\n# public\
+    \ $command;\n# \n# /**\n# * The working directory of the process.\n# *\n# * @var\
+    \ string|null\n# */\n# public $path;\n# \n# /**\n# * The maximum number of seconds\
+    \ the process may run.\n# *\n# * @var int|null\n# */\n# public $timeout = 60;\n\
+    # \n# /**\n# * The maximum number of seconds the process may go without returning\
+    \ output.\n# *\n# * @var int\n# */\n# public $idleTimeout;\n# \n# /**\n# * The\
+    \ additional environment variables for the process.\n# *\n# * @var array\n# */\n\
+    # public $environment = [];\n# \n# /**\n# * The standard input data that should\
+    \ be piped into the command.\n# *\n# * @var string|int|float|bool|resource|\\\
+    Traversable|null\n# */\n# public $input;\n# \n# /**\n# * Indicates whether output\
+    \ should be disabled for the process.\n# *\n# * @var bool\n# */\n# public $quietly\
+    \ = false;\n# \n# /**\n# * Indicates if TTY mode should be enabled.\n# *\n# *\
+    \ @var bool\n# */\n# public $tty = false;\n# \n# /**\n# * The options that will\
+    \ be passed to \"proc_open\".\n# *\n# * @var array\n# */\n# public $options =\
+    \ [];\n# \n# /**\n# * The registered fake handler callbacks.\n# *\n# * @var array\n\
+    # */\n# protected $fakeHandlers = [];\n# \n# /**\n# * Create a new pending process\
+    \ instance.\n# *\n# * @param  \\Illuminate\\Process\\Factory  $factory\n# * @return\
+    \ void"
+- name: command
+  visibility: public
+  parameters:
+  - name: command
+  comment: '# * Specify the command that will invoke the process.
+
+    # *
+
+    # * @param  array<array-key, string>|string  $command
+
+    # * @return $this'
+- name: path
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Specify the working directory of the process.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return $this'
+- name: timeout
+  visibility: public
+  parameters:
+  - name: timeout
+  comment: '# * Specify the maximum number of seconds the process may run.
+
+    # *
+
+    # * @param  int  $timeout
+
+    # * @return $this'
+- name: idleTimeout
+  visibility: public
+  parameters:
+  - name: timeout
+  comment: '# * Specify the maximum number of seconds a process may go without returning
+    output.
+
+    # *
+
+    # * @param  int  $timeout
+
+    # * @return $this'
+- name: forever
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the process may run forever without timing out.
+
+    # *
+
+    # * @return $this'
+- name: env
+  visibility: public
+  parameters:
+  - name: environment
+  comment: '# * Set the additional environment variables for the process.
+
+    # *
+
+    # * @param  array  $environment
+
+    # * @return $this'
+- name: input
+  visibility: public
+  parameters:
+  - name: input
+  comment: '# * Set the standard input that should be provided when invoking the process.
+
+    # *
+
+    # * @param  \Traversable|resource|string|int|float|bool|null  $input
+
+    # * @return $this'
+- name: quietly
+  visibility: public
+  parameters: []
+  comment: '# * Disable output for the process.
+
+    # *
+
+    # * @return $this'
+- name: tty
+  visibility: public
+  parameters:
+  - name: tty
+    default: 'true'
+  comment: '# * Enable TTY mode for the process.
+
+    # *
+
+    # * @param  bool  $tty
+
+    # * @return $this'
+- name: options
+  visibility: public
+  parameters:
+  - name: options
+  comment: '# * Set the "proc_open" options that should be used when invoking the
+    process.
+
+    # *
+
+    # * @param  array  $options
+
+    # * @return $this'
+- name: run
+  visibility: public
+  parameters:
+  - name: command
+    default: 'null'
+  - name: output
+    default: 'null'
+  comment: '# * Run the process.
+
+    # *
+
+    # * @param  array<array-key, string>|string|null  $command
+
+    # * @param  callable|null  $output
+
+    # * @return \Illuminate\Contracts\Process\ProcessResult
+
+    # *
+
+    # * @throws \Illuminate\Process\Exceptions\ProcessTimedOutException
+
+    # * @throws \RuntimeException'
+- name: start
+  visibility: public
+  parameters:
+  - name: command
+    default: 'null'
+  - name: output
+    default: 'null'
+  comment: '# * Start the process in the background.
+
+    # *
+
+    # * @param  array<array-key, string>|string|null  $command
+
+    # * @param  callable|null  $output
+
+    # * @return \Illuminate\Process\InvokedProcess
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: toSymfonyProcess
+  visibility: protected
+  parameters:
+  - name: command
+  comment: '# * Get a Symfony Process instance from the current pending command.
+
+    # *
+
+    # * @param  array<array-key, string>|string|null  $command
+
+    # * @return \Symfony\Component\Process\Process'
+- name: withFakeHandlers
+  visibility: public
+  parameters:
+  - name: fakeHandlers
+  comment: '# * Specify the fake process result handlers for the pending process.
+
+    # *
+
+    # * @param  array  $fakeHandlers
+
+    # * @return $this'
+- name: fakeFor
+  visibility: protected
+  parameters:
+  - name: command
+  comment: '# * Get the fake handler for the given command, if applicable.
+
+    # *
+
+    # * @param  string  $command
+
+    # * @return \Closure|null'
+- name: resolveSynchronousFake
+  visibility: protected
+  parameters:
+  - name: command
+  - name: fake
+  comment: '# * Resolve the given fake handler for a synchronous process.
+
+    # *
+
+    # * @param  string  $command
+
+    # * @param  \Closure  $fake
+
+    # * @return mixed'
+- name: resolveAsynchronousFake
+  visibility: protected
+  parameters:
+  - name: command
+  - name: output
+  - name: fake
+  comment: '# * Resolve the given fake handler for an asynchronous process.
+
+    # *
+
+    # * @param  string  $command
+
+    # * @param  callable|null  $output
+
+    # * @param  \Closure  $fake
+
+    # * @return \Illuminate\Process\FakeInvokedProcess
+
+    # *
+
+    # * @throw \LogicException'
+traits:
+- Closure
+- Illuminate\Process\Exceptions\ProcessTimedOutException
+- Illuminate\Support\Str
+- Illuminate\Support\Traits\Conditionable
+- LogicException
+- RuntimeException
+- Symfony\Component\Process\Process
+- Conditionable
+interfaces: []

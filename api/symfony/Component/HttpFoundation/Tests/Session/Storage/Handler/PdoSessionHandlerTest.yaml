@@ -1,0 +1,180 @@
+name: PdoSessionHandlerTest
+class_comment: '# * @requires extension pdo_sqlite
+
+  # *
+
+  # * @group time-sensitive'
+dependencies:
+- name: Schema
+  type: class
+  source: Doctrine\DBAL\Schema\Schema
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: PdoSessionHandler
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+properties: []
+methods:
+- name: testWriteDifferentSessionIdThanRead
+  visibility: public
+  parameters: []
+  comment: "# * @requires extension pdo_sqlite\n# *\n# * @group time-sensitive\n#\
+    \ */\n# class PdoSessionHandlerTest extends TestCase\n# {\n# private ?string $dbFile\
+    \ = null;\n# \n# protected function tearDown(): void\n# {\n# // make sure the\
+    \ temporary database file is deleted when it has been created (even when a test\
+    \ fails)\n# if ($this->dbFile) {\n# @unlink($this->dbFile);\n# }\n# parent::tearDown();\n\
+    # }\n# \n# protected function getPersistentSqliteDsn()\n# {\n# $this->dbFile =\
+    \ tempnam(sys_get_temp_dir(), 'sf_sqlite_sessions');\n# \n# return 'sqlite:'.$this->dbFile;\n\
+    # }\n# \n# protected function getMemorySqlitePdo()\n# {\n# $pdo = new \\PDO('sqlite::memory:');\n\
+    # $pdo->setAttribute(\\PDO::ATTR_ERRMODE, \\PDO::ERRMODE_EXCEPTION);\n# $storage\
+    \ = new PdoSessionHandler($pdo);\n# $storage->createTable();\n# \n# return $pdo;\n\
+    # }\n# \n# public function testWrongPdoErrMode()\n# {\n# $this->expectException(\\\
+    InvalidArgumentException::class);\n# $pdo = $this->getMemorySqlitePdo();\n# $pdo->setAttribute(\\\
+    PDO::ATTR_ERRMODE, \\PDO::ERRMODE_SILENT);\n# \n# new PdoSessionHandler($pdo);\n\
+    # }\n# \n# public function testInexistentTable()\n# {\n# $this->expectException(\\\
+    RuntimeException::class);\n# $storage = new PdoSessionHandler($this->getMemorySqlitePdo(),\
+    \ ['db_table' => 'inexistent_table']);\n# $storage->open('', 'sid');\n# $storage->read('id');\n\
+    # $storage->write('id', 'data');\n# $storage->close();\n# }\n# \n# public function\
+    \ testCreateTableTwice()\n# {\n# $this->expectException(\\RuntimeException::class);\n\
+    # $storage = new PdoSessionHandler($this->getMemorySqlitePdo());\n# $storage->createTable();\n\
+    # }\n# \n# public function testWithLazyDsnConnection()\n# {\n# $dsn = $this->getPersistentSqliteDsn();\n\
+    # \n# $storage = new PdoSessionHandler($dsn);\n# $storage->createTable();\n# $storage->open('',\
+    \ 'sid');\n# $data = $storage->read('id');\n# $storage->write('id', 'data');\n\
+    # $storage->close();\n# $this->assertSame('', $data, 'New session returns empty\
+    \ string data');\n# \n# $storage->open('', 'sid');\n# $data = $storage->read('id');\n\
+    # $storage->close();\n# $this->assertSame('data', $data, 'Written value can be\
+    \ read back correctly');\n# }\n# \n# public function testWithLazySavePathConnection()\n\
+    # {\n# $dsn = $this->getPersistentSqliteDsn();\n# \n# // Open is called with what\
+    \ ini_set('session.save_path', $dsn) would mean\n# $storage = new PdoSessionHandler(null);\n\
+    # $storage->open($dsn, 'sid');\n# $storage->createTable();\n# $data = $storage->read('id');\n\
+    # $storage->write('id', 'data');\n# $storage->close();\n# $this->assertSame('',\
+    \ $data, 'New session returns empty string data');\n# \n# $storage->open($dsn,\
+    \ 'sid');\n# $data = $storage->read('id');\n# $storage->close();\n# $this->assertSame('data',\
+    \ $data, 'Written value can be read back correctly');\n# }\n# \n# public function\
+    \ testReadWriteReadWithNullByte()\n# {\n# $sessionData = 'da'.\"\\0\".'ta';\n\
+    # \n# $storage = new PdoSessionHandler($this->getMemorySqlitePdo());\n# $storage->open('',\
+    \ 'sid');\n# $readData = $storage->read('id');\n# $storage->write('id', $sessionData);\n\
+    # $storage->close();\n# $this->assertSame('', $readData, 'New session returns\
+    \ empty string data');\n# \n# $storage->open('', 'sid');\n# $readData = $storage->read('id');\n\
+    # $storage->close();\n# $this->assertSame($sessionData, $readData, 'Written value\
+    \ can be read back correctly');\n# }\n# \n# public function testReadConvertsStreamToString()\n\
+    # {\n# $pdo = new MockPdo('pgsql');\n# $pdo->prepareResult = $this->createMock(\\\
+    PDOStatement::class);\n# \n# $content = 'foobar';\n# $stream = $this->createStream($content);\n\
+    # \n# $pdo->prepareResult->expects($this->once())->method('fetchAll')\n# ->willReturn([[$stream,\
+    \ time() + 42]]);\n# \n# $storage = new PdoSessionHandler($pdo);\n# $result =\
+    \ $storage->read('foo');\n# \n# $this->assertSame($content, $result);\n# }\n#\
+    \ \n# public function testReadLockedConvertsStreamToString()\n# {\n# if (filter_var(\\\
+    ini_get('session.use_strict_mode'), \\FILTER_VALIDATE_BOOL)) {\n# $this->markTestSkipped('Strict\
+    \ mode needs no locking for new sessions.');\n# }\n# \n# $pdo = new MockPdo('pgsql');\n\
+    # $selectStmt = $this->createMock(\\PDOStatement::class);\n# $insertStmt = $this->createMock(\\\
+    PDOStatement::class);\n# \n# $pdo->prepareResult = fn ($statement) => str_starts_with($statement,\
+    \ 'INSERT') ? $insertStmt : $selectStmt;\n# \n# $content = 'foobar';\n# $stream\
+    \ = $this->createStream($content);\n# $exception = null;\n# \n# $selectStmt->expects($this->atLeast(2))->method('fetchAll')\n\
+    # ->willReturnCallback(function () use (&$exception, $stream) {\n# return $exception\
+    \ ? [[$stream, time() + 42]] : [];\n# });\n# \n# $insertStmt->expects($this->once())->method('execute')\n\
+    # ->willReturnCallback(function () use (&$exception) {\n# throw $exception = new\
+    \ \\PDOException('', '23');\n# });\n# \n# $storage = new PdoSessionHandler($pdo);\n\
+    # $result = $storage->read('foo');\n# \n# $this->assertSame($content, $result);\n\
+    # }\n# \n# public function testReadingRequiresExactlySameId()\n# {\n# $storage\
+    \ = new PdoSessionHandler($this->getMemorySqlitePdo());\n# $storage->open('',\
+    \ 'sid');\n# $storage->write('id', 'data');\n# $storage->write('test', 'data');\n\
+    # $storage->write('space ', 'data');\n# $storage->close();\n# \n# $storage->open('',\
+    \ 'sid');\n# $readDataCaseSensitive = $storage->read('ID');\n# $readDataNoCharFolding\
+    \ = $storage->read('t\xE9st');\n# $readDataKeepSpace = $storage->read('space ');\n\
+    # $readDataExtraSpace = $storage->read('space  ');\n# $storage->close();\n# \n\
+    # $this->assertSame('', $readDataCaseSensitive, 'Retrieval by ID should be case-sensitive\
+    \ (collation setting)');\n# $this->assertSame('', $readDataNoCharFolding, 'Retrieval\
+    \ by ID should not do character folding (collation setting)');\n# $this->assertSame('data',\
+    \ $readDataKeepSpace, 'Retrieval by ID requires spaces as-is');\n# $this->assertSame('',\
+    \ $readDataExtraSpace, 'Retrieval by ID requires spaces as-is');\n# }\n# \n# /**\n\
+    # * Simulates session_regenerate_id(true) which will require an INSERT or UPDATE\
+    \ (replace)."
+- name: testWrongUsageStillWorks
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSessionDestroy
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSessionGC
+  visibility: public
+  parameters: []
+  comment: '# * @runInSeparateProcess'
+- name: testGetConnection
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetConnectionConnectsIfNeeded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUrlDsn
+  visibility: public
+  parameters:
+  - name: url
+  - name: expectedDsn
+  - name: expectedUser
+    default: 'null'
+  - name: expectedPassword
+    default: 'null'
+  comment: '# * @dataProvider provideUrlDsnPairs'
+- name: testConfigureSchemaDifferentDatabase
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConfigureSchemaSameDatabase
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConfigureSchemaTableExistsPdo
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideUrlDsnPairs
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTtl
+  visibility: public
+  parameters: []
+  comment: null
+- name: createStream
+  visibility: private
+  parameters:
+  - name: content
+  comment: '# * @return resource'
+- name: __construct
+  visibility: public
+  parameters:
+  - name: driverName
+    default: 'null'
+  - name: errorMode
+    default: 'null'
+  comment: null
+- name: getAttribute
+  visibility: public
+  parameters:
+  - name: attribute
+  comment: null
+- name: prepare
+  visibility: public
+  parameters:
+  - name: statement
+  - name: driverOptions
+    default: '[]'
+  comment: null
+- name: beginTransaction
+  visibility: public
+  parameters: []
+  comment: null
+- name: rollBack
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Doctrine\DBAL\Schema\Schema
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler
+interfaces: []

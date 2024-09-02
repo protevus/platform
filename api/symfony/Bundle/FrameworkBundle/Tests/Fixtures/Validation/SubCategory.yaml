@@ -1,0 +1,10 @@
+name: SubCategory
+class_comment: null
+dependencies: []
+properties:
+- name: main
+  visibility: public
+  comment: null
+methods: []
+traits: []
+interfaces: []

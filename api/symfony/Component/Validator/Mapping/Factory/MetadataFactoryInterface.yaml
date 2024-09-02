@@ -1,0 +1,45 @@
+name: MetadataFactoryInterface
+class_comment: null
+dependencies:
+- name: NoSuchMetadataException
+  type: class
+  source: Symfony\Component\Validator\Exception\NoSuchMetadataException
+- name: MetadataInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\MetadataInterface
+properties: []
+methods:
+- name: getMetadataFor
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Returns {@link \Symfony\Component\Validator\Mapping\MetadataInterface}
+    instances for values.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # interface MetadataFactoryInterface
+
+    # {
+
+    # /**
+
+    # * Returns the metadata for the given value.
+
+    # *
+
+    # * @throws NoSuchMetadataException If no metadata exists for the given value'
+- name: hasMetadataFor
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Returns whether the class is able to return metadata for the given
+    value.'
+traits:
+- Symfony\Component\Validator\Exception\NoSuchMetadataException
+- Symfony\Component\Validator\Mapping\MetadataInterface
+interfaces: []

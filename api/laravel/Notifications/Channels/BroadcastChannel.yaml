@@ -1,0 +1,74 @@
+name: BroadcastChannel
+class_comment: null
+dependencies:
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: BroadcastNotificationCreated
+  type: class
+  source: Illuminate\Notifications\Events\BroadcastNotificationCreated
+- name: BroadcastMessage
+  type: class
+  source: Illuminate\Notifications\Messages\BroadcastMessage
+- name: Notification
+  type: class
+  source: Illuminate\Notifications\Notification
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+properties:
+- name: events
+  visibility: protected
+  comment: '# * The event dispatcher.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Events\Dispatcher'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: events
+  comment: "# * The event dispatcher.\n# *\n# * @var \\Illuminate\\Contracts\\Events\\\
+    Dispatcher\n# */\n# protected $events;\n# \n# /**\n# * Create a new broadcast\
+    \ channel.\n# *\n# * @param  \\Illuminate\\Contracts\\Events\\Dispatcher  $events\n\
+    # * @return void"
+- name: send
+  visibility: public
+  parameters:
+  - name: notifiable
+  - name: notification
+  comment: '# * Send the given notification.
+
+    # *
+
+    # * @param  mixed  $notifiable
+
+    # * @param  \Illuminate\Notifications\Notification  $notification
+
+    # * @return array|null'
+- name: getData
+  visibility: protected
+  parameters:
+  - name: notifiable
+  - name: notification
+  comment: '# * Get the data for the notification.
+
+    # *
+
+    # * @param  mixed  $notifiable
+
+    # * @param  \Illuminate\Notifications\Notification  $notification
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \RuntimeException'
+traits:
+- Illuminate\Contracts\Events\Dispatcher
+- Illuminate\Notifications\Events\BroadcastNotificationCreated
+- Illuminate\Notifications\Messages\BroadcastMessage
+- Illuminate\Notifications\Notification
+- RuntimeException
+interfaces: []

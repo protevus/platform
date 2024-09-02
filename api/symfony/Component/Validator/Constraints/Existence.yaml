@@ -1,0 +1,19 @@
+name: Existence
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+properties: []
+methods:
+- name: getDefaultOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCompositeOption
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+interfaces: []

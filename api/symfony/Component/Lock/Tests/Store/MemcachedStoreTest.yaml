@@ -1,0 +1,48 @@
+name: MemcachedStoreTest
+class_comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n# *\n# *\
+  \ @requires extension memcached\n# *\n# * @group integration"
+dependencies:
+- name: InvalidTtlException
+  type: class
+  source: Symfony\Component\Lock\Exception\InvalidTtlException
+- name: Key
+  type: class
+  source: Symfony\Component\Lock\Key
+- name: PersistingStoreInterface
+  type: class
+  source: Symfony\Component\Lock\PersistingStoreInterface
+- name: MemcachedStore
+  type: class
+  source: Symfony\Component\Lock\Store\MemcachedStore
+- name: ExpiringStoreTestTrait
+  type: class
+  source: ExpiringStoreTestTrait
+properties: []
+methods:
+- name: setUpBeforeClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: getClockDelay
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getStore
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAbortAfterExpiration
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidTtl
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Lock\Exception\InvalidTtlException
+- Symfony\Component\Lock\Key
+- Symfony\Component\Lock\PersistingStoreInterface
+- Symfony\Component\Lock\Store\MemcachedStore
+- ExpiringStoreTestTrait
+interfaces: []

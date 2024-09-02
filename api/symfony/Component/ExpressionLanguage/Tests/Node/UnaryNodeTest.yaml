@@ -1,0 +1,27 @@
+name: UnaryNodeTest
+class_comment: null
+dependencies:
+- name: ConstantNode
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Node\ConstantNode
+- name: UnaryNode
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Node\UnaryNode
+properties: []
+methods:
+- name: getEvaluateData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCompileData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDumpData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\ExpressionLanguage\Node\ConstantNode
+- Symfony\Component\ExpressionLanguage\Node\UnaryNode
+interfaces: []

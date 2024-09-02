@@ -1,0 +1,42 @@
+name: Key
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Semaphore\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: getRemainingLifetime
+  visibility: public
+  parameters: []
+  comment: "# * Key is a container for the state of the semaphores in stores.\n# *\n\
+    # * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>\n# * @author J\xE9r\xE9my\
+    \ Deruss\xE9 <jeremy@derusse.com>\n# */\n# final class Key\n# {\n# private ?float\
+    \ $expiringTime = null;\n# private array $state = [];\n# \n# public function __construct(\n\
+    # private string $resource,\n# private int $limit,\n# private int $weight = 1,\n\
+    # ) {\n# if (1 > $limit) {\n# throw new InvalidArgumentException(\"The limit ($limit)\
+    \ should be greater than 0.\");\n# }\n# if (1 > $weight) {\n# throw new InvalidArgumentException(\"\
+    The weight ($weight) should be greater than 0.\");\n# }\n# if ($weight > $limit)\
+    \ {\n# throw new InvalidArgumentException(\"The weight ($weight) should be lower\
+    \ or equals to the limit ($limit).\");\n# }\n# }\n# \n# public function __toString():\
+    \ string\n# {\n# return $this->resource;\n# }\n# \n# public function getLimit():\
+    \ int\n# {\n# return $this->limit;\n# }\n# \n# public function getWeight(): int\n\
+    # {\n# return $this->weight;\n# }\n# \n# public function hasState(string $stateKey):\
+    \ bool\n# {\n# return isset($this->state[$stateKey]);\n# }\n# \n# public function\
+    \ setState(string $stateKey, mixed $state): void\n# {\n# $this->state[$stateKey]\
+    \ = $state;\n# }\n# \n# public function removeState(string $stateKey): void\n\
+    # {\n# unset($this->state[$stateKey]);\n# }\n# \n# public function getState(string\
+    \ $stateKey): mixed\n# {\n# return $this->state[$stateKey];\n# }\n# \n# public\
+    \ function resetLifetime(): void\n# {\n# $this->expiringTime = null;\n# }\n# \n\
+    # public function reduceLifetime(float $ttlInSeconds): void\n# {\n# $newTime =\
+    \ microtime(true) + $ttlInSeconds;\n# \n# if (null === $this->expiringTime ||\
+    \ $this->expiringTime > $newTime) {\n# $this->expiringTime = $newTime;\n# }\n\
+    # }\n# \n# /**\n# * @return float|null Remaining lifetime in seconds. Null when\
+    \ the key won't expire."
+- name: isExpired
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Semaphore\Exception\InvalidArgumentException
+interfaces: []

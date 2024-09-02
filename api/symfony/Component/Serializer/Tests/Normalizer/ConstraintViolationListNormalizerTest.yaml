@@ -1,0 +1,72 @@
+name: ConstraintViolationListNormalizerTest
+class_comment: "# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>\n# * @author K\xE9\
+  vin Dunglas <dunglas@gmail.com>"
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CamelCaseToSnakeCaseNameConverter
+  type: class
+  source: Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
+- name: ConstraintViolationListNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ConstraintViolationListNormalizer
+- name: NotNull
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotNull
+- name: ConstraintViolation
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolation
+- name: ConstraintViolationList
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolationList
+properties: []
+methods:
+- name: testNormalizePayloadFields
+  visibility: public
+  parameters:
+  - name: fields
+  - name: expected
+    default: 'null'
+  comment: "# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>\n# * @author K\xE9\
+    vin Dunglas <dunglas@gmail.com>\n# */\n# class ConstraintViolationListNormalizerTest\
+    \ extends TestCase\n# {\n# private ConstraintViolationListNormalizer $normalizer;\n\
+    # \n# protected function setUp(): void\n# {\n# $this->normalizer = new ConstraintViolationListNormalizer();\n\
+    # }\n# \n# public function testSupportsNormalization()\n# {\n# $this->assertTrue($this->normalizer->supportsNormalization(new\
+    \ ConstraintViolationList()));\n# $this->assertFalse($this->normalizer->supportsNormalization(new\
+    \ \\stdClass()));\n# }\n# \n# public function testNormalize()\n# {\n# $list =\
+    \ new ConstraintViolationList([\n# new ConstraintViolation('a', 'b', ['value'\
+    \ => 'foo'], 'c', 'd', 'e', null, 'f'),\n# new ConstraintViolation('1', '2', [],\
+    \ '3', '4', '5', null, '6'),\n# ]);\n# \n# $expected = [\n# 'type' => 'https://symfony.com/errors/validation',\n\
+    # 'title' => 'Validation Failed',\n# 'detail' => 'd: a\n# 4: 1',\n# 'violations'\
+    \ => [\n# [\n# 'propertyPath' => 'd',\n# 'title' => 'a',\n# 'template' => 'b',\n\
+    # 'type' => 'urn:uuid:f',\n# 'parameters' => [\n# 'value' => 'foo',\n# ],\n# ],\n\
+    # [\n# 'propertyPath' => '4',\n# 'title' => '1',\n# 'template' => '2',\n# 'type'\
+    \ => 'urn:uuid:6',\n# 'parameters' => [],\n# ],\n# ],\n# ];\n# \n# $this->assertEquals($expected,\
+    \ $this->normalizer->normalize($list));\n# }\n# \n# public function testNormalizeWithNameConverter()\n\
+    # {\n# $normalizer = new ConstraintViolationListNormalizer([], new CamelCaseToSnakeCaseNameConverter());\n\
+    # \n# $list = new ConstraintViolationList([\n# new ConstraintViolation('too short',\
+    \ 'a', [], '3', 'shortDescription', ''),\n# new ConstraintViolation('too long',\
+    \ 'b', [], '3', 'product.shortDescription', 'Lorem ipsum dolor sit amet'),\n#\
+    \ new ConstraintViolation('error', 'c', [], '3', '', ''),\n# ]);\n# \n# $expected\
+    \ = [\n# 'type' => 'https://symfony.com/errors/validation',\n# 'title' => 'Validation\
+    \ Failed',\n# 'detail' => 'short_description: too short\n# product.short_description:\
+    \ too long\n# error',\n# 'violations' => [\n# [\n# 'propertyPath' => 'short_description',\n\
+    # 'title' => 'too short',\n# 'template' => 'a',\n# 'parameters' => [],\n# ],\n\
+    # [\n# 'propertyPath' => 'product.short_description',\n# 'title' => 'too long',\n\
+    # 'template' => 'b',\n# 'parameters' => [],\n# ],\n# [\n# 'propertyPath' => '',\n\
+    # 'title' => 'error',\n# 'template' => 'c',\n# 'parameters' => [],\n# ],\n# ],\n\
+    # ];\n# \n# $this->assertEquals($expected, $normalizer->normalize($list));\n#\
+    \ }\n# \n# /**\n# * @dataProvider payloadFieldsProvider"
+- name: payloadFieldsProvider
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
+- Symfony\Component\Serializer\Normalizer\ConstraintViolationListNormalizer
+- Symfony\Component\Validator\Constraints\NotNull
+- Symfony\Component\Validator\ConstraintViolation
+- Symfony\Component\Validator\ConstraintViolationList
+interfaces: []

@@ -1,0 +1,39 @@
+name: EnableAutoMappingTest
+class_comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>"
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: EnableAutoMapping
+  type: class
+  source: Symfony\Component\Validator\Constraints\EnableAutoMapping
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- name: AutoMappingStrategy
+  type: class
+  source: Symfony\Component\Validator\Mapping\AutoMappingStrategy
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+- name: AttributeLoader
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\AttributeLoader
+properties: []
+methods:
+- name: testGroups
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDisableAutoMappingAttribute
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\Constraints\EnableAutoMapping
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- Symfony\Component\Validator\Mapping\AutoMappingStrategy
+- Symfony\Component\Validator\Mapping\ClassMetadata
+- Symfony\Component\Validator\Mapping\Loader\AttributeLoader
+interfaces: []

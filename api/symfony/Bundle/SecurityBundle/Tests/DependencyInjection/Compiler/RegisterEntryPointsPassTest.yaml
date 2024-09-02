@@ -1,0 +1,110 @@
+name: RegisterEntryPointsPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: RegisterEntryPointPass
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\RegisterEntryPointPass
+- name: FirewallConfig
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Security\FirewallConfig
+- name: AbstractArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\AbstractArgument
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: JsonResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\JsonResponse
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: TokenInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\TokenInterface
+- name: AuthenticationException
+  type: class
+  source: Symfony\Component\Security\Core\Exception\AuthenticationException
+- name: BadCredentialsException
+  type: class
+  source: Symfony\Component\Security\Core\Exception\BadCredentialsException
+- name: AuthenticatorManager
+  type: class
+  source: Symfony\Component\Security\Http\Authentication\AuthenticatorManager
+- name: AbstractAuthenticator
+  type: class
+  source: Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator
+- name: Passport
+  type: class
+  source: Symfony\Component\Security\Http\Authenticator\Passport\Passport
+- name: AuthenticationEntryPointInterface
+  type: class
+  source: Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface
+- name: ExceptionListener
+  type: class
+  source: Symfony\Component\Security\Http\Firewall\ExceptionListener
+properties: []
+methods:
+- name: testProcessResolvesChildDefinitionsClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: supports
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+- name: authenticate
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+- name: onAuthenticationSuccess
+  visibility: public
+  parameters:
+  - name: request
+  - name: token
+  - name: firewallName
+  comment: null
+- name: onAuthenticationFailure
+  visibility: public
+  parameters:
+  - name: request
+  - name: exception
+  comment: null
+- name: start
+  visibility: public
+  parameters:
+  - name: request
+  - name: authException
+    default: 'null'
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\RegisterEntryPointPass
+- Symfony\Bundle\SecurityBundle\Security\FirewallConfig
+- Symfony\Component\DependencyInjection\Argument\AbstractArgument
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\HttpFoundation\JsonResponse
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\Security\Core\Authentication\Token\TokenInterface
+- Symfony\Component\Security\Core\Exception\AuthenticationException
+- Symfony\Component\Security\Core\Exception\BadCredentialsException
+- Symfony\Component\Security\Http\Authentication\AuthenticatorManager
+- Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator
+- Symfony\Component\Security\Http\Authenticator\Passport\Passport
+- Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface
+- Symfony\Component\Security\Http\Firewall\ExceptionListener
+interfaces:
+- AuthenticationEntryPointInterface

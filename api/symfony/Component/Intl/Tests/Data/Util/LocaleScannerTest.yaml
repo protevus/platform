@@ -1,0 +1,39 @@
+name: LocaleScannerTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: LocaleScanner
+  type: class
+  source: Symfony\Component\Intl\Data\Util\LocaleScanner
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testScanLocales
+  visibility: public
+  parameters: []
+  comment: null
+- name: testScanAliases
+  visibility: public
+  parameters: []
+  comment: null
+- name: testScanParents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Filesystem\Filesystem
+- Symfony\Component\Intl\Data\Util\LocaleScanner
+interfaces: []

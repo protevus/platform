@@ -1,0 +1,62 @@
+name: CachePoolPruneCommand
+class_comment: null
+dependencies:
+- name: PruneableInterface
+  type: class
+  source: Symfony\Component\Cache\PruneableInterface
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: pools
+  comment: '# * Cache pool pruner command.
+
+    # *
+
+    # * @author Rob Frawley 2nd <rmf@src.run>
+
+    # */
+
+    # #[AsCommand(name: ''cache:pool:prune'', description: ''Prune cache pools'')]
+
+    # final class CachePoolPruneCommand extends Command
+
+    # {
+
+    # /**
+
+    # * @param iterable<mixed, PruneableInterface> $pools'
+- name: configure
+  visibility: protected
+  parameters: []
+  comment: null
+- name: execute
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+traits:
+- Symfony\Component\Cache\PruneableInterface
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Style\SymfonyStyle
+interfaces: []

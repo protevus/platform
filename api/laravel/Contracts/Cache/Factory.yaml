@@ -1,0 +1,19 @@
+name: Factory
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: store
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Get a cache store instance by name.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @return \Illuminate\Contracts\Cache\Repository'
+traits: []
+interfaces: []

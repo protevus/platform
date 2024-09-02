@@ -1,0 +1,11 @@
+name: C1
+class_comment: null
+dependencies:
+- name: T1
+  type: class
+  source: T1
+properties: []
+methods: []
+traits:
+- T1
+interfaces: []

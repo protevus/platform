@@ -1,0 +1,99 @@
+name: ValidateSignature
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: InvalidSignatureException
+  type: class
+  source: Illuminate\Routing\Exceptions\InvalidSignatureException
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+properties:
+- name: ignore
+  visibility: protected
+  comment: '# * The names of the parameters that should be ignored.
+
+    # *
+
+    # * @var array<int, string>'
+- name: neverValidate
+  visibility: protected
+  comment: '# * The globally ignored parameters.
+
+    # *
+
+    # * @var array'
+methods:
+- name: relative
+  visibility: public
+  parameters:
+  - name: ignore
+    default: '[]'
+  comment: "# * The names of the parameters that should be ignored.\n# *\n# * @var\
+    \ array<int, string>\n# */\n# protected $ignore = [\n# //\n# ];\n# \n# /**\n#\
+    \ * The globally ignored parameters.\n# *\n# * @var array\n# */\n# protected static\
+    \ $neverValidate = [];\n# \n# /**\n# * Specify that the URL signature is for a\
+    \ relative URL.\n# *\n# * @param  array|string  $ignore\n# * @return string"
+- name: absolute
+  visibility: public
+  parameters:
+  - name: ignore
+    default: '[]'
+  comment: '# * Specify that the URL signature is for an absolute URL.
+
+    # *
+
+    # * @param  array|string  $ignore
+
+    # * @return class-string'
+- name: handle
+  visibility: public
+  parameters:
+  - name: request
+  - name: next
+  - name: '...$args'
+  comment: '# * Handle an incoming request.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  \Closure  $next
+
+    # * @param  array|null  $args
+
+    # * @return \Illuminate\Http\Response
+
+    # *
+
+    # * @throws \Illuminate\Routing\Exceptions\InvalidSignatureException'
+- name: parseArguments
+  visibility: protected
+  parameters:
+  - name: args
+  comment: '# * Parse the additional arguments given to the middleware.
+
+    # *
+
+    # * @param  array  $args
+
+    # * @return array'
+- name: except
+  visibility: public
+  parameters:
+  - name: parameters
+  comment: '# * Indicate that the given parameters should be ignored during signature
+    validation.
+
+    # *
+
+    # * @param  array|string  $parameters
+
+    # * @return void'
+traits:
+- Closure
+- Illuminate\Routing\Exceptions\InvalidSignatureException
+- Illuminate\Support\Arr
+interfaces: []

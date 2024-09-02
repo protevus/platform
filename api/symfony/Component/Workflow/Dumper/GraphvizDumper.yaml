@@ -1,0 +1,133 @@
+name: GraphvizDumper
+class_comment: "# * GraphvizDumper dumps a workflow as a graphviz file.\n# *\n# *\
+  \ You can convert the generated dot file with the dot utility (https://graphviz.org/):\n\
+  # *\n# *   dot -Tpng workflow.dot > workflow.png\n# *\n# * @author Fabien Potencier\
+  \ <fabien@symfony.com>\n# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>"
+dependencies:
+- name: Definition
+  type: class
+  source: Symfony\Component\Workflow\Definition
+- name: Marking
+  type: class
+  source: Symfony\Component\Workflow\Marking
+properties: []
+methods:
+- name: dump
+  visibility: public
+  parameters:
+  - name: definition
+  - name: marking
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: "# * GraphvizDumper dumps a workflow as a graphviz file.\n# *\n# * You\
+    \ can convert the generated dot file with the dot utility (https://graphviz.org/):\n\
+    # *\n# *   dot -Tpng workflow.dot > workflow.png\n# *\n# * @author Fabien Potencier\
+    \ <fabien@symfony.com>\n# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>\n\
+    # */\n# class GraphvizDumper implements DumperInterface\n# {\n# // All values\
+    \ should be strings\n# protected static array $defaultOptions = [\n# 'graph' =>\
+    \ ['ratio' => 'compress', 'rankdir' => 'LR'],\n# 'node' => ['fontsize' => '9',\
+    \ 'fontname' => 'Arial', 'color' => '#333333', 'fillcolor' => 'lightblue', 'fixedsize'\
+    \ => 'false', 'width' => '1'],\n# 'edge' => ['fontsize' => '9', 'fontname' =>\
+    \ 'Arial', 'color' => '#333333', 'arrowhead' => 'normal', 'arrowsize' => '0.5'],\n\
+    # ];\n# \n# /**\n# * Dumps the workflow as a graphviz graph.\n# *\n# * Available\
+    \ options:\n# *\n# *  * graph: The default options for the whole graph\n# *  *\
+    \ node: The default options for nodes (places + transitions)\n# *  * edge: The\
+    \ default options for edges"
+- name: findPlaces
+  visibility: protected
+  parameters:
+  - name: definition
+  - name: withMetadata
+  - name: marking
+    default: 'null'
+  comment: '# * @internal'
+- name: findTransitions
+  visibility: protected
+  parameters:
+  - name: definition
+  - name: withMetadata
+  comment: '# * @internal'
+- name: addPlaces
+  visibility: protected
+  parameters:
+  - name: places
+  - name: withMetadata
+  comment: '# * @internal'
+- name: addTransitions
+  visibility: protected
+  parameters:
+  - name: transitions
+  - name: withMetadata
+  comment: '# * @internal'
+- name: findEdges
+  visibility: protected
+  parameters:
+  - name: definition
+  comment: '# * @internal'
+- name: addEdges
+  visibility: protected
+  parameters:
+  - name: edges
+  comment: '# * @internal'
+- name: startDot
+  visibility: protected
+  parameters:
+  - name: options
+  - name: label
+  comment: '# * @internal'
+- name: endDot
+  visibility: protected
+  parameters: []
+  comment: '# * @internal'
+- name: dotize
+  visibility: protected
+  parameters:
+  - name: id
+  comment: '# * @internal'
+- name: escape
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * @internal'
+- name: addAttributes
+  visibility: protected
+  parameters:
+  - name: attributes
+  comment: '# * @internal'
+- name: formatLabel
+  visibility: protected
+  parameters:
+  - name: definition
+  - name: withMetadata
+  - name: options
+  comment: '# * Handles the label of the graph depending on whether a label was set
+    in CLI,
+
+    # * if metadata should be included and if there are any.
+
+    # *
+
+    # * The produced label must be escaped.
+
+    # *
+
+    # * @internal'
+- name: addOptions
+  visibility: private
+  parameters:
+  - name: options
+  comment: null
+- name: addMetadata
+  visibility: private
+  parameters:
+  - name: metadata
+  - name: lineBreakFirstIfNotEmpty
+    default: 'true'
+  comment: '# * @param bool $lineBreakFirstIfNotEmpty Whether to add a separator in
+    the first place when metadata is not empty'
+traits:
+- Symfony\Component\Workflow\Definition
+- Symfony\Component\Workflow\Marking
+interfaces:
+- DumperInterface

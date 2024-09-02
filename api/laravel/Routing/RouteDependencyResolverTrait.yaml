@@ -1,0 +1,11 @@
+name: RouteDependencyResolverTrait
+class_comment: null
+dependencies:
+- name: ResolvesRouteDependencies
+  type: class
+  source: ResolvesRouteDependencies
+properties: []
+methods: []
+traits:
+- ResolvesRouteDependencies
+interfaces: []

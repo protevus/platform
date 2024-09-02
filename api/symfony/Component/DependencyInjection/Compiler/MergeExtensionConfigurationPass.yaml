@@ -1,0 +1,116 @@
+name: MergeExtensionConfigurationPass
+class_comment: '# * Merges extension configs into the container builder.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: BaseNode
+  type: class
+  source: Symfony\Component\Config\Definition\BaseNode
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: LogicException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\LogicException
+- name: ParameterNotFoundException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: ConfigurationExtensionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface
+- name: Extension
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\Extension
+- name: ExtensionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+- name: PrependExtensionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface
+- name: EnvPlaceholderParameterBag
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag
+- name: ParameterBagInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: parameterBag
+  comment: null
+- name: freezeAfterProcessing
+  visibility: public
+  parameters:
+  - name: extension
+  - name: container
+  comment: null
+- name: getEnvPlaceholders
+  visibility: public
+  parameters: []
+  comment: null
+- name: getUnusedEnvPlaceholders
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: extension
+  - name: parameterBag
+    default: 'null'
+  comment: null
+- name: addCompilerPass
+  visibility: public
+  parameters:
+  - name: pass
+  - name: type
+    default: PassConfig::TYPE_BEFORE_OPTIMIZATION
+  - name: priority
+    default: '0'
+  comment: null
+- name: registerExtension
+  visibility: public
+  parameters:
+  - name: extension
+  comment: null
+- name: compile
+  visibility: public
+  parameters:
+  - name: resolveEnvPlaceholders
+    default: 'false'
+  comment: null
+- name: resolveEnvPlaceholders
+  visibility: public
+  parameters:
+  - name: value
+  - name: format
+    default: 'null'
+  - name: '&$usedEnvs'
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\Config\Definition\BaseNode
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\LogicException
+- Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Extension\ConfigurationExtensionInterface
+- Symfony\Component\DependencyInjection\Extension\Extension
+- Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+- Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface
+- Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag
+- Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface
+interfaces:
+- CompilerPassInterface

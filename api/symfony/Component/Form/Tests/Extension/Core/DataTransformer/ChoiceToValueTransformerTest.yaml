@@ -1,0 +1,60 @@
+name: ChoiceToValueTransformerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ArrayChoiceList
+  type: class
+  source: Symfony\Component\Form\ChoiceList\ArrayChoiceList
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+- name: ChoiceToValueTransformer
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataTransformer\ChoiceToValueTransformer
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: transformProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransform
+  visibility: public
+  parameters:
+  - name: in
+  - name: out
+  - name: inWithNull
+  - name: outWithNull
+  comment: '# * @dataProvider transformProvider'
+- name: reverseTransformProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransform
+  visibility: public
+  parameters:
+  - name: in
+  - name: out
+  - name: inWithNull
+  - name: outWithNull
+  comment: '# * @dataProvider reverseTransformProvider'
+- name: reverseTransformExpectsStringOrNullProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransformExpectsStringOrNull
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider reverseTransformExpectsStringOrNullProvider'
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\ChoiceList\ArrayChoiceList
+- Symfony\Component\Form\Exception\TransformationFailedException
+- Symfony\Component\Form\Extension\Core\DataTransformer\ChoiceToValueTransformer
+interfaces: []

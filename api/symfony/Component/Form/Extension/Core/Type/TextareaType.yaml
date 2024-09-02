@@ -1,0 +1,34 @@
+name: TextareaType
+class_comment: null
+dependencies:
+- name: AbstractType
+  type: class
+  source: Symfony\Component\Form\AbstractType
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+- name: FormView
+  type: class
+  source: Symfony\Component\Form\FormView
+properties: []
+methods:
+- name: buildView
+  visibility: public
+  parameters:
+  - name: view
+  - name: form
+  - name: options
+  comment: null
+- name: getParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: getBlockPrefix
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\AbstractType
+- Symfony\Component\Form\FormInterface
+- Symfony\Component\Form\FormView
+interfaces: []

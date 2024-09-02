@@ -1,0 +1,100 @@
+name: AbstractTransport
+class_comment: null
+dependencies:
+- name: EventDispatcherInterface
+  type: class
+  source: Psr\EventDispatcher\EventDispatcherInterface
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: NullLogger
+  type: class
+  source: Psr\Log\NullLogger
+- name: TemplatedEmail
+  type: class
+  source: Symfony\Bridge\Twig\Mime\TemplatedEmail
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: FailedMessageEvent
+  type: class
+  source: Symfony\Component\Mailer\Event\FailedMessageEvent
+- name: MessageEvent
+  type: class
+  source: Symfony\Component\Mailer\Event\MessageEvent
+- name: SentMessageEvent
+  type: class
+  source: Symfony\Component\Mailer\Event\SentMessageEvent
+- name: LogicException
+  type: class
+  source: Symfony\Component\Mailer\Exception\LogicException
+- name: SentMessage
+  type: class
+  source: Symfony\Component\Mailer\SentMessage
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: BodyRendererInterface
+  type: class
+  source: Symfony\Component\Mime\BodyRendererInterface
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+properties: []
+methods:
+- name: setMaxPerSecond
+  visibility: public
+  parameters:
+  - name: rate
+  comment: "# * @author Fabien Potencier <fabien@symfony.com>\n# */\n# abstract class\
+    \ AbstractTransport implements TransportInterface\n# {\n# private LoggerInterface\
+    \ $logger;\n# private float $rate = 0;\n# private float $lastSent = 0;\n# \n#\
+    \ public function __construct(\n# private ?EventDispatcherInterface $dispatcher\
+    \ = null,\n# ?LoggerInterface $logger = null,\n# ) {\n# $this->logger = $logger\
+    \ ?? new NullLogger();\n# }\n# \n# /**\n# * Sets the maximum number of messages\
+    \ to send per second (0 to disable).\n# *\n# * @return $this"
+- name: send
+  visibility: public
+  parameters:
+  - name: message
+  - name: envelope
+    default: 'null'
+  comment: null
+- name: doSend
+  visibility: protected
+  parameters:
+  - name: message
+  comment: null
+- name: stringifyAddresses
+  visibility: protected
+  parameters:
+  - name: addresses
+  comment: '# * @param Address[] $addresses
+
+    # *
+
+    # * @return string[]'
+- name: getLogger
+  visibility: protected
+  parameters: []
+  comment: null
+- name: checkThrottling
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Psr\EventDispatcher\EventDispatcherInterface
+- Psr\Log\LoggerInterface
+- Psr\Log\NullLogger
+- Symfony\Bridge\Twig\Mime\TemplatedEmail
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mailer\Event\FailedMessageEvent
+- Symfony\Component\Mailer\Event\MessageEvent
+- Symfony\Component\Mailer\Event\SentMessageEvent
+- Symfony\Component\Mailer\Exception\LogicException
+- Symfony\Component\Mailer\SentMessage
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\BodyRendererInterface
+- Symfony\Component\Mime\RawMessage
+interfaces:
+- TransportInterface

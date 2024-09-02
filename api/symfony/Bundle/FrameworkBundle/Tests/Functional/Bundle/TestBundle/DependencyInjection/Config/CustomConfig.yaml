@@ -1,0 +1,12 @@
+name: CustomConfig
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: addConfiguration
+  visibility: public
+  parameters:
+  - name: rootNode
+  comment: null
+traits: []
+interfaces: []

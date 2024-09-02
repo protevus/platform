@@ -1,0 +1,16 @@
+name: CollectionValidatorCustomArrayObjectTest
+class_comment: null
+dependencies:
+- name: CustomArrayObject
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\CustomArrayObject
+properties: []
+methods:
+- name: prepareTestData
+  visibility: public
+  parameters:
+  - name: contents
+  comment: null
+traits:
+- Symfony\Component\Validator\Tests\Fixtures\CustomArrayObject
+interfaces: []

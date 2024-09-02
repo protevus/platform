@@ -1,0 +1,39 @@
+name: AbstractExtensionTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AbstractExtension
+  type: class
+  source: Symfony\Component\Form\AbstractExtension
+- name: FormTypeGuesserInterface
+  type: class
+  source: Symfony\Component\Form\FormTypeGuesserInterface
+- name: FooType
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\FooType
+properties: []
+methods:
+- name: testHasType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetType
+  visibility: public
+  parameters: []
+  comment: null
+- name: loadTypes
+  visibility: protected
+  parameters: []
+  comment: null
+- name: loadTypeGuesser
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\AbstractExtension
+- Symfony\Component\Form\FormTypeGuesserInterface
+- Symfony\Component\Form\Tests\Fixtures\FooType
+interfaces: []

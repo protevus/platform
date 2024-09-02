@@ -1,0 +1,122 @@
+name: MigrateMakeCommand
+class_comment: null
+dependencies:
+- name: PromptsForMissingInput
+  type: class
+  source: Illuminate\Contracts\Console\PromptsForMissingInput
+- name: MigrationCreator
+  type: class
+  source: Illuminate\Database\Migrations\MigrationCreator
+- name: Composer
+  type: class
+  source: Illuminate\Support\Composer
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+properties:
+- name: signature
+  visibility: protected
+  comment: '# * The console command signature.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+- name: creator
+  visibility: protected
+  comment: '# * The migration creator instance.
+
+    # *
+
+    # * @var \Illuminate\Database\Migrations\MigrationCreator'
+- name: composer
+  visibility: protected
+  comment: '# * The Composer instance.
+
+    # *
+
+    # * @var \Illuminate\Support\Composer
+
+    # *
+
+    # * @deprecated Will be removed in a future Laravel version.'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: creator
+  - name: composer
+  comment: "# * The console command signature.\n# *\n# * @var string\n# */\n# protected\
+    \ $signature = 'make:migration {name : The name of the migration}\n# {--create=\
+    \ : The table to be created}\n# {--table= : The table to migrate}\n# {--path=\
+    \ : The location where the migration file should be created}\n# {--realpath :\
+    \ Indicate any provided migration file paths are pre-resolved absolute paths}\n\
+    # {--fullpath : Output the full path of the migration (Deprecated)}';\n# \n# /**\n\
+    # * The console command description.\n# *\n# * @var string\n# */\n# protected\
+    \ $description = 'Create a new migration file';\n# \n# /**\n# * The migration\
+    \ creator instance.\n# *\n# * @var \\Illuminate\\Database\\Migrations\\MigrationCreator\n\
+    # */\n# protected $creator;\n# \n# /**\n# * The Composer instance.\n# *\n# * @var\
+    \ \\Illuminate\\Support\\Composer\n# *\n# * @deprecated Will be removed in a future\
+    \ Laravel version.\n# */\n# protected $composer;\n# \n# /**\n# * Create a new\
+    \ migration install command instance.\n# *\n# * @param  \\Illuminate\\Database\\\
+    Migrations\\MigrationCreator  $creator\n# * @param  \\Illuminate\\Support\\Composer\
+    \  $composer\n# * @return void"
+- name: handle
+  visibility: public
+  parameters: []
+  comment: '# * Execute the console command.
+
+    # *
+
+    # * @return void'
+- name: writeMigration
+  visibility: protected
+  parameters:
+  - name: name
+  - name: table
+  - name: create
+  comment: '# * Write the migration file to disk.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string  $table
+
+    # * @param  bool  $create
+
+    # * @return void'
+- name: getMigrationPath
+  visibility: protected
+  parameters: []
+  comment: '# * Get migration path (either specified by ''--path'' option or default
+    location).
+
+    # *
+
+    # * @return string'
+- name: promptForMissingArgumentsUsing
+  visibility: protected
+  parameters: []
+  comment: '# * Prompt for missing input arguments using the returned questions.
+
+    # *
+
+    # * @return array'
+traits:
+- Illuminate\Contracts\Console\PromptsForMissingInput
+- Illuminate\Database\Migrations\MigrationCreator
+- Illuminate\Support\Composer
+- Illuminate\Support\Str
+- Symfony\Component\Console\Attribute\AsCommand
+interfaces:
+- PromptsForMissingInput

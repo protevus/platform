@@ -1,0 +1,63 @@
+name: RemotePackageDownloaderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ImportMapConfigReader
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapConfigReader
+- name: ImportMapEntries
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapEntries
+- name: ImportMapEntry
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapEntry
+- name: ImportMapType
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapType
+- name: RemotePackageDownloader
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\RemotePackageDownloader
+- name: RemotePackageStorage
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\RemotePackageStorage
+- name: PackageResolverInterface
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\Resolver\PackageResolverInterface
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testDownloadPackagesDownloadsEverythingWithNoInstalled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPackagesWithCorrectInstalledVersionSkipped
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetVendorDir
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\AssetMapper\ImportMap\ImportMapConfigReader
+- Symfony\Component\AssetMapper\ImportMap\ImportMapEntries
+- Symfony\Component\AssetMapper\ImportMap\ImportMapEntry
+- Symfony\Component\AssetMapper\ImportMap\ImportMapType
+- Symfony\Component\AssetMapper\ImportMap\RemotePackageDownloader
+- Symfony\Component\AssetMapper\ImportMap\RemotePackageStorage
+- Symfony\Component\AssetMapper\ImportMap\Resolver\PackageResolverInterface
+- Symfony\Component\Filesystem\Filesystem
+interfaces: []

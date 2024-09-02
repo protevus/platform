@@ -1,0 +1,28 @@
+name: BaseValidatorExtension
+class_comment: null
+dependencies:
+- name: AbstractTypeExtension
+  type: class
+  source: Symfony\Component\Form\AbstractTypeExtension
+- name: Options
+  type: class
+  source: Symfony\Component\OptionsResolver\Options
+- name: OptionsResolver
+  type: class
+  source: Symfony\Component\OptionsResolver\OptionsResolver
+- name: GroupSequence
+  type: class
+  source: Symfony\Component\Validator\Constraints\GroupSequence
+properties: []
+methods:
+- name: configureOptions
+  visibility: public
+  parameters:
+  - name: resolver
+  comment: null
+traits:
+- Symfony\Component\Form\AbstractTypeExtension
+- Symfony\Component\OptionsResolver\Options
+- Symfony\Component\OptionsResolver\OptionsResolver
+- Symfony\Component\Validator\Constraints\GroupSequence
+interfaces: []

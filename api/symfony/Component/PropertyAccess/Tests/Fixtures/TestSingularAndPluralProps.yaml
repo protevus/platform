@@ -1,0 +1,48 @@
+name: TestSingularAndPluralProps
+class_comment: '# * Notice we don''t have getter/setter for emails
+
+  # * because we count on adder/remover.'
+dependencies: []
+properties:
+- name: email
+  visibility: private
+  comment: '# * Notice we don''t have getter/setter for emails
+
+    # * because we count on adder/remover.
+
+    # */
+
+    # class TestSingularAndPluralProps
+
+    # {
+
+    # /** @var string|null'
+- name: emails
+  visibility: private
+  comment: '# @var array'
+methods:
+- name: getEmail
+  visibility: public
+  parameters: []
+  comment: null
+- name: setEmail
+  visibility: public
+  parameters:
+  - name: email
+  comment: null
+- name: getEmails
+  visibility: public
+  parameters: []
+  comment: null
+- name: addEmail
+  visibility: public
+  parameters:
+  - name: email
+  comment: null
+- name: removeEmail
+  visibility: public
+  parameters:
+  - name: email
+  comment: null
+traits: []
+interfaces: []

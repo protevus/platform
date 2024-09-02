@@ -1,0 +1,189 @@
+name: FileLoader
+class_comment: null
+dependencies:
+- name: Loader
+  type: class
+  source: Illuminate\Contracts\Translation\Loader
+- name: Filesystem
+  type: class
+  source: Illuminate\Filesystem\Filesystem
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+properties:
+- name: files
+  visibility: protected
+  comment: '# * The filesystem instance.
+
+    # *
+
+    # * @var \Illuminate\Filesystem\Filesystem'
+- name: paths
+  visibility: protected
+  comment: '# * The default paths for the loader.
+
+    # *
+
+    # * @var array'
+- name: jsonPaths
+  visibility: protected
+  comment: '# * All of the registered paths to JSON translation files.
+
+    # *
+
+    # * @var array'
+- name: hints
+  visibility: protected
+  comment: '# * All of the namespace hints.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: files
+  - name: path
+  comment: "# * The filesystem instance.\n# *\n# * @var \\Illuminate\\Filesystem\\\
+    Filesystem\n# */\n# protected $files;\n# \n# /**\n# * The default paths for the\
+    \ loader.\n# *\n# * @var array\n# */\n# protected $paths;\n# \n# /**\n# * All\
+    \ of the registered paths to JSON translation files.\n# *\n# * @var array\n# */\n\
+    # protected $jsonPaths = [];\n# \n# /**\n# * All of the namespace hints.\n# *\n\
+    # * @var array\n# */\n# protected $hints = [];\n# \n# /**\n# * Create a new file\
+    \ loader instance.\n# *\n# * @param  \\Illuminate\\Filesystem\\Filesystem  $files\n\
+    # * @param  array|string  $path\n# * @return void"
+- name: load
+  visibility: public
+  parameters:
+  - name: locale
+  - name: group
+  - name: namespace
+    default: 'null'
+  comment: '# * Load the messages for the given locale.
+
+    # *
+
+    # * @param  string  $locale
+
+    # * @param  string  $group
+
+    # * @param  string|null  $namespace
+
+    # * @return array'
+- name: loadNamespaced
+  visibility: protected
+  parameters:
+  - name: locale
+  - name: group
+  - name: namespace
+  comment: '# * Load a namespaced translation group.
+
+    # *
+
+    # * @param  string  $locale
+
+    # * @param  string  $group
+
+    # * @param  string  $namespace
+
+    # * @return array'
+- name: loadNamespaceOverrides
+  visibility: protected
+  parameters:
+  - name: lines
+  - name: locale
+  - name: group
+  - name: namespace
+  comment: '# * Load a local namespaced translation group for overrides.
+
+    # *
+
+    # * @param  array  $lines
+
+    # * @param  string  $locale
+
+    # * @param  string  $group
+
+    # * @param  string  $namespace
+
+    # * @return array'
+- name: loadPaths
+  visibility: protected
+  parameters:
+  - name: paths
+  - name: locale
+  - name: group
+  comment: '# * Load a locale from a given path.
+
+    # *
+
+    # * @param  array  $paths
+
+    # * @param  string  $locale
+
+    # * @param  string  $group
+
+    # * @return array'
+- name: loadJsonPaths
+  visibility: protected
+  parameters:
+  - name: locale
+  comment: '# * Load a locale from the given JSON file path.
+
+    # *
+
+    # * @param  string  $locale
+
+    # * @return array
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: addNamespace
+  visibility: public
+  parameters:
+  - name: namespace
+  - name: hint
+  comment: '# * Add a new namespace to the loader.
+
+    # *
+
+    # * @param  string  $namespace
+
+    # * @param  string  $hint
+
+    # * @return void'
+- name: namespaces
+  visibility: public
+  parameters: []
+  comment: '# * Get an array of all the registered namespaces.
+
+    # *
+
+    # * @return array'
+- name: addJsonPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Add a new JSON path to the loader.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return void'
+- name: jsonPaths
+  visibility: public
+  parameters: []
+  comment: '# * Get an array of all the registered paths to JSON translation files.
+
+    # *
+
+    # * @return array'
+traits:
+- Illuminate\Contracts\Translation\Loader
+- Illuminate\Filesystem\Filesystem
+- RuntimeException
+interfaces:
+- Loader

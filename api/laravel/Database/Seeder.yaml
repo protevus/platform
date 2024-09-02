@@ -1,0 +1,163 @@
+name: Seeder
+class_comment: null
+dependencies:
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+- name: TwoColumnDetail
+  type: class
+  source: Illuminate\Console\View\Components\TwoColumnDetail
+- name: Container
+  type: class
+  source: Illuminate\Contracts\Container\Container
+- name: WithoutModelEvents
+  type: class
+  source: Illuminate\Database\Console\Seeds\WithoutModelEvents
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties:
+- name: container
+  visibility: protected
+  comment: '# * The container instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Container\Container'
+- name: command
+  visibility: protected
+  comment: '# * The console command instance.
+
+    # *
+
+    # * @var \Illuminate\Console\Command'
+- name: called
+  visibility: protected
+  comment: '# * Seeders that have been called at least one time.
+
+    # *
+
+    # * @var array'
+methods:
+- name: call
+  visibility: public
+  parameters:
+  - name: class
+  - name: silent
+    default: 'false'
+  - name: parameters
+    default: '[]'
+  comment: "# * The container instance.\n# *\n# * @var \\Illuminate\\Contracts\\Container\\\
+    Container\n# */\n# protected $container;\n# \n# /**\n# * The console command instance.\n\
+    # *\n# * @var \\Illuminate\\Console\\Command\n# */\n# protected $command;\n# \n\
+    # /**\n# * Seeders that have been called at least one time.\n# *\n# * @var array\n\
+    # */\n# protected static $called = [];\n# \n# /**\n# * Run the given seeder class.\n\
+    # *\n# * @param  array|string  $class\n# * @param  bool  $silent\n# * @param \
+    \ array  $parameters\n# * @return $this"
+- name: callWith
+  visibility: public
+  parameters:
+  - name: class
+  - name: parameters
+    default: '[]'
+  comment: '# * Run the given seeder class.
+
+    # *
+
+    # * @param  array|string  $class
+
+    # * @param  array  $parameters
+
+    # * @return void'
+- name: callSilent
+  visibility: public
+  parameters:
+  - name: class
+  - name: parameters
+    default: '[]'
+  comment: '# * Silently run the given seeder class.
+
+    # *
+
+    # * @param  array|string  $class
+
+    # * @param  array  $parameters
+
+    # * @return void'
+- name: callOnce
+  visibility: public
+  parameters:
+  - name: class
+  - name: silent
+    default: 'false'
+  - name: parameters
+    default: '[]'
+  comment: '# * Run the given seeder class once.
+
+    # *
+
+    # * @param  array|string  $class
+
+    # * @param  bool  $silent
+
+    # * @return void'
+- name: resolve
+  visibility: protected
+  parameters:
+  - name: class
+  comment: '# * Resolve an instance of the given seeder class.
+
+    # *
+
+    # * @param  string  $class
+
+    # * @return \Illuminate\Database\Seeder'
+- name: setContainer
+  visibility: public
+  parameters:
+  - name: container
+  comment: '# * Set the IoC container instance.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Container\Container  $container
+
+    # * @return $this'
+- name: setCommand
+  visibility: public
+  parameters:
+  - name: command
+  comment: '# * Set the console command instance.
+
+    # *
+
+    # * @param  \Illuminate\Console\Command  $command
+
+    # * @return $this'
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: parameters
+    default: '[]'
+  comment: '# * Run the database seeds.
+
+    # *
+
+    # * @param  array  $parameters
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+traits:
+- Illuminate\Console\Command
+- Illuminate\Console\View\Components\TwoColumnDetail
+- Illuminate\Contracts\Container\Container
+- Illuminate\Database\Console\Seeds\WithoutModelEvents
+- Illuminate\Support\Arr
+- InvalidArgumentException
+interfaces: []

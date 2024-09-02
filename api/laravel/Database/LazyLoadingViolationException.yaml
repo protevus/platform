@@ -1,0 +1,34 @@
+name: LazyLoadingViolationException
+class_comment: null
+dependencies:
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+properties:
+- name: model
+  visibility: public
+  comment: '# * The name of the affected Eloquent model.
+
+    # *
+
+    # * @var string'
+- name: relation
+  visibility: public
+  comment: '# * The name of the relation.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: model
+  - name: relation
+  comment: "# * The name of the affected Eloquent model.\n# *\n# * @var string\n#\
+    \ */\n# public $model;\n# \n# /**\n# * The name of the relation.\n# *\n# * @var\
+    \ string\n# */\n# public $relation;\n# \n# /**\n# * Create a new exception instance.\n\
+    # *\n# * @param  object  $model\n# * @param  string  $relation\n# * @return void"
+traits:
+- RuntimeException
+interfaces: []

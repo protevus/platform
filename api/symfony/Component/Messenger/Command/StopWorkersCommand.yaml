@@ -1,0 +1,54 @@
+name: StopWorkersCommand
+class_comment: null
+dependencies:
+- name: CacheItemPoolInterface
+  type: class
+  source: Psr\Cache\CacheItemPoolInterface
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: ConsoleOutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\ConsoleOutputInterface
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+- name: StopWorkerOnRestartSignalListener
+  type: class
+  source: Symfony\Component\Messenger\EventListener\StopWorkerOnRestartSignalListener
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: restartSignalCachePool
+  comment: null
+- name: configure
+  visibility: protected
+  parameters: []
+  comment: null
+- name: execute
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+traits:
+- Psr\Cache\CacheItemPoolInterface
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Output\ConsoleOutputInterface
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Style\SymfonyStyle
+- Symfony\Component\Messenger\EventListener\StopWorkerOnRestartSignalListener
+interfaces: []

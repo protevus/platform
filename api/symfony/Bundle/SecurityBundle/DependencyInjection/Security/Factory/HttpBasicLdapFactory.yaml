@@ -1,0 +1,48 @@
+name: HttpBasicLdapFactory
+class_comment: "# * HttpBasicFactory creates services for HTTP basic authentication.\n\
+  # *\n# * @author Fabien Potencier <fabien@symfony.com>\n# * @author Gr\xE9goire\
+  \ Pineau <lyrixx@lyrixx.info>\n# * @author Charles Sarrazin <charles@sarraz.in>\n\
+  # *\n# * @internal"
+dependencies:
+- name: NodeDefinition
+  type: class
+  source: Symfony\Component\Config\Definition\Builder\NodeDefinition
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: LogicException
+  type: class
+  source: Symfony\Component\Security\Core\Exception\LogicException
+- name: LdapFactoryTrait
+  type: class
+  source: LdapFactoryTrait
+properties: []
+methods:
+- name: create
+  visibility: public
+  parameters:
+  - name: container
+  - name: id
+  - name: config
+  - name: userProvider
+  - name: defaultEntryPoint
+  comment: null
+- name: addConfiguration
+  visibility: public
+  parameters:
+  - name: node
+  comment: null
+traits:
+- Symfony\Component\Config\Definition\Builder\NodeDefinition
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\Security\Core\Exception\LogicException
+- LdapFactoryTrait
+interfaces: []

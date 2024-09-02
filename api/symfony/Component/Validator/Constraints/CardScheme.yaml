@@ -1,0 +1,50 @@
+name: CardScheme
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: schemes
+  - name: message
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: "# * Validates a credit card number for a given credit card company.\n\
+    # *\n# * @author Tim Nagel <t.nagel@infinite.net.au>\n# * @author Bernhard Schussek\
+    \ <bschussek@gmail.com>\n# */\n# #[\\Attribute(\\Attribute::TARGET_PROPERTY |\
+    \ \\Attribute::TARGET_METHOD | \\Attribute::IS_REPEATABLE)]\n# class CardScheme\
+    \ extends Constraint\n# {\n# public const AMEX = 'AMEX';\n# public const CHINA_UNIONPAY\
+    \ = 'CHINA_UNIONPAY';\n# public const DINERS = 'DINERS';\n# public const DISCOVER\
+    \ = 'DISCOVER';\n# public const INSTAPAYMENT = 'INSTAPAYMENT';\n# public const\
+    \ JCB = 'JCB';\n# public const LASER = 'LASER';\n# public const MAESTRO = 'MAESTRO';\n\
+    # public const MASTERCARD = 'MASTERCARD';\n# public const MIR = 'MIR';\n# public\
+    \ const UATP = 'UATP';\n# public const VISA = 'VISA';\n# \n# public const NOT_NUMERIC_ERROR\
+    \ = 'a2ad9231-e827-485f-8a1e-ef4d9a6d5c2e';\n# public const INVALID_FORMAT_ERROR\
+    \ = 'a8faedbf-1c2f-4695-8d22-55783be8efed';\n# \n# protected const ERROR_NAMES\
+    \ = [\n# self::NOT_NUMERIC_ERROR => 'NOT_NUMERIC_ERROR',\n# self::INVALID_FORMAT_ERROR\
+    \ => 'INVALID_FORMAT_ERROR',\n# ];\n# \n# public string $message = 'Unsupported\
+    \ card type or invalid card number.';\n# public array|string|null $schemes = null;\n\
+    # \n# /**\n# * @param string|string[]|array<string,mixed>|null $schemes Name(s)\
+    \ of the number scheme(s) used to validate the credit card number\n# * @param\
+    \ string[]|null                            $groups\n# * @param array<string,mixed>\
+    \                      $options"
+- name: getDefaultOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRequiredOptions
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+interfaces: []

@@ -1,0 +1,29 @@
+name: TestTracesWithHandleTraitAction
+class_comment: '# * @see \Symfony\Component\Messenger\Tests\TraceableMessageBusTest::testItTracesDispatchWhenHandleTraitIsUsed'
+dependencies:
+- name: HandleTrait
+  type: class
+  source: Symfony\Component\Messenger\HandleTrait
+- name: MessageBusInterface
+  type: class
+  source: Symfony\Component\Messenger\MessageBusInterface
+- name: HandleTrait
+  type: class
+  source: HandleTrait
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: messageBus
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: message
+  comment: null
+traits:
+- Symfony\Component\Messenger\HandleTrait
+- Symfony\Component\Messenger\MessageBusInterface
+- HandleTrait
+interfaces: []

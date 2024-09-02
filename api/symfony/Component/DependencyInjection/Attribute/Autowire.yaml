@@ -1,0 +1,51 @@
+name: Autowire
+class_comment: null
+dependencies:
+- name: ArgumentInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ArgumentInterface
+- name: LogicException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\LogicException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: Expression
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Expression
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: value
+    default: 'null'
+  - name: service
+    default: 'null'
+  - name: expression
+    default: 'null'
+  - name: env
+    default: 'null'
+  - name: param
+    default: 'null'
+  - name: lazy
+    default: 'false'
+  comment: "# * Attribute to tell a parameter how to be autowired.\n# *\n# * @author\
+    \ Kevin Bond <kevinbond@gmail.com>\n# */\n# #[\\Attribute(\\Attribute::TARGET_PARAMETER)]\n\
+    # class Autowire\n# {\n# public readonly string|array|Expression|Reference|ArgumentInterface|null\
+    \ $value;\n# public readonly bool|array $lazy;\n# \n# /**\n# * Use only ONE of\
+    \ the following.\n# *\n# * @param string|array|ArgumentInterface|null $value \
+    \     Value to inject (ie \"%kernel.project_dir%/some/path\")\n# * @param string|null\
+    \                         $service    Service ID (ie \"some.service\")\n# * @param\
+    \ string|null                         $expression Expression (ie 'service(\"some.service\"\
+    ).someMethod()')\n# * @param string|null                         $env        Environment\
+    \ variable name (ie 'SOME_ENV_VARIABLE')\n# * @param string|null             \
+    \            $param      Parameter name (ie 'some.parameter.name')\n# * @param\
+    \ bool|class-string|class-string[]    $lazy       Whether to use lazy-loading\
+    \ for this argument"
+traits:
+- Symfony\Component\DependencyInjection\Argument\ArgumentInterface
+- Symfony\Component\DependencyInjection\Exception\LogicException
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\ExpressionLanguage\Expression
+interfaces: []

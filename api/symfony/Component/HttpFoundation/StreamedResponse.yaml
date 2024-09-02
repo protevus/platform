@@ -1,0 +1,94 @@
+name: StreamedResponse
+class_comment: '# * StreamedResponse represents a streamed HTTP response.
+
+  # *
+
+  # * A StreamedResponse uses a callback for its content.
+
+  # *
+
+  # * The callback should use the standard PHP functions like echo
+
+  # * to stream the response back to the client. The flush() function
+
+  # * can also be used if needed.
+
+  # *
+
+  # * @see flush()
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  - name: status
+    default: '200'
+  - name: headers
+    default: '[]'
+  comment: "# * StreamedResponse represents a streamed HTTP response.\n# *\n# * A\
+    \ StreamedResponse uses a callback for its content.\n# *\n# * The callback should\
+    \ use the standard PHP functions like echo\n# * to stream the response back to\
+    \ the client. The flush() function\n# * can also be used if needed.\n# *\n# *\
+    \ @see flush()\n# *\n# * @author Fabien Potencier <fabien@symfony.com>\n# */\n\
+    # class StreamedResponse extends Response\n# {\n# protected ?\\Closure $callback\
+    \ = null;\n# protected bool $streamed = false;\n# \n# private bool $headersSent\
+    \ = false;\n# \n# /**\n# * @param int $status The HTTP status code (200 \"OK\"\
+    \ by default)"
+- name: setCallback
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Sets the PHP callback associated with this Response.
+
+    # *
+
+    # * @return $this'
+- name: getCallback
+  visibility: public
+  parameters: []
+  comment: null
+- name: sendHeaders
+  visibility: public
+  parameters:
+  - name: statusCode
+    default: 'null'
+  comment: '# * This method only sends the headers once.
+
+    # *
+
+    # * @param positive-int|null $statusCode The status code to use, override the
+    statusCode property if set and not null
+
+    # *
+
+    # * @return $this'
+- name: sendContent
+  visibility: public
+  parameters: []
+  comment: '# * This method only sends the content once.
+
+    # *
+
+    # * @return $this'
+- name: setContent
+  visibility: public
+  parameters:
+  - name: content
+  comment: '# * @return $this
+
+    # *
+
+    # * @throws \LogicException when the content is not null'
+- name: getContent
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

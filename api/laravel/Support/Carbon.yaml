@@ -1,0 +1,41 @@
+name: Carbon
+class_comment: null
+dependencies:
+- name: BaseCarbon
+  type: class
+  source: Carbon\Carbon
+- name: BaseCarbonImmutable
+  type: class
+  source: Carbon\CarbonImmutable
+- name: Conditionable
+  type: class
+  source: Illuminate\Support\Traits\Conditionable
+- name: Dumpable
+  type: class
+  source: Illuminate\Support\Traits\Dumpable
+- name: Uuid
+  type: class
+  source: Ramsey\Uuid\Uuid
+- name: Ulid
+  type: class
+  source: Symfony\Component\Uid\Ulid
+properties: []
+methods:
+- name: setTestNow
+  visibility: public
+  parameters:
+  - name: testNow
+    default: 'null'
+  comment: '# * {@inheritdoc}'
+- name: createFromId
+  visibility: public
+  parameters:
+  - name: id
+  comment: '# * Create a Carbon instance from a given ordered UUID or ULID.'
+traits:
+- Illuminate\Support\Traits\Conditionable
+- Illuminate\Support\Traits\Dumpable
+- Ramsey\Uuid\Uuid
+- Symfony\Component\Uid\Ulid
+- Conditionable
+interfaces: []

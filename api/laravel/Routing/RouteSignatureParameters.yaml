@@ -1,0 +1,49 @@
+name: RouteSignatureParameters
+class_comment: null
+dependencies:
+- name: Reflector
+  type: class
+  source: Illuminate\Support\Reflector
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: ReflectionFunction
+  type: class
+  source: ReflectionFunction
+- name: ReflectionMethod
+  type: class
+  source: ReflectionMethod
+properties: []
+methods:
+- name: fromAction
+  visibility: public
+  parameters:
+  - name: action
+  - name: conditions
+    default: '[]'
+  comment: '# * Extract the route action''s signature parameters.
+
+    # *
+
+    # * @param  array  $action
+
+    # * @param  array  $conditions
+
+    # * @return array'
+- name: fromClassMethodString
+  visibility: protected
+  parameters:
+  - name: uses
+  comment: '# * Get the parameters for the given class / method by string.
+
+    # *
+
+    # * @param  string  $uses
+
+    # * @return array'
+traits:
+- Illuminate\Support\Reflector
+- Illuminate\Support\Str
+- ReflectionFunction
+- ReflectionMethod
+interfaces: []

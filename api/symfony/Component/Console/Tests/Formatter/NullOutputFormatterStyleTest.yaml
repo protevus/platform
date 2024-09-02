@@ -1,0 +1,31 @@
+name: NullOutputFormatterStyleTest
+class_comment: '# * @author Tien Xuan Vo <tien.xuan.vo@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: NullOutputFormatterStyle
+  type: class
+  source: Symfony\Component\Console\Formatter\NullOutputFormatterStyle
+properties: []
+methods:
+- name: testApply
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetForeground
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetBackground
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOptions
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Formatter\NullOutputFormatterStyle
+interfaces: []

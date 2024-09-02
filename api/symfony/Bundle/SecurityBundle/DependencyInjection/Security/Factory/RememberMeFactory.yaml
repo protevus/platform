@@ -1,0 +1,100 @@
+name: RememberMeFactory
+class_comment: '# * @internal'
+dependencies:
+- name: DoctrineTokenProvider
+  type: class
+  source: Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider
+- name: DecoratedRememberMeHandler
+  type: class
+  source: Symfony\Bundle\SecurityBundle\RememberMe\DecoratedRememberMeHandler
+- name: NodeDefinition
+  type: class
+  source: Symfony\Component\Config\Definition\Builder\NodeDefinition
+- name: InvalidConfigurationException
+  type: class
+  source: Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+- name: FileLocator
+  type: class
+  source: Symfony\Component\Config\FileLocator
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: PrependExtensionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface
+- name: PhpFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: Cookie
+  type: class
+  source: Symfony\Component\HttpFoundation\Cookie
+- name: CacheTokenVerifier
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\RememberMe\CacheTokenVerifier
+properties: []
+methods:
+- name: createAuthenticator
+  visibility: public
+  parameters:
+  - name: container
+  - name: firewallName
+  - name: config
+  - name: userProviderId
+  comment: null
+- name: getPriority
+  visibility: public
+  parameters: []
+  comment: null
+- name: getKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: addConfiguration
+  visibility: public
+  parameters:
+  - name: node
+  comment: null
+- name: createTokenProvider
+  visibility: private
+  parameters:
+  - name: container
+  - name: firewallName
+  - name: config
+  comment: null
+- name: createTokenVerifier
+  visibility: private
+  parameters:
+  - name: container
+  - name: firewallName
+  - name: serviceId
+  comment: null
+- name: prepend
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Bridge\Doctrine\Security\RememberMe\DoctrineTokenProvider
+- Symfony\Bundle\SecurityBundle\RememberMe\DecoratedRememberMeHandler
+- Symfony\Component\Config\Definition\Builder\NodeDefinition
+- Symfony\Component\Config\Definition\Exception\InvalidConfigurationException
+- Symfony\Component\Config\FileLocator
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface
+- Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\HttpFoundation\Cookie
+- Symfony\Component\Security\Core\Authentication\RememberMe\CacheTokenVerifier
+interfaces:
+- AuthenticatorFactoryInterface

@@ -1,0 +1,34 @@
+name: ResolveServiceSubscribersPass
+class_comment: '# * Compiler pass to inject their service locator to service subscribers.
+
+  # *
+
+  # * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: ServiceProviderInterface
+  type: class
+  source: Symfony\Contracts\Service\ServiceProviderInterface
+properties: []
+methods:
+- name: processValue
+  visibility: protected
+  parameters:
+  - name: value
+  - name: isRoot
+    default: 'false'
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Contracts\Service\ServiceProviderInterface
+interfaces: []

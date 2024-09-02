@@ -1,0 +1,22 @@
+name: PendingClosureDispatch
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+properties: []
+methods:
+- name: catch
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Add a callback to be executed if the job fails.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return $this'
+traits:
+- Closure
+interfaces: []

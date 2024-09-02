@@ -1,0 +1,64 @@
+name: MimeTypes
+class_comment: null
+dependencies:
+- name: LogicException
+  type: class
+  source: Symfony\Component\Mime\Exception\LogicException
+properties: []
+methods:
+- name: registerGuesser
+  visibility: public
+  parameters:
+  - name: guesser
+  comment: "# * Manages MIME types and file extensions.\n# *\n# * For MIME type guessing,\
+    \ you can register custom guessers\n# * by calling the registerGuesser() method.\n\
+    # * Custom guessers are always called before any default ones:\n# *\n# *     $guesser\
+    \ = new MimeTypes();\n# *     $guesser->registerGuesser(new MyCustomMimeTypeGuesser());\n\
+    # *\n# * If you want to change the order of the default guessers, just re-register\
+    \ your\n# * preferred one as a custom one. The last registered guesser is preferred\
+    \ over\n# * previously registered ones.\n# *\n# * Re-registering a built-in guesser\
+    \ also allows you to configure it:\n# *\n# *     $guesser = new MimeTypes();\n\
+    # *     $guesser->registerGuesser(new FileinfoMimeTypeGuesser('/path/to/magic/file'));\n\
+    # *\n# * @author Fabien Potencier <fabien@symfony.com>\n# */\n# final class MimeTypes\
+    \ implements MimeTypesInterface\n# {\n# private array $extensions = [];\n# private\
+    \ array $mimeTypes = [];\n# \n# /**\n# * @var MimeTypeGuesserInterface[]\n# */\n\
+    # private array $guessers = [];\n# private static MimeTypes $default;\n# \n# public\
+    \ function __construct(array $map = [])\n# {\n# foreach ($map as $mimeType =>\
+    \ $extensions) {\n# $this->extensions[$mimeType] = $extensions;\n# \n# foreach\
+    \ ($extensions as $extension) {\n# $this->mimeTypes[$extension][] = $mimeType;\n\
+    # }\n# }\n# $this->registerGuesser(new FileBinaryMimeTypeGuesser());\n# $this->registerGuesser(new\
+    \ FileinfoMimeTypeGuesser());\n# }\n# \n# public static function setDefault(self\
+    \ $default): void\n# {\n# self::$default = $default;\n# }\n# \n# public static\
+    \ function getDefault(): self\n# {\n# return self::$default ??= new self();\n\
+    # }\n# \n# /**\n# * Registers a MIME type guesser.\n# *\n# * The last registered\
+    \ guesser has precedence over the other ones."
+- name: getExtensions
+  visibility: public
+  parameters:
+  - name: mimeType
+  comment: null
+- name: getMimeTypes
+  visibility: public
+  parameters:
+  - name: ext
+  comment: null
+- name: isGuesserSupported
+  visibility: public
+  parameters: []
+  comment: null
+- name: guessMimeType
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * The file is passed to each registered MIME type guesser in reverse
+    order
+
+    # * of their registration (last registered is queried first). Once a guesser
+
+    # * returns a value that is not null, this method terminates and returns the
+
+    # * value.'
+traits:
+- Symfony\Component\Mime\Exception\LogicException
+interfaces:
+- MimeTypesInterface

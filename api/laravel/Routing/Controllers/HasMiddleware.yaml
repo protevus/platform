@@ -1,0 +1,15 @@
+name: HasMiddleware
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: middleware
+  visibility: public
+  parameters: []
+  comment: '# * Get the middleware that should be assigned to the controller.
+
+    # *
+
+    # * @return \Illuminate\Routing\Controllers\Middleware[]'
+traits: []
+interfaces: []

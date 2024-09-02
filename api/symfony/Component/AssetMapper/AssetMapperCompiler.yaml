@@ -1,0 +1,35 @@
+name: AssetMapperCompiler
+class_comment: '# * Runs a chain of compiles intended to adjust the source of assets.
+
+  # *
+
+  # * @final'
+dependencies:
+- name: AssetCompilerInterface
+  type: class
+  source: Symfony\Component\AssetMapper\Compiler\AssetCompilerInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: assetCompilers
+  - name: assetMapperFactory
+  comment: "# * Runs a chain of compiles intended to adjust the source of assets.\n\
+    # *\n# * @final\n# */\n# class AssetMapperCompiler\n# {\n# private AssetMapperInterface\
+    \ $assetMapper;\n# \n# /**\n# * @param iterable<AssetCompilerInterface> $assetCompilers\n\
+    # * @param \\Closure(): AssetMapperInterface $assetMapperFactory"
+- name: compile
+  visibility: public
+  parameters:
+  - name: content
+  - name: asset
+  comment: null
+- name: supports
+  visibility: public
+  parameters:
+  - name: asset
+  comment: null
+traits:
+- Symfony\Component\AssetMapper\Compiler\AssetCompilerInterface
+interfaces: []

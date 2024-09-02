@@ -1,0 +1,79 @@
+name: MappedAssetFactory
+class_comment: '# * Creates MappedAsset objects by reading their contents & passing
+  it through compilers.'
+dependencies:
+- name: AssetMapperCompiler
+  type: class
+  source: Symfony\Component\AssetMapper\AssetMapperCompiler
+- name: CircularAssetsException
+  type: class
+  source: Symfony\Component\AssetMapper\Exception\CircularAssetsException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\AssetMapper\Exception\RuntimeException
+- name: MappedAsset
+  type: class
+  source: Symfony\Component\AssetMapper\MappedAsset
+- name: PublicAssetsPathResolverInterface
+  type: class
+  source: Symfony\Component\AssetMapper\Path\PublicAssetsPathResolverInterface
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+properties: []
+methods:
+- name: getDigest
+  visibility: private
+  parameters:
+  - name: asset
+  - name: content
+  comment: "# * Creates MappedAsset objects by reading their contents & passing it\
+    \ through compilers.\n# */\n# class MappedAssetFactory implements MappedAssetFactoryInterface\n\
+    # {\n# private const PREDIGESTED_REGEX = '/-([0-9a-zA-Z]{7,128}\\.digested)/';\n\
+    # private const PUBLIC_DIGEST_LENGTH = 7;\n# \n# private array $assetsCache =\
+    \ [];\n# private array $assetsBeingCreated = [];\n# \n# public function __construct(\n\
+    # private readonly PublicAssetsPathResolverInterface $assetsPathResolver,\n# private\
+    \ readonly AssetMapperCompiler $compiler,\n# private readonly string $vendorDir,\n\
+    # ) {\n# }\n# \n# public function createMappedAsset(string $logicalPath, string\
+    \ $sourcePath): ?MappedAsset\n# {\n# if (isset($this->assetsBeingCreated[$logicalPath]))\
+    \ {\n# throw new CircularAssetsException($this->assetsCache[$logicalPath], \\\
+    sprintf('Circular reference detected while creating asset for \"%s\": \"%s\".',\
+    \ $logicalPath, implode(' -> ', $this->assetsBeingCreated).' -> '.$logicalPath));\n\
+    # }\n# $this->assetsBeingCreated[$logicalPath] = $logicalPath;\n# \n# if (!isset($this->assetsCache[$logicalPath]))\
+    \ {\n# $isVendor = $this->isVendor($sourcePath);\n# $asset = new MappedAsset($logicalPath,\
+    \ $sourcePath, $this->assetsPathResolver->resolvePublicPath($logicalPath), isVendor:\
+    \ $isVendor);\n# $this->assetsCache[$logicalPath] = $asset;\n# \n# $content =\
+    \ $this->compileContent($asset);\n# [$digest, $isPredigested] = $this->getDigest($asset,\
+    \ $content);\n# \n# $asset = new MappedAsset(\n# $asset->logicalPath,\n# $asset->sourcePath,\n\
+    # $asset->publicPathWithoutDigest,\n# $this->getPublicPath($asset, $content),\n\
+    # $content,\n# $digest,\n# $isPredigested,\n# $isVendor,\n# $asset->getDependencies(),\n\
+    # $asset->getFileDependencies(),\n# $asset->getJavaScriptImports(),\n# );\n# \n\
+    # $this->assetsCache[$logicalPath] = $asset;\n# }\n# \n# unset($this->assetsBeingCreated[$logicalPath]);\n\
+    # \n# return $this->assetsCache[$logicalPath];\n# }\n# \n# /**\n# * Returns an\
+    \ array of \"string digest\" and \"bool predigested\".\n# *\n# * @return array{0:\
+    \ string, 1: bool}"
+- name: compileContent
+  visibility: private
+  parameters:
+  - name: asset
+  comment: null
+- name: getPublicPath
+  visibility: private
+  parameters:
+  - name: asset
+  - name: content
+  comment: null
+- name: isVendor
+  visibility: private
+  parameters:
+  - name: sourcePath
+  comment: null
+traits:
+- Symfony\Component\AssetMapper\AssetMapperCompiler
+- Symfony\Component\AssetMapper\Exception\CircularAssetsException
+- Symfony\Component\AssetMapper\Exception\RuntimeException
+- Symfony\Component\AssetMapper\MappedAsset
+- Symfony\Component\AssetMapper\Path\PublicAssetsPathResolverInterface
+- Symfony\Component\Filesystem\Filesystem
+interfaces:
+- MappedAssetFactoryInterface

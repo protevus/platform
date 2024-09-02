@@ -1,0 +1,25 @@
+name: AbstractAttributeRoutingTestCase
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+properties: []
+methods:
+- name: testAnnotatedController
+  visibility: public
+  parameters:
+  - name: path
+  - name: expectedValue
+  comment: '# * @dataProvider getRoutes'
+- name: getRoutes
+  visibility: public
+  parameters: []
+  comment: null
+- name: getTestCaseApp
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+interfaces: []

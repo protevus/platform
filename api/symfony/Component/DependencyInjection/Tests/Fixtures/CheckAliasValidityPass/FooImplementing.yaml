@@ -1,0 +1,8 @@
+name: FooImplementing
+class_comment: null
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- FooInterface

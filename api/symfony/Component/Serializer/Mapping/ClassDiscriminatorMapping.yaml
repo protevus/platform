@@ -1,0 +1,42 @@
+name: ClassDiscriminatorMapping
+class_comment: '# * @author Samuel Roze <samuel.roze@gmail.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: typeProperty
+  - name: typesMapping
+    default: '[]'
+  comment: '# * @author Samuel Roze <samuel.roze@gmail.com>
+
+    # */
+
+    # class ClassDiscriminatorMapping
+
+    # {
+
+    # /**
+
+    # * @param array<string, string> $typesMapping'
+- name: getTypeProperty
+  visibility: public
+  parameters: []
+  comment: null
+- name: getClassForType
+  visibility: public
+  parameters:
+  - name: type
+  comment: null
+- name: getMappedObjectType
+  visibility: public
+  parameters:
+  - name: object
+  comment: null
+- name: getTypesMapping
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

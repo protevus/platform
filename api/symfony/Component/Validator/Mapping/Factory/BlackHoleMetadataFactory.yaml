@@ -1,0 +1,38 @@
+name: BlackHoleMetadataFactory
+class_comment: '# * Metadata factory that does not store metadata.
+
+  # *
+
+  # * This implementation is useful if you want to validate values against
+
+  # * constraints only and you don''t need to add constraints to classes and
+
+  # * properties.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: LogicException
+  type: class
+  source: Symfony\Component\Validator\Exception\LogicException
+- name: MetadataInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\MetadataInterface
+properties: []
+methods:
+- name: getMetadataFor
+  visibility: public
+  parameters:
+  - name: value
+  comment: null
+- name: hasMetadataFor
+  visibility: public
+  parameters:
+  - name: value
+  comment: null
+traits:
+- Symfony\Component\Validator\Exception\LogicException
+- Symfony\Component\Validator\Mapping\MetadataInterface
+interfaces:
+- MetadataFactoryInterface

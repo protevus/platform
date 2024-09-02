@@ -1,0 +1,104 @@
+name: PostmarkApiTransport
+class_comment: '# * @author Kevin Verschaeve'
+dependencies:
+- name: EventDispatcherInterface
+  type: class
+  source: Psr\EventDispatcher\EventDispatcherInterface
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: PostmarkDeliveryEvent
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Postmark\Event\PostmarkDeliveryEvent
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: HttpTransportException
+  type: class
+  source: Symfony\Component\Mailer\Exception\HttpTransportException
+- name: TransportException
+  type: class
+  source: Symfony\Component\Mailer\Exception\TransportException
+- name: MetadataHeader
+  type: class
+  source: Symfony\Component\Mailer\Header\MetadataHeader
+- name: TagHeader
+  type: class
+  source: Symfony\Component\Mailer\Header\TagHeader
+- name: SentMessage
+  type: class
+  source: Symfony\Component\Mailer\SentMessage
+- name: AbstractApiTransport
+  type: class
+  source: Symfony\Component\Mailer\Transport\AbstractApiTransport
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+- name: DecodingExceptionInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface
+- name: TransportExceptionInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+- name: HttpClientInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\HttpClientInterface
+- name: ResponseInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\ResponseInterface
+properties: []
+methods:
+- name: setMessageStream
+  visibility: public
+  parameters:
+  - name: messageStream
+  comment: "# * @author Kevin Verschaeve\n# */\n# class PostmarkApiTransport extends\
+    \ AbstractApiTransport\n# {\n# private const HOST = 'api.postmarkapp.com';\n#\
+    \ private const CODE_INACTIVE_RECIPIENT = 406;\n# \n# private ?string $messageStream\
+    \ = null;\n# \n# public function __construct(\n# #[\\SensitiveParameter] private\
+    \ string $key,\n# ?HttpClientInterface $client = null,\n# private ?EventDispatcherInterface\
+    \ $dispatcher = null,\n# ?LoggerInterface $logger = null,\n# ) {\n# parent::__construct($client,\
+    \ $dispatcher, $logger);\n# }\n# \n# /**\n# * @return $this"
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: doSendApi
+  visibility: protected
+  parameters:
+  - name: sentMessage
+  - name: email
+  - name: envelope
+  comment: null
+- name: getPayload
+  visibility: private
+  parameters:
+  - name: email
+  - name: envelope
+  comment: null
+- name: getAttachments
+  visibility: private
+  parameters:
+  - name: email
+  comment: null
+- name: getEndpoint
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Psr\EventDispatcher\EventDispatcherInterface
+- Psr\Log\LoggerInterface
+- Symfony\Component\Mailer\Bridge\Postmark\Event\PostmarkDeliveryEvent
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mailer\Exception\HttpTransportException
+- Symfony\Component\Mailer\Exception\TransportException
+- Symfony\Component\Mailer\Header\MetadataHeader
+- Symfony\Component\Mailer\Header\TagHeader
+- Symfony\Component\Mailer\SentMessage
+- Symfony\Component\Mailer\Transport\AbstractApiTransport
+- Symfony\Component\Mime\Email
+- Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface
+- Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface
+- Symfony\Contracts\HttpClient\HttpClientInterface
+- Symfony\Contracts\HttpClient\ResponseInterface
+interfaces: []

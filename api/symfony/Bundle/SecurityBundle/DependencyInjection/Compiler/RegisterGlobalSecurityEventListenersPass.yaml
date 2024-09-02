@@ -1,0 +1,78 @@
+name: RegisterGlobalSecurityEventListenersPass
+class_comment: '# * Makes sure all event listeners on the global dispatcher are also
+  listening
+
+  # * to events on the firewall-specific dispatchers.
+
+  # *
+
+  # * This compiler pass must be run after RegisterListenersPass of the
+
+  # * EventDispatcher component.
+
+  # *
+
+  # * @author Wouter de Jong <wouter@wouterj.nl>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: CompilerPassInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: AuthenticationEvents
+  type: class
+  source: Symfony\Component\Security\Core\AuthenticationEvents
+- name: AuthenticationSuccessEvent
+  type: class
+  source: Symfony\Component\Security\Core\Event\AuthenticationSuccessEvent
+- name: AuthenticationTokenCreatedEvent
+  type: class
+  source: Symfony\Component\Security\Http\Event\AuthenticationTokenCreatedEvent
+- name: CheckPassportEvent
+  type: class
+  source: Symfony\Component\Security\Http\Event\CheckPassportEvent
+- name: InteractiveLoginEvent
+  type: class
+  source: Symfony\Component\Security\Http\Event\InteractiveLoginEvent
+- name: LoginFailureEvent
+  type: class
+  source: Symfony\Component\Security\Http\Event\LoginFailureEvent
+- name: LoginSuccessEvent
+  type: class
+  source: Symfony\Component\Security\Http\Event\LoginSuccessEvent
+- name: LogoutEvent
+  type: class
+  source: Symfony\Component\Security\Http\Event\LogoutEvent
+- name: TokenDeauthenticatedEvent
+  type: class
+  source: Symfony\Component\Security\Http\Event\TokenDeauthenticatedEvent
+- name: SecurityEvents
+  type: class
+  source: Symfony\Component\Security\Http\SecurityEvents
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\Security\Core\AuthenticationEvents
+- Symfony\Component\Security\Core\Event\AuthenticationSuccessEvent
+- Symfony\Component\Security\Http\Event\AuthenticationTokenCreatedEvent
+- Symfony\Component\Security\Http\Event\CheckPassportEvent
+- Symfony\Component\Security\Http\Event\InteractiveLoginEvent
+- Symfony\Component\Security\Http\Event\LoginFailureEvent
+- Symfony\Component\Security\Http\Event\LoginSuccessEvent
+- Symfony\Component\Security\Http\Event\LogoutEvent
+- Symfony\Component\Security\Http\Event\TokenDeauthenticatedEvent
+- Symfony\Component\Security\Http\SecurityEvents
+interfaces:
+- CompilerPassInterface

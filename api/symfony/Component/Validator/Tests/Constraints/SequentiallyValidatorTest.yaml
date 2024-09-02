@@ -1,0 +1,63 @@
+name: SequentiallyValidatorTest
+class_comment: null
+dependencies:
+- name: GreaterThan
+  type: class
+  source: Symfony\Component\Validator\Constraints\GreaterThan
+- name: NotEqualTo
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotEqualTo
+- name: Range
+  type: class
+  source: Symfony\Component\Validator\Constraints\Range
+- name: Regex
+  type: class
+  source: Symfony\Component\Validator\Constraints\Regex
+- name: Sequentially
+  type: class
+  source: Symfony\Component\Validator\Constraints\Sequentially
+- name: SequentiallyValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\SequentiallyValidator
+- name: Type
+  type: class
+  source: Symfony\Component\Validator\Constraints\Type
+- name: ConstraintViolation
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolation
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+- name: Validation
+  type: class
+  source: Symfony\Component\Validator\Validation
+properties: []
+methods:
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testWalkThroughConstraints
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStopsAtFirstConstraintWithViolations
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNestedConstraintsAreNotExecutedWhenGroupDoesNotMatch
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\GreaterThan
+- Symfony\Component\Validator\Constraints\NotEqualTo
+- Symfony\Component\Validator\Constraints\Range
+- Symfony\Component\Validator\Constraints\Regex
+- Symfony\Component\Validator\Constraints\Sequentially
+- Symfony\Component\Validator\Constraints\SequentiallyValidator
+- Symfony\Component\Validator\Constraints\Type
+- Symfony\Component\Validator\ConstraintViolation
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+- Symfony\Component\Validator\Validation
+interfaces: []

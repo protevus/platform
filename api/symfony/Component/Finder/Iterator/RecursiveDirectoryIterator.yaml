@@ -1,0 +1,60 @@
+name: RecursiveDirectoryIterator
+class_comment: '# * Extends the \RecursiveDirectoryIterator to support relative paths.
+
+  # *
+
+  # * @author Victor Berchet <victor@suumit.com>
+
+  # *
+
+  # * @extends \RecursiveDirectoryIterator<string, SplFileInfo>'
+dependencies:
+- name: AccessDeniedException
+  type: class
+  source: Symfony\Component\Finder\Exception\AccessDeniedException
+- name: SplFileInfo
+  type: class
+  source: Symfony\Component\Finder\SplFileInfo
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: path
+  - name: flags
+  - name: ignoreUnreadableDirs
+    default: 'false'
+  comment: "# * Extends the \\RecursiveDirectoryIterator to support relative paths.\n\
+    # *\n# * @author Victor Berchet <victor@suumit.com>\n# *\n# * @extends \\RecursiveDirectoryIterator<string,\
+    \ SplFileInfo>\n# */\n# class RecursiveDirectoryIterator extends \\RecursiveDirectoryIterator\n\
+    # {\n# private bool $ignoreUnreadableDirs;\n# private bool $ignoreFirstRewind\
+    \ = true;\n# \n# // these 3 properties take part of the performance optimization\
+    \ to avoid redoing the same work in all iterations\n# private string $rootPath;\n\
+    # private string $subPath;\n# private string $directorySeparator = '/';\n# \n\
+    # /**\n# * @throws \\RuntimeException"
+- name: current
+  visibility: public
+  parameters: []
+  comment: '# * Return an instance of SplFileInfo with support for relative paths.'
+- name: hasChildren
+  visibility: public
+  parameters:
+  - name: allowLinks
+    default: 'false'
+  comment: null
+- name: getChildren
+  visibility: public
+  parameters: []
+  comment: '# * @throws AccessDeniedException'
+- name: next
+  visibility: public
+  parameters: []
+  comment: null
+- name: rewind
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Finder\Exception\AccessDeniedException
+- Symfony\Component\Finder\SplFileInfo
+interfaces: []

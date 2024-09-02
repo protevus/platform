@@ -1,0 +1,27 @@
+name: RemoveAbstractDefinitionsPass
+class_comment: '# * Removes abstract Definitions.'
+dependencies:
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: '# * Removes abstract Definitions.
+
+    # */
+
+    # class RemoveAbstractDefinitionsPass implements CompilerPassInterface
+
+    # {
+
+    # /**
+
+    # * Removes abstract definitions from the ContainerBuilder.'
+traits:
+- Symfony\Component\DependencyInjection\ContainerBuilder
+interfaces:
+- CompilerPassInterface

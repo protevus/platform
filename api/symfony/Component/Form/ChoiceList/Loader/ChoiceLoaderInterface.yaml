@@ -1,0 +1,115 @@
+name: ChoiceLoaderInterface
+class_comment: null
+dependencies:
+- name: ChoiceListInterface
+  type: class
+  source: Symfony\Component\Form\ChoiceList\ChoiceListInterface
+properties: []
+methods:
+- name: loadChoiceList
+  visibility: public
+  parameters:
+  - name: value
+    default: 'null'
+  comment: '# * Loads a choice list.
+
+    # *
+
+    # * The methods {@link loadChoicesForValues()} and {@link loadValuesForChoices()}
+
+    # * can be used to load the list only partially in cases where a fully-loaded
+
+    # * list is not necessary.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # interface ChoiceLoaderInterface
+
+    # {
+
+    # /**
+
+    # * Loads a list of choices.
+
+    # *
+
+    # * Optionally, a callable can be passed for generating the choice values.
+
+    # * The callable receives the choice as only argument.
+
+    # * Null may be passed when the choice list contains the empty value.
+
+    # *
+
+    # * @param callable|null $value The callable which generates the values
+
+    # *                             from choices'
+- name: loadChoicesForValues
+  visibility: public
+  parameters:
+  - name: values
+  - name: value
+    default: 'null'
+  comment: '# * Loads the choices corresponding to the given values.
+
+    # *
+
+    # * The choices are returned with the same keys and in the same order as the
+
+    # * corresponding values in the given array.
+
+    # *
+
+    # * Optionally, a callable can be passed for generating the choice values.
+
+    # * The callable receives the choice as only argument.
+
+    # * Null may be passed when the choice list contains the empty value.
+
+    # *
+
+    # * @param string[]      $values An array of choice values. Non-existing
+
+    # *                              values in this array are ignored
+
+    # * @param callable|null $value  The callable generating the choice values'
+- name: loadValuesForChoices
+  visibility: public
+  parameters:
+  - name: choices
+  - name: value
+    default: 'null'
+  comment: '# * Loads the values corresponding to the given choices.
+
+    # *
+
+    # * The values are returned with the same keys and in the same order as the
+
+    # * corresponding choices in the given array.
+
+    # *
+
+    # * Optionally, a callable can be passed for generating the choice values.
+
+    # * The callable receives the choice as only argument.
+
+    # * Null may be passed when the choice list contains the empty value.
+
+    # *
+
+    # * @param array         $choices An array of choices. Non-existing choices in
+
+    # *                               this array are ignored
+
+    # * @param callable|null $value   The callable generating the choice values
+
+    # *
+
+    # * @return string[]'
+traits:
+- Symfony\Component\Form\ChoiceList\ChoiceListInterface
+interfaces: []

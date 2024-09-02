@@ -1,0 +1,44 @@
+name: MultiplePcreFilterIteratorTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: MultiplePcreFilterIterator
+  type: class
+  source: Symfony\Component\Finder\Iterator\MultiplePcreFilterIterator
+properties: []
+methods:
+- name: testIsRegex
+  visibility: public
+  parameters:
+  - name: string
+  - name: isRegex
+  - name: message
+  comment: '# * @dataProvider getIsRegexFixtures'
+- name: getIsRegexFixtures
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters: []
+  comment: null
+- name: accept
+  visibility: public
+  parameters: []
+  comment: null
+- name: isRegex
+  visibility: public
+  parameters:
+  - name: str
+  comment: null
+- name: toRegex
+  visibility: public
+  parameters:
+  - name: str
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Finder\Iterator\MultiplePcreFilterIterator
+interfaces: []

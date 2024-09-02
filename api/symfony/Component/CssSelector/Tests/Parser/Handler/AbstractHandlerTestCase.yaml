@@ -1,0 +1,59 @@
+name: AbstractHandlerTestCase
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Reader
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Reader
+- name: Token
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Token
+- name: TokenStream
+  type: class
+  source: Symfony\Component\CssSelector\Parser\TokenStream
+properties: []
+methods:
+- name: testHandleValue
+  visibility: public
+  parameters:
+  - name: value
+  - name: expectedToken
+  - name: remainingContent
+  comment: "# * @author Jean-Fran\xE7ois Simon <contact@jfsimon.fr>\n# */\n# abstract\
+    \ class AbstractHandlerTestCase extends TestCase\n# {\n# /** @dataProvider getHandleValueTestData"
+- name: testDontHandleValue
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# @dataProvider getDontHandleValueTestData'
+- name: getHandleValueTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDontHandleValueTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: generateHandler
+  visibility: protected
+  parameters: []
+  comment: null
+- name: assertStreamEmpty
+  visibility: protected
+  parameters:
+  - name: stream
+  comment: null
+- name: assertRemainingContent
+  visibility: protected
+  parameters:
+  - name: reader
+  - name: remainingContent
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\CssSelector\Parser\Reader
+- Symfony\Component\CssSelector\Parser\Token
+- Symfony\Component\CssSelector\Parser\TokenStream
+interfaces: []

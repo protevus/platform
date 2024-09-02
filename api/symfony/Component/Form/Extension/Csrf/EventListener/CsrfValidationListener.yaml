@@ -1,0 +1,63 @@
+name: CsrfValidationListener
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: FormError
+  type: class
+  source: Symfony\Component\Form\FormError
+- name: FormEvent
+  type: class
+  source: Symfony\Component\Form\FormEvent
+- name: FormEvents
+  type: class
+  source: Symfony\Component\Form\FormEvents
+- name: ServerParams
+  type: class
+  source: Symfony\Component\Form\Util\ServerParams
+- name: CsrfToken
+  type: class
+  source: Symfony\Component\Security\Csrf\CsrfToken
+- name: CsrfTokenManagerInterface
+  type: class
+  source: Symfony\Component\Security\Csrf\CsrfTokenManagerInterface
+- name: TranslatorInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatorInterface
+properties: []
+methods:
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: fieldName
+  - name: tokenManager
+  - name: tokenId
+  - name: errorMessage
+  - name: translator
+    default: 'null'
+  - name: translationDomain
+    default: 'null'
+  - name: serverParams
+    default: 'null'
+  comment: null
+- name: preSubmit
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\Form\FormError
+- Symfony\Component\Form\FormEvent
+- Symfony\Component\Form\FormEvents
+- Symfony\Component\Form\Util\ServerParams
+- Symfony\Component\Security\Csrf\CsrfToken
+- Symfony\Component\Security\Csrf\CsrfTokenManagerInterface
+- Symfony\Contracts\Translation\TranslatorInterface
+interfaces:
+- EventSubscriberInterface

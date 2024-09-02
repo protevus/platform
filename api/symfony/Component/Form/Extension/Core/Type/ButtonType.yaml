@@ -1,0 +1,33 @@
+name: ButtonType
+class_comment: '# * A form button.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: ButtonTypeInterface
+  type: class
+  source: Symfony\Component\Form\ButtonTypeInterface
+- name: OptionsResolver
+  type: class
+  source: Symfony\Component\OptionsResolver\OptionsResolver
+properties: []
+methods:
+- name: getParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: getBlockPrefix
+  visibility: public
+  parameters: []
+  comment: null
+- name: configureOptions
+  visibility: public
+  parameters:
+  - name: resolver
+  comment: null
+traits:
+- Symfony\Component\Form\ButtonTypeInterface
+- Symfony\Component\OptionsResolver\OptionsResolver
+interfaces:
+- ButtonTypeInterface

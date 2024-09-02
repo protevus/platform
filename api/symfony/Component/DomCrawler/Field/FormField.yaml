@@ -1,0 +1,46 @@
+name: FormField
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: node
+  comment: "# * FormField is the abstract class for all form fields.\n# *\n# * @author\
+    \ Fabien Potencier <fabien@symfony.com>\n# */\n# abstract class FormField\n# {\n\
+    # protected string $name;\n# protected string|array|null $value = null;\n# protected\
+    \ \\DOMDocument $document;\n# protected \\DOMXPath $xpath;\n# protected bool $disabled\
+    \ = false;\n# \n# /**\n# * @param \\DOMElement $node The node associated with\
+    \ this field"
+- name: getLabel
+  visibility: public
+  parameters: []
+  comment: '# * Returns the label tag associated to the field or null if none.'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: '# * Returns the name of the field.'
+- name: getValue
+  visibility: public
+  parameters: []
+  comment: '# * Gets the value of the field.'
+- name: setValue
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Sets the value of the field.'
+- name: hasValue
+  visibility: public
+  parameters: []
+  comment: '# * Returns true if the field should be included in the submitted values.'
+- name: isDisabled
+  visibility: public
+  parameters: []
+  comment: '# * Check if the current field is disabled.'
+- name: initialize
+  visibility: protected
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

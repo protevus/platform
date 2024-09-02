@@ -1,0 +1,58 @@
+name: Esi
+class_comment: '# * Esi implements the ESI capabilities to Request and Response instances.
+
+  # *
+
+  # * For more information, read the following W3C notes:
+
+  # *
+
+  # *  * ESI Language Specification 1.0 (http://www.w3.org/TR/esi-lang)
+
+  # *
+
+  # *  * Edge Architecture Specification (http://www.w3.org/TR/edge-arch)
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+properties: []
+methods:
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: addSurrogateControl
+  visibility: public
+  parameters:
+  - name: response
+  comment: null
+- name: renderIncludeTag
+  visibility: public
+  parameters:
+  - name: uri
+  - name: alt
+    default: 'null'
+  - name: ignoreErrors
+    default: 'true'
+  - name: comment
+    default: ''''''
+  comment: null
+- name: process
+  visibility: public
+  parameters:
+  - name: request
+  - name: response
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+interfaces:
+- the

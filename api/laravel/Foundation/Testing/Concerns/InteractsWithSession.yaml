@@ -1,0 +1,45 @@
+name: InteractsWithSession
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: withSession
+  visibility: public
+  parameters:
+  - name: data
+  comment: '# * Set the session to the given array.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return $this'
+- name: session
+  visibility: public
+  parameters:
+  - name: data
+  comment: '# * Set the session to the given array.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return $this'
+- name: startSession
+  visibility: protected
+  parameters: []
+  comment: '# * Start the session for the application.
+
+    # *
+
+    # * @return $this'
+- name: flushSession
+  visibility: public
+  parameters: []
+  comment: '# * Flush all of the current session data.
+
+    # *
+
+    # * @return $this'
+traits: []
+interfaces: []

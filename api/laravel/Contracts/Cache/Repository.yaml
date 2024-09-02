@@ -1,0 +1,193 @@
+name: Repository
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: CacheInterface
+  type: class
+  source: Psr\SimpleCache\CacheInterface
+properties: []
+methods:
+- name: pull
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Retrieve an item from the cache and delete it.
+
+    # *
+
+    # * @template TCacheValue
+
+    # *
+
+    # * @param  array|string  $key
+
+    # * @param  TCacheValue|(\Closure(): TCacheValue)  $default
+
+    # * @return (TCacheValue is null ? mixed : TCacheValue)'
+- name: put
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  - name: ttl
+    default: 'null'
+  comment: '# * Store an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
+
+    # * @return bool'
+- name: add
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  - name: ttl
+    default: 'null'
+  comment: '# * Store an item in the cache if the key does not exist.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
+
+    # * @return bool'
+- name: increment
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: '1'
+  comment: '# * Increment the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return int|bool'
+- name: decrement
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: '1'
+  comment: '# * Decrement the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return int|bool'
+- name: forever
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Store an item in the cache indefinitely.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return bool'
+- name: remember
+  visibility: public
+  parameters:
+  - name: key
+  - name: ttl
+  - name: callback
+  comment: '# * Get an item from the cache, or execute the given Closure and store
+    the result.
+
+    # *
+
+    # * @template TCacheValue
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  \DateTimeInterface|\DateInterval|\Closure|int|null  $ttl
+
+    # * @param  \Closure(): TCacheValue  $callback
+
+    # * @return TCacheValue'
+- name: sear
+  visibility: public
+  parameters:
+  - name: key
+  - name: callback
+  comment: '# * Get an item from the cache, or execute the given Closure and store
+    the result forever.
+
+    # *
+
+    # * @template TCacheValue
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  \Closure(): TCacheValue  $callback
+
+    # * @return TCacheValue'
+- name: rememberForever
+  visibility: public
+  parameters:
+  - name: key
+  - name: callback
+  comment: '# * Get an item from the cache, or execute the given Closure and store
+    the result forever.
+
+    # *
+
+    # * @template TCacheValue
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  \Closure(): TCacheValue  $callback
+
+    # * @return TCacheValue'
+- name: forget
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Remove an item from the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: getStore
+  visibility: public
+  parameters: []
+  comment: '# * Get the cache store implementation.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Cache\Store'
+traits:
+- Closure
+- Psr\SimpleCache\CacheInterface
+interfaces: []

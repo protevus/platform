@@ -1,0 +1,11 @@
+name: Psr4RoutingTest
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getTestCaseApp
+  visibility: protected
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

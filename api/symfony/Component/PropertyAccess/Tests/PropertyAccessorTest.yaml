@@ -1,0 +1,607 @@
+name: PropertyAccessorTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ArrayAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\ArrayAdapter
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\InvalidArgumentException
+- name: NoSuchIndexException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\NoSuchIndexException
+- name: NoSuchPropertyException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException
+- name: UninitializedPropertyException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\UninitializedPropertyException
+- name: PropertyAccess
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccess
+- name: PropertyAccessor
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccessor
+- name: PropertyAccessorInterface
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccessorInterface
+- name: ExtendedUninitializedProperty
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\ExtendedUninitializedProperty
+- name: ReturnTyped
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\ReturnTyped
+- name: TestAdderRemoverInvalidArgumentLength
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\TestAdderRemoverInvalidArgumentLength
+- name: TestAdderRemoverInvalidMethods
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\TestAdderRemoverInvalidMethods
+- name: TestClass
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\TestClass
+- name: TestClassIsWritable
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\TestClassIsWritable
+- name: TestClassMagicCall
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\TestClassMagicCall
+- name: TestClassMagicGet
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\TestClassMagicGet
+- name: TestClassSetValue
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\TestClassSetValue
+- name: TestClassTypedProperty
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\TestClassTypedProperty
+- name: TestClassTypeErrorInsideCall
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\TestClassTypeErrorInsideCall
+- name: TestPublicPropertyDynamicallyCreated
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\TestPublicPropertyDynamicallyCreated
+- name: TestPublicPropertyGetterOnObject
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\TestPublicPropertyGetterOnObject
+- name: TestPublicPropertyGetterOnObjectMagicGet
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\TestPublicPropertyGetterOnObjectMagicGet
+- name: TestSingularAndPluralProps
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\TestSingularAndPluralProps
+- name: Ticket5775Object
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\Ticket5775Object
+- name: TypeHinted
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\TypeHinted
+- name: UninitializedObjectProperty
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\UninitializedObjectProperty
+- name: UninitializedPrivateProperty
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\UninitializedPrivateProperty
+- name: UninitializedProperty
+  type: class
+  source: Symfony\Component\PropertyAccess\Tests\Fixtures\UninitializedProperty
+- name: ProxyHelper
+  type: class
+  source: Symfony\Component\VarExporter\ProxyHelper
+properties:
+- name: uninitialized
+  visibility: private
+  comment: null
+- name: uninitialized
+  visibility: private
+  comment: null
+- name: foo
+  visibility: private
+  comment: null
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getPathsWithMissingProperty
+  visibility: public
+  parameters: []
+  comment: null
+- name: getPathsWithMissingIndex
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValue
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: path
+  - name: value
+  comment: '# * @dataProvider getValidReadPropertyPaths'
+- name: testGetValueThrowsExceptionIfPropertyNotFound
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: path
+  comment: '# * @dataProvider getPathsWithMissingProperty'
+- name: testGetValueReturnsNullIfPropertyNotFoundAndExceptionIsDisabled
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: path
+  comment: '# * @dataProvider getPathsWithMissingProperty'
+- name: testGetValueThrowsNoExceptionIfIndexNotFound
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: path
+  comment: '# * @dataProvider getPathsWithMissingIndex'
+- name: testGetValueThrowsExceptionIfIndexNotFoundAndIndexExceptionsEnabled
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: path
+  comment: '# * @dataProvider getPathsWithMissingIndex'
+- name: testGetValueThrowsExceptionIfUninitializedProperty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueThrowsExceptionIfUninitializedPropertyWithGetter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueThrowsExceptionIfUninitializedPropertyWithGetterOfAnonymousClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: getUninitialized
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueThrowsExceptionIfUninitializedNotNullablePropertyWithGetterOfAnonymousClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: getUninitialized
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueThrowsExceptionIfUninitializedPropertyOfAnonymousClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueThrowsExceptionIfUninitializedNotNullableOfParentClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueThrowsExceptionIfUninitializedNotNullablePropertyWithGetterOfParentClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueThrowsExceptionIfUninitializedPropertyWithGetterOfAnonymousStdClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: getUninitialized
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueThrowsExceptionIfUninitializedPropertyWithGetterOfAnonymousChildClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueThrowsExceptionIfNotArrayAccess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueReadsMagicGet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueIgnoresMagicGet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueReadsArrayWithMissingIndexForCustomPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueReadsMagicGetThatReturnsConstant
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueNotModifyObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueNotModifyObjectException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueDoesNotReadMagicCallByDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueReadsMagicCallIfEnabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueReadsMagicCallThatReturnsConstant
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetValue
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: path
+  comment: '# * @dataProvider getValidWritePropertyPaths'
+- name: testSetValueThrowsExceptionIfPropertyNotFound
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: path
+  comment: '# * @dataProvider getPathsWithMissingProperty'
+- name: testSetValueThrowsNoExceptionIfIndexNotFound
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: path
+  comment: '# * @dataProvider getPathsWithMissingIndex'
+- name: testSetValueThrowsNoExceptionIfIndexNotFoundAndIndexExceptionsEnabled
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: path
+  comment: '# * @dataProvider getPathsWithMissingIndex'
+- name: testSetValueThrowsExceptionIfNotArrayAccess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetValueUpdatesMagicSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetValueIgnoresMagicSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetValueThrowsExceptionIfThereAreMissingParameters
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetValueDoesNotUpdateMagicCallByDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetValueUpdatesMagicCallIfEnabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueWhenArrayValueIsNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsReadable
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: path
+  comment: '# * @dataProvider getValidReadPropertyPaths'
+- name: testIsReadableReturnsFalseIfPropertyNotFound
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: path
+  comment: '# * @dataProvider getPathsWithMissingProperty'
+- name: testIsReadableReturnsTrueIfIndexNotFound
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: path
+  comment: '# * @dataProvider getPathsWithMissingIndex'
+- name: testIsReadableReturnsFalseIfIndexNotFoundAndIndexExceptionsEnabled
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: path
+  comment: '# * @dataProvider getPathsWithMissingIndex'
+- name: testIsReadableRecognizesMagicGet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsReadableDoesNotRecognizeMagicCallByDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsReadableRecognizesMagicCallIfEnabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsWritable
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: path
+  comment: '# * @dataProvider getValidWritePropertyPaths'
+- name: testIsWritableReturnsFalseIfPropertyNotFound
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: path
+  comment: '# * @dataProvider getPathsWithMissingProperty'
+- name: testIsWritableReturnsTrueIfIndexNotFound
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: path
+  comment: '# * @dataProvider getPathsWithMissingIndex'
+- name: testIsWritableReturnsTrueIfIndexNotFoundAndIndexExceptionsEnabled
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: path
+  comment: '# * @dataProvider getPathsWithMissingIndex'
+- name: testIsWritableRecognizesMagicSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsWritableDoesNotRecognizeMagicCallByDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsWritableRecognizesMagicCallIfEnabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: getValidWritePropertyPaths
+  visibility: public
+  parameters: []
+  comment: null
+- name: getValidReadPropertyPaths
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNullSafeIndexPaths
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNullSafeIndexWithThrowOnInvalidIndex
+  visibility: public
+  parameters:
+  - name: objectOrArray
+  - name: path
+  - name: value
+  comment: '# * @dataProvider getNullSafeIndexPaths'
+- name: testTicket5755
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetValueDeepWithMagicGetter
+  visibility: public
+  parameters: []
+  comment: null
+- name: getReferenceChainObjectsForSetValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetValueForReferenceChainIssue
+  visibility: public
+  parameters:
+  - name: object
+  - name: path
+  - name: value
+  comment: '# * @dataProvider getReferenceChainObjectsForSetValue'
+- name: getReferenceChainObjectsForIsWritable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsWritableForReferenceChainIssue
+  visibility: public
+  parameters:
+  - name: object
+  - name: path
+  - name: value
+  comment: '# * @dataProvider getReferenceChainObjectsForIsWritable'
+- name: testThrowTypeError
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowTypeErrorWithNullArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetTypeHint
+  visibility: public
+  parameters: []
+  comment: null
+- name: testArrayNotBeeingOverwritten
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCacheReadAccess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAttributeWithSpecialChars
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowTypeErrorWithInterface
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAnonymousClassRead
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAnonymousClassReadThrowExceptionOnInvalidPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAnonymousClassReadReturnsNullOnInvalidPropertyWithDisabledException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAnonymousClassWrite
+  visibility: public
+  parameters: []
+  comment: null
+- name: generateAnonymousClass
+  visibility: private
+  parameters:
+  - name: value
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: setFoo
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: testThrowTypeErrorInsideSetterCall
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDoNotDiscardReturnTypeError
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDoNotDiscardReturnTypeErrorWhenWriterMethodIsMisconfigured
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWriteToSingularPropertyWhilePluralOneExists
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWriteToPluralPropertyWhileSingularOneExists
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAdderAndRemoverArePreferredOverSetter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAdderAndRemoverArePreferredOverSetterForSameSingularAndPlural
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAdderWithoutRemover
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemoverWithoutAdder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAdderAndRemoveNeedsTheExactParametersDefined
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetterNeedsTheExactParametersDefined
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetterNeedsPublicAccess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPublicProperty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPrivateProperty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetDynamicPublicProperty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetDynamicPublicPropertyWithMagicGetterDisallow
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetDynamicPublicPropertyWithMagicGetterAllow
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetValueWrongTypeShouldThrowWrappedException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCastDateTime
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCastDateTimeImmutable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValuePropertyThrowsExceptionIfUninitializedWithoutLazyGhost
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueGetterThrowsExceptionIfUninitializedWithoutLazyGhost
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValuePropertyThrowsExceptionIfUninitializedWithLazyGhost
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValueGetterThrowsExceptionIfUninitializedWithLazyGhost
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsReadableWithMissingPropertyAndLazyGhost
+  visibility: public
+  parameters: []
+  comment: null
+- name: createUninitializedObjectPropertyGhost
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Cache\Adapter\ArrayAdapter
+- Symfony\Component\PropertyAccess\Exception\InvalidArgumentException
+- Symfony\Component\PropertyAccess\Exception\NoSuchIndexException
+- Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException
+- Symfony\Component\PropertyAccess\Exception\UninitializedPropertyException
+- Symfony\Component\PropertyAccess\PropertyAccess
+- Symfony\Component\PropertyAccess\PropertyAccessor
+- Symfony\Component\PropertyAccess\PropertyAccessorInterface
+- Symfony\Component\PropertyAccess\Tests\Fixtures\ExtendedUninitializedProperty
+- Symfony\Component\PropertyAccess\Tests\Fixtures\ReturnTyped
+- Symfony\Component\PropertyAccess\Tests\Fixtures\TestAdderRemoverInvalidArgumentLength
+- Symfony\Component\PropertyAccess\Tests\Fixtures\TestAdderRemoverInvalidMethods
+- Symfony\Component\PropertyAccess\Tests\Fixtures\TestClass
+- Symfony\Component\PropertyAccess\Tests\Fixtures\TestClassIsWritable
+- Symfony\Component\PropertyAccess\Tests\Fixtures\TestClassMagicCall
+- Symfony\Component\PropertyAccess\Tests\Fixtures\TestClassMagicGet
+- Symfony\Component\PropertyAccess\Tests\Fixtures\TestClassSetValue
+- Symfony\Component\PropertyAccess\Tests\Fixtures\TestClassTypedProperty
+- Symfony\Component\PropertyAccess\Tests\Fixtures\TestClassTypeErrorInsideCall
+- Symfony\Component\PropertyAccess\Tests\Fixtures\TestPublicPropertyDynamicallyCreated
+- Symfony\Component\PropertyAccess\Tests\Fixtures\TestPublicPropertyGetterOnObject
+- Symfony\Component\PropertyAccess\Tests\Fixtures\TestPublicPropertyGetterOnObjectMagicGet
+- Symfony\Component\PropertyAccess\Tests\Fixtures\TestSingularAndPluralProps
+- Symfony\Component\PropertyAccess\Tests\Fixtures\Ticket5775Object
+- Symfony\Component\PropertyAccess\Tests\Fixtures\TypeHinted
+- Symfony\Component\PropertyAccess\Tests\Fixtures\UninitializedObjectProperty
+- Symfony\Component\PropertyAccess\Tests\Fixtures\UninitializedPrivateProperty
+- Symfony\Component\PropertyAccess\Tests\Fixtures\UninitializedProperty
+- Symfony\Component\VarExporter\ProxyHelper
+interfaces: []

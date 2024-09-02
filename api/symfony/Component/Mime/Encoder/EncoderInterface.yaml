@@ -1,0 +1,34 @@
+name: EncoderInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: encodeString
+  visibility: public
+  parameters:
+  - name: string
+  - name: charset
+    default: '''utf-8'''
+  - name: firstLineOffset
+    default: '0'
+  - name: maxLineLength
+    default: '0'
+  comment: '# * @author Chris Corbyn
+
+    # */
+
+    # interface EncoderInterface
+
+    # {
+
+    # /**
+
+    # * Encode a given string to produce an encoded string.
+
+    # *
+
+    # * @param int $firstLineOffset if first line needs to be shorter
+
+    # * @param int $maxLineLength   - 0 indicates the default length for this encoding'
+traits: []
+interfaces: []

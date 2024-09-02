@@ -1,0 +1,23 @@
+name: RelatedPartTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: RelatedPart
+  type: class
+  source: Symfony\Component\Mime\Part\Multipart\RelatedPart
+- name: TextPart
+  type: class
+  source: Symfony\Component\Mime\Part\TextPart
+properties: []
+methods:
+- name: testConstructor
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mime\Part\Multipart\RelatedPart
+- Symfony\Component\Mime\Part\TextPart
+interfaces: []

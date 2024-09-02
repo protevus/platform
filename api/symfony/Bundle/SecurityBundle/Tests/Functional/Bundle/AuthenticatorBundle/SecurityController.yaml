@@ -1,0 +1,23 @@
+name: SecurityController
+class_comment: null
+dependencies:
+- name: AbstractController
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Controller\AbstractController
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+properties: []
+methods:
+- name: checkAction
+  visibility: public
+  parameters: []
+  comment: null
+- name: profileAction
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Bundle\FrameworkBundle\Controller\AbstractController
+- Symfony\Component\HttpFoundation\Response
+interfaces: []

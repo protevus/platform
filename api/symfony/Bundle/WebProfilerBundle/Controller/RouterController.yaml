@@ -1,0 +1,101 @@
+name: RouterController
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: ExpressionFunctionProviderInterface
+  type: class
+  source: Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: RequestDataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\RequestDataCollector
+- name: NotFoundHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- name: Profiler
+  type: class
+  source: Symfony\Component\HttpKernel\Profiler\Profiler
+- name: TraceableUrlMatcher
+  type: class
+  source: Symfony\Component\Routing\Matcher\TraceableUrlMatcher
+- name: UrlMatcherInterface
+  type: class
+  source: Symfony\Component\Routing\Matcher\UrlMatcherInterface
+- name: RouteCollection
+  type: class
+  source: Symfony\Component\Routing\RouteCollection
+- name: RouterInterface
+  type: class
+  source: Symfony\Component\Routing\RouterInterface
+- name: Environment
+  type: class
+  source: Twig\Environment
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: profiler
+  - name: twig
+  - name: matcher
+    default: 'null'
+  - name: routes
+    default: 'null'
+  - name: expressionLanguageProviders
+    default: '[]'
+  comment: '# * @author Fabien Potencier <fabien@symfony.com>
+
+    # *
+
+    # * @internal
+
+    # */
+
+    # class RouterController
+
+    # {
+
+    # /**
+
+    # * @param ExpressionFunctionProviderInterface[] $expressionLanguageProviders'
+- name: panelAction
+  visibility: public
+  parameters:
+  - name: token
+  comment: '# * Renders the profiler panel for the given token.
+
+    # *
+
+    # * @throws NotFoundHttpException'
+- name: getTraces
+  visibility: private
+  parameters:
+  - name: request
+  - name: method
+  comment: "# @var RequestDataCollector $request */\n# $request = $profile->getCollector('request');\n\
+    # \n# return new Response($this->twig->render('@WebProfiler/Router/panel.html.twig',\
+    \ [\n# 'request' => $request,\n# 'router' => $profile->getCollector('router'),\n\
+    # 'traces' => $this->getTraces($request, $profile->getMethod()),\n# ]), 200, ['Content-Type'\
+    \ => 'text/html']);\n# }\n# \n# /**\n# * Returns the routing traces associated\
+    \ to the given request."
+traits:
+- Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\DataCollector\RequestDataCollector
+- Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- Symfony\Component\HttpKernel\Profiler\Profiler
+- Symfony\Component\Routing\Matcher\TraceableUrlMatcher
+- Symfony\Component\Routing\Matcher\UrlMatcherInterface
+- Symfony\Component\Routing\RouteCollection
+- Symfony\Component\Routing\RouterInterface
+- Twig\Environment
+interfaces: []

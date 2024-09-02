@@ -1,0 +1,34 @@
+name: Traverse
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: traverse
+    default: 'null'
+  comment: "# * Validates an object that needs to be traversed.\n# *\n# * @author\
+    \ Bernhard Schussek <bschussek@gmail.com>\n# */\n# #[\\Attribute(\\Attribute::TARGET_CLASS)]\n\
+    # class Traverse extends Constraint\n# {\n# public bool $traverse = true;\n# \n\
+    # /**\n# * @param bool|array<string,mixed>|null $traverse Whether to traverse\
+    \ the given object or not (defaults to true). Pass an associative array to configure\
+    \ the constraint's options (e.g. payload)."
+- name: getDefaultOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: getTargets
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+interfaces: []

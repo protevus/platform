@@ -1,0 +1,11 @@
+name: env_param
+class_comment: null
+dependencies:
+- name: AcmeConfig
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\AcmeConfig
+properties: []
+methods: []
+traits:
+- Symfony\Component\DependencyInjection\Tests\Fixtures\AcmeConfig
+interfaces: []

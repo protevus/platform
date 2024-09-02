@@ -1,0 +1,117 @@
+name: PendingHasThroughRelationship
+class_comment: '# * @template TIntermediateModel of \Illuminate\Database\Eloquent\Model
+
+  # * @template TDeclaringModel of \Illuminate\Database\Eloquent\Model'
+dependencies:
+- name: BadMethodCallException
+  type: class
+  source: BadMethodCallException
+- name: HasMany
+  type: class
+  source: Illuminate\Database\Eloquent\Relations\HasMany
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+properties:
+- name: rootModel
+  visibility: protected
+  comment: '# * @template TIntermediateModel of \Illuminate\Database\Eloquent\Model
+
+    # * @template TDeclaringModel of \Illuminate\Database\Eloquent\Model
+
+    # */
+
+    # class PendingHasThroughRelationship
+
+    # {
+
+    # /**
+
+    # * The root model that the relationship exists on.
+
+    # *
+
+    # * @var TDeclaringModel'
+- name: localRelationship
+  visibility: protected
+  comment: '# * The local relationship.
+
+    # *
+
+    # * @var \Illuminate\Database\Eloquent\Relations\HasMany<TIntermediateModel, TDeclaringModel>|\Illuminate\Database\Eloquent\Relations\HasOne<TIntermediateModel,
+    TDeclaringModel>'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: rootModel
+  - name: localRelationship
+  comment: "# * @template TIntermediateModel of \\Illuminate\\Database\\Eloquent\\\
+    Model\n# * @template TDeclaringModel of \\Illuminate\\Database\\Eloquent\\Model\n\
+    # */\n# class PendingHasThroughRelationship\n# {\n# /**\n# * The root model that\
+    \ the relationship exists on.\n# *\n# * @var TDeclaringModel\n# */\n# protected\
+    \ $rootModel;\n# \n# /**\n# * The local relationship.\n# *\n# * @var \\Illuminate\\\
+    Database\\Eloquent\\Relations\\HasMany<TIntermediateModel, TDeclaringModel>|\\\
+    Illuminate\\Database\\Eloquent\\Relations\\HasOne<TIntermediateModel, TDeclaringModel>\n\
+    # */\n# protected $localRelationship;\n# \n# /**\n# * Create a pending has-many-through\
+    \ or has-one-through relationship.\n# *\n# * @param  TDeclaringModel  $rootModel\n\
+    # * @param  \\Illuminate\\Database\\Eloquent\\Relations\\HasMany<TIntermediateModel,\
+    \ TDeclaringModel>|\\Illuminate\\Database\\Eloquent\\Relations\\HasOne<TIntermediateModel,\
+    \ TDeclaringModel>  $localRelationship"
+- name: has
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Define the distant relationship that this model has.
+
+    # *
+
+    # * @template TRelatedModel of \Illuminate\Database\Eloquent\Model
+
+    # *
+
+    # * @param  string|(callable(TIntermediateModel): (\Illuminate\Database\Eloquent\Relations\HasOne<TRelatedModel,
+    TIntermediateModel>|\Illuminate\Database\Eloquent\Relations\HasMany<TRelatedModel,
+    TIntermediateModel>))  $callback
+
+    # * @return (
+
+    # *     $callback is string
+
+    # *     ? \Illuminate\Database\Eloquent\Relations\HasManyThrough<\Illuminate\Database\Eloquent\Model,
+    TIntermediateModel, TDeclaringModel>|\Illuminate\Database\Eloquent\Relations\HasOneThrough<\Illuminate\Database\Eloquent\Model,
+    TIntermediateModel, TDeclaringModel>
+
+    # *     : (
+
+    # *         $callback is callable(TIntermediateModel): \Illuminate\Database\Eloquent\Relations\HasOne<TRelatedModel,
+    TIntermediateModel>
+
+    # *         ? \Illuminate\Database\Eloquent\Relations\HasOneThrough<TRelatedModel,
+    TIntermediateModel, TDeclaringModel>
+
+    # *         : \Illuminate\Database\Eloquent\Relations\HasManyThrough<TRelatedModel,
+    TIntermediateModel, TDeclaringModel>
+
+    # *     )
+
+    # * )'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Handle dynamic method calls into the model.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+traits:
+- BadMethodCallException
+- Illuminate\Database\Eloquent\Relations\HasMany
+- Illuminate\Support\Str
+interfaces: []

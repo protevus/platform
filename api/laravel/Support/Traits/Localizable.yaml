@@ -1,0 +1,25 @@
+name: Localizable
+class_comment: null
+dependencies:
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+properties: []
+methods:
+- name: withLocale
+  visibility: public
+  parameters:
+  - name: locale
+  - name: callback
+  comment: '# * Run the callback with the given locale.
+
+    # *
+
+    # * @param  string  $locale
+
+    # * @param  \Closure  $callback
+
+    # * @return mixed'
+traits:
+- Illuminate\Container\Container
+interfaces: []

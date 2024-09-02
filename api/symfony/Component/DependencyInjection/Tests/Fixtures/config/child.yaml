@@ -1,0 +1,11 @@
+name: child
+class_comment: null
+dependencies:
+- name: BarService
+  type: class
+  source: App\BarService
+properties: []
+methods: []
+traits:
+- App\BarService
+interfaces: []

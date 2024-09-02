@@ -1,0 +1,7 @@
+name: MessageDecodingFailedException
+class_comment: '# * Thrown when a message cannot be decoded in a serializer.'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces: []

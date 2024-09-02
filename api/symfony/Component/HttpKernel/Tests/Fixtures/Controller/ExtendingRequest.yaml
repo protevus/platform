@@ -1,0 +1,11 @@
+name: ExtendingRequest
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+properties: []
+methods: []
+traits:
+- Symfony\Component\HttpFoundation\Request
+interfaces: []

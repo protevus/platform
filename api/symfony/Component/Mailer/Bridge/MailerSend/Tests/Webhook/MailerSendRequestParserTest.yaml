@@ -1,0 +1,27 @@
+name: MailerSendRequestParserTest
+class_comment: null
+dependencies:
+- name: MailerSendPayloadConverter
+  type: class
+  source: Symfony\Component\Mailer\Bridge\MailerSend\RemoteEvent\MailerSendPayloadConverter
+- name: MailerSendRequestParser
+  type: class
+  source: Symfony\Component\Mailer\Bridge\MailerSend\Webhook\MailerSendRequestParser
+- name: RequestParserInterface
+  type: class
+  source: Symfony\Component\Webhook\Client\RequestParserInterface
+- name: AbstractRequestParserTestCase
+  type: class
+  source: Symfony\Component\Webhook\Test\AbstractRequestParserTestCase
+properties: []
+methods:
+- name: createRequestParser
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Mailer\Bridge\MailerSend\RemoteEvent\MailerSendPayloadConverter
+- Symfony\Component\Mailer\Bridge\MailerSend\Webhook\MailerSendRequestParser
+- Symfony\Component\Webhook\Client\RequestParserInterface
+- Symfony\Component\Webhook\Test\AbstractRequestParserTestCase
+interfaces: []

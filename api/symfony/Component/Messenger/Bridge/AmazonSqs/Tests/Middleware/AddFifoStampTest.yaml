@@ -1,0 +1,82 @@
+name: AddFifoStampTest
+class_comment: null
+dependencies:
+- name: MessageDeduplicationAwareInterface
+  type: class
+  source: Symfony\Component\Messenger\Bridge\AmazonSqs\MessageDeduplicationAwareInterface
+- name: MessageGroupAwareInterface
+  type: class
+  source: Symfony\Component\Messenger\Bridge\AmazonSqs\MessageGroupAwareInterface
+- name: AddFifoStampMiddleware
+  type: class
+  source: Symfony\Component\Messenger\Bridge\AmazonSqs\Middleware\AddFifoStampMiddleware
+- name: AmazonSqsFifoStamp
+  type: class
+  source: Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\AmazonSqsFifoStamp
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: MiddlewareTestCase
+  type: class
+  source: Symfony\Component\Messenger\Test\Middleware\MiddlewareTestCase
+properties: []
+methods:
+- name: testAddStampWithGroupIdOnly
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHandleWithDeduplicationIdOnly
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHandleWithGroupIdAndDeduplicationId
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHandleWithoutId
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: messageGroupId
+  - name: messageDeduplicationId
+  comment: null
+- name: getMessageDeduplicationId
+  visibility: public
+  parameters: []
+  comment: null
+- name: getMessageGroupId
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: messageDeduplicationId
+  comment: null
+- name: getMessageDeduplicationId
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: messageGroupId
+  comment: null
+- name: getMessageGroupId
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Messenger\Bridge\AmazonSqs\MessageDeduplicationAwareInterface
+- Symfony\Component\Messenger\Bridge\AmazonSqs\MessageGroupAwareInterface
+- Symfony\Component\Messenger\Bridge\AmazonSqs\Middleware\AddFifoStampMiddleware
+- Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\AmazonSqsFifoStamp
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Test\Middleware\MiddlewareTestCase
+interfaces:
+- MessageDeduplicationAwareInterface
+- MessageDeduplicationAwareInterface
+- MessageGroupAwareInterface

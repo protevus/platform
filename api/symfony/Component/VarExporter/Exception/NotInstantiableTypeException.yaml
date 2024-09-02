@@ -1,0 +1,15 @@
+name: NotInstantiableTypeException
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: type
+  - name: previous
+    default: 'null'
+  comment: null
+traits: []
+interfaces:
+- ExceptionInterface

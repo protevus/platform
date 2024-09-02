@@ -1,0 +1,95 @@
+name: WhenValidatorTest
+class_comment: null
+dependencies:
+- name: Blank
+  type: class
+  source: Symfony\Component\Validator\Constraints\Blank
+- name: Callback
+  type: class
+  source: Symfony\Component\Validator\Constraints\Callback
+- name: NegativeOrZero
+  type: class
+  source: Symfony\Component\Validator\Constraints\NegativeOrZero
+- name: NotBlank
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotBlank
+- name: NotNull
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotNull
+- name: PositiveOrZero
+  type: class
+  source: Symfony\Component\Validator\Constraints\PositiveOrZero
+- name: When
+  type: class
+  source: Symfony\Component\Validator\Constraints\When
+- name: WhenValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\WhenValidator
+- name: ConstraintViolation
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolation
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+properties: []
+methods:
+- name: testConstraintsAreExecuted
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstraintIsExecuted
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstraintsAreExecutedWithNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstraintsAreExecutedWithObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstraintsAreExecutedWithValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstraintsAreExecutedWithExpressionValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstraintsNotExecuted
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstraintsNotExecutedWithObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstraintsNotExecutedWithValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstraintsNotExecutedWithExpressionValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstraintViolations
+  visibility: public
+  parameters: []
+  comment: null
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\Blank
+- Symfony\Component\Validator\Constraints\Callback
+- Symfony\Component\Validator\Constraints\NegativeOrZero
+- Symfony\Component\Validator\Constraints\NotBlank
+- Symfony\Component\Validator\Constraints\NotNull
+- Symfony\Component\Validator\Constraints\PositiveOrZero
+- Symfony\Component\Validator\Constraints\When
+- Symfony\Component\Validator\Constraints\WhenValidator
+- Symfony\Component\Validator\ConstraintViolation
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

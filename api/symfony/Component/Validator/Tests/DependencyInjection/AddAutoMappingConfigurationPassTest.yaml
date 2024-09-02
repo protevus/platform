@@ -1,0 +1,48 @@
+name: AddAutoMappingConfigurationPassTest
+class_comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>"
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: AddAutoMappingConfigurationPass
+  type: class
+  source: Symfony\Component\Validator\DependencyInjection\AddAutoMappingConfigurationPass
+- name: PropertyInfoLoaderEntity
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\PropertyInfoLoaderEntity
+- name: ValidatorBuilder
+  type: class
+  source: Symfony\Component\Validator\ValidatorBuilder
+properties: []
+methods:
+- name: testProcess
+  visibility: public
+  parameters:
+  - name: namespace
+  - name: services
+  - name: expectedRegexp
+  comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# */\n# class AddAutoMappingConfigurationPassTest\
+    \ extends TestCase\n# {\n# public function testNoConfigParameter()\n# {\n# $container\
+    \ = new ContainerBuilder();\n# (new AddAutoMappingConfigurationPass())->process($container);\n\
+    # $this->assertCount(1, $container->getDefinitions());\n# }\n# \n# public function\
+    \ testNoValidatorBuilder()\n# {\n# $container = new ContainerBuilder();\n# (new\
+    \ AddAutoMappingConfigurationPass())->process($container);\n# $this->assertCount(1,\
+    \ $container->getDefinitions());\n# }\n# \n# /**\n# * @dataProvider mappingProvider"
+- name: mappingProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDoNotMapAllClassesWhenConfigIsEmpty
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\Validator\DependencyInjection\AddAutoMappingConfigurationPass
+- Symfony\Component\Validator\Tests\Fixtures\PropertyInfoLoaderEntity
+- Symfony\Component\Validator\ValidatorBuilder
+interfaces: []

@@ -1,0 +1,64 @@
+name: ForeignIdColumnDefinition
+class_comment: null
+dependencies:
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+properties:
+- name: blueprint
+  visibility: protected
+  comment: '# * The schema builder blueprint instance.
+
+    # *
+
+    # * @var \Illuminate\Database\Schema\Blueprint'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: blueprint
+  - name: attributes
+    default: '[]'
+  comment: "# * The schema builder blueprint instance.\n# *\n# * @var \\Illuminate\\\
+    Database\\Schema\\Blueprint\n# */\n# protected $blueprint;\n# \n# /**\n# * Create\
+    \ a new foreign ID column definition.\n# *\n# * @param  \\Illuminate\\Database\\\
+    Schema\\Blueprint  $blueprint\n# * @param  array  $attributes\n# * @return void"
+- name: constrained
+  visibility: public
+  parameters:
+  - name: table
+    default: 'null'
+  - name: column
+    default: '''id'''
+  - name: indexName
+    default: 'null'
+  comment: '# * Create a foreign key constraint on this column referencing the "id"
+    column of the conventionally related table.
+
+    # *
+
+    # * @param  string|null  $table
+
+    # * @param  string|null  $column
+
+    # * @param  string|null  $indexName
+
+    # * @return \Illuminate\Database\Schema\ForeignKeyDefinition'
+- name: references
+  visibility: public
+  parameters:
+  - name: column
+  - name: indexName
+    default: 'null'
+  comment: '# * Specify which column this foreign ID references on another table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  string  $indexName
+
+    # * @return \Illuminate\Database\Schema\ForeignKeyDefinition'
+traits:
+- Illuminate\Support\Str
+interfaces: []

@@ -1,0 +1,30 @@
+name: ConnectionEvent
+class_comment: null
+dependencies: []
+properties:
+- name: connectionName
+  visibility: public
+  comment: '# * The name of the connection.
+
+    # *
+
+    # * @var string'
+- name: connection
+  visibility: public
+  comment: '# * The database connection instance.
+
+    # *
+
+    # * @var \Illuminate\Database\Connection'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: connection
+  comment: "# * The name of the connection.\n# *\n# * @var string\n# */\n# public\
+    \ $connectionName;\n# \n# /**\n# * The database connection instance.\n# *\n# *\
+    \ @var \\Illuminate\\Database\\Connection\n# */\n# public $connection;\n# \n#\
+    \ /**\n# * Create a new event instance.\n# *\n# * @param  \\Illuminate\\Database\\\
+    Connection  $connection\n# * @return void"
+traits: []
+interfaces: []

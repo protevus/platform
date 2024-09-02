@@ -1,0 +1,198 @@
+name: Image
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: options
+    default: 'null'
+  - name: maxSize
+    default: 'null'
+  - name: binaryFormat
+    default: 'null'
+  - name: mimeTypes
+    default: 'null'
+  - name: filenameMaxLength
+    default: 'null'
+  - name: minWidth
+    default: 'null'
+  - name: maxWidth
+    default: 'null'
+  - name: maxHeight
+    default: 'null'
+  - name: minHeight
+    default: 'null'
+  - name: maxRatio
+    default: 'null'
+  - name: minRatio
+    default: 'null'
+  - name: minPixels
+    default: 'null'
+  - name: maxPixels
+    default: 'null'
+  - name: allowSquare
+    default: 'null'
+  - name: allowLandscape
+    default: 'null'
+  - name: allowPortrait
+    default: 'null'
+  - name: detectCorrupted
+    default: 'null'
+  - name: notFoundMessage
+    default: 'null'
+  - name: notReadableMessage
+    default: 'null'
+  - name: maxSizeMessage
+    default: 'null'
+  - name: mimeTypesMessage
+    default: 'null'
+  - name: disallowEmptyMessage
+    default: 'null'
+  - name: filenameTooLongMessage
+    default: 'null'
+  - name: uploadIniSizeErrorMessage
+    default: 'null'
+  - name: uploadFormSizeErrorMessage
+    default: 'null'
+  - name: uploadPartialErrorMessage
+    default: 'null'
+  - name: uploadNoFileErrorMessage
+    default: 'null'
+  - name: uploadNoTmpDirErrorMessage
+    default: 'null'
+  - name: uploadCantWriteErrorMessage
+    default: 'null'
+  - name: uploadExtensionErrorMessage
+    default: 'null'
+  - name: uploadErrorMessage
+    default: 'null'
+  - name: sizeNotDetectedMessage
+    default: 'null'
+  - name: maxWidthMessage
+    default: 'null'
+  - name: minWidthMessage
+    default: 'null'
+  - name: maxHeightMessage
+    default: 'null'
+  - name: minHeightMessage
+    default: 'null'
+  - name: minPixelsMessage
+    default: 'null'
+  - name: maxPixelsMessage
+    default: 'null'
+  - name: maxRatioMessage
+    default: 'null'
+  - name: minRatioMessage
+    default: 'null'
+  - name: allowSquareMessage
+    default: 'null'
+  - name: allowLandscapeMessage
+    default: 'null'
+  - name: allowPortraitMessage
+    default: 'null'
+  - name: corruptedMessage
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  comment: "# * Validates that a file (or a path to a file) is a valid image.\n# *\n\
+    # * @author Benjamin Dulau <benjamin.dulau@gmail.com>\n# * @author Bernhard Schussek\
+    \ <bschussek@gmail.com>\n# */\n# #[\\Attribute(\\Attribute::TARGET_PROPERTY |\
+    \ \\Attribute::TARGET_METHOD | \\Attribute::IS_REPEATABLE)]\n# class Image extends\
+    \ File\n# {\n# public const SIZE_NOT_DETECTED_ERROR = '6d55c3f4-e58e-4fe3-91ee-74b492199956';\n\
+    # public const TOO_WIDE_ERROR = '7f87163d-878f-47f5-99ba-a8eb723a1ab2';\n# public\
+    \ const TOO_NARROW_ERROR = '9afbd561-4f90-4a27-be62-1780fc43604a';\n# public const\
+    \ TOO_HIGH_ERROR = '7efae81c-4877-47ba-aa65-d01ccb0d4645';\n# public const TOO_LOW_ERROR\
+    \ = 'aef0cb6a-c07f-4894-bc08-1781420d7b4c';\n# public const TOO_FEW_PIXEL_ERROR\
+    \ = '1b06b97d-ae48-474e-978f-038a74854c43';\n# public const TOO_MANY_PIXEL_ERROR\
+    \ = 'ee0804e8-44db-4eac-9775-be91aaf72ce1';\n# public const RATIO_TOO_BIG_ERROR\
+    \ = '70cafca6-168f-41c9-8c8c-4e47a52be643';\n# public const RATIO_TOO_SMALL_ERROR\
+    \ = '59b8c6ef-bcf2-4ceb-afff-4642ed92f12e';\n# public const SQUARE_NOT_ALLOWED_ERROR\
+    \ = '5d41425b-facb-47f7-a55a-de9fbe45cb46';\n# public const LANDSCAPE_NOT_ALLOWED_ERROR\
+    \ = '6f895685-7cf2-4d65-b3da-9029c5581d88';\n# public const PORTRAIT_NOT_ALLOWED_ERROR\
+    \ = '65608156-77da-4c79-a88c-02ef6d18c782';\n# public const CORRUPTED_IMAGE_ERROR\
+    \ = '5d4163f3-648f-4e39-87fd-cc5ea7aad2d1';\n# \n# // Include the mapping from\
+    \ the base class\n# \n# protected const ERROR_NAMES = [\n# self::NOT_FOUND_ERROR\
+    \ => 'NOT_FOUND_ERROR',\n# self::NOT_READABLE_ERROR => 'NOT_READABLE_ERROR',\n\
+    # self::EMPTY_ERROR => 'EMPTY_ERROR',\n# self::TOO_LARGE_ERROR => 'TOO_LARGE_ERROR',\n\
+    # self::INVALID_MIME_TYPE_ERROR => 'INVALID_MIME_TYPE_ERROR',\n# self::FILENAME_TOO_LONG\
+    \ => 'FILENAME_TOO_LONG',\n# self::SIZE_NOT_DETECTED_ERROR => 'SIZE_NOT_DETECTED_ERROR',\n\
+    # self::TOO_WIDE_ERROR => 'TOO_WIDE_ERROR',\n# self::TOO_NARROW_ERROR => 'TOO_NARROW_ERROR',\n\
+    # self::TOO_HIGH_ERROR => 'TOO_HIGH_ERROR',\n# self::TOO_LOW_ERROR => 'TOO_LOW_ERROR',\n\
+    # self::TOO_FEW_PIXEL_ERROR => 'TOO_FEW_PIXEL_ERROR',\n# self::TOO_MANY_PIXEL_ERROR\
+    \ => 'TOO_MANY_PIXEL_ERROR',\n# self::RATIO_TOO_BIG_ERROR => 'RATIO_TOO_BIG_ERROR',\n\
+    # self::RATIO_TOO_SMALL_ERROR => 'RATIO_TOO_SMALL_ERROR',\n# self::SQUARE_NOT_ALLOWED_ERROR\
+    \ => 'SQUARE_NOT_ALLOWED_ERROR',\n# self::LANDSCAPE_NOT_ALLOWED_ERROR => 'LANDSCAPE_NOT_ALLOWED_ERROR',\n\
+    # self::PORTRAIT_NOT_ALLOWED_ERROR => 'PORTRAIT_NOT_ALLOWED_ERROR',\n# self::CORRUPTED_IMAGE_ERROR\
+    \ => 'CORRUPTED_IMAGE_ERROR',\n# ];\n# \n# public array|string $mimeTypes = 'image/*';\n\
+    # public ?int $minWidth = null;\n# public ?int $maxWidth = null;\n# public ?int\
+    \ $maxHeight = null;\n# public ?int $minHeight = null;\n# public int|float|null\
+    \ $maxRatio = null;\n# public int|float|null $minRatio = null;\n# public int|float|null\
+    \ $minPixels = null;\n# public int|float|null $maxPixels = null;\n# public bool\
+    \ $allowSquare = true;\n# public bool $allowLandscape = true;\n# public bool $allowPortrait\
+    \ = true;\n# public bool $detectCorrupted = false;\n# \n# // The constant for\
+    \ a wrong MIME type is taken from the parent class.\n# public string $mimeTypesMessage\
+    \ = 'This file is not a valid image.';\n# public string $sizeNotDetectedMessage\
+    \ = 'The size of the image could not be detected.';\n# public string $maxWidthMessage\
+    \ = 'The image width is too big ({{ width }}px). Allowed maximum width is {{ max_width\
+    \ }}px.';\n# public string $minWidthMessage = 'The image width is too small ({{\
+    \ width }}px). Minimum width expected is {{ min_width }}px.';\n# public string\
+    \ $maxHeightMessage = 'The image height is too big ({{ height }}px). Allowed maximum\
+    \ height is {{ max_height }}px.';\n# public string $minHeightMessage = 'The image\
+    \ height is too small ({{ height }}px). Minimum height expected is {{ min_height\
+    \ }}px.';\n# public string $minPixelsMessage = 'The image has too few pixels ({{\
+    \ pixels }} pixels). Minimum amount expected is {{ min_pixels }} pixels.';\n#\
+    \ public string $maxPixelsMessage = 'The image has too many pixels ({{ pixels\
+    \ }} pixels). Maximum amount expected is {{ max_pixels }} pixels.';\n# public\
+    \ string $maxRatioMessage = 'The image ratio is too big ({{ ratio }}). Allowed\
+    \ maximum ratio is {{ max_ratio }}.';\n# public string $minRatioMessage = 'The\
+    \ image ratio is too small ({{ ratio }}). Minimum ratio expected is {{ min_ratio\
+    \ }}.';\n# public string $allowSquareMessage = 'The image is square ({{ width\
+    \ }}x{{ height }}px). Square images are not allowed.';\n# public string $allowLandscapeMessage\
+    \ = 'The image is landscape oriented ({{ width }}x{{ height }}px). Landscape oriented\
+    \ images are not allowed.';\n# public string $allowPortraitMessage = 'The image\
+    \ is portrait oriented ({{ width }}x{{ height }}px). Portrait oriented images\
+    \ are not allowed.';\n# public string $corruptedMessage = 'The image file is corrupted.';\n\
+    # \n# /**\n# * @param array<string,mixed>|null $options\n# * @param int|string|null\
+    \          $maxSize                     The max size of the underlying file\n\
+    # * @param bool|null                $binaryFormat                Pass true to\
+    \ use binary-prefixed units (KiB, MiB, etc.) or false to use SI-prefixed units\
+    \ (kB, MB) in displayed messages. Pass null to guess the format from the maxSize\
+    \ option. (defaults to null)\n# * @param string[]|null            $mimeTypes \
+    \                  Acceptable media types\n# * @param int|null               \
+    \  $filenameMaxLength           Maximum length of the file name\n# * @param string|null\
+    \              $disallowEmptyMessage        Enable empty upload validation with\
+    \ this message in case of error\n# * @param string|null              $uploadIniSizeErrorMessage\
+    \   Message if the file size exceeds the max size configured in php.ini\n# * @param\
+    \ string|null              $uploadFormSizeErrorMessage  Message if the file size\
+    \ exceeds the max size configured in the HTML input field\n# * @param string|null\
+    \              $uploadPartialErrorMessage   Message if the file is only partially\
+    \ uploaded\n# * @param string|null              $uploadNoTmpDirErrorMessage  Message\
+    \ if there is no upload_tmp_dir in php.ini\n# * @param string|null           \
+    \   $uploadCantWriteErrorMessage Message if the uploaded file can not be stored\
+    \ in the temporary directory\n# * @param string|null              $uploadErrorMessage\
+    \          Message if an unknown error occurred on upload\n# * @param string[]|null\
+    \            $groups\n# * @param int|null                 $minWidth          \
+    \          Minimum image width\n# * @param int|null                 $maxWidth\
+    \                    Maximum image width\n# * @param int|null                \
+    \ $maxHeight                   Maximum image height\n# * @param int|null     \
+    \            $minHeight                   Minimum image weight\n# * @param int|float|null\
+    \           $maxRatio                    Maximum image ratio\n# * @param int|float|null\
+    \           $minRatio                    Minimum image ration\n# * @param int|float|null\
+    \           $minPixels                   Minimum amount of pixels\n# * @param\
+    \ int|float|null           $maxPixels                   Maximum amount of pixels\n\
+    # * @param bool|null                $allowSquare                 Whether to allow\
+    \ a square image (defaults to true)\n# * @param bool|null                $allowLandscape\
+    \              Whether to allow a landscape image (defaults to true)\n# * @param\
+    \ bool|null                $allowPortrait               Whether to allow a portrait\
+    \ image (defaults to true)\n# * @param bool|null                $detectCorrupted\
+    \             Whether to validate the image is not corrupted (defaults to false)\n\
+    # * @param string|null              $sizeNotDetectedMessage      Message if the\
+    \ system can not determine image size and there is a size constraint to validate\n\
+    # *\n# * @see https://www.iana.org/assignments/media-types/media-types.xhtml Existing\
+    \ media types"
+traits: []
+interfaces: []

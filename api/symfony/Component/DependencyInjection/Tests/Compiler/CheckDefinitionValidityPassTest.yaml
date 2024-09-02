@@ -1,0 +1,79 @@
+name: CheckDefinitionValidityPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CheckDefinitionValidityPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CheckDefinitionValidityPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: EnvParameterException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\EnvParameterException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+properties: []
+methods:
+- name: testProcessDetectsSyntheticNonPublicDefinitions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessDetectsNonSyntheticNonAbstractDefinitionWithoutClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessAcceptsServiceLocatorWithoutClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessDetectsFactoryWithoutClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidTags
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidTags
+  visibility: public
+  parameters:
+  - name: name
+  - name: attributes
+  - name: message
+  comment: '# * @dataProvider provideInvalidTags'
+- name: provideInvalidTags
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDynamicPublicServiceName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDynamicPublicAliasName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDynamicPrivateName
+  visibility: public
+  parameters: []
+  comment: null
+- name: process
+  visibility: protected
+  parameters:
+  - name: container
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Compiler\CheckDefinitionValidityPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\EnvParameterException
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+interfaces: []

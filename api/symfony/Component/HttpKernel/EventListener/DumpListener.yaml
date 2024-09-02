@@ -1,0 +1,52 @@
+name: DumpListener
+class_comment: '# * Configures dump() handler.
+
+  # *
+
+  # * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: ConsoleEvents
+  type: class
+  source: Symfony\Component\Console\ConsoleEvents
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: ClonerInterface
+  type: class
+  source: Symfony\Component\VarDumper\Cloner\ClonerInterface
+- name: DataDumperInterface
+  type: class
+  source: Symfony\Component\VarDumper\Dumper\DataDumperInterface
+- name: Connection
+  type: class
+  source: Symfony\Component\VarDumper\Server\Connection
+- name: VarDumper
+  type: class
+  source: Symfony\Component\VarDumper\VarDumper
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: cloner
+  - name: dumper
+  - name: connection
+    default: 'null'
+  comment: null
+- name: configure
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Console\ConsoleEvents
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\VarDumper\Cloner\ClonerInterface
+- Symfony\Component\VarDumper\Dumper\DataDumperInterface
+- Symfony\Component\VarDumper\Server\Connection
+- Symfony\Component\VarDumper\VarDumper
+interfaces:
+- EventSubscriberInterface

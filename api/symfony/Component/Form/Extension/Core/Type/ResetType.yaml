@@ -1,0 +1,28 @@
+name: ResetType
+class_comment: '# * A reset button.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: AbstractType
+  type: class
+  source: Symfony\Component\Form\AbstractType
+- name: ButtonTypeInterface
+  type: class
+  source: Symfony\Component\Form\ButtonTypeInterface
+properties: []
+methods:
+- name: getParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: getBlockPrefix
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\AbstractType
+- Symfony\Component\Form\ButtonTypeInterface
+interfaces:
+- ButtonTypeInterface

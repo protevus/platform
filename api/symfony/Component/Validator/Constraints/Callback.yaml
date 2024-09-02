@@ -1,0 +1,57 @@
+name: Callback
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+properties:
+- name: callback
+  visibility: public
+  comment: '# * Defines custom validation rules through arbitrary callback methods.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # #[\Attribute(\Attribute::TARGET_CLASS | \Attribute::TARGET_PROPERTY | \Attribute::TARGET_METHOD
+    | \Attribute::IS_REPEATABLE)]
+
+    # class Callback extends Constraint
+
+    # {
+
+    # /**
+
+    # * @var string|callable'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: "# * Defines custom validation rules through arbitrary callback methods.\n\
+    # *\n# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# #[\\Attribute(\\\
+    Attribute::TARGET_CLASS | \\Attribute::TARGET_PROPERTY | \\Attribute::TARGET_METHOD\
+    \ | \\Attribute::IS_REPEATABLE)]\n# class Callback extends Constraint\n# {\n#\
+    \ /**\n# * @var string|callable\n# */\n# public $callback;\n# \n# /**\n# * @param\
+    \ string|string[]|callable|array<string,mixed>|null $callback The callback definition\n\
+    # * @param string[]|null                                     $groups"
+- name: getDefaultOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: getTargets
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+interfaces: []

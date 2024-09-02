@@ -1,0 +1,30 @@
+name: JsonBundleReader
+class_comment: '# * Reads .json resource bundles.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: ResourceBundleNotFoundException
+  type: class
+  source: Symfony\Component\Intl\Exception\ResourceBundleNotFoundException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Intl\Exception\RuntimeException
+properties: []
+methods:
+- name: read
+  visibility: public
+  parameters:
+  - name: path
+  - name: locale
+  comment: null
+traits:
+- Symfony\Component\Intl\Exception\ResourceBundleNotFoundException
+- Symfony\Component\Intl\Exception\RuntimeException
+interfaces:
+- BundleReaderInterface

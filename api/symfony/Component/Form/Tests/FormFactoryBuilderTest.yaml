@@ -1,0 +1,39 @@
+name: FormFactoryBuilderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: FormFactory
+  type: class
+  source: Symfony\Component\Form\FormFactory
+- name: FormFactoryBuilder
+  type: class
+  source: Symfony\Component\Form\FormFactoryBuilder
+- name: FooType
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\FooType
+- name: NullFormTypeGuesser
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\NullFormTypeGuesser
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testAddType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddTypeGuesser
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\FormFactory
+- Symfony\Component\Form\FormFactoryBuilder
+- Symfony\Component\Form\Tests\Fixtures\FooType
+- Symfony\Component\Form\Tests\Fixtures\NullFormTypeGuesser
+interfaces: []

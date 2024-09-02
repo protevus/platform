@@ -1,0 +1,29 @@
+name: EmailTypeValidatorExtensionTest
+class_comment: null
+dependencies:
+- name: EmailType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\EmailType
+- name: ValidatorExtensionTrait
+  type: class
+  source: Symfony\Component\Form\Test\Traits\ValidatorExtensionTrait
+- name: ValidatorExtensionTrait
+  type: class
+  source: ValidatorExtensionTrait
+properties: []
+methods:
+- name: createForm
+  visibility: protected
+  parameters:
+  - name: options
+    default: '[]'
+  comment: null
+- name: testInvalidMessage
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\Extension\Core\Type\EmailType
+- Symfony\Component\Form\Test\Traits\ValidatorExtensionTrait
+- ValidatorExtensionTrait
+interfaces: []

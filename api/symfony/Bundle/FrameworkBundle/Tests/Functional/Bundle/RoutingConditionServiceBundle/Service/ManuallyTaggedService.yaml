@@ -1,0 +1,15 @@
+name: ManuallyTaggedService
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: giveMeTrue
+  visibility: public
+  parameters: []
+  comment: null
+- name: giveMeFalse
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

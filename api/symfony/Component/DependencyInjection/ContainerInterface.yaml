@@ -1,0 +1,66 @@
+name: ContainerInterface
+class_comment: null
+dependencies:
+- name: PsrContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: ParameterNotFoundException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException
+- name: ServiceCircularReferenceException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+- name: ServiceNotFoundException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+properties: []
+methods:
+- name: get
+  visibility: public
+  parameters:
+  - name: id
+  - name: invalidBehavior
+    default: self::EXCEPTION_ON_INVALID_REFERENCE
+  comment: "# * ContainerInterface is the interface implemented by service container\
+    \ classes.\n# *\n# * @author Fabien Potencier <fabien@symfony.com>\n# * @author\
+    \ Johannes M. Schmitt <schmittjoh@gmail.com>\n# */\n# interface ContainerInterface\
+    \ extends PsrContainerInterface\n# {\n# public const RUNTIME_EXCEPTION_ON_INVALID_REFERENCE\
+    \ = 0;\n# public const EXCEPTION_ON_INVALID_REFERENCE = 1;\n# public const NULL_ON_INVALID_REFERENCE\
+    \ = 2;\n# public const IGNORE_ON_INVALID_REFERENCE = 3;\n# public const IGNORE_ON_UNINITIALIZED_REFERENCE\
+    \ = 4;\n# \n# public function set(string $id, ?object $service): void;\n# \n#\
+    \ /**\n# * @template B of self::*_REFERENCE\n# *\n# * @param B $invalidBehavior\n\
+    # *\n# * @psalm-return (B is self::EXCEPTION_ON_INVALID_REFERENCE|self::RUNTIME_EXCEPTION_ON_INVALID_REFERENCE\
+    \ ? object : object|null)\n# *\n# * @throws ServiceCircularReferenceException\
+    \ When a circular reference is detected\n# * @throws ServiceNotFoundException\
+    \          When the service is not defined\n# *\n# * @see Reference"
+- name: has
+  visibility: public
+  parameters:
+  - name: id
+  comment: null
+- name: initialized
+  visibility: public
+  parameters:
+  - name: id
+  comment: '# * Check for whether or not a service has been initialized.'
+- name: getParameter
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * @throws ParameterNotFoundException if the parameter is not defined'
+- name: hasParameter
+  visibility: public
+  parameters:
+  - name: name
+  comment: null
+- name: setParameter
+  visibility: public
+  parameters:
+  - name: name
+  - name: value
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException
+- Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+- Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+interfaces: []

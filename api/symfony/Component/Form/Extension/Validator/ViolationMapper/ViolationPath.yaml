@@ -1,0 +1,104 @@
+name: ViolationPath
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>
+
+  # *
+
+  # * @implements \IteratorAggregate<int, string>'
+dependencies:
+- name: OutOfBoundsException
+  type: class
+  source: Symfony\Component\Form\Exception\OutOfBoundsException
+- name: PropertyPath
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyPath
+- name: PropertyPathInterface
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyPathInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: violationPath
+  comment: "# * @author Bernhard Schussek <bschussek@gmail.com>\n# *\n# * @implements\
+    \ \\IteratorAggregate<int, string>\n# */\n# class ViolationPath implements \\\
+    IteratorAggregate, PropertyPathInterface\n# {\n# /** @var list<string> */\n# private\
+    \ array $elements = [];\n# private array $isIndex = [];\n# private array $mapsForm\
+    \ = [];\n# private string $pathAsString = '';\n# private int $length = 0;\n# \n\
+    # /**\n# * Creates a new violation path from a string.\n# *\n# * @param string\
+    \ $violationPath The property path of a {@link \\Symfony\\Component\\Validator\\\
+    ConstraintViolation} object"
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: getLength
+  visibility: public
+  parameters: []
+  comment: null
+- name: getParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: getElements
+  visibility: public
+  parameters: []
+  comment: null
+- name: getElement
+  visibility: public
+  parameters:
+  - name: index
+  comment: null
+- name: isProperty
+  visibility: public
+  parameters:
+  - name: index
+  comment: null
+- name: isIndex
+  visibility: public
+  parameters:
+  - name: index
+  comment: null
+- name: isNullSafe
+  visibility: public
+  parameters:
+  - name: index
+  comment: null
+- name: mapsForm
+  visibility: public
+  parameters:
+  - name: index
+  comment: '# * Returns whether an element maps directly to a form.
+
+    # *
+
+    # * Consider the following violation path:
+
+    # *
+
+    # *     children[address].children[office].data.street
+
+    # *
+
+    # * In this example, "address" and "office" map to forms, while
+
+    # * "street does not.
+
+    # *
+
+    # * @throws OutOfBoundsException if the offset is invalid'
+- name: getIterator
+  visibility: public
+  parameters: []
+  comment: '# * Returns a new iterator for this path.'
+- name: buildString
+  visibility: private
+  parameters: []
+  comment: '# * Builds the string representation from the elements.'
+traits:
+- Symfony\Component\Form\Exception\OutOfBoundsException
+- Symfony\Component\PropertyAccess\PropertyPath
+- Symfony\Component\PropertyAccess\PropertyPathInterface
+interfaces:
+- \IteratorAggregate
+- \IteratorAggregate

@@ -1,0 +1,110 @@
+name: SendmailTransportTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: DelayedEnvelope
+  type: class
+  source: Symfony\Component\Mailer\DelayedEnvelope
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: TransportException
+  type: class
+  source: Symfony\Component\Mailer\Exception\TransportException
+- name: SentMessage
+  type: class
+  source: Symfony\Component\Mailer\SentMessage
+- name: SendmailTransport
+  type: class
+  source: Symfony\Component\Mailer\Transport\SendmailTransport
+- name: SmtpTransport
+  type: class
+  source: Symfony\Component\Mailer\Transport\Smtp\SmtpTransport
+- name: ProcessStream
+  type: class
+  source: Symfony\Component\Mailer\Transport\Smtp\Stream\ProcessStream
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+properties:
+- name: stream
+  visibility: private
+  comment: null
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testToString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToIsUsedWhenRecipientsAreNotSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRecipientsAreUsedWhenSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowsTransportExceptionOnFailure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStreamIsClearedOnFailure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDoesNotThrowWhenInteractive
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: stream
+  comment: null
+- name: send
+  visibility: public
+  parameters:
+  - name: message
+  - name: envelope
+    default: 'null'
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: skipOnWindows
+  visibility: private
+  parameters: []
+  comment: null
+- name: defaultMailAndEnvelope
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mailer\DelayedEnvelope
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mailer\Exception\TransportException
+- Symfony\Component\Mailer\SentMessage
+- Symfony\Component\Mailer\Transport\SendmailTransport
+- Symfony\Component\Mailer\Transport\Smtp\SmtpTransport
+- Symfony\Component\Mailer\Transport\Smtp\Stream\ProcessStream
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Email
+- Symfony\Component\Mime\RawMessage
+interfaces: []

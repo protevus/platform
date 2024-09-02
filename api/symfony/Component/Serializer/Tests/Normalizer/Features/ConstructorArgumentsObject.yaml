@@ -1,0 +1,23 @@
+name: ConstructorArgumentsObject
+class_comment: null
+dependencies: []
+properties:
+- name: foo
+  visibility: private
+  comment: null
+- name: bar
+  visibility: private
+  comment: null
+- name: baz
+  visibility: private
+  comment: null
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+  - name: bar
+  - name: baz
+  comment: null
+traits: []
+interfaces: []

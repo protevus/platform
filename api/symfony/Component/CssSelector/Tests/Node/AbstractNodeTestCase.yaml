@@ -1,0 +1,35 @@
+name: AbstractNodeTestCase
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: NodeInterface
+  type: class
+  source: Symfony\Component\CssSelector\Node\NodeInterface
+properties: []
+methods:
+- name: testToStringConversion
+  visibility: public
+  parameters:
+  - name: node
+  - name: representation
+  comment: '# @dataProvider getToStringConversionTestData'
+- name: testSpecificityValue
+  visibility: public
+  parameters:
+  - name: node
+  - name: value
+  comment: '# @dataProvider getSpecificityValueTestData'
+- name: getToStringConversionTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSpecificityValueTestData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\CssSelector\Node\NodeInterface
+interfaces: []

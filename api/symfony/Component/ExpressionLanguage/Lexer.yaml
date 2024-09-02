@@ -1,0 +1,34 @@
+name: Lexer
+class_comment: '# * Lexes an expression.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies: []
+properties: []
+methods:
+- name: tokenize
+  visibility: public
+  parameters:
+  - name: expression
+  comment: '# * Lexes an expression.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # class Lexer
+
+    # {
+
+    # /**
+
+    # * Tokenizes an expression.
+
+    # *
+
+    # * @throws SyntaxError'
+traits: []
+interfaces: []

@@ -1,0 +1,233 @@
+name: Dotenv
+class_comment: null
+dependencies:
+- name: FormatException
+  type: class
+  source: Symfony\Component\Dotenv\Exception\FormatException
+- name: FormatExceptionContext
+  type: class
+  source: Symfony\Component\Dotenv\Exception\FormatExceptionContext
+- name: PathException
+  type: class
+  source: Symfony\Component\Dotenv\Exception\PathException
+- name: ProcessException
+  type: class
+  source: Symfony\Component\Process\Exception\ExceptionInterface
+- name: Process
+  type: class
+  source: Symfony\Component\Process\Process
+properties: []
+methods:
+- name: setProdEnvs
+  visibility: public
+  parameters:
+  - name: prodEnvs
+  comment: "# * Manages .env files.\n# *\n# * @author Fabien Potencier <fabien@symfony.com>\n\
+    # * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# */\n# final class Dotenv\n\
+    # {\n# public const VARNAME_REGEX = '(?i:_?[A-Z][A-Z0-9_]*+)';\n# public const\
+    \ STATE_VARNAME = 0;\n# public const STATE_VALUE = 1;\n# \n# private string $path;\n\
+    # private int $cursor;\n# private int $lineno;\n# private string $data;\n# private\
+    \ int $end;\n# private array $values = [];\n# private array $prodEnvs = ['prod'];\n\
+    # private bool $usePutenv = false;\n# \n# public function __construct(\n# private\
+    \ string $envKey = 'APP_ENV',\n# private string $debugKey = 'APP_DEBUG',\n# )\
+    \ {\n# }\n# \n# /**\n# * @return $this"
+- name: usePutenv
+  visibility: public
+  parameters:
+  - name: usePutenv
+    default: 'true'
+  comment: '# * @param bool $usePutenv If `putenv()` should be used to define environment
+    variables or not.
+
+    # *                        Beware that `putenv()` is not thread safe, that''s
+    why it''s not enabled by default
+
+    # *
+
+    # * @return $this'
+- name: load
+  visibility: public
+  parameters:
+  - name: path
+  - name: '...$extraPaths'
+  comment: '# * Loads one or several .env files.
+
+    # *
+
+    # * @param string $path          A file to load
+
+    # * @param string ...$extraPaths A list of additional files to load
+
+    # *
+
+    # * @throws FormatException when a file has a syntax error
+
+    # * @throws PathException   when a file does not exist or is not readable'
+- name: loadEnv
+  visibility: public
+  parameters:
+  - name: path
+  - name: envKey
+    default: 'null'
+  - name: defaultEnv
+    default: '''dev'''
+  - name: testEnvs
+    default: '[''test'']'
+  - name: overrideExistingVars
+    default: 'false'
+  comment: '# * Loads a .env file and the corresponding .env.local, .env.$env and
+    .env.$env.local files if they exist.
+
+    # *
+
+    # * .env.local is always ignored in test env because tests should produce the
+    same results for everyone.
+
+    # * .env.dist is loaded when it exists and .env is not found.
+
+    # *
+
+    # * @param string      $path                 A file to load
+
+    # * @param string|null $envKey               The name of the env vars that defines
+    the app env
+
+    # * @param string      $defaultEnv           The app env to use when none is defined
+
+    # * @param array       $testEnvs             A list of app envs for which .env.local
+    should be ignored
+
+    # * @param bool        $overrideExistingVars Whether existing environment variables
+    set by the system should be overridden
+
+    # *
+
+    # * @throws FormatException when a file has a syntax error
+
+    # * @throws PathException   when a file does not exist or is not readable'
+- name: bootEnv
+  visibility: public
+  parameters:
+  - name: path
+  - name: defaultEnv
+    default: '''dev'''
+  - name: testEnvs
+    default: '[''test'']'
+  - name: overrideExistingVars
+    default: 'false'
+  comment: '# * Loads env vars from .env.local.php if the file exists or from the
+    other .env files otherwise.
+
+    # *
+
+    # * This method also configures the APP_DEBUG env var according to the current
+    APP_ENV.
+
+    # *
+
+    # * See method loadEnv() for rules related to .env files.'
+- name: overload
+  visibility: public
+  parameters:
+  - name: path
+  - name: '...$extraPaths'
+  comment: '# * Loads one or several .env files and enables override existing vars.
+
+    # *
+
+    # * @param string $path          A file to load
+
+    # * @param string ...$extraPaths A list of additional files to load
+
+    # *
+
+    # * @throws FormatException when a file has a syntax error
+
+    # * @throws PathException   when a file does not exist or is not readable'
+- name: populate
+  visibility: public
+  parameters:
+  - name: values
+  - name: overrideExistingVars
+    default: 'false'
+  comment: '# * Sets values as environment variables (via putenv, $_ENV, and $_SERVER).
+
+    # *
+
+    # * @param array $values               An array of env variables
+
+    # * @param bool  $overrideExistingVars Whether existing environment variables
+    set by the system should be overridden'
+- name: parse
+  visibility: public
+  parameters:
+  - name: data
+  - name: path
+    default: '''.env'''
+  comment: '# * Parses the contents of an .env file.
+
+    # *
+
+    # * @param string $data The data to be parsed
+
+    # * @param string $path The original file name where data where stored (used for
+    more meaningful error messages)
+
+    # *
+
+    # * @throws FormatException when a file has a syntax error'
+- name: lexVarname
+  visibility: private
+  parameters: []
+  comment: null
+- name: lexValue
+  visibility: private
+  parameters: []
+  comment: null
+- name: lexNestedExpression
+  visibility: private
+  parameters: []
+  comment: null
+- name: skipEmptyLines
+  visibility: private
+  parameters: []
+  comment: null
+- name: resolveCommands
+  visibility: private
+  parameters:
+  - name: value
+  - name: loadedVars
+  comment: null
+- name: resolveVariables
+  visibility: private
+  parameters:
+  - name: value
+  - name: loadedVars
+  comment: null
+- name: moveCursor
+  visibility: private
+  parameters:
+  - name: text
+  comment: null
+- name: createFormatException
+  visibility: private
+  parameters:
+  - name: message
+  comment: null
+- name: doLoad
+  visibility: private
+  parameters:
+  - name: overrideExistingVars
+  - name: paths
+  comment: null
+- name: populatePath
+  visibility: private
+  parameters:
+  - name: path
+  comment: null
+traits:
+- Symfony\Component\Dotenv\Exception\FormatException
+- Symfony\Component\Dotenv\Exception\FormatExceptionContext
+- Symfony\Component\Dotenv\Exception\PathException
+- Symfony\Component\Process\Process
+interfaces: []

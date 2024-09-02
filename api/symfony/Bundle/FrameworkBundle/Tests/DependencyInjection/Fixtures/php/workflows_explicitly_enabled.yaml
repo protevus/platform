@@ -1,0 +1,11 @@
+name: workflows_explicitly_enabled
+class_comment: null
+dependencies:
+- name: FrameworkExtensionTestCase
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\DependencyInjection\FrameworkExtensionTestCase
+properties: []
+methods: []
+traits:
+- Symfony\Bundle\FrameworkBundle\Tests\DependencyInjection\FrameworkExtensionTestCase
+interfaces: []

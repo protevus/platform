@@ -1,0 +1,63 @@
+name: Token
+class_comment: "# * CSS selector token.\n# *\n# * This component is a port of the\
+  \ Python cssselect library,\n# * which is copyright Ian Bicking, @see https://github.com/SimonSapin/cssselect.\n\
+  # *\n# * @author Jean-Fran\xE7ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n\
+  # * @internal"
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: type
+  - name: value
+  - name: position
+  comment: null
+- name: getType
+  visibility: public
+  parameters: []
+  comment: null
+- name: getValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: getPosition
+  visibility: public
+  parameters: []
+  comment: null
+- name: isFileEnd
+  visibility: public
+  parameters: []
+  comment: null
+- name: isDelimiter
+  visibility: public
+  parameters:
+  - name: values
+    default: '[]'
+  comment: null
+- name: isWhitespace
+  visibility: public
+  parameters: []
+  comment: null
+- name: isIdentifier
+  visibility: public
+  parameters: []
+  comment: null
+- name: isHash
+  visibility: public
+  parameters: []
+  comment: null
+- name: isNumber
+  visibility: public
+  parameters: []
+  comment: null
+- name: isString
+  visibility: public
+  parameters: []
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

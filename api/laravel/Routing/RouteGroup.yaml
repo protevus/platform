@@ -1,0 +1,89 @@
+name: RouteGroup
+class_comment: null
+dependencies:
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+properties: []
+methods:
+- name: merge
+  visibility: public
+  parameters:
+  - name: new
+  - name: old
+  - name: prependExistingPrefix
+    default: 'true'
+  comment: '# * Merge route groups into a new array.
+
+    # *
+
+    # * @param  array  $new
+
+    # * @param  array  $old
+
+    # * @param  bool  $prependExistingPrefix
+
+    # * @return array'
+- name: formatNamespace
+  visibility: protected
+  parameters:
+  - name: new
+  - name: old
+  comment: '# * Format the namespace for the new group attributes.
+
+    # *
+
+    # * @param  array  $new
+
+    # * @param  array  $old
+
+    # * @return string|null'
+- name: formatPrefix
+  visibility: protected
+  parameters:
+  - name: new
+  - name: old
+  - name: prependExistingPrefix
+    default: 'true'
+  comment: '# * Format the prefix for the new group attributes.
+
+    # *
+
+    # * @param  array  $new
+
+    # * @param  array  $old
+
+    # * @param  bool  $prependExistingPrefix
+
+    # * @return string|null'
+- name: formatWhere
+  visibility: protected
+  parameters:
+  - name: new
+  - name: old
+  comment: '# * Format the "wheres" for the new group attributes.
+
+    # *
+
+    # * @param  array  $new
+
+    # * @param  array  $old
+
+    # * @return array'
+- name: formatAs
+  visibility: protected
+  parameters:
+  - name: new
+  - name: old
+  comment: '# * Format the "as" clause of the new group attributes.
+
+    # *
+
+    # * @param  array  $new
+
+    # * @param  array  $old
+
+    # * @return array'
+traits:
+- Illuminate\Support\Arr
+interfaces: []

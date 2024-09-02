@@ -1,0 +1,75 @@
+name: InputTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ArrayInput
+  type: class
+  source: Symfony\Component\Console\Input\ArrayInput
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputDefinition
+  type: class
+  source: Symfony\Component\Console\Input\InputDefinition
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+properties: []
+methods:
+- name: testConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetInvalidOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetInvalidOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testArguments
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetInvalidArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetInvalidArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidateWithMissingArguments
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidateWithMissingRequiredArguments
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetGetInteractive
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetGetStream
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Input\ArrayInput
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputDefinition
+- Symfony\Component\Console\Input\InputOption
+interfaces: []

@@ -1,0 +1,11 @@
+name: Php82NullStandaloneReturnType
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: foo
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

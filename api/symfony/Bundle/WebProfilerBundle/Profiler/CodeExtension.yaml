@@ -1,0 +1,100 @@
+name: CodeExtension
+class_comment: null
+dependencies:
+- name: FileLinkFormatter
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter
+- name: AbstractExtension
+  type: class
+  source: Twig\Extension\AbstractExtension
+- name: TwigFilter
+  type: class
+  source: Twig\TwigFilter
+properties: []
+methods:
+- name: formatArgs
+  visibility: public
+  parameters:
+  - name: args
+  comment: "# * Twig extension relate to PHP code and used by the profiler and the\
+    \ default exception templates.\n# *\n# * This extension should only be used for\
+    \ debugging tools code\n# * that is never executed in a production environment.\n\
+    # *\n# * @author Fabien Potencier <fabien@symfony.com>\n# */\n# final class CodeExtension\
+    \ extends AbstractExtension\n# {\n# private string|FileLinkFormatter|array|false\
+    \ $fileLinkFormat;\n# \n# public function __construct(\n# string|FileLinkFormatter\
+    \ $fileLinkFormat,\n# private string $projectDir,\n# private string $charset,\n\
+    # ) {\n# $this->fileLinkFormat = $fileLinkFormat ?: \\ini_get('xdebug.file_link_format')\
+    \ ?: get_cfg_var('xdebug.file_link_format');\n# $this->projectDir = str_replace('\\\
+    \\', '/', $projectDir).'/';\n# }\n# \n# public function getFilters(): array\n\
+    # {\n# return [\n# new TwigFilter('abbr_class', $this->abbrClass(...), ['is_safe'\
+    \ => ['html'], 'pre_escape' => 'html']),\n# new TwigFilter('abbr_method', $this->abbrMethod(...),\
+    \ ['is_safe' => ['html'], 'pre_escape' => 'html']),\n# new TwigFilter('format_args',\
+    \ $this->formatArgs(...), ['is_safe' => ['html']]),\n# new TwigFilter('format_args_as_text',\
+    \ $this->formatArgsAsText(...)),\n# new TwigFilter('file_excerpt', $this->fileExcerpt(...),\
+    \ ['is_safe' => ['html']]),\n# new TwigFilter('format_file', $this->formatFile(...),\
+    \ ['is_safe' => ['html']]),\n# new TwigFilter('format_file_from_text', $this->formatFileFromText(...),\
+    \ ['is_safe' => ['html']]),\n# new TwigFilter('format_log_message', $this->formatLogMessage(...),\
+    \ ['is_safe' => ['html']]),\n# new TwigFilter('file_link', $this->getFileLink(...)),\n\
+    # new TwigFilter('file_relative', $this->getFileRelative(...)),\n# ];\n# }\n#\
+    \ \n# public function abbrClass(string $class): string\n# {\n# $parts = explode('\\\
+    \\', $class);\n# $short = array_pop($parts);\n# \n# return \\sprintf('<abbr title=\"\
+    %s\">%s</abbr>', $class, $short);\n# }\n# \n# public function abbrMethod(string\
+    \ $method): string\n# {\n# if (str_contains($method, '::')) {\n# [$class, $method]\
+    \ = explode('::', $method, 2);\n# $result = \\sprintf('%s::%s()', $this->abbrClass($class),\
+    \ $method);\n# } elseif ('Closure' === $method) {\n# $result = \\sprintf('<abbr\
+    \ title=\"%s\">%1$s</abbr>', $method);\n# } else {\n# $result = \\sprintf('<abbr\
+    \ title=\"%s\">%1$s</abbr>()', $method);\n# }\n# \n# return $result;\n# }\n# \n\
+    # /**\n# * Formats an array as a string."
+- name: formatArgsAsText
+  visibility: public
+  parameters:
+  - name: args
+  comment: '# * Formats an array as a string.'
+- name: fileExcerpt
+  visibility: public
+  parameters:
+  - name: file
+  - name: line
+  - name: srcContext
+    default: '3'
+  comment: '# * Returns an excerpt of a code file around the given line number.'
+- name: formatFile
+  visibility: public
+  parameters:
+  - name: file
+  - name: line
+  - name: text
+    default: 'null'
+  comment: '# * Formats a file path.'
+- name: getFileLink
+  visibility: public
+  parameters:
+  - name: file
+  - name: line
+  comment: null
+- name: getFileRelative
+  visibility: public
+  parameters:
+  - name: file
+  comment: null
+- name: formatFileFromText
+  visibility: public
+  parameters:
+  - name: text
+  comment: null
+- name: formatLogMessage
+  visibility: public
+  parameters:
+  - name: message
+  - name: context
+  comment: '# * @internal'
+- name: fixCodeMarkup
+  visibility: protected
+  parameters:
+  - name: line
+  comment: null
+traits:
+- Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter
+- Twig\Extension\AbstractExtension
+- Twig\TwigFilter
+interfaces: []

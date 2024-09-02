@@ -1,0 +1,98 @@
+name: RepeatedTypeTest
+class_comment: null
+dependencies:
+- name: Form
+  type: class
+  source: Symfony\Component\Form\Form
+- name: NotMappedType
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\NotMappedType
+- name: InvalidOptionsException
+  type: class
+  source: Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testSetData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetOptionsPerChild
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetRequired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMappedOverridesDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotMappedInnerIsOverridden
+  visibility: public
+  parameters:
+  - name: configurationKey
+  comment: '# * @dataProvider notMappedConfigurationKeys'
+- name: notMappedConfigurationKeys
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetInvalidOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetInvalidFirstOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetInvalidSecondOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetErrorBubblingToTrue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetErrorBubblingToFalse
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetErrorBubblingIndividually
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetOptionsPerChildAndOverwrite
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitUnequal
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitEqual
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNull
+  visibility: public
+  parameters:
+  - name: expected
+    default: 'null'
+  - name: norm
+    default: 'null'
+  - name: view
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\Form\Form
+- Symfony\Component\Form\Tests\Fixtures\NotMappedType
+- Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+interfaces: []

@@ -1,0 +1,43 @@
+name: QpMimeHeaderEncoderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: QpMimeHeaderEncoder
+  type: class
+  source: Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder
+properties: []
+methods:
+- name: testNameIsQ
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSpaceAndTabNeverAppear
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSpaceIsRepresentedByUnderscore
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEqualsAndQuestionAndUnderscoreAreEncoded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParensAndQuotesAreEncoded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOnlyCharactersAllowedInPhrasesAreUsed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEqualsNeverAppearsAtEndOfLine
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mime\Encoder\QpMimeHeaderEncoder
+interfaces: []

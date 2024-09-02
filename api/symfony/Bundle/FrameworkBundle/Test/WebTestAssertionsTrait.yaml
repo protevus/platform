@@ -1,0 +1,19 @@
+name: WebTestAssertionsTrait
+class_comment: null
+dependencies:
+- name: BrowserKitAssertionsTrait
+  type: class
+  source: BrowserKitAssertionsTrait
+- name: DomCrawlerAssertionsTrait
+  type: class
+  source: DomCrawlerAssertionsTrait
+- name: HttpClientAssertionsTrait
+  type: class
+  source: HttpClientAssertionsTrait
+properties: []
+methods: []
+traits:
+- BrowserKitAssertionsTrait
+- DomCrawlerAssertionsTrait
+- HttpClientAssertionsTrait
+interfaces: []

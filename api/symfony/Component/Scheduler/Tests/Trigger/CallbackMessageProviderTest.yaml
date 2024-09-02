@@ -1,0 +1,27 @@
+name: CallbackMessageProviderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: MessageContext
+  type: class
+  source: Symfony\Component\Scheduler\Generator\MessageContext
+- name: CallbackMessageProvider
+  type: class
+  source: Symfony\Component\Scheduler\Trigger\CallbackMessageProvider
+- name: TriggerInterface
+  type: class
+  source: Symfony\Component\Scheduler\Trigger\TriggerInterface
+properties: []
+methods:
+- name: testToString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Scheduler\Generator\MessageContext
+- Symfony\Component\Scheduler\Trigger\CallbackMessageProvider
+- Symfony\Component\Scheduler\Trigger\TriggerInterface
+interfaces: []

@@ -1,0 +1,36 @@
+name: AbstractHasher
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: info
+  visibility: public
+  parameters:
+  - name: hashedValue
+  comment: '# * Get information about the given hashed value.
+
+    # *
+
+    # * @param  string  $hashedValue
+
+    # * @return array'
+- name: check
+  visibility: public
+  parameters:
+  - name: value
+  - name: hashedValue
+  - name: options
+    default: '[]'
+  comment: '# * Check the given plain value against a hash.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @param  string|null  $hashedValue
+
+    # * @param  array  $options
+
+    # * @return bool'
+traits: []
+interfaces: []

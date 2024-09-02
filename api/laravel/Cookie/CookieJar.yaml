@@ -1,0 +1,291 @@
+name: CookieJar
+class_comment: null
+dependencies:
+- name: JarContract
+  type: class
+  source: Illuminate\Contracts\Cookie\QueueingFactory
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: InteractsWithTime
+  type: class
+  source: Illuminate\Support\InteractsWithTime
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: Cookie
+  type: class
+  source: Symfony\Component\HttpFoundation\Cookie
+properties:
+- name: path
+  visibility: protected
+  comment: '# * The default path (if specified).
+
+    # *
+
+    # * @var string'
+- name: domain
+  visibility: protected
+  comment: '# * The default domain (if specified).
+
+    # *
+
+    # * @var string|null'
+- name: secure
+  visibility: protected
+  comment: '# * The default secure setting (defaults to null).
+
+    # *
+
+    # * @var bool|null'
+- name: sameSite
+  visibility: protected
+  comment: '# * The default SameSite option (defaults to lax).
+
+    # *
+
+    # * @var string'
+- name: queued
+  visibility: protected
+  comment: '# * All of the cookies queued for sending.
+
+    # *
+
+    # * @var \Symfony\Component\HttpFoundation\Cookie[]'
+methods:
+- name: make
+  visibility: public
+  parameters:
+  - name: name
+  - name: value
+  - name: minutes
+    default: '0'
+  - name: path
+    default: 'null'
+  - name: domain
+    default: 'null'
+  - name: secure
+    default: 'null'
+  - name: httpOnly
+    default: 'true'
+  - name: raw
+    default: 'false'
+  - name: sameSite
+    default: 'null'
+  comment: "# * The default path (if specified).\n# *\n# * @var string\n# */\n# protected\
+    \ $path = '/';\n# \n# /**\n# * The default domain (if specified).\n# *\n# * @var\
+    \ string|null\n# */\n# protected $domain;\n# \n# /**\n# * The default secure setting\
+    \ (defaults to null).\n# *\n# * @var bool|null\n# */\n# protected $secure;\n#\
+    \ \n# /**\n# * The default SameSite option (defaults to lax).\n# *\n# * @var string\n\
+    # */\n# protected $sameSite = 'lax';\n# \n# /**\n# * All of the cookies queued\
+    \ for sending.\n# *\n# * @var \\Symfony\\Component\\HttpFoundation\\Cookie[]\n\
+    # */\n# protected $queued = [];\n# \n# /**\n# * Create a new cookie instance.\n\
+    # *\n# * @param  string  $name\n# * @param  string  $value\n# * @param  int  $minutes\n\
+    # * @param  string|null  $path\n# * @param  string|null  $domain\n# * @param \
+    \ bool|null  $secure\n# * @param  bool  $httpOnly\n# * @param  bool  $raw\n# *\
+    \ @param  string|null  $sameSite\n# * @return \\Symfony\\Component\\HttpFoundation\\\
+    Cookie"
+- name: forever
+  visibility: public
+  parameters:
+  - name: name
+  - name: value
+  - name: path
+    default: 'null'
+  - name: domain
+    default: 'null'
+  - name: secure
+    default: 'null'
+  - name: httpOnly
+    default: 'true'
+  - name: raw
+    default: 'false'
+  - name: sameSite
+    default: 'null'
+  comment: '# * Create a cookie that lasts "forever" (400 days).
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string  $value
+
+    # * @param  string|null  $path
+
+    # * @param  string|null  $domain
+
+    # * @param  bool|null  $secure
+
+    # * @param  bool  $httpOnly
+
+    # * @param  bool  $raw
+
+    # * @param  string|null  $sameSite
+
+    # * @return \Symfony\Component\HttpFoundation\Cookie'
+- name: forget
+  visibility: public
+  parameters:
+  - name: name
+  - name: path
+    default: 'null'
+  - name: domain
+    default: 'null'
+  comment: '# * Expire the given cookie.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|null  $path
+
+    # * @param  string|null  $domain
+
+    # * @return \Symfony\Component\HttpFoundation\Cookie'
+- name: hasQueued
+  visibility: public
+  parameters:
+  - name: key
+  - name: path
+    default: 'null'
+  comment: '# * Determine if a cookie has been queued.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  string|null  $path
+
+    # * @return bool'
+- name: queued
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  - name: path
+    default: 'null'
+  comment: '# * Get a queued cookie instance.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $default
+
+    # * @param  string|null  $path
+
+    # * @return \Symfony\Component\HttpFoundation\Cookie|null'
+- name: queue
+  visibility: public
+  parameters:
+  - name: '...$parameters'
+  comment: '# * Queue a cookie to send with the next response.
+
+    # *
+
+    # * @param  mixed  ...$parameters
+
+    # * @return void'
+- name: expire
+  visibility: public
+  parameters:
+  - name: name
+  - name: path
+    default: 'null'
+  - name: domain
+    default: 'null'
+  comment: '# * Queue a cookie to expire with the next response.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|null  $path
+
+    # * @param  string|null  $domain
+
+    # * @return void'
+- name: unqueue
+  visibility: public
+  parameters:
+  - name: name
+  - name: path
+    default: 'null'
+  comment: '# * Remove a cookie from the queue.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|null  $path
+
+    # * @return void'
+- name: getPathAndDomain
+  visibility: protected
+  parameters:
+  - name: path
+  - name: domain
+  - name: secure
+    default: 'null'
+  - name: sameSite
+    default: 'null'
+  comment: '# * Get the path and domain, or the default values.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  string|null  $domain
+
+    # * @param  bool|null  $secure
+
+    # * @param  string|null  $sameSite
+
+    # * @return array'
+- name: setDefaultPathAndDomain
+  visibility: public
+  parameters:
+  - name: path
+  - name: domain
+  - name: secure
+    default: 'false'
+  - name: sameSite
+    default: 'null'
+  comment: '# * Set the default path and domain for the jar.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  string|null  $domain
+
+    # * @param  bool|null  $secure
+
+    # * @param  string|null  $sameSite
+
+    # * @return $this'
+- name: getQueuedCookies
+  visibility: public
+  parameters: []
+  comment: '# * Get the cookies which have been queued for the next request.
+
+    # *
+
+    # * @return \Symfony\Component\HttpFoundation\Cookie[]'
+- name: flushQueuedCookies
+  visibility: public
+  parameters: []
+  comment: '# * Flush the cookies which have been queued for the next request.
+
+    # *
+
+    # * @return $this'
+traits:
+- Illuminate\Support\Arr
+- Illuminate\Support\InteractsWithTime
+- Illuminate\Support\Traits\Macroable
+- Symfony\Component\HttpFoundation\Cookie
+- InteractsWithTime
+interfaces:
+- JarContract

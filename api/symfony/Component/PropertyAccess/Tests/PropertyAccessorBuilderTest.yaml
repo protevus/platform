@@ -1,0 +1,87 @@
+name: PropertyAccessorBuilderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ArrayAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\ArrayAdapter
+- name: PropertyAccessor
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccessor
+- name: PropertyAccessorBuilder
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccessorBuilder
+- name: PropertyReadInfoExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyReadInfoExtractorInterface
+- name: PropertyWriteInfoExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyWriteInfoExtractorInterface
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testEnableMagicGet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDisableMagicGet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEnableMagicSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDisableMagicSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEnableMagicCall
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDisableMagicCall
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTogglingMagicGet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTogglingMagicSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTogglingMagicCall
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPropertyAccessor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUseCache
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUseReadInfoExtractor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUseWriteInfoExtractor
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Cache\Adapter\ArrayAdapter
+- Symfony\Component\PropertyAccess\PropertyAccessor
+- Symfony\Component\PropertyAccess\PropertyAccessorBuilder
+- Symfony\Component\PropertyInfo\PropertyReadInfoExtractorInterface
+- Symfony\Component\PropertyInfo\PropertyWriteInfoExtractorInterface
+interfaces: []

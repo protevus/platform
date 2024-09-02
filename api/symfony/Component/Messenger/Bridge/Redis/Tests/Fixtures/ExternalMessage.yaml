@@ -1,0 +1,25 @@
+name: ExternalMessage
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: setBar
+  visibility: public
+  parameters:
+  - name: bar
+  comment: null
+- name: getBar
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

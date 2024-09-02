@@ -1,0 +1,69 @@
+name: SMimeSignerTest
+class_comment: '# * @requires extension openssl'
+dependencies:
+- name: SMimeEncrypter
+  type: class
+  source: Symfony\Component\Mime\Crypto\SMimeEncrypter
+- name: SMimeSigner
+  type: class
+  source: Symfony\Component\Mime\Crypto\SMimeSigner
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+- name: Headers
+  type: class
+  source: Symfony\Component\Mime\Header\Headers
+- name: Message
+  type: class
+  source: Symfony\Component\Mime\Message
+- name: DataPart
+  type: class
+  source: Symfony\Component\Mime\Part\DataPart
+- name: TextPart
+  type: class
+  source: Symfony\Component\Mime\Part\TextPart
+properties: []
+methods:
+- name: testSignedMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSignEncryptedMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSignedMessageWithPassphrase
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProperSerialiable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSignedMessageWithBcc
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSignedMessageWithAttachments
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSignedMessageExtraCerts
+  visibility: public
+  parameters: []
+  comment: null
+- name: assertMessageSignatureIsValid
+  visibility: private
+  parameters:
+  - name: message
+  - name: originalMessage
+  comment: null
+traits:
+- Symfony\Component\Mime\Crypto\SMimeEncrypter
+- Symfony\Component\Mime\Crypto\SMimeSigner
+- Symfony\Component\Mime\Email
+- Symfony\Component\Mime\Header\Headers
+- Symfony\Component\Mime\Message
+- Symfony\Component\Mime\Part\DataPart
+- Symfony\Component\Mime\Part\TextPart
+interfaces: []

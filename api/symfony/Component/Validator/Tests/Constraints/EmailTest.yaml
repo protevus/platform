@@ -1,0 +1,68 @@
+name: EmailTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Email
+  type: class
+  source: Symfony\Component\Validator\Constraints\Email
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Validator\Exception\InvalidArgumentException
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+- name: AttributeLoader
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\AttributeLoader
+properties:
+- name: a
+  visibility: private
+  comment: null
+- name: b
+  visibility: private
+  comment: null
+- name: c
+  visibility: private
+  comment: null
+methods:
+- name: testConstructorStrict
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorHtml5AllowNoTld
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnknownModesTriggerException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnknownModeArgumentsTriggerException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNormalizerCanBeSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidNormalizerThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidNormalizerObjectThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAttribute
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\Constraints\Email
+- Symfony\Component\Validator\Exception\InvalidArgumentException
+- Symfony\Component\Validator\Mapping\ClassMetadata
+- Symfony\Component\Validator\Mapping\Loader\AttributeLoader
+interfaces: []

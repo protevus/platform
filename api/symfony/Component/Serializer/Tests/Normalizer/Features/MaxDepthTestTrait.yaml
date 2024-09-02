@@ -1,0 +1,27 @@
+name: MaxDepthTestTrait
+class_comment: null
+dependencies:
+- name: NormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\NormalizerInterface
+- name: MaxDepthDummy
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\Attributes\MaxDepthDummy
+properties: []
+methods:
+- name: getNormalizerForMaxDepth
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testMaxDepth
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMaxDepthHandler
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Serializer\Normalizer\NormalizerInterface
+- Symfony\Component\Serializer\Tests\Fixtures\Attributes\MaxDepthDummy
+interfaces: []

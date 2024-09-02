@@ -1,0 +1,41 @@
+name: Config
+class_comment: null
+dependencies:
+- name: Attribute
+  type: class
+  source: Attribute
+- name: Container
+  type: class
+  source: Illuminate\Contracts\Container\Container
+- name: ContextualAttribute
+  type: class
+  source: Illuminate\Contracts\Container\ContextualAttribute
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Create a new class instance.'
+- name: resolve
+  visibility: public
+  parameters:
+  - name: attribute
+  - name: container
+  comment: '# * Resolve the configuration value.
+
+    # *
+
+    # * @param  self  $attribute
+
+    # * @param  \Illuminate\Contracts\Container\Container  $container
+
+    # * @return mixed'
+traits:
+- Attribute
+- Illuminate\Contracts\Container\Container
+- Illuminate\Contracts\Container\ContextualAttribute
+interfaces:
+- ContextualAttribute

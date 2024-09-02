@@ -1,0 +1,10 @@
+name: Attachment
+class_comment: null
+dependencies:
+- name: BaseAttachment
+  type: class
+  source: Illuminate\Mail\Attachment
+properties: []
+methods: []
+traits: []
+interfaces: []

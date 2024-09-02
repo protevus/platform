@@ -1,0 +1,51 @@
+name: XPathExpr
+class_comment: "# * XPath expression translator interface.\n# *\n# * This component\
+  \ is a port of the Python cssselect library,\n# * which is copyright Ian Bicking,\
+  \ @see https://github.com/SimonSapin/cssselect.\n# *\n# * @author Jean-Fran\xE7\
+  ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n# * @internal"
+dependencies: []
+properties: []
+methods:
+- name: addCondition
+  visibility: public
+  parameters:
+  - name: condition
+  - name: operator
+    default: '''and'''
+  comment: "# * XPath expression translator interface.\n# *\n# * This component is\
+    \ a port of the Python cssselect library,\n# * which is copyright Ian Bicking,\
+    \ @see https://github.com/SimonSapin/cssselect.\n# *\n# * @author Jean-Fran\xE7\
+    ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n# * @internal\n# */\n# class\
+    \ XPathExpr\n# {\n# public function __construct(\n# private string $path = '',\n\
+    # private string $element = '*',\n# private string $condition = '',\n# bool $starPrefix\
+    \ = false,\n# ) {\n# if ($starPrefix) {\n# $this->addStarPrefix();\n# }\n# }\n\
+    # \n# public function getElement(): string\n# {\n# return $this->element;\n# }\n\
+    # \n# /**\n# * @return $this"
+- name: getCondition
+  visibility: public
+  parameters: []
+  comment: null
+- name: addNameTest
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: addStarPrefix
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: join
+  visibility: public
+  parameters:
+  - name: combiner
+  - name: expr
+  comment: '# * Joins another XPathExpr with a combiner.
+
+    # *
+
+    # * @return $this'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

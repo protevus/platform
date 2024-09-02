@@ -1,0 +1,25 @@
+name: ObjectDummyWithContextAttribute
+class_comment: null
+dependencies:
+- name: Context
+  type: class
+  source: Symfony\Component\Serializer\Attribute\Context
+- name: SerializedName
+  type: class
+  source: Symfony\Component\Serializer\Attribute\SerializedName
+- name: DateTimeNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DateTimeNormalizer
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: '#[Context([DateTimeNormalizer::FORMAT_KEY'
+    default: '> ''m-d-Y'']'
+  comment: null
+traits:
+- Symfony\Component\Serializer\Attribute\Context
+- Symfony\Component\Serializer\Attribute\SerializedName
+- Symfony\Component\Serializer\Normalizer\DateTimeNormalizer
+interfaces: []

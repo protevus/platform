@@ -1,0 +1,28 @@
+name: InvalidPayloadException
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties:
+- name: value
+  visibility: public
+  comment: '# * The value that failed to decode.
+
+    # *
+
+    # * @var mixed'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: message
+    default: 'null'
+  - name: value
+    default: 'null'
+  comment: "# * The value that failed to decode.\n# *\n# * @var mixed\n# */\n# public\
+    \ $value;\n# \n# /**\n# * Create a new exception instance.\n# *\n# * @param  string|null\
+    \  $message\n# * @param  mixed  $value\n# * @return void"
+traits:
+- InvalidArgumentException
+interfaces: []

@@ -1,0 +1,11 @@
+name: DummyObjectWithEnumProperty
+class_comment: null
+dependencies:
+- name: StringBackedEnumDummy
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\StringBackedEnumDummy
+properties: []
+methods: []
+traits:
+- Symfony\Component\Serializer\Tests\Fixtures\StringBackedEnumDummy
+interfaces: []

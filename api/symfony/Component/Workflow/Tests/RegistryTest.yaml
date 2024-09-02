@@ -1,0 +1,84 @@
+name: RegistryTest
+class_comment: null
+dependencies:
+- name: MockObject
+  type: class
+  source: PHPUnit\Framework\MockObject\MockObject
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Definition
+  type: class
+  source: Symfony\Component\Workflow\Definition
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Workflow\Exception\InvalidArgumentException
+- name: MarkingStoreInterface
+  type: class
+  source: Symfony\Component\Workflow\MarkingStore\MarkingStoreInterface
+- name: Registry
+  type: class
+  source: Symfony\Component\Workflow\Registry
+- name: WorkflowSupportStrategyInterface
+  type: class
+  source: Symfony\Component\Workflow\SupportStrategy\WorkflowSupportStrategyInterface
+- name: Workflow
+  type: class
+  source: Symfony\Component\Workflow\Workflow
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testHasWithMatch
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasWithoutMatch
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetWithSuccess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetWithMultipleMatch
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetWithNoMatch
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllWithOneMatchWithSuccess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllWithMultipleMatchWithSuccess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllWithNoMatch
+  visibility: public
+  parameters: []
+  comment: null
+- name: createWorkflowSupportStrategy
+  visibility: private
+  parameters:
+  - name: supportedClassName
+  comment: null
+traits:
+- PHPUnit\Framework\MockObject\MockObject
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Workflow\Definition
+- Symfony\Component\Workflow\Exception\InvalidArgumentException
+- Symfony\Component\Workflow\MarkingStore\MarkingStoreInterface
+- Symfony\Component\Workflow\Registry
+- Symfony\Component\Workflow\SupportStrategy\WorkflowSupportStrategyInterface
+- Symfony\Component\Workflow\Workflow
+- Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+interfaces: []

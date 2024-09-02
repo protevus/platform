@@ -1,0 +1,34 @@
+name: AutoconfigureTag
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  - name: attributes
+    default: '[]'
+  comment: '# * An attribute to tell how a base type should be tagged.
+
+    # *
+
+    # * @author Nicolas Grekas <p@tchwork.com>
+
+    # */
+
+    # #[\Attribute(\Attribute::TARGET_CLASS | \Attribute::IS_REPEATABLE)]
+
+    # class AutoconfigureTag extends Autoconfigure
+
+    # {
+
+    # /**
+
+    # * @param string|null             $name       The tag name to add
+
+    # * @param array<array-key, mixed> $attributes The tag attributes to attach to
+    the tag'
+traits: []
+interfaces: []

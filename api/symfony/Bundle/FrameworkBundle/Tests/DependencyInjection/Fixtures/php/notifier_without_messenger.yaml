@@ -1,0 +1,15 @@
+name: notifier_without_messenger
+class_comment: null
+dependencies:
+- name: BarMessage
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Messenger\BarMessage
+- name: FooMessage
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Messenger\FooMessage
+properties: []
+methods: []
+traits:
+- Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Messenger\BarMessage
+- Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Messenger\FooMessage
+interfaces: []

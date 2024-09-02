@@ -1,0 +1,51 @@
+name: ResolveAutowireInlineAttributesPass
+class_comment: "# * Inspects existing autowired services for {@see AutowireInline}\
+  \ attributes and registers the definitions for reuse.\n# *\n# * @author Ismail \xD6\
+  zg\xFCn Turan <oezguen.turan@dadadev.com>"
+dependencies:
+- name: AutowireInline
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\AutowireInline
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: ProxyHelper
+  type: class
+  source: Symfony\Component\VarExporter\ProxyHelper
+properties: []
+methods:
+- name: processValue
+  visibility: protected
+  parameters:
+  - name: value
+  - name: isRoot
+    default: 'false'
+  comment: null
+- name: registerAutowireInlineAttributes
+  visibility: private
+  parameters:
+  - name: method
+  - name: arguments
+  - name: isChildDefinition
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Attribute\AutowireInline
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\VarExporter\ProxyHelper
+interfaces: []

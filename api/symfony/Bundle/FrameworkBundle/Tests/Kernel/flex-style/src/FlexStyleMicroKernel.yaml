@@ -1,0 +1,92 @@
+name: FlexStyleMicroKernel
+class_comment: null
+dependencies:
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: NullLogger
+  type: class
+  source: Psr\Log\NullLogger
+- name: MicroKernelTrait
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait
+- name: ContainerConfigurator
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: Kernel
+  type: class
+  source: Symfony\Component\HttpKernel\Kernel
+- name: Route
+  type: class
+  source: Symfony\Component\Routing\Attribute\Route
+- name: RoutingConfigurator
+  type: class
+  source: Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator
+properties: []
+methods:
+- name: halloweenAction
+  visibility: public
+  parameters:
+  - name: o
+  comment: null
+- name: easterAction
+  visibility: public
+  parameters: []
+  comment: null
+- name: createHalloween
+  visibility: public
+  parameters:
+  - name: logger
+  - name: halloween
+  comment: null
+- name: getCacheDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: getLogDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: getProjectDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: __sleep
+  visibility: public
+  parameters: []
+  comment: null
+- name: __wakeup
+  visibility: public
+  parameters: []
+  comment: null
+- name: __destruct
+  visibility: public
+  parameters: []
+  comment: null
+- name: configureRoutes
+  visibility: protected
+  parameters:
+  - name: routes
+  comment: null
+- name: configureContainer
+  visibility: protected
+  parameters:
+  - name: c
+  comment: null
+traits:
+- Psr\Log\LoggerInterface
+- Psr\Log\NullLogger
+- Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait
+- Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator
+- Symfony\Component\Filesystem\Filesystem
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Kernel
+- Symfony\Component\Routing\Attribute\Route
+- Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator
+interfaces: []

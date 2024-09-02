@@ -1,0 +1,112 @@
+name: JsonResponseTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: JsonResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\JsonResponse
+properties: []
+methods:
+- name: testConstructorEmptyCreatesJsonObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithArrayCreatesJsonArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithAssocArrayCreatesJsonObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithSimpleTypes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithCustomStatus
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorAddsContentTypeHeader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithCustomHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithCustomContentType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetJson
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetCallback
+  visibility: public
+  parameters: []
+  comment: null
+- name: testJsonEncodeFlags
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetEncodingOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetEncodingOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItAcceptsJsonAsString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetCallbackInvalidIdentifier
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetContent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetContentJsonSerializeError
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetComplexCallback
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithNullAsDataThrowsAnUnexpectedValueException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithObjectWithToStringMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithObjectWithoutToStringMethodThrowsAnException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetDataWithNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: jsonSerialize
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\JsonResponse
+interfaces:
+- \JsonSerializable

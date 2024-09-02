@@ -1,0 +1,65 @@
+name: GuardListener
+class_comment: "# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>"
+dependencies:
+- name: AuthenticationTrustResolverInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface
+- name: TokenStorageInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+- name: AuthorizationCheckerInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
+- name: RoleHierarchyInterface
+  type: class
+  source: Symfony\Component\Security\Core\Role\RoleHierarchyInterface
+- name: ValidatorInterface
+  type: class
+  source: Symfony\Component\Validator\Validator\ValidatorInterface
+- name: GuardEvent
+  type: class
+  source: Symfony\Component\Workflow\Event\GuardEvent
+- name: TransitionBlocker
+  type: class
+  source: Symfony\Component\Workflow\TransitionBlocker
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: configuration
+  - name: expressionLanguage
+  - name: tokenStorage
+  - name: authorizationChecker
+  - name: trustResolver
+  - name: roleHierarchy
+    default: 'null'
+  - name: validator
+    default: 'null'
+  comment: null
+- name: onTransition
+  visibility: public
+  parameters:
+  - name: event
+  - name: eventName
+  comment: null
+- name: validateGuardExpression
+  visibility: private
+  parameters:
+  - name: event
+  - name: expression
+  comment: null
+- name: getVariables
+  visibility: private
+  parameters:
+  - name: event
+  comment: null
+traits:
+- Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface
+- Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface
+- Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
+- Symfony\Component\Security\Core\Role\RoleHierarchyInterface
+- Symfony\Component\Validator\Validator\ValidatorInterface
+- Symfony\Component\Workflow\Event\GuardEvent
+- Symfony\Component\Workflow\TransitionBlocker
+interfaces: []

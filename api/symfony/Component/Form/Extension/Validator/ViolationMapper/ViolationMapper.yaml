@@ -1,0 +1,151 @@
+name: ViolationMapper
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: FileUploadError
+  type: class
+  source: Symfony\Component\Form\FileUploadError
+- name: FormError
+  type: class
+  source: Symfony\Component\Form\FormError
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+- name: FormRendererInterface
+  type: class
+  source: Symfony\Component\Form\FormRendererInterface
+- name: InheritDataAwareIterator
+  type: class
+  source: Symfony\Component\Form\Util\InheritDataAwareIterator
+- name: PropertyPathBuilder
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyPathBuilder
+- name: PropertyPathIterator
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyPathIterator
+- name: PropertyPathIteratorInterface
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyPathIteratorInterface
+- name: File
+  type: class
+  source: Symfony\Component\Validator\Constraints\File
+- name: ConstraintViolation
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolation
+- name: TranslatorInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatorInterface
+properties: []
+methods:
+- name: matchChild
+  visibility: private
+  parameters:
+  - name: form
+  - name: it
+  comment: "# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# class ViolationMapper\
+    \ implements ViolationMapperInterface\n# {\n# private bool $allowNonSynchronized\
+    \ = false;\n# \n# public function __construct(\n# private ?FormRendererInterface\
+    \ $formRenderer = null,\n# private ?TranslatorInterface $translator = null,\n\
+    # ) {\n# }\n# \n# public function mapViolation(ConstraintViolation $violation,\
+    \ FormInterface $form, bool $allowNonSynchronized = false): void\n# {\n# $this->allowNonSynchronized\
+    \ = $allowNonSynchronized;\n# \n# // The scope is the currently found most specific\
+    \ form that\n# // an error should be mapped to. After setting the scope, the\n\
+    # // mapper will try to continue to find more specific matches in\n# // the children\
+    \ of scope. If it cannot, the error will be\n# // mapped to this scope.\n# $scope\
+    \ = null;\n# \n# $violationPath = null;\n# $relativePath = null;\n# $match = false;\n\
+    # \n# // Don't create a ViolationPath instance for empty property paths\n# if\
+    \ ('' !== $violation->getPropertyPath()) {\n# $violationPath = new ViolationPath($violation->getPropertyPath());\n\
+    # $relativePath = $this->reconstructPath($violationPath, $form);\n# }\n# \n# //\
+    \ This case happens if the violation path is empty and thus\n# // the violation\
+    \ should be mapped to the root form\n# if (null === $violationPath) {\n# $scope\
+    \ = $form;\n# }\n# \n# // In general, mapping happens from the root form to the\
+    \ leaf forms\n# // First, the rules of the root form are applied to determine\n\
+    # // the subsequent descendant. The rules of this descendant are then\n# // applied\
+    \ to find the next and so on, until we have found the\n# // most specific form\
+    \ that matches the violation.\n# \n# // If any of the forms found in this process\
+    \ is not synchronized,\n# // mapping is aborted. Non-synchronized forms could\
+    \ not reverse\n# // transform the value entered by the user, thus any further\
+    \ violations\n# // caused by the (invalid) reverse transformed value should be\n\
+    # // ignored.\n# \n# if (null !== $relativePath) {\n# // Set the scope to the\
+    \ root of the relative path\n# // This root will usually be $form. If the path\
+    \ contains\n# // an unmapped form though, the last unmapped form found\n# // will\
+    \ be the root of the path.\n# $scope = $relativePath->getRoot();\n# $it = new\
+    \ PropertyPathIterator($relativePath);\n# \n# while ($this->acceptsErrors($scope)\
+    \ && null !== ($child = $this->matchChild($scope, $it))) {\n# $scope = $child;\n\
+    # $it->next();\n# $match = true;\n# }\n# }\n# \n# // This case happens if an error\
+    \ happened in the data under a\n# // form inheriting its parent data that does\
+    \ not match any of the\n# // children of that form.\n# if (null !== $violationPath\
+    \ && !$match) {\n# // If we could not map the error to anything more specific\n\
+    # // than the root element, map it to the innermost directly\n# // mapped form\
+    \ of the violation path\n# // e.g. \"children[foo].children[bar].data.baz\"\n\
+    # // Here the innermost directly mapped child is \"bar\"\n# \n# $scope = $form;\n\
+    # $it = new ViolationPathIterator($violationPath);\n# \n# // Note: acceptsErrors()\
+    \ will always return true for forms inheriting\n# // their parent data, because\
+    \ these forms can never be non-synchronized\n# // (they don't do any data transformation\
+    \ on their own)\n# while ($this->acceptsErrors($scope) && $it->valid() && $it->mapsForm())\
+    \ {\n# if (!$scope->has($it->current())) {\n# // Break if we find a reference\
+    \ to a non-existing child\n# break;\n# }\n# \n# $scope = $scope->get($it->current());\n\
+    # $it->next();\n# }\n# }\n# \n# // Follow dot rules until we have the final target\n\
+    # $mapping = $scope->getConfig()->getOption('error_mapping');\n# \n# while ($this->acceptsErrors($scope)\
+    \ && isset($mapping['.'])) {\n# $dotRule = new MappingRule($scope, '.', $mapping['.']);\n\
+    # $scope = $dotRule->getTarget();\n# $mapping = $scope->getConfig()->getOption('error_mapping');\n\
+    # }\n# \n# // Only add the error if the form is synchronized\n# if ($this->acceptsErrors($scope))\
+    \ {\n# if ($violation->getConstraint() instanceof File && (string) \\UPLOAD_ERR_INI_SIZE\
+    \ === $violation->getCode()) {\n# $errorsTarget = $scope;\n# \n# while (null !==\
+    \ $errorsTarget->getParent() && $errorsTarget->getConfig()->getErrorBubbling())\
+    \ {\n# $errorsTarget = $errorsTarget->getParent();\n# }\n# \n# $errors = $errorsTarget->getErrors();\n\
+    # $errorsTarget->clearErrors();\n# \n# foreach ($errors as $error) {\n# if (!$error\
+    \ instanceof FileUploadError) {\n# $errorsTarget->addError($error);\n# }\n# }\n\
+    # }\n# \n# $message = $violation->getMessage();\n# $messageTemplate = $violation->getMessageTemplate();\n\
+    # \n# if (str_contains($message, '{{ label }}') || str_contains($messageTemplate,\
+    \ '{{ label }}')) {\n# $form = $scope;\n# \n# do {\n# $labelFormat = $form->getConfig()->getOption('label_format');\n\
+    # } while (null === $labelFormat && null !== $form = $form->getParent());\n# \n\
+    # if (null !== $labelFormat) {\n# $label = str_replace(\n# [\n# '%name%',\n# '%id%',\n\
+    # ],\n# [\n# $scope->getName(),\n# (string) $scope->getPropertyPath(),\n# ],\n\
+    # $labelFormat\n# );\n# } else {\n# $label = $scope->getConfig()->getOption('label');\n\
+    # }\n# \n# if (false !== $label) {\n# if (null === $label && null !== $this->formRenderer)\
+    \ {\n# $label = $this->formRenderer->humanize($scope->getName());\n# } else {\n\
+    # $label ??= $scope->getName();\n# }\n# \n# if (null !== $this->translator) {\n\
+    # $form = $scope;\n# $translationParameters[] = $form->getConfig()->getOption('label_translation_parameters',\
+    \ []);\n# \n# do {\n# $translationDomain = $form->getConfig()->getOption('translation_domain');\n\
+    # array_unshift(\n# $translationParameters,\n# $form->getConfig()->getOption('label_translation_parameters',\
+    \ [])\n# );\n# } while (null === $translationDomain && null !== $form = $form->getParent());\n\
+    # \n# $translationParameters = array_merge([], ...$translationParameters);\n#\
+    \ \n# $label = $this->translator->trans(\n# $label,\n# $translationParameters,\n\
+    # $translationDomain\n# );\n# }\n# \n# $message = str_replace('{{ label }}', $label,\
+    \ $message);\n# $messageTemplate = str_replace('{{ label }}', $label, $messageTemplate);\n\
+    # }\n# }\n# \n# $scope->addError(new FormError(\n# $message,\n# $messageTemplate,\n\
+    # $violation->getParameters(),\n# $violation->getPlural(),\n# $violation\n# ));\n\
+    # }\n# }\n# \n# /**\n# * Tries to match the beginning of the property path at\
+    \ the\n# * current position against the children of the scope.\n# *\n# * If a\
+    \ matching child is found, it is returned. Otherwise\n# * null is returned."
+- name: reconstructPath
+  visibility: private
+  parameters:
+  - name: violationPath
+  - name: origin
+  comment: "# @var FormInterface $child */\n# foreach ($children as $i => $child)\
+    \ {\n# $childPath = (string) $child->getPropertyPath();\n# if ($childPath ===\
+    \ $chunk) {\n# $target = $child;\n# $foundAtIndex = $it->key();\n# } elseif (str_starts_with($childPath,\
+    \ $chunk)) {\n# continue;\n# }\n# \n# unset($children[$i]);\n# }\n# \n# $it->next();\n\
+    # }\n# \n# if (null !== $foundAtIndex) {\n# $it->seek($foundAtIndex);\n# }\n#\
+    \ \n# return $target;\n# }\n# \n# /**\n# * Reconstructs a property path from a\
+    \ violation path and a form tree."
+- name: acceptsErrors
+  visibility: private
+  parameters:
+  - name: form
+  comment: null
+traits:
+- Symfony\Component\Form\FileUploadError
+- Symfony\Component\Form\FormError
+- Symfony\Component\Form\FormInterface
+- Symfony\Component\Form\FormRendererInterface
+- Symfony\Component\Form\Util\InheritDataAwareIterator
+- Symfony\Component\PropertyAccess\PropertyPathBuilder
+- Symfony\Component\PropertyAccess\PropertyPathIterator
+- Symfony\Component\PropertyAccess\PropertyPathIteratorInterface
+- Symfony\Component\Validator\Constraints\File
+- Symfony\Component\Validator\ConstraintViolation
+- Symfony\Contracts\Translation\TranslatorInterface
+interfaces:
+- ViolationMapperInterface

@@ -1,0 +1,11 @@
+name: AutoconfiguredInterface
+class_comment: null
+dependencies:
+- name: AutoconfigureTag
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag
+properties: []
+methods: []
+traits:
+- Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag
+interfaces: []

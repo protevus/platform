@@ -1,0 +1,16 @@
+name: AccessDeniedException
+class_comment: '# * Thrown when the access on a file was denied.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: path
+  comment: null
+traits: []
+interfaces: []

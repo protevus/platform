@@ -1,0 +1,359 @@
+name: RedisQueue
+class_comment: null
+dependencies:
+- name: ClearableQueue
+  type: class
+  source: Illuminate\Contracts\Queue\ClearableQueue
+- name: QueueContract
+  type: class
+  source: Illuminate\Contracts\Queue\Queue
+- name: Redis
+  type: class
+  source: Illuminate\Contracts\Redis\Factory
+- name: RedisJob
+  type: class
+  source: Illuminate\Queue\Jobs\RedisJob
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+properties:
+- name: redis
+  visibility: protected
+  comment: '# * The Redis factory implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Redis\Factory'
+- name: connection
+  visibility: protected
+  comment: '# * The connection name.
+
+    # *
+
+    # * @var string'
+- name: default
+  visibility: protected
+  comment: '# * The name of the default queue.
+
+    # *
+
+    # * @var string'
+- name: retryAfter
+  visibility: protected
+  comment: '# * The expiration time of a job.
+
+    # *
+
+    # * @var int|null'
+- name: blockFor
+  visibility: protected
+  comment: '# * The maximum number of seconds to block for a job.
+
+    # *
+
+    # * @var int|null'
+- name: migrationBatchSize
+  visibility: protected
+  comment: '# * The batch size to use when migrating delayed / expired jobs onto the
+    primary queue.
+
+    # *
+
+    # * Negative values are infinite.
+
+    # *
+
+    # * @var int'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: redis
+  - name: default
+    default: '''default'''
+  - name: connection
+    default: 'null'
+  - name: retryAfter
+    default: '60'
+  - name: blockFor
+    default: 'null'
+  - name: dispatchAfterCommit
+    default: 'false'
+  - name: migrationBatchSize
+    default: '-1'
+  comment: "# * The Redis factory implementation.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Redis\\Factory\n# */\n# protected $redis;\n# \n# /**\n# * The connection name.\n\
+    # *\n# * @var string\n# */\n# protected $connection;\n# \n# /**\n# * The name\
+    \ of the default queue.\n# *\n# * @var string\n# */\n# protected $default;\n#\
+    \ \n# /**\n# * The expiration time of a job.\n# *\n# * @var int|null\n# */\n#\
+    \ protected $retryAfter = 60;\n# \n# /**\n# * The maximum number of seconds to\
+    \ block for a job.\n# *\n# * @var int|null\n# */\n# protected $blockFor = null;\n\
+    # \n# /**\n# * The batch size to use when migrating delayed / expired jobs onto\
+    \ the primary queue.\n# *\n# * Negative values are infinite.\n# *\n# * @var int\n\
+    # */\n# protected $migrationBatchSize = -1;\n# \n# /**\n# * Create a new Redis\
+    \ queue instance.\n# *\n# * @param  \\Illuminate\\Contracts\\Redis\\Factory  $redis\n\
+    # * @param  string  $default\n# * @param  string|null  $connection\n# * @param\
+    \  int  $retryAfter\n# * @param  int|null  $blockFor\n# * @param  bool  $dispatchAfterCommit\n\
+    # * @param  int  $migrationBatchSize\n# * @return void"
+- name: size
+  visibility: public
+  parameters:
+  - name: queue
+    default: 'null'
+  comment: '# * Get the size of the queue.
+
+    # *
+
+    # * @param  string|null  $queue
+
+    # * @return int'
+- name: bulk
+  visibility: public
+  parameters:
+  - name: jobs
+  - name: data
+    default: ''''''
+  - name: queue
+    default: 'null'
+  comment: '# * Push an array of jobs onto the queue.
+
+    # *
+
+    # * @param  array  $jobs
+
+    # * @param  mixed  $data
+
+    # * @param  string|null  $queue
+
+    # * @return void'
+- name: push
+  visibility: public
+  parameters:
+  - name: job
+  - name: data
+    default: ''''''
+  - name: queue
+    default: 'null'
+  comment: '# * Push a new job onto the queue.
+
+    # *
+
+    # * @param  object|string  $job
+
+    # * @param  mixed  $data
+
+    # * @param  string|null  $queue
+
+    # * @return mixed'
+- name: pushRaw
+  visibility: public
+  parameters:
+  - name: payload
+  - name: queue
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: '# * Push a raw payload onto the queue.
+
+    # *
+
+    # * @param  string  $payload
+
+    # * @param  string|null  $queue
+
+    # * @param  array  $options
+
+    # * @return mixed'
+- name: later
+  visibility: public
+  parameters:
+  - name: delay
+  - name: job
+  - name: data
+    default: ''''''
+  - name: queue
+    default: 'null'
+  comment: '# * Push a new job onto the queue after a delay.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $delay
+
+    # * @param  object|string  $job
+
+    # * @param  mixed  $data
+
+    # * @param  string|null  $queue
+
+    # * @return mixed'
+- name: laterRaw
+  visibility: protected
+  parameters:
+  - name: delay
+  - name: payload
+  - name: queue
+    default: 'null'
+  comment: '# * Push a raw job onto the queue after (n) seconds.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $delay
+
+    # * @param  string  $payload
+
+    # * @param  string|null  $queue
+
+    # * @return mixed'
+- name: createPayloadArray
+  visibility: protected
+  parameters:
+  - name: job
+  - name: queue
+  - name: data
+    default: ''''''
+  comment: '# * Create a payload string from the given job and data.
+
+    # *
+
+    # * @param  string  $job
+
+    # * @param  string  $queue
+
+    # * @param  mixed  $data
+
+    # * @return array'
+- name: pop
+  visibility: public
+  parameters:
+  - name: queue
+    default: 'null'
+  comment: '# * Pop the next job off of the queue.
+
+    # *
+
+    # * @param  string|null  $queue
+
+    # * @return \Illuminate\Contracts\Queue\Job|null'
+- name: migrate
+  visibility: protected
+  parameters:
+  - name: queue
+  comment: '# * Migrate any delayed or expired jobs onto the primary queue.
+
+    # *
+
+    # * @param  string  $queue
+
+    # * @return void'
+- name: migrateExpiredJobs
+  visibility: public
+  parameters:
+  - name: from
+  - name: to
+  comment: '# * Migrate the delayed jobs that are ready to the regular queue.
+
+    # *
+
+    # * @param  string  $from
+
+    # * @param  string  $to
+
+    # * @return array'
+- name: retrieveNextJob
+  visibility: protected
+  parameters:
+  - name: queue
+  - name: block
+    default: 'true'
+  comment: '# * Retrieve the next job from the queue.
+
+    # *
+
+    # * @param  string  $queue
+
+    # * @param  bool  $block
+
+    # * @return array'
+- name: deleteReserved
+  visibility: public
+  parameters:
+  - name: queue
+  - name: job
+  comment: '# * Delete a reserved job from the queue.
+
+    # *
+
+    # * @param  string  $queue
+
+    # * @param  \Illuminate\Queue\Jobs\RedisJob  $job
+
+    # * @return void'
+- name: deleteAndRelease
+  visibility: public
+  parameters:
+  - name: queue
+  - name: job
+  - name: delay
+  comment: '# * Delete a reserved job from the reserved queue and release it.
+
+    # *
+
+    # * @param  string  $queue
+
+    # * @param  \Illuminate\Queue\Jobs\RedisJob  $job
+
+    # * @param  int  $delay
+
+    # * @return void'
+- name: clear
+  visibility: public
+  parameters:
+  - name: queue
+  comment: '# * Delete all of the jobs from the queue.
+
+    # *
+
+    # * @param  string  $queue
+
+    # * @return int'
+- name: getRandomId
+  visibility: protected
+  parameters: []
+  comment: '# * Get a random ID string.
+
+    # *
+
+    # * @return string'
+- name: getQueue
+  visibility: public
+  parameters:
+  - name: queue
+  comment: '# * Get the queue or return the default.
+
+    # *
+
+    # * @param  string|null  $queue
+
+    # * @return string'
+- name: getConnection
+  visibility: public
+  parameters: []
+  comment: '# * Get the connection for the queue.
+
+    # *
+
+    # * @return \Illuminate\Redis\Connections\Connection'
+- name: getRedis
+  visibility: public
+  parameters: []
+  comment: '# * Get the underlying Redis instance.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Redis\Factory'
+traits:
+- Illuminate\Contracts\Queue\ClearableQueue
+- Illuminate\Queue\Jobs\RedisJob
+- Illuminate\Support\Str
+interfaces:
+- QueueContract

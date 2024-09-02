@@ -1,0 +1,11 @@
+name: semaphore
+class_comment: null
+dependencies:
+- name: SemaphoreFactory
+  type: class
+  source: Symfony\Component\Semaphore\SemaphoreFactory
+properties: []
+methods: []
+traits:
+- Symfony\Component\Semaphore\SemaphoreFactory
+interfaces: []

@@ -1,0 +1,122 @@
+name: Signals
+class_comment: '# * @internal'
+dependencies: []
+properties:
+- name: registry
+  visibility: protected
+  comment: '# * @internal
+
+    # */
+
+    # class Signals
+
+    # {
+
+    # /**
+
+    # * The signal registry instance.
+
+    # *
+
+    # * @var \Symfony\Component\Console\SignalRegistry\SignalRegistry'
+- name: previousHandlers
+  visibility: protected
+  comment: '# * The signal registry''s previous list of handlers.
+
+    # *
+
+    # * @var array<int, array<int, callable>>|null'
+- name: availabilityResolver
+  visibility: protected
+  comment: '# * The current availability resolver, if any.
+
+    # *
+
+    # * @var (callable(): bool)|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: registry
+  comment: "# * @internal\n# */\n# class Signals\n# {\n# /**\n# * The signal registry\
+    \ instance.\n# *\n# * @var \\Symfony\\Component\\Console\\SignalRegistry\\SignalRegistry\n\
+    # */\n# protected $registry;\n# \n# /**\n# * The signal registry's previous list\
+    \ of handlers.\n# *\n# * @var array<int, array<int, callable>>|null\n# */\n# protected\
+    \ $previousHandlers;\n# \n# /**\n# * The current availability resolver, if any.\n\
+    # *\n# * @var (callable(): bool)|null\n# */\n# protected static $availabilityResolver;\n\
+    # \n# /**\n# * Create a new signal registrar instance.\n# *\n# * @param  \\Symfony\\\
+    Component\\Console\\SignalRegistry\\SignalRegistry  $registry\n# * @return void"
+- name: register
+  visibility: public
+  parameters:
+  - name: signal
+  - name: callback
+  comment: '# * Register a new signal handler.
+
+    # *
+
+    # * @param  int  $signal
+
+    # * @param  callable(int $signal): void  $callback
+
+    # * @return void'
+- name: initializeSignal
+  visibility: protected
+  parameters:
+  - name: signal
+  comment: '# * Gets the signal''s existing handler in array format.
+
+    # *
+
+    # * @return array<int, callable(int $signal): void>'
+- name: unregister
+  visibility: public
+  parameters: []
+  comment: '# * Unregister the current signal handlers.
+
+    # *
+
+    # * @return void'
+- name: whenAvailable
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Execute the given callback if "signals" should be used and are available.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return void'
+- name: getHandlers
+  visibility: protected
+  parameters: []
+  comment: '# * Get the registry''s handlers.
+
+    # *
+
+    # * @return array<int, array<int, callable>>'
+- name: setHandlers
+  visibility: protected
+  parameters:
+  - name: handlers
+  comment: '# * Set the registry''s handlers.
+
+    # *
+
+    # * @param  array<int, array<int, callable(int $signal):void>>  $handlers
+
+    # * @return void'
+- name: resolveAvailabilityUsing
+  visibility: public
+  parameters:
+  - name: resolver
+  comment: '# * Set the availability resolver.
+
+    # *
+
+    # * @param  (callable(): bool)  $resolver
+
+    # * @return void'
+traits: []
+interfaces: []

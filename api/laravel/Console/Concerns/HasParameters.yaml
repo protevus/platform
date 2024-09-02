@@ -1,0 +1,39 @@
+name: HasParameters
+class_comment: null
+dependencies:
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+properties: []
+methods:
+- name: specifyParameters
+  visibility: protected
+  parameters: []
+  comment: '# * Specify the arguments and options on the command.
+
+    # *
+
+    # * @return void'
+- name: getArguments
+  visibility: protected
+  parameters: []
+  comment: '# * Get the console command arguments.
+
+    # *
+
+    # * @return array'
+- name: getOptions
+  visibility: protected
+  parameters: []
+  comment: '# * Get the console command options.
+
+    # *
+
+    # * @return array'
+traits:
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputOption
+interfaces: []

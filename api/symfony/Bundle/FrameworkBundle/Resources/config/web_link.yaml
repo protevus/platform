@@ -1,0 +1,15 @@
+name: web_link
+class_comment: null
+dependencies:
+- name: AddLinkHeaderListener
+  type: class
+  source: Symfony\Component\WebLink\EventListener\AddLinkHeaderListener
+- name: HttpHeaderSerializer
+  type: class
+  source: Symfony\Component\WebLink\HttpHeaderSerializer
+properties: []
+methods: []
+traits:
+- Symfony\Component\WebLink\EventListener\AddLinkHeaderListener
+- Symfony\Component\WebLink\HttpHeaderSerializer
+interfaces: []

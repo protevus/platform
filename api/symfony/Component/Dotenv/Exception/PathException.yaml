@@ -1,0 +1,17 @@
+name: PathException
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: path
+  - name: code
+    default: '0'
+  - name: previous
+    default: 'null'
+  comment: null
+traits: []
+interfaces:
+- ExceptionInterface

@@ -1,0 +1,71 @@
+name: TimeDataCollectorTest
+class_comment: '# * @group time-sensitive'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: TimeDataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\TimeDataCollector
+- name: KernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\KernelInterface
+- name: Stopwatch
+  type: class
+  source: Symfony\Component\Stopwatch\Stopwatch
+- name: StopwatchEvent
+  type: class
+  source: Symfony\Component\Stopwatch\StopwatchEvent
+properties: []
+methods:
+- name: testCollect
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReset
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLateCollect
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetDurationHasEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetDurationNotEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetInitTimeNotEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetInitTimeHasEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetName
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\DataCollector\TimeDataCollector
+- Symfony\Component\HttpKernel\KernelInterface
+- Symfony\Component\Stopwatch\Stopwatch
+- Symfony\Component\Stopwatch\StopwatchEvent
+interfaces: []

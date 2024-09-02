@@ -1,0 +1,32 @@
+name: StateMachine
+class_comment: '# * @author Tobias Nyholm <tobias.nyholm@gmail.com>'
+dependencies:
+- name: MarkingStoreInterface
+  type: class
+  source: Symfony\Component\Workflow\MarkingStore\MarkingStoreInterface
+- name: MethodMarkingStore
+  type: class
+  source: Symfony\Component\Workflow\MarkingStore\MethodMarkingStore
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: definition
+  - name: markingStore
+    default: 'null'
+  - name: dispatcher
+    default: 'null'
+  - name: name
+    default: '''unnamed'''
+  - name: eventsToDispatch
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\Workflow\MarkingStore\MarkingStoreInterface
+- Symfony\Component\Workflow\MarkingStore\MethodMarkingStore
+- Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+interfaces: []

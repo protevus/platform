@@ -1,0 +1,11 @@
+name: messenger_debug
+class_comment: null
+dependencies:
+- name: MessengerDataCollector
+  type: class
+  source: Symfony\Component\Messenger\DataCollector\MessengerDataCollector
+properties: []
+methods: []
+traits:
+- Symfony\Component\Messenger\DataCollector\MessengerDataCollector
+interfaces: []

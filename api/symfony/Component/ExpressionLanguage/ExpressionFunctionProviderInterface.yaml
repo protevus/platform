@@ -1,0 +1,21 @@
+name: ExpressionFunctionProviderInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getFunctions
+  visibility: public
+  parameters: []
+  comment: '# * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # interface ExpressionFunctionProviderInterface
+
+    # {
+
+    # /**
+
+    # * @return ExpressionFunction[]'
+traits: []
+interfaces: []

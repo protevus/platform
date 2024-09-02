@@ -1,0 +1,39 @@
+name: SupportsBasicAuth
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: basic
+  visibility: public
+  parameters:
+  - name: field
+    default: '''email'''
+  - name: extraConditions
+    default: '[]'
+  comment: '# * Attempt to authenticate using HTTP Basic Auth.
+
+    # *
+
+    # * @param  string  $field
+
+    # * @param  array  $extraConditions
+
+    # * @return \Symfony\Component\HttpFoundation\Response|null'
+- name: onceBasic
+  visibility: public
+  parameters:
+  - name: field
+    default: '''email'''
+  - name: extraConditions
+    default: '[]'
+  comment: '# * Perform a stateless HTTP Basic login attempt.
+
+    # *
+
+    # * @param  string  $field
+
+    # * @param  array  $extraConditions
+
+    # * @return \Symfony\Component\HttpFoundation\Response|null'
+traits: []
+interfaces: []

@@ -1,0 +1,32 @@
+name: MailPaceTransportFactory
+class_comment: null
+dependencies:
+- name: UnsupportedSchemeException
+  type: class
+  source: Symfony\Component\Mailer\Exception\UnsupportedSchemeException
+- name: AbstractTransportFactory
+  type: class
+  source: Symfony\Component\Mailer\Transport\AbstractTransportFactory
+- name: Dsn
+  type: class
+  source: Symfony\Component\Mailer\Transport\Dsn
+- name: TransportInterface
+  type: class
+  source: Symfony\Component\Mailer\Transport\TransportInterface
+properties: []
+methods:
+- name: create
+  visibility: public
+  parameters:
+  - name: dsn
+  comment: null
+- name: getSupportedSchemes
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Mailer\Exception\UnsupportedSchemeException
+- Symfony\Component\Mailer\Transport\AbstractTransportFactory
+- Symfony\Component\Mailer\Transport\Dsn
+- Symfony\Component\Mailer\Transport\TransportInterface
+interfaces: []

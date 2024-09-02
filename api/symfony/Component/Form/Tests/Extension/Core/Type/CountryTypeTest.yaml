@@ -1,0 +1,57 @@
+name: CountryTypeTest
+class_comment: null
+dependencies:
+- name: ChoiceView
+  type: class
+  source: Symfony\Component\Form\ChoiceList\View\ChoiceView
+- name: IntlTestHelper
+  type: class
+  source: Symfony\Component\Intl\Util\IntlTestHelper
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testCountriesAreSelectable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testChoiceTranslationLocaleOption
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension intl'
+- name: testAlpha3Option
+  visibility: public
+  parameters: []
+  comment: null
+- name: testChoiceTranslationLocaleAndAlpha3Option
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension intl'
+- name: testUnknownCountryIsNotIncluded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNull
+  visibility: public
+  parameters:
+  - name: expected
+    default: 'null'
+  - name: norm
+    default: 'null'
+  - name: view
+    default: 'null'
+  comment: null
+- name: testSubmitNullUsesDefaultEmptyData
+  visibility: public
+  parameters:
+  - name: emptyData
+    default: '''FR'''
+  - name: expectedData
+    default: '''FR'''
+  comment: null
+traits:
+- Symfony\Component\Form\ChoiceList\View\ChoiceView
+- Symfony\Component\Intl\Util\IntlTestHelper
+interfaces: []

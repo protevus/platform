@@ -1,0 +1,379 @@
+name: CheckTypeDeclarationsPassTest
+class_comment: '# * @author Nicolas Grekas <p@tchwork.com>
+
+  # * @author Julien Maulny <jmaulny@darkmira.fr>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: IteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- name: ServiceClosureArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- name: CheckTypeDeclarationsPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CheckTypeDeclarationsPass
+- name: ResolveParameterPlaceHoldersPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ResolveParameterPlaceHoldersPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: InvalidParameterTypeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidParameterTypeException
+- name: EnvPlaceholderParameterBag
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: Bar
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\Bar
+- name: BarErroredDependency
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\BarErroredDependency
+- name: BarMethodCall
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\BarMethodCall
+- name: BarOptionalArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\BarOptionalArgument
+- name: BarOptionalArgumentNotNull
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\BarOptionalArgumentNotNull
+- name: Deprecated
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\Deprecated
+- name: Foo
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\Foo
+- name: FooObject
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\FooObject
+- name: IntersectionConstructor
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\IntersectionConstructor
+- name: UnionConstructor
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\UnionConstructor
+- name: UnionConstructorPHP82
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\UnionConstructorPHP82
+- name: Waldo
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\Waldo
+- name: WaldoFoo
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\WaldoFoo
+- name: Wobble
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\Wobble
+- name: Expression
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Expression
+properties: []
+methods:
+- name: testProcessThrowsExceptionOnInvalidTypesConstructorArguments
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessThrowsExceptionOnInvalidTypesMethodCallArguments
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessFailsWhenPassingNullToRequiredArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessThrowsExceptionWhenMissingArgumentsInConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessSuccessWhenPassingTooManyArgumentInConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessRegisterWithClassName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessThrowsExceptionWhenMissingArgumentsInMethodCall
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessVariadicFails
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessVariadicFailsOnPassingBadTypeOnAnotherArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessVariadicSuccess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessSuccessWhenNotUsingOptionalArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessSuccessWhenUsingOptionalArgumentWithGoodType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessFailsWhenUsingOptionalArgumentWithBadType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessSuccessWhenPassingNullToOptional
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessSuccessWhenPassingNullToOptionalThatDoesNotAcceptNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessFailsWhenPassingBadTypeToOptional
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessSuccessScalarType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessFailsOnPassingScalarTypeToConstructorTypedWithClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessFailsOnPassingScalarTypeToMethodTypedWithClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessFailsOnPassingClassToScalarTypedParameter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessSuccessOnPassingBadScalarType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessSuccessPassingBadScalarTypeOptionalArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessSuccessWhenPassingArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessSuccessWhenPassingIntegerToArrayTypedParameter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessSuccessWhenPassingAnIteratorArgumentToIterable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessSuccessWhenPassingDefinitionForObjectType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessFactory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessFactoryFailsOnInvalidParameterType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessFactoryFailsOnInvalidParameterTypeOptional
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessFactorySuccessOnValidTypes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessFactoryCallbackSuccessOnValidType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessDoesNotLoadCodeByDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessFactoryDoesNotLoadCodeByDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessFactoryForTypeSameAsClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessFactoryForIterableTypeAndArrayClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessPassingBuiltinTypeDoesNotLoadCodeByDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessDoesNotThrowsExceptionOnValidTypes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessThrowsOnIterableTypeWhenScalarPassed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessResolveExpressions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessSuccessWhenExpressionReturnsObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessHandleMixedEnvPlaceholder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessHandleMultipleEnvPlaceholder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessHandleExistingEnvPlaceholder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessHandleNotFoundEnvPlaceholder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessSkipSkippedIds
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessSkipsDeprecatedDefinitions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessHandleClosureForCallable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessSuccessWhenPassingServiceClosureArgumentToCallable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessSuccessWhenPassingServiceClosureArgumentToClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExpressionLanguageWithSyntheticService
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessResolveParameters
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnionTypePassesWithReference
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnionTypePassesWithBuiltin
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnionTypePassesWithFalse
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnionTypePassesWithTrue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnionTypeFailsWithReference
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnionTypeFailsWithBuiltin
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnionTypeWithFalseFailsWithReference
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnionTypeWithFalseFailsWithTrue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReferencePassesMixed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIntersectionTypePassesWithReference
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIntersectionTypeFailsWithReference
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCallableClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIgnoreDefinitionFactoryArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testErroredDefinitionsAreNotChecked
+  visibility: public
+  parameters: []
+  comment: null
+- name: __call
+  visibility: public
+  parameters:
+  - name: name
+  - name: arguments
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- Symfony\Component\DependencyInjection\Compiler\CheckTypeDeclarationsPass
+- Symfony\Component\DependencyInjection\Compiler\ResolveParameterPlaceHoldersPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Exception\InvalidParameterTypeException
+- Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\Bar
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\BarErroredDependency
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\BarMethodCall
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\BarOptionalArgument
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\BarOptionalArgumentNotNull
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\Deprecated
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\Foo
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\FooObject
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\IntersectionConstructor
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\UnionConstructor
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\UnionConstructorPHP82
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\Waldo
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\WaldoFoo
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CheckTypeDeclarationsPass\Wobble
+- Symfony\Component\ExpressionLanguage\Expression
+interfaces: []

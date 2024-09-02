@@ -1,0 +1,17 @@
+name: TableSeparator
+class_comment: '# * Marks a row as being a separator.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: options
+    default: '[]'
+  comment: null
+traits: []
+interfaces: []

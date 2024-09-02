@@ -1,0 +1,20 @@
+name: PostSetDataEvent
+class_comment: null
+dependencies:
+- name: BadMethodCallException
+  type: class
+  source: Symfony\Component\Form\Exception\BadMethodCallException
+- name: FormEvent
+  type: class
+  source: Symfony\Component\Form\FormEvent
+properties: []
+methods:
+- name: setData
+  visibility: public
+  parameters:
+  - name: data
+  comment: null
+traits:
+- Symfony\Component\Form\Exception\BadMethodCallException
+- Symfony\Component\Form\FormEvent
+interfaces: []

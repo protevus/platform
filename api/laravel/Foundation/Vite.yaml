@@ -1,0 +1,624 @@
+name: Vite
+class_comment: null
+dependencies:
+- name: Exception
+  type: class
+  source: Exception
+- name: Htmlable
+  type: class
+  source: Illuminate\Contracts\Support\Htmlable
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+- name: HtmlString
+  type: class
+  source: Illuminate\Support\HtmlString
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: Macroable
+  type: class
+  source: Macroable
+properties:
+- name: nonce
+  visibility: protected
+  comment: '# * The Content Security Policy nonce to apply to all generated tags.
+
+    # *
+
+    # * @var string|null'
+- name: integrityKey
+  visibility: protected
+  comment: '# * The key to check for integrity hashes within the manifest.
+
+    # *
+
+    # * @var string|false'
+- name: entryPoints
+  visibility: protected
+  comment: '# * The configured entry points.
+
+    # *
+
+    # * @var array'
+- name: hotFile
+  visibility: protected
+  comment: '# * The path to the "hot" file.
+
+    # *
+
+    # * @var string|null'
+- name: buildDirectory
+  visibility: protected
+  comment: '# * The path to the build directory.
+
+    # *
+
+    # * @var string'
+- name: manifestFilename
+  visibility: protected
+  comment: '# * The name of the manifest file.
+
+    # *
+
+    # * @var string'
+- name: assetPathResolver
+  visibility: protected
+  comment: '# * The custom asset path resolver.
+
+    # *
+
+    # * @var callable|null'
+- name: scriptTagAttributesResolvers
+  visibility: protected
+  comment: '# * The script tag attributes resolvers.
+
+    # *
+
+    # * @var array'
+- name: styleTagAttributesResolvers
+  visibility: protected
+  comment: '# * The style tag attributes resolvers.
+
+    # *
+
+    # * @var array'
+- name: preloadTagAttributesResolvers
+  visibility: protected
+  comment: '# * The preload tag attributes resolvers.
+
+    # *
+
+    # * @var array'
+- name: preloadedAssets
+  visibility: protected
+  comment: '# * The preloaded assets.
+
+    # *
+
+    # * @var array'
+- name: manifests
+  visibility: protected
+  comment: '# * The cached manifest files.
+
+    # *
+
+    # * @var array'
+methods:
+- name: preloadedAssets
+  visibility: public
+  parameters: []
+  comment: "# * The Content Security Policy nonce to apply to all generated tags.\n\
+    # *\n# * @var string|null\n# */\n# protected $nonce;\n# \n# /**\n# * The key to\
+    \ check for integrity hashes within the manifest.\n# *\n# * @var string|false\n\
+    # */\n# protected $integrityKey = 'integrity';\n# \n# /**\n# * The configured\
+    \ entry points.\n# *\n# * @var array\n# */\n# protected $entryPoints = [];\n#\
+    \ \n# /**\n# * The path to the \"hot\" file.\n# *\n# * @var string|null\n# */\n\
+    # protected $hotFile;\n# \n# /**\n# * The path to the build directory.\n# *\n\
+    # * @var string\n# */\n# protected $buildDirectory = 'build';\n# \n# /**\n# *\
+    \ The name of the manifest file.\n# *\n# * @var string\n# */\n# protected $manifestFilename\
+    \ = 'manifest.json';\n# \n# /**\n# * The custom asset path resolver.\n# *\n# *\
+    \ @var callable|null\n# */\n# protected $assetPathResolver = null;\n# \n# /**\n\
+    # * The script tag attributes resolvers.\n# *\n# * @var array\n# */\n# protected\
+    \ $scriptTagAttributesResolvers = [];\n# \n# /**\n# * The style tag attributes\
+    \ resolvers.\n# *\n# * @var array\n# */\n# protected $styleTagAttributesResolvers\
+    \ = [];\n# \n# /**\n# * The preload tag attributes resolvers.\n# *\n# * @var array\n\
+    # */\n# protected $preloadTagAttributesResolvers = [];\n# \n# /**\n# * The preloaded\
+    \ assets.\n# *\n# * @var array\n# */\n# protected $preloadedAssets = [];\n# \n\
+    # /**\n# * The cached manifest files.\n# *\n# * @var array\n# */\n# protected\
+    \ static $manifests = [];\n# \n# /**\n# * Get the preloaded assets.\n# *\n# *\
+    \ @return array"
+- name: cspNonce
+  visibility: public
+  parameters: []
+  comment: '# * Get the Content Security Policy nonce applied to all generated tags.
+
+    # *
+
+    # * @return string|null'
+- name: useCspNonce
+  visibility: public
+  parameters:
+  - name: nonce
+    default: 'null'
+  comment: '# * Generate or set a Content Security Policy nonce to apply to all generated
+    tags.
+
+    # *
+
+    # * @param  string|null  $nonce
+
+    # * @return string'
+- name: useIntegrityKey
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Use the given key to detect integrity hashes in the manifest.
+
+    # *
+
+    # * @param  string|false  $key
+
+    # * @return $this'
+- name: withEntryPoints
+  visibility: public
+  parameters:
+  - name: entryPoints
+  comment: '# * Set the Vite entry points.
+
+    # *
+
+    # * @param  array  $entryPoints
+
+    # * @return $this'
+- name: useManifestFilename
+  visibility: public
+  parameters:
+  - name: filename
+  comment: '# * Set the filename for the manifest file.
+
+    # *
+
+    # * @param  string  $filename
+
+    # * @return $this'
+- name: createAssetPathsUsing
+  visibility: public
+  parameters:
+  - name: resolver
+  comment: '# * Resolve asset paths using the provided resolver.
+
+    # *
+
+    # * @param  callable|null  $resolver
+
+    # * @return $this'
+- name: hotFile
+  visibility: public
+  parameters: []
+  comment: '# * Get the Vite "hot" file path.
+
+    # *
+
+    # * @return string'
+- name: useHotFile
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Set the Vite "hot" file path.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return $this'
+- name: useBuildDirectory
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Set the Vite build directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return $this'
+- name: useScriptTagAttributes
+  visibility: public
+  parameters:
+  - name: attributes
+  comment: '# * Use the given callback to resolve attributes for script tags.
+
+    # *
+
+    # * @param  (callable(string, string, ?array, ?array): array)|array  $attributes
+
+    # * @return $this'
+- name: useStyleTagAttributes
+  visibility: public
+  parameters:
+  - name: attributes
+  comment: '# * Use the given callback to resolve attributes for style tags.
+
+    # *
+
+    # * @param  (callable(string, string, ?array, ?array): array)|array  $attributes
+
+    # * @return $this'
+- name: usePreloadTagAttributes
+  visibility: public
+  parameters:
+  - name: attributes
+  comment: '# * Use the given callback to resolve attributes for preload tags.
+
+    # *
+
+    # * @param  (callable(string, string, ?array, ?array): (array|false))|array|false  $attributes
+
+    # * @return $this'
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: entrypoints
+  - name: buildDirectory
+    default: 'null'
+  comment: '# * Generate Vite tags for an entrypoint.
+
+    # *
+
+    # * @param  string|string[]  $entrypoints
+
+    # * @param  string|null  $buildDirectory
+
+    # * @return \Illuminate\Support\HtmlString
+
+    # *
+
+    # * @throws \Exception'
+- name: makeTagForChunk
+  visibility: protected
+  parameters:
+  - name: src
+  - name: url
+  - name: chunk
+  - name: manifest
+  comment: '# * Make tag for the given chunk.
+
+    # *
+
+    # * @param  string  $src
+
+    # * @param  string  $url
+
+    # * @param  array|null  $chunk
+
+    # * @param  array|null  $manifest
+
+    # * @return string'
+- name: makePreloadTagForChunk
+  visibility: protected
+  parameters:
+  - name: src
+  - name: url
+  - name: chunk
+  - name: manifest
+  comment: '# * Make a preload tag for the given chunk.
+
+    # *
+
+    # * @param  string  $src
+
+    # * @param  string  $url
+
+    # * @param  array  $chunk
+
+    # * @param  array  $manifest
+
+    # * @return string'
+- name: resolveScriptTagAttributes
+  visibility: protected
+  parameters:
+  - name: src
+  - name: url
+  - name: chunk
+  - name: manifest
+  comment: '# * Resolve the attributes for the chunks generated script tag.
+
+    # *
+
+    # * @param  string  $src
+
+    # * @param  string  $url
+
+    # * @param  array|null  $chunk
+
+    # * @param  array|null  $manifest
+
+    # * @return array'
+- name: resolveStylesheetTagAttributes
+  visibility: protected
+  parameters:
+  - name: src
+  - name: url
+  - name: chunk
+  - name: manifest
+  comment: '# * Resolve the attributes for the chunks generated stylesheet tag.
+
+    # *
+
+    # * @param  string  $src
+
+    # * @param  string  $url
+
+    # * @param  array|null  $chunk
+
+    # * @param  array|null  $manifest
+
+    # * @return array'
+- name: resolvePreloadTagAttributes
+  visibility: protected
+  parameters:
+  - name: src
+  - name: url
+  - name: chunk
+  - name: manifest
+  comment: '# * Resolve the attributes for the chunks generated preload tag.
+
+    # *
+
+    # * @param  string  $src
+
+    # * @param  string  $url
+
+    # * @param  array  $chunk
+
+    # * @param  array  $manifest
+
+    # * @return array|false'
+- name: makeTag
+  visibility: protected
+  parameters:
+  - name: url
+  comment: '# * Generate an appropriate tag for the given URL in HMR mode.
+
+    # *
+
+    # * @deprecated Will be removed in a future Laravel version.
+
+    # *
+
+    # * @param  string  $url
+
+    # * @return string'
+- name: makeScriptTag
+  visibility: protected
+  parameters:
+  - name: url
+  comment: '# * Generate a script tag for the given URL.
+
+    # *
+
+    # * @deprecated Will be removed in a future Laravel version.
+
+    # *
+
+    # * @param  string  $url
+
+    # * @return string'
+- name: makeStylesheetTag
+  visibility: protected
+  parameters:
+  - name: url
+  comment: '# * Generate a stylesheet tag for the given URL in HMR mode.
+
+    # *
+
+    # * @deprecated Will be removed in a future Laravel version.
+
+    # *
+
+    # * @param  string  $url
+
+    # * @return string'
+- name: makeScriptTagWithAttributes
+  visibility: protected
+  parameters:
+  - name: url
+  - name: attributes
+  comment: '# * Generate a script tag with attributes for the given URL.
+
+    # *
+
+    # * @param  string  $url
+
+    # * @param  array  $attributes
+
+    # * @return string'
+- name: makeStylesheetTagWithAttributes
+  visibility: protected
+  parameters:
+  - name: url
+  - name: attributes
+  comment: '# * Generate a link tag with attributes for the given URL.
+
+    # *
+
+    # * @param  string  $url
+
+    # * @param  array  $attributes
+
+    # * @return string'
+- name: isCssPath
+  visibility: protected
+  parameters:
+  - name: path
+  comment: '# * Determine whether the given path is a CSS file.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return bool'
+- name: parseAttributes
+  visibility: protected
+  parameters:
+  - name: attributes
+  comment: '# * Parse the attributes into key="value" strings.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @return array'
+- name: reactRefresh
+  visibility: public
+  parameters: []
+  comment: '# * Generate React refresh runtime script.
+
+    # *
+
+    # * @return \Illuminate\Support\HtmlString|void'
+- name: hotAsset
+  visibility: protected
+  parameters:
+  - name: asset
+  comment: '# * Get the path to a given asset when running in HMR mode.
+
+    # *
+
+    # * @return string'
+- name: asset
+  visibility: public
+  parameters:
+  - name: asset
+  - name: buildDirectory
+    default: 'null'
+  comment: '# * Get the URL for an asset.
+
+    # *
+
+    # * @param  string  $asset
+
+    # * @param  string|null  $buildDirectory
+
+    # * @return string'
+- name: content
+  visibility: public
+  parameters:
+  - name: asset
+  - name: buildDirectory
+    default: 'null'
+  comment: '# * Get the content of a given asset.
+
+    # *
+
+    # * @param  string  $asset
+
+    # * @param  string|null  $buildDirectory
+
+    # * @return string
+
+    # *
+
+    # * @throws \Exception'
+- name: assetPath
+  visibility: protected
+  parameters:
+  - name: path
+  - name: secure
+    default: 'null'
+  comment: '# * Generate an asset path for the application.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  bool|null  $secure
+
+    # * @return string'
+- name: manifest
+  visibility: protected
+  parameters:
+  - name: buildDirectory
+  comment: '# * Get the manifest file for the given build directory.
+
+    # *
+
+    # * @param  string  $buildDirectory
+
+    # * @return array
+
+    # *
+
+    # * @throws \Illuminate\Foundation\ViteManifestNotFoundException'
+- name: manifestPath
+  visibility: protected
+  parameters:
+  - name: buildDirectory
+  comment: '# * Get the path to the manifest file for the given build directory.
+
+    # *
+
+    # * @param  string  $buildDirectory
+
+    # * @return string'
+- name: manifestHash
+  visibility: public
+  parameters:
+  - name: buildDirectory
+    default: 'null'
+  comment: '# * Get a unique hash representing the current manifest, or null if there
+    is no manifest.
+
+    # *
+
+    # * @param  string|null  $buildDirectory
+
+    # * @return string|null'
+- name: chunk
+  visibility: protected
+  parameters:
+  - name: manifest
+  - name: file
+  comment: '# * Get the chunk for the given entry point / asset.
+
+    # *
+
+    # * @param  array  $manifest
+
+    # * @param  string  $file
+
+    # * @return array
+
+    # *
+
+    # * @throws \Exception'
+- name: isRunningHot
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the HMR server is running.
+
+    # *
+
+    # * @return bool'
+- name: toHtml
+  visibility: public
+  parameters: []
+  comment: '# * Get the Vite tag content as a string of HTML.
+
+    # *
+
+    # * @return string'
+traits:
+- Exception
+- Illuminate\Contracts\Support\Htmlable
+- Illuminate\Support\Collection
+- Illuminate\Support\HtmlString
+- Illuminate\Support\Str
+- Illuminate\Support\Traits\Macroable
+- Macroable
+interfaces:
+- Htmlable

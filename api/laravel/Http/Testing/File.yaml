@@ -1,0 +1,145 @@
+name: File
+class_comment: null
+dependencies:
+- name: UploadedFile
+  type: class
+  source: Illuminate\Http\UploadedFile
+properties:
+- name: name
+  visibility: public
+  comment: '# * The name of the file.
+
+    # *
+
+    # * @var string'
+- name: tempFile
+  visibility: public
+  comment: '# * The temporary file resource.
+
+    # *
+
+    # * @var resource'
+- name: sizeToReport
+  visibility: public
+  comment: '# * The "size" to report.
+
+    # *
+
+    # * @var int'
+- name: mimeTypeToReport
+  visibility: public
+  comment: '# * The MIME type to report.
+
+    # *
+
+    # * @var string|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: name
+  - name: tempFile
+  comment: "# * The name of the file.\n# *\n# * @var string\n# */\n# public $name;\n\
+    # \n# /**\n# * The temporary file resource.\n# *\n# * @var resource\n# */\n# public\
+    \ $tempFile;\n# \n# /**\n# * The \"size\" to report.\n# *\n# * @var int\n# */\n\
+    # public $sizeToReport;\n# \n# /**\n# * The MIME type to report.\n# *\n# * @var\
+    \ string|null\n# */\n# public $mimeTypeToReport;\n# \n# /**\n# * Create a new\
+    \ file instance.\n# *\n# * @param  string  $name\n# * @param  resource  $tempFile\n\
+    # * @return void"
+- name: create
+  visibility: public
+  parameters:
+  - name: name
+  - name: kilobytes
+    default: '0'
+  comment: '# * Create a new fake file.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|int  $kilobytes
+
+    # * @return \Illuminate\Http\Testing\File'
+- name: createWithContent
+  visibility: public
+  parameters:
+  - name: name
+  - name: content
+  comment: '# * Create a new fake file with content.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string  $content
+
+    # * @return \Illuminate\Http\Testing\File'
+- name: image
+  visibility: public
+  parameters:
+  - name: name
+  - name: width
+    default: '10'
+  - name: height
+    default: '10'
+  comment: '# * Create a new fake image.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  int  $width
+
+    # * @param  int  $height
+
+    # * @return \Illuminate\Http\Testing\File'
+- name: size
+  visibility: public
+  parameters:
+  - name: kilobytes
+  comment: '# * Set the "size" of the file in kilobytes.
+
+    # *
+
+    # * @param  int  $kilobytes
+
+    # * @return $this'
+- name: getSize
+  visibility: public
+  parameters: []
+  comment: '# * Get the size of the file.
+
+    # *
+
+    # * @return int'
+- name: mimeType
+  visibility: public
+  parameters:
+  - name: mimeType
+  comment: '# * Set the "MIME type" for the file.
+
+    # *
+
+    # * @param  string  $mimeType
+
+    # * @return $this'
+- name: getMimeType
+  visibility: public
+  parameters: []
+  comment: '# * Get the MIME type of the file.
+
+    # *
+
+    # * @return string'
+- name: tempFilePath
+  visibility: protected
+  parameters: []
+  comment: '# * Get the path to the temporary file.
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Http\UploadedFile
+interfaces: []

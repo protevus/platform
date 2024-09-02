@@ -1,0 +1,17 @@
+name: UuidV8
+class_comment: '# * A v8 UUID has no explicit requirements except embedding its version
+  + variant bits.
+
+  # *
+
+  # * @author Nicolas Grekas <p@tchwork.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: uuid
+  comment: null
+traits: []
+interfaces: []

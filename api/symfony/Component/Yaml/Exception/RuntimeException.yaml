@@ -1,0 +1,12 @@
+name: RuntimeException
+class_comment: '# * Exception class thrown when an error occurs during parsing.
+
+  # *
+
+  # * @author Romain Neutron <imprec@gmail.com>'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- ExceptionInterface

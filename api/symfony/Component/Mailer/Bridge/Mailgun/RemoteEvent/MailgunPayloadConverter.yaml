@@ -1,0 +1,43 @@
+name: MailgunPayloadConverter
+class_comment: null
+dependencies:
+- name: AbstractMailerEvent
+  type: class
+  source: Symfony\Component\RemoteEvent\Event\Mailer\AbstractMailerEvent
+- name: MailerDeliveryEvent
+  type: class
+  source: Symfony\Component\RemoteEvent\Event\Mailer\MailerDeliveryEvent
+- name: MailerEngagementEvent
+  type: class
+  source: Symfony\Component\RemoteEvent\Event\Mailer\MailerEngagementEvent
+- name: ParseException
+  type: class
+  source: Symfony\Component\RemoteEvent\Exception\ParseException
+- name: PayloadConverterInterface
+  type: class
+  source: Symfony\Component\RemoteEvent\PayloadConverterInterface
+properties: []
+methods:
+- name: convert
+  visibility: public
+  parameters:
+  - name: payload
+  comment: null
+- name: matchFailedEvent
+  visibility: private
+  parameters:
+  - name: payload
+  comment: null
+- name: getReason
+  visibility: private
+  parameters:
+  - name: payload
+  comment: null
+traits:
+- Symfony\Component\RemoteEvent\Event\Mailer\AbstractMailerEvent
+- Symfony\Component\RemoteEvent\Event\Mailer\MailerDeliveryEvent
+- Symfony\Component\RemoteEvent\Event\Mailer\MailerEngagementEvent
+- Symfony\Component\RemoteEvent\Exception\ParseException
+- Symfony\Component\RemoteEvent\PayloadConverterInterface
+interfaces:
+- PayloadConverterInterface

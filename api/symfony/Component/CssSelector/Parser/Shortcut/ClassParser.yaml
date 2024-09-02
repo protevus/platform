@@ -1,0 +1,32 @@
+name: ClassParser
+class_comment: "# * CSS selector class parser shortcut.\n# *\n# * This component is\
+  \ a port of the Python cssselect library,\n# * which is copyright Ian Bicking, @see\
+  \ https://github.com/SimonSapin/cssselect.\n# *\n# * @author Jean-Fran\xE7ois Simon\
+  \ <jeanfrancois.simon@sensiolabs.com>\n# *\n# * @internal"
+dependencies:
+- name: ClassNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\ClassNode
+- name: ElementNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\ElementNode
+- name: SelectorNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\SelectorNode
+- name: ParserInterface
+  type: class
+  source: Symfony\Component\CssSelector\Parser\ParserInterface
+properties: []
+methods:
+- name: parse
+  visibility: public
+  parameters:
+  - name: source
+  comment: null
+traits:
+- Symfony\Component\CssSelector\Node\ClassNode
+- Symfony\Component\CssSelector\Node\ElementNode
+- Symfony\Component\CssSelector\Node\SelectorNode
+- Symfony\Component\CssSelector\Parser\ParserInterface
+interfaces:
+- ParserInterface

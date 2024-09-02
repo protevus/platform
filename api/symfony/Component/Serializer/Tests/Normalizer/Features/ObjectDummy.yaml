@@ -1,0 +1,78 @@
+name: ObjectDummy
+class_comment: null
+dependencies: []
+properties:
+- name: foo
+  visibility: protected
+  comment: null
+- name: bar
+  visibility: public
+  comment: '# * @var array'
+- name: baz
+  visibility: private
+  comment: null
+- name: camelCase
+  visibility: protected
+  comment: null
+- name: object
+  visibility: protected
+  comment: null
+- name: go
+  visibility: private
+  comment: null
+methods:
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: setFoo
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: isBaz
+  visibility: public
+  parameters: []
+  comment: null
+- name: setBaz
+  visibility: public
+  parameters:
+  - name: baz
+  comment: null
+- name: getFooBar
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCamelCase
+  visibility: public
+  parameters: []
+  comment: null
+- name: setCamelCase
+  visibility: public
+  parameters:
+  - name: camelCase
+  comment: null
+- name: otherMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: setObject
+  visibility: public
+  parameters:
+  - name: object
+  comment: null
+- name: getObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: setGo
+  visibility: public
+  parameters:
+  - name: go
+  comment: null
+- name: canGo
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

@@ -1,0 +1,483 @@
+name: InteractsWithIO
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: OutputStyle
+  type: class
+  source: Illuminate\Console\OutputStyle
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: OutputFormatterStyle
+  type: class
+  source: Symfony\Component\Console\Formatter\OutputFormatterStyle
+- name: Table
+  type: class
+  source: Symfony\Component\Console\Helper\Table
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: ChoiceQuestion
+  type: class
+  source: Symfony\Component\Console\Question\ChoiceQuestion
+- name: Question
+  type: class
+  source: Symfony\Component\Console\Question\Question
+properties:
+- name: components
+  visibility: protected
+  comment: '# * The console components factory.
+
+    # *
+
+    # * @var \Illuminate\Console\View\Components\Factory
+
+    # *
+
+    # * @internal This property is not meant to be used or overwritten outside the
+    framework.'
+- name: input
+  visibility: protected
+  comment: '# * The input interface implementation.
+
+    # *
+
+    # * @var \Symfony\Component\Console\Input\InputInterface'
+- name: output
+  visibility: protected
+  comment: '# * The output interface implementation.
+
+    # *
+
+    # * @var \Illuminate\Console\OutputStyle'
+- name: verbosity
+  visibility: protected
+  comment: '# * The default verbosity of output commands.
+
+    # *
+
+    # * @var int'
+- name: verbosityMap
+  visibility: protected
+  comment: '# * The mapping between human readable verbosity levels and Symfony''s
+    OutputInterface.
+
+    # *
+
+    # * @var array'
+methods:
+- name: hasArgument
+  visibility: public
+  parameters:
+  - name: name
+  comment: "# * The console components factory.\n# *\n# * @var \\Illuminate\\Console\\\
+    View\\Components\\Factory\n# *\n# * @internal This property is not meant to be\
+    \ used or overwritten outside the framework.\n# */\n# protected $components;\n\
+    # \n# /**\n# * The input interface implementation.\n# *\n# * @var \\Symfony\\\
+    Component\\Console\\Input\\InputInterface\n# */\n# protected $input;\n# \n# /**\n\
+    # * The output interface implementation.\n# *\n# * @var \\Illuminate\\Console\\\
+    OutputStyle\n# */\n# protected $output;\n# \n# /**\n# * The default verbosity\
+    \ of output commands.\n# *\n# * @var int\n# */\n# protected $verbosity = OutputInterface::VERBOSITY_NORMAL;\n\
+    # \n# /**\n# * The mapping between human readable verbosity levels and Symfony's\
+    \ OutputInterface.\n# *\n# * @var array\n# */\n# protected $verbosityMap = [\n\
+    # 'v' => OutputInterface::VERBOSITY_VERBOSE,\n# 'vv' => OutputInterface::VERBOSITY_VERY_VERBOSE,\n\
+    # 'vvv' => OutputInterface::VERBOSITY_DEBUG,\n# 'quiet' => OutputInterface::VERBOSITY_QUIET,\n\
+    # 'normal' => OutputInterface::VERBOSITY_NORMAL,\n# ];\n# \n# /**\n# * Determine\
+    \ if the given argument is present.\n# *\n# * @param  string|int  $name\n# * @return\
+    \ bool"
+- name: argument
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  comment: '# * Get the value of a command argument.
+
+    # *
+
+    # * @param  string|null  $key
+
+    # * @return array|string|bool|null'
+- name: arguments
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the arguments passed to the command.
+
+    # *
+
+    # * @return array'
+- name: hasOption
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Determine if the given option is present.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return bool'
+- name: option
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  comment: '# * Get the value of a command option.
+
+    # *
+
+    # * @param  string|null  $key
+
+    # * @return string|array|bool|null'
+- name: options
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the options passed to the command.
+
+    # *
+
+    # * @return array'
+- name: confirm
+  visibility: public
+  parameters:
+  - name: question
+  - name: default
+    default: 'false'
+  comment: '# * Confirm a question with the user.
+
+    # *
+
+    # * @param  string  $question
+
+    # * @param  bool  $default
+
+    # * @return bool'
+- name: ask
+  visibility: public
+  parameters:
+  - name: question
+  - name: default
+    default: 'null'
+  comment: '# * Prompt the user for input.
+
+    # *
+
+    # * @param  string  $question
+
+    # * @param  string|null  $default
+
+    # * @return mixed'
+- name: anticipate
+  visibility: public
+  parameters:
+  - name: question
+  - name: choices
+  - name: default
+    default: 'null'
+  comment: '# * Prompt the user for input with auto completion.
+
+    # *
+
+    # * @param  string  $question
+
+    # * @param  array|callable  $choices
+
+    # * @param  string|null  $default
+
+    # * @return mixed'
+- name: askWithCompletion
+  visibility: public
+  parameters:
+  - name: question
+  - name: choices
+  - name: default
+    default: 'null'
+  comment: '# * Prompt the user for input with auto completion.
+
+    # *
+
+    # * @param  string  $question
+
+    # * @param  array|callable  $choices
+
+    # * @param  string|null  $default
+
+    # * @return mixed'
+- name: secret
+  visibility: public
+  parameters:
+  - name: question
+  - name: fallback
+    default: 'true'
+  comment: '# * Prompt the user for input but hide the answer from the console.
+
+    # *
+
+    # * @param  string  $question
+
+    # * @param  bool  $fallback
+
+    # * @return mixed'
+- name: choice
+  visibility: public
+  parameters:
+  - name: question
+  - name: choices
+  - name: default
+    default: 'null'
+  - name: attempts
+    default: 'null'
+  - name: multiple
+    default: 'false'
+  comment: '# * Give the user a single choice from an array of answers.
+
+    # *
+
+    # * @param  string  $question
+
+    # * @param  array  $choices
+
+    # * @param  string|int|null  $default
+
+    # * @param  mixed|null  $attempts
+
+    # * @param  bool  $multiple
+
+    # * @return string|array'
+- name: table
+  visibility: public
+  parameters:
+  - name: headers
+  - name: rows
+  - name: tableStyle
+    default: '''default'''
+  - name: columnStyles
+    default: '[]'
+  comment: '# * Format input to textual table.
+
+    # *
+
+    # * @param  array  $headers
+
+    # * @param  \Illuminate\Contracts\Support\Arrayable|array  $rows
+
+    # * @param  \Symfony\Component\Console\Helper\TableStyle|string  $tableStyle
+
+    # * @param  array  $columnStyles
+
+    # * @return void'
+- name: withProgressBar
+  visibility: public
+  parameters:
+  - name: totalSteps
+  - name: callback
+  comment: '# * Execute a given callback while advancing a progress bar.
+
+    # *
+
+    # * @param  iterable|int  $totalSteps
+
+    # * @param  \Closure  $callback
+
+    # * @return mixed|void'
+- name: info
+  visibility: public
+  parameters:
+  - name: string
+  - name: verbosity
+    default: 'null'
+  comment: '# * Write a string as information output.
+
+    # *
+
+    # * @param  string  $string
+
+    # * @param  int|string|null  $verbosity
+
+    # * @return void'
+- name: line
+  visibility: public
+  parameters:
+  - name: string
+  - name: style
+    default: 'null'
+  - name: verbosity
+    default: 'null'
+  comment: '# * Write a string as standard output.
+
+    # *
+
+    # * @param  string  $string
+
+    # * @param  string|null  $style
+
+    # * @param  int|string|null  $verbosity
+
+    # * @return void'
+- name: comment
+  visibility: public
+  parameters:
+  - name: string
+  - name: verbosity
+    default: 'null'
+  comment: '# * Write a string as comment output.
+
+    # *
+
+    # * @param  string  $string
+
+    # * @param  int|string|null  $verbosity
+
+    # * @return void'
+- name: question
+  visibility: public
+  parameters:
+  - name: string
+  - name: verbosity
+    default: 'null'
+  comment: '# * Write a string as question output.
+
+    # *
+
+    # * @param  string  $string
+
+    # * @param  int|string|null  $verbosity
+
+    # * @return void'
+- name: error
+  visibility: public
+  parameters:
+  - name: string
+  - name: verbosity
+    default: 'null'
+  comment: '# * Write a string as error output.
+
+    # *
+
+    # * @param  string  $string
+
+    # * @param  int|string|null  $verbosity
+
+    # * @return void'
+- name: warn
+  visibility: public
+  parameters:
+  - name: string
+  - name: verbosity
+    default: 'null'
+  comment: '# * Write a string as warning output.
+
+    # *
+
+    # * @param  string  $string
+
+    # * @param  int|string|null  $verbosity
+
+    # * @return void'
+- name: alert
+  visibility: public
+  parameters:
+  - name: string
+  - name: verbosity
+    default: 'null'
+  comment: '# * Write a string in an alert box.
+
+    # *
+
+    # * @param  string  $string
+
+    # * @param  int|string|null  $verbosity
+
+    # * @return void'
+- name: newLine
+  visibility: public
+  parameters:
+  - name: count
+    default: '1'
+  comment: '# * Write a blank line.
+
+    # *
+
+    # * @param  int  $count
+
+    # * @return $this'
+- name: setInput
+  visibility: public
+  parameters:
+  - name: input
+  comment: '# * Set the input interface implementation.
+
+    # *
+
+    # * @param  \Symfony\Component\Console\Input\InputInterface  $input
+
+    # * @return void'
+- name: setOutput
+  visibility: public
+  parameters:
+  - name: output
+  comment: '# * Set the output interface implementation.
+
+    # *
+
+    # * @param  \Illuminate\Console\OutputStyle  $output
+
+    # * @return void'
+- name: setVerbosity
+  visibility: protected
+  parameters:
+  - name: level
+  comment: '# * Set the verbosity level.
+
+    # *
+
+    # * @param  string|int  $level
+
+    # * @return void'
+- name: parseVerbosity
+  visibility: protected
+  parameters:
+  - name: level
+    default: 'null'
+  comment: '# * Get the verbosity level in terms of Symfony''s OutputInterface level.
+
+    # *
+
+    # * @param  string|int|null  $level
+
+    # * @return int'
+- name: getOutput
+  visibility: public
+  parameters: []
+  comment: '# * Get the output implementation.
+
+    # *
+
+    # * @return \Illuminate\Console\OutputStyle'
+- name: outputComponents
+  visibility: public
+  parameters: []
+  comment: '# * Get the output component factory implementation.
+
+    # *
+
+    # * @return \Illuminate\Console\View\Components\Factory'
+traits:
+- Closure
+- Illuminate\Console\OutputStyle
+- Illuminate\Contracts\Support\Arrayable
+- Illuminate\Support\Str
+- Symfony\Component\Console\Formatter\OutputFormatterStyle
+- Symfony\Component\Console\Helper\Table
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Question\ChoiceQuestion
+- Symfony\Component\Console\Question\Question
+interfaces: []

@@ -1,0 +1,70 @@
+name: JsonEncoderContextBuilder
+class_comment: null
+dependencies:
+- name: ContextBuilderInterface
+  type: class
+  source: Symfony\Component\Serializer\Context\ContextBuilderInterface
+- name: ContextBuilderTrait
+  type: class
+  source: Symfony\Component\Serializer\Context\ContextBuilderTrait
+- name: JsonDecode
+  type: class
+  source: Symfony\Component\Serializer\Encoder\JsonDecode
+- name: JsonEncode
+  type: class
+  source: Symfony\Component\Serializer\Encoder\JsonEncode
+- name: ContextBuilderTrait
+  type: class
+  source: ContextBuilderTrait
+properties: []
+methods:
+- name: withEncodeOptions
+  visibility: public
+  parameters:
+  - name: options
+  comment: "# * A helper providing autocompletion for available JsonEncoder options.\n\
+    # *\n# * @author Mathias Arlaud <mathias.arlaud@gmail.com>\n# */\n# final class\
+    \ JsonEncoderContextBuilder implements ContextBuilderInterface\n# {\n# use ContextBuilderTrait;\n\
+    # \n# /**\n# * Configures the json_encode flags bitmask.\n# *\n# * @see https://www.php.net/manual/en/json.constants.php\n\
+    # *\n# * @param positive-int|null $options"
+- name: withDecodeOptions
+  visibility: public
+  parameters:
+  - name: options
+  comment: '# * Configures the json_decode flags bitmask.
+
+    # *
+
+    # * @see https://www.php.net/manual/en/json.constants.php
+
+    # *
+
+    # * @param positive-int|null $options'
+- name: withAssociative
+  visibility: public
+  parameters:
+  - name: associative
+  comment: '# * Configures whether decoded objects will be given as
+
+    # * associative arrays or as nested stdClass.'
+- name: withRecursionDepth
+  visibility: public
+  parameters:
+  - name: recursionDepth
+  comment: '# * Configures the maximum recursion depth.
+
+    # *
+
+    # * Must be strictly positive.
+
+    # *
+
+    # * @param positive-int|null $recursionDepth'
+traits:
+- Symfony\Component\Serializer\Context\ContextBuilderInterface
+- Symfony\Component\Serializer\Context\ContextBuilderTrait
+- Symfony\Component\Serializer\Encoder\JsonDecode
+- Symfony\Component\Serializer\Encoder\JsonEncode
+- ContextBuilderTrait
+interfaces:
+- ContextBuilderInterface

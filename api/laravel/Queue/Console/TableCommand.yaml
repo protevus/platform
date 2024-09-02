@@ -1,0 +1,64 @@
+name: TableCommand
+class_comment: null
+dependencies:
+- name: MigrationGeneratorCommand
+  type: class
+  source: Illuminate\Console\MigrationGeneratorCommand
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+properties:
+- name: name
+  visibility: protected
+  comment: '# * The console command name.
+
+    # *
+
+    # * @var string'
+- name: aliases
+  visibility: protected
+  comment: '# * The console command name aliases.
+
+    # *
+
+    # * @var array'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+methods:
+- name: migrationTableName
+  visibility: protected
+  parameters: []
+  comment: "# * The console command name.\n# *\n# * @var string\n# */\n# protected\
+    \ $name = 'make:queue-table';\n# \n# /**\n# * The console command name aliases.\n\
+    # *\n# * @var array\n# */\n# protected $aliases = ['queue:table'];\n# \n# /**\n\
+    # * The console command description.\n# *\n# * @var string\n# */\n# protected\
+    \ $description = 'Create a migration for the queue jobs database table';\n# \n\
+    # /**\n# * Get the migration table name.\n# *\n# * @return string"
+- name: migrationStubFile
+  visibility: protected
+  parameters: []
+  comment: '# * Get the path to the migration stub file.
+
+    # *
+
+    # * @return string'
+- name: migrationExists
+  visibility: protected
+  parameters:
+  - name: table
+  comment: '# * Determine whether a migration for the table already exists.
+
+    # *
+
+    # * @param  string  $table
+
+    # * @return bool'
+traits:
+- Illuminate\Console\MigrationGeneratorCommand
+- Symfony\Component\Console\Attribute\AsCommand
+interfaces: []

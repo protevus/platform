@@ -1,0 +1,398 @@
+name: Batch
+class_comment: null
+dependencies:
+- name: CarbonImmutable
+  type: class
+  source: Carbon\CarbonImmutable
+- name: Closure
+  type: class
+  source: Closure
+- name: QueueFactory
+  type: class
+  source: Illuminate\Contracts\Queue\Factory
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: CallQueuedClosure
+  type: class
+  source: Illuminate\Queue\CallQueuedClosure
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+- name: JsonSerializable
+  type: class
+  source: JsonSerializable
+- name: Throwable
+  type: class
+  source: Throwable
+properties:
+- name: queue
+  visibility: protected
+  comment: '# * The queue factory implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Queue\Factory'
+- name: repository
+  visibility: protected
+  comment: '# * The repository implementation.
+
+    # *
+
+    # * @var \Illuminate\Bus\BatchRepository'
+- name: id
+  visibility: public
+  comment: '# * The batch ID.
+
+    # *
+
+    # * @var string'
+- name: name
+  visibility: public
+  comment: '# * The batch name.
+
+    # *
+
+    # * @var string'
+- name: totalJobs
+  visibility: public
+  comment: '# * The total number of jobs that belong to the batch.
+
+    # *
+
+    # * @var int'
+- name: pendingJobs
+  visibility: public
+  comment: '# * The total number of jobs that are still pending.
+
+    # *
+
+    # * @var int'
+- name: failedJobs
+  visibility: public
+  comment: '# * The total number of jobs that have failed.
+
+    # *
+
+    # * @var int'
+- name: failedJobIds
+  visibility: public
+  comment: '# * The IDs of the jobs that have failed.
+
+    # *
+
+    # * @var array'
+- name: options
+  visibility: public
+  comment: '# * The batch options.
+
+    # *
+
+    # * @var array'
+- name: createdAt
+  visibility: public
+  comment: '# * The date indicating when the batch was created.
+
+    # *
+
+    # * @var \Carbon\CarbonImmutable'
+- name: cancelledAt
+  visibility: public
+  comment: '# * The date indicating when the batch was cancelled.
+
+    # *
+
+    # * @var \Carbon\CarbonImmutable|null'
+- name: finishedAt
+  visibility: public
+  comment: '# * The date indicating when the batch was finished.
+
+    # *
+
+    # * @var \Carbon\CarbonImmutable|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: queue
+  - name: repository
+  - name: id
+  - name: name
+  - name: totalJobs
+  - name: pendingJobs
+  - name: failedJobs
+  - name: failedJobIds
+  - name: options
+  - name: createdAt
+  - name: cancelledAt
+    default: 'null'
+  - name: finishedAt
+    default: 'null'
+  comment: "# * The queue factory implementation.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Queue\\Factory\n# */\n# protected $queue;\n# \n# /**\n# * The repository implementation.\n\
+    # *\n# * @var \\Illuminate\\Bus\\BatchRepository\n# */\n# protected $repository;\n\
+    # \n# /**\n# * The batch ID.\n# *\n# * @var string\n# */\n# public $id;\n# \n\
+    # /**\n# * The batch name.\n# *\n# * @var string\n# */\n# public $name;\n# \n\
+    # /**\n# * The total number of jobs that belong to the batch.\n# *\n# * @var int\n\
+    # */\n# public $totalJobs;\n# \n# /**\n# * The total number of jobs that are still\
+    \ pending.\n# *\n# * @var int\n# */\n# public $pendingJobs;\n# \n# /**\n# * The\
+    \ total number of jobs that have failed.\n# *\n# * @var int\n# */\n# public $failedJobs;\n\
+    # \n# /**\n# * The IDs of the jobs that have failed.\n# *\n# * @var array\n# */\n\
+    # public $failedJobIds;\n# \n# /**\n# * The batch options.\n# *\n# * @var array\n\
+    # */\n# public $options;\n# \n# /**\n# * The date indicating when the batch was\
+    \ created.\n# *\n# * @var \\Carbon\\CarbonImmutable\n# */\n# public $createdAt;\n\
+    # \n# /**\n# * The date indicating when the batch was cancelled.\n# *\n# * @var\
+    \ \\Carbon\\CarbonImmutable|null\n# */\n# public $cancelledAt;\n# \n# /**\n# *\
+    \ The date indicating when the batch was finished.\n# *\n# * @var \\Carbon\\CarbonImmutable|null\n\
+    # */\n# public $finishedAt;\n# \n# /**\n# * Create a new batch instance.\n# *\n\
+    # * @param  \\Illuminate\\Contracts\\Queue\\Factory  $queue\n# * @param  \\Illuminate\\\
+    Bus\\BatchRepository  $repository\n# * @param  string  $id\n# * @param  string\
+    \  $name\n# * @param  int  $totalJobs\n# * @param  int  $pendingJobs\n# * @param\
+    \  int  $failedJobs\n# * @param  array  $failedJobIds\n# * @param  array  $options\n\
+    # * @param  \\Carbon\\CarbonImmutable  $createdAt\n# * @param  \\Carbon\\CarbonImmutable|null\
+    \  $cancelledAt\n# * @param  \\Carbon\\CarbonImmutable|null  $finishedAt\n# *\
+    \ @return void"
+- name: fresh
+  visibility: public
+  parameters: []
+  comment: '# * Get a fresh instance of the batch represented by this ID.
+
+    # *
+
+    # * @return self'
+- name: add
+  visibility: public
+  parameters:
+  - name: jobs
+  comment: '# * Add additional jobs to the batch.
+
+    # *
+
+    # * @param  \Illuminate\Support\Enumerable|object|array  $jobs
+
+    # * @return self'
+- name: prepareBatchedChain
+  visibility: protected
+  parameters:
+  - name: chain
+  comment: '# * Prepare a chain that exists within the jobs being added.
+
+    # *
+
+    # * @param  array  $chain
+
+    # * @return \Illuminate\Support\Collection'
+- name: processedJobs
+  visibility: public
+  parameters: []
+  comment: '# * Get the total number of jobs that have been processed by the batch
+    thus far.
+
+    # *
+
+    # * @return int'
+- name: progress
+  visibility: public
+  parameters: []
+  comment: '# * Get the percentage of jobs that have been processed (between 0-100).
+
+    # *
+
+    # * @return int'
+- name: recordSuccessfulJob
+  visibility: public
+  parameters:
+  - name: jobId
+  comment: '# * Record that a job within the batch finished successfully, executing
+    any callbacks if necessary.
+
+    # *
+
+    # * @param  string  $jobId
+
+    # * @return void'
+- name: decrementPendingJobs
+  visibility: public
+  parameters:
+  - name: jobId
+  comment: '# * Decrement the pending jobs for the batch.
+
+    # *
+
+    # * @param  string  $jobId
+
+    # * @return \Illuminate\Bus\UpdatedBatchJobCounts'
+- name: finished
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the batch has finished executing.
+
+    # *
+
+    # * @return bool'
+- name: hasProgressCallbacks
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the batch has "progress" callbacks.
+
+    # *
+
+    # * @return bool'
+- name: hasThenCallbacks
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the batch has "success" callbacks.
+
+    # *
+
+    # * @return bool'
+- name: allowsFailures
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the batch allows jobs to fail without cancelling the
+    batch.
+
+    # *
+
+    # * @return bool'
+- name: hasFailures
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the batch has job failures.
+
+    # *
+
+    # * @return bool'
+- name: recordFailedJob
+  visibility: public
+  parameters:
+  - name: jobId
+  - name: e
+  comment: '# * Record that a job within the batch failed to finish successfully,
+    executing any callbacks if necessary.
+
+    # *
+
+    # * @param  string  $jobId
+
+    # * @param  \Throwable  $e
+
+    # * @return void'
+- name: incrementFailedJobs
+  visibility: public
+  parameters:
+  - name: jobId
+  comment: '# * Increment the failed jobs for the batch.
+
+    # *
+
+    # * @param  string  $jobId
+
+    # * @return \Illuminate\Bus\UpdatedBatchJobCounts'
+- name: hasCatchCallbacks
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the batch has "catch" callbacks.
+
+    # *
+
+    # * @return bool'
+- name: hasFinallyCallbacks
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the batch has "finally" callbacks.
+
+    # *
+
+    # * @return bool'
+- name: cancel
+  visibility: public
+  parameters: []
+  comment: '# * Cancel the batch.
+
+    # *
+
+    # * @return void'
+- name: canceled
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the batch has been cancelled.
+
+    # *
+
+    # * @return bool'
+- name: cancelled
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the batch has been cancelled.
+
+    # *
+
+    # * @return bool'
+- name: delete
+  visibility: public
+  parameters: []
+  comment: '# * Delete the batch from storage.
+
+    # *
+
+    # * @return void'
+- name: invokeHandlerCallback
+  visibility: protected
+  parameters:
+  - name: handler
+  - name: batch
+  - name: e
+    default: 'null'
+  comment: '# * Invoke a batch callback handler.
+
+    # *
+
+    # * @param  callable  $handler
+
+    # * @param  \Illuminate\Bus\Batch  $batch
+
+    # * @param  \Throwable|null  $e
+
+    # * @return void'
+- name: toArray
+  visibility: public
+  parameters: []
+  comment: '# * Convert the batch to an array.
+
+    # *
+
+    # * @return array'
+- name: jsonSerialize
+  visibility: public
+  parameters: []
+  comment: '# * Get the JSON serializable representation of the object.
+
+    # *
+
+    # * @return array'
+- name: __get
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Dynamically access the batch''s "options" via properties.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed'
+traits:
+- Carbon\CarbonImmutable
+- Closure
+- Illuminate\Contracts\Support\Arrayable
+- Illuminate\Queue\CallQueuedClosure
+- Illuminate\Support\Arr
+- Illuminate\Support\Collection
+- JsonSerializable
+- Throwable
+interfaces:
+- Arrayable

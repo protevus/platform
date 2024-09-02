@@ -1,0 +1,24 @@
+name: UnsupportedException
+class_comment: '# * @author Mathias Arlaud <mathias.arlaud@gmail.com>
+
+  # * @author Baptiste Leduc <baptiste.leduc@gmail.com>
+
+  # *
+
+  # * @experimental'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: message
+  - name: subject
+  - name: code
+    default: '0'
+  - name: previous
+    default: 'null'
+  comment: null
+traits: []
+interfaces:
+- ExceptionInterface

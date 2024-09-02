@@ -1,0 +1,30 @@
+name: BufferedConsoleOutput
+class_comment: null
+dependencies:
+- name: ConsoleOutput
+  type: class
+  source: Symfony\Component\Console\Output\ConsoleOutput
+properties:
+- name: buffer
+  visibility: protected
+  comment: '# * The current buffer.
+
+    # *
+
+    # * @var string'
+methods:
+- name: fetch
+  visibility: public
+  parameters: []
+  comment: "# * The current buffer.\n# *\n# * @var string\n# */\n# protected $buffer\
+    \ = '';\n# \n# /**\n# * Empties the buffer and returns its content.\n# *\n# *\
+    \ @return string"
+- name: doWrite
+  visibility: protected
+  parameters:
+  - name: message
+  - name: newline
+  comment: null
+traits:
+- Symfony\Component\Console\Output\ConsoleOutput
+interfaces: []

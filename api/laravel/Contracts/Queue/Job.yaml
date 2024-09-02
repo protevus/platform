@@ -1,0 +1,196 @@
+name: Job
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: uuid
+  visibility: public
+  parameters: []
+  comment: '# * Get the UUID of the job.
+
+    # *
+
+    # * @return string|null'
+- name: getJobId
+  visibility: public
+  parameters: []
+  comment: '# * Get the job identifier.
+
+    # *
+
+    # * @return string'
+- name: payload
+  visibility: public
+  parameters: []
+  comment: '# * Get the decoded body of the job.
+
+    # *
+
+    # * @return array'
+- name: fire
+  visibility: public
+  parameters: []
+  comment: '# * Fire the job.
+
+    # *
+
+    # * @return void'
+- name: release
+  visibility: public
+  parameters:
+  - name: delay
+    default: '0'
+  comment: '# * Release the job back into the queue after (n) seconds.
+
+    # *
+
+    # * @param  int  $delay
+
+    # * @return void'
+- name: isReleased
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the job was released back into the queue.
+
+    # *
+
+    # * @return bool'
+- name: delete
+  visibility: public
+  parameters: []
+  comment: '# * Delete the job from the queue.
+
+    # *
+
+    # * @return void'
+- name: isDeleted
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the job has been deleted.
+
+    # *
+
+    # * @return bool'
+- name: isDeletedOrReleased
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the job has been deleted or released.
+
+    # *
+
+    # * @return bool'
+- name: attempts
+  visibility: public
+  parameters: []
+  comment: '# * Get the number of times the job has been attempted.
+
+    # *
+
+    # * @return int'
+- name: hasFailed
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the job has been marked as a failure.
+
+    # *
+
+    # * @return bool'
+- name: markAsFailed
+  visibility: public
+  parameters: []
+  comment: '# * Mark the job as "failed".
+
+    # *
+
+    # * @return void'
+- name: fail
+  visibility: public
+  parameters:
+  - name: e
+    default: 'null'
+  comment: '# * Delete the job, call the "failed" method, and raise the failed job
+    event.
+
+    # *
+
+    # * @param  \Throwable|null  $e
+
+    # * @return void'
+- name: maxTries
+  visibility: public
+  parameters: []
+  comment: '# * Get the number of times to attempt a job.
+
+    # *
+
+    # * @return int|null'
+- name: maxExceptions
+  visibility: public
+  parameters: []
+  comment: '# * Get the maximum number of exceptions allowed, regardless of attempts.
+
+    # *
+
+    # * @return int|null'
+- name: timeout
+  visibility: public
+  parameters: []
+  comment: '# * Get the number of seconds the job can run.
+
+    # *
+
+    # * @return int|null'
+- name: retryUntil
+  visibility: public
+  parameters: []
+  comment: '# * Get the timestamp indicating when the job should timeout.
+
+    # *
+
+    # * @return int|null'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the queued job class.
+
+    # *
+
+    # * @return string'
+- name: resolveName
+  visibility: public
+  parameters: []
+  comment: '# * Get the resolved name of the queued job class.
+
+    # *
+
+    # * Resolves the name of "wrapped" jobs such as class-based handlers.
+
+    # *
+
+    # * @return string'
+- name: getConnectionName
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the connection the job belongs to.
+
+    # *
+
+    # * @return string'
+- name: getQueue
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the queue the job belongs to.
+
+    # *
+
+    # * @return string'
+- name: getRawBody
+  visibility: public
+  parameters: []
+  comment: '# * Get the raw body string for the job.
+
+    # *
+
+    # * @return string'
+traits: []
+interfaces: []

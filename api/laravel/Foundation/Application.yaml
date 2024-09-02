@@ -1,0 +1,1401 @@
+name: Application
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: ClassLoader
+  type: class
+  source: Composer\Autoload\ClassLoader
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: ConsoleKernelContract
+  type: class
+  source: Illuminate\Contracts\Console\Kernel
+- name: ApplicationContract
+  type: class
+  source: Illuminate\Contracts\Foundation\Application
+- name: CachesConfiguration
+  type: class
+  source: Illuminate\Contracts\Foundation\CachesConfiguration
+- name: CachesRoutes
+  type: class
+  source: Illuminate\Contracts\Foundation\CachesRoutes
+- name: MaintenanceModeContract
+  type: class
+  source: Illuminate\Contracts\Foundation\MaintenanceMode
+- name: HttpKernelContract
+  type: class
+  source: Illuminate\Contracts\Http\Kernel
+- name: EventServiceProvider
+  type: class
+  source: Illuminate\Events\EventServiceProvider
+- name: Filesystem
+  type: class
+  source: Illuminate\Filesystem\Filesystem
+- name: LoadEnvironmentVariables
+  type: class
+  source: Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables
+- name: LocaleUpdated
+  type: class
+  source: Illuminate\Foundation\Events\LocaleUpdated
+- name: Request
+  type: class
+  source: Illuminate\Http\Request
+- name: ContextServiceProvider
+  type: class
+  source: Illuminate\Log\Context\ContextServiceProvider
+- name: LogServiceProvider
+  type: class
+  source: Illuminate\Log\LogServiceProvider
+- name: RoutingServiceProvider
+  type: class
+  source: Illuminate\Routing\RoutingServiceProvider
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+- name: Env
+  type: class
+  source: Illuminate\Support\Env
+- name: ServiceProvider
+  type: class
+  source: Illuminate\Support\ServiceProvider
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: ConsoleOutput
+  type: class
+  source: Symfony\Component\Console\Output\ConsoleOutput
+- name: SymfonyRequest
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: SymfonyResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: HttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\HttpException
+- name: NotFoundHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+- name: Macroable
+  type: class
+  source: Macroable
+properties:
+- name: basePath
+  visibility: protected
+  comment: "# * The Laravel framework version.\n# *\n# * @var string\n# */\n# const\
+    \ VERSION = '11.15.0';\n# \n# /**\n# * The base path for the Laravel installation.\n\
+    # *\n# * @var string"
+- name: registeredCallbacks
+  visibility: protected
+  comment: '# * The array of registered callbacks.
+
+    # *
+
+    # * @var callable[]'
+- name: hasBeenBootstrapped
+  visibility: protected
+  comment: '# * Indicates if the application has been bootstrapped before.
+
+    # *
+
+    # * @var bool'
+- name: booted
+  visibility: protected
+  comment: '# * Indicates if the application has "booted".
+
+    # *
+
+    # * @var bool'
+- name: bootingCallbacks
+  visibility: protected
+  comment: '# * The array of booting callbacks.
+
+    # *
+
+    # * @var callable[]'
+- name: bootedCallbacks
+  visibility: protected
+  comment: '# * The array of booted callbacks.
+
+    # *
+
+    # * @var callable[]'
+- name: terminatingCallbacks
+  visibility: protected
+  comment: '# * The array of terminating callbacks.
+
+    # *
+
+    # * @var callable[]'
+- name: serviceProviders
+  visibility: protected
+  comment: '# * All of the registered service providers.
+
+    # *
+
+    # * @var array<string, \Illuminate\Support\ServiceProvider>'
+- name: loadedProviders
+  visibility: protected
+  comment: '# * The names of the loaded service providers.
+
+    # *
+
+    # * @var array'
+- name: deferredServices
+  visibility: protected
+  comment: '# * The deferred services and their providers.
+
+    # *
+
+    # * @var array'
+- name: bootstrapPath
+  visibility: protected
+  comment: '# * The custom bootstrap path defined by the developer.
+
+    # *
+
+    # * @var string'
+- name: appPath
+  visibility: protected
+  comment: '# * The custom application path defined by the developer.
+
+    # *
+
+    # * @var string'
+- name: configPath
+  visibility: protected
+  comment: '# * The custom configuration path defined by the developer.
+
+    # *
+
+    # * @var string'
+- name: databasePath
+  visibility: protected
+  comment: '# * The custom database path defined by the developer.
+
+    # *
+
+    # * @var string'
+- name: langPath
+  visibility: protected
+  comment: '# * The custom language file path defined by the developer.
+
+    # *
+
+    # * @var string'
+- name: publicPath
+  visibility: protected
+  comment: '# * The custom public / web path defined by the developer.
+
+    # *
+
+    # * @var string'
+- name: storagePath
+  visibility: protected
+  comment: '# * The custom storage path defined by the developer.
+
+    # *
+
+    # * @var string'
+- name: environmentPath
+  visibility: protected
+  comment: '# * The custom environment path defined by the developer.
+
+    # *
+
+    # * @var string'
+- name: environmentFile
+  visibility: protected
+  comment: '# * The environment file to load during bootstrapping.
+
+    # *
+
+    # * @var string'
+- name: isRunningInConsole
+  visibility: protected
+  comment: '# * Indicates if the application is running in the console.
+
+    # *
+
+    # * @var bool|null'
+- name: namespace
+  visibility: protected
+  comment: '# * The application namespace.
+
+    # *
+
+    # * @var string'
+- name: mergeFrameworkConfiguration
+  visibility: protected
+  comment: '# * Indicates if the framework''s base configuration should be merged.
+
+    # *
+
+    # * @var bool'
+- name: absoluteCachePathPrefixes
+  visibility: protected
+  comment: '# * The prefixes of absolute cache paths for use during normalization.
+
+    # *
+
+    # * @var string[]'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: basePath
+    default: 'null'
+  comment: "# * The Laravel framework version.\n# *\n# * @var string\n# */\n# const\
+    \ VERSION = '11.15.0';\n# \n# /**\n# * The base path for the Laravel installation.\n\
+    # *\n# * @var string\n# */\n# protected $basePath;\n# \n# /**\n# * The array of\
+    \ registered callbacks.\n# *\n# * @var callable[]\n# */\n# protected $registeredCallbacks\
+    \ = [];\n# \n# /**\n# * Indicates if the application has been bootstrapped before.\n\
+    # *\n# * @var bool\n# */\n# protected $hasBeenBootstrapped = false;\n# \n# /**\n\
+    # * Indicates if the application has \"booted\".\n# *\n# * @var bool\n# */\n#\
+    \ protected $booted = false;\n# \n# /**\n# * The array of booting callbacks.\n\
+    # *\n# * @var callable[]\n# */\n# protected $bootingCallbacks = [];\n# \n# /**\n\
+    # * The array of booted callbacks.\n# *\n# * @var callable[]\n# */\n# protected\
+    \ $bootedCallbacks = [];\n# \n# /**\n# * The array of terminating callbacks.\n\
+    # *\n# * @var callable[]\n# */\n# protected $terminatingCallbacks = [];\n# \n\
+    # /**\n# * All of the registered service providers.\n# *\n# * @var array<string,\
+    \ \\Illuminate\\Support\\ServiceProvider>\n# */\n# protected $serviceProviders\
+    \ = [];\n# \n# /**\n# * The names of the loaded service providers.\n# *\n# * @var\
+    \ array\n# */\n# protected $loadedProviders = [];\n# \n# /**\n# * The deferred\
+    \ services and their providers.\n# *\n# * @var array\n# */\n# protected $deferredServices\
+    \ = [];\n# \n# /**\n# * The custom bootstrap path defined by the developer.\n\
+    # *\n# * @var string\n# */\n# protected $bootstrapPath;\n# \n# /**\n# * The custom\
+    \ application path defined by the developer.\n# *\n# * @var string\n# */\n# protected\
+    \ $appPath;\n# \n# /**\n# * The custom configuration path defined by the developer.\n\
+    # *\n# * @var string\n# */\n# protected $configPath;\n# \n# /**\n# * The custom\
+    \ database path defined by the developer.\n# *\n# * @var string\n# */\n# protected\
+    \ $databasePath;\n# \n# /**\n# * The custom language file path defined by the\
+    \ developer.\n# *\n# * @var string\n# */\n# protected $langPath;\n# \n# /**\n\
+    # * The custom public / web path defined by the developer.\n# *\n# * @var string\n\
+    # */\n# protected $publicPath;\n# \n# /**\n# * The custom storage path defined\
+    \ by the developer.\n# *\n# * @var string\n# */\n# protected $storagePath;\n#\
+    \ \n# /**\n# * The custom environment path defined by the developer.\n# *\n# *\
+    \ @var string\n# */\n# protected $environmentPath;\n# \n# /**\n# * The environment\
+    \ file to load during bootstrapping.\n# *\n# * @var string\n# */\n# protected\
+    \ $environmentFile = '.env';\n# \n# /**\n# * Indicates if the application is running\
+    \ in the console.\n# *\n# * @var bool|null\n# */\n# protected $isRunningInConsole;\n\
+    # \n# /**\n# * The application namespace.\n# *\n# * @var string\n# */\n# protected\
+    \ $namespace;\n# \n# /**\n# * Indicates if the framework's base configuration\
+    \ should be merged.\n# *\n# * @var bool\n# */\n# protected $mergeFrameworkConfiguration\
+    \ = true;\n# \n# /**\n# * The prefixes of absolute cache paths for use during\
+    \ normalization.\n# *\n# * @var string[]\n# */\n# protected $absoluteCachePathPrefixes\
+    \ = ['/', '\\\\'];\n# \n# /**\n# * Create a new Illuminate application instance.\n\
+    # *\n# * @param  string|null  $basePath\n# * @return void"
+- name: configure
+  visibility: public
+  parameters:
+  - name: basePath
+    default: 'null'
+  comment: '# * Begin configuring a new Laravel application instance.
+
+    # *
+
+    # * @param  string|null  $basePath
+
+    # * @return \Illuminate\Foundation\Configuration\ApplicationBuilder'
+- name: inferBasePath
+  visibility: public
+  parameters: []
+  comment: '# * Infer the application''s base directory from the environment.
+
+    # *
+
+    # * @return string'
+- name: version
+  visibility: public
+  parameters: []
+  comment: '# * Get the version number of the application.
+
+    # *
+
+    # * @return string'
+- name: registerBaseBindings
+  visibility: protected
+  parameters: []
+  comment: '# * Register the basic bindings into the container.
+
+    # *
+
+    # * @return void'
+- name: registerBaseServiceProviders
+  visibility: protected
+  parameters: []
+  comment: '# * Register all of the base service providers.
+
+    # *
+
+    # * @return void'
+- name: bootstrapWith
+  visibility: public
+  parameters:
+  - name: bootstrappers
+  comment: '# * Run the given array of bootstrap classes.
+
+    # *
+
+    # * @param  string[]  $bootstrappers
+
+    # * @return void'
+- name: afterLoadingEnvironment
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a callback to run after loading the environment.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return void'
+- name: beforeBootstrapping
+  visibility: public
+  parameters:
+  - name: bootstrapper
+  - name: callback
+  comment: '# * Register a callback to run before a bootstrapper.
+
+    # *
+
+    # * @param  string  $bootstrapper
+
+    # * @param  \Closure  $callback
+
+    # * @return void'
+- name: afterBootstrapping
+  visibility: public
+  parameters:
+  - name: bootstrapper
+  - name: callback
+  comment: '# * Register a callback to run after a bootstrapper.
+
+    # *
+
+    # * @param  string  $bootstrapper
+
+    # * @param  \Closure  $callback
+
+    # * @return void'
+- name: hasBeenBootstrapped
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the application has been bootstrapped before.
+
+    # *
+
+    # * @return bool'
+- name: setBasePath
+  visibility: public
+  parameters:
+  - name: basePath
+  comment: '# * Set the base path for the application.
+
+    # *
+
+    # * @param  string  $basePath
+
+    # * @return $this'
+- name: bindPathsInContainer
+  visibility: protected
+  parameters: []
+  comment: '# * Bind all of the application paths in the container.
+
+    # *
+
+    # * @return void'
+- name: path
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the path to the application "app" directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: useAppPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Set the application directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return $this'
+- name: basePath
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the base path of the Laravel installation.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: bootstrapPath
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the path to the bootstrap directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: getBootstrapProvidersPath
+  visibility: public
+  parameters: []
+  comment: '# * Get the path to the service provider list in the bootstrap directory.
+
+    # *
+
+    # * @return string'
+- name: useBootstrapPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Set the bootstrap file directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return $this'
+- name: configPath
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the path to the application configuration files.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: useConfigPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Set the configuration directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return $this'
+- name: databasePath
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the path to the database directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: useDatabasePath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Set the database directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return $this'
+- name: langPath
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the path to the language files.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: useLangPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Set the language file directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return $this'
+- name: publicPath
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the path to the public / web directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: usePublicPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Set the public / web directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return $this'
+- name: storagePath
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the path to the storage directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: useStoragePath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Set the storage directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return $this'
+- name: resourcePath
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the path to the resources directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: viewPath
+  visibility: public
+  parameters:
+  - name: path
+    default: ''''''
+  comment: '# * Get the path to the views directory.
+
+    # *
+
+    # * This method returns the first configured path in the array of view paths.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: joinPaths
+  visibility: public
+  parameters:
+  - name: basePath
+  - name: path
+    default: ''''''
+  comment: '# * Join the given paths together.
+
+    # *
+
+    # * @param  string  $basePath
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: environmentPath
+  visibility: public
+  parameters: []
+  comment: '# * Get the path to the environment file directory.
+
+    # *
+
+    # * @return string'
+- name: useEnvironmentPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Set the directory for the environment file.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return $this'
+- name: loadEnvironmentFrom
+  visibility: public
+  parameters:
+  - name: file
+  comment: '# * Set the environment file to be loaded during bootstrapping.
+
+    # *
+
+    # * @param  string  $file
+
+    # * @return $this'
+- name: environmentFile
+  visibility: public
+  parameters: []
+  comment: '# * Get the environment file the application is using.
+
+    # *
+
+    # * @return string'
+- name: environmentFilePath
+  visibility: public
+  parameters: []
+  comment: '# * Get the fully qualified path to the environment file.
+
+    # *
+
+    # * @return string'
+- name: environment
+  visibility: public
+  parameters:
+  - name: '...$environments'
+  comment: '# * Get or check the current application environment.
+
+    # *
+
+    # * @param  string|array  ...$environments
+
+    # * @return string|bool'
+- name: isLocal
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the application is in the local environment.
+
+    # *
+
+    # * @return bool'
+- name: isProduction
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the application is in the production environment.
+
+    # *
+
+    # * @return bool'
+- name: detectEnvironment
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Detect the application''s current environment.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return string'
+- name: runningInConsole
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the application is running in the console.
+
+    # *
+
+    # * @return bool'
+- name: runningConsoleCommand
+  visibility: public
+  parameters:
+  - name: '...$commands'
+  comment: '# * Determine if the application is running any of the given console commands.
+
+    # *
+
+    # * @param  string|array  ...$commands
+
+    # * @return bool'
+- name: runningUnitTests
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the application is running unit tests.
+
+    # *
+
+    # * @return bool'
+- name: hasDebugModeEnabled
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the application is running with debug mode enabled.
+
+    # *
+
+    # * @return bool'
+- name: registered
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a new registered listener.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return void'
+- name: registerConfiguredProviders
+  visibility: public
+  parameters: []
+  comment: '# * Register all of the configured providers.
+
+    # *
+
+    # * @return void'
+- name: register
+  visibility: public
+  parameters:
+  - name: provider
+  - name: force
+    default: 'false'
+  comment: '# * Register a service provider with the application.
+
+    # *
+
+    # * @param  \Illuminate\Support\ServiceProvider|string  $provider
+
+    # * @param  bool  $force
+
+    # * @return \Illuminate\Support\ServiceProvider'
+- name: getProvider
+  visibility: public
+  parameters:
+  - name: provider
+  comment: '# * Get the registered service provider instance if it exists.
+
+    # *
+
+    # * @param  \Illuminate\Support\ServiceProvider|string  $provider
+
+    # * @return \Illuminate\Support\ServiceProvider|null'
+- name: getProviders
+  visibility: public
+  parameters:
+  - name: provider
+  comment: '# * Get the registered service provider instances if any exist.
+
+    # *
+
+    # * @param  \Illuminate\Support\ServiceProvider|string  $provider
+
+    # * @return array'
+- name: resolveProvider
+  visibility: public
+  parameters:
+  - name: provider
+  comment: '# * Resolve a service provider instance from the class name.
+
+    # *
+
+    # * @param  string  $provider
+
+    # * @return \Illuminate\Support\ServiceProvider'
+- name: markAsRegistered
+  visibility: protected
+  parameters:
+  - name: provider
+  comment: '# * Mark the given provider as registered.
+
+    # *
+
+    # * @param  \Illuminate\Support\ServiceProvider  $provider
+
+    # * @return void'
+- name: loadDeferredProviders
+  visibility: public
+  parameters: []
+  comment: '# * Load and boot all of the remaining deferred providers.
+
+    # *
+
+    # * @return void'
+- name: loadDeferredProvider
+  visibility: public
+  parameters:
+  - name: service
+  comment: '# * Load the provider for a deferred service.
+
+    # *
+
+    # * @param  string  $service
+
+    # * @return void'
+- name: registerDeferredProvider
+  visibility: public
+  parameters:
+  - name: provider
+  - name: service
+    default: 'null'
+  comment: '# * Register a deferred provider and service.
+
+    # *
+
+    # * @param  string  $provider
+
+    # * @param  string|null  $service
+
+    # * @return void'
+- name: make
+  visibility: public
+  parameters:
+  - name: abstract
+  - name: parameters
+    default: '[]'
+  comment: '# * Resolve the given type from the container.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @param  array  $parameters
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Container\BindingResolutionException'
+- name: resolve
+  visibility: protected
+  parameters:
+  - name: abstract
+  - name: parameters
+    default: '[]'
+  - name: raiseEvents
+    default: 'true'
+  comment: '# * Resolve the given type from the container.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @param  array  $parameters
+
+    # * @param  bool  $raiseEvents
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Container\BindingResolutionException
+
+    # * @throws \Illuminate\Contracts\Container\CircularDependencyException'
+- name: loadDeferredProviderIfNeeded
+  visibility: protected
+  parameters:
+  - name: abstract
+  comment: '# * Load the deferred provider if the given type is a deferred service
+    and the instance has not been loaded.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @return void'
+- name: bound
+  visibility: public
+  parameters:
+  - name: abstract
+  comment: '# * Determine if the given abstract type has been bound.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @return bool'
+- name: isBooted
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the application has booted.
+
+    # *
+
+    # * @return bool'
+- name: boot
+  visibility: public
+  parameters: []
+  comment: '# * Boot the application''s service providers.
+
+    # *
+
+    # * @return void'
+- name: bootProvider
+  visibility: protected
+  parameters:
+  - name: provider
+  comment: '# * Boot the given service provider.
+
+    # *
+
+    # * @param  \Illuminate\Support\ServiceProvider  $provider
+
+    # * @return void'
+- name: booting
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a new boot listener.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return void'
+- name: booted
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a new "booted" listener.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return void'
+- name: fireAppCallbacks
+  visibility: protected
+  parameters:
+  - name: '&$callbacks'
+  comment: '# * Call the booting callbacks for the application.
+
+    # *
+
+    # * @param  callable[]  $callbacks
+
+    # * @return void'
+- name: handle
+  visibility: public
+  parameters:
+  - name: request
+  - name: type
+    default: self::MAIN_REQUEST
+  - name: catch
+    default: 'true'
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return \Symfony\Component\HttpFoundation\Response'
+- name: handleRequest
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Handle the incoming HTTP request and send the response to the browser.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return void'
+- name: handleCommand
+  visibility: public
+  parameters:
+  - name: input
+  comment: '# * Handle the incoming Artisan command.
+
+    # *
+
+    # * @param  \Symfony\Component\Console\Input\InputInterface  $input
+
+    # * @return int'
+- name: shouldMergeFrameworkConfiguration
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the framework''s base configuration should be merged.
+
+    # *
+
+    # * @return bool'
+- name: dontMergeFrameworkConfiguration
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the framework''s base configuration should not be merged.
+
+    # *
+
+    # * @return $this'
+- name: shouldSkipMiddleware
+  visibility: public
+  parameters: []
+  comment: '# * Determine if middleware has been disabled for the application.
+
+    # *
+
+    # * @return bool'
+- name: getCachedServicesPath
+  visibility: public
+  parameters: []
+  comment: '# * Get the path to the cached services.php file.
+
+    # *
+
+    # * @return string'
+- name: getCachedPackagesPath
+  visibility: public
+  parameters: []
+  comment: '# * Get the path to the cached packages.php file.
+
+    # *
+
+    # * @return string'
+- name: configurationIsCached
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the application configuration is cached.
+
+    # *
+
+    # * @return bool'
+- name: getCachedConfigPath
+  visibility: public
+  parameters: []
+  comment: '# * Get the path to the configuration cache file.
+
+    # *
+
+    # * @return string'
+- name: routesAreCached
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the application routes are cached.
+
+    # *
+
+    # * @return bool'
+- name: getCachedRoutesPath
+  visibility: public
+  parameters: []
+  comment: '# * Get the path to the routes cache file.
+
+    # *
+
+    # * @return string'
+- name: eventsAreCached
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the application events are cached.
+
+    # *
+
+    # * @return bool'
+- name: getCachedEventsPath
+  visibility: public
+  parameters: []
+  comment: '# * Get the path to the events cache file.
+
+    # *
+
+    # * @return string'
+- name: normalizeCachePath
+  visibility: protected
+  parameters:
+  - name: key
+  - name: default
+  comment: '# * Normalize a relative or absolute path to a cache file.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  string  $default
+
+    # * @return string'
+- name: addAbsoluteCachePathPrefix
+  visibility: public
+  parameters:
+  - name: prefix
+  comment: '# * Add new prefix to list of absolute path prefixes.
+
+    # *
+
+    # * @param  string  $prefix
+
+    # * @return $this'
+- name: maintenanceMode
+  visibility: public
+  parameters: []
+  comment: '# * Get an instance of the maintenance mode manager implementation.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Foundation\MaintenanceMode'
+- name: isDownForMaintenance
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the application is currently down for maintenance.
+
+    # *
+
+    # * @return bool'
+- name: abort
+  visibility: public
+  parameters:
+  - name: code
+  - name: message
+    default: ''''''
+  - name: headers
+    default: '[]'
+  comment: '# * Throw an HttpException with the given data.
+
+    # *
+
+    # * @param  int  $code
+
+    # * @param  string  $message
+
+    # * @param  array  $headers
+
+    # * @return never
+
+    # *
+
+    # * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+
+    # * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException'
+- name: terminating
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a terminating callback with the application.
+
+    # *
+
+    # * @param  callable|string  $callback
+
+    # * @return $this'
+- name: terminate
+  visibility: public
+  parameters: []
+  comment: '# * Terminate the application.
+
+    # *
+
+    # * @return void'
+- name: getLoadedProviders
+  visibility: public
+  parameters: []
+  comment: '# * Get the service providers that have been loaded.
+
+    # *
+
+    # * @return array<string, boolean>'
+- name: providerIsLoaded
+  visibility: public
+  parameters:
+  - name: provider
+  comment: '# * Determine if the given service provider is loaded.
+
+    # *
+
+    # * @param  string  $provider
+
+    # * @return bool'
+- name: getDeferredServices
+  visibility: public
+  parameters: []
+  comment: '# * Get the application''s deferred services.
+
+    # *
+
+    # * @return array'
+- name: setDeferredServices
+  visibility: public
+  parameters:
+  - name: services
+  comment: '# * Set the application''s deferred services.
+
+    # *
+
+    # * @param  array  $services
+
+    # * @return void'
+- name: addDeferredServices
+  visibility: public
+  parameters:
+  - name: services
+  comment: '# * Add an array of services to the application''s deferred services.
+
+    # *
+
+    # * @param  array  $services
+
+    # * @return void'
+- name: isDeferredService
+  visibility: public
+  parameters:
+  - name: service
+  comment: '# * Determine if the given service is a deferred service.
+
+    # *
+
+    # * @param  string  $service
+
+    # * @return bool'
+- name: provideFacades
+  visibility: public
+  parameters:
+  - name: namespace
+  comment: '# * Configure the real-time facade namespace.
+
+    # *
+
+    # * @param  string  $namespace
+
+    # * @return void'
+- name: getLocale
+  visibility: public
+  parameters: []
+  comment: '# * Get the current application locale.
+
+    # *
+
+    # * @return string'
+- name: currentLocale
+  visibility: public
+  parameters: []
+  comment: '# * Get the current application locale.
+
+    # *
+
+    # * @return string'
+- name: getFallbackLocale
+  visibility: public
+  parameters: []
+  comment: '# * Get the current application fallback locale.
+
+    # *
+
+    # * @return string'
+- name: setLocale
+  visibility: public
+  parameters:
+  - name: locale
+  comment: '# * Set the current application locale.
+
+    # *
+
+    # * @param  string  $locale
+
+    # * @return void'
+- name: setFallbackLocale
+  visibility: public
+  parameters:
+  - name: fallbackLocale
+  comment: '# * Set the current application fallback locale.
+
+    # *
+
+    # * @param  string  $fallbackLocale
+
+    # * @return void'
+- name: isLocale
+  visibility: public
+  parameters:
+  - name: locale
+  comment: '# * Determine if the application locale is the given locale.
+
+    # *
+
+    # * @param  string  $locale
+
+    # * @return bool'
+- name: registerCoreContainerAliases
+  visibility: public
+  parameters: []
+  comment: '# * Register the core class aliases in the container.
+
+    # *
+
+    # * @return void'
+- name: flush
+  visibility: public
+  parameters: []
+  comment: '# * Flush the container of all bindings and resolved instances.
+
+    # *
+
+    # * @return void'
+- name: getNamespace
+  visibility: public
+  parameters: []
+  comment: '# * Get the application namespace.
+
+    # *
+
+    # * @return string
+
+    # *
+
+    # * @throws \RuntimeException'
+traits:
+- Closure
+- Composer\Autoload\ClassLoader
+- Illuminate\Container\Container
+- Illuminate\Contracts\Foundation\CachesConfiguration
+- Illuminate\Contracts\Foundation\CachesRoutes
+- Illuminate\Events\EventServiceProvider
+- Illuminate\Filesystem\Filesystem
+- Illuminate\Foundation\Bootstrap\LoadEnvironmentVariables
+- Illuminate\Foundation\Events\LocaleUpdated
+- Illuminate\Http\Request
+- Illuminate\Log\Context\ContextServiceProvider
+- Illuminate\Log\LogServiceProvider
+- Illuminate\Routing\RoutingServiceProvider
+- Illuminate\Support\Arr
+- Illuminate\Support\Collection
+- Illuminate\Support\Env
+- Illuminate\Support\ServiceProvider
+- Illuminate\Support\Str
+- Illuminate\Support\Traits\Macroable
+- RuntimeException
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Output\ConsoleOutput
+- Symfony\Component\HttpKernel\Exception\HttpException
+- Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+- Symfony\Component\HttpKernel\HttpKernelInterface
+- Macroable
+interfaces:
+- ApplicationContract

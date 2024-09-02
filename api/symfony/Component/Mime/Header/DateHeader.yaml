@@ -1,0 +1,37 @@
+name: DateHeader
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: setBody
+  visibility: public
+  parameters:
+  - name: body
+  comment: "# * A Date MIME Header.\n# *\n# * @author Chris Corbyn\n# */\n# final\
+    \ class DateHeader extends AbstractHeader\n# {\n# private \\DateTimeImmutable\
+    \ $dateTime;\n# \n# public function __construct(string $name, \\DateTimeInterface\
+    \ $date)\n# {\n# parent::__construct($name);\n# \n# $this->setDateTime($date);\n\
+    # }\n# \n# /**\n# * @param \\DateTimeInterface $body"
+- name: getBody
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDateTime
+  visibility: public
+  parameters: []
+  comment: null
+- name: setDateTime
+  visibility: public
+  parameters:
+  - name: dateTime
+  comment: '# * Set the date-time of the Date in this Header.
+
+    # *
+
+    # * If a DateTime instance is provided, it is converted to DateTimeImmutable.'
+- name: getBodyAsString
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

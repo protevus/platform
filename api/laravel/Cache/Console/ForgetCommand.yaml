@@ -1,0 +1,60 @@
+name: ForgetCommand
+class_comment: null
+dependencies:
+- name: CacheManager
+  type: class
+  source: Illuminate\Cache\CacheManager
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+properties:
+- name: signature
+  visibility: protected
+  comment: '# * The console command name.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+- name: cache
+  visibility: protected
+  comment: '# * The cache manager instance.
+
+    # *
+
+    # * @var \Illuminate\Cache\CacheManager'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: cache
+  comment: "# * The console command name.\n# *\n# * @var string\n# */\n# protected\
+    \ $signature = 'cache:forget {key : The key to remove} {store? : The store to\
+    \ remove the key from}';\n# \n# /**\n# * The console command description.\n# *\n\
+    # * @var string\n# */\n# protected $description = 'Remove an item from the cache';\n\
+    # \n# /**\n# * The cache manager instance.\n# *\n# * @var \\Illuminate\\Cache\\\
+    CacheManager\n# */\n# protected $cache;\n# \n# /**\n# * Create a new cache clear\
+    \ command instance.\n# *\n# * @param  \\Illuminate\\Cache\\CacheManager  $cache\n\
+    # * @return void"
+- name: handle
+  visibility: public
+  parameters: []
+  comment: '# * Execute the console command.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Cache\CacheManager
+- Illuminate\Console\Command
+- Symfony\Component\Console\Attribute\AsCommand
+interfaces: []

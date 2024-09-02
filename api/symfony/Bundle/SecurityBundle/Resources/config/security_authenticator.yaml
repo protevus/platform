@@ -1,0 +1,75 @@
+name: security_authenticator
+class_comment: null
+dependencies:
+- name: UserAuthenticator
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Security\UserAuthenticator
+- name: ServiceLocator
+  type: class
+  source: Symfony\Component\DependencyInjection\ServiceLocator
+- name: AuthenticatorManager
+  type: class
+  source: Symfony\Component\Security\Http\Authentication\AuthenticatorManager
+- name: UserAuthenticatorInterface
+  type: class
+  source: Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface
+- name: FormLoginAuthenticator
+  type: class
+  source: Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator
+- name: HttpBasicAuthenticator
+  type: class
+  source: Symfony\Component\Security\Http\Authenticator\HttpBasicAuthenticator
+- name: JsonLoginAuthenticator
+  type: class
+  source: Symfony\Component\Security\Http\Authenticator\JsonLoginAuthenticator
+- name: RemoteUserAuthenticator
+  type: class
+  source: Symfony\Component\Security\Http\Authenticator\RemoteUserAuthenticator
+- name: X509Authenticator
+  type: class
+  source: Symfony\Component\Security\Http\Authenticator\X509Authenticator
+- name: CheckPassportEvent
+  type: class
+  source: Symfony\Component\Security\Http\Event\CheckPassportEvent
+- name: CheckCredentialsListener
+  type: class
+  source: Symfony\Component\Security\Http\EventListener\CheckCredentialsListener
+- name: LoginThrottlingListener
+  type: class
+  source: Symfony\Component\Security\Http\EventListener\LoginThrottlingListener
+- name: PasswordMigratingListener
+  type: class
+  source: Symfony\Component\Security\Http\EventListener\PasswordMigratingListener
+- name: SessionStrategyListener
+  type: class
+  source: Symfony\Component\Security\Http\EventListener\SessionStrategyListener
+- name: UserCheckerListener
+  type: class
+  source: Symfony\Component\Security\Http\EventListener\UserCheckerListener
+- name: UserProviderListener
+  type: class
+  source: Symfony\Component\Security\Http\EventListener\UserProviderListener
+- name: AuthenticatorManagerListener
+  type: class
+  source: Symfony\Component\Security\Http\Firewall\AuthenticatorManagerListener
+properties: []
+methods: []
+traits:
+- Symfony\Bundle\SecurityBundle\Security\UserAuthenticator
+- Symfony\Component\DependencyInjection\ServiceLocator
+- Symfony\Component\Security\Http\Authentication\AuthenticatorManager
+- Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface
+- Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator
+- Symfony\Component\Security\Http\Authenticator\HttpBasicAuthenticator
+- Symfony\Component\Security\Http\Authenticator\JsonLoginAuthenticator
+- Symfony\Component\Security\Http\Authenticator\RemoteUserAuthenticator
+- Symfony\Component\Security\Http\Authenticator\X509Authenticator
+- Symfony\Component\Security\Http\Event\CheckPassportEvent
+- Symfony\Component\Security\Http\EventListener\CheckCredentialsListener
+- Symfony\Component\Security\Http\EventListener\LoginThrottlingListener
+- Symfony\Component\Security\Http\EventListener\PasswordMigratingListener
+- Symfony\Component\Security\Http\EventListener\SessionStrategyListener
+- Symfony\Component\Security\Http\EventListener\UserCheckerListener
+- Symfony\Component\Security\Http\EventListener\UserProviderListener
+- Symfony\Component\Security\Http\Firewall\AuthenticatorManagerListener
+interfaces: []

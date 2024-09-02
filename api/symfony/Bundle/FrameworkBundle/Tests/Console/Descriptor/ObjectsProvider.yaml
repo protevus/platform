@@ -1,0 +1,135 @@
+name: ObjectsProvider
+class_comment: '# * This is a class with a doc comment.'
+dependencies:
+- name: FooUnitEnum
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Fixtures\FooUnitEnum
+- name: Suit
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Suit
+- name: Alias
+  type: class
+  source: Symfony\Component\DependencyInjection\Alias
+- name: AbstractArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\AbstractArgument
+- name: IteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: ParameterBag
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: CompiledRoute
+  type: class
+  source: Symfony\Component\Routing\CompiledRoute
+- name: Route
+  type: class
+  source: Symfony\Component\Routing\Route
+- name: RouteCollection
+  type: class
+  source: Symfony\Component\Routing\RouteCollection
+properties: []
+methods:
+- name: getRouteCollections
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRoutes
+  visibility: public
+  parameters: []
+  comment: null
+- name: getContainerParameters
+  visibility: public
+  parameters: []
+  comment: null
+- name: getContainerParameter
+  visibility: public
+  parameters: []
+  comment: null
+- name: getContainerDeprecations
+  visibility: public
+  parameters: []
+  comment: null
+- name: getContainerBuilders
+  visibility: public
+  parameters: []
+  comment: null
+- name: getContainerDefinitionsWithExistingClasses
+  visibility: public
+  parameters: []
+  comment: null
+- name: getContainerDefinitions
+  visibility: public
+  parameters: []
+  comment: null
+- name: getContainerBuildersWithPriorityTags
+  visibility: public
+  parameters: []
+  comment: null
+- name: getContainerDefinitionsWithPriorityTags
+  visibility: public
+  parameters: []
+  comment: null
+- name: getContainerAliases
+  visibility: public
+  parameters: []
+  comment: null
+- name: getEventDispatchers
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCallables
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDeprecatedCallables
+  visibility: public
+  parameters: []
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters: []
+  comment: null
+- name: staticMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: method
+  visibility: public
+  parameters: []
+  comment: null
+- name: staticMethod
+  visibility: public
+  parameters: []
+  comment: null
+- name: compile
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Bundle\FrameworkBundle\Tests\Fixtures\FooUnitEnum
+- Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Suit
+- Symfony\Component\DependencyInjection\Alias
+- Symfony\Component\DependencyInjection\Argument\AbstractArgument
+- Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\Routing\CompiledRoute
+- Symfony\Component\Routing\Route
+- Symfony\Component\Routing\RouteCollection
+interfaces: []

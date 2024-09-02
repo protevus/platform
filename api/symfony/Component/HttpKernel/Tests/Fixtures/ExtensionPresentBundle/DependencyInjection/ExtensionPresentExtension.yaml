@@ -1,0 +1,21 @@
+name: ExtensionPresentExtension
+class_comment: null
+dependencies:
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Extension
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\Extension
+properties: []
+methods:
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Extension\Extension
+interfaces: []

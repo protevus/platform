@@ -1,0 +1,31 @@
+name: AmqpStampTest
+class_comment: '# * @requires extension amqp'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AmqpStamp
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpStamp
+properties: []
+methods:
+- name: testRoutingKeyOnly
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFlagsAndAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromAmqpEnvelope
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateFromAmqpEnvelopeWithPreviousStamp
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Bridge\Amqp\Transport\AmqpStamp
+interfaces: []

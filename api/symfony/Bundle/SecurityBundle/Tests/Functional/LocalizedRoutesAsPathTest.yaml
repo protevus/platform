@@ -1,0 +1,35 @@
+name: LocalizedRoutesAsPathTest
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: testLoginLogoutProcedure
+  visibility: public
+  parameters:
+  - name: locale
+  comment: '# * @dataProvider getLocales'
+- name: testLoginFailureWithLocalizedFailurePath
+  visibility: public
+  parameters:
+  - name: locale
+  comment: '# * @group issue-32995
+
+    # *
+
+    # * @dataProvider getLocales'
+- name: testAccessRestrictedResource
+  visibility: public
+  parameters:
+  - name: locale
+  comment: '# * @dataProvider getLocales'
+- name: testAccessRestrictedResourceWithForward
+  visibility: public
+  parameters:
+  - name: locale
+  comment: '# * @dataProvider getLocales'
+- name: getLocales
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

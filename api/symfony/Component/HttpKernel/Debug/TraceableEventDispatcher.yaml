@@ -1,0 +1,34 @@
+name: TraceableEventDispatcher
+class_comment: '# * Collects some data about event listeners.
+
+  # *
+
+  # * This event dispatcher delegates the dispatching to another one.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: BaseTraceableEventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\Debug\TraceableEventDispatcher
+- name: KernelEvents
+  type: class
+  source: Symfony\Component\HttpKernel\KernelEvents
+properties: []
+methods:
+- name: beforeDispatch
+  visibility: protected
+  parameters:
+  - name: eventName
+  - name: event
+  comment: null
+- name: afterDispatch
+  visibility: protected
+  parameters:
+  - name: eventName
+  - name: event
+  comment: null
+traits:
+- Symfony\Component\HttpKernel\KernelEvents
+interfaces: []

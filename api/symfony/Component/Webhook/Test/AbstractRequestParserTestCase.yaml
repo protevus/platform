@@ -1,0 +1,60 @@
+name: AbstractRequestParserTestCase
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RemoteEvent
+  type: class
+  source: Symfony\Component\RemoteEvent\RemoteEvent
+- name: RequestParserInterface
+  type: class
+  source: Symfony\Component\Webhook\Client\RequestParserInterface
+properties: []
+methods:
+- name: testParse
+  visibility: public
+  parameters:
+  - name: payload
+  - name: expected
+  comment: '# * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # abstract class AbstractRequestParserTestCase extends TestCase
+
+    # {
+
+    # /**
+
+    # * @dataProvider getPayloads'
+- name: getPayloads
+  visibility: public
+  parameters: []
+  comment: '# * @return iterable<array{string, RemoteEvent}>'
+- name: createRequestParser
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getSecret
+  visibility: protected
+  parameters: []
+  comment: null
+- name: createRequest
+  visibility: protected
+  parameters:
+  - name: payload
+  comment: null
+- name: getFixtureExtension
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\RemoteEvent\RemoteEvent
+- Symfony\Component\Webhook\Client\RequestParserInterface
+interfaces: []

@@ -1,0 +1,61 @@
+name: FirewallMapTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: FirewallConfig
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Security\FirewallConfig
+- name: FirewallContext
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Security\FirewallContext
+- name: FirewallMap
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Security\FirewallMap
+- name: Container
+  type: class
+  source: Symfony\Component\DependencyInjection\Container
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestMatcherInterface
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestMatcherInterface
+- name: ExceptionListener
+  type: class
+  source: Symfony\Component\Security\Http\Firewall\ExceptionListener
+- name: LogoutListener
+  type: class
+  source: Symfony\Component\Security\Http\Firewall\LogoutListener
+properties: []
+methods:
+- name: testGetListenersWithEmptyMap
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetListenersWithInvalidParameter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetListeners
+  visibility: public
+  parameters:
+  - name: request
+  - name: expectedState
+  comment: '# @dataProvider providesStatefulStatelessRequests'
+- name: providesStatefulStatelessRequests
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\SecurityBundle\Security\FirewallConfig
+- Symfony\Bundle\SecurityBundle\Security\FirewallContext
+- Symfony\Bundle\SecurityBundle\Security\FirewallMap
+- Symfony\Component\DependencyInjection\Container
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestMatcherInterface
+- Symfony\Component\Security\Http\Firewall\ExceptionListener
+- Symfony\Component\Security\Http\Firewall\LogoutListener
+interfaces: []

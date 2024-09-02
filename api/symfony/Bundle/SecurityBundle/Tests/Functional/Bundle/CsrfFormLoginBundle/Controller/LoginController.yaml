@@ -1,0 +1,61 @@
+name: LoginController
+class_comment: null
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: UserLoginType
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Tests\Functional\Bundle\CsrfFormLoginBundle\Form\UserLoginType
+- name: FormFactoryInterface
+  type: class
+  source: Symfony\Component\Form\FormFactoryInterface
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: AccessDeniedException
+  type: class
+  source: Symfony\Component\Security\Core\Exception\AccessDeniedException
+- name: ServiceSubscriberInterface
+  type: class
+  source: Symfony\Contracts\Service\ServiceSubscriberInterface
+- name: Environment
+  type: class
+  source: Twig\Environment
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: loginAction
+  visibility: public
+  parameters: []
+  comment: null
+- name: afterLoginAction
+  visibility: public
+  parameters: []
+  comment: null
+- name: loginCheckAction
+  visibility: public
+  parameters: []
+  comment: null
+- name: secureAction
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSubscribedServices
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Bundle\SecurityBundle\Tests\Functional\Bundle\CsrfFormLoginBundle\Form\UserLoginType
+- Symfony\Component\Form\FormFactoryInterface
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\Security\Core\Exception\AccessDeniedException
+- Symfony\Contracts\Service\ServiceSubscriberInterface
+- Twig\Environment
+interfaces:
+- ServiceSubscriberInterface

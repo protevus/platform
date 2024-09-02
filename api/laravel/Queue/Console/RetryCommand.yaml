@@ -1,0 +1,130 @@
+name: RetryCommand
+class_comment: null
+dependencies:
+- name: DateTimeInterface
+  type: class
+  source: DateTimeInterface
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+- name: Encrypter
+  type: class
+  source: Illuminate\Contracts\Encryption\Encrypter
+- name: JobRetryRequested
+  type: class
+  source: Illuminate\Queue\Events\JobRetryRequested
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+properties:
+- name: signature
+  visibility: protected
+  comment: '# * The console command signature.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+methods:
+- name: handle
+  visibility: public
+  parameters: []
+  comment: "# * The console command signature.\n# *\n# * @var string\n# */\n# protected\
+    \ $signature = 'queue:retry\n# {id?* : The ID of the failed job or \"all\" to\
+    \ retry all jobs}\n# {--queue= : Retry all of the failed jobs for the specified\
+    \ queue}\n# {--range=* : Range of job IDs (numeric) to be retried (e.g. 1-5)}';\n\
+    # \n# /**\n# * The console command description.\n# *\n# * @var string\n# */\n\
+    # protected $description = 'Retry a failed queue job';\n# \n# /**\n# * Execute\
+    \ the console command.\n# *\n# * @return void"
+- name: getJobIds
+  visibility: protected
+  parameters: []
+  comment: '# * Get the job IDs to be retried.
+
+    # *
+
+    # * @return array'
+- name: getJobIdsByQueue
+  visibility: protected
+  parameters:
+  - name: queue
+  comment: '# * Get the job IDs by queue, if applicable.
+
+    # *
+
+    # * @param  string  $queue
+
+    # * @return array'
+- name: getJobIdsByRanges
+  visibility: protected
+  parameters:
+  - name: ranges
+  comment: '# * Get the job IDs ranges, if applicable.
+
+    # *
+
+    # * @param  array  $ranges
+
+    # * @return array'
+- name: retryJob
+  visibility: protected
+  parameters:
+  - name: job
+  comment: '# * Retry the queue job.
+
+    # *
+
+    # * @param  \stdClass  $job
+
+    # * @return void'
+- name: resetAttempts
+  visibility: protected
+  parameters:
+  - name: payload
+  comment: '# * Reset the payload attempts.
+
+    # *
+
+    # * Applicable to Redis and other jobs which store attempts in their payload.
+
+    # *
+
+    # * @param  string  $payload
+
+    # * @return string'
+- name: refreshRetryUntil
+  visibility: protected
+  parameters:
+  - name: payload
+  comment: '# * Refresh the "retry until" timestamp for the job.
+
+    # *
+
+    # * @param  string  $payload
+
+    # * @return string
+
+    # *
+
+    # * @throws \RuntimeException'
+traits:
+- DateTimeInterface
+- Illuminate\Console\Command
+- Illuminate\Contracts\Encryption\Encrypter
+- Illuminate\Queue\Events\JobRetryRequested
+- Illuminate\Support\Arr
+- RuntimeException
+- Symfony\Component\Console\Attribute\AsCommand
+interfaces: []

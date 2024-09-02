@@ -1,0 +1,39 @@
+name: CallbacksObject
+class_comment: null
+dependencies: []
+properties:
+- name: bar
+  visibility: public
+  comment: null
+- name: foo
+  visibility: public
+  comment: '# * @var string|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: bar
+    default: 'null'
+  - name: foo
+    default: 'null'
+  comment: null
+- name: getBar
+  visibility: public
+  parameters: []
+  comment: null
+- name: setBar
+  visibility: public
+  parameters:
+  - name: bar
+  comment: null
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: setFoo
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+traits: []
+interfaces: []

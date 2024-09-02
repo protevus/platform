@@ -1,0 +1,21 @@
+name: ArtisanStarting
+class_comment: null
+dependencies: []
+properties:
+- name: artisan
+  visibility: public
+  comment: '# * The Artisan application instance.
+
+    # *
+
+    # * @var \Illuminate\Console\Application'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: artisan
+  comment: "# * The Artisan application instance.\n# *\n# * @var \\Illuminate\\Console\\\
+    Application\n# */\n# public $artisan;\n# \n# /**\n# * Create a new event instance.\n\
+    # *\n# * @param  \\Illuminate\\Console\\Application  $artisan\n# * @return void"
+traits: []
+interfaces: []

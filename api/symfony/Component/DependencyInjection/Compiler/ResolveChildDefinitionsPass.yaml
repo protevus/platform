@@ -1,0 +1,64 @@
+name: ResolveChildDefinitionsPass
+class_comment: '# * This replaces all ChildDefinition instances with their equivalent
+  fully
+
+  # * merged Definition instance.
+
+  # *
+
+  # * @author Johannes M. Schmitt <schmittjoh@gmail.com>
+
+  # * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: ExceptionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ExceptionInterface
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: ServiceCircularReferenceException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+properties: []
+methods:
+- name: resolveDefinition
+  visibility: private
+  parameters:
+  - name: definition
+  comment: "# * This replaces all ChildDefinition instances with their equivalent\
+    \ fully\n# * merged Definition instance.\n# *\n# * @author Johannes M. Schmitt\
+    \ <schmittjoh@gmail.com>\n# * @author Nicolas Grekas <p@tchwork.com>\n# */\n#\
+    \ class ResolveChildDefinitionsPass extends AbstractRecursivePass\n# {\n# protected\
+    \ bool $skipScalars = true;\n# \n# private array $currentPath;\n# \n# protected\
+    \ function processValue(mixed $value, bool $isRoot = false): mixed\n# {\n# if\
+    \ (!$value instanceof Definition) {\n# return parent::processValue($value, $isRoot);\n\
+    # }\n# if ($isRoot) {\n# // yes, we are specifically fetching the definition from\
+    \ the\n# // container to ensure we are not operating on stale data\n# $value =\
+    \ $this->container->getDefinition($this->currentId);\n# }\n# if ($value instanceof\
+    \ ChildDefinition) {\n# $this->currentPath = [];\n# $value = $this->resolveDefinition($value);\n\
+    # if ($isRoot) {\n# $this->container->setDefinition($this->currentId, $value);\n\
+    # }\n# }\n# \n# return parent::processValue($value, $isRoot);\n# }\n# \n# /**\n\
+    # * Resolves the definition.\n# *\n# * @throws RuntimeException When the definition\
+    \ is invalid"
+- name: doResolveDefinition
+  visibility: private
+  parameters:
+  - name: definition
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\ExceptionInterface
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Exception\ServiceCircularReferenceException
+interfaces: []

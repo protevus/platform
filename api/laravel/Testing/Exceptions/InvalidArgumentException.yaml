@@ -1,0 +1,25 @@
+name: InvalidArgumentException
+class_comment: null
+dependencies:
+- name: Exception
+  type: class
+  source: PHPUnit\Framework\Exception
+properties: []
+methods:
+- name: create
+  visibility: public
+  parameters:
+  - name: argument
+  - name: type
+  comment: '# * Creates a new exception for an invalid argument.
+
+    # *
+
+    # * @param  int  $argument
+
+    # * @param  string  $type
+
+    # * @return static'
+traits:
+- PHPUnit\Framework\Exception
+interfaces: []

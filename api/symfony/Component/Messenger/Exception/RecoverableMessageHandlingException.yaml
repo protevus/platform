@@ -1,0 +1,13 @@
+name: RecoverableMessageHandlingException
+class_comment: '# * A concrete implementation of RecoverableExceptionInterface that
+  can be used directly.
+
+  # *
+
+  # * @author Frederic Bouchery <frederic@bouchery.fr>'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- RecoverableExceptionInterface

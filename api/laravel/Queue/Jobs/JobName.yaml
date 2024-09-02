@@ -1,0 +1,36 @@
+name: JobName
+class_comment: null
+dependencies:
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+properties: []
+methods:
+- name: parse
+  visibility: public
+  parameters:
+  - name: job
+  comment: '# * Parse the given job name into a class / method array.
+
+    # *
+
+    # * @param  string  $job
+
+    # * @return array'
+- name: resolve
+  visibility: public
+  parameters:
+  - name: name
+  - name: payload
+  comment: '# * Get the resolved name of the queued job class.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  array  $payload
+
+    # * @return string'
+traits:
+- Illuminate\Support\Str
+interfaces: []

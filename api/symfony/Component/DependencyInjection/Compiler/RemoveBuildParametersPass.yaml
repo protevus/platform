@@ -1,0 +1,22 @@
+name: RemoveBuildParametersPass
+class_comment: null
+dependencies:
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+properties: []
+methods:
+- name: getRemovedParameters
+  visibility: public
+  parameters: []
+  comment: "# * @var array<string, mixed>\n# */\n# private array $removedParameters\
+    \ = [];\n# \n# public function process(ContainerBuilder $container): void\n# {\n\
+    # $parameterBag = $container->getParameterBag();\n# $this->removedParameters =\
+    \ [];\n# \n# foreach ($parameterBag->all() as $name => $value) {\n# if ('.' ===\
+    \ ($name[0] ?? '')) {\n# $this->removedParameters[$name] = $value;\n# \n# $parameterBag->remove($name);\n\
+    # $container->log($this, \\sprintf('Removing build parameter \"%s\".', $name));\n\
+    # }\n# }\n# }\n# \n# /**\n# * @return array<string, mixed>"
+traits:
+- Symfony\Component\DependencyInjection\ContainerBuilder
+interfaces:
+- CompilerPassInterface

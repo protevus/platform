@@ -1,0 +1,34 @@
+name: RegisterFacades
+class_comment: null
+dependencies:
+- name: Application
+  type: class
+  source: Illuminate\Contracts\Foundation\Application
+- name: AliasLoader
+  type: class
+  source: Illuminate\Foundation\AliasLoader
+- name: PackageManifest
+  type: class
+  source: Illuminate\Foundation\PackageManifest
+- name: Facade
+  type: class
+  source: Illuminate\Support\Facades\Facade
+properties: []
+methods:
+- name: bootstrap
+  visibility: public
+  parameters:
+  - name: app
+  comment: '# * Bootstrap the given application.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Foundation\Application  $app
+
+    # * @return void'
+traits:
+- Illuminate\Contracts\Foundation\Application
+- Illuminate\Foundation\AliasLoader
+- Illuminate\Foundation\PackageManifest
+- Illuminate\Support\Facades\Facade
+interfaces: []

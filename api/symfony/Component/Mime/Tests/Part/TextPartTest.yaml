@@ -1,0 +1,110 @@
+name: TextPartTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ContentEncoderInterface
+  type: class
+  source: Symfony\Component\Mime\Encoder\ContentEncoderInterface
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Mime\Exception\InvalidArgumentException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Mime\Exception\RuntimeException
+- name: Headers
+  type: class
+  source: Symfony\Component\Mime\Header\Headers
+- name: ParameterizedHeader
+  type: class
+  source: Symfony\Component\Mime\Header\ParameterizedHeader
+- name: UnstructuredHeader
+  type: class
+  source: Symfony\Component\Mime\Header\UnstructuredHeader
+- name: File
+  type: class
+  source: Symfony\Component\Mime\Part\File
+- name: TextPart
+  type: class
+  source: Symfony\Component\Mime\Part\TextPart
+properties: []
+methods:
+- name: testConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithResource
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithFile
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithUnknownFile
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstructorWithNonStringOrResource
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEncoding
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCustomEncoderNeedsToRegisterFirst
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOverwriteDefaultEncoder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCustomEncoding
+  visibility: public
+  parameters: []
+  comment: null
+- name: encodeByteStream
+  visibility: public
+  parameters:
+  - name: stream
+  - name: maxLineLength
+    default: '0'
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: encodeString
+  visibility: public
+  parameters:
+  - name: string
+  - name: charset
+    default: '''utf-8'''
+  - name: firstLineOffset
+    default: '0'
+  - name: maxLineLength
+    default: '0'
+  comment: null
+- name: testSerialize
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mime\Encoder\ContentEncoderInterface
+- Symfony\Component\Mime\Exception\InvalidArgumentException
+- Symfony\Component\Mime\Exception\RuntimeException
+- Symfony\Component\Mime\Header\Headers
+- Symfony\Component\Mime\Header\ParameterizedHeader
+- Symfony\Component\Mime\Header\UnstructuredHeader
+- Symfony\Component\Mime\Part\File
+- Symfony\Component\Mime\Part\TextPart
+interfaces:
+- ContentEncoderInterface

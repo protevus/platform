@@ -1,0 +1,64 @@
+name: FormDataExtractor
+class_comment: '# * Default implementation of {@link FormDataExtractorInterface}.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+- name: FormView
+  type: class
+  source: Symfony\Component\Form\FormView
+- name: ConstraintViolationInterface
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolationInterface
+properties: []
+methods:
+- name: buildId
+  visibility: private
+  parameters:
+  - name: form
+  comment: "# * Default implementation of {@link FormDataExtractorInterface}.\n# *\n\
+    # * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# class FormDataExtractor\
+    \ implements FormDataExtractorInterface\n# {\n# public function extractConfiguration(FormInterface\
+    \ $form): array\n# {\n# $data = [\n# 'id' => $this->buildId($form),\n# 'name'\
+    \ => $form->getName(),\n# 'type_class' => $form->getConfig()->getType()->getInnerType()::class,\n\
+    # 'synchronized' => $form->isSynchronized(),\n# 'passed_options' => [],\n# 'resolved_options'\
+    \ => [],\n# ];\n# \n# foreach ($form->getConfig()->getAttribute('data_collector/passed_options',\
+    \ []) as $option => $value) {\n# $data['passed_options'][$option] = $value;\n\
+    # }\n# \n# foreach ($form->getConfig()->getOptions() as $option => $value) {\n\
+    # $data['resolved_options'][$option] = $value;\n# }\n# \n# ksort($data['passed_options']);\n\
+    # ksort($data['resolved_options']);\n# \n# return $data;\n# }\n# \n# public function\
+    \ extractDefaultData(FormInterface $form): array\n# {\n# $data = [\n# 'default_data'\
+    \ => [\n# 'norm' => $form->getNormData(),\n# ],\n# 'submitted_data' => [],\n#\
+    \ ];\n# \n# if ($form->getData() !== $form->getNormData()) {\n# $data['default_data']['model']\
+    \ = $form->getData();\n# }\n# \n# if ($form->getViewData() !== $form->getNormData())\
+    \ {\n# $data['default_data']['view'] = $form->getViewData();\n# }\n# \n# return\
+    \ $data;\n# }\n# \n# public function extractSubmittedData(FormInterface $form):\
+    \ array\n# {\n# $data = [\n# 'submitted_data' => [\n# 'norm' => $form->getNormData(),\n\
+    # ],\n# 'errors' => [],\n# ];\n# \n# if ($form->getViewData() !== $form->getNormData())\
+    \ {\n# $data['submitted_data']['view'] = $form->getViewData();\n# }\n# \n# if\
+    \ ($form->getData() !== $form->getNormData()) {\n# $data['submitted_data']['model']\
+    \ = $form->getData();\n# }\n# \n# foreach ($form->getErrors() as $error) {\n#\
+    \ $errorData = [\n# 'message' => $error->getMessage(),\n# 'origin' => \\is_object($error->getOrigin())\n\
+    # ? spl_object_hash($error->getOrigin())\n# : null,\n# 'trace' => [],\n# ];\n\
+    # \n# $cause = $error->getCause();\n# \n# while (null !== $cause) {\n# if ($cause\
+    \ instanceof ConstraintViolationInterface) {\n# $errorData['trace'][] = $cause;\n\
+    # $cause = method_exists($cause, 'getCause') ? $cause->getCause() : null;\n# \n\
+    # continue;\n# }\n# \n# if ($cause instanceof \\Exception) {\n# $errorData['trace'][]\
+    \ = $cause;\n# $cause = $cause->getPrevious();\n# \n# continue;\n# }\n# \n# $errorData['trace'][]\
+    \ = $cause;\n# \n# break;\n# }\n# \n# $data['errors'][] = $errorData;\n# }\n#\
+    \ \n# $data['synchronized'] = $form->isSynchronized();\n# \n# return $data;\n\
+    # }\n# \n# public function extractViewVariables(FormView $view): array\n# {\n\
+    # $data = [\n# 'id' => $view->vars['id'] ?? null,\n# 'name' => $view->vars['name']\
+    \ ?? null,\n# 'view_vars' => [],\n# ];\n# \n# foreach ($view->vars as $varName\
+    \ => $value) {\n# $data['view_vars'][$varName] = $value;\n# }\n# \n# ksort($data['view_vars']);\n\
+    # \n# return $data;\n# }\n# \n# /**\n# * Recursively builds an HTML ID for a form."
+traits:
+- Symfony\Component\Form\FormInterface
+- Symfony\Component\Form\FormView
+- Symfony\Component\Validator\ConstraintViolationInterface
+interfaces:
+- FormDataExtractorInterface

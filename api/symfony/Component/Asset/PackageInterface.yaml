@@ -1,0 +1,31 @@
+name: PackageInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getVersion
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Asset package interface.
+
+    # *
+
+    # * @author Kris Wallsmith <kris@symfony.com>
+
+    # */
+
+    # interface PackageInterface
+
+    # {
+
+    # /**
+
+    # * Returns the asset version for an asset.'
+- name: getUrl
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Returns an absolute or root-relative public path.'
+traits: []
+interfaces: []

@@ -1,0 +1,64 @@
+name: HandlersLocator
+class_comment: '# * Maps a message to a list of handlers.
+
+  # *
+
+  # * @author Nicolas Grekas <p@tchwork.com>
+
+  # * @author Samuel Roze <samuel.roze@gmail.com>'
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: ReceivedStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\ReceivedStamp
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: handlers
+  comment: '# * Maps a message to a list of handlers.
+
+    # *
+
+    # * @author Nicolas Grekas <p@tchwork.com>
+
+    # * @author Samuel Roze <samuel.roze@gmail.com>
+
+    # */
+
+    # class HandlersLocator implements HandlersLocatorInterface
+
+    # {
+
+    # /**
+
+    # * @param HandlerDescriptor[][]|callable[][] $handlers'
+- name: getHandlers
+  visibility: public
+  parameters:
+  - name: envelope
+  comment: null
+- name: listTypes
+  visibility: public
+  parameters:
+  - name: envelope
+  comment: '# * @internal'
+- name: listWildcards
+  visibility: private
+  parameters:
+  - name: type
+  comment: null
+- name: shouldHandle
+  visibility: private
+  parameters:
+  - name: envelope
+  - name: handlerDescriptor
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Stamp\ReceivedStamp
+interfaces:
+- HandlersLocatorInterface

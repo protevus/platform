@@ -1,0 +1,123 @@
+name: Dispatcher
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: listen
+  visibility: public
+  parameters:
+  - name: events
+  - name: listener
+    default: 'null'
+  comment: '# * Register an event listener with the dispatcher.
+
+    # *
+
+    # * @param  \Closure|string|array  $events
+
+    # * @param  \Closure|string|array|null  $listener
+
+    # * @return void'
+- name: hasListeners
+  visibility: public
+  parameters:
+  - name: eventName
+  comment: '# * Determine if a given event has listeners.
+
+    # *
+
+    # * @param  string  $eventName
+
+    # * @return bool'
+- name: subscribe
+  visibility: public
+  parameters:
+  - name: subscriber
+  comment: '# * Register an event subscriber with the dispatcher.
+
+    # *
+
+    # * @param  object|string  $subscriber
+
+    # * @return void'
+- name: until
+  visibility: public
+  parameters:
+  - name: event
+  - name: payload
+    default: '[]'
+  comment: '# * Dispatch an event until the first non-null response is returned.
+
+    # *
+
+    # * @param  string|object  $event
+
+    # * @param  mixed  $payload
+
+    # * @return mixed'
+- name: dispatch
+  visibility: public
+  parameters:
+  - name: event
+  - name: payload
+    default: '[]'
+  - name: halt
+    default: 'false'
+  comment: '# * Dispatch an event and call the listeners.
+
+    # *
+
+    # * @param  string|object  $event
+
+    # * @param  mixed  $payload
+
+    # * @param  bool  $halt
+
+    # * @return array|null'
+- name: push
+  visibility: public
+  parameters:
+  - name: event
+  - name: payload
+    default: '[]'
+  comment: '# * Register an event and payload to be fired later.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @param  array  $payload
+
+    # * @return void'
+- name: flush
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Flush a set of pushed events.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @return void'
+- name: forget
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Remove a set of listeners from the dispatcher.
+
+    # *
+
+    # * @param  string  $event
+
+    # * @return void'
+- name: forgetPushed
+  visibility: public
+  parameters: []
+  comment: '# * Forget all of the queued listeners.
+
+    # *
+
+    # * @return void'
+traits: []
+interfaces: []

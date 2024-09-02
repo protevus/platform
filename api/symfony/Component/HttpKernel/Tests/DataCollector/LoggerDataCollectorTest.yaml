@@ -1,0 +1,70 @@
+name: LoggerDataCollectorTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: SilencedErrorContext
+  type: class
+  source: Symfony\Component\ErrorHandler\Exception\SilencedErrorContext
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: LoggerDataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\LoggerDataCollector
+- name: DebugLoggerInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Log\DebugLoggerInterface
+- name: Data
+  type: class
+  source: Symfony\Component\VarDumper\Cloner\Data
+properties: []
+methods:
+- name: testCollectWithUnexpectedFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCollectFromDeprecationsLog
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithMainRequest
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithSubRequest
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCollect
+  visibility: public
+  parameters:
+  - name: nb
+  - name: logs
+  - name: expectedLogs
+  - name: expectedDeprecationCount
+  - name: expectedScreamCount
+  - name: expectedPriorities
+    default: 'null'
+  comment: '# * @dataProvider getCollectTestData'
+- name: getCollectTestData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\ErrorHandler\Exception\SilencedErrorContext
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestStack
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\DataCollector\LoggerDataCollector
+- Symfony\Component\HttpKernel\Log\DebugLoggerInterface
+- Symfony\Component\VarDumper\Cloner\Data
+interfaces: []

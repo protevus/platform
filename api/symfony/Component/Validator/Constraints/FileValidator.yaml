@@ -1,0 +1,132 @@
+name: FileValidator
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: FileObject
+  type: class
+  source: Symfony\Component\HttpFoundation\File\File
+- name: UploadedFile
+  type: class
+  source: Symfony\Component\HttpFoundation\File\UploadedFile
+- name: MimeTypes
+  type: class
+  source: Symfony\Component\Mime\MimeTypes
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: ConstraintValidator
+  type: class
+  source: Symfony\Component\Validator\ConstraintValidator
+- name: LogicException
+  type: class
+  source: Symfony\Component\Validator\Exception\LogicException
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedTypeException
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+properties: []
+methods:
+- name: factorizeSizes
+  visibility: private
+  parameters:
+  - name: size
+  - name: limit
+  - name: binaryFormat
+  comment: "# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# class FileValidator\
+    \ extends ConstraintValidator\n# {\n# public const KB_BYTES = 1000;\n# public\
+    \ const MB_BYTES = 1000000;\n# public const KIB_BYTES = 1024;\n# public const\
+    \ MIB_BYTES = 1048576;\n# \n# private const SUFFICES = [\n# 1 => 'bytes',\n# self::KB_BYTES\
+    \ => 'kB',\n# self::MB_BYTES => 'MB',\n# self::KIB_BYTES => 'KiB',\n# self::MIB_BYTES\
+    \ => 'MiB',\n# ];\n# \n# public function validate(mixed $value, Constraint $constraint):\
+    \ void\n# {\n# if (!$constraint instanceof File) {\n# throw new UnexpectedTypeException($constraint,\
+    \ File::class);\n# }\n# \n# if (null === $value || '' === $value) {\n# return;\n\
+    # }\n# \n# if ($value instanceof UploadedFile && !$value->isValid()) {\n# switch\
+    \ ($value->getError()) {\n# case \\UPLOAD_ERR_INI_SIZE:\n# $iniLimitSize = UploadedFile::getMaxFilesize();\n\
+    # if ($constraint->maxSize && $constraint->maxSize < $iniLimitSize) {\n# $limitInBytes\
+    \ = $constraint->maxSize;\n# $binaryFormat = $constraint->binaryFormat;\n# } else\
+    \ {\n# $limitInBytes = $iniLimitSize;\n# $binaryFormat = $constraint->binaryFormat\
+    \ ?? true;\n# }\n# \n# [, $limitAsString, $suffix] = $this->factorizeSizes(0,\
+    \ $limitInBytes, $binaryFormat);\n# $this->context->buildViolation($constraint->uploadIniSizeErrorMessage)\n\
+    # ->setParameter('{{ limit }}', $limitAsString)\n# ->setParameter('{{ suffix }}',\
+    \ $suffix)\n# ->setCode((string) \\UPLOAD_ERR_INI_SIZE)\n# ->addViolation();\n\
+    # \n# return;\n# case \\UPLOAD_ERR_FORM_SIZE:\n# $this->context->buildViolation($constraint->uploadFormSizeErrorMessage)\n\
+    # ->setCode((string) \\UPLOAD_ERR_FORM_SIZE)\n# ->addViolation();\n# \n# return;\n\
+    # case \\UPLOAD_ERR_PARTIAL:\n# $this->context->buildViolation($constraint->uploadPartialErrorMessage)\n\
+    # ->setCode((string) \\UPLOAD_ERR_PARTIAL)\n# ->addViolation();\n# \n# return;\n\
+    # case \\UPLOAD_ERR_NO_FILE:\n# $this->context->buildViolation($constraint->uploadNoFileErrorMessage)\n\
+    # ->setCode((string) \\UPLOAD_ERR_NO_FILE)\n# ->addViolation();\n# \n# return;\n\
+    # case \\UPLOAD_ERR_NO_TMP_DIR:\n# $this->context->buildViolation($constraint->uploadNoTmpDirErrorMessage)\n\
+    # ->setCode((string) \\UPLOAD_ERR_NO_TMP_DIR)\n# ->addViolation();\n# \n# return;\n\
+    # case \\UPLOAD_ERR_CANT_WRITE:\n# $this->context->buildViolation($constraint->uploadCantWriteErrorMessage)\n\
+    # ->setCode((string) \\UPLOAD_ERR_CANT_WRITE)\n# ->addViolation();\n# \n# return;\n\
+    # case \\UPLOAD_ERR_EXTENSION:\n# $this->context->buildViolation($constraint->uploadExtensionErrorMessage)\n\
+    # ->setCode((string) \\UPLOAD_ERR_EXTENSION)\n# ->addViolation();\n# \n# return;\n\
+    # default:\n# $this->context->buildViolation($constraint->uploadErrorMessage)\n\
+    # ->setCode((string) $value->getError())\n# ->addViolation();\n# \n# return;\n\
+    # }\n# }\n# \n# if (!\\is_scalar($value) && !$value instanceof FileObject && !$value\
+    \ instanceof \\Stringable) {\n# throw new UnexpectedValueException($value, 'string');\n\
+    # }\n# \n# $path = $value instanceof FileObject ? $value->getPathname() : (string)\
+    \ $value;\n# \n# if (!is_file($path)) {\n# $this->context->buildViolation($constraint->notFoundMessage)\n\
+    # ->setParameter('{{ file }}', $this->formatValue($path))\n# ->setCode(File::NOT_FOUND_ERROR)\n\
+    # ->addViolation();\n# \n# return;\n# }\n# \n# if (!is_readable($path)) {\n# $this->context->buildViolation($constraint->notReadableMessage)\n\
+    # ->setParameter('{{ file }}', $this->formatValue($path))\n# ->setCode(File::NOT_READABLE_ERROR)\n\
+    # ->addViolation();\n# \n# return;\n# }\n# \n# $sizeInBytes = filesize($path);\n\
+    # $basename = $value instanceof UploadedFile ? $value->getClientOriginalName()\
+    \ : basename($path);\n# \n# if ($constraint->filenameMaxLength && $constraint->filenameMaxLength\
+    \ < $filenameLength = \\strlen($basename)) {\n# $this->context->buildViolation($constraint->filenameTooLongMessage)\n\
+    # ->setParameter('{{ filename_max_length }}', $this->formatValue($constraint->filenameMaxLength))\n\
+    # ->setCode(File::FILENAME_TOO_LONG)\n# ->setPlural($constraint->filenameMaxLength)\n\
+    # ->addViolation();\n# \n# return;\n# }\n# \n# if (0 === $sizeInBytes) {\n# $this->context->buildViolation($constraint->disallowEmptyMessage)\n\
+    # ->setParameter('{{ file }}', $this->formatValue($path))\n# ->setParameter('{{\
+    \ name }}', $this->formatValue($basename))\n# ->setCode(File::EMPTY_ERROR)\n#\
+    \ ->addViolation();\n# \n# return;\n# }\n# \n# if ($constraint->maxSize) {\n#\
+    \ $limitInBytes = $constraint->maxSize;\n# \n# if ($sizeInBytes > $limitInBytes)\
+    \ {\n# [$sizeAsString, $limitAsString, $suffix] = $this->factorizeSizes($sizeInBytes,\
+    \ $limitInBytes, $constraint->binaryFormat);\n# $this->context->buildViolation($constraint->maxSizeMessage)\n\
+    # ->setParameter('{{ file }}', $this->formatValue($path))\n# ->setParameter('{{\
+    \ size }}', $sizeAsString)\n# ->setParameter('{{ limit }}', $limitAsString)\n\
+    # ->setParameter('{{ suffix }}', $suffix)\n# ->setParameter('{{ name }}', $this->formatValue($basename))\n\
+    # ->setCode(File::TOO_LARGE_ERROR)\n# ->addViolation();\n# \n# return;\n# }\n\
+    # }\n# \n# $mimeTypes = (array) $constraint->mimeTypes;\n# \n# if ($constraint->extensions)\
+    \ {\n# $fileExtension = strtolower(pathinfo($basename, \\PATHINFO_EXTENSION));\n\
+    # \n# $found = false;\n# $normalizedExtensions = [];\n# foreach ((array) $constraint->extensions\
+    \ as $k => $v) {\n# if (!\\is_string($k)) {\n# $k = $v;\n# $v = null;\n# }\n#\
+    \ \n# $normalizedExtensions[] = $k;\n# \n# if ($fileExtension !== $k) {\n# continue;\n\
+    # }\n# \n# $found = true;\n# if (null === $v) {\n# if (!class_exists(MimeTypes::class))\
+    \ {\n# throw new LogicException('You cannot validate the mime-type of files as\
+    \ the Mime component is not installed. Try running \"composer require symfony/mime\"\
+    .');\n# }\n# \n# $mimeTypesHelper = MimeTypes::getDefault();\n# $v = $mimeTypesHelper->getMimeTypes($k);\n\
+    # }\n# \n# $mimeTypes = $mimeTypes ? array_intersect($v, $mimeTypes) : (array)\
+    \ $v;\n# break;\n# }\n# \n# if (!$found) {\n# $this->context->buildViolation($constraint->extensionsMessage)\n\
+    # ->setParameter('{{ file }}', $this->formatValue($path))\n# ->setParameter('{{\
+    \ extension }}', $this->formatValue($fileExtension))\n# ->setParameter('{{ extensions\
+    \ }}', $this->formatValues($normalizedExtensions))\n# ->setParameter('{{ name\
+    \ }}', $this->formatValue($basename))\n# ->setCode(File::INVALID_EXTENSION_ERROR)\n\
+    # ->addViolation();\n# }\n# }\n# \n# if ($mimeTypes) {\n# if ($value instanceof\
+    \ FileObject) {\n# $mime = $value->getMimeType();\n# } elseif (isset($mimeTypesHelper)\
+    \ || class_exists(MimeTypes::class)) {\n# $mime = ($mimeTypesHelper ?? MimeTypes::getDefault())->guessMimeType($path);\n\
+    # } elseif (!class_exists(FileObject::class)) {\n# throw new LogicException('You\
+    \ cannot validate the mime-type of files as the Mime component is not installed.\
+    \ Try running \"composer require symfony/mime\".');\n# } else {\n# $mime = (new\
+    \ FileObject($value))->getMimeType();\n# }\n# \n# foreach ($mimeTypes as $mimeType)\
+    \ {\n# if ($mimeType === $mime) {\n# return;\n# }\n# \n# if ($discrete = strstr($mimeType,\
+    \ '/*', true)) {\n# if (strstr($mime, '/', true) === $discrete) {\n# return;\n\
+    # }\n# }\n# }\n# \n# $this->context->buildViolation($constraint->mimeTypesMessage)\n\
+    # ->setParameter('{{ file }}', $this->formatValue($path))\n# ->setParameter('{{\
+    \ type }}', $this->formatValue($mime))\n# ->setParameter('{{ types }}', $this->formatValues($mimeTypes))\n\
+    # ->setParameter('{{ name }}', $this->formatValue($basename))\n# ->setCode(File::INVALID_MIME_TYPE_ERROR)\n\
+    # ->addViolation();\n# }\n# }\n# \n# private static function moreDecimalsThan(string\
+    \ $double, int $numberOfDecimals): bool\n# {\n# return \\strlen($double) > \\\
+    strlen(round($double, $numberOfDecimals));\n# }\n# \n# /**\n# * Convert the limit\
+    \ to the smallest possible number\n# * (i.e. try \"MB\", then \"kB\", then \"\
+    bytes\")."
+traits:
+- Symfony\Component\HttpFoundation\File\UploadedFile
+- Symfony\Component\Mime\MimeTypes
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\ConstraintValidator
+- Symfony\Component\Validator\Exception\LogicException
+- Symfony\Component\Validator\Exception\UnexpectedTypeException
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+interfaces: []

@@ -1,0 +1,37 @@
+name: WorkflowDumpCommandTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: WorkflowDumpCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\WorkflowDumpCommand
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+- name: CommandCompletionTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandCompletionTester
+- name: ServiceLocator
+  type: class
+  source: Symfony\Component\DependencyInjection\ServiceLocator
+properties: []
+methods:
+- name: testComplete
+  visibility: public
+  parameters:
+  - name: input
+  - name: expectedSuggestions
+  comment: '# * @dataProvider provideCompletionSuggestions'
+- name: provideCompletionSuggestions
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\FrameworkBundle\Command\WorkflowDumpCommand
+- Symfony\Component\Console\Application
+- Symfony\Component\Console\Tester\CommandCompletionTester
+- Symfony\Component\DependencyInjection\ServiceLocator
+interfaces: []

@@ -1,0 +1,75 @@
+name: AuthenticateWithBasicAuth
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: AuthFactory
+  type: class
+  source: Illuminate\Contracts\Auth\Factory
+properties:
+- name: auth
+  visibility: protected
+  comment: '# * The guard factory instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Auth\Factory'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: auth
+  comment: "# * The guard factory instance.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Auth\\Factory\n# */\n# protected $auth;\n# \n# /**\n# * Create a new middleware\
+    \ instance.\n# *\n# * @param  \\Illuminate\\Contracts\\Auth\\Factory  $auth\n\
+    # * @return void"
+- name: using
+  visibility: public
+  parameters:
+  - name: guard
+    default: 'null'
+  - name: field
+    default: 'null'
+  comment: '# * Specify the guard and field for the middleware.
+
+    # *
+
+    # * @param  string|null  $guard
+
+    # * @param  string|null  $field
+
+    # * @return string
+
+    # *
+
+    # * @named-arguments-supported'
+- name: handle
+  visibility: public
+  parameters:
+  - name: request
+  - name: next
+  - name: guard
+    default: 'null'
+  - name: field
+    default: 'null'
+  comment: '# * Handle an incoming request.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  \Closure  $next
+
+    # * @param  string|null  $guard
+
+    # * @param  string|null  $field
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException'
+traits:
+- Closure
+interfaces: []

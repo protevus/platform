@@ -1,0 +1,25 @@
+name: ConsumeRemoteEventMessage
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: RemoteEvent
+  type: class
+  source: Symfony\Component\RemoteEvent\RemoteEvent
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: type
+  - name: event
+  comment: null
+- name: getType
+  visibility: public
+  parameters: []
+  comment: null
+- name: getEvent
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\RemoteEvent\RemoteEvent
+interfaces: []

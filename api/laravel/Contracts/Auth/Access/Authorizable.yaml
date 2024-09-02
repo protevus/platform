@@ -1,0 +1,22 @@
+name: Authorizable
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: can
+  visibility: public
+  parameters:
+  - name: abilities
+  - name: arguments
+    default: '[]'
+  comment: '# * Determine if the entity has a given ability.
+
+    # *
+
+    # * @param  iterable|string  $abilities
+
+    # * @param  array|mixed  $arguments
+
+    # * @return bool'
+traits: []
+interfaces: []

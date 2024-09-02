@@ -1,0 +1,155 @@
+name: HeaderBag
+class_comment: '# * HeaderBag is a container for HTTP headers.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @implements \IteratorAggregate<string, list<string|null>>'
+dependencies: []
+properties: []
+methods:
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: "# * HeaderBag is a container for HTTP headers.\n# *\n# * @author Fabien\
+    \ Potencier <fabien@symfony.com>\n# *\n# * @implements \\IteratorAggregate<string,\
+    \ list<string|null>>\n# */\n# class HeaderBag implements \\IteratorAggregate,\
+    \ \\Countable, \\Stringable\n# {\n# protected const UPPER = '_ABCDEFGHIJKLMNOPQRSTUVWXYZ';\n\
+    # protected const LOWER = '-abcdefghijklmnopqrstuvwxyz';\n# \n# /**\n# * @var\
+    \ array<string, list<string|null>>\n# */\n# protected array $headers = [];\n#\
+    \ protected array $cacheControl = [];\n# \n# public function __construct(array\
+    \ $headers = [])\n# {\n# foreach ($headers as $key => $values) {\n# $this->set($key,\
+    \ $values);\n# }\n# }\n# \n# /**\n# * Returns the headers as a string."
+- name: all
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  comment: '# * Returns the headers.
+
+    # *
+
+    # * @param string|null $key The name of the headers to return or null to get them
+    all
+
+    # *
+
+    # * @return ($key is null ? array<string, list<string|null>> : list<string|null>)'
+- name: keys
+  visibility: public
+  parameters: []
+  comment: '# * Returns the parameter keys.
+
+    # *
+
+    # * @return string[]'
+- name: replace
+  visibility: public
+  parameters:
+  - name: headers
+    default: '[]'
+  comment: '# * Replaces the current HTTP headers by a new set.'
+- name: add
+  visibility: public
+  parameters:
+  - name: headers
+  comment: '# * Adds new headers the current HTTP headers set.'
+- name: get
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Returns the first header by name or the default one.'
+- name: set
+  visibility: public
+  parameters:
+  - name: key
+  - name: values
+  - name: replace
+    default: 'true'
+  comment: '# * Sets a header by name.
+
+    # *
+
+    # * @param string|string[]|null $values  The value or an array of values
+
+    # * @param bool                 $replace Whether to replace the actual value or
+    not (true by default)'
+- name: has
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Returns true if the HTTP header is defined.'
+- name: contains
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Returns true if the given HTTP header contains the given value.'
+- name: remove
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Removes a header.'
+- name: getDate
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Returns the HTTP header value converted to a date.
+
+    # *
+
+    # * @throws \RuntimeException When the HTTP header is not parseable'
+- name: addCacheControlDirective
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: 'true'
+  comment: '# * Adds a custom Cache-Control directive.'
+- name: hasCacheControlDirective
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Returns true if the Cache-Control directive is defined.'
+- name: getCacheControlDirective
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Returns a Cache-Control directive value by name.'
+- name: removeCacheControlDirective
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Removes a Cache-Control directive.'
+- name: getIterator
+  visibility: public
+  parameters: []
+  comment: '# * Returns an iterator for headers.
+
+    # *
+
+    # * @return \ArrayIterator<string, list<string|null>>'
+- name: count
+  visibility: public
+  parameters: []
+  comment: '# * Returns the number of headers.'
+- name: getCacheControlHeader
+  visibility: protected
+  parameters: []
+  comment: null
+- name: parseCacheControl
+  visibility: protected
+  parameters:
+  - name: header
+  comment: '# * Parses a Cache-Control HTTP header.'
+traits: []
+interfaces:
+- \IteratorAggregate
+- \IteratorAggregate

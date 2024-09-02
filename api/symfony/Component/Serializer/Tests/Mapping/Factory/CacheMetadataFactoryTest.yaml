@@ -1,0 +1,51 @@
+name: CacheMetadataFactoryTest
+class_comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>"
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ArrayAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\ArrayAdapter
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Serializer\Exception\InvalidArgumentException
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassMetadata
+- name: CacheClassMetadataFactory
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\CacheClassMetadataFactory
+- name: ClassMetadataFactoryInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+- name: Dummy
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\Dummy
+properties: []
+methods:
+- name: testGetMetadataFor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasMetadataFor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidClassThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAnonymousClass
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Cache\Adapter\ArrayAdapter
+- Symfony\Component\Serializer\Exception\InvalidArgumentException
+- Symfony\Component\Serializer\Mapping\ClassMetadata
+- Symfony\Component\Serializer\Mapping\Factory\CacheClassMetadataFactory
+- Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+- Symfony\Component\Serializer\Tests\Fixtures\Dummy
+interfaces: []

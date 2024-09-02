@@ -1,0 +1,35 @@
+name: webhook
+class_comment: null
+dependencies:
+- name: RequestParser
+  type: class
+  source: Symfony\Component\Webhook\Client\RequestParser
+- name: WebhookController
+  type: class
+  source: Symfony\Component\Webhook\Controller\WebhookController
+- name: SendWebhookHandler
+  type: class
+  source: Symfony\Component\Webhook\Messenger\SendWebhookHandler
+- name: HeadersConfigurator
+  type: class
+  source: Symfony\Component\Webhook\Server\HeadersConfigurator
+- name: HeaderSignatureConfigurator
+  type: class
+  source: Symfony\Component\Webhook\Server\HeaderSignatureConfigurator
+- name: JsonBodyConfigurator
+  type: class
+  source: Symfony\Component\Webhook\Server\JsonBodyConfigurator
+- name: Transport
+  type: class
+  source: Symfony\Component\Webhook\Server\Transport
+properties: []
+methods: []
+traits:
+- Symfony\Component\Webhook\Client\RequestParser
+- Symfony\Component\Webhook\Controller\WebhookController
+- Symfony\Component\Webhook\Messenger\SendWebhookHandler
+- Symfony\Component\Webhook\Server\HeadersConfigurator
+- Symfony\Component\Webhook\Server\HeaderSignatureConfigurator
+- Symfony\Component\Webhook\Server\JsonBodyConfigurator
+- Symfony\Component\Webhook\Server\Transport
+interfaces: []

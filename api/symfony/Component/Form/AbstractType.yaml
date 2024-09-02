@@ -1,0 +1,63 @@
+name: AbstractType
+class_comment: null
+dependencies:
+- name: FormType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\FormType
+- name: StringUtil
+  type: class
+  source: Symfony\Component\Form\Util\StringUtil
+- name: OptionsResolver
+  type: class
+  source: Symfony\Component\OptionsResolver\OptionsResolver
+properties: []
+methods:
+- name: getParent
+  visibility: public
+  parameters: []
+  comment: '# * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # abstract class AbstractType implements FormTypeInterface
+
+    # {
+
+    # /**
+
+    # * @return string|null'
+- name: configureOptions
+  visibility: public
+  parameters:
+  - name: resolver
+  comment: '# * @return void'
+- name: buildForm
+  visibility: public
+  parameters:
+  - name: builder
+  - name: options
+  comment: '# * @return void'
+- name: buildView
+  visibility: public
+  parameters:
+  - name: view
+  - name: form
+  - name: options
+  comment: '# * @return void'
+- name: finishView
+  visibility: public
+  parameters:
+  - name: view
+  - name: form
+  - name: options
+  comment: '# * @return void'
+- name: getBlockPrefix
+  visibility: public
+  parameters: []
+  comment: '# * @return string'
+traits:
+- Symfony\Component\Form\Extension\Core\Type\FormType
+- Symfony\Component\Form\Util\StringUtil
+- Symfony\Component\OptionsResolver\OptionsResolver
+interfaces:
+- FormTypeInterface

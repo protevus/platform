@@ -1,0 +1,39 @@
+name: ResponseFormatSameTest
+class_comment: "# * @author K\xE9vin Dunglas <kevin@dunglas.fr>"
+dependencies:
+- name: ExpectationFailedException
+  type: class
+  source: PHPUnit\Framework\ExpectationFailedException
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: TestFailure
+  type: class
+  source: PHPUnit\Framework\TestFailure
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: ResponseFormatSame
+  type: class
+  source: Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame
+properties: []
+methods:
+- name: testConstraint
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNullFormat
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\ExpectationFailedException
+- PHPUnit\Framework\TestCase
+- PHPUnit\Framework\TestFailure
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpFoundation\Test\Constraint\ResponseFormatSame
+interfaces: []

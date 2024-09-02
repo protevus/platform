@@ -1,0 +1,43 @@
+name: EventAliasTest
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: TokenInterface
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\TokenInterface
+- name: AuthenticationEvents
+  type: class
+  source: Symfony\Component\Security\Core\AuthenticationEvents
+- name: AuthenticationSuccessEvent
+  type: class
+  source: Symfony\Component\Security\Core\Event\AuthenticationSuccessEvent
+- name: UserInterface
+  type: class
+  source: Symfony\Component\Security\Core\User\UserInterface
+- name: InteractiveLoginEvent
+  type: class
+  source: Symfony\Component\Security\Http\Event\InteractiveLoginEvent
+- name: SwitchUserEvent
+  type: class
+  source: Symfony\Component\Security\Http\Event\SwitchUserEvent
+- name: SecurityEvents
+  type: class
+  source: Symfony\Component\Security\Http\SecurityEvents
+properties: []
+methods:
+- name: testAliasedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\Security\Core\Authentication\Token\TokenInterface
+- Symfony\Component\Security\Core\AuthenticationEvents
+- Symfony\Component\Security\Core\Event\AuthenticationSuccessEvent
+- Symfony\Component\Security\Core\User\UserInterface
+- Symfony\Component\Security\Http\Event\InteractiveLoginEvent
+- Symfony\Component\Security\Http\Event\SwitchUserEvent
+- Symfony\Component\Security\Http\SecurityEvents
+interfaces: []

@@ -1,0 +1,84 @@
+name: RouteParameterBinder
+class_comment: null
+dependencies:
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+properties:
+- name: route
+  visibility: protected
+  comment: '# * The route instance.
+
+    # *
+
+    # * @var \Illuminate\Routing\Route'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: route
+  comment: "# * The route instance.\n# *\n# * @var \\Illuminate\\Routing\\Route\n\
+    # */\n# protected $route;\n# \n# /**\n# * Create a new Route parameter binder\
+    \ instance.\n# *\n# * @param  \\Illuminate\\Routing\\Route  $route\n# * @return\
+    \ void"
+- name: parameters
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Get the parameters for the route.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return array'
+- name: bindPathParameters
+  visibility: protected
+  parameters:
+  - name: request
+  comment: '# * Get the parameter matches for the path portion of the URI.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return array'
+- name: bindHostParameters
+  visibility: protected
+  parameters:
+  - name: request
+  - name: parameters
+  comment: '# * Extract the parameter list from the host part of the request.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  array  $parameters
+
+    # * @return array'
+- name: matchToKeys
+  visibility: protected
+  parameters:
+  - name: matches
+  comment: '# * Combine a set of parameter matches with the route''s keys.
+
+    # *
+
+    # * @param  array  $matches
+
+    # * @return array'
+- name: replaceDefaults
+  visibility: protected
+  parameters:
+  - name: parameters
+  comment: '# * Replace null parameters with their defaults.
+
+    # *
+
+    # * @param  array  $parameters
+
+    # * @return array'
+traits:
+- Illuminate\Support\Arr
+interfaces: []

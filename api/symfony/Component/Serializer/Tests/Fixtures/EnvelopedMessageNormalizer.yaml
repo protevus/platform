@@ -1,0 +1,35 @@
+name: EnvelopedMessageNormalizer
+class_comment: '# * @author Karoly Gossler <connor@connor.hu>'
+dependencies:
+- name: NormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\NormalizerInterface
+properties: []
+methods:
+- name: normalize
+  visibility: public
+  parameters:
+  - name: message
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: getSupportedTypes
+  visibility: public
+  parameters:
+  - name: format
+  comment: null
+- name: supportsNormalization
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\Serializer\Normalizer\NormalizerInterface
+interfaces:
+- NormalizerInterface

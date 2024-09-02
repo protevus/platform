@@ -1,0 +1,98 @@
+name: CompilesStacks
+class_comment: null
+dependencies:
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+properties: []
+methods:
+- name: compileStack
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the stack statements into the content.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compilePush
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the push statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compilePushOnce
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the push-once statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compileEndpush
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the end-push statements into valid PHP.
+
+    # *
+
+    # * @return string'
+- name: compileEndpushOnce
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the end-push-once statements into valid PHP.
+
+    # *
+
+    # * @return string'
+- name: compilePrepend
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the prepend statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compilePrependOnce
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the prepend-once statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compileEndprepend
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the end-prepend statements into valid PHP.
+
+    # *
+
+    # * @return string'
+- name: compileEndprependOnce
+  visibility: protected
+  parameters: []
+  comment: '# * Compile the end-prepend-once statements into valid PHP.
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Support\Str
+interfaces: []

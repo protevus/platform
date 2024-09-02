@@ -1,0 +1,34 @@
+name: ElementNode
+class_comment: "# * Represents a \"<namespace>|<element>\" node.\n# *\n# * This component\
+  \ is a port of the Python cssselect library,\n# * which is copyright Ian Bicking,\
+  \ @see https://github.com/SimonSapin/cssselect.\n# *\n# * @author Jean-Fran\xE7\
+  ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n# * @internal"
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: namespace
+    default: 'null'
+  - name: element
+    default: 'null'
+  comment: null
+- name: getNamespace
+  visibility: public
+  parameters: []
+  comment: null
+- name: getElement
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSpecificity
+  visibility: public
+  parameters: []
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

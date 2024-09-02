@@ -1,0 +1,67 @@
+name: WrappedListener
+class_comment: null
+dependencies:
+- name: StoppableEventInterface
+  type: class
+  source: Psr\EventDispatcher\StoppableEventInterface
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcherInterface
+- name: Stopwatch
+  type: class
+  source: Symfony\Component\Stopwatch\Stopwatch
+- name: ClassStub
+  type: class
+  source: Symfony\Component\VarDumper\Caster\ClassStub
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: listener
+  - name: name
+  - name: stopwatch
+  - name: dispatcher
+    default: 'null'
+  - name: priority
+    default: 'null'
+  comment: null
+- name: getWrappedListener
+  visibility: public
+  parameters: []
+  comment: null
+- name: wasCalled
+  visibility: public
+  parameters: []
+  comment: null
+- name: stoppedPropagation
+  visibility: public
+  parameters: []
+  comment: null
+- name: getPretty
+  visibility: public
+  parameters: []
+  comment: null
+- name: getInfo
+  visibility: public
+  parameters:
+  - name: eventName
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: event
+  - name: eventName
+  - name: dispatcher
+  comment: null
+- name: parseListener
+  visibility: private
+  parameters:
+  - name: listener
+  comment: null
+traits:
+- Psr\EventDispatcher\StoppableEventInterface
+- Symfony\Component\EventDispatcher\EventDispatcherInterface
+- Symfony\Component\Stopwatch\Stopwatch
+- Symfony\Component\VarDumper\Caster\ClassStub
+interfaces: []

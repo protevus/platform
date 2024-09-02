@@ -1,0 +1,53 @@
+name: FileinfoMimeTypeGuesser
+class_comment: '# * Guesses the MIME type using the PECL extension FileInfo.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Mime\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\Mime\Exception\LogicException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: magicFile
+    default: 'null'
+  comment: '# * Guesses the MIME type using the PECL extension FileInfo.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # class FileinfoMimeTypeGuesser implements MimeTypeGuesserInterface
+
+    # {
+
+    # /**
+
+    # * @param string|null $magicFile A magic file to use with the finfo instance
+
+    # *
+
+    # * @see http://www.php.net/manual/en/function.finfo-open.php'
+- name: isGuesserSupported
+  visibility: public
+  parameters: []
+  comment: null
+- name: guessMimeType
+  visibility: public
+  parameters:
+  - name: path
+  comment: null
+traits:
+- Symfony\Component\Mime\Exception\InvalidArgumentException
+- Symfony\Component\Mime\Exception\LogicException
+interfaces:
+- MimeTypeGuesserInterface

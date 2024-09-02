@@ -1,0 +1,72 @@
+name: TextMessage
+class_comment: '# * @mixin \Illuminate\Mail\Message'
+dependencies:
+- name: ForwardsCalls
+  type: class
+  source: Illuminate\Support\Traits\ForwardsCalls
+- name: ForwardsCalls
+  type: class
+  source: ForwardsCalls
+properties:
+- name: message
+  visibility: protected
+  comment: "# * @mixin \\Illuminate\\Mail\\Message\n# */\n# class TextMessage\n# {\n\
+    # use ForwardsCalls;\n# \n# /**\n# * The underlying message instance.\n# *\n#\
+    \ * @var \\Illuminate\\Mail\\Message"
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: message
+  comment: "# * @mixin \\Illuminate\\Mail\\Message\n# */\n# class TextMessage\n# {\n\
+    # use ForwardsCalls;\n# \n# /**\n# * The underlying message instance.\n# *\n#\
+    \ * @var \\Illuminate\\Mail\\Message\n# */\n# protected $message;\n# \n# /**\n\
+    # * Create a new text message instance.\n# *\n# * @param  \\Illuminate\\Mail\\\
+    Message  $message\n# * @return void"
+- name: embed
+  visibility: public
+  parameters:
+  - name: file
+  comment: '# * Embed a file in the message and get the CID.
+
+    # *
+
+    # * @param  string|\Illuminate\Contracts\Mail\Attachable|\Illuminate\Mail\Attachment  $file
+
+    # * @return string'
+- name: embedData
+  visibility: public
+  parameters:
+  - name: data
+  - name: name
+  - name: contentType
+    default: 'null'
+  comment: '# * Embed in-memory data in the message and get the CID.
+
+    # *
+
+    # * @param  string|resource  $data
+
+    # * @param  string  $name
+
+    # * @param  string|null  $contentType
+
+    # * @return string'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically pass missing methods to the underlying message instance.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+traits:
+- Illuminate\Support\Traits\ForwardsCalls
+- ForwardsCalls
+interfaces: []

@@ -1,0 +1,40 @@
+name: DummySchedule
+class_comment: null
+dependencies:
+- name: ArrayAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\ArrayAdapter
+- name: Key
+  type: class
+  source: Symfony\Component\Lock\Key
+- name: Lock
+  type: class
+  source: Symfony\Component\Lock\Lock
+- name: InMemoryStore
+  type: class
+  source: Symfony\Component\Lock\Store\InMemoryStore
+- name: AsSchedule
+  type: class
+  source: Symfony\Component\Scheduler\Attribute\AsSchedule
+- name: Schedule
+  type: class
+  source: Symfony\Component\Scheduler\Schedule
+- name: ScheduleProviderInterface
+  type: class
+  source: Symfony\Component\Scheduler\ScheduleProviderInterface
+properties: []
+methods:
+- name: getSchedule
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Cache\Adapter\ArrayAdapter
+- Symfony\Component\Lock\Key
+- Symfony\Component\Lock\Lock
+- Symfony\Component\Lock\Store\InMemoryStore
+- Symfony\Component\Scheduler\Attribute\AsSchedule
+- Symfony\Component\Scheduler\Schedule
+- Symfony\Component\Scheduler\ScheduleProviderInterface
+interfaces:
+- ScheduleProviderInterface

@@ -1,0 +1,32 @@
+name: WithLogLevel
+class_comment: null
+dependencies:
+- name: LogLevel
+  type: class
+  source: Psr\Log\LogLevel
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: level
+  comment: '# * Defines the log level applied to an exception.
+
+    # *
+
+    # * @author Dejan Angelov <angelovdejan@protonmail.com>
+
+    # */
+
+    # #[\Attribute(\Attribute::TARGET_CLASS)]
+
+    # final class WithLogLevel
+
+    # {
+
+    # /**
+
+    # * @param LogLevel::* $level The level to use to log the exception'
+traits:
+- Psr\Log\LogLevel
+interfaces: []

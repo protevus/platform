@@ -1,0 +1,76 @@
+name: InteractsWithTime
+class_comment: null
+dependencies:
+- name: CarbonInterval
+  type: class
+  source: Carbon\CarbonInterval
+- name: DateInterval
+  type: class
+  source: DateInterval
+- name: DateTimeInterface
+  type: class
+  source: DateTimeInterface
+properties: []
+methods:
+- name: secondsUntil
+  visibility: protected
+  parameters:
+  - name: delay
+  comment: '# * Get the number of seconds until the given DateTime.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $delay
+
+    # * @return int'
+- name: availableAt
+  visibility: protected
+  parameters:
+  - name: delay
+    default: '0'
+  comment: '# * Get the "available at" UNIX timestamp.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $delay
+
+    # * @return int'
+- name: parseDateInterval
+  visibility: protected
+  parameters:
+  - name: delay
+  comment: '# * If the given value is an interval, convert it to a DateTime instance.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $delay
+
+    # * @return \DateTimeInterface|int'
+- name: currentTime
+  visibility: protected
+  parameters: []
+  comment: '# * Get the current system time as a UNIX timestamp.
+
+    # *
+
+    # * @return int'
+- name: runTimeForHumans
+  visibility: protected
+  parameters:
+  - name: startTime
+  - name: endTime
+    default: 'null'
+  comment: '# * Given a start time, format the total run time for human readability.
+
+    # *
+
+    # * @param  float  $startTime
+
+    # * @param  float  $endTime
+
+    # * @return string'
+traits:
+- Carbon\CarbonInterval
+- DateInterval
+- DateTimeInterface
+interfaces: []

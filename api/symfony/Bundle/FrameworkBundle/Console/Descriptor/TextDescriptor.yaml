@@ -1,0 +1,221 @@
+name: TextDescriptor
+class_comment: "# * @author Jean-Fran\xE7ois Simon <jeanfrancois.simon@sensiolabs.com>\n\
+  # *\n# * @internal"
+dependencies:
+- name: OutputFormatter
+  type: class
+  source: Symfony\Component\Console\Formatter\OutputFormatter
+- name: Dumper
+  type: class
+  source: Symfony\Component\Console\Helper\Dumper
+- name: Table
+  type: class
+  source: Symfony\Component\Console\Helper\Table
+- name: TableCell
+  type: class
+  source: Symfony\Component\Console\Helper\TableCell
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+- name: Alias
+  type: class
+  source: Symfony\Component\DependencyInjection\Alias
+- name: AbstractArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\AbstractArgument
+- name: IteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- name: ServiceClosureArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- name: ServiceLocatorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- name: TaggedIteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: ParameterBag
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: FileLinkFormatter
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcherInterface
+- name: Route
+  type: class
+  source: Symfony\Component\Routing\Route
+- name: RouteCollection
+  type: class
+  source: Symfony\Component\Routing\RouteCollection
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: fileLinkFormatter
+    default: 'null'
+  comment: null
+- name: describeRouteCollection
+  visibility: protected
+  parameters:
+  - name: routes
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeRoute
+  visibility: protected
+  parameters:
+  - name: route
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeContainerParameters
+  visibility: protected
+  parameters:
+  - name: parameters
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeContainerTags
+  visibility: protected
+  parameters:
+  - name: container
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeContainerService
+  visibility: protected
+  parameters:
+  - name: service
+  - name: options
+    default: '[]'
+  - name: container
+    default: 'null'
+  comment: null
+- name: describeContainerServices
+  visibility: protected
+  parameters:
+  - name: container
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeContainerDefinition
+  visibility: protected
+  parameters:
+  - name: definition
+  - name: options
+    default: '[]'
+  - name: container
+    default: 'null'
+  comment: null
+- name: describeContainerDeprecations
+  visibility: protected
+  parameters:
+  - name: container
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeContainerAlias
+  visibility: protected
+  parameters:
+  - name: alias
+  - name: options
+    default: '[]'
+  - name: container
+    default: 'null'
+  comment: null
+- name: describeContainerParameter
+  visibility: protected
+  parameters:
+  - name: parameter
+  - name: deprecation
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeContainerEnvVars
+  visibility: protected
+  parameters:
+  - name: envs
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeEventDispatcherListeners
+  visibility: protected
+  parameters:
+  - name: eventDispatcher
+  - name: options
+    default: '[]'
+  comment: null
+- name: describeCallable
+  visibility: protected
+  parameters:
+  - name: callable
+  - name: options
+    default: '[]'
+  comment: null
+- name: renderEventListenerTable
+  visibility: private
+  parameters:
+  - name: eventDispatcher
+  - name: event
+  - name: eventListeners
+  - name: io
+  comment: null
+- name: formatRouterConfig
+  visibility: private
+  parameters:
+  - name: config
+  comment: null
+- name: formatControllerLink
+  visibility: private
+  parameters:
+  - name: controller
+  - name: anchorText
+  - name: getContainer
+    default: 'null'
+  comment: null
+- name: formatCallable
+  visibility: private
+  parameters:
+  - name: callable
+  comment: null
+- name: writeText
+  visibility: private
+  parameters:
+  - name: content
+  - name: options
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\Console\Formatter\OutputFormatter
+- Symfony\Component\Console\Helper\Dumper
+- Symfony\Component\Console\Helper\Table
+- Symfony\Component\Console\Helper\TableCell
+- Symfony\Component\Console\Style\SymfonyStyle
+- Symfony\Component\DependencyInjection\Alias
+- Symfony\Component\DependencyInjection\Argument\AbstractArgument
+- Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\ErrorHandler\ErrorRenderer\FileLinkFormatter
+- Symfony\Component\EventDispatcher\EventDispatcherInterface
+- Symfony\Component\Routing\Route
+- Symfony\Component\Routing\RouteCollection
+interfaces: []

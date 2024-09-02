@@ -1,0 +1,349 @@
+name: FormatsMessages
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: File
+  type: class
+  source: Symfony\Component\HttpFoundation\File\File
+- name: UploadedFile
+  type: class
+  source: Symfony\Component\HttpFoundation\File\UploadedFile
+- name: ReplacesAttributes
+  type: class
+  source: ReplacesAttributes
+properties: []
+methods:
+- name: getMessage
+  visibility: protected
+  parameters:
+  - name: attribute
+  - name: rule
+  comment: '# * Get the validation message for an attribute and rule.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  string  $rule
+
+    # * @return string'
+- name: getInlineMessage
+  visibility: protected
+  parameters:
+  - name: attribute
+  - name: rule
+  comment: '# * Get the proper inline error message for standard and size rules.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  string  $rule
+
+    # * @return string|null'
+- name: getFromLocalArray
+  visibility: protected
+  parameters:
+  - name: attribute
+  - name: lowerRule
+  - name: source
+    default: 'null'
+  comment: '# * Get the inline message for a rule if it exists.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  string  $lowerRule
+
+    # * @param  array|null  $source
+
+    # * @return string|null'
+- name: getCustomMessageFromTranslator
+  visibility: protected
+  parameters:
+  - name: keys
+  comment: '# * Get the custom error message from the translator.
+
+    # *
+
+    # * @param  array|string  $keys
+
+    # * @return string'
+- name: getWildcardCustomMessages
+  visibility: protected
+  parameters:
+  - name: messages
+  - name: search
+  - name: default
+  comment: '# * Check the given messages for a wildcard key.
+
+    # *
+
+    # * @param  array  $messages
+
+    # * @param  string  $search
+
+    # * @param  string  $default
+
+    # * @return string'
+- name: getSizeMessage
+  visibility: protected
+  parameters:
+  - name: attribute
+  - name: rule
+  comment: '# * Get the proper error message for an attribute and size rule.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  string  $rule
+
+    # * @return string'
+- name: getAttributeType
+  visibility: protected
+  parameters:
+  - name: attribute
+  comment: '# * Get the data type of the given attribute.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @return string'
+- name: makeReplacements
+  visibility: public
+  parameters:
+  - name: message
+  - name: attribute
+  - name: rule
+  - name: parameters
+  comment: '# * Replace all error message place-holders with actual values.
+
+    # *
+
+    # * @param  string  $message
+
+    # * @param  string  $attribute
+
+    # * @param  string  $rule
+
+    # * @param  array  $parameters
+
+    # * @return string'
+- name: getDisplayableAttribute
+  visibility: public
+  parameters:
+  - name: attribute
+  comment: '# * Get the displayable name of the attribute.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @return string'
+- name: getAttributeFromTranslations
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Get the given attribute from the attribute translations.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string|null'
+- name: getAttributeFromLocalArray
+  visibility: protected
+  parameters:
+  - name: attribute
+  - name: source
+    default: 'null'
+  comment: '# * Get the custom name for an attribute if it exists in the given array.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  array|null  $source
+
+    # * @return string|null'
+- name: replaceAttributePlaceholder
+  visibility: protected
+  parameters:
+  - name: message
+  - name: value
+  comment: '# * Replace the :attribute placeholder in the given message.
+
+    # *
+
+    # * @param  string  $message
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: replaceIndexPlaceholder
+  visibility: protected
+  parameters:
+  - name: message
+  - name: attribute
+  comment: '# * Replace the :index placeholder in the given message.
+
+    # *
+
+    # * @param  string  $message
+
+    # * @param  string  $attribute
+
+    # * @return string'
+- name: replacePositionPlaceholder
+  visibility: protected
+  parameters:
+  - name: message
+  - name: attribute
+  comment: '# * Replace the :position placeholder in the given message.
+
+    # *
+
+    # * @param  string  $message
+
+    # * @param  string  $attribute
+
+    # * @return string'
+- name: replaceIndexOrPositionPlaceholder
+  visibility: protected
+  parameters:
+  - name: message
+  - name: attribute
+  - name: placeholder
+  - name: modifier
+    default: 'null'
+  comment: '# * Replace the :index or :position placeholder in the given message.
+
+    # *
+
+    # * @param  string  $message
+
+    # * @param  string  $attribute
+
+    # * @param  string  $placeholder
+
+    # * @param  \Closure|null  $modifier
+
+    # * @return string'
+- name: numberToIndexOrPositionWord
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Get the word for a index or position segment.
+
+    # *
+
+    # * @param  int  $value
+
+    # * @return string'
+- name: replaceInputPlaceholder
+  visibility: protected
+  parameters:
+  - name: message
+  - name: attribute
+  comment: '# * Replace the :input placeholder in the given message.
+
+    # *
+
+    # * @param  string  $message
+
+    # * @param  string  $attribute
+
+    # * @return string'
+- name: getDisplayableValue
+  visibility: public
+  parameters:
+  - name: attribute
+  - name: value
+  comment: '# * Get the displayable name of the value.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  mixed  $value
+
+    # * @return string'
+- name: getAttributeList
+  visibility: protected
+  parameters:
+  - name: values
+  comment: '# * Transform an array of attributes to their displayable form.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @return array'
+- name: callReplacer
+  visibility: protected
+  parameters:
+  - name: message
+  - name: attribute
+  - name: rule
+  - name: parameters
+  - name: validator
+  comment: '# * Call a custom validator message replacer.
+
+    # *
+
+    # * @param  string  $message
+
+    # * @param  string  $attribute
+
+    # * @param  string  $rule
+
+    # * @param  array  $parameters
+
+    # * @param  \Illuminate\Validation\Validator  $validator
+
+    # * @return string|null'
+- name: callClassBasedReplacer
+  visibility: protected
+  parameters:
+  - name: callback
+  - name: message
+  - name: attribute
+  - name: rule
+  - name: parameters
+  - name: validator
+  comment: '# * Call a class based validator message replacer.
+
+    # *
+
+    # * @param  string  $callback
+
+    # * @param  string  $message
+
+    # * @param  string  $attribute
+
+    # * @param  string  $rule
+
+    # * @param  array  $parameters
+
+    # * @param  \Illuminate\Validation\Validator  $validator
+
+    # * @return string'
+traits:
+- Closure
+- Illuminate\Support\Arr
+- Illuminate\Support\Str
+- Symfony\Component\HttpFoundation\File\File
+- Symfony\Component\HttpFoundation\File\UploadedFile
+- ReplacesAttributes
+interfaces: []

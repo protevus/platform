@@ -1,0 +1,14 @@
+name: ResolverNotFoundException
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: name
+  - name: alternatives
+    default: '[]'
+  comment: '# * @param string[] $alternatives'
+traits: []
+interfaces: []

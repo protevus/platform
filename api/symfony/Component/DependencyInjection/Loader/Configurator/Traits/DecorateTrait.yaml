@@ -1,0 +1,26 @@
+name: DecorateTrait
+class_comment: null
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: decorate
+  visibility: public
+  parameters:
+  - name: id
+  - name: renamedId
+    default: 'null'
+  - name: priority
+    default: '0'
+  - name: invalidBehavior
+    default: ContainerInterface::EXCEPTION_ON_INVALID_REFERENCE
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+interfaces: []

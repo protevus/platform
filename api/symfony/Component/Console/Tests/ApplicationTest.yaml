@@ -1,0 +1,773 @@
+name: ApplicationTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Application
+  type: class
+  source: Symfony\Component\Console\Application
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: HelpCommand
+  type: class
+  source: Symfony\Component\Console\Command\HelpCommand
+- name: LazyCommand
+  type: class
+  source: Symfony\Component\Console\Command\LazyCommand
+- name: SignalableCommandInterface
+  type: class
+  source: Symfony\Component\Console\Command\SignalableCommandInterface
+- name: CommandLoaderInterface
+  type: class
+  source: Symfony\Component\Console\CommandLoader\CommandLoaderInterface
+- name: FactoryCommandLoader
+  type: class
+  source: Symfony\Component\Console\CommandLoader\FactoryCommandLoader
+- name: ConsoleEvents
+  type: class
+  source: Symfony\Component\Console\ConsoleEvents
+- name: AddConsoleCommandPass
+  type: class
+  source: Symfony\Component\Console\DependencyInjection\AddConsoleCommandPass
+- name: ConsoleCommandEvent
+  type: class
+  source: Symfony\Component\Console\Event\ConsoleCommandEvent
+- name: ConsoleErrorEvent
+  type: class
+  source: Symfony\Component\Console\Event\ConsoleErrorEvent
+- name: ConsoleSignalEvent
+  type: class
+  source: Symfony\Component\Console\Event\ConsoleSignalEvent
+- name: ConsoleTerminateEvent
+  type: class
+  source: Symfony\Component\Console\Event\ConsoleTerminateEvent
+- name: CommandNotFoundException
+  type: class
+  source: Symfony\Component\Console\Exception\CommandNotFoundException
+- name: NamespaceNotFoundException
+  type: class
+  source: Symfony\Component\Console\Exception\NamespaceNotFoundException
+- name: FormatterHelper
+  type: class
+  source: Symfony\Component\Console\Helper\FormatterHelper
+- name: HelperSet
+  type: class
+  source: Symfony\Component\Console\Helper\HelperSet
+- name: ArgvInput
+  type: class
+  source: Symfony\Component\Console\Input\ArgvInput
+- name: ArrayInput
+  type: class
+  source: Symfony\Component\Console\Input\ArrayInput
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputDefinition
+  type: class
+  source: Symfony\Component\Console\Input\InputDefinition
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: ConsoleOutput
+  type: class
+  source: Symfony\Component\Console\Output\ConsoleOutput
+- name: NullOutput
+  type: class
+  source: Symfony\Component\Console\Output\NullOutput
+- name: Output
+  type: class
+  source: Symfony\Component\Console\Output\Output
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: StreamOutput
+  type: class
+  source: Symfony\Component\Console\Output\StreamOutput
+- name: SignalRegistry
+  type: class
+  source: Symfony\Component\Console\SignalRegistry\SignalRegistry
+- name: Terminal
+  type: class
+  source: Symfony\Component\Console\Terminal
+- name: ApplicationTester
+  type: class
+  source: Symfony\Component\Console\Tester\ApplicationTester
+- name: MockableAppliationWithTerminalWidth
+  type: class
+  source: Symfony\Component\Console\Tests\Fixtures\MockableAppliationWithTerminalWidth
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcherInterface
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: Process
+  type: class
+  source: Symfony\Component\Process\Process
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: setUpBeforeClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: normalizeLineBreaks
+  visibility: protected
+  parameters:
+  - name: text
+  comment: null
+- name: ensureStaticCommandHelp
+  visibility: protected
+  parameters:
+  - name: application
+  comment: '# * Replaces the dynamic placeholders of the command help text with a
+    static version.
+
+    # * The placeholder %command.full_name% includes the script path that is not predictable
+
+    # * and cannot be tested against.'
+- name: testConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetGetName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetGetVersion
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetLongVersion
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHelp
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAll
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllWithCommandLoader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRegister
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRegisterAmbiguous
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAdd
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddCommandWithEmptyConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasGet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasGetWithCommandLoader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSilentHelp
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetInvalidCommand
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetNamespaces
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindNamespace
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindNamespaceWithSubnamespaces
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindAmbiguousNamespace
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindNonAmbiguous
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindInvalidNamespace
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindUniqueNameButNamespaceName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFind
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindCaseSensitiveFirst
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindCaseInsensitiveAsFallback
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindCaseInsensitiveSuggestions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindWithCommandLoader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindWithAmbiguousAbbreviations
+  visibility: public
+  parameters:
+  - name: abbreviation
+  - name: expectedExceptionMessage
+  comment: '# * @dataProvider provideAmbiguousAbbreviations'
+- name: provideAmbiguousAbbreviations
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindWithAmbiguousAbbreviationsFindsCommandIfAlternativesAreHidden
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindCommandEqualNamespace
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindCommandWithAmbiguousNamespacesButUniqueName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindCommandWithMissingNamespace
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindAlternativeExceptionMessageSingle
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * @dataProvider provideInvalidCommandNamesSingle'
+- name: testDontRunAlternativeNamespaceName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCanRunAlternativeCommandName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDontRunAlternativeCommandName
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideInvalidCommandNamesSingle
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunNamespace
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindAlternativeExceptionMessageMultiple
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindAlternativeCommands
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindAlternativeCommandsWithAnAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindAlternativeNamespace
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindAlternativesOutput
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindNamespaceDoesNotFailOnDeepSimilarNamespaces
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindWithDoubleColonInNameThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindHiddenWithExactName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindAmbiguousCommandsIfAllAlternativesAreHidden
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetCatchExceptions
+  visibility: public
+  parameters:
+  - name: catchErrors
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testSetCatchErrors
+  visibility: public
+  parameters:
+  - name: catchExceptions
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testAutoExitSetting
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderExceptionWithDoubleWidthCharacters
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderExceptionEscapesLines
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderExceptionLineBreaks
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderAnonymousException
+  visibility: public
+  parameters: []
+  comment: '# * @group transient-on-windows'
+- name: testRenderExceptionStackTraceContainsRootException
+  visibility: public
+  parameters: []
+  comment: '# * @group transient-on-windows'
+- name: testRenderExceptionEscapesLinesOfSynopsis
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRun
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunWithGlobalOptionAndNoCommand
+  visibility: public
+  parameters: []
+  comment: null
+- name: testVerboseValueNotBreakArguments
+  visibility: public
+  parameters: []
+  comment: '# * Issue #9285.
+
+    # *
+
+    # * If the "verbose" option is just before an argument in ArgvInput,
+
+    # * an argument value should not be treated as verbosity value.
+
+    # * This test will fail with "Not enough arguments." if broken'
+- name: testRunReturnsIntegerExitCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunDispatchesIntegerExitCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunReturnsExitCodeOneForExceptionCodeZero
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunDispatchesExitCodeOneForExceptionCodeZero
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunReturnsExitCodeOneForNegativeExceptionCode
+  visibility: public
+  parameters:
+  - name: exceptionCode
+  comment: '# * @testWith [-1]
+
+    # *           [-32000]'
+- name: testAddingOptionWithDuplicateShortcut
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddingAlreadySetDefinitionElementData
+  visibility: public
+  parameters:
+  - name: def
+  comment: '# * @dataProvider getAddingAlreadySetDefinitionElementData'
+- name: getAddingAlreadySetDefinitionElementData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetDefaultHelperSetReturnsDefaultValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddingSingleHelperSetOverwritesDefaultValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOverwritingDefaultHelperSetOverwritesDefaultValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetDefaultInputDefinitionReturnsDefaultValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOverwritingDefaultInputDefinitionOverwritesDefaultValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSettingCustomInputDefinitionOverwritesDefaultValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunWithDispatcher
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunWithExceptionAndDispatcher
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunDispatchesAllEventsWithException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunDispatchesAllEventsWithExceptionInListener
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunWithError
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunWithFindError
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunAllowsErrorListenersToSilenceTheException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConsoleErrorEventIsTriggeredOnCommandNotFound
+  visibility: public
+  parameters: []
+  comment: null
+- name: testErrorIsRethrownIfNotHandledByConsoleErrorEvent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunWithErrorAndDispatcher
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunDispatchesAllEventsWithError
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunWithErrorFailingStatusCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunWithDispatcherSkippingCommand
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunWithDispatcherAccessingInputOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunWithDispatcherAddingInputOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetRunCustomDefaultCommand
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetRunCustomDefaultCommandWithOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetRunCustomSingleCommand
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRunLazyCommandService
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetDisabledLazyCommand
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasReturnsFalseForDisabledLazyCommand
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAllExcludesDisabledLazyCommand
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindAlternativesDoesNotLoadSameNamespaceCommandsOnExactMatch
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDispatcher
+  visibility: protected
+  parameters:
+  - name: skipCommand
+    default: 'false'
+  comment: null
+- name: testErrorIsRethrownIfNotHandledByConsoleErrorEventWithCatchingEnabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowingErrorListener
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCommandNameMismatchWithCommandLoaderKeyThrows
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSignalListenerNotCalledByDefault
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension pcntl'
+- name: testSignalListener
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension pcntl'
+- name: testSignalSubscriberNotCalledByDefault
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension pcntl'
+- name: testSignalSubscriber
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension pcntl'
+- name: testSignalDispatchWithoutEventToDispatch
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension pcntl'
+- name: testSignalDispatchWithoutEventDispatcher
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension pcntl'
+- name: testSetSignalsToDispatchEvent
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension pcntl'
+- name: testSignalableCommandInterfaceWithoutSignals
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSignalableCommandHandlerCalledAfterEventListener
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSignalableCommandDoesNotInterruptedOnTermSignals
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSignalableWithEventCommandDoesNotInterruptedOnTermSignals
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSignalableRestoresStty
+  visibility: public
+  parameters: []
+  comment: '# * @group tty'
+- name: createSignalableApplication
+  visibility: private
+  parameters:
+  - name: command
+  - name: dispatcher
+  comment: null
+- name: getDefaultInputDefinition
+  visibility: protected
+  parameters: []
+  comment: '# * Overwrites the default input definition.'
+- name: getDefaultHelperSet
+  visibility: protected
+  parameters: []
+  comment: '# * Gets the default helper set with the helpers that should always be
+    available.'
+- name: __construct
+  visibility: public
+  parameters: []
+  comment: null
+- name: execute
+  visibility: public
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+- name: isEnabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: emitsSignal
+    default: 'true'
+  - name: signal
+    default: \SIGUSR1
+  comment: null
+- name: execute
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+- name: getSubscribedSignals
+  visibility: public
+  parameters: []
+  comment: null
+- name: handleSignal
+  visibility: public
+  parameters:
+  - name: signal
+  - name: previousExitCode
+    default: '0'
+  comment: null
+- name: getSubscribedSignals
+  visibility: public
+  parameters: []
+  comment: null
+- name: handleSignal
+  visibility: public
+  parameters:
+  - name: signal
+  - name: previousExitCode
+    default: '0'
+  comment: null
+- name: execute
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+- name: getSubscribedSignals
+  visibility: public
+  parameters: []
+  comment: null
+- name: handleSignal
+  visibility: public
+  parameters:
+  - name: signal
+  - name: previousExitCode
+    default: '0'
+  comment: null
+- name: handleSignalEvent
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: onSignal
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Application
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Command\HelpCommand
+- Symfony\Component\Console\Command\LazyCommand
+- Symfony\Component\Console\Command\SignalableCommandInterface
+- Symfony\Component\Console\CommandLoader\CommandLoaderInterface
+- Symfony\Component\Console\CommandLoader\FactoryCommandLoader
+- Symfony\Component\Console\ConsoleEvents
+- Symfony\Component\Console\DependencyInjection\AddConsoleCommandPass
+- Symfony\Component\Console\Event\ConsoleCommandEvent
+- Symfony\Component\Console\Event\ConsoleErrorEvent
+- Symfony\Component\Console\Event\ConsoleSignalEvent
+- Symfony\Component\Console\Event\ConsoleTerminateEvent
+- Symfony\Component\Console\Exception\CommandNotFoundException
+- Symfony\Component\Console\Exception\NamespaceNotFoundException
+- Symfony\Component\Console\Helper\FormatterHelper
+- Symfony\Component\Console\Helper\HelperSet
+- Symfony\Component\Console\Input\ArgvInput
+- Symfony\Component\Console\Input\ArrayInput
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputDefinition
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Output\ConsoleOutput
+- Symfony\Component\Console\Output\NullOutput
+- Symfony\Component\Console\Output\Output
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Output\StreamOutput
+- Symfony\Component\Console\SignalRegistry\SignalRegistry
+- Symfony\Component\Console\Terminal
+- Symfony\Component\Console\Tester\ApplicationTester
+- Symfony\Component\Console\Tests\Fixtures\MockableAppliationWithTerminalWidth
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\EventDispatcher\EventDispatcherInterface
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\Process\Process
+interfaces:
+- SignalableCommandInterface
+- SignalableCommandInterface
+- SignalableCommandInterface
+- EventSubscriberInterface

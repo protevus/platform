@@ -1,0 +1,55 @@
+name: TypeGuess
+class_comment: '# * Contains a guessed class name and a list of options for creating
+  an instance
+
+  # * of that class.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: type
+  - name: options
+  - name: confidence
+  comment: '# * Contains a guessed class name and a list of options for creating an
+    instance
+
+    # * of that class.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # class TypeGuess extends Guess
+
+    # {
+
+    # /**
+
+    # * @param string $type       The guessed field type
+
+    # * @param array  $options    The options for creating instances of the
+
+    # *                           guessed class
+
+    # * @param int    $confidence The confidence that the guessed class name
+
+    # *                           is correct'
+- name: getType
+  visibility: public
+  parameters: []
+  comment: '# * Returns the guessed field type.'
+- name: getOptions
+  visibility: public
+  parameters: []
+  comment: '# * Returns the guessed options for creating instances of the guessed
+    type.'
+traits: []
+interfaces: []

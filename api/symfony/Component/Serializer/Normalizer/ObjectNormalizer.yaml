@@ -1,0 +1,153 @@
+name: ObjectNormalizer
+class_comment: null
+dependencies:
+- name: NoSuchPropertyException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException
+- name: PropertyAccess
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccess
+- name: PropertyAccessorInterface
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccessorInterface
+- name: ReflectionExtractor
+  type: class
+  source: Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor
+- name: PropertyInfoExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyInfoExtractorInterface
+- name: PropertyTypeExtractorInterface
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface
+- name: PropertyWriteInfo
+  type: class
+  source: Symfony\Component\PropertyInfo\PropertyWriteInfo
+- name: Ignore
+  type: class
+  source: Symfony\Component\Serializer\Annotation\Ignore
+- name: LogicException
+  type: class
+  source: Symfony\Component\Serializer\Exception\LogicException
+- name: AttributeMetadata
+  type: class
+  source: Symfony\Component\Serializer\Mapping\AttributeMetadata
+- name: ClassDiscriminatorResolverInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassDiscriminatorResolverInterface
+- name: ClassMetadataFactoryInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+- name: NameConverterInterface
+  type: class
+  source: Symfony\Component\Serializer\NameConverter\NameConverterInterface
+properties:
+- name: reflectionCache
+  visibility: private
+  comment: null
+- name: isReadableCache
+  visibility: private
+  comment: null
+- name: isWritableCache
+  visibility: private
+  comment: null
+- name: propertyInfoExtractor
+  visibility: protected
+  comment: null
+- name: writeInfoExtractor
+  visibility: private
+  comment: null
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: classMetadataFactory
+    default: 'null'
+  - name: nameConverter
+    default: 'null'
+  - name: propertyAccessor
+    default: 'null'
+  - name: propertyTypeExtractor
+    default: 'null'
+  - name: classDiscriminatorResolver
+    default: 'null'
+  - name: objectClassResolver
+    default: 'null'
+  - name: defaultContext
+    default: '[]'
+  - name: propertyInfoExtractor
+    default: 'null'
+  comment: null
+- name: getSupportedTypes
+  visibility: public
+  parameters:
+  - name: format
+  comment: null
+- name: extractAttributes
+  visibility: protected
+  parameters:
+  - name: object
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: getAttributeValue
+  visibility: protected
+  parameters:
+  - name: object
+  - name: attribute
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: setAttributeValue
+  visibility: protected
+  parameters:
+  - name: object
+  - name: attribute
+  - name: value
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: getAllowedAttributes
+  visibility: protected
+  parameters:
+  - name: classOrObject
+  - name: context
+  - name: attributesAsString
+    default: 'false'
+  comment: null
+- name: isAllowedAttribute
+  visibility: protected
+  parameters:
+  - name: classOrObject
+  - name: attribute
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: hasAttributeAccessorMethod
+  visibility: private
+  parameters:
+  - name: class
+  - name: attribute
+  comment: null
+traits:
+- Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException
+- Symfony\Component\PropertyAccess\PropertyAccess
+- Symfony\Component\PropertyAccess\PropertyAccessorInterface
+- Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor
+- Symfony\Component\PropertyInfo\PropertyInfoExtractorInterface
+- Symfony\Component\PropertyInfo\PropertyTypeExtractorInterface
+- Symfony\Component\PropertyInfo\PropertyWriteInfo
+- Symfony\Component\Serializer\Annotation\Ignore
+- Symfony\Component\Serializer\Exception\LogicException
+- Symfony\Component\Serializer\Mapping\AttributeMetadata
+- Symfony\Component\Serializer\Mapping\ClassDiscriminatorResolverInterface
+- Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+- Symfony\Component\Serializer\NameConverter\NameConverterInterface
+interfaces: []

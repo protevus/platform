@@ -1,0 +1,100 @@
+name: ContainerConfigurator
+class_comment: '# * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: ParamConfigurator
+  type: class
+  source: Symfony\Component\Config\Loader\ParamConfigurator
+- name: AbstractArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\AbstractArgument
+- name: IteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- name: ServiceLocatorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- name: TaggedIteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: ExtensionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+- name: PhpFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- name: UndefinedExtensionHandler
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\UndefinedExtensionHandler
+- name: Expression
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Expression
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+  - name: loader
+  - name: '&$instanceof'
+  - name: path
+  - name: file
+  - name: env
+    default: 'null'
+  comment: null
+- name: extension
+  visibility: public
+  parameters:
+  - name: namespace
+  - name: config
+  - name: prepend
+    default: 'false'
+  comment: null
+- name: import
+  visibility: public
+  parameters:
+  - name: resource
+  - name: type
+    default: 'null'
+  - name: ignoreErrors
+    default: 'false'
+  comment: null
+- name: parameters
+  visibility: public
+  parameters: []
+  comment: null
+- name: services
+  visibility: public
+  parameters: []
+  comment: null
+- name: env
+  visibility: public
+  parameters: []
+  comment: null
+- name: withPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: null
+traits:
+- Symfony\Component\Config\Loader\ParamConfigurator
+- Symfony\Component\DependencyInjection\Argument\AbstractArgument
+- Symfony\Component\DependencyInjection\Argument\IteratorArgument
+- Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+- Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- Symfony\Component\DependencyInjection\Loader\UndefinedExtensionHandler
+- Symfony\Component\ExpressionLanguage\Expression
+interfaces: []

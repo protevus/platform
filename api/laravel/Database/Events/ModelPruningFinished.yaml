@@ -1,0 +1,21 @@
+name: ModelPruningFinished
+class_comment: null
+dependencies: []
+properties:
+- name: models
+  visibility: public
+  comment: '# * The class names of the models that were pruned.
+
+    # *
+
+    # * @var array<class-string>'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: models
+  comment: "# * The class names of the models that were pruned.\n# *\n# * @var array<class-string>\n\
+    # */\n# public $models;\n# \n# /**\n# * Create a new event instance.\n# *\n# *\
+    \ @param  array<class-string>  $models\n# * @return void"
+traits: []
+interfaces: []

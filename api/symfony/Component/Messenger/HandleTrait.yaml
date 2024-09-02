@@ -1,0 +1,27 @@
+name: HandleTrait
+class_comment: null
+dependencies:
+- name: LogicException
+  type: class
+  source: Symfony\Component\Messenger\Exception\LogicException
+- name: HandledStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\HandledStamp
+properties: []
+methods:
+- name: handle
+  visibility: private
+  parameters:
+  - name: message
+  comment: "# * Leverages a message bus to expect a single, synchronous message handling\
+    \ and return its result.\n# *\n# * @author Maxime Steinhausser <maxime.steinhausser@gmail.com>\n\
+    # */\n# trait HandleTrait\n# {\n# private MessageBusInterface $messageBus;\n#\
+    \ \n# /**\n# * Dispatches the given message, expecting to be handled by a single\
+    \ handler\n# * and returns the result from the handler returned value.\n# * This\
+    \ behavior is useful for both synchronous command & query buses,\n# * the last\
+    \ one usually returning the handler result.\n# *\n# * @param object|Envelope $message\
+    \ The message or the message pre-wrapped in an envelope"
+traits:
+- Symfony\Component\Messenger\Exception\LogicException
+- Symfony\Component\Messenger\Stamp\HandledStamp
+interfaces: []

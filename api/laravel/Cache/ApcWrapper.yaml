@@ -1,0 +1,82 @@
+name: ApcWrapper
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: get
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Get an item from the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed'
+- name: put
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  - name: seconds
+  comment: '# * Store an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  int  $seconds
+
+    # * @return array|bool'
+- name: increment
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Increment the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return int|bool'
+- name: decrement
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Decrement the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return int|bool'
+- name: delete
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Remove an item from the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: flush
+  visibility: public
+  parameters: []
+  comment: '# * Remove all items from the cache.
+
+    # *
+
+    # * @return bool'
+traits: []
+interfaces: []

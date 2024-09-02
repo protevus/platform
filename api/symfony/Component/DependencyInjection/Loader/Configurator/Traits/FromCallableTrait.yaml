@@ -1,0 +1,32 @@
+name: FromCallableTrait
+class_comment: null
+dependencies:
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: FromCallableConfigurator
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\Configurator\FromCallableConfigurator
+- name: ReferenceConfigurator
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator
+- name: Expression
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Expression
+properties: []
+methods:
+- name: fromCallable
+  visibility: public
+  parameters:
+  - name: callable
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Loader\Configurator\FromCallableConfigurator
+- Symfony\Component\DependencyInjection\Loader\Configurator\ReferenceConfigurator
+- Symfony\Component\ExpressionLanguage\Expression
+interfaces: []

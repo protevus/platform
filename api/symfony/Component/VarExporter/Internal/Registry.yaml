@@ -1,0 +1,49 @@
+name: Registry
+class_comment: '# * @author Nicolas Grekas <p@tchwork.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: ClassNotFoundException
+  type: class
+  source: Symfony\Component\VarExporter\Exception\ClassNotFoundException
+- name: NotInstantiableTypeException
+  type: class
+  source: Symfony\Component\VarExporter\Exception\NotInstantiableTypeException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: classes
+  comment: null
+- name: unserialize
+  visibility: public
+  parameters:
+  - name: objects
+  - name: serializables
+  comment: null
+- name: p
+  visibility: public
+  parameters:
+  - name: class
+  comment: null
+- name: f
+  visibility: public
+  parameters:
+  - name: class
+  comment: null
+- name: getClassReflector
+  visibility: public
+  parameters:
+  - name: class
+  - name: instantiableWithoutConstructor
+    default: 'false'
+  - name: cloneable
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\VarExporter\Exception\ClassNotFoundException
+- Symfony\Component\VarExporter\Exception\NotInstantiableTypeException
+interfaces: []

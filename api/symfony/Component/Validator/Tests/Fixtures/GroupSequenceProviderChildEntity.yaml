@@ -1,0 +1,11 @@
+name: GroupSequenceProviderChildEntity
+class_comment: null
+dependencies:
+- name: GroupSequenceProviderEntity
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\GroupSequenceProviderEntity
+properties: []
+methods: []
+traits:
+- Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\GroupSequenceProviderEntity
+interfaces: []

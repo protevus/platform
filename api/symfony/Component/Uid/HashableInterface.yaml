@@ -1,0 +1,20 @@
+name: HashableInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: hash
+  visibility: public
+  parameters: []
+  comment: null
+- name: equals
+  visibility: public
+  parameters:
+  - name: other
+  comment: null
+- name: hash
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

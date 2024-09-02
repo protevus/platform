@@ -1,0 +1,11 @@
+name: check-unused-known-tags
+class_comment: null
+dependencies:
+- name: UnusedTagsPassUtils
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\DependencyInjection\Compiler\UnusedTagsPassUtils
+properties: []
+methods: []
+traits:
+- Symfony\Bundle\FrameworkBundle\Tests\DependencyInjection\Compiler\UnusedTagsPassUtils
+interfaces: []

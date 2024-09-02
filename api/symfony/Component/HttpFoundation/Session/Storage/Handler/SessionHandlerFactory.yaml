@@ -1,0 +1,38 @@
+name: SessionHandlerFactory
+class_comment: '# * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: Configuration
+  type: class
+  source: Doctrine\DBAL\Configuration
+- name: DriverManager
+  type: class
+  source: Doctrine\DBAL\DriverManager
+- name: DefaultSchemaManagerFactory
+  type: class
+  source: Doctrine\DBAL\Schema\DefaultSchemaManagerFactory
+- name: DsnParser
+  type: class
+  source: Doctrine\DBAL\Tools\DsnParser
+- name: Relay
+  type: class
+  source: Relay\Relay
+- name: AbstractAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\AbstractAdapter
+properties: []
+methods:
+- name: createHandler
+  visibility: public
+  parameters:
+  - name: connection
+  - name: options
+    default: '[]'
+  comment: null
+traits:
+- Doctrine\DBAL\Configuration
+- Doctrine\DBAL\DriverManager
+- Doctrine\DBAL\Schema\DefaultSchemaManagerFactory
+- Doctrine\DBAL\Tools\DsnParser
+- Relay\Relay
+- Symfony\Component\Cache\Adapter\AbstractAdapter
+interfaces: []

@@ -1,0 +1,73 @@
+name: RouteBinding
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: ModelNotFoundException
+  type: class
+  source: Illuminate\Database\Eloquent\ModelNotFoundException
+- name: SoftDeletes
+  type: class
+  source: Illuminate\Database\Eloquent\SoftDeletes
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+properties: []
+methods:
+- name: forCallback
+  visibility: public
+  parameters:
+  - name: container
+  - name: binder
+  comment: '# * Create a Route model binding for a given callback.
+
+    # *
+
+    # * @param  \Illuminate\Container\Container  $container
+
+    # * @param  \Closure|string  $binder
+
+    # * @return \Closure'
+- name: createClassBinding
+  visibility: protected
+  parameters:
+  - name: container
+  - name: binding
+  comment: '# * Create a class based binding using the IoC container.
+
+    # *
+
+    # * @param  \Illuminate\Container\Container  $container
+
+    # * @param  string  $binding
+
+    # * @return \Closure'
+- name: forModel
+  visibility: public
+  parameters:
+  - name: container
+  - name: class
+  - name: callback
+    default: 'null'
+  comment: '# * Create a Route model binding for a model.
+
+    # *
+
+    # * @param  \Illuminate\Container\Container  $container
+
+    # * @param  string  $class
+
+    # * @param  \Closure|null  $callback
+
+    # * @return \Closure
+
+    # *
+
+    # * @throws \Illuminate\Database\Eloquent\ModelNotFoundException<\Illuminate\Database\Eloquent\Model>'
+traits:
+- Closure
+- Illuminate\Database\Eloquent\ModelNotFoundException
+- Illuminate\Database\Eloquent\SoftDeletes
+- Illuminate\Support\Str
+interfaces: []

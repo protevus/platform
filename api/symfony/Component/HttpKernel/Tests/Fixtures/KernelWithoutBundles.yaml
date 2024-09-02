@@ -1,0 +1,37 @@
+name: KernelWithoutBundles
+class_comment: null
+dependencies:
+- name: LoaderInterface
+  type: class
+  source: Symfony\Component\Config\Loader\LoaderInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Kernel
+  type: class
+  source: Symfony\Component\HttpKernel\Kernel
+properties: []
+methods:
+- name: registerBundles
+  visibility: public
+  parameters: []
+  comment: null
+- name: registerContainerConfiguration
+  visibility: public
+  parameters:
+  - name: loader
+  comment: null
+- name: getProjectDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: build
+  visibility: protected
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\Config\Loader\LoaderInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\HttpKernel\Kernel
+interfaces: []

@@ -1,0 +1,20 @@
+name: AbstractDummy
+class_comment: null
+dependencies:
+- name: DiscriminatorMap
+  type: class
+  source: Symfony\Component\Serializer\Attribute\DiscriminatorMap
+properties:
+- name: foo
+  visibility: public
+  comment: null
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\Serializer\Attribute\DiscriminatorMap
+interfaces: []

@@ -1,0 +1,51 @@
+name: JsonBundleReaderTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: JsonBundleReader
+  type: class
+  source: Symfony\Component\Intl\Data\Bundle\Reader\JsonBundleReader
+- name: ResourceBundleNotFoundException
+  type: class
+  source: Symfony\Component\Intl\Exception\ResourceBundleNotFoundException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Intl\Exception\RuntimeException
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testReadReturnsArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReadFailsIfNonExistingLocale
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReadFailsIfNonExistingDirectory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReadFailsIfNotAFile
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReadFailsIfInvalidJson
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReaderDoesNotBreakOutOfGivenPath
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Intl\Data\Bundle\Reader\JsonBundleReader
+- Symfony\Component\Intl\Exception\ResourceBundleNotFoundException
+- Symfony\Component\Intl\Exception\RuntimeException
+interfaces: []

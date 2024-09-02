@@ -1,0 +1,62 @@
+name: AmazonSqsReceiverTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: DummyMessage
+  type: class
+  source: Symfony\Component\Messenger\Bridge\AmazonSqs\Tests\Fixtures\DummyMessage
+- name: AmazonSqsReceiver
+  type: class
+  source: Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\AmazonSqsReceiver
+- name: Connection
+  type: class
+  source: Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\Connection
+- name: MessageDecodingFailedException
+  type: class
+  source: Symfony\Component\Messenger\Exception\MessageDecodingFailedException
+- name: PhpSerializer
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\PhpSerializer
+- name: Serializer
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\Serializer
+- name: SerializerComponent
+  type: class
+  source: Symfony\Component\Serializer
+- name: JsonEncoder
+  type: class
+  source: Symfony\Component\Serializer\Encoder\JsonEncoder
+- name: ObjectNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+properties: []
+methods:
+- name: testItReturnsTheDecodedMessageToTheHandler
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItRejectTheMessageIfThereIsAMessageDecodingFailedException
+  visibility: public
+  parameters: []
+  comment: null
+- name: createSqsEnvelope
+  visibility: private
+  parameters: []
+  comment: null
+- name: createSerializer
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Bridge\AmazonSqs\Tests\Fixtures\DummyMessage
+- Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\AmazonSqsReceiver
+- Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\Connection
+- Symfony\Component\Messenger\Exception\MessageDecodingFailedException
+- Symfony\Component\Messenger\Transport\Serialization\PhpSerializer
+- Symfony\Component\Messenger\Transport\Serialization\Serializer
+- Symfony\Component\Serializer\Encoder\JsonEncoder
+- Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+interfaces: []

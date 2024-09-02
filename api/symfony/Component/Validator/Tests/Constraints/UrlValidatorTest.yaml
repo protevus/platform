@@ -1,0 +1,117 @@
+name: UrlValidatorTest
+class_comment: null
+dependencies:
+- name: Url
+  type: class
+  source: Symfony\Component\Validator\Constraints\Url
+- name: UrlValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\UrlValidator
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+properties: []
+methods:
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testNullIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEmptyStringIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEmptyStringFromObjectIsValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExpectsStringCompatibleType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidUrls
+  visibility: public
+  parameters:
+  - name: url
+  comment: '# * @dataProvider getValidUrls'
+- name: testValidUrlsWithWhitespaces
+  visibility: public
+  parameters:
+  - name: url
+  comment: '# * @dataProvider getValidUrlsWithWhitespaces'
+- name: testValidRelativeUrl
+  visibility: public
+  parameters:
+  - name: url
+  comment: '# * @dataProvider getValidRelativeUrls
+
+    # * @dataProvider getValidUrls'
+- name: getValidRelativeUrls
+  visibility: public
+  parameters: []
+  comment: null
+- name: getValidUrls
+  visibility: public
+  parameters: []
+  comment: null
+- name: getValidUrlsWithWhitespaces
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidUrls
+  visibility: public
+  parameters:
+  - name: url
+  comment: '# * @dataProvider getInvalidUrls'
+- name: testInvalidRelativeUrl
+  visibility: public
+  parameters:
+  - name: url
+  comment: '# * @dataProvider getInvalidRelativeUrls
+
+    # * @dataProvider getInvalidUrls'
+- name: getInvalidRelativeUrls
+  visibility: public
+  parameters: []
+  comment: null
+- name: getInvalidUrls
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCustomProtocolIsValid
+  visibility: public
+  parameters:
+  - name: url
+  - name: requireTld
+  comment: '# * @dataProvider getValidCustomUrls'
+- name: getValidCustomUrls
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRequiredTld
+  visibility: public
+  parameters:
+  - name: url
+  - name: requireTld
+  - name: isValid
+  comment: '# * @dataProvider getUrlsForRequiredTld'
+- name: getUrlsForRequiredTld
+  visibility: public
+  parameters: []
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\Url
+- Symfony\Component\Validator\Constraints\UrlValidator
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

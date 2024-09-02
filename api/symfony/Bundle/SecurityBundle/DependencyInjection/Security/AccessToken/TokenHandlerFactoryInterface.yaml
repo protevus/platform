@@ -1,0 +1,41 @@
+name: TokenHandlerFactoryInterface
+class_comment: null
+dependencies:
+- name: NodeBuilder
+  type: class
+  source: Symfony\Component\Config\Definition\Builder\NodeBuilder
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+properties: []
+methods:
+- name: create
+  visibility: public
+  parameters:
+  - name: container
+  - name: id
+  - name: config
+  comment: '# * Allows creating configurable token handlers.
+
+    # */
+
+    # interface TokenHandlerFactoryInterface
+
+    # {
+
+    # /**
+
+    # * Creates a generic token handler service.'
+- name: getKey
+  visibility: public
+  parameters: []
+  comment: '# * Gets a generic token handler configuration key.'
+- name: addConfiguration
+  visibility: public
+  parameters:
+  - name: node
+  comment: '# * Adds a generic token handler configuration.'
+traits:
+- Symfony\Component\Config\Definition\Builder\NodeBuilder
+- Symfony\Component\DependencyInjection\ContainerBuilder
+interfaces: []

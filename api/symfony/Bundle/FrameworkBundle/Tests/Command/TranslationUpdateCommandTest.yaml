@@ -1,0 +1,134 @@
+name: TranslationUpdateCommandTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: TranslationUpdateCommand
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Command\TranslationUpdateCommand
+- name: Application
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Console\Application
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+- name: Container
+  type: class
+  source: Symfony\Component\DependencyInjection\Container
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: BundleInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Bundle\BundleInterface
+- name: KernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\KernelInterface
+- name: ExtractorInterface
+  type: class
+  source: Symfony\Component\Translation\Extractor\ExtractorInterface
+- name: TranslationReader
+  type: class
+  source: Symfony\Component\Translation\Reader\TranslationReader
+- name: Translator
+  type: class
+  source: Symfony\Component\Translation\Translator
+- name: TranslationWriter
+  type: class
+  source: Symfony\Component\Translation\Writer\TranslationWriter
+properties: []
+methods:
+- name: testDumpMessagesAndClean
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpMessagesAsTreeAndClean
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpSortedMessagesAndClean
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpReverseSortedMessagesAndClean
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpSortWithoutValueAndClean
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpWrongSortAndClean
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpMessagesAndCleanInRootDirectory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpTwoMessagesAndClean
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDumpMessagesForSpecificDomain
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWriteMessages
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWriteMessagesInRootDirectory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWriteMessagesForSpecificDomain
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFilterDuplicateTransPaths
+  visibility: public
+  parameters: []
+  comment: null
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: createCommandTester
+  visibility: private
+  parameters:
+  - name: extractedMessages
+    default: '[]'
+  - name: loadedMessages
+    default: '[]'
+  - name: kernel
+    default: 'null'
+  - name: transPaths
+    default: '[]'
+  - name: codePaths
+    default: '[]'
+  comment: null
+- name: getBundle
+  visibility: private
+  parameters:
+  - name: path
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\FrameworkBundle\Command\TranslationUpdateCommand
+- Symfony\Bundle\FrameworkBundle\Console\Application
+- Symfony\Component\Console\Tester\CommandTester
+- Symfony\Component\DependencyInjection\Container
+- Symfony\Component\Filesystem\Filesystem
+- Symfony\Component\HttpKernel\Bundle\BundleInterface
+- Symfony\Component\HttpKernel\KernelInterface
+- Symfony\Component\Translation\Extractor\ExtractorInterface
+- Symfony\Component\Translation\Reader\TranslationReader
+- Symfony\Component\Translation\Translator
+- Symfony\Component\Translation\Writer\TranslationWriter
+interfaces: []

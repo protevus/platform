@@ -1,0 +1,40 @@
+name: CheckboxListMapper
+class_comment: '# * Maps choices to/from checkbox forms.
+
+  # *
+
+  # * A {@link ChoiceListInterface} implementation is used to find the
+
+  # * corresponding string values for the choices. Each checkbox form whose "value"
+
+  # * option corresponds to any of the selected values is marked as selected.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: DataMapperInterface
+  type: class
+  source: Symfony\Component\Form\DataMapperInterface
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Form\Exception\UnexpectedTypeException
+properties: []
+methods:
+- name: mapDataToForms
+  visibility: public
+  parameters:
+  - name: choices
+  - name: checkboxes
+  comment: null
+- name: mapFormsToData
+  visibility: public
+  parameters:
+  - name: checkboxes
+  - name: '&$choices'
+  comment: null
+traits:
+- Symfony\Component\Form\DataMapperInterface
+- Symfony\Component\Form\Exception\UnexpectedTypeException
+interfaces:
+- DataMapperInterface

@@ -1,0 +1,17 @@
+name: TestAdderRemoverInvalidMethods
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: addFoo
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: removeBar
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+traits: []
+interfaces: []

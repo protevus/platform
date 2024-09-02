@@ -1,0 +1,25 @@
+name: DateRangeFilterIteratorTest
+class_comment: null
+dependencies:
+- name: DateComparator
+  type: class
+  source: Symfony\Component\Finder\Comparator\DateComparator
+- name: DateRangeFilterIterator
+  type: class
+  source: Symfony\Component\Finder\Iterator\DateRangeFilterIterator
+properties: []
+methods:
+- name: testAccept
+  visibility: public
+  parameters:
+  - name: size
+  - name: expected
+  comment: '# * @dataProvider getAcceptData'
+- name: getAcceptData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Finder\Comparator\DateComparator
+- Symfony\Component\Finder\Iterator\DateRangeFilterIterator
+interfaces: []

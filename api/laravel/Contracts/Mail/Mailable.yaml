@@ -1,0 +1,113 @@
+name: Mailable
+class_comment: null
+dependencies:
+- name: Queue
+  type: class
+  source: Illuminate\Contracts\Queue\Factory
+properties: []
+methods:
+- name: send
+  visibility: public
+  parameters:
+  - name: mailer
+  comment: '# * Send the message using the given mailer.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Mail\Factory|\Illuminate\Contracts\Mail\Mailer  $mailer
+
+    # * @return \Illuminate\Mail\SentMessage|null'
+- name: queue
+  visibility: public
+  parameters:
+  - name: queue
+  comment: '# * Queue the given message.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Queue\Factory  $queue
+
+    # * @return mixed'
+- name: later
+  visibility: public
+  parameters:
+  - name: delay
+  - name: queue
+  comment: '# * Deliver the queued message after (n) seconds.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $delay
+
+    # * @param  \Illuminate\Contracts\Queue\Factory  $queue
+
+    # * @return mixed'
+- name: cc
+  visibility: public
+  parameters:
+  - name: address
+  - name: name
+    default: 'null'
+  comment: '# * Set the recipients of the message.
+
+    # *
+
+    # * @param  object|array|string  $address
+
+    # * @param  string|null  $name
+
+    # * @return self'
+- name: bcc
+  visibility: public
+  parameters:
+  - name: address
+  - name: name
+    default: 'null'
+  comment: '# * Set the recipients of the message.
+
+    # *
+
+    # * @param  object|array|string  $address
+
+    # * @param  string|null  $name
+
+    # * @return $this'
+- name: to
+  visibility: public
+  parameters:
+  - name: address
+  - name: name
+    default: 'null'
+  comment: '# * Set the recipients of the message.
+
+    # *
+
+    # * @param  object|array|string  $address
+
+    # * @param  string|null  $name
+
+    # * @return $this'
+- name: locale
+  visibility: public
+  parameters:
+  - name: locale
+  comment: '# * Set the locale of the message.
+
+    # *
+
+    # * @param  string  $locale
+
+    # * @return $this'
+- name: mailer
+  visibility: public
+  parameters:
+  - name: mailer
+  comment: '# * Set the name of the mailer that should be used to send the message.
+
+    # *
+
+    # * @param  string  $mailer
+
+    # * @return $this'
+traits: []
+interfaces: []

@@ -1,0 +1,87 @@
+name: BundleInterface
+class_comment: null
+dependencies:
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: ExtensionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+properties: []
+methods:
+- name: boot
+  visibility: public
+  parameters: []
+  comment: '# * BundleInterface.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # interface BundleInterface
+
+    # {
+
+    # /**
+
+    # * Boots the Bundle.
+
+    # *
+
+    # * @return void'
+- name: shutdown
+  visibility: public
+  parameters: []
+  comment: '# * Shutdowns the Bundle.
+
+    # *
+
+    # * @return void'
+- name: build
+  visibility: public
+  parameters:
+  - name: container
+  comment: '# * Builds the bundle.
+
+    # *
+
+    # * It is only ever called once when the cache is empty.
+
+    # *
+
+    # * @return void'
+- name: getContainerExtension
+  visibility: public
+  parameters: []
+  comment: '# * Returns the container extension that should be implicitly loaded.'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: '# * Returns the bundle name (the class short name).'
+- name: getNamespace
+  visibility: public
+  parameters: []
+  comment: '# * Gets the Bundle namespace.'
+- name: getPath
+  visibility: public
+  parameters: []
+  comment: '# * Gets the Bundle directory path.
+
+    # *
+
+    # * The path should always be returned as a Unix path (with /).'
+- name: setContainer
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+interfaces: []

@@ -1,0 +1,46 @@
+name: AnnotatedController
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: Route
+  type: class
+  source: Symfony\Component\Routing\Attribute\Route
+properties: []
+methods:
+- name: requestDefaultNullAction
+  visibility: public
+  parameters:
+  - name: request
+    default: 'null'
+  comment: null
+- name: argumentDefaultNullWithoutRouteParamAction
+  visibility: public
+  parameters:
+  - name: value
+    default: 'null'
+  comment: null
+- name: argumentDefaultNullWithRouteParamAction
+  visibility: public
+  parameters:
+  - name: value
+    default: 'null'
+  comment: null
+- name: argumentWithoutDefaultWithRouteParamAndDefaultAction
+  visibility: public
+  parameters:
+  - name: value
+  comment: null
+- name: createTransaction
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\Routing\Attribute\Route
+interfaces: []

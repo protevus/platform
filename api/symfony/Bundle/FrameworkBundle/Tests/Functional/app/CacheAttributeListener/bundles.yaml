@@ -1,0 +1,15 @@
+name: bundles
+class_comment: null
+dependencies:
+- name: FrameworkBundle
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\FrameworkBundle
+- name: SecurityBundle
+  type: class
+  source: Symfony\Bundle\SecurityBundle\SecurityBundle
+properties: []
+methods: []
+traits:
+- Symfony\Bundle\FrameworkBundle\FrameworkBundle
+- Symfony\Bundle\SecurityBundle\SecurityBundle
+interfaces: []

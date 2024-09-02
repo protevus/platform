@@ -1,0 +1,30 @@
+name: Registered
+class_comment: null
+dependencies:
+- name: SerializesModels
+  type: class
+  source: Illuminate\Queue\SerializesModels
+- name: SerializesModels
+  type: class
+  source: SerializesModels
+properties:
+- name: user
+  visibility: public
+  comment: '# * The authenticated user.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Auth\Authenticatable'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: user
+  comment: "# * The authenticated user.\n# *\n# * @var \\Illuminate\\Contracts\\Auth\\\
+    Authenticatable\n# */\n# public $user;\n# \n# /**\n# * Create a new event instance.\n\
+    # *\n# * @param  \\Illuminate\\Contracts\\Auth\\Authenticatable  $user\n# * @return\
+    \ void"
+traits:
+- Illuminate\Queue\SerializesModels
+- SerializesModels
+interfaces: []

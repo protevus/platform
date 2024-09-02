@@ -1,0 +1,37 @@
+name: ServerBag
+class_comment: '# * ServerBag is a container for HTTP headers from the $_SERVER variable.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # * @author Bulat Shakirzyanov <mallluhuct@gmail.com>
+
+  # * @author Robert Kiss <kepten@gmail.com>'
+dependencies: []
+properties: []
+methods:
+- name: getHeaders
+  visibility: public
+  parameters: []
+  comment: '# * ServerBag is a container for HTTP headers from the $_SERVER variable.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # * @author Bulat Shakirzyanov <mallluhuct@gmail.com>
+
+    # * @author Robert Kiss <kepten@gmail.com>
+
+    # */
+
+    # class ServerBag extends ParameterBag
+
+    # {
+
+    # /**
+
+    # * Gets the HTTP headers.'
+traits: []
+interfaces: []

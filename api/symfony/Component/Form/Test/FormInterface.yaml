@@ -1,0 +1,10 @@
+name: FormInterface
+class_comment: null
+dependencies:
+- name: BaseFormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+properties: []
+methods: []
+traits: []
+interfaces: []

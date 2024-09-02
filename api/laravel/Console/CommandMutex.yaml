@@ -1,0 +1,40 @@
+name: CommandMutex
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: create
+  visibility: public
+  parameters:
+  - name: command
+  comment: '# * Attempt to obtain a command mutex for the given command.
+
+    # *
+
+    # * @param  \Illuminate\Console\Command  $command
+
+    # * @return bool'
+- name: exists
+  visibility: public
+  parameters:
+  - name: command
+  comment: '# * Determine if a command mutex exists for the given command.
+
+    # *
+
+    # * @param  \Illuminate\Console\Command  $command
+
+    # * @return bool'
+- name: forget
+  visibility: public
+  parameters:
+  - name: command
+  comment: '# * Release the mutex for the given command.
+
+    # *
+
+    # * @param  \Illuminate\Console\Command  $command
+
+    # * @return bool'
+traits: []
+interfaces: []

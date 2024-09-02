@@ -1,0 +1,729 @@
+name: AbstractPaginator
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Htmlable
+  type: class
+  source: Illuminate\Contracts\Support\Htmlable
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+- name: ForwardsCalls
+  type: class
+  source: Illuminate\Support\Traits\ForwardsCalls
+- name: Tappable
+  type: class
+  source: Illuminate\Support\Traits\Tappable
+- name: Stringable
+  type: class
+  source: Stringable
+- name: Traversable
+  type: class
+  source: Traversable
+properties:
+- name: items
+  visibility: protected
+  comment: "# * @mixin \\Illuminate\\Support\\Collection\n# */\n# abstract class AbstractPaginator\
+    \ implements Htmlable, Stringable\n# {\n# use ForwardsCalls, Tappable;\n# \n#\
+    \ /**\n# * All of the items being paginated.\n# *\n# * @var \\Illuminate\\Support\\\
+    Collection"
+- name: perPage
+  visibility: protected
+  comment: '# * The number of items to be shown per page.
+
+    # *
+
+    # * @var int'
+- name: currentPage
+  visibility: protected
+  comment: '# * The current page being "viewed".
+
+    # *
+
+    # * @var int'
+- name: path
+  visibility: protected
+  comment: '# * The base path to assign to all URLs.
+
+    # *
+
+    # * @var string'
+- name: query
+  visibility: protected
+  comment: '# * The query parameters to add to all URLs.
+
+    # *
+
+    # * @var array'
+- name: fragment
+  visibility: protected
+  comment: '# * The URL fragment to add to all URLs.
+
+    # *
+
+    # * @var string|null'
+- name: pageName
+  visibility: protected
+  comment: '# * The query string variable used to store the page.
+
+    # *
+
+    # * @var string'
+- name: onEachSide
+  visibility: public
+  comment: '# * The number of links to display on each side of current page link.
+
+    # *
+
+    # * @var int'
+- name: options
+  visibility: protected
+  comment: '# * The paginator options.
+
+    # *
+
+    # * @var array'
+- name: currentPathResolver
+  visibility: protected
+  comment: '# * The current path resolver callback.
+
+    # *
+
+    # * @var \Closure'
+- name: currentPageResolver
+  visibility: protected
+  comment: '# * The current page resolver callback.
+
+    # *
+
+    # * @var \Closure'
+- name: queryStringResolver
+  visibility: protected
+  comment: '# * The query string resolver callback.
+
+    # *
+
+    # * @var \Closure'
+- name: viewFactoryResolver
+  visibility: protected
+  comment: '# * The view factory resolver callback.
+
+    # *
+
+    # * @var \Closure'
+- name: defaultView
+  visibility: public
+  comment: '# * The default pagination view.
+
+    # *
+
+    # * @var string'
+- name: defaultSimpleView
+  visibility: public
+  comment: '# * The default "simple" pagination view.
+
+    # *
+
+    # * @var string'
+methods:
+- name: isValidPageNumber
+  visibility: protected
+  parameters:
+  - name: page
+  comment: "# * @mixin \\Illuminate\\Support\\Collection\n# */\n# abstract class AbstractPaginator\
+    \ implements Htmlable, Stringable\n# {\n# use ForwardsCalls, Tappable;\n# \n#\
+    \ /**\n# * All of the items being paginated.\n# *\n# * @var \\Illuminate\\Support\\\
+    Collection\n# */\n# protected $items;\n# \n# /**\n# * The number of items to be\
+    \ shown per page.\n# *\n# * @var int\n# */\n# protected $perPage;\n# \n# /**\n\
+    # * The current page being \"viewed\".\n# *\n# * @var int\n# */\n# protected $currentPage;\n\
+    # \n# /**\n# * The base path to assign to all URLs.\n# *\n# * @var string\n# */\n\
+    # protected $path = '/';\n# \n# /**\n# * The query parameters to add to all URLs.\n\
+    # *\n# * @var array\n# */\n# protected $query = [];\n# \n# /**\n# * The URL fragment\
+    \ to add to all URLs.\n# *\n# * @var string|null\n# */\n# protected $fragment;\n\
+    # \n# /**\n# * The query string variable used to store the page.\n# *\n# * @var\
+    \ string\n# */\n# protected $pageName = 'page';\n# \n# /**\n# * The number of\
+    \ links to display on each side of current page link.\n# *\n# * @var int\n# */\n\
+    # public $onEachSide = 3;\n# \n# /**\n# * The paginator options.\n# *\n# * @var\
+    \ array\n# */\n# protected $options;\n# \n# /**\n# * The current path resolver\
+    \ callback.\n# *\n# * @var \\Closure\n# */\n# protected static $currentPathResolver;\n\
+    # \n# /**\n# * The current page resolver callback.\n# *\n# * @var \\Closure\n\
+    # */\n# protected static $currentPageResolver;\n# \n# /**\n# * The query string\
+    \ resolver callback.\n# *\n# * @var \\Closure\n# */\n# protected static $queryStringResolver;\n\
+    # \n# /**\n# * The view factory resolver callback.\n# *\n# * @var \\Closure\n\
+    # */\n# protected static $viewFactoryResolver;\n# \n# /**\n# * The default pagination\
+    \ view.\n# *\n# * @var string\n# */\n# public static $defaultView = 'pagination::tailwind';\n\
+    # \n# /**\n# * The default \"simple\" pagination view.\n# *\n# * @var string\n\
+    # */\n# public static $defaultSimpleView = 'pagination::simple-tailwind';\n# \n\
+    # /**\n# * Determine if the given value is a valid page number.\n# *\n# * @param\
+    \  int  $page\n# * @return bool"
+- name: previousPageUrl
+  visibility: public
+  parameters: []
+  comment: '# * Get the URL for the previous page.
+
+    # *
+
+    # * @return string|null'
+- name: getUrlRange
+  visibility: public
+  parameters:
+  - name: start
+  - name: end
+  comment: '# * Create a range of pagination URLs.
+
+    # *
+
+    # * @param  int  $start
+
+    # * @param  int  $end
+
+    # * @return array'
+- name: url
+  visibility: public
+  parameters:
+  - name: page
+  comment: '# * Get the URL for a given page number.
+
+    # *
+
+    # * @param  int  $page
+
+    # * @return string'
+- name: fragment
+  visibility: public
+  parameters:
+  - name: fragment
+    default: 'null'
+  comment: '# * Get / set the URL fragment to be appended to URLs.
+
+    # *
+
+    # * @param  string|null  $fragment
+
+    # * @return $this|string|null'
+- name: appends
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: 'null'
+  comment: '# * Add a set of query string values to the paginator.
+
+    # *
+
+    # * @param  array|string|null  $key
+
+    # * @param  string|null  $value
+
+    # * @return $this'
+- name: appendArray
+  visibility: protected
+  parameters:
+  - name: keys
+  comment: '# * Add an array of query string values.
+
+    # *
+
+    # * @param  array  $keys
+
+    # * @return $this'
+- name: withQueryString
+  visibility: public
+  parameters: []
+  comment: '# * Add all current query string values to the paginator.
+
+    # *
+
+    # * @return $this'
+- name: addQuery
+  visibility: protected
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Add a query string value to the paginator.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  string  $value
+
+    # * @return $this'
+- name: buildFragment
+  visibility: protected
+  parameters: []
+  comment: '# * Build the full fragment portion of a URL.
+
+    # *
+
+    # * @return string'
+- name: loadMorph
+  visibility: public
+  parameters:
+  - name: relation
+  - name: relations
+  comment: '# * Load a set of relationships onto the mixed relationship collection.
+
+    # *
+
+    # * @param  string  $relation
+
+    # * @param  array  $relations
+
+    # * @return $this'
+- name: loadMorphCount
+  visibility: public
+  parameters:
+  - name: relation
+  - name: relations
+  comment: '# * Load a set of relationship counts onto the mixed relationship collection.
+
+    # *
+
+    # * @param  string  $relation
+
+    # * @param  array  $relations
+
+    # * @return $this'
+- name: items
+  visibility: public
+  parameters: []
+  comment: '# * Get the slice of items being paginated.
+
+    # *
+
+    # * @return array'
+- name: firstItem
+  visibility: public
+  parameters: []
+  comment: '# * Get the number of the first item in the slice.
+
+    # *
+
+    # * @return int|null'
+- name: lastItem
+  visibility: public
+  parameters: []
+  comment: '# * Get the number of the last item in the slice.
+
+    # *
+
+    # * @return int|null'
+- name: through
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Transform each item in the slice of items using a callback.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return $this'
+- name: perPage
+  visibility: public
+  parameters: []
+  comment: '# * Get the number of items shown per page.
+
+    # *
+
+    # * @return int'
+- name: hasPages
+  visibility: public
+  parameters: []
+  comment: '# * Determine if there are enough items to split into multiple pages.
+
+    # *
+
+    # * @return bool'
+- name: onFirstPage
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the paginator is on the first page.
+
+    # *
+
+    # * @return bool'
+- name: onLastPage
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the paginator is on the last page.
+
+    # *
+
+    # * @return bool'
+- name: currentPage
+  visibility: public
+  parameters: []
+  comment: '# * Get the current page.
+
+    # *
+
+    # * @return int'
+- name: getPageName
+  visibility: public
+  parameters: []
+  comment: '# * Get the query string variable used to store the page.
+
+    # *
+
+    # * @return string'
+- name: setPageName
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Set the query string variable used to store the page.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return $this'
+- name: withPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Set the base path to assign to all URLs.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return $this'
+- name: setPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Set the base path to assign to all URLs.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return $this'
+- name: onEachSide
+  visibility: public
+  parameters:
+  - name: count
+  comment: '# * Set the number of links to display on each side of current page link.
+
+    # *
+
+    # * @param  int  $count
+
+    # * @return $this'
+- name: path
+  visibility: public
+  parameters: []
+  comment: '# * Get the base path for paginator generated URLs.
+
+    # *
+
+    # * @return string|null'
+- name: resolveCurrentPath
+  visibility: public
+  parameters:
+  - name: default
+    default: '''/'''
+  comment: '# * Resolve the current request path or return the default value.
+
+    # *
+
+    # * @param  string  $default
+
+    # * @return string'
+- name: currentPathResolver
+  visibility: public
+  parameters:
+  - name: resolver
+  comment: '# * Set the current request path resolver callback.
+
+    # *
+
+    # * @param  \Closure  $resolver
+
+    # * @return void'
+- name: resolveCurrentPage
+  visibility: public
+  parameters:
+  - name: pageName
+    default: '''page'''
+  - name: default
+    default: '1'
+  comment: '# * Resolve the current page or return the default value.
+
+    # *
+
+    # * @param  string  $pageName
+
+    # * @param  int  $default
+
+    # * @return int'
+- name: currentPageResolver
+  visibility: public
+  parameters:
+  - name: resolver
+  comment: '# * Set the current page resolver callback.
+
+    # *
+
+    # * @param  \Closure  $resolver
+
+    # * @return void'
+- name: resolveQueryString
+  visibility: public
+  parameters:
+  - name: default
+    default: 'null'
+  comment: '# * Resolve the query string or return the default value.
+
+    # *
+
+    # * @param  string|array|null  $default
+
+    # * @return string'
+- name: queryStringResolver
+  visibility: public
+  parameters:
+  - name: resolver
+  comment: '# * Set with query string resolver callback.
+
+    # *
+
+    # * @param  \Closure  $resolver
+
+    # * @return void'
+- name: viewFactory
+  visibility: public
+  parameters: []
+  comment: '# * Get an instance of the view factory from the resolver.
+
+    # *
+
+    # * @return \Illuminate\Contracts\View\Factory'
+- name: viewFactoryResolver
+  visibility: public
+  parameters:
+  - name: resolver
+  comment: '# * Set the view factory resolver callback.
+
+    # *
+
+    # * @param  \Closure  $resolver
+
+    # * @return void'
+- name: defaultView
+  visibility: public
+  parameters:
+  - name: view
+  comment: '# * Set the default pagination view.
+
+    # *
+
+    # * @param  string  $view
+
+    # * @return void'
+- name: defaultSimpleView
+  visibility: public
+  parameters:
+  - name: view
+  comment: '# * Set the default "simple" pagination view.
+
+    # *
+
+    # * @param  string  $view
+
+    # * @return void'
+- name: useTailwind
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that Tailwind styling should be used for generated links.
+
+    # *
+
+    # * @return void'
+- name: useBootstrap
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that Bootstrap 4 styling should be used for generated links.
+
+    # *
+
+    # * @return void'
+- name: useBootstrapThree
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that Bootstrap 3 styling should be used for generated links.
+
+    # *
+
+    # * @return void'
+- name: useBootstrapFour
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that Bootstrap 4 styling should be used for generated links.
+
+    # *
+
+    # * @return void'
+- name: useBootstrapFive
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that Bootstrap 5 styling should be used for generated links.
+
+    # *
+
+    # * @return void'
+- name: getIterator
+  visibility: public
+  parameters: []
+  comment: '# * Get an iterator for the items.
+
+    # *
+
+    # * @return \ArrayIterator'
+- name: isEmpty
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the list of items is empty.
+
+    # *
+
+    # * @return bool'
+- name: isNotEmpty
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the list of items is not empty.
+
+    # *
+
+    # * @return bool'
+- name: count
+  visibility: public
+  parameters: []
+  comment: '# * Get the number of items for the current page.
+
+    # *
+
+    # * @return int'
+- name: getCollection
+  visibility: public
+  parameters: []
+  comment: '# * Get the paginator''s underlying collection.
+
+    # *
+
+    # * @return \Illuminate\Support\Collection'
+- name: setCollection
+  visibility: public
+  parameters:
+  - name: collection
+  comment: '# * Set the paginator''s underlying collection.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection  $collection
+
+    # * @return $this'
+- name: getOptions
+  visibility: public
+  parameters: []
+  comment: '# * Get the paginator options.
+
+    # *
+
+    # * @return array'
+- name: offsetExists
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Determine if the given item exists.
+
+    # *
+
+    # * @param  mixed  $key
+
+    # * @return bool'
+- name: offsetGet
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Get the item at the given offset.
+
+    # *
+
+    # * @param  mixed  $key
+
+    # * @return mixed'
+- name: offsetSet
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Set the item at the given offset.
+
+    # *
+
+    # * @param  mixed  $key
+
+    # * @param  mixed  $value
+
+    # * @return void'
+- name: offsetUnset
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Unset the item at the given key.
+
+    # *
+
+    # * @param  mixed  $key
+
+    # * @return void'
+- name: toHtml
+  visibility: public
+  parameters: []
+  comment: '# * Render the contents of the paginator to HTML.
+
+    # *
+
+    # * @return string'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Make dynamic calls into the collection.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Render the contents of the paginator when casting to a string.
+
+    # *
+
+    # * @return string'
+traits:
+- Closure
+- Illuminate\Contracts\Support\Htmlable
+- Illuminate\Support\Arr
+- Illuminate\Support\Collection
+- Illuminate\Support\Traits\ForwardsCalls
+- Illuminate\Support\Traits\Tappable
+- Stringable
+- Traversable
+- ForwardsCalls
+interfaces:
+- Htmlable

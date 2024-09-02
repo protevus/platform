@@ -1,0 +1,23 @@
+name: debug
+class_comment: null
+dependencies:
+- name: NotTaggedControllerValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver
+- name: TraceableArgumentResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\TraceableArgumentResolver
+- name: TraceableControllerResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\TraceableControllerResolver
+- name: TraceableEventDispatcher
+  type: class
+  source: Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher
+properties: []
+methods: []
+traits:
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver
+- Symfony\Component\HttpKernel\Controller\TraceableArgumentResolver
+- Symfony\Component\HttpKernel\Controller\TraceableControllerResolver
+- Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher
+interfaces: []

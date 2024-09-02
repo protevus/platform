@@ -1,0 +1,112 @@
+name: TestDatabases
+class_comment: null
+dependencies:
+- name: QueryException
+  type: class
+  source: Illuminate\Database\QueryException
+- name: Testing
+  type: class
+  source: Illuminate\Foundation\Testing
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Artisan
+  type: class
+  source: Illuminate\Support\Facades\Artisan
+- name: DB
+  type: class
+  source: Illuminate\Support\Facades\DB
+- name: ParallelTesting
+  type: class
+  source: Illuminate\Support\Facades\ParallelTesting
+- name: Schema
+  type: class
+  source: Illuminate\Support\Facades\Schema
+properties:
+- name: schemaIsUpToDate
+  visibility: protected
+  comment: '# * Indicates if the test database schema is up to date.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: bootTestDatabase
+  visibility: protected
+  parameters: []
+  comment: "# * Indicates if the test database schema is up to date.\n# *\n# * @var\
+    \ bool\n# */\n# protected static $schemaIsUpToDate = false;\n# \n# /**\n# * Boot\
+    \ a test database.\n# *\n# * @return void"
+- name: ensureTestDatabaseExists
+  visibility: protected
+  parameters:
+  - name: database
+  comment: '# * Ensure a test database exists and returns its name.
+
+    # *
+
+    # * @param  string  $database
+
+    # * @return array'
+- name: ensureSchemaIsUpToDate
+  visibility: protected
+  parameters: []
+  comment: '# * Ensure the current database test schema is up to date.
+
+    # *
+
+    # * @return void'
+- name: usingDatabase
+  visibility: protected
+  parameters:
+  - name: database
+  - name: callable
+  comment: '# * Runs the given callable using the given database.
+
+    # *
+
+    # * @param  string  $database
+
+    # * @param  callable  $callable
+
+    # * @return void'
+- name: whenNotUsingInMemoryDatabase
+  visibility: protected
+  parameters:
+  - name: callback
+  comment: '# * Apply the given callback when tests are not using in memory database.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return void'
+- name: switchToDatabase
+  visibility: protected
+  parameters:
+  - name: database
+  comment: '# * Switch to the given database.
+
+    # *
+
+    # * @param  string  $database
+
+    # * @return void'
+- name: testDatabase
+  visibility: protected
+  parameters:
+  - name: database
+  comment: '# * Returns the test database name.
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Database\QueryException
+- Illuminate\Foundation\Testing
+- Illuminate\Support\Arr
+- Illuminate\Support\Facades\Artisan
+- Illuminate\Support\Facades\DB
+- Illuminate\Support\Facades\ParallelTesting
+- Illuminate\Support\Facades\Schema
+interfaces: []

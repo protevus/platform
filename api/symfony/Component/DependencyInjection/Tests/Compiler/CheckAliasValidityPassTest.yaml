@@ -1,0 +1,64 @@
+name: CheckAliasValidityPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CheckAliasValidityPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CheckAliasValidityPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: FooImplementing
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CheckAliasValidityPass\FooImplementing
+- name: FooInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CheckAliasValidityPass\FooInterface
+- name: FooNotImplementing
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CheckAliasValidityPass\FooNotImplementing
+properties: []
+methods:
+- name: testProcessDetectsClassNotImplementingAliasedInterface
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessAcceptsClassImplementingAliasedInterface
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessIgnoresArbitraryAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessIgnoresTargetWithFactory
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessIgnoresTargetWithoutClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: process
+  visibility: protected
+  parameters:
+  - name: container
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Compiler\CheckAliasValidityPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CheckAliasValidityPass\FooImplementing
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CheckAliasValidityPass\FooInterface
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CheckAliasValidityPass\FooNotImplementing
+interfaces: []

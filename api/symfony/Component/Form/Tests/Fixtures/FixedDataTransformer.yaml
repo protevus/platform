@@ -1,0 +1,31 @@
+name: FixedDataTransformer
+class_comment: null
+dependencies:
+- name: DataTransformerInterface
+  type: class
+  source: Symfony\Component\Form\DataTransformerInterface
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: mapping
+  comment: null
+- name: transform
+  visibility: public
+  parameters:
+  - name: value
+  comment: null
+- name: reverseTransform
+  visibility: public
+  parameters:
+  - name: value
+  comment: null
+traits:
+- Symfony\Component\Form\DataTransformerInterface
+- Symfony\Component\Form\Exception\TransformationFailedException
+interfaces:
+- DataTransformerInterface

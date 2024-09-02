@@ -1,0 +1,19 @@
+name: DummyClassTwo
+class_comment: null
+dependencies:
+- name: Assert
+  type: class
+  source: Symfony\Component\Validator\Constraints
+properties:
+- name: code
+  visibility: public
+  comment: null
+- name: email
+  visibility: public
+  comment: null
+- name: dummyClassOne
+  visibility: public
+  comment: null
+methods: []
+traits: []
+interfaces: []

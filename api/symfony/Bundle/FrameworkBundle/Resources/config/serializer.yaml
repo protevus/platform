@@ -1,0 +1,167 @@
+name: serializer
+class_comment: null
+dependencies:
+- name: CacheItemPoolInterface
+  type: class
+  source: Psr\Cache\CacheItemPoolInterface
+- name: SerializerCacheWarmer
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\CacheWarmer\SerializerCacheWarmer
+- name: PhpArrayAdapter
+  type: class
+  source: Symfony\Component\Cache\Adapter\PhpArrayAdapter
+- name: HtmlErrorRenderer
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer
+- name: SerializerErrorRenderer
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorRenderer\SerializerErrorRenderer
+- name: SerializerExtractor
+  type: class
+  source: Symfony\Component\PropertyInfo\Extractor\SerializerExtractor
+- name: CsvEncoder
+  type: class
+  source: Symfony\Component\Serializer\Encoder\CsvEncoder
+- name: DecoderInterface
+  type: class
+  source: Symfony\Component\Serializer\Encoder\DecoderInterface
+- name: EncoderInterface
+  type: class
+  source: Symfony\Component\Serializer\Encoder\EncoderInterface
+- name: JsonEncoder
+  type: class
+  source: Symfony\Component\Serializer\Encoder\JsonEncoder
+- name: XmlEncoder
+  type: class
+  source: Symfony\Component\Serializer\Encoder\XmlEncoder
+- name: YamlEncoder
+  type: class
+  source: Symfony\Component\Serializer\Encoder\YamlEncoder
+- name: ClassDiscriminatorFromClassMetadata
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassDiscriminatorFromClassMetadata
+- name: ClassDiscriminatorResolverInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassDiscriminatorResolverInterface
+- name: CacheClassMetadataFactory
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\CacheClassMetadataFactory
+- name: ClassMetadataFactory
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory
+- name: ClassMetadataFactoryInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+- name: LoaderChain
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Loader\LoaderChain
+- name: CamelCaseToSnakeCaseNameConverter
+  type: class
+  source: Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
+- name: MetadataAwareNameConverter
+  type: class
+  source: Symfony\Component\Serializer\NameConverter\MetadataAwareNameConverter
+- name: ArrayDenormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ArrayDenormalizer
+- name: BackedEnumNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\BackedEnumNormalizer
+- name: ConstraintViolationListNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ConstraintViolationListNormalizer
+- name: DataUriNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DataUriNormalizer
+- name: DateIntervalNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DateIntervalNormalizer
+- name: DateTimeNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DateTimeNormalizer
+- name: DateTimeZoneNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DateTimeZoneNormalizer
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- name: FormErrorNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\FormErrorNormalizer
+- name: JsonSerializableNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\JsonSerializableNormalizer
+- name: MimeMessageNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\MimeMessageNormalizer
+- name: NormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\NormalizerInterface
+- name: ObjectNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+- name: ProblemNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ProblemNormalizer
+- name: PropertyNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\PropertyNormalizer
+- name: TranslatableNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\TranslatableNormalizer
+- name: UidNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\UidNormalizer
+- name: UnwrappingDenormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\UnwrappingDenormalizer
+- name: Serializer
+  type: class
+  source: Symfony\Component\Serializer\Serializer
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Serializer\SerializerInterface
+properties: []
+methods: []
+traits:
+- Psr\Cache\CacheItemPoolInterface
+- Symfony\Bundle\FrameworkBundle\CacheWarmer\SerializerCacheWarmer
+- Symfony\Component\Cache\Adapter\PhpArrayAdapter
+- Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer
+- Symfony\Component\ErrorHandler\ErrorRenderer\SerializerErrorRenderer
+- Symfony\Component\PropertyInfo\Extractor\SerializerExtractor
+- Symfony\Component\Serializer\Encoder\CsvEncoder
+- Symfony\Component\Serializer\Encoder\DecoderInterface
+- Symfony\Component\Serializer\Encoder\EncoderInterface
+- Symfony\Component\Serializer\Encoder\JsonEncoder
+- Symfony\Component\Serializer\Encoder\XmlEncoder
+- Symfony\Component\Serializer\Encoder\YamlEncoder
+- Symfony\Component\Serializer\Mapping\ClassDiscriminatorFromClassMetadata
+- Symfony\Component\Serializer\Mapping\ClassDiscriminatorResolverInterface
+- Symfony\Component\Serializer\Mapping\Factory\CacheClassMetadataFactory
+- Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory
+- Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+- Symfony\Component\Serializer\Mapping\Loader\LoaderChain
+- Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
+- Symfony\Component\Serializer\NameConverter\MetadataAwareNameConverter
+- Symfony\Component\Serializer\Normalizer\ArrayDenormalizer
+- Symfony\Component\Serializer\Normalizer\BackedEnumNormalizer
+- Symfony\Component\Serializer\Normalizer\ConstraintViolationListNormalizer
+- Symfony\Component\Serializer\Normalizer\DataUriNormalizer
+- Symfony\Component\Serializer\Normalizer\DateIntervalNormalizer
+- Symfony\Component\Serializer\Normalizer\DateTimeNormalizer
+- Symfony\Component\Serializer\Normalizer\DateTimeZoneNormalizer
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- Symfony\Component\Serializer\Normalizer\FormErrorNormalizer
+- Symfony\Component\Serializer\Normalizer\JsonSerializableNormalizer
+- Symfony\Component\Serializer\Normalizer\MimeMessageNormalizer
+- Symfony\Component\Serializer\Normalizer\NormalizerInterface
+- Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+- Symfony\Component\Serializer\Normalizer\ProblemNormalizer
+- Symfony\Component\Serializer\Normalizer\PropertyNormalizer
+- Symfony\Component\Serializer\Normalizer\TranslatableNormalizer
+- Symfony\Component\Serializer\Normalizer\UidNormalizer
+- Symfony\Component\Serializer\Normalizer\UnwrappingDenormalizer
+- Symfony\Component\Serializer\Serializer
+- Symfony\Component\Serializer\SerializerInterface
+interfaces: []

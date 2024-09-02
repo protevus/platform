@@ -1,0 +1,55 @@
+name: AmazonSqsSenderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: DummyMessage
+  type: class
+  source: Symfony\Component\Messenger\Bridge\AmazonSqs\Tests\Fixtures\DummyMessage
+- name: AmazonSqsFifoStamp
+  type: class
+  source: Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\AmazonSqsFifoStamp
+- name: AmazonSqsSender
+  type: class
+  source: Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\AmazonSqsSender
+- name: AmazonSqsXrayTraceHeaderStamp
+  type: class
+  source: Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\AmazonSqsXrayTraceHeaderStamp
+- name: Connection
+  type: class
+  source: Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\Connection
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+properties: []
+methods:
+- name: testSend
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendWithAmazonSqsFifoStamp
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendWithAmazonSqsXrayTraceHeaderStamp
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendEncodeBodyToRespectAmazonRequirements
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Bridge\AmazonSqs\Tests\Fixtures\DummyMessage
+- Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\AmazonSqsFifoStamp
+- Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\AmazonSqsSender
+- Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\AmazonSqsXrayTraceHeaderStamp
+- Symfony\Component\Messenger\Bridge\AmazonSqs\Transport\Connection
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+interfaces: []

@@ -1,0 +1,97 @@
+name: MongoDbSessionHandler
+class_comment: "# * Session handler using the MongoDB driver extension.\n# *\n# *\
+  \ @author Markus Bachmann <markus.bachmann@bachi.biz>\n# * @author J\xE9r\xF4me\
+  \ Tamarelle <jerome@tamarelle.net>\n# *\n# * @see https://php.net/mongodb"
+dependencies:
+- name: Binary
+  type: class
+  source: MongoDB\BSON\Binary
+- name: UTCDateTime
+  type: class
+  source: MongoDB\BSON\UTCDateTime
+- name: Client
+  type: class
+  source: MongoDB\Client
+- name: BulkWrite
+  type: class
+  source: MongoDB\Driver\BulkWrite
+- name: Manager
+  type: class
+  source: MongoDB\Driver\Manager
+- name: Query
+  type: class
+  source: MongoDB\Driver\Query
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: mongo
+  - name: options
+  comment: "# * Session handler using the MongoDB driver extension.\n# *\n# * @author\
+    \ Markus Bachmann <markus.bachmann@bachi.biz>\n# * @author J\xE9r\xF4me Tamarelle\
+    \ <jerome@tamarelle.net>\n# *\n# * @see https://php.net/mongodb\n# */\n# class\
+    \ MongoDbSessionHandler extends AbstractSessionHandler\n# {\n# private Manager\
+    \ $manager;\n# private string $namespace;\n# private array $options;\n# private\
+    \ int|\\Closure|null $ttl;\n# \n# /**\n# * Constructor.\n# *\n# * List of available\
+    \ options:\n# *  * database: The name of the database [required]\n# *  * collection:\
+    \ The name of the collection [required]\n# *  * id_field: The field name for storing\
+    \ the session id [default: _id]\n# *  * data_field: The field name for storing\
+    \ the session data [default: data]\n# *  * time_field: The field name for storing\
+    \ the timestamp [default: time]\n# *  * expiry_field: The field name for storing\
+    \ the expiry-timestamp [default: expires_at]\n# *  * ttl: The time to live in\
+    \ seconds.\n# *\n# * It is strongly recommended to put an index on the `expiry_field`\
+    \ for\n# * garbage-collection. Alternatively it's possible to automatically expire\n\
+    # * the sessions in the database as described below:\n# *\n# * A TTL collections\
+    \ can be used on MongoDB 2.2+ to cleanup expired sessions\n# * automatically.\
+    \ Such an index can for example look like this:\n# *\n# *     db.<session-collection>.createIndex(\n\
+    # *         { \"<expiry-field>\": 1 },\n# *         { \"expireAfterSeconds\":\
+    \ 0 }\n# *     )\n# *\n# * More details on: https://docs.mongodb.org/manual/tutorial/expire-data/\n\
+    # *\n# * If you use such an index, you can drop `gc_probability` to 0 since\n\
+    # * no garbage-collection is required.\n# *\n# * @throws \\InvalidArgumentException\
+    \ When \"database\" or \"collection\" not provided"
+- name: close
+  visibility: public
+  parameters: []
+  comment: null
+- name: doDestroy
+  visibility: protected
+  parameters:
+  - name: sessionId
+  comment: null
+- name: gc
+  visibility: public
+  parameters:
+  - name: maxlifetime
+  comment: null
+- name: doWrite
+  visibility: protected
+  parameters:
+  - name: sessionId
+  - name: data
+  comment: null
+- name: updateTimestamp
+  visibility: public
+  parameters:
+  - name: sessionId
+  - name: data
+  comment: null
+- name: doRead
+  visibility: protected
+  parameters:
+  - name: sessionId
+  comment: null
+- name: getUTCDateTime
+  visibility: private
+  parameters:
+  - name: additionalSeconds
+    default: '0'
+  comment: null
+traits:
+- MongoDB\BSON\Binary
+- MongoDB\BSON\UTCDateTime
+- MongoDB\Client
+- MongoDB\Driver\BulkWrite
+- MongoDB\Driver\Manager
+- MongoDB\Driver\Query
+interfaces: []

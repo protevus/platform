@@ -1,0 +1,106 @@
+name: AttributeMetadataInterface
+class_comment: null
+dependencies:
+- name: PropertyPath
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyPath
+properties: []
+methods:
+- name: getName
+  visibility: public
+  parameters: []
+  comment: "# * Stores metadata needed for serializing and deserializing attributes.\n\
+    # *\n# * Primarily, the metadata stores serialization groups.\n# *\n# * @internal\n\
+    # *\n# * @author K\xE9vin Dunglas <dunglas@gmail.com>\n# */\n# interface AttributeMetadataInterface\n\
+    # {\n# /**\n# * Gets the attribute name."
+- name: addGroup
+  visibility: public
+  parameters:
+  - name: group
+  comment: '# * Adds this attribute to the given group.'
+- name: getGroups
+  visibility: public
+  parameters: []
+  comment: '# * Gets groups of this attribute.
+
+    # *
+
+    # * @return string[]'
+- name: setMaxDepth
+  visibility: public
+  parameters:
+  - name: maxDepth
+  comment: '# * Sets the serialization max depth for this attribute.'
+- name: getMaxDepth
+  visibility: public
+  parameters: []
+  comment: '# * Gets the serialization max depth for this attribute.'
+- name: setSerializedName
+  visibility: public
+  parameters:
+  - name: serializedName
+  comment: '# * Sets the serialization name for this attribute.'
+- name: getSerializedName
+  visibility: public
+  parameters: []
+  comment: '# * Gets the serialization name for this attribute.'
+- name: setSerializedPath
+  visibility: public
+  parameters:
+  - name: serializedPath
+  comment: null
+- name: getSerializedPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: setIgnore
+  visibility: public
+  parameters:
+  - name: ignore
+  comment: '# * Sets if this attribute must be ignored or not.'
+- name: isIgnored
+  visibility: public
+  parameters: []
+  comment: '# * Gets if this attribute is ignored or not.'
+- name: merge
+  visibility: public
+  parameters:
+  - name: attributeMetadata
+  comment: '# * Merges an {@see AttributeMetadataInterface} with in the current one.'
+- name: getNormalizationContexts
+  visibility: public
+  parameters: []
+  comment: '# * Gets all the normalization contexts per group ("*" being the base
+    context applied to all groups).'
+- name: getNormalizationContextForGroups
+  visibility: public
+  parameters:
+  - name: groups
+  comment: '# * Gets the computed normalization contexts for given groups.'
+- name: setNormalizationContextForGroups
+  visibility: public
+  parameters:
+  - name: context
+  - name: groups
+    default: '[]'
+  comment: '# * Sets the normalization context for given groups.'
+- name: getDenormalizationContexts
+  visibility: public
+  parameters: []
+  comment: '# * Gets all the denormalization contexts per group ("*" being the base
+    context applied to all groups).'
+- name: getDenormalizationContextForGroups
+  visibility: public
+  parameters:
+  - name: groups
+  comment: '# * Gets the computed denormalization contexts for given groups.'
+- name: setDenormalizationContextForGroups
+  visibility: public
+  parameters:
+  - name: context
+  - name: groups
+    default: '[]'
+  comment: '# * Sets the denormalization context for given groups.'
+traits:
+- Symfony\Component\PropertyAccess\PropertyPath
+interfaces: []

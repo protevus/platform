@@ -1,0 +1,34 @@
+name: File
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: MimeTypes
+  type: class
+  source: Symfony\Component\Mime\MimeTypes
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: path
+  - name: filename
+    default: 'null'
+  comment: null
+- name: getPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: getContentType
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSize
+  visibility: public
+  parameters: []
+  comment: null
+- name: getFilename
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Mime\MimeTypes
+interfaces: []

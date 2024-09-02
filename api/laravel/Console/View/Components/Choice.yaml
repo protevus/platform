@@ -1,0 +1,59 @@
+name: Choice
+class_comment: null
+dependencies:
+- name: ChoiceQuestion
+  type: class
+  source: Symfony\Component\Console\Question\ChoiceQuestion
+properties: []
+methods:
+- name: render
+  visibility: public
+  parameters:
+  - name: question
+  - name: choices
+  - name: default
+    default: 'null'
+  - name: attempts
+    default: 'null'
+  - name: multiple
+    default: 'false'
+  comment: '# * Renders the component using the given arguments.
+
+    # *
+
+    # * @param  string  $question
+
+    # * @param  array<array-key, string>  $choices
+
+    # * @param  mixed  $default
+
+    # * @param  int  $attempts
+
+    # * @param  bool  $multiple
+
+    # * @return mixed'
+- name: getChoiceQuestion
+  visibility: protected
+  parameters:
+  - name: question
+  - name: choices
+  - name: default
+  comment: '# * Get a ChoiceQuestion instance that handles array keys like Prompts.
+
+    # *
+
+    # * @param  string  $question
+
+    # * @param  array  $choices
+
+    # * @param  mixed  $default
+
+    # * @return \Symfony\Component\Console\Question\ChoiceQuestion'
+- name: isAssoc
+  visibility: protected
+  parameters:
+  - name: array
+  comment: null
+traits:
+- Symfony\Component\Console\Question\ChoiceQuestion
+interfaces: []

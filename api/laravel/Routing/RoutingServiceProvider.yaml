@@ -1,0 +1,137 @@
+name: RoutingServiceProvider
+class_comment: null
+dependencies:
+- name: BindingResolutionException
+  type: class
+  source: Illuminate\Contracts\Container\BindingResolutionException
+- name: ResponseFactoryContract
+  type: class
+  source: Illuminate\Contracts\Routing\ResponseFactory
+- name: UrlGeneratorContract
+  type: class
+  source: Illuminate\Contracts\Routing\UrlGenerator
+- name: ViewFactoryContract
+  type: class
+  source: Illuminate\Contracts\View\Factory
+- name: CallableDispatcherContract
+  type: class
+  source: Illuminate\Routing\Contracts\CallableDispatcher
+- name: ControllerDispatcherContract
+  type: class
+  source: Illuminate\Routing\Contracts\ControllerDispatcher
+- name: ServiceProvider
+  type: class
+  source: Illuminate\Support\ServiceProvider
+- name: Psr17Factory
+  type: class
+  source: Nyholm\Psr7\Factory\Psr17Factory
+- name: PsrResponse
+  type: class
+  source: Nyholm\Psr7\Response
+- name: ResponseInterface
+  type: class
+  source: Psr\Http\Message\ResponseInterface
+- name: ServerRequestInterface
+  type: class
+  source: Psr\Http\Message\ServerRequestInterface
+- name: PsrHttpFactory
+  type: class
+  source: Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory
+properties: []
+methods:
+- name: register
+  visibility: public
+  parameters: []
+  comment: '# * Register the service provider.
+
+    # *
+
+    # * @return void'
+- name: registerRouter
+  visibility: protected
+  parameters: []
+  comment: '# * Register the router instance.
+
+    # *
+
+    # * @return void'
+- name: registerUrlGenerator
+  visibility: protected
+  parameters: []
+  comment: '# * Register the URL generator service.
+
+    # *
+
+    # * @return void'
+- name: requestRebinder
+  visibility: protected
+  parameters: []
+  comment: '# * Get the URL generator request rebinder.
+
+    # *
+
+    # * @return \Closure'
+- name: registerRedirector
+  visibility: protected
+  parameters: []
+  comment: '# * Register the Redirector service.
+
+    # *
+
+    # * @return void'
+- name: registerPsrRequest
+  visibility: protected
+  parameters: []
+  comment: '# * Register a binding for the PSR-7 request implementation.
+
+    # *
+
+    # * @return void
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Container\BindingResolutionException'
+- name: registerPsrResponse
+  visibility: protected
+  parameters: []
+  comment: '# * Register a binding for the PSR-7 response implementation.
+
+    # *
+
+    # * @return void
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Container\BindingResolutionException'
+- name: registerResponseFactory
+  visibility: protected
+  parameters: []
+  comment: '# * Register the response factory implementation.
+
+    # *
+
+    # * @return void'
+- name: registerCallableDispatcher
+  visibility: protected
+  parameters: []
+  comment: '# * Register the callable dispatcher.
+
+    # *
+
+    # * @return void'
+- name: registerControllerDispatcher
+  visibility: protected
+  parameters: []
+  comment: '# * Register the controller dispatcher.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Contracts\Container\BindingResolutionException
+- Illuminate\Support\ServiceProvider
+- Nyholm\Psr7\Factory\Psr17Factory
+- Psr\Http\Message\ResponseInterface
+- Psr\Http\Message\ServerRequestInterface
+- Symfony\Bridge\PsrHttpMessage\Factory\PsrHttpFactory
+interfaces: []

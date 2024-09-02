@@ -1,0 +1,30 @@
+name: ElementParserTest
+class_comment: "# * @author Jean-Fran\xE7ois Simon <jeanfrancois.simon@sensiolabs.com>"
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: SelectorNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\SelectorNode
+- name: ElementParser
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Shortcut\ElementParser
+properties: []
+methods:
+- name: testParse
+  visibility: public
+  parameters:
+  - name: source
+  - name: representation
+  comment: "# * @author Jean-Fran\xE7ois Simon <jeanfrancois.simon@sensiolabs.com>\n\
+    # */\n# class ElementParserTest extends TestCase\n# {\n# /** @dataProvider getParseTestData"
+- name: getParseTestData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\CssSelector\Node\SelectorNode
+- Symfony\Component\CssSelector\Parser\Shortcut\ElementParser
+interfaces: []

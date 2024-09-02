@@ -1,0 +1,77 @@
+name: Recaller
+class_comment: null
+dependencies: []
+properties:
+- name: recaller
+  visibility: protected
+  comment: '# * The "recaller" / "remember me" cookie string.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: recaller
+  comment: "# * The \"recaller\" / \"remember me\" cookie string.\n# *\n# * @var string\n\
+    # */\n# protected $recaller;\n# \n# /**\n# * Create a new recaller instance.\n\
+    # *\n# * @param  string  $recaller\n# * @return void"
+- name: id
+  visibility: public
+  parameters: []
+  comment: '# * Get the user ID from the recaller.
+
+    # *
+
+    # * @return string'
+- name: token
+  visibility: public
+  parameters: []
+  comment: '# * Get the "remember token" token from the recaller.
+
+    # *
+
+    # * @return string'
+- name: hash
+  visibility: public
+  parameters: []
+  comment: '# * Get the password from the recaller.
+
+    # *
+
+    # * @return string'
+- name: valid
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the recaller is valid.
+
+    # *
+
+    # * @return bool'
+- name: properString
+  visibility: protected
+  parameters: []
+  comment: '# * Determine if the recaller is an invalid string.
+
+    # *
+
+    # * @return bool'
+- name: hasAllSegments
+  visibility: protected
+  parameters: []
+  comment: '# * Determine if the recaller has all segments.
+
+    # *
+
+    # * @return bool'
+- name: segments
+  visibility: public
+  parameters: []
+  comment: '# * Get the recaller''s segments.
+
+    # *
+
+    # * @return array'
+traits: []
+interfaces: []

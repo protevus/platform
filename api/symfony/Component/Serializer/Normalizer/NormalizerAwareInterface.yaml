@@ -1,0 +1,22 @@
+name: NormalizerAwareInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: setNormalizer
+  visibility: public
+  parameters:
+  - name: normalizer
+  comment: '# * @author Joel Wurtz <joel.wurtz@gmail.com>
+
+    # */
+
+    # interface NormalizerAwareInterface
+
+    # {
+
+    # /**
+
+    # * Sets the owning Normalizer object.'
+traits: []
+interfaces: []

@@ -1,0 +1,14 @@
+name: CacheWarmer
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: writeCacheFile
+  visibility: protected
+  parameters:
+  - name: file
+  - name: content
+  comment: null
+traits: []
+interfaces:
+- CacheWarmerInterface

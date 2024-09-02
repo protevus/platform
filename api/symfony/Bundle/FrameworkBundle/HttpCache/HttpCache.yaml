@@ -1,0 +1,78 @@
+name: HttpCache
+class_comment: '# * Manages HTTP cache objects in a Container.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: Esi
+  type: class
+  source: Symfony\Component\HttpKernel\HttpCache\Esi
+- name: BaseHttpCache
+  type: class
+  source: Symfony\Component\HttpKernel\HttpCache\HttpCache
+- name: Store
+  type: class
+  source: Symfony\Component\HttpKernel\HttpCache\Store
+- name: StoreInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpCache\StoreInterface
+- name: SurrogateInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpCache\SurrogateInterface
+- name: KernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\KernelInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: kernel
+  - name: cache
+    default: 'null'
+  - name: surrogate
+    default: 'null'
+  - name: options
+    default: 'null'
+  comment: "# * Manages HTTP cache objects in a Container.\n# *\n# * @author Fabien\
+    \ Potencier <fabien@symfony.com>\n# */\n# class HttpCache extends BaseHttpCache\n\
+    # {\n# protected ?string $cacheDir = null;\n# \n# private ?StoreInterface $store\
+    \ = null;\n# private array $options;\n# \n# /**\n# * @param $cache The cache directory\
+    \ (default used if null) or the storage instance"
+- name: forward
+  visibility: protected
+  parameters:
+  - name: request
+  - name: catch
+    default: 'false'
+  - name: entry
+    default: 'null'
+  comment: null
+- name: getOptions
+  visibility: protected
+  parameters: []
+  comment: '# * Returns an array of options to customize the Cache configuration.'
+- name: createSurrogate
+  visibility: protected
+  parameters: []
+  comment: null
+- name: createStore
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\HttpCache\Esi
+- Symfony\Component\HttpKernel\HttpCache\Store
+- Symfony\Component\HttpKernel\HttpCache\StoreInterface
+- Symfony\Component\HttpKernel\HttpCache\SurrogateInterface
+- Symfony\Component\HttpKernel\KernelInterface
+interfaces: []

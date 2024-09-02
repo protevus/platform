@@ -1,0 +1,367 @@
+name: DatabaseStore
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: LockProvider
+  type: class
+  source: Illuminate\Contracts\Cache\LockProvider
+- name: Store
+  type: class
+  source: Illuminate\Contracts\Cache\Store
+- name: ConnectionInterface
+  type: class
+  source: Illuminate\Database\ConnectionInterface
+- name: PostgresConnection
+  type: class
+  source: Illuminate\Database\PostgresConnection
+- name: QueryException
+  type: class
+  source: Illuminate\Database\QueryException
+- name: SqlServerConnection
+  type: class
+  source: Illuminate\Database\SqlServerConnection
+- name: InteractsWithTime
+  type: class
+  source: Illuminate\Support\InteractsWithTime
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+properties:
+- name: connection
+  visibility: protected
+  comment: '# * The database connection instance.
+
+    # *
+
+    # * @var \Illuminate\Database\ConnectionInterface'
+- name: lockConnection
+  visibility: protected
+  comment: '# * The database connection instance that should be used to manage locks.
+
+    # *
+
+    # * @var \Illuminate\Database\ConnectionInterface'
+- name: table
+  visibility: protected
+  comment: '# * The name of the cache table.
+
+    # *
+
+    # * @var string'
+- name: prefix
+  visibility: protected
+  comment: '# * A string that should be prepended to keys.
+
+    # *
+
+    # * @var string'
+- name: lockTable
+  visibility: protected
+  comment: '# * The name of the cache locks table.
+
+    # *
+
+    # * @var string'
+- name: lockLottery
+  visibility: protected
+  comment: '# * An array representation of the lock lottery odds.
+
+    # *
+
+    # * @var array'
+- name: defaultLockTimeoutInSeconds
+  visibility: protected
+  comment: '# * The default number of seconds that a lock should be held.
+
+    # *
+
+    # * @var int'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: connection
+  - name: table
+  - name: prefix
+    default: ''''''
+  - name: lockTable
+    default: '''cache_locks'''
+  - name: lockLottery
+    default: '[2'
+  - name: 100]
+  - name: defaultLockTimeoutInSeconds
+    default: '86400'
+  comment: "# * The database connection instance.\n# *\n# * @var \\Illuminate\\Database\\\
+    ConnectionInterface\n# */\n# protected $connection;\n# \n# /**\n# * The database\
+    \ connection instance that should be used to manage locks.\n# *\n# * @var \\Illuminate\\\
+    Database\\ConnectionInterface\n# */\n# protected $lockConnection;\n# \n# /**\n\
+    # * The name of the cache table.\n# *\n# * @var string\n# */\n# protected $table;\n\
+    # \n# /**\n# * A string that should be prepended to keys.\n# *\n# * @var string\n\
+    # */\n# protected $prefix;\n# \n# /**\n# * The name of the cache locks table.\n\
+    # *\n# * @var string\n# */\n# protected $lockTable;\n# \n# /**\n# * An array representation\
+    \ of the lock lottery odds.\n# *\n# * @var array\n# */\n# protected $lockLottery;\n\
+    # \n# /**\n# * The default number of seconds that a lock should be held.\n# *\n\
+    # * @var int\n# */\n# protected $defaultLockTimeoutInSeconds;\n# \n# /**\n# *\
+    \ Create a new database store.\n# *\n# * @param  \\Illuminate\\Database\\ConnectionInterface\
+    \  $connection\n# * @param  string  $table\n# * @param  string  $prefix\n# * @param\
+    \  string  $lockTable\n# * @param  array  $lockLottery\n# * @return void"
+- name: get
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Retrieve an item from the cache by key.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed'
+- name: put
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  - name: seconds
+  comment: '# * Store an item in the cache for a given number of seconds.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  int  $seconds
+
+    # * @return bool'
+- name: add
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  - name: seconds
+  comment: '# * Store an item in the cache if the key doesn''t exist.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  int  $seconds
+
+    # * @return bool'
+- name: increment
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: '1'
+  comment: '# * Increment the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  int  $value
+
+    # * @return int|false'
+- name: decrement
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: '1'
+  comment: '# * Decrement the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  int  $value
+
+    # * @return int|false'
+- name: incrementOrDecrement
+  visibility: protected
+  parameters:
+  - name: key
+  - name: value
+  - name: callback
+  comment: '# * Increment or decrement an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  int|float  $value
+
+    # * @param  \Closure  $callback
+
+    # * @return int|false'
+- name: getTime
+  visibility: protected
+  parameters: []
+  comment: '# * Get the current system time.
+
+    # *
+
+    # * @return int'
+- name: forever
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Store an item in the cache indefinitely.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return bool'
+- name: lock
+  visibility: public
+  parameters:
+  - name: name
+  - name: seconds
+    default: '0'
+  - name: owner
+    default: 'null'
+  comment: '# * Get a lock instance.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  int  $seconds
+
+    # * @param  string|null  $owner
+
+    # * @return \Illuminate\Contracts\Cache\Lock'
+- name: restoreLock
+  visibility: public
+  parameters:
+  - name: name
+  - name: owner
+  comment: '# * Restore a lock instance using the owner identifier.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string  $owner
+
+    # * @return \Illuminate\Contracts\Cache\Lock'
+- name: forget
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Remove an item from the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: forgetIfExpired
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Remove an item from the cache if it is expired.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: flush
+  visibility: public
+  parameters: []
+  comment: '# * Remove all items from the cache.
+
+    # *
+
+    # * @return bool'
+- name: table
+  visibility: protected
+  parameters: []
+  comment: '# * Get a query builder for the cache table.
+
+    # *
+
+    # * @return \Illuminate\Database\Query\Builder'
+- name: getConnection
+  visibility: public
+  parameters: []
+  comment: '# * Get the underlying database connection.
+
+    # *
+
+    # * @return \Illuminate\Database\ConnectionInterface'
+- name: setLockConnection
+  visibility: public
+  parameters:
+  - name: connection
+  comment: '# * Specify the name of the connection that should be used to manage locks.
+
+    # *
+
+    # * @param  \Illuminate\Database\ConnectionInterface  $connection
+
+    # * @return $this'
+- name: getPrefix
+  visibility: public
+  parameters: []
+  comment: '# * Get the cache key prefix.
+
+    # *
+
+    # * @return string'
+- name: setPrefix
+  visibility: public
+  parameters:
+  - name: prefix
+  comment: '# * Set the cache key prefix.
+
+    # *
+
+    # * @param  string  $prefix
+
+    # * @return void'
+- name: serialize
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Serialize the given value.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return string'
+- name: unserialize
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Unserialize the given value.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return mixed'
+traits:
+- Closure
+- Illuminate\Contracts\Cache\LockProvider
+- Illuminate\Contracts\Cache\Store
+- Illuminate\Database\ConnectionInterface
+- Illuminate\Database\PostgresConnection
+- Illuminate\Database\QueryException
+- Illuminate\Database\SqlServerConnection
+- Illuminate\Support\InteractsWithTime
+- Illuminate\Support\Str
+- InteractsWithTime
+interfaces:
+- LockProvider

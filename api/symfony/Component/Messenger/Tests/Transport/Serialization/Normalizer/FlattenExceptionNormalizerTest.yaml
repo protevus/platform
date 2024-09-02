@@ -1,0 +1,50 @@
+name: FlattenExceptionNormalizerTest
+class_comment: '# * @author Pascal Luna <skalpa@zetareticuli.org>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: FlattenException
+  type: class
+  source: Symfony\Component\ErrorHandler\Exception\FlattenException
+- name: FlattenExceptionNormalizer
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\Normalizer\FlattenExceptionNormalizer
+- name: Serializer
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\Serializer
+properties: []
+methods:
+- name: testNormalize
+  visibility: public
+  parameters:
+  - name: exception
+  comment: "# * @author Pascal Luna <skalpa@zetareticuli.org>\n# */\n# class FlattenExceptionNormalizerTest\
+    \ extends TestCase\n# {\n# private FlattenExceptionNormalizer $normalizer;\n#\
+    \ \n# protected function setUp(): void\n# {\n# $this->normalizer = new FlattenExceptionNormalizer();\n\
+    # }\n# \n# public function testSupportsNormalization()\n# {\n# $this->assertTrue($this->normalizer->supportsNormalization(new\
+    \ FlattenException(), null, $this->getMessengerContext()));\n# $this->assertFalse($this->normalizer->supportsNormalization(new\
+    \ FlattenException()));\n# $this->assertFalse($this->normalizer->supportsNormalization(new\
+    \ \\stdClass()));\n# }\n# \n# /**\n# * @dataProvider provideFlattenException"
+- name: provideFlattenException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSupportsDenormalization
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDenormalizeValidData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getMessengerContext
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\ErrorHandler\Exception\FlattenException
+- Symfony\Component\Messenger\Transport\Serialization\Normalizer\FlattenExceptionNormalizer
+- Symfony\Component\Messenger\Transport\Serialization\Serializer
+interfaces: []

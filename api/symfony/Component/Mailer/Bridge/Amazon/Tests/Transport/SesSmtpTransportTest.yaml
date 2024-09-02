@@ -1,0 +1,27 @@
+name: SesSmtpTransportTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: SesSmtpTransport
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Amazon\Transport\SesSmtpTransport
+- name: MetadataHeader
+  type: class
+  source: Symfony\Component\Mailer\Header\MetadataHeader
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+properties: []
+methods:
+- name: testTagAndMetadataAndMessageStreamHeaders
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mailer\Bridge\Amazon\Transport\SesSmtpTransport
+- Symfony\Component\Mailer\Header\MetadataHeader
+- Symfony\Component\Mime\Email
+interfaces: []

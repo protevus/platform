@@ -1,0 +1,76 @@
+name: MemcachedConnector
+class_comment: null
+dependencies:
+- name: Memcached
+  type: class
+  source: Memcached
+properties: []
+methods:
+- name: connect
+  visibility: public
+  parameters:
+  - name: servers
+  - name: connectionId
+    default: 'null'
+  - name: options
+    default: '[]'
+  - name: credentials
+    default: '[]'
+  comment: '# * Create a new Memcached connection.
+
+    # *
+
+    # * @param  array  $servers
+
+    # * @param  string|null  $connectionId
+
+    # * @param  array  $options
+
+    # * @param  array  $credentials
+
+    # * @return \Memcached'
+- name: getMemcached
+  visibility: protected
+  parameters:
+  - name: connectionId
+  - name: credentials
+  - name: options
+  comment: '# * Get a new Memcached instance.
+
+    # *
+
+    # * @param  string|null  $connectionId
+
+    # * @param  array  $credentials
+
+    # * @param  array  $options
+
+    # * @return \Memcached'
+- name: createMemcachedInstance
+  visibility: protected
+  parameters:
+  - name: connectionId
+  comment: '# * Create the Memcached instance.
+
+    # *
+
+    # * @param  string|null  $connectionId
+
+    # * @return \Memcached'
+- name: setCredentials
+  visibility: protected
+  parameters:
+  - name: memcached
+  - name: credentials
+  comment: '# * Set the SASL credentials on the Memcached connection.
+
+    # *
+
+    # * @param  \Memcached  $memcached
+
+    # * @param  array  $credentials
+
+    # * @return void'
+traits:
+- Memcached
+interfaces: []

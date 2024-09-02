@@ -1,0 +1,44 @@
+name: SingleCommandApplication
+class_comment: "# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>"
+dependencies:
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+properties: []
+methods:
+- name: setVersion
+  visibility: public
+  parameters:
+  - name: version
+  comment: "# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>\n# */\n# class SingleCommandApplication\
+    \ extends Command\n# {\n# private string $version = 'UNKNOWN';\n# private bool\
+    \ $autoExit = true;\n# private bool $running = false;\n# \n# /**\n# * @return\
+    \ $this"
+- name: setAutoExit
+  visibility: public
+  parameters:
+  - name: autoExit
+  comment: '# * @final
+
+    # *
+
+    # * @return $this'
+- name: run
+  visibility: public
+  parameters:
+  - name: input
+    default: 'null'
+  - name: output
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Output\OutputInterface
+interfaces: []

@@ -1,0 +1,407 @@
+name: Queue
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: DateTimeInterface
+  type: class
+  source: DateTimeInterface
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: Encrypter
+  type: class
+  source: Illuminate\Contracts\Encryption\Encrypter
+- name: ShouldBeEncrypted
+  type: class
+  source: Illuminate\Contracts\Queue\ShouldBeEncrypted
+- name: ShouldQueueAfterCommit
+  type: class
+  source: Illuminate\Contracts\Queue\ShouldQueueAfterCommit
+- name: JobQueued
+  type: class
+  source: Illuminate\Queue\Events\JobQueued
+- name: JobQueueing
+  type: class
+  source: Illuminate\Queue\Events\JobQueueing
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: InteractsWithTime
+  type: class
+  source: Illuminate\Support\InteractsWithTime
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: InteractsWithTime
+  type: class
+  source: InteractsWithTime
+properties:
+- name: container
+  visibility: protected
+  comment: '# * The IoC container instance.
+
+    # *
+
+    # * @var \Illuminate\Container\Container'
+- name: connectionName
+  visibility: protected
+  comment: '# * The connection name for the queue.
+
+    # *
+
+    # * @var string'
+- name: dispatchAfterCommit
+  visibility: protected
+  comment: '# * Indicates that jobs should be dispatched after all database transactions
+    have committed.
+
+    # *
+
+    # * @var bool'
+- name: createPayloadCallbacks
+  visibility: protected
+  comment: '# * The create payload callbacks.
+
+    # *
+
+    # * @var callable[]'
+methods:
+- name: pushOn
+  visibility: public
+  parameters:
+  - name: queue
+  - name: job
+  - name: data
+    default: ''''''
+  comment: "# * The IoC container instance.\n# *\n# * @var \\Illuminate\\Container\\\
+    Container\n# */\n# protected $container;\n# \n# /**\n# * The connection name for\
+    \ the queue.\n# *\n# * @var string\n# */\n# protected $connectionName;\n# \n#\
+    \ /**\n# * Indicates that jobs should be dispatched after all database transactions\
+    \ have committed.\n# *\n# * @var bool\n# */\n# protected $dispatchAfterCommit;\n\
+    # \n# /**\n# * The create payload callbacks.\n# *\n# * @var callable[]\n# */\n\
+    # protected static $createPayloadCallbacks = [];\n# \n# /**\n# * Push a new job\
+    \ onto the queue.\n# *\n# * @param  string  $queue\n# * @param  string  $job\n\
+    # * @param  mixed  $data\n# * @return mixed"
+- name: laterOn
+  visibility: public
+  parameters:
+  - name: queue
+  - name: delay
+  - name: job
+  - name: data
+    default: ''''''
+  comment: '# * Push a new job onto a specific queue after (n) seconds.
+
+    # *
+
+    # * @param  string  $queue
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $delay
+
+    # * @param  string  $job
+
+    # * @param  mixed  $data
+
+    # * @return mixed'
+- name: bulk
+  visibility: public
+  parameters:
+  - name: jobs
+  - name: data
+    default: ''''''
+  - name: queue
+    default: 'null'
+  comment: '# * Push an array of jobs onto the queue.
+
+    # *
+
+    # * @param  array  $jobs
+
+    # * @param  mixed  $data
+
+    # * @param  string|null  $queue
+
+    # * @return void'
+- name: createPayload
+  visibility: protected
+  parameters:
+  - name: job
+  - name: queue
+  - name: data
+    default: ''''''
+  comment: '# * Create a payload string from the given job and data.
+
+    # *
+
+    # * @param  \Closure|string|object  $job
+
+    # * @param  string  $queue
+
+    # * @param  mixed  $data
+
+    # * @return string
+
+    # *
+
+    # * @throws \Illuminate\Queue\InvalidPayloadException'
+- name: createPayloadArray
+  visibility: protected
+  parameters:
+  - name: job
+  - name: queue
+  - name: data
+    default: ''''''
+  comment: '# * Create a payload array from the given job and data.
+
+    # *
+
+    # * @param  string|object  $job
+
+    # * @param  string  $queue
+
+    # * @param  mixed  $data
+
+    # * @return array'
+- name: createObjectPayload
+  visibility: protected
+  parameters:
+  - name: job
+  - name: queue
+  comment: '# * Create a payload for an object-based queue handler.
+
+    # *
+
+    # * @param  object  $job
+
+    # * @param  string  $queue
+
+    # * @return array'
+- name: getDisplayName
+  visibility: protected
+  parameters:
+  - name: job
+  comment: '# * Get the display name for the given job.
+
+    # *
+
+    # * @param  object  $job
+
+    # * @return string'
+- name: getJobTries
+  visibility: public
+  parameters:
+  - name: job
+  comment: '# * Get the maximum number of attempts for an object-based queue handler.
+
+    # *
+
+    # * @param  mixed  $job
+
+    # * @return mixed'
+- name: getJobBackoff
+  visibility: public
+  parameters:
+  - name: job
+  comment: '# * Get the backoff for an object-based queue handler.
+
+    # *
+
+    # * @param  mixed  $job
+
+    # * @return mixed'
+- name: getJobExpiration
+  visibility: public
+  parameters:
+  - name: job
+  comment: '# * Get the expiration timestamp for an object-based queue handler.
+
+    # *
+
+    # * @param  mixed  $job
+
+    # * @return mixed'
+- name: jobShouldBeEncrypted
+  visibility: protected
+  parameters:
+  - name: job
+  comment: '# * Determine if the job should be encrypted.
+
+    # *
+
+    # * @param  object  $job
+
+    # * @return bool'
+- name: createStringPayload
+  visibility: protected
+  parameters:
+  - name: job
+  - name: queue
+  - name: data
+  comment: '# * Create a typical, string based queue payload array.
+
+    # *
+
+    # * @param  string  $job
+
+    # * @param  string  $queue
+
+    # * @param  mixed  $data
+
+    # * @return array'
+- name: createPayloadUsing
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a callback to be executed when creating job payloads.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return void'
+- name: withCreatePayloadHooks
+  visibility: protected
+  parameters:
+  - name: queue
+  - name: payload
+  comment: '# * Create the given payload using any registered payload hooks.
+
+    # *
+
+    # * @param  string  $queue
+
+    # * @param  array  $payload
+
+    # * @return array'
+- name: enqueueUsing
+  visibility: protected
+  parameters:
+  - name: job
+  - name: payload
+  - name: queue
+  - name: delay
+  - name: callback
+  comment: '# * Enqueue a job using the given callback.
+
+    # *
+
+    # * @param  \Closure|string|object  $job
+
+    # * @param  string  $payload
+
+    # * @param  string|null  $queue
+
+    # * @param  \DateTimeInterface|\DateInterval|int|null  $delay
+
+    # * @param  callable  $callback
+
+    # * @return mixed'
+- name: shouldDispatchAfterCommit
+  visibility: protected
+  parameters:
+  - name: job
+  comment: '# * Determine if the job should be dispatched after all database transactions
+    have committed.
+
+    # *
+
+    # * @param  \Closure|string|object  $job
+
+    # * @return bool'
+- name: raiseJobQueueingEvent
+  visibility: protected
+  parameters:
+  - name: queue
+  - name: job
+  - name: payload
+  - name: delay
+  comment: '# * Raise the job queueing event.
+
+    # *
+
+    # * @param  string  $queue
+
+    # * @param  \Closure|string|object  $job
+
+    # * @param  string  $payload
+
+    # * @param  \DateTimeInterface|\DateInterval|int|null  $delay
+
+    # * @return void'
+- name: raiseJobQueuedEvent
+  visibility: protected
+  parameters:
+  - name: queue
+  - name: jobId
+  - name: job
+  - name: payload
+  - name: delay
+  comment: '# * Raise the job queued event.
+
+    # *
+
+    # * @param  string|null  $queue
+
+    # * @param  string|int|null  $jobId
+
+    # * @param  \Closure|string|object  $job
+
+    # * @param  string  $payload
+
+    # * @param  \DateTimeInterface|\DateInterval|int|null  $delay
+
+    # * @return void'
+- name: getConnectionName
+  visibility: public
+  parameters: []
+  comment: '# * Get the connection name for the queue.
+
+    # *
+
+    # * @return string'
+- name: setConnectionName
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Set the connection name for the queue.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return $this'
+- name: getContainer
+  visibility: public
+  parameters: []
+  comment: '# * Get the container instance being used by the connection.
+
+    # *
+
+    # * @return \Illuminate\Container\Container'
+- name: setContainer
+  visibility: public
+  parameters:
+  - name: container
+  comment: '# * Set the IoC container instance.
+
+    # *
+
+    # * @param  \Illuminate\Container\Container  $container
+
+    # * @return void'
+traits:
+- Closure
+- DateTimeInterface
+- Illuminate\Container\Container
+- Illuminate\Contracts\Encryption\Encrypter
+- Illuminate\Contracts\Queue\ShouldBeEncrypted
+- Illuminate\Contracts\Queue\ShouldQueueAfterCommit
+- Illuminate\Queue\Events\JobQueued
+- Illuminate\Queue\Events\JobQueueing
+- Illuminate\Support\Arr
+- Illuminate\Support\InteractsWithTime
+- Illuminate\Support\Str
+- InteractsWithTime
+interfaces: []

@@ -1,0 +1,57 @@
+name: SemaphoreInterface
+class_comment: null
+dependencies:
+- name: SemaphoreAcquiringException
+  type: class
+  source: Symfony\Component\Semaphore\Exception\SemaphoreAcquiringException
+- name: SemaphoreExpiredException
+  type: class
+  source: Symfony\Component\Semaphore\Exception\SemaphoreExpiredException
+- name: SemaphoreReleasingException
+  type: class
+  source: Symfony\Component\Semaphore\Exception\SemaphoreReleasingException
+properties: []
+methods:
+- name: acquire
+  visibility: public
+  parameters: []
+  comment: "# * SemaphoreInterface defines an interface to manipulate the status of\
+    \ a semaphore.\n# *\n# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n\
+    # * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>\n# */\n# interface SemaphoreInterface\n\
+    # {\n# /**\n# * Acquires the semaphore. If the semaphore has reached its limit.\n\
+    # *\n# * @throws SemaphoreAcquiringException If the semaphore cannot be acquired"
+- name: refresh
+  visibility: public
+  parameters:
+  - name: ttlInSecond
+    default: 'null'
+  comment: '# * Increase the duration of an acquired semaphore.
+
+    # *
+
+    # * @throws SemaphoreExpiredException If the semaphore has expired'
+- name: isAcquired
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether or not the semaphore is acquired.'
+- name: release
+  visibility: public
+  parameters: []
+  comment: '# * Release the semaphore.
+
+    # *
+
+    # * @throws SemaphoreReleasingException If the semaphore cannot be released'
+- name: isExpired
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRemainingLifetime
+  visibility: public
+  parameters: []
+  comment: '# * Returns the remaining lifetime.'
+traits:
+- Symfony\Component\Semaphore\Exception\SemaphoreAcquiringException
+- Symfony\Component\Semaphore\Exception\SemaphoreExpiredException
+- Symfony\Component\Semaphore\Exception\SemaphoreReleasingException
+interfaces: []

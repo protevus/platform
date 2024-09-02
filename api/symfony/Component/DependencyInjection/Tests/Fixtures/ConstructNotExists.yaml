@@ -1,0 +1,12 @@
+name: ConstructNotExists
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: notExist
+  comment: null
+traits: []
+interfaces: []

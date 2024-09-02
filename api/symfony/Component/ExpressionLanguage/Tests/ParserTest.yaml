@@ -1,0 +1,87 @@
+name: ParserTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Lexer
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Lexer
+- name: Node
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Node
+- name: Parser
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Parser
+- name: SyntaxError
+  type: class
+  source: Symfony\Component\ExpressionLanguage\SyntaxError
+properties: []
+methods:
+- name: testParseWithInvalidName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParseWithZeroInNames
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParseUnknownFunction
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParse
+  visibility: public
+  parameters:
+  - name: node
+  - name: expression
+  - name: names
+    default: '[]'
+  comment: '# * @dataProvider getParseData'
+- name: getParseData
+  visibility: public
+  parameters: []
+  comment: null
+- name: createGetAttrNode
+  visibility: private
+  parameters:
+  - name: node
+  - name: item
+  - name: type
+  comment: null
+- name: testParseWithInvalidPostfixData
+  visibility: public
+  parameters:
+  - name: expr
+  - name: names
+    default: '[]'
+  comment: '# * @dataProvider getInvalidPostfixData'
+- name: getInvalidPostfixData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNameProposal
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLint
+  visibility: public
+  parameters:
+  - name: expression
+  - name: names
+  - name: checks
+    default: '0'
+  - name: exception
+    default: 'null'
+  comment: '# * @dataProvider getLintData'
+- name: getLintData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\ExpressionLanguage\Lexer
+- Symfony\Component\ExpressionLanguage\Node
+- Symfony\Component\ExpressionLanguage\Parser
+- Symfony\Component\ExpressionLanguage\SyntaxError
+interfaces: []

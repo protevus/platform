@@ -1,0 +1,197 @@
+name: UrlGenerator
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: current
+  visibility: public
+  parameters: []
+  comment: '# * @method string query(string $path, array $query = [], mixed $extra
+    = [], bool|null $secure = null)
+
+    # */
+
+    # interface UrlGenerator
+
+    # {
+
+    # /**
+
+    # * Get the current URL for the request.
+
+    # *
+
+    # * @return string'
+- name: previous
+  visibility: public
+  parameters:
+  - name: fallback
+    default: 'false'
+  comment: '# * Get the URL for the previous request.
+
+    # *
+
+    # * @param  mixed  $fallback
+
+    # * @return string'
+- name: to
+  visibility: public
+  parameters:
+  - name: path
+  - name: extra
+    default: '[]'
+  - name: secure
+    default: 'null'
+  comment: '# * Generate an absolute URL to the given path.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  mixed  $extra
+
+    # * @param  bool|null  $secure
+
+    # * @return string'
+- name: secure
+  visibility: public
+  parameters:
+  - name: path
+  - name: parameters
+    default: '[]'
+  comment: '# * Generate a secure, absolute URL to the given path.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  array  $parameters
+
+    # * @return string'
+- name: asset
+  visibility: public
+  parameters:
+  - name: path
+  - name: secure
+    default: 'null'
+  comment: '# * Generate the URL to an application asset.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  bool|null  $secure
+
+    # * @return string'
+- name: route
+  visibility: public
+  parameters:
+  - name: name
+  - name: parameters
+    default: '[]'
+  - name: absolute
+    default: 'true'
+  comment: '# * Get the URL to a named route.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  mixed  $parameters
+
+    # * @param  bool  $absolute
+
+    # * @return string
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: signedRoute
+  visibility: public
+  parameters:
+  - name: name
+  - name: parameters
+    default: '[]'
+  - name: expiration
+    default: 'null'
+  - name: absolute
+    default: 'true'
+  comment: '# * Create a signed route URL for a named route.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  mixed  $parameters
+
+    # * @param  \DateTimeInterface|\DateInterval|int|null  $expiration
+
+    # * @param  bool  $absolute
+
+    # * @return string
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: temporarySignedRoute
+  visibility: public
+  parameters:
+  - name: name
+  - name: expiration
+  - name: parameters
+    default: '[]'
+  - name: absolute
+    default: 'true'
+  comment: '# * Create a temporary signed route URL for a named route.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $expiration
+
+    # * @param  array  $parameters
+
+    # * @param  bool  $absolute
+
+    # * @return string'
+- name: action
+  visibility: public
+  parameters:
+  - name: action
+  - name: parameters
+    default: '[]'
+  - name: absolute
+    default: 'true'
+  comment: '# * Get the URL to a controller action.
+
+    # *
+
+    # * @param  string|array  $action
+
+    # * @param  mixed  $parameters
+
+    # * @param  bool  $absolute
+
+    # * @return string'
+- name: getRootControllerNamespace
+  visibility: public
+  parameters: []
+  comment: '# * Get the root controller namespace.
+
+    # *
+
+    # * @return string'
+- name: setRootControllerNamespace
+  visibility: public
+  parameters:
+  - name: rootNamespace
+  comment: '# * Set the root controller namespace.
+
+    # *
+
+    # * @param  string  $rootNamespace
+
+    # * @return $this'
+traits: []
+interfaces: []

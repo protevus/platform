@@ -1,0 +1,23 @@
+name: FilterBoolTestTrait
+class_comment: null
+dependencies:
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+properties: []
+methods:
+- name: testObjectWithBoolArguments
+  visibility: public
+  parameters:
+  - name: expectedValue
+  - name: parameterValue
+  comment: "# * Test AbstractNormalizer::FILTER_BOOL.\n# */\n# trait FilterBoolTestTrait\n\
+    # {\n# abstract protected function getNormalizerForFilterBool(): DenormalizerInterface;\n\
+    # \n# /**\n# * @dataProvider provideObjectWithBoolArguments"
+- name: provideObjectWithBoolArguments
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+interfaces: []

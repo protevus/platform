@@ -1,0 +1,11 @@
+name: CustomUlid
+class_comment: null
+dependencies:
+- name: Ulid
+  type: class
+  source: Symfony\Component\Uid\Ulid
+properties: []
+methods: []
+traits:
+- Symfony\Component\Uid\Ulid
+interfaces: []

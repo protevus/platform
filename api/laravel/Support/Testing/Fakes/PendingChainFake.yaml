@@ -1,0 +1,44 @@
+name: PendingChainFake
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: PendingChain
+  type: class
+  source: Illuminate\Foundation\Bus\PendingChain
+- name: CallQueuedClosure
+  type: class
+  source: Illuminate\Queue\CallQueuedClosure
+properties:
+- name: bus
+  visibility: protected
+  comment: '# * The fake bus instance.
+
+    # *
+
+    # * @var \Illuminate\Support\Testing\Fakes\BusFake'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: bus
+  - name: job
+  - name: chain
+  comment: "# * The fake bus instance.\n# *\n# * @var \\Illuminate\\Support\\Testing\\\
+    Fakes\\BusFake\n# */\n# protected $bus;\n# \n# /**\n# * Create a new pending chain\
+    \ instance.\n# *\n# * @param  \\Illuminate\\Support\\Testing\\Fakes\\BusFake \
+    \ $bus\n# * @param  mixed  $job\n# * @param  array  $chain\n# * @return void"
+- name: dispatch
+  visibility: public
+  parameters: []
+  comment: '# * Dispatch the job with the given arguments.
+
+    # *
+
+    # * @return \Illuminate\Foundation\Bus\PendingDispatch'
+traits:
+- Closure
+- Illuminate\Foundation\Bus\PendingChain
+- Illuminate\Queue\CallQueuedClosure
+interfaces: []

@@ -1,0 +1,50 @@
+name: ServerParamsTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ServerParams
+  type: class
+  source: Symfony\Component\Form\Util\ServerParams
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+properties: []
+methods:
+- name: testGetContentLengthFromSuperglobals
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetContentLengthFromRequest
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetPostMaxSize
+  visibility: public
+  parameters:
+  - name: size
+  - name: bytes
+  comment: '# @dataProvider getGetPostMaxSizeTestData'
+- name: getGetPostMaxSizeTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: size
+  comment: null
+- name: getNormalizedIniPostMaxSize
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\Util\ServerParams
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestStack
+interfaces: []

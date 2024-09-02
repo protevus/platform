@@ -1,0 +1,773 @@
+name: BladeCompiler
+class_comment: null
+dependencies:
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: Htmlable
+  type: class
+  source: Illuminate\Contracts\Support\Htmlable
+- name: ViewFactory
+  type: class
+  source: Illuminate\Contracts\View\Factory
+- name: View
+  type: class
+  source: Illuminate\Contracts\View\View
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: ReflectsClosures
+  type: class
+  source: Illuminate\Support\Traits\ReflectsClosures
+- name: Component
+  type: class
+  source: Illuminate\View\Component
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties:
+- name: extensions
+  visibility: protected
+  comment: '# * All of the registered extensions.
+
+    # *
+
+    # * @var array'
+- name: customDirectives
+  visibility: protected
+  comment: '# * All custom "directive" handlers.
+
+    # *
+
+    # * @var array'
+- name: conditions
+  visibility: protected
+  comment: '# * All custom "condition" handlers.
+
+    # *
+
+    # * @var array'
+- name: prepareStringsForCompilationUsing
+  visibility: protected
+  comment: '# * The registered string preparation callbacks.
+
+    # *
+
+    # * @var array'
+- name: precompilers
+  visibility: protected
+  comment: '# * All of the registered precompilers.
+
+    # *
+
+    # * @var array'
+- name: path
+  visibility: protected
+  comment: '# * The file currently being compiled.
+
+    # *
+
+    # * @var string'
+- name: compilers
+  visibility: protected
+  comment: '# * All of the available compiler functions.
+
+    # *
+
+    # * @var string[]'
+- name: rawTags
+  visibility: protected
+  comment: '# * Array of opening and closing tags for raw echos.
+
+    # *
+
+    # * @var string[]'
+- name: contentTags
+  visibility: protected
+  comment: '# * Array of opening and closing tags for regular echos.
+
+    # *
+
+    # * @var string[]'
+- name: escapedTags
+  visibility: protected
+  comment: '# * Array of opening and closing tags for escaped echos.
+
+    # *
+
+    # * @var string[]'
+- name: echoFormat
+  visibility: protected
+  comment: '# * The "regular" / legacy echo string format.
+
+    # *
+
+    # * @var string'
+- name: footer
+  visibility: protected
+  comment: '# * Array of footer lines to be added to the template.
+
+    # *
+
+    # * @var array'
+- name: rawBlocks
+  visibility: protected
+  comment: '# * Array to temporarily store the raw blocks found in the template.
+
+    # *
+
+    # * @var array'
+- name: anonymousComponentPaths
+  visibility: protected
+  comment: '# * The array of anonymous component paths to search for components in.
+
+    # *
+
+    # * @var array'
+- name: anonymousComponentNamespaces
+  visibility: protected
+  comment: '# * The array of anonymous component namespaces to autoload from.
+
+    # *
+
+    # * @var array'
+- name: classComponentAliases
+  visibility: protected
+  comment: '# * The array of class component aliases and their class names.
+
+    # *
+
+    # * @var array'
+- name: classComponentNamespaces
+  visibility: protected
+  comment: '# * The array of class component namespaces to autoload from.
+
+    # *
+
+    # * @var array'
+- name: compilesComponentTags
+  visibility: protected
+  comment: '# * Indicates if component tags should be compiled.
+
+    # *
+
+    # * @var bool'
+- name: template
+  visibility: protected
+  comment: null
+methods:
+- name: compile
+  visibility: public
+  parameters:
+  - name: path
+    default: 'null'
+  comment: "# * All of the registered extensions.\n# *\n# * @var array\n# */\n# protected\
+    \ $extensions = [];\n# \n# /**\n# * All custom \"directive\" handlers.\n# *\n\
+    # * @var array\n# */\n# protected $customDirectives = [];\n# \n# /**\n# * All\
+    \ custom \"condition\" handlers.\n# *\n# * @var array\n# */\n# protected $conditions\
+    \ = [];\n# \n# /**\n# * The registered string preparation callbacks.\n# *\n# *\
+    \ @var array\n# */\n# protected $prepareStringsForCompilationUsing = [];\n# \n\
+    # /**\n# * All of the registered precompilers.\n# *\n# * @var array\n# */\n# protected\
+    \ $precompilers = [];\n# \n# /**\n# * The file currently being compiled.\n# *\n\
+    # * @var string\n# */\n# protected $path;\n# \n# /**\n# * All of the available\
+    \ compiler functions.\n# *\n# * @var string[]\n# */\n# protected $compilers =\
+    \ [\n# // 'Comments',\n# 'Extensions',\n# 'Statements',\n# 'Echos',\n# ];\n# \n\
+    # /**\n# * Array of opening and closing tags for raw echos.\n# *\n# * @var string[]\n\
+    # */\n# protected $rawTags = ['{!!', '!!}'];\n# \n# /**\n# * Array of opening\
+    \ and closing tags for regular echos.\n# *\n# * @var string[]\n# */\n# protected\
+    \ $contentTags = ['{{', '}}'];\n# \n# /**\n# * Array of opening and closing tags\
+    \ for escaped echos.\n# *\n# * @var string[]\n# */\n# protected $escapedTags =\
+    \ ['{{{', '}}}'];\n# \n# /**\n# * The \"regular\" / legacy echo string format.\n\
+    # *\n# * @var string\n# */\n# protected $echoFormat = 'e(%s)';\n# \n# /**\n# *\
+    \ Array of footer lines to be added to the template.\n# *\n# * @var array\n# */\n\
+    # protected $footer = [];\n# \n# /**\n# * Array to temporarily store the raw blocks\
+    \ found in the template.\n# *\n# * @var array\n# */\n# protected $rawBlocks =\
+    \ [];\n# \n# /**\n# * The array of anonymous component paths to search for components\
+    \ in.\n# *\n# * @var array\n# */\n# protected $anonymousComponentPaths = [];\n\
+    # \n# /**\n# * The array of anonymous component namespaces to autoload from.\n\
+    # *\n# * @var array\n# */\n# protected $anonymousComponentNamespaces = [];\n#\
+    \ \n# /**\n# * The array of class component aliases and their class names.\n#\
+    \ *\n# * @var array\n# */\n# protected $classComponentAliases = [];\n# \n# /**\n\
+    # * The array of class component namespaces to autoload from.\n# *\n# * @var array\n\
+    # */\n# protected $classComponentNamespaces = [];\n# \n# /**\n# * Indicates if\
+    \ component tags should be compiled.\n# *\n# * @var bool\n# */\n# protected $compilesComponentTags\
+    \ = true;\n# \n# /**\n# * Compile the view at the given path.\n# *\n# * @param\
+    \  string|null  $path\n# * @return void"
+- name: appendFilePath
+  visibility: protected
+  parameters:
+  - name: contents
+  comment: '# * Append the file path to the compiled string.
+
+    # *
+
+    # * @param  string  $contents
+
+    # * @return string'
+- name: getOpenAndClosingPhpTokens
+  visibility: protected
+  parameters:
+  - name: contents
+  comment: "# PATH {$this->getPath()} ENDPATH**/ ?>\";\n# }\n# \n# /**\n# * Get the\
+    \ open and closing PHP tag tokens from the given string.\n# *\n# * @param  string\
+    \  $contents\n# * @return \\Illuminate\\Support\\Collection"
+- name: getPath
+  visibility: public
+  parameters: []
+  comment: '# * Get the path currently being compiled.
+
+    # *
+
+    # * @return string'
+- name: setPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Set the path currently being compiled.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return void'
+- name: compileString
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Compile the given Blade template contents.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: render
+  visibility: public
+  parameters:
+  - name: string
+  - name: data
+    default: '[]'
+  - name: deleteCachedView
+    default: 'false'
+  comment: '# * Evaluate and render a Blade string to HTML.
+
+    # *
+
+    # * @param  string  $string
+
+    # * @param  array  $data
+
+    # * @param  bool  $deleteCachedView
+
+    # * @return string'
+- name: __construct
+  visibility: public
+  parameters:
+  - name: template
+  comment: null
+- name: render
+  visibility: public
+  parameters: []
+  comment: null
+- name: renderComponent
+  visibility: public
+  parameters:
+  - name: component
+  comment: '# * Render a component instance to HTML.
+
+    # *
+
+    # * @param  \Illuminate\View\Component  $component
+
+    # * @return string'
+- name: storeUncompiledBlocks
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Store the blocks that do not receive compilation.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: storeVerbatimBlocks
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Store the verbatim blocks and replace them with a temporary placeholder.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: storePhpBlocks
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Store the PHP blocks and replace them with a temporary placeholder.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: storeRawBlock
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Store a raw block and return a unique raw placeholder.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: compileComponentTags
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Compile the component tags.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: restoreRawContent
+  visibility: protected
+  parameters:
+  - name: result
+  comment: '# * Replace the raw placeholders with the original code stored in the
+    raw blocks.
+
+    # *
+
+    # * @param  string  $result
+
+    # * @return string'
+- name: getRawPlaceholder
+  visibility: protected
+  parameters:
+  - name: replace
+  comment: '# * Get a placeholder to temporarily mark the position of raw blocks.
+
+    # *
+
+    # * @param  int|string  $replace
+
+    # * @return string'
+- name: addFooters
+  visibility: protected
+  parameters:
+  - name: result
+  comment: '# * Add the stored footers onto the given content.
+
+    # *
+
+    # * @param  string  $result
+
+    # * @return string'
+- name: parseToken
+  visibility: protected
+  parameters:
+  - name: token
+  comment: '# * Parse the tokens from the template.
+
+    # *
+
+    # * @param  array  $token
+
+    # * @return string'
+- name: compileExtensions
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Execute the user defined extensions.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: compileStatements
+  visibility: protected
+  parameters:
+  - name: template
+  comment: '# * Compile Blade statements that start with "@".
+
+    # *
+
+    # * @param  string  $template
+
+    # * @return string'
+- name: replaceFirstStatement
+  visibility: protected
+  parameters:
+  - name: search
+  - name: replace
+  - name: subject
+  - name: offset
+  comment: '# * Replace the first match for a statement compilation operation.
+
+    # *
+
+    # * @param  string  $search
+
+    # * @param  string  $replace
+
+    # * @param  string  $subject
+
+    # * @param  int  $offset
+
+    # * @return array'
+- name: hasEvenNumberOfParentheses
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Determine if the given expression has the same number of opening and
+    closing parentheses.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return bool'
+- name: compileStatement
+  visibility: protected
+  parameters:
+  - name: match
+  comment: '# * Compile a single Blade @ statement.
+
+    # *
+
+    # * @param  array  $match
+
+    # * @return string'
+- name: callCustomDirective
+  visibility: protected
+  parameters:
+  - name: name
+  - name: value
+  comment: '# * Call the given directive with the given value.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|null  $value
+
+    # * @return string'
+- name: stripParentheses
+  visibility: public
+  parameters:
+  - name: expression
+  comment: '# * Strip the parentheses from the given expression.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: extend
+  visibility: public
+  parameters:
+  - name: compiler
+  comment: '# * Register a custom Blade compiler.
+
+    # *
+
+    # * @param  callable  $compiler
+
+    # * @return void'
+- name: getExtensions
+  visibility: public
+  parameters: []
+  comment: '# * Get the extensions used by the compiler.
+
+    # *
+
+    # * @return array'
+- name: if
+  visibility: public
+  parameters:
+  - name: name
+  - name: callback
+  comment: '# * Register an "if" statement directive.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  callable  $callback
+
+    # * @return void'
+- name: check
+  visibility: public
+  parameters:
+  - name: name
+  - name: '...$parameters'
+  comment: '# * Check the result of a condition.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  mixed  ...$parameters
+
+    # * @return bool'
+- name: component
+  visibility: public
+  parameters:
+  - name: class
+  - name: alias
+    default: 'null'
+  - name: prefix
+    default: ''''''
+  comment: '# * Register a class-based component alias directive.
+
+    # *
+
+    # * @param  string  $class
+
+    # * @param  string|null  $alias
+
+    # * @param  string  $prefix
+
+    # * @return void'
+- name: components
+  visibility: public
+  parameters:
+  - name: components
+  - name: prefix
+    default: ''''''
+  comment: '# * Register an array of class-based components.
+
+    # *
+
+    # * @param  array  $components
+
+    # * @param  string  $prefix
+
+    # * @return void'
+- name: getClassComponentAliases
+  visibility: public
+  parameters: []
+  comment: '# * Get the registered class component aliases.
+
+    # *
+
+    # * @return array'
+- name: anonymousComponentPath
+  visibility: public
+  parameters:
+  - name: path
+  - name: prefix
+    default: 'null'
+  comment: '# * Register a new anonymous component path.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  string|null  $prefix
+
+    # * @return void'
+- name: anonymousComponentNamespace
+  visibility: public
+  parameters:
+  - name: directory
+  - name: prefix
+    default: 'null'
+  comment: '# * Register an anonymous component namespace.
+
+    # *
+
+    # * @param  string  $directory
+
+    # * @param  string|null  $prefix
+
+    # * @return void'
+- name: componentNamespace
+  visibility: public
+  parameters:
+  - name: namespace
+  - name: prefix
+  comment: '# * Register a class-based component namespace.
+
+    # *
+
+    # * @param  string  $namespace
+
+    # * @param  string  $prefix
+
+    # * @return void'
+- name: getAnonymousComponentPaths
+  visibility: public
+  parameters: []
+  comment: '# * Get the registered anonymous component paths.
+
+    # *
+
+    # * @return array'
+- name: getAnonymousComponentNamespaces
+  visibility: public
+  parameters: []
+  comment: '# * Get the registered anonymous component namespaces.
+
+    # *
+
+    # * @return array'
+- name: getClassComponentNamespaces
+  visibility: public
+  parameters: []
+  comment: '# * Get the registered class component namespaces.
+
+    # *
+
+    # * @return array'
+- name: aliasComponent
+  visibility: public
+  parameters:
+  - name: path
+  - name: alias
+    default: 'null'
+  comment: '# * Register a component alias directive.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  string|null  $alias
+
+    # * @return void'
+- name: include
+  visibility: public
+  parameters:
+  - name: path
+  - name: alias
+    default: 'null'
+  comment: '# * Register an include alias directive.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  string|null  $alias
+
+    # * @return void'
+- name: aliasInclude
+  visibility: public
+  parameters:
+  - name: path
+  - name: alias
+    default: 'null'
+  comment: '# * Register an include alias directive.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  string|null  $alias
+
+    # * @return void'
+- name: directive
+  visibility: public
+  parameters:
+  - name: name
+  - name: handler
+  comment: '# * Register a handler for custom directives.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  callable  $handler
+
+    # * @return void
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: getCustomDirectives
+  visibility: public
+  parameters: []
+  comment: '# * Get the list of custom directives.
+
+    # *
+
+    # * @return array'
+- name: prepareStringsForCompilationUsing
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Indicate that the following callable should be used to prepare strings
+    for compilation.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return $this'
+- name: precompiler
+  visibility: public
+  parameters:
+  - name: precompiler
+  comment: '# * Register a new precompiler.
+
+    # *
+
+    # * @param  callable  $precompiler
+
+    # * @return void'
+- name: setEchoFormat
+  visibility: public
+  parameters:
+  - name: format
+  comment: '# * Set the echo format to be used by the compiler.
+
+    # *
+
+    # * @param  string  $format
+
+    # * @return void'
+- name: withDoubleEncoding
+  visibility: public
+  parameters: []
+  comment: '# * Set the "echo" format to double encode entities.
+
+    # *
+
+    # * @return void'
+- name: withoutDoubleEncoding
+  visibility: public
+  parameters: []
+  comment: '# * Set the "echo" format to not double encode entities.
+
+    # *
+
+    # * @return void'
+- name: withoutComponentTags
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that component tags should not be compiled.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Container\Container
+- Illuminate\Contracts\Support\Htmlable
+- Illuminate\Contracts\View\View
+- Illuminate\Support\Arr
+- Illuminate\Support\Str
+- Illuminate\Support\Traits\ReflectsClosures
+- Illuminate\View\Component
+- InvalidArgumentException
+- Concerns\CompilesAuthorizations
+interfaces:
+- CompilerInterface

@@ -1,0 +1,13 @@
+name: TestPublicPropertyGetterOnObject
+class_comment: null
+dependencies: []
+properties:
+- name: a
+  visibility: public
+  comment: null
+- name: b
+  visibility: private
+  comment: null
+methods: []
+traits: []
+interfaces: []

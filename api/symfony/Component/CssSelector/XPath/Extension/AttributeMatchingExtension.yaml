@@ -1,0 +1,82 @@
+name: AttributeMatchingExtension
+class_comment: "# * XPath expression translator attribute extension.\n# *\n# * This\
+  \ component is a port of the Python cssselect library,\n# * which is copyright Ian\
+  \ Bicking, @see https://github.com/SimonSapin/cssselect.\n# *\n# * @author Jean-Fran\xE7\
+  ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n# * @internal"
+dependencies:
+- name: Translator
+  type: class
+  source: Symfony\Component\CssSelector\XPath\Translator
+- name: XPathExpr
+  type: class
+  source: Symfony\Component\CssSelector\XPath\XPathExpr
+properties: []
+methods:
+- name: getAttributeMatchingTranslators
+  visibility: public
+  parameters: []
+  comment: null
+- name: translateExists
+  visibility: public
+  parameters:
+  - name: xpath
+  - name: attribute
+  - name: value
+  comment: null
+- name: translateEquals
+  visibility: public
+  parameters:
+  - name: xpath
+  - name: attribute
+  - name: value
+  comment: null
+- name: translateIncludes
+  visibility: public
+  parameters:
+  - name: xpath
+  - name: attribute
+  - name: value
+  comment: null
+- name: translateDashMatch
+  visibility: public
+  parameters:
+  - name: xpath
+  - name: attribute
+  - name: value
+  comment: null
+- name: translatePrefixMatch
+  visibility: public
+  parameters:
+  - name: xpath
+  - name: attribute
+  - name: value
+  comment: null
+- name: translateSuffixMatch
+  visibility: public
+  parameters:
+  - name: xpath
+  - name: attribute
+  - name: value
+  comment: null
+- name: translateSubstringMatch
+  visibility: public
+  parameters:
+  - name: xpath
+  - name: attribute
+  - name: value
+  comment: null
+- name: translateDifferent
+  visibility: public
+  parameters:
+  - name: xpath
+  - name: attribute
+  - name: value
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\CssSelector\XPath\Translator
+- Symfony\Component\CssSelector\XPath\XPathExpr
+interfaces: []

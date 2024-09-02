@@ -1,0 +1,44 @@
+name: TraceableArgumentResolverTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: ArgumentResolverInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface
+- name: TraceableArgumentResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\TraceableArgumentResolver
+- name: Stopwatch
+  type: class
+  source: Symfony\Component\Stopwatch\Stopwatch
+- name: StopwatchEvent
+  type: class
+  source: Symfony\Component\Stopwatch\StopwatchEvent
+properties: []
+methods:
+- name: testStopwatchEventIsStoppedWhenResolverThrows
+  visibility: public
+  parameters: []
+  comment: null
+- name: getArguments
+  visibility: public
+  parameters:
+  - name: request
+  - name: controller
+  - name: reflector
+    default: 'null'
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\Controller\ArgumentResolverInterface
+- Symfony\Component\HttpKernel\Controller\TraceableArgumentResolver
+- Symfony\Component\Stopwatch\Stopwatch
+- Symfony\Component\Stopwatch\StopwatchEvent
+interfaces:
+- ArgumentResolverInterface

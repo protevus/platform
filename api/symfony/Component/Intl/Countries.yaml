@@ -1,0 +1,171 @@
+name: Countries
+class_comment: null
+dependencies:
+- name: MissingResourceException
+  type: class
+  source: Symfony\Component\Intl\Exception\MissingResourceException
+properties: []
+methods:
+- name: getCountryCodes
+  visibility: public
+  parameters: []
+  comment: '# * Gives access to region-related ICU data.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # * @author Roland Franssen <franssen.roland@gmail.com>
+
+    # */
+
+    # final class Countries extends ResourceBundle
+
+    # {
+
+    # /**
+
+    # * Returns all available countries.
+
+    # *
+
+    # * Countries are returned as uppercase ISO 3166 two-letter country codes.
+
+    # *
+
+    # * A full table of ISO 3166 country codes can be found here:
+
+    # * https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+
+    # *
+
+    # * This list only contains "officially assigned ISO 3166-1 alpha-2" country codes.
+
+    # *
+
+    # * @return string[]'
+- name: getAlpha3Codes
+  visibility: public
+  parameters: []
+  comment: '# * Returns all available countries (3 letters).
+
+    # *
+
+    # * Countries are returned as uppercase ISO 3166 three-letter country codes.
+
+    # *
+
+    # * This list only contains "officially assigned ISO 3166-1 alpha-3" country codes.
+
+    # *
+
+    # * @return string[]'
+- name: getNumericCodes
+  visibility: public
+  parameters: []
+  comment: '# * Returns all available numeric country codes (3 digits).
+
+    # *
+
+    # * Countries are returned as ISO 3166 numeric three-digit country codes.
+
+    # *
+
+    # * This list only contains "officially assigned ISO 3166-1 numeric" country codes.
+
+    # *
+
+    # * Returns an array with Alpha2 country codes as keys, and numeric codes as values.
+
+    # *
+
+    # * @return array<string, string>'
+- name: getAlpha3Code
+  visibility: public
+  parameters:
+  - name: alpha2Code
+  comment: null
+- name: getAlpha2Code
+  visibility: public
+  parameters:
+  - name: alpha3Code
+  comment: null
+- name: getNumericCode
+  visibility: public
+  parameters:
+  - name: alpha2Code
+  comment: null
+- name: getAlpha2FromNumeric
+  visibility: public
+  parameters:
+  - name: numericCode
+  comment: null
+- name: exists
+  visibility: public
+  parameters:
+  - name: alpha2Code
+  comment: null
+- name: alpha3CodeExists
+  visibility: public
+  parameters:
+  - name: alpha3Code
+  comment: null
+- name: numericCodeExists
+  visibility: public
+  parameters:
+  - name: numericCode
+  comment: null
+- name: getName
+  visibility: public
+  parameters:
+  - name: country
+  - name: displayLocale
+    default: 'null'
+  comment: '# * Gets the country name from its alpha2 code.
+
+    # *
+
+    # * @throws MissingResourceException if the country code does not exist'
+- name: getAlpha3Name
+  visibility: public
+  parameters:
+  - name: alpha3Code
+  - name: displayLocale
+    default: 'null'
+  comment: '# * Gets the country name from its alpha3 code.
+
+    # *
+
+    # * @throws MissingResourceException if the country code does not exist'
+- name: getNames
+  visibility: public
+  parameters:
+  - name: displayLocale
+    default: 'null'
+  comment: '# * Gets the list of country names indexed with alpha2 codes as keys.
+
+    # *
+
+    # * @return array<string, string>'
+- name: getAlpha3Names
+  visibility: public
+  parameters:
+  - name: displayLocale
+    default: 'null'
+  comment: '# * Gets the list of country names indexed with alpha3 codes as keys.
+
+    # *
+
+    # * Same as method getNames, but with alpha3 codes instead of alpha2 codes as
+    keys.
+
+    # *
+
+    # * @return array<string, string>'
+- name: getPath
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Intl\Exception\MissingResourceException
+interfaces: []

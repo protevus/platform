@@ -1,0 +1,23 @@
+name: TaggedService3
+class_comment: null
+dependencies:
+- name: CustomAutoconfiguration
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\Attribute\CustomAutoconfiguration
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: doSomething
+  visibility: public
+  parameters:
+  - name: a
+  - name: b
+  - name: c
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Tests\Fixtures\Attribute\CustomAutoconfiguration
+interfaces: []

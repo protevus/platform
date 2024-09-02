@@ -1,0 +1,51 @@
+name: LockableTraitTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+- name: LockFactory
+  type: class
+  source: Symfony\Component\Lock\LockFactory
+- name: SharedLockInterface
+  type: class
+  source: Symfony\Component\Lock\SharedLockInterface
+- name: FlockStore
+  type: class
+  source: Symfony\Component\Lock\Store\FlockStore
+- name: SemaphoreStore
+  type: class
+  source: Symfony\Component\Lock\Store\SemaphoreStore
+properties: []
+methods:
+- name: setUpBeforeClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLockIsReleased
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLockReturnsFalseIfAlreadyLockedByAnotherCommand
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMultipleLockCallsThrowLogicException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCustomLockFactoryIsUsed
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Tester\CommandTester
+- Symfony\Component\Lock\LockFactory
+- Symfony\Component\Lock\SharedLockInterface
+- Symfony\Component\Lock\Store\FlockStore
+- Symfony\Component\Lock\Store\SemaphoreStore
+interfaces: []

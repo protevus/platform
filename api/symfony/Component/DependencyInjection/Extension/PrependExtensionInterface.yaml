@@ -1,0 +1,20 @@
+name: PrependExtensionInterface
+class_comment: null
+dependencies:
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+properties: []
+methods:
+- name: prepend
+  visibility: public
+  parameters:
+  - name: container
+  comment: '# * Allow an extension to prepend the extension configurations.
+
+    # *
+
+    # * @return void'
+traits:
+- Symfony\Component\DependencyInjection\ContainerBuilder
+interfaces: []

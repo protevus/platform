@@ -1,0 +1,19 @@
+name: MinifyTest
+class_comment: '# * Make sure we can minify content in toolbar.
+
+  # *
+
+  # * @author Tobias Nyholm <tobias.nyholm@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+properties: []
+methods:
+- name: testNoSingleLineComments
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+interfaces: []

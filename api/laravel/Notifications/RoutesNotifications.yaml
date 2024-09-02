@@ -1,0 +1,56 @@
+name: RoutesNotifications
+class_comment: null
+dependencies:
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Notifications\Dispatcher
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+properties: []
+methods:
+- name: notify
+  visibility: public
+  parameters:
+  - name: instance
+  comment: '# * Send the given notification.
+
+    # *
+
+    # * @param  mixed  $instance
+
+    # * @return void'
+- name: notifyNow
+  visibility: public
+  parameters:
+  - name: instance
+  - name: channels
+    default: 'null'
+  comment: '# * Send the given notification immediately.
+
+    # *
+
+    # * @param  mixed  $instance
+
+    # * @param  array|null  $channels
+
+    # * @return void'
+- name: routeNotificationFor
+  visibility: public
+  parameters:
+  - name: driver
+  - name: notification
+    default: 'null'
+  comment: '# * Get the notification routing information for the given driver.
+
+    # *
+
+    # * @param  string  $driver
+
+    # * @param  \Illuminate\Notifications\Notification|null  $notification
+
+    # * @return mixed'
+traits:
+- Illuminate\Contracts\Notifications\Dispatcher
+- Illuminate\Support\Str
+interfaces: []

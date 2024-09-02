@@ -1,0 +1,26 @@
+name: TaggedLocatorConsumerWithDefaultIndexMethodAndWithDefaultPriorityMethod
+class_comment: null
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: AutowireLocator
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\AutowireLocator
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: '#[AutowireLocator(''foo_bar'''
+  - name: '''getDefaultFooName'''
+  - name: '''getPriority'''
+  comment: null
+- name: getLocator
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Component\DependencyInjection\Attribute\AutowireLocator
+interfaces: []

@@ -1,0 +1,143 @@
+name: MapDenormalizationTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: PhpDocExtractor
+  type: class
+  source: Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Serializer\Exception\InvalidArgumentException
+- name: NotNormalizableValueException
+  type: class
+  source: Symfony\Component\Serializer\Exception\NotNormalizableValueException
+- name: ClassDiscriminatorFromClassMetadata
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassDiscriminatorFromClassMetadata
+- name: ClassDiscriminatorMapping
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassDiscriminatorMapping
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassMetadata
+- name: ClassMetadataInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassMetadataInterface
+- name: ClassMetadataFactory
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory
+- name: ClassMetadataFactoryInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+- name: AttributeLoader
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Loader\AttributeLoader
+- name: ArrayDenormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ArrayDenormalizer
+- name: ObjectNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+- name: Serializer
+  type: class
+  source: Symfony\Component\Serializer\Serializer
+properties:
+- name: value
+  visibility: public
+  comment: null
+- name: object
+  visibility: public
+  comment: '# * @var DummyValue'
+- name: nullObject
+  visibility: public
+  comment: '# * @var DummyValue'
+- name: object
+  visibility: public
+  comment: '# * @var DummyValue|null'
+- name: nullObject
+  visibility: public
+  comment: '# * @var DummyValue|null'
+- name: object
+  visibility: public
+  comment: '# * @var AbstractDummyValue|null'
+- name: nullObject
+  visibility: public
+  comment: '# * @var AbstractDummyValue|null'
+- name: map
+  visibility: public
+  comment: '# * @var array<string,DummyValue|null>'
+- name: map
+  visibility: public
+  comment: '# * @var array<string,DummyValue>'
+- name: map
+  visibility: public
+  comment: '# * @var array<string,AbstractDummyValue|null>'
+- name: map
+  visibility: public
+  comment: '# * @var array<string,AbstractDummyValue>'
+methods:
+- name: testMapOfStringToNullableObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMapOfStringToAbstractNullableObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMapOfStringToObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMapOfStringToAbstractObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMapOfStringToAbstractObjectMissingTypeAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNullableObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotNullableObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNullableAbstractObject
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSerializer
+  visibility: private
+  parameters: []
+  comment: null
+- name: getMetadataFor
+  visibility: public
+  parameters:
+  - name: value
+  comment: null
+- name: hasMetadataFor
+  visibility: public
+  parameters:
+  - name: value
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor
+- Symfony\Component\Serializer\Exception\InvalidArgumentException
+- Symfony\Component\Serializer\Exception\NotNormalizableValueException
+- Symfony\Component\Serializer\Mapping\ClassDiscriminatorFromClassMetadata
+- Symfony\Component\Serializer\Mapping\ClassDiscriminatorMapping
+- Symfony\Component\Serializer\Mapping\ClassMetadata
+- Symfony\Component\Serializer\Mapping\ClassMetadataInterface
+- Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory
+- Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+- Symfony\Component\Serializer\Mapping\Loader\AttributeLoader
+- Symfony\Component\Serializer\Normalizer\ArrayDenormalizer
+- Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+- Symfony\Component\Serializer\Serializer
+interfaces:
+- ClassMetadataFactoryInterface

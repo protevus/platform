@@ -1,0 +1,28 @@
+name: AbstractExtension
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getNodeTranslators
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCombinationTranslators
+  visibility: public
+  parameters: []
+  comment: null
+- name: getFunctionTranslators
+  visibility: public
+  parameters: []
+  comment: null
+- name: getPseudoClassTranslators
+  visibility: public
+  parameters: []
+  comment: null
+- name: getAttributeMatchingTranslators
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces:
+- ExtensionInterface

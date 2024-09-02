@@ -1,0 +1,33 @@
+name: JitterTrigger
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: trigger
+  - name: maxSeconds
+    default: '60'
+  comment: '# * @author Kevin Bond <kevinbond@gmail.com>
+
+    # */
+
+    # final class JitterTrigger extends AbstractDecoratedTrigger
+
+    # {
+
+    # /**
+
+    # * @param positive-int $maxSeconds'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNextRunDate
+  visibility: public
+  parameters:
+  - name: run
+  comment: null
+traits: []
+interfaces: []

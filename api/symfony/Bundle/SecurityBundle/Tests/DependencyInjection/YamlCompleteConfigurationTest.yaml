@@ -1,0 +1,28 @@
+name: YamlCompleteConfigurationTest
+class_comment: null
+dependencies:
+- name: FileLocator
+  type: class
+  source: Symfony\Component\Config\FileLocator
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: YamlFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\YamlFileLoader
+properties: []
+methods:
+- name: getLoader
+  visibility: protected
+  parameters:
+  - name: container
+  comment: null
+- name: getFileExtension
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Config\FileLocator
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Loader\YamlFileLoader
+interfaces: []

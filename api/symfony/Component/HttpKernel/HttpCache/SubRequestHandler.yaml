@@ -1,0 +1,35 @@
+name: SubRequestHandler
+class_comment: '# * @author Nicolas Grekas <p@tchwork.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: IpUtils
+  type: class
+  source: Symfony\Component\HttpFoundation\IpUtils
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+properties: []
+methods:
+- name: handle
+  visibility: public
+  parameters:
+  - name: kernel
+  - name: request
+  - name: type
+  - name: catch
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\IpUtils
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\HttpKernelInterface
+interfaces: []

@@ -1,0 +1,92 @@
+name: StatefulGuard
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: attempt
+  visibility: public
+  parameters:
+  - name: credentials
+    default: '[]'
+  - name: remember
+    default: 'false'
+  comment: '# * Attempt to authenticate a user using the given credentials.
+
+    # *
+
+    # * @param  array  $credentials
+
+    # * @param  bool  $remember
+
+    # * @return bool'
+- name: once
+  visibility: public
+  parameters:
+  - name: credentials
+    default: '[]'
+  comment: '# * Log a user into the application without sessions or cookies.
+
+    # *
+
+    # * @param  array  $credentials
+
+    # * @return bool'
+- name: login
+  visibility: public
+  parameters:
+  - name: user
+  - name: remember
+    default: 'false'
+  comment: '# * Log a user into the application.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+
+    # * @param  bool  $remember
+
+    # * @return void'
+- name: loginUsingId
+  visibility: public
+  parameters:
+  - name: id
+  - name: remember
+    default: 'false'
+  comment: '# * Log the given user ID into the application.
+
+    # *
+
+    # * @param  mixed  $id
+
+    # * @param  bool  $remember
+
+    # * @return \Illuminate\Contracts\Auth\Authenticatable|false'
+- name: onceUsingId
+  visibility: public
+  parameters:
+  - name: id
+  comment: '# * Log the given user ID into the application without sessions or cookies.
+
+    # *
+
+    # * @param  mixed  $id
+
+    # * @return \Illuminate\Contracts\Auth\Authenticatable|false'
+- name: viaRemember
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the user was authenticated via "remember me" cookie.
+
+    # *
+
+    # * @return bool'
+- name: logout
+  visibility: public
+  parameters: []
+  comment: '# * Log the user out of the application.
+
+    # *
+
+    # * @return void'
+traits: []
+interfaces: []

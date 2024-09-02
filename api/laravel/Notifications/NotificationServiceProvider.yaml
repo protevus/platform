@@ -1,0 +1,33 @@
+name: NotificationServiceProvider
+class_comment: null
+dependencies:
+- name: DispatcherContract
+  type: class
+  source: Illuminate\Contracts\Notifications\Dispatcher
+- name: FactoryContract
+  type: class
+  source: Illuminate\Contracts\Notifications\Factory
+- name: ServiceProvider
+  type: class
+  source: Illuminate\Support\ServiceProvider
+properties: []
+methods:
+- name: boot
+  visibility: public
+  parameters: []
+  comment: '# * Boot the application services.
+
+    # *
+
+    # * @return void'
+- name: register
+  visibility: public
+  parameters: []
+  comment: '# * Register the service provider.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Support\ServiceProvider
+interfaces: []

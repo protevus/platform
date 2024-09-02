@@ -1,0 +1,25 @@
+name: EventExtension
+class_comment: null
+dependencies:
+- name: TestSubscriber
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Tests\Functional\Bundle\EventBundle\EventSubscriber\TestSubscriber
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Extension
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\Extension
+properties: []
+methods:
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: container
+  comment: null
+traits:
+- Symfony\Bundle\SecurityBundle\Tests\Functional\Bundle\EventBundle\EventSubscriber\TestSubscriber
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Extension\Extension
+interfaces: []

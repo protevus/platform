@@ -1,0 +1,36 @@
+name: SiblingHolder
+class_comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>"
+dependencies: []
+properties:
+- name: sibling0
+  visibility: private
+  comment: null
+- name: sibling1
+  visibility: private
+  comment: null
+- name: sibling2
+  visibility: private
+  comment: null
+methods:
+- name: __construct
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSibling0
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSibling1
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSibling2
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCoopTilleuls
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

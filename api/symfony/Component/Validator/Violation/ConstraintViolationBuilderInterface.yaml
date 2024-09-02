@@ -1,0 +1,164 @@
+name: ConstraintViolationBuilderInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: atPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Builds {@link \Symfony\Component\Validator\ConstraintViolationInterface}
+
+    # * objects.
+
+    # *
+
+    # * Use the various methods on this interface to configure the built violation.
+
+    # * Finally, call {@link addViolation()} to add the violation to the current
+
+    # * execution context.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # interface ConstraintViolationBuilderInterface
+
+    # {
+
+    # /**
+
+    # * Stores the property path at which the violation should be generated.
+
+    # *
+
+    # * The passed path will be appended to the current property path of the
+
+    # * execution context.
+
+    # *
+
+    # * @param string $path The property path
+
+    # *
+
+    # * @return $this'
+- name: setParameter
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Sets a parameter to be inserted into the violation message.
+
+    # *
+
+    # * @param string $key   The name of the parameter
+
+    # * @param string $value The value to be inserted in the parameter''s place
+
+    # *
+
+    # * @return $this'
+- name: setParameters
+  visibility: public
+  parameters:
+  - name: parameters
+  comment: '# * Sets all parameters to be inserted into the violation message.
+
+    # *
+
+    # * @param array $parameters An array with the parameter names as keys and
+
+    # *                          the values to be inserted in their place as
+
+    # *                          values
+
+    # *
+
+    # * @return $this'
+- name: disableTranslation
+  visibility: public
+  parameters: []
+  comment: '# * @return $this'
+- name: setTranslationDomain
+  visibility: public
+  parameters:
+  - name: translationDomain
+  comment: '# * Sets the translation domain which should be used for translating the
+
+    # * violation message.
+
+    # *
+
+    # * @param string $translationDomain The translation domain
+
+    # *
+
+    # * @return $this
+
+    # *
+
+    # * @see \Symfony\Contracts\Translation\TranslatorInterface'
+- name: setInvalidValue
+  visibility: public
+  parameters:
+  - name: invalidValue
+  comment: '# * Sets the invalid value that caused this violation.
+
+    # *
+
+    # * @return $this'
+- name: setPlural
+  visibility: public
+  parameters:
+  - name: number
+  comment: '# * Sets the number which determines how the plural form of the violation
+
+    # * message is chosen when it is translated.
+
+    # *
+
+    # * @param int $number The number for determining the plural form
+
+    # *
+
+    # * @return $this
+
+    # *
+
+    # * @see \Symfony\Contracts\Translation\TranslatorInterface::trans()'
+- name: setCode
+  visibility: public
+  parameters:
+  - name: code
+  comment: '# * Sets the violation code.
+
+    # *
+
+    # * @param string|null $code The violation code
+
+    # *
+
+    # * @return $this'
+- name: setCause
+  visibility: public
+  parameters:
+  - name: cause
+  comment: '# * Sets the cause of the violation.
+
+    # *
+
+    # * @param mixed $cause The cause of the violation
+
+    # *
+
+    # * @return $this'
+- name: addViolation
+  visibility: public
+  parameters: []
+  comment: '# * Adds the violation to the current execution context.'
+traits: []
+interfaces: []

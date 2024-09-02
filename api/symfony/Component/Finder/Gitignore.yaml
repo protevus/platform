@@ -1,0 +1,32 @@
+name: Gitignore
+class_comment: "# * Gitignore matches against text.\n# *\n# * @author Michael Vo\u0159\
+  \xED\u0161ek <vorismi3@fel.cvut.cz>\n# * @author Ahmed Abdou <mail@ahmd.io>"
+dependencies: []
+properties: []
+methods:
+- name: toRegex
+  visibility: public
+  parameters:
+  - name: gitignoreFileContent
+  comment: "# * Gitignore matches against text.\n# *\n# * @author Michael Vo\u0159\
+    \xED\u0161ek <vorismi3@fel.cvut.cz>\n# * @author Ahmed Abdou <mail@ahmd.io>\n\
+    # */\n# class Gitignore\n# {\n# /**\n# * Returns a regexp which is the equivalent\
+    \ of the gitignore pattern.\n# *\n# * Format specification: https://git-scm.com/docs/gitignore#_pattern_format"
+- name: toRegexMatchingNegatedPatterns
+  visibility: public
+  parameters:
+  - name: gitignoreFileContent
+  comment: null
+- name: buildRegex
+  visibility: private
+  parameters:
+  - name: gitignoreFileContent
+  - name: inverted
+  comment: null
+- name: lineToRegex
+  visibility: private
+  parameters:
+  - name: gitignoreLine
+  comment: null
+traits: []
+interfaces: []

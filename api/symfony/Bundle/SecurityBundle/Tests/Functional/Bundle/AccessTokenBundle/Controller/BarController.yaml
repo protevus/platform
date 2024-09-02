@@ -1,0 +1,15 @@
+name: BarController
+class_comment: null
+dependencies:
+- name: JsonResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\JsonResponse
+properties: []
+methods:
+- name: __invoke
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\JsonResponse
+interfaces: []

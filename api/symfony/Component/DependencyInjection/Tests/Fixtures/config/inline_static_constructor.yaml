@@ -1,0 +1,15 @@
+name: inline_static_constructor
+class_comment: null
+dependencies:
+- name: PrototypeStaticConstructor
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\StaticConstructor\PrototypeStaticConstructor
+- name: PrototypeStaticConstructorAsArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\StaticConstructor\PrototypeStaticConstructorAsArgument
+properties: []
+methods: []
+traits:
+- Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\StaticConstructor\PrototypeStaticConstructor
+- Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\StaticConstructor\PrototypeStaticConstructorAsArgument
+interfaces: []

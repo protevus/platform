@@ -1,0 +1,27 @@
+name: ZeroComparisonConstraintTrait
+class_comment: null
+dependencies:
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: options
+    default: 'null'
+  - name: message
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  comment: null
+- name: validatedBy
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+interfaces: []

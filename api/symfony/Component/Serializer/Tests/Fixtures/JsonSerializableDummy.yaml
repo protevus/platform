@@ -1,0 +1,12 @@
+name: JsonSerializableDummy
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: jsonSerialize
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces:
+- \JsonSerializable

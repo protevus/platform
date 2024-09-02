@@ -1,0 +1,117 @@
+name: BaseTypeTestCase
+class_comment: null
+dependencies:
+- name: TypeTestCase
+  type: class
+  source: Symfony\Component\Form\Test\TypeTestCase
+- name: VersionAwareTest
+  type: class
+  source: Symfony\Component\Form\Tests\VersionAwareTest
+- name: VersionAwareTest
+  type: class
+  source: VersionAwareTest
+properties: []
+methods:
+- name: testPassDisabledAsOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassIdAndNameToView
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassIdAndNameToViewWithParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassIdAndNameToViewWithGrandParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassTranslationDomainToView
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInheritTranslationDomainFromParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPreferOwnTranslationDomain
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDefaultTranslationDomain
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassLabelTranslationParametersToView
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassAttrTranslationParametersToView
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInheritLabelTranslationParametersFromParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInheritAttrTranslationParametersFromParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPreferOwnLabelTranslationParameters
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPreferOwnAttrTranslationParameters
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDefaultLabelTranslationParameters
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDefaultAttrTranslationParameters
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassLabelToView
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassMultipartFalseToView
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNull
+  visibility: public
+  parameters:
+  - name: expected
+    default: 'null'
+  - name: norm
+    default: 'null'
+  - name: view
+    default: 'null'
+  comment: null
+- name: testSubmitNullUsesDefaultEmptyData
+  visibility: public
+  parameters:
+  - name: emptyData
+    default: '''empty'''
+  - name: expectedData
+    default: 'null'
+  comment: null
+- name: getTestedType
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getTestOptions
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\Test\TypeTestCase
+- Symfony\Component\Form\Tests\VersionAwareTest
+- VersionAwareTest
+interfaces: []

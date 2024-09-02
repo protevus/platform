@@ -1,0 +1,93 @@
+name: DoctrineDbalPostgreSqlStoreTest
+class_comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n# *\n# *\
+  \ @requires extension pdo_pgsql\n# *\n# * @group integration"
+dependencies:
+- name: Configuration
+  type: class
+  source: Doctrine\DBAL\Configuration
+- name: Connection
+  type: class
+  source: Doctrine\DBAL\Connection
+- name: DriverManager
+  type: class
+  source: Doctrine\DBAL\DriverManager
+- name: DBALException
+  type: class
+  source: Doctrine\DBAL\Exception
+- name: DefaultSchemaManagerFactory
+  type: class
+  source: Doctrine\DBAL\Schema\DefaultSchemaManagerFactory
+- name: DsnParser
+  type: class
+  source: Doctrine\DBAL\Tools\DsnParser
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Lock\Exception\InvalidArgumentException
+- name: LockConflictedException
+  type: class
+  source: Symfony\Component\Lock\Exception\LockConflictedException
+- name: Key
+  type: class
+  source: Symfony\Component\Lock\Key
+- name: PersistingStoreInterface
+  type: class
+  source: Symfony\Component\Lock\PersistingStoreInterface
+- name: DoctrineDbalPostgreSqlStore
+  type: class
+  source: Symfony\Component\Lock\Store\DoctrineDbalPostgreSqlStore
+- name: BlockingStoreTestTrait
+  type: class
+  source: BlockingStoreTestTrait
+- name: SharedLockStoreTestTrait
+  type: class
+  source: SharedLockStoreTestTrait
+properties: []
+methods:
+- name: testInvalidDriver
+  visibility: public
+  parameters:
+  - name: connOrDsn
+  comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n# *\n# * @requires\
+    \ extension pdo_pgsql\n# *\n# * @group integration\n# */\n# class DoctrineDbalPostgreSqlStoreTest\
+    \ extends AbstractStoreTestCase\n# {\n# use BlockingStoreTestTrait;\n# use SharedLockStoreTestTrait;\n\
+    # \n# public function createPostgreSqlConnection(): Connection\n# {\n# if (!getenv('POSTGRES_HOST'))\
+    \ {\n# $this->markTestSkipped('Missing POSTGRES_HOST env variable');\n# }\n# \n\
+    # return self::getDbalConnection('pdo-pgsql://postgres:password@'.getenv('POSTGRES_HOST'));\n\
+    # }\n# \n# public function getStore(): PersistingStoreInterface\n# {\n# $conn\
+    \ = $this->createPostgreSqlConnection();\n# \n# return new DoctrineDbalPostgreSqlStore($conn);\n\
+    # }\n# \n# /**\n# * @requires extension pdo_sqlite\n# *\n# * @dataProvider getInvalidDrivers"
+- name: getInvalidDrivers
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSaveAfterConflict
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWaitAndSaveAfterConflictReleasesLockFromInternalStore
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWaitAndSaveReadAfterConflictReleasesLockFromInternalStore
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDbalConnection
+  visibility: private
+  parameters:
+  - name: dsn
+  comment: null
+traits:
+- Doctrine\DBAL\Configuration
+- Doctrine\DBAL\Connection
+- Doctrine\DBAL\DriverManager
+- Doctrine\DBAL\Schema\DefaultSchemaManagerFactory
+- Doctrine\DBAL\Tools\DsnParser
+- Symfony\Component\Lock\Exception\InvalidArgumentException
+- Symfony\Component\Lock\Exception\LockConflictedException
+- Symfony\Component\Lock\Key
+- Symfony\Component\Lock\PersistingStoreInterface
+- Symfony\Component\Lock\Store\DoctrineDbalPostgreSqlStore
+- BlockingStoreTestTrait
+- SharedLockStoreTestTrait
+interfaces: []

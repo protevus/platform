@@ -1,0 +1,32 @@
+name: RouteFileRegistrar
+class_comment: null
+dependencies: []
+properties:
+- name: router
+  visibility: protected
+  comment: '# * The router instance.
+
+    # *
+
+    # * @var \Illuminate\Routing\Router'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: router
+  comment: "# * The router instance.\n# *\n# * @var \\Illuminate\\Routing\\Router\n\
+    # */\n# protected $router;\n# \n# /**\n# * Create a new route file registrar instance.\n\
+    # *\n# * @param  \\Illuminate\\Routing\\Router  $router\n# * @return void"
+- name: register
+  visibility: public
+  parameters:
+  - name: routes
+  comment: '# * Require the given routes file.
+
+    # *
+
+    # * @param  string  $routes
+
+    # * @return void'
+traits: []
+interfaces: []

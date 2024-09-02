@@ -1,0 +1,95 @@
+name: NullQueue
+class_comment: null
+dependencies:
+- name: QueueContract
+  type: class
+  source: Illuminate\Contracts\Queue\Queue
+properties: []
+methods:
+- name: size
+  visibility: public
+  parameters:
+  - name: queue
+    default: 'null'
+  comment: '# * Get the size of the queue.
+
+    # *
+
+    # * @param  string|null  $queue
+
+    # * @return int'
+- name: push
+  visibility: public
+  parameters:
+  - name: job
+  - name: data
+    default: ''''''
+  - name: queue
+    default: 'null'
+  comment: '# * Push a new job onto the queue.
+
+    # *
+
+    # * @param  string  $job
+
+    # * @param  mixed  $data
+
+    # * @param  string|null  $queue
+
+    # * @return mixed'
+- name: pushRaw
+  visibility: public
+  parameters:
+  - name: payload
+  - name: queue
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: '# * Push a raw payload onto the queue.
+
+    # *
+
+    # * @param  string  $payload
+
+    # * @param  string|null  $queue
+
+    # * @param  array  $options
+
+    # * @return mixed'
+- name: later
+  visibility: public
+  parameters:
+  - name: delay
+  - name: job
+  - name: data
+    default: ''''''
+  - name: queue
+    default: 'null'
+  comment: '# * Push a new job onto the queue after (n) seconds.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $delay
+
+    # * @param  string  $job
+
+    # * @param  mixed  $data
+
+    # * @param  string|null  $queue
+
+    # * @return mixed'
+- name: pop
+  visibility: public
+  parameters:
+  - name: queue
+    default: 'null'
+  comment: '# * Pop the next job off of the queue.
+
+    # *
+
+    # * @param  string|null  $queue
+
+    # * @return \Illuminate\Contracts\Queue\Job|null'
+traits: []
+interfaces:
+- QueueContract

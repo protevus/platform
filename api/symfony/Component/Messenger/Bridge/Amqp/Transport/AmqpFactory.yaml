@@ -1,0 +1,27 @@
+name: AmqpFactory
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: createConnection
+  visibility: public
+  parameters:
+  - name: credentials
+  comment: null
+- name: createChannel
+  visibility: public
+  parameters:
+  - name: connection
+  comment: null
+- name: createQueue
+  visibility: public
+  parameters:
+  - name: channel
+  comment: null
+- name: createExchange
+  visibility: public
+  parameters:
+  - name: channel
+  comment: null
+traits: []
+interfaces: []

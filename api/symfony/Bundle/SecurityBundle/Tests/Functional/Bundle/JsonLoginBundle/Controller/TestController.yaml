@@ -1,0 +1,20 @@
+name: TestController
+class_comment: "# * @author K\xE9vin Dunglas <dunglas@gmail.com>"
+dependencies:
+- name: JsonResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\JsonResponse
+- name: UserInterface
+  type: class
+  source: Symfony\Component\Security\Core\User\UserInterface
+properties: []
+methods:
+- name: loginCheckAction
+  visibility: public
+  parameters:
+  - name: user
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\JsonResponse
+- Symfony\Component\Security\Core\User\UserInterface
+interfaces: []

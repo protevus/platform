@@ -1,0 +1,44 @@
+name: sync-iban-formats
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getIbanFormats
+  visibility: public
+  parameters: []
+  comment: '# * @return array<string, array{string, string}>'
+- name: parseCountryCodesList
+  visibility: private
+  parameters:
+  - name: countryCodesList
+  comment: '# * @return list<string>'
+- name: readPropertiesFromRegistry
+  visibility: private
+  parameters:
+  - name: properties
+  comment: '# * @param array<string, string> $properties
+
+    # *
+
+    # * @return list<array<string, string>>'
+- name: buildIbanRegexp
+  visibility: private
+  parameters:
+  - name: ibanStructure
+  comment: null
+- name: getIbanFormats
+  visibility: public
+  parameters: []
+  comment: '# * @return array<string, array{string, string}>'
+- name: readIbanFormatsTable
+  visibility: private
+  parameters: []
+  comment: '# * @return list<array<string, string|int>>'
+- name: buildIbanRegexp
+  visibility: private
+  parameters:
+  - name: countryCode
+  - name: bbanFormat
+  comment: null
+traits: []
+interfaces: []

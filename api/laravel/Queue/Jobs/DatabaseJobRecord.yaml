@@ -1,0 +1,56 @@
+name: DatabaseJobRecord
+class_comment: null
+dependencies:
+- name: InteractsWithTime
+  type: class
+  source: Illuminate\Support\InteractsWithTime
+- name: InteractsWithTime
+  type: class
+  source: InteractsWithTime
+properties:
+- name: record
+  visibility: protected
+  comment: '# * The underlying job record.
+
+    # *
+
+    # * @var \stdClass'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: record
+  comment: "# * The underlying job record.\n# *\n# * @var \\stdClass\n# */\n# protected\
+    \ $record;\n# \n# /**\n# * Create a new job record instance.\n# *\n# * @param\
+    \  \\stdClass  $record\n# * @return void"
+- name: increment
+  visibility: public
+  parameters: []
+  comment: '# * Increment the number of times the job has been attempted.
+
+    # *
+
+    # * @return int'
+- name: touch
+  visibility: public
+  parameters: []
+  comment: '# * Update the "reserved at" timestamp of the job.
+
+    # *
+
+    # * @return int'
+- name: __get
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Dynamically access the underlying job information.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed'
+traits:
+- Illuminate\Support\InteractsWithTime
+- InteractsWithTime
+interfaces: []

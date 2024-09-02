@@ -1,0 +1,76 @@
+name: CompiledClassMetadataFactoryTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AttributeMetadata
+  type: class
+  source: Symfony\Component\Serializer\Mapping\AttributeMetadata
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassMetadata
+- name: ClassMetadataFactoryInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+- name: CompiledClassMetadataFactory
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Factory\CompiledClassMetadataFactory
+- name: SerializedNameDummy
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\Attributes\SerializedNameDummy
+- name: Dummy
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\Dummy
+properties: []
+methods:
+- name: testItReturnsTheCompiledMetadata
+  visibility: public
+  parameters:
+  - name: value
+  comment: "# * @author Fabien Bourigault <bourigaultfabien@gmail.com>\n# */\n# final\
+    \ class CompiledClassMetadataFactoryTest extends TestCase\n# {\n# public function\
+    \ testItImplementsClassMetadataFactoryInterface()\n# {\n# $classMetadataFactory\
+    \ = $this->createMock(ClassMetadataFactoryInterface::class);\n# $compiledClassMetadataFactory\
+    \ = new CompiledClassMetadataFactory(__DIR__.'/../../Fixtures/serializer.class.metadata.php',\
+    \ $classMetadataFactory);\n# \n# $this->assertInstanceOf(ClassMetadataFactoryInterface::class,\
+    \ $compiledClassMetadataFactory);\n# }\n# \n# public function testItThrowAnExceptionWhenCacheFileIsNotFound()\n\
+    # {\n# $classMetadataFactory = $this->createMock(ClassMetadataFactoryInterface::class);\n\
+    # \n# $this->expectException(\\RuntimeException::class);\n# $this->expectExceptionMessageMatches('#File\
+    \ \".*/Fixtures/not-found-serializer.class.metadata.php\" could not be found.#');\n\
+    # \n# new CompiledClassMetadataFactory(__DIR__.'/../../Fixtures/not-found-serializer.class.metadata.php',\
+    \ $classMetadataFactory);\n# }\n# \n# public function testItThrowAnExceptionWhenMetadataIsNotOfTypeArray()\n\
+    # {\n# $classMetadataFactory = $this->createMock(ClassMetadataFactoryInterface::class);\n\
+    # \n# $this->expectException(\\RuntimeException::class);\n# $this->expectExceptionMessage('Compiled\
+    \ metadata must be of the type array, object given.');\n# \n# new CompiledClassMetadataFactory(__DIR__.'/../../Fixtures/object-metadata.php',\
+    \ $classMetadataFactory);\n# }\n# \n# /**\n# * @dataProvider valueProvider"
+- name: testItDelegatesGetMetadataForCall
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItReturnsTheSameInstance
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItHasMetadataFor
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider valueProvider'
+- name: testItDelegatesHasMetadataForCall
+  visibility: public
+  parameters: []
+  comment: null
+- name: valueProvider
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Mapping\AttributeMetadata
+- Symfony\Component\Serializer\Mapping\ClassMetadata
+- Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactoryInterface
+- Symfony\Component\Serializer\Mapping\Factory\CompiledClassMetadataFactory
+- Symfony\Component\Serializer\Tests\Fixtures\Attributes\SerializedNameDummy
+- Symfony\Component\Serializer\Tests\Fixtures\Dummy
+interfaces: []

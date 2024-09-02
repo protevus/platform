@@ -1,0 +1,108 @@
+name: ProfilerPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AbstractDataCollector
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DataCollector\AbstractDataCollector
+- name: TemplateAwareDataCollectorInterface
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DataCollector\TemplateAwareDataCollectorInterface
+- name: ProfilerPass
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\ProfilerPass
+- name: ResolveChildDefinitionsPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass
+- name: ResolveInstanceofConditionalsPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ResolveInstanceofConditionalsPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: DataCollectorInterface
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface
+properties: []
+methods:
+- name: testTemplateNoIdThrowsException
+  visibility: public
+  parameters: []
+  comment: '# * Tests that collectors that specify a template but no "id" will throw
+
+    # * an exception (both are needed if the template is specified).
+
+    # *
+
+    # * Thus, a fully-valid tag looks something like this:
+
+    # *
+
+    # *     <tag name="data_collector" template="YourBundle:Collector:templatename"
+    id="your_collector_name" />'
+- name: testValidCollector
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideValidCollectorWithTemplateUsingAutoconfigure
+  visibility: public
+  parameters: []
+  comment: null
+- name: collect
+  visibility: public
+  parameters:
+  - name: request
+  - name: response
+  - name: exception
+    default: 'null'
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+- name: getTemplate
+  visibility: public
+  parameters: []
+  comment: null
+- name: collect
+  visibility: public
+  parameters:
+  - name: request
+  - name: response
+  - name: exception
+    default: 'null'
+  comment: null
+- name: getTemplate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidCollectorWithTemplateUsingAutoconfigure
+  visibility: public
+  parameters:
+  - name: dataCollector
+  comment: '# * @dataProvider provideValidCollectorWithTemplateUsingAutoconfigure'
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\FrameworkBundle\DataCollector\AbstractDataCollector
+- Symfony\Bundle\FrameworkBundle\DataCollector\TemplateAwareDataCollectorInterface
+- Symfony\Bundle\FrameworkBundle\DependencyInjection\Compiler\ProfilerPass
+- Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass
+- Symfony\Component\DependencyInjection\Compiler\ResolveInstanceofConditionalsPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface
+interfaces:
+- TemplateAwareDataCollectorInterface

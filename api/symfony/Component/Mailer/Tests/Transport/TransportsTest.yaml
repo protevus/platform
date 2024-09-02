@@ -1,0 +1,51 @@
+name: TransportsTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Mailer\Exception\InvalidArgumentException
+- name: TransportInterface
+  type: class
+  source: Symfony\Component\Mailer\Transport\TransportInterface
+- name: Transports
+  type: class
+  source: Symfony\Component\Mailer\Transport\Transports
+- name: Headers
+  type: class
+  source: Symfony\Component\Mime\Header\Headers
+- name: Message
+  type: class
+  source: Symfony\Component\Mime\Message
+- name: TextPart
+  type: class
+  source: Symfony\Component\Mime\Part\TextPart
+properties: []
+methods:
+- name: testDefaultTransport
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOverrideTransport
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransportDoesNotExist
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransportRestoredAfterFailure
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mailer\Exception\InvalidArgumentException
+- Symfony\Component\Mailer\Transport\TransportInterface
+- Symfony\Component\Mailer\Transport\Transports
+- Symfony\Component\Mime\Header\Headers
+- Symfony\Component\Mime\Message
+- Symfony\Component\Mime\Part\TextPart
+interfaces: []

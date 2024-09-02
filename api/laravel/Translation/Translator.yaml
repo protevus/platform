@@ -1,0 +1,505 @@
+name: Translator
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Loader
+  type: class
+  source: Illuminate\Contracts\Translation\Loader
+- name: TranslatorContract
+  type: class
+  source: Illuminate\Contracts\Translation\Translator
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: NamespacedItemResolver
+  type: class
+  source: Illuminate\Support\NamespacedItemResolver
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: ReflectsClosures
+  type: class
+  source: Illuminate\Support\Traits\ReflectsClosures
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties:
+- name: loader
+  visibility: protected
+  comment: '# * The loader implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Translation\Loader'
+- name: locale
+  visibility: protected
+  comment: '# * The default locale being used by the translator.
+
+    # *
+
+    # * @var string'
+- name: fallback
+  visibility: protected
+  comment: '# * The fallback locale used by the translator.
+
+    # *
+
+    # * @var string'
+- name: loaded
+  visibility: protected
+  comment: '# * The array of loaded translation groups.
+
+    # *
+
+    # * @var array'
+- name: selector
+  visibility: protected
+  comment: '# * The message selector.
+
+    # *
+
+    # * @var \Illuminate\Translation\MessageSelector'
+- name: determineLocalesUsing
+  visibility: protected
+  comment: '# * The callable that should be invoked to determine applicable locales.
+
+    # *
+
+    # * @var callable'
+- name: stringableHandlers
+  visibility: protected
+  comment: '# * The custom rendering callbacks for stringable objects.
+
+    # *
+
+    # * @var array'
+- name: missingTranslationKeyCallback
+  visibility: protected
+  comment: '# * The callback that is responsible for handling missing translation
+    keys.
+
+    # *
+
+    # * @var callable|null'
+- name: handleMissingTranslationKeys
+  visibility: protected
+  comment: '# * Indicates whether missing translation keys should be handled.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: loader
+  - name: locale
+  comment: "# * The loader implementation.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Translation\\Loader\n# */\n# protected $loader;\n# \n# /**\n# * The default locale\
+    \ being used by the translator.\n# *\n# * @var string\n# */\n# protected $locale;\n\
+    # \n# /**\n# * The fallback locale used by the translator.\n# *\n# * @var string\n\
+    # */\n# protected $fallback;\n# \n# /**\n# * The array of loaded translation groups.\n\
+    # *\n# * @var array\n# */\n# protected $loaded = [];\n# \n# /**\n# * The message\
+    \ selector.\n# *\n# * @var \\Illuminate\\Translation\\MessageSelector\n# */\n\
+    # protected $selector;\n# \n# /**\n# * The callable that should be invoked to\
+    \ determine applicable locales.\n# *\n# * @var callable\n# */\n# protected $determineLocalesUsing;\n\
+    # \n# /**\n# * The custom rendering callbacks for stringable objects.\n# *\n#\
+    \ * @var array\n# */\n# protected $stringableHandlers = [];\n# \n# /**\n# * The\
+    \ callback that is responsible for handling missing translation keys.\n# *\n#\
+    \ * @var callable|null\n# */\n# protected $missingTranslationKeyCallback;\n# \n\
+    # /**\n# * Indicates whether missing translation keys should be handled.\n# *\n\
+    # * @var bool\n# */\n# protected $handleMissingTranslationKeys = true;\n# \n#\
+    \ /**\n# * Create a new translator instance.\n# *\n# * @param  \\Illuminate\\\
+    Contracts\\Translation\\Loader  $loader\n# * @param  string  $locale\n# * @return\
+    \ void"
+- name: hasForLocale
+  visibility: public
+  parameters:
+  - name: key
+  - name: locale
+    default: 'null'
+  comment: '# * Determine if a translation exists for a given locale.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  string|null  $locale
+
+    # * @return bool'
+- name: has
+  visibility: public
+  parameters:
+  - name: key
+  - name: locale
+    default: 'null'
+  - name: fallback
+    default: 'true'
+  comment: '# * Determine if a translation exists.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  string|null  $locale
+
+    # * @param  bool  $fallback
+
+    # * @return bool'
+- name: get
+  visibility: public
+  parameters:
+  - name: key
+  - name: replace
+    default: '[]'
+  - name: locale
+    default: 'null'
+  - name: fallback
+    default: 'true'
+  comment: '# * Get the translation for the given key.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  array  $replace
+
+    # * @param  string|null  $locale
+
+    # * @param  bool  $fallback
+
+    # * @return string|array'
+- name: choice
+  visibility: public
+  parameters:
+  - name: key
+  - name: number
+  - name: replace
+    default: '[]'
+  - name: locale
+    default: 'null'
+  comment: '# * Get a translation according to an integer value.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  \Countable|int|float|array  $number
+
+    # * @param  array  $replace
+
+    # * @param  string|null  $locale
+
+    # * @return string'
+- name: localeForChoice
+  visibility: protected
+  parameters:
+  - name: locale
+  comment: '# * Get the proper locale for a choice operation.
+
+    # *
+
+    # * @param  string|null  $locale
+
+    # * @return string'
+- name: getLine
+  visibility: protected
+  parameters:
+  - name: namespace
+  - name: group
+  - name: locale
+  - name: item
+  - name: replace
+  comment: '# * Retrieve a language line out the loaded array.
+
+    # *
+
+    # * @param  string  $namespace
+
+    # * @param  string  $group
+
+    # * @param  string  $locale
+
+    # * @param  string  $item
+
+    # * @param  array  $replace
+
+    # * @return string|array|null'
+- name: makeReplacements
+  visibility: protected
+  parameters:
+  - name: line
+  - name: replace
+  comment: '# * Make the place-holder replacements on a line.
+
+    # *
+
+    # * @param  string  $line
+
+    # * @param  array  $replace
+
+    # * @return string'
+- name: addLines
+  visibility: public
+  parameters:
+  - name: lines
+  - name: locale
+  - name: namespace
+    default: '''*'''
+  comment: '# * Add translation lines to the given locale.
+
+    # *
+
+    # * @param  array  $lines
+
+    # * @param  string  $locale
+
+    # * @param  string  $namespace
+
+    # * @return void'
+- name: load
+  visibility: public
+  parameters:
+  - name: namespace
+  - name: group
+  - name: locale
+  comment: '# * Load the specified language group.
+
+    # *
+
+    # * @param  string  $namespace
+
+    # * @param  string  $group
+
+    # * @param  string  $locale
+
+    # * @return void'
+- name: isLoaded
+  visibility: protected
+  parameters:
+  - name: namespace
+  - name: group
+  - name: locale
+  comment: '# * Determine if the given group has been loaded.
+
+    # *
+
+    # * @param  string  $namespace
+
+    # * @param  string  $group
+
+    # * @param  string  $locale
+
+    # * @return bool'
+- name: handleMissingTranslationKey
+  visibility: protected
+  parameters:
+  - name: key
+  - name: replace
+  - name: locale
+  - name: fallback
+  comment: '# * Handle a missing translation key.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  array  $replace
+
+    # * @param  string|null  $locale
+
+    # * @param  bool  $fallback
+
+    # * @return string'
+- name: handleMissingKeysUsing
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a callback that is responsible for handling missing translation
+    keys.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return static'
+- name: addNamespace
+  visibility: public
+  parameters:
+  - name: namespace
+  - name: hint
+  comment: '# * Add a new namespace to the loader.
+
+    # *
+
+    # * @param  string  $namespace
+
+    # * @param  string  $hint
+
+    # * @return void'
+- name: addJsonPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Add a new JSON path to the loader.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return void'
+- name: parseKey
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Parse a key into namespace, group, and item.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return array'
+- name: localeArray
+  visibility: protected
+  parameters:
+  - name: locale
+  comment: '# * Get the array of locales to be checked.
+
+    # *
+
+    # * @param  string|null  $locale
+
+    # * @return array'
+- name: determineLocalesUsing
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Specify a callback that should be invoked to determined the applicable
+    locale array.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return void'
+- name: getSelector
+  visibility: public
+  parameters: []
+  comment: '# * Get the message selector instance.
+
+    # *
+
+    # * @return \Illuminate\Translation\MessageSelector'
+- name: setSelector
+  visibility: public
+  parameters:
+  - name: selector
+  comment: '# * Set the message selector instance.
+
+    # *
+
+    # * @param  \Illuminate\Translation\MessageSelector  $selector
+
+    # * @return void'
+- name: getLoader
+  visibility: public
+  parameters: []
+  comment: '# * Get the language line loader implementation.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Translation\Loader'
+- name: locale
+  visibility: public
+  parameters: []
+  comment: '# * Get the default locale being used.
+
+    # *
+
+    # * @return string'
+- name: getLocale
+  visibility: public
+  parameters: []
+  comment: '# * Get the default locale being used.
+
+    # *
+
+    # * @return string'
+- name: setLocale
+  visibility: public
+  parameters:
+  - name: locale
+  comment: '# * Set the default locale.
+
+    # *
+
+    # * @param  string  $locale
+
+    # * @return void
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: getFallback
+  visibility: public
+  parameters: []
+  comment: '# * Get the fallback locale being used.
+
+    # *
+
+    # * @return string'
+- name: setFallback
+  visibility: public
+  parameters:
+  - name: fallback
+  comment: '# * Set the fallback locale being used.
+
+    # *
+
+    # * @param  string  $fallback
+
+    # * @return void'
+- name: setLoaded
+  visibility: public
+  parameters:
+  - name: loaded
+  comment: '# * Set the loaded translation groups.
+
+    # *
+
+    # * @param  array  $loaded
+
+    # * @return void'
+- name: stringable
+  visibility: public
+  parameters:
+  - name: class
+  - name: handler
+    default: 'null'
+  comment: '# * Add a handler to be executed in order to format a given class to a
+    string during translation replacements.
+
+    # *
+
+    # * @param  callable|string  $class
+
+    # * @param  callable|null  $handler
+
+    # * @return void'
+traits:
+- Closure
+- Illuminate\Contracts\Translation\Loader
+- Illuminate\Support\Arr
+- Illuminate\Support\NamespacedItemResolver
+- Illuminate\Support\Str
+- Illuminate\Support\Traits\Macroable
+- Illuminate\Support\Traits\ReflectsClosures
+- InvalidArgumentException
+- Macroable
+interfaces:
+- TranslatorContract

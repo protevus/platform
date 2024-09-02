@@ -1,0 +1,70 @@
+name: SubRequestHandlerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: SubRequestHandler
+  type: class
+  source: Symfony\Component\HttpKernel\HttpCache\SubRequestHandler
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testTrustedHeadersAreKept
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUntrustedHeadersAreRemoved
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTrustedForwardedHeader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTrustedXForwardedForHeader
+  visibility: public
+  parameters: []
+  comment: null
+- name: getGlobalState
+  visibility: private
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: assertCallback
+  comment: null
+- name: handle
+  visibility: public
+  parameters:
+  - name: request
+  - name: type
+    default: self::MAIN_REQUEST
+  - name: catch
+    default: 'true'
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\HttpCache\SubRequestHandler
+- Symfony\Component\HttpKernel\HttpKernelInterface
+interfaces:
+- HttpKernelInterface

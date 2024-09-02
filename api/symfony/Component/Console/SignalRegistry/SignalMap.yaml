@@ -1,0 +1,12 @@
+name: SignalMap
+class_comment: "# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>"
+dependencies: []
+properties: []
+methods:
+- name: getSignalName
+  visibility: public
+  parameters:
+  - name: signal
+  comment: null
+traits: []
+interfaces: []

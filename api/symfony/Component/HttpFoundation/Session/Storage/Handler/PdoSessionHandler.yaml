@@ -1,0 +1,350 @@
+name: PdoSessionHandler
+class_comment: '# * Session handler using a PDO connection to read and write data.
+
+  # *
+
+  # * It works with MySQL, PostgreSQL, Oracle, SQL Server and SQLite and implements
+
+  # * different locking strategies to handle concurrent access to the same session.
+
+  # * Locking is necessary to prevent loss of data due to race conditions and to keep
+
+  # * the session data consistent between read() and write(). With locking, requests
+
+  # * for the same session will wait until the other one finished writing. For this
+
+  # * reason it''s best practice to close a session as early as possible to improve
+
+  # * concurrency. PHPs internal files session handler also implements locking.
+
+  # *
+
+  # * Attention: Since SQLite does not support row level locks but locks the whole
+  database,
+
+  # * it means only one session can be accessed at a time. Even different sessions
+  would wait
+
+  # * for another to finish. So saving session in SQLite should only be considered
+  for
+
+  # * development or prototypes.
+
+  # *
+
+  # * Session data is a binary string that can contain non-printable characters like
+  the null byte.
+
+  # * For this reason it must be saved in a binary column in the database like BLOB
+  in MySQL.
+
+  # * Saving it in a character column could corrupt the data. You can use createTable()
+
+  # * to initialize a correctly defined table.
+
+  # *
+
+  # * @see https://php.net/sessionhandlerinterface
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # * @author Michael Williams <michael.williams@funsational.com>
+
+  # * @author Tobias Schultze <http://tobion.de>'
+dependencies:
+- name: Schema
+  type: class
+  source: Doctrine\DBAL\Schema\Schema
+- name: Types
+  type: class
+  source: Doctrine\DBAL\Types\Types
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: pdoOrDsn
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: "# * Session handler using a PDO connection to read and write data.\n#\
+    \ *\n# * It works with MySQL, PostgreSQL, Oracle, SQL Server and SQLite and implements\n\
+    # * different locking strategies to handle concurrent access to the same session.\n\
+    # * Locking is necessary to prevent loss of data due to race conditions and to\
+    \ keep\n# * the session data consistent between read() and write(). With locking,\
+    \ requests\n# * for the same session will wait until the other one finished writing.\
+    \ For this\n# * reason it's best practice to close a session as early as possible\
+    \ to improve\n# * concurrency. PHPs internal files session handler also implements\
+    \ locking.\n# *\n# * Attention: Since SQLite does not support row level locks\
+    \ but locks the whole database,\n# * it means only one session can be accessed\
+    \ at a time. Even different sessions would wait\n# * for another to finish. So\
+    \ saving session in SQLite should only be considered for\n# * development or prototypes.\n\
+    # *\n# * Session data is a binary string that can contain non-printable characters\
+    \ like the null byte.\n# * For this reason it must be saved in a binary column\
+    \ in the database like BLOB in MySQL.\n# * Saving it in a character column could\
+    \ corrupt the data. You can use createTable()\n# * to initialize a correctly defined\
+    \ table.\n# *\n# * @see https://php.net/sessionhandlerinterface\n# *\n# * @author\
+    \ Fabien Potencier <fabien@symfony.com>\n# * @author Michael Williams <michael.williams@funsational.com>\n\
+    # * @author Tobias Schultze <http://tobion.de>\n# */\n# class PdoSessionHandler\
+    \ extends AbstractSessionHandler\n# {\n# /**\n# * No locking is done. This means\
+    \ sessions are prone to loss of data due to\n# * race conditions of concurrent\
+    \ requests to the same session. The last session\n# * write will win in this case.\
+    \ It might be useful when you implement your own\n# * logic to deal with this\
+    \ like an optimistic approach.\n# */\n# public const LOCK_NONE = 0;\n# \n# /**\n\
+    # * Creates an application-level lock on a session. The disadvantage is that the\n\
+    # * lock is not enforced by the database and thus other, unaware parts of the\n\
+    # * application could still concurrently modify the session. The advantage is\
+    \ it\n# * does not require a transaction.\n# * This mode is not available for\
+    \ SQLite and not yet implemented for oci and sqlsrv.\n# */\n# public const LOCK_ADVISORY\
+    \ = 1;\n# \n# /**\n# * Issues a real row lock. Since it uses a transaction between\
+    \ opening and\n# * closing a session, you have to be careful when you use same\
+    \ database connection\n# * that you also use for your application logic. This\
+    \ mode is the default because\n# * it's the only reliable solution across DBMSs.\n\
+    # */\n# public const LOCK_TRANSACTIONAL = 2;\n# \n# private \\PDO $pdo;\n# \n\
+    # /**\n# * DSN string or null for session.save_path or false when lazy connection\
+    \ disabled.\n# */\n# private string|false|null $dsn = false;\n# \n# private string\
+    \ $driver;\n# private string $table = 'sessions';\n# private string $idCol = 'sess_id';\n\
+    # private string $dataCol = 'sess_data';\n# private string $lifetimeCol = 'sess_lifetime';\n\
+    # private string $timeCol = 'sess_time';\n# \n# /**\n# * Time to live in seconds.\n\
+    # */\n# private int|\\Closure|null $ttl;\n# \n# /**\n# * Username when lazy-connect.\n\
+    # */\n# private ?string $username = null;\n# \n# /**\n# * Password when lazy-connect.\n\
+    # */\n# private ?string $password = null;\n# \n# /**\n# * Connection options when\
+    \ lazy-connect.\n# */\n# private array $connectionOptions = [];\n# \n# /**\n#\
+    \ * The strategy for locking, see constants.\n# */\n# private int $lockMode =\
+    \ self::LOCK_TRANSACTIONAL;\n# \n# /**\n# * It's an array to support multiple\
+    \ reads before closing which is manual, non-standard usage.\n# *\n# * @var \\\
+    PDOStatement[] An array of statements to release advisory locks\n# */\n# private\
+    \ array $unlockStatements = [];\n# \n# /**\n# * True when the current session\
+    \ exists but expired according to session.gc_maxlifetime.\n# */\n# private bool\
+    \ $sessionExpired = false;\n# \n# /**\n# * Whether a transaction is active.\n\
+    # */\n# private bool $inTransaction = false;\n# \n# /**\n# * Whether gc() has\
+    \ been called.\n# */\n# private bool $gcCalled = false;\n# \n# /**\n# * You can\
+    \ either pass an existing database connection as PDO instance or\n# * pass a DSN\
+    \ string that will be used to lazy-connect to the database\n# * when the session\
+    \ is actually used. Furthermore it's possible to pass null\n# * which will then\
+    \ use the session.save_path ini setting as PDO DSN parameter.\n# *\n# * List of\
+    \ available options:\n# *  * db_table: The name of the table [default: sessions]\n\
+    # *  * db_id_col: The column where to store the session id [default: sess_id]\n\
+    # *  * db_data_col: The column where to store the session data [default: sess_data]\n\
+    # *  * db_lifetime_col: The column where to store the lifetime [default: sess_lifetime]\n\
+    # *  * db_time_col: The column where to store the timestamp [default: sess_time]\n\
+    # *  * db_username: The username when lazy-connect [default: '']\n# *  * db_password:\
+    \ The password when lazy-connect [default: '']\n# *  * db_connection_options:\
+    \ An array of driver-specific connection options [default: []]\n# *  * lock_mode:\
+    \ The strategy for locking, see constants [default: LOCK_TRANSACTIONAL]\n# * \
+    \ * ttl: The time to live in seconds.\n# *\n# * @param \\PDO|string|null $pdoOrDsn\
+    \ A \\PDO instance or DSN string or URL string or null\n# *\n# * @throws \\InvalidArgumentException\
+    \ When PDO error mode is not PDO::ERRMODE_EXCEPTION"
+- name: configureSchema
+  visibility: public
+  parameters:
+  - name: schema
+  - name: isSameDatabase
+    default: 'null'
+  comment: '# * Adds the Table to the Schema if it doesn''t exist.'
+- name: createTable
+  visibility: public
+  parameters: []
+  comment: '# * Creates the table to store sessions which can be called once for setup.
+
+    # *
+
+    # * Session ID is saved in a column of maximum length 128 because that is enough
+    even
+
+    # * for a 512 bit configured session.hash_function like Whirlpool. Session data
+    is
+
+    # * saved in a BLOB. One could also use a shorter inlined varbinary column
+
+    # * if one was sure the data fits into it.
+
+    # *
+
+    # * @throws \PDOException    When the table already exists
+
+    # * @throws \DomainException When an unsupported PDO driver is used'
+- name: isSessionExpired
+  visibility: public
+  parameters: []
+  comment: '# * Returns true when the current session exists but expired according
+    to session.gc_maxlifetime.
+
+    # *
+
+    # * Can be used to distinguish between a new session and one that expired due
+    to inactivity.'
+- name: open
+  visibility: public
+  parameters:
+  - name: savePath
+  - name: sessionName
+  comment: null
+- name: read
+  visibility: public
+  parameters:
+  - name: sessionId
+  comment: null
+- name: gc
+  visibility: public
+  parameters:
+  - name: maxlifetime
+  comment: null
+- name: doDestroy
+  visibility: protected
+  parameters:
+  - name: sessionId
+  comment: null
+- name: doWrite
+  visibility: protected
+  parameters:
+  - name: sessionId
+  - name: data
+  comment: null
+- name: updateTimestamp
+  visibility: public
+  parameters:
+  - name: sessionId
+  - name: data
+  comment: null
+- name: close
+  visibility: public
+  parameters: []
+  comment: null
+- name: connect
+  visibility: private
+  parameters:
+  - name: dsn
+  comment: '# * Lazy-connects to the database.'
+- name: buildDsnFromUrl
+  visibility: private
+  parameters:
+  - name: dsnOrUrl
+  comment: '# * Builds a PDO DSN from a URL-like connection string.
+
+    # *
+
+    # * @todo implement missing support for oci DSN (which look totally different
+    from other PDO ones)'
+- name: beginTransaction
+  visibility: private
+  parameters: []
+  comment: '# * Helper method to begin a transaction.
+
+    # *
+
+    # * Since SQLite does not support row level locks, we have to acquire a reserved
+    lock
+
+    # * on the database immediately. Because of https://bugs.php.net/42766 we have
+    to create
+
+    # * such a transaction manually which also means we cannot use PDO::commit or
+
+    # * PDO::rollback or PDO::inTransaction for SQLite.
+
+    # *
+
+    # * Also MySQLs default isolation, REPEATABLE READ, causes deadlock for different
+    sessions
+
+    # * due to https://percona.com/blog/2013/12/12/one-more-innodb-gap-lock-to-avoid/
+    .
+
+    # * So we change it to READ COMMITTED.'
+- name: commit
+  visibility: private
+  parameters: []
+  comment: '# * Helper method to commit a transaction.'
+- name: rollback
+  visibility: private
+  parameters: []
+  comment: '# * Helper method to rollback a transaction.'
+- name: doRead
+  visibility: protected
+  parameters:
+  - name: sessionId
+  comment: '# * Reads the session data in respect to the different locking strategies.
+
+    # *
+
+    # * We need to make sure we do not return session data that is already considered
+    garbage according
+
+    # * to the session.gc_maxlifetime setting because gc() is called after read()
+    and only sometimes.'
+- name: doAdvisoryLock
+  visibility: private
+  parameters:
+  - name: sessionId
+  comment: '# * Executes an application-level lock on the database.
+
+    # *
+
+    # * @return \PDOStatement The statement that needs to be executed later to release
+    the lock
+
+    # *
+
+    # * @throws \DomainException When an unsupported PDO driver is used
+
+    # *
+
+    # * @todo implement missing advisory locks
+
+    # *       - for oci using DBMS_LOCK.REQUEST
+
+    # *       - for sqlsrv using sp_getapplock with LockOwner = Session'
+- name: convertStringToInt
+  visibility: private
+  parameters:
+  - name: string
+  comment: '# * Encodes the first 4 (when PHP_INT_SIZE == 4) or 8 characters of the
+    string as an integer.
+
+    # *
+
+    # * Keep in mind, PHP integers are signed.'
+- name: getSelectSql
+  visibility: private
+  parameters: []
+  comment: '# * Return a locking or nonlocking SQL query to read session information.
+
+    # *
+
+    # * @throws \DomainException When an unsupported PDO driver is used'
+- name: getInsertStatement
+  visibility: private
+  parameters:
+  - name: sessionId
+  - name: sessionData
+  - name: maxlifetime
+  comment: '# * Returns an insert statement supported by the database for writing
+    session data.'
+- name: getUpdateStatement
+  visibility: private
+  parameters:
+  - name: sessionId
+  - name: sessionData
+  - name: maxlifetime
+  comment: '# * Returns an update statement supported by the database for writing
+    session data.'
+- name: getMergeStatement
+  visibility: private
+  parameters:
+  - name: sessionId
+  - name: data
+  - name: maxlifetime
+  comment: '# * Returns a merge/upsert (i.e. insert or update) statement when supported
+    by the database for writing session data.'
+- name: getConnection
+  visibility: protected
+  parameters: []
+  comment: '# * Return a PDO instance.'
+traits:
+- Doctrine\DBAL\Schema\Schema
+- Doctrine\DBAL\Types\Types
+interfaces:
+- locking

@@ -1,0 +1,41 @@
+name: Key
+class_comment: null
+dependencies:
+- name: UnserializableKeyException
+  type: class
+  source: Symfony\Component\Lock\Exception\UnserializableKeyException
+properties: []
+methods:
+- name: reduceLifetime
+  visibility: public
+  parameters:
+  - name: ttl
+  comment: "# * Key is a container for the state of the locks in stores.\n# *\n# *\
+    \ @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n# */\n# final class Key\n\
+    # {\n# private ?float $expiringTime = null;\n# private array $state = [];\n# private\
+    \ bool $serializable = true;\n# \n# public function __construct(\n# private string\
+    \ $resource,\n# ) {\n# }\n# \n# public function __toString(): string\n# {\n# return\
+    \ $this->resource;\n# }\n# \n# public function hasState(string $stateKey): bool\n\
+    # {\n# return isset($this->state[$stateKey]);\n# }\n# \n# public function setState(string\
+    \ $stateKey, mixed $state): void\n# {\n# $this->state[$stateKey] = $state;\n#\
+    \ }\n# \n# public function removeState(string $stateKey): void\n# {\n# unset($this->state[$stateKey]);\n\
+    # }\n# \n# public function getState(string $stateKey): mixed\n# {\n# return $this->state[$stateKey];\n\
+    # }\n# \n# public function markUnserializable(): void\n# {\n# $this->serializable\
+    \ = false;\n# }\n# \n# public function resetLifetime(): void\n# {\n# $this->expiringTime\
+    \ = null;\n# }\n# \n# /**\n# * @param float $ttl the expiration delay of locks\
+    \ in seconds"
+- name: getRemainingLifetime
+  visibility: public
+  parameters: []
+  comment: '# * Returns the remaining lifetime in seconds.'
+- name: isExpired
+  visibility: public
+  parameters: []
+  comment: null
+- name: __sleep
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Lock\Exception\UnserializableKeyException
+interfaces: []

@@ -1,0 +1,45 @@
+name: MiddlewareNameResolver
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+properties: []
+methods:
+- name: resolve
+  visibility: public
+  parameters:
+  - name: name
+  - name: map
+  - name: middlewareGroups
+  comment: '# * Resolve the middleware name to a class name(s) preserving passed parameters.
+
+    # *
+
+    # * @param  \Closure|string  $name
+
+    # * @param  array  $map
+
+    # * @param  array  $middlewareGroups
+
+    # * @return \Closure|string|array'
+- name: parseMiddlewareGroup
+  visibility: protected
+  parameters:
+  - name: name
+  - name: map
+  - name: middlewareGroups
+  comment: '# * Parse the middleware group and format it for usage.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  array  $map
+
+    # * @param  array  $middlewareGroups
+
+    # * @return array'
+traits:
+- Closure
+interfaces: []

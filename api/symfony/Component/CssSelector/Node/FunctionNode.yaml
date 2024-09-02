@@ -1,0 +1,47 @@
+name: FunctionNode
+class_comment: "# * Represents a \"<selector>:<name>(<arguments>)\" node.\n# *\n#\
+  \ * This component is a port of the Python cssselect library,\n# * which is copyright\
+  \ Ian Bicking, @see https://github.com/SimonSapin/cssselect.\n# *\n# * @author Jean-Fran\xE7\
+  ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n# * @internal"
+dependencies:
+- name: Token
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Token
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: selector
+  - name: name
+  - name: arguments
+    default: '[]'
+  comment: "# * Represents a \"<selector>:<name>(<arguments>)\" node.\n# *\n# * This\
+    \ component is a port of the Python cssselect library,\n# * which is copyright\
+    \ Ian Bicking, @see https://github.com/SimonSapin/cssselect.\n# *\n# * @author\
+    \ Jean-Fran\xE7ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n# * @internal\n\
+    # */\n# class FunctionNode extends AbstractNode\n# {\n# private string $name;\n\
+    # \n# /**\n# * @param Token[] $arguments"
+- name: getSelector
+  visibility: public
+  parameters: []
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: getArguments
+  visibility: public
+  parameters: []
+  comment: '# * @return Token[]'
+- name: getSpecificity
+  visibility: public
+  parameters: []
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\CssSelector\Parser\Token
+interfaces: []

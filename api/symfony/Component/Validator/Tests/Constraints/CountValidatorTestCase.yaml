@@ -1,0 +1,120 @@
+name: CountValidatorTestCase
+class_comment: null
+dependencies:
+- name: Count
+  type: class
+  source: Symfony\Component\Validator\Constraints\Count
+- name: CountValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\CountValidator
+- name: DivisibleBy
+  type: class
+  source: Symfony\Component\Validator\Constraints\DivisibleBy
+- name: UnexpectedValueException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedValueException
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+properties: []
+methods:
+- name: testValidValuesMax
+  visibility: public
+  parameters:
+  - name: value
+  comment: "# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# abstract\
+    \ class CountValidatorTestCase extends ConstraintValidatorTestCase\n# {\n# protected\
+    \ function createValidator(): CountValidator\n# {\n# return new CountValidator();\n\
+    # }\n# \n# abstract protected static function createCollection(array $content);\n\
+    # \n# public function testNullIsValid()\n# {\n# $this->validator->validate(null,\
+    \ new Count(6));\n# \n# $this->assertNoViolation();\n# }\n# \n# public function\
+    \ testExpectsCountableType()\n# {\n# $this->expectException(UnexpectedValueException::class);\n\
+    # $this->validator->validate(new \\stdClass(), new Count(5));\n# }\n# \n# public\
+    \ static function getThreeOrLessElements()\n# {\n# return [\n# [static::createCollection([1])],\n\
+    # [static::createCollection([1, 2])],\n# [static::createCollection([1, 2, 3])],\n\
+    # [static::createCollection(['a' => 1, 'b' => 2, 'c' => 3])],\n# ];\n# }\n# \n\
+    # public static function getFourElements()\n# {\n# return [\n# [static::createCollection([1,\
+    \ 2, 3, 4])],\n# [static::createCollection(['a' => 1, 'b' => 2, 'c' => 3, 'd'\
+    \ => 4])],\n# ];\n# }\n# \n# public static function getFiveOrMoreElements()\n\
+    # {\n# return [\n# [static::createCollection([1, 2, 3, 4, 5])],\n# [static::createCollection([1,\
+    \ 2, 3, 4, 5, 6])],\n# [static::createCollection(['a' => 1, 'b' => 2, 'c' => 3,\
+    \ 'd' => 4, 'e' => 5])],\n# ];\n# }\n# \n# /**\n# * @dataProvider getThreeOrLessElements"
+- name: testValidValuesMaxNamed
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider getThreeOrLessElements'
+- name: testValidValuesMin
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider getFiveOrMoreElements'
+- name: testValidValuesMinNamed
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider getFiveOrMoreElements'
+- name: testValidValuesExact
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider getFourElements'
+- name: testValidValuesExactNamed
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider getFourElements'
+- name: testTooManyValues
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider getFiveOrMoreElements'
+- name: testTooManyValuesNamed
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider getFiveOrMoreElements'
+- name: testTooFewValues
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider getThreeOrLessElements'
+- name: testTooFewValuesNamed
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider getThreeOrLessElements'
+- name: testTooManyValuesExact
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider getFiveOrMoreElements'
+- name: testTooManyValuesExactNamed
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider getFiveOrMoreElements'
+- name: testTooFewValuesExact
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * @dataProvider getThreeOrLessElements'
+- name: testDefaultOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConstraintAttributeDefaultOption
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDivisibleBy
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraints\Count
+- Symfony\Component\Validator\Constraints\CountValidator
+- Symfony\Component\Validator\Constraints\DivisibleBy
+- Symfony\Component\Validator\Exception\UnexpectedValueException
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

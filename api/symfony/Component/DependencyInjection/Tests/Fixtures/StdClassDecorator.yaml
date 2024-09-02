@@ -1,0 +1,15 @@
+name: StdClassDecorator
+class_comment: null
+dependencies: []
+properties:
+- name: foo
+  visibility: public
+  comment: null
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+traits: []
+interfaces: []

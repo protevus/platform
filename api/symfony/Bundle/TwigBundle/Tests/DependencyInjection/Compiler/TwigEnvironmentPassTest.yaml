@@ -1,0 +1,39 @@
+name: TwigEnvironmentPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: FormExtension
+  type: class
+  source: Symfony\Bridge\Twig\Extension\FormExtension
+- name: TwigEnvironmentPass
+  type: class
+  source: Symfony\Bundle\TwigBundle\DependencyInjection\Compiler\TwigEnvironmentPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+properties: []
+methods:
+- name: testPassWithTwoExtensionsWithPriority
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTwigBridgeExtensionsAreRegisteredFirst
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bridge\Twig\Extension\FormExtension
+- Symfony\Bundle\TwigBundle\DependencyInjection\Compiler\TwigEnvironmentPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Reference
+interfaces: []

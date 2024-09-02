@@ -1,0 +1,20 @@
+name: CallTrait
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: call
+  visibility: public
+  parameters:
+  - name: method
+  - name: arguments
+    default: '[]'
+  - name: returnsClone
+    default: 'false'
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+interfaces: []

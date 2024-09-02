@@ -1,0 +1,44 @@
+name: AuthServiceProvider
+class_comment: null
+dependencies:
+- name: Gate
+  type: class
+  source: Illuminate\Support\Facades\Gate
+- name: ServiceProvider
+  type: class
+  source: Illuminate\Support\ServiceProvider
+properties:
+- name: policies
+  visibility: protected
+  comment: '# * The policy mappings for the application.
+
+    # *
+
+    # * @var array<class-string, class-string>'
+methods:
+- name: register
+  visibility: public
+  parameters: []
+  comment: "# * The policy mappings for the application.\n# *\n# * @var array<class-string,\
+    \ class-string>\n# */\n# protected $policies = [];\n# \n# /**\n# * Register the\
+    \ application's policies.\n# *\n# * @return void"
+- name: registerPolicies
+  visibility: public
+  parameters: []
+  comment: '# * Register the application''s policies.
+
+    # *
+
+    # * @return void'
+- name: policies
+  visibility: public
+  parameters: []
+  comment: '# * Get the policies defined on the provider.
+
+    # *
+
+    # * @return array<class-string, class-string>'
+traits:
+- Illuminate\Support\Facades\Gate
+- Illuminate\Support\ServiceProvider
+interfaces: []

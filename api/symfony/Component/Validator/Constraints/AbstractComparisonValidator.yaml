@@ -1,0 +1,76 @@
+name: AbstractComparisonValidator
+class_comment: null
+dependencies:
+- name: NoSuchPropertyException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException
+- name: UninitializedPropertyException
+  type: class
+  source: Symfony\Component\PropertyAccess\Exception\UninitializedPropertyException
+- name: PropertyAccess
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccess
+- name: PropertyAccessorInterface
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccessorInterface
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: ConstraintValidator
+  type: class
+  source: Symfony\Component\Validator\ConstraintValidator
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Validator\Exception\UnexpectedTypeException
+properties: []
+methods:
+- name: getErrorCode
+  visibility: protected
+  parameters: []
+  comment: "# * Provides a base class for the validation of property comparisons.\n\
+    # *\n# * @author Daniel Holmes <daniel@danielholmes.org>\n# * @author Bernhard\
+    \ Schussek <bschussek@gmail.com>\n# */\n# abstract class AbstractComparisonValidator\
+    \ extends ConstraintValidator\n# {\n# public function __construct(private ?PropertyAccessorInterface\
+    \ $propertyAccessor = null)\n# {\n# }\n# \n# public function validate(mixed $value,\
+    \ Constraint $constraint): void\n# {\n# if (!$constraint instanceof AbstractComparison)\
+    \ {\n# throw new UnexpectedTypeException($constraint, AbstractComparison::class);\n\
+    # }\n# \n# if (null === $value) {\n# return;\n# }\n# \n# if ($path = $constraint->propertyPath)\
+    \ {\n# if (null === $object = $this->context->getObject()) {\n# return;\n# }\n\
+    # \n# try {\n# $comparedValue = $this->getPropertyAccessor()->getValue($object,\
+    \ $path);\n# } catch (NoSuchPropertyException $e) {\n# throw new ConstraintDefinitionException(\\\
+    sprintf('Invalid property path \"%s\" provided to \"%s\" constraint: ', $path,\
+    \ get_debug_type($constraint)).$e->getMessage(), 0, $e);\n# } catch (UninitializedPropertyException)\
+    \ {\n# $comparedValue = null;\n# }\n# } else {\n# $comparedValue = $constraint->value;\n\
+    # }\n# \n# // Convert strings to date-time objects if comparing to another date-time\
+    \ object\n# // This allows to compare with any date/time value supported by date-time\
+    \ constructors:\n# // https://php.net/datetime.formats\n# if (\\is_string($comparedValue)\
+    \ && $value instanceof \\DateTimeInterface) {\n# try {\n# $comparedValue = new\
+    \ $value($comparedValue);\n# } catch (\\Exception) {\n# throw new ConstraintDefinitionException(\\\
+    sprintf('The compared value \"%s\" could not be converted to a \"%s\" instance\
+    \ in the \"%s\" constraint.', $comparedValue, get_debug_type($value), get_debug_type($constraint)));\n\
+    # }\n# }\n# \n# if (!$this->compareValues($value, $comparedValue)) {\n# $violationBuilder\
+    \ = $this->context->buildViolation($constraint->message)\n# ->setParameter('{{\
+    \ value }}', $this->formatValue($value, self::OBJECT_TO_STRING | self::PRETTY_DATE))\n\
+    # ->setParameter('{{ compared_value }}', $this->formatValue($comparedValue, self::OBJECT_TO_STRING\
+    \ | self::PRETTY_DATE))\n# ->setParameter('{{ compared_value_type }}', $this->formatTypeOf($comparedValue))\n\
+    # ->setCode($this->getErrorCode());\n# \n# if (null !== $path) {\n# $violationBuilder->setParameter('{{\
+    \ compared_value_path }}', $path);\n# }\n# \n# $violationBuilder->addViolation();\n\
+    # }\n# }\n# \n# private function getPropertyAccessor(): PropertyAccessorInterface\n\
+    # {\n# return $this->propertyAccessor ??= PropertyAccess::createPropertyAccessor();\n\
+    # }\n# \n# /**\n# * Compares the two given values to find if their relationship\
+    \ is valid.\n# */\n# abstract protected function compareValues(mixed $value1,\
+    \ mixed $value2): bool;\n# \n# /**\n# * Returns the error code used if the comparison\
+    \ fails."
+traits:
+- Symfony\Component\PropertyAccess\Exception\NoSuchPropertyException
+- Symfony\Component\PropertyAccess\Exception\UninitializedPropertyException
+- Symfony\Component\PropertyAccess\PropertyAccess
+- Symfony\Component\PropertyAccess\PropertyAccessorInterface
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\ConstraintValidator
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- Symfony\Component\Validator\Exception\UnexpectedTypeException
+interfaces: []

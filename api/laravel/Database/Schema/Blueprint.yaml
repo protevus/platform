@@ -1,0 +1,1840 @@
+name: Blueprint
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: Connection
+  type: class
+  source: Illuminate\Database\Connection
+- name: HasUlids
+  type: class
+  source: Illuminate\Database\Eloquent\Concerns\HasUlids
+- name: Expression
+  type: class
+  source: Illuminate\Database\Query\Expression
+- name: Grammar
+  type: class
+  source: Illuminate\Database\Schema\Grammars\Grammar
+- name: MySqlGrammar
+  type: class
+  source: Illuminate\Database\Schema\Grammars\MySqlGrammar
+- name: SQLiteGrammar
+  type: class
+  source: Illuminate\Database\Schema\Grammars\SQLiteGrammar
+- name: Fluent
+  type: class
+  source: Illuminate\Support\Fluent
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: Macroable
+  type: class
+  source: Macroable
+properties:
+- name: table
+  visibility: protected
+  comment: '# * The table the blueprint describes.
+
+    # *
+
+    # * @var string'
+- name: prefix
+  visibility: protected
+  comment: '# * The prefix of the table.
+
+    # *
+
+    # * @var string'
+- name: columns
+  visibility: protected
+  comment: '# * The columns that should be added to the table.
+
+    # *
+
+    # * @var \Illuminate\Database\Schema\ColumnDefinition[]'
+- name: commands
+  visibility: protected
+  comment: '# * The commands that should be run for the table.
+
+    # *
+
+    # * @var \Illuminate\Support\Fluent[]'
+- name: engine
+  visibility: public
+  comment: '# * The storage engine that should be used for the table.
+
+    # *
+
+    # * @var string'
+- name: charset
+  visibility: public
+  comment: '# * The default character set that should be used for the table.
+
+    # *
+
+    # * @var string'
+- name: collation
+  visibility: public
+  comment: '# * The collation that should be used for the table.
+
+    # *
+
+    # * @var string'
+- name: temporary
+  visibility: public
+  comment: '# * Whether to make the table temporary.
+
+    # *
+
+    # * @var bool'
+- name: after
+  visibility: public
+  comment: '# * The column to add new columns after.
+
+    # *
+
+    # * @var string'
+- name: state
+  visibility: protected
+  comment: '# * The blueprint state instance.
+
+    # *
+
+    # * @var \Illuminate\Database\Schema\BlueprintState|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: table
+  - name: callback
+    default: 'null'
+  - name: prefix
+    default: ''''''
+  comment: "# * The table the blueprint describes.\n# *\n# * @var string\n# */\n#\
+    \ protected $table;\n# \n# /**\n# * The prefix of the table.\n# *\n# * @var string\n\
+    # */\n# protected $prefix;\n# \n# /**\n# * The columns that should be added to\
+    \ the table.\n# *\n# * @var \\Illuminate\\Database\\Schema\\ColumnDefinition[]\n\
+    # */\n# protected $columns = [];\n# \n# /**\n# * The commands that should be run\
+    \ for the table.\n# *\n# * @var \\Illuminate\\Support\\Fluent[]\n# */\n# protected\
+    \ $commands = [];\n# \n# /**\n# * The storage engine that should be used for the\
+    \ table.\n# *\n# * @var string\n# */\n# public $engine;\n# \n# /**\n# * The default\
+    \ character set that should be used for the table.\n# *\n# * @var string\n# */\n\
+    # public $charset;\n# \n# /**\n# * The collation that should be used for the table.\n\
+    # *\n# * @var string\n# */\n# public $collation;\n# \n# /**\n# * Whether to make\
+    \ the table temporary.\n# *\n# * @var bool\n# */\n# public $temporary = false;\n\
+    # \n# /**\n# * The column to add new columns after.\n# *\n# * @var string\n# */\n\
+    # public $after;\n# \n# /**\n# * The blueprint state instance.\n# *\n# * @var\
+    \ \\Illuminate\\Database\\Schema\\BlueprintState|null\n# */\n# protected $state;\n\
+    # \n# /**\n# * Create a new schema blueprint.\n# *\n# * @param  string  $table\n\
+    # * @param  \\Closure|null  $callback\n# * @param  string  $prefix\n# * @return\
+    \ void"
+- name: build
+  visibility: public
+  parameters:
+  - name: connection
+  - name: grammar
+  comment: '# * Execute the blueprint against the database.
+
+    # *
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @param  \Illuminate\Database\Schema\Grammars\Grammar  $grammar
+
+    # * @return void'
+- name: toSql
+  visibility: public
+  parameters:
+  - name: connection
+  - name: grammar
+  comment: '# * Get the raw SQL statements for the blueprint.
+
+    # *
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @param  \Illuminate\Database\Schema\Grammars\Grammar  $grammar
+
+    # * @return array'
+- name: ensureCommandsAreValid
+  visibility: protected
+  parameters:
+  - name: connection
+  comment: '# * Ensure the commands on the blueprint are valid for the connection
+    type.
+
+    # *
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @return void
+
+    # *
+
+    # * @throws \BadMethodCallException'
+- name: commandsNamed
+  visibility: protected
+  parameters:
+  - name: names
+  comment: '# * Get all of the commands matching the given names.
+
+    # *
+
+    # * @deprecated Will be removed in a future Laravel version.
+
+    # *
+
+    # * @param  array  $names
+
+    # * @return \Illuminate\Support\Collection'
+- name: addImpliedCommands
+  visibility: protected
+  parameters:
+  - name: connection
+  - name: grammar
+  comment: '# * Add the commands that are implied by the blueprint''s state.
+
+    # *
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @param  \Illuminate\Database\Schema\Grammars\Grammar  $grammar
+
+    # * @return void'
+- name: addFluentIndexes
+  visibility: protected
+  parameters:
+  - name: connection
+  - name: grammar
+  comment: '# * Add the index commands fluently specified on columns.
+
+    # *
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @param  \Illuminate\Database\Schema\Grammars\Grammar  $grammar
+
+    # * @return void'
+- name: addFluentCommands
+  visibility: public
+  parameters:
+  - name: connection
+  - name: grammar
+  comment: '# * Add the fluent commands specified on any columns.
+
+    # *
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @param  \Illuminate\Database\Schema\Grammars\Grammar  $grammar
+
+    # * @return void'
+- name: addAlterCommands
+  visibility: public
+  parameters:
+  - name: connection
+  - name: grammar
+  comment: '# * Add the alter commands if whenever needed.
+
+    # *
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @param  \Illuminate\Database\Schema\Grammars\Grammar  $grammar
+
+    # * @return void'
+- name: creating
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the blueprint has a create command.
+
+    # *
+
+    # * @return bool'
+- name: create
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the table needs to be created.
+
+    # *
+
+    # * @return \Illuminate\Support\Fluent'
+- name: engine
+  visibility: public
+  parameters:
+  - name: engine
+  comment: '# * Specify the storage engine that should be used for the table.
+
+    # *
+
+    # * @param  string  $engine
+
+    # * @return void'
+- name: innoDb
+  visibility: public
+  parameters: []
+  comment: '# * Specify that the InnoDB storage engine should be used for the table
+    (MySQL only).
+
+    # *
+
+    # * @return void'
+- name: charset
+  visibility: public
+  parameters:
+  - name: charset
+  comment: '# * Specify the character set that should be used for the table.
+
+    # *
+
+    # * @param  string  $charset
+
+    # * @return void'
+- name: collation
+  visibility: public
+  parameters:
+  - name: collation
+  comment: '# * Specify the collation that should be used for the table.
+
+    # *
+
+    # * @param  string  $collation
+
+    # * @return void'
+- name: temporary
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the table needs to be temporary.
+
+    # *
+
+    # * @return void'
+- name: drop
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the table should be dropped.
+
+    # *
+
+    # * @return \Illuminate\Support\Fluent'
+- name: dropIfExists
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the table should be dropped if it exists.
+
+    # *
+
+    # * @return \Illuminate\Support\Fluent'
+- name: dropColumn
+  visibility: public
+  parameters:
+  - name: columns
+  comment: '# * Indicate that the given columns should be dropped.
+
+    # *
+
+    # * @param  array|mixed  $columns
+
+    # * @return \Illuminate\Support\Fluent'
+- name: renameColumn
+  visibility: public
+  parameters:
+  - name: from
+  - name: to
+  comment: '# * Indicate that the given columns should be renamed.
+
+    # *
+
+    # * @param  string  $from
+
+    # * @param  string  $to
+
+    # * @return \Illuminate\Support\Fluent'
+- name: dropPrimary
+  visibility: public
+  parameters:
+  - name: index
+    default: 'null'
+  comment: '# * Indicate that the given primary key should be dropped.
+
+    # *
+
+    # * @param  string|array|null  $index
+
+    # * @return \Illuminate\Support\Fluent'
+- name: dropUnique
+  visibility: public
+  parameters:
+  - name: index
+  comment: '# * Indicate that the given unique key should be dropped.
+
+    # *
+
+    # * @param  string|array  $index
+
+    # * @return \Illuminate\Support\Fluent'
+- name: dropIndex
+  visibility: public
+  parameters:
+  - name: index
+  comment: '# * Indicate that the given index should be dropped.
+
+    # *
+
+    # * @param  string|array  $index
+
+    # * @return \Illuminate\Support\Fluent'
+- name: dropFullText
+  visibility: public
+  parameters:
+  - name: index
+  comment: '# * Indicate that the given fulltext index should be dropped.
+
+    # *
+
+    # * @param  string|array  $index
+
+    # * @return \Illuminate\Support\Fluent'
+- name: dropSpatialIndex
+  visibility: public
+  parameters:
+  - name: index
+  comment: '# * Indicate that the given spatial index should be dropped.
+
+    # *
+
+    # * @param  string|array  $index
+
+    # * @return \Illuminate\Support\Fluent'
+- name: dropForeign
+  visibility: public
+  parameters:
+  - name: index
+  comment: '# * Indicate that the given foreign key should be dropped.
+
+    # *
+
+    # * @param  string|array  $index
+
+    # * @return \Illuminate\Support\Fluent'
+- name: dropConstrainedForeignId
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Indicate that the given column and foreign key should be dropped.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Support\Fluent'
+- name: dropForeignIdFor
+  visibility: public
+  parameters:
+  - name: model
+  - name: column
+    default: 'null'
+  comment: '# * Indicate that the given foreign key should be dropped.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Model|string  $model
+
+    # * @param  string|null  $column
+
+    # * @return \Illuminate\Support\Fluent'
+- name: dropConstrainedForeignIdFor
+  visibility: public
+  parameters:
+  - name: model
+  - name: column
+    default: 'null'
+  comment: '# * Indicate that the given foreign key should be dropped.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Model|string  $model
+
+    # * @param  string|null  $column
+
+    # * @return \Illuminate\Support\Fluent'
+- name: renameIndex
+  visibility: public
+  parameters:
+  - name: from
+  - name: to
+  comment: '# * Indicate that the given indexes should be renamed.
+
+    # *
+
+    # * @param  string  $from
+
+    # * @param  string  $to
+
+    # * @return \Illuminate\Support\Fluent'
+- name: dropTimestamps
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the timestamp columns should be dropped.
+
+    # *
+
+    # * @return void'
+- name: dropTimestampsTz
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the timestamp columns should be dropped.
+
+    # *
+
+    # * @return void'
+- name: dropSoftDeletes
+  visibility: public
+  parameters:
+  - name: column
+    default: '''deleted_at'''
+  comment: '# * Indicate that the soft delete column should be dropped.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return void'
+- name: dropSoftDeletesTz
+  visibility: public
+  parameters:
+  - name: column
+    default: '''deleted_at'''
+  comment: '# * Indicate that the soft delete column should be dropped.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return void'
+- name: dropRememberToken
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the remember token column should be dropped.
+
+    # *
+
+    # * @return void'
+- name: dropMorphs
+  visibility: public
+  parameters:
+  - name: name
+  - name: indexName
+    default: 'null'
+  comment: '# * Indicate that the polymorphic columns should be dropped.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|null  $indexName
+
+    # * @return void'
+- name: rename
+  visibility: public
+  parameters:
+  - name: to
+  comment: '# * Rename the table to a given name.
+
+    # *
+
+    # * @param  string  $to
+
+    # * @return \Illuminate\Support\Fluent'
+- name: primary
+  visibility: public
+  parameters:
+  - name: columns
+  - name: name
+    default: 'null'
+  - name: algorithm
+    default: 'null'
+  comment: '# * Specify the primary key(s) for the table.
+
+    # *
+
+    # * @param  string|array  $columns
+
+    # * @param  string|null  $name
+
+    # * @param  string|null  $algorithm
+
+    # * @return \Illuminate\Database\Schema\IndexDefinition'
+- name: unique
+  visibility: public
+  parameters:
+  - name: columns
+  - name: name
+    default: 'null'
+  - name: algorithm
+    default: 'null'
+  comment: '# * Specify a unique index for the table.
+
+    # *
+
+    # * @param  string|array  $columns
+
+    # * @param  string|null  $name
+
+    # * @param  string|null  $algorithm
+
+    # * @return \Illuminate\Database\Schema\IndexDefinition'
+- name: index
+  visibility: public
+  parameters:
+  - name: columns
+  - name: name
+    default: 'null'
+  - name: algorithm
+    default: 'null'
+  comment: '# * Specify an index for the table.
+
+    # *
+
+    # * @param  string|array  $columns
+
+    # * @param  string|null  $name
+
+    # * @param  string|null  $algorithm
+
+    # * @return \Illuminate\Database\Schema\IndexDefinition'
+- name: fullText
+  visibility: public
+  parameters:
+  - name: columns
+  - name: name
+    default: 'null'
+  - name: algorithm
+    default: 'null'
+  comment: '# * Specify an fulltext for the table.
+
+    # *
+
+    # * @param  string|array  $columns
+
+    # * @param  string|null  $name
+
+    # * @param  string|null  $algorithm
+
+    # * @return \Illuminate\Database\Schema\IndexDefinition'
+- name: spatialIndex
+  visibility: public
+  parameters:
+  - name: columns
+  - name: name
+    default: 'null'
+  comment: '# * Specify a spatial index for the table.
+
+    # *
+
+    # * @param  string|array  $columns
+
+    # * @param  string|null  $name
+
+    # * @return \Illuminate\Database\Schema\IndexDefinition'
+- name: rawIndex
+  visibility: public
+  parameters:
+  - name: expression
+  - name: name
+  comment: '# * Specify a raw index for the table.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @param  string  $name
+
+    # * @return \Illuminate\Database\Schema\IndexDefinition'
+- name: foreign
+  visibility: public
+  parameters:
+  - name: columns
+  - name: name
+    default: 'null'
+  comment: '# * Specify a foreign key for the table.
+
+    # *
+
+    # * @param  string|array  $columns
+
+    # * @param  string|null  $name
+
+    # * @return \Illuminate\Database\Schema\ForeignKeyDefinition'
+- name: id
+  visibility: public
+  parameters:
+  - name: column
+    default: '''id'''
+  comment: '# * Create a new auto-incrementing big integer (8-byte) column on the
+    table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: increments
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Create a new auto-incrementing integer (4-byte) column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: integerIncrements
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Create a new auto-incrementing integer (4-byte) column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: tinyIncrements
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Create a new auto-incrementing tiny integer (1-byte) column on the
+    table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: smallIncrements
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Create a new auto-incrementing small integer (2-byte) column on the
+    table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: mediumIncrements
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Create a new auto-incrementing medium integer (3-byte) column on the
+    table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: bigIncrements
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Create a new auto-incrementing big integer (8-byte) column on the
+    table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: char
+  visibility: public
+  parameters:
+  - name: column
+  - name: length
+    default: 'null'
+  comment: '# * Create a new char column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  int|null  $length
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: string
+  visibility: public
+  parameters:
+  - name: column
+  - name: length
+    default: 'null'
+  comment: '# * Create a new string column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  int|null  $length
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: tinyText
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Create a new tiny text column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: text
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Create a new text column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: mediumText
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Create a new medium text column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: longText
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Create a new long text column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: integer
+  visibility: public
+  parameters:
+  - name: column
+  - name: autoIncrement
+    default: 'false'
+  - name: unsigned
+    default: 'false'
+  comment: '# * Create a new integer (4-byte) column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  bool  $autoIncrement
+
+    # * @param  bool  $unsigned
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: tinyInteger
+  visibility: public
+  parameters:
+  - name: column
+  - name: autoIncrement
+    default: 'false'
+  - name: unsigned
+    default: 'false'
+  comment: '# * Create a new tiny integer (1-byte) column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  bool  $autoIncrement
+
+    # * @param  bool  $unsigned
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: smallInteger
+  visibility: public
+  parameters:
+  - name: column
+  - name: autoIncrement
+    default: 'false'
+  - name: unsigned
+    default: 'false'
+  comment: '# * Create a new small integer (2-byte) column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  bool  $autoIncrement
+
+    # * @param  bool  $unsigned
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: mediumInteger
+  visibility: public
+  parameters:
+  - name: column
+  - name: autoIncrement
+    default: 'false'
+  - name: unsigned
+    default: 'false'
+  comment: '# * Create a new medium integer (3-byte) column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  bool  $autoIncrement
+
+    # * @param  bool  $unsigned
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: bigInteger
+  visibility: public
+  parameters:
+  - name: column
+  - name: autoIncrement
+    default: 'false'
+  - name: unsigned
+    default: 'false'
+  comment: '# * Create a new big integer (8-byte) column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  bool  $autoIncrement
+
+    # * @param  bool  $unsigned
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: unsignedInteger
+  visibility: public
+  parameters:
+  - name: column
+  - name: autoIncrement
+    default: 'false'
+  comment: '# * Create a new unsigned integer (4-byte) column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  bool  $autoIncrement
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: unsignedTinyInteger
+  visibility: public
+  parameters:
+  - name: column
+  - name: autoIncrement
+    default: 'false'
+  comment: '# * Create a new unsigned tiny integer (1-byte) column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  bool  $autoIncrement
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: unsignedSmallInteger
+  visibility: public
+  parameters:
+  - name: column
+  - name: autoIncrement
+    default: 'false'
+  comment: '# * Create a new unsigned small integer (2-byte) column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  bool  $autoIncrement
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: unsignedMediumInteger
+  visibility: public
+  parameters:
+  - name: column
+  - name: autoIncrement
+    default: 'false'
+  comment: '# * Create a new unsigned medium integer (3-byte) column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  bool  $autoIncrement
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: unsignedBigInteger
+  visibility: public
+  parameters:
+  - name: column
+  - name: autoIncrement
+    default: 'false'
+  comment: '# * Create a new unsigned big integer (8-byte) column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  bool  $autoIncrement
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: foreignId
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Create a new unsigned big integer (8-byte) column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ForeignIdColumnDefinition'
+- name: foreignIdFor
+  visibility: public
+  parameters:
+  - name: model
+  - name: column
+    default: 'null'
+  comment: '# * Create a foreign ID column for the given model.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Model|string  $model
+
+    # * @param  string|null  $column
+
+    # * @return \Illuminate\Database\Schema\ForeignIdColumnDefinition'
+- name: float
+  visibility: public
+  parameters:
+  - name: column
+  - name: precision
+    default: '53'
+  comment: '# * Create a new float column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  int  $precision
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: double
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Create a new double column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: decimal
+  visibility: public
+  parameters:
+  - name: column
+  - name: total
+    default: '8'
+  - name: places
+    default: '2'
+  comment: '# * Create a new decimal column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  int  $total
+
+    # * @param  int  $places
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: boolean
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Create a new boolean column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: enum
+  visibility: public
+  parameters:
+  - name: column
+  - name: allowed
+  comment: '# * Create a new enum column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  array  $allowed
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: set
+  visibility: public
+  parameters:
+  - name: column
+  - name: allowed
+  comment: '# * Create a new set column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  array  $allowed
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: json
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Create a new json column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: jsonb
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Create a new jsonb column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: date
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Create a new date column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: dateTime
+  visibility: public
+  parameters:
+  - name: column
+  - name: precision
+    default: '0'
+  comment: '# * Create a new date-time column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  int|null  $precision
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: dateTimeTz
+  visibility: public
+  parameters:
+  - name: column
+  - name: precision
+    default: '0'
+  comment: '# * Create a new date-time column (with time zone) on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  int|null  $precision
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: time
+  visibility: public
+  parameters:
+  - name: column
+  - name: precision
+    default: '0'
+  comment: '# * Create a new time column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  int|null  $precision
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: timeTz
+  visibility: public
+  parameters:
+  - name: column
+  - name: precision
+    default: '0'
+  comment: '# * Create a new time column (with time zone) on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  int|null  $precision
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: timestamp
+  visibility: public
+  parameters:
+  - name: column
+  - name: precision
+    default: '0'
+  comment: '# * Create a new timestamp column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  int|null  $precision
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: timestampTz
+  visibility: public
+  parameters:
+  - name: column
+  - name: precision
+    default: '0'
+  comment: '# * Create a new timestamp (with time zone) column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  int|null  $precision
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: timestamps
+  visibility: public
+  parameters:
+  - name: precision
+    default: '0'
+  comment: '# * Add nullable creation and update timestamps to the table.
+
+    # *
+
+    # * @param  int|null  $precision
+
+    # * @return void'
+- name: nullableTimestamps
+  visibility: public
+  parameters:
+  - name: precision
+    default: '0'
+  comment: '# * Add nullable creation and update timestamps to the table.
+
+    # *
+
+    # * Alias for self::timestamps().
+
+    # *
+
+    # * @param  int|null  $precision
+
+    # * @return void'
+- name: timestampsTz
+  visibility: public
+  parameters:
+  - name: precision
+    default: '0'
+  comment: '# * Add creation and update timestampTz columns to the table.
+
+    # *
+
+    # * @param  int|null  $precision
+
+    # * @return void'
+- name: datetimes
+  visibility: public
+  parameters:
+  - name: precision
+    default: '0'
+  comment: '# * Add creation and update datetime columns to the table.
+
+    # *
+
+    # * @param  int|null  $precision
+
+    # * @return void'
+- name: softDeletes
+  visibility: public
+  parameters:
+  - name: column
+    default: '''deleted_at'''
+  - name: precision
+    default: '0'
+  comment: '# * Add a "deleted at" timestamp for the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  int|null  $precision
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: softDeletesTz
+  visibility: public
+  parameters:
+  - name: column
+    default: '''deleted_at'''
+  - name: precision
+    default: '0'
+  comment: '# * Add a "deleted at" timestampTz for the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  int|null  $precision
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: softDeletesDatetime
+  visibility: public
+  parameters:
+  - name: column
+    default: '''deleted_at'''
+  - name: precision
+    default: '0'
+  comment: '# * Add a "deleted at" datetime column to the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  int|null  $precision
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: year
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Create a new year column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: binary
+  visibility: public
+  parameters:
+  - name: column
+  - name: length
+    default: 'null'
+  - name: fixed
+    default: 'false'
+  comment: '# * Create a new binary column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  int|null  $length
+
+    # * @param  bool  $fixed
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: uuid
+  visibility: public
+  parameters:
+  - name: column
+    default: '''uuid'''
+  comment: '# * Create a new UUID column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: foreignUuid
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Create a new UUID column on the table with a foreign key constraint.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ForeignIdColumnDefinition'
+- name: ulid
+  visibility: public
+  parameters:
+  - name: column
+    default: '''ulid'''
+  - name: length
+    default: '26'
+  comment: '# * Create a new ULID column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  int|null  $length
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: foreignUlid
+  visibility: public
+  parameters:
+  - name: column
+  - name: length
+    default: '26'
+  comment: '# * Create a new ULID column on the table with a foreign key constraint.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  int|null  $length
+
+    # * @return \Illuminate\Database\Schema\ForeignIdColumnDefinition'
+- name: ipAddress
+  visibility: public
+  parameters:
+  - name: column
+    default: '''ip_address'''
+  comment: '# * Create a new IP address column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: macAddress
+  visibility: public
+  parameters:
+  - name: column
+    default: '''mac_address'''
+  comment: '# * Create a new MAC address column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: geometry
+  visibility: public
+  parameters:
+  - name: column
+  - name: subtype
+    default: 'null'
+  - name: srid
+    default: '0'
+  comment: '# * Create a new geometry column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  string|null  $subtype
+
+    # * @param  int  $srid
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: geography
+  visibility: public
+  parameters:
+  - name: column
+  - name: subtype
+    default: 'null'
+  - name: srid
+    default: '4326'
+  comment: '# * Create a new geography column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  string|null  $subtype
+
+    # * @param  int  $srid
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: computed
+  visibility: public
+  parameters:
+  - name: column
+  - name: expression
+  comment: '# * Create a new generated, computed column on the table.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  string  $expression
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: morphs
+  visibility: public
+  parameters:
+  - name: name
+  - name: indexName
+    default: 'null'
+  comment: '# * Add the proper columns for a polymorphic table.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|null  $indexName
+
+    # * @return void'
+- name: nullableMorphs
+  visibility: public
+  parameters:
+  - name: name
+  - name: indexName
+    default: 'null'
+  comment: '# * Add nullable columns for a polymorphic table.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|null  $indexName
+
+    # * @return void'
+- name: numericMorphs
+  visibility: public
+  parameters:
+  - name: name
+  - name: indexName
+    default: 'null'
+  comment: '# * Add the proper columns for a polymorphic table using numeric IDs (incremental).
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|null  $indexName
+
+    # * @return void'
+- name: nullableNumericMorphs
+  visibility: public
+  parameters:
+  - name: name
+  - name: indexName
+    default: 'null'
+  comment: '# * Add nullable columns for a polymorphic table using numeric IDs (incremental).
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|null  $indexName
+
+    # * @return void'
+- name: uuidMorphs
+  visibility: public
+  parameters:
+  - name: name
+  - name: indexName
+    default: 'null'
+  comment: '# * Add the proper columns for a polymorphic table using UUIDs.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|null  $indexName
+
+    # * @return void'
+- name: nullableUuidMorphs
+  visibility: public
+  parameters:
+  - name: name
+  - name: indexName
+    default: 'null'
+  comment: '# * Add nullable columns for a polymorphic table using UUIDs.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|null  $indexName
+
+    # * @return void'
+- name: ulidMorphs
+  visibility: public
+  parameters:
+  - name: name
+  - name: indexName
+    default: 'null'
+  comment: '# * Add the proper columns for a polymorphic table using ULIDs.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|null  $indexName
+
+    # * @return void'
+- name: nullableUlidMorphs
+  visibility: public
+  parameters:
+  - name: name
+  - name: indexName
+    default: 'null'
+  comment: '# * Add nullable columns for a polymorphic table using ULIDs.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string|null  $indexName
+
+    # * @return void'
+- name: rememberToken
+  visibility: public
+  parameters: []
+  comment: '# * Adds the `remember_token` column to the table.
+
+    # *
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: comment
+  visibility: public
+  parameters:
+  - name: comment
+  comment: '# * Add a comment to the table.
+
+    # *
+
+    # * @param  string  $comment
+
+    # * @return \Illuminate\Support\Fluent'
+- name: indexCommand
+  visibility: protected
+  parameters:
+  - name: type
+  - name: columns
+  - name: index
+  - name: algorithm
+    default: 'null'
+  comment: '# * Add a new index command to the blueprint.
+
+    # *
+
+    # * @param  string  $type
+
+    # * @param  string|array  $columns
+
+    # * @param  string  $index
+
+    # * @param  string|null  $algorithm
+
+    # * @return \Illuminate\Support\Fluent'
+- name: dropIndexCommand
+  visibility: protected
+  parameters:
+  - name: command
+  - name: type
+  - name: index
+  comment: '# * Create a new drop index command on the blueprint.
+
+    # *
+
+    # * @param  string  $command
+
+    # * @param  string  $type
+
+    # * @param  string|array  $index
+
+    # * @return \Illuminate\Support\Fluent'
+- name: createIndexName
+  visibility: protected
+  parameters:
+  - name: type
+  - name: columns
+  comment: '# * Create a default index name for the table.
+
+    # *
+
+    # * @param  string  $type
+
+    # * @param  array  $columns
+
+    # * @return string'
+- name: addColumn
+  visibility: public
+  parameters:
+  - name: type
+  - name: name
+  - name: parameters
+    default: '[]'
+  comment: '# * Add a new column to the blueprint.
+
+    # *
+
+    # * @param  string  $type
+
+    # * @param  string  $name
+
+    # * @param  array  $parameters
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: addColumnDefinition
+  visibility: protected
+  parameters:
+  - name: definition
+  comment: '# * Add a new column definition to the blueprint.
+
+    # *
+
+    # * @param  \Illuminate\Database\Schema\ColumnDefinition  $definition
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition'
+- name: after
+  visibility: public
+  parameters:
+  - name: column
+  - name: callback
+  comment: '# * Add the columns from the callback after the given column.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @param  \Closure  $callback
+
+    # * @return void'
+- name: removeColumn
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Remove a column from the schema blueprint.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return $this'
+- name: addCommand
+  visibility: protected
+  parameters:
+  - name: name
+  - name: parameters
+    default: '[]'
+  comment: '# * Add a new command to the blueprint.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  array  $parameters
+
+    # * @return \Illuminate\Support\Fluent'
+- name: createCommand
+  visibility: protected
+  parameters:
+  - name: name
+  - name: parameters
+    default: '[]'
+  comment: '# * Create a new Fluent command.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  array  $parameters
+
+    # * @return \Illuminate\Support\Fluent'
+- name: getTable
+  visibility: public
+  parameters: []
+  comment: '# * Get the table the blueprint describes.
+
+    # *
+
+    # * @return string'
+- name: getPrefix
+  visibility: public
+  parameters: []
+  comment: '# * Get the table prefix.
+
+    # *
+
+    # * @return string'
+- name: getColumns
+  visibility: public
+  parameters: []
+  comment: '# * Get the columns on the blueprint.
+
+    # *
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition[]'
+- name: getCommands
+  visibility: public
+  parameters: []
+  comment: '# * Get the commands on the blueprint.
+
+    # *
+
+    # * @return \Illuminate\Support\Fluent[]'
+- name: hasState
+  visibility: private
+  parameters: []
+  comment: null
+- name: getState
+  visibility: public
+  parameters: []
+  comment: '# * Get the state of the blueprint.
+
+    # *
+
+    # * @return \Illuminate\Database\Schema\BlueprintState'
+- name: getAddedColumns
+  visibility: public
+  parameters: []
+  comment: '# * Get the columns on the blueprint that should be added.
+
+    # *
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition[]'
+- name: getChangedColumns
+  visibility: public
+  parameters: []
+  comment: '# * Get the columns on the blueprint that should be changed.
+
+    # *
+
+    # * @deprecated Will be removed in a future Laravel version.
+
+    # *
+
+    # * @return \Illuminate\Database\Schema\ColumnDefinition[]'
+traits:
+- Closure
+- Illuminate\Database\Connection
+- Illuminate\Database\Eloquent\Concerns\HasUlids
+- Illuminate\Database\Query\Expression
+- Illuminate\Database\Schema\Grammars\Grammar
+- Illuminate\Database\Schema\Grammars\MySqlGrammar
+- Illuminate\Database\Schema\Grammars\SQLiteGrammar
+- Illuminate\Support\Fluent
+- Illuminate\Support\Traits\Macroable
+- Macroable
+interfaces: []

@@ -1,0 +1,230 @@
+name: BrowserKitAssertionsTrait
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: PHPUnit\Framework\Constraint\Constraint
+- name: LogicalAnd
+  type: class
+  source: PHPUnit\Framework\Constraint\LogicalAnd
+- name: LogicalNot
+  type: class
+  source: PHPUnit\Framework\Constraint\LogicalNot
+- name: ExpectationFailedException
+  type: class
+  source: PHPUnit\Framework\ExpectationFailedException
+- name: AbstractBrowser
+  type: class
+  source: Symfony\Component\BrowserKit\AbstractBrowser
+- name: BrowserKitConstraint
+  type: class
+  source: Symfony\Component\BrowserKit\Test\Constraint
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: ResponseConstraint
+  type: class
+  source: Symfony\Component\HttpFoundation\Test\Constraint
+properties: []
+methods:
+- name: assertResponseIsSuccessful
+  visibility: public
+  parameters:
+  - name: message
+    default: ''''''
+  - name: verbose
+    default: 'true'
+  comment: null
+- name: assertResponseStatusCodeSame
+  visibility: public
+  parameters:
+  - name: expectedCode
+  - name: message
+    default: ''''''
+  - name: verbose
+    default: 'true'
+  comment: null
+- name: assertResponseFormatSame
+  visibility: public
+  parameters:
+  - name: expectedFormat
+  - name: message
+    default: ''''''
+  comment: null
+- name: assertResponseRedirects
+  visibility: public
+  parameters:
+  - name: expectedLocation
+    default: 'null'
+  - name: expectedCode
+    default: 'null'
+  - name: message
+    default: ''''''
+  - name: verbose
+    default: 'true'
+  comment: null
+- name: assertResponseHasHeader
+  visibility: public
+  parameters:
+  - name: headerName
+  - name: message
+    default: ''''''
+  comment: null
+- name: assertResponseNotHasHeader
+  visibility: public
+  parameters:
+  - name: headerName
+  - name: message
+    default: ''''''
+  comment: null
+- name: assertResponseHeaderSame
+  visibility: public
+  parameters:
+  - name: headerName
+  - name: expectedValue
+  - name: message
+    default: ''''''
+  comment: null
+- name: assertResponseHeaderNotSame
+  visibility: public
+  parameters:
+  - name: headerName
+  - name: expectedValue
+  - name: message
+    default: ''''''
+  comment: null
+- name: assertResponseHasCookie
+  visibility: public
+  parameters:
+  - name: name
+  - name: path
+    default: '''/'''
+  - name: domain
+    default: 'null'
+  - name: message
+    default: ''''''
+  comment: null
+- name: assertResponseNotHasCookie
+  visibility: public
+  parameters:
+  - name: name
+  - name: path
+    default: '''/'''
+  - name: domain
+    default: 'null'
+  - name: message
+    default: ''''''
+  comment: null
+- name: assertResponseCookieValueSame
+  visibility: public
+  parameters:
+  - name: name
+  - name: expectedValue
+  - name: path
+    default: '''/'''
+  - name: domain
+    default: 'null'
+  - name: message
+    default: ''''''
+  comment: null
+- name: assertResponseIsUnprocessable
+  visibility: public
+  parameters:
+  - name: message
+    default: ''''''
+  - name: verbose
+    default: 'true'
+  comment: null
+- name: assertBrowserHasCookie
+  visibility: public
+  parameters:
+  - name: name
+  - name: path
+    default: '''/'''
+  - name: domain
+    default: 'null'
+  - name: message
+    default: ''''''
+  comment: null
+- name: assertBrowserNotHasCookie
+  visibility: public
+  parameters:
+  - name: name
+  - name: path
+    default: '''/'''
+  - name: domain
+    default: 'null'
+  - name: message
+    default: ''''''
+  comment: null
+- name: assertBrowserCookieValueSame
+  visibility: public
+  parameters:
+  - name: name
+  - name: expectedValue
+  - name: raw
+    default: 'false'
+  - name: path
+    default: '''/'''
+  - name: domain
+    default: 'null'
+  - name: message
+    default: ''''''
+  comment: null
+- name: assertRequestAttributeValueSame
+  visibility: public
+  parameters:
+  - name: name
+  - name: expectedValue
+  - name: message
+    default: ''''''
+  comment: null
+- name: assertRouteSame
+  visibility: public
+  parameters:
+  - name: expectedRoute
+  - name: parameters
+    default: '[]'
+  - name: message
+    default: ''''''
+  comment: null
+- name: assertThatForResponse
+  visibility: public
+  parameters:
+  - name: constraint
+  - name: message
+    default: ''''''
+  comment: null
+- name: assertThatForClient
+  visibility: public
+  parameters:
+  - name: constraint
+  - name: message
+    default: ''''''
+  comment: null
+- name: getClient
+  visibility: protected
+  parameters:
+  - name: newClient
+    default: 'null'
+  comment: null
+- name: getResponse
+  visibility: private
+  parameters: []
+  comment: null
+- name: getRequest
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\Constraint\Constraint
+- PHPUnit\Framework\Constraint\LogicalAnd
+- PHPUnit\Framework\Constraint\LogicalNot
+- PHPUnit\Framework\ExpectationFailedException
+- Symfony\Component\BrowserKit\AbstractBrowser
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+interfaces: []

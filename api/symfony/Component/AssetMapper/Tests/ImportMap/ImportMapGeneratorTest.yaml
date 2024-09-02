@@ -1,0 +1,142 @@
+name: ImportMapGeneratorTest
+class_comment: null
+dependencies:
+- name: MockObject
+  type: class
+  source: PHPUnit\Framework\MockObject\MockObject
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AssetMapperInterface
+  type: class
+  source: Symfony\Component\AssetMapper\AssetMapperInterface
+- name: CompiledAssetMapperConfigReader
+  type: class
+  source: Symfony\Component\AssetMapper\CompiledAssetMapperConfigReader
+- name: ImportMapConfigReader
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapConfigReader
+- name: ImportMapEntries
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapEntries
+- name: ImportMapEntry
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapEntry
+- name: ImportMapGenerator
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapGenerator
+- name: ImportMapType
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapType
+- name: JavaScriptImport
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\JavaScriptImport
+- name: MappedAsset
+  type: class
+  source: Symfony\Component\AssetMapper\MappedAsset
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: Path
+  type: class
+  source: Symfony\Component\Filesystem\Path
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testGetEntrypointNames
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetImportMapData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetRawImportMapData
+  visibility: public
+  parameters:
+  - name: importMapEntries
+  - name: mappedAssets
+  - name: expectedData
+  comment: '# * @dataProvider getRawImportMapDataTests'
+- name: getRawImportMapDataTests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetRawImportDataUsesCacheFile
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindEagerEntrypointImports
+  visibility: public
+  parameters:
+  - name: entryAsset
+  - name: expected
+  - name: mappedAssets
+    default: '[]'
+  comment: '# * @dataProvider getEagerEntrypointImportsTests'
+- name: getEagerEntrypointImportsTests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFindEagerEntrypointImportsUsesCacheFile
+  visibility: public
+  parameters: []
+  comment: null
+- name: createImportMapGenerator
+  visibility: private
+  parameters: []
+  comment: null
+- name: mockImportMap
+  visibility: private
+  parameters:
+  - name: importMapEntries
+  comment: null
+- name: createLocalEntry
+  visibility: private
+  parameters:
+  - name: importName
+  - name: path
+  - name: type
+    default: ImportMapType::JS
+  - name: isEntrypoint
+    default: 'false'
+  comment: null
+- name: createRemoteEntry
+  visibility: private
+  parameters:
+  - name: importName
+  - name: version
+  - name: path
+    default: 'null'
+  - name: type
+    default: ImportMapType::JS
+  - name: packageSpecifier
+    default: 'null'
+  comment: null
+- name: mockAssetMapper
+  visibility: private
+  parameters:
+  - name: mappedAssets
+  comment: '# * @param MappedAsset[] $mappedAssets'
+traits:
+- PHPUnit\Framework\MockObject\MockObject
+- PHPUnit\Framework\TestCase
+- Symfony\Component\AssetMapper\AssetMapperInterface
+- Symfony\Component\AssetMapper\CompiledAssetMapperConfigReader
+- Symfony\Component\AssetMapper\ImportMap\ImportMapConfigReader
+- Symfony\Component\AssetMapper\ImportMap\ImportMapEntries
+- Symfony\Component\AssetMapper\ImportMap\ImportMapEntry
+- Symfony\Component\AssetMapper\ImportMap\ImportMapGenerator
+- Symfony\Component\AssetMapper\ImportMap\ImportMapType
+- Symfony\Component\AssetMapper\ImportMap\JavaScriptImport
+- Symfony\Component\AssetMapper\MappedAsset
+- Symfony\Component\Filesystem\Filesystem
+- Symfony\Component\Filesystem\Path
+interfaces: []

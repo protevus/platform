@@ -1,0 +1,23 @@
+name: InMemoryStoreTest
+class_comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>"
+dependencies:
+- name: PersistingStoreInterface
+  type: class
+  source: Symfony\Component\Lock\PersistingStoreInterface
+- name: InMemoryStore
+  type: class
+  source: Symfony\Component\Lock\Store\InMemoryStore
+- name: SharedLockStoreTestTrait
+  type: class
+  source: SharedLockStoreTestTrait
+properties: []
+methods:
+- name: getStore
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Lock\PersistingStoreInterface
+- Symfony\Component\Lock\Store\InMemoryStore
+- SharedLockStoreTestTrait
+interfaces: []

@@ -1,0 +1,27 @@
+name: MessageCountAwareInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getMessageCount
+  visibility: public
+  parameters: []
+  comment: '# * @author Samuel Roze <samuel.roze@gmail.com>
+
+    # * @author Ryan Weaver <ryan@symfonycasts.com>
+
+    # */
+
+    # interface MessageCountAwareInterface
+
+    # {
+
+    # /**
+
+    # * Returns the number of messages waiting to be handled.
+
+    # *
+
+    # * In some systems, this may be an approximate number.'
+traits: []
+interfaces: []

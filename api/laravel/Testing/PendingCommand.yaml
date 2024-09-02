@@ -1,0 +1,370 @@
+name: PendingCommand
+class_comment: null
+dependencies:
+- name: OutputStyle
+  type: class
+  source: Illuminate\Console\OutputStyle
+- name: PromptValidationException
+  type: class
+  source: Illuminate\Console\PromptValidationException
+- name: Kernel
+  type: class
+  source: Illuminate\Contracts\Console\Kernel
+- name: Container
+  type: class
+  source: Illuminate\Contracts\Container\Container
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Conditionable
+  type: class
+  source: Illuminate\Support\Traits\Conditionable
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: Mockery
+  type: class
+  source: Mockery
+- name: NoMatchingExpectationException
+  type: class
+  source: Mockery\Exception\NoMatchingExpectationException
+- name: PHPUnitTestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: Table
+  type: class
+  source: Symfony\Component\Console\Helper\Table
+- name: ArrayInput
+  type: class
+  source: Symfony\Component\Console\Input\ArrayInput
+- name: BufferedOutput
+  type: class
+  source: Symfony\Component\Console\Output\BufferedOutput
+- name: Conditionable
+  type: class
+  source: Conditionable
+- name: Macroable
+  type: class
+  source: Macroable
+properties:
+- name: test
+  visibility: public
+  comment: '# * The test being run.
+
+    # *
+
+    # * @var \Illuminate\Foundation\Testing\TestCase'
+- name: app
+  visibility: protected
+  comment: '# * The application instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Container\Container'
+- name: command
+  visibility: protected
+  comment: '# * The command to run.
+
+    # *
+
+    # * @var string'
+- name: parameters
+  visibility: protected
+  comment: '# * The parameters to pass to the command.
+
+    # *
+
+    # * @var array'
+- name: expectedExitCode
+  visibility: protected
+  comment: '# * The expected exit code.
+
+    # *
+
+    # * @var int'
+- name: unexpectedExitCode
+  visibility: protected
+  comment: '# * The unexpected exit code.
+
+    # *
+
+    # * @var int'
+- name: hasExecuted
+  visibility: protected
+  comment: '# * Determine if the command has executed.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: test
+  - name: app
+  - name: command
+  - name: parameters
+  comment: "# * The test being run.\n# *\n# * @var \\Illuminate\\Foundation\\Testing\\\
+    TestCase\n# */\n# public $test;\n# \n# /**\n# * The application instance.\n# *\n\
+    # * @var \\Illuminate\\Contracts\\Container\\Container\n# */\n# protected $app;\n\
+    # \n# /**\n# * The command to run.\n# *\n# * @var string\n# */\n# protected $command;\n\
+    # \n# /**\n# * The parameters to pass to the command.\n# *\n# * @var array\n#\
+    \ */\n# protected $parameters;\n# \n# /**\n# * The expected exit code.\n# *\n\
+    # * @var int\n# */\n# protected $expectedExitCode;\n# \n# /**\n# * The unexpected\
+    \ exit code.\n# *\n# * @var int\n# */\n# protected $unexpectedExitCode;\n# \n\
+    # /**\n# * Determine if the command has executed.\n# *\n# * @var bool\n# */\n\
+    # protected $hasExecuted = false;\n# \n# /**\n# * Create a new pending console\
+    \ command run.\n# *\n# * @param  \\PHPUnit\\Framework\\TestCase  $test\n# * @param\
+    \  \\Illuminate\\Contracts\\Container\\Container  $app\n# * @param  string  $command\n\
+    # * @param  array  $parameters\n# * @return void"
+- name: expectsQuestion
+  visibility: public
+  parameters:
+  - name: question
+  - name: answer
+  comment: '# * Specify an expected question that will be asked when the command runs.
+
+    # *
+
+    # * @param  string  $question
+
+    # * @param  string|bool  $answer
+
+    # * @return $this'
+- name: expectsConfirmation
+  visibility: public
+  parameters:
+  - name: question
+  - name: answer
+    default: '''no'''
+  comment: '# * Specify an expected confirmation question that will be asked when
+    the command runs.
+
+    # *
+
+    # * @param  string  $question
+
+    # * @param  string  $answer
+
+    # * @return $this'
+- name: expectsChoice
+  visibility: public
+  parameters:
+  - name: question
+  - name: answer
+  - name: answers
+  - name: strict
+    default: 'false'
+  comment: '# * Specify an expected choice question with expected answers that will
+    be asked/shown when the command runs.
+
+    # *
+
+    # * @param  string  $question
+
+    # * @param  string|array  $answer
+
+    # * @param  array  $answers
+
+    # * @param  bool  $strict
+
+    # * @return $this'
+- name: expectsOutput
+  visibility: public
+  parameters:
+  - name: output
+    default: 'null'
+  comment: '# * Specify output that should be printed when the command runs.
+
+    # *
+
+    # * @param  string|null  $output
+
+    # * @return $this'
+- name: doesntExpectOutput
+  visibility: public
+  parameters:
+  - name: output
+    default: 'null'
+  comment: '# * Specify output that should never be printed when the command runs.
+
+    # *
+
+    # * @param  string|null  $output
+
+    # * @return $this'
+- name: expectsOutputToContain
+  visibility: public
+  parameters:
+  - name: string
+  comment: '# * Specify that the given string should be contained in the command output.
+
+    # *
+
+    # * @param  string  $string
+
+    # * @return $this'
+- name: doesntExpectOutputToContain
+  visibility: public
+  parameters:
+  - name: string
+  comment: '# * Specify that the given string shouldn''t be contained in the command
+    output.
+
+    # *
+
+    # * @param  string  $string
+
+    # * @return $this'
+- name: expectsTable
+  visibility: public
+  parameters:
+  - name: headers
+  - name: rows
+  - name: tableStyle
+    default: '''default'''
+  - name: columnStyles
+    default: '[]'
+  comment: '# * Specify a table that should be printed when the command runs.
+
+    # *
+
+    # * @param  array  $headers
+
+    # * @param  \Illuminate\Contracts\Support\Arrayable|array  $rows
+
+    # * @param  string  $tableStyle
+
+    # * @param  array  $columnStyles
+
+    # * @return $this'
+- name: assertExitCode
+  visibility: public
+  parameters:
+  - name: exitCode
+  comment: '# * Assert that the command has the given exit code.
+
+    # *
+
+    # * @param  int  $exitCode
+
+    # * @return $this'
+- name: assertNotExitCode
+  visibility: public
+  parameters:
+  - name: exitCode
+  comment: '# * Assert that the command does not have the given exit code.
+
+    # *
+
+    # * @param  int  $exitCode
+
+    # * @return $this'
+- name: assertSuccessful
+  visibility: public
+  parameters: []
+  comment: '# * Assert that the command has the success exit code.
+
+    # *
+
+    # * @return $this'
+- name: assertOk
+  visibility: public
+  parameters: []
+  comment: '# * Assert that the command has the success exit code.
+
+    # *
+
+    # * @return $this'
+- name: assertFailed
+  visibility: public
+  parameters: []
+  comment: '# * Assert that the command does not have the success exit code.
+
+    # *
+
+    # * @return $this'
+- name: execute
+  visibility: public
+  parameters: []
+  comment: '# * Execute the command.
+
+    # *
+
+    # * @return int'
+- name: run
+  visibility: public
+  parameters: []
+  comment: '# * Execute the command.
+
+    # *
+
+    # * @return int
+
+    # *
+
+    # * @throws \Mockery\Exception\NoMatchingExpectationException'
+- name: verifyExpectations
+  visibility: protected
+  parameters: []
+  comment: '# * Determine if expected questions / choices / outputs are fulfilled.
+
+    # *
+
+    # * @return void'
+- name: mockConsoleOutput
+  visibility: protected
+  parameters: []
+  comment: '# * Mock the application''s console output.
+
+    # *
+
+    # * @return \Mockery\MockInterface'
+- name: createABufferedOutputMock
+  visibility: private
+  parameters: []
+  comment: '# * Create a mock for the buffered output.
+
+    # *
+
+    # * @return \Mockery\MockInterface'
+- name: flushExpectations
+  visibility: protected
+  parameters: []
+  comment: '# * Flush the expectations from the test case.
+
+    # *
+
+    # * @return void'
+- name: __destruct
+  visibility: public
+  parameters: []
+  comment: '# * Handle the object''s destruction.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Console\OutputStyle
+- Illuminate\Console\PromptValidationException
+- Illuminate\Contracts\Console\Kernel
+- Illuminate\Contracts\Container\Container
+- Illuminate\Contracts\Support\Arrayable
+- Illuminate\Support\Arr
+- Illuminate\Support\Traits\Conditionable
+- Illuminate\Support\Traits\Macroable
+- Mockery
+- Mockery\Exception\NoMatchingExpectationException
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Helper\Table
+- Symfony\Component\Console\Input\ArrayInput
+- Symfony\Component\Console\Output\BufferedOutput
+- Conditionable
+- Macroable
+interfaces: []

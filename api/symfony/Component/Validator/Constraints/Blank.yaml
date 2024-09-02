@@ -1,0 +1,30 @@
+name: Blank
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: options
+    default: 'null'
+  - name: message
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  comment: "# * Validates that a value is blank, i.e. an empty string or null.\n#\
+    \ *\n# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# #[\\Attribute(\\\
+    Attribute::TARGET_PROPERTY | \\Attribute::TARGET_METHOD | \\Attribute::IS_REPEATABLE)]\n\
+    # class Blank extends Constraint\n# {\n# public const NOT_BLANK_ERROR = '183ad2de-533d-4796-a439-6d3c3852b549';\n\
+    # \n# protected const ERROR_NAMES = [\n# self::NOT_BLANK_ERROR => 'NOT_BLANK_ERROR',\n\
+    # ];\n# \n# public string $message = 'This value should be blank.';\n# \n# /**\n\
+    # * @param array<string,mixed>|null $options\n# * @param string[]|null       \
+    \     $groups"
+traits:
+- Symfony\Component\Validator\Constraint
+interfaces: []

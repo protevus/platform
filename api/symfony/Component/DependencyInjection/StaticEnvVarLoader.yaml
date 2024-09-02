@@ -1,0 +1,17 @@
+name: StaticEnvVarLoader
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: envVarLoader
+  comment: null
+- name: loadEnvVars
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces:
+- EnvVarLoaderInterface

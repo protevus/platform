@@ -1,0 +1,78 @@
+name: YamlFileLoader
+class_comment: '# * Loads validation metadata from a YAML file.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+- name: ParseException
+  type: class
+  source: Symfony\Component\Yaml\Exception\ParseException
+- name: YamlParser
+  type: class
+  source: Symfony\Component\Yaml\Parser
+- name: Yaml
+  type: class
+  source: Symfony\Component\Yaml\Yaml
+properties: []
+methods:
+- name: getMappedClasses
+  visibility: public
+  parameters: []
+  comment: "# * Loads validation metadata from a YAML file.\n# *\n# * @author Bernhard\
+    \ Schussek <bschussek@gmail.com>\n# */\n# class YamlFileLoader extends FileLoader\n\
+    # {\n# protected array $classes;\n# \n# public function __construct(string $file)\n\
+    # {\n# $this->file = $file;\n# }\n# \n# /**\n# * Caches the used YAML parser.\n\
+    # */\n# private YamlParser $yamlParser;\n# \n# public function loadClassMetadata(ClassMetadata\
+    \ $metadata): bool\n# {\n# if (!isset($this->classes)) {\n# $this->loadClassesFromYaml();\n\
+    # }\n# \n# if (isset($this->classes[$metadata->getClassName()])) {\n# $classDescription\
+    \ = $this->classes[$metadata->getClassName()];\n# \n# $this->loadClassMetadataFromYaml($metadata,\
+    \ $classDescription);\n# \n# return true;\n# }\n# \n# return false;\n# }\n# \n\
+    # /**\n# * Return the names of the classes mapped in this file.\n# *\n# * @return\
+    \ string[]"
+- name: parseNodes
+  visibility: protected
+  parameters:
+  - name: nodes
+  comment: '# * Parses a collection of YAML nodes.
+
+    # *
+
+    # * @param array $nodes The YAML nodes
+
+    # *
+
+    # * @return array<array|scalar|Constraint>'
+- name: parseFile
+  visibility: private
+  parameters:
+  - name: path
+  comment: '# * Loads the YAML class descriptions from the given file.
+
+    # *
+
+    # * @throws \InvalidArgumentException If the file could not be loaded or did
+
+    # *                                   not contain a YAML array'
+- name: loadClassesFromYaml
+  visibility: private
+  parameters: []
+  comment: null
+- name: loadClassMetadataFromYaml
+  visibility: private
+  parameters:
+  - name: metadata
+  - name: classDescription
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Mapping\ClassMetadata
+- Symfony\Component\Yaml\Exception\ParseException
+- Symfony\Component\Yaml\Yaml
+interfaces: []

@@ -1,0 +1,49 @@
+name: FirewallMap
+class_comment: '# * This is a lazy-loading firewall map implementation.
+
+  # *
+
+  # * Listeners will only be initialized if we really need them.
+
+  # *
+
+  # * @author Johannes M. Schmitt <schmittjoh@gmail.com>'
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: FirewallMapInterface
+  type: class
+  source: Symfony\Component\Security\Http\FirewallMapInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+  - name: map
+  comment: null
+- name: getListeners
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+- name: getFirewallConfig
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+- name: getFirewallContext
+  visibility: private
+  parameters:
+  - name: request
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\Security\Http\FirewallMapInterface
+interfaces:
+- FirewallMapInterface

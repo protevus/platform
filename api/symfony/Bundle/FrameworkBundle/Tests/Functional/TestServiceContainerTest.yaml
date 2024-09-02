@@ -1,0 +1,55 @@
+name: TestServiceContainerTest
+class_comment: null
+dependencies:
+- name: TestContainer
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Test\TestContainer
+- name: NonPublicService
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\TestBundle\TestServiceContainer\NonPublicService
+- name: PrivateService
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\TestBundle\TestServiceContainer\PrivateService
+- name: PublicService
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\TestBundle\TestServiceContainer\PublicService
+- name: UnusedPrivateService
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\TestBundle\TestServiceContainer\UnusedPrivateService
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: testLogicExceptionIfTestConfigIsDisabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThatPrivateServicesAreAvailableIfTestConfigIsEnabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThatPrivateServicesCanBeSetIfTestConfigIsEnabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetDecoratedService
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBootKernel
+  visibility: public
+  parameters: []
+  comment: '# * @doesNotPerformAssertions'
+- name: testKernelIsNotInitialized
+  visibility: public
+  parameters: []
+  comment: '# * @depends testBootKernel'
+traits:
+- Symfony\Bundle\FrameworkBundle\Test\TestContainer
+- Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\TestBundle\TestServiceContainer\NonPublicService
+- Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\TestBundle\TestServiceContainer\PrivateService
+- Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\TestBundle\TestServiceContainer\PublicService
+- Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\TestBundle\TestServiceContainer\UnusedPrivateService
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+interfaces: []

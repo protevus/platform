@@ -1,0 +1,94 @@
+name: TransformsRequest
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: ParameterBag
+  type: class
+  source: Symfony\Component\HttpFoundation\ParameterBag
+properties: []
+methods:
+- name: handle
+  visibility: public
+  parameters:
+  - name: request
+  - name: next
+  comment: '# * Handle an incoming request.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  \Closure  $next
+
+    # * @return mixed'
+- name: clean
+  visibility: protected
+  parameters:
+  - name: request
+  comment: '# * Clean the request''s data.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return void'
+- name: cleanParameterBag
+  visibility: protected
+  parameters:
+  - name: bag
+  comment: '# * Clean the data in the parameter bag.
+
+    # *
+
+    # * @param  \Symfony\Component\HttpFoundation\ParameterBag  $bag
+
+    # * @return void'
+- name: cleanArray
+  visibility: protected
+  parameters:
+  - name: data
+  - name: keyPrefix
+    default: ''''''
+  comment: '# * Clean the data in the given array.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @param  string  $keyPrefix
+
+    # * @return array'
+- name: cleanValue
+  visibility: protected
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Clean the given value.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return mixed'
+- name: transform
+  visibility: protected
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Transform the given value.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return mixed'
+traits:
+- Closure
+- Symfony\Component\HttpFoundation\ParameterBag
+interfaces: []

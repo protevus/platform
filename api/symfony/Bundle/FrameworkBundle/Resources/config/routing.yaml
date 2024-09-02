@@ -1,0 +1,119 @@
+name: routing
+class_comment: null
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: RouterCacheWarmer
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer
+- name: RedirectController
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+- name: TemplateController
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+- name: AttributeRouteControllerLoader
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Routing\AttributeRouteControllerLoader
+- name: DelegatingLoader
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader
+- name: RedirectableCompiledUrlMatcher
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Routing\RedirectableCompiledUrlMatcher
+- name: Router
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Routing\Router
+- name: LoaderResolver
+  type: class
+  source: Symfony\Component\Config\Loader\LoaderResolver
+- name: RouterListener
+  type: class
+  source: Symfony\Component\HttpKernel\EventListener\RouterListener
+- name: CompiledUrlGenerator
+  type: class
+  source: Symfony\Component\Routing\Generator\CompiledUrlGenerator
+- name: CompiledUrlGeneratorDumper
+  type: class
+  source: Symfony\Component\Routing\Generator\Dumper\CompiledUrlGeneratorDumper
+- name: UrlGeneratorInterface
+  type: class
+  source: Symfony\Component\Routing\Generator\UrlGeneratorInterface
+- name: AttributeDirectoryLoader
+  type: class
+  source: Symfony\Component\Routing\Loader\AttributeDirectoryLoader
+- name: AttributeFileLoader
+  type: class
+  source: Symfony\Component\Routing\Loader\AttributeFileLoader
+- name: ContainerLoader
+  type: class
+  source: Symfony\Component\Routing\Loader\ContainerLoader
+- name: DirectoryLoader
+  type: class
+  source: Symfony\Component\Routing\Loader\DirectoryLoader
+- name: GlobFileLoader
+  type: class
+  source: Symfony\Component\Routing\Loader\GlobFileLoader
+- name: PhpFileLoader
+  type: class
+  source: Symfony\Component\Routing\Loader\PhpFileLoader
+- name: Psr4DirectoryLoader
+  type: class
+  source: Symfony\Component\Routing\Loader\Psr4DirectoryLoader
+- name: XmlFileLoader
+  type: class
+  source: Symfony\Component\Routing\Loader\XmlFileLoader
+- name: YamlFileLoader
+  type: class
+  source: Symfony\Component\Routing\Loader\YamlFileLoader
+- name: CompiledUrlMatcherDumper
+  type: class
+  source: Symfony\Component\Routing\Matcher\Dumper\CompiledUrlMatcherDumper
+- name: ExpressionLanguageProvider
+  type: class
+  source: Symfony\Component\Routing\Matcher\ExpressionLanguageProvider
+- name: UrlMatcherInterface
+  type: class
+  source: Symfony\Component\Routing\Matcher\UrlMatcherInterface
+- name: RequestContext
+  type: class
+  source: Symfony\Component\Routing\RequestContext
+- name: RequestContextAwareInterface
+  type: class
+  source: Symfony\Component\Routing\RequestContextAwareInterface
+- name: RouterInterface
+  type: class
+  source: Symfony\Component\Routing\RouterInterface
+properties: []
+methods: []
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer
+- Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+- Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+- Symfony\Bundle\FrameworkBundle\Routing\AttributeRouteControllerLoader
+- Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader
+- Symfony\Bundle\FrameworkBundle\Routing\RedirectableCompiledUrlMatcher
+- Symfony\Bundle\FrameworkBundle\Routing\Router
+- Symfony\Component\Config\Loader\LoaderResolver
+- Symfony\Component\HttpKernel\EventListener\RouterListener
+- Symfony\Component\Routing\Generator\CompiledUrlGenerator
+- Symfony\Component\Routing\Generator\Dumper\CompiledUrlGeneratorDumper
+- Symfony\Component\Routing\Generator\UrlGeneratorInterface
+- Symfony\Component\Routing\Loader\AttributeDirectoryLoader
+- Symfony\Component\Routing\Loader\AttributeFileLoader
+- Symfony\Component\Routing\Loader\ContainerLoader
+- Symfony\Component\Routing\Loader\DirectoryLoader
+- Symfony\Component\Routing\Loader\GlobFileLoader
+- Symfony\Component\Routing\Loader\PhpFileLoader
+- Symfony\Component\Routing\Loader\Psr4DirectoryLoader
+- Symfony\Component\Routing\Loader\XmlFileLoader
+- Symfony\Component\Routing\Loader\YamlFileLoader
+- Symfony\Component\Routing\Matcher\Dumper\CompiledUrlMatcherDumper
+- Symfony\Component\Routing\Matcher\ExpressionLanguageProvider
+- Symfony\Component\Routing\Matcher\UrlMatcherInterface
+- Symfony\Component\Routing\RequestContext
+- Symfony\Component\Routing\RequestContextAwareInterface
+- Symfony\Component\Routing\RouterInterface
+interfaces: []

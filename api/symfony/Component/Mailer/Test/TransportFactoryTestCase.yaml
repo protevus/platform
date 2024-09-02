@@ -1,0 +1,96 @@
+name: TransportFactoryTestCase
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: IncompleteDsnException
+  type: class
+  source: Symfony\Component\Mailer\Exception\IncompleteDsnException
+- name: UnsupportedSchemeException
+  type: class
+  source: Symfony\Component\Mailer\Exception\UnsupportedSchemeException
+- name: Dsn
+  type: class
+  source: Symfony\Component\Mailer\Transport\Dsn
+- name: TransportFactoryInterface
+  type: class
+  source: Symfony\Component\Mailer\Transport\TransportFactoryInterface
+- name: TransportInterface
+  type: class
+  source: Symfony\Component\Mailer\Transport\TransportInterface
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+- name: HttpClientInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\HttpClientInterface
+properties: []
+methods:
+- name: unsupportedSchemeProvider
+  visibility: public
+  parameters: []
+  comment: "# * A test case to ease testing Transport Factory.\n# *\n# * @author Konstantin\
+    \ Myakshin <molodchick@gmail.com>\n# */\n# abstract class TransportFactoryTestCase\
+    \ extends TestCase\n# {\n# protected const USER = 'u$er';\n# protected const PASSWORD\
+    \ = 'pa$s';\n# \n# protected EventDispatcherInterface $dispatcher;\n# protected\
+    \ HttpClientInterface $client;\n# protected LoggerInterface $logger;\n# \n# abstract\
+    \ public function getFactory(): TransportFactoryInterface;\n# \n# /**\n# * @psalm-return\
+    \ iterable<array{0: Dsn, 1: bool}>\n# */\n# abstract public static function supportsProvider():\
+    \ iterable;\n# \n# /**\n# * @psalm-return iterable<array{0: Dsn, 1: TransportInterface}>\n\
+    # */\n# abstract public static function createProvider(): iterable;\n# \n# /**\n\
+    # * @psalm-return iterable<array{0: Dsn, 1?: string|null}>"
+- name: incompleteDsnProvider
+  visibility: public
+  parameters: []
+  comment: '# * @psalm-return iterable<array{0: Dsn}>'
+- name: testSupports
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: supports
+  comment: '# * @dataProvider supportsProvider'
+- name: testCreate
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: transport
+  comment: '# * @dataProvider createProvider'
+- name: testUnsupportedSchemeException
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: message
+    default: 'null'
+  comment: '# * @dataProvider unsupportedSchemeProvider'
+- name: testIncompleteDsnException
+  visibility: public
+  parameters:
+  - name: dsn
+  comment: '# * @dataProvider incompleteDsnProvider'
+- name: getDispatcher
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getClient
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getLogger
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Psr\Log\LoggerInterface
+- Symfony\Component\Mailer\Exception\IncompleteDsnException
+- Symfony\Component\Mailer\Exception\UnsupportedSchemeException
+- Symfony\Component\Mailer\Transport\Dsn
+- Symfony\Component\Mailer\Transport\TransportFactoryInterface
+- Symfony\Component\Mailer\Transport\TransportInterface
+- Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+- Symfony\Contracts\HttpClient\HttpClientInterface
+interfaces: []

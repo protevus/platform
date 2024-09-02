@@ -1,0 +1,35 @@
+name: RelayStoreTest
+class_comment: '# * @requires extension relay
+
+  # *
+
+  # * @group integration'
+dependencies:
+- name: Relay
+  type: class
+  source: Relay\Relay
+- name: AbstractRedisStoreTestCase
+  type: class
+  source: Symfony\Component\Lock\Tests\Store\AbstractRedisStoreTestCase
+- name: SharedLockStoreTestTrait
+  type: class
+  source: Symfony\Component\Lock\Tests\Store\SharedLockStoreTestTrait
+- name: SharedLockStoreTestTrait
+  type: class
+  source: SharedLockStoreTestTrait
+properties: []
+methods:
+- name: setUpBeforeClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRedisConnection
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Relay\Relay
+- Symfony\Component\Lock\Tests\Store\AbstractRedisStoreTestCase
+- Symfony\Component\Lock\Tests\Store\SharedLockStoreTestTrait
+- SharedLockStoreTestTrait
+interfaces: []

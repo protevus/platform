@@ -1,0 +1,7 @@
+name: ValidateCsrfToken
+class_comment: '# * Alias of VerifyCsrfToken for consistency.'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces: []

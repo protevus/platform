@@ -1,0 +1,148 @@
+name: NullStore
+class_comment: null
+dependencies:
+- name: LockProvider
+  type: class
+  source: Illuminate\Contracts\Cache\LockProvider
+- name: RetrievesMultipleKeys
+  type: class
+  source: RetrievesMultipleKeys
+properties: []
+methods:
+- name: get
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Retrieve an item from the cache by key.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return void'
+- name: put
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  - name: seconds
+  comment: '# * Store an item in the cache for a given number of seconds.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  int  $seconds
+
+    # * @return bool'
+- name: increment
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: '1'
+  comment: '# * Increment the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return false'
+- name: decrement
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: '1'
+  comment: '# * Decrement the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return false'
+- name: forever
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Store an item in the cache indefinitely.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return bool'
+- name: lock
+  visibility: public
+  parameters:
+  - name: name
+  - name: seconds
+    default: '0'
+  - name: owner
+    default: 'null'
+  comment: '# * Get a lock instance.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  int  $seconds
+
+    # * @param  string|null  $owner
+
+    # * @return \Illuminate\Contracts\Cache\Lock'
+- name: restoreLock
+  visibility: public
+  parameters:
+  - name: name
+  - name: owner
+  comment: '# * Restore a lock instance using the owner identifier.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  string  $owner
+
+    # * @return \Illuminate\Contracts\Cache\Lock'
+- name: forget
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Remove an item from the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: flush
+  visibility: public
+  parameters: []
+  comment: '# * Remove all items from the cache.
+
+    # *
+
+    # * @return bool'
+- name: getPrefix
+  visibility: public
+  parameters: []
+  comment: '# * Get the cache key prefix.
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Contracts\Cache\LockProvider
+- RetrievesMultipleKeys
+interfaces:
+- LockProvider

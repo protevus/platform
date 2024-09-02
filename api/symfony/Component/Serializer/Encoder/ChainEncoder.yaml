@@ -1,0 +1,71 @@
+name: ChainEncoder
+class_comment: '# * Encoder delegating the decoding to a chain of encoders.
+
+  # *
+
+  # * @author Jordi Boggiano <j.boggiano@seld.be>
+
+  # * @author Johannes M. Schmitt <schmittjoh@gmail.com>
+
+  # * @author Lukas Kahwe Smith <smith@pooteeweet.org>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: TraceableEncoder
+  type: class
+  source: Symfony\Component\Serializer\Debug\TraceableEncoder
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Serializer\Exception\RuntimeException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: encoders
+    default: '[]'
+  comment: "# * Encoder delegating the decoding to a chain of encoders.\n# *\n# *\
+    \ @author Jordi Boggiano <j.boggiano@seld.be>\n# * @author Johannes M. Schmitt\
+    \ <schmittjoh@gmail.com>\n# * @author Lukas Kahwe Smith <smith@pooteeweet.org>\n\
+    # *\n# * @final\n# */\n# class ChainEncoder implements ContextAwareEncoderInterface\n\
+    # {\n# /**\n# * @var array<string, array-key>\n# */\n# private array $encoderByFormat\
+    \ = [];\n# \n# /**\n# * @param array<EncoderInterface> $encoders"
+- name: encode
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+  - name: context
+    default: '[]'
+  comment: null
+- name: supportsEncoding
+  visibility: public
+  parameters:
+  - name: format
+  - name: context
+    default: '[]'
+  comment: null
+- name: needsNormalization
+  visibility: public
+  parameters:
+  - name: format
+  - name: context
+    default: '[]'
+  comment: '# * Checks whether the normalization is needed for the given format.'
+- name: getEncoder
+  visibility: private
+  parameters:
+  - name: format
+  - name: context
+  comment: '# * Gets the encoder supporting the format.
+
+    # *
+
+    # * @throws RuntimeException if no encoder is found'
+traits:
+- Symfony\Component\Serializer\Debug\TraceableEncoder
+- Symfony\Component\Serializer\Exception\RuntimeException
+interfaces:
+- ContextAwareEncoderInterface

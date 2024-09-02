@@ -1,0 +1,54 @@
+name: ListableReceiverInterface
+class_comment: null
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+properties: []
+methods:
+- name: all
+  visibility: public
+  parameters:
+  - name: limit
+    default: 'null'
+  comment: '# * Used when a receiver has the ability to list messages and find specific
+    messages.
+
+    # * A receiver that implements this should add the TransportMessageIdStamp
+
+    # * to the Envelopes that it returns.
+
+    # *
+
+    # * @author Ryan Weaver <ryan@symfonycasts.com>
+
+    # */
+
+    # interface ListableReceiverInterface extends ReceiverInterface
+
+    # {
+
+    # /**
+
+    # * Returns all the messages (up to the limit) in this receiver.
+
+    # *
+
+    # * Messages should be given the same stamps as when using ReceiverInterface::get().
+
+    # *
+
+    # * @return Envelope[]|iterable'
+- name: find
+  visibility: public
+  parameters:
+  - name: id
+  comment: '# * Returns the Envelope by id or none.
+
+    # *
+
+    # * Message should be given the same stamps as when using ReceiverInterface::get().'
+traits:
+- Symfony\Component\Messenger\Envelope
+interfaces:
+- this

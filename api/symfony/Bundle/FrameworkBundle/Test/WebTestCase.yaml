@@ -1,0 +1,33 @@
+name: WebTestCase
+class_comment: null
+dependencies:
+- name: KernelBrowser
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\KernelBrowser
+- name: ServiceNotFoundException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+- name: WebTestAssertionsTrait
+  type: class
+  source: WebTestAssertionsTrait
+properties: []
+methods:
+- name: createClient
+  visibility: protected
+  parameters:
+  - name: options
+    default: '[]'
+  - name: server
+    default: '[]'
+  comment: "# * WebTestCase is the base class for functional tests.\n# *\n# * @author\
+    \ Fabien Potencier <fabien@symfony.com>\n# */\n# abstract class WebTestCase extends\
+    \ KernelTestCase\n# {\n# use WebTestAssertionsTrait;\n# \n# protected function\
+    \ tearDown(): void\n# {\n# parent::tearDown();\n# self::getClient(null);\n# }\n\
+    # \n# /**\n# * Creates a KernelBrowser.\n# *\n# * @param array $options An array\
+    \ of options to pass to the createKernel method\n# * @param array $server  An\
+    \ array of server parameters"
+traits:
+- Symfony\Bundle\FrameworkBundle\KernelBrowser
+- Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+- WebTestAssertionsTrait
+interfaces: []

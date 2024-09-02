@@ -1,0 +1,719 @@
+name: Filesystem
+class_comment: null
+dependencies:
+- name: ErrorException
+  type: class
+  source: ErrorException
+- name: FilesystemIterator
+  type: class
+  source: FilesystemIterator
+- name: FileNotFoundException
+  type: class
+  source: Illuminate\Contracts\Filesystem\FileNotFoundException
+- name: LazyCollection
+  type: class
+  source: Illuminate\Support\LazyCollection
+- name: Conditionable
+  type: class
+  source: Illuminate\Support\Traits\Conditionable
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: SplFileObject
+  type: class
+  source: SplFileObject
+- name: SymfonyFilesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: Finder
+  type: class
+  source: Symfony\Component\Finder\Finder
+- name: MimeTypes
+  type: class
+  source: Symfony\Component\Mime\MimeTypes
+properties: []
+methods:
+- name: exists
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Determine if a file or directory exists.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return bool'
+- name: missing
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Determine if a file or directory is missing.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return bool'
+- name: get
+  visibility: public
+  parameters:
+  - name: path
+  - name: lock
+    default: 'false'
+  comment: '# * Get the contents of a file.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  bool  $lock
+
+    # * @return string
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException'
+- name: json
+  visibility: public
+  parameters:
+  - name: path
+  - name: flags
+    default: '0'
+  - name: lock
+    default: 'false'
+  comment: '# * Get the contents of a file as decoded JSON.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  int  $flags
+
+    # * @param  bool  $lock
+
+    # * @return array
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException'
+- name: sharedGet
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Get contents of a file with shared access.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: getRequire
+  visibility: public
+  parameters:
+  - name: path
+  - name: data
+    default: '[]'
+  comment: '# * Get the returned value of a file.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  array  $data
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException'
+- name: requireOnce
+  visibility: public
+  parameters:
+  - name: path
+  - name: data
+    default: '[]'
+  comment: '# * Require the given file once.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  array  $data
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException'
+- name: lines
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Get the contents of a file one line at a time.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return \Illuminate\Support\LazyCollection
+
+    # *
+
+    # * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException'
+- name: hash
+  visibility: public
+  parameters:
+  - name: path
+  - name: algorithm
+    default: '''md5'''
+  comment: '# * Get the hash of the file at the given path.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  string  $algorithm
+
+    # * @return string'
+- name: put
+  visibility: public
+  parameters:
+  - name: path
+  - name: contents
+  - name: lock
+    default: 'false'
+  comment: '# * Write the contents of a file.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  string  $contents
+
+    # * @param  bool  $lock
+
+    # * @return int|bool'
+- name: replace
+  visibility: public
+  parameters:
+  - name: path
+  - name: content
+  - name: mode
+    default: 'null'
+  comment: '# * Write the contents of a file, replacing it atomically if it already
+    exists.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  string  $content
+
+    # * @param  int|null  $mode
+
+    # * @return void'
+- name: replaceInFile
+  visibility: public
+  parameters:
+  - name: search
+  - name: replace
+  - name: path
+  comment: '# * Replace a given string within a given file.
+
+    # *
+
+    # * @param  array|string  $search
+
+    # * @param  array|string  $replace
+
+    # * @param  string  $path
+
+    # * @return void'
+- name: prepend
+  visibility: public
+  parameters:
+  - name: path
+  - name: data
+  comment: '# * Prepend to a file.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  string  $data
+
+    # * @return int'
+- name: append
+  visibility: public
+  parameters:
+  - name: path
+  - name: data
+  - name: lock
+    default: 'false'
+  comment: '# * Append to a file.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  string  $data
+
+    # * @param  bool  $lock
+
+    # * @return int'
+- name: chmod
+  visibility: public
+  parameters:
+  - name: path
+  - name: mode
+    default: 'null'
+  comment: '# * Get or set UNIX mode of a file or directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  int|null  $mode
+
+    # * @return mixed'
+- name: delete
+  visibility: public
+  parameters:
+  - name: paths
+  comment: '# * Delete the file at a given path.
+
+    # *
+
+    # * @param  string|array  $paths
+
+    # * @return bool'
+- name: move
+  visibility: public
+  parameters:
+  - name: path
+  - name: target
+  comment: '# * Move a file to a new location.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  string  $target
+
+    # * @return bool'
+- name: copy
+  visibility: public
+  parameters:
+  - name: path
+  - name: target
+  comment: '# * Copy a file to a new location.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  string  $target
+
+    # * @return bool'
+- name: link
+  visibility: public
+  parameters:
+  - name: target
+  - name: link
+  comment: '# * Create a symlink to the target file or directory. On Windows, a hard
+    link is created if the target is a file.
+
+    # *
+
+    # * @param  string  $target
+
+    # * @param  string  $link
+
+    # * @return bool|null'
+- name: relativeLink
+  visibility: public
+  parameters:
+  - name: target
+  - name: link
+  comment: '# * Create a relative symlink to the target file or directory.
+
+    # *
+
+    # * @param  string  $target
+
+    # * @param  string  $link
+
+    # * @return void
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: name
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Extract the file name from a file path.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: basename
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Extract the trailing name component from a file path.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: dirname
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Extract the parent directory from a file path.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: extension
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Extract the file extension from a file path.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: guessExtension
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Guess the file extension from the mime-type of a given file.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string|null
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: type
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Get the file type of a given file.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: mimeType
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Get the mime-type of a given file.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string|false'
+- name: size
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Get the file size of a given file.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return int'
+- name: lastModified
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Get the file''s last modification time.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return int'
+- name: isDirectory
+  visibility: public
+  parameters:
+  - name: directory
+  comment: '# * Determine if the given path is a directory.
+
+    # *
+
+    # * @param  string  $directory
+
+    # * @return bool'
+- name: isEmptyDirectory
+  visibility: public
+  parameters:
+  - name: directory
+  - name: ignoreDotFiles
+    default: 'false'
+  comment: '# * Determine if the given path is a directory that does not contain any
+    other files or directories.
+
+    # *
+
+    # * @param  string  $directory
+
+    # * @param  bool  $ignoreDotFiles
+
+    # * @return bool'
+- name: isReadable
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Determine if the given path is readable.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return bool'
+- name: isWritable
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Determine if the given path is writable.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return bool'
+- name: hasSameHash
+  visibility: public
+  parameters:
+  - name: firstFile
+  - name: secondFile
+  comment: '# * Determine if two files are the same by comparing their hashes.
+
+    # *
+
+    # * @param  string  $firstFile
+
+    # * @param  string  $secondFile
+
+    # * @return bool'
+- name: isFile
+  visibility: public
+  parameters:
+  - name: file
+  comment: '# * Determine if the given path is a file.
+
+    # *
+
+    # * @param  string  $file
+
+    # * @return bool'
+- name: glob
+  visibility: public
+  parameters:
+  - name: pattern
+  - name: flags
+    default: '0'
+  comment: '# * Find path names matching a given pattern.
+
+    # *
+
+    # * @param  string  $pattern
+
+    # * @param  int  $flags
+
+    # * @return array'
+- name: files
+  visibility: public
+  parameters:
+  - name: directory
+  - name: hidden
+    default: 'false'
+  comment: '# * Get an array of all files in a directory.
+
+    # *
+
+    # * @param  string  $directory
+
+    # * @param  bool  $hidden
+
+    # * @return \Symfony\Component\Finder\SplFileInfo[]'
+- name: allFiles
+  visibility: public
+  parameters:
+  - name: directory
+  - name: hidden
+    default: 'false'
+  comment: '# * Get all of the files from the given directory (recursive).
+
+    # *
+
+    # * @param  string  $directory
+
+    # * @param  bool  $hidden
+
+    # * @return \Symfony\Component\Finder\SplFileInfo[]'
+- name: directories
+  visibility: public
+  parameters:
+  - name: directory
+  comment: '# * Get all of the directories within a given directory.
+
+    # *
+
+    # * @param  string  $directory
+
+    # * @return array'
+- name: ensureDirectoryExists
+  visibility: public
+  parameters:
+  - name: path
+  - name: mode
+    default: '0755'
+  - name: recursive
+    default: 'true'
+  comment: '# * Ensure a directory exists.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  int  $mode
+
+    # * @param  bool  $recursive
+
+    # * @return void'
+- name: makeDirectory
+  visibility: public
+  parameters:
+  - name: path
+  - name: mode
+    default: '0755'
+  - name: recursive
+    default: 'false'
+  - name: force
+    default: 'false'
+  comment: '# * Create a directory.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @param  int  $mode
+
+    # * @param  bool  $recursive
+
+    # * @param  bool  $force
+
+    # * @return bool'
+- name: moveDirectory
+  visibility: public
+  parameters:
+  - name: from
+  - name: to
+  - name: overwrite
+    default: 'false'
+  comment: '# * Move a directory.
+
+    # *
+
+    # * @param  string  $from
+
+    # * @param  string  $to
+
+    # * @param  bool  $overwrite
+
+    # * @return bool'
+- name: copyDirectory
+  visibility: public
+  parameters:
+  - name: directory
+  - name: destination
+  - name: options
+    default: 'null'
+  comment: '# * Copy a directory from one location to another.
+
+    # *
+
+    # * @param  string  $directory
+
+    # * @param  string  $destination
+
+    # * @param  int|null  $options
+
+    # * @return bool'
+- name: deleteDirectory
+  visibility: public
+  parameters:
+  - name: directory
+  - name: preserve
+    default: 'false'
+  comment: '# * Recursively delete a directory.
+
+    # *
+
+    # * The directory itself may be optionally preserved.
+
+    # *
+
+    # * @param  string  $directory
+
+    # * @param  bool  $preserve
+
+    # * @return bool'
+- name: deleteDirectories
+  visibility: public
+  parameters:
+  - name: directory
+  comment: '# * Remove all of the directories within a given directory.
+
+    # *
+
+    # * @param  string  $directory
+
+    # * @return bool'
+- name: cleanDirectory
+  visibility: public
+  parameters:
+  - name: directory
+  comment: '# * Empty the specified directory of all files and folders.
+
+    # *
+
+    # * @param  string  $directory
+
+    # * @return bool'
+traits:
+- ErrorException
+- FilesystemIterator
+- Illuminate\Contracts\Filesystem\FileNotFoundException
+- Illuminate\Support\LazyCollection
+- Illuminate\Support\Traits\Conditionable
+- Illuminate\Support\Traits\Macroable
+- RuntimeException
+- SplFileObject
+- Symfony\Component\Finder\Finder
+- Symfony\Component\Mime\MimeTypes
+- Conditionable
+interfaces: []

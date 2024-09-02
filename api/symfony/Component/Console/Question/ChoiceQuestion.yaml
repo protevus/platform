@@ -1,0 +1,79 @@
+name: ChoiceQuestion
+class_comment: '# * Represents a choice question.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Console\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: question
+  - name: choices
+  - name: default
+    default: 'null'
+  comment: "# * Represents a choice question.\n# *\n# * @author Fabien Potencier <fabien@symfony.com>\n\
+    # */\n# class ChoiceQuestion extends Question\n# {\n# private bool $multiselect\
+    \ = false;\n# private string $prompt = ' > ';\n# private string $errorMessage\
+    \ = 'Value \"%s\" is invalid';\n# \n# /**\n# * @param string $question The question\
+    \ to ask to the user\n# * @param array  $choices  The list of available choices\n\
+    # * @param mixed  $default  The default answer to return"
+- name: getChoices
+  visibility: public
+  parameters: []
+  comment: '# * Returns available choices.'
+- name: setMultiselect
+  visibility: public
+  parameters:
+  - name: multiselect
+  comment: '# * Sets multiselect option.
+
+    # *
+
+    # * When multiselect is set to true, multiple choices can be answered.
+
+    # *
+
+    # * @return $this'
+- name: isMultiselect
+  visibility: public
+  parameters: []
+  comment: '# * Returns whether the choices are multiselect.'
+- name: getPrompt
+  visibility: public
+  parameters: []
+  comment: '# * Gets the prompt for choices.'
+- name: setPrompt
+  visibility: public
+  parameters:
+  - name: prompt
+  comment: '# * Sets the prompt for choices.
+
+    # *
+
+    # * @return $this'
+- name: setErrorMessage
+  visibility: public
+  parameters:
+  - name: errorMessage
+  comment: '# * Sets the error message for invalid values.
+
+    # *
+
+    # * The error message has a string placeholder (%s) for the invalid value.
+
+    # *
+
+    # * @return $this'
+- name: getDefaultValidator
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Console\Exception\InvalidArgumentException
+interfaces: []

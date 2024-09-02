@@ -1,0 +1,27 @@
+name: IntlCallbackChoiceLoader
+class_comment: '# * Callback choice loader optimized for Intl choice types.
+
+  # *
+
+  # * @author Jules Pietri <jules@heahprod.com>
+
+  # * @author Yonel Ceruto <yonelceruto@gmail.com>'
+dependencies: []
+properties: []
+methods:
+- name: loadChoicesForValues
+  visibility: public
+  parameters:
+  - name: values
+  - name: value
+    default: 'null'
+  comment: null
+- name: loadValuesForChoices
+  visibility: public
+  parameters:
+  - name: choices
+  - name: value
+    default: 'null'
+  comment: null
+traits: []
+interfaces: []

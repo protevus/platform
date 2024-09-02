@@ -1,0 +1,147 @@
+name: MicroKernelTrait
+class_comment: null
+dependencies:
+- name: FrameworkBundle
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\FrameworkBundle
+- name: LoaderInterface
+  type: class
+  source: Symfony\Component\Config\Loader\LoaderInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: AbstractConfigurator
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
+- name: ContainerConfigurator
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator
+- name: ContainerPhpFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: RoutingConfigurator
+  type: class
+  source: Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator
+- name: RoutingPhpFileLoader
+  type: class
+  source: Symfony\Component\Routing\Loader\PhpFileLoader
+- name: RouteCollection
+  type: class
+  source: Symfony\Component\Routing\RouteCollection
+properties: []
+methods:
+- name: configureContainer
+  visibility: private
+  parameters:
+  - name: container
+  - name: loader
+  - name: builder
+  comment: '# * A Kernel that provides configuration hooks.
+
+    # *
+
+    # * @author Ryan Weaver <ryan@knpuniversity.com>
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # trait MicroKernelTrait
+
+    # {
+
+    # /**
+
+    # * Configures the container.
+
+    # *
+
+    # * You can register extensions:
+
+    # *
+
+    # *     $container->extension(''framework'', [
+
+    # *         ''secret'' => ''%secret%''
+
+    # *     ]);
+
+    # *
+
+    # * Or services:
+
+    # *
+
+    # *     $container->services()->set(''halloween'', ''FooBundle\HalloweenProvider'');
+
+    # *
+
+    # * Or parameters:
+
+    # *
+
+    # *     $container->parameters()->set(''halloween'', ''lot of fun'');'
+- name: configureRoutes
+  visibility: private
+  parameters:
+  - name: routes
+  comment: '# * Adds or imports routes into your application.
+
+    # *
+
+    # *     $routes->import($this->getConfigDir().''/*.{yaml,php}'');
+
+    # *     $routes
+
+    # *         ->add(''admin_dashboard'', ''/admin'')
+
+    # *         ->controller(''App\Controller\AdminController::dashboard'')
+
+    # *     ;'
+- name: getConfigDir
+  visibility: private
+  parameters: []
+  comment: '# * Gets the path to the configuration directory.'
+- name: getBundlesPath
+  visibility: private
+  parameters: []
+  comment: '# * Gets the path to the bundles configuration file.'
+- name: getCacheDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: getBuildDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: getLogDir
+  visibility: public
+  parameters: []
+  comment: null
+- name: registerBundles
+  visibility: public
+  parameters: []
+  comment: null
+- name: registerContainerConfiguration
+  visibility: public
+  parameters:
+  - name: loader
+  comment: null
+- name: loadRoutes
+  visibility: public
+  parameters:
+  - name: loader
+  comment: '# * @internal'
+traits:
+- Symfony\Bundle\FrameworkBundle\FrameworkBundle
+- Symfony\Component\Config\Loader\LoaderInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator
+- Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator
+- Symfony\Component\Routing\RouteCollection
+interfaces: []

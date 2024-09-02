@@ -1,0 +1,91 @@
+name: AbstractChoiceListTestCase
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ChoiceListInterface
+  type: class
+  source: Symfony\Component\Form\ChoiceList\ChoiceListInterface
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testGetChoices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetStructuredValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetOriginalKeys
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetChoicesForValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetChoicesForValuesPreservesKeys
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetChoicesForValuesPreservesOrder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetChoicesForValuesIgnoresNonExistingValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetChoicesForValuesEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValuesForChoices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValuesForChoicesPreservesKeys
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValuesForChoicesPreservesOrder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValuesForChoicesIgnoresNonExistingChoices
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetValuesForChoicesEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetChoicesForValuesWithNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: createChoiceList
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getChoices
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getValues
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\ChoiceList\ChoiceListInterface
+interfaces: []

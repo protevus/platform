@@ -1,0 +1,32 @@
+name: WithHttpStatus
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: statusCode
+  - name: headers
+    default: '[]'
+  comment: '# * Defines the HTTP status code applied to an exception.
+
+    # *
+
+    # * @author Dejan Angelov <angelovdejan@protonmail.com>
+
+    # */
+
+    # #[\Attribute(\Attribute::TARGET_CLASS)]
+
+    # class WithHttpStatus
+
+    # {
+
+    # /**
+
+    # * @param int                   $statusCode The HTTP status code to use
+
+    # * @param array<string, string> $headers    The HTTP headers to add to the response'
+traits: []
+interfaces: []

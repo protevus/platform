@@ -1,0 +1,53 @@
+name: WrappedListenerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: WrappedListener
+  type: class
+  source: Symfony\Component\EventDispatcher\Debug\WrappedListener
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcherInterface
+- name: Stopwatch
+  type: class
+  source: Symfony\Component\Stopwatch\Stopwatch
+- name: StopwatchEvent
+  type: class
+  source: Symfony\Component\Stopwatch\StopwatchEvent
+properties: []
+methods:
+- name: testListenerDescription
+  visibility: public
+  parameters:
+  - name: listener
+  - name: expected
+  comment: '# * @dataProvider provideListenersToDescribe'
+- name: provideListenersToDescribe
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStopwatchEventIsStoppedWhenListenerThrows
+  visibility: public
+  parameters: []
+  comment: null
+- name: listen
+  visibility: public
+  parameters: []
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters: []
+  comment: null
+- name: listenStatic
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\EventDispatcher\Debug\WrappedListener
+- Symfony\Component\EventDispatcher\EventDispatcherInterface
+- Symfony\Component\Stopwatch\Stopwatch
+- Symfony\Component\Stopwatch\StopwatchEvent
+interfaces: []

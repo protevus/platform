@@ -1,0 +1,1273 @@
+name: Validator
+class_comment: null
+dependencies:
+- name: BadMethodCallException
+  type: class
+  source: BadMethodCallException
+- name: Container
+  type: class
+  source: Illuminate\Contracts\Container\Container
+- name: Translator
+  type: class
+  source: Illuminate\Contracts\Translation\Translator
+- name: DataAwareRule
+  type: class
+  source: Illuminate\Contracts\Validation\DataAwareRule
+- name: ImplicitRule
+  type: class
+  source: Illuminate\Contracts\Validation\ImplicitRule
+- name: RuleContract
+  type: class
+  source: Illuminate\Contracts\Validation\Rule
+- name: ValidatorContract
+  type: class
+  source: Illuminate\Contracts\Validation\Validator
+- name: ValidatorAwareRule
+  type: class
+  source: Illuminate\Contracts\Validation\ValidatorAwareRule
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Fluent
+  type: class
+  source: Illuminate\Support\Fluent
+- name: MessageBag
+  type: class
+  source: Illuminate\Support\MessageBag
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: ValidatedInput
+  type: class
+  source: Illuminate\Support\ValidatedInput
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: stdClass
+  type: class
+  source: stdClass
+- name: UploadedFile
+  type: class
+  source: Symfony\Component\HttpFoundation\File\UploadedFile
+properties:
+- name: translator
+  visibility: protected
+  comment: '# * The Translator implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Translation\Translator'
+- name: container
+  visibility: protected
+  comment: '# * The container instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Container\Container'
+- name: presenceVerifier
+  visibility: protected
+  comment: '# * The Presence Verifier implementation.
+
+    # *
+
+    # * @var \Illuminate\Validation\PresenceVerifierInterface'
+- name: failedRules
+  visibility: protected
+  comment: '# * The failed validation rules.
+
+    # *
+
+    # * @var array'
+- name: excludeAttributes
+  visibility: protected
+  comment: '# * Attributes that should be excluded from the validated data.
+
+    # *
+
+    # * @var array'
+- name: messages
+  visibility: protected
+  comment: '# * The message bag instance.
+
+    # *
+
+    # * @var \Illuminate\Support\MessageBag'
+- name: data
+  visibility: protected
+  comment: '# * The data under validation.
+
+    # *
+
+    # * @var array'
+- name: initialRules
+  visibility: protected
+  comment: '# * The initial rules provided.
+
+    # *
+
+    # * @var array'
+- name: rules
+  visibility: protected
+  comment: '# * The rules to be applied to the data.
+
+    # *
+
+    # * @var array'
+- name: currentRule
+  visibility: protected
+  comment: '# * The current rule that is validating.
+
+    # *
+
+    # * @var string'
+- name: implicitAttributes
+  visibility: protected
+  comment: '# * The array of wildcard attributes with their asterisks expanded.
+
+    # *
+
+    # * @var array'
+- name: implicitAttributesFormatter
+  visibility: protected
+  comment: '# * The callback that should be used to format the attribute.
+
+    # *
+
+    # * @var callable|null'
+- name: distinctValues
+  visibility: protected
+  comment: '# * The cached data for the "distinct" rule.
+
+    # *
+
+    # * @var array'
+- name: after
+  visibility: protected
+  comment: '# * All of the registered "after" callbacks.
+
+    # *
+
+    # * @var array'
+- name: customMessages
+  visibility: public
+  comment: '# * The array of custom error messages.
+
+    # *
+
+    # * @var array'
+- name: fallbackMessages
+  visibility: public
+  comment: '# * The array of fallback error messages.
+
+    # *
+
+    # * @var array'
+- name: customAttributes
+  visibility: public
+  comment: '# * The array of custom attribute names.
+
+    # *
+
+    # * @var array'
+- name: customValues
+  visibility: public
+  comment: '# * The array of custom displayable values.
+
+    # *
+
+    # * @var array'
+- name: stopOnFirstFailure
+  visibility: protected
+  comment: '# * Indicates if the validator should stop on the first rule failure.
+
+    # *
+
+    # * @var bool'
+- name: excludeUnvalidatedArrayKeys
+  visibility: public
+  comment: '# * Indicates that unvalidated array keys should be excluded, even if
+    the parent array was validated.
+
+    # *
+
+    # * @var bool'
+- name: extensions
+  visibility: public
+  comment: '# * All of the custom validator extensions.
+
+    # *
+
+    # * @var array'
+- name: replacers
+  visibility: public
+  comment: '# * All of the custom replacer extensions.
+
+    # *
+
+    # * @var array'
+- name: fileRules
+  visibility: protected
+  comment: '# * The validation rules that may be applied to files.
+
+    # *
+
+    # * @var string[]'
+- name: implicitRules
+  visibility: protected
+  comment: '# * The validation rules that imply the field is required.
+
+    # *
+
+    # * @var string[]'
+- name: dependentRules
+  visibility: protected
+  comment: '# * The validation rules which depend on other fields as parameters.
+
+    # *
+
+    # * @var string[]'
+- name: excludeRules
+  visibility: protected
+  comment: '# * The validation rules that can exclude an attribute.
+
+    # *
+
+    # * @var string[]'
+- name: sizeRules
+  visibility: protected
+  comment: '# * The size related validation rules.
+
+    # *
+
+    # * @var string[]'
+- name: numericRules
+  visibility: protected
+  comment: '# * The numeric related validation rules.
+
+    # *
+
+    # * @var string[]'
+- name: defaultNumericRules
+  visibility: protected
+  comment: '# * The default numeric related validation rules.
+
+    # *
+
+    # * @var string[]'
+- name: dotPlaceholder
+  visibility: protected
+  comment: '# * The current placeholder for dots in rule keys.
+
+    # *
+
+    # * @var string'
+- name: exception
+  visibility: protected
+  comment: '# * The exception to throw upon failure.
+
+    # *
+
+    # * @var string'
+- name: ensureExponentWithinAllowedRangeUsing
+  visibility: protected
+  comment: '# * The custom callback to determine if an exponent is within allowed
+    range.
+
+    # *
+
+    # * @var callable|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: translator
+  - name: data
+  - name: rules
+  - name: messages
+    default: '[]'
+  - name: attributes
+    default: '[]'
+  comment: "# * The Translator implementation.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Translation\\Translator\n# */\n# protected $translator;\n# \n# /**\n# * The container\
+    \ instance.\n# *\n# * @var \\Illuminate\\Contracts\\Container\\Container\n# */\n\
+    # protected $container;\n# \n# /**\n# * The Presence Verifier implementation.\n\
+    # *\n# * @var \\Illuminate\\Validation\\PresenceVerifierInterface\n# */\n# protected\
+    \ $presenceVerifier;\n# \n# /**\n# * The failed validation rules.\n# *\n# * @var\
+    \ array\n# */\n# protected $failedRules = [];\n# \n# /**\n# * Attributes that\
+    \ should be excluded from the validated data.\n# *\n# * @var array\n# */\n# protected\
+    \ $excludeAttributes = [];\n# \n# /**\n# * The message bag instance.\n# *\n# *\
+    \ @var \\Illuminate\\Support\\MessageBag\n# */\n# protected $messages;\n# \n#\
+    \ /**\n# * The data under validation.\n# *\n# * @var array\n# */\n# protected\
+    \ $data;\n# \n# /**\n# * The initial rules provided.\n# *\n# * @var array\n# */\n\
+    # protected $initialRules;\n# \n# /**\n# * The rules to be applied to the data.\n\
+    # *\n# * @var array\n# */\n# protected $rules;\n# \n# /**\n# * The current rule\
+    \ that is validating.\n# *\n# * @var string\n# */\n# protected $currentRule;\n\
+    # \n# /**\n# * The array of wildcard attributes with their asterisks expanded.\n\
+    # *\n# * @var array\n# */\n# protected $implicitAttributes = [];\n# \n# /**\n\
+    # * The callback that should be used to format the attribute.\n# *\n# * @var callable|null\n\
+    # */\n# protected $implicitAttributesFormatter;\n# \n# /**\n# * The cached data\
+    \ for the \"distinct\" rule.\n# *\n# * @var array\n# */\n# protected $distinctValues\
+    \ = [];\n# \n# /**\n# * All of the registered \"after\" callbacks.\n# *\n# * @var\
+    \ array\n# */\n# protected $after = [];\n# \n# /**\n# * The array of custom error\
+    \ messages.\n# *\n# * @var array\n# */\n# public $customMessages = [];\n# \n#\
+    \ /**\n# * The array of fallback error messages.\n# *\n# * @var array\n# */\n\
+    # public $fallbackMessages = [];\n# \n# /**\n# * The array of custom attribute\
+    \ names.\n# *\n# * @var array\n# */\n# public $customAttributes = [];\n# \n# /**\n\
+    # * The array of custom displayable values.\n# *\n# * @var array\n# */\n# public\
+    \ $customValues = [];\n# \n# /**\n# * Indicates if the validator should stop on\
+    \ the first rule failure.\n# *\n# * @var bool\n# */\n# protected $stopOnFirstFailure\
+    \ = false;\n# \n# /**\n# * Indicates that unvalidated array keys should be excluded,\
+    \ even if the parent array was validated.\n# *\n# * @var bool\n# */\n# public\
+    \ $excludeUnvalidatedArrayKeys = false;\n# \n# /**\n# * All of the custom validator\
+    \ extensions.\n# *\n# * @var array\n# */\n# public $extensions = [];\n# \n# /**\n\
+    # * All of the custom replacer extensions.\n# *\n# * @var array\n# */\n# public\
+    \ $replacers = [];\n# \n# /**\n# * The validation rules that may be applied to\
+    \ files.\n# *\n# * @var string[]\n# */\n# protected $fileRules = [\n# 'Between',\n\
+    # 'Dimensions',\n# 'Extensions',\n# 'File',\n# 'Image',\n# 'Max',\n# 'Mimes',\n\
+    # 'Mimetypes',\n# 'Min',\n# 'Size',\n# ];\n# \n# /**\n# * The validation rules\
+    \ that imply the field is required.\n# *\n# * @var string[]\n# */\n# protected\
+    \ $implicitRules = [\n# 'Accepted',\n# 'AcceptedIf',\n# 'Declined',\n# 'DeclinedIf',\n\
+    # 'Filled',\n# 'Missing',\n# 'MissingIf',\n# 'MissingUnless',\n# 'MissingWith',\n\
+    # 'MissingWithAll',\n# 'Present',\n# 'PresentIf',\n# 'PresentUnless',\n# 'PresentWith',\n\
+    # 'PresentWithAll',\n# 'Required',\n# 'RequiredIf',\n# 'RequiredIfAccepted',\n\
+    # 'RequiredIfDeclined',\n# 'RequiredUnless',\n# 'RequiredWith',\n# 'RequiredWithAll',\n\
+    # 'RequiredWithout',\n# 'RequiredWithoutAll',\n# ];\n# \n# /**\n# * The validation\
+    \ rules which depend on other fields as parameters.\n# *\n# * @var string[]\n\
+    # */\n# protected $dependentRules = [\n# 'After',\n# 'AfterOrEqual',\n# 'Before',\n\
+    # 'BeforeOrEqual',\n# 'Confirmed',\n# 'Different',\n# 'ExcludeIf',\n# 'ExcludeUnless',\n\
+    # 'ExcludeWith',\n# 'ExcludeWithout',\n# 'Gt',\n# 'Gte',\n# 'Lt',\n# 'Lte',\n\
+    # 'AcceptedIf',\n# 'DeclinedIf',\n# 'RequiredIf',\n# 'RequiredIfAccepted',\n#\
+    \ 'RequiredIfDeclined',\n# 'RequiredUnless',\n# 'RequiredWith',\n# 'RequiredWithAll',\n\
+    # 'RequiredWithout',\n# 'RequiredWithoutAll',\n# 'PresentIf',\n# 'PresentUnless',\n\
+    # 'PresentWith',\n# 'PresentWithAll',\n# 'Prohibited',\n# 'ProhibitedIf',\n# 'ProhibitedUnless',\n\
+    # 'Prohibits',\n# 'MissingIf',\n# 'MissingUnless',\n# 'MissingWith',\n# 'MissingWithAll',\n\
+    # 'Same',\n# 'Unique',\n# ];\n# \n# /**\n# * The validation rules that can exclude\
+    \ an attribute.\n# *\n# * @var string[]\n# */\n# protected $excludeRules = ['Exclude',\
+    \ 'ExcludeIf', 'ExcludeUnless', 'ExcludeWith', 'ExcludeWithout'];\n# \n# /**\n\
+    # * The size related validation rules.\n# *\n# * @var string[]\n# */\n# protected\
+    \ $sizeRules = ['Size', 'Between', 'Min', 'Max', 'Gt', 'Lt', 'Gte', 'Lte'];\n\
+    # \n# /**\n# * The numeric related validation rules.\n# *\n# * @var string[]\n\
+    # */\n# protected $numericRules = ['Numeric', 'Integer', 'Decimal'];\n# \n# /**\n\
+    # * The default numeric related validation rules.\n# *\n# * @var string[]\n# */\n\
+    # protected $defaultNumericRules = ['Numeric', 'Integer', 'Decimal'];\n# \n# /**\n\
+    # * The current placeholder for dots in rule keys.\n# *\n# * @var string\n# */\n\
+    # protected $dotPlaceholder;\n# \n# /**\n# * The exception to throw upon failure.\n\
+    # *\n# * @var string\n# */\n# protected $exception = ValidationException::class;\n\
+    # \n# /**\n# * The custom callback to determine if an exponent is within allowed\
+    \ range.\n# *\n# * @var callable|null\n# */\n# protected $ensureExponentWithinAllowedRangeUsing;\n\
+    # \n# /**\n# * Create a new Validator instance.\n# *\n# * @param  \\Illuminate\\\
+    Contracts\\Translation\\Translator  $translator\n# * @param  array  $data\n# *\
+    \ @param  array  $rules\n# * @param  array  $messages\n# * @param  array  $attributes\n\
+    # * @return void"
+- name: parseData
+  visibility: public
+  parameters:
+  - name: data
+  comment: '# * Parse the data array, converting dots and asterisks.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return array'
+- name: replacePlaceholders
+  visibility: protected
+  parameters:
+  - name: data
+  comment: '# * Replace the placeholders used in data keys.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return array'
+- name: replacePlaceholderInString
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Replace the placeholders in the given string.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: after
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Add an after validation callback.
+
+    # *
+
+    # * @param  callable|array|string  $callback
+
+    # * @return $this'
+- name: passes
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the data passes the validation rules.
+
+    # *
+
+    # * @return bool'
+- name: fails
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the data fails the validation rules.
+
+    # *
+
+    # * @return bool'
+- name: shouldBeExcluded
+  visibility: protected
+  parameters:
+  - name: attribute
+  comment: '# * Determine if the attribute should be excluded.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @return bool'
+- name: removeAttribute
+  visibility: protected
+  parameters:
+  - name: attribute
+  comment: '# * Remove the given attribute.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @return void'
+- name: validate
+  visibility: public
+  parameters: []
+  comment: '# * Run the validator''s rules against its data.
+
+    # *
+
+    # * @return array
+
+    # *
+
+    # * @throws \Illuminate\Validation\ValidationException'
+- name: validateWithBag
+  visibility: public
+  parameters:
+  - name: errorBag
+  comment: '# * Run the validator''s rules against its data.
+
+    # *
+
+    # * @param  string  $errorBag
+
+    # * @return array
+
+    # *
+
+    # * @throws \Illuminate\Validation\ValidationException'
+- name: safe
+  visibility: public
+  parameters:
+  - name: keys
+    default: 'null'
+  comment: '# * Get a validated input container for the validated input.
+
+    # *
+
+    # * @param  array|null  $keys
+
+    # * @return \Illuminate\Support\ValidatedInput|array'
+- name: validated
+  visibility: public
+  parameters: []
+  comment: '# * Get the attributes and values that were validated.
+
+    # *
+
+    # * @return array
+
+    # *
+
+    # * @throws \Illuminate\Validation\ValidationException'
+- name: validateAttribute
+  visibility: protected
+  parameters:
+  - name: attribute
+  - name: rule
+  comment: '# * Validate a given attribute against a rule.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  string  $rule
+
+    # * @return void'
+- name: dependsOnOtherFields
+  visibility: protected
+  parameters:
+  - name: rule
+  comment: '# * Determine if the given rule depends on other fields.
+
+    # *
+
+    # * @param  string  $rule
+
+    # * @return bool'
+- name: getExplicitKeys
+  visibility: protected
+  parameters:
+  - name: attribute
+  comment: '# * Get the explicit keys from an attribute flattened with dot notation.
+
+    # *
+
+    # * E.g. ''foo.1.bar.spark.baz'' -> [1, ''spark''] for ''foo.*.bar.*.baz''
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @return array'
+- name: getPrimaryAttribute
+  visibility: protected
+  parameters:
+  - name: attribute
+  comment: '# * Get the primary attribute name.
+
+    # *
+
+    # * For example, if "name.0" is given, "name.*" will be returned.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @return string'
+- name: replaceDotInParameters
+  visibility: protected
+  parameters:
+  - name: parameters
+  comment: '# * Replace each field parameter which has an escaped dot with the dot
+    placeholder.
+
+    # *
+
+    # * @param  array  $parameters
+
+    # * @return array'
+- name: replaceAsterisksInParameters
+  visibility: protected
+  parameters:
+  - name: parameters
+  - name: keys
+  comment: '# * Replace each field parameter which has asterisks with the given keys.
+
+    # *
+
+    # * @param  array  $parameters
+
+    # * @param  array  $keys
+
+    # * @return array'
+- name: isValidatable
+  visibility: protected
+  parameters:
+  - name: rule
+  - name: attribute
+  - name: value
+  comment: '# * Determine if the attribute is validatable.
+
+    # *
+
+    # * @param  object|string  $rule
+
+    # * @param  string  $attribute
+
+    # * @param  mixed  $value
+
+    # * @return bool'
+- name: presentOrRuleIsImplicit
+  visibility: protected
+  parameters:
+  - name: rule
+  - name: attribute
+  - name: value
+  comment: '# * Determine if the field is present, or the rule implies required.
+
+    # *
+
+    # * @param  object|string  $rule
+
+    # * @param  string  $attribute
+
+    # * @param  mixed  $value
+
+    # * @return bool'
+- name: isImplicit
+  visibility: protected
+  parameters:
+  - name: rule
+  comment: '# * Determine if a given rule implies the attribute is required.
+
+    # *
+
+    # * @param  object|string  $rule
+
+    # * @return bool'
+- name: passesOptionalCheck
+  visibility: protected
+  parameters:
+  - name: attribute
+  comment: '# * Determine if the attribute passes any optional check.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @return bool'
+- name: isNotNullIfMarkedAsNullable
+  visibility: protected
+  parameters:
+  - name: rule
+  - name: attribute
+  comment: '# * Determine if the attribute fails the nullable check.
+
+    # *
+
+    # * @param  string  $rule
+
+    # * @param  string  $attribute
+
+    # * @return bool'
+- name: hasNotFailedPreviousRuleIfPresenceRule
+  visibility: protected
+  parameters:
+  - name: rule
+  - name: attribute
+  comment: '# * Determine if it''s a necessary presence validation.
+
+    # *
+
+    # * This is to avoid possible database type comparison errors.
+
+    # *
+
+    # * @param  string  $rule
+
+    # * @param  string  $attribute
+
+    # * @return bool'
+- name: validateUsingCustomRule
+  visibility: protected
+  parameters:
+  - name: attribute
+  - name: value
+  - name: rule
+  comment: '# * Validate an attribute using a custom rule object.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  mixed  $value
+
+    # * @param  \Illuminate\Contracts\Validation\Rule  $rule
+
+    # * @return void'
+- name: shouldStopValidating
+  visibility: protected
+  parameters:
+  - name: attribute
+  comment: '# * Check if we should stop further validations on a given attribute.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @return bool'
+- name: addFailure
+  visibility: public
+  parameters:
+  - name: attribute
+  - name: rule
+  - name: parameters
+    default: '[]'
+  comment: '# * Add a failed rule and error message to the collection.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  string  $rule
+
+    # * @param  array  $parameters
+
+    # * @return void'
+- name: excludeAttribute
+  visibility: protected
+  parameters:
+  - name: attribute
+  comment: '# * Add the given attribute to the list of excluded attributes.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @return void'
+- name: valid
+  visibility: public
+  parameters: []
+  comment: '# * Returns the data which was valid.
+
+    # *
+
+    # * @return array'
+- name: invalid
+  visibility: public
+  parameters: []
+  comment: '# * Returns the data which was invalid.
+
+    # *
+
+    # * @return array'
+- name: attributesThatHaveMessages
+  visibility: protected
+  parameters: []
+  comment: '# * Generate an array of all attributes that have messages.
+
+    # *
+
+    # * @return array'
+- name: failed
+  visibility: public
+  parameters: []
+  comment: '# * Get the failed validation rules.
+
+    # *
+
+    # * @return array'
+- name: messages
+  visibility: public
+  parameters: []
+  comment: '# * Get the message container for the validator.
+
+    # *
+
+    # * @return \Illuminate\Support\MessageBag'
+- name: errors
+  visibility: public
+  parameters: []
+  comment: '# * An alternative more semantic shortcut to the message container.
+
+    # *
+
+    # * @return \Illuminate\Support\MessageBag'
+- name: getMessageBag
+  visibility: public
+  parameters: []
+  comment: '# * Get the messages for the instance.
+
+    # *
+
+    # * @return \Illuminate\Support\MessageBag'
+- name: hasRule
+  visibility: public
+  parameters:
+  - name: attribute
+  - name: rules
+  comment: '# * Determine if the given attribute has a rule in the given set.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  string|array  $rules
+
+    # * @return bool'
+- name: getRule
+  visibility: protected
+  parameters:
+  - name: attribute
+  - name: rules
+  comment: '# * Get a rule and its parameters for a given attribute.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  string|array  $rules
+
+    # * @return array|null'
+- name: attributes
+  visibility: public
+  parameters: []
+  comment: '# * Get the data under validation.
+
+    # *
+
+    # * @return array'
+- name: getData
+  visibility: public
+  parameters: []
+  comment: '# * Get the data under validation.
+
+    # *
+
+    # * @return array'
+- name: setData
+  visibility: public
+  parameters:
+  - name: data
+  comment: '# * Set the data under validation.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return $this'
+- name: getValue
+  visibility: public
+  parameters:
+  - name: attribute
+  comment: '# * Get the value of a given attribute.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @return mixed'
+- name: setValue
+  visibility: public
+  parameters:
+  - name: attribute
+  - name: value
+  comment: '# * Set the value of a given attribute.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  mixed  $value
+
+    # * @return void'
+- name: getRules
+  visibility: public
+  parameters: []
+  comment: '# * Get the validation rules.
+
+    # *
+
+    # * @return array'
+- name: getRulesWithoutPlaceholders
+  visibility: public
+  parameters: []
+  comment: '# * Get the validation rules with key placeholders removed.
+
+    # *
+
+    # * @return array'
+- name: setRules
+  visibility: public
+  parameters:
+  - name: rules
+  comment: '# * Set the validation rules.
+
+    # *
+
+    # * @param  array  $rules
+
+    # * @return $this'
+- name: addRules
+  visibility: public
+  parameters:
+  - name: rules
+  comment: '# * Parse the given rules and merge them into current rules.
+
+    # *
+
+    # * @param  array  $rules
+
+    # * @return void'
+- name: sometimes
+  visibility: public
+  parameters:
+  - name: attribute
+  - name: rules
+  - name: callback
+  comment: '# * Add conditions to a given field based on a Closure.
+
+    # *
+
+    # * @param  string|array  $attribute
+
+    # * @param  string|array  $rules
+
+    # * @param  callable  $callback
+
+    # * @return $this'
+- name: dataForSometimesIteration
+  visibility: private
+  parameters:
+  - name: attribute
+  - name: removeLastSegmentOfAttribute
+  comment: '# * Get the data that should be injected into the iteration of a wildcard
+    "sometimes" callback.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @return \Illuminate\Support\Fluent|array|mixed'
+- name: stopOnFirstFailure
+  visibility: public
+  parameters:
+  - name: stopOnFirstFailure
+    default: 'true'
+  comment: '# * Instruct the validator to stop validating after the first rule failure.
+
+    # *
+
+    # * @param  bool  $stopOnFirstFailure
+
+    # * @return $this'
+- name: addExtensions
+  visibility: public
+  parameters:
+  - name: extensions
+  comment: '# * Register an array of custom validator extensions.
+
+    # *
+
+    # * @param  array  $extensions
+
+    # * @return void'
+- name: addImplicitExtensions
+  visibility: public
+  parameters:
+  - name: extensions
+  comment: '# * Register an array of custom implicit validator extensions.
+
+    # *
+
+    # * @param  array  $extensions
+
+    # * @return void'
+- name: addDependentExtensions
+  visibility: public
+  parameters:
+  - name: extensions
+  comment: '# * Register an array of custom dependent validator extensions.
+
+    # *
+
+    # * @param  array  $extensions
+
+    # * @return void'
+- name: addExtension
+  visibility: public
+  parameters:
+  - name: rule
+  - name: extension
+  comment: '# * Register a custom validator extension.
+
+    # *
+
+    # * @param  string  $rule
+
+    # * @param  \Closure|string  $extension
+
+    # * @return void'
+- name: addImplicitExtension
+  visibility: public
+  parameters:
+  - name: rule
+  - name: extension
+  comment: '# * Register a custom implicit validator extension.
+
+    # *
+
+    # * @param  string  $rule
+
+    # * @param  \Closure|string  $extension
+
+    # * @return void'
+- name: addDependentExtension
+  visibility: public
+  parameters:
+  - name: rule
+  - name: extension
+  comment: '# * Register a custom dependent validator extension.
+
+    # *
+
+    # * @param  string  $rule
+
+    # * @param  \Closure|string  $extension
+
+    # * @return void'
+- name: addReplacers
+  visibility: public
+  parameters:
+  - name: replacers
+  comment: '# * Register an array of custom validator message replacers.
+
+    # *
+
+    # * @param  array  $replacers
+
+    # * @return void'
+- name: addReplacer
+  visibility: public
+  parameters:
+  - name: rule
+  - name: replacer
+  comment: '# * Register a custom validator message replacer.
+
+    # *
+
+    # * @param  string  $rule
+
+    # * @param  \Closure|string  $replacer
+
+    # * @return void'
+- name: setCustomMessages
+  visibility: public
+  parameters:
+  - name: messages
+  comment: '# * Set the custom messages for the validator.
+
+    # *
+
+    # * @param  array  $messages
+
+    # * @return $this'
+- name: setAttributeNames
+  visibility: public
+  parameters:
+  - name: attributes
+  comment: '# * Set the custom attributes on the validator.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @return $this'
+- name: addCustomAttributes
+  visibility: public
+  parameters:
+  - name: attributes
+  comment: '# * Add custom attributes to the validator.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @return $this'
+- name: setImplicitAttributesFormatter
+  visibility: public
+  parameters:
+  - name: formatter
+    default: 'null'
+  comment: '# * Set the callback that used to format an implicit attribute.
+
+    # *
+
+    # * @param  callable|null  $formatter
+
+    # * @return $this'
+- name: setValueNames
+  visibility: public
+  parameters:
+  - name: values
+  comment: '# * Set the custom values on the validator.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @return $this'
+- name: addCustomValues
+  visibility: public
+  parameters:
+  - name: customValues
+  comment: '# * Add the custom values for the validator.
+
+    # *
+
+    # * @param  array  $customValues
+
+    # * @return $this'
+- name: setFallbackMessages
+  visibility: public
+  parameters:
+  - name: messages
+  comment: '# * Set the fallback messages for the validator.
+
+    # *
+
+    # * @param  array  $messages
+
+    # * @return void'
+- name: getPresenceVerifier
+  visibility: public
+  parameters:
+  - name: connection
+    default: 'null'
+  comment: '# * Get the Presence Verifier implementation.
+
+    # *
+
+    # * @param  string|null  $connection
+
+    # * @return \Illuminate\Validation\PresenceVerifierInterface
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: setPresenceVerifier
+  visibility: public
+  parameters:
+  - name: presenceVerifier
+  comment: '# * Set the Presence Verifier implementation.
+
+    # *
+
+    # * @param  \Illuminate\Validation\PresenceVerifierInterface  $presenceVerifier
+
+    # * @return void'
+- name: getException
+  visibility: public
+  parameters: []
+  comment: '# * Get the exception to throw upon failed validation.
+
+    # *
+
+    # * @return string'
+- name: setException
+  visibility: public
+  parameters:
+  - name: exception
+  comment: '# * Set the exception to throw upon failed validation.
+
+    # *
+
+    # * @param  string  $exception
+
+    # * @return $this
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: ensureExponentWithinAllowedRangeUsing
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Ensure exponents are within range using the given callback.
+
+    # *
+
+    # * @param  callable(int $scale, string $attribute, mixed $value)  $callback
+
+    # * @return $this'
+- name: getTranslator
+  visibility: public
+  parameters: []
+  comment: '# * Get the Translator implementation.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Translation\Translator'
+- name: setTranslator
+  visibility: public
+  parameters:
+  - name: translator
+  comment: '# * Set the Translator implementation.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Translation\Translator  $translator
+
+    # * @return void'
+- name: setContainer
+  visibility: public
+  parameters:
+  - name: container
+  comment: '# * Set the IoC container instance.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Container\Container  $container
+
+    # * @return void'
+- name: callExtension
+  visibility: protected
+  parameters:
+  - name: rule
+  - name: parameters
+  comment: '# * Call a custom validator extension.
+
+    # *
+
+    # * @param  string  $rule
+
+    # * @param  array  $parameters
+
+    # * @return bool|null'
+- name: callClassBasedExtension
+  visibility: protected
+  parameters:
+  - name: callback
+  - name: parameters
+  comment: '# * Call a class based validator extension.
+
+    # *
+
+    # * @param  string  $callback
+
+    # * @param  array  $parameters
+
+    # * @return bool'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Handle dynamic calls to class methods.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \BadMethodCallException'
+traits:
+- BadMethodCallException
+- Illuminate\Contracts\Container\Container
+- Illuminate\Contracts\Translation\Translator
+- Illuminate\Contracts\Validation\DataAwareRule
+- Illuminate\Contracts\Validation\ImplicitRule
+- Illuminate\Contracts\Validation\ValidatorAwareRule
+- Illuminate\Support\Arr
+- Illuminate\Support\Fluent
+- Illuminate\Support\MessageBag
+- Illuminate\Support\Str
+- Illuminate\Support\ValidatedInput
+- InvalidArgumentException
+- RuntimeException
+- stdClass
+- Symfony\Component\HttpFoundation\File\UploadedFile
+- Concerns\FormatsMessages
+interfaces:
+- ValidatorContract

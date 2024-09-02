@@ -1,0 +1,26 @@
+name: ResolveTaggedIteratorArgumentPass
+class_comment: '# * Resolves all TaggedIteratorArgument arguments.
+
+  # *
+
+  # * @author Roland Franssen <franssen.roland@gmail.com>'
+dependencies:
+- name: TaggedIteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- name: PriorityTaggedServiceTrait
+  type: class
+  source: PriorityTaggedServiceTrait
+properties: []
+methods:
+- name: processValue
+  visibility: protected
+  parameters:
+  - name: value
+  - name: isRoot
+    default: 'false'
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- PriorityTaggedServiceTrait
+interfaces: []

@@ -1,0 +1,654 @@
+name: Repository
+class_comment: '# * @mixin \Illuminate\Contracts\Cache\Store'
+dependencies:
+- name: ArrayAccess
+  type: class
+  source: ArrayAccess
+- name: BadMethodCallException
+  type: class
+  source: BadMethodCallException
+- name: Closure
+  type: class
+  source: Closure
+- name: DateTimeInterface
+  type: class
+  source: DateTimeInterface
+- name: CacheHit
+  type: class
+  source: Illuminate\Cache\Events\CacheHit
+- name: CacheMissed
+  type: class
+  source: Illuminate\Cache\Events\CacheMissed
+- name: ForgettingKey
+  type: class
+  source: Illuminate\Cache\Events\ForgettingKey
+- name: KeyForgetFailed
+  type: class
+  source: Illuminate\Cache\Events\KeyForgetFailed
+- name: KeyForgotten
+  type: class
+  source: Illuminate\Cache\Events\KeyForgotten
+- name: KeyWriteFailed
+  type: class
+  source: Illuminate\Cache\Events\KeyWriteFailed
+- name: KeyWritten
+  type: class
+  source: Illuminate\Cache\Events\KeyWritten
+- name: RetrievingKey
+  type: class
+  source: Illuminate\Cache\Events\RetrievingKey
+- name: RetrievingManyKeys
+  type: class
+  source: Illuminate\Cache\Events\RetrievingManyKeys
+- name: WritingKey
+  type: class
+  source: Illuminate\Cache\Events\WritingKey
+- name: WritingManyKeys
+  type: class
+  source: Illuminate\Cache\Events\WritingManyKeys
+- name: CacheContract
+  type: class
+  source: Illuminate\Contracts\Cache\Repository
+- name: Store
+  type: class
+  source: Illuminate\Contracts\Cache\Store
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: Carbon
+  type: class
+  source: Illuminate\Support\Carbon
+- name: InteractsWithTime
+  type: class
+  source: Illuminate\Support\InteractsWithTime
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+properties:
+- name: store
+  visibility: protected
+  comment: "# * @mixin \\Illuminate\\Contracts\\Cache\\Store\n# */\n# class Repository\
+    \ implements ArrayAccess, CacheContract\n# {\n# use InteractsWithTime, Macroable\
+    \ {\n# __call as macroCall;\n# }\n# \n# /**\n# * The cache store implementation.\n\
+    # *\n# * @var \\Illuminate\\Contracts\\Cache\\Store"
+- name: events
+  visibility: protected
+  comment: '# * The event dispatcher implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Events\Dispatcher|null'
+- name: default
+  visibility: protected
+  comment: '# * The default number of seconds to store items.
+
+    # *
+
+    # * @var int|null'
+- name: config
+  visibility: protected
+  comment: '# * The cache store configuration options.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: store
+  - name: config
+    default: '[]'
+  comment: "# * @mixin \\Illuminate\\Contracts\\Cache\\Store\n# */\n# class Repository\
+    \ implements ArrayAccess, CacheContract\n# {\n# use InteractsWithTime, Macroable\
+    \ {\n# __call as macroCall;\n# }\n# \n# /**\n# * The cache store implementation.\n\
+    # *\n# * @var \\Illuminate\\Contracts\\Cache\\Store\n# */\n# protected $store;\n\
+    # \n# /**\n# * The event dispatcher implementation.\n# *\n# * @var \\Illuminate\\\
+    Contracts\\Events\\Dispatcher|null\n# */\n# protected $events;\n# \n# /**\n# *\
+    \ The default number of seconds to store items.\n# *\n# * @var int|null\n# */\n\
+    # protected $default = 3600;\n# \n# /**\n# * The cache store configuration options.\n\
+    # *\n# * @var array\n# */\n# protected $config = [];\n# \n# /**\n# * Create a\
+    \ new cache repository instance.\n# *\n# * @param  \\Illuminate\\Contracts\\Cache\\\
+    Store  $store\n# * @param  array  $config\n# * @return void"
+- name: has
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Determine if an item exists in the cache.
+
+    # *
+
+    # * @param  array|string  $key
+
+    # * @return bool'
+- name: missing
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Determine if an item doesn''t exist in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: get
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Retrieve an item from the cache by key.
+
+    # *
+
+    # * @template TCacheValue
+
+    # *
+
+    # * @param  array|string  $key
+
+    # * @param  TCacheValue|(\Closure(): TCacheValue)  $default
+
+    # * @return (TCacheValue is null ? mixed : TCacheValue)'
+- name: many
+  visibility: public
+  parameters:
+  - name: keys
+  comment: '# * Retrieve multiple items from the cache by key.
+
+    # *
+
+    # * Items not found in the cache will have a null value.
+
+    # *
+
+    # * @param  array  $keys
+
+    # * @return array'
+- name: getMultiple
+  visibility: public
+  parameters:
+  - name: keys
+  - name: default
+    default: 'null'
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return iterable'
+- name: handleManyResult
+  visibility: protected
+  parameters:
+  - name: keys
+  - name: key
+  - name: value
+  comment: '# * Handle a result for the "many" method.
+
+    # *
+
+    # * @param  array  $keys
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return mixed'
+- name: pull
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Retrieve an item from the cache and delete it.
+
+    # *
+
+    # * @template TCacheValue
+
+    # *
+
+    # * @param  array|string  $key
+
+    # * @param  TCacheValue|(\Closure(): TCacheValue)  $default
+
+    # * @return (TCacheValue is null ? mixed : TCacheValue)'
+- name: put
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  - name: ttl
+    default: 'null'
+  comment: '# * Store an item in the cache.
+
+    # *
+
+    # * @param  array|string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
+
+    # * @return bool'
+- name: set
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  - name: ttl
+    default: 'null'
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return bool'
+- name: putMany
+  visibility: public
+  parameters:
+  - name: values
+  - name: ttl
+    default: 'null'
+  comment: '# * Store multiple items in the cache for a given number of seconds.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
+
+    # * @return bool'
+- name: putManyForever
+  visibility: protected
+  parameters:
+  - name: values
+  comment: '# * Store multiple items in the cache indefinitely.
+
+    # *
+
+    # * @param  array  $values
+
+    # * @return bool'
+- name: setMultiple
+  visibility: public
+  parameters:
+  - name: values
+  - name: ttl
+    default: 'null'
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return bool'
+- name: add
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  - name: ttl
+    default: 'null'
+  comment: '# * Store an item in the cache if the key does not exist.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @param  \DateTimeInterface|\DateInterval|int|null  $ttl
+
+    # * @return bool'
+- name: increment
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: '1'
+  comment: '# * Increment the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return int|bool'
+- name: decrement
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+    default: '1'
+  comment: '# * Decrement the value of an item in the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return int|bool'
+- name: forever
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Store an item in the cache indefinitely.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return bool'
+- name: remember
+  visibility: public
+  parameters:
+  - name: key
+  - name: ttl
+  - name: callback
+  comment: '# * Get an item from the cache, or execute the given Closure and store
+    the result.
+
+    # *
+
+    # * @template TCacheValue
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  \Closure|\DateTimeInterface|\DateInterval|int|null  $ttl
+
+    # * @param  \Closure(): TCacheValue  $callback
+
+    # * @return TCacheValue'
+- name: sear
+  visibility: public
+  parameters:
+  - name: key
+  - name: callback
+  comment: '# * Get an item from the cache, or execute the given Closure and store
+    the result forever.
+
+    # *
+
+    # * @template TCacheValue
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  \Closure(): TCacheValue  $callback
+
+    # * @return TCacheValue'
+- name: rememberForever
+  visibility: public
+  parameters:
+  - name: key
+  - name: callback
+  comment: '# * Get an item from the cache, or execute the given Closure and store
+    the result forever.
+
+    # *
+
+    # * @template TCacheValue
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  \Closure(): TCacheValue  $callback
+
+    # * @return TCacheValue'
+- name: forget
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Remove an item from the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: delete
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return bool'
+- name: deleteMultiple
+  visibility: public
+  parameters:
+  - name: keys
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return bool'
+- name: clear
+  visibility: public
+  parameters: []
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return bool'
+- name: tags
+  visibility: public
+  parameters:
+  - name: names
+  comment: '# * Begin executing a new tags operation if the store supports it.
+
+    # *
+
+    # * @param  array|mixed  $names
+
+    # * @return \Illuminate\Cache\TaggedCache
+
+    # *
+
+    # * @throws \BadMethodCallException'
+- name: itemKey
+  visibility: protected
+  parameters:
+  - name: key
+  comment: '# * Format the key for a cache item.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return string'
+- name: getSeconds
+  visibility: protected
+  parameters:
+  - name: ttl
+  comment: '# * Calculate the number of seconds for the given TTL.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $ttl
+
+    # * @return int'
+- name: getName
+  visibility: protected
+  parameters: []
+  comment: '# * Get the name of the cache store.
+
+    # *
+
+    # * @return string|null'
+- name: supportsTags
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the current store supports tags.
+
+    # *
+
+    # * @return bool'
+- name: getDefaultCacheTime
+  visibility: public
+  parameters: []
+  comment: '# * Get the default cache time.
+
+    # *
+
+    # * @return int|null'
+- name: setDefaultCacheTime
+  visibility: public
+  parameters:
+  - name: seconds
+  comment: '# * Set the default cache time in seconds.
+
+    # *
+
+    # * @param  int|null  $seconds
+
+    # * @return $this'
+- name: getStore
+  visibility: public
+  parameters: []
+  comment: '# * Get the cache store implementation.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Cache\Store'
+- name: setStore
+  visibility: public
+  parameters:
+  - name: store
+  comment: '# * Set the cache store implementation.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Cache\Store  $store
+
+    # * @return static'
+- name: event
+  visibility: protected
+  parameters:
+  - name: event
+  comment: '# * Fire an event for this cache instance.
+
+    # *
+
+    # * @param  object|string  $event
+
+    # * @return void'
+- name: getEventDispatcher
+  visibility: public
+  parameters: []
+  comment: '# * Get the event dispatcher instance.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Events\Dispatcher|null'
+- name: setEventDispatcher
+  visibility: public
+  parameters:
+  - name: events
+  comment: '# * Set the event dispatcher instance.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Events\Dispatcher  $events
+
+    # * @return void'
+- name: offsetExists
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Determine if a cached value exists.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return bool'
+- name: offsetGet
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Retrieve an item from the cache by key.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed'
+- name: offsetSet
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Store an item in the cache for the default time.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return void'
+- name: offsetUnset
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Remove an item from the cache.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return void'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Handle dynamic calls into macros or pass missing methods to the store.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+- name: __clone
+  visibility: public
+  parameters: []
+  comment: '# * Clone cache repository instance.
+
+    # *
+
+    # * @return void'
+traits:
+- ArrayAccess
+- BadMethodCallException
+- Closure
+- DateTimeInterface
+- Illuminate\Cache\Events\CacheHit
+- Illuminate\Cache\Events\CacheMissed
+- Illuminate\Cache\Events\ForgettingKey
+- Illuminate\Cache\Events\KeyForgetFailed
+- Illuminate\Cache\Events\KeyForgotten
+- Illuminate\Cache\Events\KeyWriteFailed
+- Illuminate\Cache\Events\KeyWritten
+- Illuminate\Cache\Events\RetrievingKey
+- Illuminate\Cache\Events\RetrievingManyKeys
+- Illuminate\Cache\Events\WritingKey
+- Illuminate\Cache\Events\WritingManyKeys
+- Illuminate\Contracts\Cache\Store
+- Illuminate\Contracts\Events\Dispatcher
+- Illuminate\Support\Carbon
+- Illuminate\Support\InteractsWithTime
+- Illuminate\Support\Traits\Macroable
+interfaces:
+- ArrayAccess

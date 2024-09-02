@@ -1,0 +1,29 @@
+name: AddErrorDetailsStampListener
+class_comment: null
+dependencies:
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: WorkerMessageFailedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerMessageFailedEvent
+- name: ErrorDetailsStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\ErrorDetailsStamp
+properties: []
+methods:
+- name: onMessageFailed
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\Messenger\Event\WorkerMessageFailedEvent
+- Symfony\Component\Messenger\Stamp\ErrorDetailsStamp
+interfaces:
+- EventSubscriberInterface

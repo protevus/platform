@@ -1,0 +1,35 @@
+name: QueryParameterRequestMatcher
+class_comment: '# * Checks the presence of HTTP query parameters of a Request.
+
+  # *
+
+  # * @author Alexandre Daubois <alex.daubois@gmail.com>'
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestMatcherInterface
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestMatcherInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: parameters
+  comment: "# * Checks the presence of HTTP query parameters of a Request.\n# *\n\
+    # * @author Alexandre Daubois <alex.daubois@gmail.com>\n# */\n# class QueryParameterRequestMatcher\
+    \ implements RequestMatcherInterface\n# {\n# /**\n# * @var string[]\n# */\n# private\
+    \ array $parameters;\n# \n# /**\n# * @param string[]|string $parameters A parameter\
+    \ or a list of parameters\n# *                                    Strings can\
+    \ contain a comma-delimited list of query parameters"
+- name: matches
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestMatcherInterface
+interfaces:
+- RequestMatcherInterface

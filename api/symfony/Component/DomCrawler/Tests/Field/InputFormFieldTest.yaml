@@ -1,0 +1,15 @@
+name: InputFormFieldTest
+class_comment: null
+dependencies:
+- name: InputFormField
+  type: class
+  source: Symfony\Component\DomCrawler\Field\InputFormField
+properties: []
+methods:
+- name: testInitialize
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\DomCrawler\Field\InputFormField
+interfaces: []

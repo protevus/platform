@@ -1,0 +1,134 @@
+name: ShowCommand
+class_comment: null
+dependencies:
+- name: ConnectionInterface
+  type: class
+  source: Illuminate\Database\ConnectionInterface
+- name: ConnectionResolverInterface
+  type: class
+  source: Illuminate\Database\ConnectionResolverInterface
+- name: Builder
+  type: class
+  source: Illuminate\Database\Schema\Builder
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Number
+  type: class
+  source: Illuminate\Support\Number
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+properties:
+- name: signature
+  visibility: protected
+  comment: '# * The name and signature of the console command.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+methods:
+- name: handle
+  visibility: public
+  parameters:
+  - name: connections
+  comment: "# * The name and signature of the console command.\n# *\n# * @var string\n\
+    # */\n# protected $signature = 'db:show {--database= : The database connection}\n\
+    # {--json : Output the database information as JSON}\n# {--counts : Show the table\
+    \ row count <bg=red;options=bold> Note: This can be slow on large databases </>}\n\
+    # {--views : Show the database views <bg=red;options=bold> Note: This can be slow\
+    \ on large databases </>}\n# {--types : Show the user defined types}';\n# \n#\
+    \ /**\n# * The console command description.\n# *\n# * @var string\n# */\n# protected\
+    \ $description = 'Display information about the given database';\n# \n# /**\n\
+    # * Execute the console command.\n# *\n# * @param  \\Illuminate\\Database\\ConnectionResolverInterface\
+    \  $connections\n# * @return int"
+- name: tables
+  visibility: protected
+  parameters:
+  - name: connection
+  - name: schema
+  comment: '# * Get information regarding the tables within the database.
+
+    # *
+
+    # * @param  \Illuminate\Database\ConnectionInterface  $connection
+
+    # * @param  \Illuminate\Database\Schema\Builder  $schema
+
+    # * @return \Illuminate\Support\Collection'
+- name: views
+  visibility: protected
+  parameters:
+  - name: connection
+  - name: schema
+  comment: '# * Get information regarding the views within the database.
+
+    # *
+
+    # * @param  \Illuminate\Database\ConnectionInterface  $connection
+
+    # * @param  \Illuminate\Database\Schema\Builder  $schema
+
+    # * @return \Illuminate\Support\Collection'
+- name: types
+  visibility: protected
+  parameters:
+  - name: connection
+  - name: schema
+  comment: '# * Get information regarding the user-defined types within the database.
+
+    # *
+
+    # * @param  \Illuminate\Database\ConnectionInterface  $connection
+
+    # * @param  \Illuminate\Database\Schema\Builder  $schema
+
+    # * @return \Illuminate\Support\Collection'
+- name: display
+  visibility: protected
+  parameters:
+  - name: data
+  comment: '# * Render the database information.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return void'
+- name: displayJson
+  visibility: protected
+  parameters:
+  - name: data
+  comment: '# * Render the database information as JSON.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return void'
+- name: displayForCli
+  visibility: protected
+  parameters:
+  - name: data
+  comment: '# * Render the database information formatted for the CLI.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return void'
+traits:
+- Illuminate\Database\ConnectionInterface
+- Illuminate\Database\ConnectionResolverInterface
+- Illuminate\Database\Schema\Builder
+- Illuminate\Support\Arr
+- Illuminate\Support\Number
+- Symfony\Component\Console\Attribute\AsCommand
+interfaces: []

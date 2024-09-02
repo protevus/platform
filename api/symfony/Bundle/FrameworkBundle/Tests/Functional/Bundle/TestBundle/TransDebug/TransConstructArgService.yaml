@@ -1,0 +1,20 @@
+name: TransConstructArgService
+class_comment: null
+dependencies:
+- name: TranslatorInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatorInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: translator
+  comment: null
+- name: hello
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Contracts\Translation\TranslatorInterface
+interfaces: []

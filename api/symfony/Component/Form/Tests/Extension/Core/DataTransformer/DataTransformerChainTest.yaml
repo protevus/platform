@@ -1,0 +1,27 @@
+name: DataTransformerChainTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: DataTransformerChain
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataTransformer\DataTransformerChain
+- name: FixedDataTransformer
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\FixedDataTransformer
+properties: []
+methods:
+- name: testTransform
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransform
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\Extension\Core\DataTransformer\DataTransformerChain
+- Symfony\Component\Form\Tests\Fixtures\FixedDataTransformer
+interfaces: []

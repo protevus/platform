@@ -1,0 +1,105 @@
+name: TransportTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Mailer\Exception\InvalidArgumentException
+- name: SentMessage
+  type: class
+  source: Symfony\Component\Mailer\SentMessage
+- name: Transport
+  type: class
+  source: Symfony\Component\Mailer\Transport
+- name: Dsn
+  type: class
+  source: Symfony\Component\Mailer\Transport\Dsn
+- name: FailoverTransport
+  type: class
+  source: Symfony\Component\Mailer\Transport\FailoverTransport
+- name: RoundRobinTransport
+  type: class
+  source: Symfony\Component\Mailer\Transport\RoundRobinTransport
+- name: TransportInterface
+  type: class
+  source: Symfony\Component\Mailer\Transport\TransportInterface
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+properties: []
+methods:
+- name: testFromString
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: transport
+  comment: '# * @dataProvider fromStringProvider'
+- name: fromStringProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsn
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: transport
+  comment: '# * @dataProvider fromDsnProvider'
+- name: fromDsnProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromWrongString
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: error
+  comment: '# * @dataProvider fromWrongStringProvider'
+- name: fromWrongStringProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: host
+  comment: null
+- name: send
+  visibility: public
+  parameters:
+  - name: message
+  - name: envelope
+    default: 'null'
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: create
+  visibility: public
+  parameters:
+  - name: dsn
+  comment: null
+- name: supports
+  visibility: public
+  parameters:
+  - name: dsn
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mailer\Exception\InvalidArgumentException
+- Symfony\Component\Mailer\SentMessage
+- Symfony\Component\Mailer\Transport
+- Symfony\Component\Mailer\Transport\Dsn
+- Symfony\Component\Mailer\Transport\FailoverTransport
+- Symfony\Component\Mailer\Transport\RoundRobinTransport
+- Symfony\Component\Mailer\Transport\TransportInterface
+- Symfony\Component\Mime\RawMessage
+interfaces:
+- TransportInterface
+- Transport\TransportFactoryInterface

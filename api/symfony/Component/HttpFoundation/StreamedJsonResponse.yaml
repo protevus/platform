@@ -1,0 +1,121 @@
+name: StreamedJsonResponse
+class_comment: '# * StreamedJsonResponse represents a streamed HTTP response for JSON.
+
+  # *
+
+  # * A StreamedJsonResponse uses a structure and generics to create an
+
+  # * efficient resource-saving JSON response.
+
+  # *
+
+  # * It is recommended to use flush() function after a specific number of items to
+  directly stream the data.
+
+  # *
+
+  # * @see flush()
+
+  # *
+
+  # * @author Alexander Schranz <alexander@sulu.io>
+
+  # *
+
+  # * Example usage:
+
+  # *
+
+  # *     function loadArticles(): \Generator
+
+  # *         // some streamed loading
+
+  # *         yield [''title'' => ''Article 1''];
+
+  # *         yield [''title'' => ''Article 2''];
+
+  # *         yield [''title'' => ''Article 3''];
+
+  # *         // recommended to use flush() after every specific number of items
+
+  # *     }),
+
+  # *
+
+  # *     $response = new StreamedJsonResponse(
+
+  # *         // json structure with generators in which will be streamed
+
+  # *         [
+
+  # *             ''_embedded'' => [
+
+  # *                 ''articles'' => loadArticles(), // any generator which you want
+  to stream as list of data
+
+  # *             ],
+
+  # *         ],
+
+  # *     );'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: data
+  - name: status
+    default: '200'
+  - name: headers
+    default: '[]'
+  - name: encodingOptions
+    default: JsonResponse::DEFAULT_ENCODING_OPTIONS
+  comment: "# * StreamedJsonResponse represents a streamed HTTP response for JSON.\n\
+    # *\n# * A StreamedJsonResponse uses a structure and generics to create an\n#\
+    \ * efficient resource-saving JSON response.\n# *\n# * It is recommended to use\
+    \ flush() function after a specific number of items to directly stream the data.\n\
+    # *\n# * @see flush()\n# *\n# * @author Alexander Schranz <alexander@sulu.io>\n\
+    # *\n# * Example usage:\n# *\n# *     function loadArticles(): \\Generator\n#\
+    \ *         // some streamed loading\n# *         yield ['title' => 'Article 1'];\n\
+    # *         yield ['title' => 'Article 2'];\n# *         yield ['title' => 'Article\
+    \ 3'];\n# *         // recommended to use flush() after every specific number\
+    \ of items\n# *     }),\n# *\n# *     $response = new StreamedJsonResponse(\n\
+    # *         // json structure with generators in which will be streamed\n# * \
+    \        [\n# *             '_embedded' => [\n# *                 'articles' =>\
+    \ loadArticles(), // any generator which you want to stream as list of data\n\
+    # *             ],\n# *         ],\n# *     );\n# */\n# class StreamedJsonResponse\
+    \ extends StreamedResponse\n# {\n# private const PLACEHOLDER = '__symfony_json__';\n\
+    # \n# /**\n# * @param mixed[]                        $data            JSON Data\
+    \ containing PHP generators which will be streamed as list of data or a Generator\n\
+    # * @param int                            $status          The HTTP status code\
+    \ (200 \"OK\" by default)\n# * @param array<string, string|string[]> $headers\
+    \         An array of HTTP headers\n# * @param int                           \
+    \ $encodingOptions Flags for the json_encode() function"
+- name: stream
+  visibility: private
+  parameters: []
+  comment: null
+- name: streamData
+  visibility: private
+  parameters:
+  - name: data
+  - name: jsonEncodingOptions
+  - name: keyEncodingOptions
+  comment: null
+- name: streamArray
+  visibility: private
+  parameters:
+  - name: data
+  - name: jsonEncodingOptions
+  - name: keyEncodingOptions
+  comment: null
+- name: streamIterable
+  visibility: private
+  parameters:
+  - name: iterable
+  - name: jsonEncodingOptions
+  - name: keyEncodingOptions
+  comment: null
+traits: []
+interfaces: []

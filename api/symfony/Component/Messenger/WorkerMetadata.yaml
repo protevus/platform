@@ -1,0 +1,21 @@
+name: WorkerMetadata
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getQueueNames
+  visibility: public
+  parameters: []
+  comment: "# * @author Oleg Krasavin <okwinza@gmail.com>\n# */\n# final class WorkerMetadata\n\
+    # {\n# public function __construct(\n# private array $metadata,\n# ) {\n# }\n\
+    # \n# public function set(array $newMetadata): void\n# {\n# $this->metadata =\
+    \ array_merge($this->metadata, $newMetadata);\n# }\n# \n# /**\n# * Returns the\
+    \ queue names the worker consumes from, if \"--queues\" option was used.\n# *\
+    \ Returns null otherwise."
+- name: getTransportNames
+  visibility: public
+  parameters: []
+  comment: '# * Returns an array of unique identifiers for transport receivers the
+    worker consumes from.'
+traits: []
+interfaces: []

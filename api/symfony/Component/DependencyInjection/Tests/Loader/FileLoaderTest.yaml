@@ -1,0 +1,252 @@
+name: FileLoaderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: FileLocator
+  type: class
+  source: Symfony\Component\Config\FileLocator
+- name: LoaderResolver
+  type: class
+  source: Symfony\Component\Config\Loader\LoaderResolver
+- name: Alias
+  type: class
+  source: Symfony\Component\DependencyInjection\Alias
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\LogicException
+- name: FileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\FileLoader
+- name: IniFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\IniFileLoader
+- name: PhpFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- name: XmlFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\XmlFileLoader
+- name: YamlFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\YamlFileLoader
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: MissingParent
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\BadClasses\MissingParent
+- name: Foo
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\Foo
+- name: FooInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\FooInterface
+- name: NotFoo
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\NotFoo
+- name: AnotherSub
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\OtherDir\AnotherSub
+- name: DeeperBaz
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\OtherDir\AnotherSub\DeeperBaz
+- name: Baz
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\OtherDir\Baz
+- name: Bar
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\Sub\Bar
+- name: BarInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\Sub\BarInterface
+- name: AliasBarInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\PrototypeAsAlias\AliasBarInterface
+- name: AliasFooInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\PrototypeAsAlias\AliasFooInterface
+- name: WithAsAlias
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\PrototypeAsAlias\WithAsAlias
+- name: WithAsAliasIdMultipleInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\PrototypeAsAlias\WithAsAliasIdMultipleInterface
+- name: WithAsAliasInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\PrototypeAsAlias\WithAsAliasInterface
+- name: WithAsAliasMultiple
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\PrototypeAsAlias\WithAsAliasMultiple
+- name: NotAService
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\Utils\NotAService
+properties: []
+methods:
+- name: setUpBeforeClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testImportWithGlobPattern
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRegisterClasses
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRegisterClassesWithExclude
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRegisterClassesWithExcludeAttribute
+  visibility: public
+  parameters:
+  - name: autoconfigure
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: testRegisterClassesWithExcludeAsArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNestedRegisterClasses
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMissingParentClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRegisterClassesWithBadPrefix
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRegisterClassesWithIncompatibleExclude
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExcludeTrailingSlashConsistency
+  visibility: public
+  parameters:
+  - name: exclude
+  - name: excludedId
+  comment: '# * @dataProvider excludeTrailingSlashConsistencyProvider'
+- name: excludeTrailingSlashConsistencyProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRegisterClassesWithWhenEnv
+  visibility: public
+  parameters:
+  - name: env
+  - name: expected
+  comment: '# * @testWith ["prod", false]
+
+    # *           ["dev", false]
+
+    # *           ["bar", true]
+
+    # *           [null, false]'
+- name: testRegisterWithNotWhenAttributes
+  visibility: public
+  parameters:
+  - name: env
+  - name: expectedNotFooExclusion
+  comment: '# * @dataProvider provideEnvAndExpectedExclusions'
+- name: provideEnvAndExpectedExclusions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRegisterThrowsWithBothWhenAndNotWhenAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRegisterClassesWithAsAlias
+  visibility: public
+  parameters:
+  - name: resource
+  - name: expectedAliases
+  comment: '# * @dataProvider provideResourcesWithAsAliasAttributes'
+- name: provideResourcesWithAsAliasAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRegisterClassesWithDuplicatedAsAlias
+  visibility: public
+  parameters:
+  - name: resource
+  - name: expectedExceptionMessage
+  comment: '# * @dataProvider provideResourcesWithDuplicatedAsAliasAttributes'
+- name: provideResourcesWithDuplicatedAsAliasAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRegisterClassesWithAsAliasAndImplementingMultipleInterfaces
+  visibility: public
+  parameters: []
+  comment: null
+- name: noAutoRegisterAliasesForSinglyImplementedInterfaces
+  visibility: public
+  parameters: []
+  comment: null
+- name: load
+  visibility: public
+  parameters:
+  - name: resource
+  - name: type
+    default: 'null'
+  comment: null
+- name: supports
+  visibility: public
+  parameters:
+  - name: resource
+  - name: type
+    default: 'null'
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Config\FileLocator
+- Symfony\Component\Config\Loader\LoaderResolver
+- Symfony\Component\DependencyInjection\Alias
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Exception\LogicException
+- Symfony\Component\DependencyInjection\Loader\FileLoader
+- Symfony\Component\DependencyInjection\Loader\IniFileLoader
+- Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- Symfony\Component\DependencyInjection\Loader\XmlFileLoader
+- Symfony\Component\DependencyInjection\Loader\YamlFileLoader
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\BadClasses\MissingParent
+- Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\Foo
+- Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\FooInterface
+- Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\NotFoo
+- Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\OtherDir\AnotherSub
+- Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\OtherDir\AnotherSub\DeeperBaz
+- Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\OtherDir\Baz
+- Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\Sub\Bar
+- Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\Sub\BarInterface
+- Symfony\Component\DependencyInjection\Tests\Fixtures\PrototypeAsAlias\AliasBarInterface
+- Symfony\Component\DependencyInjection\Tests\Fixtures\PrototypeAsAlias\AliasFooInterface
+- Symfony\Component\DependencyInjection\Tests\Fixtures\PrototypeAsAlias\WithAsAlias
+- Symfony\Component\DependencyInjection\Tests\Fixtures\PrototypeAsAlias\WithAsAliasIdMultipleInterface
+- Symfony\Component\DependencyInjection\Tests\Fixtures\PrototypeAsAlias\WithAsAliasInterface
+- Symfony\Component\DependencyInjection\Tests\Fixtures\PrototypeAsAlias\WithAsAliasMultiple
+- Symfony\Component\DependencyInjection\Tests\Fixtures\Utils\NotAService
+interfaces: []

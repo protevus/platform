@@ -1,0 +1,27 @@
+name: FunctionNodeTest
+class_comment: null
+dependencies:
+- name: ElementNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\ElementNode
+- name: FunctionNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\FunctionNode
+- name: Token
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Token
+properties: []
+methods:
+- name: getToStringConversionTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSpecificityValueTestData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\CssSelector\Node\ElementNode
+- Symfony\Component\CssSelector\Node\FunctionNode
+- Symfony\Component\CssSelector\Parser\Token
+interfaces: []

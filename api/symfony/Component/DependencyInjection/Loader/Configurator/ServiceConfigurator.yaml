@@ -1,0 +1,116 @@
+name: ServiceConfigurator
+class_comment: '# * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: AbstractTrait
+  type: class
+  source: Traits\AbstractTrait
+- name: ArgumentTrait
+  type: class
+  source: Traits\ArgumentTrait
+- name: AutoconfigureTrait
+  type: class
+  source: Traits\AutoconfigureTrait
+- name: AutowireTrait
+  type: class
+  source: Traits\AutowireTrait
+- name: BindTrait
+  type: class
+  source: Traits\BindTrait
+- name: CallTrait
+  type: class
+  source: Traits\CallTrait
+- name: ClassTrait
+  type: class
+  source: Traits\ClassTrait
+- name: ConfiguratorTrait
+  type: class
+  source: Traits\ConfiguratorTrait
+- name: ConstructorTrait
+  type: class
+  source: Traits\ConstructorTrait
+- name: DecorateTrait
+  type: class
+  source: Traits\DecorateTrait
+- name: DeprecateTrait
+  type: class
+  source: Traits\DeprecateTrait
+- name: FactoryTrait
+  type: class
+  source: Traits\FactoryTrait
+- name: FileTrait
+  type: class
+  source: Traits\FileTrait
+- name: FromCallableTrait
+  type: class
+  source: Traits\FromCallableTrait
+- name: LazyTrait
+  type: class
+  source: Traits\LazyTrait
+- name: ParentTrait
+  type: class
+  source: Traits\ParentTrait
+- name: PropertyTrait
+  type: class
+  source: Traits\PropertyTrait
+- name: PublicTrait
+  type: class
+  source: Traits\PublicTrait
+- name: ShareTrait
+  type: class
+  source: Traits\ShareTrait
+- name: SyntheticTrait
+  type: class
+  source: Traits\SyntheticTrait
+- name: TagTrait
+  type: class
+  source: Traits\TagTrait
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+  - name: instanceof
+  - name: allowParent
+  - name: parent
+  - name: definition
+  - name: id
+  - name: defaultTags
+  - name: path
+    default: 'null'
+  comment: null
+- name: __destruct
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Traits\AbstractTrait
+- Traits\ArgumentTrait
+- Traits\AutoconfigureTrait
+- Traits\AutowireTrait
+- Traits\BindTrait
+- Traits\CallTrait
+- Traits\ClassTrait
+- Traits\ConfiguratorTrait
+- Traits\ConstructorTrait
+- Traits\DecorateTrait
+- Traits\DeprecateTrait
+- Traits\FactoryTrait
+- Traits\FileTrait
+- Traits\FromCallableTrait
+- Traits\LazyTrait
+- Traits\ParentTrait
+- Traits\PropertyTrait
+- Traits\PublicTrait
+- Traits\ShareTrait
+- Traits\SyntheticTrait
+- Traits\TagTrait
+interfaces: []

@@ -1,0 +1,73 @@
+name: MemcachedSessionHandler
+class_comment: '# * Memcached based session storage handler based on the Memcached
+  class
+
+  # * provided by the PHP memcached extension.
+
+  # *
+
+  # * @see https://php.net/memcached
+
+  # *
+
+  # * @author Drak <drak@zikula.org>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: memcached
+  - name: options
+    default: '[]'
+  comment: "# * Memcached based session storage handler based on the Memcached class\n\
+    # * provided by the PHP memcached extension.\n# *\n# * @see https://php.net/memcached\n\
+    # *\n# * @author Drak <drak@zikula.org>\n# */\n# class MemcachedSessionHandler\
+    \ extends AbstractSessionHandler\n# {\n# /**\n# * Time to live in seconds.\n#\
+    \ */\n# private int|\\Closure|null $ttl;\n# \n# /**\n# * Key prefix for shared\
+    \ environments.\n# */\n# private string $prefix;\n# \n# /**\n# * Constructor.\n\
+    # *\n# * List of available options:\n# *  * prefix: The prefix to use for the\
+    \ memcached keys in order to avoid collision\n# *  * ttl: The time to live in\
+    \ seconds.\n# *\n# * @throws \\InvalidArgumentException When unsupported options\
+    \ are passed"
+- name: close
+  visibility: public
+  parameters: []
+  comment: null
+- name: doRead
+  visibility: protected
+  parameters:
+  - name: sessionId
+  comment: null
+- name: updateTimestamp
+  visibility: public
+  parameters:
+  - name: sessionId
+  - name: data
+  comment: null
+- name: doWrite
+  visibility: protected
+  parameters:
+  - name: sessionId
+  - name: data
+  comment: null
+- name: getCompatibleTtl
+  visibility: private
+  parameters: []
+  comment: null
+- name: doDestroy
+  visibility: protected
+  parameters:
+  - name: sessionId
+  comment: null
+- name: gc
+  visibility: public
+  parameters:
+  - name: maxlifetime
+  comment: null
+- name: getMemcached
+  visibility: protected
+  parameters: []
+  comment: '# * Return a Memcached instance.'
+traits: []
+interfaces: []

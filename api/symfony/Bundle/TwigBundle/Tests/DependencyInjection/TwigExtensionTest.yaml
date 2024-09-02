@@ -1,0 +1,165 @@
+name: TwigExtensionTest
+class_comment: null
+dependencies:
+- name: ExpectUserDeprecationMessageTrait
+  type: class
+  source: Symfony\Bridge\PhpUnit\ExpectUserDeprecationMessageTrait
+- name: RuntimeLoaderPass
+  type: class
+  source: Symfony\Bundle\TwigBundle\DependencyInjection\Compiler\RuntimeLoaderPass
+- name: TwigExtension
+  type: class
+  source: Symfony\Bundle\TwigBundle\DependencyInjection\TwigExtension
+- name: AcmeBundle
+  type: class
+  source: Symfony\Bundle\TwigBundle\Tests\DependencyInjection\AcmeBundle\AcmeBundle
+- name: TestCase
+  type: class
+  source: Symfony\Bundle\TwigBundle\Tests\TestCase
+- name: FileLocator
+  type: class
+  source: Symfony\Component\Config\FileLocator
+- name: PassConfig
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\PassConfig
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: PhpFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- name: XmlFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\XmlFileLoader
+- name: YamlFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\YamlFileLoader
+- name: ParameterBag
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: HtmlErrorRenderer
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer
+- name: FormRenderer
+  type: class
+  source: Symfony\Component\Form\FormRenderer
+- name: Mailer
+  type: class
+  source: Symfony\Component\Mailer\Mailer
+- name: Stopwatch
+  type: class
+  source: Symfony\Component\Stopwatch\Stopwatch
+- name: Environment
+  type: class
+  source: Twig\Environment
+- name: ExpectUserDeprecationMessageTrait
+  type: class
+  source: ExpectUserDeprecationMessageTrait
+properties: []
+methods:
+- name: testLoadEmptyConfiguration
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoadFullConfiguration
+  visibility: public
+  parameters:
+  - name: format
+  comment: '# * @dataProvider getFormats'
+- name: testLoadCustomBaseTemplateClassConfiguration
+  visibility: public
+  parameters:
+  - name: format
+  comment: '# * @group legacy
+
+    # *
+
+    # * @dataProvider getFormats'
+- name: testLoadCustomTemplateEscapingGuesserConfiguration
+  visibility: public
+  parameters:
+  - name: format
+  comment: '# * @dataProvider getFormats'
+- name: testLoadDefaultTemplateEscapingGuesserConfiguration
+  visibility: public
+  parameters:
+  - name: format
+  comment: '# * @dataProvider getFormats'
+- name: testLoadCustomDateFormats
+  visibility: public
+  parameters:
+  - name: fileFormat
+  comment: '# * @dataProvider getFormats'
+- name: testGlobalsWithDifferentTypesAndValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTwigLoaderPaths
+  visibility: public
+  parameters:
+  - name: format
+  comment: '# * @dataProvider getFormats'
+- name: getFormats
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStopwatchExtensionAvailability
+  visibility: public
+  parameters:
+  - name: debug
+  - name: stopwatchEnabled
+  - name: expected
+  comment: '# * @dataProvider stopwatchExtensionAvailabilityProvider'
+- name: stopwatchExtensionAvailabilityProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRuntimeLoader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCustomHtmlToTextConverterService
+  visibility: public
+  parameters:
+  - name: format
+  comment: '# * @dataProvider getFormats'
+- name: createContainer
+  visibility: private
+  parameters: []
+  comment: null
+- name: compileContainer
+  visibility: private
+  parameters:
+  - name: container
+  comment: null
+- name: loadFromFile
+  visibility: private
+  parameters:
+  - name: container
+  - name: file
+  - name: format
+  comment: null
+traits:
+- Symfony\Bridge\PhpUnit\ExpectUserDeprecationMessageTrait
+- Symfony\Bundle\TwigBundle\DependencyInjection\Compiler\RuntimeLoaderPass
+- Symfony\Bundle\TwigBundle\DependencyInjection\TwigExtension
+- Symfony\Bundle\TwigBundle\Tests\DependencyInjection\AcmeBundle\AcmeBundle
+- Symfony\Bundle\TwigBundle\Tests\TestCase
+- Symfony\Component\Config\FileLocator
+- Symfony\Component\DependencyInjection\Compiler\PassConfig
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Loader\PhpFileLoader
+- Symfony\Component\DependencyInjection\Loader\XmlFileLoader
+- Symfony\Component\DependencyInjection\Loader\YamlFileLoader
+- Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer
+- Symfony\Component\Form\FormRenderer
+- Symfony\Component\Mailer\Mailer
+- Symfony\Component\Stopwatch\Stopwatch
+- Twig\Environment
+- ExpectUserDeprecationMessageTrait
+interfaces: []

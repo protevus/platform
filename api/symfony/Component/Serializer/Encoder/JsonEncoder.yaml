@@ -1,0 +1,48 @@
+name: JsonEncoder
+class_comment: '# * Encodes JSON data.
+
+  # *
+
+  # * @author Jordi Boggiano <j.boggiano@seld.be>'
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: encodingImpl
+    default: 'null'
+  - name: decodingImpl
+    default: 'null'
+  - name: defaultContext
+    default: '[]'
+  comment: null
+- name: encode
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+  - name: context
+    default: '[]'
+  comment: null
+- name: decode
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+  - name: context
+    default: '[]'
+  comment: null
+- name: supportsEncoding
+  visibility: public
+  parameters:
+  - name: format
+  comment: null
+- name: supportsDecoding
+  visibility: public
+  parameters:
+  - name: format
+  comment: null
+traits: []
+interfaces:
+- EncoderInterface

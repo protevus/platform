@@ -1,0 +1,35 @@
+name: AbstractWorkerMessageEvent
+class_comment: null
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: StampInterface
+  type: class
+  source: Symfony\Component\Messenger\Stamp\StampInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: envelope
+  - name: receiverName
+  comment: null
+- name: getEnvelope
+  visibility: public
+  parameters: []
+  comment: null
+- name: getReceiverName
+  visibility: public
+  parameters: []
+  comment: '# * Returns a unique identifier for transport receiver this message was
+    received from.'
+- name: addStamps
+  visibility: public
+  parameters:
+  - name: '...$stamps'
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Stamp\StampInterface
+interfaces: []

@@ -1,0 +1,117 @@
+name: File
+class_comment: '# * A file in the file system.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: FileException
+  type: class
+  source: Symfony\Component\HttpFoundation\File\Exception\FileException
+- name: FileNotFoundException
+  type: class
+  source: Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException
+- name: MimeTypes
+  type: class
+  source: Symfony\Component\Mime\MimeTypes
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: path
+  - name: checkPath
+    default: 'true'
+  comment: '# * A file in the file system.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # class File extends \SplFileInfo
+
+    # {
+
+    # /**
+
+    # * Constructs a new file from the given path.
+
+    # *
+
+    # * @param string $path      The path to the file
+
+    # * @param bool   $checkPath Whether to check the path or not
+
+    # *
+
+    # * @throws FileNotFoundException If the given path is not a file'
+- name: guessExtension
+  visibility: public
+  parameters: []
+  comment: '# * Returns the extension based on the mime type.
+
+    # *
+
+    # * If the mime type is unknown, returns null.
+
+    # *
+
+    # * This method uses the mime type as guessed by getMimeType()
+
+    # * to guess the file extension.
+
+    # *
+
+    # * @see MimeTypes
+
+    # * @see getMimeType()'
+- name: getMimeType
+  visibility: public
+  parameters: []
+  comment: '# * Returns the mime type of the file.
+
+    # *
+
+    # * The mime type is guessed using a MimeTypeGuesserInterface instance,
+
+    # * which uses finfo_file() then the "file" system binary,
+
+    # * depending on which of those are available.
+
+    # *
+
+    # * @see MimeTypes'
+- name: move
+  visibility: public
+  parameters:
+  - name: directory
+  - name: name
+    default: 'null'
+  comment: '# * Moves the file to a new location.
+
+    # *
+
+    # * @throws FileException if the target file could not be created'
+- name: getContent
+  visibility: public
+  parameters: []
+  comment: null
+- name: getTargetFile
+  visibility: protected
+  parameters:
+  - name: directory
+  - name: name
+    default: 'null'
+  comment: null
+- name: getName
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Returns locale independent base name of the given path.'
+traits:
+- Symfony\Component\HttpFoundation\File\Exception\FileException
+- Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException
+- Symfony\Component\Mime\MimeTypes
+interfaces: []

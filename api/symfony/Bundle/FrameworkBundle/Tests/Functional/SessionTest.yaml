@@ -1,0 +1,49 @@
+name: SessionTest
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: testWelcome
+  visibility: public
+  parameters:
+  - name: config
+  - name: insulate
+  comment: '# * Tests session attributes persist.
+
+    # *
+
+    # * @dataProvider getConfigs'
+- name: testFlash
+  visibility: public
+  parameters:
+  - name: config
+  - name: insulate
+  comment: '# * Tests flash messages work in practice.
+
+    # *
+
+    # * @dataProvider getConfigs'
+- name: testTwoClients
+  visibility: public
+  parameters:
+  - name: config
+  - name: insulate
+  comment: '# * See if two separate insulated clients can run without
+
+    # * polluting each other''s session data.
+
+    # *
+
+    # * @dataProvider getConfigs'
+- name: testCorrectCacheControlHeadersForCacheableAction
+  visibility: public
+  parameters:
+  - name: config
+  - name: insulate
+  comment: '# * @dataProvider getConfigs'
+- name: getConfigs
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

@@ -1,0 +1,47 @@
+name: GroupClassDummy
+class_comment: null
+dependencies:
+- name: Groups
+  type: class
+  source: Symfony\Component\Serializer\Attribute\Groups
+properties:
+- name: foo
+  visibility: private
+  comment: null
+- name: bar
+  visibility: private
+  comment: null
+- name: baz
+  visibility: private
+  comment: null
+methods:
+- name: getFoo
+  visibility: public
+  parameters: []
+  comment: null
+- name: setFoo
+  visibility: public
+  parameters:
+  - name: foo
+  comment: null
+- name: getBar
+  visibility: public
+  parameters: []
+  comment: null
+- name: setBar
+  visibility: public
+  parameters:
+  - name: bar
+  comment: null
+- name: getBaz
+  visibility: public
+  parameters: []
+  comment: null
+- name: setBaz
+  visibility: public
+  parameters:
+  - name: baz
+  comment: null
+traits:
+- Symfony\Component\Serializer\Attribute\Groups
+interfaces: []

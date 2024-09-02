@@ -1,0 +1,448 @@
+name: InteractsWithPivotTable
+class_comment: null
+dependencies:
+- name: BackedEnum
+  type: class
+  source: BackedEnum
+- name: Collection
+  type: class
+  source: Illuminate\Database\Eloquent\Collection
+- name: Model
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+- name: Pivot
+  type: class
+  source: Illuminate\Database\Eloquent\Relations\Pivot
+- name: BaseCollection
+  type: class
+  source: Illuminate\Support\Collection
+properties: []
+methods:
+- name: toggle
+  visibility: public
+  parameters:
+  - name: ids
+  - name: touch
+    default: 'true'
+  comment: '# * Toggles a model (or models) from the parent.
+
+    # *
+
+    # * Each existing model is detached, and non existing ones are attached.
+
+    # *
+
+    # * @param  mixed  $ids
+
+    # * @param  bool  $touch
+
+    # * @return array'
+- name: syncWithoutDetaching
+  visibility: public
+  parameters:
+  - name: ids
+  comment: '# * Sync the intermediate tables with a list of IDs without detaching.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection|\Illuminate\Database\Eloquent\Model|array  $ids
+
+    # * @return array{attached: array, detached: array, updated: array}'
+- name: sync
+  visibility: public
+  parameters:
+  - name: ids
+  - name: detaching
+    default: 'true'
+  comment: '# * Sync the intermediate tables with a list of IDs or collection of models.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection|\Illuminate\Database\Eloquent\Model|array  $ids
+
+    # * @param  bool  $detaching
+
+    # * @return array{attached: array, detached: array, updated: array}'
+- name: syncWithPivotValues
+  visibility: public
+  parameters:
+  - name: ids
+  - name: values
+  - name: detaching
+    default: 'true'
+  comment: '# * Sync the intermediate tables with a list of IDs or collection of models
+    with the given pivot values.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection|\Illuminate\Database\Eloquent\Model|array  $ids
+
+    # * @param  array  $values
+
+    # * @param  bool  $detaching
+
+    # * @return array{attached: array, detached: array, updated: array}'
+- name: formatRecordsList
+  visibility: protected
+  parameters:
+  - name: records
+  comment: '# * Format the sync / toggle record list so that it is keyed by ID.
+
+    # *
+
+    # * @param  array  $records
+
+    # * @return array'
+- name: attachNew
+  visibility: protected
+  parameters:
+  - name: records
+  - name: current
+  - name: touch
+    default: 'true'
+  comment: '# * Attach all of the records that aren''t in the given current records.
+
+    # *
+
+    # * @param  array  $records
+
+    # * @param  array  $current
+
+    # * @param  bool  $touch
+
+    # * @return array'
+- name: updateExistingPivot
+  visibility: public
+  parameters:
+  - name: id
+  - name: attributes
+  - name: touch
+    default: 'true'
+  comment: '# * Update an existing pivot record on the table.
+
+    # *
+
+    # * @param  mixed  $id
+
+    # * @param  array  $attributes
+
+    # * @param  bool  $touch
+
+    # * @return int'
+- name: updateExistingPivotUsingCustomClass
+  visibility: protected
+  parameters:
+  - name: id
+  - name: attributes
+  - name: touch
+  comment: '# * Update an existing pivot record on the table via a custom class.
+
+    # *
+
+    # * @param  mixed  $id
+
+    # * @param  array  $attributes
+
+    # * @param  bool  $touch
+
+    # * @return int'
+- name: attach
+  visibility: public
+  parameters:
+  - name: id
+  - name: attributes
+    default: '[]'
+  - name: touch
+    default: 'true'
+  comment: '# * Attach a model to the parent.
+
+    # *
+
+    # * @param  mixed  $id
+
+    # * @param  array  $attributes
+
+    # * @param  bool  $touch
+
+    # * @return void'
+- name: attachUsingCustomClass
+  visibility: protected
+  parameters:
+  - name: id
+  - name: attributes
+  comment: '# * Attach a model to the parent using a custom class.
+
+    # *
+
+    # * @param  mixed  $id
+
+    # * @param  array  $attributes
+
+    # * @return void'
+- name: formatAttachRecords
+  visibility: protected
+  parameters:
+  - name: ids
+  - name: attributes
+  comment: '# * Create an array of records to insert into the pivot table.
+
+    # *
+
+    # * @param  array  $ids
+
+    # * @param  array  $attributes
+
+    # * @return array'
+- name: formatAttachRecord
+  visibility: protected
+  parameters:
+  - name: key
+  - name: value
+  - name: attributes
+  - name: hasTimestamps
+  comment: '# * Create a full attachment record payload.
+
+    # *
+
+    # * @param  int  $key
+
+    # * @param  mixed  $value
+
+    # * @param  array  $attributes
+
+    # * @param  bool  $hasTimestamps
+
+    # * @return array'
+- name: extractAttachIdAndAttributes
+  visibility: protected
+  parameters:
+  - name: key
+  - name: value
+  - name: attributes
+  comment: '# * Get the attach record ID and extra attributes.
+
+    # *
+
+    # * @param  mixed  $key
+
+    # * @param  mixed  $value
+
+    # * @param  array  $attributes
+
+    # * @return array'
+- name: baseAttachRecord
+  visibility: protected
+  parameters:
+  - name: id
+  - name: timed
+  comment: '# * Create a new pivot attachment record.
+
+    # *
+
+    # * @param  int  $id
+
+    # * @param  bool  $timed
+
+    # * @return array'
+- name: addTimestampsToAttachment
+  visibility: protected
+  parameters:
+  - name: record
+  - name: exists
+    default: 'false'
+  comment: '# * Set the creation and update timestamps on an attach record.
+
+    # *
+
+    # * @param  array  $record
+
+    # * @param  bool  $exists
+
+    # * @return array'
+- name: hasPivotColumn
+  visibility: public
+  parameters:
+  - name: column
+  comment: '# * Determine whether the given column is defined as a pivot column.
+
+    # *
+
+    # * @param  string  $column
+
+    # * @return bool'
+- name: detach
+  visibility: public
+  parameters:
+  - name: ids
+    default: 'null'
+  - name: touch
+    default: 'true'
+  comment: '# * Detach models from the relationship.
+
+    # *
+
+    # * @param  mixed  $ids
+
+    # * @param  bool  $touch
+
+    # * @return int'
+- name: detachUsingCustomClass
+  visibility: protected
+  parameters:
+  - name: ids
+  comment: '# * Detach models from the relationship using a custom class.
+
+    # *
+
+    # * @param  mixed  $ids
+
+    # * @return int'
+- name: getCurrentlyAttachedPivots
+  visibility: protected
+  parameters: []
+  comment: '# * Get the pivot models that are currently attached.
+
+    # *
+
+    # * @return \Illuminate\Support\Collection'
+- name: newPivot
+  visibility: public
+  parameters:
+  - name: attributes
+    default: '[]'
+  - name: exists
+    default: 'false'
+  comment: '# * Create a new pivot model instance.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @param  bool  $exists
+
+    # * @return \Illuminate\Database\Eloquent\Relations\Pivot'
+- name: newExistingPivot
+  visibility: public
+  parameters:
+  - name: attributes
+    default: '[]'
+  comment: '# * Create a new existing pivot model instance.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @return \Illuminate\Database\Eloquent\Relations\Pivot'
+- name: newPivotStatement
+  visibility: public
+  parameters: []
+  comment: '# * Get a new plain query builder for the pivot table.
+
+    # *
+
+    # * @return \Illuminate\Database\Query\Builder'
+- name: newPivotStatementForId
+  visibility: public
+  parameters:
+  - name: id
+  comment: '# * Get a new pivot statement for a given "other" ID.
+
+    # *
+
+    # * @param  mixed  $id
+
+    # * @return \Illuminate\Database\Query\Builder'
+- name: newPivotQuery
+  visibility: public
+  parameters: []
+  comment: '# * Create a new query builder for the pivot table.
+
+    # *
+
+    # * @return \Illuminate\Database\Query\Builder'
+- name: withPivot
+  visibility: public
+  parameters:
+  - name: columns
+  comment: '# * Set the columns on the pivot table to retrieve.
+
+    # *
+
+    # * @param  array|mixed  $columns
+
+    # * @return $this'
+- name: parseIds
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Get all of the IDs from the given mixed value.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return array'
+- name: parseId
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Get the ID from the given mixed value.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return mixed'
+- name: castKeys
+  visibility: protected
+  parameters:
+  - name: keys
+  comment: '# * Cast the given keys to integers if they are numeric and string otherwise.
+
+    # *
+
+    # * @param  array  $keys
+
+    # * @return array'
+- name: castKey
+  visibility: protected
+  parameters:
+  - name: key
+  comment: '# * Cast the given key to convert to primary key type.
+
+    # *
+
+    # * @param  mixed  $key
+
+    # * @return mixed'
+- name: castAttributes
+  visibility: protected
+  parameters:
+  - name: attributes
+  comment: '# * Cast the given pivot attributes.
+
+    # *
+
+    # * @param  array  $attributes
+
+    # * @return array'
+- name: getTypeSwapValue
+  visibility: protected
+  parameters:
+  - name: type
+  - name: value
+  comment: '# * Converts a given value to a given type value.
+
+    # *
+
+    # * @param  string  $type
+
+    # * @param  mixed  $value
+
+    # * @return mixed'
+traits:
+- BackedEnum
+- Illuminate\Database\Eloquent\Collection
+- Illuminate\Database\Eloquent\Model
+- Illuminate\Database\Eloquent\Relations\Pivot
+interfaces: []

@@ -1,0 +1,54 @@
+name: ScheduleTestCommand
+class_comment: null
+dependencies:
+- name: Application
+  type: class
+  source: Illuminate\Console\Application
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+properties:
+- name: signature
+  visibility: protected
+  comment: '# * The console command name.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+methods:
+- name: handle
+  visibility: public
+  parameters:
+  - name: schedule
+  comment: "# * The console command name.\n# *\n# * @var string\n# */\n# protected\
+    \ $signature = 'schedule:test {--name= : The name of the scheduled command to\
+    \ run}';\n# \n# /**\n# * The console command description.\n# *\n# * @var string\n\
+    # */\n# protected $description = 'Run a scheduled command';\n# \n# /**\n# * Execute\
+    \ the console command.\n# *\n# * @param  \\Illuminate\\Console\\Scheduling\\Schedule\
+    \  $schedule\n# * @return void"
+- name: getSelectedCommandByIndex
+  visibility: protected
+  parameters:
+  - name: commandNames
+  comment: '# * Get the selected command name by index.
+
+    # *
+
+    # * @param  array  $commandNames
+
+    # * @return int'
+traits:
+- Illuminate\Console\Application
+- Illuminate\Console\Command
+- Symfony\Component\Console\Attribute\AsCommand
+interfaces: []

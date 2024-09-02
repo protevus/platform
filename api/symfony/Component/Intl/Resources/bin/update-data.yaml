@@ -1,0 +1,59 @@
+name: update-data
+class_comment: null
+dependencies:
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: GenrbCompiler
+  type: class
+  source: Symfony\Component\Intl\Data\Bundle\Compiler\GenrbCompiler
+- name: PhpBundleWriter
+  type: class
+  source: Symfony\Component\Intl\Data\Bundle\Writer\PhpBundleWriter
+- name: CurrencyDataGenerator
+  type: class
+  source: Symfony\Component\Intl\Data\Generator\CurrencyDataGenerator
+- name: GeneratorConfig
+  type: class
+  source: Symfony\Component\Intl\Data\Generator\GeneratorConfig
+- name: LanguageDataGenerator
+  type: class
+  source: Symfony\Component\Intl\Data\Generator\LanguageDataGenerator
+- name: LocaleDataGenerator
+  type: class
+  source: Symfony\Component\Intl\Data\Generator\LocaleDataGenerator
+- name: RegionDataGenerator
+  type: class
+  source: Symfony\Component\Intl\Data\Generator\RegionDataGenerator
+- name: ScriptDataGenerator
+  type: class
+  source: Symfony\Component\Intl\Data\Generator\ScriptDataGenerator
+- name: TimezoneDataGenerator
+  type: class
+  source: Symfony\Component\Intl\Data\Generator\TimezoneDataGenerator
+- name: Intl
+  type: class
+  source: Symfony\Component\Intl\Intl
+- name: Locale
+  type: class
+  source: Symfony\Component\Intl\Locale
+- name: GitRepository
+  type: class
+  source: Symfony\Component\Intl\Util\GitRepository
+properties: []
+methods: []
+traits:
+- Symfony\Component\Filesystem\Filesystem
+- Symfony\Component\Intl\Data\Bundle\Compiler\GenrbCompiler
+- Symfony\Component\Intl\Data\Bundle\Writer\PhpBundleWriter
+- Symfony\Component\Intl\Data\Generator\CurrencyDataGenerator
+- Symfony\Component\Intl\Data\Generator\GeneratorConfig
+- Symfony\Component\Intl\Data\Generator\LanguageDataGenerator
+- Symfony\Component\Intl\Data\Generator\LocaleDataGenerator
+- Symfony\Component\Intl\Data\Generator\RegionDataGenerator
+- Symfony\Component\Intl\Data\Generator\ScriptDataGenerator
+- Symfony\Component\Intl\Data\Generator\TimezoneDataGenerator
+- Symfony\Component\Intl\Intl
+- Symfony\Component\Intl\Locale
+- Symfony\Component\Intl\Util\GitRepository
+interfaces: []

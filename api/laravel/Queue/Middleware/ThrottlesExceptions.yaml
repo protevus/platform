@@ -1,0 +1,209 @@
+name: ThrottlesExceptions
+class_comment: null
+dependencies:
+- name: RateLimiter
+  type: class
+  source: Illuminate\Cache\RateLimiter
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: Throwable
+  type: class
+  source: Throwable
+properties:
+- name: key
+  visibility: protected
+  comment: '# * The developer specified key that the rate limiter should use.
+
+    # *
+
+    # * @var string'
+- name: byJob
+  visibility: protected
+  comment: '# * Indicates whether the throttle key should use the job''s UUID.
+
+    # *
+
+    # * @var bool'
+- name: maxAttempts
+  visibility: protected
+  comment: '# * The maximum number of attempts allowed before rate limiting applies.
+
+    # *
+
+    # * @var int'
+- name: decaySeconds
+  visibility: protected
+  comment: '# * The number of seconds until the maximum attempts are reset.
+
+    # *
+
+    # * @var int'
+- name: retryAfterMinutes
+  visibility: protected
+  comment: '# * The number of minutes to wait before retrying the job after an exception.
+
+    # *
+
+    # * @var int'
+- name: reportCallback
+  visibility: protected
+  comment: '# * The callback that determines if the exception should be reported.
+
+    # *
+
+    # * @var callable'
+- name: whenCallback
+  visibility: protected
+  comment: '# * The callback that determines if rate limiting should apply.
+
+    # *
+
+    # * @var callable'
+- name: prefix
+  visibility: protected
+  comment: '# * The prefix of the rate limiter key.
+
+    # *
+
+    # * @var string'
+- name: limiter
+  visibility: protected
+  comment: '# * The rate limiter instance.
+
+    # *
+
+    # * @var \Illuminate\Cache\RateLimiter'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: maxAttempts
+    default: '10'
+  - name: decaySeconds
+    default: '600'
+  comment: "# * The developer specified key that the rate limiter should use.\n# *\n\
+    # * @var string\n# */\n# protected $key;\n# \n# /**\n# * Indicates whether the\
+    \ throttle key should use the job's UUID.\n# *\n# * @var bool\n# */\n# protected\
+    \ $byJob = false;\n# \n# /**\n# * The maximum number of attempts allowed before\
+    \ rate limiting applies.\n# *\n# * @var int\n# */\n# protected $maxAttempts;\n\
+    # \n# /**\n# * The number of seconds until the maximum attempts are reset.\n#\
+    \ *\n# * @var int\n# */\n# protected $decaySeconds;\n# \n# /**\n# * The number\
+    \ of minutes to wait before retrying the job after an exception.\n# *\n# * @var\
+    \ int\n# */\n# protected $retryAfterMinutes = 0;\n# \n# /**\n# * The callback\
+    \ that determines if the exception should be reported.\n# *\n# * @var callable\n\
+    # */\n# protected $reportCallback;\n# \n# /**\n# * The callback that determines\
+    \ if rate limiting should apply.\n# *\n# * @var callable\n# */\n# protected $whenCallback;\n\
+    # \n# /**\n# * The prefix of the rate limiter key.\n# *\n# * @var string\n# */\n\
+    # protected $prefix = 'laravel_throttles_exceptions:';\n# \n# /**\n# * The rate\
+    \ limiter instance.\n# *\n# * @var \\Illuminate\\Cache\\RateLimiter\n# */\n# protected\
+    \ $limiter;\n# \n# /**\n# * Create a new middleware instance.\n# *\n# * @param\
+    \  int  $maxAttempts\n# * @param  int  $decaySeconds\n# * @return void"
+- name: handle
+  visibility: public
+  parameters:
+  - name: job
+  - name: next
+  comment: '# * Process the job.
+
+    # *
+
+    # * @param  mixed  $job
+
+    # * @param  callable  $next
+
+    # * @return mixed'
+- name: when
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Specify a callback that should determine if rate limiting behavior
+    should apply.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return $this'
+- name: withPrefix
+  visibility: public
+  parameters:
+  - name: prefix
+  comment: '# * Set the prefix of the rate limiter key.
+
+    # *
+
+    # * @param  string  $prefix
+
+    # * @return $this'
+- name: backoff
+  visibility: public
+  parameters:
+  - name: backoff
+  comment: '# * Specify the number of minutes a job should be delayed when it is released
+    (before it has reached its max exceptions).
+
+    # *
+
+    # * @param  int  $backoff
+
+    # * @return $this'
+- name: getKey
+  visibility: protected
+  parameters:
+  - name: job
+  comment: '# * Get the cache key associated for the rate limiter.
+
+    # *
+
+    # * @param  mixed  $job
+
+    # * @return string'
+- name: by
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Set the value that the rate limiter should be keyed by.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return $this'
+- name: byJob
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the throttle key should use the job''s UUID.
+
+    # *
+
+    # * @return $this'
+- name: report
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Report exceptions and optionally specify a callback that determines
+    if the exception should be reported.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return $this'
+- name: getTimeUntilNextRetry
+  visibility: protected
+  parameters:
+  - name: key
+  comment: '# * Get the number of seconds that should elapse before the job is retried.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return int'
+traits:
+- Illuminate\Cache\RateLimiter
+- Illuminate\Container\Container
+- Throwable
+interfaces: []

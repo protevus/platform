@@ -1,0 +1,12 @@
+name: DummyObjectWithEnumConstructor
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: get
+  comment: null
+traits: []
+interfaces: []

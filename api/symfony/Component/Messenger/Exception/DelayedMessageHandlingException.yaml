@@ -1,0 +1,34 @@
+name: DelayedMessageHandlingException
+class_comment: '# * When handling queued messages from {@link DispatchAfterCurrentBusMiddleware},
+
+  # * some handlers caused an exception. This exception contains all those handler
+  exceptions.
+
+  # *
+
+  # * @author Tobias Nyholm <tobias.nyholm@gmail.com>'
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: EnvelopeAwareExceptionTrait
+  type: class
+  source: EnvelopeAwareExceptionTrait
+- name: WrappedExceptionsTrait
+  type: class
+  source: WrappedExceptionsTrait
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: exceptions
+  - name: envelope
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+- EnvelopeAwareExceptionTrait
+- WrappedExceptionsTrait
+interfaces:
+- WrappedExceptionsInterface

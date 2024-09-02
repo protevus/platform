@@ -1,0 +1,121 @@
+name: MigrationRepositoryInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getRan
+  visibility: public
+  parameters: []
+  comment: '# * Get the completed migrations.
+
+    # *
+
+    # * @return array'
+- name: getMigrations
+  visibility: public
+  parameters:
+  - name: steps
+  comment: '# * Get the list of migrations.
+
+    # *
+
+    # * @param  int  $steps
+
+    # * @return array'
+- name: getMigrationsByBatch
+  visibility: public
+  parameters:
+  - name: batch
+  comment: '# * Get the list of the migrations by batch.
+
+    # *
+
+    # * @param  int  $batch
+
+    # * @return array'
+- name: getLast
+  visibility: public
+  parameters: []
+  comment: '# * Get the last migration batch.
+
+    # *
+
+    # * @return array'
+- name: getMigrationBatches
+  visibility: public
+  parameters: []
+  comment: '# * Get the completed migrations with their batch numbers.
+
+    # *
+
+    # * @return array'
+- name: log
+  visibility: public
+  parameters:
+  - name: file
+  - name: batch
+  comment: '# * Log that a migration was run.
+
+    # *
+
+    # * @param  string  $file
+
+    # * @param  int  $batch
+
+    # * @return void'
+- name: delete
+  visibility: public
+  parameters:
+  - name: migration
+  comment: '# * Remove a migration from the log.
+
+    # *
+
+    # * @param  object  $migration
+
+    # * @return void'
+- name: getNextBatchNumber
+  visibility: public
+  parameters: []
+  comment: '# * Get the next migration batch number.
+
+    # *
+
+    # * @return int'
+- name: createRepository
+  visibility: public
+  parameters: []
+  comment: '# * Create the migration repository data store.
+
+    # *
+
+    # * @return void'
+- name: repositoryExists
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the migration repository exists.
+
+    # *
+
+    # * @return bool'
+- name: deleteRepository
+  visibility: public
+  parameters: []
+  comment: '# * Delete the migration repository data store.
+
+    # *
+
+    # * @return void'
+- name: setSource
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Set the information source to gather data.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return void'
+traits: []
+interfaces: []

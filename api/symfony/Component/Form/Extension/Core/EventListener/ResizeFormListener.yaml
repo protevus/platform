@@ -1,0 +1,69 @@
+name: ResizeFormListener
+class_comment: '# * Resize a collection form element based on the data sent from the
+  client.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Form\Exception\UnexpectedTypeException
+- name: FormEvent
+  type: class
+  source: Symfony\Component\Form\FormEvent
+- name: FormEvents
+  type: class
+  source: Symfony\Component\Form\FormEvents
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: type
+  - name: options
+    default: '[]'
+  - name: allowAdd
+    default: 'false'
+  - name: allowDelete
+    default: 'false'
+  - name: deleteEmpty
+    default: 'false'
+  - name: prototypeOptions
+    default: 'null'
+  - name: keepAsList
+    default: 'false'
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: preSetData
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: preSubmit
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: onSubmit
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+traits:
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\Form\Exception\UnexpectedTypeException
+- Symfony\Component\Form\FormEvent
+- Symfony\Component\Form\FormEvents
+- Symfony\Component\Form\FormInterface
+interfaces:
+- EventSubscriberInterface

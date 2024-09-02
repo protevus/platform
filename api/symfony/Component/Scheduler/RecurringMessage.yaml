@@ -1,0 +1,120 @@
+name: RecurringMessage
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Scheduler\Exception\InvalidArgumentException
+- name: MessageContext
+  type: class
+  source: Symfony\Component\Scheduler\Generator\MessageContext
+- name: CronExpressionTrigger
+  type: class
+  source: Symfony\Component\Scheduler\Trigger\CronExpressionTrigger
+- name: JitterTrigger
+  type: class
+  source: Symfony\Component\Scheduler\Trigger\JitterTrigger
+- name: MessageProviderInterface
+  type: class
+  source: Symfony\Component\Scheduler\Trigger\MessageProviderInterface
+- name: PeriodicalTrigger
+  type: class
+  source: Symfony\Component\Scheduler\Trigger\PeriodicalTrigger
+- name: StaticMessageProvider
+  type: class
+  source: Symfony\Component\Scheduler\Trigger\StaticMessageProvider
+- name: TriggerInterface
+  type: class
+  source: Symfony\Component\Scheduler\Trigger\TriggerInterface
+properties: []
+methods:
+- name: __construct
+  visibility: private
+  parameters:
+  - name: trigger
+  - name: provider
+  comment: null
+- name: every
+  visibility: public
+  parameters:
+  - name: frequency
+  - name: message
+  - name: from
+    default: 'null'
+  - name: until
+    default: new \DateTimeImmutable('3000-01-01'
+  comment: '# * Sets the trigger frequency.
+
+    # *
+
+    # * Supported frequency formats:
+
+    # *
+
+    # *  * An integer to define the frequency as a number of seconds;
+
+    # *  * An ISO 8601 duration format;
+
+    # *  * A relative date format as supported by \DateInterval;
+
+    # *  * A \DateInterval instance.
+
+    # *
+
+    # * @param MessageProviderInterface|object $message A message provider that yields
+    messages or a static message that will be dispatched on every trigger
+
+    # *
+
+    # * @see https://en.wikipedia.org/wiki/ISO_8601#Durations
+
+    # * @see https://php.net/datetime.formats#datetime.formats.relative'
+- name: cron
+  visibility: public
+  parameters:
+  - name: expression
+  - name: message
+  - name: timezone
+    default: 'null'
+  comment: '# * @param MessageProviderInterface|object $message A message provider
+    that yields messages or a static message that will be dispatched on every trigger'
+- name: trigger
+  visibility: public
+  parameters:
+  - name: trigger
+  - name: message
+  comment: '# * @param MessageProviderInterface|object $message A message provider
+    that yields messages or a static message that will be dispatched on every trigger'
+- name: withJitter
+  visibility: public
+  parameters:
+  - name: maxSeconds
+    default: '60'
+  comment: null
+- name: getId
+  visibility: public
+  parameters: []
+  comment: '# * Unique identifier for this message''s context.'
+- name: getMessages
+  visibility: public
+  parameters:
+  - name: context
+  comment: null
+- name: getProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: getTrigger
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Scheduler\Exception\InvalidArgumentException
+- Symfony\Component\Scheduler\Generator\MessageContext
+- Symfony\Component\Scheduler\Trigger\CronExpressionTrigger
+- Symfony\Component\Scheduler\Trigger\JitterTrigger
+- Symfony\Component\Scheduler\Trigger\MessageProviderInterface
+- Symfony\Component\Scheduler\Trigger\PeriodicalTrigger
+- Symfony\Component\Scheduler\Trigger\StaticMessageProvider
+- Symfony\Component\Scheduler\Trigger\TriggerInterface
+interfaces:
+- MessageProviderInterface

@@ -1,0 +1,18 @@
+name: ResolveEnvPlaceholdersPass
+class_comment: '# * Replaces env var placeholders by their current values.'
+dependencies:
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+properties: []
+methods:
+- name: processValue
+  visibility: protected
+  parameters:
+  - name: value
+  - name: isRoot
+    default: 'false'
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Definition
+interfaces: []

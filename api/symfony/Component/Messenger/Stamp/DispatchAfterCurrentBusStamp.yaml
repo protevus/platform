@@ -1,0 +1,8 @@
+name: DispatchAfterCurrentBusStamp
+class_comment: null
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- NonSendableStampInterface

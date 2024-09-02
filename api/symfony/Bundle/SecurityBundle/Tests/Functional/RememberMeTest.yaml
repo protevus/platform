@@ -1,0 +1,32 @@
+name: RememberMeTest
+class_comment: null
+dependencies:
+- name: UserChangingUserProvider
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Tests\Functional\Bundle\RememberMeBundle\Security\UserChangingUserProvider
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testRememberMe
+  visibility: public
+  parameters:
+  - name: options
+  comment: '# * @dataProvider provideConfigs'
+- name: testUserChangeClearsCookie
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSessionLessRememberMeLogout
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideConfigs
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Bundle\SecurityBundle\Tests\Functional\Bundle\RememberMeBundle\Security\UserChangingUserProvider
+interfaces: []

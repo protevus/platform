@@ -1,0 +1,79 @@
+name: UnionTypeTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\TypeInfo\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\TypeInfo\Exception\LogicException
+- name: Type
+  type: class
+  source: Symfony\Component\TypeInfo\Type
+- name: BuiltinType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\BuiltinType
+- name: UnionType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\UnionType
+- name: TypeIdentifier
+  type: class
+  source: Symfony\Component\TypeInfo\TypeIdentifier
+properties: []
+methods:
+- name: testCannotCreateWithOnlyOneType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCannotCreateWithUnionTypeParts
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSortTypesOnCreation
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAsNonNullable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetBaseType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAtLeastOneTypeIs
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEveryTypeIs
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsNullable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsA
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProxiesMethodsToNonNullableType
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\TypeInfo\Exception\InvalidArgumentException
+- Symfony\Component\TypeInfo\Exception\LogicException
+- Symfony\Component\TypeInfo\Type
+- Symfony\Component\TypeInfo\Type\BuiltinType
+- Symfony\Component\TypeInfo\Type\UnionType
+- Symfony\Component\TypeInfo\TypeIdentifier
+interfaces: []

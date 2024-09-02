@@ -1,0 +1,88 @@
+name: MessengerDataCollector
+class_comment: '# * @author Samuel Roze <samuel.roze@gmail.com>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: DataCollector
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\DataCollector
+- name: LateDataCollectorInterface
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+- name: TraceableMessageBus
+  type: class
+  source: Symfony\Component\Messenger\TraceableMessageBus
+- name: ClassStub
+  type: class
+  source: Symfony\Component\VarDumper\Caster\ClassStub
+properties: []
+methods:
+- name: registerBus
+  visibility: public
+  parameters:
+  - name: name
+  - name: bus
+  comment: null
+- name: collect
+  visibility: public
+  parameters:
+  - name: request
+  - name: response
+  - name: exception
+    default: 'null'
+  comment: null
+- name: lateCollect
+  visibility: public
+  parameters: []
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCasters
+  visibility: protected
+  parameters: []
+  comment: null
+- name: collectMessage
+  visibility: private
+  parameters:
+  - name: busName
+  - name: tracedMessage
+  comment: null
+- name: getExceptionsCount
+  visibility: public
+  parameters:
+  - name: bus
+    default: 'null'
+  comment: null
+- name: getMessages
+  visibility: public
+  parameters:
+  - name: bus
+    default: 'null'
+  comment: null
+- name: getBuses
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\DataCollector\DataCollector
+- Symfony\Component\HttpKernel\DataCollector\LateDataCollectorInterface
+- Symfony\Component\Messenger\TraceableMessageBus
+- Symfony\Component\VarDumper\Caster\ClassStub
+interfaces:
+- LateDataCollectorInterface

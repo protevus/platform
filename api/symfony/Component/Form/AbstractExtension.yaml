@@ -1,0 +1,81 @@
+name: AbstractExtension
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Form\Exception\InvalidArgumentException
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Form\Exception\UnexpectedTypeException
+properties: []
+methods:
+- name: loadTypes
+  visibility: protected
+  parameters: []
+  comment: "# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# abstract\
+    \ class AbstractExtension implements FormExtensionInterface\n# {\n# /**\n# * The\
+    \ types provided by this extension.\n# *\n# * @var FormTypeInterface[]\n# */\n\
+    # private array $types;\n# \n# /**\n# * The type extensions provided by this extension.\n\
+    # *\n# * @var FormTypeExtensionInterface[][]\n# */\n# private array $typeExtensions;\n\
+    # \n# /**\n# * The type guesser provided by this extension.\n# */\n# private ?FormTypeGuesserInterface\
+    \ $typeGuesser = null;\n# \n# /**\n# * Whether the type guesser has been loaded.\n\
+    # */\n# private bool $typeGuesserLoaded = false;\n# \n# public function getType(string\
+    \ $name): FormTypeInterface\n# {\n# if (!isset($this->types)) {\n# $this->initTypes();\n\
+    # }\n# \n# if (!isset($this->types[$name])) {\n# throw new InvalidArgumentException(\\\
+    sprintf('The type \"%s\" cannot be loaded by this extension.', $name));\n# }\n\
+    # \n# return $this->types[$name];\n# }\n# \n# public function hasType(string $name):\
+    \ bool\n# {\n# if (!isset($this->types)) {\n# $this->initTypes();\n# }\n# \n#\
+    \ return isset($this->types[$name]);\n# }\n# \n# public function getTypeExtensions(string\
+    \ $name): array\n# {\n# if (!isset($this->typeExtensions)) {\n# $this->initTypeExtensions();\n\
+    # }\n# \n# return $this->typeExtensions[$name]\n# ?? [];\n# }\n# \n# public function\
+    \ hasTypeExtensions(string $name): bool\n# {\n# if (!isset($this->typeExtensions))\
+    \ {\n# $this->initTypeExtensions();\n# }\n# \n# return isset($this->typeExtensions[$name])\
+    \ && \\count($this->typeExtensions[$name]) > 0;\n# }\n# \n# public function getTypeGuesser():\
+    \ ?FormTypeGuesserInterface\n# {\n# if (!$this->typeGuesserLoaded) {\n# $this->initTypeGuesser();\n\
+    # }\n# \n# return $this->typeGuesser;\n# }\n# \n# /**\n# * Registers the types.\n\
+    # *\n# * @return FormTypeInterface[]"
+- name: loadTypeExtensions
+  visibility: protected
+  parameters: []
+  comment: '# * Registers the type extensions.
+
+    # *
+
+    # * @return FormTypeExtensionInterface[]'
+- name: loadTypeGuesser
+  visibility: protected
+  parameters: []
+  comment: '# * Registers the type guesser.'
+- name: initTypes
+  visibility: private
+  parameters: []
+  comment: '# * Initializes the types.
+
+    # *
+
+    # * @throws UnexpectedTypeException if any registered type is not an instance
+    of FormTypeInterface'
+- name: initTypeExtensions
+  visibility: private
+  parameters: []
+  comment: '# * Initializes the type extensions.
+
+    # *
+
+    # * @throws UnexpectedTypeException if any registered type extension is not
+
+    # *                                 an instance of FormTypeExtensionInterface'
+- name: initTypeGuesser
+  visibility: private
+  parameters: []
+  comment: '# * Initializes the type guesser.
+
+    # *
+
+    # * @throws UnexpectedTypeException if the type guesser is not an instance of
+    FormTypeGuesserInterface'
+traits:
+- Symfony\Component\Form\Exception\InvalidArgumentException
+- Symfony\Component\Form\Exception\UnexpectedTypeException
+interfaces:
+- FormExtensionInterface

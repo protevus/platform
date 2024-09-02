@@ -1,0 +1,39 @@
+name: RelatedPart
+class_comment: null
+dependencies:
+- name: AbstractMultipartPart
+  type: class
+  source: Symfony\Component\Mime\Part\AbstractMultipartPart
+- name: AbstractPart
+  type: class
+  source: Symfony\Component\Mime\Part\AbstractPart
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: mainPart
+  - name: part
+  - name: '...$parts'
+  comment: null
+- name: getParts
+  visibility: public
+  parameters: []
+  comment: null
+- name: getMediaSubtype
+  visibility: public
+  parameters: []
+  comment: null
+- name: generateContentId
+  visibility: private
+  parameters: []
+  comment: null
+- name: prepareParts
+  visibility: private
+  parameters:
+  - name: '...$parts'
+  comment: null
+traits:
+- Symfony\Component\Mime\Part\AbstractMultipartPart
+- Symfony\Component\Mime\Part\AbstractPart
+interfaces: []

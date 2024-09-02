@@ -1,0 +1,64 @@
+name: FileFormField
+class_comment: '# * FileFormField represents a file form field (an HTML file input
+  tag).
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies: []
+properties: []
+methods:
+- name: setErrorCode
+  visibility: public
+  parameters:
+  - name: error
+  comment: '# * FileFormField represents a file form field (an HTML file input tag).
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # class FileFormField extends FormField
+
+    # {
+
+    # /**
+
+    # * Sets the PHP error code associated with the field.
+
+    # *
+
+    # * @param int $error The error code (one of UPLOAD_ERR_INI_SIZE, UPLOAD_ERR_FORM_SIZE,
+    UPLOAD_ERR_PARTIAL, UPLOAD_ERR_NO_FILE, UPLOAD_ERR_NO_TMP_DIR, UPLOAD_ERR_CANT_WRITE,
+    or UPLOAD_ERR_EXTENSION)
+
+    # *
+
+    # * @throws \InvalidArgumentException When error code doesn''t exist'
+- name: upload
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Sets the value of the field.'
+- name: setValue
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Sets the value of the field.'
+- name: setFilePath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Sets path to the file as string for simulating HTTP request.'
+- name: initialize
+  visibility: protected
+  parameters: []
+  comment: '# * Initializes the form field.
+
+    # *
+
+    # * @throws \LogicException When node type is incorrect'
+traits: []
+interfaces: []

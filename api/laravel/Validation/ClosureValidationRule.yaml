@@ -1,0 +1,95 @@
+name: ClosureValidationRule
+class_comment: null
+dependencies:
+- name: RuleContract
+  type: class
+  source: Illuminate\Contracts\Validation\Rule
+- name: ValidatorAwareRule
+  type: class
+  source: Illuminate\Contracts\Validation\ValidatorAwareRule
+- name: CreatesPotentiallyTranslatedStrings
+  type: class
+  source: Illuminate\Translation\CreatesPotentiallyTranslatedStrings
+- name: CreatesPotentiallyTranslatedStrings
+  type: class
+  source: CreatesPotentiallyTranslatedStrings
+properties:
+- name: callback
+  visibility: public
+  comment: '# * The callback that validates the attribute.
+
+    # *
+
+    # * @var \Closure'
+- name: failed
+  visibility: public
+  comment: '# * Indicates if the validation callback failed.
+
+    # *
+
+    # * @var bool'
+- name: messages
+  visibility: public
+  comment: '# * The validation error messages.
+
+    # *
+
+    # * @var array'
+- name: validator
+  visibility: protected
+  comment: '# * The current validator.
+
+    # *
+
+    # * @var \Illuminate\Validation\Validator'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: callback
+  comment: "# * The callback that validates the attribute.\n# *\n# * @var \\Closure\n\
+    # */\n# public $callback;\n# \n# /**\n# * Indicates if the validation callback\
+    \ failed.\n# *\n# * @var bool\n# */\n# public $failed = false;\n# \n# /**\n# *\
+    \ The validation error messages.\n# *\n# * @var array\n# */\n# public $messages\
+    \ = [];\n# \n# /**\n# * The current validator.\n# *\n# * @var \\Illuminate\\Validation\\\
+    Validator\n# */\n# protected $validator;\n# \n# /**\n# * Create a new Closure\
+    \ based validation rule.\n# *\n# * @param  \\Closure  $callback\n# * @return void"
+- name: passes
+  visibility: public
+  parameters:
+  - name: attribute
+  - name: value
+  comment: '# * Determine if the validation rule passes.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  mixed  $value
+
+    # * @return bool'
+- name: message
+  visibility: public
+  parameters: []
+  comment: '# * Get the validation error messages.
+
+    # *
+
+    # * @return array'
+- name: setValidator
+  visibility: public
+  parameters:
+  - name: validator
+  comment: '# * Set the current validator.
+
+    # *
+
+    # * @param  \Illuminate\Validation\Validator  $validator
+
+    # * @return $this'
+traits:
+- Illuminate\Contracts\Validation\ValidatorAwareRule
+- Illuminate\Translation\CreatesPotentiallyTranslatedStrings
+- CreatesPotentiallyTranslatedStrings
+interfaces:
+- RuleContract

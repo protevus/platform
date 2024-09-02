@@ -1,0 +1,86 @@
+name: ArgumentResolver
+class_comment: null
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: ValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Attribute\ValueResolver
+- name: DefaultValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver
+- name: RequestAttributeValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestAttributeValueResolver
+- name: RequestValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver
+- name: SessionValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver
+- name: VariadicValueResolver
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver
+- name: ArgumentMetadataFactory
+  type: class
+  source: Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory
+- name: ArgumentMetadataFactoryInterface
+  type: class
+  source: Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactoryInterface
+- name: NearMissValueResolverException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\NearMissValueResolverException
+- name: ResolverNotFoundException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\ResolverNotFoundException
+- name: ServiceProviderInterface
+  type: class
+  source: Symfony\Contracts\Service\ServiceProviderInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: argumentMetadataFactory
+    default: 'null'
+  - name: argumentValueResolvers
+    default: '[]'
+  - name: namedResolvers
+    default: 'null'
+  comment: "# * Responsible for resolving the arguments passed to an action.\n# *\n\
+    # * @author Iltar van der Berg <kjarli@gmail.com>\n# */\n# final class ArgumentResolver\
+    \ implements ArgumentResolverInterface\n# {\n# private ArgumentMetadataFactoryInterface\
+    \ $argumentMetadataFactory;\n# private iterable $argumentValueResolvers;\n# \n\
+    # /**\n# * @param iterable<mixed, ValueResolverInterface> $argumentValueResolvers"
+- name: getArguments
+  visibility: public
+  parameters:
+  - name: request
+  - name: controller
+  - name: reflector
+    default: 'null'
+  comment: null
+- name: getDefaultArgumentValueResolvers
+  visibility: public
+  parameters: []
+  comment: '# * @return iterable<int, ValueResolverInterface>'
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\Attribute\ValueResolver
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestAttributeValueResolver
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\RequestValueResolver
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\SessionValueResolver
+- Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver
+- Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactory
+- Symfony\Component\HttpKernel\ControllerMetadata\ArgumentMetadataFactoryInterface
+- Symfony\Component\HttpKernel\Exception\NearMissValueResolverException
+- Symfony\Component\HttpKernel\Exception\ResolverNotFoundException
+- Symfony\Contracts\Service\ServiceProviderInterface
+interfaces:
+- ArgumentResolverInterface

@@ -1,0 +1,114 @@
+name: StreamedJsonResponseTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: StreamedJsonResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\StreamedJsonResponse
+properties:
+- name: __symfony_json__
+  visibility: public
+  comment: null
+- name: bar
+  visibility: public
+  comment: null
+methods:
+- name: testResponseSimpleList
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResponseSimpleGenerator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResponseNestedGenerator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResponseEmptyList
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResponseObjectsList
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResponseWithoutGenerator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResponseWithPlaceholder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResponseWithMixedKeyType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResponseOtherTraversable
+  visibility: public
+  parameters: []
+  comment: null
+- name: getIterator
+  visibility: public
+  parameters: []
+  comment: null
+- name: getIterator
+  visibility: public
+  parameters: []
+  comment: null
+- name: jsonSerialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPlaceholderAsKeyAndValueInStructure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResponseStatusCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPlaceholderAsObjectStructure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testResponseHeaders
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCustomContentType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEncodingOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: createSendResponse
+  visibility: private
+  parameters:
+  - name: data
+  comment: '# * @param iterable<mixed> $data'
+- name: generatorSimple
+  visibility: private
+  parameters:
+  - name: test
+  - name: length
+    default: '3'
+  comment: '# * @return \Generator<int, string>'
+- name: generatorArray
+  visibility: private
+  parameters:
+  - name: test
+  - name: length
+    default: '3'
+  comment: '# * @return \Generator<int, array{title: string}>'
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\StreamedJsonResponse
+interfaces:
+- \IteratorAggregate
+- \IteratorAggregate

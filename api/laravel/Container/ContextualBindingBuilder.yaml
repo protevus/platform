@@ -1,0 +1,97 @@
+name: ContextualBindingBuilder
+class_comment: null
+dependencies:
+- name: Container
+  type: class
+  source: Illuminate\Contracts\Container\Container
+- name: ContextualBindingBuilderContract
+  type: class
+  source: Illuminate\Contracts\Container\ContextualBindingBuilder
+properties:
+- name: container
+  visibility: protected
+  comment: '# * The underlying container instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Container\Container'
+- name: concrete
+  visibility: protected
+  comment: '# * The concrete instance.
+
+    # *
+
+    # * @var string|array'
+- name: needs
+  visibility: protected
+  comment: '# * The abstract target.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+  - name: concrete
+  comment: "# * The underlying container instance.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Container\\Container\n# */\n# protected $container;\n# \n# /**\n# * The concrete\
+    \ instance.\n# *\n# * @var string|array\n# */\n# protected $concrete;\n# \n# /**\n\
+    # * The abstract target.\n# *\n# * @var string\n# */\n# protected $needs;\n# \n\
+    # /**\n# * Create a new contextual binding builder.\n# *\n# * @param  \\Illuminate\\\
+    Contracts\\Container\\Container  $container\n# * @param  string|array  $concrete\n\
+    # * @return void"
+- name: needs
+  visibility: public
+  parameters:
+  - name: abstract
+  comment: '# * Define the abstract target that depends on the context.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @return $this'
+- name: give
+  visibility: public
+  parameters:
+  - name: implementation
+  comment: '# * Define the implementation for the contextual binding.
+
+    # *
+
+    # * @param  \Closure|string|array  $implementation
+
+    # * @return void'
+- name: giveTagged
+  visibility: public
+  parameters:
+  - name: tag
+  comment: '# * Define tagged services to be used as the implementation for the contextual
+    binding.
+
+    # *
+
+    # * @param  string  $tag
+
+    # * @return void'
+- name: giveConfig
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Specify the configuration item to bind as a primitive.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $default
+
+    # * @return void'
+traits:
+- Illuminate\Contracts\Container\Container
+interfaces:
+- ContextualBindingBuilderContract

@@ -1,0 +1,44 @@
+name: StringUtilTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: StringUtil
+  type: class
+  source: Symfony\Component\Form\Util\StringUtil
+properties: []
+methods:
+- name: trimProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTrim
+  visibility: public
+  parameters:
+  - name: data
+  - name: expectedData
+  comment: '# * @dataProvider trimProvider'
+- name: testTrimUtf8Separators
+  visibility: public
+  parameters:
+  - name: hex
+  comment: '# * @dataProvider spaceProvider'
+- name: spaceProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFqcnToBlockPrefix
+  visibility: public
+  parameters:
+  - name: fqcn
+  - name: expectedBlockPrefix
+  comment: '# * @dataProvider fqcnToBlockPrefixProvider'
+- name: fqcnToBlockPrefixProvider
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\Util\StringUtil
+interfaces: []

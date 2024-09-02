@@ -1,0 +1,31 @@
+name: ChainCacheClearerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CacheClearerInterface
+  type: class
+  source: Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface
+- name: ChainCacheClearer
+  type: class
+  source: Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer
+properties: []
+methods:
+- name: setUpBeforeClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: tearDownAfterClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInjectClearersInConstructor
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface
+- Symfony\Component\HttpKernel\CacheClearer\ChainCacheClearer
+interfaces: []

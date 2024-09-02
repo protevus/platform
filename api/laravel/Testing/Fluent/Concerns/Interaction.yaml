@@ -1,0 +1,50 @@
+name: Interaction
+class_comment: null
+dependencies:
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: PHPUnit
+  type: class
+  source: PHPUnit\Framework\Assert
+properties:
+- name: interacted
+  visibility: protected
+  comment: '# * The list of interacted properties.
+
+    # *
+
+    # * @var array'
+methods:
+- name: interactsWith
+  visibility: protected
+  parameters:
+  - name: key
+  comment: "# * The list of interacted properties.\n# *\n# * @var array\n# */\n# protected\
+    \ $interacted = [];\n# \n# /**\n# * Marks the property as interacted.\n# *\n#\
+    \ * @param  string  $key\n# * @return void"
+- name: interacted
+  visibility: public
+  parameters: []
+  comment: '# * Asserts that all properties have been interacted with.
+
+    # *
+
+    # * @return void'
+- name: etc
+  visibility: public
+  parameters: []
+  comment: '# * Disables the interaction check.
+
+    # *
+
+    # * @return $this'
+- name: prop
+  visibility: protected
+  parameters:
+  - name: key
+    default: 'null'
+  comment: null
+traits:
+- Illuminate\Support\Str
+interfaces: []

@@ -1,0 +1,31 @@
+name: AtLeastOneOfTest
+class_comment: "# * @author Przemys\u0142aw Bogusz <przemyslaw.bogusz@tubotax.pl>"
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AtLeastOneOf
+  type: class
+  source: Symfony\Component\Validator\Constraints\AtLeastOneOf
+- name: Valid
+  type: class
+  source: Symfony\Component\Validator\Constraints\Valid
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+properties: []
+methods:
+- name: testRejectNonConstraints
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRejectValidConstraint
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\Constraints\AtLeastOneOf
+- Symfony\Component\Validator\Constraints\Valid
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+interfaces: []

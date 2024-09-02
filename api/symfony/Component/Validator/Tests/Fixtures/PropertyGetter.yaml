@@ -1,0 +1,12 @@
+name: PropertyGetter
+class_comment: '# * This class has two paths to PropertyGetterInterface:
+
+  # *   PropertyGetterInterface <- AbstractPropertyGetter <- PropertyGetter
+
+  # *   PropertyGetterInterface <- ChildGetterInterface <- PropertyGetter.'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces:
+- ChildGetterInterface

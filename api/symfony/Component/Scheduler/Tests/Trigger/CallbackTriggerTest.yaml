@@ -1,0 +1,19 @@
+name: CallbackTriggerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CallbackTrigger
+  type: class
+  source: Symfony\Component\Scheduler\Trigger\CallbackTrigger
+properties: []
+methods:
+- name: testToString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Scheduler\Trigger\CallbackTrigger
+interfaces: []

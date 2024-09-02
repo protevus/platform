@@ -1,0 +1,107 @@
+name: StatsCommand
+class_comment: null
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: CompletionInput
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionInput
+- name: CompletionSuggestions
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionSuggestions
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: ConsoleOutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\ConsoleOutputInterface
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Messenger\Exception\InvalidArgumentException
+- name: MessageCountAwareInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Receiver\MessageCountAwareInterface
+properties: []
+methods:
+- name: getAvailableFormatOptions
+  visibility: private
+  parameters: []
+  comment: "# * @author K\xE9vin Th\xE9rage <therage.kevin@gmail.com>\n# */\n# #[AsCommand(name:\
+    \ 'messenger:stats', description: 'Show the message count for one or more transports')]\n\
+    # class StatsCommand extends Command\n# {\n# public function __construct(\n# private\
+    \ ContainerInterface $transportLocator,\n# private array $transportNames = [],\n\
+    # ) {\n# parent::__construct();\n# }\n# \n# protected function configure(): void\n\
+    # {\n# $this\n# ->addArgument('transport_names', InputArgument::IS_ARRAY | InputArgument::OPTIONAL,\
+    \ 'List of transports\\' names')\n# ->addOption('format', '', InputOption::VALUE_REQUIRED,\
+    \ \\sprintf('The output format (\"%s\")', implode('\", \"', $this->getAvailableFormatOptions())),\
+    \ 'txt')\n# ->setHelp(<<<EOF\n# The <info>%command.name%</info> command counts\
+    \ the messages for all the transports:\n# \n# <info>php %command.full_name%</info>\n\
+    # \n# Or specific transports only:\n# \n# <info>php %command.full_name% <transportNames></info>\n\
+    # \n# The <info>--format</info> option specifies the format of the command output:\n\
+    # \n# <info>php %command.full_name% --format=json</info>\n# EOF\n# )\n# ;\n# }\n\
+    # \n# protected function execute(InputInterface $input, OutputInterface $output):\
+    \ int\n# {\n# $io = new SymfonyStyle($input, $output instanceof ConsoleOutputInterface\
+    \ ? $output->getErrorOutput() : $output);\n# \n# $format = $input->getOption('format');\n\
+    # if ('text' === $format) {\n# trigger_deprecation('symfony/messenger', '7.2',\
+    \ 'The \"text\" format is deprecated, use \"txt\" instead.');\n# \n# $format =\
+    \ 'txt';\n# }\n# if (!\\in_array($format, $this->getAvailableFormatOptions(),\
+    \ true)) {\n# throw new InvalidArgumentException('Invalid output format.');\n\
+    # }\n# \n# $transportNames = $this->transportNames;\n# if ($input->getArgument('transport_names'))\
+    \ {\n# $transportNames = $input->getArgument('transport_names');\n# }\n# \n# $outputTable\
+    \ = [];\n# $uncountableTransports = [];\n# foreach ($transportNames as $transportName)\
+    \ {\n# if (!$this->transportLocator->has($transportName)) {\n# if ($this->formatSupportsWarnings($format))\
+    \ {\n# $io->warning(\\sprintf('The \"%s\" transport does not exist.', $transportName));\n\
+    # }\n# \n# continue;\n# }\n# $transport = $this->transportLocator->get($transportName);\n\
+    # if (!$transport instanceof MessageCountAwareInterface) {\n# $uncountableTransports[]\
+    \ = $transportName;\n# \n# continue;\n# }\n# $outputTable[] = [$transportName,\
+    \ $transport->getMessageCount()];\n# }\n# \n# match ($format) {\n# 'txt' => $this->outputText($io,\
+    \ $outputTable, $uncountableTransports),\n# 'json' => $this->outputJson($io, $outputTable,\
+    \ $uncountableTransports),\n# };\n# \n# return 0;\n# }\n# \n# private function\
+    \ outputText(SymfonyStyle $io, array $outputTable, array $uncountableTransports):\
+    \ void\n# {\n# $io->table(['Transport', 'Count'], $outputTable);\n# \n# if ($uncountableTransports)\
+    \ {\n# $io->note(\\sprintf('Unable to get message count for the following transports:\
+    \ \"%s\".', implode('\", \"', $uncountableTransports)));\n# }\n# }\n# \n# private\
+    \ function outputJson(SymfonyStyle $io, array $outputTable, array $uncountableTransports):\
+    \ void\n# {\n# $output = ['transports' => []];\n# foreach ($outputTable as [$transportName,\
+    \ $count]) {\n# $output['transports'][$transportName] = ['count' => $count];\n\
+    # }\n# \n# if ($uncountableTransports) {\n# $output['uncountable_transports']\
+    \ = $uncountableTransports;\n# }\n# \n# $io->writeln(json_encode($output, \\JSON_PRETTY_PRINT));\n\
+    # }\n# \n# private function formatSupportsWarnings(string $format): bool\n# {\n\
+    # return match ($format) {\n# 'txt' => true,\n# 'json' => false,\n# };\n# }\n\
+    # \n# public function complete(CompletionInput $input, CompletionSuggestions $suggestions):\
+    \ void\n# {\n# if ($input->mustSuggestOptionValuesFor('format')) {\n# $suggestions->suggestValues($this->getAvailableFormatOptions());\n\
+    # }\n# }\n# \n# /** @return string[]"
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Completion\CompletionInput
+- Symfony\Component\Console\Completion\CompletionSuggestions
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Output\ConsoleOutputInterface
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Style\SymfonyStyle
+- Symfony\Component\Messenger\Exception\InvalidArgumentException
+- Symfony\Component\Messenger\Transport\Receiver\MessageCountAwareInterface
+interfaces: []

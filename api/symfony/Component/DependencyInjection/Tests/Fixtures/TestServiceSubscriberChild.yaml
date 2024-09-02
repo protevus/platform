@@ -1,0 +1,47 @@
+name: TestServiceSubscriberChild
+class_comment: null
+dependencies:
+- name: SubscribedService
+  type: class
+  source: Symfony\Contracts\Service\Attribute\SubscribedService
+- name: ServiceMethodsSubscriberTrait
+  type: class
+  source: Symfony\Contracts\Service\ServiceMethodsSubscriberTrait
+- name: ServiceMethodsSubscriberTrait
+  type: class
+  source: ServiceMethodsSubscriberTrait
+- name: TestServiceMethodsSubscriberTrait
+  type: class
+  source: TestServiceMethodsSubscriberTrait
+properties: []
+methods:
+- name: testDefinition2
+  visibility: private
+  parameters: []
+  comment: null
+- name: testDefinition3
+  visibility: private
+  parameters: []
+  comment: null
+- name: invalidDefinition
+  visibility: private
+  parameters: []
+  comment: null
+- name: privateFunction1
+  visibility: private
+  parameters: []
+  comment: null
+- name: privateFunction2
+  visibility: private
+  parameters: []
+  comment: null
+- name: privateFunction3
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Symfony\Contracts\Service\Attribute\SubscribedService
+- Symfony\Contracts\Service\ServiceMethodsSubscriberTrait
+- ServiceMethodsSubscriberTrait
+- TestServiceMethodsSubscriberTrait
+interfaces: []

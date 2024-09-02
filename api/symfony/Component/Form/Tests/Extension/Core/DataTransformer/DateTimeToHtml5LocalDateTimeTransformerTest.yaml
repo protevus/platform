@@ -1,0 +1,85 @@
+name: DateTimeToHtml5LocalDateTimeTransformerTest
+class_comment: null
+dependencies:
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+- name: BaseDateTimeTransformer
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataTransformer\BaseDateTimeTransformer
+- name: DateTimeToHtml5LocalDateTimeTransformer
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToHtml5LocalDateTimeTransformer
+- name: DateTimeEqualsTrait
+  type: class
+  source: Symfony\Component\Form\Tests\Extension\Core\DataTransformer\Traits\DateTimeEqualsTrait
+- name: DateTimeEqualsTrait
+  type: class
+  source: DateTimeEqualsTrait
+properties: []
+methods:
+- name: transformProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: reverseTransformProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransform
+  visibility: public
+  parameters:
+  - name: fromTz
+  - name: toTz
+  - name: from
+  - name: to
+  - name: withSeconds
+  comment: '# * @dataProvider transformProvider'
+- name: testTransformDateTimeImmutable
+  visibility: public
+  parameters:
+  - name: fromTz
+  - name: toTz
+  - name: from
+  - name: to
+  - name: withSeconds
+  comment: '# * @dataProvider transformProvider'
+- name: testTransformRequiresValidDateTime
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransform
+  visibility: public
+  parameters:
+  - name: toTz
+  - name: fromTz
+  - name: to
+  - name: from
+  comment: '# * @dataProvider reverseTransformProvider'
+- name: testReverseTransformRequiresString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransformWithNonExistingDate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransformExpectsValidDateString
+  visibility: public
+  parameters: []
+  comment: null
+- name: createDateTimeTransformer
+  visibility: protected
+  parameters:
+  - name: inputTimezone
+    default: 'null'
+  - name: outputTimezone
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\Form\Exception\TransformationFailedException
+- Symfony\Component\Form\Extension\Core\DataTransformer\BaseDateTimeTransformer
+- Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToHtml5LocalDateTimeTransformer
+- Symfony\Component\Form\Tests\Extension\Core\DataTransformer\Traits\DateTimeEqualsTrait
+- DateTimeEqualsTrait
+interfaces: []

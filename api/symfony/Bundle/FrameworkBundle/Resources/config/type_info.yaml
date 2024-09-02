@@ -1,0 +1,35 @@
+name: type_info
+class_comment: null
+dependencies:
+- name: TypeContextFactory
+  type: class
+  source: Symfony\Component\TypeInfo\TypeContext\TypeContextFactory
+- name: ReflectionParameterTypeResolver
+  type: class
+  source: Symfony\Component\TypeInfo\TypeResolver\ReflectionParameterTypeResolver
+- name: ReflectionPropertyTypeResolver
+  type: class
+  source: Symfony\Component\TypeInfo\TypeResolver\ReflectionPropertyTypeResolver
+- name: ReflectionReturnTypeResolver
+  type: class
+  source: Symfony\Component\TypeInfo\TypeResolver\ReflectionReturnTypeResolver
+- name: ReflectionTypeResolver
+  type: class
+  source: Symfony\Component\TypeInfo\TypeResolver\ReflectionTypeResolver
+- name: TypeResolver
+  type: class
+  source: Symfony\Component\TypeInfo\TypeResolver\TypeResolver
+- name: TypeResolverInterface
+  type: class
+  source: Symfony\Component\TypeInfo\TypeResolver\TypeResolverInterface
+properties: []
+methods: []
+traits:
+- Symfony\Component\TypeInfo\TypeContext\TypeContextFactory
+- Symfony\Component\TypeInfo\TypeResolver\ReflectionParameterTypeResolver
+- Symfony\Component\TypeInfo\TypeResolver\ReflectionPropertyTypeResolver
+- Symfony\Component\TypeInfo\TypeResolver\ReflectionReturnTypeResolver
+- Symfony\Component\TypeInfo\TypeResolver\ReflectionTypeResolver
+- Symfony\Component\TypeInfo\TypeResolver\TypeResolver
+- Symfony\Component\TypeInfo\TypeResolver\TypeResolverInterface
+interfaces: []

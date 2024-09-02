@@ -1,0 +1,27 @@
+name: MailjetRequestParserTest
+class_comment: null
+dependencies:
+- name: MailjetPayloadConverter
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Mailjet\RemoteEvent\MailjetPayloadConverter
+- name: MailjetRequestParser
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Mailjet\Webhook\MailjetRequestParser
+- name: RequestParserInterface
+  type: class
+  source: Symfony\Component\Webhook\Client\RequestParserInterface
+- name: AbstractRequestParserTestCase
+  type: class
+  source: Symfony\Component\Webhook\Test\AbstractRequestParserTestCase
+properties: []
+methods:
+- name: createRequestParser
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Mailer\Bridge\Mailjet\RemoteEvent\MailjetPayloadConverter
+- Symfony\Component\Mailer\Bridge\Mailjet\Webhook\MailjetRequestParser
+- Symfony\Component\Webhook\Client\RequestParserInterface
+- Symfony\Component\Webhook\Test\AbstractRequestParserTestCase
+interfaces: []

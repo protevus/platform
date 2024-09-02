@@ -1,0 +1,11 @@
+name: CircularReferenceHandler
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __invoke
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

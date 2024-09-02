@@ -1,0 +1,74 @@
+name: BelongsToManyRelationship
+class_comment: null
+dependencies:
+- name: Model
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+properties:
+- name: factory
+  visibility: protected
+  comment: '# * The related factory instance.
+
+    # *
+
+    # * @var \Illuminate\Database\Eloquent\Factories\Factory|\Illuminate\Support\Collection|\Illuminate\Database\Eloquent\Model|array'
+- name: pivot
+  visibility: protected
+  comment: '# * The pivot attributes / attribute resolver.
+
+    # *
+
+    # * @var callable|array'
+- name: relationship
+  visibility: protected
+  comment: '# * The relationship name.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: factory
+  - name: pivot
+  - name: relationship
+  comment: "# * The related factory instance.\n# *\n# * @var \\Illuminate\\Database\\\
+    Eloquent\\Factories\\Factory|\\Illuminate\\Support\\Collection|\\Illuminate\\\
+    Database\\Eloquent\\Model|array\n# */\n# protected $factory;\n# \n# /**\n# * The\
+    \ pivot attributes / attribute resolver.\n# *\n# * @var callable|array\n# */\n\
+    # protected $pivot;\n# \n# /**\n# * The relationship name.\n# *\n# * @var string\n\
+    # */\n# protected $relationship;\n# \n# /**\n# * Create a new attached relationship\
+    \ definition.\n# *\n# * @param  \\Illuminate\\Database\\Eloquent\\Factories\\\
+    Factory|\\Illuminate\\Support\\Collection|\\Illuminate\\Database\\Eloquent\\Model|array\
+    \  $factory\n# * @param  callable|array  $pivot\n# * @param  string  $relationship\n\
+    # * @return void"
+- name: createFor
+  visibility: public
+  parameters:
+  - name: model
+  comment: '# * Create the attached relationship for the given model.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Model  $model
+
+    # * @return void'
+- name: recycle
+  visibility: public
+  parameters:
+  - name: recycle
+  comment: '# * Specify the model instances to always use when creating relationships.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection  $recycle
+
+    # * @return $this'
+traits:
+- Illuminate\Database\Eloquent\Model
+- Illuminate\Support\Collection
+interfaces: []

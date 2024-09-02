@@ -1,0 +1,23 @@
+name: ExtensionCompilerPass
+class_comment: '# * A pass to automatically process extensions if they implement
+
+  # * CompilerPassInterface.
+
+  # *
+
+  # * @author Wouter J <wouter@wouterj.nl>'
+dependencies:
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\ContainerBuilder
+interfaces:
+- CompilerPassInterface

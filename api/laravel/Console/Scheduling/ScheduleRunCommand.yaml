@@ -1,0 +1,212 @@
+name: ScheduleRunCommand
+class_comment: null
+dependencies:
+- name: Application
+  type: class
+  source: Illuminate\Console\Application
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+- name: ScheduledTaskFailed
+  type: class
+  source: Illuminate\Console\Events\ScheduledTaskFailed
+- name: ScheduledTaskFinished
+  type: class
+  source: Illuminate\Console\Events\ScheduledTaskFinished
+- name: ScheduledTaskSkipped
+  type: class
+  source: Illuminate\Console\Events\ScheduledTaskSkipped
+- name: ScheduledTaskStarting
+  type: class
+  source: Illuminate\Console\Events\ScheduledTaskStarting
+- name: Cache
+  type: class
+  source: Illuminate\Contracts\Cache\Repository
+- name: ExceptionHandler
+  type: class
+  source: Illuminate\Contracts\Debug\ExceptionHandler
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: Carbon
+  type: class
+  source: Illuminate\Support\Carbon
+- name: Date
+  type: class
+  source: Illuminate\Support\Facades\Date
+- name: Sleep
+  type: class
+  source: Illuminate\Support\Sleep
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Throwable
+  type: class
+  source: Throwable
+properties:
+- name: name
+  visibility: protected
+  comment: '# * The console command name.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+- name: schedule
+  visibility: protected
+  comment: '# * The schedule instance.
+
+    # *
+
+    # * @var \Illuminate\Console\Scheduling\Schedule'
+- name: startedAt
+  visibility: protected
+  comment: '# * The 24 hour timestamp this scheduler command started running.
+
+    # *
+
+    # * @var \Illuminate\Support\Carbon'
+- name: eventsRan
+  visibility: protected
+  comment: '# * Check if any events ran.
+
+    # *
+
+    # * @var bool'
+- name: dispatcher
+  visibility: protected
+  comment: '# * The event dispatcher.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Events\Dispatcher'
+- name: handler
+  visibility: protected
+  comment: '# * The exception handler.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Debug\ExceptionHandler'
+- name: cache
+  visibility: protected
+  comment: '# * The cache store implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Cache\Repository'
+- name: phpBinary
+  visibility: protected
+  comment: '# * The PHP binary used by the command.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters: []
+  comment: "# * The console command name.\n# *\n# * @var string\n# */\n# protected\
+    \ $name = 'schedule:run';\n# \n# /**\n# * The console command description.\n#\
+    \ *\n# * @var string\n# */\n# protected $description = 'Run the scheduled commands';\n\
+    # \n# /**\n# * The schedule instance.\n# *\n# * @var \\Illuminate\\Console\\Scheduling\\\
+    Schedule\n# */\n# protected $schedule;\n# \n# /**\n# * The 24 hour timestamp this\
+    \ scheduler command started running.\n# *\n# * @var \\Illuminate\\Support\\Carbon\n\
+    # */\n# protected $startedAt;\n# \n# /**\n# * Check if any events ran.\n# *\n\
+    # * @var bool\n# */\n# protected $eventsRan = false;\n# \n# /**\n# * The event\
+    \ dispatcher.\n# *\n# * @var \\Illuminate\\Contracts\\Events\\Dispatcher\n# */\n\
+    # protected $dispatcher;\n# \n# /**\n# * The exception handler.\n# *\n# * @var\
+    \ \\Illuminate\\Contracts\\Debug\\ExceptionHandler\n# */\n# protected $handler;\n\
+    # \n# /**\n# * The cache store implementation.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Cache\\Repository\n# */\n# protected $cache;\n# \n# /**\n# * The PHP binary used\
+    \ by the command.\n# *\n# * @var string\n# */\n# protected $phpBinary;\n# \n#\
+    \ /**\n# * Create a new command instance.\n# *\n# * @return void"
+- name: handle
+  visibility: public
+  parameters:
+  - name: schedule
+  - name: dispatcher
+  - name: cache
+  - name: handler
+  comment: '# * Execute the console command.
+
+    # *
+
+    # * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+
+    # * @param  \Illuminate\Contracts\Events\Dispatcher  $dispatcher
+
+    # * @param  \Illuminate\Contracts\Cache\Repository  $cache
+
+    # * @param  \Illuminate\Contracts\Debug\ExceptionHandler  $handler
+
+    # * @return void'
+- name: runSingleServerEvent
+  visibility: protected
+  parameters:
+  - name: event
+  comment: '# * Run the given single server event.
+
+    # *
+
+    # * @param  \Illuminate\Console\Scheduling\Event  $event
+
+    # * @return void'
+- name: runEvent
+  visibility: protected
+  parameters:
+  - name: event
+  comment: '# * Run the given event.
+
+    # *
+
+    # * @param  \Illuminate\Console\Scheduling\Event  $event
+
+    # * @return void'
+- name: repeatEvents
+  visibility: protected
+  parameters:
+  - name: events
+  comment: '# * Run the given repeating events.
+
+    # *
+
+    # * @param  \Illuminate\Support\Collection<\Illuminate\Console\Scheduling\Event>  $events
+
+    # * @return void'
+- name: shouldInterrupt
+  visibility: protected
+  parameters: []
+  comment: '# * Determine if the schedule run should be interrupted.
+
+    # *
+
+    # * @return bool'
+- name: clearInterruptSignal
+  visibility: protected
+  parameters: []
+  comment: '# * Ensure the interrupt signal is cleared.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Console\Application
+- Illuminate\Console\Command
+- Illuminate\Console\Events\ScheduledTaskFailed
+- Illuminate\Console\Events\ScheduledTaskFinished
+- Illuminate\Console\Events\ScheduledTaskSkipped
+- Illuminate\Console\Events\ScheduledTaskStarting
+- Illuminate\Contracts\Debug\ExceptionHandler
+- Illuminate\Contracts\Events\Dispatcher
+- Illuminate\Support\Carbon
+- Illuminate\Support\Facades\Date
+- Illuminate\Support\Sleep
+- Symfony\Component\Console\Attribute\AsCommand
+- Throwable
+interfaces: []

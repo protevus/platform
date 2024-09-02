@@ -1,0 +1,59 @@
+name: MigratingSessionHandlerTest
+class_comment: null
+dependencies:
+- name: MockObject
+  type: class
+  source: PHPUnit\Framework\MockObject\MockObject
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: MigratingSessionHandler
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Storage\Handler\MigratingSessionHandler
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testInstanceOf
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClose
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDestroy
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGc
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOpen
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRead
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWrite
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidateId
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUpdateTimestamp
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\MockObject\MockObject
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Session\Storage\Handler\MigratingSessionHandler
+interfaces: []

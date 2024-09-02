@@ -1,0 +1,35 @@
+name: FormLoginTest
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: testFormLogin
+  visibility: public
+  parameters:
+  - name: options
+  comment: '# * @dataProvider provideClientOptions'
+- name: testFormLogout
+  visibility: public
+  parameters:
+  - name: options
+  comment: '# * @dataProvider provideClientOptions'
+- name: testFormLoginWithCustomTargetPath
+  visibility: public
+  parameters:
+  - name: options
+  comment: '# * @dataProvider provideClientOptions'
+- name: testFormLoginRedirectsToProtectedResourceAfterLogin
+  visibility: public
+  parameters:
+  - name: options
+  comment: '# * @dataProvider provideClientOptions'
+- name: testLoginThrottling
+  visibility: public
+  parameters: []
+  comment: '# * @group time-sensitive'
+- name: provideClientOptions
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

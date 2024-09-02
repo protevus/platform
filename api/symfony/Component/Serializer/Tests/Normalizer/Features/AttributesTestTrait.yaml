@@ -1,0 +1,43 @@
+name: AttributesTestTrait
+class_comment: null
+dependencies:
+- name: ExtraAttributesException
+  type: class
+  source: Symfony\Component\Serializer\Exception\ExtraAttributesException
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- name: NormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\NormalizerInterface
+properties: []
+methods:
+- name: getNormalizerForAttributes
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getDenormalizerForAttributes
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testAttributesNormalize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAttributesContextDenormalize
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAttributesContextDenormalizeIgnoreExtraAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAttributesContextDenormalizeExceptionExtraAttributes
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Serializer\Exception\ExtraAttributesException
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- Symfony\Component\Serializer\Normalizer\NormalizerInterface
+interfaces: []

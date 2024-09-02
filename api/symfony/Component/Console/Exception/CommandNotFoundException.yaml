@@ -1,0 +1,30 @@
+name: CommandNotFoundException
+class_comment: "# * Represents an incorrect command name typed in the console.\n#\
+  \ *\n# * @author J\xE9r\xF4me Tamarelle <jerome@tamarelle.net>"
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: message
+  - name: alternatives
+    default: '[]'
+  - name: code
+    default: '0'
+  - name: previous
+    default: 'null'
+  comment: "# * Represents an incorrect command name typed in the console.\n# *\n\
+    # * @author J\xE9r\xF4me Tamarelle <jerome@tamarelle.net>\n# */\n# class CommandNotFoundException\
+    \ extends \\InvalidArgumentException implements ExceptionInterface\n# {\n# /**\n\
+    # * @param string          $message      Exception message to throw\n# * @param\
+    \ string[]        $alternatives List of similar defined names\n# * @param int\
+    \             $code         Exception code\n# * @param \\Throwable|null $previous\
+    \     Previous exception used for the exception chaining"
+- name: getAlternatives
+  visibility: public
+  parameters: []
+  comment: '# * @return string[]'
+traits: []
+interfaces:
+- ExceptionInterface

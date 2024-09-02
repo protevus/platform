@@ -1,0 +1,217 @@
+name: InputDefinition
+class_comment: '# * A InputDefinition represents a set of valid command line arguments
+  and options.
+
+  # *
+
+  # * Usage:
+
+  # *
+
+  # *     $definition = new InputDefinition([
+
+  # *         new InputArgument(''name'', InputArgument::REQUIRED),
+
+  # *         new InputOption(''foo'', ''f'', InputOption::VALUE_REQUIRED),
+
+  # *     ]);
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Console\Exception\InvalidArgumentException
+- name: LogicException
+  type: class
+  source: Symfony\Component\Console\Exception\LogicException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: definition
+    default: '[]'
+  comment: "# * A InputDefinition represents a set of valid command line arguments\
+    \ and options.\n# *\n# * Usage:\n# *\n# *     $definition = new InputDefinition([\n\
+    # *         new InputArgument('name', InputArgument::REQUIRED),\n# *         new\
+    \ InputOption('foo', 'f', InputOption::VALUE_REQUIRED),\n# *     ]);\n# *\n# *\
+    \ @author Fabien Potencier <fabien@symfony.com>\n# */\n# class InputDefinition\n\
+    # {\n# private array $arguments = [];\n# private int $requiredCount = 0;\n# private\
+    \ ?InputArgument $lastArrayArgument = null;\n# private ?InputArgument $lastOptionalArgument\
+    \ = null;\n# private array $options = [];\n# private array $negations = [];\n\
+    # private array $shortcuts = [];\n# \n# /**\n# * @param array $definition An array\
+    \ of InputArgument and InputOption instance"
+- name: setDefinition
+  visibility: public
+  parameters:
+  - name: definition
+  comment: '# * Sets the definition of the input.'
+- name: setArguments
+  visibility: public
+  parameters:
+  - name: arguments
+    default: '[]'
+  comment: '# * Sets the InputArgument objects.
+
+    # *
+
+    # * @param InputArgument[] $arguments An array of InputArgument objects'
+- name: addArguments
+  visibility: public
+  parameters:
+  - name: arguments
+    default: '[]'
+  comment: '# * Adds an array of InputArgument objects.
+
+    # *
+
+    # * @param InputArgument[] $arguments An array of InputArgument objects'
+- name: addArgument
+  visibility: public
+  parameters:
+  - name: argument
+  comment: '# * @throws LogicException When incorrect argument is given'
+- name: getArgument
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Returns an InputArgument by name or by position.
+
+    # *
+
+    # * @throws InvalidArgumentException When argument given doesn''t exist'
+- name: hasArgument
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Returns true if an InputArgument object exists by name or position.'
+- name: getArguments
+  visibility: public
+  parameters: []
+  comment: '# * Gets the array of InputArgument objects.
+
+    # *
+
+    # * @return InputArgument[]'
+- name: getArgumentCount
+  visibility: public
+  parameters: []
+  comment: '# * Returns the number of InputArguments.'
+- name: getArgumentRequiredCount
+  visibility: public
+  parameters: []
+  comment: '# * Returns the number of required InputArguments.'
+- name: getArgumentDefaults
+  visibility: public
+  parameters: []
+  comment: '# * @return array<string|bool|int|float|array|null>'
+- name: setOptions
+  visibility: public
+  parameters:
+  - name: options
+    default: '[]'
+  comment: '# * Sets the InputOption objects.
+
+    # *
+
+    # * @param InputOption[] $options An array of InputOption objects'
+- name: addOptions
+  visibility: public
+  parameters:
+  - name: options
+    default: '[]'
+  comment: '# * Adds an array of InputOption objects.
+
+    # *
+
+    # * @param InputOption[] $options An array of InputOption objects'
+- name: addOption
+  visibility: public
+  parameters:
+  - name: option
+  comment: '# * @throws LogicException When option given already exist'
+- name: getOption
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Returns an InputOption by name.
+
+    # *
+
+    # * @throws InvalidArgumentException When option given doesn''t exist'
+- name: hasOption
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Returns true if an InputOption object exists by name.
+
+    # *
+
+    # * This method can''t be used to check if the user included the option when
+
+    # * executing the command (use getOption() instead).'
+- name: getOptions
+  visibility: public
+  parameters: []
+  comment: '# * Gets the array of InputOption objects.
+
+    # *
+
+    # * @return InputOption[]'
+- name: hasShortcut
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Returns true if an InputOption object exists by shortcut.'
+- name: hasNegation
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Returns true if an InputOption object exists by negated name.'
+- name: getOptionForShortcut
+  visibility: public
+  parameters:
+  - name: shortcut
+  comment: '# * Gets an InputOption by shortcut.'
+- name: getOptionDefaults
+  visibility: public
+  parameters: []
+  comment: '# * @return array<string|bool|int|float|array|null>'
+- name: shortcutToName
+  visibility: public
+  parameters:
+  - name: shortcut
+  comment: '# * Returns the InputOption name given a shortcut.
+
+    # *
+
+    # * @throws InvalidArgumentException When option given does not exist
+
+    # *
+
+    # * @internal'
+- name: negationToName
+  visibility: public
+  parameters:
+  - name: negation
+  comment: '# * Returns the InputOption name given a negation.
+
+    # *
+
+    # * @throws InvalidArgumentException When option given does not exist
+
+    # *
+
+    # * @internal'
+- name: getSynopsis
+  visibility: public
+  parameters:
+  - name: short
+    default: 'false'
+  comment: '# * Gets the synopsis.'
+traits:
+- Symfony\Component\Console\Exception\InvalidArgumentException
+- Symfony\Component\Console\Exception\LogicException
+interfaces: []

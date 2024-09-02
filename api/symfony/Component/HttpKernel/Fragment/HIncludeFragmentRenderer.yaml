@@ -1,0 +1,82 @@
+name: HIncludeFragmentRenderer
+class_comment: '# * Implements the Hinclude rendering strategy.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: UriSigner
+  type: class
+  source: Symfony\Component\HttpFoundation\UriSigner
+- name: ControllerReference
+  type: class
+  source: Symfony\Component\HttpKernel\Controller\ControllerReference
+- name: Environment
+  type: class
+  source: Twig\Environment
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: twig
+    default: 'null'
+  - name: signer
+    default: 'null'
+  - name: globalDefaultTemplate
+    default: 'null'
+  - name: charset
+    default: '''utf-8'''
+  comment: '# * Implements the Hinclude rendering strategy.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # class HIncludeFragmentRenderer extends RoutableFragmentRenderer
+
+    # {
+
+    # /**
+
+    # * @param string|null $globalDefaultTemplate The global default content (it can
+    be a template name or the content)'
+- name: hasTemplating
+  visibility: public
+  parameters: []
+  comment: '# * Checks if a templating engine has been set.'
+- name: render
+  visibility: public
+  parameters:
+  - name: uri
+  - name: request
+  - name: options
+    default: '[]'
+  comment: '# * Additional available options:
+
+    # *
+
+    # *  * default:    The default content (it can be a template name or the content)
+
+    # *  * id:         An optional hx:include tag id attribute
+
+    # *  * attributes: An optional array of hx:include tag attributes'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpFoundation\UriSigner
+- Symfony\Component\HttpKernel\Controller\ControllerReference
+- Twig\Environment
+interfaces: []

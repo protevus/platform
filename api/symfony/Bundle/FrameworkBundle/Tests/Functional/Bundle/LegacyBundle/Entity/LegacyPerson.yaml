@@ -1,0 +1,13 @@
+name: LegacyPerson
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: name
+  - name: age
+  comment: null
+traits: []
+interfaces: []

@@ -1,0 +1,200 @@
+name: Manager
+class_comment: null
+dependencies:
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: ConnectionFactory
+  type: class
+  source: Illuminate\Database\Connectors\ConnectionFactory
+- name: DatabaseManager
+  type: class
+  source: Illuminate\Database\DatabaseManager
+- name: Eloquent
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+- name: CapsuleManagerTrait
+  type: class
+  source: Illuminate\Support\Traits\CapsuleManagerTrait
+- name: PDO
+  type: class
+  source: PDO
+- name: CapsuleManagerTrait
+  type: class
+  source: CapsuleManagerTrait
+properties:
+- name: manager
+  visibility: protected
+  comment: '# * The database manager instance.
+
+    # *
+
+    # * @var \Illuminate\Database\DatabaseManager'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+    default: 'null'
+  comment: "# * The database manager instance.\n# *\n# * @var \\Illuminate\\Database\\\
+    DatabaseManager\n# */\n# protected $manager;\n# \n# /**\n# * Create a new database\
+    \ capsule manager.\n# *\n# * @param  \\Illuminate\\Container\\Container|null \
+    \ $container\n# * @return void"
+- name: setupDefaultConfiguration
+  visibility: protected
+  parameters: []
+  comment: '# * Setup the default database configuration options.
+
+    # *
+
+    # * @return void'
+- name: setupManager
+  visibility: protected
+  parameters: []
+  comment: '# * Build the database manager instance.
+
+    # *
+
+    # * @return void'
+- name: connection
+  visibility: public
+  parameters:
+  - name: connection
+    default: 'null'
+  comment: '# * Get a connection instance from the global manager.
+
+    # *
+
+    # * @param  string|null  $connection
+
+    # * @return \Illuminate\Database\Connection'
+- name: table
+  visibility: public
+  parameters:
+  - name: table
+  - name: as
+    default: 'null'
+  - name: connection
+    default: 'null'
+  comment: '# * Get a fluent query builder instance.
+
+    # *
+
+    # * @param  \Closure|\Illuminate\Database\Query\Builder|string  $table
+
+    # * @param  string|null  $as
+
+    # * @param  string|null  $connection
+
+    # * @return \Illuminate\Database\Query\Builder'
+- name: schema
+  visibility: public
+  parameters:
+  - name: connection
+    default: 'null'
+  comment: '# * Get a schema builder instance.
+
+    # *
+
+    # * @param  string|null  $connection
+
+    # * @return \Illuminate\Database\Schema\Builder'
+- name: getConnection
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Get a registered connection instance.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @return \Illuminate\Database\Connection'
+- name: addConnection
+  visibility: public
+  parameters:
+  - name: config
+  - name: name
+    default: '''default'''
+  comment: '# * Register a connection with the manager.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @param  string  $name
+
+    # * @return void'
+- name: bootEloquent
+  visibility: public
+  parameters: []
+  comment: '# * Bootstrap Eloquent so it is ready for usage.
+
+    # *
+
+    # * @return void'
+- name: setFetchMode
+  visibility: public
+  parameters:
+  - name: fetchMode
+  comment: '# * Set the fetch mode for the database connections.
+
+    # *
+
+    # * @param  int  $fetchMode
+
+    # * @return $this'
+- name: getDatabaseManager
+  visibility: public
+  parameters: []
+  comment: '# * Get the database manager instance.
+
+    # *
+
+    # * @return \Illuminate\Database\DatabaseManager'
+- name: getEventDispatcher
+  visibility: public
+  parameters: []
+  comment: '# * Get the current event dispatcher instance.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Events\Dispatcher|null'
+- name: setEventDispatcher
+  visibility: public
+  parameters:
+  - name: dispatcher
+  comment: '# * Set the event dispatcher instance to be used by connections.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Events\Dispatcher  $dispatcher
+
+    # * @return void'
+- name: __callStatic
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically pass methods to the default connection.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+traits:
+- Illuminate\Container\Container
+- Illuminate\Contracts\Events\Dispatcher
+- Illuminate\Database\Connectors\ConnectionFactory
+- Illuminate\Database\DatabaseManager
+- Illuminate\Support\Traits\CapsuleManagerTrait
+- PDO
+- CapsuleManagerTrait
+interfaces: []

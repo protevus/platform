@@ -1,0 +1,91 @@
+name: security_authenticator_access_token
+class_comment: null
+dependencies:
+- name: AlgorithmManager
+  type: class
+  source: Jose\Component\Core\AlgorithmManager
+- name: AlgorithmManagerFactory
+  type: class
+  source: Jose\Component\Core\AlgorithmManagerFactory
+- name: JWK
+  type: class
+  source: Jose\Component\Core\JWK
+- name: JWKSet
+  type: class
+  source: Jose\Component\Core\JWKSet
+- name: ES256
+  type: class
+  source: Jose\Component\Signature\Algorithm\ES256
+- name: ES384
+  type: class
+  source: Jose\Component\Signature\Algorithm\ES384
+- name: ES512
+  type: class
+  source: Jose\Component\Signature\Algorithm\ES512
+- name: PS256
+  type: class
+  source: Jose\Component\Signature\Algorithm\PS256
+- name: PS384
+  type: class
+  source: Jose\Component\Signature\Algorithm\PS384
+- name: PS512
+  type: class
+  source: Jose\Component\Signature\Algorithm\PS512
+- name: RS256
+  type: class
+  source: Jose\Component\Signature\Algorithm\RS256
+- name: RS384
+  type: class
+  source: Jose\Component\Signature\Algorithm\RS384
+- name: RS512
+  type: class
+  source: Jose\Component\Signature\Algorithm\RS512
+- name: ChainAccessTokenExtractor
+  type: class
+  source: Symfony\Component\Security\Http\AccessToken\ChainAccessTokenExtractor
+- name: FormEncodedBodyExtractor
+  type: class
+  source: Symfony\Component\Security\Http\AccessToken\FormEncodedBodyExtractor
+- name: HeaderAccessTokenExtractor
+  type: class
+  source: Symfony\Component\Security\Http\AccessToken\HeaderAccessTokenExtractor
+- name: OidcTokenHandler
+  type: class
+  source: Symfony\Component\Security\Http\AccessToken\Oidc\OidcTokenHandler
+- name: OidcUserInfoTokenHandler
+  type: class
+  source: Symfony\Component\Security\Http\AccessToken\Oidc\OidcUserInfoTokenHandler
+- name: QueryAccessTokenExtractor
+  type: class
+  source: Symfony\Component\Security\Http\AccessToken\QueryAccessTokenExtractor
+- name: AccessTokenAuthenticator
+  type: class
+  source: Symfony\Component\Security\Http\Authenticator\AccessTokenAuthenticator
+- name: HttpClientInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\HttpClientInterface
+properties: []
+methods: []
+traits:
+- Jose\Component\Core\AlgorithmManager
+- Jose\Component\Core\AlgorithmManagerFactory
+- Jose\Component\Core\JWK
+- Jose\Component\Core\JWKSet
+- Jose\Component\Signature\Algorithm\ES256
+- Jose\Component\Signature\Algorithm\ES384
+- Jose\Component\Signature\Algorithm\ES512
+- Jose\Component\Signature\Algorithm\PS256
+- Jose\Component\Signature\Algorithm\PS384
+- Jose\Component\Signature\Algorithm\PS512
+- Jose\Component\Signature\Algorithm\RS256
+- Jose\Component\Signature\Algorithm\RS384
+- Jose\Component\Signature\Algorithm\RS512
+- Symfony\Component\Security\Http\AccessToken\ChainAccessTokenExtractor
+- Symfony\Component\Security\Http\AccessToken\FormEncodedBodyExtractor
+- Symfony\Component\Security\Http\AccessToken\HeaderAccessTokenExtractor
+- Symfony\Component\Security\Http\AccessToken\Oidc\OidcTokenHandler
+- Symfony\Component\Security\Http\AccessToken\Oidc\OidcUserInfoTokenHandler
+- Symfony\Component\Security\Http\AccessToken\QueryAccessTokenExtractor
+- Symfony\Component\Security\Http\Authenticator\AccessTokenAuthenticator
+- Symfony\Contracts\HttpClient\HttpClientInterface
+interfaces: []

@@ -1,0 +1,45 @@
+name: HttpResponseException
+class_comment: null
+dependencies:
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: Throwable
+  type: class
+  source: Throwable
+properties:
+- name: response
+  visibility: protected
+  comment: '# * The underlying response instance.
+
+    # *
+
+    # * @var \Symfony\Component\HttpFoundation\Response'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: response
+  - name: previous
+    default: 'null'
+  comment: "# * The underlying response instance.\n# *\n# * @var \\Symfony\\Component\\\
+    HttpFoundation\\Response\n# */\n# protected $response;\n# \n# /**\n# * Create\
+    \ a new HTTP response exception instance.\n# *\n# * @param  \\Symfony\\Component\\\
+    HttpFoundation\\Response  $response\n# * @param  \\Throwable  $previous\n# * @return\
+    \ void"
+- name: getResponse
+  visibility: public
+  parameters: []
+  comment: '# * Get the underlying response instance.
+
+    # *
+
+    # * @return \Symfony\Component\HttpFoundation\Response'
+traits:
+- RuntimeException
+- Symfony\Component\HttpFoundation\Response
+- Throwable
+interfaces: []

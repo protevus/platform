@@ -1,0 +1,44 @@
+name: Html5ParserCrawlerTest
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getDoctype
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddHtml5
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHtml5ParserParseContentStartingWithValidHeading
+  visibility: public
+  parameters:
+  - name: content
+  comment: '# @dataProvider validHtml5Provider'
+- name: testHtml5ParserWithInvalidHeadedContent
+  visibility: public
+  parameters:
+  - name: content
+  comment: '# @dataProvider invalidHtml5Provider'
+- name: testHtml5ParserNotSameAsNativeParserForSpecificHtml
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasHtml5Parser
+  visibility: public
+  parameters:
+  - name: useHtml5Parser
+  comment: '# * @testWith [true]
+
+    # *           [false]'
+- name: validHtml5Provider
+  visibility: public
+  parameters: []
+  comment: null
+- name: invalidHtml5Provider
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

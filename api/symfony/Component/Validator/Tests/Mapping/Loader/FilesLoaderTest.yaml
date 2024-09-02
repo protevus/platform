@@ -1,0 +1,40 @@
+name: FilesLoaderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+- name: LoaderInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\LoaderInterface
+- name: FilesLoader
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\FilesLoader
+- name: Entity
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\Entity
+properties: []
+methods:
+- name: testCallsGetFileLoaderInstanceForeachPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCallsActualFileLoaderForMetadata
+  visibility: public
+  parameters: []
+  comment: null
+- name: getFilesLoader
+  visibility: public
+  parameters:
+  - name: loader
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\Mapping\ClassMetadata
+- Symfony\Component\Validator\Mapping\Loader\LoaderInterface
+- Symfony\Component\Validator\Tests\Fixtures\FilesLoader
+- Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\Entity
+interfaces: []

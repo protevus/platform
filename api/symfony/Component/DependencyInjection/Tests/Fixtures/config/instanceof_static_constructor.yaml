@@ -1,0 +1,15 @@
+name: instanceof_static_constructor
+class_comment: null
+dependencies:
+- name: PrototypeStaticConstructor
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\StaticConstructor\PrototypeStaticConstructor
+- name: PrototypeStaticConstructorInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\StaticConstructor\PrototypeStaticConstructorInterface
+properties: []
+methods: []
+traits:
+- Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\StaticConstructor\PrototypeStaticConstructor
+- Symfony\Component\DependencyInjection\Tests\Fixtures\Prototype\StaticConstructor\PrototypeStaticConstructorInterface
+interfaces: []

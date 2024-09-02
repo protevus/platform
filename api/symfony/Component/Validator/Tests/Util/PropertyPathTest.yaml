@@ -1,0 +1,27 @@
+name: PropertyPathTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: PropertyPath
+  type: class
+  source: Symfony\Component\Validator\Util\PropertyPath
+properties: []
+methods:
+- name: testAppend
+  visibility: public
+  parameters:
+  - name: basePath
+  - name: subPath
+  - name: expectedPath
+  - name: message
+  comment: '# * @dataProvider provideAppendPaths'
+- name: provideAppendPaths
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\Util\PropertyPath
+interfaces: []

@@ -1,0 +1,59 @@
+name: ErrorListener
+class_comment: '# * @author James Halsall <james.t.halsall@googlemail.com>
+
+  # * @author Robin Chalas <robin.chalas@gmail.com>'
+dependencies:
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: ConsoleEvents
+  type: class
+  source: Symfony\Component\Console\ConsoleEvents
+- name: ConsoleErrorEvent
+  type: class
+  source: Symfony\Component\Console\Event\ConsoleErrorEvent
+- name: ConsoleEvent
+  type: class
+  source: Symfony\Component\Console\Event\ConsoleEvent
+- name: ConsoleTerminateEvent
+  type: class
+  source: Symfony\Component\Console\Event\ConsoleTerminateEvent
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: logger
+    default: 'null'
+  comment: null
+- name: onConsoleError
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: onConsoleTerminate
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: getInputString
+  visibility: private
+  parameters:
+  - name: event
+  comment: null
+traits:
+- Psr\Log\LoggerInterface
+- Symfony\Component\Console\ConsoleEvents
+- Symfony\Component\Console\Event\ConsoleErrorEvent
+- Symfony\Component\Console\Event\ConsoleEvent
+- Symfony\Component\Console\Event\ConsoleTerminateEvent
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+interfaces:
+- EventSubscriberInterface

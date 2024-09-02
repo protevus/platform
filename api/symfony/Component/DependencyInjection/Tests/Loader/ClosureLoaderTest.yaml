@@ -1,0 +1,27 @@
+name: ClosureLoaderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ClosureLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\ClosureLoader
+properties: []
+methods:
+- name: testSupports
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLoad
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Loader\ClosureLoader
+interfaces: []

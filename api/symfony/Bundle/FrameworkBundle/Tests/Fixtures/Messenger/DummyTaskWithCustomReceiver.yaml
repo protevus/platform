@@ -1,0 +1,15 @@
+name: DummyTaskWithCustomReceiver
+class_comment: null
+dependencies:
+- name: AsPeriodicTask
+  type: class
+  source: Symfony\Component\Scheduler\Attribute\AsPeriodicTask
+properties: []
+methods:
+- name: __invoke
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Scheduler\Attribute\AsPeriodicTask
+interfaces: []

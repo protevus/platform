@@ -1,0 +1,220 @@
+name: ContainerDebugCommand
+class_comment: null
+dependencies:
+- name: DescriptorHelper
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Console\Helper\DescriptorHelper
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: CompletionInput
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionInput
+- name: CompletionSuggestions
+  type: class
+  source: Symfony\Component\Console\Completion\CompletionSuggestions
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Console\Exception\InvalidArgumentException
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ServiceNotFoundException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+- name: ParameterBag
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- name: BuildDebugContainerTrait
+  type: class
+  source: BuildDebugContainerTrait
+properties: []
+methods:
+- name: validateInput
+  visibility: protected
+  parameters:
+  - name: input
+  comment: "# * A console command for retrieving information about services.\n# *\n\
+    # * @author Ryan Weaver <ryan@thatsquality.com>\n# *\n# * @internal\n# */\n# #[AsCommand(name:\
+    \ 'debug:container', description: 'Display current services for an application')]\n\
+    # class ContainerDebugCommand extends Command\n# {\n# use BuildDebugContainerTrait;\n\
+    # \n# protected function configure(): void\n# {\n# $this\n# ->setDefinition([\n\
+    # new InputArgument('name', InputArgument::OPTIONAL, 'A service name (foo)'),\n\
+    # new InputOption('show-arguments', null, InputOption::VALUE_NONE, 'Show arguments\
+    \ in services'),\n# new InputOption('show-hidden', null, InputOption::VALUE_NONE,\
+    \ 'Show hidden (internal) services'),\n# new InputOption('tag', null, InputOption::VALUE_REQUIRED,\
+    \ 'Show all services with a specific tag'),\n# new InputOption('tags', null, InputOption::VALUE_NONE,\
+    \ 'Display tagged services for an application'),\n# new InputOption('parameter',\
+    \ null, InputOption::VALUE_REQUIRED, 'Display a specific parameter for an application'),\n\
+    # new InputOption('parameters', null, InputOption::VALUE_NONE, 'Display parameters\
+    \ for an application'),\n# new InputOption('types', null, InputOption::VALUE_NONE,\
+    \ 'Display types (classes/interfaces) available in the container'),\n# new InputOption('env-var',\
+    \ null, InputOption::VALUE_REQUIRED, 'Display a specific environment variable\
+    \ used in the container'),\n# new InputOption('env-vars', null, InputOption::VALUE_NONE,\
+    \ 'Display environment variables used in the container'),\n# new InputOption('format',\
+    \ null, InputOption::VALUE_REQUIRED, \\sprintf('The output format (\"%s\")', implode('\"\
+    , \"', $this->getAvailableFormatOptions())), 'txt'),\n# new InputOption('raw',\
+    \ null, InputOption::VALUE_NONE, 'To output raw description'),\n# new InputOption('deprecations',\
+    \ null, InputOption::VALUE_NONE, 'Display deprecations generated when compiling\
+    \ and warming up the container'),\n# ])\n# ->setHelp(<<<'EOF'\n# The <info>%command.name%</info>\
+    \ command displays all configured <comment>public</comment> services:\n# \n# <info>php\
+    \ %command.full_name%</info>\n# \n# To see deprecations generated during container\
+    \ compilation and cache warmup, use the <info>--deprecations</info> option:\n\
+    # \n# <info>php %command.full_name% --deprecations</info>\n# \n# To get specific\
+    \ information about a service, specify its name:\n# \n# <info>php %command.full_name%\
+    \ validator</info>\n# \n# To get specific information about a service including\
+    \ all its arguments, use the <info>--show-arguments</info> flag:\n# \n# <info>php\
+    \ %command.full_name% validator --show-arguments</info>\n# \n# To see available\
+    \ types that can be used for autowiring, use the <info>--types</info> flag:\n\
+    # \n# <info>php %command.full_name% --types</info>\n# \n# To see environment variables\
+    \ used by the container, use the <info>--env-vars</info> flag:\n# \n# <info>php\
+    \ %command.full_name% --env-vars</info>\n# \n# Display a specific environment\
+    \ variable by specifying its name with the <info>--env-var</info> option:\n# \n\
+    # <info>php %command.full_name% --env-var=APP_ENV</info>\n# \n# Use the --tags\
+    \ option to display tagged <comment>public</comment> services grouped by tag:\n\
+    # \n# <info>php %command.full_name% --tags</info>\n# \n# Find all services with\
+    \ a specific tag by specifying the tag name with the <info>--tag</info> option:\n\
+    # \n# <info>php %command.full_name% --tag=form.type</info>\n# \n# Use the <info>--parameters</info>\
+    \ option to display all parameters:\n# \n# <info>php %command.full_name% --parameters</info>\n\
+    # \n# Display a specific parameter by specifying its name with the <info>--parameter</info>\
+    \ option:\n# \n# <info>php %command.full_name% --parameter=kernel.debug</info>\n\
+    # \n# By default, internal services are hidden. You can display them\n# using\
+    \ the <info>--show-hidden</info> flag:\n# \n# <info>php %command.full_name% --show-hidden</info>\n\
+    # \n# The <info>--format</info> option specifies the format of the command output:\n\
+    # \n# <info>php %command.full_name% --format=json</info>\n# EOF\n# )\n# ;\n# }\n\
+    # \n# protected function execute(InputInterface $input, OutputInterface $output):\
+    \ int\n# {\n# $io = new SymfonyStyle($input, $output);\n# $errorIo = $io->getErrorStyle();\n\
+    # \n# $this->validateInput($input);\n# $kernel = $this->getApplication()->getKernel();\n\
+    # $object = $this->getContainerBuilder($kernel);\n# \n# if ($input->getOption('env-vars'))\
+    \ {\n# $options = ['env-vars' => true];\n# } elseif ($envVar = $input->getOption('env-var'))\
+    \ {\n# $options = ['env-vars' => true, 'name' => $envVar];\n# } elseif ($input->getOption('types'))\
+    \ {\n# $options = [];\n# $options['filter'] = $this->filterToServiceTypes(...);\n\
+    # } elseif ($input->getOption('parameters')) {\n# $parameters = [];\n# $parameterBag\
+    \ = $object->getParameterBag();\n# foreach ($parameterBag->all() as $k => $v)\
+    \ {\n# $parameters[$k] = $object->resolveEnvPlaceholders($v);\n# }\n# $object\
+    \ = new ParameterBag($parameters);\n# if ($parameterBag instanceof ParameterBag)\
+    \ {\n# foreach ($parameterBag->allDeprecated() as $k => $deprecation) {\n# $object->deprecate($k,\
+    \ ...$deprecation);\n# }\n# }\n# $options = [];\n# } elseif ($parameter = $input->getOption('parameter'))\
+    \ {\n# $options = ['parameter' => $parameter];\n# } elseif ($input->getOption('tags'))\
+    \ {\n# $options = ['group_by' => 'tags'];\n# } elseif ($tag = $input->getOption('tag'))\
+    \ {\n# $tag = $this->findProperTagName($input, $errorIo, $object, $tag);\n# $options\
+    \ = ['tag' => $tag];\n# } elseif ($name = $input->getArgument('name')) {\n# $name\
+    \ = $this->findProperServiceName($input, $errorIo, $object, $name, $input->getOption('show-hidden'));\n\
+    # $options = ['id' => $name];\n# } elseif ($input->getOption('deprecations'))\
+    \ {\n# $options = ['deprecations' => true];\n# } else {\n# $options = [];\n# }\n\
+    # \n# $helper = new DescriptorHelper();\n# $options['format'] = $input->getOption('format');\n\
+    # $options['show_arguments'] = $input->getOption('show-arguments');\n# $options['show_hidden']\
+    \ = $input->getOption('show-hidden');\n# $options['raw_text'] = $input->getOption('raw');\n\
+    # $options['output'] = $io;\n# $options['is_debug'] = $kernel->isDebug();\n# \n\
+    # try {\n# $helper->describe($io, $object, $options);\n# \n# if ('txt' === $options['format']\
+    \ && isset($options['id'])) {\n# if ($object->hasDefinition($options['id'])) {\n\
+    # $definition = $object->getDefinition($options['id']);\n# if ($definition->isDeprecated())\
+    \ {\n# $errorIo->warning($definition->getDeprecation($options['id'])['message']\
+    \ ?? \\sprintf('The \"%s\" service is deprecated.', $options['id']));\n# }\n#\
+    \ }\n# if ($object->hasAlias($options['id'])) {\n# $alias = $object->getAlias($options['id']);\n\
+    # if ($alias->isDeprecated()) {\n# $errorIo->warning($alias->getDeprecation($options['id'])['message']\
+    \ ?? \\sprintf('The \"%s\" alias is deprecated.', $options['id']));\n# }\n# }\n\
+    # }\n# \n# if (isset($options['id']) && isset($kernel->getContainer()->getRemovedIds()[$options['id']]))\
+    \ {\n# $errorIo->note(\\sprintf('The \"%s\" service or alias has been removed\
+    \ or inlined when the container was compiled.', $options['id']));\n# }\n# } catch\
+    \ (ServiceNotFoundException $e) {\n# if ('' !== $e->getId() && '@' === $e->getId()[0])\
+    \ {\n# throw new ServiceNotFoundException($e->getId(), $e->getSourceId(), null,\
+    \ [substr($e->getId(), 1)]);\n# }\n# \n# throw $e;\n# }\n# \n# if (!$input->getArgument('name')\
+    \ && !$input->getOption('tag') && !$input->getOption('parameter') && !$input->getOption('env-vars')\
+    \ && !$input->getOption('env-var') && $input->isInteractive()) {\n# if ($input->getOption('tags'))\
+    \ {\n# $errorIo->comment('To search for a specific tag, re-run this command with\
+    \ a search term. (e.g. <comment>debug:container --tag=form.type</comment>)');\n\
+    # } elseif ($input->getOption('parameters')) {\n# $errorIo->comment('To search\
+    \ for a specific parameter, re-run this command with a search term. (e.g. <comment>debug:container\
+    \ --parameter=kernel.debug</comment>)');\n# } elseif (!$input->getOption('deprecations'))\
+    \ {\n# $errorIo->comment('To search for a specific service, re-run this command\
+    \ with a search term. (e.g. <comment>debug:container log</comment>)');\n# }\n\
+    # }\n# \n# return 0;\n# }\n# \n# public function complete(CompletionInput $input,\
+    \ CompletionSuggestions $suggestions): void\n# {\n# if ($input->mustSuggestOptionValuesFor('format'))\
+    \ {\n# $suggestions->suggestValues($this->getAvailableFormatOptions());\n# \n\
+    # return;\n# }\n# \n# $kernel = $this->getApplication()->getKernel();\n# $object\
+    \ = $this->getContainerBuilder($kernel);\n# \n# if ($input->mustSuggestArgumentValuesFor('name')\n\
+    # && !$input->getOption('tag') && !$input->getOption('tags')\n# && !$input->getOption('parameter')\
+    \ && !$input->getOption('parameters')\n# && !$input->getOption('env-var') && !$input->getOption('env-vars')\n\
+    # && !$input->getOption('types') && !$input->getOption('deprecations')\n# ) {\n\
+    # $suggestions->suggestValues($this->findServiceIdsContaining(\n# $object,\n#\
+    \ $input->getCompletionValue(),\n# (bool) $input->getOption('show-hidden')\n#\
+    \ ));\n# \n# return;\n# }\n# \n# if ($input->mustSuggestOptionValuesFor('tag'))\
+    \ {\n# $suggestions->suggestValues($object->findTags());\n# \n# return;\n# }\n\
+    # \n# if ($input->mustSuggestOptionValuesFor('parameter')) {\n# $suggestions->suggestValues(array_keys($object->getParameterBag()->all()));\n\
+    # }\n# }\n# \n# /**\n# * Validates input arguments and options.\n# *\n# * @throws\
+    \ \\InvalidArgumentException"
+- name: findProperServiceName
+  visibility: private
+  parameters:
+  - name: input
+  - name: io
+  - name: container
+  - name: name
+  - name: showHidden
+  comment: null
+- name: findProperTagName
+  visibility: private
+  parameters:
+  - name: input
+  - name: io
+  - name: container
+  - name: tagName
+  comment: null
+- name: findServiceIdsContaining
+  visibility: private
+  parameters:
+  - name: container
+  - name: name
+  - name: showHidden
+  comment: null
+- name: findTagsContaining
+  visibility: private
+  parameters:
+  - name: container
+  - name: tagName
+  comment: null
+- name: filterToServiceTypes
+  visibility: public
+  parameters:
+  - name: serviceId
+  comment: '# * @internal'
+- name: getAvailableFormatOptions
+  visibility: private
+  parameters: []
+  comment: '# @return string[]'
+traits:
+- Symfony\Bundle\FrameworkBundle\Console\Helper\DescriptorHelper
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Completion\CompletionInput
+- Symfony\Component\Console\Completion\CompletionSuggestions
+- Symfony\Component\Console\Exception\InvalidArgumentException
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Style\SymfonyStyle
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException
+- Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- BuildDebugContainerTrait
+interfaces: []

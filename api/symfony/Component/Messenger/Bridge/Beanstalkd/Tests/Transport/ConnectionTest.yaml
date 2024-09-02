@@ -1,0 +1,126 @@
+name: ConnectionTest
+class_comment: null
+dependencies:
+- name: PheanstalkInterface
+  type: class
+  source: Pheanstalk\Contract\PheanstalkInterface
+- name: Exception
+  type: class
+  source: Pheanstalk\Exception
+- name: ClientException
+  type: class
+  source: Pheanstalk\Exception\ClientException
+- name: DeadlineSoonException
+  type: class
+  source: Pheanstalk\Exception\DeadlineSoonException
+- name: ServerException
+  type: class
+  source: Pheanstalk\Exception\ServerException
+- name: Job
+  type: class
+  source: Pheanstalk\Job
+- name: JobId
+  type: class
+  source: Pheanstalk\JobId
+- name: Pheanstalk
+  type: class
+  source: Pheanstalk\Pheanstalk
+- name: ArrayResponse
+  type: class
+  source: Pheanstalk\Response\ArrayResponse
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Connection
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Beanstalkd\Transport\Connection
+- name: MessengerInvalidArgumentException
+  type: class
+  source: Symfony\Component\Messenger\Exception\InvalidArgumentException
+- name: TransportException
+  type: class
+  source: Symfony\Component\Messenger\Exception\TransportException
+properties: []
+methods:
+- name: testFromInvalidDsn
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsn
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsnWithOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFromDsnOptionsArrayWinsOverOptionsFromDsn
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItThrowsAnExceptionIfAnExtraOptionIsDefined
+  visibility: public
+  parameters: []
+  comment: null
+- name: testItThrowsAnExceptionIfAnExtraOptionIsDefinedInDSN
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetWhenThereIsNoJobInTheTube
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetWhenABeanstalkdExceptionOccurs
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAck
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAckWhenABeanstalkdExceptionOccurs
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRejectWhenABeanstalkdExceptionOccurs
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMessageCount
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMessageCountWhenABeanstalkdExceptionOccurs
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSend
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendWhenABeanstalkdExceptionOccurs
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Pheanstalk\Contract\PheanstalkInterface
+- Pheanstalk\Exception
+- Pheanstalk\Exception\ClientException
+- Pheanstalk\Exception\DeadlineSoonException
+- Pheanstalk\Exception\ServerException
+- Pheanstalk\Job
+- Pheanstalk\JobId
+- Pheanstalk\Pheanstalk
+- Pheanstalk\Response\ArrayResponse
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Bridge\Beanstalkd\Transport\Connection
+- Symfony\Component\Messenger\Exception\TransportException
+interfaces: []

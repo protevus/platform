@@ -1,0 +1,172 @@
+name: DatabaseTransactionsManager
+class_comment: null
+dependencies:
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+properties:
+- name: committedTransactions
+  visibility: protected
+  comment: '# * All of the committed transactions.
+
+    # *
+
+    # * @var \Illuminate\Support\Collection<int, \Illuminate\Database\DatabaseTransactionRecord>'
+- name: pendingTransactions
+  visibility: protected
+  comment: '# * All of the pending transactions.
+
+    # *
+
+    # * @var \Illuminate\Support\Collection<int, \Illuminate\Database\DatabaseTransactionRecord>'
+- name: currentTransaction
+  visibility: protected
+  comment: '# * The current transaction.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters: []
+  comment: "# * All of the committed transactions.\n# *\n# * @var \\Illuminate\\Support\\\
+    Collection<int, \\Illuminate\\Database\\DatabaseTransactionRecord>\n# */\n# protected\
+    \ $committedTransactions;\n# \n# /**\n# * All of the pending transactions.\n#\
+    \ *\n# * @var \\Illuminate\\Support\\Collection<int, \\Illuminate\\Database\\\
+    DatabaseTransactionRecord>\n# */\n# protected $pendingTransactions;\n# \n# /**\n\
+    # * The current transaction.\n# *\n# * @var array\n# */\n# protected $currentTransaction\
+    \ = [];\n# \n# /**\n# * Create a new database transactions manager instance.\n\
+    # *\n# * @return void"
+- name: begin
+  visibility: public
+  parameters:
+  - name: connection
+  - name: level
+  comment: '# * Start a new database transaction.
+
+    # *
+
+    # * @param  string  $connection
+
+    # * @param  int  $level
+
+    # * @return void'
+- name: commit
+  visibility: public
+  parameters:
+  - name: connection
+  - name: levelBeingCommitted
+  - name: newTransactionLevel
+  comment: '# * Commit the root database transaction and execute callbacks.
+
+    # *
+
+    # * @param  string  $connection
+
+    # * @param  int  $levelBeingCommitted
+
+    # * @param  int  $newTransactionLevel
+
+    # * @return array'
+- name: stageTransactions
+  visibility: public
+  parameters:
+  - name: connection
+  - name: levelBeingCommitted
+  comment: '# * Move relevant pending transactions to a committed state.
+
+    # *
+
+    # * @param  string  $connection
+
+    # * @param  int  $levelBeingCommitted
+
+    # * @return void'
+- name: rollback
+  visibility: public
+  parameters:
+  - name: connection
+  - name: newTransactionLevel
+  comment: '# * Rollback the active database transaction.
+
+    # *
+
+    # * @param  string  $connection
+
+    # * @param  int  $newTransactionLevel
+
+    # * @return void'
+- name: removeAllTransactionsForConnection
+  visibility: protected
+  parameters:
+  - name: connection
+  comment: '# * Remove all pending, completed, and current transactions for the given
+    connection name.
+
+    # *
+
+    # * @param  string  $connection
+
+    # * @return void'
+- name: removeCommittedTransactionsThatAreChildrenOf
+  visibility: protected
+  parameters:
+  - name: transaction
+  comment: '# * Remove all transactions that are children of the given transaction.
+
+    # *
+
+    # * @param  \Illuminate\Database\DatabaseTransactionRecord  $transaction
+
+    # * @return void'
+- name: addCallback
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Register a transaction callback.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return void'
+- name: callbackApplicableTransactions
+  visibility: public
+  parameters: []
+  comment: '# * Get the transactions that are applicable to callbacks.
+
+    # *
+
+    # * @return \Illuminate\Support\Collection<int, \Illuminate\Database\DatabaseTransactionRecord>'
+- name: afterCommitCallbacksShouldBeExecuted
+  visibility: public
+  parameters:
+  - name: level
+  comment: '# * Determine if after commit callbacks should be executed for the given
+    transaction level.
+
+    # *
+
+    # * @param  int  $level
+
+    # * @return bool'
+- name: getPendingTransactions
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the pending transactions.
+
+    # *
+
+    # * @return \Illuminate\Support\Collection'
+- name: getCommittedTransactions
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the committed transactions.
+
+    # *
+
+    # * @return \Illuminate\Support\Collection'
+traits:
+- Illuminate\Support\Collection
+interfaces: []

@@ -1,0 +1,121 @@
+name: DoctrineDbalStoreTest
+class_comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n# *\n# *\
+  \ @requires extension pdo_sqlite"
+dependencies:
+- name: Configuration
+  type: class
+  source: Doctrine\DBAL\Configuration
+- name: Connection
+  type: class
+  source: Doctrine\DBAL\Connection
+- name: DriverManager
+  type: class
+  source: Doctrine\DBAL\DriverManager
+- name: TableNotFoundException
+  type: class
+  source: Doctrine\DBAL\Exception\TableNotFoundException
+- name: AbstractPlatform
+  type: class
+  source: Doctrine\DBAL\Platforms\AbstractPlatform
+- name: DefaultSchemaManagerFactory
+  type: class
+  source: Doctrine\DBAL\Schema\DefaultSchemaManagerFactory
+- name: Schema
+  type: class
+  source: Doctrine\DBAL\Schema\Schema
+- name: Key
+  type: class
+  source: Symfony\Component\Lock\Key
+- name: PersistingStoreInterface
+  type: class
+  source: Symfony\Component\Lock\PersistingStoreInterface
+- name: DoctrineDbalStore
+  type: class
+  source: Symfony\Component\Lock\Store\DoctrineDbalStore
+- name: ExpiringStoreTestTrait
+  type: class
+  source: ExpiringStoreTestTrait
+properties: []
+methods:
+- name: testDsnWithSQLite
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: file
+    default: 'null'
+  comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n# *\n# * @requires\
+    \ extension pdo_sqlite\n# */\n# class DoctrineDbalStoreTest extends AbstractStoreTestCase\n\
+    # {\n# use ExpiringStoreTestTrait;\n# \n# protected static string $dbFile;\n#\
+    \ \n# public static function setUpBeforeClass(): void\n# {\n# self::$dbFile =\
+    \ tempnam(sys_get_temp_dir(), 'sf_sqlite_lock');\n# \n# $config = new Configuration();\n\
+    # $config->setSchemaManagerFactory(new DefaultSchemaManagerFactory());\n# \n#\
+    \ $store = new DoctrineDbalStore(DriverManager::getConnection(['driver' => 'pdo_sqlite',\
+    \ 'path' => self::$dbFile], $config));\n# $store->createTable();\n# }\n# \n# public\
+    \ static function tearDownAfterClass(): void\n# {\n# @unlink(self::$dbFile);\n\
+    # }\n# \n# protected function getClockDelay(): int\n# {\n# return 1000000;\n#\
+    \ }\n# \n# public function getStore(): PersistingStoreInterface\n# {\n# $config\
+    \ = new Configuration();\n# if (class_exists(DefaultSchemaManagerFactory::class))\
+    \ {\n# $config->setSchemaManagerFactory(new DefaultSchemaManagerFactory());\n\
+    # }\n# \n# return new DoctrineDbalStore(DriverManager::getConnection(['driver'\
+    \ => 'pdo_sqlite', 'path' => self::$dbFile], $config));\n# }\n# \n# public function\
+    \ testAbortAfterExpiration()\n# {\n# $this->markTestSkipped('Pdo expects a TTL\
+    \ greater than 1 sec. Simulating a slow network is too hard');\n# }\n# \n# /**\n\
+    # * @dataProvider provideDsnWithSQLite"
+- name: provideDsnWithSQLite
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDsnWithPostgreSQL
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension pdo_pgsql
+
+    # *
+
+    # * @group integration'
+- name: testCreatesTableInTransaction
+  visibility: public
+  parameters:
+  - name: platform
+  comment: '# * @param class-string<AbstractPlatform>
+
+    # *
+
+    # * @dataProvider providePlatforms'
+- name: providePlatforms
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTableCreationInTransactionNotSupported
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreatesTableOutsideTransaction
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConfigureSchemaDifferentDatabase
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConfigureSchemaSameDatabase
+  visibility: public
+  parameters: []
+  comment: null
+- name: testConfigureSchemaTableExists
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Doctrine\DBAL\Configuration
+- Doctrine\DBAL\Connection
+- Doctrine\DBAL\DriverManager
+- Doctrine\DBAL\Exception\TableNotFoundException
+- Doctrine\DBAL\Platforms\AbstractPlatform
+- Doctrine\DBAL\Schema\DefaultSchemaManagerFactory
+- Doctrine\DBAL\Schema\Schema
+- Symfony\Component\Lock\Key
+- Symfony\Component\Lock\PersistingStoreInterface
+- Symfony\Component\Lock\Store\DoctrineDbalStore
+- ExpiringStoreTestTrait
+interfaces: []

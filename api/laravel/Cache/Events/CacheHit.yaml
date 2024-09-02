@@ -1,0 +1,26 @@
+name: CacheHit
+class_comment: null
+dependencies: []
+properties:
+- name: value
+  visibility: public
+  comment: '# * The value that was retrieved.
+
+    # *
+
+    # * @var mixed'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: storeName
+  - name: key
+  - name: value
+  - name: tags
+    default: '[]'
+  comment: "# * The value that was retrieved.\n# *\n# * @var mixed\n# */\n# public\
+    \ $value;\n# \n# /**\n# * Create a new event instance.\n# *\n# * @param  string|null\
+    \  $storeName\n# * @param  string  $key\n# * @param  mixed  $value\n# * @param\
+    \  array  $tags\n# * @return void"
+traits: []
+interfaces: []

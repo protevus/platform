@@ -1,0 +1,87 @@
+name: ConstraintViolationListInterface
+class_comment: null
+dependencies:
+- name: OutOfBoundsException
+  type: class
+  source: Symfony\Component\Validator\Exception\OutOfBoundsException
+properties: []
+methods:
+- name: add
+  visibility: public
+  parameters:
+  - name: violation
+  comment: '# * A list of constraint violations.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # *
+
+    # * @extends \ArrayAccess<int, ConstraintViolationInterface>
+
+    # * @extends \Traversable<int, ConstraintViolationInterface>
+
+    # */
+
+    # interface ConstraintViolationListInterface extends \Traversable, \Countable,
+    \ArrayAccess
+
+    # {
+
+    # /**
+
+    # * Adds a constraint violation to this list.'
+- name: addAll
+  visibility: public
+  parameters:
+  - name: otherList
+  comment: '# * Merges an existing violation list into this list.'
+- name: get
+  visibility: public
+  parameters:
+  - name: offset
+  comment: '# * Returns the violation at a given offset.
+
+    # *
+
+    # * @param int $offset The offset of the violation
+
+    # *
+
+    # * @throws OutOfBoundsException if the offset does not exist'
+- name: has
+  visibility: public
+  parameters:
+  - name: offset
+  comment: '# * Returns whether the given offset exists.
+
+    # *
+
+    # * @param int $offset The violation offset'
+- name: set
+  visibility: public
+  parameters:
+  - name: offset
+  - name: violation
+  comment: '# * Sets a violation at a given offset.
+
+    # *
+
+    # * @param int $offset The violation offset'
+- name: remove
+  visibility: public
+  parameters:
+  - name: offset
+  comment: '# * Removes a violation at a given offset.
+
+    # *
+
+    # * @param int $offset The offset to remove'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Converts the violation into a string for debugging purposes.'
+traits:
+- Symfony\Component\Validator\Exception\OutOfBoundsException
+interfaces: []

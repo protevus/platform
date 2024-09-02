@@ -1,0 +1,25 @@
+name: SluggerLocaleAwareTest
+class_comment: '# * @group functional'
+dependencies:
+- name: SlugConstructArgService
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\TestBundle\Slugger\SlugConstructArgService
+properties: []
+methods:
+- name: testLocalizedSlugger
+  visibility: public
+  parameters: []
+  comment: '# * @group functional
+
+    # */
+
+    # class SluggerLocaleAwareTest extends AbstractWebTestCase
+
+    # {
+
+    # /**
+
+    # * @requires extension intl'
+traits:
+- Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\TestBundle\Slugger\SlugConstructArgService
+interfaces: []

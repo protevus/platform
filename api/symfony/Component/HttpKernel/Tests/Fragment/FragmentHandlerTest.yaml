@@ -1,0 +1,62 @@
+name: FragmentHandlerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: HttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\HttpException
+- name: FragmentHandler
+  type: class
+  source: Symfony\Component\HttpKernel\Fragment\FragmentHandler
+- name: FragmentRendererInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testRenderWhenRendererDoesNotExist
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRenderWithUnknownRenderer
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDeliverWithUnsuccessfulResponse
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRender
+  visibility: public
+  parameters: []
+  comment: null
+- name: getHandler
+  visibility: protected
+  parameters:
+  - name: returnValue
+  - name: arguments
+    default: '[]'
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestStack
+- Symfony\Component\HttpFoundation\Response
+- Symfony\Component\HttpKernel\Exception\HttpException
+- Symfony\Component\HttpKernel\Fragment\FragmentHandler
+- Symfony\Component\HttpKernel\Fragment\FragmentRendererInterface
+interfaces: []

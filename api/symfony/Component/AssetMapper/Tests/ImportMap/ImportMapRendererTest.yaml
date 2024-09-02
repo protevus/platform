@@ -1,0 +1,63 @@
+name: ImportMapRendererTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Packages
+  type: class
+  source: Symfony\Component\Asset\Packages
+- name: ImportMapGenerator
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapGenerator
+- name: ImportMapRenderer
+  type: class
+  source: Symfony\Component\AssetMapper\ImportMap\ImportMapRenderer
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+- name: GenericLinkProvider
+  type: class
+  source: Symfony\Component\WebLink\GenericLinkProvider
+properties: []
+methods:
+- name: testBasicRender
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoPolyfill
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDefaultPolyfillUsedIfNotInImportmap
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCustomScriptAttributes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithEntrypoint
+  visibility: public
+  parameters: []
+  comment: null
+- name: createBasicImportMapGenerator
+  visibility: private
+  parameters: []
+  comment: null
+- name: testItAddsPreloadLinks
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Asset\Packages
+- Symfony\Component\AssetMapper\ImportMap\ImportMapGenerator
+- Symfony\Component\AssetMapper\ImportMap\ImportMapRenderer
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestStack
+- Symfony\Component\WebLink\GenericLinkProvider
+interfaces: []

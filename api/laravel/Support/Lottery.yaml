@@ -1,0 +1,229 @@
+name: Lottery
+class_comment: null
+dependencies:
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+properties:
+- name: chances
+  visibility: protected
+  comment: '# * The number of expected wins.
+
+    # *
+
+    # * @var int|float'
+- name: outOf
+  visibility: protected
+  comment: '# * The number of potential opportunities to win.
+
+    # *
+
+    # * @var int|null'
+- name: winner
+  visibility: protected
+  comment: '# * The winning callback.
+
+    # *
+
+    # * @var null|callable'
+- name: loser
+  visibility: protected
+  comment: '# * The losing callback.
+
+    # *
+
+    # * @var null|callable'
+- name: resultFactory
+  visibility: protected
+  comment: '# * The factory that should be used to generate results.
+
+    # *
+
+    # * @var callable|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: chances
+  - name: outOf
+    default: 'null'
+  comment: "# * The number of expected wins.\n# *\n# * @var int|float\n# */\n# protected\
+    \ $chances;\n# \n# /**\n# * The number of potential opportunities to win.\n# *\n\
+    # * @var int|null\n# */\n# protected $outOf;\n# \n# /**\n# * The winning callback.\n\
+    # *\n# * @var null|callable\n# */\n# protected $winner;\n# \n# /**\n# * The losing\
+    \ callback.\n# *\n# * @var null|callable\n# */\n# protected $loser;\n# \n# /**\n\
+    # * The factory that should be used to generate results.\n# *\n# * @var callable|null\n\
+    # */\n# protected static $resultFactory;\n# \n# /**\n# * Create a new Lottery\
+    \ instance.\n# *\n# * @param  int|float  $chances\n# * @param  int|null  $outOf\n\
+    # * @return void"
+- name: odds
+  visibility: public
+  parameters:
+  - name: chances
+  - name: outOf
+    default: 'null'
+  comment: '# * Create a new Lottery instance.
+
+    # *
+
+    # * @param  int|float  $chances
+
+    # * @param  int|null  $outOf
+
+    # * @return static'
+- name: winner
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Set the winner callback.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return $this'
+- name: loser
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Set the loser callback.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return $this'
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: '...$args'
+  comment: '# * Run the lottery.
+
+    # *
+
+    # * @param  mixed  ...$args
+
+    # * @return mixed'
+- name: choose
+  visibility: public
+  parameters:
+  - name: times
+    default: 'null'
+  comment: '# * Run the lottery.
+
+    # *
+
+    # * @param  null|int  $times
+
+    # * @return mixed'
+- name: runCallback
+  visibility: protected
+  parameters:
+  - name: '...$args'
+  comment: '# * Run the winner or loser callback, randomly.
+
+    # *
+
+    # * @param  mixed  ...$args
+
+    # * @return callable'
+- name: wins
+  visibility: protected
+  parameters: []
+  comment: '# * Determine if the lottery "wins" or "loses".
+
+    # *
+
+    # * @return bool'
+- name: resultFactory
+  visibility: protected
+  parameters: []
+  comment: '# * The factory that determines the lottery result.
+
+    # *
+
+    # * @return callable'
+- name: alwaysWin
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Force the lottery to always result in a win.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return void'
+- name: alwaysLose
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Force the lottery to always result in a lose.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return void'
+- name: fix
+  visibility: public
+  parameters:
+  - name: sequence
+  - name: whenMissing
+    default: 'null'
+  comment: '# * Set the sequence that will be used to determine lottery results.
+
+    # *
+
+    # * @param  array  $sequence
+
+    # * @param  callable|null  $whenMissing
+
+    # * @return void'
+- name: forceResultWithSequence
+  visibility: public
+  parameters:
+  - name: sequence
+  - name: whenMissing
+    default: 'null'
+  comment: '# * Set the sequence that will be used to determine lottery results.
+
+    # *
+
+    # * @param  array  $sequence
+
+    # * @param  callable|null  $whenMissing
+
+    # * @return void'
+- name: determineResultsNormally
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the lottery results should be determined normally.
+
+    # *
+
+    # * @return void'
+- name: determineResultNormally
+  visibility: public
+  parameters: []
+  comment: '# * Indicate that the lottery results should be determined normally.
+
+    # *
+
+    # * @return void'
+- name: setResultFactory
+  visibility: public
+  parameters:
+  - name: factory
+  comment: '# * Set the factory that should be used to determine the lottery results.
+
+    # *
+
+    # * @param  callable  $factory
+
+    # * @return void'
+traits:
+- RuntimeException
+interfaces: []

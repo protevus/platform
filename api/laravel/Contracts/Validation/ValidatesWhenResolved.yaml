@@ -1,0 +1,15 @@
+name: ValidatesWhenResolved
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: validateResolved
+  visibility: public
+  parameters: []
+  comment: '# * Validate the given class instance.
+
+    # *
+
+    # * @return void'
+traits: []
+interfaces: []

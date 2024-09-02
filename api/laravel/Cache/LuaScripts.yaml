@@ -1,0 +1,21 @@
+name: LuaScripts
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: releaseLock
+  visibility: public
+  parameters: []
+  comment: '# * Get the Lua script to atomically release a lock.
+
+    # *
+
+    # * KEYS[1] - The name of the lock
+
+    # * ARGV[1] - The owner key of the lock instance trying to release it
+
+    # *
+
+    # * @return string'
+traits: []
+interfaces: []

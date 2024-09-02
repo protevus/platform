@@ -1,0 +1,39 @@
+name: TextTypeHtmlSanitizerExtensionTest
+class_comment: null
+dependencies:
+- name: ServiceLocator
+  type: class
+  source: Symfony\Component\DependencyInjection\ServiceLocator
+- name: FormType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\FormType
+- name: TextType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\TextType
+- name: HtmlSanitizerExtension
+  type: class
+  source: Symfony\Component\Form\Extension\HtmlSanitizer\HtmlSanitizerExtension
+- name: TypeTestCase
+  type: class
+  source: Symfony\Component\Form\Test\TypeTestCase
+- name: HtmlSanitizerInterface
+  type: class
+  source: Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface
+properties: []
+methods:
+- name: getExtensions
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testSanitizer
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\ServiceLocator
+- Symfony\Component\Form\Extension\Core\Type\FormType
+- Symfony\Component\Form\Extension\Core\Type\TextType
+- Symfony\Component\Form\Extension\HtmlSanitizer\HtmlSanitizerExtension
+- Symfony\Component\Form\Test\TypeTestCase
+- Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface
+interfaces: []

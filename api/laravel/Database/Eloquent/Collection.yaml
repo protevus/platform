@@ -1,0 +1,616 @@
+name: Collection
+class_comment: '# * @template TKey of array-key
+
+  # * @template TModel of \Illuminate\Database\Eloquent\Model
+
+  # *
+
+  # * @extends \Illuminate\Support\Collection<TKey, TModel>'
+dependencies:
+- name: QueueableCollection
+  type: class
+  source: Illuminate\Contracts\Queue\QueueableCollection
+- name: QueueableEntity
+  type: class
+  source: Illuminate\Contracts\Queue\QueueableEntity
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: InteractsWithDictionary
+  type: class
+  source: Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithDictionary
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: BaseCollection
+  type: class
+  source: Illuminate\Support\Collection
+- name: LogicException
+  type: class
+  source: LogicException
+- name: InteractsWithDictionary
+  type: class
+  source: InteractsWithDictionary
+properties: []
+methods:
+- name: find
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: "# * @template TKey of array-key\n# * @template TModel of \\Illuminate\\\
+    Database\\Eloquent\\Model\n# *\n# * @extends \\Illuminate\\Support\\Collection<TKey,\
+    \ TModel>\n# */\n# class Collection extends BaseCollection implements QueueableCollection\n\
+    # {\n# use InteractsWithDictionary;\n# \n# /**\n# * Find a model in the collection\
+    \ by key.\n# *\n# * @template TFindDefault\n# *\n# * @param  mixed  $key\n# *\
+    \ @param  TFindDefault  $default\n# * @return static<TKey, TModel>|TModel|TFindDefault"
+- name: load
+  visibility: public
+  parameters:
+  - name: relations
+  comment: '# * Load a set of relationships onto the collection.
+
+    # *
+
+    # * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Builder<TModel>):
+    mixed)|string>|string  $relations
+
+    # * @return $this'
+- name: loadAggregate
+  visibility: public
+  parameters:
+  - name: relations
+  - name: column
+  - name: function
+    default: 'null'
+  comment: '# * Load a set of aggregations over relationship''s column onto the collection.
+
+    # *
+
+    # * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Builder<TModel>):
+    mixed)|string>|string  $relations
+
+    # * @param  string  $column
+
+    # * @param  string|null  $function
+
+    # * @return $this'
+- name: loadCount
+  visibility: public
+  parameters:
+  - name: relations
+  comment: '# * Load a set of relationship counts onto the collection.
+
+    # *
+
+    # * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Builder<TModel>):
+    mixed)|string>|string  $relations
+
+    # * @return $this'
+- name: loadMax
+  visibility: public
+  parameters:
+  - name: relations
+  - name: column
+  comment: '# * Load a set of relationship''s max column values onto the collection.
+
+    # *
+
+    # * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Builder<TModel>):
+    mixed)|string>|string  $relations
+
+    # * @param  string  $column
+
+    # * @return $this'
+- name: loadMin
+  visibility: public
+  parameters:
+  - name: relations
+  - name: column
+  comment: '# * Load a set of relationship''s min column values onto the collection.
+
+    # *
+
+    # * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Builder<TModel>):
+    mixed)|string>|string  $relations
+
+    # * @param  string  $column
+
+    # * @return $this'
+- name: loadSum
+  visibility: public
+  parameters:
+  - name: relations
+  - name: column
+  comment: '# * Load a set of relationship''s column summations onto the collection.
+
+    # *
+
+    # * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Builder<TModel>):
+    mixed)|string>|string  $relations
+
+    # * @param  string  $column
+
+    # * @return $this'
+- name: loadAvg
+  visibility: public
+  parameters:
+  - name: relations
+  - name: column
+  comment: '# * Load a set of relationship''s average column values onto the collection.
+
+    # *
+
+    # * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Builder<TModel>):
+    mixed)|string>|string  $relations
+
+    # * @param  string  $column
+
+    # * @return $this'
+- name: loadExists
+  visibility: public
+  parameters:
+  - name: relations
+  comment: '# * Load a set of related existences onto the collection.
+
+    # *
+
+    # * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Builder<TModel>):
+    mixed)|string>|string  $relations
+
+    # * @return $this'
+- name: loadMissing
+  visibility: public
+  parameters:
+  - name: relations
+  comment: '# * Load a set of relationships onto the collection if they are not already
+    eager loaded.
+
+    # *
+
+    # * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Builder<TModel>):
+    mixed)|string>|string  $relations
+
+    # * @return $this'
+- name: loadMissingRelation
+  visibility: protected
+  parameters:
+  - name: models
+  - name: path
+  comment: '# * Load a relationship path if it is not already eager loaded.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Collection<int, TModel>  $models
+
+    # * @param  array  $path
+
+    # * @return void'
+- name: loadMorph
+  visibility: public
+  parameters:
+  - name: relation
+  - name: relations
+  comment: '# * Load a set of relationships onto the mixed relationship collection.
+
+    # *
+
+    # * @param  string  $relation
+
+    # * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Builder<TModel>):
+    mixed)|string>  $relations
+
+    # * @return $this'
+- name: loadMorphCount
+  visibility: public
+  parameters:
+  - name: relation
+  - name: relations
+  comment: '# * Load a set of relationship counts onto the mixed relationship collection.
+
+    # *
+
+    # * @param  string  $relation
+
+    # * @param  array<array-key, (callable(\Illuminate\Database\Eloquent\Builder<TModel>):
+    mixed)|string>  $relations
+
+    # * @return $this'
+- name: contains
+  visibility: public
+  parameters:
+  - name: key
+  - name: operator
+    default: 'null'
+  - name: value
+    default: 'null'
+  comment: '# * Determine if a key exists in the collection.
+
+    # *
+
+    # * @param  (callable(TModel, TKey): bool)|TModel|string|int  $key
+
+    # * @param  mixed  $operator
+
+    # * @param  mixed  $value
+
+    # * @return bool'
+- name: modelKeys
+  visibility: public
+  parameters: []
+  comment: '# * Get the array of primary keys.
+
+    # *
+
+    # * @return array<int, array-key>'
+- name: merge
+  visibility: public
+  parameters:
+  - name: items
+  comment: '# * Merge the collection with the given items.
+
+    # *
+
+    # * @param  iterable<array-key, TModel>  $items
+
+    # * @return static'
+- name: map
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Run a map over each of the items.
+
+    # *
+
+    # * @template TMapValue
+
+    # *
+
+    # * @param  callable(TModel, TKey): TMapValue  $callback
+
+    # * @return \Illuminate\Support\Collection<TKey, TMapValue>|static<TKey, TMapValue>'
+- name: mapWithKeys
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Run an associative map over each of the items.
+
+    # *
+
+    # * The callback should return an associative array with a single key / value
+    pair.
+
+    # *
+
+    # * @template TMapWithKeysKey of array-key
+
+    # * @template TMapWithKeysValue
+
+    # *
+
+    # * @param  callable(TModel, TKey): array<TMapWithKeysKey, TMapWithKeysValue>  $callback
+
+    # * @return \Illuminate\Support\Collection<TMapWithKeysKey, TMapWithKeysValue>|static<TMapWithKeysKey,
+    TMapWithKeysValue>'
+- name: fresh
+  visibility: public
+  parameters:
+  - name: with
+    default: '[]'
+  comment: '# * Reload a fresh model instance from the database for all the entities.
+
+    # *
+
+    # * @param  array<array-key, string>|string  $with
+
+    # * @return static'
+- name: diff
+  visibility: public
+  parameters:
+  - name: items
+  comment: '# * Diff the collection with the given items.
+
+    # *
+
+    # * @param  iterable<array-key, TModel>  $items
+
+    # * @return static'
+- name: intersect
+  visibility: public
+  parameters:
+  - name: items
+  comment: '# * Intersect the collection with the given items.
+
+    # *
+
+    # * @param  iterable<array-key, TModel>  $items
+
+    # * @return static'
+- name: unique
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  - name: strict
+    default: 'false'
+  comment: '# * Return only unique items from the collection.
+
+    # *
+
+    # * @param  (callable(TModel, TKey): mixed)|string|null  $key
+
+    # * @param  bool  $strict
+
+    # * @return static<int, TModel>'
+- name: only
+  visibility: public
+  parameters:
+  - name: keys
+  comment: '# * Returns only the models from the collection with the specified keys.
+
+    # *
+
+    # * @param  array<array-key, mixed>|null  $keys
+
+    # * @return static<int, TModel>'
+- name: except
+  visibility: public
+  parameters:
+  - name: keys
+  comment: '# * Returns all models in the collection except the models with specified
+    keys.
+
+    # *
+
+    # * @param  array<array-key, mixed>|null  $keys
+
+    # * @return static<int, TModel>'
+- name: makeHidden
+  visibility: public
+  parameters:
+  - name: attributes
+  comment: '# * Make the given, typically visible, attributes hidden across the entire
+    collection.
+
+    # *
+
+    # * @param  array<array-key, string>|string  $attributes
+
+    # * @return $this'
+- name: makeVisible
+  visibility: public
+  parameters:
+  - name: attributes
+  comment: '# * Make the given, typically hidden, attributes visible across the entire
+    collection.
+
+    # *
+
+    # * @param  array<array-key, string>|string  $attributes
+
+    # * @return $this'
+- name: setVisible
+  visibility: public
+  parameters:
+  - name: visible
+  comment: '# * Set the visible attributes across the entire collection.
+
+    # *
+
+    # * @param  array<int, string>  $visible
+
+    # * @return $this'
+- name: setHidden
+  visibility: public
+  parameters:
+  - name: hidden
+  comment: '# * Set the hidden attributes across the entire collection.
+
+    # *
+
+    # * @param  array<int, string>  $hidden
+
+    # * @return $this'
+- name: append
+  visibility: public
+  parameters:
+  - name: attributes
+  comment: '# * Append an attribute across the entire collection.
+
+    # *
+
+    # * @param  array<array-key, string>|string  $attributes
+
+    # * @return $this'
+- name: getDictionary
+  visibility: public
+  parameters:
+  - name: items
+    default: 'null'
+  comment: '# * Get a dictionary keyed by primary keys.
+
+    # *
+
+    # * @param  iterable<array-key, TModel>|null  $items
+
+    # * @return array<array-key, TModel>'
+- name: countBy
+  visibility: public
+  parameters:
+  - name: countBy
+    default: 'null'
+  comment: "# * The following methods are intercepted to always return base collections.\n\
+    # */\n# \n# /**\n# * Count the number of items in the collection by a field or\
+    \ using a callback.\n# *\n# * @param  (callable(TModel, TKey): array-key)|string|null\
+    \  $countBy\n# * @return \\Illuminate\\Support\\Collection<array-key, int>"
+- name: collapse
+  visibility: public
+  parameters: []
+  comment: '# * Collapse the collection of items into a single array.
+
+    # *
+
+    # * @return \Illuminate\Support\Collection<int, mixed>'
+- name: flatten
+  visibility: public
+  parameters:
+  - name: depth
+    default: INF
+  comment: '# * Get a flattened array of the items in the collection.
+
+    # *
+
+    # * @param  int  $depth
+
+    # * @return \Illuminate\Support\Collection<int, mixed>'
+- name: flip
+  visibility: public
+  parameters: []
+  comment: '# * Flip the items in the collection.
+
+    # *
+
+    # * @return \Illuminate\Support\Collection<TModel, TKey>'
+- name: keys
+  visibility: public
+  parameters: []
+  comment: '# * Get the keys of the collection items.
+
+    # *
+
+    # * @return \Illuminate\Support\Collection<int, TKey>'
+- name: pad
+  visibility: public
+  parameters:
+  - name: size
+  - name: value
+  comment: '# * Pad collection to the specified length with a value.
+
+    # *
+
+    # * @template TPadValue
+
+    # *
+
+    # * @param  int  $size
+
+    # * @param  TPadValue  $value
+
+    # * @return \Illuminate\Support\Collection<int, TModel|TPadValue>'
+- name: pluck
+  visibility: public
+  parameters:
+  - name: value
+  - name: key
+    default: 'null'
+  comment: '# * Get an array with the values of a given key.
+
+    # *
+
+    # * @param  string|array<array-key, string>|null  $value
+
+    # * @param  string|null  $key
+
+    # * @return \Illuminate\Support\Collection<array-key, mixed>'
+- name: zip
+  visibility: public
+  parameters:
+  - name: items
+  comment: '# * Zip the collection together with one or more arrays.
+
+    # *
+
+    # * @template TZipValue
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Support\Arrayable<array-key, TZipValue>|iterable<array-key,
+    TZipValue>  ...$items
+
+    # * @return \Illuminate\Support\Collection<int, \Illuminate\Support\Collection<int,
+    TModel|TZipValue>>'
+- name: duplicateComparator
+  visibility: protected
+  parameters:
+  - name: strict
+  comment: '# * Get the comparison function to detect duplicates.
+
+    # *
+
+    # * @param  bool  $strict
+
+    # * @return callable(TModel, TModel): bool'
+- name: getQueueableClass
+  visibility: public
+  parameters: []
+  comment: '# * Get the type of the entities being queued.
+
+    # *
+
+    # * @return string|null
+
+    # *
+
+    # * @throws \LogicException'
+- name: getQueueableModelClass
+  visibility: protected
+  parameters:
+  - name: model
+  comment: '# * Get the queueable class name for the given model.
+
+    # *
+
+    # * @param  \Illuminate\Database\Eloquent\Model  $model
+
+    # * @return string'
+- name: getQueueableIds
+  visibility: public
+  parameters: []
+  comment: '# * Get the identifiers for all of the entities.
+
+    # *
+
+    # * @return array<int, mixed>'
+- name: getQueueableRelations
+  visibility: public
+  parameters: []
+  comment: '# * Get the relationships of the entities being queued.
+
+    # *
+
+    # * @return array<int, string>'
+- name: getQueueableConnection
+  visibility: public
+  parameters: []
+  comment: '# * Get the connection of the entities being queued.
+
+    # *
+
+    # * @return string|null
+
+    # *
+
+    # * @throws \LogicException'
+- name: toQuery
+  visibility: public
+  parameters: []
+  comment: '# * Get the Eloquent query builder from the collection.
+
+    # *
+
+    # * @return \Illuminate\Database\Eloquent\Builder<TModel>
+
+    # *
+
+    # * @throws \LogicException'
+traits:
+- Illuminate\Contracts\Queue\QueueableCollection
+- Illuminate\Contracts\Queue\QueueableEntity
+- Illuminate\Contracts\Support\Arrayable
+- Illuminate\Database\Eloquent\Relations\Concerns\InteractsWithDictionary
+- Illuminate\Support\Arr
+- LogicException
+- InteractsWithDictionary
+interfaces:
+- QueueableCollection

@@ -1,0 +1,44 @@
+name: InteractsWithSignals
+class_comment: null
+dependencies:
+- name: Signals
+  type: class
+  source: Illuminate\Console\Signals
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+properties:
+- name: signals
+  visibility: protected
+  comment: '# * The signal registrar instance.
+
+    # *
+
+    # * @var \Illuminate\Console\Signals|null'
+methods:
+- name: trap
+  visibility: public
+  parameters:
+  - name: signals
+  - name: callback
+  comment: "# * The signal registrar instance.\n# *\n# * @var \\Illuminate\\Console\\\
+    Signals|null\n# */\n# protected $signals;\n# \n# /**\n# * Define a callback to\
+    \ be run when the given signal(s) occurs.\n# *\n# * @template TSignals of iterable<array-key,\
+    \ int>|int\n# *\n# * @param  (\\Closure():(TSignals))|TSignals  $signals\n# *\
+    \ @param  callable(int $signal): void  $callback\n# * @return void"
+- name: untrap
+  visibility: public
+  parameters: []
+  comment: '# * Untrap signal handlers set within the command''s handler.
+
+    # *
+
+    # * @return void
+
+    # *
+
+    # * @internal'
+traits:
+- Illuminate\Console\Signals
+- Illuminate\Support\Arr
+interfaces: []

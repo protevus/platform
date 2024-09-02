@@ -1,0 +1,41 @@
+name: ContextBuilderTraitTest
+class_comment: '# * @author Mathias Arlaud <mathias.arlaud@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ContextBuilderInterface
+  type: class
+  source: Symfony\Component\Serializer\Context\ContextBuilderInterface
+- name: ContextBuilderTrait
+  type: class
+  source: Symfony\Component\Serializer\Context\ContextBuilderTrait
+- name: ContextBuilderTrait
+  type: class
+  source: ContextBuilderTrait
+- name: ContextBuilderTrait
+  type: class
+  source: ContextBuilderTrait
+properties: []
+methods:
+- name: testWithContext
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWith
+  visibility: public
+  parameters: []
+  comment: null
+- name: withFoo
+  visibility: public
+  parameters:
+  - name: value
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Context\ContextBuilderInterface
+- Symfony\Component\Serializer\Context\ContextBuilderTrait
+- ContextBuilderTrait
+- ContextBuilderTrait
+interfaces:
+- ContextBuilderInterface

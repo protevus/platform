@@ -1,0 +1,18 @@
+name: FinalPublicClass
+class_comment: null
+dependencies: []
+properties:
+- name: count
+  visibility: private
+  comment: null
+methods:
+- name: increment
+  visibility: public
+  parameters: []
+  comment: null
+- name: decrement
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

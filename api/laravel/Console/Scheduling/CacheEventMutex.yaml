@@ -1,0 +1,97 @@
+name: CacheEventMutex
+class_comment: null
+dependencies:
+- name: DynamoDbStore
+  type: class
+  source: Illuminate\Cache\DynamoDbStore
+- name: Cache
+  type: class
+  source: Illuminate\Contracts\Cache\Factory
+- name: LockProvider
+  type: class
+  source: Illuminate\Contracts\Cache\LockProvider
+properties:
+- name: cache
+  visibility: public
+  comment: '# * The cache repository implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Cache\Factory'
+- name: store
+  visibility: public
+  comment: '# * The cache store that should be used.
+
+    # *
+
+    # * @var string|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: cache
+  comment: "# * The cache repository implementation.\n# *\n# * @var \\Illuminate\\\
+    Contracts\\Cache\\Factory\n# */\n# public $cache;\n# \n# /**\n# * The cache store\
+    \ that should be used.\n# *\n# * @var string|null\n# */\n# public $store;\n# \n\
+    # /**\n# * Create a new overlapping strategy.\n# *\n# * @param  \\Illuminate\\\
+    Contracts\\Cache\\Factory  $cache\n# * @return void"
+- name: create
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Attempt to obtain an event mutex for the given event.
+
+    # *
+
+    # * @param  \Illuminate\Console\Scheduling\Event  $event
+
+    # * @return bool'
+- name: exists
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Determine if an event mutex exists for the given event.
+
+    # *
+
+    # * @param  \Illuminate\Console\Scheduling\Event  $event
+
+    # * @return bool'
+- name: forget
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Clear the event mutex for the given event.
+
+    # *
+
+    # * @param  \Illuminate\Console\Scheduling\Event  $event
+
+    # * @return void'
+- name: shouldUseLocks
+  visibility: protected
+  parameters:
+  - name: store
+  comment: '# * Determine if the given store should use locks for cache event mutexes.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Cache\Store  $store
+
+    # * @return bool'
+- name: useStore
+  visibility: public
+  parameters:
+  - name: store
+  comment: '# * Specify the cache store that should be used.
+
+    # *
+
+    # * @param  string  $store
+
+    # * @return $this'
+traits:
+- Illuminate\Cache\DynamoDbStore
+- Illuminate\Contracts\Cache\LockProvider
+interfaces:
+- EventMutex

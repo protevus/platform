@@ -1,0 +1,31 @@
+name: UserProviderFactoryInterface
+class_comment: null
+dependencies:
+- name: NodeDefinition
+  type: class
+  source: Symfony\Component\Config\Definition\Builder\NodeDefinition
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+properties: []
+methods:
+- name: create
+  visibility: public
+  parameters:
+  - name: container
+  - name: id
+  - name: config
+  comment: null
+- name: getKey
+  visibility: public
+  parameters: []
+  comment: null
+- name: addConfiguration
+  visibility: public
+  parameters:
+  - name: builder
+  comment: null
+traits:
+- Symfony\Component\Config\Definition\Builder\NodeDefinition
+- Symfony\Component\DependencyInjection\ContainerBuilder
+interfaces: []

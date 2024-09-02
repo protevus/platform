@@ -1,0 +1,27 @@
+name: EnvVarLoaderInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: loadEnvVars
+  visibility: public
+  parameters: []
+  comment: '# * EnvVarLoaderInterface objects return key/value pairs that are added
+    to the list of available env vars.
+
+    # *
+
+    # * @author Nicolas Grekas <p@tchwork.com>
+
+    # */
+
+    # interface EnvVarLoaderInterface
+
+    # {
+
+    # /**
+
+    # * @return array<string|\Stringable> Key/value pairs that can be accessed using
+    the regular "%env()%" syntax'
+traits: []
+interfaces: []

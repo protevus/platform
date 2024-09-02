@@ -1,0 +1,1113 @@
+name: EnumeratesValues
+class_comment: null
+dependencies:
+- name: BackedEnum
+  type: class
+  source: BackedEnum
+- name: CachingIterator
+  type: class
+  source: CachingIterator
+- name: Closure
+  type: class
+  source: Closure
+- name: Exception
+  type: class
+  source: Exception
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: Jsonable
+  type: class
+  source: Illuminate\Contracts\Support\Jsonable
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+- name: Enumerable
+  type: class
+  source: Illuminate\Support\Enumerable
+- name: HigherOrderCollectionProxy
+  type: class
+  source: Illuminate\Support\HigherOrderCollectionProxy
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+- name: JsonSerializable
+  type: class
+  source: JsonSerializable
+- name: Traversable
+  type: class
+  source: Traversable
+- name: UnexpectedValueException
+  type: class
+  source: UnexpectedValueException
+- name: UnitEnum
+  type: class
+  source: UnitEnum
+- name: WeakMap
+  type: class
+  source: WeakMap
+- name: Conditionable
+  type: class
+  source: Conditionable
+properties:
+- name: escapeWhenCastingToString
+  visibility: protected
+  comment: "# * @template TKey of array-key\n# *\n# * @template-covariant TValue\n\
+    # *\n# * @property-read HigherOrderCollectionProxy $average\n# * @property-read\
+    \ HigherOrderCollectionProxy $avg\n# * @property-read HigherOrderCollectionProxy\
+    \ $contains\n# * @property-read HigherOrderCollectionProxy $doesntContain\n# *\
+    \ @property-read HigherOrderCollectionProxy $each\n# * @property-read HigherOrderCollectionProxy\
+    \ $every\n# * @property-read HigherOrderCollectionProxy $filter\n# * @property-read\
+    \ HigherOrderCollectionProxy $first\n# * @property-read HigherOrderCollectionProxy\
+    \ $flatMap\n# * @property-read HigherOrderCollectionProxy $groupBy\n# * @property-read\
+    \ HigherOrderCollectionProxy $keyBy\n# * @property-read HigherOrderCollectionProxy\
+    \ $map\n# * @property-read HigherOrderCollectionProxy $max\n# * @property-read\
+    \ HigherOrderCollectionProxy $min\n# * @property-read HigherOrderCollectionProxy\
+    \ $partition\n# * @property-read HigherOrderCollectionProxy $percentage\n# * @property-read\
+    \ HigherOrderCollectionProxy $reject\n# * @property-read HigherOrderCollectionProxy\
+    \ $skipUntil\n# * @property-read HigherOrderCollectionProxy $skipWhile\n# * @property-read\
+    \ HigherOrderCollectionProxy $some\n# * @property-read HigherOrderCollectionProxy\
+    \ $sortBy\n# * @property-read HigherOrderCollectionProxy $sortByDesc\n# * @property-read\
+    \ HigherOrderCollectionProxy $sum\n# * @property-read HigherOrderCollectionProxy\
+    \ $takeUntil\n# * @property-read HigherOrderCollectionProxy $takeWhile\n# * @property-read\
+    \ HigherOrderCollectionProxy $unique\n# * @property-read HigherOrderCollectionProxy\
+    \ $unless\n# * @property-read HigherOrderCollectionProxy $until\n# * @property-read\
+    \ HigherOrderCollectionProxy $when\n# */\n# trait EnumeratesValues\n# {\n# use\
+    \ Conditionable;\n# \n# /**\n# * Indicates that the object's string representation\
+    \ should be escaped when __toString is invoked.\n# *\n# * @var bool"
+- name: proxies
+  visibility: protected
+  comment: '# * The methods that can be proxied.
+
+    # *
+
+    # * @var array<int, string>'
+methods:
+- name: make
+  visibility: public
+  parameters:
+  - name: items
+    default: '[]'
+  comment: "# * @template TKey of array-key\n# *\n# * @template-covariant TValue\n\
+    # *\n# * @property-read HigherOrderCollectionProxy $average\n# * @property-read\
+    \ HigherOrderCollectionProxy $avg\n# * @property-read HigherOrderCollectionProxy\
+    \ $contains\n# * @property-read HigherOrderCollectionProxy $doesntContain\n# *\
+    \ @property-read HigherOrderCollectionProxy $each\n# * @property-read HigherOrderCollectionProxy\
+    \ $every\n# * @property-read HigherOrderCollectionProxy $filter\n# * @property-read\
+    \ HigherOrderCollectionProxy $first\n# * @property-read HigherOrderCollectionProxy\
+    \ $flatMap\n# * @property-read HigherOrderCollectionProxy $groupBy\n# * @property-read\
+    \ HigherOrderCollectionProxy $keyBy\n# * @property-read HigherOrderCollectionProxy\
+    \ $map\n# * @property-read HigherOrderCollectionProxy $max\n# * @property-read\
+    \ HigherOrderCollectionProxy $min\n# * @property-read HigherOrderCollectionProxy\
+    \ $partition\n# * @property-read HigherOrderCollectionProxy $percentage\n# * @property-read\
+    \ HigherOrderCollectionProxy $reject\n# * @property-read HigherOrderCollectionProxy\
+    \ $skipUntil\n# * @property-read HigherOrderCollectionProxy $skipWhile\n# * @property-read\
+    \ HigherOrderCollectionProxy $some\n# * @property-read HigherOrderCollectionProxy\
+    \ $sortBy\n# * @property-read HigherOrderCollectionProxy $sortByDesc\n# * @property-read\
+    \ HigherOrderCollectionProxy $sum\n# * @property-read HigherOrderCollectionProxy\
+    \ $takeUntil\n# * @property-read HigherOrderCollectionProxy $takeWhile\n# * @property-read\
+    \ HigherOrderCollectionProxy $unique\n# * @property-read HigherOrderCollectionProxy\
+    \ $unless\n# * @property-read HigherOrderCollectionProxy $until\n# * @property-read\
+    \ HigherOrderCollectionProxy $when\n# */\n# trait EnumeratesValues\n# {\n# use\
+    \ Conditionable;\n# \n# /**\n# * Indicates that the object's string representation\
+    \ should be escaped when __toString is invoked.\n# *\n# * @var bool\n# */\n# protected\
+    \ $escapeWhenCastingToString = false;\n# \n# /**\n# * The methods that can be\
+    \ proxied.\n# *\n# * @var array<int, string>\n# */\n# protected static $proxies\
+    \ = [\n# 'average',\n# 'avg',\n# 'contains',\n# 'doesntContain',\n# 'each',\n\
+    # 'every',\n# 'filter',\n# 'first',\n# 'flatMap',\n# 'groupBy',\n# 'keyBy',\n\
+    # 'map',\n# 'max',\n# 'min',\n# 'partition',\n# 'percentage',\n# 'reject',\n#\
+    \ 'skipUntil',\n# 'skipWhile',\n# 'some',\n# 'sortBy',\n# 'sortByDesc',\n# 'sum',\n\
+    # 'takeUntil',\n# 'takeWhile',\n# 'unique',\n# 'unless',\n# 'until',\n# 'when',\n\
+    # ];\n# \n# /**\n# * Create a new collection instance if the value isn't one already.\n\
+    # *\n# * @template TMakeKey of array-key\n# * @template TMakeValue\n# *\n# * @param\
+    \  \\Illuminate\\Contracts\\Support\\Arrayable<TMakeKey, TMakeValue>|iterable<TMakeKey,\
+    \ TMakeValue>|null  $items\n# * @return static<TMakeKey, TMakeValue>"
+- name: wrap
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Wrap the given value in a collection if applicable.
+
+    # *
+
+    # * @template TWrapValue
+
+    # *
+
+    # * @param  iterable<array-key, TWrapValue>|TWrapValue  $value
+
+    # * @return static<array-key, TWrapValue>'
+- name: unwrap
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Get the underlying items from the given collection if applicable.
+
+    # *
+
+    # * @template TUnwrapKey of array-key
+
+    # * @template TUnwrapValue
+
+    # *
+
+    # * @param  array<TUnwrapKey, TUnwrapValue>|static<TUnwrapKey, TUnwrapValue>  $value
+
+    # * @return array<TUnwrapKey, TUnwrapValue>'
+- name: empty
+  visibility: public
+  parameters: []
+  comment: '# * Create a new instance with no items.
+
+    # *
+
+    # * @return static'
+- name: times
+  visibility: public
+  parameters:
+  - name: number
+  - name: callback
+    default: 'null'
+  comment: '# * Create a new collection by invoking the callback a given amount of
+    times.
+
+    # *
+
+    # * @template TTimesValue
+
+    # *
+
+    # * @param  int  $number
+
+    # * @param  (callable(int): TTimesValue)|null  $callback
+
+    # * @return static<int, TTimesValue>'
+- name: avg
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Get the average value of a given key.
+
+    # *
+
+    # * @param  (callable(TValue): float|int)|string|null  $callback
+
+    # * @return float|int|null'
+- name: average
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Alias for the "avg" method.
+
+    # *
+
+    # * @param  (callable(TValue): float|int)|string|null  $callback
+
+    # * @return float|int|null'
+- name: some
+  visibility: public
+  parameters:
+  - name: key
+  - name: operator
+    default: 'null'
+  - name: value
+    default: 'null'
+  comment: '# * Alias for the "contains" method.
+
+    # *
+
+    # * @param  (callable(TValue, TKey): bool)|TValue|string  $key
+
+    # * @param  mixed  $operator
+
+    # * @param  mixed  $value
+
+    # * @return bool'
+- name: dd
+  visibility: public
+  parameters:
+  - name: '...$args'
+  comment: '# * Dump the given arguments and terminate execution.
+
+    # *
+
+    # * @param  mixed  ...$args
+
+    # * @return never'
+- name: dump
+  visibility: public
+  parameters:
+  - name: '...$args'
+  comment: '# * Dump the items.
+
+    # *
+
+    # * @param  mixed  ...$args
+
+    # * @return $this'
+- name: each
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Execute a callback over each item.
+
+    # *
+
+    # * @param  callable(TValue, TKey): mixed  $callback
+
+    # * @return $this'
+- name: eachSpread
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Execute a callback over each nested chunk of items.
+
+    # *
+
+    # * @param  callable(...mixed): mixed  $callback
+
+    # * @return static'
+- name: every
+  visibility: public
+  parameters:
+  - name: key
+  - name: operator
+    default: 'null'
+  - name: value
+    default: 'null'
+  comment: '# * Determine if all items pass the given truth test.
+
+    # *
+
+    # * @param  (callable(TValue, TKey): bool)|TValue|string  $key
+
+    # * @param  mixed  $operator
+
+    # * @param  mixed  $value
+
+    # * @return bool'
+- name: firstWhere
+  visibility: public
+  parameters:
+  - name: key
+  - name: operator
+    default: 'null'
+  - name: value
+    default: 'null'
+  comment: '# * Get the first item by the given key value pair.
+
+    # *
+
+    # * @param  callable|string  $key
+
+    # * @param  mixed  $operator
+
+    # * @param  mixed  $value
+
+    # * @return TValue|null'
+- name: value
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Get a single key''s value from the first matching item in the collection.
+
+    # *
+
+    # * @template TValueDefault
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  TValueDefault|(\Closure(): TValueDefault)  $default
+
+    # * @return TValue|TValueDefault'
+- name: ensure
+  visibility: public
+  parameters:
+  - name: type
+  comment: '# * Ensure that every item in the collection is of the expected type.
+
+    # *
+
+    # * @template TEnsureOfType
+
+    # *
+
+    # * @param  class-string<TEnsureOfType>|array<array-key, class-string<TEnsureOfType>>  $type
+
+    # * @return static<TKey, TEnsureOfType>
+
+    # *
+
+    # * @throws \UnexpectedValueException'
+- name: isNotEmpty
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the collection is not empty.
+
+    # *
+
+    # * @phpstan-assert-if-true !null $this->first()
+
+    # *
+
+    # * @phpstan-assert-if-false null $this->first()
+
+    # *
+
+    # * @return bool'
+- name: mapSpread
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Run a map over each nested chunk of items.
+
+    # *
+
+    # * @template TMapSpreadValue
+
+    # *
+
+    # * @param  callable(mixed...): TMapSpreadValue  $callback
+
+    # * @return static<TKey, TMapSpreadValue>'
+- name: mapToGroups
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Run a grouping map over the items.
+
+    # *
+
+    # * The callback should return an associative array with a single key/value pair.
+
+    # *
+
+    # * @template TMapToGroupsKey of array-key
+
+    # * @template TMapToGroupsValue
+
+    # *
+
+    # * @param  callable(TValue, TKey): array<TMapToGroupsKey, TMapToGroupsValue>  $callback
+
+    # * @return static<TMapToGroupsKey, static<int, TMapToGroupsValue>>'
+- name: flatMap
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Map a collection and flatten the result by a single level.
+
+    # *
+
+    # * @template TFlatMapKey of array-key
+
+    # * @template TFlatMapValue
+
+    # *
+
+    # * @param  callable(TValue, TKey): (\Illuminate\Support\Collection<TFlatMapKey,
+    TFlatMapValue>|array<TFlatMapKey, TFlatMapValue>)  $callback
+
+    # * @return static<TFlatMapKey, TFlatMapValue>'
+- name: mapInto
+  visibility: public
+  parameters:
+  - name: class
+  comment: '# * Map the values into a new class.
+
+    # *
+
+    # * @template TMapIntoValue
+
+    # *
+
+    # * @param  class-string<TMapIntoValue>  $class
+
+    # * @return static<TKey, TMapIntoValue>'
+- name: min
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Get the min value of a given key.
+
+    # *
+
+    # * @param  (callable(TValue):mixed)|string|null  $callback
+
+    # * @return mixed'
+- name: max
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Get the max value of a given key.
+
+    # *
+
+    # * @param  (callable(TValue):mixed)|string|null  $callback
+
+    # * @return mixed'
+- name: forPage
+  visibility: public
+  parameters:
+  - name: page
+  - name: perPage
+  comment: '# * "Paginate" the collection by slicing it into a smaller collection.
+
+    # *
+
+    # * @param  int  $page
+
+    # * @param  int  $perPage
+
+    # * @return static'
+- name: partition
+  visibility: public
+  parameters:
+  - name: key
+  - name: operator
+    default: 'null'
+  - name: value
+    default: 'null'
+  comment: '# * Partition the collection into two arrays using the given callback
+    or key.
+
+    # *
+
+    # * @param  (callable(TValue, TKey): bool)|TValue|string  $key
+
+    # * @param  TValue|string|null  $operator
+
+    # * @param  TValue|null  $value
+
+    # * @return static<int<0, 1>, static<TKey, TValue>>'
+- name: percentage
+  visibility: public
+  parameters:
+  - name: callback
+  - name: precision
+    default: '2'
+  comment: '# * Calculate the percentage of items that pass a given truth test.
+
+    # *
+
+    # * @param  (callable(TValue, TKey): bool)  $callback
+
+    # * @param  int  $precision
+
+    # * @return float|null'
+- name: sum
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Get the sum of the given values.
+
+    # *
+
+    # * @param  (callable(TValue): mixed)|string|null  $callback
+
+    # * @return mixed'
+- name: whenEmpty
+  visibility: public
+  parameters:
+  - name: callback
+  - name: default
+    default: 'null'
+  comment: '# * Apply the callback if the collection is empty.
+
+    # *
+
+    # * @template TWhenEmptyReturnType
+
+    # *
+
+    # * @param  (callable($this): TWhenEmptyReturnType)  $callback
+
+    # * @param  (callable($this): TWhenEmptyReturnType)|null  $default
+
+    # * @return $this|TWhenEmptyReturnType'
+- name: whenNotEmpty
+  visibility: public
+  parameters:
+  - name: callback
+  - name: default
+    default: 'null'
+  comment: '# * Apply the callback if the collection is not empty.
+
+    # *
+
+    # * @template TWhenNotEmptyReturnType
+
+    # *
+
+    # * @param  callable($this): TWhenNotEmptyReturnType  $callback
+
+    # * @param  (callable($this): TWhenNotEmptyReturnType)|null  $default
+
+    # * @return $this|TWhenNotEmptyReturnType'
+- name: unlessEmpty
+  visibility: public
+  parameters:
+  - name: callback
+  - name: default
+    default: 'null'
+  comment: '# * Apply the callback unless the collection is empty.
+
+    # *
+
+    # * @template TUnlessEmptyReturnType
+
+    # *
+
+    # * @param  callable($this): TUnlessEmptyReturnType  $callback
+
+    # * @param  (callable($this): TUnlessEmptyReturnType)|null  $default
+
+    # * @return $this|TUnlessEmptyReturnType'
+- name: unlessNotEmpty
+  visibility: public
+  parameters:
+  - name: callback
+  - name: default
+    default: 'null'
+  comment: '# * Apply the callback unless the collection is not empty.
+
+    # *
+
+    # * @template TUnlessNotEmptyReturnType
+
+    # *
+
+    # * @param  callable($this): TUnlessNotEmptyReturnType  $callback
+
+    # * @param  (callable($this): TUnlessNotEmptyReturnType)|null  $default
+
+    # * @return $this|TUnlessNotEmptyReturnType'
+- name: where
+  visibility: public
+  parameters:
+  - name: key
+  - name: operator
+    default: 'null'
+  - name: value
+    default: 'null'
+  comment: '# * Filter items by the given key value pair.
+
+    # *
+
+    # * @param  callable|string  $key
+
+    # * @param  mixed  $operator
+
+    # * @param  mixed  $value
+
+    # * @return static'
+- name: whereNull
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  comment: '# * Filter items where the value for the given key is null.
+
+    # *
+
+    # * @param  string|null  $key
+
+    # * @return static'
+- name: whereNotNull
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  comment: '# * Filter items where the value for the given key is not null.
+
+    # *
+
+    # * @param  string|null  $key
+
+    # * @return static'
+- name: whereStrict
+  visibility: public
+  parameters:
+  - name: key
+  - name: value
+  comment: '# * Filter items by the given key value pair using strict comparison.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $value
+
+    # * @return static'
+- name: whereIn
+  visibility: public
+  parameters:
+  - name: key
+  - name: values
+  - name: strict
+    default: 'false'
+  comment: '# * Filter items by the given key value pair.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  \Illuminate\Contracts\Support\Arrayable|iterable  $values
+
+    # * @param  bool  $strict
+
+    # * @return static'
+- name: whereInStrict
+  visibility: public
+  parameters:
+  - name: key
+  - name: values
+  comment: '# * Filter items by the given key value pair using strict comparison.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  \Illuminate\Contracts\Support\Arrayable|iterable  $values
+
+    # * @return static'
+- name: whereBetween
+  visibility: public
+  parameters:
+  - name: key
+  - name: values
+  comment: '# * Filter items such that the value of the given key is between the given
+    values.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  \Illuminate\Contracts\Support\Arrayable|iterable  $values
+
+    # * @return static'
+- name: whereNotBetween
+  visibility: public
+  parameters:
+  - name: key
+  - name: values
+  comment: '# * Filter items such that the value of the given key is not between the
+    given values.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  \Illuminate\Contracts\Support\Arrayable|iterable  $values
+
+    # * @return static'
+- name: whereNotIn
+  visibility: public
+  parameters:
+  - name: key
+  - name: values
+  - name: strict
+    default: 'false'
+  comment: '# * Filter items by the given key value pair.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  \Illuminate\Contracts\Support\Arrayable|iterable  $values
+
+    # * @param  bool  $strict
+
+    # * @return static'
+- name: whereNotInStrict
+  visibility: public
+  parameters:
+  - name: key
+  - name: values
+  comment: '# * Filter items by the given key value pair using strict comparison.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  \Illuminate\Contracts\Support\Arrayable|iterable  $values
+
+    # * @return static'
+- name: whereInstanceOf
+  visibility: public
+  parameters:
+  - name: type
+  comment: '# * Filter the items, removing any items that don''t match the given type(s).
+
+    # *
+
+    # * @template TWhereInstanceOf
+
+    # *
+
+    # * @param  class-string<TWhereInstanceOf>|array<array-key, class-string<TWhereInstanceOf>>  $type
+
+    # * @return static<TKey, TWhereInstanceOf>'
+- name: pipe
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Pass the collection to the given callback and return the result.
+
+    # *
+
+    # * @template TPipeReturnType
+
+    # *
+
+    # * @param  callable($this): TPipeReturnType  $callback
+
+    # * @return TPipeReturnType'
+- name: pipeInto
+  visibility: public
+  parameters:
+  - name: class
+  comment: '# * Pass the collection into a new class.
+
+    # *
+
+    # * @template TPipeIntoValue
+
+    # *
+
+    # * @param  class-string<TPipeIntoValue>  $class
+
+    # * @return TPipeIntoValue'
+- name: pipeThrough
+  visibility: public
+  parameters:
+  - name: callbacks
+  comment: '# * Pass the collection through a series of callable pipes and return
+    the result.
+
+    # *
+
+    # * @param  array<callable>  $callbacks
+
+    # * @return mixed'
+- name: reduce
+  visibility: public
+  parameters:
+  - name: callback
+  - name: initial
+    default: 'null'
+  comment: '# * Reduce the collection to a single value.
+
+    # *
+
+    # * @template TReduceInitial
+
+    # * @template TReduceReturnType
+
+    # *
+
+    # * @param  callable(TReduceInitial|TReduceReturnType, TValue, TKey): TReduceReturnType  $callback
+
+    # * @param  TReduceInitial  $initial
+
+    # * @return TReduceReturnType'
+- name: reduceSpread
+  visibility: public
+  parameters:
+  - name: callback
+  - name: '...$initial'
+  comment: '# * Reduce the collection to multiple aggregate values.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @param  mixed  ...$initial
+
+    # * @return array
+
+    # *
+
+    # * @throws \UnexpectedValueException'
+- name: reduceWithKeys
+  visibility: public
+  parameters:
+  - name: callback
+  - name: initial
+    default: 'null'
+  comment: '# * Reduce an associative collection to a single value.
+
+    # *
+
+    # * @template TReduceWithKeysInitial
+
+    # * @template TReduceWithKeysReturnType
+
+    # *
+
+    # * @param  callable(TReduceWithKeysInitial|TReduceWithKeysReturnType, TValue,
+    TKey): TReduceWithKeysReturnType  $callback
+
+    # * @param  TReduceWithKeysInitial  $initial
+
+    # * @return TReduceWithKeysReturnType'
+- name: reject
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'true'
+  comment: '# * Create a collection of all elements that do not pass a given truth
+    test.
+
+    # *
+
+    # * @param  (callable(TValue, TKey): bool)|bool|TValue  $callback
+
+    # * @return static'
+- name: tap
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Pass the collection to the given callback and then return it.
+
+    # *
+
+    # * @param  callable($this): mixed  $callback
+
+    # * @return $this'
+- name: unique
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  - name: strict
+    default: 'false'
+  comment: '# * Return only unique items from the collection array.
+
+    # *
+
+    # * @param  (callable(TValue, TKey): mixed)|string|null  $key
+
+    # * @param  bool  $strict
+
+    # * @return static'
+- name: uniqueStrict
+  visibility: public
+  parameters:
+  - name: key
+    default: 'null'
+  comment: '# * Return only unique items from the collection array using strict comparison.
+
+    # *
+
+    # * @param  (callable(TValue, TKey): mixed)|string|null  $key
+
+    # * @return static'
+- name: collect
+  visibility: public
+  parameters: []
+  comment: '# * Collect the values into a collection.
+
+    # *
+
+    # * @return \Illuminate\Support\Collection<TKey, TValue>'
+- name: toArray
+  visibility: public
+  parameters: []
+  comment: '# * Get the collection of items as a plain array.
+
+    # *
+
+    # * @return array<TKey, mixed>'
+- name: jsonSerialize
+  visibility: public
+  parameters: []
+  comment: '# * Convert the object into something JSON serializable.
+
+    # *
+
+    # * @return array<TKey, mixed>'
+- name: toJson
+  visibility: public
+  parameters:
+  - name: options
+    default: '0'
+  comment: '# * Get the collection of items as JSON.
+
+    # *
+
+    # * @param  int  $options
+
+    # * @return string'
+- name: getCachingIterator
+  visibility: public
+  parameters:
+  - name: flags
+    default: CachingIterator::CALL_TOSTRING
+  comment: '# * Get a CachingIterator instance.
+
+    # *
+
+    # * @param  int  $flags
+
+    # * @return \CachingIterator'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Convert the collection to its string representation.
+
+    # *
+
+    # * @return string'
+- name: escapeWhenCastingToString
+  visibility: public
+  parameters:
+  - name: escape
+    default: 'true'
+  comment: '# * Indicate that the model''s string representation should be escaped
+    when __toString is invoked.
+
+    # *
+
+    # * @param  bool  $escape
+
+    # * @return $this'
+- name: proxy
+  visibility: public
+  parameters:
+  - name: method
+  comment: '# * Add a method to the list of proxied methods.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @return void'
+- name: __get
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Dynamically access collection proxies.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \Exception'
+- name: getArrayableItems
+  visibility: protected
+  parameters:
+  - name: items
+  comment: '# * Results array of items from Collection or Arrayable.
+
+    # *
+
+    # * @param  mixed  $items
+
+    # * @return array<TKey, TValue>'
+- name: operatorForWhere
+  visibility: protected
+  parameters:
+  - name: key
+  - name: operator
+    default: 'null'
+  - name: value
+    default: 'null'
+  comment: '# * Get an operator checker callback.
+
+    # *
+
+    # * @param  callable|string  $key
+
+    # * @param  string|null  $operator
+
+    # * @param  mixed  $value
+
+    # * @return \Closure'
+- name: useAsCallable
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Determine if the given value is callable, but not a string.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return bool'
+- name: valueRetriever
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Get a value retrieving callback.
+
+    # *
+
+    # * @param  callable|string|null  $value
+
+    # * @return callable'
+- name: equality
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Make a function to check an item''s equality.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return \Closure(mixed): bool'
+- name: negate
+  visibility: protected
+  parameters:
+  - name: callback
+  comment: '# * Make a function using another function, by negating its result.
+
+    # *
+
+    # * @param  \Closure  $callback
+
+    # * @return \Closure'
+- name: identity
+  visibility: protected
+  parameters: []
+  comment: '# * Make a function that returns what''s passed to it.
+
+    # *
+
+    # * @return \Closure(TValue): TValue'
+traits:
+- BackedEnum
+- CachingIterator
+- Closure
+- Exception
+- Illuminate\Contracts\Support\Arrayable
+- Illuminate\Contracts\Support\Jsonable
+- Illuminate\Support\Arr
+- Illuminate\Support\Collection
+- Illuminate\Support\Enumerable
+- Illuminate\Support\HigherOrderCollectionProxy
+- InvalidArgumentException
+- JsonSerializable
+- Traversable
+- UnexpectedValueException
+- UnitEnum
+- WeakMap
+- Conditionable
+interfaces: []

@@ -1,0 +1,11 @@
+name: error_renderer
+class_comment: null
+dependencies:
+- name: HtmlErrorRenderer
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer
+properties: []
+methods: []
+traits:
+- Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer
+interfaces: []

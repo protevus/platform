@@ -1,0 +1,56 @@
+name: HelperSet
+class_comment: '# * HelperSet represents a set of helpers to be used with a command.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @implements \IteratorAggregate<string, HelperInterface>'
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Console\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: helpers
+    default: '[]'
+  comment: "# * HelperSet represents a set of helpers to be used with a command.\n\
+    # *\n# * @author Fabien Potencier <fabien@symfony.com>\n# *\n# * @implements \\\
+    IteratorAggregate<string, HelperInterface>\n# */\n# class HelperSet implements\
+    \ \\IteratorAggregate\n# {\n# /** @var array<string, HelperInterface> */\n# private\
+    \ array $helpers = [];\n# \n# /**\n# * @param HelperInterface[] $helpers"
+- name: set
+  visibility: public
+  parameters:
+  - name: helper
+  - name: alias
+    default: 'null'
+  comment: null
+- name: has
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Returns true if the helper if defined.'
+- name: get
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Gets a helper value.
+
+    # *
+
+    # * @throws InvalidArgumentException if the helper is not defined'
+- name: getIterator
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Console\Exception\InvalidArgumentException
+interfaces:
+- \IteratorAggregate
+- \IteratorAggregate

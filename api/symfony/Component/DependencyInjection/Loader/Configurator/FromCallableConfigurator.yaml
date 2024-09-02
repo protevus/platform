@@ -1,0 +1,61 @@
+name: FromCallableConfigurator
+class_comment: '# * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: AbstractTrait
+  type: class
+  source: Traits\AbstractTrait
+- name: AutoconfigureTrait
+  type: class
+  source: Traits\AutoconfigureTrait
+- name: AutowireTrait
+  type: class
+  source: Traits\AutowireTrait
+- name: BindTrait
+  type: class
+  source: Traits\BindTrait
+- name: DecorateTrait
+  type: class
+  source: Traits\DecorateTrait
+- name: DeprecateTrait
+  type: class
+  source: Traits\DeprecateTrait
+- name: LazyTrait
+  type: class
+  source: Traits\LazyTrait
+- name: PublicTrait
+  type: class
+  source: Traits\PublicTrait
+- name: ShareTrait
+  type: class
+  source: Traits\ShareTrait
+- name: TagTrait
+  type: class
+  source: Traits\TagTrait
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: serviceConfigurator
+  - name: definition
+  comment: null
+- name: __destruct
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Definition
+- Traits\AbstractTrait
+- Traits\AutoconfigureTrait
+- Traits\AutowireTrait
+- Traits\BindTrait
+- Traits\DecorateTrait
+- Traits\DeprecateTrait
+- Traits\LazyTrait
+- Traits\PublicTrait
+- Traits\ShareTrait
+- Traits\TagTrait
+interfaces: []

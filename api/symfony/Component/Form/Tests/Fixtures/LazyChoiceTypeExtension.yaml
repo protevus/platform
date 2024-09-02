@@ -1,0 +1,31 @@
+name: LazyChoiceTypeExtension
+class_comment: null
+dependencies:
+- name: AbstractTypeExtension
+  type: class
+  source: Symfony\Component\Form\AbstractTypeExtension
+- name: ChoiceList
+  type: class
+  source: Symfony\Component\Form\ChoiceList\ChoiceList
+- name: OptionsResolver
+  type: class
+  source: Symfony\Component\OptionsResolver\OptionsResolver
+properties:
+- name: extendedType
+  visibility: public
+  comment: null
+methods:
+- name: configureOptions
+  visibility: public
+  parameters:
+  - name: resolver
+  comment: null
+- name: getExtendedTypes
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\AbstractTypeExtension
+- Symfony\Component\Form\ChoiceList\ChoiceList
+- Symfony\Component\OptionsResolver\OptionsResolver
+interfaces: []

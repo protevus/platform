@@ -1,0 +1,50 @@
+name: TransportInterface
+class_comment: null
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: TransportExceptionInterface
+  type: class
+  source: Symfony\Component\Mailer\Exception\TransportExceptionInterface
+- name: SentMessage
+  type: class
+  source: Symfony\Component\Mailer\SentMessage
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+properties: []
+methods:
+- name: send
+  visibility: public
+  parameters:
+  - name: message
+  - name: envelope
+    default: 'null'
+  comment: '# * Interface for all mailer transports.
+
+    # *
+
+    # * When sending emails, you should prefer MailerInterface implementations
+
+    # * as they allow asynchronous sending.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # interface TransportInterface extends \Stringable
+
+    # {
+
+    # /**
+
+    # * @throws TransportExceptionInterface'
+traits:
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mailer\Exception\TransportExceptionInterface
+- Symfony\Component\Mailer\SentMessage
+- Symfony\Component\Mime\RawMessage
+interfaces: []

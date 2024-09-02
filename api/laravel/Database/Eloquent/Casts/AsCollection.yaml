@@ -1,0 +1,69 @@
+name: AsCollection
+class_comment: null
+dependencies:
+- name: Castable
+  type: class
+  source: Illuminate\Contracts\Database\Eloquent\Castable
+- name: CastsAttributes
+  type: class
+  source: Illuminate\Contracts\Database\Eloquent\CastsAttributes
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties: []
+methods:
+- name: castUsing
+  visibility: public
+  parameters:
+  - name: arguments
+  comment: '# * Get the caster class to use when casting from / to this cast target.
+
+    # *
+
+    # * @param  array  $arguments
+
+    # * @return \Illuminate\Contracts\Database\Eloquent\CastsAttributes<\Illuminate\Support\Collection<array-key,
+    mixed>, iterable>'
+- name: __construct
+  visibility: public
+  parameters:
+  - name: arguments
+  comment: null
+- name: get
+  visibility: public
+  parameters:
+  - name: model
+  - name: key
+  - name: value
+  - name: attributes
+  comment: null
+- name: set
+  visibility: public
+  parameters:
+  - name: model
+  - name: key
+  - name: value
+  - name: attributes
+  comment: null
+- name: using
+  visibility: public
+  parameters:
+  - name: class
+  comment: '# * Specify the collection for the cast.
+
+    # *
+
+    # * @param  class-string  $class
+
+    # * @return string'
+traits:
+- Illuminate\Contracts\Database\Eloquent\Castable
+- Illuminate\Contracts\Database\Eloquent\CastsAttributes
+- Illuminate\Support\Collection
+- InvalidArgumentException
+interfaces:
+- Castable
+- CastsAttributes

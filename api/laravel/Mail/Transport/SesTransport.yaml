@@ -1,0 +1,116 @@
+name: SesTransport
+class_comment: null
+dependencies:
+- name: AwsException
+  type: class
+  source: Aws\Exception\AwsException
+- name: SesClient
+  type: class
+  source: Aws\Ses\SesClient
+- name: Stringable
+  type: class
+  source: Stringable
+- name: TransportException
+  type: class
+  source: Symfony\Component\Mailer\Exception\TransportException
+- name: MetadataHeader
+  type: class
+  source: Symfony\Component\Mailer\Header\MetadataHeader
+- name: SentMessage
+  type: class
+  source: Symfony\Component\Mailer\SentMessage
+- name: AbstractTransport
+  type: class
+  source: Symfony\Component\Mailer\Transport\AbstractTransport
+- name: Message
+  type: class
+  source: Symfony\Component\Mime\Message
+properties:
+- name: ses
+  visibility: protected
+  comment: '# * The Amazon SES instance.
+
+    # *
+
+    # * @var \Aws\Ses\SesClient'
+- name: options
+  visibility: protected
+  comment: '# * The Amazon SES transmission options.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: ses
+  - name: options
+    default: '[]'
+  comment: "# * The Amazon SES instance.\n# *\n# * @var \\Aws\\Ses\\SesClient\n# */\n\
+    # protected $ses;\n# \n# /**\n# * The Amazon SES transmission options.\n# *\n\
+    # * @var array\n# */\n# protected $options = [];\n# \n# /**\n# * Create a new\
+    \ SES transport instance.\n# *\n# * @param  \\Aws\\Ses\\SesClient  $ses\n# * @param\
+    \  array  $options\n# * @return void"
+- name: doSend
+  visibility: protected
+  parameters:
+  - name: message
+  comment: '# * {@inheritDoc}'
+- name: listManagementOptions
+  visibility: protected
+  parameters:
+  - name: message
+  comment: '# * Extract the SES list management options, if applicable.
+
+    # *
+
+    # * @param  \Symfony\Component\Mailer\SentMessage  $message
+
+    # * @return array|null'
+- name: ses
+  visibility: public
+  parameters: []
+  comment: '# * Get the Amazon SES client for the SesTransport instance.
+
+    # *
+
+    # * @return \Aws\Ses\SesClient'
+- name: getOptions
+  visibility: public
+  parameters: []
+  comment: '# * Get the transmission options being used by the transport.
+
+    # *
+
+    # * @return array'
+- name: setOptions
+  visibility: public
+  parameters:
+  - name: options
+  comment: '# * Set the transmission options being used by the transport.
+
+    # *
+
+    # * @param  array  $options
+
+    # * @return array'
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Get the string representation of the transport.
+
+    # *
+
+    # * @return string'
+traits:
+- Aws\Exception\AwsException
+- Aws\Ses\SesClient
+- Stringable
+- Symfony\Component\Mailer\Exception\TransportException
+- Symfony\Component\Mailer\Header\MetadataHeader
+- Symfony\Component\Mailer\SentMessage
+- Symfony\Component\Mailer\Transport\AbstractTransport
+- Symfony\Component\Mime\Message
+interfaces:
+- Stringable

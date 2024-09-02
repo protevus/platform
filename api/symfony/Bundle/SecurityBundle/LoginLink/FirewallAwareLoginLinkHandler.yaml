@@ -1,0 +1,69 @@
+name: FirewallAwareLoginLinkHandler
+class_comment: '# * Decorates the login link handler for the current firewall.
+
+  # *
+
+  # * @author Ryan Weaver <ryan@symfonycasts.com>'
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: FirewallAwareTrait
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Security\FirewallAwareTrait
+- name: FirewallMap
+  type: class
+  source: Symfony\Bundle\SecurityBundle\Security\FirewallMap
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+- name: UserInterface
+  type: class
+  source: Symfony\Component\Security\Core\User\UserInterface
+- name: LoginLinkDetails
+  type: class
+  source: Symfony\Component\Security\Http\LoginLink\LoginLinkDetails
+- name: LoginLinkHandlerInterface
+  type: class
+  source: Symfony\Component\Security\Http\LoginLink\LoginLinkHandlerInterface
+- name: FirewallAwareTrait
+  type: class
+  source: FirewallAwareTrait
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: firewallMap
+  - name: loginLinkHandlerLocator
+  - name: requestStack
+  comment: null
+- name: createLoginLink
+  visibility: public
+  parameters:
+  - name: user
+  - name: request
+    default: 'null'
+  - name: lifetime
+    default: 'null'
+  comment: null
+- name: consumeLoginLink
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Bundle\SecurityBundle\Security\FirewallAwareTrait
+- Symfony\Bundle\SecurityBundle\Security\FirewallMap
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestStack
+- Symfony\Component\Security\Core\User\UserInterface
+- Symfony\Component\Security\Http\LoginLink\LoginLinkDetails
+- Symfony\Component\Security\Http\LoginLink\LoginLinkHandlerInterface
+- FirewallAwareTrait
+interfaces:
+- LoginLinkHandlerInterface

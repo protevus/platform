@@ -1,0 +1,35 @@
+name: LoaderChainTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+- name: LoaderChain
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\LoaderChain
+- name: LoaderInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\LoaderInterface
+properties: []
+methods:
+- name: testAllLoadersAreCalled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReturnsTrueIfAnyLoaderReturnedTrue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReturnsFalseIfNoLoaderReturnedTrue
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\Mapping\ClassMetadata
+- Symfony\Component\Validator\Mapping\Loader\LoaderChain
+- Symfony\Component\Validator\Mapping\Loader\LoaderInterface
+interfaces: []

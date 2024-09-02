@@ -1,0 +1,16 @@
+name: PropertyInfoLoaderNoAutoMappingEntity
+class_comment: null
+dependencies:
+- name: Assert
+  type: class
+  source: Symfony\Component\Validator\Constraints
+properties:
+- name: string
+  visibility: public
+  comment: null
+- name: autoMappingExplicitlyEnabled
+  visibility: public
+  comment: null
+methods: []
+traits: []
+interfaces: []

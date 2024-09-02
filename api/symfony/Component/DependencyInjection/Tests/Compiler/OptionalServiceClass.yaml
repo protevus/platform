@@ -1,0 +1,11 @@
+name: OptionalServiceClass
+class_comment: null
+dependencies:
+- name: NotExistClass
+  type: class
+  source: Symfony\Bug\NotExistClass
+properties: []
+methods: []
+traits:
+- Symfony\Bug\NotExistClass
+interfaces: []

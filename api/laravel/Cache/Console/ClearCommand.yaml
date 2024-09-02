@@ -1,0 +1,121 @@
+name: ClearCommand
+class_comment: null
+dependencies:
+- name: CacheManager
+  type: class
+  source: Illuminate\Cache\CacheManager
+- name: Command
+  type: class
+  source: Illuminate\Console\Command
+- name: Filesystem
+  type: class
+  source: Illuminate\Filesystem\Filesystem
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+properties:
+- name: name
+  visibility: protected
+  comment: '# * The console command name.
+
+    # *
+
+    # * @var string'
+- name: description
+  visibility: protected
+  comment: '# * The console command description.
+
+    # *
+
+    # * @var string'
+- name: cache
+  visibility: protected
+  comment: '# * The cache manager instance.
+
+    # *
+
+    # * @var \Illuminate\Cache\CacheManager'
+- name: files
+  visibility: protected
+  comment: '# * The filesystem instance.
+
+    # *
+
+    # * @var \Illuminate\Filesystem\Filesystem'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: cache
+  - name: files
+  comment: "# * The console command name.\n# *\n# * @var string\n# */\n# protected\
+    \ $name = 'cache:clear';\n# \n# /**\n# * The console command description.\n# *\n\
+    # * @var string\n# */\n# protected $description = 'Flush the application cache';\n\
+    # \n# /**\n# * The cache manager instance.\n# *\n# * @var \\Illuminate\\Cache\\\
+    CacheManager\n# */\n# protected $cache;\n# \n# /**\n# * The filesystem instance.\n\
+    # *\n# * @var \\Illuminate\\Filesystem\\Filesystem\n# */\n# protected $files;\n\
+    # \n# /**\n# * Create a new cache clear command instance.\n# *\n# * @param  \\\
+    Illuminate\\Cache\\CacheManager  $cache\n# * @param  \\Illuminate\\Filesystem\\\
+    Filesystem  $files\n# * @return void"
+- name: handle
+  visibility: public
+  parameters: []
+  comment: '# * Execute the console command.
+
+    # *
+
+    # * @return void'
+- name: flushFacades
+  visibility: public
+  parameters: []
+  comment: '# * Flush the real-time facades stored in the cache directory.
+
+    # *
+
+    # * @return void'
+- name: cache
+  visibility: protected
+  parameters: []
+  comment: '# * Get the cache instance for the command.
+
+    # *
+
+    # * @return \Illuminate\Cache\Repository'
+- name: tags
+  visibility: protected
+  parameters: []
+  comment: '# * Get the tags passed to the command.
+
+    # *
+
+    # * @return array'
+- name: getArguments
+  visibility: protected
+  parameters: []
+  comment: '# * Get the console command arguments.
+
+    # *
+
+    # * @return array'
+- name: getOptions
+  visibility: protected
+  parameters: []
+  comment: '# * Get the console command options.
+
+    # *
+
+    # * @return array'
+traits:
+- Illuminate\Cache\CacheManager
+- Illuminate\Console\Command
+- Illuminate\Filesystem\Filesystem
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputOption
+interfaces: []

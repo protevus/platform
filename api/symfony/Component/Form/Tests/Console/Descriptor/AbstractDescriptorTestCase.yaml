@@ -1,0 +1,133 @@
+name: AbstractDescriptorTestCase
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ArrayInput
+  type: class
+  source: Symfony\Component\Console\Input\ArrayInput
+- name: BufferedOutput
+  type: class
+  source: Symfony\Component\Console\Output\BufferedOutput
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+- name: AbstractType
+  type: class
+  source: Symfony\Component\Form\AbstractType
+- name: ChoiceType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\ChoiceType
+- name: FormType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\FormType
+- name: FormTypeCsrfExtension
+  type: class
+  source: Symfony\Component\Form\Extension\Csrf\Type\FormTypeCsrfExtension
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+- name: ResolvedFormType
+  type: class
+  source: Symfony\Component\Form\ResolvedFormType
+- name: ResolvedFormTypeInterface
+  type: class
+  source: Symfony\Component\Form\ResolvedFormTypeInterface
+- name: Options
+  type: class
+  source: Symfony\Component\OptionsResolver\Options
+- name: OptionsResolver
+  type: class
+  source: Symfony\Component\OptionsResolver\OptionsResolver
+- name: CsrfTokenManager
+  type: class
+  source: Symfony\Component\Security\Csrf\CsrfTokenManager
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testDescribeDefaults
+  visibility: public
+  parameters:
+  - name: object
+  - name: options
+  - name: fixtureName
+  comment: '# @dataProvider getDescribeDefaultsTestData'
+- name: testDescribeResolvedFormType
+  visibility: public
+  parameters:
+  - name: type
+  - name: options
+  - name: fixtureName
+  comment: '# @dataProvider getDescribeResolvedFormTypeTestData'
+- name: testDescribeOption
+  visibility: public
+  parameters:
+  - name: optionsResolver
+  - name: options
+  - name: fixtureName
+  comment: '# @dataProvider getDescribeOptionTestData'
+- name: getDescribeDefaultsTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDescribeResolvedFormTypeTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDescribeOptionTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getDescriptor
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getFormat
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getObjectDescription
+  visibility: private
+  parameters:
+  - name: object
+  - name: options
+  comment: null
+- name: getExpectedDescription
+  visibility: private
+  parameters:
+  - name: name
+  comment: null
+- name: getFixtureFilename
+  visibility: private
+  parameters:
+  - name: name
+  comment: null
+- name: configureOptions
+  visibility: public
+  parameters:
+  - name: resolver
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Console\Input\ArrayInput
+- Symfony\Component\Console\Output\BufferedOutput
+- Symfony\Component\Console\Style\SymfonyStyle
+- Symfony\Component\Form\AbstractType
+- Symfony\Component\Form\Extension\Core\Type\ChoiceType
+- Symfony\Component\Form\Extension\Core\Type\FormType
+- Symfony\Component\Form\Extension\Csrf\Type\FormTypeCsrfExtension
+- Symfony\Component\Form\FormInterface
+- Symfony\Component\Form\ResolvedFormType
+- Symfony\Component\Form\ResolvedFormTypeInterface
+- Symfony\Component\OptionsResolver\Options
+- Symfony\Component\OptionsResolver\OptionsResolver
+- Symfony\Component\Security\Csrf\CsrfTokenManager
+interfaces: []

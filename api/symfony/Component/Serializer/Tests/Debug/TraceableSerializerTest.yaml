@@ -1,0 +1,142 @@
+name: TraceableSerializerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: SerializerDataCollector
+  type: class
+  source: Symfony\Component\Serializer\DataCollector\SerializerDataCollector
+- name: TraceableSerializer
+  type: class
+  source: Symfony\Component\Serializer\Debug\TraceableSerializer
+- name: DecoderInterface
+  type: class
+  source: Symfony\Component\Serializer\Encoder\DecoderInterface
+- name: EncoderInterface
+  type: class
+  source: Symfony\Component\Serializer\Encoder\EncoderInterface
+- name: DenormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- name: NormalizerInterface
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\NormalizerInterface
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Serializer\SerializerInterface
+properties: []
+methods:
+- name: testForwardsToSerializer
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCollectData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddDebugTraceIdInContext
+  visibility: public
+  parameters: []
+  comment: null
+- name: serialize
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+  - name: context
+    default: '[]'
+  comment: null
+- name: deserialize
+  visibility: public
+  parameters:
+  - name: data
+  - name: type
+  - name: format
+  - name: context
+    default: '[]'
+  comment: null
+- name: normalize
+  visibility: public
+  parameters:
+  - name: object
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: getSupportedTypes
+  visibility: public
+  parameters:
+  - name: format
+  comment: null
+- name: supportsNormalization
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: denormalize
+  visibility: public
+  parameters:
+  - name: data
+  - name: type
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: supportsDenormalization
+  visibility: public
+  parameters:
+  - name: data
+  - name: type
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: encode
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+  - name: context
+    default: '[]'
+  comment: null
+- name: supportsEncoding
+  visibility: public
+  parameters:
+  - name: format
+  - name: context
+    default: '[]'
+  comment: null
+- name: decode
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+  - name: context
+    default: '[]'
+  comment: null
+- name: supportsDecoding
+  visibility: public
+  parameters:
+  - name: format
+  - name: context
+    default: '[]'
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\DataCollector\SerializerDataCollector
+- Symfony\Component\Serializer\Debug\TraceableSerializer
+- Symfony\Component\Serializer\Encoder\DecoderInterface
+- Symfony\Component\Serializer\Encoder\EncoderInterface
+- Symfony\Component\Serializer\Normalizer\DenormalizerInterface
+- Symfony\Component\Serializer\Normalizer\NormalizerInterface
+- Symfony\Component\Serializer\SerializerInterface
+interfaces:
+- SerializerInterface

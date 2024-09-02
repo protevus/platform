@@ -1,0 +1,171 @@
+name: FormFactoryInterface
+class_comment: null
+dependencies:
+- name: FormType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\FormType
+- name: InvalidOptionsException
+  type: class
+  source: Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+properties: []
+methods:
+- name: create
+  visibility: public
+  parameters:
+  - name: type
+    default: FormType::class
+  - name: data
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: '# * Allows creating a form based on a name, a class or a property.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # interface FormFactoryInterface
+
+    # {
+
+    # /**
+
+    # * Returns a form.
+
+    # *
+
+    # * @see createBuilder()
+
+    # *
+
+    # * @param mixed $data The initial data
+
+    # *
+
+    # * @throws InvalidOptionsException if any given option is not applicable to the
+    given type'
+- name: createNamed
+  visibility: public
+  parameters:
+  - name: name
+  - name: type
+    default: FormType::class
+  - name: data
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: '# * Returns a form.
+
+    # *
+
+    # * @see createNamedBuilder()
+
+    # *
+
+    # * @param mixed $data The initial data
+
+    # *
+
+    # * @throws InvalidOptionsException if any given option is not applicable to the
+    given type'
+- name: createForProperty
+  visibility: public
+  parameters:
+  - name: class
+  - name: property
+  - name: data
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: '# * Returns a form for a property of a class.
+
+    # *
+
+    # * @see createBuilderForProperty()
+
+    # *
+
+    # * @param string $class    The fully qualified class name
+
+    # * @param string $property The name of the property to guess for
+
+    # * @param mixed  $data     The initial data
+
+    # *
+
+    # * @throws InvalidOptionsException if any given option is not applicable to the
+    form type'
+- name: createBuilder
+  visibility: public
+  parameters:
+  - name: type
+    default: FormType::class
+  - name: data
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: '# * Returns a form builder.
+
+    # *
+
+    # * @param mixed $data The initial data
+
+    # *
+
+    # * @throws InvalidOptionsException if any given option is not applicable to the
+    given type'
+- name: createNamedBuilder
+  visibility: public
+  parameters:
+  - name: name
+  - name: type
+    default: FormType::class
+  - name: data
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: '# * Returns a form builder.
+
+    # *
+
+    # * @param mixed $data The initial data
+
+    # *
+
+    # * @throws InvalidOptionsException if any given option is not applicable to the
+    given type'
+- name: createBuilderForProperty
+  visibility: public
+  parameters:
+  - name: class
+  - name: property
+  - name: data
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: '# * Returns a form builder for a property of a class.
+
+    # *
+
+    # * If any of the ''required'' and type options can be guessed,
+
+    # * and are not provided in the options argument, the guessed value is used.
+
+    # *
+
+    # * @param string $class    The fully qualified class name
+
+    # * @param string $property The name of the property to guess for
+
+    # * @param mixed  $data     The initial data
+
+    # *
+
+    # * @throws InvalidOptionsException if any given option is not applicable to the
+    form type'
+traits:
+- Symfony\Component\Form\Extension\Core\Type\FormType
+- Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
+interfaces: []

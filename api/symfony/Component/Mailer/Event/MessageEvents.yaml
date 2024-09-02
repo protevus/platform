@@ -1,0 +1,29 @@
+name: MessageEvents
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+properties: []
+methods:
+- name: getEvents
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: "# * @author Fabien Potencier <fabien@symfony.com>\n# */\n# class MessageEvents\n\
+    # {\n# /**\n# * @var MessageEvent[]\n# */\n# private array $events = [];\n# \n\
+    # /**\n# * @var array<string, bool>\n# */\n# private array $transports = [];\n\
+    # \n# public function add(MessageEvent $event): void\n# {\n# $this->events[] =\
+    \ $event;\n# $this->transports[$event->getTransport()] = true;\n# }\n# \n# public\
+    \ function getTransports(): array\n# {\n# return array_keys($this->transports);\n\
+    # }\n# \n# /**\n# * @return MessageEvent[]"
+- name: getMessages
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * @return RawMessage[]'
+traits:
+- Symfony\Component\Mime\RawMessage
+interfaces: []

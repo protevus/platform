@@ -1,0 +1,15 @@
+name: Attachable
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: toMailAttachment
+  visibility: public
+  parameters: []
+  comment: '# * Get an attachment instance for this entity.
+
+    # *
+
+    # * @return \Illuminate\Mail\Attachment'
+traits: []
+interfaces: []

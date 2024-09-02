@@ -1,0 +1,15 @@
+name: Unlimited
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters: []
+  comment: '# * Create a new limit instance.
+
+    # *
+
+    # * @return void'
+traits: []
+interfaces: []

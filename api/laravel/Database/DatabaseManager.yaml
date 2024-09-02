@@ -1,0 +1,370 @@
+name: DatabaseManager
+class_comment: '# * @mixin \Illuminate\Database\Connection'
+dependencies:
+- name: ConnectionFactory
+  type: class
+  source: Illuminate\Database\Connectors\ConnectionFactory
+- name: ConnectionEstablished
+  type: class
+  source: Illuminate\Database\Events\ConnectionEstablished
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: ConfigurationUrlParser
+  type: class
+  source: Illuminate\Support\ConfigurationUrlParser
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: Macroable
+  type: class
+  source: Illuminate\Support\Traits\Macroable
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+- name: PDO
+  type: class
+  source: PDO
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+properties:
+- name: app
+  visibility: protected
+  comment: "# * @mixin \\Illuminate\\Database\\Connection\n# */\n# class DatabaseManager\
+    \ implements ConnectionResolverInterface\n# {\n# use Macroable {\n# __call as\
+    \ macroCall;\n# }\n# \n# /**\n# * The application instance.\n# *\n# * @var \\\
+    Illuminate\\Contracts\\Foundation\\Application"
+- name: factory
+  visibility: protected
+  comment: '# * The database connection factory instance.
+
+    # *
+
+    # * @var \Illuminate\Database\Connectors\ConnectionFactory'
+- name: connections
+  visibility: protected
+  comment: '# * The active connection instances.
+
+    # *
+
+    # * @var array<string, \Illuminate\Database\Connection>'
+- name: extensions
+  visibility: protected
+  comment: '# * The custom connection resolvers.
+
+    # *
+
+    # * @var array<string, callable>'
+- name: reconnector
+  visibility: protected
+  comment: '# * The callback to be executed to reconnect to a database.
+
+    # *
+
+    # * @var callable'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: app
+  - name: factory
+  comment: "# * @mixin \\Illuminate\\Database\\Connection\n# */\n# class DatabaseManager\
+    \ implements ConnectionResolverInterface\n# {\n# use Macroable {\n# __call as\
+    \ macroCall;\n# }\n# \n# /**\n# * The application instance.\n# *\n# * @var \\\
+    Illuminate\\Contracts\\Foundation\\Application\n# */\n# protected $app;\n# \n\
+    # /**\n# * The database connection factory instance.\n# *\n# * @var \\Illuminate\\\
+    Database\\Connectors\\ConnectionFactory\n# */\n# protected $factory;\n# \n# /**\n\
+    # * The active connection instances.\n# *\n# * @var array<string, \\Illuminate\\\
+    Database\\Connection>\n# */\n# protected $connections = [];\n# \n# /**\n# * The\
+    \ custom connection resolvers.\n# *\n# * @var array<string, callable>\n# */\n\
+    # protected $extensions = [];\n# \n# /**\n# * The callback to be executed to reconnect\
+    \ to a database.\n# *\n# * @var callable\n# */\n# protected $reconnector;\n# \n\
+    # /**\n# * Create a new database manager instance.\n# *\n# * @param  \\Illuminate\\\
+    Contracts\\Foundation\\Application  $app\n# * @param  \\Illuminate\\Database\\\
+    Connectors\\ConnectionFactory  $factory\n# * @return void"
+- name: connection
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Get a database connection instance.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @return \Illuminate\Database\Connection'
+- name: connectUsing
+  visibility: public
+  parameters:
+  - name: name
+  - name: config
+  - name: force
+    default: 'false'
+  comment: '# * Get a database connection instance from the given configuration.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  array  $config
+
+    # * @param  bool  $force
+
+    # * @return \Illuminate\Database\ConnectionInterface'
+- name: parseConnectionName
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Parse the connection into an array of the name and read / write type.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return array'
+- name: makeConnection
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Make the database connection instance.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return \Illuminate\Database\Connection'
+- name: configuration
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Get the configuration for a connection.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return array
+
+    # *
+
+    # * @throws \InvalidArgumentException'
+- name: configure
+  visibility: protected
+  parameters:
+  - name: connection
+  - name: type
+  comment: '# * Prepare the database connection instance.
+
+    # *
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @param  string  $type
+
+    # * @return \Illuminate\Database\Connection'
+- name: dispatchConnectionEstablishedEvent
+  visibility: protected
+  parameters:
+  - name: connection
+  comment: '# * Dispatch the ConnectionEstablished event if the event dispatcher is
+    available.
+
+    # *
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @return void'
+- name: setPdoForType
+  visibility: protected
+  parameters:
+  - name: connection
+  - name: type
+    default: 'null'
+  comment: '# * Prepare the read / write mode for database connection instance.
+
+    # *
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @param  string|null  $type
+
+    # * @return \Illuminate\Database\Connection'
+- name: purge
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Disconnect from the given database and remove from local cache.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @return void'
+- name: disconnect
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Disconnect from the given database.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @return void'
+- name: reconnect
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Reconnect to the given database.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @return \Illuminate\Database\Connection'
+- name: usingConnection
+  visibility: public
+  parameters:
+  - name: name
+  - name: callback
+  comment: '# * Set the default database connection for the callback execution.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  callable  $callback
+
+    # * @return mixed'
+- name: refreshPdoConnections
+  visibility: protected
+  parameters:
+  - name: name
+  comment: '# * Refresh the PDO connections on a given connection.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return \Illuminate\Database\Connection'
+- name: getDefaultConnection
+  visibility: public
+  parameters: []
+  comment: '# * Get the default connection name.
+
+    # *
+
+    # * @return string'
+- name: setDefaultConnection
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Set the default connection name.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return void'
+- name: supportedDrivers
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the supported drivers.
+
+    # *
+
+    # * @return string[]'
+- name: availableDrivers
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the drivers that are actually available.
+
+    # *
+
+    # * @return string[]'
+- name: extend
+  visibility: public
+  parameters:
+  - name: name
+  - name: resolver
+  comment: '# * Register an extension connection resolver.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  callable  $resolver
+
+    # * @return void'
+- name: forgetExtension
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Remove an extension connection resolver.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return void'
+- name: getConnections
+  visibility: public
+  parameters: []
+  comment: '# * Return all of the created connections.
+
+    # *
+
+    # * @return array<string, \Illuminate\Database\Connection>'
+- name: setReconnector
+  visibility: public
+  parameters:
+  - name: reconnector
+  comment: '# * Set the database reconnector callback.
+
+    # *
+
+    # * @param  callable  $reconnector
+
+    # * @return void'
+- name: setApplication
+  visibility: public
+  parameters:
+  - name: app
+  comment: '# * Set the application instance used by the manager.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Foundation\Application  $app
+
+    # * @return $this'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically pass methods to the default connection.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+traits:
+- Illuminate\Database\Connectors\ConnectionFactory
+- Illuminate\Database\Events\ConnectionEstablished
+- Illuminate\Support\Arr
+- Illuminate\Support\ConfigurationUrlParser
+- Illuminate\Support\Str
+- Illuminate\Support\Traits\Macroable
+- InvalidArgumentException
+- PDO
+- RuntimeException
+interfaces:
+- ConnectionResolverInterface

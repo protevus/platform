@@ -1,0 +1,32 @@
+name: SerializedName
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Serializer\Exception\InvalidArgumentException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: serializedName
+  comment: '# * @author Fabien Bourigault <bourigaultfabien@gmail.com>
+
+    # */
+
+    # #[\Attribute(\Attribute::TARGET_METHOD | \Attribute::TARGET_PROPERTY)]
+
+    # class SerializedName
+
+    # {
+
+    # /**
+
+    # * @param string $serializedName The name of the property as it will be serialized'
+- name: getSerializedName
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Serializer\Exception\InvalidArgumentException
+interfaces: []

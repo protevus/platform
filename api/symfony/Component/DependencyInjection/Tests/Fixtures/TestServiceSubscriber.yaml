@@ -1,0 +1,30 @@
+name: TestServiceSubscriber
+class_comment: null
+dependencies:
+- name: ServiceProviderInterface
+  type: class
+  source: Symfony\Contracts\Service\ServiceProviderInterface
+- name: ServiceSubscriberInterface
+  type: class
+  source: Symfony\Contracts\Service\ServiceSubscriberInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: setServiceProvider
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+- name: getSubscribedServices
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Contracts\Service\ServiceProviderInterface
+- Symfony\Contracts\Service\ServiceSubscriberInterface
+interfaces:
+- ServiceSubscriberInterface

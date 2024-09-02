@@ -1,0 +1,56 @@
+name: ContextualBindingBuilder
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: needs
+  visibility: public
+  parameters:
+  - name: abstract
+  comment: '# * Define the abstract target that depends on the context.
+
+    # *
+
+    # * @param  string  $abstract
+
+    # * @return $this'
+- name: give
+  visibility: public
+  parameters:
+  - name: implementation
+  comment: '# * Define the implementation for the contextual binding.
+
+    # *
+
+    # * @param  \Closure|string|array  $implementation
+
+    # * @return void'
+- name: giveTagged
+  visibility: public
+  parameters:
+  - name: tag
+  comment: '# * Define tagged services to be used as the implementation for the contextual
+    binding.
+
+    # *
+
+    # * @param  string  $tag
+
+    # * @return void'
+- name: giveConfig
+  visibility: public
+  parameters:
+  - name: key
+  - name: default
+    default: 'null'
+  comment: '# * Specify the configuration item to bind as a primitive.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  mixed  $default
+
+    # * @return void'
+traits: []
+interfaces: []

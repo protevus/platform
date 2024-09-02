@@ -1,0 +1,30 @@
+name: DatabaseBusy
+class_comment: null
+dependencies: []
+properties:
+- name: connectionName
+  visibility: public
+  comment: '# * The database connection name.
+
+    # *
+
+    # * @var string'
+- name: connections
+  visibility: public
+  comment: '# * The number of open connections.
+
+    # *
+
+    # * @var int'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: connectionName
+  - name: connections
+  comment: "# * The database connection name.\n# *\n# * @var string\n# */\n# public\
+    \ $connectionName;\n# \n# /**\n# * The number of open connections.\n# *\n# * @var\
+    \ int\n# */\n# public $connections;\n# \n# /**\n# * Create a new event instance.\n\
+    # *\n# * @param  string  $connectionName\n# * @param  int  $connections"
+traits: []
+interfaces: []

@@ -1,0 +1,21 @@
+name: DoctrineReceivedStamp
+class_comment: '# * @author Vincent Touzet <vincent.touzet@gmail.com>'
+dependencies:
+- name: NonSendableStampInterface
+  type: class
+  source: Symfony\Component\Messenger\Stamp\NonSendableStampInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: id
+  comment: null
+- name: getId
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Messenger\Stamp\NonSendableStampInterface
+interfaces:
+- NonSendableStampInterface

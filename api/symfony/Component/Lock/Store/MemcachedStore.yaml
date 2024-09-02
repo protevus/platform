@@ -1,0 +1,76 @@
+name: MemcachedStore
+class_comment: "# * MemcachedStore is a PersistingStoreInterface implementation using\
+  \ Memcached as store engine.\n# *\n# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>"
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Lock\Exception\InvalidArgumentException
+- name: InvalidTtlException
+  type: class
+  source: Symfony\Component\Lock\Exception\InvalidTtlException
+- name: LockConflictedException
+  type: class
+  source: Symfony\Component\Lock\Exception\LockConflictedException
+- name: Key
+  type: class
+  source: Symfony\Component\Lock\Key
+- name: PersistingStoreInterface
+  type: class
+  source: Symfony\Component\Lock\PersistingStoreInterface
+- name: ExpiringStoreTrait
+  type: class
+  source: ExpiringStoreTrait
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: memcached
+  - name: initialTtl
+    default: '300'
+  comment: "# * MemcachedStore is a PersistingStoreInterface implementation using\
+    \ Memcached as store engine.\n# *\n# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n\
+    # */\n# class MemcachedStore implements PersistingStoreInterface\n# {\n# use ExpiringStoreTrait;\n\
+    # \n# private bool $useExtendedReturn;\n# \n# public static function isSupported():\
+    \ bool\n# {\n# return \\extension_loaded('memcached');\n# }\n# \n# /**\n# * @param\
+    \ int $initialTtl the expiration delay of locks in seconds"
+- name: save
+  visibility: public
+  parameters:
+  - name: key
+  comment: null
+- name: putOffExpiration
+  visibility: public
+  parameters:
+  - name: key
+  - name: ttl
+  comment: null
+- name: delete
+  visibility: public
+  parameters:
+  - name: key
+  comment: null
+- name: exists
+  visibility: public
+  parameters:
+  - name: key
+  comment: null
+- name: getUniqueToken
+  visibility: private
+  parameters:
+  - name: key
+  comment: null
+- name: getValueAndCas
+  visibility: private
+  parameters:
+  - name: key
+  comment: null
+traits:
+- Symfony\Component\Lock\Exception\InvalidArgumentException
+- Symfony\Component\Lock\Exception\InvalidTtlException
+- Symfony\Component\Lock\Exception\LockConflictedException
+- Symfony\Component\Lock\Key
+- Symfony\Component\Lock\PersistingStoreInterface
+- ExpiringStoreTrait
+interfaces:
+- PersistingStoreInterface

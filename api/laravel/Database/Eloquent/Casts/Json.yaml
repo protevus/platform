@@ -1,0 +1,45 @@
+name: Json
+class_comment: null
+dependencies: []
+properties:
+- name: encoder
+  visibility: protected
+  comment: '# * The custom JSON encoder.
+
+    # *
+
+    # * @var callable|null'
+- name: decoder
+  visibility: protected
+  comment: '# * The custom JSON decode.
+
+    # *
+
+    # * @var callable|null'
+methods:
+- name: encode
+  visibility: public
+  parameters:
+  - name: value
+  comment: "# * The custom JSON encoder.\n# *\n# * @var callable|null\n# */\n# protected\
+    \ static $encoder;\n# \n# /**\n# * The custom JSON decode.\n# *\n# * @var callable|null\n\
+    # */\n# protected static $decoder;\n# \n# /**\n# * Encode the given value."
+- name: decode
+  visibility: public
+  parameters:
+  - name: value
+  - name: associative
+    default: 'true'
+  comment: '# * Decode the given value.'
+- name: encodeUsing
+  visibility: public
+  parameters:
+  - name: encoder
+  comment: '# * Encode all values using the given callable.'
+- name: decodeUsing
+  visibility: public
+  parameters:
+  - name: decoder
+  comment: '# * Decode all values using the given callable.'
+traits: []
+interfaces: []

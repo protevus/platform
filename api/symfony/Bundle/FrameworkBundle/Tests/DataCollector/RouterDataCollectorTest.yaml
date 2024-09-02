@@ -1,0 +1,48 @@
+name: RouterDataCollectorTest
+class_comment: null
+dependencies:
+- name: RedirectController
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+- name: RouterDataCollector
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector
+- name: TestCase
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\TestCase
+- name: RedirectResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\RedirectResponse
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: ControllerEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ControllerEvent
+- name: KernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\KernelInterface
+properties: []
+methods:
+- name: testRouteRedirectControllerNoRouteAtrribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRouteRedirectControllerWithRouteAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: createControllerEvent
+  visibility: protected
+  parameters:
+  - name: request
+  comment: null
+traits:
+- Symfony\Bundle\FrameworkBundle\Controller\RedirectController
+- Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector
+- Symfony\Bundle\FrameworkBundle\Tests\TestCase
+- Symfony\Component\HttpFoundation\RedirectResponse
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\Event\ControllerEvent
+- Symfony\Component\HttpKernel\KernelInterface
+interfaces: []

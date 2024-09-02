@@ -1,0 +1,137 @@
+name: FileTypeTest
+class_comment: null
+dependencies:
+- name: CoreExtension
+  type: class
+  source: Symfony\Component\Form\Extension\Core\CoreExtension
+- name: HttpFoundationRequestHandler
+  type: class
+  source: Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationRequestHandler
+- name: NativeRequestHandler
+  type: class
+  source: Symfony\Component\Form\NativeRequestHandler
+- name: RequestHandlerInterface
+  type: class
+  source: Symfony\Component\Form\RequestHandlerInterface
+- name: File
+  type: class
+  source: Symfony\Component\HttpFoundation\File\File
+- name: UploadedFile
+  type: class
+  source: Symfony\Component\HttpFoundation\File\UploadedFile
+- name: IdentityTranslator
+  type: class
+  source: Symfony\Component\Translation\IdentityTranslator
+properties: []
+methods:
+- name: getExtensions
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testSetData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmit
+  visibility: public
+  parameters:
+  - name: requestHandler
+  comment: '# * @dataProvider requestHandlerProvider'
+- name: testSetDataMultiple
+  visibility: public
+  parameters:
+  - name: requestHandler
+  comment: '# * @dataProvider requestHandlerProvider'
+- name: testSubmitMultiple
+  visibility: public
+  parameters:
+  - name: requestHandler
+  comment: '# * @dataProvider requestHandlerProvider'
+- name: testDontPassValueToView
+  visibility: public
+  parameters:
+  - name: requestHandler
+  comment: '# * @dataProvider requestHandlerProvider'
+- name: testPassMultipartFalseToView
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitNull
+  visibility: public
+  parameters:
+  - name: expected
+    default: 'null'
+  - name: norm
+    default: 'null'
+  - name: view
+    default: 'null'
+  comment: null
+- name: testSubmitNullWhenMultiple
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmittedFilePathsAreDropped
+  visibility: public
+  parameters:
+  - name: requestHandler
+  comment: '# * @dataProvider requestHandlerProvider'
+- name: testMultipleSubmittedFilePathsAreDropped
+  visibility: public
+  parameters:
+  - name: requestHandler
+  comment: '# * @dataProvider requestHandlerProvider'
+- name: testSubmitNonArrayValueWhenMultiple
+  visibility: public
+  parameters:
+  - name: requestHandler
+  comment: '# * @dataProvider requestHandlerProvider'
+- name: requestHandlerProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFailedFileUploadIsTurnedIntoFormErrorUsingHttpFoundationRequestHandler
+  visibility: public
+  parameters:
+  - name: errorCode
+  - name: expectedErrorMessage
+  comment: '# * @dataProvider uploadFileErrorCodes'
+- name: testFailedFileUploadIsTurnedIntoFormErrorUsingNativeRequestHandler
+  visibility: public
+  parameters:
+  - name: errorCode
+  - name: expectedErrorMessage
+  comment: '# * @dataProvider uploadFileErrorCodes'
+- name: testMultipleSubmittedFailedFileUploadsAreTurnedIntoFormErrorUsingHttpFoundationRequestHandler
+  visibility: public
+  parameters:
+  - name: errorCode
+  - name: expectedErrorMessage
+  comment: '# * @dataProvider uploadFileErrorCodes'
+- name: testMultipleSubmittedFailedFileUploadsAreTurnedIntoFormErrorUsingNativeRequestHandler
+  visibility: public
+  parameters:
+  - name: errorCode
+  - name: expectedErrorMessage
+  comment: '# * @dataProvider uploadFileErrorCodes'
+- name: uploadFileErrorCodes
+  visibility: public
+  parameters: []
+  comment: null
+- name: createUploadedFile
+  visibility: private
+  parameters:
+  - name: requestHandler
+  - name: path
+  - name: originalName
+  - name: errorCode
+    default: '0'
+  comment: null
+traits:
+- Symfony\Component\Form\Extension\Core\CoreExtension
+- Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationRequestHandler
+- Symfony\Component\Form\NativeRequestHandler
+- Symfony\Component\Form\RequestHandlerInterface
+- Symfony\Component\HttpFoundation\File\File
+- Symfony\Component\HttpFoundation\File\UploadedFile
+- Symfony\Component\Translation\IdentityTranslator
+interfaces: []

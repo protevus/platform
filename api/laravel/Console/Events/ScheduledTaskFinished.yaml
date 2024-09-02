@@ -1,0 +1,35 @@
+name: ScheduledTaskFinished
+class_comment: null
+dependencies:
+- name: Event
+  type: class
+  source: Illuminate\Console\Scheduling\Event
+properties:
+- name: task
+  visibility: public
+  comment: '# * The scheduled event that ran.
+
+    # *
+
+    # * @var \Illuminate\Console\Scheduling\Event'
+- name: runtime
+  visibility: public
+  comment: '# * The runtime of the scheduled event.
+
+    # *
+
+    # * @var float'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: task
+  - name: runtime
+  comment: "# * The scheduled event that ran.\n# *\n# * @var \\Illuminate\\Console\\\
+    Scheduling\\Event\n# */\n# public $task;\n# \n# /**\n# * The runtime of the scheduled\
+    \ event.\n# *\n# * @var float\n# */\n# public $runtime;\n# \n# /**\n# * Create\
+    \ a new event instance.\n# *\n# * @param  \\Illuminate\\Console\\Scheduling\\\
+    Event  $task\n# * @param  float  $runtime\n# * @return void"
+traits:
+- Illuminate\Console\Scheduling\Event
+interfaces: []

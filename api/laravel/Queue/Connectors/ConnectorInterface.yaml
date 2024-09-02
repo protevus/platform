@@ -1,0 +1,18 @@
+name: ConnectorInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: connect
+  visibility: public
+  parameters:
+  - name: config
+  comment: '# * Establish a queue connection.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Contracts\Queue\Queue'
+traits: []
+interfaces: []

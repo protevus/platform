@@ -1,0 +1,27 @@
+name: BackedEnumNormalizerContextBuilderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: BackedEnumNormalizerContextBuilder
+  type: class
+  source: Symfony\Component\Serializer\Context\Normalizer\BackedEnumNormalizerContextBuilder
+- name: BackedEnumNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\BackedEnumNormalizer
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testWithers
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Serializer\Context\Normalizer\BackedEnumNormalizerContextBuilder
+- Symfony\Component\Serializer\Normalizer\BackedEnumNormalizer
+interfaces: []

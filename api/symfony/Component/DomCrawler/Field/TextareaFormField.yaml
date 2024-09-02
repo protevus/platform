@@ -1,0 +1,35 @@
+name: TextareaFormField
+class_comment: '# * TextareaFormField represents a textarea form field (an HTML textarea
+  tag).
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies: []
+properties: []
+methods:
+- name: initialize
+  visibility: protected
+  parameters: []
+  comment: '# * TextareaFormField represents a textarea form field (an HTML textarea
+    tag).
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # class TextareaFormField extends FormField
+
+    # {
+
+    # /**
+
+    # * Initializes the form field.
+
+    # *
+
+    # * @throws \LogicException When node type is incorrect'
+traits: []
+interfaces: []

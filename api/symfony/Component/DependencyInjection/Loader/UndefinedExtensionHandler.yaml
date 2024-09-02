@@ -1,0 +1,15 @@
+name: UndefinedExtensionHandler
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getErrorMessage
+  visibility: public
+  parameters:
+  - name: extensionName
+  - name: loadingFilePath
+  - name: namespaceOrAlias
+  - name: foundExtensionNamespaces
+  comment: null
+traits: []
+interfaces: []

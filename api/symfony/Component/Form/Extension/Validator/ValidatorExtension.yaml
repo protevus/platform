@@ -1,0 +1,62 @@
+name: ValidatorExtension
+class_comment: '# * Extension supporting the Symfony Validator component in forms.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: AbstractExtension
+  type: class
+  source: Symfony\Component\Form\AbstractExtension
+- name: Form
+  type: class
+  source: Symfony\Component\Form\Extension\Validator\Constraints\Form
+- name: FormRendererInterface
+  type: class
+  source: Symfony\Component\Form\FormRendererInterface
+- name: FormTypeGuesserInterface
+  type: class
+  source: Symfony\Component\Form\FormTypeGuesserInterface
+- name: Traverse
+  type: class
+  source: Symfony\Component\Validator\Constraints\Traverse
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+- name: ValidatorInterface
+  type: class
+  source: Symfony\Component\Validator\Validator\ValidatorInterface
+- name: TranslatorInterface
+  type: class
+  source: Symfony\Contracts\Translation\TranslatorInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: validator
+  - name: legacyErrorMessages
+    default: 'true'
+  - name: formRenderer
+    default: 'null'
+  - name: translator
+    default: 'null'
+  comment: null
+- name: loadTypeGuesser
+  visibility: public
+  parameters: []
+  comment: null
+- name: loadTypeExtensions
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\AbstractExtension
+- Symfony\Component\Form\Extension\Validator\Constraints\Form
+- Symfony\Component\Form\FormRendererInterface
+- Symfony\Component\Form\FormTypeGuesserInterface
+- Symfony\Component\Validator\Constraints\Traverse
+- Symfony\Component\Validator\Mapping\ClassMetadata
+- Symfony\Component\Validator\Validator\ValidatorInterface
+- Symfony\Contracts\Translation\TranslatorInterface
+interfaces: []

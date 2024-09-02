@@ -1,0 +1,112 @@
+name: Cursor
+class_comment: null
+dependencies:
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: UnexpectedValueException
+  type: class
+  source: UnexpectedValueException
+properties:
+- name: parameters
+  visibility: protected
+  comment: '# * The parameters associated with the cursor.
+
+    # *
+
+    # * @var array'
+- name: pointsToNextItems
+  visibility: protected
+  comment: '# * Determine whether the cursor points to the next or previous set of
+    items.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: parameters
+  - name: pointsToNextItems
+    default: 'true'
+  comment: "# * The parameters associated with the cursor.\n# *\n# * @var array\n\
+    # */\n# protected $parameters;\n# \n# /**\n# * Determine whether the cursor points\
+    \ to the next or previous set of items.\n# *\n# * @var bool\n# */\n# protected\
+    \ $pointsToNextItems;\n# \n# /**\n# * Create a new cursor instance.\n# *\n# *\
+    \ @param  array  $parameters\n# * @param  bool  $pointsToNextItems"
+- name: parameter
+  visibility: public
+  parameters:
+  - name: parameterName
+  comment: '# * Get the given parameter from the cursor.
+
+    # *
+
+    # * @param  string  $parameterName
+
+    # * @return string|null
+
+    # *
+
+    # * @throws \UnexpectedValueException'
+- name: parameters
+  visibility: public
+  parameters:
+  - name: parameterNames
+  comment: '# * Get the given parameters from the cursor.
+
+    # *
+
+    # * @param  array  $parameterNames
+
+    # * @return array'
+- name: pointsToNextItems
+  visibility: public
+  parameters: []
+  comment: '# * Determine whether the cursor points to the next set of items.
+
+    # *
+
+    # * @return bool'
+- name: pointsToPreviousItems
+  visibility: public
+  parameters: []
+  comment: '# * Determine whether the cursor points to the previous set of items.
+
+    # *
+
+    # * @return bool'
+- name: toArray
+  visibility: public
+  parameters: []
+  comment: '# * Get the array representation of the cursor.
+
+    # *
+
+    # * @return array'
+- name: encode
+  visibility: public
+  parameters: []
+  comment: '# * Get the encoded string representation of the cursor to construct a
+    URL.
+
+    # *
+
+    # * @return string'
+- name: fromEncoded
+  visibility: public
+  parameters:
+  - name: encodedString
+  comment: '# * Get a cursor instance from the encoded string representation.
+
+    # *
+
+    # * @param  string|null  $encodedString
+
+    # * @return static|null'
+traits:
+- Illuminate\Contracts\Support\Arrayable
+- UnexpectedValueException
+interfaces:
+- Arrayable

@@ -1,0 +1,43 @@
+name: ExecutionContextFactoryInterface
+class_comment: null
+dependencies:
+- name: ValidatorInterface
+  type: class
+  source: Symfony\Component\Validator\Validator\ValidatorInterface
+properties: []
+methods:
+- name: createContext
+  visibility: public
+  parameters:
+  - name: validator
+  - name: root
+  comment: '# * Creates instances of {@link ExecutionContextInterface}.
+
+    # *
+
+    # * You can use a custom factory if you want to customize the execution context
+
+    # * that is passed through the validation run.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # interface ExecutionContextFactoryInterface
+
+    # {
+
+    # /**
+
+    # * Creates a new execution context.
+
+    # *
+
+    # * @param mixed $root The root value of the validated
+
+    # *                    object graph'
+traits:
+- Symfony\Component\Validator\Validator\ValidatorInterface
+interfaces: []

@@ -1,0 +1,48 @@
+name: BackedEnumNormalizer
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Serializer\Exception\InvalidArgumentException
+- name: NotNormalizableValueException
+  type: class
+  source: Symfony\Component\Serializer\Exception\NotNormalizableValueException
+properties: []
+methods:
+- name: denormalize
+  visibility: public
+  parameters:
+  - name: data
+  - name: type
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: "# * Normalizes a {@see \\BackedEnum} enumeration to a string or an integer.\n\
+    # *\n# * @author Alexandre Daubois <alex.daubois@gmail.com>\n# */\n# final class\
+    \ BackedEnumNormalizer implements NormalizerInterface, DenormalizerInterface\n\
+    # {\n# /**\n# * If true, will denormalize any invalid value into null.\n# */\n\
+    # public const ALLOW_INVALID_VALUES = 'allow_invalid_values';\n# \n# public function\
+    \ getSupportedTypes(?string $format): array\n# {\n# return [\n# \\BackedEnum::class\
+    \ => true,\n# ];\n# }\n# \n# public function normalize(mixed $object, ?string\
+    \ $format = null, array $context = []): int|string\n# {\n# if (!$object instanceof\
+    \ \\BackedEnum) {\n# throw new InvalidArgumentException('The data must belong\
+    \ to a backed enumeration.');\n# }\n# \n# return $object->value;\n# }\n# \n# public\
+    \ function supportsNormalization(mixed $data, ?string $format = null, array $context\
+    \ = []): bool\n# {\n# return $data instanceof \\BackedEnum;\n# }\n# \n# /**\n\
+    # * @throws NotNormalizableValueException"
+- name: supportsDenormalization
+  visibility: public
+  parameters:
+  - name: data
+  - name: type
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\Serializer\Exception\InvalidArgumentException
+- Symfony\Component\Serializer\Exception\NotNormalizableValueException
+interfaces:
+- NormalizerInterface

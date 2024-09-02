@@ -1,0 +1,155 @@
+name: MergeExtensionConfigurationPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: TreeBuilder
+  type: class
+  source: Symfony\Component\Config\Definition\Builder\TreeBuilder
+- name: ConfigurationInterface
+  type: class
+  source: Symfony\Component\Config\Definition\ConfigurationInterface
+- name: FileResource
+  type: class
+  source: Symfony\Component\Config\Resource\FileResource
+- name: MergeExtensionConfigurationContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationContainerBuilder
+- name: MergeExtensionConfigurationPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ParameterNotFoundException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: Extension
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\Extension
+- name: ExtensionInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+- name: ParameterBag
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- name: ExpressionFunctionProviderInterface
+  type: class
+  source: Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface
+properties: []
+methods:
+- name: testExpressionLanguageProviderForwarding
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtensionLoadGetAMergeExtensionConfigurationContainerBuilderInstance
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExtensionConfigurationIsTrackedByDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOverriddenEnvsAreMerged
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessedEnvsAreIncompatibleWithResolve
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowingExtensionsGetMergedBag
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMissingParameterIncludesExtension
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReuseEnvPlaceholderGeneratedByPreviousExtension
+  visibility: public
+  parameters: []
+  comment: null
+- name: getConfigTreeBuilder
+  visibility: public
+  parameters: []
+  comment: null
+- name: getAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: getConfiguration
+  visibility: public
+  parameters:
+  - name: config
+  - name: container
+  comment: null
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: container
+  comment: null
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: container
+  comment: null
+- name: getAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: getConfiguration
+  visibility: public
+  parameters:
+  - name: config
+  - name: container
+  comment: null
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: container
+  comment: null
+- name: getConfigTreeBuilder
+  visibility: public
+  parameters: []
+  comment: null
+- name: getAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: getConfiguration
+  visibility: public
+  parameters:
+  - name: config
+  - name: container
+  comment: null
+- name: load
+  visibility: public
+  parameters:
+  - name: configs
+  - name: container
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Config\Definition\Builder\TreeBuilder
+- Symfony\Component\Config\Definition\ConfigurationInterface
+- Symfony\Component\Config\Resource\FileResource
+- Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationContainerBuilder
+- Symfony\Component\DependencyInjection\Compiler\MergeExtensionConfigurationPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Extension\Extension
+- Symfony\Component\DependencyInjection\Extension\ExtensionInterface
+- Symfony\Component\DependencyInjection\ParameterBag\ParameterBag
+- Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface
+interfaces:
+- ConfigurationInterface
+- ConfigurationInterface

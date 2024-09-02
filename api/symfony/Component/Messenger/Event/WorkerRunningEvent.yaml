@@ -1,0 +1,20 @@
+name: WorkerRunningEvent
+class_comment: null
+dependencies:
+- name: Worker
+  type: class
+  source: Symfony\Component\Messenger\Worker
+properties: []
+methods:
+- name: isWorkerIdle
+  visibility: public
+  parameters: []
+  comment: "# * Dispatched after the worker processed a message or didn't receive\
+    \ a message at all.\n# *\n# * @author Tobias Schultze <http://tobion.de>\n# */\n\
+    # final class WorkerRunningEvent\n# {\n# public function __construct(\n# private\
+    \ Worker $worker,\n# private bool $isWorkerIdle,\n# ) {\n# }\n# \n# public function\
+    \ getWorker(): Worker\n# {\n# return $this->worker;\n# }\n# \n# /**\n# * Returns\
+    \ true when no message has been received by the worker."
+traits:
+- Symfony\Component\Messenger\Worker
+interfaces: []

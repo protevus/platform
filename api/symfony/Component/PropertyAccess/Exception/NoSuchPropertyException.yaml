@@ -1,0 +1,11 @@
+name: NoSuchPropertyException
+class_comment: '# * Thrown when a property cannot be found.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies: []
+properties: []
+methods: []
+traits: []
+interfaces: []

@@ -1,0 +1,41 @@
+name: VirtualRequestStack
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: RequestStack
+  type: class
+  source: Symfony\Component\HttpFoundation\RequestStack
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: decorated
+  comment: null
+- name: push
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+- name: pop
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCurrentRequest
+  visibility: public
+  parameters: []
+  comment: null
+- name: getMainRequest
+  visibility: public
+  parameters: []
+  comment: null
+- name: getParentRequest
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\RequestStack
+interfaces: []

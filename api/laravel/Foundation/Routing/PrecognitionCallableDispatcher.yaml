@@ -1,0 +1,29 @@
+name: PrecognitionCallableDispatcher
+class_comment: null
+dependencies:
+- name: CallableDispatcher
+  type: class
+  source: Illuminate\Routing\CallableDispatcher
+- name: Route
+  type: class
+  source: Illuminate\Routing\Route
+properties: []
+methods:
+- name: dispatch
+  visibility: public
+  parameters:
+  - name: route
+  - name: callable
+  comment: '# * Dispatch a request to a given callable.
+
+    # *
+
+    # * @param  \Illuminate\Routing\Route  $route
+
+    # * @param  callable  $callable
+
+    # * @return mixed'
+traits:
+- Illuminate\Routing\CallableDispatcher
+- Illuminate\Routing\Route
+interfaces: []

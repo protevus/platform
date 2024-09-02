@@ -1,0 +1,151 @@
+name: ErrorListener
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: LogLevel
+  type: class
+  source: Psr\Log\LogLevel
+- name: ErrorHandler
+  type: class
+  source: Symfony\Component\ErrorHandler\ErrorHandler
+- name: FlattenException
+  type: class
+  source: Symfony\Component\ErrorHandler\Exception\FlattenException
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: WithHttpStatus
+  type: class
+  source: Symfony\Component\HttpKernel\Attribute\WithHttpStatus
+- name: WithLogLevel
+  type: class
+  source: Symfony\Component\HttpKernel\Attribute\WithLogLevel
+- name: ControllerArgumentsEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent
+- name: ExceptionEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ExceptionEvent
+- name: ResponseEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ResponseEvent
+- name: HttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\HttpException
+- name: HttpExceptionInterface
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\HttpExceptionInterface
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+- name: KernelEvents
+  type: class
+  source: Symfony\Component\HttpKernel\KernelEvents
+- name: DebugLoggerConfigurator
+  type: class
+  source: Symfony\Component\HttpKernel\Log\DebugLoggerConfigurator
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: controller
+  - name: logger
+    default: 'null'
+  - name: debug
+    default: 'false'
+  - name: exceptionsMapping
+    default: '[]'
+  comment: '# * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # class ErrorListener implements EventSubscriberInterface
+
+    # {
+
+    # /**
+
+    # * @param array<class-string, array{log_level: string|null, status_code: int<100,599>|null}>
+    $exceptionsMapping'
+- name: logKernelException
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: onKernelException
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: removeCspHeader
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: onControllerArguments
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: getSubscribedEvents
+  visibility: public
+  parameters: []
+  comment: null
+- name: logException
+  visibility: protected
+  parameters:
+  - name: exception
+  - name: message
+  - name: logLevel
+    default: 'null'
+  comment: '# * Logs an exception.'
+- name: resolveLogLevel
+  visibility: private
+  parameters:
+  - name: throwable
+  comment: '# * Resolves the level to be used when logging the exception.'
+- name: duplicateRequest
+  visibility: protected
+  parameters:
+  - name: exception
+  - name: request
+  comment: '# * Clones the request for the exception.'
+- name: getInheritedAttribute
+  visibility: private
+  parameters:
+  - name: class
+  - name: attribute
+  comment: '# * @template T
+
+    # *
+
+    # * @param class-string<T> $attribute
+
+    # *
+
+    # * @return T|null'
+traits:
+- Psr\Log\LoggerInterface
+- Psr\Log\LogLevel
+- Symfony\Component\ErrorHandler\ErrorHandler
+- Symfony\Component\ErrorHandler\Exception\FlattenException
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\Attribute\WithHttpStatus
+- Symfony\Component\HttpKernel\Attribute\WithLogLevel
+- Symfony\Component\HttpKernel\Event\ControllerArgumentsEvent
+- Symfony\Component\HttpKernel\Event\ExceptionEvent
+- Symfony\Component\HttpKernel\Event\ResponseEvent
+- Symfony\Component\HttpKernel\Exception\HttpException
+- Symfony\Component\HttpKernel\Exception\HttpExceptionInterface
+- Symfony\Component\HttpKernel\HttpKernelInterface
+- Symfony\Component\HttpKernel\KernelEvents
+- Symfony\Component\HttpKernel\Log\DebugLoggerConfigurator
+interfaces:
+- EventSubscriberInterface

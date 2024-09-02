@@ -1,0 +1,39 @@
+name: RedisSenderTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: DummyMessage
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Redis\Tests\Fixtures\DummyMessage
+- name: Connection
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Redis\Transport\Connection
+- name: RedisSender
+  type: class
+  source: Symfony\Component\Messenger\Bridge\Redis\Transport\RedisSender
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: TransportMessageIdStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\TransportMessageIdStamp
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+properties: []
+methods:
+- name: testSend
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Bridge\Redis\Tests\Fixtures\DummyMessage
+- Symfony\Component\Messenger\Bridge\Redis\Transport\Connection
+- Symfony\Component\Messenger\Bridge\Redis\Transport\RedisSender
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Stamp\TransportMessageIdStamp
+- Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+interfaces: []

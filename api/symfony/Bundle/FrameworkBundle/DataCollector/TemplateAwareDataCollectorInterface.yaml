@@ -1,0 +1,15 @@
+name: TemplateAwareDataCollectorInterface
+class_comment: null
+dependencies:
+- name: DataCollectorInterface
+  type: class
+  source: Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface
+properties: []
+methods:
+- name: getTemplate
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface
+interfaces: []

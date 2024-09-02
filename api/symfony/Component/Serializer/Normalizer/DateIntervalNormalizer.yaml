@@ -1,0 +1,68 @@
+name: DateIntervalNormalizer
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Serializer\Exception\InvalidArgumentException
+- name: NotNormalizableValueException
+  type: class
+  source: Symfony\Component\Serializer\Exception\NotNormalizableValueException
+properties: []
+methods:
+- name: normalize
+  visibility: public
+  parameters:
+  - name: object
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: "# * Normalizes an instance of {@see \\DateInterval} to an interval string.\n\
+    # * Denormalizes an interval string to an instance of {@see \\DateInterval}.\n\
+    # *\n# * @author J\xE9r\xF4me Parmentier <jerome@prmntr.me>\n# */\n# final class\
+    \ DateIntervalNormalizer implements NormalizerInterface, DenormalizerInterface\n\
+    # {\n# public const FORMAT_KEY = 'dateinterval_format';\n# \n# private array $defaultContext\
+    \ = [\n# self::FORMAT_KEY => '%rP%yY%mM%dDT%hH%iM%sS',\n# ];\n# \n# public function\
+    \ __construct(array $defaultContext = [])\n# {\n# $this->defaultContext = array_merge($this->defaultContext,\
+    \ $defaultContext);\n# }\n# \n# public function getSupportedTypes(?string $format):\
+    \ array\n# {\n# return [\n# \\DateInterval::class => true,\n# ];\n# }\n# \n# /**\n\
+    # * @throws InvalidArgumentException"
+- name: supportsNormalization
+  visibility: public
+  parameters:
+  - name: data
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: denormalize
+  visibility: public
+  parameters:
+  - name: data
+  - name: type
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: '# * @throws NotNormalizableValueException'
+- name: supportsDenormalization
+  visibility: public
+  parameters:
+  - name: data
+  - name: type
+  - name: format
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+- name: isISO8601
+  visibility: private
+  parameters:
+  - name: string
+  comment: null
+traits:
+- Symfony\Component\Serializer\Exception\InvalidArgumentException
+- Symfony\Component\Serializer\Exception\NotNormalizableValueException
+interfaces:
+- NormalizerInterface

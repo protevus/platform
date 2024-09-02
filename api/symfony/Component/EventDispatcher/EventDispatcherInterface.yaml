@@ -1,0 +1,94 @@
+name: EventDispatcherInterface
+class_comment: null
+dependencies:
+- name: ContractsEventDispatcherInterface
+  type: class
+  source: Symfony\Contracts\EventDispatcher\EventDispatcherInterface
+properties: []
+methods:
+- name: addListener
+  visibility: public
+  parameters:
+  - name: eventName
+  - name: listener
+  - name: priority
+    default: '0'
+  comment: '# * The EventDispatcherInterface is the central point of Symfony''s event
+    listener system.
+
+    # * Listeners are registered on the manager and events are dispatched through
+    the
+
+    # * manager.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # interface EventDispatcherInterface extends ContractsEventDispatcherInterface
+
+    # {
+
+    # /**
+
+    # * Adds an event listener that listens on the specified events.
+
+    # *
+
+    # * @param int $priority The higher this value, the earlier an event
+
+    # *                      listener will be triggered in the chain (defaults to
+    0)'
+- name: addSubscriber
+  visibility: public
+  parameters:
+  - name: subscriber
+  comment: '# * Adds an event subscriber.
+
+    # *
+
+    # * The subscriber is asked for all the events it is
+
+    # * interested in and added as a listener for these events.'
+- name: removeListener
+  visibility: public
+  parameters:
+  - name: eventName
+  - name: listener
+  comment: '# * Removes an event listener from the specified events.'
+- name: removeSubscriber
+  visibility: public
+  parameters:
+  - name: subscriber
+  comment: null
+- name: getListeners
+  visibility: public
+  parameters:
+  - name: eventName
+    default: 'null'
+  comment: '# * Gets the listeners of a specific event or all listeners sorted by
+    descending priority.
+
+    # *
+
+    # * @return array<callable[]|callable>'
+- name: getListenerPriority
+  visibility: public
+  parameters:
+  - name: eventName
+  - name: listener
+  comment: '# * Gets the listener priority for a specific event.
+
+    # *
+
+    # * Returns null if the event or the listener does not exist.'
+- name: hasListeners
+  visibility: public
+  parameters:
+  - name: eventName
+    default: 'null'
+  comment: '# * Checks whether an event has any registered listeners.'
+traits: []
+interfaces: []

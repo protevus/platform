@@ -1,0 +1,134 @@
+name: ExpressionValidatorTest
+class_comment: null
+dependencies:
+- name: ExpressionLanguage
+  type: class
+  source: Symfony\Component\ExpressionLanguage\ExpressionLanguage
+- name: Expression
+  type: class
+  source: Symfony\Component\Validator\Constraints\Expression
+- name: ExpressionLanguageProvider
+  type: class
+  source: Symfony\Component\Validator\Constraints\ExpressionLanguageProvider
+- name: ExpressionValidator
+  type: class
+  source: Symfony\Component\Validator\Constraints\ExpressionValidator
+- name: NotNull
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotNull
+- name: Range
+  type: class
+  source: Symfony\Component\Validator\Constraints\Range
+- name: ConstraintViolation
+  type: class
+  source: Symfony\Component\Validator\ConstraintViolation
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+- name: Entity
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\Entity
+- name: ToString
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\ToString
+properties: []
+methods:
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testExpressionIsEvaluatedWithNullValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testExpressionIsEvaluatedWithEmptyStringValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSucceedingExpressionAtObjectLevel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFailingExpressionAtObjectLevel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSucceedingExpressionAtObjectLevelWithToString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFailingExpressionAtObjectLevelWithToString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSucceedingExpressionAtPropertyLevel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFailingExpressionAtPropertyLevel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSucceedingExpressionAtNestedPropertyLevel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFailingExpressionAtNestedPropertyLevel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSucceedingExpressionAtPropertyLevelWithoutRoot
+  visibility: public
+  parameters: []
+  comment: '# * When validatePropertyValue() is called with a class name
+
+    # * https://github.com/symfony/symfony/pull/11498.'
+- name: testFailingExpressionAtPropertyLevelWithoutRoot
+  visibility: public
+  parameters: []
+  comment: '# * When validatePropertyValue() is called with a class name
+
+    # * https://github.com/symfony/symfony/pull/11498.'
+- name: testExpressionLanguageUsage
+  visibility: public
+  parameters: []
+  comment: null
+- name: testPassingCustomValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testViolationOnPass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsValidExpression
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsValidExpressionInvalid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompileIsValid
+  visibility: public
+  parameters:
+  - name: expression
+  - name: names
+  - name: expected
+  comment: '# * @dataProvider provideCompileIsValid'
+- name: provideCompileIsValid
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\ExpressionLanguage\ExpressionLanguage
+- Symfony\Component\Validator\Constraints\Expression
+- Symfony\Component\Validator\Constraints\ExpressionLanguageProvider
+- Symfony\Component\Validator\Constraints\ExpressionValidator
+- Symfony\Component\Validator\Constraints\NotNull
+- Symfony\Component\Validator\Constraints\Range
+- Symfony\Component\Validator\ConstraintViolation
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+- Symfony\Component\Validator\Tests\Fixtures\NestedAttribute\Entity
+- Symfony\Component\Validator\Tests\Fixtures\ToString
+interfaces: []

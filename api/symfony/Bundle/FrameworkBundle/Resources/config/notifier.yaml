@@ -1,0 +1,95 @@
+name: notifier
+class_comment: null
+dependencies:
+- name: NotifierHandler
+  type: class
+  source: Symfony\Bridge\Monolog\Handler\NotifierHandler
+- name: BrowserChannel
+  type: class
+  source: Symfony\Component\Notifier\Channel\BrowserChannel
+- name: ChannelPolicy
+  type: class
+  source: Symfony\Component\Notifier\Channel\ChannelPolicy
+- name: ChatChannel
+  type: class
+  source: Symfony\Component\Notifier\Channel\ChatChannel
+- name: EmailChannel
+  type: class
+  source: Symfony\Component\Notifier\Channel\EmailChannel
+- name: PushChannel
+  type: class
+  source: Symfony\Component\Notifier\Channel\PushChannel
+- name: SmsChannel
+  type: class
+  source: Symfony\Component\Notifier\Channel\SmsChannel
+- name: Chatter
+  type: class
+  source: Symfony\Component\Notifier\Chatter
+- name: ChatterInterface
+  type: class
+  source: Symfony\Component\Notifier\ChatterInterface
+- name: NotificationLoggerListener
+  type: class
+  source: Symfony\Component\Notifier\EventListener\NotificationLoggerListener
+- name: SendFailedMessageToNotifierListener
+  type: class
+  source: Symfony\Component\Notifier\EventListener\SendFailedMessageToNotifierListener
+- name: DefaultFlashMessageImportanceMapper
+  type: class
+  source: Symfony\Component\Notifier\FlashMessage\DefaultFlashMessageImportanceMapper
+- name: ChatMessage
+  type: class
+  source: Symfony\Component\Notifier\Message\ChatMessage
+- name: PushMessage
+  type: class
+  source: Symfony\Component\Notifier\Message\PushMessage
+- name: SmsMessage
+  type: class
+  source: Symfony\Component\Notifier\Message\SmsMessage
+- name: MessageHandler
+  type: class
+  source: Symfony\Component\Notifier\Messenger\MessageHandler
+- name: Notifier
+  type: class
+  source: Symfony\Component\Notifier\Notifier
+- name: NotifierInterface
+  type: class
+  source: Symfony\Component\Notifier\NotifierInterface
+- name: Texter
+  type: class
+  source: Symfony\Component\Notifier\Texter
+- name: TexterInterface
+  type: class
+  source: Symfony\Component\Notifier\TexterInterface
+- name: Transport
+  type: class
+  source: Symfony\Component\Notifier\Transport
+- name: Transports
+  type: class
+  source: Symfony\Component\Notifier\Transport\Transports
+properties: []
+methods: []
+traits:
+- Symfony\Bridge\Monolog\Handler\NotifierHandler
+- Symfony\Component\Notifier\Channel\BrowserChannel
+- Symfony\Component\Notifier\Channel\ChannelPolicy
+- Symfony\Component\Notifier\Channel\ChatChannel
+- Symfony\Component\Notifier\Channel\EmailChannel
+- Symfony\Component\Notifier\Channel\PushChannel
+- Symfony\Component\Notifier\Channel\SmsChannel
+- Symfony\Component\Notifier\Chatter
+- Symfony\Component\Notifier\ChatterInterface
+- Symfony\Component\Notifier\EventListener\NotificationLoggerListener
+- Symfony\Component\Notifier\EventListener\SendFailedMessageToNotifierListener
+- Symfony\Component\Notifier\FlashMessage\DefaultFlashMessageImportanceMapper
+- Symfony\Component\Notifier\Message\ChatMessage
+- Symfony\Component\Notifier\Message\PushMessage
+- Symfony\Component\Notifier\Message\SmsMessage
+- Symfony\Component\Notifier\Messenger\MessageHandler
+- Symfony\Component\Notifier\Notifier
+- Symfony\Component\Notifier\NotifierInterface
+- Symfony\Component\Notifier\Texter
+- Symfony\Component\Notifier\TexterInterface
+- Symfony\Component\Notifier\Transport
+- Symfony\Component\Notifier\Transport\Transports
+interfaces: []

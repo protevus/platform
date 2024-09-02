@@ -1,0 +1,71 @@
+name: CollectionTypeTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\TypeInfo\Exception\InvalidArgumentException
+- name: Type
+  type: class
+  source: Symfony\Component\TypeInfo\Type
+- name: CollectionType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\CollectionType
+- name: GenericType
+  type: class
+  source: Symfony\Component\TypeInfo\Type\GenericType
+- name: TypeIdentifier
+  type: class
+  source: Symfony\Component\TypeInfo\TypeIdentifier
+properties: []
+methods:
+- name: testCanOnlyConstructListWithIntKeyType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsList
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetCollectionKeyType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetCollectionValueType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testToString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetBaseType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsNullable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAsNonNullable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsA
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProxiesMethodsToBaseType
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\TypeInfo\Exception\InvalidArgumentException
+- Symfony\Component\TypeInfo\Type
+- Symfony\Component\TypeInfo\Type\CollectionType
+- Symfony\Component\TypeInfo\Type\GenericType
+- Symfony\Component\TypeInfo\TypeIdentifier
+interfaces: []

@@ -1,0 +1,180 @@
+name: SendQueuedNotifications
+class_comment: null
+dependencies:
+- name: Queueable
+  type: class
+  source: Illuminate\Bus\Queueable
+- name: ShouldBeEncrypted
+  type: class
+  source: Illuminate\Contracts\Queue\ShouldBeEncrypted
+- name: ShouldQueue
+  type: class
+  source: Illuminate\Contracts\Queue\ShouldQueue
+- name: ShouldQueueAfterCommit
+  type: class
+  source: Illuminate\Contracts\Queue\ShouldQueueAfterCommit
+- name: EloquentCollection
+  type: class
+  source: Illuminate\Database\Eloquent\Collection
+- name: Model
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+- name: InteractsWithQueue
+  type: class
+  source: Illuminate\Queue\InteractsWithQueue
+- name: SerializesModels
+  type: class
+  source: Illuminate\Queue\SerializesModels
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+properties:
+- name: notifiables
+  visibility: public
+  comment: '# * The notifiable entities that should receive the notification.
+
+    # *
+
+    # * @var \Illuminate\Support\Collection'
+- name: notification
+  visibility: public
+  comment: '# * The notification to be sent.
+
+    # *
+
+    # * @var \Illuminate\Notifications\Notification'
+- name: channels
+  visibility: public
+  comment: '# * All of the channels to send the notification to.
+
+    # *
+
+    # * @var array'
+- name: tries
+  visibility: public
+  comment: '# * The number of times the job may be attempted.
+
+    # *
+
+    # * @var int'
+- name: timeout
+  visibility: public
+  comment: '# * The number of seconds the job can run before timing out.
+
+    # *
+
+    # * @var int'
+- name: maxExceptions
+  visibility: public
+  comment: '# * The maximum number of unhandled exceptions to allow before failing.
+
+    # *
+
+    # * @var int'
+- name: shouldBeEncrypted
+  visibility: public
+  comment: '# * Indicates if the job should be encrypted.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: notifiables
+  - name: notification
+  - name: channels
+    default: 'null'
+  comment: "# * The notifiable entities that should receive the notification.\n# *\n\
+    # * @var \\Illuminate\\Support\\Collection\n# */\n# public $notifiables;\n# \n\
+    # /**\n# * The notification to be sent.\n# *\n# * @var \\Illuminate\\Notifications\\\
+    Notification\n# */\n# public $notification;\n# \n# /**\n# * All of the channels\
+    \ to send the notification to.\n# *\n# * @var array\n# */\n# public $channels;\n\
+    # \n# /**\n# * The number of times the job may be attempted.\n# *\n# * @var int\n\
+    # */\n# public $tries;\n# \n# /**\n# * The number of seconds the job can run before\
+    \ timing out.\n# *\n# * @var int\n# */\n# public $timeout;\n# \n# /**\n# * The\
+    \ maximum number of unhandled exceptions to allow before failing.\n# *\n# * @var\
+    \ int\n# */\n# public $maxExceptions;\n# \n# /**\n# * Indicates if the job should\
+    \ be encrypted.\n# *\n# * @var bool\n# */\n# public $shouldBeEncrypted = false;\n\
+    # \n# /**\n# * Create a new job instance.\n# *\n# * @param  \\Illuminate\\Notifications\\\
+    Notifiable|\\Illuminate\\Support\\Collection  $notifiables\n# * @param  \\Illuminate\\\
+    Notifications\\Notification  $notification\n# * @param  array|null  $channels\n\
+    # * @return void"
+- name: wrapNotifiables
+  visibility: protected
+  parameters:
+  - name: notifiables
+  comment: '# * Wrap the notifiable(s) in a collection.
+
+    # *
+
+    # * @param  \Illuminate\Notifications\Notifiable|\Illuminate\Support\Collection  $notifiables
+
+    # * @return \Illuminate\Support\Collection'
+- name: handle
+  visibility: public
+  parameters:
+  - name: manager
+  comment: '# * Send the notifications.
+
+    # *
+
+    # * @param  \Illuminate\Notifications\ChannelManager  $manager
+
+    # * @return void'
+- name: displayName
+  visibility: public
+  parameters: []
+  comment: '# * Get the display name for the queued job.
+
+    # *
+
+    # * @return string'
+- name: failed
+  visibility: public
+  parameters:
+  - name: e
+  comment: '# * Call the failed method on the notification instance.
+
+    # *
+
+    # * @param  \Throwable  $e
+
+    # * @return void'
+- name: backoff
+  visibility: public
+  parameters: []
+  comment: '# * Get the number of seconds before a released notification will be available.
+
+    # *
+
+    # * @return mixed'
+- name: retryUntil
+  visibility: public
+  parameters: []
+  comment: '# * Determine the time at which the job should timeout.
+
+    # *
+
+    # * @return \DateTime|null'
+- name: __clone
+  visibility: public
+  parameters: []
+  comment: '# * Prepare the instance for cloning.
+
+    # *
+
+    # * @return void'
+traits:
+- Illuminate\Bus\Queueable
+- Illuminate\Contracts\Queue\ShouldBeEncrypted
+- Illuminate\Contracts\Queue\ShouldQueue
+- Illuminate\Contracts\Queue\ShouldQueueAfterCommit
+- Illuminate\Database\Eloquent\Model
+- Illuminate\Queue\InteractsWithQueue
+- Illuminate\Queue\SerializesModels
+- Illuminate\Support\Collection
+- InteractsWithQueue
+interfaces:
+- ShouldQueue

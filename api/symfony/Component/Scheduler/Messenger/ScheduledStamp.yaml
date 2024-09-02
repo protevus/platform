@@ -1,0 +1,21 @@
+name: ScheduledStamp
+class_comment: null
+dependencies:
+- name: StampInterface
+  type: class
+  source: Symfony\Component\Messenger\Stamp\StampInterface
+- name: MessageContext
+  type: class
+  source: Symfony\Component\Scheduler\Generator\MessageContext
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: messageContext
+  comment: null
+traits:
+- Symfony\Component\Messenger\Stamp\StampInterface
+- Symfony\Component\Scheduler\Generator\MessageContext
+interfaces:
+- StampInterface

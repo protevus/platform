@@ -1,0 +1,39 @@
+name: KernelBrowserTest
+class_comment: null
+dependencies:
+- name: KernelBrowser
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\KernelBrowser
+- name: AbstractWebTestCase
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Functional\AbstractWebTestCase
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+properties: []
+methods:
+- name: testRebootKernelBetweenRequests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDisabledRebootKernel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEnableRebootKernel
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRequestAfterKernelShutdownAndPerformedRequest
+  visibility: public
+  parameters: []
+  comment: null
+- name: getKernelMock
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Symfony\Bundle\FrameworkBundle\KernelBrowser
+- Symfony\Bundle\FrameworkBundle\Tests\Functional\AbstractWebTestCase
+- Symfony\Component\HttpFoundation\Response
+interfaces: []

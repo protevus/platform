@@ -1,0 +1,35 @@
+name: AnnounceEvent
+class_comment: null
+dependencies:
+- name: Marking
+  type: class
+  source: Symfony\Component\Workflow\Marking
+- name: Transition
+  type: class
+  source: Symfony\Component\Workflow\Transition
+- name: WorkflowInterface
+  type: class
+  source: Symfony\Component\Workflow\WorkflowInterface
+- name: HasContextTrait
+  type: class
+  source: HasContextTrait
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: subject
+  - name: marking
+  - name: transition
+    default: 'null'
+  - name: workflow
+    default: 'null'
+  - name: context
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\Workflow\Marking
+- Symfony\Component\Workflow\Transition
+- Symfony\Component\Workflow\WorkflowInterface
+- HasContextTrait
+interfaces: []

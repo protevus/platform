@@ -1,0 +1,15 @@
+name: templating_twig
+class_comment: null
+dependencies:
+- name: LogoutUrlExtension
+  type: class
+  source: Symfony\Bridge\Twig\Extension\LogoutUrlExtension
+- name: SecurityExtension
+  type: class
+  source: Symfony\Bridge\Twig\Extension\SecurityExtension
+properties: []
+methods: []
+traits:
+- Symfony\Bridge\Twig\Extension\LogoutUrlExtension
+- Symfony\Bridge\Twig\Extension\SecurityExtension
+interfaces: []

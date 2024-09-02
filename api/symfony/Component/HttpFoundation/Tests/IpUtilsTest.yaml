@@ -1,0 +1,90 @@
+name: IpUtilsTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: IpUtils
+  type: class
+  source: Symfony\Component\HttpFoundation\IpUtils
+properties: []
+methods:
+- name: testSeparateCachesPerProtocol
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIpv4
+  visibility: public
+  parameters:
+  - name: matches
+  - name: remoteAddr
+  - name: cidr
+  comment: '# * @dataProvider getIpv4Data'
+- name: getIpv4Data
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIpv6
+  visibility: public
+  parameters:
+  - name: matches
+  - name: remoteAddr
+  - name: cidr
+  comment: '# * @dataProvider getIpv6Data'
+- name: getIpv6Data
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAnIpv6WithOptionDisabledIpv6
+  visibility: public
+  parameters: []
+  comment: '# * @requires extension sockets'
+- name: testInvalidIpAddressesDoNotMatch
+  visibility: public
+  parameters:
+  - name: requestIp
+  - name: proxyIp
+  comment: '# * @dataProvider invalidIpAddressData'
+- name: invalidIpAddressData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAnonymize
+  visibility: public
+  parameters:
+  - name: ip
+  - name: expected
+  comment: '# * @dataProvider anonymizedIpData'
+- name: anonymizedIpData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIp4SubnetMaskZero
+  visibility: public
+  parameters:
+  - name: matches
+  - name: remoteAddr
+  - name: cidr
+  comment: '# * @dataProvider getIp4SubnetMaskZeroData'
+- name: getIp4SubnetMaskZeroData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIsPrivateIp
+  visibility: public
+  parameters:
+  - name: ip
+  - name: matches
+  comment: '# * @dataProvider getIsPrivateIpData'
+- name: getIsPrivateIpData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCacheSizeLimit
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\IpUtils
+interfaces: []

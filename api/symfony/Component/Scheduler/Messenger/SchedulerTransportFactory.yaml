@@ -1,0 +1,61 @@
+name: SchedulerTransportFactory
+class_comment: '# * @implements TransportFactoryInterface<SchedulerTransport>'
+dependencies:
+- name: ClockInterface
+  type: class
+  source: Psr\Clock\ClockInterface
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: Clock
+  type: class
+  source: Symfony\Component\Clock\Clock
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+- name: TransportFactoryInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\TransportFactoryInterface
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Scheduler\Exception\InvalidArgumentException
+- name: MessageGenerator
+  type: class
+  source: Symfony\Component\Scheduler\Generator\MessageGenerator
+- name: ScheduleProviderInterface
+  type: class
+  source: Symfony\Component\Scheduler\ScheduleProviderInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: scheduleProviders
+  - name: clock
+    default: new Clock(
+  comment: null
+- name: createTransport
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: options
+  - name: serializer
+  comment: null
+- name: supports
+  visibility: public
+  parameters:
+  - name: dsn
+  - name: options
+  comment: null
+traits:
+- Psr\Clock\ClockInterface
+- Psr\Container\ContainerInterface
+- Symfony\Component\Clock\Clock
+- Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+- Symfony\Component\Messenger\Transport\TransportFactoryInterface
+- Symfony\Component\Scheduler\Exception\InvalidArgumentException
+- Symfony\Component\Scheduler\Generator\MessageGenerator
+- Symfony\Component\Scheduler\ScheduleProviderInterface
+interfaces:
+- TransportFactoryInterface
+- TransportFactoryInterface

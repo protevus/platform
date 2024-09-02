@@ -1,0 +1,171 @@
+name: ValidatorTypeGuesserTest
+class_comment: '# * @author franek <franek@chicour.net>
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CheckboxType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\CheckboxType
+- name: CollectionType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\CollectionType
+- name: DateType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\DateType
+- name: IntegerType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\IntegerType
+- name: NumberType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\NumberType
+- name: TextType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\TextType
+- name: ValidatorTypeGuesser
+  type: class
+  source: Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser
+- name: Guess
+  type: class
+  source: Symfony\Component\Form\Guess\Guess
+- name: TypeGuess
+  type: class
+  source: Symfony\Component\Form\Guess\TypeGuess
+- name: ValueGuess
+  type: class
+  source: Symfony\Component\Form\Guess\ValueGuess
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: Email
+  type: class
+  source: Symfony\Component\Validator\Constraints\Email
+- name: File
+  type: class
+  source: Symfony\Component\Validator\Constraints\File
+- name: IsTrue
+  type: class
+  source: Symfony\Component\Validator\Constraints\IsTrue
+- name: Length
+  type: class
+  source: Symfony\Component\Validator\Constraints\Length
+- name: NotBlank
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotBlank
+- name: NotNull
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotNull
+- name: Range
+  type: class
+  source: Symfony\Component\Validator\Constraints\Range
+- name: Type
+  type: class
+  source: Symfony\Component\Validator\Constraints\Type
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+- name: MetadataFactoryInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface
+- name: FakeMetadataFactory
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\FakeMetadataFactory
+properties:
+- name: property
+  visibility: private
+  comment: null
+methods:
+- name: testGuessType
+  visibility: public
+  parameters:
+  - name: constraint
+  - name: guess
+  comment: "# * @author franek <franek@chicour.net>\n# * @author Bernhard Schussek\
+    \ <bschussek@gmail.com>\n# */\n# class ValidatorTypeGuesserTest extends TestCase\n\
+    # {\n# public const TEST_CLASS = 'Symfony\\Component\\Form\\Tests\\Extension\\\
+    Validator\\ValidatorTypeGuesserTest_TestClass';\n# public const TEST_PROPERTY\
+    \ = 'property';\n# \n# private ValidatorTypeGuesser $guesser;\n# private ClassMetadata\
+    \ $metadata;\n# \n# /**\n# * @var MetadataFactoryInterface\n# */\n# private FakeMetadataFactory\
+    \ $metadataFactory;\n# \n# protected function setUp(): void\n# {\n# $this->metadata\
+    \ = new ClassMetadata(self::TEST_CLASS);\n# $this->metadataFactory = new FakeMetadataFactory();\n\
+    # $this->metadataFactory->addMetadata($this->metadata);\n# $this->guesser = new\
+    \ ValidatorTypeGuesser($this->metadataFactory);\n# }\n# \n# /**\n# * @dataProvider\
+    \ guessTypeProvider"
+- name: guessTypeProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: guessRequiredProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGuessRequired
+  visibility: public
+  parameters:
+  - name: constraint
+  - name: guess
+  comment: '# * @dataProvider guessRequiredProvider'
+- name: testGuessRequiredReturnsFalseForUnmappedProperties
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGuessMaxLengthForConstraintWithMaxValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGuessMaxLengthForConstraintWithMinValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGuessMimeTypesForConstraintWithMimeTypesValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGuessMimeTypesForConstraintWithoutMimeTypesValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGuessMimeTypesForConstraintWithMimeTypesStringValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGuessMimeTypesForConstraintWithMimeTypesEmptyStringValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: maxLengthTypeProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGuessMaxLengthForConstraintWithType
+  visibility: public
+  parameters:
+  - name: type
+  comment: '# * @dataProvider maxLengthTypeProvider'
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\Extension\Core\Type\CheckboxType
+- Symfony\Component\Form\Extension\Core\Type\CollectionType
+- Symfony\Component\Form\Extension\Core\Type\DateType
+- Symfony\Component\Form\Extension\Core\Type\IntegerType
+- Symfony\Component\Form\Extension\Core\Type\NumberType
+- Symfony\Component\Form\Extension\Core\Type\TextType
+- Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser
+- Symfony\Component\Form\Guess\Guess
+- Symfony\Component\Form\Guess\TypeGuess
+- Symfony\Component\Form\Guess\ValueGuess
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Constraints\Email
+- Symfony\Component\Validator\Constraints\File
+- Symfony\Component\Validator\Constraints\IsTrue
+- Symfony\Component\Validator\Constraints\Length
+- Symfony\Component\Validator\Constraints\NotBlank
+- Symfony\Component\Validator\Constraints\NotNull
+- Symfony\Component\Validator\Constraints\Range
+- Symfony\Component\Validator\Constraints\Type
+- Symfony\Component\Validator\Mapping\ClassMetadata
+- Symfony\Component\Validator\Mapping\Factory\MetadataFactoryInterface
+- Symfony\Component\Validator\Tests\Fixtures\FakeMetadataFactory
+interfaces: []

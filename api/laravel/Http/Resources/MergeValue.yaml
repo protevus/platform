@@ -1,0 +1,29 @@
+name: MergeValue
+class_comment: null
+dependencies:
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+- name: JsonSerializable
+  type: class
+  source: JsonSerializable
+properties:
+- name: data
+  visibility: public
+  comment: '# * The data to be merged.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: data
+  comment: "# * The data to be merged.\n# *\n# * @var array\n# */\n# public $data;\n\
+    # \n# /**\n# * Create a new merge value instance.\n# *\n# * @param  \\Illuminate\\\
+    Support\\Collection|\\JsonSerializable|array  $data\n# * @return void"
+traits:
+- Illuminate\Support\Collection
+- JsonSerializable
+interfaces: []

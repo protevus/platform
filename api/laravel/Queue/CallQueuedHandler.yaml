@@ -1,0 +1,264 @@
+name: CallQueuedHandler
+class_comment: null
+dependencies:
+- name: Exception
+  type: class
+  source: Exception
+- name: Batchable
+  type: class
+  source: Illuminate\Bus\Batchable
+- name: UniqueLock
+  type: class
+  source: Illuminate\Bus\UniqueLock
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Bus\Dispatcher
+- name: Cache
+  type: class
+  source: Illuminate\Contracts\Cache\Repository
+- name: Container
+  type: class
+  source: Illuminate\Contracts\Container\Container
+- name: Encrypter
+  type: class
+  source: Illuminate\Contracts\Encryption\Encrypter
+- name: Job
+  type: class
+  source: Illuminate\Contracts\Queue\Job
+- name: ShouldBeUnique
+  type: class
+  source: Illuminate\Contracts\Queue\ShouldBeUnique
+- name: ShouldBeUniqueUntilProcessing
+  type: class
+  source: Illuminate\Contracts\Queue\ShouldBeUniqueUntilProcessing
+- name: ModelNotFoundException
+  type: class
+  source: Illuminate\Database\Eloquent\ModelNotFoundException
+- name: Pipeline
+  type: class
+  source: Illuminate\Pipeline\Pipeline
+- name: DeleteWhenMissingModels
+  type: class
+  source: Illuminate\Queue\Attributes\DeleteWhenMissingModels
+- name: ReflectionClass
+  type: class
+  source: ReflectionClass
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+properties:
+- name: dispatcher
+  visibility: protected
+  comment: '# * The bus dispatcher implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Bus\Dispatcher'
+- name: container
+  visibility: protected
+  comment: '# * The container instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Container\Container'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: dispatcher
+  - name: container
+  comment: "# * The bus dispatcher implementation.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Bus\\Dispatcher\n# */\n# protected $dispatcher;\n# \n# /**\n# * The container\
+    \ instance.\n# *\n# * @var \\Illuminate\\Contracts\\Container\\Container\n# */\n\
+    # protected $container;\n# \n# /**\n# * Create a new handler instance.\n# *\n\
+    # * @param  \\Illuminate\\Contracts\\Bus\\Dispatcher  $dispatcher\n# * @param\
+    \  \\Illuminate\\Contracts\\Container\\Container  $container\n# * @return void"
+- name: call
+  visibility: public
+  parameters:
+  - name: job
+  - name: data
+  comment: '# * Handle the queued job.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Queue\Job  $job
+
+    # * @param  array  $data
+
+    # * @return void'
+- name: getCommand
+  visibility: protected
+  parameters:
+  - name: data
+  comment: '# * Get the command from the given payload.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: dispatchThroughMiddleware
+  visibility: protected
+  parameters:
+  - name: job
+  - name: command
+  comment: '# * Dispatch the given job / command through its specified middleware.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Queue\Job  $job
+
+    # * @param  mixed  $command
+
+    # * @return mixed'
+- name: resolveHandler
+  visibility: protected
+  parameters:
+  - name: job
+  - name: command
+  comment: '# * Resolve the handler for the given command.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Queue\Job  $job
+
+    # * @param  mixed  $command
+
+    # * @return mixed'
+- name: setJobInstanceIfNecessary
+  visibility: protected
+  parameters:
+  - name: job
+  - name: instance
+  comment: '# * Set the job instance of the given class if necessary.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Queue\Job  $job
+
+    # * @param  mixed  $instance
+
+    # * @return mixed'
+- name: ensureNextJobInChainIsDispatched
+  visibility: protected
+  parameters:
+  - name: command
+  comment: '# * Ensure the next job in the chain is dispatched if applicable.
+
+    # *
+
+    # * @param  mixed  $command
+
+    # * @return void'
+- name: ensureSuccessfulBatchJobIsRecorded
+  visibility: protected
+  parameters:
+  - name: command
+  comment: '# * Ensure the batch is notified of the successful job completion.
+
+    # *
+
+    # * @param  mixed  $command
+
+    # * @return void'
+- name: ensureUniqueJobLockIsReleased
+  visibility: protected
+  parameters:
+  - name: command
+  comment: '# * Ensure the lock for a unique job is released.
+
+    # *
+
+    # * @param  mixed  $command
+
+    # * @return void'
+- name: handleModelNotFound
+  visibility: protected
+  parameters:
+  - name: job
+  - name: e
+  comment: '# * Handle a model not found exception.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Queue\Job  $job
+
+    # * @param  \Throwable  $e
+
+    # * @return void'
+- name: failed
+  visibility: public
+  parameters:
+  - name: data
+  - name: e
+  - name: uuid
+  comment: '# * Call the failed method on the job instance.
+
+    # *
+
+    # * The exception that caused the failure will be passed.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @param  \Throwable|null  $e
+
+    # * @param  string  $uuid
+
+    # * @return void'
+- name: ensureFailedBatchJobIsRecorded
+  visibility: protected
+  parameters:
+  - name: uuid
+  - name: command
+  - name: e
+  comment: '# * Ensure the batch is notified of the failed job.
+
+    # *
+
+    # * @param  string  $uuid
+
+    # * @param  mixed  $command
+
+    # * @param  \Throwable  $e
+
+    # * @return void'
+- name: ensureChainCatchCallbacksAreInvoked
+  visibility: protected
+  parameters:
+  - name: uuid
+  - name: command
+  - name: e
+  comment: '# * Ensure the chained job catch callbacks are invoked.
+
+    # *
+
+    # * @param  string  $uuid
+
+    # * @param  mixed  $command
+
+    # * @param  \Throwable  $e
+
+    # * @return void'
+traits:
+- Exception
+- Illuminate\Bus\Batchable
+- Illuminate\Bus\UniqueLock
+- Illuminate\Contracts\Bus\Dispatcher
+- Illuminate\Contracts\Container\Container
+- Illuminate\Contracts\Encryption\Encrypter
+- Illuminate\Contracts\Queue\Job
+- Illuminate\Contracts\Queue\ShouldBeUnique
+- Illuminate\Contracts\Queue\ShouldBeUniqueUntilProcessing
+- Illuminate\Database\Eloquent\ModelNotFoundException
+- Illuminate\Pipeline\Pipeline
+- Illuminate\Queue\Attributes\DeleteWhenMissingModels
+- ReflectionClass
+- RuntimeException
+interfaces: []

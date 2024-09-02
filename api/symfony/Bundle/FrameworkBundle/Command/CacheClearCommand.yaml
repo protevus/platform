@@ -1,0 +1,98 @@
+name: CacheClearCommand
+class_comment: null
+dependencies:
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Console\Exception\RuntimeException
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+- name: Preloader
+  type: class
+  source: Symfony\Component\DependencyInjection\Dumper\Preloader
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: IOException
+  type: class
+  source: Symfony\Component\Filesystem\Exception\IOException
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: Finder
+  type: class
+  source: Symfony\Component\Finder\Finder
+- name: CacheClearerInterface
+  type: class
+  source: Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface
+- name: RebootableInterface
+  type: class
+  source: Symfony\Component\HttpKernel\RebootableInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: cacheClearer
+  - name: filesystem
+    default: 'null'
+  comment: null
+- name: configure
+  visibility: protected
+  parameters: []
+  comment: null
+- name: execute
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+- name: isNfs
+  visibility: private
+  parameters:
+  - name: dir
+  comment: null
+- name: warmup
+  visibility: private
+  parameters:
+  - name: warmupDir
+  - name: realBuildDir
+  comment: null
+- name: warmupOptionals
+  visibility: private
+  parameters:
+  - name: cacheDir
+  - name: warmupDir
+  - name: io
+  comment: null
+traits:
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Exception\RuntimeException
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Style\SymfonyStyle
+- Symfony\Component\DependencyInjection\Dumper\Preloader
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\Filesystem\Exception\IOException
+- Symfony\Component\Filesystem\Filesystem
+- Symfony\Component\Finder\Finder
+- Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface
+- Symfony\Component\HttpKernel\RebootableInterface
+interfaces: []

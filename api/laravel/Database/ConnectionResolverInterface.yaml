@@ -1,0 +1,38 @@
+name: ConnectionResolverInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: connection
+  visibility: public
+  parameters:
+  - name: name
+    default: 'null'
+  comment: '# * Get a database connection instance.
+
+    # *
+
+    # * @param  string|null  $name
+
+    # * @return \Illuminate\Database\ConnectionInterface'
+- name: getDefaultConnection
+  visibility: public
+  parameters: []
+  comment: '# * Get the default connection name.
+
+    # *
+
+    # * @return string'
+- name: setDefaultConnection
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Set the default connection name.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return void'
+traits: []
+interfaces: []

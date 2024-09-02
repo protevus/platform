@@ -1,0 +1,23 @@
+name: DatabaseTransactions
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: beginDatabaseTransaction
+  visibility: public
+  parameters: []
+  comment: '# * Handle database transactions on the specified connections.
+
+    # *
+
+    # * @return void'
+- name: connectionsToTransact
+  visibility: protected
+  parameters: []
+  comment: '# * The database connections that should have transactions.
+
+    # *
+
+    # * @return array'
+traits: []
+interfaces: []

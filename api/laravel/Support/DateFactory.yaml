@@ -1,0 +1,359 @@
+name: DateFactory
+class_comment: '# * @see https://carbon.nesbot.com/docs/
+
+  # * @see https://github.com/briannesbitt/Carbon/blob/master/src/Carbon/Factory.php
+
+  # *
+
+  # * @method \Illuminate\Support\Carbon create($year = 0, $month = 1, $day = 1, $hour
+  = 0, $minute = 0, $second = 0, $tz = null)
+
+  # * @method \Illuminate\Support\Carbon createFromDate($year = null, $month = null,
+  $day = null, $tz = null)
+
+  # * @method \Illuminate\Support\Carbon|false createFromFormat($format, $time, $tz
+  = null)
+
+  # * @method \Illuminate\Support\Carbon createFromTime($hour = 0, $minute = 0, $second
+  = 0, $tz = null)
+
+  # * @method \Illuminate\Support\Carbon createFromTimeString($time, $tz = null)
+
+  # * @method \Illuminate\Support\Carbon createFromTimestamp($timestamp, $tz = null)
+
+  # * @method \Illuminate\Support\Carbon createFromTimestampMs($timestamp, $tz = null)
+
+  # * @method \Illuminate\Support\Carbon createFromTimestampUTC($timestamp)
+
+  # * @method \Illuminate\Support\Carbon createMidnightDate($year = null, $month =
+  null, $day = null, $tz = null)
+
+  # * @method \Illuminate\Support\Carbon|false createSafe($year = null, $month = null,
+  $day = null, $hour = null, $minute = null, $second = null, $tz = null)
+
+  # * @method void disableHumanDiffOption($humanDiffOption)
+
+  # * @method void enableHumanDiffOption($humanDiffOption)
+
+  # * @method mixed executeWithLocale($locale, $func)
+
+  # * @method \Illuminate\Support\Carbon fromSerialized($value)
+
+  # * @method array getAvailableLocales()
+
+  # * @method array getDays()
+
+  # * @method int getHumanDiffOptions()
+
+  # * @method array getIsoUnits()
+
+  # * @method array getLastErrors()
+
+  # * @method string getLocale()
+
+  # * @method int getMidDayAt()
+
+  # * @method \Illuminate\Support\Carbon|null getTestNow()
+
+  # * @method \Symfony\Component\Translation\TranslatorInterface getTranslator()
+
+  # * @method int getWeekEndsAt()
+
+  # * @method int getWeekStartsAt()
+
+  # * @method array getWeekendDays()
+
+  # * @method bool hasFormat($date, $format)
+
+  # * @method bool hasMacro($name)
+
+  # * @method bool hasRelativeKeywords($time)
+
+  # * @method bool hasTestNow()
+
+  # * @method \Illuminate\Support\Carbon instance($date)
+
+  # * @method bool isImmutable()
+
+  # * @method bool isModifiableUnit($unit)
+
+  # * @method bool isMutable()
+
+  # * @method bool isStrictModeEnabled()
+
+  # * @method bool localeHasDiffOneDayWords($locale)
+
+  # * @method bool localeHasDiffSyntax($locale)
+
+  # * @method bool localeHasDiffTwoDayWords($locale)
+
+  # * @method bool localeHasPeriodSyntax($locale)
+
+  # * @method bool localeHasShortUnits($locale)
+
+  # * @method void macro($name, $macro)
+
+  # * @method \Illuminate\Support\Carbon|null make($var)
+
+  # * @method \Illuminate\Support\Carbon maxValue()
+
+  # * @method \Illuminate\Support\Carbon minValue()
+
+  # * @method void mixin($mixin)
+
+  # * @method \Illuminate\Support\Carbon now($tz = null)
+
+  # * @method \Illuminate\Support\Carbon parse($time = null, $tz = null)
+
+  # * @method string pluralUnit(string $unit)
+
+  # * @method void resetMonthsOverflow()
+
+  # * @method void resetToStringFormat()
+
+  # * @method void resetYearsOverflow()
+
+  # * @method void serializeUsing($callback)
+
+  # * @method void setHumanDiffOptions($humanDiffOptions)
+
+  # * @method bool setLocale($locale)
+
+  # * @method void setMidDayAt($hour)
+
+  # * @method void setTestNow($testNow = null)
+
+  # * @method void setToStringFormat($format)
+
+  # * @method void setTranslator(\Symfony\Component\Translation\TranslatorInterface
+  $translator)
+
+  # * @method void setUtf8($utf8)
+
+  # * @method void setWeekEndsAt($day)
+
+  # * @method void setWeekStartsAt($day)
+
+  # * @method void setWeekendDays($days)
+
+  # * @method bool shouldOverflowMonths()
+
+  # * @method bool shouldOverflowYears()
+
+  # * @method string singularUnit(string $unit)
+
+  # * @method \Illuminate\Support\Carbon today($tz = null)
+
+  # * @method \Illuminate\Support\Carbon tomorrow($tz = null)
+
+  # * @method void useMonthsOverflow($monthsOverflow = true)
+
+  # * @method void useStrictMode($strictModeEnabled = true)
+
+  # * @method void useYearsOverflow($yearsOverflow = true)
+
+  # * @method \Illuminate\Support\Carbon yesterday($tz = null)'
+dependencies:
+- name: Factory
+  type: class
+  source: Carbon\Factory
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties:
+- name: dateClass
+  visibility: protected
+  comment: "# * @see https://carbon.nesbot.com/docs/\n# * @see https://github.com/briannesbitt/Carbon/blob/master/src/Carbon/Factory.php\n\
+    # *\n# * @method \\Illuminate\\Support\\Carbon create($year = 0, $month = 1, $day\
+    \ = 1, $hour = 0, $minute = 0, $second = 0, $tz = null)\n# * @method \\Illuminate\\\
+    Support\\Carbon createFromDate($year = null, $month = null, $day = null, $tz =\
+    \ null)\n# * @method \\Illuminate\\Support\\Carbon|false createFromFormat($format,\
+    \ $time, $tz = null)\n# * @method \\Illuminate\\Support\\Carbon createFromTime($hour\
+    \ = 0, $minute = 0, $second = 0, $tz = null)\n# * @method \\Illuminate\\Support\\\
+    Carbon createFromTimeString($time, $tz = null)\n# * @method \\Illuminate\\Support\\\
+    Carbon createFromTimestamp($timestamp, $tz = null)\n# * @method \\Illuminate\\\
+    Support\\Carbon createFromTimestampMs($timestamp, $tz = null)\n# * @method \\\
+    Illuminate\\Support\\Carbon createFromTimestampUTC($timestamp)\n# * @method \\\
+    Illuminate\\Support\\Carbon createMidnightDate($year = null, $month = null, $day\
+    \ = null, $tz = null)\n# * @method \\Illuminate\\Support\\Carbon|false createSafe($year\
+    \ = null, $month = null, $day = null, $hour = null, $minute = null, $second =\
+    \ null, $tz = null)\n# * @method void disableHumanDiffOption($humanDiffOption)\n\
+    # * @method void enableHumanDiffOption($humanDiffOption)\n# * @method mixed executeWithLocale($locale,\
+    \ $func)\n# * @method \\Illuminate\\Support\\Carbon fromSerialized($value)\n#\
+    \ * @method array getAvailableLocales()\n# * @method array getDays()\n# * @method\
+    \ int getHumanDiffOptions()\n# * @method array getIsoUnits()\n# * @method array\
+    \ getLastErrors()\n# * @method string getLocale()\n# * @method int getMidDayAt()\n\
+    # * @method \\Illuminate\\Support\\Carbon|null getTestNow()\n# * @method \\Symfony\\\
+    Component\\Translation\\TranslatorInterface getTranslator()\n# * @method int getWeekEndsAt()\n\
+    # * @method int getWeekStartsAt()\n# * @method array getWeekendDays()\n# * @method\
+    \ bool hasFormat($date, $format)\n# * @method bool hasMacro($name)\n# * @method\
+    \ bool hasRelativeKeywords($time)\n# * @method bool hasTestNow()\n# * @method\
+    \ \\Illuminate\\Support\\Carbon instance($date)\n# * @method bool isImmutable()\n\
+    # * @method bool isModifiableUnit($unit)\n# * @method bool isMutable()\n# * @method\
+    \ bool isStrictModeEnabled()\n# * @method bool localeHasDiffOneDayWords($locale)\n\
+    # * @method bool localeHasDiffSyntax($locale)\n# * @method bool localeHasDiffTwoDayWords($locale)\n\
+    # * @method bool localeHasPeriodSyntax($locale)\n# * @method bool localeHasShortUnits($locale)\n\
+    # * @method void macro($name, $macro)\n# * @method \\Illuminate\\Support\\Carbon|null\
+    \ make($var)\n# * @method \\Illuminate\\Support\\Carbon maxValue()\n# * @method\
+    \ \\Illuminate\\Support\\Carbon minValue()\n# * @method void mixin($mixin)\n#\
+    \ * @method \\Illuminate\\Support\\Carbon now($tz = null)\n# * @method \\Illuminate\\\
+    Support\\Carbon parse($time = null, $tz = null)\n# * @method string pluralUnit(string\
+    \ $unit)\n# * @method void resetMonthsOverflow()\n# * @method void resetToStringFormat()\n\
+    # * @method void resetYearsOverflow()\n# * @method void serializeUsing($callback)\n\
+    # * @method void setHumanDiffOptions($humanDiffOptions)\n# * @method bool setLocale($locale)\n\
+    # * @method void setMidDayAt($hour)\n# * @method void setTestNow($testNow = null)\n\
+    # * @method void setToStringFormat($format)\n# * @method void setTranslator(\\\
+    Symfony\\Component\\Translation\\TranslatorInterface $translator)\n# * @method\
+    \ void setUtf8($utf8)\n# * @method void setWeekEndsAt($day)\n# * @method void\
+    \ setWeekStartsAt($day)\n# * @method void setWeekendDays($days)\n# * @method bool\
+    \ shouldOverflowMonths()\n# * @method bool shouldOverflowYears()\n# * @method\
+    \ string singularUnit(string $unit)\n# * @method \\Illuminate\\Support\\Carbon\
+    \ today($tz = null)\n# * @method \\Illuminate\\Support\\Carbon tomorrow($tz =\
+    \ null)\n# * @method void useMonthsOverflow($monthsOverflow = true)\n# * @method\
+    \ void useStrictMode($strictModeEnabled = true)\n# * @method void useYearsOverflow($yearsOverflow\
+    \ = true)\n# * @method \\Illuminate\\Support\\Carbon yesterday($tz = null)\n#\
+    \ */\n# class DateFactory\n# {\n# /**\n# * The default class that will be used\
+    \ for all created dates.\n# *\n# * @var string\n# */\n# const DEFAULT_CLASS_NAME\
+    \ = Carbon::class;\n# \n# /**\n# * The type (class) of dates that should be created.\n\
+    # *\n# * @var string"
+- name: callable
+  visibility: protected
+  comment: '# * This callable may be used to intercept date creation.
+
+    # *
+
+    # * @var callable'
+- name: factory
+  visibility: protected
+  comment: '# * The Carbon factory that should be used when creating dates.
+
+    # *
+
+    # * @var object'
+methods:
+- name: use
+  visibility: public
+  parameters:
+  - name: handler
+  comment: "# * @see https://carbon.nesbot.com/docs/\n# * @see https://github.com/briannesbitt/Carbon/blob/master/src/Carbon/Factory.php\n\
+    # *\n# * @method \\Illuminate\\Support\\Carbon create($year = 0, $month = 1, $day\
+    \ = 1, $hour = 0, $minute = 0, $second = 0, $tz = null)\n# * @method \\Illuminate\\\
+    Support\\Carbon createFromDate($year = null, $month = null, $day = null, $tz =\
+    \ null)\n# * @method \\Illuminate\\Support\\Carbon|false createFromFormat($format,\
+    \ $time, $tz = null)\n# * @method \\Illuminate\\Support\\Carbon createFromTime($hour\
+    \ = 0, $minute = 0, $second = 0, $tz = null)\n# * @method \\Illuminate\\Support\\\
+    Carbon createFromTimeString($time, $tz = null)\n# * @method \\Illuminate\\Support\\\
+    Carbon createFromTimestamp($timestamp, $tz = null)\n# * @method \\Illuminate\\\
+    Support\\Carbon createFromTimestampMs($timestamp, $tz = null)\n# * @method \\\
+    Illuminate\\Support\\Carbon createFromTimestampUTC($timestamp)\n# * @method \\\
+    Illuminate\\Support\\Carbon createMidnightDate($year = null, $month = null, $day\
+    \ = null, $tz = null)\n# * @method \\Illuminate\\Support\\Carbon|false createSafe($year\
+    \ = null, $month = null, $day = null, $hour = null, $minute = null, $second =\
+    \ null, $tz = null)\n# * @method void disableHumanDiffOption($humanDiffOption)\n\
+    # * @method void enableHumanDiffOption($humanDiffOption)\n# * @method mixed executeWithLocale($locale,\
+    \ $func)\n# * @method \\Illuminate\\Support\\Carbon fromSerialized($value)\n#\
+    \ * @method array getAvailableLocales()\n# * @method array getDays()\n# * @method\
+    \ int getHumanDiffOptions()\n# * @method array getIsoUnits()\n# * @method array\
+    \ getLastErrors()\n# * @method string getLocale()\n# * @method int getMidDayAt()\n\
+    # * @method \\Illuminate\\Support\\Carbon|null getTestNow()\n# * @method \\Symfony\\\
+    Component\\Translation\\TranslatorInterface getTranslator()\n# * @method int getWeekEndsAt()\n\
+    # * @method int getWeekStartsAt()\n# * @method array getWeekendDays()\n# * @method\
+    \ bool hasFormat($date, $format)\n# * @method bool hasMacro($name)\n# * @method\
+    \ bool hasRelativeKeywords($time)\n# * @method bool hasTestNow()\n# * @method\
+    \ \\Illuminate\\Support\\Carbon instance($date)\n# * @method bool isImmutable()\n\
+    # * @method bool isModifiableUnit($unit)\n# * @method bool isMutable()\n# * @method\
+    \ bool isStrictModeEnabled()\n# * @method bool localeHasDiffOneDayWords($locale)\n\
+    # * @method bool localeHasDiffSyntax($locale)\n# * @method bool localeHasDiffTwoDayWords($locale)\n\
+    # * @method bool localeHasPeriodSyntax($locale)\n# * @method bool localeHasShortUnits($locale)\n\
+    # * @method void macro($name, $macro)\n# * @method \\Illuminate\\Support\\Carbon|null\
+    \ make($var)\n# * @method \\Illuminate\\Support\\Carbon maxValue()\n# * @method\
+    \ \\Illuminate\\Support\\Carbon minValue()\n# * @method void mixin($mixin)\n#\
+    \ * @method \\Illuminate\\Support\\Carbon now($tz = null)\n# * @method \\Illuminate\\\
+    Support\\Carbon parse($time = null, $tz = null)\n# * @method string pluralUnit(string\
+    \ $unit)\n# * @method void resetMonthsOverflow()\n# * @method void resetToStringFormat()\n\
+    # * @method void resetYearsOverflow()\n# * @method void serializeUsing($callback)\n\
+    # * @method void setHumanDiffOptions($humanDiffOptions)\n# * @method bool setLocale($locale)\n\
+    # * @method void setMidDayAt($hour)\n# * @method void setTestNow($testNow = null)\n\
+    # * @method void setToStringFormat($format)\n# * @method void setTranslator(\\\
+    Symfony\\Component\\Translation\\TranslatorInterface $translator)\n# * @method\
+    \ void setUtf8($utf8)\n# * @method void setWeekEndsAt($day)\n# * @method void\
+    \ setWeekStartsAt($day)\n# * @method void setWeekendDays($days)\n# * @method bool\
+    \ shouldOverflowMonths()\n# * @method bool shouldOverflowYears()\n# * @method\
+    \ string singularUnit(string $unit)\n# * @method \\Illuminate\\Support\\Carbon\
+    \ today($tz = null)\n# * @method \\Illuminate\\Support\\Carbon tomorrow($tz =\
+    \ null)\n# * @method void useMonthsOverflow($monthsOverflow = true)\n# * @method\
+    \ void useStrictMode($strictModeEnabled = true)\n# * @method void useYearsOverflow($yearsOverflow\
+    \ = true)\n# * @method \\Illuminate\\Support\\Carbon yesterday($tz = null)\n#\
+    \ */\n# class DateFactory\n# {\n# /**\n# * The default class that will be used\
+    \ for all created dates.\n# *\n# * @var string\n# */\n# const DEFAULT_CLASS_NAME\
+    \ = Carbon::class;\n# \n# /**\n# * The type (class) of dates that should be created.\n\
+    # *\n# * @var string\n# */\n# protected static $dateClass;\n# \n# /**\n# * This\
+    \ callable may be used to intercept date creation.\n# *\n# * @var callable\n#\
+    \ */\n# protected static $callable;\n# \n# /**\n# * The Carbon factory that should\
+    \ be used when creating dates.\n# *\n# * @var object\n# */\n# protected static\
+    \ $factory;\n# \n# /**\n# * Use the given handler when generating dates (class\
+    \ name, callable, or factory).\n# *\n# * @param  mixed  $handler\n# * @return\
+    \ mixed\n# *\n# * @throws \\InvalidArgumentException"
+- name: useDefault
+  visibility: public
+  parameters: []
+  comment: '# * Use the default date class when generating dates.
+
+    # *
+
+    # * @return void'
+- name: useCallable
+  visibility: public
+  parameters:
+  - name: callable
+  comment: '# * Execute the given callable on each date creation.
+
+    # *
+
+    # * @param  callable  $callable
+
+    # * @return void'
+- name: useClass
+  visibility: public
+  parameters:
+  - name: dateClass
+  comment: '# * Use the given date type (class) when generating dates.
+
+    # *
+
+    # * @param  string  $dateClass
+
+    # * @return void'
+- name: useFactory
+  visibility: public
+  parameters:
+  - name: factory
+  comment: '# * Use the given Carbon factory when generating dates.
+
+    # *
+
+    # * @param  object  $factory
+
+    # * @return void'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Handle dynamic calls to generate dates.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed
+
+    # *
+
+    # * @throws \RuntimeException'
+traits:
+- Carbon\Factory
+- InvalidArgumentException
+interfaces: []

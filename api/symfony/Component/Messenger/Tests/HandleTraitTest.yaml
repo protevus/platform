@@ -1,0 +1,73 @@
+name: HandleTraitTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: LogicException
+  type: class
+  source: Symfony\Component\Messenger\Exception\LogicException
+- name: HandleTrait
+  type: class
+  source: Symfony\Component\Messenger\HandleTrait
+- name: MessageBus
+  type: class
+  source: Symfony\Component\Messenger\MessageBus
+- name: MessageBusInterface
+  type: class
+  source: Symfony\Component\Messenger\MessageBusInterface
+- name: HandledStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\HandledStamp
+- name: DummyMessage
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\DummyMessage
+- name: HandleTrait
+  type: class
+  source: HandleTrait
+properties: []
+methods:
+- name: testItThrowsOnNoMessageBusInstance
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHandleReturnsHandledStampResult
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHandleAcceptsEnvelopes
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHandleThrowsOnNoHandledStamp
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHandleThrowsOnMultipleHandledStamps
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: messageBus
+  comment: null
+- name: query
+  visibility: public
+  parameters:
+  - name: query
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Exception\LogicException
+- Symfony\Component\Messenger\HandleTrait
+- Symfony\Component\Messenger\MessageBus
+- Symfony\Component\Messenger\MessageBusInterface
+- Symfony\Component\Messenger\Stamp\HandledStamp
+- Symfony\Component\Messenger\Tests\Fixtures\DummyMessage
+- HandleTrait
+interfaces: []

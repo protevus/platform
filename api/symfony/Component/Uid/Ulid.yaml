@@ -1,0 +1,68 @@
+name: Ulid
+class_comment: '# * A ULID is lexicographically sortable and contains a 48-bit timestamp
+  and 80-bit of crypto-random entropy.
+
+  # *
+
+  # * @see https://github.com/ulid/spec
+
+  # *
+
+  # * @author Nicolas Grekas <p@tchwork.com>'
+dependencies: []
+properties: []
+methods:
+- name: toBase32
+  visibility: public
+  parameters: []
+  comment: "# * A ULID is lexicographically sortable and contains a 48-bit timestamp\
+    \ and 80-bit of crypto-random entropy.\n# *\n# * @see https://github.com/ulid/spec\n\
+    # *\n# * @author Nicolas Grekas <p@tchwork.com>\n# */\n# class Ulid extends AbstractUid\
+    \ implements TimeBasedUidInterface\n# {\n# protected const NIL = '00000000000000000000000000';\n\
+    # protected const MAX = '7ZZZZZZZZZZZZZZZZZZZZZZZZZ';\n# \n# private static string\
+    \ $time = '';\n# private static array $rand = [];\n# \n# public function __construct(?string\
+    \ $ulid = null)\n# {\n# if (null === $ulid) {\n# $this->uid = static::generate();\n\
+    # } elseif (self::NIL === $ulid) {\n# $this->uid = $ulid;\n# } elseif (self::MAX\
+    \ === strtr($ulid, 'z', 'Z')) {\n# $this->uid = $ulid;\n# } else {\n# if (!self::isValid($ulid))\
+    \ {\n# throw new \\InvalidArgumentException(\\sprintf('Invalid ULID: \"%s\".',\
+    \ $ulid));\n# }\n# \n# $this->uid = strtoupper($ulid);\n# }\n# }\n# \n# public\
+    \ static function isValid(string $ulid): bool\n# {\n# if (26 !== \\strlen($ulid))\
+    \ {\n# return false;\n# }\n# \n# if (26 !== strspn($ulid, '0123456789ABCDEFGHJKMNPQRSTVWXYZabcdefghjkmnpqrstvwxyz'))\
+    \ {\n# return false;\n# }\n# \n# return $ulid[0] <= '7';\n# }\n# \n# public static\
+    \ function fromString(string $ulid): static\n# {\n# if (36 === \\strlen($ulid)\
+    \ && preg_match('{^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$}Di', $ulid)) {\n\
+    # $ulid = hex2bin(str_replace('-', '', $ulid));\n# } elseif (22 === \\strlen($ulid)\
+    \ && 22 === strspn($ulid, BinaryUtil::BASE58[''])) {\n# $ulid = str_pad(BinaryUtil::fromBase($ulid,\
+    \ BinaryUtil::BASE58), 16, \"\\0\", \\STR_PAD_LEFT);\n# }\n# \n# if (16 !== \\\
+    strlen($ulid)) {\n# return match (strtr($ulid, 'z', 'Z')) {\n# self::NIL => new\
+    \ NilUlid(),\n# self::MAX => new MaxUlid(),\n# default => new static($ulid),\n\
+    # };\n# }\n# \n# $ulid = bin2hex($ulid);\n# $ulid = \\sprintf('%02s%04s%04s%04s%04s%04s%04s',\n\
+    # base_convert(substr($ulid, 0, 2), 16, 32),\n# base_convert(substr($ulid, 2,\
+    \ 5), 16, 32),\n# base_convert(substr($ulid, 7, 5), 16, 32),\n# base_convert(substr($ulid,\
+    \ 12, 5), 16, 32),\n# base_convert(substr($ulid, 17, 5), 16, 32),\n# base_convert(substr($ulid,\
+    \ 22, 5), 16, 32),\n# base_convert(substr($ulid, 27, 5), 16, 32)\n# );\n# \n#\
+    \ if (self::NIL === $ulid) {\n# return new NilUlid();\n# }\n# \n# if (self::MAX\
+    \ === $ulid = strtr($ulid, 'abcdefghijklmnopqrstuv', 'ABCDEFGHJKMNPQRSTVWXYZ'))\
+    \ {\n# return new MaxUlid();\n# }\n# \n# $u = new static(self::NIL);\n# $u->uid\
+    \ = $ulid;\n# \n# return $u;\n# }\n# \n# public function toBinary(): string\n\
+    # {\n# $ulid = strtr($this->uid, 'ABCDEFGHJKMNPQRSTVWXYZ', 'abcdefghijklmnopqrstuv');\n\
+    # \n# $ulid = \\sprintf('%02s%05s%05s%05s%05s%05s%05s',\n# base_convert(substr($ulid,\
+    \ 0, 2), 32, 16),\n# base_convert(substr($ulid, 2, 4), 32, 16),\n# base_convert(substr($ulid,\
+    \ 6, 4), 32, 16),\n# base_convert(substr($ulid, 10, 4), 32, 16),\n# base_convert(substr($ulid,\
+    \ 14, 4), 32, 16),\n# base_convert(substr($ulid, 18, 4), 32, 16),\n# base_convert(substr($ulid,\
+    \ 22, 4), 32, 16)\n# );\n# \n# return hex2bin($ulid);\n# }\n# \n# /**\n# * Returns\
+    \ the identifier as a base32 case insensitive string.\n# *\n# * @see https://tools.ietf.org/html/rfc4648#section-6\n\
+    # *\n# * @example 09EJ0S614A9FXVG9C5537Q9ZE1 (len=26)"
+- name: getDateTime
+  visibility: public
+  parameters: []
+  comment: null
+- name: generate
+  visibility: public
+  parameters:
+  - name: time
+    default: 'null'
+  comment: null
+traits: []
+interfaces:
+- TimeBasedUidInterface

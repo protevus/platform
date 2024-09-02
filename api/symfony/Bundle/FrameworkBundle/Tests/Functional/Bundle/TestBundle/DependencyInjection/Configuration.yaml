@@ -1,0 +1,30 @@
+name: Configuration
+class_comment: null
+dependencies:
+- name: CustomConfig
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\TestBundle\DependencyInjection\Config\CustomConfig
+- name: TreeBuilder
+  type: class
+  source: Symfony\Component\Config\Definition\Builder\TreeBuilder
+- name: ConfigurationInterface
+  type: class
+  source: Symfony\Component\Config\Definition\ConfigurationInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: customConfig
+    default: 'null'
+  comment: null
+- name: getConfigTreeBuilder
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Bundle\FrameworkBundle\Tests\Functional\Bundle\TestBundle\DependencyInjection\Config\CustomConfig
+- Symfony\Component\Config\Definition\Builder\TreeBuilder
+- Symfony\Component\Config\Definition\ConfigurationInterface
+interfaces:
+- ConfigurationInterface

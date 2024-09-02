@@ -1,0 +1,95 @@
+name: WebProfilerExtension
+class_comment: '# * Twig extension for the profiler.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @internal'
+dependencies:
+- name: Data
+  type: class
+  source: Symfony\Component\VarDumper\Cloner\Data
+- name: HtmlDumper
+  type: class
+  source: Symfony\Component\VarDumper\Dumper\HtmlDumper
+- name: Environment
+  type: class
+  source: Twig\Environment
+- name: ProfilerExtension
+  type: class
+  source: Twig\Extension\ProfilerExtension
+- name: Profile
+  type: class
+  source: Twig\Profiler\Profile
+- name: EscaperRuntime
+  type: class
+  source: Twig\Runtime\EscaperRuntime
+- name: TwigFunction
+  type: class
+  source: Twig\TwigFunction
+properties:
+- name: output
+  visibility: private
+  comment: "# * Twig extension for the profiler.\n# *\n# * @author Fabien Potencier\
+    \ <fabien@symfony.com>\n# *\n# * @internal\n# */\n# class WebProfilerExtension\
+    \ extends ProfilerExtension\n# {\n# private HtmlDumper $dumper;\n# \n# /**\n#\
+    \ * @var resource"
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: dumper
+    default: 'null'
+  comment: null
+- name: enter
+  visibility: public
+  parameters:
+  - name: profile
+  comment: null
+- name: leave
+  visibility: public
+  parameters:
+  - name: profile
+  comment: null
+- name: getFunctions
+  visibility: public
+  parameters: []
+  comment: null
+- name: dumpData
+  visibility: public
+  parameters:
+  - name: env
+  - name: data
+  - name: maxDepth
+    default: '0'
+  comment: null
+- name: dumpLog
+  visibility: public
+  parameters:
+  - name: env
+  - name: message
+  - name: context
+    default: 'null'
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: escape
+  visibility: private
+  parameters:
+  - name: env
+  - name: s
+  comment: null
+traits:
+- Symfony\Component\VarDumper\Cloner\Data
+- Symfony\Component\VarDumper\Dumper\HtmlDumper
+- Twig\Environment
+- Twig\Extension\ProfilerExtension
+- Twig\Profiler\Profile
+- Twig\Runtime\EscaperRuntime
+- Twig\TwigFunction
+interfaces: []

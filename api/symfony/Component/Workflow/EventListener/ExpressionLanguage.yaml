@@ -1,0 +1,26 @@
+name: ExpressionLanguage
+class_comment: '# * Adds some function to the default Symfony Security ExpressionLanguage.
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: BaseExpressionLanguage
+  type: class
+  source: Symfony\Component\Security\Core\Authorization\ExpressionLanguage
+- name: ValidatorInterface
+  type: class
+  source: Symfony\Component\Validator\Validator\ValidatorInterface
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Workflow\Exception\RuntimeException
+properties: []
+methods:
+- name: registerFunctions
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Validator\ValidatorInterface
+- Symfony\Component\Workflow\Exception\RuntimeException
+interfaces: []

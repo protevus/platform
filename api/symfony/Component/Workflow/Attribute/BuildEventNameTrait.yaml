@@ -1,0 +1,21 @@
+name: BuildEventNameTrait
+class_comment: null
+dependencies:
+- name: LogicException
+  type: class
+  source: Symfony\Component\Workflow\Exception\LogicException
+properties: []
+methods:
+- name: buildEventName
+  visibility: private
+  parameters:
+  - name: keyword
+  - name: argument
+  - name: workflow
+    default: 'null'
+  - name: node
+    default: 'null'
+  comment: null
+traits:
+- Symfony\Component\Workflow\Exception\LogicException
+interfaces: []

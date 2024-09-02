@@ -1,0 +1,78 @@
+name: Uuid
+class_comment: "# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>\n# *\n# * @see\
+  \ https://tools.ietf.org/html/rfc4122#appendix-C for details about namespaces"
+dependencies: []
+properties: []
+methods:
+- name: toRfc4122
+  visibility: public
+  parameters: []
+  comment: "# * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>\n# *\n# * @see https://tools.ietf.org/html/rfc4122#appendix-C\
+    \ for details about namespaces\n# */\n# class Uuid extends AbstractUid\n# {\n\
+    # public const NAMESPACE_DNS = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';\n# public\
+    \ const NAMESPACE_URL = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';\n# public const\
+    \ NAMESPACE_OID = '6ba7b812-9dad-11d1-80b4-00c04fd430c8';\n# public const NAMESPACE_X500\
+    \ = '6ba7b814-9dad-11d1-80b4-00c04fd430c8';\n# \n# protected const TYPE = 0;\n\
+    # protected const NIL = '00000000-0000-0000-0000-000000000000';\n# protected const\
+    \ MAX = 'ffffffff-ffff-ffff-ffff-ffffffffffff';\n# \n# public function __construct(string\
+    \ $uuid, bool $checkVariant = false)\n# {\n# $type = preg_match('{^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$}Di',\
+    \ $uuid) ? (int) $uuid[14] : false;\n# \n# if (false === $type || (static::TYPE\
+    \ ?: $type) !== $type) {\n# throw new \\InvalidArgumentException(\\sprintf('Invalid\
+    \ UUID%s: \"%s\".', static::TYPE ? 'v'.static::TYPE : '', $uuid));\n# }\n# \n\
+    # $this->uid = strtolower($uuid);\n# \n# if ($checkVariant && !\\in_array($this->uid[19],\
+    \ ['8', '9', 'a', 'b'], true)) {\n# throw new \\InvalidArgumentException(\\sprintf('Invalid\
+    \ UUID%s: \"%s\".', static::TYPE ? 'v'.static::TYPE : '', $uuid));\n# }\n# }\n\
+    # \n# public static function fromString(string $uuid): static\n# {\n# if (22 ===\
+    \ \\strlen($uuid) && 22 === strspn($uuid, BinaryUtil::BASE58[''])) {\n# $uuid\
+    \ = str_pad(BinaryUtil::fromBase($uuid, BinaryUtil::BASE58), 16, \"\\0\", \\STR_PAD_LEFT);\n\
+    # }\n# \n# if (16 === \\strlen($uuid)) {\n# // don't use uuid_unparse(), it's\
+    \ slower\n# $uuid = bin2hex($uuid);\n# $uuid = substr_replace($uuid, '-', 8, 0);\n\
+    # $uuid = substr_replace($uuid, '-', 13, 0);\n# $uuid = substr_replace($uuid,\
+    \ '-', 18, 0);\n# $uuid = substr_replace($uuid, '-', 23, 0);\n# } elseif (26 ===\
+    \ \\strlen($uuid) && Ulid::isValid($uuid)) {\n# $ulid = new NilUlid();\n# $ulid->uid\
+    \ = strtoupper($uuid);\n# $uuid = $ulid->toRfc4122();\n# }\n# \n# if (__CLASS__\
+    \ !== static::class || 36 !== \\strlen($uuid)) {\n# return new static($uuid);\n\
+    # }\n# \n# if (self::NIL === $uuid) {\n# return new NilUuid();\n# }\n# \n# if\
+    \ (self::MAX === $uuid = strtr($uuid, 'F', 'f')) {\n# return new MaxUuid();\n\
+    # }\n# \n# if (!\\in_array($uuid[19], ['8', '9', 'a', 'b', 'A', 'B'], true)) {\n\
+    # return new self($uuid);\n# }\n# \n# return match ((int) $uuid[14]) {\n# UuidV1::TYPE\
+    \ => new UuidV1($uuid),\n# UuidV3::TYPE => new UuidV3($uuid),\n# UuidV4::TYPE\
+    \ => new UuidV4($uuid),\n# UuidV5::TYPE => new UuidV5($uuid),\n# UuidV6::TYPE\
+    \ => new UuidV6($uuid),\n# UuidV7::TYPE => new UuidV7($uuid),\n# UuidV8::TYPE\
+    \ => new UuidV8($uuid),\n# default => new self($uuid),\n# };\n# }\n# \n# final\
+    \ public static function v1(): UuidV1\n# {\n# return new UuidV1();\n# }\n# \n\
+    # final public static function v3(self $namespace, string $name): UuidV3\n# {\n\
+    # // don't use uuid_generate_md5(), some versions are buggy\n# $uuid = md5(hex2bin(str_replace('-',\
+    \ '', $namespace->uid)).$name, true);\n# \n# return new UuidV3(self::format($uuid,\
+    \ '-3'));\n# }\n# \n# final public static function v4(): UuidV4\n# {\n# return\
+    \ new UuidV4();\n# }\n# \n# final public static function v5(self $namespace, string\
+    \ $name): UuidV5\n# {\n# // don't use uuid_generate_sha1(), some versions are\
+    \ buggy\n# $uuid = substr(sha1(hex2bin(str_replace('-', '', $namespace->uid)).$name,\
+    \ true), 0, 16);\n# \n# return new UuidV5(self::format($uuid, '-5'));\n# }\n#\
+    \ \n# final public static function v6(): UuidV6\n# {\n# return new UuidV6();\n\
+    # }\n# \n# final public static function v7(): UuidV7\n# {\n# return new UuidV7();\n\
+    # }\n# \n# final public static function v8(string $uuid): UuidV8\n# {\n# return\
+    \ new UuidV8($uuid);\n# }\n# \n# public static function isValid(string $uuid):\
+    \ bool\n# {\n# if (self::NIL === $uuid && \\in_array(static::class, [__CLASS__,\
+    \ NilUuid::class], true)) {\n# return true;\n# }\n# \n# if (self::MAX === strtr($uuid,\
+    \ 'F', 'f') && \\in_array(static::class, [__CLASS__, MaxUuid::class], true)) {\n\
+    # return true;\n# }\n# \n# if (!preg_match('{^[0-9a-f]{8}(?:-[0-9a-f]{4}){2}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$}Di',\
+    \ $uuid)) {\n# return false;\n# }\n# \n# return __CLASS__ === static::class ||\
+    \ static::TYPE === (int) $uuid[14];\n# }\n# \n# public function toBinary(): string\n\
+    # {\n# return hex2bin(str_replace('-', '', $this->uid));\n# }\n# \n# /**\n# *\
+    \ Returns the identifier as a RFC4122 case insensitive string.\n# *\n# * @see\
+    \ https://tools.ietf.org/html/rfc4122#section-3\n# *\n# * @example 09748193-048a-4bfb-b825-8528cf74fdc1\
+    \ (len=36)"
+- name: compare
+  visibility: public
+  parameters:
+  - name: other
+  comment: null
+- name: format
+  visibility: private
+  parameters:
+  - name: uuid
+  - name: version
+  comment: null
+traits: []
+interfaces: []

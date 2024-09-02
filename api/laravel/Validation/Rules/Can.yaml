@@ -1,0 +1,86 @@
+name: Can
+class_comment: null
+dependencies:
+- name: Rule
+  type: class
+  source: Illuminate\Contracts\Validation\Rule
+- name: ValidatorAwareRule
+  type: class
+  source: Illuminate\Contracts\Validation\ValidatorAwareRule
+- name: Gate
+  type: class
+  source: Illuminate\Support\Facades\Gate
+properties:
+- name: ability
+  visibility: protected
+  comment: '# * The ability to check.
+
+    # *
+
+    # * @var string'
+- name: arguments
+  visibility: protected
+  comment: '# * The arguments to pass to the authorization check.
+
+    # *
+
+    # * @var array'
+- name: validator
+  visibility: protected
+  comment: '# * The current validator instance.
+
+    # *
+
+    # * @var \Illuminate\Validation\Validator'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: ability
+  - name: arguments
+    default: '[]'
+  comment: "# * The ability to check.\n# *\n# * @var string\n# */\n# protected $ability;\n\
+    # \n# /**\n# * The arguments to pass to the authorization check.\n# *\n# * @var\
+    \ array\n# */\n# protected $arguments;\n# \n# /**\n# * The current validator instance.\n\
+    # *\n# * @var \\Illuminate\\Validation\\Validator\n# */\n# protected $validator;\n\
+    # \n# /**\n# * Constructor.\n# *\n# * @param  string  $ability\n# * @param  array\
+    \  $arguments"
+- name: passes
+  visibility: public
+  parameters:
+  - name: attribute
+  - name: value
+  comment: '# * Determine if the validation rule passes.
+
+    # *
+
+    # * @param  string  $attribute
+
+    # * @param  mixed  $value
+
+    # * @return bool'
+- name: message
+  visibility: public
+  parameters: []
+  comment: '# * Get the validation error message.
+
+    # *
+
+    # * @return array'
+- name: setValidator
+  visibility: public
+  parameters:
+  - name: validator
+  comment: '# * Set the current validator.
+
+    # *
+
+    # * @param  \Illuminate\Validation\Validator  $validator
+
+    # * @return $this'
+traits:
+- Illuminate\Contracts\Validation\Rule
+- Illuminate\Contracts\Validation\ValidatorAwareRule
+- Illuminate\Support\Facades\Gate
+interfaces:
+- Rule

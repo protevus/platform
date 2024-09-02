@@ -1,0 +1,63 @@
+name: DotenvDumpCommand
+class_comment: null
+dependencies:
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: Autoconfigure
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\Autoconfigure
+- name: Dotenv
+  type: class
+  source: Symfony\Component\Dotenv\Dotenv
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: projectDir
+  - name: defaultEnv
+    default: 'null'
+  comment: null
+- name: configure
+  visibility: protected
+  parameters: []
+  comment: null
+- name: execute
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+- name: loadEnv
+  visibility: private
+  parameters:
+  - name: dotenvPath
+  - name: env
+  - name: config
+  comment: null
+traits:
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\DependencyInjection\Attribute\Autoconfigure
+- Symfony\Component\Dotenv\Dotenv
+interfaces: []

@@ -1,0 +1,53 @@
+name: AbstractTransportFactory
+class_comment: null
+dependencies:
+- name: EventDispatcherInterface
+  type: class
+  source: Psr\EventDispatcher\EventDispatcherInterface
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: IncompleteDsnException
+  type: class
+  source: Symfony\Component\Mailer\Exception\IncompleteDsnException
+- name: HttpClientInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\HttpClientInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: dispatcher
+    default: 'null'
+  - name: client
+    default: 'null'
+  - name: logger
+    default: 'null'
+  comment: null
+- name: supports
+  visibility: public
+  parameters:
+  - name: dsn
+  comment: null
+- name: getSupportedSchemes
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getUser
+  visibility: protected
+  parameters:
+  - name: dsn
+  comment: null
+- name: getPassword
+  visibility: protected
+  parameters:
+  - name: dsn
+  comment: null
+traits:
+- Psr\EventDispatcher\EventDispatcherInterface
+- Psr\Log\LoggerInterface
+- Symfony\Component\Mailer\Exception\IncompleteDsnException
+- Symfony\Contracts\HttpClient\HttpClientInterface
+interfaces:
+- TransportFactoryInterface

@@ -1,0 +1,11 @@
+name: early_hints
+class_comment: null
+dependencies:
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+properties: []
+methods: []
+traits:
+- Symfony\Component\HttpFoundation\Response
+interfaces: []

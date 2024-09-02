@@ -1,0 +1,23 @@
+name: SelectorNodeTest
+class_comment: null
+dependencies:
+- name: ElementNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\ElementNode
+- name: SelectorNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\SelectorNode
+properties: []
+methods:
+- name: getToStringConversionTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSpecificityValueTestData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\CssSelector\Node\ElementNode
+- Symfony\Component\CssSelector\Node\SelectorNode
+interfaces: []

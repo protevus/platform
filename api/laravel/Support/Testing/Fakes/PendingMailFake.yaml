@@ -1,0 +1,59 @@
+name: PendingMailFake
+class_comment: null
+dependencies:
+- name: Mailable
+  type: class
+  source: Illuminate\Contracts\Mail\Mailable
+- name: PendingMail
+  type: class
+  source: Illuminate\Mail\PendingMail
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: mailer
+  comment: '# * Create a new instance.
+
+    # *
+
+    # * @param  \Illuminate\Support\Testing\Fakes\MailFake  $mailer
+
+    # * @return void'
+- name: send
+  visibility: public
+  parameters:
+  - name: mailable
+  comment: '# * Send a new mailable message instance.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Mail\Mailable  $mailable
+
+    # * @return void'
+- name: sendNow
+  visibility: public
+  parameters:
+  - name: mailable
+  comment: '# * Send a new mailable message instance synchronously.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Mail\Mailable  $mailable
+
+    # * @return void'
+- name: queue
+  visibility: public
+  parameters:
+  - name: mailable
+  comment: '# * Push the given mailable onto the queue.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Mail\Mailable  $mailable
+
+    # * @return mixed'
+traits:
+- Illuminate\Contracts\Mail\Mailable
+- Illuminate\Mail\PendingMail
+interfaces: []

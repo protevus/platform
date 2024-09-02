@@ -1,0 +1,35 @@
+name: FilesLoader
+class_comment: null
+dependencies:
+- name: BaseFilesLoader
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\FilesLoader
+- name: LoaderInterface
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\LoaderInterface
+properties:
+- name: timesCalled
+  visibility: protected
+  comment: null
+- name: loader
+  visibility: protected
+  comment: null
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: paths
+  - name: loader
+  comment: null
+- name: getFileLoaderInstance
+  visibility: protected
+  parameters:
+  - name: file
+  comment: null
+- name: getTimesCalled
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Validator\Mapping\Loader\LoaderInterface
+interfaces: []

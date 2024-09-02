@@ -1,0 +1,96 @@
+name: Pipe
+class_comment: '# * @mixin \Illuminate\Process\Factory
+
+  # * @mixin \Illuminate\Process\PendingProcess'
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: InvalidArgumentException
+properties:
+- name: factory
+  visibility: protected
+  comment: '# * @mixin \Illuminate\Process\Factory
+
+    # * @mixin \Illuminate\Process\PendingProcess
+
+    # */
+
+    # class Pipe
+
+    # {
+
+    # /**
+
+    # * The process factory instance.
+
+    # *
+
+    # * @var \Illuminate\Process\Factory'
+- name: callback
+  visibility: protected
+  comment: '# * The callback that resolves the pending processes.
+
+    # *
+
+    # * @var callable'
+- name: pendingProcesses
+  visibility: protected
+  comment: '# * The array of pending processes.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: factory
+  - name: callback
+  comment: "# * @mixin \\Illuminate\\Process\\Factory\n# * @mixin \\Illuminate\\Process\\\
+    PendingProcess\n# */\n# class Pipe\n# {\n# /**\n# * The process factory instance.\n\
+    # *\n# * @var \\Illuminate\\Process\\Factory\n# */\n# protected $factory;\n# \n\
+    # /**\n# * The callback that resolves the pending processes.\n# *\n# * @var callable\n\
+    # */\n# protected $callback;\n# \n# /**\n# * The array of pending processes.\n\
+    # *\n# * @var array\n# */\n# protected $pendingProcesses = [];\n# \n# /**\n# *\
+    \ Create a new series of piped processes.\n# *\n# * @param  \\Illuminate\\Process\\\
+    Factory  $factory\n# * @param  callable  $callback\n# * @return void"
+- name: as
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * Add a process to the pipe with a key.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return \Illuminate\Process\PendingProcess'
+- name: run
+  visibility: public
+  parameters:
+  - name: output
+    default: 'null'
+  comment: '# * Runs the processes in the pipe.
+
+    # *
+
+    # * @param  callable|null  $output
+
+    # * @return \Illuminate\Contracts\Process\ProcessResult'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically proxy methods calls to a new pending process.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return \Illuminate\Process\PendingProcess'
+traits:
+- InvalidArgumentException
+interfaces: []

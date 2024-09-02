@@ -1,0 +1,106 @@
+name: MailboxListHeader
+class_comment: null
+dependencies:
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: RfcComplianceException
+  type: class
+  source: Symfony\Component\Mime\Exception\RfcComplianceException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: name
+  - name: addresses
+  comment: "# * A Mailbox list MIME Header for something like From, To, Cc, and Bcc\
+    \ (one or more named addresses).\n# *\n# * @author Chris Corbyn\n# */\n# final\
+    \ class MailboxListHeader extends AbstractHeader\n# {\n# private array $addresses\
+    \ = [];\n# \n# /**\n# * @param Address[] $addresses"
+- name: setBody
+  visibility: public
+  parameters:
+  - name: body
+  comment: '# * @param Address[] $body
+
+    # *
+
+    # * @throws RfcComplianceException'
+- name: getBody
+  visibility: public
+  parameters: []
+  comment: '# * @return Address[]
+
+    # *
+
+    # * @throws RfcComplianceException'
+- name: setAddresses
+  visibility: public
+  parameters:
+  - name: addresses
+  comment: '# * Sets a list of addresses to be shown in this Header.
+
+    # *
+
+    # * @param Address[] $addresses
+
+    # *
+
+    # * @throws RfcComplianceException'
+- name: addAddresses
+  visibility: public
+  parameters:
+  - name: addresses
+  comment: '# * Sets a list of addresses to be shown in this Header.
+
+    # *
+
+    # * @param Address[] $addresses
+
+    # *
+
+    # * @throws RfcComplianceException'
+- name: addAddress
+  visibility: public
+  parameters:
+  - name: address
+  comment: '# * @throws RfcComplianceException'
+- name: getAddresses
+  visibility: public
+  parameters: []
+  comment: '# * @return Address[]'
+- name: getAddressStrings
+  visibility: public
+  parameters: []
+  comment: '# * Gets the full mailbox list of this Header as an array of valid RFC
+    2822 strings.
+
+    # *
+
+    # * @return string[]
+
+    # *
+
+    # * @throws RfcComplianceException'
+- name: getBodyAsString
+  visibility: public
+  parameters: []
+  comment: null
+- name: tokenNeedsEncoding
+  visibility: protected
+  parameters:
+  - name: token
+  comment: '# * Redefine the encoding requirements for addresses.
+
+    # *
+
+    # * All "specials" must be encoded as the full header value will not be quoted
+
+    # *
+
+    # * @see RFC 2822 3.2.1'
+traits:
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Exception\RfcComplianceException
+interfaces: []

@@ -1,0 +1,15 @@
+name: AdminController
+class_comment: null
+dependencies:
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+properties: []
+methods:
+- name: indexAction
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Response
+interfaces: []

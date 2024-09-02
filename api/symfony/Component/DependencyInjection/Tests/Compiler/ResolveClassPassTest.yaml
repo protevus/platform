@@ -1,0 +1,61 @@
+name: ResolveClassPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ResolveClassPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ResolveClassPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: CaseSensitiveClass
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CaseSensitiveClass
+properties: []
+methods:
+- name: testResolveClassFromId
+  visibility: public
+  parameters:
+  - name: serviceId
+  comment: '# * @dataProvider provideValidClassId'
+- name: provideValidClassId
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWontResolveClassFromId
+  visibility: public
+  parameters:
+  - name: serviceId
+  comment: '# * @dataProvider provideInvalidClassId'
+- name: provideInvalidClassId
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNonFqcnChildDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClassFoundChildDefinition
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAmbiguousChildDefinition
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\Compiler\ResolveClassPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CaseSensitiveClass
+interfaces: []

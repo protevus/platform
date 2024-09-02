@@ -1,0 +1,33 @@
+name: LogoutRouteLoader
+class_comment: null
+dependencies:
+- name: ContainerParametersResource
+  type: class
+  source: Symfony\Component\DependencyInjection\Config\ContainerParametersResource
+- name: Route
+  type: class
+  source: Symfony\Component\Routing\Route
+- name: RouteCollection
+  type: class
+  source: Symfony\Component\Routing\RouteCollection
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: logoutUris
+  - name: parameterName
+  comment: '# * @param array<string, string> $logoutUris    Logout URIs indexed by
+    the corresponding firewall name
+
+    # * @param string                $parameterName Name of the container parameter
+    containing {@see $logoutUris} value'
+- name: __invoke
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Config\ContainerParametersResource
+- Symfony\Component\Routing\Route
+- Symfony\Component\Routing\RouteCollection
+interfaces: []

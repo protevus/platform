@@ -1,0 +1,59 @@
+name: In
+class_comment: null
+dependencies:
+- name: BackedEnum
+  type: class
+  source: BackedEnum
+- name: Arrayable
+  type: class
+  source: Illuminate\Contracts\Support\Arrayable
+- name: Stringable
+  type: class
+  source: Stringable
+- name: UnitEnum
+  type: class
+  source: UnitEnum
+properties:
+- name: rule
+  visibility: protected
+  comment: '# * The name of the rule.
+
+    # *
+
+    # * @var string'
+- name: values
+  visibility: protected
+  comment: '# * The accepted values.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: values
+  comment: "# * The name of the rule.\n# *\n# * @var string\n# */\n# protected $rule\
+    \ = 'in';\n# \n# /**\n# * The accepted values.\n# *\n# * @var array\n# */\n# protected\
+    \ $values;\n# \n# /**\n# * Create a new in rule instance.\n# *\n# * @param  \\\
+    Illuminate\\Contracts\\Support\\Arrayable|\\BackedEnum|\\UnitEnum|array|string\
+    \  $values\n# * @return void"
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: '# * Convert the rule to a validation string.
+
+    # *
+
+    # * @return string
+
+    # *
+
+    # * @see \Illuminate\Validation\ValidationRuleParser::parseParameters'
+traits:
+- BackedEnum
+- Illuminate\Contracts\Support\Arrayable
+- Stringable
+- UnitEnum
+interfaces:
+- Stringable

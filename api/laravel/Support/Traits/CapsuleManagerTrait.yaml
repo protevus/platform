@@ -1,0 +1,65 @@
+name: CapsuleManagerTrait
+class_comment: null
+dependencies:
+- name: Container
+  type: class
+  source: Illuminate\Contracts\Container\Container
+- name: Fluent
+  type: class
+  source: Illuminate\Support\Fluent
+properties:
+- name: instance
+  visibility: protected
+  comment: '# * The current globally used instance.
+
+    # *
+
+    # * @var object'
+- name: container
+  visibility: protected
+  comment: '# * The container instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Container\Container'
+methods:
+- name: setupContainer
+  visibility: protected
+  parameters:
+  - name: container
+  comment: "# * The current globally used instance.\n# *\n# * @var object\n# */\n\
+    # protected static $instance;\n# \n# /**\n# * The container instance.\n# *\n#\
+    \ * @var \\Illuminate\\Contracts\\Container\\Container\n# */\n# protected $container;\n\
+    # \n# /**\n# * Setup the IoC container instance.\n# *\n# * @param  \\Illuminate\\\
+    Contracts\\Container\\Container  $container\n# * @return void"
+- name: setAsGlobal
+  visibility: public
+  parameters: []
+  comment: '# * Make this capsule instance available globally.
+
+    # *
+
+    # * @return void'
+- name: getContainer
+  visibility: public
+  parameters: []
+  comment: '# * Get the IoC container instance.
+
+    # *
+
+    # * @return \Illuminate\Contracts\Container\Container'
+- name: setContainer
+  visibility: public
+  parameters:
+  - name: container
+  comment: '# * Set the IoC container instance.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Container\Container  $container
+
+    # * @return void'
+traits:
+- Illuminate\Contracts\Container\Container
+- Illuminate\Support\Fluent
+interfaces: []

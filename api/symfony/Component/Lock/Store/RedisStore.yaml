@@ -1,0 +1,100 @@
+name: RedisStore
+class_comment: "# * RedisStore is a PersistingStoreInterface implementation using\
+  \ Redis as store engine.\n# *\n# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n\
+  # * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>"
+dependencies:
+- name: ServerException
+  type: class
+  source: Predis\Response\ServerException
+- name: Relay
+  type: class
+  source: Relay\Relay
+- name: InvalidTtlException
+  type: class
+  source: Symfony\Component\Lock\Exception\InvalidTtlException
+- name: LockConflictedException
+  type: class
+  source: Symfony\Component\Lock\Exception\LockConflictedException
+- name: LockStorageException
+  type: class
+  source: Symfony\Component\Lock\Exception\LockStorageException
+- name: Key
+  type: class
+  source: Symfony\Component\Lock\Key
+- name: PersistingStoreInterface
+  type: class
+  source: Symfony\Component\Lock\PersistingStoreInterface
+- name: SharedLockStoreInterface
+  type: class
+  source: Symfony\Component\Lock\SharedLockStoreInterface
+- name: ExpiringStoreTrait
+  type: class
+  source: ExpiringStoreTrait
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: redis
+  - name: initialTtl
+    default: '300.0'
+  comment: "# * RedisStore is a PersistingStoreInterface implementation using Redis\
+    \ as store engine.\n# *\n# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n\
+    # * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>\n# */\n# class RedisStore\
+    \ implements SharedLockStoreInterface\n# {\n# use ExpiringStoreTrait;\n# \n# private\
+    \ bool $supportTime;\n# \n# /**\n# * @param float $initialTtl The expiration delay\
+    \ of locks in seconds"
+- name: save
+  visibility: public
+  parameters:
+  - name: key
+  comment: null
+- name: saveRead
+  visibility: public
+  parameters:
+  - name: key
+  comment: null
+- name: putOffExpiration
+  visibility: public
+  parameters:
+  - name: key
+  - name: ttl
+  comment: null
+- name: delete
+  visibility: public
+  parameters:
+  - name: key
+  comment: null
+- name: exists
+  visibility: public
+  parameters:
+  - name: key
+  comment: null
+- name: evaluate
+  visibility: private
+  parameters:
+  - name: script
+  - name: resource
+  - name: args
+  comment: null
+- name: getUniqueToken
+  visibility: private
+  parameters:
+  - name: key
+  comment: null
+- name: getNowCode
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Predis\Response\ServerException
+- Relay\Relay
+- Symfony\Component\Lock\Exception\InvalidTtlException
+- Symfony\Component\Lock\Exception\LockConflictedException
+- Symfony\Component\Lock\Exception\LockStorageException
+- Symfony\Component\Lock\Key
+- Symfony\Component\Lock\PersistingStoreInterface
+- Symfony\Component\Lock\SharedLockStoreInterface
+- ExpiringStoreTrait
+interfaces:
+- SharedLockStoreInterface

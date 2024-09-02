@@ -1,0 +1,19 @@
+name: FooWithAbstractArgument
+class_comment: null
+dependencies: []
+properties:
+- name: baz
+  visibility: private
+  comment: '# @var string'
+- name: bar
+  visibility: private
+  comment: '# @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: baz
+  - name: bar
+  comment: null
+traits: []
+interfaces: []

@@ -1,0 +1,59 @@
+name: RegisterTokenUsageTrackingPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: RegisterTokenUsageTrackingPass
+  type: class
+  source: Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\RegisterTokenUsageTrackingPass
+- name: Alias
+  type: class
+  source: Symfony\Component\DependencyInjection\Alias
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: ContainerInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerInterface
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: SessionFactory
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\SessionFactory
+- name: TokenStorage
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
+- name: UsageTrackingTokenStorage
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\Storage\UsageTrackingTokenStorage
+- name: ContextListener
+  type: class
+  source: Symfony\Component\Security\Http\Firewall\ContextListener
+properties: []
+methods:
+- name: testTokenStorageIsUntrackedIfSessionIsMissing
+  visibility: public
+  parameters: []
+  comment: null
+- name: testContextListenerIsNotModifiedIfTokenStorageDoesNotSupportUsageTracking
+  visibility: public
+  parameters: []
+  comment: null
+- name: testContextListenerEnablesUsageTrackingIfSupportedByTokenStorage
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\SecurityBundle\DependencyInjection\Compiler\RegisterTokenUsageTrackingPass
+- Symfony\Component\DependencyInjection\Alias
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\ContainerInterface
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\HttpFoundation\Session\SessionFactory
+- Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
+- Symfony\Component\Security\Core\Authentication\Token\Storage\UsageTrackingTokenStorage
+- Symfony\Component\Security\Http\Firewall\ContextListener
+interfaces: []

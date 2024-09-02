@@ -1,0 +1,11 @@
+name: SessionFactoryInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: createSession
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

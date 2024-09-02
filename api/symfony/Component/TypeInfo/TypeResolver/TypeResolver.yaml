@@ -1,0 +1,90 @@
+name: TypeResolver
+class_comment: null
+dependencies:
+- name: PhpDocParser
+  type: class
+  source: PHPStan\PhpDocParser\Parser\PhpDocParser
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: UnsupportedException
+  type: class
+  source: Symfony\Component\TypeInfo\Exception\UnsupportedException
+- name: Type
+  type: class
+  source: Symfony\Component\TypeInfo\Type
+- name: TypeContext
+  type: class
+  source: Symfony\Component\TypeInfo\TypeContext\TypeContext
+- name: TypeContextFactory
+  type: class
+  source: Symfony\Component\TypeInfo\TypeContext\TypeContextFactory
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: resolvers
+  comment: '# * Resolves type for a given subject by delegating resolving to nested
+    type resolvers.
+
+    # *
+
+    # * @author Mathias Arlaud <mathias.arlaud@gmail.com>
+
+    # * @author Baptiste Leduc <baptiste.leduc@gmail.com>
+
+    # *
+
+    # * @experimental
+
+    # */
+
+    # final readonly class TypeResolver implements TypeResolverInterface
+
+    # {
+
+    # /**
+
+    # * @param ContainerInterface $resolvers Locator of type resolvers, keyed by supported
+    subject type'
+- name: resolve
+  visibility: public
+  parameters:
+  - name: subject
+  - name: typeContext
+    default: 'null'
+  comment: null
+- name: create
+  visibility: public
+  parameters:
+  - name: resolvers
+    default: 'null'
+  comment: "# @param TypeResolverInterface $resolver */\n# $resolver = $this->resolvers->get($subjectType);\n\
+    # \n# return $resolver->resolve($subject, $typeContext);\n# }\n# \n# /**\n# *\
+    \ @param array<string, TypeResolverInterface>|null $resolvers"
+- name: __construct
+  visibility: public
+  parameters:
+  - name: resolvers
+  comment: null
+- name: has
+  visibility: public
+  parameters:
+  - name: id
+  comment: null
+- name: get
+  visibility: public
+  parameters:
+  - name: id
+  comment: null
+traits:
+- PHPStan\PhpDocParser\Parser\PhpDocParser
+- Psr\Container\ContainerInterface
+- Symfony\Component\TypeInfo\Exception\UnsupportedException
+- Symfony\Component\TypeInfo\Type
+- Symfony\Component\TypeInfo\TypeContext\TypeContext
+- Symfony\Component\TypeInfo\TypeContext\TypeContextFactory
+interfaces:
+- TypeResolverInterface
+- ContainerInterface

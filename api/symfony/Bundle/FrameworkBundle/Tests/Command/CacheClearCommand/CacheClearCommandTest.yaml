@@ -1,0 +1,71 @@
+name: CacheClearCommandTest
+class_comment: null
+dependencies:
+- name: Application
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Console\Application
+- name: TestAppKernel
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Command\CacheClearCommand\Fixture\TestAppKernel
+- name: TestCase
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\TestCase
+- name: ConfigCacheFactory
+  type: class
+  source: Symfony\Component\Config\ConfigCacheFactory
+- name: ResourceInterface
+  type: class
+  source: Symfony\Component\Config\Resource\ResourceInterface
+- name: ArrayInput
+  type: class
+  source: Symfony\Component\Console\Input\ArrayInput
+- name: NullOutput
+  type: class
+  source: Symfony\Component\Console\Output\NullOutput
+- name: Container
+  type: class
+  source: Symfony\Component\DependencyInjection\Container
+- name: IOException
+  type: class
+  source: Symfony\Component\Filesystem\Exception\IOException
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: Finder
+  type: class
+  source: Symfony\Component\Finder\Finder
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testCacheIsFreshAfterCacheClearedWithWarmup
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCacheIsWarmedWhenCalledTwice
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCacheIsWarmedWithOldContainer
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Bundle\FrameworkBundle\Console\Application
+- Symfony\Bundle\FrameworkBundle\Tests\Command\CacheClearCommand\Fixture\TestAppKernel
+- Symfony\Bundle\FrameworkBundle\Tests\TestCase
+- Symfony\Component\Config\ConfigCacheFactory
+- Symfony\Component\Config\Resource\ResourceInterface
+- Symfony\Component\Console\Input\ArrayInput
+- Symfony\Component\Console\Output\NullOutput
+- Symfony\Component\DependencyInjection\Container
+- Symfony\Component\Filesystem\Exception\IOException
+- Symfony\Component\Filesystem\Filesystem
+- Symfony\Component\Finder\Finder
+interfaces: []

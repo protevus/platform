@@ -1,0 +1,16 @@
+name: CountValidatorCountableTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: Countable
+  type: class
+  source: Symfony\Component\Validator\Tests\Fixtures\Countable
+properties: []
+methods:
+- name: createCollection
+  visibility: protected
+  parameters:
+  - name: content
+  comment: null
+traits:
+- Symfony\Component\Validator\Tests\Fixtures\Countable
+interfaces: []

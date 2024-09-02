@@ -1,0 +1,44 @@
+name: HttpClientAssertionsTrait
+class_comment: null
+dependencies:
+- name: KernelBrowser
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\KernelBrowser
+- name: HttpClientDataCollector
+  type: class
+  source: Symfony\Component\HttpClient\DataCollector\HttpClientDataCollector
+properties: []
+methods:
+- name: assertHttpClientRequest
+  visibility: public
+  parameters:
+  - name: expectedUrl
+  - name: expectedMethod
+    default: '''GET'''
+  - name: expectedBody
+    default: 'null'
+  - name: expectedHeaders
+    default: '[]'
+  - name: httpClientId
+    default: '''http_client'''
+  comment: null
+- name: assertNotHttpClientRequest
+  visibility: public
+  parameters:
+  - name: unexpectedUrl
+  - name: expectedMethod
+    default: '''GET'''
+  - name: httpClientId
+    default: '''http_client'''
+  comment: null
+- name: assertHttpClientRequestCount
+  visibility: public
+  parameters:
+  - name: count
+  - name: httpClientId
+    default: '''http_client'''
+  comment: null
+traits:
+- Symfony\Bundle\FrameworkBundle\KernelBrowser
+- Symfony\Component\HttpClient\DataCollector\HttpClientDataCollector
+interfaces: []

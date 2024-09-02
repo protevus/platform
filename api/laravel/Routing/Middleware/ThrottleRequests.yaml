@@ -1,0 +1,335 @@
+name: ThrottleRequests
+class_comment: null
+dependencies:
+- name: Closure
+  type: class
+  source: Closure
+- name: RateLimiter
+  type: class
+  source: Illuminate\Cache\RateLimiter
+- name: Unlimited
+  type: class
+  source: Illuminate\Cache\RateLimiting\Unlimited
+- name: HttpResponseException
+  type: class
+  source: Illuminate\Http\Exceptions\HttpResponseException
+- name: ThrottleRequestsException
+  type: class
+  source: Illuminate\Http\Exceptions\ThrottleRequestsException
+- name: MissingRateLimiterException
+  type: class
+  source: Illuminate\Routing\Exceptions\MissingRateLimiterException
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: InteractsWithTime
+  type: class
+  source: Illuminate\Support\InteractsWithTime
+- name: RuntimeException
+  type: class
+  source: RuntimeException
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+- name: InteractsWithTime
+  type: class
+  source: InteractsWithTime
+properties:
+- name: limiter
+  visibility: protected
+  comment: '# * The rate limiter instance.
+
+    # *
+
+    # * @var \Illuminate\Cache\RateLimiter'
+- name: shouldHashKeys
+  visibility: protected
+  comment: '# * Indicates if the rate limiter keys should be hashed.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: limiter
+  comment: "# * The rate limiter instance.\n# *\n# * @var \\Illuminate\\Cache\\RateLimiter\n\
+    # */\n# protected $limiter;\n# \n# /**\n# * Indicates if the rate limiter keys\
+    \ should be hashed.\n# *\n# * @var bool\n# */\n# protected static $shouldHashKeys\
+    \ = true;\n# \n# /**\n# * Create a new request throttler.\n# *\n# * @param  \\\
+    Illuminate\\Cache\\RateLimiter  $limiter\n# * @return void"
+- name: using
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Specify the named rate limiter to use for the middleware.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return string'
+- name: with
+  visibility: public
+  parameters:
+  - name: maxAttempts
+    default: '60'
+  - name: decayMinutes
+    default: '1'
+  - name: prefix
+    default: ''''''
+  comment: '# * Specify the rate limiter configuration for the middleware.
+
+    # *
+
+    # * @param  int  $maxAttempts
+
+    # * @param  int  $decayMinutes
+
+    # * @param  string  $prefix
+
+    # * @return string
+
+    # *
+
+    # * @named-arguments-supported'
+- name: handle
+  visibility: public
+  parameters:
+  - name: request
+  - name: next
+  - name: maxAttempts
+    default: '60'
+  - name: decayMinutes
+    default: '1'
+  - name: prefix
+    default: ''''''
+  comment: '# * Handle an incoming request.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  \Closure  $next
+
+    # * @param  int|string  $maxAttempts
+
+    # * @param  float|int  $decayMinutes
+
+    # * @param  string  $prefix
+
+    # * @return \Symfony\Component\HttpFoundation\Response
+
+    # *
+
+    # * @throws \Illuminate\Http\Exceptions\ThrottleRequestsException
+
+    # * @throws \Illuminate\Routing\Exceptions\MissingRateLimiterException'
+- name: handleRequestUsingNamedLimiter
+  visibility: protected
+  parameters:
+  - name: request
+  - name: next
+  - name: limiterName
+  - name: limiter
+  comment: '# * Handle an incoming request.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  \Closure  $next
+
+    # * @param  string  $limiterName
+
+    # * @param  \Closure  $limiter
+
+    # * @return \Symfony\Component\HttpFoundation\Response
+
+    # *
+
+    # * @throws \Illuminate\Http\Exceptions\ThrottleRequestsException'
+- name: handleRequest
+  visibility: protected
+  parameters:
+  - name: request
+  - name: next
+  - name: limits
+  comment: '# * Handle an incoming request.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  \Closure  $next
+
+    # * @param  array  $limits
+
+    # * @return \Symfony\Component\HttpFoundation\Response
+
+    # *
+
+    # * @throws \Illuminate\Http\Exceptions\ThrottleRequestsException'
+- name: resolveMaxAttempts
+  visibility: protected
+  parameters:
+  - name: request
+  - name: maxAttempts
+  comment: '# * Resolve the number of attempts if the user is authenticated or not.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  int|string  $maxAttempts
+
+    # * @return int
+
+    # *
+
+    # * @throws \Illuminate\Routing\Exceptions\MissingRateLimiterException'
+- name: resolveRequestSignature
+  visibility: protected
+  parameters:
+  - name: request
+  comment: '# * Resolve request signature.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return string
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: buildException
+  visibility: protected
+  parameters:
+  - name: request
+  - name: key
+  - name: maxAttempts
+  - name: responseCallback
+    default: 'null'
+  comment: '# * Create a ''too many attempts'' exception.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @param  string  $key
+
+    # * @param  int  $maxAttempts
+
+    # * @param  callable|null  $responseCallback
+
+    # * @return \Illuminate\Http\Exceptions\ThrottleRequestsException|\Illuminate\Http\Exceptions\HttpResponseException'
+- name: getTimeUntilNextRetry
+  visibility: protected
+  parameters:
+  - name: key
+  comment: '# * Get the number of seconds until the next retry.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @return int'
+- name: addHeaders
+  visibility: protected
+  parameters:
+  - name: response
+  - name: maxAttempts
+  - name: remainingAttempts
+  - name: retryAfter
+    default: 'null'
+  comment: '# * Add the limit header information to the given response.
+
+    # *
+
+    # * @param  \Symfony\Component\HttpFoundation\Response  $response
+
+    # * @param  int  $maxAttempts
+
+    # * @param  int  $remainingAttempts
+
+    # * @param  int|null  $retryAfter
+
+    # * @return \Symfony\Component\HttpFoundation\Response'
+- name: getHeaders
+  visibility: protected
+  parameters:
+  - name: maxAttempts
+  - name: remainingAttempts
+  - name: retryAfter
+    default: 'null'
+  - name: response
+    default: 'null'
+  comment: '# * Get the limit headers information.
+
+    # *
+
+    # * @param  int  $maxAttempts
+
+    # * @param  int  $remainingAttempts
+
+    # * @param  int|null  $retryAfter
+
+    # * @param  \Symfony\Component\HttpFoundation\Response|null  $response
+
+    # * @return array'
+- name: calculateRemainingAttempts
+  visibility: protected
+  parameters:
+  - name: key
+  - name: maxAttempts
+  - name: retryAfter
+    default: 'null'
+  comment: '# * Calculate the number of remaining attempts.
+
+    # *
+
+    # * @param  string  $key
+
+    # * @param  int  $maxAttempts
+
+    # * @param  int|null  $retryAfter
+
+    # * @return int'
+- name: formatIdentifier
+  visibility: private
+  parameters:
+  - name: value
+  comment: '# * Format the given identifier based on the configured hashing settings.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: shouldHashKeys
+  visibility: public
+  parameters:
+  - name: shouldHashKeys
+    default: 'true'
+  comment: '# * Specify whether rate limiter keys should be hashed.
+
+    # *
+
+    # * @param  bool  $shouldHashKeys
+
+    # * @return void'
+traits:
+- Closure
+- Illuminate\Cache\RateLimiter
+- Illuminate\Cache\RateLimiting\Unlimited
+- Illuminate\Http\Exceptions\HttpResponseException
+- Illuminate\Http\Exceptions\ThrottleRequestsException
+- Illuminate\Routing\Exceptions\MissingRateLimiterException
+- Illuminate\Support\Arr
+- Illuminate\Support\InteractsWithTime
+- RuntimeException
+- Symfony\Component\HttpFoundation\Response
+- InteractsWithTime
+interfaces: []

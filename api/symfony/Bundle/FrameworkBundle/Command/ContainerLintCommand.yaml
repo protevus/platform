@@ -1,0 +1,93 @@
+name: ContainerLintCommand
+class_comment: null
+dependencies:
+- name: ConfigCache
+  type: class
+  source: Symfony\Component\Config\ConfigCache
+- name: FileLocator
+  type: class
+  source: Symfony\Component\Config\FileLocator
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Console\Exception\RuntimeException
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+- name: CheckAliasValidityPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CheckAliasValidityPass
+- name: CheckTypeDeclarationsPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CheckTypeDeclarationsPass
+- name: PassConfig
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\PassConfig
+- name: ResolveFactoryClassPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ResolveFactoryClassPass
+- name: Container
+  type: class
+  source: Symfony\Component\DependencyInjection\Container
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: XmlFileLoader
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\XmlFileLoader
+- name: EnvPlaceholderParameterBag
+  type: class
+  source: Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag
+- name: Kernel
+  type: class
+  source: Symfony\Component\HttpKernel\Kernel
+properties: []
+methods:
+- name: configure
+  visibility: protected
+  parameters: []
+  comment: null
+- name: execute
+  visibility: protected
+  parameters:
+  - name: input
+  - name: output
+  comment: null
+- name: getContainerBuilder
+  visibility: private
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Config\ConfigCache
+- Symfony\Component\Config\FileLocator
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Exception\RuntimeException
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Style\SymfonyStyle
+- Symfony\Component\DependencyInjection\Compiler\CheckAliasValidityPass
+- Symfony\Component\DependencyInjection\Compiler\CheckTypeDeclarationsPass
+- Symfony\Component\DependencyInjection\Compiler\PassConfig
+- Symfony\Component\DependencyInjection\Compiler\ResolveFactoryClassPass
+- Symfony\Component\DependencyInjection\Container
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Loader\XmlFileLoader
+- Symfony\Component\DependencyInjection\ParameterBag\EnvPlaceholderParameterBag
+- Symfony\Component\HttpKernel\Kernel
+interfaces: []

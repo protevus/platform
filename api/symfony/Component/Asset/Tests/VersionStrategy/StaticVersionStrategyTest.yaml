@@ -1,0 +1,30 @@
+name: StaticVersionStrategyTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: StaticVersionStrategy
+  type: class
+  source: Symfony\Component\Asset\VersionStrategy\StaticVersionStrategy
+properties: []
+methods:
+- name: testGetVersion
+  visibility: public
+  parameters: []
+  comment: null
+- name: testApplyVersion
+  visibility: public
+  parameters:
+  - name: path
+  - name: version
+  - name: format
+  comment: '# * @dataProvider getConfigs'
+- name: getConfigs
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Asset\VersionStrategy\StaticVersionStrategy
+interfaces: []

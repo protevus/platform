@@ -1,0 +1,107 @@
+name: MergeCollectionListenerTestCase
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: UnexpectedTypeException
+  type: class
+  source: Symfony\Component\Form\Exception\UnexpectedTypeException
+- name: MergeCollectionListener
+  type: class
+  source: Symfony\Component\Form\Extension\Core\EventListener\MergeCollectionListener
+- name: FormBuilderInterface
+  type: class
+  source: Symfony\Component\Form\FormBuilderInterface
+- name: FormEvent
+  type: class
+  source: Symfony\Component\Form\FormEvent
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getBuilder
+  visibility: protected
+  parameters:
+  - name: name
+    default: '''name'''
+  comment: null
+- name: getForm
+  visibility: protected
+  parameters:
+  - name: name
+    default: '''name'''
+  - name: propertyPath
+    default: 'null'
+  comment: null
+- name: getBooleanMatrix1
+  visibility: public
+  parameters: []
+  comment: null
+- name: getBooleanMatrix2
+  visibility: public
+  parameters: []
+  comment: null
+- name: getData
+  visibility: protected
+  parameters:
+  - name: data
+  comment: null
+- name: testAddExtraEntriesIfAllowAdd
+  visibility: public
+  parameters:
+  - name: allowDelete
+  comment: '# * @dataProvider getBooleanMatrix1'
+- name: testAddExtraEntriesIfAllowAddDontOverwriteExistingIndices
+  visibility: public
+  parameters:
+  - name: allowDelete
+  comment: '# * @dataProvider getBooleanMatrix1'
+- name: testDoNothingIfNotAllowAdd
+  visibility: public
+  parameters:
+  - name: allowDelete
+  comment: '# * @dataProvider getBooleanMatrix1'
+- name: testRemoveMissingEntriesIfAllowDelete
+  visibility: public
+  parameters:
+  - name: allowAdd
+  comment: '# * @dataProvider getBooleanMatrix1'
+- name: testDoNothingIfNotAllowDelete
+  visibility: public
+  parameters:
+  - name: allowAdd
+  comment: '# * @dataProvider getBooleanMatrix1'
+- name: testRequireArrayOrTraversable
+  visibility: public
+  parameters:
+  - name: allowAdd
+  - name: allowDelete
+  comment: '# * @dataProvider getBooleanMatrix2'
+- name: testDealWithNullData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDealWithNullOriginalDataIfAllowAdd
+  visibility: public
+  parameters:
+  - name: allowDelete
+  comment: '# * @dataProvider getBooleanMatrix1'
+- name: testDontDealWithNullOriginalDataIfNotAllowAdd
+  visibility: public
+  parameters:
+  - name: allowDelete
+  comment: '# * @dataProvider getBooleanMatrix1'
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\Exception\UnexpectedTypeException
+- Symfony\Component\Form\Extension\Core\EventListener\MergeCollectionListener
+- Symfony\Component\Form\FormBuilderInterface
+- Symfony\Component\Form\FormEvent
+- Symfony\Component\Form\FormInterface
+interfaces: []

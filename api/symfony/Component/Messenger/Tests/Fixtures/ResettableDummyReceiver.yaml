@@ -1,0 +1,20 @@
+name: ResettableDummyReceiver
+class_comment: null
+dependencies:
+- name: ResetInterface
+  type: class
+  source: Symfony\Contracts\Service\ResetInterface
+properties: []
+methods:
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+- name: hasBeenReset
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Contracts\Service\ResetInterface
+interfaces:
+- ResetInterface

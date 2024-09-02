@@ -1,0 +1,63 @@
+name: ImmutableEventDispatcherTest
+class_comment: '# * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: MockObject
+  type: class
+  source: PHPUnit\Framework\MockObject\MockObject
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcherInterface
+- name: EventSubscriberInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventSubscriberInterface
+- name: ImmutableEventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\ImmutableEventDispatcher
+- name: Event
+  type: class
+  source: Symfony\Contracts\EventDispatcher\Event
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testDispatchDelegates
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetListenersDelegates
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHasListenersDelegates
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddListenerDisallowed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddSubscriberDisallowed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemoveListenerDisallowed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemoveSubscriberDisallowed
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\MockObject\MockObject
+- PHPUnit\Framework\TestCase
+- Symfony\Component\EventDispatcher\EventDispatcherInterface
+- Symfony\Component\EventDispatcher\EventSubscriberInterface
+- Symfony\Component\EventDispatcher\ImmutableEventDispatcher
+- Symfony\Contracts\EventDispatcher\Event
+interfaces: []

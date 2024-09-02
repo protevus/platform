@@ -1,0 +1,56 @@
+name: MessageListenerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: MessageEvent
+  type: class
+  source: Symfony\Component\Mailer\Event\MessageEvent
+- name: MessageListener
+  type: class
+  source: Symfony\Component\Mailer\EventListener\MessageListener
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: Headers
+  type: class
+  source: Symfony\Component\Mime\Header\Headers
+- name: MailboxListHeader
+  type: class
+  source: Symfony\Component\Mime\Header\MailboxListHeader
+- name: UnstructuredHeader
+  type: class
+  source: Symfony\Component\Mime\Header\UnstructuredHeader
+- name: Message
+  type: class
+  source: Symfony\Component\Mime\Message
+properties: []
+methods:
+- name: testHeaders
+  visibility: public
+  parameters:
+  - name: initialHeaders
+  - name: defaultHeaders
+  - name: expectedHeaders
+  - name: rules
+    default: MessageListener::DEFAULT_RULES
+  comment: '# * @dataProvider provideHeaders'
+- name: provideHeaders
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mailer\Event\MessageEvent
+- Symfony\Component\Mailer\EventListener\MessageListener
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Header\Headers
+- Symfony\Component\Mime\Header\MailboxListHeader
+- Symfony\Component\Mime\Header\UnstructuredHeader
+- Symfony\Component\Mime\Message
+interfaces: []

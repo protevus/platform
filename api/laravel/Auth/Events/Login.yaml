@@ -1,0 +1,49 @@
+name: Login
+class_comment: null
+dependencies:
+- name: SerializesModels
+  type: class
+  source: Illuminate\Queue\SerializesModels
+- name: SerializesModels
+  type: class
+  source: SerializesModels
+properties:
+- name: guard
+  visibility: public
+  comment: '# * The authentication guard name.
+
+    # *
+
+    # * @var string'
+- name: user
+  visibility: public
+  comment: '# * The authenticated user.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Auth\Authenticatable'
+- name: remember
+  visibility: public
+  comment: '# * Indicates if the user should be "remembered".
+
+    # *
+
+    # * @var bool'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: guard
+  - name: user
+  - name: remember
+  comment: "# * The authentication guard name.\n# *\n# * @var string\n# */\n# public\
+    \ $guard;\n# \n# /**\n# * The authenticated user.\n# *\n# * @var \\Illuminate\\\
+    Contracts\\Auth\\Authenticatable\n# */\n# public $user;\n# \n# /**\n# * Indicates\
+    \ if the user should be \"remembered\".\n# *\n# * @var bool\n# */\n# public $remember;\n\
+    # \n# /**\n# * Create a new event instance.\n# *\n# * @param  string  $guard\n\
+    # * @param  \\Illuminate\\Contracts\\Auth\\Authenticatable  $user\n# * @param\
+    \  bool  $remember\n# * @return void"
+traits:
+- Illuminate\Queue\SerializesModels
+- SerializesModels
+interfaces: []

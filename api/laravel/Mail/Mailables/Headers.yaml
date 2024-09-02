@@ -1,0 +1,97 @@
+name: Headers
+class_comment: null
+dependencies:
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: Conditionable
+  type: class
+  source: Illuminate\Support\Traits\Conditionable
+- name: Conditionable
+  type: class
+  source: Conditionable
+properties:
+- name: messageId
+  visibility: public
+  comment: '# * The message''s message ID.
+
+    # *
+
+    # * @var string|null'
+- name: references
+  visibility: public
+  comment: '# * The message IDs that are referenced by the message.
+
+    # *
+
+    # * @var array'
+- name: text
+  visibility: public
+  comment: '# * The message''s text headers.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: messageId
+    default: 'null'
+  - name: references
+    default: '[]'
+  - name: text
+    default: '[]'
+  comment: "# * The message's message ID.\n# *\n# * @var string|null\n# */\n# public\
+    \ $messageId;\n# \n# /**\n# * The message IDs that are referenced by the message.\n\
+    # *\n# * @var array\n# */\n# public $references;\n# \n# /**\n# * The message's\
+    \ text headers.\n# *\n# * @var array\n# */\n# public $text;\n# \n# /**\n# * Create\
+    \ a new instance of headers for a message.\n# *\n# * @param  string|null  $messageId\n\
+    # * @param  array  $references\n# * @param  array  $text\n# * @return void\n#\
+    \ *\n# * @named-arguments-supported"
+- name: messageId
+  visibility: public
+  parameters:
+  - name: messageId
+  comment: '# * Set the message ID.
+
+    # *
+
+    # * @param  string  $messageId
+
+    # * @return $this'
+- name: references
+  visibility: public
+  parameters:
+  - name: references
+  comment: '# * Set the message IDs referenced by this message.
+
+    # *
+
+    # * @param  array  $references
+
+    # * @return $this'
+- name: text
+  visibility: public
+  parameters:
+  - name: text
+  comment: '# * Set the headers for this message.
+
+    # *
+
+    # * @param  array  $text
+
+    # * @return $this'
+- name: referencesString
+  visibility: public
+  parameters: []
+  comment: '# * Get the references header as a string.
+
+    # *
+
+    # * @return string'
+traits:
+- Illuminate\Support\Str
+- Illuminate\Support\Traits\Conditionable
+- Conditionable
+interfaces: []

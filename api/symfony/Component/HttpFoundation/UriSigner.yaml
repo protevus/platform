@@ -1,0 +1,95 @@
+name: UriSigner
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: LogicException
+  type: class
+  source: Symfony\Component\HttpFoundation\Exception\LogicException
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: secret
+  - name: hashParameter
+    default: '''_hash'''
+  - name: expirationParameter
+    default: '''_expiration'''
+  comment: '# * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # class UriSigner
+
+    # {
+
+    # /**
+
+    # * @param string $hashParameter       Query string parameter to use
+
+    # * @param string $expirationParameter Query string parameter to use for expiration'
+- name: sign
+  visibility: public
+  parameters:
+  - name: uri/*
+  - name: expiration
+    default: null*/
+  comment: '# * Signs a URI.
+
+    # *
+
+    # * The given URI is signed by adding the query string parameter
+
+    # * which value depends on the URI and the secret.
+
+    # *
+
+    # * @param \DateTimeInterface|\DateInterval|int|null $expiration The expiration
+    for the given URI.
+
+    # *                                                              If $expiration
+    is a \DateTimeInterface, it''s expected to be the exact date + time.
+
+    # *                                                              If $expiration
+    is a \DateInterval, the interval is added to "now" to get the date + time.
+
+    # *                                                              If $expiration
+    is an int, it''s expected to be a timestamp in seconds of the exact date + time.
+
+    # *                                                              If $expiration
+    is null, no expiration.
+
+    # *
+
+    # * The expiration is added as a query string parameter.'
+- name: check
+  visibility: public
+  parameters:
+  - name: uri
+  comment: '# * Checks that a URI contains the correct hash.
+
+    # * Also checks if the URI has not expired (If you used expiration during signing).'
+- name: checkRequest
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+- name: computeHash
+  visibility: private
+  parameters:
+  - name: uri
+  comment: null
+- name: buildUrl
+  visibility: private
+  parameters:
+  - name: url
+  - name: params
+    default: '[]'
+  comment: null
+- name: getExpirationTime
+  visibility: private
+  parameters:
+  - name: expiration
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Exception\LogicException
+interfaces: []

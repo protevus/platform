@@ -1,0 +1,161 @@
+name: SQLiteConnection
+class_comment: null
+dependencies:
+- name: Exception
+  type: class
+  source: Exception
+- name: QueryGrammar
+  type: class
+  source: Illuminate\Database\Query\Grammars\SQLiteGrammar
+- name: SQLiteProcessor
+  type: class
+  source: Illuminate\Database\Query\Processors\SQLiteProcessor
+- name: SchemaGrammar
+  type: class
+  source: Illuminate\Database\Schema\Grammars\SQLiteGrammar
+- name: SQLiteBuilder
+  type: class
+  source: Illuminate\Database\Schema\SQLiteBuilder
+- name: SqliteSchemaState
+  type: class
+  source: Illuminate\Database\Schema\SqliteSchemaState
+- name: Filesystem
+  type: class
+  source: Illuminate\Filesystem\Filesystem
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: pdo
+  - name: database
+    default: ''''''
+  - name: tablePrefix
+    default: ''''''
+  - name: config
+    default: '[]'
+  comment: '# * Create a new database connection instance.
+
+    # *
+
+    # * @param  \PDO|\Closure  $pdo
+
+    # * @param  string  $database
+
+    # * @param  string  $tablePrefix
+
+    # * @param  array  $config
+
+    # * @return void'
+- name: configureForeignKeyConstraints
+  visibility: protected
+  parameters: []
+  comment: '# * Enable or disable foreign key constraints if configured.
+
+    # *
+
+    # * @return void'
+- name: configureBusyTimeout
+  visibility: protected
+  parameters: []
+  comment: '# * Set the busy timeout if configured.
+
+    # *
+
+    # * @return void'
+- name: configureJournalMode
+  visibility: protected
+  parameters: []
+  comment: '# * Set the journal mode if configured.
+
+    # *
+
+    # * @return void'
+- name: configureSynchronous
+  visibility: protected
+  parameters: []
+  comment: '# * Set the synchronous mode if configured.
+
+    # *
+
+    # * @return void'
+- name: escapeBinary
+  visibility: protected
+  parameters:
+  - name: value
+  comment: '# * Escape a binary value for safe SQL embedding.
+
+    # *
+
+    # * @param  string  $value
+
+    # * @return string'
+- name: isUniqueConstraintError
+  visibility: protected
+  parameters:
+  - name: exception
+  comment: '# * Determine if the given database exception was caused by a unique constraint
+    violation.
+
+    # *
+
+    # * @param  \Exception  $exception
+
+    # * @return bool'
+- name: getDefaultQueryGrammar
+  visibility: protected
+  parameters: []
+  comment: '# * Get the default query grammar instance.
+
+    # *
+
+    # * @return \Illuminate\Database\Query\Grammars\SQLiteGrammar'
+- name: getSchemaBuilder
+  visibility: public
+  parameters: []
+  comment: '# * Get a schema builder instance for the connection.
+
+    # *
+
+    # * @return \Illuminate\Database\Schema\SQLiteBuilder'
+- name: getDefaultSchemaGrammar
+  visibility: protected
+  parameters: []
+  comment: '# * Get the default schema grammar instance.
+
+    # *
+
+    # * @return \Illuminate\Database\Schema\Grammars\SQLiteGrammar'
+- name: getSchemaState
+  visibility: public
+  parameters:
+  - name: files
+    default: 'null'
+  - name: processFactory
+    default: 'null'
+  comment: '# * Get the schema state for the connection.
+
+    # *
+
+    # * @param  \Illuminate\Filesystem\Filesystem|null  $files
+
+    # * @param  callable|null  $processFactory
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: getDefaultPostProcessor
+  visibility: protected
+  parameters: []
+  comment: '# * Get the default post processor instance.
+
+    # *
+
+    # * @return \Illuminate\Database\Query\Processors\SQLiteProcessor'
+traits:
+- Exception
+- Illuminate\Database\Query\Processors\SQLiteProcessor
+- Illuminate\Database\Schema\SQLiteBuilder
+- Illuminate\Database\Schema\SqliteSchemaState
+- Illuminate\Filesystem\Filesystem
+interfaces: []

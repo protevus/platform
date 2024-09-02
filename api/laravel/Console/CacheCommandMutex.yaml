@@ -1,0 +1,120 @@
+name: CacheCommandMutex
+class_comment: null
+dependencies:
+- name: CarbonInterval
+  type: class
+  source: Carbon\CarbonInterval
+- name: DynamoDbStore
+  type: class
+  source: Illuminate\Cache\DynamoDbStore
+- name: Cache
+  type: class
+  source: Illuminate\Contracts\Cache\Factory
+- name: LockProvider
+  type: class
+  source: Illuminate\Contracts\Cache\LockProvider
+- name: InteractsWithTime
+  type: class
+  source: Illuminate\Support\InteractsWithTime
+- name: InteractsWithTime
+  type: class
+  source: InteractsWithTime
+properties:
+- name: cache
+  visibility: public
+  comment: '# * The cache factory implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Cache\Factory'
+- name: store
+  visibility: public
+  comment: '# * The cache store that should be used.
+
+    # *
+
+    # * @var string|null'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: cache
+  comment: "# * The cache factory implementation.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Cache\\Factory\n# */\n# public $cache;\n# \n# /**\n# * The cache store that should\
+    \ be used.\n# *\n# * @var string|null\n# */\n# public $store = null;\n# \n# /**\n\
+    # * Create a new command mutex.\n# *\n# * @param  \\Illuminate\\Contracts\\Cache\\\
+    Factory  $cache"
+- name: create
+  visibility: public
+  parameters:
+  - name: command
+  comment: '# * Attempt to obtain a command mutex for the given command.
+
+    # *
+
+    # * @param  \Illuminate\Console\Command  $command
+
+    # * @return bool'
+- name: exists
+  visibility: public
+  parameters:
+  - name: command
+  comment: '# * Determine if a command mutex exists for the given command.
+
+    # *
+
+    # * @param  \Illuminate\Console\Command  $command
+
+    # * @return bool'
+- name: forget
+  visibility: public
+  parameters:
+  - name: command
+  comment: '# * Release the mutex for the given command.
+
+    # *
+
+    # * @param  \Illuminate\Console\Command  $command
+
+    # * @return bool'
+- name: commandMutexName
+  visibility: protected
+  parameters:
+  - name: command
+  comment: '# * Get the isolatable command mutex name.
+
+    # *
+
+    # * @param  \Illuminate\Console\Command  $command
+
+    # * @return string'
+- name: useStore
+  visibility: public
+  parameters:
+  - name: store
+  comment: '# * Specify the cache store that should be used.
+
+    # *
+
+    # * @param  string|null  $store
+
+    # * @return $this'
+- name: shouldUseLocks
+  visibility: protected
+  parameters:
+  - name: store
+  comment: '# * Determine if the given store should use locks for command mutexes.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Cache\Store  $store
+
+    # * @return bool'
+traits:
+- Carbon\CarbonInterval
+- Illuminate\Cache\DynamoDbStore
+- Illuminate\Contracts\Cache\LockProvider
+- Illuminate\Support\InteractsWithTime
+- InteractsWithTime
+interfaces:
+- CommandMutex

@@ -1,0 +1,16 @@
+name: AbstractStaticMethodLoader
+class_comment: null
+dependencies:
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+properties: []
+methods:
+- name: loadMetadata
+  visibility: public
+  parameters:
+  - name: metadata
+  comment: null
+traits:
+- Symfony\Component\Validator\Mapping\ClassMetadata
+interfaces: []

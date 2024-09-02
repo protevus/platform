@@ -1,0 +1,143 @@
+name: ResolveInstanceofConditionalsPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ResourceInterface
+  type: class
+  source: Symfony\Component\Config\Resource\ResourceInterface
+- name: ResourceCheckerInterface
+  type: class
+  source: Symfony\Component\Config\ResourceCheckerInterface
+- name: BoundArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\BoundArgument
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ResolveChildDefinitionsPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass
+- name: ResolveInstanceofConditionalsPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ResolveInstanceofConditionalsPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: ResetInterface
+  type: class
+  source: Symfony\Contracts\Service\ResetInterface
+- name: ServiceSubscriberInterface
+  type: class
+  source: Symfony\Contracts\Service\ServiceSubscriberInterface
+properties: []
+methods:
+- name: testProcess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessInheritance
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessDoesReplaceShared
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessHandlesMultipleInheritance
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessUsesAutoconfiguredInstanceof
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAutoconfigureInstanceofDoesNotDuplicateTags
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessDoesNotUseAutoconfiguredInstanceofIfNotEnabled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBadInterfaceThrowsException
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBadInterfaceForAutomaticInstanceofIsOk
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessForAutoconfiguredCalls
+  visibility: public
+  parameters: []
+  comment: '# * Test that autoconfigured calls are handled gracefully.'
+- name: testProcessThrowsExceptionForArguments
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMergeReset
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessForAutoconfiguredBindings
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBindingsOnInstanceofConditionals
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDecoratorsAreNotAutomaticallyTagged
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDecoratorsKeepBehaviorDescribingTags
+  visibility: public
+  parameters: []
+  comment: null
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+- name: supports
+  visibility: public
+  parameters:
+  - name: metadata
+  comment: null
+- name: isFresh
+  visibility: public
+  parameters:
+  - name: resource
+  - name: timestamp
+  comment: null
+- name: getSubscribedServices
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Config\Resource\ResourceInterface
+- Symfony\Component\Config\ResourceCheckerInterface
+- Symfony\Component\DependencyInjection\Argument\BoundArgument
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\Compiler\ResolveChildDefinitionsPass
+- Symfony\Component\DependencyInjection\Compiler\ResolveInstanceofConditionalsPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Contracts\Service\ResetInterface
+- Symfony\Contracts\Service\ServiceSubscriberInterface
+interfaces:
+- ResetInterface

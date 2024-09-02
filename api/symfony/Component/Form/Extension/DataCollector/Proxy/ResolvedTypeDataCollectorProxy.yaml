@@ -1,0 +1,106 @@
+name: ResolvedTypeDataCollectorProxy
+class_comment: '# * Proxy that invokes a data collector when creating a form and its
+  view.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: FormDataCollectorInterface
+  type: class
+  source: Symfony\Component\Form\Extension\DataCollector\FormDataCollectorInterface
+- name: FormBuilderInterface
+  type: class
+  source: Symfony\Component\Form\FormBuilderInterface
+- name: FormFactoryInterface
+  type: class
+  source: Symfony\Component\Form\FormFactoryInterface
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+- name: FormTypeInterface
+  type: class
+  source: Symfony\Component\Form\FormTypeInterface
+- name: FormView
+  type: class
+  source: Symfony\Component\Form\FormView
+- name: ResolvedFormTypeInterface
+  type: class
+  source: Symfony\Component\Form\ResolvedFormTypeInterface
+- name: OptionsResolver
+  type: class
+  source: Symfony\Component\OptionsResolver\OptionsResolver
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: proxiedType
+  - name: dataCollector
+  comment: null
+- name: getBlockPrefix
+  visibility: public
+  parameters: []
+  comment: null
+- name: getParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: getInnerType
+  visibility: public
+  parameters: []
+  comment: null
+- name: getTypeExtensions
+  visibility: public
+  parameters: []
+  comment: null
+- name: createBuilder
+  visibility: public
+  parameters:
+  - name: factory
+  - name: name
+  - name: options
+    default: '[]'
+  comment: null
+- name: createView
+  visibility: public
+  parameters:
+  - name: form
+  - name: parent
+    default: 'null'
+  comment: null
+- name: buildForm
+  visibility: public
+  parameters:
+  - name: builder
+  - name: options
+  comment: null
+- name: buildView
+  visibility: public
+  parameters:
+  - name: view
+  - name: form
+  - name: options
+  comment: null
+- name: finishView
+  visibility: public
+  parameters:
+  - name: view
+  - name: form
+  - name: options
+  comment: null
+- name: getOptionsResolver
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\Extension\DataCollector\FormDataCollectorInterface
+- Symfony\Component\Form\FormBuilderInterface
+- Symfony\Component\Form\FormFactoryInterface
+- Symfony\Component\Form\FormInterface
+- Symfony\Component\Form\FormTypeInterface
+- Symfony\Component\Form\FormView
+- Symfony\Component\Form\ResolvedFormTypeInterface
+- Symfony\Component\OptionsResolver\OptionsResolver
+interfaces:
+- ResolvedFormTypeInterface

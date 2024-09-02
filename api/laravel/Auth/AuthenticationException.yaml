@@ -1,0 +1,85 @@
+name: AuthenticationException
+class_comment: null
+dependencies:
+- name: Exception
+  type: class
+  source: Exception
+- name: Request
+  type: class
+  source: Illuminate\Http\Request
+properties:
+- name: guards
+  visibility: protected
+  comment: '# * All of the guards that were checked.
+
+    # *
+
+    # * @var array'
+- name: redirectTo
+  visibility: protected
+  comment: '# * The path the user should be redirected to.
+
+    # *
+
+    # * @var string|null'
+- name: redirectToCallback
+  visibility: protected
+  comment: '# * The callback that should be used to generate the authentication redirect
+    path.
+
+    # *
+
+    # * @var callable'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: message
+    default: '''Unauthenticated.'''
+  - name: guards
+    default: '[]'
+  - name: redirectTo
+    default: 'null'
+  comment: "# * All of the guards that were checked.\n# *\n# * @var array\n# */\n\
+    # protected $guards;\n# \n# /**\n# * The path the user should be redirected to.\n\
+    # *\n# * @var string|null\n# */\n# protected $redirectTo;\n# \n# /**\n# * The\
+    \ callback that should be used to generate the authentication redirect path.\n\
+    # *\n# * @var callable\n# */\n# protected static $redirectToCallback;\n# \n# /**\n\
+    # * Create a new authentication exception.\n# *\n# * @param  string  $message\n\
+    # * @param  array  $guards\n# * @param  string|null  $redirectTo\n# * @return\
+    \ void"
+- name: guards
+  visibility: public
+  parameters: []
+  comment: '# * Get the guards that were checked.
+
+    # *
+
+    # * @return array'
+- name: redirectTo
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Get the path the user should be redirected to.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return string|null'
+- name: redirectUsing
+  visibility: public
+  parameters:
+  - name: redirectToCallback
+  comment: '# * Specify the callback that should be used to generate the redirect
+    path.
+
+    # *
+
+    # * @param  callable  $redirectToCallback
+
+    # * @return void'
+traits:
+- Exception
+- Illuminate\Http\Request
+interfaces: []

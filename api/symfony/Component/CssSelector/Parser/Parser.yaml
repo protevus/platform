@@ -1,0 +1,75 @@
+name: Parser
+class_comment: "# * CSS selector parser.\n# *\n# * This component is a port of the\
+  \ Python cssselect library,\n# * which is copyright Ian Bicking, @see https://github.com/scrapy/cssselect.\n\
+  # *\n# * @author Jean-Fran\xE7ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n\
+  # * @internal"
+dependencies:
+- name: SyntaxErrorException
+  type: class
+  source: Symfony\Component\CssSelector\Exception\SyntaxErrorException
+- name: Node
+  type: class
+  source: Symfony\Component\CssSelector\Node
+- name: Tokenizer
+  type: class
+  source: Symfony\Component\CssSelector\Parser\Tokenizer\Tokenizer
+properties: []
+methods:
+- name: parseSeries
+  visibility: public
+  parameters:
+  - name: tokens
+  comment: "# * CSS selector parser.\n# *\n# * This component is a port of the Python\
+    \ cssselect library,\n# * which is copyright Ian Bicking, @see https://github.com/scrapy/cssselect.\n\
+    # *\n# * @author Jean-Fran\xE7ois Simon <jeanfrancois.simon@sensiolabs.com>\n\
+    # *\n# * @internal\n# */\n# class Parser implements ParserInterface\n# {\n# private\
+    \ Tokenizer $tokenizer;\n# \n# public function __construct(?Tokenizer $tokenizer\
+    \ = null)\n# {\n# $this->tokenizer = $tokenizer ?? new Tokenizer();\n# }\n# \n\
+    # public function parse(string $source): array\n# {\n# $reader = new Reader($source);\n\
+    # $stream = $this->tokenizer->tokenize($reader);\n# \n# return $this->parseSelectorList($stream);\n\
+    # }\n# \n# /**\n# * Parses the arguments for \":nth-child()\" and friends.\n#\
+    \ *\n# * @param Token[] $tokens\n# *\n# * @throws SyntaxErrorException"
+- name: parseSelectorList
+  visibility: private
+  parameters:
+  - name: stream
+  - name: isArgument
+    default: 'false'
+  comment: null
+- name: parserSelectorNode
+  visibility: private
+  parameters:
+  - name: stream
+  - name: isArgument
+    default: 'false'
+  comment: null
+- name: parseSimpleSelector
+  visibility: private
+  parameters:
+  - name: stream
+  - name: insideNegation
+    default: 'false'
+  - name: isArgument
+    default: 'false'
+  comment: '# * Parses next simple node (hash, class, pseudo, negation).
+
+    # *
+
+    # * @throws SyntaxErrorException'
+- name: parseElementNode
+  visibility: private
+  parameters:
+  - name: stream
+  comment: null
+- name: parseAttributeNode
+  visibility: private
+  parameters:
+  - name: selector
+  - name: stream
+  comment: null
+traits:
+- Symfony\Component\CssSelector\Exception\SyntaxErrorException
+- Symfony\Component\CssSelector\Node
+- Symfony\Component\CssSelector\Parser\Tokenizer\Tokenizer
+interfaces:
+- ParserInterface

@@ -1,0 +1,90 @@
+name: SurrogateInterface
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+properties: []
+methods:
+- name: getName
+  visibility: public
+  parameters: []
+  comment: '# * Returns surrogate name.'
+- name: createCacheStrategy
+  visibility: public
+  parameters: []
+  comment: '# * Returns a new cache strategy instance.'
+- name: hasSurrogateCapability
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Checks that at least one surrogate has Surrogate capability.'
+- name: addSurrogateCapability
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Adds Surrogate-capability to the given Request.'
+- name: addSurrogateControl
+  visibility: public
+  parameters:
+  - name: response
+  comment: '# * Adds HTTP headers to specify that the Response needs to be parsed
+    for Surrogate.
+
+    # *
+
+    # * This method only adds an Surrogate HTTP header if the Response has some Surrogate
+    tags.'
+- name: needsParsing
+  visibility: public
+  parameters:
+  - name: response
+  comment: '# * Checks that the Response needs to be parsed for Surrogate tags.'
+- name: renderIncludeTag
+  visibility: public
+  parameters:
+  - name: uri
+  - name: alt
+    default: 'null'
+  - name: ignoreErrors
+    default: 'true'
+  - name: comment
+    default: ''''''
+  comment: '# * Renders a Surrogate tag.
+
+    # *
+
+    # * @param string|null $alt     An alternate URI
+
+    # * @param string      $comment A comment to add as an esi:include tag'
+- name: process
+  visibility: public
+  parameters:
+  - name: request
+  - name: response
+  comment: '# * Replaces a Response Surrogate tags with the included resource content.'
+- name: handle
+  visibility: public
+  parameters:
+  - name: cache
+  - name: uri
+  - name: alt
+  - name: ignoreErrors
+  comment: '# * Handles a Surrogate from the cache.
+
+    # *
+
+    # * @param string $alt An alternative URI
+
+    # *
+
+    # * @throws \RuntimeException
+
+    # * @throws \Exception'
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+interfaces: []

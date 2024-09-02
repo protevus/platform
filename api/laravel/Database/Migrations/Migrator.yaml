@@ -1,0 +1,590 @@
+name: Migrator
+class_comment: null
+dependencies:
+- name: BulletList
+  type: class
+  source: Illuminate\Console\View\Components\BulletList
+- name: Info
+  type: class
+  source: Illuminate\Console\View\Components\Info
+- name: Task
+  type: class
+  source: Illuminate\Console\View\Components\Task
+- name: TwoColumnDetail
+  type: class
+  source: Illuminate\Console\View\Components\TwoColumnDetail
+- name: Dispatcher
+  type: class
+  source: Illuminate\Contracts\Events\Dispatcher
+- name: Resolver
+  type: class
+  source: Illuminate\Database\ConnectionResolverInterface
+- name: MigrationEnded
+  type: class
+  source: Illuminate\Database\Events\MigrationEnded
+- name: MigrationsEnded
+  type: class
+  source: Illuminate\Database\Events\MigrationsEnded
+- name: MigrationsStarted
+  type: class
+  source: Illuminate\Database\Events\MigrationsStarted
+- name: MigrationStarted
+  type: class
+  source: Illuminate\Database\Events\MigrationStarted
+- name: NoPendingMigrations
+  type: class
+  source: Illuminate\Database\Events\NoPendingMigrations
+- name: Filesystem
+  type: class
+  source: Illuminate\Filesystem\Filesystem
+- name: Arr
+  type: class
+  source: Illuminate\Support\Arr
+- name: Collection
+  type: class
+  source: Illuminate\Support\Collection
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: ReflectionClass
+  type: class
+  source: ReflectionClass
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+properties:
+- name: events
+  visibility: protected
+  comment: '# * The event dispatcher instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Events\Dispatcher'
+- name: repository
+  visibility: protected
+  comment: '# * The migration repository implementation.
+
+    # *
+
+    # * @var \Illuminate\Database\Migrations\MigrationRepositoryInterface'
+- name: files
+  visibility: protected
+  comment: '# * The filesystem instance.
+
+    # *
+
+    # * @var \Illuminate\Filesystem\Filesystem'
+- name: resolver
+  visibility: protected
+  comment: '# * The connection resolver instance.
+
+    # *
+
+    # * @var \Illuminate\Database\ConnectionResolverInterface'
+- name: connection
+  visibility: protected
+  comment: '# * The name of the default connection.
+
+    # *
+
+    # * @var string'
+- name: paths
+  visibility: protected
+  comment: '# * The paths to all of the migration files.
+
+    # *
+
+    # * @var string[]'
+- name: requiredPathCache
+  visibility: protected
+  comment: '# * The paths that have already been required.
+
+    # *
+
+    # * @var array<string, \Illuminate\Database\Migrations\Migration|null>'
+- name: output
+  visibility: protected
+  comment: '# * The output interface implementation.
+
+    # *
+
+    # * @var \Symfony\Component\Console\Output\OutputInterface'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: repository
+  - name: resolver
+  - name: files
+  - name: dispatcher
+    default: 'null'
+  comment: "# * The event dispatcher instance.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Events\\Dispatcher\n# */\n# protected $events;\n# \n# /**\n# * The migration repository\
+    \ implementation.\n# *\n# * @var \\Illuminate\\Database\\Migrations\\MigrationRepositoryInterface\n\
+    # */\n# protected $repository;\n# \n# /**\n# * The filesystem instance.\n# *\n\
+    # * @var \\Illuminate\\Filesystem\\Filesystem\n# */\n# protected $files;\n# \n\
+    # /**\n# * The connection resolver instance.\n# *\n# * @var \\Illuminate\\Database\\\
+    ConnectionResolverInterface\n# */\n# protected $resolver;\n# \n# /**\n# * The\
+    \ name of the default connection.\n# *\n# * @var string\n# */\n# protected $connection;\n\
+    # \n# /**\n# * The paths to all of the migration files.\n# *\n# * @var string[]\n\
+    # */\n# protected $paths = [];\n# \n# /**\n# * The paths that have already been\
+    \ required.\n# *\n# * @var array<string, \\Illuminate\\Database\\Migrations\\\
+    Migration|null>\n# */\n# protected static $requiredPathCache = [];\n# \n# /**\n\
+    # * The output interface implementation.\n# *\n# * @var \\Symfony\\Component\\\
+    Console\\Output\\OutputInterface\n# */\n# protected $output;\n# \n# /**\n# * Create\
+    \ a new migrator instance.\n# *\n# * @param  \\Illuminate\\Database\\Migrations\\\
+    MigrationRepositoryInterface  $repository\n# * @param  \\Illuminate\\Database\\\
+    ConnectionResolverInterface  $resolver\n# * @param  \\Illuminate\\Filesystem\\\
+    Filesystem  $files\n# * @param  \\Illuminate\\Contracts\\Events\\Dispatcher|null\
+    \  $dispatcher\n# * @return void"
+- name: run
+  visibility: public
+  parameters:
+  - name: paths
+    default: '[]'
+  - name: options
+    default: '[]'
+  comment: '# * Run the pending migrations at a given path.
+
+    # *
+
+    # * @param  string[]|string  $paths
+
+    # * @param  array<string, mixed>  $options
+
+    # * @return string[]'
+- name: pendingMigrations
+  visibility: protected
+  parameters:
+  - name: files
+  - name: ran
+  comment: '# * Get the migration files that have not yet run.
+
+    # *
+
+    # * @param  string[]  $files
+
+    # * @param  string[]  $ran
+
+    # * @return string[]'
+- name: runPending
+  visibility: public
+  parameters:
+  - name: migrations
+  - name: options
+    default: '[]'
+  comment: '# * Run an array of migrations.
+
+    # *
+
+    # * @param  string[]  $migrations
+
+    # * @param  array<string, mixed>  $options
+
+    # * @return void'
+- name: runUp
+  visibility: protected
+  parameters:
+  - name: file
+  - name: batch
+  - name: pretend
+  comment: '# * Run "up" a migration instance.
+
+    # *
+
+    # * @param  string  $file
+
+    # * @param  int  $batch
+
+    # * @param  bool  $pretend
+
+    # * @return void'
+- name: rollback
+  visibility: public
+  parameters:
+  - name: paths
+    default: '[]'
+  - name: options
+    default: '[]'
+  comment: '# * Rollback the last migration operation.
+
+    # *
+
+    # * @param  string[]|string  $paths
+
+    # * @param  array<string, mixed>  $options
+
+    # * @return string[]'
+- name: getMigrationsForRollback
+  visibility: protected
+  parameters:
+  - name: options
+  comment: '# * Get the migrations for a rollback operation.
+
+    # *
+
+    # * @param  array<string, mixed>  $options
+
+    # * @return array'
+- name: rollbackMigrations
+  visibility: protected
+  parameters:
+  - name: migrations
+  - name: paths
+  - name: options
+  comment: '# * Rollback the given migrations.
+
+    # *
+
+    # * @param  array  $migrations
+
+    # * @param  string[]|string  $paths
+
+    # * @param  array<string, mixed>  $options
+
+    # * @return string[]'
+- name: reset
+  visibility: public
+  parameters:
+  - name: paths
+    default: '[]'
+  - name: pretend
+    default: 'false'
+  comment: '# * Rolls all of the currently applied migrations back.
+
+    # *
+
+    # * @param  string[]|string  $paths
+
+    # * @param  bool  $pretend
+
+    # * @return array'
+- name: resetMigrations
+  visibility: protected
+  parameters:
+  - name: migrations
+  - name: paths
+  - name: pretend
+    default: 'false'
+  comment: '# * Reset the given migrations.
+
+    # *
+
+    # * @param  string[]  $migrations
+
+    # * @param  string[]  $paths
+
+    # * @param  bool  $pretend
+
+    # * @return array'
+- name: runDown
+  visibility: protected
+  parameters:
+  - name: file
+  - name: migration
+  - name: pretend
+  comment: '# * Run "down" a migration instance.
+
+    # *
+
+    # * @param  string  $file
+
+    # * @param  object  $migration
+
+    # * @param  bool  $pretend
+
+    # * @return void'
+- name: runMigration
+  visibility: protected
+  parameters:
+  - name: migration
+  - name: method
+  comment: '# * Run a migration inside a transaction if the database supports it.
+
+    # *
+
+    # * @param  object  $migration
+
+    # * @param  string  $method
+
+    # * @return void'
+- name: pretendToRun
+  visibility: protected
+  parameters:
+  - name: migration
+  - name: method
+  comment: '# * Pretend to run the migrations.
+
+    # *
+
+    # * @param  object  $migration
+
+    # * @param  string  $method
+
+    # * @return void'
+- name: getQueries
+  visibility: protected
+  parameters:
+  - name: migration
+  - name: method
+  comment: '# * Get all of the queries that would be run for a migration.
+
+    # *
+
+    # * @param  object  $migration
+
+    # * @param  string  $method
+
+    # * @return array'
+- name: runMethod
+  visibility: protected
+  parameters:
+  - name: connection
+  - name: migration
+  - name: method
+  comment: '# * Run a migration method on the given connection.
+
+    # *
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @param  object  $migration
+
+    # * @param  string  $method
+
+    # * @return void'
+- name: resolve
+  visibility: public
+  parameters:
+  - name: file
+  comment: '# * Resolve a migration instance from a file.
+
+    # *
+
+    # * @param  string  $file
+
+    # * @return object'
+- name: resolvePath
+  visibility: protected
+  parameters:
+  - name: path
+  comment: '# * Resolve a migration instance from a migration path.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return object'
+- name: getMigrationClass
+  visibility: protected
+  parameters:
+  - name: migrationName
+  comment: '# * Generate a migration class name based on the migration file name.
+
+    # *
+
+    # * @param  string  $migrationName
+
+    # * @return string'
+- name: getMigrationFiles
+  visibility: public
+  parameters:
+  - name: paths
+  comment: '# * Get all of the migration files in a given path.
+
+    # *
+
+    # * @param  string|array  $paths
+
+    # * @return array<string, string>'
+- name: requireFiles
+  visibility: public
+  parameters:
+  - name: files
+  comment: '# * Require in all the migration files in a given path.
+
+    # *
+
+    # * @param  string[]  $files
+
+    # * @return void'
+- name: getMigrationName
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Get the name of the migration.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: path
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Register a custom migration path.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return void'
+- name: paths
+  visibility: public
+  parameters: []
+  comment: '# * Get all of the custom migration paths.
+
+    # *
+
+    # * @return string[]'
+- name: getConnection
+  visibility: public
+  parameters: []
+  comment: '# * Get the default connection name.
+
+    # *
+
+    # * @return string'
+- name: usingConnection
+  visibility: public
+  parameters:
+  - name: name
+  - name: callback
+  comment: '# * Execute the given callback using the given connection as the default
+    connection.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @param  callable  $callback
+
+    # * @return mixed'
+- name: setConnection
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * Set the default connection name.
+
+    # *
+
+    # * @param  string  $name
+
+    # * @return void'
+- name: resolveConnection
+  visibility: public
+  parameters:
+  - name: connection
+  comment: '# * Resolve the database connection instance.
+
+    # *
+
+    # * @param  string  $connection
+
+    # * @return \Illuminate\Database\Connection'
+- name: getSchemaGrammar
+  visibility: protected
+  parameters:
+  - name: connection
+  comment: '# * Get the schema grammar out of a migration connection.
+
+    # *
+
+    # * @param  \Illuminate\Database\Connection  $connection
+
+    # * @return \Illuminate\Database\Schema\Grammars\Grammar'
+- name: getRepository
+  visibility: public
+  parameters: []
+  comment: '# * Get the migration repository instance.
+
+    # *
+
+    # * @return \Illuminate\Database\Migrations\MigrationRepositoryInterface'
+- name: repositoryExists
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the migration repository exists.
+
+    # *
+
+    # * @return bool'
+- name: hasRunAnyMigrations
+  visibility: public
+  parameters: []
+  comment: '# * Determine if any migrations have been run.
+
+    # *
+
+    # * @return bool'
+- name: deleteRepository
+  visibility: public
+  parameters: []
+  comment: '# * Delete the migration repository data store.
+
+    # *
+
+    # * @return void'
+- name: getFilesystem
+  visibility: public
+  parameters: []
+  comment: '# * Get the file system instance.
+
+    # *
+
+    # * @return \Illuminate\Filesystem\Filesystem'
+- name: setOutput
+  visibility: public
+  parameters:
+  - name: output
+  comment: '# * Set the output implementation that should be used by the console.
+
+    # *
+
+    # * @param  \Symfony\Component\Console\Output\OutputInterface  $output
+
+    # * @return $this'
+- name: write
+  visibility: protected
+  parameters:
+  - name: component
+  - name: '...$arguments'
+  comment: '# * Write to the console''s output.
+
+    # *
+
+    # * @param  string  $component
+
+    # * @param  array<int, string>|string  ...$arguments
+
+    # * @return void'
+- name: fireMigrationEvent
+  visibility: public
+  parameters:
+  - name: event
+  comment: '# * Fire the given event for the migration.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Database\Events\MigrationEvent  $event
+
+    # * @return void'
+traits:
+- Illuminate\Console\View\Components\BulletList
+- Illuminate\Console\View\Components\Info
+- Illuminate\Console\View\Components\Task
+- Illuminate\Console\View\Components\TwoColumnDetail
+- Illuminate\Contracts\Events\Dispatcher
+- Illuminate\Database\Events\MigrationEnded
+- Illuminate\Database\Events\MigrationsEnded
+- Illuminate\Database\Events\MigrationsStarted
+- Illuminate\Database\Events\MigrationStarted
+- Illuminate\Database\Events\NoPendingMigrations
+- Illuminate\Filesystem\Filesystem
+- Illuminate\Support\Arr
+- Illuminate\Support\Collection
+- Illuminate\Support\Str
+- ReflectionClass
+- Symfony\Component\Console\Output\OutputInterface
+interfaces: []

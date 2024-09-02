@@ -1,0 +1,16 @@
+name: FileValidatorObjectTest
+class_comment: null
+dependencies:
+- name: File
+  type: class
+  source: Symfony\Component\HttpFoundation\File\File
+properties: []
+methods:
+- name: getFile
+  visibility: protected
+  parameters:
+  - name: filename
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\File\File
+interfaces: []

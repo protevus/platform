@@ -1,0 +1,31 @@
+name: VersionStrategyInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getVersion
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Asset version strategy interface.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # interface VersionStrategyInterface
+
+    # {
+
+    # /**
+
+    # * Returns the asset version for an asset.'
+- name: applyVersion
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Applies version to the supplied path.'
+traits: []
+interfaces: []

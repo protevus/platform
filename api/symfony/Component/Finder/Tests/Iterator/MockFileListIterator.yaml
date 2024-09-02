@@ -1,0 +1,13 @@
+name: MockFileListIterator
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: filesArray
+    default: '[]'
+  comment: null
+traits: []
+interfaces: []

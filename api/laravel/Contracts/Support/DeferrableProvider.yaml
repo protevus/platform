@@ -1,0 +1,15 @@
+name: DeferrableProvider
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: provides
+  visibility: public
+  parameters: []
+  comment: '# * Get the services provided by the provider.
+
+    # *
+
+    # * @return array'
+traits: []
+interfaces: []

@@ -1,0 +1,50 @@
+name: EnvVarProcessor
+class_comment: '# * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: EnvNotFoundException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\EnvNotFoundException
+- name: ParameterCircularReferenceException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: ResetInterface
+  type: class
+  source: Symfony\Contracts\Service\ResetInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: container
+  - name: loaders
+    default: 'null'
+  comment: "# * @author Nicolas Grekas <p@tchwork.com>\n# */\n# class EnvVarProcessor\
+    \ implements EnvVarProcessorInterface, ResetInterface\n# {\n# /** @var \\Traversable<EnvVarLoaderInterface>\
+    \ */\n# private \\Traversable $loaders;\n# /** @var \\Traversable<EnvVarLoaderInterface>\
+    \ */\n# private \\Traversable $originalLoaders;\n# private array $loadedVars =\
+    \ [];\n# \n# /**\n# * @param \\Traversable<EnvVarLoaderInterface>|null $loaders"
+- name: getProvidedTypes
+  visibility: public
+  parameters: []
+  comment: null
+- name: getEnv
+  visibility: public
+  parameters:
+  - name: prefix
+  - name: name
+  - name: getEnv
+  comment: null
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Exception\EnvNotFoundException
+- Symfony\Component\DependencyInjection\Exception\ParameterCircularReferenceException
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Contracts\Service\ResetInterface
+interfaces:
+- EnvVarProcessorInterface

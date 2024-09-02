@@ -1,0 +1,112 @@
+name: Batchable
+class_comment: null
+dependencies:
+- name: CarbonImmutable
+  type: class
+  source: Carbon\CarbonImmutable
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: BatchFake
+  type: class
+  source: Illuminate\Support\Testing\Fakes\BatchFake
+properties:
+- name: batchId
+  visibility: public
+  comment: '# * The batch ID (if applicable).
+
+    # *
+
+    # * @var string'
+- name: fakeBatch
+  visibility: private
+  comment: '# * The fake batch, if applicable.
+
+    # *
+
+    # * @var \Illuminate\Support\Testing\Fakes\BatchFake'
+methods:
+- name: batch
+  visibility: public
+  parameters: []
+  comment: "# * The batch ID (if applicable).\n# *\n# * @var string\n# */\n# public\
+    \ $batchId;\n# \n# /**\n# * The fake batch, if applicable.\n# *\n# * @var \\Illuminate\\\
+    Support\\Testing\\Fakes\\BatchFake\n# */\n# private $fakeBatch;\n# \n# /**\n#\
+    \ * Get the batch instance for the job, if applicable.\n# *\n# * @return \\Illuminate\\\
+    Bus\\Batch|null"
+- name: batching
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the batch is still active and processing.
+
+    # *
+
+    # * @return bool'
+- name: withBatchId
+  visibility: public
+  parameters:
+  - name: batchId
+  comment: '# * Set the batch ID on the job.
+
+    # *
+
+    # * @param  string  $batchId
+
+    # * @return $this'
+- name: withFakeBatch
+  visibility: public
+  parameters:
+  - name: id
+    default: ''''''
+  - name: name
+    default: ''''''
+  - name: totalJobs
+    default: '0'
+  - name: pendingJobs
+    default: '0'
+  - name: failedJobs
+    default: '0'
+  - name: failedJobIds
+    default: '[]'
+  - name: options
+    default: '[]'
+  - name: createdAt
+    default: 'null'
+  - name: cancelledAt
+    default: 'null'
+  - name: finishedAt
+    default: 'null'
+  comment: '# * Indicate that the job should use a fake batch.
+
+    # *
+
+    # * @param  string  $id
+
+    # * @param  string  $name
+
+    # * @param  int  $totalJobs
+
+    # * @param  int  $pendingJobs
+
+    # * @param  int  $failedJobs
+
+    # * @param  array  $failedJobIds
+
+    # * @param  array  $options
+
+    # * @param  \Carbon\CarbonImmutable|null  $createdAt
+
+    # * @param  \Carbon\CarbonImmutable|null  $cancelledAt
+
+    # * @param  \Carbon\CarbonImmutable|null  $finishedAt
+
+    # * @return array{0: $this, 1: \Illuminate\Support\Testing\Fakes\BatchFake}'
+traits:
+- Carbon\CarbonImmutable
+- Illuminate\Container\Container
+- Illuminate\Support\Str
+- Illuminate\Support\Testing\Fakes\BatchFake
+interfaces: []

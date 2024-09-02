@@ -1,0 +1,23 @@
+name: UlidFactoryTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: UlidFactory
+  type: class
+  source: Symfony\Component\Uid\Factory\UlidFactory
+properties: []
+methods:
+- name: testCreate
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateWithInvalidTimestamp
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Uid\Factory\UlidFactory
+interfaces: []

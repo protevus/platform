@@ -1,0 +1,16 @@
+name: object
+class_comment: null
+dependencies:
+- name: BarService
+  type: class
+  source: App\BarService
+properties: []
+methods:
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: c
+  comment: null
+traits:
+- App\BarService
+interfaces: []

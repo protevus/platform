@@ -1,0 +1,49 @@
+name: BroadcastController
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Illuminate\Http\Request
+- name: Controller
+  type: class
+  source: Illuminate\Routing\Controller
+- name: Broadcast
+  type: class
+  source: Illuminate\Support\Facades\Broadcast
+- name: AccessDeniedHttpException
+  type: class
+  source: Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
+properties: []
+methods:
+- name: authenticate
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Authenticate the request for channel access.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return \Illuminate\Http\Response'
+- name: authenticateUser
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Authenticate the current user.
+
+    # *
+
+    # * See: https://pusher.com/docs/channels/server_api/authenticating-users/#user-authentication.
+
+    # *
+
+    # * @param  \Illuminate\Http\Request  $request
+
+    # * @return \Illuminate\Http\Response'
+traits:
+- Illuminate\Http\Request
+- Illuminate\Routing\Controller
+- Illuminate\Support\Facades\Broadcast
+- Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
+interfaces: []

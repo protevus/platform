@@ -1,0 +1,45 @@
+name: DumperNativeFallbackTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ClassExistsMock
+  type: class
+  source: Symfony\Bridge\PhpUnit\ClassExistsMock
+- name: Dumper
+  type: class
+  source: Symfony\Component\Console\Helper\Dumper
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: CliDumper
+  type: class
+  source: Symfony\Component\VarDumper\Dumper\CliDumper
+properties: []
+methods:
+- name: setUpBeforeClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: tearDownAfterClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvoke
+  visibility: public
+  parameters:
+  - name: variable
+  - name: primitiveString
+  comment: '# * @dataProvider provideVariables'
+- name: provideVariables
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bridge\PhpUnit\ClassExistsMock
+- Symfony\Component\Console\Helper\Dumper
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\VarDumper\Dumper\CliDumper
+interfaces: []

@@ -1,0 +1,73 @@
+name: SesApiAsyncAwsTransportTest
+class_comment: null
+dependencies:
+- name: Configuration
+  type: class
+  source: AsyncAws\Core\Configuration
+- name: NullProvider
+  type: class
+  source: AsyncAws\Core\Credentials\NullProvider
+- name: SesClient
+  type: class
+  source: AsyncAws\Ses\SesClient
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: MockHttpClient
+  type: class
+  source: Symfony\Component\HttpClient\MockHttpClient
+- name: MockResponse
+  type: class
+  source: Symfony\Component\HttpClient\Response\MockResponse
+- name: SesApiAsyncAwsTransport
+  type: class
+  source: Symfony\Component\Mailer\Bridge\Amazon\Transport\SesApiAsyncAwsTransport
+- name: HttpTransportException
+  type: class
+  source: Symfony\Component\Mailer\Exception\HttpTransportException
+- name: MetadataHeader
+  type: class
+  source: Symfony\Component\Mailer\Header\MetadataHeader
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: Email
+  type: class
+  source: Symfony\Component\Mime\Email
+- name: ResponseInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\ResponseInterface
+properties: []
+methods:
+- name: testToString
+  visibility: public
+  parameters:
+  - name: transport
+  - name: expected
+  comment: '# * @dataProvider getTransportData'
+- name: getTransportData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSend
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSendThrowsForErrorResponse
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- AsyncAws\Core\Configuration
+- AsyncAws\Core\Credentials\NullProvider
+- AsyncAws\Ses\SesClient
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpClient\MockHttpClient
+- Symfony\Component\HttpClient\Response\MockResponse
+- Symfony\Component\Mailer\Bridge\Amazon\Transport\SesApiAsyncAwsTransport
+- Symfony\Component\Mailer\Exception\HttpTransportException
+- Symfony\Component\Mailer\Header\MetadataHeader
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Email
+- Symfony\Contracts\HttpClient\ResponseInterface
+interfaces: []

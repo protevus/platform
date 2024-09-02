@@ -1,0 +1,31 @@
+name: SpecificityAdjustmentNodeTest
+class_comment: null
+dependencies:
+- name: ClassNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\ClassNode
+- name: ElementNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\ElementNode
+- name: HashNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\HashNode
+- name: SpecificityAdjustmentNode
+  type: class
+  source: Symfony\Component\CssSelector\Node\SpecificityAdjustmentNode
+properties: []
+methods:
+- name: getToStringConversionTestData
+  visibility: public
+  parameters: []
+  comment: null
+- name: getSpecificityValueTestData
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\CssSelector\Node\ClassNode
+- Symfony\Component\CssSelector\Node\ElementNode
+- Symfony\Component\CssSelector\Node\HashNode
+- Symfony\Component\CssSelector\Node\SpecificityAdjustmentNode
+interfaces: []

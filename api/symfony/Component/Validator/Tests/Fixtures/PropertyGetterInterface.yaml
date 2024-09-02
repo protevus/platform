@@ -1,0 +1,11 @@
+name: PropertyGetterInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getProperty
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

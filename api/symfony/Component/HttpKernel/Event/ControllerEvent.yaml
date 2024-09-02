@@ -1,0 +1,52 @@
+name: ControllerEvent
+class_comment: null
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: HttpKernelInterface
+  type: class
+  source: Symfony\Component\HttpKernel\HttpKernelInterface
+properties: []
+methods:
+- name: setController
+  visibility: public
+  parameters:
+  - name: controller
+  - name: attributes
+    default: 'null'
+  comment: "# * Allows filtering of a controller callable.\n# *\n# * You can call\
+    \ getController() to retrieve the current controller. With\n# * setController()\
+    \ you can set a new controller that is used in the processing\n# * of the request.\n\
+    # *\n# * Controllers should be callables.\n# *\n# * @author Bernhard Schussek\
+    \ <bschussek@gmail.com>\n# */\n# final class ControllerEvent extends KernelEvent\n\
+    # {\n# private string|array|object $controller;\n# private \\ReflectionFunctionAbstract\
+    \ $controllerReflector;\n# private array $attributes;\n# \n# public function __construct(HttpKernelInterface\
+    \ $kernel, callable $controller, Request $request, ?int $requestType)\n# {\n#\
+    \ parent::__construct($kernel, $request, $requestType);\n# \n# $this->setController($controller);\n\
+    # }\n# \n# public function getController(): callable\n# {\n# return $this->controller;\n\
+    # }\n# \n# public function getControllerReflector(): \\ReflectionFunctionAbstract\n\
+    # {\n# return $this->controllerReflector;\n# }\n# \n# /**\n# * @param array<class-string,\
+    \ list<object>>|null $attributes"
+- name: getAttributes
+  visibility: public
+  parameters:
+  - name: className
+    default: 'null'
+  comment: '# * @template T of class-string|null
+
+    # *
+
+    # * @param T $className
+
+    # *
+
+    # * @return array<class-string, list<object>>|list<object>
+
+    # *
+
+    # * @psalm-return (T is null ? array<class-string, list<object>> : list<object>)'
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\HttpKernelInterface
+interfaces: []

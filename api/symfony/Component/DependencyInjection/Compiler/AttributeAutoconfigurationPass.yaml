@@ -1,0 +1,99 @@
+name: AttributeAutoconfigurationPass
+class_comment: null
+dependencies:
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: LogicException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\LogicException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+properties: []
+methods:
+- name: findConfigurator
+  visibility: private
+  parameters:
+  - name: '&$configurators'
+  - name: attributeName
+  comment: "# * @author Alexander M. Turek <me@derrabus.de>\n# */\n# final class AttributeAutoconfigurationPass\
+    \ extends AbstractRecursivePass\n# {\n# protected bool $skipScalars = true;\n\
+    # \n# private array $classAttributeConfigurators = [];\n# private array $methodAttributeConfigurators\
+    \ = [];\n# private array $propertyAttributeConfigurators = [];\n# private array\
+    \ $parameterAttributeConfigurators = [];\n# \n# public function process(ContainerBuilder\
+    \ $container): void\n# {\n# if (!$container->getAutoconfiguredAttributes()) {\n\
+    # return;\n# }\n# \n# foreach ($container->getAutoconfiguredAttributes() as $attributeName\
+    \ => $callable) {\n# $callableReflector = new \\ReflectionFunction($callable(...));\n\
+    # if ($callableReflector->getNumberOfParameters() <= 2) {\n# $this->classAttributeConfigurators[$attributeName]\
+    \ = $callable;\n# continue;\n# }\n# \n# $reflectorParameter = $callableReflector->getParameters()[2];\n\
+    # $parameterType = $reflectorParameter->getType();\n# $types = [];\n# if ($parameterType\
+    \ instanceof \\ReflectionUnionType) {\n# foreach ($parameterType->getTypes() as\
+    \ $type) {\n# $types[] = $type->getName();\n# }\n# } elseif ($parameterType instanceof\
+    \ \\ReflectionNamedType) {\n# $types[] = $parameterType->getName();\n# } else\
+    \ {\n# throw new LogicException(\\sprintf('Argument \"$%s\" of attribute autoconfigurator\
+    \ should have a type, use one or more of \"\\ReflectionClass|\\ReflectionMethod|\\\
+    ReflectionProperty|\\ReflectionParameter|\\Reflector\" in \"%s\" on line \"%d\"\
+    .', $reflectorParameter->getName(), $callableReflector->getFileName(), $callableReflector->getStartLine()));\n\
+    # }\n# \n# try {\n# $attributeReflector = new \\ReflectionClass($attributeName);\n\
+    # } catch (\\ReflectionException) {\n# continue;\n# }\n# \n# $targets = $attributeReflector->getAttributes(\\\
+    Attribute::class)[0] ?? 0;\n# $targets = $targets ? $targets->getArguments()[0]\
+    \ ?? -1 : 0;\n# \n# foreach (['class', 'method', 'property', 'parameter'] as $symbol)\
+    \ {\n# if (['Reflector'] !== $types) {\n# if (!\\in_array('Reflection'.ucfirst($symbol),\
+    \ $types, true)) {\n# continue;\n# }\n# if (!($targets & \\constant('Attribute::TARGET_'.strtoupper($symbol))))\
+    \ {\n# throw new LogicException(\\sprintf('Invalid type \"Reflection%s\" on argument\
+    \ \"$%s\": attribute \"%s\" cannot target a '.$symbol.' in \"%s\" on line \"%d\"\
+    .', ucfirst($symbol), $reflectorParameter->getName(), $attributeName, $callableReflector->getFileName(),\
+    \ $callableReflector->getStartLine()));\n# }\n# }\n# $this->{$symbol.'AttributeConfigurators'}[$attributeName]\
+    \ = $callable;\n# }\n# }\n# \n# parent::process($container);\n# }\n# \n# protected\
+    \ function processValue(mixed $value, bool $isRoot = false): mixed\n# {\n# if\
+    \ (!$value instanceof Definition\n# || !$value->isAutoconfigured()\n# || $value->isAbstract()\n\
+    # || $value->hasTag('container.ignore_attributes')\n# || !($classReflector = $this->container->getReflectionClass($value->getClass(),\
+    \ false))\n# ) {\n# return parent::processValue($value, $isRoot);\n# }\n# \n#\
+    \ $instanceof = $value->getInstanceofConditionals();\n# $conditionals = $instanceof[$classReflector->getName()]\
+    \ ?? new ChildDefinition('');\n# \n# if ($this->classAttributeConfigurators) {\n\
+    # foreach ($classReflector->getAttributes() as $attribute) {\n# if ($configurator\
+    \ = $this->findConfigurator($this->classAttributeConfigurators, $attribute->getName()))\
+    \ {\n# $configurator($conditionals, $attribute->newInstance(), $classReflector);\n\
+    # }\n# }\n# }\n# \n# if ($this->parameterAttributeConfigurators) {\n# try {\n\
+    # $constructorReflector = $this->getConstructor($value, false);\n# } catch (RuntimeException)\
+    \ {\n# $constructorReflector = null;\n# }\n# \n# if ($constructorReflector) {\n\
+    # foreach ($constructorReflector->getParameters() as $parameterReflector) {\n\
+    # foreach ($parameterReflector->getAttributes() as $attribute) {\n# if ($configurator\
+    \ = $this->findConfigurator($this->parameterAttributeConfigurators, $attribute->getName()))\
+    \ {\n# $configurator($conditionals, $attribute->newInstance(), $parameterReflector);\n\
+    # }\n# }\n# }\n# }\n# }\n# \n# if ($this->methodAttributeConfigurators || $this->parameterAttributeConfigurators)\
+    \ {\n# foreach ($classReflector->getMethods(\\ReflectionMethod::IS_PUBLIC) as\
+    \ $methodReflector) {\n# if ($methodReflector->isConstructor() || $methodReflector->isDestructor())\
+    \ {\n# continue;\n# }\n# \n# if ($this->methodAttributeConfigurators) {\n# foreach\
+    \ ($methodReflector->getAttributes() as $attribute) {\n# if ($configurator = $this->findConfigurator($this->methodAttributeConfigurators,\
+    \ $attribute->getName())) {\n# $configurator($conditionals, $attribute->newInstance(),\
+    \ $methodReflector);\n# }\n# }\n# }\n# \n# if ($this->parameterAttributeConfigurators)\
+    \ {\n# foreach ($methodReflector->getParameters() as $parameterReflector) {\n\
+    # foreach ($parameterReflector->getAttributes() as $attribute) {\n# if ($configurator\
+    \ = $this->findConfigurator($this->parameterAttributeConfigurators, $attribute->getName()))\
+    \ {\n# $configurator($conditionals, $attribute->newInstance(), $parameterReflector);\n\
+    # }\n# }\n# }\n# }\n# }\n# }\n# \n# if ($this->propertyAttributeConfigurators)\
+    \ {\n# foreach ($classReflector->getProperties(\\ReflectionProperty::IS_PUBLIC)\
+    \ as $propertyReflector) {\n# if ($propertyReflector->isStatic()) {\n# continue;\n\
+    # }\n# \n# foreach ($propertyReflector->getAttributes() as $attribute) {\n# if\
+    \ ($configurator = $this->findConfigurator($this->propertyAttributeConfigurators,\
+    \ $attribute->getName())) {\n# $configurator($conditionals, $attribute->newInstance(),\
+    \ $propertyReflector);\n# }\n# }\n# }\n# }\n# \n# if (!isset($instanceof[$classReflector->getName()])\
+    \ && new ChildDefinition('') != $conditionals) {\n# $instanceof[$classReflector->getName()]\
+    \ = $conditionals;\n# $value->setInstanceofConditionals($instanceof);\n# }\n#\
+    \ \n# return parent::processValue($value, $isRoot);\n# }\n# \n# /**\n# * Find\
+    \ the first configurator for the given attribute name, looking up the class hierarchy."
+traits:
+- Symfony\Component\DependencyInjection\ChildDefinition
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\LogicException
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+interfaces: []

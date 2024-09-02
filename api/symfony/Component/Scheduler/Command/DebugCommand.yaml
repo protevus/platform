@@ -1,0 +1,85 @@
+name: DebugCommand
+class_comment: null
+dependencies:
+- name: AsCommand
+  type: class
+  source: Symfony\Component\Console\Attribute\AsCommand
+- name: Command
+  type: class
+  source: Symfony\Component\Console\Command\Command
+- name: InputArgument
+  type: class
+  source: Symfony\Component\Console\Input\InputArgument
+- name: InputInterface
+  type: class
+  source: Symfony\Component\Console\Input\InputInterface
+- name: InputOption
+  type: class
+  source: Symfony\Component\Console\Input\InputOption
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: SymfonyStyle
+  type: class
+  source: Symfony\Component\Console\Style\SymfonyStyle
+- name: RecurringMessage
+  type: class
+  source: Symfony\Component\Scheduler\RecurringMessage
+- name: ScheduleProviderInterface
+  type: class
+  source: Symfony\Component\Scheduler\ScheduleProviderInterface
+- name: ServiceProviderInterface
+  type: class
+  source: Symfony\Contracts\Service\ServiceProviderInterface
+properties: []
+methods:
+- name: renderRecurringMessage
+  visibility: private
+  parameters:
+  - name: recurringMessage
+  - name: date
+  - name: all
+  comment: "# * Command to list/debug schedules.\n# *\n# * @author Kevin Bond <kevinbond@gmail.com>\n\
+    # */\n# #[AsCommand(name: 'debug:scheduler', description: 'List schedules and\
+    \ their recurring messages')]\n# final class DebugCommand extends Command\n# {\n\
+    # private array $scheduleNames;\n# \n# public function __construct(private ServiceProviderInterface\
+    \ $schedules)\n# {\n# $this->scheduleNames = array_keys($this->schedules->getProvidedServices());\n\
+    # \n# parent::__construct();\n# }\n# \n# protected function configure(): void\n\
+    # {\n# $this\n# ->addArgument('schedule', InputArgument::OPTIONAL | InputArgument::IS_ARRAY,\
+    \ \\sprintf('The schedule name (one of \"%s\")', implode('\", \"', $this->scheduleNames)),\
+    \ null, $this->scheduleNames)\n# ->addOption('date', null, InputOption::VALUE_REQUIRED,\
+    \ 'The date to use for the next run date', 'now')\n# ->addOption('all', null,\
+    \ InputOption::VALUE_NONE, 'Display all recurring messages, including the terminated\
+    \ ones')\n# ->setHelp(<<<'EOF'\n# The <info>%command.name%</info> lists schedules\
+    \ and their recurring messages:\n# \n# <info>php %command.full_name%</info>\n\
+    # \n# Or for a specific schedule only:\n# \n# <info>php %command.full_name% default</info>\n\
+    # \n# You can also specify a date to use for the next run date:\n# \n# <info>php\
+    \ %command.full_name% --date=2025-10-18</info>\n# \n# To also display the terminated\
+    \ recurring messages, use the <info>--all</info> option:\n# \n# <info>php %command.full_name%\
+    \ --all</info>\n# \n# EOF\n# )\n# ;\n# }\n# \n# protected function execute(InputInterface\
+    \ $input, OutputInterface $output): int\n# {\n# $io = new SymfonyStyle($input,\
+    \ $output);\n# $io->title('Scheduler');\n# \n# if (!$names = $input->getArgument('schedule')\
+    \ ?: $this->scheduleNames) {\n# $io->error('No schedules found.');\n# \n# return\
+    \ 2;\n# }\n# \n# $date = new \\DateTimeImmutable($input->getOption('date'));\n\
+    # if ('now' !== $input->getOption('date')) {\n# $io->comment(\\sprintf('All next\
+    \ run dates computed from %s.', $date->format('r')));\n# }\n# \n# foreach ($names\
+    \ as $name) {\n# $io->section($name);\n# \n# /** @var ScheduleProviderInterface\
+    \ $schedule */\n# $schedule = $this->schedules->get($name);\n# if (!$messages\
+    \ = $schedule->getSchedule()->getRecurringMessages()) {\n# $io->warning(\\sprintf('No\
+    \ recurring messages found for schedule \"%s\".', $name));\n# \n# continue;\n\
+    # }\n# $io->table(\n# ['Trigger', 'Provider', 'Next Run'],\n# array_filter(array_map(self::renderRecurringMessage(...),\
+    \ $messages, array_fill(0, \\count($messages), $date), array_fill(0, \\count($messages),\
+    \ $input->getOption('all')))),\n# );\n# }\n# \n# return 0;\n# }\n# \n# /**\n#\
+    \ * @return array{0:string,1:string,2:string}|null"
+traits:
+- Symfony\Component\Console\Attribute\AsCommand
+- Symfony\Component\Console\Command\Command
+- Symfony\Component\Console\Input\InputArgument
+- Symfony\Component\Console\Input\InputInterface
+- Symfony\Component\Console\Input\InputOption
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Style\SymfonyStyle
+- Symfony\Component\Scheduler\RecurringMessage
+- Symfony\Component\Scheduler\ScheduleProviderInterface
+- Symfony\Contracts\Service\ServiceProviderInterface
+interfaces: []

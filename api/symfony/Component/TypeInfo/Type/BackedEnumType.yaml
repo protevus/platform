@@ -1,0 +1,49 @@
+name: BackedEnumType
+class_comment: null
+dependencies:
+- name: TypeIdentifier
+  type: class
+  source: Symfony\Component\TypeInfo\TypeIdentifier
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: className
+  - name: backingType
+  comment: '# * @author Mathias Arlaud <mathias.arlaud@gmail.com>
+
+    # * @author Baptiste Leduc <baptiste.leduc@gmail.com>
+
+    # *
+
+    # * @template T of class-string<\BackedEnum>
+
+    # * @template U of BuiltinType<TypeIdentifier::INT>|BuiltinType<TypeIdentifier::STRING>
+
+    # *
+
+    # * @extends EnumType<T>
+
+    # *
+
+    # * @experimental
+
+    # */
+
+    # final class BackedEnumType extends EnumType
+
+    # {
+
+    # /**
+
+    # * @param T $className
+
+    # * @param U $backingType'
+- name: getBackingType
+  visibility: public
+  parameters: []
+  comment: '# * @return U'
+traits:
+- Symfony\Component\TypeInfo\TypeIdentifier
+interfaces: []

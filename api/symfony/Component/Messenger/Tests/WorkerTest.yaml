@@ -1,0 +1,277 @@
+name: WorkerTest
+class_comment: '# * @group time-sensitive'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: EventDispatcherInterface
+  type: class
+  source: Psr\EventDispatcher\EventDispatcherInterface
+- name: LoggerInterface
+  type: class
+  source: Psr\Log\LoggerInterface
+- name: MockClock
+  type: class
+  source: Symfony\Component\Clock\MockClock
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: ServicesResetter
+  type: class
+  source: Symfony\Component\HttpKernel\DependencyInjection\ServicesResetter
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: WorkerMessageFailedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerMessageFailedEvent
+- name: WorkerMessageHandledEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerMessageHandledEvent
+- name: WorkerMessageReceivedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerMessageReceivedEvent
+- name: WorkerRateLimitedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerRateLimitedEvent
+- name: WorkerRunningEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerRunningEvent
+- name: WorkerStartedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerStartedEvent
+- name: WorkerStoppedEvent
+  type: class
+  source: Symfony\Component\Messenger\Event\WorkerStoppedEvent
+- name: ResetServicesListener
+  type: class
+  source: Symfony\Component\Messenger\EventListener\ResetServicesListener
+- name: StopWorkerOnMessageLimitListener
+  type: class
+  source: Symfony\Component\Messenger\EventListener\StopWorkerOnMessageLimitListener
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Messenger\Exception\RuntimeException
+- name: Acknowledger
+  type: class
+  source: Symfony\Component\Messenger\Handler\Acknowledger
+- name: BatchHandlerInterface
+  type: class
+  source: Symfony\Component\Messenger\Handler\BatchHandlerInterface
+- name: BatchHandlerTrait
+  type: class
+  source: Symfony\Component\Messenger\Handler\BatchHandlerTrait
+- name: HandlerDescriptor
+  type: class
+  source: Symfony\Component\Messenger\Handler\HandlerDescriptor
+- name: HandlersLocator
+  type: class
+  source: Symfony\Component\Messenger\Handler\HandlersLocator
+- name: MessageBus
+  type: class
+  source: Symfony\Component\Messenger\MessageBus
+- name: MessageBusInterface
+  type: class
+  source: Symfony\Component\Messenger\MessageBusInterface
+- name: HandleMessageMiddleware
+  type: class
+  source: Symfony\Component\Messenger\Middleware\HandleMessageMiddleware
+- name: ConsumedByWorkerStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\ConsumedByWorkerStamp
+- name: ReceivedStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\ReceivedStamp
+- name: SentStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\SentStamp
+- name: StampInterface
+  type: class
+  source: Symfony\Component\Messenger\Stamp\StampInterface
+- name: DummyMessage
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\DummyMessage
+- name: DummyReceiver
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\DummyReceiver
+- name: ResettableDummyReceiver
+  type: class
+  source: Symfony\Component\Messenger\Tests\Fixtures\ResettableDummyReceiver
+- name: QueueReceiverInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Receiver\QueueReceiverInterface
+- name: ReceiverInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface
+- name: Worker
+  type: class
+  source: Symfony\Component\Messenger\Worker
+- name: RateLimiterFactory
+  type: class
+  source: Symfony\Component\RateLimiter\RateLimiterFactory
+- name: InMemoryStorage
+  type: class
+  source: Symfony\Component\RateLimiter\Storage\InMemoryStorage
+- name: BatchHandlerTrait
+  type: class
+  source: BatchHandlerTrait
+properties: []
+methods:
+- name: testWorkerDispatchTheReceivedMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters: []
+  comment: null
+- name: dispatch
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+- name: testHandlingErrorCausesReject
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkerResetsConnectionIfReceiverIsResettable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkerResetsTransportsIfResetServicesListenerIsCalled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkerDoesNotResetTransportsIfResetServicesListenerIsNotCalled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkerDoesNotSendNullMessagesToTheBus
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkerDispatchesEventsOnSuccess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkerWithoutDispatcher
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkerDispatchesEventsOnError
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkerContainsMetadata
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTimeoutIsConfigurable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkerWithMultipleReceivers
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkerLimitQueues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkerLimitQueuesUnsupported
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkerMessageReceivedEventMutability
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkerRateLimitMessages
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWorkerShouldLogOnStop
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBatchProcessing
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFlushBatchOnIdle
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFlushBatchOnStop
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGcCollectCyclesIsCalledOnMessageHandle
+  visibility: public
+  parameters: []
+  comment: null
+- name: getFromQueues
+  visibility: public
+  parameters:
+  - name: queueNames
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: message
+  - name: ack
+    default: 'null'
+  comment: null
+- name: shouldFlush
+  visibility: private
+  parameters: []
+  comment: null
+- name: process
+  visibility: private
+  parameters:
+  - name: jobs
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Psr\EventDispatcher\EventDispatcherInterface
+- Psr\Log\LoggerInterface
+- Symfony\Component\Clock\MockClock
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\HttpKernel\DependencyInjection\ServicesResetter
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Event\WorkerMessageFailedEvent
+- Symfony\Component\Messenger\Event\WorkerMessageHandledEvent
+- Symfony\Component\Messenger\Event\WorkerMessageReceivedEvent
+- Symfony\Component\Messenger\Event\WorkerRateLimitedEvent
+- Symfony\Component\Messenger\Event\WorkerRunningEvent
+- Symfony\Component\Messenger\Event\WorkerStartedEvent
+- Symfony\Component\Messenger\Event\WorkerStoppedEvent
+- Symfony\Component\Messenger\EventListener\ResetServicesListener
+- Symfony\Component\Messenger\EventListener\StopWorkerOnMessageLimitListener
+- Symfony\Component\Messenger\Exception\RuntimeException
+- Symfony\Component\Messenger\Handler\Acknowledger
+- Symfony\Component\Messenger\Handler\BatchHandlerInterface
+- Symfony\Component\Messenger\Handler\BatchHandlerTrait
+- Symfony\Component\Messenger\Handler\HandlerDescriptor
+- Symfony\Component\Messenger\Handler\HandlersLocator
+- Symfony\Component\Messenger\MessageBus
+- Symfony\Component\Messenger\MessageBusInterface
+- Symfony\Component\Messenger\Middleware\HandleMessageMiddleware
+- Symfony\Component\Messenger\Stamp\ConsumedByWorkerStamp
+- Symfony\Component\Messenger\Stamp\ReceivedStamp
+- Symfony\Component\Messenger\Stamp\SentStamp
+- Symfony\Component\Messenger\Stamp\StampInterface
+- Symfony\Component\Messenger\Tests\Fixtures\DummyMessage
+- Symfony\Component\Messenger\Tests\Fixtures\DummyReceiver
+- Symfony\Component\Messenger\Tests\Fixtures\ResettableDummyReceiver
+- Symfony\Component\Messenger\Transport\Receiver\QueueReceiverInterface
+- Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface
+- Symfony\Component\Messenger\Worker
+- Symfony\Component\RateLimiter\RateLimiterFactory
+- Symfony\Component\RateLimiter\Storage\InMemoryStorage
+- BatchHandlerTrait
+interfaces:
+- EventDispatcherInterface
+- StampInterface
+- QueueReceiverInterface
+- BatchHandlerInterface

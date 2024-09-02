@@ -1,0 +1,65 @@
+name: DkimSigner
+class_comment: null
+dependencies:
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Mime\Exception\InvalidArgumentException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\Mime\Exception\RuntimeException
+- name: UnstructuredHeader
+  type: class
+  source: Symfony\Component\Mime\Header\UnstructuredHeader
+- name: Message
+  type: class
+  source: Symfony\Component\Mime\Message
+- name: AbstractPart
+  type: class
+  source: Symfony\Component\Mime\Part\AbstractPart
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: pk
+  - name: domainName
+  - name: selector
+  - name: defaultOptions
+    default: '[]'
+  - name: passphrase
+    default: ''''''
+  comment: "# * @author Fabien Potencier <fabien@symfony.com>\n# *\n# * RFC 6376 and\
+    \ 8301\n# */\n# final class DkimSigner\n# {\n# public const CANON_SIMPLE = 'simple';\n\
+    # public const CANON_RELAXED = 'relaxed';\n# \n# public const ALGO_SHA256 = 'rsa-sha256';\n\
+    # public const ALGO_ED25519 = 'ed25519-sha256'; // RFC 8463\n# \n# private \\\
+    OpenSSLAsymmetricKey $key;\n# \n# /**\n# * @param string $pk         The private\
+    \ key as a string or the path to the file containing the private key, should be\
+    \ prefixed with file:// (in PEM format)\n# * @param string $passphrase A passphrase\
+    \ of the private key (if any)"
+- name: sign
+  visibility: public
+  parameters:
+  - name: message
+  - name: options
+    default: '[]'
+  comment: null
+- name: canonicalizeHeader
+  visibility: private
+  parameters:
+  - name: header
+  - name: headerCanon
+  comment: null
+- name: hashBody
+  visibility: private
+  parameters:
+  - name: body
+  - name: bodyCanon
+  - name: maxLength
+  comment: null
+traits:
+- Symfony\Component\Mime\Exception\InvalidArgumentException
+- Symfony\Component\Mime\Exception\RuntimeException
+- Symfony\Component\Mime\Header\UnstructuredHeader
+- Symfony\Component\Mime\Message
+- Symfony\Component\Mime\Part\AbstractPart
+interfaces: []

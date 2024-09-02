@@ -1,0 +1,138 @@
+name: CookieSessionHandler
+class_comment: null
+dependencies:
+- name: CookieJar
+  type: class
+  source: Illuminate\Contracts\Cookie\QueueingFactory
+- name: InteractsWithTime
+  type: class
+  source: Illuminate\Support\InteractsWithTime
+- name: SessionHandlerInterface
+  type: class
+  source: SessionHandlerInterface
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: InteractsWithTime
+  type: class
+  source: InteractsWithTime
+properties:
+- name: cookie
+  visibility: protected
+  comment: '# * The cookie jar instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Cookie\Factory'
+- name: request
+  visibility: protected
+  comment: '# * The request instance.
+
+    # *
+
+    # * @var \Symfony\Component\HttpFoundation\Request'
+- name: minutes
+  visibility: protected
+  comment: '# * The number of minutes the session should be valid.
+
+    # *
+
+    # * @var int'
+- name: expireOnClose
+  visibility: protected
+  comment: '# * Indicates whether the session should be expired when the browser closes.
+
+    # *
+
+    # * @var bool'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: cookie
+  - name: minutes
+  - name: expireOnClose
+    default: 'false'
+  comment: "# * The cookie jar instance.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Cookie\\Factory\n# */\n# protected $cookie;\n# \n# /**\n# * The request instance.\n\
+    # *\n# * @var \\Symfony\\Component\\HttpFoundation\\Request\n# */\n# protected\
+    \ $request;\n# \n# /**\n# * The number of minutes the session should be valid.\n\
+    # *\n# * @var int\n# */\n# protected $minutes;\n# \n# /**\n# * Indicates whether\
+    \ the session should be expired when the browser closes.\n# *\n# * @var bool\n\
+    # */\n# protected $expireOnClose;\n# \n# /**\n# * Create a new cookie driven handler\
+    \ instance.\n# *\n# * @param  \\Illuminate\\Contracts\\Cookie\\QueueingFactory\
+    \  $cookie\n# * @param  int  $minutes\n# * @param  bool  $expireOnClose\n# * @return\
+    \ void"
+- name: open
+  visibility: public
+  parameters:
+  - name: savePath
+  - name: sessionName
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return bool'
+- name: close
+  visibility: public
+  parameters: []
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return bool'
+- name: read
+  visibility: public
+  parameters:
+  - name: sessionId
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return string|false'
+- name: write
+  visibility: public
+  parameters:
+  - name: sessionId
+  - name: data
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return bool'
+- name: destroy
+  visibility: public
+  parameters:
+  - name: sessionId
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return bool'
+- name: gc
+  visibility: public
+  parameters:
+  - name: lifetime
+  comment: '# * {@inheritdoc}
+
+    # *
+
+    # * @return int'
+- name: setRequest
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Set the request instance.
+
+    # *
+
+    # * @param  \Symfony\Component\HttpFoundation\Request  $request
+
+    # * @return void'
+traits:
+- Illuminate\Support\InteractsWithTime
+- SessionHandlerInterface
+- Symfony\Component\HttpFoundation\Request
+- InteractsWithTime
+interfaces:
+- SessionHandlerInterface

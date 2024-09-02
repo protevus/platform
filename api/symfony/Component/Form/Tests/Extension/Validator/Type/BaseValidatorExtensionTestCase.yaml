@@ -1,0 +1,53 @@
+name: BaseValidatorExtensionTestCase
+class_comment: null
+dependencies:
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\Test\FormInterface
+- name: TypeTestCase
+  type: class
+  source: Symfony\Component\Form\Test\TypeTestCase
+- name: GroupSequence
+  type: class
+  source: Symfony\Component\Validator\Constraints\GroupSequence
+properties: []
+methods:
+- name: testValidationGroupNullByDefault
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidationGroupsTransformedToArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidationGroupsCanBeSetToArray
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidationGroupsCanBeSetToFalse
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidationGroupsCanBeSetToCallback
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidationGroupsCanBeSetToClosure
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidationGroupsCanBeSetToGroupSequence
+  visibility: public
+  parameters: []
+  comment: null
+- name: createForm
+  visibility: protected
+  parameters:
+  - name: options
+    default: '[]'
+  comment: null
+traits:
+- Symfony\Component\Form\Test\FormInterface
+- Symfony\Component\Form\Test\TypeTestCase
+- Symfony\Component\Validator\Constraints\GroupSequence
+interfaces: []

@@ -1,0 +1,118 @@
+name: DynamicComponent
+class_comment: null
+dependencies:
+- name: Container
+  type: class
+  source: Illuminate\Container\Container
+- name: Str
+  type: class
+  source: Illuminate\Support\Str
+- name: ComponentTagCompiler
+  type: class
+  source: Illuminate\View\Compilers\ComponentTagCompiler
+properties:
+- name: component
+  visibility: public
+  comment: '# * The name of the component.
+
+    # *
+
+    # * @var string'
+- name: compiler
+  visibility: protected
+  comment: '# * The component tag compiler instance.
+
+    # *
+
+    # * @var \Illuminate\View\Compilers\BladeTagCompiler'
+- name: componentClasses
+  visibility: protected
+  comment: '# * The cached component classes.
+
+    # *
+
+    # * @var array'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: component
+  comment: "# * The name of the component.\n# *\n# * @var string\n# */\n# public $component;\n\
+    # \n# /**\n# * The component tag compiler instance.\n# *\n# * @var \\Illuminate\\\
+    View\\Compilers\\BladeTagCompiler\n# */\n# protected static $compiler;\n# \n#\
+    \ /**\n# * The cached component classes.\n# *\n# * @var array\n# */\n# protected\
+    \ static $componentClasses = [];\n# \n# /**\n# * Create a new component instance.\n\
+    # *\n# * @param  string  $component\n# * @return void"
+- name: render
+  visibility: public
+  parameters: []
+  comment: '# * Get the view / contents that represent the component.
+
+    # *
+
+    # * @return \Illuminate\Contracts\View\View|string'
+- name: compileProps
+  visibility: protected
+  parameters:
+  - name: bindings
+  comment: '# * Compile the @props directive for the component.
+
+    # *
+
+    # * @param  array  $bindings
+
+    # * @return string'
+- name: compileBindings
+  visibility: protected
+  parameters:
+  - name: bindings
+  comment: '# * Compile the bindings for the component.
+
+    # *
+
+    # * @param  array  $bindings
+
+    # * @return string'
+- name: compileSlots
+  visibility: protected
+  parameters:
+  - name: slots
+  comment: '# * Compile the slots for the component.
+
+    # *
+
+    # * @param  array  $slots
+
+    # * @return string'
+- name: classForComponent
+  visibility: protected
+  parameters: []
+  comment: '# * Get the class for the current component.
+
+    # *
+
+    # * @return string'
+- name: bindings
+  visibility: protected
+  parameters:
+  - name: class
+  comment: '# * Get the names of the variables that should be bound to the component.
+
+    # *
+
+    # * @param  string  $class
+
+    # * @return array'
+- name: compiler
+  visibility: protected
+  parameters: []
+  comment: '# * Get an instance of the Blade tag compiler.
+
+    # *
+
+    # * @return \Illuminate\View\Compilers\ComponentTagCompiler'
+traits:
+- Illuminate\Container\Container
+- Illuminate\Support\Str
+- Illuminate\View\Compilers\ComponentTagCompiler
+interfaces: []

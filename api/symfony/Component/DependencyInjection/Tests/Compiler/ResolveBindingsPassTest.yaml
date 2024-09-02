@@ -1,0 +1,139 @@
+name: ResolveBindingsPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: BoundArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\BoundArgument
+- name: ServiceLocatorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- name: TaggedIteratorArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- name: AutowireRequiredMethodsPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\AutowireRequiredMethodsPass
+- name: DefinitionErrorExceptionPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\DefinitionErrorExceptionPass
+- name: ResolveBindingsPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\ResolveBindingsPass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\RuntimeException
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: BarInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\BarInterface
+- name: CaseSensitiveClass
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\CaseSensitiveClass
+- name: FooUnitEnum
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\FooUnitEnum
+- name: NamedArgumentsDummy
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\NamedArgumentsDummy
+- name: NamedEnumArgumentDummy
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\NamedEnumArgumentDummy
+- name: NamedIterableArgumentDummy
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\NamedIterableArgumentDummy
+- name: ParentNotExists
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\ParentNotExists
+- name: WithTarget
+  type: class
+  source: Symfony\Component\DependencyInjection\Tests\Fixtures\WithTarget
+- name: TypedReference
+  type: class
+  source: Symfony\Component\DependencyInjection\TypedReference
+properties: []
+methods:
+- name: testProcess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessEnum
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUnusedBinding
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMissingParent
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTypedReferenceSupport
+  visibility: public
+  parameters: []
+  comment: null
+- name: testScalarSetterAttribute
+  visibility: public
+  parameters: []
+  comment: null
+- name: testWithNonExistingSetterAndBinding
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSyntheticServiceWithBind
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEmptyBindingTypehint
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIterableBindingTypehint
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBindWithTarget
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBindWithNamedArgs
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Argument\BoundArgument
+- Symfony\Component\DependencyInjection\Argument\ServiceLocatorArgument
+- Symfony\Component\DependencyInjection\Argument\TaggedIteratorArgument
+- Symfony\Component\DependencyInjection\Compiler\AutowireRequiredMethodsPass
+- Symfony\Component\DependencyInjection\Compiler\DefinitionErrorExceptionPass
+- Symfony\Component\DependencyInjection\Compiler\ResolveBindingsPass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Exception\RuntimeException
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\DependencyInjection\Tests\Fixtures\BarInterface
+- Symfony\Component\DependencyInjection\Tests\Fixtures\CaseSensitiveClass
+- Symfony\Component\DependencyInjection\Tests\Fixtures\FooUnitEnum
+- Symfony\Component\DependencyInjection\Tests\Fixtures\NamedArgumentsDummy
+- Symfony\Component\DependencyInjection\Tests\Fixtures\NamedEnumArgumentDummy
+- Symfony\Component\DependencyInjection\Tests\Fixtures\NamedIterableArgumentDummy
+- Symfony\Component\DependencyInjection\Tests\Fixtures\ParentNotExists
+- Symfony\Component\DependencyInjection\Tests\Fixtures\WithTarget
+- Symfony\Component\DependencyInjection\TypedReference
+interfaces: []

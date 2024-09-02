@@ -1,0 +1,257 @@
+name: ExpressionLanguageTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: CacheItemInterface
+  type: class
+  source: Psr\Cache\CacheItemInterface
+- name: CacheItemPoolInterface
+  type: class
+  source: Psr\Cache\CacheItemPoolInterface
+- name: ExpressionFunction
+  type: class
+  source: Symfony\Component\ExpressionLanguage\ExpressionFunction
+- name: ExpressionLanguage
+  type: class
+  source: Symfony\Component\ExpressionLanguage\ExpressionLanguage
+- name: ParsedExpression
+  type: class
+  source: Symfony\Component\ExpressionLanguage\ParsedExpression
+- name: SyntaxError
+  type: class
+  source: Symfony\Component\ExpressionLanguage\SyntaxError
+- name: FooBackedEnum
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Tests\Fixtures\FooBackedEnum
+- name: FooEnum
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Tests\Fixtures\FooEnum
+- name: TestProvider
+  type: class
+  source: Symfony\Component\ExpressionLanguage\Tests\Fixtures\TestProvider
+properties: []
+methods:
+- name: testCachedParse
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBasicPhpFunction
+  visibility: public
+  parameters:
+  - name: expression
+  - name: expected
+  - name: compiled
+  comment: '# * @dataProvider basicPhpFunctionProvider'
+- name: basicPhpFunctionProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEnumFunctionWithConstantThrows
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompiledEnumFunctionWithConstantThrows
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEnumFunction
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompiledEnumFunction
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBackedEnumFunction
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompiledEnumFunctionWithBackedEnum
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProviders
+  visibility: public
+  parameters:
+  - name: providers
+  comment: '# * @dataProvider providerTestCases'
+- name: providerTestCases
+  visibility: public
+  parameters: []
+  comment: null
+- name: testShortCircuitOperatorsEvaluate
+  visibility: public
+  parameters:
+  - name: expression
+  - name: values
+  - name: expected
+  comment: '# * @dataProvider shortCircuitProviderEvaluate'
+- name: testShortCircuitOperatorsCompile
+  visibility: public
+  parameters:
+  - name: expression
+  - name: names
+  - name: expected
+  comment: '# * @dataProvider shortCircuitProviderCompile'
+- name: testParseThrowsInsteadOfNotice
+  visibility: public
+  parameters: []
+  comment: null
+- name: testParseReturnsObjectOnAlreadyParsedExpression
+  visibility: public
+  parameters: []
+  comment: null
+- name: shortCircuitProviderEvaluate
+  visibility: public
+  parameters: []
+  comment: null
+- name: __construct
+  visibility: public
+  parameters:
+  - name: fail
+  comment: null
+- name: foo
+  visibility: public
+  parameters: []
+  comment: null
+- name: shortCircuitProviderCompile
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCachingForOverriddenVariableNames
+  visibility: public
+  parameters: []
+  comment: null
+- name: testStrictEquality
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCachingWithDifferentNamesOrder
+  visibility: public
+  parameters: []
+  comment: null
+- name: testOperatorCollisions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRegisterAfterParse
+  visibility: public
+  parameters:
+  - name: registerCallback
+  comment: '# * @dataProvider getRegisterCallbacks'
+- name: testRegisterAfterEval
+  visibility: public
+  parameters:
+  - name: registerCallback
+  comment: '# * @dataProvider getRegisterCallbacks'
+- name: testNullSafeEvaluate
+  visibility: public
+  parameters:
+  - name: expression
+  - name: foo
+  comment: '# * @dataProvider provideNullSafe'
+- name: testNullSafeCompile
+  visibility: public
+  parameters:
+  - name: expression
+  - name: foo
+  comment: '# * @dataProvider provideNullSafe'
+- name: provideNullSafe
+  visibility: public
+  parameters: []
+  comment: null
+- name: bar
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNullSafeEvaluateFails
+  visibility: public
+  parameters:
+  - name: expression
+  - name: foo
+  - name: message
+  comment: '# * @dataProvider provideInvalidNullSafe'
+- name: testNullSafeCompileFails
+  visibility: public
+  parameters:
+  - name: expression
+  - name: foo
+  comment: '# * @dataProvider provideInvalidNullSafe'
+- name: provideInvalidNullSafe
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNullCoalescingEvaluate
+  visibility: public
+  parameters:
+  - name: expression
+  - name: foo
+  comment: '# * @dataProvider provideNullCoalescing'
+- name: testNullCoalescingCompile
+  visibility: public
+  parameters:
+  - name: expression
+  - name: foo
+  comment: '# * @dataProvider provideNullCoalescing'
+- name: provideNullCoalescing
+  visibility: public
+  parameters: []
+  comment: null
+- name: bar
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRegisterAfterCompile
+  visibility: public
+  parameters:
+  - name: registerCallback
+  comment: '# * @dataProvider getRegisterCallbacks'
+- name: validCommentProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLintAllowsComments
+  visibility: public
+  parameters:
+  - name: expression
+  comment: "# extra stars **/ + 1'];\n# yield [\"/* multi\\nline */ 'foo'\"];\n# }\n\
+    # \n# /**\n# * @dataProvider validCommentProvider"
+- name: invalidCommentProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLintThrowsOnInvalidComments
+  visibility: public
+  parameters:
+  - name: expression
+  comment: '# * @dataProvider invalidCommentProvider'
+- name: testLintDoesntThrowOnValidExpression
+  visibility: public
+  parameters: []
+  comment: null
+- name: testLintThrowsOnInvalidExpression
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCommentsIgnored
+  visibility: public
+  parameters: []
+  comment: null
+- name: getRegisterCallbacks
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Psr\Cache\CacheItemInterface
+- Psr\Cache\CacheItemPoolInterface
+- Symfony\Component\ExpressionLanguage\ExpressionFunction
+- Symfony\Component\ExpressionLanguage\ExpressionLanguage
+- Symfony\Component\ExpressionLanguage\ParsedExpression
+- Symfony\Component\ExpressionLanguage\SyntaxError
+- Symfony\Component\ExpressionLanguage\Tests\Fixtures\FooBackedEnum
+- Symfony\Component\ExpressionLanguage\Tests\Fixtures\FooEnum
+- Symfony\Component\ExpressionLanguage\Tests\Fixtures\TestProvider
+interfaces: []

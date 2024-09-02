@@ -1,0 +1,70 @@
+name: AbstractRedisSessionHandlerTestCase
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Relay
+  type: class
+  source: Relay\Relay
+- name: RedisSessionHandler
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler
+properties: []
+methods:
+- name: testSupportedParam
+  visibility: public
+  parameters:
+  - name: options
+  - name: supported
+  comment: "# * @requires extension redis\n# *\n# * @group time-sensitive\n# */\n\
+    # abstract class AbstractRedisSessionHandlerTestCase extends TestCase\n# {\n#\
+    \ protected const PREFIX = 'prefix_';\n# \n# protected RedisSessionHandler $storage;\n\
+    # protected \\Redis|Relay|\\RedisArray|\\RedisCluster|\\Predis\\Client $redisClient;\n\
+    # \n# abstract protected function createRedisClient(string $host): \\Redis|Relay|\\\
+    RedisArray|\\RedisCluster|\\Predis\\Client;\n# \n# protected function setUp():\
+    \ void\n# {\n# parent::setUp();\n# \n# if (!\\extension_loaded('redis')) {\n#\
+    \ self::markTestSkipped('Extension redis required.');\n# }\n# try {\n# (new \\\
+    Redis())->connect(...explode(':', getenv('REDIS_HOST')));\n# } catch (\\Exception\
+    \ $e) {\n# self::markTestSkipped($e->getMessage());\n# }\n# \n# $host = getenv('REDIS_HOST')\
+    \ ?: 'localhost';\n# \n# $this->redisClient = $this->createRedisClient($host);\n\
+    # $this->storage = new RedisSessionHandler(\n# $this->redisClient,\n# ['prefix'\
+    \ => self::PREFIX]\n# );\n# }\n# \n# public function testOpenSession()\n# {\n\
+    # $this->assertTrue($this->storage->open('', ''));\n# }\n# \n# public function\
+    \ testCloseSession()\n# {\n# $this->assertTrue($this->storage->close());\n# }\n\
+    # \n# public function testReadSession()\n# {\n# $this->redisClient->set(self::PREFIX.'id1',\
+    \ null);\n# $this->redisClient->set(self::PREFIX.'id2', 'abc123');\n# \n# $this->assertEquals('',\
+    \ $this->storage->read('id1'));\n# $this->assertEquals('abc123', $this->storage->read('id2'));\n\
+    # }\n# \n# public function testWriteSession()\n# {\n# $this->assertTrue($this->storage->write('id',\
+    \ 'data'));\n# \n# $this->assertTrue((bool) $this->redisClient->exists(self::PREFIX.'id'));\n\
+    # $this->assertEquals('data', $this->redisClient->get(self::PREFIX.'id'));\n#\
+    \ }\n# \n# public function testUseSessionGcMaxLifetimeAsTimeToLive()\n# {\n# $this->storage->write('id',\
+    \ 'data');\n# $ttl = $this->redisClient->ttl(self::PREFIX.'id');\n# \n# $this->assertLessThanOrEqual(\\\
+    ini_get('session.gc_maxlifetime'), $ttl);\n# $this->assertGreaterThanOrEqual(0,\
+    \ $ttl);\n# }\n# \n# public function testDestroySession()\n# {\n# $this->redisClient->set(self::PREFIX.'id',\
+    \ 'foo');\n# \n# $this->assertTrue((bool) $this->redisClient->exists(self::PREFIX.'id'));\n\
+    # $this->assertTrue($this->storage->destroy('id'));\n# $this->assertFalse((bool)\
+    \ $this->redisClient->exists(self::PREFIX.'id'));\n# }\n# \n# public function\
+    \ testGcSession()\n# {\n# $this->assertIsInt($this->storage->gc(123));\n# }\n\
+    # \n# public function testUpdateTimestamp()\n# {\n# $lowTtl = 10;\n# \n# $this->redisClient->setex(self::PREFIX.'id',\
+    \ $lowTtl, 'foo');\n# $this->storage->updateTimestamp('id', 'data');\n# \n# $this->assertGreaterThan($lowTtl,\
+    \ $this->redisClient->ttl(self::PREFIX.'id'));\n# }\n# \n# /**\n# * @dataProvider\
+    \ getOptionFixtures"
+- name: getOptionFixtures
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUseTtlOption
+  visibility: public
+  parameters:
+  - name: ttl
+  comment: '# * @dataProvider getTtlFixtures'
+- name: getTtlFixtures
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Relay\Relay
+- Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler
+interfaces: []

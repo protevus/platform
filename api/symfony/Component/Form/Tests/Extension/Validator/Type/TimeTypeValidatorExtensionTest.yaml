@@ -1,0 +1,29 @@
+name: TimeTypeValidatorExtensionTest
+class_comment: null
+dependencies:
+- name: TimeType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\TimeType
+- name: ValidatorExtensionTrait
+  type: class
+  source: Symfony\Component\Form\Test\Traits\ValidatorExtensionTrait
+- name: ValidatorExtensionTrait
+  type: class
+  source: ValidatorExtensionTrait
+properties: []
+methods:
+- name: createForm
+  visibility: protected
+  parameters:
+  - name: options
+    default: '[]'
+  comment: null
+- name: testInvalidMessage
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Form\Extension\Core\Type\TimeType
+- Symfony\Component\Form\Test\Traits\ValidatorExtensionTrait
+- ValidatorExtensionTrait
+interfaces: []

@@ -1,0 +1,50 @@
+name: Locale
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: setDefaultFallback
+  visibility: public
+  parameters:
+  - name: locale
+  comment: "# * Provides access to locale-related data.\n# *\n# * @author Bernhard\
+    \ Schussek <bschussek@gmail.com>\n# *\n# * @internal\n# */\n# final class Locale\
+    \ extends \\Locale\n# {\n# private static ?string $defaultFallback = 'en';\n#\
+    \ \n# /**\n# * Sets the default fallback locale.\n# *\n# * The default fallback\
+    \ locale is used as fallback for locales that have no\n# * fallback otherwise.\n\
+    # *\n# * @see getFallback()"
+- name: getDefaultFallback
+  visibility: public
+  parameters: []
+  comment: '# * Returns the default fallback locale.
+
+    # *
+
+    # * @see setDefaultFallback()
+
+    # * @see getFallback()'
+- name: getFallback
+  visibility: public
+  parameters:
+  - name: locale
+  comment: '# * Returns the fallback locale for a given locale.
+
+    # *
+
+    # * For example, the fallback of "fr_FR" is "fr". The fallback of "fr" is
+
+    # * the default fallback locale configured with {@link setDefaultFallback()}.
+
+    # * The default fallback locale has no fallback.
+
+    # *
+
+    # * @return string|null The ICU locale code of the fallback locale, or null
+
+    # *                     if no fallback exists'
+- name: __construct
+  visibility: private
+  parameters: []
+  comment: '# * This class must not be instantiated.'
+traits: []
+interfaces: []

@@ -1,0 +1,172 @@
+name: HasTimestamps
+class_comment: null
+dependencies:
+- name: Date
+  type: class
+  source: Illuminate\Support\Facades\Date
+properties:
+- name: timestamps
+  visibility: public
+  comment: '# * Indicates if the model should be timestamped.
+
+    # *
+
+    # * @var bool'
+- name: ignoreTimestampsOn
+  visibility: protected
+  comment: '# * The list of models classes that have timestamps temporarily disabled.
+
+    # *
+
+    # * @var array'
+methods:
+- name: touch
+  visibility: public
+  parameters:
+  - name: attribute
+    default: 'null'
+  comment: "# * Indicates if the model should be timestamped.\n# *\n# * @var bool\n\
+    # */\n# public $timestamps = true;\n# \n# /**\n# * The list of models classes\
+    \ that have timestamps temporarily disabled.\n# *\n# * @var array\n# */\n# protected\
+    \ static $ignoreTimestampsOn = [];\n# \n# /**\n# * Update the model's update timestamp.\n\
+    # *\n# * @param  string|null  $attribute\n# * @return bool"
+- name: touchQuietly
+  visibility: public
+  parameters:
+  - name: attribute
+    default: 'null'
+  comment: '# * Update the model''s update timestamp without raising any events.
+
+    # *
+
+    # * @param  string|null  $attribute
+
+    # * @return bool'
+- name: updateTimestamps
+  visibility: public
+  parameters: []
+  comment: '# * Update the creation and update timestamps.
+
+    # *
+
+    # * @return $this'
+- name: setCreatedAt
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Set the value of the "created at" attribute.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return $this'
+- name: setUpdatedAt
+  visibility: public
+  parameters:
+  - name: value
+  comment: '# * Set the value of the "updated at" attribute.
+
+    # *
+
+    # * @param  mixed  $value
+
+    # * @return $this'
+- name: freshTimestamp
+  visibility: public
+  parameters: []
+  comment: '# * Get a fresh timestamp for the model.
+
+    # *
+
+    # * @return \Illuminate\Support\Carbon'
+- name: freshTimestampString
+  visibility: public
+  parameters: []
+  comment: '# * Get a fresh timestamp for the model.
+
+    # *
+
+    # * @return string'
+- name: usesTimestamps
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the model uses timestamps.
+
+    # *
+
+    # * @return bool'
+- name: getCreatedAtColumn
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the "created at" column.
+
+    # *
+
+    # * @return string|null'
+- name: getUpdatedAtColumn
+  visibility: public
+  parameters: []
+  comment: '# * Get the name of the "updated at" column.
+
+    # *
+
+    # * @return string|null'
+- name: getQualifiedCreatedAtColumn
+  visibility: public
+  parameters: []
+  comment: '# * Get the fully qualified "created at" column.
+
+    # *
+
+    # * @return string|null'
+- name: getQualifiedUpdatedAtColumn
+  visibility: public
+  parameters: []
+  comment: '# * Get the fully qualified "updated at" column.
+
+    # *
+
+    # * @return string|null'
+- name: withoutTimestamps
+  visibility: public
+  parameters:
+  - name: callback
+  comment: '# * Disable timestamps for the current class during the given callback
+    scope.
+
+    # *
+
+    # * @param  callable  $callback
+
+    # * @return mixed'
+- name: withoutTimestampsOn
+  visibility: public
+  parameters:
+  - name: models
+  - name: callback
+  comment: '# * Disable timestamps for the given model classes during the given callback
+    scope.
+
+    # *
+
+    # * @param  array  $models
+
+    # * @param  callable  $callback
+
+    # * @return mixed'
+- name: isIgnoringTimestamps
+  visibility: public
+  parameters:
+  - name: class
+    default: 'null'
+  comment: '# * Determine if the given model is ignoring timestamps / touches.
+
+    # *
+
+    # * @param  string|null  $class
+
+    # * @return bool'
+traits:
+- Illuminate\Support\Facades\Date
+interfaces: []

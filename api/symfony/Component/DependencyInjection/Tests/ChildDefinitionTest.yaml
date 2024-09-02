@@ -1,0 +1,65 @@
+name: ChildDefinitionTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ChildDefinition
+  type: class
+  source: Symfony\Component\DependencyInjection\ChildDefinition
+properties: []
+methods:
+- name: testConstructor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetProperty
+  visibility: public
+  parameters:
+  - name: property
+  - name: changeKey
+  comment: '# * @dataProvider getPropertyTests'
+- name: getPropertyTests
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetPublic
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetLazy
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetAutowired
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReplaceArgumentShouldRequireIntegerIndex
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReplaceArgument
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetArgumentShouldCheckBounds
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAutoconfigured
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInstanceofConditionals
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\ChildDefinition
+interfaces: []

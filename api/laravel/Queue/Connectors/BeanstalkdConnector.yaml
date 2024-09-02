@@ -1,0 +1,46 @@
+name: BeanstalkdConnector
+class_comment: null
+dependencies:
+- name: BeanstalkdQueue
+  type: class
+  source: Illuminate\Queue\BeanstalkdQueue
+- name: SocketFactoryInterface
+  type: class
+  source: Pheanstalk\Contract\SocketFactoryInterface
+- name: Pheanstalk
+  type: class
+  source: Pheanstalk\Pheanstalk
+- name: Timeout
+  type: class
+  source: Pheanstalk\Values\Timeout
+properties: []
+methods:
+- name: connect
+  visibility: public
+  parameters:
+  - name: config
+  comment: '# * Establish a queue connection.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Contracts\Queue\Queue'
+- name: pheanstalk
+  visibility: protected
+  parameters:
+  - name: config
+  comment: '# * Create a Pheanstalk instance.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return \Pheanstalk\Pheanstalk'
+traits:
+- Illuminate\Queue\BeanstalkdQueue
+- Pheanstalk\Contract\SocketFactoryInterface
+- Pheanstalk\Pheanstalk
+- Pheanstalk\Values\Timeout
+interfaces:
+- ConnectorInterface

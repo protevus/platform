@@ -1,0 +1,15 @@
+name: FooReplacementService
+class_comment: null
+dependencies:
+- name: AsRoutingConditionService
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Routing\Attribute\AsRoutingConditionService
+properties: []
+methods:
+- name: isAllowed
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Bundle\FrameworkBundle\Routing\Attribute\AsRoutingConditionService
+interfaces: []

@@ -1,0 +1,11 @@
+name: webhook
+class_comment: null
+dependencies:
+- name: MailerDeliveryEvent
+  type: class
+  source: Symfony\Component\RemoteEvent\Event\Mailer\MailerDeliveryEvent
+properties: []
+methods: []
+traits:
+- Symfony\Component\RemoteEvent\Event\Mailer\MailerDeliveryEvent
+interfaces: []

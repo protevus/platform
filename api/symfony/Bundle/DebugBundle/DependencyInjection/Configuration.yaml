@@ -1,0 +1,24 @@
+name: Configuration
+class_comment: '# * DebugExtension configuration structure.
+
+  # *
+
+  # * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: TreeBuilder
+  type: class
+  source: Symfony\Component\Config\Definition\Builder\TreeBuilder
+- name: ConfigurationInterface
+  type: class
+  source: Symfony\Component\Config\Definition\ConfigurationInterface
+properties: []
+methods:
+- name: getConfigTreeBuilder
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Config\Definition\Builder\TreeBuilder
+- Symfony\Component\Config\Definition\ConfigurationInterface
+interfaces:
+- ConfigurationInterface

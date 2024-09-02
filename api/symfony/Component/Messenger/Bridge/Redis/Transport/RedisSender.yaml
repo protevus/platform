@@ -1,0 +1,41 @@
+name: RedisSender
+class_comment: '# * @author Alexander Schranz <alexander@sulu.io>
+
+  # * @author Antoine Bluchet <soyuka@gmail.com>'
+dependencies:
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: DelayStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\DelayStamp
+- name: TransportMessageIdStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\TransportMessageIdStamp
+- name: SenderInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Sender\SenderInterface
+- name: SerializerInterface
+  type: class
+  source: Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: connection
+  - name: serializer
+  comment: null
+- name: send
+  visibility: public
+  parameters:
+  - name: envelope
+  comment: null
+traits:
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Stamp\DelayStamp
+- Symfony\Component\Messenger\Stamp\TransportMessageIdStamp
+- Symfony\Component\Messenger\Transport\Sender\SenderInterface
+- Symfony\Component\Messenger\Transport\Serialization\SerializerInterface
+interfaces:
+- SenderInterface

@@ -1,0 +1,39 @@
+name: MiddlewareTestCase
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Envelope
+  type: class
+  source: Symfony\Component\Messenger\Envelope
+- name: MiddlewareInterface
+  type: class
+  source: Symfony\Component\Messenger\Middleware\MiddlewareInterface
+- name: StackInterface
+  type: class
+  source: Symfony\Component\Messenger\Middleware\StackInterface
+- name: StackMiddleware
+  type: class
+  source: Symfony\Component\Messenger\Middleware\StackMiddleware
+properties: []
+methods:
+- name: getStackMock
+  visibility: protected
+  parameters:
+  - name: nextIsCalled
+    default: 'true'
+  comment: null
+- name: getThrowingStackMock
+  visibility: protected
+  parameters:
+  - name: throwable
+    default: 'null'
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Envelope
+- Symfony\Component\Messenger\Middleware\MiddlewareInterface
+- Symfony\Component\Messenger\Middleware\StackInterface
+- Symfony\Component\Messenger\Middleware\StackMiddleware
+interfaces: []

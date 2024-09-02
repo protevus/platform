@@ -1,0 +1,12 @@
+name: FileTrait
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: file
+  visibility: public
+  parameters:
+  - name: file
+  comment: null
+traits: []
+interfaces: []

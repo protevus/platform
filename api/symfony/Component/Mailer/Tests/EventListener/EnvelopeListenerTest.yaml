@@ -1,0 +1,44 @@
+name: EnvelopeListenerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Envelope
+  type: class
+  source: Symfony\Component\Mailer\Envelope
+- name: MessageEvent
+  type: class
+  source: Symfony\Component\Mailer\Event\MessageEvent
+- name: EnvelopeListener
+  type: class
+  source: Symfony\Component\Mailer\EventListener\EnvelopeListener
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: RawMessage
+  type: class
+  source: Symfony\Component\Mime\RawMessage
+properties: []
+methods:
+- name: testRecipients
+  visibility: public
+  parameters:
+  - name: expected
+  - name: recipients
+    default: 'null'
+  - name: allowedRecipients
+    default: '[]'
+  comment: '# * @dataProvider provideRecipientsTests'
+- name: provideRecipientsTests
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Mailer\Envelope
+- Symfony\Component\Mailer\Event\MessageEvent
+- Symfony\Component\Mailer\EventListener\EnvelopeListener
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\RawMessage
+interfaces: []

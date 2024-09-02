@@ -1,0 +1,26 @@
+name: TaggedConsumerWithExclude
+class_comment: null
+dependencies:
+- name: ContainerInterface
+  type: class
+  source: Psr\Container\ContainerInterface
+- name: AutowireIterator
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\AutowireIterator
+- name: AutowireLocator
+  type: class
+  source: Symfony\Component\DependencyInjection\Attribute\AutowireLocator
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: '#[AutowireIterator(AutoconfiguredInterface2::class'
+  - name: self::class
+  comment: null
+traits:
+- Psr\Container\ContainerInterface
+- Symfony\Component\DependencyInjection\Attribute\AutowireIterator
+- Symfony\Component\DependencyInjection\Attribute\AutowireLocator
+interfaces:
+- AutoconfiguredInterface2

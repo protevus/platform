@@ -1,0 +1,154 @@
+name: UrlWindow
+class_comment: null
+dependencies:
+- name: PaginatorContract
+  type: class
+  source: Illuminate\Contracts\Pagination\LengthAwarePaginator
+properties:
+- name: paginator
+  visibility: protected
+  comment: '# * The paginator implementation.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Pagination\LengthAwarePaginator'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: paginator
+  comment: "# * The paginator implementation.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Pagination\\LengthAwarePaginator\n# */\n# protected $paginator;\n# \n# /**\n#\
+    \ * Create a new URL window instance.\n# *\n# * @param  \\Illuminate\\Contracts\\\
+    Pagination\\LengthAwarePaginator  $paginator\n# * @return void"
+- name: make
+  visibility: public
+  parameters:
+  - name: paginator
+  comment: '# * Create a new URL window instance.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Pagination\LengthAwarePaginator  $paginator
+
+    # * @return array'
+- name: get
+  visibility: public
+  parameters: []
+  comment: '# * Get the window of URLs to be shown.
+
+    # *
+
+    # * @return array'
+- name: getSmallSlider
+  visibility: protected
+  parameters: []
+  comment: '# * Get the slider of URLs there are not enough pages to slide.
+
+    # *
+
+    # * @return array'
+- name: getUrlSlider
+  visibility: protected
+  parameters:
+  - name: onEachSide
+  comment: '# * Create a URL slider links.
+
+    # *
+
+    # * @param  int  $onEachSide
+
+    # * @return array'
+- name: getSliderTooCloseToBeginning
+  visibility: protected
+  parameters:
+  - name: window
+  - name: onEachSide
+  comment: '# * Get the slider of URLs when too close to the beginning of the window.
+
+    # *
+
+    # * @param  int  $window
+
+    # * @param  int  $onEachSide
+
+    # * @return array'
+- name: getSliderTooCloseToEnding
+  visibility: protected
+  parameters:
+  - name: window
+  - name: onEachSide
+  comment: '# * Get the slider of URLs when too close to the ending of the window.
+
+    # *
+
+    # * @param  int  $window
+
+    # * @param  int  $onEachSide
+
+    # * @return array'
+- name: getFullSlider
+  visibility: protected
+  parameters:
+  - name: onEachSide
+  comment: '# * Get the slider of URLs when a full slider can be made.
+
+    # *
+
+    # * @param  int  $onEachSide
+
+    # * @return array'
+- name: getAdjacentUrlRange
+  visibility: public
+  parameters:
+  - name: onEachSide
+  comment: '# * Get the page range for the current page window.
+
+    # *
+
+    # * @param  int  $onEachSide
+
+    # * @return array'
+- name: getStart
+  visibility: public
+  parameters: []
+  comment: '# * Get the starting URLs of a pagination slider.
+
+    # *
+
+    # * @return array'
+- name: getFinish
+  visibility: public
+  parameters: []
+  comment: '# * Get the ending URLs of a pagination slider.
+
+    # *
+
+    # * @return array'
+- name: hasPages
+  visibility: public
+  parameters: []
+  comment: '# * Determine if the underlying paginator being presented has pages to
+    show.
+
+    # *
+
+    # * @return bool'
+- name: currentPage
+  visibility: protected
+  parameters: []
+  comment: '# * Get the current page from the paginator.
+
+    # *
+
+    # * @return int'
+- name: lastPage
+  visibility: protected
+  parameters: []
+  comment: '# * Get the last page from the paginator.
+
+    # *
+
+    # * @return int'
+traits: []
+interfaces: []

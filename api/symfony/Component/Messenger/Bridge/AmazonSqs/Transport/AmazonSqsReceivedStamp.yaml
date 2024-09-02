@@ -1,0 +1,21 @@
+name: AmazonSqsReceivedStamp
+class_comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>"
+dependencies:
+- name: NonSendableStampInterface
+  type: class
+  source: Symfony\Component\Messenger\Stamp\NonSendableStampInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: id
+  comment: null
+- name: getId
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Messenger\Stamp\NonSendableStampInterface
+interfaces:
+- NonSendableStampInterface

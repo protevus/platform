@@ -1,0 +1,61 @@
+name: MemoryDataCollector
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>
+
+  # *
+
+  # * @final'
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters: []
+  comment: null
+- name: collect
+  visibility: public
+  parameters:
+  - name: request
+  - name: response
+  - name: exception
+    default: 'null'
+  comment: null
+- name: reset
+  visibility: public
+  parameters: []
+  comment: null
+- name: lateCollect
+  visibility: public
+  parameters: []
+  comment: null
+- name: getMemory
+  visibility: public
+  parameters: []
+  comment: null
+- name: getMemoryLimit
+  visibility: public
+  parameters: []
+  comment: null
+- name: updateMemoryUsage
+  visibility: public
+  parameters: []
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: convertToBytes
+  visibility: private
+  parameters:
+  - name: memoryLimit
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+interfaces:
+- LateDataCollectorInterface

@@ -1,0 +1,26 @@
+name: WorkflowGuardListenerPass
+class_comment: "# * @author Christian Flothmann <christian.flothmann@sensiolabs.de>\n\
+  # * @author Gr\xE9goire Pineau <lyrixx@lyrixx.info>"
+dependencies:
+- name: CompilerPassInterface
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: LogicException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\LogicException
+properties: []
+methods:
+- name: process
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\LogicException
+interfaces:
+- CompilerPassInterface

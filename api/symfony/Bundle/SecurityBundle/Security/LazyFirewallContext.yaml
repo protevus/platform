@@ -1,0 +1,54 @@
+name: LazyFirewallContext
+class_comment: '# * Lazily calls authentication listeners when actually required by
+  the access listener.
+
+  # *
+
+  # * @author Nicolas Grekas <p@tchwork.com>'
+dependencies:
+- name: RequestEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\RequestEvent
+- name: TokenStorage
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
+- name: LazyResponseEvent
+  type: class
+  source: Symfony\Component\Security\Http\Event\LazyResponseEvent
+- name: ExceptionListener
+  type: class
+  source: Symfony\Component\Security\Http\Firewall\ExceptionListener
+- name: FirewallListenerInterface
+  type: class
+  source: Symfony\Component\Security\Http\Firewall\FirewallListenerInterface
+- name: LogoutListener
+  type: class
+  source: Symfony\Component\Security\Http\Firewall\LogoutListener
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: listeners
+  - name: exceptionListener
+  - name: logoutListener
+  - name: config
+  - name: tokenStorage
+  comment: null
+- name: getListeners
+  visibility: public
+  parameters: []
+  comment: null
+- name: __invoke
+  visibility: public
+  parameters:
+  - name: event
+  comment: null
+traits:
+- Symfony\Component\HttpKernel\Event\RequestEvent
+- Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
+- Symfony\Component\Security\Http\Event\LazyResponseEvent
+- Symfony\Component\Security\Http\Firewall\ExceptionListener
+- Symfony\Component\Security\Http\Firewall\FirewallListenerInterface
+- Symfony\Component\Security\Http\Firewall\LogoutListener
+interfaces: []

@@ -1,0 +1,15 @@
+name: Stream
+class_comment: '# * A PHP stream of unknown size.
+
+  # *
+
+  # * @author Nicolas Grekas <p@tchwork.com>'
+dependencies: []
+properties: []
+methods:
+- name: getSize
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

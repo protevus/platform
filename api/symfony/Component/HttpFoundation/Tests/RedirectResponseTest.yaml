@@ -1,0 +1,47 @@
+name: RedirectResponseTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: RedirectResponse
+  type: class
+  source: Symfony\Component\HttpFoundation\RedirectResponse
+properties: []
+methods:
+- name: testGenerateMetaRedirect
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRedirectResponseConstructorEmptyUrl
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRedirectResponseConstructorWrongStatusCode
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateLocationHeader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGenerateContentTypeHeader
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetTargetUrl
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetTargetUrl
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCacheHeaders
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\RedirectResponse
+interfaces: []

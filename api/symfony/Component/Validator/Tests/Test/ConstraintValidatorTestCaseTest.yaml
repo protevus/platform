@@ -1,0 +1,45 @@
+name: ConstraintValidatorTestCaseTest
+class_comment: null
+dependencies:
+- name: ExpectationFailedException
+  type: class
+  source: PHPUnit\Framework\ExpectationFailedException
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: DateTime
+  type: class
+  source: Symfony\Component\Validator\Constraints\DateTime
+- name: NotNull
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotNull
+- name: ConstraintValidator
+  type: class
+  source: Symfony\Component\Validator\ConstraintValidator
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+properties: []
+methods:
+- name: createValidator
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testAssertingContextualValidatorRemainingExpectationsThrow
+  visibility: public
+  parameters: []
+  comment: null
+- name: validate
+  visibility: public
+  parameters:
+  - name: value
+  - name: constraint
+  comment: null
+traits:
+- PHPUnit\Framework\ExpectationFailedException
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Constraints\DateTime
+- Symfony\Component\Validator\Constraints\NotNull
+- Symfony\Component\Validator\ConstraintValidator
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+interfaces: []

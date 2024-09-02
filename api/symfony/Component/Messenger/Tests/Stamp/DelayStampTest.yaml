@@ -1,0 +1,23 @@
+name: DelayStampTest
+class_comment: '# * @author Yanick Witschi <yanick.witschi@terminal42.ch>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: DelayStamp
+  type: class
+  source: Symfony\Component\Messenger\Stamp\DelayStamp
+properties: []
+methods:
+- name: testDelayFor
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDelayUntil
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Messenger\Stamp\DelayStamp
+interfaces: []

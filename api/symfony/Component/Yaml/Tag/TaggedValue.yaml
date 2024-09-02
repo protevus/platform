@@ -1,0 +1,21 @@
+name: TaggedValue
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: tag
+  - name: value
+  comment: null
+- name: getTag
+  visibility: public
+  parameters: []
+  comment: null
+- name: getValue
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

@@ -1,0 +1,59 @@
+name: AssetMapperCompileCommandTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Application
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Console\Application
+- name: PreAssetsCompileEvent
+  type: class
+  source: Symfony\Component\AssetMapper\Event\PreAssetsCompileEvent
+- name: AssetMapperTestAppKernel
+  type: class
+  source: Symfony\Component\AssetMapper\Tests\Fixtures\AssetMapperTestAppKernel
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+- name: CommandTester
+  type: class
+  source: Symfony\Component\Console\Tester\CommandTester
+- name: EventDispatcherInterface
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcherInterface
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: Finder
+  type: class
+  source: Symfony\Component\Finder\Finder
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: tearDown
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testAssetsAreCompiled
+  visibility: public
+  parameters: []
+  comment: null
+- name: testEventIsDispatched
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Bundle\FrameworkBundle\Console\Application
+- Symfony\Component\AssetMapper\Event\PreAssetsCompileEvent
+- Symfony\Component\AssetMapper\Tests\Fixtures\AssetMapperTestAppKernel
+- Symfony\Component\Console\Output\OutputInterface
+- Symfony\Component\Console\Tester\CommandTester
+- Symfony\Component\EventDispatcher\EventDispatcherInterface
+- Symfony\Component\Filesystem\Filesystem
+- Symfony\Component\Finder\Finder
+interfaces: []

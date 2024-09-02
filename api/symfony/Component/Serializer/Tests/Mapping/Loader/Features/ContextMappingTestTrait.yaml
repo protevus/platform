@@ -1,0 +1,43 @@
+name: ContextMappingTestTrait
+class_comment: null
+dependencies:
+- name: Assert
+  type: class
+  source: PHPUnit\Framework\Assert
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Serializer\Mapping\ClassMetadata
+- name: LoaderInterface
+  type: class
+  source: Symfony\Component\Serializer\Mapping\Loader\LoaderInterface
+- name: ContextDummy
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\Attributes\ContextDummy
+- name: ContextDummyParent
+  type: class
+  source: Symfony\Component\Serializer\Tests\Fixtures\Attributes\ContextDummyParent
+properties: []
+methods:
+- name: getLoaderForContextMapping
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testLoadContexts
+  visibility: public
+  parameters: []
+  comment: null
+- name: assertLoadedContexts
+  visibility: public
+  parameters:
+  - name: dummyClass
+    default: ContextDummy::class
+  - name: parentClass
+    default: ContextDummyParent::class
+  comment: null
+traits:
+- PHPUnit\Framework\Assert
+- Symfony\Component\Serializer\Mapping\ClassMetadata
+- Symfony\Component\Serializer\Mapping\Loader\LoaderInterface
+- Symfony\Component\Serializer\Tests\Fixtures\Attributes\ContextDummy
+- Symfony\Component\Serializer\Tests\Fixtures\Attributes\ContextDummyParent
+interfaces: []

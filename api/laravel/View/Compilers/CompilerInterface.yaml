@@ -1,0 +1,40 @@
+name: CompilerInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getCompiledPath
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Get the path to the compiled version of a view.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return string'
+- name: isExpired
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Determine if the given view is expired.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return bool'
+- name: compile
+  visibility: public
+  parameters:
+  - name: path
+  comment: '# * Compile the view at the given path.
+
+    # *
+
+    # * @param  string  $path
+
+    # * @return void'
+traits: []
+interfaces: []

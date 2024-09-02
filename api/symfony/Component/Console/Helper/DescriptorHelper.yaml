@@ -1,0 +1,76 @@
+name: DescriptorHelper
+class_comment: "# * This class adds helper method to describe objects in various formats.\n\
+  # *\n# * @author Jean-Fran\xE7ois Simon <contact@jfsimon.fr>"
+dependencies:
+- name: DescriptorInterface
+  type: class
+  source: Symfony\Component\Console\Descriptor\DescriptorInterface
+- name: JsonDescriptor
+  type: class
+  source: Symfony\Component\Console\Descriptor\JsonDescriptor
+- name: MarkdownDescriptor
+  type: class
+  source: Symfony\Component\Console\Descriptor\MarkdownDescriptor
+- name: ReStructuredTextDescriptor
+  type: class
+  source: Symfony\Component\Console\Descriptor\ReStructuredTextDescriptor
+- name: TextDescriptor
+  type: class
+  source: Symfony\Component\Console\Descriptor\TextDescriptor
+- name: XmlDescriptor
+  type: class
+  source: Symfony\Component\Console\Descriptor\XmlDescriptor
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Console\Exception\InvalidArgumentException
+- name: OutputInterface
+  type: class
+  source: Symfony\Component\Console\Output\OutputInterface
+properties: []
+methods:
+- name: describe
+  visibility: public
+  parameters:
+  - name: output
+  - name: object
+  - name: options
+    default: '[]'
+  comment: "# * This class adds helper method to describe objects in various formats.\n\
+    # *\n# * @author Jean-Fran\xE7ois Simon <contact@jfsimon.fr>\n# */\n# class DescriptorHelper\
+    \ extends Helper\n# {\n# /**\n# * @var DescriptorInterface[]\n# */\n# private\
+    \ array $descriptors = [];\n# \n# public function __construct()\n# {\n# $this\n\
+    # ->register('txt', new TextDescriptor())\n# ->register('xml', new XmlDescriptor())\n\
+    # ->register('json', new JsonDescriptor())\n# ->register('md', new MarkdownDescriptor())\n\
+    # ->register('rst', new ReStructuredTextDescriptor())\n# ;\n# }\n# \n# /**\n#\
+    \ * Describes an object if supported.\n# *\n# * Available options are:\n# * *\
+    \ format: string, the output format name\n# * * raw_text: boolean, sets output\
+    \ type as raw\n# *\n# * @throws InvalidArgumentException when the given format\
+    \ is not supported"
+- name: register
+  visibility: public
+  parameters:
+  - name: format
+  - name: descriptor
+  comment: '# * Registers a descriptor.
+
+    # *
+
+    # * @return $this'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+- name: getFormats
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Console\Descriptor\DescriptorInterface
+- Symfony\Component\Console\Descriptor\JsonDescriptor
+- Symfony\Component\Console\Descriptor\MarkdownDescriptor
+- Symfony\Component\Console\Descriptor\ReStructuredTextDescriptor
+- Symfony\Component\Console\Descriptor\TextDescriptor
+- Symfony\Component\Console\Descriptor\XmlDescriptor
+- Symfony\Component\Console\Exception\InvalidArgumentException
+- Symfony\Component\Console\Output\OutputInterface
+interfaces: []

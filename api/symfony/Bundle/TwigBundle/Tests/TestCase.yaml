@@ -1,0 +1,10 @@
+name: TestCase
+class_comment: null
+dependencies:
+- name: PHPUnitTestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+properties: []
+methods: []
+traits: []
+interfaces: []

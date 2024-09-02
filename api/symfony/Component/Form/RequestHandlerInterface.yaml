@@ -1,0 +1,33 @@
+name: RequestHandlerInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: handleRequest
+  visibility: public
+  parameters:
+  - name: form
+  - name: request
+    default: 'null'
+  comment: '# * Submits forms if they were submitted.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # interface RequestHandlerInterface
+
+    # {
+
+    # /**
+
+    # * Submits a form if it was submitted.'
+- name: isFileUpload
+  visibility: public
+  parameters:
+  - name: data
+  comment: '# * Returns true if the given data is a file upload.'
+traits: []
+interfaces: []

@@ -1,0 +1,27 @@
+name: profiling
+class_comment: null
+dependencies:
+- name: ConsoleProfilerListener
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\EventListener\ConsoleProfilerListener
+- name: VirtualRequestStack
+  type: class
+  source: Symfony\Component\HttpKernel\Debug\VirtualRequestStack
+- name: ProfilerListener
+  type: class
+  source: Symfony\Component\HttpKernel\EventListener\ProfilerListener
+- name: FileProfilerStorage
+  type: class
+  source: Symfony\Component\HttpKernel\Profiler\FileProfilerStorage
+- name: Profiler
+  type: class
+  source: Symfony\Component\HttpKernel\Profiler\Profiler
+properties: []
+methods: []
+traits:
+- Symfony\Bundle\FrameworkBundle\EventListener\ConsoleProfilerListener
+- Symfony\Component\HttpKernel\Debug\VirtualRequestStack
+- Symfony\Component\HttpKernel\EventListener\ProfilerListener
+- Symfony\Component\HttpKernel\Profiler\FileProfilerStorage
+- Symfony\Component\HttpKernel\Profiler\Profiler
+interfaces: []

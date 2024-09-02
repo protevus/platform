@@ -1,0 +1,19 @@
+name: PublicAssetsPathResolverTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: PublicAssetsPathResolver
+  type: class
+  source: Symfony\Component\AssetMapper\Path\PublicAssetsPathResolver
+properties: []
+methods:
+- name: testResolvePublicPath
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\AssetMapper\Path\PublicAssetsPathResolver
+interfaces: []

@@ -1,0 +1,38 @@
+name: EnvironmentConfigurator
+class_comment: '# * Twig environment configurator.
+
+  # *
+
+  # * @author Christian Flothmann <christian.flothmann@xabbuh.de>'
+dependencies:
+- name: UndefinedCallableHandler
+  type: class
+  source: Symfony\Bridge\Twig\UndefinedCallableHandler
+- name: Environment
+  type: class
+  source: Twig\Environment
+- name: CoreExtension
+  type: class
+  source: Twig\Extension\CoreExtension
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: dateFormat
+  - name: intervalFormat
+  - name: timezone
+  - name: decimals
+  - name: decimalPoint
+  - name: thousandsSeparator
+  comment: null
+- name: configure
+  visibility: public
+  parameters:
+  - name: environment
+  comment: null
+traits:
+- Symfony\Bridge\Twig\UndefinedCallableHandler
+- Twig\Environment
+- Twig\Extension\CoreExtension
+interfaces: []

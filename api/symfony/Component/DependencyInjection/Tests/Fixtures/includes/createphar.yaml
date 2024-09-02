@@ -1,0 +1,19 @@
+name: createphar
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: getXsdValidationBasePath
+  visibility: public
+  parameters: []
+  comment: null
+- name: getNamespace
+  visibility: public
+  parameters: []
+  comment: null
+- name: getAlias
+  visibility: public
+  parameters: []
+  comment: null
+traits: []
+interfaces: []

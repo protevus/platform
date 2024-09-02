@@ -1,0 +1,16 @@
+name: TestUnserializeClass
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __serialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: __unserialize
+  visibility: public
+  parameters:
+  - name: data
+  comment: null
+traits: []
+interfaces: []

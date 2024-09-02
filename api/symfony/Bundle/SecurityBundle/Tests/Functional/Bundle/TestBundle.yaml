@@ -1,0 +1,28 @@
+name: TestBundle
+class_comment: null
+dependencies:
+- name: CheckTypeDeclarationsPass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\CheckTypeDeclarationsPass
+- name: PassConfig
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\PassConfig
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Bundle
+  type: class
+  source: Symfony\Component\HttpKernel\Bundle\Bundle
+properties: []
+methods:
+- name: build
+  visibility: public
+  parameters:
+  - name: container
+  comment: null
+traits:
+- Symfony\Component\DependencyInjection\Compiler\CheckTypeDeclarationsPass
+- Symfony\Component\DependencyInjection\Compiler\PassConfig
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\HttpKernel\Bundle\Bundle
+interfaces: []

@@ -1,0 +1,11 @@
+name: notifier_debug
+class_comment: null
+dependencies:
+- name: NotificationDataCollector
+  type: class
+  source: Symfony\Component\Notifier\DataCollector\NotificationDataCollector
+properties: []
+methods: []
+traits:
+- Symfony\Component\Notifier\DataCollector\NotificationDataCollector
+interfaces: []

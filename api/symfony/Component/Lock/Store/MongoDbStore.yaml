@@ -1,0 +1,277 @@
+name: MongoDbStore
+class_comment: "# * MongoDbStore is a StoreInterface implementation using MongoDB\
+  \ as a storage\n# * engine. Support for MongoDB server >=2.2 due to use of TTL indexes.\n\
+  # *\n# * CAUTION: TTL Indexes are used so this store relies on all client and server\n\
+  # * nodes to have synchronized clocks for lock expiry to occur at the correct\n\
+  # * time. To ensure locks don't expire prematurely; the TTLs should be set with\n\
+  # * enough extra time to account for any clock drift between nodes.\n# *\n# * CAUTION:\
+  \ The locked resource name is indexed in the _id field of the lock\n# * collection.\
+  \ An indexed field's value in MongoDB can be a maximum of 1024\n# * bytes in length\
+  \ inclusive of structural overhead.\n# *\n# * @see https://docs.mongodb.com/manual/reference/limits/#Index-Key-Limit\n\
+  # *\n# * @author Joe Bennett <joe@assimtech.com>\n# * @author J\xE9r\xF4me Tamarelle\
+  \ <jerome@tamarelle.net>"
+dependencies:
+- name: UTCDateTime
+  type: class
+  source: MongoDB\BSON\UTCDateTime
+- name: Client
+  type: class
+  source: MongoDB\Client
+- name: Collection
+  type: class
+  source: MongoDB\Collection
+- name: Database
+  type: class
+  source: MongoDB\Database
+- name: BulkWrite
+  type: class
+  source: MongoDB\Driver\BulkWrite
+- name: Command
+  type: class
+  source: MongoDB\Driver\Command
+- name: WriteException
+  type: class
+  source: MongoDB\Driver\Exception\WriteException
+- name: Manager
+  type: class
+  source: MongoDB\Driver\Manager
+- name: Query
+  type: class
+  source: MongoDB\Driver\Query
+- name: DriverRuntimeException
+  type: class
+  source: MongoDB\Exception\DriverRuntimeException
+- name: MongoInvalidArgumentException
+  type: class
+  source: MongoDB\Exception\InvalidArgumentException
+- name: UnsupportedException
+  type: class
+  source: MongoDB\Exception\UnsupportedException
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Lock\Exception\InvalidArgumentException
+- name: InvalidTtlException
+  type: class
+  source: Symfony\Component\Lock\Exception\InvalidTtlException
+- name: LockAcquiringException
+  type: class
+  source: Symfony\Component\Lock\Exception\LockAcquiringException
+- name: LockConflictedException
+  type: class
+  source: Symfony\Component\Lock\Exception\LockConflictedException
+- name: LockExpiredException
+  type: class
+  source: Symfony\Component\Lock\Exception\LockExpiredException
+- name: LockStorageException
+  type: class
+  source: Symfony\Component\Lock\Exception\LockStorageException
+- name: Key
+  type: class
+  source: Symfony\Component\Lock\Key
+- name: PersistingStoreInterface
+  type: class
+  source: Symfony\Component\Lock\PersistingStoreInterface
+- name: ExpiringStoreTrait
+  type: class
+  source: ExpiringStoreTrait
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: mongo
+  - name: options
+    default: '[]'
+  - name: initialTtl
+    default: '300.0'
+  comment: "# * MongoDbStore is a StoreInterface implementation using MongoDB as a\
+    \ storage\n# * engine. Support for MongoDB server >=2.2 due to use of TTL indexes.\n\
+    # *\n# * CAUTION: TTL Indexes are used so this store relies on all client and\
+    \ server\n# * nodes to have synchronized clocks for lock expiry to occur at the\
+    \ correct\n# * time. To ensure locks don't expire prematurely; the TTLs should\
+    \ be set with\n# * enough extra time to account for any clock drift between nodes.\n\
+    # *\n# * CAUTION: The locked resource name is indexed in the _id field of the\
+    \ lock\n# * collection. An indexed field's value in MongoDB can be a maximum of\
+    \ 1024\n# * bytes in length inclusive of structural overhead.\n# *\n# * @see https://docs.mongodb.com/manual/reference/limits/#Index-Key-Limit\n\
+    # *\n# * @author Joe Bennett <joe@assimtech.com>\n# * @author J\xE9r\xF4me Tamarelle\
+    \ <jerome@tamarelle.net>\n# */\n# class MongoDbStore implements PersistingStoreInterface\n\
+    # {\n# use ExpiringStoreTrait;\n# \n# private Manager $manager;\n# private string\
+    \ $namespace;\n# private string $uri;\n# private array $options;\n# \n# /**\n\
+    # * @param Collection|Client|Manager|string $mongo      An instance of a Collection\
+    \ or Client or URI @see https://docs.mongodb.com/manual/reference/connection-string/\n\
+    # * @param array                            $options    See below\n# * @param\
+    \ float                            $initialTtl The expiration delay of locks in\
+    \ seconds\n# *\n# * @throws InvalidArgumentException If required options are not\
+    \ provided\n# * @throws InvalidTtlException      When the initial ttl is not valid\n\
+    # *\n# * Options:\n# *      gcProbability: Should a TTL Index be created expressed\
+    \ as a probability from 0.0 to 1.0 [default: 0.001]\n# *      database:      The\
+    \ name of the database [required when $mongo is a Client]\n# *      collection:\
+    \    The name of the collection [required when $mongo is a Client]\n# *      uriOptions:\
+    \    Array of uri options. [used when $mongo is a URI]\n# *      driverOptions:\
+    \ Array of driver options. [used when $mongo is a URI]\n# *\n# * When using a\
+    \ URI string:\n# *      The database is determined from the uri's path, otherwise\
+    \ the \"database\" option is used. To specify an alternate authentication database;\
+    \ \"authSource\" uriOption or querystring parameter must be used.\n# *      The\
+    \ collection is determined from the uri's \"collection\" querystring parameter,\
+    \ otherwise the \"collection\" option is used.\n# *\n# * For example: mongodb://myuser:mypass@myhost/mydatabase?collection=mycollection\n\
+    # *\n# * @see https://docs.mongodb.com/php-library/current/reference/method/MongoDBClient__construct/\n\
+    # *\n# * If gcProbability is set to a value greater than 0.0 there is a chance\n\
+    # * this store will attempt to create a TTL index on self::save().\n# * If you\
+    \ prefer to create your TTL Index manually you can set gcProbability\n# * to 0.0\
+    \ and optionally leverage\n# * self::createTtlIndex(int $expireAfterSeconds =\
+    \ 0).\n# *\n# * writeConcern and readConcern are not specified by MongoDbStore\
+    \ meaning the connection's settings will take effect.\n# * readPreference is primary\
+    \ for all queries.\n# * @see https://docs.mongodb.com/manual/applications/replication/"
+- name: skimUri
+  visibility: private
+  parameters:
+  - name: uri
+  comment: '# * Extract default database and collection from given connection URI
+    and remove collection querystring.
+
+    # *
+
+    # * Non-standard parameters are removed from the URI to improve libmongoc''s re-use
+    of connections.
+
+    # *
+
+    # * @see https://www.php.net/manual/en/mongodb.connection-handling.php'
+- name: createTtlIndex
+  visibility: public
+  parameters:
+  - name: expireAfterSeconds
+    default: '0'
+  comment: '# * Creates a TTL index to automatically remove expired locks.
+
+    # *
+
+    # * If the gcProbability option is set higher than 0.0 (defaults to 0.001);
+
+    # * there is a chance this will be called on self::save().
+
+    # *
+
+    # * Otherwise; this should be called once manually during database setup.
+
+    # *
+
+    # * Alternatively the TTL index can be created manually on the database:
+
+    # *
+
+    # *  db.lock.createIndex(
+
+    # *      { "expires_at": 1 },
+
+    # *      { "expireAfterSeconds": 0 }
+
+    # *  )
+
+    # *
+
+    # * Please note, expires_at is based on the application server. If the
+
+    # * database time differs; a lock could be cleaned up before it has expired.
+
+    # * To ensure locks don''t expire prematurely; the lock TTL should be set
+
+    # * with enough extra time to account for any clock drift between nodes.
+
+    # *
+
+    # * A TTL index MUST BE used to automatically clean up expired locks.
+
+    # *
+
+    # * @see http://docs.mongodb.org/manual/tutorial/expire-data/
+
+    # *
+
+    # * @throws UnsupportedException          if options are not supported by the
+    selected server
+
+    # * @throws MongoInvalidArgumentException for parameter/option parsing errors
+
+    # * @throws DriverRuntimeException        for other driver errors (e.g. connection
+    errors)'
+- name: save
+  visibility: public
+  parameters:
+  - name: key
+  comment: '# * @throws LockExpiredException when save is called on an expired lock'
+- name: putOffExpiration
+  visibility: public
+  parameters:
+  - name: key
+  - name: ttl
+  comment: '# * @throws LockStorageException
+
+    # * @throws LockExpiredException'
+- name: delete
+  visibility: public
+  parameters:
+  - name: key
+  comment: null
+- name: exists
+  visibility: public
+  parameters:
+  - name: key
+  comment: null
+- name: upsert
+  visibility: private
+  parameters:
+  - name: key
+  - name: ttl
+  comment: '# * Update or Insert a Key.
+
+    # *
+
+    # * @param float $ttl Expiry in seconds from now'
+- name: isDuplicateKeyException
+  visibility: private
+  parameters:
+  - name: e
+  comment: null
+- name: getManager
+  visibility: private
+  parameters: []
+  comment: null
+- name: createMongoDateTime
+  visibility: private
+  parameters:
+  - name: seconds
+  comment: '# * @param float $seconds Seconds since 1970-01-01T00:00:00.000Z supporting
+    millisecond precision. Defaults to now.'
+- name: getUniqueToken
+  visibility: private
+  parameters:
+  - name: key
+  comment: '# * Retrieves a unique token for the given key namespaced to this store.
+
+    # *
+
+    # * @param Key $key lock state container'
+traits:
+- MongoDB\BSON\UTCDateTime
+- MongoDB\Client
+- MongoDB\Collection
+- MongoDB\Database
+- MongoDB\Driver\BulkWrite
+- MongoDB\Driver\Command
+- MongoDB\Driver\Exception\WriteException
+- MongoDB\Driver\Manager
+- MongoDB\Driver\Query
+- MongoDB\Exception\DriverRuntimeException
+- MongoDB\Exception\UnsupportedException
+- Symfony\Component\Lock\Exception\InvalidArgumentException
+- Symfony\Component\Lock\Exception\InvalidTtlException
+- Symfony\Component\Lock\Exception\LockAcquiringException
+- Symfony\Component\Lock\Exception\LockConflictedException
+- Symfony\Component\Lock\Exception\LockExpiredException
+- Symfony\Component\Lock\Exception\LockStorageException
+- Symfony\Component\Lock\Key
+- Symfony\Component\Lock\PersistingStoreInterface
+- ExpiringStoreTrait
+interfaces:
+- PersistingStoreInterface

@@ -1,0 +1,130 @@
+name: SymfonySessionDecorator
+class_comment: null
+dependencies:
+- name: BadMethodCallException
+  type: class
+  source: BadMethodCallException
+- name: Session
+  type: class
+  source: Illuminate\Contracts\Session\Session
+- name: SessionBagInterface
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\SessionBagInterface
+- name: SessionInterface
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\SessionInterface
+- name: MetadataBag
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Storage\MetadataBag
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: store
+  comment: "# * The underlying Laravel session store.\n# *\n# * @var \\Illuminate\\\
+    Contracts\\Session\\Session\n# */\n# public readonly Session $store;\n# \n# /**\n\
+    # * Create a new session decorator.\n# *\n# * @param  \\Illuminate\\Contracts\\\
+    Session\\Session  $store\n# * @return void"
+- name: start
+  visibility: public
+  parameters: []
+  comment: '# * {@inheritdoc}'
+- name: getId
+  visibility: public
+  parameters: []
+  comment: '# * {@inheritdoc}'
+- name: setId
+  visibility: public
+  parameters:
+  - name: id
+  comment: '# * {@inheritdoc}'
+- name: getName
+  visibility: public
+  parameters: []
+  comment: '# * {@inheritdoc}'
+- name: setName
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * {@inheritdoc}'
+- name: invalidate
+  visibility: public
+  parameters:
+  - name: lifetime
+    default: 'null'
+  comment: '# * {@inheritdoc}'
+- name: migrate
+  visibility: public
+  parameters:
+  - name: destroy
+    default: 'false'
+  - name: lifetime
+    default: 'null'
+  comment: '# * {@inheritdoc}'
+- name: save
+  visibility: public
+  parameters: []
+  comment: '# * {@inheritdoc}'
+- name: has
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * {@inheritdoc}'
+- name: get
+  visibility: public
+  parameters:
+  - name: name
+  - name: default
+    default: 'null'
+  comment: '# * {@inheritdoc}'
+- name: set
+  visibility: public
+  parameters:
+  - name: name
+  - name: value
+  comment: '# * {@inheritdoc}'
+- name: all
+  visibility: public
+  parameters: []
+  comment: '# * {@inheritdoc}'
+- name: replace
+  visibility: public
+  parameters:
+  - name: attributes
+  comment: '# * {@inheritdoc}'
+- name: remove
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * {@inheritdoc}'
+- name: clear
+  visibility: public
+  parameters: []
+  comment: '# * {@inheritdoc}'
+- name: isStarted
+  visibility: public
+  parameters: []
+  comment: '# * {@inheritdoc}'
+- name: registerBag
+  visibility: public
+  parameters:
+  - name: bag
+  comment: '# * {@inheritdoc}'
+- name: getBag
+  visibility: public
+  parameters:
+  - name: name
+  comment: '# * {@inheritdoc}'
+- name: getMetadataBag
+  visibility: public
+  parameters: []
+  comment: '# * {@inheritdoc}'
+traits:
+- BadMethodCallException
+- Illuminate\Contracts\Session\Session
+- Symfony\Component\HttpFoundation\Session\SessionBagInterface
+- Symfony\Component\HttpFoundation\Session\SessionInterface
+- Symfony\Component\HttpFoundation\Session\Storage\MetadataBag
+interfaces:
+- SessionInterface

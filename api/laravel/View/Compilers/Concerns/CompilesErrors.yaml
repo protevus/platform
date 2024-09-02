@@ -1,0 +1,29 @@
+name: CompilesErrors
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: compileError
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the error statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+- name: compileEnderror
+  visibility: protected
+  parameters:
+  - name: expression
+  comment: '# * Compile the enderror statements into valid PHP.
+
+    # *
+
+    # * @param  string  $expression
+
+    # * @return string'
+traits: []
+interfaces: []

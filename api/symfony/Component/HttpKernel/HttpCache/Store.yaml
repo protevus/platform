@@ -1,0 +1,205 @@
+name: Store
+class_comment: '# * Store implements all the logic for storing cache metadata (Request
+  and Response headers).
+
+  # *
+
+  # * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: Response
+  type: class
+  source: Symfony\Component\HttpFoundation\Response
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: root
+  - name: options
+    default: '[]'
+  comment: "# * Store implements all the logic for storing cache metadata (Request\
+    \ and Response headers).\n# *\n# * @author Fabien Potencier <fabien@symfony.com>\n\
+    # */\n# class Store implements StoreInterface\n# {\n# /** @var \\SplObjectStorage<Request,\
+    \ string> */\n# private \\SplObjectStorage $keyCache;\n# /** @var array<string,\
+    \ resource> */\n# private array $locks = [];\n# \n# /**\n# * Constructor.\n# *\n\
+    # * The available options are:\n# *\n# *   * private_headers  Set of response\
+    \ headers that should not be stored\n# *                      when a response\
+    \ is cached. (default: Set-Cookie)\n# *\n# * @throws \\RuntimeException"
+- name: cleanup
+  visibility: public
+  parameters: []
+  comment: '# * Cleanups storage.'
+- name: lock
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Tries to lock the cache for a given Request, without blocking.
+
+    # *
+
+    # * @return bool|string true if the lock is acquired, the path to the current
+    lock otherwise'
+- name: unlock
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Releases the lock for the given Request.
+
+    # *
+
+    # * @return bool False if the lock file does not exist or cannot be unlocked,
+    true otherwise'
+- name: isLocked
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+- name: lookup
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Locates a cached Response for the Request provided.'
+- name: write
+  visibility: public
+  parameters:
+  - name: request
+  - name: response
+  comment: '# * Writes a cache entry to the store for the given Request and Response.
+
+    # *
+
+    # * Existing entries are read and any that match the response are removed. This
+
+    # * method calls write with the new list of cache entries.
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: generateContentDigest
+  visibility: protected
+  parameters:
+  - name: response
+  comment: '# * Returns content digest for $response.'
+- name: invalidate
+  visibility: public
+  parameters:
+  - name: request
+  comment: '# * Invalidates all cache entries that match the request.
+
+    # *
+
+    # * @throws \RuntimeException'
+- name: requestsMatch
+  visibility: private
+  parameters:
+  - name: vary
+  - name: env1
+  - name: env2
+  comment: '# * Determines whether two Request HTTP header sets are non-varying based
+    on
+
+    # * the vary response header value provided.
+
+    # *
+
+    # * @param string|null $vary A Response vary header
+
+    # * @param array       $env1 A Request HTTP header array
+
+    # * @param array       $env2 A Request HTTP header array'
+- name: getMetadata
+  visibility: private
+  parameters:
+  - name: key
+  comment: '# * Gets all data associated with the given key.
+
+    # *
+
+    # * Use this method only if you know what you are doing.'
+- name: purge
+  visibility: public
+  parameters:
+  - name: url
+  comment: '# * Purges data for the given URL.
+
+    # *
+
+    # * This method purges both the HTTP and the HTTPS version of the cache entry.
+
+    # *
+
+    # * @return bool true if the URL exists with either HTTP or HTTPS scheme and has
+    been purged, false otherwise'
+- name: doPurge
+  visibility: private
+  parameters:
+  - name: url
+  comment: '# * Purges data for the given URL.'
+- name: load
+  visibility: private
+  parameters:
+  - name: key
+  comment: '# * Loads data for the given key.'
+- name: save
+  visibility: private
+  parameters:
+  - name: key
+  - name: data
+  - name: overwrite
+    default: 'true'
+  comment: '# * Save data for the given key.'
+- name: getPath
+  visibility: public
+  parameters:
+  - name: key
+  comment: null
+- name: generateCacheKey
+  visibility: protected
+  parameters:
+  - name: request
+  comment: '# * Generates a cache key for the given Request.
+
+    # *
+
+    # * This method should return a key that must only depend on a
+
+    # * normalized version of the request URI.
+
+    # *
+
+    # * If the same URI can have more than one representation, based on some
+
+    # * headers, use a Vary header to indicate them, and each representation will
+
+    # * be stored independently under the same cache key.'
+- name: getCacheKey
+  visibility: private
+  parameters:
+  - name: request
+  comment: '# * Returns a cache key for the given Request.'
+- name: persistRequest
+  visibility: private
+  parameters:
+  - name: request
+  comment: '# * Persists the Request HTTP headers.'
+- name: persistResponse
+  visibility: private
+  parameters:
+  - name: response
+  comment: '# * Persists the Response HTTP headers.'
+- name: restoreResponse
+  visibility: private
+  parameters:
+  - name: headers
+  - name: path
+    default: 'null'
+  comment: '# * Restores a Response from the HTTP headers and body.'
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Response
+interfaces:
+- all
+- StoreInterface

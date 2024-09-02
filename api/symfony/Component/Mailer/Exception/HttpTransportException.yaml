@@ -1,0 +1,25 @@
+name: HttpTransportException
+class_comment: '# * @author Fabien Potencier <fabien@symfony.com>'
+dependencies:
+- name: ResponseInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\ResponseInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: message
+  - name: response
+  - name: code
+    default: '0'
+  - name: previous
+    default: 'null'
+  comment: null
+- name: getResponse
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Contracts\HttpClient\ResponseInterface
+interfaces: []

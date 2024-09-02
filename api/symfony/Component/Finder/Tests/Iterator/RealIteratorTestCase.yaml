@@ -1,0 +1,34 @@
+name: RealIteratorTestCase
+class_comment: null
+dependencies:
+- name: Filesystem
+  type: class
+  source: Symfony\Component\Filesystem\Filesystem
+- name: FinderTest
+  type: class
+  source: Symfony\Component\Finder\Tests\FinderTest
+properties: []
+methods:
+- name: setUpBeforeClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: tearDownAfterClass
+  visibility: public
+  parameters: []
+  comment: null
+- name: toAbsolute
+  visibility: protected
+  parameters:
+  - name: files
+    default: 'null'
+  comment: null
+- name: toAbsoluteFixtures
+  visibility: protected
+  parameters:
+  - name: files
+  comment: null
+traits:
+- Symfony\Component\Filesystem\Filesystem
+- Symfony\Component\Finder\Tests\FinderTest
+interfaces: []

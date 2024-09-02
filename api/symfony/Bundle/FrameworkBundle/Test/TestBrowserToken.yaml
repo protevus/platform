@@ -1,0 +1,47 @@
+name: TestBrowserToken
+class_comment: '# * A very limited token that is used to login in tests using the
+  KernelBrowser.
+
+  # *
+
+  # * @author Wouter de Jong <wouter@wouterj.nl>'
+dependencies:
+- name: AbstractToken
+  type: class
+  source: Symfony\Component\Security\Core\Authentication\Token\AbstractToken
+- name: UserInterface
+  type: class
+  source: Symfony\Component\Security\Core\User\UserInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: roles
+    default: '[]'
+  - name: user
+    default: 'null'
+  - name: firewallName
+    default: '''main'''
+  comment: null
+- name: getFirewallName
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCredentials
+  visibility: public
+  parameters: []
+  comment: null
+- name: __serialize
+  visibility: public
+  parameters: []
+  comment: null
+- name: __unserialize
+  visibility: public
+  parameters:
+  - name: data
+  comment: null
+traits:
+- Symfony\Component\Security\Core\Authentication\Token\AbstractToken
+- Symfony\Component\Security\Core\User\UserInterface
+interfaces: []

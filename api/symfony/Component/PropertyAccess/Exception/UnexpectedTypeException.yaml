@@ -1,0 +1,40 @@
+name: UnexpectedTypeException
+class_comment: '# * Thrown when a value does not match an expected type.
+
+  # *
+
+  # * @author Bernhard Schussek <bschussek@gmail.com>'
+dependencies:
+- name: PropertyPathInterface
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyPathInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: value
+  - name: path
+  - name: pathIndex
+  comment: '# * Thrown when a value does not match an expected type.
+
+    # *
+
+    # * @author Bernhard Schussek <bschussek@gmail.com>
+
+    # */
+
+    # class UnexpectedTypeException extends RuntimeException
+
+    # {
+
+    # /**
+
+    # * @param mixed $value     The unexpected value found while traversing property
+    path
+
+    # * @param int   $pathIndex The property path index when the unexpected value
+    was found'
+traits:
+- Symfony\Component\PropertyAccess\PropertyPathInterface
+interfaces: []

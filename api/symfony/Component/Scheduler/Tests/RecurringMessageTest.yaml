@@ -1,0 +1,40 @@
+name: RecurringMessageTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Randomizer
+  type: class
+  source: Random\Randomizer
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Scheduler\Exception\InvalidArgumentException
+- name: RecurringMessage
+  type: class
+  source: Symfony\Component\Scheduler\RecurringMessage
+properties: []
+methods:
+- name: testCanCreateHashedCronMessage
+  visibility: public
+  parameters: []
+  comment: null
+- name: testHashedCronContextIsRequiredIfMessageIsNotStringable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testUniqueId
+  visibility: public
+  parameters: []
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Random\Randomizer
+- Symfony\Component\Scheduler\Exception\InvalidArgumentException
+- Symfony\Component\Scheduler\RecurringMessage
+interfaces:
+- \Stringable

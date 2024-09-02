@@ -1,0 +1,59 @@
+name: BooleanToStringTransformerTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\Form\Exception\InvalidArgumentException
+- name: TransformationFailedException
+  type: class
+  source: Symfony\Component\Form\Exception\TransformationFailedException
+- name: BooleanToStringTransformer
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataTransformer\BooleanToStringTransformer
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testTransform
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransformAcceptsNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTransformFailsIfString
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransformFailsIfInteger
+  visibility: public
+  parameters: []
+  comment: null
+- name: testReverseTransform
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCustomFalseValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testTrueValueContainedInFalseValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testBeStrictOnTrueInFalseValueCheck
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Form\Exception\InvalidArgumentException
+- Symfony\Component\Form\Exception\TransformationFailedException
+- Symfony\Component\Form\Extension\Core\DataTransformer\BooleanToStringTransformer
+interfaces: []

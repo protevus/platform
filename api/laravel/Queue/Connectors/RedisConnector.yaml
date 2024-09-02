@@ -1,0 +1,51 @@
+name: RedisConnector
+class_comment: null
+dependencies:
+- name: Redis
+  type: class
+  source: Illuminate\Contracts\Redis\Factory
+- name: RedisQueue
+  type: class
+  source: Illuminate\Queue\RedisQueue
+properties:
+- name: redis
+  visibility: protected
+  comment: '# * The Redis database instance.
+
+    # *
+
+    # * @var \Illuminate\Contracts\Redis\Factory'
+- name: connection
+  visibility: protected
+  comment: '# * The connection name.
+
+    # *
+
+    # * @var string'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: redis
+  - name: connection
+    default: 'null'
+  comment: "# * The Redis database instance.\n# *\n# * @var \\Illuminate\\Contracts\\\
+    Redis\\Factory\n# */\n# protected $redis;\n# \n# /**\n# * The connection name.\n\
+    # *\n# * @var string\n# */\n# protected $connection;\n# \n# /**\n# * Create a\
+    \ new Redis queue connector instance.\n# *\n# * @param  \\Illuminate\\Contracts\\\
+    Redis\\Factory  $redis\n# * @param  string|null  $connection\n# * @return void"
+- name: connect
+  visibility: public
+  parameters:
+  - name: config
+  comment: '# * Establish a queue connection.
+
+    # *
+
+    # * @param  array  $config
+
+    # * @return \Illuminate\Contracts\Queue\Queue'
+traits:
+- Illuminate\Queue\RedisQueue
+interfaces:
+- ConnectorInterface

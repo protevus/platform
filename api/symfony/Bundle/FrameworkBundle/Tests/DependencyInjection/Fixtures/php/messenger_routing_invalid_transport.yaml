@@ -1,0 +1,11 @@
+name: messenger_routing_invalid_transport
+class_comment: null
+dependencies:
+- name: DummyMessage
+  type: class
+  source: Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Messenger\DummyMessage
+properties: []
+methods: []
+traits:
+- Symfony\Bundle\FrameworkBundle\Tests\Fixtures\Messenger\DummyMessage
+interfaces: []

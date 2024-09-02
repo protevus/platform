@@ -1,0 +1,64 @@
+name: Collection
+class_comment: null
+dependencies:
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: fields
+    default: 'null'
+  - name: groups
+    default: 'null'
+  - name: payload
+    default: 'null'
+  - name: allowExtraFields
+    default: 'null'
+  - name: allowMissingFields
+    default: 'null'
+  - name: extraFieldsMessage
+    default: 'null'
+  - name: missingFieldsMessage
+    default: 'null'
+  comment: "# * Validates a collection with constraints defined for specific keys.\n\
+    # *\n# * @author Bernhard Schussek <bschussek@gmail.com>\n# */\n# #[\\Attribute(\\\
+    Attribute::TARGET_PROPERTY | \\Attribute::TARGET_METHOD | \\Attribute::IS_REPEATABLE)]\n\
+    # class Collection extends Composite\n# {\n# public const MISSING_FIELD_ERROR\
+    \ = '2fa2158c-2a7f-484b-98aa-975522539ff8';\n# public const NO_SUCH_FIELD_ERROR\
+    \ = '7703c766-b5d5-4cef-ace7-ae0dd82304e9';\n# \n# protected const ERROR_NAMES\
+    \ = [\n# self::MISSING_FIELD_ERROR => 'MISSING_FIELD_ERROR',\n# self::NO_SUCH_FIELD_ERROR\
+    \ => 'NO_SUCH_FIELD_ERROR',\n# ];\n# \n# public array $fields = [];\n# public\
+    \ bool $allowExtraFields = false;\n# public bool $allowMissingFields = false;\n\
+    # public string $extraFieldsMessage = 'This field was not expected.';\n# public\
+    \ string $missingFieldsMessage = 'This field is missing.';\n# \n# /**\n# * @param\
+    \ array<string,Constraint>|array<string,mixed>|null $fields             An associative\
+    \ array defining keys in the collection and their constraints\n# * @param string[]|null\
+    \                                     $groups\n# * @param bool|null          \
+    \                               $allowExtraFields   Whether to allow additional\
+    \ keys not declared in the configured fields (defaults to false)\n# * @param bool|null\
+    \                                         $allowMissingFields Whether to allow\
+    \ the collection to lack some fields declared in the configured fields (defaults\
+    \ to false)"
+- name: initializeNestedConstraints
+  visibility: protected
+  parameters: []
+  comment: null
+- name: getRequiredOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: getCompositeOption
+  visibility: protected
+  parameters: []
+  comment: null
+- name: isFieldsOption
+  visibility: private
+  parameters:
+  - name: options
+  comment: null
+traits:
+- Symfony\Component\Validator\Constraint
+interfaces: []

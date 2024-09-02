@@ -1,0 +1,158 @@
+name: AbstractComparisonValidatorTestCase
+class_comment: null
+dependencies:
+- name: IntlTestHelper
+  type: class
+  source: Symfony\Component\Intl\Util\IntlTestHelper
+- name: Constraint
+  type: class
+  source: Symfony\Component\Validator\Constraint
+- name: AbstractComparison
+  type: class
+  source: Symfony\Component\Validator\Constraints\AbstractComparison
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- name: ConstraintValidatorTestCase
+  type: class
+  source: Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+- name: TypedDummy
+  type: class
+  source: Symfony\Component\Validator\Tests\Constraints\Fixtures\TypedDummy
+properties:
+- name: value
+  visibility: protected
+  comment: null
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: value
+  comment: null
+- name: __toString
+  visibility: public
+  parameters: []
+  comment: null
+- name: getValue
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowsConstraintExceptionIfNoValueOrPropertyPath
+  visibility: public
+  parameters:
+  - name: options
+  comment: "# * @author Daniel Holmes <daniel@danielholmes.org>\n# */\n# abstract\
+    \ class AbstractComparisonValidatorTestCase extends ConstraintValidatorTestCase\n\
+    # {\n# protected static function addPhp5Dot5Comparisons(array $comparisons)\n\
+    # {\n# $result = $comparisons;\n# \n# // Duplicate all tests involving DateTime\
+    \ objects to be tested with\n# // DateTimeImmutable objects as well\n# foreach\
+    \ ($comparisons as $comparison) {\n# $add = false;\n# \n# foreach ($comparison\
+    \ as $i => $value) {\n# if ($value instanceof \\DateTime) {\n# $comparison[$i]\
+    \ = new \\DateTimeImmutable($value->format('Y-m-d H:i:s.u e'));\n# $add = true;\n\
+    # } elseif ('DateTime' === $value) {\n# $comparison[$i] = 'DateTimeImmutable';\n\
+    # $add = true;\n# }\n# }\n# \n# if ($add) {\n# $result[] = $comparison;\n# }\n\
+    # }\n# \n# return $result;\n# }\n# \n# public static function provideInvalidConstraintOptions()\n\
+    # {\n# return [\n# [null],\n# [[]],\n# ];\n# }\n# \n# /**\n# * @dataProvider provideInvalidConstraintOptions"
+- name: testThrowsConstraintExceptionIfBothValueAndPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidComparisonToValue
+  visibility: public
+  parameters:
+  - name: dirtyValue
+  - name: comparisonValue
+  comment: '# * @dataProvider provideAllValidComparisons'
+- name: provideAllValidComparisons
+  visibility: public
+  parameters: []
+  comment: null
+- name: testValidComparisonToPropertyPath
+  visibility: public
+  parameters:
+  - name: comparedValue
+  comment: '# * @dataProvider provideValidComparisonsToPropertyPath'
+- name: testNoViolationOnNullObjectWithPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidValuePath
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideValidComparisons
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideValidComparisonsToPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidComparisonToValue
+  visibility: public
+  parameters:
+  - name: dirtyValue
+  - name: dirtyValueAsString
+  - name: comparedValue
+  - name: comparedValueString
+  - name: comparedValueType
+  comment: '# * @dataProvider provideAllInvalidComparisons'
+- name: testInvalidComparisonToPropertyPathAddsPathAsParameter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowsOnInvalidStringDates
+  visibility: public
+  parameters:
+  - name: constraint
+  - name: expectedMessage
+  - name: value
+  comment: '# * @dataProvider throwsOnInvalidStringDatesProvider'
+- name: throwsOnInvalidStringDatesProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCompareWithNullValueAtPropertyAt
+  visibility: public
+  parameters:
+  - name: dirtyValue
+  - name: dirtyValueAsString
+  - name: isValid
+  comment: '# * @dataProvider provideComparisonsToNullValueAtPropertyPath'
+- name: testCompareWithUninitializedPropertyAtPropertyPath
+  visibility: public
+  parameters:
+  - name: dirtyValue
+  - name: dirtyValueAsString
+  - name: isValid
+  comment: '# * @dataProvider provideComparisonsToNullValueAtPropertyPath'
+- name: provideAllInvalidComparisons
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideInvalidComparisons
+  visibility: public
+  parameters: []
+  comment: null
+- name: provideComparisonsToNullValueAtPropertyPath
+  visibility: public
+  parameters: []
+  comment: null
+- name: createConstraint
+  visibility: protected
+  parameters:
+  - name: options
+    default: 'null'
+  comment: null
+- name: getErrorCode
+  visibility: protected
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Intl\Util\IntlTestHelper
+- Symfony\Component\Validator\Constraint
+- Symfony\Component\Validator\Constraints\AbstractComparison
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- Symfony\Component\Validator\Test\ConstraintValidatorTestCase
+- Symfony\Component\Validator\Tests\Constraints\Fixtures\TypedDummy
+interfaces: []

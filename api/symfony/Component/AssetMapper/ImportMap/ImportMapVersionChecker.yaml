@@ -1,0 +1,59 @@
+name: ImportMapVersionChecker
+class_comment: null
+dependencies:
+- name: Semver
+  type: class
+  source: Composer\Semver\Semver
+- name: RuntimeException
+  type: class
+  source: Symfony\Component\AssetMapper\Exception\RuntimeException
+- name: HttpClient
+  type: class
+  source: Symfony\Component\HttpClient\HttpClient
+- name: HttpExceptionInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface
+- name: HttpClientInterface
+  type: class
+  source: Symfony\Contracts\HttpClient\HttpClientInterface
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: importMapConfigReader
+  - name: packageDownloader
+  - name: httpClient
+    default: 'null'
+  comment: null
+- name: checkVersions
+  visibility: public
+  parameters: []
+  comment: '# * @return PackageVersionProblem[]'
+- name: convertNpmConstraint
+  visibility: public
+  parameters:
+  - name: versionConstraint
+  comment: '# * Converts npm-specific version constraints to composer-style.
+
+    # *
+
+    # * @internal'
+- name: cleanVersionSegment
+  visibility: private
+  parameters:
+  - name: segment
+  comment: null
+- name: isVersionSatisfied
+  visibility: private
+  parameters:
+  - name: versionConstraint
+  - name: version
+  comment: null
+traits:
+- Composer\Semver\Semver
+- Symfony\Component\AssetMapper\Exception\RuntimeException
+- Symfony\Component\HttpClient\HttpClient
+- Symfony\Contracts\HttpClient\Exception\HttpExceptionInterface
+- Symfony\Contracts\HttpClient\HttpClientInterface
+interfaces: []

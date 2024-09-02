@@ -1,0 +1,39 @@
+name: PackageTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Package
+  type: class
+  source: Symfony\Component\Asset\Package
+- name: EmptyVersionStrategy
+  type: class
+  source: Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy
+- name: StaticVersionStrategy
+  type: class
+  source: Symfony\Component\Asset\VersionStrategy\StaticVersionStrategy
+properties: []
+methods:
+- name: testGetUrl
+  visibility: public
+  parameters:
+  - name: version
+  - name: format
+  - name: path
+  - name: expected
+  comment: '# * @dataProvider getConfigs'
+- name: getConfigs
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetVersion
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Asset\Package
+- Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy
+- Symfony\Component\Asset\VersionStrategy\StaticVersionStrategy
+interfaces: []

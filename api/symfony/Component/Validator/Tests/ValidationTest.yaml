@@ -1,0 +1,43 @@
+name: ValidationTest
+class_comment: '# * @author Jan Vernieuwe <jan.vernieuwe@phpro.be>'
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Blank
+  type: class
+  source: Symfony\Component\Validator\Constraints\Blank
+- name: NotBlank
+  type: class
+  source: Symfony\Component\Validator\Constraints\NotBlank
+- name: ValidationFailedException
+  type: class
+  source: Symfony\Component\Validator\Exception\ValidationFailedException
+- name: Validation
+  type: class
+  source: Symfony\Component\Validator\Validation
+properties: []
+methods:
+- name: testCreateCallableValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateCallableInvalid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateIsValidCallableValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateIsValidCallableInvalid
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\Constraints\Blank
+- Symfony\Component\Validator\Constraints\NotBlank
+- Symfony\Component\Validator\Exception\ValidationFailedException
+- Symfony\Component\Validator\Validation
+interfaces: []

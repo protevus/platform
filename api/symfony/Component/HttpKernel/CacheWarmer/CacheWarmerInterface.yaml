@@ -1,0 +1,35 @@
+name: CacheWarmerInterface
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: isOptional
+  visibility: public
+  parameters: []
+  comment: '# * Interface for classes able to warm up the cache.
+
+    # *
+
+    # * @author Fabien Potencier <fabien@symfony.com>
+
+    # */
+
+    # interface CacheWarmerInterface extends WarmableInterface
+
+    # {
+
+    # /**
+
+    # * Checks whether this warmer is optional or not.
+
+    # *
+
+    # * Optional warmers can be ignored on certain conditions.
+
+    # *
+
+    # * A warmer should return true if the cache can be
+
+    # * generated incrementally and on-demand.'
+traits: []
+interfaces: []

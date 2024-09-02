@@ -1,0 +1,40 @@
+name: MailQueue
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: queue
+  visibility: public
+  parameters:
+  - name: view
+  - name: queue
+    default: 'null'
+  comment: '# * Queue a new e-mail message for sending.
+
+    # *
+
+    # * @param  \Illuminate\Contracts\Mail\Mailable|string|array  $view
+
+    # * @param  string|null  $queue
+
+    # * @return mixed'
+- name: later
+  visibility: public
+  parameters:
+  - name: delay
+  - name: view
+  - name: queue
+    default: 'null'
+  comment: '# * Queue a new e-mail message for sending after (n) seconds.
+
+    # *
+
+    # * @param  \DateTimeInterface|\DateInterval|int  $delay
+
+    # * @param  \Illuminate\Contracts\Mail\Mailable|string|array  $view
+
+    # * @param  string|null  $queue
+
+    # * @return mixed'
+traits: []
+interfaces: []

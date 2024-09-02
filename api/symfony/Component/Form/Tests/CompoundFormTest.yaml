@@ -1,0 +1,373 @@
+name: CompoundFormTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: EventDispatcher
+  type: class
+  source: Symfony\Component\EventDispatcher\EventDispatcher
+- name: AlreadySubmittedException
+  type: class
+  source: Symfony\Component\Form\Exception\AlreadySubmittedException
+- name: PropertyPathAccessor
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataAccessor\PropertyPathAccessor
+- name: DataMapper
+  type: class
+  source: Symfony\Component\Form\Extension\Core\DataMapper\DataMapper
+- name: DateType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\DateType
+- name: SubmitType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\SubmitType
+- name: TextType
+  type: class
+  source: Symfony\Component\Form\Extension\Core\Type\TextType
+- name: HttpFoundationRequestHandler
+  type: class
+  source: Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationRequestHandler
+- name: FormBuilder
+  type: class
+  source: Symfony\Component\Form\FormBuilder
+- name: FormError
+  type: class
+  source: Symfony\Component\Form\FormError
+- name: FormErrorIterator
+  type: class
+  source: Symfony\Component\Form\FormErrorIterator
+- name: FormEvent
+  type: class
+  source: Symfony\Component\Form\FormEvent
+- name: FormEvents
+  type: class
+  source: Symfony\Component\Form\FormEvents
+- name: FormFactory
+  type: class
+  source: Symfony\Component\Form\FormFactory
+- name: FormInterface
+  type: class
+  source: Symfony\Component\Form\FormInterface
+- name: FormRegistry
+  type: class
+  source: Symfony\Component\Form\FormRegistry
+- name: Forms
+  type: class
+  source: Symfony\Component\Form\Forms
+- name: FormView
+  type: class
+  source: Symfony\Component\Form\FormView
+- name: ResolvedFormTypeFactory
+  type: class
+  source: Symfony\Component\Form\ResolvedFormTypeFactory
+- name: ResolvedFormTypeInterface
+  type: class
+  source: Symfony\Component\Form\ResolvedFormTypeInterface
+- name: SubmitButtonBuilder
+  type: class
+  source: Symfony\Component\Form\SubmitButtonBuilder
+- name: FixedDataTransformer
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\FixedDataTransformer
+- name: Map
+  type: class
+  source: Symfony\Component\Form\Tests\Fixtures\Map
+- name: UploadedFile
+  type: class
+  source: Symfony\Component\HttpFoundation\File\UploadedFile
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: PropertyAccess
+  type: class
+  source: Symfony\Component\PropertyAccess\PropertyAccess
+properties: []
+methods:
+- name: setUp
+  visibility: protected
+  parameters: []
+  comment: null
+- name: testValidIfAllChildrenAreValid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testInvalidIfChildIsInvalid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDisabledFormsValidEvenIfChildrenInvalid
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitForwardsNullIfNotClearMissingButValueIsExplicitlyNull
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitForwardsNullIfValueIsMissing
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitDoesNotForwardNullIfNotClearMissing
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitDoesNotAddExtraFieldForNullValues
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClearMissingFlagIsForwarded
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCloneChildren
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNotEmptyIfChildNotEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAdd
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddUsingNameAndType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddUsingIntegerNameAndType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddWithoutType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddUsingNameButNoType
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddUsingNameButNoTypeAndOptions
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddThrowsExceptionIfAlreadySubmitted
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemove
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemoveThrowsExceptionIfAlreadySubmitted
+  visibility: public
+  parameters: []
+  comment: null
+- name: testRemoveIgnoresUnknownName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testArrayAccess
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCountable
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIterator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testIteratorKeys
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddMapsViewDataToFormIfInitialized
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddDoesNotMapViewDataToFormIfNotInitialized
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAddDoesNotMapViewDataToFormIfInheritData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetDataSupportsDynamicAdditionAndRemovalOfChildren
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetDataMapsViewDataToChildren
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSetDataDoesNotMapViewDataToChildrenWithLockedSetData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitSupportsDynamicAdditionAndRemovalOfChildren
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitMapsSubmittedChildrenOntoExistingViewData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMapFormsToDataIsNotInvokedIfInheritData
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitRestoresViewDataIfCompoundAndEmpty
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitMapsSubmittedChildrenOntoEmptyData
+  visibility: public
+  parameters: []
+  comment: null
+- name: requestMethodProvider
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitPostOrPutRequest
+  visibility: public
+  parameters:
+  - name: method
+  comment: '# * @dataProvider requestMethodProvider'
+- name: testSubmitPostOrPutRequestWithEmptyRootFormName
+  visibility: public
+  parameters:
+  - name: method
+  comment: '# * @dataProvider requestMethodProvider'
+- name: testSubmitPostOrPutRequestWithSingleChildForm
+  visibility: public
+  parameters:
+  - name: method
+  comment: '# * @dataProvider requestMethodProvider'
+- name: testSubmitPostOrPutRequestWithSingleChildFormUploadedFile
+  visibility: public
+  parameters:
+  - name: method
+  comment: '# * @dataProvider requestMethodProvider'
+- name: testSubmitGetRequest
+  visibility: public
+  parameters: []
+  comment: null
+- name: testSubmitGetRequestWithEmptyRootFormName
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetErrors
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetErrorsDeep
+  visibility: public
+  parameters: []
+  comment: null
+- name: testGetErrorsDeepRecursive
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClearErrors
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClearErrorsShallow
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClearErrorsDeep
+  visibility: public
+  parameters: []
+  comment: null
+- name: testCreateViewWithChildren
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoClickedButtonBeforeSubmission
+  visibility: public
+  parameters: []
+  comment: null
+- name: testNoClickedButton
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClickedButton
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClickedButtonFromNestedForm
+  visibility: public
+  parameters: []
+  comment: null
+- name: testClickedButtonFromParentForm
+  visibility: public
+  parameters: []
+  comment: null
+- name: testDisabledButtonIsNotSubmitted
+  visibility: public
+  parameters: []
+  comment: null
+- name: testArrayTransformationFailureOnSubmit
+  visibility: public
+  parameters: []
+  comment: null
+- name: testFileUpload
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMapDateTimeObjectsWithEmptyArrayDataUsingDataMapper
+  visibility: public
+  parameters: []
+  comment: null
+- name: createForm
+  visibility: private
+  parameters:
+  - name: name
+    default: '''name'''
+  - name: compound
+    default: 'true'
+  comment: null
+- name: getBuilder
+  visibility: private
+  parameters:
+  - name: name
+    default: '''name'''
+  - name: dataClass
+    default: 'null'
+  - name: options
+    default: '[]'
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\EventDispatcher\EventDispatcher
+- Symfony\Component\Form\Exception\AlreadySubmittedException
+- Symfony\Component\Form\Extension\Core\DataAccessor\PropertyPathAccessor
+- Symfony\Component\Form\Extension\Core\DataMapper\DataMapper
+- Symfony\Component\Form\Extension\Core\Type\DateType
+- Symfony\Component\Form\Extension\Core\Type\SubmitType
+- Symfony\Component\Form\Extension\Core\Type\TextType
+- Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationRequestHandler
+- Symfony\Component\Form\FormBuilder
+- Symfony\Component\Form\FormError
+- Symfony\Component\Form\FormErrorIterator
+- Symfony\Component\Form\FormEvent
+- Symfony\Component\Form\FormEvents
+- Symfony\Component\Form\FormFactory
+- Symfony\Component\Form\FormInterface
+- Symfony\Component\Form\FormRegistry
+- Symfony\Component\Form\Forms
+- Symfony\Component\Form\FormView
+- Symfony\Component\Form\ResolvedFormTypeFactory
+- Symfony\Component\Form\ResolvedFormTypeInterface
+- Symfony\Component\Form\SubmitButtonBuilder
+- Symfony\Component\Form\Tests\Fixtures\FixedDataTransformer
+- Symfony\Component\Form\Tests\Fixtures\Map
+- Symfony\Component\HttpFoundation\File\UploadedFile
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\PropertyAccess\PropertyAccess
+interfaces: []

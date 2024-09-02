@@ -1,0 +1,12 @@
+name: intersectiontype_classes
+class_comment: null
+dependencies: []
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: collision
+  comment: null
+traits: []
+interfaces: []

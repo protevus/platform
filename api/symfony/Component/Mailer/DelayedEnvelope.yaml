@@ -1,0 +1,46 @@
+name: DelayedEnvelope
+class_comment: null
+dependencies:
+- name: LogicException
+  type: class
+  source: Symfony\Component\Mailer\Exception\LogicException
+- name: Address
+  type: class
+  source: Symfony\Component\Mime\Address
+- name: Headers
+  type: class
+  source: Symfony\Component\Mime\Header\Headers
+- name: Message
+  type: class
+  source: Symfony\Component\Mime\Message
+properties: []
+methods:
+- name: getRecipients
+  visibility: public
+  parameters: []
+  comment: "# * @author Fabien Potencier <fabien@symfony.com>\n# *\n# * @internal\n\
+    # */\n# final class DelayedEnvelope extends Envelope\n# {\n# private bool $senderSet\
+    \ = false;\n# private bool $recipientsSet = false;\n# \n# public function __construct(\n\
+    # private Message $message,\n# ) {\n# }\n# \n# public function setSender(Address\
+    \ $sender): void\n# {\n# parent::setSender($sender);\n# \n# $this->senderSet =\
+    \ true;\n# }\n# \n# public function getSender(): Address\n# {\n# if (!$this->senderSet)\
+    \ {\n# parent::setSender(self::getSenderFromHeaders($this->message->getHeaders()));\n\
+    # }\n# \n# return parent::getSender();\n# }\n# \n# public function setRecipients(array\
+    \ $recipients): void\n# {\n# parent::setRecipients($recipients);\n# \n# $this->recipientsSet\
+    \ = (bool) parent::getRecipients();\n# }\n# \n# /**\n# * @return Address[]"
+- name: getRecipientsFromHeaders
+  visibility: private
+  parameters:
+  - name: headers
+  comment: null
+- name: getSenderFromHeaders
+  visibility: private
+  parameters:
+  - name: headers
+  comment: null
+traits:
+- Symfony\Component\Mailer\Exception\LogicException
+- Symfony\Component\Mime\Address
+- Symfony\Component\Mime\Header\Headers
+- Symfony\Component\Mime\Message
+interfaces: []

@@ -1,0 +1,43 @@
+name: CharsetTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Charset
+  type: class
+  source: Symfony\Component\Validator\Constraints\Charset
+- name: ConstraintDefinitionException
+  type: class
+  source: Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- name: ClassMetadata
+  type: class
+  source: Symfony\Component\Validator\Mapping\ClassMetadata
+- name: AttributeLoader
+  type: class
+  source: Symfony\Component\Validator\Mapping\Loader\AttributeLoader
+properties: []
+methods:
+- name: testSingleEncodingCanBeSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testMultipleEncodingCanBeSet
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThrowsOnNoCharset
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAttributes
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\Validator\Constraints\Charset
+- Symfony\Component\Validator\Exception\ConstraintDefinitionException
+- Symfony\Component\Validator\Mapping\ClassMetadata
+- Symfony\Component\Validator\Mapping\Loader\AttributeLoader
+interfaces: []

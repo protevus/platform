@@ -1,0 +1,47 @@
+name: AddConstraintValidatorsPassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: ServiceClosureArgument
+  type: class
+  source: Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: Definition
+  type: class
+  source: Symfony\Component\DependencyInjection\Definition
+- name: Reference
+  type: class
+  source: Symfony\Component\DependencyInjection\Reference
+- name: ServiceLocator
+  type: class
+  source: Symfony\Component\DependencyInjection\ServiceLocator
+- name: AddConstraintValidatorsPass
+  type: class
+  source: Symfony\Component\Validator\DependencyInjection\AddConstraintValidatorsPass
+properties: []
+methods:
+- name: testThatConstraintValidatorServicesAreProcessed
+  visibility: public
+  parameters: []
+  comment: null
+- name: testAbstractConstraintValidator
+  visibility: public
+  parameters: []
+  comment: null
+- name: testThatCompilerPassIsIgnoredIfThereIsNoConstraintValidatorFactoryDefinition
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Argument\ServiceClosureArgument
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Definition
+- Symfony\Component\DependencyInjection\Reference
+- Symfony\Component\DependencyInjection\ServiceLocator
+- Symfony\Component\Validator\DependencyInjection\AddConstraintValidatorsPass
+interfaces: []

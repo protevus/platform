@@ -1,0 +1,236 @@
+name: Wormhole
+class_comment: null
+dependencies:
+- name: Carbon
+  type: class
+  source: Illuminate\Support\Carbon
+properties:
+- name: value
+  visibility: public
+  comment: '# * The amount of time to travel.
+
+    # *
+
+    # * @var int'
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: value
+  comment: "# * The amount of time to travel.\n# *\n# * @var int\n# */\n# public $value;\n\
+    # \n# /**\n# * Create a new wormhole instance.\n# *\n# * @param  int  $value\n\
+    # * @return void"
+- name: millisecond
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Travel forward the given number of milliseconds.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return mixed'
+- name: milliseconds
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Travel forward the given number of milliseconds.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return mixed'
+- name: second
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Travel forward the given number of seconds.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return mixed'
+- name: seconds
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Travel forward the given number of seconds.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return mixed'
+- name: minute
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Travel forward the given number of minutes.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return mixed'
+- name: minutes
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Travel forward the given number of minutes.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return mixed'
+- name: hour
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Travel forward the given number of hours.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return mixed'
+- name: hours
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Travel forward the given number of hours.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return mixed'
+- name: day
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Travel forward the given number of days.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return mixed'
+- name: days
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Travel forward the given number of days.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return mixed'
+- name: week
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Travel forward the given number of weeks.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return mixed'
+- name: weeks
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Travel forward the given number of weeks.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return mixed'
+- name: month
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Travel forward the given number of months.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return mixed'
+- name: months
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Travel forward the given number of months.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return mixed'
+- name: year
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Travel forward the given number of years.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return mixed'
+- name: years
+  visibility: public
+  parameters:
+  - name: callback
+    default: 'null'
+  comment: '# * Travel forward the given number of years.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return mixed'
+- name: back
+  visibility: public
+  parameters: []
+  comment: '# * Travel back to the current time.
+
+    # *
+
+    # * @return \DateTimeInterface'
+- name: handleCallback
+  visibility: protected
+  parameters:
+  - name: callback
+  comment: '# * Handle the given optional execution callback.
+
+    # *
+
+    # * @param  callable|null  $callback
+
+    # * @return mixed'
+traits:
+- Illuminate\Support\Carbon
+interfaces: []

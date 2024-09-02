@@ -1,0 +1,35 @@
+name: NativeSessionStorageFactory
+class_comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>"
+dependencies:
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: AbstractProxy
+  type: class
+  source: Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy
+properties: []
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: options
+    default: '[]'
+  - name: handler
+    default: 'null'
+  - name: metaBag
+    default: 'null'
+  - name: secure
+    default: 'false'
+  comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>\n# */\n# class\
+    \ NativeSessionStorageFactory implements SessionStorageFactoryInterface\n# {\n\
+    # /**\n# * @see NativeSessionStorage constructor."
+- name: createStorage
+  visibility: public
+  parameters:
+  - name: request
+  comment: null
+traits:
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpFoundation\Session\Storage\Proxy\AbstractProxy
+interfaces:
+- SessionStorageFactoryInterface

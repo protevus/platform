@@ -1,0 +1,47 @@
+name: AutoAliasServicePassTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: AutoAliasServicePass
+  type: class
+  source: Symfony\Component\DependencyInjection\Compiler\AutoAliasServicePass
+- name: ContainerBuilder
+  type: class
+  source: Symfony\Component\DependencyInjection\ContainerBuilder
+- name: InvalidArgumentException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- name: ParameterNotFoundException
+  type: class
+  source: Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException
+properties: []
+methods:
+- name: testProcessWithMissingParameter
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWithMissingFormat
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWithNonExistingAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWithExistingAlias
+  visibility: public
+  parameters: []
+  comment: null
+- name: testProcessWithManualAlias
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\DependencyInjection\Compiler\AutoAliasServicePass
+- Symfony\Component\DependencyInjection\ContainerBuilder
+- Symfony\Component\DependencyInjection\Exception\InvalidArgumentException
+- Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException
+interfaces: []

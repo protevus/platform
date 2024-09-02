@@ -1,0 +1,43 @@
+name: ProblemNormalizerContextBuilder
+class_comment: null
+dependencies:
+- name: ContextBuilderInterface
+  type: class
+  source: Symfony\Component\Serializer\Context\ContextBuilderInterface
+- name: ContextBuilderTrait
+  type: class
+  source: Symfony\Component\Serializer\Context\ContextBuilderTrait
+- name: ProblemNormalizer
+  type: class
+  source: Symfony\Component\Serializer\Normalizer\ProblemNormalizer
+- name: ContextBuilderTrait
+  type: class
+  source: ContextBuilderTrait
+properties: []
+methods:
+- name: withTitle
+  visibility: public
+  parameters:
+  - name: title
+  comment: "# * A helper providing autocompletion for available ProblemNormalizer\
+    \ options.\n# *\n# * @author Mathias Arlaud <mathias.arlaud@gmail.com>\n# */\n\
+    # final class ProblemNormalizerContextBuilder implements ContextBuilderInterface\n\
+    # {\n# use ContextBuilderTrait;\n# \n# /**\n# * Configure the title field of normalized\
+    \ data."
+- name: withType
+  visibility: public
+  parameters:
+  - name: type
+  comment: '# * Configure the type field of normalized data.'
+- name: withStatusCode
+  visibility: public
+  parameters:
+  - name: statusCode
+  comment: '# * Configure the status field of normalized data.'
+traits:
+- Symfony\Component\Serializer\Context\ContextBuilderInterface
+- Symfony\Component\Serializer\Context\ContextBuilderTrait
+- Symfony\Component\Serializer\Normalizer\ProblemNormalizer
+- ContextBuilderTrait
+interfaces:
+- ContextBuilderInterface

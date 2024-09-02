@@ -1,0 +1,47 @@
+name: AbstractMailerEvent
+class_comment: null
+dependencies:
+- name: RemoteEvent
+  type: class
+  source: Symfony\Component\RemoteEvent\RemoteEvent
+properties: []
+methods:
+- name: setDate
+  visibility: public
+  parameters:
+  - name: date
+  comment: null
+- name: getDate
+  visibility: public
+  parameters: []
+  comment: null
+- name: setRecipientEmail
+  visibility: public
+  parameters:
+  - name: email
+  comment: null
+- name: getRecipientEmail
+  visibility: public
+  parameters: []
+  comment: null
+- name: setMetadata
+  visibility: public
+  parameters:
+  - name: metadata
+  comment: null
+- name: getMetadata
+  visibility: public
+  parameters: []
+  comment: null
+- name: setTags
+  visibility: public
+  parameters:
+  - name: tags
+  comment: null
+- name: getTags
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\RemoteEvent\RemoteEvent
+interfaces: []

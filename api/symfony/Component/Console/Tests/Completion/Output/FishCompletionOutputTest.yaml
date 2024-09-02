@@ -1,0 +1,27 @@
+name: FishCompletionOutputTest
+class_comment: null
+dependencies:
+- name: CompletionOutputInterface
+  type: class
+  source: Symfony\Component\Console\Completion\Output\CompletionOutputInterface
+- name: FishCompletionOutput
+  type: class
+  source: Symfony\Component\Console\Completion\Output\FishCompletionOutput
+properties: []
+methods:
+- name: getCompletionOutput
+  visibility: public
+  parameters: []
+  comment: null
+- name: getExpectedOptionsOutput
+  visibility: public
+  parameters: []
+  comment: null
+- name: getExpectedValuesOutput
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\Console\Completion\Output\CompletionOutputInterface
+- Symfony\Component\Console\Completion\Output\FishCompletionOutput
+interfaces: []

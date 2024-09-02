@@ -1,0 +1,73 @@
+name: SentMessage
+class_comment: '# * @mixin \Symfony\Component\Mailer\SentMessage'
+dependencies:
+- name: ForwardsCalls
+  type: class
+  source: Illuminate\Support\Traits\ForwardsCalls
+- name: SymfonySentMessage
+  type: class
+  source: Symfony\Component\Mailer\SentMessage
+- name: ForwardsCalls
+  type: class
+  source: ForwardsCalls
+properties:
+- name: sentMessage
+  visibility: protected
+  comment: "# * @mixin \\Symfony\\Component\\Mailer\\SentMessage\n# */\n# class SentMessage\n\
+    # {\n# use ForwardsCalls;\n# \n# /**\n# * The Symfony SentMessage instance.\n\
+    # *\n# * @var \\Symfony\\Component\\Mailer\\SentMessage"
+methods:
+- name: __construct
+  visibility: public
+  parameters:
+  - name: sentMessage
+  comment: "# * @mixin \\Symfony\\Component\\Mailer\\SentMessage\n# */\n# class SentMessage\n\
+    # {\n# use ForwardsCalls;\n# \n# /**\n# * The Symfony SentMessage instance.\n\
+    # *\n# * @var \\Symfony\\Component\\Mailer\\SentMessage\n# */\n# protected $sentMessage;\n\
+    # \n# /**\n# * Create a new SentMessage instance.\n# *\n# * @param  \\Symfony\\\
+    Component\\Mailer\\SentMessage  $sentMessage\n# * @return void"
+- name: getSymfonySentMessage
+  visibility: public
+  parameters: []
+  comment: '# * Get the underlying Symfony Email instance.
+
+    # *
+
+    # * @return \Symfony\Component\Mailer\SentMessage'
+- name: __call
+  visibility: public
+  parameters:
+  - name: method
+  - name: parameters
+  comment: '# * Dynamically pass missing methods to the Symfony instance.
+
+    # *
+
+    # * @param  string  $method
+
+    # * @param  array  $parameters
+
+    # * @return mixed'
+- name: __serialize
+  visibility: public
+  parameters: []
+  comment: '# * Get the serializable representation of the object.
+
+    # *
+
+    # * @return array'
+- name: __unserialize
+  visibility: public
+  parameters:
+  - name: data
+  comment: '# * Marshal the object from its serialized data.
+
+    # *
+
+    # * @param  array  $data
+
+    # * @return void'
+traits:
+- Illuminate\Support\Traits\ForwardsCalls
+- ForwardsCalls
+interfaces: []

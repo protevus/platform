@@ -1,0 +1,27 @@
+name: ExceptionEventTest
+class_comment: null
+dependencies:
+- name: TestCase
+  type: class
+  source: PHPUnit\Framework\TestCase
+- name: Request
+  type: class
+  source: Symfony\Component\HttpFoundation\Request
+- name: ExceptionEvent
+  type: class
+  source: Symfony\Component\HttpKernel\Event\ExceptionEvent
+- name: TestHttpKernel
+  type: class
+  source: Symfony\Component\HttpKernel\Tests\TestHttpKernel
+properties: []
+methods:
+- name: testAllowSuccessfulResponseIsFalseByDefault
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- PHPUnit\Framework\TestCase
+- Symfony\Component\HttpFoundation\Request
+- Symfony\Component\HttpKernel\Event\ExceptionEvent
+- Symfony\Component\HttpKernel\Tests\TestHttpKernel
+interfaces: []

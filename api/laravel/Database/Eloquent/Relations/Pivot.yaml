@@ -1,0 +1,33 @@
+name: Pivot
+class_comment: null
+dependencies:
+- name: Model
+  type: class
+  source: Illuminate\Database\Eloquent\Model
+- name: AsPivot
+  type: class
+  source: Illuminate\Database\Eloquent\Relations\Concerns\AsPivot
+- name: AsPivot
+  type: class
+  source: AsPivot
+properties:
+- name: incrementing
+  visibility: public
+  comment: '# * Indicates if the IDs are auto-incrementing.
+
+    # *
+
+    # * @var bool'
+- name: guarded
+  visibility: protected
+  comment: '# * The attributes that aren''t mass assignable.
+
+    # *
+
+    # * @var array<string>|bool'
+methods: []
+traits:
+- Illuminate\Database\Eloquent\Model
+- Illuminate\Database\Eloquent\Relations\Concerns\AsPivot
+- AsPivot
+interfaces: []

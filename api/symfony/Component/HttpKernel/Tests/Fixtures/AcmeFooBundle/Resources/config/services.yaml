@@ -1,0 +1,11 @@
+name: services
+class_comment: null
+dependencies:
+- name: ContainerConfigurator
+  type: class
+  source: Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator
+properties: []
+methods: []
+traits:
+- Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator
+interfaces: []

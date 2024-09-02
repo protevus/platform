@@ -1,0 +1,64 @@
+name: PseudoClassExtension
+class_comment: "# * XPath expression translator pseudo-class extension.\n# *\n# *\
+  \ This component is a port of the Python cssselect library,\n# * which is copyright\
+  \ Ian Bicking, @see https://github.com/SimonSapin/cssselect.\n# *\n# * @author Jean-Fran\xE7\
+  ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n# * @internal"
+dependencies:
+- name: ExpressionErrorException
+  type: class
+  source: Symfony\Component\CssSelector\Exception\ExpressionErrorException
+- name: XPathExpr
+  type: class
+  source: Symfony\Component\CssSelector\XPath\XPathExpr
+properties: []
+methods:
+- name: translateFirstOfType
+  visibility: public
+  parameters:
+  - name: xpath
+  comment: "# * XPath expression translator pseudo-class extension.\n# *\n# * This\
+    \ component is a port of the Python cssselect library,\n# * which is copyright\
+    \ Ian Bicking, @see https://github.com/SimonSapin/cssselect.\n# *\n# * @author\
+    \ Jean-Fran\xE7ois Simon <jeanfrancois.simon@sensiolabs.com>\n# *\n# * @internal\n\
+    # */\n# class PseudoClassExtension extends AbstractExtension\n# {\n# public function\
+    \ getPseudoClassTranslators(): array\n# {\n# return [\n# 'root' => $this->translateRoot(...),\n\
+    # 'scope' => $this->translateScopePseudo(...),\n# 'first-child' => $this->translateFirstChild(...),\n\
+    # 'last-child' => $this->translateLastChild(...),\n# 'first-of-type' => $this->translateFirstOfType(...),\n\
+    # 'last-of-type' => $this->translateLastOfType(...),\n# 'only-child' => $this->translateOnlyChild(...),\n\
+    # 'only-of-type' => $this->translateOnlyOfType(...),\n# 'empty' => $this->translateEmpty(...),\n\
+    # ];\n# }\n# \n# public function translateRoot(XPathExpr $xpath): XPathExpr\n\
+    # {\n# return $xpath->addCondition('not(parent::*)');\n# }\n# \n# public function\
+    \ translateScopePseudo(XPathExpr $xpath): XPathExpr\n# {\n# return $xpath->addCondition('1');\n\
+    # }\n# \n# public function translateFirstChild(XPathExpr $xpath): XPathExpr\n\
+    # {\n# return $xpath\n# ->addStarPrefix()\n# ->addNameTest()\n# ->addCondition('position()\
+    \ = 1');\n# }\n# \n# public function translateLastChild(XPathExpr $xpath): XPathExpr\n\
+    # {\n# return $xpath\n# ->addStarPrefix()\n# ->addNameTest()\n# ->addCondition('position()\
+    \ = last()');\n# }\n# \n# /**\n# * @throws ExpressionErrorException"
+- name: translateLastOfType
+  visibility: public
+  parameters:
+  - name: xpath
+  comment: '# * @throws ExpressionErrorException'
+- name: translateOnlyChild
+  visibility: public
+  parameters:
+  - name: xpath
+  comment: null
+- name: translateOnlyOfType
+  visibility: public
+  parameters:
+  - name: xpath
+  comment: null
+- name: translateEmpty
+  visibility: public
+  parameters:
+  - name: xpath
+  comment: null
+- name: getName
+  visibility: public
+  parameters: []
+  comment: null
+traits:
+- Symfony\Component\CssSelector\Exception\ExpressionErrorException
+- Symfony\Component\CssSelector\XPath\XPathExpr
+interfaces: []
