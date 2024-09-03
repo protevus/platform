@@ -1,0 +1,23 @@
+name: protevus_application
+description: The Application Package for the Protevus Platform
+version: 0.0.1
+homepage: https://protevus.com
+documentation: https://docs.protevus.com
+repository: https://git.protevus.com/protevus/platform
+
+environment:
+  sdk: ^3.4.2
+
+# Add regular dependencies here.
+dependencies:
+  args: ^2.4.2
+  logging: ^1.2.0
+  meta: ^1.12.0
+  protevus_runtime: ^0.0.1
+  protevus_openapi: ^0.0.1
+  protevus_http: ^0.0.1
+  # path: ^1.8.0
+
+dev_dependencies:
+  lints: ^3.0.0
+  test: ^1.24.0
