@@ -10,6 +10,10 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
+  protevus_http: ^0.0.1
+  protevus_openapi: ^0.0.1
+  protevus_hashing: ^0.0.1
+  crypto: ^3.0.3
   # path: ^1.8.0
 
 dev_dependencies:
