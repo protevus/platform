@@ -1,3 +1,12 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'dart:async';
 import 'dart:io';
 
@@ -9,7 +18,7 @@ import 'package:protevus_runtime/runtime.dart';
 import 'package:logging/logging.dart';
 import 'package:meta/meta.dart';
 
-/// An object that defines the behavior specific to your application.
+/// An abstract class that defines the behavior specific to your application.
 ///
 /// You create a subclass of [ApplicationChannel] to initialize your application's services and define how HTTP requests are handled by your application.
 /// There *must* only be one subclass in an application and it must be visible to your application library file, e.g., 'package:my_app/my_app.dart'.
@@ -21,7 +30,7 @@ import 'package:meta/meta.dart';
 /// When your application is started, an instance of your application channel is created for each isolate (see [Application.start]). Each instance
 /// is a replica of your application that runs in its own memory isolated thread.
 abstract class ApplicationChannel implements APIComponentDocumenter {
-  /// You implement this method to provide global initialization for your application.
+  /// Provides global initialization for the application.
   ///
   /// Most of your application initialization code is written in [prepare], which is invoked for each isolate. For initialization that
   /// needs to occur once per application start, you must provide an implementation for this method. This method is invoked prior
@@ -51,27 +60,43 @@ abstract class ApplicationChannel implements APIComponentDocumenter {
   /// is for documentation purposes.
   static Future initializeApplication(ApplicationOptions options) async {}
 
-  /// The logger that this object will write messages to.
+  /// Returns a Logger instance for this object.
   ///
   /// This logger's name appears as 'conduit'.
-  Logger get logger => Logger("conduit");
+  Logger get logger => Logger("protevus");
 
-  /// The [ApplicationServer] that sends HTTP requests to this object.
+  /// Returns the [ApplicationServer] instance that sends HTTP requests to this object.
+  ///
+  /// This getter provides access to the server associated with this ApplicationChannel.
+  /// The server is responsible for handling incoming HTTP requests and routing them
+  /// to the appropriate controllers within the channel.
   ApplicationServer get server => _server;
 
+  /// Sets the ApplicationServer for this channel and establishes message hub connections.
+  ///
+  /// This setter method performs two main tasks:
+  /// 1. It assigns the provided [server] to the private [_server] variable.
+  /// 2. It sets up the message hub connections:
+  ///    - It adds a listener to the outbound stream of the messageHub, which sends
+  ///      application events through the server.
+  ///    - It sets the inbound sink of the messageHub as the hubSink of the server.
+  ///
+  /// This setup allows for inter-isolate communication through the ApplicationMessageHub.
+  ///
+  /// [server] The ApplicationServer instance to be set for this channel.
   set server(ApplicationServer server) {
     _server = server;
     messageHub._outboundController.stream.listen(server.sendApplicationEvent);
     server.hubSink = messageHub._inboundController.sink;
   }
 
-  /// Use this object to send data to channels running on other isolates.
+  /// A messaging hub for inter-isolate communication within the application.
   ///
   /// You use this object to synchronize state across the isolates of an application. Any data sent
   /// through this object will be received by every other channel in your application (except the one that sent it).
   final ApplicationMessageHub messageHub = ApplicationMessageHub();
 
-  /// The context used for setting up HTTPS in an application.
+  /// Returns a SecurityContext for HTTPS configuration if certificate and private key files are provided.
   ///
   /// If this value is non-null, the [server] receiving HTTP requests will only accept requests over HTTPS.
   ///
@@ -93,6 +118,17 @@ abstract class ApplicationChannel implements APIComponentDocumenter {
   ///
   /// These options are set when starting the application. Changes to this object have no effect
   /// on other isolates.
+  ///
+  /// This property holds an instance of [ApplicationOptions] which contains various
+  /// configuration settings for the application. These options are typically set
+  /// during the application's startup process.
+  ///
+  /// The options stored here are specific to this channel instance and do not
+  /// affect other isolates running in the application. This means that modifying
+  /// these options at runtime will only impact the current isolate.
+  ///
+  /// The property is nullable, allowing for cases where options might not be set
+  /// or where default configurations are used in the absence of specific options.
   ApplicationOptions? options;
 
   /// You implement this accessor to define how HTTP requests are handled by your application.
@@ -112,9 +148,17 @@ abstract class ApplicationChannel implements APIComponentDocumenter {
   ///         }
   Controller get entryPoint;
 
+  /// The [ApplicationServer] instance associated with this channel.
+  ///
+  /// This private variable stores the server that handles HTTP requests for this
+  /// ApplicationChannel. It is marked as 'late' because it will be initialized
+  /// after the channel is created, typically when the 'server' setter is called.
+  ///
+  /// The server is responsible for managing incoming HTTP connections and
+  /// routing requests to the appropriate controllers within the channel.
   late ApplicationServer _server;
 
-  /// You override this method to perform initialization tasks.
+  /// Performs initialization tasks for the application channel.
   ///
   /// This method allows this instance to perform any initialization (other than setting up the [entryPoint]). This method
   /// is often used to set up services that [Controller]s use to fulfill their duties. This method is invoked
@@ -123,12 +167,12 @@ abstract class ApplicationChannel implements APIComponentDocumenter {
   /// By default, this method does nothing.
   Future prepare() async {}
 
-  /// You override this method to perform initialization tasks that occur after [entryPoint] has been established.
+  /// Overridable method called just before the application starts receiving requests.
   ///
   /// Override this method to take action just before [entryPoint] starts receiving requests. By default, does nothing.
   void willStartReceivingRequests() {}
 
-  /// You override this method to release any resources created in [prepare].
+  /// Releases resources and performs cleanup when the application channel is closing.
   ///
   /// This method is invoked when the owning [Application] is stopped. It closes open ports
   /// that this channel was using so that the application can be properly shut down.
@@ -146,7 +190,8 @@ abstract class ApplicationChannel implements APIComponentDocumenter {
 
   /// Creates an OpenAPI document for the components and paths in this channel.
   ///
-  /// This method invokes [entryPoint] and [prepare] before starting the documentation process.
+  /// This method generates a complete OpenAPI specification document for the application,
+  /// including all components, paths, and operations defined in the channel.
   ///
   /// The documentation process first invokes [documentComponents] on this channel. Every controller in the channel will have its
   /// [documentComponents] methods invoked. Any declared property
@@ -181,6 +226,24 @@ abstract class ApplicationChannel implements APIComponentDocumenter {
     return doc;
   }
 
+  /// Documents the components of this ApplicationChannel and its controllers.
+  ///
+  /// This method is responsible for generating API documentation for the components
+  /// of this ApplicationChannel and its associated controllers. It performs the following tasks:
+  ///
+  /// 1. Calls `documentComponents` on the entry point controller, which typically
+  ///    initiates the documentation process for all linked controllers.
+  ///
+  /// 2. Retrieves all documentable channel components using the ChannelRuntime,
+  ///    which are typically services or other objects that implement APIComponentDocumenter.
+  ///
+  /// 3. Calls `documentComponents` on each of these channel components, allowing
+  ///    them to add their own documentation to the API registry.
+  ///
+  /// This method is marked with @mustCallSuper, indicating that subclasses
+  /// overriding this method must call the superclass implementation.
+  ///
+  /// [registry] The APIDocumentContext used to store and organize the API documentation.
   @mustCallSuper
   @override
   void documentComponents(APIDocumentContext registry) {
@@ -194,7 +257,7 @@ abstract class ApplicationChannel implements APIComponentDocumenter {
   }
 }
 
-/// An object that sends and receives messages between [ApplicationChannel]s.
+/// An object that facilitates message passing between [ApplicationChannel]s in different isolates.
 ///
 /// You use this object to share information between isolates. Each [ApplicationChannel] has a property of this type. A message sent through this object
 /// is received by every other channel through its hub.
@@ -218,13 +281,43 @@ abstract class ApplicationChannel implements APIComponentDocumenter {
 ///           }
 ///         });
 class ApplicationMessageHub extends Stream<dynamic> implements Sink<dynamic> {
-  final Logger _logger = Logger("conduit");
+  /// A logger instance for the ApplicationMessageHub.
+  ///
+  /// This logger is used to log messages and errors related to the ApplicationMessageHub.
+  /// It is named "protevus" to identify logs from this specific component.
+  final Logger _logger = Logger("protevus");
+
+  /// A StreamController for outbound messages.
+  ///
+  /// This controller manages the stream of outbound messages sent from this
+  /// ApplicationMessageHub to other hubs. It is used internally to handle
+  /// the flow of messages being sent out to other isolates.
+  ///
+  /// The stream is not broadcast, meaning it only allows a single subscriber.
+  /// This is typically used by the ApplicationServer to listen for outbound
+  /// messages and distribute them to other isolates.
   final StreamController<dynamic> _outboundController =
       StreamController<dynamic>();
+
+  /// A StreamController for inbound messages.
+  ///
+  /// This controller manages the stream of inbound messages received by this
+  /// ApplicationMessageHub from other hubs. It is used internally to handle
+  /// the flow of messages coming in from other isolates.
+  ///
+  /// The stream is broadcast, meaning it allows multiple subscribers. This allows
+  /// multiple parts of the application to listen for and react to incoming messages
+  /// independently.
   final StreamController<dynamic> _inboundController =
       StreamController<dynamic>.broadcast();
 
   /// Adds a listener for messages from other hubs.
+  ///
+  /// A class that facilitates message passing between [ApplicationChannel]s in different isolates.
+  ///
+  /// This class implements both [Stream] and [Sink] interfaces, allowing it to send and receive messages
+  /// across isolates. It uses separate controllers for inbound and outbound messages to manage the flow
+  /// of data.
   ///
   /// You use this method to add listeners for messages from other hubs.
   /// When another hub [add]s a message, this hub will receive it on [onData].
@@ -249,7 +342,8 @@ class ApplicationMessageHub extends Stream<dynamic> implements Sink<dynamic> {
 
   /// Sends a message to all other hubs.
   ///
-  /// [event] will be delivered to all other isolates that have set up a callback for [listen].
+  /// This method allows sending a message [event] to all other isolates in the application.
+  /// The message will be delivered to all other isolates that have set up a callback using [listen].
   ///
   /// [event] must be isolate-safe data - in general, this means it may not be or contain a closure. Consult the API reference `dart:isolate` for more details. If [event]
   /// is not isolate-safe data, an error is delivered to [listen] on this isolate.
@@ -258,6 +352,19 @@ class ApplicationMessageHub extends Stream<dynamic> implements Sink<dynamic> {
     _outboundController.sink.add(event);
   }
 
+  /// Closes the message hub and its associated stream controllers.
+  ///
+  /// This method performs the following tasks:
+  /// 1. If the outbound controller has no listeners, it adds a dummy listener
+  ///    to prevent potential issues with unhandled stream events.
+  /// 2. If the inbound controller has no listeners, it adds a dummy listener
+  ///    for the same reason.
+  /// 3. Closes both the outbound and inbound controllers.
+  ///
+  /// This method should be called when the application is shutting down or
+  /// when the message hub is no longer needed to ensure proper cleanup of resources.
+  ///
+  /// Returns a Future that completes when both controllers have been closed.
   @override
   Future close() async {
     if (!_outboundController.hasListener) {
@@ -273,6 +380,10 @@ class ApplicationMessageHub extends Stream<dynamic> implements Sink<dynamic> {
   }
 }
 
+/// An abstract class that defines the runtime behavior of an ApplicationChannel.
+///
+/// This class provides methods and properties for managing the lifecycle,
+/// documentation, and instantiation of an ApplicationChannel.
 abstract class ChannelRuntime {
   Iterable<APIComponentDocumenter> getDocumentableChannelComponents(
     ApplicationChannel channel,

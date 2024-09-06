@@ -7,6 +7,14 @@
  * file that was distributed with this source code.
  */
 
+/// This library exports various components of the application framework.
+///
+/// It includes:
+/// - Application and ApplicationServer classes for managing the application lifecycle
+/// - Channel for handling request/response cycles
+/// - IsolateApplicationServer and IsolateSupervisor for managing isolates
+/// - Options for configuring the application
+/// - Starter for initializing and running the application
 library;
 
 export 'src/application.dart';
