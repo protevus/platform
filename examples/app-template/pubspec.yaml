@@ -1,0 +1,28 @@
+name: app-template
+description: An absolute bare-bones protevus app.
+version: 1.0.0
+# repository: https://github.com/my_org/my_repo
+
+environment:
+  sdk: ^3.4.0
+
+# Add regular dependencies here.
+dependencies:
+  web: ^0.5.1
+
+dev_dependencies:
+  build_runner: ^2.4.8
+  build_web_compilers: ^4.0.9
+  lints: ^3.0.0
+
+# Override default source directory
+source_directories:
+  - app
+  - bootstrap
+  - config
+  - database
+  - public
+  - resources
+  - routes
+  - storage
+  - tests

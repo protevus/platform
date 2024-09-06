@@ -1,0 +1,53 @@
+{
+  "lockfile_version": "1",
+  "packages": {
+    "dart@latest": {
+      "last_modified": "2024-06-03T07:19:07Z",
+      "resolved": "github:NixOS/nixpkgs/4a4ecb0ab415c9fccfb005567a215e6a9564cdf5#dart",
+      "source": "devbox-search",
+      "version": "3.4.2",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/9piqr817cdsgmz31m8q723lxhcpgqsa4-dart-3.4.2",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/9piqr817cdsgmz31m8q723lxhcpgqsa4-dart-3.4.2"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/1j3h5yqxvgzakv5gir1ssg7wggwxhmsd-dart-3.4.2",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/1j3h5yqxvgzakv5gir1ssg7wggwxhmsd-dart-3.4.2"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/k8a6gkss3s19p5dhbzgbdqqk5b8qzd7d-dart-3.4.2",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/k8a6gkss3s19p5dhbzgbdqqk5b8qzd7d-dart-3.4.2"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/wbj1csi5fk2w99aiglwgg1mv406pw4pn-dart-3.4.2",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/wbj1csi5fk2w99aiglwgg1mv406pw4pn-dart-3.4.2"
+        }
+      }
+    }
+  }
+}
