@@ -1,3 +1,12 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'dart:async';
 import 'dart:io';
 
@@ -8,8 +17,9 @@ import 'package:protevus_openapi/v3.dart';
 
 /// A [Controller] that validates the Authorization header of a request.
 ///
-/// An instance of this type will validate that the authorization information in an Authorization header is sufficient to access
-/// the next controller in the channel.
+/// This class, Authorizer, is responsible for authenticating and authorizing incoming HTTP requests.
+/// It validates the Authorization header, processes it according to the specified parser (e.g., Bearer or Basic),
+/// and then uses the provided validator to check the credentials.
 ///
 /// For each request, this controller parses the authorization header, validates it with an [AuthValidator] and then create an [Authorization] object
 /// if successful. The [Request] keeps a reference to this [Authorization] and is then sent to the next controller in the channel.
@@ -28,7 +38,7 @@ import 'package:protevus_openapi/v3.dart';
 class Authorizer extends Controller {
   /// Creates an instance of [Authorizer].
   ///
-  /// Use this constructor to provide custom [AuthorizationParser]s.
+  /// This constructor allows for creating an [Authorizer] with custom configurations.
   ///
   /// By default, this instance will parse bearer tokens from the authorization header, e.g.:
   ///
@@ -43,7 +53,11 @@ class Authorizer extends Controller {
 
   /// Creates an instance of [Authorizer] with Basic Authentication parsing.
   ///
-  /// Parses a username and password from the request's Basic Authentication data in the Authorization header, e.g.:
+  /// This constructor initializes an [Authorizer] that uses Basic Authentication.
+  /// It sets up the [Authorizer] to parse the Authorization header of incoming requests
+  /// using the [AuthorizationBasicParser].
+  ///
+  /// The Authorization header for Basic Authentication should be in the format:
   ///
   ///         Authorization: Basic base64(username:password)
   Authorizer.basic(AuthValidator? validator)
@@ -51,7 +65,9 @@ class Authorizer extends Controller {
 
   /// Creates an instance of [Authorizer] with Bearer token parsing.
   ///
-  /// Parses a bearer token from the request's Authorization header, e.g.
+  /// This constructor initializes an [Authorizer] that uses Bearer token authentication.
+  /// It sets up the [Authorizer] to parse the Authorization header of incoming requests
+  /// using the [AuthorizationBearerParser].
   ///
   ///         Authorization: Bearer ap9ijlarlkz8jIOa9laweo
   ///
@@ -65,12 +81,19 @@ class Authorizer extends Controller {
 
   /// The validating authorization object.
   ///
-  /// This object will check credentials parsed from the Authorization header and produce an
-  /// [Authorization] object representing the authorization the credentials have. It may also
-  /// reject a request. This is typically an instance of [AuthServer].
+  /// This property holds an instance of [AuthValidator] responsible for validating
+  /// the credentials parsed from the Authorization header. It processes these
+  /// credentials and produces an [Authorization] object that represents the
+  /// authorization level of the provided credentials.
+  ///
+  /// The validator can also reject a request if the credentials are invalid or
+  /// insufficient. This property is typically set to an instance of [AuthServer].
+  ///
+  /// The validator is crucial for determining whether a request should be allowed
+  /// to proceed based on the provided authorization information.
   final AuthValidator? validator;
 
-  /// The list of required scopes.
+  /// The list of required scopes for authorization.
   ///
   /// If [validator] grants scope-limited authorizations (e.g., OAuth2 bearer tokens), the authorization
   /// provided by the request's header must have access to all [scopes] in order to move on to the next controller.
@@ -79,7 +102,7 @@ class Authorizer extends Controller {
   /// an [AuthScope] and added to this list.
   final List<AuthScope>? scopes;
 
-  /// Parses the Authorization header.
+  /// Parses the Authorization header of incoming requests.
   ///
   /// The parser determines how to interpret the data in the Authorization header. Concrete subclasses
   /// are [AuthorizationBasicParser] and [AuthorizationBearerParser].
@@ -87,6 +110,20 @@ class Authorizer extends Controller {
   /// Once parsed, the parsed value is validated by [validator].
   final AuthorizationParser parser;
 
+  /// Handles the incoming request by validating its authorization.
+  ///
+  /// This method performs the following steps:
+  /// 1. Extracts the Authorization header from the request.
+  /// 2. If the header is missing, returns an unauthorized response.
+  /// 3. Attempts to parse the authorization data using the configured parser.
+  /// 4. Validates the parsed data using the configured validator.
+  /// 5. If validation succeeds, adds the authorization to the request and proceeds.
+  /// 6. If validation fails due to insufficient scope, returns a forbidden response.
+  /// 7. For other validation failures, returns an unauthorized response.
+  /// 8. Handles parsing exceptions by returning appropriate error responses.
+  ///
+  /// @param request The incoming HTTP request to be authorized.
+  /// @return A [Future] that resolves to either the authorized [Request] or an error [Response].
   @override
   FutureOr<RequestOrResponse> handle(Request request) async {
     final authData = request.raw.headers.value(HttpHeaders.authorizationHeader);
@@ -121,6 +158,19 @@ class Authorizer extends Controller {
     return request;
   }
 
+  /// Generates an appropriate HTTP response based on the type of AuthorizationParserException.
+  ///
+  /// This method takes an [AuthorizationParserException] as input and returns
+  /// a [Response] object based on the exception's reason:
+  ///
+  /// - For [AuthorizationParserExceptionReason.malformed], it returns a 400 Bad Request
+  ///   response with a body indicating an invalid authorization header.
+  /// - For [AuthorizationParserExceptionReason.missing], it returns a 401 Unauthorized
+  ///   response.
+  /// - For any other reason, it returns a 500 Server Error response.
+  ///
+  /// @param e The AuthorizationParserException that occurred during parsing.
+  /// @return A Response object appropriate to the exception reason.
   Response _responseFromParseException(AuthorizationParserException e) {
     switch (e.reason) {
       case AuthorizationParserExceptionReason.malformed:
@@ -134,6 +184,21 @@ class Authorizer extends Controller {
     }
   }
 
+  /// Adds a response modifier to the request to handle scope requirements.
+  ///
+  /// This method is called after successful authorization and adds a response
+  /// modifier to the request. The modifier's purpose is to enhance 403 (Forbidden)
+  /// responses that are due to insufficient scope.
+  ///
+  /// If this [Authorizer] has required scopes and the response is a 403 with a body
+  /// containing a "scope" key, this modifier will add any of this [Authorizer]'s
+  /// required scopes that aren't already present in the response body's scope list.
+  ///
+  /// This ensures that if a downstream controller returns a 403 due to insufficient
+  /// scope, the response includes all the scopes required by both this [Authorizer]
+  /// and the downstream controller.
+  ///
+  /// @param request The [Request] object to which the modifier will be added.
   void _addScopeRequirementModifier(Request request) {
     // If a controller returns a 403 because of invalid scope,
     // this Authorizer adds its required scope as well.
@@ -154,10 +219,49 @@ class Authorizer extends Controller {
     }
   }
 
+  /// Documents the components for the API documentation.
+  ///
+  /// This method is responsible for registering custom API responses that are specific
+  /// to authorization-related errors. It adds three responses to the API documentation:
+  ///
+  /// 1. "InsufficientScope": Used when the provided credentials or bearer token have
+  ///    insufficient permissions to access a route.
+  ///
+  /// 2. "InsufficientAccess": Used when the provided credentials or bearer token are
+  ///    not authorized for a specific request.
+  ///
+  /// 3. "MalformedAuthorizationHeader": Used when the provided Authorization header
+  ///    is malformed.
+  ///
+  /// Each response is registered with a description and a schema defining the
+  /// structure of the JSON response body.
+  ///
+  /// @param context The APIDocumentContext used to register the responses.
   @override
   void documentComponents(APIDocumentContext context) {
+    /// Calls the superclass's documentComponents method.
+    ///
+    /// This method invokes the documentComponents method of the superclass,
+    /// ensuring that any component documentation defined in the parent class
+    /// is properly registered in the API documentation context.
+    ///
+    /// @param context The APIDocumentContext used for registering API components.
     super.documentComponents(context);
 
+    /// Registers an "InsufficientScope" response in the API documentation.
+    ///
+    /// This response is used when the provided credentials or bearer token
+    /// have insufficient permissions to access a specific route. It includes
+    /// details about the error and the required scope for the operation.
+    ///
+    /// The response has the following structure:
+    /// - A description explaining the insufficient scope error.
+    /// - Content of type "application/json" with a schema containing:
+    ///   - An "error" field of type string.
+    ///   - A "scope" field of type string, describing the required scope.
+    ///
+    /// This response can be referenced in API operations to standardize
+    /// the documentation of insufficient scope errors.
     context.responses.register(
       "InsufficientScope",
       APIResponse(
@@ -174,6 +278,19 @@ class Authorizer extends Controller {
       ),
     );
 
+    /// Registers an "InsufficientAccess" response in the API documentation.
+    ///
+    /// This response is used when the provided credentials or bearer token
+    /// are not authorized for a specific request. It includes details about
+    /// the error in a JSON format.
+    ///
+    /// The response has the following structure:
+    /// - A description explaining the insufficient access error.
+    /// - Content of type "application/json" with a schema containing:
+    ///   - An "error" field of type string.
+    ///
+    /// This response can be referenced in API operations to standardize
+    /// the documentation of insufficient access errors.
     context.responses.register(
       "InsufficientAccess",
       APIResponse(
@@ -188,6 +305,18 @@ class Authorizer extends Controller {
       ),
     );
 
+    /// Registers a "MalformedAuthorizationHeader" response in the API documentation.
+    ///
+    /// This response is used when the provided Authorization header is malformed.
+    /// It includes details about the error in a JSON format.
+    ///
+    /// The response has the following structure:
+    /// - A description explaining the malformed authorization header error.
+    /// - Content of type "application/json" with a schema containing:
+    ///   - An "error" field of type string.
+    ///
+    /// This response can be referenced in API operations to standardize
+    /// the documentation of malformed authorization header errors.
     context.responses.register(
       "MalformedAuthorizationHeader",
       APIResponse(
@@ -203,6 +332,23 @@ class Authorizer extends Controller {
     );
   }
 
+  /// Documents the operations for the API documentation.
+  ///
+  /// This method is responsible for adding security-related responses and requirements
+  /// to each operation in the API documentation. It performs the following tasks:
+  ///
+  /// 1. Calls the superclass's documentOperations method to get the base operations.
+  /// 2. For each operation:
+  ///    - Adds a 400 response for malformed authorization headers.
+  ///    - Adds a 401 response for insufficient access.
+  ///    - Adds a 403 response for insufficient scope.
+  ///    - Retrieves security requirements from the validator.
+  ///    - Adds these security requirements to the operation.
+  ///
+  /// @param context The APIDocumentContext used for documenting the API.
+  /// @param route The route string for which operations are being documented.
+  /// @param path The APIPath object representing the path of the operations.
+  /// @return A map of operation names to APIOperation objects with added security documentation.
   @override
   Map<String, APIOperation> documentOperations(
     APIDocumentContext context,

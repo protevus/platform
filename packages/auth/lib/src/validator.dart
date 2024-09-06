@@ -1,3 +1,12 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'dart:async';
 
 import 'package:protevus_openapi/documentable.dart';
@@ -5,14 +14,14 @@ import 'package:protevus_auth/auth.dart';
 import 'package:protevus_http/http.dart';
 import 'package:protevus_openapi/v3.dart';
 
-/// Instances that implement this type can be used by an [Authorizer] to determine authorization of a request.
+/// A mixin that defines the interface for validating authorization data.
 ///
 /// When an [Authorizer] processes a [Request], it invokes [validate], passing in the parsed Authorization
 /// header of the [Request].
 ///
 /// [AuthServer] implements this interface.
 mixin AuthValidator {
-  /// Returns an [Authorization] if [authorizationData] is valid.
+  /// Validates authorization data and returns an [Authorization] if valid.
   ///
   /// This method is invoked by [Authorizer] to validate the Authorization header of a request. [authorizationData]
   /// is the parsed contents of the Authorization header, while [parser] is the object that parsed the header.
@@ -28,7 +37,7 @@ mixin AuthValidator {
     List<AuthScope>? requiredScope,
   });
 
-  /// Provide [APISecurityRequirement]s for [authorizer].
+  /// Provides [APISecurityRequirement]s for the given [authorizer].
   ///
   /// An [Authorizer] that adds security requirements to operations will invoke this method to allow this validator to define those requirements.
   /// The [Authorizer] must provide the [context] it was given to document the operations, itself and optionally a list of [scopes] required to pass it.
