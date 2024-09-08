@@ -14,7 +14,7 @@
 /// - Salt generation utilities
 ///
 /// These components are essential for secure password hashing and storage.
-library hashing;
+library;
 
 export 'package:protevus_hashing/src/pbkdf2.dart';
 export 'package:protevus_hashing/src/salt.dart';

@@ -10,36 +10,56 @@
 import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
-
 import 'package:crypto/crypto.dart';
 
-/// Instances of this type derive a key from a password, salt, and hash function.
+/// Implements the PBKDF2 (Password-Based Key Derivation Function 2) algorithm.
+///
+/// This class is used to derive a key from a password, salt, and hash function.
+/// It's particularly useful for secure password storage and key generation.
 ///
 /// https://en.wikipedia.org/wiki/PBKDF2
 class PBKDF2 {
-  /// Creates instance capable of generating a key.
+  /// Creates an instance of PBKDF2 capable of generating a key.
   ///
-  /// [hashAlgorithm] defaults to [sha256].
+  /// [hashAlgorithm] specifies the hash function to use. Defaults to [sha256].
   PBKDF2({Hash? hashAlgorithm}) {
     this.hashAlgorithm = hashAlgorithm ?? sha256;
   }
 
+  /// Gets the current hash algorithm used by this PBKDF2 instance.
   Hash get hashAlgorithm => _hashAlgorithm;
+
+  /// Sets the hash algorithm to be used by this PBKDF2 instance.
+  ///
+  /// This also updates the internal block size based on the new algorithm.
   set hashAlgorithm(Hash algorithm) {
     _hashAlgorithm = algorithm;
     _blockSize = _hashAlgorithm.convert([1, 2, 3]).bytes.length;
   }
 
+  /// The hash algorithm used for key derivation.
+  ///
+  /// This is marked as 'late' because it's initialized in the constructor or
+  /// when the setter is called, but not at the point of declaration.
   late Hash _hashAlgorithm;
+
+  /// The block size used in the PBKDF2 algorithm.
+  ///
+  /// This value is determined by the output size of the hash function being used.
+  /// It's initialized when the hash algorithm is set, either in the constructor
+  /// or when the hashAlgorithm setter is called.
   late int _blockSize;
 
-  /// Hashes a [password] with a given [salt].
+  /// Generates a key from the given password and salt.
   ///
-  /// The length of this return value will be [keyLength].
+  /// [password] is the password to hash.
+  /// [salt] is the salt to use in the hashing process.
+  /// [rounds] is the number of iterations to perform.
+  /// [keyLength] is the desired length of the output key in bytes.
   ///
-  /// See [generateAsBase64String] for generating a random salt.
+  /// Returns a [List<int>] representing the generated key.
   ///
-  /// See also [generateBase64Key], which base64 encodes the key returned from this method for storage.
+  /// Throws a [PBKDF2Exception] if the derived key would be too long.
   List<int> generateKey(
     String password,
     String salt,
@@ -79,9 +99,16 @@ class PBKDF2 {
     return key.buffer.asUint8List();
   }
 
-  /// Hashed a [password] with a given [salt] and base64 encodes the result.
+  /// Generates a base64-encoded key from the given password and salt.
   ///
   /// This method invokes [generateKey] and base64 encodes the result.
+  ///
+  /// [password] is the password to hash.
+  /// [salt] is the salt to use in the hashing process.
+  /// [rounds] is the number of iterations to perform.
+  /// [keyLength] is the desired length of the output key in bytes.
+  ///
+  /// Returns a [String] representing the base64-encoded generated key.
   String generateBase64Key(
     String password,
     String salt,
@@ -94,22 +121,42 @@ class PBKDF2 {
   }
 }
 
-/// Thrown when [PBKDF2] throws an exception.
+/// Exception thrown when an error occurs during PBKDF2 key generation.
 class PBKDF2Exception implements Exception {
+  /// Creates a new PBKDF2Exception with the given error message.
   PBKDF2Exception(this.message);
+
+  /// The error message describing the exception.
   String message;
 
+  /// Returns a string representation of the PBKDF2Exception.
+  ///
+  /// This method overrides the default [Object.toString] method to provide
+  /// a more descriptive string representation of the exception. The returned
+  /// string includes the exception type ("PBKDF2Exception") followed by the
+  /// error message.
+  ///
+  /// Returns a [String] in the format "PBKDF2Exception: [error message]".
   @override
   String toString() => "PBKDF2Exception: $message";
 }
 
+/// A helper class for XOR operations on digests during PBKDF2 key generation.
 class _XORDigestSink implements Sink<Digest> {
+  /// Creates a new _XORDigestSink with the given input buffer and HMAC.
   _XORDigestSink(ByteData inputBuffer, Hmac hmac) {
     lastDigest = hmac.convert(inputBuffer.buffer.asUint8List()).bytes;
     bytes = ByteData(lastDigest.length)
       ..buffer.asUint8List().setRange(0, lastDigest.length, lastDigest);
   }
 
+  /// Generates a hash by repeatedly applying HMAC and XOR operations.
+  ///
+  /// [inputBuffer] is the initial input data.
+  /// [hmac] is the HMAC instance to use for hashing.
+  /// [rounds] is the number of iterations to perform.
+  ///
+  /// Returns a [Uint8List] representing the generated hash.
   static Uint8List generate(ByteData inputBuffer, Hmac hmac, int rounds) {
     final hashSink = _XORDigestSink(inputBuffer, hmac);
 
@@ -124,9 +171,15 @@ class _XORDigestSink implements Sink<Digest> {
     return hashSink.bytes.buffer.asUint8List();
   }
 
+  /// Stores the intermediate XOR results.
   late ByteData bytes;
+
+  /// Stores the last computed digest.
   late List<int> lastDigest;
 
+  /// Adds a new digest to the sink by performing an XOR operation.
+  ///
+  /// [digest] is the digest to add to the sink.
   @override
   void add(Digest digest) {
     lastDigest = digest.bytes;
@@ -135,6 +188,10 @@ class _XORDigestSink implements Sink<Digest> {
     }
   }
 
+  /// Closes the sink and performs any necessary cleanup.
+  ///
+  /// This method is required by the [Sink] interface but does not perform
+  /// any additional actions in this implementation.
   @override
   void close() {}
 }
