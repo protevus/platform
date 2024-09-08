@@ -1,5 +1,13 @@
-import 'dart:async';
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
+import 'dart:async';
 import 'package:protevus_openapi/documentable.dart';
 import 'package:protevus_database/src/managed/data_model_manager.dart' as mm;
 import 'package:protevus_database/src/managed/managed.dart';
@@ -36,7 +44,7 @@ import 'package:protevus_database/src/query/query.dart';
 ///            }
 ///         }
 class ManagedContext implements APIComponentDocumenter {
-  /// Creates an instance of [ManagedContext] from a [ManagedDataModel] and [PersistentStore].
+  /// Creates a new instance of [ManagedContext] with the provided [dataModel] and [persistentStore].
   ///
   /// This is the default constructor.
   ///
@@ -47,15 +55,36 @@ class ManagedContext implements APIComponentDocumenter {
     _finalizer.attach(this, persistentStore, detach: this);
   }
 
-  /// Creates a child context from [parentContext].
+  /// Creates a child [ManagedContext] from the provided [parentContext].
+  ///
+  /// The created child context will share the same [persistentStore] and [dataModel]
+  /// as the [parentContext]. This allows you to perform database operations within
+  /// a transaction by creating a child context and executing queries on it.
+  ///
+  /// Example usage:
+  ///
+  ///     await context.transaction((transaction) async {
+  ///       final childContext = ManagedContext.childOf(transaction);
+  ///       final query = Query<MyModel>(childContext)..values.name = 'John';
+  ///       await query.insert();
+  ///     });
   ManagedContext.childOf(ManagedContext parentContext)
       : persistentStore = parentContext.persistentStore,
         dataModel = parentContext.dataModel;
 
+  /// A [Finalizer] that is used to automatically close the [PersistentStore] when the [ManagedContext] is destroyed.
+  ///
+  /// This [Finalizer] is attached to the [ManagedContext] instance in the constructor, and will call the `close()` method
+  /// of the [PersistentStore] when the [ManagedContext] is garbage collected or explicitly closed. This ensures that the
+  /// resources associated with the [PersistentStore] are properly cleaned up when the [ManagedContext] is no longer needed.
   static final Finalizer<PersistentStore> _finalizer =
       Finalizer((store) async => store.close());
 
   /// The persistent store that [Query]s on this context are executed through.
+  ///
+  /// The [PersistentStore] is responsible for maintaining the connection to the database and
+  /// executing queries on behalf of the [ManagedContext]. This property holds the instance
+  /// of the persistent store that this [ManagedContext] will use to interact with the database.
   PersistentStore persistentStore;
 
   /// The data model containing the [ManagedEntity]s that describe the [ManagedObject]s this instance works with.
@@ -78,9 +107,8 @@ class ManagedContext implements APIComponentDocumenter {
   /// [transactionBlock], roll back any changes made in the transaction, but this method will not
   /// throw.
   ///
-  /// TODO: the following statement is not true.
   /// Rollback takes a string but the transaction
-  /// returns <T>.  It would seem to be a better idea to still throw the manual Rollback
+  /// returns `Future<void>`. It would seem to be a better idea to still throw the manual Rollback
   /// so the user has a consistent method of handling the rollback. We could add a property
   /// to the Rollback class 'manual' which would be used to indicate a manual rollback.
   /// For the moment I've changed the return type to Future<void> as
@@ -104,7 +132,7 @@ class ManagedContext implements APIComponentDocumenter {
     );
   }
 
-  /// Closes this context and release its underlying resources.
+  /// Closes this [ManagedContext] and releases its underlying resources.
   ///
   /// This method closes the connection to [persistentStore] and releases [dataModel].
   /// A context may not be reused once it has been closed.
@@ -114,7 +142,7 @@ class ManagedContext implements APIComponentDocumenter {
     mm.remove(dataModel!);
   }
 
-  /// Returns an entity for a type from [dataModel].
+  /// Returns the [ManagedEntity] for the given [type] from the [dataModel].
   ///
   /// See [ManagedDataModel.entityForType].
   ManagedEntity entityForType(Type type) {
@@ -123,7 +151,20 @@ class ManagedContext implements APIComponentDocumenter {
 
   /// Inserts a single [object] into this context.
   ///
-  /// This method is equivalent shorthand for [Query.insert].
+  /// This method is a shorthand for creating a [Query] with the provided [object] and
+  /// calling [Query.insert] to insert the object into the database.
+  ///
+  /// This method is useful when you need to insert a single object into the database.
+  /// If you need to insert multiple objects, consider using the [insertObjects] method
+  /// instead.
+  ///
+  /// Example usage:
+  ///
+  ///     final user = User()..name = 'John Doe';
+  ///     await context.insertObject(user);
+  ///
+  /// @param object The [ManagedObject] instance to be inserted.
+  /// @return A [Future] that completes with the inserted [object] when the insert operation is complete.
   Future<T> insertObject<T extends ManagedObject>(T object) {
     final query = Query<T>(this)..values = object;
     return query.insert();
@@ -131,8 +172,21 @@ class ManagedContext implements APIComponentDocumenter {
 
   /// Inserts each object in [objects] into this context.
   ///
-  /// If any insertion fails, no objects will be inserted into the database and an exception
-  /// is thrown.
+  /// This method takes a list of [ManagedObject] instances and inserts them into the
+  /// database in a single operation. If any of the insertions fail, no objects will
+  /// be inserted and an exception will be thrown.
+  ///
+  /// Example usage:
+  ///
+  ///     final users = [
+  ///       User()..name = 'John Doe',
+  ///       User()..name = 'Jane Doe',
+  ///     ];
+  ///     await context.insertObjects(users);
+  ///
+  /// @param objects A list of [ManagedObject] instances to be inserted.
+  /// @return A [Future] that completes with a list of the inserted objects when the
+  ///         insert operation is complete.
   Future<List<T>> insertObjects<T extends ManagedObject>(
     List<T> objects,
   ) async {
@@ -141,8 +195,23 @@ class ManagedContext implements APIComponentDocumenter {
 
   /// Returns an object of type [T] from this context if it exists, otherwise returns null.
   ///
-  /// If [T] cannot be inferred, an error is thrown. If [identifier] is not the same type as [T]'s primary key,
-  /// null is returned.
+  /// This method retrieves a single [ManagedObject] of type [T] from the database based on the provided [identifier].
+  /// If the object of type [T] is found in the database, it is returned. If the object is not found, `null` is returned.
+  ///
+  /// If the type [T] cannot be inferred, an `ArgumentError` is thrown. Similarly, if the provided [identifier] is not
+  /// of the same type as the primary key of the [ManagedEntity] for type [T], `null` is returned.
+  ///
+  /// Example usage:
+  ///
+  ///     final user = await context.fetchObjectWithID<User>(1);
+  ///     if (user != null) {
+  ///       print('Found user: ${user.name}');
+  ///     } else {
+  ///       print('User not found');
+  ///     }
+  ///
+  /// @param identifier The value of the primary key for the object of type [T] to fetch.
+  /// @return A [Future] that completes with the fetched object of type [T] if it exists, or `null` if it does not.
   Future<T?> fetchObjectWithID<T extends ManagedObject>(
     dynamic identifier,
   ) async {
@@ -162,12 +231,22 @@ class ManagedContext implements APIComponentDocumenter {
     return query.fetchOne();
   }
 
+  /// Documents the components of the [ManagedContext] by delegating to the
+  /// [dataModel]'s [documentComponents] method.
+  ///
+  /// This method is part of the [APIComponentDocumenter] interface, which is
+  /// implemented by [ManagedContext]. It is responsible for generating
+  /// documentation for the components (such as [ManagedEntity] and
+  /// [ManagedAttribute]) that are part of the data model managed by this
+  /// [ManagedContext].
+  ///
+  /// The documentation is generated and added to the provided [APIDocumentContext].
   @override
   void documentComponents(APIDocumentContext context) =>
       dataModel!.documentComponents(context);
 }
 
-/// Throw this object to roll back a [ManagedContext.transaction].
+/// An exception that can be thrown to rollback a transaction in [ManagedContext.transaction].
 ///
 /// When thrown in a transaction, it will cancel an in-progress transaction and rollback
 /// any changes it has made.

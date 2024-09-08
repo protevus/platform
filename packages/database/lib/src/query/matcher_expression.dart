@@ -1,7 +1,22 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'package:protevus_database/src/managed/managed.dart';
 import 'package:protevus_database/src/query/query.dart';
 
 /// Contains binary logic operations to be applied to a [QueryExpression].
+///
+/// This class represents a junction of two [QueryExpression] instances, allowing for the creation of more complex
+/// expressions through the use of logical operators like `and`, `or`, and `not`.
+///
+/// You do not create instances of this type directly, but instead it is returned when you invoke methods like
+/// [QueryExpression.and], [QueryExpression.or], and [QueryExpression.not] on a [QueryExpression].
 class QueryExpressionJunction<T, InstanceType> {
   QueryExpressionJunction._(this.lhs);
 
@@ -18,19 +33,47 @@ class QueryExpressionJunction<T, InstanceType> {
 ///           ..where((e) => e.name).equalTo("Bob");
 ///
 class QueryExpression<T, InstanceType> {
+  /// Creates a new instance of [QueryExpression] with the specified [keyPath].
+  ///
+  /// The [keyPath] represents the property path for the expression being created.
   QueryExpression(this.keyPath);
 
+  /// Creates a new [QueryExpression] by adding a key to the [keyPath] of the provided [original] expression.
+  ///
+  /// This method is used to create a new [QueryExpression] by appending a new [ManagedPropertyDescription] to the
+  /// [keyPath] of an existing [QueryExpression]. The resulting [QueryExpression] will have the same [_expression] as
+  /// the [original] expression, but with an updated [keyPath] that includes the additional key.
+  ///
+  /// This method is typically used when navigating through nested properties in a data model, allowing you to
+  /// build up complex query expressions by adding new keys to the path.
+  ///
+  /// @param original The original [QueryExpression] to use as the base.
+  /// @param byAdding The [ManagedPropertyDescription] to add to the [keyPath] of the original expression.
+  ///
+  /// @return A new [QueryExpression] with the updated [keyPath].
   QueryExpression.byAddingKey(
     QueryExpression<T, InstanceType> original,
     ManagedPropertyDescription byAdding,
   )   : keyPath = KeyPath.byAddingKey(original.keyPath, byAdding),
         _expression = original.expression;
 
+  /// The key path associated with this query expression.
+  ///
+  /// The key path represents the property path for the expression being created.
   final KeyPath keyPath;
 
-  // todo: This needs to be extended to an expr tree
+  /// Gets or sets the predicate expression associated with this query expression.
+  ///
+  /// The predicate expression represents the logical conditions that will be applied to the query.
+  /// When setting the expression, you can also invert the expression by using the [not] method.
   PredicateExpression? get expression => _expression;
 
+  /// Sets the predicate expression associated with this query expression.
+  ///
+  /// When setting the expression, you can also invert the expression by using the [not] method.
+  /// If the [_invertNext] flag is set to `true`, the expression will be inverted before being
+  /// assigned to the [_expression] field. After the expression is set, the [_invertNext] flag
+  /// is reset to `false`.
   set expression(PredicateExpression? expr) {
     if (_invertNext) {
       _expression = expr!.inverse;
@@ -40,16 +83,34 @@ class QueryExpression<T, InstanceType> {
     }
   }
 
+  /// A flag that indicates whether the next expression should be inverted.
+  ///
+  /// When this flag is set to `true`, the next expression that is set using the `expression` property
+  /// will be inverted before being assigned. After the expression is set, the flag is reset to `false`.
   bool _invertNext = false;
+
+  /// The predicate expression associated with this query expression.
+  ///
+  /// The predicate expression represents the logical conditions that will be applied to the query.
+  /// When setting the expression, you can also invert the expression by using the [not] method.
   PredicateExpression? _expression;
 
+  /// Creates a new [QueryExpressionJunction] instance with the current [QueryExpression] as the left-hand side.
+  ///
+  /// This method is used internally to create a new [QueryExpressionJunction] instance that represents the logical junction
+  /// between the current [QueryExpression] and another [QueryExpression].
+  ///
+  /// The resulting [QueryExpressionJunction] instance can be used to further build up complex query expressions using
+  /// methods like [and], [or], and [not].
+  ///
+  /// @return A new [QueryExpressionJunction] instance with the current [QueryExpression] as the left-hand side.
   QueryExpressionJunction<T, InstanceType> _createJunction() =>
       QueryExpressionJunction<T, InstanceType>._(this);
 
   /// Inverts the next expression.
   ///
   /// You use this method to apply an inversion to the expression that follows. For example,
-  /// the following example would only return objects where the 'id' is  *not* equal to '5'.
+  /// the following example would only return objects where the 'id' is *not* equal to '5':
   ///
   ///         final query = new Query<Employee>()
   ///           ..where((e) => e.name).not.equalTo("Bob");
@@ -122,7 +183,7 @@ class QueryExpression<T, InstanceType> {
     return _createJunction();
   }
 
-  /// Adds a like expression to a query.
+  /// Adds a 'like' expression to a query.
   ///
   /// A query will only return objects where the selected property is like [value].
   ///

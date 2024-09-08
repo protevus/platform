@@ -1,3 +1,12 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'package:protevus_database/src/query/query.dart';
 
 /// A description of a page of results to be applied to a [Query].
@@ -16,7 +25,7 @@ import 'package:protevus_database/src/query/query.dart';
 class QueryPage {
   QueryPage(this.order, this.propertyName, {this.boundingValue});
 
-  /// The order in which rows should be in before the page of values is searched for.
+  /// The order in which rows should be sorted before the page of values is searched for.
   ///
   /// The rows of a database table will be sorted according to this order on the column backing [propertyName] prior
   /// to this page being fetched.
@@ -24,7 +33,7 @@ class QueryPage {
 
   /// The property of the model object to page on.
   ///
-  /// This property must have an inherent order, such as an [int] or [DateTime]. The database must be able to compare the values of this property using comparison operator '<' and '>'.
+  /// This property must have an inherent order, such as an [int] or [DateTime]. The database must be able to compare the values of this property using comparison operators like '<' and '>'.
   String propertyName;
 
   /// The point within an ordered set of result values in which rows will begin being fetched from.

@@ -1,13 +1,33 @@
-import 'dart:async';
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
+import 'dart:async';
 import 'package:protevus_database/src/persistent_store/persistent_store.dart';
 import 'package:protevus_database/src/schema/schema.dart';
 
-/// Thrown when [Migration] encounters an error.
+/// Thrown when a [Migration] encounters an error.
+///
+/// This exception is used to indicate that an error occurred during the execution of a database migration.
+/// The exception includes a [message] property that provides more information about the error that occurred.
 class MigrationException implements Exception {
+  /// Creates a new [MigrationException] with the given [message].
+  ///
+  /// The [message] parameter is a string that describes the error that occurred.
   MigrationException(this.message);
+
+  /// A message describing the error that occurred.
   String message;
 
+  /// Returns a string representation of the [MigrationException] object.
+  ///
+  /// The string representation includes the [message] property, which provides
+  /// a description of the error that occurred during the migration.
   @override
   String toString() => message;
 }
@@ -54,6 +74,23 @@ abstract class Migration {
   /// to a database after this migration version is executed.
   Future seed();
 
+  /// Generates the source code for a database schema upgrade migration.
+  ///
+  /// This method compares an existing [Schema] with a new [Schema] and generates
+  /// the source code for a migration class that can be used to upgrade a database
+  /// from the existing schema to the new schema.
+  ///
+  /// The generated migration class will have an `upgrade()` method that contains
+  /// the necessary schema changes, and empty `downgrade()` and `seed()` methods.
+  ///
+  /// Parameters:
+  /// - `existingSchema`: The current schema of the database.
+  /// - `newSchema`: The new schema that the database should be upgraded to.
+  /// - `version`: The version number of the migration. This is used to name the migration class.
+  /// - `changeList`: An optional list of strings that describe the changes being made in this migration.
+  ///
+  /// Returns:
+  /// The source code for the migration class as a string.
   static String sourceForSchemaUpgrade(
     Schema existingSchema,
     Schema newSchema,

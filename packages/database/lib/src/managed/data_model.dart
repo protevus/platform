@@ -1,3 +1,12 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:protevus_openapi/documentable.dart';
 import 'package:protevus_database/src/managed/managed.dart';
@@ -12,7 +21,6 @@ import 'package:protevus_runtime/runtime.dart';
 /// all subclasses of [ManagedObject], building a [ManagedEntity] for each.
 ///
 /// Most applications do not need to access instances of this type.
-///
 class ManagedDataModel extends Object implements APIComponentDocumenter {
   /// Creates an instance of [ManagedDataModel] from a list of types that extend [ManagedObject]. It is preferable
   /// to use [ManagedDataModel.fromCurrentMirrorSystem] over this method.
@@ -69,8 +77,23 @@ class ManagedDataModel extends Object implements APIComponentDocumenter {
     }
   }
 
+  /// Returns an [Iterable] of all [ManagedEntity] instances registered in this [ManagedDataModel].
+  ///
+  /// This property provides access to the collection of all [ManagedEntity] instances that
+  /// were discovered and registered during the construction of this [ManagedDataModel].
   Iterable<ManagedEntity> get entities => _entities.values;
+
+  /// Returns a [ManagedEntity] for a [Type].
+  ///
+  /// [type] may be either a sub
+  /// [type] may be either a subclass of [ManagedObject] or a [ManagedObject]'s table definition. For example, the following
+  /// definition
   final Map<Type, ManagedEntity> _entities = {};
+
+  /// A map that associates table definitions to their corresponding [ManagedEntity] instances.
+  ///
+  /// This map is used to retrieve a [ManagedEntity] instance given a table definition type,
+  /// which can be useful when the type of the managed object is not known.
   final Map<String, ManagedEntity> _tableDefinitionToEntityMap = {};
 
   /// Returns a [ManagedEntity] for a [Type].
@@ -97,9 +120,24 @@ class ManagedDataModel extends Object implements APIComponentDocumenter {
     return entity;
   }
 
+  /// Attempts to retrieve a [ManagedEntity] for the given [Type].
+  ///
+  /// This method first checks the [_entities] map for a direct match on the [Type]. If no match is found,
+  /// it then checks the [_tableDefinitionToEntityMap] for a match on the string representation of the [Type].
+  ///
+  /// If a [ManagedEntity] is found, it is returned. Otherwise, `null` is returned.
   ManagedEntity? tryEntityForType(Type type) =>
       _entities[type] ?? _tableDefinitionToEntityMap[type.toString()];
 
+  /// Documents the components of the managed data model.
+  ///
+  /// This method iterates over all the [ManagedEntity] instances registered in this
+  /// [ManagedDataModel] and calls the `documentComponents` method on each one, passing
+  /// the provided [APIDocumentContext] instance.
+  ///
+  /// This allows each [ManagedEntity] to describe its own components, such as the
+  /// database table definition and the properties of the corresponding [ManagedObject]
+  /// subclass, in the context of the API documentation.
   @override
   void documentComponents(APIDocumentContext context) {
     for (final e in entities) {
@@ -108,7 +146,11 @@ class ManagedDataModel extends Object implements APIComponentDocumenter {
   }
 }
 
-/// Thrown when a [ManagedDataModel] encounters an error.
+/// An error that is thrown when a [ManagedDataModel] encounters an issue.
+///
+/// This error is used to indicate that there was a problem during the
+/// construction or usage of a [ManagedDataModel] instance. The error
+/// message provides information about the specific issue that occurred.
 class ManagedDataModelError extends Error {
   ManagedDataModelError(this.message);
 

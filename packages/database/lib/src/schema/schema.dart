@@ -1,5 +1,13 @@
-import 'package:collection/collection.dart' show IterableExtension;
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:protevus_database/src/managed/managed.dart';
 import 'package:protevus_database/src/schema/schema_table.dart';
 
@@ -55,6 +63,7 @@ class Schema {
   // Do not set this directly. Use _tables= instead.
   late List<SchemaTable> _tableStorage;
 
+  /// Sets the tables for this schema and updates each table's schema reference.
   set _tables(List<SchemaTable> tables) {
     _tableStorage = tables;
     for (final t in _tableStorage) {
@@ -89,6 +98,9 @@ class Schema {
     table.schema = this;
   }
 
+  /// Replaces an existing table with a new one.
+  ///
+  /// Throws a [SchemaException] if the existing table is not found.
   void replaceTable(SchemaTable existingTable, SchemaTable newTable) {
     if (!_tableStorage.contains(existingTable)) {
       throw SchemaException(
@@ -102,19 +114,11 @@ class Schema {
     existingTable.schema = null;
   }
 
+  /// Renames a table in the schema.
+  ///
+  /// This method is not yet implemented and will throw a [SchemaException].
   void renameTable(SchemaTable table, String newName) {
     throw SchemaException("Renaming a table not yet implemented!");
-//
-//    if (tableForName(newName) != null) {
-//      throw new SchemaException("Table ${newName} already exist.");
-//    }
-//
-//    if (!tables.contains(table)) {
-//      throw new SchemaException("Table ${table.name} does not exist in schema.");
-//    }
-//
-//    // Rename indices and constraints
-//    table.name = newName;
   }
 
   /// Removes a table from this instance.
@@ -154,7 +158,6 @@ class Schema {
 /// This class is used for comparing schemas for validation and migration.
 class SchemaDifference {
   /// Creates a new instance that represents the difference between [expectedSchema] and [actualSchema].
-  ///
   SchemaDifference(this.expectedSchema, this.actualSchema) {
     for (final expectedTable in expectedSchema.tables) {
       final actualTable = actualSchema[expectedTable.name!];
@@ -197,6 +200,7 @@ class SchemaDifference {
   /// The differences, if any, between tables in [expectedSchema] and [actualSchema].
   List<SchemaTableDifference> get tableDifferences => _differingTables;
 
+  /// Returns a list of tables that need to be added to the actual schema.
   List<SchemaTable?> get tablesToAdd {
     return _differingTables
         .where((diff) => diff.expectedTable == null && diff.actualTable != null)
@@ -204,6 +208,7 @@ class SchemaDifference {
         .toList();
   }
 
+  /// Returns a list of tables that need to be deleted from the actual schema.
   List<SchemaTable?> get tablesToDelete {
     return _differingTables
         .where((diff) => diff.expectedTable != null && diff.actualTable == null)
@@ -211,21 +216,28 @@ class SchemaDifference {
         .toList();
   }
 
+  /// Returns a list of tables that need to be modified in the actual schema.
   List<SchemaTableDifference> get tablesToModify {
     return _differingTables
         .where((diff) => diff.expectedTable != null && diff.actualTable != null)
         .toList();
   }
 
+  /// Internal storage for differing tables.
   final List<SchemaTableDifference> _differingTables = [];
 }
 
 /// Thrown when a [Schema] encounters an error.
 class SchemaException implements Exception {
+  /// Creates a new [SchemaException] with the given [message].
   SchemaException(this.message);
 
+  /// The error message describing the schema exception.
   String message;
 
+  /// Returns a string representation of this exception.
+  ///
+  /// The returned string includes the phrase "Invalid schema." followed by the [message].
   @override
   String toString() => "Invalid schema. $message";
 }

@@ -1,9 +1,21 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'package:protevus_openapi/documentable.dart';
 import 'package:protevus_database/db.dart';
 import 'package:protevus_database/src/managed/validation/impl.dart';
 import 'package:protevus_openapi/v3.dart';
 
 /// Types of operations [ManagedValidator]s will be triggered for.
+///
+/// - [update]: The validation is triggered during an update operation.
+/// - [insert]: The validation is triggered during an insert operation.
 enum Validating { update, insert }
 
 /// Information about a validation being performed.
@@ -52,6 +64,7 @@ class ValidationContext {
 class ValidateCompilationError extends Error {
   ValidateCompilationError(this.reason);
 
+  /// The reason for the [ValidateCompilationError].
   final String reason;
 }
 
@@ -79,7 +92,9 @@ class ValidateCompilationError extends Error {
 class Validate {
   /// Invoke this constructor when creating custom subclasses.
   ///
-  /// This constructor is used so that subclasses can pass [onUpdate] and [onInsert].
+  /// This constructor is used so that subclasses can pass [onUpdate] and [onInsert] values to control when
+  /// the validation is performed. For example:
+  ///
   /// Example:
   ///         class CustomValidate extends Validate<String> {
   ///           CustomValidate({bool onUpdate: true, bool onInsert: true})
@@ -104,6 +119,20 @@ class Validate {
         _equalTo = null,
         type = null;
 
+  /// A private constructor used to create instances of the [Validate] class.
+  ///
+  /// This constructor is used by the various named constructors of the [Validate] class to set the instance
+  /// variables with the provided values.
+  ///
+  /// - [onUpdate]: Whether the validation should be performed during update operations.
+  /// - [onInsert]: Whether the validation should be performed during insert operations.
+  /// - [validator]: The type of validation to perform.
+  /// - [value]: A value used by the validation.
+  /// - [greaterThan]: A value to compare the input value against using the "greater than" operator.
+  /// - [greaterThanEqualTo]: A value to compare the input value against using the "greater than or equal to" operator.
+  /// - [equalTo]: A value to compare the input value against using the "equal to" operator.
+  /// - [lessThan]: A value to compare the input value against using the "less than" operator.
+  /// - [lessThanEqualTo]: A value to compare the input value against using the "less than or equal to" operator.
   const Validate._({
     bool onUpdate = true,
     bool onInsert = true,
@@ -292,21 +321,67 @@ class Validate {
 
   /// A validator that ensures a value cannot be modified after insertion.
   ///
-  /// This is equivalent to `Validate.absent(onUpdate: true, onInsert: false).
+  /// This is equivalent to `Validate.absent(onUpdate: true, onInsert: false)`.
+  ///
+  /// This validator is used to ensure that a property, once set during the initial
+  /// insertion of a record, cannot be updated. For example, you might use this
+  /// validator on a `dateCreated` property to ensure that the creation date
+  /// cannot be changed after the record is inserted.
   const Validate.constant() : this.absent(onUpdate: true, onInsert: false);
 
   /// Whether or not this validation is checked on update queries.
+  ///
+  /// This property determines whether the validation will be performed during update operations on the database.
+  /// If `true`, the validation will be executed during update queries. If `false`, the validation will be skipped
+  /// during update queries.
   final bool runOnUpdate;
 
   /// Whether or not this validation is checked on insert queries.
+  ///
+  /// This property determines whether the validation will be performed during insert operations on the database.
+  /// If `true`, the validation will be executed during insert queries. If `false`, the validation will be skipped
+  /// during insert queries.
   final bool runOnInsert;
 
+  /// The value associated with the validator.
+  ///
+  /// The meaning of this value depends on the type of validator. For example, for a
+  /// [Validate.matches] validator, this value would be the regular expression pattern to
+  /// match against. For a [Validate.oneOf] validator, this value would be the list of
+  /// allowed values.
   final dynamic _value;
+
+  /// The greater than value for the comparison validation.
   final Comparable? _greaterThan;
+
+  /// The greater than or equal to value for the comparison validation.
   final Comparable? _greaterThanEqualTo;
+
+  /// The value to compare the input value against using the "equal to" operator.
+  ///
+  /// This value is used in the [_comparisonCompiler] method to create a [ValidationExpression]
+  /// with the [ValidationOperator.equalTo] operator.
   final Comparable? _equalTo;
+
+  /// The "less than" value for the comparison validation.
   final Comparable? _lessThan;
+
+  /// The "less than or equal to" value for the comparison validation.
+  ///
+  /// This value is used in the [_comparisonCompiler] method to create a [ValidationExpression]
+  /// with the [ValidationOperator.lessThanEqualTo] operator.
   final Comparable? _lessThanEqualTo;
+
+  /// The type of validation to be performed.
+  ///
+  /// This can be one of the following values:
+  ///
+  /// - `ValidateType.absent`: The property must not be present in the update or insert query.
+  /// - `ValidateType.present`: The property must be present in the update or insert query.
+  /// - `ValidateType.oneOf`: The property value must be one of the values in the provided list.
+  /// - `ValidateType.comparison`: The property value must meet the comparison conditions specified.
+  /// - `ValidateType.regex`: The property value must match the provided regular expression.
+  /// - `ValidateType.length`: The length of the property value must meet the specified length conditions.
   final ValidateType? type;
 
   /// Subclasses override this method to perform any one-time initialization tasks and check for correctness.
@@ -422,10 +497,95 @@ class Validate {
   ///
   /// Used during documentation process. When creating custom validator subclasses, override this method
   /// to modify [object] for any constraints the validator imposes.
+  /// This method is used during the documentation process. When creating custom validator subclasses,
+  /// override this method to modify the [object] parameter for any constraints the validator imposes.
+  ///
+  /// The constraints added to the [APISchemaObject] depend on the type of validator:
+  ///
+  /// - For `ValidateType.regex` validators, the `pattern` property of the [APISchemaObject] is set to the
+  ///   regular expression pattern specified in the validator.
+  /// - For `ValidateType.comparison` validators, the `minimum`, `maximum`, `exclusiveMinimum`, and
+  ///   `exclusiveMaximum` properties of the [APISchemaObject] are set based on the comparison values
+  ///   specified in the validator.
+  /// - For `ValidateType.length` validators, the `minLength`, `maxLength`, and `maximum` properties
+  ///   of the [APISchemaObject] are set based on the length-related values specified in the validator.
+  /// - For `ValidateType.present` and `ValidateType.absent` validators, no constraints are added to the
+  ///   [APISchemaObject].
+  /// - For `ValidateType.oneOf` validators, the `enumerated` property of the [APISchemaObject] is set
+  ///   to the list of allowed values specified in the validator.
+  ///
+  /// @param context The [APIDocumentContext] being used to document the API.
+  /// @param object The [APISchemaObject] to which constraints should be added.
   void constrainSchemaObject(
+    /// Adds constraints to an [APISchemaObject] imposed by this validator.
+    ///
+    /// This method is used during the documentation process. When creating custom validator subclasses,
+    /// override this method to modify the [object] parameter for any constraints the validator imposes.
+    ///
+    /// The constraints added to the [APISchemaObject] depend on the type of validator:
+    ///
+    /// - For `ValidateType.regex` validators, the `pattern` property of the [APISchemaObject] is set to the
+    ///   regular expression pattern specified in the validator.
+    /// - For `ValidateType.comparison` validators, the `minimum`, `maximum`, `exclusiveMinimum`, and
+    ///   `exclusiveMaximum` properties of the [APISchemaObject] are set based on the comparison values
+    ///   specified in the validator.
+    /// - For `ValidateType.length` validators, the `minLength`, `maxLength`, and `maximum` properties
+    ///   of the [APISchemaObject] are set based on the length-related values specified in the validator.
+    /// - For `ValidateType.present` and `ValidateType.absent` validators, no constraints are added to the
+    ///   [APISchemaObject].
+    /// - For `ValidateType.oneOf` validators, the `enumerated` property of the [APISchemaObject] is set
+    ///   to the list of allowed values specified in the validator.
+    ///
+    /// @param context The [APIDocumentContext] being used to document the API.
+    /// @param object The [APISchemaObject] to which constraints should be added.
     APIDocumentContext context,
+
+    /// Adds constraints to an [APISchemaObject] imposed by this validator.
+    ///
+    /// This method is used during the documentation process. When creating custom validator subclasses,
+    /// override this method to modify the [object] parameter for any constraints the validator imposes.
+    ///
+    /// The constraints added to the [APISchemaObject] depend on the type of validator:
+    ///
+    /// - For `ValidateType.regex` validators, the `pattern` property of the [APISchemaObject] is set to the
+    ///   regular expression pattern specified in the validator.
+    /// - For `ValidateType.comparison` validators, the `minimum`, `maximum`, `exclusiveMinimum`, and
+    ///   `exclusiveMaximum` properties of the [APISchemaObject] are set based on the comparison values
+    ///   specified in the validator.
+    /// - For `ValidateType.length` validators, the `minLength`, `maxLength`, and `maximum` properties
+    ///   of the [APISchemaObject] are set based on the length-related values specified in the validator.
+    /// - For `ValidateType.present` and `ValidateType.absent` validators, no constraints are added to the
+    ///   [APISchemaObject].
+    /// - For `ValidateType.oneOf` validators, the `enumerated` property of the [APISchemaObject] is set
+    ///   to the list of allowed values specified in the validator.
+    ///
+    /// @param context The [APIDocumentContext] being used to document the API.
+    /// @param object The [APISchemaObject] to which constraints should be added.
     APISchemaObject object,
   ) {
+    /// Adds constraints to an [APISchemaObject] imposed by this validator.
+    ///
+    /// This method is used during the documentation process. When creating custom validator subclasses,
+    /// override this method to modify the [object] parameter for any constraints the validator imposes.
+    ///
+    /// The constraints added to the [APISchemaObject] depend on the type of validator:
+    ///
+    /// - For `ValidateType.regex` validators, the `pattern` property of the [APISchemaObject] is set to the
+    ///   regular expression pattern specified in the validator.
+    /// - For `ValidateType.comparison` validators, the `minimum`, `maximum`, `exclusiveMinimum`, and
+    ///   `exclusiveMaximum` properties of the [APISchemaObject] are set based on the comparison values
+    ///   specified in the validator.
+    /// - For `ValidateType.length` validators, the `minLength`, `maxLength`, and `maximum` properties
+    ///   of the [APISchemaObject] are set based on the length-related values specified in the validator.
+    /// - For `ValidateType.present` and `ValidateType.absent` validators, no constraints are added to the
+    ///   [APISchemaObject].
+    /// - For `ValidateType.oneOf` validators, the `enumerated` property of the [APISchemaObject] is set
+    ///   to the list of allowed values specified in the validator.
+    ///
+    /// @param context The [APIDocumentContext] being used to document the API.
+    /// @param object The [APISchemaObject] to which constraints should be added.
+    ///
+    /// The implementation of this method is as follows:
     switch (type!) {
       case ValidateType.regex:
         {
@@ -485,6 +645,25 @@ class Validate {
     }
   }
 
+  /// Compiles the [Validate.oneOf] validator.
+  ///
+  /// The [Validate.oneOf] validator ensures that the value of a property is one of a set of allowed values.
+  ///
+  /// This method checks the following:
+  ///
+  /// - The `_value` property must be a `List`.
+  /// - The type of the property being validated must be either `String`, `int`, or `bigint`.
+  /// - The list of allowed values must all be assignable to the type of the property being validated.
+  /// - The list of allowed values must not be empty.
+  ///
+  /// If any of these conditions are not met, a [ValidateCompilationError] is thrown with a descriptive error message.
+  ///
+  /// The compiled result is the list of allowed values, which will be stored in the [ValidationContext.state] property
+  /// during validation.
+  ///
+  /// @param typeBeingValidated The [ManagedType] of the property being validated.
+  /// @param relationshipInverseType If the property is a relationship, the type of the inverse property.
+  /// @return The list of allowed values for the [Validate.oneOf] validator.
   dynamic _oneOfCompiler(
     ManagedType typeBeingValidated, {
     Type? relationshipInverseType,
@@ -523,6 +702,15 @@ class Validate {
     return options;
   }
 
+  /// A list of [ValidationExpression] objects representing the various comparison
+  /// conditions specified for this validator.
+  ///
+  /// The [ValidationExpression] objects are created based on the values of the
+  /// `_equalTo`, `_lessThan`, `_lessThanEqualTo`, `_greaterThan`, and
+  /// `_greaterThanEqualTo` instance variables.
+  ///
+  /// This method is used by the `_comparisonCompiler` method to compile the
+  /// comparison validator.
   List<ValidationExpression> get _expressions {
     final comparisons = <ValidationExpression>[];
     if (_equalTo != null) {
@@ -558,6 +746,23 @@ class Validate {
     return comparisons;
   }
 
+  /// Compiles the comparison validator.
+  ///
+  /// This method is responsible for creating a list of [ValidationExpression] objects
+  /// that represent the various comparison conditions specified for this validator.
+  ///
+  /// The method performs the following tasks:
+  ///
+  /// 1. Retrieves the list of comparison expressions from the `_expressions` getter.
+  /// 2. For each expression, it calls the `_parseComparisonValue` method to parse and validate
+  ///    the comparison value based on the type of the property being validated.
+  ///
+  /// The compiled result is the list of [ValidationExpression] objects, which will be stored
+  /// in the [ValidationContext.state] property during validation.
+  ///
+  /// @param typeBeingValidated The [ManagedType] of the property being validated.
+  /// @param relationshipInverseType If the property is a relationship, the type of the inverse property.
+  /// @return The list of [ValidationExpression] objects representing the comparison conditions.
   dynamic _comparisonCompiler(
     ManagedType? typeBeingValidated, {
     Type? relationshipInverseType,
@@ -573,6 +778,28 @@ class Validate {
     return exprs;
   }
 
+  /// Parses the comparison value for the [Validate.compare] validator.
+  ///
+  /// This method is responsible for validating the type of the comparison value
+  /// and converting it to the appropriate type if necessary.
+  ///
+  /// If the property being validated is of type [DateTime], the method attempts to
+  /// parse the [referenceValue] as a [DateTime] using [DateTime.parse]. If the
+  /// parsing fails, a [ValidateCompilationError] is thrown.
+  ///
+  /// If the property being validated is not of type [DateTime], the method checks
+  /// if the [referenceValue] is assignable to the type of the property being
+  /// validated. If the types are not compatible, a [ValidateCompilationError] is
+  /// thrown.
+  ///
+  /// If the [relationshipInverseType] is not null, the method checks if the
+  /// [referenceValue] is assignable to the primary key type of the relationship
+  /// being validated.
+  ///
+  /// @param referenceValue The value to be used for the comparison.
+  /// @param typeBeingValidated The [ManagedType] of the property being validated.
+  /// @param relationshipInverseType If the property is a relationship, the type of the inverse property.
+  /// @return The parsed comparison value as a [Comparable] object.
   Comparable? _parseComparisonValue(
     dynamic referenceValue,
     ManagedType? typeBeingValidated, {
@@ -611,6 +838,27 @@ class Validate {
     return referenceValue as Comparable?;
   }
 
+  /// Compiles the regular expression validator.
+  ///
+  /// This method is responsible for compiling the regular expression pattern specified
+  /// in the `Validate.matches` validator.
+  ///
+  /// The method performs the following tasks:
+  ///
+  /// 1. Checks that the property being validated is of type `String`. If not, a `ValidateCompilationError`
+  ///    is thrown with an appropriate error message.
+  /// 2. Checks that the `_value` property, which should contain the regular expression pattern,
+  ///    is of type `String`. If not, a `ValidateCompilationError` is thrown with an appropriate
+  ///    error message.
+  /// 3. Creates a `RegExp` object using the regular expression pattern specified in the `_value`
+  ///    property, and returns it as the compiled result.
+  ///
+  /// The compiled `RegExp` object will be stored in the `ValidationContext.state` property
+  /// during validation.
+  ///
+  /// @param typeBeingValidated The [ManagedType] of the property being validated.
+  /// @param relationshipInverseType If the property is a relationship, the type of the inverse property.
+  /// @return The compiled `RegExp` object representing the regular expression pattern.
   dynamic _regexCompiler(
     ManagedType? typeBeingValidated, {
     Type? relationshipInverseType,
@@ -630,6 +878,25 @@ class Validate {
     return RegExp(_value);
   }
 
+  /// Compiles the length validator.
+  ///
+  /// This method is responsible for creating a list of [ValidationExpression] objects
+  /// that represent the various length-based conditions specified for this validator.
+  ///
+  /// The method performs the following tasks:
+  ///
+  /// 1. Checks that the property being validated is of type `String`. If not, a
+  ///    `ValidateCompilationError` is thrown with an appropriate error message.
+  /// 2. Retrieves the list of length-based expressions from the `_expressions` getter.
+  /// 3. Checks that all the values in the expressions are of type `int`. If not, a
+  ///    `ValidateCompilationError` is thrown with an appropriate error message.
+  ///
+  /// The compiled result is the list of [ValidationExpression] objects, which will be
+  /// stored in the [ValidationContext.state] property during validation.
+  ///
+  /// @param typeBeingValidated The [ManagedType] of the property being validated.
+  /// @param relationshipInverseType If the property is a relationship, the type of the inverse property.
+  /// @return The list of [ValidationExpression] objects representing the length-based conditions.
   dynamic _lengthCompiler(
     ManagedType typeBeingValidated, {
     Type? relationshipInverseType,
