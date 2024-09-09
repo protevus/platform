@@ -1,3 +1,12 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'package:protevus_openapi/documentable.dart';
 import 'package:protevus_http/http.dart';
 import 'package:protevus_openapi/v3.dart';
@@ -11,6 +20,9 @@ abstract class Serializable {
   ///
   /// The returned [APISchemaObject] will be of type [APIType.object]. By default, each instance variable
   /// of the receiver's type will be a property of the return value.
+  ///
+  /// [context] The API document context.
+  /// Returns an [APISchemaObject] representing the schema of this serializable object.
   APISchemaObject documentSchema(APIDocumentContext context) {
     return (RuntimeContext.current[runtimeType] as SerializableRuntime)
         .documentSchema(context);
@@ -24,6 +36,8 @@ abstract class Serializable {
   /// This method is used by implementors to assign and use values from [object] for its own
   /// purposes. [SerializableException]s should be thrown when [object] violates a constraint
   /// of the receiver.
+  ///
+  /// [object] The map containing the values to be read.
   void readFromMap(Map<String, dynamic> object);
 
   /// Reads values from [object], after applying filters.
@@ -31,17 +45,11 @@ abstract class Serializable {
   /// The key name must exactly match the name of the property as defined in the receiver's type.
   /// If [object] contains a key that is unknown to the receiver, an exception is thrown (status code: 400).
   ///
-  /// [accept], [ignore], [reject] and [require] are filters on [object]'s keys with the following behaviors:
-  ///
-  /// If [accept] is set, all values for the keys that are not given are ignored and discarded.
-  /// If [ignore] is set, all values for the given keys are ignored and discarded.
-  /// If [reject] is set, if [object] contains any of these keys, a status code 400 exception is thrown.
-  /// If [require] is set, all keys must be present in [object].
-  ///
-  /// Usage:
-  ///     var values = json.decode(await request.body.decode());
-  ///     var user = User()
-  ///       ..read(values, ignore: ["id"]);
+  /// [object] The map containing the values to be read.
+  /// [accept] If set, only these keys will be accepted from the object.
+  /// [ignore] If set, these keys will be ignored from the object.
+  /// [reject] If set, the presence of any of these keys will cause an exception.
+  /// [require] If set, all of these keys must be present in the object.
   void read(
     Map<String, dynamic> object, {
     Iterable<String>? accept,
@@ -82,6 +90,8 @@ abstract class Serializable {
   /// If a [Response.body]'s type implements this interface, this method is invoked prior to any content-type encoding
   /// performed by the [Response].  A [Response.body] may also be a [List<Serializable>], for which this method is invoked on
   /// each element in the list.
+  ///
+  /// Returns a [Map<String, dynamic>] representation of the object.
   Map<String, dynamic> asMap();
 
   /// Whether a subclass will automatically be registered as a schema component automatically.
@@ -94,11 +104,19 @@ abstract class Serializable {
   static bool get shouldAutomaticallyDocument => true;
 }
 
+/// Exception thrown when there's an error in serialization or deserialization.
 class SerializableException implements HandlerException {
+  /// Constructor for SerializableException.
+  ///
+  /// [reasons] A list of reasons for the exception.
   SerializableException(this.reasons);
 
+  /// The reasons for the exception.
   final List<String> reasons;
 
+  /// Generates a response for this exception.
+  ///
+  /// Returns a [Response] with a bad request status and error details.
   @override
   Response get response {
     return Response.badRequest(
@@ -106,6 +124,9 @@ class SerializableException implements HandlerException {
     );
   }
 
+  /// Returns a string representation of the exception.
+  ///
+  /// Returns a string containing the error and reasons.
   @override
   String toString() {
     final errorString = response.body["error"] as String?;
@@ -114,6 +135,11 @@ class SerializableException implements HandlerException {
   }
 }
 
+/// Abstract class representing the runtime behavior of a Serializable object.
 abstract class SerializableRuntime {
+  /// Documents the schema of a Serializable object.
+  ///
+  /// [context] The API document context.
+  /// Returns an [APISchemaObject] representing the schema of the Serializable object.
   APISchemaObject documentSchema(APIDocumentContext context);
 }

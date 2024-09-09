@@ -1,3 +1,12 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:protevus_http/http.dart';
@@ -11,6 +20,7 @@ import 'package:protevus_http/http.dart';
 /// Additional mappings are added via [add]. This method must be called per-isolate and it is recommended
 /// to add mappings in an application's [ApplicationChannel] subclass constructor.
 class CodecRegistry {
+  /// Private constructor to prevent direct instantiation.
   CodecRegistry._() {
     add(
       ContentType("application", "json", charset: "utf-8"),
@@ -31,10 +41,19 @@ class CodecRegistry {
   static CodecRegistry get defaultInstance => _defaultInstance;
   static final CodecRegistry _defaultInstance = CodecRegistry._();
 
+  /// Map of primary content types to their respective codecs.
   final Map<String, Codec> _primaryTypeCodecs = {};
+
+  /// Map of fully specified content types to their respective codecs.
   final Map<String, Map<String, Codec>> _fullySpecificedCodecs = {};
+
+  /// Map of primary content types to their compression settings.
   final Map<String, bool> _primaryTypeCompressionMap = {};
+
+  /// Map of fully specified content types to their compression settings.
   final Map<String, Map<String, bool>> _fullySpecifiedCompressionMap = {};
+
+  /// Map of content types to their default charsets.
   final Map<String, Map<String, String?>> _defaultCharsetMap = {};
 
   /// Adds a custom [codec] for [contentType].
@@ -167,6 +186,7 @@ class CodecRegistry {
     return null;
   }
 
+  /// Returns a [Codec] for the given [charset].
   Codec<String, List<int>> _codecForCharset(String? charset) {
     final encoding = Encoding.getByName(charset);
     if (encoding == null) {
@@ -176,6 +196,7 @@ class CodecRegistry {
     return encoding;
   }
 
+  /// Returns the default charset [Codec] for the given [ContentType].
   Codec<String, List<int>>? _defaultCharsetCodecForType(ContentType type) {
     final inner = _defaultCharsetMap[type.primaryType];
     if (inner == null) {
@@ -191,6 +212,7 @@ class CodecRegistry {
   }
 }
 
+/// A [Codec] for encoding and decoding form data.
 class _FormCodec extends Codec<Map<String, dynamic>?, dynamic> {
   const _FormCodec();
 
@@ -201,6 +223,7 @@ class _FormCodec extends Codec<Map<String, dynamic>?, dynamic> {
   Converter<String, Map<String, dynamic>> get decoder => const _FormDecoder();
 }
 
+/// A [Converter] for encoding form data.
 class _FormEncoder extends Converter<Map<String, dynamic>, String> {
   const _FormEncoder();
 
@@ -209,6 +232,7 @@ class _FormEncoder extends Converter<Map<String, dynamic>, String> {
     return data.keys.map((k) => _encodePair(k, data[k])).join("&");
   }
 
+  /// Encodes a key-value pair for form data.
   String _encodePair(String key, dynamic value) {
     String encode(String v) => "$key=${Uri.encodeQueryComponent(v)}";
     if (value is List<String>) {
@@ -223,6 +247,7 @@ class _FormEncoder extends Converter<Map<String, dynamic>, String> {
   }
 }
 
+/// A [Converter] for decoding form data.
 class _FormDecoder extends Converter<String, Map<String, dynamic>> {
   // This class may take input as either String or List<int>. If charset is not defined in request,
   // then data is List<int> (from CodecRegistry) and will default to being UTF8 decoded first.
@@ -230,29 +255,81 @@ class _FormDecoder extends Converter<String, Map<String, dynamic>> {
 
   const _FormDecoder();
 
+  /// Converts a URL-encoded form data string into a Map of key-value pairs.
+  ///
+  /// This method takes a [String] `data` containing URL-encoded form data
+  /// and returns a [Map<String, dynamic>] where the keys are the form field names
+  /// and the values are either a single String or a List<String> for multiple values.
+  ///
+  /// The conversion is performed by creating a [Uri] object with the input data
+  /// as its query string, then accessing its [Uri.queryParametersAll] property.
+  ///
+  /// Example:
+  ///   Input: "name=John&age=30&hobby=reading&hobby=gaming"
+  ///   Output: {
+  ///     "name": ["John"],
+  ///     "age": ["30"],
+  ///     "hobby": ["reading", "gaming"]
+  ///   }
   @override
   Map<String, dynamic> convert(String data) {
     return Uri(query: data).queryParametersAll;
   }
 
+  /// Starts a chunked conversion process for form data.
+  ///
+  /// This method initializes and returns a [_FormSink] object, which is used to
+  /// handle the chunked conversion of form data. The [_FormSink] accumulates
+  /// incoming data chunks and performs the final conversion when the data stream
+  /// is closed.
+  ///
+  /// [outSink] is the output sink where the converted Map<String, dynamic> will
+  /// be added after the conversion is complete.
+  ///
+  /// Returns a [_FormSink] object that can be used to add string chunks of form
+  /// data for conversion.
   @override
   _FormSink startChunkedConversion(Sink<Map<String, dynamic>> outSink) {
     return _FormSink(outSink);
   }
 }
 
+/// A [ChunkedConversionSink] for form data.
 class _FormSink implements ChunkedConversionSink<String> {
   _FormSink(this._outSink);
 
+  /// The decoder used to convert the form data.
   final _FormDecoder decoder = const _FormDecoder();
+
+  /// The output sink for the converted data.
   final Sink<Map<String, dynamic>> _outSink;
+
+  /// Buffer to accumulate incoming data.
   final StringBuffer _buffer = StringBuffer();
 
+  /// Adds a chunk of form data to the buffer.
+  ///
+  /// This method is part of the chunked conversion process for form data.
+  /// It appends the given [data] string to an internal buffer, which will be
+  /// processed when the [close] method is called.
+  ///
+  /// [data] is a String containing a portion of the form data to be converted.
   @override
   void add(String data) {
     _buffer.write(data);
   }
 
+  /// Completes the chunked conversion process for form data.
+  ///
+  /// This method is called when all chunks of the form data have been added
+  /// to the buffer. It performs the following steps:
+  /// 1. Converts the accumulated buffer content to a string.
+  /// 2. Uses the decoder to convert this string into a Map<String, dynamic>.
+  /// 3. Adds the resulting map to the output sink.
+  /// 4. Closes the output sink.
+  ///
+  /// This method should be called after all add() operations are complete
+  /// to finalize the conversion process and clean up resources.
   @override
   void close() {
     _outSink.add(decoder.convert(_buffer.toString()));

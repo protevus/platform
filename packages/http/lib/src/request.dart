@@ -1,7 +1,15 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:protevus_auth/auth.dart';
 import 'package:protevus_http/http.dart';
 
@@ -73,6 +81,7 @@ class Request implements RequestOrResponse {
   /// null if no permission has been set.
   Authorization? authorization;
 
+  /// List of response modifiers to be applied before sending the response.
   List<void Function(Response)>? _responseModifiers;
 
   /// The acceptable content types for a [Response] returned for this instance.
@@ -125,6 +134,7 @@ class Request implements RequestOrResponse {
     return _cachedAcceptableTypes!;
   }
 
+  /// Cached list of acceptable content types.
   List<ContentType>? _cachedAcceptableTypes;
 
   /// Whether a [Response] may contain a body of type [contentType].
@@ -205,6 +215,7 @@ class Request implements RequestOrResponse {
     _responseModifiers!.add(modifier);
   }
 
+  /// Returns a sanitized version of the request headers as a string.
   String get _sanitizedHeaders {
     final StringBuffer buf = StringBuffer("{");
 
@@ -216,6 +227,7 @@ class Request implements RequestOrResponse {
     return buf.toString();
   }
 
+  /// Truncates a string to a specified length, adding an ellipsis if truncated.
   String _truncatedString(String originalString, {int charSize = 128}) {
     if (originalString.length <= charSize) {
       return originalString;
@@ -302,6 +314,7 @@ class Request implements RequestOrResponse {
     throw StateError("Invalid response body. Could not encode.");
   }
 
+  /// Encodes the response body as bytes, applying compression if necessary.
   List<int>? _responseBodyBytes(
     Response resp,
     _Reference<String> compressionType,
@@ -346,6 +359,7 @@ class Request implements RequestOrResponse {
     return codec.encode(resp.body);
   }
 
+  /// Encodes the response body as a stream, applying compression if necessary.
   Stream<List<int>> _responseBodyStream(
     Response resp,
     _Reference<String> compressionType,
@@ -383,6 +397,7 @@ class Request implements RequestOrResponse {
     return codec.encoder.bind(resp.body as Stream);
   }
 
+  /// Whether the client accepts gzip-encoded response bodies.
   bool get _acceptsGzipResponseBody {
     return raw.headers[HttpHeaders.acceptEncodingHeader]
             ?.any((v) => v.split(",").any((s) => s.trim() == "gzip")) ??
@@ -434,15 +449,23 @@ class Request implements RequestOrResponse {
   }
 }
 
+/// Exception thrown when there's an error during HTTP streaming.
 class HTTPStreamingException implements Exception {
+  /// Creates a new [HTTPStreamingException] with the given underlying exception and stack trace.
   HTTPStreamingException(this.underlyingException, this.trace);
 
+  /// The underlying exception that caused the streaming error.
   dynamic underlyingException;
+
+  /// The stack trace associated with the underlying exception.
   StackTrace trace;
 }
 
+/// A reference wrapper class for holding mutable values.
 class _Reference<T> {
+  /// Creates a new [_Reference] with the given initial value.
   _Reference(this.value);
 
+  /// The wrapped value.
   T? value;
 }

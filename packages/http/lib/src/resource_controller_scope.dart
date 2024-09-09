@@ -1,3 +1,12 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'package:protevus_auth/auth.dart';
 import 'package:protevus_http/http.dart';
 
@@ -33,11 +42,16 @@ import 'package:protevus_http/http.dart';
 ///           .link(() => Authorizer.bearer(authServer))
 ///           .link(() => NoteController());
 class Scope {
-  /// Add to [ResourceController] operation method to require authorization scope.
+  /// Constructor for the Scope class.
   ///
-  /// An incoming [Request.authorization] must have sufficient scope for all [scopes].
+  /// Creates a new Scope instance with the provided list of scopes.
+  ///
+  /// [scopes] is the list of authorization scopes required.
   const Scope(this.scopes);
 
   /// The list of authorization scopes required.
+  ///
+  /// This list contains the string representations of the scopes that are
+  /// required for the annotated operation method.
   final List<String> scopes;
 }

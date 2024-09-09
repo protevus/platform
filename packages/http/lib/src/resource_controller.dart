@@ -1,7 +1,15 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'dart:async';
 import 'dart:ffi';
 import 'dart:io';
-
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:protevus_openapi/documentable.dart';
 import 'package:protevus_auth/auth.dart';
@@ -67,15 +75,18 @@ import 'package:meta/meta.dart';
 /// To access the request directly, use [request]. Note that the [Request.body] of [request] will be decoded prior to invoking an operation method.
 abstract class ResourceController extends Controller
     implements Recyclable<void> {
+  /// Constructor for ResourceController.
   ResourceController() {
     _runtime =
         (RuntimeContext.current.runtimes[runtimeType] as ControllerRuntime?)
             ?.resourceController;
   }
 
+  /// Getter for the recycled state of the controller.
   @override
   void get recycledState => nullptr;
 
+  /// The runtime for this ResourceController.
   ResourceControllerRuntime? _runtime;
 
   /// The request being processed by this [ResourceController].
@@ -129,11 +140,13 @@ abstract class ResourceController extends Controller
   /// this method is not called.
   void didDecodeRequestBody(RequestBody body) {}
 
+  /// Restores the state of the controller.
   @override
   void restore(void state) {
     /* no op - fetched from static cache in Runtime */
   }
 
+  /// Handles the incoming request.
   @override
   FutureOr<RequestOrResponse> handle(Request request) async {
     this.request = request;
@@ -226,6 +239,7 @@ abstract class ResourceController extends Controller
     return [tag];
   }
 
+  /// Documents the operations for this controller.
   @override
   Map<String, APIOperation> documentOperations(
     APIDocumentContext context,
@@ -235,11 +249,13 @@ abstract class ResourceController extends Controller
     return _runtime!.documenter!.documentOperations(this, context, route, path);
   }
 
+  /// Documents the components for this controller.
   @override
   void documentComponents(APIDocumentContext context) {
     _runtime!.documenter?.documentComponents(this, context);
   }
 
+  /// Checks if the request content type is supported.
   bool _requestContentTypeIsSupported(Request? req) {
     final incomingContentType = request!.raw.headers.contentType;
     return acceptedContentTypes.firstWhereOrNull((ct) {
@@ -249,6 +265,7 @@ abstract class ResourceController extends Controller
         null;
   }
 
+  /// Returns a list of allowed HTTP methods for the given path variables.
   List<String> _allowedMethodsForPathVariables(
     Iterable<String?> pathVariables,
   ) {
@@ -258,6 +275,7 @@ abstract class ResourceController extends Controller
         .toList();
   }
 
+  /// Processes the request and returns a response.
   Future<Response> _process() async {
     if (!request!.body.isEmpty) {
       if (!_requestContentTypeIsSupported(request)) {

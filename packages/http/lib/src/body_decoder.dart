@@ -1,14 +1,26 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:protevus_http/http.dart';
 import 'package:protevus_runtime/runtime.dart';
 
-/// Decodes [bytes] according to [contentType].
+/// A class that decodes bytes according to a specific content type.
 ///
-/// See [RequestBody] for a concrete implementation.
+/// This abstract class provides the base functionality for decoding byte streams
+/// based on their content type.
 abstract class BodyDecoder {
+  /// Creates a new [BodyDecoder] instance.
+  ///
+  /// [bodyByteStream] is the stream of bytes to be decoded.
   BodyDecoder(Stream<List<int>> bodyByteStream)
       : _originalByteStream = bodyByteStream;
 
@@ -67,8 +79,13 @@ abstract class BodyDecoder {
     return _bytes;
   }
 
+  /// The original byte stream to be decoded.
   final Stream<List<int>> _originalByteStream;
+
+  /// The decoded data after processing.
   dynamic _decodedData;
+
+  /// The original bytes, if retained.
   List<int>? _bytes;
 
   /// Decodes this object's bytes as [T].
@@ -127,6 +144,9 @@ abstract class BodyDecoder {
     return _cast<T>(_decodedData);
   }
 
+  /// Casts the decoded body to the specified type [T].
+  ///
+  /// Throws a [Response.badRequest] if the casting fails.
   T _cast<T>(dynamic body) {
     try {
       return RuntimeContext.current.coerce<T>(body);
@@ -137,6 +157,7 @@ abstract class BodyDecoder {
     }
   }
 
+  /// Reads all bytes from the given [stream] and returns them as a [List<int>].
   Future<List<int>> _readBytes(Stream<List<int>> stream) async {
     return (await stream.toList()).expand((e) => e).toList();
   }

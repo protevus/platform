@@ -1,3 +1,12 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'package:protevus_http/http.dart';
 
 /// Instances of this type provide configuration for the 'Cache-Control' header.
@@ -9,6 +18,11 @@ class CachePolicy {
   /// Policies applied to [Response.cachePolicy] will add the appropriate
   /// headers to that response. See properties for definitions of arguments
   /// to this constructor.
+  ///
+  /// [preventIntermediateProxyCaching] - If true, prevents caching by intermediate proxies.
+  /// [preventCaching] - If true, prevents any caching of the response.
+  /// [requireConditionalRequest] - If true, requires a conditional GET for cached responses.
+  /// [expirationFromNow] - Sets the duration for which the resource is valid.
   const CachePolicy({
     this.preventIntermediateProxyCaching = false,
     this.preventCaching = false,
@@ -40,6 +54,9 @@ class CachePolicy {
   /// Constructs a header value configured from this instance.
   ///
   /// This value is used for the 'Cache-Control' header.
+  ///
+  /// Returns a string representation of the cache control header based on the
+  /// configuration of this CachePolicy instance.
   String get headerValue {
     if (preventCaching) {
       return "no-cache, no-store";

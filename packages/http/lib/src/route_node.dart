@@ -1,6 +1,19 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'package:protevus_http/http.dart';
 
+/// Represents a segment of a route path.
 class RouteSegment {
+  /// Creates a new RouteSegment from a string segment.
+  ///
+  /// [segment] The string representation of the route segment.
   RouteSegment(String segment) {
     if (segment == "*") {
       isRemainingMatcher = true;
@@ -22,6 +35,12 @@ class RouteSegment {
     }
   }
 
+  /// Creates a new RouteSegment directly with specified properties.
+  ///
+  /// [literal] The literal string of the segment.
+  /// [variableName] The name of the variable if this is a variable segment.
+  /// [expression] The regular expression string for matching.
+  /// [matchesAnything] Whether this segment matches anything (like "*").
   RouteSegment.direct({
     this.literal,
     this.variableName,
@@ -34,18 +53,34 @@ class RouteSegment {
     }
   }
 
+  /// The literal string of the segment.
   String? literal;
+
+  /// The name of the variable if this is a variable segment.
   String? variableName;
+
+  /// The regular expression for matching this segment.
   RegExp? matcher;
 
+  /// Whether this segment is a literal matcher.
   bool get isLiteralMatcher =>
       !isRemainingMatcher && !isVariable && !hasRegularExpression;
 
+  /// Whether this segment has a regular expression for matching.
   bool get hasRegularExpression => matcher != null;
 
+  /// Whether this segment is a variable.
   bool get isVariable => variableName != null;
+
+  /// Whether this segment matches all remaining segments.
   bool isRemainingMatcher = false;
 
+  /// Checks if this RouteSegment is equal to another object.
+  ///
+  /// Returns true if the [other] object is a RouteSegment and has the same
+  /// [literal], [variableName], [isRemainingMatcher], and [matcher] pattern.
+  ///
+  /// [other] The object to compare with this RouteSegment.
   @override
   bool operator ==(Object other) =>
       other is RouteSegment &&
@@ -54,9 +89,25 @@ class RouteSegment {
       isRemainingMatcher == other.isRemainingMatcher &&
       matcher?.pattern == other.matcher?.pattern;
 
+  /// Generates a hash code for this RouteSegment.
+  ///
+  /// The hash code is based on either the [literal] value or the [variableName],
+  /// whichever is not null. This ensures that RouteSegments with the same
+  /// literal or variable name will have the same hash code.
+  ///
+  /// Returns an integer hash code value.
   @override
   int get hashCode => (literal ?? variableName).hashCode;
 
+  /// Returns a string representation of the RouteSegment.
+  ///
+  /// The string representation depends on the type of the segment:
+  /// - For a literal matcher, it returns the literal value.
+  /// - For a variable segment, it returns the variable name.
+  /// - For a segment with a regular expression, it returns the pattern enclosed in parentheses.
+  /// - For a remaining matcher (wildcard), it returns "*".
+  ///
+  /// Returns a string representing the RouteSegment.
   @override
   String toString() {
     if (isLiteralMatcher) {
@@ -75,7 +126,13 @@ class RouteSegment {
   }
 }
 
+/// Represents a node in the route tree.
 class RouteNode {
+  /// Creates a new RouteNode from a list of route specifications.
+  ///
+  /// [specs] The list of route specifications.
+  /// [depth] The depth of this node in the route tree.
+  /// [matcher] The regular expression matcher for this node.
   RouteNode(List<RouteSpecification?> specs, {int depth = 0, RegExp? matcher}) {
     patternMatcher = matcher;
 
@@ -147,22 +204,35 @@ class RouteNode {
     }).toList();
   }
 
+  /// Creates a new RouteNode with a specific route specification.
+  ///
+  /// [specification] The route specification for this node.
   RouteNode.withSpecification(this.specification);
 
-  // Regular expression matcher for this node. May be null.
+  /// Regular expression matcher for this node. May be null.
   RegExp? patternMatcher;
+
+  /// The controller associated with this route node.
   Controller? get controller => specification?.controller;
+
+  /// The route specification for this node.
   RouteSpecification? specification;
 
-  // Includes children that are variables with and without regex patterns
+  /// Children nodes that are matched using regular expressions.
   List<RouteNode> patternedChildren = [];
 
-  // Includes children that are literal path segments that can be matched with simple string equality
+  /// Children nodes that are matched using string equality.
   Map<String, RouteNode> equalityChildren = {};
 
-  // Valid if has child that is a take all (*) segment.
+  /// Child node that matches all remaining segments.
   RouteNode? takeAllChild;
 
+  /// Finds the appropriate node for the given path segments.
+  ///
+  /// [requestSegments] An iterator of the path segments.
+  /// [path] The full request path.
+  ///
+  /// Returns the matching RouteNode or null if no match is found.
   RouteNode? nodeForPathSegments(
     Iterator<String> requestSegments,
     RequestPath path,
@@ -195,6 +265,16 @@ class RouteNode {
     return takeAllChild;
   }
 
+  /// Generates a string representation of the RouteNode and its children.
+  ///
+  /// This method creates a hierarchical string representation of the RouteNode,
+  /// including information about the pattern matcher, associated controller,
+  /// and child nodes. The representation is indented based on the depth of the
+  /// node in the route tree.
+  ///
+  /// [depth] The depth of this node in the route tree, used for indentation.
+  ///
+  /// Returns a string representation of the RouteNode and its children.
   @override
   String toString({int depth = 0}) {
     final buf = StringBuffer();

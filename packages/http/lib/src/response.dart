@@ -1,8 +1,16 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:protevus_http/http.dart';
 
 /// Represents the information in an HTTP response.
@@ -14,6 +22,10 @@ class Response implements RequestOrResponse {
   ///
   /// There exist convenience constructors for common response status codes
   /// and you should prefer to use those.
+  ///
+  /// [statusCode] The HTTP status code for this response.
+  /// [headers] A map of HTTP headers for this response.
+  /// [body] The body content of this response.
   Response(int this.statusCode, Map<String, dynamic>? headers, dynamic body) {
     this.body = body;
     this.headers = LinkedHashMap<String, dynamic>(
@@ -22,13 +34,18 @@ class Response implements RequestOrResponse {
     this.headers.addAll(headers ?? {});
   }
 
-  /// Represents a 200 response.
+  /// Represents a 200 OK response.
+  ///
+  /// [body] The body content of this response.
+  /// [headers] Optional map of HTTP headers for this response.
   Response.ok(dynamic body, {Map<String, dynamic>? headers})
       : this(HttpStatus.ok, headers, body);
 
-  /// Represents a 201 response.
+  /// Represents a 201 Created response.
   ///
-  /// The [location] is a URI that is added as the Location header.
+  /// [location] A URI that is added as the Location header.
+  /// [body] Optional body content of this response.
+  /// [headers] Optional map of HTTP headers for this response.
   Response.created(
     String location, {
     dynamic body,
@@ -39,48 +56,73 @@ class Response implements RequestOrResponse {
           body,
         );
 
-  /// Represents a 202 response.
+  /// Represents a 202 Accepted response.
+  ///
+  /// [headers] Optional map of HTTP headers for this response.
   Response.accepted({Map<String, dynamic>? headers})
       : this(HttpStatus.accepted, headers, null);
 
-  /// Represents a 204 response.
+  /// Represents a 204 No Content response.
+  ///
+  /// [headers] Optional map of HTTP headers for this response.
   Response.noContent({Map<String, dynamic>? headers})
       : this(HttpStatus.noContent, headers, null);
 
-  /// Represents a 304 response.
+  /// Represents a 304 Not Modified response.
   ///
-  /// Where [lastModified] is the last modified date of the resource
-  /// and [cachePolicy] is the same policy as applied when this resource was first fetched.
+  /// [lastModified] The last modified date of the resource.
+  /// [cachePolicy] The same policy as applied when this resource was first fetched.
   Response.notModified(DateTime lastModified, this.cachePolicy) {
     statusCode = HttpStatus.notModified;
     headers = {HttpHeaders.lastModifiedHeader: HttpDate.format(lastModified)};
   }
 
-  /// Represents a 400 response.
+  /// Represents a 400 Bad Request response.
+  ///
+  /// [headers] Optional map of HTTP headers for this response.
+  /// [body] Optional body content of this response.
   Response.badRequest({Map<String, dynamic>? headers, dynamic body})
       : this(HttpStatus.badRequest, headers, body);
 
-  /// Represents a 401 response.
+  /// Represents a 401 Unauthorized response.
+  ///
+  /// [headers] Optional map of HTTP headers for this response.
+  /// [body] Optional body content of this response.
   Response.unauthorized({Map<String, dynamic>? headers, dynamic body})
       : this(HttpStatus.unauthorized, headers, body);
 
-  /// Represents a 403 response.
+  /// Represents a 403 Forbidden response.
+  ///
+  /// [headers] Optional map of HTTP headers for this response.
+  /// [body] Optional body content of this response.
   Response.forbidden({Map<String, dynamic>? headers, dynamic body})
       : this(HttpStatus.forbidden, headers, body);
 
-  /// Represents a 404 response.
+  /// Represents a 404 Not Found response.
+  ///
+  /// [headers] Optional map of HTTP headers for this response.
+  /// [body] Optional body content of this response.
   Response.notFound({Map<String, dynamic>? headers, dynamic body})
       : this(HttpStatus.notFound, headers, body);
 
-  /// Represents a 409 response.
+  /// Represents a 409 Conflict response.
+  ///
+  /// [headers] Optional map of HTTP headers for this response.
+  /// [body] Optional body content of this response.
   Response.conflict({Map<String, dynamic>? headers, dynamic body})
       : this(HttpStatus.conflict, headers, body);
 
-  /// Represents a 410 response.
+  /// Represents a 410 Gone response.
+  ///
+  /// [headers] Optional map of HTTP headers for this response.
+  /// [body] Optional body content of this response.
   Response.gone({Map<String, dynamic>? headers, dynamic body})
       : this(HttpStatus.gone, headers, body);
 
-  /// Represents a 500 response.
+  /// Represents a 500 Internal Server Error response.
+  ///
+  /// [headers] Optional map of HTTP headers for this response.
+  /// [body] Optional body content of this response.
   Response.serverError({Map<String, dynamic>? headers, dynamic body})
       : this(HttpStatus.internalServerError, headers, body);
 
@@ -112,6 +154,12 @@ class Response implements RequestOrResponse {
     _body = serializedBody ?? initialResponseBody;
   }
 
+  /// The internal storage for the response body.
+  ///
+  /// This private variable holds the actual content of the response body.
+  /// It can be of any type (dynamic) to accommodate various types of response data.
+  /// The public 'body' getter and setter methods interact with this variable
+  /// to provide controlled access and manipulation of the response body.
   dynamic _body;
 
   /// Whether or not this instance should buffer its output or send it right away.
@@ -135,11 +183,22 @@ class Response implements RequestOrResponse {
   ///
   /// See [contentType] for behavior when setting 'content-type' in this property.
   Map<String, dynamic> get headers => _headers;
+
+  /// Sets the headers for this response.
+  ///
+  /// Clears existing headers and adds all headers from the provided map.
   set headers(Map<String, dynamic> h) {
     _headers.clear();
     _headers.addAll(h);
   }
 
+  /// A case-insensitive map for storing HTTP headers.
+  ///
+  /// This map uses a custom equality and hash function to ensure that header names
+  /// are treated case-insensitively. For example, 'Content-Type' and 'content-type'
+  /// are considered the same key.
+  ///
+  /// The map is implemented as a [LinkedHashMap] to maintain the order of insertion.
   final Map<String, dynamic> _headers = LinkedHashMap<String, Object?>(
       equals: (a, b) => a.toLowerCase() == b.toLowerCase(),
       hashCode: (key) => key.toLowerCase().hashCode);
@@ -188,13 +247,14 @@ class Response implements RequestOrResponse {
     );
   }
 
+  /// Sets the content type for this response.
   set contentType(ContentType? t) {
     _contentType = t;
   }
 
   ContentType? _contentType;
 
-  /// Whether or nor this instance has explicitly has its [contentType] property.
+  /// Whether or not this instance has explicitly set its [contentType] property.
   ///
   /// This value indicates whether or not [contentType] has been set, or is still using its default value.
   bool get hasExplicitlySetContentType => _contentType != null;
@@ -209,6 +269,11 @@ class Response implements RequestOrResponse {
   /// from disk where it is already stored as an encoded list of bytes.
   bool encodeBody = true;
 
+  /// Combines two header maps into a single map.
+  ///
+  /// [inputHeaders] The initial set of headers.
+  /// [otherHeaders] Additional headers to be added.
+  /// Returns a new map containing all headers from both input maps.
   static Map<String, dynamic> _headersWith(
     Map<String, dynamic>? inputHeaders,
     Map<String, dynamic> otherHeaders,

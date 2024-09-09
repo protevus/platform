@@ -1,3 +1,12 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'package:protevus_http/http.dart';
 
 /// Specifies a matchable route path.
@@ -15,6 +24,11 @@ class RouteSpecification {
         .toList();
   }
 
+  /// Creates a list of [RouteSpecification]s from a given route pattern.
+  ///
+  /// This method handles optional segments in the route pattern.
+  /// @param routePattern The input route pattern string.
+  /// @return A list of [RouteSpecification]s.
   static List<RouteSpecification> specificationsForRoutePattern(
     String routePattern,
   ) {
@@ -32,10 +46,16 @@ class RouteSpecification {
   /// A reference back to the [Controller] to be used when this specification is matched.
   Controller? controller;
 
+  /// Returns a string representation of the route specification.
   @override
   String toString() => segments.join("/");
 }
 
+/// Generates a list of path strings from a given route pattern.
+///
+/// This function handles optional segments and regular expressions in the route pattern.
+/// @param inputPattern The input route pattern string.
+/// @return A list of path strings.
 List<String> _pathsFromRoutePattern(String inputPattern) {
   var routePattern = inputPattern;
   var endingOptionalCloseCount = 0;
@@ -102,6 +122,11 @@ List<String> _pathsFromRoutePattern(String inputPattern) {
   return patterns;
 }
 
+/// Splits a path string into a list of [RouteSegment]s.
+///
+/// This function handles regular expressions within path segments.
+/// @param inputPath The input path string.
+/// @return A list of [RouteSegment]s.
 List<RouteSegment> _splitPathSegments(String inputPath) {
   var path = inputPath;
   // Once we've gotten into this method, the path has been validated for optionals and regex and optionals have been removed.

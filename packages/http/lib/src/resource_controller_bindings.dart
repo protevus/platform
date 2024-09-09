@@ -1,3 +1,12 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'package:protevus_http/http.dart';
 
 /// Binds an instance method in [ResourceController] to an operation.
@@ -14,6 +23,7 @@ import 'package:protevus_http/http.dart';
 ///           }
 ///         }
 class Operation {
+  /// Creates an [Operation] with the specified [method] and optional path variables.
   const Operation(
     this.method, [
     String? pathVariable1,
@@ -25,6 +35,7 @@ class Operation {
         _pathVariable3 = pathVariable3,
         _pathVariable4 = pathVariable4;
 
+  /// Creates a GET [Operation] with optional path variables.
   const Operation.get([
     String? pathVariable1,
     String? pathVariable2,
@@ -36,6 +47,7 @@ class Operation {
         _pathVariable3 = pathVariable3,
         _pathVariable4 = pathVariable4;
 
+  /// Creates a PUT [Operation] with optional path variables.
   const Operation.put([
     String? pathVariable1,
     String? pathVariable2,
@@ -47,6 +59,7 @@ class Operation {
         _pathVariable3 = pathVariable3,
         _pathVariable4 = pathVariable4;
 
+  /// Creates a POST [Operation] with optional path variables.
   const Operation.post([
     String? pathVariable1,
     String? pathVariable2,
@@ -58,6 +71,7 @@ class Operation {
         _pathVariable3 = pathVariable3,
         _pathVariable4 = pathVariable4;
 
+  /// Creates a DELETE [Operation] with optional path variables.
   const Operation.delete([
     String? pathVariable1,
     String? pathVariable2,
@@ -69,10 +83,19 @@ class Operation {
         _pathVariable3 = pathVariable3,
         _pathVariable4 = pathVariable4;
 
+  /// The HTTP method for this operation.
   final String method;
+
+  /// The first path variable (if any).
   final String? _pathVariable1;
+
+  /// The second path variable (if any).
   final String? _pathVariable2;
+
+  /// The third path variable (if any).
   final String? _pathVariable3;
+
+  /// The fourth path variable (if any).
   final String? _pathVariable4;
 
   /// Returns a list of all path variables required for this operation.
@@ -209,15 +232,26 @@ class Bind {
         ignore = null,
         reject = null;
 
+  /// The name of the binding (for query, header, and path bindings).
   final String? name;
+
+  /// The type of binding (query, header, body, or path).
   final BindingType bindingType;
 
+  /// List of keys to accept in the request body (for body bindings).
   final List<String>? accept;
+
+  /// List of keys to ignore in the request body (for body bindings).
   final List<String>? ignore;
+
+  /// List of keys to reject in the request body (for body bindings).
   final List<String>? reject;
+
+  /// List of keys required in the request body (for body bindings).
   final List<String>? require;
 }
 
+/// Enum representing the types of bindings available.
 enum BindingType { query, header, body, path }
 
 /// Marks an [ResourceController] property binding as required.
@@ -245,7 +279,10 @@ enum BindingType { query, header, body, path }
 ///         }
 const RequiredBinding requiredBinding = RequiredBinding();
 
-/// See [requiredBinding].
+/// Class representing a required binding.
+///
+/// See [requiredBinding] for more information.
 class RequiredBinding {
+  /// Creates a [RequiredBinding] instance.
   const RequiredBinding();
 }

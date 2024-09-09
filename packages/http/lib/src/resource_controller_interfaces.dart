@@ -1,17 +1,36 @@
-import 'dart:async';
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
+import 'dart:async';
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:protevus_openapi/documentable.dart';
 import 'package:protevus_auth/auth.dart';
 import 'package:protevus_http/http.dart';
 import 'package:protevus_openapi/v3.dart';
 
+/// Abstract class representing the runtime of a ResourceController.
 abstract class ResourceControllerRuntime {
+  /// List of instance variable parameters.
   List<ResourceControllerParameter>? ivarParameters;
+
+  /// List of operations supported by the ResourceController.
   late List<ResourceControllerOperation> operations;
 
+  /// Documenter for the ResourceController.
   ResourceControllerDocumenter? documenter;
 
+  /// Retrieves the operation runtime for a given method and path variables.
+  ///
+  /// [method] The HTTP method.
+  /// [pathVariables] The list of path variables.
+  ///
+  /// Returns the matching [ResourceControllerOperation] or null if not found.
   ResourceControllerOperation? getOperationRuntime(
     String method,
     List<String?> pathVariables,
@@ -21,27 +40,58 @@ abstract class ResourceControllerRuntime {
     );
   }
 
+  /// Applies request properties to the controller.
+  ///
+  /// [untypedController] The ResourceController instance.
+  /// [args] The invocation arguments.
   void applyRequestProperties(
     ResourceController untypedController,
     ResourceControllerOperationInvocationArgs args,
   );
 }
 
+/// Abstract class for documenting a ResourceController.
 abstract class ResourceControllerDocumenter {
+  /// Documents the components of a ResourceController.
+  ///
+  /// [rc] The ResourceController instance.
+  /// [context] The API documentation context.
   void documentComponents(ResourceController rc, APIDocumentContext context);
 
+  /// Documents the operation parameters of a ResourceController.
+  ///
+  /// [rc] The ResourceController instance.
+  /// [context] The API documentation context.
+  /// [operation] The operation to document.
+  ///
+  /// Returns a list of [APIParameter] objects.
   List<APIParameter> documentOperationParameters(
     ResourceController rc,
     APIDocumentContext context,
     Operation? operation,
   );
 
+  /// Documents the operation request body of a ResourceController.
+  ///
+  /// [rc] The ResourceController instance.
+  /// [context] The API documentation context.
+  /// [operation] The operation to document.
+  ///
+  /// Returns an [APIRequestBody] object or null.
   APIRequestBody? documentOperationRequestBody(
     ResourceController rc,
     APIDocumentContext context,
     Operation? operation,
   );
 
+  /// Documents the operations of a ResourceController.
+  ///
+  /// [rc] The ResourceController instance.
+  /// [context] The API documentation context.
+  /// [route] The route string.
+  /// [path] The API path.
+  ///
+  /// Returns a map of operation names to [APIOperation] objects.
   Map<String, APIOperation> documentOperations(
     ResourceController rc,
     APIDocumentContext context,
@@ -50,7 +100,9 @@ abstract class ResourceControllerDocumenter {
   );
 }
 
+/// Represents an operation in a ResourceController.
 class ResourceControllerOperation {
+  /// Creates a new ResourceControllerOperation.
   ResourceControllerOperation({
     required this.scopes,
     required this.pathVariables,
@@ -61,23 +113,36 @@ class ResourceControllerOperation {
     required this.invoker,
   });
 
+  /// The required authentication scopes for this operation.
   final List<AuthScope>? scopes;
+
+  /// The path variables for this operation.
   final List<String> pathVariables;
+
+  /// The HTTP method for this operation.
   final String httpMethod;
+
+  /// The name of the Dart method implementing this operation.
   final String dartMethodName;
 
+  /// The positional parameters for this operation.
   final List<ResourceControllerParameter> positionalParameters;
+
+  /// The named parameters for this operation.
   final List<ResourceControllerParameter> namedParameters;
 
+  /// The function to invoke this operation.
   final Future<Response> Function(
     ResourceController resourceController,
     ResourceControllerOperationInvocationArgs args,
   ) invoker;
 
-  /// Checks if a request's method and path variables will select this binder.
+  /// Checks if a request's method and path variables will select this operation.
   ///
-  /// Note that [requestMethod] may be null; if this is the case, only
-  /// path variables are compared.
+  /// [requestMethod] The HTTP method of the request.
+  /// [requestPathVariables] The path variables of the request.
+  ///
+  /// Returns true if the operation is suitable for the request, false otherwise.
   bool isSuitableForRequest(
     String? requestMethod,
     List<String?> requestPathVariables,
@@ -94,7 +159,9 @@ class ResourceControllerOperation {
   }
 }
 
+/// Represents a parameter in a ResourceController operation.
 class ResourceControllerParameter {
+  /// Creates a new ResourceControllerParameter.
   ResourceControllerParameter({
     required this.symbolName,
     required this.name,
@@ -109,6 +176,7 @@ class ResourceControllerParameter {
     required this.rejectFilter,
   }) : _decoder = decoder;
 
+  /// Creates a typed ResourceControllerParameter.
   static ResourceControllerParameter make<T>({
     required String symbolName,
     required String? name,
@@ -136,22 +204,40 @@ class ResourceControllerParameter {
     );
   }
 
+  /// The name of the symbol in the Dart code.
   final String symbolName;
+
+  /// The name of the parameter in the API.
   final String? name;
+
+  /// The type of the parameter.
   final Type type;
+
+  /// The default value of the parameter.
   final dynamic defaultValue;
+
+  /// The filter for accepted values.
   final List<String>? acceptFilter;
+
+  /// The filter for ignored values.
   final List<String>? ignoreFilter;
+
+  /// The filter for required values.
   final List<String>? requireFilter;
+
+  /// The filter for rejected values.
   final List<String>? rejectFilter;
 
-  /// The location in the request that this parameter is bound to
+  /// The location of the parameter in the request.
   final BindingType location;
 
+  /// Indicates if the parameter is required.
   final bool isRequired;
 
+  /// The decoder function for the parameter.
   final dynamic Function(dynamic input)? _decoder;
 
+  /// Gets the API parameter location for this parameter.
   APIParameterLocation get apiLocation {
     switch (location) {
       case BindingType.body:
@@ -165,6 +251,7 @@ class ResourceControllerParameter {
     }
   }
 
+  /// Gets the location name as a string.
   String get locationName {
     switch (location) {
       case BindingType.query:
@@ -178,6 +265,11 @@ class ResourceControllerParameter {
     }
   }
 
+  /// Decodes the parameter value from the request.
+  ///
+  /// [request] The HTTP request.
+  ///
+  /// Returns the decoded value.
   dynamic decode(Request? request) {
     switch (location) {
       case BindingType.query:
@@ -220,8 +312,14 @@ class ResourceControllerParameter {
   }
 }
 
+/// Holds the arguments for invoking a ResourceController operation.
 class ResourceControllerOperationInvocationArgs {
+  /// The instance variables for the invocation.
   late Map<String, dynamic> instanceVariables;
+
+  /// The named arguments for the invocation.
   late Map<String, dynamic> namedArguments;
+
+  /// The positional arguments for the invocation.
   late List<dynamic> positionalArguments;
 }

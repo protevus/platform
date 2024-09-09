@@ -1,5 +1,13 @@
-import 'dart:async';
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
+import 'dart:async';
 import 'package:protevus_openapi/documentable.dart';
 import 'package:protevus_database/db.dart';
 import 'package:protevus_http/http.dart';
@@ -40,6 +48,8 @@ import 'package:protevus_openapi/v3.dart';
 class ManagedObjectController<InstanceType extends ManagedObject>
     extends ResourceController {
   /// Creates an instance of a [ManagedObjectController].
+  ///
+  /// [context] is the [ManagedContext] used for database operations.
   ManagedObjectController(ManagedContext context) : super() {
     _query = Query<InstanceType>(context);
   }
@@ -49,6 +59,8 @@ class ManagedObjectController<InstanceType extends ManagedObject>
   /// This method is used when generating instances of this type dynamically from runtime values,
   /// where the static type argument cannot be defined. Behaves just like the unnamed constructor.
   ///
+  /// [entity] is the [ManagedEntity] for the object type being controlled.
+  /// [context] is the [ManagedContext] used for database operations.
   ManagedObjectController.forEntity(
     ManagedEntity entity,
     ManagedContext context,
@@ -59,10 +71,13 @@ class ManagedObjectController<InstanceType extends ManagedObject>
   /// Returns a route pattern for using [ManagedObjectController]s.
   ///
   /// Returns the string "/$name/[:id]", to be used as a route pattern in a [Router] for instances of [ResourceController] and subclasses.
+  ///
+  /// [name] is the name to be used in the route pattern.
   static String routePattern(String name) {
     return "/$name/[:id]";
   }
 
+  /// The query used for database operations.
   Query<InstanceType>? _query;
 
   /// Executed prior to a fetch by ID query.
@@ -92,6 +107,9 @@ class ManagedObjectController<InstanceType extends ManagedObject>
     return Response.notFound();
   }
 
+  /// Handles GET requests for a single object by ID.
+  ///
+  /// [id] is the ID of the object to fetch.
   @Operation.get("id")
   Future<Response> getObject(@Bind.path("id") String id) async {
     final primaryKey = _query!.entity.primaryKey;
@@ -128,6 +146,7 @@ class ManagedObjectController<InstanceType extends ManagedObject>
     return Response.ok(object);
   }
 
+  /// Handles POST requests to create a new object.
   @Operation.post()
   Future<Response> createObject() async {
     final instance = _query!.entity.instanceOf() as InstanceType;
@@ -165,6 +184,9 @@ class ManagedObjectController<InstanceType extends ManagedObject>
     return Response.notFound();
   }
 
+  /// Handles DELETE requests to delete an object by ID.
+  ///
+  /// [id] is the ID of the object to delete.
   @Operation.delete("id")
   Future<Response> deleteObject(@Bind.path("id") String id) async {
     final primaryKey = _query!.entity.primaryKey;
@@ -208,6 +230,9 @@ class ManagedObjectController<InstanceType extends ManagedObject>
     return Response.notFound();
   }
 
+  /// Handles PUT requests to update an object by ID.
+  ///
+  /// [id] is the ID of the object to update.
   @Operation.put("id")
   Future<Response> updateObject(@Bind.path("id") String id) async {
     final primaryKey = _query!.entity.primaryKey;
@@ -247,6 +272,9 @@ class ManagedObjectController<InstanceType extends ManagedObject>
     return Response.ok(objects);
   }
 
+  /// Handles GET requests to fetch multiple objects.
+  ///
+  /// Supports pagination, sorting, and filtering through query parameters.
   @Operation.get()
   Future<Response> getObjects({
     /// Limits the number of objects returned.
@@ -359,6 +387,7 @@ class ManagedObjectController<InstanceType extends ManagedObject>
     return didFindObjects(results);
   }
 
+  /// Documents the request body for POST and PUT operations.
   @override
   APIRequestBody? documentOperationRequestBody(
     APIDocumentContext context,
@@ -375,6 +404,7 @@ class ManagedObjectController<InstanceType extends ManagedObject>
     return null;
   }
 
+  /// Documents the responses for each operation type.
   @override
   Map<String, APIResponse> documentOperationResponses(
     APIDocumentContext context,
@@ -445,6 +475,7 @@ class ManagedObjectController<InstanceType extends ManagedObject>
     return {};
   }
 
+  /// Documents the operations for this controller.
   @override
   Map<String, APIOperation> documentOperations(
     APIDocumentContext context,
@@ -469,6 +500,10 @@ class ManagedObjectController<InstanceType extends ManagedObject>
     return ops;
   }
 
+  /// Parses the identifier from the path.
+  ///
+  /// [value] is the string value from the path.
+  /// [desc] is the property description for the identifier.
   dynamic _getIdentifierFromPath(
     String value,
     ManagedPropertyDescription? desc,
@@ -476,6 +511,11 @@ class ManagedObjectController<InstanceType extends ManagedObject>
     return _parseValueForProperty(value, desc, onError: Response.notFound());
   }
 
+  /// Parses a value for a specific property.
+  ///
+  /// [value] is the string value to parse.
+  /// [desc] is the property description.
+  /// [onError] is the response to return if parsing fails.
   dynamic _parseValueForProperty(
     String value,
     ManagedPropertyDescription? desc, {

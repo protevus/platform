@@ -1,6 +1,14 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'dart:async';
 import 'dart:io';
-
 import 'package:protevus_openapi/documentable.dart';
 import 'package:protevus_http/http.dart';
 import 'package:protevus_openapi/v3.dart';
@@ -18,6 +26,9 @@ import 'package:protevus_openapi/v3.dart';
 /// a [Router] is the [ApplicationChannel.entryPoint].
 class Router extends Controller {
   /// Creates a new [Router].
+  ///
+  /// [basePath] is an optional prefix for all routes on this instance.
+  /// [notFoundHandler] is an optional function to handle requests that don't match any routes.
   Router({String? basePath, Future Function(Request)? notFoundHandler})
       : _unmatchedController = notFoundHandler,
         _basePathSegments =
@@ -25,9 +36,16 @@ class Router extends Controller {
     policy?.allowCredentials = false;
   }
 
+  /// The root node of the routing tree.
   final _RootNode _root = _RootNode();
+
+  /// List of route controllers.
   final List<_RouteController> _routeControllers = [];
+
+  /// Segments of the base path.
   final List<String> _basePathSegments;
+
+  /// Function to handle unmatched requests.
   final Function(Request)? _unmatchedController;
 
   /// A prefix for all routes on this instance.
@@ -77,6 +95,7 @@ class Router extends Controller {
     return routeController;
   }
 
+  /// Called when this controller is added to a channel.
   @override
   void didAddToChannel() {
     _root.node =
@@ -95,6 +114,7 @@ class Router extends Controller {
     );
   }
 
+  /// Routers override this method to throw an exception. Use [route] instead.
   @override
   Linkable? linkFunction(
     FutureOr<RequestOrResponse?> Function(Request request) handle,
@@ -104,6 +124,7 @@ class Router extends Controller {
     );
   }
 
+  /// Receives a request and routes it to the appropriate controller.
   @override
   Future receive(Request req) async {
     Controller next;
@@ -142,11 +163,13 @@ class Router extends Controller {
     return next.receive(req);
   }
 
+  /// Router should not handle requests directly.
   @override
   FutureOr<RequestOrResponse> handle(Request request) {
     throw StateError("Router invoked handle. This is a bug.");
   }
 
+  /// Documents the paths for this router.
   @override
   Map<String, APIPath> documentPaths(APIDocumentContext context) {
     return _routeControllers.fold(<String, APIPath>{}, (prev, elem) {
@@ -155,6 +178,7 @@ class Router extends Controller {
     });
   }
 
+  /// Documents the components for this router.
   @override
   void documentComponents(APIDocumentContext context) {
     for (final controller in _routeControllers) {
@@ -162,11 +186,13 @@ class Router extends Controller {
     }
   }
 
+  /// Returns a string representation of this router.
   @override
   String toString() {
     return _root.node.toString();
   }
 
+  /// Handles unmatched requests.
   Future _handleUnhandledRequest(Request req) async {
     if (_unmatchedController != null) {
       return _unmatchedController(req);
@@ -184,11 +210,14 @@ class Router extends Controller {
   }
 }
 
+/// Represents the root node of the routing tree.
 class _RootNode {
   RouteNode? node;
 }
 
+/// Represents a route controller.
 class _RouteController extends Controller {
+  /// Creates a new [_RouteController] with the given specifications.
   _RouteController(this.specifications) {
     for (final p in specifications) {
       p.controller = this;
@@ -198,6 +227,7 @@ class _RouteController extends Controller {
   /// Route specifications for this controller.
   final List<RouteSpecification> specifications;
 
+  /// Documents the paths for this route controller.
   @override
   Map<String, APIPath> documentPaths(APIDocumentContext components) {
     return specifications.fold(<String, APIPath>{}, (pathMap, spec) {
@@ -235,6 +265,7 @@ class _RouteController extends Controller {
     });
   }
 
+  /// Handles the request for this route controller.
   @override
   FutureOr<RequestOrResponse> handle(Request request) {
     return request;

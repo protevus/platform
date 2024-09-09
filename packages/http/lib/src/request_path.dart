@@ -1,3 +1,12 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'package:protevus_http/http.dart';
 
 /// Stores path info for a [Request].
@@ -10,8 +19,14 @@ class RequestPath {
   /// Default constructor for [RequestPath].
   ///
   /// There is no need to invoke this constructor manually.
+  ///
+  /// [segments] is a list of path segments.
   RequestPath(this.segments);
 
+  /// Sets the route specification for this request path.
+  ///
+  /// [spec] is the [RouteSpecification] to set.
+  /// [segmentOffset] is the offset to start processing segments from (default is 0).
   void setSpecification(RouteSpecification spec, {int segmentOffset = 0}) {
     final requestIterator = segments.iterator;
     for (var i = 0; i < segmentOffset; i++) {
@@ -50,7 +65,6 @@ class RequestPath {
   /// Consider a match specification /users/:id. If the evaluated path is
   ///     /users/2
   /// This property will be {'id' : '2'}.
-  ///
   Map<String, String> variables = {};
 
   /// A list of the segments in a matched path.

@@ -1,5 +1,13 @@
-import 'dart:async';
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
+import 'dart:async';
 import 'package:protevus_database/db.dart';
 import 'package:protevus_http/http.dart';
 
@@ -20,6 +28,8 @@ import 'package:protevus_http/http.dart';
 abstract class QueryController<InstanceType extends ManagedObject>
     extends ResourceController {
   /// Create an instance of [QueryController].
+  ///
+  /// [context] is the [ManagedContext] used for database operations.
   QueryController(ManagedContext context) : super() {
     query = Query<InstanceType>(context);
   }
@@ -34,6 +44,12 @@ abstract class QueryController<InstanceType extends ManagedObject>
   /// 3. If the [Request] contains a body, it will be decoded per the [acceptedContentTypes] and deserialized into the [Query.values] property via [ManagedObject.readFromMap].
   Query<InstanceType>? query;
 
+  /// Overrides [ResourceController.willProcessRequest] to set up the [query] based on the request.
+  ///
+  /// This method checks if there's a path variable matching the primary key of [InstanceType],
+  /// and if so, sets up the [query] to filter by this primary key value.
+  ///
+  /// Returns a [Future] that completes with either the [Request] or a [Response].
   @override
   FutureOr<RequestOrResponse> willProcessRequest(Request req) {
     if (req.path.orderedVariableNames.isNotEmpty) {
@@ -64,6 +80,12 @@ abstract class QueryController<InstanceType extends ManagedObject>
     return super.willProcessRequest(req);
   }
 
+  /// Overrides [ResourceController.didDecodeRequestBody] to populate [query.values] with the decoded request body.
+  ///
+  /// This method reads the decoded request body into [query.values] and removes the primary key
+  /// from the backing map to prevent accidental updates to the primary key.
+  ///
+  /// [body] is the decoded request body.
   @override
   void didDecodeRequestBody(RequestBody body) {
     query!.values.readFromMap(body.as());

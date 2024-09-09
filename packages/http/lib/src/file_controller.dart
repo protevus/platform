@@ -1,11 +1,20 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'dart:async';
 import 'dart:io';
-
 import 'package:protevus_openapi/documentable.dart';
 import 'package:protevus_http/http.dart';
 import 'package:protevus_openapi/v3.dart';
 import 'package:path/path.dart' as path;
 
+/// A typedef for a function that handles file controller operations.
 typedef FileControllerClosure = FutureOr<Response> Function(
   FileController controller,
   Request req,
@@ -48,6 +57,7 @@ class FileController extends Controller {
   })  : _servingDirectory = Uri.directory(pathOfDirectoryToServe),
         _onFileNotFound = onFileNotFound;
 
+  /// A map of default file extensions to their corresponding ContentTypes.
   static final Map<String, ContentType> _defaultExtensionMap = {
     /* Web content */
     "html": ContentType("text", "html", charset: "utf-8"),
@@ -80,9 +90,16 @@ class FileController extends Controller {
     "otf": ContentType("font", "otf"),
   };
 
+  /// A map of file extensions to their corresponding ContentTypes.
   final Map<String, ContentType> _extensionMap = Map.from(_defaultExtensionMap);
+
+  /// A list of policy pairs for caching.
   final List<_PolicyPair?> _policyPairs = [];
+
+  /// The URI of the directory being served.
   final Uri _servingDirectory;
+
+  /// A function to handle file not found errors.
   final FutureOr<Response> Function(
     FileController,
     Request,
@@ -155,6 +172,7 @@ class FileController extends Controller {
         ?.policy;
   }
 
+  /// Handles incoming requests and serves the appropriate file.
   @override
   Future<RequestOrResponse> handle(Request request) async {
     if (request.method != "GET") {
@@ -208,6 +226,7 @@ class FileController extends Controller {
       ..contentType = contentType;
   }
 
+  /// Documents the operations of this controller for API documentation.
   @override
   Map<String, APIOperation> documentOperations(
     APIDocumentContext context,
@@ -230,12 +249,21 @@ class FileController extends Controller {
     };
   }
 
+  /// Returns the cache policy for a given file.
   CachePolicy? _policyForFile(File file) => cachePolicyForPath(file.path);
 }
 
+/// A class to pair a cache policy with a function that determines if it should be applied.
 class _PolicyPair {
+  /// Creates a new policy pair.
+  ///
+  /// [policy] is the cache policy to apply.
+  /// [shouldApplyToPath] is a function that determines if the policy should be applied to a given path.
   _PolicyPair(this.policy, this.shouldApplyToPath);
 
+  /// A function that determines if the policy should be applied to a given path.
   final bool Function(String) shouldApplyToPath;
+
+  /// The cache policy to apply.
   final CachePolicy policy;
 }

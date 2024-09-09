@@ -1,3 +1,12 @@
+/*
+ * This file is part of the Protevus Platform.
+ *
+ * (C) Protevus <developers@protevus.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 import 'dart:io';
 import 'package:protevus_http/http.dart';
 
@@ -11,7 +20,6 @@ import 'package:protevus_http/http.dart';
 /// Modifications to policy for a specific [Controller] can be accomplished in the initializer of the controller.
 ///
 /// Application-wide defaults can be managed by modifying [defaultPolicy] in a [ApplicationChannel]'s constructor.
-///
 class CORSPolicy {
   /// Create a new instance of [CORSPolicy].
   ///
@@ -26,6 +34,7 @@ class CORSPolicy {
     cacheInSeconds = def.cacheInSeconds;
   }
 
+  /// Creates a new instance of [CORSPolicy] with default values.
   CORSPolicy._defaults() {
     allowedOrigins = ["*"];
     allowCredentials = true;
@@ -50,6 +59,7 @@ class CORSPolicy {
     return _defaultPolicy ??= CORSPolicy._defaults();
   }
 
+  /// Internal storage for the default policy.
   static CORSPolicy? _defaultPolicy;
 
   /// List of 'Simple' CORS headers.
@@ -88,8 +98,6 @@ class CORSPolicy {
   /// Which response headers to expose to the client.
   ///
   /// Defaults to empty. In the specification (http://www.w3.org/TR/cors/), this is 'list of exposed headers'.
-  ///
-  ///
   late List<String> exposedResponseHeaders;
 
   /// Which HTTP methods are allowed.
@@ -110,6 +118,9 @@ class CORSPolicy {
   ///
   /// This will add Access-Control-Allow-Origin, Access-Control-Expose-Headers and Access-Control-Allow-Credentials
   /// depending on the this policy.
+  ///
+  /// [request] The incoming request.
+  /// Returns a map of HTTP headers.
   Map<String, dynamic> headersForRequest(Request request) {
     final origin = request.raw.headers.value("origin");
 
@@ -133,6 +144,9 @@ class CORSPolicy {
   /// Will return true if [allowedOrigins] contains the case-sensitive Origin of the [request],
   /// or that [allowedOrigins] contains *.
   /// This method is invoked internally by [Controller]s that have a [Controller.policy].
+  ///
+  /// [request] The incoming HTTP request.
+  /// Returns true if the request origin is allowed, false otherwise.
   bool isRequestOriginAllowed(HttpRequest request) {
     if (allowedOrigins.contains("*")) {
       return true;
@@ -150,6 +164,9 @@ class CORSPolicy {
   ///
   /// Will return true if the policy agrees with the Access-Control-Request-* headers of the request, otherwise, false.
   /// This method is invoked internally by [Controller]s that have a [Controller.policy].
+  ///
+  /// [request] The incoming HTTP request.
+  /// Returns true if the preflight request is valid according to this policy, false otherwise.
   bool validatePreflightRequest(HttpRequest request) {
     if (!isRequestOriginAllowed(request)) {
       return false;
@@ -181,6 +198,9 @@ class CORSPolicy {
   /// Contains the Access-Control-Allow-* headers for a CORS preflight request according
   /// to this policy.
   /// This method is invoked internally by [Controller]s that have a [Controller.policy].
+  ///
+  /// [req] The incoming request.
+  /// Returns a Response object with the appropriate CORS headers.
   Response preflightResponse(Request req) {
     final headers = {
       "Access-Control-Allow-Origin": req.raw.headers.value("origin"),
