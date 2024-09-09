@@ -14,7 +14,11 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/file_system/physical_file_system.dart';
 import 'package:path/path.dart';
 
+/// A class for analyzing Dart code.
 class CodeAnalyzer {
+  /// Constructs a CodeAnalyzer with the given URI.
+  ///
+  /// Throws an [ArgumentError] if the URI is not absolute or if no analysis context is found.
   CodeAnalyzer(this.uri) {
     if (!uri.isAbsolute) {
       throw ArgumentError("'uri' must be absolute for CodeAnalyzer");
@@ -27,16 +31,23 @@ class CodeAnalyzer {
     }
   }
 
+  /// Gets the path from the URI.
   String get path {
     return getPath(uri);
   }
 
+  /// The URI of the code to analyze.
   late final Uri uri;
 
+  /// The collection of analysis contexts.
   late AnalysisContextCollection contexts;
 
+  /// A cache of resolved ASTs.
   final _resolvedAsts = <String, AnalysisResult>{};
 
+  /// Resolves the unit or library at the given URI.
+  ///
+  /// Returns a [Future] that completes with an [AnalysisResult].
   Future<AnalysisResult> resolveUnitOrLibraryAt(Uri uri) async {
     if (FileSystemEntity.isFileSync(
       uri.toFilePath(windows: Platform.isWindows),
@@ -47,6 +58,10 @@ class CodeAnalyzer {
     }
   }
 
+  /// Resolves the library at the given URI.
+  ///
+  /// Returns a [Future] that completes with a [ResolvedLibraryResult].
+  /// Throws an [ArgumentError] if the URI could not be resolved.
   Future<ResolvedLibraryResult> resolveLibraryAt(Uri uri) async {
     assert(
       FileSystemEntity.isDirectorySync(
@@ -68,6 +83,10 @@ class CodeAnalyzer {
         "${contexts.contexts.map((c) => c.contextRoot.root.toUri()).join(", ")})");
   }
 
+  /// Resolves the unit at the given URI.
+  ///
+  /// Returns a [Future] that completes with a [ResolvedUnitResult].
+  /// Throws an [ArgumentError] if the URI could not be resolved.
   Future<ResolvedUnitResult> resolveUnitAt(Uri uri) async {
     assert(
       FileSystemEntity.isFileSync(
@@ -89,6 +108,9 @@ class CodeAnalyzer {
         "${contexts.contexts.map((c) => c.contextRoot.root.toUri()).join(", ")})");
   }
 
+  /// Gets the class declaration from the file at the given URI.
+  ///
+  /// Returns null if the class is not found or if there's an error.
   ClassDeclaration? getClassFromFile(String className, Uri fileUri) {
     try {
       return _getFileAstRoot(fileUri)
@@ -103,6 +125,9 @@ class CodeAnalyzer {
     }
   }
 
+  /// Gets all subclasses of the given superclass from the file at the given URI.
+  ///
+  /// Returns a list of [ClassDeclaration]s.
   List<ClassDeclaration> getSubclassesFromFile(
     String superclassName,
     Uri fileUri,
@@ -115,6 +140,9 @@ class CodeAnalyzer {
         .toList();
   }
 
+  /// Gets the AST root of the file at the given URI.
+  ///
+  /// Returns a [CompilationUnit].
   CompilationUnit _getFileAstRoot(Uri fileUri) {
     assert(
       FileSystemEntity.isFileSync(
@@ -135,6 +163,9 @@ class CodeAnalyzer {
     return unit.unit;
   }
 
+  /// Converts the input URI to a normalized path string.
+  ///
+  /// This is a static utility method.
   static String getPath(dynamic inputUri) {
     return PhysicalResourceProvider.INSTANCE.pathContext.normalize(
       PhysicalResourceProvider.INSTANCE.pathContext.fromUri(inputUri),

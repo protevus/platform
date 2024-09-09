@@ -8,9 +8,23 @@
  */
 
 import 'dart:mirrors';
-
 import 'package:protevus_runtime/runtime.dart';
 
+/// Attempts to cast an object to a specified type at runtime.
+///
+/// This function uses Dart's mirror system to perform runtime type checking
+/// and casting. It handles casting to List and Map types, including their
+/// generic type arguments.
+///
+/// Parameters:
+/// - [object]: The object to be cast.
+/// - [intoType]: A [TypeMirror] representing the type to cast into.
+///
+/// Returns:
+/// The object cast to the specified type.
+///
+/// Throws:
+/// - [TypeCoercionException] if the casting fails.
 Object runtimeCast(Object object, TypeMirror intoType) {
   final exceptionToThrow =
       TypeCoercionException(intoType.reflectedType, object.runtimeType);
@@ -51,6 +65,16 @@ Object runtimeCast(Object object, TypeMirror intoType) {
   throw exceptionToThrow;
 }
 
+/// Determines if a given type is fully primitive.
+///
+/// A type is considered fully primitive if it's a basic type (num, String, bool),
+/// dynamic, or a collection (List, Map) where all nested types are also primitive.
+///
+/// Parameters:
+/// - [type]: A [TypeMirror] representing the type to check.
+///
+/// Returns:
+/// true if the type is fully primitive, false otherwise.
 bool isTypeFullyPrimitive(TypeMirror type) {
   if (type == reflectType(dynamic)) {
     return true;

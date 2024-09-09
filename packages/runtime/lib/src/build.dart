@@ -11,16 +11,34 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:mirrors';
-
 import 'package:protevus_runtime/runtime.dart';
 import 'package:io/io.dart';
 import 'package:package_config/package_config.dart';
 
+/// A class responsible for building and compiling the application.
+///
+/// This class handles the entire build process, including resolving ASTs,
+/// generating runtime, compiling packages, and creating the final executable.
 class Build {
+  /// Creates a new [Build] instance with the given [BuildContext].
+  ///
+  /// [context] is the build context containing necessary information for the build process.
   Build(this.context);
 
+  /// The build context for this build operation.
   final BuildContext context;
 
+  /// Executes the build process.
+  ///
+  /// This method performs the following steps:
+  /// 1. Resolves ASTs
+  /// 2. Generates runtime
+  /// 3. Compiles packages
+  /// 4. Prepares the build directory
+  /// 5. Fetches dependencies
+  /// 6. Compiles the final executable (if not for tests)
+  ///
+  /// Throws a [StateError] if any step fails.
   Future execute() async {
     final compilers = context.context.compilers;
 
@@ -129,6 +147,10 @@ class Build {
     }
   }
 
+  /// Fetches dependencies for the project.
+  ///
+  /// This method runs 'dart pub get' with the '--offline' and '--no-precompile' flags.
+  /// It throws a [StateError] if the command fails.
   Future getDependencies() async {
     const String cmd = "dart";
 
@@ -147,6 +169,13 @@ class Build {
     }
   }
 
+  /// Compiles the source file to an executable.
+  ///
+  /// [srcUri] is the URI of the source file to compile.
+  /// [dstUri] is the URI where the compiled executable will be saved.
+  ///
+  /// This method runs 'dart compile exe' with verbose output.
+  /// It throws a [StateError] if the compilation fails.
   Future compile(Uri srcUri, Uri dstUri) async {
     final res = await Process.run(
       "dart",
@@ -173,6 +202,13 @@ class Build {
     print("${res.stdout}");
   }
 
+  /// Copies a package from source to destination.
+  ///
+  /// [srcUri] is the URI of the source package.
+  /// [dstUri] is the URI where the package will be copied.
+  ///
+  /// This method creates the destination directory if it doesn't exist,
+  /// copies the package contents, and handles Windows-specific file system issues.
   Future copyPackage(Uri srcUri, Uri dstUri) async {
     final dstDir = Directory.fromUri(dstUri);
     if (!dstDir.existsSync()) {
@@ -206,6 +242,12 @@ class Build {
         );
   }
 
+  /// Retrieves package information for a given compiler.
+  ///
+  /// [compiler] is the compiler instance to get package information for.
+  ///
+  /// This method uses reflection to find the source URI of the compiler
+  /// and then retrieves the corresponding package information.
   Future<Package> _getPackageInfoForCompiler(Compiler compiler) async {
     final compilerUri = reflect(compiler).type.location!.sourceUri;
 

@@ -8,20 +8,31 @@
  */
 
 import 'dart:io';
-
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:protevus_isolate/isolate.dart';
 import 'package:protevus_runtime/runtime.dart';
 import 'package:io/io.dart';
 
+/// A class that represents an executable build process.
+///
+/// This class extends the [Executable] class and is responsible for
+/// executing a build process based on the provided build context.
 class BuildExecutable extends Executable {
+  /// Constructs a new [BuildExecutable] instance.
+  ///
+  /// [message] is a map containing the build context information.
   BuildExecutable(Map<String, dynamic> message) : super(message) {
     context = BuildContext.fromMap(message);
   }
 
+  /// The build context for this executable.
   late final BuildContext context;
 
+  /// Executes the build process.
+  ///
+  /// This method creates a new [Build] instance with the current context
+  /// and calls its execute method.
   @override
   Future execute() async {
     final build = Build(context);
@@ -29,21 +40,33 @@ class BuildExecutable extends Executable {
   }
 }
 
+/// A class that manages the build process for non-mirrored builds.
 class BuildManager {
-  /// Creates a new build manager to compile a non-mirrored build.
+  /// Creates a new [BuildManager] instance.
+  ///
+  /// [context] is the [BuildContext] for this build manager.
   BuildManager(this.context);
 
+  /// The build context for this manager.
   final BuildContext context;
 
+  /// Gets the URI of the source directory.
   Uri get sourceDirectoryUri => context.sourceApplicationDirectory.uri;
 
+  /// Performs the build process.
+  ///
+  /// This method handles the following steps:
+  /// 1. Creates the build directory if it doesn't exist.
+  /// 2. Creates a temporary copy of the script file with the main function stripped.
+  /// 3. Analyzes the script file and removes all main functions.
+  /// 4. Copies the 'not_tests' directory if it exists.
+  /// 5. Runs the build executable in an isolate.
   Future build() async {
     if (!context.buildDirectory.existsSync()) {
       context.buildDirectory.createSync();
     }
 
-    // Here is where we need to provide a temporary copy of the script file with the main function stripped;
-    // this is because when the RuntimeGenerator loads, it needs Mirror access to any declarations in this file
+    // Create a temporary copy of the script file with the main function stripped
     var scriptSource = context.source;
     final strippedScriptFile = File.fromUri(context.targetScriptFileUri)
       ..writeAsStringSync(scriptSource);
@@ -52,6 +75,7 @@ class BuildManager {
     final parsedUnit = analyzerContext.currentSession
         .getParsedUnit(analyzer.path) as ParsedUnitResult;
 
+    // Find and remove all main functions
     final mainFunctions = parsedUnit.unit.declarations
         .whereType<FunctionDeclaration>()
         .where((f) => f.name.value() == "main")
@@ -63,12 +87,14 @@ class BuildManager {
 
     strippedScriptFile.writeAsStringSync(scriptSource);
 
+    // Copy the 'not_tests' directory if it exists
     try {
       await copyPath(
           context.sourceApplicationDirectory.uri.resolve('test/not_tests').path,
           context.buildDirectoryUri.resolve('not_tests').path);
     } catch (_) {}
 
+    // Run the build executable in an isolate
     await IsolateExecutor.run(
       BuildExecutable(context.safeMap),
       packageConfigURI:
@@ -81,6 +107,9 @@ class BuildManager {
     );
   }
 
+  /// Cleans up the build directory.
+  ///
+  /// This method deletes the build directory and its contents if it exists.
   Future clean() async {
     if (context.buildDirectory.existsSync()) {
       context.buildDirectory.deleteSync(recursive: true);
