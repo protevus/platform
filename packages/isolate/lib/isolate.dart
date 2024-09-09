@@ -7,15 +7,6 @@
  * file that was distributed with this source code.
  */
 
-/*
- * This file is part of the Protevus Platform.
- *
- * (C) Protevus <developers@protevus.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 /// This library provides functionality for working with isolates in Dart.
 /// It exports three main components:
 /// 1. Executable: Defines the structure for tasks that can be executed in isolates.
