@@ -19,7 +19,7 @@ void main() async {
   hierarchicalLoggingEnabled = true;
   //Logger.root.onRecord.listen(prettyLog);
 
-  var app = Protevus(logger: Logger('angel'));
+  var app = Protevus(logger: Logger('protevus'));
   var http = ProtevusHttp(app);
   var multiHost = HostnameRouter.configure({
     'api.localhost:3000': apiConfigurer,

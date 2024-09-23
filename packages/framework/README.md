@@ -1,6 +1,6 @@
-# Angel3 Framework
+# Protevus Framework
 
-[![Angel3 Framework](../../angel3_logo.png)](https://github.com/dart-backend/angel)
+[![Protevus Framework](../../angel3_logo.png)](https://github.com/dart-backend/angel)
 
 ![Pub Version (including pre-releases)](https://img.shields.io/pub/v/angel3_framework?include_prereleases)
 [![Null Safety](https://img.shields.io/badge/null-safety-brightgreen)](https://dart.dev/null-safety)
@@ -8,9 +8,9 @@
 [![License](https://img.shields.io/github/license/dart-backend/angel)](https://github.com/dart-backend/angel/tree/master/packages/framework/LICENSE)
 [![melos](https://img.shields.io/badge/maintained%20with-melos-f700ff.svg?style=flat-square)](https://github.com/invertase/melos)
 
-Angel3 framework is a high-powered HTTP server with support for dependency injection, sophisticated routing, authentication, ORM, graphql etc. It is designed to keep the core minimal but extensible through a series of plugin packages. It won't dictate which features, databases or web templating engine to use. This flexibility enable Angel3 framework to grow with your application as new features can be added to handle the new use cases.
+Protevus framework is a high-powered HTTP server with support for dependency injection, sophisticated routing, authentication, ORM, graphql etc. It is designed to keep the core minimal but extensible through a series of plugin packages. It won't dictate which features, databases or web templating engine to use. This flexibility enable Protevus framework to grow with your application as new features can be added to handle the new use cases.
 
-This package is the core package of [Angel3](https://github.com/dart-backend/angel). For more information, visit us at [Angel3 Website](https://angel3-framework.web.app).
+This package is the core package of [Protevus](https://github.com/dart-backend/angel). For more information, visit us at [Protevus Website](https://angel3-framework.web.app).
 
 ## Installation and Setup
 
@@ -19,10 +19,10 @@ This package is the core package of [Angel3](https://github.com/dart-backend/ang
 1. Download and install [Dart](https://dart.dev/get-dart)
 
 2. Clone one of the following starter projects:
-   * [Angel3 Basic Template](https://github.com/dukefirehawk/boilerplates/tree/v7/angel3-basic)
-   * [Angel3 ORM Template](https://github.com/dukefirehawk/boilerplates/tree/v7/angel3-orm)
-   * [Angel3 ORM MySQL Template](https://github.com/dukefirehawk/boilerplates/tree/v7/angel3-orm-mysql)
-   * [Angel3 Graphql Template](https://github.com/dukefirehawk/boilerplates/tree/v7/angel3-graphql)
+   * [Protevus Basic Template](https://github.com/dukefirehawk/boilerplates/tree/v7/angel3-basic)
+   * [Protevus ORM Template](https://github.com/dukefirehawk/boilerplates/tree/v7/angel3-orm)
+   * [Protevus ORM MySQL Template](https://github.com/dukefirehawk/boilerplates/tree/v7/angel3-orm-mysql)
+   * [Protevus Graphql Template](https://github.com/dukefirehawk/boilerplates/tree/v7/angel3-graphql)
 
 3. Run the project in development mode (*hot-reloaded* is enabled on file changes).
 
@@ -38,11 +38,11 @@ This package is the core package of [Angel3](https://github.com/dart-backend/ang
 
 5. Run as docker. Edit and build the image with the provided `Dockerfile` file.
 
-### (Option 2) Create a new project with Angel3 CLI
+### (Option 2) Create a new project with Protevus CLI
 
 1. Download and install [Dart](https://dart.dev/get-dart)
 
-2. Install the [Angel3 CLI](https://pub.dev/packages/angel3_cli):
+2. Install the [Protevus CLI](https://pub.dev/packages/angel3_cli):
 
    ```bash
    dart pub global activate angel3_cli
@@ -74,9 +74,9 @@ The performance benchmark can be found at
 
 [TechEmpower Framework Benchmarks Round 21](https://www.techempower.com/benchmarks/#section=data-r21&test=composite)
 
-### Migrating from Angel to Angel3
+### Migrating from Angel to Protevus
 
-Check out [Migrating to Angel3](https://angel3-docs.dukefirehawk.com/migration/angel-2.x.x-to-angel3/migration-guide-3)
+Check out [Migrating to Protevus](https://angel3-docs.dukefirehawk.com/migration/angel-2.x.x-to-angel3/migration-guide-3)
 
 ## Donation & Support
 

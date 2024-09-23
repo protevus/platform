@@ -1,4 +1,4 @@
-# Angel3 Route
+# Protevus Route
 
 ![Pub Version (including pre-releases)](https://img.shields.io/pub/v/angel3_route?include_prereleases)
 [![Null Safety](https://img.shields.io/badge/null-safety-brightgreen)](https://dart.dev/null-safety)
@@ -9,11 +9,11 @@ A powerful, isomorphic routing library for Dart.
 
 `angel3_route` exposes a routing system that takes the shape of a tree. This tree structure can be easily navigated, in a fashion somewhat similar to a filesystem. The `Router` API is a very straightforward interface that allows for your code to take a shape similar to the route tree. Users of Laravel and Express will be very happy.
 
-`angel3_route` does not require the use of [Angel 3](https://pub.dev/packages/angel3_framework), and has minimal dependencies. Thus, it can be used in any application, regardless of framework. This includes Web apps, Flutter apps, CLI apps, and smaller servers which do not need all the features of the Angel framework.
+`angel3_route` does not require the use of [Protevus 3](https://pub.dev/packages/angel3_framework), and has minimal dependencies. Thus, it can be used in any application, regardless of framework. This includes Web apps, Flutter apps, CLI apps, and smaller servers which do not need all the features of the Protevus framework.
 
 ## Contents
 
-- [Angel3 Route](#angel3-route)
+- [Protevus Route](#angel3-route)
   - [Contents](#contents)
   - [Examples](#examples)
     - [Routing](#routing)
@@ -26,7 +26,7 @@ A powerful, isomorphic routing library for Dart.
 
 ### Routing
 
-If you use [Angel3](https://pub.dev/packages/angel3_framework), every `Angel` instance is a `Router` in itself.
+If you use [Protevus](https://pub.dev/packages/angel3_framework), every `Protevus` instance is a `Router` in itself.
 
 ```dart
 void main() {

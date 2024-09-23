@@ -83,7 +83,7 @@ void main() {
       ..listen((HookedServiceEvent event) async {
         // Hooks can be Futures ;)
         event.cancel([
-          {'angel': 'framework'}
+          {'protevus': 'framework'}
         ]);
       })
       ..listen((HookedServiceEvent event) {
@@ -93,13 +93,13 @@ void main() {
     var response = await client.get(Uri.parse('$url/todos'));
     print(response.body);
     var result = json.decode(response.body) as List;
-    expect(result[0]['angel'], equals('framework'));
+    expect(result[0]['protevus'], equals('framework'));
   });
 
   test('asStream() fires', () async {
     var stream = todoService.afterCreated.asStream();
-    await todoService.create({'angel': 'framework'});
-    expect(await stream.first.then((e) => e.result['angel']), 'framework');
+    await todoService.create({'protevus': 'framework'});
+    expect(await stream.first.then((e) => e.result['protevus']), 'framework');
   });
 
   test('metadata', () async {

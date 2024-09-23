@@ -11,7 +11,7 @@ void main() async {
       'gzip': gzip.encoder,
       'deflate': zlib.encoder,
     });
-  app.logger = Logger('angel')..onRecord.listen(dumpError);
+  app.logger = Logger('protevus')..onRecord.listen(dumpError);
 
   app.get('/', (req, res) => 'Hello HTTP/2!!!');
 

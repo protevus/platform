@@ -20,8 +20,8 @@
 
 ## 8.2.0
 
-* Add `addResponseHeader` to `AngelHttp` to add headers to HTTP default response
-* Add `removeResponseHeader` to `AngelHttp` to remove headers from HTTP default response
+* Add `addResponseHeader` to `ProtevusHttp` to add headers to HTTP default response
+* Add `removeResponseHeader` to `ProtevusHttp` to remove headers from HTTP default response
 
 ## 8.1.1
 
@@ -80,7 +80,7 @@
 ## 4.2.2
 
 * Added `Date` to response header
-* Updated `Server: Angel3` response header
+* Updated `Server: Protevus` response header
 
 ## 4.2.1
 
@@ -103,7 +103,7 @@
   
 ## 4.1.1
 
-* Updated link to `Angel3` home page
+* Updated link to `Protevus` home page
 * Fixed pedantic warnings
 
 ## 4.1.0
@@ -138,7 +138,7 @@
 
 ## 2.1.1
 
-* `AngelHttp.uri` now returns an empty `Uri` if the server is not listening.
+* `ProtevusHttp.uri` now returns an empty `Uri` if the server is not listening.
 
 ## 2.1.0
 
@@ -150,7 +150,7 @@ therefore been bumped to `2.1.0`.
 ## 2.0.5-beta
 
 * Make `@Expose()` in `Controller` optional. <https://github.com/angel-dart/angel/issues/107>
-* Add `allowHttp1` to `AngelHttp2` constructors. <https://github.com/angel-dart/angel/issues/108>
+* Add `allowHttp1` to `ProtevusHttp2` constructors. <https://github.com/angel-dart/angel/issues/108>
 * Add `deserializeBody` and `decodeBody` to `RequestContext`. <https://github.com/angel-dart/angel/issues/109>
 * Add `HostnameRouter`, which allows for routing based on hostname. <https://github.com/angel-dart/angel/issues/110>
 * Default to using `ThrowingReflector`, instead of `EmptyReflector`. This will give a more descriptive
@@ -189,17 +189,17 @@ See more: <https://github.com/angel-dart/angel/issues/106#issuecomment-499564485
 handlers to run, even after the response was closed.
 * Add `RequestContext.shutdownHooks`.
 * Call `RequestContext.close` in `Driver.sendResponse`.
-* AngelConfigurer is now `FutureOr<void>`, instead of just `FutureOr`.
+* ProtevusConfigurer is now `FutureOr<void>`, instead of just `FutureOr`.
 * Use a `Container.has<Stopwatch>` check in `Driver.sendResponse`.
 * Remove unnecessary `new` and `const`.
 
 ## 2.0.0
 
-* Angel 2! :angel: :rocket:
+* Protevus 2! :angel: :rocket:
 
 ## 2.0.0-rc.10
 
-* Fix an error that prevented `AngelHttp2.custom` from working properly.
+* Fix an error that prevented `ProtevusHttp2.custom` from working properly.
 * Add `startSharedHttp2`.
 
 ## 2.0.0-rc.9
@@ -246,8 +246,8 @@ the outputs of `before` events.
 ## 2.0.0-rc.0
 
 * Log a warning when no `reflector` is provided.
-* Add `AngelEnvironment` class.
-  * Add `Angel.environment`.
+* Add `ProtevusEnvironment` class.
+  * Add `Protevus.environment`.
   * Deprecated `app.isProduction` in favor of `app.environment.isProduction`.
 * Allow setting of `bodyAsObject`, `bodyAsMap`, or `bodyAsList` **exactly once**.
 * Resolve named singletons in `resolveInjection`.
@@ -256,8 +256,8 @@ the outputs of `before` events.
 
 ## 2.0.0-alpha.24
 
-* Add `AngelEnv` class to `core`.
-* Deprecate `Angel.isProduction`, in favor of `AngelEnv`.
+* Add `ProtevusEnv` class to `core`.
+* Deprecate `Protevus.isProduction`, in favor of `ProtevusEnv`.
 
 ## 2.0.0-alpha.23
 
@@ -306,7 +306,7 @@ stable, there'll be a conversion, perhaps.
 * `RequestContext` now exposes a `Stream<List<int>> get body` getter.
   * Calling `RequestContext.parseBody()` parses its contents.
   * Added `bodyAsMap`, `bodyAsList`, `bodyAsObject`, and `uploadedFiles` to `RequestContext`.
-  * Removed `Angel.keepRawRequestBuffers` and anything that had to do with buffering request bodies.
+  * Removed `Protevus.keepRawRequestBuffers` and anything that had to do with buffering request bodies.
 
 ## 2.0.0-alpha.14
 
@@ -319,21 +319,21 @@ stable, there'll be a conversion, perhaps.
 ## 2.0.0-alpha.12
 
 * Remove `ResponseContext.sendFile`.
-* Add `Angel.mimeTypeResolver`.
+* Add `Protevus.mimeTypeResolver`.
 * Fix a bug where an unknown MIME type on `streamFile` would return a 500.
 
 ## 2.0.0-alpha.11
 
 * Add `readMany` to `Service`.
 * Allow `ResponseContext.redirect` to take a `Uri`.
-* Add `Angel.mountController`.
-* Add `Angel.findServiceOf`.
+* Add `Protevus.mountController`.
+* Add `Protevus.findServiceOf`.
 * Roll in HTTP/2. See `pkg:angel_framework/http2.dart`.
 
 ## 2.0.0-alpha.10
 
 * All calls to `Service.parseId` are now affixed with the `<Id>` argument.
-* Added `uri` getter to `AngelHttp`.
+* Added `uri` getter to `ProtevusHttp`.
 * The default for `parseQuery` now wraps query parameters in `Map<String, dynamic>.from`.
   This resolves a bug in `package:angel_validate`.
 
@@ -379,10 +379,10 @@ stable, there'll be a conversion, perhaps.
 
 ## 2.0.0-alpha.1
 
-* Removed `Angel.injectEncoders`.
+* Removed `Protevus.injectEncoders`.
 * Added `Providers.toJson`.
 * Moved `Providers.graphql` to `Providers.graphQL`.
-* `Angel.optimizeForProduction` no longer calls `preInject`,
+* `Protevus.optimizeForProduction` no longer calls `preInject`,
   as it does not need to.
 * Rename `ResponseContext.enableBuffer` to `ResponseContext.useBuffer`.
 
@@ -398,7 +398,7 @@ stable, there'll be a conversion, perhaps.
 * Remove dependency on `package:dart2_constant`.
 * Moved `lib/hooks.dart` into `package:angel_hooks`.
 * Moved `TypedService` into `package:angel_typed_service`.
-* Completely removed the `AngelBase` class.
+* Completely removed the `ProtevusBase` class.
 * Removed all `@deprecated` symbols.
 * `Service.toId` was renamed to `Service.parseId`; it also now uses its
   single type argument to determine how to parse a value. \* In addition, this method was also made `static`.
@@ -409,16 +409,16 @@ stable, there'll be a conversion, perhaps.
   gone.
 * `HttpRequestContextImpl` and `HttpResponseContextImpl` were renamed to
   `HttpRequestContext` and `HttpResponseContext`.
-* Lazy-parsing request bodies is now the default; `Angel.lazyParseBodies` was replaced
-  with `Angel.eagerParseRequestBodies`.
-* `Angel.storeOriginalBuffer` -> `Angel.storeRawRequestBuffers`.
+* Lazy-parsing request bodies is now the default; `Protevus.lazyParseBodies` was replaced
+  with `Protevus.eagerParseRequestBodies`.
+* `Protevus.storeOriginalBuffer` -> `Protevus.storeRawRequestBuffers`.
 * The methods `lazyBody`, `lazyFiles`, and `lazyOriginalBuffer` on `ResponseContext` were all
   replaced with `parseBody`, `parseUploadedFiles`, and `parseRawRequestBuffer`, respectively.
 * Removed the synchronous equivalents of the above methods (`body`, `files`, and `originalBuffer`),
   as well as `query`.
-* Removed `Angel.injections` and `RequestContext.injections`.
-* Removed `Angel.inject` and `RequestContext.inject`.
-* Removed a dependency on `package:pool`, which also meant removing `AngelHttp.throttle`.
+* Removed `Protevus.injections` and `RequestContext.injections`.
+* Removed `Protevus.inject` and `RequestContext.inject`.
+* Removed a dependency on `package:pool`, which also meant removing `ProtevusHttp.throttle`.
 * Remove the `RequestMiddleware` typedef; from now on, one should use `ResponseContext.end`
   exclusively to close responses.
 * `waterfall` will now only accept `RequestHandler`.
@@ -434,11 +434,11 @@ stable, there'll be a conversion, perhaps.
 * Removed `RequestContext.properties`.
 * Removed the defunct `debug` property where it still existed.
 * `Routable.use` now only accepts a `Service`.
-* Removed `Angel.createZoneForRequest`.
-* Removed `Angel.defaultZoneCreator`.
-* Added all flags to the `Angel` constructor, ex. `Angel.eagerParseBodies`.
+* Removed `Protevus.createZoneForRequest`.
+* Removed `Protevus.defaultZoneCreator`.
+* Added all flags to the `Protevus` constructor, ex. `Protevus.eagerParseBodies`.
 * Fix a bug where synchronous errors in `handleRequest` would not be caught.
-* `AngelHttp.useZone` now defaults to `false`.
+* `ProtevusHttp.useZone` now defaults to `false`.
 * `ResponseContext` now starts in streaming mode by default; the response buffer is opt-in,
   as in many cases it is unnecessary and slows down response time.
 * `ResponseContext.streaming` was replaced by `ResponseContext.isBuffered`.
@@ -448,5 +448,5 @@ stable, there'll be a conversion, perhaps.
 * Removed the now-obsolete `ResponseContext.end`.
 * Removed the now-obsolete `ResponseContext.releaseCorrespondingRequest`.
 * `preInject` now takes a `Reflector` as its second argument.
-* `Angel.reflector` defaults to `const EmptyReflector()`, disabling
+* `Protevus.reflector` defaults to `const EmptyReflector()`, disabling
   reflection out-of-the-box.

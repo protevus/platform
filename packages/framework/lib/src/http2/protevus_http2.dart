@@ -158,13 +158,13 @@ class ProtevusHttp2 extends Driver<Socket, ServerTransportStream,
 }
 
 class _FakeServerSocket extends Stream<Socket> implements ServerSocket {
-  final _ProtevusHttp2ServerSocket angel;
+  final _ProtevusHttp2ServerSocket protevus;
   final _ctrl = StreamController<Socket>();
 
-  _FakeServerSocket(this.angel);
+  _FakeServerSocket(this.protevus);
 
   @override
-  InternetAddress get address => angel.address;
+  InternetAddress get address => protevus.address;
 
   @override
   Future<ServerSocket> close() async {
@@ -173,7 +173,7 @@ class _FakeServerSocket extends Stream<Socket> implements ServerSocket {
   }
 
   @override
-  int get port => angel.port;
+  int get port => protevus.port;
 
   @override
   StreamSubscription<Socket> listen(void Function(Socket event)? onData,

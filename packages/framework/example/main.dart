@@ -9,7 +9,7 @@ void main() async {
 
   // Create our server.
   var app = Protevus(
-    logger: Logger('angel'),
+    logger: Logger('protevus'),
     reflector: MirrorsReflector(),
   );
 

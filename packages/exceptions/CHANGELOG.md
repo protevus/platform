@@ -24,7 +24,7 @@
 ## 6.0.0
 
 * Require Dart >= 2.16
-* [**Breaking**] `error` for `AngelHttpException` is no longer mandatory
+* [**Breaking**] `error` for `HttpException` is no longer mandatory
 
 ## 5.0.0
 

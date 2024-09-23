@@ -7,7 +7,7 @@ import 'package:logging/logging.dart';
 
 void main() async {
   var app = Protevus();
-  app.logger = Logger('angel')
+  app.logger = Logger('protevus')
     ..onRecord.listen((rec) {
       print(rec);
       if (rec.error != null) print(rec.error);

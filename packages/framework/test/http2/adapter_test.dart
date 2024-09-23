@@ -33,7 +33,7 @@ void main() {
     app = Protevus(reflector: MirrorsReflector())
       ..encoders['gzip'] = gzip.encoder;
     hierarchicalLoggingEnabled = true;
-    app.logger = Logger.detached('angel.http2')
+    app.logger = Logger.detached('protevus.http2')
       ..onRecord.listen((rec) {
         print(rec);
         if (rec.error == null) return;
@@ -53,7 +53,7 @@ void main() {
     app.get('/stream', (req, res) => jfkStream().pipe(res));
 
     app.get('/headers', (req, res) async {
-      res.headers.addAll({'foo': 'bar', 'x-angel': 'http2'});
+      res.headers.addAll({'foo': 'bar', 'x-protevus': 'http2'});
       await res.close();
     });
 
@@ -184,7 +184,7 @@ void main() {
   test('headers sent', () async {
     var response = await client.get(serverRoot.replace(path: '/headers'));
     expect(response.headers['foo'], 'bar');
-    expect(response.headers['x-angel'], 'http2');
+    expect(response.headers['x-protevus'], 'http2');
   });
 
   test('server push', () async {
@@ -288,7 +288,7 @@ void main() {
       rq.fields['foo'] = 'bar';
       rq.files.add(http.MultipartFile(
           'file', Stream.fromIterable([utf8.encode('hello world')]), 11,
-          contentType: MediaType('angel', 'framework')));
+          contentType: MediaType('protevus', 'framework')));
 
       var response = await client.send(rq);
       var responseBody = await response.stream.transform(utf8.decoder).join();
@@ -297,7 +297,7 @@ void main() {
           responseBody,
           json.encode([
             11,
-            'angel/framework',
+            'protevus/framework',
             {'foo': 'bar'}
           ]));
     });

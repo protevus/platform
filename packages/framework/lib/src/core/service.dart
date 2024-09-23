@@ -77,8 +77,8 @@ class Service<Id, Data> extends Routable {
     return _app!;
   }
 
-  set app(Protevus angel) {
-    _app = angel;
+  set app(Protevus protevus) {
+    _app = protevus;
   }
 
   bool get isAppActive => _app != null;
