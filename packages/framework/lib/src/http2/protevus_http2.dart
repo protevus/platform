@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:platform_framework/platform_framework.dart' hide Header;
 import 'package:platform_framework/http.dart';
 import 'package:http2/transport.dart';
-import 'package:platform_mock_request/platform_mock_request.dart';
+import 'package:platform_mocking/platform_mocking.dart';
 import 'http2_request_context.dart';
 import 'http2_response_context.dart';
 import 'package:uuid/uuid.dart';

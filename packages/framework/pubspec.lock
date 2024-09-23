@@ -284,10 +284,10 @@ packages:
       relative: true
     source: path
     version: "9.0.0"
-  platform_mock_request:
+  platform_mocking:
     dependency: "direct main"
     description:
-      path: "../mock_request"
+      path: "../mocking"
       relative: true
     source: path
     version: "9.0.0"

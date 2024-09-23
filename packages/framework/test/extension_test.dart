@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:platform_container/mirrors.dart';
 import 'package:platform_framework/platform_framework.dart';
 import 'package:platform_framework/http.dart';
-import 'package:platform_mock_request/platform_mock_request.dart';
+import 'package:platform_mocking/platform_mocking.dart';
 import 'package:test/test.dart';
 
 final Uri endpoint = Uri.parse('http://example.com');

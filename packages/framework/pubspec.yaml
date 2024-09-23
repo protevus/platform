@@ -10,7 +10,7 @@ dependencies:
   platform_exceptions: ^9.0.0
   platform_model: ^9.0.0
   platform_route: ^9.0.0
-  platform_mock_request: ^9.0.0
+  platform_mocking: ^9.0.0
   belatuk_merge_map: ^5.1.0
   belatuk_combinator: ^5.1.0
   belatuk_http_server: ^4.1.0
