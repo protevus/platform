@@ -1,8 +1,9 @@
 name: platform_container_generator
 version: 9.0.0
-description: Codegen support for using pkg:reflectable with pkg:angel3_container.
-homepage: https://angel3-framework.web.app/
-repository: https://github.com/dart-backend/angel/tree/master/packages/container/angel_container_generator
+description: Protevus Platform Codegen support for using pkg:reflectable with pkg:platform_container.
+homepage: https://protevus.com
+documentation: https://docs.protevus.com
+repository: https://git.protevus.com/protevus/platform/src/branch/main/packages/container/container_generator
 environment:
   sdk: '>=3.3.0 <4.0.0'
 dependencies:
@@ -14,5 +15,5 @@ dev_dependencies:
   test: ^1.24.0
   lints: ^4.0.0
 # dependency_overrides:
-#   angel3_container:
-#     path: ../angel_container
+#   platform_container:
+#     path: ../platform_container

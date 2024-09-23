@@ -1,8 +1,9 @@
 name: platform_exceptions
 version: 9.0.0
-description: Exception pakcage
-homepage: https://angel3-framework.web.app/
-repository: https://github.com/dart-backend/angel/tree/master/packages/http_exception
+description: Protevus Platform Exception package
+homepage: https://protevus.com
+documentation: https://docs.protevus.com
+repository: https://git.protevus.com/protevus/platform/src/branch/main/packages/exceptions
 environment:
   sdk: '>=3.3.0 <4.0.0'
 dev_dependencies:

@@ -1,8 +1,9 @@
 name: platform_model
 version: 9.0.0
-description: Protevus basic data model class, no longer with the added weight of the whole framework.
-homepage: https://angel3-framework.web.app/
-repository: https://github.com/dart-backend/angel/tree/master/packages/model
+description: Protevus Platform basic data model class, no longer with the added weight of the whole framework.
+homepage: https://protevus.com
+documentation: https://docs.protevus.com
+repository: https://git.protevus.com/protevus/platform/src/branch/main/packages/model
 environment:
   sdk: '>=3.3.0 <4.0.0'
 dev_dependencies:
