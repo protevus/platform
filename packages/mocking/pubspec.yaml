@@ -1,4 +1,4 @@
-name: platform_mock_request
+name: platform_mocking
 version: 9.0.0
 description: Manufacture dart:io HttpRequests, HttpResponses, HttpHeaders, etc.
 homepage: https://angel3-framework.web.app/

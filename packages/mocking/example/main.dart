@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:platform_mock_request/platform_mock_request.dart';
+import 'package:platform_mocking/platform_mocking.dart';
 
 Future<void> main() async {
   var rq =
