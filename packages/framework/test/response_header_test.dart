@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:platform_container/mirrors.dart';
 import 'package:platform_framework/platform_framework.dart';
-import 'package:platform_framework/src/http/angel_http.dart';
+import 'package:platform_framework/src/http/protevus_http.dart';
 import 'package:test/test.dart';
 
 void main() {

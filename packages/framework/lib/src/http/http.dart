@@ -3,7 +3,7 @@ library angel_framework.http;
 
 import 'dart:async';
 import 'dart:io';
-export 'angel_http.dart';
+export 'protevus_http.dart';
 export 'http_request_context.dart';
 export 'http_response_context.dart';
 
