@@ -7,8 +7,8 @@ import 'package:platform_mock_request/platform_mock_request.dart';
 import 'package:test/test.dart';
 
 void main() {
-  var app = Angel();
-  var http = AngelHttp(app);
+  var app = Protevus();
+  var http = ProtevusHttp(app);
 
   app.get('/default', (req, res) => res.jsonp({'foo': 'bar'}));
 

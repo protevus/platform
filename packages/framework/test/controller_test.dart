@@ -70,7 +70,7 @@ bool bar(RequestContext req, ResponseContext res) {
 }
 
 void main() {
-  late Angel app;
+  late Protevus app;
   late TodoController todoController;
   late NoExposeController noExposeCtrl;
   late HttpServer server;
@@ -78,7 +78,7 @@ void main() {
   String? url;
 
   setUp(() async {
-    app = Angel(reflector: MirrorsReflector());
+    app = Protevus(reflector: MirrorsReflector());
     app.get(
         '/redirect',
         (req, res) async =>
@@ -104,7 +104,7 @@ void main() {
     print(app.controllers);
     app.dumpTree();
 
-    server = await AngelHttp(app).startServer();
+    server = await ProtevusHttp(app).startServer();
     url = 'http://${server.address.address}:${server.port}';
   });
 
@@ -118,20 +118,20 @@ void main() {
   });
 
   test('create dynamic handler', () async {
-    var app = Angel(reflector: MirrorsReflector());
+    var app = Protevus(reflector: MirrorsReflector());
     app.get(
         '/foo',
         ioc(({String? bar}) {
           return 2;
         }, optional: ['bar']));
     var rq = MockHttpRequest('GET', Uri(path: 'foo'));
-    await AngelHttp(app).handleRequest(rq);
+    await ProtevusHttp(app).handleRequest(rq);
     var body = await utf8.decoder.bind(rq.response).join();
     expect(json.decode(body), 2);
   });
 
   test('optional name', () async {
-    var app = Angel(reflector: MirrorsReflector());
+    var app = Protevus(reflector: MirrorsReflector());
     await app.configure(NamedController().configureServer);
     expect(app.controllers['foo'], const IsInstanceOf<NamedController>());
   });

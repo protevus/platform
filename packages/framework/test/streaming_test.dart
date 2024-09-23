@@ -13,12 +13,12 @@ import 'package:test/test.dart';
 import 'encoders_buffer_test.dart' show encodingTests;
 
 void main() {
-  late Angel app;
-  late AngelHttp http;
+  late Protevus app;
+  late ProtevusHttp http;
 
   setUp(() {
-    app = Angel(reflector: MirrorsReflector());
-    http = AngelHttp(app, useZone: true);
+    app = Protevus(reflector: MirrorsReflector());
+    http = ProtevusHttp(app, useZone: true);
 
     app.logger = Logger('streaming_test')
       ..onRecord.listen((rec) {

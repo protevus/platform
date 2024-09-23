@@ -8,7 +8,7 @@ import 'pretty_log.dart';
 
 void main() {
   late http.IOClient client;
-  late AngelHttp driver;
+  late ProtevusHttp driver;
   late Logger logger;
   late StringBuffer buf;
 
@@ -21,14 +21,14 @@ void main() {
       ..level = Level.ALL
       ..onRecord.listen(prettyLog);
 
-    var app = Angel(logger: logger);
+    var app = Protevus(logger: logger);
 
     app.fallback((req, res) {
       req.shutdownHooks.add(() => buf.write('Hello, '));
       req.shutdownHooks.add(() => buf.write('world!'));
     });
 
-    driver = AngelHttp(app);
+    driver = ProtevusHttp(app);
     await driver.startServer();
   });
 

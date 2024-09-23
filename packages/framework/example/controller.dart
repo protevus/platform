@@ -8,8 +8,8 @@ void main() async {
   Logger.root.onRecord.listen(print);
 
   // Create our server.
-  var app = Angel(logger: Logger('angel'), reflector: MirrorsReflector());
-  var http = AngelHttp(app);
+  var app = Protevus(logger: Logger('angel'), reflector: MirrorsReflector());
+  var http = ProtevusHttp(app);
 
   await app.mountController<ArtistsController>();
 

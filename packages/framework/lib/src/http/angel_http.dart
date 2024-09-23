@@ -17,8 +17,8 @@ final RegExp _straySlashes = RegExp(r'(^/+)|(/+$)');
 
 typedef ServerGeneratorType = Future<HttpServer> Function(dynamic, int);
 
-/// Adapts `dart:io`'s [HttpServer] to serve Angel.
-class AngelHttp extends Driver<HttpRequest, HttpResponse, HttpServer,
+/// Adapts `dart:io`'s [HttpServer] to serve Protevus.
+class ProtevusHttp extends Driver<HttpRequest, HttpResponse, HttpServer,
     HttpRequestContext, HttpResponseContext> {
   @override
   Uri get uri {
@@ -26,22 +26,23 @@ class AngelHttp extends Driver<HttpRequest, HttpResponse, HttpServer,
         scheme: 'http', host: server?.address.address, port: server?.port);
   }
 
-  AngelHttp._(super.app, super.serverGenerator, bool useZone)
+  ProtevusHttp._(super.app, super.serverGenerator, bool useZone)
       : super(useZone: useZone);
 
-  factory AngelHttp(Angel app, {bool useZone = true}) {
-    return AngelHttp._(app, HttpServer.bind, useZone);
+  factory ProtevusHttp(Protevus app, {bool useZone = true}) {
+    return ProtevusHttp._(app, HttpServer.bind, useZone);
   }
 
   /// An instance mounted on a server started by the [serverGenerator].
-  factory AngelHttp.custom(Angel app, ServerGeneratorType serverGenerator,
+  factory ProtevusHttp.custom(Protevus app, ServerGeneratorType serverGenerator,
       {bool useZone = true, Map<String, String> headers = const {}}) {
-    return AngelHttp._(app, serverGenerator, useZone);
+    return ProtevusHttp._(app, serverGenerator, useZone);
   }
 
-  factory AngelHttp.fromSecurityContext(Angel app, SecurityContext context,
+  factory ProtevusHttp.fromSecurityContext(
+      Protevus app, SecurityContext context,
       {bool useZone = true}) {
-    return AngelHttp._(app, (address, int port) {
+    return ProtevusHttp._(app, (address, int port) {
       return HttpServer.bindSecure(address, port, context);
     }, useZone);
   }
@@ -51,8 +52,8 @@ class AngelHttp extends Driver<HttpRequest, HttpResponse, HttpServer,
   /// Provide paths to a certificate chain and server key (both .pem).
   /// If no password is provided, a random one will be generated upon running
   /// the server.
-  factory AngelHttp.secure(
-      Angel app, String certificateChainPath, String serverKeyPath,
+  factory ProtevusHttp.secure(
+      Protevus app, String certificateChainPath, String serverKeyPath,
       {String? password, bool useZone = true}) {
     var certificateChain =
         Platform.script.resolve(certificateChainPath).toFilePath();
@@ -61,7 +62,8 @@ class AngelHttp extends Driver<HttpRequest, HttpResponse, HttpServer,
     serverContext.useCertificateChain(certificateChain, password: password);
     serverContext.usePrivateKey(serverKey, password: password);
 
-    return AngelHttp.fromSecurityContext(app, serverContext, useZone: useZone);
+    return ProtevusHttp.fromSecurityContext(app, serverContext,
+        useZone: useZone);
   }
 
   Future handleRequest(HttpRequest request) =>

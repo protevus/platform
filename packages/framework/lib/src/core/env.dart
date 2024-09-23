@@ -1,19 +1,19 @@
 import 'dart:io';
 
-/// A constant instance of [AngelEnv].
-const AngelEnvironment angelEnv = AngelEnvironment();
+/// A constant instance of [ProtevusEnv].
+const ProtevusEnvironment protevusEnv = ProtevusEnvironment();
 
 /// Queries the environment's `ANGEL_ENV` value.
-class AngelEnvironment {
+class ProtevusEnvironment {
   final String? _customValue;
 
   /// You can optionally provide a custom value, in order to override the system's
   /// value.
-  const AngelEnvironment([this._customValue]);
+  const ProtevusEnvironment([this._customValue]);
 
   /// Returns the value of the `ANGEL_ENV` variable; defaults to `'development'`.
   String get value =>
-      (_customValue ?? Platform.environment['ANGEL_ENV'] ?? 'development')
+      (_customValue ?? Platform.environment['PROTEVUS_ENV'] ?? 'development')
           .toLowerCase();
 
   /// Returns whether the [value] is `'development'`.

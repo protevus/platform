@@ -13,14 +13,14 @@ void main() {
     'Content-Type': 'application/json'
   };
 
-  late Angel app;
+  late Protevus app;
   late HttpServer server;
   late String url;
   late http.Client client;
   late HookedService todoService;
 
   setUp(() async {
-    app = Angel(reflector: MirrorsReflector());
+    app = Protevus(reflector: MirrorsReflector());
     client = http.Client();
     app.use('/todos', MapService());
     app.use('/books', BookService());
@@ -36,7 +36,7 @@ void main() {
       throw e.error as Object;
     };
 
-    server = await AngelHttp(app).startServer();
+    server = await ProtevusHttp(app).startServer();
     url = 'http://${server.address.host}:${server.port}';
   });
 

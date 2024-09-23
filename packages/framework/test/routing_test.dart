@@ -36,16 +36,16 @@ bool interceptService(RequestContext req, ResponseContext res) {
 }
 
 void main() {
-  late Angel app;
-  late Angel nested;
-  late Angel todos;
+  late Protevus app;
+  late Protevus nested;
+  late Protevus todos;
   late String url;
   late http.Client client;
 
   setUp(() async {
-    app = Angel(reflector: MirrorsReflector());
-    nested = Angel(reflector: MirrorsReflector());
-    todos = Angel(reflector: MirrorsReflector());
+    app = Protevus(reflector: MirrorsReflector());
+    nested = Protevus(reflector: MirrorsReflector());
+    todos = Protevus(reflector: MirrorsReflector());
 
     for (var app in [app, nested, todos]) {
       app.logger = Logger('routing_test')
@@ -113,7 +113,7 @@ void main() {
     //app.dumpTree(header: "DUMPING ROUTES:", showMatchers: true);
 
     client = http.Client();
-    var server = await AngelHttp(app).startServer('127.0.0.1', 0);
+    var server = await ProtevusHttp(app).startServer('127.0.0.1', 0);
     url = 'http://${server.address.host}:${server.port}';
   });
 
@@ -141,13 +141,13 @@ void main() {
     expect(response.body, equals('abc'));
   });
 
-  test('Can nest another Angel instance', () async {
+  test('Can nest another Protevus instance', () async {
     var response = await client.post(Uri.parse('$url/nes/ted/foo'));
     var json_ = json.decode(response.body);
     expect(json_['route'], equals('foo'));
   });
 
-  test('Can parse parameters from a nested Angel instance', () async {
+  test('Can parse parameters from a nested Protevus instance', () async {
     var response = await client.get(Uri.parse('$url/todos/1337/action/test'));
     var json_ = json.decode(response.body);
     print('JSON: $json_');
@@ -184,9 +184,9 @@ void main() {
   test('Can name routes', () {
     Route foo = app.get('/framework/:id', null)..name = 'frm';
     print('Foo: $foo');
-    String uri = foo.makeUri({'id': 'angel'});
+    String uri = foo.makeUri({'id': 'Protevus'});
     print(uri);
-    expect(uri, equals('framework/angel'));
+    expect(uri, equals('framework/Protevus'));
   });
   */
 

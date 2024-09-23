@@ -7,7 +7,7 @@ window.onload = function() {
   $app.appendChild($h1);
   $app.appendChild($button);
 
-  $h1.textContent = '~Angel HTTP/2 server push~';
+  $h1.textContent = '~Protevus HTTP/2 server push~';
 
   $button.textContent = 'Change color';
   $button.onclick = function() {

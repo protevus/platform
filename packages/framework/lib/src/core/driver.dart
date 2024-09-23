@@ -8,16 +8,16 @@ import 'package:stack_trace/stack_trace.dart';
 import 'package:tuple/tuple.dart';
 import 'core.dart';
 
-/// Base driver class for Angel implementations.
+/// Base driver class for Protevus implementations.
 ///
-/// Powers both AngelHttp and AngelHttp2.
+/// Powers both ProtevusHttp and ProtevusHttp2.
 abstract class Driver<
     Request,
     Response,
     Server extends Stream<Request>,
     RequestContextType extends RequestContext,
     ResponseContextType extends ResponseContext> {
-  final Angel app;
+  final Protevus app;
   final bool useZone;
   bool _closed = false;
 
@@ -383,7 +383,7 @@ abstract class Driver<
       MiddlewarePipelineIterator<RequestHandler> it,
       RequestContextType req,
       ResponseContextType res,
-      Angel app) async {
+      Protevus app) async {
     var broken = false;
     while (it.moveNext()) {
       var current = it.current.handlers.iterator;

@@ -8,13 +8,13 @@ void main() async {
   //Logger.root.onRecord.listen(prettyLog);
 
   // Create our server.
-  var app = Angel(
+  var app = Protevus(
     logger: Logger('angel'),
     reflector: MirrorsReflector(),
   );
 
   // Index route. Returns JSON.
-  app.get('/', (req, res) => 'Welcome to Angel!');
+  app.get('/', (req, res) => 'Welcome to Protevus!');
 
   // Accepts a URL like /greet/foo or /greet/bob.
   app.get(
@@ -46,11 +46,11 @@ void main() async {
     );
   });
 
-  var http = AngelHttp(app);
+  var http = ProtevusHttp(app);
   var server = await http.startServer('127.0.0.1', 3000);
   var url = 'http://${server.address.address}:${server.port}';
   print('Listening at $url');
-  print('Visit these pages to see Angel in action:');
+  print('Visit these pages to see Protevus in action:');
   print('* $url/greet/bob');
   print('* $url/greet/?name=emoji');
   print('* $url/greet/?name=jack');

@@ -6,7 +6,7 @@ import 'package:logging/logging.dart';
 import 'common.dart';
 
 void main() async {
-  var app = Angel()
+  var app = Protevus()
     ..encoders.addAll({
       'gzip': gzip.encoder,
       'deflate': zlib.encoder,
@@ -32,10 +32,10 @@ void main() async {
     );
   }
 
-  var http1 = AngelHttp(app);
-  var http2 = AngelHttp2(app, ctx);
+  var http1 = ProtevusHttp(app);
+  var http2 = ProtevusHttp2(app, ctx);
 
-  // HTTP/1.x requests will fallback to `AngelHttp`
+  // HTTP/1.x requests will fallback to `ProtevusHttp`
   http2.onHttp1.listen(http1.handleRequest);
 
   await http2.startServer('127.0.0.1', 3000);

@@ -24,13 +24,13 @@ import 'server.dart';
 /// * `example.*` -> `/example\./[^$]*`
 /// * `example.+` -> `/example\./[^$]+`
 class HostnameRouter {
-  final Map<Pattern, Angel> _apps = {};
-  final Map<Pattern, FutureOr<Angel> Function()> _creators = {};
+  final Map<Pattern, Protevus> _apps = {};
+  final Map<Pattern, FutureOr<Protevus> Function()> _creators = {};
   final List<Pattern> _patterns = [];
 
   HostnameRouter(
-      {Map<Pattern, Angel> apps = const {},
-      Map<Pattern, FutureOr<Angel> Function()> creators = const {}}) {
+      {Map<Pattern, Protevus> apps = const {},
+      Map<Pattern, FutureOr<Protevus> Function()> creators = const {}}) {
     Map<Pattern, V> parseMap<V>(Map<Pattern, V> map) {
       return map.map((p, c) {
         Pattern pp;
@@ -55,16 +55,16 @@ class HostnameRouter {
   }
 
   factory HostnameRouter.configure(
-      Map<Pattern, FutureOr<void> Function(Angel)> configurers,
+      Map<Pattern, FutureOr<void> Function(Protevus)> configurers,
       {Reflector reflector = const EmptyReflector(),
-      AngelEnvironment environment = angelEnv,
+      ProtevusEnvironment environment = protevusEnv,
       Logger? logger,
       bool allowMethodOverrides = true,
       FutureOr<String> Function(dynamic)? serializer,
       ViewGenerator? viewGenerator}) {
     var creators = configurers.map((p, c) {
       return MapEntry(p, () async {
-        var app = Angel(
+        var app = Protevus(
             reflector: reflector,
             environment: environment,
             logger: logger,

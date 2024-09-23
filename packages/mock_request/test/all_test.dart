@@ -9,7 +9,7 @@ void main() {
   //var uri = Uri.parse('http://localhost:3000');
 
   /*
-  var app = Angel()
+  var app = Protevus()
     ..get('/foo', (req, res) => 'Hello, world!')
     ..post('/body',
         (req, res) => req.parseBody().then((_) => req.bodyAsMap.length))
@@ -20,7 +20,7 @@ void main() {
       return res.serialize(req.ip == InternetAddress.loopbackIPv4.address);
     });
 
-  var http = AngelHttp(app);
+  var http = ProtevusHttp(app);
 
   test('receive a response', () async {
     var rq = MockHttpRequest('GET', uri.resolve('/foo'));

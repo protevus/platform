@@ -5,8 +5,8 @@ import 'package:platform_framework/platform_framework.dart';
 import 'package:platform_framework/http.dart';
 
 void main() async {
-  var app = Angel();
-  var http = AngelHttp.custom(app, startShared, useZone: false);
+  var app = Protevus();
+  var http = ProtevusHttp.custom(app, startShared, useZone: false);
 
   app.get('/', (req, res) => res.write('Hello, world!'));
   app.optimizeForProduction(force: true);

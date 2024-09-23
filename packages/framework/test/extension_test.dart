@@ -26,7 +26,7 @@ void main() {
 
 Future<RequestContext> makeRequest(String path) {
   var rq = MockHttpRequest('GET', endpoint.replace(path: path))..close();
-  var app = Angel(reflector: MirrorsReflector());
-  var http = AngelHttp(app);
+  var app = Protevus(reflector: MirrorsReflector());
+  var http = ProtevusHttp(app);
   return http.createRequestContext(rq, rq.response);
 }

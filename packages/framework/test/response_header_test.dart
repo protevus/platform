@@ -6,13 +6,13 @@ import 'package:platform_framework/src/http/angel_http.dart';
 import 'package:test/test.dart';
 
 void main() {
-  late Angel app;
-  late AngelHttp http;
+  late Protevus app;
+  late ProtevusHttp http;
   late HttpClient client;
 
   setUp(() async {
-    app = Angel(reflector: MirrorsReflector());
-    http = AngelHttp(app);
+    app = Protevus(reflector: MirrorsReflector());
+    http = ProtevusHttp(app);
 
     await http.startServer();
 

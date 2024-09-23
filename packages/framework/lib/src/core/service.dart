@@ -67,17 +67,17 @@ class Service<Id, Data> extends Routable {
   /// Handlers that must run to ensure this service's functionality.
   List<RequestHandler> get bootstrappers => [];
 
-  /// The [Angel] app powering this service.
-  Angel? _app;
+  /// The [Protevus] app powering this service.
+  Protevus? _app;
 
-  Angel get app {
+  Protevus get app {
     if (_app == null) {
-      throw ArgumentError("Angel is not initialized");
+      throw ArgumentError("Protevus is not initialized");
     }
     return _app!;
   }
 
-  set app(Angel angel) {
+  set app(Protevus angel) {
     _app = angel;
   }
 

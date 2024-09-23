@@ -16,20 +16,20 @@ void main() {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
   };
-  late Angel app;
+  late Protevus app;
   late MapService service;
   late String url;
   late http.Client client;
 
   setUp(() async {
-    app = Angel(reflector: MirrorsReflector())
+    app = Protevus(reflector: MirrorsReflector())
       ..use('/todos', service = MapService())
       ..errorHandler = (e, req, res) {
         if (e.error != null) print('Whoops: ${e.error}');
         if (e.stackTrace != null) print(Chain.forTrace(e.stackTrace!).terse);
       };
 
-    var server = await AngelHttp(app).startServer();
+    var server = await ProtevusHttp(app).startServer();
     client = http.Client();
     url = 'http://${server.address.host}:${server.port}';
   });

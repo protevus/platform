@@ -1,4 +1,4 @@
-library angel_framework.http.request_context;
+library Protevus_framework.http.request_context;
 
 import 'dart:async';
 import 'dart:convert';
@@ -18,13 +18,13 @@ import 'package:logging/logging.dart';
 import 'metadata.dart';
 import 'response_context.dart';
 import 'routable.dart';
-import 'server.dart' show Angel;
+import 'server.dart' show Protevus;
 
 part 'injection.dart';
 
 /// A convenience wrapper around an incoming [RawRequest].
 abstract class RequestContext<RawRequest> {
-  /// Similar to [Angel.shutdownHooks], allows for logic to be executed
+  /// Similar to [Protevus.shutdownHooks], allows for logic to be executed
   /// when a [RequestContext] is done being processed.
   final _log = Logger('RequestContext');
 
@@ -46,8 +46,8 @@ abstract class RequestContext<RawRequest> {
   /// Additional params to be passed to services.
   final Map<String, dynamic> serviceParams = {};
 
-  /// The [Angel] instance that is responding to this request.
-  Angel? app;
+  /// The [Protevus] instance that is responding to this request.
+  Protevus? app;
 
   /// Any cookies sent with this request.
   List<Cookie> get cookies => <Cookie>[];
@@ -131,7 +131,7 @@ abstract class RequestContext<RawRequest> {
 
   /// This setter allows you to explicitly set the request body **exactly once**.
   ///
-  /// Use this if the format of the body is not natively parsed by Angel.
+  /// Use this if the format of the body is not natively parsed by Protevus.
   set bodyAsMap(Map<String, dynamic>? value) => bodyAsObject = value;
 
   /// Returns a *mutable* [List] parsed from the request [body].
@@ -151,7 +151,7 @@ abstract class RequestContext<RawRequest> {
 
   /// This setter allows you to explicitly set the request body **exactly once**.
   ///
-  /// Use this if the format of the body is not natively parsed by Angel.
+  /// Use this if the format of the body is not natively parsed by Protevus.
   set bodyAsList(List? value) => bodyAsObject = value;
 
   /// Returns the parsed request body, whatever it may be (typically a [Map] or [List]).
@@ -167,7 +167,7 @@ abstract class RequestContext<RawRequest> {
 
   /// This setter allows you to explicitly set the request body **exactly once**.
   ///
-  /// Use this if the format of the body is not natively parsed by Angel.
+  /// Use this if the format of the body is not natively parsed by Protevus.
   set bodyAsObject(value) {
     if (_bodyObject != null) {
       throw StateError(

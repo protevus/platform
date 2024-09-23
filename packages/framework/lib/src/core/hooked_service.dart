@@ -98,7 +98,7 @@ class HookedService<Id, Data, T extends Service<Id, Data>>
   }
 
   /// Adds hooks to this instance.
-  void addHooks(Angel app) {
+  void addHooks(Protevus app) {
     var hooks = getAnnotation<Hooks>(inner, app.container.reflector);
     var before = <HookedServiceEventListener<Id, Data, T>>[];
     var after = <HookedServiceEventListener<Id, Data, T>>[];

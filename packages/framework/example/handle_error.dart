@@ -6,7 +6,7 @@ import 'package:platform_framework/http.dart';
 import 'package:logging/logging.dart';
 
 void main() async {
-  var app = Angel(reflector: MirrorsReflector())
+  var app = Protevus(reflector: MirrorsReflector())
     ..logger = (Logger('angel')
       ..onRecord.listen((rec) {
         print(rec);
@@ -18,7 +18,7 @@ void main() async {
   app.fallback(
       (req, res) => Future.error('Throwing just because I feel like!'));
 
-  var http = AngelHttp(app);
+  var http = ProtevusHttp(app);
   HttpServer? server = await http.startServer('127.0.0.1', 3000);
   var url = 'http://${server.address.address}:${server.port}';
   print('Listening at $url');

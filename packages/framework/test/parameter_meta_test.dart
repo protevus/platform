@@ -24,12 +24,12 @@ void main() {
 }
 
 void parameterMetaTests() {
-  Angel app;
-  late AngelHttp http;
+  Protevus app;
+  late ProtevusHttp http;
 
   setUp(() {
-    app = Angel(reflector: MirrorsReflector());
-    http = AngelHttp(app);
+    app = Protevus(reflector: MirrorsReflector());
+    http = ProtevusHttp(app);
 
     app.get('/cookie', ioc((@CookieValue('token') String jwt) {
       return jwt;

@@ -21,18 +21,18 @@ import 'service.dart';
 
 //final RegExp _straySlashes = RegExp(r'(^/+)|(/+$)');
 
-/// A function that configures an [Angel] server.
-typedef AngelConfigurer = FutureOr<void> Function(Angel app);
+/// A function that configures an [Protevus] server.
+typedef Configurer = FutureOr<void> Function(Protevus app);
 
 /// A function that asynchronously generates a view from the given path and data.
 typedef ViewGenerator = FutureOr<String> Function(String path,
     [Map<String, dynamic>? data]);
 
 /// A function that handles error
-typedef AngelErrorHandler = dynamic Function(
+typedef PlatformErrorHandler = dynamic Function(
     HttpException e, RequestContext req, ResponseContext res);
 
-/// The default error handler for [Angel] server
+/// The default error handler for [Protevus] server
 Future<bool> _defaultErrorHandler(
     HttpException e, RequestContext req, ResponseContext res) async {
   if (!req.accepts('text/html', strict: true) &&
@@ -78,18 +78,18 @@ Logger _defaultLogger() {
 }
 
 /// A powerful real-time/REST/MVC server class.
-class Angel extends Routable {
+class Protevus extends Routable {
   static Future<String> _noViewEngineConfigured(String view, [Map? data]) =>
       Future.value('No view engine has been configured yet.');
 
-  final List<Angel> _children = [];
+  final List<Protevus> _children = [];
   final Map<
       String,
       Tuple4<List, Map<String, dynamic>, ParseResult<RouteResult>,
           MiddlewarePipeline>> handlerCache = HashMap();
 
   Router<RequestHandler>? _flattened;
-  Angel? _parent;
+  Protevus? _parent;
 
   /// A global Map of converters that can transform responses bodies.
   final Map<String, Converter<List<int>, List<int>>> encoders = {};
@@ -114,20 +114,20 @@ class Angel extends Routable {
   bool allowMethodOverrides = true;
 
   /// All child application mounted on this instance.
-  List<Angel> get children => List<Angel>.unmodifiable(_children);
+  List<Protevus> get children => List<Protevus>.unmodifiable(_children);
 
   final Map<Pattern, Controller> _controllers = {};
 
   /// A set of [Controller] objects that have been loaded into the application.
   Map<Pattern, Controller> get controllers => _controllers;
 
-  /// The [AngelEnvironment] in which the application is running.
+  /// The [ProtevusEnvironment] in which the application is running.
   ///
   /// By default, it is automatically inferred.
-  final AngelEnvironment environment;
+  final ProtevusEnvironment environment;
 
   /// Returns the parent instance of this application, if any.
-  Angel? get parent => _parent;
+  Protevus? get parent => _parent;
 
   /// Outputs diagnostics and debug messages.
   Logger _logger = _defaultLogger();
@@ -145,12 +145,12 @@ class Angel extends Routable {
   /// Plug-ins to be called right before server startup.
   ///
   /// If the server is never started, they will never be called.
-  final List<AngelConfigurer> startupHooks = [];
+  final List<Configurer> startupHooks = [];
 
   /// Plug-ins to be called right before server shutdown.
   ///
   /// If the server is never [close]d, they will never be called.
-  final List<AngelConfigurer> shutdownHooks = [];
+  final List<Configurer> shutdownHooks = [];
 
   /// Always run before responses are sent.
   ///
@@ -163,7 +163,7 @@ class Angel extends Routable {
   ViewGenerator? viewGenerator = _noViewEngineConfigured;
 
   /// The handler currently configured to run on [HttpException]s.
-  AngelErrorHandler errorHandler = _defaultErrorHandler;
+  PlatformErrorHandler errorHandler = _defaultErrorHandler;
 
   @override
   Route<RequestHandler> addRoute(
@@ -189,7 +189,7 @@ class Angel extends Routable {
           'This route will be ignored, and no requests will ever reach it.');
     }
 
-    if (router is Angel) {
+    if (router is Protevus) {
       router._parent = this;
       _children.add(router);
     }
@@ -199,11 +199,11 @@ class Angel extends Routable {
 
   /// Loads some base dependencies into the service container.
   void bootstrapContainer() {
-    if (runtimeType != Angel) {
+    if (runtimeType != Protevus) {
       container.registerSingleton(this);
     }
 
-    container.registerSingleton<Angel>(this);
+    container.registerSingleton<Protevus>(this);
     container.registerSingleton<Routable>(this);
     container.registerSingleton<Router>(this);
   }
@@ -311,7 +311,7 @@ class Angel extends Routable {
     return null;
   }
 
-  /// Runs several optimizations, *if* [angelEnv.isProduction] is `true`.
+  /// Runs several optimizations, *if* [protevusEnv.isProduction] is `true`.
   ///
   /// * Preprocesses all dependency injection, and eliminates the burden of reflecting handlers
   /// at run-time.
@@ -321,7 +321,7 @@ class Angel extends Routable {
   void optimizeForProduction({bool force = false}) {
     if (environment.isProduction || force == true) {
       _flattened ??= flatten(this);
-      logger.info('Angel is running in production mode.');
+      logger.info('Protevus is running in production mode.');
     }
   }
 
@@ -358,8 +358,8 @@ class Angel extends Routable {
     // return   closureMirror.apply(args).reflectee;
   }
 
-  /// Applies an [AngelConfigurer] to this instance.
-  Future configure(AngelConfigurer configurer) {
+  /// Applies an [Configurer] to this instance.
+  Future configure(Configurer configurer) {
     return Future.sync(() => configurer(this));
   }
 
@@ -396,10 +396,10 @@ class Angel extends Routable {
       'For more, see the documentation:\n'
       'https://docs.angel-dart.dev/guides/dependency-injection#enabling-dart-mirrors-or-other-reflection';
 
-  Angel(
+  Protevus(
       {Reflector reflector =
           const ThrowingReflector(errorMessage: _reflectionErrorMessage),
-      this.environment = angelEnv,
+      this.environment = protevusEnv,
       Logger? logger,
       this.allowMethodOverrides = true,
       this.serializer,
@@ -412,7 +412,7 @@ class Angel extends Routable {
 
     if (reflector is EmptyReflector || reflector is ThrowingReflector) {
       var msg =
-          'No `reflector` was passed to the Angel constructor, so reflection will not be available.\n$_reflectionInfo';
+          'No `reflector` was passed to the Protevus constructor, so reflection will not be available.\n$_reflectionInfo';
       this.logger.warning(msg);
     }
 

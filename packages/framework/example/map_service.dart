@@ -8,7 +8,7 @@ void main() async {
   Logger.root.onRecord.listen(print);
 
   // Create our server.
-  var app = Angel(
+  var app = Protevus(
     logger: Logger('angel'),
     reflector: MirrorsReflector(),
   );
@@ -16,7 +16,7 @@ void main() async {
   // Create a RESTful service that manages an in-memory collection.
   app.use('/api/todos', MapService());
 
-  var http = AngelHttp(app);
+  var http = ProtevusHttp(app);
   await http.startServer('127.0.0.1', 0);
   print('Listening at ${http.uri}');
 }

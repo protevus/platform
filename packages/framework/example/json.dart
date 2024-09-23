@@ -26,14 +26,14 @@ void main() async {
 
   serverMain(null);
 
-  print('Angel listening at http://localhost:3000');
+  print('Protevus listening at http://localhost:3000');
   await c.future;
 }
 
 void serverMain(_) async {
-  var app = Angel();
+  var app = Protevus();
   var http =
-      AngelHttp.custom(app, startShared, useZone: false); // Run a cluster
+      ProtevusHttp.custom(app, startShared, useZone: false); // Run a cluster
 
   app.get('/', (req, res) {
     return res.serialize({

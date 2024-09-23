@@ -5,11 +5,11 @@ import 'package:platform_mock_request/platform_mock_request.dart';
 import 'package:test/test.dart';
 
 void main() {
-  late AngelHttp http;
+  late ProtevusHttp http;
 
   setUp(() async {
-    var app = Angel();
-    http = AngelHttp(app);
+    var app = Protevus();
+    http = ProtevusHttp(app);
 
     app.get('/detach', (req, res) async {
       if (res is HttpResponseContext) {

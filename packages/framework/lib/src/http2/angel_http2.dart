@@ -15,20 +15,20 @@ Future<SecureServerSocket> startSharedHttp2(
   return SecureServerSocket.bind(address, port, ctx, shared: true);
 }
 
-/// Adapts `package:http2`'s [ServerTransportConnection] to serve Angel.
-class AngelHttp2 extends Driver<Socket, ServerTransportStream,
+/// Adapts `package:http2`'s [ServerTransportConnection] to serve Protevus.
+class ProtevusHttp2 extends Driver<Socket, ServerTransportStream,
     SecureServerSocket, Http2RequestContext, Http2ResponseContext> {
   final ServerSettings? settings;
-  late AngelHttp _http;
+  late ProtevusHttp _http;
   final StreamController<HttpRequest> _onHttp1 = StreamController();
   final Map<String, MockHttpSession> _sessions = {};
   final Uuid _uuid = Uuid();
-  _AngelHttp2ServerSocket? _artificial;
+  _ProtevusHttp2ServerSocket? _artificial;
 
   SecureServerSocket? get socket => _artificial;
 
-  AngelHttp2._(
-      Angel app,
+  ProtevusHttp2._(
+      Protevus app,
       Future<SecureServerSocket> Function(dynamic, int) serverGenerator,
       bool useZone,
       bool allowHttp1,
@@ -39,21 +39,21 @@ class AngelHttp2 extends Driver<Socket, ServerTransportStream,
           useZone: useZone,
         ) {
     if (allowHttp1) {
-      _http = AngelHttp(app, useZone: useZone);
+      _http = ProtevusHttp(app, useZone: useZone);
       onHttp1.listen(_http.handleRequest);
     }
   }
 
-  factory AngelHttp2(Angel app, SecurityContext securityContext,
+  factory ProtevusHttp2(Protevus app, SecurityContext securityContext,
       {bool useZone = true,
       bool allowHttp1 = false,
       ServerSettings? settings}) {
-    return AngelHttp2.custom(app, securityContext, SecureServerSocket.bind,
+    return ProtevusHttp2.custom(app, securityContext, SecureServerSocket.bind,
         allowHttp1: allowHttp1, settings: settings);
   }
 
-  factory AngelHttp2.custom(
-      Angel app,
+  factory ProtevusHttp2.custom(
+      Protevus app,
       SecurityContext ctx,
       Future<SecureServerSocket> Function(
               InternetAddress? address, int port, SecurityContext ctx)
@@ -61,7 +61,7 @@ class AngelHttp2 extends Driver<Socket, ServerTransportStream,
       {bool useZone = true,
       bool allowHttp1 = false,
       ServerSettings? settings}) {
-    return AngelHttp2._(app, (address, port) {
+    return ProtevusHttp2._(app, (address, port) {
       var addr = address is InternetAddress
           ? address
           : InternetAddress(address.toString());
@@ -75,7 +75,7 @@ class AngelHttp2 extends Driver<Socket, ServerTransportStream,
   @override
   Future<SecureServerSocket> generateServer([address, int? port]) async {
     var s = await serverGenerator(address ?? '127.0.0.1', port ?? 0);
-    return _artificial = _AngelHttp2ServerSocket(s, this);
+    return _artificial = _ProtevusHttp2ServerSocket(s, this);
   }
 
   @override
@@ -158,7 +158,7 @@ class AngelHttp2 extends Driver<Socket, ServerTransportStream,
 }
 
 class _FakeServerSocket extends Stream<Socket> implements ServerSocket {
-  final _AngelHttp2ServerSocket angel;
+  final _ProtevusHttp2ServerSocket angel;
   final _ctrl = StreamController<Socket>();
 
   _FakeServerSocket(this.angel);
@@ -183,15 +183,15 @@ class _FakeServerSocket extends Stream<Socket> implements ServerSocket {
   }
 }
 
-class _AngelHttp2ServerSocket extends Stream<SecureSocket>
+class _ProtevusHttp2ServerSocket extends Stream<SecureSocket>
     implements SecureServerSocket {
   final SecureServerSocket socket;
-  final AngelHttp2 driver;
+  final ProtevusHttp2 driver;
   final _ctrl = StreamController<SecureSocket>();
   late _FakeServerSocket _fake;
   StreamSubscription? _sub;
 
-  _AngelHttp2ServerSocket(this.socket, this.driver) {
+  _ProtevusHttp2ServerSocket(this.socket, this.driver) {
     _fake = _FakeServerSocket(this);
     HttpServer.listenOn(_fake).pipe(driver._onHttp1);
     _sub = socket.listen(
@@ -206,7 +206,7 @@ class _AngelHttp2ServerSocket extends Stream<SecureSocket>
         } else {
           socket.destroy();
           throw Exception(
-              'AngelHttp2 does not support ${socket.selectedProtocol} as an ALPN protocol.');
+              'ProtevusHttp2 does not support ${socket.selectedProtocol} as an ALPN protocol.');
         }
       },
       onDone: _ctrl.close,

@@ -25,12 +25,13 @@ Stream<List<int>> jfkStream() {
 void main() {
   var client = Http2Client();
   late IOClient h1c;
-  Angel app;
-  late AngelHttp2 http2;
+  Protevus app;
+  late ProtevusHttp2 http2;
   late Uri serverRoot;
 
   setUp(() async {
-    app = Angel(reflector: MirrorsReflector())..encoders['gzip'] = gzip.encoder;
+    app = Protevus(reflector: MirrorsReflector())
+      ..encoders['gzip'] = gzip.encoder;
     hierarchicalLoggingEnabled = true;
     app.logger = Logger.detached('angel.http2')
       ..onRecord.listen((rec) {
@@ -105,7 +106,7 @@ void main() {
     // Create an HTTP client that trusts our server.
     h1c = IOClient(HttpClient()..badCertificateCallback = (_, __, ___) => true);
 
-    http2 = AngelHttp2(app, ctx, allowHttp1: true);
+    http2 = ProtevusHttp2(app, ctx, allowHttp1: true);
 
     var server = await http2.startServer();
     serverRoot = Uri.parse('https://127.0.0.1:${server.port}');

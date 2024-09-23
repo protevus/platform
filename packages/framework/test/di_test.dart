@@ -15,13 +15,13 @@ final String sampleText = 'make your bed';
 final String sampleOver = 'never';
 
 void main() {
-  late Angel app;
+  late Protevus app;
   late http.Client client;
   late HttpServer server;
   String? url;
 
   setUp(() async {
-    app = Angel(reflector: MirrorsReflector());
+    app = Protevus(reflector: MirrorsReflector());
     client = http.Client();
 
     // Inject some todos
@@ -41,7 +41,7 @@ void main() {
     await app.configure(SingletonController().configureServer);
     await app.configure(ErrandController().configureServer);
 
-    server = await AngelHttp(app).startServer();
+    server = await ProtevusHttp(app).startServer();
     url = 'http://${server.address.host}:${server.port}';
   });
 
@@ -52,7 +52,7 @@ void main() {
   });
 
   test('runContained with custom container', () async {
-    var app = Angel();
+    var app = Protevus();
     var c = Container(const MirrorsReflector());
     c.registerSingleton(Todo(text: 'Hey!'));
 
@@ -63,7 +63,7 @@ void main() {
     var rq = MockHttpRequest('GET', Uri(path: '/'));
     await rq.close();
     var rs = rq.response;
-    await AngelHttp(app).handleRequest(rq);
+    await ProtevusHttp(app).handleRequest(rq);
     var text = await rs.transform(utf8.decoder).join();
     expect(text, json.encode('Hey!'));
   });

@@ -13,10 +13,10 @@ void main() {
   }
 
   test('can request the same url twice', () async {
-    var app = Angel(reflector: MirrorsReflector())
+    var app = Protevus(reflector: MirrorsReflector())
       ..get('/test/:id', ioc((id) => 'Hello $id'));
     var rq1 = mk(1), rq2 = mk(2), rq3 = mk(1);
-    await Future.wait([rq1, rq2, rq3].map(AngelHttp(app).handleRequest));
+    await Future.wait([rq1, rq2, rq3].map(ProtevusHttp(app).handleRequest));
     var body1 = await rq1.response.transform(utf8.decoder).join(),
         body2 = await rq2.response.transform(utf8.decoder).join(),
         body3 = await rq3.response.transform(utf8.decoder).join();

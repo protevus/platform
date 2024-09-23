@@ -13,7 +13,7 @@ import 'package:mime/mime.dart';
 
 import 'controller.dart';
 import 'request_context.dart';
-import 'server.dart' show Angel;
+import 'server.dart' show Protevus;
 
 final RegExp _straySlashes = RegExp(r'(^/+)|(/+$)');
 
@@ -22,15 +22,15 @@ abstract class ResponseContext<RawResponse>
     implements StreamConsumer<List<int>>, StreamSink<List<int>>, StringSink {
   final Map properties = {};
   final CaseInsensitiveMap<String> _headers = CaseInsensitiveMap<String>.from(
-      {'content-type': 'text/plain', 'server': 'Angel3'});
+      {'content-type': 'text/plain', 'server': 'Protevus3'});
 
   //final log = Logger('ResponseContext');
 
   Completer? _done;
   int _statusCode = 200;
 
-  /// The [Angel] instance that is sending a response.
-  Angel? app;
+  /// The [Protevus] instance that is sending a response.
+  Protevus? app;
 
   /// Is `Transfer-Encoding` chunked?
   bool? chunked;
@@ -84,9 +84,9 @@ abstract class ResponseContext<RawResponse>
     }
   }
 
-  /// Returns `true` if the response is still available for processing by Angel.
+  /// Returns `true` if the response is still available for processing by Protevus.
   ///
-  /// If it is `false`, then Angel will stop executing handlers, and will only run
+  /// If it is `false`, then Protevus will stop executing handlers, and will only run
   /// response finalizers if the response [isBuffered].
   bool get isOpen;
 
@@ -99,7 +99,7 @@ abstract class ResponseContext<RawResponse>
   /// The underlying [RawResponse] under this instance.
   RawResponse get rawResponse;
 
-  /// Signals Angel that the response is being held alive deliberately, and that the framework should not automatically close it.
+  /// Signals Protevus that the response is being held alive deliberately, and that the framework should not automatically close it.
   ///
   /// This is mostly used in situations like WebSocket handlers, where the connection should remain
   /// open indefinitely.

@@ -9,7 +9,7 @@ import 'pretty_log.dart';
 
 void main() {
   late http.IOClient client;
-  late AngelHttp driver;
+  late ProtevusHttp driver;
   late Logger logger;
 
   setUp(() async {
@@ -20,7 +20,7 @@ void main() {
       ..level = Level.ALL
       ..onRecord.listen(prettyLog);
 
-    var app = Angel(logger: logger);
+    var app = Protevus(logger: logger);
 
     app.fallback(hello);
     app.fallback(throw404);
@@ -40,7 +40,7 @@ void main() {
       }
     };
 
-    driver = AngelHttp(app);
+    driver = ProtevusHttp(app);
     await driver.startServer();
   });
 

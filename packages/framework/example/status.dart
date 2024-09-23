@@ -2,8 +2,8 @@ import 'package:platform_framework/platform_framework.dart';
 import 'package:platform_framework/http.dart';
 
 void main() async {
-  var app = Angel();
-  var http = AngelHttp(app);
+  var app = Protevus();
+  var http = ProtevusHttp(app);
 
   app.fallback((req, res) {
     res.statusCode = 304;
