@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:platform_container/platform_container.dart';
-import 'package:platform_container_generator/angel3_container_generator.dart';
+import 'package:platform_container/container.dart';
+import 'package:platform_container_generator/generator.dart';
 
 Future<void> main() async {
   // Create a container instance.

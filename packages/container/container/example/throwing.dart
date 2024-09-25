@@ -1,4 +1,4 @@
-import 'package:platform_container/platform_container.dart';
+import 'package:platform_container/container.dart';
 
 void main() {
   var reflector = const ThrowingReflector();

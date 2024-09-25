@@ -1,6 +1,6 @@
 name: platform_route
 version: 9.0.0
-description: A powerful, isomorphic routing library for Dart. It is mainly used in the Protevus framework, but can be used in Flutter and on the Web.
+description: A powerful, isomorphic routing library for Dart. It is mainly used in the Protevus Platform, but can be used in Flutter and on the Web.
 homepage: https://protevus.com
 documentation: https://docs.protevus.com
 repository: https://git.protevus.com/protevus/platform/src/branch/main/packages/route

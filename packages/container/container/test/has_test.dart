@@ -1,4 +1,4 @@
-import 'package:platform_container/platform_container.dart';
+import 'package:platform_container/container.dart';
 import 'package:test/test.dart';
 
 void main() {

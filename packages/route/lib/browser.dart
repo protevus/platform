@@ -2,7 +2,7 @@ import 'dart:async' show Stream, StreamController;
 import 'dart:html';
 import 'package:path/path.dart' as p;
 
-import 'platform_route.dart';
+import 'route.dart';
 
 final RegExp _hash = RegExp(r'^#/');
 final RegExp _straySlashes = RegExp(r'(^/+)|(/+$)');

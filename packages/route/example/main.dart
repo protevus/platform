@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:platform_route/platform_route.dart';
+import 'package:platform_route/route.dart';
 
 void main() {
   final router = Router();

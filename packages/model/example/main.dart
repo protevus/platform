@@ -1,4 +1,4 @@
-import 'package:platform_model/platform_model.dart';
+import 'package:platform_model/model.dart';
 
 void main() {
   var todo = Todo(id: '34', isComplete: false);

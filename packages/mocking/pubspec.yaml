@@ -13,7 +13,7 @@ dev_dependencies:
   test: ^1.24.0
   lints: ^4.0.0
 # dependency_overrides:
-#   platform_framework:
+#   platform_core:
 #     path: ../framework
 #   platform_route:
 #     path: ../route

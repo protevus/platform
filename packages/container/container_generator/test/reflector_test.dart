@@ -1,5 +1,5 @@
-import 'package:platform_container/platform_container.dart';
-import 'package:platform_container_generator/angel3_container_generator.dart';
+import 'package:platform_container/container.dart';
+import 'package:platform_container_generator/generator.dart';
 
 import 'package:test/test.dart';
 import 'reflector_test.reflectable.dart';

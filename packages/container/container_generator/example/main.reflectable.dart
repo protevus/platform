@@ -3,8 +3,7 @@
 
 import 'dart:core';
 import 'dart:math' as prefix6;
-import 'package:platform_container_generator/angel3_container_generator.dart'
-    as prefix0;
+import 'package:platform_container_generator/generator.dart' as prefix0;
 import 'package:reflectable/capability.dart' as prefix5;
 import 'package:reflectable/mirrors.dart' as prefix4;
 import 'package:reflectable/reflectable.dart' as prefix1;

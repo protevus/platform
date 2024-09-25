@@ -1,4 +1,4 @@
-import 'package:platform_route/platform_route.dart';
+import 'package:platform_route/route.dart';
 import 'package:test/test.dart';
 
 void main() {

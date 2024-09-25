@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:platform_route/platform_route.dart';
+import 'package:platform_route/route.dart';
 import 'package:http/http.dart' as http;
 import 'package:test/test.dart';
 

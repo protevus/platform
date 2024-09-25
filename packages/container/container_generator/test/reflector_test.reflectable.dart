@@ -4,8 +4,7 @@
 import 'dart:core';
 import 'dart:math' as prefix8;
 import 'package:platform_container/src/reflector.dart' as prefix7;
-import 'package:platform_container_generator/angel3_container_generator.dart'
-    as prefix0;
+import 'package:platform_container_generator/generator.dart' as prefix0;
 import 'package:reflectable/capability.dart' as prefix6;
 import 'package:reflectable/mirrors.dart' as prefix5;
 import 'package:reflectable/reflectable.dart' as prefix2;
