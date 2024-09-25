@@ -9,7 +9,6 @@ import 'dart:io'
         Platform,
         SecurityContext;
 import 'package:platform_core/core.dart';
-import '../core/core.dart';
 import 'http_request_context.dart';
 import 'http_response_context.dart';
 
