@@ -1,8 +1,0 @@
-name: DummyMessageNumberThree
-class_comment: '# * @author Samuel Roze <samuel.roze@gmail.com>'
-dependencies: []
-properties: []
-methods: []
-traits: []
-interfaces:
-- DummyMessageInterface

@@ -1,8 +1,0 @@
-name: Bar
-class_comment: null
-dependencies: []
-properties: []
-methods: []
-traits: []
-interfaces:
-- BarInterface

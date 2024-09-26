@@ -1,8 +1,0 @@
-name: NoSuchIndexException
-class_comment: "# * Thrown when an index cannot be found.\n# *\n# * @author St\xE9\
-  phane Escandell <stephane.escandell@gmail.com>"
-dependencies: []
-properties: []
-methods: []
-traits: []
-interfaces: []

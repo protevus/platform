@@ -1,8 +1,0 @@
-name: LogicException
-class_comment: '# * Base LogicException for Http Foundation component.'
-dependencies: []
-properties: []
-methods: []
-traits: []
-interfaces:
-- ExceptionInterface

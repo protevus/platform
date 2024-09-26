@@ -1,7 +1,0 @@
-name: DummyCommandWithDescription
-class_comment: '# * Used whenever a test needs to show a message with a class description.'
-dependencies: []
-properties: []
-methods: []
-traits: []
-interfaces: []

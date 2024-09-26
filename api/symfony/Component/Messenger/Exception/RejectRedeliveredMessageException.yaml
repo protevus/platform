@@ -1,7 +1,0 @@
-name: RejectRedeliveredMessageException
-class_comment: '# * @author Tobias Schultze <http://tobion.de>'
-dependencies: []
-properties: []
-methods: []
-traits: []
-interfaces: []

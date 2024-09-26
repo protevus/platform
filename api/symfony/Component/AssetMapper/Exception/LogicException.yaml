@@ -1,8 +1,0 @@
-name: LogicException
-class_comment: null
-dependencies: []
-properties: []
-methods: []
-traits: []
-interfaces:
-- ExceptionInterface

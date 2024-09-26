@@ -1,8 +1,0 @@
-name: AutoconfiguredService1
-class_comment: null
-dependencies: []
-properties: []
-methods: []
-traits: []
-interfaces:
-- AutoconfiguredInterface2

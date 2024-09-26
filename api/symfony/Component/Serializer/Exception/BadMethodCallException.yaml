@@ -1,8 +1,0 @@
-name: BadMethodCallException
-class_comment: null
-dependencies: []
-properties: []
-methods: []
-traits: []
-interfaces:
-- ExceptionInterface

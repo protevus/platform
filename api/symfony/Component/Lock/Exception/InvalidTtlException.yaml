@@ -1,8 +1,0 @@
-name: InvalidTtlException
-class_comment: '# * @author Amrouche Hamza <hamza.simperfit@gmail.com>'
-dependencies: []
-properties: []
-methods: []
-traits: []
-interfaces:
-- ExceptionInterface

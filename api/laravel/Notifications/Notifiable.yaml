@@ -1,8 +1,0 @@
-name: Notifiable
-class_comment: null
-dependencies: []
-properties: []
-methods: []
-traits:
-- HasDatabaseNotifications
-interfaces: []

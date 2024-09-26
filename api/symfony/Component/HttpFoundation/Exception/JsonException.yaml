@@ -1,8 +1,0 @@
-name: JsonException
-class_comment: null
-dependencies: []
-properties: []
-methods: []
-traits: []
-interfaces:
-- RequestExceptionInterface

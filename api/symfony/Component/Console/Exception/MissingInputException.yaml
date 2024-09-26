@@ -1,9 +1,0 @@
-name: MissingInputException
-class_comment: "# * Represents failure to read input from stdin.\n# *\n# * @author\
-  \ Gabriel Ostroluck\xFD <gabriel.ostrolucky@gmail.com>"
-dependencies: []
-properties: []
-methods: []
-traits: []
-interfaces:
-- ExceptionInterface

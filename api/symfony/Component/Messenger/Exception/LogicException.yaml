@@ -1,8 +1,0 @@
-name: LogicException
-class_comment: '# * @author Roland Franssen <franssen.roland@gmail.com>'
-dependencies: []
-properties: []
-methods: []
-traits: []
-interfaces:
-- ExceptionInterface

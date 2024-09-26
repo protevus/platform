@@ -1,9 +1,0 @@
-name: InvalidOptionException
-class_comment: "# * Represents an incorrect option name or value typed in the console.\n\
-  # *\n# * @author J\xE9r\xF4me Tamarelle <jerome@tamarelle.net>"
-dependencies: []
-properties: []
-methods: []
-traits: []
-interfaces:
-- ExceptionInterface

@@ -1,8 +1,0 @@
-name: InvalidArgumentException
-class_comment: "# * @author J\xE9r\xE9my Deruss\xE9 <jeremy@derusse.com>"
-dependencies: []
-properties: []
-methods: []
-traits: []
-interfaces:
-- ExceptionInterface

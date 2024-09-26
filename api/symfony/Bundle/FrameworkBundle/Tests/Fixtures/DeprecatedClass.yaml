@@ -1,7 +1,0 @@
-name: DeprecatedClass
-class_comment: '# * @deprecated'
-dependencies: []
-properties: []
-methods: []
-traits: []
-interfaces: []
