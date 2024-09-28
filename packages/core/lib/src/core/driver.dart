@@ -10,14 +10,14 @@ import 'core.dart';
 
 /// Base driver class for Protevus implementations.
 ///
-/// Powers both ProtevusHttp and ProtevusHttp2.
+/// Powers both PlatformHttp and PlatformHttp2.
 abstract class Driver<
     Request,
     Response,
     Server extends Stream<Request>,
     RequestContextType extends RequestContext,
     ResponseContextType extends ResponseContext> {
-  final Protevus app;
+  final Application app;
   final bool useZone;
   bool _closed = false;
 
@@ -170,22 +170,23 @@ abstract class Driver<
 
           return f.catchError((e, StackTrace st) {
             if (e is FormatException) {
-              throw HttpException.badRequest(message: e.message)
+              throw PlatformHttpException.badRequest(message: e.message)
                 ..stackTrace = st;
             }
-            throw HttpException(
+            throw PlatformHttpException(
                 stackTrace: st,
-                statusCode: (e is HttpException) ? e.statusCode : 500,
+                statusCode: (e is PlatformHttpException) ? e.statusCode : 500,
                 message: e?.toString() ?? '500 Internal Server Error');
-          }, test: (e) => e is HttpException).catchError((ee, StackTrace st) {
+          }, test: (e) => e is PlatformHttpException).catchError(
+              (ee, StackTrace st) {
             //print(">>>> Framework error: $ee");
             //var t = (st).runtimeType;
             //print(">>>> StackTrace: $t");
-            HttpException e;
-            if (ee is HttpException) {
+            PlatformHttpException e;
+            if (ee is PlatformHttpException) {
               e = ee;
             } else {
-              e = HttpException(
+              e = PlatformHttpException(
                   stackTrace: st,
                   statusCode: 500,
                   message: ee?.toString() ?? '500 Internal Server Error');
@@ -207,14 +208,14 @@ abstract class Driver<
 
               // TODO: To be revisited
               Future(() {
-                HttpException e;
+                PlatformHttpException e;
 
                 if (error is FormatException) {
-                  e = HttpException.badRequest(message: error.message);
-                } else if (error is HttpException) {
+                  e = PlatformHttpException.badRequest(message: error.message);
+                } else if (error is PlatformHttpException) {
                   e = error;
                 } else {
-                  e = HttpException(
+                  e = PlatformHttpException(
                       stackTrace: stackTrace, message: error.toString());
                 }
 
@@ -251,9 +252,9 @@ abstract class Driver<
     });
   }
 
-  /// Handles an [HttpException].
+  /// Handles an [PlatformHttpException].
   Future handleHttpException(
-      HttpException e,
+      PlatformHttpException e,
       StackTrace st,
       RequestContext? req,
       ResponseContext? res,
@@ -383,7 +384,7 @@ abstract class Driver<
       MiddlewarePipelineIterator<RequestHandler> it,
       RequestContextType req,
       ResponseContextType res,
-      Protevus app) async {
+      Application app) async {
     var broken = false;
     while (it.moveNext()) {
       var current = it.current.handlers.iterator;

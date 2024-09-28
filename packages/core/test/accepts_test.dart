@@ -64,7 +64,7 @@ Future<RequestContext> acceptContentTypes(
   var rq = MockHttpRequest('GET', endpoint, persistentConnection: false);
   rq.headers.set('accept', headerString);
   rq.close();
-  var app = Protevus(reflector: MirrorsReflector());
-  var http = ProtevusHttp(app);
+  var app = Application(reflector: MirrorsReflector());
+  var http = PlatformHttp(app);
   return http.createRequestContext(rq, rq.response);
 }

@@ -24,12 +24,12 @@ void main() {
 }
 
 void parameterMetaTests() {
-  Protevus app;
-  late ProtevusHttp http;
+  Application app;
+  late PlatformHttp http;
 
   setUp(() {
-    app = Protevus(reflector: MirrorsReflector());
-    http = ProtevusHttp(app);
+    app = Application(reflector: MirrorsReflector());
+    http = PlatformHttp(app);
 
     app.get('/cookie', ioc((@CookieValue('token') String jwt) {
       return jwt;

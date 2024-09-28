@@ -3,14 +3,14 @@ import 'package:platform_core/core.dart';
 import 'package:platform_core/http.dart';
 import 'package:logging/logging.dart';
 
-Future<void> apiConfigurer(Protevus app) async {
+Future<void> apiConfigurer(Application app) async {
   app.get('/', (req, res) => 'Hello, API!');
   app.fallback((req, res) {
     return 'fallback on ${req.uri} (within the API)';
   });
 }
 
-Future<void> frontendConfigurer(Protevus app) async {
+Future<void> frontendConfigurer(Application app) async {
   app.fallback((req, res) => '(usually an index page would be shown here.)');
 }
 
@@ -19,8 +19,8 @@ void main() async {
   hierarchicalLoggingEnabled = true;
   //Logger.root.onRecord.listen(prettyLog);
 
-  var app = Protevus(logger: Logger('protevus'));
-  var http = ProtevusHttp(app);
+  var app = Application(logger: Logger('protevus'));
+  var http = PlatformHttp(app);
   var multiHost = HostnameRouter.configure({
     'api.localhost:3000': apiConfigurer,
     'localhost:3000': frontendConfigurer,

@@ -24,13 +24,13 @@ import 'server.dart';
 /// * `example.*` -> `/example\./[^$]*`
 /// * `example.+` -> `/example\./[^$]+`
 class HostnameRouter {
-  final Map<Pattern, Protevus> _apps = {};
-  final Map<Pattern, FutureOr<Protevus> Function()> _creators = {};
+  final Map<Pattern, Application> _apps = {};
+  final Map<Pattern, FutureOr<Application> Function()> _creators = {};
   final List<Pattern> _patterns = [];
 
   HostnameRouter(
-      {Map<Pattern, Protevus> apps = const {},
-      Map<Pattern, FutureOr<Protevus> Function()> creators = const {}}) {
+      {Map<Pattern, Application> apps = const {},
+      Map<Pattern, FutureOr<Application> Function()> creators = const {}}) {
     Map<Pattern, V> parseMap<V>(Map<Pattern, V> map) {
       return map.map((p, c) {
         Pattern pp;
@@ -55,7 +55,7 @@ class HostnameRouter {
   }
 
   factory HostnameRouter.configure(
-      Map<Pattern, FutureOr<void> Function(Protevus)> configurers,
+      Map<Pattern, FutureOr<void> Function(Application)> configurers,
       {Reflector reflector = const EmptyReflector(),
       ProtevusEnvironment environment = protevusEnv,
       Logger? logger,
@@ -64,7 +64,7 @@ class HostnameRouter {
       ViewGenerator? viewGenerator}) {
     var creators = configurers.map((p, c) {
       return MapEntry(p, () async {
-        var app = Protevus(
+        var app = Application(
             reflector: reflector,
             environment: environment,
             logger: logger,

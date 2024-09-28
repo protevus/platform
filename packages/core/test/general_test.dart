@@ -7,18 +7,18 @@ import 'package:http/http.dart' as http;
 import 'package:test/test.dart';
 
 void main() {
-  late Protevus app;
+  late Application app;
   late http.Client client;
   late HttpServer server;
   late String url;
 
   setUp(() async {
-    app = Protevus(reflector: MirrorsReflector())
+    app = Application(reflector: MirrorsReflector())
       ..post('/foo', (req, res) => res.serialize({'hello': 'world'}))
-      ..all('*', (req, res) => throw HttpException.notFound());
+      ..all('*', (req, res) => throw PlatformHttpException.notFound());
     client = http.Client();
 
-    server = await ProtevusHttp(app).startServer();
+    server = await PlatformHttp(app).startServer();
     url = 'http://${server.address.host}:${server.port}';
   });
 

@@ -3,7 +3,8 @@ import 'package:test/test.dart';
 import 'common.dart';
 
 void main() {
-  var throwsAnHttpException = throwsA(const IsInstanceOf<HttpException>());
+  var throwsAnHttpException =
+      throwsA(const IsInstanceOf<PlatformHttpException>());
 
   /*
   test('throw 404 on null', () {

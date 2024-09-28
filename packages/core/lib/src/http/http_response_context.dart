@@ -18,7 +18,7 @@ class HttpResponseContext extends ResponseContext<HttpResponse> {
   final HttpRequestContext? _correspondingRequest;
   bool _isDetached = false, _isClosed = false, _streamInitialized = false;
 
-  HttpResponseContext(this.rawResponse, Protevus? app,
+  HttpResponseContext(this.rawResponse, Application? app,
       [this._correspondingRequest]) {
     this.app = app;
   }

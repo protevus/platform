@@ -1,5 +1,5 @@
 /// Various libraries useful for creating highly-extensible servers.
-library angel_framework.http;
+library platform_core.http;
 
 import 'dart:async';
 import 'dart:io';

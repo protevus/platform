@@ -8,13 +8,13 @@ import 'package:http_parser/http_parser.dart';
 import 'package:test/test.dart';
 
 void main() {
-  late Protevus app;
+  late Application app;
   late http.Client client;
   late HttpServer server;
   late String url;
 
   setUp(() async {
-    app = Protevus(reflector: MirrorsReflector())
+    app = Application(reflector: MirrorsReflector())
       ..get('/foo', ioc(() => {'hello': 'world'}))
       ..get('/bar', (req, res) async {
         await res.serialize({'hello': 'world'},
@@ -22,7 +22,7 @@ void main() {
       });
     client = http.Client();
 
-    server = await ProtevusHttp(app).startServer();
+    server = await PlatformHttp(app).startServer();
     url = 'http://${server.address.host}:${server.port}';
   });
 

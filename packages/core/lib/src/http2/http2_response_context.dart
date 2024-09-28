@@ -23,7 +23,7 @@ class Http2ResponseContext extends ResponseContext<ServerTransportStream> {
 
   Uri? _targetUri;
 
-  Http2ResponseContext(Protevus? app, this.stream, this._req) {
+  Http2ResponseContext(Application? app, this.stream, this._req) {
     this.app = app;
     _targetUri = _req?.uri;
   }

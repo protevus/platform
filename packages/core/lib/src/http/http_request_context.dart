@@ -77,7 +77,7 @@ class HttpRequestContext extends RequestContext<HttpRequest?> {
 
   /// Magically transforms an [HttpRequest] into a [RequestContext].
   static Future<HttpRequestContext> from(
-      HttpRequest request, Protevus app, String path) {
+      HttpRequest request, Application app, String path) {
     var ctx = HttpRequestContext().._container = app.container.createChild();
 
     var override = request.method;

@@ -5,8 +5,8 @@ import 'package:platform_core/core.dart';
 import 'package:platform_core/http.dart';
 
 void main() async {
-  var app = Protevus();
-  var http = ProtevusHttp.custom(app, startShared, useZone: false);
+  var app = Application();
+  var http = PlatformHttp.custom(app, startShared, useZone: false);
 
   app.get('/', (req, res) => res.write('Hello, world!'));
   app.optimizeForProduction(force: true);

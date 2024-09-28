@@ -9,13 +9,13 @@ import 'package:platform_mocking/mocking.dart';
 import 'package:test/test.dart';
 
 void main() {
-  late Protevus app;
-  late ProtevusHttp http;
+  late Application app;
+  late PlatformHttp http;
 
   setUp(() {
-    app = Protevus(reflector: MirrorsReflector())
+    app = Application(reflector: MirrorsReflector())
       ..configuration['global'] = 305; // Pitbull!
-    http = ProtevusHttp(app);
+    http = PlatformHttp(app);
 
     app.get('/string/:string', ioc((String string) => string));
 

@@ -17,7 +17,7 @@ final RegExp _straySlashes = RegExp(r'(^/+)|(/+$)');
 typedef ServerGeneratorType = Future<HttpServer> Function(dynamic, int);
 
 /// Adapts `dart:io`'s [HttpServer] to serve Protevus.
-class ProtevusHttp extends Driver<HttpRequest, HttpResponse, HttpServer,
+class PlatformHttp extends Driver<HttpRequest, HttpResponse, HttpServer,
     HttpRequestContext, HttpResponseContext> {
   @override
   Uri get uri {
@@ -25,23 +25,24 @@ class ProtevusHttp extends Driver<HttpRequest, HttpResponse, HttpServer,
         scheme: 'http', host: server?.address.address, port: server?.port);
   }
 
-  ProtevusHttp._(super.app, super.serverGenerator, bool useZone)
+  PlatformHttp._(super.app, super.serverGenerator, bool useZone)
       : super(useZone: useZone);
 
-  factory ProtevusHttp(Protevus app, {bool useZone = true}) {
-    return ProtevusHttp._(app, HttpServer.bind, useZone);
+  factory PlatformHttp(Application app, {bool useZone = true}) {
+    return PlatformHttp._(app, HttpServer.bind, useZone);
   }
 
   /// An instance mounted on a server started by the [serverGenerator].
-  factory ProtevusHttp.custom(Protevus app, ServerGeneratorType serverGenerator,
+  factory PlatformHttp.custom(
+      Application app, ServerGeneratorType serverGenerator,
       {bool useZone = true, Map<String, String> headers = const {}}) {
-    return ProtevusHttp._(app, serverGenerator, useZone);
+    return PlatformHttp._(app, serverGenerator, useZone);
   }
 
-  factory ProtevusHttp.fromSecurityContext(
-      Protevus app, SecurityContext context,
+  factory PlatformHttp.fromSecurityContext(
+      Application app, SecurityContext context,
       {bool useZone = true}) {
-    return ProtevusHttp._(app, (address, int port) {
+    return PlatformHttp._(app, (address, int port) {
       return HttpServer.bindSecure(address, port, context);
     }, useZone);
   }
@@ -51,8 +52,8 @@ class ProtevusHttp extends Driver<HttpRequest, HttpResponse, HttpServer,
   /// Provide paths to a certificate chain and server key (both .pem).
   /// If no password is provided, a random one will be generated upon running
   /// the server.
-  factory ProtevusHttp.secure(
-      Protevus app, String certificateChainPath, String serverKeyPath,
+  factory PlatformHttp.secure(
+      Application app, String certificateChainPath, String serverKeyPath,
       {String? password, bool useZone = true}) {
     var certificateChain =
         Platform.script.resolve(certificateChainPath).toFilePath();
@@ -61,7 +62,7 @@ class ProtevusHttp extends Driver<HttpRequest, HttpResponse, HttpServer,
     serverContext.useCertificateChain(certificateChain, password: password);
     serverContext.usePrivateKey(serverKey, password: password);
 
-    return ProtevusHttp.fromSecurityContext(app, serverContext,
+    return PlatformHttp.fromSecurityContext(app, serverContext,
         useZone: useZone);
   }
 

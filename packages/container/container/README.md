@@ -38,7 +38,7 @@ A better IoC container for Protevus, ultimately allowing Protevus to be used wit
         app.container.registerSingleton<SalesController>(SalesController());
         await app.mountController<SalesController>();
 
-        var http = ProtevusHttp(app);
+        var http = PlatformHttp(app);
         var server = await http.startServer('localhost', 3000);
         print("Protevus server listening at ${http.uri}");
     }

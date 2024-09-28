@@ -9,7 +9,7 @@ import 'pretty_log.dart';
 
 void main() {
   late http.IOClient client;
-  late ProtevusHttp driver;
+  late PlatformHttp driver;
   late Logger logger;
 
   setUp(() async {
@@ -20,7 +20,7 @@ void main() {
       ..level = Level.ALL
       ..onRecord.listen(prettyLog);
 
-    var app = Protevus(logger: logger);
+    var app = Application(logger: logger);
 
     app.fallback(hello);
     app.fallback(throw404);
@@ -40,7 +40,7 @@ void main() {
       }
     };
 
-    driver = ProtevusHttp(app);
+    driver = PlatformHttp(app);
     await driver.startServer();
   });
 
@@ -76,5 +76,5 @@ Future<void> hello(RequestContext req, ResponseContext res) {
 void throw404(RequestContext req, ResponseContext res) {
   Zone.current
       .handleUncaughtError('This 404 should not occur.', StackTrace.current);
-  throw HttpException.notFound();
+  throw PlatformHttpException.notFound();
 }

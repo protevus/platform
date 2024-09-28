@@ -13,7 +13,7 @@ import 'package:mime/mime.dart';
 
 import 'controller.dart';
 import 'request_context.dart';
-import 'server.dart' show Protevus;
+import 'server.dart' show Application;
 
 final RegExp _straySlashes = RegExp(r'(^/+)|(/+$)');
 
@@ -29,8 +29,8 @@ abstract class ResponseContext<RawResponse>
   Completer? _done;
   int _statusCode = 200;
 
-  /// The [Protevus] instance that is sending a response.
-  Protevus? app;
+  /// The [Application] instance that is sending a response.
+  Application? app;
 
   /// Is `Transfer-Encoding` chunked?
   bool? chunked;

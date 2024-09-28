@@ -9,7 +9,7 @@ import 'package:test/test.dart';
 
 void main() {
   test('preinjects functions', () async {
-    var app = Protevus(reflector: MirrorsReflector())
+    var app = Application(reflector: MirrorsReflector())
       ..configuration['foo'] = 'bar'
       ..get('/foo', ioc(echoAppFoo));
     app.optimizeForProduction(force: true);
@@ -18,7 +18,7 @@ void main() {
 
     var rq = MockHttpRequest('GET', Uri(path: '/foo'));
     await rq.close();
-    await ProtevusHttp(app).handleRequest(rq);
+    await PlatformHttp(app).handleRequest(rq);
     var rs = rq.response;
     var body = await rs.transform(utf8.decoder).join();
     expect(body, json.encode('bar'));

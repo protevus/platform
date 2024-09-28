@@ -14,9 +14,9 @@ final Uri $foo = Uri.parse('http://localhost:3000/foo');
 /// Additional tests to improve coverage of server.dart
 void main() {
   group('scoping', () {
-    var parent = Protevus(reflector: MirrorsReflector())
+    var parent = Application(reflector: MirrorsReflector())
       ..configuration['two'] = 2;
-    var child = Protevus(reflector: MirrorsReflector());
+    var child = Application(reflector: MirrorsReflector());
     parent.mount('/child', child);
 
     test('sets children', () {
@@ -33,20 +33,20 @@ void main() {
   });
 
   test('custom server generator', () {
-    var app = Protevus(reflector: MirrorsReflector());
-    var http = ProtevusHttp.custom(app, HttpServer.bind);
+    var app = Application(reflector: MirrorsReflector());
+    var http = PlatformHttp.custom(app, HttpServer.bind);
     expect(http.serverGenerator, HttpServer.bind);
   });
 
   test('default error handler', () async {
-    var app = Protevus(reflector: MirrorsReflector());
-    var http = ProtevusHttp(app);
+    var app = Application(reflector: MirrorsReflector());
+    var http = PlatformHttp(app);
     var rq = MockHttpRequest('GET', $foo);
     await (rq.close());
     var rs = rq.response;
     var req = await http.createRequestContext(rq, rs);
     var res = await http.createResponseContext(rq, rs);
-    var e = HttpException(
+    var e = PlatformHttpException(
         statusCode: 321, message: 'Hello', errors: ['foo', 'bar']);
     await app.errorHandler(e, req, res);
     await http.sendResponse(rq, rs, req, res);
@@ -62,10 +62,10 @@ void main() {
   });
 
   test('plug-ins run on startup', () async {
-    var app = Protevus(reflector: MirrorsReflector());
+    var app = Application(reflector: MirrorsReflector());
     app.startupHooks.add((app) => app.configuration['two'] = 2);
 
-    var http = ProtevusHttp(app);
+    var http = PlatformHttp(app);
     await http.startServer();
     expect(app.configuration['two'], 2);
     await app.close();
@@ -73,7 +73,7 @@ void main() {
   });
 
   test('warning when adding routes to flattened router', () {
-    var app = Protevus(reflector: MirrorsReflector())
+    var app = Application(reflector: MirrorsReflector())
       ..optimizeForProduction(force: true);
     app.dumpTree();
     app.get('/', (req, res) => 2);
@@ -81,7 +81,7 @@ void main() {
   });
 
   test('services close on close call', () async {
-    var app = Protevus(reflector: MirrorsReflector());
+    var app = Application(reflector: MirrorsReflector());
     var svc = CustomCloseService();
     expect(svc.value, 2);
     app.use('/', svc);
@@ -90,8 +90,9 @@ void main() {
   });
 
   test('global injection added to injection map', () async {
-    var app = Protevus(reflector: MirrorsReflector())..configuration['a'] = 'b';
-    var http = ProtevusHttp(app);
+    var app = Application(reflector: MirrorsReflector())
+      ..configuration['a'] = 'b';
+    var http = PlatformHttp(app);
     app.get('/', ioc((String a) => a));
     var rq = MockHttpRequest('GET', Uri.parse('/'));
     await (rq.close());
@@ -101,8 +102,9 @@ void main() {
   });
 
   test('global injected serializer', () async {
-    var app = Protevus(reflector: MirrorsReflector())..serializer = (_) => 'x';
-    var http = ProtevusHttp(app);
+    var app = Application(reflector: MirrorsReflector())
+      ..serializer = (_) => 'x';
+    var http = PlatformHttp(app);
     app.get($foo.path, (req, ResponseContext res) => res.serialize(null));
     var rq = MockHttpRequest('GET', $foo);
     await (rq.close());
@@ -112,9 +114,10 @@ void main() {
   });
 
   group('handler results', () {
-    var app = Protevus(reflector: MirrorsReflector());
-    var http = ProtevusHttp(app);
-    app.responseFinalizers.add((req, res) => throw HttpException.forbidden());
+    var app = Application(reflector: MirrorsReflector());
+    var http = PlatformHttp(app);
+    app.responseFinalizers
+        .add((req, res) => throw PlatformHttpException.forbidden());
     late RequestContext req;
     late ResponseContext res;
 
@@ -154,14 +157,14 @@ void main() {
   });
 
   group('handleHttpException', () {
-    late Protevus app;
-    late ProtevusHttp http;
+    late Application app;
+    late PlatformHttp http;
 
     setUp(() async {
-      app = Protevus(reflector: MirrorsReflector());
-      app.get('/wtf', (req, res) => throw HttpException.forbidden());
-      app.get('/wtf2', (req, res) => throw HttpException.forbidden());
-      http = ProtevusHttp(app);
+      app = Application(reflector: MirrorsReflector());
+      app.get('/wtf', (req, res) => throw PlatformHttpException.forbidden());
+      app.get('/wtf2', (req, res) => throw PlatformHttpException.forbidden());
+      http = PlatformHttp(app);
       await http.startServer('127.0.0.1', 0);
 
       var oldHandler = app.errorHandler;

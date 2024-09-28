@@ -31,7 +31,7 @@ class Http2RequestContext extends RequestContext<ServerTransportStream?> {
   static Future<Http2RequestContext> from(
       ServerTransportStream stream,
       Socket socket,
-      Protevus app,
+      Application app,
       Map<String, MockHttpSession> sessions,
       Uuid uuid) {
     var c = Completer<Http2RequestContext>();

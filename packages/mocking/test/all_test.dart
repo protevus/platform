@@ -20,7 +20,7 @@ void main() {
       return res.serialize(req.ip == InternetAddress.loopbackIPv4.address);
     });
 
-  var http = ProtevusHttp(app);
+  var http = PlatformHttp(app);
 
   test('receive a response', () async {
     var rq = MockHttpRequest('GET', uri.resolve('/foo'));

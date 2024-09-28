@@ -6,7 +6,7 @@ import 'package:logging/logging.dart';
 import 'common.dart';
 
 void main() async {
-  var app = Protevus()
+  var app = Application()
     ..encoders.addAll({
       'gzip': gzip.encoder,
       'deflate': zlib.encoder,
@@ -15,8 +15,8 @@ void main() async {
 
   app.get('/', (req, res) => 'Hello HTTP/2!!!');
 
-  app.fallback((req, res) =>
-      throw HttpException.notFound(message: 'No file exists at ${req.uri}'));
+  app.fallback((req, res) => throw PlatformHttpException.notFound(
+      message: 'No file exists at ${req.uri}'));
 
   var ctx = SecurityContext()
     ..useCertificateChain('dev.pem')
@@ -32,10 +32,10 @@ void main() async {
     );
   }
 
-  var http1 = ProtevusHttp(app);
-  var http2 = ProtevusHttp2(app, ctx);
+  var http1 = PlatformHttp(app);
+  var http2 = PlatformHttp2(app, ctx);
 
-  // HTTP/1.x requests will fallback to `ProtevusHttp`
+  // HTTP/1.x requests will fallback to `PlatformHttp`
   http2.onHttp1.listen(http1.handleRequest);
 
   await http2.startServer('127.0.0.1', 3000);

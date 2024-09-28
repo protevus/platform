@@ -8,7 +8,7 @@ void main() async {
   //Logger.root.onRecord.listen(prettyLog);
 
   // Create our server.
-  var app = Protevus(
+  var app = Application(
     logger: Logger('protevus'),
     reflector: MirrorsReflector(),
   );
@@ -41,12 +41,12 @@ void main() async {
 
   // Simple fallback to throw a 404 on unknown paths.
   app.fallback((req, res) {
-    throw HttpException.notFound(
+    throw PlatformHttpException.notFound(
       message: 'Unknown path: "${req.uri!.path}"',
     );
   });
 
-  var http = ProtevusHttp(app);
+  var http = PlatformHttp(app);
   var server = await http.startServer('127.0.0.1', 3000);
   var url = 'http://${server.address.address}:${server.port}';
   print('Listening at $url');

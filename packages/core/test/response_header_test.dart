@@ -6,13 +6,13 @@ import 'package:platform_core/src/http/protevus_http.dart';
 import 'package:test/test.dart';
 
 void main() {
-  late Protevus app;
-  late ProtevusHttp http;
+  late Application app;
+  late PlatformHttp http;
   late HttpClient client;
 
   setUp(() async {
-    app = Protevus(reflector: MirrorsReflector());
-    http = ProtevusHttp(app);
+    app = Application(reflector: MirrorsReflector());
+    http = PlatformHttp(app);
 
     await http.startServer();
 

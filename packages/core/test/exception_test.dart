@@ -4,41 +4,46 @@ import 'package:test/test.dart';
 
 void main() {
   test('named constructors', () {
-    expect(HttpException.badRequest(), isException(400, '400 Bad Request'));
-    expect(HttpException.notAuthenticated(),
+    expect(PlatformHttpException.badRequest(),
+        isException(400, '400 Bad Request'));
+    expect(PlatformHttpException.notAuthenticated(),
         isException(401, '401 Not Authenticated'));
-    expect(HttpException.paymentRequired(),
+    expect(PlatformHttpException.paymentRequired(),
         isException(402, '402 Payment Required'));
-    expect(HttpException.forbidden(), isException(403, '403 Forbidden'));
-    expect(HttpException.notFound(), isException(404, '404 Not Found'));
-    expect(HttpException.methodNotAllowed(),
-        isException(405, '405 Method Not Allowed'));
     expect(
-        HttpException.notAcceptable(), isException(406, '406 Not Acceptable'));
-    expect(HttpException.methodTimeout(), isException(408, '408 Timeout'));
-    expect(HttpException.conflict(), isException(409, '409 Conflict'));
-    expect(HttpException.notProcessable(),
+        PlatformHttpException.forbidden(), isException(403, '403 Forbidden'));
+    expect(PlatformHttpException.notFound(), isException(404, '404 Not Found'));
+    expect(PlatformHttpException.methodNotAllowed(),
+        isException(405, '405 Method Not Allowed'));
+    expect(PlatformHttpException.notAcceptable(),
+        isException(406, '406 Not Acceptable'));
+    expect(
+        PlatformHttpException.methodTimeout(), isException(408, '408 Timeout'));
+    expect(PlatformHttpException.conflict(), isException(409, '409 Conflict'));
+    expect(PlatformHttpException.notProcessable(),
         isException(422, '422 Not Processable'));
-    expect(HttpException.notImplemented(),
+    expect(PlatformHttpException.notImplemented(),
         isException(501, '501 Not Implemented'));
-    expect(HttpException.unavailable(), isException(503, '503 Unavailable'));
+    expect(PlatformHttpException.unavailable(),
+        isException(503, '503 Unavailable'));
   });
 
   test('fromMap', () {
-    expect(HttpException.fromMap({'status_code': -1, 'message': 'ok'}),
+    expect(PlatformHttpException.fromMap({'status_code': -1, 'message': 'ok'}),
         isException(-1, 'ok'));
   });
 
   test('toMap = toJson', () {
-    var exc = HttpException.badRequest();
+    var exc = PlatformHttpException.badRequest();
     expect(exc.toMap(), exc.toJson());
     var json_ = json.encode(exc.toJson());
-    var exc2 = HttpException.fromJson(json_);
+    var exc2 = PlatformHttpException.fromJson(json_);
     expect(exc2.toJson(), exc.toJson());
   });
 
   test('toString', () {
-    expect(HttpException(statusCode: 420, message: 'Blaze It').toString(),
+    expect(
+        PlatformHttpException(statusCode: 420, message: 'Blaze It').toString(),
         '420: Blaze It');
   });
 }
@@ -58,7 +63,7 @@ class _IsException extends Matcher {
 
   @override
   bool matches(item, Map matchState) {
-    return item is HttpException &&
+    return item is PlatformHttpException &&
         item.statusCode == statusCode &&
         item.message == message;
   }

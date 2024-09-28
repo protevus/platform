@@ -1,4 +1,4 @@
-library http_exception;
+library platform_http_exception;
 
 //import 'package:dart2_constant/convert.dart';
 import 'dart:convert';
@@ -8,7 +8,7 @@ import 'dart:convert';
 ///
 /// Originally inspired by
 /// [feathers-errors](https://github.com/feathersjs/feathers-errors).
-class HttpException implements Exception {
+class PlatformHttpException implements Exception {
   /// A list of errors that occurred when this exception was thrown.
   final List<String> errors = [];
 
@@ -24,7 +24,7 @@ class HttpException implements Exception {
   /// An HTTP status code this exception will throw.
   int statusCode;
 
-  HttpException(
+  PlatformHttpException(
       {this.message = '500 Internal Server Error',
       this.stackTrace,
       this.statusCode = 500,
@@ -49,8 +49,8 @@ class HttpException implements Exception {
     return '$statusCode: $message';
   }
 
-  factory HttpException.fromMap(Map data) {
-    return HttpException(
+  factory PlatformHttpException.fromMap(Map data) {
+    return PlatformHttpException(
       statusCode: (data['status_code'] ?? data['statusCode'] ?? 500) as int,
       message: data['message']?.toString() ?? 'Internal Server Error',
       errors: data['errors'] is Iterable
@@ -59,63 +59,65 @@ class HttpException implements Exception {
     );
   }
 
-  factory HttpException.fromJson(String str) =>
-      HttpException.fromMap(json.decode(str) as Map);
+  factory PlatformHttpException.fromJson(String str) =>
+      PlatformHttpException.fromMap(json.decode(str) as Map);
 
   /// Throws a 400 Bad Request error, including an optional arrray of (validation?)
   /// errors you specify.
-  factory HttpException.badRequest(
+  factory PlatformHttpException.badRequest(
           {String message = '400 Bad Request',
           List<String> errors = const []}) =>
-      HttpException(message: message, errors: errors, statusCode: 400);
+      PlatformHttpException(message: message, errors: errors, statusCode: 400);
 
   /// Throws a 401 Not Authenticated error.
-  factory HttpException.notAuthenticated(
+  factory PlatformHttpException.notAuthenticated(
           {String message = '401 Not Authenticated'}) =>
-      HttpException(message: message, statusCode: 401);
+      PlatformHttpException(message: message, statusCode: 401);
 
   /// Throws a 402 Payment Required error.
-  factory HttpException.paymentRequired(
+  factory PlatformHttpException.paymentRequired(
           {String message = '402 Payment Required'}) =>
-      HttpException(message: message, statusCode: 402);
+      PlatformHttpException(message: message, statusCode: 402);
 
   /// Throws a 403 Forbidden error.
-  factory HttpException.forbidden({String message = '403 Forbidden'}) =>
-      HttpException(message: message, statusCode: 403);
+  factory PlatformHttpException.forbidden({String message = '403 Forbidden'}) =>
+      PlatformHttpException(message: message, statusCode: 403);
 
   /// Throws a 404 Not Found error.
-  factory HttpException.notFound({String message = '404 Not Found'}) =>
-      HttpException(message: message, statusCode: 404);
+  factory PlatformHttpException.notFound({String message = '404 Not Found'}) =>
+      PlatformHttpException(message: message, statusCode: 404);
 
   /// Throws a 405 Method Not Allowed error.
-  factory HttpException.methodNotAllowed(
+  factory PlatformHttpException.methodNotAllowed(
           {String message = '405 Method Not Allowed'}) =>
-      HttpException(message: message, statusCode: 405);
+      PlatformHttpException(message: message, statusCode: 405);
 
   /// Throws a 406 Not Acceptable error.
-  factory HttpException.notAcceptable(
+  factory PlatformHttpException.notAcceptable(
           {String message = '406 Not Acceptable'}) =>
-      HttpException(message: message, statusCode: 406);
+      PlatformHttpException(message: message, statusCode: 406);
 
   /// Throws a 408 Timeout error.
-  factory HttpException.methodTimeout({String message = '408 Timeout'}) =>
-      HttpException(message: message, statusCode: 408);
+  factory PlatformHttpException.methodTimeout(
+          {String message = '408 Timeout'}) =>
+      PlatformHttpException(message: message, statusCode: 408);
 
   /// Throws a 409 Conflict error.
-  factory HttpException.conflict({String message = '409 Conflict'}) =>
-      HttpException(message: message, statusCode: 409);
+  factory PlatformHttpException.conflict({String message = '409 Conflict'}) =>
+      PlatformHttpException(message: message, statusCode: 409);
 
   /// Throws a 422 Not Processable error.
-  factory HttpException.notProcessable(
+  factory PlatformHttpException.notProcessable(
           {String message = '422 Not Processable'}) =>
-      HttpException(message: message, statusCode: 422);
+      PlatformHttpException(message: message, statusCode: 422);
 
   /// Throws a 501 Not Implemented error.
-  factory HttpException.notImplemented(
+  factory PlatformHttpException.notImplemented(
           {String message = '501 Not Implemented'}) =>
-      HttpException(message: message, statusCode: 501);
+      PlatformHttpException(message: message, statusCode: 501);
 
   /// Throws a 503 Unavailable error.
-  factory HttpException.unavailable({String message = '503 Unavailable'}) =>
-      HttpException(message: message, statusCode: 503);
+  factory PlatformHttpException.unavailable(
+          {String message = '503 Unavailable'}) =>
+      PlatformHttpException(message: message, statusCode: 503);
 }

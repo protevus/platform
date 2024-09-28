@@ -21,8 +21,8 @@ import 'service.dart';
 
 //final RegExp _straySlashes = RegExp(r'(^/+)|(/+$)');
 
-/// A function that configures an [Protevus] server.
-typedef Configurer = FutureOr<void> Function(Protevus app);
+/// A function that configures an [Application] server.
+typedef PlatformConfigurer = FutureOr<void> Function(Application app);
 
 /// A function that asynchronously generates a view from the given path and data.
 typedef ViewGenerator = FutureOr<String> Function(String path,
@@ -30,11 +30,11 @@ typedef ViewGenerator = FutureOr<String> Function(String path,
 
 /// A function that handles error
 typedef PlatformErrorHandler = dynamic Function(
-    HttpException e, RequestContext req, ResponseContext res);
+    PlatformHttpException e, RequestContext req, ResponseContext res);
 
-/// The default error handler for [Protevus] server
+/// The default error handler for [Application] server
 Future<bool> _defaultErrorHandler(
-    HttpException e, RequestContext req, ResponseContext res) async {
+    PlatformHttpException e, RequestContext req, ResponseContext res) async {
   if (!req.accepts('text/html', strict: true) &&
       (req.accepts('application/json') ||
           req.accepts('application/javascript'))) {
@@ -65,7 +65,7 @@ Logger _defaultLogger() {
 
       if (rec.error != null) {
         var err = rec.error;
-        if (err is HttpException && err.statusCode != 500) return;
+        if (err is PlatformHttpException && err.statusCode != 500) return;
         print('${rec.message} \n');
         print(rec.error);
         if (rec.stackTrace != null) {
@@ -78,18 +78,18 @@ Logger _defaultLogger() {
 }
 
 /// A powerful real-time/REST/MVC server class.
-class Protevus extends Routable {
+class Application extends Routable {
   static Future<String> _noViewEngineConfigured(String view, [Map? data]) =>
       Future.value('No view engine has been configured yet.');
 
-  final List<Protevus> _children = [];
+  final List<Application> _children = [];
   final Map<
       String,
       Tuple4<List, Map<String, dynamic>, ParseResult<RouteResult>,
           MiddlewarePipeline>> handlerCache = HashMap();
 
   Router<RequestHandler>? _flattened;
-  Protevus? _parent;
+  Application? _parent;
 
   /// A global Map of converters that can transform responses bodies.
   final Map<String, Converter<List<int>, List<int>>> encoders = {};
@@ -114,7 +114,7 @@ class Protevus extends Routable {
   bool allowMethodOverrides = true;
 
   /// All child application mounted on this instance.
-  List<Protevus> get children => List<Protevus>.unmodifiable(_children);
+  List<Application> get children => List<Application>.unmodifiable(_children);
 
   final Map<Pattern, Controller> _controllers = {};
 
@@ -127,7 +127,7 @@ class Protevus extends Routable {
   final ProtevusEnvironment environment;
 
   /// Returns the parent instance of this application, if any.
-  Protevus? get parent => _parent;
+  Application? get parent => _parent;
 
   /// Outputs diagnostics and debug messages.
   Logger _logger = _defaultLogger();
@@ -145,12 +145,12 @@ class Protevus extends Routable {
   /// Plug-ins to be called right before server startup.
   ///
   /// If the server is never started, they will never be called.
-  final List<Configurer> startupHooks = [];
+  final List<PlatformConfigurer> startupHooks = [];
 
   /// Plug-ins to be called right before server shutdown.
   ///
   /// If the server is never [close]d, they will never be called.
-  final List<Configurer> shutdownHooks = [];
+  final List<PlatformConfigurer> shutdownHooks = [];
 
   /// Always run before responses are sent.
   ///
@@ -162,7 +162,7 @@ class Protevus extends Routable {
   /// Called by [ResponseContext]@`render`.
   ViewGenerator? viewGenerator = _noViewEngineConfigured;
 
-  /// The handler currently configured to run on [HttpException]s.
+  /// The handler currently configured to run on [PlatformHttpException]s.
   PlatformErrorHandler errorHandler = _defaultErrorHandler;
 
   @override
@@ -189,7 +189,7 @@ class Protevus extends Routable {
           'This route will be ignored, and no requests will ever reach it.');
     }
 
-    if (router is Protevus) {
+    if (router is Application) {
       router._parent = this;
       _children.add(router);
     }
@@ -199,11 +199,11 @@ class Protevus extends Routable {
 
   /// Loads some base dependencies into the service container.
   void bootstrapContainer() {
-    if (runtimeType != Protevus) {
+    if (runtimeType != Application) {
       container.registerSingleton(this);
     }
 
-    container.registerSingleton<Protevus>(this);
+    container.registerSingleton<Application>(this);
     container.registerSingleton<Routable>(this);
     container.registerSingleton<Router>(this);
   }
@@ -358,8 +358,8 @@ class Protevus extends Routable {
     // return   closureMirror.apply(args).reflectee;
   }
 
-  /// Applies an [Configurer] to this instance.
-  Future configure(Configurer configurer) {
+  /// Applies an [PlatformConfigurer] to this instance.
+  Future configure(PlatformConfigurer configurer) {
     return Future.sync(() => configurer(this));
   }
 
@@ -396,7 +396,7 @@ class Protevus extends Routable {
       'For more, see the documentation:\n'
       'https://docs.angel-dart.dev/guides/dependency-injection#enabling-dart-mirrors-or-other-reflection';
 
-  Protevus(
+  Application(
       {Reflector reflector =
           const ThrowingReflector(errorMessage: _reflectionErrorMessage),
       this.environment = protevusEnv,

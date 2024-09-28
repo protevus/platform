@@ -16,10 +16,10 @@ Future<SecureServerSocket> startSharedHttp2(
 }
 
 /// Adapts `package:http2`'s [ServerTransportConnection] to serve Protevus.
-class ProtevusHttp2 extends Driver<Socket, ServerTransportStream,
+class PlatformHttp2 extends Driver<Socket, ServerTransportStream,
     SecureServerSocket, Http2RequestContext, Http2ResponseContext> {
   final ServerSettings? settings;
-  late ProtevusHttp _http;
+  late PlatformHttp _http;
   final StreamController<HttpRequest> _onHttp1 = StreamController();
   final Map<String, MockHttpSession> _sessions = {};
   final Uuid _uuid = Uuid();
@@ -27,8 +27,8 @@ class ProtevusHttp2 extends Driver<Socket, ServerTransportStream,
 
   SecureServerSocket? get socket => _artificial;
 
-  ProtevusHttp2._(
-      Protevus app,
+  PlatformHttp2._(
+      Application app,
       Future<SecureServerSocket> Function(dynamic, int) serverGenerator,
       bool useZone,
       bool allowHttp1,
@@ -39,21 +39,21 @@ class ProtevusHttp2 extends Driver<Socket, ServerTransportStream,
           useZone: useZone,
         ) {
     if (allowHttp1) {
-      _http = ProtevusHttp(app, useZone: useZone);
+      _http = PlatformHttp(app, useZone: useZone);
       onHttp1.listen(_http.handleRequest);
     }
   }
 
-  factory ProtevusHttp2(Protevus app, SecurityContext securityContext,
+  factory PlatformHttp2(Application app, SecurityContext securityContext,
       {bool useZone = true,
       bool allowHttp1 = false,
       ServerSettings? settings}) {
-    return ProtevusHttp2.custom(app, securityContext, SecureServerSocket.bind,
+    return PlatformHttp2.custom(app, securityContext, SecureServerSocket.bind,
         allowHttp1: allowHttp1, settings: settings);
   }
 
-  factory ProtevusHttp2.custom(
-      Protevus app,
+  factory PlatformHttp2.custom(
+      Application app,
       SecurityContext ctx,
       Future<SecureServerSocket> Function(
               InternetAddress? address, int port, SecurityContext ctx)
@@ -61,7 +61,7 @@ class ProtevusHttp2 extends Driver<Socket, ServerTransportStream,
       {bool useZone = true,
       bool allowHttp1 = false,
       ServerSettings? settings}) {
-    return ProtevusHttp2._(app, (address, port) {
+    return PlatformHttp2._(app, (address, port) {
       var addr = address is InternetAddress
           ? address
           : InternetAddress(address.toString());
@@ -186,7 +186,7 @@ class _FakeServerSocket extends Stream<Socket> implements ServerSocket {
 class _ProtevusHttp2ServerSocket extends Stream<SecureSocket>
     implements SecureServerSocket {
   final SecureServerSocket socket;
-  final ProtevusHttp2 driver;
+  final PlatformHttp2 driver;
   final _ctrl = StreamController<SecureSocket>();
   late _FakeServerSocket _fake;
   StreamSubscription? _sub;
@@ -206,7 +206,7 @@ class _ProtevusHttp2ServerSocket extends Stream<SecureSocket>
         } else {
           socket.destroy();
           throw Exception(
-              'ProtevusHttp2 does not support ${socket.selectedProtocol} as an ALPN protocol.');
+              'PlatformHttp2 does not support ${socket.selectedProtocol} as an ALPN protocol.');
         }
       },
       onDone: _ctrl.close,

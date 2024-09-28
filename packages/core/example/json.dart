@@ -31,9 +31,9 @@ void main() async {
 }
 
 void serverMain(_) async {
-  var app = Protevus();
+  var app = Application();
   var http =
-      ProtevusHttp.custom(app, startShared, useZone: false); // Run a cluster
+      PlatformHttp.custom(app, startShared, useZone: false); // Run a cluster
 
   app.get('/', (req, res) {
     return res.serialize({

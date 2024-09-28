@@ -9,10 +9,10 @@ import '../core/core.dart';
 
 /// Supports grouping routes with shared functionality.
 class Controller {
-  Protevus? _app;
+  Application? _app;
 
-  /// The [Protevus] application powering this controller.
-  Protevus get app {
+  /// The [Application] application powering this controller.
+  Application get app {
     if (_app == null) {
       throw ArgumentError("Protevus is not instantiated.");
     }
@@ -38,7 +38,7 @@ class Controller {
 
   /// Applies routes, DI, and other configuration to an [app].
   @mustCallSuper
-  Future<void> configureServer(Protevus app) async {
+  Future<void> configureServer(Application app) async {
     _app = app;
 
     if (injectSingleton != false) {

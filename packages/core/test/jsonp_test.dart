@@ -7,8 +7,8 @@ import 'package:platform_mocking/mocking.dart';
 import 'package:test/test.dart';
 
 void main() {
-  var app = Protevus();
-  var http = ProtevusHttp(app);
+  var app = Application();
+  var http = PlatformHttp(app);
 
   app.get('/default', (req, res) => res.jsonp({'foo': 'bar'}));
 

@@ -72,7 +72,7 @@ class MapService extends Service<String?, Map<String, dynamic>> {
   Future<Map<String, dynamic>> read(String? id,
       [Map<String, dynamic>? params]) {
     return Future.value(items.firstWhere(_matchesId(id),
-        orElse: (() => throw HttpException.notFound(
+        orElse: (() => throw PlatformHttpException.notFound(
             message: 'No record found for ID $id'))));
   }
 
@@ -127,7 +127,8 @@ class MapService extends Service<String?, Map<String, dynamic>> {
 
     return read(id).then((old) {
       if (!items.remove(old)) {
-        throw HttpException.notFound(message: 'No record found for ID $id');
+        throw PlatformHttpException.notFound(
+            message: 'No record found for ID $id');
       }
 
       var result = Map<String, dynamic>.from(data);
@@ -151,7 +152,7 @@ class MapService extends Service<String?, Map<String, dynamic>> {
       // Remove everything...
       if (!(allowRemoveAll == true ||
           params?.containsKey('provider') != true)) {
-        throw HttpException.forbidden(
+        throw PlatformHttpException.forbidden(
             message: 'Clients are not allowed to delete all items.');
       } else {
         items.clear();
@@ -163,7 +164,8 @@ class MapService extends Service<String?, Map<String, dynamic>> {
       if (items.remove(result)) {
         return result;
       } else {
-        throw HttpException.notFound(message: 'No record found for ID $id');
+        throw PlatformHttpException.notFound(
+            message: 'No record found for ID $id');
       }
     });
   }

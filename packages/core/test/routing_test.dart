@@ -36,16 +36,16 @@ bool interceptService(RequestContext req, ResponseContext res) {
 }
 
 void main() {
-  late Protevus app;
-  late Protevus nested;
-  late Protevus todos;
+  late Application app;
+  late Application nested;
+  late Application todos;
   late String url;
   late http.Client client;
 
   setUp(() async {
-    app = Protevus(reflector: MirrorsReflector());
-    nested = Protevus(reflector: MirrorsReflector());
-    todos = Protevus(reflector: MirrorsReflector());
+    app = Application(reflector: MirrorsReflector());
+    nested = Application(reflector: MirrorsReflector());
+    todos = Application(reflector: MirrorsReflector());
 
     for (var app in [app, nested, todos]) {
       app.logger = Logger('routing_test')
@@ -113,7 +113,7 @@ void main() {
     //app.dumpTree(header: "DUMPING ROUTES:", showMatchers: true);
 
     client = http.Client();
-    var server = await ProtevusHttp(app).startServer('127.0.0.1', 0);
+    var server = await PlatformHttp(app).startServer('127.0.0.1', 0);
     url = 'http://${server.address.host}:${server.port}';
   });
 

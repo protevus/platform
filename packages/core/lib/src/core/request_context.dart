@@ -18,13 +18,13 @@ import 'package:logging/logging.dart';
 import 'metadata.dart';
 import 'response_context.dart';
 import 'routable.dart';
-import 'server.dart' show Protevus;
+import 'server.dart' show Application;
 
 part 'injection.dart';
 
 /// A convenience wrapper around an incoming [RawRequest].
 abstract class RequestContext<RawRequest> {
-  /// Similar to [Protevus.shutdownHooks], allows for logic to be executed
+  /// Similar to [Application.shutdownHooks], allows for logic to be executed
   /// when a [RequestContext] is done being processed.
   final _log = Logger('RequestContext');
 
@@ -46,8 +46,8 @@ abstract class RequestContext<RawRequest> {
   /// Additional params to be passed to services.
   final Map<String, dynamic> serviceParams = {};
 
-  /// The [Protevus] instance that is responding to this request.
-  Protevus? app;
+  /// The [Application] instance that is responding to this request.
+  Application? app;
 
   /// Any cookies sent with this request.
   List<Cookie> get cookies => <Cookie>[];

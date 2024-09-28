@@ -67,17 +67,17 @@ class Service<Id, Data> extends Routable {
   /// Handlers that must run to ensure this service's functionality.
   List<RequestHandler> get bootstrappers => [];
 
-  /// The [Protevus] app powering this service.
-  Protevus? _app;
+  /// The [Application] app powering this service.
+  Application? _app;
 
-  Protevus get app {
+  Application get app {
     if (_app == null) {
       throw ArgumentError("Protevus is not initialized");
     }
     return _app!;
   }
 
-  set app(Protevus protevus) {
+  set app(Application protevus) {
     _app = protevus;
   }
 
@@ -94,7 +94,7 @@ class Service<Id, Data> extends Routable {
 
     _readData ??= (req, res) {
       if (req.bodyAsObject is! Data) {
-        throw HttpException.badRequest(
+        throw PlatformHttpException.badRequest(
             message:
                 'Invalid request body. Expected $Data; found ${req.bodyAsObject} instead.');
       } else {
@@ -123,7 +123,7 @@ class Service<Id, Data> extends Routable {
       String errorMessage = 'No record was found matching the given query.']) {
     return index(params).then((result) {
       if (result.isEmpty) {
-        throw HttpException.notFound(message: errorMessage);
+        throw PlatformHttpException.notFound(message: errorMessage);
       } else {
         return result.first;
       }
@@ -132,12 +132,12 @@ class Service<Id, Data> extends Routable {
 
   /// Retrieves all resources.
   Future<List<Data>> index([Map<String, dynamic>? params]) {
-    throw HttpException.methodNotAllowed();
+    throw PlatformHttpException.methodNotAllowed();
   }
 
   /// Retrieves the desired resource.
   Future<Data> read(Id id, [Map<String, dynamic>? params]) {
-    throw HttpException.methodNotAllowed();
+    throw PlatformHttpException.methodNotAllowed();
   }
 
   /// Reads multiple resources at once.
@@ -150,22 +150,22 @@ class Service<Id, Data> extends Routable {
 
   /// Creates a resource.
   Future<Data> create(Data data, [Map<String, dynamic>? params]) {
-    throw HttpException.methodNotAllowed();
+    throw PlatformHttpException.methodNotAllowed();
   }
 
   /// Modifies a resource.
   Future<Data> modify(Id id, Data data, [Map<String, dynamic>? params]) {
-    throw HttpException.methodNotAllowed();
+    throw PlatformHttpException.methodNotAllowed();
   }
 
   /// Overwrites a resource.
   Future<Data> update(Id id, Data data, [Map<String, dynamic>? params]) {
-    throw HttpException.methodNotAllowed();
+    throw PlatformHttpException.methodNotAllowed();
   }
 
   /// Removes the given resource.
   Future<Data> remove(Id id, [Map<String, dynamic>? params]) {
-    throw HttpException.methodNotAllowed();
+    throw PlatformHttpException.methodNotAllowed();
   }
 
   /// Creates an [AnonymousService] that wraps over this one, and maps input and output
@@ -371,8 +371,8 @@ class Service<Id, Data> extends Routable {
     ]);
 
     // REST compliance
-    put('/', (req, res) => throw HttpException.notFound());
-    patch('/', (req, res) => throw HttpException.notFound());
+    put('/', (req, res) => throw PlatformHttpException.notFound());
+    patch('/', (req, res) => throw PlatformHttpException.notFound());
   }
 
   /// Invoked when this service is wrapped within a [HookedService].

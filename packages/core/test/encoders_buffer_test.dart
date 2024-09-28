@@ -17,10 +17,10 @@ Future<List<int>> getBody(MockHttpResponse rs) async {
 }
 
 void main() {
-  late Protevus app;
+  late Application app;
 
   setUp(() {
-    app = Protevus(reflector: MirrorsReflector());
+    app = Application(reflector: MirrorsReflector());
     app.encoders.addAll(
       {
         'deflate': zlib.encoder,
@@ -40,14 +40,14 @@ void main() {
   encodingTests(() => app);
 }
 
-void encodingTests(Protevus Function() getApp) {
+void encodingTests(Application Function() getApp) {
   group('encoding', () {
-    Protevus app;
-    late ProtevusHttp http;
+    Application app;
+    late PlatformHttp http;
 
     setUp(() {
       app = getApp();
-      http = ProtevusHttp(app);
+      http = PlatformHttp(app);
     });
 
     test('sends plaintext if no accept-encoding', () async {

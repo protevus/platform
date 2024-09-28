@@ -20,8 +20,8 @@
 
 ## 8.2.0
 
-* Add `addResponseHeader` to `ProtevusHttp` to add headers to HTTP default response
-* Add `removeResponseHeader` to `ProtevusHttp` to remove headers from HTTP default response
+* Add `addResponseHeader` to `PlatformHttp` to add headers to HTTP default response
+* Add `removeResponseHeader` to `PlatformHttp` to remove headers from HTTP default response
 
 ## 8.1.1
 
@@ -138,7 +138,7 @@
 
 ## 2.1.1
 
-* `ProtevusHttp.uri` now returns an empty `Uri` if the server is not listening.
+* `PlatformHttp.uri` now returns an empty `Uri` if the server is not listening.
 
 ## 2.1.0
 
@@ -150,7 +150,7 @@ therefore been bumped to `2.1.0`.
 ## 2.0.5-beta
 
 * Make `@Expose()` in `Controller` optional. <https://github.com/angel-dart/angel/issues/107>
-* Add `allowHttp1` to `ProtevusHttp2` constructors. <https://github.com/angel-dart/angel/issues/108>
+* Add `allowHttp1` to `PlatformHttp2` constructors. <https://github.com/angel-dart/angel/issues/108>
 * Add `deserializeBody` and `decodeBody` to `RequestContext`. <https://github.com/angel-dart/angel/issues/109>
 * Add `HostnameRouter`, which allows for routing based on hostname. <https://github.com/angel-dart/angel/issues/110>
 * Default to using `ThrowingReflector`, instead of `EmptyReflector`. This will give a more descriptive
@@ -199,7 +199,7 @@ handlers to run, even after the response was closed.
 
 ## 2.0.0-rc.10
 
-* Fix an error that prevented `ProtevusHttp2.custom` from working properly.
+* Fix an error that prevented `PlatformHttp2.custom` from working properly.
 * Add `startSharedHttp2`.
 
 ## 2.0.0-rc.9
@@ -333,7 +333,7 @@ stable, there'll be a conversion, perhaps.
 ## 2.0.0-alpha.10
 
 * All calls to `Service.parseId` are now affixed with the `<Id>` argument.
-* Added `uri` getter to `ProtevusHttp`.
+* Added `uri` getter to `PlatformHttp`.
 * The default for `parseQuery` now wraps query parameters in `Map<String, dynamic>.from`.
   This resolves a bug in `package:angel_validate`.
 
@@ -418,7 +418,7 @@ stable, there'll be a conversion, perhaps.
   as well as `query`.
 * Removed `Protevus.injections` and `RequestContext.injections`.
 * Removed `Protevus.inject` and `RequestContext.inject`.
-* Removed a dependency on `package:pool`, which also meant removing `ProtevusHttp.throttle`.
+* Removed a dependency on `package:pool`, which also meant removing `PlatformHttp.throttle`.
 * Remove the `RequestMiddleware` typedef; from now on, one should use `ResponseContext.end`
   exclusively to close responses.
 * `waterfall` will now only accept `RequestHandler`.
@@ -438,7 +438,7 @@ stable, there'll be a conversion, perhaps.
 * Removed `Protevus.defaultZoneCreator`.
 * Added all flags to the `Protevus` constructor, ex. `Protevus.eagerParseBodies`.
 * Fix a bug where synchronous errors in `handleRequest` would not be caught.
-* `ProtevusHttp.useZone` now defaults to `false`.
+* `PlatformHttp.useZone` now defaults to `false`.
 * `ResponseContext` now starts in streaming mode by default; the response buffer is opt-in,
   as in many cases it is unnecessary and slows down response time.
 * `ResponseContext.streaming` was replaced by `ResponseContext.isBuffered`.
