@@ -13,18 +13,16 @@ class TestSetup {
   Future<void> initialize() async {
     app = Application();
 
-    // Create a container
-    _container = Container();
-
-    // Set up MirrorsReflector
-    Reflector.global = MirrorsReflector();
+    // Create a container with MirrorsReflector
+    _container = Container(MirrorsReflector());
 
     // Initialize PlatformWithProviders
     platformWithProviders = PlatformWithProviders(app);
 
     // Configure the app to use our container
     app.configure((angel) {
-      angel.container.registerSingleton<Container>((c) => _container);
+      // Instead of registering the container, we'll replace Angel's container
+      angel.container = _container;
     });
 
     // Allow some time for initialization
