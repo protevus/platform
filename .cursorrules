@@ -1,0 +1,224 @@
+The name of our company is Protevus
+The name of our project is Platform
+Protevus = Laravel and Platform = Illuminate
+Our Development Langauge is Dart
+Our cross-platform UI Kit is Flutter
+Our Implementation is based on Angel3
+Our Inspiration is based on Laravel
+Our Deployment Target are Windows, MacOS, Linux, iOS, Android, Web, IoT and Edge Devices
+
+Protevus Aims to bring a complete Laravel experience to Dart, and Flutter with a truely Unified Full Stack Experience. We aim to mature the platform to support cross-platform development of complex government, military, financial, medical, supply-chain, enterprise and idustrial applications.
+
+Our 10 Step  Development Lifecycle is as follows: We use a hybrid mix of Interface Driven Development, Test Driven Development and AI Software Engineer Agents to assist in generating efficient and reliable code while also providing help with other task like code reviews, documentation, and testing. We call this approach IDD-AI or Individual Driven Developemt AI.
+
+1. Research - Research the requirements and specifications of the project.
+2. Identify - Identify the key components and technologies that are needed to build the project. (use opensource)
+3. Transform - Transform the requirements and specifications from the code to a langauge agnostic abstract contract (YAML)
+4. Inform - Use the abstract contracts to inform the design of the system and the components.
+5. Generate - Use AI to generate the initial code based on the abstract contracts.
+6. Implement - Implement the code in the codebase.
+7. Test - Test the code to ensure it meets the requirements and specifications.
+8. Iterate - Iterate the code to improve the design and implementation.
+9. Review - Review the code to ensure it meets the requirements and specifications.
+10. Release - Release the code to the public.
+
+Or RITIGITIRR pronounced Rih-tih-gih-tirr
+
+The we wash rinse and repeat for each project. When we are done we have a fully functional and robust implementation of the requirements and specifications we will still follow this pattern for enhancements, bug fixes, and new features.
+
+The API Specifications are in inbox/spec_packagename
+The Concrete Implementations are in inbox/src_packagename
+
+The directory structure for the project is as follows:
+
+config/ = configuration files
+devops/ = docker and kubernetes configuration
+docs/   = documentation
+examples/ = example applications demonstrating using the Platform API
+packages/ = platform packages
+resources = images, icons, and other resources
+scripts/ = utility scripts
+templates/ = starter templates
+tests/ = repository wide integration tests
+tools/ = project wide tools
+utils/ = cli, console, and other utilities
+
+Protevus Platform is a hard-fork of Angel3 that is being refactored and rebranded to be Protevus Platform
+For now all references to Angel3 remain the same, but in the future we will be changing them to Protevus or Platform
+You must always refer to the project as Platform, not Protevus or Angel3
+
+You must always prefer leveraging existing sanctioned angel3 packages as dependencies where possible as most of them will be replace and can't be relied on initially.
+
+You must always prefer leveraging existing standard dart packages as dependencies where possible
+You will always prefer leveraging any packages that we can from pub.dev or github.com dart/flutter ecosystem
+
+Our goal is to reimplement the laravel illuminate packages as angel3 packages in short bringing Laravel to Dart
+Our goal is to reach feature parity with the illuminate api so we must adhere to the specifications of laravel's api as we reimplement the illuminate packages
+
+We will not reimplement any packages that are not part of laravel, such as symfony packages, or any other packages that are not part of the laravel framework as our goal is to have pure dart implementations so we must find packages in the dart ecosystem where possible or create the feature in dart.
+
+We will not be re-implementing some features of laravel that would require reinventing wheels, for example angel3's server system is more then sufficiant and consist of the following angel3 packages which we will be initally keeping. Container, Framework, Route Http_Exception, Mock_Request, Modal. All other Illuminate packages will be reimplemented in dart. This list of keepers may change as we begin our phases of development.
+
+You must always take the following points into consderation when planning and executing your task.
+
+1. Dart and Flutter ecosystem awareness:
+   - Stay updated with the latest Dart language features and best practices.
+   - Consider Flutter compatibility for components that might be used in mobile/web applications.
+   - Utilize popular Dart packages when appropriate, but be mindful of adding unnecessary dependencies.
+
+2. Performance considerations:
+   - Implement benchmarking tools to compare performance with both Laravel and the original Angel3.
+   - Use Dart's profiling tools to identify and optimize bottlenecks.
+   - Consider implementing lazy loading and deferred initialization where appropriate.
+
+3. Asynchronous programming:
+   - Leverage Dart's async/await and Future-based programming extensively.
+   - Implement proper error handling and cancellation for asynchronous operations.
+   - Consider using Streams for reactive programming where appropriate.
+
+4. Code style and structure:
+   - Follow Dart's official style guide and linting rules.
+   - Implement consistent error handling and logging practices across all packages.
+   - Use Dart's strong typing system to its full potential, including generics and type inference.
+
+5. Testing strategy:
+   - Implement both unit and integration tests for all components.
+   - Use mock objects and dependency injection to facilitate easier testing.
+   - Implement property-based testing for complex algorithms or data structures.
+
+6. Documentation:
+   - Use Dart's documentation comments extensively.
+   - Provide examples in documentation for all public APIs.
+   - Create architecture decision records (ADRs) for significant design choices.
+
+7. Internationalization and localization:
+   - Design with i18n in mind from the start.
+   - Use Dart's intl package for formatting dates, numbers, and plurals.
+
+8. Error handling and logging:
+   - Implement a consistent error handling strategy across all packages.
+   - Create custom exception classes where appropriate.
+   - Implement structured logging with different log levels.
+
+9. Security:
+   - Implement security best practices, including input validation, output encoding, and CSRF protection.
+   - Use secure random number generation for cryptographic operations.
+   - Implement rate limiting and throttling mechanisms.
+
+10. Dependency management:
+    - Use Dart's pub tool effectively for package management.
+    - Consider implementing a monorepo structure for managing multiple packages.
+
+11. Compatibility layers:
+    - Implement compatibility layers or wrappers to ease migration from Angel3 to the new framework.
+    - Provide migration scripts or tools where possible.
+
+12. Extensibility:
+    - Design components with extensibility in mind, allowing for easy customization and overriding of default behaviors.
+    - Implement plugin systems where appropriate.
+
+13. Configuration:
+    - Implement a flexible configuration system that supports different environments (development, testing, production).
+    - Support both file-based and environment variable-based configuration.
+
+14. CLI tools:
+    - Develop CLI tools to assist in common development tasks (e.g., generating boilerplate code, running migrations).
+    - Ensure CLI tools are cross-platform compatible.
+
+15. Database abstraction:
+    - Implement database migrations and seeders.
+    - Support multiple database systems, including NoSQL databases.
+
+16. API design:
+    - Follow RESTful principles when designing APIs.
+    - Consider implementing GraphQL support.
+
+17. Caching strategies:
+    - Implement various caching mechanisms (in-memory, file-based, distributed).
+    - Provide cache invalidation strategies.
+
+18. Scalability:
+    - Design components with horizontal scalability in mind.
+    - Implement support for distributed systems and microservices architecture.
+
+19. Metrics and monitoring:
+    - Implement instrumentation for gathering metrics.
+    - Provide hooks for integrating with monitoring systems.
+
+20. Dependency injection:
+    - Implement a robust dependency injection system.
+    - Support both constructor and property injection.
+
+21. Reflection and metadata:
+    - Utilize Dart's reflection capabilities where appropriate.
+    - Implement custom metadata annotations for declarative programming.
+
+22. Error reporting:
+    - Implement integration with error reporting services (e.g., Sentry).
+    - Provide detailed stack traces and context for errors.
+
+23. Code generation:
+    - Utilize Dart's build system for code generation where appropriate.
+    - Implement source code generators for repetitive tasks.
+
+24. Versioning:
+    - Follow semantic versioning principles.
+    - Maintain a detailed changelog.
+
+25. Community engagement:
+    - Set up issue templates and contribution guidelines on GitHub.
+    - Implement a code of conduct for the project.
+
+26. Null Safety
+- Implement sound null safety throughout the entire codebase.
+- Utilize Dart's null safety features, including:
+  - Nullable and non-nullable types
+  - Late variables
+  - Null-aware operators
+- Perform null checks where necessary and provide clear documentation on nullability for all public APIs.
+- Use the `required` keyword for named parameters that must not be null.
+- Leverage the `?`, `!`, and `??` operators appropriately to handle potential null values.
+- Implement proper error handling for cases where null values are unexpected.
+- When interfacing with external code or APIs that are not null-safe:
+  - Use the `dynamic` type or appropriate cast operations cautiously
+- Utilize the `Never` type for functions that never return normally (i.e., always throw an exception or loop forever).
+- Consider using the `late` keyword for variables that are initialized after their declaration but before they're used.
+- When working with collections:
+  - Prefer using nullable item types (e.g., `List<String?>`) over nullable collections (e.g., `List<String>?`) where appropriate
+- Use static analysis tools to catch potential null safety issues early in the development process.
+- When migrating existing code:
+  - Use the Dart migration tool
+  - Carefully review all changes
+- Educate contributors on null safety best practices and include null safety checks in code review processes.
+
+Here are some notes that you should always keep in mind when working with the project
+
+Here's the content formatted in Markdown:
+
+## General Guidelines
+
+- Always consider the idiomatic Dart approach when implementing Laravel features.
+- Maintain compatibility with existing Angel3 applications where possible.
+- Prioritize performance and scalability in all implementations.
+- Write comprehensive tests for each component, aiming for high code coverage.
+- Document all public APIs and provide usage examples.
+- Consider cross-platform compatibility (server, web, mobile) where applicable.
+- Keep security as a top priority, especially when implementing authentication and encryption features.
+- Regularly refactor and optimize code as the project progresses.
+- Engage with the Angel3 community for feedback and contributions throughout the development process.
+
+## Advanced Implementation Considerations
+
+- When implementing advanced features like Telescope or Dusk, consider how they can be adapted to work well in a Dart ecosystem.
+- Pay special attention to how Facades and Macroable traits can be implemented in Dart, as these are core to Laravel's flexibility but may not have direct equivalents in Dart.
+- For packages like Scout and Passport, research Dart-specific best practices for implementing search and OAuth2 functionalities.
+- When working on Blade-like templating, consider how to balance between staying close to Blade's syntax and leveraging Dart's language features.
+
+## Dart-Specific Considerations
+
+- Always consider the implications of Dart's strong typing when implementing dynamic features from Laravel.
+- Look for opportunities to leverage Dart's unique features, such as isolates for concurrency, where appropriate.
+
+The Project Road Map is in @Roadmap Book
+
+You now have access to all the information that all team members need to start working on the project.
