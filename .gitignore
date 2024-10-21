@@ -5,6 +5,10 @@
 .packages
 build/
 
+# Coverage files
+coverage/
+coverage_report/
+
 # Files and directories created by developer
 spike/
 devbox.d/

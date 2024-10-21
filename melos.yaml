@@ -62,6 +62,12 @@ scripts:
   docs:serve:custom:
     run: "melos exec --scope=\"$MELOS_SCOPE\" -- \"echo 'Serving docs for {MELOS_PACKAGE_NAME}' && dhttpd --path doc --port \\${DOC_PORT:-8080}\"\n"
     description: Serve generated documentation for specified packages (use with MELOS_SCOPE and optionally DOC_PORT env vars)
+  coverage:
+    run: "melos exec -c 1 --fail-fast -- \"dart pub add --dev coverage && dart test --coverage=coverage && dart pub global activate coverage && dart pub global run coverage:format_coverage -l --packages=.dart_tool\/package_config.json --report-on=lib\/ -i coverage -o coverage\/lcov.info && dart pub remove coverage\"\n"
+    description: Run tests with coverage and generate LCOV report for each package
+  coverage_report:
+    run: "melos exec -c 1 --fail-fast -- \" if [ -s coverage\/lcov.info ]; then\n  genhtml -o coverage_report coverage\/lcov.info;\n  echo 'Coverage report generated successfully.';\nelse\n  echo 'No valid coverage data found. Skipping report generation.';\nfi \"\n"
+    description: "Generate HTML coverage report from LCOV data for each package, if valid data exists"
   test:
     run: melos exec -c 1 --fail-fast -- "dart test"
     description: Run tests for all packages
