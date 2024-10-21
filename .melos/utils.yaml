@@ -3,3 +3,7 @@ scripts:
     combine_config:
       run: dart helpers/combine_melos_config.dart
       description: Combine Melos configuration files
+    
+    help:
+      run: dart helpers/print_melos_commands.dart
+      description: Display a formatted list of all available Melos commands
