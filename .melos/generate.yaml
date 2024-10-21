@@ -1,0 +1,51 @@
+scripts:
+  _: &generate_scripts
+    generate:
+      run: melos exec -- "dart run build_runner build --delete-conflicting-outputs"
+      description: Run code generation for all packages
+
+    generate:custom:
+      run: melos exec --scope="$MELOS_SCOPE" -- "dart run build_runner build --delete-conflicting-outputs"
+      description: Run code generation for specified packages (use with MELOS_SCOPE env var)
+    
+    generate:check:
+      run: >
+        melos exec --scope="$MELOS_SCOPE" -- "
+        if grep -q 'build_runner' pubspec.yaml; then
+          if [ -n \"$(find lib test example -name '*.g.dart' -o -name '*.freezed.dart' -o -name '*.reflectable.dart' 2>/dev/null)\" ]; then
+            echo \"Package {MELOS_PACKAGE_NAME} needs code generation.\"
+          else
+            echo \"Package {MELOS_PACKAGE_NAME} has build_runner but no generated files found.\"
+          fi
+        else
+          echo \"Package {MELOS_PACKAGE_NAME} does not use build_runner.\"
+        fi
+        "
+      description: Check if code generation is needed (use with MELOS_SCOPE env var)
+    
+    generate:dummy:test:
+      run: >
+        melos exec --scope="$MELOS_SCOPE" -- "
+        echo '
+        import \"package:test/test.dart\";
+
+        void main() {
+          group(\"Dummy Test\", () {
+            test(\"Always passes\", () {
+              expect(true, isTrue);
+            });
+
+            test(\"Basic arithmetic\", () {
+              expect(2 + 2, equals(4));
+            });
+
+            test(\"String manipulation\", () {
+              String testString = \"Protevus Platform\";
+              expect(testString.contains(\"Platform\"), isTrue);
+              expect(testString.toLowerCase(), equals(\"protevus platform\"));
+            });
+          });
+        }
+        ' > test/dummy_test.dart
+        "
+      description: Generate a dummy test file in the specified package(s)

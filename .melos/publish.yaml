@@ -1,0 +1,9 @@
+scripts:
+  _: &publish_scripts
+    publish:
+      run: melos publish
+      description: Publish all packages that have changed.
+    
+    publish:check:
+      run: melos publish --dry-run
+      description: Check which packages would be published

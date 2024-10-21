@@ -1,0 +1,5 @@
+scripts:
+  _: &utils_scripts
+    combine_config:
+      run: dart helpers/combine_melos_config.dart
+      description: Combine Melos configuration files

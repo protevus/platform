@@ -1,0 +1,5 @@
+scripts:
+  _: &ci_scripts
+    ci:
+      run: melos run analyze && melos run test
+      description: Run full CI pipeline

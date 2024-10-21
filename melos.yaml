@@ -6,10 +6,8 @@ packages:
 
 command:
   version:
-    # Generate commit links in package changelogs.
     linkToCommits: true
     message: "chore: Bump version to %v"
-    # Only allow versioning to happen on main branch.
     branch: main
     workspaceChangelog: true
     
@@ -17,49 +15,74 @@ ide:
   intellij:
     enabled: false
 
-# Project scripts
-
 scripts:
   analyze:
     run: dart analyze .
     description: Run static analysis on all packages
-
-  test:
-    run: melos exec -c 1 --fail-fast -- "dart test"
-    description: Run tests for all packages
-
   format:
     run: dart format .
     description: Format all Dart files in the repository
-  
   generate:
     run: melos exec -- "dart run build_runner build --delete-conflicting-outputs"
     description: Run code generation for all packages
-
-  ci:
-    run: melos run analyze && melos run test
-    description: Run full CI pipeline
-
+  generate:custom:
+    run: melos exec --scope="$MELOS_SCOPE" -- "dart run build_runner build --delete-conflicting-outputs"
+    description: Run code generation for specified packages (use with MELOS_SCOPE env var)
+  generate:check:
+    run: "melos exec --scope=\"$MELOS_SCOPE\" -- \" if grep -q 'build_runner' pubspec.yaml; then\n  if [ -n \\\"$(find lib test example -name '*.g.dart' -o -name '*.freezed.dart' -o -name '*.reflectable.dart' 2>\/dev\/null)\\\" ]; then\n    echo \\\"Package {MELOS_PACKAGE_NAME} needs code generation.\\\"\n  else\n    echo \\\"Package {MELOS_PACKAGE_NAME} has build_runner but no generated files found.\\\"\n  fi\nelse\n  echo \\\"Package {MELOS_PACKAGE_NAME} does not use build_runner.\\\"\nfi \"\n"
+    description: Check if code generation is needed (use with MELOS_SCOPE env var)
+  generate:dummy:test:
+    run: "melos exec --scope=\"$MELOS_SCOPE\" -- \" echo ' import \\\"package:test\/test.dart\\\";\nvoid main() {\n  group(\\\"Dummy Test\\\", () {\n    test(\\\"Always passes\\\", () {\n      expect(true, isTrue);\n    });\n\n    test(\\\"Basic arithmetic\\\", () {\n      expect(2 + 2, equals(4));\n    });\n\n    test(\\\"String manipulation\\\", () {\n      String testString = \\\"Protevus Platform\\\";\n      expect(testString.contains(\\\"Platform\\\"), isTrue);\n      expect(testString.toLowerCase(), equals(\\\"protevus platform\\\"));\n    });\n  });\n} ' > test\/dummy_test.dart \"\n"
+    description: Generate a dummy test file in the specified package(s)
+  publish:
+    run: melos publish
+    description: Publish all packages that have changed.
+  publish:check:
+    run: melos publish --dry-run
+    description: Check which packages would be published
   docs:generate:
     run: melos exec -- "dart doc ."
     description: Generate documentation for all packages
-
+  docs:generate:custom:
+    run: melos exec --scope="$MELOS_SCOPE" -- "dart doc ."
+    description: Generate documentation for specified packages (use with MELOS_SCOPE env var)
+  docs:serve:
+    run: dhttpd --path doc
+    description: Serve generated documentation
+  docs:serve:custom:
+    run: "melos exec --scope=\"$MELOS_SCOPE\" -- \"echo 'Serving docs for {MELOS_PACKAGE_NAME}' && dhttpd --path doc --port \\${DOC_PORT:-8080}\"\n"
+    description: Serve generated documentation for specified packages (use with MELOS_SCOPE and optionally DOC_PORT env vars)
+  test:
+    run: melos exec -c 1 --fail-fast -- "dart test"
+    description: Run tests for all packages
+  test:custom:
+    run: melos exec --scope="$MELOS_SCOPE" -- dart test
+    description: Run tests for specified packages (use with MELOS_SCOPE env var)
   deps:check:
     run: melos exec -- "dart pub outdated"
     description: Check for outdated dependencies
-
   deps:upgrade:
     run: melos exec -- "dart pub upgrade"
     description: Upgrade all dependencies to their latest versions
-  
-  publish:
-       run: melos publish
-       description: Publish all packages that have changed.
-
+  deps:upgrade:custom:
+    run: melos exec --scope="$MELOS_SCOPE" -- "dart pub upgrade"
+    description: Upgrade dependencies for specified packages (use with MELOS_SCOPE env var)
+  ci:
+    run: melos run analyze && melos run test
+    description: Run full CI pipeline
   debug_pkg_name:
-    run: melos exec -- echo "Package name is {MELOS_PACKAGE_NAME}"
+    run: "melos exec -- echo \"Package name is {MELOS_PACKAGE_NAME}\""
     description: Debug package name resolution
-  
   debug_pkg_path:
-    run: melos exec -- echo "Package name is {MELOS_PACKAGE_PATH}"
-    description: Debug package name resolution
+    run: "melos exec -- echo \"Package name is {MELOS_PACKAGE_PATH}\""
+    description: Debug package path resolution
+  debug:reflectable:
+    run: "melos exec --scope=\"$MELOS_SCOPE\" -- \" echo \\\"Checking for .reflectable.dart files in {MELOS_PACKAGE_NAME}\\\" && find lib test example -name '*.reflectable.dart' -print 2>\/dev\/null \"\n"
+    description: Debug script to find .reflectable.dart files (use with MELOS_SCOPE env var)
+  list:dart:files:
+    run: "melos exec --scope=\"$MELOS_SCOPE\" -- \" echo \\\"Listing all Dart files in {MELOS_PACKAGE_NAME}:\\\" && find lib test example -name '*.dart' -print 2>\/dev\/null \"\n"
+    description: List all Dart files in specified package(s) (use with MELOS_SCOPE env var)
+  combine_config:
+    run: dart helpers/combine_melos_config.dart
+    description: Combine Melos configuration files
+    

@@ -31,7 +31,7 @@ packages:
     source: hosted
     version: "0.3.2+1"
   args:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: args
       sha256: bf9f5caeea8d8fe6721a9c358dd8a5c1947b27f1cfaa18b39c301273594919e6
@@ -543,7 +543,7 @@ packages:
     source: hosted
     version: "1.2.1"
   yaml:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: yaml
       sha256: "75769501ea3489fca56601ff33454fe45507ea3bfb014161abc3b43ae25989d5"
@@ -551,7 +551,7 @@ packages:
     source: hosted
     version: "3.1.2"
   yaml_edit:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: yaml_edit
       sha256: e9c1a3543d2da0db3e90270dbb1e4eebc985ee5e3ffe468d83224472b2194a5f

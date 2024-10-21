@@ -1,0 +1,10 @@
+scripts:
+  _: &test_scripts
+    test:
+      run: melos exec -c 1 --fail-fast -- "dart test"
+      description: Run tests for all packages
+    
+    test:custom:
+      run: melos exec --scope="$MELOS_SCOPE" -- dart test
+      description: Run tests for specified packages (use with MELOS_SCOPE env var)
+

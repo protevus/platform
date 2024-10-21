@@ -1,0 +1,25 @@
+scripts:
+  _: &debug_scripts
+    debug_pkg_name:
+      run: melos exec -- echo "Package name is {MELOS_PACKAGE_NAME}"
+      description: Debug package name resolution
+    
+    debug_pkg_path:
+      run: melos exec -- echo "Package name is {MELOS_PACKAGE_PATH}"
+      description: Debug package path resolution
+
+    debug:reflectable:
+      run: >
+        melos exec --scope="$MELOS_SCOPE" -- "
+        echo \"Checking for .reflectable.dart files in {MELOS_PACKAGE_NAME}\" &&
+        find lib test example -name '*.reflectable.dart' -print 2>/dev/null
+        "
+      description: Debug script to find .reflectable.dart files (use with MELOS_SCOPE env var)
+    
+    list:dart:files:
+      run: >
+        melos exec --scope="$MELOS_SCOPE" -- "
+        echo \"Listing all Dart files in {MELOS_PACKAGE_NAME}:\" &&
+        find lib test example -name '*.dart' -print 2>/dev/null
+        "
+      description: List all Dart files in specified package(s) (use with MELOS_SCOPE env var)

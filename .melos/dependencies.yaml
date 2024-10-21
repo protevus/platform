@@ -1,0 +1,13 @@
+scripts:
+  _: &dependencies_scripts
+    deps:check:
+      run: melos exec -- "dart pub outdated"
+      description: Check for outdated dependencies
+
+    deps:upgrade:
+      run: melos exec -- "dart pub upgrade"
+      description: Upgrade all dependencies to their latest versions
+
+    deps:upgrade:custom:
+      run: melos exec --scope="$MELOS_SCOPE" -- "dart pub upgrade"
+      description: Upgrade dependencies for specified packages (use with MELOS_SCOPE env var)

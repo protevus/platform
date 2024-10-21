@@ -1,0 +1,20 @@
+scripts:
+  _: &docs_scripts
+    docs:generate:
+      run: melos exec -- "dart doc ."
+      description: Generate documentation for all packages
+    
+    docs:generate:custom:
+      run: melos exec --scope="$MELOS_SCOPE" -- "dart doc ."
+      description: Generate documentation for specified packages (use with MELOS_SCOPE env var)
+    
+    docs:serve:
+      run: dhttpd --path doc
+      description: Serve generated documentation
+    
+    docs:serve:custom:
+      run: >
+        melos exec --scope="$MELOS_SCOPE" --
+        "echo 'Serving docs for {MELOS_PACKAGE_NAME}' &&
+        dhttpd --path doc --port \${DOC_PORT:-8080}"
+      description: Serve generated documentation for specified packages (use with MELOS_SCOPE and optionally DOC_PORT env vars)

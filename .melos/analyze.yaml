@@ -1,0 +1,10 @@
+scripts:
+  _: &analyze_scripts
+    analyze:
+      run: dart analyze .
+      description: Run static analysis on all packages
+    
+    format:
+      run: dart format .
+      description: Format all Dart files in the repository
+
