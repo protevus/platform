@@ -1,0 +1,13 @@
+scripts:
+  _: &configure_scripts
+    configure:
+      run: >
+        melos bootstrap &&
+        MELOS_SCOPE="platform_container_generator" melos run generate:custom &&
+        MELOS_SCOPE="package_model,package_exceptions,platform_mocking" melos run generate:dummy:test &&
+        MELOS_SCOPE="platform_container_generator" melos run debug:reflectable &&
+        melos run test &&
+        melos run coverage &&
+        melos run coverage_report &&
+        melos run docs:generate
+      description: Configure the development environment, generate code and dummy tests, run tests, generate coverage, and create API documentation
