@@ -27,9 +27,7 @@ README.md~
 
 # Ignore Temporary files
 .DS_Store
-.copies
-response2.dart
-response3.dart
+dummy_test.dart
 
 # Directory created by dartdoc
 # If you don't generate documentation locally you can remove this line.
