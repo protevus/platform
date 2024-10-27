@@ -7,8 +7,8 @@ repository: https://git.protevus.com/protevus/platform/src/branch/main/packages/
 environment:
   sdk: '>=3.3.0 <4.0.0'
 dependencies:
-  collection: ^1.17.0
-  quiver: ^3.2.0
+  collection: ^1.19.1
+  quiver: ^3.2.2
 dev_dependencies:
-  test: ^1.24.0
+  test: ^1.25.8
   lints: ^4.0.0

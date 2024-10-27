@@ -8,8 +8,8 @@ void main() {
 
   final scripts = yamlMap['scripts'] as YamlMap;
 
-  print('Available Melos commands:');
-  print('========================\n');
+  print('Available Protevus Platform commands:');
+  print('=====================================\n');
 
   scripts.forEach((key, value) {
     final description =

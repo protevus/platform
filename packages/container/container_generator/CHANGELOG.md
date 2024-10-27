@@ -47,7 +47,7 @@
 
 * Migrated to support Dart >= 2.12 NNBD
 * Updated linter to `package:lints`
-* Updated to use `angel3_` packages
+* Updated to use `platform_` packages
 
 ## 2.0.0
 

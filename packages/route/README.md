@@ -13,7 +13,7 @@ A powerful, isomorphic routing library for Dart.
 
 ## Contents
 
-- [Protevus Route](#angel3-route)
+- [Protevus Route](#platform-route)
   - [Contents](#contents)
   - [Examples](#examples)
     - [Routing](#routing)

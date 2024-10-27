@@ -1,10 +1,10 @@
-# Angel Performance Results
+# Platform Performance Results
 
 5 consecutive trials run on a Windows 10 box with 4GB RAM, and several programs open in the background.
 
 Setup:
 
-* Angel framework `1.0.8`
+* Protevus Platform `1.0.8`
 * Running `wrk` 4.0.2.2
 * 2 threads
 * 256 connections
