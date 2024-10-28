@@ -75,6 +75,10 @@ scripts:
   configure:
     run: "melos bootstrap && MELOS_SCOPE=\"platform_container_generator\" melos run generate:custom && MELOS_SCOPE=\"platform_model, platform_exceptions, platform_mocking\" melos run generate:dummy:test && MELOS_SCOPE=\"platform_container_generator\" melos run debug:reflectable && melos run test && melos run coverage && melos run coverage_report && melos run docs:generate\n"
     description: "Configure the development environment, generate code and dummy tests, run tests, generate coverage, and create API documentation"
+  template:
+    name: Create from template
+    description: "Creates a new project from a template in the templates directory.\n\nUsage: melos run template template_name:name type:dart|flutter name:project_name\n\nExample:\n  melos run template template_name:bloc_app type:flutter name:my_new_app\n  melos run template template_name:core_package type:dart name:core_utils\n"
+    run: dart run helpers/create_from_template.dart $MELOS_ARGS
   test:
     run: melos exec -c 1 --fail-fast -- "dart test"
     description: Run tests for all packages

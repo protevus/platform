@@ -1,0 +1,13 @@
+scripts:
+  _: &template_scripts
+    template:
+      name: Create from template
+      description: |
+        Creates a new project from a template in the templates directory.
+        
+        Usage: melos run template template_name:name type:dart|flutter name:project_name
+        
+        Example:
+          melos run template template_name:bloc_app type:flutter name:my_new_app
+          melos run template template_name:core_package type:dart name:core_utils
+      run: dart run helpers/create_from_template.dart $MELOS_ARGS
