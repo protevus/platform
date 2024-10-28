@@ -11,6 +11,7 @@
 name: protevus_platform
 repository: https://github.com/protevus/platform
 packages:
+  - apps/**
   - packages/**
   - examples/**
 
@@ -80,6 +81,10 @@ scripts:
   test:custom:
     run: melos exec --scope="$MELOS_SCOPE" -- dart test
     description: Run tests for specified packages (use with MELOS_SCOPE env var)
+  create:
+    name: Create new package or application
+    description: "Creates a new Dart package or Flutter application in the appropriate directory.\n\nUsage: melos run create -- --type dart|flutter --category type --name project_name\n\nAvailable categories for Dart:\n  - package     : Basic Dart package\n  - console     : Command-line application\n  - server      : Server-side application\n  - desktop     : Desktop application\n  - plugin      : Dart plugin\n\nAvailable categories for Flutter:\n  - app         : Mobile application\n  - web         : Web application\n  - desktop     : Desktop application\n  - plugin      : Flutter plugin\n  - module      : Flutter module\n  - package     : Flutter package\n"
+    run: dart run helpers/create_project.dart $MELOS_ARGS
   deps:check:
     run: melos exec -- "dart pub outdated"
     description: Check for outdated dependencies

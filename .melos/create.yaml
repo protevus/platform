@@ -1,0 +1,24 @@
+scripts:
+  _: &create_scripts
+    create:
+      name: Create new package or application
+      description: |
+        Creates a new Dart package or Flutter application in the appropriate directory.
+        
+        Usage: melos run create -- --type dart|flutter --category type --name project_name
+
+        Available categories for Dart:
+          - package     : Basic Dart package
+          - console     : Command-line application
+          - server      : Server-side application
+          - desktop     : Desktop application
+          - plugin      : Dart plugin
+
+        Available categories for Flutter:
+          - app         : Mobile application
+          - web         : Web application
+          - desktop     : Desktop application
+          - plugin      : Flutter plugin
+          - module      : Flutter module
+          - package     : Flutter package
+      run: dart run helpers/create_project.dart $MELOS_ARGS

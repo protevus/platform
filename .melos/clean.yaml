@@ -1,5 +1,5 @@
 scripts:
-  _: &workflow_scripts
+  _: &create_scripts
     clean:
       run: >
         melos exec -c 1 --fail-fast -- "
