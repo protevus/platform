@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="160" height="40" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- P shape with gradient -->
+    <path d="M10 5h15c5.523 0 10 4.477 10 10s-4.477 10-10 10H20v10H10V5z" fill="url(#gradient)"/>
+    <path d="M20 15h5c2.761 0 5 2.239 5 5s-2.239 5-5 5h-5v-10z" fill="#ffffff"/>
+    
+    <!-- Circular element representing technology/connectivity -->
+    <circle cx="45" cy="20" r="8" fill="url(#gradient)" opacity="0.8"/>
+    <circle cx="45" cy="20" r="4" fill="#ffffff"/>
+    
+    <!-- Text "Protevus" -->
+    <text x="65" y="28" font-family="Arial, sans-serif" font-weight="bold" font-size="24" fill="currentColor">Protevus</text>
+    
+    <!-- Gradient definition -->
+    <defs>
+        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#512BD4"/>
+            <stop offset="100%" style="stop-color:#6742D9"/>
+        </linearGradient>
+    </defs>
+</svg>
