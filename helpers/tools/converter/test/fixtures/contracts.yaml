@@ -1,0 +1,112 @@
+interfaces:
+- 
+    name: "LLMProtocol"
+    bases:
+    - Protocol
+    methods:
+    - 
+        name: "generate"
+        arguments:
+        - 
+            name: "prompts"
+            type: "List[str]"
+            is_optional: false
+            has_default: false
+        return_type: "List[str]"
+        docstring: "Generate completions for the prompts."
+        decorators:
+        - 
+            name: "abstractmethod"
+        is_abstract: true
+    - 
+        name: "model_name"
+        arguments:
+        return_type: "str"
+        docstring: "Get the model name."
+        decorators:
+        - 
+            name: "property"
+        - 
+            name: "abstractmethod"
+        is_abstract: true
+    properties:
+    docstring: "Protocol for language models."
+    decorators:
+    is_interface: true
+classes:
+- 
+    name: "BaseChain"
+    bases:
+    - ABC
+    methods:
+    - 
+        name: "run"
+        arguments:
+        - 
+            name: "inputs"
+            type: "dict"
+            is_optional: false
+            has_default: false
+        return_type: "dict"
+        docstring: "Run the chain on the inputs."
+        decorators:
+        - 
+            name: "abstractmethod"
+        is_abstract: true
+    - 
+        name: "set_memory"
+        arguments:
+        - 
+            name: "memory"
+            type: "dict"
+            is_optional: false
+            has_default: false
+        return_type: "None"
+        docstring: "Set the memory for the chain."
+        decorators:
+        is_abstract: false
+    properties:
+    - 
+        name: "memory"
+        type: "Optional[dict]"
+        has_default: true
+    - 
+        name: "verbose"
+        type: "bool"
+        has_default: true
+    docstring: "Base class for chains."
+    decorators:
+    is_interface: false
+- 
+    name: "SimpleChain"
+    bases:
+    - BaseChain
+    methods:
+    - 
+        name: "__init__"
+        arguments:
+        - 
+            name: "llm"
+            type: "LLMProtocol"
+            is_optional: false
+            has_default: false
+        return_type: "None"
+        docstring: "Initialize the chain."
+        decorators:
+        is_abstract: false
+    - 
+        name: "run"
+        arguments:
+        - 
+            name: "inputs"
+            type: "dict"
+            is_optional: false
+            has_default: false
+        return_type: "dict"
+        docstring: "Execute the chain logic."
+        decorators:
+        is_abstract: false
+    properties:
+    docstring: "A simple implementation of a chain."
+    decorators:
+    is_interface: false

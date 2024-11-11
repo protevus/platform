@@ -1,0 +1,15 @@
+name: converter
+description: A Dart implementation of LangChain, providing tools and utilities for building applications powered by large language models (LLMs).
+version: 0.1.0
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  yaml: ^3.1.2
+  path: ^1.8.3
+  args: ^2.4.2
+
+dev_dependencies:
+  lints: ^2.1.1
+  test: ^1.24.6
