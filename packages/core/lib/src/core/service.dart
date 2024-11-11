@@ -1,7 +1,7 @@
 library platform_core.http.service;
 
 import 'dart:async';
-import 'package:platform_exceptions/http_exception.dart';
+import 'package:platform_support/exceptions.dart';
 import 'package:belatuk_merge_map/belatuk_merge_map.dart';
 import 'package:quiver/core.dart';
 import '../util.dart';

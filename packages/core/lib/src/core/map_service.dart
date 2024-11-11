@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:platform_exceptions/http_exception.dart';
+import 'package:platform_support/exceptions.dart';
 
 import 'service.dart';
 

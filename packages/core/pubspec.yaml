@@ -8,10 +8,10 @@ environment:
   sdk: '>=3.3.0 <4.0.0'
 dependencies:
   platform_container: ^9.0.0
-  platform_exceptions: ^9.0.0
   platform_model: ^9.0.0
   platform_route: ^9.0.0
-  platform_mocking: ^9.0.0
+  platform_support: ^9.0.0
+  platform_testing: ^9.0.0
   belatuk_merge_map: ^5.1.0
   belatuk_combinator: ^5.2.0
   belatuk_http_server: ^4.4.0

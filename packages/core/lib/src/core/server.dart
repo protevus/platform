@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:collection' show HashMap;
 import 'dart:convert';
 import 'package:platform_container/container.dart';
-import 'package:platform_exceptions/http_exception.dart';
+import 'package:platform_support/exceptions.dart';
 import 'package:platform_route/route.dart';
 import 'package:belatuk_combinator/belatuk_combinator.dart';
 import 'package:http_parser/http_parser.dart';

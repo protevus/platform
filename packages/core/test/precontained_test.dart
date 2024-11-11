@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:platform_container/mirrors.dart';
 import 'package:platform_core/core.dart';
 import 'package:platform_core/http.dart';
-import 'package:platform_mocking/mocking.dart';
+import 'package:platform_testing/http.dart';
 
 import 'package:test/test.dart';
 

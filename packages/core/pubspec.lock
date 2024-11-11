@@ -389,20 +389,6 @@ packages:
       relative: true
     source: path
     version: "9.0.0"
-  platform_exceptions:
-    dependency: "direct main"
-    description:
-      path: "../exceptions"
-      relative: true
-    source: path
-    version: "9.0.0"
-  platform_mocking:
-    dependency: "direct main"
-    description:
-      path: "../mocking"
-      relative: true
-    source: path
-    version: "9.0.0"
   platform_model:
     dependency: "direct main"
     description:
@@ -414,6 +400,20 @@ packages:
     dependency: "direct main"
     description:
       path: "../route"
+      relative: true
+    source: path
+    version: "9.0.0"
+  platform_support:
+    dependency: "direct main"
+    description:
+      path: "../support"
+      relative: true
+    source: path
+    version: "9.0.0"
+  platform_testing:
+    dependency: "direct main"
+    description:
+      path: "../testing"
       relative: true
     source: path
     version: "9.0.0"

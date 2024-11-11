@@ -5,7 +5,7 @@ import 'package:platform_container/container.dart';
 import 'package:platform_core/core.dart';
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:http2/transport.dart';
-import 'package:platform_mocking/mocking.dart';
+import 'package:platform_testing/http.dart';
 import 'package:uuid/uuid.dart';
 
 final RegExp _comma = RegExp(r',\s*');

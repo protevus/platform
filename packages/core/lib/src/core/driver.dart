@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io' show Cookie;
-import 'package:platform_exceptions/http_exception.dart';
+import 'package:platform_support/exceptions.dart';
 import 'package:platform_route/route.dart';
 import 'package:belatuk_combinator/belatuk_combinator.dart';
 import 'package:stack_trace/stack_trace.dart';
