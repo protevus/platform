@@ -1,0 +1,105 @@
+graph TB
+    %% Core System
+    subgraph Core ["Core System"]
+        App[Application]
+        Container[Container]
+        Events[Events]
+        Pipeline[Pipeline]
+        
+        App --> Container
+        App --> Events
+        App --> Pipeline
+    end
+    
+    %% HTTP Layer
+    subgraph HTTP ["HTTP Layer"]
+        Server[HTTP Server]
+        Kernel[HTTP Kernel]
+        Router[Router]
+        Controller[Controller]
+        
+        Server --> Kernel
+        Kernel --> Router
+        Router --> Controller
+    end
+    
+    %% Service Layer
+    subgraph Services ["Service Layer"]
+        Config[Config]
+        Cache[Cache]
+        Queue[Queue]
+        DB[Database]
+        
+        Config --> Container
+        Cache --> Container
+        Queue --> Events
+        DB --> Events
+    end
+    
+    %% Infrastructure
+    subgraph Infrastructure ["Infrastructure"]
+        FileSystem[FileSystem]
+        Process[Process]
+        Bus[Command Bus]
+        Model[Model]
+        
+        FileSystem --> Container
+        Process --> Queue
+        Bus --> Queue
+        Model --> Events
+    end
+    
+    %% Request Flow
+    Server --> App
+    Controller --> Services
+    Services --> Infrastructure
+    
+    %% Event Flow
+    Events --> Queue
+    Queue --> Process
+    Events --> Bus
+    
+    %% Service Provider Registration
+    Container --> Services
+    Container --> Infrastructure
+    
+    %% Middleware Pipeline
+    Pipeline --> HTTP
+    Pipeline --> Services
+    
+    %% Testing Integration
+    subgraph Testing ["Testing"]
+        TestCase[TestCase]
+        HttpTest[HTTP Tests]
+        DBTest[DB Tests]
+        EventTest[Event Tests]
+        
+        TestCase --> App
+        HttpTest --> Server
+        DBTest --> DB
+        EventTest --> Events
+    end
+    
+    %% Style Definitions
+    classDef core fill:#f9f,stroke:#333,stroke-width:2px
+    classDef http fill:#bbf,stroke:#333,stroke-width:2px
+    classDef service fill:#bfb,stroke:#333,stroke-width:2px
+    classDef infra fill:#fbb,stroke:#333,stroke-width:2px
+    classDef test fill:#fff,stroke:#333,stroke-width:2px
+    
+    %% Apply Styles
+    class App,Container,Events,Pipeline core
+    class Server,Kernel,Router,Controller http
+    class Config,Cache,Queue,DB service
+    class FileSystem,Process,Bus,Model infra
+    class TestCase,HttpTest,DBTest,EventTest test
+    
+    %% Relationships
+    linkStyle default stroke:#333,stroke-width:2px
+    
+    %% Notes
+    %% Core System handles application lifecycle
+    %% HTTP Layer processes web requests
+    %% Service Layer provides business functionality
+    %% Infrastructure provides system services
+    %% Testing ensures system quality

@@ -1,0 +1,112 @@
+sequenceDiagram
+    participant Source as Event Source
+    participant Dispatcher as Event Dispatcher
+    participant Queue as Queue System
+    participant Broadcast as Broadcaster
+    participant Listeners as Event Listeners
+    participant DB as Database
+    participant Cache as Cache System
+    participant Subscribers as Event Subscribers
+
+    %% Event Creation
+    Source->>Dispatcher: Dispatch Event
+    activate Dispatcher
+    Note over Dispatcher: Event Created
+
+    %% Event Type Check
+    alt Is Queued Event
+        Dispatcher->>Queue: Push to Queue
+        activate Queue
+        Queue-->>Dispatcher: Queued Successfully
+        deactivate Queue
+    else Is Immediate Event
+        Dispatcher->>Listeners: Process Immediately
+        activate Listeners
+    end
+
+    %% Broadcasting Check
+    alt Should Broadcast
+        Dispatcher->>Broadcast: Broadcast Event
+        activate Broadcast
+        Note over Broadcast: WebSocket/Redis/Pusher
+        Broadcast-->>Dispatcher: Broadcast Complete
+        deactivate Broadcast
+    end
+
+    %% Database Operations
+    alt Has Database Operations
+        Dispatcher->>DB: Begin Transaction
+        activate DB
+        Note over DB: Event-related Changes
+        DB-->>Dispatcher: Transaction Complete
+        deactivate DB
+    end
+
+    %% Cache Operations
+    alt Has Cache Operations
+        Dispatcher->>Cache: Update Cache
+        activate Cache
+        Note over Cache: Cache Invalidation/Update
+        Cache-->>Dispatcher: Cache Updated
+        deactivate Cache
+    end
+
+    %% Event Subscribers
+    Dispatcher->>Subscribers: Notify Subscribers
+    activate Subscribers
+    Note over Subscribers: Handle Multiple Events
+    Subscribers-->>Dispatcher: Processing Complete
+    deactivate Subscribers
+
+    %% Queued Event Processing
+    alt Is Queued Event
+        Queue->>Listeners: Process Queue
+        activate Queue
+        Note over Queue: Background Processing
+        Listeners-->>Queue: Processing Complete
+        deactivate Queue
+    end
+
+    %% Event Listeners Processing
+    Note over Listeners: Process Event
+    Listeners-->>Dispatcher: Handling Complete
+    deactivate Listeners
+
+    %% Event Completion
+    Dispatcher-->>Source: Event Processed
+    deactivate Dispatcher
+
+    %% Style Definitions
+    style Source fill:#f9f,stroke:#333,stroke-width:2px
+    style Dispatcher fill:#bbf,stroke:#333,stroke-width:2px
+    style Queue fill:#bfb,stroke:#333,stroke-width:2px
+    style Broadcast fill:#fbb,stroke:#333,stroke-width:2px
+    style Listeners fill:#bfb,stroke:#333,stroke-width:2px
+    style DB fill:#fbb,stroke:#333,stroke-width:2px
+    style Cache fill:#fbb,stroke:#333,stroke-width:2px
+    style Subscribers fill:#bfb,stroke:#333,stroke-width:2px
+
+    %% Notes
+    Note right of Source: System Component
+    Note right of Dispatcher: Event Management
+    Note right of Queue: Async Processing
+    Note right of Broadcast: Real-time Updates
+    Note right of Listeners: Event Handlers
+    Note right of DB: Persistence Layer
+    Note right of Cache: Performance Layer
+    Note right of Subscribers: Event Subscribers
+
+    %% Event Types
+    Note over Dispatcher: Event Types:<br>1. Immediate Events<br>2. Queued Events<br>3. Broadcast Events
+
+    %% Processing Types
+    Note over Listeners: Processing Types:<br>1. Sync Processing<br>2. Async Processing<br>3. Batch Processing
+
+    %% Integration Points
+    Note over Queue: Integration:<br>1. Redis Queue<br>2. Database Queue<br>3. Memory Queue
+
+    %% Broadcast Channels
+    Note over Broadcast: Channels:<br>1. Public Channels<br>2. Private Channels<br>3. Presence Channels
+
+    %% Subscriber Types
+    Note over Subscribers: Subscriber Types:<br>1. Model Subscribers<br>2. System Subscribers<br>3. Custom Subscribers

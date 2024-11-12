@@ -1,0 +1,98 @@
+sequenceDiagram
+    participant Client
+    participant Server as HTTP Server
+    participant Kernel as HTTP Kernel
+    participant Pipeline as Middleware Pipeline
+    participant Router
+    participant Controller
+    participant Services
+    participant Events
+    participant DB as Database
+
+    %% Initial Request
+    Client->>Server: HTTP Request
+    activate Server
+    Server->>Kernel: Handle Request
+    activate Kernel
+
+    %% Global Middleware
+    Kernel->>Pipeline: Process Global Middleware
+    activate Pipeline
+    Note over Pipeline: - Check Maintenance Mode<br>- Validate Post Size<br>- Trim Strings<br>- Convert Empty to Null
+    Pipeline-->>Kernel: Request Processed
+    deactivate Pipeline
+
+    %% Route Matching
+    Kernel->>Router: Match Route
+    activate Router
+    Router-->>Kernel: Route Found
+    deactivate Router
+
+    %% Route Middleware
+    Kernel->>Pipeline: Process Route Middleware
+    activate Pipeline
+    Note over Pipeline: - Authentication<br>- Authorization<br>- Throttling<br>- CSRF Protection
+    Pipeline-->>Kernel: Request Processed
+    deactivate Pipeline
+
+    %% Controller Action
+    Kernel->>Controller: Handle Request
+    activate Controller
+
+    %% Service Layer
+    Controller->>Services: Process Business Logic
+    activate Services
+    
+    %% Database Operations
+    Services->>DB: Query Data
+    activate DB
+    DB-->>Services: Data Retrieved
+    deactivate DB
+
+    %% Event Dispatching
+    Services->>Events: Dispatch Events
+    activate Events
+    Note over Events: - Model Events<br>- Custom Events<br>- System Events
+    Events-->>Services: Events Processed
+    deactivate Events
+
+    Services-->>Controller: Logic Processed
+    deactivate Services
+
+    %% Response Generation
+    Controller-->>Kernel: Generate Response
+    deactivate Controller
+
+    %% Response Middleware
+    Kernel->>Pipeline: Process Response Middleware
+    activate Pipeline
+    Note over Pipeline: - Session<br>- Cookies<br>- Headers<br>- Response Compression
+    Pipeline-->>Kernel: Response Processed
+    deactivate Pipeline
+
+    %% Final Response
+    Kernel-->>Server: Return Response
+    deactivate Kernel
+    Server-->>Client: HTTP Response
+    deactivate Server
+
+    %% Style Definitions
+    style Client fill:#f9f,stroke:#333,stroke-width:2px
+    style Server fill:#bbf,stroke:#333,stroke-width:2px
+    style Kernel fill:#bbf,stroke:#333,stroke-width:2px
+    style Pipeline fill:#bfb,stroke:#333,stroke-width:2px
+    style Router fill:#bfb,stroke:#333,stroke-width:2px
+    style Controller fill:#bfb,stroke:#333,stroke-width:2px
+    style Services fill:#fbb,stroke:#333,stroke-width:2px
+    style Events fill:#fbb,stroke:#333,stroke-width:2px
+    style DB fill:#fbb,stroke:#333,stroke-width:2px
+
+    %% Notes
+    Note right of Server: Entry Point
+    Note right of Kernel: Request Processing
+    Note right of Pipeline: Middleware Chain
+    Note right of Router: Route Resolution
+    Note right of Controller: Business Logic
+    Note right of Services: Service Layer
+    Note right of Events: Event System
+    Note right of DB: Data Layer

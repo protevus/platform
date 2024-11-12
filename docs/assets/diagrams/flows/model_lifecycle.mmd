@@ -1,0 +1,161 @@
+sequenceDiagram
+    participant Client as Model Client
+    participant Model as Model Instance
+    participant Events as Event System
+    participant Cache as Cache Layer
+    participant DB as Database
+    participant Queue as Queue System
+    participant Relations as Relationship Loader
+    participant Observer as Model Observer
+
+    %% Model Creation
+    Client->>Model: Create Model
+    activate Model
+    Model->>Events: Dispatch Creating Event
+    activate Events
+    Events->>Observer: Handle Creating
+    Observer-->>Events: Continue
+    Events-->>Model: Proceed
+    deactivate Events
+
+    %% Database Operation
+    Model->>DB: Insert Record
+    activate DB
+    DB-->>Model: Record Created
+    deactivate DB
+
+    %% Post Creation
+    Model->>Events: Dispatch Created Event
+    activate Events
+    Events->>Observer: Handle Created
+    Observer-->>Events: Continue
+    Events->>Queue: Queue Events
+    Queue-->>Events: Queued
+    Events-->>Model: Complete
+    deactivate Events
+    Model-->>Client: Model Instance
+    deactivate Model
+
+    %% Model Retrieval
+    Client->>Model: Find Model
+    activate Model
+    Model->>Cache: Check Cache
+    activate Cache
+    
+    alt Cache Hit
+        Cache-->>Model: Return Cached
+    else Cache Miss
+        Cache-->>Model: Not Found
+        Model->>DB: Query Database
+        activate DB
+        DB-->>Model: Record Found
+        deactivate DB
+        Model->>Cache: Store in Cache
+        Cache-->>Model: Cached
+    end
+    deactivate Cache
+
+    %% Relationship Loading
+    Model->>Relations: Load Relations
+    activate Relations
+    Relations->>DB: Query Relations
+    activate DB
+    DB-->>Relations: Related Records
+    deactivate DB
+    Relations-->>Model: Relations Loaded
+    deactivate Relations
+    Model-->>Client: Complete Model
+    deactivate Model
+
+    %% Model Update
+    Client->>Model: Update Model
+    activate Model
+    Model->>Events: Dispatch Updating Event
+    activate Events
+    Events->>Observer: Handle Updating
+    Observer-->>Events: Continue
+    Events-->>Model: Proceed
+    deactivate Events
+
+    Model->>DB: Update Record
+    activate DB
+    DB-->>Model: Record Updated
+    deactivate DB
+
+    Model->>Cache: Invalidate Cache
+    activate Cache
+    Cache-->>Model: Cache Cleared
+    deactivate Cache
+
+    Model->>Events: Dispatch Updated Event
+    activate Events
+    Events->>Observer: Handle Updated
+    Observer-->>Events: Continue
+    Events->>Queue: Queue Events
+    Queue-->>Events: Queued
+    Events-->>Model: Complete
+    deactivate Events
+    Model-->>Client: Updated Model
+    deactivate Model
+
+    %% Model Deletion
+    Client->>Model: Delete Model
+    activate Model
+    Model->>Events: Dispatch Deleting Event
+    activate Events
+    Events->>Observer: Handle Deleting
+    Observer-->>Events: Continue
+    Events-->>Model: Proceed
+    deactivate Events
+
+    Model->>DB: Delete Record
+    activate DB
+    DB-->>Model: Record Deleted
+    deactivate DB
+
+    Model->>Cache: Clear Cache
+    activate Cache
+    Cache-->>Model: Cache Cleared
+    deactivate Cache
+
+    Model->>Events: Dispatch Deleted Event
+    activate Events
+    Events->>Observer: Handle Deleted
+    Observer-->>Events: Continue
+    Events->>Queue: Queue Events
+    Queue-->>Events: Queued
+    Events-->>Model: Complete
+    deactivate Events
+    Model-->>Client: Deletion Confirmed
+    deactivate Model
+
+    %% Style Definitions
+    style Client fill:#f9f,stroke:#333,stroke-width:2px
+    style Model fill:#bbf,stroke:#333,stroke-width:2px
+    style Events fill:#bfb,stroke:#333,stroke-width:2px
+    style Cache fill:#fbb,stroke:#333,stroke-width:2px
+    style DB fill:#fbb,stroke:#333,stroke-width:2px
+    style Queue fill:#bfb,stroke:#333,stroke-width:2px
+    style Relations fill:#bbf,stroke:#333,stroke-width:2px
+    style Observer fill:#bfb,stroke:#333,stroke-width:2px
+
+    %% Notes
+    Note over Model: Model Lifecycle
+    Note over Events: Event Handling
+    Note over Cache: Cache Management
+    Note over DB: Data Persistence
+    Note over Queue: Async Processing
+    Note over Relations: Relationship Management
+    Note over Observer: Lifecycle Hooks
+
+    %% Model States
+    Note over Model: States:<br>1. Creating/Created<br>2. Retrieving/Retrieved<br>3. Updating/Updated<br>4. Deleting/Deleted
+
+    %% Event Types
+    Note over Events: Events:<br>1. Model Events<br>2. Relation Events<br>3. Cache Events<br>4. Queue Events
+
+    %% Cache Strategy
+    Note over Cache: Strategy:<br>1. Read Through<br>2. Write Behind<br>3. Cache Invalidation
+
+    %% Observer Points
+    Note over Observer: Hooks:<br>1. Before Events<br>2. After Events<br>3. Around Events

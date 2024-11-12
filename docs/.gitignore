@@ -1,0 +1,77 @@
+# Generated documentation
+api/
+build/
+site/
+_site/
+.dart_tool/
+.pub-cache/
+.pub/
+doc/api/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+.settings/
+.project
+.classpath
+
+# Build artifacts
+*.html
+*.pdf
+*.epub
+*.mobi
+*.docx
+*.doc
+*.rtf
+
+# Local configuration
+.env
+.env.local
+*.local
+local.*
+
+# Documentation tools
+node_modules/
+package-lock.json
+yarn.lock
+pubspec.lock
+
+# Generated diagrams
+*.svg
+*.png
+*.jpg
+*.jpeg
+*.gif
+!assets/*.svg
+!assets/*.png
+!assets/*.jpg
+!assets/*.jpeg
+!assets/*.gif
+
+# Generated markdown
+*.generated.md
+*.auto.md
+*.temp.md
+
+# Coverage reports
+coverage/
+.coverage/
+coverage.xml
+*.lcov
+
+# Log files
+*.log
+log/
+logs/

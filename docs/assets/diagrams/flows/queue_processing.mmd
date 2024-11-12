@@ -1,0 +1,119 @@
+sequenceDiagram
+    participant Source as Job Source
+    participant Queue as Queue Manager
+    participant Worker as Queue Worker
+    participant Job as Job Handler
+    participant Events as Event System
+    participant DB as Database
+    participant Failed as Failed Jobs
+    participant Monitor as Queue Monitor
+
+    %% Job Creation
+    Source->>Queue: Dispatch Job
+    activate Queue
+    Note over Queue: Create Job Record
+
+    %% Job Configuration
+    alt Has Delay
+        Queue->>Queue: Schedule for Later
+    else No Delay
+        Queue->>Queue: Available Immediately
+    end
+
+    %% Worker Pickup
+    Queue->>Worker: Worker Picks Up Job
+    activate Worker
+    Note over Worker: Start Processing
+
+    %% Job Processing
+    Worker->>Job: Handle Job
+    activate Job
+
+    %% Database Transaction
+    alt Has Database Operations
+        Job->>DB: Begin Transaction
+        activate DB
+        Note over DB: Perform Operations
+        DB-->>Job: Transaction Complete
+        deactivate DB
+    end
+
+    %% Event Dispatching
+    alt Has Events
+        Job->>Events: Dispatch Events
+        activate Events
+        Note over Events: Process Events
+        Events-->>Job: Events Handled
+        deactivate Events
+    end
+
+    %% Job Completion Check
+    alt Job Succeeds
+        Job-->>Worker: Processing Complete
+        Worker-->>Queue: Job Completed
+        Queue->>Events: JobProcessed Event
+    else Job Fails
+        Job-->>Worker: Throws Exception
+        
+        %% Retry Logic
+        alt Can Retry
+            Worker->>Queue: Release Job
+            Note over Queue: Increment Attempts
+            Queue-->>Worker: Job Released
+        else Max Retries Exceeded
+            Worker->>Failed: Move to Failed Jobs
+            activate Failed
+            Note over Failed: Log Failure
+            Failed-->>Worker: Failure Logged
+            deactivate Failed
+        end
+    end
+
+    deactivate Job
+    deactivate Worker
+    deactivate Queue
+
+    %% Queue Monitoring
+    Monitor->>Queue: Check Status
+    activate Monitor
+    Queue-->>Monitor: Queue Statistics
+    Note over Monitor: Monitor Queue Health
+    
+    Monitor->>Failed: Check Failed Jobs
+    Failed-->>Monitor: Failed Job Count
+    
+    Monitor->>Worker: Check Workers
+    Worker-->>Monitor: Worker Status
+    deactivate Monitor
+
+    %% Style Definitions
+    style Source fill:#f9f,stroke:#333,stroke-width:2px
+    style Queue fill:#bbf,stroke:#333,stroke-width:2px
+    style Worker fill:#bfb,stroke:#333,stroke-width:2px
+    style Job fill:#bfb,stroke:#333,stroke-width:2px
+    style Events fill:#fbb,stroke:#333,stroke-width:2px
+    style DB fill:#fbb,stroke:#333,stroke-width:2px
+    style Failed fill:#fbb,stroke:#333,stroke-width:2px
+    style Monitor fill:#bbf,stroke:#333,stroke-width:2px
+
+    %% Notes
+    Note right of Source: Application Code
+    Note right of Queue: Queue Management
+    Note right of Worker: Job Processing
+    Note right of Job: Business Logic
+    Note right of Events: Event System
+    Note right of DB: Data Layer
+    Note right of Failed: Error Handling
+    Note right of Monitor: Health Checks
+
+    %% Job States
+    Note over Queue: Job States:<br>1. Pending<br>2. Reserved<br>3. Released<br>4. Failed
+
+    %% Processing Types
+    Note over Worker: Processing:<br>1. Immediate<br>2. Delayed<br>3. Batched<br>4. Chained
+
+    %% Retry Strategy
+    Note over Failed: Retry Strategy:<br>1. Exponential Backoff<br>2. Max Attempts<br>3. Custom Delays
+
+    %% Monitoring Aspects
+    Note over Monitor: Monitoring:<br>1. Queue Size<br>2. Processing Rate<br>3. Error Rate<br>4. Worker Health
