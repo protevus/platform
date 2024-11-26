@@ -1,26 +1,39 @@
-# Mock HTTP Request
+<!-- 
+This README describes the package. If you publish this package to pub.dev,
+this README's contents appear on the landing page for your package.
 
-![Pub Version (including pre-releases)](https://img.shields.io/pub/v/angel3_mock_request?include_prereleases)
-[![Null Safety](https://img.shields.io/badge/null-safety-brightgreen)](https://dart.dev/null-safety)
-[![Gitter](https://img.shields.io/gitter/room/angel_dart/discussion)](https://gitter.im/angel_dart/discussion)
-[![License](https://img.shields.io/github/license/dart-backend/angel)](https://github.com/dart-backend/angel/tree/master/packages/mock_request/LICENSE)
+For information about how to write a good package README, see the guide for
+[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
 
-**Forked from `mock_request` to support NNBD**
+For general information about developing packages, see the Dart guide for
+[creating packages](https://dart.dev/guides/libraries/create-library-packages)
+and the Flutter guide for
+[developing packages and plugins](https://flutter.dev/developing-packages). 
+-->
 
-Manufacture dart:io HttpRequests, HttpResponses, HttpHeaders, etc. This makes it possible to test server-side Dart applications without having to ever bind to a port.
+TODO: Put a short description of the package here that helps potential users
+know whether this package might be useful for them.
 
-This package was originally designed to make testing [Protevus](https://protevus.com/) applications smoother, but works with any Dart-based server.
+## Features
+
+TODO: List what your package can do. Maybe include images, gifs, or videos.
+
+## Getting started
+
+TODO: List prerequisites and provide or point to information on how to
+start using the package.
 
 ## Usage
 
+TODO: Include short and useful examples for package users. Add longer examples
+to `/example` folder. 
+
 ```dart
-var rq = MockHttpRequest('GET', Uri.parse('/foo'));
-await rq.close();
-await app.handleRequest(rq); // Run within your server-side application
-var rs = rq.response;
-expect(rs.statusCode, equals(200));
-expect(await rs.transform(UTF8.decoder).join(),
-    equals(JSON.encode('Hello, world!')));
+const like = 'sample';
 ```
 
-More examples can be found in the included test cases.
+## Additional information
+
+TODO: Tell users more about the package: where to find more information, how to 
+contribute to the package, how to file issues, what response they can expect 
+from the package authors, and more.

@@ -1,5 +1,5 @@
-name: platform_support
-description: The Support Package for the Protevus Platform
+name: platform_session
+description: The Session Package for the Protevus Platform
 version: 0.0.1
 homepage: https://protevus.com
 documentation: https://docs.protevus.com
