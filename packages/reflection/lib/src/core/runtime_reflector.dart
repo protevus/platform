@@ -83,14 +83,15 @@ class RuntimeReflector {
 
     // Create instance
     try {
+      // Convert named args to symbols
+      final namedArgSymbols = namedArgs.map(
+        (key, value) => MapEntry(Symbol(key), value),
+      );
+
+      // Call the factory with the arguments spread out
       if (constructor.parameters.any((p) => p.isNamed)) {
         // For constructors with named parameters
-        return Function.apply(
-            factory,
-            [],
-            namedArgs.map(
-              (key, value) => MapEntry(Symbol(key), value),
-            ));
+        return Function.apply(factory, positionalArgs, namedArgSymbols);
       } else {
         // For constructors with only positional parameters
         return Function.apply(factory, positionalArgs);
