@@ -1,16 +1,20 @@
-# Dart Pure Reflection
+# Platform Reflection
 
-A lightweight, cross-platform reflection system for Dart that provides runtime type introspection and manipulation without using `dart:mirrors` or code generation.
+A lightweight, cross-platform reflection system for Dart that provides runtime type introspection and manipulation with an API similar to `dart:mirrors` but without its limitations.
 
 ## Features
 
 - ✅ Works on all platforms (Web, Mobile, Desktop)
 - ✅ No dependency on `dart:mirrors`
-- ✅ No code generation required
 - ✅ Pure runtime reflection
+- ✅ No code generation required
+- ✅ No manual registration needed
+- ✅ Complete mirror-based API
 - ✅ Type-safe property access
 - ✅ Method invocation with argument validation
 - ✅ Constructor invocation support
+- ✅ Library and isolate reflection
+- ✅ Full MirrorSystem implementation
 - ✅ Comprehensive error handling
 
 ## Installation
@@ -19,91 +23,136 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  reflection: ^1.0.0
+  platform_reflection: ^0.1.0
 ```
 
 ## Usage
 
-### Basic Setup
+### Basic Reflection
 
-1. Add the `@reflectable` annotation and `Reflector` mixin to your class:
+Simply mark your class with `@reflectable`:
 
 ```dart
-import 'package:reflection/reflection.dart';
+import 'package:platform_reflection/reflection.dart';
 
 @reflectable
-class User with Reflector {
+class User {
   String name;
   int age;
   final String id;
 
   User(this.name, this.age, {required this.id});
+
+  void birthday() {
+    age++;
+  }
+
+  String greet(String greeting) {
+    return '$greeting, $name!';
+  }
 }
 ```
 
-2. Register your class and its constructors:
+Then use reflection directly:
 
 ```dart
-// Register the class
-Reflector.register(User);
-
-// Register constructors
-Reflector.registerConstructor(
-  User,
-  '', // Default constructor
-  (String name, int age, {String? id}) {
-    if (id == null) throw ArgumentError.notNull('id');
-    return User(name, age, id: id);
-  },
-);
-```
-
-### Reflecting on Types
-
-```dart
+// Get the reflector instance
 final reflector = RuntimeReflector.instance;
 
-// Get type metadata
-final userType = reflector.reflectType(User);
-print('Type name: ${userType.name}');
-print('Properties: ${userType.properties.keys.join(', ')}');
-print('Methods: ${userType.methods.keys.join(', ')}');
-```
+// Create instance using reflection
+final user = reflector.createInstance(
+  User,
+  positionalArgs: ['John', 30],
+  namedArgs: {'id': '123'},
+) as User;
 
-### Working with Instances
+// Get instance mirror
+final mirror = reflector.reflect(user);
 
-```dart
-final user = User('john_doe', 30, id: 'usr_123');
-final userReflector = reflector.reflect(user);
+// Access properties
+print(mirror.getField(const Symbol('name')).reflectee); // John
+print(mirror.getField(const Symbol('age')).reflectee); // 30
 
-// Read properties
-final name = userReflector.getField('name'); // john_doe
-final age = userReflector.getField('age');   // 30
-
-// Write properties
-userReflector.setField('name', 'jane_doe');
-userReflector.setField('age', 25);
+// Modify properties
+mirror.setField(const Symbol('name'), 'Jane');
+mirror.setField(const Symbol('age'), 25);
 
 // Invoke methods
-userReflector.invoke('someMethod', ['arg1', 'arg2']);
+mirror.invoke(const Symbol('birthday'), []);
+final greeting = mirror.invoke(const Symbol('greet'), ['Hello']).reflectee;
+print(greeting); // Hello, Jane!
 ```
 
-### Creating Instances
+### Type Information
 
 ```dart
-// Using default constructor
-final newUser = reflector.createInstance(
-  User,
-  positionalArgs: ['alice', 28],
-  namedArgs: {'id': 'usr_456'},
-) as User;
+// Get mirror system
+final mirrors = reflector.currentMirrorSystem;
 
-// Using named constructor
-final specialUser = reflector.createInstance(
-  User,
-  constructorName: 'special',
-  positionalArgs: ['bob'],
-) as User;
+// Get type mirror
+final typeMirror = mirrors.reflectType(User);
+
+// Access type information
+print(typeMirror.name); // User
+print(typeMirror.properties); // {name: PropertyMetadata(...), age: PropertyMetadata(...)}
+print(typeMirror.methods); // {birthday: MethodMetadata(...), greet: MethodMetadata(...)}
+
+// Check type relationships
+if (typeMirror.isSubtypeOf(otherType)) {
+  print('User is a subtype');
+}
+
+// Get declarations
+final declarations = typeMirror.declarations;
+for (var member in declarations.values) {
+  if (member is MethodMirror) {
+    print('Method: ${member.simpleName}');
+  } else if (member is VariableMirror) {
+    print('Variable: ${member.simpleName}');
+  }
+}
+
+// Access special types
+print(mirrors.dynamicType.name); // dynamic
+print(mirrors.voidType.name); // void
+print(mirrors.neverType.name); // Never
+```
+
+### Library Reflection
+
+```dart
+// Get a library
+final library = mirrors.findLibrary(const Symbol('package:myapp/src/models.dart'));
+
+// Access library members
+final declarations = library.declarations;
+for (var decl in declarations.values) {
+  print('Declaration: ${decl.simpleName}');
+}
+
+// Check imports
+for (var dep in library.libraryDependencies) {
+  if (dep.isImport) {
+    print('Imports: ${dep.targetLibrary?.uri}');
+  }
+}
+```
+
+### Isolate Reflection
+
+```dart
+// Get current isolate
+final currentIsolate = mirrors.isolate;
+print('Current isolate: ${currentIsolate.debugName}');
+
+// Reflect on another isolate
+final isolate = await Isolate.spawn(workerFunction, message);
+final isolateMirror = reflector.reflectIsolate(isolate, 'worker');
+
+// Control isolate
+await isolateMirror.pause();
+await isolateMirror.resume();
+await isolateMirror.kill();
 ```
 
 ## Error Handling
@@ -117,46 +166,23 @@ The package provides specific exceptions for different error cases:
 
 ```dart
 try {
-  reflector.reflect(NonReflectableClass());
+  reflect(NonReflectableClass());
 } catch (e) {
-  print(e); // NotReflectableException: Type "NonReflectableClass" is not marked as @reflectable
+  print(e); // NotReflectableException: Type NonReflectableClass is not reflectable
 }
 ```
 
-## Complete Example
-
-See the [example](example/reflection_example.dart) for a complete working demonstration.
-
-## Limitations
-
-1. Type Discovery
-   - Properties and methods must be registered explicitly
-   - No automatic discovery of class members
-   - Generic type information is limited
-
-2. Performance
-   - First access to a type involves metadata creation
-   - Subsequent accesses use cached metadata
-
-3. Private Members
-   - Private fields and methods cannot be accessed
-   - Reflection is limited to public API
-
 ## Design Philosophy
 
-This package is inspired by:
+This package provides a reflection API that closely mirrors the design of `dart:mirrors` while being:
 
-- **dart:mirrors**: API design and metadata structure
-- **fake_reflection**: Registration-based approach
-- **mirrors.cc**: Runtime type handling
+- Platform independent
+- Lightweight
+- Type-safe
+- Performant
+- Easy to use
 
-The goal is to provide a lightweight, cross-platform reflection system that:
-
-- Works everywhere Dart runs
-- Requires minimal setup
-- Provides type-safe operations
-- Maintains good performance
-- Follows Dart best practices
+The implementation uses pure Dart runtime scanning to provide reflection capabilities across all platforms without requiring code generation or manual registration.
 
 ## Contributing
 

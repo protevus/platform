@@ -2,7 +2,7 @@ import 'package:platform_reflection/reflection.dart';
 import 'package:test/test.dart';
 
 @reflectable
-class Person with Reflector {
+class Person {
   String name;
   int age;
   final String id;
@@ -43,54 +43,124 @@ void main() {
 
     setUp(() {
       // Register Person as reflectable
-      Reflector.register(Person);
+      Reflector.registerType(Person);
 
       // Register properties
-      Reflector.registerProperty(Person, 'name', String);
-      Reflector.registerProperty(Person, 'age', int);
-      Reflector.registerProperty(Person, 'id', String, isWritable: false);
+      Reflector.registerPropertyMetadata(
+        Person,
+        'name',
+        PropertyMetadata(
+          name: 'name',
+          type: String,
+          isReadable: true,
+          isWritable: true,
+        ),
+      );
+
+      Reflector.registerPropertyMetadata(
+        Person,
+        'age',
+        PropertyMetadata(
+          name: 'age',
+          type: int,
+          isReadable: true,
+          isWritable: true,
+        ),
+      );
+
+      Reflector.registerPropertyMetadata(
+        Person,
+        'id',
+        PropertyMetadata(
+          name: 'id',
+          type: String,
+          isReadable: true,
+          isWritable: false,
+        ),
+      );
 
       // Register methods
-      Reflector.registerMethod(
+      Reflector.registerMethodMetadata(
         Person,
         'birthday',
-        [],
-        true,
+        MethodMetadata(
+          name: 'birthday',
+          parameterTypes: [],
+          parameters: [],
+          returnsVoid: true,
+        ),
       );
-      Reflector.registerMethod(
+
+      Reflector.registerMethodMetadata(
         Person,
         'greet',
-        [String],
-        false,
-        parameterNames: ['greeting'],
+        MethodMetadata(
+          name: 'greet',
+          parameterTypes: [String],
+          parameters: [
+            ParameterMetadata(
+              name: 'greeting',
+              type: String,
+              isRequired: true,
+            ),
+          ],
+          returnsVoid: false,
+        ),
       );
 
       // Register constructors
-      Reflector.registerConstructor(
+      Reflector.registerConstructorMetadata(
+        Person,
+        ConstructorMetadata(
+          name: '',
+          parameterTypes: [String, int, String],
+          parameters: [
+            ParameterMetadata(name: 'name', type: String, isRequired: true),
+            ParameterMetadata(name: 'age', type: int, isRequired: true),
+            ParameterMetadata(
+                name: 'id', type: String, isRequired: true, isNamed: true),
+          ],
+        ),
+      );
+
+      Reflector.registerConstructorFactory(
         Person,
         '',
         (String name, int age, {required String id}) =>
             Person(name, age, id: id),
-        parameterTypes: [String, int, String],
-        parameterNames: ['name', 'age', 'id'],
-        isRequired: [true, true, true],
-        isNamed: [false, false, true],
       );
 
-      Reflector.registerConstructor(
+      Reflector.registerConstructorMetadata(
+        Person,
+        ConstructorMetadata(
+          name: 'guest',
+          parameterTypes: [],
+          parameters: [],
+        ),
+      );
+
+      Reflector.registerConstructorFactory(
         Person,
         'guest',
         () => Person.guest(),
       );
 
-      Reflector.registerConstructor(
+      Reflector.registerConstructorMetadata(
+        Person,
+        ConstructorMetadata(
+          name: 'withDefaults',
+          parameterTypes: [String, int],
+          parameters: [
+            ParameterMetadata(name: 'name', type: String, isRequired: true),
+            ParameterMetadata(name: 'age', type: int, isRequired: false),
+          ],
+        ),
+      );
+
+      Reflector.registerConstructorFactory(
         Person,
         'withDefaults',
         (String name, [int age = 18]) => Person.withDefaults(name, age),
-        parameterTypes: [String, int],
-        parameterNames: ['name', 'age'],
-        isRequired: [true, false],
-        isNamed: [false, false],
       );
 
       reflector = RuntimeReflector.instance;
@@ -99,20 +169,20 @@ void main() {
 
     group('Type Reflection', () {
       test('reflectType returns correct type metadata', () {
-        final metadata = reflector.reflectType(Person);
+        final typeMirror = reflector.reflectType(Person);
 
-        expect(metadata.name, equals('Person'));
-        expect(metadata.properties.length, equals(3));
-        expect(metadata.methods.length, equals(2)); // birthday and greet
-        expect(metadata.constructors.length,
+        expect(typeMirror.name, equals('Person'));
+        expect(typeMirror.properties.length, equals(3));
+        expect(typeMirror.methods.length, equals(2)); // birthday and greet
+        expect(typeMirror.constructors.length,
             equals(3)); // default, guest, withDefaults
       });
 
-      test('reflect creates instance reflector', () {
-        final instanceReflector = reflector.reflect(person);
+      test('reflect creates instance mirror', () {
+        final instanceMirror = reflector.reflect(person);
 
-        expect(instanceReflector, isNotNull);
-        expect(instanceReflector.type.name, equals('Person'));
+        expect(instanceMirror, isNotNull);
+        expect(instanceMirror.type.name, equals('Person'));
       });
 
       test('throws NotReflectableException for non-reflectable class', () {
@@ -127,28 +197,31 @@ void main() {
 
     group('Property Access', () {
       test('getField returns property value', () {
-        final instanceReflector = reflector.reflect(person);
+        final instanceMirror = reflector.reflect(person);
 
-        expect(instanceReflector.getField('name'), equals('John'));
-        expect(instanceReflector.getField('age'), equals(30));
-        expect(instanceReflector.getField('id'), equals('123'));
+        expect(instanceMirror.getField(const Symbol('name')).reflectee,
+            equals('John'));
+        expect(
+            instanceMirror.getField(const Symbol('age')).reflectee, equals(30));
+        expect(instanceMirror.getField(const Symbol('id')).reflectee,
+            equals('123'));
       });
 
       test('setField updates property value', () {
-        final instanceReflector = reflector.reflect(person);
+        final instanceMirror = reflector.reflect(person);
 
-        instanceReflector.setField('name', 'Jane');
-        instanceReflector.setField('age', 25);
+        instanceMirror.setField(const Symbol('name'), 'Jane');
+        instanceMirror.setField(const Symbol('age'), 25);
 
         expect(person.name, equals('Jane'));
         expect(person.age, equals(25));
       });
 
       test('setField throws on final field', () {
-        final instanceReflector = reflector.reflect(person);
+        final instanceMirror = reflector.reflect(person);
 
         expect(
-          () => instanceReflector.setField('id', '456'),
+          () => instanceMirror.setField(const Symbol('id'), '456'),
           throwsA(isA<ReflectionException>()),
         );
       });
@@ -156,20 +229,21 @@ void main() {
 
     group('Method Invocation', () {
       test('invoke calls method with arguments', () {
-        final instanceReflector = reflector.reflect(person);
+        final instanceMirror = reflector.reflect(person);
 
-        final result = instanceReflector.invoke('greet', ['Hello']);
+        final result =
+            instanceMirror.invoke(const Symbol('greet'), ['Hello']).reflectee;
         expect(result, equals('Hello, John!'));
 
-        instanceReflector.invoke('birthday', []);
+        instanceMirror.invoke(const Symbol('birthday'), []);
         expect(person.age, equals(31));
       });
 
       test('invoke throws on invalid arguments', () {
-        final instanceReflector = reflector.reflect(person);
+        final instanceMirror = reflector.reflect(person);
 
         expect(
-          () => instanceReflector.invoke('greet', [42]),
+          () => instanceMirror.invoke(const Symbol('greet'), [42]),
           throwsA(isA<InvalidArgumentsException>()),
         );
       });

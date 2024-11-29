@@ -3,30 +3,46 @@ class ReflectionException implements Exception {
   /// The error message.
   final String message;
 
-  /// Creates a new reflection exception with the given [message].
+  /// Creates a new reflection exception.
   const ReflectionException(this.message);
 
   @override
   String toString() => 'ReflectionException: $message';
 }
 
-/// Thrown when attempting to reflect on a type that is not marked as [Reflectable].
+/// Exception thrown when attempting to reflect on a non-reflectable type.
 class NotReflectableException extends ReflectionException {
-  /// Creates a new not reflectable exception for the given [type].
-  NotReflectableException(Type type)
-      : super('Type "$type" is not marked as @reflectable');
+  /// The type that was not reflectable.
+  final Type type;
+
+  /// Creates a new not reflectable exception.
+  const NotReflectableException(this.type)
+      : super('Type $type is not reflectable. '
+            'Make sure it is annotated with @reflectable or registered manually.');
 }
 
-/// Thrown when a property or method is not found during reflection.
-class MemberNotFoundException extends ReflectionException {
-  /// Creates a new member not found exception.
-  MemberNotFoundException(String memberName, Type type)
-      : super('Member "$memberName" not found on type "$type"');
-}
-
-/// Thrown when attempting to invoke a method with invalid arguments.
+/// Exception thrown when invalid arguments are provided to a reflective operation.
 class InvalidArgumentsException extends ReflectionException {
+  /// The name of the member being invoked.
+  final String memberName;
+
+  /// The type the member belongs to.
+  final Type type;
+
   /// Creates a new invalid arguments exception.
-  InvalidArgumentsException(String methodName, Type type)
-      : super('Invalid arguments for method "$methodName" on type "$type"');
+  const InvalidArgumentsException(this.memberName, this.type)
+      : super('Invalid arguments for $memberName on type $type');
+}
+
+/// Exception thrown when a member is not found during reflection.
+class MemberNotFoundException extends ReflectionException {
+  /// The name of the member that was not found.
+  final String memberName;
+
+  /// The type the member was looked up on.
+  final Type type;
+
+  /// Creates a new member not found exception.
+  const MemberNotFoundException(this.memberName, this.type)
+      : super('Member $memberName not found on type $type');
 }

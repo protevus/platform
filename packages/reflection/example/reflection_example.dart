@@ -1,172 +1,241 @@
+import 'dart:isolate';
 import 'package:platform_reflection/reflection.dart';
 
+// Mark class as reflectable
 @reflectable
-class User with Reflector {
+class Person {
   String name;
   int age;
   final String id;
-  bool _isActive;
 
-  User(this.name, this.age, {required this.id, bool isActive = true})
-      : _isActive = isActive;
-
-  // Guest constructor
-  User.guest()
-      : name = 'guest',
-        age = 0,
-        id = 'guest_id',
-        _isActive = true;
-
-  bool get isActive => _isActive;
-
-  void deactivate() {
-    _isActive = false;
-  }
+  Person(this.name, this.age, {required this.id});
 
   void birthday() {
     age++;
   }
 
-  String greet([String greeting = 'Hello']) => '$greeting, $name!';
+  String greet(String greeting) {
+    return '$greeting, $name!';
+  }
 
-  @override
-  String toString() =>
-      'User(name: $name age: $age id: $id isActive: $isActive)';
+  static Person create(String name, int age, String id) {
+    return Person(name, age, id: id);
+  }
 }
 
-void main() {
-  // Register User class for reflection
-  Reflector.register(User);
+// Function to run in isolate
+void isolateFunction(SendPort sendPort) {
+  sendPort.send('Hello from isolate!');
+}
+
+void main() async {
+  // Register Person class for reflection
+  Reflector.registerType(Person);
 
   // Register properties
-  Reflector.registerProperty(User, 'name', String);
-  Reflector.registerProperty(User, 'age', int);
-  Reflector.registerProperty(User, 'id', String, isWritable: false);
-  Reflector.registerProperty(User, 'isActive', bool, isWritable: false);
+  Reflector.registerPropertyMetadata(
+    Person,
+    'name',
+    PropertyMetadata(
+      name: 'name',
+      type: String,
+      isReadable: true,
+      isWritable: true,
+    ),
+  );
+
+  Reflector.registerPropertyMetadata(
+    Person,
+    'age',
+    PropertyMetadata(
+      name: 'age',
+      type: int,
+      isReadable: true,
+      isWritable: true,
+    ),
+  );
+
+  Reflector.registerPropertyMetadata(
+    Person,
+    'id',
+    PropertyMetadata(
+      name: 'id',
+      type: String,
+      isReadable: true,
+      isWritable: false,
+    ),
+  );
 
   // Register methods
-  Reflector.registerMethod(
-    User,
+  Reflector.registerMethodMetadata(
+    Person,
     'birthday',
-    [],
-    true, // returns void
+    MethodMetadata(
+      name: 'birthday',
+      parameterTypes: [],
+      parameters: [],
+      returnsVoid: true,
+    ),
   );
-  Reflector.registerMethod(
-    User,
+
+  Reflector.registerMethodMetadata(
+    Person,
     'greet',
-    [String],
-    false, // returns String
-    parameterNames: ['greeting'],
-    isRequired: [false], // optional parameter
-  );
-  Reflector.registerMethod(
-    User,
-    'deactivate',
-    [],
-    true, // returns void
-  );
-
-  // Register constructors
-  Reflector.registerConstructor(
-    User,
-    '', // default constructor
-    (String name, int age, {required String id, bool isActive = true}) =>
-        User(name, age, id: id, isActive: isActive),
-    parameterTypes: [String, int, String, bool],
-    parameterNames: ['name', 'age', 'id', 'isActive'],
-    isRequired: [true, true, true, false],
-    isNamed: [false, false, true, true],
+    MethodMetadata(
+      name: 'greet',
+      parameterTypes: [String],
+      parameters: [
+        ParameterMetadata(
+          name: 'greeting',
+          type: String,
+          isRequired: true,
+        ),
+      ],
+      returnsVoid: false,
+    ),
   );
 
-  Reflector.registerConstructor(
-    User,
-    'guest',
-    () => User.guest(),
+  // Register constructor
+  Reflector.registerConstructorMetadata(
+    Person,
+    ConstructorMetadata(
+      name: '',
+      parameterTypes: [String, int, String],
+      parameters: [
+        ParameterMetadata(name: 'name', type: String, isRequired: true),
+        ParameterMetadata(name: 'age', type: int, isRequired: true),
+        ParameterMetadata(
+            name: 'id', type: String, isRequired: true, isNamed: true),
+      ],
+    ),
   );
 
-  // Create a user instance
-  final user = User('john_doe', 30, id: 'usr_123');
-  print('Original user: $user');
+  Reflector.registerConstructorFactory(
+    Person,
+    '',
+    (String name, int age, {required String id}) => Person(name, age, id: id),
+  );
 
-  // Get the reflector instance
+  // Get reflector instance
   final reflector = RuntimeReflector.instance;
 
-  // Reflect on the User type
-  final userType = reflector.reflectType(User);
+  // Get mirror system
+  final mirrorSystem = reflector.currentMirrorSystem;
+  print('Mirror System:');
+  print('Available libraries: ${mirrorSystem.libraries.keys.join(', ')}');
+  print('Dynamic type: ${mirrorSystem.dynamicType.name}');
+  print('Void type: ${mirrorSystem.voidType.name}');
+  print('Never type: ${mirrorSystem.neverType.name}');
+
+  // Create instance using reflection
+  final person = reflector.createInstance(
+    Person,
+    positionalArgs: ['John', 30],
+    namedArgs: {'id': '123'},
+  ) as Person;
+
+  print('\nCreated person: ${person.name}, age ${person.age}, id ${person.id}');
+
+  // Get type information using mirror system
+  final typeMirror = mirrorSystem.reflectType(Person);
   print('\nType information:');
-  print('Type name: ${userType.name}');
-  print('Properties: ${userType.properties.keys.join(', ')}');
-  print('Methods: ${userType.methods.keys.join(', ')}');
-  print('Constructors: ${userType.constructors.map((c) => c.name).join(', ')}');
+  print('Name: ${typeMirror.name}');
+  print('Properties: ${typeMirror.properties.keys}');
+  print('Methods: ${typeMirror.methods.keys}');
 
-  // Create an instance reflector
-  final userReflector = reflector.reflect(user);
+  // Get instance mirror
+  final instanceMirror = reflector.reflect(person);
 
-  // Read properties
-  print('\nReading properties:');
-  print('Name: ${userReflector.getField('name')}');
-  print('Age: ${userReflector.getField('age')}');
-  print('ID: ${userReflector.getField('id')}');
-  print('Is active: ${userReflector.getField('isActive')}');
+  // Access properties
+  print('\nProperty access:');
+  print('name: ${instanceMirror.getField(const Symbol('name')).reflectee}');
+  print('age: ${instanceMirror.getField(const Symbol('age')).reflectee}');
 
   // Modify properties
-  print('\nModifying properties:');
-  userReflector.setField('name', 'jane_doe');
-  userReflector.setField('age', 25);
-  print('Modified user: $user');
+  instanceMirror.setField(const Symbol('name'), 'Jane');
+  instanceMirror.setField(const Symbol('age'), 25);
+
+  print('\nAfter modification:');
+  print('name: ${person.name}');
+  print('age: ${person.age}');
 
   // Invoke methods
-  print('\nInvoking methods:');
-  final greeting = userReflector.invoke('greet', ['Hi']);
+  print('\nMethod invocation:');
+  final greeting =
+      instanceMirror.invoke(const Symbol('greet'), ['Hello']).reflectee;
   print('Greeting: $greeting');
 
-  userReflector.invoke('birthday', []);
-  print('After birthday: $user');
+  instanceMirror.invoke(const Symbol('birthday'), []);
+  print('After birthday: age ${person.age}');
 
-  userReflector.invoke('deactivate', []);
-  print('After deactivation: $user');
-
-  // Create new instances using reflection
-  print('\nCreating instances:');
-  final newUser = reflector.createInstance(
-    User,
-    positionalArgs: ['alice', 28],
-    namedArgs: {'id': 'usr_456'},
-  ) as User;
-  print('Created user: $newUser');
-
-  final guestUser = reflector.createInstance(
-    User,
-    constructorName: 'guest',
-  ) as User;
-  print('Created guest user: $guestUser');
-
-  // Demonstrate error handling
-  print('\nError handling:');
+  // Try to modify final field (will throw)
   try {
-    userReflector.setField('id', 'new_id'); // Should throw - id is final
+    instanceMirror.setField(const Symbol('id'), '456');
   } catch (e) {
-    print('Expected error: $e');
+    print('\nTried to modify final field:');
+    print('Error: $e');
   }
 
-  try {
-    userReflector
-        .invoke('unknownMethod', []); // Should throw - method doesn't exist
-  } catch (e) {
-    print('Expected error: $e');
-  }
+  // Library reflection using mirror system
+  print('\nLibrary reflection:');
+  final libraryMirror = mirrorSystem.findLibrary(const Symbol('dart:core'));
+  print('Library name: ${libraryMirror.qualifiedName}');
+  print('Library URI: ${libraryMirror.uri}');
+  print('Top-level declarations: ${libraryMirror.declarations.keys}');
 
-  // Demonstrate non-reflectable class
-  print('\nNon-reflectable class:');
-  try {
-    final nonReflectable = NonReflectable();
-    reflector.reflect(nonReflectable);
-  } catch (e) {
-    print('Expected error: $e');
-  }
-}
+  // Check type relationships
+  print('\nType relationships:');
+  final stringType = mirrorSystem.reflectType(String);
+  final dynamicType = mirrorSystem.dynamicType;
+  print(
+      'String assignable to dynamic: ${stringType.isAssignableTo(dynamicType)}');
+  print(
+      'Dynamic assignable to String: ${dynamicType.isAssignableTo(stringType)}');
 
-// Class without @reflectable annotation for testing
-class NonReflectable {
-  String value = 'test';
+  // Isolate reflection
+  print('\nIsolate reflection:');
+
+  // Get current isolate mirror from mirror system
+  final currentIsolate = mirrorSystem.isolate;
+  print(
+      'Current isolate: ${currentIsolate.debugName} (isCurrent: ${currentIsolate.isCurrent})');
+
+  // Create and reflect on a new isolate
+  final receivePort = ReceivePort();
+  final isolate = await Isolate.spawn(
+    isolateFunction,
+    receivePort.sendPort,
+  );
+
+  final isolateMirror =
+      reflector.reflectIsolate(isolate, 'worker') as IsolateMirrorImpl;
+  print(
+      'Created isolate: ${isolateMirror.debugName} (isCurrent: ${isolateMirror.isCurrent})');
+
+  // Add error and exit listeners
+  isolateMirror.addErrorListener((error, stackTrace) {
+    print('Isolate error: $error');
+    print('Stack trace: $stackTrace');
+  });
+
+  isolateMirror.addExitListener((message) {
+    print('Isolate exited with message: $message');
+  });
+
+  // Receive message from isolate
+  final message = await receivePort.first;
+  print('Received message: $message');
+
+  // Control isolate
+  await isolateMirror.pause();
+  print('Isolate paused');
+
+  await isolateMirror.resume();
+  print('Isolate resumed');
+
+  await isolateMirror.kill();
+  print('Isolate killed');
+
+  // Clean up
+  receivePort.close();
 }
