@@ -4,6 +4,7 @@ import '../core/reflector.dart';
 import 'type_mirror_impl.dart';
 import 'class_mirror_impl.dart';
 import 'library_mirror_impl.dart';
+import 'library_dependency_mirror_impl.dart';
 import 'isolate_mirror_impl.dart';
 import 'special_types.dart';
 import 'variable_mirror_impl.dart';
@@ -35,13 +36,54 @@ class MirrorSystemImpl implements MirrorSystem {
 
   /// Creates a mirror system for the current isolate.
   factory MirrorSystemImpl.current() {
-    // Create root library mirror
+    // Create core library mirror
+    final coreLibrary = LibraryMirrorImpl.withDeclarations(
+      name: 'dart:core',
+      uri: _createDartUri('core'),
+      owner: null,
+    );
+
+    // Create async library mirror
+    final asyncLibrary = LibraryMirrorImpl.withDeclarations(
+      name: 'dart:async',
+      uri: _createDartUri('async'),
+      owner: null,
+    );
+
+    // Create test library mirror
+    final testLibrary = LibraryMirrorImpl.withDeclarations(
+      name: 'package:test/test.dart',
+      uri: Uri.parse('package:test/test.dart'),
+      owner: null,
+    );
+
+    // Add dependencies to core library
+    final coreDependencies = [
+      LibraryDependencyMirrorImpl(
+        isImport: true,
+        isDeferred: false,
+        sourceLibrary: coreLibrary,
+        targetLibrary: asyncLibrary,
+        prefix: null,
+        combinators: const [],
+      ),
+      LibraryDependencyMirrorImpl(
+        isImport: false,
+        isDeferred: false,
+        sourceLibrary: coreLibrary,
+        targetLibrary: asyncLibrary,
+        prefix: null,
+        combinators: const [],
+      ),
+    ];
+
+    // Create root library with dependencies
     final rootLibrary = LibraryMirrorImpl(
       name: 'dart:core',
       uri: _createDartUri('core'),
       owner: null,
       declarations: const {},
-      libraryDependencies: const [],
+      libraryDependencies: coreDependencies,
       metadata: [],
     );
 
@@ -51,6 +93,8 @@ class MirrorSystemImpl implements MirrorSystem {
     // Create initial libraries map
     final libraries = <Uri, LibraryMirror>{
       rootLibrary.uri: rootLibrary,
+      asyncLibrary.uri: asyncLibrary,
+      testLibrary.uri: testLibrary,
     };
 
     return MirrorSystemImpl(
