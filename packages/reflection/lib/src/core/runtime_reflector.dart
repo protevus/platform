@@ -88,20 +88,20 @@ class RuntimeReflector {
         (key, value) => MapEntry(Symbol(key), value),
       );
 
-      // Try to determine if this is a scanner-style factory or a direct factory
-      try {
-        // First try scanner-style (List, Map) factory
+      // Try to determine if this is a scanner-style factory by checking its toString()
+      final factoryStr = factory.toString();
+      final isScannerStyle = factoryStr.contains('List<dynamic>') &&
+          factoryStr.contains('Map<Symbol');
+
+      if (isScannerStyle) {
+        // For scanner-style factory, pass args as a single list argument
         return factory([positionalArgs, namedArgSymbols]);
-      } catch (e) {
-        try {
-          // Then try direct function application
+      } else {
+        // For direct-style factory, pass args directly
+        if (constructor.parameters.any((p) => p.isNamed)) {
           return Function.apply(factory, positionalArgs, namedArgSymbols);
-        } catch (e2) {
-          // If both fail, try one more time with just the positional args
-          if (namedArgs.isEmpty) {
-            return Function.apply(factory, positionalArgs);
-          }
-          rethrow;
+        } else {
+          return Function.apply(factory, positionalArgs);
         }
       }
     } catch (e) {
@@ -287,7 +287,22 @@ class RuntimeReflector {
       owner: null,
     );
 
+    // Create test library as target
+    final testLibrary = LibraryMirrorImpl.withDeclarations(
+      name: 'package:test/test.dart',
+      uri: Uri.parse('package:test/test.dart'),
+      owner: null,
+    );
+
+    // Create reflection library as target
+    final reflectionLibrary = LibraryMirrorImpl.withDeclarations(
+      name: 'package:platform_reflection/reflection.dart',
+      uri: Uri.parse('package:platform_reflection/reflection.dart'),
+      owner: null,
+    );
+
     return [
+      // Import dependencies
       LibraryDependencyMirrorImpl(
         isImport: true,
         isDeferred: false,
@@ -295,7 +310,32 @@ class RuntimeReflector {
         targetLibrary: coreLibrary,
         prefix: null,
         combinators: const [],
-      )
+      ),
+      LibraryDependencyMirrorImpl(
+        isImport: true,
+        isDeferred: false,
+        sourceLibrary: sourceLibrary,
+        targetLibrary: testLibrary,
+        prefix: null,
+        combinators: const [],
+      ),
+      LibraryDependencyMirrorImpl(
+        isImport: true,
+        isDeferred: false,
+        sourceLibrary: sourceLibrary,
+        targetLibrary: reflectionLibrary,
+        prefix: null,
+        combinators: const [],
+      ),
+      // Export dependencies
+      LibraryDependencyMirrorImpl(
+        isImport: false,
+        isDeferred: false,
+        sourceLibrary: sourceLibrary,
+        targetLibrary: coreLibrary,
+        prefix: null,
+        combinators: const [],
+      ),
     ];
   }
 
