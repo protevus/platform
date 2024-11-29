@@ -104,15 +104,9 @@ class Scanner {
           final name = positionalArgs[0] as String;
           final age = positionalArgs[1] as int;
           return Function.apply(typeObj, [name, age], {});
-
-        default:
-          // For unknown types, create a generic factory that applies the arguments directly
-          return Function.apply(
-            constructor.name.isEmpty ? typeObj : typeObj[constructor.name],
-            positionalArgs,
-            namedArgs,
-          );
       }
+
+      throw UnsupportedError('Cannot create instance of $typeName');
     };
   }
 }
