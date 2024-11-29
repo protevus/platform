@@ -1,7 +1,57 @@
 import 'dart:core';
 import '../metadata.dart';
 import 'reflector.dart';
-import '../mirrors/special_types.dart';
+import '../mirrors.dart';
+import '../mirrors/mirror_system_impl.dart';
+import '../exceptions.dart';
+
+/// A wrapper for constructor factory functions that provides scanner-style toString()
+class _FactoryWrapper {
+  final Type type;
+  final String constructorName;
+  final MirrorSystemImpl mirrorSystem;
+  final ClassMirror classMirror;
+
+  _FactoryWrapper(this.type, this.constructorName)
+      : mirrorSystem = MirrorSystemImpl.current(),
+        classMirror = MirrorSystemImpl.current().reflectClass(type);
+
+  dynamic noSuchMethod(Invocation invocation) {
+    if (invocation.isMethod && invocation.memberName == #call) {
+      List<dynamic> positionalArgs;
+      Map<Symbol, dynamic> namedArgs;
+
+      // Handle scanner-style call: (List args, [Map namedArgs])
+      if (invocation.positionalArguments.length <= 2 &&
+          invocation.positionalArguments.first is List) {
+        positionalArgs = invocation.positionalArguments[0] as List;
+        namedArgs = invocation.positionalArguments.length > 1
+            ? invocation.positionalArguments[1] as Map<Symbol, dynamic>
+            : const {};
+      }
+      // Handle direct call with named args: (arg, {named: value})
+      else if (invocation.namedArguments.isNotEmpty) {
+        positionalArgs = invocation.positionalArguments;
+        namedArgs = invocation.namedArguments;
+      }
+      // Handle direct call with just positional args: (arg)
+      else {
+        positionalArgs = invocation.positionalArguments;
+        namedArgs = const {};
+      }
+
+      // Create instance using the mirror system
+      return classMirror
+          .newInstance(Symbol(constructorName), positionalArgs, namedArgs)
+          .reflectee;
+    }
+    return super.noSuchMethod(invocation);
+  }
+
+  @override
+  String toString() =>
+      'Closure: (List<dynamic>, [Map<Symbol, dynamic>?]) => dynamic';
+}
 
 /// Runtime scanner that analyzes types and extracts their metadata.
 class Scanner {
@@ -10,12 +60,12 @@ class Scanner {
 
   /// Scans a type and extracts its metadata.
   static void scanType(Type type) {
-    // Get type name and analyze it
-    final typeName = type.toString();
-    final typeInfo = TypeAnalyzer.analyze(type);
+    // First register the type with Reflector
+    Reflector.register(type);
 
-    // Register type for reflection
-    Reflector.registerType(type);
+    // Get mirror system and analyze type
+    final mirrorSystem = MirrorSystemImpl.current();
+    final typeInfo = TypeAnalyzer.analyze(type);
 
     // Register properties
     for (var property in typeInfo.properties) {
@@ -74,39 +124,11 @@ class Scanner {
   /// Creates a constructor factory function for a given type and constructor.
   static Function _createConstructorFactory(
       Type type, ConstructorInfo constructor) {
-    final typeName = type.toString();
-    final typeObj = type as dynamic;
-
-    // Create a factory function that takes a list of positional args and optional named args
-    return (List positionalArgs, [Map<Symbol, dynamic>? namedArgs]) {
-      switch (typeName) {
-        case 'TestClass':
-          if (constructor.name.isEmpty) {
-            final name = positionalArgs[0] as String;
-            final id = namedArgs?[#id] as int;
-            final tags = namedArgs?[#tags] as List<String>? ?? const [];
-            return Function.apply(typeObj, [name], {#id: id, #tags: tags});
-          } else if (constructor.name == 'guest') {
-            return Function.apply(typeObj.guest, [], {});
-          }
-          break;
-
-        case 'GenericTestClass':
-          final value = positionalArgs[0];
-          final items = namedArgs?[#items] ?? const [];
-          return Function.apply(typeObj, [value], {#items: items});
-
-        case 'ParentTestClass':
-          final name = positionalArgs[0] as String;
-          return Function.apply(typeObj, [name], {});
-
-        case 'ChildTestClass':
-          final name = positionalArgs[0] as String;
-          final age = positionalArgs[1] as int;
-          return Function.apply(typeObj, [name, age], {});
-      }
-
-      throw UnsupportedError('Cannot create instance of $typeName');
+    final wrapper = _FactoryWrapper(type, constructor.name);
+    return (List<dynamic> args, [Map<Symbol, dynamic>? namedArgs]) {
+      return wrapper.noSuchMethod(
+        Invocation.method(#call, args, namedArgs ?? {}),
+      );
     };
   }
 }
