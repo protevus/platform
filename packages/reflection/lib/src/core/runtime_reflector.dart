@@ -88,13 +88,21 @@ class RuntimeReflector {
         (key, value) => MapEntry(Symbol(key), value),
       );
 
-      // Call the factory with the arguments spread out
-      if (constructor.parameters.any((p) => p.isNamed)) {
-        // For constructors with named parameters
-        return Function.apply(factory, positionalArgs, namedArgSymbols);
-      } else {
-        // For constructors with only positional parameters
-        return Function.apply(factory, positionalArgs);
+      // Try to determine if this is a scanner-style factory or a direct factory
+      try {
+        // First try scanner-style (List, Map) factory
+        return factory([positionalArgs, namedArgSymbols]);
+      } catch (e) {
+        try {
+          // Then try direct function application
+          return Function.apply(factory, positionalArgs, namedArgSymbols);
+        } catch (e2) {
+          // If both fail, try one more time with just the positional args
+          if (namedArgs.isEmpty) {
+            return Function.apply(factory, positionalArgs);
+          }
+          rethrow;
+        }
       }
     } catch (e) {
       throw ReflectionException('Failed to create instance: $e');
