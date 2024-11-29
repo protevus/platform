@@ -117,12 +117,14 @@ class Scanner {
 
       // Create and register factory function
       final factory = _createConstructorFactory(type, constructor);
-      Reflector.registerConstructorFactory(type, constructor.name, factory);
+      if (factory != null) {
+        Reflector.registerConstructorFactory(type, constructor.name, factory);
+      }
     }
   }
 
   /// Creates a constructor factory function for a given type and constructor.
-  static Function _createConstructorFactory(
+  static Function? _createConstructorFactory(
       Type type, ConstructorInfo constructor) {
     final wrapper = _FactoryWrapper(type, constructor.name);
     return (List<dynamic> args, [Map<Symbol, dynamic>? namedArgs]) {
