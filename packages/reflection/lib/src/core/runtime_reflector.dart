@@ -94,15 +94,14 @@ class RuntimeReflector {
           factoryStr.contains('Map<Symbol');
 
       if (isScannerStyle) {
-        // For scanner-style factory, pass args as a single list argument
-        return factory([positionalArgs, namedArgSymbols]);
+        // For scanner-style factory, pass args as two positional parameters
+        return Function.apply(factory, [positionalArgs, namedArgSymbols]);
       } else {
-        // For direct-style factory, pass args directly
-        if (constructor.parameters.any((p) => p.isNamed)) {
-          return Function.apply(factory, positionalArgs, namedArgSymbols);
-        } else {
-          return Function.apply(factory, positionalArgs);
-        }
+        // For direct-style factory, wrap it to match scanner-style signature
+        final wrappedFactory = (List args, [Map<Symbol, dynamic>? named]) {
+          return Function.apply(factory, args, named);
+        };
+        return wrappedFactory(positionalArgs, namedArgSymbols);
       }
     } catch (e) {
       throw ReflectionException('Failed to create instance: $e');

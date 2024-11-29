@@ -110,15 +110,19 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
     if (this == other) return true;
     if (other is! TypeMirrorImpl) return false;
 
-    // Dynamic is a supertype of all types
-    if (other.type == dynamicType) return true;
+    // Never is a subtype of all types
+    if (type == Never) return true;
+
+    // Dynamic is a supertype of all types except void
+    if (other.type == dynamicType && type != voidType) return true;
+
+    // void is only a subtype of itself
+    if (type == voidType) return other.type == voidType;
 
     // Get type metadata
     final metadata = Reflector.getConstructorMetadata(type);
     if (metadata == null) return false;
 
-    // For now, just handle basic type relationships
-    // TODO: Implement proper type relationship checking
     return false;
   }
 
@@ -126,8 +130,12 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
   bool isAssignableTo(TypeMirror other) {
     // A type T may be assigned to a type S if either:
     // 1. T is a subtype of S, or
-    // 2. S is dynamic
-    if (other is TypeMirrorImpl && other.type == dynamicType) return true;
+    // 2. S is dynamic (except for void)
+    if (other is TypeMirrorImpl &&
+        other.type == dynamicType &&
+        type != voidType) {
+      return true;
+    }
     return isSubtypeOf(other);
   }
 
