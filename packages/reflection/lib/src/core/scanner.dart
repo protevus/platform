@@ -67,46 +67,32 @@ class Scanner {
 
       // Create and register factory function
       final factory = _createConstructorFactory(type, constructor);
-      Reflector.registerConstructorFactory(type, constructor.name, factory);
+      if (factory != null) {
+        Reflector.registerConstructorFactory(type, constructor.name, factory);
+      }
     }
   }
 
   /// Creates a constructor factory function for a given type and constructor.
-  static Function _createConstructorFactory(
+  static Function? _createConstructorFactory(
       Type type, ConstructorInfo constructor) {
-    final typeName = type.toString();
     final typeObj = type as dynamic;
 
     // Create a factory function that takes a list of positional args and optional named args
     return (List positionalArgs, [Map<Symbol, dynamic>? namedArgs]) {
-      switch (typeName) {
-        case 'TestClass':
-          if (constructor.name.isEmpty) {
-            final name = positionalArgs[0] as String;
-            final id = namedArgs?[#id] as int;
-            final tags = namedArgs?[#tags] as List<String>? ?? const [];
-            return Function.apply(typeObj, [name], {#id: id, #tags: tags});
-          } else if (constructor.name == 'guest') {
-            return Function.apply(typeObj.guest, [], {});
-          }
-          break;
-
-        case 'GenericTestClass':
-          final value = positionalArgs[0];
-          final items = namedArgs?[#items] ?? const [];
-          return Function.apply(typeObj, [value], {#items: items});
-
-        case 'ParentTestClass':
-          final name = positionalArgs[0] as String;
-          return Function.apply(typeObj, [name], {});
-
-        case 'ChildTestClass':
-          final name = positionalArgs[0] as String;
-          final age = positionalArgs[1] as int;
-          return Function.apply(typeObj, [name, age], {});
+      try {
+        if (constructor.name.isEmpty) {
+          // For default constructor
+          return Function.apply(typeObj, positionalArgs, namedArgs);
+        } else {
+          // For named constructor
+          final namedConstructor = typeObj[constructor.name];
+          return Function.apply(namedConstructor, positionalArgs, namedArgs);
+        }
+      } catch (e) {
+        print('Warning: Failed to create instance: $e');
+        return null;
       }
-
-      throw UnsupportedError('Cannot create instance of $typeName');
     };
   }
 }

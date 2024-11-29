@@ -61,20 +61,15 @@ class IsolateMirrorImpl implements IsolateMirror {
     if (identical(this, other)) return true;
     if (other is! IsolateMirrorImpl) return false;
 
-    return _debugName == other._debugName &&
-        _isCurrent == other._isCurrent &&
-        _rootLibrary == other._rootLibrary &&
-        _underlyingIsolate == other._underlyingIsolate;
+    // Only compare debug name and isCurrent flag
+    // Two mirrors pointing to the same isolate should be equal
+    return _debugName == other._debugName && _isCurrent == other._isCurrent;
   }
 
   @override
   int get hashCode {
-    return Object.hash(
-      _debugName,
-      _isCurrent,
-      _rootLibrary,
-      _underlyingIsolate,
-    );
+    // Hash code should be consistent with equals
+    return Object.hash(_debugName, _isCurrent);
   }
 
   @override
