@@ -34,77 +34,93 @@ class RuntimeReflector {
   }
 
   /// Creates a new instance of a type using reflection.
-  Object createInstance(
+  dynamic createInstance(
     Type type, {
-    String constructorName = '',
-    List<Object?> positionalArgs = const [],
-    Map<String, Object?> namedArgs = const {},
+    dynamic positionalArgs,
+    Map<String, dynamic>? namedArgs,
+    String? constructorName,
   }) {
-    // Check if type is reflectable
-    if (!Reflector.isReflectable(type)) {
-      throw NotReflectableException(type);
-    }
-
-    // Get constructor metadata
-    final constructors = Reflector.getConstructorMetadata(type);
-    if (constructors == null || constructors.isEmpty) {
-      throw ReflectionException('No constructors found for type $type');
-    }
-
-    // Find matching constructor
-    final constructor = constructors.firstWhere(
-      (c) => c.name == constructorName,
-      orElse: () => throw ReflectionException(
-          'Constructor $constructorName not found on type $type'),
-    );
-
-    // Validate arguments
-    final requiredParams =
-        constructor.parameters.where((p) => p.isRequired && !p.isNamed).length;
-    if (positionalArgs.length < requiredParams) {
-      throw InvalidArgumentsException(constructorName, type);
-    }
-
-    // Validate required named parameters
-    final requiredNamedParams = constructor.parameters
-        .where((p) => p.isRequired && p.isNamed)
-        .map((p) => p.name)
-        .toSet();
-    if (!requiredNamedParams.every(namedArgs.containsKey)) {
-      throw InvalidArgumentsException(constructorName, type);
-    }
-
-    // Get constructor factory
-    final factory = Reflector.getConstructor(type, constructorName);
-    if (factory == null) {
-      throw ReflectionException(
-          'No factory found for constructor $constructorName');
-    }
-
-    // Create instance
     try {
-      // Convert named args to symbols
-      final namedArgSymbols = namedArgs.map(
-        (key, value) => MapEntry(Symbol(key), value),
+      // Check if type is reflectable
+      if (!Reflector.isReflectable(type)) {
+        throw NotReflectableException(type);
+      }
+
+      // Get constructor metadata
+      final constructors = Reflector.getConstructorMetadata(type);
+      if (constructors == null || constructors.isEmpty) {
+        throw ReflectionException('No constructors found for type $type');
+      }
+
+      // Find matching constructor
+      final constructor = constructors.firstWhere(
+        (c) => c.name == (constructorName ?? ''),
+        orElse: () => throw ReflectionException(
+            'Constructor ${constructorName ?? ''} not found on type $type'),
       );
 
-      // Try to determine if this is a scanner-style factory by checking its toString()
-      final factoryStr = factory.toString();
-      final isScannerStyle = factoryStr.contains('List<dynamic>') &&
-          factoryStr.contains('Map<Symbol');
+      // Convert positional args to List if single value provided
+      final args = positionalArgs is List
+          ? positionalArgs
+          : positionalArgs != null
+              ? [positionalArgs]
+              : [];
 
-      if (isScannerStyle) {
-        // For scanner-style factory, pass args as two positional parameters
-        return Function.apply(factory, [positionalArgs, namedArgSymbols]);
-      } else {
-        // For direct-style factory, pass args directly
-        if (namedArgs.isEmpty) {
-          return Function.apply(factory, positionalArgs);
+      // Convert string keys to symbols for named args
+      final symbolNamedArgs =
+          namedArgs?.map((key, value) => MapEntry(Symbol(key), value)) ?? {};
+
+      // Validate arguments
+      final requiredParams = constructor.parameters
+          .where((p) => p.isRequired && !p.isNamed)
+          .length;
+      if (args.length < requiredParams) {
+        throw InvalidArgumentsException(constructorName ?? '', type);
+      }
+
+      // Validate required named parameters
+      final requiredNamedParams = constructor.parameters
+          .where((p) => p.isRequired && p.isNamed)
+          .map((p) => p.name)
+          .toSet();
+      if (requiredNamedParams.isNotEmpty &&
+          !requiredNamedParams
+              .every((param) => namedArgs?.containsKey(param) ?? false)) {
+        throw InvalidArgumentsException(constructorName ?? '', type);
+      }
+
+      // Get constructor factory
+      final factory = Reflector.getConstructor(type, constructorName ?? '');
+      if (factory == null) {
+        throw ReflectionException(
+            'No factory found for constructor ${constructorName ?? ''}');
+      }
+
+      // Create instance
+      try {
+        if (constructor.parameters.any((p) => p.isNamed)) {
+          // For constructors with named parameters
+          return Function.apply(factory, args, symbolNamedArgs);
+        } else if (args.isEmpty) {
+          // For constructors with no parameters
+          return Function.apply(factory, []);
+        } else if (args.length == 1) {
+          // For constructors with a single parameter
+          return Function.apply(factory, args);
         } else {
-          return Function.apply(factory, positionalArgs, namedArgSymbols);
+          // For constructors with multiple parameters
+          return Function.apply(factory, args);
         }
+      } catch (e) {
+        if (e is NoSuchMethodError) {
+          throw InvalidArgumentsException(constructorName ?? '', type);
+        }
+        rethrow;
       }
     } catch (e) {
+      if (e is InvalidArgumentsException) {
+        throw e;
+      }
       throw ReflectionException('Failed to create instance: $e');
     }
   }

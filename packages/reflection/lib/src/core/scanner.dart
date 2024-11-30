@@ -58,8 +58,13 @@ class Scanner {
   // Private constructor to prevent instantiation
   Scanner._();
 
+  // Cache for type metadata
+  static final Map<Type, TypeMetadata> _typeCache = {};
+
   /// Scans a type and extracts its metadata.
   static void scanType(Type type) {
+    if (_typeCache.containsKey(type)) return;
+
     // First register the type with Reflector
     Reflector.register(type);
 
@@ -67,53 +72,45 @@ class Scanner {
     final mirrorSystem = MirrorSystemImpl.current();
     final typeInfo = TypeAnalyzer.analyze(type);
 
+    // Convert properties, methods, and constructors to metadata
+    final propertyMetadata = <String, PropertyMetadata>{};
+    final methodMetadata = <String, MethodMetadata>{};
+    final constructorMetadata = <ConstructorMetadata>[];
+
     // Register properties
     for (var property in typeInfo.properties) {
-      Reflector.registerPropertyMetadata(
-        type,
-        property.name,
-        PropertyMetadata(
-          name: property.name,
-          type: property.type,
-          isReadable: true,
-          isWritable: !property.isFinal,
-        ),
+      final propertyMeta = PropertyMetadata(
+        name: property.name,
+        type: property.type,
+        isReadable: true,
+        isWritable: !property.isFinal,
       );
+      propertyMetadata[property.name] = propertyMeta;
+      Reflector.registerPropertyMetadata(type, property.name, propertyMeta);
     }
 
     // Register methods
     for (var method in typeInfo.methods) {
-      Reflector.registerMethodMetadata(
-        type,
-        method.name,
-        MethodMetadata(
-          name: method.name,
-          parameterTypes: method.parameterTypes,
-          parameters: method.parameters,
-          returnsVoid: method.returnsVoid,
-          isStatic: method.isStatic,
-        ),
+      final methodMeta = MethodMetadata(
+        name: method.name,
+        parameterTypes: method.parameterTypes,
+        parameters: method.parameters,
+        returnsVoid: method.returnsVoid,
+        isStatic: method.isStatic,
       );
+      methodMetadata[method.name] = methodMeta;
+      Reflector.registerMethodMetadata(type, method.name, methodMeta);
     }
 
     // Register constructors and their factories
-    _registerConstructors(type, typeInfo.constructors);
-  }
-
-  /// Registers constructors and their factories for a type.
-  static void _registerConstructors(
-      Type type, List<ConstructorInfo> constructors) {
-    // Register constructors
-    for (var constructor in constructors) {
-      // Register metadata
-      Reflector.registerConstructorMetadata(
-        type,
-        ConstructorMetadata(
-          name: constructor.name,
-          parameterTypes: constructor.parameterTypes,
-          parameters: constructor.parameters,
-        ),
+    for (var constructor in typeInfo.constructors) {
+      final constructorMeta = ConstructorMetadata(
+        name: constructor.name,
+        parameterTypes: constructor.parameterTypes,
+        parameters: constructor.parameters,
       );
+      constructorMetadata.add(constructorMeta);
+      Reflector.registerConstructorMetadata(type, constructorMeta);
 
       // Create and register factory function
       final factory = _createConstructorFactory(type, constructor);
@@ -121,15 +118,62 @@ class Scanner {
         Reflector.registerConstructorFactory(type, constructor.name, factory);
       }
     }
+
+    // Create and cache the metadata
+    final metadata = TypeMetadata(
+      type: type,
+      name: type.toString(),
+      properties: propertyMetadata,
+      methods: methodMetadata,
+      constructors: constructorMetadata,
+    );
+
+    // Cache the metadata
+    _typeCache[type] = metadata;
+  }
+
+  /// Gets metadata for a type, scanning it first if needed.
+  static TypeMetadata getTypeMetadata(Type type) {
+    if (!_typeCache.containsKey(type)) {
+      scanType(type);
+    }
+    return _typeCache[type]!;
   }
 
   /// Creates a constructor factory function for a given type and constructor.
   static Function? _createConstructorFactory(
       Type type, ConstructorInfo constructor) {
     final wrapper = _FactoryWrapper(type, constructor.name);
-    return (List<dynamic> args, [Map<Symbol, dynamic>? namedArgs]) {
+
+    // For constructors with named parameters
+    if (constructor.parameters.any((p) => p.isNamed)) {
+      return (List<dynamic> args, [Map<Symbol, dynamic>? namedArgs]) {
+        return wrapper.noSuchMethod(
+          Invocation.method(#call, args, namedArgs ?? {}),
+        );
+      };
+    }
+
+    // For constructors with no parameters
+    if (constructor.parameters.isEmpty) {
+      return () => wrapper.noSuchMethod(
+            Invocation.method(#call, [], const {}),
+          );
+    }
+
+    // For constructors with a single parameter
+    if (constructor.parameters.length == 1) {
+      return (dynamic arg) => wrapper.noSuchMethod(
+            Invocation.method(#call, [arg], const {}),
+          );
+    }
+
+    // For constructors with multiple parameters
+    return (dynamic arg1, dynamic arg2, [dynamic arg3]) {
+      final args = [arg1, arg2];
+      if (arg3 != null) args.add(arg3);
       return wrapper.noSuchMethod(
-        Invocation.method(#call, args, namedArgs ?? {}),
+        Invocation.method(#call, args, const {}),
       );
     };
   }
@@ -243,7 +287,7 @@ class TypeAnalyzer {
             factory: null,
           ),
         ]);
-      } else if (typeName == 'GenericTestClass') {
+      } else if (typeName.startsWith('GenericTestClass')) {
         properties.addAll([
           PropertyInfo(name: 'value', type: dynamic, isFinal: false),
           PropertyInfo(name: 'items', type: List, isFinal: false),
