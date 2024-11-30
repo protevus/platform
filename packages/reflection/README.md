@@ -1,40 +1,167 @@
 # Platform Reflection
 
-A lightweight, cross-platform reflection system for Dart that provides runtime type introspection and manipulation with an API similar to `dart:mirrors` but without its limitations.
+A powerful cross-platform reflection system for Dart that provides runtime type introspection and manipulation. This implementation offers a carefully balanced approach between functionality and performance, providing reflection capabilities without the limitations of `dart:mirrors`.
+
+## Table of Contents
+
+- [Features](#features)
+- [Architecture](#architecture)
+- [Installation](#installation)
+- [Core Components](#core-components)
+- [Usage Guide](#usage-guide)
+- [Advanced Usage](#advanced-usage)
+- [Performance Considerations](#performance-considerations)
+- [Migration Guide](#migration-guide)
+- [API Reference](#api-reference)
+- [Limitations](#limitations)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Features
 
-- ✅ Works on all platforms (Web, Mobile, Desktop)
+### Core Features
+- ✅ Platform independent reflection system
 - ✅ No dependency on `dart:mirrors`
 - ✅ Pure runtime reflection
-- ✅ No code generation required
-- ✅ No manual registration needed
-- ✅ Complete mirror-based API
-- ✅ Type-safe property access
-- ✅ Method invocation with argument validation
-- ✅ Constructor invocation support
-- ✅ Library and isolate reflection
-- ✅ Full MirrorSystem implementation
+- ✅ Explicit registration for performance
+- ✅ Type-safe operations
 - ✅ Comprehensive error handling
 
-## Installation
+### Reflection Capabilities
+- ✅ Class reflection
+- ✅ Method invocation
+- ✅ Property access/mutation
+- ✅ Constructor invocation
+- ✅ Type introspection
+- ✅ Basic metadata support
+- ✅ Parameter inspection
+- ✅ Type relationship checking
 
-Add this to your package's `pubspec.yaml` file:
+### Performance Features
+- ✅ Optimized metadata storage
+- ✅ Efficient lookup mechanisms
+- ✅ Minimal runtime overhead
+- ✅ Memory-efficient design
+- ✅ Lazy initialization support
+
+## Architecture
+
+### Core Components
+
+```
+platform_reflection/
+├── core/
+│   ├── reflector.dart       # Central reflection management
+│   ├── scanner.dart         # Type scanning and analysis
+│   └── runtime_reflector.dart # Runtime reflection implementation
+├── metadata/
+│   ├── type_metadata.dart    # Type information storage
+│   ├── method_metadata.dart  # Method metadata handling
+│   └── property_metadata.dart # Property metadata handling
+├── mirrors/
+│   ├── class_mirror.dart     # Class reflection implementation
+│   ├── instance_mirror.dart  # Instance reflection handling
+│   └── method_mirror.dart    # Method reflection support
+└── exceptions/
+    └── reflection_exceptions.dart # Error handling
+```
+
+### Design Principles
+
+1. **Explicit Registration**
+   - Clear registration of reflectable types
+   - Controlled reflection surface
+   - Optimized runtime performance
+
+2. **Type Safety**
+   - Strong type checking
+   - Compile-time validations
+   - Runtime type verification
+
+3. **Performance First**
+   - Minimal runtime overhead
+   - Efficient metadata storage
+   - Optimized lookup mechanisms
+
+4. **Platform Independence**
+   - Cross-platform compatibility
+   - No platform-specific dependencies
+   - Consistent behavior
+
+## Installation
 
 ```yaml
 dependencies:
   platform_reflection: ^0.1.0
 ```
 
-## Usage
+## Core Components
 
-### Basic Reflection
+### Reflector
 
-Simply mark your class with `@reflectable`:
+Central management class for reflection operations:
 
 ```dart
-import 'package:platform_reflection/reflection.dart';
+class Reflector {
+  // Type registration
+  static void register(Type type);
+  static void registerProperty(Type type, String name, Type propertyType);
+  static void registerMethod(Type type, String name, List<Type> parameterTypes);
+  static void registerConstructor(Type type, String name, {Function? creator});
+  
+  // Metadata access
+  static TypeMetadata? getTypeMetadata(Type type);
+  static Map<String, PropertyMetadata>? getPropertyMetadata(Type type);
+  static Map<String, MethodMetadata>? getMethodMetadata(Type type);
+  
+  // Utility methods
+  static void reset();
+  static bool isReflectable(Type type);
+}
+```
 
+### Scanner
+
+Automatic metadata extraction and analysis:
+
+```dart
+class Scanner {
+  // Scanning operations
+  static void scanType(Type type);
+  static TypeMetadata getTypeMetadata(Type type);
+  
+  // Analysis methods
+  static TypeInfo analyze(Type type);
+  static List<PropertyInfo> analyzeProperties(Type type);
+  static List<MethodInfo> analyzeMethods(Type type);
+}
+```
+
+### RuntimeReflector
+
+Runtime reflection implementation:
+
+```dart
+class RuntimeReflector {
+  // Instance creation
+  InstanceMirror createInstance(Type type, {
+    List<dynamic>? positionalArgs,
+    Map<Symbol, dynamic>? namedArgs,
+    String? constructorName,
+  });
+  
+  // Reflection operations
+  InstanceMirror reflect(Object object);
+  ClassMirror reflectClass(Type type);
+  TypeMirror reflectType(Type type);
+}
+```
+
+## Usage Guide
+
+### Basic Registration
+
+```dart
 @reflectable
 class User {
   String name;
@@ -48,146 +175,334 @@ class User {
   }
 
   String greet(String greeting) {
-    return '$greeting, $name!';
+    return '$greeting $name!';
+  }
+}
+
+// Register class and members
+void registerUser() {
+  Reflector.register(User);
+  
+  // Register properties
+  Reflector.registerProperty(User, 'name', String);
+  Reflector.registerProperty(User, 'age', int);
+  Reflector.registerProperty(User, 'id', String, isWritable: false);
+  
+  // Register methods
+  Reflector.registerMethod(
+    User,
+    'birthday',
+    [],
+    true,
+    parameterNames: [],
+    isRequired: [],
+  );
+  
+  Reflector.registerMethod(
+    User,
+    'greet',
+    [String],
+    false,
+    parameterNames: ['greeting'],
+    isRequired: [true],
+  );
+  
+  // Register constructor
+  Reflector.registerConstructor(
+    User,
+    '',
+    parameterTypes: [String, int, String],
+    parameterNames: ['name', 'age', 'id'],
+    isRequired: [true, true, true],
+    isNamed: [false, false, true],
+    creator: (String name, int age, {required String id}) => 
+        User(name, age, id: id),
+  );
+}
+```
+
+### Instance Manipulation
+
+```dart
+void manipulateInstance() {
+  final reflector = RuntimeReflector.instance;
+  
+  // Create instance
+  final user = reflector.createInstance(
+    User,
+    positionalArgs: ['John', 30],
+    namedArgs: {const Symbol('id'): '123'},
+  ) as User;
+  
+  // Get mirror
+  final mirror = reflector.reflect(user);
+  
+  // Property access
+  final name = mirror.getField(const Symbol('name')).reflectee as String;
+  final age = mirror.getField(const Symbol('age')).reflectee as int;
+  
+  // Property modification
+  mirror.setField(const Symbol('name'), 'Jane');
+  mirror.setField(const Symbol('age'), 31);
+  
+  // Method invocation
+  mirror.invoke(const Symbol('birthday'), []);
+  final greeting = mirror.invoke(
+    const Symbol('greet'),
+    ['Hello'],
+  ).reflectee as String;
+}
+```
+
+### Type Introspection
+
+```dart
+void inspectType() {
+  final metadata = Reflector.getTypeMetadata(User);
+  
+  // Property inspection
+  for (var property in metadata.properties.values) {
+    print('Property: ${property.name}');
+    print('  Type: ${property.type}');
+    print('  Writable: ${property.isWritable}');
+    print('  Static: ${property.isStatic}');
+  }
+  
+  // Method inspection
+  for (var method in metadata.methods.values) {
+    print('Method: ${method.name}');
+    print('  Return type: ${method.returnType}');
+    print('  Parameters:');
+    for (var param in method.parameters) {
+      print('    ${param.name}: ${param.type}');
+      print('    Required: ${param.isRequired}');
+      print('    Named: ${param.isNamed}');
+    }
+  }
+  
+  // Constructor inspection
+  for (var ctor in metadata.constructors) {
+    print('Constructor: ${ctor.name}');
+    print('  Parameters:');
+    for (var param in ctor.parameters) {
+      print('    ${param.name}: ${param.type}');
+      print('    Required: ${param.isRequired}');
+      print('    Named: ${param.isNamed}');
+    }
   }
 }
 ```
 
-Then use reflection directly:
+### Scanner Usage
 
 ```dart
-// Get the reflector instance
-final reflector = RuntimeReflector.instance;
-
-// Create instance using reflection
-final user = reflector.createInstance(
-  User,
-  positionalArgs: ['John', 30],
-  namedArgs: {'id': '123'},
-) as User;
-
-// Get instance mirror
-final mirror = reflector.reflect(user);
-
-// Access properties
-print(mirror.getField(const Symbol('name')).reflectee); // John
-print(mirror.getField(const Symbol('age')).reflectee); // 30
-
-// Modify properties
-mirror.setField(const Symbol('name'), 'Jane');
-mirror.setField(const Symbol('age'), 25);
-
-// Invoke methods
-mirror.invoke(const Symbol('birthday'), []);
-final greeting = mirror.invoke(const Symbol('greet'), ['Hello']).reflectee;
-print(greeting); // Hello, Jane!
-```
-
-### Type Information
-
-```dart
-// Get mirror system
-final mirrors = reflector.currentMirrorSystem;
-
-// Get type mirror
-final typeMirror = mirrors.reflectType(User);
-
-// Access type information
-print(typeMirror.name); // User
-print(typeMirror.properties); // {name: PropertyMetadata(...), age: PropertyMetadata(...)}
-print(typeMirror.methods); // {birthday: MethodMetadata(...), greet: MethodMetadata(...)}
-
-// Check type relationships
-if (typeMirror.isSubtypeOf(otherType)) {
-  print('User is a subtype');
-}
-
-// Get declarations
-final declarations = typeMirror.declarations;
-for (var member in declarations.values) {
-  if (member is MethodMirror) {
-    print('Method: ${member.simpleName}');
-  } else if (member is VariableMirror) {
-    print('Variable: ${member.simpleName}');
+void useScannerFeatures() {
+  // Scan type
+  Scanner.scanType(User);
+  
+  // Get scanned metadata
+  final metadata = Scanner.getTypeMetadata(User);
+  
+  // Analyze type structure
+  final typeInfo = Scanner.analyze(User);
+  
+  // Property analysis
+  final properties = typeInfo.properties;
+  for (var prop in properties) {
+    print('Property: ${prop.name}');
+    print('  Type: ${prop.type}');
+    print('  Final: ${prop.isFinal}');
   }
-}
-
-// Access special types
-print(mirrors.dynamicType.name); // dynamic
-print(mirrors.voidType.name); // void
-print(mirrors.neverType.name); // Never
-```
-
-### Library Reflection
-
-```dart
-// Get a library
-final library = mirrors.findLibrary(const Symbol('package:myapp/src/models.dart'));
-
-// Access library members
-final declarations = library.declarations;
-for (var decl in declarations.values) {
-  print('Declaration: ${decl.simpleName}');
-}
-
-// Check imports
-for (var dep in library.libraryDependencies) {
-  if (dep.isImport) {
-    print('Imports: ${dep.targetLibrary?.uri}');
+  
+  // Method analysis
+  final methods = typeInfo.methods;
+  for (var method in methods) {
+    print('Method: ${method.name}');
+    print('  Return type: ${method.returnType}');
+    print('  Static: ${method.isStatic}');
+    print('  Parameters: ${method.parameters}');
   }
 }
 ```
 
-### Isolate Reflection
+## Advanced Usage
+
+### Generic Type Handling
 
 ```dart
-// Get current isolate
-final currentIsolate = mirrors.isolate;
-print('Current isolate: ${currentIsolate.debugName}');
+@reflectable
+class Container<T> {
+  T value;
+  Container(this.value);
+}
 
-// Reflect on another isolate
-final isolate = await Isolate.spawn(workerFunction, message);
-final isolateMirror = reflector.reflectIsolate(isolate, 'worker');
-
-// Control isolate
-await isolateMirror.pause();
-await isolateMirror.resume();
-await isolateMirror.kill();
-```
-
-## Error Handling
-
-The package provides specific exceptions for different error cases:
-
-- `NotReflectableException`: Thrown when attempting to reflect on a non-reflectable type
-- `ReflectionException`: Base class for reflection-related errors
-- `InvalidArgumentsException`: Thrown when providing invalid arguments to a method or constructor
-- `MemberNotFoundException`: Thrown when a property or method is not found
-
-```dart
-try {
-  reflect(NonReflectableClass());
-} catch (e) {
-  print(e); // NotReflectableException: Type NonReflectableClass is not reflectable
+void handleGenericType() {
+  Reflector.register(Container);
+  
+  // Register with specific type
+  final stringContainer = reflector.createInstance(
+    Container,
+    positionalArgs: ['Hello'],
+  ) as Container<String>;
+  
+  final mirror = reflector.reflect(stringContainer);
+  final value = mirror.getField(const Symbol('value')).reflectee as String;
 }
 ```
 
-## Design Philosophy
+### Error Handling
 
-This package provides a reflection API that closely mirrors the design of `dart:mirrors` while being:
+```dart
+void demonstrateErrorHandling() {
+  try {
+    // Attempt to reflect unregistered type
+    reflector.reflect(UnregisteredClass());
+  } on NotReflectableException catch (e) {
+    print('Type not registered: $e');
+  }
+  
+  try {
+    // Attempt to access non-existent member
+    final mirror = reflector.reflect(user);
+    mirror.getField(const Symbol('nonexistent'));
+  } on MemberNotFoundException catch (e) {
+    print('Member not found: $e');
+  }
+  
+  try {
+    // Attempt invalid method invocation
+    final mirror = reflector.reflect(user);
+    mirror.invoke(const Symbol('greet'), [42]); // Wrong argument type
+  } on InvalidArgumentsException catch (e) {
+    print('Invalid arguments: $e');
+  }
+}
+```
 
-- Platform independent
-- Lightweight
-- Type-safe
-- Performant
-- Easy to use
+## Performance Considerations
 
-The implementation uses pure Dart runtime scanning to provide reflection capabilities across all platforms without requiring code generation or manual registration.
+### Registration Impact
+
+- Explicit registration adds startup cost
+- Improved runtime performance
+- Reduced memory usage
+- Controlled reflection surface
+
+### Optimization Techniques
+
+1. **Lazy Loading**
+   ```dart
+   // Only register when needed
+   if (Reflector.getTypeMetadata(User) == null) {
+     registerUser();
+   }
+   ```
+
+2. **Metadata Caching**
+   ```dart
+   // Cache metadata access
+   final metadata = Reflector.getTypeMetadata(User);
+   final properties = metadata.properties;
+   final methods = metadata.methods;
+   ```
+
+3. **Instance Reuse**
+   ```dart
+   // Reuse instance mirrors
+   final mirror = reflector.reflect(user);
+   // Store mirror for repeated use
+   ```
+
+### Memory Management
+
+- Metadata storage optimization
+- Instance mirror lifecycle management
+- Cache invalidation strategies
+
+## Migration Guide
+
+### From dart:mirrors
+
+```dart
+// Old dart:mirrors code
+import 'dart:mirrors';
+
+final mirror = reflect(instance);
+final value = mirror.getField(#propertyName).reflectee;
+
+// New platform_reflection code
+import 'package:platform_reflection/reflection.dart';
+
+final mirror = reflector.reflect(instance);
+final value = mirror.getField(const Symbol('propertyName')).reflectee;
+```
+
+### Registration Requirements
+
+```dart
+// Add registration code
+void registerTypes() {
+  Reflector.register(MyClass);
+  Reflector.registerProperty(MyClass, 'property', String);
+  Reflector.registerMethod(MyClass, 'method', [int]);
+}
+```
+
+## API Reference
+
+### Core Classes
+
+- `Reflector`: Central reflection management
+- `Scanner`: Metadata extraction
+- `RuntimeReflector`: Runtime reflection operations
+
+### Mirrors
+
+- `InstanceMirror`: Instance reflection
+- `ClassMirror`: Class reflection
+- `MethodMirror`: Method reflection
+
+### Metadata
+
+- `TypeMetadata`: Type information
+- `PropertyMetadata`: Property information
+- `MethodMetadata`: Method information
+
+### Exceptions
+
+- `NotReflectableException`
+- `ReflectionException`
+- `InvalidArgumentsException`
+- `MemberNotFoundException`
+
+## Limitations
+
+Current Implementation Gaps:
+
+1. **Type System**
+   - Limited generic support
+   - No variance handling
+   - Basic type relationship checking
+
+2. **Reflection Features**
+   - No cross-isolate reflection
+   - No source location tracking
+   - Limited metadata capabilities
+
+3. **Language Features**
+   - No extension method support
+   - No mixin composition
+   - No operator overloading reflection
+
+4. **Advanced Features**
+   - No dynamic proxy generation
+   - No attribute-based reflection
+   - Limited annotation processing
 
 ## Contributing
 
-Contributions are welcome! Please read our [contributing guidelines](CONTRIBUTING.md) before submitting pull requests.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed contribution guidelines.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License - see [LICENSE](LICENSE) for details.
