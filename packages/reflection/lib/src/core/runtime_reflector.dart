@@ -70,11 +70,14 @@ class RuntimeReflector {
       final symbolNamedArgs =
           namedArgs?.map((key, value) => MapEntry(Symbol(key), value)) ?? {};
 
-      // Validate arguments
-      final requiredParams = constructor.parameters
-          .where((p) => p.isRequired && !p.isNamed)
-          .length;
-      if (args.length < requiredParams) {
+      // Extract positional args based on parameter metadata
+      final positionalParams =
+          constructor.parameters.where((p) => !p.isNamed).toList();
+      final finalPositionalArgs = args.take(positionalParams.length).toList();
+
+      // Validate positional arguments
+      if (finalPositionalArgs.length <
+          positionalParams.where((p) => p.isRequired).length) {
         throw InvalidArgumentsException(constructorName ?? '', type);
       }
 
@@ -89,36 +92,14 @@ class RuntimeReflector {
         throw InvalidArgumentsException(constructorName ?? '', type);
       }
 
-      // Get constructor factory
-      final factory = Reflector.getConstructor(type, constructorName ?? '');
-      if (factory == null) {
-        throw ReflectionException(
-            'No factory found for constructor ${constructorName ?? ''}');
-      }
-
-      // Create instance
-      try {
-        if (constructor.parameters.any((p) => p.isNamed)) {
-          // For constructors with named parameters
-          return Function.apply(factory, args, symbolNamedArgs);
-        } else if (args.isEmpty) {
-          // For constructors with no parameters
-          return Function.apply(factory, []);
-        } else if (args.length == 1) {
-          // For constructors with a single parameter
-          return Function.apply(factory, args);
-        } else {
-          // For constructors with multiple parameters
-          return Function.apply(factory, args);
-        }
-      } catch (e) {
-        if (e is NoSuchMethodError) {
-          throw InvalidArgumentsException(constructorName ?? '', type);
-        }
-        rethrow;
-      }
+      // Create instance using mirror system directly
+      final mirror = reflectClass(type);
+      return mirror
+          .newInstance(Symbol(constructorName ?? ''), finalPositionalArgs,
+              symbolNamedArgs)
+          .reflectee;
     } catch (e) {
-      if (e is InvalidArgumentsException) {
+      if (e is InvalidArgumentsException || e is ReflectionException) {
         throw e;
       }
       throw ReflectionException('Failed to create instance: $e');

@@ -15,7 +15,7 @@ class Reflector {
       HashMap<Type, Map<String, MethodMetadata>>();
   static final Map<Type, List<ConstructorMetadata>> _constructorMetadata =
       HashMap<Type, List<ConstructorMetadata>>();
-  static final Map<Type, Map<String, Function>> _constructorFactories =
+  static final Map<Type, Map<String, Function>> _instanceCreators =
       HashMap<Type, Map<String, Function>>();
   static final Set<Type> _reflectableTypes = HashSet<Type>();
 
@@ -26,7 +26,7 @@ class Reflector {
         type, () => HashMap<String, PropertyMetadata>());
     _methodMetadata.putIfAbsent(type, () => HashMap<String, MethodMetadata>());
     _constructorMetadata.putIfAbsent(type, () => []);
-    _constructorFactories.putIfAbsent(type, () => {});
+    _instanceCreators.putIfAbsent(type, () => {});
   }
 
   /// Register this type for reflection.
@@ -93,12 +93,12 @@ class Reflector {
   /// Register a constructor for reflection.
   static void registerConstructor(
     Type type,
-    String name,
-    Function factory, {
+    String name, {
     List<Type>? parameterTypes,
     List<String>? parameterNames,
     List<bool>? isRequired,
     List<bool>? isNamed,
+    Function? creator,
   }) {
     final parameters = <ParameterMetadata>[];
     if (parameterTypes != null) {
@@ -120,7 +120,10 @@ class Reflector {
         parameters: parameters,
       ),
     );
-    registerConstructorFactory(type, name, factory);
+
+    if (creator != null) {
+      _instanceCreators[type]![name] = creator;
+    }
   }
 
   /// Checks if a type is reflectable.
@@ -143,9 +146,9 @@ class Reflector {
     return _constructorMetadata[type];
   }
 
-  /// Gets a constructor factory function.
-  static Function? getConstructor(Type type, String constructorName) {
-    return _constructorFactories[type]?[constructorName];
+  /// Gets an instance creator function.
+  static Function? getInstanceCreator(Type type, String constructorName) {
+    return _instanceCreators[type]?[constructorName];
   }
 
   /// Registers property metadata for a type.
@@ -178,20 +181,13 @@ class Reflector {
     }
   }
 
-  /// Registers a constructor factory function.
-  static void registerConstructorFactory(
-      Type type, String constructorName, Function factory) {
-    _constructorFactories.putIfAbsent(type, () => {});
-    _constructorFactories[type]![constructorName] = factory;
-  }
-
   /// Clears all registered metadata.
   /// This is primarily used for testing.
   static void reset() {
     _propertyMetadata.clear();
     _methodMetadata.clear();
     _constructorMetadata.clear();
-    _constructorFactories.clear();
+    _instanceCreators.clear();
     _reflectableTypes.clear();
   }
 }

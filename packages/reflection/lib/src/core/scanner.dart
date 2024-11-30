@@ -5,54 +5,6 @@ import '../mirrors.dart';
 import '../mirrors/mirror_system_impl.dart';
 import '../exceptions.dart';
 
-/// A wrapper for constructor factory functions that provides scanner-style toString()
-class _FactoryWrapper {
-  final Type type;
-  final String constructorName;
-  final MirrorSystemImpl mirrorSystem;
-  final ClassMirror classMirror;
-
-  _FactoryWrapper(this.type, this.constructorName)
-      : mirrorSystem = MirrorSystemImpl.current(),
-        classMirror = MirrorSystemImpl.current().reflectClass(type);
-
-  dynamic noSuchMethod(Invocation invocation) {
-    if (invocation.isMethod && invocation.memberName == #call) {
-      List<dynamic> positionalArgs;
-      Map<Symbol, dynamic> namedArgs;
-
-      // Handle scanner-style call: (List args, [Map namedArgs])
-      if (invocation.positionalArguments.length <= 2 &&
-          invocation.positionalArguments.first is List) {
-        positionalArgs = invocation.positionalArguments[0] as List;
-        namedArgs = invocation.positionalArguments.length > 1
-            ? invocation.positionalArguments[1] as Map<Symbol, dynamic>
-            : const {};
-      }
-      // Handle direct call with named args: (arg, {named: value})
-      else if (invocation.namedArguments.isNotEmpty) {
-        positionalArgs = invocation.positionalArguments;
-        namedArgs = invocation.namedArguments;
-      }
-      // Handle direct call with just positional args: (arg)
-      else {
-        positionalArgs = invocation.positionalArguments;
-        namedArgs = const {};
-      }
-
-      // Create instance using the mirror system
-      return classMirror
-          .newInstance(Symbol(constructorName), positionalArgs, namedArgs)
-          .reflectee;
-    }
-    return super.noSuchMethod(invocation);
-  }
-
-  @override
-  String toString() =>
-      'Closure: (List<dynamic>, [Map<Symbol, dynamic>?]) => dynamic';
-}
-
 /// Runtime scanner that analyzes types and extracts their metadata.
 class Scanner {
   // Private constructor to prevent instantiation
@@ -102,7 +54,7 @@ class Scanner {
       Reflector.registerMethodMetadata(type, method.name, methodMeta);
     }
 
-    // Register constructors and their factories
+    // Register constructors
     for (var constructor in typeInfo.constructors) {
       final constructorMeta = ConstructorMetadata(
         name: constructor.name,
@@ -111,12 +63,6 @@ class Scanner {
       );
       constructorMetadata.add(constructorMeta);
       Reflector.registerConstructorMetadata(type, constructorMeta);
-
-      // Create and register factory function
-      final factory = _createConstructorFactory(type, constructor);
-      if (factory != null) {
-        Reflector.registerConstructorFactory(type, constructor.name, factory);
-      }
     }
 
     // Create and cache the metadata
@@ -138,44 +84,6 @@ class Scanner {
       scanType(type);
     }
     return _typeCache[type]!;
-  }
-
-  /// Creates a constructor factory function for a given type and constructor.
-  static Function? _createConstructorFactory(
-      Type type, ConstructorInfo constructor) {
-    final wrapper = _FactoryWrapper(type, constructor.name);
-
-    // For constructors with named parameters
-    if (constructor.parameters.any((p) => p.isNamed)) {
-      return (List<dynamic> args, [Map<Symbol, dynamic>? namedArgs]) {
-        return wrapper.noSuchMethod(
-          Invocation.method(#call, args, namedArgs ?? {}),
-        );
-      };
-    }
-
-    // For constructors with no parameters
-    if (constructor.parameters.isEmpty) {
-      return () => wrapper.noSuchMethod(
-            Invocation.method(#call, [], const {}),
-          );
-    }
-
-    // For constructors with a single parameter
-    if (constructor.parameters.length == 1) {
-      return (dynamic arg) => wrapper.noSuchMethod(
-            Invocation.method(#call, [arg], const {}),
-          );
-    }
-
-    // For constructors with multiple parameters
-    return (dynamic arg1, dynamic arg2, [dynamic arg3]) {
-      final args = [arg1, arg2];
-      if (arg3 != null) args.add(arg3);
-      return wrapper.noSuchMethod(
-        Invocation.method(#call, args, const {}),
-      );
-    };
   }
 }
 
@@ -278,13 +186,11 @@ class TypeAnalyzer {
                 isNamed: true,
               ),
             ],
-            factory: null,
           ),
           ConstructorInfo(
             name: 'guest',
             parameterTypes: [],
             parameters: [],
-            factory: null,
           ),
         ]);
       } else if (typeName.startsWith('GenericTestClass')) {
@@ -335,7 +241,6 @@ class TypeAnalyzer {
                 isNamed: true,
               ),
             ],
-            factory: null,
           ),
         );
       } else if (typeName == 'ParentTestClass') {
@@ -365,7 +270,6 @@ class TypeAnalyzer {
                 isNamed: false,
               ),
             ],
-            factory: null,
           ),
         );
       } else if (typeName == 'ChildTestClass') {
@@ -402,7 +306,6 @@ class TypeAnalyzer {
                 isNamed: false,
               ),
             ],
-            factory: null,
           ),
         );
       }
@@ -469,12 +372,10 @@ class ConstructorInfo {
   final String name;
   final List<Type> parameterTypes;
   final List<ParameterMetadata> parameters;
-  final Function? factory;
 
   ConstructorInfo({
     required this.name,
     required this.parameterTypes,
     required this.parameters,
-    this.factory,
   });
 }

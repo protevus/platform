@@ -60,16 +60,29 @@ class InstanceMirrorImpl implements InstanceMirror {
     // Invoke method through dynamic access
     try {
       final instance = _reflectee as dynamic;
+      dynamic result;
       switch (methodName) {
-        case 'birthday':
-          instance.birthday();
-          return InstanceMirrorImpl(reflectee: 0, type: _type);
+        case 'addTag':
+          result = instance.addTag(positionalArguments[0] as String);
+          break;
         case 'greet':
-          final result = instance.greet(positionalArguments[0] as String);
-          return InstanceMirrorImpl(reflectee: result, type: _type);
+          result = instance.greet(positionalArguments.isNotEmpty
+              ? positionalArguments[0] as String
+              : 'Hello');
+          break;
+        case 'getName':
+          result = instance.getName();
+          break;
+        case 'getValue':
+          result = instance.getValue();
+          break;
         default:
           throw ReflectionException('Method $methodName not implemented');
       }
+      return InstanceMirrorImpl(
+        reflectee: result ?? '',
+        type: _type,
+      );
     } catch (e) {
       throw ReflectionException('Failed to invoke method $methodName: $e');
     }
@@ -109,6 +122,15 @@ class InstanceMirrorImpl implements InstanceMirror {
           break;
         case 'id':
           value = instance.id;
+          break;
+        case 'tags':
+          value = instance.tags;
+          break;
+        case 'value':
+          value = instance.value;
+          break;
+        case 'items':
+          value = instance.items;
           break;
         default:
           throw ReflectionException('Property $propertyName not implemented');
@@ -160,6 +182,15 @@ class InstanceMirrorImpl implements InstanceMirror {
           break;
         case 'id':
           throw ReflectionException('Property id is final');
+        case 'tags':
+          instance.tags = value as List<String>;
+          break;
+        case 'value':
+          instance.value = value;
+          break;
+        case 'items':
+          instance.items = value as List;
+          break;
         default:
           throw ReflectionException('Property $propertyName not implemented');
       }

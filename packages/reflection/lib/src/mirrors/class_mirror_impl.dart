@@ -1,172 +1,130 @@
-import 'dart:core';
-import '../mirrors.dart';
-import '../core/reflector.dart';
 import '../metadata.dart';
+import '../mirrors.dart';
 import '../exceptions.dart';
-import '../core/runtime_reflector.dart';
+import '../core/reflector.dart';
 import 'base_mirror.dart';
-import 'type_mirror_impl.dart';
-import 'method_mirror_impl.dart';
-import 'variable_mirror_impl.dart';
-import 'parameter_mirror_impl.dart';
 import 'instance_mirror_impl.dart';
-import 'special_types.dart';
+import 'method_mirror_impl.dart';
+import 'mirror_system_impl.dart';
+import 'type_mirror_impl.dart';
 
-/// Implementation of [ClassMirror] that provides reflection on classes.
+/// Implementation of [ClassMirror].
 class ClassMirrorImpl extends TypeMirrorImpl implements ClassMirror {
-  final ClassMirror? _superclass;
-  final List<ClassMirror> _superinterfaces;
-  final bool _isAbstract;
-  final bool _isEnum;
-  final Map<Symbol, DeclarationMirror> _declarations;
-  final Map<Symbol, MethodMirror> _instanceMembers;
-  final Map<Symbol, MethodMirror> _staticMembers;
+  @override
+  final Map<Symbol, DeclarationMirror> declarations;
+
+  @override
+  final Map<Symbol, MethodMirror> instanceMembers;
+
+  @override
+  final Map<Symbol, MethodMirror> staticMembers;
+
+  @override
+  final bool isAbstract;
+
+  @override
+  final bool isEnum;
+
+  @override
+  final ClassMirror? superclass;
+
+  @override
+  final List<ClassMirror> superinterfaces;
 
   ClassMirrorImpl({
     required Type type,
     required String name,
-    DeclarationMirror? owner,
-    ClassMirror? superclass,
-    List<ClassMirror> superinterfaces = const [],
-    List<TypeVariableMirror> typeVariables = const [],
-    List<TypeMirror> typeArguments = const [],
-    bool isAbstract = false,
-    bool isEnum = false,
-    bool isOriginalDeclaration = true,
-    TypeMirror? originalDeclaration,
-    Map<Symbol, DeclarationMirror> declarations = const {},
-    Map<Symbol, MethodMirror> instanceMembers = const {},
-    Map<Symbol, MethodMirror> staticMembers = const {},
-    List<InstanceMirror> metadata = const [],
-  })  : _superclass = superclass,
-        _superinterfaces = superinterfaces,
-        _isAbstract = isAbstract,
-        _isEnum = isEnum,
-        _declarations = declarations,
-        _instanceMembers = instanceMembers,
-        _staticMembers = staticMembers,
-        super(
+    required DeclarationMirror? owner,
+    required this.declarations,
+    required this.instanceMembers,
+    required this.staticMembers,
+    required List<InstanceMirror> metadata,
+    this.isAbstract = false,
+    this.isEnum = false,
+    this.superclass,
+    this.superinterfaces = const [],
+  }) : super(
           type: type,
           name: name,
           owner: owner,
-          typeVariables: typeVariables,
-          typeArguments: typeArguments,
-          isOriginalDeclaration: isOriginalDeclaration,
-          originalDeclaration: originalDeclaration,
           metadata: metadata,
         );
 
-  @override
-  bool get hasReflectedType => true;
+  /// Converts a Symbol to its string name
+  String _symbolToString(Symbol symbol) {
+    final str = symbol.toString();
+    return str.substring(8, str.length - 2); // Remove "Symbol(" and ")"
+  }
 
   @override
-  Type get reflectedType => type;
-
-  @override
-  Map<String, PropertyMetadata> get properties =>
-      Reflector.getPropertyMetadata(type) ?? {};
-
-  @override
-  Map<String, MethodMetadata> get methods =>
-      Reflector.getMethodMetadata(type) ?? {};
-
-  @override
-  List<ConstructorMetadata> get constructors =>
-      Reflector.getConstructorMetadata(type) ?? [];
-
-  @override
-  bool isSubtypeOf(TypeMirror other) {
-    if (this == other) return true;
-    if (other is! TypeMirrorImpl) return false;
-
-    // Check superclass chain
-    ClassMirror? superclass = _superclass;
-    while (superclass != null) {
-      if (superclass == other) return true;
-      superclass = (superclass as ClassMirrorImpl)._superclass;
+  bool isSubclassOf(ClassMirror other) {
+    var current = this;
+    while (current.superclass != null) {
+      if (current.superclass == other) {
+        return true;
+      }
+      current = current.superclass as ClassMirrorImpl;
     }
-
-    // Check interfaces
-    for (var interface in _superinterfaces) {
-      if (interface == other || interface.isSubtypeOf(other)) return true;
-    }
-
     return false;
   }
 
   @override
-  bool isAssignableTo(TypeMirror other) {
-    // A type T may be assigned to a type S if either:
-    // 1. T is a subtype of S, or
-    // 2. S is dynamic
-    if (other is TypeMirrorImpl && other.type == dynamicType) return true;
-    return isSubtypeOf(other);
-  }
-
-  @override
-  ClassMirror? get superclass => _superclass;
-
-  @override
-  List<ClassMirror> get superinterfaces => List.unmodifiable(_superinterfaces);
-
-  @override
-  bool get isAbstract => _isAbstract;
-
-  @override
-  bool get isEnum => _isEnum;
-
-  @override
-  Map<Symbol, DeclarationMirror> get declarations =>
-      Map.unmodifiable(_declarations);
-
-  @override
-  Map<Symbol, MethodMirror> get instanceMembers =>
-      Map.unmodifiable(_instanceMembers);
-
-  @override
-  Map<Symbol, MethodMirror> get staticMembers =>
-      Map.unmodifiable(_staticMembers);
-
-  @override
   InstanceMirror newInstance(
     Symbol constructorName,
-    List positionalArguments, [
-    Map<Symbol, dynamic> namedArguments = const {},
+    List<dynamic> positionalArguments, [
+    Map<Symbol, dynamic>? namedArguments,
   ]) {
-    // Get constructor metadata
-    final ctors = constructors;
-    if (ctors.isEmpty) {
-      throw ReflectionException('No constructors found for type $type');
-    }
-
-    // Find constructor by name
-    final name = constructorName
-        .toString()
-        .substring(8, constructorName.toString().length - 2);
-    final constructor = ctors.firstWhere(
-      (c) => c.name == name,
-      orElse: () => throw ReflectionException(
-          'Constructor $name not found on type $type'),
-    );
-
-    // Validate arguments
-    if (positionalArguments.length > constructor.parameters.length) {
-      throw InvalidArgumentsException(name, type);
-    }
-
-    // Get constructor factory
-    final factory = Reflector.getConstructor(type, name);
-    if (factory == null) {
-      throw ReflectionException('No factory found for constructor $name');
-    }
-
-    // Create instance
     try {
+      // Get constructor metadata
+      final constructors = Reflector.getConstructorMetadata(type);
+      if (constructors == null || constructors.isEmpty) {
+        throw ReflectionException('No constructors found for type $type');
+      }
+
+      // Find matching constructor
+      final constructorStr = _symbolToString(constructorName);
+      final constructor = constructors.firstWhere(
+        (c) => c.name == constructorStr,
+        orElse: () => throw ReflectionException(
+            'Constructor $constructorStr not found on type $type'),
+      );
+
+      // Validate arguments
+      final positionalParams =
+          constructor.parameters.where((p) => !p.isNamed).toList();
+      if (positionalArguments.length <
+          positionalParams.where((p) => p.isRequired).length) {
+        throw InvalidArgumentsException(constructor.name, type);
+      }
+
+      final requiredNamedParams = constructor.parameters
+          .where((p) => p.isRequired && p.isNamed)
+          .map((p) => p.name)
+          .toSet();
+      if (requiredNamedParams.isNotEmpty &&
+          !requiredNamedParams.every(
+              (param) => namedArguments?.containsKey(Symbol(param)) ?? false)) {
+        throw InvalidArgumentsException(constructor.name, type);
+      }
+
+      // Get instance creator
+      final creator = Reflector.getInstanceCreator(type, constructorStr);
+      if (creator == null) {
+        throw ReflectionException(
+            'No instance creator found for constructor $constructorStr');
+      }
+
+      // Create instance
       final instance = Function.apply(
-        factory,
+        creator,
         positionalArguments,
         namedArguments,
       );
+
+      if (instance == null) {
+        throw ReflectionException(
+            'Failed to create instance: creator returned null');
+      }
 
       return InstanceMirrorImpl(
         reflectee: instance,
@@ -178,44 +136,105 @@ class ClassMirrorImpl extends TypeMirrorImpl implements ClassMirror {
   }
 
   @override
-  bool isSubclassOf(ClassMirror other) {
-    if (this == other) return true;
-    if (other is! ClassMirrorImpl) return false;
+  InstanceMirror invoke(Symbol memberName, List<dynamic> positionalArguments,
+      [Map<Symbol, dynamic>? namedArguments]) {
+    try {
+      // Get method metadata
+      final methods = Reflector.getMethodMetadata(type);
+      if (methods == null ||
+          !methods.containsKey(_symbolToString(memberName))) {
+        throw ReflectionException('Method $memberName not found');
+      }
 
-    // Check superclass chain
-    ClassMirror? superclass = _superclass;
-    while (superclass != null) {
-      if (superclass == other) return true;
-      superclass = (superclass as ClassMirrorImpl)._superclass;
-    }
+      // Get method
+      final method = methods[_symbolToString(memberName)]!;
 
-    return false;
-  }
+      // Validate arguments
+      final positionalParams =
+          method.parameters.where((p) => !p.isNamed).toList();
+      if (positionalArguments.length <
+          positionalParams.where((p) => p.isRequired).length) {
+        throw InvalidArgumentsException(method.name, type);
+      }
 
-  @override
-  InstanceMirror invoke(Symbol memberName, List positionalArguments,
-      [Map<Symbol, dynamic> namedArguments = const {}]) {
-    final method = staticMembers[memberName];
-    if (method == null) {
-      throw NoSuchMethodError.withInvocation(
-        this,
-        Invocation.method(memberName, positionalArguments, namedArguments),
+      final requiredNamedParams = method.parameters
+          .where((p) => p.isRequired && p.isNamed)
+          .map((p) => p.name)
+          .toSet();
+      if (requiredNamedParams.isNotEmpty &&
+          !requiredNamedParams.every(
+              (param) => namedArguments?.containsKey(Symbol(param)) ?? false)) {
+        throw InvalidArgumentsException(method.name, type);
+      }
+
+      // Call method
+      final result = Function.apply(
+        (type as dynamic)[_symbolToString(memberName)],
+        positionalArguments,
+        namedArguments,
       );
-    }
 
-    // TODO: Implement static method invocation
-    throw UnimplementedError();
+      return InstanceMirrorImpl(
+        reflectee: result,
+        type: this,
+      );
+    } catch (e) {
+      throw ReflectionException('Failed to invoke method $memberName: $e');
+    }
   }
 
   @override
   InstanceMirror getField(Symbol fieldName) {
-    // TODO: Implement static field access
-    throw UnimplementedError();
+    final declaration = declarations[fieldName];
+    if (declaration == null) {
+      throw NoSuchMethodError.withInvocation(
+        this,
+        Invocation.getter(fieldName),
+      );
+    }
+
+    try {
+      final value = (type as dynamic)[_symbolToString(fieldName)];
+      return InstanceMirrorImpl(
+        reflectee: value,
+        type: this,
+      );
+    } catch (e) {
+      throw ReflectionException('Failed to get field: $e');
+    }
   }
 
   @override
   InstanceMirror setField(Symbol fieldName, dynamic value) {
-    // TODO: Implement static field modification
-    throw UnimplementedError();
+    final declaration = declarations[fieldName];
+    if (declaration == null) {
+      throw NoSuchMethodError.withInvocation(
+        this,
+        Invocation.setter(fieldName, [value]),
+      );
+    }
+
+    try {
+      (type as dynamic)[_symbolToString(fieldName)] = value;
+      return InstanceMirrorImpl(
+        reflectee: value,
+        type: this,
+      );
+    } catch (e) {
+      throw ReflectionException('Failed to set field: $e');
+    }
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ClassMirrorImpl &&
+          runtimeType == other.runtimeType &&
+          type == other.type;
+
+  @override
+  int get hashCode => type.hashCode;
+
+  @override
+  String toString() => 'ClassMirror on $name';
 }
