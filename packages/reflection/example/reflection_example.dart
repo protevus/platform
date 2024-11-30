@@ -1,35 +1,136 @@
 import 'package:platform_reflection/reflection.dart';
 
+// Custom annotation to demonstrate metadata
+class Validate {
+  final String pattern;
+  const Validate(this.pattern);
+}
+
+// Interface to demonstrate reflection with interfaces
 @reflectable
-class Person {
+abstract class Identifiable {
+  String get id;
+}
+
+// Base class to demonstrate inheritance
+@reflectable
+abstract class Entity implements Identifiable {
+  final String _id;
+
+  Entity(this._id);
+
+  @override
+  String get id => _id;
+
+  @override
+  String toString() => 'Entity($_id)';
+}
+
+// Generic class to demonstrate type parameters
+@reflectable
+class Container<T> {
+  final T value;
+
+  Container(this.value);
+
+  T getValue() => value;
+}
+
+@reflectable
+class User extends Entity {
+  @Validate(r'^[a-zA-Z\s]+$')
   String name;
+
   int age;
 
-  Person(this.name, this.age);
+  final List<String> tags;
 
-  Person.guest()
-      : name = 'Guest',
-        age = 0;
+  User(String id, this.name, this.age, [this.tags = const []]) : super(id) {
+    _userCount++;
+  }
+
+  User.guest() : this('guest', 'Guest User', 0);
+
+  static int _userCount = 0;
+  static int get userCount => _userCount;
 
   String greet([String greeting = 'Hello']) {
     return '$greeting $name!';
   }
 
+  void addTag(String tag) {
+    if (!tags.contains(tag)) {
+      tags.add(tag);
+    }
+  }
+
+  String getName() => name;
+
   @override
-  String toString() => '$name ($age)';
+  String toString() =>
+      'User($id, $name, age: $age)${tags.isNotEmpty ? " [${tags.join(", ")}]" : ""}';
 }
 
-void main() {
-  // Register Person class for reflection
-  Reflector.register(Person);
+void main() async {
+  // Register classes for reflection
+  Reflector.register(Identifiable);
+  Reflector.register(Entity);
+  Reflector.register(User);
+  Reflector.register(Container);
 
-  // Register properties
-  Reflector.registerProperty(Person, 'name', String);
-  Reflector.registerProperty(Person, 'age', int);
+  // Register Container<int> specifically for reflection
+  final container = Container<int>(42);
+  Reflector.register(container.runtimeType);
 
-  // Register methods
+  // Register property metadata directly
+  Reflector.registerPropertyMetadata(
+    User,
+    'name',
+    PropertyMetadata(
+      name: 'name',
+      type: String,
+      isReadable: true,
+      isWritable: true,
+      attributes: [Validate(r'^[a-zA-Z\s]+$')],
+    ),
+  );
+
+  Reflector.registerPropertyMetadata(
+    User,
+    'age',
+    PropertyMetadata(
+      name: 'age',
+      type: int,
+      isReadable: true,
+      isWritable: true,
+    ),
+  );
+
+  Reflector.registerPropertyMetadata(
+    User,
+    'tags',
+    PropertyMetadata(
+      name: 'tags',
+      type: List,
+      isReadable: true,
+      isWritable: false,
+    ),
+  );
+
+  Reflector.registerPropertyMetadata(
+    User,
+    'id',
+    PropertyMetadata(
+      name: 'id',
+      type: String,
+      isReadable: true,
+      isWritable: false,
+    ),
+  );
+
+  // Register User methods
   Reflector.registerMethod(
-    Person,
+    User,
     'greet',
     [String],
     false,
@@ -37,48 +138,147 @@ void main() {
     isRequired: [false],
   );
 
-  // Register constructors
+  Reflector.registerMethod(
+    User,
+    'addTag',
+    [String],
+    true,
+    parameterNames: ['tag'],
+    isRequired: [true],
+  );
+
+  Reflector.registerMethod(
+    User,
+    'getName',
+    [],
+    false,
+  );
+
+  // Register constructors with creators
   Reflector.registerConstructor(
-    Person,
+    User,
     '',
-    parameterTypes: [String, int],
-    parameterNames: ['name', 'age'],
+    parameterTypes: [String, String, int, List],
+    parameterNames: ['id', 'name', 'age', 'tags'],
+    isRequired: [true, true, true, false],
+    creator: (id, name, age, [tags]) => User(
+      id as String,
+      name as String,
+      age as int,
+      tags as List<String>? ?? const [],
+    ),
   );
 
   Reflector.registerConstructor(
-    Person,
+    User,
     'guest',
+    creator: () => User.guest(),
   );
 
   // Create reflector instance
   final reflector = RuntimeReflector.instance;
 
-  // Create Person instance using reflection
-  final person = reflector.createInstance(
-    Person,
-    positionalArgs: ['John', 30],
-  ) as Person;
+  // Demonstrate generic type reflection
+  print('Container value: ${container.getValue()}');
 
-  print(person); // John (30)
+  try {
+    // Create User instance using reflection
+    final user = reflector.createInstance(
+      User,
+      positionalArgs: [
+        'user1',
+        'John Doe',
+        30,
+        ['admin', 'user']
+      ],
+    ) as User;
 
-  // Create guest instance using reflection
-  final guest = reflector.createInstance(
-    Person,
-    constructorName: 'guest',
-  ) as Person;
+    print('\nCreated user: $user');
 
-  print(guest); // Guest (0)
+    // Create guest user using named constructor
+    final guest = reflector.createInstance(
+      User,
+      constructorName: 'guest',
+    ) as User;
 
-  // Get property values
-  final mirror = reflector.reflect(person);
-  print(mirror.getField(const Symbol('name')).reflectee); // John
-  print(mirror.getField(const Symbol('age')).reflectee); // 30
+    print('Created guest: $guest');
 
-  // Set property values
-  mirror.setField(const Symbol('name'), 'Jane');
-  print(person.name); // Jane
+    // Demonstrate property reflection
+    final userMirror = reflector.reflect(user);
 
-  // Invoke methods
-  final greeting = mirror.invoke(const Symbol('greet'), ['Hi']).reflectee;
-  print(greeting); // Hi Jane!
+    // Get property values
+    print('\nProperty values:');
+    print('ID: ${userMirror.getField(const Symbol('id')).reflectee}');
+    print('Name: ${userMirror.getField(const Symbol('name')).reflectee}');
+    print('Age: ${userMirror.getField(const Symbol('age')).reflectee}');
+    print('Tags: ${userMirror.getField(const Symbol('tags')).reflectee}');
+
+    // Try to modify properties
+    userMirror.setField(const Symbol('name'), 'Jane Doe');
+    userMirror.setField(const Symbol('age'), 25);
+    print('\nAfter property changes: $user');
+
+    // Try to modify read-only property (should throw)
+    try {
+      userMirror.setField(const Symbol('id'), 'new_id');
+      print('ERROR: Should not be able to modify read-only property');
+    } catch (e) {
+      print('\nExpected error when modifying read-only property id: $e');
+    }
+
+    // Invoke methods
+    final greeting = userMirror.invoke(const Symbol('greet'), ['Hi']).reflectee;
+    print('\nGreeting: $greeting');
+
+    userMirror.invoke(const Symbol('addTag'), ['vip']);
+    print('After adding tag: $user');
+
+    final name = userMirror.invoke(const Symbol('getName'), []).reflectee;
+    print('Got name: $name');
+
+    // Demonstrate type metadata and relationships
+    final userType = reflector.reflectType(User);
+    print('\nType information:');
+    print('Type name: ${userType.name}');
+
+    // Show available properties
+    final properties = (userType as dynamic).properties;
+    print('\nDeclared properties:');
+    properties.forEach((name, metadata) {
+      print(
+          '- $name: ${metadata.type}${metadata.isWritable ? "" : " (read-only)"}');
+      if (metadata.attributes.isNotEmpty) {
+        metadata.attributes.forEach((attr) {
+          if (attr is Validate) {
+            print('  @Validate(${attr.pattern})');
+          }
+        });
+      }
+    });
+
+    // Show available methods
+    final methods = (userType as dynamic).methods;
+    print('\nDeclared methods:');
+    methods.forEach((name, metadata) {
+      print('- $name');
+    });
+
+    // Show constructors
+    final constructors = (userType as dynamic).constructors;
+    print('\nDeclared constructors:');
+    constructors.forEach((metadata) {
+      print('- ${metadata.name}');
+    });
+
+    // Demonstrate type relationships
+    final identifiableType = reflector.reflectType(Identifiable);
+    print('\nType relationships:');
+    print(
+        'User is assignable to Identifiable: ${userType.isAssignableTo(identifiableType)}');
+    print(
+        'User is subtype of Entity: ${userType.isSubtypeOf(reflector.reflectType(Entity))}');
+  } catch (e) {
+    print('Error: $e');
+    print(e.runtimeType);
+  }
 }
