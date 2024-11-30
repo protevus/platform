@@ -8,12 +8,13 @@ class TestClass {
   List<String> tags;
   static const version = '1.0.0';
 
-  TestClass(this.name, {required this.id, this.tags = const []});
+  TestClass(this.name, {required this.id, List<String>? tags})
+      : tags = List<String>.from(tags ?? []); // Make sure tags is mutable
 
   TestClass.guest()
       : name = 'Guest',
         id = 0,
-        tags = const [];
+        tags = []; // Initialize with empty mutable list
 
   void addTag(String tag) {
     tags.add(tag);
@@ -33,7 +34,8 @@ class GenericTestClass<T> {
   T value;
   List<T> items;
 
-  GenericTestClass(this.value, {this.items = const []});
+  GenericTestClass(this.value, {List<T>? items})
+      : items = List<T>.from(items ?? []); // Make sure items is mutable
 
   void addItem(T item) {
     items.add(item);
@@ -242,7 +244,7 @@ void main() {
         isRequired: [true, true, false],
         isNamed: [false, true, true],
         creator: (String name, {required int id, List<String>? tags}) =>
-            TestClass(name, id: id, tags: tags ?? const []),
+            TestClass(name, id: id, tags: tags),
       );
       Reflector.registerConstructor(
         TestClass,
