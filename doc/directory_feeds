@@ -3,3 +3,11 @@ mirrors.dart
 mirrors.h mirrors.cc
 /home/platform/Devboxes/sdk/runtime/lib
 /home/platform/Devboxes/fake_reflection
+
+
+
+Abstract language agnostic specification in YAML
+/home/platform/Devboxes/api/laravel
+
+PHP reference implementation
+/home/platform/Devboxes/resources/laravel_framework/src/Illuminate
