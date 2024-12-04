@@ -142,4 +142,40 @@ class SupportReflector {
       return false;
     }
   }
+
+  /// Determine if the parameter's type is a backed enum with a string backing type.
+  static bool isParameterBackedEnumWithStringBackingType(
+      ParameterMirror parameter) {
+    final type = parameter.type;
+    if (!type.hasReflectedType) {
+      return false;
+    }
+
+    try {
+      final reflectedType = type.reflectedType;
+
+      // Check if it's registered for reflection
+      if (!Reflector.isReflectable(reflectedType)) {
+        return false;
+      }
+
+      // Get the property metadata
+      final properties = Reflector.getPropertyMetadata(reflectedType);
+      if (properties == null) {
+        return false;
+      }
+
+      // Check if it has a 'name' property of type String
+      // and a 'values' property that returns a List
+      final nameProperty = properties['name'];
+      final valuesProperty = properties['values'];
+
+      return nameProperty != null &&
+          nameProperty.type == String &&
+          valuesProperty != null &&
+          valuesProperty.type.toString().startsWith('List<');
+    } catch (_) {
+      return false;
+    }
+  }
 }

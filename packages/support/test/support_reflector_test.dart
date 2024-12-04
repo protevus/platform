@@ -232,5 +232,62 @@ void main() {
 
       expect(SupportReflector.isParameterSubclassOf(param, 'Object'), isTrue);
     });
+
+    test(
+        'isParameterBackedEnumWithStringBackingType returns true for backed enums',
+        () {
+      final type = TypeMirrorImpl(
+        type: BackedEnum,
+        name: 'BackedEnum',
+        owner: null,
+        metadata: const [],
+      );
+      final param = ParameterMirrorImpl(
+        name: 'param',
+        type: type,
+        owner: testClassMirror,
+      );
+
+      expect(SupportReflector.isParameterBackedEnumWithStringBackingType(param),
+          isTrue);
+    });
+
+    test(
+        'isParameterBackedEnumWithStringBackingType returns false for simple enums',
+        () {
+      final type = TypeMirrorImpl(
+        type: SimpleEnum,
+        name: 'SimpleEnum',
+        owner: null,
+        metadata: const [],
+      );
+      final param = ParameterMirrorImpl(
+        name: 'param',
+        type: type,
+        owner: testClassMirror,
+      );
+
+      expect(SupportReflector.isParameterBackedEnumWithStringBackingType(param),
+          isFalse);
+    });
+
+    test(
+        'isParameterBackedEnumWithStringBackingType returns false for non-enums',
+        () {
+      final type = TypeMirrorImpl(
+        type: String,
+        name: 'String',
+        owner: null,
+        metadata: const [],
+      );
+      final param = ParameterMirrorImpl(
+        name: 'param',
+        type: type,
+        owner: testClassMirror,
+      );
+
+      expect(SupportReflector.isParameterBackedEnumWithStringBackingType(param),
+          isFalse);
+    });
   });
 }
