@@ -1,39 +1,89 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Platform Support
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Core support utilities and helper functions for the framework.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+This package provides fundamental utilities and abstractions used throughout the framework:
 
-## Getting started
+### Fluent Interface
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+The `Fluent` class provides a fluent interface for working with attributes:
+
+```dart
+final user = Fluent({
+  'name': 'John',
+  'age': 30,
+})
+  ..set('email', 'john@example.com')
+  ..set('active', true);
+
+print(user.get('name')); // John
+print(user.toJson()); // {"name":"John","age":30,"email":"john@example.com","active":true}
+```
+
+### Optional Values
+
+The `Optional` class provides safe handling of potentially null values:
+
+```dart
+final value = Optional.of(someNullableValue)
+  .map((val) => val * 2)
+  .get(defaultValue);
+
+// Or with null checks
+final optional = Optional.of(someValue);
+if (optional.isPresent) {
+  optional.ifPresent((value) {
+    // Do something with value
+  });
+}
+```
+
+### Higher Order Tap Proxy
+
+The `HigherOrderTapProxy` class enables method chaining while allowing side effects:
+
+```dart
+final result = HigherOrderTapProxy(someObject)
+  ..someMethod() // Calls method on target
+  ..anotherMethod(); // Method chaining
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+Add this to your `pubspec.yaml`:
 
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  platform_support: ^1.0.0
 ```
 
-## Additional information
+Then import and use:
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+```dart
+import 'package:platform_support/platform_support.dart';
+
+// Use Fluent for attribute handling
+final config = Fluent({
+  'debug': true,
+  'cache': {
+    'driver': 'redis',
+    'ttl': 3600
+  }
+});
+
+// Use Optional for null safety
+final value = Optional.of(config.get('missing'))
+  .map((val) => val * 2)
+  .get('default');
+
+// Use HigherOrderTapProxy for method chaining
+final proxy = HigherOrderTapProxy(someObject)
+  ..doSomething()
+  ..doSomethingElse();
+```
+
+## Features and bugs
+
+Please file feature requests and bugs at the [issue tracker](https://github.com/yourusername/platform/issues).
