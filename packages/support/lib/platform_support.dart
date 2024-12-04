@@ -7,6 +7,7 @@ export 'src/facades/date.dart';
 export 'src/fluent.dart';
 export 'src/higher_order_tap_proxy.dart';
 export 'src/optional.dart';
+export 'src/reflector.dart';
 export 'src/traits/dumpable.dart';
 export 'src/traits/forwards_calls.dart';
 export 'src/traits/tappable.dart';

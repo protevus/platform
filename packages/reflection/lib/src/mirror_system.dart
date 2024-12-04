@@ -1,65 +1,97 @@
 import 'dart:core';
 import 'mirrors.dart';
+import 'mirrors/class_mirror_impl.dart';
+import 'mirrors/instance_mirror_impl.dart';
+import 'mirrors/library_mirror_impl.dart';
+import 'mirrors/type_mirror_impl.dart';
+import 'mirrors/isolate_mirror_impl.dart';
+import 'mirrors/special_types.dart';
 
 /// The default implementation of [MirrorSystem].
 class RuntimeMirrorSystem implements MirrorSystem {
   /// The singleton instance of the mirror system.
   static final instance = RuntimeMirrorSystem._();
 
-  RuntimeMirrorSystem._();
+  RuntimeMirrorSystem._() {
+    _initializeRootLibrary();
+  }
+
+  final Map<Uri, LibraryMirror> _libraries = {};
+  final Map<Type, ClassMirror> _classes = {};
+  final Map<Type, TypeMirror> _types = {};
+  late final LibraryMirror _rootLibrary;
 
   @override
-  Map<Uri, LibraryMirror> get libraries {
-    // TODO: Implement library tracking
-    return {};
-  }
+  Map<Uri, LibraryMirror> get libraries => Map.unmodifiable(_libraries);
 
   @override
   LibraryMirror findLibrary(Symbol libraryName) {
-    // TODO: Implement library lookup
-    throw UnimplementedError();
+    final lib = _libraries.values.firstWhere(
+      (lib) => lib.qualifiedName == libraryName,
+      orElse: () => throw ArgumentError('Library not found: $libraryName'),
+    );
+    return lib;
   }
 
   @override
-  IsolateMirror get isolate {
-    // TODO: Implement isolate mirror
-    throw UnimplementedError();
-  }
+  IsolateMirror get isolate => IsolateMirrorImpl.current(_rootLibrary);
 
   @override
-  TypeMirror get dynamicType {
-    // TODO: Implement dynamic type mirror
-    throw UnimplementedError();
-  }
+  TypeMirror get dynamicType => _getOrCreateTypeMirror(dynamic);
 
   @override
-  TypeMirror get voidType {
-    // TODO: Implement void type mirror
-    throw UnimplementedError();
-  }
+  TypeMirror get voidType => _getOrCreateTypeMirror(VoidType);
 
   @override
-  TypeMirror get neverType {
-    // TODO: Implement never type mirror
-    throw UnimplementedError();
-  }
+  TypeMirror get neverType => _getOrCreateTypeMirror(NeverType);
 
   /// Creates a mirror reflecting [reflectee].
   InstanceMirror reflect(Object reflectee) {
-    // TODO: Implement instance reflection
-    throw UnimplementedError();
+    return InstanceMirrorImpl(
+      reflectee: reflectee,
+      type: reflectClass(reflectee.runtimeType),
+    );
   }
 
   /// Creates a mirror reflecting the class [key].
   ClassMirror reflectClass(Type key) {
-    // TODO: Implement class reflection
-    throw UnimplementedError();
+    return _classes.putIfAbsent(
+      key,
+      () => ClassMirrorImpl(
+        type: key,
+        name: key.toString(),
+        owner: _rootLibrary,
+        declarations: {},
+        instanceMembers: {},
+        staticMembers: {},
+        metadata: [],
+      ),
+    );
   }
 
   /// Creates a mirror reflecting the type [key].
   TypeMirror reflectType(Type key) {
-    // TODO: Implement type reflection
-    throw UnimplementedError();
+    return _getOrCreateTypeMirror(key);
+  }
+
+  TypeMirror _getOrCreateTypeMirror(Type type) {
+    return _types.putIfAbsent(
+      type,
+      () => TypeMirrorImpl(
+        type: type,
+        name: type.toString(),
+        owner: _rootLibrary,
+        metadata: const [],
+      ),
+    );
+  }
+
+  void _initializeRootLibrary() {
+    _rootLibrary = LibraryMirrorImpl.withDeclarations(
+      name: 'dart.core',
+      uri: Uri.parse('dart:core'),
+    );
+    _libraries[_rootLibrary.uri] = _rootLibrary;
   }
 }
 
