@@ -115,9 +115,14 @@ void main() {
 
     test('pads string', () {
       str = Stringable('hello');
-      expect(str.padLeft(6).toString(), equals(' hello'));
-      expect(str.padRight(6).toString(), equals('hello '));
-      expect(str.padBoth(7).toString(), equals(' hello '));
+      var padded = str.padRight(6);
+      expect(padded.toString(), equals('hello '));
+      str = Stringable('hello');
+      padded = str.padLeft(6);
+      expect(padded.toString(), equals(' hello'));
+      str = Stringable('hello');
+      padded = str.padBoth(7);
+      expect(padded.toString(), equals(' hello '));
     });
 
     test('splits string', () {
@@ -162,8 +167,9 @@ void main() {
       expect(str.before(' ').toString(), equals('hello'));
       str = Stringable('hello world');
       expect(str.after(' ').toString(), equals('world'));
-      str = Stringable('hello');
-      expect(str.beforeLast('o').toString(), equals('hell'));
+      str = Stringable('hello world');
+      var beforeLast = Stringable('hello world').beforeLast('o');
+      expect(beforeLast.toString(), equals('hell'));
       str = Stringable('hello world');
       expect(str.afterLast('o').toString(), equals(' world'));
     });
