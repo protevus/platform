@@ -115,8 +115,8 @@ void main() {
 
     test('pads string', () {
       str = Stringable('hello');
-      expect(str.padRight(6).toString(), equals('hello '));
       expect(str.padLeft(6).toString(), equals(' hello'));
+      expect(str.padRight(6).toString(), equals('hello '));
       expect(str.padBoth(7).toString(), equals(' hello '));
     });
 
@@ -162,7 +162,7 @@ void main() {
       expect(str.before(' ').toString(), equals('hello'));
       str = Stringable('hello world');
       expect(str.after(' ').toString(), equals('world'));
-      str = Stringable('hello world');
+      str = Stringable('hello');
       expect(str.beforeLast('o').toString(), equals('hell'));
       str = Stringable('hello world');
       expect(str.afterLast('o').toString(), equals(' world'));

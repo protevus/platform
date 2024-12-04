@@ -269,20 +269,18 @@ class Stringable with Macroable, Conditionable, Dumpable, Tappable {
 
   /// Get the portion of a string before the last occurrence of a given value.
   Stringable beforeLast(String search) {
-    final original = _value;
-    final pos = original.lastIndexOf(search);
+    final pos = _value.lastIndexOf(search);
     if (pos != -1) {
-      _value = original.substring(0, pos);
+      _value = _value.substring(0, pos);
     }
     return this;
   }
 
   /// Get the portion of a string after the last occurrence of a given value.
   Stringable afterLast(String search) {
-    final original = _value;
-    final pos = original.lastIndexOf(search);
+    final pos = _value.lastIndexOf(search);
     if (pos != -1) {
-      _value = original.substring(pos + search.length);
+      _value = _value.substring(pos + search.length);
     }
     return this;
   }
