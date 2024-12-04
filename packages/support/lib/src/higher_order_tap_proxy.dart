@@ -33,26 +33,46 @@ class HigherOrderTapProxy<T extends Object> with Macroable {
       return super.noSuchMethod(invocation);
     } catch (_) {
       // If not a macro, forward to target
-      final mirror = _reflector.reflect(_target) as InstanceMirror;
-
-      // Get method declarations
-      final methods = mirror.type.declarations.values
-          .whereType<MethodMirror>()
-          .where((m) => m.simpleName == invocation.memberName);
-
-      if (methods.isNotEmpty) {
-        // Found matching method, invoke it
-        mirror.invoke(
-          invocation.memberName,
-          invocation.positionalArguments,
-          invocation.namedArguments,
-        );
-        return this;
+      final methods = Reflector.getMethodMetadata(_target.runtimeType);
+      if (methods == null) {
+        throw NoSuchMethodError.withInvocation(_target, invocation);
       }
 
-      // If we get here, method wasn't found
-      throw NoSuchMethodError.withInvocation(_target, invocation);
+      final methodName = _symbolToString(invocation.memberName);
+      if (!methods.containsKey(methodName)) {
+        throw NoSuchMethodError.withInvocation(_target, invocation);
+      }
+
+      // Get method metadata
+      final method = methods[methodName]!;
+
+      // Forward invocation to target
+      try {
+        final result = Function.apply(
+          (_target as dynamic).noSuchMethod,
+          [invocation],
+        );
+
+        // If method returns target or void, return proxy for chaining
+        if (identical(result, _target) || method.returnsVoid) {
+          return this;
+        }
+
+        // Otherwise return actual result
+        return result;
+      } catch (e) {
+        if (e is NoSuchMethodError) {
+          throw NoSuchMethodError.withInvocation(_target, invocation);
+        }
+        rethrow;
+      }
     }
+  }
+
+  /// Converts a Symbol to its string name.
+  String _symbolToString(Symbol symbol) {
+    final str = symbol.toString();
+    return str.substring(8, str.length - 2); // Remove "Symbol(" and ")"
   }
 
   @override
