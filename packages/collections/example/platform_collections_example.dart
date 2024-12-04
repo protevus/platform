@@ -1,4 +1,5 @@
 import 'package:platform_collections/platform_collections.dart';
+import 'package:platform_collections/src/helpers.dart';
 
 void main() {
   // Regular Collection Examples
@@ -8,6 +9,27 @@ void main() {
   print('Average: ${numbers.avg()}');
   print('Max: ${numbers.max()}');
   print('Min: ${numbers.min()}');
+  print('---\n');
+
+  // Collection Operations
+  print('Collection Operations:');
+  print('Contains 3: ${numbers.contains(3)}');
+  print('Contains 6: ${numbers.contains(6)}');
+
+  final other = Collection([4, 5, 6]);
+  print('Diff with [4, 5, 6]: ${numbers.diff(other)}');
+
+  print('Before 3: ${numbers.before(3)}');
+  print('After 3: ${numbers.after(3)}');
+
+  print('Multiplied by 2: ${numbers.multiply(2)}');
+
+  final keys = Collection(['a', 'b', 'c']);
+  final values = Collection([1, 2, 3]);
+  print('Combined: ${keys.combine(values)}');
+
+  print(
+      'Count by even/odd: ${numbers.countBy((n) => n.isEven ? 'even' : 'odd')}');
   print('---\n');
 
   // Transformation Methods
@@ -20,6 +42,72 @@ void main() {
 
   final mapped = numbers.mapItems((n) => n * 2);
   print('Doubled: $mapped');
+
+  print('Split in 2: ${numbers.splitIn(2)}');
+  print(
+      'Split by condition: ${numbers.chunkWhile((curr, next) => curr < next)}');
+  print('---\n');
+
+  // Working with Objects
+  print('Working with Objects:');
+  final users = Collection([
+    {'id': 1, 'name': 'John', 'role': 'admin', 'active': true},
+    {'id': 2, 'name': 'Jane', 'role': 'user', 'active': true},
+    {'id': 3, 'name': 'Bob', 'role': 'admin', 'active': false},
+  ]);
+
+  // Higher Order Messages
+  print('Names: ${users.mapItems((user) => user['name'])}');
+  print('Active users: ${users.filter((user) => user['active'] == true)}');
+  print('Sum of IDs: ${users.mapItems((user) => user['id'] as int).avg()}');
+  print('---\n');
+
+  // Dot Notation Examples
+  print('Dot Notation Examples:');
+  final data = <String, dynamic>{
+    'users': [
+      {
+        'name': 'John',
+        'profile': {'age': 30, 'email': 'john@example.com'},
+        'roles': ['admin', 'user']
+      },
+      {
+        'name': 'Jane',
+        'profile': {'age': 25, 'email': 'jane@example.com'},
+        'roles': ['user']
+      }
+    ],
+    'settings': {'theme': 'dark', 'notifications': true}
+  };
+
+  print('First user name: ${dataGet(data, 'users.0.name')}');
+  print('All user names: ${dataGet(data, 'users.*.name')}');
+  print('First user: ${dataGet(data, 'users.{first}.name')}');
+  print('Last user: ${dataGet(data, 'users.{last}.name')}');
+
+  dataSet(data, 'users.*.verified', true);
+  print('After setting verified: ${dataGet(data, 'users.*.verified')}');
+
+  dataFill(data, 'users.0.country', 'USA');
+  print('After filling country: ${dataGet(data, 'users.0.country')}');
+
+  dataForget(data, 'users.0.roles');
+  print(
+      'After forgetting roles: ${(data['users'] as List)[0].containsKey('roles')}');
+  print('---\n');
+
+  // Helper Functions
+  print('Helper Functions:');
+  print('Head of numbers: ${head(numbers)}');
+  print('Last of numbers: ${last(numbers)}');
+  print('Collected: ${collect([1, 2, 3])}');
+
+  var counter = 0;
+  final factoryResult = value(() {
+    counter++;
+    return counter;
+  });
+  print('Value from factory: $factoryResult');
   print('---\n');
 
   // Lazy Collection Examples
@@ -67,23 +155,21 @@ void main() {
     }
   });
 
-  final evenNumbers =
-      lazyNumbers.filter((n) => n.isEven).take(3); // Take first 3 even numbers
-
+  final evenNumbers = lazyNumbers.filter((n) => n.isEven).take(3);
   print('First 3 even numbers:');
   print(evenNumbers.toList());
   print('---\n');
 
-  // Example 4: Working with Objects
-  print('Working with Objects:');
-  final users = LazyCollection([
+  // Example 4: Working with Objects Lazily
+  print('Working with Objects Lazily:');
+  final lazyUsers = LazyCollection([
     {'id': 1, 'name': 'John', 'role': 'admin'},
     {'id': 2, 'name': 'Jane', 'role': 'user'},
     {'id': 3, 'name': 'Bob', 'role': 'admin'},
     {'id': 4, 'name': 'Alice', 'role': 'user'},
   ]);
 
-  final admins = users
+  final admins = lazyUsers
       .filter((user) => user['role'] == 'admin')
       .mapItems((user) => user['name']);
 
@@ -115,8 +201,8 @@ void main() {
   });
 
   print('Skip 2, take 3 of squares:');
-  final result = sequence.skip(2).take(3);
-  print(result.toList());
+  final skipTakeResult = sequence.skip(2).take(3);
+  print(skipTakeResult.toList());
   print('---\n');
 
   // Example 7: FlatMap Operation
