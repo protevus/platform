@@ -10,3 +10,4 @@ export 'src/optional.dart';
 export 'src/traits/dumpable.dart';
 export 'src/traits/forwards_calls.dart';
 export 'src/traits/tappable.dart';
+export 'src/traits/interacts_with_data.dart';
