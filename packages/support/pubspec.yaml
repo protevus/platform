@@ -13,6 +13,9 @@ dependencies:
   crypto: ^3.0.0
   uuid: ^4.0.0
   intl: ^0.18.0
+  glob: ^2.1.0
+  yaml: ^3.1.2
+  pub_semver: ^2.1.4
   platform_contracts: ^1.0.0
   platform_macroable: ^1.0.0
   platform_reflection: ^1.0.0
