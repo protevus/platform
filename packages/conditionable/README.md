@@ -1,39 +1,165 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Platform Conditionable
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+A Dart implementation of Laravel's Conditionable trait, providing fluent conditional execution with method chaining.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+- Conditional method execution with `when` and `unless`
+- Support for method chaining
+- Cascade notation support with `whenThen` and `unlessThen`
+- Fallback execution with `orElse` handlers
+- Support for both direct values and closure conditions
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
-
 ```dart
-const like = 'sample';
+import 'package:platform_conditionable/platform_conditionable.dart';
+
+// Add the Conditionable mixin to your class
+class YourClass with Conditionable {
+  // Your class implementation
+}
 ```
 
-## Additional information
+### Basic Conditional Execution
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+```dart
+class QueryBuilder with Conditionable {
+  final conditions = <String>[];
+  
+  void addCondition(String condition) {
+    conditions.add(condition);
+  }
+}
+
+final query = QueryBuilder();
+
+// Using when
+query.when(hasStatus, (self, _) {
+  (self as QueryBuilder).addCondition("status = 'active'");
+});
+
+// Using unless
+query.unless(category == null, (self, value) {
+  (self as QueryBuilder).addCondition("category = '$value'");
+});
+```
+
+### Method Chaining with Cascade Notation
+
+```dart
+class Config with Conditionable {
+  bool debugMode = false;
+  List<String> features = [];
+}
+
+final config = Config()
+  ..whenThen(
+    isDevelopment,
+    () => config.features.add('debug-toolbar'),
+  )
+  ..unlessThen(
+    isProduction,
+    () => config.features.add('detailed-logs'),
+  );
+```
+
+### Using Fallback Handlers
+
+```dart
+final result = instance.when(
+  condition,
+  (self, value) => 'Primary result',
+  orElse: (self, value) => 'Fallback result',
+);
+```
+
+### Closure Conditions
+
+```dart
+instance.when(
+  () => someComplexCondition(),
+  (self, value) {
+    // Execute when condition is true
+  },
+);
+```
+
+## Features in Detail
+
+### The `when` Method
+
+Executes a callback if the condition is true:
+
+```dart
+instance.when(condition, (self, value) {
+  // Executed if condition is true
+});
+```
+
+### The `unless` Method
+
+Executes a callback if the condition is false:
+
+```dart
+instance.unless(condition, (self, value) {
+  // Executed if condition is false
+});
+```
+
+### Cascade Notation with `whenThen` and `unlessThen`
+
+For void operations that work well with cascade notation:
+
+```dart
+instance
+  ..whenThen(condition1, () {
+    // Execute if condition1 is true
+  })
+  ..unlessThen(condition2, () {
+    // Execute if condition2 is false
+  });
+```
+
+### Fallback Handling
+
+All methods support fallback execution through `orElse`:
+
+```dart
+instance.when(
+  condition,
+  (self, value) => 'Primary action',
+  orElse: (self, value) => 'Fallback action',
+);
+
+instance.whenThen(
+  condition,
+  () => print('Primary action'),
+  orElse: () => print('Fallback action'),
+);
+```
+
+## Example
+
+See the [example](example/platform_conditionable_example.dart) for a complete demonstration of all features, including:
+
+- Conditional query building
+- Configuration setup
+- Method chaining
+- Fallback handlers
+- Closure conditions
+
+## Important Notes
+
+1. When using callbacks that need to access the instance methods, cast the `self` parameter to your class type:
+   ```dart
+   instance.when(condition, (self, value) {
+     (self as YourClass).someMethod();
+   });
+   ```
+
+2. The `whenThen` and `unlessThen` methods are designed for void operations and work well with cascade notation.
+
+3. Conditions can be either direct values or closures that return a value.
+
+4. All methods return the instance by default if no callback is provided, enabling method chaining.
