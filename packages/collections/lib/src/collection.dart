@@ -4,6 +4,8 @@ import 'package:meta/meta.dart';
 import 'package:platform_contracts/contracts.dart';
 import 'enumerable.dart';
 import 'lazy_collection.dart';
+import 'exceptions/item_not_found_exception.dart';
+import 'exceptions/multiple_items_found_exception.dart';
 
 /// A wrapper around List that provides a fluent interface for working with arrays of data.
 class Collection<T>
@@ -381,7 +383,12 @@ class Collection<T>
   T firstOrFail([bool Function(T element)? predicate]) {
     final item = tryFirst(predicate);
     if (item == null) {
-      throw StateError('No matching items found in collection');
+      throw ItemNotFoundException(
+        null,
+        predicate != null
+            ? 'No matching items found in collection.'
+            : 'Collection is empty.',
+      );
     }
     return item;
   }
@@ -392,11 +399,21 @@ class Collection<T>
     final count = filtered.length;
 
     if (count == 0) {
-      throw StateError('No items found in collection');
+      throw ItemNotFoundException(
+        null,
+        predicate != null
+            ? 'No matching items found in collection.'
+            : 'Collection is empty.',
+      );
     }
 
     if (count > 1) {
-      throw StateError('Multiple items found in collection');
+      throw MultipleItemsFoundException(
+        count,
+        predicate != null
+            ? 'Multiple matching items found in collection.'
+            : 'Multiple items found in collection.',
+      );
     }
 
     return filtered.first;
