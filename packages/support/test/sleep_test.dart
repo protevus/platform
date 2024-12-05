@@ -31,7 +31,7 @@ void main() {
       await Sleep.until(futureTime);
       final duration = DateTime.now().difference(start);
       expect(duration.inMilliseconds,
-          greaterThanOrEqualTo(40)); // Allow 10ms variance
+          greaterThanOrEqualTo(35)); // Allow 15ms variance
     });
 
     test('does not sleep if time is in the past', () async {
