@@ -22,6 +22,7 @@ export 'src/pluralizer.dart';
 export 'src/process_utils.dart';
 export 'src/reflector.dart';
 export 'src/sleep.dart';
+export 'src/timebox.dart';
 
 // String manipulation
 export 'src/str.dart';
