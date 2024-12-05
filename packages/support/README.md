@@ -348,6 +348,53 @@ final result = someObject
   .continueChain();
 ```
 
+### Global Helper Functions
+
+The package provides a comprehensive set of global helper functions for common operations:
+
+```dart
+// Environment helpers
+final debug = env('APP_DEBUG', false);
+final port = env('PORT', 8080);
+
+// Collection helpers
+final collection = collect([1, 2, 3]);
+final value = data('user.name', {'user': {'name': 'John'}});
+
+// String manipulation
+final str = string('hello world');
+final snake = snakeCase('fooBar'); // foo_bar
+final camel = camelCase('foo_bar'); // fooBar
+final studly = studlyCase('foo_bar'); // FooBar
+final slug = slugify('Hello World'); // hello-world
+final random = randomString(16);
+
+// Value handling
+final opt = optional(someValue);
+final result = tap(value, (val) => print(val));
+final className = class_basename(object);
+
+// Execution control
+final once = createOnce();
+once.call(() => print('Executes once'));
+
+final onceable = createOnceable();
+onceable.once('key', () => print('Executes once'));
+
+await sleepFor(Duration(seconds: 1));
+
+// Value conversion
+final str = stringify(someValue);
+
+// State checking
+if (blank(value)) print('Value is empty');
+if (filled(value)) print('Value is not empty');
+
+// Value transformation
+final result = value_of(() => expensiveOperation());
+final output = when(condition, () => 'Yes', orElse: () => 'No');
+```
+
 ## Usage
 
 Add this to your `pubspec.yaml`:
