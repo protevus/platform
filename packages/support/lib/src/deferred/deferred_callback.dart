@@ -55,13 +55,22 @@ class DeferredCallback {
     List<dynamic>? args,
     Map<Symbol, dynamic>? namedArgs,
   ]) async {
-    final arguments = args ?? _arguments;
-    final namedArguments = namedArgs ?? _namedArguments;
-    final result = Function.apply(_callback, arguments, namedArguments);
-    if (result is Future) {
-      return result;
+    try {
+      final arguments = args ?? _arguments;
+      final namedArguments = namedArgs ?? _namedArguments;
+
+      // Handle callbacks with no parameters
+      if (_callback is Function() || _callback is Future<dynamic> Function()) {
+        final result = _callback();
+        return result is Future ? await result : result;
+      }
+
+      // Handle callbacks with parameters
+      final result = Function.apply(_callback, arguments, namedArguments);
+      return result is Future ? await result : result;
+    } catch (e) {
+      rethrow;
     }
-    return Future.value(result);
   }
 
   /// Execute the callback after a delay.
@@ -152,6 +161,10 @@ class DeferredCallback {
     return DeferredCallback(() async {
       if (!executed) {
         executed = true;
+        if (callback is Function()) {
+          final result = callback();
+          return result is Future ? await result : result;
+        }
         final result = Function.apply(callback, const [], const {});
         return result is Future ? await result : result;
       }
@@ -177,21 +190,39 @@ class DeferredCallback {
 
       if (!waiting && leading) {
         waiting = true;
-        final result = Function.apply(callback, const [], const {});
-        if (result is Future) {
-          await result;
-        }
-        completer.complete(result);
-      }
-
-      timer = Timer(duration, () async {
-        if (!leading) {
+        if (callback is Function()) {
+          final result = callback();
+          if (result is Future) {
+            await result;
+          }
+          completer.complete(result);
+        } else {
           final result = Function.apply(callback, const [], const {});
           if (result is Future) {
             await result;
           }
-          if (!completer.isCompleted) {
-            completer.complete(result);
+          completer.complete(result);
+        }
+      }
+
+      timer = Timer(duration, () async {
+        if (!leading) {
+          if (callback is Function()) {
+            final result = callback();
+            if (result is Future) {
+              await result;
+            }
+            if (!completer.isCompleted) {
+              completer.complete(result);
+            }
+          } else {
+            final result = Function.apply(callback, const [], const {});
+            if (result is Future) {
+              await result;
+            }
+            if (!completer.isCompleted) {
+              completer.complete(result);
+            }
           }
         }
         waiting = false;
@@ -214,6 +245,10 @@ class DeferredCallback {
       final now = DateTime.now();
       if (now.difference(lastRun) >= duration) {
         lastRun = now;
+        if (callback is Function()) {
+          final result = callback();
+          return result is Future ? await result : result;
+        }
         final result = Function.apply(callback, const [], const {});
         return result is Future ? await result : result;
       }
@@ -248,23 +283,22 @@ class DeferredCallback {
       }
     }
 
-    return DeferredCallback(
-      (List<dynamic> args, [Map<Symbol, dynamic>? namedArgs]) async {
-        final key = _generateKey(args, namedArgs ?? {});
-        _cleanCache();
+    return DeferredCallback((List<dynamic> args,
+        [Map<Symbol, dynamic>? namedArgs]) async {
+      final key = _generateKey(args, namedArgs ?? {});
+      _cleanCache();
 
-        if (cache.containsKey(key)) {
-          return cache[key]!.value;
-        }
+      if (cache.containsKey(key)) {
+        return cache[key]!.value;
+      }
 
-        final result = Function.apply(callback, args, namedArgs ?? {});
-        final finalResult = result is Future ? await result : result;
-        cache[key] = _CacheEntry(finalResult);
-        keys.add(key);
+      final result = Function.apply(callback, args, namedArgs ?? {});
+      final finalResult = result is Future ? await result : result;
+      cache[key] = _CacheEntry(finalResult);
+      keys.add(key);
 
-        return finalResult;
-      },
-    );
+      return finalResult;
+    });
   }
 }
 

@@ -8,6 +8,8 @@ export 'src/configuration_url_parser.dart';
 export 'src/date_factory.dart';
 export 'src/env.dart';
 export 'src/fluent.dart';
+export 'src/functions.dart';
+export 'src/helpers.dart';
 export 'src/higher_order_tap_proxy.dart';
 export 'src/js.dart';
 export 'src/lottery.dart';
@@ -22,7 +24,6 @@ export 'src/pluralizer.dart';
 export 'src/process_utils.dart';
 export 'src/reflector.dart';
 export 'src/sleep.dart';
-
 export 'src/timebox.dart';
 export 'src/validated_input.dart';
 export 'src/view_error_bag.dart';
@@ -38,6 +39,9 @@ export 'src/facades/date.dart';
 // Deferred functionality
 export 'src/deferred/deferred_callback.dart';
 export 'src/deferred/deferred_callback_collection.dart';
+
+// Process utilities
+export 'src/process/executable_finder.dart';
 
 // Traits
 export 'src/traits/dumpable.dart';
