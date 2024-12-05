@@ -12,6 +12,8 @@ export 'src/higher_order_tap_proxy.dart';
 export 'src/js.dart';
 export 'src/lottery.dart';
 export 'src/message_bag.dart';
+export 'src/multiple_instance_manager.dart';
+export 'src/namespaced_item_resolver.dart';
 export 'src/optional.dart';
 export 'src/reflector.dart';
 

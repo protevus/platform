@@ -6,6 +6,71 @@ Core support utilities and helper functions for the framework.
 
 This package provides fundamental utilities and abstractions used throughout the framework:
 
+### Multiple Instance Management
+
+The `MultipleInstanceManager` class provides a way to manage multiple instances of a class with different configurations:
+
+```dart
+// Define a class that needs multiple instances
+class Database {
+  final String host;
+  final int port;
+  
+  Database({required this.host, required this.port});
+}
+
+// Create a manager with a factory function
+final manager = MultipleInstanceManager<Database>((config) {
+  return Database(
+    host: config['host'] as String,
+    port: config['port'] as int,
+  );
+});
+
+// Configure different instances
+manager.configure({
+  'host': 'localhost',
+  'port': 5432,
+}, 'primary');
+
+manager.configure({
+  'host': 'readonly.db',
+  'port': 5432,
+}, 'readonly');
+
+// Get instances (they're created lazily)
+final primary = manager.instance('primary');
+final readonly = manager.instance('readonly');
+
+// Extend existing configuration
+manager.extend({
+  'timeout': Duration(seconds: 30),
+}, 'primary');
+
+// Check instance/config existence
+if (manager.hasConfiguration('primary')) {
+  final config = manager.getConfiguration('primary');
+  // Use configuration
+}
+
+if (manager.has('primary')) {
+  // Instance has been created
+}
+
+// Reset instances
+manager.reset('primary'); // Keeps configuration
+manager.reset('readonly', preserveConfig: false); // Removes configuration
+
+// Get all instances/configs
+final instances = manager.instances();
+final names = manager.names();
+final configs = manager.configurations();
+
+// Count instances
+print(manager.count); // Number of configurations
+print(manager.instanceCount); // Number of created instances
+```
+
 ### Carbon Date/Time
 
 The `Carbon` class provides an expressive interface for working with dates and times:
@@ -312,6 +377,11 @@ class MyClass with Dumpable, InteractsWithData, Tappable {
     tap((self) => print('Side effect'));
   }
 }
+
+// Manage multiple instances
+final manager = MultipleInstanceManager<Database>((config) {
+  return Database(config);
+});
 ```
 
 ## Features and bugs
