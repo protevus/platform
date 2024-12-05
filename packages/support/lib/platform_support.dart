@@ -14,6 +14,9 @@ export 'src/lottery.dart';
 export 'src/message_bag.dart';
 export 'src/multiple_instance_manager.dart';
 export 'src/namespaced_item_resolver.dart';
+export 'src/number.dart';
+export 'src/once.dart';
+export 'src/onceable.dart';
 export 'src/optional.dart';
 export 'src/reflector.dart';
 
