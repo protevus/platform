@@ -142,16 +142,19 @@ class Timebox {
           throw TimeoutException('Operation timed out', timeout);
         }
 
-        final result = await run(
+        return await run(
           callback,
           timeout: remainingTime,
+          onTimeout: () =>
+              throw TimeoutException('Operation timed out', timeout),
         );
-
-        return result;
       } catch (e) {
         if (e is TimeoutException ||
             (maxAttempts != null && attempts >= maxAttempts)) {
-          rethrow;
+          throw TimeoutException(
+            'Operation timed out after $attempts attempts',
+            timeout,
+          );
         }
 
         // Wait before retrying

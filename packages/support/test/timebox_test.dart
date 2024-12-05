@@ -114,7 +114,7 @@ void main() {
 
     test('retries respect max attempts', () async {
       var attempts = 0;
-      expect(
+      await expectLater(
         () => Timebox.retry(
           () async {
             attempts++;
