@@ -164,14 +164,11 @@ void main() {
     });
 
     test('gets string before and after', () {
-      expect(str.before(' ').toString(), equals('hello'));
-      str = Stringable('hello world');
-      expect(str.after(' ').toString(), equals('world'));
-      str = Stringable('hello world');
-      var beforeLast = Stringable('hello world').beforeLast('o');
-      expect(beforeLast.toString(), equals('hell'));
-      str = Stringable('hello world');
-      expect(str.afterLast('o').toString(), equals(' world'));
+      expect(Stringable('hello world').before(' ').toString(), equals('hello'));
+      expect(Stringable('hello world').after(' ').toString(), equals('world'));
+      expect(Stringable('hello').beforeLast('o').toString(), equals('hell'));
+      expect(
+          Stringable('hello world').afterLast('o').toString(), equals('rld'));
     });
 
     test('checks if string matches pattern', () {

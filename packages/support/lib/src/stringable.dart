@@ -280,7 +280,10 @@ class Stringable with Macroable, Conditionable, Dumpable, Tappable {
   Stringable afterLast(String search) {
     final pos = _value.lastIndexOf(search);
     if (pos != -1) {
-      _value = _value.substring(pos + search.length);
+      final start = pos + search.length;
+      if (start <= _value.length) {
+        _value = _value.substring(start);
+      }
     }
     return this;
   }
