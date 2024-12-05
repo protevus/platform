@@ -18,6 +18,7 @@ export 'src/number.dart';
 export 'src/once.dart';
 export 'src/onceable.dart';
 export 'src/optional.dart';
+export 'src/pluralizer.dart';
 export 'src/reflector.dart';
 
 // String manipulation
