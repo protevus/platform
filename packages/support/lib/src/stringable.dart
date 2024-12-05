@@ -14,6 +14,9 @@ class Stringable with Macroable, Conditionable, Dumpable, Tappable {
   /// Create a new stringable instance.
   Stringable(this._value);
 
+  /// Get the string length.
+  int getLength() => Str.length(_value);
+
   /// Convert the given string to camel case.
   Stringable camel() {
     _value = Str.camel(_value);
@@ -103,9 +106,6 @@ class Stringable with Macroable, Conditionable, Dumpable, Tappable {
 
   /// Determine if a given string contains a given substring.
   bool contains(dynamic needles) => Str.contains(_value, needles);
-
-  /// Return the length of the given string.
-  int length() => Str.length(_value);
 
   /// Limit the number of characters in a string.
   Stringable limit(int limit, [String end = '...']) {
@@ -280,10 +280,7 @@ class Stringable with Macroable, Conditionable, Dumpable, Tappable {
   Stringable afterLast(String search) {
     final pos = _value.lastIndexOf(search);
     if (pos != -1) {
-      final start = pos + search.length;
-      if (start <= _value.length) {
-        _value = _value.substring(start);
-      }
+      _value = _value.substring(pos + search.length);
     }
     return this;
   }

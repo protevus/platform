@@ -88,7 +88,7 @@ void main() {
 
     test('gets string length', () {
       str = Stringable('hello');
-      expect(str.length(), equals(5));
+      expect(str.getLength(), equals(5));
     });
 
     test('limits string length', () {
