@@ -73,13 +73,18 @@ class Sleep with Macroable {
 
   /// Sleep for a random duration between min and max milliseconds.
   static Future<void> random(int min, int max) async {
+    // Normalize input
     if (min < 0) min = 0;
     if (max < min) max = min;
 
-    // Ensure we don't exceed the max
-    final range = (max - min).abs();
-    final duration = min + (range > 0 ? _random.nextInt(range) : 0);
-    await sleep(duration);
+    // Calculate random duration
+    final range = max - min;
+    if (range == 0) {
+      await sleep(min);
+    } else {
+      final duration = min + _random.nextInt(range);
+      await sleep(duration);
+    }
   }
 }
 
