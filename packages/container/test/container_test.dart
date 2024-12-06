@@ -6,22 +6,57 @@ import 'package:mockito/annotations.dart';
 
 import 'container_test.mocks.dart';
 
-@GenerateMocks(
-    [ReflectorContract, ReflectedTypeContract, ReflectedInstanceContract])
+@GenerateMocks([
+  ReflectorContract,
+  ClassMirror,
+  InstanceMirror,
+  MethodMirror,
+  TypeMirror,
+  ParameterMirror
+])
 void main() {
   late IlluminateContainer container;
   late MockReflectorContract reflector;
-  late MockReflectedTypeContract reflectedType;
-  late MockReflectedInstanceContract reflectedInstance;
+  late MockClassMirror classMirror;
+  late MockInstanceMirror instanceMirror;
+  late MockMethodMirror methodMirror;
+  late MockTypeMirror typeMirror;
+  late MockParameterMirror parameterMirror;
 
   setUp(() {
     reflector = MockReflectorContract();
-    reflectedType = MockReflectedTypeContract();
-    reflectedInstance = MockReflectedInstanceContract();
+    classMirror = MockClassMirror();
+    instanceMirror = MockInstanceMirror();
+    methodMirror = MockMethodMirror();
+    typeMirror = MockTypeMirror();
+    parameterMirror = MockParameterMirror();
     container = IlluminateContainer(reflector);
 
     // Setup default reflection behavior
     when(reflector.reflectClass(any)).thenReturn(null);
+    when(reflector.reflect(any)).thenReturn(instanceMirror);
+    when(reflector.reflectType(any)).thenReturn(typeMirror);
+
+    // Setup class mirror behavior
+    when(classMirror.newInstance(any, any, any)).thenReturn(instanceMirror);
+    when(classMirror.instanceMembers)
+        .thenReturn({Symbol('call'): methodMirror});
+
+    // Setup instance mirror behavior
+    when(instanceMirror.type).thenReturn(classMirror);
+    when(instanceMirror.reflectee).thenReturn(null);
+    when(instanceMirror.hasReflectee).thenReturn(true);
+
+    // Setup method mirror behavior
+    when(methodMirror.parameters).thenReturn([parameterMirror]);
+    when(methodMirror.isRegularMethod).thenReturn(true);
+    when(methodMirror.name).thenReturn('call');
+
+    // Setup parameter mirror behavior
+    when(parameterMirror.type).thenReturn(typeMirror);
+
+    // Setup type mirror behavior
+    when(typeMirror.reflectedType).thenReturn(String);
   });
 
   group('Container', () {
@@ -74,10 +109,11 @@ void main() {
     });
 
     test('makeAsync returns Future for async dependency', () async {
-      // Setup mock behavior
-      when(reflector.reflectFutureOf(String)).thenReturn(reflectedType);
-      when(reflectedType.newInstance('', [])).thenReturn(reflectedInstance);
-      when(reflectedInstance.reflectee).thenAnswer((_) => Future.value('test'));
+      // Setup mock behavior for Future creation
+      when(reflector.reflectClass(Future)).thenReturn(classMirror);
+      when(classMirror.newInstance(Symbol.empty, [], any))
+          .thenReturn(instanceMirror);
+      when(instanceMirror.reflectee).thenAnswer((_) => Future.value('test'));
 
       final result = await container.makeAsync<String>();
       expect(result, equals('test'));
@@ -103,6 +139,7 @@ void main() {
     });
 
     test('throws when making unregistered type without reflection', () {
+      when(reflector.reflectClass(any)).thenReturn(null);
       expect(() => container.make<String>(), throwsStateError);
     });
 
@@ -121,6 +158,18 @@ void main() {
       expect(
           () => container.registerNamedSingleton<String>('test.name', 'test2'),
           throwsStateError);
+    });
+
+    test('call method uses reflection for dependency injection', () {
+      // Setup mock behavior for function reflection
+      when(reflector.reflect(any)).thenReturn(instanceMirror);
+      when(instanceMirror.type).thenReturn(classMirror);
+      when(classMirror.instanceMembers)
+          .thenReturn({Symbol('call'): methodMirror});
+
+      container.registerSingleton<String>('test');
+      final result = container.call((String s) => 'Hello $s');
+      expect(result, equals('Hello test'));
     });
   });
 }

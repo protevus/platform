@@ -4,254 +4,172 @@ import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 
-import '../laravel_container_test.mocks.dart';
-import '../stubs.dart';
+import '../container_test.mocks.dart';
 
 @GenerateMocks([
   ReflectorContract,
-  ReflectedClassContract,
-  ReflectedInstanceContract,
-  ReflectedFunctionContract,
-  ReflectedParameterContract,
-  ReflectedTypeContract
+  ClassMirror,
+  InstanceMirror,
+  MethodMirror,
+  TypeMirror,
+  ParameterMirror
 ])
 void main() {
   late IlluminateContainer container;
   late MockReflectorContract reflector;
-  late MockReflectedClassContract reflectedClass;
-  late MockReflectedInstanceContract reflectedInstance;
-  late MockReflectedFunctionContract reflectedFunction;
-  late MockReflectedParameterContract reflectedParameter;
-  late MockReflectedTypeContract reflectedType;
+  late MockClassMirror classMirror;
+  late MockInstanceMirror instanceMirror;
+  late MockMethodMirror methodMirror;
+  late MockTypeMirror typeMirror;
+  late MockParameterMirror parameterMirror;
 
   setUp(() {
     reflector = MockReflectorContract();
-    reflectedClass = MockReflectedClassContract();
-    reflectedInstance = MockReflectedInstanceContract();
-    reflectedFunction = MockReflectedFunctionContract();
-    reflectedParameter = MockReflectedParameterContract();
-    reflectedType = MockReflectedTypeContract();
+    classMirror = MockClassMirror();
+    instanceMirror = MockInstanceMirror();
+    methodMirror = MockMethodMirror();
+    typeMirror = MockTypeMirror();
+    parameterMirror = MockParameterMirror();
     container = IlluminateContainer(reflector);
 
     // Setup default reflection behavior
-    when(reflector.reflectClass(any)).thenReturn(reflectedClass);
-    when(reflectedClass.newInstance('', [])).thenReturn(reflectedInstance);
+    when(reflector.reflectClass(any)).thenReturn(null);
+    when(reflector.reflect(any)).thenReturn(instanceMirror);
+    when(reflector.reflectType(any)).thenReturn(typeMirror);
+
+    // Setup class mirror behavior
+    when(classMirror.newInstance(any, any, any)).thenReturn(instanceMirror);
+    when(classMirror.instanceMembers)
+        .thenReturn({Symbol('call'): methodMirror});
+
+    // Setup instance mirror behavior
+    when(instanceMirror.type).thenReturn(classMirror);
+    when(instanceMirror.reflectee).thenReturn(null);
+    when(instanceMirror.hasReflectee).thenReturn(true);
+
+    // Setup method mirror behavior
+    when(methodMirror.parameters).thenReturn([parameterMirror]);
+    when(methodMirror.isRegularMethod).thenReturn(true);
+    when(methodMirror.name).thenReturn('call');
+
+    // Setup parameter mirror behavior
+    when(parameterMirror.type).thenReturn(typeMirror);
+
+    // Setup type mirror behavior
+    when(typeMirror.reflectedType).thenReturn(String);
   });
 
-  group('Container Basic Resolution', () {
-    test('testClosureResolution', () {
-      container.bind<String>((c) => 'Taylor');
-      expect(container.make<String>(), equals('Taylor'));
+  group('Container', () {
+    test('isRoot returns true for root container', () {
+      expect(container.isRoot, isTrue);
     });
 
-    test('testBindIfDoesntRegisterIfServiceAlreadyRegistered', () {
-      container.bind<String>((c) => 'Taylor');
-      container.bindIf<String>((c) => 'Dayle');
-      expect(container.make<String>(), equals('Taylor'));
+    test('isRoot returns false for child container', () {
+      final child = container.createChild();
+      expect(child.isRoot, isFalse);
     });
 
-    test('testBindIfDoesRegisterIfServiceNotRegisteredYet', () {
-      container.bindIf<String>((c) => 'Dayle');
-      expect(container.make<String>(), equals('Dayle'));
+    test('has returns true for registered singleton', () {
+      container.registerSingleton<String>('test');
+      expect(container.has<String>(), isTrue);
     });
 
-    test('testAutoConcreteResolution', () {
-      final instance = ContainerConcreteStub();
-      when(reflectedInstance.reflectee).thenReturn(instance);
-      expect(container.make<ContainerConcreteStub>(),
-          isA<ContainerConcreteStub>());
-    });
-  });
-
-  group('Container Singleton', () {
-    test('testSharedClosureResolution', () {
-      container
-          .singleton<ContainerConcreteStub>((c) => ContainerConcreteStub());
-      final first = container.make<ContainerConcreteStub>();
-      final second = container.make<ContainerConcreteStub>();
-      expect(identical(first, second), isTrue);
+    test('has returns true for registered factory', () {
+      container.registerFactory<String>((c) => 'test');
+      expect(container.has<String>(), isTrue);
     });
 
-    test('testSingletonIfDoesntRegisterIfBindingAlreadyRegistered', () {
-      container
-          .singleton<ContainerConcreteStub>((c) => ContainerConcreteStub());
-      final first = container.make<ContainerConcreteStub>();
-      container
-          .singletonIf<ContainerConcreteStub>((c) => ContainerConcreteStub());
-      final second = container.make<ContainerConcreteStub>();
-      expect(identical(first, second), isTrue);
+    test('has returns true for registered lazy singleton', () {
+      container.registerLazySingleton<String>((c) => 'test');
+      expect(container.has<String>(), isTrue);
     });
 
-    test('testSingletonIfDoesRegisterIfBindingNotRegisteredYet', () {
-      container
-          .singletonIf<ContainerConcreteStub>((c) => ContainerConcreteStub());
-      final first = container.make<ContainerConcreteStub>();
-      final second = container.make<ContainerConcreteStub>();
-      expect(identical(first, second), isTrue);
+    test('hasNamed returns true for registered named singleton', () {
+      container.registerNamedSingleton<String>('test.name', 'test');
+      expect(container.hasNamed('test.name'), isTrue);
     });
 
-    test('testBindingAnInstanceAsShared', () {
-      final instance = ContainerConcreteStub();
-      container.instance<ContainerConcreteStub>(instance);
+    test('make returns singleton instance', () {
+      container.registerSingleton<String>('test');
+      expect(container.make<String>(), equals('test'));
+    });
+
+    test('make creates new instance for factory', () {
+      var count = 0;
+      container.registerFactory<String>((c) => 'test${count++}');
+      expect(container.make<String>(), equals('test0'));
+      expect(container.make<String>(), equals('test1'));
+    });
+
+    test('make returns same instance for lazy singleton', () {
+      var count = 0;
+      container.registerLazySingleton<String>((c) => 'test${count++}');
+      expect(container.make<String>(), equals('test0'));
+      expect(container.make<String>(), equals('test0'));
+    });
+
+    test('makeAsync returns Future for async dependency', () async {
+      // Setup mock behavior for Future creation
+      when(reflector.reflectClass(Future)).thenReturn(classMirror);
+      when(classMirror.newInstance(Symbol.empty, [], any))
+          .thenReturn(instanceMirror);
+      when(instanceMirror.reflectee).thenAnswer((_) => Future.value('test'));
+
+      final result = await container.makeAsync<String>();
+      expect(result, equals('test'));
+    });
+
+    test('findByName returns named singleton', () {
+      container.registerNamedSingleton<String>('test.name', 'test');
+      expect(container.findByName<String>('test.name'), equals('test'));
+    });
+
+    test('child container inherits parent bindings', () {
+      container.registerSingleton<String>('test');
+      final child = container.createChild();
+      expect(child.make<String>(), equals('test'));
+    });
+
+    test('child container can override parent bindings', () {
+      container.registerSingleton<String>('parent');
+      final child = container.createChild() as IlluminateContainer;
+      child.registerSingleton<String>('child');
+      expect(child.make<String>(), equals('child'));
+      expect(container.make<String>(), equals('parent'));
+    });
+
+    test('throws when making unregistered type without reflection', () {
+      when(reflector.reflectClass(any)).thenReturn(null);
+      expect(() => container.make<String>(), throwsStateError);
+    });
+
+    test('throws when making named singleton that does not exist', () {
+      expect(() => container.findByName<String>('missing'), throwsStateError);
+    });
+
+    test('throws when registering duplicate singleton', () {
+      container.registerSingleton<String>('test');
       expect(
-          identical(container.make<ContainerConcreteStub>(), instance), isTrue);
-    });
-  });
-
-  group('Container Scoped', () {
-    test('testScopedClosureResolution', () {
-      container.scoped<ContainerConcreteStub>((c) => ContainerConcreteStub());
-      final first = container.make<ContainerConcreteStub>();
-      final second = container.make<ContainerConcreteStub>();
-      expect(identical(first, second), isTrue);
-
-      container.forgetScopedInstances();
-      final third = container.make<ContainerConcreteStub>();
-      expect(identical(second, third), isFalse);
+          () => container.registerSingleton<String>('test2'), throwsStateError);
     });
 
-    test('testScopedIfDoesntRegisterIfBindingAlreadyRegistered', () {
-      container.scoped<ContainerConcreteStub>((c) => ContainerConcreteStub());
-      final first = container.make<ContainerConcreteStub>();
-      container.scopedIf<ContainerConcreteStub>((c) => ContainerConcreteStub());
-      final second = container.make<ContainerConcreteStub>();
-      expect(identical(first, second), isTrue);
-    });
-
-    test('testScopedIfDoesRegisterIfBindingNotRegisteredYet', () {
-      container.scopedIf<ContainerConcreteStub>((c) => ContainerConcreteStub());
-      final first = container.make<ContainerConcreteStub>();
-      final second = container.make<ContainerConcreteStub>();
-      expect(identical(first, second), isTrue);
-    });
-  });
-
-  group('Container Dependencies', () {
-    test('testAbstractToConcreteResolution', () {
-      final impl = ContainerImplementationStub();
-      final dependent = ContainerDependentStub(impl);
-      when(reflectedInstance.reflectee).thenReturn(dependent);
-
-      container
-          .bind<IContainerContractStub>((c) => ContainerImplementationStub());
-      final instance = container.make<ContainerDependentStub>();
-      expect(instance.impl, isA<ContainerImplementationStub>());
-    });
-
-    test('testNestedDependencyResolution', () {
-      final impl = ContainerImplementationStub();
-      final dependent = ContainerDependentStub(impl);
-      final nested = ContainerNestedDependentStub(dependent);
-      when(reflectedInstance.reflectee).thenReturn(nested);
-
-      container
-          .bind<IContainerContractStub>((c) => ContainerImplementationStub());
-      final instance = container.make<ContainerNestedDependentStub>();
-      expect(instance.inner, isA<ContainerDependentStub>());
-      expect(instance.inner.impl, isA<ContainerImplementationStub>());
-    });
-
-    test('testContainerIsPassedToResolvers', () {
-      container.bind<ContainerContract>((c) => c);
-      final resolved = container.make<ContainerContract>();
-      expect(identical(resolved, container), isTrue);
-    });
-  });
-
-  group('Container Aliases', () {
-    test('testAliases', () {
-      final impl = ContainerImplementationStub('bar');
-      when(reflectedInstance.reflectee).thenReturn(impl);
-
-      container.bind<IContainerContractStub>((c) => impl);
-      container.alias(IContainerContractStub, ContainerImplementationStub);
-
+    test('throws when registering duplicate named singleton', () {
+      container.registerNamedSingleton<String>('test.name', 'test');
       expect(
-          container.make<IContainerContractStub>().getValue(), equals('bar'));
-      expect(container.make<ContainerImplementationStub>().getValue(),
-          equals('bar'));
-      expect(container.isAlias('ContainerImplementationStub'), isTrue);
+          () => container.registerNamedSingleton<String>('test.name', 'test2'),
+          throwsStateError);
     });
 
-    test('testAliasesWithArrayOfParameters', () {
-      final impl = ContainerImplementationStub('foo');
-      when(reflectedInstance.reflectee).thenReturn(impl);
+    test('call method uses reflection for dependency injection', () {
+      // Setup mock behavior for function reflection
+      when(reflector.reflect(any)).thenReturn(instanceMirror);
+      when(instanceMirror.type).thenReturn(classMirror);
+      when(classMirror.instanceMembers)
+          .thenReturn({Symbol('call'): methodMirror});
 
-      container.bind<IContainerContractStub>((c) => impl);
-      container.alias(IContainerContractStub, ContainerImplementationStub);
-
-      expect(
-          container.make<IContainerContractStub>().getValue(), equals('foo'));
-      expect(container.make<ContainerImplementationStub>().getValue(),
-          equals('foo'));
-    });
-
-    test('testGetAliasRecursive', () {
-      final impl = ContainerImplementationStub('foo');
-      when(reflectedInstance.reflectee).thenReturn(impl);
-
-      // Bind the implementation to the interface
-      container.bind<IContainerContractStub>((c) => impl);
-
-      // Create alias chain in reverse order
-      container.alias(ContainerImplementationStub, StubAlias);
-      container.alias(IContainerContractStub, ContainerImplementationStub);
-
-      // Verify immediate aliases
-      expect(
-          container.getAlias(StubAlias), equals(ContainerImplementationStub));
-      expect(container.getAlias(ContainerImplementationStub),
-          equals(IContainerContractStub));
-
-      // Verify instance resolution through alias chain
-      final instance = container.make<IContainerContractStub>();
-      expect(instance.getValue(), equals('foo'));
-    });
-  });
-
-  group('Container State', () {
-    test('testBindingsCanBeOverridden', () {
-      container.bind<String>((c) => 'bar');
-      container.bind<String>((c) => 'baz');
-      expect(container.make<String>(), equals('baz'));
-    });
-
-    test('testContainerFlushFlushesAllBindingsAliasesAndResolvedInstances', () {
-      container
-          .bind<IContainerContractStub>((c) => ContainerImplementationStub());
-      container.bind<ContainerConcreteStub>((c) => ContainerConcreteStub());
-      container.tag([ContainerConcreteStub], 'services');
-      container.alias(IContainerContractStub, ContainerImplementationStub);
-
-      expect(container.has<IContainerContractStub>(), isTrue);
-      expect(container.has<ContainerConcreteStub>(), isTrue);
-      expect(container.isAlias('ContainerImplementationStub'), isTrue);
-
-      container.flush();
-
-      expect(container.has<IContainerContractStub>(), isFalse);
-      expect(container.has<ContainerConcreteStub>(), isFalse);
-      expect(container.isAlias('ContainerImplementationStub'), isFalse);
-    });
-
-    test('testForgetInstanceForgetsInstance', () {
-      final instance = ContainerConcreteStub();
-      container.instance<ContainerConcreteStub>(instance);
-      expect(container.has<ContainerConcreteStub>(), isTrue);
-      container.forgetInstance(ContainerConcreteStub);
-      expect(container.has<ContainerConcreteStub>(), isFalse);
-    });
-
-    test('testForgetInstancesForgetsAllInstances', () {
-      final instance1 = ContainerConcreteStub();
-      final instance2 = ContainerImplementationStub();
-      container.instance<ContainerConcreteStub>(instance1);
-      container.instance<ContainerImplementationStub>(instance2);
-      expect(container.has<ContainerConcreteStub>(), isTrue);
-      expect(container.has<ContainerImplementationStub>(), isTrue);
-      container.forgetInstances();
-      expect(container.has<ContainerConcreteStub>(), isFalse);
-      expect(container.has<ContainerImplementationStub>(), isFalse);
+      container.registerSingleton<String>('test');
+      final result = container.call((String s) => 'Hello $s');
+      expect(result, equals('Hello test'));
     });
   });
 }

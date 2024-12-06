@@ -99,13 +99,17 @@ class IlluminateContainer implements ContainerContract {
 
   @override
   dynamic call(Function callback, [List<dynamic> parameters = const []]) {
-    final reflected = reflector.reflectFunction(callback);
+    final reflected = _reflector.reflect(callback);
     if (reflected == null) {
-      Function.apply(callback, parameters);
-      return null;
+      return Function.apply(callback, parameters);
     }
 
-    final injectedParams = reflected.parameters.map((param) {
+    final method = reflected.type.instanceMembers.values.firstWhere(
+      (m) => m.isRegularMethod && m.name == 'call',
+      orElse: () => throw StateError('Could not find call method'),
+    );
+
+    final injectedParams = method.parameters.map((param) {
       if (parameters.isNotEmpty) {
         return parameters.removeAt(0);
       }
@@ -222,13 +226,13 @@ class IlluminateContainer implements ContainerContract {
     }
 
     // Try to create instance via reflection
-    final reflected = reflector.reflectClass(concrete);
+    final reflected = _reflector.reflectClass(concrete);
     if (reflected == null) {
       throw StateError('Could not reflect type $concrete');
     }
 
     try {
-      final instance = reflected.newInstance('', []).reflectee as T;
+      final instance = reflected.newInstance(Symbol.empty, []).reflectee as T;
       // Apply extenders to reflected instance
       final extenders = getExtenders(concrete);
       for (var extender in extenders) {
@@ -266,12 +270,15 @@ class IlluminateContainer implements ContainerContract {
       }
       return Future<T>.value(instance);
     } catch (e) {
-      final futureType = reflector.reflectFutureOf(type ?? T);
-      final instance = futureType.newInstance('', []);
-      if (instance.reflectee is Future<T>) {
-        return instance.reflectee as Future<T>;
+      // Create a Future<T> instance
+      final futureClass = _reflector.reflectClass(Future);
+      if (futureClass == null) {
+        throw StateError('Could not reflect Future type');
       }
-      throw StateError('Failed to create Future<$T>: Invalid instance type');
+
+      final instance =
+          futureClass.newInstance(Symbol.empty, []).reflectee as Future<T>;
+      return instance;
     }
   }
 

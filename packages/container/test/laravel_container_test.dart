@@ -24,33 +24,55 @@ class Client {
 
 @GenerateMocks([
   ReflectorContract,
-  ReflectedClassContract,
-  ReflectedInstanceContract,
-  ReflectedFunctionContract,
-  ReflectedParameterContract,
-  ReflectedTypeContract
+  ClassMirror,
+  InstanceMirror,
+  MethodMirror,
+  TypeMirror,
+  ParameterMirror
 ])
 void main() {
   late IlluminateContainer container;
   late MockReflectorContract reflector;
-  late MockReflectedClassContract reflectedClass;
-  late MockReflectedInstanceContract reflectedInstance;
-  late MockReflectedFunctionContract reflectedFunction;
-  late MockReflectedParameterContract reflectedParameter;
-  late MockReflectedTypeContract reflectedType;
+  late MockClassMirror classMirror;
+  late MockInstanceMirror instanceMirror;
+  late MockMethodMirror methodMirror;
+  late MockTypeMirror typeMirror;
+  late MockParameterMirror parameterMirror;
 
   setUp(() {
     reflector = MockReflectorContract();
-    reflectedClass = MockReflectedClassContract();
-    reflectedInstance = MockReflectedInstanceContract();
-    reflectedFunction = MockReflectedFunctionContract();
-    reflectedParameter = MockReflectedParameterContract();
-    reflectedType = MockReflectedTypeContract();
+    classMirror = MockClassMirror();
+    instanceMirror = MockInstanceMirror();
+    methodMirror = MockMethodMirror();
+    typeMirror = MockTypeMirror();
+    parameterMirror = MockParameterMirror();
     container = IlluminateContainer(reflector);
 
     // Setup default reflection behavior
     when(reflector.reflectClass(any)).thenReturn(null);
-    when(reflector.reflectFunction(any)).thenReturn(null);
+    when(reflector.reflect(any)).thenReturn(instanceMirror);
+    when(reflector.reflectType(any)).thenReturn(typeMirror);
+
+    // Setup class mirror behavior
+    when(classMirror.newInstance(any, any, any)).thenReturn(instanceMirror);
+    when(classMirror.instanceMembers)
+        .thenReturn({Symbol('call'): methodMirror});
+
+    // Setup instance mirror behavior
+    when(instanceMirror.type).thenReturn(classMirror);
+    when(instanceMirror.reflectee).thenReturn(null);
+    when(instanceMirror.hasReflectee).thenReturn(true);
+
+    // Setup method mirror behavior
+    when(methodMirror.parameters).thenReturn([parameterMirror]);
+    when(methodMirror.isRegularMethod).thenReturn(true);
+    when(methodMirror.name).thenReturn('call');
+
+    // Setup parameter mirror behavior
+    when(parameterMirror.type).thenReturn(typeMirror);
+
+    // Setup type mirror behavior
+    when(typeMirror.reflectedType).thenReturn(Service);
   });
 
   group('Laravel Container', () {
@@ -59,9 +81,10 @@ void main() {
       container.when(Client).needs<Service>().give(SpecialService());
 
       // Then the contextual binding should be used
-      when(reflector.reflectClass(Client)).thenReturn(reflectedClass);
-      when(reflectedClass.newInstance('', [])).thenReturn(reflectedInstance);
-      when(reflectedInstance.reflectee).thenReturn(Client(SpecialService()));
+      when(reflector.reflectClass(Client)).thenReturn(classMirror);
+      when(classMirror.newInstance(Symbol.empty, []))
+          .thenReturn(instanceMirror);
+      when(instanceMirror.reflectee).thenReturn(Client(SpecialService()));
 
       final client = container.make<Client>();
       expect(client.service, isA<SpecialService>());
@@ -71,10 +94,13 @@ void main() {
       void method(Service service) {}
 
       // Setup reflection mocks
-      when(reflector.reflectFunction(method)).thenReturn(reflectedFunction);
-      when(reflectedFunction.parameters).thenReturn([reflectedParameter]);
-      when(reflectedParameter.type).thenReturn(reflectedType);
-      when(reflectedType.reflectedType).thenReturn(Service);
+      when(reflector.reflect(method)).thenReturn(instanceMirror);
+      when(instanceMirror.type).thenReturn(classMirror);
+      when(classMirror.instanceMembers)
+          .thenReturn({Symbol('call'): methodMirror});
+      when(methodMirror.parameters).thenReturn([parameterMirror]);
+      when(parameterMirror.type).thenReturn(typeMirror);
+      when(typeMirror.reflectedType).thenReturn(Service);
 
       // Register service
       final service = Service();
@@ -84,7 +110,7 @@ void main() {
       container.call(method);
 
       // Then dependencies should be injected
-      verify(reflector.reflectFunction(method)).called(1);
+      verify(reflector.reflect(method)).called(1);
     });
 
     test('resolution hooks', () {
@@ -116,8 +142,8 @@ void main() {
 
     test('method binding', () {
       // Setup reflection mocks
-      when(reflector.reflectFunction(any)).thenReturn(reflectedFunction);
-      when(reflectedFunction.parameters).thenReturn([]);
+      when(reflector.reflect(any)).thenReturn(instanceMirror);
+      when(methodMirror.parameters).thenReturn([]);
 
       // Register a method
       String boundMethod() => 'bound';
@@ -128,7 +154,7 @@ void main() {
       final result = container.call(testMethod);
 
       // Verify the method was called
-      verify(reflector.reflectFunction(any)).called(1);
+      verify(reflector.reflect(any)).called(1);
       expect(result, equals('test'));
     });
 

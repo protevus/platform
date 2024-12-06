@@ -5,9 +5,9 @@ import 'package:platform_container/platform_container.dart';
 class User {
   final String id;
   final String name;
-  final String email;
+  final int age;
 
-  User(this.id, this.name, this.email);
+  User(this.id, this.name, this.age);
 }
 
 // Repository Layer
@@ -23,10 +23,7 @@ class DatabaseUserRepository implements UserRepository {
   User? findById(String id) => _users[id];
 
   @override
-  void save(User user) {
-    print('DB: Saving user ${user.id}');
-    _users[user.id] = user;
-  }
+  void save(User user) => _users[user.id] = user;
 }
 
 // Service Layer
@@ -36,24 +33,17 @@ class UserService {
 
   UserService(this.repository, this.emailService);
 
-  void registerUser(String name, String email) {
-    // Create user
-    final user =
-        User(DateTime.now().millisecondsSinceEpoch.toString(), name, email);
-
-    // Save user
+  User createUser(String name, int age) {
+    final user = User(DateTime.now().toString(), name, age);
     repository.save(user);
-
-    // Send welcome email
     emailService.sendWelcomeEmail(user);
+    return user;
   }
-
-  User? getUser(String id) => repository.findById(id);
 }
 
 class EmailService {
   void sendWelcomeEmail(User user) {
-    print('Sending welcome email to ${user.email}');
+    print('Sending welcome email to ${user.name}');
   }
 }
 
@@ -63,72 +53,66 @@ class UserController {
 
   UserController(this.userService);
 
-  void createUser(String name, String email) {
-    try {
-      userService.registerUser(name, email);
-      print('User created successfully');
-    } catch (e) {
-      print('Error creating user: $e');
-    }
+  void createUser(String name, int age) {
+    final user = userService.createUser(name, age);
+    print('Created user: ${user.name}');
   }
-
-  void getUser(String id) {
-    final user = userService.getUser(id);
-    if (user != null) {
-      print('Found user: ${user.name} (${user.email})');
-    } else {
-      print('User not found');
-    }
-  }
-}
-
-void main() {
-  // Create container
-  final container = IlluminateContainer(ExampleReflector());
-
-  // Register repositories
-  container.singleton<UserRepository>((c) => DatabaseUserRepository());
-
-  // Register services
-  container.singleton<EmailService>((c) => EmailService());
-  container.singleton<UserService>(
-      (c) => UserService(c.make<UserRepository>(), c.make<EmailService>()));
-
-  // Register controllers
-  container
-      .singleton<UserController>((c) => UserController(c.make<UserService>()));
-
-  // Use the application
-  final controller = container.make<UserController>();
-
-  // Create a user
-  print('Creating user...');
-  controller.createUser('John Doe', 'john@example.com');
-
-  // Try to find the user
-  print('\nLooking up user...');
-  controller.getUser('123'); // Not found
 }
 
 /// Example reflector implementation
 class ExampleReflector implements ReflectorContract {
   @override
-  String? getName(Symbol symbol) => null;
-
-  @override
-  ReflectedClassContract? reflectClass(Type clazz) => null;
-
-  @override
-  ReflectedFunctionContract? reflectFunction(Function function) => null;
-
-  @override
-  ReflectedInstanceContract? reflectInstance(Object object) => null;
-
-  @override
-  ReflectedTypeContract reflectFutureOf(Type type) {
-    throw UnsupportedError('Future reflection not needed for example');
+  ClassMirror? reflectClass(Type type) {
+    // Implementation
+    return null;
   }
 
   @override
-  ReflectedTypeContract? reflectType(Type type) => null;
+  TypeMirror reflectType(Type type) {
+    // Implementation
+    throw UnimplementedError();
+  }
+
+  @override
+  InstanceMirror reflect(Object object) {
+    // Implementation
+    throw UnimplementedError();
+  }
+
+  @override
+  LibraryMirror reflectLibrary(Uri uri) {
+    // Implementation
+    throw UnimplementedError();
+  }
+
+  @override
+  dynamic createInstance(
+    Type type, {
+    List<dynamic>? positionalArgs,
+    Map<String, dynamic>? namedArgs,
+    String? constructorName,
+  }) {
+    // Implementation
+    throw UnimplementedError();
+  }
+}
+
+void main() {
+  // Create container with example reflector
+  final container = IlluminateContainer(ExampleReflector());
+
+  // Register dependencies
+  container.bind<UserRepository>((c) => DatabaseUserRepository());
+  container.bind<EmailService>((c) => EmailService());
+  container.bind<UserService>((c) => UserService(
+        c.make<UserRepository>(),
+        c.make<EmailService>(),
+      ));
+  container.bind<UserController>((c) => UserController(
+        c.make<UserService>(),
+      ));
+
+  // Resolve controller and create user
+  final controller = container.make<UserController>();
+  controller.createUser('John Doe', 30);
 }
