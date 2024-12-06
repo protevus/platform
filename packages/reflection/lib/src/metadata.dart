@@ -1,5 +1,28 @@
 import 'exceptions.dart';
 
+/// Represents metadata about a type parameter.
+class TypeParameterMetadata {
+  /// The name of the type parameter (e.g., 'T', 'E').
+  final String name;
+
+  /// The type of the parameter.
+  final Type type;
+
+  /// The upper bound of the type parameter, if any.
+  final Type? bound;
+
+  /// Any attributes (annotations) on this type parameter.
+  final List<Object> attributes;
+
+  /// Creates a new type parameter metadata instance.
+  const TypeParameterMetadata({
+    required this.name,
+    required this.type,
+    this.bound,
+    this.attributes = const [],
+  });
+}
+
 /// Represents metadata about a parameter.
 class ParameterMetadata {
   /// The name of the parameter.
@@ -75,8 +98,14 @@ class MethodMetadata {
   /// Whether the method returns void.
   final bool returnsVoid;
 
+  /// The return type of the method.
+  final Type returnType;
+
   /// Any attributes (annotations) on this method.
   final List<Object> attributes;
+
+  /// Type parameters for generic methods.
+  final List<TypeParameterMetadata> typeParameters;
 
   /// Creates a new method metadata instance.
   const MethodMetadata({
@@ -84,8 +113,10 @@ class MethodMetadata {
     required this.parameterTypes,
     required this.parameters,
     required this.returnsVoid,
+    required this.returnType,
     this.isStatic = false,
     this.attributes = const [],
+    this.typeParameters = const [],
   });
 
   /// Validates the given arguments against this method's parameter types.
@@ -170,8 +201,17 @@ class TypeMetadata {
   /// The interfaces this type implements.
   final List<TypeMetadata> interfaces;
 
+  /// The mixins this type uses.
+  final List<TypeMetadata> mixins;
+
   /// Any attributes (annotations) on this type.
   final List<Object> attributes;
+
+  /// Type parameters for generic types.
+  final List<TypeParameterMetadata> typeParameters;
+
+  /// Type arguments if this is a generic type instantiation.
+  final List<TypeMetadata> typeArguments;
 
   /// Creates a new type metadata instance.
   const TypeMetadata({
@@ -182,8 +222,17 @@ class TypeMetadata {
     required this.constructors,
     this.supertype,
     this.interfaces = const [],
+    this.mixins = const [],
     this.attributes = const [],
+    this.typeParameters = const [],
+    this.typeArguments = const [],
   });
+
+  /// Whether this type is generic (has type parameters).
+  bool get isGeneric => typeParameters.isNotEmpty;
+
+  /// Whether this is a generic type instantiation.
+  bool get isGenericInstantiation => typeArguments.isNotEmpty;
 
   /// Gets a property by name, throwing if not found.
   PropertyMetadata getProperty(String name) {
@@ -235,11 +284,15 @@ class FunctionMetadata {
   /// The return type of the function.
   final Type returnType;
 
+  /// Type parameters for generic functions.
+  final List<TypeParameterMetadata> typeParameters;
+
   /// Creates a new function metadata instance.
   const FunctionMetadata({
     required this.parameters,
     required this.returnsVoid,
     required this.returnType,
+    this.typeParameters = const [],
   });
 
   /// Validates the given arguments against this function's parameters.

@@ -10,6 +10,7 @@ import '../mirrors/instance_mirror_impl.dart';
 import '../mirrors/method_mirror_impl.dart';
 import '../mirrors/parameter_mirror_impl.dart';
 import '../mirrors/type_mirror_impl.dart';
+import '../mirrors/type_variable_mirror_impl.dart';
 import '../mirrors/variable_mirror_impl.dart';
 import '../mirrors/library_mirror_impl.dart';
 import '../mirrors/library_dependency_mirror_impl.dart';
@@ -31,6 +32,120 @@ class RuntimeReflector {
   RuntimeReflector._() {
     // Initialize mirror system
     _mirrorSystem = MirrorSystemImpl.current();
+  }
+
+  /// Resolves parameters for method or constructor invocation
+  List<dynamic> resolveParameters(
+    List<ParameterMirror> parameters,
+    List<dynamic> positionalArgs,
+    Map<Symbol, dynamic>? namedArgs,
+  ) {
+    final resolvedArgs = List<dynamic>.filled(parameters.length, null);
+    var positionalIndex = 0;
+
+    ClassMirror? _getClassMirror(Type? type) {
+      if (type == null) return null;
+      try {
+        return reflectClass(type);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    bool _isTypeCompatible(dynamic value, TypeMirror expectedType) {
+      // Handle null values
+      if (value == null) {
+        // For now, accept null for any type as we don't have nullability information
+        return true;
+      }
+
+      // Get the actual type to check
+      Type actualType;
+      if (value is Type) {
+        actualType = value;
+      } else {
+        actualType = value.runtimeType;
+      }
+
+      // Get the expected type
+      Type expectedRawType = expectedType.reflectedType;
+
+      // Special case handling
+      if (expectedRawType == dynamic || expectedRawType == Object) {
+        return true;
+      }
+
+      // If types are exactly the same, they're compatible
+      if (actualType == expectedRawType) {
+        return true;
+      }
+
+      // Handle generic type parameters
+      if (expectedType is TypeVariableMirrorImpl) {
+        return _isTypeCompatible(value, expectedType.upperBound);
+      }
+
+      // Get class mirrors
+      final actualMirror = _getClassMirror(actualType);
+      final expectedMirror = _getClassMirror(expectedRawType);
+
+      // If we can't get mirrors, assume compatible
+      if (actualMirror == null || expectedMirror == null) {
+        return true;
+      }
+
+      return actualMirror.isSubclassOf(expectedMirror);
+    }
+
+    for (var i = 0; i < parameters.length; i++) {
+      final param = parameters[i];
+      dynamic value;
+
+      if (param.isNamed) {
+        // Handle named parameter
+        final paramName = Symbol(param.name);
+        if (namedArgs?.containsKey(paramName) ?? false) {
+          value = namedArgs![paramName];
+          resolvedArgs[i] = value;
+        } else if (param.hasDefaultValue) {
+          value = param.defaultValue?.reflectee;
+          resolvedArgs[i] = value;
+        } else if (!param.isOptional) {
+          throw InvalidArgumentsException(
+            'Missing required named parameter: ${param.name}',
+            param.type.reflectedType,
+          );
+        }
+      } else {
+        // Handle positional parameter
+        if (positionalIndex < positionalArgs.length) {
+          value = positionalArgs[positionalIndex++];
+          resolvedArgs[i] = value;
+        } else if (param.hasDefaultValue) {
+          value = param.defaultValue?.reflectee;
+          resolvedArgs[i] = value;
+        } else if (!param.isOptional) {
+          throw InvalidArgumentsException(
+            'Missing required positional parameter at index $i',
+            param.type.reflectedType,
+          );
+        }
+      }
+
+      // Validate argument type if a value was provided or required
+      if (!param.isOptional || value != null) {
+        if (!_isTypeCompatible(value, param.type)) {
+          final actualType = value?.runtimeType.toString() ?? 'null';
+          throw InvalidArgumentsException(
+            'Invalid argument type for parameter ${param.name}: '
+            'expected ${param.type.name}, got $actualType',
+            param.type.reflectedType,
+          );
+        }
+      }
+    }
+
+    return resolvedArgs;
   }
 
   /// Creates a new instance of a type using reflection.
@@ -59,6 +174,13 @@ class RuntimeReflector {
             'Constructor ${constructorName ?? ''} not found on type $type'),
       );
 
+      // Get constructor factory
+      final factory = Reflector.getInstanceCreator(type, constructor.name);
+      if (factory == null) {
+        throw ReflectionException(
+            'No factory found for constructor ${constructor.name} on type $type');
+      }
+
       // Convert positional args to List if single value provided
       final args = positionalArgs is List
           ? positionalArgs
@@ -70,34 +192,32 @@ class RuntimeReflector {
       final symbolNamedArgs =
           namedArgs?.map((key, value) => MapEntry(Symbol(key), value)) ?? {};
 
-      // Extract positional args based on parameter metadata
-      final positionalParams =
-          constructor.parameters.where((p) => !p.isNamed).toList();
-      final finalPositionalArgs = args.take(positionalParams.length).toList();
-
-      // Validate positional arguments
-      if (finalPositionalArgs.length <
-          positionalParams.where((p) => p.isRequired).length) {
-        throw InvalidArgumentsException(constructorName ?? '', type);
-      }
-
-      // Validate required named parameters
-      final requiredNamedParams = constructor.parameters
-          .where((p) => p.isRequired && p.isNamed)
-          .map((p) => p.name)
-          .toSet();
-      if (requiredNamedParams.isNotEmpty &&
-          !requiredNamedParams
-              .every((param) => namedArgs?.containsKey(param) ?? false)) {
-        throw InvalidArgumentsException(constructorName ?? '', type);
-      }
-
-      // Create instance using mirror system directly
+      // Get class mirror
       final mirror = reflectClass(type);
-      return mirror
-          .newInstance(Symbol(constructorName ?? ''), finalPositionalArgs,
-              symbolNamedArgs)
-          .reflectee;
+
+      // Resolve parameters using constructor metadata
+      final resolvedArgs = resolveParameters(
+        constructor.parameters
+            .map((param) => ParameterMirrorImpl(
+                  name: param.name,
+                  type: TypeMirrorImpl(
+                    type: param.type,
+                    name: param.type.toString(),
+                    owner: mirror,
+                    metadata: const [],
+                  ),
+                  owner: mirror,
+                  isOptional: !param.isRequired,
+                  isNamed: param.isNamed,
+                  metadata: const [],
+                ))
+            .toList(),
+        args,
+        symbolNamedArgs,
+      );
+
+      // Create instance using factory
+      return Function.apply(factory, resolvedArgs);
     } catch (e) {
       if (e is InvalidArgumentsException || e is ReflectionException) {
         throw e;
@@ -150,6 +270,7 @@ class RuntimeReflector {
     final properties = Reflector.getPropertyMetadata(type) ?? {};
     final methods = Reflector.getMethodMetadata(type) ?? {};
     final constructors = Reflector.getConstructorMetadata(type) ?? [];
+    final typeMetadata = Reflector.getTypeMetadata(type);
 
     // Create declarations map
     final declarations = <Symbol, DeclarationMirror>{};
@@ -174,7 +295,8 @@ class RuntimeReflector {
         owner: emptyMirror,
         returnType: method.returnsVoid
             ? TypeMirrorImpl.voidType(emptyMirror)
-            : TypeMirrorImpl.dynamicType(emptyMirror),
+            : _createTypeMirror(
+                method.returnType, method.returnType.toString(), emptyMirror),
         parameters: method.parameters
             .map((param) => ParameterMirrorImpl(
                   name: param.name,
@@ -183,6 +305,10 @@ class RuntimeReflector {
                   owner: emptyMirror,
                   isOptional: !param.isRequired,
                   isNamed: param.isNamed,
+                  hasDefaultValue: param.defaultValue != null,
+                  defaultValue: param.defaultValue != null
+                      ? reflect(param.defaultValue!)
+                      : null,
                   metadata: [],
                 ))
             .toList(),
@@ -190,6 +316,33 @@ class RuntimeReflector {
         metadata: [],
       );
     });
+
+    // Add constructors as method declarations
+    for (final ctor in constructors) {
+      declarations[Symbol(ctor.name)] = MethodMirrorImpl(
+        name: ctor.name,
+        owner: emptyMirror,
+        returnType: emptyMirror,
+        parameters: ctor.parameters
+            .map((param) => ParameterMirrorImpl(
+                  name: param.name,
+                  type: _createTypeMirror(
+                      param.type, param.type.toString(), emptyMirror),
+                  owner: emptyMirror,
+                  isOptional: !param.isRequired,
+                  isNamed: param.isNamed,
+                  hasDefaultValue: param.defaultValue != null,
+                  defaultValue: param.defaultValue != null
+                      ? reflect(param.defaultValue!)
+                      : null,
+                  metadata: [],
+                ))
+            .toList(),
+        isStatic: false,
+        isConstructor: true,
+        metadata: [],
+      );
+    }
 
     // Create instance and static member maps
     final instanceMembers = <Symbol, MethodMirror>{};
@@ -213,6 +366,12 @@ class RuntimeReflector {
       instanceMembers: instanceMembers,
       staticMembers: staticMembers,
       metadata: [],
+      superclass: typeMetadata?.supertype != null
+          ? reflectClass(typeMetadata!.supertype!.type)
+          : null,
+      superinterfaces:
+          typeMetadata?.interfaces.map((i) => reflectClass(i.type)).toList() ??
+              const [],
     );
 
     // Update cache with complete mirror

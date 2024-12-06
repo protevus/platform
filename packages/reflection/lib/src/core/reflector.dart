@@ -2,6 +2,7 @@ import 'dart:collection';
 import '../metadata.dart';
 import '../mirrors.dart';
 import '../mirrors/mirrors.dart';
+import '../mirrors/special_types.dart';
 
 /// Static registry for reflection metadata.
 class Reflector {
@@ -15,6 +16,8 @@ class Reflector {
       HashMap<Type, Map<String, MethodMetadata>>();
   static final Map<Type, List<ConstructorMetadata>> _constructorMetadata =
       HashMap<Type, List<ConstructorMetadata>>();
+  static final Map<Type, TypeMetadata> _typeMetadata =
+      HashMap<Type, TypeMetadata>();
   static final Map<Type, Map<String, Function>> _instanceCreators =
       HashMap<Type, Map<String, Function>>();
   static final Set<Type> _reflectableTypes = HashSet<Type>();
@@ -62,6 +65,7 @@ class Reflector {
     String name,
     List<Type> parameterTypes,
     bool returnsVoid, {
+    Type? returnType,
     List<String>? parameterNames,
     List<bool>? isRequired,
     List<bool>? isNamed,
@@ -85,6 +89,7 @@ class Reflector {
         parameterTypes: parameterTypes,
         parameters: parameters,
         returnsVoid: returnsVoid,
+        returnType: returnType ?? (returnsVoid ? voidType : dynamicType),
         isStatic: isStatic,
       ),
     );
@@ -126,6 +131,14 @@ class Reflector {
     }
   }
 
+  /// Register complete type metadata for reflection.
+  static void registerTypeMetadata(Type type, TypeMetadata metadata) {
+    if (!isReflectable(type)) {
+      registerType(type);
+    }
+    _typeMetadata[type] = metadata;
+  }
+
   /// Checks if a type is reflectable.
   static bool isReflectable(Type type) {
     return _reflectableTypes.contains(type);
@@ -144,6 +157,11 @@ class Reflector {
   /// Gets constructor metadata for a type.
   static List<ConstructorMetadata>? getConstructorMetadata(Type type) {
     return _constructorMetadata[type];
+  }
+
+  /// Gets complete type metadata for a type.
+  static TypeMetadata? getTypeMetadata(Type type) {
+    return _typeMetadata[type];
   }
 
   /// Gets an instance creator function.
@@ -187,6 +205,7 @@ class Reflector {
     _propertyMetadata.clear();
     _methodMetadata.clear();
     _constructorMetadata.clear();
+    _typeMetadata.clear();
     _instanceCreators.clear();
     _reflectableTypes.clear();
   }

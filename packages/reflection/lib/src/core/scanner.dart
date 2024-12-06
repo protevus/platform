@@ -3,6 +3,7 @@ import '../metadata.dart';
 import 'reflector.dart';
 import '../mirrors.dart';
 import '../mirrors/mirror_system_impl.dart';
+import '../mirrors/special_types.dart';
 import '../exceptions.dart';
 
 /// Runtime scanner that analyzes types and extracts their metadata.
@@ -48,6 +49,7 @@ class Scanner {
         parameterTypes: method.parameterTypes,
         parameters: method.parameters,
         returnsVoid: method.returnsVoid,
+        returnType: method.returnType,
         isStatic: method.isStatic,
       );
       methodMetadata[method.name] = methodMeta;
@@ -124,6 +126,7 @@ class TypeAnalyzer {
               ),
             ],
             returnsVoid: true,
+            returnType: voidType,
             isStatic: false,
           ),
           MethodInfo(
@@ -138,6 +141,7 @@ class TypeAnalyzer {
               ),
             ],
             returnsVoid: false,
+            returnType: String,
             isStatic: false,
           ),
           MethodInfo(
@@ -158,6 +162,7 @@ class TypeAnalyzer {
               ),
             ],
             returnsVoid: false,
+            returnType: type,
             isStatic: true,
           ),
         ]);
@@ -212,6 +217,7 @@ class TypeAnalyzer {
               ),
             ],
             returnsVoid: true,
+            returnType: voidType,
             isStatic: false,
           ),
           MethodInfo(
@@ -219,6 +225,7 @@ class TypeAnalyzer {
             parameterTypes: [],
             parameters: [],
             returnsVoid: false,
+            returnType: dynamic,
             isStatic: false,
           ),
         ]);
@@ -254,6 +261,7 @@ class TypeAnalyzer {
             parameterTypes: [],
             parameters: [],
             returnsVoid: false,
+            returnType: String,
             isStatic: false,
           ),
         );
@@ -284,6 +292,7 @@ class TypeAnalyzer {
             parameterTypes: [],
             parameters: [],
             returnsVoid: false,
+            returnType: String,
             isStatic: false,
           ),
         );
@@ -356,6 +365,7 @@ class MethodInfo {
   final List<Type> parameterTypes;
   final List<ParameterMetadata> parameters;
   final bool returnsVoid;
+  final Type returnType;
   final bool isStatic;
 
   MethodInfo({
@@ -363,6 +373,7 @@ class MethodInfo {
     required this.parameterTypes,
     required this.parameters,
     required this.returnsVoid,
+    required this.returnType,
     required this.isStatic,
   });
 }

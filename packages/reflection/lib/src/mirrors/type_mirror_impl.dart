@@ -4,6 +4,7 @@ import '../core/reflector.dart';
 import '../metadata.dart';
 import 'base_mirror.dart';
 import 'special_types.dart';
+import 'type_variable_mirror_impl.dart';
 
 /// Implementation of [TypeMirror] that provides reflection on types.
 class TypeMirrorImpl extends TypedMirror implements TypeMirror {
@@ -11,6 +12,7 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
   final List<TypeMirror> _typeArguments;
   final bool _isOriginalDeclaration;
   final TypeMirror? _originalDeclaration;
+  final bool _isGeneric;
 
   TypeMirrorImpl({
     required Type type,
@@ -25,6 +27,7 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
         _typeArguments = typeArguments,
         _isOriginalDeclaration = isOriginalDeclaration,
         _originalDeclaration = originalDeclaration,
+        _isGeneric = typeVariables.isNotEmpty,
         super(
           type: type,
           name: name,
@@ -35,18 +38,49 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
     if (!Reflector.isReflectable(type)) {
       Reflector.registerType(type);
     }
+
+    // Validate generic type arguments
+    if (_typeArguments.length > _typeVariables.length) {
+      throw ArgumentError('Too many type arguments');
+    }
   }
 
   /// Creates a TypeMirror from TypeMetadata.
   factory TypeMirrorImpl.fromMetadata(TypeMetadata typeMetadata,
       [DeclarationMirror? owner]) {
+    // Get type variables from metadata
+    final typeVariables = typeMetadata.typeParameters.map((param) {
+      // Create upper bound type mirror
+      final upperBound = TypeMirrorImpl(
+        type: param.bound ?? Object,
+        name: param.bound?.toString() ?? 'Object',
+        owner: owner,
+      );
+
+      // Create type variable mirror
+      return TypeVariableMirrorImpl(
+        type: param.type,
+        name: param.name,
+        upperBound: upperBound,
+        owner: owner,
+      );
+    }).toList();
+
+    // Get type arguments from metadata
+    final typeArguments = typeMetadata.typeArguments.map((arg) {
+      return TypeMirrorImpl(
+        type: arg.type,
+        name: arg.name,
+        owner: owner,
+      );
+    }).toList();
+
     return TypeMirrorImpl(
       type: typeMetadata.type,
       name: typeMetadata.name,
       owner: owner,
-      // Convert interfaces to TypeMirrors
-      typeVariables: [], // TODO: Add type variable support
-      typeArguments: [], // TODO: Add type argument support
+      typeVariables: typeVariables,
+      typeArguments: typeArguments,
       metadata: [], // TODO: Add metadata support
     );
   }
@@ -71,6 +105,39 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
     );
   }
 
+  /// Creates a new TypeMirror with the given type arguments.
+  TypeMirror instantiateGeneric(List<TypeMirror> typeArguments) {
+    if (!_isGeneric) {
+      throw StateError('Type $name is not generic');
+    }
+
+    if (typeArguments.length != _typeVariables.length) {
+      throw ArgumentError(
+          'Wrong number of type arguments: expected ${_typeVariables.length}, got ${typeArguments.length}');
+    }
+
+    // Validate type arguments against bounds
+    for (var i = 0; i < typeArguments.length; i++) {
+      final argument = typeArguments[i];
+      final variable = _typeVariables[i];
+      if (!argument.isAssignableTo(variable.upperBound)) {
+        throw ArgumentError(
+            'Type argument ${argument.name} is not assignable to bound ${variable.upperBound.name}');
+      }
+    }
+
+    return TypeMirrorImpl(
+      type: type,
+      name: name,
+      owner: owner,
+      typeVariables: _typeVariables,
+      typeArguments: typeArguments,
+      isOriginalDeclaration: false,
+      originalDeclaration: this,
+      metadata: metadata,
+    );
+  }
+
   @override
   bool get hasReflectedType => true;
 
@@ -92,6 +159,9 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
     if (isOriginalDeclaration) return this;
     return _originalDeclaration!;
   }
+
+  /// Whether this type is generic (has type parameters)
+  bool get isGeneric => _isGeneric;
 
   /// Gets the properties defined on this type.
   Map<String, PropertyMetadata> get properties =>
@@ -120,8 +190,45 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
     if (type == voidType) return other.type == voidType;
 
     // Get type metadata
-    final metadata = Reflector.getConstructorMetadata(type);
+    final metadata = Reflector.getTypeMetadata(type);
     if (metadata == null) return false;
+
+    // Check supertype
+    if (metadata.supertype != null) {
+      final superMirror = TypeMirrorImpl.fromMetadata(metadata.supertype!);
+      if (superMirror.isSubtypeOf(other)) return true;
+    }
+
+    // Check interfaces
+    for (final interface in metadata.interfaces) {
+      final interfaceMirror = TypeMirrorImpl.fromMetadata(interface);
+      if (interfaceMirror.isSubtypeOf(other)) return true;
+    }
+
+    // Check mixins
+    for (final mixin in metadata.mixins) {
+      final mixinMirror = TypeMirrorImpl.fromMetadata(mixin);
+      if (mixinMirror.isSubtypeOf(other)) return true;
+    }
+
+    // Handle generic type arguments
+    if (!isOriginalDeclaration && other.isOriginalDeclaration) {
+      return originalDeclaration.isSubtypeOf(other);
+    }
+
+    if (!isOriginalDeclaration && !other.isOriginalDeclaration) {
+      if (originalDeclaration != other.originalDeclaration) {
+        return false;
+      }
+
+      // Check type arguments are compatible
+      for (var i = 0; i < _typeArguments.length; i++) {
+        if (!_typeArguments[i].isSubtypeOf(other._typeArguments[i])) {
+          return false;
+        }
+      }
+      return true;
+    }
 
     return false;
   }

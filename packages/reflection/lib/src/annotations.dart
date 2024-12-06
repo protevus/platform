@@ -43,7 +43,8 @@ class ReflectionRegistry {
     Type type,
     String name,
     List<Type> parameterTypes,
-    bool returnsVoid, {
+    bool returnsVoid,
+    Type returnType, {
     List<String>? parameterNames,
     List<bool>? isRequired,
     List<bool>? isNamed,
@@ -63,6 +64,8 @@ class ReflectionRegistry {
       parameterTypes: parameterTypes,
       parameters: parameters,
       returnsVoid: returnsVoid,
+      returnType: returnType,
+      isStatic: false,
     );
   }
 
