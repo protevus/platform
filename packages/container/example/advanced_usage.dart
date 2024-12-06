@@ -1,4 +1,4 @@
-import 'package:platform_contracts/contracts.dart';
+import 'package:platform_contracts/contracts.dart' hide Container;
 import 'package:platform_container/platform_container.dart';
 
 /// Example reflector implementation
@@ -41,7 +41,7 @@ class ExampleReflector implements ReflectorContract {
 
 void main() {
   // Create container with example reflector
-  final container = IlluminateContainer(ExampleReflector());
+  final container = Container(ExampleReflector());
 
   // Register some bindings
   container.bind<String>((c) => 'Hello');

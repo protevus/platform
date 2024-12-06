@@ -2,7 +2,7 @@ import 'package:platform_contracts/contracts.dart';
 import 'reflector.dart';
 
 /// Laravel-style container implementation.
-class IlluminateContainer implements ContainerContract {
+class Container implements ContainerContract {
   final ReflectorContract _reflector;
   final Map<Type, dynamic Function(ContainerContract)> _bindings = {};
   final Map<Type, dynamic> _instances = {};
@@ -14,7 +14,7 @@ class IlluminateContainer implements ContainerContract {
   final Map<Type, List<Function>> _extenders = {};
   final Map<Type, List<Function>> _reboundCallbacks = {};
   final Map<Type, dynamic> _scopedInstances = {};
-  final IlluminateContainer? _parent;
+  final Container? _parent;
 
   final List<Function> _beforeResolvingCallbacks = [];
   final List<Function> _resolvingCallbacks = [];
@@ -22,11 +22,11 @@ class IlluminateContainer implements ContainerContract {
 
   /// Creates a new container instance.
   /// If no reflector is provided, uses the default ContainerReflector.
-  IlluminateContainer([ReflectorContract? reflector])
+  Container([ReflectorContract? reflector])
       : _reflector = reflector ?? ContainerReflector(),
         _parent = null;
 
-  IlluminateContainer._child(this._parent, this._reflector);
+  Container._child(this._parent, this._reflector);
 
   @override
   ReflectorContract get reflector => _reflector;
@@ -36,7 +36,7 @@ class IlluminateContainer implements ContainerContract {
 
   @override
   ContainerContract createChild() {
-    return IlluminateContainer._child(this, _reflector);
+    return Container._child(this, _reflector);
   }
 
   @override
@@ -451,7 +451,7 @@ class IlluminateContainer implements ContainerContract {
 }
 
 class _ContextualBindingBuilder implements ContextualBindingBuilder {
-  final IlluminateContainer _container;
+  final Container _container;
   final Type _concrete;
   Type? _needsType;
 

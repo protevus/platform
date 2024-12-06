@@ -1,4 +1,4 @@
-import 'package:platform_contracts/contracts.dart';
+import 'package:platform_contracts/contracts.dart' hide Container;
 import 'package:platform_container/platform_container.dart';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
@@ -31,7 +31,7 @@ class Client {
   ParameterMirror
 ])
 void main() {
-  late IlluminateContainer container;
+  late Container container;
   late MockReflectorContract reflector;
   late MockClassMirror classMirror;
   late MockInstanceMirror instanceMirror;
@@ -46,7 +46,7 @@ void main() {
     methodMirror = MockMethodMirror();
     typeMirror = MockTypeMirror();
     parameterMirror = MockParameterMirror();
-    container = IlluminateContainer(reflector);
+    container = Container(reflector);
 
     // Setup default reflection behavior
     when(reflector.reflectClass(any)).thenReturn(null);

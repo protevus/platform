@@ -1,4 +1,4 @@
-import 'package:platform_contracts/contracts.dart';
+import 'package:platform_contracts/contracts.dart' hide Container;
 import 'package:platform_container/platform_container.dart';
 
 abstract class PaymentGateway {
@@ -73,7 +73,7 @@ class ExampleReflector implements ReflectorContract {
 
 void main() {
   // Create container with example reflector
-  final container = IlluminateContainer(ExampleReflector());
+  final container = Container(ExampleReflector());
 
   // Register dependencies
   container.bind<PaymentGateway>((c) => StripeGateway('sk_test_123'));

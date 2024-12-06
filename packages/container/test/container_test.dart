@@ -1,4 +1,4 @@
-import 'package:platform_contracts/contracts.dart';
+import 'package:platform_contracts/contracts.dart' hide Container;
 import 'package:platform_container/platform_container.dart';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
@@ -15,7 +15,7 @@ import 'container_test.mocks.dart';
   ParameterMirror
 ])
 void main() {
-  late IlluminateContainer container;
+  late Container container;
   late MockReflectorContract reflector;
   late MockClassMirror classMirror;
   late MockInstanceMirror instanceMirror;
@@ -30,7 +30,7 @@ void main() {
     methodMirror = MockMethodMirror();
     typeMirror = MockTypeMirror();
     parameterMirror = MockParameterMirror();
-    container = IlluminateContainer(reflector);
+    container = Container(reflector);
 
     // Setup default reflection behavior
     when(reflector.reflectClass(any)).thenReturn(null);
@@ -61,7 +61,7 @@ void main() {
 
   group('Container', () {
     test('uses ContainerReflector by default', () {
-      final defaultContainer = IlluminateContainer();
+      final defaultContainer = Container();
       expect(defaultContainer.reflector, isA<ContainerReflector>());
     });
 
@@ -137,7 +137,7 @@ void main() {
 
     test('child container can override parent bindings', () {
       container.registerSingleton<String>('parent');
-      final child = container.createChild() as IlluminateContainer;
+      final child = container.createChild() as Container;
       child.registerSingleton<String>('child');
       expect(child.make<String>(), equals('child'));
       expect(container.make<String>(), equals('parent'));
