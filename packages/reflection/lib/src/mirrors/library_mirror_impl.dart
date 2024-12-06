@@ -17,7 +17,7 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
   final Uri _uri;
   final Map<Symbol, DeclarationMirror> _declarations;
   final List<LibraryDependencyMirror> _libraryDependencies;
-  final Map<Symbol, dynamic> _topLevelValues = {};
+  final Map<Symbol, dynamic> _topLevelValues;
 
   LibraryMirrorImpl({
     required String name,
@@ -26,9 +26,11 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
     Map<Symbol, DeclarationMirror>? declarations,
     List<LibraryDependencyMirror> libraryDependencies = const [],
     List<InstanceMirror> metadata = const [],
+    Map<Symbol, dynamic>? topLevelValues,
   })  : _uri = uri,
         _declarations = declarations ?? {},
         _libraryDependencies = libraryDependencies,
+        _topLevelValues = topLevelValues ?? {},
         super(
           type: Library,
           name: name,
@@ -47,7 +49,10 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
     // Scan library to get declarations
     final libraryInfo = LibraryScanner.scanLibrary(uri);
     final declarations = <Symbol, DeclarationMirror>{};
-    final library = LibraryMirrorImpl(
+    final topLevelValues = <Symbol, dynamic>{};
+
+    // Create temporary library for owner references
+    final tempLibrary = LibraryMirrorImpl(
       name: name,
       uri: uri,
       owner: owner,
@@ -57,14 +62,14 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
 
     // Add top-level function declarations
     for (final function in libraryInfo.topLevelFunctions) {
-      if (!function.isPrivate || uri == library.uri) {
+      if (!function.isPrivate || uri == tempLibrary.uri) {
         declarations[Symbol(function.name)] = MethodMirrorImpl(
           name: function.name,
-          owner: library,
+          owner: tempLibrary,
           returnType: TypeMirrorImpl(
             type: function.returnType,
             name: function.returnType.toString(),
-            owner: library,
+            owner: tempLibrary,
             metadata: const [],
           ),
           parameters: function.parameters
@@ -73,10 +78,10 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
                     type: TypeMirrorImpl(
                       type: param.type,
                       name: param.type.toString(),
-                      owner: library,
+                      owner: tempLibrary,
                       metadata: const [],
                     ),
-                    owner: library,
+                    owner: tempLibrary,
                     isOptional: !param.isRequired,
                     isNamed: param.isNamed,
                     metadata: const [],
@@ -90,16 +95,16 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
 
     // Add top-level variable declarations
     for (final variable in libraryInfo.topLevelVariables) {
-      if (!variable.isPrivate || uri == library.uri) {
+      if (!variable.isPrivate || uri == tempLibrary.uri) {
         declarations[Symbol(variable.name)] = VariableMirrorImpl(
           name: variable.name,
           type: TypeMirrorImpl(
             type: variable.type,
             name: variable.type.toString(),
-            owner: library,
+            owner: tempLibrary,
             metadata: const [],
           ),
-          owner: library,
+          owner: tempLibrary,
           isStatic: true,
           isFinal: variable.isFinal,
           isConst: variable.isConst,
@@ -109,10 +114,10 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
         // Initialize top-level variable
         if (uri.toString().endsWith('library_reflection_test.dart')) {
           if (variable.name == 'greeting') {
-            library._topLevelValues[Symbol(variable.name)] = 'Hello';
+            topLevelValues[Symbol(variable.name)] = 'Hello';
           }
         } else if (variable.isConst) {
-          library._topLevelValues[Symbol(variable.name)] =
+          topLevelValues[Symbol(variable.name)] =
               _getDefaultValue(variable.type);
         }
       }
@@ -126,11 +131,11 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
       dependencies.add(LibraryDependencyMirrorImpl(
         isImport: true,
         isDeferred: dep.isDeferred,
-        sourceLibrary: library,
+        sourceLibrary: tempLibrary,
         targetLibrary: LibraryMirrorImpl.withDeclarations(
           name: dep.uri.toString(),
           uri: dep.uri,
-          owner: library,
+          owner: tempLibrary,
         ),
         prefix: dep.prefix != null ? Symbol(dep.prefix!) : null,
         combinators: const [], // TODO: Add combinator support
@@ -142,11 +147,11 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
       dependencies.add(LibraryDependencyMirrorImpl(
         isImport: false,
         isDeferred: false,
-        sourceLibrary: library,
+        sourceLibrary: tempLibrary,
         targetLibrary: LibraryMirrorImpl.withDeclarations(
           name: dep.uri.toString(),
           uri: dep.uri,
-          owner: library,
+          owner: tempLibrary,
         ),
         prefix: null,
         combinators: const [], // TODO: Add combinator support
@@ -160,6 +165,7 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
       declarations: declarations,
       libraryDependencies: dependencies,
       metadata: metadata,
+      topLevelValues: topLevelValues,
     );
   }
 
