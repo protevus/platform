@@ -23,24 +23,26 @@ A powerful cross-platform reflection system for Dart that provides runtime type 
 - ✅ Platform independent reflection system
 - ✅ No dependency on `dart:mirrors`
 - ✅ Pure runtime reflection
+- ✅ Library scanning and reflection
 - ✅ Explicit registration for performance
 - ✅ Type-safe operations
 - ✅ Comprehensive error handling
 
 ### Reflection Capabilities
-- ✅ Class reflection
-- ✅ Method invocation
+- ✅ Class reflection with inheritance
+- ✅ Method invocation with named parameters
 - ✅ Property access/mutation
-- ✅ Constructor invocation
-- ✅ Type introspection
-- ✅ Basic metadata support
-- ✅ Parameter inspection
-- ✅ Type relationship checking
+- ✅ Constructor resolution and invocation
+- ✅ Type introspection and relationships
+- ✅ Library dependency tracking
+- ✅ Parameter inspection and validation
+- ✅ Top-level variable support
 
 ### Performance Features
-- ✅ Optimized metadata storage
-- ✅ Efficient lookup mechanisms
-- ✅ Minimal runtime overhead
+- ✅ Cached class mirrors
+- ✅ Optimized type compatibility checking
+- ✅ Efficient parameter resolution
+- ✅ Smart library scanning
 - ✅ Memory-efficient design
 - ✅ Lazy initialization support
 
@@ -51,19 +53,21 @@ A powerful cross-platform reflection system for Dart that provides runtime type 
 ```
 platform_reflection/
 ├── core/
-│   ├── reflector.dart       # Central reflection management
-│   ├── scanner.dart         # Type scanning and analysis
-│   └── runtime_reflector.dart # Runtime reflection implementation
-├── metadata/
-│   ├── type_metadata.dart    # Type information storage
-│   ├── method_metadata.dart  # Method metadata handling
-│   └── property_metadata.dart # Property metadata handling
+│   ├── library_scanner.dart  # Library scanning and analysis
+│   ├── reflector.dart       # Central reflection registry
+│   ├── runtime_reflector.dart # Runtime reflection implementation
+│   └── scanner.dart         # Type scanning and analysis
 ├── mirrors/
-│   ├── class_mirror.dart     # Class reflection implementation
-│   ├── instance_mirror.dart  # Instance reflection handling
-│   └── method_mirror.dart    # Method reflection support
-└── exceptions/
-    └── reflection_exceptions.dart # Error handling
+│   ├── base_mirror.dart     # Base mirror implementations
+│   ├── class_mirror_impl.dart # Class reflection
+│   ├── instance_mirror_impl.dart # Instance reflection
+│   ├── library_mirror_impl.dart # Library reflection
+│   ├── method_mirror_impl.dart # Method reflection
+│   └── ... (other mirrors)
+├── annotations.dart         # Reflection annotations
+├── exceptions.dart         # Error handling
+├── metadata.dart          # Metadata definitions
+└── types.dart            # Special type implementations
 ```
 
 ### Design Principles
@@ -120,23 +124,6 @@ class Reflector {
 }
 ```
 
-### Scanner
-
-Automatic metadata extraction and analysis:
-
-```dart
-class Scanner {
-  // Scanning operations
-  static void scanType(Type type);
-  static TypeMetadata getTypeMetadata(Type type);
-  
-  // Analysis methods
-  static TypeInfo analyze(Type type);
-  static List<PropertyInfo> analyzeProperties(Type type);
-  static List<MethodInfo> analyzeMethods(Type type);
-}
-```
-
 ### RuntimeReflector
 
 Runtime reflection implementation:
@@ -146,7 +133,7 @@ class RuntimeReflector {
   // Instance creation
   InstanceMirror createInstance(Type type, {
     List<dynamic>? positionalArgs,
-    Map<Symbol, dynamic>? namedArgs,
+    Map<String, dynamic>? namedArgs,
     String? constructorName,
   });
   
@@ -154,6 +141,23 @@ class RuntimeReflector {
   InstanceMirror reflect(Object object);
   ClassMirror reflectClass(Type type);
   TypeMirror reflectType(Type type);
+  LibraryMirror reflectLibrary(Uri uri);
+}
+```
+
+### LibraryScanner
+
+Library scanning and analysis:
+
+```dart
+class LibraryScanner {
+  // Library scanning
+  static LibraryInfo scanLibrary(Uri uri);
+  
+  // Analysis methods
+  static List<FunctionInfo> getTopLevelFunctions(Uri uri);
+  static List<VariableInfo> getTopLevelVariables(Uri uri);
+  static List<DependencyInfo> getDependencies(Uri uri);
 }
 ```
 
@@ -231,7 +235,7 @@ void manipulateInstance() {
   final user = reflector.createInstance(
     User,
     positionalArgs: ['John', 30],
-    namedArgs: {const Symbol('id'): '123'},
+    namedArgs: {'id': '123'},
   ) as User;
   
   // Get mirror
@@ -254,74 +258,56 @@ void manipulateInstance() {
 }
 ```
 
-### Type Introspection
+### Library Reflection
 
 ```dart
-void inspectType() {
-  final metadata = Reflector.getTypeMetadata(User);
+void reflectLibrary() {
+  final reflector = RuntimeReflector.instance;
   
-  // Property inspection
-  for (var property in metadata.properties.values) {
-    print('Property: ${property.name}');
-    print('  Type: ${property.type}');
-    print('  Writable: ${property.isWritable}');
-    print('  Static: ${property.isStatic}');
-  }
+  // Get library mirror
+  final library = reflector.reflectLibrary(
+    Uri.parse('package:myapp/src/models.dart')
+  );
   
-  // Method inspection
-  for (var method in metadata.methods.values) {
-    print('Method: ${method.name}');
-    print('  Return type: ${method.returnType}');
-    print('  Parameters:');
-    for (var param in method.parameters) {
-      print('    ${param.name}: ${param.type}');
-      print('    Required: ${param.isRequired}');
-      print('    Named: ${param.isNamed}');
-    }
-  }
+  // Access top-level function
+  final result = library.invoke(
+    const Symbol('utilityFunction'),
+    [arg1, arg2],
+  ).reflectee;
   
-  // Constructor inspection
-  for (var ctor in metadata.constructors) {
-    print('Constructor: ${ctor.name}');
-    print('  Parameters:');
-    for (var param in ctor.parameters) {
-      print('    ${param.name}: ${param.type}');
-      print('    Required: ${param.isRequired}');
-      print('    Named: ${param.isNamed}');
-    }
+  // Access top-level variable
+  final value = library.getField(const Symbol('constant')).reflectee;
+  
+  // Get library dependencies
+  final dependencies = library.libraryDependencies;
+  for (final dep in dependencies) {
+    print('Import: ${dep.targetLibrary.uri}');
+    print('Is deferred: ${dep.isDeferred}');
   }
 }
 ```
 
-### Scanner Usage
+### Type Relationships
 
 ```dart
-void useScannerFeatures() {
-  // Scan type
-  Scanner.scanType(User);
+void checkTypes() {
+  final reflector = RuntimeReflector.instance;
   
-  // Get scanned metadata
-  final metadata = Scanner.getTypeMetadata(User);
+  // Get class mirrors
+  final userMirror = reflector.reflectClass(User);
+  final baseMirror = reflector.reflectClass(BaseClass);
   
-  // Analyze type structure
-  final typeInfo = Scanner.analyze(User);
+  // Check inheritance
+  final isSubclass = userMirror.isSubclassOf(baseMirror);
   
-  // Property analysis
-  final properties = typeInfo.properties;
-  for (var prop in properties) {
-    print('Property: ${prop.name}');
-    print('  Type: ${prop.type}');
-    print('  Final: ${prop.isFinal}');
-  }
+  // Check type compatibility
+  final isCompatible = userMirror.isAssignableTo(baseMirror);
   
-  // Method analysis
-  final methods = typeInfo.methods;
-  for (var method in methods) {
-    print('Method: ${method.name}');
-    print('  Return type: ${method.returnType}');
-    print('  Static: ${method.isStatic}');
-    print('  Parameters: ${method.parameters}');
-  }
+  // Get superclass
+  final superclass = userMirror.superclass;
+  
+  // Get interfaces
+  final interfaces = userMirror.interfaces;
 }
 ```
 
@@ -415,9 +401,10 @@ void demonstrateErrorHandling() {
 
 ### Memory Management
 
-- Metadata storage optimization
-- Instance mirror lifecycle management
-- Cache invalidation strategies
+- Cached class mirrors
+- Efficient parameter resolution
+- Smart library scanning
+- Minimal metadata storage
 
 ## Migration Guide
 
@@ -453,20 +440,23 @@ void registerTypes() {
 ### Core Classes
 
 - `Reflector`: Central reflection management
-- `Scanner`: Metadata extraction
 - `RuntimeReflector`: Runtime reflection operations
+- `LibraryScanner`: Library scanning and analysis
 
 ### Mirrors
 
 - `InstanceMirror`: Instance reflection
 - `ClassMirror`: Class reflection
 - `MethodMirror`: Method reflection
+- `LibraryMirror`: Library reflection
+- `TypeMirror`: Type reflection
 
 ### Metadata
 
 - `TypeMetadata`: Type information
 - `PropertyMetadata`: Property information
 - `MethodMetadata`: Method information
+- `ConstructorMetadata`: Constructor information
 
 ### Exceptions
 
@@ -480,24 +470,18 @@ void registerTypes() {
 Current Implementation Gaps:
 
 1. **Type System**
-   - Limited generic support
-   - No variance handling
+   - Limited generic variance support
    - Basic type relationship checking
 
 2. **Reflection Features**
-   - No cross-isolate reflection
-   - No source location tracking
-   - Limited metadata capabilities
+   - No extension method support
+   - Limited annotation metadata
+   - No cross-package private member access
 
 3. **Language Features**
-   - No extension method support
-   - No mixin composition
    - No operator overloading reflection
-
-4. **Advanced Features**
-   - No dynamic proxy generation
-   - No attribute-based reflection
-   - Limited annotation processing
+   - No dynamic code generation
+   - Limited mixin support
 
 ## Contributing
 
