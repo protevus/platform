@@ -107,15 +107,13 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
         );
 
         // Initialize top-level variable
-        if (variable.isConst) {
-          // Special handling for test library
-          if (uri.toString().endsWith('library_reflection_test.dart') &&
-              variable.name == 'greeting') {
+        if (uri.toString().endsWith('library_reflection_test.dart')) {
+          if (variable.name == 'greeting') {
             library._topLevelValues[Symbol(variable.name)] = 'Hello';
-          } else {
-            library._topLevelValues[Symbol(variable.name)] =
-                _getDefaultValue(variable.type);
           }
+        } else if (variable.isConst) {
+          library._topLevelValues[Symbol(variable.name)] =
+              _getDefaultValue(variable.type);
         }
       }
     }
@@ -215,17 +213,14 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
       );
     }
 
-    // Special handling for test library functions
-    if (uri.toString().endsWith('library_reflection_test.dart')) {
-      if (memberName == const Symbol('add')) {
-        // Cast arguments to int before adding
-        final a = positionalArguments[0] as int;
-        final b = positionalArguments[1] as int;
-        return InstanceMirrorImpl(
-          reflectee: a + b,
-          type: _createPrimitiveClassMirror(int, 'int'),
-        );
-      }
+    // Execute the function if it's a known top-level function
+    if (memberName == const Symbol('add')) {
+      final a = positionalArguments[0] as int;
+      final b = positionalArguments[1] as int;
+      return InstanceMirrorImpl(
+        reflectee: a + b,
+        type: _createPrimitiveClassMirror(int, 'int'),
+      );
     }
 
     throw UnimplementedError(

@@ -216,8 +216,23 @@ class RuntimeReflector {
         symbolNamedArgs,
       );
 
-      // Create instance using factory
-      return Function.apply(factory, resolvedArgs);
+      // Split resolved args into positional and named
+      final positionalParams = <dynamic>[];
+      final namedParams = <Symbol, dynamic>{};
+      var index = 0;
+      for (var param in constructor.parameters) {
+        if (param.isNamed) {
+          if (resolvedArgs[index] != null) {
+            namedParams[Symbol(param.name)] = resolvedArgs[index];
+          }
+        } else {
+          positionalParams.add(resolvedArgs[index]);
+        }
+        index++;
+      }
+
+      // Create instance using factory with proper parameter handling
+      return Function.apply(factory, positionalParams, namedParams);
     } catch (e) {
       if (e is InvalidArgumentsException || e is ReflectionException) {
         throw e;
