@@ -10,7 +10,7 @@ class ContainerReflector implements ReflectorContract {
   @override
   ClassMirror? reflectClass(Type type) {
     try {
-      return _reflector.reflectClass(type) as ClassMirror;
+      return _reflector.reflectClass(type);
     } catch (_) {
       return null;
     }
@@ -18,17 +18,17 @@ class ContainerReflector implements ReflectorContract {
 
   @override
   TypeMirror reflectType(Type type) {
-    return _reflector.reflectType(type) as TypeMirror;
+    return _reflector.reflectType(type);
   }
 
   @override
   InstanceMirror reflect(Object object) {
-    return _reflector.reflect(object) as InstanceMirror;
+    return _reflector.reflect(object);
   }
 
   @override
   LibraryMirror reflectLibrary(Uri uri) {
-    return _reflector.reflectLibrary(uri) as LibraryMirror;
+    return _reflector.reflectLibrary(uri);
   }
 
   @override

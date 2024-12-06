@@ -1,9 +1,16 @@
-import 'dart:mirrors';
+import 'package:platform_reflection/reflection.dart';
+
+/// Interface for objects that can provide methods to be mixed in
+abstract class MacroProvider {
+  /// Get all methods that should be mixed in
+  Map<String, Function> getMethods();
+}
 
 /// A mixin that allows runtime method extension through macros.
 ///
 /// This mixin provides functionality similar to Laravel's Macroable trait,
 /// allowing classes to be extended with custom methods at runtime.
+@reflectable
 mixin Macroable {
   /// The registered macros.
   static final Map<Type, Map<String, Function>> _macros = {};
@@ -30,22 +37,14 @@ mixin Macroable {
   /// [mixin] - The object whose methods should be mixed in
   /// [replace] - Whether to replace existing macros with the same name
   static void mixin<T>(Object mixin, {bool replace = true}) {
-    final instanceMirror = reflect(mixin);
-    final classMirror = instanceMirror.type;
+    if (mixin is! MacroProvider) {
+      throw ArgumentError('Mixin source must implement MacroProvider');
+    }
 
-    for (var declarationKey in classMirror.declarations.keys) {
-      final declaration = classMirror.declarations[declarationKey];
-
-      if (declaration is MethodMirror &&
-          declaration.isRegularMethod &&
-          !declaration.isPrivate) {
-        final methodName = MirrorSystem.getName(declaration.simpleName);
-
-        if (replace || !hasMacro<T>(methodName)) {
-          final method =
-              instanceMirror.getField(declaration.simpleName).reflectee;
-          macro<T>(methodName, method);
-        }
+    final methods = mixin.getMethods();
+    for (var entry in methods.entries) {
+      if (replace || !hasMacro<T>(entry.key)) {
+        macro<T>(entry.key, entry.value);
       }
     }
   }
@@ -63,7 +62,12 @@ mixin Macroable {
   /// Handle dynamic method calls.
   @override
   dynamic noSuchMethod(Invocation invocation) {
-    final name = MirrorSystem.getName(invocation.memberName);
+    // Get method name from Symbol without using reflection
+    final name = invocation.memberName
+        .toString()
+        .substring(8) // Remove "Symbol("
+        .split('"')[0]; // Get name part before closing quote
+
     final macros = _macros[runtimeType];
 
     if (macros != null && macros.containsKey(name)) {

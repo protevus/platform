@@ -1,11 +1,22 @@
+import 'package:platform_reflection/reflection.dart';
 import 'package:test/test.dart';
-import '../lib/platform_macroable.dart';
+import 'package:platform_macroable/platform_macroable.dart';
 
+@reflectable
 class TestClass with Macroable {}
 
-class MixinSource {
+@reflectable
+class MixinSource implements MacroProvider {
   String greet(String name) => 'Hello, $name!';
   int add(int a, int b) => a + b;
+
+  @override
+  Map<String, Function> getMethods() {
+    return {
+      'greet': greet,
+      'add': add,
+    };
+  }
 }
 
 void main() {
