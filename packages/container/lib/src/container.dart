@@ -1,4 +1,5 @@
 import 'package:platform_contracts/contracts.dart';
+import 'reflector.dart';
 
 /// Laravel-style container implementation.
 class IlluminateContainer implements ContainerContract {
@@ -19,7 +20,11 @@ class IlluminateContainer implements ContainerContract {
   final List<Function> _resolvingCallbacks = [];
   final List<Function> _afterResolvingCallbacks = [];
 
-  IlluminateContainer(this._reflector) : _parent = null;
+  /// Creates a new container instance.
+  /// If no reflector is provided, uses the default ContainerReflector.
+  IlluminateContainer([ReflectorContract? reflector])
+      : _reflector = reflector ?? ContainerReflector(),
+        _parent = null;
 
   IlluminateContainer._child(this._parent, this._reflector);
 

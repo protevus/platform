@@ -60,6 +60,11 @@ void main() {
   });
 
   group('Container', () {
+    test('uses ContainerReflector by default', () {
+      final defaultContainer = IlluminateContainer();
+      expect(defaultContainer.reflector, isA<ContainerReflector>());
+    });
+
     test('isRoot returns true for root container', () {
       expect(container.isRoot, isTrue);
     });
