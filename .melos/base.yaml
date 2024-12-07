@@ -3,7 +3,7 @@ repository: https://github.com/protevus/platform
 packages:
   - apps/**
   - packages/**
-  - sandbox/**
+  - fig/**
   - helpers/tools/**
   - examples/**
 
