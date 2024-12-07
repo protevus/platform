@@ -1,5 +1,5 @@
+import 'package:dsr_container/container.dart';
 import 'binding_resolution_exception.dart';
-import 'container_interface.dart';
 import 'contextual_binding_builder.dart';
 
 /// Interface for the IoC container.

@@ -41,7 +41,6 @@ export 'src/bus/queueing_dispatcher.dart';
 
 // Cache contracts
 export 'src/cache/cache_factory.dart';
-export 'src/cache/cache_interface.dart';
 export 'src/cache/lock.dart';
 export 'src/cache/lock_provider.dart';
 export 'src/cache/lock_timeout_exception.dart' show CacheLockTimeoutException;
@@ -62,7 +61,6 @@ export 'src/container/binding_resolution_exception.dart';
 export 'src/container/circular_dependency_exception.dart';
 export 'src/container/container.dart';
 export 'src/container/container_contract.dart';
-export 'src/container/container_interface.dart';
 export 'src/container/contextual_binding_contract.dart';
 
 // Cookie contracts

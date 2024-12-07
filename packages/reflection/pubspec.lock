@@ -166,6 +166,20 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.7"
+  dsr_container:
+    dependency: "direct overridden"
+    description:
+      path: "../../fig/container"
+      relative: true
+    source: path
+    version: "0.0.1"
+  dsr_simple_cache:
+    dependency: "direct overridden"
+    description:
+      path: "../../fig/simple_cache"
+      relative: true
+    source: path
+    version: "0.0.1"
   file:
     dependency: transitive
     description:

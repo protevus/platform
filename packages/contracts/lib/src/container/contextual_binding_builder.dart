@@ -22,4 +22,33 @@ abstract class ContextualBindingBuilder {
   ///
   /// The implementation can be either a concrete type or a factory function.
   void give(dynamic implementation);
+
+  /// Define tagged services to be used as the implementation.
+  ///
+  /// This method specifies that all services tagged with the given tag
+  /// should be used as the implementation in this context.
+  ///
+  /// Example:
+  /// ```dart
+  /// container.when(ReportGenerator)
+  ///          .needs(Logger)
+  ///          .giveTagged('loggers');
+  /// ```
+  void giveTagged(String tag);
+
+  /// Specify the configuration item to bind as a primitive.
+  ///
+  /// This method allows binding a configuration value as the implementation.
+  /// If the configuration key doesn't exist, the default value is used.
+  ///
+  /// Example:
+  /// ```dart
+  /// container.when(MailService)
+  ///          .needs(String)
+  ///          .giveConfig('services.mail.host');
+  /// ```
+  ///
+  /// @param key The configuration key to bind
+  /// @param defaultValue The default value if the key doesn't exist (defaults to null)
+  void giveConfig(String key, [dynamic defaultValue = null]);
 }

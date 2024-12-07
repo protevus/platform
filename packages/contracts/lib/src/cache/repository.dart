@@ -1,9 +1,9 @@
-import 'cache_interface.dart';
+import 'package:dsr_simple_cache/simple_cache.dart';
 import 'store.dart';
 
 /// Interface for cache operations.
 ///
-/// This contract extends the PSR-16 CacheInterface to add additional
+/// This contract extends the DSR-16 CacheInterface to add additional
 /// functionality specific to Laravel's caching system.
 abstract class CacheRepository extends CacheInterface {
   /// Retrieve an item from the cache and delete it.
