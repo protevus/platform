@@ -1,4 +1,4 @@
-import 'package:platform_contracts/contracts.dart' hide Container;
+import 'package:platform_contracts/contracts.dart' hide ContainerContract;
 import 'package:platform_container/platform_container.dart';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';
@@ -119,12 +119,11 @@ void main() {
       final testValue = 'test';
 
       // Register hooks with explicit type parameters
-      void beforeCallback(ContainerContract c, String? i) =>
+      void beforeCallback(ContainerBase c, String? i) =>
           resolving.add('before');
-      void resolvingCallback(ContainerContract c, String i) =>
+      void resolvingCallback(ContainerBase c, String i) =>
           resolving.add('resolving');
-      void afterCallback(ContainerContract c, String i) =>
-          resolving.add('after');
+      void afterCallback(ContainerBase c, String i) => resolving.add('after');
 
       container.beforeResolving<String>(beforeCallback);
       container.resolving<String>(resolvingCallback);

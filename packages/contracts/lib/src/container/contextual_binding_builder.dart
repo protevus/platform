@@ -50,5 +50,5 @@ abstract class ContextualBindingBuilder {
   ///
   /// @param key The configuration key to bind
   /// @param defaultValue The default value if the key doesn't exist (defaults to null)
-  void giveConfig(String key, [dynamic defaultValue = null]);
+  void giveConfig(String key, [dynamic value = null]);
 }

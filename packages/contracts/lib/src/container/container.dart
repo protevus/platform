@@ -8,7 +8,7 @@ import 'contextual_binding_builder.dart';
 /// which provides dependency injection and service location capabilities.
 /// It extends the basic [ContainerInterface] with additional functionality
 /// for binding, resolving, and managing services.
-abstract class Container implements ContainerInterface {
+abstract class ContainerContract implements ContainerInterface {
   /// Determine if the given abstract type has been bound.
   bool bound(String abstract);
 
@@ -90,18 +90,18 @@ abstract class Container implements ContainerInterface {
   /// Register a new before resolving callback.
   void beforeResolving(
     dynamic abstract, [
-    void Function(Container container, String abstract)? callback,
+    void Function(ContainerContract container, String abstract)? callback,
   ]);
 
   /// Register a new resolving callback.
   void resolving(
     dynamic abstract, [
-    void Function(dynamic instance, Container container)? callback,
+    void Function(dynamic instance, ContainerContract container)? callback,
   ]);
 
   /// Register a new after resolving callback.
   void afterResolving(
     dynamic abstract, [
-    void Function(dynamic instance, Container container)? callback,
+    void Function(dynamic instance, ContainerContract container)? callback,
   ]);
 }

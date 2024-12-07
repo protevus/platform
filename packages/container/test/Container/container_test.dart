@@ -1,4 +1,4 @@
-import 'package:platform_contracts/contracts.dart' hide Container;
+import 'package:platform_contracts/contracts.dart' hide ContainerContract;
 import 'package:platform_container/platform_container.dart';
 import 'package:test/test.dart';
 import 'package:mockito/mockito.dart';

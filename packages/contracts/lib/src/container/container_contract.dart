@@ -10,7 +10,7 @@
 import '../reflection/reflector_contract.dart';
 
 /// Core container contract defining dependency injection functionality.
-abstract class ContainerContract {
+abstract class ContainerBase {
   /// Gets the reflector instance used by this container.
   ReflectorContract get reflector;
 
@@ -18,28 +18,28 @@ abstract class ContainerContract {
   bool get isRoot;
 
   /// Creates a child container that inherits from this container.
-  ContainerContract createChild();
+  ContainerBase createChild();
 
   /// Determine if the given abstract type has been bound.
   bool bound(String abstract);
 
   /// Register a binding with the container.
-  void bind<T>(T Function(ContainerContract) concrete, {bool shared = false});
+  void bind<T>(T Function(ContainerBase) concrete, {bool shared = false});
 
   /// Register a binding if it hasn't already been registered.
-  void bindIf<T>(T Function(ContainerContract) concrete, {bool shared = false});
+  void bindIf<T>(T Function(ContainerBase) concrete, {bool shared = false});
 
   /// Register a shared binding in the container.
-  void singleton<T>(T Function(ContainerContract) concrete);
+  void singleton<T>(T Function(ContainerBase) concrete);
 
   /// Register a shared binding if it hasn't already been registered.
-  void singletonIf<T>(T Function(ContainerContract) concrete);
+  void singletonIf<T>(T Function(ContainerBase) concrete);
 
   /// Register a scoped binding in the container.
-  void scoped<T>(T Function(ContainerContract) concrete);
+  void scoped<T>(T Function(ContainerBase) concrete);
 
   /// Register a scoped binding if it hasn't already been registered.
-  void scopedIf<T>(T Function(ContainerContract) concrete);
+  void scopedIf<T>(T Function(ContainerBase) concrete);
 
   /// Register an existing instance as shared in the container.
   T instance<T>(T instance);
@@ -61,14 +61,13 @@ abstract class ContainerContract {
       Type concrete, Type abstract, dynamic implementation);
 
   /// Register a new before resolving callback.
-  void beforeResolving<T>(
-      void Function(ContainerContract, T instance) callback);
+  void beforeResolving<T>(void Function(ContainerBase, T instance) callback);
 
   /// Register a new resolving callback.
-  void resolving<T>(void Function(ContainerContract, T instance) callback);
+  void resolving<T>(void Function(ContainerBase, T instance) callback);
 
   /// Register a new after resolving callback.
-  void afterResolving<T>(void Function(ContainerContract, T instance) callback);
+  void afterResolving<T>(void Function(ContainerBase, T instance) callback);
 
   /// Checks if a type is registered in this container or its parents.
   bool has<T>([Type? t]);
@@ -86,13 +85,13 @@ abstract class ContainerContract {
   T registerSingleton<T>(T object, {Type? as});
 
   /// Registers a factory function.
-  T Function(ContainerContract) registerFactory<T>(
-      T Function(ContainerContract) factory,
+  T Function(ContainerBase) registerFactory<T>(
+      T Function(ContainerBase) factory,
       {Type? as});
 
   /// Registers a lazy singleton.
-  T Function(ContainerContract) registerLazySingleton<T>(
-      T Function(ContainerContract) factory,
+  T Function(ContainerBase) registerLazySingleton<T>(
+      T Function(ContainerBase) factory,
       {Type? as});
 
   /// Gets a named singleton.
@@ -138,7 +137,7 @@ abstract class ContainerContract {
   void flush();
 
   /// Bind a new callback to an abstract's rebind event.
-  void rebinding(Type abstract, Function(ContainerContract, dynamic) callback);
+  void rebinding(Type abstract, Function(ContainerBase, dynamic) callback);
 
   /// Refresh an instance on the given target and method.
   void refresh(Type abstract, dynamic target, String method);

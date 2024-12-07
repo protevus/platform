@@ -2,9 +2,9 @@ import 'package:platform_contracts/contracts.dart';
 import 'reflector.dart';
 
 /// Laravel-style container implementation.
-class Container implements ContainerContract {
+class Container implements ContainerBase {
   final ReflectorContract _reflector;
-  final Map<Type, dynamic Function(ContainerContract)> _bindings = {};
+  final Map<Type, dynamic Function(ContainerBase)> _bindings = {};
   final Map<Type, dynamic> _instances = {};
   final Map<String, dynamic> _namedInstances = {};
   final Map<String, List<Type>> _tags = {};
@@ -35,7 +35,7 @@ class Container implements ContainerContract {
   bool get isRoot => _parent == null;
 
   @override
-  ContainerContract createChild() {
+  ContainerBase createChild() {
     return Container._child(this, _reflector);
   }
 
@@ -45,7 +45,7 @@ class Container implements ContainerContract {
   }
 
   @override
-  void bind<T>(T Function(ContainerContract) concrete, {bool shared = false}) {
+  void bind<T>(T Function(ContainerBase) concrete, {bool shared = false}) {
     if (shared) {
       singleton<T>(concrete);
     } else {
@@ -54,29 +54,28 @@ class Container implements ContainerContract {
   }
 
   @override
-  void bindIf<T>(T Function(ContainerContract) concrete,
-      {bool shared = false}) {
+  void bindIf<T>(T Function(ContainerBase) concrete, {bool shared = false}) {
     if (!has<T>()) {
       bind<T>(concrete, shared: shared);
     }
   }
 
   @override
-  void singleton<T>(T Function(ContainerContract) concrete) {
+  void singleton<T>(T Function(ContainerBase) concrete) {
     registerLazySingleton<T>(concrete);
   }
 
   @override
-  void singletonIf<T>(T Function(ContainerContract) concrete) {
+  void singletonIf<T>(T Function(ContainerBase) concrete) {
     if (!has<T>()) {
       singleton<T>(concrete);
     }
   }
 
   @override
-  void scoped<T>(T Function(ContainerContract) concrete) {
+  void scoped<T>(T Function(ContainerBase) concrete) {
     final type = T;
-    T Function(ContainerContract) wrapper = (container) {
+    T Function(ContainerBase) wrapper = (container) {
       if (!_scopedInstances.containsKey(type)) {
         _scopedInstances[type] = concrete(container);
       }
@@ -86,7 +85,7 @@ class Container implements ContainerContract {
   }
 
   @override
-  void scopedIf<T>(T Function(ContainerContract) concrete) {
+  void scopedIf<T>(T Function(ContainerBase) concrete) {
     if (!has<T>()) {
       scoped<T>(concrete);
     }
@@ -143,19 +142,17 @@ class Container implements ContainerContract {
   }
 
   @override
-  void beforeResolving<T>(
-      void Function(ContainerContract, T instance) callback) {
+  void beforeResolving<T>(void Function(ContainerBase, T instance) callback) {
     _beforeResolvingCallbacks.add(callback);
   }
 
   @override
-  void resolving<T>(void Function(ContainerContract, T instance) callback) {
+  void resolving<T>(void Function(ContainerBase, T instance) callback) {
     _resolvingCallbacks.add(callback);
   }
 
   @override
-  void afterResolving<T>(
-      void Function(ContainerContract, T instance) callback) {
+  void afterResolving<T>(void Function(ContainerBase, T instance) callback) {
     _afterResolvingCallbacks.add(callback);
   }
 
@@ -298,8 +295,8 @@ class Container implements ContainerContract {
   }
 
   @override
-  T Function(ContainerContract) registerFactory<T>(
-      T Function(ContainerContract) factory,
+  T Function(ContainerBase) registerFactory<T>(
+      T Function(ContainerBase) factory,
       {Type? as}) {
     final type = as ?? T;
     _bindings[type] = factory;
@@ -307,11 +304,11 @@ class Container implements ContainerContract {
   }
 
   @override
-  T Function(ContainerContract) registerLazySingleton<T>(
-      T Function(ContainerContract) factory,
+  T Function(ContainerBase) registerLazySingleton<T>(
+      T Function(ContainerBase) factory,
       {Type? as}) {
     final type = as ?? T;
-    T Function(ContainerContract) wrapper = (container) {
+    T Function(ContainerBase) wrapper = (container) {
       if (!_instances.containsKey(type)) {
         _instances[type] = factory(container);
       }
@@ -434,7 +431,7 @@ class Container implements ContainerContract {
   }
 
   @override
-  void rebinding(Type abstract, Function(ContainerContract, dynamic) callback) {
+  void rebinding(Type abstract, Function(ContainerBase, dynamic) callback) {
     _reboundCallbacks.putIfAbsent(abstract, () => []).add(callback);
   }
 

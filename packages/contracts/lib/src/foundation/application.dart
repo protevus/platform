@@ -1,7 +1,7 @@
 import '../container/container.dart';
 
 /// Interface for the application.
-abstract class Application extends Container {
+abstract class Application extends ContainerContract {
   /// Get the version number of the application.
   String version();
 
