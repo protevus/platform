@@ -1,228 +1,185 @@
-# Container Contracts Compatibility Report
+# Container Interface Compatibility Report
 
-## 1. Container Interface: 95% Compatible
+## Interface Alignment Required
 
-### Base Interface Alignment
+### 1. Parameter Types and Signatures
+
 ```dart
-// Current:
+// Current Interface
 abstract class Container implements ContainerInterface {
-  // Methods
-}
-
-// Correct - matches Laravel's approach of extending PSR-11 ContainerInterface
-```
-
-### Method Compatibility
-```dart
-// Needs alignment:
-bind(String abstract, [dynamic concrete, bool shared = false])
-make<T>(String abstract, [List<dynamic> parameters = const []])
-call(dynamic callback, [List<dynamic> parameters = const [], String? defaultMethod])
-```
-
-## 2. ContextualBindingBuilder Interface: 50% Compatible
-
-### Missing Methods
-```dart
-// Need to add:
-void giveTagged(String tag)
-void giveConfig(String key, [dynamic default])
-```
-
-## 3. Exception Contracts
-
-### BindingResolutionException: Needs Alignment
-
-Current:
-```dart
-class BindingResolutionException implements Exception {
-  final String message;
-  final Object? originalError;
-  final StackTrace? stackTrace;
-}
-```
-
-Should be:
-```dart
-class BindingResolutionException implements Exception, ContainerExceptionInterface {
-  final String message;
+  T make<T>(String abstract, {Map<String, dynamic>? parameters});
   
-  // Optional - our additional features can stay
-  final Object? originalError;
-  final StackTrace? stackTrace;
+  dynamic call(
+    dynamic callback, {
+    Map<String, dynamic>? parameters,
+    String? defaultMethod,
+  });
+}
+
+// Should Be
+abstract class Container implements ContainerInterface {
+  T make<T>(String abstract, [List<dynamic> parameters = const []]);
+  
+  dynamic call(
+    dynamic callback, [
+    List<dynamic> parameters = const [],
+    String? defaultMethod,
+  ]);
 }
 ```
 
-### CircularDependencyException: Missing
+### 2. Callback Signatures
 
-Need to add:
 ```dart
-class CircularDependencyException implements Exception, ContainerExceptionInterface {
-  final String message;
-  final List<Type> dependencyChain;
+// Current - Too Specific
+abstract class Container {
+  void beforeResolving(
+    dynamic abstract, [
+    void Function(Container container, String abstract)? callback,
+  ]);
+  
+  void resolving(
+    dynamic abstract, [
+    void Function(dynamic instance, Container container)? callback,
+  ]);
+  
+  void afterResolving(
+    dynamic abstract, [
+    void Function(dynamic instance, Container container)? callback,
+  ]);
+}
 
-  const CircularDependencyException(this.message, this.dependencyChain);
+// Should Be - More Flexible
+abstract class Container {
+  void beforeResolving(dynamic abstract, [Function? callback]);
+  void resolving(dynamic abstract, [Function? callback]);
+  void afterResolving(dynamic abstract, [Function? callback]);
+}
+```
 
-  @override
-  String toString() {
-    return 'CircularDependencyException: $message\nDependency chain: ${dependencyChain.join(' -> ')}';
-  }
+### 3. Missing Methods
+
+```dart
+// Need to Add
+abstract class Container {
+  /// An alias function name for make().
+  T makeWith<T>(String abstract, List<dynamic> parameters);
+}
+```
+
+### 4. Tag Parameters
+
+```dart
+// Current
+abstract class Container {
+  void tag(dynamic abstracts, List<String> tags);
+}
+
+// Should Be - Match Laravel's Variadic Style
+abstract class Container {
+  void tag(dynamic abstracts, String tag, [List<String> additionalTags = const []]);
 }
 ```
 
 ## Required Changes
 
-### 1. Update Exception Contracts
-
-1. Update BindingResolutionException:
-```dart
-import 'package:psr_container/container_exception_interface.dart';
-
-class BindingResolutionException implements Exception, ContainerExceptionInterface {
-  // Existing implementation can stay
-}
-```
-
-2. Add CircularDependencyException:
-```dart
-import 'package:psr_container/container_exception_interface.dart';
-
-class CircularDependencyException implements Exception, ContainerExceptionInterface {
-  final String message;
-  final List<Type> dependencyChain;
-
-  const CircularDependencyException(this.message, this.dependencyChain);
-}
-```
-
-### 2. Update ContextualBindingBuilder
-
-```dart
-abstract class ContextualBindingBuilder {
-  /// Define the abstract target that is being contextualized.
-  ContextualBindingBuilder needs(dynamic abstract);
-
-  /// Define the concrete implementation that should be used.
-  void give(dynamic implementation);
-
-  /// Define tagged services to be used as the implementation.
-  void giveTagged(String tag);
-
-  /// Specify the configuration item to bind as a primitive.
-  void giveConfig(String key, [dynamic default]);
-}
-```
-
-### 3. Update Container Method Signatures
+### 1. Update Method Signatures
 
 ```dart
 abstract class Container implements ContainerInterface {
-  // Update parameter types
+  // Change named parameters to positional
   T make<T>(String abstract, [List<dynamic> parameters = const []]);
   
-  // Update callback signatures
-  void resolving(dynamic abstract, [Function? callback]);
+  // Add makeWith alias
+  T makeWith<T>(String abstract, List<dynamic> parameters);
+  
+  // Update call signature
+  dynamic call(
+    dynamic callback, [
+    List<dynamic> parameters = const [],
+    String? defaultMethod,
+  ]);
+  
+  // Simplify callback signatures
   void beforeResolving(dynamic abstract, [Function? callback]);
+  void resolving(dynamic abstract, [Function? callback]);
   void afterResolving(dynamic abstract, [Function? callback]);
+  
+  // Update tag signature
+  void tag(dynamic abstracts, String tag, [List<String> additionalTags = const []]);
 }
 ```
 
-## Implementation Impact
+### 2. Update Exception Types
+
+```dart
+// Current
+throw BindingResolutionException(message);
+
+// Should Use DSR Exceptions
+throw ContainerException(message);  // For general errors
+throw NotFoundException(id);        // For missing bindings
+```
+
+## Impact Analysis
 
 ### Breaking Changes
 
-1. Exception Handling:
-- Add PSR ContainerExceptionInterface
-- Add CircularDependencyException
-- Update exception catching code
+1. Parameter Types:
+- Map to List conversion
+- Named to positional parameters
+- New parameter handling
 
-2. ContextualBindingBuilder:
-- Add new required methods
-- Update implementations
+2. Method Signatures:
+- Simplified callback types
+- New tag method signature
+- Added makeWith method
 
-3. Container:
-- Update parameter types
-- Update callback signatures
+3. Exception Types:
+- Using DSR exceptions
+- More specific error cases
+- Changed exception hierarchy
 
 ### Migration Path
 
-1. Exception Updates:
+1. Interface Updates:
 ```dart
-// Step 1: Add PSR dependency
-dependencies:
-  psr_container: ^1.0.0
+// Step 1: Add new methods alongside existing
+T makeWith<T>(String abstract, List<dynamic> parameters);
 
-// Step 2: Update exceptions
-class BindingResolutionException implements ContainerExceptionInterface {
-  // Implementation
-}
+// Step 2: Mark old methods as deprecated
+@Deprecated('Use positional parameters instead')
+T make<T>(String abstract, {Map<String, dynamic>? parameters});
 
-// Step 3: Add circular dependency detection
-class Container {
-  final List<Type> _resolutionStack = [];
-  
-  void _checkCircular(Type type) {
-    if (_resolutionStack.contains(type)) {
-      throw CircularDependencyException(
-        'Circular dependency detected',
-        List.from(_resolutionStack)..add(type),
-      );
-    }
-    _resolutionStack.add(type);
-  }
-}
+// Step 3: Replace with new signatures
+T make<T>(String abstract, [List<dynamic> parameters = const []]);
 ```
 
-2. ContextualBindingBuilder Updates:
+2. Implementation Updates:
 ```dart
-class ContextualBindingBuilderImpl implements ContextualBindingBuilder {
-  // Implement new methods
-  @override
-  void giveTagged(String tag) {
-    // Implementation
+// Update internal parameter handling
+List<dynamic> _convertParameters(dynamic parameters) {
+  if (parameters is Map) {
+    // Convert map to list for backward compatibility
+    return parameters.values.toList();
   }
-
-  @override
-  void giveConfig(String key, [dynamic default]) {
-    // Implementation
-  }
+  return parameters as List<dynamic>;
 }
 ```
-
-## Verification Checklist
-
-### Exception Contracts
-- [ ] Implement ContainerExceptionInterface
-- [ ] Add CircularDependencyException
-- [ ] Update exception handling code
-
-### ContextualBindingBuilder
-- [ ] Add giveTagged method
-- [ ] Add giveConfig method
-- [ ] Update implementations
-
-### Container Interface
-- [ ] Update parameter types
-- [ ] Update callback signatures
-- [ ] Add circular dependency detection
 
 ## Next Steps
 
-1. Add PSR Container Dependency:
-- Add to pubspec.yaml
-- Import in contracts
-
-2. Update Exceptions:
-- Implement ContainerExceptionInterface
-- Add CircularDependencyException
-- Update exception handling
-
-3. Enhance ContextualBindingBuilder:
+1. Update Container Interface:
+- Change parameter types
 - Add missing methods
-- Implement tag support
-- Add config integration
+- Update signatures
 
-4. Update Documentation:
-- Document new exceptions
-- Update migration guide
-- Add examples
+2. Update Implementation:
+- Add parameter conversion
+- Update exception handling
+- Add makeWith implementation
+
+3. Update Documentation:
+- Document breaking changes
+- Add migration examples
+- Update API docs
