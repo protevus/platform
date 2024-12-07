@@ -1,0 +1,13 @@
+name: dsr_event_dispatcher
+description: A PSR-14 compatible event dispatcher interface for Dart. Provides standardized interfaces for event handling including EventDispatcherInterface, ListenerProviderInterface, and StoppableEventInterface.
+version: 0.0.1
+homepage: https://dart-fig.org
+
+environment:
+  sdk: ^3.4.2
+
+dependencies: {}
+
+dev_dependencies:
+  lints: ^3.0.0
+  test: ^1.24.0
