@@ -1,54 +1,24 @@
 /// Interface for building contextual bindings in the container.
-///
-/// This contract allows for fluent configuration of contextual bindings,
-/// which are used to specify different concrete implementations for a
-/// dependency based on the context in which it is being resolved.
 abstract class ContextualBindingBuilder {
-  /// Define the abstract target that is being contextualized.
+  /// Define the abstract target that depends on the context.
   ///
-  /// This method specifies which abstract type or interface should be
-  /// bound differently in the given context.
-  ///
-  /// Example:
-  /// ```dart
-  /// container.when([UserController]).needs(Logger).give(FileLogger);
-  /// ```
+  /// @param abstract The abstract type that needs a contextual binding
+  /// @return This builder instance for method chaining
   ContextualBindingBuilder needs(dynamic abstract);
 
-  /// Define the concrete implementation that should be used.
+  /// Define the implementation for the contextual binding.
   ///
-  /// This method specifies the concrete implementation that should be
-  /// used when resolving the abstract type in the given context.
-  ///
-  /// The implementation can be either a concrete type or a factory function.
+  /// @param implementation The implementation (closure, string, or array)
   void give(dynamic implementation);
 
-  /// Define tagged services to be used as the implementation.
+  /// Define tagged services to be used as the implementation for the contextual binding.
   ///
-  /// This method specifies that all services tagged with the given tag
-  /// should be used as the implementation in this context.
-  ///
-  /// Example:
-  /// ```dart
-  /// container.when(ReportGenerator)
-  ///          .needs(Logger)
-  ///          .giveTagged('loggers');
-  /// ```
+  /// @param tag The tag to use for implementation
   void giveTagged(String tag);
 
   /// Specify the configuration item to bind as a primitive.
   ///
-  /// This method allows binding a configuration value as the implementation.
-  /// If the configuration key doesn't exist, the default value is used.
-  ///
-  /// Example:
-  /// ```dart
-  /// container.when(MailService)
-  ///          .needs(String)
-  ///          .giveConfig('services.mail.host');
-  /// ```
-  ///
   /// @param key The configuration key to bind
-  /// @param defaultValue The default value if the key doesn't exist (defaults to null)
-  void giveConfig(String key, [dynamic value = null]);
+  /// @param defaultValue The default value if the key doesn't exist
+  void giveConfig(String key, [dynamic defaultValue = null]);
 }

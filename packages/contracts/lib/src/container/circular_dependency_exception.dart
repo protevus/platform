@@ -1,3 +1,5 @@
+import 'package:dsr_container/container.dart';
+
 /// Exception thrown when a circular dependency is detected in the container.
 ///
 /// This exception is thrown when the container detects a circular dependency
@@ -22,8 +24,9 @@
 ///   print(e.path); // ["A", "B", "A"]
 /// }
 /// ```
-class CircularDependencyException implements Exception {
+class CircularDependencyException implements ContainerExceptionInterface {
   /// The error message describing the circular dependency.
+  @override
   final String message;
 
   /// The path of dependencies that form the circle.

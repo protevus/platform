@@ -1,11 +1,9 @@
-# Container Interface Compatibility Report
+# Container Migration Plan - File Changes
 
-## Interface Alignment Required
+## 1. packages/contracts/lib/src/container/container.dart
 
-### 1. Parameter Types and Signatures
-
+Current:
 ```dart
-// Current Interface
 abstract class Container implements ContainerInterface {
   T make<T>(String abstract, {Map<String, dynamic>? parameters});
   
@@ -14,25 +12,7 @@ abstract class Container implements ContainerInterface {
     Map<String, dynamic>? parameters,
     String? defaultMethod,
   });
-}
 
-// Should Be
-abstract class Container implements ContainerInterface {
-  T make<T>(String abstract, [List<dynamic> parameters = const []]);
-  
-  dynamic call(
-    dynamic callback, [
-    List<dynamic> parameters = const [],
-    String? defaultMethod,
-  ]);
-}
-```
-
-### 2. Callback Signatures
-
-```dart
-// Current - Too Specific
-abstract class Container {
   void beforeResolving(
     dynamic abstract, [
     void Function(Container container, String abstract)? callback,
@@ -47,139 +27,225 @@ abstract class Container {
     dynamic abstract, [
     void Function(dynamic instance, Container container)? callback,
   ]);
-}
 
-// Should Be - More Flexible
-abstract class Container {
-  void beforeResolving(dynamic abstract, [Function? callback]);
-  void resolving(dynamic abstract, [Function? callback]);
-  void afterResolving(dynamic abstract, [Function? callback]);
-}
-```
-
-### 3. Missing Methods
-
-```dart
-// Need to Add
-abstract class Container {
-  /// An alias function name for make().
-  T makeWith<T>(String abstract, List<dynamic> parameters);
-}
-```
-
-### 4. Tag Parameters
-
-```dart
-// Current
-abstract class Container {
   void tag(dynamic abstracts, List<String> tags);
 }
-
-// Should Be - Match Laravel's Variadic Style
-abstract class Container {
-  void tag(dynamic abstracts, String tag, [List<String> additionalTags = const []]);
-}
 ```
 
-## Required Changes
-
-### 1. Update Method Signatures
-
+Changes Needed:
 ```dart
 abstract class Container implements ContainerInterface {
-  // Change named parameters to positional
+  // 1. Update make signature
   T make<T>(String abstract, [List<dynamic> parameters = const []]);
   
-  // Add makeWith alias
+  // 2. Add makeWith method
   T makeWith<T>(String abstract, List<dynamic> parameters);
   
-  // Update call signature
+  // 3. Update call signature
   dynamic call(
     dynamic callback, [
     List<dynamic> parameters = const [],
     String? defaultMethod,
   ]);
   
-  // Simplify callback signatures
+  // 4. Simplify callback signatures
   void beforeResolving(dynamic abstract, [Function? callback]);
   void resolving(dynamic abstract, [Function? callback]);
   void afterResolving(dynamic abstract, [Function? callback]);
   
-  // Update tag signature
+  // 5. Update tag signature
   void tag(dynamic abstracts, String tag, [List<String> additionalTags = const []]);
 }
 ```
 
-### 2. Update Exception Types
+## 2. packages/container/lib/src/container.dart
 
+Current:
 ```dart
-// Current
-throw BindingResolutionException(message);
-
-// Should Use DSR Exceptions
-throw ContainerException(message);  // For general errors
-throw NotFoundException(id);        // For missing bindings
-```
-
-## Impact Analysis
-
-### Breaking Changes
-
-1. Parameter Types:
-- Map to List conversion
-- Named to positional parameters
-- New parameter handling
-
-2. Method Signatures:
-- Simplified callback types
-- New tag method signature
-- Added makeWith method
-
-3. Exception Types:
-- Using DSR exceptions
-- More specific error cases
-- Changed exception hierarchy
-
-### Migration Path
-
-1. Interface Updates:
-```dart
-// Step 1: Add new methods alongside existing
-T makeWith<T>(String abstract, List<dynamic> parameters);
-
-// Step 2: Mark old methods as deprecated
-@Deprecated('Use positional parameters instead')
-T make<T>(String abstract, {Map<String, dynamic>? parameters});
-
-// Step 3: Replace with new signatures
-T make<T>(String abstract, [List<dynamic> parameters = const []]);
-```
-
-2. Implementation Updates:
-```dart
-// Update internal parameter handling
-List<dynamic> _convertParameters(dynamic parameters) {
-  if (parameters is Map) {
-    // Convert map to list for backward compatibility
-    return parameters.values.toList();
+class Container implements ContainerBase {
+  T make<T>(String abstract, {Map<String, dynamic>? parameters}) {
+    // Current implementation
   }
-  return parameters as List<dynamic>;
+
+  dynamic call(
+    dynamic callback, {
+    Map<String, dynamic>? parameters,
+    String? defaultMethod,
+  }) {
+    // Current implementation
+  }
+
+  void tag(dynamic abstracts, List<String> tags) {
+    // Current implementation
+  }
 }
 ```
 
-## Next Steps
+Changes Needed:
+```dart
+class Container implements ContainerBase {
+  // 1. Update make implementation
+  T make<T>(String abstract, [List<dynamic> parameters = const []]) {
+    try {
+      // Implementation using list parameters
+    } catch (e) {
+      if (e is ContainerException || e is NotFoundException) {
+        rethrow;
+      }
+      throw ContainerException('Failed to resolve $abstract: ${e.toString()}');
+    }
+  }
 
-1. Update Container Interface:
-- Change parameter types
-- Add missing methods
-- Update signatures
+  // 2. Add makeWith implementation
+  T makeWith<T>(String abstract, List<dynamic> parameters) {
+    return make<T>(abstract, parameters);
+  }
 
-2. Update Implementation:
-- Add parameter conversion
-- Update exception handling
-- Add makeWith implementation
+  // 3. Update call implementation
+  dynamic call(
+    dynamic callback, [
+    List<dynamic> parameters = const [],
+    String? defaultMethod,
+  ]) {
+    // Implementation using list parameters
+  }
 
-3. Update Documentation:
-- Document breaking changes
-- Add migration examples
-- Update API docs
+  // 4. Update tag implementation
+  void tag(dynamic abstracts, String tag, [List<String> additionalTags = const []]) {
+    final tags = [tag, ...additionalTags];
+    final abstractList = abstracts is List ? abstracts : [abstracts];
+    _tags.putIfAbsent(tag, () => []).addAll(abstractList);
+  }
+
+  // 5. Update exception handling
+  void _throwIfNotFound(String id) {
+    if (!has(id)) {
+      throw NotFoundException(id);
+    }
+  }
+
+  void _throwIfInvalid(String message) {
+    throw ContainerException(message);
+  }
+}
+```
+
+## 3. packages/contracts/lib/src/container/contextual_binding_builder.dart
+
+Current:
+```dart
+abstract class ContextualBindingBuilder {
+  ContextualBindingBuilder needs<T>();
+  void give(dynamic implementation);
+}
+```
+
+Changes Needed:
+```dart
+abstract class ContextualBindingBuilder {
+  ContextualBindingBuilder needs<T>();
+  void give(dynamic implementation);
+  
+  // Add new methods
+  void giveTagged(String tag);
+  void giveConfig(String key, [dynamic defaultValue = null]);
+}
+```
+
+## 4. packages/container/lib/src/contextual_binding_builder.dart
+
+Current:
+```dart
+class _ContextualBindingBuilder implements ContextualBindingBuilder {
+  // Current implementation
+}
+```
+
+Changes Needed:
+```dart
+class _ContextualBindingBuilder implements ContextualBindingBuilder {
+  // Keep existing implementation
+
+  // Add new methods
+  @override
+  void giveTagged(String tag) {
+    if (_needsType == null) {
+      throw ContainerException('Must call needs() before giveTagged()');
+    }
+    final tagged = _container.tagged(tag);
+    _container.addContextualBinding(_concrete, _needsType!, tagged);
+  }
+
+  @override
+  void giveConfig(String key, [dynamic defaultValue = null]) {
+    if (_needsType == null) {
+      throw ContainerException('Must call needs() before giveConfig()');
+    }
+    // TODO: Implement config integration
+    throw ContainerException('Config integration not implemented');
+  }
+}
+```
+
+## Migration Steps
+
+1. Phase 1: Interface Updates
+   - Update Container interface in contracts
+   - Update ContextualBindingBuilder interface
+   - Add new method definitions
+
+2. Phase 2: Implementation Updates
+   - Update Container implementation
+   - Update parameter handling
+   - Add new method implementations
+   - Update exception handling
+
+3. Phase 3: Tests
+   - Update existing tests for new signatures
+   - Add tests for new methods
+   - Add tests for error cases
+
+4. Phase 4: Documentation
+   - Update API documentation
+   - Add migration guide
+   - Document breaking changes
+
+## Breaking Changes Impact
+
+1. Code Using Map Parameters:
+```dart
+// Old code
+container.make<Service>(abstract, parameters: {'id': 1});
+
+// New code
+container.make<Service>(abstract, [1]);
+```
+
+2. Code Using Named Parameters:
+```dart
+// Old code
+container.call(callback, parameters: {'id': 1});
+
+// New code
+container.call(callback, [1]);
+```
+
+3. Code Using Tag Lists:
+```dart
+// Old code
+container.tag([ServiceA, ServiceB], ['tag1', 'tag2']);
+
+// New code
+container.tag([ServiceA, ServiceB], 'tag1', ['tag2']);
+```
+
+## Verification Steps
+
+1. Run existing tests with old signatures
+2. Update tests for new signatures
+3. Add tests for new methods
+4. Verify exception handling
+5. Check backward compatibility
+6. Update documentation
+
+Would you like me to start with any particular file or phase?

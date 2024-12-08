@@ -60,8 +60,8 @@ export 'src/console/prompts_for_missing_input.dart';
 export 'src/container/binding_resolution_exception.dart';
 export 'src/container/circular_dependency_exception.dart';
 export 'src/container/container.dart';
-export 'src/container/container_contract.dart';
-export 'src/container/contextual_binding_contract.dart';
+export 'src/container/contextual_attribute.dart';
+export "src/container/contextual_binding_builder.dart";
 
 // Cookie contracts
 export 'src/cookie/cookie_factory.dart' show CookieFactory;

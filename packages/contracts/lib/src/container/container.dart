@@ -18,7 +18,8 @@ abstract class ContainerContract implements ContainerInterface {
   void alias(String abstract, String alias);
 
   /// Assign a set of tags to a given binding.
-  void tag(dynamic abstracts, List<String> tags);
+  void tag(dynamic abstracts, String tag,
+      [List<String> additionalTags = const []]);
 
   /// Resolve all of the bindings for a given tag.
   Iterable<dynamic> tagged(String tag);
@@ -66,6 +67,21 @@ abstract class ContainerContract implements ContainerInterface {
   /// Define a contextual binding.
   ContextualBindingBuilder when(dynamic concrete);
 
+  /// Define a contextual binding based on an attribute.
+  ///
+  /// This method allows binding resolution to be determined by the presence
+  /// of a specific attribute on a dependency. The handler will be called
+  /// when resolving dependencies that have the specified attribute.
+  ///
+  /// Example:
+  /// ```dart
+  /// container.whenHasAttribute(
+  ///   'Logger',
+  ///   (attribute, container) => FileLogger(),
+  /// );
+  /// ```
+  void whenHasAttribute(String attribute, Function handler);
+
   /// Get a factory function to resolve the given type from the container.
   Function factory(String abstract);
 
@@ -75,33 +91,24 @@ abstract class ContainerContract implements ContainerInterface {
   /// Resolve the given type from the container.
   ///
   /// Throws [BindingResolutionException] if the type cannot be resolved.
-  T make<T>(String abstract, {Map<String, dynamic>? parameters});
+  T make<T>(String abstract, [List<dynamic> parameters = const []]);
 
   /// Call the given callback / class@method and inject its dependencies.
   dynamic call(
-    dynamic callback, {
-    Map<String, dynamic>? parameters,
+    dynamic callback, [
+    List<dynamic> parameters = const [],
     String? defaultMethod,
-  });
+  ]);
 
   /// Determine if the given abstract type has been resolved.
   bool resolved(String abstract);
 
   /// Register a new before resolving callback.
-  void beforeResolving(
-    dynamic abstract, [
-    void Function(ContainerContract container, String abstract)? callback,
-  ]);
+  void beforeResolving(dynamic abstract, [Function? callback]);
 
   /// Register a new resolving callback.
-  void resolving(
-    dynamic abstract, [
-    void Function(dynamic instance, ContainerContract container)? callback,
-  ]);
+  void resolving(dynamic abstract, [Function? callback]);
 
   /// Register a new after resolving callback.
-  void afterResolving(
-    dynamic abstract, [
-    void Function(dynamic instance, ContainerContract container)? callback,
-  ]);
+  void afterResolving(dynamic abstract, [Function? callback]);
 }

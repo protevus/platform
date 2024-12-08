@@ -1,6 +1,9 @@
+import 'package:dsr_container/container.dart';
+
 /// Exception thrown when the container fails to resolve a binding.
-class BindingResolutionException implements Exception {
+class BindingResolutionException implements ContainerExceptionInterface {
   /// The message describing the binding resolution failure.
+  @override
   final String message;
 
   /// The original error that caused the binding resolution failure, if any.

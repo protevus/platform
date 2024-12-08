@@ -167,7 +167,7 @@ packages:
     source: hosted
     version: "2.3.7"
   dsr_container:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       path: "../../fig/container"
       relative: true
