@@ -1,13 +1,13 @@
 import 'package:platform_container/container.dart';
 import 'package:platform_contracts/contracts.dart';
+import 'package:platform_reflection/reflection.dart';
 import 'package:test/test.dart';
-import '../lib/src/reflection.dart';
 
 // Test stubs
-@ContainerReflectable()
+@reflectable
 class ContainerCallConcreteStub {}
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestCallStub {
   List<dynamic> work(List<dynamic> args) {
     return args;
@@ -25,7 +25,7 @@ class ContainerTestCallStub {
   static String type() => 'ContainerTestCallStub';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerStaticMethodStub {
   static List<dynamic> inject(ContainerCallConcreteStub stub,
       [String default_ = 'taylor']) {
@@ -35,13 +35,13 @@ class ContainerStaticMethodStub {
   static String type() => 'ContainerStaticMethodStub';
 }
 
-@ContainerReflectable()
+@reflectable
 List<dynamic> containerTestInject(ContainerCallConcreteStub stub,
     [String default_ = 'taylor']) {
   return [stub, default_];
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerCallCallableStub {
   List<dynamic> call(ContainerCallConcreteStub stub,
       [String default_ = 'jeffrey']) {
@@ -51,7 +51,7 @@ class ContainerCallCallableStub {
   static String type() => 'ContainerCallCallableStub';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerCallCallableClassStringStub {
   final ContainerCallConcreteStub stub;
   final String default_;
@@ -67,10 +67,8 @@ class ContainerCallCallableClassStringStub {
 
 void main() {
   setUp(() {
-    initializeReflection();
-
-    // Register test classes
-    registerTypes([
+    // Register test classes using Container's static method
+    Container.registerTypes([
       ContainerCallConcreteStub,
       ContainerTestCallStub,
       ContainerStaticMethodStub,

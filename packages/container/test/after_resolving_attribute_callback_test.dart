@@ -1,10 +1,10 @@
 import 'package:platform_container/container.dart';
 import 'package:platform_contracts/contracts.dart';
+import 'package:platform_reflection/reflection.dart';
 import 'package:test/test.dart';
-import '../lib/src/reflection.dart';
 
 // Tenant attribute and related classes
-@ContainerReflectable()
+@reflectable
 class ContainerTestOnTenant implements ContextualAttribute {
   final Tenant tenant;
 
@@ -24,7 +24,7 @@ enum Tenant {
   tenantB,
 }
 
-@ContainerReflectable()
+@reflectable
 class HasTenantImpl {
   Tenant? tenant;
 
@@ -35,7 +35,7 @@ class HasTenantImpl {
   static String type() => 'HasTenantImpl';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestHasTenantImplPropertyWithTenantA {
   final HasTenantImpl property;
 
@@ -46,7 +46,7 @@ class ContainerTestHasTenantImplPropertyWithTenantA {
   static String type() => 'ContainerTestHasTenantImplPropertyWithTenantA';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestHasTenantImplPropertyWithTenantB {
   final HasTenantImpl property;
 
@@ -58,7 +58,7 @@ class ContainerTestHasTenantImplPropertyWithTenantB {
 }
 
 // Configures class attribute
-@ContainerReflectable()
+@reflectable
 class ContainerTestConfiguresClass implements ContextualAttribute {
   final String value;
 
@@ -73,7 +73,7 @@ class ContainerTestConfiguresClass implements ContextualAttribute {
   static String type() => 'ContainerTestConfiguresClass';
 }
 
-@ContainerReflectable()
+@reflectable
 @ContainerTestConfiguresClass('the-right-value')
 class ContainerTestHasSelfConfiguringAttributeAndConstructor {
   String value;
@@ -85,7 +85,7 @@ class ContainerTestHasSelfConfiguringAttributeAndConstructor {
 }
 
 // Bootable attribute
-@ContainerReflectable()
+@reflectable
 class ContainerTestBootable implements ContextualAttribute {
   const ContainerTestBootable();
 
@@ -98,7 +98,7 @@ class ContainerTestBootable implements ContextualAttribute {
   static String type() => 'ContainerTestBootable';
 }
 
-@ContainerReflectable()
+@reflectable
 @ContainerTestBootable()
 class ContainerTestHasBootable {
   bool hasBooted = false;
@@ -112,10 +112,8 @@ class ContainerTestHasBootable {
 
 void main() {
   setUp(() {
-    initializeReflection();
-
-    // Register test classes
-    registerTypes([
+    // Register test classes using Container's static method
+    Container.registerTypes([
       ContainerTestOnTenant,
       HasTenantImpl,
       ContainerTestHasTenantImplPropertyWithTenantA,

@@ -1,20 +1,20 @@
 import 'package:platform_container/container.dart';
+import 'package:platform_reflection/reflection.dart';
 import 'package:test/test.dart';
-import '../lib/src/reflection.dart';
 
 // Test stubs
-@ContainerReflectable()
+@reflectable
 abstract class IContainerTaggedContractStub {
   static String type() => 'IContainerTaggedContractStub';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerImplementationTaggedStub
     implements IContainerTaggedContractStub {
   static String type() => 'ContainerImplementationTaggedStub';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerImplementationTaggedStubTwo
     implements IContainerTaggedContractStub {
   static String type() => 'ContainerImplementationTaggedStubTwo';
@@ -22,10 +22,8 @@ class ContainerImplementationTaggedStubTwo
 
 void main() {
   setUp(() {
-    initializeReflection();
-
-    // Register test classes
-    registerTypes([
+    // Register test classes using Container's static method
+    Container.registerTypes([
       IContainerTaggedContractStub,
       ContainerImplementationTaggedStub,
       ContainerImplementationTaggedStubTwo,

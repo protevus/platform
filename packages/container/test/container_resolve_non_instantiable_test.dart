@@ -1,14 +1,14 @@
 import 'package:platform_container/container.dart';
+import 'package:platform_reflection/reflection.dart';
 import 'package:test/test.dart';
-import '../lib/src/reflection.dart';
 
 // Test stubs
-@ContainerReflectable()
+@reflectable
 abstract class TestInterface {
   static String type() => 'TestInterface';
 }
 
-@ContainerReflectable()
+@reflectable
 class ParentClass {
   final int i;
 
@@ -17,7 +17,7 @@ class ParentClass {
   static String type() => 'ParentClass';
 }
 
-@ContainerReflectable()
+@reflectable
 class VariadicParentClass {
   final ChildClass child;
   final int i;
@@ -27,7 +27,7 @@ class VariadicParentClass {
   static String type() => 'VariadicParentClass';
 }
 
-@ContainerReflectable()
+@reflectable
 class ChildClass {
   final List<TestInterface> objects;
 
@@ -36,7 +36,7 @@ class ChildClass {
   static String type() => 'ChildClass';
 }
 
-@ContainerReflectable()
+@reflectable
 class VariadicPrimitive {
   final List<dynamic> params;
 
@@ -47,10 +47,8 @@ class VariadicPrimitive {
 
 void main() {
   setUp(() {
-    initializeReflection();
-
-    // Register test classes
-    registerTypes([
+    // Register test classes using Container's static method
+    Container.registerTypes([
       TestInterface,
       ParentClass,
       VariadicParentClass,

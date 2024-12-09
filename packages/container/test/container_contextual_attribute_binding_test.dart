@@ -1,10 +1,10 @@
 import 'package:platform_container/container.dart';
 import 'package:platform_contracts/contracts.dart';
+import 'package:platform_reflection/reflection.dart';
 import 'package:test/test.dart';
-import '../lib/src/reflection.dart';
 
 // Attribute classes
-@ContainerReflectable()
+@reflectable
 class ContainerTestAttributeThatResolvesContractImpl
     implements ContextualAttribute {
   final String name;
@@ -27,23 +27,23 @@ class ContainerTestAttributeThatResolvesContractImpl
 }
 
 // Test contract and implementations
-@ContainerReflectable()
+@reflectable
 abstract class ContainerTestContract {
   static String type() => 'ContainerTestContract';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestImplA implements ContainerTestContract {
   static String type() => 'ContainerTestImplA';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestImplB implements ContainerTestContract {
   static String type() => 'ContainerTestImplB';
 }
 
 // Test classes with attributes
-@ContainerReflectable()
+@reflectable
 class ContainerTestHasAttributeThatResolvesToImplA {
   final ContainerTestContract property;
 
@@ -54,7 +54,7 @@ class ContainerTestHasAttributeThatResolvesToImplA {
   static String type() => 'ContainerTestHasAttributeThatResolvesToImplA';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestHasAttributeThatResolvesToImplB {
   final ContainerTestContract property;
 
@@ -66,7 +66,7 @@ class ContainerTestHasAttributeThatResolvesToImplB {
 }
 
 // Config value attribute
-@ContainerReflectable()
+@reflectable
 class ContainerTestConfigValue implements ContextualAttribute {
   final String key;
 
@@ -89,7 +89,7 @@ class ContainerTestConfigValue implements ContextualAttribute {
   static String type() => 'ContainerTestConfigValue';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestHasConfigValueProperty {
   final String timezone;
 
@@ -101,7 +101,7 @@ class ContainerTestHasConfigValueProperty {
 }
 
 // Config value with resolve method
-@ContainerReflectable()
+@reflectable
 class ContainerTestConfigValueWithResolve implements ContextualAttribute {
   final String key;
 
@@ -124,7 +124,7 @@ class ContainerTestConfigValueWithResolve implements ContextualAttribute {
   static String type() => 'ContainerTestConfigValueWithResolve';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestHasConfigValueWithResolveProperty {
   final String env;
 
@@ -136,7 +136,7 @@ class ContainerTestHasConfigValueWithResolveProperty {
 }
 
 // Config value with resolve and after callback
-@ContainerReflectable()
+@reflectable
 class ContainerTestConfigValueWithResolveAndAfter
     implements ContextualAttribute {
   const ContainerTestConfigValueWithResolveAndAfter();
@@ -154,7 +154,7 @@ class ContainerTestConfigValueWithResolveAndAfter
   static String type() => 'ContainerTestConfigValueWithResolveAndAfter';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestHasConfigValueWithResolvePropertyAndAfterCallback {
   final Map<String, String> person;
 
@@ -168,10 +168,8 @@ class ContainerTestHasConfigValueWithResolvePropertyAndAfterCallback {
 
 void main() {
   setUp(() {
-    initializeReflection();
-
-    // Register test classes
-    registerTypes([
+    // Register test classes using Container's static method
+    Container.registerTypes([
       ContainerTestAttributeThatResolvesContractImpl,
       ContainerTestContract,
       ContainerTestImplA,

@@ -1,9 +1,9 @@
 import 'package:platform_container/container.dart';
+import 'package:platform_reflection/reflection.dart';
 import 'package:test/test.dart';
-import '../lib/src/reflection.dart';
 
 // Test stubs
-@ContainerReflectable()
+@reflectable
 class ContainerLazyExtendStub {
   static bool initialized = false;
 
@@ -16,10 +16,8 @@ class ContainerLazyExtendStub {
 
 void main() {
   setUp(() {
-    initializeReflection();
-
-    // Register test classes
-    registerTypes([
+    // Register test classes using Container's static method
+    Container.registerTypes([
       ContainerLazyExtendStub,
     ]);
 

@@ -1,31 +1,31 @@
 import 'package:platform_container/container.dart';
+import 'package:platform_reflection/reflection.dart';
 import 'package:test/test.dart';
-import '../lib/src/reflection.dart';
 
 // Test stubs
-@ContainerReflectable()
+@reflectable
 abstract class IContainerContextContractStub {
   static String type() => 'IContainerContextContractStub';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerContextNonContractStub {
   static String type() => 'ContainerContextNonContractStub';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerContextImplementationStub
     implements IContainerContextContractStub {
   static String type() => 'ContainerContextImplementationStub';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerContextImplementationStubTwo
     implements IContainerContextContractStub {
   static String type() => 'ContainerContextImplementationStubTwo';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestContextInjectInstantiations
     implements IContainerContextContractStub {
   static int instantiations = 0;
@@ -37,7 +37,7 @@ class ContainerTestContextInjectInstantiations
   static String type() => 'ContainerTestContextInjectInstantiations';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestContextInjectOne {
   final IContainerContextContractStub impl;
 
@@ -46,7 +46,7 @@ class ContainerTestContextInjectOne {
   static String type() => 'ContainerTestContextInjectOne';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestContextInjectTwo {
   final IContainerContextContractStub impl;
 
@@ -55,7 +55,7 @@ class ContainerTestContextInjectTwo {
   static String type() => 'ContainerTestContextInjectTwo';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestContextInjectThree {
   final IContainerContextContractStub impl;
 
@@ -64,7 +64,7 @@ class ContainerTestContextInjectThree {
   static String type() => 'ContainerTestContextInjectThree';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestContextWithOptionalInnerDependency {
   final ContainerTestContextInjectOne? inner;
 
@@ -73,7 +73,7 @@ class ContainerTestContextWithOptionalInnerDependency {
   static String type() => 'ContainerTestContextWithOptionalInnerDependency';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestContextInjectTwoInstances {
   final ContainerTestContextWithOptionalInnerDependency implOne;
   final ContainerTestContextInjectTwo implTwo;
@@ -83,7 +83,7 @@ class ContainerTestContextInjectTwoInstances {
   static String type() => 'ContainerTestContextInjectTwoInstances';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestContextInjectArray {
   final List<dynamic> stubs;
 
@@ -92,7 +92,7 @@ class ContainerTestContextInjectArray {
   static String type() => 'ContainerTestContextInjectArray';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestContextInjectVariadic {
   final List<IContainerContextContractStub> stubs;
 
@@ -101,7 +101,7 @@ class ContainerTestContextInjectVariadic {
   static String type() => 'ContainerTestContextInjectVariadic';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestContextInjectVariadicAfterNonVariadic {
   final ContainerContextNonContractStub other;
   final List<IContainerContextContractStub> stubs;
@@ -111,7 +111,7 @@ class ContainerTestContextInjectVariadicAfterNonVariadic {
   static String type() => 'ContainerTestContextInjectVariadicAfterNonVariadic';
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerTestContextInjectMethodArgument {
   IContainerContextContractStub method(
       IContainerContextContractStub dependency) {
@@ -123,10 +123,8 @@ class ContainerTestContextInjectMethodArgument {
 
 void main() {
   setUp(() {
-    initializeReflection();
-
-    // Register test classes
-    registerTypes([
+    // Register test classes using Container's static method
+    Container.registerTypes([
       IContainerContextContractStub,
       ContainerContextNonContractStub,
       ContainerContextImplementationStub,

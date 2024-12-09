@@ -1,23 +1,68 @@
 import 'dart:collection';
 import 'package:platform_contracts/contracts.dart';
 import 'package:platform_reflection/reflection.dart';
+import 'package:platform_reflection/src/annotations.dart';
 
 import 'bound_method.dart';
 import 'contextual_binding_builder.dart';
 import 'entry_not_found_exception.dart';
-import 'reflection.dart';
 import 'rewindable_generator.dart';
 import 'util.dart';
 
 /// The IoC container implementation.
-@ContainerReflectable()
+@reflectable
 class Container implements ContainerContract {
   /// The current globally available container (if any).
   static Container? _instance;
 
+  /// Keep track of registered types for lookup
+  static final Set<Type> _registeredTypes = {};
+
+  /// Keep track of primitive types that don't need reflection
+  static final Set<Type> _primitiveTypes = {
+    String,
+    bool,
+    int,
+    double,
+    num,
+    Object,
+    Function,
+    Type,
+    List,
+    Map,
+    Set,
+    Iterable,
+    Null,
+  };
+
   Container() {
-    // Register self for reflection
+    // Register self and core types
     registerType(Container);
+    registerType(ContainerContract);
+    registerType(BindingResolutionException);
+    registerType(CircularDependencyException);
+    registerType(EntryNotFoundException);
+
+    // Register primitive types
+    _primitiveTypes.forEach(registerType);
+  }
+
+  /// Register a type for reflection
+  static void registerType(Type type) {
+    // Don't register primitive types, function types or List types
+    if (!_primitiveTypes.contains(type) &&
+        !(type.toString().startsWith('(') && type.toString().contains(')')) &&
+        !type.toString().startsWith('List<')) {
+      _registeredTypes.add(type);
+      ReflectionRegistry.registerType(type);
+    }
+  }
+
+  /// Register multiple types for reflection
+  static void registerTypes(List<Type> types) {
+    for (final type in types) {
+      registerType(type);
+    }
   }
 
   /// An array of the types that have been resolved.
@@ -344,7 +389,9 @@ class Container implements ContainerContract {
     abstract = getAlias(abstract);
 
     if (_instances.containsKey(abstract)) {
-      _instances[abstract] = closure(_instances[abstract]);
+      final instance = _instances[abstract];
+      final extended = closure(instance);
+      _instances[abstract] = extended;
       _rebound(abstract);
     } else {
       _extenders.putIfAbsent(abstract, () => []).add(closure);
@@ -493,22 +540,19 @@ class Container implements ContainerContract {
 
   /// Build an instance of the given type.
   dynamic build(dynamic concrete) {
+    // Handle function types
     if (concrete is Function) {
-      // Handle different closure parameter counts
       final closure = concrete;
       final params = [this, _getLastParameterOverride()];
 
       try {
-        // Try with both parameters
         return Function.apply(closure, params);
       } catch (e) {
         if (e is NoSuchMethodError) {
           try {
-            // Try with just container
             return Function.apply(closure, [this]);
           } catch (e) {
             if (e is NoSuchMethodError) {
-              // Try with no parameters
               return closure();
             }
             rethrow;
@@ -516,6 +560,22 @@ class Container implements ContainerContract {
         }
         rethrow;
       }
+    }
+
+    // Handle string types
+    if (concrete is String) {
+      for (final type in _registeredTypes) {
+        if (type.toString() == concrete) {
+          return build(type);
+        }
+      }
+      throw BindingResolutionException('Target [$concrete] does not exist.');
+    }
+
+    // Handle primitive types and function types
+    if (concrete.runtimeType.toString().startsWith('(') ||
+        _primitiveTypes.contains(concrete.runtimeType)) {
+      return concrete;
     }
 
     final reflector = RuntimeReflector.instance;
@@ -528,6 +588,15 @@ class Container implements ContainerContract {
 
       _buildStack.add(concrete.toString());
 
+      // Get class metadata first
+      final metadata = mirror.metadata;
+      final attributes = <InstanceMirror>[];
+      for (final meta in metadata) {
+        if (meta.reflectee is ContextualAttribute) {
+          attributes.add(meta);
+        }
+      }
+
       final constructor = mirror.declarations.values
           .whereType<MethodMirror>()
           .where((m) => m.isConstructor)
@@ -535,7 +604,9 @@ class Container implements ContainerContract {
 
       if (constructor == null) {
         _buildStack.removeLast();
-        return reflector.createInstance(concrete.runtimeType);
+        final instance = reflector.createInstance(concrete.runtimeType);
+        _fireAttributeCallbacks(attributes, instance);
+        return instance;
       }
 
       final parameters = constructor.parameters;
@@ -544,11 +615,38 @@ class Container implements ContainerContract {
         final instances = _resolveDependencies(parameters);
         _buildStack.removeLast();
 
-        // Create instance with resolved parameters using named parameter
-        return reflector.createInstance(
+        // Handle variadic parameters
+        if (parameters
+            .any((p) => p.isOptional && p.type.toString().startsWith('List'))) {
+          final positionalArgs = <dynamic>[];
+          final namedArgs = <String, dynamic>{};
+
+          for (var i = 0; i < parameters.length; i++) {
+            final param = parameters[i];
+            if (param.isNamed) {
+              namedArgs[param.simpleName.toString().replaceAll('"', '')] =
+                  i < instances.length ? instances[i] : const [];
+            } else {
+              positionalArgs
+                  .add(i < instances.length ? instances[i] : const []);
+            }
+          }
+
+          final instance = reflector.createInstance(
+            concrete.runtimeType,
+            positionalArgs: positionalArgs,
+            namedArgs: namedArgs,
+          );
+          _fireAttributeCallbacks(attributes, instance);
+          return instance;
+        }
+
+        final instance = reflector.createInstance(
           concrete.runtimeType,
           positionalArgs: instances,
         );
+        _fireAttributeCallbacks(attributes, instance);
+        return instance;
       } catch (e) {
         _buildStack.removeLast();
         rethrow;
@@ -558,6 +656,18 @@ class Container implements ContainerContract {
         'Target [$concrete] does not exist.',
         originalError: e,
       );
+    }
+  }
+
+  /// Fire attribute callbacks for an instance
+  void _fireAttributeCallbacks(
+      List<InstanceMirror> attributes, dynamic instance) {
+    for (final attribute in attributes) {
+      final handler =
+          contextualAttributes[attribute.type.reflectedType.toString()];
+      if (handler != null) {
+        handler(attribute.reflectee, instance);
+      }
     }
   }
 

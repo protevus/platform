@@ -1,24 +1,24 @@
 import 'package:platform_container/container.dart';
+import 'package:platform_reflection/reflection.dart';
 import 'package:test/test.dart';
-import '../lib/src/reflection.dart';
 
 // Test stubs
-@ContainerReflectable()
+@reflectable
 abstract class ResolvingContractStub {
   static String type() => 'ResolvingContractStub';
 }
 
-@ContainerReflectable()
+@reflectable
 class ResolvingImplementationStub implements ResolvingContractStub {
   static String type() => 'ResolvingImplementationStub';
 }
 
-@ContainerReflectable()
+@reflectable
 class ResolvingImplementationStubTwo implements ResolvingContractStub {
   static String type() => 'ResolvingImplementationStubTwo';
 }
 
-@ContainerReflectable()
+@reflectable
 class TestObject {
   String? name;
   static String type() => 'TestObject';
@@ -26,10 +26,8 @@ class TestObject {
 
 void main() {
   setUp(() {
-    initializeReflection();
-
-    // Register test classes
-    registerTypes([
+    // Register test classes using Container's static method
+    Container.registerTypes([
       ResolvingContractStub,
       ResolvingImplementationStub,
       ResolvingImplementationStubTwo,

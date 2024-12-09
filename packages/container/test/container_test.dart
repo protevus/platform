@@ -1,21 +1,21 @@
 import 'package:platform_container/container.dart';
 import 'package:platform_contracts/contracts.dart';
+import 'package:platform_reflection/reflection.dart';
 import 'package:test/test.dart';
-import '../lib/src/reflection.dart';
 
 // Test stubs
-@ContainerReflectable()
+@reflectable
 class ContainerConcreteStub {
   @override
   String toString() => runtimeType.toString();
 }
 
-@ContainerReflectable()
+@reflectable
 abstract class IContainerContractStub {
   String get something;
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerImplementationStub implements IContainerContractStub {
   @override
   final String something = '';
@@ -24,7 +24,7 @@ class ContainerImplementationStub implements IContainerContractStub {
   String toString() => runtimeType.toString();
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerImplementationStubTwo implements IContainerContractStub {
   @override
   final String something = '';
@@ -33,7 +33,7 @@ class ContainerImplementationStubTwo implements IContainerContractStub {
   String toString() => runtimeType.toString();
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerDependentStub {
   final IContainerContractStub impl;
 
@@ -43,7 +43,7 @@ class ContainerDependentStub {
   String toString() => runtimeType.toString();
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerNestedDependentStub {
   final ContainerDependentStub inner;
 
@@ -53,7 +53,7 @@ class ContainerNestedDependentStub {
   String toString() => runtimeType.toString();
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerDefaultValueStub {
   final ContainerConcreteStub stub;
   final String default_;
@@ -64,7 +64,7 @@ class ContainerDefaultValueStub {
   String toString() => runtimeType.toString();
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerMixedPrimitiveStub {
   final int first;
   final ContainerConcreteStub stub;
@@ -76,7 +76,7 @@ class ContainerMixedPrimitiveStub {
   String toString() => runtimeType.toString();
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerInjectVariableStub {
   final String something;
 
@@ -86,7 +86,7 @@ class ContainerInjectVariableStub {
   String toString() => runtimeType.toString();
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerInjectVariableStubWithInterfaceImplementation
     implements IContainerContractStub {
   @override
@@ -99,7 +99,7 @@ class ContainerInjectVariableStubWithInterfaceImplementation
   String toString() => runtimeType.toString();
 }
 
-@ContainerReflectable()
+@reflectable
 class ContainerContextualBindingCallTarget {
   IContainerContractStub work(IContainerContractStub stub) => stub;
 
@@ -108,7 +108,7 @@ class ContainerContextualBindingCallTarget {
 }
 
 // Circular dependency stubs
-@ContainerReflectable()
+@reflectable
 class CircularAStub {
   CircularAStub(CircularBStub b);
 
@@ -116,7 +116,7 @@ class CircularAStub {
   String toString() => runtimeType.toString();
 }
 
-@ContainerReflectable()
+@reflectable
 class CircularBStub {
   CircularBStub(CircularCStub c);
 
@@ -124,7 +124,7 @@ class CircularBStub {
   String toString() => runtimeType.toString();
 }
 
-@ContainerReflectable()
+@reflectable
 class CircularCStub {
   CircularCStub(CircularAStub a);
 
@@ -134,10 +134,8 @@ class CircularCStub {
 
 void main() {
   setUp(() {
-    initializeReflection();
-
-    // Register test classes
-    registerTypes([
+    // Register test classes using Container's static method
+    Container.registerTypes([
       ContainerConcreteStub,
       IContainerContractStub,
       ContainerImplementationStub,
@@ -159,7 +157,6 @@ void main() {
     Container.setInstance(null);
   });
 
-  // Rest of tests remain unchanged...
   test('container singleton', () {
     final container = Container.setInstance(Container());
     expect(container, equals(Container.getInstance()));

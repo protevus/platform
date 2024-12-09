@@ -35,10 +35,14 @@ class BoundMethod {
   /// Call a string reference to a class using Class@method syntax.
   static dynamic callClass(
     dynamic container,
-    String target, [
+    dynamic target, [
     List<dynamic> parameters = const [],
     String? defaultMethod,
   ]) {
+    if (target is! String) {
+      target = target.toString();
+    }
+
     final segments = target.split('@');
 
     // We will assume an @ sign is used to delimit the class name from the method
@@ -128,11 +132,16 @@ class BoundMethod {
 
     if (callback is List) {
       final classMirror = reflector.reflectClass(callback[0].runtimeType);
-      return classMirror.declarations[Symbol(callback[1])] as MethodMirror;
+      return classMirror.declarations[callback[1]] as MethodMirror;
     }
 
-    final mirror = reflector.reflect(callback);
-    return mirror.type.declarations[Symbol('call')] as MethodMirror;
+    // Handle function types
+    if (callback is Function) {
+      final mirror = reflector.reflect(callback);
+      return mirror.type.declarations['call'] as MethodMirror;
+    }
+
+    throw BindingResolutionException('Invalid callback type');
   }
 
   /// Add a dependency for the given call parameter.
@@ -199,6 +208,13 @@ class BoundMethod {
 
   /// Unwrap a closure if needed.
   static dynamic unwrapIfClosure(dynamic value) {
-    return value is Function ? value() : value;
+    if (value is Function) {
+      try {
+        return value();
+      } catch (e) {
+        return value;
+      }
+    }
+    return value;
   }
 }

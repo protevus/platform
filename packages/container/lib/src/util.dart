@@ -76,8 +76,20 @@ class Util {
       ParameterMirror dependency) {
     try {
       final reflector = RuntimeReflector.instance;
-      final type = dependency.type.reflectedType;
-      return reflector.reflect(type);
+
+      // Get metadata annotations
+      final metadata = dependency.metadata;
+      if (metadata.isEmpty) return null;
+
+      // Find first annotation that implements ContextualAttribute
+      for (final annotation in metadata) {
+        final instance = annotation.reflectee;
+        if (instance is ContextualAttribute) {
+          return annotation;
+        }
+      }
+
+      return null;
     } catch (e) {
       return null;
     }
@@ -92,10 +104,31 @@ class Util {
     try {
       final reflector = RuntimeReflector.instance;
       final mirror = reflector.reflectClass(object.runtimeType);
+
+      // Check if object directly implements the attribute type
       if (mirror.hasReflectedType &&
           mirror.reflectedType.toString() == attributeType) {
         return object;
       }
+
+      // Check superclass chain
+      var currentMirror = mirror;
+      while (currentMirror.superclass != null) {
+        currentMirror = currentMirror.superclass!;
+        if (currentMirror.reflectedType.toString() == attributeType) {
+          return object;
+        }
+      }
+
+      // Check metadata
+      for (final metadata in mirror.metadata) {
+        final instance = metadata.reflectee;
+        if (instance.runtimeType.toString() == attributeType ||
+            instance is ContextualAttribute) {
+          return instance;
+        }
+      }
+
       return null;
     } catch (e) {
       return null;
