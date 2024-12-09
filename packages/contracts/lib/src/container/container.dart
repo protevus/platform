@@ -65,7 +65,7 @@ abstract class ContainerContract implements ContainerInterface {
   );
 
   /// Define a contextual binding.
-  ContextualBindingBuilder when(dynamic concrete);
+  ContextualBindingBuilderContract when(dynamic concrete);
 
   /// Define a contextual binding based on an attribute.
   ///

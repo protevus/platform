@@ -1,10 +1,10 @@
 /// Interface for building contextual bindings in the container.
-abstract class ContextualBindingBuilder {
+abstract class ContextualBindingBuilderContract {
   /// Define the abstract target that depends on the context.
   ///
   /// @param abstract The abstract type that needs a contextual binding
   /// @return This builder instance for method chaining
-  ContextualBindingBuilder needs(dynamic abstract);
+  ContextualBindingBuilderContract needs(dynamic abstract);
 
   /// Define the implementation for the contextual binding.
   ///
