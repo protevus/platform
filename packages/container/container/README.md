@@ -9,8 +9,8 @@ A better IoC container for Protevus, ultimately allowing Protevus to be used wit
 
 ```dart
     import 'package:platform_container/mirrors.dart';
-    import 'package:platform_core/core.dart';
-    import 'package:platform_core/http.dart';
+    import 'package:platform_foundation/core.dart';
+    import 'package:platform_foundation/http.dart';
 
     @Expose('/sales', middleware: [process1])
     class SalesController extends Controller {
