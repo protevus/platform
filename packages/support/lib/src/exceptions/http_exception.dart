@@ -1,6 +1,5 @@
 library platform_http_exception;
 
-//import 'package:dart2_constant/convert.dart';
 import 'dart:convert';
 
 /// Exception class that can be serialized to JSON and serialized to clients.

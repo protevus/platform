@@ -8,7 +8,7 @@ import 'dart:io'
 
 import 'package:platform_container/container.dart';
 import 'package:http_parser/http_parser.dart';
-import 'package:belatuk_http_server/belatuk_http_server.dart';
+import 'package:platform_http_server/http_server.dart';
 import 'package:meta/meta.dart';
 import 'package:mime/mime.dart';
 import 'package:path/path.dart' as p;

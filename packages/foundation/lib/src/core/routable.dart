@@ -3,7 +3,7 @@ library angel_framework.http.routable;
 import 'dart:async';
 
 import 'package:platform_container/container.dart';
-import 'package:platform_route/route.dart';
+import 'package:platform_routing/route.dart';
 
 import '../util.dart';
 import 'hooked_service.dart';

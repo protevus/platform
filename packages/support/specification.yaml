@@ -1,0 +1,286 @@
+# Laravel Illuminate Support Package Specification
+
+name: support
+description: Core support utilities and helper functions for the framework
+version: 1.0.0
+
+dependencies:
+  required:
+    collections: ^1.0.0
+    contracts: ^1.0.0
+    macroable: ^1.0.0
+
+components:
+  # Core String Manipulation
+  Str:
+    description: String manipulation utilities
+    methods:
+      - after
+      - before
+      - between
+      - camel
+      - contains
+      - endsWith
+      - finish
+      - is
+      - isAscii
+      - kebab
+      - length
+      - limit
+      - lower
+      - orderedUuid
+      - padBoth
+      - padLeft
+      - padRight
+      - plural
+      - random
+      - replace
+      - replaceArray
+      - replaceFirst
+      - replaceLast
+      - singular
+      - slug
+      - snake
+      - start
+      - startsWith
+      - studly
+      - title
+      - ucfirst
+      - upper
+      - uuid
+      - words
+
+  # Service Provider System
+  ServiceProvider:
+    description: Base service provider for package registration and bootstrapping
+    methods:
+      - register
+      - boot
+      - provides
+      - when
+      - defer
+
+  # Facade System
+  Facade:
+    description: Base facade class for static proxy interface
+    methods:
+      - getFacadeAccessor
+      - getFacadeRoot
+      - clearResolvedInstance
+      - setFacadeApplication
+      - resolveFacadeInstance
+
+  # Collection Handling
+  Collection:
+    description: Wrapper for array manipulation with fluent interface
+    methods:
+      - all
+      - average
+      - chunk
+      - collapse
+      - combine
+      - concat
+      - contains
+      - count
+      - diff
+      - each
+      - every
+      - except
+      - filter
+      - first
+      - flatMap
+      - flatten
+      - flip
+      - forget
+      - get
+      - groupBy
+      - has
+      - implode
+      - intersect
+      - isEmpty
+      - isNotEmpty
+      - keyBy
+      - keys
+      - last
+      - map
+      - mapInto
+      - mapSpread
+      - mapToGroups
+      - mapWithKeys
+      - max
+      - median
+      - merge
+      - min
+      - mode
+      - only
+      - pad
+      - partition
+      - pipe
+      - pluck
+      - random
+      - reduce
+      - reject
+      - reverse
+      - search
+      - shift
+      - shuffle
+      - slice
+      - sort
+      - sortBy
+      - sortByDesc
+      - splice
+      - split
+      - sum
+      - take
+      - tap
+      - times
+      - toArray
+      - toJson
+      - transform
+      - union
+      - unique
+      - values
+      - when
+      - where
+      - whereIn
+      - whereNotIn
+      - zip
+
+  # Helper Traits
+  traits:
+    Macroable:
+      description: Allows dynamic method registration on classes
+      methods:
+        - macro
+        - mixin
+        - hasMacro
+        - flushMacros
+    
+    Conditionable:
+      description: Adds fluent conditional execution
+      methods:
+        - when
+        - unless
+    
+    Tappable:
+      description: Provides tap helper for debugging and chaining
+      methods:
+        - tap
+
+  # Optional Features
+  optional:
+    - name: HtmlString
+      description: HTML string wrapper that prevents double encoding
+    
+    - name: MessageBag
+      description: Error message container
+    
+    - name: Optional
+      description: Nullable object wrapper
+    
+    - name: Pluralizer
+      description: Word pluralization utilities
+
+# Helper Functions
+helpers:
+  array:
+    - array_add
+    - array_collapse
+    - array_divide
+    - array_dot
+    - array_except
+    - array_first
+    - array_flatten
+    - array_forget
+    - array_get
+    - array_has
+    - array_last
+    - array_only
+    - array_pluck
+    - array_prepend
+    - array_pull
+    - array_random
+    - array_set
+    - array_sort
+    - array_sort_recursive
+    - array_where
+    - array_wrap
+    
+  string:
+    - camel_case
+    - class_basename
+    - e
+    - ends_with
+    - kebab_case
+    - preg_replace_array
+    - snake_case
+    - starts_with
+    - str_after
+    - str_before
+    - str_contains
+    - str_finish
+    - str_is
+    - str_limit
+    - str_plural
+    - str_random
+    - str_singular
+    - str_slug
+    - str_start
+    - studly_case
+    - title_case
+    
+  misc:
+    - app
+    - auth
+    - back
+    - base_path
+    - bcrypt
+    - blank
+    - broadcast
+    - cache
+    - config
+    - cookie
+    - csrf_field
+    - csrf_token
+    - dd
+    - decrypt
+    - dispatch
+    - encrypt
+    - env
+    - event
+    - factory
+    - filled
+    - info
+    - logger
+    - method_field
+    - now
+    - old
+    - optional
+    - policy
+    - redirect
+    - report
+    - request
+    - rescue
+    - resolve
+    - response
+    - retry
+    - session
+    - tap
+    - throw_if
+    - throw_unless
+    - today
+    - trans
+    - trans_choice
+    - url
+    - validator
+    - view
+    - with
+
+# Testing Utilities
+testing:
+  fakes:
+    - EventFake
+    - MailFake
+    - NotificationFake
+    - QueueFake
+    - BusFake

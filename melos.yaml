@@ -11,8 +11,11 @@
 name: protevus_platform
 repository: https://github.com/protevus/platform
 packages:
-  - apps/**
+  - common/**
+  - drivers/**
   - packages/**
+  - incubation/**
+  - apps/**
   - helpers/tools/**
   - examples/**
 

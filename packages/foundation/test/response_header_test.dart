@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:platform_container/mirrors.dart';
 import 'package:platform_foundation/core.dart';
-import 'package:platform_foundation/src/http/protevus_http.dart';
+import 'package:platform_foundation/src/http/v1/protevus_http.dart';
 import 'package:test/test.dart';
 
 void main() {

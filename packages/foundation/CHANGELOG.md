@@ -88,8 +88,8 @@
 
 ## 4.2.0
 
-* Updated to `package:belatuk_combinator`
-* Updated to `package:belatuk_merge_map`
+* Updated to `package:platform_combinator`
+* Updated to `package:platform_merge_map`
 * Updated linter to `package:lints`
 
 ## 4.1.3
@@ -108,7 +108,7 @@
 
 ## 4.1.0
 
-* Replaced `http_server` with `belatuk_http_server`
+* Replaced `http_server` with `platform_http_server`
 
 ## 4.0.4
 

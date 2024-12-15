@@ -2,7 +2,7 @@ library platform_foundation.http.service;
 
 import 'dart:async';
 import 'package:platform_support/exceptions.dart';
-import 'package:belatuk_merge_map/belatuk_merge_map.dart';
+import 'package:platform_merge_map/merge_map.dart';
 import 'package:quiver/core.dart';
 import '../util.dart';
 import 'anonymous_service.dart';

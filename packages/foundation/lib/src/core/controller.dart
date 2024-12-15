@@ -2,7 +2,7 @@ library platform_foundation.http.controller;
 
 import 'dart:async';
 import 'package:platform_container/container.dart';
-import 'package:platform_route/route.dart';
+import 'package:platform_routing/route.dart';
 import 'package:meta/meta.dart';
 import 'package:recase/recase.dart';
 import '../core/core.dart';

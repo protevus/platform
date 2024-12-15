@@ -1,0 +1,19 @@
+name: platform_driver_rethinkdb
+description: A dart driver for connecting to RethinkDB, the open-source database for the realtime web
+version: 1.1.0
+homepage: https://github.com/dart-backend/belatuk-rethinkdb
+repository: https://github.com/dart-backend/belatuk-rethinkdb
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+
+dependencies:
+  protobuf: ^3.1.0
+  fixnum: ^1.0.0
+  convert: ^3.0.1
+  hashlib: ^1.17.0
+  crypto: ^3.0.1
+
+dev_dependencies:
+  test: ^1.25.0
+  lints: ^5.0.0

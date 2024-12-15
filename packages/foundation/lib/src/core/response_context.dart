@@ -6,7 +6,7 @@ import 'dart:convert' as c show json;
 import 'dart:io' show BytesBuilder, Cookie;
 import 'dart:typed_data';
 
-import 'package:platform_route/route.dart';
+import 'package:platform_routing/route.dart';
 import 'package:file/file.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:mime/mime.dart';
