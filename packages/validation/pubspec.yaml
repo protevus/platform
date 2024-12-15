@@ -1,4 +1,4 @@
-name: angel3_validate
+name: platform_validation
 description: Cross-platform HTTP request body validator library based on `matcher`.
 version: 8.2.0
 homepage: https://angel3-framework.web.app/

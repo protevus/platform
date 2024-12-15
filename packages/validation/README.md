@@ -1,6 +1,6 @@
 # Angel3 Validate
 
-![Pub Version (including pre-releases)](https://img.shields.io/pub/v/angel3_validate?include_prereleases)
+![Pub Version (including pre-releases)](https://img.shields.io/pub/v/platform_validation?include_prereleases)
 [![Null Safety](https://img.shields.io/badge/null-safety-brightgreen)](https://dart.dev/null-safety)
 [![Discord](https://img.shields.io/discord/1060322353214660698)](https://discord.gg/3X6bxTUdCM)
 [![License](https://img.shields.io/github/license/dart-backend/angel)](https://github.com/dart-backend/angel/tree/master/packages/validate/LICENSE)
@@ -30,7 +30,7 @@ For convenience's sake, this library also exports `matcher`.
 ### Creating a Validator
 
 ```dart
-import 'package:angel3_validate/angel3_validate.dart';
+import 'package:platform_validation/platform_validation.dart';
 
 main() {
     var validator = Validator({
@@ -131,7 +131,7 @@ main() {
 
 ### Custom Error Messages
 
-If these are not present, `angel3_validate` will *attempt* to generate a coherent error message on its own.
+If these are not present, `platform_validation` will *attempt* to generate a coherent error message on its own.
 
 ```dart
 Validator({
@@ -270,7 +270,7 @@ main() {
 
 ```dart
 import 'package:angel3_framework/angel3_framework.dart';
-import 'package:angel3_validate/server.dart';
+import 'package:platform_validation/server.dart';
 
 final Validator echo = Validator({
     'message*': (String message) => message.length >= 5

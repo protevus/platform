@@ -1,4 +1,4 @@
-import 'package:angel3_validate/angel3_validate.dart';
+import 'package:platform_validation/platform_validation.dart';
 import 'package:test/test.dart';
 
 void main() {

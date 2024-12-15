@@ -1,6 +1,6 @@
 import 'dart:html';
 
-import 'package:angel3_validate/angel3_validate.dart';
+import 'package:platform_validation/platform_validation.dart';
 
 final $errors = querySelector('#errors') as UListElement?;
 final $form = querySelector('#form') as FormElement?;
