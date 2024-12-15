@@ -115,8 +115,8 @@ void main() {
     test('hasHeader', () async {
       var res = await client.get(Uri.parse('/hello'));
       expect(res, hasHeader('server'));
-      expect(res, hasHeader('server', 'Angel3'));
-      expect(res, hasHeader('server', ['Angel3']));
+      expect(res, hasHeader('server', 'Platform'));
+      expect(res, hasHeader('server', ['Platform']));
     });
 
     test('hasValidBody+hasContentType', () async {
