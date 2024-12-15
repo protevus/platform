@@ -5,7 +5,7 @@
 void main() async {
   /*
   var app = new Angel();
-  var http = new AngelHttp(app);
+  var http = new PlatformHttp(app);
   var fs = const LocalFileSystem();
   var vDir = new _RangingVirtualDirectory(app, fs.currentDirectory);
   app.logger = new Logger('range_header')
@@ -22,7 +22,7 @@ void main() async {
     ..addExtension('yaml', 'text/plain')
     ..addExtension('yml', 'text/plain');
   app.fallback(vDir.handleRequest);
-  app.fallback((req, res) => throw new AngelHttpException.notFound());
+  app.fallback((req, res) => throw new PlatformHttpException.notFound());
   await http.startServer('127.0.0.1', 3000);
   print('Listening at ${http.uri}');
   */

@@ -34,7 +34,7 @@ var pretty = prettyLog(
   printFunction: stderr.writeln,
   omitError: (r) {
     var err = r.error;
-    return err is AngelHttpException && err.statusCode != 500;
+    return err is PlatformHttpException && err.statusCode != 500;
   },
 );
 myLogger.onRecord.listen(pretty);
