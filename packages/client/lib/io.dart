@@ -7,7 +7,7 @@ import 'package:platform_json_serializer/json_serializer.dart' as god;
 import 'package:path/path.dart' as p;
 import 'package:logging/logging.dart';
 import 'platform_client.dart';
-import 'base_angel_client.dart';
+import 'base_platform_client.dart';
 export 'platform_client.dart';
 
 /// Queries an Angel server via REST.

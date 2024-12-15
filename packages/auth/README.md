@@ -52,7 +52,7 @@ configureServer(Angel app) async {
 
 ## Default Authentication Callback
 
-A frequent use case within SPA's is opening OAuth login endpoints in a separate window. [`angel3_client`](https://pub.dev/packages/angel3_client) provides a facility for this, which works perfectly with the default callback provided in this package.
+A frequent use case within SPA's is opening OAuth login endpoints in a separate window. [`platform_client`](https://pub.dev/packages/platform_client) provides a facility for this, which works perfectly with the default callback provided in this package.
 
 ```dart
 configureServer(Angel app) async {
@@ -75,7 +75,7 @@ configureServer(Angel app) async {
 }
 ```
 
-This renders a simple HTML page that fires the user's JWT as a `token` event in `window.opener`. `angel3_client` [exposes this as a Stream](https://pub.dev/documentation/angel3_client/latest/):
+This renders a simple HTML page that fires the user's JWT as a `token` event in `window.opener`. `platform_client` [exposes this as a Stream](https://pub.dev/documentation/platform_client/latest/):
 
 ```dart
 app.authenticateViaPopup('/auth/google').listen((jwt) {

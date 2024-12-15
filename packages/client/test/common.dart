@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:platform_client/base_angel_client.dart';
+import 'package:platform_client/base_platform_client.dart';
 import 'dart:convert';
 import 'package:http/src/base_client.dart' as http;
 import 'package:http/src/base_request.dart' as http;

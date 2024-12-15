@@ -8,7 +8,7 @@ import 'dart:convert';
 import 'package:http/browser_client.dart' as http;
 import 'platform_client.dart';
 // import 'auth_types.dart' as auth_types;
-import 'base_angel_client.dart';
+import 'base_platform_client.dart';
 export 'platform_client.dart';
 
 /// Queries an Angel server via REST.
