@@ -1,56 +1,88 @@
-import 'dart:mirrors';
+import 'package:platform_reflection/reflection.dart';
 
+/// Interface for objects that can provide methods to be mixed in
+abstract class MacroProvider {
+  /// Get all methods that should be mixed in
+  Map<String, Function> getMethods();
+}
+
+/// A mixin that allows runtime method extension through macros.
+///
+/// This mixin provides functionality similar to Laravel's Macroable trait,
+/// allowing classes to be extended with custom methods at runtime.
+@reflectable
 mixin Macroable {
-  static final Map<Type, Map<Symbol, Function>> _macros = {};
+  /// The registered macros.
+  static final Map<Type, Map<String, Function>> _macros = {};
 
-  static void macro(Type type, String name, Function macro) {
-    _macros.putIfAbsent(type, () => {});
-    _macros[type]![Symbol(name)] = macro;
+  /// Register a custom macro.
+  ///
+  /// Example:
+  /// ```dart
+  /// class MyClass with Macroable {
+  ///   static void registerMacros() {
+  ///     Macroable.macro<MyClass>('customMethod', (String arg) {
+  ///       print('Custom method called with: $arg');
+  ///     });
+  ///   }
+  /// }
+  /// ```
+  static void macro<T>(String name, Function macro) {
+    _macros.putIfAbsent(T, () => {});
+    _macros[T]![name] = macro;
   }
 
-  static bool hasMacro(Type type, String name) {
-    return _macros[type]?.containsKey(Symbol(name)) ?? false;
-  }
+  /// Mix another object's methods into this class.
+  ///
+  /// [mixin] - The object whose methods should be mixed in
+  /// [replace] - Whether to replace existing macros with the same name
+  static void mixin<T>(Object mixin, {bool replace = true}) {
+    if (mixin is! MacroProvider) {
+      throw ArgumentError('Mixin source must implement MacroProvider');
+    }
 
-  static void mixin(Type type, Object mixin, {bool replace = true}) {
-    final methods = reflect(mixin)
-        .type
-        .declarations
-        .values
-        .whereType<MethodMirror>()
-        .where((m) => m.isRegularMethod && !m.isPrivate);
-
-    for (final method in methods) {
-      final name = MirrorSystem.getName(method.simpleName);
-      if (replace || !hasMacro(type, name)) {
-        macro(type, name, (List args,
-            [Map<Symbol, dynamic> namedArgs = const {}]) {
-          return reflect(mixin)
-              .invoke(method.simpleName, args, namedArgs)
-              .reflectee;
-        });
+    final methods = mixin.getMethods();
+    for (var entry in methods.entries) {
+      if (replace || !hasMacro<T>(entry.key)) {
+        macro<T>(entry.key, entry.value);
       }
     }
   }
 
-  static void flushMacros(Type type) {
-    _macros.remove(type);
+  /// Check if a macro is registered.
+  static bool hasMacro<T>(String name) {
+    return _macros[T]?.containsKey(name) ?? false;
   }
 
-  dynamic noSuchMethod(Invocation invocation) {
-    final macro = _macros[runtimeType]?[invocation.memberName];
+  /// Remove all registered macros.
+  static void flushMacros<T>() {
+    _macros.remove(T);
+  }
 
-    if (macro != null) {
+  /// Handle dynamic method calls.
+  @override
+  dynamic noSuchMethod(Invocation invocation) {
+    // Get method name from Symbol without using reflection
+    final name = invocation.memberName
+        .toString()
+        .substring(8) // Remove "Symbol("
+        .split('"')[0]; // Get name part before closing quote
+
+    final macros = _macros[runtimeType];
+
+    if (macros != null && macros.containsKey(name)) {
+      final macro = macros[name]!;
+      final positionalArgs = invocation.positionalArguments;
+      final namedArgs = invocation.namedArguments;
+
       try {
         return Function.apply(
-            macro, [invocation.positionalArguments], invocation.namedArguments);
+          macro,
+          positionalArgs,
+          namedArgs.isNotEmpty ? namedArgs : null,
+        );
       } catch (e) {
-        try {
-          return Function.apply(
-              macro, invocation.positionalArguments, invocation.namedArguments);
-        } catch (e) {
-          return (macro as dynamic)();
-        }
+        throw NoSuchMethodError.withInvocation(this, invocation);
       }
     }
 

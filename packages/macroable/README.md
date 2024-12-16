@@ -1,78 +1,129 @@
 # Platform Macroable
 
-A Dart implementation of Laravel's Macroable trait, allowing you to add methods to classes at runtime.
+A Dart implementation of Laravel's Macroable trait, allowing runtime method extension of classes.
 
 ## Features
 
-- Add custom methods to classes at runtime
-- Mix in methods from other classes
-- Check for the existence of macros
-- Flush all macros for a given class
-
-## Getting started
-
-Add this package to your `pubspec.yaml`:
-
-```yaml
-dependencies:
-  platform_macroable: ^1.0.0
-```
-
-Then run `dart pub get` or `flutter pub get` to install the package.
+- Add methods to classes at runtime through macros
+- Mix in methods from other objects
+- Support for both positional and named parameters
+- Type-safe macro registration and usage
+- Easy method existence checking
+- Ability to clear registered macros
 
 ## Usage
 
-Here's a simple example of how to use the `Macroable` mixin:
-
 ```dart
-import 'package:platform_macroable/macroable.dart';
+import 'package:platform_macroable/platform_macroable.dart';
 
-class MyClass with Macroable {
-  String regularMethod() => 'This is a regular method';
+// 1. Add the Macroable mixin to your class
+class StringFormatter with Macroable {
+  String capitalize(String input) => 
+      input.isEmpty ? '' : input[0].toUpperCase() + input.substring(1);
 }
 
 void main() {
-  // Register a macro
-  Macroable.macro(MyClass, 'customMethod', () => 'This is a custom method');
+  final formatter = StringFormatter();
 
-  final instance = MyClass();
+  // 2. Register a macro with positional parameters
+  Macroable.macro<StringFormatter>('repeat', (String text, int times) {
+    return text * times;
+  });
 
-  // Call the regular method
-  print(instance.regularMethod());
+  // 3. Register a macro with named parameters
+  Macroable.macro<StringFormatter>(
+    'wrap',
+    ({required String text, String start = '[', String end = ']'}) {
+      return '$start$text$end';
+    },
+  );
 
-  // Call the macro method
-  print((instance as dynamic).customMethod());
+  // 4. Use the macros (requires dynamic casting)
+  print(formatter.capitalize('hello')); // Built-in method
+  print((formatter as dynamic).repeat('ha ', 3)); // Prints: ha ha ha
+  print((formatter as dynamic).wrap(text: 'hello')); // Prints: [hello]
 
-  // Check if a macro exists
-  print(Macroable.hasMacro(MyClass, 'customMethod')); // true
-  print(Macroable.hasMacro(MyClass, 'nonExistentMethod')); // false
-
-  // Add methods from a mixin
-  class MyMixin {
-    String mixinMethod() => 'This is a mixin method';
+  // 5. Mix in methods from another class
+  class TextTransformations {
+    String reverse(String text) => text.split('').reversed.join();
   }
 
-  Macroable.mixin(MyClass, MyMixin());
+  Macroable.mixin<StringFormatter>(TextTransformations());
+  print((formatter as dynamic).reverse('hello')); // Prints: olleh
 
-  // Call the mixin method
-  print((instance as dynamic).mixinMethod());
+  // 6. Check if a macro exists
+  print(Macroable.hasMacro<StringFormatter>('reverse')); // Prints: true
 
-  // Flush all macros
-  Macroable.flushMacros(MyClass);
-
-  // This will now throw a NoSuchMethodError
-  try {
-    (instance as dynamic).customMethod();
-  } catch (e) {
-    print('Caught exception: $e');
-  }
+  // 7. Clear all macros
+  Macroable.flushMacros<StringFormatter>();
 }
 ```
 
-## Additional Information
+## Features in Detail
 
-For more detailed examples, please refer to the `example/macroable_example.dart` file in the package.
+### Basic Macro Registration
 
-If you encounter any issues or have feature requests, please file them on the [issue tracker](https://github.com/yourusername/platform_macroable/issues).
+Register methods that can be called on instances of your class:
 
-Contributions are welcome! Please read our [contributing guidelines](https://github.com/yourusername/platform_macroable/blob/main/CONTRIBUTING.md) before submitting a pull request.
+```dart
+Macroable.macro<YourClass>('methodName', (String arg) {
+  return arg.toUpperCase();
+});
+```
+
+### Named Parameters
+
+Support for methods with named parameters:
+
+```dart
+Macroable.macro<YourClass>(
+  'format',
+  ({required String text, String prefix = '>> '}) {
+    return '$prefix$text';
+  },
+);
+```
+
+### Method Mixing
+
+Add all public methods from another object:
+
+```dart
+class Helper {
+  String process(String input) => input.trim();
+  int calculate(int x, int y) => x + y;
+}
+
+Macroable.mixin<YourClass>(Helper());
+```
+
+### Utility Methods
+
+Check for macro existence and clear macros:
+
+```dart
+// Check if a macro exists
+bool exists = Macroable.hasMacro<YourClass>('methodName');
+
+// Remove all macros
+Macroable.flushMacros<YourClass>();
+```
+
+## Important Notes
+
+1. Macro calls require dynamic casting since they're resolved at runtime:
+   ```dart
+   (instance as dynamic).macroMethod()
+   ```
+
+2. Macros are registered per-type, not per-instance:
+   ```dart
+   // All instances of YourClass will have access to this macro
+   Macroable.macro<YourClass>('method', () => 'result');
+   ```
+
+3. Type safety is maintained at registration time through generics.
+
+## Example
+
+See the [example](example/platform_macroable_example.dart) for a complete demonstration of all features.

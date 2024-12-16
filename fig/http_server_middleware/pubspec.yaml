@@ -1,0 +1,15 @@
+name: dsr_http_server_middleware
+description: A PSR-15 compatible HTTP server middleware interface for Dart. Provides a standardized interface for middleware components that participate in processing HTTP server requests.
+version: 0.0.1
+homepage: https://dart-fig.org
+
+environment:
+  sdk: ^3.4.2
+
+dependencies:
+  dsr_http_message: ^0.0.1
+  dsr_http_server_handler: ^0.0.1
+
+dev_dependencies:
+  lints: ^3.0.0
+  test: ^1.24.0
