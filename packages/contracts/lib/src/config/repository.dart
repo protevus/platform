@@ -3,7 +3,7 @@
 /// This contract defines the standard way to interact with configuration values
 /// in the application. It provides methods to get, set, and manipulate
 /// configuration values in a consistent manner.
-abstract class Repository {
+abstract class ConfigContract {
   /// Determine if the given configuration value exists.
   ///
   /// Example:
