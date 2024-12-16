@@ -1,5 +1,5 @@
 /// Interface for encryption.
-abstract class Encrypter {
+abstract class EncrypterContract {
   /// Encrypt the given value.
   ///
   /// @throws EncryptException
