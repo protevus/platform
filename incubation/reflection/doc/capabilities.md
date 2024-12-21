@@ -1,203 +1,102 @@
 # Platform Reflection Capabilities
 
+This document outlines the key capabilities of the Platform Reflection library, demonstrating its features and usage patterns.
+
 ## Core Reflection Features
 
-### 1. Library Reflection
+### 1. Class Reflection
 ```dart
-// Library reflection support
-final library = LibraryMirrorImpl.withDeclarations(
-  name: 'my_library',
-  uri: Uri.parse('package:my_package/my_library.dart'),
-);
+@reflectable
+class User {
+  String name;
+  int age;
+  final String id;
+  List<String> tags;
 
-// Access top-level members
-final greeting = library.getField(const Symbol('greeting')).reflectee;
-final sum = library.invoke(
-  const Symbol('add'),
-  [1, 2],
-).reflectee;
+  User(this.name, this.age, {required this.id, List<String>? tags})
+      : tags = tags ?? [];
+
+  String greet() => "Hi $name!";
+  void addTag(String tag) => tags.add(tag);
+  String getName() => name;
+}
+
+// Registration
+Reflector.register(User);
+Reflector.registerProperty(User, 'name', String);
+Reflector.registerProperty(User, 'age', int);
+Reflector.registerProperty(User, 'id', String, isWritable: false);
+Reflector.registerProperty(User, 'tags', List<String>, isWritable: false);
+Reflector.registerMethod(User, 'greet', [], false);
+Reflector.registerMethod(User, 'addTag', [String], true);
+Reflector.registerMethod(User, 'getName', [], false);
+Reflector.registerConstructor(User, '', 
+  parameterTypes: [String, int, String, List<String>],
+  parameterNames: ['name', 'age', 'id', 'tags'],
+  isRequired: [true, true, true, false],
+  isNamed: [false, false, true, true],
+);
 ```
 
-### 2. Isolate Support
+### 2. Instance Creation and Manipulation
 ```dart
-// Current isolate reflection
-final current = IsolateMirrorImpl.current(rootLibrary);
+final reflector = RuntimeReflector.instance;
 
-// Other isolate reflection
-final other = IsolateMirrorImpl.other(
-  isolate,
-  'worker',
-  rootLibrary,
-);
+// Create instance
+final user = reflector.createInstance(
+  User,
+  positionalArgs: ['John Doe', 30],
+  namedArgs: {'id': 'user1', 'tags': ['admin', 'user']},
+) as User;
 
-// Isolate control
-await other.pause();
-await other.resume();
-await other.kill();
+// Get mirror
+final mirror = reflector.reflect(user);
 
-// Error handling
-other.addErrorListener((error, stack) {
-  print('Error in isolate: $error\n$stack');
+// Property access and modification
+print('Name: ${mirror.getField(const Symbol('name')).reflectee}');
+mirror.setField(const Symbol('name'), 'Jane Doe');
+
+// Method invocation
+final greeting = mirror.invoke(const Symbol('greet'), []).reflectee as String;
+mirror.invoke(const Symbol('addTag'), ['vip']);
+```
+
+### 3. Type Information
+```dart
+final classMirror = reflector.reflectClass(User);
+
+print('Type name: ${classMirror.name}');
+
+// Properties
+classMirror.declarations.values
+    .whereType<VariableMirror>()
+    .forEach((prop) {
+  print('Property: ${prop.name}: ${prop.type.name}');
+  if (!prop.isFinal && !prop.isWritable) print('  (read-only)');
 });
 
-// Exit handling
-other.addExitListener((message) {
-  print('Isolate exited with: $message');
+// Methods
+classMirror.declarations.values
+    .whereType<MethodMirror>()
+    .where((method) => !method.isConstructor)
+    .forEach((method) {
+  print('Method: ${method.name}');
 });
-```
 
-### 3. Type System
-```dart
-// Special types
-final voidType = VoidType.instance;
-final dynamicType = DynamicType.instance;
-final neverType = NeverType.instance;
-
-// Type checking
-final isVoid = type.isVoid;
-final isDynamic = type.isDynamic;
-final isNever = type.isNever;
-```
-
-### 4. Metadata System
-```dart
-// Parameter metadata
-final param = ParameterMetadata(
-  name: 'id',
-  type: int,
-  isRequired: true,
-  isNamed: false,
-  defaultValue: 0,
-  attributes: [deprecated],
-);
-
-// Property metadata
-final prop = PropertyMetadata(
-  name: 'name',
-  type: String,
-  isReadable: true,
-  isWritable: true,
-  attributes: [override],
-);
-
-// Method metadata
-final method = MethodMetadata(
-  name: 'calculate',
-  parameterTypes: [int, double],
-  parameters: [...],
-  isStatic: false,
-  returnsVoid: false,
-  attributes: [deprecated],
-);
-```
-
-### 5. Constructor Support
-```dart
-// Constructor metadata
-final ctor = ConstructorMetadata(
-  name: 'named',
-  parameterTypes: [String, int],
-  parameters: [...],
-  parameterNames: ['name', 'age'],
-  attributes: [...],
-);
-
-// Validation
-final valid = ctor.validateArguments(['John', 42]);
-```
-
-### 6. Type Metadata
-```dart
-// Full type information
-final type = TypeMetadata(
-  type: User,
-  name: 'User',
-  properties: {...},
-  methods: {...},
-  constructors: [...],
-  supertype: Person,
-  interfaces: [Comparable],
-  attributes: [serializable],
-);
-
-// Member access
-final prop = type.getProperty('name');
-final method = type.getMethod('greet');
-final ctor = type.getConstructor('guest');
-```
-
-## Advanced Features
-
-### 1. Library Dependencies
-```dart
-final deps = library.libraryDependencies;
-for (var dep in deps) {
-  if (dep.isImport) {
-    print('Imports: ${dep.targetLibrary?.uri}');
-  }
-}
-```
-
-### 2. Declaration Access
-```dart
-final decls = library.declarations;
-for (var decl in decls.values) {
-  if (decl is MethodMirror) {
-    print('Method: ${decl.simpleName}');
-  } else if (decl is VariableMirror) {
-    print('Variable: ${decl.simpleName}');
-  }
-}
-```
-
-### 3. Function Metadata
-```dart
-final func = FunctionMetadata(
-  parameters: [...],
-  returnsVoid: false,
-  returnType: int,
-);
-
-final valid = func.validateArguments([1, 2.0]);
-```
-
-### 4. Reflection Registry
-```dart
-// Type registration
-ReflectionRegistry.registerType(User);
-
-// Member registration
-ReflectionRegistry.registerProperty(
-  User,
-  'name',
-  String,
-  isReadable: true,
-  isWritable: true,
-);
-
-ReflectionRegistry.registerMethod(
-  User,
-  'greet',
-  [String],
-  false,
-);
-
-ReflectionRegistry.registerConstructor(
-  User,
-  'guest',
-  factory,
-);
+// Constructors
+classMirror.declarations.values
+    .whereType<MethodMirror>()
+    .where((method) => method.isConstructor)
+    .forEach((constructor) {
+  print('Constructor: ${constructor.name}');
+});
 ```
 
 ## Error Handling
 
 ```dart
 try {
-  // Reflection operations
-} on MemberNotFoundException catch (e) {
-  print('Member not found: ${e.memberName} on ${e.type}');
-} on InvalidArgumentsException catch (e) {
-  print('Invalid arguments for ${e.memberName}');
+  final mirror = reflector.reflect(unregisteredInstance);
 } on ReflectionException catch (e) {
   print('Reflection error: ${e.message}');
 }
@@ -222,66 +121,34 @@ try {
    - Fast lookup mechanisms
    - Memory-conscious design
 
-3. **Cross-isolate Performance**
-   - Minimal serialization overhead
-   - Efficient isolate communication
-   - Controlled resource usage
-
-## Security Features
-
-1. **Access Control**
-   - Controlled reflection surface
-   - Explicit registration required
-   - Member visibility respect
-
-2. **Type Safety**
-   - Strong type checking
-   - Argument validation
-   - Return type verification
-
-3. **Isolate Safety**
-   - Controlled isolate access
-   - Error propagation
-   - Resource cleanup
-
 ## Best Practices
 
-1. **Registration**
+1. **Early Registration**
    ```dart
-   // Register early
    void main() {
-     registerTypes();
+     registerReflectableTypes();
      runApp();
    }
    ```
 
-2. **Metadata Usage**
+2. **Caching Mirrors**
    ```dart
-   // Cache metadata
-   final metadata = Reflector.getTypeMetadata(User);
-   final properties = metadata.properties;
-   final methods = metadata.methods;
+   class UserService {
+     final Map<User, InstanceMirror> _mirrors = {};
+     
+     InstanceMirror getMirror(User user) {
+       return _mirrors.putIfAbsent(user, () => reflector.reflect(user));
+     }
+   }
    ```
 
-3. **Error Handling**
+3. **Comprehensive Error Handling**
    ```dart
-   // Comprehensive error handling
    try {
-     final result = mirror.invoke(name, args);
+     final result = mirror.invoke(const Symbol('method'), args);
    } on ReflectionException catch (e) {
-     handleError(e);
+     handleReflectionError(e);
    }
    ```
 
-4. **Isolate Management**
-   ```dart
-   // Proper cleanup
-   final isolate = IsolateMirrorImpl.other(...);
-   try {
-     await doWork(isolate);
-   } finally {
-     await isolate.kill();
-   }
-   ```
-
-This document provides a comprehensive overview of the Platform Reflection library's capabilities. For detailed API documentation, see the [API Reference](../README.md#api-reference).
+This document provides an overview of the Platform Reflection library's capabilities. For detailed API documentation, please refer to the [API Reference](../README.md#api-reference).

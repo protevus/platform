@@ -1,7 +1,7 @@
 # Platform Reflection Documentation
 
 ## Overview
-Platform Reflection is a modern reflection system for Dart that provides runtime type introspection and manipulation capabilities across all platforms.
+Platform Reflection is a modern reflection system for Dart that provides runtime type introspection and manipulation capabilities across all platforms, including VM, Web, and Flutter.
 
 ## Documentation Structure
 
@@ -21,19 +21,17 @@ Platform Reflection is a modern reflection system for Dart that provides runtime
 1. Basic Usage
    - [Installation](../README.md#installation)
    - [Basic Reflection](quick_start.md#basic-usage)
-   - [Property Access](quick_start.md#2-property-access)
-   - [Method Invocation](quick_start.md#3-method-invocation)
+   - [Property Access and Method Invocation](quick_start.md#2-use-reflection)
+   - [Type Information](quick_start.md#3-type-information)
 
 2. Advanced Usage
-   - [Type Information](quick_start.md#5-type-information)
-   - [Error Handling](quick_start.md#6-error-handling)
-   - [Common Patterns](quick_start.md#common-patterns)
+   - [Error Handling](quick_start.md#error-handling)
    - [Best Practices](quick_start.md#best-practices)
+   - [Performance Tips](quick_start.md#performance-tips)
 
 3. Performance
    - [Optimization Techniques](technical_specification.md#performance-optimizations)
-   - [Performance Tips](quick_start.md#performance-tips)
-   - [Memory Management](technical_specification.md#memory-management)
+   - [Performance Considerations](capabilities.md#performance-considerations)
 
 ### Implementation Status
 
@@ -45,23 +43,19 @@ Platform Reflection is a modern reflection system for Dart that provides runtime
 ✅ Type introspection
 ✅ Basic metadata support
 ✅ Error handling
-✅ Cross-platform support
+✅ Cross-platform support (VM, Web, Flutter)
 
 #### Known Limitations
-❌ No cross-isolate reflection
 ❌ Limited generic support
-❌ No source location tracking
 ❌ No extension method support
-❌ No mixin composition
 ❌ Limited metadata capabilities
 ❌ No dynamic proxy generation
-❌ No attribute-based reflection
 
 ### Development
 
 1. Contributing
-   - [Getting Started](roadmap.md#getting-started)
    - [Priority Areas](roadmap.md#priority-areas)
+   - [Getting Started](roadmap.md#getting-started)
    - [Development Process](roadmap.md#development-process)
 
 2. Future Plans
@@ -77,9 +71,7 @@ Platform Reflection is a modern reflection system for Dart that provides runtime
    - [Performance Tips](quick_start.md#performance-tips)
 
 2. Version Support
-   - [Support Matrix](roadmap.md#version-support-matrix)
    - [Breaking Changes](roadmap.md#breaking-changes)
-   - [Migration Support](roadmap.md#migration-support)
 
 ## Quick Links
 
@@ -93,13 +85,12 @@ Platform Reflection is a modern reflection system for Dart that provides runtime
 1. Review the [Technical Specification](technical_specification.md)
 2. Check the [Development Roadmap](roadmap.md)
 3. See [Priority Areas](roadmap.md#priority-areas)
-4. Read [Contributing Guidelines](../CONTRIBUTING.md)
+4. Read Contributing Guidelines (../CONTRIBUTING.md)
 
 ### For Framework Developers
 1. Study the [Mirrors Comparison](mirrors_comparison.md)
 2. Review [Implementation Details](technical_specification.md#implementation-details)
-3. Check [Framework Integration](roadmap.md#framework-integration)
-4. See [Enterprise Features](roadmap.md#enterprise-features)
+3. Check [Framework Integration](roadmap.md#2-framework-integration)
 
 ## Document Updates
 

@@ -310,17 +310,17 @@ class MirrorSystem implements MirrorSystemContract {
   }
 }
 
-/// The current mirror system.
-MirrorSystemContract currentMirrorSystem() => MirrorSystem.current();
+// /// The current mirror system.
+// MirrorSystemContract currentMirrorSystem() => MirrorSystem.current();
 
-/// Reflects an instance.
-InstanceMirrorContract reflect(Object reflectee) =>
-    MirrorSystem.instance.reflect(reflectee);
+// /// Reflects an instance.
+// InstanceMirrorContract reflect(Object reflectee) =>
+//     MirrorSystem.instance.reflect(reflectee);
 
-/// Reflects a class.
-ClassMirrorContract reflectClass(Type key) =>
-    MirrorSystem.instance.reflectClass(key);
+// /// Reflects a class.
+// ClassMirrorContract reflectClass(Type key) =>
+//     MirrorSystem.instance.reflectClass(key);
 
-/// Reflects a type.
-TypeMirrorContract reflectType(Type key) =>
-    MirrorSystem.instance.reflectType(key);
+// /// Reflects a type.
+// TypeMirrorContract reflectType(Type key) =>
+//     MirrorSystem.instance.reflectType(key);

@@ -6,64 +6,71 @@
 
 ```mermaid
 graph TD
-    A[Reflector] --> B[Scanner]
-    A --> C[RuntimeReflector]
-    B --> D[TypeAnalyzer]
-    C --> E[MirrorSystem]
-    E --> F[Mirrors]
-    F --> G[ClassMirror]
-    F --> H[InstanceMirror]
-    F --> I[MethodMirror]
+    A[Reflector] --> B[RuntimeReflector]
+    B --> C[MirrorSystem]
+    C --> D[Mirrors]
+    D --> E[ClassMirror]
+    D --> F[InstanceMirror]
+    D --> G[MethodMirror]
+    D --> H[VariableMirror]
+    D --> I[LibraryMirror]
+    D --> J[TypeMirror]
 ```
 
 ### Component Responsibilities
 
 #### 1. Reflector
-- Central registration point
-- Metadata management
+- Static class for central registration and metadata management
 - Type registration validation
-- Cache management
+- Metadata storage for properties, methods, and constructors
 
 ```dart
 class Reflector {
-  static final Map<Type, TypeMetadata> _typeCache;
-  static final Map<Type, Map<String, PropertyMetadata>> _propertyMetadata;
-  static final Map<Type, Map<String, MethodMetadata>> _methodMetadata;
-  static final Map<Type, List<ConstructorMetadata>> _constructorMetadata;
+  static void register(Type type);
+  static void registerProperty(Type type, String name, Type propertyType, {bool isWritable = true});
+  static void registerMethod(Type type, String name, List<Type> parameterTypes, bool returnsVoid);
+  static void registerConstructor(Type type, String name, {List<Type>? parameterTypes, List<String>? parameterNames, List<bool>? isRequired, List<bool>? isNamed, Function? creator});
+  static bool isReflectable(Type type);
+  static Map<String, PropertyMetadata>? getPropertyMetadata(Type type);
+  static Map<String, MethodMetadata>? getMethodMetadata(Type type);
+  static List<ConstructorMetadata>? getConstructorMetadata(Type type);
 }
 ```
 
-#### 2. Scanner
-- Type analysis
-- Metadata extraction
-- Registration validation
-- Type relationship analysis
-
-```dart
-class Scanner {
-  static final Map<Type, TypeInfo> _typeInfoCache;
-  
-  static TypeInfo analyze(Type type) {
-    // Analyze class structure
-    // Extract metadata
-    // Build type relationships
-  }
-}
-```
-
-#### 3. RuntimeReflector
-- Instance creation
-- Method invocation
-- Property access
-- Type reflection
+#### 2. RuntimeReflector
+- Singleton class for runtime reflection operations
+- Instance creation and manipulation
+- Type and class reflection
+- Library reflection
 
 ```dart
 class RuntimeReflector {
-  InstanceMirror reflect(Object object) {
-    // Create instance mirror
-    // Setup metadata access
-    // Configure invocation handling
-  }
+  static final RuntimeReflector instance = RuntimeReflector._();
+  
+  InstanceMirror reflect(Object object);
+  ClassMirror reflectClass(Type type);
+  TypeMirror reflectType(Type type);
+  LibraryMirror reflectLibrary(Uri uri);
+  
+  InstanceMirror createInstance(Type type, {List<dynamic>? positionalArgs, Map<Symbol, dynamic>? namedArgs, String? constructorName});
+}
+```
+
+#### 3. MirrorSystem
+- Manages the overall reflection system
+- Provides access to libraries and types
+- Handles special types (dynamic, void, never)
+
+```dart
+class MirrorSystem implements MirrorSystemContract {
+  static MirrorSystem get instance;
+  static MirrorSystem current();
+  
+  Map<Uri, LibraryMirrorContract> get libraries;
+  LibraryMirrorContract findLibrary(Symbol libraryName);
+  ClassMirrorContract reflectClass(Type type);
+  TypeMirrorContract reflectType(Type type);
+  IsolateMirrorContract get isolate;
 }
 ```
 
@@ -77,8 +84,8 @@ class TypeMetadata {
   final Map<String, PropertyMetadata> properties;
   final Map<String, MethodMetadata> methods;
   final List<ConstructorMetadata> constructors;
-  final bool isAbstract;
-  final bool isEnum;
+  final TypeMetadata? supertype;
+  final List<TypeMetadata> interfaces;
 }
 ```
 
@@ -89,8 +96,8 @@ class MethodMetadata {
   final List<Type> parameterTypes;
   final List<ParameterMetadata> parameters;
   final bool returnsVoid;
+  final Type returnType;
   final bool isStatic;
-  final bool isAbstract;
 }
 ```
 
@@ -101,7 +108,6 @@ class PropertyMetadata {
   final Type type;
   final bool isReadable;
   final bool isWritable;
-  final bool isStatic;
 }
 ```
 
@@ -112,20 +118,11 @@ class PropertyMetadata {
 1. Type Registration
 ```dart
 static void register(Type type) {
-  // Validate type
-  if (_typeCache.containsKey(type)) return;
-  
-  // Create metadata
-  final metadata = TypeMetadata(
-    type: type,
-    name: type.toString(),
-    properties: {},
-    methods: {},
-    constructors: [],
-  );
-  
-  // Cache metadata
-  _typeCache[type] = metadata;
+  _reflectableTypes.add(type);
+  _propertyMetadata.putIfAbsent(type, () => {});
+  _methodMetadata.putIfAbsent(type, () => {});
+  _constructorMetadata.putIfAbsent(type, () => []);
+  _instanceCreators.putIfAbsent(type, () => {});
 }
 ```
 
@@ -138,23 +135,16 @@ static void registerProperty(
   bool isReadable = true,
   bool isWritable = true,
 }) {
-  // Validate type registration
-  if (!isRegistered(type)) {
-    throw NotReflectableException(type);
-  }
-  
-  // Create property metadata
-  final metadata = PropertyMetadata(
-    name: name,
-    type: propertyType,
-    isReadable: isReadable,
-    isWritable: isWritable,
+  registerPropertyMetadata(
+    type,
+    name,
+    PropertyMetadata(
+      name: name,
+      type: propertyType,
+      isReadable: isReadable,
+      isWritable: isWritable,
+    ),
   );
-  
-  // Cache metadata
-  _propertyMetadata
-    .putIfAbsent(type, () => {})
-    [name] = metadata;
 }
 ```
 
@@ -165,30 +155,13 @@ static void registerMethod(
   String name,
   List<Type> parameterTypes,
   bool returnsVoid, {
+  Type? returnType,
   List<String>? parameterNames,
   List<bool>? isRequired,
+  List<bool>? isNamed,
+  bool isStatic = false,
 }) {
-  // Validate type registration
-  if (!isRegistered(type)) {
-    throw NotReflectableException(type);
-  }
-  
-  // Create method metadata
-  final metadata = MethodMetadata(
-    name: name,
-    parameterTypes: parameterTypes,
-    parameters: _createParameters(
-      parameterTypes,
-      parameterNames,
-      isRequired,
-    ),
-    returnsVoid: returnsVoid,
-  );
-  
-  // Cache metadata
-  _methodMetadata
-    .putIfAbsent(type, () => {})
-    [name] = metadata;
+  // Implementation details...
 }
 ```
 
@@ -201,203 +174,76 @@ InstanceMirror createInstance(
   Map<Symbol, dynamic>? namedArgs,
   String? constructorName,
 }) {
-  // Get constructor metadata
-  final constructors = Reflector.getConstructorMetadata(type);
-  if (constructors == null) {
-    throw ReflectionException('No constructors found');
-  }
-  
-  // Find matching constructor
-  final constructor = constructors.firstWhere(
-    (c) => c.name == (constructorName ?? ''),
-    orElse: () => throw ReflectionException('Constructor not found'),
-  );
-  
-  // Validate arguments
-  _validateArguments(
-    constructor,
-    positionalArgs,
-    namedArgs,
-  );
-  
-  // Create instance
-  final instance = constructor.creator!(
-    positionalArgs,
-    namedArgs,
-  );
-  
-  // Return mirror
-  return InstanceMirror(
-    instance,
-    type,
-  );
+  // Implementation details...
 }
 ```
 
 ### Method Invocation
 
 ```dart
-InstanceMirror invoke(
-  Symbol methodName,
-  List<dynamic> positionalArguments, [
-  Map<Symbol, dynamic>? namedArguments,
-]) {
-  // Get method metadata
-  final method = _getMethodMetadata(methodName);
-  if (method == null) {
-    throw ReflectionException('Method not found');
-  }
-  
-  // Validate arguments
-  _validateMethodArguments(
-    method,
-    positionalArguments,
-    namedArguments,
-  );
-  
-  // Invoke method
-  final result = method.invoke(
-    instance,
-    positionalArguments,
-    namedArguments,
-  );
-  
-  // Return result mirror
-  return InstanceMirror(
-    result,
-    result.runtimeType,
-  );
+InstanceMirror invoke(Symbol methodName, List<dynamic> positionalArguments, [Map<Symbol, dynamic>? namedArguments]) {
+  // Implementation details...
 }
 ```
 
 ## Performance Optimizations
 
-### 1. Metadata Caching
-- Type metadata cached on registration
-- Method metadata cached on registration
-- Property metadata cached on registration
-
-### 2. Lookup Optimization
-- O(1) type lookup
-- O(1) method lookup
-- O(1) property lookup
-
-### 3. Memory Management
-- Weak references for type cache
-- Lazy initialization of metadata
-- Minimal metadata storage
+- Metadata caching on registration for fast lookup
+- Use of HashMap for O(1) average case lookups
+- Lazy initialization of certain components (e.g., special types in MirrorSystem)
+- Reuse of mirrors for repeated operations on the same object
 
 ## Error Handling
 
-### Exception Hierarchy
 ```dart
-abstract class ReflectionException implements Exception {
+class ReflectionException implements Exception {
   final String message;
-  final StackTrace? stackTrace;
+  ReflectionException(this.message);
+  @override
+  String toString() => 'ReflectionException: $message';
 }
 
 class NotReflectableException extends ReflectionException {
-  final Type type;
+  NotReflectableException(Type type) : super('Type is not reflectable: $type');
 }
 
 class InvalidArgumentsException extends ReflectionException {
-  final String memberName;
-  final Type type;
-}
-
-class MemberNotFoundException extends ReflectionException {
-  final String memberName;
-  final Type type;
+  InvalidArgumentsException(String message, Type type) : super(message);
 }
 ```
 
-### Validation Points
-1. Registration validation
-2. Argument validation
-3. Type validation
-4. Access validation
-
 ## Platform Considerations
 
-### Web Support
-- No dart:mirrors dependency
-- Tree-shaking friendly
-- Minimal runtime overhead
-
-### Flutter Support
-- AOT compilation compatible
-- No code generation required
-- Performance optimized
-
-### Native Support
-- Cross-platform compatible
-- No platform-specific code
-- Consistent behavior
+- Full support for VM, Web, Flutter, and AOT compilation
+- No use of dart:mirrors, ensuring cross-platform compatibility
+- Explicit registration allows for better tree-shaking and smaller code size
 
 ## Limitations and Constraints
 
-### Technical Limitations
-1. No cross-isolate reflection
-2. No source location support
-3. Limited generic support
-4. No extension method support
-
-### Design Decisions
-1. Explicit registration required
-2. No private member access
-3. No dynamic loading
-4. No proxy generation
+- Explicit registration required for all reflectable types and members
+- Limited support for complex generic types
+- No reflection on private members
+- No dynamic loading of code or types at runtime
 
 ## Future Considerations
 
-### Planned Improvements
-1. Enhanced generic support
-2. Better type relationship handling
-3. Improved metadata capabilities
-4. Performance optimizations
-
-### Potential Features
-1. Attribute-based reflection
-2. Dynamic proxy generation
-3. Enhanced type analysis
-4. Improved error reporting
+- Enhanced generic type support, including variance and type parameter bounds
+- Improved metadata capabilities, including custom metadata providers
+- Dynamic proxy generation for more advanced use cases
+- Potential for code generation tools to automate registration process
 
 ## Security Considerations
 
-### Access Control
-- No private member access
-- Controlled reflection surface
-- Explicit registration required
-
-### Type Safety
-- Strong type checking
-- Runtime validation
-- Safe method invocation
+- No access to private members, maintaining encapsulation
+- Controlled reflection surface through explicit registration
+- Runtime type checking and validation during reflection operations
 
 ## Testing Strategy
 
-### Unit Tests
-1. Registration tests
-2. Reflection tests
-3. Error handling tests
-4. Performance tests
+- Comprehensive unit tests for all core components (Reflector, RuntimeReflector, MirrorSystem)
+- Integration tests simulating real-world usage scenarios
+- Performance benchmarks comparing against direct method calls and dart:mirrors (where applicable)
+- Cross-platform tests ensuring consistent behavior across VM, Web, and Flutter
+- Stress tests with large numbers of registered types and reflection operations
 
-### Integration Tests
-1. Platform compatibility
-2. Framework integration
-3. Real-world scenarios
-4. Edge cases
-
-## Documentation Requirements
-
-### API Documentation
-1. Public API documentation
-2. Usage examples
-3. Best practices
-4. Migration guides
-
-### Technical Documentation
-1. Architecture overview
-2. Implementation details
-3. Performance considerations
-4. Security guidelines
+This technical specification provides a detailed overview of the Platform Reflection library's architecture, implementation details, and key considerations. For API documentation and usage examples, please refer to the [README](../README.md) and [Quick Start Guide](quick_start.md).
