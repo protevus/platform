@@ -261,6 +261,9 @@ class MirrorSystem implements MirrorSystemContract {
 
   @override
   TypeMirrorContract reflectType(Type type) {
+    if (!Reflector.isReflectable(type)) {
+      throw ArgumentError('Type is not reflectable: $type');
+    }
     return _getOrCreateTypeMirror(type);
   }
 
