@@ -1,32 +1,31 @@
 import 'dart:core';
-import '../mirrors.dart';
-import 'base_mirror.dart';
-import 'type_mirror_impl.dart';
+import 'package:platform_contracts/contracts.dart';
+import 'package:platform_reflection/mirrors.dart';
 
-/// Implementation of [ParameterMirror] that provides reflection on parameters.
-class ParameterMirrorImpl extends MutableOwnerMirror
-    implements ParameterMirror {
+/// Implementation of [ParameterMirrorContract] that provides reflection on parameters.
+class ParameterMirror extends MutableOwnerMirror
+    implements ParameterMirrorContract {
   final String _name;
-  final TypeMirror _type;
+  final TypeMirrorContract _type;
   final bool _isOptional;
   final bool _isNamed;
   final bool _hasDefaultValue;
-  final InstanceMirror? _defaultValue;
+  final InstanceMirrorContract? _defaultValue;
   final bool _isFinal;
   final bool _isConst;
-  final List<InstanceMirror> _metadata;
+  final List<InstanceMirrorContract> _metadata;
 
-  ParameterMirrorImpl({
+  ParameterMirror({
     required String name,
-    required TypeMirror type,
-    required DeclarationMirror owner,
+    required TypeMirrorContract type,
+    required DeclarationMirrorContract owner,
     bool isOptional = false,
     bool isNamed = false,
     bool hasDefaultValue = false,
-    InstanceMirror? defaultValue,
+    InstanceMirrorContract? defaultValue,
     bool isFinal = false,
     bool isConst = false,
-    List<InstanceMirror> metadata = const [],
+    List<InstanceMirrorContract> metadata = const [],
   })  : _name = name,
         _type = type,
         _isOptional = isOptional,
@@ -58,7 +57,7 @@ class ParameterMirrorImpl extends MutableOwnerMirror
   bool get isTopLevel => false;
 
   @override
-  TypeMirror get type => _type;
+  TypeMirrorContract get type => _type;
 
   @override
   bool get isStatic => false;
@@ -79,15 +78,15 @@ class ParameterMirrorImpl extends MutableOwnerMirror
   bool get hasDefaultValue => _hasDefaultValue;
 
   @override
-  InstanceMirror? get defaultValue => _defaultValue;
+  InstanceMirrorContract? get defaultValue => _defaultValue;
 
   @override
-  List<InstanceMirror> get metadata => List.unmodifiable(_metadata);
+  List<InstanceMirrorContract> get metadata => List.unmodifiable(_metadata);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (other is! ParameterMirrorImpl) return false;
+    if (other is! ParameterMirror) return false;
 
     return _name == other._name &&
         _type == other._type &&

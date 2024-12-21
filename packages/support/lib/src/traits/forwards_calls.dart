@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:platform_reflection/reflection.dart';
+import 'package:platform_reflection/mirrors.dart';
 
 /// A mixin that provides method forwarding functionality.
 ///

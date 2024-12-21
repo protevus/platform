@@ -1,22 +1,6 @@
-import 'package:meta/meta.dart';
 import 'dart:isolate' as isolate;
-import '../exceptions.dart';
-import '../metadata.dart';
-import '../mirrors.dart';
-import 'reflector.dart';
-import '../mirrors/base_mirror.dart';
-import '../mirrors/class_mirror_impl.dart';
-import '../mirrors/instance_mirror_impl.dart';
-import '../mirrors/method_mirror_impl.dart';
-import '../mirrors/parameter_mirror_impl.dart';
-import '../mirrors/type_mirror_impl.dart';
-import '../mirrors/type_variable_mirror_impl.dart';
-import '../mirrors/variable_mirror_impl.dart';
-import '../mirrors/library_mirror_impl.dart';
-import '../mirrors/library_dependency_mirror_impl.dart';
-import '../mirrors/isolate_mirror_impl.dart';
-import '../mirrors/mirror_system_impl.dart';
-import '../mirrors/special_types.dart';
+import 'package:platform_contracts/contracts.dart';
+import 'package:platform_reflection/mirrors.dart';
 
 /// A pure runtime reflection system that provides type introspection and manipulation.
 class RuntimeReflector {
@@ -24,26 +8,26 @@ class RuntimeReflector {
   static final instance = RuntimeReflector._();
 
   /// The current mirror system.
-  late final MirrorSystemImpl _mirrorSystem;
+  late final MirrorSystem _mirrorSystem;
 
   /// Cache of class mirrors to prevent infinite recursion
-  final Map<Type, ClassMirror> _classMirrorCache = {};
+  final Map<Type, ClassMirrorContract> _classMirrorCache = {};
 
   RuntimeReflector._() {
     // Initialize mirror system
-    _mirrorSystem = MirrorSystemImpl.current();
+    _mirrorSystem = MirrorSystem.current();
   }
 
   /// Resolves parameters for method or constructor invocation
   List<dynamic> resolveParameters(
-    List<ParameterMirror> parameters,
+    List<ParameterMirrorContract> parameters,
     List<dynamic> positionalArgs,
     Map<Symbol, dynamic>? namedArgs,
   ) {
     final resolvedArgs = List<dynamic>.filled(parameters.length, null);
     var positionalIndex = 0;
 
-    ClassMirror? _getClassMirror(Type? type) {
+    ClassMirrorContract? _getClassMirror(Type? type) {
       if (type == null) return null;
       try {
         return reflectClass(type);
@@ -52,7 +36,7 @@ class RuntimeReflector {
       }
     }
 
-    bool _isTypeCompatible(dynamic value, TypeMirror expectedType) {
+    bool _isTypeCompatible(dynamic value, TypeMirrorContract expectedType) {
       // Handle null values
       if (value == null) {
         // For now, accept null for any type as we don't have nullability information
@@ -81,7 +65,7 @@ class RuntimeReflector {
       }
 
       // Handle generic type parameters
-      if (expectedType is TypeVariableMirrorImpl) {
+      if (expectedType is TypeVariableMirror) {
         return _isTypeCompatible(value, expectedType.upperBound);
       }
 
@@ -198,9 +182,9 @@ class RuntimeReflector {
       // Resolve parameters using constructor metadata
       final resolvedArgs = resolveParameters(
         constructor.parameters
-            .map((param) => ParameterMirrorImpl(
+            .map((param) => ParameterMirror(
                   name: param.name,
-                  type: TypeMirrorImpl(
+                  type: TypeMirror(
                     type: param.type,
                     name: param.type.toString(),
                     owner: mirror,
@@ -242,14 +226,15 @@ class RuntimeReflector {
   }
 
   /// Creates a TypeMirror for a given type.
-  TypeMirror _createTypeMirror(Type type, String name, [ClassMirror? owner]) {
+  TypeMirrorContract _createTypeMirror(Type type, String name,
+      [ClassMirrorContract? owner]) {
     if (type == voidType) {
-      return TypeMirrorImpl.voidType(owner);
+      return TypeMirror.voidType(owner);
     }
     if (type == dynamicType) {
-      return TypeMirrorImpl.dynamicType(owner);
+      return TypeMirror.dynamicType(owner);
     }
-    return TypeMirrorImpl(
+    return TypeMirror(
       type: type,
       name: name,
       owner: owner,
@@ -258,7 +243,7 @@ class RuntimeReflector {
   }
 
   /// Reflects on a type, returning its class mirror.
-  ClassMirror reflectClass(Type type) {
+  ClassMirrorContract reflectClass(Type type) {
     // Check cache first
     if (_classMirrorCache.containsKey(type)) {
       return _classMirrorCache[type]!;
@@ -270,7 +255,7 @@ class RuntimeReflector {
     }
 
     // Create empty mirror and add to cache to break recursion
-    final emptyMirror = ClassMirrorImpl(
+    final emptyMirror = ClassMirror(
       type: type,
       name: type.toString(),
       owner: null,
@@ -288,11 +273,11 @@ class RuntimeReflector {
     final typeMetadata = Reflector.getTypeMetadata(type);
 
     // Create declarations map
-    final declarations = <Symbol, DeclarationMirror>{};
+    final declarations = <Symbol, DeclarationMirrorContract>{};
 
     // Add properties as variable declarations
     properties.forEach((name, prop) {
-      declarations[Symbol(name)] = VariableMirrorImpl(
+      declarations[Symbol(name)] = VariableMirror(
         name: name,
         type: _createTypeMirror(prop.type, prop.type.toString(), emptyMirror),
         owner: emptyMirror,
@@ -305,15 +290,15 @@ class RuntimeReflector {
 
     // Add methods as method declarations
     methods.forEach((name, method) {
-      declarations[Symbol(name)] = MethodMirrorImpl(
+      declarations[Symbol(name)] = MethodMirror(
         name: name,
         owner: emptyMirror,
         returnType: method.returnsVoid
-            ? TypeMirrorImpl.voidType(emptyMirror)
+            ? TypeMirror.voidType(emptyMirror)
             : _createTypeMirror(
                 method.returnType, method.returnType.toString(), emptyMirror),
         parameters: method.parameters
-            .map((param) => ParameterMirrorImpl(
+            .map((param) => ParameterMirror(
                   name: param.name,
                   type: _createTypeMirror(
                       param.type, param.type.toString(), emptyMirror),
@@ -334,12 +319,12 @@ class RuntimeReflector {
 
     // Add constructors as method declarations
     for (final ctor in constructors) {
-      declarations[Symbol(ctor.name)] = MethodMirrorImpl(
+      declarations[Symbol(ctor.name)] = MethodMirror(
         name: ctor.name,
         owner: emptyMirror,
         returnType: emptyMirror,
         parameters: ctor.parameters
-            .map((param) => ParameterMirrorImpl(
+            .map((param) => ParameterMirror(
                   name: param.name,
                   type: _createTypeMirror(
                       param.type, param.type.toString(), emptyMirror),
@@ -360,11 +345,11 @@ class RuntimeReflector {
     }
 
     // Create instance and static member maps
-    final instanceMembers = <Symbol, MethodMirror>{};
-    final staticMembers = <Symbol, MethodMirror>{};
+    final instanceMembers = <Symbol, MethodMirrorContract>{};
+    final staticMembers = <Symbol, MethodMirrorContract>{};
 
     methods.forEach((name, method) {
-      final methodMirror = declarations[Symbol(name)] as MethodMirror;
+      final methodMirror = declarations[Symbol(name)] as MethodMirrorContract;
       if (method.isStatic) {
         staticMembers[Symbol(name)] = methodMirror;
       } else {
@@ -373,7 +358,7 @@ class RuntimeReflector {
     });
 
     // Create class mirror
-    final mirror = ClassMirrorImpl(
+    final mirror = ClassMirror(
       type: type,
       name: type.toString(),
       owner: null,
@@ -403,7 +388,7 @@ class RuntimeReflector {
   }
 
   /// Reflects on a type, returning its type mirror.
-  TypeMirror reflectType(Type type) {
+  TypeMirrorContract reflectType(Type type) {
     // Check if type is reflectable
     if (!Reflector.isReflectable(type)) {
       throw NotReflectableException(type);
@@ -413,22 +398,22 @@ class RuntimeReflector {
   }
 
   /// Creates a new instance reflector for the given object.
-  InstanceMirror reflect(Object instance) {
+  InstanceMirrorContract reflect(Object instance) {
     // Check if type is reflectable
     if (!Reflector.isReflectable(instance.runtimeType)) {
       throw NotReflectableException(instance.runtimeType);
     }
 
-    return InstanceMirrorImpl(
+    return InstanceMirror(
       reflectee: instance,
       type: reflectClass(instance.runtimeType),
     );
   }
 
   /// Reflects on a library, returning its library mirror.
-  LibraryMirror reflectLibrary(Uri uri) {
+  LibraryMirrorContract reflectLibrary(Uri uri) {
     // Create library mirror with declarations
-    final library = LibraryMirrorImpl.withDeclarations(
+    final library = LibraryMirror.withDeclarations(
       name: uri.toString(),
       uri: uri,
       owner: null,
@@ -443,30 +428,30 @@ class RuntimeReflector {
   }
 
   /// Gets library dependencies for a given URI.
-  List<LibraryDependencyMirror> _getLibraryDependencies(Uri uri) {
+  List<LibraryDependencyMirrorContract> _getLibraryDependencies(Uri uri) {
     // Create source library
-    final sourceLibrary = LibraryMirrorImpl.withDeclarations(
+    final sourceLibrary = LibraryMirror.withDeclarations(
       name: uri.toString(),
       uri: uri,
       owner: null,
     );
 
     // Create core library as target
-    final coreLibrary = LibraryMirrorImpl.withDeclarations(
+    final coreLibrary = LibraryMirror.withDeclarations(
       name: 'dart:core',
       uri: Uri.parse('dart:core'),
       owner: null,
     );
 
     // Create test library as target
-    final testLibrary = LibraryMirrorImpl.withDeclarations(
+    final testLibrary = LibraryMirror.withDeclarations(
       name: 'package:test/test.dart',
       uri: Uri.parse('package:test/test.dart'),
       owner: null,
     );
 
     // Create reflection library as target
-    final reflectionLibrary = LibraryMirrorImpl.withDeclarations(
+    final reflectionLibrary = LibraryMirror.withDeclarations(
       name: 'package:platform_reflection/reflection.dart',
       uri: Uri.parse('package:platform_reflection/reflection.dart'),
       owner: null,
@@ -474,7 +459,7 @@ class RuntimeReflector {
 
     return [
       // Import dependencies
-      LibraryDependencyMirrorImpl(
+      LibraryDependencyMirror(
         isImport: true,
         isDeferred: false,
         sourceLibrary: sourceLibrary,
@@ -482,7 +467,7 @@ class RuntimeReflector {
         prefix: null,
         combinators: const [],
       ),
-      LibraryDependencyMirrorImpl(
+      LibraryDependencyMirror(
         isImport: true,
         isDeferred: false,
         sourceLibrary: sourceLibrary,
@@ -490,7 +475,7 @@ class RuntimeReflector {
         prefix: null,
         combinators: const [],
       ),
-      LibraryDependencyMirrorImpl(
+      LibraryDependencyMirror(
         isImport: true,
         isDeferred: false,
         sourceLibrary: sourceLibrary,
@@ -499,7 +484,7 @@ class RuntimeReflector {
         combinators: const [],
       ),
       // Export dependencies
-      LibraryDependencyMirrorImpl(
+      LibraryDependencyMirror(
         isImport: false,
         isDeferred: false,
         sourceLibrary: sourceLibrary,
@@ -511,11 +496,12 @@ class RuntimeReflector {
   }
 
   /// Returns a mirror on the current isolate.
-  IsolateMirror get currentIsolate => _mirrorSystem.isolate;
+  IsolateMirrorContract get currentIsolate => _mirrorSystem.isolate;
 
   /// Creates a mirror for another isolate.
-  IsolateMirror reflectIsolate(isolate.Isolate isolate, String debugName) {
-    return IsolateMirrorImpl.other(
+  IsolateMirrorContract reflectIsolate(
+      isolate.Isolate isolate, String debugName) {
+    return IsolateMirror.other(
       isolate,
       debugName,
       reflectLibrary(Uri.parse('dart:core')),

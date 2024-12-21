@@ -1,11 +1,7 @@
 import 'package:test/test.dart';
+import 'package:platform_contracts/contracts.dart';
+import 'package:platform_reflection/mirrors.dart';
 import 'package:platform_support/platform_support.dart';
-import 'package:platform_reflection/reflection.dart';
-import 'package:platform_reflection/src/core/reflector.dart';
-import 'package:platform_reflection/src/mirrors/method_mirror_impl.dart';
-import 'package:platform_reflection/src/mirrors/parameter_mirror_impl.dart';
-import 'package:platform_reflection/src/mirrors/type_mirror_impl.dart';
-import 'package:platform_reflection/src/mirrors/class_mirror_impl.dart';
 
 class TestClass {
   void publicMethod() {}
@@ -28,29 +24,29 @@ enum BackedEnum {
 }
 
 void main() {
-  late ClassMirrorImpl testClassMirror;
+  late ClassMirror testClassMirror;
 
   setUp(() {
     // Create type mirrors
-    final voidType = TypeMirrorImpl(
+    final voidType = TypeMirror(
       type: Null, // Using Null as a stand-in for void
       name: 'void',
       owner: null,
       metadata: const [],
     );
-    final stringType = TypeMirrorImpl(
+    final stringType = TypeMirror(
       type: String,
       name: 'String',
       owner: null,
       metadata: const [],
     );
-    final invocationType = TypeMirrorImpl(
+    final invocationType = TypeMirror(
       type: Invocation,
       name: 'Invocation',
       owner: null,
       metadata: const [],
     );
-    final objectType = TypeMirrorImpl(
+    final objectType = TypeMirror(
       type: Object,
       name: 'Object',
       owner: null,
@@ -58,7 +54,7 @@ void main() {
     );
 
     // Create class mirrors
-    testClassMirror = ClassMirrorImpl(
+    testClassMirror = ClassMirror(
       type: TestClass,
       name: 'TestClass',
       owner: null,
@@ -69,34 +65,34 @@ void main() {
     );
 
     // Create parameter mirrors
-    final selfParam = ParameterMirrorImpl(
+    final selfParam = ParameterMirror(
       name: 'self',
       type: objectType, // Using Object type for inheritance test
       owner: testClassMirror,
     );
 
-    final invocationParam = ParameterMirrorImpl(
+    final invocationParam = ParameterMirror(
       name: 'invocation',
       type: invocationType,
       owner: testClassMirror,
     );
 
     // Create method mirrors
-    final publicMethodMirror = MethodMirrorImpl(
+    final publicMethodMirror = MethodMirror(
       name: 'publicMethod',
       owner: testClassMirror,
       returnType: voidType,
       parameters: [selfParam],
     );
 
-    final privateMethodMirror = MethodMirrorImpl(
+    final privateMethodMirror = MethodMirror(
       name: '_privateMethod',
       owner: testClassMirror,
       returnType: voidType,
       parameters: [selfParam],
     );
 
-    final noSuchMethodMirror = MethodMirrorImpl(
+    final noSuchMethodMirror = MethodMirror(
       name: 'noSuchMethod',
       owner: testClassMirror,
       returnType: voidType,
@@ -208,16 +204,16 @@ void main() {
     });
 
     test('getParameterClassName returns correct class name', () {
-      final method =
-          testClassMirror.declarations[Symbol('publicMethod')] as MethodMirror;
+      final method = testClassMirror.declarations[Symbol('publicMethod')]
+          as MethodMirrorContract;
       final param = method.parameters.first;
 
       expect(SupportReflector.getParameterClassName(param), equals('Object'));
     });
 
     test('getParameterClassNames handles union types', () {
-      final method =
-          testClassMirror.declarations[Symbol('publicMethod')] as MethodMirror;
+      final method = testClassMirror.declarations[Symbol('publicMethod')]
+          as MethodMirrorContract;
       final param = method.parameters.first;
 
       final classNames = SupportReflector.getParameterClassNames(param);
@@ -226,8 +222,8 @@ void main() {
     });
 
     test('isParameterSubclassOf checks inheritance correctly', () {
-      final method =
-          testClassMirror.declarations[Symbol('publicMethod')] as MethodMirror;
+      final method = testClassMirror.declarations[Symbol('publicMethod')]
+          as MethodMirrorContract;
       final param = method.parameters.first;
 
       expect(SupportReflector.isParameterSubclassOf(param, 'Object'), isTrue);
@@ -236,13 +232,13 @@ void main() {
     test(
         'isParameterBackedEnumWithStringBackingType returns true for backed enums',
         () {
-      final type = TypeMirrorImpl(
+      final type = TypeMirror(
         type: BackedEnum,
         name: 'BackedEnum',
         owner: null,
         metadata: const [],
       );
-      final param = ParameterMirrorImpl(
+      final param = ParameterMirror(
         name: 'param',
         type: type,
         owner: testClassMirror,
@@ -255,13 +251,13 @@ void main() {
     test(
         'isParameterBackedEnumWithStringBackingType returns false for simple enums',
         () {
-      final type = TypeMirrorImpl(
+      final type = TypeMirror(
         type: SimpleEnum,
         name: 'SimpleEnum',
         owner: null,
         metadata: const [],
       );
-      final param = ParameterMirrorImpl(
+      final param = ParameterMirror(
         name: 'param',
         type: type,
         owner: testClassMirror,
@@ -274,13 +270,13 @@ void main() {
     test(
         'isParameterBackedEnumWithStringBackingType returns false for non-enums',
         () {
-      final type = TypeMirrorImpl(
+      final type = TypeMirror(
         type: String,
         name: 'String',
         owner: null,
         metadata: const [],
       );
-      final param = ParameterMirrorImpl(
+      final param = ParameterMirror(
         name: 'param',
         type: type,
         owner: testClassMirror,

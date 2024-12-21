@@ -8,7 +8,6 @@
  */
 
 import 'base.dart';
-import 'metadata.dart';
 
 export 'base.dart';
 export 'metadata.dart';
@@ -16,16 +15,16 @@ export 'metadata.dart';
 /// Core reflector contract for type introspection.
 abstract class ReflectorContract {
   /// Get a class mirror
-  ClassMirror? reflectClass(Type type);
+  ClassMirrorContract? reflectClass(Type type);
 
   /// Get a type mirror
-  TypeMirror reflectType(Type type);
+  TypeMirrorContract reflectType(Type type);
 
   /// Get an instance mirror
-  InstanceMirror reflect(Object object);
+  InstanceMirrorContract reflect(Object object);
 
   /// Get a library mirror
-  LibraryMirror reflectLibrary(Uri uri);
+  LibraryMirrorContract reflectLibrary(Uri uri);
 
   /// Create a new instance
   dynamic createInstance(

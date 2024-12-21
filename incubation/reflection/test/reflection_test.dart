@@ -1,4 +1,5 @@
-import 'package:platform_reflection/reflection.dart';
+import 'package:platform_contracts/contracts.dart';
+import 'package:platform_reflection/mirrors.dart';
 import 'package:test/test.dart';
 
 @reflectable
@@ -53,7 +54,7 @@ void main() {
 
     group('Property Access', () {
       late Person person;
-      late InstanceMirror mirror;
+      late InstanceMirrorContract mirror;
 
       setUp(() {
         Reflector.register(Person);
@@ -90,7 +91,7 @@ void main() {
 
     group('Method Invocation', () {
       late Person person;
-      late InstanceMirror mirror;
+      late InstanceMirrorContract mirror;
 
       setUp(() {
         Reflector.register(Person);

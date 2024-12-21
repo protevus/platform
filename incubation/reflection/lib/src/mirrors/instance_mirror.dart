@@ -1,21 +1,20 @@
 import 'dart:core';
-import '../mirrors.dart';
-import '../exceptions.dart';
-import '../core/reflector.dart';
+import 'package:platform_contracts/contracts.dart';
+import 'package:platform_reflection/mirrors.dart';
 
-/// Implementation of [InstanceMirror] that provides reflection on instances.
-class InstanceMirrorImpl implements InstanceMirror {
+/// Implementation of [InstanceMirrorContract] that provides reflection on instances.
+class InstanceMirror implements InstanceMirrorContract {
   final Object _reflectee;
-  final ClassMirror _type;
+  final ClassMirrorContract _type;
 
-  InstanceMirrorImpl({
+  InstanceMirror({
     required Object reflectee,
-    required ClassMirror type,
+    required ClassMirrorContract type,
   })  : _reflectee = reflectee,
         _type = type;
 
   @override
-  ClassMirror get type => _type;
+  ClassMirrorContract get type => _type;
 
   @override
   bool get hasReflectee => true;
@@ -24,7 +23,7 @@ class InstanceMirrorImpl implements InstanceMirror {
   dynamic get reflectee => _reflectee;
 
   @override
-  InstanceMirror invoke(Symbol memberName, List positionalArguments,
+  InstanceMirrorContract invoke(Symbol memberName, List positionalArguments,
       [Map<Symbol, dynamic> namedArguments = const {}]) {
     // Get method metadata
     final methods = Reflector.getMethodMetadata(_reflectee.runtimeType);
@@ -79,7 +78,7 @@ class InstanceMirrorImpl implements InstanceMirror {
         default:
           throw ReflectionException('Method $methodName not implemented');
       }
-      return InstanceMirrorImpl(
+      return InstanceMirror(
         reflectee: result ?? '',
         type: _type,
       );
@@ -89,7 +88,7 @@ class InstanceMirrorImpl implements InstanceMirror {
   }
 
   @override
-  InstanceMirror getField(Symbol fieldName) {
+  InstanceMirrorContract getField(Symbol fieldName) {
     // Get property metadata
     final properties = Reflector.getPropertyMetadata(_reflectee.runtimeType);
     if (properties == null) {
@@ -135,7 +134,7 @@ class InstanceMirrorImpl implements InstanceMirror {
         default:
           throw ReflectionException('Property $propertyName not implemented');
       }
-      return InstanceMirrorImpl(
+      return InstanceMirror(
         reflectee: value ?? '',
         type: _type,
       );
@@ -145,7 +144,7 @@ class InstanceMirrorImpl implements InstanceMirror {
   }
 
   @override
-  InstanceMirror setField(Symbol fieldName, dynamic value) {
+  InstanceMirrorContract setField(Symbol fieldName, dynamic value) {
     // Get property metadata
     final properties = Reflector.getPropertyMetadata(_reflectee.runtimeType);
     if (properties == null) {
@@ -194,7 +193,7 @@ class InstanceMirrorImpl implements InstanceMirror {
         default:
           throw ReflectionException('Property $propertyName not implemented');
       }
-      return InstanceMirrorImpl(
+      return InstanceMirror(
         reflectee: value,
         type: _type,
       );
@@ -206,7 +205,7 @@ class InstanceMirrorImpl implements InstanceMirror {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (other is! InstanceMirrorImpl) return false;
+    if (other is! InstanceMirror) return false;
 
     return identical(_reflectee, other._reflectee) && _type == other._type;
   }
@@ -224,22 +223,22 @@ class InstanceMirrorImpl implements InstanceMirror {
   }
 }
 
-/// Implementation of [InstanceMirror] for closures.
-class ClosureMirrorImpl extends InstanceMirrorImpl {
-  final MethodMirror _function;
+/// Implementation of [InstanceMirrorContract] for closures.
+class ClosureMirrorImpl extends InstanceMirror {
+  final MethodMirrorContract _function;
 
   ClosureMirrorImpl({
     required Object reflectee,
-    required ClassMirror type,
-    required MethodMirror function,
+    required ClassMirrorContract type,
+    required MethodMirrorContract function,
   })  : _function = function,
         super(reflectee: reflectee, type: type);
 
   /// The function this closure represents.
-  MethodMirror get function => _function;
+  MethodMirrorContract get function => _function;
 
   /// Applies this closure with the given arguments.
-  InstanceMirror apply(List positionalArguments,
+  InstanceMirrorContract apply(List positionalArguments,
       [Map<Symbol, dynamic> namedArguments = const {}]) {
     final closure = reflectee as Function;
     final result = Function.apply(
@@ -247,7 +246,7 @@ class ClosureMirrorImpl extends InstanceMirrorImpl {
       positionalArguments,
       namedArguments,
     );
-    return InstanceMirrorImpl(
+    return InstanceMirror(
       reflectee: result ?? '',
       type: type,
     );
@@ -269,11 +268,11 @@ class ClosureMirrorImpl extends InstanceMirrorImpl {
   String toString() => 'ClosureMirror on ${_reflectee.runtimeType}';
 }
 
-/// Implementation of [InstanceMirror] for simple values.
-class ValueMirrorImpl extends InstanceMirrorImpl {
+/// Implementation of [InstanceMirrorContract] for simple values.
+class ValueMirrorImpl extends InstanceMirror {
   ValueMirrorImpl({
     required Object reflectee,
-    required ClassMirror type,
+    required ClassMirrorContract type,
   }) : super(reflectee: reflectee, type: type);
 
   @override

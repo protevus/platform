@@ -1,5 +1,5 @@
 import 'dart:isolate';
-import 'package:platform_reflection/reflection.dart';
+import 'package:platform_reflection/mirrors.dart';
 import 'package:test/test.dart';
 
 // Function to run in isolate
@@ -50,8 +50,8 @@ void main() {
         receivePort.sendPort,
       );
 
-      final isolateMirror = reflector.reflectIsolate(isolate, 'test-isolate')
-          as IsolateMirrorImpl;
+      final isolateMirror =
+          reflector.reflectIsolate(isolate, 'test-isolate') as IsolateMirror;
 
       // Test pause/resume
       await isolateMirror.pause();

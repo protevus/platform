@@ -1,4 +1,4 @@
-import 'package:platform_reflection/reflection.dart';
+import 'package:platform_reflection/mirrors.dart';
 import 'collection.dart';
 
 /// A proxy class for higher-order collection operations.

@@ -1,23 +1,16 @@
-import '../metadata.dart';
-import '../mirrors.dart';
-import '../exceptions.dart';
-import '../core/reflector.dart';
-import 'base_mirror.dart';
-import 'instance_mirror_impl.dart';
-import 'method_mirror_impl.dart';
-import 'mirror_system_impl.dart';
-import 'type_mirror_impl.dart';
+import 'package:platform_contracts/contracts.dart';
+import 'package:platform_reflection/mirrors.dart';
 
-/// Implementation of [ClassMirror].
-class ClassMirrorImpl extends TypeMirrorImpl implements ClassMirror {
+/// Implementation of [ClassMirrorContract].
+class ClassMirror extends TypeMirror implements ClassMirrorContract {
   @override
-  final Map<Symbol, DeclarationMirror> declarations;
+  final Map<Symbol, DeclarationMirrorContract> declarations;
 
   @override
-  final Map<Symbol, MethodMirror> instanceMembers;
+  final Map<Symbol, MethodMirrorContract> instanceMembers;
 
   @override
-  final Map<Symbol, MethodMirror> staticMembers;
+  final Map<Symbol, MethodMirrorContract> staticMembers;
 
   @override
   final bool isAbstract;
@@ -26,19 +19,19 @@ class ClassMirrorImpl extends TypeMirrorImpl implements ClassMirror {
   final bool isEnum;
 
   @override
-  final ClassMirror? superclass;
+  final ClassMirrorContract? superclass;
 
   @override
-  final List<ClassMirror> superinterfaces;
+  final List<ClassMirrorContract> superinterfaces;
 
-  ClassMirrorImpl({
+  ClassMirror({
     required Type type,
     required String name,
-    required DeclarationMirror? owner,
+    required DeclarationMirrorContract? owner,
     required this.declarations,
     required this.instanceMembers,
     required this.staticMembers,
-    required List<InstanceMirror> metadata,
+    required List<InstanceMirrorContract> metadata,
     this.isAbstract = false,
     this.isEnum = false,
     this.superclass,
@@ -57,19 +50,19 @@ class ClassMirrorImpl extends TypeMirrorImpl implements ClassMirror {
   }
 
   @override
-  bool isSubclassOf(ClassMirror other) {
+  bool isSubclassOf(ClassMirrorContract other) {
     var current = this;
     while (current.superclass != null) {
       if (current.superclass == other) {
         return true;
       }
-      current = current.superclass as ClassMirrorImpl;
+      current = current.superclass as ClassMirror;
     }
     return false;
   }
 
   @override
-  InstanceMirror newInstance(
+  InstanceMirrorContract newInstance(
     Symbol constructorName,
     List<dynamic> positionalArguments, [
     Map<Symbol, dynamic>? namedArguments,
@@ -126,7 +119,7 @@ class ClassMirrorImpl extends TypeMirrorImpl implements ClassMirror {
             'Failed to create instance: creator returned null');
       }
 
-      return InstanceMirrorImpl(
+      return InstanceMirror(
         reflectee: instance,
         type: this,
       );
@@ -136,7 +129,8 @@ class ClassMirrorImpl extends TypeMirrorImpl implements ClassMirror {
   }
 
   @override
-  InstanceMirror invoke(Symbol memberName, List<dynamic> positionalArguments,
+  InstanceMirrorContract invoke(
+      Symbol memberName, List<dynamic> positionalArguments,
       [Map<Symbol, dynamic>? namedArguments]) {
     try {
       // Get method metadata
@@ -174,7 +168,7 @@ class ClassMirrorImpl extends TypeMirrorImpl implements ClassMirror {
         namedArguments,
       );
 
-      return InstanceMirrorImpl(
+      return InstanceMirror(
         reflectee: result,
         type: this,
       );
@@ -184,7 +178,7 @@ class ClassMirrorImpl extends TypeMirrorImpl implements ClassMirror {
   }
 
   @override
-  InstanceMirror getField(Symbol fieldName) {
+  InstanceMirrorContract getField(Symbol fieldName) {
     final declaration = declarations[fieldName];
     if (declaration == null) {
       throw NoSuchMethodError.withInvocation(
@@ -195,7 +189,7 @@ class ClassMirrorImpl extends TypeMirrorImpl implements ClassMirror {
 
     try {
       final value = (type as dynamic)[_symbolToString(fieldName)];
-      return InstanceMirrorImpl(
+      return InstanceMirror(
         reflectee: value,
         type: this,
       );
@@ -205,7 +199,7 @@ class ClassMirrorImpl extends TypeMirrorImpl implements ClassMirror {
   }
 
   @override
-  InstanceMirror setField(Symbol fieldName, dynamic value) {
+  InstanceMirrorContract setField(Symbol fieldName, dynamic value) {
     final declaration = declarations[fieldName];
     if (declaration == null) {
       throw NoSuchMethodError.withInvocation(
@@ -216,7 +210,7 @@ class ClassMirrorImpl extends TypeMirrorImpl implements ClassMirror {
 
     try {
       (type as dynamic)[_symbolToString(fieldName)] = value;
-      return InstanceMirrorImpl(
+      return InstanceMirror(
         reflectee: value,
         type: this,
       );
@@ -228,7 +222,7 @@ class ClassMirrorImpl extends TypeMirrorImpl implements ClassMirror {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ClassMirrorImpl &&
+      other is ClassMirror &&
           runtimeType == other.runtimeType &&
           type == other.type;
 

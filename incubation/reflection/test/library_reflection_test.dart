@@ -1,4 +1,5 @@
-import 'package:platform_reflection/reflection.dart';
+import 'package:platform_contracts/contracts.dart';
+import 'package:platform_reflection/mirrors.dart';
 import 'package:test/test.dart';
 
 // Top-level function for testing
@@ -44,14 +45,15 @@ void main() {
       expect(declarations, isNotEmpty);
 
       // Check for top-level function
-      final addFunction = declarations[const Symbol('add')] as MethodMirror;
+      final addFunction =
+          declarations[const Symbol('add')] as MethodMirrorContract;
       expect(addFunction, isNotNull);
       expect(addFunction.isStatic, isTrue);
       expect(addFunction.parameters.length, equals(2));
 
       // Check for top-level variable
       final greetingVar =
-          declarations[const Symbol('greeting')] as VariableMirror;
+          declarations[const Symbol('greeting')] as VariableMirrorContract;
       expect(greetingVar, isNotNull);
       expect(greetingVar.isStatic, isTrue);
       expect(greetingVar.isConst, isTrue);

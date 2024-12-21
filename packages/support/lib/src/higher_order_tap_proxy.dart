@@ -1,5 +1,5 @@
 import 'package:platform_macroable/platform_macroable.dart';
-import 'package:platform_reflection/reflection.dart';
+import 'package:platform_reflection/mirrors.dart';
 
 /// Provides higher-order tap functionality with macro support.
 ///

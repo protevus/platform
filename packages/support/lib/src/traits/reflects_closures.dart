@@ -1,4 +1,4 @@
-import 'package:platform_reflection/reflection.dart';
+import 'package:platform_reflection/mirrors.dart';
 
 /// A trait that provides functionality to reflect on closures.
 mixin ReflectsClosures {

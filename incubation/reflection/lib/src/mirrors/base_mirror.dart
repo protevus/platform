@@ -1,31 +1,31 @@
 import 'package:meta/meta.dart';
-import '../mirrors.dart';
+import 'package:platform_contracts/contracts.dart';
 
 /// Base class for mirrors that have an owner.
-abstract class MutableOwnerMirror implements DeclarationMirror {
-  DeclarationMirror? _owner;
+abstract class MutableOwnerMirror implements DeclarationMirrorContract {
+  DeclarationMirrorContract? _owner;
 
   /// Sets the owner of this mirror.
   @protected
-  void setOwner(DeclarationMirror? owner) {
+  void setOwner(DeclarationMirrorContract? owner) {
     _owner = owner;
   }
 
   @override
-  DeclarationMirror? get owner => _owner;
+  DeclarationMirrorContract? get owner => _owner;
 }
 
 /// Base class for mirrors that have a type.
 abstract class TypedMirror extends MutableOwnerMirror {
   final Type _type;
   final String _name;
-  final List<InstanceMirror> _metadata;
+  final List<InstanceMirrorContract> _metadata;
 
   TypedMirror({
     required Type type,
     required String name,
-    DeclarationMirror? owner,
-    List<InstanceMirror> metadata = const [],
+    DeclarationMirrorContract? owner,
+    List<InstanceMirrorContract> metadata = const [],
   })  : _type = type,
         _name = name,
         _metadata = metadata {
@@ -54,5 +54,5 @@ abstract class TypedMirror extends MutableOwnerMirror {
   bool get isTopLevel => owner == null;
 
   @override
-  List<InstanceMirror> get metadata => List.unmodifiable(_metadata);
+  List<InstanceMirrorContract> get metadata => List.unmodifiable(_metadata);
 }

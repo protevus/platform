@@ -1,4 +1,4 @@
-import 'package:platform_reflection/reflection.dart';
+import 'package:platform_reflection/mirrors.dart';
 import 'package:test/test.dart';
 
 @reflectable

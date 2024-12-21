@@ -1,28 +1,25 @@
 import 'dart:core';
-import '../mirrors.dart';
-import '../core/reflector.dart';
-import '../metadata.dart';
-import 'base_mirror.dart';
-import 'special_types.dart';
-import 'type_variable_mirror_impl.dart';
+import 'package:platform_contracts/contracts.dart'
+    hide PropertyMetadata, MethodMetadata, ConstructorMetadata;
+import 'package:platform_reflection/mirrors.dart';
 
-/// Implementation of [TypeMirror] that provides reflection on types.
-class TypeMirrorImpl extends TypedMirror implements TypeMirror {
-  final List<TypeVariableMirror> _typeVariables;
-  final List<TypeMirror> _typeArguments;
+/// Implementation of [TypeMirrorContract] that provides reflection on types.
+class TypeMirror extends TypedMirror implements TypeMirrorContract {
+  final List<TypeVariableMirrorContract> _typeVariables;
+  final List<TypeMirrorContract> _typeArguments;
   final bool _isOriginalDeclaration;
-  final TypeMirror? _originalDeclaration;
+  final TypeMirrorContract? _originalDeclaration;
   final bool _isGeneric;
 
-  TypeMirrorImpl({
+  TypeMirror({
     required Type type,
     required String name,
-    DeclarationMirror? owner,
-    List<TypeVariableMirror> typeVariables = const [],
-    List<TypeMirror> typeArguments = const [],
+    DeclarationMirrorContract? owner,
+    List<TypeVariableMirrorContract> typeVariables = const [],
+    List<TypeMirrorContract> typeArguments = const [],
     bool isOriginalDeclaration = true,
-    TypeMirror? originalDeclaration,
-    List<InstanceMirror> metadata = const [],
+    TypeMirrorContract? originalDeclaration,
+    List<InstanceMirrorContract> metadata = const [],
   })  : _typeVariables = typeVariables,
         _typeArguments = typeArguments,
         _isOriginalDeclaration = isOriginalDeclaration,
@@ -46,19 +43,19 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
   }
 
   /// Creates a TypeMirror from TypeMetadata.
-  factory TypeMirrorImpl.fromMetadata(TypeMetadata typeMetadata,
-      [DeclarationMirror? owner]) {
+  factory TypeMirror.fromMetadata(TypeMetadata typeMetadata,
+      [DeclarationMirrorContract? owner]) {
     // Get type variables from metadata
     final typeVariables = typeMetadata.typeParameters.map((param) {
       // Create upper bound type mirror
-      final upperBound = TypeMirrorImpl(
+      final upperBound = TypeMirror(
         type: param.bound ?? Object,
         name: param.bound?.toString() ?? 'Object',
         owner: owner,
       );
 
       // Create type variable mirror
-      return TypeVariableMirrorImpl(
+      return TypeVariableMirror(
         type: param.type,
         name: param.name,
         upperBound: upperBound,
@@ -68,14 +65,14 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
 
     // Get type arguments from metadata
     final typeArguments = typeMetadata.typeArguments.map((arg) {
-      return TypeMirrorImpl(
+      return TypeMirror(
         type: arg.type,
         name: arg.name,
         owner: owner,
       );
     }).toList();
 
-    return TypeMirrorImpl(
+    return TypeMirror(
       type: typeMetadata.type,
       name: typeMetadata.name,
       owner: owner,
@@ -86,8 +83,8 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
   }
 
   /// Creates a TypeMirror for void.
-  factory TypeMirrorImpl.voidType([DeclarationMirror? owner]) {
-    return TypeMirrorImpl(
+  factory TypeMirror.voidType([DeclarationMirrorContract? owner]) {
+    return TypeMirror(
       type: voidType,
       name: 'void',
       owner: owner,
@@ -96,8 +93,8 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
   }
 
   /// Creates a TypeMirror for dynamic.
-  factory TypeMirrorImpl.dynamicType([DeclarationMirror? owner]) {
-    return TypeMirrorImpl(
+  factory TypeMirror.dynamicType([DeclarationMirrorContract? owner]) {
+    return TypeMirror(
       type: dynamicType,
       name: 'dynamic',
       owner: owner,
@@ -106,7 +103,8 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
   }
 
   /// Creates a new TypeMirror with the given type arguments.
-  TypeMirror instantiateGeneric(List<TypeMirror> typeArguments) {
+  TypeMirrorContract instantiateGeneric(
+      List<TypeMirrorContract> typeArguments) {
     if (!_isGeneric) {
       throw StateError('Type $name is not generic');
     }
@@ -126,7 +124,7 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
       }
     }
 
-    return TypeMirrorImpl(
+    return TypeMirror(
       type: type,
       name: name,
       owner: owner,
@@ -145,17 +143,18 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
   Type get reflectedType => type;
 
   @override
-  List<TypeVariableMirror> get typeVariables =>
+  List<TypeVariableMirrorContract> get typeVariables =>
       List.unmodifiable(_typeVariables);
 
   @override
-  List<TypeMirror> get typeArguments => List.unmodifiable(_typeArguments);
+  List<TypeMirrorContract> get typeArguments =>
+      List.unmodifiable(_typeArguments);
 
   @override
   bool get isOriginalDeclaration => _isOriginalDeclaration;
 
   @override
-  TypeMirror get originalDeclaration {
+  TypeMirrorContract get originalDeclaration {
     if (isOriginalDeclaration) return this;
     return _originalDeclaration!;
   }
@@ -176,9 +175,9 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
       Reflector.getConstructorMetadata(type) ?? [];
 
   @override
-  bool isSubtypeOf(TypeMirror other) {
+  bool isSubtypeOf(TypeMirrorContract other) {
     if (this == other) return true;
-    if (other is! TypeMirrorImpl) return false;
+    if (other is! TypeMirror) return false;
 
     // Never is a subtype of all types
     if (type == Never) return true;
@@ -195,19 +194,19 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
 
     // Check supertype
     if (metadata.supertype != null) {
-      final superMirror = TypeMirrorImpl.fromMetadata(metadata.supertype!);
+      final superMirror = TypeMirror.fromMetadata(metadata.supertype!);
       if (superMirror.isSubtypeOf(other)) return true;
     }
 
     // Check interfaces
     for (final interface in metadata.interfaces) {
-      final interfaceMirror = TypeMirrorImpl.fromMetadata(interface);
+      final interfaceMirror = TypeMirror.fromMetadata(interface);
       if (interfaceMirror.isSubtypeOf(other)) return true;
     }
 
     // Check mixins
     for (final mixin in metadata.mixins) {
-      final mixinMirror = TypeMirrorImpl.fromMetadata(mixin);
+      final mixinMirror = TypeMirror.fromMetadata(mixin);
       if (mixinMirror.isSubtypeOf(other)) return true;
     }
 
@@ -234,13 +233,11 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
   }
 
   @override
-  bool isAssignableTo(TypeMirror other) {
+  bool isAssignableTo(TypeMirrorContract other) {
     // A type T may be assigned to a type S if either:
     // 1. T is a subtype of S, or
     // 2. S is dynamic (except for void)
-    if (other is TypeMirrorImpl &&
-        other.type == dynamicType &&
-        type != voidType) {
+    if (other is TypeMirror && other.type == dynamicType && type != voidType) {
       return true;
     }
     return isSubtypeOf(other);
@@ -249,7 +246,7 @@ class TypeMirrorImpl extends TypedMirror implements TypeMirror {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (other is! TypeMirrorImpl) return false;
+    if (other is! TypeMirror) return false;
 
     return type == other.type &&
         name == other.name &&

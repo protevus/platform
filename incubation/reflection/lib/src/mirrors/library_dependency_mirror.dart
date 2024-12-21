@@ -1,21 +1,21 @@
-import '../mirrors.dart';
+import 'package:platform_contracts/contracts.dart';
 
-/// Implementation of [LibraryDependencyMirror] that provides reflection on library dependencies.
-class LibraryDependencyMirrorImpl implements LibraryDependencyMirror {
+/// Implementation of [LibraryDependencyMirrorContract] that provides reflection on library dependencies.
+class LibraryDependencyMirror implements LibraryDependencyMirrorContract {
   final bool _isImport;
   final bool _isDeferred;
-  final LibraryMirror _sourceLibrary;
-  final LibraryMirror? _targetLibrary;
+  final LibraryMirrorContract _sourceLibrary;
+  final LibraryMirrorContract? _targetLibrary;
   final Symbol? _prefix;
-  final List<CombinatorMirror> _combinators;
+  final List<CombinatorMirrorContract> _combinators;
 
-  LibraryDependencyMirrorImpl({
+  LibraryDependencyMirror({
     required bool isImport,
     required bool isDeferred,
-    required LibraryMirror sourceLibrary,
-    LibraryMirror? targetLibrary,
+    required LibraryMirrorContract sourceLibrary,
+    LibraryMirrorContract? targetLibrary,
     Symbol? prefix,
-    List<CombinatorMirror> combinators = const [],
+    List<CombinatorMirrorContract> combinators = const [],
   })  : _isImport = isImport,
         _isDeferred = isDeferred,
         _sourceLibrary = sourceLibrary,
@@ -33,21 +33,22 @@ class LibraryDependencyMirrorImpl implements LibraryDependencyMirror {
   bool get isDeferred => _isDeferred;
 
   @override
-  LibraryMirror get sourceLibrary => _sourceLibrary;
+  LibraryMirrorContract get sourceLibrary => _sourceLibrary;
 
   @override
-  LibraryMirror? get targetLibrary => _targetLibrary;
+  LibraryMirrorContract? get targetLibrary => _targetLibrary;
 
   @override
   Symbol? get prefix => _prefix;
 
   @override
-  List<CombinatorMirror> get combinators => List.unmodifiable(_combinators);
+  List<CombinatorMirrorContract> get combinators =>
+      List.unmodifiable(_combinators);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (other is! LibraryDependencyMirrorImpl) return false;
+    if (other is! LibraryDependencyMirror) return false;
 
     return _isImport == other._isImport &&
         _isDeferred == other._isDeferred &&

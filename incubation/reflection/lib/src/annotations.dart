@@ -1,4 +1,4 @@
-import 'metadata.dart';
+import 'package:platform_reflection/mirrors.dart';
 
 /// Registry of reflectable types and their metadata.
 class ReflectionRegistry {

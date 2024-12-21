@@ -1,14 +1,9 @@
 import 'dart:core';
-import 'mirrors.dart';
-import 'mirrors/class_mirror_impl.dart';
-import 'mirrors/instance_mirror_impl.dart';
-import 'mirrors/library_mirror_impl.dart';
-import 'mirrors/type_mirror_impl.dart';
-import 'mirrors/isolate_mirror_impl.dart';
-import 'mirrors/special_types.dart';
+import 'package:platform_contracts/contracts.dart';
+import 'package:platform_reflection/mirrors.dart';
 
-/// The default implementation of [MirrorSystem].
-class RuntimeMirrorSystem implements MirrorSystem {
+/// The default implementation of [MirrorSystemContract].
+class RuntimeMirrorSystem implements MirrorSystemContract {
   /// The singleton instance of the mirror system.
   static final instance = RuntimeMirrorSystem._();
 
@@ -16,16 +11,16 @@ class RuntimeMirrorSystem implements MirrorSystem {
     _initializeRootLibrary();
   }
 
-  final Map<Uri, LibraryMirror> _libraries = {};
-  final Map<Type, ClassMirror> _classes = {};
-  final Map<Type, TypeMirror> _types = {};
-  late final LibraryMirror _rootLibrary;
+  final Map<Uri, LibraryMirrorContract> _libraries = {};
+  final Map<Type, ClassMirrorContract> _classes = {};
+  final Map<Type, TypeMirrorContract> _types = {};
+  late final LibraryMirrorContract _rootLibrary;
 
   @override
-  Map<Uri, LibraryMirror> get libraries => Map.unmodifiable(_libraries);
+  Map<Uri, LibraryMirrorContract> get libraries => Map.unmodifiable(_libraries);
 
   @override
-  LibraryMirror findLibrary(Symbol libraryName) {
+  LibraryMirrorContract findLibrary(Symbol libraryName) {
     final lib = _libraries.values.firstWhere(
       (lib) => lib.qualifiedName == libraryName,
       orElse: () => throw ArgumentError('Library not found: $libraryName'),
@@ -34,30 +29,31 @@ class RuntimeMirrorSystem implements MirrorSystem {
   }
 
   @override
-  IsolateMirror get isolate => IsolateMirrorImpl.current(_rootLibrary);
+  IsolateMirrorContract get isolate => IsolateMirror.current(_rootLibrary);
 
   @override
-  TypeMirror get dynamicType => _getOrCreateTypeMirror(dynamic);
+  TypeMirrorContract get dynamicType => _getOrCreateTypeMirror(dynamic);
 
   @override
-  TypeMirror get voidType => _getOrCreateTypeMirror(VoidType);
+  TypeMirrorContract get voidType => _getOrCreateTypeMirror(VoidType);
 
   @override
-  TypeMirror get neverType => _getOrCreateTypeMirror(NeverType);
+  TypeMirrorContract get neverType => _getOrCreateTypeMirror(NeverType);
 
   /// Creates a mirror reflecting [reflectee].
-  InstanceMirror reflect(Object reflectee) {
-    return InstanceMirrorImpl(
+  InstanceMirrorContract reflect(Object reflectee) {
+    return InstanceMirror(
       reflectee: reflectee,
       type: reflectClass(reflectee.runtimeType),
     );
   }
 
   /// Creates a mirror reflecting the class [key].
-  ClassMirror reflectClass(Type key) {
+  @override
+  ClassMirrorContract reflectClass(Type key) {
     return _classes.putIfAbsent(
       key,
-      () => ClassMirrorImpl(
+      () => ClassMirror(
         type: key,
         name: key.toString(),
         owner: _rootLibrary,
@@ -70,14 +66,15 @@ class RuntimeMirrorSystem implements MirrorSystem {
   }
 
   /// Creates a mirror reflecting the type [key].
-  TypeMirror reflectType(Type key) {
+  @override
+  TypeMirrorContract reflectType(Type key) {
     return _getOrCreateTypeMirror(key);
   }
 
-  TypeMirror _getOrCreateTypeMirror(Type type) {
+  TypeMirrorContract _getOrCreateTypeMirror(Type type) {
     return _types.putIfAbsent(
       type,
-      () => TypeMirrorImpl(
+      () => TypeMirror(
         type: type,
         name: type.toString(),
         owner: _rootLibrary,
@@ -87,7 +84,7 @@ class RuntimeMirrorSystem implements MirrorSystem {
   }
 
   void _initializeRootLibrary() {
-    _rootLibrary = LibraryMirrorImpl.withDeclarations(
+    _rootLibrary = LibraryMirror.withDeclarations(
       name: 'dart.core',
       uri: Uri.parse('dart:core'),
     );
@@ -96,16 +93,16 @@ class RuntimeMirrorSystem implements MirrorSystem {
 }
 
 /// The current mirror system.
-MirrorSystem currentMirrorSystem() => RuntimeMirrorSystem.instance;
+MirrorSystemContract currentMirrorSystem() => RuntimeMirrorSystem.instance;
 
 /// Reflects an instance.
-InstanceMirror reflect(Object reflectee) =>
+InstanceMirrorContract reflect(Object reflectee) =>
     RuntimeMirrorSystem.instance.reflect(reflectee);
 
 /// Reflects a class.
-ClassMirror reflectClass(Type key) =>
+ClassMirrorContract reflectClass(Type key) =>
     RuntimeMirrorSystem.instance.reflectClass(key);
 
 /// Reflects a type.
-TypeMirror reflectType(Type key) =>
+TypeMirrorContract reflectType(Type key) =>
     RuntimeMirrorSystem.instance.reflectType(key);

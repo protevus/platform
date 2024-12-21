@@ -1,19 +1,18 @@
 import 'dart:core';
 import 'dart:isolate' as isolate;
-import '../mirrors.dart';
-import 'library_mirror_impl.dart';
+import 'package:platform_contracts/contracts.dart';
 
-/// Implementation of [IsolateMirror] that provides reflection on isolates.
-class IsolateMirrorImpl implements IsolateMirror {
+/// Implementation of [IsolateMirrorContract] that provides reflection on isolates.
+class IsolateMirror implements IsolateMirrorContract {
   final String _debugName;
   final bool _isCurrent;
-  final LibraryMirror _rootLibrary;
+  final LibraryMirrorContract _rootLibrary;
   final isolate.Isolate? _underlyingIsolate;
 
-  IsolateMirrorImpl({
+  IsolateMirror({
     required String debugName,
     required bool isCurrent,
-    required LibraryMirror rootLibrary,
+    required LibraryMirrorContract rootLibrary,
     isolate.Isolate? underlyingIsolate,
   })  : _debugName = debugName,
         _isCurrent = isCurrent,
@@ -21,8 +20,8 @@ class IsolateMirrorImpl implements IsolateMirror {
         _underlyingIsolate = underlyingIsolate;
 
   /// Creates a mirror for the current isolate.
-  factory IsolateMirrorImpl.current(LibraryMirror rootLibrary) {
-    return IsolateMirrorImpl(
+  factory IsolateMirror.current(LibraryMirrorContract rootLibrary) {
+    return IsolateMirror(
       debugName: 'main',
       isCurrent: true,
       rootLibrary: rootLibrary,
@@ -31,12 +30,12 @@ class IsolateMirrorImpl implements IsolateMirror {
   }
 
   /// Creates a mirror for another isolate.
-  factory IsolateMirrorImpl.other(
+  factory IsolateMirror.other(
     isolate.Isolate underlyingIsolate,
     String debugName,
-    LibraryMirror rootLibrary,
+    LibraryMirrorContract rootLibrary,
   ) {
-    return IsolateMirrorImpl(
+    return IsolateMirror(
       debugName: debugName,
       isCurrent: false,
       rootLibrary: rootLibrary,
@@ -51,7 +50,7 @@ class IsolateMirrorImpl implements IsolateMirror {
   bool get isCurrent => _isCurrent;
 
   @override
-  LibraryMirror get rootLibrary => _rootLibrary;
+  LibraryMirrorContract get rootLibrary => _rootLibrary;
 
   /// The underlying isolate, if this mirror reflects a non-current isolate.
   isolate.Isolate? get underlyingIsolate => _underlyingIsolate;
@@ -59,7 +58,7 @@ class IsolateMirrorImpl implements IsolateMirror {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (other is! IsolateMirrorImpl) return false;
+    if (other is! IsolateMirror) return false;
 
     // Only compare debug name and isCurrent flag
     // Two mirrors pointing to the same isolate should be equal

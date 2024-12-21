@@ -1,4 +1,4 @@
-import 'exceptions.dart';
+import 'package:platform_reflection/mirrors.dart';
 
 /// Represents metadata about a type parameter.
 class TypeParameterMetadata {

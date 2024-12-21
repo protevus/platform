@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:platform_support/platform_support.dart';
-import 'package:platform_reflection/reflection.dart';
+import 'package:platform_reflection/mirrors.dart';
 
 @reflectable
 class TestObject {

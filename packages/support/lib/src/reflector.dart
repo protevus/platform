@@ -1,5 +1,5 @@
-import 'package:platform_reflection/reflection.dart';
-import 'package:platform_reflection/src/core/reflector.dart';
+import 'package:platform_contracts/contracts.dart';
+import 'package:platform_reflection/mirrors.dart';
 
 /// Provides reflection utilities for examining types and methods at runtime.
 class SupportReflector {
@@ -64,7 +64,7 @@ class SupportReflector {
   }
 
   /// Get the class name of the given parameter's type, if possible.
-  static String? getParameterClassName(ParameterMirror parameter) {
+  static String? getParameterClassName(ParameterMirrorContract parameter) {
     final type = parameter.type;
 
     if (!type.hasReflectedType) {
@@ -75,7 +75,8 @@ class SupportReflector {
   }
 
   /// Get the class names of the given parameter's type, including union types.
-  static List<String> getParameterClassNames(ParameterMirror parameter) {
+  static List<String> getParameterClassNames(
+      ParameterMirrorContract parameter) {
     final type = parameter.type;
     final classNames = <String>[];
 
@@ -106,13 +107,14 @@ class SupportReflector {
   }
 
   /// Get the given type's class name.
-  static String? _getTypeName(ParameterMirror parameter, TypeMirror type) {
+  static String? _getTypeName(
+      ParameterMirrorContract parameter, TypeMirrorContract type) {
     if (!type.hasReflectedType) {
       return null;
     }
 
     final name = type.reflectedType.toString();
-    final declaringClass = parameter.owner as ClassMirror?;
+    final declaringClass = parameter.owner as ClassMirrorContract?;
 
     if (declaringClass != null) {
       if (name == 'self') {
@@ -129,7 +131,7 @@ class SupportReflector {
 
   /// Determine if the parameter's type is a subclass of the given type.
   static bool isParameterSubclassOf(
-      ParameterMirror parameter, String className) {
+      ParameterMirrorContract parameter, String className) {
     final type = parameter.type;
     if (!type.hasReflectedType) {
       return false;
@@ -145,7 +147,7 @@ class SupportReflector {
 
   /// Determine if the parameter's type is a backed enum with a string backing type.
   static bool isParameterBackedEnumWithStringBackingType(
-      ParameterMirror parameter) {
+      ParameterMirrorContract parameter) {
     final type = parameter.type;
     if (!type.hasReflectedType) {
       return false;

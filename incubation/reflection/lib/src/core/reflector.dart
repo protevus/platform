@@ -1,8 +1,5 @@
 import 'dart:collection';
-import '../metadata.dart';
-import '../mirrors.dart';
-import '../mirrors/mirrors.dart';
-import '../mirrors/special_types.dart';
+import 'package:platform_reflection/mirrors.dart';
 
 /// Static registry for reflection metadata.
 class Reflector {

@@ -1,10 +1,10 @@
-import '../mirrors.dart';
-import 'base_mirror.dart';
+import 'package:platform_contracts/contracts.dart';
+import 'package:platform_reflection/mirrors.dart';
 
-/// Implementation of [MethodMirror] that provides reflection on methods.
-class MethodMirrorImpl extends TypedMirror implements MethodMirror {
-  final TypeMirror _returnType;
-  final List<ParameterMirror> _parameters;
+/// Implementation of [MethodMirrorContract] that provides reflection on methods.
+class MethodMirror extends TypedMirror implements MethodMirrorContract {
+  final TypeMirrorContract _returnType;
+  final List<ParameterMirrorContract> _parameters;
   final bool _isStatic;
   final bool _isAbstract;
   final bool _isSynthetic;
@@ -16,11 +16,11 @@ class MethodMirrorImpl extends TypedMirror implements MethodMirror {
   final bool _isFactoryConstructor;
   final String? _source;
 
-  MethodMirrorImpl({
+  MethodMirror({
     required String name,
-    required DeclarationMirror? owner,
-    required TypeMirror returnType,
-    required List<ParameterMirror> parameters,
+    required DeclarationMirrorContract? owner,
+    required TypeMirrorContract returnType,
+    required List<ParameterMirrorContract> parameters,
     bool isStatic = false,
     bool isAbstract = false,
     bool isSynthetic = false,
@@ -31,7 +31,7 @@ class MethodMirrorImpl extends TypedMirror implements MethodMirror {
     bool isRedirectingConstructor = false,
     bool isFactoryConstructor = false,
     String? source,
-    List<InstanceMirror> metadata = const [],
+    List<InstanceMirrorContract> metadata = const [],
   })  : _returnType = returnType,
         _parameters = parameters,
         _isStatic = isStatic,
@@ -52,10 +52,11 @@ class MethodMirrorImpl extends TypedMirror implements MethodMirror {
         );
 
   @override
-  TypeMirror get returnType => _returnType;
+  TypeMirrorContract get returnType => _returnType;
 
   @override
-  List<ParameterMirror> get parameters => List.unmodifiable(_parameters);
+  List<ParameterMirrorContract> get parameters =>
+      List.unmodifiable(_parameters);
 
   @override
   bool get isStatic => _isStatic;
@@ -103,7 +104,7 @@ class MethodMirrorImpl extends TypedMirror implements MethodMirror {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (other is! MethodMirrorImpl) return false;
+    if (other is! MethodMirror) return false;
 
     return name == other.name &&
         owner == other.owner &&

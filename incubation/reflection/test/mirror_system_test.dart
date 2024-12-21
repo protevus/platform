@@ -1,4 +1,5 @@
-import 'package:platform_reflection/reflection.dart';
+import 'package:platform_contracts/contracts.dart' hide PropertyMetadata;
+import 'package:platform_reflection/mirrors.dart';
 import 'package:test/test.dart';
 
 @reflectable
@@ -9,12 +10,12 @@ class TestClass {
 
 void main() {
   group('MirrorSystem', () {
-    late RuntimeReflector reflector;
-    late MirrorSystem mirrorSystem;
+    //late RuntimeReflector reflector;
+    late MirrorSystemContract mirrorSystem;
 
     setUp(() {
-      reflector = RuntimeReflector.instance;
-      mirrorSystem = reflector.currentMirrorSystem;
+      //reflector = RuntimeReflector.instance;
+      mirrorSystem = MirrorSystem.instance;
 
       // Register test class
       Reflector.registerType(TestClass);

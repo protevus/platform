@@ -1,31 +1,21 @@
 import 'dart:core';
-import '../mirrors.dart';
-import '../core/library_scanner.dart';
-import 'base_mirror.dart';
-import 'library_dependency_mirror_impl.dart';
-import 'method_mirror_impl.dart';
-import 'variable_mirror_impl.dart';
-import 'type_mirror_impl.dart';
-import 'parameter_mirror_impl.dart';
-import 'instance_mirror_impl.dart';
-import 'class_mirror_impl.dart';
-import '../core/reflector.dart';
-import '../core/runtime_reflector.dart';
+import 'package:platform_contracts/contracts.dart';
+import 'package:platform_reflection/mirrors.dart';
 
-/// Implementation of [LibraryMirror] that provides reflection on libraries.
-class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
+/// Implementation of [LibraryMirrorContract] that provides reflection on libraries.
+class LibraryMirror extends TypedMirror implements LibraryMirrorContract {
   final Uri _uri;
-  final Map<Symbol, DeclarationMirror> _declarations;
-  final List<LibraryDependencyMirror> _libraryDependencies;
+  final Map<Symbol, DeclarationMirrorContract> _declarations;
+  final List<LibraryDependencyMirrorContract> _libraryDependencies;
   final Map<Symbol, dynamic> _topLevelValues;
 
-  LibraryMirrorImpl({
+  LibraryMirror({
     required String name,
     required Uri uri,
-    DeclarationMirror? owner,
-    Map<Symbol, DeclarationMirror>? declarations,
-    List<LibraryDependencyMirror> libraryDependencies = const [],
-    List<InstanceMirror> metadata = const [],
+    DeclarationMirrorContract? owner,
+    Map<Symbol, DeclarationMirrorContract>? declarations,
+    List<LibraryDependencyMirrorContract> libraryDependencies = const [],
+    List<InstanceMirrorContract> metadata = const [],
     Map<Symbol, dynamic>? topLevelValues,
   })  : _uri = uri,
         _declarations = declarations ?? {},
@@ -39,20 +29,20 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
         );
 
   /// Factory constructor that creates a library mirror with declarations from scanning
-  factory LibraryMirrorImpl.withDeclarations({
+  factory LibraryMirror.withDeclarations({
     required String name,
     required Uri uri,
-    DeclarationMirror? owner,
-    List<LibraryDependencyMirror> libraryDependencies = const [],
-    List<InstanceMirror> metadata = const [],
+    DeclarationMirrorContract? owner,
+    List<LibraryDependencyMirrorContract> libraryDependencies = const [],
+    List<InstanceMirrorContract> metadata = const [],
   }) {
     // Scan library to get declarations
     final libraryInfo = LibraryScanner.scanLibrary(uri);
-    final declarations = <Symbol, DeclarationMirror>{};
+    final declarations = <Symbol, DeclarationMirrorContract>{};
     final topLevelValues = <Symbol, dynamic>{};
 
     // Create temporary library for owner references
-    final tempLibrary = LibraryMirrorImpl(
+    final tempLibrary = LibraryMirror(
       name: name,
       uri: uri,
       owner: owner,
@@ -63,19 +53,19 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
     // Add top-level function declarations
     for (final function in libraryInfo.topLevelFunctions) {
       if (!function.isPrivate || uri == tempLibrary.uri) {
-        declarations[Symbol(function.name)] = MethodMirrorImpl(
+        declarations[Symbol(function.name)] = MethodMirror(
           name: function.name,
           owner: tempLibrary,
-          returnType: TypeMirrorImpl(
+          returnType: TypeMirror(
             type: function.returnType,
             name: function.returnType.toString(),
             owner: tempLibrary,
             metadata: const [],
           ),
           parameters: function.parameters
-              .map((param) => ParameterMirrorImpl(
+              .map((param) => ParameterMirror(
                     name: param.name,
-                    type: TypeMirrorImpl(
+                    type: TypeMirror(
                       type: param.type,
                       name: param.type.toString(),
                       owner: tempLibrary,
@@ -96,9 +86,9 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
     // Add top-level variable declarations
     for (final variable in libraryInfo.topLevelVariables) {
       if (!variable.isPrivate || uri == tempLibrary.uri) {
-        declarations[Symbol(variable.name)] = VariableMirrorImpl(
+        declarations[Symbol(variable.name)] = VariableMirror(
           name: variable.name,
-          type: TypeMirrorImpl(
+          type: TypeMirror(
             type: variable.type,
             name: variable.type.toString(),
             owner: tempLibrary,
@@ -124,15 +114,15 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
     }
 
     // Create library dependencies
-    final dependencies = <LibraryDependencyMirror>[];
+    final dependencies = <LibraryDependencyMirrorContract>[];
 
     // Add imports
     for (final dep in libraryInfo.dependencies) {
-      dependencies.add(LibraryDependencyMirrorImpl(
+      dependencies.add(LibraryDependencyMirror(
         isImport: true,
         isDeferred: dep.isDeferred,
         sourceLibrary: tempLibrary,
-        targetLibrary: LibraryMirrorImpl.withDeclarations(
+        targetLibrary: LibraryMirror.withDeclarations(
           name: dep.uri.toString(),
           uri: dep.uri,
           owner: tempLibrary,
@@ -144,11 +134,11 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
 
     // Add exports
     for (final dep in libraryInfo.exports) {
-      dependencies.add(LibraryDependencyMirrorImpl(
+      dependencies.add(LibraryDependencyMirror(
         isImport: false,
         isDeferred: false,
         sourceLibrary: tempLibrary,
-        targetLibrary: LibraryMirrorImpl.withDeclarations(
+        targetLibrary: LibraryMirror.withDeclarations(
           name: dep.uri.toString(),
           uri: dep.uri,
           owner: tempLibrary,
@@ -158,7 +148,7 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
       ));
     }
 
-    return LibraryMirrorImpl(
+    return LibraryMirror(
       name: name,
       uri: uri,
       owner: owner,
@@ -194,15 +184,15 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
   Uri get uri => _uri;
 
   @override
-  Map<Symbol, DeclarationMirror> get declarations =>
+  Map<Symbol, DeclarationMirrorContract> get declarations =>
       Map.unmodifiable(_declarations);
 
   @override
-  List<LibraryDependencyMirror> get libraryDependencies =>
+  List<LibraryDependencyMirrorContract> get libraryDependencies =>
       List.unmodifiable(_libraryDependencies);
 
   @override
-  InstanceMirror invoke(Symbol memberName, List positionalArguments,
+  InstanceMirrorContract invoke(Symbol memberName, List positionalArguments,
       [Map<Symbol, dynamic> namedArguments = const {}]) {
     final member = declarations[memberName];
     if (member == null) {
@@ -212,7 +202,7 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
       );
     }
 
-    if (member is! MethodMirror) {
+    if (member is! MethodMirrorContract) {
       throw NoSuchMethodError.withInvocation(
         this,
         Invocation.method(memberName, positionalArguments, namedArguments),
@@ -223,7 +213,7 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
     if (memberName == const Symbol('add')) {
       final a = positionalArguments[0] as int;
       final b = positionalArguments[1] as int;
-      return InstanceMirrorImpl(
+      return InstanceMirror(
         reflectee: a + b,
         type: _createPrimitiveClassMirror(int, 'int'),
       );
@@ -234,7 +224,7 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
   }
 
   @override
-  InstanceMirror getField(Symbol fieldName) {
+  InstanceMirrorContract getField(Symbol fieldName) {
     final member = declarations[fieldName];
     if (member == null) {
       throw NoSuchMethodError.withInvocation(
@@ -243,7 +233,7 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
       );
     }
 
-    if (member is! VariableMirror) {
+    if (member is! VariableMirrorContract) {
       throw NoSuchMethodError.withInvocation(
         this,
         Invocation.getter(fieldName),
@@ -257,14 +247,14 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
           'Top-level variable $fieldName has not been initialized');
     }
 
-    return InstanceMirrorImpl(
+    return InstanceMirror(
       reflectee: value,
       type: _createPrimitiveClassMirror(member.type.reflectedType, member.name),
     );
   }
 
   @override
-  InstanceMirror setField(Symbol fieldName, dynamic value) {
+  InstanceMirrorContract setField(Symbol fieldName, dynamic value) {
     final member = declarations[fieldName];
     if (member == null) {
       throw NoSuchMethodError.withInvocation(
@@ -273,7 +263,7 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
       );
     }
 
-    if (member is! VariableMirror) {
+    if (member is! VariableMirrorContract) {
       throw NoSuchMethodError.withInvocation(
         this,
         Invocation.setter(fieldName, [value]),
@@ -296,15 +286,16 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
 
     // Update value in top-level values map
     _topLevelValues[fieldName] = value;
-    return InstanceMirrorImpl(
+    return InstanceMirror(
       reflectee: value,
       type: _createPrimitiveClassMirror(member.type.reflectedType, member.name),
     );
   }
 
   /// Creates a ClassMirror for a primitive type.
-  static ClassMirror _createPrimitiveClassMirror(Type type, String name) {
-    return ClassMirrorImpl(
+  static ClassMirrorContract _createPrimitiveClassMirror(
+      Type type, String name) {
+    return ClassMirror(
       type: type,
       name: name,
       owner: null,
@@ -318,7 +309,7 @@ class LibraryMirrorImpl extends TypedMirror implements LibraryMirror {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (other is! LibraryMirrorImpl) return false;
+    if (other is! LibraryMirror) return false;
 
     return _uri == other._uri &&
         name == other.name &&

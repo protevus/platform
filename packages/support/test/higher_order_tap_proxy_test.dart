@@ -1,7 +1,5 @@
 import 'package:test/test.dart';
 import 'package:platform_support/platform_support.dart';
-import 'package:platform_macroable/platform_macroable.dart';
-import 'package:platform_reflection/reflection.dart';
 
 // Test class to use with HigherOrderTapProxy
 class TestTarget {

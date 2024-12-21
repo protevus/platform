@@ -8,10 +8,10 @@
  */
 
 /// Base mirror interface
-abstract class Mirror {}
+abstract class MirrorContract {}
 
 /// Base declaration mirror interface
-abstract class DeclarationMirror implements Mirror {
+abstract class DeclarationMirrorContract implements MirrorContract {
   /// The simple name for this Dart language entity.
   Symbol get simpleName;
 
@@ -19,7 +19,7 @@ abstract class DeclarationMirror implements Mirror {
   Symbol get qualifiedName;
 
   /// A mirror on the owner of this Dart language entity.
-  DeclarationMirror? get owner;
+  DeclarationMirrorContract? get owner;
 
   /// Whether this declaration is library private.
   bool get isPrivate;
@@ -28,29 +28,30 @@ abstract class DeclarationMirror implements Mirror {
   bool get isTopLevel;
 
   /// A list of the metadata associated with this declaration.
-  List<InstanceMirror> get metadata;
+  List<InstanceMirrorContract> get metadata;
 
   /// The name of this declaration.
   String get name;
 }
 
 /// Base object mirror interface
-abstract class ObjectMirror implements Mirror {
+abstract class ObjectMirrorContract implements MirrorContract {
   /// Invokes the named function and returns a mirror on the result.
-  InstanceMirror invoke(Symbol memberName, List<dynamic> positionalArguments,
+  InstanceMirrorContract invoke(
+      Symbol memberName, List<dynamic> positionalArguments,
       [Map<Symbol, dynamic> namedArguments = const {}]);
 
   /// Invokes a getter and returns a mirror on the result.
-  InstanceMirror getField(Symbol fieldName);
+  InstanceMirrorContract getField(Symbol fieldName);
 
   /// Invokes a setter and returns a mirror on the result.
-  InstanceMirror setField(Symbol fieldName, dynamic value);
+  InstanceMirrorContract setField(Symbol fieldName, dynamic value);
 }
 
 /// Base instance mirror interface
-abstract class InstanceMirror implements ObjectMirror {
+abstract class InstanceMirrorContract implements ObjectMirrorContract {
   /// A mirror on the type of the instance.
-  ClassMirror get type;
+  ClassMirrorContract get type;
 
   /// Whether this mirror's reflectee is accessible.
   bool get hasReflectee;
@@ -60,12 +61,13 @@ abstract class InstanceMirror implements ObjectMirror {
 }
 
 /// Base class mirror interface
-abstract class ClassMirror implements TypeMirror, ObjectMirror {
+abstract class ClassMirrorContract
+    implements TypeMirrorContract, ObjectMirrorContract {
   /// A mirror on the superclass.
-  ClassMirror? get superclass;
+  ClassMirrorContract? get superclass;
 
   /// Mirrors on the superinterfaces.
-  List<ClassMirror> get superinterfaces;
+  List<ClassMirrorContract> get superinterfaces;
 
   /// Whether this class is abstract.
   bool get isAbstract;
@@ -74,25 +76,25 @@ abstract class ClassMirror implements TypeMirror, ObjectMirror {
   bool get isEnum;
 
   /// The declarations in this class.
-  Map<Symbol, DeclarationMirror> get declarations;
+  Map<Symbol, DeclarationMirrorContract> get declarations;
 
   /// The instance members of this class.
-  Map<Symbol, MethodMirror> get instanceMembers;
+  Map<Symbol, MethodMirrorContract> get instanceMembers;
 
   /// The static members of this class.
-  Map<Symbol, MethodMirror> get staticMembers;
+  Map<Symbol, MethodMirrorContract> get staticMembers;
 
   /// Creates a new instance using the specified constructor.
-  InstanceMirror newInstance(
+  InstanceMirrorContract newInstance(
       Symbol constructorName, List<dynamic> positionalArguments,
       [Map<Symbol, dynamic> namedArguments = const {}]);
 
   /// Whether this class is a subclass of [other].
-  bool isSubclassOf(ClassMirror other);
+  bool isSubclassOf(ClassMirrorContract other);
 }
 
 /// Base type mirror interface
-abstract class TypeMirror implements DeclarationMirror {
+abstract class TypeMirrorContract implements DeclarationMirrorContract {
   /// Whether this mirror reflects a type available at runtime.
   bool get hasReflectedType;
 
@@ -100,34 +102,34 @@ abstract class TypeMirror implements DeclarationMirror {
   Type get reflectedType;
 
   /// Type variables declared on this type.
-  List<TypeVariableMirror> get typeVariables;
+  List<TypeVariableMirrorContract> get typeVariables;
 
   /// Type arguments provided to this type.
-  List<TypeMirror> get typeArguments;
+  List<TypeMirrorContract> get typeArguments;
 
   /// Whether this is the original declaration of this type.
   bool get isOriginalDeclaration;
 
   /// A mirror on the original declaration of this type.
-  TypeMirror get originalDeclaration;
+  TypeMirrorContract get originalDeclaration;
 
   /// Checks if this type is a subtype of [other].
-  bool isSubtypeOf(TypeMirror other);
+  bool isSubtypeOf(TypeMirrorContract other);
 
   /// Checks if this type is assignable to [other].
-  bool isAssignableTo(TypeMirror other);
+  bool isAssignableTo(TypeMirrorContract other);
 }
 
 /// Base method mirror interface
-abstract class MethodMirror implements DeclarationMirror {
+abstract class MethodMirrorContract implements DeclarationMirrorContract {
   /// A mirror on the return type.
-  TypeMirror get returnType;
+  TypeMirrorContract get returnType;
 
   /// The source code if available.
   String? get source;
 
   /// Mirrors on the parameters.
-  List<ParameterMirror> get parameters;
+  List<ParameterMirrorContract> get parameters;
 
   /// Whether this is a static method.
   bool get isStatic;
@@ -170,7 +172,7 @@ abstract class MethodMirror implements DeclarationMirror {
 }
 
 /// Base parameter mirror interface
-abstract class ParameterMirror implements VariableMirror {
+abstract class ParameterMirrorContract implements VariableMirrorContract {
   /// Whether this is an optional parameter.
   bool get isOptional;
 
@@ -181,13 +183,13 @@ abstract class ParameterMirror implements VariableMirror {
   bool get hasDefaultValue;
 
   /// The default value if this is an optional parameter.
-  InstanceMirror? get defaultValue;
+  InstanceMirrorContract? get defaultValue;
 }
 
 /// Base variable mirror interface
-abstract class VariableMirror implements DeclarationMirror {
+abstract class VariableMirrorContract implements DeclarationMirrorContract {
   /// A mirror on the type of this variable.
-  TypeMirror get type;
+  TypeMirrorContract get type;
 
   /// Whether this is a static variable.
   bool get isStatic;
@@ -200,25 +202,26 @@ abstract class VariableMirror implements DeclarationMirror {
 }
 
 /// Base type variable mirror interface
-abstract class TypeVariableMirror implements TypeMirror {
+abstract class TypeVariableMirrorContract implements TypeMirrorContract {
   /// A mirror on the upper bound of this type variable.
-  TypeMirror get upperBound;
+  TypeMirrorContract get upperBound;
 }
 
 /// Base library mirror interface
-abstract class LibraryMirror implements DeclarationMirror, ObjectMirror {
+abstract class LibraryMirrorContract
+    implements DeclarationMirrorContract, ObjectMirrorContract {
   /// The absolute URI of the library.
   Uri get uri;
 
   /// The declarations in this library.
-  Map<Symbol, DeclarationMirror> get declarations;
+  Map<Symbol, DeclarationMirrorContract> get declarations;
 
   /// The imports and exports of this library.
-  List<LibraryDependencyMirror> get libraryDependencies;
+  List<LibraryDependencyMirrorContract> get libraryDependencies;
 }
 
 /// Base library dependency mirror interface
-abstract class LibraryDependencyMirror implements Mirror {
+abstract class LibraryDependencyMirrorContract implements MirrorContract {
   /// Whether this is an import.
   bool get isImport;
 
@@ -229,20 +232,20 @@ abstract class LibraryDependencyMirror implements Mirror {
   bool get isDeferred;
 
   /// The library containing this dependency.
-  LibraryMirror get sourceLibrary;
+  LibraryMirrorContract get sourceLibrary;
 
   /// The target library of this dependency.
-  LibraryMirror? get targetLibrary;
+  LibraryMirrorContract? get targetLibrary;
 
   /// The prefix if this is a prefixed import.
   Symbol? get prefix;
 
   /// The show/hide combinators on this dependency.
-  List<CombinatorMirror> get combinators;
+  List<CombinatorMirrorContract> get combinators;
 }
 
 /// Base combinator mirror interface
-abstract class CombinatorMirror implements Mirror {
+abstract class CombinatorMirrorContract implements MirrorContract {
   /// The identifiers in this combinator.
   List<Symbol> get identifiers;
 
@@ -251,4 +254,43 @@ abstract class CombinatorMirror implements Mirror {
 
   /// Whether this is a hide combinator.
   bool get isHide;
+}
+
+/// An [IsolateMirrorContract] reflects an isolate.
+abstract class IsolateMirrorContract implements MirrorContract {
+  /// A unique name used to refer to the isolate in debugging messages.
+  String get debugName;
+
+  /// Whether this mirror reflects the currently running isolate.
+  bool get isCurrent;
+
+  /// The root library for the reflected isolate.
+  LibraryMirrorContract get rootLibrary;
+}
+
+/// A [MirrorSystemContract] is the main interface used to reflect on a set of libraries.
+abstract class MirrorSystemContract {
+  /// All libraries known to the mirror system.
+  Map<Uri, LibraryMirrorContract> get libraries;
+
+  /// Returns the unique library with the specified name.
+  LibraryMirrorContract findLibrary(Symbol libraryName);
+
+  /// Returns a mirror for the specified class.
+  ClassMirrorContract reflectClass(Type type);
+
+  /// Returns a mirror for the specified type.
+  TypeMirrorContract reflectType(Type type);
+
+  /// A mirror on the isolate associated with this mirror system.
+  IsolateMirrorContract get isolate;
+
+  /// A mirror on the dynamic type.
+  TypeMirrorContract get dynamicType;
+
+  /// A mirror on the void type.
+  TypeMirrorContract get voidType;
+
+  /// A mirror on the Never type.
+  TypeMirrorContract get neverType;
 }

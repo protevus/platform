@@ -1,11 +1,11 @@
-import '../mirrors.dart';
+import 'package:platform_contracts/contracts.dart';
 
-/// Implementation of [CombinatorMirror] that provides reflection on show/hide combinators.
-class CombinatorMirrorImpl implements CombinatorMirror {
+/// Implementation of [CombinatorMirrorContract] that provides reflection on show/hide combinators.
+class CombinatorMirror implements CombinatorMirrorContract {
   final List<Symbol> _identifiers;
   final bool _isShow;
 
-  CombinatorMirrorImpl({
+  CombinatorMirror({
     required List<Symbol> identifiers,
     required bool isShow,
   })  : _identifiers = identifiers,
@@ -23,7 +23,7 @@ class CombinatorMirrorImpl implements CombinatorMirror {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (other is! CombinatorMirrorImpl) return false;
+    if (other is! CombinatorMirror) return false;
 
     return _identifiers == other._identifiers && _isShow == other._isShow;
   }

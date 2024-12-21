@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:platform_reflection/reflection.dart';
+import 'package:platform_reflection/mirrors.dart';
 import 'package:platform_support/src/traits/reflects_closures.dart';
 
 class TestClass with ReflectsClosures {}

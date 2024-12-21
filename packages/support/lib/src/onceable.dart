@@ -1,5 +1,5 @@
 import 'once.dart';
-import 'package:platform_reflection/reflection.dart';
+import 'package:platform_reflection/mirrors.dart';
 
 /// A class that provides functionality to ensure methods are only executed once.
 ///

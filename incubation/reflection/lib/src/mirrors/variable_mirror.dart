@@ -1,25 +1,25 @@
 import 'dart:core';
-import '../mirrors.dart';
-import 'base_mirror.dart';
-import 'type_mirror_impl.dart';
+import 'package:platform_contracts/contracts.dart';
+import 'package:platform_reflection/mirrors.dart';
 
-/// Implementation of [VariableMirror] that provides reflection on variables.
-class VariableMirrorImpl extends MutableOwnerMirror implements VariableMirror {
-  final TypeMirror _type;
+/// Implementation of [VariableMirrorContract] that provides reflection on variables.
+class VariableMirror extends MutableOwnerMirror
+    implements VariableMirrorContract {
+  final TypeMirrorContract _type;
   final String _name;
   final bool _isStatic;
   final bool _isFinal;
   final bool _isConst;
-  final List<InstanceMirror> _metadata;
+  final List<InstanceMirrorContract> _metadata;
 
-  VariableMirrorImpl({
+  VariableMirror({
     required String name,
-    required TypeMirror type,
-    DeclarationMirror? owner,
+    required TypeMirrorContract type,
+    DeclarationMirrorContract? owner,
     bool isStatic = false,
     bool isFinal = false,
     bool isConst = false,
-    List<InstanceMirror> metadata = const [],
+    List<InstanceMirrorContract> metadata = const [],
   })  : _name = name,
         _type = type,
         _isStatic = isStatic,
@@ -45,10 +45,10 @@ class VariableMirrorImpl extends MutableOwnerMirror implements VariableMirror {
   bool get isPrivate => _name.startsWith('_');
 
   @override
-  bool get isTopLevel => owner is LibraryMirror;
+  bool get isTopLevel => owner is LibraryMirrorContract;
 
   @override
-  TypeMirror get type => _type;
+  TypeMirrorContract get type => _type;
 
   @override
   bool get isStatic => _isStatic;
@@ -60,12 +60,12 @@ class VariableMirrorImpl extends MutableOwnerMirror implements VariableMirror {
   bool get isConst => _isConst;
 
   @override
-  List<InstanceMirror> get metadata => List.unmodifiable(_metadata);
+  List<InstanceMirrorContract> get metadata => List.unmodifiable(_metadata);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (other is! VariableMirrorImpl) return false;
+    if (other is! VariableMirror) return false;
 
     return _name == other._name &&
         _type == other._type &&
@@ -98,21 +98,21 @@ class VariableMirrorImpl extends MutableOwnerMirror implements VariableMirror {
   }
 }
 
-/// Implementation of [VariableMirror] specifically for fields.
-class FieldMirrorImpl extends VariableMirrorImpl {
+/// Implementation of [VariableMirrorContract] specifically for fields.
+class FieldMirrorImpl extends VariableMirror {
   final bool _isReadable;
   final bool _isWritable;
 
   FieldMirrorImpl({
     required String name,
-    required TypeMirror type,
-    DeclarationMirror? owner,
+    required TypeMirrorContract type,
+    DeclarationMirrorContract? owner,
     bool isStatic = false,
     bool isFinal = false,
     bool isConst = false,
     bool isReadable = true,
     bool isWritable = true,
-    List<InstanceMirror> metadata = const [],
+    List<InstanceMirrorContract> metadata = const [],
   })  : _isReadable = isReadable,
         _isWritable = isWritable,
         super(

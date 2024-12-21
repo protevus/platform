@@ -1,10 +1,5 @@
 import 'dart:core';
-import '../metadata.dart';
-import 'reflector.dart';
-import '../mirrors.dart';
-import '../mirrors/mirror_system_impl.dart';
-import '../mirrors/special_types.dart';
-import '../exceptions.dart';
+import 'package:platform_reflection/mirrors.dart';
 
 /// Runtime scanner that analyzes types and extracts their metadata.
 class Scanner {
@@ -22,7 +17,7 @@ class Scanner {
     Reflector.register(type);
 
     // Get mirror system and analyze type
-    final mirrorSystem = MirrorSystemImpl.current();
+    //final mirrorSystem = MirrorSystem.current();
     final typeInfo = TypeAnalyzer.analyze(type);
 
     // Convert properties, methods, and constructors to metadata

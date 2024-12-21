@@ -1,18 +1,18 @@
-import '../mirrors.dart';
-import '../metadata.dart';
-import 'base_mirror.dart';
-import 'type_mirror_impl.dart';
+import 'package:platform_contracts/contracts.dart'
+    hide PropertyMetadata, MethodMetadata, ConstructorMetadata;
+import 'package:platform_reflection/mirrors.dart';
 
-/// Implementation of [TypeVariableMirror] that provides reflection on type variables.
-class TypeVariableMirrorImpl extends TypedMirror implements TypeVariableMirror {
-  final TypeMirror _upperBound;
+/// Implementation of [TypeVariableMirrorContract] that provides reflection on type variables.
+class TypeVariableMirror extends TypedMirror
+    implements TypeVariableMirrorContract {
+  final TypeMirrorContract _upperBound;
 
-  TypeVariableMirrorImpl({
+  TypeVariableMirror({
     required Type type,
     required String name,
-    required TypeMirror upperBound,
-    DeclarationMirror? owner,
-    List<InstanceMirror> metadata = const [],
+    required TypeMirrorContract upperBound,
+    DeclarationMirrorContract? owner,
+    List<InstanceMirrorContract> metadata = const [],
   })  : _upperBound = upperBound,
         super(
           type: type,
@@ -22,7 +22,7 @@ class TypeVariableMirrorImpl extends TypedMirror implements TypeVariableMirror {
         );
 
   @override
-  TypeMirror get upperBound => _upperBound;
+  TypeMirrorContract get upperBound => _upperBound;
 
   @override
   bool get hasReflectedType => true;
@@ -31,42 +31,39 @@ class TypeVariableMirrorImpl extends TypedMirror implements TypeVariableMirror {
   Type get reflectedType => type;
 
   @override
-  List<TypeVariableMirror> get typeVariables => const [];
+  List<TypeVariableMirrorContract> get typeVariables => const [];
 
   @override
-  List<TypeMirror> get typeArguments => const [];
+  List<TypeMirrorContract> get typeArguments => const [];
 
   @override
   bool get isOriginalDeclaration => true;
 
   @override
-  TypeMirror get originalDeclaration => this;
+  TypeMirrorContract get originalDeclaration => this;
 
   @override
-  bool isSubtypeOf(TypeMirror other) {
+  bool isSubtypeOf(TypeMirrorContract other) {
     if (identical(this, other)) return true;
     return _upperBound.isSubtypeOf(other);
   }
 
   @override
-  bool isAssignableTo(TypeMirror other) {
+  bool isAssignableTo(TypeMirrorContract other) {
     if (identical(this, other)) return true;
     return _upperBound.isAssignableTo(other);
   }
 
-  @override
   Map<String, PropertyMetadata> get properties => const {};
 
-  @override
   Map<String, MethodMetadata> get methods => const {};
 
-  @override
   List<ConstructorMetadata> get constructors => const [];
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (other is! TypeVariableMirrorImpl) return false;
+    if (other is! TypeVariableMirror) return false;
 
     return type == other.type &&
         name == other.name &&

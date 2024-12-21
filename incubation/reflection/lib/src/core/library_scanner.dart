@@ -1,9 +1,6 @@
 import 'dart:core';
-import '../metadata.dart';
-import '../mirrors.dart';
-import '../mirrors/mirror_system_impl.dart';
-import '../mirrors/special_types.dart';
-import '../exceptions.dart';
+import 'package:platform_contracts/contracts.dart';
+import 'package:platform_reflection/mirrors.dart';
 
 /// Runtime scanner that analyzes libraries and extracts their metadata.
 class LibraryScanner {
@@ -89,7 +86,7 @@ class LibraryAnalyzer {
           ),
         ],
         returnsVoid: false,
-        returnType: InstanceMirror,
+        returnType: InstanceMirrorContract,
         isPrivate: false,
       ),
       FunctionInfo(
@@ -104,7 +101,7 @@ class LibraryAnalyzer {
           ),
         ],
         returnsVoid: false,
-        returnType: ClassMirror,
+        returnType: ClassMirrorContract,
         isPrivate: false,
       ),
     ]);
@@ -112,7 +109,7 @@ class LibraryAnalyzer {
     variables.addAll([
       VariableInfo(
         name: 'currentMirrorSystem',
-        type: MirrorSystem,
+        type: MirrorSystemContract,
         isFinal: true,
         isConst: false,
         isPrivate: false,
