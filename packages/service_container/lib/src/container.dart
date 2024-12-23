@@ -319,27 +319,38 @@ class Container implements ContainerContract, Map<String, dynamic> {
   @override
   void bindMethod(dynamic method, Function callback) {
     _methodBindings[_parseBindMethod(method)] = (container, params) {
-      var callbackMirror = reflect(callback);
-      var methodMirror =
-          callbackMirror.type.declarations[Symbol('call')] as MethodMirror;
-      var parameterMirrors = methodMirror.parameters;
-      var args = [container];
-      if (params.isNotEmpty) {
-        args.add(params);
-      }
-      for (var i = args.length; i < parameterMirrors.length; i++) {
-        var paramMirror = parameterMirrors[i];
-        if (paramMirror.isOptional && !params.asMap().containsKey(i - 2)) {
-          break;
-        }
-        if (paramMirror.type is ClassMirror) {
-          args.add(resolve(
-              (paramMirror.type as ClassMirror).reflectedType.toString()));
+      try {
+        if (params is List) {
+          return Function.apply(callback, [container, ...params]);
+        } else if (params != null) {
+          return callback(container, params);
         } else {
-          args.add(params.asMap().containsKey(i - 2) ? params[i - 2] : null);
+          return callback(container);
+        }
+      } catch (e) {
+        try {
+          // Try calling with just the container
+          return callback(container);
+        } catch (e) {
+          try {
+            // Try calling without any arguments
+            return callback();
+          } catch (e) {
+            try {
+              // Try calling with just the params
+              if (params is List) {
+                return Function.apply(callback, params);
+              } else if (params != null) {
+                return callback(params);
+              }
+            } catch (e) {
+              // If all attempts fail, throw an exception
+              throw BindingResolutionException(
+                  'Failed to call bound method: $e');
+            }
+          }
         }
       }
-      return callbackMirror.invoke(Symbol('call'), args).reflectee;
     };
   }
 
