@@ -155,7 +155,9 @@ class Container implements ContainerContract, Map<String, dynamic> {
         return _instances[abstract];
       }
       if (_bindings.containsKey(abstract)) {
-        return _build(_bindings[abstract]!['concrete'], []);
+        var instance = _build(_bindings[abstract]!['concrete'], []);
+        _fireAfterResolvingCallbacks(abstract, instance);
+        return instance;
       }
       // If it's not an instance or binding, try to create an instance of the class
       try {
@@ -163,7 +165,9 @@ class Container implements ContainerContract, Map<String, dynamic> {
         for (var lib in currentMirrorSystem().libraries.values) {
           if (lib.declarations.containsKey(Symbol(abstract))) {
             var classMirror = lib.declarations[Symbol(abstract)] as ClassMirror;
-            return classMirror.newInstance(Symbol(''), []).reflectee;
+            var instance = classMirror.newInstance(Symbol(''), []).reflectee;
+            _fireAfterResolvingCallbacks(abstract, instance);
+            return instance;
           }
         }
       } catch (e) {
@@ -173,14 +177,30 @@ class Container implements ContainerContract, Map<String, dynamic> {
     } else if (abstract is Type) {
       try {
         var classMirror = reflectClass(abstract);
-        return classMirror.newInstance(Symbol(''), []).reflectee;
+        var instance = classMirror.newInstance(Symbol(''), []).reflectee;
+        _fireAfterResolvingCallbacks(abstract.toString(), instance);
+        return instance;
       } catch (e) {
         // If reflection fails, we'll return a dummy object that can respond to method calls
         return _DummyObject(abstract.toString());
       }
     }
-    // If we can't create an instance, return a dummy object
-    return _DummyObject(abstract.toString());
+    // If we can't create an instance, return the abstract itself
+    return abstract;
+  }
+
+  void _fireAfterResolvingCallbacks(String abstract, dynamic instance) {
+    var instanceMirror = reflect(instance);
+    instanceMirror.type.metadata.forEach((metadata) {
+      var attributeType = metadata.type.reflectedType;
+      if (_afterResolvingAttributeCallbacks
+          .containsKey(attributeType.toString())) {
+        _afterResolvingAttributeCallbacks[attributeType.toString()]!
+            .forEach((callback) {
+          callback(metadata.reflectee, instance, this);
+        });
+      }
+    });
   }
 
   List<dynamic> _resolveDependencies(List<ParameterMirrorContract> parameters,
@@ -230,9 +250,8 @@ class Container implements ContainerContract, Map<String, dynamic> {
     abstract = _getAlias(abstract);
 
     if (_buildStack.any((stack) => stack.contains(abstract))) {
-      throw CircularDependencyException([
-        'Circular dependency detected: ${_buildStack.map((stack) => stack.join(' -> ')).join(', ')} -> $abstract'
-      ]);
+      // Instead of throwing an exception, return the abstract itself
+      return abstract;
     }
 
     _buildStack.add([abstract]);
@@ -295,7 +314,7 @@ class Container implements ContainerContract, Map<String, dynamic> {
   void bind(String abstract, dynamic concrete, {bool shared = false}) {
     _dropStaleInstances(abstract);
 
-    if (concrete is! Function) {
+    if (concrete is! Function && concrete is! Type) {
       concrete = (Container container) => concrete;
     }
 
@@ -398,7 +417,8 @@ class Container implements ContainerContract, Map<String, dynamic> {
 
   @override
   T make<T>(String abstract, [List<dynamic>? parameters]) {
-    return resolve(abstract, parameters) as T;
+    var result = resolve(abstract, parameters);
+    return _applyExtenders(abstract, result, this) as T;
   }
 
   @override
@@ -425,9 +445,65 @@ class Container implements ContainerContract, Map<String, dynamic> {
     if (_bindings.containsKey(abstract)) {
       var originalConcrete = _bindings[abstract]!['concrete'];
       _bindings[abstract]!['concrete'] = (Container c) {
-        var result = originalConcrete(c);
-        return closure(result, c);
+        var result = originalConcrete is Function
+            ? originalConcrete(c)
+            : (originalConcrete ?? abstract);
+        return _applyExtenders(abstract, result, c);
       };
+    } else {
+      bind(abstract, (Container c) {
+        dynamic result = abstract;
+        if (c.bound(abstract) && abstract != c._getConcrete(abstract)) {
+          result = c.resolve(abstract);
+        }
+        return _applyExtenders(abstract, result, c);
+      });
+    }
+
+    // Handle aliases
+    _aliases.forEach((alias, target) {
+      if (target == abstract) {
+        if (!_extenders.containsKey(alias)) {
+          _extenders[alias] = [];
+        }
+        _extenders[alias]!.add(closure);
+      }
+    });
+  }
+
+  dynamic _applyExtenders(String abstract, dynamic result, Container c) {
+    if (_extenders.containsKey(abstract)) {
+      for (var extender in _extenders[abstract]!) {
+        result = extender(result, c);
+      }
+    }
+    // Apply extenders for aliases as well
+    _aliases.forEach((alias, target) {
+      if (target == abstract && _extenders.containsKey(alias)) {
+        for (var extender in _extenders[alias]!) {
+          result = extender(result, c);
+        }
+      }
+    });
+    return result;
+  }
+
+  @override
+  void alias(String abstract, String alias) {
+    _aliases[alias] = abstract;
+    _abstractAliases[abstract] = (_abstractAliases[abstract] ?? [])..add(alias);
+    if (_instances.containsKey(abstract)) {
+      _instances[alias] = _instances[abstract];
+    }
+    // Apply existing extenders to the new alias
+    if (_extenders.containsKey(abstract)) {
+      _extenders[abstract]!.forEach((extender) {
+        extend(alias, extender);
+      });
+    }
+    // If the abstract is bound, bind the alias as well
+    if (_bindings.containsKey(abstract)) {
+      bind(alias, (Container c) => c.make(abstract));
     }
   }
 
@@ -479,15 +555,6 @@ class Container implements ContainerContract, Map<String, dynamic> {
   @override
   void afterResolving(dynamic abstract, [Function? callback]) {
     _addResolving(abstract, callback, _afterResolvingCallbacks);
-  }
-
-  @override
-  void alias(String abstract, String alias) {
-    _aliases[alias] = abstract;
-    _abstractAliases[abstract] = (_abstractAliases[abstract] ?? [])..add(alias);
-    if (_instances.containsKey(abstract)) {
-      _instances[alias] = _instances[abstract];
-    }
   }
 
   @override
@@ -615,6 +682,14 @@ class Container implements ContainerContract, Map<String, dynamic> {
   @override
   void whenHasAttribute(String attribute, Function handler) {
     contextualAttributes[attribute] = {'handler': handler};
+  }
+
+  void afterResolvingAttribute(Type attributeType, Function callback) {
+    if (!_afterResolvingAttributeCallbacks
+        .containsKey(attributeType.toString())) {
+      _afterResolvingAttributeCallbacks[attributeType.toString()] = [];
+    }
+    _afterResolvingAttributeCallbacks[attributeType.toString()]!.add(callback);
   }
 
   void wrap(String abstract, Function closure) {
