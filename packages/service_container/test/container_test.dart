@@ -194,6 +194,59 @@ void main() {
       var secondInstantiation = container.makeScoped('class');
       expect(firstInstantiation, same(secondInstantiation));
     });
+    test('testForgetInstanceForgetsInstance', () {
+      var containerConcreteStub = ContainerConcreteStub();
+      container.instance('ContainerConcreteStub', containerConcreteStub);
+      expect(container.isShared('ContainerConcreteStub'), isTrue);
+      container.forgetInstance('ContainerConcreteStub');
+      expect(container.isShared('ContainerConcreteStub'), isFalse);
+    });
+
+    test('testForgetInstancesForgetsAllInstances', () {
+      var stub1 = ContainerConcreteStub();
+      var stub2 = ContainerConcreteStub();
+      var stub3 = ContainerConcreteStub();
+      container.instance('Instance1', stub1);
+      container.instance('Instance2', stub2);
+      container.instance('Instance3', stub3);
+      expect(container.isShared('Instance1'), isTrue);
+      expect(container.isShared('Instance2'), isTrue);
+      expect(container.isShared('Instance3'), isTrue);
+      container.forgetInstances();
+      expect(container.isShared('Instance1'), isFalse);
+      expect(container.isShared('Instance2'), isFalse);
+      expect(container.isShared('Instance3'), isFalse);
+    });
+
+    test('testContainerFlushFlushesAllBindingsAliasesAndResolvedInstances', () {
+      container.bind('ConcreteStub', (Container c) => ContainerConcreteStub(),
+          shared: true);
+      container.alias('ConcreteStub', 'ContainerConcreteStub');
+      container.make('ConcreteStub');
+      expect(container.resolved('ConcreteStub'), isTrue);
+      expect(container.isAlias('ContainerConcreteStub'), isTrue);
+      expect(container.getBindings().containsKey('ConcreteStub'), isTrue);
+      expect(container.isShared('ConcreteStub'), isTrue);
+      container.flush();
+      expect(container.resolved('ConcreteStub'), isFalse);
+      expect(container.isAlias('ContainerConcreteStub'), isFalse);
+      expect(container.getBindings().isEmpty, isTrue);
+      expect(container.isShared('ConcreteStub'), isFalse);
+    });
+
+    test('testResolvedResolvesAliasToBindingNameBeforeChecking', () {
+      container.bind('ConcreteStub', (Container c) => ContainerConcreteStub(),
+          shared: true);
+      container.alias('ConcreteStub', 'foo');
+
+      expect(container.resolved('ConcreteStub'), isFalse);
+      expect(container.resolved('foo'), isFalse);
+
+      container.make('ConcreteStub');
+
+      expect(container.resolved('ConcreteStub'), isTrue);
+      expect(container.resolved('foo'), isTrue);
+    });
   });
 }
 

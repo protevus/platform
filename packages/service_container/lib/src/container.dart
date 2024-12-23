@@ -320,36 +320,34 @@ class Container implements ContainerContract, Map<String, dynamic> {
   void bindMethod(dynamic method, Function callback) {
     _methodBindings[_parseBindMethod(method)] = (container, params) {
       try {
-        if (params is List) {
-          return Function.apply(callback, [container, ...params]);
-        } else if (params != null) {
-          return callback(container, params);
-        } else {
-          return callback(container);
-        }
-      } catch (e) {
-        try {
-          // Try calling with just the container
-          return callback(container);
-        } catch (e) {
-          try {
-            // Try calling without any arguments
-            return callback();
-          } catch (e) {
-            try {
-              // Try calling with just the params
-              if (params is List) {
-                return Function.apply(callback, params);
-              } else if (params != null) {
-                return callback(params);
-              }
-            } catch (e) {
-              // If all attempts fail, throw an exception
-              throw BindingResolutionException(
-                  'Failed to call bound method: $e');
-            }
+        var callbackMirror = reflect(callback);
+        var functionMirror =
+            callbackMirror.type.declarations[Symbol('call')] as MethodMirror;
+        var parameterCount = functionMirror.parameters.length;
+
+        var args = [];
+        if (parameterCount > 0) args.add(container);
+        if (parameterCount > 1) {
+          if (params is List) {
+            args.addAll(params);
+          } else if (params != null) {
+            args.add(params);
           }
         }
+
+        // Ensure we have the correct number of arguments
+        while (args.length < parameterCount) {
+          args.add(null);
+        }
+
+        // Trim excess arguments if we have too many
+        if (args.length > parameterCount) {
+          args = args.sublist(0, parameterCount);
+        }
+
+        return Function.apply(callback, args);
+      } catch (e) {
+        throw BindingResolutionException('Failed to call bound method: $e');
       }
     };
   }
@@ -535,11 +533,30 @@ class Container implements ContainerContract, Map<String, dynamic> {
     _resolvingCallbacks.clear();
     _afterResolvingCallbacks.clear();
     _afterResolvingAttributeCallbacks.clear();
+
+    // Ensure all resolved flags are reset
+    for (var key in _resolved.keys.toList()) {
+      _resolved[key] = false;
+    }
   }
 
   @override
   bool resolved(String abstract) {
-    return _resolved.containsKey(abstract) && _resolved[abstract]!;
+    abstract = _getAlias(abstract);
+    return _resolved.containsKey(abstract) || _instances.containsKey(abstract);
+  }
+
+  bool isAlias(String name) {
+    return _aliases.containsKey(name);
+  }
+
+  Map<String, Map<String, dynamic>> getBindings() {
+    return Map.from(_bindings);
+  }
+
+  bool isShared(String abstract) {
+    return _bindings[abstract]?['shared'] == true ||
+        _instances.containsKey(abstract);
   }
 
   @override
@@ -649,19 +666,6 @@ class Container implements ContainerContract, Map<String, dynamic> {
 
   List<Function> getExtenders(String abstract) {
     return _extenders[abstract] ?? [];
-  }
-
-  Map<String, Map<String, dynamic>> getBindings() {
-    return Map.from(_bindings);
-  }
-
-  bool isAlias(String name) {
-    return _aliases.containsKey(name);
-  }
-
-  bool isShared(String abstract) {
-    return _bindings[abstract]?['shared'] == true ||
-        _instances.containsKey(abstract);
   }
 
   // Implement Map methods
