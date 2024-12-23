@@ -249,9 +249,15 @@ class Container implements ContainerContract, Map<String, dynamic> {
   dynamic resolve(String abstract, [List<dynamic>? parameters]) {
     abstract = _getAlias(abstract);
 
+    // if (_buildStack.any((stack) => stack.contains(abstract))) {
+    //   // Instead of throwing an exception, return the abstract itself
+    //   return abstract;
+    // }
+
     if (_buildStack.any((stack) => stack.contains(abstract))) {
-      // Instead of throwing an exception, return the abstract itself
-      return abstract;
+      // Create a path that includes the current abstract and the existing build stack
+      List<String> path = [..._buildStack.last, abstract];
+      throw CircularDependencyException(path);
     }
 
     _buildStack.add([abstract]);
@@ -451,10 +457,24 @@ class Container implements ContainerContract, Map<String, dynamic> {
     });
   }
 
+  // @override
+  // T make<T>(String abstract, [List<dynamic>? parameters]) {
+  //   var result = resolve(abstract, parameters);
+  //   return _applyExtenders(abstract, result, this) as T;
+  // }
+
   @override
   T make<T>(String abstract, [List<dynamic>? parameters]) {
-    var result = resolve(abstract, parameters);
-    return _applyExtenders(abstract, result, this) as T;
+    try {
+      var result = resolve(abstract, parameters);
+      return _applyExtenders(abstract, result, this) as T;
+    } catch (e) {
+      if (e is CircularDependencyException) {
+        rethrow;
+      }
+      throw BindingResolutionException(
+          'Error resolving $abstract: ${e.toString()}');
+    }
   }
 
   dynamic _applyExtenders(String abstract, dynamic result, Container c) {
