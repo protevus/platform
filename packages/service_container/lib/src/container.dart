@@ -416,12 +416,6 @@ class Container implements ContainerContract, Map<String, dynamic> {
   }
 
   @override
-  T make<T>(String abstract, [List<dynamic>? parameters]) {
-    var result = resolve(abstract, parameters);
-    return _applyExtenders(abstract, result, this) as T;
-  }
-
-  @override
   void singleton(String abstract, [dynamic concrete]) {
     bind(abstract, concrete ?? abstract, shared: true);
   }
@@ -442,22 +436,8 @@ class Container implements ContainerContract, Map<String, dynamic> {
       _instances[abstract] = closure(_instances[abstract], this);
     }
 
-    if (_bindings.containsKey(abstract)) {
-      var originalConcrete = _bindings[abstract]!['concrete'];
-      _bindings[abstract]!['concrete'] = (Container c) {
-        var result = originalConcrete is Function
-            ? originalConcrete(c)
-            : (originalConcrete ?? abstract);
-        return _applyExtenders(abstract, result, c);
-      };
-    } else {
-      bind(abstract, (Container c) {
-        dynamic result = abstract;
-        if (c.bound(abstract) && abstract != c._getConcrete(abstract)) {
-          result = c.resolve(abstract);
-        }
-        return _applyExtenders(abstract, result, c);
-      });
+    if (!_bindings.containsKey(abstract)) {
+      bind(abstract, (Container c) => abstract);
     }
 
     // Handle aliases
@@ -471,20 +451,35 @@ class Container implements ContainerContract, Map<String, dynamic> {
     });
   }
 
+  @override
+  T make<T>(String abstract, [List<dynamic>? parameters]) {
+    var result = resolve(abstract, parameters);
+    return _applyExtenders(abstract, result, this) as T;
+  }
+
   dynamic _applyExtenders(String abstract, dynamic result, Container c) {
-    if (_extenders.containsKey(abstract)) {
-      for (var extender in _extenders[abstract]!) {
-        result = extender(result, c);
-      }
-    }
-    // Apply extenders for aliases as well
-    _aliases.forEach((alias, target) {
-      if (target == abstract && _extenders.containsKey(alias)) {
-        for (var extender in _extenders[alias]!) {
-          result = extender(result, c);
+    var appliedExtenders = <Function>{};
+
+    void applyExtendersForAbstract(String key) {
+      if (_extenders.containsKey(key)) {
+        for (var extender in _extenders[key]!) {
+          if (!appliedExtenders.contains(extender)) {
+            result = extender(result, c);
+            appliedExtenders.add(extender);
+          }
         }
       }
+    }
+
+    applyExtendersForAbstract(abstract);
+
+    // Apply extenders for aliases
+    _aliases.forEach((alias, target) {
+      if (target == abstract) {
+        applyExtendersForAbstract(alias);
+      }
     });
+
     return result;
   }
 
