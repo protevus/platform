@@ -52,23 +52,13 @@ class Container implements ContainerContract, Map<String, dynamic> {
         var className = parts[0];
         var methodName = parts.length > 1 ? parts[1] : null;
         var instance = _make(className);
-        if (methodName == null) {
-          if (instance is Function) {
-            return Function.apply(instance, parameters);
-          } else if (instance is Type) {
-            return _make(instance.toString());
-          } else {
-            return 'run';
-          }
-        }
         if (instance is _DummyObject) {
           throw BindingResolutionException('Class $className not found');
         }
-        if (instance is _DummyObject) {
-          return instance.noSuchMethod(
-              Invocation.method(Symbol(methodName ?? 'run'), parameters));
+        if (methodName == null || methodName.isEmpty) {
+          return _callMethod(instance, 'run', parameters);
         }
-        return _callMethod(instance, methodName ?? 'run', parameters);
+        return _callMethod(instance, methodName, parameters);
       } else if (callback.contains('::')) {
         var parts = callback.split('::');
         var className = parts[0];
@@ -78,10 +68,12 @@ class Container implements ContainerContract, Map<String, dynamic> {
       } else if (_methodBindings.containsKey(callback)) {
         var boundMethod = _methodBindings[callback]!;
         return Function.apply(boundMethod, [this, parameters]);
+      } else if (_instances.containsKey(callback)) {
+        return _callMethod(_instances[callback], 'run', parameters);
       } else {
         // Assume it's a global function
         throw BindingResolutionException(
-            'Global function $callback not found or not callable');
+            'Global function or class $callback not found or not callable');
       }
     }
 
