@@ -1,4 +1,4 @@
-name: platform_service_container
+name: ioc_container
 description: The Container Package for the Protevus Platform
 version: 0.0.1
 homepage: https://protevus.com
@@ -10,12 +10,10 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
-  dsr_container: ^0.0.1
+  dsr_container: ^0.1.0
   platform_contracts: ^0.1.0
-  platform_reflection: ^0.1.0
   # path: ^1.8.0
 
 dev_dependencies:
   lints: ^3.0.0
   test: ^1.24.0
-  platform_config: ^0.1.0
