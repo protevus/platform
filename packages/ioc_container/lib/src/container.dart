@@ -120,6 +120,11 @@ class Container implements ContainerContract {
 
       _tags[tag]!.addAll(abstractList.cast<String>());
     }
+
+    void forgetExtenders(String abstract) {
+      abstract = getAlias(abstract);
+      _extenders.remove(abstract);
+    }
   }
 
   @override
@@ -323,9 +328,26 @@ class Container implements ContainerContract {
     }
   }
 
-  void afterResolvingAttribute(String attribute, Function callback) {
-    _afterResolvingAttributeCallbacks[attribute] ??= [];
-    _afterResolvingAttributeCallbacks[attribute]!.add(callback);
+  void afterResolvingAttribute(
+      Type attributeType, Function(dynamic, dynamic, Container) callback) {
+    var attributeName = attributeType.toString();
+    _afterResolvingAttributeCallbacks[attributeName] ??= [];
+    _afterResolvingAttributeCallbacks[attributeName]!.add(callback);
+
+    // Ensure the attribute type is bound
+    if (!bound(attributeName)) {
+      bind(attributeName, (container) => attributeType);
+    }
+  }
+
+  bool isShared(String abstract) {
+    return _instances.containsKey(abstract) ||
+        (_bindings.containsKey(abstract) &&
+            _bindings[abstract]!['shared'] == true);
+  }
+
+  bool isAlias(String name) {
+    return _aliases.containsKey(name);
   }
 
   @override
@@ -483,14 +505,12 @@ class Container implements ContainerContract {
   void fireAfterResolvingAttributeCallbacks(
       List<InstanceMirror> annotations, dynamic object) {
     for (var annotation in annotations) {
-      if (annotation.reflectee is ContextualAttribute) {
-        var instance = annotation.reflectee as ContextualAttribute;
-        var attributeType = instance.runtimeType.toString();
-        if (_afterResolvingAttributeCallbacks.containsKey(attributeType)) {
-          for (var callback
-              in _afterResolvingAttributeCallbacks[attributeType]!) {
-            callback(instance, object, this);
-          }
+      var instance = annotation.reflectee;
+      var attributeType = instance.runtimeType.toString();
+      if (_afterResolvingAttributeCallbacks.containsKey(attributeType)) {
+        for (var callback
+            in _afterResolvingAttributeCallbacks[attributeType]!) {
+          callback(instance, object, this);
         }
       }
     }
@@ -508,6 +528,11 @@ class Container implements ContainerContract {
     for (var scoped in _scopedInstances) {
       _instances.remove(scoped);
     }
+  }
+
+  void forgetExtenders(String abstract) {
+    abstract = getAlias(abstract);
+    _extenders.remove(abstract);
   }
 
   T makeScoped<T>(String abstract) {
@@ -578,8 +603,63 @@ class Container implements ContainerContract {
         var instance =
             classMirror.newInstance(Symbol.empty, parameters).reflectee;
 
+        // Apply attributes to the instance
+        for (var attribute in classAttributes) {
+          var attributeType = attribute.reflectee.runtimeType;
+          var attributeTypeName = attributeType.toString();
+          if (_afterResolvingAttributeCallbacks
+              .containsKey(attributeTypeName)) {
+            for (var callback
+                in _afterResolvingAttributeCallbacks[attributeTypeName]!) {
+              callback(attribute.reflectee, instance, this);
+            }
+          }
+        }
+
+        // Apply attributes to properties
+        var instanceMirror = reflect(instance);
+        for (var declaration in classMirror.declarations.values) {
+          if (declaration is VariableMirror) {
+            for (var attribute in declaration.metadata) {
+              var attributeType = attribute.reflectee.runtimeType;
+              var attributeTypeName = attributeType.toString();
+              if (_afterResolvingAttributeCallbacks
+                  .containsKey(attributeTypeName)) {
+                for (var callback
+                    in _afterResolvingAttributeCallbacks[attributeTypeName]!) {
+                  var propertyValue =
+                      instanceMirror.getField(declaration.simpleName).reflectee;
+                  callback(attribute.reflectee, propertyValue, this);
+                  instanceMirror.setField(
+                      declaration.simpleName, propertyValue);
+                }
+              }
+            }
+          }
+        }
+
+        // Apply after resolving callbacks
         fireAfterResolvingAttributeCallbacks(classAttributes, instance);
         _fireAfterResolvingCallbacks(concrete, instance);
+
+        // Apply after resolving callbacks
+        fireAfterResolvingAttributeCallbacks(classAttributes, instance);
+        _fireAfterResolvingCallbacks(concrete, instance);
+
+        // Apply extenders after all callbacks
+        for (var extender in _getExtenders(concrete)) {
+          instance = extender(instance);
+        }
+
+        // Store the instance if it's shared
+        if (isShared(concrete)) {
+          _instances[concrete] = instance;
+        }
+
+        // Ensure the instance is stored before returning
+        if (_instances.containsKey(concrete)) {
+          return _instances[concrete];
+        }
 
         return instance;
       } catch (e) {
@@ -812,16 +892,6 @@ class Container implements ContainerContract {
     }
 
     return getAlias(_aliases[abstract]!);
-  }
-
-  bool isShared(String abstract) {
-    return _instances.containsKey(abstract) ||
-        (_bindings.containsKey(abstract) &&
-            _bindings[abstract]!['shared'] == true);
-  }
-
-  bool isAlias(String name) {
-    return _aliases.containsKey(name);
   }
 
   // Implement ArrayAccess-like functionality
