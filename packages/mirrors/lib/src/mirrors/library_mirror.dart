@@ -37,7 +37,7 @@ class LibraryMirror extends TypedMirror implements LibraryMirrorContract {
     List<InstanceMirrorContract> metadata = const [],
   }) {
     // Scan library to get declarations
-    final libraryInfo = LibraryScanner.scanLibrary(uri);
+    final libraryInfo = RuntimeLibraryDiscoverer.scanLibrary(uri);
     final declarations = <Symbol, DeclarationMirrorContract>{};
     final topLevelValues = <Symbol, dynamic>{};
 

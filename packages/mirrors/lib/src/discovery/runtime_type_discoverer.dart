@@ -2,9 +2,9 @@ import 'dart:core';
 import 'package:platform_mirrors/mirrors.dart';
 
 /// Runtime scanner that analyzes types and extracts their metadata.
-class Scanner {
+class RuntimeTypeDiscoverer {
   // Private constructor to prevent instantiation
-  Scanner._();
+  RuntimeTypeDiscoverer._();
 
   // Cache for type metadata
   static final Map<Type, TypeMetadata> _typeCache = {};

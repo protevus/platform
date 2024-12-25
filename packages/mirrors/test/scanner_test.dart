@@ -78,7 +78,7 @@ void main() {
           isWritable: false);
 
       // Scan type
-      Scanner.scanType(TestClass);
+      RuntimeTypeDiscoverer.scanType(TestClass);
       final metadata = ReflectionRegistry.getPropertyMetadata(TestClass);
 
       expect(metadata, isNotNull);
@@ -130,7 +130,7 @@ void main() {
       );
 
       // Scan type
-      Scanner.scanType(TestClass);
+      RuntimeTypeDiscoverer.scanType(TestClass);
       final metadata = ReflectionRegistry.getMethodMetadata(TestClass);
 
       expect(metadata, isNotNull);
@@ -187,7 +187,7 @@ void main() {
       );
 
       // Scan type
-      Scanner.scanType(TestClass);
+      RuntimeTypeDiscoverer.scanType(TestClass);
       final metadata = ReflectionRegistry.getConstructorMetadata(TestClass);
 
       expect(metadata, isNotNull);
@@ -255,7 +255,7 @@ void main() {
       );
 
       // Scan type
-      Scanner.scanType(TestClass);
+      RuntimeTypeDiscoverer.scanType(TestClass);
 
       final reflector = RuntimeReflector.instance;
 
@@ -320,7 +320,7 @@ void main() {
       );
 
       // Scan type
-      Scanner.scanType(GenericTestClass);
+      RuntimeTypeDiscoverer.scanType(GenericTestClass);
       final metadata = ReflectionRegistry.getPropertyMetadata(GenericTestClass);
 
       expect(metadata, isNotNull);
@@ -364,8 +364,8 @@ void main() {
       );
 
       // Scan types
-      Scanner.scanType(ParentTestClass);
-      Scanner.scanType(ChildTestClass);
+      RuntimeTypeDiscoverer.scanType(ParentTestClass);
+      RuntimeTypeDiscoverer.scanType(ChildTestClass);
 
       final parentMeta =
           ReflectionRegistry.getPropertyMetadata(ParentTestClass);

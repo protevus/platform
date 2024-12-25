@@ -1,26 +1,5 @@
-import 'dart:core';
 import 'package:platform_contracts/contracts.dart';
 import 'package:platform_mirrors/mirrors.dart';
-
-/// Runtime scanner that analyzes libraries and extracts their metadata.
-class LibraryScanner {
-  // Private constructor to prevent instantiation
-  LibraryScanner._();
-
-  // Cache for library metadata
-  static final Map<Uri, LibraryInfo> _libraryCache = {};
-
-  /// Scans a library and extracts its metadata.
-  static LibraryInfo scanLibrary(Uri uri) {
-    if (_libraryCache.containsKey(uri)) {
-      return _libraryCache[uri]!;
-    }
-
-    final libraryInfo = LibraryAnalyzer.analyze(uri);
-    _libraryCache[uri] = libraryInfo;
-    return libraryInfo;
-  }
-}
 
 /// Analyzes libraries at runtime to extract their metadata.
 class LibraryAnalyzer {

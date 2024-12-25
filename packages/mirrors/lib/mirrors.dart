@@ -13,8 +13,9 @@ export 'src/core/mirror_system.dart';
 
 /// Discovery
 export 'src/discovery/type_analyzer.dart';
-export 'src/discovery/library_scanner.dart';
-export 'src/discovery/scanner.dart';
+export 'src/discovery/library_analyzer.dart';
+export 'src/discovery/runtime_library_discoverer.dart';
+export 'src/discovery/runtime_type_discoverer.dart';
 
 /// Discovery Models
 export 'src/discovery/models/models.dart';
