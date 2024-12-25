@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:platform_support/platform_support.dart';
-import 'package:platform_reflection/mirrors.dart';
+import 'package:platform_mirrors/mirrors.dart';
 
 @reflectable
 class TappableTest with Tappable {
@@ -34,11 +34,11 @@ void main() {
     instance = TappableTest();
 
     // Register class and methods for reflection
-    Reflector.reset();
-    Reflector.register(TappableTest);
+    ReflectionRegistry.reset();
+    ReflectionRegistry.register(TappableTest);
 
     // Register setValue method
-    Reflector.registerMethod(
+    ReflectionRegistry.registerMethod(
       TappableTest,
       'setValue',
       [String],
@@ -48,7 +48,7 @@ void main() {
     );
 
     // Register getValue method
-    Reflector.registerMethod(
+    ReflectionRegistry.registerMethod(
       TappableTest,
       'getValue',
       [],
@@ -56,7 +56,7 @@ void main() {
     );
 
     // Register tap method
-    Reflector.registerMethod(
+    ReflectionRegistry.registerMethod(
       TappableTest,
       'tap',
       [Function],

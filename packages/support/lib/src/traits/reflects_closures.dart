@@ -1,11 +1,12 @@
-import 'package:platform_reflection/mirrors.dart';
+import 'package:platform_mirrors/mirrors.dart';
 
 /// A trait that provides functionality to reflect on closures.
 mixin ReflectsClosures {
   /// Get the number of parameters that a closure accepts.
   int getClosureParameterCount(Function closure) {
     try {
-      final metadata = Reflector.getMethodMetadata(closure.runtimeType);
+      final metadata =
+          ReflectionRegistry.getMethodMetadata(closure.runtimeType);
       if (metadata == null || !metadata.containsKey('call')) {
         return 0;
       }
@@ -19,7 +20,8 @@ mixin ReflectsClosures {
   /// Get the parameter names of a closure.
   List<String> getClosureParameterNames(Function closure) {
     try {
-      final metadata = Reflector.getMethodMetadata(closure.runtimeType);
+      final metadata =
+          ReflectionRegistry.getMethodMetadata(closure.runtimeType);
       if (metadata == null || !metadata.containsKey('call')) {
         return [];
       }
@@ -33,7 +35,8 @@ mixin ReflectsClosures {
   /// Get the parameter types of a closure.
   List<Type> getClosureParameterTypes(Function closure) {
     try {
-      final metadata = Reflector.getMethodMetadata(closure.runtimeType);
+      final metadata =
+          ReflectionRegistry.getMethodMetadata(closure.runtimeType);
       if (metadata == null || !metadata.containsKey('call')) {
         return [];
       }
@@ -52,7 +55,8 @@ mixin ReflectsClosures {
   /// Determine if a closure returns void.
   bool isClosureVoid(Function closure) {
     try {
-      final metadata = Reflector.getMethodMetadata(closure.runtimeType);
+      final metadata =
+          ReflectionRegistry.getMethodMetadata(closure.runtimeType);
       if (metadata == null || !metadata.containsKey('call')) {
         return false;
       }
@@ -66,7 +70,8 @@ mixin ReflectsClosures {
   /// Determine if a closure is nullable.
   bool isClosureNullable(Function closure) {
     try {
-      final metadata = Reflector.getMethodMetadata(closure.runtimeType);
+      final metadata =
+          ReflectionRegistry.getMethodMetadata(closure.runtimeType);
       if (metadata == null || !metadata.containsKey('call')) {
         return true;
       }
@@ -89,7 +94,8 @@ mixin ReflectsClosures {
       }
 
       // Also check if it's marked as async in the metadata
-      final metadata = Reflector.getMethodMetadata(closure.runtimeType);
+      final metadata =
+          ReflectionRegistry.getMethodMetadata(closure.runtimeType);
       if (metadata == null || !metadata.containsKey('call')) {
         return false;
       }

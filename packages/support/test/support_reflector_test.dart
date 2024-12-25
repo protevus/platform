@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:platform_contracts/contracts.dart';
-import 'package:platform_reflection/mirrors.dart';
+import 'package:platform_mirrors/mirrors.dart';
 import 'package:platform_support/platform_support.dart';
 
 class TestClass {
@@ -106,8 +106,8 @@ void main() {
     testClassMirror.declarations[Symbol('noSuchMethod')] = noSuchMethodMirror;
 
     // Register test classes
-    Reflector.register(TestClass);
-    Reflector.registerMethod(
+    ReflectionRegistry.register(TestClass);
+    ReflectionRegistry.registerMethod(
       TestClass,
       'publicMethod',
       [TestClass],
@@ -117,7 +117,7 @@ void main() {
       isNamed: [false],
       isStatic: false,
     );
-    Reflector.registerMethod(
+    ReflectionRegistry.registerMethod(
       TestClass,
       '_privateMethod',
       [TestClass],
@@ -127,7 +127,7 @@ void main() {
       isNamed: [false],
       isStatic: false,
     );
-    Reflector.registerMethod(
+    ReflectionRegistry.registerMethod(
       TestClass,
       'noSuchMethod',
       [Invocation],
@@ -139,20 +139,20 @@ void main() {
     );
 
     // Register enums
-    Reflector.register(SimpleEnum);
-    Reflector.registerProperty(
+    ReflectionRegistry.register(SimpleEnum);
+    ReflectionRegistry.registerProperty(
       SimpleEnum,
       'values',
       List<SimpleEnum>,
     );
 
-    Reflector.register(BackedEnum);
-    Reflector.registerProperty(
+    ReflectionRegistry.register(BackedEnum);
+    ReflectionRegistry.registerProperty(
       BackedEnum,
       'values',
       List<BackedEnum>,
     );
-    Reflector.registerProperty(
+    ReflectionRegistry.registerProperty(
       BackedEnum,
       'name',
       String,
@@ -162,7 +162,7 @@ void main() {
   });
 
   tearDown(() {
-    Reflector.reset();
+    ReflectionRegistry.reset();
   });
 
   group('SupportReflector', () {

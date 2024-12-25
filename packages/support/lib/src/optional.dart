@@ -1,5 +1,5 @@
 import 'package:platform_macroable/platform_macroable.dart';
-import 'package:platform_reflection/mirrors.dart';
+import 'package:platform_mirrors/mirrors.dart';
 
 /// Provides Laravel-like Optional type functionality with macro support.
 ///
@@ -46,7 +46,8 @@ class Optional<T> with Macroable {
       final instance = reflector.reflect(_value!);
       if (instance != null) {
         final type = instance.type;
-        final metadata = Reflector.getPropertyMetadata(type.reflectedType);
+        final metadata =
+            ReflectionRegistry.getPropertyMetadata(type.reflectedType);
 
         if (metadata != null && metadata.containsKey(key)) {
           // Access property through dynamic dispatch
@@ -89,7 +90,8 @@ class Optional<T> with Macroable {
       final instance = reflector.reflect(_value!);
       if (instance != null) {
         final type = instance.type;
-        final metadata = Reflector.getPropertyMetadata(type.reflectedType);
+        final metadata =
+            ReflectionRegistry.getPropertyMetadata(type.reflectedType);
         return metadata != null && metadata.containsKey(key);
       }
     } catch (_) {

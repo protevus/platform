@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:platform_support/platform_support.dart';
-import 'package:platform_reflection/mirrors.dart';
+import 'package:platform_mirrors/mirrors.dart';
 
 @reflectable
 class TestObject {
@@ -13,16 +13,16 @@ void main() {
 
   setUp(() {
     reflector = RuntimeReflector.instance;
-    Reflector.reset();
+    ReflectionRegistry.reset();
 
     // Register TestObject for reflection
-    Reflector.register(TestObject);
+    ReflectionRegistry.register(TestObject);
 
     // Register property
-    Reflector.registerProperty(TestObject, 'item', String);
+    ReflectionRegistry.registerProperty(TestObject, 'item', String);
 
     // Register constructors
-    Reflector.registerConstructor(
+    ReflectionRegistry.registerConstructor(
       TestObject,
       '',
       parameterTypes: [String],

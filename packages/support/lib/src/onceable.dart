@@ -1,5 +1,5 @@
 import 'once.dart';
-import 'package:platform_reflection/mirrors.dart';
+import 'package:platform_mirrors/mirrors.dart';
 
 /// A class that provides functionality to ensure methods are only executed once.
 ///
@@ -25,9 +25,9 @@ class Onceable {
 
     // If not executed yet, register the callback type
     if (!_once[key]!.executed &&
-        !Reflector.isReflectable(callback.runtimeType)) {
-      Reflector.register(callback.runtimeType);
-      Reflector.registerMethod(
+        !ReflectionRegistry.isReflectable(callback.runtimeType)) {
+      ReflectionRegistry.register(callback.runtimeType);
+      ReflectionRegistry.registerMethod(
         callback.runtimeType,
         'call',
         const <Type>[],

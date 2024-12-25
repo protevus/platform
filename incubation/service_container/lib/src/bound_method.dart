@@ -1,5 +1,5 @@
 import 'package:platform_contracts/contracts.dart';
-import 'package:platform_reflection/mirrors.dart';
+import 'package:platform_mirrors/mirrors.dart';
 
 /// A utility class for calling methods with dependency injection.
 class BoundMethod {

@@ -1,5 +1,5 @@
 import 'package:platform_contracts/contracts.dart';
-import 'package:platform_reflection/mirrors.dart';
+import 'package:platform_mirrors/mirrors.dart';
 
 /// A builder for defining contextual bindings for the container.
 class ContextualBindingBuilder implements ContextualBindingBuilderContract {

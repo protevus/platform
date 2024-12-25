@@ -1,5 +1,5 @@
 import 'package:platform_contracts/contracts.dart';
-import 'package:platform_reflection/mirrors.dart';
+import 'package:platform_mirrors/mirrors.dart';
 
 /// Provides reflection utilities for examining types and methods at runtime.
 class SupportReflector {
@@ -28,12 +28,12 @@ class SupportReflector {
       final targetType = target is Type ? target : target.runtimeType;
 
       // Check if type is registered for reflection
-      if (!Reflector.isReflectable(targetType)) {
+      if (!ReflectionRegistry.isReflectable(targetType)) {
         return false;
       }
 
       // Check for regular method
-      final methods = Reflector.getMethodMetadata(targetType);
+      final methods = ReflectionRegistry.getMethodMetadata(targetType);
       if (methods != null) {
         // If the method is private, return false
         if (methodName.startsWith('_')) {
@@ -157,12 +157,12 @@ class SupportReflector {
       final reflectedType = type.reflectedType;
 
       // Check if it's registered for reflection
-      if (!Reflector.isReflectable(reflectedType)) {
+      if (!ReflectionRegistry.isReflectable(reflectedType)) {
         return false;
       }
 
       // Get the property metadata
-      final properties = Reflector.getPropertyMetadata(reflectedType);
+      final properties = ReflectionRegistry.getPropertyMetadata(reflectedType);
       if (properties == null) {
         return false;
       }

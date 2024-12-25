@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:platform_reflection/mirrors.dart';
+import 'package:platform_mirrors/mirrors.dart';
 
 /// A mixin that provides method forwarding functionality.
 ///
@@ -38,7 +38,7 @@ mixin ForwardsCalls {
       }
 
       // Get method metadata
-      final methods = Reflector.getMethodMetadata(object.runtimeType);
+      final methods = ReflectionRegistry.getMethodMetadata(object.runtimeType);
       if (methods == null || !methods.containsKey(method)) {
         throwBadMethodCallException(method);
       }

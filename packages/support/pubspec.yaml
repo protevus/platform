@@ -20,7 +20,7 @@ dependencies:
   platform_conditionable: ^1.0.0
   platform_contracts: ^1.0.0
   platform_macroable: ^1.0.0
-  platform_reflection: ^1.0.0
+  platform_mirrors: ^1.0.0
   
   
 

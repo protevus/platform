@@ -7,7 +7,7 @@ environment:
 
 dependencies:
   platform_contracts: ^0.1.0
-  platform_reflection: ^0.1.0
+  platform_mirrors: ^0.1.0
   meta: ^1.9.0
 
 dev_dependencies:

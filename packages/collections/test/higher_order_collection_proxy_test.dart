@@ -1,4 +1,4 @@
-import 'package:platform_reflection/mirrors.dart';
+import 'package:platform_mirrors/mirrors.dart';
 import 'package:test/test.dart';
 import 'package:platform_collections/src/collection.dart';
 import 'package:platform_collections/src/higher_order_collection_proxy.dart';
@@ -24,16 +24,16 @@ void main() {
 
     setUp(() {
       // Register TestModel for reflection
-      Reflector.registerType(TestModel);
+      ReflectionRegistry.registerType(TestModel);
 
       // Register properties
-      Reflector.registerProperty(TestModel, 'name', String,
+      ReflectionRegistry.registerProperty(TestModel, 'name', String,
           isReadable: true, isWritable: true);
-      Reflector.registerProperty(TestModel, 'age', int,
+      ReflectionRegistry.registerProperty(TestModel, 'age', int,
           isReadable: true, isWritable: true);
 
       // Register methods with proper return types
-      Reflector.registerMethod(
+      ReflectionRegistry.registerMethod(
         TestModel,
         'greet',
         [], // no parameters
@@ -41,7 +41,7 @@ void main() {
         isStatic: false,
       );
 
-      Reflector.registerMethod(
+      ReflectionRegistry.registerMethod(
         TestModel,
         'setAge',
         [int], // takes an int parameter
@@ -60,17 +60,17 @@ void main() {
     });
 
     test('reflection registration is correct', () {
-      expect(Reflector.isReflectable(TestModel), isTrue,
+      expect(ReflectionRegistry.isReflectable(TestModel), isTrue,
           reason: 'TestModel should be reflectable');
 
-      final props = Reflector.getPropertyMetadata(TestModel);
+      final props = ReflectionRegistry.getPropertyMetadata(TestModel);
       expect(props, isNotNull, reason: 'Property metadata should exist');
       expect(props!['name'], isNotNull,
           reason: 'name property should be registered');
       expect(props['age'], isNotNull,
           reason: 'age property should be registered');
 
-      final methods = Reflector.getMethodMetadata(TestModel);
+      final methods = ReflectionRegistry.getMethodMetadata(TestModel);
       expect(methods, isNotNull, reason: 'Method metadata should exist');
       expect(methods!['greet'], isNotNull,
           reason: 'greet method should be registered');
@@ -155,7 +155,7 @@ void main() {
 
     tearDown(() {
       // Clean up reflection metadata after each test
-      Reflector.reset();
+      ReflectionRegistry.reset();
     });
   });
 }

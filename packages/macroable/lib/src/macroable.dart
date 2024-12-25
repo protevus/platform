@@ -1,4 +1,4 @@
-import 'package:platform_reflection/mirrors.dart';
+import 'package:platform_mirrors/mirrors.dart';
 
 /// Interface for objects that can provide methods to be mixed in
 abstract class MacroProvider {

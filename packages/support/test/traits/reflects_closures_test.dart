@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:platform_reflection/mirrors.dart';
+import 'package:platform_mirrors/mirrors.dart';
 import 'package:platform_support/src/traits/reflects_closures.dart';
 
 class TestClass with ReflectsClosures {}
@@ -16,13 +16,13 @@ void main() {
     testClass = TestClass();
 
     // Register function types
-    Reflector.register(StringIntFunction);
-    Reflector.register(VoidFunction);
-    Reflector.register(AsyncVoidFunction);
-    Reflector.register(IntFunction);
+    ReflectionRegistry.register(StringIntFunction);
+    ReflectionRegistry.register(VoidFunction);
+    ReflectionRegistry.register(AsyncVoidFunction);
+    ReflectionRegistry.register(IntFunction);
 
     // Register method metadata for each function type
-    Reflector.registerMethod(
+    ReflectionRegistry.registerMethod(
       StringIntFunction,
       'call',
       [String, int],
@@ -32,21 +32,21 @@ void main() {
       isNamed: [false, false],
     );
 
-    Reflector.registerMethod(
+    ReflectionRegistry.registerMethod(
       VoidFunction,
       'call',
       [],
       true,
     );
 
-    Reflector.registerMethod(
+    ReflectionRegistry.registerMethod(
       AsyncVoidFunction,
       'call',
       [],
       true,
     );
 
-    Reflector.registerMethod(
+    ReflectionRegistry.registerMethod(
       IntFunction,
       'call',
       [],
@@ -55,14 +55,14 @@ void main() {
   });
 
   tearDown(() {
-    Reflector.reset();
+    ReflectionRegistry.reset();
   });
 
   group('ReflectsClosures', () {
     test('getClosureParameterCount returns correct count', () {
       final closure = (String name, int age) {};
-      Reflector.register(closure.runtimeType);
-      Reflector.registerMethod(
+      ReflectionRegistry.register(closure.runtimeType);
+      ReflectionRegistry.registerMethod(
         closure.runtimeType,
         'call',
         [String, int],
@@ -76,8 +76,8 @@ void main() {
 
     test('getClosureParameterCount returns 0 for no parameters', () {
       final closure = () {};
-      Reflector.register(closure.runtimeType);
-      Reflector.registerMethod(
+      ReflectionRegistry.register(closure.runtimeType);
+      ReflectionRegistry.registerMethod(
         closure.runtimeType,
         'call',
         [],
@@ -88,8 +88,8 @@ void main() {
 
     test('getClosureParameterNames returns correct names', () {
       final closure = (String name, int age) {};
-      Reflector.register(closure.runtimeType);
-      Reflector.registerMethod(
+      ReflectionRegistry.register(closure.runtimeType);
+      ReflectionRegistry.registerMethod(
         closure.runtimeType,
         'call',
         [String, int],
@@ -104,8 +104,8 @@ void main() {
 
     test('getClosureParameterNames returns empty list for no parameters', () {
       final closure = () {};
-      Reflector.register(closure.runtimeType);
-      Reflector.registerMethod(
+      ReflectionRegistry.register(closure.runtimeType);
+      ReflectionRegistry.registerMethod(
         closure.runtimeType,
         'call',
         [],
@@ -116,8 +116,8 @@ void main() {
 
     test('getClosureParameterTypes returns correct types', () {
       final closure = (String name, int age) {};
-      Reflector.register(closure.runtimeType);
-      Reflector.registerMethod(
+      ReflectionRegistry.register(closure.runtimeType);
+      ReflectionRegistry.registerMethod(
         closure.runtimeType,
         'call',
         [String, int],
@@ -132,8 +132,8 @@ void main() {
 
     test('getClosureParameterTypes returns empty list for no parameters', () {
       final closure = () {};
-      Reflector.register(closure.runtimeType);
-      Reflector.registerMethod(
+      ReflectionRegistry.register(closure.runtimeType);
+      ReflectionRegistry.registerMethod(
         closure.runtimeType,
         'call',
         [],
@@ -144,8 +144,8 @@ void main() {
 
     test('closureHasParameter returns true for existing parameter', () {
       final closure = (String name, int age) {};
-      Reflector.register(closure.runtimeType);
-      Reflector.registerMethod(
+      ReflectionRegistry.register(closure.runtimeType);
+      ReflectionRegistry.registerMethod(
         closure.runtimeType,
         'call',
         [String, int],
@@ -160,8 +160,8 @@ void main() {
 
     test('closureHasParameter returns false for non-existent parameter', () {
       final closure = (String name, int age) {};
-      Reflector.register(closure.runtimeType);
-      Reflector.registerMethod(
+      ReflectionRegistry.register(closure.runtimeType);
+      ReflectionRegistry.registerMethod(
         closure.runtimeType,
         'call',
         [String, int],
@@ -175,8 +175,8 @@ void main() {
 
     test('isClosureVoid returns true for void closure', () {
       final closure = () {};
-      Reflector.register(closure.runtimeType);
-      Reflector.registerMethod(
+      ReflectionRegistry.register(closure.runtimeType);
+      ReflectionRegistry.registerMethod(
         closure.runtimeType,
         'call',
         [],
@@ -187,8 +187,8 @@ void main() {
 
     test('isClosureVoid returns false for non-void closure', () {
       final closure = () => 42;
-      Reflector.register(closure.runtimeType);
-      Reflector.registerMethod(
+      ReflectionRegistry.register(closure.runtimeType);
+      ReflectionRegistry.registerMethod(
         closure.runtimeType,
         'call',
         [],
@@ -199,8 +199,8 @@ void main() {
 
     test('isClosureNullable returns true for nullable closure', () {
       final closure = () => null;
-      Reflector.register(closure.runtimeType);
-      Reflector.registerMethod(
+      ReflectionRegistry.register(closure.runtimeType);
+      ReflectionRegistry.registerMethod(
         closure.runtimeType,
         'call',
         [],
@@ -211,8 +211,8 @@ void main() {
 
     test('isClosureNullable returns false for non-nullable closure', () {
       final closure = () {};
-      Reflector.register(closure.runtimeType);
-      Reflector.registerMethod(
+      ReflectionRegistry.register(closure.runtimeType);
+      ReflectionRegistry.registerMethod(
         closure.runtimeType,
         'call',
         [],
@@ -223,8 +223,8 @@ void main() {
 
     test('isClosureAsync returns true for async closure', () {
       final closure = () async {};
-      Reflector.register(closure.runtimeType);
-      Reflector.registerMethod(
+      ReflectionRegistry.register(closure.runtimeType);
+      ReflectionRegistry.registerMethod(
         closure.runtimeType,
         'call',
         [],
@@ -235,8 +235,8 @@ void main() {
 
     test('isClosureAsync returns false for sync closure', () {
       final closure = () {};
-      Reflector.register(closure.runtimeType);
-      Reflector.registerMethod(
+      ReflectionRegistry.register(closure.runtimeType);
+      ReflectionRegistry.registerMethod(
         closure.runtimeType,
         'call',
         [],

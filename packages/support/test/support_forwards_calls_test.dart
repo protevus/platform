@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:platform_support/platform_support.dart';
-import 'package:platform_reflection/mirrors.dart';
+import 'package:platform_mirrors/mirrors.dart';
 
 @reflectable
 class TargetClass {
@@ -32,18 +32,18 @@ void main() {
 
   setUp(() {
     // Register classes for reflection
-    Reflector.reset();
-    Reflector.register(TargetClass);
+    ReflectionRegistry.reset();
+    ReflectionRegistry.register(TargetClass);
 
     // Register methods
-    Reflector.registerMethod(
+    ReflectionRegistry.registerMethod(
       TargetClass,
       'getValue',
       [/* no parameters */],
       false, // not void
     );
 
-    Reflector.registerMethod(
+    ReflectionRegistry.registerMethod(
       TargetClass,
       'setValue',
       [String],
@@ -52,14 +52,14 @@ void main() {
       isRequired: [true],
     );
 
-    Reflector.registerMethod(
+    ReflectionRegistry.registerMethod(
       TargetClass,
       'chainedMethod',
       [/* no parameters */],
       false, // not void
     );
 
-    Reflector.registerMethod(
+    ReflectionRegistry.registerMethod(
       TargetClass,
       'throwingMethod',
       [/* no parameters */],

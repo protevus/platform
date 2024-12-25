@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 import 'package:platform_macroable/platform_macroable.dart';
-import 'package:platform_reflection/mirrors.dart';
+import 'package:platform_mirrors/mirrors.dart';
 
 @reflectable
 class TestClass with Macroable {}

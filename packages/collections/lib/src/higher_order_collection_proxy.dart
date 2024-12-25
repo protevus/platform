@@ -1,4 +1,4 @@
-import 'package:platform_reflection/mirrors.dart';
+import 'package:platform_mirrors/mirrors.dart';
 import 'collection.dart';
 
 /// A proxy class for higher-order collection operations.
@@ -31,7 +31,7 @@ class HigherOrderCollectionProxy<T> {
       }
 
       // Handle object property access
-      if (Reflector.isReflectable(item.runtimeType)) {
+      if (ReflectionRegistry.isReflectable(item.runtimeType)) {
         try {
           // Use direct property access
           switch (name) {
@@ -57,7 +57,7 @@ class HigherOrderCollectionProxy<T> {
       if (item == null) return null;
 
       // Handle method calls
-      if (Reflector.isReflectable(item.runtimeType)) {
+      if (ReflectionRegistry.isReflectable(item.runtimeType)) {
         try {
           // Use direct method invocation
           switch (_method) {
@@ -107,7 +107,7 @@ class HigherOrderCollectionProxy<T> {
       }
 
       // Handle object property access
-      if (Reflector.isReflectable(item.runtimeType)) {
+      if (ReflectionRegistry.isReflectable(item.runtimeType)) {
         try {
           // Use direct property access
           switch (property) {
@@ -149,7 +149,7 @@ class HigherOrderCollectionProxy<T> {
       }
 
       // Handle object property access
-      if (Reflector.isReflectable(item.runtimeType)) {
+      if (ReflectionRegistry.isReflectable(item.runtimeType)) {
         try {
           // Use direct property access
           switch (property) {
@@ -188,8 +188,9 @@ class HigherOrderCollectionProxy<T> {
       }
 
       // Handle object property access
-      if (Reflector.isReflectable(item.runtimeType)) {
-        final metadata = Reflector.getPropertyMetadata(item.runtimeType);
+      if (ReflectionRegistry.isReflectable(item.runtimeType)) {
+        final metadata =
+            ReflectionRegistry.getPropertyMetadata(item.runtimeType);
         return metadata?.containsKey(property) ?? false;
       }
 

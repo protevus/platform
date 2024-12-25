@@ -1,5 +1,5 @@
 import 'package:platform_macroable/platform_macroable.dart';
-import 'package:platform_reflection/mirrors.dart';
+import 'package:platform_mirrors/mirrors.dart';
 
 /// Provides higher-order tap functionality with macro support.
 ///
@@ -33,7 +33,7 @@ class HigherOrderTapProxy<T extends Object> with Macroable {
       return super.noSuchMethod(invocation);
     } catch (_) {
       // If not a macro, forward to target
-      final methods = Reflector.getMethodMetadata(_target.runtimeType);
+      final methods = ReflectionRegistry.getMethodMetadata(_target.runtimeType);
       if (methods == null) {
         throw NoSuchMethodError.withInvocation(_target, invocation);
       }

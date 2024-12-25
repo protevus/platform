@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:platform_reflection/mirrors.dart';
+import 'package:platform_mirrors/mirrors.dart';
 import 'package:platform_support/platform_support.dart';
 
 void main() {
@@ -10,7 +10,7 @@ void main() {
   });
 
   tearDown(() {
-    Reflector.reset();
+    ReflectionRegistry.reset();
   });
 
   group('Onceable', () {
