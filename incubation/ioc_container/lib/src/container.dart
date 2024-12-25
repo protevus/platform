@@ -642,10 +642,6 @@ class Container implements ContainerContract {
         fireAfterResolvingAttributeCallbacks(classAttributes, instance);
         _fireAfterResolvingCallbacks(concrete, instance);
 
-        // Apply after resolving callbacks
-        fireAfterResolvingAttributeCallbacks(classAttributes, instance);
-        _fireAfterResolvingCallbacks(concrete, instance);
-
         // Apply extenders after all callbacks
         for (var extender in _getExtenders(concrete)) {
           instance = extender(instance);

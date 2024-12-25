@@ -35,6 +35,72 @@ class BoundMethod {
     throw ArgumentError('Invalid callback type: ${callback.runtimeType}');
   }
 
+  static dynamic _callBoundMethod(
+      Container container, dynamic callback, Function defaultCallback,
+      [List<dynamic> parameters = const []]) {
+    if (callback is List && callback.length == 2) {
+      var instance = callback[0];
+      var method = callback[1];
+      if (instance is String) {
+        instance = container.make(instance);
+      }
+      if (method is String) {
+        if (instance is Function && method == '__invoke') {
+          return Function.apply(instance, parameters);
+        }
+        if (instance is Map && instance.containsKey(method)) {
+          // Handle the case where instance is a Map and method is a key
+          var result = instance[method];
+          return result is Function
+              ? Function.apply(result, parameters)
+              : result;
+        }
+        var instanceMirror = reflect(instance);
+        var methodSymbol = Symbol(method);
+        if (instanceMirror.type.instanceMembers.containsKey(methodSymbol)) {
+          var dependencies =
+              _getMethodDependencies(container, instance, method, parameters);
+          var result = Function.apply(
+              instanceMirror.getField(methodSymbol).reflectee, dependencies);
+          return result is Function
+              ? Function.apply(result, parameters)
+              : result;
+        } else if (method == '__invoke' && instance is Function) {
+          return Function.apply(instance, parameters);
+        } else if (instance is Type) {
+          // Handle static methods
+          var classMirror = reflectClass(instance);
+          if (classMirror.staticMembers.containsKey(Symbol(method))) {
+            var dependencies =
+                _getMethodDependencies(container, instance, method, parameters);
+            var result = Function.apply(
+                classMirror.getField(Symbol(method)).reflectee, dependencies);
+            return result is Function
+                ? Function.apply(result, parameters)
+                : result;
+          }
+        }
+        // Try to find the method in the global scope
+        var globalMethod = _findGlobalMethod(method);
+        if (globalMethod != null) {
+          var result = Function.apply(globalMethod, parameters);
+          return result is Function
+              ? Function.apply(result, parameters)
+              : result;
+        }
+        throw BindingResolutionException(
+            'Method $method not found on ${instance.runtimeType}');
+      } else if (method is Function) {
+        var result = Function.apply(method, [instance, ...parameters]);
+        return result is Function ? Function.apply(result, parameters) : result;
+      }
+    } else if (callback is Function) {
+      var result = Function.apply(callback, parameters);
+      return result is Function ? Function.apply(result, parameters) : result;
+    }
+    return Util.unwrapIfClosure(defaultCallback);
+  }
+
   static dynamic _callClass(Container container, String target,
       List<dynamic> parameters, String? defaultMethod) {
     var segments = target.split('@');
@@ -50,8 +116,11 @@ class BoundMethod {
       if (container.bound(instance)) {
         return container.make(instance);
       }
-      throw BindingResolutionException(
-          'Failed to resolve class or function: $className');
+      // If it's not bound, treat it as a string value
+      return instance;
+    }
+    if (instance is Function && method == '__invoke') {
+      return Function.apply(instance, parameters);
     }
     return _callBoundMethod(container, [instance, method], () {
       throw BindingResolutionException(
@@ -59,46 +128,17 @@ class BoundMethod {
     }, parameters);
   }
 
-  static dynamic _callBoundMethod(
-      Container container, dynamic callback, Function defaultCallback,
-      [List<dynamic> parameters = const []]) {
-    if (callback is List && callback.length == 2) {
-      var instance = callback[0];
-      var method = callback[1];
-      if (instance is String) {
-        instance = container.make(instance);
-      }
-      if (method is String) {
-        if (instance is Function && method == '__invoke') {
-          return Function.apply(instance, parameters);
+  static Function? _findGlobalMethod(String methodName) {
+    var currentMirror = currentMirrorSystem();
+    for (var library in currentMirror.libraries.values) {
+      if (library.declarations.containsKey(Symbol(methodName))) {
+        var declaration = library.declarations[Symbol(methodName)]!;
+        if (declaration is MethodMirror && declaration.isTopLevel) {
+          return library.getField(Symbol(methodName)).reflectee as Function;
         }
-        var instanceMirror = reflect(instance);
-        var methodSymbol = Symbol(method);
-        if (instanceMirror.type.instanceMembers.containsKey(methodSymbol)) {
-          var dependencies =
-              _getMethodDependencies(container, instance, method, parameters);
-          return Function.apply(
-              instanceMirror.getField(methodSymbol).reflectee, dependencies);
-        } else {
-          throw BindingResolutionException(
-              'Method $method not found on ${instance.runtimeType}');
-        }
-      } else if (method is Function) {
-        return method(instance);
       }
-    } else if (callback is Function) {
-      var dependencies =
-          _getMethodDependencies(container, callback, null, parameters);
-      return Function.apply(callback, dependencies);
     }
-    return Util.unwrapIfClosure(defaultCallback);
-  }
-
-  static dynamic _resolveInstance(Container container, dynamic instance) {
-    if (instance is String) {
-      return container.make(instance);
-    }
-    return instance;
+    return null;
   }
 
   static List _getMethodDependencies(Container container, dynamic instance,
@@ -111,12 +151,24 @@ class BoundMethod {
         _addDependencyForCallParameter(
             container, parameter, parameters, dependencies);
       }
+    } else if (instance is Map &&
+        method is String &&
+        instance.containsKey(method)) {
+      // If instance is a Map and method is a key, return the value
+      return [instance[method]];
     } else {
       // If we couldn't get a reflector, just return the original parameters
       return parameters;
     }
 
     return dependencies;
+  }
+
+  static dynamic _resolveInstance(Container container, dynamic instance) {
+    if (instance is String) {
+      return container.make(instance);
+    }
+    return instance;
   }
 
   static bool _hasInvokeMethod(String className) {
