@@ -1,13 +1,13 @@
 import 'dart:io';
 import 'package:path/path.dart' as path;
-import '../metadata/type_metadata.dart';
-import '../metadata/constructor_metadata.dart';
-import '../metadata/method_metadata.dart';
-import '../metadata/parameter_metadata.dart';
-import '../metadata/property_metadata.dart';
-import '../registry/reflection_registry.dart';
-import '../reflector/runtime_reflector.dart';
-import 'proxy_type.dart';
+import '../../metadata/type_metadata.dart';
+import '../../metadata/constructor_metadata.dart';
+import '../../metadata/method_metadata.dart';
+import '../../metadata/parameter_metadata.dart';
+import '../../metadata/property_metadata.dart';
+import '../../registry/reflection_registry.dart';
+import '../../reflector/runtime_reflector.dart';
+import '../../types/proxy_type.dart';
 
 /// Discovers and analyzes types in a package automatically.
 class PackageAnalyzer {
@@ -172,6 +172,33 @@ class PackageAnalyzer {
   ) {
     final type = _getTypeForName(className);
 
+    // Register constructors first
+    for (final constructor in constructors) {
+      // Get parameter names for named parameters
+      final parameterNames = constructor.parameters
+          .where((p) => p.isNamed)
+          .map((p) => p.name)
+          .toList();
+
+      // Get required flags for named parameters
+      final isRequired = constructor.parameters
+          .where((p) => p.isNamed)
+          .map((p) => p.isRequired)
+          .toList();
+
+      // Get isNamed flags for all parameters
+      final isNamed = constructor.parameters.map((p) => p.isNamed).toList();
+
+      ReflectionRegistry.registerConstructor(
+        type,
+        constructor.name,
+        parameterTypes: constructor.parameterTypes,
+        parameterNames: parameterNames.isNotEmpty ? parameterNames : null,
+        isRequired: isRequired.isNotEmpty ? isRequired : null,
+        isNamed: isNamed.isNotEmpty ? isNamed : null,
+      );
+    }
+
     // Register properties
     properties.forEach((name, metadata) {
       ReflectionRegistry.registerProperty(
@@ -212,23 +239,7 @@ class PackageAnalyzer {
       );
     });
 
-    // Register constructors
-    for (final constructor in constructors) {
-      // Get parameter names for named parameters
-      final parameterNames = constructor.parameters
-          .where((p) => p.isNamed)
-          .map((p) => p.name)
-          .toList();
-
-      ReflectionRegistry.registerConstructor(
-        type,
-        constructor.name,
-        parameterTypes: constructor.parameterTypes,
-        parameterNames: parameterNames.isNotEmpty ? parameterNames : null,
-      );
-    }
-
-    // Create type metadata
+    // Create and register type metadata last
     final metadata = TypeMetadata(
       type: type,
       name: className,
@@ -259,7 +270,6 @@ class PackageAnalyzer {
           const [],
     );
 
-    // Register metadata with reflection system
     ReflectionRegistry.registerTypeMetadata(type, metadata);
   }
 
@@ -513,142 +523,156 @@ class PackageAnalyzer {
 
     print('Found ${matches.length} constructor matches:');
     for (final match in matches) {
-      final fullMatch = classContent.substring(match.start, match.end);
-      print('Full match: $fullMatch');
+      final matchContent = classContent.substring(match.start, match.end);
+      print('Full match: $matchContent');
       print('Group 1 (name): ${match.group(1)}');
       print('Group 2 (params): ${match.group(2)}');
 
-      // Get the line containing this match
-      final lineStart = classContent.lastIndexOf('\n', match.start) + 1;
-      final lineEnd = classContent.indexOf('\n', match.start);
-      final line = classContent.substring(
-          lineStart, lineEnd > 0 ? lineEnd : classContent.length);
-
-      // Skip if this is part of a static method or return statement
-      if (line.trim().startsWith('static') ||
-          line.trim().startsWith('return')) {
-        continue;
-      }
+      // Get the line before this match
+      final beforeLineStart =
+          classContent.lastIndexOf('\n', match.start - 1) + 1;
+      final beforeLineEnd = match.start - 1;
+      final beforeLine = beforeLineStart < beforeLineEnd
+          ? classContent.substring(beforeLineStart, beforeLineEnd).trim()
+          : '';
 
       final name = match.group(1) ?? '';
       final params = match.group(2) ?? '';
-      final isFactory = line.trim().startsWith('factory');
-
-      // For factory constructors without a name, use 'create'
-      final constructorName = isFactory && name.isEmpty ? 'create' : name;
+      final isFactory = matchContent.trim().startsWith('factory');
+      final isStatic = beforeLine.startsWith('static');
 
       // Parse parameters
       final parameterTypes = _extractParameterTypes(params);
       final parameters = _extractParameters(params);
 
-      // Add constructor
-      constructors.add(ConstructorMetadata(
-        name: constructorName,
-        parameterTypes: parameterTypes,
-        parameters: parameters,
-      ));
+      // Add constructor with appropriate name
+      final constructorName = isFactory && name.isEmpty ? 'create' : name;
+
+      if (isStatic) {
+        // Handle static factory methods
+        if (matchContent.trim().contains('return $className')) {
+          // Add both the static factory method and its constructor call
+          constructors.add(ConstructorMetadata(
+            name: name,
+            parameterTypes: parameterTypes,
+            parameters: parameters,
+          ));
+
+          // Extract the constructor call parameters
+          final callMatch =
+              RegExp('$className\\(([^)]*)\\)').firstMatch(matchContent);
+          if (callMatch != null) {
+            final callParams = callMatch.group(1) ?? '';
+            final callParamTypes = _extractParameterTypes(callParams);
+            final callParameters = _extractParameters(callParams);
+
+            constructors.add(ConstructorMetadata(
+              name: '',
+              parameterTypes: callParamTypes,
+              parameters: callParameters,
+            ));
+          }
+        }
+      } else {
+        // Regular constructor
+        constructors.add(ConstructorMetadata(
+          name: constructorName,
+          parameterTypes: parameterTypes,
+          parameters: parameters,
+        ));
+
+        // For factory constructors, also add a default constructor
+        if (isFactory && name.isNotEmpty) {
+          constructors.add(ConstructorMetadata(
+            name: '',
+            parameterTypes: parameterTypes,
+            parameters: parameters,
+          ));
+        }
+      }
     }
 
     print('Returning ${constructors.length} constructors');
     return constructors;
   }
 
-  /// Extracts parameter types from a parameter list string.
-  static List<Type> _extractParameterTypes(String params) {
+  /// Extracts parameter types and metadata from a parameter list string.
+  static (List<Type>, List<ParameterMetadata>) _extractParameterInfo(
+      String params) {
     final types = <Type>[];
-    final paramRegex = RegExp(
-      r'(?:required\s+)?(\w+(?:<[^>]+>)?)\s+(?:this\.)?(\w+)(?:\s*\?)?',
-      multiLine: true,
-    );
-
-    // Split parameters by commas, handling both positional and named parameters
-    final parts =
-        params.split(',').map((p) => p.trim()).where((p) => p.isNotEmpty);
-    for (final part in parts) {
-      if (part.startsWith('{') || part.endsWith('}')) {
-        // Handle named parameter section
-        final namedParams = part.replaceAll(RegExp(r'[{}]'), '').trim();
-        if (namedParams.isNotEmpty) {
-          final namedParts = namedParams
-              .split(',')
-              .map((p) => p.trim())
-              .where((p) => p.isNotEmpty);
-          for (final namedPart in namedParts) {
-            final match = paramRegex.firstMatch(namedPart);
-            if (match != null) {
-              types.add(_getTypeForName(match.group(1)!));
-            }
-          }
-        }
-      } else {
-        // Handle positional parameter
-        final match = paramRegex.firstMatch(part);
-        if (match != null) {
-          types.add(_getTypeForName(match.group(1)!));
-        }
-      }
-    }
-
-    return types;
-  }
-
-  /// Extracts parameters from a parameter list string.
-  static List<ParameterMetadata> _extractParameters(String params) {
     final parameters = <ParameterMetadata>[];
     final paramRegex = RegExp(
       r'(?:required\s+)?(\w+(?:<[^>]+>)?)\s+(?:this\.)?(\w+)(?:\s*\?)?(?:\s*=\s*([^,}]+))?',
       multiLine: true,
     );
 
-    // Split parameters by commas, handling both positional and named parameters
-    final parts =
-        params.split(',').map((p) => p.trim()).where((p) => p.isNotEmpty);
-    for (final part in parts) {
-      if (part.startsWith('{') || part.endsWith('}')) {
-        // Handle named parameter section
-        final namedParams = part.replaceAll(RegExp(r'[{}]'), '').trim();
-        if (namedParams.isNotEmpty) {
-          final namedParts = namedParams
-              .split(',')
-              .map((p) => p.trim())
-              .where((p) => p.isNotEmpty);
-          for (final namedPart in namedParts) {
-            final match = paramRegex.firstMatch(namedPart);
-            if (match != null) {
-              final type = match.group(1)!;
-              final name = match.group(2)!;
-              final defaultValue = match.group(3);
-              final isRequired = namedPart.contains('required');
+    // Find named parameter section
+    final namedStart = params.indexOf('{');
+    final namedEnd = params.lastIndexOf('}');
+    final hasNamedParams = namedStart != -1 && namedEnd != -1;
 
-              parameters.add(ParameterMetadata(
-                name: name,
-                type: _getTypeForName(type),
-                isRequired: isRequired,
-                isNamed: true,
-                defaultValue: defaultValue != null
-                    ? _parseDefaultValue(defaultValue)
-                    : null,
-              ));
-            }
-          }
-        }
-      } else {
-        // Handle positional parameter
-        final match = paramRegex.firstMatch(part);
+    // Handle positional parameters
+    final positionalPart =
+        hasNamedParams ? params.substring(0, namedStart).trim() : params.trim();
+    final positionalParams = positionalPart.split(',').map((p) => p.trim());
+    for (final param in positionalParams) {
+      if (param.isEmpty) continue;
+      final match = paramRegex.firstMatch(param);
+      if (match != null) {
+        final type = match.group(1)!;
+        final name = match.group(2)!;
+        final defaultValue = match.group(3);
+
+        types.add(_getTypeForName(type));
+        parameters.add(ParameterMetadata(
+          name: name,
+          type: _getTypeForName(type),
+          isRequired: true,
+          isNamed: false,
+          defaultValue:
+              defaultValue != null ? _parseDefaultValue(defaultValue) : null,
+        ));
+      }
+    }
+
+    // Handle named parameters if present
+    if (hasNamedParams) {
+      final namedPart = params.substring(namedStart + 1, namedEnd).trim();
+      final namedParams = namedPart.split(',').map((p) => p.trim());
+      for (final param in namedParams) {
+        if (param.isEmpty) continue;
+        final match = paramRegex.firstMatch(param);
         if (match != null) {
           final type = match.group(1)!;
           final name = match.group(2)!;
+          final defaultValue = match.group(3);
+          final isRequired = param.contains('required $type');
 
+          types.add(_getTypeForName(type));
           parameters.add(ParameterMetadata(
             name: name,
             type: _getTypeForName(type),
-            isRequired: true,
-            isNamed: false,
+            isRequired: isRequired,
+            isNamed: true,
+            defaultValue:
+                defaultValue != null ? _parseDefaultValue(defaultValue) : null,
           ));
         }
       }
     }
 
+    return (types, parameters);
+  }
+
+  /// Extracts parameter types from a parameter list string.
+  static List<Type> _extractParameterTypes(String params) {
+    final (types, _) = _extractParameterInfo(params);
+    return types;
+  }
+
+  /// Extracts parameters from a parameter list string.
+  static List<ParameterMetadata> _extractParameters(String params) {
+    final (_, parameters) = _extractParameterInfo(params);
     return parameters;
   }
 

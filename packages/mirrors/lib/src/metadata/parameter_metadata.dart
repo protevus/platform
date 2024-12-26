@@ -1,4 +1,4 @@
-/// Represents metadata about a parameter.
+/// Metadata about a method or constructor parameter.
 class ParameterMetadata {
   /// The name of the parameter.
   final String name;
@@ -6,25 +6,24 @@ class ParameterMetadata {
   /// The type of the parameter.
   final Type type;
 
-  /// Whether this parameter is required.
+  /// Whether the parameter is required.
   final bool isRequired;
 
-  /// Whether this parameter is named.
+  /// Whether the parameter is named.
   final bool isNamed;
 
-  /// The default value for this parameter, if any.
-  final Object? defaultValue;
+  /// Whether the parameter is nullable.
+  final bool isNullable;
 
-  /// Any attributes (annotations) on this parameter.
-  final List<Object> attributes;
+  /// The default value of the parameter, if any.
+  final dynamic defaultValue;
 
-  /// Creates a new parameter metadata instance.
-  const ParameterMetadata({
+  ParameterMetadata({
     required this.name,
     required this.type,
-    required this.isRequired,
+    this.isRequired = true,
     this.isNamed = false,
+    this.isNullable = false,
     this.defaultValue,
-    this.attributes = const [],
   });
 }

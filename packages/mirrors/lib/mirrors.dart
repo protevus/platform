@@ -13,11 +13,11 @@ export 'src/annotations/reflectable.dart';
 export 'src/core/mirror_system.dart';
 
 /// Discovery
-export 'src/discovery/type_analyzer.dart';
-export 'src/discovery/library_analyzer.dart';
+export 'src/discovery/analyzers/library_analyzer.dart';
+export 'src/discovery/analyzers/type_analyzer.dart';
+export 'src/discovery/analyzers/package_analyzer.dart';
 export 'src/discovery/runtime_library_discoverer.dart';
 export 'src/discovery/runtime_type_discoverer.dart';
-export 'src/discovery/package_analyzer.dart';
 
 /// Discovery Models
 export 'src/discovery/models/models.dart';
@@ -29,7 +29,9 @@ export 'src/exceptions/not_reflectable_exception.dart';
 export 'src/exceptions/reflection_exception.dart';
 
 /// Metadata
+export 'src/metadata/class_metadata.dart';
 export 'src/metadata/constructor_metadata.dart';
+export 'src/metadata/extended_method_metadata.dart';
 export 'src/metadata/function_metadata.dart';
 export 'src/metadata/method_metadata.dart';
 export 'src/metadata/parameter_metadata.dart';
