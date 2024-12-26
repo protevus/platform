@@ -504,7 +504,7 @@ class PackageAnalyzer {
     // Extract all constructor declarations using regex
     final constructorPattern = '(?:const\\s+)?(?:factory\\s+)?' +
         RegExp.escape(className) +
-        '(?:\\.([\\w.]+))?\\s*\\(([^)]*?)\\)(?:\\s*:[^{;]*?)?(?:\\s*(?:=>|{|;))';
+        '(?:\\.([\\w.]+))?\\s*\\(([^)]*)\\)(?:\\s*:[^{;]*?)?(?:\\s*(?:=>|{|;))';
     print('Constructor pattern: $constructorPattern');
 
     final constructorRegex =
@@ -517,49 +517,76 @@ class PackageAnalyzer {
       print('Full match: $fullMatch');
       print('Group 1 (name): ${match.group(1)}');
       print('Group 2 (params): ${match.group(2)}');
-    }
 
-    // Use a map to deduplicate constructors by name
-    final constructorMap = <String, ConstructorMetadata>{};
+      // Get the line containing this match
+      final lineStart = classContent.lastIndexOf('\n', match.start) + 1;
+      final lineEnd = classContent.indexOf('\n', match.start);
+      final line = classContent.substring(
+          lineStart, lineEnd > 0 ? lineEnd : classContent.length);
 
-    // Process constructors
-    for (final match in matches) {
-      final fullMatch = classContent.substring(match.start, match.end);
+      // Skip if this is part of a static method or return statement
+      if (line.trim().startsWith('static') ||
+          line.trim().startsWith('return')) {
+        continue;
+      }
+
       final name = match.group(1) ?? '';
       final params = match.group(2) ?? '';
-      final isFactory = fullMatch.trim().startsWith('factory');
+      final isFactory = line.trim().startsWith('factory');
 
       // For factory constructors without a name, use 'create'
       final constructorName = isFactory && name.isEmpty ? 'create' : name;
 
-      // Only add if we haven't seen this constructor name before
-      if (!constructorMap.containsKey(constructorName)) {
-        constructorMap[constructorName] = ConstructorMetadata(
-          name: constructorName,
-          parameterTypes: _extractParameterTypes(params),
-          parameters: _extractParameters(params),
-        );
-      }
+      // Parse parameters
+      final parameterTypes = _extractParameterTypes(params);
+      final parameters = _extractParameters(params);
+
+      // Add constructor
+      constructors.add(ConstructorMetadata(
+        name: constructorName,
+        parameterTypes: parameterTypes,
+        parameters: parameters,
+      ));
     }
 
-    final result = constructorMap.values.toList();
-    print('Returning ${result.length} constructors');
-    return result;
+    print('Returning ${constructors.length} constructors');
+    return constructors;
   }
 
   /// Extracts parameter types from a parameter list string.
   static List<Type> _extractParameterTypes(String params) {
     final types = <Type>[];
-
     final paramRegex = RegExp(
       r'(?:required\s+)?(\w+(?:<[^>]+>)?)\s+(?:this\.)?(\w+)(?:\s*\?)?',
       multiLine: true,
     );
-    final matches = paramRegex.allMatches(params);
 
-    for (final match in matches) {
-      final type = match.group(1)!;
-      types.add(_getTypeForName(type));
+    // Split parameters by commas, handling both positional and named parameters
+    final parts =
+        params.split(',').map((p) => p.trim()).where((p) => p.isNotEmpty);
+    for (final part in parts) {
+      if (part.startsWith('{') || part.endsWith('}')) {
+        // Handle named parameter section
+        final namedParams = part.replaceAll(RegExp(r'[{}]'), '').trim();
+        if (namedParams.isNotEmpty) {
+          final namedParts = namedParams
+              .split(',')
+              .map((p) => p.trim())
+              .where((p) => p.isNotEmpty);
+          for (final namedPart in namedParts) {
+            final match = paramRegex.firstMatch(namedPart);
+            if (match != null) {
+              types.add(_getTypeForName(match.group(1)!));
+            }
+          }
+        }
+      } else {
+        // Handle positional parameter
+        final match = paramRegex.firstMatch(part);
+        if (match != null) {
+          types.add(_getTypeForName(match.group(1)!));
+        }
+      }
     }
 
     return types;
@@ -568,26 +595,58 @@ class PackageAnalyzer {
   /// Extracts parameters from a parameter list string.
   static List<ParameterMetadata> _extractParameters(String params) {
     final parameters = <ParameterMetadata>[];
-
     final paramRegex = RegExp(
-      r'(?:required\s+)?(\w+(?:<[^>]+>)?)\s+(?:this\.)?(\w+)(?:\s*\?)?(?:\s*=\s*([^,}]+))?(?:,|\s*$|\s*\}|\s*\)|$)',
+      r'(?:required\s+)?(\w+(?:<[^>]+>)?)\s+(?:this\.)?(\w+)(?:\s*\?)?(?:\s*=\s*([^,}]+))?',
       multiLine: true,
     );
-    final matches = paramRegex.allMatches(params);
 
-    for (final match in matches) {
-      final type = match.group(1)!;
-      final name = match.group(2)!;
-      final defaultValue = match.group(3);
+    // Split parameters by commas, handling both positional and named parameters
+    final parts =
+        params.split(',').map((p) => p.trim()).where((p) => p.isNotEmpty);
+    for (final part in parts) {
+      if (part.startsWith('{') || part.endsWith('}')) {
+        // Handle named parameter section
+        final namedParams = part.replaceAll(RegExp(r'[{}]'), '').trim();
+        if (namedParams.isNotEmpty) {
+          final namedParts = namedParams
+              .split(',')
+              .map((p) => p.trim())
+              .where((p) => p.isNotEmpty);
+          for (final namedPart in namedParts) {
+            final match = paramRegex.firstMatch(namedPart);
+            if (match != null) {
+              final type = match.group(1)!;
+              final name = match.group(2)!;
+              final defaultValue = match.group(3);
+              final isRequired = namedPart.contains('required');
 
-      parameters.add(ParameterMetadata(
-        name: name,
-        type: _getTypeForName(type),
-        isRequired: params.contains('required $type $name'),
-        isNamed: params.contains('{') && params.contains('}'),
-        defaultValue:
-            defaultValue != null ? _parseDefaultValue(defaultValue) : null,
-      ));
+              parameters.add(ParameterMetadata(
+                name: name,
+                type: _getTypeForName(type),
+                isRequired: isRequired,
+                isNamed: true,
+                defaultValue: defaultValue != null
+                    ? _parseDefaultValue(defaultValue)
+                    : null,
+              ));
+            }
+          }
+        }
+      } else {
+        // Handle positional parameter
+        final match = paramRegex.firstMatch(part);
+        if (match != null) {
+          final type = match.group(1)!;
+          final name = match.group(2)!;
+
+          parameters.add(ParameterMetadata(
+            name: name,
+            type: _getTypeForName(type),
+            isRequired: true,
+            isNamed: false,
+          ));
+        }
+      }
     }
 
     return parameters;
@@ -597,23 +656,22 @@ class PackageAnalyzer {
   static String _extractClassContent(String source, String className) {
     // Find the class declaration
     final classRegex = RegExp(
-      '(?:abstract\\s+)?class\\s+' + RegExp.escape(className) + '[^{]*{',
+      '(?:abstract\\s+)?class\\s+' + RegExp.escape(className) + '[^{]*\\{',
     );
     final match = classRegex.firstMatch(source);
     if (match == null) return '';
 
-    final startIndex = match.start;
-    var bracketCount = 1;
+    // Find the matching closing brace
+    var bracketCount = 0;
     var inString = false;
     var stringChar = '';
-    var content = source.substring(startIndex, match.end);
+    var endIndex = source.length;
 
-    // Extract everything between the opening and closing braces
-    for (var i = match.end; i < source.length; i++) {
+    for (var i = match.start; i < source.length; i++) {
       final char = source[i];
 
       // Handle string literals to avoid counting braces inside strings
-      if ((char == '"' || char == "'") && source[i - 1] != '\\') {
+      if ((char == '"' || char == "'") && (i == 0 || source[i - 1] != '\\')) {
         if (!inString) {
           inString = true;
           stringChar = char;
@@ -627,14 +685,16 @@ class PackageAnalyzer {
           bracketCount++;
         } else if (char == '}') {
           bracketCount--;
-          if (bracketCount == 0) {
-            content += source.substring(match.end, i + 1);
+          if (bracketCount == 0 && i > match.end) {
+            endIndex = i + 1;
             break;
           }
         }
       }
     }
 
+    // Include the class declaration and its content
+    final content = source.substring(match.start, endIndex);
     return content;
   }
 
