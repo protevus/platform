@@ -17,7 +17,7 @@ class RuntimeTypeDiscoverer {
     ReflectionRegistry.register(type);
 
     // Get mirror system and analyze type
-    //final mirrorSystem = MirrorSystem.current();
+    final mirrorSystem = MirrorSystem.current();
     final typeInfo = TypeAnalyzer.analyze(type);
 
     // Convert properties, methods, and constructors to metadata

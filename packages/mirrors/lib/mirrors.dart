@@ -4,6 +4,7 @@ import 'package:platform_contracts/contracts.dart';
 
 import 'src/core/mirror_system.dart';
 import 'src/mirrors/instance_mirror.dart';
+import 'src/reflector/runtime_reflector.dart';
 
 /// Annotations
 export 'src/annotations/reflectable.dart';
@@ -16,6 +17,7 @@ export 'src/discovery/type_analyzer.dart';
 export 'src/discovery/library_analyzer.dart';
 export 'src/discovery/runtime_library_discoverer.dart';
 export 'src/discovery/runtime_type_discoverer.dart';
+export 'src/discovery/package_analyzer.dart';
 
 /// Discovery Models
 export 'src/discovery/models/models.dart';
@@ -57,6 +59,9 @@ export 'src/registry/reflection_registry.dart';
 
 /// Types
 export 'src/types/special_types.dart';
+
+// Export the runtime reflector instance globally
+final reflector = RuntimeReflector.instance;
 
 /// Reflects an instance.
 InstanceMirrorContract reflect(dynamic reflectee) {

@@ -7,9 +7,11 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
-  platform_contracts: ^0.1.0
-  meta: ^1.9.0
   collection: ^1.17.0
+  meta: ^1.9.0
+  path: ^1.9.1
+  platform_contracts: ^0.1.0
+  
 
 dev_dependencies:
   test: ^1.24.0
