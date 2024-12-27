@@ -284,13 +284,15 @@ class ReflectedParameter {
   final ReflectedType type;
   final bool isRequired;
   final bool isNamed;
+  final bool isVariadic;
 
   const ReflectedParameter(
-      this.name, this.annotations, this.type, this.isRequired, this.isNamed);
+      this.name, this.annotations, this.type, this.isRequired, this.isNamed,
+      {this.isVariadic = false});
 
   @override
   int get hashCode =>
-      hashObjects([name, annotations, type, isRequired, isNamed]);
+      hashObjects([name, annotations, type, isRequired, isNamed, isVariadic]);
 
   @override
   bool operator ==(other) =>
@@ -300,7 +302,8 @@ class ReflectedParameter {
           .equals(other.annotations, annotations) &&
       other.type == type &&
       other.isRequired == isRequired &&
-      other.isNamed == isNamed;
+      other.isNamed == isNamed &&
+      other.isVariadic == isVariadic;
 }
 
 class ReflectedTypeParameter {

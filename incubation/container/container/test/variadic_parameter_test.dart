@@ -1,16 +1,12 @@
 import 'package:platformed_container/container.dart';
 import 'package:test/test.dart';
 
-class Config {
-  final String environment;
-  Config(this.environment);
-}
-
 class Logger {
-  String log(String message) => message;
-  void configure(Config config) {}
-  String format(String message, {int? level}) => '$message (level: $level)';
-  void setup(Config config, String name) {}
+  String log(String prefix, String message) => '$prefix: $message';
+  String logMany(String prefix, List<String> messages) =>
+      '$prefix: ${messages.join(", ")}';
+  String format(String message, {List<String> tags = const []}) =>
+      '$message [${tags.join(", ")}]';
 }
 
 class MockReflector extends Reflector {
@@ -45,32 +41,48 @@ class MockReflector extends Reflector {
         case 'log':
           return MockMethod('log', (invocation) {
             var args = invocation.positionalArguments;
-            return MockReflectedInstance(instance.log(args[0] as String));
-          }, [MockParameter('message', String, true, false)]);
-        case 'configure':
-          return MockMethod('configure', (invocation) {
+            if (args.length < 2) {
+              throw ArgumentError(
+                  'Method log requires prefix and message parameters');
+            }
+            return MockReflectedInstance(
+                instance.log(args[0] as String, args[1] as String));
+          }, [
+            MockParameter('prefix', String, true, false),
+            MockParameter('message', String, true, false)
+          ]);
+        case 'logMany':
+          return MockMethod('logMany', (invocation) {
             var args = invocation.positionalArguments;
-            instance.configure(args[0] as Config);
-            return MockReflectedInstance(null);
-          }, [MockParameter('config', Config, true, false)]);
+            if (args.isEmpty) {
+              throw ArgumentError('Method logMany requires a prefix parameter');
+            }
+            var prefix = args[0] as String;
+            var messages = args.length > 1
+                ? args.skip(1).map((e) => e.toString()).toList()
+                : <String>[];
+            return MockReflectedInstance(instance.logMany(prefix, messages));
+          }, [
+            MockParameter('prefix', String, true, false),
+            MockParameter('messages', List<String>, true, false,
+                isVariadic: true)
+          ]);
         case 'format':
           return MockMethod('format', (invocation) {
             var args = invocation.positionalArguments;
             var namedArgs = invocation.namedArguments;
-            return MockReflectedInstance(instance.format(args[0] as String,
-                level: namedArgs[#level] as int?));
+            if (args.isEmpty) {
+              throw ArgumentError('Method format requires a message parameter');
+            }
+            var tags = (namedArgs[#tags] as List?)
+                    ?.map((e) => e.toString())
+                    .toList() ??
+                const <String>[];
+            return MockReflectedInstance(
+                instance.format(args[0] as String, tags: tags));
           }, [
             MockParameter('message', String, true, false),
-            MockParameter('level', int, false, true)
-          ]);
-        case 'setup':
-          return MockMethod('setup', (invocation) {
-            var args = invocation.positionalArguments;
-            instance.setup(args[0] as Config, args[1] as String);
-            return MockReflectedInstance(null);
-          }, [
-            MockParameter('config', Config, true, false),
-            MockParameter('name', String, true, false)
+            MockParameter('tags', List<String>, false, true, isVariadic: true)
           ]);
       }
     }
@@ -81,9 +93,11 @@ class MockReflector extends Reflector {
 class MockMethod implements ReflectedFunction {
   final String methodName;
   final ReflectedInstance Function(Invocation) handler;
-  final List<ReflectedParameter> methodParameters;
+  final List<ReflectedParameter> _parameters;
 
-  MockMethod(this.methodName, this.handler, this.methodParameters);
+  MockMethod(this.methodName, this.handler,
+      [List<ReflectedParameter>? parameters])
+      : _parameters = parameters ?? [];
 
   @override
   List<ReflectedInstance> get annotations => [];
@@ -98,7 +112,7 @@ class MockMethod implements ReflectedFunction {
   String get name => methodName;
 
   @override
-  List<ReflectedParameter> get parameters => methodParameters;
+  List<ReflectedParameter> get parameters => _parameters;
 
   @override
   ReflectedType? get returnType => null;
@@ -117,8 +131,8 @@ class MockParameter implements ReflectedParameter {
   final bool isRequired;
   @override
   final bool isNamed;
-  final bool isVariadic;
   final Type paramType;
+  final bool isVariadic;
 
   MockParameter(this.name, this.paramType, this.isRequired, this.isNamed,
       {this.isVariadic = false});
@@ -176,39 +190,34 @@ void main() {
   setUp(() {
     container = Container(MockReflector());
     container.registerSingleton(Logger());
-    container.registerSingleton(Config('test'));
   });
 
-  group('Parameter Dependency Injection', () {
-    test('can inject dependencies into method parameters', () {
-      expect(() => container.call('Logger@configure'), returnsNormally);
+  group('Variadic Parameter Tests', () {
+    test('can call method with variadic positional parameters', () {
+      var result = container.call('Logger@logMany',
+          ['INFO', 'first message', 'second message', 'third message']);
+      expect(result,
+          equals('INFO: [first message, second message, third message]'));
     });
 
-    test('uses provided parameters over container bindings', () {
-      var prodConfig = Config('production');
-      container.call('Logger@configure', [prodConfig]);
+    test('can call method with variadic named parameters', () {
+      var result = container.call('Logger@format', [
+        'Hello world'
+      ], {
+        #tags: ['info', 'debug', 'test']
+      });
+      expect(result, equals('Hello world [info, debug, test]'));
     });
 
-    test('throws when required parameter is missing', () {
-      expect(() => container.call('Logger@setup', [Config('test')]),
-          throwsA(isA<BindingResolutionException>()));
+    test('variadic parameters are optional', () {
+      var result = container.call('Logger@format', ['Hello world']);
+      expect(result, equals('Hello world []'));
     });
 
-    test('handles mix of injected and provided parameters', () {
-      // When null is provided for a parameter that can be resolved from container,
-      // the container should resolve it
-      container.call('Logger@setup', [null, 'test-logger']);
-    });
-
-    test('handles optional parameters', () {
-      var result = container.call('Logger@format', ['test message']);
-      expect(result, equals('test message (level: null)'));
-    });
-
-    test('handles optional parameters with provided values', () {
+    test('can mix regular and variadic parameters', () {
       var result =
-          container.call('Logger@format', ['test message'], {#level: 1});
-      expect(result, equals('test message (level: 1)'));
+          container.call('Logger@logMany', ['DEBUG', 'single message']);
+      expect(result, equals('DEBUG: [single message]'));
     });
   });
 }

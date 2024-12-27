@@ -112,9 +112,11 @@ class MockParameter implements ReflectedParameter {
   final bool isRequired;
   @override
   final bool isNamed;
+  final bool isVariadic;
   final Type paramType;
 
-  MockParameter(this.name, this.paramType, this.isRequired, this.isNamed);
+  MockParameter(this.name, this.paramType, this.isRequired, this.isNamed,
+      {this.isVariadic = false});
 
   @override
   List<ReflectedInstance> get annotations => [];

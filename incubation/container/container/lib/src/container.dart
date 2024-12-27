@@ -1072,16 +1072,24 @@ class Container {
 
     // Resolve each parameter
     for (var param in methodParams) {
-      // If a value was provided for this parameter position, use it
-      if (paramIndex < parameters.length) {
-        var value = parameters[paramIndex++];
-        // If null was provided and we can resolve from container, do so
-        if (value == null && has(param.type.reflectedType)) {
-          resolvedParams.add(make(param.type.reflectedType));
-        } else {
-          resolvedParams.add(value);
+      // Handle variadic parameters
+      if (param.isVariadic) {
+        // Collect all remaining parameters into a list
+        var variadicArgs = parameters.skip(paramIndex).toList();
+        resolvedParams.add(variadicArgs);
+        break; // Variadic parameter must be last
+      } else {
+        // If a value was provided for this parameter position, use it
+        if (paramIndex < parameters.length) {
+          var value = parameters[paramIndex++];
+          // If null was provided and we can resolve from container, do so
+          if (value == null && has(param.type.reflectedType)) {
+            resolvedParams.add(make(param.type.reflectedType));
+          } else {
+            resolvedParams.add(value);
+          }
+          continue;
         }
-        continue;
       }
 
       // Otherwise try to resolve from container
