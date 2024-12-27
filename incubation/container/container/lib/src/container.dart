@@ -1248,6 +1248,18 @@ class Container {
     bindIf<T>(concrete, singleton: true);
   }
 
+  /// Make an instance with parameters
+  ///
+  /// This is an alias for making an instance while providing parameters.
+  /// It's equivalent to using withParameters() with make().
+  ///
+  /// ```dart
+  /// var logger = container.makeWith<Logger>({'level': 'debug'});
+  /// ```
+  T makeWith<T>(Map<String, dynamic> parameters, [Type? type]) {
+    return withParameters(parameters, () => make<T>(type));
+  }
+
   /// Create a factory binding for deferred resolution
   ///
   /// This method allows you to create a factory binding that will be resolved
