@@ -1011,6 +1011,28 @@ class Container {
     return null;
   }
 
+  /// Operator overload for array-style access to container bindings.
+  ///
+  /// This allows you to get instances from the container using array syntax:
+  /// ```dart
+  /// var logger = container[Logger];
+  /// ```
+  dynamic operator [](Type type) => make(type);
+
+  /// Operator overload for array-style binding registration.
+  ///
+  /// This allows you to register bindings using array syntax:
+  /// ```dart
+  /// container[Logger] = ConsoleLogger();
+  /// ```
+  void operator []=(Type type, dynamic value) {
+    if (value is Function) {
+      registerFactory(value as dynamic Function(Container), as: type);
+    } else {
+      registerSingleton(value, as: type);
+    }
+  }
+
   /// Check if we're in danger of a circular dependency.
   void _checkCircularDependency(Type type) {
     if (_buildStack.contains(type)) {
