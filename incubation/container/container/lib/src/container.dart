@@ -1157,6 +1157,30 @@ class Container {
     bind(abstract).to(concrete);
   }
 
+  /// Register a binding if it hasn't already been registered
+  void bindIf<T>(dynamic concrete, {bool singleton = false}) {
+    if (!has<T>()) {
+      if (singleton) {
+        if (concrete is Function) {
+          registerLazySingleton<T>(concrete as T Function(Container));
+        } else {
+          registerSingleton<T>(concrete as T);
+        }
+      } else {
+        if (concrete is Function) {
+          registerFactory<T>(concrete as T Function(Container));
+        } else {
+          registerFactory<T>((c) => concrete as T);
+        }
+      }
+    }
+  }
+
+  /// Register a singleton if it hasn't already been registered
+  void singletonIf<T>(dynamic concrete) {
+    bindIf<T>(concrete, singleton: true);
+  }
+
   /// Register all attribute-based bindings for a type
   void registerAttributeBindings(Type type) {
     var annotations = reflector.getAnnotations(type);
