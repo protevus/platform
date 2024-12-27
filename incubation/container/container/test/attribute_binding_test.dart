@@ -235,9 +235,19 @@ class MockReflectedClass extends ReflectedType implements ReflectedClass {
     // Handle List<Logger> specially
     if (reflectedType == List<Logger>) {
       var loggers = <Logger>[];
-      for (var arg in positionalArguments) {
-        if (arg is Logger) {
-          loggers.add(arg);
+      if (positionalArguments.isNotEmpty) {
+        if (positionalArguments[0] is List) {
+          for (var item in positionalArguments[0] as List) {
+            if (item is Logger) {
+              loggers.add(item);
+            }
+          }
+        } else {
+          for (var item in positionalArguments) {
+            if (item is Logger) {
+              loggers.add(item);
+            }
+          }
         }
       }
       return MockReflectedInstance(loggers);
@@ -252,18 +262,18 @@ class MockReflectedClass extends ReflectedType implements ReflectedClass {
         constructor.parameters, positionalArguments, namedArguments);
 
     if (reflectedType == Service) {
-      var loggers = <Logger>[];
+      var allLoggers = <Logger>[];
       if (positionalArguments[2] is List) {
         for (var item in positionalArguments[2] as List) {
           if (item is Logger) {
-            loggers.add(item);
+            allLoggers.add(item);
           }
         }
       }
       return MockReflectedInstance(Service(
         positionalArguments[0] as Logger,
         positionalArguments[1] as Logger,
-        loggers,
+        allLoggers,
       ));
     }
     if (reflectedType == ConsoleLogger) {
@@ -286,10 +296,20 @@ class MockReflectedClass extends ReflectedType implements ReflectedClass {
 
   @override
   bool isAssignableTo(ReflectedType? other) {
+    // Handle primitive types and exact matches
+    if (reflectedType == other?.reflectedType) {
+      return true;
+    }
+    // Handle Logger implementations
     if (reflectedType == ConsoleLogger && other?.reflectedType == Logger) {
       return true;
     }
     if (reflectedType == FileLogger && other?.reflectedType == Logger) {
+      return true;
+    }
+    // Handle List<Logger>
+    if (reflectedType.toString() == 'List<Logger>' &&
+        other?.reflectedType.toString() == 'List<Logger>') {
       return true;
     }
     return false;
@@ -364,6 +384,18 @@ class MockReflectedType implements ReflectedType {
     if (reflectedType == other?.reflectedType) {
       return true;
     }
+    // Handle Logger implementations
+    if (reflectedType == ConsoleLogger && other?.reflectedType == Logger) {
+      return true;
+    }
+    if (reflectedType == FileLogger && other?.reflectedType == Logger) {
+      return true;
+    }
+    // Handle List<Logger>
+    if (reflectedType.toString() == 'List<Logger>' &&
+        other?.reflectedType.toString() == 'List<Logger>') {
+      return true;
+    }
     return false;
   }
 
@@ -405,13 +437,20 @@ void main() {
       // Reset instance count
       SingletonService.instanceCount = 0;
 
-      // Register implementations
+      // Register implementations with attributes
       container.registerAttributeBindings(ConsoleLogger);
       container.registerAttributeBindings(FileLogger);
       container.registerAttributeBindings(SingletonService);
 
       // Set ConsoleLogger as default implementation for Logger
       container.bind(Logger).to(ConsoleLogger);
+
+      // Register FileLogger for @Inject
+      container.registerSingleton(FileLogger(filename: 'app.log'));
+
+      // Register implementations for @InjectAll
+      container.registerFactory<List<Logger>>((c) =>
+          [container.make<ConsoleLogger>(), container.make<FileLogger>()]);
     });
 
     test('can bind implementation using @Injectable', () {

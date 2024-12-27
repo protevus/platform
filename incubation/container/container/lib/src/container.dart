@@ -1218,8 +1218,19 @@ class Container {
         var value = injectAnnotation.reflectee;
         if (value is Inject) {
           // Inject specific implementation with config
-          result.add(
-              withParameters(value.config, () => make(value.implementation)));
+          result.add(withParameters(value.config, () {
+            // First try to make the implementation directly
+            if (has(value.implementation)) {
+              return make(value.implementation);
+            }
+            // If that fails, try to resolve through contextual binding
+            var contextual = _getContextualConcrete(value.implementation);
+            if (contextual != null) {
+              return make(contextual);
+            }
+            // Finally try to make it normally
+            return make(value.implementation);
+          }));
         } else if (value is InjectTagged) {
           // Inject tagged implementation
           var tagged = this.tagged(value.tag);
@@ -1248,6 +1259,7 @@ class Container {
   /// Make all instances of a type
   List<dynamic> makeAll(Type type) {
     var result = <dynamic>[];
+    var seen = <Type>{};
 
     // Get all tagged implementations
     var allTags = _tags.entries
@@ -1255,8 +1267,38 @@ class Container {
         .map((entry) => entry.key)
         .toList();
 
+    // Collect implementations from all tags
     for (var tag in allTags) {
-      result.addAll(tagged(tag));
+      var implementations =
+          _tags[tag]!.where((t) => !seen.contains(t)).where((t) {
+        var reflectedType = reflector.reflectType(t);
+        var targetType = reflector.reflectType(type);
+        return reflectedType != null &&
+            targetType != null &&
+            (reflectedType.isAssignableTo(targetType) || t == type);
+      }).toList();
+
+      for (var impl in implementations) {
+        seen.add(impl);
+        result.add(make(impl));
+      }
+    }
+
+    // If no tagged implementations found, try to get all registered implementations
+    if (result.isEmpty) {
+      var allTypes = [..._singletons.keys, ..._factories.keys];
+      for (var t in allTypes) {
+        if (!seen.contains(t)) {
+          var reflectedType = reflector.reflectType(t);
+          var targetType = reflector.reflectType(type);
+          if (reflectedType != null &&
+              targetType != null &&
+              (reflectedType.isAssignableTo(targetType) || t == type)) {
+            seen.add(t);
+            result.add(make(t));
+          }
+        }
+      }
     }
 
     return result;
