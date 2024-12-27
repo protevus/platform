@@ -8,6 +8,7 @@
  */
 
 import 'dart:async';
+import 'dart:mirrors' show AbstractClassInstantiationError;
 import 'attributes.dart';
 import 'exception.dart';
 import 'reflector.dart';
@@ -344,10 +345,29 @@ class Container {
                 }
               }
 
-              instance = reflectedType.newInstance(
-                  isDefault(constructor.name) ? '' : constructor.name,
-                  positional,
-                  named, []).reflectee;
+              try {
+                dynamic tempInstance;
+                try {
+                  tempInstance = reflectedType.newInstance(
+                      isDefault(constructor.name) ? '' : constructor.name,
+                      positional,
+                      named, []).reflectee;
+                } on AbstractClassInstantiationError {
+                  throw BindingResolutionException(
+                      'Cannot instantiate abstract class ${reflectedType.name}');
+                }
+
+                tempInstance = _applyExtenders(t2, tempInstance);
+                _fireResolvingCallbacks(tempInstance);
+                _fireAfterResolvingCallbacks(tempInstance);
+                return tempInstance as T;
+              } catch (e) {
+                if (e is AbstractClassInstantiationError) {
+                  throw BindingResolutionException(
+                      'Cannot instantiate abstract class ${reflectedType.name}');
+                }
+                rethrow;
+              }
             }
           } finally {
             _buildStack.add(t2); // Add it back

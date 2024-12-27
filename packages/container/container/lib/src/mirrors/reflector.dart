@@ -564,8 +564,13 @@ class _ReflectedClassMirror extends ReflectedClass {
   ReflectedInstance newInstance(
       String constructorName, List positionalArguments,
       [Map<String, dynamic>? namedArguments, List<Type>? typeArguments]) {
-    return _ReflectedInstanceMirror(
-        mirror.newInstance(Symbol(constructorName), positionalArguments));
+    try {
+      return _ReflectedInstanceMirror(
+          mirror.newInstance(Symbol(constructorName), positionalArguments));
+    } on dart.AbstractClassInstantiationError {
+      throw BindingResolutionException(
+          'Cannot instantiate abstract class ${mirror.simpleName}');
+    }
   }
 
   /// Checks if this [_ReflectedClassMirror] is equal to another object.
