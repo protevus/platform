@@ -30,6 +30,14 @@ class ContextualBindingBuilder {
   ContextualImplementationBuilder needs<T>() {
     return ContextualImplementationBuilder(container, concrete, T);
   }
+
+  /// Bind directly to a concrete implementation
+  void to(Type implementation) {
+    for (var concreteType in concrete) {
+      container.addContextualBinding(
+          concreteType, concreteType, implementation);
+    }
+  }
 }
 
 /// A builder class for defining the implementation for a contextual binding.
@@ -59,6 +67,13 @@ class ContextualImplementationBuilder {
   void give<T>() {
     for (var concreteType in concrete) {
       container.addContextualBinding(concreteType, abstract, T);
+    }
+  }
+
+  /// Bind to a concrete implementation type
+  void to(Type implementation) {
+    for (var concreteType in concrete) {
+      container.addContextualBinding(concreteType, abstract, implementation);
     }
   }
 

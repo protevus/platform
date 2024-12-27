@@ -8,6 +8,7 @@
  */
 
 import 'dart:async';
+import 'attributes.dart';
 import 'exception.dart';
 import 'reflector.dart';
 import 'contextual_binding_builder.dart';
@@ -418,6 +419,11 @@ class Container {
       // Handle primitive types
       if (t2 == String) {
         return '' as T;
+      }
+
+      // Handle List<T> specially
+      if (t2.toString().startsWith('List<')) {
+        return [] as T;
       }
 
       // Use reflection to create instance
@@ -1131,5 +1137,128 @@ class Container {
         'Circular dependency detected while building $type. Build stack: ${_buildStack.join(' -> ')}',
       );
     }
+  }
+
+  /// Bind an abstract type to a concrete implementation
+  ContextualBindingBuilder bind(Type abstract) {
+    return ContextualBindingBuilder(this, [abstract]);
+  }
+
+  /// Register a singleton type and initialize it
+  void singleton(Type type) {
+    if (!_singletons.containsKey(type)) {
+      var instance = make(type);
+      _singletons[type] = instance;
+    }
+  }
+
+  /// Helper method to bind a concrete type to an abstract type
+  void bindTo(Type abstract, Type concrete) {
+    bind(abstract).to(concrete);
+  }
+
+  /// Register all attribute-based bindings for a type
+  void registerAttributeBindings(Type type) {
+    var annotations = reflector.getAnnotations(type);
+    for (var annotation in annotations) {
+      var value = annotation.reflectee;
+      if (value is Injectable) {
+        // Register the binding
+        if (value.bindTo != null) {
+          bind(value.bindTo!).to(type);
+
+          // Apply tags to both the concrete type and the abstract type
+          if (value.tags.isNotEmpty) {
+            for (var tag in value.tags) {
+              _tags[tag] ??= [];
+              _tags[tag]!.add(type);
+              _tags[tag]!.add(value.bindTo!);
+            }
+          }
+        } else {
+          // Apply tags to just the concrete type
+          if (value.tags.isNotEmpty) {
+            for (var tag in value.tags) {
+              _tags[tag] ??= [];
+              _tags[tag]!.add(type);
+            }
+          }
+        }
+
+        // Make it a singleton if requested
+        if (value.singleton) {
+          singleton(type);
+        }
+      }
+    }
+  }
+
+  /// Resolve constructor parameters using attribute-based injection
+  List<dynamic> resolveConstructorParameters(
+      Type type, String constructorName, List<ReflectedParameter> parameters) {
+    var result = <dynamic>[];
+
+    for (var param in parameters) {
+      var annotations =
+          reflector.getParameterAnnotations(type, constructorName, param.name);
+
+      // Find injection annotation
+      ReflectedInstance? injectAnnotation;
+      try {
+        injectAnnotation = annotations.firstWhere(
+            (a) => a.reflectee is Inject || a.reflectee is InjectTagged);
+      } catch (_) {
+        try {
+          injectAnnotation =
+              annotations.firstWhere((a) => a.reflectee is InjectAll);
+        } catch (_) {}
+      }
+
+      if (injectAnnotation != null) {
+        var value = injectAnnotation.reflectee;
+        if (value is Inject) {
+          // Inject specific implementation with config
+          result.add(
+              withParameters(value.config, () => make(value.implementation)));
+        } else if (value is InjectTagged) {
+          // Inject tagged implementation
+          var tagged = this.tagged(value.tag);
+          if (tagged.isEmpty) {
+            throw BindingResolutionException(
+                'No implementations found for tag: ${value.tag}');
+          }
+          result.add(tagged.first);
+        } else if (value is InjectAll) {
+          // Inject all implementations
+          if (value.tag != null) {
+            result.add(tagged(value.tag!).toList());
+          } else {
+            result.add(makeAll(param.type.reflectedType));
+          }
+        }
+      } else {
+        // No injection annotation, use default resolution
+        result.add(make(param.type.reflectedType));
+      }
+    }
+
+    return result;
+  }
+
+  /// Make all instances of a type
+  List<dynamic> makeAll(Type type) {
+    var result = <dynamic>[];
+
+    // Get all tagged implementations
+    var allTags = _tags.entries
+        .where((entry) => entry.value.any((t) => t == type))
+        .map((entry) => entry.key)
+        .toList();
+
+    for (var tag in allTags) {
+      result.addAll(tagged(tag));
+    }
+
+    return result;
   }
 }

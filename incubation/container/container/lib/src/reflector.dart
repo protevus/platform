@@ -59,6 +59,25 @@ abstract class Reflector {
   ReflectedFunction? findInstanceMethod(Object instance, String methodName) {
     throw UnsupportedError('`findInstanceMethod` requires `dart:mirrors`.');
   }
+
+  /// Get annotations for a type.
+  ///
+  /// This method returns a list of reflected instances representing the annotations
+  /// applied to the given type.
+  List<ReflectedInstance> getAnnotations(Type type) {
+    throw UnsupportedError('`getAnnotations` requires `dart:mirrors`.');
+  }
+
+  /// Get annotations for a parameter.
+  ///
+  /// This method returns a list of reflected instances representing the annotations
+  /// applied to the parameter with the given name in the specified constructor of
+  /// the given type.
+  List<ReflectedInstance> getParameterAnnotations(
+      Type type, String constructorName, String parameterName) {
+    throw UnsupportedError(
+        '`getParameterAnnotations` requires `dart:mirrors`.');
+  }
 }
 
 /// Represents a reflected instance of an object.
