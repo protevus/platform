@@ -43,6 +43,41 @@ abstract class Reflector {
   ReflectedType reflectFutureOf(Type type) {
     throw UnsupportedError('`reflectFutureOf` requires `dart:mirrors`.');
   }
+
+  /// Find a type by its name.
+  ///
+  /// This method is used to support Class@method syntax by finding a type
+  /// from its string name.
+  Type? findTypeByName(String name) {
+    throw UnsupportedError('`findTypeByName` requires `dart:mirrors`.');
+  }
+
+  /// Find an instance method by its name.
+  ///
+  /// This method is used to support Class@method syntax by finding a method
+  /// on an instance from its string name.
+  ReflectedFunction? findInstanceMethod(Object instance, String methodName) {
+    throw UnsupportedError('`findInstanceMethod` requires `dart:mirrors`.');
+  }
+
+  /// Get annotations for a type.
+  ///
+  /// This method returns a list of reflected instances representing the annotations
+  /// applied to the given type.
+  List<ReflectedInstance> getAnnotations(Type type) {
+    throw UnsupportedError('`getAnnotations` requires `dart:mirrors`.');
+  }
+
+  /// Get annotations for a parameter.
+  ///
+  /// This method returns a list of reflected instances representing the annotations
+  /// applied to the parameter with the given name in the specified constructor of
+  /// the given type.
+  List<ReflectedInstance> getParameterAnnotations(
+      Type type, String constructorName, String parameterName) {
+    throw UnsupportedError(
+        '`getParameterAnnotations` requires `dart:mirrors`.');
+  }
 }
 
 /// Represents a reflected instance of an object.
@@ -241,6 +276,9 @@ abstract class ReflectedFunction {
       other.isGetter == isGetter &&
       other.isSetter == isSetter;
 
+  /// Invoke this function with the given invocation.
+  ///
+  /// This method is used to support dynamic method invocation.
   ReflectedInstance invoke(Invocation invocation);
 }
 
@@ -265,13 +303,15 @@ class ReflectedParameter {
   final ReflectedType type;
   final bool isRequired;
   final bool isNamed;
+  final bool isVariadic;
 
   const ReflectedParameter(
-      this.name, this.annotations, this.type, this.isRequired, this.isNamed);
+      this.name, this.annotations, this.type, this.isRequired, this.isNamed,
+      {this.isVariadic = false});
 
   @override
   int get hashCode =>
-      hashObjects([name, annotations, type, isRequired, isNamed]);
+      hashObjects([name, annotations, type, isRequired, isNamed, isVariadic]);
 
   @override
   bool operator ==(other) =>
@@ -281,7 +321,8 @@ class ReflectedParameter {
           .equals(other.annotations, annotations) &&
       other.type == type &&
       other.isRequired == isRequired &&
-      other.isNamed == isNamed;
+      other.isNamed == isNamed &&
+      other.isVariadic == isVariadic;
 }
 
 class ReflectedTypeParameter {

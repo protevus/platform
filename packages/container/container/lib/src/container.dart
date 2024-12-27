@@ -8,8 +8,12 @@
  */
 
 import 'dart:async';
+import 'attributes.dart';
 import 'exception.dart';
 import 'reflector.dart';
+import 'contextual_binding_builder.dart';
+
+var currentPos = 0;
 
 class Container {
   /// The [Reflector] instance used by this container for reflection-based operations.
@@ -18,36 +22,48 @@ class Container {
   /// when no explicit factory or singleton is registered for a given type.
   final Reflector reflector;
 
-  /// A map that stores singleton instances, where the key is the Type and the value is the singleton object.
-  ///
-  /// This map is used internally by the Container to store and retrieve singleton objects
-  /// that have been registered using the [registerSingleton] method.
+  /// The container's bindings map
   final Map<Type, dynamic> _singletons = {};
-
-  /// A map that stores factory functions for creating instances of different types.
-  ///
-  /// The key is the Type for which the factory is registered, and the value is a function
-  /// that takes a Container as an argument and returns an instance of that Type.
-  ///
-  /// This map is used internally by the Container to store and retrieve factory functions
-  /// that have been registered using the [registerFactory] method.
   final Map<Type, dynamic Function(Container)> _factories = {};
-
-  /// A map that stores named singleton instances, where the key is a String name and the value is the singleton object.
-  ///
-  /// This map is used internally by the Container to store and retrieve named singleton objects
-  /// that have been registered using the [registerNamedSingleton] method. Named singletons allow
-  /// for multiple instances of the same type to be stored in the container with different names.
   final Map<String, dynamic> _namedSingletons = {};
 
-  /// The parent container of this container, if any.
-  ///
-  /// This property is used to create a hierarchy of containers, where child containers
-  /// can access dependencies registered in their parent containers. If this container
-  /// is a root container (i.e., it has no parent), this property will be null.
-  ///
-  /// The parent-child relationship allows for scoped dependency injection, where
-  /// child containers can override or add to the dependencies defined in their parents.
+  /// The container's type aliases
+  final Map<Type, Type> _aliases = {};
+
+  /// The container's service extenders
+  final Map<Type, List<dynamic Function(dynamic, Container)>> _extenders = {};
+
+  /// The container's rebound callbacks
+  final Map<Type, List<void Function(dynamic, Container)>> _reboundCallbacks =
+      {};
+
+  /// The container's refreshing instances
+  final Set<Type> _refreshing = {};
+
+  /// The container's parameter override stack
+  final List<Map<String, dynamic>> _parameterStack = [];
+
+  /// The container's contextual bindings
+  final Map<Type, Map<Type, dynamic>> _contextual = {};
+
+  /// The container's method bindings
+  final Map<String, Function> _methodBindings = {};
+
+  /// The container's tags
+  final Map<String, List<Type>> _tags = {};
+
+  /// The container's scoped instances
+  final List<Type> _scopedInstances = [];
+
+  /// Resolution callbacks
+  final List<Function(Type, List, Container)> _beforeResolvingCallbacks = [];
+  final List<Function(dynamic, Container)> _resolvingCallbacks = [];
+  final List<Function(dynamic, Container)> _afterResolvingCallbacks = [];
+
+  /// The build stack for detecting circular dependencies
+  final List<Type> _buildStack = [];
+
+  /// The parent container
   final Container? _parent;
 
   /// Creates a new root [Container] instance with the given [Reflector].
@@ -137,6 +153,9 @@ class Container {
     } else if (T == dynamic && t == null) {
       return false;
     }
+
+    // Check if the type is aliased
+    t2 = getAlias(t2);
 
     Container? search = this;
     while (search != null) {
@@ -256,56 +275,241 @@ class Container {
   /// This method is central to the dependency injection mechanism, allowing for
   /// flexible object creation and dependency resolution within the container hierarchy.
   T make<T>([Type? type]) {
+    // Get the original type
     Type t2 = T;
     if (type != null) {
       t2 = type;
     }
 
-    Container? search = this;
+    // Check for circular dependencies
+    _checkCircularDependency(t2);
+    _buildStack.add(t2);
 
-    while (search != null) {
-      if (search._singletons.containsKey(t2)) {
-        // Find a singleton, if any.
-        return search._singletons[t2] as T;
-      } else if (search._factories.containsKey(t2)) {
-        // Find a factory, if any.
-        return search._factories[t2]!(this) as T;
-      } else {
-        search = search._parent;
+    try {
+      // Fire before resolving callbacks
+      _fireBeforeResolvingCallbacks(t2, []);
+
+      // Check for contextual binding
+      var contextualConcrete = _getContextualConcrete(t2);
+      if (contextualConcrete == null && _hasContextualBinding(t2)) {
+        throw BindingResolutionException(
+            'No implementation was provided for contextual binding of $t2');
       }
-    }
+      if (contextualConcrete != null) {
+        dynamic instance;
+        if (contextualConcrete is Function) {
+          // Remove current type from stack to avoid circular dependency
+          _buildStack.removeLast();
+          try {
+            instance = contextualConcrete(this);
+          } finally {
+            _buildStack.add(t2);
+          }
+        } else if (contextualConcrete is Type) {
+          // For Type bindings, we need to use reflection to create the instance
+          _buildStack.removeLast(); // Remove current type from stack
+          try {
+            var reflectedType = reflector.reflectType(contextualConcrete);
+            if (reflectedType is ReflectedClass) {
+              bool isDefault(String name) {
+                return name.isEmpty || name == reflectedType.name;
+              }
 
-    var reflectedType = reflector.reflectType(t2);
-    var positional = [];
-    var named = <String, Object>{};
+              var constructor = reflectedType.constructors.firstWhere(
+                  (c) => isDefault(c.name),
+                  orElse: (() => throw BindingResolutionException(
+                      '${reflectedType.name} has no default constructor, and therefore cannot be instantiated.')));
 
-    if (reflectedType is ReflectedClass) {
-      bool isDefault(String name) {
-        return name.isEmpty || name == reflectedType.name;
-      }
+              var positional = [];
+              var named = <String, Object>{};
 
-      var constructor = reflectedType.constructors.firstWhere(
-          (c) => isDefault(c.name),
-          orElse: (() => throw ReflectionException(
-              '${reflectedType.name} has no default constructor, and therefore cannot be instantiated.')));
+              for (var param in constructor.parameters) {
+                // Check for parameter override
+                var override = getParameterOverride(param.name);
+                if (override != null) {
+                  if (param.isNamed) {
+                    named[param.name] = override;
+                  } else {
+                    positional.add(override);
+                  }
+                  continue;
+                }
 
-      for (var param in constructor.parameters) {
-        var value = make(param.type.reflectedType);
+                // No override, resolve normally
+                var value = make(param.type.reflectedType);
+                if (param.isNamed) {
+                  named[param.name] = value;
+                } else {
+                  positional.add(value);
+                }
+              }
 
-        if (param.isNamed) {
-          named[param.name] = value;
-        } else {
-          positional.add(value);
+              instance = reflectedType.newInstance(
+                  isDefault(constructor.name) ? '' : constructor.name,
+                  positional,
+                  named, []).reflectee;
+            }
+          } finally {
+            _buildStack.add(t2); // Add it back
+          }
+        }
+
+        if (instance != null) {
+          instance = _applyExtenders(t2, instance);
+          var typedInstance = instance as T;
+          _fireResolvingCallbacks(typedInstance);
+          _fireAfterResolvingCallbacks(typedInstance);
+          return typedInstance;
         }
       }
 
-      return reflectedType.newInstance(
-          isDefault(constructor.name) ? '' : constructor.name,
-          positional,
-          named, []).reflectee as T;
-    } else {
-      throw ReflectionException(
-          '$t2 is not a class, and therefore cannot be instantiated.');
+      // Check for contextual binding in parent classes
+      var parentContextual = _getContextualConcreteFromParent(t2);
+      if (parentContextual != null) {
+        dynamic instance;
+        if (parentContextual is Function) {
+          // Remove current type from stack to avoid circular dependency
+          _buildStack.removeLast();
+          try {
+            instance = parentContextual(this);
+          } finally {
+            _buildStack.add(t2);
+          }
+        } else if (parentContextual is Type) {
+          // For Type bindings, we need to use reflection to create the instance
+          _buildStack.removeLast(); // Remove current type from stack
+          try {
+            instance = make(parentContextual);
+          } finally {
+            _buildStack.add(t2); // Add it back
+          }
+        }
+
+        if (instance != null) {
+          instance = _applyExtenders(t2, instance);
+          var typedInstance = instance as T;
+          _fireResolvingCallbacks(typedInstance);
+          _fireAfterResolvingCallbacks(typedInstance);
+          return typedInstance;
+        }
+      }
+
+      // Check for singleton or factory, resolving aliases if no contextual binding was found
+      Container? search = this;
+      var resolvedType = contextualConcrete == null ? getAlias(t2) : t2;
+      while (search != null) {
+        if (search._singletons.containsKey(resolvedType)) {
+          var instance = search._singletons[resolvedType];
+          instance = _applyExtenders(resolvedType, instance);
+          _fireResolvingCallbacks(instance);
+          _fireAfterResolvingCallbacks(instance);
+          return instance as T;
+        } else if (search._factories.containsKey(resolvedType)) {
+          // For factory bindings, wrap the factory call in withParameters
+          var instance = withParameters(_parameterStack.lastOrNull ?? {}, () {
+            return search!._factories[resolvedType]!(this);
+          });
+          instance = _applyExtenders(resolvedType, instance);
+          _fireResolvingCallbacks(instance);
+          _fireAfterResolvingCallbacks(instance);
+          return instance as T;
+        } else {
+          search = search._parent;
+        }
+      }
+
+      // Handle primitive types
+      if (t2 == String) {
+        return '' as T;
+      }
+
+      // Handle List<T> specially
+      if (t2.toString().startsWith('List<')) {
+        return [] as T;
+      }
+
+      // Use reflection to create instance
+      var reflectedType = reflector.reflectType(t2);
+      if (reflectedType == null) {
+        throw BindingResolutionException('No binding was found for $t2');
+      }
+
+      // Check if we have all required dependencies
+      if (reflectedType is ReflectedClass) {
+        bool isDefault(String name) {
+          return name.isEmpty || name == reflectedType.name;
+        }
+
+        var constructor = reflectedType.constructors.firstWhere(
+            (c) => isDefault(c.name),
+            orElse: (() => throw BindingResolutionException(
+                '${reflectedType.name} has no default constructor, and therefore cannot be instantiated.')));
+
+        // Check if we can resolve all constructor parameters
+        for (var param in constructor.parameters) {
+          var paramType = param.type.reflectedType;
+          if (!has(paramType) && reflector.reflectType(paramType) == null) {
+            throw BindingResolutionException(
+                'No binding was found for $paramType required by $t2');
+          }
+        }
+      }
+
+      var positional = [];
+      var named = <String, Object>{};
+
+      if (reflectedType is ReflectedClass) {
+        bool isDefault(String name) {
+          return name.isEmpty || name == reflectedType.name;
+        }
+
+        var constructor = reflectedType.constructors.firstWhere(
+            (c) => isDefault(c.name),
+            orElse: (() => throw BindingResolutionException(
+                '${reflectedType.name} has no default constructor, and therefore cannot be instantiated.')));
+
+        // Add current type to build stack before resolving parameters
+        _buildStack.add(t2);
+        try {
+          for (var param in constructor.parameters) {
+            // Check for parameter override
+            var override = getParameterOverride(param.name);
+            if (override != null) {
+              if (param.isNamed) {
+                named[param.name] = override;
+              } else {
+                positional.add(override);
+              }
+              continue;
+            }
+
+            // No override, resolve normally
+            var value = make(param.type.reflectedType);
+            if (param.isNamed) {
+              named[param.name] = value;
+            } else {
+              positional.add(value);
+            }
+          }
+        } finally {
+          _buildStack.removeLast();
+        }
+
+        var instance = reflectedType.newInstance(
+            isDefault(constructor.name) ? '' : constructor.name,
+            positional,
+            named, []).reflectee;
+
+        instance = _applyExtenders(t2, instance);
+        _fireResolvingCallbacks(instance);
+        _fireAfterResolvingCallbacks(instance);
+        return instance as T;
+      } else {
+        throw BindingResolutionException(
+            '$t2 is not a class, and therefore cannot be instantiated.');
+      }
+    } finally {
+      _buildStack.removeLast();
     }
   }
 
@@ -340,7 +544,11 @@ class Container {
       throw StateError('This container already has a factory for $t2.');
     }
 
-    _factories[t2] = f;
+    // Wrap factory in parameter override handler
+    _factories[t2] = (container) {
+      return container.withParameters(
+          _parameterStack.lastOrNull ?? {}, () => f(container));
+    };
     return f;
   }
 
@@ -392,5 +600,785 @@ class Container {
 
     _namedSingletons[name] = object;
     return object;
+  }
+
+  /// Define a contextual binding.
+  ///
+  /// This allows you to define how abstract types should be resolved in specific contexts.
+  ///
+  /// The [concrete] parameter can be either a single Type or a List<Type>.
+  /// When a List<Type> is provided, the same binding will be applied to all types in the list.
+  ContextualBindingBuilder when(dynamic concrete) {
+    if (concrete is Type) {
+      return ContextualBindingBuilder(this, [concrete]);
+    } else if (concrete is List<Type>) {
+      return ContextualBindingBuilder(this, concrete);
+    }
+    throw ArgumentError(
+        'The concrete parameter must be either Type or List<Type>');
+  }
+
+  /// Add a contextual binding to the container.
+  ///
+  /// This is used internally by [ContextualBindingBuilder] to register the actual binding.
+  void addContextualBinding(
+      Type concrete, Type abstract, dynamic implementation) {
+    _contextual.putIfAbsent(concrete, () => {});
+    _contextual[concrete]![abstract] = implementation;
+  }
+
+  /// Bind a callback to resolve with Container::call.
+  ///
+  /// This allows you to register custom resolution logic for specific method calls.
+  void bindMethod(String method, Function callback) {
+    if (_methodBindings.containsKey(method)) {
+      throw StateError(
+          'This container already has a method binding for $method.');
+    }
+    _methodBindings[method] = callback;
+  }
+
+  /// Call the given method and inject its dependencies.
+  ///
+  /// This method supports both static methods and instance methods.
+  dynamic callMethod(String method, [List<dynamic> arguments = const []]) {
+    Container? search = this;
+    while (search != null) {
+      if (search._methodBindings.containsKey(method)) {
+        return Function.apply(search._methodBindings[method]!, arguments);
+      }
+      search = search._parent;
+    }
+    throw StateError('No method binding found for $method.');
+  }
+
+  /// Check if this container or any parent has a method binding.
+  bool hasMethodBinding(String method) {
+    Container? search = this;
+    while (search != null) {
+      if (search._methodBindings.containsKey(method)) {
+        return true;
+      }
+      search = search._parent;
+    }
+    return false;
+  }
+
+  /// Assign a set of tags to a given binding.
+  ///
+  /// This allows you to group related bindings together under a common tag.
+  void tag(List<Type> abstracts, String tag) {
+    _tags[tag] ??= [];
+    _tags[tag]!.addAll(abstracts);
+  }
+
+  /// Resolve all bindings for a given tag.
+  ///
+  /// Returns a list of instances for all bindings tagged with the given tag.
+  List<dynamic> tagged(String tag) {
+    var result = <Type>{}; // Use Set to avoid duplicates
+
+    // Collect tagged types from this container and all parents
+    Container? search = this;
+    while (search != null) {
+      if (search._tags.containsKey(tag)) {
+        result.addAll(search._tags[tag]!);
+      }
+      search = search._parent;
+    }
+
+    return result.map((type) => make(type)).toList();
+  }
+
+  /// Register a scoped binding in the container.
+  ///
+  /// Scoped bindings are similar to singletons but are cleared when [clearScoped] is called.
+  void scoped<T>(T Function(Container) factory) {
+    _scopedInstances.add(T);
+    registerSingleton<T>(
+        factory(this)); // Use singleton to ensure same instance
+  }
+
+  /// Clear all scoped bindings from the container.
+  void clearScoped() {
+    // Clear this container's scoped instances
+    for (var type in _scopedInstances) {
+      _singletons.remove(type);
+      _factories.remove(type);
+    }
+    _scopedInstances.clear();
+
+    // Clear parent's scoped instances if any
+    if (_parent != null) {
+      _parent.clearScoped();
+    }
+  }
+
+  /// Get all scoped instances from this container and its parents.
+  List<Type> _getAllScopedInstances() {
+    var result = <Type>{}; // Use Set to avoid duplicates
+    Container? search = this;
+    while (search != null) {
+      result.addAll(search._scopedInstances);
+      search = search._parent;
+    }
+    return result.toList();
+  }
+
+  /// Register a callback to be run before resolving a type.
+  void beforeResolving<T>(
+      void Function(Type type, List args, Container container) callback) {
+    _beforeResolvingCallbacks.add(callback);
+  }
+
+  /// Register a callback to be run while resolving a type.
+  void resolving<T>(
+      void Function(dynamic instance, Container container) callback) {
+    _resolvingCallbacks.add(callback);
+  }
+
+  /// Register a callback to be run after resolving a type.
+  void afterResolving<T>(
+      void Function(dynamic instance, Container container) callback) {
+    _afterResolvingCallbacks.add(callback);
+  }
+
+  /// Fire the "before resolving" callbacks for a type.
+  void _fireBeforeResolvingCallbacks(Type type, List args) {
+    // Fire parent callbacks first
+    if (_parent != null) {
+      _parent._fireBeforeResolvingCallbacks(type, args);
+    }
+
+    // Then fire this container's callbacks
+    for (var callback in _beforeResolvingCallbacks) {
+      callback(type, args, this);
+    }
+  }
+
+  /// Fire the "resolving" callbacks for an instance.
+  void _fireResolvingCallbacks(dynamic instance) {
+    // Fire parent callbacks first
+    if (_parent != null) {
+      _parent._fireResolvingCallbacks(instance);
+    }
+
+    // Then fire this container's callbacks
+    for (var callback in _resolvingCallbacks) {
+      callback(instance, this);
+    }
+  }
+
+  /// Fire the "after resolving" callbacks for an instance.
+  void _fireAfterResolvingCallbacks(dynamic instance) {
+    // Fire parent callbacks first
+    if (_parent != null) {
+      _parent._fireAfterResolvingCallbacks(instance);
+    }
+
+    // Then fire this container's callbacks
+    for (var callback in _afterResolvingCallbacks) {
+      callback(instance, this);
+    }
+  }
+
+  /// Get a contextual concrete binding for the given abstract type.
+  dynamic _getContextualConcrete(Type abstract) {
+    if (_buildStack.isEmpty) return null;
+
+    // Check current container's contextual bindings
+    Container? search = this;
+    while (search != null) {
+      var building = _buildStack.last;
+      var contextMap = search._contextual[building];
+      if (contextMap != null) {
+        // First try to find a binding for the original type
+        if (contextMap.containsKey(abstract)) {
+          return contextMap[abstract];
+        }
+        // Then try to find a binding for the aliased type
+        var aliasedType = getAlias(abstract);
+        if (aliasedType != abstract && contextMap.containsKey(aliasedType)) {
+          return contextMap[aliasedType];
+        }
+      }
+      search = search._parent;
+    }
+
+    return null;
+  }
+
+  /// Get a contextual binding map for a concrete type.
+  Map<Type, dynamic>? _getContextualBindings(Type concrete) {
+    return _contextual[concrete];
+  }
+
+  /// Get a contextual concrete binding from parent classes in the build stack.
+  dynamic _getContextualConcreteFromParent(Type abstract) {
+    if (_buildStack.isEmpty) return null;
+
+    // Get the parent type from the build stack
+    var parentIndex = _buildStack.length - 2;
+    if (parentIndex < 0) return null;
+
+    var parentType = _buildStack[parentIndex];
+
+    // Check current container's contextual bindings
+    Container? search = this;
+    while (search != null) {
+      var contextMap = search._contextual[parentType];
+      if (contextMap != null && contextMap.containsKey(abstract)) {
+        return contextMap[abstract];
+      }
+      search = search._parent;
+    }
+
+    return null;
+  }
+
+  /// Check if a type has a contextual binding.
+  bool _hasContextualBinding(Type type) {
+    if (_buildStack.isEmpty) return false;
+
+    // Check current container's contextual bindings
+    Container? search = this;
+    while (search != null) {
+      var building = _buildStack.last;
+      var contextMap = search._contextual[building];
+      if (contextMap != null) {
+        // First check for binding of original type
+        if (contextMap.containsKey(type)) {
+          return true;
+        }
+        // Then check for binding of aliased type
+        var aliasedType = getAlias(type);
+        if (aliasedType != type && contextMap.containsKey(aliasedType)) {
+          return true;
+        }
+      }
+      search = search._parent;
+    }
+
+    return false;
+  }
+
+  /// Register an alias for an abstract type.
+  ///
+  /// This allows you to alias an abstract type to a concrete implementation.
+  /// For example, you might alias an interface to its default implementation:
+  /// ```dart
+  /// container.alias<Logger>(ConsoleLogger);
+  /// ```
+  void alias<T>(Type concrete) {
+    _aliases[T] = concrete;
+  }
+
+  /// Get the concrete type that an abstract type is aliased to.
+  ///
+  /// If the type is not aliased in this container or any parent container,
+  /// returns the type itself.
+  Type getAlias(Type abstract) {
+    Container? search = this;
+    while (search != null) {
+      if (search._aliases.containsKey(abstract)) {
+        return search._aliases[abstract]!;
+      }
+      search = search._parent;
+    }
+    return abstract;
+  }
+
+  /// Check if a type is aliased to another type in this container or any parent container.
+  bool isAlias(Type type) {
+    Container? search = this;
+    while (search != null) {
+      if (search._aliases.containsKey(type)) {
+        return true;
+      }
+      search = search._parent;
+    }
+    return false;
+  }
+
+  /// Extend a service after it is resolved.
+  ///
+  /// This allows you to modify a service after it has been resolved from the container.
+  /// The callback receives the resolved instance and the container, and should return
+  /// the modified instance.
+  ///
+  /// ```dart
+  /// container.extend<Logger>((logger, container) {
+  ///   logger.level = LogLevel.debug;
+  ///   return logger;
+  /// });
+  /// ```
+  void extend<T>(
+      dynamic Function(dynamic instance, Container container) callback) {
+    _extenders.putIfAbsent(T, () => []).add(callback);
+  }
+
+  /// Apply any registered extenders to an instance.
+  dynamic _applyExtenders(Type type, dynamic instance) {
+    // Collect all extenders from parent to child
+    var extenders = <dynamic Function(dynamic, Container)>[];
+    Container? search = this;
+    while (search != null) {
+      if (search._extenders.containsKey(type)) {
+        extenders.insertAll(0, search._extenders[type]!);
+      }
+      search = search._parent;
+    }
+
+    // Apply extenders in order (parent to child)
+    for (var extender in extenders) {
+      instance = extender(instance, this);
+    }
+    return instance;
+  }
+
+  /// Register a callback to be run when a type is rebound.
+  ///
+  /// The callback will be invoked whenever the type's binding is replaced
+  /// or when refresh() is called on the type.
+  ///
+  /// ```dart
+  /// container.rebinding<Logger>((logger, container) {
+  ///   print('Logger was rebound');
+  /// });
+  /// ```
+  void rebinding<T>(
+      void Function(dynamic instance, Container container) callback) {
+    _reboundCallbacks.putIfAbsent(T, () => []).add(callback);
+  }
+
+  /// Refresh an instance in the container.
+  ///
+  /// This will create a new instance and trigger any rebound callbacks.
+  /// If the instance is a singleton, it will be replaced in the container.
+  ///
+  /// ```dart
+  /// container.refresh<Logger>();
+  /// ```
+  T refresh<T>() {
+    if (_refreshing.contains(T)) {
+      throw CircularDependencyException(
+          'Circular dependency detected while refreshing $T');
+    }
+
+    _refreshing.add(T);
+    try {
+      // Create new instance
+      var instance = make<T>();
+
+      // If it's a singleton, replace it
+      if (_singletons.containsKey(T)) {
+        _singletons[T] = instance;
+      }
+
+      // Fire rebound callbacks
+      _fireReboundCallbacks(T, instance);
+
+      return instance;
+    } finally {
+      _refreshing.remove(T);
+    }
+  }
+
+  /// Fire the rebound callbacks for a type.
+  void _fireReboundCallbacks(Type type, dynamic instance) {
+    Container? search = this;
+    while (search != null) {
+      if (search._reboundCallbacks.containsKey(type)) {
+        for (var callback in search._reboundCallbacks[type]!) {
+          callback(instance, this);
+        }
+      }
+      search = search._parent;
+    }
+  }
+
+  /// Push parameter overrides onto the stack.
+  ///
+  /// These parameters will be used when resolving dependencies until they are popped.
+  /// ```dart
+  /// container.withParameters({'filename': 'custom.log'}, () {
+  ///   var logger = container.make<Logger>();
+  /// });
+  /// ```
+  T withParameters<T>(Map<String, dynamic> parameters, T Function() callback) {
+    _parameterStack.add(parameters);
+    try {
+      return callback();
+    } finally {
+      _parameterStack.removeLast();
+    }
+  }
+
+  /// Get an override value for a parameter if one exists.
+  ///
+  /// This method is used internally by the container to resolve parameter overrides,
+  /// but is also exposed for use in factory functions.
+  dynamic getParameterOverride(String name) {
+    for (var i = _parameterStack.length - 1; i >= 0; i--) {
+      var parameters = _parameterStack[i];
+      if (parameters.containsKey(name)) {
+        return parameters[name];
+      }
+    }
+    return null;
+  }
+
+  /// Operator overload for array-style access to container bindings.
+  ///
+  /// This allows you to get instances from the container using array syntax:
+  /// ```dart
+  /// var logger = container[Logger];
+  /// ```
+  dynamic operator [](Type type) => make(type);
+
+  /// Operator overload for array-style binding registration.
+  ///
+  /// This allows you to register bindings using array syntax:
+  /// ```dart
+  /// container[Logger] = ConsoleLogger();
+  /// ```
+  void operator []=(Type type, dynamic value) {
+    if (value is Function) {
+      registerFactory(value as dynamic Function(Container), as: type);
+    } else {
+      registerSingleton(value, as: type);
+    }
+  }
+
+  /// Call a method on a resolved instance using Class@method syntax.
+  ///
+  /// This allows you to resolve and call a method in one step:
+  /// ```dart
+  /// container.call('Logger@log', ['Hello world']);
+  /// ```
+  dynamic call(String target,
+      [List<dynamic> parameters = const [],
+      Map<Symbol, dynamic> namedParameters = const {}]) {
+    var parts = target.split('@');
+    if (parts.length != 2) {
+      throw ArgumentError('Invalid Class@method syntax: $target');
+    }
+
+    var className = parts[0];
+    var methodName = parts[1];
+
+    // Find the type by name
+    var type = reflector.findTypeByName(className);
+    if (type == null) {
+      throw ArgumentError('Class not found: $className');
+    }
+
+    // Resolve the instance
+    var instance = make(type);
+
+    // Find and call the method
+    var method = reflector.findInstanceMethod(instance, methodName);
+
+    // If method not found and it's __invoke, try 'call' instead
+    if (method == null && methodName == '__invoke') {
+      method = reflector.findInstanceMethod(instance, 'call');
+    }
+
+    if (method == null) {
+      throw ArgumentError('Method not found: $methodName on $className');
+    }
+
+    // Get method parameters
+    var methodParams = method.parameters;
+    var resolvedParams = [];
+    var paramIndex = 0;
+
+    // Resolve each parameter
+    for (var param in methodParams) {
+      // Handle variadic parameters
+      if (param.isVariadic) {
+        // Collect all remaining parameters into a list
+        var variadicArgs = parameters.skip(paramIndex).toList();
+        resolvedParams.add(variadicArgs);
+        break; // Variadic parameter must be last
+      } else {
+        // If a value was provided for this parameter position, use it
+        if (paramIndex < parameters.length) {
+          var value = parameters[paramIndex++];
+          // If null was provided and we can resolve from container, do so
+          if (value == null && has(param.type.reflectedType)) {
+            resolvedParams.add(make(param.type.reflectedType));
+          } else {
+            resolvedParams.add(value);
+          }
+          continue;
+        }
+      }
+
+      // Otherwise try to resolve from container
+      var paramType = param.type.reflectedType;
+      if (has(paramType)) {
+        resolvedParams.add(make(paramType));
+      } else if (param.isRequired) {
+        throw BindingResolutionException(
+            'No value provided for required parameter ${param.name} of type $paramType in $className@$methodName');
+      }
+    }
+
+    // Call the method with resolved parameters
+    return method
+        .invoke(Invocation.method(
+            Symbol(methodName), resolvedParams, namedParameters))
+        .reflectee;
+  }
+
+  /// Check if we're in danger of a circular dependency.
+  void _checkCircularDependency(Type type) {
+    if (_buildStack.contains(type)) {
+      throw CircularDependencyException(
+        'Circular dependency detected while building $type. Build stack: ${_buildStack.join(' -> ')}',
+      );
+    }
+  }
+
+  /// Bind an abstract type to a concrete implementation
+  ContextualBindingBuilder bind(Type abstract) {
+    return ContextualBindingBuilder(this, [abstract]);
+  }
+
+  /// Register a singleton type and initialize it
+  void singleton(Type type) {
+    if (!_singletons.containsKey(type)) {
+      var instance = make(type);
+      _singletons[type] = instance;
+    }
+  }
+
+  /// Helper method to bind a concrete type to an abstract type
+  void bindTo(Type abstract, Type concrete) {
+    bind(abstract).to(concrete);
+  }
+
+  /// Register a binding if it hasn't already been registered
+  void bindIf<T>(dynamic concrete, {bool singleton = false}) {
+    if (!has<T>()) {
+      if (singleton) {
+        if (concrete is Function) {
+          registerLazySingleton<T>(concrete as T Function(Container));
+        } else {
+          registerSingleton<T>(concrete as T);
+        }
+      } else {
+        if (concrete is Function) {
+          registerFactory<T>(concrete as T Function(Container));
+        } else {
+          registerFactory<T>((c) => concrete as T);
+        }
+      }
+    }
+  }
+
+  /// Register a singleton if it hasn't already been registered
+  void singletonIf<T>(dynamic concrete) {
+    bindIf<T>(concrete, singleton: true);
+  }
+
+  /// Reset the container's state
+  ///
+  /// This method clears all bindings, aliases, extenders, and callbacks,
+  /// effectively resetting the container to its initial state.
+  ///
+  /// ```dart
+  /// container.flush();
+  /// ```
+  void flush() {
+    _singletons.clear();
+    _factories.clear();
+    _namedSingletons.clear();
+    _aliases.clear();
+    _extenders.clear();
+    _reboundCallbacks.clear();
+    _refreshing.clear();
+    _parameterStack.clear();
+    _contextual.clear();
+    _methodBindings.clear();
+    _tags.clear();
+    _scopedInstances.clear();
+    _beforeResolvingCallbacks.clear();
+    _resolvingCallbacks.clear();
+    _afterResolvingCallbacks.clear();
+    _buildStack.clear();
+  }
+
+  /// Make an instance with parameters
+  ///
+  /// This is an alias for making an instance while providing parameters.
+  /// It's equivalent to using withParameters() with make().
+  ///
+  /// ```dart
+  /// var logger = container.makeWith<Logger>({'level': 'debug'});
+  /// ```
+  T makeWith<T>(Map<String, dynamic> parameters, [Type? type]) {
+    return withParameters(parameters, () => make<T>(type));
+  }
+
+  /// Create a factory binding for deferred resolution
+  ///
+  /// This method allows you to create a factory binding that will be resolved
+  /// only when the dependency is requested. This is useful for lazy loading
+  /// and circular dependency resolution.
+  ///
+  /// ```dart
+  /// container.factory<Logger>(() => ConsoleLogger());
+  /// ```
+  void factory<T>(T Function() concrete) {
+    registerFactory<T>((container) => concrete());
+  }
+
+  /// Register all attribute-based bindings for a type
+  void registerAttributeBindings(Type type) {
+    var annotations = reflector.getAnnotations(type);
+    for (var annotation in annotations) {
+      var value = annotation.reflectee;
+      if (value is Injectable) {
+        // Register the binding
+        if (value.bindTo != null) {
+          bind(value.bindTo!).to(type);
+
+          // Apply tags to both the concrete type and the abstract type
+          if (value.tags.isNotEmpty) {
+            for (var tag in value.tags) {
+              _tags[tag] ??= [];
+              _tags[tag]!.add(type);
+              _tags[tag]!.add(value.bindTo!);
+            }
+          }
+        } else {
+          // Apply tags to just the concrete type
+          if (value.tags.isNotEmpty) {
+            for (var tag in value.tags) {
+              _tags[tag] ??= [];
+              _tags[tag]!.add(type);
+            }
+          }
+        }
+
+        // Make it a singleton if requested
+        if (value.singleton) {
+          singleton(type);
+        }
+      }
+    }
+  }
+
+  /// Resolve constructor parameters using attribute-based injection
+  List<dynamic> resolveConstructorParameters(
+      Type type, String constructorName, List<ReflectedParameter> parameters) {
+    var result = <dynamic>[];
+
+    for (var param in parameters) {
+      var annotations =
+          reflector.getParameterAnnotations(type, constructorName, param.name);
+
+      // Find injection annotation
+      ReflectedInstance? injectAnnotation;
+      try {
+        injectAnnotation = annotations.firstWhere(
+            (a) => a.reflectee is Inject || a.reflectee is InjectTagged);
+      } catch (_) {
+        try {
+          injectAnnotation =
+              annotations.firstWhere((a) => a.reflectee is InjectAll);
+        } catch (_) {}
+      }
+
+      if (injectAnnotation != null) {
+        var value = injectAnnotation.reflectee;
+        if (value is Inject) {
+          // Inject specific implementation with config
+          result.add(withParameters(value.config, () {
+            // First try to make the implementation directly
+            if (has(value.implementation)) {
+              return make(value.implementation);
+            }
+            // If that fails, try to resolve through contextual binding
+            var contextual = _getContextualConcrete(value.implementation);
+            if (contextual != null) {
+              return make(contextual);
+            }
+            // Finally try to make it normally
+            return make(value.implementation);
+          }));
+        } else if (value is InjectTagged) {
+          // Inject tagged implementation
+          var tagged = this.tagged(value.tag);
+          if (tagged.isEmpty) {
+            throw BindingResolutionException(
+                'No implementations found for tag: ${value.tag}');
+          }
+          result.add(tagged.first);
+        } else if (value is InjectAll) {
+          // Inject all implementations
+          if (value.tag != null) {
+            result.add(tagged(value.tag!).toList());
+          } else {
+            result.add(makeAll(param.type.reflectedType));
+          }
+        }
+      } else {
+        // No injection annotation, use default resolution
+        result.add(make(param.type.reflectedType));
+      }
+    }
+
+    return result;
+  }
+
+  /// Make all instances of a type
+  List<dynamic> makeAll(Type type) {
+    var result = <dynamic>[];
+    var seen = <Type>{};
+
+    // Get all tagged implementations
+    var allTags = _tags.entries
+        .where((entry) => entry.value.any((t) => t == type))
+        .map((entry) => entry.key)
+        .toList();
+
+    // Collect implementations from all tags
+    for (var tag in allTags) {
+      var implementations =
+          _tags[tag]!.where((t) => !seen.contains(t)).where((t) {
+        var reflectedType = reflector.reflectType(t);
+        var targetType = reflector.reflectType(type);
+        return reflectedType != null &&
+            targetType != null &&
+            (reflectedType.isAssignableTo(targetType) || t == type);
+      }).toList();
+
+      for (var impl in implementations) {
+        seen.add(impl);
+        result.add(make(impl));
+      }
+    }
+
+    // If no tagged implementations found, try to get all registered implementations
+    if (result.isEmpty) {
+      var allTypes = [..._singletons.keys, ..._factories.keys];
+      for (var t in allTypes) {
+        if (!seen.contains(t)) {
+          var reflectedType = reflector.reflectType(t);
+          var targetType = reflector.reflectType(type);
+          if (reflectedType != null &&
+              targetType != null &&
+              (reflectedType.isAssignableTo(targetType) || t == type)) {
+            seen.add(t);
+            result.add(make(t));
+          }
+        }
+      }
+    }
+
+    return result;
   }
 }

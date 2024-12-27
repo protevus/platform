@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-library platform_container;
-
+export 'src/attributes.dart';
 export 'src/container.dart';
+export 'src/contextual_binding_builder.dart';
 export 'src/empty/empty.dart';
 export 'src/static/static.dart';
 export 'src/exception.dart';
