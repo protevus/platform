@@ -56,8 +56,7 @@ class ContextualImplementationBuilder {
   /// Specify the implementation that should be used
   void give<T>() {
     for (var concreteType in concrete) {
-      container.addContextualBinding(
-          concreteType, abstract, (Container c) => c.make<T>());
+      container.addContextualBinding(concreteType, abstract, T);
     }
   }
 

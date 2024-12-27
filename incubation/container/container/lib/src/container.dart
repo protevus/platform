@@ -24,6 +24,12 @@ class Container {
   final Map<Type, dynamic Function(Container)> _factories = {};
   final Map<String, dynamic> _namedSingletons = {};
 
+  /// The container's type aliases
+  final Map<Type, Type> _aliases = {};
+
+  /// The container's service extenders
+  final Map<Type, List<dynamic Function(dynamic, Container)>> _extenders = {};
+
   /// The container's contextual bindings
   final Map<Type, Map<Type, dynamic>> _contextual = {};
 
@@ -134,6 +140,9 @@ class Container {
     } else if (T == dynamic && t == null) {
       return false;
     }
+
+    // Check if the type is aliased
+    t2 = getAlias(t2);
 
     Container? search = this;
     while (search != null) {
@@ -253,6 +262,7 @@ class Container {
   /// This method is central to the dependency injection mechanism, allowing for
   /// flexible object creation and dependency resolution within the container hierarchy.
   T make<T>([Type? type]) {
+    // Get the original type
     Type t2 = T;
     if (type != null) {
       t2 = type;
@@ -324,6 +334,7 @@ class Container {
         }
 
         if (instance != null) {
+          instance = _applyExtenders(t2, instance);
           var typedInstance = instance as T;
           _fireResolvingCallbacks(typedInstance);
           _fireAfterResolvingCallbacks(typedInstance);
@@ -354,6 +365,7 @@ class Container {
         }
 
         if (instance != null) {
+          instance = _applyExtenders(t2, instance);
           var typedInstance = instance as T;
           _fireResolvingCallbacks(typedInstance);
           _fireAfterResolvingCallbacks(typedInstance);
@@ -361,19 +373,22 @@ class Container {
         }
       }
 
-      // Check for singleton or factory
+      // Check for singleton or factory, resolving aliases if no contextual binding was found
       Container? search = this;
+      var resolvedType = contextualConcrete == null ? getAlias(t2) : t2;
       while (search != null) {
-        if (search._singletons.containsKey(t2)) {
-          var instance = search._singletons[t2] as T;
+        if (search._singletons.containsKey(resolvedType)) {
+          var instance = search._singletons[resolvedType];
+          instance = _applyExtenders(resolvedType, instance);
           _fireResolvingCallbacks(instance);
           _fireAfterResolvingCallbacks(instance);
-          return instance;
-        } else if (search._factories.containsKey(t2)) {
-          var instance = search._factories[t2]!(this) as T;
+          return instance as T;
+        } else if (search._factories.containsKey(resolvedType)) {
+          var instance = search._factories[resolvedType]!(this);
+          instance = _applyExtenders(resolvedType, instance);
           _fireResolvingCallbacks(instance);
           _fireAfterResolvingCallbacks(instance);
-          return instance;
+          return instance as T;
         } else {
           search = search._parent;
         }
@@ -443,11 +458,12 @@ class Container {
         var instance = reflectedType.newInstance(
             isDefault(constructor.name) ? '' : constructor.name,
             positional,
-            named, []).reflectee as T;
+            named, []).reflectee;
 
+        instance = _applyExtenders(t2, instance);
         _fireResolvingCallbacks(instance);
         _fireAfterResolvingCallbacks(instance);
-        return instance;
+        return instance as T;
       } else {
         throw BindingResolutionException(
             '$t2 is not a class, and therefore cannot be instantiated.');
@@ -722,8 +738,16 @@ class Container {
     while (search != null) {
       var building = _buildStack.last;
       var contextMap = search._contextual[building];
-      if (contextMap != null && contextMap.containsKey(abstract)) {
-        return contextMap[abstract];
+      if (contextMap != null) {
+        // First try to find a binding for the original type
+        if (contextMap.containsKey(abstract)) {
+          return contextMap[abstract];
+        }
+        // Then try to find a binding for the aliased type
+        var aliasedType = getAlias(abstract);
+        if (aliasedType != abstract && contextMap.containsKey(aliasedType)) {
+          return contextMap[aliasedType];
+        }
       }
       search = search._parent;
     }
@@ -768,13 +792,95 @@ class Container {
     while (search != null) {
       var building = _buildStack.last;
       var contextMap = search._contextual[building];
-      if (contextMap != null && contextMap.containsKey(type)) {
-        return true;
+      if (contextMap != null) {
+        // First check for binding of original type
+        if (contextMap.containsKey(type)) {
+          return true;
+        }
+        // Then check for binding of aliased type
+        var aliasedType = getAlias(type);
+        if (aliasedType != type && contextMap.containsKey(aliasedType)) {
+          return true;
+        }
       }
       search = search._parent;
     }
 
     return false;
+  }
+
+  /// Register an alias for an abstract type.
+  ///
+  /// This allows you to alias an abstract type to a concrete implementation.
+  /// For example, you might alias an interface to its default implementation:
+  /// ```dart
+  /// container.alias<Logger>(ConsoleLogger);
+  /// ```
+  void alias<T>(Type concrete) {
+    _aliases[T] = concrete;
+  }
+
+  /// Get the concrete type that an abstract type is aliased to.
+  ///
+  /// If the type is not aliased in this container or any parent container,
+  /// returns the type itself.
+  Type getAlias(Type abstract) {
+    Container? search = this;
+    while (search != null) {
+      if (search._aliases.containsKey(abstract)) {
+        return search._aliases[abstract]!;
+      }
+      search = search._parent;
+    }
+    return abstract;
+  }
+
+  /// Check if a type is aliased to another type in this container or any parent container.
+  bool isAlias(Type type) {
+    Container? search = this;
+    while (search != null) {
+      if (search._aliases.containsKey(type)) {
+        return true;
+      }
+      search = search._parent;
+    }
+    return false;
+  }
+
+  /// Extend a service after it is resolved.
+  ///
+  /// This allows you to modify a service after it has been resolved from the container.
+  /// The callback receives the resolved instance and the container, and should return
+  /// the modified instance.
+  ///
+  /// ```dart
+  /// container.extend<Logger>((logger, container) {
+  ///   logger.level = LogLevel.debug;
+  ///   return logger;
+  /// });
+  /// ```
+  void extend<T>(
+      dynamic Function(dynamic instance, Container container) callback) {
+    _extenders.putIfAbsent(T, () => []).add(callback);
+  }
+
+  /// Apply any registered extenders to an instance.
+  dynamic _applyExtenders(Type type, dynamic instance) {
+    // Collect all extenders from parent to child
+    var extenders = <dynamic Function(dynamic, Container)>[];
+    Container? search = this;
+    while (search != null) {
+      if (search._extenders.containsKey(type)) {
+        extenders.insertAll(0, search._extenders[type]!);
+      }
+      search = search._parent;
+    }
+
+    // Apply extenders in order (parent to child)
+    for (var extender in extenders) {
+      instance = extender(instance, this);
+    }
+    return instance;
   }
 
   /// Check if we're in danger of a circular dependency.
