@@ -30,6 +30,13 @@ class Container {
   /// The container's service extenders
   final Map<Type, List<dynamic Function(dynamic, Container)>> _extenders = {};
 
+  /// The container's rebound callbacks
+  final Map<Type, List<void Function(dynamic, Container)>> _reboundCallbacks =
+      {};
+
+  /// The container's refreshing instances
+  final Set<Type> _refreshing = {};
+
   /// The container's contextual bindings
   final Map<Type, Map<Type, dynamic>> _contextual = {};
 
@@ -881,6 +888,67 @@ class Container {
       instance = extender(instance, this);
     }
     return instance;
+  }
+
+  /// Register a callback to be run when a type is rebound.
+  ///
+  /// The callback will be invoked whenever the type's binding is replaced
+  /// or when refresh() is called on the type.
+  ///
+  /// ```dart
+  /// container.rebinding<Logger>((logger, container) {
+  ///   print('Logger was rebound');
+  /// });
+  /// ```
+  void rebinding<T>(
+      void Function(dynamic instance, Container container) callback) {
+    _reboundCallbacks.putIfAbsent(T, () => []).add(callback);
+  }
+
+  /// Refresh an instance in the container.
+  ///
+  /// This will create a new instance and trigger any rebound callbacks.
+  /// If the instance is a singleton, it will be replaced in the container.
+  ///
+  /// ```dart
+  /// container.refresh<Logger>();
+  /// ```
+  T refresh<T>() {
+    if (_refreshing.contains(T)) {
+      throw CircularDependencyException(
+          'Circular dependency detected while refreshing $T');
+    }
+
+    _refreshing.add(T);
+    try {
+      // Create new instance
+      var instance = make<T>();
+
+      // If it's a singleton, replace it
+      if (_singletons.containsKey(T)) {
+        _singletons[T] = instance;
+      }
+
+      // Fire rebound callbacks
+      _fireReboundCallbacks(T, instance);
+
+      return instance;
+    } finally {
+      _refreshing.remove(T);
+    }
+  }
+
+  /// Fire the rebound callbacks for a type.
+  void _fireReboundCallbacks(Type type, dynamic instance) {
+    Container? search = this;
+    while (search != null) {
+      if (search._reboundCallbacks.containsKey(type)) {
+        for (var callback in search._reboundCallbacks[type]!) {
+          callback(instance, this);
+        }
+      }
+      search = search._parent;
+    }
   }
 
   /// Check if we're in danger of a circular dependency.
