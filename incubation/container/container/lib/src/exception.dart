@@ -24,19 +24,17 @@ abstract class ContainerException implements Exception {
 
 /// Exception thrown when reflection operations fail
 class ReflectionException extends ContainerException {
-  ReflectionException(String message, [Object? cause]) : super(message, cause);
+  ReflectionException(super.message, [super.cause]);
 }
 
 /// Exception thrown when a binding resolution fails
 class BindingResolutionException extends ContainerException {
-  BindingResolutionException(String message, [Object? cause])
-      : super(message, cause);
+  BindingResolutionException(super.message, [super.cause]);
 }
 
 /// Exception thrown when a circular dependency is detected
 class CircularDependencyException extends ContainerException {
-  CircularDependencyException(String message, [Object? cause])
-      : super(message, cause);
+  CircularDependencyException(super.message, [super.cause]);
 }
 
 /// Exception thrown when an entry is not found in the container
@@ -50,6 +48,5 @@ class EntryNotFoundException extends ContainerException {
 
 /// Exception thrown when there are contextual binding issues
 class ContextualBindingException extends ContainerException {
-  ContextualBindingException(String message, [Object? cause])
-      : super(message, cause);
+  ContextualBindingException(super.message, [super.cause]);
 }
