@@ -1061,6 +1061,12 @@ class Container {
 
     // Find and call the method
     var method = reflector.findInstanceMethod(instance, methodName);
+
+    // If method not found and it's __invoke, try 'call' instead
+    if (method == null && methodName == '__invoke') {
+      method = reflector.findInstanceMethod(instance, 'call');
+    }
+
     if (method == null) {
       throw ArgumentError('Method not found: $methodName on $className');
     }
