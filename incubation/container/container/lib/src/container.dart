@@ -1248,6 +1248,33 @@ class Container {
     bindIf<T>(concrete, singleton: true);
   }
 
+  /// Reset the container's state
+  ///
+  /// This method clears all bindings, aliases, extenders, and callbacks,
+  /// effectively resetting the container to its initial state.
+  ///
+  /// ```dart
+  /// container.flush();
+  /// ```
+  void flush() {
+    _singletons.clear();
+    _factories.clear();
+    _namedSingletons.clear();
+    _aliases.clear();
+    _extenders.clear();
+    _reboundCallbacks.clear();
+    _refreshing.clear();
+    _parameterStack.clear();
+    _contextual.clear();
+    _methodBindings.clear();
+    _tags.clear();
+    _scopedInstances.clear();
+    _beforeResolvingCallbacks.clear();
+    _resolvingCallbacks.clear();
+    _afterResolvingCallbacks.clear();
+    _buildStack.clear();
+  }
+
   /// Make an instance with parameters
   ///
   /// This is an alias for making an instance while providing parameters.
