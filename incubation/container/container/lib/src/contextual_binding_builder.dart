@@ -8,6 +8,8 @@
  */
 
 import 'container.dart';
+import 'exception.dart';
+import 'reflector.dart';
 
 /// A builder class for defining contextual bindings in the container.
 ///
@@ -65,5 +67,44 @@ class ContextualImplementationBuilder {
     for (var concreteType in concrete) {
       container.addContextualBinding(concreteType, abstract, factory);
     }
+  }
+
+  /// Specify that the implementation should be resolved from a tagged binding
+  void giveTagged(String tag) {
+    giveFactory((container) {
+      var tagged = container.tagged(tag);
+      if (tagged.isEmpty) {
+        throw BindingResolutionException(
+            'No implementations found for tag: $tag');
+      }
+      return tagged.first;
+    });
+  }
+
+  /// Specify the implementation type and its configuration
+  void giveConfig(Type implementation, Map<String, dynamic> config) {
+    giveFactory((container) {
+      // Get reflected type to validate required parameters
+      var reflectedType = container.reflector.reflectType(implementation);
+      if (reflectedType is ReflectedClass) {
+        var constructor = reflectedType.constructors.firstWhere(
+            (c) => c.name.isEmpty || c.name == reflectedType.name,
+            orElse: () => reflectedType.constructors.first);
+
+        // Check required parameters
+        for (var param in constructor.parameters) {
+          if (param.isRequired &&
+              param.isNamed &&
+              !config.containsKey(param.name)) {
+            throw BindingResolutionException(
+                'Required parameter ${param.name} is missing for ${reflectedType.name}');
+          }
+        }
+      }
+
+      return container.withParameters(config, () {
+        return container.make(implementation);
+      });
+    });
   }
 }
