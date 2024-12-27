@@ -1039,7 +1039,9 @@ class Container {
   /// ```dart
   /// container.call('Logger@log', ['Hello world']);
   /// ```
-  dynamic call(String target, [List<dynamic> parameters = const []]) {
+  dynamic call(String target,
+      [List<dynamic> parameters = const [],
+      Map<Symbol, dynamic> namedParameters = const {}]) {
     var parts = target.split('@');
     if (parts.length != 2) {
       throw ArgumentError('Invalid Class@method syntax: $target');
@@ -1063,8 +1065,39 @@ class Container {
       throw ArgumentError('Method not found: $methodName on $className');
     }
 
+    // Get method parameters
+    var methodParams = method.parameters;
+    var resolvedParams = [];
+    var paramIndex = 0;
+
+    // Resolve each parameter
+    for (var param in methodParams) {
+      // If a value was provided for this parameter position, use it
+      if (paramIndex < parameters.length) {
+        var value = parameters[paramIndex++];
+        // If null was provided and we can resolve from container, do so
+        if (value == null && has(param.type.reflectedType)) {
+          resolvedParams.add(make(param.type.reflectedType));
+        } else {
+          resolvedParams.add(value);
+        }
+        continue;
+      }
+
+      // Otherwise try to resolve from container
+      var paramType = param.type.reflectedType;
+      if (has(paramType)) {
+        resolvedParams.add(make(paramType));
+      } else if (param.isRequired) {
+        throw BindingResolutionException(
+            'No value provided for required parameter ${param.name} of type $paramType in $className@$methodName');
+      }
+    }
+
+    // Call the method with resolved parameters
     return method
-        .invoke(Invocation.method(Symbol(methodName), parameters))
+        .invoke(Invocation.method(
+            Symbol(methodName), resolvedParams, namedParameters))
         .reflectee;
   }
 

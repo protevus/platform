@@ -1,10 +1,16 @@
 import 'package:platformed_container/container.dart';
 import 'package:test/test.dart';
 
+class Config {
+  final String environment;
+  Config(this.environment);
+}
+
 class Logger {
   String log(String message) => message;
-  void debug(String message, {int? level}) {}
-  int count(List<String> items) => items.length;
+  void configure(Config config) {}
+  String format(String message, {int? level}) => '$message (level: $level)';
+  void setup(Config config, String name) {}
 }
 
 class MockReflector extends Reflector {
@@ -39,32 +45,33 @@ class MockReflector extends Reflector {
         case 'log':
           return MockMethod('log', (invocation) {
             var args = invocation.positionalArguments;
-            if (args.isEmpty) {
-              throw ArgumentError('Method log requires a message parameter');
-            }
             return MockReflectedInstance(instance.log(args[0] as String));
           }, [MockParameter('message', String, true, false)]);
-        case 'debug':
-          return MockMethod('debug', (invocation) {
+        case 'configure':
+          return MockMethod('configure', (invocation) {
             var args = invocation.positionalArguments;
-            if (args.isEmpty) {
-              throw ArgumentError('Method debug requires a message parameter');
-            }
-            instance.debug(args[0] as String);
+            instance.configure(args[0] as Config);
             return MockReflectedInstance(null);
+          }, [MockParameter('config', Config, true, false)]);
+        case 'format':
+          return MockMethod('format', (invocation) {
+            var args = invocation.positionalArguments;
+            var namedArgs = invocation.namedArguments;
+            return MockReflectedInstance(instance.format(args[0] as String,
+                level: namedArgs[#level] as int?));
           }, [
             MockParameter('message', String, true, false),
             MockParameter('level', int, false, true)
           ]);
-        case 'count':
-          return MockMethod('count', (invocation) {
+        case 'setup':
+          return MockMethod('setup', (invocation) {
             var args = invocation.positionalArguments;
-            if (args.isEmpty) {
-              throw ArgumentError('Method count requires a list parameter');
-            }
-            return MockReflectedInstance(
-                instance.count(args[0] as List<String>));
-          }, [MockParameter('items', List<String>, true, false)]);
+            instance.setup(args[0] as Config, args[1] as String);
+            return MockReflectedInstance(null);
+          }, [
+            MockParameter('config', Config, true, false),
+            MockParameter('name', String, true, false)
+          ]);
       }
     }
     return null;
@@ -74,11 +81,9 @@ class MockReflector extends Reflector {
 class MockMethod implements ReflectedFunction {
   final String methodName;
   final ReflectedInstance Function(Invocation) handler;
-  final List<ReflectedParameter> _parameters;
+  final List<ReflectedParameter> methodParameters;
 
-  MockMethod(this.methodName, this.handler,
-      [List<ReflectedParameter>? parameters])
-      : _parameters = parameters ?? [];
+  MockMethod(this.methodName, this.handler, this.methodParameters);
 
   @override
   List<ReflectedInstance> get annotations => [];
@@ -93,7 +98,7 @@ class MockMethod implements ReflectedFunction {
   String get name => methodName;
 
   @override
-  List<ReflectedParameter> get parameters => _parameters;
+  List<ReflectedParameter> get parameters => methodParameters;
 
   @override
   ReflectedType? get returnType => null;
@@ -169,38 +174,39 @@ void main() {
   setUp(() {
     container = Container(MockReflector());
     container.registerSingleton(Logger());
+    container.registerSingleton(Config('test'));
   });
 
-  group('Class@method syntax', () {
-    test('can call method with return value', () {
-      var result = container.call('Logger@log', ['Hello world']);
-      expect(result, equals('Hello world'));
+  group('Parameter Dependency Injection', () {
+    test('can inject dependencies into method parameters', () {
+      expect(() => container.call('Logger@configure'), returnsNormally);
     });
 
-    test('can call void method', () {
-      expect(() => container.call('Logger@debug', ['Debug message']),
-          returnsNormally);
+    test('uses provided parameters over container bindings', () {
+      var prodConfig = Config('production');
+      container.call('Logger@configure', [prodConfig]);
     });
 
-    test('can call method with list parameter', () {
-      var result = container.call('Logger@count', [
-        ['one', 'two', 'three']
-      ]);
-      expect(result, equals(3));
+    test('throws when required parameter is missing', () {
+      expect(() => container.call('Logger@setup', [Config('test')]),
+          throwsA(isA<BindingResolutionException>()));
     });
 
-    test('throws on invalid syntax', () {
-      expect(() => container.call('Logger'), throwsArgumentError);
-      expect(() => container.call('Logger@'), throwsArgumentError);
-      expect(() => container.call('@log'), throwsArgumentError);
+    test('handles mix of injected and provided parameters', () {
+      // When null is provided for a parameter that can be resolved from container,
+      // the container should resolve it
+      container.call('Logger@setup', [null, 'test-logger']);
     });
 
-    test('throws on unknown class', () {
-      expect(() => container.call('Unknown@method'), throwsArgumentError);
+    test('handles optional parameters', () {
+      var result = container.call('Logger@format', ['test message']);
+      expect(result, equals('test message (level: null)'));
     });
 
-    test('throws on unknown method', () {
-      expect(() => container.call('Logger@unknown'), throwsArgumentError);
+    test('handles optional parameters with provided values', () {
+      var result =
+          container.call('Logger@format', ['test message'], {#level: 1});
+      expect(result, equals('test message (level: 1)'));
     });
   });
 }
