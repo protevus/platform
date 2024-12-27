@@ -597,8 +597,17 @@ class Container {
   /// Define a contextual binding.
   ///
   /// This allows you to define how abstract types should be resolved in specific contexts.
-  ContextualBindingBuilder when(Type concrete) {
-    return ContextualBindingBuilder(this, [concrete]);
+  ///
+  /// The [concrete] parameter can be either a single Type or a List<Type>.
+  /// When a List<Type> is provided, the same binding will be applied to all types in the list.
+  ContextualBindingBuilder when(dynamic concrete) {
+    if (concrete is Type) {
+      return ContextualBindingBuilder(this, [concrete]);
+    } else if (concrete is List<Type>) {
+      return ContextualBindingBuilder(this, concrete);
+    }
+    throw ArgumentError(
+        'The concrete parameter must be either Type or List<Type>');
   }
 
   /// Add a contextual binding to the container.
