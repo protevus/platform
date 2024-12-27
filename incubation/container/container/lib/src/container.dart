@@ -1033,6 +1033,41 @@ class Container {
     }
   }
 
+  /// Call a method on a resolved instance using Class@method syntax.
+  ///
+  /// This allows you to resolve and call a method in one step:
+  /// ```dart
+  /// container.call('Logger@log', ['Hello world']);
+  /// ```
+  dynamic call(String target, [List<dynamic> parameters = const []]) {
+    var parts = target.split('@');
+    if (parts.length != 2) {
+      throw ArgumentError('Invalid Class@method syntax: $target');
+    }
+
+    var className = parts[0];
+    var methodName = parts[1];
+
+    // Find the type by name
+    var type = reflector.findTypeByName(className);
+    if (type == null) {
+      throw ArgumentError('Class not found: $className');
+    }
+
+    // Resolve the instance
+    var instance = make(type);
+
+    // Find and call the method
+    var method = reflector.findInstanceMethod(instance, methodName);
+    if (method == null) {
+      throw ArgumentError('Method not found: $methodName on $className');
+    }
+
+    return method
+        .invoke(Invocation.method(Symbol(methodName), parameters))
+        .reflectee;
+  }
+
   /// Check if we're in danger of a circular dependency.
   void _checkCircularDependency(Type type) {
     if (_buildStack.contains(type)) {

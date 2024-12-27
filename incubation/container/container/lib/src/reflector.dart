@@ -43,6 +43,22 @@ abstract class Reflector {
   ReflectedType reflectFutureOf(Type type) {
     throw UnsupportedError('`reflectFutureOf` requires `dart:mirrors`.');
   }
+
+  /// Find a type by its name.
+  ///
+  /// This method is used to support Class@method syntax by finding a type
+  /// from its string name.
+  Type? findTypeByName(String name) {
+    throw UnsupportedError('`findTypeByName` requires `dart:mirrors`.');
+  }
+
+  /// Find an instance method by its name.
+  ///
+  /// This method is used to support Class@method syntax by finding a method
+  /// on an instance from its string name.
+  ReflectedFunction? findInstanceMethod(Object instance, String methodName) {
+    throw UnsupportedError('`findInstanceMethod` requires `dart:mirrors`.');
+  }
 }
 
 /// Represents a reflected instance of an object.
@@ -241,6 +257,9 @@ abstract class ReflectedFunction {
       other.isGetter == isGetter &&
       other.isSetter == isSetter;
 
+  /// Invoke this function with the given invocation.
+  ///
+  /// This method is used to support dynamic method invocation.
   ReflectedInstance invoke(Invocation invocation);
 }
 
