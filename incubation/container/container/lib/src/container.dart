@@ -37,6 +37,9 @@ class Container {
   /// The container's refreshing instances
   final Set<Type> _refreshing = {};
 
+  /// The container's parameter override stack
+  final List<Map<String, dynamic>> _parameterStack = [];
+
   /// The container's contextual bindings
   final Map<Type, Map<Type, dynamic>> _contextual = {};
 
@@ -318,15 +321,23 @@ class Container {
               var named = <String, Object>{};
 
               for (var param in constructor.parameters) {
-                if (param.type.reflectedType == String) {
-                  positional.add('test.log'); // Default filename for FileLogger
-                } else {
-                  var value = make(param.type.reflectedType);
+                // Check for parameter override
+                var override = getParameterOverride(param.name);
+                if (override != null) {
                   if (param.isNamed) {
-                    named[param.name] = value;
+                    named[param.name] = override;
                   } else {
-                    positional.add(value);
+                    positional.add(override);
                   }
+                  continue;
+                }
+
+                // No override, resolve normally
+                var value = make(param.type.reflectedType);
+                if (param.isNamed) {
+                  named[param.name] = value;
+                } else {
+                  positional.add(value);
                 }
               }
 
@@ -391,7 +402,10 @@ class Container {
           _fireAfterResolvingCallbacks(instance);
           return instance as T;
         } else if (search._factories.containsKey(resolvedType)) {
-          var instance = search._factories[resolvedType]!(this);
+          // For factory bindings, wrap the factory call in withParameters
+          var instance = withParameters(_parameterStack.lastOrNull ?? {}, () {
+            return search!._factories[resolvedType]!(this);
+          });
           instance = _applyExtenders(resolvedType, instance);
           _fireResolvingCallbacks(instance);
           _fireAfterResolvingCallbacks(instance);
@@ -450,8 +464,19 @@ class Container {
         _buildStack.add(t2);
         try {
           for (var param in constructor.parameters) {
-            var value = make(param.type.reflectedType);
+            // Check for parameter override
+            var override = getParameterOverride(param.name);
+            if (override != null) {
+              if (param.isNamed) {
+                named[param.name] = override;
+              } else {
+                positional.add(override);
+              }
+              continue;
+            }
 
+            // No override, resolve normally
+            var value = make(param.type.reflectedType);
             if (param.isNamed) {
               named[param.name] = value;
             } else {
@@ -511,7 +536,11 @@ class Container {
       throw StateError('This container already has a factory for $t2.');
     }
 
-    _factories[t2] = f;
+    // Wrap factory in parameter override handler
+    _factories[t2] = (container) {
+      return container.withParameters(
+          _parameterStack.lastOrNull ?? {}, () => f(container));
+    };
     return f;
   }
 
@@ -949,6 +978,37 @@ class Container {
       }
       search = search._parent;
     }
+  }
+
+  /// Push parameter overrides onto the stack.
+  ///
+  /// These parameters will be used when resolving dependencies until they are popped.
+  /// ```dart
+  /// container.withParameters({'filename': 'custom.log'}, () {
+  ///   var logger = container.make<Logger>();
+  /// });
+  /// ```
+  T withParameters<T>(Map<String, dynamic> parameters, T Function() callback) {
+    _parameterStack.add(parameters);
+    try {
+      return callback();
+    } finally {
+      _parameterStack.removeLast();
+    }
+  }
+
+  /// Get an override value for a parameter if one exists.
+  ///
+  /// This method is used internally by the container to resolve parameter overrides,
+  /// but is also exposed for use in factory functions.
+  dynamic getParameterOverride(String name) {
+    for (var i = _parameterStack.length - 1; i >= 0; i--) {
+      var parameters = _parameterStack[i];
+      if (parameters.containsKey(name)) {
+        return parameters[name];
+      }
+    }
+    return null;
   }
 
   /// Check if we're in danger of a circular dependency.
