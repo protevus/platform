@@ -13,6 +13,8 @@ import 'exception.dart';
 import 'reflector.dart';
 import 'contextual_binding_builder.dart';
 
+var currentPos = 0;
+
 class Container {
   /// The [Reflector] instance used by this container for reflection-based operations.
   ///
@@ -1155,73 +1157,6 @@ class Container {
   /// Helper method to bind a concrete type to an abstract type
   void bindTo(Type abstract, Type concrete) {
     bind(abstract).to(concrete);
-  }
-
-  /// Wrap a closure with dependency injection
-  ///
-  /// This allows you to wrap a closure so its dependencies will be injected when executed.
-  /// The wrapped closure will receive injected dependencies first, followed by any
-  /// additional parameters passed to the wrapper.
-  ///
-  /// ```dart
-  /// var wrapped = container.wrap((Logger logger, String message) {
-  ///   logger.log(message);
-  /// });
-  /// wrapped('Hello world'); // Logger will be injected automatically
-  /// ```
-  Function wrap<T extends Function>(T callback) {
-    return ([dynamic arg1]) {
-      // Get the function's parameter types through reflection
-      var reflectedFunction = reflector.reflectFunction(callback);
-      if (reflectedFunction == null) {
-        throw BindingResolutionException(
-            'Could not reflect function parameters for dependency injection');
-      }
-
-      // Resolve dependencies for each parameter
-      var resolvedArgs = <dynamic>[];
-      var namedArgs = <Symbol, dynamic>{};
-
-      // First resolve all container-injectable parameters
-      var injectedTypes = <Type>{};
-      for (var param in reflectedFunction.parameters) {
-        var paramType = param.type.reflectedType;
-        if (has(paramType)) {
-          if (param.isNamed) {
-            namedArgs[Symbol(param.name)] = make(paramType);
-          } else {
-            resolvedArgs.add(make(paramType));
-          }
-          injectedTypes.add(paramType);
-        }
-      }
-
-      // Then add any provided arguments for remaining parameters
-      var providedArgs = <dynamic>[];
-      if (arg1 != null) providedArgs.add(arg1);
-
-      // Process remaining parameters in order
-      var paramIndex = 0;
-      var providedIndex = 0;
-      for (var param in reflectedFunction.parameters) {
-        if (param.isNamed) continue;
-        if (injectedTypes.contains(param.type.reflectedType)) {
-          paramIndex++;
-          continue;
-        }
-
-        if (providedIndex < providedArgs.length) {
-          resolvedArgs.add(providedArgs[providedIndex++]);
-        } else if (param.isRequired) {
-          throw BindingResolutionException(
-              'No value provided for required parameter ${param.name} of type ${param.type.reflectedType}');
-        }
-        paramIndex++;
-      }
-
-      // Call the function with resolved arguments
-      return Function.apply(callback, resolvedArgs, namedArgs);
-    };
   }
 
   /// Register a binding if it hasn't already been registered
