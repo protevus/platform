@@ -42,7 +42,10 @@ void main() {
       container.registerSingleton<Logger>(ConsoleLogger());
 
       // Register contextual binding
-      container.when(LoggerClient).needs<Logger>().give<FileLogger>();
+      container
+          .when(LoggerClient)
+          .needs<Logger>()
+          .giveFactory((c) => FileLogger('test.log'));
 
       // The default binding should be used here
       var logger = container.make<Logger>();
@@ -56,8 +59,14 @@ void main() {
     test('multiple contextual bindings work independently', () {
       container.registerSingleton<Logger>(ConsoleLogger());
 
-      container.when(LoggerClient).needs<Logger>().give<FileLogger>();
-      container.when(SpecialLoggerClient).needs<Logger>().give<ConsoleLogger>();
+      container
+          .when(LoggerClient)
+          .needs<Logger>()
+          .giveFactory((c) => FileLogger('test.log'));
+      container
+          .when(SpecialLoggerClient)
+          .needs<Logger>()
+          .giveFactory((c) => ConsoleLogger());
 
       var client1 = container.make<LoggerClient>();
       var client2 = container.make<SpecialLoggerClient>();
@@ -80,7 +89,10 @@ void main() {
     });
 
     test('contextual binding throws when implementation not found', () {
-      container.when(LoggerClient).needs<Logger>().give<FileLogger>();
+      container
+          .when(LoggerClient)
+          .needs<Logger>()
+          .giveFactory((c) => FileLogger('test.log'));
 
       expect(
         () => container.make<LoggerClient>(),
@@ -90,7 +102,10 @@ void main() {
 
     test('contextual bindings are inherited by child containers', () {
       container.registerSingleton<Logger>(ConsoleLogger());
-      container.when(LoggerClient).needs<Logger>().give<FileLogger>();
+      container
+          .when(LoggerClient)
+          .needs<Logger>()
+          .giveFactory((c) => FileLogger('test.log'));
 
       var childContainer = container.createChild();
       var client = childContainer.make<LoggerClient>();
@@ -100,7 +115,10 @@ void main() {
 
     test('child container can override parent contextual binding', () {
       container.registerSingleton<Logger>(ConsoleLogger());
-      container.when(LoggerClient).needs<Logger>().give<FileLogger>();
+      container
+          .when(LoggerClient)
+          .needs<Logger>()
+          .giveFactory((c) => FileLogger('test.log'));
 
       var childContainer = container.createChild();
       childContainer

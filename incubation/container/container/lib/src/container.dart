@@ -268,6 +268,10 @@ class Container {
 
       // Check for contextual binding
       var contextualConcrete = _getContextualConcrete(t2);
+      if (contextualConcrete == null && _hasContextualBinding(t2)) {
+        throw BindingResolutionException(
+            'No implementation was provided for contextual binding of $t2');
+      }
       if (contextualConcrete != null) {
         dynamic instance;
         if (contextualConcrete is Function) {
@@ -382,6 +386,31 @@ class Container {
 
       // Use reflection to create instance
       var reflectedType = reflector.reflectType(t2);
+      if (reflectedType == null) {
+        throw BindingResolutionException('No binding was found for $t2');
+      }
+
+      // Check if we have all required dependencies
+      if (reflectedType is ReflectedClass) {
+        bool isDefault(String name) {
+          return name.isEmpty || name == reflectedType.name;
+        }
+
+        var constructor = reflectedType.constructors.firstWhere(
+            (c) => isDefault(c.name),
+            orElse: (() => throw BindingResolutionException(
+                '${reflectedType.name} has no default constructor, and therefore cannot be instantiated.')));
+
+        // Check if we can resolve all constructor parameters
+        for (var param in constructor.parameters) {
+          var paramType = param.type.reflectedType;
+          if (!has(paramType) && reflector.reflectType(paramType) == null) {
+            throw BindingResolutionException(
+                'No binding was found for $paramType required by $t2');
+          }
+        }
+      }
+
       var positional = [];
       var named = <String, Object>{};
 
@@ -728,6 +757,24 @@ class Container {
     }
 
     return null;
+  }
+
+  /// Check if a type has a contextual binding.
+  bool _hasContextualBinding(Type type) {
+    if (_buildStack.isEmpty) return false;
+
+    // Check current container's contextual bindings
+    Container? search = this;
+    while (search != null) {
+      var building = _buildStack.last;
+      var contextMap = search._contextual[building];
+      if (contextMap != null && contextMap.containsKey(type)) {
+        return true;
+      }
+      search = search._parent;
+    }
+
+    return false;
   }
 
   /// Check if we're in danger of a circular dependency.

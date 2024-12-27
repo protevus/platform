@@ -45,12 +45,19 @@ class ContextualImplementationBuilder {
   final Type abstract;
 
   /// Creates a new contextual implementation builder
-  ContextualImplementationBuilder(this.container, this.concrete, this.abstract);
+  ContextualImplementationBuilder(
+      this.container, this.concrete, this.abstract) {
+    // Register an empty binding by default
+    for (var concreteType in concrete) {
+      container.addContextualBinding(concreteType, abstract, null);
+    }
+  }
 
   /// Specify the implementation that should be used
   void give<T>() {
     for (var concreteType in concrete) {
-      container.addContextualBinding(concreteType, abstract, T);
+      container.addContextualBinding(
+          concreteType, abstract, (Container c) => c.make<T>());
     }
   }
 
