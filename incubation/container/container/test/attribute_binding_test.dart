@@ -69,11 +69,12 @@ class MockReflector extends Reflector {
               MockParameter('allLoggers', List<Logger>, true, false),
             ])
           ],
-          Service);
+          Service,
+          this);
     }
     if (clazz == SingletonService) {
       return MockReflectedClass('SingletonService', [], [],
-          [MockConstructor('', [])], SingletonService);
+          [MockConstructor('', [])], SingletonService, this);
     }
     return null;
   }
@@ -81,7 +82,7 @@ class MockReflector extends Reflector {
   @override
   ReflectedType? reflectType(Type type) {
     if (type == List<Logger>) {
-      return MockReflectedClass('List<Logger>', [], [], [], List<Logger>);
+      return MockReflectedClass('List<Logger>', [], [], [], List<Logger>, this);
     }
     if (type == Service) {
       return MockReflectedClass(
@@ -95,7 +96,8 @@ class MockReflector extends Reflector {
               MockParameter('allLoggers', List<Logger>, true, false),
             ])
           ],
-          Service);
+          Service,
+          this);
     }
     if (type == ConsoleLogger) {
       return MockReflectedClass(
@@ -107,7 +109,8 @@ class MockReflector extends Reflector {
               MockParameter('level', String, false, true),
             ])
           ],
-          ConsoleLogger);
+          ConsoleLogger,
+          this);
     }
     if (type == FileLogger) {
       return MockReflectedClass(
@@ -119,19 +122,20 @@ class MockReflector extends Reflector {
               MockParameter('filename', String, true, true),
             ])
           ],
-          FileLogger);
+          FileLogger,
+          this);
     }
     if (type == Logger) {
       return MockReflectedClass(
-          'Logger', [], [], [MockConstructor('', [])], Logger);
+          'Logger', [], [], [MockConstructor('', [])], Logger, this);
     }
     if (type == SingletonService) {
       return MockReflectedClass('SingletonService', [], [],
-          [MockConstructor('', [])], SingletonService);
+          [MockConstructor('', [])], SingletonService, this);
     }
     if (type == String) {
       return MockReflectedClass(
-          'String', [], [], [MockConstructor('', [])], String);
+          'String', [], [], [MockConstructor('', [])], String, this);
     }
     return null;
   }
@@ -198,15 +202,20 @@ class MockReflectedClass extends ReflectedType implements ReflectedClass {
   final List<ReflectedFunction> constructors;
   @override
   final List<ReflectedDeclaration> declarations;
+  final MockReflector? reflector;
 
-  MockReflectedClass(
-    String name,
-    List<ReflectedTypeParameter> typeParameters,
-    this.annotations,
-    this.constructors,
-    Type reflectedType,
-  )   : declarations = [],
+  MockReflectedClass(String name, List<ReflectedTypeParameter> typeParameters,
+      this.annotations, this.constructors, Type reflectedType,
+      [this.reflector])
+      : declarations = [],
         super(reflectedType.toString(), typeParameters, reflectedType);
+
+  List<ReflectedInstance> getParameterAnnotations(
+      Type type, String constructorName, String parameterName) {
+    return reflector?.getParameterAnnotations(
+            type, constructorName, parameterName) ??
+        [];
+  }
 
   void _validateParameters(List<ReflectedParameter> parameters,
       List positionalArguments, Map<String, dynamic> namedArguments) {
@@ -262,6 +271,13 @@ class MockReflectedClass extends ReflectedType implements ReflectedClass {
         constructor.parameters, positionalArguments, namedArguments);
 
     if (reflectedType == Service) {
+      // Get parameter annotations
+      var fileLoggerAnnotations =
+          getParameterAnnotations(Service, '', 'fileLogger');
+      var fileLoggerConfig = fileLoggerAnnotations
+          .firstWhere((a) => a.reflectee is Inject)
+          .reflectee as Inject;
+
       var allLoggers = <Logger>[];
       if (positionalArguments[2] is List) {
         for (var item in positionalArguments[2] as List) {
@@ -270,9 +286,10 @@ class MockReflectedClass extends ReflectedType implements ReflectedClass {
           }
         }
       }
+
       return MockReflectedInstance(Service(
         positionalArguments[0] as Logger,
-        positionalArguments[1] as Logger,
+        FileLogger(filename: fileLoggerConfig.config['filename'] as String),
         allLoggers,
       ));
     }
@@ -442,15 +459,22 @@ void main() {
       container.registerAttributeBindings(FileLogger);
       container.registerAttributeBindings(SingletonService);
 
+      // Register FileLogger binding with configuration
+      container
+          .registerFactory<FileLogger>((c) => FileLogger(filename: 'app.log'));
+
       // Set ConsoleLogger as default implementation for Logger
       container.bind(Logger).to(ConsoleLogger);
 
-      // Register FileLogger for @Inject
-      container.registerSingleton(FileLogger(filename: 'app.log'));
-
       // Register implementations for @InjectAll
-      container.registerFactory<List<Logger>>((c) =>
-          [container.make<ConsoleLogger>(), container.make<FileLogger>()]);
+      container.registerFactory<List<Logger>>(
+          (c) => [ConsoleLogger(), FileLogger(filename: 'app.log')]);
+
+      // Register contextual binding for Service's fileLogger parameter
+      container
+          .when(Service)
+          .needs<FileLogger>()
+          .giveFactory((c) => FileLogger(filename: 'app.log'));
     });
 
     test('can bind implementation using @Injectable', () {
