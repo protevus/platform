@@ -2,6 +2,7 @@ import 'dart:async';
 import 'traits/macroable.dart';
 import 'pending_process.dart';
 import 'contracts/process_result.dart';
+import 'process_result.dart';
 import 'pool.dart';
 import 'pipe.dart';
 
@@ -45,7 +46,16 @@ class Factory with Macroable {
     void Function(String)? onOutput,
   }) async {
     // Run all processes concurrently and wait for all to complete
-    final futures = processes.map((process) => process.run(null, onOutput));
+    final futures = processes.map((process) async {
+      final result = await process.run(onOutput);
+      if (onOutput != null) {
+        final output = result.output().trim();
+        if (output.isNotEmpty) {
+          onOutput(output);
+        }
+      }
+      return result;
+    });
     return Future.wait(futures);
   }
 
@@ -54,9 +64,18 @@ class Factory with Macroable {
     List<PendingProcess> processes, {
     void Function(String)? onOutput,
   }) async {
+    if (processes.isEmpty) {
+      return ProcessResultImpl(
+        command: '',
+        exitCode: 0,
+        output: '',
+        errorOutput: '',
+      );
+    }
+
     ProcessResult? result;
     for (final process in processes) {
-      result = await process.run(null, onOutput);
+      result = await process.run(onOutput);
       if (result.failed()) {
         return result;
       }

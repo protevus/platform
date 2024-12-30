@@ -68,8 +68,8 @@ void main() {
       final process2 = factory.command('pwd').path('/tmp');
 
       // Add configured processes to pool
-      pool.command(process1.command);
-      pool.command(process2.command);
+      pool.command(process1); // Pass the PendingProcess directly
+      pool.command(process2); // Pass the PendingProcess directly
 
       final results = await pool.start();
       expect(results.length, equals(2));
