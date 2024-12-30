@@ -466,11 +466,21 @@ class Container {
                 '${reflectedType.name} has no default constructor, and therefore cannot be instantiated.')));
 
         // Check if we can resolve all constructor parameters
+        // for (var param in constructor.parameters) {
+        //   var paramType = param.type.reflectedType;
+        //   if (!has(paramType) && reflector.reflectType(paramType) == null) {
+        //     throw BindingResolutionException(
+        //         'No binding was found for $paramType required by $t2');
+        //   }
+        // }
         for (var param in constructor.parameters) {
+          // Skip optional parameters
+          if (!param.isRequired) continue;
+
           var paramType = param.type.reflectedType;
           if (!has(paramType) && reflector.reflectType(paramType) == null) {
             throw BindingResolutionException(
-                'No binding was found for $paramType required by $t2');
+                'No binding was found for required parameter $paramType in ${reflectedType.name}');
           }
         }
       }
@@ -491,6 +501,9 @@ class Container {
         // Add current type to build stack before resolving parameters
         _buildStack.add(t2);
         try {
+          var positional = [];
+          var named = <String, Object>{};
+
           for (var param in constructor.parameters) {
             // Check for parameter override
             var override = getParameterOverride(param.name);
@@ -503,27 +516,42 @@ class Container {
               continue;
             }
 
-            // No override, resolve normally
-            var value = make(param.type.reflectedType);
-            if (param.isNamed) {
-              named[param.name] = value;
+            // Skip optional parameters if we can't resolve them
+            if (!param.isRequired) {
+              try {
+                var value = make(param.type.reflectedType);
+                if (param.isNamed) {
+                  named[param.name] = value;
+                } else {
+                  positional.add(value);
+                }
+              } catch (e) {
+                // Skip optional parameter if we can't resolve it
+                continue;
+              }
             } else {
-              positional.add(value);
+              // Required parameter, must resolve
+              var value = make(param.type.reflectedType);
+              if (param.isNamed) {
+                named[param.name] = value;
+              } else {
+                positional.add(value);
+              }
             }
           }
+
+          var instance = reflectedType.newInstance(
+              isDefault(constructor.name) ? '' : constructor.name,
+              positional,
+              named, []).reflectee;
+
+          instance = _applyExtenders(t2, instance);
+          _fireResolvingCallbacks(instance);
+          _fireAfterResolvingCallbacks(instance);
+          return instance as T;
         } finally {
           _buildStack.removeLast();
         }
-
-        var instance = reflectedType.newInstance(
-            isDefault(constructor.name) ? '' : constructor.name,
-            positional,
-            named, []).reflectee;
-
-        instance = _applyExtenders(t2, instance);
-        _fireResolvingCallbacks(instance);
-        _fireAfterResolvingCallbacks(instance);
-        return instance as T;
       } else {
         throw BindingResolutionException(
             '$t2 is not a class, and therefore cannot be instantiated.');
