@@ -44,6 +44,7 @@ class InvokedProcess {
         _handleOutput(data, _outputBuffer);
       },
       onDone: _stdoutController.close,
+      cancelOnError: false,
     );
 
     _stderrSubscription = _process.stderr.listen(
@@ -52,6 +53,7 @@ class InvokedProcess {
         _handleOutput(data, _errorBuffer);
       },
       onDone: _stderrController.close,
+      cancelOnError: false,
     );
   }
 
@@ -76,7 +78,11 @@ class InvokedProcess {
 
   /// Kill the process.
   bool kill([ProcessSignal signal = ProcessSignal.sigterm]) {
-    return _process.kill(signal);
+    try {
+      return _process.kill(signal);
+    } catch (e) {
+      return false;
+    }
   }
 
   /// Get the process exit code.
@@ -84,18 +90,29 @@ class InvokedProcess {
 
   /// Wait for the process to complete.
   Future<ProcessResult> wait() async {
-    final exitCode = await _process.exitCode;
+    try {
+      // Wait for process to complete first
+      final exitCode = await _process.exitCode;
 
-    // Cancel stream subscriptions
-    await _stdoutSubscription.cancel();
-    await _stderrSubscription.cancel();
+      // Give streams a chance to complete
+      await Future.delayed(Duration(milliseconds: 10));
 
-    return ProcessResultImpl(
-      command: _command,
-      exitCode: exitCode,
-      output: _outputBuffer.toString(),
-      errorOutput: _errorBuffer.toString(),
-    );
+      // Cancel stream subscriptions
+      await _stdoutSubscription.cancel();
+      await _stderrSubscription.cancel();
+
+      return ProcessResultImpl(
+        command: _command,
+        exitCode: exitCode,
+        output: _outputBuffer.toString(),
+        errorOutput: _errorBuffer.toString(),
+      );
+    } finally {
+      // Ensure stdin is closed
+      try {
+        _process.stdin.close();
+      } catch (_) {}
+    }
   }
 
   /// Get the process stdout stream.
@@ -109,24 +126,33 @@ class InvokedProcess {
 
   /// Write data to the process stdin.
   Future<void> write(String input) async {
-    _process.stdin.write(input);
-    _process.stdin.flush();
-    if (input.endsWith('\n')) {
-      _process.stdin.close();
-    }
+    try {
+      _process.stdin.write(input);
+      await _process.stdin.flush();
+      if (input.endsWith('\n')) {
+        await _process.stdin.close();
+        await Future.delayed(Duration(milliseconds: 10));
+      }
+    } catch (_) {}
   }
 
   /// Write lines to the process stdin.
   Future<void> writeLines(List<String> lines) async {
-    for (final line in lines) {
-      _process.stdin.write('$line\n');
-      _process.stdin.flush();
-    }
-    _process.stdin.close();
+    try {
+      for (final line in lines) {
+        _process.stdin.write('$line\n');
+        await _process.stdin.flush();
+      }
+      await _process.stdin.close();
+      await Future.delayed(Duration(milliseconds: 10));
+    } catch (_) {}
   }
 
   /// Close stdin.
   Future<void> closeStdin() async {
-    _process.stdin.close();
+    try {
+      await _process.stdin.close();
+      await Future.delayed(Duration(milliseconds: 10));
+    } catch (_) {}
   }
 }
