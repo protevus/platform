@@ -15,17 +15,26 @@ class Pool {
   final List<PendingProcess> _processes = [];
 
   /// Create a new process pool instance.
-  Pool(this._factory, this._callback);
+  Pool(this._factory, this._callback) {
+    // Call the callback immediately to configure the pool
+    _callback(this);
+  }
 
   /// Add a process to the pool.
   Pool command(dynamic command) {
-    _processes.add(_factory.command(command));
+    if (command is PendingProcess) {
+      _processes.add(command);
+    } else {
+      _processes.add(_factory.command(command));
+    }
     return this;
   }
 
   /// Start the processes in the pool.
   Future<List<ProcessResult>> start([void Function(String)? output]) async {
-    _callback(this);
+    if (_processes.isEmpty) {
+      return [];
+    }
     return _factory.concurrently(_processes, onOutput: output);
   }
 }

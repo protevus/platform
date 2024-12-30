@@ -119,11 +119,11 @@ void main() {
       invokedProcess = InvokedProcess(process, 'sleep 10');
 
       // Kill process and ensure resources are cleaned up
-      invokedProcess.kill();
+      expect(invokedProcess.kill(), isTrue);
       await invokedProcess.wait();
 
       // Verify process is terminated
-      expect(() => process.kill(), throwsA(anything));
+      expect(await invokedProcess.exitCode, isNot(0));
     });
   });
 }

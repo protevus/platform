@@ -44,11 +44,9 @@ class Factory with Macroable {
     List<PendingProcess> processes, {
     void Function(String)? onOutput,
   }) async {
-    final results = <ProcessResult>[];
-    for (final process in processes) {
-      results.add(await process.run(null, onOutput));
-    }
-    return results;
+    // Run all processes concurrently and wait for all to complete
+    final futures = processes.map((process) => process.run(null, onOutput));
+    return Future.wait(futures);
   }
 
   /// Run a series of processes in sequence.

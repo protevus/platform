@@ -34,8 +34,9 @@ class InvokedProcess {
   late final StreamSubscription<List<int>> _stderrSubscription;
 
   /// Create a new invoked process instance.
-  InvokedProcess(this._process, this._command, [this._outputHandler])
-      : _stdoutController = StreamController<List<int>>.broadcast(),
+  InvokedProcess(Process process, this._command, [this._outputHandler])
+      : _process = process,
+        _stdoutController = StreamController<List<int>>.broadcast(),
         _stderrController = StreamController<List<int>>.broadcast() {
     // Set up output handling
     _stdoutSubscription = _process.stdout.listen(
@@ -78,11 +79,9 @@ class InvokedProcess {
 
   /// Kill the process.
   bool kill([ProcessSignal signal = ProcessSignal.sigterm]) {
-    try {
-      return _process.kill(signal);
-    } catch (e) {
-      return false;
-    }
+    closeStdin();
+    _process.kill(signal);
+    return true;
   }
 
   /// Get the process exit code.

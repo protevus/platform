@@ -133,6 +133,9 @@ class PendingProcess with Macroable {
       if (commandStr == 'test -t 0') {
         // Special handling for TTY test command
         return ('sh', ['-c', 'exit 0'], true);
+      } else if (commandStr == 'pwd') {
+        // Special handling for pwd command
+        return ('pwd', [], false);
       }
       // All other commands need sh shell
       return ('sh', ['-c', commandStr], true);
@@ -216,11 +219,16 @@ class PendingProcess with Macroable {
       }
     }
 
-    final stdoutSubscription =
-        process.stdout.transform(utf8.decoder).listen(handleOutput);
+    final stdoutCompleter = Completer<void>();
+    final stderrCompleter = Completer<void>();
 
-    final stderrSubscription =
-        process.stderr.transform(utf8.decoder).listen(handleError);
+    final stdoutSubscription = process.stdout
+        .transform(utf8.decoder)
+        .listen(handleOutput, onDone: stdoutCompleter.complete);
+
+    final stderrSubscription = process.stderr
+        .transform(utf8.decoder)
+        .listen(handleError, onDone: stderrCompleter.complete);
 
     if (_input != null) {
       if (_input is String) {
@@ -250,6 +258,12 @@ class PendingProcess with Macroable {
     } else {
       exitCode = await process.exitCode;
     }
+
+    // Wait for output streams to complete
+    await Future.wait([
+      stdoutCompleter.future,
+      stderrCompleter.future,
+    ]);
 
     await stdoutSubscription.cancel();
     await stderrSubscription.cancel();
