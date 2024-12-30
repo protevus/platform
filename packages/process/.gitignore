@@ -1,0 +1,83 @@
+# Dart/Flutter
+.dart_tool/
+.packages
+build/
+pubspec.lock
+.pub-cache/
+.pub/
+coverage/
+.test_coverage.dart
+*.freezed.dart
+*.g.dart
+*.mocks.dart
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.iws
+.DS_Store
+.classpath
+.project
+.settings/
+*.code-workspace
+
+# Temporary files
+*.swp
+*.swo
+*~
+.directory
+.fvm/
+.env*
+*.log
+*.tmp
+*.temp
+*.bak
+
+# Documentation
+doc/api/
+dartdoc_options.yaml
+
+# Test artifacts
+.test_coverage.dart
+coverage/
+test/.test_coverage.dart
+test/coverage/
+.test_runner.dart
+
+# Build artifacts
+*.dll
+*.so
+*.dylib
+*.exe
+*.o
+*.out
+
+# Platform-specific
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+.Trash-*
+.nfs*
+
+# Development
+.dev/
+.local/
+node_modules/
+.npm/
+.history/
+
+# Package specific
+.process_tool/
+.process_cache/

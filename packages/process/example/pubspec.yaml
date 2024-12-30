@@ -1,0 +1,15 @@
+name: platform_process_example
+description: Examples demonstrating the platform_process package usage
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  platform_process:
+    path: ../
+
+dev_dependencies:
+  test: ^1.24.0
+  lints: ^3.0.0

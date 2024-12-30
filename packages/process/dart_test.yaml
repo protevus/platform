@@ -1,0 +1,54 @@
+# Test configuration for the process package
+
+# Configure test timeout
+timeout: 30s
+
+# Configure test platforms
+platforms: [vm]
+
+# Configure test output
+reporter: expanded
+
+# Configure test paths
+filename: "*_test.dart"
+
+# Configure test concurrency
+concurrency: 4
+
+# Configure test tags
+tags:
+  unit:
+    platform: [vm]
+    timeout: 30s
+  integration:
+    platform: [vm]
+    timeout: 60s
+  process:
+    platform: [vm]
+    timeout: 45s
+
+# Configure test retry
+retry: 2
+
+# Configure test verbosity
+verbose-trace: true
+
+# Configure test paths
+paths:
+  - test/all_tests.dart
+  - test/process_result_test.dart
+  - test/pending_process_test.dart
+  - test/factory_test.dart
+  - test/pool_test.dart
+  - test/pipe_test.dart
+
+# Configure test output directory
+temp_dir: .dart_tool/test
+
+# Configure test warnings
+warning:
+  unrecognized: error
+  missing: warning
+
+# Configure test coverage
+coverage: true

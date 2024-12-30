@@ -1,0 +1,74 @@
+# Development files
+.dart_tool/
+.packages
+.pub/
+build/
+coverage/
+doc/
+test/
+tool/
+
+# Documentation source
+doc-src/
+*.md
+!README.md
+!CHANGELOG.md
+!LICENSE
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Git files
+.git/
+.gitignore
+.github/
+
+# CI/CD
+.travis.yml
+.gitlab-ci.yml
+.circleci/
+.github/workflows/
+
+# Development configuration
+analysis_options.yaml
+dartdoc_options.yaml
+.test_config
+.test_coverage.dart
+
+# Examples and benchmarks
+example/test/
+benchmark/
+performance/
+
+# Temporary files
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# Platform-specific
+.DS_Store
+Thumbs.db
+
+# Generated files
+*.freezed.dart
+*.g.dart
+*.mocks.dart
+
+# Development tools
+.fvm/
+.dev/
+.local/
+node_modules/
+.npm/
+.history/
+
+# Package specific
+.process_tool/
+.process_cache/
