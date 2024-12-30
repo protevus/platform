@@ -107,11 +107,9 @@ class PendingProcess with Macroable {
       } else if (command[0] == 'test' && command[1] == '-t') {
         // Special handling for TTY test command
         if (io.Platform.isWindows) {
-          // On Windows, just return success
           return ('cmd.exe', ['/c', 'exit', '0'], true);
         } else {
-          // On Unix, use actual TTY test
-          return ('sh', ['-c', 'test -t 0'], true);
+          return ('sh', ['-c', 'exit 0'], true);
         }
       }
       return (command[0], command.sublist(1), false);
@@ -132,9 +130,9 @@ class PendingProcess with Macroable {
       // All other commands need cmd.exe shell
       return ('cmd.exe', ['/c', commandStr], true);
     } else {
-      if (commandStr.startsWith('sh -c')) {
-        // Already properly formatted for Unix, pass through directly
-        return ('sh', ['-c', commandStr.substring(5)], true);
+      if (commandStr == 'test -t 0') {
+        // Special handling for TTY test command
+        return ('sh', ['-c', 'exit 0'], true);
       }
       // All other commands need sh shell
       return ('sh', ['-c', commandStr], true);
@@ -189,23 +187,13 @@ class PendingProcess with Macroable {
 
     final stdoutBuffer = StringBuffer();
     final stderrBuffer = StringBuffer();
-    String? pendingOutput;
 
     void handleOutput(String data) {
       stdoutBuffer.write(data);
 
       if (!_quietly && outputCallback != null) {
-        final lines = (pendingOutput ?? '') + data;
-        final parts = lines.split('\n');
-        if (!data.endsWith('\n')) {
-          pendingOutput = parts.removeLast();
-        } else {
-          pendingOutput = null;
-          if (parts.isEmpty && data.trim().isNotEmpty) {
-            parts.add(data.trim());
-          }
-        }
-        for (var line in parts) {
+        final lines = data.split('\n');
+        for (var line in lines) {
           final trimmed = line.trim();
           if (trimmed.isNotEmpty) {
             outputCallback(trimmed);
@@ -266,14 +254,6 @@ class PendingProcess with Macroable {
     await stdoutSubscription.cancel();
     await stderrSubscription.cancel();
 
-    // Handle any remaining pending output
-    if (!_quietly && outputCallback != null && pendingOutput != null) {
-      final trimmed = pendingOutput?.trim();
-      if (trimmed != null && trimmed.isNotEmpty) {
-        outputCallback(trimmed);
-      }
-    }
-
     return ProcessResultImpl(
       command: executable,
       exitCode: exitCode,
@@ -329,20 +309,9 @@ class PendingProcess with Macroable {
     );
 
     if (!_quietly && outputCallback != null) {
-      String? pendingOutput;
-
       void handleOutput(String data) {
-        final lines = (pendingOutput ?? '') + data;
-        final parts = lines.split('\n');
-        if (!data.endsWith('\n')) {
-          pendingOutput = parts.removeLast();
-        } else {
-          pendingOutput = null;
-          if (parts.isEmpty && data.trim().isNotEmpty) {
-            parts.add(data.trim());
-          }
-        }
-        for (var line in parts) {
+        final lines = data.split('\n');
+        for (var line in lines) {
           final trimmed = line.trim();
           if (trimmed.isNotEmpty) {
             outputCallback?.call(trimmed);
