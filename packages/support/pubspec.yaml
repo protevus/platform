@@ -18,6 +18,7 @@ dependencies:
   pub_semver: ^2.1.4
   platform_collections: ^1.0.0
   platform_conditionable: ^1.0.0
+  platform_container: ^1.0.0
   platform_contracts: ^1.0.0
   platform_macroable: ^1.0.0
   platform_mirrors: ^1.0.0

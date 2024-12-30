@@ -44,6 +44,7 @@ export 'src/deferred/deferred_callback_collection.dart';
 export 'src/process/executable_finder.dart';
 
 // Traits
+export 'src/traits/capsule_manager.dart';
 export 'src/traits/dumpable.dart';
 export 'src/traits/forwards_calls.dart';
 export 'src/traits/interacts_with_data.dart';
