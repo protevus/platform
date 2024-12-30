@@ -299,90 +299,20 @@ class Container {
       if (contextualConcrete != null) {
         dynamic instance;
         if (contextualConcrete is Function) {
-          // Remove current type from stack to avoid circular dependency
-          _buildStack.removeLast();
-          try {
-            instance = contextualConcrete(this);
-          } finally {
-            _buildStack.add(t2);
-          }
+          // Keep current type on stack for dependency resolution
+          instance = contextualConcrete(this);
         } else if (contextualConcrete is Type) {
           // For Type bindings, we need to use reflection to create the instance
-          _buildStack.removeLast(); // Remove current type from stack
-          try {
-            var reflectedType = reflector.reflectType(contextualConcrete);
-            if (reflectedType is ReflectedClass) {
-              bool isDefault(String name) {
-                return name.isEmpty || name == reflectedType.name;
-              }
-
-              var constructor = reflectedType.constructors.firstWhere(
-                  (c) => isDefault(c.name),
-                  orElse: (() => throw BindingResolutionException(
-                      '${reflectedType.name} has no default constructor, and therefore cannot be instantiated.')));
-
-              var positional = [];
-              var named = <String, Object>{};
-
-              for (var param in constructor.parameters) {
-                // Check for parameter override
-                var override = getParameterOverride(param.name);
-                if (override != null) {
-                  if (param.isNamed) {
-                    named[param.name] = override;
-                  } else {
-                    positional.add(override);
-                  }
-                  continue;
-                }
-
-                // No override, resolve normally
-                var value = make(param.type.reflectedType);
-                if (param.isNamed) {
-                  named[param.name] = value;
-                } else {
-                  positional.add(value);
-                }
-              }
-
-              try {
-                dynamic tempInstance;
-                try {
-                  tempInstance = reflectedType.newInstance(
-                      isDefault(constructor.name) ? '' : constructor.name,
-                      positional,
-                      named, []).reflectee;
-                } on AbstractClassInstantiationError {
-                  throw BindingResolutionException(
-                      'Cannot instantiate abstract class ${reflectedType.name}');
-                }
-
-                tempInstance = _applyExtenders(t2, tempInstance);
-                _fireResolvingCallbacks(tempInstance);
-                _fireAfterResolvingCallbacks(tempInstance);
-                return tempInstance as T;
-              } catch (e) {
-                if (e is AbstractClassInstantiationError) {
-                  throw BindingResolutionException(
-                      'Cannot instantiate abstract class ${reflectedType.name}');
-                }
-                rethrow;
-              }
-            }
-          } finally {
-            _buildStack.add(t2); // Add it back
-          }
+          instance = make(contextualConcrete);
         }
 
         if (instance != null) {
           instance = _applyExtenders(t2, instance);
-          var typedInstance = instance as T;
-          _fireResolvingCallbacks(typedInstance);
-          _fireAfterResolvingCallbacks(typedInstance);
-          return typedInstance;
+          _fireResolvingCallbacks(instance);
+          _fireAfterResolvingCallbacks(instance);
+          return instance as T;
         }
       }
-
       // Check for contextual binding in parent classes
       var parentContextual = _getContextualConcreteFromParent(t2);
       if (parentContextual != null) {
@@ -485,8 +415,8 @@ class Container {
         }
       }
 
-      var positional = [];
-      var named = <String, Object>{};
+      // var positional = [];
+      // var named = <String, Object>{};
 
       if (reflectedType is ReflectedClass) {
         bool isDefault(String name) {
@@ -498,6 +428,17 @@ class Container {
             orElse: (() => throw BindingResolutionException(
                 '${reflectedType.name} has no default constructor, and therefore cannot be instantiated.')));
 
+        // Check if we can resolve all constructor parameters
+        for (var param in constructor.parameters) {
+          var paramType = param.type.reflectedType;
+          if (param.isRequired &&
+              !has(paramType) &&
+              reflector.reflectType(paramType) == null) {
+            throw BindingResolutionException(
+                'No binding was found for required parameter $paramType in ${reflectedType.name}');
+          }
+        }
+
         // Add current type to build stack before resolving parameters
         _buildStack.add(t2);
         try {
@@ -505,7 +446,7 @@ class Container {
           var named = <String, Object>{};
 
           for (var param in constructor.parameters) {
-            // Check for parameter override
+            // Check for parameter override first
             var override = getParameterOverride(param.name);
             if (override != null) {
               if (param.isNamed) {
@@ -516,27 +457,26 @@ class Container {
               continue;
             }
 
-            // Skip optional parameters if we can't resolve them
-            if (!param.isRequired) {
-              try {
-                var value = make(param.type.reflectedType);
-                if (param.isNamed) {
-                  named[param.name] = value;
-                } else {
-                  positional.add(value);
-                }
-              } catch (e) {
-                // Skip optional parameter if we can't resolve it
-                continue;
-              }
-            } else {
-              // Required parameter, must resolve
+            // Try to resolve the parameter
+            try {
               var value = make(param.type.reflectedType);
               if (param.isNamed) {
+                // For named parameters, only add if we successfully resolved
                 named[param.name] = value;
               } else {
+                // For positional parameters, handle errors
                 positional.add(value);
               }
+            } catch (e) {
+              // Only rethrow for required parameters
+              if (param.isRequired) {
+                rethrow;
+              }
+              // For optional positional parameters, add null
+              if (!param.isNamed) {
+                positional.add(null);
+              }
+              // Skip optional named parameters that can't be resolved
             }
           }
 
@@ -1267,7 +1207,15 @@ class Container {
   /// var logger = container.makeWith<Logger>({'level': 'debug'});
   /// ```
   T makeWith<T>(Map<String, dynamic> parameters, [Type? type]) {
-    return withParameters(parameters, () => make<T>(type));
+    // Push parameters onto stack
+    _parameterStack.add(parameters);
+    try {
+      // Make instance with parameters
+      return make<T>(type);
+    } finally {
+      // Always pop parameters from stack
+      _parameterStack.removeLast();
+    }
   }
 
   /// Create a factory binding for deferred resolution
