@@ -42,6 +42,14 @@ class PendingProcess {
   /// Create a new pending process instance.
   PendingProcess(this._factory);
 
+  /// Format the command for display.
+  String _formatCommand() {
+    if (command is List) {
+      return (command as List).join(' ');
+    }
+    return command.toString();
+  }
+
   /// Specify the command that will invoke the process.
   PendingProcess withCommand(dynamic command) {
     this.command = command;
@@ -105,26 +113,57 @@ class PendingProcess {
       throw ArgumentError('No command specified');
     }
 
+    // Handle immediate timeout
+    if (timeout == 0) {
+      throw ProcessTimedOutException(
+        'The process "${_formatCommand()}" exceeded the timeout of $timeout seconds.',
+      );
+    }
+
     try {
       final process = await _createProcess();
       final completer = Completer<ProcessResult>();
       Timer? timeoutTimer;
+      Timer? idleTimer;
+      DateTime? lastOutputTime;
 
       if (timeout != null) {
         timeoutTimer = Timer(Duration(seconds: timeout!), () {
+          process.kill();
           if (!completer.isCompleted) {
-            process.kill();
             completer.completeError(
               ProcessTimedOutException(
-                'The process "${this.command}" exceeded the timeout of $timeout seconds.',
+                'The process "${_formatCommand()}" exceeded the timeout of $timeout seconds.',
               ),
             );
           }
         });
       }
 
+      if (idleTimeout != null) {
+        lastOutputTime = DateTime.now();
+        idleTimer = Timer.periodic(Duration(seconds: 1), (_) {
+          final idleSeconds =
+              DateTime.now().difference(lastOutputTime!).inSeconds;
+          if (idleSeconds >= idleTimeout!) {
+            process.kill();
+            if (!completer.isCompleted) {
+              completer.completeError(
+                ProcessTimedOutException(
+                  'The process "${_formatCommand()}" exceeded the idle timeout of $idleTimeout seconds.',
+                ),
+              );
+            }
+            idleTimer?.cancel();
+          }
+        });
+      }
+
       try {
-        final result = await _runProcess(process, onOutput);
+        final result = await _runProcess(process, (output) {
+          lastOutputTime = DateTime.now();
+          onOutput?.call(output);
+        });
         if (!completer.isCompleted) {
           if (result.exitCode != 0) {
             completer.completeError(ProcessFailedException(result));
@@ -134,9 +173,10 @@ class PendingProcess {
         }
       } finally {
         timeoutTimer?.cancel();
+        idleTimer?.cancel();
       }
 
-      return await completer.future;
+      return completer.future;
     } on ProcessException catch (e) {
       final result = ProcessResult(1, '', e.message);
       throw ProcessFailedException(result);

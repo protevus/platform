@@ -22,23 +22,19 @@ class ProcessFailedException implements Exception {
 
   @override
   String toString() {
-    final buffer = StringBuffer('The command failed.');
-    buffer.writeln();
-    buffer.writeln();
-    buffer.writeln('Exit Code: ${_result.exitCode}');
+    final buffer =
+        StringBuffer('Process failed with exit code: ${_result.exitCode}');
 
     if (_result.output().isNotEmpty) {
       buffer.writeln();
       buffer.writeln('Output:');
-      buffer.writeln('================');
-      buffer.writeln(_result.output());
+      buffer.writeln(_result.output().trim());
     }
 
     if (_result.errorOutput().isNotEmpty) {
       buffer.writeln();
       buffer.writeln('Error Output:');
-      buffer.writeln('================');
-      buffer.writeln(_result.errorOutput());
+      buffer.writeln(_result.errorOutput().trim());
     }
 
     return buffer.toString();

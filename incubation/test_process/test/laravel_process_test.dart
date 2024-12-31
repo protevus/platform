@@ -80,10 +80,14 @@ void main() {
 
     test('process can timeout', () async {
       if (!Platform.isWindows) {
-        expect(
-          () => factory.command(['sh', '-c', 'sleep 2']).withTimeout(1).run(),
-          throwsA(isA<ProcessTimedOutException>()),
-        );
+        try {
+          await factory.command(['sleep', '0.5']).withTimeout(0).run();
+          fail('Should have thrown');
+        } on ProcessTimedOutException catch (e) {
+          expect(e.message, contains('exceeded the timeout'));
+          expect(e.message, contains('sleep 0.5'));
+          expect(e.message, contains('0 seconds'));
+        }
       }
     });
 

@@ -20,6 +20,9 @@ class InvokedProcess {
   /// Whether the process has completed
   bool _completed = false;
 
+  /// Whether the process was killed
+  bool _killed = false;
+
   /// Completer for stdout stream
   final _stdoutCompleter = Completer<void>();
 
@@ -66,6 +69,7 @@ class InvokedProcess {
 
   /// Signal the process.
   bool kill([ProcessSignal signal = ProcessSignal.sigterm]) {
+    _killed = true;
     return _process.kill(signal);
   }
 
@@ -89,7 +93,8 @@ class InvokedProcess {
       String.fromCharCodes(_stderr),
     );
 
-    if (exitCode != 0) {
+    // Don't throw if the process was killed
+    if (!_killed && exitCode != 0) {
       throw ProcessFailedException(result);
     }
 

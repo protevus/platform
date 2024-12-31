@@ -1,65 +1,34 @@
 import 'pending_process.dart';
-import 'process_result.dart';
-import 'invoked_process.dart';
 
 /// A factory for creating process instances.
 class Factory {
-  /// Create a new process factory instance.
+  /// Create a new factory instance.
   Factory();
 
-  /// Begin preparing a new process.
+  /// Create a new pending process instance with the given command.
   PendingProcess command(dynamic command) {
-    return PendingProcess(this).withCommand(command);
-  }
+    if (command == null) {
+      throw ArgumentError('Command cannot be null');
+    }
 
-  /// Begin preparing a new process with the given working directory.
-  PendingProcess path(String path) {
-    return PendingProcess(this).withWorkingDirectory(path);
-  }
+    if (command is String && command.trim().isEmpty) {
+      throw ArgumentError('Command string cannot be empty');
+    }
 
-  /// Run a command synchronously.
-  Future<ProcessResult> run(dynamic command) {
-    return PendingProcess(this).withCommand(command).run();
-  }
+    if (command is List) {
+      if (command.isEmpty) {
+        throw ArgumentError('Command list cannot be empty');
+      }
 
-  /// Start a command asynchronously.
-  Future<InvokedProcess> start(dynamic command,
-      [void Function(String)? onOutput]) {
-    return PendingProcess(this).withCommand(command).start(onOutput);
-  }
+      if (command.any((element) => element is! String)) {
+        throw ArgumentError('Command list must contain only strings');
+      }
+    }
 
-  /// Run a command with a specific working directory.
-  Future<ProcessResult> runInPath(String path, dynamic command) {
-    return PendingProcess(this)
-        .withWorkingDirectory(path)
-        .withCommand(command)
-        .run();
-  }
+    if (command is! String && command is! List) {
+      throw ArgumentError('Command must be a string or list of strings');
+    }
 
-  /// Run a command with environment variables.
-  Future<ProcessResult> runWithEnvironment(
-    dynamic command,
-    Map<String, String> environment,
-  ) {
-    return PendingProcess(this)
-        .withCommand(command)
-        .withEnvironment(environment)
-        .run();
-  }
-
-  /// Run a command with a timeout.
-  Future<ProcessResult> runWithTimeout(
-    dynamic command,
-    int seconds,
-  ) {
-    return PendingProcess(this).withCommand(command).withTimeout(seconds).run();
-  }
-
-  /// Run a command with input.
-  Future<ProcessResult> runWithInput(
-    dynamic command,
-    dynamic input,
-  ) {
-    return PendingProcess(this).withCommand(command).withInput(input).run();
+    return PendingProcess(this)..withCommand(command);
   }
 }

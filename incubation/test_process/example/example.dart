@@ -1,95 +1,151 @@
+import 'dart:async';
 import 'package:test_process/test_process.dart';
 
-Future<void> main() async {
+Future<void> runExamples() async {
   // Create a process factory
   final factory = Factory();
 
-  print('\n1. Basic command execution:');
+  // Basic command execution
+  print('\n=== Basic Command Execution ===');
   try {
-    final result = await factory.command(['echo', 'Hello', 'World']).run();
-    print('Output: ${result.output()}');
+    final result = await factory.command(['echo', 'Hello, World!']).run();
+    print('Output: ${result.output().trim()}');
+    print('Exit Code: ${result.exitCode}');
+    print('Success: ${result.successful()}');
   } catch (e) {
     print('Error: $e');
   }
 
-  print('\n2. Command with working directory and environment:');
+  // Working directory
+  print('\n=== Working Directory ===');
+  try {
+    final result =
+        await factory.command(['pwd']).withWorkingDirectory('/tmp').run();
+    print('Current Directory: ${result.output().trim()}');
+  } catch (e) {
+    print('Error: $e');
+  }
+
+  // Environment variables
+  print('\n=== Environment Variables ===');
   try {
     final result = await factory
-        .command(['ls', '-la'])
-        .withWorkingDirectory('/tmp')
-        .withEnvironment({'CUSTOM_VAR': 'value'})
-        .run();
-    print('Directory contents: ${result.output()}');
+        .command(['sh', '-c', 'echo \$CUSTOM_VAR']).withEnvironment(
+            {'CUSTOM_VAR': 'Hello from env!'}).run();
+    print('Environment Value: ${result.output().trim()}');
   } catch (e) {
     print('Error: $e');
   }
 
-  print('\n3. Asynchronous process with timeout:');
+  // Process timeout
+  print('\n=== Process Timeout ===');
   try {
-    final process =
-        await factory.command(['sleep', '1']).withTimeout(5).start();
-
-    print('Process started with PID: ${process.pid}');
-    final result = await process.wait();
-    print('Async process completed with exit code: ${result.exitCode}');
+    await factory.command(['sleep', '5']).withTimeout(1).run();
+    print('Process completed (unexpected)');
   } catch (e) {
-    print('Error: $e');
+    // Let the zone handler catch this
   }
 
-  print('\n4. Process with input:');
+  // Standard input
+  print('\n=== Standard Input ===');
   try {
     final result =
         await factory.command(['cat']).withInput('Hello from stdin!').run();
-    print('Output from cat: ${result.output()}');
+    print('Input Echo: ${result.output()}');
   } catch (e) {
     print('Error: $e');
   }
 
-  print('\n5. Error handling:');
+  // Error handling
+  print('\n=== Error Handling ===');
   try {
-    await factory.command(['nonexistent-command']).run();
+    await factory.command(['ls', 'nonexistent-file']).run();
+    print('Command succeeded (unexpected)');
   } on ProcessFailedException catch (e) {
-    print('Expected error caught: ${e.toString()}');
+    print('Expected error:');
+    print('  Exit code: ${e.exitCode}');
+    print('  Error output: ${e.errorOutput.trim()}');
+  } catch (e) {
+    print('Unexpected error: $e');
   }
 
-  print('\n6. Quiet process (no output):');
+  // Shell commands with pipes
+  print('\n=== Shell Commands with Pipes ===');
   try {
-    await factory
-        .command(['echo', 'This should not be visible'])
+    final result = await factory.command(
+        ['sh', '-c', 'echo "line1\nline2\nline3" | grep "line2"']).run();
+    print('Grep Result: ${result.output().trim()}');
+  } catch (e) {
+    print('Error: $e');
+  }
+
+  // Async process with output callback
+  print('\n=== Async Process with Output Callback ===');
+  try {
+    final process = await factory.command([
+      'sh',
+      '-c',
+      'for n in 1 2 3; do echo \$n; sleep 1; done'
+    ]).start((output) {
+      print('Realtime Output: ${output.trim()}');
+    });
+
+    final result = await process.wait();
+    print('Final Exit Code: ${result.exitCode}');
+  } catch (e) {
+    print('Error: $e');
+  }
+
+  // Process killing
+  print('\n=== Process Killing ===');
+  try {
+    final process = await factory.command(['sleep', '10']).start();
+
+    print('Process started with PID: ${process.pid}');
+    print('Is running: ${process.running()}');
+
+    // Kill after 1 second
+    await Future.delayed(Duration(seconds: 1));
+    final killed = process.kill();
+    print('Kill signal sent: $killed');
+
+    final result = await process.wait();
+    print('Process completed with exit code: ${result.exitCode}');
+  } catch (e) {
+    print('Error: $e');
+  }
+
+  // Quiet mode (no output)
+  print('\n=== Quiet Mode ===');
+  try {
+    final result = await factory
+        .command(['echo', 'This output is suppressed'])
         .withoutOutput()
         .run();
-    print('Process completed silently');
+    print('Output length: ${result.output().length}');
   } catch (e) {
     print('Error: $e');
   }
 
-  print('\n7. Shell command with pipes:');
+  // Color output (alternative to TTY mode)
+  print('\n=== Color Output ===');
   try {
-    final result = await factory
-        .command(['/bin/sh', '-c', 'echo Hello | tr a-z A-Z']).run();
-    print('Output: ${result.output()}');
+    final result = await factory.command(['ls', '--color=always']).run();
+    print('Color Output: ${result.output().trim()}');
   } catch (e) {
     print('Error: $e');
   }
+}
 
-  print('\n8. Multiple commands with shell:');
-  try {
-    final result = await factory
-        .command(['/bin/sh', '-c', 'echo Start && sleep 1 && echo End']).run();
-    print('Output: ${result.output()}');
-  } catch (e) {
-    print('Error: $e');
-  }
-
-  print('\n9. Complex shell command:');
-  try {
-    final result = await factory.command([
-      '/bin/sh',
-      '-c',
-      r'for i in 1 2 3; do echo "Count: $i"; sleep 0.1; done'
-    ]).run();
-    print('Output: ${result.output()}');
-  } catch (e) {
-    print('Error: $e');
-  }
+void main() {
+  runZonedGuarded(() async {
+    await runExamples();
+  }, (error, stack) {
+    if (error is ProcessTimedOutException) {
+      print('Expected timeout error: ${error.message}');
+    } else {
+      print('Unexpected error: $error');
+      print('Stack trace: $stack');
+    }
+  });
 }

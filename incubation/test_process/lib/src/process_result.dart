@@ -28,19 +28,5 @@ class ProcessResult {
   bool failed() => !successful();
 
   @override
-  String toString() {
-    final buffer = StringBuffer();
-    if (_output.isNotEmpty) {
-      buffer.writeln('Output:');
-      buffer.writeln('================');
-      buffer.writeln(_output);
-    }
-    if (_errorOutput.isNotEmpty) {
-      if (buffer.isNotEmpty) buffer.writeln();
-      buffer.writeln('Error Output:');
-      buffer.writeln('================');
-      buffer.writeln(_errorOutput);
-    }
-    return buffer.toString();
-  }
+  String toString() => _output;
 }
