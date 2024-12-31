@@ -122,38 +122,30 @@ class PendingProcess {
 
     try {
       final process = await _createProcess();
-      final completer = Completer<ProcessResult>();
       Timer? timeoutTimer;
       Timer? idleTimer;
-      DateTime? lastOutputTime;
+      DateTime lastOutputTime = DateTime.now();
+      bool timedOut = false;
+      String? timeoutMessage;
 
       if (timeout != null) {
         timeoutTimer = Timer(Duration(seconds: timeout!), () {
+          timedOut = true;
+          timeoutMessage =
+              'The process "${_formatCommand()}" exceeded the timeout of $timeout seconds.';
           process.kill();
-          if (!completer.isCompleted) {
-            completer.completeError(
-              ProcessTimedOutException(
-                'The process "${_formatCommand()}" exceeded the timeout of $timeout seconds.',
-              ),
-            );
-          }
         });
       }
 
       if (idleTimeout != null) {
-        lastOutputTime = DateTime.now();
         idleTimer = Timer.periodic(Duration(seconds: 1), (_) {
           final idleSeconds =
-              DateTime.now().difference(lastOutputTime!).inSeconds;
+              DateTime.now().difference(lastOutputTime).inSeconds;
           if (idleSeconds >= idleTimeout!) {
+            timedOut = true;
+            timeoutMessage =
+                'The process "${_formatCommand()}" exceeded the idle timeout of $idleTimeout seconds.';
             process.kill();
-            if (!completer.isCompleted) {
-              completer.completeError(
-                ProcessTimedOutException(
-                  'The process "${_formatCommand()}" exceeded the idle timeout of $idleTimeout seconds.',
-                ),
-              );
-            }
             idleTimer?.cancel();
           }
         });
@@ -164,19 +156,20 @@ class PendingProcess {
           lastOutputTime = DateTime.now();
           onOutput?.call(output);
         });
-        if (!completer.isCompleted) {
-          if (result.exitCode != 0) {
-            completer.completeError(ProcessFailedException(result));
-          } else {
-            completer.complete(result);
-          }
+
+        if (timedOut) {
+          throw ProcessTimedOutException(timeoutMessage!);
         }
+
+        if (result.exitCode != 0) {
+          throw ProcessFailedException(result);
+        }
+
+        return result;
       } finally {
         timeoutTimer?.cancel();
         idleTimer?.cancel();
       }
-
-      return completer.future;
     } on ProcessException catch (e) {
       final result = ProcessResult(1, '', e.message);
       throw ProcessFailedException(result);

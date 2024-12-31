@@ -1,18 +1,19 @@
-# Test Process
+# Dart Process Handler
 
-A Laravel-compatible process management implementation in pure Dart. This package provides a robust way to execute and manage system processes with features like timeouts, input/output handling, and asynchronous execution.
+A Laravel-inspired process handling library for Dart that provides an elegant and powerful API for executing shell commands and managing processes.
 
 ## Features
 
-- 💫 Fluent API for process configuration
-- ⏱️ Process timeout support
-- 🔄 Asynchronous process execution
-- 📥 Input/output handling
-- 🌍 Environment variables support
-- 📁 Working directory configuration
-- 🚦 TTY mode support
-- 🤫 Quiet mode for suppressing output
-- ⚡ Process pooling capabilities
+- Fluent API for process configuration
+- Synchronous and asynchronous execution
+- Process timeouts and idle timeouts
+- Working directory and environment variables
+- Input/output handling and streaming
+- Shell command support with pipes and redirects
+- TTY mode support
+- Comprehensive error handling
+- Real-time output callbacks
+- Process status tracking and management
 
 ## Installation
 
@@ -23,9 +24,9 @@ dependencies:
   test_process: ^1.0.0
 ```
 
-## Usage
+## Basic Usage
 
-### Basic Command Execution
+### Simple Command Execution
 
 ```dart
 import 'package:test_process/test_process.dart';
@@ -33,127 +34,398 @@ import 'package:test_process/test_process.dart';
 void main() async {
   final factory = Factory();
   
-  // Simple command execution
-  final result = await factory.run('echo "Hello World"');
+  // Basic command execution
+  final result = await factory.command(['echo', 'Hello World']).run();
+  print('Output: ${result.output()}');  // Output: Hello World
+  print('Success: ${result.successful()}');  // Success: true
+  
+  // Using string command (executed through shell)
+  final result2 = await factory.command('echo "Hello World"').run();
+  print('Output: ${result2.output()}');  // Output: Hello World
+}
+```
+
+### Working Directory
+
+```dart
+void main() async {
+  final factory = Factory();
+  
+  // Execute command in specific directory
+  final result = await factory
+      .command(['ls', '-l'])
+      .withWorkingDirectory('/tmp')
+      .run();
+      
+  print('Files in /tmp:');
   print(result.output());
 }
 ```
 
-### Configuring Process Execution
+### Environment Variables
 
 ```dart
-final result = await factory
-    .command('ls -la')
-    .withWorkingDirectory('/tmp')
-    .withEnvironment({'CUSTOM_VAR': 'value'})
-    .withTimeout(30)
-    .run();
-
-print('Exit code: ${result.exitCode}');
-print('Output: ${result.output()}');
-print('Error output: ${result.errorOutput()}');
+void main() async {
+  final factory = Factory();
+  
+  final result = await factory
+      .command(['printenv', 'MY_VAR'])
+      .withEnvironment({'MY_VAR': 'Hello from env!'})
+      .run();
+      
+  print('Environment Value: ${result.output()}');
+}
 ```
 
-### Asynchronous Process Execution
+### Process Timeouts
 
 ```dart
-final process = await factory
-    .command('long-running-command')
-    .withTimeout(60)
-    .start();
-
-print('Process started with PID: ${process.pid}');
-
-// Wait for completion
-final result = await process.wait();
-print('Process completed with exit code: ${result.exitCode}');
+void main() async {
+  final factory = Factory();
+  
+  try {
+    // Process timeout
+    await factory
+        .command(['sleep', '10'])
+        .withTimeout(5)  // 5 second timeout
+        .run();
+  } on ProcessTimedOutException catch (e) {
+    print('Process timed out: ${e.message}');
+  }
+  
+  try {
+    // Idle timeout (no output for specified duration)
+    await factory
+        .command(['tail', '-f', '/dev/null'])
+        .withIdleTimeout(5)  // 5 second idle timeout
+        .run();
+  } on ProcessTimedOutException catch (e) {
+    print('Process idle timeout: ${e.message}');
+  }
+}
 ```
 
-### Process Input/Output
+### Standard Input
 
 ```dart
-// Provide input to process
-final result = await factory
-    .command('cat')
-    .withInput('Hello from stdin!')
-    .run();
-
-// Disable output
-await factory
-    .command('noisy-command')
-    .withoutOutput()
-    .run();
+void main() async {
+  final factory = Factory();
+  
+  // String input
+  final result1 = await factory
+      .command(['cat'])
+      .withInput('Hello from stdin!')
+      .run();
+  print('Input Echo: ${result1.output()}');
+  
+  // Byte input
+  final result2 = await factory
+      .command(['cat'])
+      .withInput([72, 101, 108, 108, 111])  // "Hello" in bytes
+      .run();
+  print('Byte Input Echo: ${result2.output()}');
+}
 ```
 
 ### Error Handling
 
 ```dart
-try {
-  await factory.run('nonexistent-command');
-} on ProcessFailedException catch (e) {
-  print('Process failed with exit code: ${e.exitCode}');
-  print('Error output: ${e.errorOutput}');
-} on ProcessTimedOutException catch (e) {
-  print('Process timed out: ${e.message}');
+void main() async {
+  final factory = Factory();
+  
+  try {
+    await factory.command(['ls', 'nonexistent-file']).run();
+  } on ProcessFailedException catch (e) {
+    print('Command failed:');
+    print('  Exit code: ${e.result.exitCode}');
+    print('  Error output: ${e.result.errorOutput()}');
+  }
 }
 ```
 
-## API Reference
+### Shell Commands with Pipes
 
-### Factory
+```dart
+void main() async {
+  final factory = Factory();
+  
+  // Using pipes in shell command
+  final result = await factory
+      .command('echo "line1\nline2\nline3" | grep "line2"')
+      .run();
+  print('Grep Result: ${result.output()}');
+  
+  // Multiple commands
+  final result2 = await factory
+      .command('cd /tmp && ls -l | grep "log"')
+      .run();
+  print('Log files: ${result2.output()}');
+}
+```
 
-The main entry point for creating and running processes.
+### Asynchronous Execution with Output Callback
 
-- `run(command)` - Run a command synchronously
-- `command(command)` - Begin configuring a command
-- `path(directory)` - Begin configuring a command with a working directory
+```dart
+void main() async {
+  final factory = Factory();
+  
+  // Start process asynchronously
+  final process = await factory
+      .command(['sh', '-c', 'for i in 1 2 3; do echo $i; sleep 1; done'])
+      .start((output) {
+        print('Realtime Output: $output');
+      });
+      
+  // Wait for completion
+  final result = await process.wait();
+  print('Final Exit Code: ${result.exitCode}');
+}
+```
 
-### PendingProcess
+### Process Management
 
-Configures how a process should be run.
+```dart
+void main() async {
+  final factory = Factory();
+  
+  // Start long-running process
+  final process = await factory
+      .command(['sleep', '10'])
+      .start();
+      
+  print('Process started with PID: ${process.pid}');
+  print('Is running: ${process.running()}');
+  
+  // Kill the process
+  final killed = process.kill();  // Sends SIGTERM
+  print('Kill signal sent: $killed');
+  
+  // Or with specific signal
+  process.kill(ProcessSignal.sigint);  // Sends SIGINT
+  
+  final result = await process.wait();
+  print('Process completed with exit code: ${result.exitCode}');
+}
+```
 
-- `withCommand(command)` - Set the command to run
-- `withWorkingDirectory(directory)` - Set the working directory
-- `withTimeout(seconds)` - Set the process timeout
-- `withIdleTimeout(seconds)` - Set the idle timeout
-- `withEnvironment(env)` - Set environment variables
-- `withInput(input)` - Provide input to the process
-- `withoutOutput()` - Disable process output
-- `withTty()` - Enable TTY mode
-- `forever()` - Disable timeout
-- `run()` - Run the process
-- `start()` - Start the process asynchronously
+### Output Control
 
-### ProcessResult
+```dart
+void main() async {
+  final factory = Factory();
+  
+  // Disable output
+  final result = await factory
+      .command(['echo', 'test'])
+      .withoutOutput()
+      .run();
+  print('Output length: ${result.output().length}');  // Output length: 0
+}
+```
 
-Represents the result of a completed process.
+### TTY Mode
 
-- `exitCode` - The process exit code
-- `output()` - The process standard output
-- `errorOutput()` - The process error output
-- `successful()` - Whether the process was successful
-- `failed()` - Whether the process failed
+```dart
+void main() async {
+  final factory = Factory();
+  
+  // Enable TTY mode for commands that require it
+  final result = await factory
+      .command(['ls', '--color=auto'])
+      .withTty()
+      .run();
+  print('Color Output: ${result.output()}');
+}
+```
 
-### InvokedProcess
+## Advanced Usage
 
-Represents a running process.
+### Custom Process Configuration
 
-- `pid` - The process ID
-- `write(input)` - Write to the process stdin
-- `kill([signal])` - Send a signal to the process
-- `wait()` - Wait for the process to complete
+```dart
+void main() async {
+  final factory = Factory();
+  
+  final result = await factory
+      .command(['my-script'])
+      .withWorkingDirectory('/path/to/scripts')
+      .withEnvironment({
+        'NODE_ENV': 'production',
+        'DEBUG': 'true'
+      })
+      .withTimeout(30)
+      .withIdleTimeout(5)
+      .withTty()
+      .run();
+      
+  if (result.successful()) {
+    print('Script completed successfully');
+    print(result.output());
+  }
+}
+```
+
+### Process Pool Management
+
+```dart
+void main() async {
+  final factory = Factory();
+  final processes = <InvokedProcess>[];
+  
+  // Start multiple processes
+  for (var i = 0; i < 3; i++) {
+    final process = await factory
+        .command(['worker.sh', i.toString()])
+        .start();
+    processes.add(process);
+  }
+  
+  // Wait for all processes to complete
+  for (var process in processes) {
+    final result = await process.wait();
+    print('Worker completed with exit code: ${result.exitCode}');
+  }
+}
+```
+
+### Error Output Handling
+
+```dart
+void main() async {
+  final factory = Factory();
+  
+  try {
+    final result = await factory
+        .command(['some-command'])
+        .run();
+        
+    print('Standard output:');
+    print(result.output());
+    
+    print('Error output:');
+    print(result.errorOutput());
+    
+  } on ProcessFailedException catch (e) {
+    print('Command failed with exit code: ${e.result.exitCode}');
+    print('Error details:');
+    print(e.result.errorOutput());
+  }
+}
+```
+
+### Infinite Process Execution
+
+```dart
+void main() async {
+  final factory = Factory();
+  
+  // Disable timeout for long-running processes
+  final process = await factory
+      .command(['tail', '-f', 'logfile.log'])
+      .forever()  // Disables timeout
+      .start((output) {
+        print('New log entry: $output');
+      });
+      
+  // Process will run until explicitly killed
+  await Future.delayed(Duration(minutes: 1));
+  process.kill();
+}
+```
 
 ## Error Handling
 
-The package provides two main exception types:
+The library provides several exception types for different error scenarios:
 
-- `ProcessFailedException` - Thrown when a process exits with a non-zero code
-- `ProcessTimedOutException` - Thrown when a process exceeds its timeout
+### ProcessFailedException
+
+Thrown when a process exits with a non-zero exit code:
+
+```dart
+try {
+  await factory.command(['nonexistent-command']).run();
+} on ProcessFailedException catch (e) {
+  print('Command failed:');
+  print('Exit code: ${e.result.exitCode}');
+  print('Error output: ${e.result.errorOutput()}');
+  print('Standard output: ${e.result.output()}');
+}
+```
+
+### ProcessTimedOutException
+
+Thrown when a process exceeds its timeout or idle timeout:
+
+```dart
+try {
+  await factory
+      .command(['sleep', '10'])
+      .withTimeout(5)
+      .run();
+} on ProcessTimedOutException catch (e) {
+  print('Process timed out:');
+  print('Message: ${e.message}');
+  if (e.result != null) {
+    print('Partial output: ${e.result?.output()}');
+  }
+}
+```
+
+## Best Practices
+
+1. **Always handle process failures:**
+```dart
+try {
+  await factory.command(['risky-command']).run();
+} on ProcessFailedException catch (e) {
+  // Handle failure
+} on ProcessTimedOutException catch (e) {
+  // Handle timeout
+}
+```
+
+2. **Set appropriate timeouts:**
+```dart
+factory
+    .command(['long-running-task'])
+    .withTimeout(300)        // Overall timeout
+    .withIdleTimeout(60)     // Idle timeout
+    .run();
+```
+
+3. **Use output callbacks for long-running processes:**
+```dart
+await factory
+    .command(['lengthy-task'])
+    .start((output) {
+      // Process output in real-time
+      print('Progress: $output');
+    });
+```
+
+4. **Clean up resources:**
+```dart
+final process = await factory.command(['server']).start();
+try {
+  // Do work
+} finally {
+  process.kill();  // Ensure process is terminated
+}
+```
+
+5. **Use shell mode appropriately:**
+```dart
+// For simple commands, use array form:
+factory.command(['echo', 'hello']);
+
+// For shell features (pipes, redirects), use string form:
+factory.command('echo hello | grep "o"');
+```
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
 
-This package is open-sourced software licensed under the MIT license.
+This project is licensed under the MIT License - see the LICENSE file for details.

@@ -68,17 +68,69 @@ void main() {
 
     test('idle timeout triggers', () async {
       if (!Platform.isWindows) {
-        final process = factory.command(['sleep', '5']).withIdleTimeout(1);
+        // Use tail -f to wait indefinitely without producing output
+        final process =
+            factory.command(['tail', '-f', '/dev/null']).withIdleTimeout(1);
 
         await expectLater(
           process.run(),
-          throwsA(isA<ProcessTimedOutException>().having(
-            (e) => e.message,
-            'message',
-            contains('exceeded the idle timeout of 1 seconds'),
-          )),
+          throwsA(
+            allOf(
+              isA<ProcessTimedOutException>(),
+              predicate((ProcessTimedOutException e) =>
+                  e.message.contains('exceeded the idle timeout of 1 seconds')),
+            ),
+          ),
         );
       }
     }, timeout: Timeout(Duration(seconds: 5)));
+
+    test('timeout triggers', () async {
+      if (!Platform.isWindows) {
+        final process = factory.command(['sleep', '5']).withTimeout(1);
+
+        await expectLater(
+          process.run(),
+          throwsA(
+            allOf(
+              isA<ProcessTimedOutException>(),
+              predicate((ProcessTimedOutException e) =>
+                  e.message.contains('exceeded the timeout of 1 seconds')),
+            ),
+          ),
+        );
+      }
+    }, timeout: Timeout(Duration(seconds: 5)));
+
+    test('immediate timeout triggers', () async {
+      if (!Platform.isWindows) {
+        final process = factory.command(['sleep', '1']).withTimeout(0);
+
+        await expectLater(
+          process.run(),
+          throwsA(
+            allOf(
+              isA<ProcessTimedOutException>(),
+              predicate((ProcessTimedOutException e) =>
+                  e.message.contains('exceeded the timeout of 0 seconds')),
+            ),
+          ),
+        );
+      }
+    });
+
+    test('string command is executed through shell', () async {
+      if (!Platform.isWindows) {
+        final result = await factory.command('echo "Hello from shell"').run();
+        expect(result.output().trim(), equals('Hello from shell'));
+      }
+    });
+
+    test('input as bytes is handled', () async {
+      final process =
+          factory.command(['cat']).withInput([72, 101, 108, 108, 111]);
+      final result = await process.run();
+      expect(result.output().trim(), equals('Hello'));
+    });
   });
 }
