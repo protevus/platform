@@ -67,6 +67,11 @@ class InvokedProcess {
     }
   }
 
+  /// Close the process stdin.
+  Future<void> closeStdin() async {
+    await _process.stdin.close();
+  }
+
   /// Signal the process.
   bool kill([ProcessSignal signal = ProcessSignal.sigterm]) {
     _killed = true;

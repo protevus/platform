@@ -50,7 +50,7 @@ void main() {
 
       process.write('Hello');
       process.write(' World');
-      await process.kill(); // Force process to complete
+      await process.closeStdin();
       final result = await process.wait();
       expect(result.output().trim(), equals('Hello World'));
     }, timeout: Timeout(Duration(seconds: 5)));
@@ -60,7 +60,7 @@ void main() {
       final process = await factory.command(['cat']).start();
 
       process.write([72, 101, 108, 108, 111]); // "Hello" in bytes
-      await process.kill(); // Force process to complete
+      await process.closeStdin();
       final result = await process.wait();
       expect(result.output().trim(), equals('Hello'));
     }, timeout: Timeout(Duration(seconds: 5)));
