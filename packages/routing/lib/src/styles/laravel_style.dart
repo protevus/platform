@@ -40,7 +40,11 @@ class LaravelStyle<T> implements RoutingStyle<T> {
   Route<T> route(String method, String path, T handler,
       {List<T> middleware = const [], String? name}) {
     var allMiddleware = [..._currentMiddleware, ...middleware];
-    var route = _router.addRoute(method.toUpperCase(), path, handler,
+
+    // If we're in a group, prepend the group prefix to the path
+    var fullPath = _groupPrefix != null ? '$_groupPrefix$path' : path;
+
+    var route = _router.addRoute(method.toUpperCase(), fullPath, handler,
         middleware: allMiddleware);
 
     // Auto-generate route name if not provided
@@ -50,33 +54,45 @@ class LaravelStyle<T> implements RoutingStyle<T> {
       // Convert path to route name (e.g., /users/{id} -> users.show)
       var segments = path.split('/').where((s) => s.isNotEmpty).toList();
       if (segments.isNotEmpty) {
-        var lastSegment = segments.last;
-        var prefix = segments.length > 1 ? segments[segments.length - 2] : '';
-        var groupPrefix = _groupName ?? _groupPrefix?.replaceAll('/', '.');
-        var namePrefix = groupPrefix != null ? '$groupPrefix.' : '';
+        // Clean up segments
+        var cleanSegments =
+            segments.map((s) => s.replaceAll(RegExp(r'[:{}/]'), '')).toList();
+
+        // Get the resource name from the last non-parameter segment
+        var resourceName = cleanSegments.last;
+        var hasParams =
+            segments.last.contains(':') || segments.last.contains('{');
+
+        if (hasParams && segments.length > 1) {
+          // If the last segment is a parameter, use the previous segment
+          resourceName = cleanSegments[segments.length - 2];
+        }
+
+        var prefix = _groupPrefix
+                ?.replaceAll('/', '.')
+                .replaceAll(RegExp(r'^\.|\.$'), '') ??
+            '';
+        var namePrefix = prefix.isEmpty ? '' : '$prefix.';
 
         // Generate name based on method and path
         switch (method.toUpperCase()) {
           case 'GET':
-            route.name = lastSegment.contains(':') || lastSegment.contains('{')
-                ? '$namePrefix${prefix.isEmpty ? lastSegment : prefix}.show'
-                : '$namePrefix${lastSegment}.index';
+            route.name = hasParams
+                ? '$namePrefix$resourceName.show'
+                : '$namePrefix$resourceName.index';
             break;
           case 'POST':
-            route.name =
-                '$namePrefix${prefix.isEmpty ? lastSegment : prefix}.store';
+            route.name = '$namePrefix$resourceName.store';
             break;
           case 'PUT':
           case 'PATCH':
-            route.name =
-                '$namePrefix${prefix.isEmpty ? lastSegment : prefix}.update';
+            route.name = '$namePrefix$resourceName.update';
             break;
           case 'DELETE':
-            route.name =
-                '$namePrefix${prefix.isEmpty ? lastSegment : prefix}.destroy';
+            route.name = '$namePrefix$resourceName.destroy';
             break;
           default:
-            route.name = '$namePrefix$lastSegment';
+            route.name = '$namePrefix$resourceName';
         }
       }
     }
@@ -144,37 +160,24 @@ class LaravelStyle<T> implements RoutingStyle<T> {
     var middleware = attributes['middleware'] as List<T>? ?? const [];
     var groupName = attributes['name'] as String? ?? '';
 
-    // Create new router for group
-    var groupRouter = Router<T>();
+    // Store current state
+    var previousPrefix = _groupPrefix;
+    var previousName = _groupName;
+    var previousMiddleware = _currentMiddleware;
 
-    // Create new style instance for group
-    var groupStyle = LaravelStyle<T>(groupRouter);
+    // Update group context
+    _groupPrefix = previousPrefix != null ? '$previousPrefix$prefix' : prefix;
+    _groupName = groupName.isNotEmpty ? groupName : prefix.replaceAll('/', '.');
+    _currentMiddleware = [...previousMiddleware, ...middleware];
 
-    // Set group prefix and name for route naming
-    groupStyle._groupPrefix = prefix;
-    groupStyle._groupName = groupName;
-    groupStyle._currentMiddleware = [..._currentMiddleware, ...middleware];
-
-    // Store previous active instance
-    var previousInstance = _activeInstance;
-    // Set group style as active instance
-    _activeInstance = groupStyle;
-
-    // Execute callback with group context
+    // Execute callback in group context
     callback();
 
-    // Mount group router with prefix
-    var route = _router.mount(prefix, groupRouter);
-    if (groupName.isNotEmpty) {
-      route.name = groupName;
-    }
-
-    // Restore previous active instance
-    _activeInstance = previousInstance;
+    // Restore previous state
+    _groupPrefix = previousPrefix;
+    _groupName = previousName;
+    _currentMiddleware = previousMiddleware;
   }
-
-  // Track active instance for group context
-  static LaravelStyle? _activeInstance;
 
   /// Add a name to the last registered route.
   ///
