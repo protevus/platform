@@ -7,7 +7,7 @@ import '../routing_style.dart';
 /// existing Express-like routing pattern. It provides the familiar app.get(),
 /// app.post(), etc. methods while utilizing the underlying routing system.
 class ExpressStyle<T> implements RoutingStyle<T> {
-  final Router<T> _router;
+  Router<T> _router;
 
   @override
   Router<T> get router => _router;
@@ -36,7 +36,8 @@ class ExpressStyle<T> implements RoutingStyle<T> {
   /// });
   /// ```
   Route<T> get(String path, T handler, {List<T> middleware = const []}) {
-    return _router.get(path, handler, middleware: middleware);
+    return _router.get(path, _wrapHandler(handler),
+        middleware: middleware.map(_wrapMiddleware).toList());
   }
 
   /// Register a route that handles POST requests.
@@ -47,7 +48,8 @@ class ExpressStyle<T> implements RoutingStyle<T> {
   /// });
   /// ```
   Route<T> post(String path, T handler, {List<T> middleware = const []}) {
-    return _router.post(path, handler, middleware: middleware);
+    return _router.post(path, _wrapHandler(handler),
+        middleware: middleware.map(_wrapMiddleware).toList());
   }
 
   /// Register a route that handles PUT requests.
@@ -58,7 +60,8 @@ class ExpressStyle<T> implements RoutingStyle<T> {
   /// });
   /// ```
   Route<T> put(String path, T handler, {List<T> middleware = const []}) {
-    return _router.put(path, handler, middleware: middleware) as Route<T>;
+    return _router.addRoute('PUT', path, _wrapHandler(handler),
+        middleware: middleware.map(_wrapMiddleware).toList());
   }
 
   /// Register a route that handles DELETE requests.
@@ -69,7 +72,8 @@ class ExpressStyle<T> implements RoutingStyle<T> {
   /// });
   /// ```
   Route<T> delete(String path, T handler, {List<T> middleware = const []}) {
-    return _router.delete(path, handler, middleware: middleware);
+    return _router.delete(path, _wrapHandler(handler),
+        middleware: middleware.map(_wrapMiddleware).toList());
   }
 
   /// Register a route that handles PATCH requests.
@@ -80,7 +84,8 @@ class ExpressStyle<T> implements RoutingStyle<T> {
   /// });
   /// ```
   Route<T> patch(String path, T handler, {List<T> middleware = const []}) {
-    return _router.patch(path, handler, middleware: middleware);
+    return _router.patch(path, _wrapHandler(handler),
+        middleware: middleware.map(_wrapMiddleware).toList());
   }
 
   /// Register a route that handles HEAD requests.
@@ -91,7 +96,8 @@ class ExpressStyle<T> implements RoutingStyle<T> {
   /// });
   /// ```
   Route<T> head(String path, T handler, {List<T> middleware = const []}) {
-    return _router.head(path, handler, middleware: middleware);
+    return _router.head(path, _wrapHandler(handler),
+        middleware: middleware.map(_wrapMiddleware).toList());
   }
 
   /// Register a route that handles OPTIONS requests.
@@ -102,7 +108,8 @@ class ExpressStyle<T> implements RoutingStyle<T> {
   /// });
   /// ```
   Route<T> options(String path, T handler, {List<T> middleware = const []}) {
-    return _router.options(path, handler, middleware: middleware);
+    return _router.options(path, _wrapHandler(handler),
+        middleware: middleware.map(_wrapMiddleware).toList());
   }
 
   /// Register a route that handles all HTTP methods.
@@ -113,7 +120,8 @@ class ExpressStyle<T> implements RoutingStyle<T> {
   /// });
   /// ```
   Route<T> all(String path, T handler, {List<T> middleware = const []}) {
-    return _router.all(path, handler, middleware: middleware);
+    return _router.all(path, _wrapHandler(handler),
+        middleware: middleware.map(_wrapMiddleware).toList());
   }
 
   /// Use middleware for all routes.
@@ -125,7 +133,16 @@ class ExpressStyle<T> implements RoutingStyle<T> {
   /// });
   /// ```
   void use(T middleware) {
-    _router.chain([middleware]);
+    // Chain middleware and update router
+    var chainedRouter = _router.chain([_wrapMiddleware(middleware)]);
+    _router = chainedRouter;
+
+    // Apply middleware to existing routes
+    for (var route in _router.routes) {
+      if (route is! SymlinkRoute<T>) {
+        route.handlers.insert(0, _wrapMiddleware(middleware));
+      }
+    }
   }
 
   /// Create a route group with optional prefix and middleware.
@@ -138,9 +155,54 @@ class ExpressStyle<T> implements RoutingStyle<T> {
   /// ```
   void group(String prefix, void Function(ExpressStyle<T> router) callback,
       {List<T> middleware = const []}) {
-    _router.group(prefix, (router) {
-      callback(ExpressStyle<T>(router));
-    }, middleware: middleware);
+    // Create a new router for the group
+    var groupRouter = Router<T>();
+
+    // Create new style instance for group
+    var groupStyle = ExpressStyle<T>(groupRouter);
+
+    // Execute callback with group style
+    callback(groupStyle);
+
+    // Apply middleware to all routes in the group
+    if (middleware.isNotEmpty) {
+      for (var route in groupRouter.routes) {
+        if (route is! SymlinkRoute<T>) {
+          route.handlers.insertAll(0, middleware.map(_wrapMiddleware).toList());
+        }
+      }
+    }
+
+    // Mount group router with prefix
+    _router.mount(prefix, groupRouter);
+  }
+
+  // Helper to wrap handler functions to match expected signature
+  T _wrapHandler(T handler) {
+    if (handler is Function) {
+      return ((req, res) {
+        if (handler is Function(dynamic, dynamic)) {
+          handler(req, res);
+        } else if (handler is Function(dynamic, dynamic, Function)) {
+          handler(req, res, () {});
+        }
+      }) as T;
+    }
+    return handler;
+  }
+
+  // Helper to wrap middleware functions to match expected signature
+  T _wrapMiddleware(T middleware) {
+    if (middleware is Function) {
+      return ((req, res) {
+        if (middleware is Function(dynamic, dynamic, Function)) {
+          middleware(req, res, () {});
+        } else if (middleware is Function(dynamic, dynamic)) {
+          middleware(req, res);
+        }
+      }) as T;
+    }
+    return middleware;
   }
 }
 

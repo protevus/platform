@@ -7,7 +7,10 @@ import '../routing_style.dart';
 /// underlying routing system. It demonstrates how different routing styles
 /// can be implemented on top of the core routing functionality.
 class LaravelStyle<T> implements RoutingStyle<T> {
-  final Router<T> _router;
+  Router<T> _router;
+  String? _groupPrefix;
+  String? _groupName;
+  List<T> _currentMiddleware = [];
 
   @override
   Router<T> get router => _router;
@@ -35,9 +38,49 @@ class LaravelStyle<T> implements RoutingStyle<T> {
   /// Route::post('/users', handler);
   /// ```
   Route<T> route(String method, String path, T handler,
-      {List<T> middleware = const []}) {
-    return _router.addRoute(method.toUpperCase(), path, handler,
-        middleware: middleware);
+      {List<T> middleware = const [], String? name}) {
+    var allMiddleware = [..._currentMiddleware, ...middleware];
+    var route = _router.addRoute(method.toUpperCase(), path, handler,
+        middleware: allMiddleware);
+
+    // Auto-generate route name if not provided
+    if (name != null) {
+      route.name = name;
+    } else {
+      // Convert path to route name (e.g., /users/{id} -> users.show)
+      var segments = path.split('/').where((s) => s.isNotEmpty).toList();
+      if (segments.isNotEmpty) {
+        var lastSegment = segments.last;
+        var prefix = segments.length > 1 ? segments[segments.length - 2] : '';
+        var groupPrefix = _groupName ?? _groupPrefix?.replaceAll('/', '.');
+        var namePrefix = groupPrefix != null ? '$groupPrefix.' : '';
+
+        // Generate name based on method and path
+        switch (method.toUpperCase()) {
+          case 'GET':
+            route.name = lastSegment.contains(':') || lastSegment.contains('{')
+                ? '$namePrefix${prefix.isEmpty ? lastSegment : prefix}.show'
+                : '$namePrefix${lastSegment}.index';
+            break;
+          case 'POST':
+            route.name =
+                '$namePrefix${prefix.isEmpty ? lastSegment : prefix}.store';
+            break;
+          case 'PUT':
+          case 'PATCH':
+            route.name =
+                '$namePrefix${prefix.isEmpty ? lastSegment : prefix}.update';
+            break;
+          case 'DELETE':
+            route.name =
+                '$namePrefix${prefix.isEmpty ? lastSegment : prefix}.destroy';
+            break;
+          default:
+            route.name = '$namePrefix$lastSegment';
+        }
+      }
+    }
+    return route;
   }
 
   /// Register a GET route.
@@ -99,26 +142,39 @@ class LaravelStyle<T> implements RoutingStyle<T> {
   void group(Map<String, dynamic> attributes, void Function() callback) {
     var prefix = attributes['prefix'] as String? ?? '';
     var middleware = attributes['middleware'] as List<T>? ?? const [];
+    var groupName = attributes['name'] as String? ?? '';
 
-    _router.group(prefix, (groupRouter) {
-      // Store current router
-      var parentRouter = _router;
-      // Create new style instance for group
-      var groupStyle = LaravelStyle<T>(groupRouter);
-      // Set current instance as the active one
-      _activeInstance = groupStyle;
-      // Execute callback
-      callback();
-      // Restore parent instance
-      _activeInstance = this;
-    }, middleware: middleware);
+    // Create new router for group
+    var groupRouter = Router<T>();
+
+    // Create new style instance for group
+    var groupStyle = LaravelStyle<T>(groupRouter);
+
+    // Set group prefix and name for route naming
+    groupStyle._groupPrefix = prefix;
+    groupStyle._groupName = groupName;
+    groupStyle._currentMiddleware = [..._currentMiddleware, ...middleware];
+
+    // Store previous active instance
+    var previousInstance = _activeInstance;
+    // Set group style as active instance
+    _activeInstance = groupStyle;
+
+    // Execute callback with group context
+    callback();
+
+    // Mount group router with prefix
+    var route = _router.mount(prefix, groupRouter);
+    if (groupName.isNotEmpty) {
+      route.name = groupName;
+    }
+
+    // Restore previous active instance
+    _activeInstance = previousInstance;
   }
 
   // Track active instance for group context
   static LaravelStyle? _activeInstance;
-
-  // Forward calls to active instance
-  LaravelStyle<T> get _current => _activeInstance as LaravelStyle<T>? ?? this;
 
   /// Add a name to the last registered route.
   ///
@@ -137,7 +193,14 @@ class LaravelStyle<T> implements RoutingStyle<T> {
   /// Route::middleware(['auth', 'throttle']);
   /// ```
   void middleware(List<T> middleware) {
-    _router.chain(middleware);
+    _currentMiddleware.addAll(middleware);
+
+    // Apply middleware to all existing routes
+    for (var route in _router.routes) {
+      if (route is! SymlinkRoute<T>) {
+        route.handlers.insertAll(0, middleware);
+      }
+    }
   }
 }
 
