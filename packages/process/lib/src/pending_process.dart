@@ -1,8 +1,5 @@
 import 'dart:io';
 import 'dart:async';
-import 'package:meta/meta.dart';
-import 'package:path/path.dart' as path;
-import 'package:collection/collection.dart';
 
 import 'factory.dart';
 import 'process_result.dart';
