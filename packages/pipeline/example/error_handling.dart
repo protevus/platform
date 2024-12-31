@@ -1,34 +1,23 @@
-import 'package:platform_foundation/core.dart';
-import 'package:platform_foundation/http.dart';
-import 'package:platform_container/mirrors.dart';
 import 'package:platform_pipeline/pipeline.dart';
+import 'package:platform_container/container.dart';
+import 'package:platform_container/mirrors.dart';
 
 class ErrorPipe {
-  dynamic handle(String input, Function next) {
-    throw Exception('Simulated error');
+  dynamic handle(dynamic input, Function next) {
+    throw Exception('Simulated error in pipeline');
   }
 }
 
 void main() async {
-  var app = Application(reflector: MirrorsReflector());
-  var http = PlatformHttp(app);
+  var container = Container(MirrorsReflector());
+  var pipeline = Pipeline(container);
 
-  app.container.registerSingleton((c) => Pipeline(c));
+  try {
+    var result = await pipeline.send('World').through([ErrorPipe()]).then(
+        (result) => result.toString().toUpperCase());
 
-  app.get('/', (req, res) async {
-    var pipeline = app.container.make<Pipeline>();
-    try {
-      await pipeline
-          .send('World')
-          .through(['ErrorPipe']).then((result) => result.toUpperCase());
-    } catch (e) {
-      res.write('Error occurred: ${e.toString()}');
-      return;
-    }
-
-    res.write('This should not be reached');
-  });
-
-  await http.startServer('localhost', 3000);
-  print('Server started on http://localhost:3000');
+    print('This should not be printed');
+  } catch (e) {
+    print('Caught error: $e');
+  }
 }
