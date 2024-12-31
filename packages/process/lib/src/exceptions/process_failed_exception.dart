@@ -1,48 +1,42 @@
-import '../contracts/process_result.dart';
+import '../process_result.dart';
 
 /// Exception thrown when a process fails.
 class ProcessFailedException implements Exception {
-  /// The process result that caused this exception.
-  final ProcessResult result;
+  /// The process result.
+  final ProcessResult _result;
 
   /// Create a new process failed exception instance.
-  ProcessFailedException(this.result);
+  ProcessFailedException(this._result);
+
+  /// Get the process result.
+  ProcessResult get result => _result;
+
+  /// Get the process exit code.
+  int get exitCode => _result.exitCode;
+
+  /// Get the process output.
+  String get output => _result.output();
+
+  /// Get the process error output.
+  String get errorOutput => _result.errorOutput();
 
   @override
   String toString() {
-    return '''
-The process "${result.command()}" failed with exit code ${result.exitCode()}.
+    final buffer =
+        StringBuffer('Process failed with exit code: ${_result.exitCode}');
 
-Output:
-${result.output().isEmpty ? '(empty)' : result.output()}
+    if (_result.output().isNotEmpty) {
+      buffer.writeln();
+      buffer.writeln('Output:');
+      buffer.writeln(_result.output().trim());
+    }
 
-Error Output:
-${result.errorOutput().isEmpty ? '(empty)' : result.errorOutput()}
-''';
-  }
-}
+    if (_result.errorOutput().isNotEmpty) {
+      buffer.writeln();
+      buffer.writeln('Error Output:');
+      buffer.writeln(_result.errorOutput().trim());
+    }
 
-/// Exception thrown when a process times out.
-class ProcessTimeoutException implements Exception {
-  /// The process result that caused this exception.
-  final ProcessResult result;
-
-  /// The timeout duration that was exceeded.
-  final Duration timeout;
-
-  /// Create a new process timeout exception instance.
-  ProcessTimeoutException(this.result, this.timeout);
-
-  @override
-  String toString() {
-    return '''
-The process "${result.command()}" timed out after ${timeout.inSeconds} seconds.
-
-Output:
-${result.output().isEmpty ? '(empty)' : result.output()}
-
-Error Output:
-${result.errorOutput().isEmpty ? '(empty)' : result.errorOutput()}
-''';
+    return buffer.toString();
   }
 }

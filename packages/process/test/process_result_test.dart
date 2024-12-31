@@ -1,115 +1,70 @@
 import 'package:test/test.dart';
-import 'package:platform_process/process.dart';
+import 'package:platform_process/platform_process.dart';
 
 void main() {
   group('ProcessResult', () {
-    late ProcessResultImpl result;
-
-    setUp(() {
-      result = ProcessResultImpl(
-        command: 'test-command',
-        exitCode: 0,
-        output: 'test output',
-        errorOutput: 'test error',
-      );
-    });
-
-    test('returns command', () {
-      expect(result.command(), equals('test-command'));
-    });
-
-    test('indicates success when exit code is 0', () {
+    test('successful process is detected correctly', () {
+      final result = ProcessResult(0, 'output', '');
       expect(result.successful(), isTrue);
       expect(result.failed(), isFalse);
     });
 
-    test('indicates failure when exit code is non-zero', () {
-      result = ProcessResultImpl(
-        command: 'test-command',
-        exitCode: 1,
-        output: '',
-        errorOutput: '',
-      );
+    test('failed process is detected correctly', () {
+      final result = ProcessResult(1, '', 'error');
       expect(result.successful(), isFalse);
       expect(result.failed(), isTrue);
     });
 
-    test('returns exit code', () {
-      expect(result.exitCode(), equals(0));
+    test('output methods return correct streams', () {
+      final result = ProcessResult(0, 'stdout', 'stderr');
+      expect(result.output(), equals('stdout'));
+      expect(result.errorOutput(), equals('stderr'));
     });
 
-    test('returns output', () {
-      expect(result.output(), equals('test output'));
+    test('toString returns stdout', () {
+      final result = ProcessResult(0, 'test output', 'error output');
+      expect(result.toString(), equals('test output'));
     });
 
-    test('returns error output', () {
-      expect(result.errorOutput(), equals('test error'));
+    test('empty output is handled correctly', () {
+      final result = ProcessResult(0, '', '');
+      expect(result.output(), isEmpty);
+      expect(result.errorOutput(), isEmpty);
     });
 
-    test('checks output content', () {
-      expect(result.seeInOutput('test'), isTrue);
-      expect(result.seeInOutput('missing'), isFalse);
+    test('exit code is accessible', () {
+      final result = ProcessResult(123, '', '');
+      expect(result.exitCode, equals(123));
     });
 
-    test('checks error output content', () {
-      expect(result.seeInErrorOutput('error'), isTrue);
-      expect(result.seeInErrorOutput('missing'), isFalse);
+    test('multiline output is preserved', () {
+      final stdout = 'line1\nline2\nline3';
+      final stderr = 'error1\nerror2';
+      final result = ProcessResult(0, stdout, stderr);
+      expect(result.output(), equals(stdout));
+      expect(result.errorOutput(), equals(stderr));
     });
 
-    test('throwIfFailed does not throw on success', () {
-      expect(() => result.throwIfFailed(), returnsNormally);
+    test('whitespace in output is preserved', () {
+      final stdout = '  leading and trailing spaces  ';
+      final result = ProcessResult(0, stdout, '');
+      expect(result.output(), equals(stdout));
     });
 
-    test('throwIfFailed throws on failure', () {
-      result = ProcessResultImpl(
-        command: 'test-command',
-        exitCode: 1,
-        output: 'failed output',
-        errorOutput: 'error message',
-      );
-
-      expect(
-          () => result.throwIfFailed(), throwsA(isA<ProcessFailedException>()));
+    test('non-zero exit code indicates failure', () {
+      for (var code in [1, 2, 127, 255]) {
+        final result = ProcessResult(code, '', '');
+        expect(result.failed(), isTrue,
+            reason: 'Exit code $code should indicate failure');
+        expect(result.successful(), isFalse,
+            reason: 'Exit code $code should not indicate success');
+      }
     });
 
-    test('throwIfFailed executes callback before throwing', () {
-      result = ProcessResultImpl(
-        command: 'test-command',
-        exitCode: 1,
-        output: '',
-        errorOutput: '',
-      );
-
-      var callbackExecuted = false;
-      expect(
-          () => result.throwIfFailed((result, exception) {
-                callbackExecuted = true;
-              }),
-          throwsA(isA<ProcessFailedException>()));
-      expect(callbackExecuted, isTrue);
-    });
-
-    test('throwIf respects condition', () {
-      expect(() => result.throwIf(false), returnsNormally);
-      expect(() => result.throwIf(true), returnsNormally);
-
-      result = ProcessResultImpl(
-        command: 'test-command',
-        exitCode: 1,
-        output: '',
-        errorOutput: '',
-      );
-
-      expect(() => result.throwIf(false), returnsNormally);
-      expect(
-          () => result.throwIf(true), throwsA(isA<ProcessFailedException>()));
-    });
-
-    test('toString includes command and outputs', () {
-      final string = result.toString();
-      expect(string, contains('test-command'));
-      expect(string, contains('test output'));
-      expect(string, contains('test error'));
+    test('zero exit code indicates success', () {
+      final result = ProcessResult(0, '', '');
+      expect(result.successful(), isTrue);
+      expect(result.failed(), isFalse);
     });
   });
 }

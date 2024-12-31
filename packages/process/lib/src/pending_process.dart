@@ -1,351 +1,288 @@
+import 'dart:io';
 import 'dart:async';
-import 'dart:io' as io;
-import 'dart:convert';
-import 'traits/macroable.dart';
-import 'contracts/process_result.dart';
+import 'package:meta/meta.dart';
+import 'package:path/path.dart' as path;
+import 'package:collection/collection.dart';
+
+import 'factory.dart';
 import 'process_result.dart';
+import 'invoked_process.dart';
+import 'exceptions/process_timed_out_exception.dart';
 import 'exceptions/process_failed_exception.dart';
 
-/// Represents a pending process that can be configured and then executed.
-class PendingProcess with Macroable {
+/// A class that represents a process that is ready to be started.
+class PendingProcess {
+  /// The process factory instance.
+  final Factory _factory;
+
   /// The command to invoke the process.
-  dynamic _command;
+  dynamic command;
 
   /// The working directory of the process.
-  String? _workingDirectory;
+  String? workingDirectory;
 
   /// The maximum number of seconds the process may run.
-  int? _timeout = 60;
+  int? timeout = 60;
 
   /// The maximum number of seconds the process may go without returning output.
-  int? _idleTimeout;
+  int? idleTimeout;
 
   /// The additional environment variables for the process.
-  final Map<String, String> _environment = {};
+  Map<String, String> environment = {};
 
   /// The standard input data that should be piped into the command.
-  dynamic _input;
+  dynamic input;
 
   /// Indicates whether output should be disabled for the process.
-  bool _quietly = false;
+  bool quietly = false;
 
   /// Indicates if TTY mode should be enabled.
-  bool _tty = true;
+  bool tty = false;
 
   /// Create a new pending process instance.
-  PendingProcess();
+  PendingProcess(this._factory);
+
+  /// Format the command for display.
+  String _formatCommand() {
+    if (command is List) {
+      return (command as List).join(' ');
+    }
+    return command.toString();
+  }
 
   /// Specify the command that will invoke the process.
-  PendingProcess command(dynamic command) {
-    _command = command;
+  PendingProcess withCommand(dynamic command) {
+    this.command = command;
     return this;
   }
 
   /// Specify the working directory of the process.
-  PendingProcess path(String path) {
-    _workingDirectory = path;
+  PendingProcess withWorkingDirectory(String directory) {
+    workingDirectory = directory;
     return this;
   }
 
   /// Specify the maximum number of seconds the process may run.
-  PendingProcess timeout(int seconds) {
-    _timeout = seconds;
+  PendingProcess withTimeout(int seconds) {
+    timeout = seconds;
     return this;
   }
 
   /// Specify the maximum number of seconds a process may go without returning output.
-  PendingProcess idleTimeout(int seconds) {
-    _idleTimeout = seconds;
+  PendingProcess withIdleTimeout(int seconds) {
+    idleTimeout = seconds;
     return this;
   }
 
   /// Indicate that the process may run forever without timing out.
   PendingProcess forever() {
-    _timeout = null;
+    timeout = null;
     return this;
   }
 
   /// Set the additional environment variables for the process.
-  PendingProcess env(Map<String, String> environment) {
-    _environment.addAll(environment);
+  PendingProcess withEnvironment(Map<String, String> env) {
+    environment = env;
     return this;
   }
 
   /// Set the standard input that should be provided when invoking the process.
-  PendingProcess input(dynamic input) {
-    _input = input;
+  PendingProcess withInput(dynamic input) {
+    this.input = input;
     return this;
   }
 
   /// Disable output for the process.
-  PendingProcess quietly() {
-    _quietly = true;
+  PendingProcess withoutOutput() {
+    quietly = true;
     return this;
   }
 
   /// Enable TTY mode for the process.
-  PendingProcess tty([bool enabled = true]) {
-    _tty = enabled;
+  PendingProcess withTty([bool enabled = true]) {
+    tty = enabled;
     return this;
   }
 
-  /// Parse the command into executable and arguments
-  (String, List<String>, bool) _parseCommand(dynamic command) {
-    if (command is List<String>) {
-      // For list commands, use directly without shell
-      if (command[0] == 'echo') {
-        // Special handling for echo command
-        if (io.Platform.isWindows) {
-          return (
-            'cmd.exe',
-            ['/c', 'echo', command.sublist(1).join(' ')],
-            true
-          );
-        }
-        // On Unix, pass arguments directly to echo
-        return ('echo', command.sublist(1), false);
-      } else if (command[0] == 'test' && command[1] == '-t') {
-        // Special handling for TTY test command
-        if (io.Platform.isWindows) {
-          return ('cmd.exe', ['/c', 'exit', '0'], true);
-        } else {
-          return ('sh', ['-c', 'exit 0'], true);
-        }
-      }
-      return (command[0], command.sublist(1), false);
+  /// Run the process synchronously.
+  Future<ProcessResult> run(
+      [dynamic command, void Function(String)? onOutput]) async {
+    this.command = command ?? this.command;
+
+    if (this.command == null) {
+      throw ArgumentError('No command specified');
     }
 
-    if (command is! String) {
-      throw ArgumentError('Command must be a string or list of strings');
+    // Handle immediate timeout
+    if (timeout == 0) {
+      throw ProcessTimedOutException(
+        'The process "${_formatCommand()}" exceeded the timeout of $timeout seconds.',
+      );
     }
 
-    final commandStr = command.toString();
+    try {
+      final process = await _createProcess();
+      Timer? timeoutTimer;
+      Timer? idleTimer;
+      DateTime lastOutputTime = DateTime.now();
+      bool timedOut = false;
+      String? timeoutMessage;
 
-    // Handle platform-specific shell commands
-    if (io.Platform.isWindows) {
-      if (commandStr.startsWith('cmd /c')) {
-        // Already properly formatted for Windows, pass through directly
-        return ('cmd.exe', ['/c', commandStr.substring(6)], true);
+      if (timeout != null) {
+        timeoutTimer = Timer(Duration(seconds: timeout!), () {
+          timedOut = true;
+          timeoutMessage =
+              'The process "${_formatCommand()}" exceeded the timeout of $timeout seconds.';
+          process.kill();
+        });
       }
-      // All other commands need cmd.exe shell
-      return ('cmd.exe', ['/c', commandStr], true);
-    } else {
-      if (commandStr == 'test -t 0') {
-        // Special handling for TTY test command
-        return ('sh', ['-c', 'exit 0'], true);
-      } else if (commandStr == 'pwd') {
-        // Special handling for pwd command
-        return ('pwd', [], false);
+
+      if (idleTimeout != null) {
+        idleTimer = Timer.periodic(Duration(seconds: 1), (_) {
+          final idleSeconds =
+              DateTime.now().difference(lastOutputTime).inSeconds;
+          if (idleSeconds >= idleTimeout!) {
+            timedOut = true;
+            timeoutMessage =
+                'The process "${_formatCommand()}" exceeded the idle timeout of $idleTimeout seconds.';
+            process.kill();
+            idleTimer?.cancel();
+          }
+        });
       }
-      // All other commands need sh shell
-      return ('sh', ['-c', commandStr], true);
+
+      try {
+        final result = await _runProcess(process, (output) {
+          lastOutputTime = DateTime.now();
+          onOutput?.call(output);
+        });
+
+        if (timedOut) {
+          throw ProcessTimedOutException(timeoutMessage!);
+        }
+
+        if (result.exitCode != 0) {
+          throw ProcessFailedException(result);
+        }
+
+        return result;
+      } finally {
+        timeoutTimer?.cancel();
+        idleTimer?.cancel();
+      }
+    } on ProcessException catch (e) {
+      final result = ProcessResult(1, '', e.message);
+      throw ProcessFailedException(result);
     }
   }
 
-  /// Run the process.
-  Future<ProcessResult> run(
-      [dynamic commandOrCallback, dynamic callback]) async {
-    // Handle overloaded parameters
-    dynamic actualCommand = _command;
-    void Function(String)? outputCallback;
+  /// Start the process asynchronously.
+  Future<InvokedProcess> start([void Function(String)? onOutput]) async {
+    if (command == null) {
+      throw ArgumentError('No command specified');
+    }
 
-    if (commandOrCallback != null) {
-      if (commandOrCallback is void Function(String)) {
-        outputCallback = commandOrCallback;
-      } else {
-        actualCommand = commandOrCallback;
-        if (callback != null && callback is void Function(String)) {
-          outputCallback = callback;
+    try {
+      final process = await _createProcess();
+
+      if (input != null) {
+        if (input is String) {
+          process.stdin.write(input);
+        } else if (input is List<int>) {
+          process.stdin.add(input);
         }
+        await process.stdin.close();
       }
+
+      return InvokedProcess(process, onOutput);
+    } on ProcessException catch (e) {
+      final result = ProcessResult(1, '', e.message);
+      throw ProcessFailedException(result);
     }
+  }
 
-    if (actualCommand == null) {
-      throw ArgumentError('No command has been specified.');
+  Future<Process> _createProcess() async {
+    if (command is List) {
+      final List<String> args =
+          (command as List).map((e) => e.toString()).toList();
+      return Process.start(
+        args[0],
+        args.skip(1).toList(),
+        workingDirectory: workingDirectory ?? Directory.current.path,
+        environment: environment,
+        includeParentEnvironment: true,
+        runInShell: false,
+        mode: tty ? ProcessStartMode.inheritStdio : ProcessStartMode.normal,
+      );
+    } else {
+      // For string commands, use shell to handle pipes, redirects, etc.
+      final shell = Platform.isWindows ? 'cmd' : '/bin/sh';
+      final shellArg = Platform.isWindows ? '/c' : '-c';
+      return Process.start(
+        shell,
+        [shellArg, command.toString()],
+        workingDirectory: workingDirectory ?? Directory.current.path,
+        environment: environment,
+        includeParentEnvironment: true,
+        runInShell: true,
+        mode: tty ? ProcessStartMode.inheritStdio : ProcessStartMode.normal,
+      );
     }
+  }
 
-    final (executable, args, useShell) = _parseCommand(actualCommand);
-
-    // Merge current environment with custom environment
-    final env = Map<String, String>.from(io.Platform.environment);
-    env.addAll(_environment);
-
-    // Set TTY environment variables
-    if (_tty) {
-      env['TERM'] = 'xterm';
-      env['FORCE_TTY'] = '1';
-      if (!io.Platform.isWindows) {
-        env['POSIXLY_CORRECT'] = '1';
-      }
-    }
-
-    final process = await io.Process.start(
-      executable,
-      args,
-      workingDirectory: _workingDirectory ?? io.Directory.current.path,
-      environment: env,
-      runInShell: useShell || _tty,
-      includeParentEnvironment: true,
-    );
-
-    final stdoutBuffer = StringBuffer();
-    final stderrBuffer = StringBuffer();
-
-    void handleOutput(String data) {
-      stdoutBuffer.write(data);
-
-      if (!_quietly && outputCallback != null) {
-        final lines = data.split('\n');
-        for (var line in lines) {
-          final trimmed = line.trim();
-          if (trimmed.isNotEmpty) {
-            outputCallback(trimmed);
-          }
-        }
-      }
-    }
-
-    void handleError(String data) {
-      stderrBuffer.write(data);
-
-      if (!_quietly && outputCallback != null) {
-        final lines = data.split('\n');
-        for (var line in lines) {
-          final trimmed = line.trim();
-          if (trimmed.isNotEmpty) {
-            outputCallback(trimmed);
-          }
-        }
-      }
-    }
-
+  Future<ProcessResult> _runProcess(
+      Process process, void Function(String)? onOutput) async {
+    final stdout = <int>[];
+    final stderr = <int>[];
     final stdoutCompleter = Completer<void>();
     final stderrCompleter = Completer<void>();
 
-    final stdoutSubscription = process.stdout
-        .transform(utf8.decoder)
-        .listen(handleOutput, onDone: stdoutCompleter.complete);
+    if (!quietly) {
+      process.stdout.listen(
+        (data) {
+          stdout.addAll(data);
+          if (onOutput != null) {
+            onOutput(String.fromCharCodes(data));
+          }
+        },
+        onDone: () => stdoutCompleter.complete(),
+      );
 
-    final stderrSubscription = process.stderr
-        .transform(utf8.decoder)
-        .listen(handleError, onDone: stderrCompleter.complete);
+      process.stderr.listen(
+        (data) {
+          stderr.addAll(data);
+          if (onOutput != null) {
+            onOutput(String.fromCharCodes(data));
+          }
+        },
+        onDone: () => stderrCompleter.complete(),
+      );
+    } else {
+      stdoutCompleter.complete();
+      stderrCompleter.complete();
+    }
 
-    if (_input != null) {
-      if (_input is String) {
-        process.stdin.write(_input);
-      } else if (_input is List<int>) {
-        process.stdin.add(_input as List<int>);
+    if (input != null) {
+      if (input is String) {
+        process.stdin.write(input);
+      } else if (input is List<int>) {
+        process.stdin.add(input);
       }
       await process.stdin.close();
     }
 
-    int? exitCode;
-    if (_timeout != null) {
-      try {
-        exitCode = await process.exitCode.timeout(Duration(seconds: _timeout!));
-      } on TimeoutException {
-        process.kill();
-        throw ProcessTimeoutException(
-          ProcessResultImpl(
-            command: executable,
-            exitCode: null,
-            output: stdoutBuffer.toString(),
-            errorOutput: stderrBuffer.toString(),
-          ),
-          Duration(seconds: _timeout!),
-        );
-      }
-    } else {
-      exitCode = await process.exitCode;
-    }
-
-    // Wait for output streams to complete
+    // Wait for all streams to complete
     await Future.wait([
       stdoutCompleter.future,
       stderrCompleter.future,
     ]);
 
-    await stdoutSubscription.cancel();
-    await stderrSubscription.cancel();
+    final exitCode = await process.exitCode;
 
-    return ProcessResultImpl(
-      command: executable,
-      exitCode: exitCode,
-      output: stdoutBuffer.toString(),
-      errorOutput: stderrBuffer.toString(),
+    return ProcessResult(
+      exitCode,
+      String.fromCharCodes(stdout),
+      String.fromCharCodes(stderr),
     );
-  }
-
-  /// Start the process in the background.
-  Future<io.Process> start(
-      [dynamic commandOrCallback, dynamic callback]) async {
-    // Handle overloaded parameters
-    dynamic actualCommand = _command;
-    void Function(String)? outputCallback;
-
-    if (commandOrCallback != null) {
-      if (commandOrCallback is void Function(String)) {
-        outputCallback = commandOrCallback;
-      } else {
-        actualCommand = commandOrCallback;
-        if (callback != null && callback is void Function(String)) {
-          outputCallback = callback;
-        }
-      }
-    }
-
-    if (actualCommand == null) {
-      throw ArgumentError('No command has been specified.');
-    }
-
-    final (executable, args, useShell) = _parseCommand(actualCommand);
-
-    // Merge current environment with custom environment
-    final env = Map<String, String>.from(io.Platform.environment);
-    env.addAll(_environment);
-
-    // Set TTY environment variables
-    if (_tty) {
-      env['TERM'] = 'xterm';
-      env['FORCE_TTY'] = '1';
-      if (!io.Platform.isWindows) {
-        env['POSIXLY_CORRECT'] = '1';
-      }
-    }
-
-    final process = await io.Process.start(
-      executable,
-      args,
-      workingDirectory: _workingDirectory ?? io.Directory.current.path,
-      environment: env,
-      runInShell: useShell || _tty,
-      includeParentEnvironment: true,
-    );
-
-    if (!_quietly && outputCallback != null) {
-      void handleOutput(String data) {
-        final lines = data.split('\n');
-        for (var line in lines) {
-          final trimmed = line.trim();
-          if (trimmed.isNotEmpty) {
-            outputCallback?.call(trimmed);
-          }
-        }
-      }
-
-      process.stdout.transform(utf8.decoder).listen(handleOutput);
-      process.stderr.transform(utf8.decoder).listen(handleOutput);
-    }
-
-    if (_input != null) {
-      if (_input is String) {
-        process.stdin.write(_input);
-      } else if (_input is List<int>) {
-        process.stdin.add(_input as List<int>);
-      }
-      await process.stdin.close();
-    }
-
-    return process;
   }
 }

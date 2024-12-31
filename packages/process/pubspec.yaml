@@ -1,45 +1,17 @@
 name: platform_process
-description: A fluent process execution package for Dart, inspired by Laravel's Process package. Provides process pools, piping, testing utilities, and more.
+description: A Laravel-compatible process management implementation in pure Dart
 version: 1.0.0
-homepage: https://github.com/platform-platform/process
-repository: https://github.com/platform-platform/process
-issue_tracker: https://github.com/platform-platform/process/issues
-documentation: https://github.com/platform-platform/process/blob/main/README.md
+homepage: https://github.com/platform/platform_process
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=2.17.0 <4.0.0'
 
 dependencies:
-  meta: ^1.9.0
-  collection: ^1.18.0
-  async: ^2.11.0
+  meta: ^1.9.1
   path: ^1.8.0
+  async: ^2.11.0
+  collection: ^1.17.0
 
 dev_dependencies:
+  lints: ^2.0.0
   test: ^1.24.0
-  lints: ^3.0.0
-  coverage: ^1.7.0
-  mockito: ^5.4.0
-  build_runner: ^2.4.0
-
-executables:
-  process: process
-
-topics:
-  - process
-  - shell
-  - command
-  - execution
-  - laravel
-
-platforms:
-  linux:
-  macos:
-  windows:
-
-funding:
-  - https://github.com/sponsors/platform-platform
-
-false_secrets:
-  - /example/**
-  - /test/**

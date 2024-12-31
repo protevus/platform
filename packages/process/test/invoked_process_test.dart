@@ -1,129 +1,104 @@
 import 'dart:io';
-import 'dart:convert';
 import 'package:test/test.dart';
-import 'package:platform_process/process.dart';
+import 'package:platform_process/platform_process.dart';
 
 void main() {
-  group('InvokedProcess', () {
-    late Process process;
-    late InvokedProcess invokedProcess;
+  group('InvokedProcess Tests', () {
+    test('latestOutput() returns latest stdout', () async {
+      final factory = Factory();
+      final process = await factory.command(
+          ['sh', '-c', 'echo "line1"; sleep 0.1; echo "line2"']).start();
 
-    setUp(() async {
-      process = await Process.start('echo', ['test']);
-      invokedProcess = InvokedProcess(process, 'echo test');
-    });
+      await Future.delayed(Duration(milliseconds: 50));
+      expect(process.latestOutput().trim(), equals('line1'));
 
-    test('provides process ID', () {
-      expect(invokedProcess.pid, equals(process.pid));
-    });
+      await Future.delayed(Duration(milliseconds: 100));
+      expect(process.latestOutput().trim(), contains('line2'));
 
-    test('captures output', () async {
-      final result = await invokedProcess.wait();
-      expect(result.output().trim(), equals('test'));
-    });
+      await process.wait();
+    }, timeout: Timeout(Duration(seconds: 5)));
 
-    test('handles error output', () async {
-      process = await Process.start('sh', ['-c', 'echo error >&2']);
-      invokedProcess = InvokedProcess(process, 'echo error >&2');
+    test('latestErrorOutput() returns latest stderr', () async {
+      final factory = Factory();
+      final process = await factory.command([
+        'sh',
+        '-c',
+        'echo "error1" >&2; sleep 0.1; echo "error2" >&2'
+      ]).start();
 
-      final result = await invokedProcess.wait();
-      expect(result.errorOutput().trim(), equals('error'));
-    });
+      await Future.delayed(Duration(milliseconds: 50));
+      expect(process.latestErrorOutput().trim(), equals('error1'));
 
-    test('provides exit code', () async {
-      final exitCode = await invokedProcess.exitCode;
-      expect(exitCode, equals(0));
-    });
+      await Future.delayed(Duration(milliseconds: 100));
+      expect(process.latestErrorOutput().trim(), contains('error2'));
 
-    test('handles process kill', () async {
-      process = await Process.start('sleep', ['10']);
-      invokedProcess = InvokedProcess(process, 'sleep 10');
+      await process.wait();
+    }, timeout: Timeout(Duration(seconds: 5)));
 
-      expect(invokedProcess.kill(), isTrue);
-      final exitCode = await invokedProcess.exitCode;
-      expect(exitCode, isNot(0));
-    });
+    test('running() returns correct state', () async {
+      final factory = Factory();
+      final process = await factory.command(['sleep', '0.5']).start();
 
-    test('provides access to stdout stream', () async {
-      final output = await invokedProcess.stdout.transform(utf8.decoder).join();
-      expect(output.trim(), equals('test'));
-    });
+      expect(process.running(), isTrue);
+      await Future.delayed(Duration(milliseconds: 600));
+      expect(process.running(), isFalse);
+    }, timeout: Timeout(Duration(seconds: 5)));
 
-    test('provides access to stderr stream', () async {
-      process = await Process.start('sh', ['-c', 'echo error >&2']);
-      invokedProcess = InvokedProcess(process, 'echo error >&2');
+    test('write() sends input to process', () async {
+      final factory = Factory();
+      final process = await factory.command(['cat']).start();
 
-      final error = await invokedProcess.stderr.transform(utf8.decoder).join();
-      expect(error.trim(), equals('error'));
-    });
+      process.write('Hello');
+      process.write(' World');
+      await process.closeStdin();
+      final result = await process.wait();
+      expect(result.output().trim(), equals('Hello World'));
+    }, timeout: Timeout(Duration(seconds: 5)));
 
-    test('provides access to stdin', () async {
-      process = await Process.start('cat', []);
-      invokedProcess = InvokedProcess(process, 'cat');
+    test('write() handles byte input', () async {
+      final factory = Factory();
+      final process = await factory.command(['cat']).start();
 
-      await invokedProcess.write('test input\n');
-      final result = await invokedProcess.wait();
-      expect(result.output().trim(), equals('test input'));
-    });
+      process.write([72, 101, 108, 108, 111]); // "Hello" in bytes
+      await process.closeStdin();
+      final result = await process.wait();
+      expect(result.output().trim(), equals('Hello'));
+    }, timeout: Timeout(Duration(seconds: 5)));
 
-    test('writes multiple lines to stdin', () async {
-      process = await Process.start('cat', []);
-      invokedProcess = InvokedProcess(process, 'cat');
+    test('kill() terminates process', () async {
+      final factory = Factory();
+      final process = await factory.command(['sleep', '10']).start();
 
-      await invokedProcess.writeLines(['line 1', 'line 2', 'line 3']);
-      final result = await invokedProcess.wait();
-      expect(result.output().trim().split('\n'),
-          equals(['line 1', 'line 2', 'line 3']));
-    });
+      expect(process.running(), isTrue);
+      final killed = process.kill();
+      expect(killed, isTrue);
 
-    test('captures real-time output', () async {
-      final outputs = <String>[];
-      process = await Process.start(
-          'sh', ['-c', 'echo line1; sleep 0.1; echo line2']);
-      invokedProcess = InvokedProcess(process, 'echo lines', (data) {
-        outputs.add(data.trim());
-      });
+      final result = await process.wait();
+      expect(result.exitCode, equals(-15)); // SIGTERM
+      expect(process.running(), isFalse);
+    }, timeout: Timeout(Duration(seconds: 5)));
 
-      await invokedProcess.wait();
-      expect(outputs, equals(['line1', 'line2']));
-    });
+    test('kill() with custom signal', () async {
+      if (!Platform.isWindows) {
+        final factory = Factory();
+        final process = await factory.command(['sleep', '10']).start();
 
-    test('handles process failure', () async {
-      process = await Process.start('false', []);
-      invokedProcess = InvokedProcess(process, 'false');
+        expect(process.running(), isTrue);
+        final killed = process.kill(ProcessSignal.sigint);
+        expect(killed, isTrue);
 
-      final result = await invokedProcess.wait();
-      expect(result.failed(), isTrue);
-      expect(result.exitCode(), equals(1));
-    });
+        final result = await process.wait();
+        expect(result.exitCode, equals(-2)); // SIGINT
+        expect(process.running(), isFalse);
+      }
+    }, timeout: Timeout(Duration(seconds: 5)));
 
-    test('handles process with arguments', () async {
-      process = await Process.start('echo', ['arg1', 'arg2']);
-      invokedProcess = InvokedProcess(process, 'echo arg1 arg2');
+    test('pid returns process ID', () async {
+      final factory = Factory();
+      final process = await factory.command(['echo', 'test']).start();
 
-      final result = await invokedProcess.wait();
-      expect(result.output().trim(), equals('arg1 arg2'));
-    });
-
-    test('handles binary output', () async {
-      process =
-          await Process.start('printf', [r'\x48\x45\x4C\x4C\x4F']); // "HELLO"
-      invokedProcess = InvokedProcess(process, 'printf HELLO');
-
-      final result = await invokedProcess.wait();
-      expect(result.output(), equals('HELLO'));
-    });
-
-    test('handles process cleanup', () async {
-      process = await Process.start('sleep', ['10']);
-      invokedProcess = InvokedProcess(process, 'sleep 10');
-
-      // Kill process and ensure resources are cleaned up
-      expect(invokedProcess.kill(), isTrue);
-      await invokedProcess.wait();
-
-      // Verify process is terminated
-      expect(await invokedProcess.exitCode, isNot(0));
-    });
+      expect(process.pid, isPositive);
+      await process.wait();
+    }, timeout: Timeout(Duration(seconds: 5)));
   });
 }

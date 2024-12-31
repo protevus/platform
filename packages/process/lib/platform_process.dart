@@ -1,5 +1,5 @@
 /// A Laravel-compatible process management implementation in pure Dart.
-library test_process;
+library platform_process;
 
 export 'src/pending_process.dart';
 export 'src/process_result.dart';
