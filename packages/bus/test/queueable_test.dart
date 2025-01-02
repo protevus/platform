@@ -1,14 +1,25 @@
 import 'package:platform_bus/platform_bus.dart';
+import 'package:platform_contracts/contracts.dart';
 import 'package:test/test.dart';
 
 // Test job that uses both mixins
 class TestQueueableJob with QueueableMixin, InteractsWithQueueMixin {
   final String id;
+  String? _configuredQueue;
 
   TestQueueableJob(this.id);
 
   Future<void> handle() async {
     // Simulate job processing
+  }
+
+  @override
+  String get queue => _configuredQueue ?? super.queue;
+
+  @override
+  QueueableJob onQueue(String queue) {
+    _configuredQueue = queue;
+    return super.onQueue(queue);
   }
 }
 
@@ -40,7 +51,6 @@ void main() {
 
     test('initializes with default values', () {
       expect(job.connection, isNull);
-      expect(job.queue, isNull);
       expect(job.delay, isNull);
       expect(job.maxTries, isNull);
       expect(job.retryAfter, isNull);
@@ -53,8 +63,9 @@ void main() {
     });
 
     test('configures queue', () {
+      expect(job.queue, equals('default')); // Initial default
       job.onQueue('high-priority');
-      expect(job.queue, equals('high-priority'));
+      expect(job.queue, equals('high-priority')); // After configuration
     });
 
     test('configures delay', () {
