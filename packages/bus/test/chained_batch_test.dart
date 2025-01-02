@@ -140,8 +140,8 @@ void main() {
       executionOrder = [];
 
       container.registerSingleton<BatchRepository>(repository);
-      container.registerSingleton<Dispatcher>(dispatcher);
       container.registerSingleton<Queue>(TestQueue());
+      container.registerSingleton<Dispatcher>(dispatcher);
     });
 
     test('prepares nested batches correctly', () {

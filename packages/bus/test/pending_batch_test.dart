@@ -130,8 +130,8 @@ void main() {
       dispatcher = MockDispatcher(container);
 
       container.registerSingleton<BatchRepository>(repository);
-      container.registerSingleton<Dispatcher>(dispatcher);
       container.registerSingleton<Queue>(TestQueue());
+      container.registerSingleton<Dispatcher>(dispatcher);
     });
 
     test('configures basic batch properties', () async {
