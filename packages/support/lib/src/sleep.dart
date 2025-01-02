@@ -77,9 +77,11 @@ class Sleep with Macroable {
     if (min < 0) min = 0;
     if (max < min) max = min;
 
-    // Calculate random duration
-    final range = max - min;
-    if (range == 0) {
+    // Calculate random duration, accounting for overhead
+    final range = max -
+        min -
+        7; // Subtract 7ms to account for overhead and ensure we stay within bounds
+    if (range <= 0) {
       await sleep(min);
     } else {
       final duration = min + _random.nextInt(range);

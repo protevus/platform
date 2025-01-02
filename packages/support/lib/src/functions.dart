@@ -62,36 +62,100 @@ class Functions {
   }) {
     final cache = <String, dynamic>{};
     var keys = <String>[];
+    final timestamps = <String, DateTime>{};
 
     String _generateKey(List<dynamic> args) {
-      return args.toString();
+      if (args.isEmpty) return 'no_args';
+
+      // Handle case where args is [[]]: parameterless function call
+      if (args.length == 1 && args[0] is List && (args[0] as List).isEmpty) {
+        return 'no_args';
+      }
+
+      // Handle case where args is [[arg1, arg2, ...]]: function call with arguments
+      if (args.length == 1 && args[0] is List) {
+        return (args[0] as List).map((arg) => arg.toString()).join('|');
+      }
+
+      // Handle direct arguments
+      return args.map((arg) => arg.toString()).join('|');
     }
 
     void _cleanCache() {
+      final now = DateTime.now();
+      if (maxAge != null) {
+        keys.removeWhere((key) {
+          if (now.difference(timestamps[key]!) > maxAge) {
+            cache.remove(key);
+            timestamps.remove(key);
+            return true;
+          }
+          return false;
+        });
+      }
+
       if (maxSize != null && keys.length > maxSize) {
         final removeCount = keys.length - maxSize;
         for (var i = 0; i < removeCount; i++) {
-          cache.remove(keys.removeAt(0));
+          final key = keys.removeAt(0);
+          cache.remove(key);
+          timestamps.remove(key);
         }
       }
     }
 
     return DeferredCallback((List<dynamic> args) {
       final key = _generateKey(args);
-      _cleanCache();
+
+      if (maxAge != null && timestamps.containsKey(key)) {
+        final age = DateTime.now().difference(timestamps[key]!);
+        if (age > maxAge) {
+          cache.remove(key);
+          timestamps.remove(key);
+          keys.remove(key);
+        }
+      }
 
       if (cache.containsKey(key)) {
         return cache[key];
       }
 
-      final result = callback is Function()
-          ? callback()
-          : callback is Function(List<dynamic>)
-              ? callback(args[0] as List<dynamic>)
-              : Function.apply(callback, args[0] as List<dynamic>);
+      dynamic result;
+      if (callback is Function()) {
+        // Handle parameterless function
+        result = callback();
+      } else if (args.isEmpty ||
+          (args.length == 1 && args[0] is List && (args[0] as List).isEmpty)) {
+        // Handle empty args or [[]] pattern for parameterless function
+        result = callback();
+      } else if (args.length == 1 && args[0] is List) {
+        // Handle nested array case from DeferredCallback.execute
+        final innerArgs = args[0] as List;
+        if (innerArgs.isEmpty) {
+          // Handle parameterless function call
+          result = callback();
+        } else if (callback is Function(List<dynamic>)) {
+          // If callback expects a List argument, pass the inner list directly
+          result = callback(innerArgs);
+        } else if (callback is Function(dynamic)) {
+          // If callback expects a single argument, pass the first element
+          result = callback(innerArgs[0]);
+        } else {
+          // Otherwise, spread the inner list as arguments
+          result = Function.apply(callback, innerArgs);
+        }
+      } else if (args.isEmpty) {
+        // Handle no arguments
+        result = callback();
+      } else {
+        // Handle direct arguments
+        result = Function.apply(callback, args);
+      }
 
       cache[key] = result;
+      timestamps[key] = DateTime.now();
       keys.add(key);
+      _cleanCache();
 
       return result;
     });

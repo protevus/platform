@@ -18,7 +18,9 @@ mixin InteractsWithTime {
   Future<void> sleepUntil(DateTime timestamp) async {
     final now = currentTime().dateTime;
     if (timestamp.isAfter(now)) {
-      await sleep(timestamp.difference(now).inMilliseconds);
+      final duration = timestamp.difference(now).inMilliseconds;
+      // Add a small buffer (1ms) to ensure we meet the minimum duration
+      await sleep(duration + 1);
     }
   }
 
