@@ -137,19 +137,19 @@ class Functions {
         } else if (callback is Function(List<dynamic>)) {
           // If callback expects a List argument, pass the inner list directly
           result = callback(innerArgs);
-        } else if (callback is Function(dynamic)) {
-          // If callback expects a single argument, pass the first element
+        } else if (innerArgs.length == 1) {
+          // Handle single argument
           result = callback(innerArgs[0]);
         } else {
-          // Otherwise, spread the inner list as arguments
-          result = Function.apply(callback, innerArgs);
+          // Handle multiple arguments
+          result = callback.call(innerArgs);
         }
       } else if (args.isEmpty) {
         // Handle no arguments
         result = callback();
       } else {
         // Handle direct arguments
-        result = Function.apply(callback, args);
+        result = callback.call(args);
       }
 
       cache[key] = result;
