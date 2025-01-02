@@ -73,6 +73,45 @@ class MockDispatcher implements Dispatcher {
   }
 }
 
+// Test queue
+class TestQueue implements Queue {
+  final List<dynamic> queuedJobs = [];
+
+  @override
+  Future<void> clear() async {
+    queuedJobs.clear();
+  }
+
+  @override
+  Future<dynamic> later(Duration delay, dynamic job) async {
+    queuedJobs.add(job);
+    return Future.value(job);
+  }
+
+  @override
+  Future<dynamic> laterOn(String queue, Duration delay, dynamic job) async {
+    queuedJobs.add(job);
+    return Future.value(job);
+  }
+
+  @override
+  Future<dynamic> push(dynamic job) async {
+    queuedJobs.add(job);
+    return Future.value(job);
+  }
+
+  @override
+  Future<dynamic> pushOn(String queue, dynamic job) async {
+    queuedJobs.add(job);
+    return Future.value(job);
+  }
+
+  @override
+  Future<int> size() async {
+    return queuedJobs.length;
+  }
+}
+
 // Test command for batch operations
 class TestCommand {
   final String id;
@@ -92,6 +131,7 @@ void main() {
 
       container.registerSingleton<BatchRepository>(repository);
       container.registerSingleton<Dispatcher>(dispatcher);
+      container.registerSingleton<Queue>(TestQueue());
     });
 
     test('configures basic batch properties', () async {

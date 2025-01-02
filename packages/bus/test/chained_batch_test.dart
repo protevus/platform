@@ -73,6 +73,45 @@ class MockDispatcher implements Dispatcher {
   }
 }
 
+// Test queue
+class TestQueue implements Queue {
+  final List<dynamic> queuedJobs = [];
+
+  @override
+  Future<void> clear() async {
+    queuedJobs.clear();
+  }
+
+  @override
+  Future<dynamic> later(Duration delay, dynamic job) async {
+    queuedJobs.add(job);
+    return Future.value(job);
+  }
+
+  @override
+  Future<dynamic> laterOn(String queue, Duration delay, dynamic job) async {
+    queuedJobs.add(job);
+    return Future.value(job);
+  }
+
+  @override
+  Future<dynamic> push(dynamic job) async {
+    queuedJobs.add(job);
+    return Future.value(job);
+  }
+
+  @override
+  Future<dynamic> pushOn(String queue, dynamic job) async {
+    queuedJobs.add(job);
+    return Future.value(job);
+  }
+
+  @override
+  Future<int> size() async {
+    return queuedJobs.length;
+  }
+}
+
 // Test job for batch chaining
 class TestJob with QueueableMixin, InteractsWithQueueMixin {
   final String id;
@@ -102,6 +141,7 @@ void main() {
 
       container.registerSingleton<BatchRepository>(repository);
       container.registerSingleton<Dispatcher>(dispatcher);
+      container.registerSingleton<Queue>(TestQueue());
     });
 
     test('prepares nested batches correctly', () {
@@ -150,12 +190,12 @@ void main() {
       final jobs = Collection([job1, nested1, nested2]);
       final prepared = ChainedBatch.prepareNestedBatches(jobs);
 
-      expect(prepared.length, equals(5));
+      expect(prepared.length, equals(6));
       final jobIds =
           prepared.whereType<TestJob>().map((job) => job.id).toList();
       expect(
         jobIds,
-        containsAllInOrder(['1', '2', '3', '4', '5']),
+        containsAllInOrder(['1', '2', '3', '4', '5', '6']),
       );
     });
 

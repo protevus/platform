@@ -15,13 +15,19 @@ class ChainedBatch {
   static Collection<dynamic> prepareNestedBatches(Collection<dynamic> jobs) {
     final prepared = <dynamic>[];
 
-    for (final job in jobs) {
+    void processJob(dynamic job) {
       if (job is Collection<dynamic>) {
-        // If the job is a collection, it's a nested batch
-        prepared.addAll(job);
+        // If the job is a collection, recursively process its items
+        for (final nestedJob in job) {
+          processJob(nestedJob);
+        }
       } else {
         prepared.add(job);
       }
+    }
+
+    for (final job in jobs) {
+      processJob(job);
     }
 
     return Collection<dynamic>(prepared);
