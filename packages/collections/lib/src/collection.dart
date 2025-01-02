@@ -252,9 +252,14 @@ class Collection<T> implements Iterable<T> {
 
   /// Returns a new collection with values extracted by key.
   Collection<V> pluck<V>(String key) {
-    if (T is! Map<String, dynamic>) throw TypeError();
-    return Collection(
-        _items.map((item) => (item as Map<String, dynamic>)[key] as V));
+    try {
+      return Collection(_items.map((item) {
+        final map = item as Map;
+        return map[key] as V;
+      }));
+    } catch (e) {
+      throw TypeError();
+    }
   }
 
   /// Returns a new collection with elements in the given range.
@@ -384,11 +389,12 @@ class Collection<T> implements Iterable<T> {
 
   /// Returns a map representation of the collection.
   Map<K, V> toMap<K, V>() {
-    if (T is! MapEntry<K, V>) {
+    try {
+      final entries = _items.map((item) => item as MapEntry<K, V>);
+      return Map.fromEntries(entries);
+    } catch (e) {
       throw TypeError();
     }
-    final entries = _items.cast<MapEntry<K, V>>();
-    return Map.fromEntries(entries);
   }
 
   /// Gets or sets a value in the collection.

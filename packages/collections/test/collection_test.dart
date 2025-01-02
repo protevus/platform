@@ -127,9 +127,9 @@ void main() {
     });
 
     test('can pluck values', () {
-      final collection = Collection([
-        {'id': 1, 'name': 'one'},
-        {'id': 2, 'name': 'two'},
+      final collection = Collection<Map<String, dynamic>>([
+        <String, dynamic>{'id': 1, 'name': 'one'},
+        <String, dynamic>{'id': 2, 'name': 'two'},
       ]);
       expect(collection.pluck<String>('name'), equals(['one', 'two']));
     });
@@ -243,11 +243,11 @@ void main() {
     });
 
     test('can convert to map', () {
-      final collection = Collection([
+      final collection = Collection<MapEntry<String, int>>([
         MapEntry('one', 1),
         MapEntry('two', 2),
       ]);
-      expect(collection.toMap(), equals({'one': 1, 'two': 2}));
+      expect(collection.toMap<String, int>(), equals({'one': 1, 'two': 2}));
     });
   });
 }
