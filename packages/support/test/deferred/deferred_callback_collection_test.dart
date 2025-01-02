@@ -254,15 +254,16 @@ void main() {
       expect(subset.length, equals(2));
     });
 
-    test('gets random callbacks', () {
+    test('gets random callback', () {
       final collection = DeferredCallbackCollection([
         DeferredCallback(() => 1),
         DeferredCallback(() => 2),
         DeferredCallback(() => 3),
       ]);
 
-      final random = collection.random(2);
-      expect(random.length, equals(2));
+      final random = collection.random();
+      expect(random, isA<DeferredCallback>());
+      expect(collection.contains(random), isTrue);
     });
 
     test('gets unique callbacks', () {
@@ -272,7 +273,6 @@ void main() {
         DeferredCallback(() => 2),
       ]);
 
-      // Use the callback's toString() for uniqueness
       final unique = collection.unique();
       expect(unique.length, equals(3)); // Each callback is unique by reference
     });

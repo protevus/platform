@@ -1,3 +1,5 @@
+import 'dart:async';
+
 /// Interface for command bus dispatching.
 ///
 /// This contract defines how commands should be dispatched to their handlers.
@@ -12,7 +14,7 @@ abstract class Dispatcher {
   ///   CreateOrderCommand(items: items),
   /// );
   /// ```
-  Future<dynamic> dispatch(dynamic command);
+  FutureOr<T> dispatch<T>(dynamic command);
 
   /// Dispatch a command to its appropriate handler in the current process.
   ///
@@ -24,7 +26,7 @@ abstract class Dispatcher {
   ///   CreateOrderCommand(items: items),
   /// );
   /// ```
-  Future<dynamic> dispatchSync(dynamic command, [dynamic handler]);
+  FutureOr<T> dispatchSync<T>(dynamic command, [dynamic handler]);
 
   /// Dispatch a command to its appropriate handler in the current process.
   ///
@@ -34,7 +36,7 @@ abstract class Dispatcher {
   ///   CreateOrderCommand(items: items),
   /// );
   /// ```
-  Future<dynamic> dispatchNow(dynamic command, [dynamic handler]);
+  FutureOr<T> dispatchNow<T>(dynamic command, [dynamic handler]);
 
   /// Determine if the given command has a handler.
   ///
@@ -77,5 +79,5 @@ abstract class Dispatcher {
   ///   UpdateOrderCommand: UpdateOrderHandler,
   /// });
   /// ```
-  Dispatcher map(Map<dynamic, dynamic> commandMap);
+  Dispatcher map(Map<Type, dynamic> commandMap);
 }

@@ -31,19 +31,22 @@ export 'src/broadcasting/broadcast_exception.dart';
 export 'src/broadcasting/broadcast_factory.dart';
 export 'src/broadcasting/broadcaster.dart';
 export 'src/broadcasting/has_broadcast_channel.dart';
-export 'src/broadcasting/should_be_unique.dart' show BroadcastShouldBeUnique;
+export 'src/broadcasting/should_be_unique.dart';
 export 'src/broadcasting/should_broadcast.dart';
 export 'src/broadcasting/should_broadcast_now.dart';
 
 // Bus contracts
-export 'src/bus/dispatcher.dart' show BusDispatcher;
+export 'src/bus/batch_repository.dart';
+export 'src/bus/batch.dart';
+export 'src/bus/dispatcher.dart';
+export 'src/bus/pending_batch.dart';
 export 'src/bus/queueing_dispatcher.dart';
 
 // Cache contracts
 export 'src/cache/cache_factory.dart';
 export 'src/cache/lock.dart';
 export 'src/cache/lock_provider.dart';
-export 'src/cache/lock_timeout_exception.dart' show CacheLockTimeoutException;
+export 'src/cache/lock_timeout_exception.dart';
 export 'src/cache/repository.dart';
 export 'src/cache/store.dart';
 
@@ -152,6 +155,7 @@ export 'src/queue/entity_not_found_exception.dart';
 export 'src/queue/entity_resolver.dart';
 export 'src/queue/queue_factory.dart' show QueueFactory;
 export 'src/queue/job.dart';
+export 'src/queue/jobs.dart';
 export 'src/queue/monitor.dart';
 export 'src/queue/queue.dart';
 export 'src/queue/queueable_collection.dart';
@@ -159,7 +163,7 @@ export 'src/queue/queueable_entity.dart';
 export 'src/queue/should_be_encrypted.dart';
 export 'src/queue/should_be_unique.dart' show QueueShouldBeUnique;
 export 'src/queue/should_be_unique_until_processing.dart';
-export 'src/queue/should_queue.dart';
+//export 'src/queue/should_queue.dart';
 export 'src/queue/should_queue_after_commit.dart';
 
 // Redis contracts

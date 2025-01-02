@@ -1,10 +1,13 @@
+import 'batch.dart';
 import 'dispatcher.dart';
+
+import 'pending_batch.dart';
 
 /// Interface for queueing command bus dispatching.
 ///
 /// This contract extends the base [Dispatcher] to add queueing functionality,
 /// allowing commands to be dispatched to queues and processed in batches.
-abstract class QueueingDispatcher implements Dispatcher {
+abstract interface class QueueingDispatcher implements Dispatcher {
   /// Attempt to find the batch with the given ID.
   ///
   /// Example:
@@ -14,7 +17,7 @@ abstract class QueueingDispatcher implements Dispatcher {
   ///   print('Found batch with ${batch.jobs.length} jobs');
   /// }
   /// ```
-  Future<dynamic> findBatch(String batchId);
+  Future<BatchContract?> findBatch(String batchId);
 
   /// Create a new batch of queueable jobs.
   ///
@@ -26,7 +29,7 @@ abstract class QueueingDispatcher implements Dispatcher {
   ///   ProcessOrderCommand(orderId: 3),
   /// ]);
   /// ```
-  Future<dynamic> batch(dynamic jobs);
+  PendingBatchContract batch(dynamic jobs);
 
   /// Dispatch a command to its appropriate handler behind a queue.
   ///
@@ -36,5 +39,5 @@ abstract class QueueingDispatcher implements Dispatcher {
   ///   ProcessLargeOrderCommand(orderId: 1),
   /// );
   /// ```
-  Future<dynamic> dispatchToQueue(dynamic command);
+  Future<dynamic> dispatchToQueue(dynamic job);
 }

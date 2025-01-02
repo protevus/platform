@@ -155,7 +155,7 @@ class DeferredCallbackCollection extends Collection<DeferredCallback> {
   /// Filter the collection to only include callbacks that match the predicate.
   @override
   DeferredCallbackCollection where(bool Function(DeferredCallback) test) {
-    return DeferredCallbackCollection(super.filter(test));
+    return DeferredCallbackCollection(super.where(test));
   }
 
   /// Map each callback to a new callback.
@@ -166,26 +166,25 @@ class DeferredCallbackCollection extends Collection<DeferredCallback> {
 
   /// Get a new collection with the specified callbacks.
   @override
-  DeferredCallbackCollection only(Iterable<int> keys) {
-    return DeferredCallbackCollection(super.only(keys));
+  DeferredCallbackCollection only(List<int> indices) {
+    return DeferredCallbackCollection(super.only(indices));
   }
 
   /// Get a new collection without the specified callbacks.
   @override
-  DeferredCallbackCollection except(Iterable<int> keys) {
-    return DeferredCallbackCollection(super.except(keys));
+  DeferredCallbackCollection except(List<int> indices) {
+    return DeferredCallbackCollection(super.except(indices));
   }
 
-  /// Get a new collection with random callbacks.
+  /// Get a random callback from the collection.
   @override
-  DeferredCallbackCollection random([int? number]) {
-    return DeferredCallbackCollection(super.random(number));
+  DeferredCallback random() {
+    return super.random();
   }
 
   /// Get a new collection with unique callbacks.
   @override
-  DeferredCallbackCollection unique(
-      [Object? Function(DeferredCallback element)? callback]) {
-    return DeferredCallbackCollection(super.unique(callback));
+  DeferredCallbackCollection unique() {
+    return DeferredCallbackCollection(super.unique());
   }
 }
