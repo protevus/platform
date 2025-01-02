@@ -1,874 +1,477 @@
-import 'dart:collection';
 import 'dart:math' as math;
-import 'package:meta/meta.dart';
-import 'package:platform_contracts/contracts.dart';
-import 'enumerable.dart';
-import 'lazy_collection.dart';
-import 'exceptions/item_not_found_exception.dart';
-import 'exceptions/multiple_items_found_exception.dart';
 
-/// A wrapper around List that provides a fluent interface for working with arrays of data.
-class Collection<T>
-    with ListMixin<T>
-    implements Enumerable<T>, CanBeEscapedWhenCastToString {
-  /// The items contained in the collection.
+/// A collection class that provides Laravel-like collection functionality.
+class Collection<T> implements Iterable<T> {
+  /// The underlying list of items.
   final List<T> _items;
 
-  /// Whether the collection should be escaped when cast to string.
-  bool _shouldEscape = false;
+  /// Creates a new collection instance.
+  Collection([Iterable<T>? items])
+      : _items = items != null ? List<T>.from(items) : [];
 
-  /// Create a new collection.
-  Collection([Iterable<T>? items]) : _items = List<T>.from(items ?? <T>[]);
+  /// Creates a new collection instance from any iterable.
+  factory Collection.from(Iterable<T> items) => Collection(items);
 
-  /// Create a collection with the given range.
-  static Collection<int> range(int from, int to) {
-    return Collection<int>(List.generate(to - from + 1, (i) => i + from));
+  /// Creates an empty collection.
+  factory Collection.empty() => Collection();
+
+  /// Wraps any value in a collection.
+  static Collection<T> wrap<T>(dynamic value) {
+    if (value == null) return Collection<T>();
+    if (value is Collection<T>) return value;
+    if (value is Iterable<T>) return Collection<T>.from(value);
+    if (value is T) return Collection<T>([value]);
+    throw ArgumentError('Cannot wrap value of type ${value.runtimeType}');
   }
 
-  /// Get all items in the collection.
+  /// Gets all items in the collection.
+  List<T> all() => toList();
+
   @override
-  List<T> all() => List.unmodifiable(_items);
+  List<T> toList({bool growable = true}) =>
+      growable ? List<T>.from(_items) : List<T>.unmodifiable(_items);
 
-  /// Get a lazy collection for the items in this collection.
-  LazyCollection<T> lazy() => LazyCollection<T>(_items);
-
-  /// Get the average value of a given key.
   @override
-  double? avg([num Function(T element)? callback]) {
-    if (_items.isEmpty) return null;
+  int get length => _items.length;
 
-    num sum = 0;
-    for (var item in _items) {
-      sum += callback?.call(item) ?? (item is num ? item : 0);
-    }
-    return sum / _items.length;
-  }
-
-  /// Get the median of a given key.
-  num? median([num Function(T element)? callback]) {
-    if (_items.isEmpty) return null;
-
-    final values = callback != null
-        ? _items.map(callback).where((n) => n != null).toList()
-        : _items.whereType<num>().toList();
-
-    if (values.isEmpty) return null;
-
-    values.sort();
-    final count = values.length;
-    final middle = (count / 2).floor();
-
-    if (count % 2 == 0) {
-      return (values[middle - 1] + values[middle]) / 2;
-    }
-
-    return values[middle];
-  }
-
-  /// Get the mode of a given key.
-  Collection<T> mode([num Function(T element)? callback]) {
-    if (_items.isEmpty) return Collection<T>();
-
-    final transformed = callback != null
-        ? _items.map((e) => MapEntry(e, callback(e))).toList()
-        : _items.map((e) => MapEntry(e, e is num ? e : null)).toList();
-
-    final counts = <num, List<T>>{};
-    for (var entry in transformed) {
-      if (entry.value != null) {
-        counts.putIfAbsent(entry.value as num, () => []).add(entry.key);
-      }
-    }
-
-    if (counts.isEmpty) return Collection<T>();
-
-    final maxCount = counts.values.map((list) => list.length).reduce(math.max);
-    return Collection(counts.values
-        .where((list) => list.length == maxCount)
-        .expand((list) => list)
-        .toList());
-  }
-
-  /// Get the max value of a given key.
   @override
-  T? max([dynamic Function(T element)? callback]) {
-    if (_items.isEmpty) return null;
+  bool get isEmpty => _items.isEmpty;
 
-    if (callback != null) {
-      return _items.reduce((value, element) {
-        final comp1 = callback(value);
-        final comp2 = callback(element);
-        if (comp1 is Comparable && comp2 is Comparable) {
-          return comp1.compareTo(comp2) > 0 ? value : element;
-        }
-        return value;
-      });
-    }
-
-    if (_items.first is Comparable) {
-      return _items.reduce((value, element) {
-        return (value as Comparable).compareTo(element) > 0 ? value : element;
-      });
-    }
-
-    return _items.first;
-  }
-
-  /// Get the min value of a given key.
   @override
-  T? min([dynamic Function(T element)? callback]) {
-    if (_items.isEmpty) return null;
+  bool get isNotEmpty => _items.isNotEmpty;
 
-    if (callback != null) {
-      return _items.reduce((value, element) {
-        final comp1 = callback(value);
-        final comp2 = callback(element);
-        if (comp1 is Comparable && comp2 is Comparable) {
-          return comp1.compareTo(comp2) < 0 ? value : element;
-        }
-        return value;
-      });
-    }
+  @override
+  T get first => _items.first;
 
-    if (_items.first is Comparable) {
-      return _items.reduce((value, element) {
-        return (value as Comparable).compareTo(element) < 0 ? value : element;
-      });
-    }
+  @override
+  T get last => _items.last;
 
-    return _items.first;
-  }
+  @override
+  Iterator<T> get iterator => _items.iterator;
 
-  /// Sort through each item with a callback.
-  Collection<T> sort([Comparator<T>? compare]) {
+  T operator [](int index) => _items[index];
+  void operator []=(int index, T value) => _items[index] = value;
+
+  /// Adds an item to the collection.
+  void add(T item) => _items.add(item);
+
+  /// Adds all items from an iterable to the collection.
+  void addAll(Iterable<T> items) => _items.addAll(items);
+
+  /// Removes an item from the collection.
+  bool remove(T item) => _items.remove(item);
+
+  /// Removes the item at the given index.
+  T removeAt(int index) => _items.removeAt(index);
+
+  /// Removes a range of items from the collection.
+  void removeRange(int start, int end) => _items.removeRange(start, end);
+
+  /// Removes all items from the collection.
+  void clear() => _items.clear();
+
+  @override
+  Collection<R> map<R>(R Function(T) f) => Collection(_items.map(f));
+
+  /// Maps each item in the collection to a new value.
+  Collection<R> mapItems<R>(R Function(T) f) => map(f);
+
+  @override
+  Collection<T> where(bool Function(T) test) => Collection(_items.where(test));
+
+  @override
+  Collection<R> whereType<R>() => Collection(_items.whereType<R>());
+
+  @override
+  R fold<R>(R initial, R Function(R previous, T element) combine) =>
+      _items.fold(initial, combine);
+
+  @override
+  bool any(bool Function(T) test) => _items.any(test);
+
+  @override
+  bool every(bool Function(T) test) => _items.every(test);
+
+  @override
+  void forEach(void Function(T element) action) => _items.forEach(action);
+
+  @override
+  Collection<T> followedBy(Iterable<T> other) =>
+      Collection([..._items, ...other]);
+
+  /// Returns a new collection with the items in reversed order.
+  Collection<T> reverse() => Collection(_items.reversed);
+
+  /// Sorts the items in the collection.
+  void sort([int Function(T a, T b)? compare]) => _items.sort(compare);
+
+  /// Returns a new collection with the items sorted.
+  Collection<T> sorted([int Function(T a, T b)? compare]) {
     final sorted = List<T>.from(_items);
-    if (compare != null) {
-      sorted.sort(compare);
-    } else if (T is Comparable) {
-      sorted.sort((a, b) => (a as Comparable).compareTo(b));
-    }
+    sorted.sort(compare);
     return Collection(sorted);
   }
 
-  /// Sort the collection using the given callback.
-  Collection<T> sortBy(dynamic Function(T element) callback,
-      {bool desc = false}) {
-    final sorted = List<T>.from(_items);
-    sorted.sort((a, b) {
-      final aVal = callback(a);
-      final bVal = callback(b);
-      if (aVal is Comparable && bVal is Comparable) {
-        final comparison = aVal.compareTo(bVal);
-        return desc ? -comparison : comparison;
-      }
-      return 0;
-    });
-    return Collection(sorted);
+  @override
+  Collection<T> take(int count) => Collection(_items.take(count));
+
+  @override
+  Collection<T> skip(int count) => Collection(_items.skip(count));
+
+  /// Returns a new collection with elements that satisfy the predicate.
+  Collection<T> filter(bool Function(T) test) => where(test);
+
+  /// Returns a new collection containing only the elements at the given indices.
+  Collection<T> only(List<int> indices) =>
+      Collection(indices.map((i) => _items[i]));
+
+  /// Returns a new collection excluding the elements at the given indices.
+  Collection<T> except(List<int> indices) {
+    final indexSet = indices.toSet();
+    return Collection(
+        _items.where((item) => !indexSet.contains(_items.indexOf(item))));
   }
 
-  /// Sort the collection in descending order using the given callback.
-  Collection<T> sortByDesc(dynamic Function(T element) callback) {
-    return sortBy(callback, desc: true);
-  }
-
-  /// Sort the collection keys.
-  Collection<T> sortKeys({bool desc = false}) {
-    final sorted = Map.fromEntries(_items.asMap().entries.toList()
-      ..sort((a, b) => desc ? b.key.compareTo(a.key) : a.key.compareTo(b.key)));
-    return Collection(sorted.values);
-  }
-
-  /// Sort the collection keys in descending order.
-  Collection<T> sortKeysDesc() {
-    return sortKeys(desc: true);
-  }
-
-  /// Sort the collection keys using a callback.
-  Collection<T> sortKeysUsing(Comparator<int> callback) {
-    final sorted = Map.fromEntries(_items.asMap().entries.toList()
-      ..sort((a, b) => callback(a.key, b.key)));
-    return Collection(sorted.values);
-  }
-
-  /// Chunk the collection into chunks of the given size.
-  Collection<Collection<T>> chunk(int size) {
-    if (size <= 0) return Collection<Collection<T>>();
-
-    final chunks = <Collection<T>>[];
-    for (var i = 0; i < _items.length; i += size) {
-      chunks.add(Collection(_items.sublist(
-          i, i + size > _items.length ? _items.length : i + size)));
+  /// Returns a random element from the collection.
+  T random() {
+    if (isEmpty) {
+      throw StateError('Cannot get a random element from empty collection');
     }
-    return Collection(chunks);
+    return _items[math.Random().nextInt(length)];
   }
 
-  /// Chunk the collection into chunks with a callback.
-  Collection<Collection<T>> chunkWhile(
-      bool Function(T value, T previous) callback) {
-    if (_items.isEmpty) return Collection<Collection<T>>();
+  /// Returns a new collection with duplicate elements removed.
+  Collection<T> unique() => Collection(_items.toSet());
 
-    final chunks = <Collection<T>>[];
-    var chunk = <T>[_items.first];
-
-    for (var i = 1; i < _items.length; i++) {
-      if (callback(_items[i], _items[i - 1])) {
-        chunk.add(_items[i]);
-      } else {
-        chunks.add(Collection(chunk));
-        chunk = <T>[_items[i]];
-      }
-    }
-
-    if (chunk.isNotEmpty) {
-      chunks.add(Collection(chunk));
-    }
-
-    return Collection(chunks);
-  }
-
-  /// Create chunks representing a "sliding window" view of the items in the collection.
-  Collection<Collection<T>> sliding(int size, [int step = 1]) {
-    if (size <= 0 || step <= 0) return Collection<Collection<T>>();
-
-    final result = <Collection<T>>[];
-    for (var i = 0; i <= _items.length - size; i += step) {
-      result.add(Collection(_items.sublist(i, i + size)));
+  /// Returns a new collection with elements chunked into groups of [size].
+  Collection<List<T>> chunk(int size) {
+    if (size <= 0) throw ArgumentError('Size must be positive');
+    final result = <List<T>>[];
+    for (var i = 0; i < length; i += size) {
+      result.add(_items.skip(i).take(size).toList());
     }
     return Collection(result);
   }
 
-  /// Cross join with the given lists, returning all possible permutations.
-  Collection<List<dynamic>> crossJoin(List<List<dynamic>> lists) {
-    final result = <List<dynamic>>[];
-    final allLists = [_items, ...lists];
+  /// Returns a new collection with elements split into [numberOfGroups] groups.
+  Collection<List<T>> splitIn(int numberOfGroups) {
+    if (numberOfGroups <= 0) {
+      throw ArgumentError('Number of groups must be positive');
+    }
+    final size = (length / numberOfGroups).ceil();
+    return chunk(size);
+  }
 
-    void _crossJoin(List<dynamic> current, int depth) {
-      if (depth == allLists.length) {
-        result.add(List.from(current));
-        return;
-      }
-
-      for (var item in allLists[depth]) {
+  /// Returns a new collection with elements split by the given value.
+  Collection<List<T>> split(T separator) {
+    final result = <List<T>>[];
+    var current = <T>[];
+    for (final item in _items) {
+      if (item == separator) {
+        if (current.isNotEmpty) {
+          result.add(List<T>.from(current));
+          current = <T>[];
+        }
+      } else {
         current.add(item);
-        _crossJoin(current, depth + 1);
-        current.removeLast();
       }
     }
-
-    _crossJoin([], 0);
-    return Collection(result);
-  }
-
-  /// Collapse a collection of arrays into a single flat collection.
-  Collection<dynamic> collapse() {
-    final result = <dynamic>[];
-    for (var item in _items) {
-      if (item is Iterable) {
-        result.addAll(item);
-      } else {
-        result.add(item);
-      }
+    if (current.isNotEmpty) {
+      result.add(List<T>.from(current));
     }
     return Collection(result);
   }
 
-  /// Get the items in the collection that are not present in the given items.
-  @override
-  Collection<T> diff(Iterable<T> items) {
-    return Collection(_items.where((item) => !items.contains(item)));
+  /// Returns the average value of numeric elements.
+  double avg(num Function(T) selector) {
+    if (isEmpty) return 0;
+    final sum = _items.fold<num>(0, (sum, item) => sum + selector(item));
+    return sum / length;
   }
 
-  /// Get the items in the collection that are not present in the given items, using the callback.
-  Collection<T> diffUsing(Iterable<T> items, int Function(T a, T b) callback) {
-    return Collection(_items
-        .where((item) => !items.any((other) => callback(item, other) == 0)));
-  }
-
-  /// Get the items in the collection whose keys and values are not present in the given items.
-  Collection<T> diffAssoc(Iterable<T> items) {
-    final otherMap =
-        Map.fromIterables(List.generate(items.length, (i) => i), items);
-    final thisMap =
-        Map.fromIterables(List.generate(_items.length, (i) => i), _items);
-
-    return Collection(thisMap.entries
-        .where((entry) =>
-            !otherMap.containsKey(entry.key) ||
-            otherMap[entry.key] != entry.value)
-        .map((entry) => entry.value));
-  }
-
-  /// Get the items in the collection whose keys and values are not present in the given items, using the callback.
-  Collection<T> diffAssocUsing(
-      Iterable<T> items, int Function(T a, T b) callback) {
-    final otherMap =
-        Map.fromIterables(List.generate(items.length, (i) => i), items);
-    final thisMap =
-        Map.fromIterables(List.generate(_items.length, (i) => i), _items);
-
-    return Collection(thisMap.entries
-        .where((entry) =>
-            !otherMap.containsKey(entry.key) ||
-            callback(entry.value, otherMap[entry.key] as T) != 0)
-        .map((entry) => entry.value));
-  }
-
-  /// Get the items in the collection whose keys are not present in the given items.
-  Collection<T> diffKeys(Iterable<T> items) {
-    final otherKeys = Set.from(List.generate(items.length, (i) => i));
-    return Collection(_items
-        .asMap()
-        .entries
-        .where((entry) => !otherKeys.contains(entry.key))
-        .map((entry) => entry.value));
-  }
-
-  /// Get the items in the collection whose keys are not present in the given items, using the callback.
-  Collection<T> diffKeysUsing(
-      Iterable<T> items, int Function(int a, int b) callback) {
-    final otherKeys = List.generate(items.length, (i) => i);
-    return Collection(_items
-        .asMap()
-        .entries
-        .where(
-            (entry) => !otherKeys.any((key) => callback(entry.key, key) == 0))
-        .map((entry) => entry.value));
-  }
-
-  /// Retrieve duplicate items from the collection.
-  Collection<T> duplicates([Object? Function(T element)? callback]) {
-    final seen = <Object?>{};
-    final duplicates = <T>{};
-
-    for (var item in _items) {
-      final key = callback?.call(item) ?? item;
-      if (!seen.add(key)) {
-        duplicates.add(item);
+  /// Returns the maximum value in the collection.
+  T max() {
+    if (isEmpty) throw StateError('Cannot get max of empty collection');
+    return _items.reduce((a, b) {
+      if (a is Comparable && b is Comparable) {
+        return (a as Comparable).compareTo(b) > 0 ? a : b;
       }
-    }
-
-    return Collection(duplicates.toList());
+      throw TypeError();
+    });
   }
 
-  /// Get all items except for those with the specified keys.
-  Collection<T> except(Iterable<int> keys) {
-    final keySet = Set.from(keys);
-    return Collection(_items
-        .asMap()
-        .entries
-        .where((entry) => !keySet.contains(entry.key))
-        .map((entry) => entry.value));
+  /// Returns the minimum value in the collection.
+  T min() {
+    if (isEmpty) throw StateError('Cannot get min of empty collection');
+    return _items.reduce((a, b) {
+      if (a is Comparable && b is Comparable) {
+        return (a as Comparable).compareTo(b) < 0 ? a : b;
+      }
+      throw TypeError();
+    });
   }
 
-  /// Run a filter over each of the items.
-  @override
-  Collection<T> filter(bool Function(T element) test) {
-    return Collection(_items.where(test));
-  }
-
-  /// Try to get the first item matching the predicate.
-  @override
-  T? tryFirst([bool Function(T element)? predicate]) {
-    if (predicate == null) {
-      return _items.isEmpty ? null : _items.first;
-    }
-
-    for (var item in _items) {
-      if (predicate(item)) return item;
-    }
-    return null;
-  }
-
-  /// Get the first item in the collection but throw an exception if no matching items exist.
-  T firstOrFail([bool Function(T element)? predicate]) {
-    final item = tryFirst(predicate);
-    if (item == null) {
-      throw ItemNotFoundException(
-        null,
-        predicate != null
-            ? 'No matching items found in collection.'
-            : 'Collection is empty.',
-      );
-    }
-    return item;
-  }
-
-  /// Get the first item in the collection, but only if exactly one item exists.
-  T sole([bool Function(T element)? predicate]) {
-    final filtered = predicate != null ? _items.where(predicate) : _items;
-    final count = filtered.length;
-
-    if (count == 0) {
-      throw ItemNotFoundException(
-        null,
-        predicate != null
-            ? 'No matching items found in collection.'
-            : 'Collection is empty.',
-      );
-    }
-
-    if (count > 1) {
-      throw MultipleItemsFoundException(
-        count,
-        predicate != null
-            ? 'Multiple matching items found in collection.'
-            : 'Multiple items found in collection.',
-      );
-    }
-
-    return filtered.first;
-  }
-
-  /// Try to get the last item matching the predicate.
-  @override
-  T? tryLast([bool Function(T element)? predicate]) {
-    if (predicate == null) {
-      return _items.isEmpty ? null : _items.last;
-    }
-
-    T? result;
-    for (var item in _items) {
-      if (predicate(item)) result = item;
-    }
-    return result;
-  }
-
-  /// Get the item before the first matching item.
-  T? before(T value) {
+  /// Returns a new collection with elements before the given value.
+  Collection<T> before(T value) {
     final index = _items.indexOf(value);
-    if (index <= 0) return null;
-    return _items[index - 1];
+    if (index == -1) return Collection.empty();
+    return Collection(_items.take(index));
   }
 
-  /// Get the item after the first matching item.
-  T? after(T value) {
+  /// Returns a new collection with elements after the given value.
+  Collection<T> after(T value) {
     final index = _items.indexOf(value);
-    if (index == -1 || index >= _items.length - 1) return null;
-    return _items[index + 1];
+    if (index == -1) return Collection.empty();
+    return Collection(_items.skip(index + 1));
   }
 
-  /// Flip the collection's items.
-  Collection<dynamic> flip() {
-    final result = <dynamic, dynamic>{};
-    for (var i = 0; i < _items.length; i++) {
-      result[_items[i]] = i;
-    }
-    return Collection(result.keys.toList());
-  }
-
-  /// Group an associative array by a field or using a callback.
-  Map<K, Collection<T>> groupBy<K>(K Function(T element) keyFunction) {
-    final result = <K, List<T>>{};
-    for (var item in _items) {
-      final key = keyFunction(item);
-      result.putIfAbsent(key, () => []).add(item);
-    }
-    return result.map((key, value) => MapEntry(key, Collection(value)));
-  }
-
-  /// Key an associative array by a field or using a callback.
-  Map<K, T> keyBy<K>(K Function(T element) keyFunction) {
-    return Map.fromEntries(
-      _items.map((item) => MapEntry(keyFunction(item), item)),
-    );
-  }
-
-  /// Get the values of a given key.
-  Collection<R> pluck<R>(R Function(T element) valueFunction) {
-    return Collection(_items.map(valueFunction));
-  }
-
-  /// Run a dictionary map over the items.
-  Map<K, List<V>> mapToDictionary<K, V>(
-      MapEntry<K, V> Function(T element) callback) {
-    final result = <K, List<V>>{};
-    for (var item in _items) {
-      final entry = callback(item);
-      result.putIfAbsent(entry.key, () => []).add(entry.value);
-    }
-    return result;
-  }
-
-  /// Run an associative map over each of the items.
-  Map<K, V> mapWithKeys<K, V>(MapEntry<K, V> Function(T element) callback) {
-    return Map.fromEntries(_items.map(callback));
-  }
-
-  /// Determine if an item exists in the collection.
-  bool contains(Object? item) => _items.contains(item);
-
-  /// Determine if an item exists in the collection using strict comparison.
-  bool containsStrict(T value) => _items.any((item) => identical(item, value));
-
-  /// Determine if an item is not contained in the collection.
-  bool doesntContain(Object? item) => !contains(item);
-
-  /// Get an item from the collection by key or add it to collection if it does not exist.
-  T getOrPut(int key, T Function() defaultValue) {
-    if (key >= 0 && key < _items.length) {
-      return _items[key];
-    }
-    final value = defaultValue();
-    if (key == _items.length) {
-      _items.add(value);
-    } else {
-      while (_items.length < key) {
-        _items.add(null as T);
-      }
-      _items.add(value);
-    }
-    return value;
-  }
-
-  /// Determine if a given key exists in the collection.
-  bool has(int index) => index >= 0 && index < _items.length;
-
-  /// Determine if any of the given keys exist in the collection.
-  bool hasAny(Iterable<int> keys) => keys.any(has);
-
-  /// Get the intersection of the collection with the given items.
-  Collection<T> intersect(Iterable<T> items) {
-    final otherSet = Set.from(items);
-    return Collection(_items.where((item) => otherSet.contains(item)));
-  }
-
-  /// Get the intersection of the collection with the given items, using the callback.
-  Collection<T> intersectUsing(
-      Iterable<T> items, int Function(T a, T b) callback) {
-    return Collection(_items
-        .where((item) => items.any((other) => callback(item, other) == 0)));
-  }
-
-  /// Get the intersection of the collection with the given items with additional index check.
-  Collection<T> intersectAssoc(Iterable<T> items) {
-    final otherMap =
-        Map.fromIterables(List.generate(items.length, (i) => i), items);
-    final thisMap =
-        Map.fromIterables(List.generate(_items.length, (i) => i), _items);
-
-    return Collection(thisMap.entries
-        .where((entry) =>
-            otherMap.containsKey(entry.key) &&
-            otherMap[entry.key] == entry.value)
-        .map((entry) => entry.value));
-  }
-
-  /// Get the intersection of the collection with the given items with additional index check, using the callback.
-  Collection<T> intersectAssocUsing(
-      Iterable<T> items, int Function(T a, T b) callback) {
-    final otherMap =
-        Map.fromIterables(List.generate(items.length, (i) => i), items);
-    final thisMap =
-        Map.fromIterables(List.generate(_items.length, (i) => i), _items);
-
-    return Collection(thisMap.entries
-        .where((entry) =>
-            otherMap.containsKey(entry.key) &&
-            callback(entry.value, otherMap[entry.key] as T) == 0)
-        .map((entry) => entry.value));
-  }
-
-  /// Join items with a string.
-  @override
-  String join([String separator = '']) => _items.join(separator);
-
-  /// Join items with a string and optional final separator.
-  String joinWith(String separator, [String? lastSeparator]) {
-    if (_items.isEmpty) return '';
-    if (_items.length == 1) return _items.first.toString();
-
-    if (lastSeparator == null) {
-      return _items.join(separator);
-    }
-
-    final allButLast = _items.take(_items.length - 1).join(separator);
-    return '$allButLast$lastSeparator${_items.last}';
-  }
-
-  /// Run a map over each of the items.
-  @override
-  Collection<R> mapItems<R>(R Function(T element) toElement) {
-    return Collection(_items.map(toElement));
-  }
-
-  /// Create a new collection consisting of every n-th element.
-  Collection<T> nth(int step, [int offset = 0]) {
-    final result = <T>[];
-    for (var i = offset; i < _items.length; i += step) {
-      result.add(_items[i]);
-    }
-    return Collection(result);
-  }
-
-  /// Get the items with the specified keys.
-  Collection<T> only(Iterable<int> keys) {
-    return Collection(keys.where((key) => has(key)).map((key) => _items[key]));
-  }
-
-  /// Pad collection to the specified length with a value.
-  Collection<T> pad(int size, T value) {
-    final result = List<T>.from(_items);
-    if (size > 0) {
-      while (result.length < size) {
-        result.add(value);
-      }
-    } else if (size < 0) {
-      while (result.length < -size) {
-        result.insert(0, value);
-      }
-    }
-    return Collection(result);
-  }
-
-  /// Get one or a specified number of items randomly.
-  @override
-  Collection<T> random([int? number]) {
-    if (_items.isEmpty) return Collection<T>();
-
-    final random = math.Random();
-    if (number == null) {
-      return Collection([_items[random.nextInt(_items.length)]]);
-    }
-
-    final shuffled = List<T>.from(_items)..shuffle(random);
-    return Collection(shuffled.take(number));
-  }
-
-  /// Multiply the items in the collection by the multiplier.
-  Collection<T> multiply(int multiplier) {
-    if (multiplier <= 0) return Collection<T>();
-    return Collection(
-        List.generate(multiplier, (_) => _items).expand((x) => x));
-  }
-
-  /// Create a collection by using this collection for keys and another for its values.
-  Collection<MapEntry<T, V>> combine<V>(Iterable<V> values) {
-    final valuesList = values.toList();
-    if (_items.length != valuesList.length) {
-      throw ArgumentError(
-          'The number of elements in both collections must be equal');
-    }
-    return Collection(
-      List.generate(
-        _items.length,
-        (i) => MapEntry(_items[i], valuesList[i]),
-      ),
-    );
-  }
-
-  /// Count the number of items in the collection by a field or using a callback.
-  Map<K, int> countBy<K>(K Function(T element) callback) {
+  /// Returns a map counting occurrences of elements.
+  Map<K, int> countBy<K>([K Function(T)? keySelector]) {
+    final selector = keySelector ?? ((T item) => item as K);
     final result = <K, int>{};
-    for (var item in _items) {
-      final key = callback(item);
+    for (final item in _items) {
+      final key = selector(item);
       result[key] = (result[key] ?? 0) + 1;
     }
     return result;
   }
 
-  /// Split a collection into a certain number of groups.
-  Collection<Collection<T>> split(int numberOfGroups) {
-    if (_items.isEmpty || numberOfGroups <= 0) {
-      return Collection<Collection<T>>();
+  /// Returns a new collection with elements grouped by the given key.
+  Map<K, Collection<T>> groupBy<K>(K Function(T) keySelector) {
+    final result = <K, List<T>>{};
+    for (final item in _items) {
+      final key = keySelector(item);
+      (result[key] ??= []).add(item);
     }
-
-    final result = <Collection<T>>[];
-    final size = (_items.length / numberOfGroups).ceil();
-
-    for (var i = 0; i < _items.length; i += size) {
-      result.add(Collection(
-        _items.sublist(i, math.min(i + size, _items.length)),
-      ));
-    }
-
-    return Collection(result);
+    return result.map((k, v) => MapEntry(k, Collection(v)));
   }
 
-  /// Split a collection into a certain number of groups, and fill the first groups completely.
-  Collection<Collection<T>> splitIn(int numberOfGroups) {
-    if (_items.isEmpty || numberOfGroups <= 0) {
-      return Collection<Collection<T>>();
-    }
+  /// Returns a new collection keyed by the given key.
+  Map<K, T> keyBy<K>(K Function(T) keySelector) =>
+      Map.fromEntries(_items.map((item) => MapEntry(keySelector(item), item)));
 
-    final size = (_items.length / numberOfGroups).ceil();
-    return chunk(size);
+  /// Returns a new collection with values extracted by key.
+  Collection<V> pluck<V>(String key) {
+    if (T is! Map<String, dynamic>) throw TypeError();
+    return Collection(
+        _items.map((item) => (item as Map<String, dynamic>)[key] as V));
   }
 
-  /// Skip the first {$count} items.
-  @override
-  Collection<T> skip(int count) {
-    return Collection(_items.skip(count));
+  /// Returns a new collection with elements in the given range.
+  Collection<T> range(int start, [int? end]) {
+    end ??= length;
+    if (start < 0) start = length + start;
+    if (end < 0) end = length + end;
+    return Collection(_items.skip(start).take(end - start));
   }
 
-  /// Skip items in the collection until the given condition is met.
-  Collection<T> skipUntil(bool Function(T element) callback) {
-    var skip = true;
-    return Collection(_items.where((element) {
-      if (!skip) return true;
-      if (callback(element)) {
-        skip = false;
-        return true;
-      }
-      return false;
-    }));
+  /// Returns a new collection with elements that are not in the other collection.
+  Collection<T> diff(Iterable<T> other) {
+    final otherSet = other.toSet();
+    return Collection(_items.where((item) => !otherSet.contains(item)));
   }
 
-  /// Skip items in the collection while the given condition is met.
-  Collection<T> skipWhile(bool Function(T element) callback) {
-    var skip = true;
-    return Collection(_items.where((element) {
-      if (!skip) return true;
-      if (!callback(element)) {
-        skip = false;
-        return true;
-      }
-      return false;
-    }));
+  /// Returns a new collection with elements that are in both collections.
+  Collection<T> intersect(Iterable<T> other) {
+    final otherSet = other.toSet();
+    return Collection(_items.where((item) => otherSet.contains(item)));
   }
 
-  /// Splice a portion of the underlying collection array.
-  Collection<T> splice(int offset, [int? length, List<T>? replacement]) {
-    final removed = length != null
-        ? _items.sublist(offset, math.min(offset + length, _items.length))
-        : _items.sublist(offset);
+  /// Returns a new collection with elements from both collections combined.
+  Collection<T> union(Iterable<T> other) => Collection({..._items, ...other});
 
-    if (length != null) {
-      _items.removeRange(offset, math.min(offset + length, _items.length));
-    } else {
-      _items.removeRange(offset, _items.length);
-    }
+  /// Returns a new collection with elements transformed using the pipe.
+  Collection<R> pipe<R>(Collection<R> Function(Collection<T>) callback) =>
+      callback(this);
 
-    if (replacement != null) {
-      _items.insertAll(offset, replacement);
-    }
-
-    return Collection(removed);
-  }
-
-  /// Take the first {$limit} items.
-  @override
-  Collection<T> take(int limit) {
-    return Collection(_items.take(limit));
-  }
-
-  /// Take items in the collection until the given condition is met.
-  Collection<T> takeUntil(bool Function(T element) callback) {
-    final result = <T>[];
-    for (var item in _items) {
-      result.add(item);
-      if (callback(item)) break;
-    }
-    return Collection(result);
-  }
-
-  /// Take items in the collection while the given condition is met.
-  Collection<T> takeWhile(bool Function(T element) callback) {
-    final result = <T>[];
-    for (var item in _items) {
-      if (!callback(item)) break;
-      result.add(item);
-    }
-    return Collection(result);
-  }
-
-  /// Convert the collection to a Map.
-  Map<K, V> toMap<K, V>(
-    K Function(T element) keyFunction,
-    V Function(T element) valueFunction,
-  ) {
-    return Map.fromEntries(
-      _items.map((item) => MapEntry(keyFunction(item), valueFunction(item))),
-    );
-  }
-
-  /// Return only unique items from the collection.
-  @override
-  Collection<T> unique([Object? Function(T element)? callback]) {
-    final seen = Set();
-    return Collection(_items.where((item) {
-      final key = callback?.call(item) ?? item;
-      return seen.add(key);
-    }));
-  }
-
-  /// Union the collection with the given items.
-  Collection<T> union(Iterable<T> items) {
-    return Collection({..._items, ...items});
-  }
-
-  // ListMixin implementation
-  @override
-  int get length => _items.length;
-
-  @override
-  set length(int newLength) {
-    _items.length = newLength;
-  }
-
-  @override
-  T operator [](int index) => _items[index];
-
-  @override
-  void operator []=(int index, T value) {
-    _items[index] = value;
-  }
-
-  @override
-  void add(T element) => _items.add(element);
-
-  @override
-  void addAll(Iterable<T> iterable) => _items.addAll(iterable);
-
-  @override
-  void clear() => _items.clear();
-
-  @override
-  void removeRange(int start, int end) => _items.removeRange(start, end);
-
-  @override
-  void setRange(int start, int end, Iterable<T> iterable, [int skipCount = 0]) {
-    _items.setRange(start, end, iterable, skipCount);
-  }
-
-  @override
-  void setAll(int index, Iterable<T> iterable) =>
-      _items.setAll(index, iterable);
-
-  @override
-  void insertAll(int index, Iterable<T> iterable) =>
-      _items.insertAll(index, iterable);
-
-  @override
-  void insert(int index, T element) => _items.insert(index, element);
-
-  @override
-  bool remove(Object? element) => _items.remove(element);
-
-  @override
-  T removeAt(int index) => _items.removeAt(index);
-
-  // CanBeEscapedWhenCastToString implementation
-  @override
-  Collection<T> escapeWhenCastingToString([bool escape = true]) {
-    _shouldEscape = escape;
+  /// Returns a new collection with elements tapped by the callback.
+  Collection<T> tap(void Function(Collection<T>) callback) {
+    callback(this);
     return this;
   }
 
-  @override
-  String toString() {
-    if (_shouldEscape) {
-      return _items.map((item) => _escape(item.toString())).toString();
-    }
-    return _items.toString();
+  /// Returns a new collection with elements that pass the truth test.
+  Collection<T> whenNotEmpty(Collection<T> Function(Collection<T>) callback) =>
+      isEmpty ? this : callback(this);
+
+  /// Returns a new collection with elements unless the condition is true.
+  Collection<T> unless(bool Function(Collection<T>) condition,
+          Collection<T> Function(Collection<T>) callback) =>
+      condition(this) ? this : callback(this);
+
+  /// Returns a new collection with elements repeated [times] times.
+  Collection<T> multiply(int times) {
+    if (times <= 0) return Collection.empty();
+    return Collection(List.generate(times, (_) => _items).expand((x) => x));
   }
 
-  /// Escape special characters in a string.
-  String _escape(String value) {
-    return value
-        .replaceAll('&', '&amp;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#039;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;');
+  /// Returns a new collection with elements combined with another collection.
+  Collection<T> combine(Iterable<T> other) => Collection([..._items, ...other]);
+
+  /// Returns a new collection with nested collections flattened.
+  Collection<dynamic> collapse() {
+    final result = <dynamic>[];
+    void flatten(dynamic item) {
+      if (item is Iterable) {
+        for (final subItem in item) {
+          if (subItem is Iterable) {
+            flatten(subItem);
+          } else {
+            result.add(subItem);
+          }
+        }
+      } else {
+        result.add(item);
+      }
+    }
+
+    for (final item in _items) {
+      flatten(item);
+    }
+    return Collection(result);
+  }
+
+  /// Returns a new collection with all possible combinations of elements.
+  Collection<List<T>> crossJoin(Iterable<T> other) {
+    final result = <List<T>>[];
+    for (final item1 in _items) {
+      for (final item2 in other) {
+        result.add([item1, item2]);
+      }
+    }
+    return Collection(result);
+  }
+
+  /// Returns true if the collection contains the element using strict equality.
+  bool containsStrict(Object? element) =>
+      _items.any((item) => identical(item, element));
+
+  /// Returns true if the collection does not contain the element.
+  bool doesntContain(Object? element) => !contains(element);
+
+  /// Returns the first element or throws if the collection is empty.
+  T firstOrFail() {
+    if (isEmpty) throw StateError('Collection is empty');
+    return first;
+  }
+
+  /// Returns the sole element that matches the predicate.
+  T sole([bool Function(T)? predicate]) {
+    if (predicate != null) {
+      return where(predicate).single;
+    }
+    return single;
+  }
+
+  /// Returns a new collection with elements chunked based on the predicate.
+  Collection<List<T>> chunkWhile(bool Function(T, T) predicate) {
+    if (isEmpty) return Collection.empty();
+    final result = <List<T>>[];
+    var current = <T>[_items.first];
+    for (var i = 1; i < length; i++) {
+      if (predicate(_items[i - 1], _items[i])) {
+        current.add(_items[i]);
+      } else {
+        result.add(List<T>.from(current));
+        current = <T>[_items[i]];
+      }
+    }
+    if (current.isNotEmpty) {
+      result.add(List<T>.from(current));
+    }
+    return Collection(result);
+  }
+
+  /// Returns a map representation of the collection.
+  Map<K, V> toMap<K, V>() {
+    if (T is! MapEntry<K, V>) {
+      throw TypeError();
+    }
+    final entries = _items.cast<MapEntry<K, V>>();
+    return Map.fromEntries(entries);
+  }
+
+  /// Gets or sets a value in the collection.
+  T getOrPut(T key, T Function() defaultValue) {
+    final index = _items.indexOf(key);
+    if (index != -1) return _items[index];
+    final value = defaultValue();
+    add(value);
+    return value;
+  }
+
+  /// Returns a new collection with elements mapped to a dictionary.
+  Map<K, V> mapToDictionary<K, V>(MapEntry<K, V> Function(T) transform) =>
+      Map.fromEntries(_items.map(transform));
+
+  /// Returns a new collection with elements mapped with keys.
+  Map<K, T> mapWithKeys<K>(K Function(T) keySelector) =>
+      Map.fromEntries(_items.map((item) => MapEntry(keySelector(item), item)));
+
+  @override
+  bool contains(Object? element) => _items.contains(element);
+
+  @override
+  T elementAt(int index) => _items[index];
+
+  @override
+  Collection<R> expand<R>(Iterable<R> Function(T) f) =>
+      Collection(_items.expand(f));
+
+  @override
+  T firstWhere(bool Function(T) test, {T Function()? orElse}) =>
+      _items.firstWhere(test, orElse: orElse);
+
+  @override
+  Collection<R> cast<R>() => Collection(_items.cast<R>());
+
+  @override
+  String join([String separator = ""]) => _items.join(separator);
+
+  @override
+  T lastWhere(bool Function(T) test, {T Function()? orElse}) =>
+      _items.lastWhere(test, orElse: orElse);
+
+  @override
+  T reduce(T Function(T value, T element) combine) => _items.reduce(combine);
+
+  @override
+  T get single => _items.single;
+
+  @override
+  T singleWhere(bool Function(T) test, {T Function()? orElse}) =>
+      _items.singleWhere(test, orElse: orElse);
+
+  @override
+  Collection<T> skipWhile(bool Function(T) test) =>
+      Collection(_items.skipWhile(test));
+
+  @override
+  Collection<T> takeWhile(bool Function(T) test) =>
+      Collection(_items.takeWhile(test));
+
+  @override
+  Set<T> toSet() => _items.toSet();
+
+  @override
+  String toString() => _items.toString();
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Collection &&
+          runtimeType == other.runtimeType &&
+          _listEquals(_items, other._items);
+
+  @override
+  int get hashCode => Object.hashAll(_items);
+
+  bool _listEquals<E>(List<E> list1, List<E> list2) {
+    if (identical(list1, list2)) return true;
+    if (list1.length != list2.length) return false;
+    for (var i = 0; i < list1.length; i++) {
+      if (list1[i] != list2[i]) return false;
+    }
+    return true;
   }
 }

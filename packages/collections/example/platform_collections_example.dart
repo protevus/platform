@@ -6,7 +6,7 @@ void main() {
   print('Regular Collection Examples:');
   final numbers = Collection([1, 2, 3, 4, 5]);
   print('Original: $numbers');
-  print('Average: ${numbers.avg()}');
+  print('Average: ${numbers.avg((x) => x)}');
   print('Max: ${numbers.max()}');
   print('Min: ${numbers.min()}');
   print('---\n');
@@ -26,7 +26,7 @@ void main() {
 
   final keys = Collection(['a', 'b', 'c']);
   final values = Collection([1, 2, 3]);
-  print('Combined: ${keys.combine(values)}');
+  print('Combined: ${keys.combine(values as Iterable<String>)}');
 
   print(
       'Count by even/odd: ${numbers.countBy((n) => n.isEven ? 'even' : 'odd')}');
@@ -59,7 +59,8 @@ void main() {
   // Higher Order Messages
   print('Names: ${users.mapItems((user) => user['name'])}');
   print('Active users: ${users.filter((user) => user['active'] == true)}');
-  print('Sum of IDs: ${users.mapItems((user) => user['id'] as int).avg()}');
+  print(
+      'Sum of IDs: ${users.mapItems((user) => user['id'] as int).avg((x) => x)}');
   print('---\n');
 
   // Dot Notation Examples
