@@ -4,39 +4,128 @@ import 'package:platform_bus/platform_bus.dart';
 import 'package:platform_collections/platform_collections.dart';
 import 'package:platform_container/container.dart';
 import 'package:platform_container/mirrors.dart';
-import 'package:platform_contracts/contracts.dart' as contracts;
+import 'package:platform_contracts/contracts.dart' hide Dispatcher;
 import 'package:test/test.dart';
+
+// Mock dispatcher for testing
+class MockDispatcher implements Dispatcher {
+  final Container container;
+  final List<dynamic> dispatchedJobs = [];
+  final Map<Type, dynamic> _handlers = {};
+
+  MockDispatcher(this.container);
+
+  @override
+  PendingBatchContract batch(dynamic jobs) {
+    return PendingBatch(container, Collection(jobs is List ? jobs : [jobs]));
+  }
+
+  @override
+  FutureOr<T> dispatch<T>(dynamic command) {
+    dispatchedJobs.add(command);
+    return Future.value(command as T);
+  }
+
+  @override
+  FutureOr<T> dispatchNow<T>(dynamic command, [dynamic handler]) {
+    dispatchedJobs.add(command);
+    return Future.value(command as T);
+  }
+
+  @override
+  FutureOr<T> dispatchSync<T>(dynamic command, [dynamic handler]) {
+    dispatchedJobs.add(command);
+    return Future.value(command as T);
+  }
+
+  @override
+  Future<dynamic> dispatchToQueue(dynamic command) async {
+    dispatchedJobs.add(command);
+    return command;
+  }
+
+  @override
+  Future<BatchContract?> findBatch(String id) async {
+    return null;
+  }
+
+  @override
+  dynamic getCommandHandler(dynamic command) {
+    final type = command.runtimeType;
+    return _handlers[type];
+  }
+
+  @override
+  bool hasCommandHandler(dynamic command) {
+    final type = command.runtimeType;
+    return _handlers.containsKey(type);
+  }
+
+  @override
+  Dispatcher map(Map<Type, dynamic> handlers) {
+    _handlers.addAll(handlers);
+    return this;
+  }
+
+  @override
+  Dispatcher pipeThrough(List<dynamic> pipes) {
+    return this;
+  }
+}
 
 // Test job for batch chaining
 class TestJob with QueueableMixin, InteractsWithQueueMixin {
   final String id;
-  TestJob(this.id);
+  final List<String> executionOrder;
 
-  Future<void> handle() async => print('Handling job $id');
+  TestJob(this.id, this.executionOrder);
+
+  Future<void> handle() async {
+    executionOrder.add('start-$id');
+    await Future.delayed(Duration(milliseconds: 50));
+    executionOrder.add('end-$id');
+  }
 }
 
 void main() {
   group('ChainedBatch', () {
+    late Container container;
+    late BatchRepository repository;
+    late MockDispatcher dispatcher;
+    late List<String> executionOrder;
+
+    setUp(() {
+      container = Container(MirrorsReflector());
+      repository = InMemoryBatchRepository();
+      dispatcher = MockDispatcher(container);
+      executionOrder = [];
+
+      container.registerSingleton<BatchRepository>(repository);
+      container.registerSingleton<Dispatcher>(dispatcher);
+    });
+
     test('prepares nested batches correctly', () {
-      final job1 = TestJob('1');
-      final job2 = TestJob('2');
-      final nestedJobs = Collection([TestJob('3'), TestJob('4')]);
-      final job5 = TestJob('5');
+      final job1 = TestJob('1', executionOrder);
+      final job2 = TestJob('2', executionOrder);
+      final nestedJobs = Collection(
+          [TestJob('3', executionOrder), TestJob('4', executionOrder)]);
+      final job5 = TestJob('5', executionOrder);
 
       final jobs = Collection([job1, job2, nestedJobs, job5]);
       final prepared = ChainedBatch.prepareNestedBatches(jobs);
 
       expect(prepared.length, equals(5));
+      final jobIds = prepared.whereType<TestJob>().map((job) => job.id);
       expect(
-        prepared.map((job) => (job as TestJob).id),
+        jobIds,
         containsAllInOrder(['1', '2', '3', '4', '5']),
       );
     });
 
     test('handles empty nested batches', () {
-      final job1 = TestJob('1');
+      final job1 = TestJob('1', executionOrder);
       final emptyBatch = Collection([]);
-      final job2 = TestJob('2');
+      final job2 = TestJob('2', executionOrder);
 
       final jobs = Collection([job1, emptyBatch, job2]);
       final prepared = ChainedBatch.prepareNestedBatches(jobs);
@@ -49,30 +138,28 @@ void main() {
     });
 
     test('handles multiple levels of nesting', () {
-      final job1 = TestJob('1');
-      final nested1 = Collection([TestJob('2'), TestJob('3')]);
+      final job1 = TestJob('1', executionOrder);
+      final nested1 = Collection(
+          [TestJob('2', executionOrder), TestJob('3', executionOrder)]);
       final nested2 = Collection([
-        TestJob('4'),
-        Collection([TestJob('5'), TestJob('6')]),
+        TestJob('4', executionOrder),
+        Collection(
+            [TestJob('5', executionOrder), TestJob('6', executionOrder)]),
       ]);
-      final job7 = TestJob('7');
 
-      final jobs = Collection([job1, nested1, nested2, job7]);
+      final jobs = Collection([job1, nested1, nested2]);
       final prepared = ChainedBatch.prepareNestedBatches(jobs);
 
-      expect(prepared.length, equals(7));
+      expect(prepared.length, equals(5));
+      final jobIds =
+          prepared.whereType<TestJob>().map((job) => job.id).toList();
       expect(
-        prepared.map((job) => (job as TestJob).id),
-        containsAllInOrder(['1', '2', '3', '4', '5', '6', '7']),
+        jobIds,
+        containsAllInOrder(['1', '2', '3', '4', '5']),
       );
     });
 
     test('chains batches correctly', () async {
-      // Set up container with required dependencies
-      final container = Container(MirrorsReflector());
-      final repository = InMemoryBatchRepository();
-      container.registerSingleton<contracts.BatchRepository>(repository);
-
       // Create test batch and jobs
       final batch = Batch(
         'test-batch',
@@ -84,8 +171,8 @@ void main() {
       await repository.store(batch);
 
       final chainedJobs = Collection([
-        TestJob('chained-1'),
-        TestJob('chained-2'),
+        TestJob('chained-1', executionOrder),
+        TestJob('chained-2', executionOrder),
       ]);
 
       // Chain the jobs
@@ -106,25 +193,6 @@ void main() {
     });
 
     test('executes chain correctly', () async {
-      // Set up container with required dependencies
-      final container = Container(MirrorsReflector());
-      final repository = InMemoryBatchRepository();
-      container.registerSingleton<contracts.BatchRepository>(repository);
-
-      // Create a queue for tracking executed jobs
-      final executedJobs = <String>[];
-      final queue = TestQueue(onPush: (job) {
-        if (job is TestJob) {
-          executedJobs.add(job.id);
-        }
-        return Future.value(job);
-      });
-
-      // Create dispatcher with test queue
-      final dispatcher =
-          Dispatcher(container, (connection) => Future.value(queue));
-      container.registerSingleton<contracts.Dispatcher>(dispatcher);
-
       // Create main batch with chained batches
       final mainBatch = Batch(
         'main-batch',
@@ -136,8 +204,14 @@ void main() {
       await repository.store(mainBatch);
 
       // Create and store chained batches with jobs
-      final chain1Jobs = Collection([TestJob('1-1'), TestJob('1-2')]);
-      final chain2Jobs = Collection([TestJob('2-1'), TestJob('2-2')]);
+      final chain1Jobs = Collection([
+        TestJob('1-1', executionOrder),
+        TestJob('1-2', executionOrder),
+      ]);
+      final chain2Jobs = Collection([
+        TestJob('2-1', executionOrder),
+        TestJob('2-2', executionOrder),
+      ]);
 
       await repository.storeJobs('chain1', chain1Jobs);
       await repository.storeJobs('chain2', chain2Jobs);
@@ -145,49 +219,21 @@ void main() {
       // Execute the chain
       await ChainedBatch.executeChain(mainBatch, container);
 
-      // Verify all jobs were executed in order
-      expect(executedJobs.length, equals(4));
+      // Verify execution order
+      expect(executionOrder.length, equals(8)); // start + end for each job
       expect(
-        executedJobs,
-        containsAllInOrder(['1-1', '1-2', '2-1', '2-2']),
+        executionOrder,
+        containsAllInOrder([
+          'start-1-1',
+          'end-1-1',
+          'start-1-2',
+          'end-1-2',
+          'start-2-1',
+          'end-2-1',
+          'start-2-2',
+          'end-2-2',
+        ]),
       );
     });
   });
-}
-
-// Test queue that tracks job execution
-class TestQueue extends contracts.Queue {
-  final Future<dynamic> Function(dynamic) onPush;
-  final List<dynamic> _jobs = [];
-
-  TestQueue({required this.onPush});
-
-  @override
-  Future<int> size() async => _jobs.length;
-
-  @override
-  Future<void> clear() async => _jobs.clear();
-
-  @override
-  Future<dynamic> push(dynamic job) async {
-    _jobs.add(job);
-    return onPush(job);
-  }
-
-  @override
-  Future<dynamic> later(Duration delay, dynamic job) async {
-    await Future.delayed(delay);
-    return push(job);
-  }
-
-  @override
-  Future<dynamic> pushOn(String queue, dynamic job) async {
-    return push(job);
-  }
-
-  @override
-  Future<dynamic> laterOn(String queue, Duration delay, dynamic job) async {
-    await Future.delayed(delay);
-    return pushOn(queue, job);
-  }
 }

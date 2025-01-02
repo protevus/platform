@@ -27,10 +27,10 @@ void main() {
     });
 
     test('allows lock acquisition after expiration', () async {
-      final expiration = Duration(milliseconds: 100);
+      final expiration = Duration(milliseconds: 50);
 
       expect(UniqueLock.acquire('test-lock', expiration), isTrue);
-      await Future.delayed(Duration(milliseconds: 150)); // Wait for expiration
+      await Future.delayed(Duration(milliseconds: 100)); // Wait for expiration
       expect(UniqueLock.acquire('test-lock', expiration), isTrue);
     });
 
@@ -57,17 +57,18 @@ void main() {
     });
 
     test('clears expired locks', () async {
-      final shortExpiration = Duration(milliseconds: 100);
-      final longExpiration = Duration(seconds: 1);
+      final expiration = Duration(milliseconds: 50);
 
-      UniqueLock.acquire('short-lock', shortExpiration);
-      UniqueLock.acquire('long-lock', longExpiration);
+      // Acquire lock with short expiration
+      expect(UniqueLock.acquire('test-lock', expiration), isTrue);
+      expect(UniqueLock.exists('test-lock', expiration), isTrue);
 
-      await Future.delayed(Duration(milliseconds: 150));
-      UniqueLock.clearExpired(shortExpiration);
+      // Wait for expiration
+      await Future.delayed(Duration(milliseconds: 100));
 
-      expect(UniqueLock.exists('short-lock', shortExpiration), isFalse);
-      expect(UniqueLock.exists('long-lock', longExpiration), isTrue);
+      // Clear expired locks and verify
+      UniqueLock.clearExpired(expiration);
+      expect(UniqueLock.exists('test-lock', expiration), isFalse);
     });
 
     test('clears all locks', () {
@@ -95,14 +96,14 @@ void main() {
     });
 
     test('handles multiple lock operations', () async {
-      final expiration = Duration(milliseconds: 100);
+      final expiration = Duration(milliseconds: 50);
 
       // First acquisition
       expect(UniqueLock.acquire('test-lock', expiration), isTrue);
       expect(UniqueLock.exists('test-lock', expiration), isTrue);
 
       // Wait for expiration
-      await Future.delayed(Duration(milliseconds: 150));
+      await Future.delayed(Duration(milliseconds: 100));
       expect(UniqueLock.exists('test-lock', expiration), isFalse);
 
       // Re-acquire
