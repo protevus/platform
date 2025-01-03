@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:platform_contracts/contracts.dart';
-
 /// A file that can be locked for exclusive or shared access.
 class LockableFile {
   /// The file handle.
