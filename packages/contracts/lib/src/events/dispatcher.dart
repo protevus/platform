@@ -1,5 +1,5 @@
 /// Interface for event dispatching.
-abstract class Dispatcher {
+abstract class EventDispatcherContract {
   /// Register an event listener with the dispatcher.
   void listen(dynamic events, [dynamic listener]);
 

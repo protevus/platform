@@ -98,7 +98,7 @@ export 'src/encryption/encrypter.dart';
 export 'src/encryption/string_encrypter.dart';
 
 // Events contracts
-export 'src/events/dispatcher.dart' show EventDispatcher;
+export 'src/events/dispatcher.dart' show EventDispatcherContract;
 export 'src/events/should_dispatch_after_commit.dart';
 export 'src/events/should_handle_events_after_commit.dart';
 
