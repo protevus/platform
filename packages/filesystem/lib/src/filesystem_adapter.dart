@@ -243,12 +243,22 @@ class FilesystemAdapter
   @override
   List<String> files([String? directory, bool recursive = false]) {
     try {
-      return driver
-          .listContents(directory ?? '', recursive)
-          .where((attrs) => attrs.isFile)
-          .map<String>((attrs) => attrs.path)
-          .toList()
-        ..sort();
+      final dir = directory ?? '';
+      final prefix = dir.isEmpty ? '' : '$dir/';
+      final contents = driver.listContents(dir, recursive);
+
+      // Filter for files and map to paths
+      final files = contents.where((info) => info.isFile).map<String>((info) {
+        if (!recursive && info.path.startsWith(prefix)) {
+          // For non-recursive listing, strip directory prefix
+          return info.path.substring(prefix.length);
+        }
+        return info.path;
+      }).toList();
+
+      // Sort for consistent ordering
+      files.sort();
+      return files;
     } catch (e) {
       if (_throwsExceptions) rethrow;
       return [];

@@ -65,15 +65,31 @@ class MockDriver {
   List<FileInfo> listContents(String directory, bool recursive) {
     final prefix = directory.isEmpty ? '' : '$directory/';
     final paths = storage.keys.where((path) {
+      // Skip directories (paths ending with /)
+      if (path.endsWith('/')) return false;
+
+      // If no directory specified, include all files at root
+      if (directory.isEmpty) {
+        return !path.contains('/');
+      }
+
+      // Check if path is in the specified directory
       if (!path.startsWith(prefix)) return false;
-      if (!recursive && path.substring(prefix.length).contains('/'))
-        return false;
+
+      // For non-recursive, only include direct children
+      if (!recursive) {
+        final relativePath = path.substring(prefix.length);
+        return !relativePath.contains('/');
+      }
+
       return true;
     }).toList();
+
+    // Sort paths
     paths.sort();
-    return paths
-        .map((path) => FileInfo(path, isFile: !path.endsWith('/')))
-        .toList();
+
+    // Create FileInfo objects with correct paths
+    return paths.map((path) => FileInfo(path, isFile: true)).toList();
   }
 
   void createDirectory(String path) {
@@ -187,12 +203,31 @@ void main() {
     });
 
     test('files() lists files from driver', () {
+      // Create test files
       driver.write('file1.txt', 'content');
       driver.write('file2.txt', 'content');
+      driver.write('subdir/file3.txt', 'content');
+
+      // Verify files were created
+      expect(driver.storage.containsKey('file1.txt'), isTrue);
+      expect(driver.storage.containsKey('file2.txt'), isTrue);
+      expect(driver.storage.containsKey('subdir/file3.txt'), isTrue);
+
+      // Test root directory listing (non-recursive)
       final files = adapter.files();
       expect(files, hasLength(2));
-      expect(files, contains('file1.txt'));
-      expect(files, contains('file2.txt'));
+      expect(files, containsAll(['file1.txt', 'file2.txt']));
+
+      // Test subdirectory listing
+      final subFiles = adapter.files('subdir');
+      expect(subFiles, hasLength(1));
+      expect(subFiles, contains('file3.txt'));
+
+      // Test recursive listing
+      final allFiles = adapter.files('', true);
+      expect(allFiles, hasLength(3));
+      expect(allFiles,
+          containsAll(['file1.txt', 'file2.txt', 'subdir/file3.txt']));
     });
 
     test('makeDirectory() creates directory in driver', () {

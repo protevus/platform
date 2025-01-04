@@ -125,10 +125,20 @@ class Filesystem with Macroable, Conditionable implements FilesystemContract {
   @override
   String getVisibility(String path) {
     try {
+      if (!exists(path)) {
+        return FilesystemContract.visibilityPrivate;
+      }
+
       final stat = FileStat.statSync(path);
-      // Check if world readable (others have read permission)
+      // Check if others have read permission (0o004)
       final worldReadable = (stat.mode & 0x004) != 0;
-      return worldReadable
+      // Check if group has read permission (0o040)
+      final groupReadable = (stat.mode & 0x040) != 0;
+      // Check if owner has write permission (0o200)
+      final ownerWritable = (stat.mode & 0x200) != 0;
+
+      // Public if world readable, group readable, and owner writable
+      return (worldReadable && groupReadable && ownerWritable)
           ? FilesystemContract.visibilityPublic
           : FilesystemContract.visibilityPrivate;
     } catch (e) {
@@ -140,17 +150,33 @@ class Filesystem with Macroable, Conditionable implements FilesystemContract {
   @override
   bool setVisibility(String path, String visibility) {
     try {
-      final isPublic = visibility == FilesystemContract.visibilityPublic;
-      final mode = isPublic ? '644' : '600';
+      if (!exists(path)) return false;
 
+      final isPublic = visibility == FilesystemContract.visibilityPublic;
       if (Platform.isWindows) {
         // On Windows, use attrib command
         final attr = isPublic ? '-r' : '+r';
-        Process.runSync('attrib', [attr, path]);
+        final result = Process.runSync('attrib', [attr, path]);
+        if (result.exitCode != 0) return false;
       } else {
         // On Unix-like systems, use chmod
-        Process.runSync('chmod', [mode, path]);
+        // 644 = owner rw, group r, others r (public)
+        // 600 = owner rw, group -, others - (private)
+        final mode = isPublic ? '0644' : '0600';
+        final result = Process.runSync('chmod', [mode, path]);
+        if (result.exitCode != 0) return false;
+
+        // Wait for permissions to be updated and verify
+        sleep(Duration(milliseconds: 100));
+        final stat = FileStat.statSync(path);
+        final worldReadable = (stat.mode & 0x004) != 0;
+        final groupReadable = (stat.mode & 0x040) != 0;
+        final ownerWritable = (stat.mode & 0x200) != 0;
+
+        // Verify all permissions for public
+        return (worldReadable && groupReadable && ownerWritable) == isPublic;
       }
+
       return true;
     } catch (e) {
       return false;

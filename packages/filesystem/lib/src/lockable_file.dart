@@ -100,8 +100,8 @@ class LockableFile {
     return this;
   }
 
-  /// Static map to track locked files
-  static final Map<String, bool> _lockedFiles = {};
+  /// Static map to track file locks
+  static final Map<String, bool> _fileLocks = {};
 
   /// Get a shared lock on the file.
   ///
@@ -111,33 +111,38 @@ class LockableFile {
   LockableFile getSharedLock([bool block = false]) {
     _checkHandle();
 
-    if (!block && _lockedFiles.containsKey(path)) {
+    // For non-blocking mode, fail immediately if already locked
+    if (!block && _fileLocks.containsKey(path)) {
       throw LockTimeoutException(
           'Unable to acquire file lock at path [$path].');
     }
 
+    // Try to acquire lock
     try {
+      // For blocking mode, keep trying until lock is acquired
       if (block) {
-        _handle!.lockSync();
-        _isLocked = true;
-        _lockedFiles[path] = true;
-      } else {
-        // Try non-blocking lock
-        try {
-          _handle!.lockSync();
-          _isLocked = true;
-          _lockedFiles[path] = true;
-        } catch (e) {
-          throw LockTimeoutException(
-              'Unable to acquire file lock at path [$path].');
+        while (_fileLocks.containsKey(path)) {
+          sleep(Duration(milliseconds: 10));
         }
       }
+
+      // Try to acquire the lock
+      try {
+        _handle!.lockSync();
+        _isLocked = true;
+        _fileLocks[path] = true;
+        return this;
+      } catch (e) {
+        // Failed to acquire lock
+        throw LockTimeoutException(
+            'Unable to acquire file lock at path [$path].');
+      }
     } catch (e) {
+      // Clean up if anything fails
+      _fileLocks.remove(path);
       throw LockTimeoutException(
           'Unable to acquire file lock at path [$path].');
     }
-
-    return this;
   }
 
   /// Get an exclusive lock on the file.
@@ -159,7 +164,7 @@ class LockableFile {
     if (_isLocked) {
       _handle!.unlockSync();
       _isLocked = false;
-      _lockedFiles.remove(path);
+      _fileLocks.remove(path);
     }
 
     return this;
@@ -177,7 +182,7 @@ class LockableFile {
 
     _handle!.closeSync();
     _handle = null;
-    _lockedFiles.remove(path);
+    _fileLocks.remove(path);
     return true;
   }
 
