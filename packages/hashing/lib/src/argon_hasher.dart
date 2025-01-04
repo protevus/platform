@@ -54,7 +54,7 @@ class ArgonHasher extends AbstractHasher implements Hasher {
           r'$' +
           base64Encode(hash);
     } catch (e) {
-      throw StateError('Argon2i hashing not supported.');
+      throw StateError('Argon2i hashing not supported: $e');
     }
   }
 
@@ -187,9 +187,13 @@ class ArgonHasher extends AbstractHasher implements Hasher {
       iterations: timeCost,
       memory: memoryCost,
       lanes: parallelism,
+      version: Argon2Parameters.ARGON2_VERSION_13,
     );
     argon2.init(params);
 
-    return argon2.process(utf8.encode(password) as Uint8List);
+    final output = Uint8List(32);
+    final passwordBytes = utf8.encode(password) as Uint8List;
+    argon2.deriveKey(passwordBytes, 0, output, 0);
+    return output;
   }
 }

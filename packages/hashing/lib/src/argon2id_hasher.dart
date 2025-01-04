@@ -31,7 +31,7 @@ class Argon2IdHasher extends ArgonHasher {
           r'$' +
           base64Encode(hash);
     } catch (e) {
-      throw StateError('Argon2id hashing not supported.');
+      throw StateError('Argon2id hashing not supported: $e');
     }
   }
 
@@ -62,15 +62,20 @@ class Argon2IdHasher extends ArgonHasher {
     final parallelism = options['threads'] as int? ?? threads({});
 
     final argon2 = Argon2BytesGenerator();
-    argon2.init(Argon2Parameters(
+    final params = Argon2Parameters(
       Argon2Parameters.ARGON2_id,
       salt,
       desiredKeyLength: 32,
       iterations: timeCost,
       memory: memoryCost,
       lanes: parallelism,
-    ));
+      version: Argon2Parameters.ARGON2_VERSION_13,
+    );
+    argon2.init(params);
 
-    return argon2.process(utf8.encode(password) as Uint8List);
+    final output = Uint8List(32);
+    final passwordBytes = utf8.encode(password) as Uint8List;
+    argon2.deriveKey(passwordBytes, 0, output, 0);
+    return output;
   }
 }

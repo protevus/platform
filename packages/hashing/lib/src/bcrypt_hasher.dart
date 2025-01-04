@@ -4,6 +4,8 @@ import 'dart:typed_data';
 import 'package:platform_contracts/contracts.dart';
 import 'package:pointycastle/api.dart';
 import 'package:pointycastle/digests/sha512.dart';
+import 'package:pointycastle/key_derivators/api.dart';
+import 'package:pointycastle/key_derivators/pbkdf2.dart';
 import 'package:pointycastle/macs/hmac.dart';
 
 import 'abstract_hasher.dart';
@@ -36,7 +38,7 @@ class BcryptHasher extends AbstractHasher implements Hasher {
           r'$' +
           base64Encode(hash);
     } catch (e) {
-      throw StateError('Bcrypt hashing not supported.');
+      throw StateError('Bcrypt hashing not supported: $e');
     }
   }
 
@@ -108,18 +110,18 @@ class BcryptHasher extends AbstractHasher implements Hasher {
 
     // Use PBKDF2 with SHA-512 as a substitute for BCrypt
     // since PointyCastle doesn't have direct BCrypt support
-    final hmac = HMac(SHA512Digest(), 64);
-    final params = KeyParameter(salt);
-    hmac.init(params);
+    final digest = SHA512Digest();
+    final hmac = HMac.withDigest(digest);
+    final passwordBytes = utf8.encode(password) as Uint8List;
+    hmac.init(KeyParameter(passwordBytes));
 
-    // Perform multiple rounds of hashing
-    var result = utf8.encode(password) as Uint8List;
-    for (var i = 0; i < (1 << rounds); i++) {
-      hmac.update(result, 0, result.length);
-      result = Uint8List(hmac.macSize);
-      hmac.doFinal(result, 0);
-    }
+    final pbkdf2 = PBKDF2KeyDerivator(hmac);
+    final pbkdf2Params =
+        Pbkdf2Parameters(salt, 1 << rounds, 32); // 32 bytes output
+    pbkdf2.init(pbkdf2Params);
 
-    return result;
+    final output = Uint8List(32);
+    pbkdf2.deriveKey(salt, 0, output, 0);
+    return output;
   }
 }

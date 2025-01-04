@@ -100,9 +100,10 @@ abstract class AbstractHasher implements Hasher {
 
   /// Generate a secure random salt.
   Uint8List generateSalt([int length = 16]) {
-    final secureRandom = FortunaRandom();
-    secureRandom.seed(KeyParameter(
-        SecureRandom('Fortuna').nextBytes(32))); // Seed with 32 random bytes
-    return secureRandom.nextBytes(length);
+    final secureRandom = SecureRandom('Fortuna');
+    final seed = secureRandom.nextBytes(32);
+    final random = FortunaRandom();
+    random.seed(KeyParameter(seed));
+    return random.nextBytes(length);
   }
 }
