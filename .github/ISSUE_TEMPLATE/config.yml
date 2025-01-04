@@ -4,4 +4,4 @@ contact_links:
       url: mailto:jgracia9988@gmail.com
       about: Please do NOT use this email to post issues or feature requests (only important business/personal contact).
     - name: Bug Report
-      url: https://github.com/protevus/platform/issues/new?template=bug-report.yml
+      url: https://github.com/protevus/platform/issues/new?template=1-bug-report.yml
