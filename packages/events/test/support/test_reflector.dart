@@ -5,9 +5,26 @@ class TestReflector implements Reflector {
   /// Map of registered types.
   final Map<String, Type> _types = {};
 
-  /// Register a type with the reflector.
-  void registerType(Type type) {
+  /// Map of class instances.
+  final Map<Type, Object Function()> _factories = {};
+
+  /// Map of singleton instances.
+  final Map<Type, Object> _instances = {};
+
+  TestReflector() {
+    // Pre-register TestSubscriber
+    registerClass(TestSubscriber, () => TestSubscriber([]));
+  }
+
+  /// Register a class with the reflector.
+  void registerClass(Type type, Object Function() factory) {
     _types[type.toString()] = type;
+    _factories[type] = factory;
+  }
+
+  /// Register a singleton instance
+  void registerInstance(Type type, Object instance) {
+    _instances[type] = instance;
   }
 
   @override
@@ -17,9 +34,14 @@ class TestReflector implements Reflector {
 
   @override
   dynamic createInstance(Type type, [List<dynamic>? args]) {
-    // For test purposes, we only need to handle the types used in tests
-    if (type == TestSubscriber) {
-      return TestSubscriber([]);
+    // Return singleton instance if registered
+    if (_instances.containsKey(type)) {
+      return _instances[type];
+    }
+    // Otherwise create new instance
+    final factory = _factories[type];
+    if (factory != null) {
+      return factory();
     }
     return null;
   }
@@ -96,14 +118,12 @@ class TestReflector implements Reflector {
 
   @override
   bool hasDefaultConstructor(Type type) {
-    // For test purposes, assume all test types have default constructors
-    return true;
+    return _factories.containsKey(type) || _instances.containsKey(type);
   }
 
   @override
   bool isClass(Type type) {
-    // For test purposes, assume all test types are classes
-    return true;
+    return _factories.containsKey(type) || _instances.containsKey(type);
   }
 
   @override
@@ -114,7 +134,20 @@ class TestReflector implements Reflector {
         'TestSubscriber',
         [],
         [],
-        [],
+        [
+          TestReflectedFunction(
+            '',
+            [],
+            [],
+            [
+              TestReflectedParameter(
+                  'calls', [], TestReflectedType('List<String>', [], List))
+            ],
+            false,
+            false,
+            returnType: TestReflectedType('void', [], Null),
+          )
+        ],
         [
           TestReflectedDeclaration('handleOne', false, null),
           TestReflectedDeclaration('handleTwo', false, null),
@@ -146,7 +179,20 @@ class TestReflector implements Reflector {
         'TestSubscriber',
         [],
         [],
-        [],
+        [
+          TestReflectedFunction(
+            '',
+            [],
+            [],
+            [
+              TestReflectedParameter(
+                  'calls', [], TestReflectedType('List<String>', [], List))
+            ],
+            false,
+            false,
+            returnType: TestReflectedType('void', [], Null),
+          )
+        ],
         [
           TestReflectedDeclaration('handleOne', false, null),
           TestReflectedDeclaration('handleTwo', false, null),
@@ -327,4 +373,16 @@ class TestReflectedDeclaration implements ReflectedDeclaration {
   final ReflectedFunction? function;
 
   TestReflectedDeclaration(this.name, this.isStatic, this.function);
+}
+
+/// Test implementation of ReflectedTypeParameter.
+class TestReflectedTypeParameter implements ReflectedTypeParameter {
+  @override
+  final String name;
+  @override
+  final List<ReflectedInstance> annotations;
+  @override
+  final ReflectedType? bound;
+
+  TestReflectedTypeParameter(this.name, this.annotations, this.bound);
 }

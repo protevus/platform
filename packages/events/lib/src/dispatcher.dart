@@ -255,7 +255,10 @@ class EventDispatcher with Macroable implements EventDispatcherContract {
         return method
             .invoke(Invocation.method(Symbol(methodName), [event, payload]));
       }
-      return method.invoke(Invocation.method(Symbol(methodName), [payload]));
+      // Pass an empty list if payload is empty to match the method signature
+      final methodPayload = payload.isEmpty ? [[]] : [payload];
+      return method
+          .invoke(Invocation.method(Symbol(methodName), methodPayload));
     };
   }
 

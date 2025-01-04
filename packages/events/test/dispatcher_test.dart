@@ -12,8 +12,9 @@ void main() {
 
     setUp(() {
       reflector = TestReflector();
-      reflector.registerType(TestSubscriber);
       container = Container(reflector);
+      // Register TestSubscriber type with container
+      container.registerFactory<TestSubscriber>((c) => TestSubscriber([]));
       dispatcher = EventDispatcher(container);
     });
 
@@ -119,6 +120,8 @@ void main() {
     test('subscriber registers multiple event listeners', () {
       var calls = <String>[];
       var subscriber = TestSubscriber(calls);
+      // Register the subscriber instance with the container
+      container.registerSingleton<TestSubscriber>(subscriber);
 
       dispatcher.subscribe(subscriber);
 

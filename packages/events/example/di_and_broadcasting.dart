@@ -1,5 +1,4 @@
 import 'package:platform_container/container.dart';
-import 'package:platform_container/mirrors.dart';
 import 'package:platform_events/events.dart';
 import 'package:platform_contracts/contracts.dart';
 
@@ -46,9 +45,165 @@ class AuthenticationService {
   }
 }
 
+// Simple reflector implementation
+class SimpleReflector implements Reflector {
+  @override
+  dynamic createInstance(Type type, [List<dynamic>? args]) {
+    if (type == AuthenticationService) {
+      return AuthenticationService(args![0] as EventDispatcherContract);
+    }
+    return null;
+  }
+
+  @override
+  Type? findTypeByName(String name) => null;
+
+  @override
+  ReflectedFunction? findInstanceMethod(Object instance, String name) => null;
+
+  @override
+  List<ReflectedInstance> getAnnotations(Type type) => [];
+
+  @override
+  List<ReflectedInstance> getParameterAnnotations(
+          Type type, String constructorName, String parameterName) =>
+      [];
+
+  @override
+  List<Type> getParameterTypes(Function function) => [];
+
+  @override
+  Type? getReturnType(Function function) => null;
+
+  @override
+  bool hasDefaultConstructor(Type type) => true;
+
+  @override
+  bool isClass(Type type) => type == AuthenticationService;
+
+  @override
+  ReflectedClass? reflectClass(Type type) {
+    if (type == AuthenticationService) {
+      return SimpleReflectedClass(
+        name: 'AuthenticationService',
+        type: type,
+        methods: ['login'],
+      );
+    }
+    return null;
+  }
+
+  @override
+  ReflectedFunction? reflectFunction(Function function) => null;
+
+  @override
+  ReflectedType reflectFutureOf(Type type) =>
+      throw UnsupportedError('Not needed for this example');
+
+  @override
+  ReflectedInstance? reflectInstance(Object instance) => null;
+
+  @override
+  ReflectedType? reflectType(Type type) {
+    if (type == AuthenticationService) {
+      return SimpleReflectedType(type);
+    }
+    return null;
+  }
+
+  @override
+  String? getName(Symbol symbol) => symbol.toString().replaceAll('"', '');
+}
+
+class SimpleReflectedType implements ReflectedType {
+  final Type type;
+
+  SimpleReflectedType(this.type);
+
+  @override
+  String get name => type.toString();
+
+  @override
+  List<ReflectedTypeParameter> get typeParameters => [];
+
+  @override
+  Type get reflectedType => type;
+
+  @override
+  bool isAssignableTo(ReflectedType? other) => true;
+
+  @override
+  ReflectedInstance newInstance(
+      String constructorName, List positionalArguments,
+      [Map<String, dynamic> namedArguments = const {},
+      List<Type> typeArguments = const []]) {
+    throw UnsupportedError('Not needed for this example');
+  }
+}
+
+class SimpleReflectedClass extends SimpleReflectedType
+    implements ReflectedClass {
+  final String className;
+  final List<String> methods;
+
+  SimpleReflectedClass({
+    required String name,
+    required Type type,
+    required this.methods,
+  })  : className = name,
+        super(type);
+
+  @override
+  List<ReflectedInstance> get annotations => [];
+
+  @override
+  List<ReflectedFunction> get constructors => [];
+
+  @override
+  List<ReflectedDeclaration> get declarations =>
+      methods.map((m) => SimpleReflectedDeclaration(m)).toList();
+}
+
+class SimpleReflectedDeclaration implements ReflectedDeclaration {
+  @override
+  final String name;
+  @override
+  final bool isStatic;
+  @override
+  final ReflectedFunction? function;
+
+  SimpleReflectedDeclaration(this.name, [this.isStatic = false, this.function]);
+}
+
+class SimpleReflectedInstance implements ReflectedInstance {
+  @override
+  final ReflectedType type;
+
+  SimpleReflectedInstance(this.type);
+
+  @override
+  ReflectedClass get clazz =>
+      throw UnsupportedError('Not needed for this example');
+
+  @override
+  Object get reflectee => throw UnsupportedError('Not needed for this example');
+
+  @override
+  ReflectedInstance getField(String name) {
+    throw UnsupportedError('Not needed for this example');
+  }
+
+  @override
+  dynamic invoke(String name,
+      [List<dynamic>? positionalArguments,
+      Map<Symbol, dynamic>? namedArguments]) {
+    throw UnsupportedError('Not needed for this example');
+  }
+}
+
 void main() async {
   // Set up container
-  final container = Container(MirrorsReflector());
+  final container = Container(SimpleReflector());
 
   // Register event dispatcher
   final dispatcher = EventDispatcher(container);

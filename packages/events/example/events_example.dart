@@ -1,63 +1,66 @@
 import 'package:platform_container/container.dart';
 import 'package:platform_events/events.dart';
 
-/// Example event subscriber class
-class UserEventSubscriber {
-  Map<String, dynamic> subscribe(EventDispatcher events) {
+// Example event class
+class OrderShipped {
+  final String orderId;
+  final DateTime shippedAt;
+
+  OrderShipped(this.orderId, this.shippedAt);
+}
+
+// Example subscriber class
+class OrderEventSubscriber {
+  void handleOrderShipped(List<dynamic> payload) {
+    final event = payload[0] as OrderShipped;
+    print('Order ${event.orderId} was shipped at ${event.shippedAt}');
+  }
+
+  void handleOrderCancelled(List<dynamic> payload) {
+    print('Order ${payload[0]} was cancelled');
+  }
+
+  Map<dynamic, dynamic> subscribe(EventDispatcher events) {
     return {
-      'UserRegistered': 'handleUserRegistration',
-      'UserDeleted': 'handleUserDeletion',
-      'user.login': ['handleUserLogin', 'logLoginAttempt'],
+      OrderShipped: 'handleOrderShipped',
+      'order.cancelled': 'handleOrderCancelled',
     };
-  }
-
-  void handleUserRegistration(List<dynamic> data) {
-    final email = data[0] as String;
-    print('Subscriber handling registration for: $email');
-    print('Sending welcome email...');
-  }
-
-  void handleUserDeletion(List<dynamic> data) {
-    final email = data[0] as String;
-    print('Subscriber handling deletion for: $email');
-    print('Cleaning up user data...');
-  }
-
-  void handleUserLogin(List<dynamic> data) {
-    final email = data[0] as String;
-    print('Subscriber handling login for: $email');
-    print('Updating last login timestamp...');
-  }
-
-  void logLoginAttempt(List<dynamic> data) {
-    final email = data[0] as String;
-    print('Logging login attempt for: $email');
   }
 }
 
-/// Example queued event handler
-class SendWelcomeEmail {
-  void handle(List<dynamic> data) {
-    final email = data[0] as String;
-    print('Sending welcome email to: $email');
+// Example listener class
+class SendShipmentNotification {
+  void handle(List<dynamic> payload) {
+    final event = payload[0] as OrderShipped;
+    print('Sending shipment notification for order ${event.orderId}...');
   }
+}
 
-  void failed(List<dynamic> data, Object error) {
-    final email = data[0] as String;
-    print('Failed to send welcome email to: $email');
-    print('Error: $error');
-  }
+// Example reflection implementations
+class ExampleReflectedTypeParameter implements ReflectedTypeParameter {
+  @override
+  final String name;
+
+  const ExampleReflectedTypeParameter(this.name);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ReflectedTypeParameter && other.name == name;
+
+  @override
+  int get hashCode => name.hashCode;
 }
 
 // Simple reflector implementation
 class SimpleReflector implements Reflector {
   @override
   dynamic createInstance(Type type, [List<dynamic>? args]) {
-    if (type == UserEventSubscriber) {
-      return UserEventSubscriber();
+    if (type == SendShipmentNotification) {
+      return SendShipmentNotification();
     }
-    if (type == SendWelcomeEmail) {
-      return SendWelcomeEmail();
+    if (type == OrderEventSubscriber) {
+      return OrderEventSubscriber();
     }
     return null;
   }
@@ -67,42 +70,30 @@ class SimpleReflector implements Reflector {
 
   @override
   ReflectedFunction? findInstanceMethod(Object instance, String name) {
-    if (instance is UserEventSubscriber) {
-      switch (name) {
-        case 'handleUserRegistration':
-          return SimpleReflectedFunction(
-            name: name,
-            instance: instance,
-            implementation: (args) =>
-                instance.handleUserRegistration(args[0] as List),
-          );
-        case 'handleUserDeletion':
-          return SimpleReflectedFunction(
-            name: name,
-            instance: instance,
-            implementation: (args) =>
-                instance.handleUserDeletion(args[0] as List),
-          );
-        case 'handleUserLogin':
-          return SimpleReflectedFunction(
-            name: name,
-            instance: instance,
-            implementation: (args) => instance.handleUserLogin(args[0] as List),
-          );
-        case 'logLoginAttempt':
-          return SimpleReflectedFunction(
-            name: name,
-            instance: instance,
-            implementation: (args) => instance.logLoginAttempt(args[0] as List),
-          );
-      }
-    }
-    if (instance is SendWelcomeEmail && name == 'handle') {
+    if (instance is SendShipmentNotification && name == 'handle') {
       return SimpleReflectedFunction(
-        name: name,
+        name: 'handle',
         instance: instance,
         implementation: (args) => instance.handle(args[0] as List),
       );
+    }
+    if (instance is OrderEventSubscriber) {
+      switch (name) {
+        case 'handleOrderShipped':
+          return SimpleReflectedFunction(
+            name: 'handleOrderShipped',
+            instance: instance,
+            implementation: (args) =>
+                instance.handleOrderShipped(args[0] as List),
+          );
+        case 'handleOrderCancelled':
+          return SimpleReflectedFunction(
+            name: 'handleOrderCancelled',
+            instance: instance,
+            implementation: (args) =>
+                instance.handleOrderCancelled(args[0] as List),
+          );
+      }
     }
     return null;
   }
@@ -126,27 +117,22 @@ class SimpleReflector implements Reflector {
 
   @override
   bool isClass(Type type) =>
-      type == UserEventSubscriber || type == SendWelcomeEmail;
+      type == SendShipmentNotification || type == OrderEventSubscriber;
 
   @override
   ReflectedClass? reflectClass(Type type) {
-    if (type == UserEventSubscriber) {
+    if (type == SendShipmentNotification) {
       return SimpleReflectedClass(
-        name: 'UserEventSubscriber',
+        name: 'SendShipmentNotification',
         type: type,
-        methods: [
-          'handleUserRegistration',
-          'handleUserDeletion',
-          'handleUserLogin',
-          'logLoginAttempt'
-        ],
+        methods: ['handle'],
       );
     }
-    if (type == SendWelcomeEmail) {
+    if (type == OrderEventSubscriber) {
       return SimpleReflectedClass(
-        name: 'SendWelcomeEmail',
+        name: 'OrderEventSubscriber',
         type: type,
-        methods: ['handle', 'failed'],
+        methods: ['handleOrderShipped', 'handleOrderCancelled'],
       );
     }
     return null;
@@ -164,7 +150,7 @@ class SimpleReflector implements Reflector {
 
   @override
   ReflectedType? reflectType(Type type) {
-    if (type == UserEventSubscriber || type == SendWelcomeEmail) {
+    if (type == SendShipmentNotification || type == OrderEventSubscriber) {
       return SimpleReflectedType(type);
     }
     return null;
@@ -306,38 +292,36 @@ void main() {
   // Create event dispatcher
   final events = EventDispatcher(container);
 
-  // Register the subscriber
-  final subscriber = UserEventSubscriber();
-  container.registerSingleton<UserEventSubscriber>(subscriber);
+  // Register subscriber
+  final subscriber = OrderEventSubscriber();
+  container.registerSingleton<OrderEventSubscriber>(subscriber);
   events.subscribe(subscriber);
 
-  // Register a queued event listener
-  events.listen('UserRegistered', (event, data) {
-    print('Queued: Sending welcome email to ${data[0]}');
+  // Register single event listener
+  events.listen(OrderShipped, (event, data) {
+    print('Order shipped listener called');
   });
 
-  // Dispatch some events
-  print('\nRegistering user:');
-  events.dispatch('UserRegistered', ['jane@example.com']);
-
-  print('\nUser logging in:');
-  events.dispatch('user.login', ['jane@example.com']);
-
-  print('\nDeleting user:');
-  events.dispatch('UserDeleted', ['jane@example.com']);
-
-  // Example of serializable closure
-  final greetUser = SerializableClosure.create(
-    (String name) => 'Hello $name',
-    'greet-user',
-    () => (String name) => 'Hello $name',
-  );
-
-  // Later reconstruct and use the closure
-  final reconstructed = SerializableClosure.fromJson({
-    'identifier': 'greet-user',
+  // Register wildcard listener
+  events.listen('order.*', (event, data) {
+    print('Wildcard listener caught event: $event');
   });
 
-  print('\nGreeting from reconstructed closure:');
-  print((reconstructed as Function).call('Jane'));
+  // Register class-based listener
+  final notification = SendShipmentNotification();
+  container.registerSingleton<SendShipmentNotification>(notification);
+  events.listen(OrderShipped, [SendShipmentNotification, 'handle']);
+
+  // Dispatch events
+  print('\nDispatching OrderShipped event...');
+  events.dispatch(OrderShipped('123', DateTime.now()));
+
+  print('\nDispatching order.cancelled event...');
+  events.dispatch('order.cancelled', ['456']);
+
+  // Example of queueing events
+  print('\nQueuing event...');
+  events.push('order.cancelled', ['789']);
+  print('Processing queued event...');
+  events.flush('order.cancelled');
 }
