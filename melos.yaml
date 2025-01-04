@@ -11,9 +11,6 @@
 name: protevus_platform
 repository: https://github.com/protevus/platform
 packages:
-  - fig/**
-  - common/**
-  - drivers/**
   - packages/**
   - incubation/**
   - apps/**
@@ -38,24 +35,19 @@ scripts:
   format:
     run: dart format .
     description: Format all Dart files in the repository
-  generate:
-    run: melos exec -- "dart run build_runner build --delete-conflicting-outputs"
-    description: Run code generation for all packages
-  generate:custom:
-    run: melos exec --scope="$MELOS_SCOPE" -- "dart run build_runner build --delete-conflicting-outputs"
-    description: Run code generation for specified packages (use with MELOS_SCOPE env var)
-  generate:check:
-    run: "melos exec --scope=\"$MELOS_SCOPE\" -- \" if grep -q 'build_runner' pubspec.yaml; then\n  if [ -n \\\"$(find lib test example -name '*.g.dart' -o -name '*.freezed.dart' -o -name '*.reflectable.dart' 2>\/dev\/null)\\\" ]; then\n    echo \\\"Package {MELOS_PACKAGE_NAME} needs code generation.\\\"\n  else\n    echo \\\"Package {MELOS_PACKAGE_NAME} has build_runner but no generated files found.\\\"\n  fi\nelse\n  echo \\\"Package {MELOS_PACKAGE_NAME} does not use build_runner.\\\"\nfi \"\n"
-    description: Check if code generation is needed (use with MELOS_SCOPE env var)
-  generate:dummy:test:
-    run: "melos exec --scope=\"$MELOS_SCOPE\" -- \" echo ' import \\\"package:test\/test.dart\\\";\nvoid main() {\n  group(\\\"Dummy Test\\\", () {\n    test(\\\"Always passes\\\", () {\n      expect(true, isTrue);\n    });\n\n    test(\\\"Basic arithmetic\\\", () {\n      expect(2 + 2, equals(4));\n    });\n\n    test(\\\"String manipulation\\\", () {\n      String testString = \\\"Protevus Platform\\\";\n      expect(testString.contains(\\\"Platform\\\"), isTrue);\n      expect(testString.toLowerCase(), equals(\\\"protevus platform\\\"));\n    });\n  });\n} ' > test\/dummy_test.dart \"\n"
-    description: Generate a dummy test file in the specified package(s)
   publish:
     run: melos publish
     description: Publish all packages that have changed.
   publish:check:
     run: melos publish --dry-run
     description: Check which packages would be published
+  configure:
+    run: "melos bootstrap && MELOS_SCOPE=\"platform_container_generator\" melos run generate:custom && MELOS_SCOPE=\"platform_model, platform_exceptions, platform_mocking\" melos run generate:dummy:test && MELOS_SCOPE=\"platform_container_generator\" melos run debug:reflectable && melos run test && melos run coverage && melos run coverage_report && melos run docs:generate\n"
+    description: "Configure the development environment, generate code and dummy tests, run tests, generate coverage, and create API documentation"
+  template:
+    name: Create from template
+    description: "Creates a new project from a template in the templates directory.\n\nUsage: melos run template template_name:name type:dart|flutter name:project_name\n\nExample:\n  melos run template template_name:bloc_app type:flutter name:my_new_app\n  melos run template template_name:core_package type:dart name:core_utils\n"
+    run: dart run helpers/create_from_template.dart $MELOS_ARGS
   docs:generate:
     run: melos exec -- "dart doc ."
     description: Generate documentation for all packages
@@ -74,22 +66,18 @@ scripts:
   coverage_report:
     run: "melos exec -c 1 --fail-fast -- \" if [ -s coverage\/lcov.info ]; then\n  genhtml -o coverage_report coverage\/lcov.info;\n  echo 'Coverage report generated successfully.';\nelse\n  echo 'No valid coverage data found. Skipping report generation.';\nfi \"\n"
     description: "Generate HTML coverage report from LCOV data for each package, if valid data exists"
-  clean:
-    run: "melos exec -c 1 --fail-fast -- \" rm -rf build .dart_tool .packages .flutter-plugins .flutter-plugins-dependencies .pub-cache .pub .idea coverage doc\/api .test_coverage.dart .test_runner.dart && find . -name '*.g.dart' -delete && find . -name '*.freezed.dart' -delete && find . -name '*.mocks.dart' -delete && find . -name '*.gr.dart' -delete && find . -name '*.config.dart' -delete && find . -name '*.hive.dart' -delete && find . -name '*.chopper.dart' -delete && find . -name '*.reflectable.dart' -delete && find . -name '*.injectable.dart' -delete && find . -name '*.gql.dart' -delete && find . -name '*.gql.g.dart' -delete && find . -name '*.iconfig.dart' -delete && find . -name '*.moor.dart' -delete && find . -name '*.drift.dart' -delete && find . -name '*.mapper.dart' -delete && find . -name '*.ast.gql.dart' -delete && find . -name '*.req.gql.dart' -delete && find . -name '*.data.gql.dart' -delete && find . -name '*.var.gql.dart' -delete && find . -name '*.jorm.dart' -delete && find . -name '*.g.aot' -delete && find . -name '*.g.ddc' -delete && find . -name '*.g.js' -delete && find . -name '*.g.js.map' -delete && find . -name '*.g.part' -delete && find . -name '*.g.sum' -delete && find . -name '*.g.txt' -delete && find . -name 'lcov.info' -delete && find . -name 'coverage_report' -type d -exec rm -r {} + && git clean -xdf \" && flutter clean\n"
-    description: "Thoroughly clean all build artifacts, generated files, coverage reports, and documentation from the entire repository"
-  configure:
-    run: "melos bootstrap && MELOS_SCOPE=\"platform_container_generator\" melos run generate:custom && MELOS_SCOPE=\"platform_model, platform_exceptions, platform_mocking\" melos run generate:dummy:test && MELOS_SCOPE=\"platform_container_generator\" melos run debug:reflectable && melos run test && melos run coverage && melos run coverage_report && melos run docs:generate\n"
-    description: "Configure the development environment, generate code and dummy tests, run tests, generate coverage, and create API documentation"
-  template:
-    name: Create from template
-    description: "Creates a new project from a template in the templates directory.\n\nUsage: melos run template template_name:name type:dart|flutter name:project_name\n\nExample:\n  melos run template template_name:bloc_app type:flutter name:my_new_app\n  melos run template template_name:core_package type:dart name:core_utils\n"
-    run: dart run helpers/create_from_template.dart $MELOS_ARGS
-  test:
-    run: melos exec -c 1 --fail-fast -- "dart test"
-    description: Run tests for all packages
-  test:custom:
-    run: melos exec --scope="$MELOS_SCOPE" -- dart test
-    description: Run tests for specified packages (use with MELOS_SCOPE env var)
+  debug_pkg_name:
+    run: "melos exec -- echo \"Package name is {MELOS_PACKAGE_NAME}\""
+    description: Debug package name resolution
+  debug_pkg_path:
+    run: "melos exec -- echo \"Package name is {MELOS_PACKAGE_PATH}\""
+    description: Debug package path resolution
+  debug:reflectable:
+    run: "melos exec --scope=\"$MELOS_SCOPE\" -- \" echo \\\"Checking for .reflectable.dart files in {MELOS_PACKAGE_NAME}\\\" && find lib test example -name '*.reflectable.dart' -print 2>\/dev\/null \"\n"
+    description: Debug script to find .reflectable.dart files (use with MELOS_SCOPE env var)
+  list:dart:files:
+    run: "melos exec --scope=\"$MELOS_SCOPE\" -- \" echo \\\"Listing all Dart files in {MELOS_PACKAGE_NAME}:\\\" && find lib test example -name '*.dart' -print 2>\/dev\/null \"\n"
+    description: List all Dart files in specified package(s) (use with MELOS_SCOPE env var)
   create:
     name: Create new package or application
     description: "Creates a new Dart package or Flutter application in the appropriate directory.\n\nUsage: melos run create -- --type dart|flutter --category type --name project_name\n\nAvailable categories for Dart:\n  - package     : Basic Dart package\n  - console     : Command-line application\n  - server      : Server-side application\n  - desktop     : Desktop application\n  - plugin      : Dart plugin\n\nAvailable categories for Flutter:\n  - app         : Mobile application\n  - web         : Web application\n  - desktop     : Desktop application\n  - plugin      : Flutter plugin\n  - module      : Flutter module\n  - package     : Flutter package\n"
@@ -106,23 +94,32 @@ scripts:
   ci:
     run: melos run analyze && melos run test
     description: Run full CI pipeline
-  debug_pkg_name:
-    run: "melos exec -- echo \"Package name is {MELOS_PACKAGE_NAME}\""
-    description: Debug package name resolution
-  debug_pkg_path:
-    run: "melos exec -- echo \"Package name is {MELOS_PACKAGE_PATH}\""
-    description: Debug package path resolution
-  debug:reflectable:
-    run: "melos exec --scope=\"$MELOS_SCOPE\" -- \" echo \\\"Checking for .reflectable.dart files in {MELOS_PACKAGE_NAME}\\\" && find lib test example -name '*.reflectable.dart' -print 2>\/dev\/null \"\n"
-    description: Debug script to find .reflectable.dart files (use with MELOS_SCOPE env var)
-  list:dart:files:
-    run: "melos exec --scope=\"$MELOS_SCOPE\" -- \" echo \\\"Listing all Dart files in {MELOS_PACKAGE_NAME}:\\\" && find lib test example -name '*.dart' -print 2>\/dev\/null \"\n"
-    description: List all Dart files in specified package(s) (use with MELOS_SCOPE env var)
+  test:
+    run: melos exec -c 1 --fail-fast -- "dart test"
+    description: Run tests for all packages
+  test:custom:
+    run: melos exec --scope="$MELOS_SCOPE" -- dart test
+    description: Run tests for specified packages (use with MELOS_SCOPE env var)
+  generate:
+    run: melos exec -- "dart run build_runner build --delete-conflicting-outputs"
+    description: Run code generation for all packages
+  generate:custom:
+    run: melos exec --scope="$MELOS_SCOPE" -- "dart run build_runner build --delete-conflicting-outputs"
+    description: Run code generation for specified packages (use with MELOS_SCOPE env var)
+  generate:check:
+    run: "melos exec --scope=\"$MELOS_SCOPE\" -- \" if grep -q 'build_runner' pubspec.yaml; then\n  if [ -n \\\"$(find lib test example -name '*.g.dart' -o -name '*.freezed.dart' -o -name '*.reflectable.dart' 2>\/dev\/null)\\\" ]; then\n    echo \\\"Package {MELOS_PACKAGE_NAME} needs code generation.\\\"\n  else\n    echo \\\"Package {MELOS_PACKAGE_NAME} has build_runner but no generated files found.\\\"\n  fi\nelse\n  echo \\\"Package {MELOS_PACKAGE_NAME} does not use build_runner.\\\"\nfi \"\n"
+    description: Check if code generation is needed (use with MELOS_SCOPE env var)
+  generate:dummy:test:
+    run: "melos exec --scope=\"$MELOS_SCOPE\" -- \" echo ' import \\\"package:test\/test.dart\\\";\nvoid main() {\n  group(\\\"Dummy Test\\\", () {\n    test(\\\"Always passes\\\", () {\n      expect(true, isTrue);\n    });\n\n    test(\\\"Basic arithmetic\\\", () {\n      expect(2 + 2, equals(4));\n    });\n\n    test(\\\"String manipulation\\\", () {\n      String testString = \\\"Protevus Platform\\\";\n      expect(testString.contains(\\\"Platform\\\"), isTrue);\n      expect(testString.toLowerCase(), equals(\\\"protevus platform\\\"));\n    });\n  });\n} ' > test\/dummy_test.dart \"\n"
+    description: Generate a dummy test file in the specified package(s)
   combine_config:
     run: dart helpers/combine_melos_config.dart
     description: Combine Melos configuration files
   help:
     run: dart helpers/print_melos_commands.dart
     description: Display a formatted list of all available Melos commands
+  clean:
+    run: "melos exec -c 1 --fail-fast -- \" rm -rf build .dart_tool .packages .flutter-plugins .flutter-plugins-dependencies .pub-cache .pub .idea coverage doc\/api .test_coverage.dart .test_runner.dart && find . -name '*.g.dart' -delete && find . -name '*.freezed.dart' -delete && find . -name '*.mocks.dart' -delete && find . -name '*.gr.dart' -delete && find . -name '*.config.dart' -delete && find . -name '*.hive.dart' -delete && find . -name '*.chopper.dart' -delete && find . -name '*.reflectable.dart' -delete && find . -name '*.injectable.dart' -delete && find . -name '*.gql.dart' -delete && find . -name '*.gql.g.dart' -delete && find . -name '*.iconfig.dart' -delete && find . -name '*.moor.dart' -delete && find . -name '*.drift.dart' -delete && find . -name '*.mapper.dart' -delete && find . -name '*.ast.gql.dart' -delete && find . -name '*.req.gql.dart' -delete && find . -name '*.data.gql.dart' -delete && find . -name '*.var.gql.dart' -delete && find . -name '*.jorm.dart' -delete && find . -name '*.g.aot' -delete && find . -name '*.g.ddc' -delete && find . -name '*.g.js' -delete && find . -name '*.g.js.map' -delete && find . -name '*.g.part' -delete && find . -name '*.g.sum' -delete && find . -name '*.g.txt' -delete && find . -name 'lcov.info' -delete && find . -name 'coverage_report' -type d -exec rm -r {} + && git clean -xdf \" && flutter clean\n"
+    description: "Thoroughly clean all build artifacts, generated files, coverage reports, and documentation from the entire repository"
 
 
