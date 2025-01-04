@@ -75,41 +75,38 @@ void main() {
       expect(File(path).readAsStringSync(), isEmpty);
     });
 
-    test('acquires shared lock', () {
+    test('acquires and releases lock', () async {
       final path = '${tempDir.path}/test.txt';
       File(path).writeAsStringSync('test');
 
-      final file = LockableFile(path, 'r');
-      expect(() => file.getSharedLock(), returnsNormally);
-      file.close();
-    });
+      final file1 = LockableFile(path, 'r');
+      expect(() => file1.getSharedLock(true), returnsNormally);
 
-    test('acquires exclusive lock', () {
-      final path = '${tempDir.path}/test.txt';
-      File(path).writeAsStringSync('test');
+      // Try to get exclusive lock while shared lock is held
+      final file2 = LockableFile(path, 'w');
+      expect(() => file2.getExclusiveLock(false),
+          throwsA(isA<LockTimeoutException>()));
 
-      final file = LockableFile(path, 'w');
-      expect(() => file.getExclusiveLock(), returnsNormally);
-      file.close();
-    });
+      // Release shared lock and try exclusive lock again
+      file1.releaseLock();
+      expect(() => file2.getExclusiveLock(true), returnsNormally);
 
-    test('releases lock', () {
-      final path = '${tempDir.path}/test.txt';
-      File(path).writeAsStringSync('test');
-
-      final file = LockableFile(path, 'w');
-      file.getExclusiveLock();
-      expect(() => file.releaseLock(), returnsNormally);
-      file.close();
+      file1.close();
+      file2.close();
     });
 
     test('releases lock on close', () {
       final path = '${tempDir.path}/test.txt';
       File(path).writeAsStringSync('test');
 
-      final file = LockableFile(path, 'w');
-      file.getExclusiveLock();
-      expect(() => file.close(), returnsNormally);
+      final file1 = LockableFile(path, 'w');
+      file1.getExclusiveLock(true);
+      file1.close();
+
+      // Should be able to get lock after close
+      final file2 = LockableFile(path, 'w');
+      expect(() => file2.getExclusiveLock(true), returnsNormally);
+      file2.close();
     });
 
     test('throws when reading closed file', () {
@@ -155,19 +152,44 @@ void main() {
       expect(() => LockableFile(path, 'x'), throwsArgumentError);
     });
 
-    test('throws LockTimeoutException when lock cannot be acquired', () {
+    test('handles concurrent lock attempts', () {
       final path = '${tempDir.path}/test.txt';
       File(path).writeAsStringSync('test');
 
       final file1 = LockableFile(path, 'w');
-      file1.getExclusiveLock();
-
       final file2 = LockableFile(path, 'w');
+      final file3 = LockableFile(path, 'w');
+
+      // First lock succeeds
+      expect(() => file1.getExclusiveLock(true), returnsNormally);
+
+      // Subsequent non-blocking attempts fail
       expect(() => file2.getExclusiveLock(false),
+          throwsA(isA<LockTimeoutException>()));
+      expect(() => file3.getExclusiveLock(false),
           throwsA(isA<LockTimeoutException>()));
 
       file1.close();
       file2.close();
+      file3.close();
+    });
+
+    test('handles lock release properly', () {
+      final path = '${tempDir.path}/test.txt';
+      File(path).writeAsStringSync('test');
+
+      final file = LockableFile(path, 'w');
+
+      // Initial lock
+      expect(() => file.getExclusiveLock(true), returnsNormally);
+
+      // Release
+      expect(() => file.releaseLock(), returnsNormally);
+
+      // Can acquire again
+      expect(() => file.getExclusiveLock(true), returnsNormally);
+
+      file.close();
     });
   });
 }

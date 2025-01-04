@@ -100,6 +100,9 @@ class LockableFile {
     return this;
   }
 
+  /// Static map to track locked files
+  static final Map<String, bool> _lockedFiles = {};
+
   /// Get a shared lock on the file.
   ///
   /// @param block Whether to block until lock is acquired
@@ -108,16 +111,27 @@ class LockableFile {
   LockableFile getSharedLock([bool block = false]) {
     _checkHandle();
 
-    // Note: Dart's file locking is always blocking
-    // For non-blocking, we return false immediately if lock is already held
-    if (!block && _isLocked) {
+    if (!block && _lockedFiles.containsKey(path)) {
       throw LockTimeoutException(
           'Unable to acquire file lock at path [$path].');
     }
 
     try {
-      _handle!.lockSync();
-      _isLocked = true;
+      if (block) {
+        _handle!.lockSync();
+        _isLocked = true;
+        _lockedFiles[path] = true;
+      } else {
+        // Try non-blocking lock
+        try {
+          _handle!.lockSync();
+          _isLocked = true;
+          _lockedFiles[path] = true;
+        } catch (e) {
+          throw LockTimeoutException(
+              'Unable to acquire file lock at path [$path].');
+        }
+      }
     } catch (e) {
       throw LockTimeoutException(
           'Unable to acquire file lock at path [$path].');
@@ -145,6 +159,7 @@ class LockableFile {
     if (_isLocked) {
       _handle!.unlockSync();
       _isLocked = false;
+      _lockedFiles.remove(path);
     }
 
     return this;
@@ -162,6 +177,7 @@ class LockableFile {
 
     _handle!.closeSync();
     _handle = null;
+    _lockedFiles.remove(path);
     return true;
   }
 

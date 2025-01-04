@@ -107,7 +107,18 @@ class Filesystem with Macroable, Conditionable implements FilesystemContract {
   @override
   bool writeStream(String path, Stream<List<int>> resource,
       [Map<String, dynamic> options = const {}]) {
-    return put(path, resource, options);
+    try {
+      final file = File(path);
+      final sink = file.openWrite();
+      resource.listen(
+        (data) => sink.add(data),
+        onDone: () => sink.close(),
+        onError: (e) => sink.close(),
+      );
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   /// Get the visibility for the given path.
@@ -115,8 +126,9 @@ class Filesystem with Macroable, Conditionable implements FilesystemContract {
   String getVisibility(String path) {
     try {
       final stat = FileStat.statSync(path);
-      // Check if world readable
-      return (stat.mode & 0x4) != 0
+      // Check if world readable (others have read permission)
+      final worldReadable = (stat.mode & 0x004) != 0;
+      return worldReadable
           ? FilesystemContract.visibilityPublic
           : FilesystemContract.visibilityPrivate;
     } catch (e) {
@@ -128,9 +140,17 @@ class Filesystem with Macroable, Conditionable implements FilesystemContract {
   @override
   bool setVisibility(String path, String visibility) {
     try {
-      final mode =
-          visibility == FilesystemContract.visibilityPublic ? '644' : '600';
-      Process.runSync('chmod', [mode, path]);
+      final isPublic = visibility == FilesystemContract.visibilityPublic;
+      final mode = isPublic ? '644' : '600';
+
+      if (Platform.isWindows) {
+        // On Windows, use attrib command
+        final attr = isPublic ? '-r' : '+r';
+        Process.runSync('attrib', [attr, path]);
+      } else {
+        // On Unix-like systems, use chmod
+        Process.runSync('chmod', [mode, path]);
+      }
       return true;
     } catch (e) {
       return false;

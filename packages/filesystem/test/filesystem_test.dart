@@ -70,9 +70,10 @@ void main() {
       expect(File(targetPath).readAsStringSync(), equals('test content'));
     });
 
-    test('putFileAs() stores file with custom name', () {
+    test('putFileAs() stores file with custom name', () async {
       final sourcePath = '${tempDir.path}/source.txt';
       final targetDir = '${tempDir.path}/subdir';
+      Directory(targetDir).createSync();
       File(sourcePath).writeAsStringSync('test content');
 
       final result = fs.putFileAs(targetDir, File(sourcePath), 'custom.txt');
@@ -84,15 +85,19 @@ void main() {
     test('writeStream() writes stream to file', () async {
       final path = '${tempDir.path}/test.txt';
       final content = 'test content';
-      final stream = Stream.value(utf8.encode(content));
+      final bytes = utf8.encode(content);
+      final stream = Stream.value(bytes);
 
       expect(fs.writeStream(path, stream), isTrue);
+      await Future.delayed(
+          Duration(milliseconds: 100)); // Wait for write to complete
       expect(File(path).readAsStringSync(), equals(content));
     });
 
     test('getVisibility() returns file visibility', () {
       final path = '${tempDir.path}/test.txt';
       fs.put(path, 'test');
+      // Default visibility should be private
       expect(
           fs.getVisibility(path), equals(FilesystemContract.visibilityPrivate));
     });
@@ -100,10 +105,18 @@ void main() {
     test('setVisibility() changes file visibility', () {
       final path = '${tempDir.path}/test.txt';
       fs.put(path, 'test');
+
+      // Change to public
       expect(
           fs.setVisibility(path, FilesystemContract.visibilityPublic), isTrue);
       expect(
           fs.getVisibility(path), equals(FilesystemContract.visibilityPublic));
+
+      // Change back to private
+      expect(
+          fs.setVisibility(path, FilesystemContract.visibilityPrivate), isTrue);
+      expect(
+          fs.getVisibility(path), equals(FilesystemContract.visibilityPrivate));
     });
 
     test('put() writes content to file', () {

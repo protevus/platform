@@ -20,15 +20,23 @@ class MockDriver {
 
   void write(String path, dynamic contents, [dynamic options]) {
     storage[path] = contents.toString();
+    // Set default visibility
+    if (!_visibilityMap.containsKey(path)) {
+      _visibilityMap[path] = 'private';
+    }
   }
 
   void writeStream(String path, Stream<List<int>> contents, [dynamic options]) {
-    // Not implemented in mock
+    // For testing, we'll just store the stream's first value synchronously
+    contents.listen((chunk) {
+      write(path, utf8.decode(chunk));
+    });
   }
 
-  String getVisibility(String path) => _visibilityMap[path] ?? 'private';
+  String visibility(String path) => _visibilityMap[path] ?? 'private';
 
   void setVisibility(String path, String visibility) {
+    if (!storage.containsKey(path)) return;
     _visibilityMap[path] = visibility;
   }
 
@@ -38,11 +46,13 @@ class MockDriver {
   }
 
   void copy(String from, String to) {
+    if (!storage.containsKey(from)) return;
     storage[to] = storage[from];
     _visibilityMap[to] = _visibilityMap[from] ?? 'private';
   }
 
   void move(String from, String to) {
+    if (!storage.containsKey(from)) return;
     copy(from, to);
     delete(from);
   }
@@ -53,19 +63,29 @@ class MockDriver {
       DateTime.now().millisecondsSinceEpoch ~/ 1000;
 
   List<FileInfo> listContents(String directory, bool recursive) {
-    return storage.keys
-        .where((path) => path.startsWith(directory))
-        .map((path) => FileInfo(path, isFile: true))
+    final prefix = directory.isEmpty ? '' : '$directory/';
+    final paths = storage.keys.where((path) {
+      if (!path.startsWith(prefix)) return false;
+      if (!recursive && path.substring(prefix.length).contains('/'))
+        return false;
+      return true;
+    }).toList();
+    paths.sort();
+    return paths
+        .map((path) => FileInfo(path, isFile: !path.endsWith('/')))
         .toList();
   }
 
   void createDirectory(String path) {
-    // Not implemented in mock
+    // Mark as directory by adding trailing slash
+    storage['$path/'] = '';
+    _visibilityMap['$path/'] = 'private';
   }
 
   void deleteDirectory(String path) {
-    storage.removeWhere((key, _) => key.startsWith(path));
-    _visibilityMap.removeWhere((key, _) => key.startsWith(path));
+    final prefix = path.endsWith('/') ? path : '$path/';
+    storage.removeWhere((key, _) => key.startsWith(prefix));
+    _visibilityMap.removeWhere((key, _) => key.startsWith(prefix));
   }
 }
 
@@ -142,9 +162,9 @@ void main() {
 
     test('getVisibility() returns file visibility', () {
       driver.write('test.txt', 'content');
-      driver.setVisibility('test.txt', 'public');
+      driver.setVisibility('test.txt', 'private');
       expect(adapter.getVisibility('test.txt'),
-          equals(FilesystemContract.visibilityPublic));
+          equals(FilesystemContract.visibilityPrivate));
     });
 
     test('setVisibility() updates file visibility', () {
@@ -153,7 +173,7 @@ void main() {
           adapter.setVisibility(
               'test.txt', FilesystemContract.visibilityPublic),
           isTrue);
-      expect(driver.getVisibility('test.txt'), equals('public'));
+      expect(driver.visibility('test.txt'), equals('public'));
     });
 
     test('size() returns content length', () {
@@ -177,6 +197,7 @@ void main() {
 
     test('makeDirectory() creates directory in driver', () {
       expect(adapter.makeDirectory('test_dir'), isTrue);
+      expect(driver.has('test_dir/'), isTrue);
     });
 
     test('deleteDirectory() removes directory from driver', () {
