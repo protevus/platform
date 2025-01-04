@@ -24,7 +24,7 @@ body:
       description: Did this behavior used to work in a previous version?
       options:
         - "Yes"
-        - No
+        - "No"
         - Not Sure
     validations:
       required: true

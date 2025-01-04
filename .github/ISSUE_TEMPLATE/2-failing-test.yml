@@ -10,6 +10,18 @@ body:
         # **💉 Failing Test**
         Use this form to report failing tests or CI jobs.
 
+  - type: dropdown
+    id: package-name
+    attributes:
+      label: Select package
+      description: Select package where test is failing
+      options:
+        - Auth
+        - Bus
+        - Events
+    validations:
+      required: true
+
   - type: input
     id: failing-tests
     attributes:
