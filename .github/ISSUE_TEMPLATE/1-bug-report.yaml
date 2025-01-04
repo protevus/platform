@@ -1,0 +1,78 @@
+name: "🐞 Bug Report"
+description: "Report an issue to help the project improve."
+title: "[Bug] "
+labels: ["Type: Bug"]
+assignees: ["Josee9988"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # **🐞 Bug Report**
+        Use this form to provide details about the issue.
+
+  - type: textarea
+    id: describe-bug
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+      placeholder: Provide a description of the issue here.
+
+  - type: dropdown
+    id: is-regression
+    attributes:
+      label: Is this a regression?
+      description: Did this behavior used to work in a previous version?
+      options:
+        - Yes
+        - No
+        - Not Sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Provide step-by-step instructions to reproduce the issue.
+      placeholder: "1. Step one\n2. Step two\n3. Step three"
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+      placeholder: Describe the expected outcome here.
+
+  - type: textarea
+    id: media-proof
+    attributes:
+      label: Media proof
+      description: If applicable, add screenshots or videos to help explain your problem.
+      placeholder: Provide a link to media or describe media attachments.
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Your environment
+      description: Provide details about your environment (e.g., OS, Node version, npm version).
+      placeholder: |
+        - OS: [e.g. Ubuntu 20.04 / Windows 10]
+        - Node version: [e.g. 16.x]
+        - npm version: [e.g. 8.x]
+        - Browser: [e.g. Chrome 91]
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add any other context or information about the problem.
+      placeholder: Provide additional details here.
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        **Please Note:**
+        - Ensure you’ve searched open and closed issues before submitting.
+        - Review our Rules of Conduct in `.github/CODE_OF_CONDUCT.md`.
