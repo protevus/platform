@@ -1,0 +1,48 @@
+name: "💉 Failing Test"
+description: "Report failing tests or CI jobs."
+title: "[Test] "
+labels: ["Type: Test"]
+assignees: ["Josee9988"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # **💉 Failing Test**
+        Use this form to report failing tests or CI jobs.
+
+  - type: input
+    id: failing-tests
+    attributes:
+      label: Which jobs/test(s) are failing
+      description: Specify the CI jobs or tests that are failing.
+      placeholder: e.g., `test_authentication`, `build_pipeline`
+
+  - type: textarea
+    id: reason-for-failure
+    attributes:
+      label: Reason for failure/description
+      description: Try to describe why the test is failing or what might be missing to make it pass.
+      placeholder: Provide details about the failure.
+
+  - type: textarea
+    id: media-proof
+    attributes:
+      label: Media proof
+      description: If applicable, add screenshots or videos to help explain your problem.
+      placeholder: Provide a link to media or describe media attachments.
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add any other context or additional information about the problem.
+      placeholder: Provide any additional details here.
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        **Please Note:**
+        - Ensure you’ve searched open and closed issues before submitting.
+        - Review our Rules of Conduct in `.github/CODE_OF_CONDUCT.md`.
