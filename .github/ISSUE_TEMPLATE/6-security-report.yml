@@ -1,0 +1,97 @@
+name: "⚠️ Security Report"
+description: "Report an issue to help the project improve."
+title: "[Security]"
+labels: ["Type: Security"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        <!--📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛
+
+        Oh, hi there! 😄
+
+        To expedite issue processing, please search open and closed issues before submitting a new one.
+        Please read our Rules of Conduct at this repository's `.github/CODE_OF_CONDUCT.md`
+
+        FIRST OF ALL, read this project's SECURITY.md file. Located in `.github/SECURITY.md`.
+
+        READ CAREFULLY IF YOUR ISSUE REPORT CONTAINS SENSIBLE OR PRIVATE DATA:
+        (data that might be leaked or subtracted from our servers due to this
+        security issue).
+
+        If this security report (or the guide on how to "identify the security bug") includes
+        certain personal information or involves personal identifiable data, or you believe
+        that the data that you might leak by exposing the way on how to attack the project
+        could be considered as a data leak or could violate the privacy of any kind of
+        data or sensible data, please do not post it here and directly email the developer:
+        (jgracia9988@gmail.com). You should post the issue with the least amount of
+        sensible or private data as possible to help us manage the security issue, and
+        with the extra data sent from your email to the developer (if any), we will deeply
+        analyze and try to fix it as fast as possible.
+
+        If you are in doubt about the data that you might post here (screenshots or media
+        also, count as data), please directly email us.
+
+        The data that must NOT be posted here:
+
+        * Legal and/or full names
+        * Names or usernames combined with other identifiers like phone numbers or email addresses
+        * Health or financial information (including insurance information, social security numbers, etc.)
+        * Information about political or religious affiliations
+        * Information about race, ethnicity, sexual orientation, gender, or other identifying information that could be used for discriminatory purposes
+
+        📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛📛-->
+
+        # **⚠️ Security Report**
+        Use this form to report security-related issues to improve the project.
+
+  - type: textarea
+    id: describe-issue
+    attributes:
+      label: Describe the security issue
+      description: A clear and concise description of what the issue is.
+      placeholder: Provide a description of the security issue here.
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: To Reproduce
+      description: Steps to reproduce the error (if applicable).
+      placeholder: "1. Step one\n2. Step two\n3. Step three"
+
+  - type: textarea
+    id: expected-behaviour
+    attributes:
+      label: Expected behaviour
+      description: A clear and concise description of what you expected to happen.
+      placeholder: Describe the expected outcome here.
+
+  - type: textarea
+    id: media-proof
+    attributes:
+      label: Media proof
+      description: If applicable, add screenshots or videos to help explain the issue.
+      placeholder: Provide any media links or describe them.
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Your environment
+      description: Information about your operating system, node version, and other relevant details.
+      placeholder: "* OS: Ubuntu 5.4.0-26-generic x86_64\n* Node version: 14.17.0\n* Npm version: 7.16.0\n* Browser name and version: Chrome 91.0.4472.124"
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add any other context or additional information about the security issue.
+      placeholder: Provide any additional details or context here.
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        **Please Note:**
+        - Do not post sensitive data such as personal information.
+        - If unsure about the data to post, please email directly to jgracia9988@gmail.com.

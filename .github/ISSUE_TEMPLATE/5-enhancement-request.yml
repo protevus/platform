@@ -1,0 +1,47 @@
+name: "🚀➕ Enhancement Request"
+description: "Suggest an enhancement for this project. Improve an existing feature."
+title: "[Enhancement]"
+labels: ["Type: Enhancement"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # **🚀 Enhancement Request**
+        Use this form to suggest improvements or enhancements for existing features.
+
+  - type: textarea
+    id: related-problem
+    attributes:
+      label: Is your enhancement request related to a problem? Please describe.
+      description: A clear and concise description of the problem (e.g., "I'm always frustrated when [...]").
+      placeholder: Describe the problem here.
+
+  - type: textarea
+    id: desired-solution
+    attributes:
+      label: Describe the solution you'd like
+      description: A clear and concise description of what you want to happen.
+      placeholder: Describe the desired enhancement here.
+
+  - type: textarea
+    id: alternatives-considered
+    attributes:
+      label: Describe alternatives you've considered
+      description: A clear and concise description of any alternative solutions or features you've considered.
+      placeholder: Describe any alternative approaches here.
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add any other context or additional information about the enhancement.
+      placeholder: Provide additional details here.
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        **Please Note:**
+        - Ensure you’ve searched open and closed issues before submitting.
+        - Review our Rules of Conduct in `.github/CODE_OF_CONDUCT.md`.
