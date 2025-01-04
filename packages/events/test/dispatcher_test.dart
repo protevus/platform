@@ -1,39 +1,42 @@
+import 'package:platform_container/container.dart';
 import 'package:platform_events/events.dart';
 import 'package:test/test.dart';
 
-class TestSubscriber {
-  final List<String> calls;
-
-  TestSubscriber(this.calls);
-
-  Map<String, dynamic> subscribe(EventDispatcher events) {
-    return {
-      'event.one': 'handleOne',
-      'event.two': 'handleTwo',
-    };
-  }
-
-  void handleOne(List<dynamic> data) => calls.add('one');
-  void handleTwo(List<dynamic> data) => calls.add('two');
-}
+import 'support/test_reflector.dart';
 
 void main() {
   group('EventDispatcher', () {
     late EventDispatcher dispatcher;
+    late Container container;
+    late TestReflector reflector;
 
     setUp(() {
-      dispatcher = EventDispatcher();
+      reflector = TestReflector();
+      reflector.registerType(TestSubscriber);
+      container = Container(reflector);
+      dispatcher = EventDispatcher(container);
     });
 
-    test('listen registers event listener', () {
+    test('listen registers event listener for string events', () {
       var called = false;
-      dispatcher.listen('test-event', (event, data) {
+      dispatcher.listen('UserRegistered', (event, data) {
         called = true;
-        expect(event, equals('test-event'));
+        expect(event, equals('UserRegistered'));
         expect(data, equals(['test-data']));
       });
 
-      dispatcher.dispatch('test-event', ['test-data']);
+      dispatcher.dispatch('UserRegistered', ['test-data']);
+      expect(called, isTrue);
+    });
+
+    test('listen registers event listener for type events', () {
+      var called = false;
+      dispatcher.listen(TestSubscriber, (event, data) {
+        called = true;
+        expect(data[0], isA<TestSubscriber>());
+      });
+
+      dispatcher.dispatch(TestSubscriber([]));
       expect(called, isTrue);
     });
 

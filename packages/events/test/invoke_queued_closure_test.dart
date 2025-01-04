@@ -33,7 +33,9 @@ void main() {
     test('failed invokes catch callbacks with error', () {
       var caughtError;
       final closure = (String name) => throw Exception('test error');
-      final catchCallback = (error) => caughtError = error;
+      final catchCallback = (List<dynamic> args, dynamic error) {
+        caughtError = error;
+      };
 
       final serializedClosure = SerializableClosure.create(
         closure,
@@ -60,8 +62,10 @@ void main() {
     test('failed invokes multiple catch callbacks', () {
       var catchCount = 0;
       final closure = (String name) => throw Exception('test error');
-      final catchCallback1 = (error) => catchCount++;
-      final catchCallback2 = (error) => catchCount++;
+      final catchCallback1 =
+          (List<dynamic> args, dynamic error) => catchCount++;
+      final catchCallback2 =
+          (List<dynamic> args, dynamic error) => catchCount++;
 
       final serializedClosure = SerializableClosure.create(
         closure,

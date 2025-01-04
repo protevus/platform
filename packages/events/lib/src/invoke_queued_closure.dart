@@ -1,32 +1,25 @@
-import 'package:platform_collections/collections.dart';
-import 'package:platform_container/container.dart';
-
-import 'reflection/reflection.dart';
-
-/// Class for invoking queued closures.
+/// A class for invoking queued closures.
 class InvokeQueuedClosure {
-  /// Handle the event.
-  void handle(Function closure, List<dynamic> arguments) {
-    Function.apply(closure, arguments);
+  /// Handle the queued closure.
+  dynamic handle(Function closure, List<dynamic> arguments) {
+    return Function.apply(closure, arguments);
   }
 
-  /// Handle a job failure.
+  /// Handle a failed closure by invoking catch callbacks.
   void failed(
     Function closure,
     List<dynamic> arguments,
     List<Function> catchCallbacks,
-    Object exception,
+    dynamic error,
   ) {
-    arguments.add(exception);
-
-    Collection(catchCallbacks).forEach((callback) {
-      Function.apply(callback, arguments);
-    });
+    for (var callback in catchCallbacks) {
+      Function.apply(callback, [arguments, error]);
+    }
   }
 
-  /// Get the display name for the queued job.
+  /// Get the display name for this job.
   String displayName() => 'Closure';
 
-  /// Get the job's unique identifier.
+  /// Get the job ID.
   String? jobId() => null;
 }

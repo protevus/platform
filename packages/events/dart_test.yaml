@@ -1,20 +1,24 @@
-# Test file patterns
-filename: "*_test.dart"
+# Enable mirrors for all tests
+dart_args:
+  - "--enable-mirrors"
 
-# VM configuration
+# Run tests on the VM
 platforms:
   - vm
 
-# Enable mirrors for reflection
-dart_args:
-  - "--enable-vm-service"
-  - "--enable-mirrors"
-
-# Test concurrency
-concurrency: 4
+# Test file patterns
+filename: "*_test.dart"
 
 # Test timeout
 timeout: 30s
 
 # Test reporter
 reporter: expanded
+
+# Test concurrency
+concurrency: 4
+
+# Coverage settings
+coverage:
+  include:
+    - lib/**/*.dart
