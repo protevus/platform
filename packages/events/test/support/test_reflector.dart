@@ -42,6 +42,7 @@ class TestReflector implements Reflector {
             false,
             returnType: TestReflectedType('void', [], Null),
             instance: instance,
+            implementation: (args) => instance.handleOne(args[0] as List),
           );
         case 'handleTwo':
           return TestReflectedFunction(
@@ -56,6 +57,7 @@ class TestReflector implements Reflector {
             false,
             returnType: TestReflectedType('void', [], Null),
             instance: instance,
+            implementation: (args) => instance.handleTwo(args[0] as List),
           );
       }
     }
@@ -276,32 +278,21 @@ class TestReflectedFunction implements ReflectedFunction {
   @override
   final ReflectedType? returnType;
   final Object? instance;
+  final Function(List<dynamic>)? implementation;
 
   TestReflectedFunction(this.name, this.typeParameters, this.annotations,
       this.parameters, this.isGetter, this.isSetter,
-      {this.returnType, this.instance});
+      {this.returnType, this.instance, this.implementation});
 
   @override
   ReflectedInstance invoke(Invocation invocation) {
-    if (instance is TestSubscriber) {
-      switch (name) {
-        case 'handleOne':
-          (instance as TestSubscriber)
-              .handleOne(invocation.positionalArguments[0] as List);
-          return TestReflectedInstance(
-            returnType!,
-            TestReflectedClass('void', [], [], [], [], Null),
-            0, // Use 0 as a dummy value since we can't use null
-          );
-        case 'handleTwo':
-          (instance as TestSubscriber)
-              .handleTwo(invocation.positionalArguments[0] as List);
-          return TestReflectedInstance(
-            returnType!,
-            TestReflectedClass('void', [], [], [], [], Null),
-            0, // Use 0 as a dummy value since we can't use null
-          );
-      }
+    if (implementation != null) {
+      implementation!(invocation.positionalArguments);
+      return TestReflectedInstance(
+        returnType!,
+        TestReflectedClass('void', [], [], [], [], Null),
+        0,
+      );
     }
     throw UnsupportedError('invoke not supported for this method');
   }

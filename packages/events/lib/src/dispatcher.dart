@@ -81,8 +81,10 @@ class EventDispatcher with Macroable implements EventDispatcherContract {
 
   @override
   void push(String event, [List payload = const []]) {
-    listen('${event}_pushed', (String event, List data) {
-      dispatch(event, payload);
+    final pushEvent = '${event}_pushed';
+    listen(pushEvent, (String event, List data) {
+      final originalEvent = event.substring(0, event.length - 7);
+      dispatch(originalEvent, payload);
     });
   }
 
@@ -111,7 +113,8 @@ class EventDispatcher with Macroable implements EventDispatcherContract {
 
   @override
   dynamic until(dynamic event, [dynamic payload = const []]) {
-    return dispatch(event, payload, true);
+    final result = dispatch(event, payload, true);
+    return result?.isNotEmpty == true ? result![0] : null;
   }
 
   @override
@@ -157,10 +160,10 @@ class EventDispatcher with Macroable implements EventDispatcherContract {
     final responses = <dynamic>[];
 
     for (final listener in _getListeners(event)) {
-      final response = Function.apply(listener, [event, payload]);
+      final response = listener(event, payload);
 
       if (halt && response != null) {
-        return null;
+        return [response];
       }
 
       if (response == false) {
@@ -172,7 +175,7 @@ class EventDispatcher with Macroable implements EventDispatcherContract {
       }
     }
 
-    return halt ? null : responses;
+    return responses;
   }
 
   /// Get all listeners for a given event name.
@@ -221,9 +224,9 @@ class EventDispatcher with Macroable implements EventDispatcherContract {
     if (listener is Function) {
       return (String event, List payload) {
         if (wildcard) {
-          return Function.apply(listener, [event, payload]);
+          return listener(event, payload);
         }
-        return Function.apply(listener, [event, payload]);
+        return listener(event, payload);
       };
     }
 
@@ -252,7 +255,7 @@ class EventDispatcher with Macroable implements EventDispatcherContract {
         return method
             .invoke(Invocation.method(Symbol(methodName), [event, payload]));
       }
-      return method.invoke(Invocation.method(Symbol(methodName), payload));
+      return method.invoke(Invocation.method(Symbol(methodName), [payload]));
     };
   }
 

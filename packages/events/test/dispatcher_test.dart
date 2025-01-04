@@ -31,12 +31,13 @@ void main() {
 
     test('listen registers event listener for type events', () {
       var called = false;
+      var subscriber = TestSubscriber([]);
       dispatcher.listen(TestSubscriber, (event, data) {
         called = true;
-        expect(data[0], isA<TestSubscriber>());
+        expect(data[0], equals(subscriber));
       });
 
-      dispatcher.dispatch(TestSubscriber([]));
+      dispatcher.dispatch(subscriber);
       expect(called, isTrue);
     });
 
