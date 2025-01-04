@@ -1,0 +1,54 @@
+name: "📚 Documentation or README.md issue report"
+description: "Report an issue in the project's documentation or README.md file."
+title: "[Docs]"
+labels: ["Documentation"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # **📚 Documentation Issue Report**
+        Use this form to report an issue in the documentation or README.md files.
+
+  - type: textarea
+    id: describe-bug
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the issue is.
+      placeholder: Provide a description of the issue here.
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Provide steps to reproduce the issue.
+      placeholder: "1. Step one\n2. Step two\n3. Step three"
+
+  - type: textarea
+    id: media-proof
+    attributes:
+      label: Media proof
+      description: If applicable, add screenshots or videos to help explain the problem.
+      placeholder: Provide a link to media or describe media attachments.
+
+  - type: textarea
+    id: desired-solution
+    attributes:
+      label: Describe the solution you'd like
+      description: A clear and concise description of the desired resolution or changes.
+      placeholder: Provide details of the solution.
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Add any other context or information about the problem.
+      placeholder: Provide additional details here.
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        **Please Note:**
+        - Ensure you’ve searched open and closed issues before submitting.
+        - Review our Rules of Conduct in `.github/CODE_OF_CONDUCT.md`.

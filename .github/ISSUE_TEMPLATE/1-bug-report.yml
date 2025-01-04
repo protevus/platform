@@ -2,7 +2,6 @@ name: "🐞 Bug Report"
 description: "Report an issue to help the project improve."
 title: "[Bug] "
 labels: ["Type: Bug"]
-assignees: ["Josee9988"]
 
 body:
   - type: markdown

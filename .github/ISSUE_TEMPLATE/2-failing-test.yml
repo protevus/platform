@@ -2,7 +2,6 @@ name: "💉 Failing Test"
 description: "Report failing tests or CI jobs."
 title: "[Test] "
 labels: ["Type: Test"]
-assignees: ["Josee9988"]
 
 body:
   - type: markdown
