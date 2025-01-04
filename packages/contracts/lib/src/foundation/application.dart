@@ -1,7 +1,7 @@
 import '../container/container.dart';
 
 /// Interface for the application.
-abstract class Application extends ContainerContract {
+abstract class ApplicationContract extends ContainerContract {
   /// Get the version number of the application.
   String version();
 
@@ -93,7 +93,7 @@ abstract class Application extends ContainerContract {
   bool shouldSkipMiddleware();
 
   /// Register a terminating callback with the application.
-  Application terminating(dynamic callback);
+  ApplicationContract terminating(dynamic callback);
 
   /// Terminate the application.
   void terminate();

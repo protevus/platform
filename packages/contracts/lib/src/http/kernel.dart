@@ -12,5 +12,5 @@ abstract class Kernel {
   void terminate(dynamic request, dynamic response);
 
   /// Get the application instance.
-  Application getApplication();
+  ApplicationContract getApplication();
 }
