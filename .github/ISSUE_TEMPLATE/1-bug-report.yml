@@ -24,7 +24,7 @@ body:
       label: Is this a regression?
       description: Did this behavior used to work in a previous version?
       options:
-        - Yes
+        - "Yes"
         - No
         - Not Sure
     validations:
