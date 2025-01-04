@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
-    - name: 🐞 Bug Report
-      url: https://github.com/protevus/platform/issues/new?template=1-bug-report.yml
-      about: "Hello"
+    - name: Send an e-mail to the developers
+      url: mailto:opensource.protevus.com
+      about: Please do NOT use this email to post issues or feature requests (only important business/personal contact).
