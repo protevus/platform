@@ -122,9 +122,6 @@ labels:
       color: AEB1C2
       description: Is Linux-specific
 
-    - name: 'Os: Test'
-      color: AEB1C2
-      description: Is Test-specific
 # # Collaborators: give specific users access to this repository.
 # # See https://developer.github.com/v3/repos/collaborators/#add-user-as-a-collaborator for available options
 # collaborators:
