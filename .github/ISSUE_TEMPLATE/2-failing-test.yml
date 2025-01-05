@@ -18,7 +18,30 @@ body:
       options:
         - Auth
         - Bus
+        - Cache
+        - Client
+        - Collections
+        - Conditionable
+        - Config
+        - Container
+        - Contracts
+        - Cookie
+        - Encryption
         - Events
+        - Filesystem
+        - Foundation
+        - Hashing
+        - Log
+        - Macroable
+        - Mirrors
+        - Pagination
+        - Pipeline
+        - Process
+        - Routing
+        - Support
+        - Testing
+        - Validation
+        - Websocket
     validations:
       required: true
 
@@ -35,6 +58,18 @@ body:
       label: Reason for failure/description
       description: Try to describe why the test is failing or what might be missing to make it pass.
       placeholder: Provide details about the failure.
+
+  - type: dropdown
+    id: is-regression
+    attributes:
+      label: Is this a regression?
+      description: Did this behavior used to work in a previous version?
+      options:
+        - "Yes"
+        - "No"
+        - Not Sure
+    validations:
+      required: true
 
   - type: textarea
     id: media-proof
