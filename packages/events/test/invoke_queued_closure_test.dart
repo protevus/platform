@@ -15,10 +15,10 @@ void main() {
 
     test('handle invokes closure with arguments', () {
       var called = false;
-      final closure = (String name) {
+      closure(String name) {
         called = true;
         return 'Hello $name';
-      };
+      }
 
       final serializedClosure = SerializableClosure.create(
         closure,
@@ -32,10 +32,10 @@ void main() {
 
     test('failed invokes catch callbacks with error', () {
       var caughtError;
-      final closure = (String name) => throw Exception('test error');
-      final catchCallback = (List<dynamic> args, dynamic error) {
+      closure(String name) => throw Exception('test error');
+      catchCallback(List<dynamic> args, dynamic error) {
         caughtError = error;
-      };
+      }
 
       final serializedClosure = SerializableClosure.create(
         closure,
@@ -61,11 +61,9 @@ void main() {
 
     test('failed invokes multiple catch callbacks', () {
       var catchCount = 0;
-      final closure = (String name) => throw Exception('test error');
-      final catchCallback1 =
-          (List<dynamic> args, dynamic error) => catchCount++;
-      final catchCallback2 =
-          (List<dynamic> args, dynamic error) => catchCount++;
+      closure(String name) => throw Exception('test error');
+      catchCallback1(List<dynamic> args, dynamic error) => catchCount++;
+      catchCallback2(List<dynamic> args, dynamic error) => catchCount++;
 
       final serializedClosure = SerializableClosure.create(
         closure,

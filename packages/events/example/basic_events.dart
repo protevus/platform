@@ -35,7 +35,6 @@ void main() {
 
 /// A basic reflector that doesn't need to do anything since we're only using string-based events
 class BasicReflector implements Reflector {
-  @override
   dynamic createInstance(Type type, [List<dynamic>? args]) => null;
 
   @override
@@ -55,16 +54,12 @@ class BasicReflector implements Reflector {
           Type type, String constructorName, String parameterName) =>
       [];
 
-  @override
   List<Type> getParameterTypes(Function function) => [];
 
-  @override
   Type? getReturnType(Function function) => null;
 
-  @override
   bool hasDefaultConstructor(Type type) => false;
 
-  @override
   bool isClass(Type type) => false;
 
   @override

@@ -2,10 +2,6 @@ import 'package:platform_container/container.dart';
 import 'package:platform_container/mirrors.dart';
 import 'package:platform_contracts/contracts.dart';
 import 'package:platform_macroable/platform_macroable.dart';
-import 'package:platform_support/platform_support.dart';
-
-import 'queued_listener.dart';
-import 'reflection/reflection.dart';
 
 /// The event dispatcher implementation.
 class EventDispatcher with Macroable implements EventDispatcherContract {

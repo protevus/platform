@@ -32,7 +32,6 @@ class TestReflector implements Reflector {
     return _types[name];
   }
 
-  @override
   dynamic createInstance(Type type, [List<dynamic>? args]) {
     // Return singleton instance if registered
     if (_instances.containsKey(type)) {
@@ -104,24 +103,20 @@ class TestReflector implements Reflector {
     return [];
   }
 
-  @override
   List<Type> getParameterTypes(Function function) {
     // Not used in tests
     return [];
   }
 
-  @override
   Type? getReturnType(Function function) {
     // Not used in tests
     return null;
   }
 
-  @override
   bool hasDefaultConstructor(Type type) {
     return _factories.containsKey(type) || _instances.containsKey(type);
   }
 
-  @override
   bool isClass(Type type) {
     return _factories.containsKey(type) || _instances.containsKey(type);
   }
@@ -289,7 +284,6 @@ class TestReflectedInstance implements ReflectedInstance {
     throw UnsupportedError('getField not supported in tests');
   }
 
-  @override
   dynamic invoke(String name,
       [List<dynamic>? positionalArguments,
       Map<Symbol, dynamic>? namedArguments]) {
@@ -379,9 +373,9 @@ class TestReflectedDeclaration implements ReflectedDeclaration {
 class TestReflectedTypeParameter implements ReflectedTypeParameter {
   @override
   final String name;
-  @override
+
   final List<ReflectedInstance> annotations;
-  @override
+
   final ReflectedType? bound;
 
   TestReflectedTypeParameter(this.name, this.annotations, this.bound);

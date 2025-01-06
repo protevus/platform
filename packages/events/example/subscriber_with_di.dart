@@ -61,7 +61,6 @@ class UserEventSubscriber {
 
 // Simple reflector implementation
 class SimpleReflector implements Reflector {
-  @override
   dynamic createInstance(Type type, [List<dynamic>? args]) {
     if (type == NotificationService) {
       return NotificationService();
@@ -118,16 +117,12 @@ class SimpleReflector implements Reflector {
           Type type, String constructorName, String parameterName) =>
       [];
 
-  @override
   List<Type> getParameterTypes(Function function) => [];
 
-  @override
   Type? getReturnType(Function function) => null;
 
-  @override
   bool hasDefaultConstructor(Type type) => true;
 
-  @override
   bool isClass(Type type) =>
       type == NotificationService ||
       type == ActivityLogger ||
@@ -290,7 +285,6 @@ class SimpleReflectedInstance implements ReflectedInstance {
     throw UnsupportedError('Not needed for this example');
   }
 
-  @override
   dynamic invoke(String name,
       [List<dynamic>? positionalArguments,
       Map<Symbol, dynamic>? namedArguments]) {
@@ -313,13 +307,13 @@ void main() async {
   // Register subscriber with dependencies injected from container
   container.registerFactory<UserEventSubscriber>((container) {
     return UserEventSubscriber(
-      container.make<NotificationService>()!,
-      container.make<ActivityLogger>()!,
+      container.make<NotificationService>(),
+      container.make<ActivityLogger>(),
     );
   });
 
   // Subscribe using container-resolved subscriber
-  final subscriber = container.make<UserEventSubscriber>()!;
+  final subscriber = container.make<UserEventSubscriber>();
   dispatcher.subscribe(subscriber);
 
   // Dispatch some events
@@ -344,7 +338,7 @@ void main() async {
   );
 
   // Create test subscriber with overridden dependencies
-  final testSubscriber = testContainer.make<UserEventSubscriber>()!;
+  final testSubscriber = testContainer.make<UserEventSubscriber>();
 
   // Create test dispatcher
   final testDispatcher = EventDispatcher(testContainer);

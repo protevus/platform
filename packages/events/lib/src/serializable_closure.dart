@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 /// A wrapper for serializable closures.
 ///
 /// Note: Unlike Laravel's SerializableClosure which can serialize any closure,

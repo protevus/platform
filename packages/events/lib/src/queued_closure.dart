@@ -1,9 +1,7 @@
 import 'package:platform_collections/collections.dart';
 import 'package:platform_contracts/contracts.dart';
-import 'package:platform_support/platform_support.dart';
 
 import 'queued_listener.dart';
-import 'invoke_queued_closure.dart';
 import 'serializable_closure.dart';
 
 /// A wrapper for closures that should be queued.

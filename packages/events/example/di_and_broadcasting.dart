@@ -12,16 +12,13 @@ class UserLoggedIn implements ShouldBroadcast {
   @override
   List<String> broadcastOn() => ['user-events', 'activity-log'];
 
-  @override
   String broadcastAs() => 'user.logged_in';
 
-  @override
   Map<String, dynamic> broadcastWith() => {
         'email': email,
         'timestamp': timestamp.toIso8601String(),
       };
 
-  @override
   bool broadcastWhen() {
     final hour = timestamp.hour;
     return hour >= 9 && hour <= 17;
@@ -47,7 +44,6 @@ class AuthenticationService {
 
 // Simple reflector implementation
 class SimpleReflector implements Reflector {
-  @override
   dynamic createInstance(Type type, [List<dynamic>? args]) {
     if (type == AuthenticationService) {
       return AuthenticationService(args![0] as EventDispatcherContract);
@@ -69,16 +65,12 @@ class SimpleReflector implements Reflector {
           Type type, String constructorName, String parameterName) =>
       [];
 
-  @override
   List<Type> getParameterTypes(Function function) => [];
 
-  @override
   Type? getReturnType(Function function) => null;
 
-  @override
   bool hasDefaultConstructor(Type type) => true;
 
-  @override
   bool isClass(Type type) => type == AuthenticationService;
 
   @override
@@ -193,7 +185,6 @@ class SimpleReflectedInstance implements ReflectedInstance {
     throw UnsupportedError('Not needed for this example');
   }
 
-  @override
   dynamic invoke(String name,
       [List<dynamic>? positionalArguments,
       Map<Symbol, dynamic>? namedArguments]) {
@@ -212,12 +203,12 @@ void main() async {
   // Register auth service factory
   container.registerFactory<AuthenticationService>((container) {
     return AuthenticationService(
-      container.make<EventDispatcherContract>()!,
+      container.make<EventDispatcherContract>(),
     );
   });
 
   // Get auth service from container
-  final auth = container.make<AuthenticationService>()!;
+  final auth = container.make<AuthenticationService>();
 
   // Register event listeners
   dispatcher.listen(UserLoggedIn, (event, data) {

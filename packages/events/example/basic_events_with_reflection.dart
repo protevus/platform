@@ -54,7 +54,6 @@ class ExampleReflectedTypeParameter implements ReflectedTypeParameter {
 
 // Simple reflector implementation
 class SimpleReflector implements Reflector {
-  @override
   dynamic createInstance(Type type, [List<dynamic>? args]) {
     if (type == SendShipmentNotification) {
       return SendShipmentNotification();
@@ -106,16 +105,12 @@ class SimpleReflector implements Reflector {
           Type type, String constructorName, String parameterName) =>
       [];
 
-  @override
   List<Type> getParameterTypes(Function function) => [];
 
-  @override
   Type? getReturnType(Function function) => null;
 
-  @override
   bool hasDefaultConstructor(Type type) => true;
 
-  @override
   bool isClass(Type type) =>
       type == SendShipmentNotification || type == OrderEventSubscriber;
 
@@ -222,7 +217,6 @@ class SimpleReflectedInstance implements ReflectedInstance {
     throw UnsupportedError('Not needed for this example');
   }
 
-  @override
   dynamic invoke(String name,
       [List<dynamic>? positionalArguments,
       Map<Symbol, dynamic>? namedArguments]) {
