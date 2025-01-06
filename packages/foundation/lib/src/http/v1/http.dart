@@ -3,7 +3,7 @@ library platform_foundation.http;
 
 import 'dart:async';
 import 'dart:io';
-export 'protevus_http.dart';
+export 'platform_http.dart';
 export 'http_request_context.dart';
 export 'http_response_context.dart';
 
