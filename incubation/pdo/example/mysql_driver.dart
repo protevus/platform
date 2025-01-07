@@ -1,9 +1,10 @@
-import '../lib/pdo.dart';
-import '../lib/src/pdo_base.dart';
-import '../lib/src/pdo_statement.dart';
-import '../lib/src/pdo_exception.dart';
-import '../lib/src/core/pdo_result.dart';
-import '../lib/src/core/pdo_column.dart';
+import 'package:pdo/pdo.dart';
+import 'package:pdo/src/pdo_base.dart';
+import 'package:pdo/src/pdo_statement.dart';
+import 'package:pdo/src/pdo_exception.dart';
+import 'package:pdo/src/core/pdo_result.dart';
+import 'package:pdo/src/core/pdo_column.dart';
+import 'package:pdo/src/test_helpers/test_utils.dart';
 
 /// Example implementation of a MySQL PDO driver.
 /// This is just a demonstration and not a complete implementation.
@@ -171,19 +172,13 @@ class PDOMySqlStatement implements PDOStatement {
   Future<bool> execute([List<dynamic>? parameters]) async {
     try {
       // Mock execution for testing
-      final columns = [
-        PDOColumn(name: 'id', position: 0, type: 'INTEGER'),
-        PDOColumn(name: 'name', position: 1, type: 'VARCHAR'),
-      ];
-
-      final testData = [
-        {'id': 1, 'name': 'John'},
-        {'id': 2, 'name': 'Jane'},
-      ];
+      final columns = createSampleColumns();
+      final testData = createSampleRows();
 
       _result = PDOResult(columns, columns.length, testData.length);
       _result!.setTestData(testData);
       _executed = true;
+      _rowCount = testData.length;
       return true;
     } catch (e) {
       throw PDOException(
@@ -277,6 +272,11 @@ class PDOMySqlStatement implements PDOStatement {
     dynamic driverOptions,
   }) {
     try {
+      // Execute first to ensure we have column metadata
+      if (!_executed) {
+        execute();
+      }
+
       final param = PDOParam(
         name: column is String ? column : null,
         position: column is int ? column - 1 : -1,
@@ -292,12 +292,8 @@ class PDOMySqlStatement implements PDOStatement {
           throw PDOException('Invalid column index');
         }
       } else if (param.name != null) {
-        // Column name validation would be done when result is available
-        if (_result != null) {
-          final meta = _result!.getColumnMeta(param.name);
-          if (meta == null) {
-            throw PDOException('Column not found: ${param.name}');
-          }
+        if (_result == null || _result!.getColumnMeta(param.name) == null) {
+          throw PDOException('Column not found: ${param.name}');
         }
       }
 
@@ -358,7 +354,15 @@ void main() async {
     // Set error mode to throw exceptions
     pdo.setAttribute(PDO.ATTR_ERRMODE, PDO.ERRMODE_EXCEPTION);
 
-    // Prepare and execute a statement
+    // Test invalid SQL to trigger error
+    try {
+      pdo.prepare('INVALID SQL !@#');
+      throw Exception('Should have thrown PDOException');
+    } on PDOException catch (e) {
+      print('Expected error: ${e.message}');
+    }
+
+    // Prepare and execute a valid statement
     final stmt = pdo.prepare('SELECT * FROM users WHERE id = ?');
     await stmt.execute([1]);
 

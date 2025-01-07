@@ -1,9 +1,9 @@
 import 'package:test/test.dart';
+import 'package:pdo/pdo.dart';
+import 'package:pdo/src/pdo_exception.dart';
+import 'package:pdo/src/pdo_statement.dart';
+import 'package:pdo/src/test_helpers/test_utils.dart';
 import '../example/mysql_driver.dart';
-import '../lib/pdo.dart';
-import '../lib/src/pdo_exception.dart';
-import '../lib/src/pdo_statement.dart';
-import 'helpers/test_utils.dart';
 
 void main() {
   group('PDOMySql', () {
@@ -89,23 +89,26 @@ void main() {
       await stmt.execute([1, 'John']);
 
       // Test different fetch modes
-      final assocRow = await stmt.fetch(PDO.FETCH_ASSOC);
+      stmt.setFetchMode(PDO.FETCH_ASSOC);
+      final assocRow = await stmt.fetch();
       expect(assocRow, isA<Map<String, dynamic>>());
       expect(assocRow?['id'], equals(testRows[0]['id']));
 
-      final numRow = await stmt.fetch(PDO.FETCH_NUM);
+      stmt.setFetchMode(PDO.FETCH_NUM);
+      final numRow = await stmt.fetch();
       expect(numRow, isA<List>());
       expect(numRow?.length, equals(testColumns.length));
 
-      final objRow = await stmt.fetch(PDO.FETCH_OBJ);
+      stmt.setFetchMode(PDO.FETCH_OBJ);
+      final objRow = await stmt.fetch();
       expect(objRow, isNotNull);
 
       // Test column metadata
       final meta = stmt.getColumnMeta(0);
       expect(meta, isNotNull);
-      expect(meta!['name'], equals(testColumns[0].name));
-      expect(meta['type'], equals(testColumns[0].type));
-      expect(meta['flags'], equals(testColumns[0].flags));
+      expect(meta!['name'], equals('id'));
+      expect(meta['type'], equals('INTEGER'));
+      expect(meta['flags'], contains('NOT_NULL'));
     });
 
     test('handles fetch modes', () async {
@@ -114,8 +117,10 @@ void main() {
       expect(() => stmt.setFetchMode(999), throwsA(isA<PDOException>()));
       expect(stmt.setFetchMode(PDO.FETCH_ASSOC), isTrue);
 
-      final rows = await stmt.fetchAll(PDO.FETCH_ASSOC);
-      expect(rows, isEmpty); // Since this is a mock implementation
+      final rows = await stmt.fetchAll();
+      expect(rows.length, equals(2)); // Should match sample data length
+      expect(rows[0]['id'], equals(1));
+      expect(rows[1]['name'], equals('Jane Smith'));
     });
 
     test('handles column binding', () {
@@ -160,15 +165,14 @@ void main() {
         'test_pass',
       );
 
-      try {
-        pdo.prepare('INVALID SQL !@#');
-        fail('Should throw PDOException');
-      } on PDOException catch (e) {
-        expect(e.message, isNotEmpty);
-        expect(e.sqlState, isNotNull);
-        expect(e.code, isNull);
-        expect(e.statement, isNotNull);
-      }
+      expect(
+        () => pdo.prepare('INVALID SQL !@#'),
+        throwsA(isA<PDOException>()
+            .having((e) => e.message, 'message', contains('Execute failed'))
+            .having((e) => e.sqlState, 'sqlState', equals('42000'))
+            .having((e) => e.code, 'code', isNull)
+            .having((e) => e.statement, 'statement', isNotNull)),
+      );
     });
   });
 }
