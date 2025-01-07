@@ -1,6 +1,6 @@
-/// Represents metadata about a column in a PDO result set.
+/// Represents metadata about a column in a DBO result set.
 class DBOColumn {
-  /// Creates a new PDO column metadata object.
+  /// Creates a new DBO column metadata object.
   ///
   /// [name] and [position] are required.
   /// Optional [length], [precision], [type], and [flags] provide additional metadata.

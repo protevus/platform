@@ -1,6 +1,6 @@
-/// Exception thrown when PDO encounters an error.
+/// Exception thrown when DBO encounters an error.
 class DBOException implements Exception {
-  /// Creates a new PDO exception.
+  /// Creates a new DBO exception.
   ///
   /// The [message] parameter is required and describes the error.
   /// Optional [sqlState], [code], [statement], and [errorInfo] can provide more details.

@@ -7,16 +7,16 @@ class Connection with DetectsLostConnections implements ConnectionInterface {
   static const defaultTimeout = const Duration(seconds: 300);
 
   ///
-  /// The active PDO connection.
+  /// The active DBO connection.
   ///
-  /// @var PDO
+  /// @var DBO
   ///
   PDOExecutionContext pdo;
 
   ///
-  /// The active PDO connection used for reads.
+  /// The active DBO connection used for reads.
   ///
-  /// @var PDO
+  /// @var DBO
   ///
   PDOExecutionContext? readPdo;
 
@@ -117,7 +117,7 @@ class Connection with DetectsLostConnections implements ConnectionInterface {
   ///
   /// Create a new database connection instance.
   ///
-  /// @param  \PDO     pdo
+  /// @param  \DBO     pdo
   /// @param  String   database
   /// @param  String   tablePrefix
   /// @param  array    config
@@ -292,10 +292,10 @@ class Connection with DetectsLostConnections implements ConnectionInterface {
   }
 
   ///
-  /// Get the PDO connection to use for a select query.
+  /// Get the DBO connection to use for a select query.
   ///
   /// @param  bool  $useReadPdo
-  /// @return \PDO
+  /// @return \DBO
   ///
   PDOExecutionContext getPdoForSelect([bool useReadPdo = true]) {
     return useReadPdo ? this.getReadPdo() : this.getPdo();
@@ -395,7 +395,7 @@ class Connection with DetectsLostConnections implements ConnectionInterface {
 
       // For update or delete statements, we want to get the number of rows affected
       // by the statement and return that back to the developer. We'll first need
-      // to execute the statement and then we'll use PDO to fetch the affected.
+      // to execute the statement and then we'll use DBO to fetch the affected.
       final _pdo = me.getPdo();
       final params = me.prepareBindings(bindings);
       final res = await _pdo.query(query, params, timeoutInSeconds);
@@ -406,7 +406,7 @@ class Connection with DetectsLostConnections implements ConnectionInterface {
   }
 
   ///
-  /// Run a raw, unprepared query against the PDO connection.
+  /// Run a raw, unprepared query against the DBO connection.
   ///
   /// @param  String  $query
   /// @return bool
@@ -628,7 +628,7 @@ class Connection with DetectsLostConnections implements ConnectionInterface {
           callback,
       int? timeoutInSeconds) async {
     // To execute the statement, we'll simply call the callback, which will actually
-    // run the SQL against the PDO connection. Then we can calculate the time it
+    // run the SQL against the DBO connection. Then we can calculate the time it
     // took to execute and log the query SQL, bindings and time in our memory.
     var result;
     //try {
@@ -680,7 +680,7 @@ class Connection with DetectsLostConnections implements ConnectionInterface {
   }
 
   ///
-  /// Disconnect from the underlying PDO connection.
+  /// Disconnect from the underlying DBO connection.
   ///
   /// @return void
   ///
@@ -712,7 +712,7 @@ class Connection with DetectsLostConnections implements ConnectionInterface {
   }
 
   ///
-  /// Reconnect to the database if a PDO connection is missing.
+  /// Reconnect to the database if a DBO connection is missing.
   ///
   /// @return void
   ///
@@ -839,18 +839,18 @@ class Connection with DetectsLostConnections implements ConnectionInterface {
   }
 
   ///
-  /// Get the current PDO connection.
+  /// Get the current DBO connection.
   ///
-  /// @return \PDO
+  /// @return \DBO
   ///
   PDOExecutionContext getPdo() {
     return this.pdo;
   }
 
   ///
-  /// Get the current PDO connection used for reading.
+  /// Get the current DBO connection used for reading.
   ///
-  /// @return \PDO
+  /// @return \DBO
   ///
   PDOExecutionContext getReadPdo() {
     if (this.transactions >= 1) {
@@ -861,15 +861,15 @@ class Connection with DetectsLostConnections implements ConnectionInterface {
   }
 
   ///
-  /// Set the PDO connection.
+  /// Set the DBO connection.
   ///
-  /// @param  \PDO|null  $pdo
+  /// @param  \DBO|null  $pdo
   /// @return $this
   ///
   dynamic setPdo(PDOExecutionContext pdo) {
     if (this.transactions >= 1) {
       //RuntimeException
-      throw Exception("Can't swap PDO instance while within transaction.");
+      throw Exception("Can't swap DBO instance while within transaction.");
     }
 
     this.pdo = pdo;
@@ -878,9 +878,9 @@ class Connection with DetectsLostConnections implements ConnectionInterface {
   }
 
   ///
-  /// Set the PDO connection used for reading.
+  /// Set the DBO connection used for reading.
   ///
-  /// @param  \PDO|null  $pdo
+  /// @param  \DBO|null  $pdo
   /// @return $this
   ///
   dynamic setReadPdo($pdo) {
@@ -926,12 +926,12 @@ class Connection with DetectsLostConnections implements ConnectionInterface {
   }
 
   ///
-  /// Get the PDO driver name.
+  /// Get the DBO driver name.
   ///
   /// @return string
   ///
   String getDriverName() {
-    //return this.pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
+    //return this.pdo->getAttribute(DBO::ATTR_DRIVER_NAME);
     return 'teste';
   }
 

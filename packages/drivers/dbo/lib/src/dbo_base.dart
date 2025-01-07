@@ -1,8 +1,8 @@
 import 'dbo_statement.dart';
 
-/// The main PDO class that provides database connection and management functionality.
+/// The main DBO class that provides database connection and management functionality.
 class DBO {
-  /// Creates a new PDO instance and connects to the database.
+  /// Creates a new DBO instance and connects to the database.
   ///
   /// The [dsn] parameter must be a valid Data Source Name string.
   /// Optional [username] and [password] can be provided for authentication.
@@ -90,15 +90,19 @@ class DBO {
   final Map<int, dynamic> _attributes = {};
 
   /// The DSN (Data Source Name) used to connect to the database
+  // ignore: unused_field
   final String _dsn;
 
   /// The username used to connect to the database
+  // ignore: unused_field
   final String? _username;
 
   /// The password used to connect to the database
+  // ignore: unused_field
   final String? _password;
 
   /// The driver options used when connecting
+  // ignore: unused_field
   final Map<int, dynamic>? _driverOptions;
 
   /// Initializes the database connection.

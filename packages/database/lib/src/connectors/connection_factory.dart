@@ -21,7 +21,7 @@ class ConnectionFactory {
   ConnectionFactory(this.container);
 
   ///
-  /// Establish a PDO connection based on the configuration.
+  /// Establish a DBO connection based on the configuration.
   ///
   /// @param  array   $config
   /// @param  string  $name
@@ -68,10 +68,10 @@ class ConnectionFactory {
   }
 
   ///
-  /// Create a new PDO instance for reading.
+  /// Create a new DBO instance for reading.
   ///
   /// @param  array  $config
-  /// @return \PDO
+  /// @return \DBO
   ///
   Future<PDOInterface> createReadPdo(Map<String, dynamic> config) async {
     var readConfig = getReadConfig(config);
@@ -188,7 +188,7 @@ class ConnectionFactory {
   ///  Create a new Connection instance.
   ///
   ///  @param  string   $driver
-  ///  @param  \PDO     $connection
+  ///  @param  \DBO     $connection
   ///  @param  string   $database
   ///  @param  string   $prefix
   ///  @param  array    $config

@@ -1,4 +1,4 @@
-/// Parameter type constants for PDO parameters
+/// Parameter type constants for DBO parameters
 class DBOParamType {
   /// Represents a NULL value
   static const int NULL = 0;

@@ -60,7 +60,7 @@ final manager = Manager();
 
 ## 2.1.1
 
-- small improvement and optimization in postgres PDO implementation
+- small improvement and optimization in postgres DBO implementation
 
 ## 2.1.2
 

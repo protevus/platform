@@ -92,7 +92,7 @@ abstract class ConnectionInterface {
       [List bindings = listVoid, int? timeoutInSeconds]);
 
   ///
-  /// Run a raw, unprepared query against the PDO connection.
+  /// Run a raw, unprepared query against the DBO connection.
   ///
   /// [query]  String
   /// @return bool

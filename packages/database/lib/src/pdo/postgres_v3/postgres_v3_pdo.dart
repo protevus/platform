@@ -14,12 +14,12 @@ class PostgresV3PDO extends PDOInterface {
 
   PDOConfig config;
 
-  /// Creates a PDO instance representing a connection to a database
+  /// Creates a DBO instance representing a connection to a database
   /// Example
   ///
   ///
   /// Example:  Map<String, dynamic> config = {'host': 'localhost','port':5432,'database':'teste'};
-  /// var pdo = new PDO(PDOConfig.fromMap(config));
+  /// var pdo = new DBO(PDOConfig.fromMap(config));
   /// await pdo.connect();
   ///
   PostgresV3PDO(this.config) {

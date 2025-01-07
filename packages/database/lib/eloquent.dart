@@ -36,7 +36,7 @@ export 'src/exceptions/invalid_argument_exception.dart';
 export 'src/exceptions/logic_exception.dart';
 export 'src/exceptions/query_exception.dart';
 
-//PDO
+//DBO
 
 export 'src/pdo/core/pdo_execution_context.dart';
 export 'src/pdo/core/pdo_result.dart';

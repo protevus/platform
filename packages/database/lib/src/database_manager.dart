@@ -53,7 +53,7 @@ class DatabaseManager implements ConnectionResolverInterface {
     var type = re[1];
     // If we haven't created this connection, we'll create it based on the config
     // provided in the application. Once we've created the connections we will
-    // set the "fetch mode" for PDO which determines the query return types.
+    // set the "fetch mode" for DBO which determines the query return types.
 
     if (!Utils.isset(this.connectionsProp[name])) {
       final connection = await this.makeConnection(name);
@@ -123,7 +123,7 @@ class DatabaseManager implements ConnectionResolverInterface {
   }
 
   ///
-  /// Refresh the PDO connections on a given connection.
+  /// Refresh the DBO connections on a given connection.
   ///
   /// @param  string  $name
   /// @return \Illuminate\Database\Connection
@@ -263,7 +263,7 @@ class DatabaseManager implements ConnectionResolverInterface {
   /// @return array
   ///
   List availableDrivers() {
-    //return array_intersect($this->supportedDrivers(), str_replace('dblib', 'sqlsrv', PDO::getAvailableDrivers()));
+    //return array_intersect($this->supportedDrivers(), str_replace('dblib', 'sqlsrv', DBO::getAvailableDrivers()));
     return supportedDrivers();
   }
 

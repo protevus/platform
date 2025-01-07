@@ -22,6 +22,7 @@ void main() {
     group('Drivers', () {
       // Run driver implementation tests
       group('DBOMySQL', mysql_test.main);
+      group('DBOMySqlStatement', mysql_test.main);
     });
   });
 }

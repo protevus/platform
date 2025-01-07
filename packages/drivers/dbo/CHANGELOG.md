@@ -10,8 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Initial development release.
 
 ### Added
-- Core PDO functionality ported from PHP to Dart
-- Base PDO class with standard database operations
+- Core DBO functionality ported from PHP to Dart
+- Base DBO class with standard database operations
 - PDOStatement interface for prepared statements
 - Support for multiple fetch modes:
   - FETCH_ASSOC
@@ -39,7 +39,7 @@ Initial development release.
 - Improved type safety using Dart's type system
 
 ### Known Issues
-- Some PHP PDO features not yet implemented:
+- Some PHP DBO features not yet implemented:
   - FETCH_CLASS mode
   - FETCH_INTO mode
   - FETCH_LAZY mode
@@ -47,8 +47,8 @@ Initial development release.
 
 ## Notes
 
-### PHP PDO Compatibility
-This implementation aims to provide a familiar interface for PHP developers while taking advantage of Dart's features. Some differences from PHP's PDO include:
+### PHP DBO Compatibility
+This implementation aims to provide a familiar interface for PHP developers while taking advantage of Dart's features. Some differences from PHP's DBO include:
 
 - Async/await usage instead of synchronous calls
 - Strong typing where appropriate
@@ -59,7 +59,7 @@ This implementation aims to provide a familiar interface for PHP developers whil
 ### Driver Implementation
 The initial release includes an example MySQL driver implementation. Additional drivers can be implemented by:
 
-1. Extending the PDO class
+1. Extending the DBO class
 2. Implementing the required methods
 3. Creating a corresponding statement class
 4. Adding comprehensive tests

@@ -6,7 +6,7 @@ import 'package:platform_dbo/src/core/dbo_result.dart';
 import 'package:platform_dbo/src/core/dbo_column.dart';
 import 'package:platform_dbo/src/test_helpers/test_utils.dart';
 
-/// Example implementation of a MySQL PDO driver.
+/// Example implementation of a MySQL DBO driver.
 /// This is just a demonstration and not a complete implementation.
 class DBOMySql implements DBO {
   String _host = 'localhost';

@@ -1,6 +1,6 @@
-# Contributing to PDO for Dart
+# Contributing to DBO for Dart
 
-First off, thank you for considering contributing to PDO for Dart! It's people like you that make this project better.
+First off, thank you for considering contributing to DBO for Dart! It's people like you that make this project better.
 
 ## Code of Conduct
 
@@ -49,13 +49,13 @@ Enhancement suggestions are tracked as GitHub issues. When creating an enhanceme
 lib/
   ├── pdo.dart              # Main library file
   └── src/
-      ├── core/             # Core PDO components
+      ├── core/             # Core DBO components
       │   ├── pdo_column.dart
       │   ├── pdo_param.dart
       │   └── pdo_result.dart
-      ├── pdo_base.dart     # Base PDO class
+      ├── pdo_base.dart     # Base DBO class
       ├── pdo_statement.dart # Statement interface
-      └── pdo_exception.dart # PDO exceptions
+      └── pdo_exception.dart # DBO exceptions
 
 test/
   ├── core/                 # Core component tests
@@ -106,7 +106,7 @@ We follow the official [Dart Style Guide](https://dart.dev/guides/language/effec
 
 When implementing a new database driver:
 
-1. Create a new class that extends `PDO`
+1. Create a new class that extends `DBO`
 2. Implement all required methods
 3. Create a corresponding statement class
 4. Add comprehensive tests
@@ -115,7 +115,7 @@ When implementing a new database driver:
 Example structure for a new driver:
 
 ```dart
-class PDOMySQL extends PDO {
+class PDOMySQL extends DBO {
   @override
   PDOStatement prepare(String statement, [List<dynamic>? driverOptions]) {
     // Implementation

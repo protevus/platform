@@ -4,7 +4,7 @@ import '../dbo_base.dart';
 import '../dbo_exception.dart';
 import 'dbo_column.dart';
 
-/// Represents a PDO result set that provides access to query results.
+/// Represents a DBO result set that provides access to query results.
 class DBOResult {
   /// The columns in the result set
   final List<DBOColumn> _columns;
@@ -27,7 +27,7 @@ class DBOResult {
   /// Test data for mocking results
   final List<Map<String, dynamic>> _testData = [];
 
-  /// Creates a new PDO result set.
+  /// Creates a new DBO result set.
   DBOResult(this._columns, this._columnCount, this._rowCount)
       : _fetchMode = DBO.FETCH_BOTH {
     _validateColumns();

@@ -1,6 +1,6 @@
 import 'dbo_param_type.dart';
 
-/// A class representing a parameter in a PDO statement.
+/// A class representing a parameter in a DBO statement.
 class DBOParam {
   /// The name of the parameter (for named parameters)
   final String? name;

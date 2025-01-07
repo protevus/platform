@@ -73,7 +73,7 @@ List<Map<String, dynamic>> createSampleRows() => [
       },
     ];
 
-/// A mock PDO driver for testing that doesn't require a real database connection.
+/// A mock DBO driver for testing that doesn't require a real database connection.
 class MockPDO implements DBO {
   final Map<int, dynamic> _attributes = {};
   bool _inTransaction = false;
@@ -132,7 +132,7 @@ class MockPDO implements DBO {
       "'${string.replaceAll("'", "\\'")}'";
 }
 
-/// A mock PDO statement for testing.
+/// A mock DBO statement for testing.
 class MockPDOStatement implements DBOStatement {
   MockPDOStatement(this._pdo, this._queryString);
   final MockPDO _pdo;

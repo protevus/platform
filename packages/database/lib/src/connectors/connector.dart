@@ -2,14 +2,14 @@ import '../../eloquent.dart';
 
 abstract class Connector with DetectsLostConnections {
   ///
-  /// The default PDO connection options.
+  /// The default DBO connection options.
   ///
   /// @var array
   ///
   Map<dynamic, dynamic> options = {};
 
   ///
-  /// Get the PDO options based on the configuration.
+  /// Get the DBO options based on the configuration.
   ///
   /// @param  array  $config
   /// @return array
@@ -25,12 +25,12 @@ abstract class Connector with DetectsLostConnections {
   }
 
   ///
-  /// Create a new PDO connection.
+  /// Create a new DBO connection.
   ///
   /// @param  string  $dsn
   /// @param  array   $config
   /// @param  array   $options
-  /// @return \PDO
+  /// @return \DBO
   ///
   dynamic createConnection(Map<String, dynamic> config);
 }

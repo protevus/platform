@@ -4,7 +4,7 @@ import 'package:platform_database/src/pdo/mysql_client/mysql_client_pdo.dart';
 
 class MySqlConnector extends Connector implements ConnectorInterface {
   ///
-  /// The default PDO connection options.
+  /// The default DBO connection options.
   ///
   /// @var array
   ///
@@ -14,7 +14,7 @@ class MySqlConnector extends Connector implements ConnectorInterface {
   /// Establish a database connection.
   ///
   /// [config] Map<String, dynamic>
-  /// @return PostgreSQLConnection \PDO
+  /// @return PostgreSQLConnection \DBO
   ///
   Future<PDOInterface> connect(Map<String, dynamic> config) async {
     //final dsn = getDsn(config);
@@ -62,7 +62,7 @@ class MySqlConnector extends Connector implements ConnectorInterface {
   String getDsn(Map<String, dynamic> config) {
     // First we will create the basic DSN setup as well as the port if it is in
     // in the configuration options. This will give us the basic DSN we will
-    // need to establish the PDO connections and return them back for use.
+    // need to establish the DBO connections and return them back for use.
 
     final host = config['host'] != null ? "host=${config['host']};" : '';
     var dsn = "mysql:${host}dbname=${config['database']}";
@@ -105,7 +105,7 @@ class MySqlConnector extends Connector implements ConnectorInterface {
   ///
   /// Set the modes for the connection.
   ///
-  /// @param  \PDO  $connection
+  /// @param  \DBO  $connection
   /// @param  array  $config
   /// @return void
   ///
@@ -141,12 +141,12 @@ class MySqlConnector extends Connector implements ConnectorInterface {
   }
 
   ///
-  /// Create a new PDO connection.
+  /// Create a new DBO connection.
   ///
   /// @param  string  $dsn
   /// @param  array   $config
   /// @param  array   $options
-  /// @return \PDO
+  /// @return \DBO
   /// Aqui que cria a conexão com o Banco de Dados de fato
   ///
   Future<PDOInterface> createConnection(Map<String, dynamic> config) async {

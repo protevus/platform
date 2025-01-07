@@ -5,7 +5,7 @@ import 'package:platform_database/src/pdo/postgres_v3/postgres_v3_pdo.dart';
 
 class PostgresConnector extends Connector implements ConnectorInterface {
   ///
-  /// The default PDO connection options.
+  /// The default DBO connection options.
   ///
   /// @var array
   ///
@@ -15,7 +15,7 @@ class PostgresConnector extends Connector implements ConnectorInterface {
   /// Establish a database connection.
   ///
   /// [config] Map<String, dynamic>
-  /// @return PostgreSQLConnection \PDO
+  /// @return PostgreSQLConnection \DBO
   ///
   Future<PDOInterface> connect(Map<String, dynamic> config) async {
     // First we'll create the basic DSN and connection instance connecting to the
@@ -75,7 +75,7 @@ class PostgresConnector extends Connector implements ConnectorInterface {
   String getDsn(Map<String, dynamic> config) {
     // First we will create the basic DSN setup as well as the port if it is in
     // in the configuration options. This will give us the basic DSN we will
-    // need to establish the PDO connections and return them back for use.
+    // need to establish the DBO connections and return them back for use.
 
     final host = config['host'] != null ? "host=${config['host']};" : '';
     var dsn = "pgsql:${host}dbname=${config['database']}";
@@ -147,12 +147,12 @@ class PostgresConnector extends Connector implements ConnectorInterface {
   }
 
   ///
-  /// Create a new PDO connection.
+  /// Create a new DBO connection.
   ///
   /// @param  string  $dsn
   /// @param  array   $config
   /// @param  array   $options
-  /// @return \PDO
+  /// @return \DBO
   /// Aqui que cria a conexão com o Banco de Dados de fato
   ///
   Future<PDOInterface> createConnection(Map<String, dynamic> config) async {

@@ -56,7 +56,7 @@ void main() {
     });
   });
 
-  group('PDOMySqlStatement', () {
+  group('DBOMySqlStatement', () {
     late DBOMySql pdo;
     late DBOStatement stmt;
 

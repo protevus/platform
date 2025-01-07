@@ -1,5 +1,5 @@
 name: platform_dbo
-description: A Dart implementation of PHP's PDO (PHP Data Objects) database abstraction layer.
+description: Dart Database Objects an implementation of PHP's PDO (PHP Data Objects) database abstraction layer.
 version: 0.1.0
 publish_to: none
 

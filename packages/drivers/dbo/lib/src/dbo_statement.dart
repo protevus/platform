@@ -7,10 +7,10 @@ import 'package:platform_dbo/src/dbo_exception.dart';
 
 /// Represents a prepared statement and, after the statement is executed, an associated result set.
 class DBOStatement {
-  /// Creates a new PDO statement.
+  /// Creates a new DBO statement.
   DBOStatement(this._dbo, this._queryString);
 
-  /// The PDO instance that created this statement
+  /// The DBO instance that created this statement
   final DBO _dbo;
 
   /// The original query string
@@ -47,7 +47,7 @@ class DBOStatement {
   ///
   /// [parameter] can be either a parameter number (1-based) or name.
   /// [value] is the value to bind.
-  /// [type] is one of the PDO.PARAM_* constants.
+  /// [type] is one of the DBO.PARAM_* constants.
   /// [length] is the maximum length for string parameters.
   /// [driverOptions] are additional driver-specific options.
   bool bindParam(
