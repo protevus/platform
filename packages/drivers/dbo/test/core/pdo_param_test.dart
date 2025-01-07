@@ -1,6 +1,5 @@
 import 'package:test/test.dart';
 import '../../lib/pdo.dart';
-import '../../lib/src/core/pdo_param.dart';
 
 void main() {
   group('PDOParam', () {

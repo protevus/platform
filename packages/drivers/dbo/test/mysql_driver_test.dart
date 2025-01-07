@@ -1,8 +1,8 @@
 import 'package:test/test.dart';
-import 'package:pdo/pdo.dart';
-import 'package:pdo/src/pdo_exception.dart';
-import 'package:pdo/src/pdo_statement.dart';
-import 'package:pdo/src/test_helpers/test_utils.dart';
+import 'package:platform_dbo/pdo.dart';
+import 'package:platform_dbo/src/pdo_exception.dart';
+import 'package:platform_dbo/src/pdo_statement.dart';
+import 'package:platform_dbo/src/test_helpers/test_utils.dart';
 import '../example/mysql_driver.dart';
 
 void main() {
@@ -88,20 +88,26 @@ void main() {
 
       await stmt.execute([1, 'John']);
 
-      // Test different fetch modes
+      // Test FETCH_ASSOC mode
       stmt.setFetchMode(PDO.FETCH_ASSOC);
       final assocRow = await stmt.fetch();
       expect(assocRow, isA<Map<String, dynamic>>());
       expect(assocRow?['id'], equals(testRows[0]['id']));
 
+      // Test FETCH_NUM mode
+      await stmt.execute(); // Reset for next fetch
       stmt.setFetchMode(PDO.FETCH_NUM);
       final numRow = await stmt.fetch();
       expect(numRow, isA<List>());
       expect(numRow?.length, equals(testColumns.length));
 
+      // Test FETCH_OBJ mode
+      await stmt.execute(); // Reset for next fetch
       stmt.setFetchMode(PDO.FETCH_OBJ);
       final objRow = await stmt.fetch();
       expect(objRow, isNotNull);
+      expect(objRow.toString(), contains('id: ${testRows[0]['id']}'));
+      expect(objRow.toString(), contains('name: ${testRows[0]['name']}'));
 
       // Test column metadata
       final meta = stmt.getColumnMeta(0);
@@ -117,6 +123,9 @@ void main() {
       expect(() => stmt.setFetchMode(999), throwsA(isA<PDOException>()));
       expect(stmt.setFetchMode(PDO.FETCH_ASSOC), isTrue);
 
+      // Reset cursor and fetch with default mode
+      await stmt.closeCursor();
+      await stmt.execute();
       final rows = await stmt.fetchAll();
       expect(rows.length, equals(2)); // Should match sample data length
       expect(rows[0]['id'], equals(1));

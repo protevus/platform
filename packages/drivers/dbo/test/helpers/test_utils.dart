@@ -1,4 +1,4 @@
-import 'package:pdo/pdo.dart';
+import 'package:platform_dbo/pdo.dart';
 
 /// Creates a mock result set for testing.
 PDOResult createMockResult({

@@ -1,7 +1,7 @@
-import 'package:pdo/pdo.dart';
+import 'package:platform_dbo/pdo.dart';
 import 'package:test/test.dart';
 
-import 'package:pdo/src/test_helpers/test_utils.dart';
+import 'package:platform_dbo/src/test_helpers/test_utils.dart';
 
 void main() {
   group('PDOResult', () {

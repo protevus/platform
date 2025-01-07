@@ -1,10 +1,10 @@
-import 'package:pdo/pdo.dart';
-import 'package:pdo/src/pdo_base.dart';
-import 'package:pdo/src/pdo_statement.dart';
-import 'package:pdo/src/pdo_exception.dart';
-import 'package:pdo/src/core/pdo_result.dart';
-import 'package:pdo/src/core/pdo_column.dart';
-import 'package:pdo/src/test_helpers/test_utils.dart';
+import 'package:platform_dbo/pdo.dart';
+import 'package:platform_dbo/src/pdo_base.dart';
+import 'package:platform_dbo/src/pdo_statement.dart';
+import 'package:platform_dbo/src/pdo_exception.dart';
+import 'package:platform_dbo/src/core/pdo_result.dart';
+import 'package:platform_dbo/src/core/pdo_column.dart';
+import 'package:platform_dbo/src/test_helpers/test_utils.dart';
 
 /// Example implementation of a MySQL PDO driver.
 /// This is just a demonstration and not a complete implementation.

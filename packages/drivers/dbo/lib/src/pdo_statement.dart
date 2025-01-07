@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:pdo/src/core/pdo_param.dart';
-import 'package:pdo/src/core/pdo_result.dart';
-import 'package:pdo/src/pdo_base.dart';
-import 'package:pdo/src/pdo_exception.dart';
+import 'package:platform_dbo/src/core/pdo_param.dart';
+import 'package:platform_dbo/src/core/pdo_result.dart';
+import 'package:platform_dbo/src/pdo_base.dart';
+import 'package:platform_dbo/src/pdo_exception.dart';
 
 /// Represents a prepared statement and, after the statement is executed, an associated result set.
 class PDOStatement {

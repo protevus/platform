@@ -1,5 +1,5 @@
-import 'package:pdo/src/core/pdo_column.dart';
-import 'package:pdo/src/core/pdo_result.dart';
+import 'package:platform_dbo/src/core/pdo_column.dart';
+import 'package:platform_dbo/src/core/pdo_result.dart';
 
 /// Creates a mock result set for testing.
 PDOResult createMockResult({

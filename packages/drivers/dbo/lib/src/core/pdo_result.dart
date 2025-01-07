@@ -3,7 +3,6 @@ import 'dart:async';
 import '../pdo_base.dart';
 import '../pdo_exception.dart';
 import 'pdo_column.dart';
-import 'pdo_param.dart';
 
 /// Represents a PDO result set that provides access to query results.
 class PDOResult {

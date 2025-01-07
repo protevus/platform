@@ -1,4 +1,4 @@
-import 'package:pdo/src/core/pdo_column.dart';
+import 'package:platform_dbo/src/core/pdo_column.dart';
 import 'package:test/test.dart';
 
 void main() {
