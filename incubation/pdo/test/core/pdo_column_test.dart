@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 void main() {
   group('PDOColumn', () {
     test('initializes with required values', () {
-      const column = PDOColumn(
+      final column = PDOColumn(
         name: 'id',
         position: 0,
       );
@@ -18,7 +18,7 @@ void main() {
     });
 
     test('initializes with all values', () {
-      const column = PDOColumn(
+      final column = PDOColumn(
         name: 'price',
         position: 1,
         length: 10,
@@ -36,7 +36,7 @@ void main() {
     });
 
     test('creates copy with modified values', () {
-      const original = PDOColumn(
+      final original = PDOColumn(
         name: 'old_name',
         position: 0,
         length: 100,
@@ -68,7 +68,7 @@ void main() {
     });
 
     test('provides string representation', () {
-      const column = PDOColumn(
+      final column = PDOColumn(
         name: 'email',
         position: 2,
         length: 255,
@@ -86,21 +86,21 @@ void main() {
     });
 
     test('implements value equality', () {
-      const col1 = PDOColumn(
+      final col1 = PDOColumn(
         name: 'id',
         position: 0,
         type: 'INTEGER',
         flags: ['PRIMARY_KEY'],
       );
 
-      const col2 = PDOColumn(
+      final col2 = PDOColumn(
         name: 'id',
         position: 0,
         type: 'INTEGER',
         flags: ['PRIMARY_KEY'],
       );
 
-      const col3 = PDOColumn(
+      final col3 = PDOColumn(
         name: 'id',
         position: 1, // Different position
         type: 'INTEGER',
@@ -116,13 +116,13 @@ void main() {
       expect(col1.hashCode, isNot(equals(col3.hashCode)));
 
       // Test with different flags order
-      const col4 = PDOColumn(
+      final col4 = PDOColumn(
         name: 'status',
         position: 0,
         flags: ['NOT_NULL', 'UNIQUE'],
       );
 
-      const col5 = PDOColumn(
+      final col5 = PDOColumn(
         name: 'status',
         position: 0,
         flags: ['UNIQUE', 'NOT_NULL'], // Different order
@@ -134,12 +134,12 @@ void main() {
     });
 
     test('handles null values in equality', () {
-      const col1 = PDOColumn(
+      final col1 = PDOColumn(
         name: 'id',
         position: 0,
       );
 
-      const col2 = PDOColumn(
+      final col2 = PDOColumn(
         name: 'id',
         position: 0,
         length: null,
@@ -155,13 +155,13 @@ void main() {
 
     test('validates required fields', () {
       expect(
-        () => const PDOColumn(name: '', position: 0),
+        () => PDOColumn(name: '', position: 0),
         throwsA(isA<AssertionError>()),
         reason: 'Name should not be empty',
       );
 
       expect(
-        () => const PDOColumn(name: 'id', position: -1),
+        () => PDOColumn(name: 'id', position: -1),
         throwsA(isA<AssertionError>()),
         reason: 'Position should not be negative',
       );

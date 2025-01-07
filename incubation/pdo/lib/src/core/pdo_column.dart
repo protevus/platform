@@ -4,14 +4,18 @@ class PDOColumn {
   ///
   /// [name] and [position] are required.
   /// Optional [length], [precision], [type], and [flags] provide additional metadata.
-  const PDOColumn({
+  PDOColumn({
     required this.name,
     required this.position,
     this.length,
     this.precision,
     this.type,
-    this.flags,
-  });
+    List<String>? flags,
+  }) : flags = flags?.toList()?..sort() {
+    // Validate required fields
+    assert(name.isNotEmpty, 'Name should not be empty');
+    assert(position >= 0, 'Position must be non-negative');
+  }
 
   /// The name of the column
   final String name;
@@ -88,8 +92,11 @@ class PDOColumn {
     if (a.length != b.length) {
       return false;
     }
-    for (var i = 0; i < a.length; i++) {
-      if (a[i] != b[i]) {
+    // Sort lists for comparison to ensure order doesn't matter
+    final sortedA = List<T>.from(a)..sort();
+    final sortedB = List<T>.from(b)..sort();
+    for (var i = 0; i < sortedA.length; i++) {
+      if (sortedA[i] != sortedB[i]) {
         return false;
       }
     }

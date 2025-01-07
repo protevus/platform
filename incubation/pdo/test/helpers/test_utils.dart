@@ -155,10 +155,13 @@ class MockPDOStatement implements PDOStatement {
   @override
   Future<bool> execute([List<dynamic>? parameters]) async {
     _executed = true;
-    _result = createMockResult(
+    final result = createMockResult(
       columns: createSampleColumns(),
       rowCount: createSampleRows().length,
     );
+    // Set the test data
+    result.setTestData(createSampleRows());
+    _result = result;
     return true;
   }
 
@@ -201,21 +204,29 @@ class MockPDOStatement implements PDOStatement {
     int? length,
     dynamic driverOptions,
   }) {
+    String paramKey;
+    int position;
+
+    if (parameter is String) {
+      paramKey = parameter;
+      position = _boundParams.length;
+    } else if (parameter is int) {
+      position = parameter - 1;
+      paramKey = position.toString();
+    } else {
+      throw PDOException('Invalid parameter identifier');
+    }
+
     final param = PDOParam(
       name: parameter is String ? parameter : null,
-      position: parameter is int ? parameter - 1 : -1,
+      position: position,
       value: value,
       type: type,
       length: length,
       driverOptions: driverOptions,
     );
 
-    if (param.name != null) {
-      _boundParams[param.name!] = param;
-    } else {
-      _boundParams[param.position.toString()] = param;
-    }
-
+    _boundParams[paramKey] = param;
     return true;
   }
 

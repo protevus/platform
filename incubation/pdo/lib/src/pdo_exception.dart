@@ -10,7 +10,16 @@ class PDOException implements Exception {
     this.code,
     this.statement,
     this.errorInfo,
-  });
+  }) {
+    // Validate required message
+    assert(message.isNotEmpty, 'Message should not be empty');
+
+    // Validate optional parameters if provided
+    assert(sqlState == null || sqlState!.isNotEmpty,
+        'SQLSTATE should not be empty if provided');
+    assert(statement == null || statement!.isNotEmpty,
+        'Statement should not be empty if provided');
+  }
 
   /// The SQLSTATE error code
   final String? sqlState;

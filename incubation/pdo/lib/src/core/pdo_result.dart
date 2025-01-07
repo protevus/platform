@@ -22,12 +22,16 @@ class PDOResult {
   /// Current fetch mode
   int _fetchMode;
 
-  /// The current row data
+  /// Current row data
   Map<String, dynamic>? _currentRow;
+
+  /// Sample data for testing - this would normally come from the database driver
+  final List<Map<String, dynamic>> _testData;
 
   /// Creates a new PDO result set.
   PDOResult(this._columns, this._columnCount, this._rowCount)
-      : _fetchMode = PDO.FETCH_BOTH {
+      : _fetchMode = PDO.FETCH_BOTH,
+        _testData = [] {
     _validateColumns();
   }
 
@@ -39,6 +43,12 @@ class PDOResult {
 
   /// Gets the current row number (0-based).
   int get position => _position;
+
+  /// Sets test data for the result set (used in testing)
+  void setTestData(List<Map<String, dynamic>> data) {
+    _testData.clear();
+    _testData.addAll(data);
+  }
 
   /// Validates column metadata and normalizes column names if needed.
   void _validateColumns() {
@@ -87,6 +97,9 @@ class PDOResult {
   /// Fetches all remaining rows from the result set.
   Future<List<dynamic>> fetchAll([int? fetchMode]) async {
     fetchMode ??= _fetchMode;
+
+    // Reset position to start
+    _position = -1;
 
     final List<dynamic> results = [];
     while (moveNext()) {
@@ -201,9 +214,15 @@ class PDOResult {
     }
 
     _position++;
-    // Fetch next row - this will be implemented by database drivers
-    // _currentRow = ...
-    return _currentRow != null;
+
+    // For testing, use test data if available
+    if (_testData.isNotEmpty && _position < _testData.length) {
+      _currentRow = Map<String, dynamic>.from(_testData[_position]);
+      return true;
+    }
+
+    // In real implementation, this would fetch from the database driver
+    return false;
   }
 
   /// Gets the current row.
