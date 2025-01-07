@@ -1,0 +1,368 @@
+import '../lib/pdo.dart';
+import '../lib/src/pdo_base.dart';
+import '../lib/src/pdo_statement.dart';
+import '../lib/src/pdo_exception.dart';
+import '../lib/src/core/pdo_result.dart';
+import '../lib/src/core/pdo_column.dart';
+
+/// Example implementation of a MySQL PDO driver.
+/// This is just a demonstration and not a complete implementation.
+class PDOMySql implements PDO {
+  String _host = 'localhost';
+  int _port = 3306;
+  String? _database;
+  Map<String, String> _options = {};
+  final Map<int, dynamic> _attributes = {};
+
+  /// The DSN (Data Source Name) used to connect to the database
+  final String _dsn;
+
+  /// The username used to connect to the database
+  final String? _username;
+
+  /// The password used to connect to the database
+  final String? _password;
+
+  /// The driver options used when connecting
+  final Map<int, dynamic>? _driverOptions;
+
+  PDOMySql(
+    this._dsn, [
+    this._username,
+    this._password,
+    this._driverOptions,
+  ]) {
+    _parseDsn(_dsn);
+    _initializeConnection();
+  }
+
+  void _parseDsn(String dsn) {
+    // Parse DSN string like: mysql:host=localhost;dbname=testdb;port=3306
+    if (!dsn.startsWith('mysql:')) {
+      throw PDOException('Invalid DSN format for MySQL');
+    }
+
+    final parts = dsn.substring(6).split(';');
+    for (final part in parts) {
+      final keyValue = part.split('=');
+      if (keyValue.length != 2) continue;
+
+      final key = keyValue[0].trim();
+      final value = keyValue[1].trim();
+
+      switch (key) {
+        case 'host':
+          _host = value;
+          break;
+        case 'port':
+          _port = int.tryParse(value) ?? 3306;
+          break;
+        case 'dbname':
+          _database = value;
+          break;
+        default:
+          _options[key] = value;
+      }
+    }
+  }
+
+  void _initializeConnection() {
+    // Set default attributes
+    _attributes[PDO.ATTR_CASE] = PDO.CASE_NATURAL;
+    _attributes[PDO.ATTR_ERRMODE] = PDO.ERRMODE_SILENT;
+    _attributes[PDO.ATTR_ORACLE_NULLS] = PDO.NULL_NATURAL;
+    _attributes[PDO.ATTR_STRINGIFY_FETCHES] = false;
+    _attributes[PDO.ATTR_EMULATE_PREPARES] = true;
+    _attributes[PDO.ATTR_DEFAULT_FETCH_MODE] = PDO.FETCH_BOTH;
+  }
+
+  @override
+  dynamic getAttribute(int attribute) {
+    return _attributes[attribute];
+  }
+
+  @override
+  bool setAttribute(int attribute, dynamic value) {
+    _attributes[attribute] = value;
+    return true;
+  }
+
+  @override
+  PDOStatement prepare(String statement, [List<dynamic>? driverOptions]) {
+    // Create MySQL-specific statement implementation
+    return PDOMySqlStatement(this, statement);
+  }
+
+  @override
+  bool beginTransaction() {
+    // Implement MySQL transaction start
+    return true;
+  }
+
+  @override
+  bool commit() {
+    // Implement MySQL transaction commit
+    return true;
+  }
+
+  @override
+  bool rollBack() {
+    // Implement MySQL transaction rollback
+    return true;
+  }
+
+  @override
+  bool inTransaction() {
+    // Implement transaction status check
+    return false;
+  }
+
+  @override
+  bool exec(String statement) {
+    // Implement direct execution
+    return true;
+  }
+
+  @override
+  String? lastInsertId([String? name]) {
+    // Implement last insert ID retrieval
+    return null;
+  }
+
+  @override
+  String quote(String string, [int parameterType = PDO.PARAM_STR]) {
+    // Implement MySQL-specific string quoting
+    return "'${string.replaceAll("'", "\\'")}'";
+  }
+}
+
+/// MySQL-specific statement implementation
+class PDOMySqlStatement implements PDOStatement {
+  final PDOMySql _pdo;
+  final String _queryString;
+  PDOResult? _result;
+  bool _executed = false;
+  int _rowCount = 0;
+  final Map<String, PDOParam> _boundParams = {};
+
+  PDOMySqlStatement(this._pdo, this._queryString);
+
+  @override
+  String get queryString => _queryString;
+
+  @override
+  int get rowCount => _rowCount;
+
+  @override
+  int get columnCount => _result?.columnCount ?? 0;
+
+  @override
+  Future<bool> execute([List<dynamic>? parameters]) async {
+    try {
+      // Here you would:
+      // 1. Connect to MySQL if not connected
+      // 2. Prepare the statement if not prepared
+      // 3. Bind parameters if provided
+      // 4. Execute the statement
+      // 5. Store result metadata
+      // For example:
+
+      // final conn = await MySqlConnection.connect(...);
+      // final prepared = await conn.prepare(_queryString);
+      // final result = await prepared.execute(parameters);
+      // _result = PDOResult(
+      //   result.fields.map((f) => PDOColumn(...)).toList(),
+      //   result.fields.length,
+      //   result.affectedRows,
+      // );
+
+      _executed = true;
+      return true;
+    } catch (e) {
+      throw PDOException(
+        'Execute failed: $e',
+        sqlState: '42000', // Example SQLSTATE code
+        statement: _queryString,
+      );
+    }
+  }
+
+  @override
+  Future<bool> closeCursor() async {
+    // Close MySQL statement and free resources
+    _result = null;
+    _executed = false;
+    return true;
+  }
+
+  @override
+  Future<dynamic> fetch([int? fetchMode]) async {
+    if (!_executed || _result == null) {
+      throw PDOException('Statement must be executed before fetching');
+    }
+    return _result!.fetch(fetchMode);
+  }
+
+  @override
+  Future<List<dynamic>> fetchAll([int? fetchMode]) async {
+    if (!_executed || _result == null) {
+      throw PDOException('Statement must be executed before fetching');
+    }
+    return _result!.fetchAll(fetchMode);
+  }
+
+  @override
+  bool bindParam(
+    dynamic parameter,
+    dynamic value, {
+    int type = PDO.PARAM_STR,
+    int? length,
+    dynamic driverOptions,
+  }) {
+    try {
+      final param = PDOParam(
+        name: parameter is String ? parameter : null,
+        position: parameter is int ? parameter - 1 : -1,
+        value: value,
+        type: type,
+        length: length,
+        driverOptions: driverOptions,
+      );
+
+      if (param.name != null) {
+        _boundParams[param.name!] = param;
+      } else {
+        _boundParams[param.position.toString()] = param;
+      }
+
+      return true;
+    } catch (e) {
+      throw PDOException('Error binding parameter: $e');
+    }
+  }
+
+  @override
+  bool bindValue(dynamic parameter, dynamic value, [int type = PDO.PARAM_STR]) {
+    return bindParam(parameter, value, type: type);
+  }
+
+  @override
+  Map<String, dynamic>? getColumnMeta(dynamic column) {
+    return _result?.getColumnMeta(column);
+  }
+
+  @override
+  bool setFetchMode(int mode) {
+    if (_result == null) {
+      throw PDOException(
+          'Statement must be executed before setting fetch mode');
+    }
+    _result!.setFetchMode(mode);
+    return true;
+  }
+
+  @override
+  bool bindColumn(
+    dynamic column,
+    dynamic value, {
+    int type = PDO.PARAM_STR,
+    int? length,
+    dynamic driverOptions,
+  }) {
+    try {
+      final param = PDOParam(
+        name: column is String ? column : null,
+        position: column is int ? column - 1 : -1,
+        value: value,
+        type: type,
+        length: length,
+        driverOptions: driverOptions,
+      );
+
+      // Validate column exists
+      if (param.position >= 0) {
+        if (_result == null || param.position >= _result!.columnCount) {
+          throw PDOException('Invalid column index');
+        }
+      } else if (param.name != null) {
+        // Column name validation would be done when result is available
+        if (_result != null) {
+          final meta = _result!.getColumnMeta(param.name);
+          if (meta == null) {
+            throw PDOException('Column not found: ${param.name}');
+          }
+        }
+      }
+
+      return true;
+    } catch (e) {
+      throw PDOException('Error binding column: $e');
+    }
+  }
+
+  @override
+  Future<dynamic> fetchColumn([int columnNumber = 0]) async {
+    if (!_executed || _result == null) {
+      throw PDOException('Statement must be executed before fetching');
+    }
+    return _result!.fetchColumn(columnNumber);
+  }
+
+  @override
+  Future<bool> nextRowset() async {
+    // For MySQL, this would move to the next result set if the query
+    // returned multiple result sets (e.g., from stored procedures)
+    throw PDOException('Multiple rowsets not supported');
+  }
+
+  @override
+  String debugDumpParams() {
+    final buffer = StringBuffer();
+
+    buffer.writeln('SQL: [$_queryString]');
+
+    if (_result != null) {
+      buffer.writeln('Params: ${_boundParams.length}');
+
+      _boundParams.forEach((key, param) {
+        buffer.writeln('Key: ${param.name ?? 'Position #${param.position}'}');
+        buffer.writeln('paramno=${param.position}');
+        buffer.writeln('name=[${param.name ?? ''}]');
+        buffer.writeln('value=${param.value}');
+        buffer.writeln('type=${param.type}');
+      });
+    }
+
+    return buffer.toString();
+  }
+}
+
+void main() async {
+  // Example usage of MySQL driver
+  try {
+    final pdo = PDOMySql(
+      'mysql:host=localhost;dbname=testdb;port=3306',
+      'username',
+      'password',
+    );
+
+    // Set error mode to throw exceptions
+    pdo.setAttribute(PDO.ATTR_ERRMODE, PDO.ERRMODE_EXCEPTION);
+
+    // Prepare and execute a statement
+    final stmt = pdo.prepare('SELECT * FROM users WHERE id = ?');
+    await stmt.execute([1]);
+
+    // Fetch results
+    final result = await stmt.fetchAll(PDO.FETCH_ASSOC);
+    print(result);
+
+    // Clean up
+    await stmt.closeCursor();
+  } on PDOException catch (e) {
+    print('Database error: ${e.message}');
+    if (e.sqlState != null) {
+      print('SQLSTATE: ${e.sqlState}');
+    }
+  }
+}
