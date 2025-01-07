@@ -1,10 +1,10 @@
 /// Represents metadata about a column in a PDO result set.
-class PDOColumn {
+class DBOColumn {
   /// Creates a new PDO column metadata object.
   ///
   /// [name] and [position] are required.
   /// Optional [length], [precision], [type], and [flags] provide additional metadata.
-  PDOColumn({
+  DBOColumn({
     required this.name,
     required this.position,
     this.length,
@@ -36,7 +36,7 @@ class PDOColumn {
   final List<String>? flags;
 
   /// Creates a copy of this column with optionally modified values.
-  PDOColumn copyWith({
+  DBOColumn copyWith({
     String? name,
     int? position,
     int? length,
@@ -44,7 +44,7 @@ class PDOColumn {
     String? type,
     List<String>? flags,
   }) =>
-      PDOColumn(
+      DBOColumn(
         name: name ?? this.name,
         position: position ?? this.position,
         length: length ?? this.length,
@@ -62,7 +62,7 @@ class PDOColumn {
     if (identical(this, other)) {
       return true;
     }
-    return other is PDOColumn &&
+    return other is DBOColumn &&
         other.name == name &&
         other.position == position &&
         other.length == length &&

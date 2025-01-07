@@ -1,17 +1,17 @@
 import 'dart:async';
 
-import 'package:platform_dbo/src/core/pdo_param.dart';
-import 'package:platform_dbo/src/core/pdo_result.dart';
-import 'package:platform_dbo/src/pdo_base.dart';
-import 'package:platform_dbo/src/pdo_exception.dart';
+import 'package:platform_dbo/src/core/dbo_param.dart';
+import 'package:platform_dbo/src/core/dbo_result.dart';
+import 'package:platform_dbo/src/dbo_base.dart';
+import 'package:platform_dbo/src/dbo_exception.dart';
 
 /// Represents a prepared statement and, after the statement is executed, an associated result set.
-class PDOStatement {
+class DBOStatement {
   /// Creates a new PDO statement.
-  PDOStatement(this._pdo, this._queryString);
+  DBOStatement(this._dbo, this._queryString);
 
   /// The PDO instance that created this statement
-  final PDO _pdo;
+  final DBO _dbo;
 
   /// The original query string
   final String _queryString;
@@ -26,13 +26,13 @@ class PDOStatement {
   final int _rowCount = 0;
 
   /// The current result set
-  PDOResult? _result;
+  DBOResult? _result;
 
   /// Bound parameters for the statement
-  final Map<String, PDOParam> _boundParams = {};
+  final Map<String, DBOParam> _boundParams = {};
 
   /// Bound columns for the result
-  final Map<String, PDOParam> _boundColumns = {};
+  final Map<String, DBOParam> _boundColumns = {};
 
   /// Gets the original query string.
   String get queryString => _queryString;
@@ -53,7 +53,7 @@ class PDOStatement {
   bool bindParam(
     dynamic parameter,
     dynamic value, {
-    int type = PDO.PARAM_STR,
+    int type = DBO.PARAM_STR,
     int? length,
     dynamic driverOptions,
   }) {
@@ -63,7 +63,7 @@ class PDOStatement {
         paramName = ':$paramName';
       }
 
-      final param = PDOParam(
+      final param = DBOParam(
         name: paramName,
         position: parameter is int ? parameter - 1 : -1,
         value: value,
@@ -74,10 +74,10 @@ class PDOStatement {
 
       // Validate parameter name/number
       if (param.name != null && param.name!.isEmpty) {
-        throw PDOException('Invalid parameter name');
+        throw DBOException('Invalid parameter name');
       }
       if (param.position < -1) {
-        throw PDOException('Invalid parameter index');
+        throw DBOException('Invalid parameter index');
       }
 
       // Store the parameter
@@ -89,25 +89,25 @@ class PDOStatement {
 
       return true;
     } catch (e) {
-      throw PDOException('Error binding parameter: $e');
+      throw DBOException('Error binding parameter: $e');
     }
   }
 
   /// Binds a value directly to a parameter.
   bool bindValue(dynamic parameter, dynamic value,
-          [int type = PDO.PARAM_STR]) =>
+          [int type = DBO.PARAM_STR]) =>
       bindParam(parameter, value, type: type);
 
   /// Binds a column to a variable.
   bool bindColumn(
     dynamic column,
     dynamic value, {
-    int type = PDO.PARAM_STR,
+    int type = DBO.PARAM_STR,
     int? length,
     dynamic driverOptions,
   }) {
     try {
-      final param = PDOParam(
+      final param = DBOParam(
         name: column is String ? column : null,
         position: column is int ? column - 1 : -1,
         value: value,
@@ -125,7 +125,7 @@ class PDOStatement {
 
       return true;
     } catch (e) {
-      throw PDOException('Error binding column: $e');
+      throw DBOException('Error binding column: $e');
     }
   }
 
@@ -143,7 +143,7 @@ class PDOStatement {
       // This will be implemented by database drivers
       throw UnimplementedError();
     } catch (e) {
-      throw PDOException(
+      throw DBOException(
         'Execute failed: $e',
         statement: _activeQueryString ?? _queryString,
       );
@@ -153,7 +153,7 @@ class PDOStatement {
   /// Fetches the next row from the result set.
   Future<dynamic> fetch([int? fetchMode]) async {
     if (!_executed) {
-      throw PDOException('Statement must be executed before fetching');
+      throw DBOException('Statement must be executed before fetching');
     }
 
     return _result?.fetch(fetchMode);
@@ -162,7 +162,7 @@ class PDOStatement {
   /// Fetches all rows from the result set.
   Future<List<dynamic>> fetchAll([int? fetchMode]) async {
     if (!_executed) {
-      throw PDOException('Statement must be executed before fetching');
+      throw DBOException('Statement must be executed before fetching');
     }
 
     return await _result?.fetchAll(fetchMode) ?? [];
@@ -171,7 +171,7 @@ class PDOStatement {
   /// Fetches a single column from the next row.
   Future<dynamic> fetchColumn([int columnNumber = 0]) async {
     if (!_executed) {
-      throw PDOException('Statement must be executed before fetching');
+      throw DBOException('Statement must be executed before fetching');
     }
 
     return _result?.fetchColumn(columnNumber);
@@ -180,7 +180,7 @@ class PDOStatement {
   /// Sets the default fetch mode for this statement.
   bool setFetchMode(int mode) {
     if (!_executed) {
-      throw PDOException(
+      throw DBOException(
           'Statement must be executed before setting fetch mode');
     }
 
@@ -191,7 +191,7 @@ class PDOStatement {
   /// Gets metadata about a column.
   Map<String, dynamic>? getColumnMeta(dynamic column) {
     if (!_executed) {
-      throw PDOException(
+      throw DBOException(
           'Statement must be executed before getting column metadata');
     }
 

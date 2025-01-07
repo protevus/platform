@@ -1,13 +1,13 @@
-import 'pdo_statement.dart';
+import 'dbo_statement.dart';
 
 /// The main PDO class that provides database connection and management functionality.
-class PDO {
+class DBO {
   /// Creates a new PDO instance and connects to the database.
   ///
   /// The [dsn] parameter must be a valid Data Source Name string.
   /// Optional [username] and [password] can be provided for authentication.
   /// Additional [driverOptions] can be specified as needed.
-  PDO(
+  DBO(
     this._dsn, [
     this._username,
     this._password,
@@ -151,7 +151,7 @@ class PDO {
   }
 
   /// Prepares a statement for execution.
-  PDOStatement prepare(String statement, [List<dynamic>? driverOptions]) {
+  DBOStatement prepare(String statement, [List<dynamic>? driverOptions]) {
     // Implementation will be provided by database drivers
     throw UnimplementedError();
   }

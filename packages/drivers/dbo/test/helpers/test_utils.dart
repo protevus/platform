@@ -1,15 +1,15 @@
-import 'package:platform_dbo/pdo.dart';
+import 'package:platform_dbo/dbo.dart';
 
 /// Creates a mock result set for testing.
-PDOResult createMockResult({
-  List<PDOColumn> columns = const [],
+DBOResult createMockResult({
+  List<DBOColumn> columns = const [],
   int rowCount = 0,
 }) {
-  return PDOResult(columns, columns.length, rowCount);
+  return DBOResult(columns, columns.length, rowCount);
 }
 
 /// Creates a mock column for testing.
-PDOColumn createMockColumn({
+DBOColumn createMockColumn({
   required String name,
   required int position,
   int? length,
@@ -17,7 +17,7 @@ PDOColumn createMockColumn({
   String? type,
   List<String>? flags,
 }) =>
-    PDOColumn(
+    DBOColumn(
       name: name,
       position: position,
       length: length,
@@ -27,7 +27,7 @@ PDOColumn createMockColumn({
     );
 
 /// Creates a sample set of columns for testing.
-List<PDOColumn> createSampleColumns() => [
+List<DBOColumn> createSampleColumns() => [
       createMockColumn(
         name: 'id',
         position: 0,
@@ -74,7 +74,7 @@ List<Map<String, dynamic>> createSampleRows() => [
     ];
 
 /// A mock PDO driver for testing that doesn't require a real database connection.
-class MockPDO implements PDO {
+class MockPDO implements DBO {
   final Map<int, dynamic> _attributes = {};
   bool _inTransaction = false;
 
@@ -118,7 +118,7 @@ class MockPDO implements PDO {
   bool inTransaction() => _inTransaction;
 
   @override
-  PDOStatement prepare(String statement, [List<dynamic>? driverOptions]) =>
+  DBOStatement prepare(String statement, [List<dynamic>? driverOptions]) =>
       MockPDOStatement(this, statement);
 
   @override
@@ -128,20 +128,20 @@ class MockPDO implements PDO {
   String? lastInsertId([String? name]) => '1';
 
   @override
-  String quote(String string, [int parameterType = PDO.PARAM_STR]) =>
+  String quote(String string, [int parameterType = DBO.PARAM_STR]) =>
       "'${string.replaceAll("'", "\\'")}'";
 }
 
 /// A mock PDO statement for testing.
-class MockPDOStatement implements PDOStatement {
+class MockPDOStatement implements DBOStatement {
   MockPDOStatement(this._pdo, this._queryString);
   final MockPDO _pdo;
   final String _queryString;
-  PDOResult? _result;
+  DBOResult? _result;
   bool _executed = false;
   final int _rowCount = 0;
-  final Map<String, PDOParam> _boundParams = {};
-  final Map<String, PDOParam> _boundColumns = {};
+  final Map<String, DBOParam> _boundParams = {};
+  final Map<String, DBOParam> _boundColumns = {};
 
   @override
   String get queryString => _queryString;
@@ -175,7 +175,7 @@ class MockPDOStatement implements PDOStatement {
   @override
   Future<dynamic> fetch([int? fetchMode]) async {
     if (!_executed || _result == null) {
-      throw PDOException('Statement must be executed before fetching');
+      throw DBOException('Statement must be executed before fetching');
     }
     return _result!.fetch(fetchMode);
   }
@@ -183,7 +183,7 @@ class MockPDOStatement implements PDOStatement {
   @override
   Future<List<dynamic>> fetchAll([int? fetchMode]) async {
     if (!_executed || _result == null) {
-      throw PDOException('Statement must be executed before fetching');
+      throw DBOException('Statement must be executed before fetching');
     }
     return _result!.fetchAll(fetchMode);
   }
@@ -191,7 +191,7 @@ class MockPDOStatement implements PDOStatement {
   @override
   Future<dynamic> fetchColumn([int columnNumber = 0]) async {
     if (!_executed || _result == null) {
-      throw PDOException('Statement must be executed before fetching');
+      throw DBOException('Statement must be executed before fetching');
     }
     return _result!.fetchColumn(columnNumber);
   }
@@ -200,7 +200,7 @@ class MockPDOStatement implements PDOStatement {
   bool bindParam(
     dynamic parameter,
     dynamic value, {
-    int type = PDO.PARAM_STR,
+    int type = DBO.PARAM_STR,
     int? length,
     dynamic driverOptions,
   }) {
@@ -214,10 +214,10 @@ class MockPDOStatement implements PDOStatement {
       position = parameter - 1;
       paramKey = position.toString();
     } else {
-      throw PDOException('Invalid parameter identifier');
+      throw DBOException('Invalid parameter identifier');
     }
 
-    final param = PDOParam(
+    final param = DBOParam(
       name: parameter is String ? parameter : null,
       position: position,
       value: value,
@@ -232,18 +232,18 @@ class MockPDOStatement implements PDOStatement {
 
   @override
   bool bindValue(dynamic parameter, dynamic value,
-          [int type = PDO.PARAM_STR]) =>
+          [int type = DBO.PARAM_STR]) =>
       bindParam(parameter, value, type: type);
 
   @override
   bool bindColumn(
     dynamic column,
     dynamic value, {
-    int type = PDO.PARAM_STR,
+    int type = DBO.PARAM_STR,
     int? length,
     dynamic driverOptions,
   }) {
-    final param = PDOParam(
+    final param = DBOParam(
       name: column is String ? column : null,
       position: column is int ? column - 1 : -1,
       value: value,
@@ -268,7 +268,7 @@ class MockPDOStatement implements PDOStatement {
   @override
   bool setFetchMode(int mode) {
     if (_result == null) {
-      throw PDOException(
+      throw DBOException(
           'Statement must be executed before setting fetch mode');
     }
     _result!.setFetchMode(mode);
@@ -277,7 +277,7 @@ class MockPDOStatement implements PDOStatement {
 
   @override
   Future<bool> nextRowset() async {
-    throw PDOException('Multiple rowsets not supported in mock implementation');
+    throw DBOException('Multiple rowsets not supported in mock implementation');
   }
 
   @override

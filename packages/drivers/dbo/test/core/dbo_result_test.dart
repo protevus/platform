@@ -1,12 +1,12 @@
-import 'package:platform_dbo/pdo.dart';
+import 'package:platform_dbo/dbo.dart';
 import 'package:test/test.dart';
 
 import 'package:platform_dbo/src/test_helpers/test_utils.dart';
 
 void main() {
-  group('PDOResult', () {
-    late PDOResult result;
-    late List<PDOColumn> columns;
+  group('DBOResult', () {
+    late DBOResult result;
+    late List<DBOColumn> columns;
     late List<Map<String, dynamic>> sampleData;
 
     setUp(() {
@@ -28,7 +28,7 @@ void main() {
     test('validates column positions', () {
       // Valid column positions
       expect(
-        () => PDOResult(columns, columns.length, sampleData.length),
+        () => DBOResult(columns, columns.length, sampleData.length),
         returnsNormally,
       );
 
@@ -37,24 +37,24 @@ void main() {
         createMockColumn(name: 'invalid', position: 999, type: 'INTEGER'),
       ];
       expect(
-        () => PDOResult(invalidColumns, invalidColumns.length, 0),
-        throwsA(isA<PDOException>()),
+        () => DBOResult(invalidColumns, invalidColumns.length, 0),
+        throwsA(isA<DBOException>()),
       );
     });
 
     test('handles fetch modes', () {
       // Valid fetch modes
-      expect(() => result.setFetchMode(PDO.FETCH_ASSOC), returnsNormally);
-      expect(() => result.setFetchMode(PDO.FETCH_NUM), returnsNormally);
-      expect(() => result.setFetchMode(PDO.FETCH_BOTH), returnsNormally);
-      expect(() => result.setFetchMode(PDO.FETCH_OBJ), returnsNormally);
-      expect(() => result.setFetchMode(PDO.FETCH_NAMED), returnsNormally);
-      expect(() => result.setFetchMode(PDO.FETCH_KEY_PAIR), returnsNormally);
+      expect(() => result.setFetchMode(DBO.FETCH_ASSOC), returnsNormally);
+      expect(() => result.setFetchMode(DBO.FETCH_NUM), returnsNormally);
+      expect(() => result.setFetchMode(DBO.FETCH_BOTH), returnsNormally);
+      expect(() => result.setFetchMode(DBO.FETCH_OBJ), returnsNormally);
+      expect(() => result.setFetchMode(DBO.FETCH_NAMED), returnsNormally);
+      expect(() => result.setFetchMode(DBO.FETCH_KEY_PAIR), returnsNormally);
 
       // Invalid fetch mode
       expect(
         () => result.setFetchMode(999),
-        throwsA(isA<PDOException>()),
+        throwsA(isA<DBOException>()),
       );
     });
 
@@ -80,13 +80,13 @@ void main() {
 
     test('fetches rows in different modes', () async {
       // Create a fresh result for each test to avoid position issues
-      PDOResult testResult;
+      DBOResult testResult;
 
       // FETCH_ASSOC
       testResult =
           createMockResult(columns: columns, rowCount: sampleData.length);
       testResult.setTestData(sampleData);
-      testResult.setFetchMode(PDO.FETCH_ASSOC);
+      testResult.setFetchMode(DBO.FETCH_ASSOC);
       final assoc = await testResult.fetch();
       expect(assoc, isA<Map<String, dynamic>>());
       expect(assoc?['id'], equals(sampleData[0]['id']));
@@ -96,7 +96,7 @@ void main() {
       testResult =
           createMockResult(columns: columns, rowCount: sampleData.length);
       testResult.setTestData(sampleData);
-      testResult.setFetchMode(PDO.FETCH_NUM);
+      testResult.setFetchMode(DBO.FETCH_NUM);
       final num = await testResult.fetch();
       expect(num, isA<List>());
       expect(num?.length, equals(columns.length));
@@ -105,7 +105,7 @@ void main() {
       testResult =
           createMockResult(columns: columns, rowCount: sampleData.length);
       testResult.setTestData(sampleData);
-      testResult.setFetchMode(PDO.FETCH_BOTH);
+      testResult.setFetchMode(DBO.FETCH_BOTH);
       final both = await testResult.fetch();
       expect(both, isA<Map>());
       expect(both?['id'], equals(sampleData[0]['id']));
@@ -115,7 +115,7 @@ void main() {
       testResult =
           createMockResult(columns: columns, rowCount: sampleData.length);
       testResult.setTestData(sampleData);
-      testResult.setFetchMode(PDO.FETCH_OBJ);
+      testResult.setFetchMode(DBO.FETCH_OBJ);
       final obj = await testResult.fetch();
       expect(obj, isNotNull);
 
@@ -123,7 +123,7 @@ void main() {
       testResult =
           createMockResult(columns: columns, rowCount: sampleData.length);
       testResult.setTestData(sampleData);
-      testResult.setFetchMode(PDO.FETCH_NAMED);
+      testResult.setFetchMode(DBO.FETCH_NAMED);
       final named = await testResult.fetch();
       expect(named, isA<Map>());
 
@@ -132,31 +132,31 @@ void main() {
         createMockColumn(name: 'id', position: 0, type: 'INTEGER'),
         createMockColumn(name: 'name', position: 1, type: 'VARCHAR'),
       ];
-      final keyPairResult = PDOResult(keyPairColumns, 2, 1);
+      final keyPairResult = DBOResult(keyPairColumns, 2, 1);
       keyPairResult.setTestData([
         {'id': 1, 'name': 'John'}
       ]);
-      keyPairResult.setFetchMode(PDO.FETCH_KEY_PAIR);
+      keyPairResult.setFetchMode(DBO.FETCH_KEY_PAIR);
       final keyPair = await keyPairResult.fetch();
       expect(keyPair, isA<Map>());
 
       // FETCH_KEY_PAIR with wrong number of columns should throw
-      result.setFetchMode(PDO.FETCH_KEY_PAIR);
+      result.setFetchMode(DBO.FETCH_KEY_PAIR);
       expect(
         () => result.fetch(),
-        throwsA(isA<PDOException>()),
+        throwsA(isA<DBOException>()),
       );
     });
 
     test('handles invalid fetch modes', () {
       expect(
         () => result.setFetchMode(999),
-        throwsA(isA<PDOException>()),
+        throwsA(isA<DBOException>()),
       );
     });
 
     test('fetches all rows', () async {
-      result.setFetchMode(PDO.FETCH_ASSOC);
+      result.setFetchMode(DBO.FETCH_ASSOC);
       final allRows = await result.fetchAll();
       expect(allRows, isA<List>());
       expect(allRows.length, equals(sampleData.length));
@@ -170,12 +170,12 @@ void main() {
     test('handles column access errors', () {
       expect(
         () => result.fetchColumn(-1),
-        throwsA(isA<PDOException>()),
+        throwsA(isA<DBOException>()),
       );
 
       expect(
         () => result.fetchColumn(999),
-        throwsA(isA<PDOException>()),
+        throwsA(isA<DBOException>()),
       );
     });
   });

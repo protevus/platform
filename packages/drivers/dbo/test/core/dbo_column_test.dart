@@ -1,10 +1,10 @@
-import 'package:platform_dbo/src/core/pdo_column.dart';
+import 'package:platform_dbo/src/core/dbo_column.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('PDOColumn', () {
+  group('DBOColumn', () {
     test('initializes with required values', () {
-      final column = PDOColumn(
+      final column = DBOColumn(
         name: 'id',
         position: 0,
       );
@@ -18,7 +18,7 @@ void main() {
     });
 
     test('initializes with all values', () {
-      final column = PDOColumn(
+      final column = DBOColumn(
         name: 'price',
         position: 1,
         length: 10,
@@ -36,7 +36,7 @@ void main() {
     });
 
     test('creates copy with modified values', () {
-      final original = PDOColumn(
+      final original = DBOColumn(
         name: 'old_name',
         position: 0,
         length: 100,
@@ -68,7 +68,7 @@ void main() {
     });
 
     test('provides string representation', () {
-      final column = PDOColumn(
+      final column = DBOColumn(
         name: 'email',
         position: 2,
         length: 255,
@@ -86,21 +86,21 @@ void main() {
     });
 
     test('implements value equality', () {
-      final col1 = PDOColumn(
+      final col1 = DBOColumn(
         name: 'id',
         position: 0,
         type: 'INTEGER',
         flags: ['PRIMARY_KEY'],
       );
 
-      final col2 = PDOColumn(
+      final col2 = DBOColumn(
         name: 'id',
         position: 0,
         type: 'INTEGER',
         flags: ['PRIMARY_KEY'],
       );
 
-      final col3 = PDOColumn(
+      final col3 = DBOColumn(
         name: 'id',
         position: 1, // Different position
         type: 'INTEGER',
@@ -116,13 +116,13 @@ void main() {
       expect(col1.hashCode, isNot(equals(col3.hashCode)));
 
       // Test with different flags order
-      final col4 = PDOColumn(
+      final col4 = DBOColumn(
         name: 'status',
         position: 0,
         flags: ['NOT_NULL', 'UNIQUE'],
       );
 
-      final col5 = PDOColumn(
+      final col5 = DBOColumn(
         name: 'status',
         position: 0,
         flags: ['UNIQUE', 'NOT_NULL'], // Different order
@@ -134,12 +134,12 @@ void main() {
     });
 
     test('handles null values in equality', () {
-      final col1 = PDOColumn(
+      final col1 = DBOColumn(
         name: 'id',
         position: 0,
       );
 
-      final col2 = PDOColumn(
+      final col2 = DBOColumn(
         name: 'id',
         position: 0,
         length: null,
@@ -155,13 +155,13 @@ void main() {
 
     test('validates required fields', () {
       expect(
-        () => PDOColumn(name: '', position: 0),
+        () => DBOColumn(name: '', position: 0),
         throwsA(isA<AssertionError>()),
         reason: 'Name should not be empty',
       );
 
       expect(
-        () => PDOColumn(name: 'id', position: -1),
+        () => DBOColumn(name: 'id', position: -1),
         throwsA(isA<AssertionError>()),
         reason: 'Position should not be negative',
       );

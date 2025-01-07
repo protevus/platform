@@ -1,47 +1,46 @@
 import 'package:test/test.dart';
-import 'package:platform_dbo/pdo.dart';
-import 'package:platform_dbo/src/pdo_exception.dart';
-import 'package:platform_dbo/src/pdo_statement.dart';
+import 'package:platform_dbo/dbo.dart';
 import 'package:platform_dbo/src/test_helpers/test_utils.dart';
+
 import '../example/mysql_driver.dart';
 
 void main() {
-  group('PDOMySql', () {
-    late PDOMySql pdo;
+  group('DBOMySql', () {
+    late DBOMySql pdo;
 
     setUp(() {
-      pdo = PDOMySql(
+      pdo = DBOMySql(
         'mysql:host=localhost;dbname=testdb;port=3306',
         'test_user',
         'test_pass',
       );
-      pdo.setAttribute(PDO.ATTR_DRIVER_NAME, 'mysql');
+      pdo.setAttribute(DBO.ATTR_DRIVER_NAME, 'mysql');
     });
 
     test('parses DSN correctly', () {
-      expect(() => PDOMySql('invalid_dsn'), throwsA(isA<PDOException>()));
+      expect(() => DBOMySql('invalid_dsn'), throwsA(isA<DBOException>()));
 
-      final pdo = PDOMySql(
+      final pdo = DBOMySql(
         'mysql:host=127.0.0.1;dbname=mydb;port=3307',
         'user',
         'pass',
       );
 
-      expect(pdo.getAttribute(PDO.ATTR_DRIVER_NAME), equals('mysql'));
+      expect(pdo.getAttribute(DBO.ATTR_DRIVER_NAME), equals('mysql'));
       expect(pdo.quote("O'Reilly"), equals("'O\\'Reilly'"));
     });
 
     test('handles attributes correctly', () {
-      pdo.setAttribute(PDO.ATTR_CASE, PDO.CASE_UPPER);
-      expect(pdo.getAttribute(PDO.ATTR_CASE), equals(PDO.CASE_UPPER));
+      pdo.setAttribute(DBO.ATTR_CASE, DBO.CASE_UPPER);
+      expect(pdo.getAttribute(DBO.ATTR_CASE), equals(DBO.CASE_UPPER));
 
-      pdo.setAttribute(PDO.ATTR_ERRMODE, PDO.ERRMODE_EXCEPTION);
-      expect(pdo.getAttribute(PDO.ATTR_ERRMODE), equals(PDO.ERRMODE_EXCEPTION));
+      pdo.setAttribute(DBO.ATTR_ERRMODE, DBO.ERRMODE_EXCEPTION);
+      expect(pdo.getAttribute(DBO.ATTR_ERRMODE), equals(DBO.ERRMODE_EXCEPTION));
     });
 
     test('prepares statements', () {
       final stmt = pdo.prepare('SELECT * FROM users WHERE id = ?');
-      expect(stmt, isA<PDOStatement>());
+      expect(stmt, isA<DBOStatement>());
       expect(stmt.queryString, equals('SELECT * FROM users WHERE id = ?'));
     });
 
@@ -58,11 +57,11 @@ void main() {
   });
 
   group('PDOMySqlStatement', () {
-    late PDOMySql pdo;
-    late PDOStatement stmt;
+    late DBOMySql pdo;
+    late DBOStatement stmt;
 
     setUp(() {
-      pdo = PDOMySql(
+      pdo = DBOMySql(
         'mysql:host=localhost;dbname=testdb',
         'test_user',
         'test_pass',
@@ -89,21 +88,21 @@ void main() {
       await stmt.execute([1, 'John']);
 
       // Test FETCH_ASSOC mode
-      stmt.setFetchMode(PDO.FETCH_ASSOC);
+      stmt.setFetchMode(DBO.FETCH_ASSOC);
       final assocRow = await stmt.fetch();
       expect(assocRow, isA<Map<String, dynamic>>());
       expect(assocRow?['id'], equals(testRows[0]['id']));
 
       // Test FETCH_NUM mode
       await stmt.execute(); // Reset for next fetch
-      stmt.setFetchMode(PDO.FETCH_NUM);
+      stmt.setFetchMode(DBO.FETCH_NUM);
       final numRow = await stmt.fetch();
       expect(numRow, isA<List>());
       expect(numRow?.length, equals(testColumns.length));
 
       // Test FETCH_OBJ mode
       await stmt.execute(); // Reset for next fetch
-      stmt.setFetchMode(PDO.FETCH_OBJ);
+      stmt.setFetchMode(DBO.FETCH_OBJ);
       final objRow = await stmt.fetch();
       expect(objRow, isNotNull);
       expect(objRow.toString(), contains('id: ${testRows[0]['id']}'));
@@ -120,8 +119,8 @@ void main() {
     test('handles fetch modes', () async {
       await stmt.execute();
 
-      expect(() => stmt.setFetchMode(999), throwsA(isA<PDOException>()));
-      expect(stmt.setFetchMode(PDO.FETCH_ASSOC), isTrue);
+      expect(() => stmt.setFetchMode(999), throwsA(isA<DBOException>()));
+      expect(stmt.setFetchMode(DBO.FETCH_ASSOC), isTrue);
 
       // Reset cursor and fetch with default mode
       await stmt.closeCursor();
@@ -135,11 +134,11 @@ void main() {
     test('handles column binding', () {
       expect(
         () => stmt.bindColumn(999, null),
-        throwsA(isA<PDOException>()),
+        throwsA(isA<DBOException>()),
       );
 
       expect(stmt.bindColumn('id', null), isTrue);
-      expect(stmt.bindColumn(1, null, type: PDO.PARAM_INT), isTrue);
+      expect(stmt.bindColumn(1, null, type: DBO.PARAM_INT), isTrue);
     });
 
     test('closes cursor', () async {
@@ -149,7 +148,7 @@ void main() {
       // After closing, fetching should throw
       expect(
         () => stmt.fetch(),
-        throwsA(isA<PDOException>()),
+        throwsA(isA<DBOException>()),
       );
     });
 
@@ -157,7 +156,7 @@ void main() {
       await stmt.execute();
       expect(
         () => stmt.nextRowset(),
-        throwsA(isA<PDOException>().having(
+        throwsA(isA<DBOException>().having(
           (e) => e.message,
           'message',
           contains('Multiple rowsets not supported'),
@@ -168,7 +167,7 @@ void main() {
 
   group('Error handling', () {
     test('throws PDOException with correct information', () {
-      final pdo = PDOMySql(
+      final pdo = DBOMySql(
         'mysql:host=localhost;dbname=testdb',
         'test_user',
         'test_pass',
@@ -176,7 +175,7 @@ void main() {
 
       expect(
         () => pdo.prepare('INVALID SQL !@#'),
-        throwsA(isA<PDOException>()
+        throwsA(isA<DBOException>()
             .having((e) => e.message, 'message', contains('Execute failed'))
             .having((e) => e.sqlState, 'sqlState', equals('42000'))
             .having((e) => e.code, 'code', isNull)

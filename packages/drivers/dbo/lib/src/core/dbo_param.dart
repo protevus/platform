@@ -1,7 +1,7 @@
-import 'pdo_param_type.dart';
+import 'dbo_param_type.dart';
 
 /// A class representing a parameter in a PDO statement.
-class PDOParam {
+class DBOParam {
   /// The name of the parameter (for named parameters)
   final String? name;
 
@@ -21,7 +21,7 @@ class PDOParam {
   final dynamic driverOptions;
 
   /// Creates a new PDOParam instance.
-  PDOParam({
+  DBOParam({
     this.name,
     required this.position,
     this.value,
@@ -37,7 +37,7 @@ class PDOParam {
     }
 
     switch (type) {
-      case PDOParamType.BOOL:
+      case DBOParamType.BOOL:
         if (value is bool) {
           return value;
         }
@@ -64,7 +64,7 @@ class PDOParam {
           return false;
         }
 
-      case PDOParamType.INT:
+      case DBOParamType.INT:
         if (value is int) {
           return value;
         }
@@ -78,7 +78,7 @@ class PDOParam {
           return value ? 1 : 0;
         }
 
-      case PDOParamType.STR:
+      case DBOParamType.STR:
         if (value is String) {
           return value;
         }
@@ -94,11 +94,11 @@ class PDOParam {
           return '';
         }
 
-      case PDOParamType.LOB:
+      case DBOParamType.LOB:
         // Pass through LOB data without conversion
         return value;
 
-      case PDOParamType.NULL:
+      case DBOParamType.NULL:
         return null;
 
       default:
@@ -118,7 +118,7 @@ class PDOParam {
   }
 
   /// Creates a copy of this parameter with optionally modified values.
-  PDOParam copyWith({
+  DBOParam copyWith({
     String? name,
     int? position,
     dynamic value,
@@ -126,7 +126,7 @@ class PDOParam {
     int? length,
     dynamic driverOptions,
   }) {
-    return PDOParam(
+    return DBOParam(
       name: name ?? this.name,
       position: position ?? this.position,
       value: value ?? this.value,
@@ -181,7 +181,7 @@ class PDOParam {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is PDOParam &&
+    return other is DBOParam &&
         other.name == name &&
         other.position == position &&
         other.value == value &&

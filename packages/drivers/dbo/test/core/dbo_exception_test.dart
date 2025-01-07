@@ -1,10 +1,10 @@
 import 'package:test/test.dart';
-import '../../lib/src/pdo_exception.dart';
+import '../../lib/src/dbo_exception.dart';
 
 void main() {
-  group('PDOException', () {
+  group('DBOException', () {
     test('initializes with message only', () {
-      final exception = PDOException('Database error');
+      final exception = DBOException('Database error');
 
       expect(exception.message, equals('Database error'));
       expect(exception.sqlState, isNull);
@@ -14,7 +14,7 @@ void main() {
     });
 
     test('initializes with all values', () {
-      final exception = PDOException(
+      final exception = DBOException(
         'Invalid SQL syntax',
         sqlState: '42000',
         code: 1064,
@@ -34,7 +34,7 @@ void main() {
     });
 
     test('provides formatted string representation', () {
-      final exception = PDOException(
+      final exception = DBOException(
         'Connection failed',
         sqlState: 'HY000',
         code: 2002,
@@ -50,17 +50,17 @@ void main() {
 
     test('handles partial information in string representation', () {
       // Only message
-      final e1 = PDOException('Error 1');
+      final e1 = DBOException('Error 1');
       expect(e1.toString(), equals('PDOException: Error 1'));
 
       // Message and SQLSTATE
-      final e2 = PDOException('Error 2', sqlState: '23000');
+      final e2 = DBOException('Error 2', sqlState: '23000');
       expect(e2.toString(), contains('PDOException: Error 2'));
       expect(e2.toString(), contains('SQLSTATE[23000]'));
       expect(e2.toString(), isNot(contains('Driver Error Code')));
 
       // Message and error info
-      final e3 = PDOException(
+      final e3 = DBOException(
         'Error 3',
         errorInfo: {'detail': 'Additional info'},
       );
@@ -71,21 +71,21 @@ void main() {
 
     test('handles common SQLSTATE codes', () {
       // Feature not supported
-      final e1 = PDOException(
+      final e1 = DBOException(
         'Feature not supported',
         sqlState: '0A000',
       );
       expect(e1.toString(), contains('SQLSTATE[0A000]'));
 
       // Syntax error
-      final e2 = PDOException(
+      final e2 = DBOException(
         'Syntax error',
         sqlState: '42000',
       );
       expect(e2.toString(), contains('SQLSTATE[42000]'));
 
       // Constraint violation
-      final e3 = PDOException(
+      final e3 = DBOException(
         'Duplicate key',
         sqlState: '23000',
       );
@@ -95,32 +95,32 @@ void main() {
     test('handles empty or invalid values', () {
       // Empty message
       expect(
-        () => PDOException(''),
+        () => DBOException(''),
         throwsA(isA<AssertionError>()),
         reason: 'Message should not be empty',
       );
 
       // Empty SQLSTATE
       expect(
-        () => PDOException('Error', sqlState: ''),
+        () => DBOException('Error', sqlState: ''),
         throwsA(isA<AssertionError>()),
         reason: 'SQLSTATE should not be empty if provided',
       );
 
       // Empty statement
       expect(
-        () => PDOException('Error', statement: ''),
+        () => DBOException('Error', statement: ''),
         throwsA(isA<AssertionError>()),
         reason: 'Statement should not be empty if provided',
       );
 
       // Empty error info
-      final e = PDOException('Error', errorInfo: {});
+      final e = DBOException('Error', errorInfo: {});
       expect(e.toString(), isNot(contains('Driver Error Info')));
     });
 
     test('preserves error information for rethrowing', () {
-      final original = PDOException(
+      final original = DBOException(
         'Original error',
         sqlState: '42S02',
         code: 1146,
@@ -130,7 +130,7 @@ void main() {
       try {
         throw original;
       } catch (e) {
-        final caught = e as PDOException;
+        final caught = e as DBOException;
         expect(caught.message, equals(original.message));
         expect(caught.sqlState, equals(original.sqlState));
         expect(caught.code, equals(original.code));

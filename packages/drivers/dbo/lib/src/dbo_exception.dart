@@ -1,10 +1,10 @@
 /// Exception thrown when PDO encounters an error.
-class PDOException implements Exception {
+class DBOException implements Exception {
   /// Creates a new PDO exception.
   ///
   /// The [message] parameter is required and describes the error.
   /// Optional [sqlState], [code], [statement], and [errorInfo] can provide more details.
-  PDOException(
+  DBOException(
     this.message, {
     this.sqlState,
     this.code,

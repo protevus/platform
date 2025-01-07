@@ -1,27 +1,27 @@
 import 'package:test/test.dart';
 
 // Core tests
-import 'core/pdo_column_test.dart' as column_test;
-import 'core/pdo_exception_test.dart' as exception_test;
-import 'core/pdo_param_test.dart' as param_test;
-import 'core/pdo_result_test.dart' as result_test;
+import 'core/dbo_column_test.dart' as column_test;
+import 'core/dbo_exception_test.dart' as exception_test;
+import 'core/dbo_param_test.dart' as param_test;
+import 'core/dbo_result_test.dart' as result_test;
 
 // Driver tests
 import 'mysql_driver_test.dart' as mysql_test;
 
 void main() {
-  group('PDO Tests', () {
+  group('DBO Tests', () {
     group('Core', () {
       // Run core component tests
-      group('PDOColumn', column_test.main);
-      group('PDOException', exception_test.main);
-      group('PDOParam', param_test.main);
-      group('PDOResult', result_test.main);
+      group('DBOColumn', column_test.main);
+      group('DBOException', exception_test.main);
+      group('DBOParam', param_test.main);
+      group('DBOResult', result_test.main);
     });
 
     group('Drivers', () {
       // Run driver implementation tests
-      group('MySQL', mysql_test.main);
+      group('DBOMySQL', mysql_test.main);
     });
   });
 }

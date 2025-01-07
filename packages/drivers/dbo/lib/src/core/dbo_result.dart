@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import '../pdo_base.dart';
-import '../pdo_exception.dart';
-import 'pdo_column.dart';
+import '../dbo_base.dart';
+import '../dbo_exception.dart';
+import 'dbo_column.dart';
 
 /// Represents a PDO result set that provides access to query results.
-class PDOResult {
+class DBOResult {
   /// The columns in the result set
-  final List<PDOColumn> _columns;
+  final List<DBOColumn> _columns;
 
   /// The number of columns in the result set
   final int _columnCount;
@@ -28,8 +28,8 @@ class PDOResult {
   final List<Map<String, dynamic>> _testData = [];
 
   /// Creates a new PDO result set.
-  PDOResult(this._columns, this._columnCount, this._rowCount)
-      : _fetchMode = PDO.FETCH_BOTH {
+  DBOResult(this._columns, this._columnCount, this._rowCount)
+      : _fetchMode = DBO.FETCH_BOTH {
     _validateColumns();
   }
 
@@ -55,7 +55,7 @@ class PDOResult {
     // Validate column indices
     for (var i = 0; i < _columns.length; i++) {
       if (_columns[i].position != i) {
-        throw PDOException('Invalid column position for ${_columns[i].name}');
+        throw DBOException('Invalid column position for ${_columns[i].name}');
       }
     }
   }
@@ -63,16 +63,16 @@ class PDOResult {
   /// Sets the fetch mode for subsequent fetches.
   void setFetchMode(int mode) {
     if (![
-      PDO.FETCH_ASSOC,
-      PDO.FETCH_NUM,
-      PDO.FETCH_BOTH,
-      PDO.FETCH_OBJ,
-      PDO.FETCH_BOUND,
-      PDO.FETCH_COLUMN,
-      PDO.FETCH_KEY_PAIR,
-      PDO.FETCH_NAMED,
+      DBO.FETCH_ASSOC,
+      DBO.FETCH_NUM,
+      DBO.FETCH_BOTH,
+      DBO.FETCH_OBJ,
+      DBO.FETCH_BOUND,
+      DBO.FETCH_COLUMN,
+      DBO.FETCH_KEY_PAIR,
+      DBO.FETCH_NAMED,
     ].contains(mode)) {
-      throw PDOException('Invalid fetch mode');
+      throw DBOException('Invalid fetch mode');
     }
     _fetchMode = mode;
   }
@@ -111,7 +111,7 @@ class PDOResult {
   /// Fetches a single column from the next row.
   Future<dynamic> fetchColumn([int columnNumber = 0]) async {
     if (columnNumber < 0 || columnNumber >= _columnCount) {
-      throw PDOException('Invalid column index');
+      throw DBOException('Invalid column index');
     }
 
     if (!moveNext() || _currentRow == null) {
@@ -119,7 +119,7 @@ class PDOResult {
     }
 
     if (columnNumber >= _columns.length) {
-      throw PDOException('Column index out of bounds');
+      throw DBOException('Column index out of bounds');
     }
 
     final column = _columns[columnNumber];
@@ -129,13 +129,13 @@ class PDOResult {
   /// Formats a row according to the fetch mode.
   dynamic _formatRow(Map<String, dynamic> row, int fetchMode) {
     switch (fetchMode) {
-      case PDO.FETCH_ASSOC:
+      case DBO.FETCH_ASSOC:
         return Map<String, dynamic>.from(row);
 
-      case PDO.FETCH_NUM:
+      case DBO.FETCH_NUM:
         return row.values.toList();
 
-      case PDO.FETCH_BOTH:
+      case DBO.FETCH_BOTH:
         final both = Map<String, dynamic>.from(row);
         var index = 0;
         row.forEach((_, value) {
@@ -144,10 +144,10 @@ class PDOResult {
         });
         return both;
 
-      case PDO.FETCH_OBJ:
+      case DBO.FETCH_OBJ:
         return _RowObject(row);
 
-      case PDO.FETCH_NAMED:
+      case DBO.FETCH_NAMED:
         final named = <String, dynamic>{};
         row.forEach((key, value) {
           if (named.containsKey(key)) {
@@ -161,20 +161,20 @@ class PDOResult {
         });
         return named;
 
-      case PDO.FETCH_KEY_PAIR:
+      case DBO.FETCH_KEY_PAIR:
         if (_columnCount != 2) {
-          throw PDOException(
+          throw DBOException(
               'FETCH_KEY_PAIR requires exactly 2 columns in result set');
         }
         if (_columns.isEmpty) {
-          throw PDOException('No columns available');
+          throw DBOException('No columns available');
         }
         final key = row[_columns[0].name];
         final value = _columns.length > 1 ? row[_columns[1].name] : null;
         return {key: value};
 
       default:
-        throw PDOException('Invalid fetch mode');
+        throw DBOException('Invalid fetch mode');
     }
   }
 
@@ -187,7 +187,7 @@ class PDOResult {
     } else if (column is String) {
       colIndex = _columns.indexWhere((col) => col.name == column);
     } else {
-      throw PDOException('Invalid column identifier');
+      throw DBOException('Invalid column identifier');
     }
 
     if (colIndex < 0 || colIndex >= _columnCount) {

@@ -5,9 +5,9 @@
 /// a single, consistent API.
 library pdo;
 
-export 'src/pdo_base.dart' show PDO;
-export 'src/pdo_statement.dart' show PDOStatement;
-export 'src/pdo_exception.dart' show PDOException;
-export 'src/core/pdo_result.dart' show PDOResult;
-export 'src/core/pdo_param.dart' show PDOParam;
-export 'src/core/pdo_column.dart' show PDOColumn;
+export 'src/dbo_base.dart' show DBO;
+export 'src/dbo_statement.dart' show DBOStatement;
+export 'src/dbo_exception.dart' show DBOException;
+export 'src/core/dbo_result.dart' show DBOResult;
+export 'src/core/dbo_param.dart' show DBOParam;
+export 'src/core/dbo_column.dart' show DBOColumn;

@@ -1,16 +1,16 @@
-import 'package:platform_dbo/src/core/pdo_column.dart';
-import 'package:platform_dbo/src/core/pdo_result.dart';
+import 'package:platform_dbo/src/core/dbo_column.dart';
+import 'package:platform_dbo/src/core/dbo_result.dart';
 
 /// Creates a mock result set for testing.
-PDOResult createMockResult({
-  List<PDOColumn> columns = const [],
+DBOResult createMockResult({
+  List<DBOColumn> columns = const [],
   int rowCount = 0,
 }) {
-  return PDOResult(columns, columns.length, rowCount);
+  return DBOResult(columns, columns.length, rowCount);
 }
 
 /// Creates a mock column for testing.
-PDOColumn createMockColumn({
+DBOColumn createMockColumn({
   required String name,
   required int position,
   int? length,
@@ -18,7 +18,7 @@ PDOColumn createMockColumn({
   String? type,
   List<String>? flags,
 }) =>
-    PDOColumn(
+    DBOColumn(
       name: name,
       position: position,
       length: length,
@@ -28,7 +28,7 @@ PDOColumn createMockColumn({
     );
 
 /// Creates a sample set of columns for testing.
-List<PDOColumn> createSampleColumns() => [
+List<DBOColumn> createSampleColumns() => [
       createMockColumn(
         name: 'id',
         position: 0,

@@ -1,14 +1,14 @@
 import 'package:test/test.dart';
-import '../../lib/pdo.dart';
+import '../../lib/dbo.dart';
 
 void main() {
-  group('PDOParam', () {
+  group('DBOParam', () {
     test('initializes with correct values', () {
-      final param = PDOParam(
+      final param = DBOParam(
         name: ':username',
         position: 0,
         value: 'john',
-        type: PDO.PARAM_STR,
+        type: DBO.PARAM_STR,
         length: 255,
         driverOptions: {'encoding': 'utf8'},
       );
@@ -16,30 +16,30 @@ void main() {
       expect(param.name, equals(':username'));
       expect(param.position, equals(0));
       expect(param.value, equals('john'));
-      expect(param.type, equals(PDO.PARAM_STR));
+      expect(param.type, equals(DBO.PARAM_STR));
       expect(param.length, equals(255));
       expect(param.driverOptions, equals({'encoding': 'utf8'}));
     });
 
     test('handles null values', () {
-      final param = PDOParam(
+      final param = DBOParam(
         position: -1,
-        type: PDO.PARAM_NULL,
+        type: DBO.PARAM_NULL,
       );
 
       expect(param.name, isNull);
       expect(param.position, equals(-1));
       expect(param.value, isNull);
-      expect(param.type, equals(PDO.PARAM_NULL));
+      expect(param.type, equals(DBO.PARAM_NULL));
       expect(param.length, isNull);
       expect(param.driverOptions, isNull);
     });
 
     group('type conversion', () {
       test('converts to boolean', () {
-        final param = PDOParam(
+        final param = DBOParam(
           position: 0,
-          type: PDO.PARAM_BOOL,
+          type: DBO.PARAM_BOOL,
         );
 
         // Test various values that should convert to true
@@ -70,9 +70,9 @@ void main() {
       });
 
       test('converts to integer', () {
-        final param = PDOParam(
+        final param = DBOParam(
           position: 0,
-          type: PDO.PARAM_INT,
+          type: DBO.PARAM_INT,
         );
 
         // Test integer values
@@ -97,9 +97,9 @@ void main() {
       });
 
       test('converts to string', () {
-        final param = PDOParam(
+        final param = DBOParam(
           position: 0,
-          type: PDO.PARAM_STR,
+          type: DBO.PARAM_STR,
         );
 
         // Test string value
@@ -120,9 +120,9 @@ void main() {
       });
 
       test('handles LOB data', () {
-        final param = PDOParam(
+        final param = DBOParam(
           position: 0,
-          type: PDO.PARAM_LOB,
+          type: DBO.PARAM_LOB,
           value: [1, 2, 3], // Simulating binary data
         );
 
@@ -132,11 +132,11 @@ void main() {
     });
 
     test('creates copy with modified values', () {
-      final original = PDOParam(
+      final original = DBOParam(
         name: ':param',
         position: 0,
         value: 'original',
-        type: PDO.PARAM_STR,
+        type: DBO.PARAM_STR,
         length: 100,
         driverOptions: {'key': 'value'},
       );
@@ -144,13 +144,13 @@ void main() {
       final copy = original.copyWith(
         name: ':new_param',
         value: 'modified',
-        type: PDO.PARAM_INT,
+        type: DBO.PARAM_INT,
       );
 
       // Changed values
       expect(copy.name, equals(':new_param'));
       expect(copy.value, equals('modified'));
-      expect(copy.type, equals(PDO.PARAM_INT));
+      expect(copy.type, equals(DBO.PARAM_INT));
 
       // Unchanged values
       expect(copy.position, equals(original.position));
@@ -160,15 +160,15 @@ void main() {
       // Original should remain unchanged
       expect(original.name, equals(':param'));
       expect(original.value, equals('original'));
-      expect(original.type, equals(PDO.PARAM_STR));
+      expect(original.type, equals(DBO.PARAM_STR));
     });
 
     test('provides string representation', () {
-      final param = PDOParam(
+      final param = DBOParam(
         name: ':test',
         position: 1,
         value: 'value',
-        type: PDO.PARAM_STR,
+        type: DBO.PARAM_STR,
         length: 50,
       );
 

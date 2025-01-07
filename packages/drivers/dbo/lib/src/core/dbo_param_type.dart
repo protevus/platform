@@ -1,5 +1,5 @@
 /// Parameter type constants for PDO parameters
-class PDOParamType {
+class DBOParamType {
   /// Represents a NULL value
   static const int NULL = 0;
 
