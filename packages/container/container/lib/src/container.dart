@@ -8,7 +8,6 @@
  */
 
 import 'dart:async';
-import 'dart:mirrors' show AbstractClassInstantiationError;
 import 'attributes.dart';
 import 'exception.dart';
 import 'reflector.dart';

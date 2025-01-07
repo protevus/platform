@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:platform_eloquent/eloquent.dart';
+import 'package:platform_database/eloquent.dart';
 //import 'package:eloquent/src/query/join_clause.dart';
 
 void main(List<String> args) async {
