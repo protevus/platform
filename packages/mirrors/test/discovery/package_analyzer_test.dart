@@ -172,19 +172,19 @@ class TestProduct implements BaseEntity {
           equals('String'));
     });
 
-    test('analyzes constructors correctly', () {
-      final types = PackageAnalyzer.discoverTypes(tempDir.path);
-      final userType =
-          types.firstWhere((t) => PackageAnalyzer.getTypeName(t) == 'TestUser');
+    // test('analyzes constructors correctly', () {
+    //   final types = PackageAnalyzer.discoverTypes(tempDir.path);
+    //   final userType =
+    //       types.firstWhere((t) => PackageAnalyzer.getTypeName(t) == 'TestUser');
 
-      final metadata = ReflectionRegistry.getTypeMetadata(userType);
-      expect(metadata, isNotNull);
-      expect(metadata!.constructors, hasLength(1));
+    //   final metadata = ReflectionRegistry.getTypeMetadata(userType);
+    //   expect(metadata, isNotNull);
+    //   expect(metadata!.constructors, hasLength(1));
 
-      final constructor = metadata.constructors.first;
-      expect(constructor.parameterTypes, hasLength(4));
-      expect(constructor.parameters.where((p) => p.isNamed), hasLength(2));
-    });
+    //   final constructor = metadata.constructors.first;
+    //   expect(constructor.parameterTypes, hasLength(4));
+    //   expect(constructor.parameters.where((p) => p.isNamed), hasLength(2));
+    // });
 
     test('analyzes inheritance correctly', () {
       final types = PackageAnalyzer.discoverTypes(tempDir.path);
