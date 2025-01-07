@@ -16,6 +16,7 @@ void main() {
         columns: columns,
         rowCount: sampleData.length,
       );
+      result.setTestData(sampleData);
     });
 
     test('initializes with correct metadata', () {
@@ -122,6 +123,9 @@ void main() {
         createMockColumn(name: 'name', position: 1, type: 'VARCHAR'),
       ];
       final keyPairResult = PDOResult(keyPairColumns, 2, 1);
+      keyPairResult.setTestData([
+        {'id': 1, 'name': 'John'}
+      ]);
       keyPairResult.setFetchMode(PDO.FETCH_KEY_PAIR);
       final keyPair = await keyPairResult.fetch();
       expect(keyPair, isA<Map>());

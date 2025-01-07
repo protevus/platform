@@ -25,13 +25,12 @@ class PDOResult {
   /// Current row data
   Map<String, dynamic>? _currentRow;
 
-  /// Sample data for testing - this would normally come from the database driver
-  final List<Map<String, dynamic>> _testData;
+  /// Test data for mocking results
+  final List<Map<String, dynamic>> _testData = [];
 
   /// Creates a new PDO result set.
   PDOResult(this._columns, this._columnCount, this._rowCount)
-      : _fetchMode = PDO.FETCH_BOTH,
-        _testData = [] {
+      : _fetchMode = PDO.FETCH_BOTH {
     _validateColumns();
   }
 
