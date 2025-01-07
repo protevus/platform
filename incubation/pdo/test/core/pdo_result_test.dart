@@ -79,42 +79,52 @@ void main() {
     });
 
     test('fetches rows in different modes', () async {
-      // Create a test result with sample data
-      final testData = {
-        'id': 1,
-        'name': 'John',
-        'email': 'john@example.com',
-        'created_at': '2023-01-01',
-      };
+      // Create a fresh result for each test to avoid position issues
+      PDOResult testResult;
 
       // FETCH_ASSOC
-      result.setFetchMode(PDO.FETCH_ASSOC);
-      final assoc = await result.fetch();
+      testResult =
+          createMockResult(columns: columns, rowCount: sampleData.length);
+      testResult.setTestData(sampleData);
+      testResult.setFetchMode(PDO.FETCH_ASSOC);
+      final assoc = await testResult.fetch();
       expect(assoc, isA<Map<String, dynamic>>());
       expect(assoc?['id'], equals(sampleData[0]['id']));
       expect(assoc?['name'], equals(sampleData[0]['name']));
 
       // FETCH_NUM
-      result.setFetchMode(PDO.FETCH_NUM);
-      final num = await result.fetch();
+      testResult =
+          createMockResult(columns: columns, rowCount: sampleData.length);
+      testResult.setTestData(sampleData);
+      testResult.setFetchMode(PDO.FETCH_NUM);
+      final num = await testResult.fetch();
       expect(num, isA<List>());
       expect(num?.length, equals(columns.length));
 
       // FETCH_BOTH
-      result.setFetchMode(PDO.FETCH_BOTH);
-      final both = await result.fetch();
+      testResult =
+          createMockResult(columns: columns, rowCount: sampleData.length);
+      testResult.setTestData(sampleData);
+      testResult.setFetchMode(PDO.FETCH_BOTH);
+      final both = await testResult.fetch();
       expect(both, isA<Map>());
       expect(both?['id'], equals(sampleData[0]['id']));
       expect(both?['0'], equals(sampleData[0]['id']));
 
       // FETCH_OBJ
-      result.setFetchMode(PDO.FETCH_OBJ);
-      final obj = await result.fetch();
+      testResult =
+          createMockResult(columns: columns, rowCount: sampleData.length);
+      testResult.setTestData(sampleData);
+      testResult.setFetchMode(PDO.FETCH_OBJ);
+      final obj = await testResult.fetch();
       expect(obj, isNotNull);
 
       // FETCH_NAMED
-      result.setFetchMode(PDO.FETCH_NAMED);
-      final named = await result.fetch();
+      testResult =
+          createMockResult(columns: columns, rowCount: sampleData.length);
+      testResult.setTestData(sampleData);
+      testResult.setFetchMode(PDO.FETCH_NAMED);
+      final named = await testResult.fetch();
       expect(named, isA<Map>());
 
       // FETCH_KEY_PAIR (requires exactly 2 columns)
