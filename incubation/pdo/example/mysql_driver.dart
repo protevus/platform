@@ -74,6 +74,7 @@ class PDOMySql implements PDO {
     _attributes[PDO.ATTR_STRINGIFY_FETCHES] = false;
     _attributes[PDO.ATTR_EMULATE_PREPARES] = true;
     _attributes[PDO.ATTR_DEFAULT_FETCH_MODE] = PDO.FETCH_BOTH;
+    _attributes[PDO.ATTR_DRIVER_NAME] = 'mysql';
   }
 
   @override
@@ -93,28 +94,38 @@ class PDOMySql implements PDO {
     return PDOMySqlStatement(this, statement);
   }
 
+  bool _inTransaction = false;
+
   @override
   bool beginTransaction() {
-    // Implement MySQL transaction start
+    if (_inTransaction) {
+      return false;
+    }
+    _inTransaction = true;
     return true;
   }
 
   @override
   bool commit() {
-    // Implement MySQL transaction commit
+    if (!_inTransaction) {
+      return false;
+    }
+    _inTransaction = false;
     return true;
   }
 
   @override
   bool rollBack() {
-    // Implement MySQL transaction rollback
+    if (!_inTransaction) {
+      return false;
+    }
+    _inTransaction = false;
     return true;
   }
 
   @override
   bool inTransaction() {
-    // Implement transaction status check
-    return false;
+    return _inTransaction;
   }
 
   @override
@@ -159,29 +170,25 @@ class PDOMySqlStatement implements PDOStatement {
   @override
   Future<bool> execute([List<dynamic>? parameters]) async {
     try {
-      // Here you would:
-      // 1. Connect to MySQL if not connected
-      // 2. Prepare the statement if not prepared
-      // 3. Bind parameters if provided
-      // 4. Execute the statement
-      // 5. Store result metadata
-      // For example:
+      // Mock execution for testing
+      final columns = [
+        PDOColumn(name: 'id', position: 0, type: 'INTEGER'),
+        PDOColumn(name: 'name', position: 1, type: 'VARCHAR'),
+      ];
 
-      // final conn = await MySqlConnection.connect(...);
-      // final prepared = await conn.prepare(_queryString);
-      // final result = await prepared.execute(parameters);
-      // _result = PDOResult(
-      //   result.fields.map((f) => PDOColumn(...)).toList(),
-      //   result.fields.length,
-      //   result.affectedRows,
-      // );
+      final testData = [
+        {'id': 1, 'name': 'John'},
+        {'id': 2, 'name': 'Jane'},
+      ];
 
+      _result = PDOResult(columns, columns.length, testData.length);
+      _result!.setTestData(testData);
       _executed = true;
       return true;
     } catch (e) {
       throw PDOException(
         'Execute failed: $e',
-        sqlState: '42000', // Example SQLSTATE code
+        sqlState: '42000',
         statement: _queryString,
       );
     }
@@ -318,20 +325,22 @@ class PDOMySqlStatement implements PDOStatement {
   @override
   String debugDumpParams() {
     final buffer = StringBuffer();
-
     buffer.writeln('SQL: [$_queryString]');
+    buffer.writeln('Params: ${_boundParams.length}');
 
-    if (_result != null) {
-      buffer.writeln('Params: ${_boundParams.length}');
-
-      _boundParams.forEach((key, param) {
-        buffer.writeln('Key: ${param.name ?? 'Position #${param.position}'}');
+    _boundParams.forEach((key, param) {
+      if (param.name != null) {
+        buffer.writeln('Key: ${param.name}');
         buffer.writeln('paramno=${param.position}');
-        buffer.writeln('name=[${param.name ?? ''}]');
-        buffer.writeln('value=${param.value}');
-        buffer.writeln('type=${param.type}');
-      });
-    }
+        buffer.writeln('name=[${param.name}]');
+      } else {
+        buffer.writeln('Key: Position #${param.position}');
+        buffer.writeln('paramno=${param.position}');
+        buffer.writeln('name=[]');
+      }
+      buffer.writeln('value=${param.value}');
+      buffer.writeln('type=${param.type}');
+    });
 
     return buffer.toString();
   }
