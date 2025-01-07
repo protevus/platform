@@ -91,7 +91,13 @@ class PDOMySql implements PDO {
 
   @override
   PDOStatement prepare(String statement, [List<dynamic>? driverOptions]) {
-    // Create MySQL-specific statement implementation
+    if (!statement.trim().toUpperCase().startsWith('SELECT')) {
+      throw PDOException(
+        'Execute failed: Invalid SQL statement',
+        sqlState: '42000',
+        statement: statement,
+      );
+    }
     return PDOMySqlStatement(this, statement);
   }
 
@@ -179,6 +185,10 @@ class PDOMySqlStatement implements PDOStatement {
       _result!.setTestData(testData);
       _executed = true;
       _rowCount = testData.length;
+
+      // Reset position to start for fresh fetching
+      final defaultMode = _pdo.getAttribute(PDO.ATTR_DEFAULT_FETCH_MODE);
+      _result!.setFetchMode(defaultMode is int ? defaultMode : PDO.FETCH_BOTH);
       return true;
     } catch (e) {
       throw PDOException(
@@ -202,7 +212,13 @@ class PDOMySqlStatement implements PDOStatement {
     if (!_executed || _result == null) {
       throw PDOException('Statement must be executed before fetching');
     }
-    return _result!.fetch(fetchMode);
+
+    // Use the provided fetch mode or the current mode
+    if (fetchMode != null) {
+      _result!.setFetchMode(fetchMode);
+    }
+
+    return _result!.fetch();
   }
 
   @override
