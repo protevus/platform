@@ -1,6 +1,7 @@
 <p align="center"><a href="https://protevus.com" target="_blank"><img src="https://git.protevus.com/protevus/branding/raw/branch/main/protevus-logo-bg.png"></a></p>
 
-# Protevus Platform
+# Protevus Platform 
+***NOTE: THIS REPO IS NOT STABLE AND IS UNDER HEAVY DEVELOPMENT***
 
 Protevus Platform is a highly versatile and extensible application server platform for the Dart programming language. It is a hard fork of the Angel3 core, inspired by Express.js and Laravel, aiming to provide a familiar and Laravel-compatible API while leveraging the power of Dart.
 
