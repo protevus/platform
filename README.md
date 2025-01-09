@@ -6,7 +6,10 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
 
-***NOTE: THIS REPO IS NOT STABLE AND IS UNDER HEAVY DEVELOPMENT***
+***NOTE: THIS REPO IS NOT STABLE AND IS UNDER HEAVY DEVELOPMENt AND TESTING***
+***FAST MOVING CODEBASE: NOTHING THAT YOU SEE HERE TODAY MAY BE HERE TOMMORROW***
+***PREVIEW RELEASE: DATE TO BE DETERMINED***
+***DISCLOSURE: EXAMPLES IN THIS DOCUMENT ARE TEMPORARY BOILERPLATE EXAMPLES***
 
 ## 📖 Overview
 
@@ -64,12 +67,67 @@ Key features:
 Advanced routing system supporting both Laravel and Express styles:
 
 ```dart
-// Laravel style
+// Laravel style routing with rich features
 app.router.group('/api/v1', (router) {
-  router.resource('users', UserController());
-  router.middleware(['auth'], (router) {
-    router.post('documents/{id}/share', DocumentController.share);
+  // Resource routes with custom configuration
+  router.resource('users', UserController())
+    .only(['index', 'show', 'store'])  // Limit available actions
+    .names({                           // Custom route naming
+      'index': 'users.list',
+      'show': 'users.detail'
+    })
+    .middleware(['throttle:60,1']);    // Rate limiting middleware
+
+  // Nested resources
+  router.resource('users.posts', PostController())
+    .shallow()                         // Generate shallow routes
+    .middleware(['cache:public']);     // Cache middleware
+
+  // Route groups with shared middleware
+  router.middleware(['auth:api', 'verified'], (router) {
+    // Protected document routes
+    router.prefix('documents', (router) {
+      router.get('/', DocumentController.index)
+        .name('documents.index')
+        .where('type', 'pdf|doc');     // URL constraints
+
+      router.post('{id}/share', DocumentController.share)
+        .name('documents.share')
+        .where('id', '[0-9]+')         // Parameter constraints
+        .middleware(['can:share,document']); // Authorization
+
+      router.put('{id}/move', DocumentController.move)
+        .middleware(['transaction']);   // Database transaction
+    });
+
+    // Admin routes with role middleware
+    router.middleware(['role:admin'], (router) {
+      router.prefix('admin', (router) {
+        router.get('stats', AdminController.stats)
+          .middleware(['cache:private,5']);
+        
+        router.resource('settings', SettingController())
+          .except(['destroy']);
+      });
+    });
   });
+
+  // API versioning
+  router.prefix('v2', (router) {
+    router.get('features', FeatureController.index)
+      .middleware(['api.version:2']);
+  });
+});
+
+// Route model binding
+app.router.model('user', (id) => User.findOrFail(id));
+app.router.model('document', (id) => Document.findOrFail(id));
+
+// Named route groups
+app.router.as('api.', (router) {
+  router.get('health', HealthController.check)
+    .name('health')  // Results in 'api.health'
+    .middleware(['throttle:1000,1']);
 });
 
 // Express style
