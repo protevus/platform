@@ -4,12 +4,12 @@
 
 [![Dart Version](https://img.shields.io/badge/Dart-%3E%3D3.3.0-blue.svg)](https://dart.dev)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)]()
+[![Build Status](https://img.shields.io/badge/build-failing-red.svg)]()
 
-***NOTE: THIS REPO IS NOT STABLE AND IS UNDER HEAVY DEVELOPMENt AND TESTING***
-***FAST MOVING CODEBASE: NOTHING THAT YOU SEE HERE TODAY MAY BE HERE TOMMORROW***
-***PREVIEW RELEASE: DATE TO BE DETERMINED***
-***DISCLOSURE: EXAMPLES IN THIS DOCUMENT ARE TEMPORARY BOILERPLATE EXAMPLES***
+- ***NOTE: THIS REPO IS NOT STABLE AND IS UNDER HEAVY DEVELOPMENt AND TESTING***
+- ***FAST MOVING CODEBASE: NOTHING THAT YOU SEE HERE TODAY MAY BE HERE TOMMORROW***
+- ***PREVIEW RELEASE: DATE TO BE DETERMINED***
+- ***DISCLOSURE: EXAMPLES IN THIS DOCUMENT ARE TEMPORARY BOILERPLATE EXAMPLES***
 
 ## 📖 Overview
 
