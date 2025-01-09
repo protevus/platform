@@ -13,7 +13,7 @@
 
 ## 📖 Overview
 
-Protevus Platform is a high-performance, modular unified full-stack framework for Dart that combines the elegance of Laravel's API design with Dart's powerful async/await capabilities and strong typing. Built upon Angel3's foundation, it provides a comprehensive suite of tools for building scalable desktop, mobile, web, iot, edge applications, APIs, and microservices.
+Protevus Platform is a high-performance, modular unified full-stack platform for Dart that combines the elegance of Laravel's API design with Dart's powerful async/await capabilities and strong typing. Built upon Angel3's foundation, it provides a comprehensive suite of tools for building scalable desktop, mobile, web, iot, edge applications, APIs, and microservices.
 
 ### 🌟 Key Features
 
