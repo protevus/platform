@@ -269,7 +269,7 @@ main() {
 - `filterQuery(only)`: Same as `filterBody`, but operates on `req.query`.
 
 ```dart
-import 'package:angel3_framework/angel3_framework.dart';
+import 'package:platform_foundation/core.dart';
 import 'package:platform_validation/server.dart';
 
 final Validator echo = Validator({
