@@ -1,4 +1,4 @@
-import 'package:queue/src/contracts/job.dart';
+import 'package:platform_queue/src/contracts/job.dart';
 
 /// Base interface for queue implementations.
 abstract class Queue {

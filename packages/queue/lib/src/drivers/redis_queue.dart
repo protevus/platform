@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:queue/src/contracts/job.dart';
-import 'package:queue/src/queue_base.dart';
-import 'package:queue/src/jobs/redis_job.dart';
+import 'package:platform_queue/src/contracts/job.dart';
+import 'package:platform_queue/src/queue_base.dart';
+import 'package:platform_queue/src/jobs/redis_job.dart';
 
 /// Redis queue implementation.
 class RedisQueue extends QueueBase {

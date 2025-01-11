@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:uuid/uuid.dart';
-import 'package:queue/src/contracts/queue.dart';
-import 'package:queue/src/exceptions/invalid_payload_exception.dart';
+import 'package:platform_queue/src/contracts/queue.dart';
+import 'package:platform_queue/src/exceptions/invalid_payload_exception.dart';
 
 /// Base class for queue implementations.
 abstract class QueueBase implements Queue {

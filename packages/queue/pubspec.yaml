@@ -1,4 +1,4 @@
-name: queue
+name: platform_queue
 description: A Dart implementation of Laravel's queue package with full feature parity and API compatibility.
 version: 1.0.0
 

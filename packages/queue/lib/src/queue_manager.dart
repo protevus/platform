@@ -1,6 +1,6 @@
-import 'package:queue/src/contracts/queue.dart';
-import 'package:queue/src/drivers/redis_queue.dart';
-import 'package:queue/src/exceptions/queue_connection_exception.dart';
+import 'package:platform_queue/src/contracts/queue.dart';
+import 'package:platform_queue/src/drivers/redis_queue.dart';
+import 'package:platform_queue/src/exceptions/queue_connection_exception.dart';
 
 /// Manager for queue connections and drivers.
 class QueueManager {

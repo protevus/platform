@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:queue/src/contracts/job.dart';
-import 'package:queue/src/drivers/redis_queue.dart';
+import 'package:platform_queue/src/contracts/job.dart';
+import 'package:platform_queue/src/drivers/redis_queue.dart';
 
 /// A job that is stored in Redis.
 class RedisJob implements Job {

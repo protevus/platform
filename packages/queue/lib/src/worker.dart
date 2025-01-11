@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:queue/src/contracts/job.dart';
-import 'package:queue/src/contracts/queue.dart';
-import 'package:queue/src/worker_options.dart';
+import 'package:platform_queue/src/contracts/job.dart';
+import 'package:platform_queue/src/contracts/queue.dart';
+import 'package:platform_queue/src/worker_options.dart';
 
 /// A queue worker that processes jobs.
 class Worker {
