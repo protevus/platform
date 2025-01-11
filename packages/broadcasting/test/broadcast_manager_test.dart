@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:test/test.dart';
-import 'package:protevus_broadcasting/broadcasting.dart';
+import 'package:platform_broadcasting/broadcasting.dart';
 
 class TestBroadcaster implements Broadcaster {
   final events = <String>[];

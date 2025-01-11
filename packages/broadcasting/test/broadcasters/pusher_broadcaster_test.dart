@@ -1,6 +1,6 @@
 import 'package:pusher_client/pusher_client.dart' as pusher;
 import 'package:test/test.dart';
-import 'package:protevus_broadcasting/broadcasting.dart';
+import 'package:platform_broadcasting/broadcasting.dart';
 
 void main() {
   group('PusherBroadcaster', () {
