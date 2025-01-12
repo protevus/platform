@@ -6,7 +6,7 @@ class MessageSelector {
   /// [number] The number to determine plural form
   /// [locale] The locale to use for pluralization rules
   String choose(String line, num number, String locale) {
-    final segments = line.split('|').map((s) => s.trim()).toList();
+    final segments = line.split('|');
 
     // Try to match explicit number/range conditions first
     final value = _extract(segments, number);
@@ -39,14 +39,14 @@ class MessageSelector {
   /// Get the translation string if the condition matches.
   String? _extractFromString(String part, num number) {
     final match =
-        RegExp(r'^[\{\[]([^\[\]\{\}]*)[\}\]](.*)').firstMatch(part.trim());
+        RegExp(r'^\s*[\{\[]([^\[\]\{\}]*)[\}\]](.*)').firstMatch(part);
 
     if (match == null || match.groupCount != 2) {
       return null;
     }
 
     final condition = match.group(1)!.trim();
-    final value = match.group(2)!.trim();
+    final value = match.group(2)!;
 
     if (condition.contains(',')) {
       final parts = condition.split(',').map((p) => p.trim()).toList();
@@ -76,9 +76,8 @@ class MessageSelector {
   /// Strip the inline conditions from each segment.
   List<String> _stripConditions(List<String> segments) {
     return segments
-        .map((part) => part
-            .replaceFirst(RegExp(r'^[\{\[]([^\[\]\{\}]*)[\}\]]'), '')
-            .trim())
+        .map((part) =>
+            part.replaceFirst(RegExp(r'^\s*[\{\[]([^\[\]\{\}]*)[\}\]]'), ''))
         .toList();
   }
 
