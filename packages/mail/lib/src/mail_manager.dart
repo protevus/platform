@@ -12,39 +12,61 @@ import 'mailable.dart';
 /// for sending emails. It supports multiple mail drivers and handles
 /// driver configuration and lifecycle.
 class MailManager {
-  /// The registered mail drivers.
+  /// The registered mail driver factories.
+  final Map<String, MailDriver Function(MailManager)> _factories = {};
+
+  /// The cached mail driver instances.
   final Map<String, MailDriver> _drivers = {};
 
   /// The default driver name.
-  final String _defaultDriver;
+  String? _defaultDriver;
 
   /// Creates a new mail manager.
-  ///
-  /// The [defaultDriver] parameter specifies which driver to use by default.
-  MailManager({
-    required String defaultDriver,
-  }) : _defaultDriver = defaultDriver;
+  MailManager();
 
-  /// Registers a mail driver.
+  /// Extends the mail manager with a new driver.
   ///
   /// The [name] parameter is a unique identifier for the driver.
-  /// The [driver] parameter is the driver instance to register.
-  void registerDriver(String name, MailDriver driver) {
-    _drivers[name] = driver;
+  /// The [factory] parameter is a function that creates the driver instance.
+  void extend(String name, MailDriver Function(MailManager) factory) {
+    _factories[name] = factory;
   }
 
-  /// Gets a mail driver by name.
+  /// Sets the default driver name.
+  ///
+  /// Throws [MailConfigException] if the driver is not registered.
+  void setDefaultDriver(String name) {
+    if (!_factories.containsKey(name)) {
+      throw MailConfigException('Mail driver "$name" not found');
+    }
+    _defaultDriver = name;
+  }
+
+  /// Gets the default driver name.
+  String getDefaultDriver() {
+    return _defaultDriver ?? 'smtp';
+  }
+
+  /// Gets a mail driver by name or creates it if it doesn't exist.
   ///
   /// If no name is provided, returns the default driver.
-  /// Throws [MailConfigException] if the driver is not found.
+  /// Throws [MailConfigException] if the driver is not registered.
   MailDriver driver([String? name]) {
-    final driverName = name ?? _defaultDriver;
-    final driver = _drivers[driverName];
+    final driverName = name ?? getDefaultDriver();
 
-    if (driver == null) {
+    // Return cached driver if it exists
+    if (_drivers.containsKey(driverName)) {
+      return _drivers[driverName]!;
+    }
+
+    // Create new driver instance
+    final factory = _factories[driverName];
+    if (factory == null) {
       throw MailConfigException('Mail driver "$driverName" not found');
     }
 
+    final driver = factory(this);
+    _drivers[driverName] = driver;
     return driver;
   }
 

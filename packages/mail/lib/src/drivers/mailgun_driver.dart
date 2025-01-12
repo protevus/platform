@@ -52,7 +52,11 @@ class MailgunDriver implements MailDriver {
   final http.Client _client;
 
   /// Creates a new Mailgun driver.
-  MailgunDriver(this.config) : _client = http.Client() {
+  ///
+  /// The [client] parameter is optional and primarily used for testing.
+  /// If not provided, a new HTTP client will be created.
+  MailgunDriver(this.config, {http.Client? client})
+      : _client = client ?? http.Client() {
     if (!config.validate()) {
       throw MailConfigException('Invalid Mailgun configuration');
     }
