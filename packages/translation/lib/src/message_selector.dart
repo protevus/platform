@@ -19,10 +19,14 @@ class MessageSelector {
     final pluralIndex = _getPluralIndex(locale, number);
 
     if (cleanSegments.length == 1 || pluralIndex >= cleanSegments.length) {
-      return cleanSegments[0];
+      return _hasCondition(segments[0])
+          ? cleanSegments[0]
+          : cleanSegments[0].trim();
     }
 
-    return cleanSegments[pluralIndex];
+    return _hasCondition(segments[pluralIndex])
+        ? cleanSegments[pluralIndex]
+        : cleanSegments[pluralIndex].trim();
   }
 
   /// Extract a translation string using inline conditions.
@@ -38,8 +42,7 @@ class MessageSelector {
 
   /// Get the translation string if the condition matches.
   String? _extractFromString(String part, num number) {
-    final match =
-        RegExp(r'^\s*[\{\[]([^\[\]\{\}]*)[\}\]](.*)').firstMatch(part);
+    final match = RegExp(r'^[\{\[]([^\[\]\{\}]*)[\}\]](.*)').firstMatch(part);
 
     if (match == null || match.groupCount != 2) {
       return null;
@@ -75,10 +78,23 @@ class MessageSelector {
 
   /// Strip the inline conditions from each segment.
   List<String> _stripConditions(List<String> segments) {
-    return segments
-        .map((part) =>
-            part.replaceFirst(RegExp(r'^\s*[\{\[]([^\[\]\{\}]*)[\}\]]'), ''))
-        .toList();
+    // If all conditions are invalid, return the last segment
+    final validSegment = segments.lastWhere(
+      (part) => !_hasCondition(part) || _extractFromString(part, 0) != null,
+      orElse: () => segments.last,
+    );
+
+    return segments.map((part) {
+      if (part == validSegment && !_hasCondition(part)) {
+        return part.trim();
+      }
+      return part.replaceFirst(RegExp(r'^[\{\[]([^\[\]\{\}]*)[\}\]]'), '');
+    }).toList();
+  }
+
+  /// Check if a segment has a condition prefix.
+  bool _hasCondition(String part) {
+    return RegExp(r'^[\{\[]([^\[\]\{\}]*)[\}\]]').hasMatch(part);
   }
 
   /// Get the index to use for pluralization.
