@@ -1,4 +1,4 @@
-import 'package:notifications/notifications.dart';
+import 'package:platform_notifications/notifications.dart';
 import 'example_dependencies.dart';
 
 /// Example notification sent to welcome new users.

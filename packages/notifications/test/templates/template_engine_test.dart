@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:notifications/notifications.dart';
+import 'package:platform_notifications/notifications.dart';
 
 void main() {
   group('TemplateEngine', () {

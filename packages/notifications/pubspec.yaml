@@ -1,4 +1,4 @@
-name: notifications
+name: platform_notifications
 description: Laravel-style notifications for Dart
 version: 0.0.1
 homepage: https://protevus.com
