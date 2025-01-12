@@ -46,7 +46,10 @@ class Translator {
     for (final currentLocale in locales) {
       // Try JSON translations first
       _load('*', '*', currentLocale);
-      line = _loaded['*']?['*']?[currentLocale]?[key] as String?;
+      final jsonTranslations = _loaded['*']?['*']?[currentLocale];
+      if (jsonTranslations != null) {
+        line = _getNestedValue(jsonTranslations, key.split('.'));
+      }
 
       // If not found in JSON, try file-based translations
       if (line == null) {
@@ -149,6 +152,16 @@ class Translator {
     if (parts.length == 2) parts.add('');
 
     return parts;
+  }
+
+  /// Get a value from a nested map structure using dot notation.
+  String? _getNestedValue(Map<String, dynamic> map, List<String> keys) {
+    dynamic current = map;
+    for (final key in keys) {
+      if (current is! Map) return null;
+      current = current[key];
+    }
+    return current is String ? current : null;
   }
 
   /// Get the array of locales to try.

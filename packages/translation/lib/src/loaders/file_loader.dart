@@ -41,8 +41,15 @@ class FileLoader implements Loader {
   Map<String, dynamic> _loadJsonPaths(String locale) {
     final Map<String, dynamic> translations = {};
 
-    for (final path in [..._jsonPaths, ..._paths]) {
-      final jsonFile = File('${path}/$locale.json');
+    for (final basePath in [..._jsonPaths, ..._paths]) {
+      // Try locale.json first (e.g., en.json)
+      var jsonFile = File('$basePath/$locale.json');
+
+      // If not found, try locale/messages.json (e.g., en/messages.json)
+      if (!jsonFile.existsSync()) {
+        jsonFile = File('$basePath/$locale/messages.json');
+      }
+
       if (jsonFile.existsSync()) {
         try {
           final Map<String, dynamic> decoded =

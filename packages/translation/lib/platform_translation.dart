@@ -3,6 +3,7 @@ library platform_translation;
 
 export 'src/contracts/loader.dart';
 export 'src/loaders/file_loader.dart';
+export 'src/loaders/web_loader.dart';
 export 'src/message_selector.dart';
 export 'src/translator.dart';
 
@@ -25,6 +26,13 @@ Translator translator({
 }) {
   _translator ??= Translator(FileLoader(paths), locale)..fallback = fallback;
   return _translator!;
+}
+
+/// Set the global translator instance.
+///
+/// [newTranslator] The translator instance to use globally
+void setTranslator(Translator newTranslator) {
+  _translator = newTranslator;
 }
 
 /// Get the translation for the given key.
