@@ -1,130 +1,87 @@
-# Platform Config
+# Angel3 Configuration Loader
 
-A Dart implementation of Laravel-inspired configuration management for the Protevus platform.
+![Pub Version (including pre-releases)](https://img.shields.io/pub/v/angel3_configuration?include_prereleases)
+[![Null Safety](https://img.shields.io/badge/null-safety-brightgreen)](https://dart.dev/null-safety)
+[![Discord](https://img.shields.io/discord/1060322353214660698)](https://discord.gg/3X6bxTUdCM)
+[![License](https://img.shields.io/github/license/dart-backend/angel)](https://github.com/dart-backend/angel/tree/master/packages/configuration/LICENSE)
 
-## Features
+Automatic YAML configuration loader for [Angel3 framework](https://pub.dev/packages/angel3)
 
-- Flexible configuration storage and retrieval
-- Support for nested configuration keys
-- Type-safe retrieval methods (string, integer, float, boolean, array)
-- Implementation of Dart's `Map` interface for familiar usage
-- Macro system for extending functionality at runtime
+## About
+
+Any web app needs different configuration for development and production. This plugin will search
+for a `config/default.yaml` file. If it is found, configuration from it is loaded into `app.configuration`.
+Then, it will look for a `config/$ANGEL_ENV` file. (i.e. config/development.yaml). If this found, all of its
+configuration be loaded, and will override anything loaded from the `default.yaml` file. This allows for your
+app to work under different conditions without you re-coding anything. :)
 
 ## Installation
 
-Add this package to your `pubspec.yaml`:
+In `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  platform_config: ^1.0.0
-```
-
-Then run:
-
-```
-dart pub get
+    angel3_configuration: ^6.0.0
 ```
 
 ## Usage
 
-Here's a basic example of how to use the `Repository` class:
+Example Configuration
 
-```dart
-import 'package:platform_config/platform_config.dart';
-
-void main() {
-  final config = Repository({
-    'app': {
-      'name': 'My App',
-      'debug': true,
-    },
-    'database': {
-      'default': 'mysql',
-      'connections': {
-        'mysql': {
-          'host': 'localhost',
-          'port': 3306,
-        },
-      },
-    },
-  });
-
-  // Get a value
-  print(config.get('app.name')); // Output: My App
-
-  // Get a typed value
-  final isDebug = config.boolean('app.debug');
-  print(isDebug); // Output: true
-
-  // Get a nested value
-  final dbPort = config.integer('database.connections.mysql.port');
-  print(dbPort); // Output: 3306
-
-  // Set a value
-  config.set('app.version', '1.0.0');
-
-  // Check if a key exists
-  print(config.has('app.version')); // Output: true
-
-  // Get multiple values
-  final values = config.getMany(['app.name', 'app.debug']);
-  print(values); // Output: {app.name: My App, app.debug: true}
-}
+```yaml
+# Define normal YAML objects
+some_key: foo
+this_is_a_map:
+  a_string: "string"
+  another_string: "string"
+  
 ```
 
-### Available Methods
+You can also load configuration from the environment:
 
-- `get<T>(String key, [T? defaultValue])`: Get a value by key, optionally specifying a default value.
-- `set(dynamic key, dynamic value)`: Set a value for a key.
-- `has(String key)`: Check if a key exists in the configuration.
-- `string(String key, [String? defaultValue])`: Get a string value.
-- `integer(String key, [int? defaultValue])`: Get an integer value.
-- `float(String key, [double? defaultValue])`: Get a float value.
-- `boolean(String key, [bool? defaultValue])`: Get a boolean value.
-- `array(String key, [List<dynamic>? defaultValue])`: Get an array value.
-- `getMany(List<String> keys)`: Get multiple values at once.
-- `all()`: Get all configuration items.
-- `prepend(String key, dynamic value)`: Prepend a value to an array.
-- `push(String key, dynamic value)`: Append a value to an array.
-
-The `Repository` class also implements Dart's `Map` interface, so you can use it like a regular map:
-
-```dart
-config['new.key'] = 'new value';
-print(config['new.key']); // Output: new value
+```yaml
+# Loaded from the environment
+system_path: $PATH
 ```
 
-## Error Handling
+If a `.env` file is present in your configuration directory (i.e. `config/.env`), then it will be loaded before
+applying YAML configuration.
 
-The type-safe methods (`string()`, `integer()`, `float()`, `boolean()`, `array()`) will throw an `ArgumentError` if the value at the specified key is not of the expected type.
+You can also include values from one file into another:
 
-## Extending Functionality
-
-You can extend the `Repository` class with custom methods using the macro system:
-
-```dart
-Repository.macro('getConnectionUrl', (Repository repo, String connection) {
-  final conn = repo.get('database.connections.$connection');
-  return 'mysql://${conn['username']}:${conn['password']}@${conn['host']}:${conn['port']}/${conn['database']}';
-});
-
-final config = Repository(/* ... */);
-final mysqlUrl = config.callMacro('getConnectionUrl', ['mysql']);
-print(mysqlUrl); // Output: mysql://user:password@localhost:3306/dbname
+```yaml
+_include:
+  - "./include-prod.yaml"
+  - "./include-misc.yaml"
+_include: "just-one-file.yaml"
 ```
 
-## Testing
+**Server-side**
+Call `configuration()`. The loaded configuration will be available in your application's `configuration` map.
 
-To run the tests for this package, use the following command:
+`configuration` also accepts a `sourceDirectory` or `overrideEnvironmentName` parameter.
+The former will allow you to search in a directory other than `config`, and the latter lets you
+override `$ANGEL_ENV` by specifying a specific configuration name to look for (i.e. `production`).
 
+This package uses [`package:angel3_merge_map`](https://pub.dev/packages/angel3_merge_map)
+internally, so existing configurations can be deeply merged.
+
+Example:
+
+```yaml
+# default.yaml
+foo:
+  bar: baz
+  quux: hello
+  
+# production.yaml
+foo:
+  quux: goodbye
+  yellow: submarine
+  
+# Propagates to:
+foo:
+  bar: baz
+  quux: goodbye
+  yellow: submarine
 ```
-dart test
-```
-
-## Contributing
-
-Contributions are welcome! Please read our contributing guidelines before submitting pull requests.
-
-## License
-
-This project is licensed under the MIT License.
