@@ -36,8 +36,8 @@ class LocalAuthStrategy<User> extends AuthStrategy<User> {
 
   @override
   Future<User?> authenticate(RequestContext req, ResponseContext res,
-      [AngelAuthOptions? options]) async {
-    var localOptions = options ?? AngelAuthOptions();
+      [PlatformAuthOptions? options]) async {
+    var localOptions = options ?? PlatformAuthOptions();
     User? verificationResult;
 
     if (allowBasic) {

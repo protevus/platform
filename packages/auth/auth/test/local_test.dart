@@ -13,10 +13,10 @@ final PlatformAuth<Map<String, String>> auth =
         serializer: (user) async => '1337',
         deserializer: (id) async => sampleUser);
 //var headers = <String, String>{'accept': 'application/json'};
-var localOpts = AngelAuthOptions<Map<String, String>>(
+var localOpts = PlatformAuthOptions<Map<String, String>>(
     failureRedirect: '/failure', successRedirect: '/success');
 var localOpts2 =
-    AngelAuthOptions<Map<String, String>>(canRespondWithJson: false);
+    PlatformAuthOptions<Map<String, String>>(canRespondWithJson: false);
 
 Map<String, String> sampleUser = {'hello': 'world'};
 

@@ -355,9 +355,9 @@ class PlatformAuth<User> {
   /// or a `401 Not Authenticated` is thrown, if it is the last one.
   ///
   /// Any other result is considered an authenticated user, and terminates the loop.
-  RequestHandler authenticate(type, [AngelAuthOptions<User>? opt]) {
+  RequestHandler authenticate(type, [PlatformAuthOptions<User>? opt]) {
     return (RequestContext req, ResponseContext res) async {
-      var authOption = opt ?? AngelAuthOptions<User>();
+      var authOption = opt ?? PlatformAuthOptions<User>();
 
       var names = <String>[];
 
@@ -485,7 +485,7 @@ class PlatformAuth<User> {
   }
 
   /// Log an authenticated user out.
-  RequestHandler logout([AngelAuthOptions<User>? options]) {
+  RequestHandler logout([PlatformAuthOptions<User>? options]) {
     return (RequestContext req, ResponseContext res) async {
       if (req.container?.has<User>() == true) {
         var user = req.container?.make<User>();

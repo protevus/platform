@@ -3,15 +3,15 @@ import 'dart:async';
 import 'package:platform_foundation/core.dart';
 import 'auth_token.dart';
 
-typedef AngelAuthCallback = FutureOr Function(
+typedef PlatformAuthCallback = FutureOr Function(
     RequestContext req, ResponseContext res, String token);
 
-typedef AngelAuthTokenCallback<User> = FutureOr Function(
+typedef PlatformAuthTokenCallback<User> = FutureOr Function(
     RequestContext req, ResponseContext res, AuthToken token, User user);
 
-class AngelAuthOptions<User> {
-  AngelAuthCallback? callback;
-  AngelAuthTokenCallback<User>? tokenCallback;
+class PlatformAuthOptions<User> {
+  PlatformAuthCallback? callback;
+  PlatformAuthTokenCallback<User>? tokenCallback;
   String? successRedirect;
   String? failureRedirect;
 
@@ -21,7 +21,7 @@ class AngelAuthOptions<User> {
   /// Works well with `Basic` authentication.
   bool canRespondWithJson;
 
-  AngelAuthOptions(
+  PlatformAuthOptions(
       {this.callback,
       this.tokenCallback,
       this.canRespondWithJson = true,

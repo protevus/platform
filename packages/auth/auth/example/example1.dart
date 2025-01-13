@@ -88,7 +88,8 @@ void main() async {
 
   app.post(
       '/login',
-      auth.authenticate('local', AngelAuthOptions(callback: (req, res, token) {
+      auth.authenticate('local',
+          PlatformAuthOptions(callback: (req, res, token) {
         res
           ..write('Hello!')
           ..close();
