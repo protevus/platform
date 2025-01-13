@@ -12,7 +12,7 @@ dependencies:
   args: ^2.4.0
   io: ^1.0.0
   logging: ^1.2.0
-  intl: ^0.18.0
+  intl: ^0.17.0
 dev_dependencies:
   lints: ^4.0.0
 #dependency_overrides:

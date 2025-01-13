@@ -20,7 +20,7 @@ Instantiate it as follows, and your file will become a command-line executable t
 ```dart
 import 'dart:async';
 import 'dart:isolate';
-import 'package:angel3_framework/angel3_framework.dart';
+import 'package:platform_foundation/core.dart';
 import 'package:angel3_production/angel3_production.dart';
 
 void main(List<String> args) => Runner('example', configureServer).run(args);

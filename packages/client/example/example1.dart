@@ -7,7 +7,7 @@ import 'package:logging/logging.dart';
 void main() async {
   const Map<String, String> user = {'username': 'foo', 'password': 'bar'};
   var localOpts =
-      AngelAuthOptions<Map<String, String>>(canRespondWithJson: true);
+      PlatformAuthOptions<Map<String, String>>(canRespondWithJson: true);
 
   Application app = Application();
   PlatformHttp http = PlatformHttp(app, useZone: false);
