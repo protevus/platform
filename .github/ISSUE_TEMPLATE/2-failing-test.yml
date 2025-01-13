@@ -17,15 +17,24 @@ body:
       description: Select package where test is failing
       options:
         - Auth
+        - Auth_OAuth2
+        - Auth_Twitter
+        - OAuth2
+        - Broadcasting
         - Bus
         - Cache
         - Client
         - Collections
+        - Concurrency
         - Conditionable
         - Config
+        - Console
         - Container
         - Contracts
         - Cookie
+        - Database
+        - DBO
+        - RethinkDB
         - Encryption
         - Events
         - Filesystem
@@ -33,14 +42,40 @@ body:
         - Hashing
         - Log
         - Macroable
+        - Mail
+        - CORS
+        - Proxy
+        - Security
+        - User_Agent
         - Mirrors
+        - Modals
+        - Notifications
         - Pagination
         - Pipeline
         - Process
+        - Production
+        - Queue
+        - Reload
         - Routing
+        - Serialize
+        - File_Service
+        - Mongo
+        - Redis
+        - Sembast
+        - Session
         - Support
         - Testing
+        - Translation
+        - SEO
+        - Shelf
+        - Static
+        - Sync
         - Validation
+        - Blade
+        - Html
+        - Jael
+        - Jinja
+        - Mark
         - Websocket
     validations:
       required: true
