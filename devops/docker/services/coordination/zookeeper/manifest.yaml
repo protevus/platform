@@ -1,0 +1,143 @@
+name: zookeeper
+category: coordination
+description: Distributed coordination service for distributed systems, providing configuration management, leader election, and synchronization primitives
+versions:
+  - "3.9"
+  - "3.8"
+  - "3.7"
+default_version: "3.9"
+
+config_schema:
+  client_port:
+    type: integer
+    default: 2181
+    description: Port for client connections
+    required: true
+
+  peer_port:
+    type: integer
+    default: 2888
+    description: Port for peer communication
+    required: false
+
+  leader_port:
+    type: integer
+    default: 3888
+    description: Port for leader election
+    required: false
+
+  tick_time:
+    type: integer
+    default: 2000
+    description: Length of a single tick in milliseconds
+    required: false
+
+  init_limit:
+    type: integer
+    default: 10
+    description: Ticks to allow for followers to connect and sync
+    required: false
+
+  sync_limit:
+    type: integer
+    default: 5
+    description: Ticks to allow followers to sync with ZooKeeper
+    required: false
+
+  max_client_connections:
+    type: integer
+    default: 60
+    description: Maximum number of client connections
+    required: false
+
+  autopurge_snap_retain_count:
+    type: integer
+    default: 3
+    description: Number of snapshots to retain
+    required: false
+
+  autopurge_purge_interval:
+    type: integer
+    default: 24
+    description: Purge interval in hours
+    required: false
+
+  heap_size:
+    type: string
+    default: "1G"
+    description: JVM heap size
+    required: false
+
+  jmx_port:
+    type: integer
+    default: 9998
+    description: JMX port for monitoring
+    required: false
+
+  4lw_commands:
+    type: string
+    default: "mntr,conf,ruok,stat,envi"
+    description: Enabled four letter words commands for monitoring and diagnostics
+    required: false
+
+  max_session_timeout:
+    type: integer
+    default: 40000
+    description: Maximum session timeout in milliseconds
+    required: false
+
+  min_session_timeout:
+    type: integer
+    default: 4000
+    description: Minimum session timeout in milliseconds
+    required: false
+
+  global_outstanding_limit:
+    type: integer
+    default: 1000
+    description: Maximum number of outstanding requests
+    required: false
+
+volumes:
+  - data:/data
+  - datalog:/datalog
+  - logs:/logs
+  - conf:/conf
+
+environment:
+  - ZOO_MY_ID
+  - ZOO_SERVERS
+  - ZOO_STANDALONE_ENABLED
+  - ZOO_ADMINSERVER_ENABLED
+  - ZOO_AUTOPURGE_PURGEINTERVAL
+  - ZOO_AUTOPURGE_SNAPRETAINCOUNT
+  - ZOO_MAX_CLIENT_CNXNS
+  - ZOO_TICK_TIME
+  - ZOO_INIT_LIMIT
+  - ZOO_SYNC_LIMIT
+  - JVMFLAGS
+  - ZOO_4LW_COMMANDS_WHITELIST
+  - ZOO_MAX_SESSION_TIMEOUT
+  - ZOO_MIN_SESSION_TIMEOUT
+  - ZOO_GLOBAL_OUTSTANDING_LIMIT
+  - TZ
+
+health_check:
+  command: "echo ruok | nc localhost 2181 | grep imok"
+  interval: "10s"
+  timeout: "5s"
+  retries: 3
+  start_period: "30s"
+
+ports:
+  - 2181  # Client connections
+  - 2888  # Peer communication
+  - 3888  # Leader election
+  - 9998  # JMX
+  - 8080  # Admin server (if enabled)
+
+logging:
+  driver: json-file
+  options:
+    max-size: "100m"
+    max-file: "3"

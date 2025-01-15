@@ -1,0 +1,140 @@
+name: kafka
+category: messaging
+description: Apache Kafka message broker with ZooKeeper
+versions:
+  - "3.5"
+  - "3.4"
+  - "3.3"
+default_version: "3.5"
+
+config_schema:
+  port:
+    type: integer
+    default: 9092
+    description: Port to expose Kafka broker
+    required: true
+
+  internal_port:
+    type: integer
+    default: 9093
+    description: Internal port for inter-broker communication
+    required: false
+
+  num_partitions:
+    type: integer
+    default: 3
+    description: Default number of partitions per topic
+    required: false
+
+  replication_factor:
+    type: integer
+    default: 1
+    description: Default replication factor
+    required: false
+
+  min_insync_replicas:
+    type: integer
+    default: 1
+    description: Minimum number of in-sync replicas
+    required: false
+
+  auto_create_topics:
+    type: boolean
+    default: true
+    description: Enable auto creation of topics
+    required: false
+
+  delete_topic_enable:
+    type: boolean
+    default: true
+    description: Enable topic deletion
+    required: false
+
+  log_retention_hours:
+    type: integer
+    default: 168
+    description: Log retention time in hours
+    required: false
+
+  log_retention_bytes:
+    type: string
+    default: "1073741824"
+    description: Maximum size of logs before deletion
+    required: false
+
+  heap_opts:
+    type: string
+    default: "-Xmx1G -Xms1G"
+    description: JVM heap options
+    required: false
+
+  jmx_port:
+    type: integer
+    default: 9999
+    description: JMX port for monitoring
+    required: false
+
+  zookeeper_connection:
+    type: string
+    default: "zookeeper:2181"
+    description: ZooKeeper connection string
+    required: true
+
+  listeners:
+    type: string
+    default: "PLAINTEXT://:9092,INTERNAL://:9093"
+    description: Kafka listener configuration
+    required: false
+
+  advertised_listeners:
+    type: string
+    default: "PLAINTEXT://localhost:9092,INTERNAL://kafka:9093"
+    description: Kafka advertised listener configuration
+    required: false
+
+volumes:
+  - data:/var/lib/kafka/data
+  - logs:/var/log/kafka
+  - config:/etc/kafka/config
+
+environment:
+  - KAFKA_HEAP_OPTS
+  - KAFKA_JMX_OPTS
+  - KAFKA_JVM_PERFORMANCE_OPTS
+  - KAFKA_LOG4J_OPTS
+  - KAFKA_OPTS
+  - KAFKA_JMX_PORT
+  - KAFKA_ADVERTISED_HOST_NAME
+  - KAFKA_ADVERTISED_PORT
+  - KAFKA_ZOOKEEPER_CONNECT
+  - KAFKA_BROKER_ID
+  - KAFKA_LOG_DIRS
+  - KAFKA_LOG_RETENTION_HOURS
+  - KAFKA_LOG_RETENTION_BYTES
+  - KAFKA_NUM_PARTITIONS
+  - KAFKA_DEFAULT_REPLICATION_FACTOR
+  - KAFKA_MIN_INSYNC_REPLICAS
+  - KAFKA_AUTO_CREATE_TOPICS_ENABLE
+  - KAFKA_DELETE_TOPIC_ENABLE
+  - TZ
+
+dependencies:
+  - name: zookeeper
+    required: true
+    config:
+      port: 2181
+      client_port: 2181
+      peer_port: 2888
+      leader_port: 3888
+
+health_check:
+  command: "kafka-topics.sh --bootstrap-server localhost:9092 --list"
+  interval: "10s"
+  timeout: "5s"
+  retries: 3
+  start_period: "30s"
+
+ports:
+  - 9092  # PLAINTEXT listener
+  - 9093  # INTERNAL listener
+  - 9999  # JMX

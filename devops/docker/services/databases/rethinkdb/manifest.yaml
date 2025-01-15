@@ -1,0 +1,136 @@
+name: rethinkdb
+category: databases
+description: RethinkDB real-time database server
+versions:
+  - "2.4"
+  - "2.3"
+default_version: "2.4"
+
+config_schema:
+  driver_port:
+    type: integer
+    default: 28015
+    description: Port for client driver connections
+    required: true
+
+  http_port:
+    type: integer
+    default: 8080
+    description: Port for HTTP admin interface
+    required: true
+
+  cluster_port:
+    type: integer
+    default: 29015
+    description: Port for cluster communications
+    required: false
+
+  cache_size:
+    type: string
+    default: "1024"
+    description: Cache size in MB
+    required: false
+
+  io_threads:
+    type: integer
+    default: 64
+    description: Number of IO threads
+    required: false
+
+  direct_io:
+    type: boolean
+    default: true
+    description: Use direct IO for file access
+    required: false
+
+  log_level:
+    type: string
+    default: "info"
+    description: Log level (error, warning, info, debug)
+    required: false
+
+  bind_cluster:
+    type: string
+    default: "all"
+    description: Network interface to bind cluster port
+    required: false
+
+  bind_driver:
+    type: string
+    default: "all"
+    description: Network interface to bind driver port
+    required: false
+
+  bind_http:
+    type: string
+    default: "all"
+    description: Network interface to bind HTTP port
+    required: false
+
+  no_http_admin:
+    type: boolean
+    default: false
+    description: Disable web admin interface
+    required: false
+
+  server_name:
+    type: string
+    default: "rethinkdb_dev"
+    description: Server name for clustering
+    required: false
+
+  directory:
+    type: string
+    default: "/data"
+    description: Data directory
+    required: false
+
+  join:
+    type: string
+    default: ""
+    description: Join an existing cluster
+    required: false
+
+  initial_password:
+    type: string
+    default: ""
+    description: Initial admin password
+    required: false
+
+  cors_allowed_origins:
+    type: string
+    default: "*"
+    description: CORS allowed origins for HTTP interface
+    required: false
+
+volumes:
+  - data:/data
+  - backups:/backups
+  - logs:/var/log/rethinkdb
+
+environment:
+  - RETHINKDB_PASSWORD
+  - RETHINKDB_USERNAME
+  - RETHINKDB_DATABASE
+  - RETHINKDB_CLUSTER_NAME
+  - RETHINKDB_BIND
+  - RETHINKDB_CACHE_SIZE
+  - RETHINKDB_IO_THREADS
+  - RETHINKDB_LOG_LEVEL
+  - DEV_DB_NAME
+  - DEV_DB_USER
+  - DEV_DB_PASSWORD
+  - CREATE_TEST_DB
+  - TZ
+
+health_check:
+  command: "rethinkdb admin --connect localhost:28015 --password $RETHINKDB_PASSWORD --exec 'r.db(\"rethinkdb\").table(\"server_status\").count()'"
+  interval: "10s"
+  timeout: "5s"
+  retries: 3
+  start_period: "30s"
+
+ports:
+  - 28015  # Driver port
+  - 29015  # Cluster port
+  - 8080   # HTTP admin interface

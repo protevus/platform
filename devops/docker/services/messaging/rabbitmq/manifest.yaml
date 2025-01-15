@@ -1,0 +1,159 @@
+name: rabbitmq
+category: messaging
+description: RabbitMQ message broker with management interface
+versions:
+  - "3.12"
+  - "3.11"
+  - "3.10"
+default_version: "3.12"
+
+config_schema:
+  amqp_port:
+    type: integer
+    default: 5672
+    description: Port for AMQP protocol
+    required: true
+
+  management_port:
+    type: integer
+    default: 15672
+    description: Port for management interface
+    required: true
+
+  mqtt_port:
+    type: integer
+    default: 1883
+    description: Port for MQTT protocol
+    required: false
+
+  stomp_port:
+    type: integer
+    default: 61613
+    description: Port for STOMP protocol
+    required: false
+
+  memory_high_watermark:
+    type: string
+    default: "0.4"
+    description: Memory high watermark relative to total system memory
+    required: false
+
+  disk_free_limit:
+    type: string
+    default: "2GB"
+    description: Free disk space limit
+    required: false
+
+  vm_memory_high_watermark_paging_ratio:
+    type: string
+    default: "0.5"
+    description: Memory paging ratio
+    required: false
+
+  channel_max:
+    type: integer
+    default: 2047
+    description: Maximum number of channels per connection
+    required: false
+
+  heartbeat:
+    type: integer
+    default: 60
+    description: Connection heartbeat timeout in seconds
+    required: false
+
+  default_vhost:
+    type: string
+    default: "/"
+    description: Default virtual host
+    required: false
+
+  default_user:
+    type: string
+    default: "guest"
+    description: Default username
+    required: false
+
+  default_permissions:
+    type: string
+    default: ".*"
+    description: Default resource permissions
+    required: false
+
+  cluster_partition_handling:
+    type: string
+    default: "ignore"
+    description: How to handle network partitions
+    required: false
+
+  collect_statistics:
+    type: string
+    default: "none"
+    description: Statistics collection mode
+    required: false
+
+  collect_statistics_interval:
+    type: integer
+    default: 5000
+    description: Statistics collection interval in milliseconds
+    required: false
+
+  management_db_cache_multiplier:
+    type: integer
+    default: 5
+    description: Management database cache multiplier
+    required: false
+
+volumes:
+  - data:/var/lib/rabbitmq
+  - logs:/var/log/rabbitmq
+  - config:/etc/rabbitmq
+
+environment:
+  - RABBITMQ_DEFAULT_USER
+  - RABBITMQ_DEFAULT_PASS
+  - RABBITMQ_DEFAULT_VHOST
+  - RABBITMQ_ERLANG_COOKIE
+  - RABBITMQ_NODE_NAME
+  - RABBITMQ_NODE_PORT
+  - RABBITMQ_MANAGEMENT_PORT
+  - RABBITMQ_MQTT_PORT
+  - RABBITMQ_STOMP_PORT
+  - RABBITMQ_CONFIG_FILE
+  - RABBITMQ_LOGS
+  - RABBITMQ_SASL_LOGS
+  - DEV_VHOST
+  - DEV_USER
+  - DEV_PASSWORD
+  - CREATE_TEST_VHOST
+  - TZ
+
+health_check:
+  command: "rabbitmq-diagnostics -q ping"
+  interval: "10s"
+  timeout: "5s"
+  retries: 3
+  start_period: "30s"
+
+ports:
+  - 5672   # AMQP
+  - 15672  # Management
+  - 1883   # MQTT
+  - 61613  # STOMP
+  - 15692  # Prometheus metrics
+  - 25672  # Inter-node and CLI tool communication
+
+plugins:
+  - rabbitmq_management
+  - rabbitmq_management_agent
+  - rabbitmq_prometheus
+  - rabbitmq_mqtt
+  - rabbitmq_stomp
+  - rabbitmq_federation
+  - rabbitmq_federation_management
+  - rabbitmq_shovel
+  - rabbitmq_shovel_management
+  - rabbitmq_delayed_message_exchange
+  - rabbitmq_consistent_hash_exchange
+  - rabbitmq_top
+  - rabbitmq_tracing

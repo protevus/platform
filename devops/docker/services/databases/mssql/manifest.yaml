@@ -1,0 +1,143 @@
+name: mssql
+category: databases
+description: Microsoft SQL Server database
+versions:
+  - "2022"
+  - "2019"
+  - "2017"
+default_version: "2022"
+
+config_schema:
+  port:
+    type: integer
+    default: 1433
+    description: Port to expose SQL Server
+    required: true
+
+  memory_limit:
+    type: string
+    default: "2GB"
+    description: Maximum memory limit
+    required: false
+
+  max_degree_of_parallelism:
+    type: integer
+    default: 2
+    description: Maximum degree of parallelism
+    required: false
+
+  cost_threshold_for_parallelism:
+    type: integer
+    default: 50
+    description: Cost threshold for parallelism
+    required: false
+
+  max_server_memory:
+    type: integer
+    default: 2048
+    description: Maximum server memory (MB)
+    required: false
+
+  min_server_memory:
+    type: integer
+    default: 1024
+    description: Minimum server memory (MB)
+    required: false
+
+  tempdb_files:
+    type: integer
+    default: 4
+    description: Number of tempdb data files
+    required: false
+
+  tempdb_file_size:
+    type: string
+    default: "512MB"
+    description: Initial size of tempdb files
+    required: false
+
+  tempdb_file_growth:
+    type: string
+    default: "128MB"
+    description: Growth increment for tempdb files
+    required: false
+
+  max_worker_threads:
+    type: integer
+    default: 0
+    description: Maximum worker threads (0 = automatic)
+    required: false
+
+  query_governor_cost_limit:
+    type: integer
+    default: 0
+    description: Query governor cost limit (0 = disabled)
+    required: false
+
+  remote_query_timeout:
+    type: integer
+    default: 600
+    description: Remote query timeout in seconds
+    required: false
+
+  clr_enabled:
+    type: boolean
+    default: false
+    description: Enable CLR integration
+    required: false
+
+  filestream_access_level:
+    type: string
+    default: "0"
+    description: FILESTREAM access level
+    required: false
+
+  optimize_for_ad_hoc_workloads:
+    type: boolean
+    default: true
+    description: Optimize for ad hoc workloads
+    required: false
+
+  allow_snapshot_isolation:
+    type: boolean
+    default: true
+    description: Allow snapshot isolation
+    required: false
+
+  read_committed_snapshot:
+    type: boolean
+    default: true
+    description: Enable read committed snapshot
+    required: false
+
+volumes:
+  - data:/var/opt/mssql/data
+  - backups:/var/opt/mssql/backups
+  - logs:/var/opt/mssql/log
+  - config:/var/opt/mssql/config
+
+environment:
+  - ACCEPT_EULA
+  - MSSQL_SA_PASSWORD
+  - MSSQL_PID
+  - MSSQL_COLLATION
+  - MSSQL_TCP_PORT
+  - MSSQL_IP_ADDRESS
+  - MSSQL_MEMORY_LIMIT_MB
+  - MSSQL_AGENT_ENABLED
+  - DEV_DB_NAME
+  - DEV_DB_USER
+  - DEV_DB_PASSWORD
+  - CREATE_TEST_DB
+  - TZ
+
+health_check:
+  command: "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P \"${MSSQL_SA_PASSWORD}\" -Q 'SELECT 1' || exit 1"
+  interval: "10s"
+  timeout: "5s"
+  retries: 3
+  start_period: "30s"
+
+ports:
+  - 1433  # Main port
+  - 1434  # Browser service

@@ -1,0 +1,186 @@
+name: redis
+category: caching
+description: Redis in-memory data structure store, cache, message broker, and queue
+versions:
+  - "7.0"
+  - "6.2"
+  - "6.0"
+default_version: "7.0"
+
+config_schema:
+  port:
+    type: integer
+    default: 6379
+    description: Port to expose Redis
+    required: true
+
+  maxmemory:
+    type: string
+    default: "256mb"
+    description: Maximum memory Redis can use
+    required: false
+
+  maxmemory_policy:
+    type: string
+    default: "allkeys-lru"
+    description: Eviction policy (volatile-lru, allkeys-lru, volatile-lfu, allkeys-lfu, volatile-random, allkeys-random, volatile-ttl, noeviction)
+    required: false
+
+  maxmemory_samples:
+    type: integer
+    default: 5
+    description: Sample size for eviction algorithms
+    required: false
+
+  active_defrag:
+    type: boolean
+    default: false
+    description: Enable active defragmentation
+    required: false
+
+  active_defrag_threshold_lower:
+    type: integer
+    default: 10
+    description: Minimum percentage of fragmentation to start defrag
+    required: false
+
+  active_defrag_threshold_upper:
+    type: integer
+    default: 100
+    description: Maximum percentage of fragmentation to start defrag
+    required: false
+
+  databases:
+    type: integer
+    default: 16
+    description: Number of Redis databases
+    required: false
+
+  save_intervals:
+    type: string
+    default: "900:1 300:10 60:10000"
+    description: Save intervals (seconds:changes)
+    required: false
+
+  appendonly:
+    type: boolean
+    default: true
+    description: Enable append-only file persistence
+    required: false
+
+  appendfsync:
+    type: string
+    default: "everysec"
+    description: How often to sync the append-only file
+    required: false
+
+  notify_keyspace_events:
+    type: string
+    default: "Kgx"
+    description: Keyspace notifications for development
+    required: false
+
+  slowlog_log_slower_than:
+    type: integer
+    default: 10000
+    description: Slow log threshold in microseconds
+    required: false
+
+  slowlog_max_len:
+    type: integer
+    default: 128
+    description: Slow log maximum length
+    required: false
+
+  timeout:
+    type: integer
+    default: 0
+    description: Connection timeout in seconds
+    required: false
+
+  tcp_keepalive:
+    type: integer
+    default: 300
+    description: TCP keepalive interval
+    required: false
+
+  replica_read_only:
+    type: boolean
+    default: true
+    description: Make replica nodes read-only
+    required: false
+
+  lazyfree_lazy_eviction:
+    type: boolean
+    default: true
+    description: Perform evictions in background threads
+    required: false
+
+  lazyfree_lazy_expire:
+    type: boolean
+    default: true
+    description: Perform key expiration in background threads
+    required: false
+
+  latency_monitor_threshold:
+    type: integer
+    default: 100
+    description: Latency monitoring threshold in milliseconds
+    required: false
+
+  client_output_buffer_limit_normal:
+    type: string
+    default: "0 0 0"
+    description: Normal client output buffer limits
+    required: false
+
+  client_output_buffer_limit_pubsub:
+    type: string
+    default: "32mb 8mb 60"
+    description: Pub/Sub client output buffer limits
+    required: false
+
+volumes:
+  - data:/data
+  - backups:/backups
+  - logs:/var/log/redis
+
+environment:
+  - REDIS_PASSWORD
+  - REDIS_DATABASES
+  - REDIS_MAX_MEMORY
+  - REDIS_MAX_MEMORY_POLICY
+  - REDIS_MAX_MEMORY_SAMPLES
+  - REDIS_ACTIVE_DEFRAG
+  - REDIS_APPEND_ONLY
+  - REDIS_SAVE_INTERVALS
+  - REDIS_NOTIFY_KEYSPACE_EVENTS
+  - REDIS_SLOWLOG_LOG_SLOWER_THAN
+  - REDIS_SLOWLOG_MAX_LEN
+  - REDIS_LATENCY_MONITOR_THRESHOLD
+  - REDIS_LAZYFREE_LAZY_EVICTION
+  - REDIS_LAZYFREE_LAZY_EXPIRE
+  - TZ
+
+health_check:
+  command: "redis-cli ping"
+  interval: "10s"
+  timeout: "5s"
+  retries: 3
+  start_period: "5s"
+
+ports:
+  - 6379  # Main port
+
+features:
+  - Caching with multiple eviction policies
+  - Pub/Sub messaging
+  - Lists, Sets, Sorted Sets, Hashes
+  - Bitmap and HyperLogLog
+  - Lua scripting
+  - Transactions
+  - Key expiration
+  - LRU/LFU eviction
+  - Replication
+  - Persistence
+  - Redis Cluster protocol

@@ -1,0 +1,91 @@
+name: mongodb
+category: databases
+description: MongoDB database server
+versions:
+  - "6.0"
+  - "5.0"
+  - "4.4"
+default_version: "6.0"
+
+config_schema:
+  port:
+    type: integer
+    default: 27017
+    description: Port to expose MongoDB
+    required: true
+
+  auth_enabled:
+    type: boolean
+    default: true
+    description: Enable authentication
+    required: false
+
+  oplog_size:
+    type: integer
+    default: 1024
+    description: Size of oplog in MB
+    required: false
+
+  wired_tiger_cache_size:
+    type: string
+    default: "256MB"
+    description: WiredTiger cache size
+    required: false
+
+  max_connections:
+    type: integer
+    default: 100
+    description: Maximum number of connections
+    required: false
+
+  storage_engine:
+    type: string
+    default: "wiredTiger"
+    description: Storage engine to use
+    required: false
+
+  journal_enabled:
+    type: boolean
+    default: true
+    description: Enable journaling
+    required: false
+
+  replication_enabled:
+    type: boolean
+    default: false
+    description: Enable replication features
+    required: false
+
+  profiling_level:
+    type: integer
+    default: 0
+    description: Profiling level (0=off, 1=slow ops, 2=all)
+    required: false
+
+  profiling_slow_ms:
+    type: integer
+    default: 100
+    description: Slow operation threshold in milliseconds
+    required: false
+
+volumes:
+  - data:/data/db
+  - config:/data/configdb
+  - backups:/backups
+  - logs:/var/log/mongodb
+
+environment:
+  - MONGO_INITDB_ROOT_USERNAME
+  - MONGO_INITDB_ROOT_PASSWORD
+  - MONGO_INITDB_DATABASE
+  - DEV_DB_NAME
+  - DEV_DB_USER
+  - DEV_DB_PASSWORD
+  - CREATE_TEST_DB
+  - MONGODB_EXTRA_FLAGS
+
+health_check:
+  command: "mongosh --eval 'db.runCommand({ ping: 1 })'"
+  interval: "10s"
+  timeout: "5s"
+  retries: 3

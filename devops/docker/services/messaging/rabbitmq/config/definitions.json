@@ -1,0 +1,196 @@
+{
+    "rabbit_version": "3.12.0",
+    "rabbitmq_version": "3.12.0",
+    "product_name": "RabbitMQ",
+    "product_version": "3.12.0",
+    "users": [
+        {
+            "name": "developer",
+            "password_hash": "",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": ["administrator", "management"]
+        }
+    ],
+    "vhosts": [
+        {
+            "name": "/"
+        },
+        {
+            "name": "development"
+        },
+        {
+            "name": "test"
+        }
+    ],
+    "permissions": [
+        {
+            "user": "developer",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "developer",
+            "vhost": "development",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "developer",
+            "vhost": "test",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        }
+    ],
+    "parameters": [],
+    "policies": [
+        {
+            "vhost": "development",
+            "name": "dev-ha-policy",
+            "pattern": "^dev\\.",
+            "apply-to": "all",
+            "definition": {
+                "ha-mode": "all",
+                "ha-sync-mode": "automatic",
+                "message-ttl": 86400000
+            },
+            "priority": 1
+        },
+        {
+            "vhost": "development",
+            "name": "dev-dl-policy",
+            "pattern": "^(?!amq\\.|dev\\.dl\\.).*",
+            "apply-to": "queues",
+            "definition": {
+                "dead-letter-exchange": "dev.dlx",
+                "dead-letter-routing-key": "dead-letter"
+            },
+            "priority": 2
+        }
+    ],
+    "queues": [
+        {
+            "name": "dev.notifications",
+            "vhost": "development",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-message-ttl": 86400000,
+                "x-queue-type": "classic"
+            }
+        },
+        {
+            "name": "dev.events",
+            "vhost": "development",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-message-ttl": 86400000,
+                "x-queue-type": "classic"
+            }
+        },
+        {
+            "name": "dev.logs",
+            "vhost": "development",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-message-ttl": 86400000,
+                "x-queue-type": "classic"
+            }
+        },
+        {
+            "name": "dev.dl.queue",
+            "vhost": "development",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {
+                "x-queue-type": "classic"
+            }
+        }
+    ],
+    "exchanges": [
+        {
+            "name": "dev.topic",
+            "vhost": "development",
+            "type": "topic",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "dev.direct",
+            "vhost": "development",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "dev.fanout",
+            "vhost": "development",
+            "type": "fanout",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "dev.headers",
+            "vhost": "development",
+            "type": "headers",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        },
+        {
+            "name": "dev.dlx",
+            "vhost": "development",
+            "type": "direct",
+            "durable": true,
+            "auto_delete": false,
+            "internal": false,
+            "arguments": {}
+        }
+    ],
+    "bindings": [
+        {
+            "source": "dev.topic",
+            "vhost": "development",
+            "destination": "dev.notifications",
+            "destination_type": "queue",
+            "routing_key": "notifications.#",
+            "arguments": {}
+        },
+        {
+            "source": "dev.topic",
+            "vhost": "development",
+            "destination": "dev.events",
+            "destination_type": "queue",
+            "routing_key": "events.#",
+            "arguments": {}
+        },
+        {
+            "source": "dev.topic",
+            "vhost": "development",
+            "destination": "dev.logs",
+            "destination_type": "queue",
+            "routing_key": "logs.#",
+            "arguments": {}
+        },
+        {
+            "source": "dev.dlx",
+            "vhost": "development",
+            "destination": "dev.dl.queue",
+            "destination_type": "queue",
+            "routing_key": "dead-letter",
+            "arguments": {}
+        }
+    ]
+}

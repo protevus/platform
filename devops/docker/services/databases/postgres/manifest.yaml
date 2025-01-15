@@ -1,0 +1,72 @@
+name: postgres
+category: databases
+description: PostgreSQL database server
+versions:
+  - "14"
+  - "13"
+  - "12"
+  - "11"
+  - "10"
+default_version: "14"
+
+config_schema:
+  port:
+    type: integer
+    default: 5432
+    description: Port to expose PostgreSQL
+    required: true
+
+  max_connections:
+    type: integer
+    default: 100
+    description: Maximum number of concurrent connections
+    required: false
+
+  shared_buffers:
+    type: string
+    default: "128MB"
+    description: Memory used for shared memory buffers
+    required: false
+
+  work_mem:
+    type: string
+    default: "4MB"
+    description: Memory used for sort operations and hash tables
+    required: false
+
+  maintenance_work_mem:
+    type: string
+    default: "64MB"
+    description: Memory used for maintenance operations
+    required: false
+
+  effective_cache_size:
+    type: string
+    default: "4GB"
+    description: Planner's assumption about size of disk cache
+    required: false
+
+  timezone:
+    type: string
+    default: "UTC"
+    description: Timezone for the server
+    required: false
+
+volumes:
+  - data:/var/lib/postgresql/data
+  - backups:/backups
+
+environment:
+  - POSTGRES_USER
+  - POSTGRES_PASSWORD
+  - POSTGRES_DB
+  - POSTGRES_INITDB_ARGS
+  - POSTGRES_INITDB_WALDIR
+  - POSTGRES_HOST_AUTH_METHOD
+  - PGDATA
+
+health_check:
+  command: ["pg_isready", "-U", "postgres"]
+  interval: "10s"
+  timeout: "5s"
+  retries: 3

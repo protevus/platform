@@ -1,0 +1,136 @@
+name: firebird
+category: databases
+description: Firebird SQL database server
+versions:
+  - "4.0"
+  - "3.0"
+default_version: "4.0"
+
+config_schema:
+  port:
+    type: integer
+    default: 3050
+    description: Port to expose Firebird
+    required: true
+
+  architecture:
+    type: string
+    default: "superclassic"
+    description: Server architecture (superclassic or superserver)
+    required: false
+
+  page_size:
+    type: integer
+    default: 16384
+    description: Database page size in bytes
+    required: false
+
+  default_character_set:
+    type: string
+    default: "UTF8"
+    description: Default character set
+    required: false
+
+  max_connections:
+    type: integer
+    default: 100
+    description: Maximum number of concurrent connections
+    required: false
+
+  temp_cache_limit:
+    type: string
+    default: "64M"
+    description: Temporary cache size limit
+    required: false
+
+  temp_directories:
+    type: string
+    default: "/tmp"
+    description: Temporary directories
+    required: false
+
+  wire_compression:
+    type: boolean
+    default: true
+    description: Enable wire protocol compression
+    required: false
+
+  wire_encryption:
+    type: boolean
+    default: false
+    description: Enable wire protocol encryption
+    required: false
+
+  guard_file:
+    type: string
+    default: "guardian"
+    description: Guardian file name
+    required: false
+
+  remote_buffer_size:
+    type: string
+    default: "8K"
+    description: Remote buffer size
+    required: false
+
+  connection_timeout:
+    type: integer
+    default: 180
+    description: Connection timeout in seconds
+    required: false
+
+  dummy_packet_interval:
+    type: integer
+    default: 60
+    description: Keep-alive packet interval
+    required: false
+
+  linger:
+    type: integer
+    default: 30
+    description: Socket linger time
+    required: false
+
+  security_database:
+    type: string
+    default: "security4.fdb"
+    description: Security database name
+    required: false
+
+volumes:
+  - data:/firebird/data
+  - backups:/firebird/backups
+  - logs:/firebird/logs
+  - config:/firebird/etc
+
+environment:
+  - ISC_USER
+  - ISC_PASSWORD
+  - FIREBIRD_USER
+  - FIREBIRD_PASSWORD
+  - FIREBIRD_DATABASE
+  - FIREBIRD_SAMPLE_DB
+  - FIREBIRD_SECURITY_DB
+  - FB_ARCHITECTURE
+  - FB_PAGE_SIZE
+  - FB_CHARACTER_SET
+  - FB_MAX_CONNECTIONS
+  - FB_TEMP_CACHE_LIMIT
+  - FB_WIRE_COMPRESSION
+  - FB_WIRE_ENCRYPTION
+  - DEV_DB_NAME
+  - DEV_DB_USER
+  - DEV_DB_PASSWORD
+  - CREATE_TEST_DB
+  - TZ
+
+health_check:
+  command: "isql -user $ISC_USER -password $ISC_PASSWORD -q -bail localhost:employee"
+  interval: "10s"
+  timeout: "5s"
+  retries: 3
+  start_period: "30s"
+
+ports:
+  - 3050  # Main port
+  - 3051  # Event port (optional)

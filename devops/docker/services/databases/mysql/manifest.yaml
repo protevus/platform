@@ -1,0 +1,96 @@
+name: mysql
+category: databases
+description: MySQL database server
+versions:
+  - "8.0"
+  - "5.7"
+default_version: "8.0"
+
+config_schema:
+  port:
+    type: integer
+    default: 3306
+    description: Port to expose MySQL
+    required: true
+
+  max_connections:
+    type: integer
+    default: 100
+    description: Maximum number of concurrent connections
+    required: false
+
+  innodb_buffer_pool_size:
+    type: string
+    default: "128M"
+    description: Size of InnoDB buffer pool
+    required: false
+
+  innodb_log_file_size:
+    type: string
+    default: "64M"
+    description: Size of InnoDB log files
+    required: false
+
+  max_allowed_packet:
+    type: string
+    default: "64M"
+    description: Maximum size of one packet
+    required: false
+
+  key_buffer_size:
+    type: string
+    default: "32M"
+    description: Size of buffer used for MyISAM table indexes
+    required: false
+
+  thread_cache_size:
+    type: integer
+    default: 8
+    description: Number of threads to cache
+    required: false
+
+  query_cache_size:
+    type: string
+    default: "32M"
+    description: Size of query cache
+    required: false
+
+  character_set_server:
+    type: string
+    default: "utf8mb4"
+    description: Default character set
+    required: false
+
+  collation_server:
+    type: string
+    default: "utf8mb4_unicode_ci"
+    description: Default collation
+    required: false
+
+  default_authentication_plugin:
+    type: string
+    default: "mysql_native_password"
+    description: Default authentication plugin
+    required: false
+
+volumes:
+  - data:/var/lib/mysql
+  - backups:/backups
+  - logs:/var/log/mysql
+
+environment:
+  - MYSQL_ROOT_PASSWORD
+  - MYSQL_DATABASE
+  - MYSQL_USER
+  - MYSQL_PASSWORD
+  - MYSQL_ALLOW_EMPTY_PASSWORD
+  - MYSQL_RANDOM_ROOT_PASSWORD
+  - MYSQL_ONETIME_PASSWORD
+  - MYSQL_INITDB_SKIP_TZINFO
+  - TZ
+
+health_check:
+  command: "mysqladmin ping -h localhost -u root --password=\"${MYSQL_ROOT_PASSWORD}\""
+  interval: "10s"
+  timeout: "5s"
+  retries: 3
