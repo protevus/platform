@@ -1,9 +1,0 @@
-{
-  "messages": {
-    "welcome": "¡Hola!",
-    "greeting": "¡Hola, :name!",
-    "items": "Tienes {1} artículo|Tienes :count artículos",
-    "new_feature": "¡Mira nuestra nueva función!",
-    "add_item": "Agregar Artículo"
-  }
-}

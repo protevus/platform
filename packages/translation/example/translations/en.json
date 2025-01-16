@@ -1,9 +1,0 @@
-{
-  "messages": {
-    "welcome": "Hello!",
-    "greeting": "Hello, :name!",
-    "items": "You have {1} item|You have :count items",
-    "new_feature": "Check out our new feature!",
-    "add_item": "Add Item"
-  }
-}
