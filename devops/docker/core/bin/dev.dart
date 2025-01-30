@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart' as path;
-import '../lib/src/service_manager.dart';
+import 'package:dev_service_manager/src/service_manager.dart';
 
 /// Base class for service commands
 abstract class ServiceCommand extends Command {
