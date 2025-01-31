@@ -165,5 +165,44 @@ not_in_nav: |
 
 nav:
   - Home: index.md
+  - Getting Started:
+    - the-basic/installation.md
+    - the-basic/routing.md
+    - the-basic/request.md
+    - the-basic/response.md
+    - the-basic/controller.md
+    - the-basic/middleware.md
+    - the-basic/validation.md
+  - Digging deeper:
+    - digging-deeper/cache.md
+    - digging-deeper/file-storage.md
+    - digging-deeper/env.md
+    - digging-deeper/isolate.md
+    - digging-deeper/services.md
+    - digging-deeper/websocket.md
+    - digging-deeper/dox-cli.md
+    - digging-deeper/deployment.md
+    - digging-deeper/testing.md
+  - Database:
+    - database/migration.md
+    - database/query-builder.md
+    - Model:
+      - database/model/index.md
+      - Relationship:
+        - database/model/relationship/has-one.md
+        - database/model/relationship/has-many.md
+        - database/model/relationship/belongs-to.md
+        - database/model/relationship/many-to-many.md
+      - database/model/serializer.md
+  - Security:
+    - security/authentication.md
+    - security/cors.md
+    - security/encryption.md
+    - security/hashing.md
+  - Others:
+    - others/contribute.md
+    - Releases:
+      - others/releases/core-release.md
+      - others/releases/query-builder-release.md
   - Blog:
     - blog/index.md
