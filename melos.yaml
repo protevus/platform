@@ -12,16 +12,14 @@ name: protevus_platform
 repository: https://github.com/protevus/platform
 packages:
   - packages/**
-  - incubation/**
   - apps/**
-  - helpers/tools/**
   - examples/**
 
 command:
   version:
     linkToCommits: true
     message: "chore: Bump version to %v"
-    branch: main
+    branch: dmz
     workspaceChangelog: true
 
 ide:
