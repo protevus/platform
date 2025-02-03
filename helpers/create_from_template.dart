@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:path/path.dart' as path;
-import 'package:yaml/yaml.dart';
+//import 'package:yaml/yaml.dart';
 
 void main(List<String> args) async {
   // Parse command line arguments
@@ -158,7 +158,7 @@ Future<void> _processTemplateFiles(
 
 Future<void> _updatePubspec(File pubspecFile, String projectName) async {
   final content = await pubspecFile.readAsString();
-  final yaml = loadYaml(content);
+  //final yaml = loadYaml(content);
 
   // Create new pubspec content with updated name
   final newContent = content.replaceFirst(
