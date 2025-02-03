@@ -1,54 +1,31 @@
 # Project information
 site_name: Protevus
-site_url: https://protevus.com/
-site_author: Patrick Stewart
 site_description: >-
   Protevus is a unified full-stack platform with an expressive, elegant syntax. 
   We’ve already established the foundation — freeing you to create and deploy across multiple targets 
   all from the same codebase.
+site_author: Patrick Stewart
+site_url: https://protevus.com/
 
 # Repository
 repo_name: protevus/platform
 repo_url: https://github.com/protevus/platform
-
-# Copyright
-copyright: Copyright &copy; 2023 - 2025 Protevus
+edit_uri: 'https://github.com/protevus/platform/blob/dmz/'
 
 # Custom Directories
 docs_dir: docs
+
+# Copyright
+copyright: Copyright &copy; 2023 - 2025 Protevus
 
 # Configuration
 theme:
   name: material
   custom_dir: website/overrides
-  features:
-    - announce.dismiss
-    - content.action.edit
-    - content.action.view
-    - content.code.annotate
-    - content.code.copy
-    # - content.code.select
-    # - content.footnote.tooltips
-    # - content.tabs.link
-    - content.tooltips
-    # - header.autohide
-    # - navigation.expand
-    - navigation.footer
-    - navigation.indexes
-    # - navigation.instant
-    # - navigation.instant.prefetch
-    # - navigation.instant.progress
-    # - navigation.prune
-    - navigation.sections
-    - navigation.tabs
-    # - navigation.tabs.sticky
-    - navigation.top
-    - navigation.tracking
-    - search.highlight
-    - search.share
-    - search.suggest
-    - toc.follow
-    # - toc.integrate
+  logo: assets/logo.svg
+  favicon: assets/favicon.png
+  icon:
+    logo: logo
   palette:
     - media: "(prefers-color-scheme)"
       toggle:
@@ -71,22 +48,35 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
-  favicon: assets/favicon.png
-  icon:
-    logo: logo
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.top
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.path
+    - navigation.indexes
+    - navigation.prune
+    - navigation.expand
+    - navigation.footer
+    - content.action.edit
+    - content.action.view
+    - content.code.copy
+    - content.code.annotate
+    - content.tooltips
+    - toc.follow
+    - announce.dismiss
+    - search.highlight
+    - search.share
+    - search.suggest
 
-    # Plugins
+# Plugins
 plugins:
   - blog
   - search:
       separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
   - minify:
       minify_html: true
-
-# Hooks
-hooks:
-  - website/overrides/hooks/shortcodes.py
-  - website/overrides/hooks/translations.py
 
 # Additional configuration
 extra:
@@ -99,52 +89,55 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/protevus
-    # - icon: fontawesome/brands/docker
-    #   link: https://hub.docker.com/r/squidfunk/mkdocs-material/
-    # - icon: fontawesome/brands/python
-    #   link: https://pypi.org/project/mkdocs-material/
-    # - icon: fontawesome/brands/bluesky
-    #   link: https://bsky.app/profile/squidfunk.bsky.social
-    # - icon: fontawesome/brands/mastodon
-    #   link: https://fosstodon.org/@squidfunk
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/68wNtUEX
+    - icon: fontawesome/brands/bluesky
+      link: https://bsky.app/profile/protevus.bsky.social
+    - icon: fontawesome/brands/mastodon
+      link: https://mastodon.social/@protevus
     - icon: fontawesome/brands/x-twitter
       link: https://x.com/protevus
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/@protevus
+
+extra_css:
+  - assets/style.css
+extra_javascript:
+  - assets/script.js
+
+hooks:
+  - website/overrides/hooks/shortcodes.py
+  - website/overrides/hooks/translations.py
 
 # Extensions
 markdown_extensions:
   - abbr
   - admonition
   - attr_list
+  - md_in_html
   - def_list
   - footnotes
-  - md_in_html
-  - toc:
-      permalink: true
-  - pymdownx.arithmatex:
-      generic: true
-  - pymdownx.betterem:
-      smart_enable: all
   - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.critic
   - pymdownx.details
   - pymdownx.emoji:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
       emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.keys
+  # - pymdownx.magiclink:
+  #     normalize_issue_symbols: true
+  #     repo_url_shorthand: true
+  #     user: squidfunk
+  #     repo: mkdocs-material
+  - pymdownx.smartsymbols
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
   - pymdownx.inlinehilite
-  - pymdownx.keys
-  - pymdownx.magiclink:
-      normalize_issue_symbols: true
-      repo_url_shorthand: true
-      user: squidfunk
-      repo: mkdocs-material
-  - pymdownx.mark
-  - pymdownx.smartsymbols
-  - pymdownx.snippets:
-      auto_append:
-        - includes/mkdocs.md
+  - pymdownx.snippets
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -158,51 +151,77 @@ markdown_extensions:
           case: lower
   - pymdownx.tasklist:
       custom_checkbox: true
-  - pymdownx.tilde
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - toc:
+      permalink: true
+  - tables
 
 not_in_nav: |
   /tutorials/**/*.md
 
 nav:
   - Home: index.md
-  - Getting Started:
-    - the-basic/installation.md
-    - the-basic/routing.md
-    - the-basic/request.md
-    - the-basic/response.md
-    - the-basic/controller.md
-    - the-basic/middleware.md
-    - the-basic/validation.md
-  - Digging deeper:
-    - digging-deeper/cache.md
-    - digging-deeper/file-storage.md
-    - digging-deeper/env.md
-    - digging-deeper/isolate.md
-    - digging-deeper/services.md
-    - digging-deeper/websocket.md
-    - digging-deeper/dox-cli.md
-    - digging-deeper/deployment.md
-    - digging-deeper/testing.md
-  - Database:
-    - database/migration.md
-    - database/query-builder.md
-    - Model:
-      - database/model/index.md
+  - Features: features.md
+  - Ecosystem:
+    - ecosystem/index.md
+  - Documentation:
+    - Documentation: documentation/index.md
+    - Prologue:
+      - documentation/prologue/release-notes.md
+      - documentation/prologue/upgrade-guide.md
+      - documentation/prologue/contributing-guide.md
+    - Getting Started:
+      - documentation/the-basic/installation.md
+    - Architecture Concepts:
+      - documentation/architecture-concepts/request-lifecycle.md
+      - documentation/architecture-concepts/service-container.md
+      - documentation/architecture-concepts/services.md
+      - documentation/architecture-concepts/facades.md
+    - The Basics:
+      - documentation/the-basic/routing.md
+      - documentation/the-basic/request.md
+      - documentation/the-basic/response.md
+      - documentation/the-basic/controller.md
+      - documentation/the-basic/middleware.md
+      - documentation/the-basic/validation.md
+    - Digging Deeper:
+      - documentation/digging-deeper/cache.md
+      - documentation/digging-deeper/file-storage.md
+      - documentation/digging-deeper/env.md
+      - documentation/digging-deeper/isolate.md
+      - documentation/digging-deeper/services.md
+      - documentation/digging-deeper/websocket.md
+      - documentation/digging-deeper/dox-cli.md
+      - documentation/digging-deeper/deployment.md
+      - documentation/digging-deeper/testing.md
+    - Security:
+      - documentation/security/authentication.md
+      - documentation/security/cors.md
+      - documentation/security/encryption.md
+      - documentation/security/hashing.md
+    - Database:
+      - documentation/database/migration.md
+      - documentation/database/query-builder.md
+      - Model:
+        - documentation/database/model/index.md
       - Relationship:
-        - database/model/relationship/has-one.md
-        - database/model/relationship/has-many.md
-        - database/model/relationship/belongs-to.md
-        - database/model/relationship/many-to-many.md
-      - database/model/serializer.md
-  - Security:
-    - security/authentication.md
-    - security/cors.md
-    - security/encryption.md
-    - security/hashing.md
-  - Others:
-    - others/contribute.md
+        - documentation/database/model/relationship/has-one.md
+        - documentation/database/model/relationship/has-many.md
+        - documentation/database/model/relationship/belongs-to.md
+        - documentation/database/model/relationship/many-to-many.md
+        - documentation/database/model/serializer.md
+  - Examples:
+    - examples/index.md
+  - Certification: certification/
+  - Insiders:
+    - insiders/insiders.md
+  - Community:
+    - community/contribute.md
     - Releases:
-      - others/releases/core-release.md
-      - others/releases/query-builder-release.md
+      - community/releases/core-release.md
+      - community/releases/query-builder-release.md
   - Blog:
     - blog/index.md
