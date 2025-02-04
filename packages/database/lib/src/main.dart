@@ -1,5 +1,5 @@
-import 'package:dox_query_builder/dox_query_builder.dart';
-import 'package:dox_query_builder/src/drivers/mysql_driver.dart';
+import 'package:illuminate_database/dox_query_builder.dart';
+import 'package:illuminate_database/src/drivers/mysql_driver.dart';
 import 'package:mysql1/mysql1.dart';
 import 'package:postgres/postgres.dart';
 

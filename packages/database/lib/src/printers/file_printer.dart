@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dox_query_builder/dox_query_builder.dart';
+import 'package:illuminate_database/dox_query_builder.dart';
 
 // coverage:ignore-file
 class FileQueryPrinter implements QueryPrinter {

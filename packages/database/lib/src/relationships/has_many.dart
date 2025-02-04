@@ -1,4 +1,4 @@
-import 'package:dox_query_builder/dox_query_builder.dart';
+import 'package:illuminate_database/dox_query_builder.dart';
 
 /// has many relationships query
 M? hasMany<T, M>(

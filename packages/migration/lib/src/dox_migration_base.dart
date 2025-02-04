@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:dox_migration/src/migrations/sql_ext_migration.dart';
-import 'package:dox_migration/src/utils/env.dart';
-import 'package:dox_migration/src/utils/file_extension.dart';
-import 'package:dox_migration/src/utils/logger.dart';
-import 'package:dox_migration/src/utils/utils.dart';
+import 'package:illuminate_migration/src/migrations/sql_ext_migration.dart';
+import 'package:illuminate_migration/src/utils/env.dart';
+import 'package:illuminate_migration/src/utils/file_extension.dart';
+import 'package:illuminate_migration/src/utils/logger.dart';
+import 'package:illuminate_migration/src/utils/utils.dart';
 import 'package:postgres/postgres.dart';
 
 class Migration {

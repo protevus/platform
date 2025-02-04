@@ -1,5 +1,5 @@
 import 'package:dox_app/config/redis.dart';
-import 'package:dox_core/dox_core.dart';
+import 'package:illuminate_foundation/dox_core.dart';
 
 class WebController {
   String pong(DoxRequest req) {

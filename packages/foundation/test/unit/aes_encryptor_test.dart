@@ -1,4 +1,4 @@
-import 'package:dox_core/utils/aes_encryptor.dart';
+import 'package:illuminate_foundation/utils/aes_encryptor.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -1,5 +1,5 @@
-import 'package:dox_websocket/src/utils/constant.dart';
-import 'package:dox_websocket/src/utils/json.dart';
+import 'package:illuminate_websocket/src/utils/constant.dart';
+import 'package:illuminate_websocket/src/utils/json.dart';
 
 class WebsocketEmitEvent {
   final String senderId;

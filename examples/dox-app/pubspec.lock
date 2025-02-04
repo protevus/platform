@@ -226,54 +226,21 @@ packages:
     source: hosted
     version: "2.3.2"
   dox_annotation:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "../../packages/annotation"
-      relative: true
-    source: path
+      name: dox_annotation
+      sha256: "11fd6f0b950669e82b3604583f829a5739f53afb22dc4173f9803fc17259cfd1"
+      url: "https://pub.dev"
+    source: hosted
     version: "1.0.5"
-  dox_auth:
-    dependency: "direct main"
-    description:
-      path: "../../packages/auth"
-      relative: true
-    source: path
-    version: "2.0.0"
-  dox_builder:
-    dependency: "direct dev"
-    description:
-      path: "../../packages/builder"
-      relative: true
-    source: path
-    version: "2.0.0"
-  dox_core:
-    dependency: "direct main"
-    description:
-      path: "../../packages/foundation"
-      relative: true
-    source: path
-    version: "2.0.0"
-  dox_migration:
-    dependency: "direct main"
-    description:
-      path: "../../packages/migration"
-      relative: true
-    source: path
-    version: "2.0.0"
   dox_query_builder:
     dependency: "direct main"
     description:
-      path: "../../packages/database"
-      relative: true
-    source: path
+      name: dox_query_builder
+      sha256: "8176a24d89d6ad5b61bda80ea230792294b73862a487c2e7d5e603e416e46469"
+      url: "https://pub.dev"
+    source: hosted
     version: "2.1.0"
-  dox_websocket:
-    dependency: "direct main"
-    description:
-      path: "../../packages/websocket"
-      relative: true
-    source: path
-    version: "1.0.0"
   ed25519_edwards:
     dependency: transitive
     description:
@@ -354,6 +321,48 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  illuminate_annotation:
+    dependency: "direct overridden"
+    description:
+      path: "../../packages/annotation"
+      relative: true
+    source: path
+    version: "1.0.5"
+  illuminate_auth:
+    dependency: "direct main"
+    description:
+      path: "../../packages/auth"
+      relative: true
+    source: path
+    version: "2.0.0"
+  illuminate_builder:
+    dependency: "direct dev"
+    description:
+      path: "../../packages/builder"
+      relative: true
+    source: path
+    version: "2.0.0"
+  illuminate_foundation:
+    dependency: "direct main"
+    description:
+      path: "../../packages/foundation"
+      relative: true
+    source: path
+    version: "2.0.0"
+  illuminate_migration:
+    dependency: "direct main"
+    description:
+      path: "../../packages/migration"
+      relative: true
+    source: path
+    version: "2.0.0"
+  illuminate_websocket:
+    dependency: "direct main"
+    description:
+      path: "../../packages/websocket"
+      relative: true
+    source: path
+    version: "1.0.0"
   io:
     dependency: transitive
     description:

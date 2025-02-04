@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dox_annotation/src/core_annotation.dart';
+import 'package:illuminate_annotation/src/core_annotation.dart';
 
 abstract class IDoxWebsocket {
   dynamic create();

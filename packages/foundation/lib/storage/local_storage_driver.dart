@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:dox_core/dox_core.dart';
+import 'package:illuminate_foundation/dox_core.dart';
 import 'package:mime/mime.dart';
 
 class LocalStorageDriver implements StorageDriverInterface {

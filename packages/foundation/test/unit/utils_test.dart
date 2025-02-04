@@ -1,4 +1,4 @@
-import 'package:dox_core/utils/utils.dart';
+import 'package:illuminate_foundation/utils/utils.dart';
 import 'package:test/test.dart';
 
 void main() {

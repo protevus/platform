@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dox_annotation/dox_annotation.dart';
-import 'package:dox_websocket/src/utils/constant.dart';
-import 'package:dox_websocket/src/websocket_emitter.dart';
-import 'package:dox_websocket/src/websocket_storage.dart';
+import 'package:illuminate_annotation/dox_annotation.dart';
+import 'package:illuminate_websocket/src/utils/constant.dart';
+import 'package:illuminate_websocket/src/websocket_emitter.dart';
+import 'package:illuminate_websocket/src/websocket_storage.dart';
 import 'package:uuid/uuid.dart';
 
 Uuid uuid = Uuid();

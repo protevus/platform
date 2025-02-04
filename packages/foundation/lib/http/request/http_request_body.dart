@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dox_core/http/request/form_data_visitor.dart';
+import 'package:illuminate_foundation/http/request/form_data_visitor.dart';
 
 class HttpBody {
   static Future<Map<String, dynamic>> read(HttpRequest request) async {

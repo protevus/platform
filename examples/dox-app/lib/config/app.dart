@@ -7,7 +7,7 @@ import 'package:dox_app/config/storage.dart';
 import 'package:dox_app/routes/api.dart';
 import 'package:dox_app/routes/web.dart';
 import 'package:dox_app/routes/websocket.dart';
-import 'package:dox_core/dox_core.dart';
+import 'package:illuminate_foundation/dox_core.dart';
 
 AppConfig appConfig = AppConfig(
   /// Application secret key

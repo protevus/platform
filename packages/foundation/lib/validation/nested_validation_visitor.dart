@@ -1,5 +1,5 @@
-import 'package:dox_core/dox_core.dart';
-import 'package:dox_core/validation/validation_item.dart';
+import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/validation/validation_item.dart';
 
 class NestedValidationVisitor {
   final String field;

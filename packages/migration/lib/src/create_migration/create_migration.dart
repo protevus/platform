@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:dox_migration/src/utils/string_extension.dart';
-import 'package:dox_migration/src/utils/utils.dart';
+import 'package:illuminate_migration/src/utils/string_extension.dart';
+import 'package:illuminate_migration/src/utils/utils.dart';
 
 class MigrationFile {
   final String name;

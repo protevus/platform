@@ -1,8 +1,8 @@
 import 'dart:isolate';
 
-import 'package:dox_core/dox_core.dart';
-import 'package:dox_core/isolate/isolate_handler.dart';
-import 'package:dox_core/isolate/isolate_interfaces.dart';
+import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/isolate/isolate_handler.dart';
+import 'package:illuminate_foundation/isolate/isolate_interfaces.dart';
 
 class DoxIsolate {
   /// singleton

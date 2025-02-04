@@ -1,4 +1,4 @@
-import 'package:dox_auth/src/hash.dart';
+import 'package:illuminate_auth/src/hash.dart';
 import 'package:test/test.dart';
 
 void main() {

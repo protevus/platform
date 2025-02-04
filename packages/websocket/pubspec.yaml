@@ -1,5 +1,5 @@
-name: dox_websocket
-description: Websocket library for dox framework.
+name: illuminate_websocket
+description: Websocket library for protevus platform.
 version: 1.0.0
 repository: https://github.com/dartondox/dox
 environment:
@@ -7,10 +7,10 @@ environment:
 
 dependencies:
   uuid: ^3.0.6
-  dox_annotation: ^1.0.5
+  illuminate_annotation: ^1.0.5
   ioredis: ^1.0.2
 
 dev_dependencies:
   lints: ^2.0.0
   test: ^1.21.0
-  dox_core: ^2.0.0
+  illuminate_foundation: ^2.0.0

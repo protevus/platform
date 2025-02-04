@@ -1,7 +1,7 @@
 import 'package:dox_app/services/auth_service.dart';
 import 'package:dox_app/services/orm_service.dart';
 import 'package:dox_app/services/websocket_service.dart';
-import 'package:dox_core/dox_core.dart';
+import 'package:illuminate_foundation/dox_core.dart';
 
 /// Services to register on dox
 /// -------------------------------

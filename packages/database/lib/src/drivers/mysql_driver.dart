@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:dox_query_builder/dox_query_builder.dart';
+import 'package:illuminate_database/dox_query_builder.dart';
 import 'package:mysql1/mysql1.dart';
 
 /// driver for postgres SQL

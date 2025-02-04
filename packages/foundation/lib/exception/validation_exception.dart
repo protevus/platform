@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dox_core/dox_core.dart';
+import 'package:illuminate_foundation/dox_core.dart';
 
 class ValidationException extends IHttpException {
   ValidationException({

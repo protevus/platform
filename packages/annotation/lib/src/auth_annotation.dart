@@ -1,4 +1,4 @@
-import 'package:dox_annotation/dox_annotation.dart';
+import 'package:illuminate_annotation/dox_annotation.dart';
 
 abstract class IAuth {
   Future<void> verifyToken(IDoxRequest req);

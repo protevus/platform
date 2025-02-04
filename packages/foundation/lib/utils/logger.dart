@@ -1,6 +1,6 @@
 /// coverage:ignore-file
-import 'package:dox_core/app.dart';
-import 'package:dox_core/utils/json.dart';
+import 'package:illuminate_foundation/app.dart';
+import 'package:illuminate_foundation/utils/json.dart';
 
 class Logger {
   static void log(String level, dynamic message, [dynamic data]) {

@@ -1,5 +1,5 @@
-import 'package:dox_core/dox_core.dart';
-import 'package:dox_websocket/dox_websocket.dart';
+import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_websocket/dox_websocket.dart';
 
 class WsController {
   intro(WebsocketEmitter emitter, dynamic message) {

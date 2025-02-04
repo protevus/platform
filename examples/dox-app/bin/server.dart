@@ -1,6 +1,6 @@
 import 'package:dox_app/config/app.dart';
-import 'package:dox_core/dox_core.dart';
-import 'package:dox_migration/dox_migration.dart';
+import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_migration/dox_migration.dart';
 
 void main() async {
   /// Initialize Dox

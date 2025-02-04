@@ -1,5 +1,5 @@
-import 'package:dox_core/dox_core.dart';
-import 'package:dox_core/router/route_data.dart';
+import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/router/route_data.dart';
 
 class IsolateSpawnParameter {
   final int isolateId;

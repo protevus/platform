@@ -1,4 +1,4 @@
-import 'package:dox_core/utils/json.dart';
+import 'package:illuminate_foundation/utils/json.dart';
 import 'package:test/test.dart';
 
 class JsonSerializableObject {

@@ -1,7 +1,7 @@
-import 'package:dox_core/dox_core.dart';
-import 'package:dox_core/isolate/dox_isolate.dart';
-import 'package:dox_core/server/dox_server.dart';
-import 'package:dox_core/utils/logger.dart';
+import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/isolate/dox_isolate.dart';
+import 'package:illuminate_foundation/server/dox_server.dart';
+import 'package:illuminate_foundation/utils/logger.dart';
 import 'package:sprintf/sprintf.dart';
 
 IocContainer _ioc = IocContainer();

@@ -1,4 +1,4 @@
-import 'package:dox_core/dox_core.dart';
+import 'package:illuminate_foundation/dox_core.dart';
 import 'package:test/test.dart';
 
 import '../integration/requirements/config/app.dart';

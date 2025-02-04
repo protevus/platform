@@ -1,6 +1,6 @@
-import 'package:dox_websocket/src/adapters/websocket_adapter.dart';
-import 'package:dox_websocket/src/websocket_emit_event.dart';
-import 'package:dox_websocket/src/websocket_emitter.dart';
+import 'package:illuminate_websocket/src/adapters/websocket_adapter.dart';
+import 'package:illuminate_websocket/src/websocket_emit_event.dart';
+import 'package:illuminate_websocket/src/websocket_emitter.dart';
 import 'package:ioredis/ioredis.dart';
 
 class WebsocketRedisAdapter implements WebsocketAdapterInterface {

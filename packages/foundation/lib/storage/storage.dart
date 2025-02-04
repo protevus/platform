@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:dox_core/dox_core.dart';
-import 'package:dox_core/storage/local_storage_driver.dart';
+import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/storage/local_storage_driver.dart';
 import 'package:mime/mime.dart';
 
 class StreamFile {

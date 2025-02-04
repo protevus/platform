@@ -4,7 +4,7 @@ import '../utils/utils.dart';
 
 String _getSample(className, filename) {
   return '''
-import 'package:dox_core/dox_core.dart';
+import 'package:illuminate_foundation/dox_core.dart';
 
 import '../../../app/models/$filename/$filename.model.dart';
 

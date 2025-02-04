@@ -1,5 +1,5 @@
-import 'package:dox_core/cache/drivers/file/file_cache_driver.dart';
-import 'package:dox_core/dox_core.dart';
+import 'package:illuminate_foundation/cache/drivers/file/file_cache_driver.dart';
+import 'package:illuminate_foundation/dox_core.dart';
 
 import 'router.dart';
 

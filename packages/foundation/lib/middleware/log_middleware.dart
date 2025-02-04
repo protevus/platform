@@ -1,5 +1,5 @@
-import 'package:dox_core/dox_core.dart';
-import 'package:dox_core/utils/json.dart';
+import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/utils/json.dart';
 
 class LogMiddleware implements IDoxMiddleware {
   Map<String, dynamic> Function(Map<String, dynamic>)? filter;

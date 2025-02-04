@@ -1,6 +1,6 @@
 import 'package:dox_app/app/models/user/user.model.dart';
-import 'package:dox_auth/dox_auth.dart';
-import 'package:dox_core/dox_core.dart';
+import 'package:illuminate_auth/dox_auth.dart';
+import 'package:illuminate_foundation/dox_core.dart';
 
 class AuthService implements DoxService {
   @override

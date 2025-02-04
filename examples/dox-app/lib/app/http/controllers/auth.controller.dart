@@ -1,8 +1,8 @@
 import 'package:dox_app/app/http/serializers/user.serializer.dart';
 import 'package:dox_app/app/models/user/user.model.dart';
-import 'package:dox_auth/dox_auth.dart';
-import 'package:dox_core/dox_core.dart';
-import 'package:dox_core/utils/logger.dart';
+import 'package:illuminate_auth/dox_auth.dart';
+import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/utils/logger.dart';
 
 class AuthController {
   Future<dynamic> login(DoxRequest req) async {

@@ -1,4 +1,4 @@
-import 'package:dox_auth/src/interfaces.dart';
+import 'package:illuminate_auth/src/interfaces.dart';
 
 class AuthEngine {
   late AuthConfig config;

@@ -1,5 +1,5 @@
 import 'package:dox_app/config/postgres.dart';
-import 'package:dox_core/dox_core.dart';
+import 'package:illuminate_foundation/dox_core.dart';
 import 'package:dox_query_builder/dox_query_builder.dart';
 import 'package:postgres/postgres.dart';
 

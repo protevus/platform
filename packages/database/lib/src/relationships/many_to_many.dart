@@ -1,4 +1,4 @@
-import 'package:dox_query_builder/dox_query_builder.dart';
+import 'package:illuminate_database/dox_query_builder.dart';
 
 /// many to many relationship query
 M? manyToMany<T, M>(

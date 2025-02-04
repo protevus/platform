@@ -1,4 +1,4 @@
-import 'package:dox_websocket/dox_websocket.dart';
+import 'package:illuminate_websocket/dox_websocket.dart';
 
 class BlogController {
   void index(WebsocketEmitter emitter, dynamic message) async {

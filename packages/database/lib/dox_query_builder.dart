@@ -1,6 +1,6 @@
 library dox_query_builder;
 
-export 'package:dox_annotation/dox_annotation.dart';
+export 'package:illuminate_annotation/dox_annotation.dart';
 
 export 'src/drivers/db_driver.dart';
 export 'src/drivers/postgres_driver.dart';

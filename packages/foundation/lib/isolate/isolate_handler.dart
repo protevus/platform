@@ -1,6 +1,6 @@
-import 'package:dox_core/dox_core.dart';
-import 'package:dox_core/isolate/isolate_interfaces.dart';
-import 'package:dox_core/server/dox_server.dart';
+import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/isolate/isolate_interfaces.dart';
+import 'package:illuminate_foundation/server/dox_server.dart';
 
 /// process middleware and controller and sent data via sentPort
 void isolateHandler(IsolateSpawnParameter param) async {

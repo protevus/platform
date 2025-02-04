@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
-import 'package:dox_core/dox_core.dart';
-import 'package:dox_core/utils/extensions/num.dart';
+import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/utils/extensions/num.dart';
 import 'package:mime/mime.dart';
 import 'package:path/path.dart' as path;
 import 'package:uuid/uuid.dart';

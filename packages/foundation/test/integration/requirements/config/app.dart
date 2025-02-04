@@ -1,6 +1,6 @@
-import 'package:dox_core/cache/drivers/file/file_cache_driver.dart';
-import 'package:dox_core/dox_core.dart';
-import 'package:dox_core/utils/logger.dart';
+import 'package:illuminate_foundation/cache/drivers/file/file_cache_driver.dart';
+import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/utils/logger.dart';
 
 import '../handler.dart';
 import '../middleware/custom_middleware.dart';

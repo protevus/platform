@@ -1,8 +1,8 @@
-import 'package:dox_core/dox_core.dart';
-import 'package:dox_core/utils/logger.dart';
-import 'package:dox_core/validation/nested_validation_visitor.dart';
-import 'package:dox_core/validation/validation_item.dart';
-import 'package:dox_core/validation/validation_rules.dart';
+import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/utils/logger.dart';
+import 'package:illuminate_foundation/validation/nested_validation_visitor.dart';
+import 'package:illuminate_foundation/validation/validation_item.dart';
+import 'package:illuminate_foundation/validation/validation_rules.dart';
 import 'package:sprintf/sprintf.dart';
 
 class DoxValidator {

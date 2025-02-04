@@ -1,5 +1,5 @@
-import 'package:dox_core/dox_core.dart';
-import 'package:dox_core/isolate/dox_isolate.dart';
+import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/isolate/dox_isolate.dart';
 import 'package:http/http.dart' as http;
 import 'package:test/test.dart';
 

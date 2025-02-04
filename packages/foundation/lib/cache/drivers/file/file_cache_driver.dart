@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dox_core/dox_core.dart';
-import 'package:dox_core/utils/aes_encryptor.dart';
+import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/utils/aes_encryptor.dart';
 
 class FileCacheDriver implements CacheDriverInterface {
   /// tag name

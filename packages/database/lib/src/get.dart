@@ -1,4 +1,4 @@
-import 'package:dox_query_builder/src/types/pagination_result.dart';
+import 'package:illuminate_database/src/types/pagination_result.dart';
 
 import 'shared_mixin.dart';
 

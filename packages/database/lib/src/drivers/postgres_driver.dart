@@ -1,4 +1,4 @@
-import 'package:dox_query_builder/dox_query_builder.dart';
+import 'package:illuminate_database/dox_query_builder.dart';
 import 'package:postgres/postgres.dart';
 
 /// driver for postgres SQL

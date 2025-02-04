@@ -1,6 +1,6 @@
 library dox_core;
 
-export 'package:dox_annotation/dox_annotation.dart';
+export 'package:illuminate_annotation/dox_annotation.dart';
 
 export 'app.dart';
 

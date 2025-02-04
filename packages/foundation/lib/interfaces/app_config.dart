@@ -1,6 +1,6 @@
 /// coverage:ignore-file
-import 'package:dox_core/dox_core.dart';
-import 'package:dox_core/utils/logger.dart';
+import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/utils/logger.dart';
 
 void defaultErrorHandler(Object? error, StackTrace stackTrace) {
   Logger.warn(error);

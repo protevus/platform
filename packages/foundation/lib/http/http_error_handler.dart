@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:dox_core/dox_core.dart';
-import 'package:dox_core/http/http_response_handler.dart';
+import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/http/http_response_handler.dart';
 
 void httpErrorHandler(HttpRequest req, Object? error, StackTrace stackTrace) {
   if (error is Exception || error is Error) {

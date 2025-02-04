@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dox_migration/src/utils/file_extension.dart';
+import 'package:illuminate_migration/src/utils/file_extension.dart';
 import 'package:postgres/postgres.dart';
 
 enum MigrationType { up, down }

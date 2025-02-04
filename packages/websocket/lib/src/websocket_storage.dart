@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:dox_websocket/src/websocket_info.dart';
+import 'package:illuminate_websocket/src/websocket_info.dart';
 
 /// active websocket connections
 final Map<String, WebsocketInfo> _socketConnections = <String, WebsocketInfo>{};

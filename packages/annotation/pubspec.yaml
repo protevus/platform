@@ -1,5 +1,5 @@
-name: dox_annotation
-description: Dox annotation for dox framework
+name: illuminate_annotation
+description: Annotation for protevus platform
 version: 1.0.5
 repository: https://github.com/dartondox/dox
 homepage: https://dartondox.dev

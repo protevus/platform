@@ -1,4 +1,4 @@
-import 'package:dox_core/validation/dox_validator.dart';
+import 'package:illuminate_foundation/validation/dox_validator.dart';
 import 'package:test/test.dart';
 
 void main() {

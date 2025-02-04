@@ -1,4 +1,4 @@
-import 'package:dox_core/dox_core.dart';
+import 'package:illuminate_foundation/dox_core.dart';
 
 abstract class ResponseHandlerInterface {
   const ResponseHandlerInterface();
