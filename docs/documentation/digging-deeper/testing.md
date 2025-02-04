@@ -4,7 +4,7 @@
 
 ```dart
 import 'package:dox_app/config/app.dart';
-import 'package:dox_core/dox_core.dart';
+import 'package:illuminate_foundation/dox_core.dart';
 import 'package:http/http.dart' as http;
 import 'package:test/test.dart';
 
