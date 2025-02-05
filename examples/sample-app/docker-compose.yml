@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+
+  # Http server
+  dox:
+    build:
+      context: .
+      target: ${APP_ENV}
+    working_dir: /app
+    volumes:
+      - ./:/app
+      - /app/.dart_tool
+    ports:
+      - "${APP_PORT}:${APP_PORT}"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # Postgres database
+  postgres:
+    image: postgres:14.1
+    environment: 
+      - POSTGRES_USER=${DB_USERNAME}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    expose:
+      - ${DB_PORT}
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    command: -p ${DB_PORT}
+    restart: always
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-q', '-U', 'postgres', '-p', '${DB_PORT}']
+      interval: 5s
+      retries: 5

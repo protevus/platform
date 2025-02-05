@@ -1,0 +1,5 @@
+.dart_tool/
+.DS_Store
+.env
+bin/server
+storage/cache

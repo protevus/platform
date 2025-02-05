@@ -1,0 +1,20 @@
+name: sample_app
+publish_to: 'none'
+
+environment:
+  sdk: '>=2.19.0 <4.0.0'
+
+dependencies:
+  illuminate_cache: ^0.0.1
+  illuminate_contracts: ^0.0.1
+  illuminate_foundation: ^2.0.0
+  illuminate_database: ^2.0.0
+  illuminate_migration: ^2.0.0
+  postgres: ^3.0.5
+
+dev_dependencies:
+  illuminate_builder: ^2.0.0
+  build_runner: ^2.3.3
+  lints: ^2.0.0
+  test: ^1.21.0
+  http: ^1.1.2
