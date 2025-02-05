@@ -9,8 +9,12 @@ environment:
   sdk: ^3.4.2
 
 # Add regular dependencies here.
-dependencies():
-  # path: ^1.8.0
+dependencies:
+  mime: ^1.0.4
+  path: ^1.8.3
+  string_scanner: ^1.1.0
+  uuid: ^3.0.6
+  illuminate_foundation: ^2.0.0
 
 dev_dependencies:
   lints: ^3.0.0
