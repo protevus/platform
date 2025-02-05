@@ -1,4 +1,5 @@
-import 'package:illuminate_foundation/cache/drivers/file/file_cache_driver.dart';
+import 'package:illuminate_contracts/contracts.dart';
+import 'package:illuminate_cache/cache.dart';
 import 'package:illuminate_foundation/dox_core.dart';
 import 'package:illuminate_foundation/utils/logger.dart';
 

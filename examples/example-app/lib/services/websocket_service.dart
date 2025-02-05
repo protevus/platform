@@ -1,0 +1,18 @@
+import 'package:example_app/config/redis.dart';
+import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_websocket/dox_websocket.dart';
+import 'package:ioredis/ioredis.dart';
+
+class WebsocketService implements DoxService {
+  @override
+  void setup() {
+    Redis sub = redis.duplicate();
+    Redis pub = sub.duplicate();
+
+    WebsocketServer io = WebsocketServer(Dox());
+    io.adapter(WebsocketRedisAdapter(
+      subscriber: sub,
+      publisher: pub,
+    ));
+  }
+}

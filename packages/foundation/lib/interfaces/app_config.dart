@@ -1,4 +1,5 @@
 /// coverage:ignore-file
+import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_foundation/dox_core.dart';
 import 'package:illuminate_foundation/utils/logger.dart';
 
