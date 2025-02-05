@@ -1,7 +1,7 @@
 // ignore_for_file: depend_on_referenced_packages
 import 'package:illuminate_auth/dox_auth.dart';
 import 'package:illuminate_auth/src/hash.dart';
-import 'package:dox_query_builder/dox_query_builder.dart';
+import 'package:illuminate_database/dox_query_builder.dart';
 
 class JwtAuthDriver extends AuthDriver {
   /// Jwt secret

@@ -2,7 +2,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:illuminate_auth/dox_auth.dart';
-import 'package:dox_query_builder/dox_query_builder.dart';
+import 'package:illuminate_database/dox_query_builder.dart';
 
 const String AUTH_REQUEST_KEY = 'dox_authentication_instance';
 

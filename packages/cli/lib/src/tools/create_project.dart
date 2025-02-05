@@ -64,7 +64,7 @@ createProject(projectName, [String? versionName]) async {
     if (file is File) {
       if (!file.path.contains('bin/dox')) {
         final content =
-            file.readAsStringSync().replaceAll('dox_sample', projectName);
+            file.readAsStringSync().replaceAll('sample_app', projectName);
         file.writeAsStringSync(content);
       }
     }

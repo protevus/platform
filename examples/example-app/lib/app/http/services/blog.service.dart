@@ -1,7 +1,7 @@
 import 'package:example_app/app/http/requests/blog.request.dart';
 import 'package:example_app/app/models/blog/blog.model.dart';
 import 'package:example_app/app/models/category/category.model.dart';
-import 'package:dox_query_builder/dox_query_builder.dart';
+import 'package:illuminate_database/dox_query_builder.dart';
 
 class BlogService {
   BlogService();

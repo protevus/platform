@@ -1,5 +1,5 @@
 import 'package:example_app/app/models/blog/blog.model.dart';
-import 'package:dox_query_builder/dox_query_builder.dart';
+import 'package:illuminate_database/dox_query_builder.dart';
 
 part 'category.model.g.dart';
 

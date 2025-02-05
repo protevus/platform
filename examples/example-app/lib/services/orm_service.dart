@@ -1,6 +1,6 @@
 import 'package:example_app/config/postgres.dart';
 import 'package:illuminate_foundation/dox_core.dart';
-import 'package:dox_query_builder/dox_query_builder.dart';
+import 'package:illuminate_database/dox_query_builder.dart';
 import 'package:postgres/postgres.dart';
 
 /// Query builder service

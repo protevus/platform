@@ -14,7 +14,7 @@ dependencies:
   illuminate_migration: ^2.0.0
   illuminate_foundation: ^2.0.0
   illuminate_websocket: ^1.0.0
-  dox_query_builder: ^2.0.0
+  illuminate_database: ^2.0.0
 
 dev_dependencies:
   illuminate_builder: ^2.0.0

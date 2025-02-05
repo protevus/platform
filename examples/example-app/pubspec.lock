@@ -225,22 +225,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.2"
-  dox_annotation:
-    dependency: transitive
-    description:
-      name: dox_annotation
-      sha256: "11fd6f0b950669e82b3604583f829a5739f53afb22dc4173f9803fc17259cfd1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.5"
-  dox_query_builder:
-    dependency: "direct main"
-    description:
-      name: dox_query_builder
-      sha256: "8176a24d89d6ad5b61bda80ea230792294b73862a487c2e7d5e603e416e46469"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.0"
   ed25519_edwards:
     dependency: transitive
     description:
@@ -356,6 +340,13 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  illuminate_database:
+    dependency: "direct main"
+    description:
+      path: "../../packages/database"
+      relative: true
+    source: path
+    version: "2.1.0"
   illuminate_foundation:
     dependency: "direct main"
     description:
