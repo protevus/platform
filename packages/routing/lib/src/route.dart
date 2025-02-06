@@ -2,8 +2,9 @@
 
 import 'package:illuminate_foundation/constants/http_request_method.dart';
 import 'package:illuminate_foundation/dox_core.dart';
-import 'package:illuminate_foundation/router/route_data.dart';
 import 'package:illuminate_foundation/utils/utils.dart';
+
+import './route_data.dart';
 
 /// list of routes registered
 List<RouteData> _routes = <RouteData>[];
