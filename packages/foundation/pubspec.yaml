@@ -17,6 +17,9 @@ dependencies:
   illuminate_annotation: ^1.0.5
   illuminate_cache: ^0.0.1
   illuminate_contracts: ^0.0.1
+  illuminate_http: ^0.0.1
+  illuminate_routing: ^0.0.1
+  illuminate_validation: ^0.0.1
 
 dev_dependencies:
   lints: ^2.0.0

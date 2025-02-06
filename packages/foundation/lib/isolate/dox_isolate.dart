@@ -3,6 +3,7 @@ import 'dart:isolate';
 import 'package:illuminate_foundation/dox_core.dart';
 import 'package:illuminate_foundation/isolate/isolate_handler.dart';
 import 'package:illuminate_foundation/isolate/isolate_interfaces.dart';
+import 'package:illuminate_routing/routing.dart';
 
 class DoxIsolate {
   /// singleton
