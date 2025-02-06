@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:illuminate_foundation/dox_core.dart';
 import 'package:illuminate_http/http.dart';
 import 'package:illuminate_routing/routing.dart';
+import 'package:illuminate_storage/storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:test/test.dart';
 

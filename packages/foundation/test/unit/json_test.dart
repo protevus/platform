@@ -1,4 +1,4 @@
-import 'package:illuminate_foundation/utils/json.dart';
+import 'package:illuminate_support/support.dart';
 import 'package:test/test.dart';
 
 class JsonSerializableObject {
