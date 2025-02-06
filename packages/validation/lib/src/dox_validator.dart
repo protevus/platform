@@ -1,5 +1,5 @@
-import 'package:illuminate_foundation/dox_core.dart';
-import 'package:illuminate_foundation/utils/logger.dart';
+import 'package:illuminate_log/log.dart';
+import 'package:illuminate_support/support.dart';
 import 'package:sprintf/sprintf.dart';
 
 import './nested_validation_visitor.dart';

@@ -13,6 +13,8 @@ dependencies:
   sprintf: ^7.0.0
   illuminate_foundation: ^2.0.0
   illuminate_http: ^0.0.1
+  illuminate_log: ^0.0.1
+  illuminate_support: ^0.0.1
 
 dev_dependencies:
   lints: ^3.0.0

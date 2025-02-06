@@ -1,4 +1,4 @@
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_support/support.dart';
 
 //import './nested_validation_visitor.dart';
 import './validation_item.dart';
