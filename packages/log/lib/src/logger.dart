@@ -1,7 +1,7 @@
-/// coverage:ignore-file
 import 'package:illuminate_foundation/app.dart';
-import 'package:illuminate_foundation/utils/json.dart';
+import 'package:illuminate_support/support.dart';
 
+/// coverage:ignore-file
 class Logger {
   static void log(String level, dynamic message, [dynamic data]) {
     if (Dox().config.logger.enabled == false) return;
