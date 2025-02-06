@@ -1,6 +1,7 @@
 import 'package:illuminate_cache/cache.dart';
 import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_http/http.dart';
 
 import 'router.dart';
 
