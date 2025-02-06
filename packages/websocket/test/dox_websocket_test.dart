@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:illuminate_foundation/dox_core.dart';
-import 'package:illuminate_foundation/utils/json.dart';
+import 'package:illuminate_support/support.dart';
 import 'package:illuminate_websocket/dox_websocket.dart';
 import 'package:ioredis/ioredis.dart';
 import 'package:test/test.dart';

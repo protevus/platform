@@ -12,6 +12,7 @@ dependencies:
   illuminate_contracts: ^0.0.1
   illuminate_http: ^0.0.1
   illuminate_routing: ^0.0.1
+  illuminate_support: ^0.0.1
   ioredis: ^1.0.2
 
 dev_dependencies:
