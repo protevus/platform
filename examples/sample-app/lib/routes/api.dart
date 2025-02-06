@@ -1,4 +1,5 @@
 import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_routing/routing.dart';
 import 'package:sample_app/app/http/controllers/api.controller.dart';
 
 class ApiRouter extends Router {

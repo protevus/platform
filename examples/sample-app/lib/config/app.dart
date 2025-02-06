@@ -1,4 +1,5 @@
 import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_http/http.dart';
 import 'package:sample_app/app/http/response_handler.dart';
 import 'package:sample_app/config/cache.dart';
 import 'package:sample_app/config/cors.dart';

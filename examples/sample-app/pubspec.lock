@@ -315,6 +315,13 @@ packages:
       relative: true
     source: path
     version: "2.0.0"
+  illuminate_http:
+    dependency: "direct overridden"
+    description:
+      path: "../../packages/http"
+      relative: true
+    source: path
+    version: "0.0.1"
   illuminate_migration:
     dependency: "direct main"
     description:
@@ -322,6 +329,20 @@ packages:
       relative: true
     source: path
     version: "2.0.0"
+  illuminate_routing:
+    dependency: "direct main"
+    description:
+      path: "../../packages/routing"
+      relative: true
+    source: path
+    version: "0.0.1"
+  illuminate_validation:
+    dependency: "direct overridden"
+    description:
+      path: "../../packages/validation"
+      relative: true
+    source: path
+    version: "0.0.1"
   io:
     dependency: transitive
     description:

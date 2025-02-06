@@ -1,4 +1,5 @@
 import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_routing/routing.dart';
 import 'package:sample_app/app/http/controllers/web.controller.dart';
 
 class WebRouter extends Router {
