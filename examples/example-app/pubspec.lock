@@ -361,6 +361,13 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  illuminate_log:
+    dependency: "direct main"
+    description:
+      path: "../../packages/log"
+      relative: true
+    source: path
+    version: "0.0.1"
   illuminate_migration:
     dependency: "direct main"
     description:
@@ -372,6 +379,20 @@ packages:
     dependency: "direct main"
     description:
       path: "../../packages/routing"
+      relative: true
+    source: path
+    version: "0.0.1"
+  illuminate_storage:
+    dependency: "direct main"
+    description:
+      path: "../../packages/storage"
+      relative: true
+    source: path
+    version: "0.0.1"
+  illuminate_support:
+    dependency: "direct main"
+    description:
+      path: "../../packages/support"
       relative: true
     source: path
     version: "0.0.1"

@@ -3,6 +3,7 @@ import 'package:illuminate_cache/cache.dart';
 import 'package:illuminate_foundation/dox_core.dart';
 import 'package:illuminate_http/http.dart';
 import 'package:illuminate_routing/routing.dart';
+import 'package:illuminate_storage/storage.dart';
 
 class WebRouter extends Router {
   @override

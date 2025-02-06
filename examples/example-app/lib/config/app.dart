@@ -9,6 +9,7 @@ import 'package:example_app/routes/web.dart';
 import 'package:example_app/routes/websocket.dart';
 import 'package:illuminate_foundation/dox_core.dart';
 import 'package:illuminate_http/http.dart';
+import 'package:illuminate_log/log.dart';
 
 AppConfig appConfig = AppConfig(
   /// Application secret key

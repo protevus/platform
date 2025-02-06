@@ -11,13 +11,16 @@ dependencies:
   illuminate_auth: ^2.0.0
   illuminate_cache: ^0.0.1
   illuminate_contracts: ^0.0.1
+  illuminate_database: ^2.0.0
   illuminate_migration: ^2.0.0
   illuminate_foundation: ^2.0.0
   illuminate_http: ^0.0.1
+  illuminate_log: ^0.0.1
   illuminate_routing: ^0.0.1
+  illuminate_storage: ^0.0.1
+  illuminate_support: ^0.0.1
   illuminate_websocket: ^1.0.0
-  illuminate_database: ^2.0.0
-
+  
 dev_dependencies:
   illuminate_builder: ^2.0.0
   build_runner: ^2.3.3
