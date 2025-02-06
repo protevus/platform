@@ -3,6 +3,7 @@ import 'package:example_app/app/http/controllers/auth.controller.dart';
 import 'package:example_app/app/http/controllers/blog.controller.dart';
 import 'package:illuminate_auth/dox_auth.dart';
 import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_routing/routing.dart';
 
 class ApiRouter extends Router {
   @override

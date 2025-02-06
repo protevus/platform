@@ -1,6 +1,7 @@
 import 'package:example_app/app/http/requests/blog.request.dart';
 import 'package:example_app/app/http/services/blog.service.dart';
 import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_http/http.dart';
 
 class BlogController {
   /// GET /blogs

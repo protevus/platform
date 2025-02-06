@@ -1,4 +1,5 @@
 import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_routing/routing.dart';
 import 'package:illuminate_websocket/dox_websocket.dart';
 
 class WebsocketRouter extends Router {
