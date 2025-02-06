@@ -316,9 +316,16 @@ packages:
     source: path
     version: "2.0.0"
   illuminate_http:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       path: "../../packages/http"
+      relative: true
+    source: path
+    version: "0.0.1"
+  illuminate_log:
+    dependency: "direct main"
+    description:
+      path: "../../packages/log"
       relative: true
     source: path
     version: "0.0.1"
@@ -333,6 +340,20 @@ packages:
     dependency: "direct main"
     description:
       path: "../../packages/routing"
+      relative: true
+    source: path
+    version: "0.0.1"
+  illuminate_storage:
+    dependency: "direct main"
+    description:
+      path: "../../packages/storage"
+      relative: true
+    source: path
+    version: "0.0.1"
+  illuminate_support:
+    dependency: "direct overridden"
+    description:
+      path: "../../packages/support"
       relative: true
     source: path
     version: "0.0.1"
