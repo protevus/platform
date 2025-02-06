@@ -1,5 +1,6 @@
 import 'package:illuminate_foundation/dox_core.dart';
-import 'package:illuminate_foundation/router/route_data.dart';
+import 'package:illuminate_routing/routing.dart';
+import 'package:illuminate_http/http.dart';
 
 /// Handle middleware and controllers
 Future<dynamic> middlewareAndControllerHandler(DoxRequest doxReq) async {

@@ -2,9 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:illuminate_foundation/dox_core.dart';
-import 'package:illuminate_foundation/router/route_data.dart';
+import 'package:illuminate_routing/routing.dart';
 import 'package:illuminate_foundation/utils/aes_encryptor.dart';
-import 'package:illuminate_foundation/validation/dox_validator.dart';
+import 'package:illuminate_validation/validation.dart';
+import 'package:illuminate_http/http.dart';
 import './http_request_body.dart';
 
 class DoxRequest implements IDoxRequest {

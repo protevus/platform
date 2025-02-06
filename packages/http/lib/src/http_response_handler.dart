@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:illuminate_foundation/dox_core.dart';
 import 'package:illuminate_foundation/server/dox_server.dart';
 import 'package:illuminate_foundation/utils/json.dart';
+import 'package:illuminate_http/http.dart';
 
 dynamic httpResponseHandler(
   dynamic payload,
