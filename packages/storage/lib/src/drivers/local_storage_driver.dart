@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:illuminate_foundation/dox_core.dart';
+//import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_http/http.dart';
 import 'package:mime/mime.dart';
 
