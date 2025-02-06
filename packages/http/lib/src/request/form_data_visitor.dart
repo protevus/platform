@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:illuminate_foundation/dox_core.dart';
 import 'package:illuminate_http/http.dart';
 import 'package:mime/mime.dart';
 import 'package:string_scanner/string_scanner.dart';

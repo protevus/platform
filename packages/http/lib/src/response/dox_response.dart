@@ -2,8 +2,7 @@ import 'dart:io';
 
 import 'package:illuminate_foundation/dox_core.dart';
 import 'package:illuminate_http/http.dart';
-
-import '../http_response_handler.dart';
+import 'package:illuminate_storage/storage.dart';
 
 class DoxResponse {
   /// content can be anything

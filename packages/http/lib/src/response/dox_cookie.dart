@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:illuminate_foundation/app.dart';
-import 'package:illuminate_foundation/utils/aes_encryptor.dart';
+import 'package:illuminate_support/support.dart';
 
 class DoxCookie {
   final String key;
