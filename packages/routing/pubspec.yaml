@@ -10,6 +10,7 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
+  illuminate_contracts: ^0.0.1
   illuminate_foundation: ^2.0.0
   illuminate_http: ^0.0.1
   illuminate_support: ^0.0.1

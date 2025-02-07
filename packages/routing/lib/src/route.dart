@@ -1,7 +1,7 @@
 // ignore_for_file: empty_catches
-
-import 'package:illuminate_foundation/constants/http_request_method.dart';
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_contracts/contracts.dart';
+import 'package:illuminate_foundation/foundation.dart';
+import 'package:illuminate_http/http.dart';
 import 'package:illuminate_support/support.dart';
 
 import './route_data.dart';
@@ -161,7 +161,7 @@ class Route {
   /// ```
   static void websocket(String route, Function(WebsocketEvent) callback,
       {List<dynamic> middleware = const <dynamic>[]}) {
-    IDoxWebsocket? ws = Dox().websocket;
+    WebsocketInterface? ws = Application().websocket;
     if (ws == null) {
       throw Exception('websocket is not registered');
     }
