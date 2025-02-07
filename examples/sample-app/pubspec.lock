@@ -301,6 +301,13 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  illuminate_container:
+    dependency: "direct overridden"
+    description:
+      path: "../../packages/container"
+      relative: true
+    source: path
+    version: "0.0.1"
   illuminate_contracts:
     dependency: "direct main"
     description:
