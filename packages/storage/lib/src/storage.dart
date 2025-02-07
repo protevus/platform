@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_http/http.dart';
 import 'package:mime/mime.dart';
@@ -29,7 +29,7 @@ class Storage {
   Map<String, StorageDriverInterface> storageDriver =
       <String, StorageDriverInterface>{
     'local': LocalStorageDriver(),
-    ...Dox().config.fileStorage.drivers,
+    ...Application().config.fileStorage.drivers,
   };
 
   /// set the disk name
@@ -43,7 +43,7 @@ class Storage {
 
   StorageDriverInterface get _driver {
     return storageDriver[_disk] ??
-        storageDriver[Dox().config.fileStorage.defaultDriver] ??
+        storageDriver[Application().config.fileStorage.defaultDriver] ??
         LocalStorageDriver();
   }
 
