@@ -2,7 +2,7 @@
 abstract class CacheDriverInterface {
   String tag = '';
 
-  String get prefix => 'dox-framework-cache-$tag:';
+  String get prefix => 'protevus-platform-cache-$tag:';
 
   Future<void> put(String key, String value, {Duration? duration});
 
