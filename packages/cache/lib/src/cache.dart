@@ -1,5 +1,5 @@
 import 'package:illuminate_contracts/contracts.dart';
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_cache/src/drivers/file/file_cache_driver.dart';
 
 class Cache {
@@ -9,7 +9,7 @@ class Cache {
   Map<String, CacheDriverInterface> cacheDrivers =
       <String, CacheDriverInterface>{
     'file': FileCacheDriver(),
-    ...Dox().config.cache.drivers,
+    ...Application().config.cache.drivers,
   };
 
   /// Set where to store the cache.
@@ -34,9 +34,9 @@ class Cache {
 
   /// get the cache driver
   CacheDriverInterface get _driver {
-    _store ??= Dox().config.cache.defaultDriver;
+    _store ??= Application().config.cache.defaultDriver;
     CacheDriverInterface d = cacheDrivers[_store] ??
-        cacheDrivers[Dox().config.cache.defaultDriver] ??
+        cacheDrivers[Application().config.cache.defaultDriver] ??
         FileCacheDriver();
     d.setTag(_tag);
     return d;

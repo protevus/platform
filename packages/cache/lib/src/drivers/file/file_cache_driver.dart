@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_support/support.dart';
 
@@ -20,7 +20,7 @@ class FileCacheDriver implements CacheDriverInterface {
   FileCacheDriver({this.tag = ''});
 
   /// Dox() APP_KEY to encrypt data
-  String get _secret => Dox().config.appKey;
+  String get _secret => Application().config.appKey;
 
   @override
   void setTag(String tagName) {
