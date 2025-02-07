@@ -6,7 +6,7 @@ import './nested_validation_visitor.dart';
 import './validation_item.dart';
 import './validation_rules.dart';
 
-class DoxValidator {
+class Validator {
   /// request data
   final Map<String, dynamic> data;
 
@@ -14,7 +14,7 @@ class DoxValidator {
   final Map<String, String> _errors = <String, String>{};
   List<String> get _methodNoNeedToSplitArguments => <String>['in'];
 
-  DoxValidator(this.data);
+  Validator(this.data);
 
   /// check validation has errors
   bool get hasError => _errors.isNotEmpty;
