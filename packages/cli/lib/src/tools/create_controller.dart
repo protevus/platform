@@ -4,7 +4,7 @@ import '../utils/utils.dart';
 
 String _getSample(className, filename) {
   return '''
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 
 class ${className}Controller {
   Future<dynamic> index(DoxRequest req) async {
@@ -30,7 +30,7 @@ class ${className}Controller {
 
 String _getResourceSample(className, filename) {
   return '''
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 
 class ${className}Controller {
   /// GET /resource

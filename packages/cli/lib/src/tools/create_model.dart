@@ -4,7 +4,7 @@ import '../utils/utils.dart';
 
 String _getSample(className, filename) {
   return '''
-import 'package:illuminate_database/dox_query_builder.dart';
+import 'package:illuminate_database/query_builder.dart';
 
 part '$filename.model.g.dart';
 
