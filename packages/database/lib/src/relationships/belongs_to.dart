@@ -1,4 +1,4 @@
-import 'package:illuminate_database/dox_query_builder.dart';
+import 'package:illuminate_database/query_builder.dart';
 
 /// belongs to relationship query
 M? belongsTo<T, M>(

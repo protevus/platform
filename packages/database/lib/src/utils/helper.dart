@@ -1,4 +1,4 @@
-import 'package:illuminate_database/dox_query_builder.dart';
+import 'package:illuminate_database/query_builder.dart';
 
 class QueryBuilderHelper<T> {
   final QueryBuilder<T> queryBuilder;

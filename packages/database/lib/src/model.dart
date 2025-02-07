@@ -1,4 +1,4 @@
-import '../dox_query_builder.dart';
+import '../query_builder.dart';
 
 class Model<T> extends QueryBuilder<T> {
   int? tempIdValue;

@@ -1,4 +1,4 @@
-import '/dox_query_builder.dart';
+import '/query_builder.dart';
 
 class Schema {
   /// create table with schema
