@@ -6,6 +6,7 @@ environment:
 
 dependencies:
   illuminate_cache: ^0.0.1
+  illuminate_config: ^0.0.1
   illuminate_contracts: ^0.0.1
   illuminate_database: ^2.0.0
   illuminate_foundation: ^2.0.0

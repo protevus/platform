@@ -1,5 +1,6 @@
-import 'package:illuminate_foundation/dox_core.dart';
-import 'package:illuminate_database/dox_query_builder.dart';
+import 'package:illuminate_config/config.dart';
+import 'package:illuminate_foundation/foundation.dart';
+import 'package:illuminate_database/query_builder.dart';
 import 'package:sample_app/config/postgres.dart';
 import 'package:postgres/postgres.dart';
 
@@ -8,7 +9,7 @@ import 'package:postgres/postgres.dart';
 /// Initializing to setup query builder so that this project can use ORM.
 /// If this project do not require database, you can simply delete this file
 /// and remove from config/services.dart list.
-class ORMService implements DoxService {
+class ORMService implements Service {
   @override
   Future<void> setup() async {
     /// Initialize Sql QueryBuilder

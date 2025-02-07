@@ -294,6 +294,13 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  illuminate_config:
+    dependency: "direct main"
+    description:
+      path: "../../packages/config"
+      relative: true
+    source: path
+    version: "0.0.1"
   illuminate_contracts:
     dependency: "direct main"
     description:

@@ -1,4 +1,4 @@
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:sample_app/config/app.dart';
 import 'package:http/http.dart' as http;
 import 'package:test/test.dart';
@@ -7,8 +7,8 @@ String baseUrl = 'http://localhost:${appConfig.serverPort}';
 
 void main() {
   setUpAll(() async {
-    Dox().initialize(appConfig);
-    await Dox().startServer();
+    Application().initialize(appConfig);
+    await Application().startServer();
     await Future<dynamic>.delayed(Duration(milliseconds: 500));
   });
 

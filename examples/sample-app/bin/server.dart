@@ -1,10 +1,10 @@
-import 'package:illuminate_foundation/dox_core.dart';
-import 'package:illuminate_migration/dox_migration.dart';
+import 'package:illuminate_foundation/foundation.dart';
+import 'package:illuminate_migration/migration.dart';
 import 'package:sample_app/config/app.dart';
 
 void main() async {
   /// Initialize Dox
-  Dox().initialize(appConfig);
+  Application().initialize(appConfig);
 
   /// Run database migration before starting server.
   /// Since Migration need to process only once,
@@ -12,5 +12,5 @@ void main() async {
   await Migration().migrate();
 
   /// Start dox http server
-  await Dox().startServer();
+  await Application().startServer();
 }

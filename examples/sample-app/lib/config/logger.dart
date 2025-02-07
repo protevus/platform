@@ -1,4 +1,5 @@
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_config/config.dart';
+import 'package:illuminate_foundation/foundation.dart';
 
 LoggerConfig logger = LoggerConfig(
   /// Application name
