@@ -48,7 +48,7 @@ class MigrationFile {
 }
 
 String _sampleDart = '''
-import 'package:illuminate_database/dox_query_builder.dart'; // ignore: file_names
+import 'package:illuminate_database/query_builder.dart'; // ignore: file_names
 
 Future<void> up() async {
   await Schema.create('table_name', (Table table) {});

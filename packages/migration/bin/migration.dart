@@ -1,5 +1,5 @@
 import 'package:illuminate_migration/src/create_migration/create_migration.dart';
-import 'package:illuminate_migration/src/dox_migration_base.dart';
+import 'package:illuminate_migration/src/migration_base.dart';
 
 void main(List<String> args) async {
   if (args.length == 2 && args[0] == 'migrate') {
