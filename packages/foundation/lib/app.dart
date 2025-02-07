@@ -1,4 +1,5 @@
 import 'package:illuminate_config/config.dart';
+import 'package:illuminate_container/container.dart';
 import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_foundation/isolate/platform_isolate.dart';
@@ -7,7 +8,7 @@ import 'package:illuminate_log/log.dart';
 import 'package:illuminate_routing/routing.dart';
 import 'package:sprintf/sprintf.dart';
 
-IocContainer _ioc = IocContainer();
+Container _ioc = Container();
 
 class Application implements ApplicationInterface {
   /// setup singleton
@@ -30,7 +31,7 @@ class Application implements ApplicationInterface {
   late AppConfig config;
 
   /// global dox ioc containers
-  IocContainer ioc = _ioc;
+  Container ioc = _ioc;
 
   /// isolate Id
   int isolateId = 1;

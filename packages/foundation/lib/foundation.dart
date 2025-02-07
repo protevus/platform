@@ -33,7 +33,7 @@ export 'interfaces/response_handler_interface.dart';
 export 'interfaces/router.dart';
 
 /// Tools
-export 'ioc/ioc_container.dart';
+// export 'ioc/ioc_container.dart';
 // export 'middleware/log_middleware.dart';
 
 /// Router
