@@ -1,8 +1,9 @@
 import 'package:example_app/app/models/user/user.model.dart';
-import 'package:illuminate_auth/dox_auth.dart';
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_auth/auth.dart';
+import 'package:illuminate_config/config.dart';
+import 'package:illuminate_foundation/foundation.dart';
 
-class AuthService implements DoxService {
+class AuthService implements Service {
   @override
   void setup() {
     Auth.initialize(AuthConfig(

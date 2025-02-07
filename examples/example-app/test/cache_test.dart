@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:example_app/config/app.dart';
 import 'package:illuminate_cache/cache.dart';
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -13,7 +13,7 @@ void main() {
       if (storage.existsSync()) {
         storage.deleteSync(recursive: true);
       }
-      Dox().initialize(appConfig);
+      Application().initialize(appConfig);
     });
 
     test('put', () async {

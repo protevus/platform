@@ -1,7 +1,7 @@
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_http/http.dart';
 
-DoxRequest functionMiddleware(DoxRequest req) {
+Request functionMiddleware(Request req) {
   /// write your logic here
   return req;
 }

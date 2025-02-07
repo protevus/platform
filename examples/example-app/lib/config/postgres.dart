@@ -1,4 +1,4 @@
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_config/config.dart';
 import 'package:postgres/postgres.dart';
 
 Endpoint postgresEndpoint = Endpoint(

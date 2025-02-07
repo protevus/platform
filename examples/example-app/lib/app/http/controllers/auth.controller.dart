@@ -1,13 +1,13 @@
 import 'package:example_app/app/http/serializers/user.serializer.dart';
 import 'package:example_app/app/models/user/user.model.dart';
-import 'package:illuminate_auth/dox_auth.dart';
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_auth/auth.dart';
+import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_http/http.dart';
 import 'package:illuminate_log/log.dart';
 import 'package:illuminate_support/support.dart';
 
 class AuthController {
-  Future<dynamic> login(DoxRequest req) async {
+  Future<dynamic> login(Request req) async {
     Map<String, dynamic> credentials = req.only(<String>['email', 'password']);
 
     Auth auth = Auth();
@@ -27,7 +27,7 @@ class AuthController {
     };
   }
 
-  Future<dynamic> register(DoxRequest req) async {
+  Future<dynamic> register(Request req) async {
     User user = User();
     user.name = 'AJ';
     user.email = 'aj@mail.com';
@@ -36,8 +36,8 @@ class AuthController {
     return user;
   }
 
-  Future<dynamic> user(DoxRequest req) async {
-    IAuth? auth = req.auth;
+  Future<dynamic> user(Request req) async {
+    AuthInterface? auth = req.auth;
     if (auth?.isLoggedIn() == true) {
       Logger.info('${auth?.user<User>()?.name} is logged in');
       return UserSerializer(auth?.user());

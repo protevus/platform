@@ -1,7 +1,7 @@
 import 'package:example_app/app/models/category/category.model.dart';
 import 'package:example_app/app/models/user/user.model.dart';
 import 'package:example_app/utils/extensions.dart';
-import 'package:illuminate_database/dox_query_builder.dart';
+import 'package:illuminate_database/query_builder.dart';
 
 part 'blog.model.g.dart';
 

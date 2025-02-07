@@ -10,6 +10,7 @@ dependencies:
   short_uuids: ^2.0.0
   illuminate_auth: ^2.0.0
   illuminate_cache: ^0.0.1
+  illuminate_config: ^0.0.1
   illuminate_contracts: ^0.0.1
   illuminate_database: ^2.0.0
   illuminate_migration: ^2.0.0

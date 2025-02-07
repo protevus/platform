@@ -1,8 +1,9 @@
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
+import 'package:illuminate_contracts/contracts.dart';
 
-class CustomMiddleware extends IDoxMiddleware {
+class CustomMiddleware extends MiddlewareInterface {
   @override
-  IDoxRequest handle(IDoxRequest req) {
+  RequestInterface handle(RequestInterface req) {
     /// write your logic here
     return req;
   }

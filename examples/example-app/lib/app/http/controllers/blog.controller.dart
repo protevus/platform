@@ -1,11 +1,11 @@
 import 'package:example_app/app/http/requests/blog.request.dart';
 import 'package:example_app/app/http/services/blog.service.dart';
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_http/http.dart';
 
 class BlogController {
   /// GET /blogs
-  Future<dynamic> index(DoxRequest req) async {
+  Future<dynamic> index(Request req) async {
     req.validate(
       <String, String>{
         'page': 'required|integer',
@@ -26,7 +26,7 @@ class BlogController {
   }
 
   /// GET /blogs/{id}
-  Future<dynamic> show(DoxRequest req, String id) async {
+  Future<dynamic> show(Request req, String id) async {
     return BlogService().findById(id);
   }
 
@@ -36,7 +36,7 @@ class BlogController {
   }
 
   /// DELETE /blogs/{id}
-  Future<dynamic> destroy(DoxRequest req, String id) async {
+  Future<dynamic> destroy(Request req, String id) async {
     await BlogService().delete(id);
     return <String, String>{
       'status': 'success',
