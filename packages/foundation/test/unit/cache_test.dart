@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:illuminate_cache/cache.dart';
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:test/test.dart';
 
 import '../integration/requirements/config/app.dart';
@@ -14,7 +14,7 @@ void main() {
       if (storage.existsSync()) {
         storage.deleteSync(recursive: true);
       }
-      Dox().initialize(config);
+      Application().initialize(config);
     });
 
     test('put', () async {

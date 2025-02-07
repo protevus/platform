@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_http/http.dart';
 import 'package:illuminate_routing/routing.dart';
 import 'package:http/http.dart' as http;
@@ -18,11 +18,11 @@ void main() {
     });
 
     tearDownAll(() async {
-      await Dox().server.close();
+      await Application().server.close();
     });
 
     test('date response', () async {
-      Route.get('/date/response', (DoxRequest req, String name) {
+      Route.get('/date/response', (Request req, String name) {
         return DateTime(2023);
       });
 
@@ -34,7 +34,7 @@ void main() {
     });
 
     test('date response', () async {
-      Route.get('/date/response/json', (DoxRequest req, String name) {
+      Route.get('/date/response/json', (Request req, String name) {
         return <String, dynamic>{
           'date': DateTime(2023),
         };

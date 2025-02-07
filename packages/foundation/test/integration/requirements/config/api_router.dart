@@ -1,4 +1,5 @@
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_contracts/contracts.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_http/http.dart';
 import 'package:illuminate_routing/routing.dart';
 
@@ -11,8 +12,8 @@ class ApiRouter extends Router {
   @override
   void register() {
     Route.use(customMiddleware);
-    Route.use(<IDoxMiddleware>[ClassBasedMiddleware()]);
+    Route.use(<MiddlewareInterface>[ClassBasedMiddleware()]);
 
-    Route.get('ping', (DoxRequest req) => 'pong');
+    Route.get('ping', (Request req) => 'pong');
   }
 }

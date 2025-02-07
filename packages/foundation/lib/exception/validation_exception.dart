@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_contracts/contracts.dart';
 
-class ValidationException extends IHttpException {
+class ValidationException extends HttpExceptionInterface {
   ValidationException({
     dynamic message = const <String, dynamic>{},
     String errorCode = 'validation_failed',

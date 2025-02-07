@@ -1,6 +1,6 @@
 /// coverage:ignore-file
 import 'package:illuminate_contracts/contracts.dart';
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_http/http.dart';
 import 'package:illuminate_log/log.dart';
 
@@ -22,13 +22,13 @@ class AppConfig {
   final CacheConfig cache;
   final FileStorageConfig fileStorage;
   final LoggerConfig logger;
-  final List<DoxService> services;
+  final List<Service> services;
 
   AppConfig({
     required this.appKey,
     this.serverPort = 3000,
     this.totalIsolate = 3,
-    this.services = const <DoxService>[],
+    this.services = const <Service>[],
     this.formRequests = const <Type, FormRequest Function()>{},
     this.globalMiddleware = const <dynamic>[],
     this.routers = const <Router>[],

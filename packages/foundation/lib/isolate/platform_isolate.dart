@@ -1,15 +1,15 @@
 import 'dart:isolate';
 
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_foundation/isolate/isolate_handler.dart';
 import 'package:illuminate_foundation/isolate/isolate_interfaces.dart';
 import 'package:illuminate_routing/routing.dart';
 
-class DoxIsolate {
+class PlatformIsolate {
   /// singleton
-  static final DoxIsolate _singleton = DoxIsolate._internal();
-  factory DoxIsolate() => _singleton;
-  DoxIsolate._internal();
+  static final PlatformIsolate _singleton = PlatformIsolate._internal();
+  factory PlatformIsolate() => _singleton;
+  PlatformIsolate._internal();
 
   final Map<int, Isolate> _isolates = <int, Isolate>{};
   final Map<int, ReceivePort> _receivePorts = <int, ReceivePort>{};
@@ -46,8 +46,8 @@ class DoxIsolate {
       isolateHandler,
       IsolateSpawnParameter(
         isolateId,
-        Dox().config,
-        Dox().doxServices,
+        Application().config,
+        Application().doxServices,
         routes: Route().routes,
       ),
     );

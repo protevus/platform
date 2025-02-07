@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_http/http.dart';
 import 'package:illuminate_routing/routing.dart';
 import 'package:http/http.dart' as http;
@@ -18,11 +18,11 @@ void main() {
     });
 
     tearDownAll(() async {
-      await Dox().server.close();
+      await Application().server.close();
     });
 
     test('validation failed', () async {
-      Route.post('/validation', (DoxRequest req) {
+      Route.post('/validation', (Request req) {
         req.validate(<String, String>{
           'name': 'required',
           'email': 'required|email',
@@ -39,7 +39,7 @@ void main() {
     });
 
     test('validation passed', () async {
-      Route.post('/validation_passed', (DoxRequest req) {
+      Route.post('/validation_passed', (Request req) {
         req.validate(<String, String>{
           'name': 'required',
           'email': 'required|email',

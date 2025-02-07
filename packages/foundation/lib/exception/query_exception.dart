@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_contracts/contracts.dart';
 
-class QueryException extends IHttpException {
+class QueryException extends HttpExceptionInterface {
   QueryException({
     String message = 'Error in sql query',
     String errorCode = 'sql_query_error',

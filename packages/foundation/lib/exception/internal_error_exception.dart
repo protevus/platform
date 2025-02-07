@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_contracts/contracts.dart';
 
-class InternalErrorException extends IHttpException {
+class InternalErrorException extends HttpExceptionInterface {
   InternalErrorException({
     String message = 'Server Error',
     String errorCode = 'server_error',

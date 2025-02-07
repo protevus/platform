@@ -1,6 +1,6 @@
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 
 Future<void> startHttpServer(AppConfig config) async {
-  Dox().initialize(config);
-  await Dox().startServer();
+  Application().initialize(config);
+  await Application().startServer();
 }

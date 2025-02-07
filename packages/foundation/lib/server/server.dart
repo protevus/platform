@@ -1,13 +1,13 @@
 import 'dart:io';
 
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_http/http.dart';
 
-class DoxServer {
+class Server {
   /// register singleton
-  static final DoxServer _singleton = DoxServer._internal();
-  factory DoxServer() => _singleton;
-  DoxServer._internal();
+  static final Server _singleton = Server._internal();
+  factory Server() => _singleton;
+  Server._internal();
 
   /// httpServer dart:io
   late HttpServer httpServer;

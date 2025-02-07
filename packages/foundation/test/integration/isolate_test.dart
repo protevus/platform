@@ -1,5 +1,5 @@
-import 'package:illuminate_foundation/dox_core.dart';
-import 'package:illuminate_foundation/isolate/dox_isolate.dart';
+import 'package:illuminate_foundation/foundation.dart';
+import 'package:illuminate_foundation/isolate/platform_isolate.dart';
 import 'package:http/http.dart' as http;
 import 'package:test/test.dart';
 
@@ -27,7 +27,7 @@ AppConfig isolateConfig = AppConfig(
 
 String baseUrl = 'http://localhost:${isolateConfig.serverPort}';
 
-class ExampleService implements DoxService {
+class ExampleService implements Service {
   @override
   void setup() {}
 }
@@ -35,14 +35,14 @@ class ExampleService implements DoxService {
 void main() {
   group('Isolate', () {
     setUpAll(() async {
-      Dox().initialize(isolateConfig);
-      Dox().addService(ExampleService());
-      Dox().totalIsolate(5);
-      await Dox().startServer();
+      Application().initialize(isolateConfig);
+      Application().addService(ExampleService());
+      Application().totalIsolate(5);
+      await Application().startServer();
     });
 
     tearDownAll(() async {
-      DoxIsolate().killAll();
+      PlatformIsolate().killAll();
     });
 
     test('test', () async {
@@ -51,7 +51,7 @@ void main() {
 
       expect(res.statusCode, 200);
       expect(res.body, 'pong');
-      expect(DoxIsolate().isolates.length, 5 - 1);
+      expect(PlatformIsolate().isolates.length, 5 - 1);
     });
   });
 }

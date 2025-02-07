@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_http/http.dart';
 import 'package:illuminate_routing/routing.dart';
 import 'package:illuminate_storage/storage.dart';
@@ -21,7 +21,7 @@ void main() {
     });
 
     tearDownAll(() async {
-      await Dox().server.close();
+      await Application().server.close();
       Directory storage = Directory('${Directory.current.path}/storage/images');
       if (storage.existsSync()) {
         storage.deleteSync(recursive: true);
@@ -30,7 +30,7 @@ void main() {
 
     test('file upload | stream | download', () async {
       /// upload image
-      Route.post('/image', (DoxRequest req) async {
+      Route.post('/image', (Request req) async {
         req.validate(<String, String>{
           'image': 'file:png|image:png',
         });
@@ -44,29 +44,29 @@ void main() {
       });
 
       /// stream image
-      Route.get('/image/stream', (DoxRequest req) async {
+      Route.get('/image/stream', (Request req) async {
         return await Storage().stream(req.input('image'));
       });
 
       /// stream image
-      Route.get('/image/download', (DoxRequest req) async {
+      Route.get('/image/download', (Request req) async {
         return await Storage().disk('file').download(req.input('image'));
       });
 
       /// stream image
-      Route.get('/image/stream2', (DoxRequest req) async {
+      Route.get('/image/stream2', (Request req) async {
         StreamFile file = await Storage().stream(req.input('image'));
         return response(file.stream).contentType(file.contentType);
       });
 
       // check file exists
-      Route.get('/image', (DoxRequest req) async {
+      Route.get('/image', (Request req) async {
         bool exists = await Storage().exists(req.input('image'));
         return exists ? 'yes' : 'no';
       });
 
       /// stream image
-      Route.delete('/image', (DoxRequest req) async {
+      Route.delete('/image', (Request req) async {
         await Storage().delete(req.input('image'));
         return 'success';
       });
@@ -113,7 +113,7 @@ void main() {
 
     test('store', () async {
       /// upload image
-      Route.post('/image/store', (DoxRequest req) async {
+      Route.post('/image/store', (Request req) async {
         RequestFile file = req.input('image');
         return await file.store('images');
       });
@@ -127,7 +127,7 @@ void main() {
 
     test('put', () async {
       /// upload image
-      Route.post('/image/put', (DoxRequest req) async {
+      Route.post('/image/put', (Request req) async {
         RequestFile file = req.input('image');
         return await Storage().put('images', await file.bytes);
       });
@@ -140,7 +140,7 @@ void main() {
     });
 
     test('get non-existent file', () async {
-      Route.get('/image/non-existent', (DoxRequest req) async {
+      Route.get('/image/non-existent', (Request req) async {
         StreamFile file = await Storage().stream(req.input('image'));
         return response(file.stream).contentType(file.contentType);
       });
@@ -154,7 +154,7 @@ void main() {
 
     test('handle file with response()', () async {
       /// upload image
-      Route.post('/file', (DoxRequest req) async {
+      Route.post('/file', (Request req) async {
         req.validate(<String, String>{
           'image': 'file:png|image:png',
         });
@@ -168,19 +168,19 @@ void main() {
       });
 
       /// stream image
-      Route.get('/file/stream', (DoxRequest req) async {
+      Route.get('/file/stream', (Request req) async {
         StreamFile file = await Storage().stream(req.input('image'));
         return response().stream(file.stream).contentType(file.contentType);
       });
 
       /// stream image
-      Route.get('/file/stream2', (DoxRequest req) async {
+      Route.get('/file/stream2', (Request req) async {
         StreamFile file = await Storage().stream(req.input('image'));
         return response(file);
       });
 
       /// stream image
-      Route.get('/file/download', (DoxRequest req) async {
+      Route.get('/file/download', (Request req) async {
         DownloadableFile file = await Storage().download(req.input('image'));
         return response(file);
       });

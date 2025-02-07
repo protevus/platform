@@ -12,112 +12,112 @@ void main() {
     });
 
     test('get', () {
-      Route.get('/ping', (DoxRequest req) {});
+      Route.get('/ping', (Request req) {});
       List<RouteData> routes = Route().routes;
       expect(routes[0].path, '/ping');
       expect(routes[0].method, 'GET');
     });
 
     test('post', () {
-      Route.post('/ping', (DoxRequest req) {});
+      Route.post('/ping', (Request req) {});
       List<RouteData> routes = Route().routes;
       expect(routes[0].path, '/ping');
       expect(routes[0].method, 'POST');
     });
 
     test('put', () {
-      Route.put('/ping', (DoxRequest req) {});
+      Route.put('/ping', (Request req) {});
       List<RouteData> routes = Route().routes;
       expect(routes[0].path, '/ping');
       expect(routes[0].method, 'PUT');
     });
 
     test('patch', () {
-      Route.patch('/ping', (DoxRequest req) {});
+      Route.patch('/ping', (Request req) {});
       List<RouteData> routes = Route().routes;
       expect(routes[0].path, '/ping');
       expect(routes[0].method, 'PATCH');
     });
 
     test('delete', () {
-      Route.delete('/ping', (DoxRequest req) {});
+      Route.delete('/ping', (Request req) {});
       List<RouteData> routes = Route().routes;
       expect(routes[0].path, '/ping');
       expect(routes[0].method, 'DELETE');
     });
 
     test('purge', () {
-      Route.purge('/ping', (DoxRequest req) {});
+      Route.purge('/ping', (Request req) {});
       List<RouteData> routes = Route().routes;
       expect(routes[0].path, '/ping');
       expect(routes[0].method, 'PURGE');
     });
 
     test('options', () {
-      Route.options('/ping', (DoxRequest req) {});
+      Route.options('/ping', (Request req) {});
       List<RouteData> routes = Route().routes;
       expect(routes[0].path, '/ping');
       expect(routes[0].method, 'OPTIONS');
     });
 
     test('copy', () {
-      Route.copy('/ping', (DoxRequest req) {});
+      Route.copy('/ping', (Request req) {});
       List<RouteData> routes = Route().routes;
       expect(routes[0].path, '/ping');
       expect(routes[0].method, 'COPY');
     });
 
     test('view', () {
-      Route.view('/ping', (DoxRequest req) {});
+      Route.view('/ping', (Request req) {});
       List<RouteData> routes = Route().routes;
       expect(routes[0].path, '/ping');
       expect(routes[0].method, 'VIEW');
     });
 
     test('link', () {
-      Route.link('/ping', (DoxRequest req) {});
+      Route.link('/ping', (Request req) {});
       List<RouteData> routes = Route().routes;
       expect(routes[0].path, '/ping');
       expect(routes[0].method, 'LINK');
     });
 
     test('unlink', () {
-      Route.unlink('/ping', (DoxRequest req) {});
+      Route.unlink('/ping', (Request req) {});
       List<RouteData> routes = Route().routes;
       expect(routes[0].path, '/ping');
       expect(routes[0].method, 'UNLINK');
     });
 
     test('lock', () {
-      Route.lock('/ping', (DoxRequest req) {});
+      Route.lock('/ping', (Request req) {});
       List<RouteData> routes = Route().routes;
       expect(routes[0].path, '/ping');
       expect(routes[0].method, 'LOCK');
     });
 
     test('propfind', () {
-      Route.propfind('/ping', (DoxRequest req) {});
+      Route.propfind('/ping', (Request req) {});
       List<RouteData> routes = Route().routes;
       expect(routes[0].path, '/ping');
       expect(routes[0].method, 'PROPFIND');
     });
 
     test('unlock', () {
-      Route.unlock('/ping', (DoxRequest req) {});
+      Route.unlock('/ping', (Request req) {});
       List<RouteData> routes = Route().routes;
       expect(routes[0].path, '/ping');
       expect(routes[0].method, 'UNLOCK');
     });
 
     test('group', () {
-      Route.get('/ping', (DoxRequest req) {});
+      Route.get('/ping', (Request req) {});
 
       Route.group('blog', () {
-        Route.post('/info', (DoxRequest req) {});
-        Route.get('/activate', (DoxRequest req) {});
+        Route.post('/info', (Request req) {});
+        Route.get('/activate', (Request req) {});
       });
 
-      Route.post('admin', (DoxRequest req) {});
+      Route.post('admin', (Request req) {});
 
       List<RouteData> routes = Route().routes;
 
@@ -193,8 +193,8 @@ void main() {
 
     test('domain route', () {
       Route.domain('dartondox.dev', () {
-        Route.get('ping', (DoxRequest req) {});
-        Route.post('pong', (DoxRequest req) {});
+        Route.get('ping', (Request req) {});
+        Route.post('pong', (Request req) {});
       });
 
       List<RouteData> routes = Route().routes;

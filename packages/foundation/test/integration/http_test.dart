@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_http/http.dart';
 import 'package:illuminate_routing/routing.dart';
 import 'package:http/http.dart' as http;
@@ -22,15 +22,15 @@ void main() {
     });
 
     tearDownAll(() async {
-      await Dox().server.close();
+      await Application().server.close();
     });
 
     test('ping -> pong', () async {
-      DoxRequest middlewareFn(DoxRequest req) {
+      Request middlewareFn(Request req) {
         return req;
       }
 
-      String pong(DoxRequest req) {
+      String pong(Request req) {
         return 'pong';
       }
 
@@ -44,11 +44,11 @@ void main() {
     });
 
     test('ping -> pong', () async {
-      DoxRequest middlewareFn(DoxRequest req) {
+      Request middlewareFn(Request req) {
         return req;
       }
 
-      String pong(DoxRequest req) {
+      String pong(Request req) {
         return 'pong';
       }
 
@@ -64,7 +64,7 @@ void main() {
     });
 
     test('param route', () async {
-      Route.get('/ping/{name}', (DoxRequest req, String name) {
+      Route.get('/ping/{name}', (Request req, String name) {
         return 'pong $name';
       });
 
@@ -76,7 +76,7 @@ void main() {
     });
 
     test('throw an error', () async {
-      Route.get('/exception', (DoxRequest req, String name) {
+      Route.get('/exception', (Request req, String name) {
         throw Exception('something wrong');
       });
 
@@ -101,8 +101,7 @@ void main() {
     });
 
     test('double param route', () async {
-      Route.get('/ping/{name}/{type}',
-          (DoxRequest req, String name, String type) {
+      Route.get('/ping/{name}/{type}', (Request req, String name, String type) {
         return 'pong $name $type';
       });
 
@@ -115,7 +114,7 @@ void main() {
 
     test('json response', () async {
       Map<String, String> responseData = <String, String>{'ping': 'pong'};
-      Route.get('/json', (DoxRequest req) {
+      Route.get('/json', (Request req) {
         return responseData;
       });
 
@@ -138,7 +137,7 @@ void main() {
 
     test('list', () async {
       List<String> responseData = <String>['1', '2', '4'];
-      Route.get('/list', (DoxRequest req) {
+      Route.get('/list', (Request req) {
         return responseData;
       });
 
@@ -150,7 +149,7 @@ void main() {
     });
 
     test('cache response', () async {
-      Route.get('/cache_response', (DoxRequest req) {
+      Route.get('/cache_response', (Request req) {
         return response('pong').cache(Duration(seconds: 10));
       });
 
@@ -164,7 +163,7 @@ void main() {
 
     test('domain test', () async {
       Route.domain('localhost:${config.serverPort}', () {
-        Route.get('/domain/test', (DoxRequest doxRequest) {
+        Route.get('/domain/test', (Request doxRequest) {
           return 'pong';
         });
       });
@@ -177,7 +176,7 @@ void main() {
     });
 
     test('custom status', () async {
-      Route.get('/custom_status', (DoxRequest req) {
+      Route.get('/custom_status', (Request req) {
         return response('pong').statusCode(207);
       });
 
@@ -189,7 +188,7 @@ void main() {
     });
 
     test('custom header', () async {
-      Route.get('/custom_header', (DoxRequest req) {
+      Route.get('/custom_header', (Request req) {
         return response('pong').header('x-key', 'ABCD');
       });
 
@@ -202,7 +201,7 @@ void main() {
     });
 
     test('content type', () async {
-      Route.get('/content_type', (DoxRequest req) {
+      Route.get('/content_type', (Request req) {
         return response('pong').contentType(ContentType.text);
       });
 
@@ -215,7 +214,7 @@ void main() {
     });
 
     test('cookie response', () async {
-      Route.get('/cookie_response', (DoxRequest req) {
+      Route.get('/cookie_response', (Request req) {
         DoxCookie cookie = DoxCookie('x-key', 'ABCD');
         DoxCookie cookie2 = DoxCookie('x-key2', 'ABCD', encrypt: false);
         return response('pong').cookie(cookie).cookie(cookie2);

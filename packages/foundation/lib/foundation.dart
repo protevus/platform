@@ -1,6 +1,6 @@
 library dox_core;
 
-export 'package:illuminate_annotation/dox_annotation.dart';
+export 'package:illuminate_annotation/annotation.dart';
 
 export 'app.dart';
 
@@ -8,7 +8,7 @@ export 'app.dart';
 //export 'cache/cache.dart';
 //export 'cache/cache_driver_interface.dart';
 export 'constants/constants.dart';
-export 'env/env.dart';
+//export 'env/env.dart';
 
 /// Exceptions
 export 'exception/internal_error_exception.dart';
@@ -28,7 +28,7 @@ export 'exception/validation_exception.dart';
 
 /// interfaces
 export 'interfaces/app_config.dart';
-export 'interfaces/dox_service.dart';
+export 'interfaces/service.dart';
 export 'interfaces/response_handler_interface.dart';
 export 'interfaces/router.dart';
 

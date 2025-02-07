@@ -1,4 +1,4 @@
 /// coverage:ignore-file
-abstract class DoxService {
+abstract class Service {
   dynamic setup() {}
 }

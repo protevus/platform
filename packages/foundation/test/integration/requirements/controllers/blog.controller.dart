@@ -1,34 +1,34 @@
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_http/http.dart';
 
 class BlogController {
   /// GET /admins
-  Future<String> index(DoxRequest req) async {
+  Future<String> index(Request req) async {
     return 'GET /admins';
   }
 
   /// GET /admins/create
-  String create(DoxRequest req) {
+  String create(Request req) {
     return 'GET /admins/create';
   }
 
   /// GET /admins/{id}
-  Future<String> show(DoxRequest req, String id) async {
+  Future<String> show(Request req, String id) async {
     return 'GET /admins/{id}';
   }
 
   /// GET /admins/{id}/edit
-  Future<String> edit(DoxRequest req, String id) async {
+  Future<String> edit(Request req, String id) async {
     return 'GET /admins/{id}/edit';
   }
 
   /// PUT|PATCH /admins/{id}
-  Future<String> update(DoxRequest req, String id) async {
+  Future<String> update(Request req, String id) async {
     return 'PUT|PATCH /admins/{id}';
   }
 
   /// DELETE /admins/{id}
-  Future<String> destroy(DoxRequest req, String id) async {
+  Future<String> destroy(Request req, String id) async {
     return 'DELETE /admins/{id}';
   }
 }

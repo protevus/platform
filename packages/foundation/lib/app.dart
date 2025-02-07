@@ -1,28 +1,30 @@
-import 'package:illuminate_foundation/dox_core.dart';
-import 'package:illuminate_foundation/isolate/dox_isolate.dart';
-import 'package:illuminate_foundation/server/dox_server.dart';
+import 'package:illuminate_config/config.dart';
+import 'package:illuminate_contracts/contracts.dart';
+import 'package:illuminate_foundation/foundation.dart';
+import 'package:illuminate_foundation/isolate/platform_isolate.dart';
+import 'package:illuminate_foundation/server/server.dart';
 import 'package:illuminate_log/log.dart';
 import 'package:illuminate_routing/routing.dart';
 import 'package:sprintf/sprintf.dart';
 
 IocContainer _ioc = IocContainer();
 
-class Dox implements IDox {
+class Application implements ApplicationInterface {
   /// setup singleton
-  static Dox? _singleton;
+  static Application? _singleton;
 
-  factory Dox() {
+  factory Application() {
     if (_singleton == null) {
       Env().load();
-      _singleton = Dox._internal();
+      _singleton = Application._internal();
     }
     return _singleton!;
   }
 
-  Dox._internal();
+  Application._internal();
 
   /// get dox http server
-  DoxServer get server => DoxServer();
+  Server get server => Server();
 
   /// get app config
   late AppConfig config;
@@ -34,14 +36,14 @@ class Dox implements IDox {
   int isolateId = 1;
 
   /// websocket
-  IDoxWebsocket? websocket;
+  WebsocketInterface? websocket;
 
   /// total isolate to spawn
   int? _totalIsolate;
 
   /// list of services that need to run when
   /// creating isolate
-  List<DoxService> doxServices = <DoxService>[];
+  List<Service> doxServices = <Service>[];
 
   /// initialize dox application
   /// it load env and set config
@@ -64,7 +66,7 @@ class Dox implements IDox {
   /// Dox().setWebsocket(DoxWebsocket())
   /// ```
   @override
-  void setWebsocket(IDoxWebsocket ws) {
+  void setWebsocket(WebsocketInterface ws) {
     websocket = ws;
   }
 
@@ -74,32 +76,32 @@ class Dox implements IDox {
   /// ```
   Future<void> startServer() async {
     addServices(config.services);
-    _totalIsolate ??= Dox().config.totalIsolate;
+    _totalIsolate ??= Application().config.totalIsolate;
     int isolatesToSpawn = _totalIsolate ?? 1;
 
     if (isolatesToSpawn > 1) {
-      await DoxIsolate().spawn(isolatesToSpawn);
+      await PlatformIsolate().spawn(isolatesToSpawn);
     }
 
     await startServices();
-    DoxServer().setResponseHandler(config.responseHandler);
-    await DoxServer().listen(config.serverPort, isolateId: 1);
+    Server().setResponseHandler(config.responseHandler);
+    await Server().listen(config.serverPort, isolateId: 1);
 
     Logger.info(sprintf(
       'Server started at http://127.0.0.1:%s with $isolatesToSpawn isolate',
-      <dynamic>[Dox().config.serverPort],
+      <dynamic>[Application().config.serverPort],
     ));
   }
 
   /// ####### functions need to run on isolate #######
 
   /// add services that need to run on isolate spawn
-  void addServices(List<DoxService> services) {
+  void addServices(List<Service> services) {
     doxServices.addAll(services);
   }
 
   /// add service that need to run on isolate spawn
-  void addService(DoxService service) {
+  void addService(Service service) {
     doxServices.add(service);
   }
 
@@ -107,7 +109,7 @@ class Dox implements IDox {
   /// this is internal core use only
   /// your app do not need to call this function
   Future<void> startServices() async {
-    for (DoxService service in doxServices) {
+    for (Service service in doxServices) {
       await service.setup();
     }
     _registerFormRequests();
@@ -119,7 +121,7 @@ class Dox implements IDox {
   /// register form request assign in app config
   void _registerFormRequests() {
     config.formRequests.forEach((Type key, Function() value) {
-      Dox().ioc.registerRequest(key.toString(), value);
+      Application().ioc.registerRequest(key.toString(), value);
     });
   }
 

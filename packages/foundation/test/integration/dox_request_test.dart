@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_http/http.dart';
 import 'package:illuminate_routing/routing.dart';
 import 'package:illuminate_support/support.dart';
@@ -19,10 +19,10 @@ void main() {
     });
 
     tearDownAll(() async {
-      await Dox().server.close();
+      await Application().server.close();
     });
     test('dox request', () async {
-      Route.post('/with_headers/{id}', (DoxRequest req) async {
+      Route.post('/with_headers/{id}', (Request req) async {
         return response(<String, dynamic>{
           'x-auth-key': req.header('x-auth-key'),
           'x-auth-key2': req.headers['x-auth-key'],
@@ -78,7 +78,7 @@ void main() {
     test('get cookies', () async {
       String authKeyValue = 'auth-key-value';
 
-      Route.post('/get_cookies', (DoxRequest req) async {
+      Route.post('/get_cookies', (Request req) async {
         return <String, dynamic>{
           'cookie': req.cookie('auth-key'),
           'userAgent': req.userAgent(),
@@ -106,7 +106,7 @@ void main() {
     });
 
     test('add & merge request input', () async {
-      Route.post('/request/add/merge', (DoxRequest req) async {
+      Route.post('/request/add/merge', (Request req) async {
         req.add('bar', 'foo');
         req.merge(<String, String>{'name': 'dox'});
         return <String, dynamic>{
@@ -133,7 +133,7 @@ void main() {
     });
 
     test('return request support json encode', () async {
-      Route.post('/request/add/merge', (DoxRequest req) async {
+      Route.post('/request/add/merge', (Request req) async {
         return req;
       });
 

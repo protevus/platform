@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_contracts/contracts.dart';
 
-class NotFoundHttpException extends IHttpException {
+class NotFoundHttpException extends HttpExceptionInterface {
   NotFoundHttpException({
     String message = 'Not Found',
     String errorCode = 'not_found',
