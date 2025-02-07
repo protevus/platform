@@ -1,7 +1,8 @@
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_contracts/contracts.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_support/support.dart';
 
-class LogMiddleware implements IDoxMiddleware {
+class LogMiddleware implements MiddlewareInterface {
   Map<String, dynamic> Function(Map<String, dynamic>)? filter;
 
   final bool withHeader;
@@ -14,7 +15,7 @@ class LogMiddleware implements IDoxMiddleware {
   });
 
   @override
-  IDoxRequest handle(IDoxRequest req) {
+  RequestInterface handle(RequestInterface req) {
     if (!enabled) {
       return req;
     }

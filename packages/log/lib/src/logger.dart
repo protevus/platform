@@ -4,8 +4,8 @@ import 'package:illuminate_support/support.dart';
 /// coverage:ignore-file
 class Logger {
   static void log(String level, dynamic message, [dynamic data]) {
-    if (Dox().config.logger.enabled == false) return;
-    Dox().config.logger.prettyPrint
+    if (Application().config.logger.enabled == false) return;
+    Application().config.logger.prettyPrint
         ? _prettyLog(level, message, data)
         : _log(level, message, data);
   }
@@ -74,7 +74,7 @@ class Logger {
   static void _log(String level, dynamic message, dynamic data) {
     Map<String, dynamic> text = <String, dynamic>{
       'level': level.toUpperCase(),
-      'name': Dox().config.logger.name,
+      'name': Application().config.logger.name,
       'message': message.toString(),
       'timestamp': DateTime.now().toIso8601String(),
       'payload': data
