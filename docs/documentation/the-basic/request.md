@@ -73,7 +73,7 @@ formRequests: <Type, FormRequest Function()>{
 === "blog.request.dart"
 
     ```dart
-    import 'package:illuminate_foundation/dox_core.dart';
+    import 'package:illuminate_foundation/foundation.dart';
 
     class BlogRequest extends FormRequest {
         String? title;

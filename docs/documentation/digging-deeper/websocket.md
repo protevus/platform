@@ -41,7 +41,7 @@ dox create:controller SocketController -ws
 ```
 
 ```dart
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:dox_websocket/dox_websocket.dart';
 
 class ChatWebSocketController {

@@ -69,7 +69,7 @@ dox create:controller Blog
 === "Sample"
 
     ```dart
-    import 'package:illuminate_foundation/dox_core.dart';
+    import 'package:illuminate_foundation/foundation.dart';
 
     class BlogController {
         /// GET /resource
