@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_support/support.dart';
-import 'package:illuminate_websocket/dox_websocket.dart';
+import 'package:illuminate_websocket/websocket.dart';
 import 'package:ioredis/ioredis.dart';
 import 'package:test/test.dart';
 
@@ -11,13 +11,13 @@ import 'config/app_config.dart';
 
 String baseUrl = 'http://localhost:${appConfig.serverPort}';
 
-class WebsocketService implements DoxService {
+class WebsocketService implements Service {
   @override
   void setup() {
     Redis sub = Redis();
     Redis pub = sub.duplicate();
 
-    WebsocketServer io = WebsocketServer(Dox());
+    WebsocketServer io = WebsocketServer(Application());
     io.adapter(WebsocketRedisAdapter(
       subscriber: sub,
       publisher: pub,
@@ -28,13 +28,13 @@ class WebsocketService implements DoxService {
 void main() {
   group('Websocket |', () {
     setUpAll(() async {
-      Dox().initialize(appConfig);
-      Dox().addService(WebsocketService());
-      await Dox().startServer();
+      Application().initialize(appConfig);
+      Application().addService(WebsocketService());
+      await Application().startServer();
     });
 
     tearDownAll(() async {
-      await Dox().server.close();
+      await Application().server.close();
     });
 
     test('websocket', () async {

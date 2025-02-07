@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:illuminate_websocket/dox_websocket.dart';
+import 'package:illuminate_websocket/websocket.dart';
 import 'package:illuminate_websocket/src/websocket_storage.dart';
 
 class WebsocketEmitter {

@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:illuminate_annotation/dox_annotation.dart';
+import 'package:illuminate_annotation/annotation.dart';
+import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_websocket/src/utils/constant.dart';
 import 'package:illuminate_websocket/src/websocket_emitter.dart';
 import 'package:illuminate_websocket/src/websocket_storage.dart';
@@ -31,7 +32,7 @@ class WebsocketEventHandler implements WebsocketEvent {
 
   /// handle http request and convert into websocket
   @override
-  Future<WebSocket?> handle(IDoxRequest req) async {
+  Future<WebSocket?> handle(RequestInterface req) async {
     WebSocket ws = await WebSocketTransformer.upgrade(req.httpRequest);
 
     /// create socket id for each client connection
