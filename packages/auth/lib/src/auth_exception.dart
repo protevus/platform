@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:illuminate_annotation/dox_annotation.dart';
+import 'package:illuminate_contracts/contracts.dart';
 
-class UnAuthorizedException extends IHttpException {
+class UnAuthorizedException extends HttpExceptionInterface {
   UnAuthorizedException({
     String message = 'Authentication failed',
     String errorCode = 'unauthorized',

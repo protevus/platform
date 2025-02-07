@@ -1,7 +1,8 @@
 // ignore_for_file: depend_on_referenced_packages
-import 'package:illuminate_auth/dox_auth.dart';
+import 'package:illuminate_auth/auth.dart';
 import 'package:illuminate_auth/src/hash.dart';
-import 'package:illuminate_database/dox_query_builder.dart';
+import 'package:illuminate_contracts/contracts.dart';
+import 'package:illuminate_database/query_builder.dart';
 
 class JwtAuthDriver extends AuthDriver {
   /// Jwt secret
@@ -33,7 +34,7 @@ class JwtAuthDriver extends AuthDriver {
   /// verify token and get model from provider
   /// and get user data
   @override
-  Future<Model<dynamic>?> verifyToken(IDoxRequest req) async {
+  Future<Model<dynamic>?> verifyToken(RequestInterface req) async {
     try {
       /// get token from header
       String? token = req.header('Authorization')?.replaceFirst('Bearer ', '');

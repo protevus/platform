@@ -1,4 +1,5 @@
-import 'package:illuminate_database/dox_query_builder.dart';
+import 'package:illuminate_contracts/contracts.dart';
+import 'package:illuminate_database/query_builder.dart';
 
 class AuthGuard {
   final AuthDriver driver;
@@ -34,7 +35,7 @@ class AuthConfig {
 }
 
 abstract class AuthDriver {
-  Future<Model<dynamic>?> verifyToken(IDoxRequest req);
+  Future<Model<dynamic>?> verifyToken(RequestInterface req);
 
   Future<Model<dynamic>?> attempt(Map<String, dynamic> credentials);
 

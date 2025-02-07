@@ -2,7 +2,7 @@
 
 ```dart
 import 'package:dox_auth/dox_auth.dart';
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:dox/models/user/user.model.dart';
 
 class AuthConfig extends AuthConfigInterface {

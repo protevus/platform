@@ -1,9 +1,10 @@
 // ignore_for_file: depend_on_referenced_packages
 import 'package:illuminate_auth/src/auth_engine.dart';
 import 'package:illuminate_auth/src/interfaces.dart';
-import 'package:illuminate_database/dox_query_builder.dart';
+import 'package:illuminate_contracts/contracts.dart';
+import 'package:illuminate_database/query_builder.dart';
 
-class Auth implements IAuth {
+class Auth implements AuthInterface {
   /// user data
   Model<dynamic>? _userData;
 
@@ -14,7 +15,7 @@ class Auth implements IAuth {
   }
 
   @override
-  Future<void> verifyToken(IDoxRequest req) async {
+  Future<void> verifyToken(RequestInterface req) async {
     _userData = await _driver.verifyToken(req);
   }
 
