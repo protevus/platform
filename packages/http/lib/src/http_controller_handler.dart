@@ -1,9 +1,10 @@
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_contracts/contracts.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_routing/routing.dart';
 import 'package:illuminate_http/http.dart';
 
 /// Handle middleware and controllers
-Future<dynamic> middlewareAndControllerHandler(DoxRequest doxReq) async {
+Future<dynamic> middlewareAndControllerHandler(Request doxReq) async {
   dynamic result;
   RouteData route = doxReq.route;
 
@@ -23,13 +24,13 @@ Future<dynamic> middlewareAndControllerHandler(DoxRequest doxReq) async {
 
     /// DoxMiddleware class
     /// with handle function
-    if (fn is IDoxMiddleware) {
+    if (fn is MiddlewareInterface) {
       result = await fn.handle(doxReq);
     }
 
     /// if result is dox Request, it mean result is from middleware
     /// and need to pass values to next controller.
-    if (result is DoxRequest) {
+    if (result is Request) {
       /// override doxReq from arguments in order to pass in the next loop
       doxReq = result;
     } else {
@@ -43,7 +44,7 @@ Future<dynamic> middlewareAndControllerHandler(DoxRequest doxReq) async {
 Future<dynamic> _handleController(
   RouteData route,
   dynamic fn,
-  DoxRequest doxRequest,
+  Request doxRequest,
 ) async {
   dynamic result;
 
@@ -66,7 +67,7 @@ Future<dynamic> _handleController(
   if (controllerArgumentsDataType.isNotEmpty) {
     String requestName = controllerArgumentsDataType.first;
     if (requestName != 'DoxRequest') {
-      FormRequest? formReq = Dox().ioc.getByName(requestName);
+      FormRequest? formReq = Application().ioc.getByName(requestName);
       if (formReq != null && _isFormRequestTypeMatched(fn, formReq)) {
         /// mapping request inputs field
         doxRequest.processInputMapper(formReq.mapInputs());

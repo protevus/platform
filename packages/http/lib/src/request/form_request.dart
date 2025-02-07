@@ -1,4 +1,4 @@
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_http/http.dart';
 
 abstract class FormRequest {
@@ -20,9 +20,9 @@ abstract class FormRequest {
     return <String, String>{};
   }
 
-  late DoxRequest request;
+  late Request request;
 
-  void setRequest(DoxRequest req) {
+  void setRequest(Request req) {
     request = req;
   }
 

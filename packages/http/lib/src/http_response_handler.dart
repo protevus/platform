@@ -1,7 +1,8 @@
 import 'dart:io';
 
-import 'package:illuminate_foundation/dox_core.dart';
-import 'package:illuminate_foundation/server/dox_server.dart';
+import 'package:illuminate_contracts/contracts.dart';
+import 'package:illuminate_foundation/foundation.dart';
+import 'package:illuminate_foundation/server/server.dart';
 import 'package:illuminate_http/http.dart';
 import 'package:illuminate_storage/storage.dart';
 import 'package:illuminate_support/support.dart';
@@ -20,17 +21,17 @@ dynamic httpResponseHandler(
   /// If there is responseHandler set, handle responseHandler
   /// before DoxResponse process. The responseHandler will return
   /// DoxResponse to process
-  ResponseHandlerInterface? customResponseHandler = DoxServer().responseHandler;
+  ResponseHandlerInterface? customResponseHandler = Server().responseHandler;
   if (customResponseHandler != null) {
-    DoxResponse doxResponse = customResponseHandler
-        .handle(payload is DoxResponse ? payload : DoxResponse(payload));
+    Response doxResponse = customResponseHandler
+        .handle(payload is Response ? payload : Response(payload));
     payload = doxResponse;
   }
 
   /// If payload is DoxResponse, DoxResponse have process function
   /// which will set header and status code in the response
   /// and will pass payload/content to `responseDataHandler` function.
-  if (payload is DoxResponse) {
+  if (payload is Response) {
     payload.process(request);
     return;
   }
@@ -71,7 +72,7 @@ void responseDataHandler(dynamic payload, HttpRequest request) {
   /// if payload handle base Http Exception
   /// we set http status from exception and return as map
   /// which will parse into json and response as json
-  if (payload is IHttpException) {
+  if (payload is HttpExceptionInterface) {
     res.statusCode = payload.code;
     payload = payload.toResponse();
   }

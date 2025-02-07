@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_http/http.dart';
 import 'package:illuminate_storage/storage.dart';
 
-class DoxResponse {
+class Response {
   /// content can be anything
   /// String, int, Map, json serializable object, Stream<List<int>>
   dynamic _contentData;
@@ -17,7 +17,7 @@ class DoxResponse {
 
   /// content can be anything
   /// String, int, Map, json serializable object, Stream<List<int>>
-  DoxResponse(this._contentData) {
+  Response(this._contentData) {
     if (_contentData is StreamFile) {
       _contentType = _contentData.contentType;
     }
@@ -33,7 +33,7 @@ class DoxResponse {
   /// ```
   /// res.statusCode(200);
   /// ```
-  DoxResponse statusCode(int code) {
+  Response statusCode(int code) {
     _statusCode = code;
     return this;
   }
@@ -42,7 +42,7 @@ class DoxResponse {
   /// ```
   /// res.setContent({"foo": "bar"});
   /// ```
-  DoxResponse content(dynamic content) {
+  Response content(dynamic content) {
     _contentData = content;
     return this;
   }
@@ -59,7 +59,7 @@ class DoxResponse {
   /// ```
   /// res.stream(streamData);
   /// ```
-  DoxResponse stream(Stream<List<int>> stream) {
+  Response stream(Stream<List<int>> stream) {
     content(stream);
     return this;
   }
@@ -68,7 +68,7 @@ class DoxResponse {
   /// ```
   /// res.statusCode(ContentType.json);
   /// ```
-  DoxResponse contentType(ContentType contentType) {
+  Response contentType(ContentType contentType) {
     _contentType = contentType;
     return this;
   }
@@ -77,7 +77,7 @@ class DoxResponse {
   /// ```
   /// res.header('Authorization', 'Bearer xxx');
   /// ```
-  DoxResponse header(String key, dynamic value) {
+  Response header(String key, dynamic value) {
     _headers[key] = value;
     return this;
   }
@@ -87,7 +87,7 @@ class DoxResponse {
   /// var DoxCookie('key', 'value');
   /// res.cookie(cookie);
   /// ```
-  DoxResponse cookie(DoxCookie cookie, {bool setExpire = false}) {
+  Response cookie(DoxCookie cookie, {bool setExpire = false}) {
     _cookies.add(setExpire ? cookie.expire() : cookie.get());
     return this;
   }
@@ -96,7 +96,7 @@ class DoxResponse {
   /// ```
   /// res.cache(Duration(seconds: 10));
   /// ```
-  DoxResponse cache(Duration duration) {
+  Response cache(Duration duration) {
     _headers[HttpHeaders.cacheControlHeader] = 'max-age=${duration.inSeconds}';
     return this;
   }
@@ -105,7 +105,7 @@ class DoxResponse {
   /// ```
   /// res.withHeaders({'Authorization' : 'Bearer xxx'});
   /// ```
-  DoxResponse withHeaders(Map<String, dynamic> values) {
+  Response withHeaders(Map<String, dynamic> values) {
     _headers = values;
     return this;
   }
@@ -130,6 +130,6 @@ class DoxResponse {
 
 /// content can be anything
 /// String, int, Map, json serializable object, Stream<List<int>>
-DoxResponse response([dynamic content]) {
-  return DoxResponse(content);
+Response response([dynamic content]) {
+  return Response(content);
 }

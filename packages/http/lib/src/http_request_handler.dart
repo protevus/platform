@@ -20,7 +20,7 @@ void httpRequestHandler(HttpRequest req) {
       return;
     }
 
-    getDoxRequest(req, route).then((DoxRequest doxReq) {
+    getDoxRequest(req, route).then((Request doxReq) {
       middlewareAndControllerHandler(doxReq).then((dynamic result) {
         httpResponseHandler(result, req);
       }).onError((Object? error, StackTrace stackTrace) {
@@ -36,8 +36,8 @@ void httpRequestHandler(HttpRequest req) {
   }
 }
 
-Future<DoxRequest> getDoxRequest(HttpRequest req, RouteData route) async {
-  return DoxRequest(
+Future<Request> getDoxRequest(HttpRequest req, RouteData route) async {
+  return Request(
     route: route,
     uri: req.uri,
     body: await HttpBody.read(req),

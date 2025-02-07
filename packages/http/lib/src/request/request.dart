@@ -1,14 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_contracts/contracts.dart';
+import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_routing/routing.dart';
 import 'package:illuminate_support/support.dart';
 import 'package:illuminate_validation/validation.dart';
 import 'package:illuminate_http/http.dart';
 import './http_request_body.dart';
 
-class DoxRequest implements IDoxRequest {
+class Request implements RequestInterface {
   final RouteData route;
 
   final HttpHeaders httpHeaders;
@@ -34,7 +35,7 @@ class DoxRequest implements IDoxRequest {
   final Map<String, dynamic> _cookies = <String, dynamic>{};
   Map<String, dynamic> _allRequest = <String, dynamic>{};
 
-  DoxRequest({
+  Request({
     required this.route,
     required this.uri,
     required this.body,
@@ -108,7 +109,7 @@ class DoxRequest implements IDoxRequest {
 
   /// get auth class
   @override
-  IAuth? get auth => input(AUTH_REQUEST_KEY);
+  AuthInterface? get auth => input(AUTH_REQUEST_KEY);
 
   /// Get request value
   /// ```
@@ -182,7 +183,8 @@ class DoxRequest implements IDoxRequest {
   @override
   String? cookie(String key, {bool decrypt = true}) {
     if (_cookies[key] == null) return null;
-    if (decrypt) AESEncryptor.decode(_cookies[key], Dox().config.appKey);
+    if (decrypt)
+      AESEncryptor.decode(_cookies[key], Application().config.appKey);
     return _cookies[key];
   }
 
@@ -231,7 +233,7 @@ class DoxRequest implements IDoxRequest {
   @override
   void validate(Map<String, String> rules,
       {Map<String, String> messages = const <String, String>{}}) {
-    DoxValidator validator = DoxValidator(all());
+    Validator validator = Validator(all());
     if (messages.isNotEmpty) {
       validator.setMessages(messages);
     }

@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:illuminate_foundation/dox_core.dart';
+import 'package:illuminate_foundation/foundation.dart';
 
 void httpCorsHandler(bool? enabled, HttpRequest req) {
-  CORSConfig cors = Dox().config.cors;
+  CORSConfig cors = Application().config.cors;
   if (enabled ?? cors.enabled) {
     Map<String, dynamic> headers = <String, dynamic>{
       HttpHeaders.accessControlAllowOriginHeader: cors.origin,
