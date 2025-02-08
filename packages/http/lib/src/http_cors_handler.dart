@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_foundation/foundation.dart';
 
 void httpCorsHandler(bool? enabled, HttpRequest req) {

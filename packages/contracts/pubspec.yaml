@@ -9,7 +9,10 @@ environment:
   sdk: ^3.4.2
 
 # Add regular dependencies here.
-dependencies():
+dependencies:
+  illuminate_http: ^0.0.1
+  illuminate_log: ^0.0.1
+  illuminate_support: ^0.0.1
 
 dev_dependencies:
   lints: ^3.0.0

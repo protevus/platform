@@ -6,12 +6,16 @@ export 'src/auth/auth_interface.dart';
 /// Cache
 export 'src/cache/cache_driver_interface.dart';
 
+/// Config
+export 'src/config/app_config.dart';
+
 /// Foundation
 export 'src/foundation/application_interface.dart';
 
 /// Http
 export 'src/http/http_exception_interface.dart';
 export 'src/http/request_interface.dart';
+export 'src/http/response_handler_interface.dart';
 
 /// Middleware
 export 'src/middleware/middleware_interface.dart';
