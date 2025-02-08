@@ -1,5 +1,8 @@
+import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_foundation/isolate/platform_isolate.dart';
+import 'package:illuminate_support/support.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:test/test.dart';
 

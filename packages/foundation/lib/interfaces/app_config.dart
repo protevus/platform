@@ -3,6 +3,7 @@ import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_http/http.dart';
 import 'package:illuminate_log/log.dart';
+import 'package:illuminate_support/support.dart';
 
 void defaultErrorHandler(Object? error, StackTrace stackTrace) {
   Logger.warn(error);
