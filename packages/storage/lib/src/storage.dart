@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_http/http.dart';
+import 'package:illuminate_support/support.dart';
 import 'package:mime/mime.dart';
 
 import './drivers/local_storage_driver.dart';
