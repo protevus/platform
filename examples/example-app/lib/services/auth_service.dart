@@ -1,7 +1,7 @@
 import 'package:example_app/app/models/user/user.model.dart';
 import 'package:illuminate_auth/auth.dart';
 import 'package:illuminate_config/config.dart';
-import 'package:illuminate_foundation/foundation.dart';
+import 'package:illuminate_support/support.dart';
 
 class AuthService implements Service {
   @override

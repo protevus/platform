@@ -2,7 +2,7 @@ import 'package:example_app/app/http/controllers/api.controller.dart';
 import 'package:example_app/app/http/controllers/auth.controller.dart';
 import 'package:example_app/app/http/controllers/blog.controller.dart';
 import 'package:illuminate_auth/auth.dart';
-import 'package:illuminate_foundation/foundation.dart';
+import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_routing/routing.dart';
 
 class ApiRouter extends Router {
