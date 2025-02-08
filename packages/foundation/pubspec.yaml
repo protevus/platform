@@ -14,7 +14,6 @@ dependencies:
   mime: ^1.0.4
   string_scanner: ^1.1.0
   uuid: ^3.0.6
-  illuminate_annotation: ^1.0.5
   illuminate_cache: ^0.0.1
   illuminate_config: ^0.0.1
   illuminate_container: ^0.0.1

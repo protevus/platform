@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:illuminate_annotation/annotation.dart';
 import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_websocket/src/utils/constant.dart';
 import 'package:illuminate_websocket/src/websocket_emitter.dart';

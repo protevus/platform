@@ -1,6 +1,6 @@
 library query_builder;
 
-export 'package:illuminate_annotation/annotation.dart';
+//export 'package:illuminate_annotation/annotation.dart';
 
 export 'src/drivers/db_driver.dart';
 export 'src/drivers/postgres_driver.dart';

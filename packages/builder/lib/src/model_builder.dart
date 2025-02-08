@@ -2,9 +2,9 @@
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/src/builder/build_step.dart';
-import 'package:illuminate_annotation/annotation.dart';
 import 'package:illuminate_builder/src/model_visitor.dart';
 import 'package:illuminate_builder/src/util.dart';
+import 'package:illuminate_database/query_builder.dart';
 import 'package:source_gen/source_gen.dart';
 
 class ModelBuilder extends GeneratorForAnnotation<DoxModel> {

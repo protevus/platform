@@ -7,7 +7,6 @@ environment:
 
 dependencies:
   uuid: ^3.0.6
-  illuminate_annotation: ^1.0.5
   illuminate_cache: ^0.0.1
   illuminate_contracts: ^0.0.1
   illuminate_http: ^0.0.1

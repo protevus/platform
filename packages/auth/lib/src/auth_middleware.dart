@@ -1,10 +1,10 @@
 // ignore_for_file: depend_on_referenced_packages
 // ignore_for_file: constant_identifier_names
-import 'package:illuminate_annotation/annotation.dart';
+
 import 'package:illuminate_auth/auth.dart';
 import 'package:illuminate_contracts/contracts.dart';
 
-const String AUTH_REQUEST_KEY = 'dox_authentication_instance';
+const String AUTH_REQUEST_KEY = 'protevus_platform_authentication_instance';
 
 class AuthMiddleware implements MiddlewareInterface {
   @override

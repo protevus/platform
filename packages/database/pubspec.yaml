@@ -10,7 +10,6 @@ environment:
 dependencies:
   postgres: ^3.0.5
   mysql1: ^0.20.0
-  illuminate_annotation: ^1.0.5
   
 dev_dependencies:
   lints: ^2.0.0
