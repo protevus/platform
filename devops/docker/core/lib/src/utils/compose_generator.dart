@@ -1,4 +1,4 @@
-import 'package:yaml/yaml.dart';
+//import 'package:yaml/yaml.dart';
 import '../models/service_config.dart';
 import '../models/service_manifest.dart';
 
@@ -89,58 +89,58 @@ class ComposeGenerator {
     buffer.writeln('$indent${config.name}:');
 
     // Build context and args
-    buffer.writeln('${indent}  build:');
-    buffer.writeln('${indent}    context: ./${config.category}/${config.name}');
-    buffer.writeln('${indent}    args:');
-    buffer.writeln('${indent}      - VERSION=${config.version}');
+    buffer.writeln('$indent  build:');
+    buffer.writeln('$indent    context: ./${config.category}/${config.name}');
+    buffer.writeln('$indent    args:');
+    buffer.writeln('$indent      - VERSION=${config.version}');
 
     // Container name
-    buffer.writeln('${indent}  container_name: ${config.name}');
+    buffer.writeln('$indent  container_name: ${config.name}');
 
     // Restart policy
-    buffer.writeln('${indent}  restart: unless-stopped');
+    buffer.writeln('$indent  restart: unless-stopped');
 
     // Environment variables
     if (manifest.environment.isNotEmpty) {
-      buffer.writeln('${indent}  environment:');
+      buffer.writeln('$indent  environment:');
       for (final env in manifest.environment) {
-        buffer.writeln('${indent}    - $env');
+        buffer.writeln('$indent    - $env');
       }
     }
 
     // Volumes
     if (manifest.volumes.isNotEmpty) {
-      buffer.writeln('${indent}  volumes:');
+      buffer.writeln('$indent  volumes:');
       for (final volume in manifest.volumes) {
-        buffer.writeln('${indent}    - $volume');
+        buffer.writeln('$indent    - $volume');
       }
     }
 
     // Ports
     if (config.config.containsKey('port')) {
-      buffer.writeln('${indent}  ports:');
+      buffer.writeln('$indent  ports:');
       buffer.writeln(
-          '${indent}    - "${config.config['port']}:${config.config['port']}"');
+          '$indent    - "${config.config['port']}:${config.config['port']}"');
     }
 
     // Health check
-    buffer.writeln('${indent}  healthcheck:');
-    buffer.writeln('${indent}    test: ${manifest.healthCheck.command}');
-    buffer.writeln('${indent}    interval: ${manifest.healthCheck.interval}');
-    buffer.writeln('${indent}    timeout: ${manifest.healthCheck.timeout}');
-    buffer.writeln('${indent}    retries: ${manifest.healthCheck.retries}');
+    buffer.writeln('$indent  healthcheck:');
+    buffer.writeln('$indent    test: ${manifest.healthCheck.command}');
+    buffer.writeln('$indent    interval: ${manifest.healthCheck.interval}');
+    buffer.writeln('$indent    timeout: ${manifest.healthCheck.timeout}');
+    buffer.writeln('$indent    retries: ${manifest.healthCheck.retries}');
 
     // Networks
-    buffer.writeln('${indent}  networks:');
-    buffer.writeln('${indent}    - $defaultNetwork');
+    buffer.writeln('$indent  networks:');
+    buffer.writeln('$indent    - $defaultNetwork');
 
     // Service-specific configuration
     if (config.config.isNotEmpty) {
-      buffer.writeln('${indent}  # Service-specific configuration');
+      buffer.writeln('$indent  # Service-specific configuration');
       for (final entry in config.config.entries) {
         if (entry.key != 'port') {
           // Skip port as it's handled above
-          buffer.writeln('${indent}  # ${entry.key}: ${entry.value}');
+          buffer.writeln('$indent  # ${entry.key}: ${entry.value}');
         }
       }
     }

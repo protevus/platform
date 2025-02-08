@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:yaml/yaml.dart';
 import 'package:path/path.dart' as path;
-import 'package:logging/logging.dart';
+//import 'package:logging/logging.dart';
 
 import 'models/service_config.dart';
 import 'models/service_manifest.dart';
@@ -26,7 +26,7 @@ class ServiceException implements Exception {
 
 /// Manages development services
 class ServiceManager {
-  final Logger _logger = Logger('ServiceManager');
+  //final Logger _logger = Logger('ServiceManager');
   final String configPath;
   final String servicesPath;
   final String workingDir;
@@ -200,7 +200,7 @@ health_check:
       final dockerFile = File(path.join(serviceDir.path, 'Dockerfile'));
       await dockerFile.writeAsString('''
 ARG VERSION
-FROM ${name}:\${VERSION}
+FROM $name:\${VERSION}
 
 LABEL maintainer="DevOps Team"
 ''');
