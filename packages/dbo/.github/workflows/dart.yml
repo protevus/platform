@@ -1,0 +1,142 @@
+name: Dart CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Dart SDK
+      uses: dart-lang/setup-dart@v1
+      with:
+        sdk: 'stable'
+
+    - name: Install dependencies
+      run: dart pub get
+
+    - name: Verify formatting
+      run: dart format --output=none --set-exit-if-changed .
+
+    - name: Analyze project source
+      run: dart analyze
+
+    - name: Run tests with coverage
+      run: |
+        dart pub global activate coverage
+        dart test --coverage=coverage
+        dart pub global run coverage:format_coverage --lcov --in=coverage --out=coverage.lcov --packages=.packages --report-on=lib
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: coverage.lcov
+        fail_ci_if_error: true
+
+  package-analysis:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: 'stable'
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Verify package completeness
+        run: dart pub publish --dry-run
+
+      - name: Check for outdated dependencies
+        run: dart pub outdated
+
+      - name: Run custom analysis
+        run: |
+          # Check for TODOs
+          ! find . -type f -name "*.dart" -exec grep -l "TODO" {} \;
+          
+          # Check file headers
+          ! find . -type f -name "*.dart" ! -path "*/test/*" -exec grep -L "Copyright (c)" {} \;
+
+  platform-tests:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        sdk: [stable, beta]
+    
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ matrix.sdk }}
+      
+      - name: Install dependencies
+        run: dart pub get
+      
+      - name: Run tests
+        run: dart test
+
+  documentation:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: 'stable'
+      
+      - name: Install dependencies
+        run: dart pub get
+      
+      - name: Generate documentation
+        run: dart doc .
+      
+      - name: Check documentation coverage
+        run: |
+          TOTAL_SYMBOLS=$(dart doc --machine 2>&1 | grep -c "^symbol:")
+          DOCUMENTED_SYMBOLS=$(dart doc --machine 2>&1 | grep -c "^symbol:.*documentationComment:")
+          COVERAGE=$((DOCUMENTED_SYMBOLS * 100 / TOTAL_SYMBOLS))
+          echo "Documentation coverage: $COVERAGE%"
+          if [ $COVERAGE -lt 80 ]; then
+            echo "Documentation coverage is below 80%"
+            exit 1
+          fi
+
+  security:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: 'stable'
+      
+      - name: Install dependencies
+        run: dart pub get
+      
+      - name: Run dependency vulnerability check
+        run: |
+          dart pub global activate dependency_validator
+          dart pub global run dependency_validator:dependency_validator
+      
+      - name: Run static analysis security checks
+        run: |
+          dart analyze --fatal-infos
+          # Add additional security-focused static analysis tools here
