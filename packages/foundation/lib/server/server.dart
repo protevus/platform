@@ -17,7 +17,7 @@ class Server {
 
   /// listen the request
   /// ```
-  /// DoxServer().listen(3000);
+  /// Server().listen(3000);
   /// ```
   Future<HttpServer> listen(int port,
       {Function? onError, int? isolateId}) async {

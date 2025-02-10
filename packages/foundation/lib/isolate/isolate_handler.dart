@@ -1,6 +1,5 @@
 import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_foundation/foundation.dart';
-import 'package:illuminate_foundation/isolate/isolate_interfaces.dart';
 import 'package:illuminate_foundation/server/server.dart';
 import 'package:illuminate_routing/routing.dart';
 import 'package:illuminate_support/support.dart';

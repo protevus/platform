@@ -1,8 +1,8 @@
 import 'dart:isolate';
 
+import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_foundation/isolate/isolate_handler.dart';
-import 'package:illuminate_foundation/isolate/isolate_interfaces.dart';
 import 'package:illuminate_routing/routing.dart';
 
 class PlatformIsolate {
@@ -21,7 +21,7 @@ class PlatformIsolate {
 
   /// create threads
   /// ```
-  /// await DoxIsolate().spawn(3)
+  /// await PlatformIsolate().spawn(3)
   /// ```
   Future<void> spawn(int count) async {
     for (int i = 1; i < count; i++) {
@@ -47,7 +47,7 @@ class PlatformIsolate {
       IsolateSpawnParameter(
         isolateId,
         Application().config,
-        Application().doxServices,
+        Application().platformServices,
         routes: Route().routes,
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_routing/routing.dart';
 import 'package:illuminate_http/http.dart';
 import 'package:test/test.dart';

@@ -5,10 +5,10 @@ import 'package:illuminate_foundation/isolate/platform_isolate.dart';
 import 'package:illuminate_foundation/server/server.dart';
 import 'package:illuminate_log/log.dart';
 import 'package:illuminate_routing/routing.dart';
-import 'package:illuminate_support/support.dart';
+import 'package:illuminate_support/support.dart' hide Env;
 import 'package:sprintf/sprintf.dart';
 
-Container _ioc = Container();
+Container _container = Container();
 
 class Application implements ApplicationInterface {
   /// setup singleton
@@ -24,14 +24,14 @@ class Application implements ApplicationInterface {
 
   Application._internal();
 
-  /// get dox http server
+  /// get protevus http server
   Server get server => Server();
 
   /// get app config
   late AppConfig config;
 
-  /// global dox ioc containers
-  Container ioc = _ioc;
+  /// global protevus container
+  Container container = _container;
 
   /// isolate Id
   int isolateId = 1;
@@ -44,12 +44,12 @@ class Application implements ApplicationInterface {
 
   /// list of services that need to run when
   /// creating isolate
-  List<Service> doxServices = <Service>[];
+  List<Service> platformServices = <Service>[];
 
-  /// initialize dox application
+  /// initialize protevus application
   /// it load env and set config
   /// ```
-  /// Dox().initialize(config);
+  /// Application().initialize(config);
   /// ```
   void initialize(AppConfig appConfig) async {
     config = appConfig;
@@ -63,17 +63,17 @@ class Application implements ApplicationInterface {
 
   /// set websocket
   /// ```
-  /// Dox().initialize(config)
-  /// Dox().setWebsocket(DoxWebsocket())
+  /// Application().initialize(config)
+  /// Application().setWebsocket(DoxWebsocket())
   /// ```
   @override
   void setWebsocket(WebsocketInterface ws) {
     websocket = ws;
   }
 
-  /// start dox server
+  /// start protevus server
   /// ```
-  /// await Dox().startServer();
+  /// await Application().startServer();
   /// ```
   Future<void> startServer() async {
     addServices(config.services);
@@ -98,19 +98,19 @@ class Application implements ApplicationInterface {
 
   /// add services that need to run on isolate spawn
   void addServices(List<Service> services) {
-    doxServices.addAll(services);
+    platformServices.addAll(services);
   }
 
   /// add service that need to run on isolate spawn
   void addService(Service service) {
-    doxServices.add(service);
+    platformServices.add(service);
   }
 
   /// start service registered to dox
   /// this is internal core use only
   /// your app do not need to call this function
   Future<void> startServices() async {
-    for (Service service in doxServices) {
+    for (Service service in platformServices) {
       await service.setup();
     }
     _registerFormRequests();
@@ -122,7 +122,7 @@ class Application implements ApplicationInterface {
   /// register form request assign in app config
   void _registerFormRequests() {
     config.formRequests.forEach((Type key, Function() value) {
-      Application().ioc.registerRequest(key.toString(), value);
+      Application().container.registerRequest(key.toString(), value);
     });
   }
 

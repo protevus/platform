@@ -19,7 +19,7 @@
 - Added support of size and bytes information on uploaded `RequestFile`
 - Bug fixed on multipart form data file store
 - Removed database config option in app config.
-- Moved ioc container from `Global.ioc` to `Dox().ioc`
+- Moved ioc container from `Global.ioc` to `Application().ioc`
 - Improvement on routes
 - Rename Handler interface to ResponseHandlerInterface
 
