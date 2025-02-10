@@ -19,7 +19,7 @@ class FileCacheDriver implements CacheDriverInterface {
   /// Store cache into file
   FileCacheDriver({this.tag = ''});
 
-  /// Dox() APP_KEY to encrypt data
+  /// Application() APP_KEY to encrypt data
   String get _secret => Application().config.appKey;
 
   @override
