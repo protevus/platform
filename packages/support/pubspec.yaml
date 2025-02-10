@@ -10,10 +10,24 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
-  encrypt: ^5.0.3
   bcrypt: ^1.1.3
+  collection: ^1.17.0
+  encrypt: ^5.0.3
+  meta: ^1.9.0
+  path: ^1.8.0
+  crypto: ^3.0.0
+  uuid: ^3.0.6
+  intl: ^0.17.0
+  glob: ^2.1.0
+  yaml: ^3.1.2
+  pub_semver: ^2.1.4
+  illuminate_collections: ^1.0.0
+  illuminate_conditionable: ^1.0.0
+  illuminate_container: ^1.0.0
   illuminate_contracts: ^0.0.1
   illuminate_foundation: ^2.0.0
+  illuminate_macroable: ^1.0.0
+  illuminate_mirrors: ^1.0.0
 
 dev_dependencies:
   lints: ^3.0.0
