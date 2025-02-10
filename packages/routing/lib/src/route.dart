@@ -4,8 +4,6 @@ import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_http/http.dart';
 import 'package:illuminate_support/support.dart';
 
-import './route_data.dart';
-
 /// list of routes registered
 List<RouteData> _routes = <RouteData>[];
 
