@@ -13,7 +13,7 @@ class WebsocketService implements DoxService {
     Redis sub = Redis();
     Redis pub = sub.duplicate();
 
-    WebsocketServer io = WebsocketServer(Dox());
+    WebsocketServer io = WebsocketServer(Application());
     io.adapter(WebsocketRedisAdapter(
       subscriber: sub,
       publisher: pub,

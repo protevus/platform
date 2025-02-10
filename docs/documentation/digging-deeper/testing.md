@@ -12,8 +12,8 @@ String baseUrl = 'http://localhost:${config.serverPort}';
 
 void main() {
     setUpAll(() async {
-        Dox().initialize(appConfig);
-        await Dox().startServer();
+        Application().initialize(appConfig);
+        await Application().startServer();
 
         // for for few seconds to fully started http server
         await Future<dynamic>.delayed(Duration(milliseconds: 500));
