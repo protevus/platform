@@ -26,7 +26,7 @@ class AuthConfig extends AuthConfigInterface {
 2. Modify `bin/server.dart` to add auth config
 
 ```dart
-Dox dox = Dox();
+Dox dox = Application();
 await dox.initialize(config);
 dox.setAuthConfig(AuthConfig());
 ```
