@@ -1,0 +1,6 @@
+#!/usr/bin/env dart
+
+void main(List<String> args) {
+  print('Protevus Platform Artisan CLI');
+  print('Version: 1.0.0');
+}
