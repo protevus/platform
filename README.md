@@ -6,6 +6,12 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Build Status](https://img.shields.io/badge/build-failing-red.svg)]()
 
+
+- ***NOTE: THIS REPO IS NOT STABLE AND IS UNDER HEAVY DEVELOPMENT AND TESTING***
+- ***FAST MOVING CODEBASE: NOTHING THAT YOU SEE HERE TODAY MAY BE HERE TOMMORROW***
+- ***PREVIEW RELEASE: DATE TO BE DETERMINED***
+- ***DISCLOSURE: EXAMPLES IN THIS DOCUMENT ARE TEMPORARY BOILERPLATE EXAMPLES***
+
 ## 📖 Overview
 
 Protevus Platform is a high-performance, modular unified full-stack platform for Dart that provides a comprehensive suite of tools for building scalable web applications, APIs, and microservices. Built on the Dox framework, it combines modern architecture patterns with Dart's powerful async/await capabilities and strong typing.
