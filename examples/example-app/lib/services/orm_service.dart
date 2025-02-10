@@ -1,7 +1,7 @@
 import 'package:example_app/config/postgres.dart';
 import 'package:illuminate_config/config.dart';
 import 'package:illuminate_database/query_builder.dart';
-import 'package:illuminate_support/support.dart';
+import 'package:illuminate_support/support.dart' hide Env;
 import 'package:postgres/postgres.dart';
 
 /// Query builder service
