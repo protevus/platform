@@ -67,7 +67,7 @@ Future<dynamic> _handleController(
   if (controllerArgumentsDataType.isNotEmpty) {
     String requestName = controllerArgumentsDataType.first;
     if (requestName != 'DoxRequest') {
-      FormRequest? formReq = Application().ioc.getByName(requestName);
+      FormRequest? formReq = Application().container.getByName(requestName);
       if (formReq != null && _isFormRequestTypeMatched(fn, formReq)) {
         /// mapping request inputs field
         doxRequest.processInputMapper(formReq.mapInputs());

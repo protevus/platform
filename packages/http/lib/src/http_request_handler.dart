@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:illuminate_routing/routing.dart';
+import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_http/http.dart';
 
 import './request/http_request_body.dart';

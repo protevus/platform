@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_routing/routing.dart';
 import 'package:illuminate_support/support.dart';
 

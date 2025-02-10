@@ -1,7 +1,7 @@
 import 'dart:io';
 
+import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_http/http.dart';
-import 'package:illuminate_routing/routing.dart';
 
 void httpWebSocketHandler(HttpRequest req, RouteData route) {
   getDoxRequest(req, route).then((Request doxReq) {
