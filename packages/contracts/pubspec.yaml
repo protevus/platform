@@ -10,8 +10,10 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
+  illuminate_database: ^2.1.0
   illuminate_http: ^0.0.1
   illuminate_log: ^0.0.1
+  illuminate_routing: ^0.0.1
   illuminate_support: ^0.0.1
 
 dev_dependencies:
