@@ -7,6 +7,15 @@ export 'src/auth/auth_guard.dart';
 export 'src/auth/auth_interface.dart';
 export 'src/auth/auth_provider.dart';
 
+/// Broadcasting
+export 'src/broadcasting/broadcast_exception.dart';
+export 'src/broadcasting/broadcast_factory.dart';
+export 'src/broadcasting/broadcaster.dart';
+export 'src/broadcasting/has_broadcast_channel.dart';
+export 'src/broadcasting/should_be_unique.dart';
+export 'src/broadcasting/should_broadcast.dart';
+export 'src/broadcasting/should_broadcast_now.dart';
+
 /// Bus
 export 'src/bus/batch.dart';
 export 'src/bus/batch_repository.dart';
@@ -35,6 +44,11 @@ export 'src/encryption/encrypt_exception.dart';
 export 'src/encryption/encrypter.dart';
 export 'src/encryption/string_encrypter.dart';
 
+/// Events contracts
+export 'src/events/dispatcher.dart' show EventDispatcherContract;
+export 'src/events/should_dispatch_after_commit.dart';
+export 'src/events/should_handle_events_after_commit.dart';
+
 /// Filesystem
 export 'src/filesystem/cloud.dart';
 export 'src/filesystem/file_not_found_exception.dart';
@@ -59,7 +73,7 @@ export 'src/isolate/isolate_spawn_parameter.dart';
 /// Middleware
 export 'src/middleware/middleware_interface.dart';
 
-// Queue contracts
+// Queue
 export 'src/queue/clearable_queue.dart';
 export 'src/queue/entity_not_found_exception.dart';
 export 'src/queue/entity_resolver.dart';
