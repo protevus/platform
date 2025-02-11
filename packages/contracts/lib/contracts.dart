@@ -27,6 +27,13 @@ export 'src/encryption/encrypt_exception.dart';
 export 'src/encryption/encrypter.dart';
 export 'src/encryption/string_encrypter.dart';
 
+/// Filesystem
+export 'src/filesystem/cloud.dart';
+export 'src/filesystem/file_not_found_exception.dart';
+export 'src/filesystem/filesystem.dart';
+export 'src/filesystem/filesystem_factory.dart';
+export 'src/filesystem/lock_timeout_exception.dart';
+
 /// Foundation
 export 'src/foundation/application_interface.dart';
 
