@@ -1,0 +1,14 @@
+name: events_example
+description: Example for the platform_events package
+publish_to: none
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  illuminate_events: ^9.0.0
+  illuminate_container: ^9.0.0
+  illuminate_contracts: ^0.0.1
+
+dev_dependencies:
+  lints: ^2.0.0
