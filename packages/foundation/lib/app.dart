@@ -1,5 +1,6 @@
 import 'package:illuminate_config/config.dart';
 import 'package:illuminate_container/container.dart';
+import 'package:illuminate_container/mirrors.dart';
 import 'package:illuminate_contracts/contracts.dart';
 import 'package:illuminate_foundation/isolate/platform_isolate.dart';
 import 'package:illuminate_foundation/server/server.dart';
@@ -8,7 +9,7 @@ import 'package:illuminate_routing/routing.dart';
 import 'package:illuminate_support/support.dart' hide Env;
 import 'package:sprintf/sprintf.dart';
 
-Container _container = Container();
+Container _container = Container(MirrorsReflector());
 
 class Application implements ApplicationInterface {
   /// setup singleton
