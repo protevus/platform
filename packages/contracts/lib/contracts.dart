@@ -25,6 +25,12 @@ export 'src/bus/queueing_dispatcher.dart';
 
 /// Cache
 export 'src/cache/cache_driver_interface.dart';
+export 'src/cache/cache_factory.dart';
+export 'src/cache/lock.dart';
+export 'src/cache/lock_provider.dart';
+export 'src/cache/lock_timeout_exception.dart';
+export 'src/cache/repository.dart';
+export 'src/cache/store.dart';
 
 /// Cookie
 export 'src/cookie/cookie_factory.dart';
@@ -54,7 +60,8 @@ export 'src/filesystem/cloud.dart';
 export 'src/filesystem/file_not_found_exception.dart';
 export 'src/filesystem/filesystem.dart';
 export 'src/filesystem/filesystem_factory.dart';
-export 'src/filesystem/lock_timeout_exception.dart';
+export 'src/filesystem/lock_timeout_exception.dart'
+    show FilesystemLockTimeoutException;
 
 /// Foundation
 export 'src/foundation/application_interface.dart';
