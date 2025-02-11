@@ -7,6 +7,13 @@ export 'src/auth/auth_guard.dart';
 export 'src/auth/auth_interface.dart';
 export 'src/auth/auth_provider.dart';
 
+/// Bus
+export 'src/bus/batch.dart';
+export 'src/bus/batch_repository.dart';
+export 'src/bus/dispatcher.dart';
+export 'src/bus/pending_batch.dart';
+export 'src/bus/queueing_dispatcher.dart';
+
 /// Cache
 export 'src/cache/cache_driver_interface.dart';
 
@@ -51,6 +58,23 @@ export 'src/isolate/isolate_spawn_parameter.dart';
 
 /// Middleware
 export 'src/middleware/middleware_interface.dart';
+
+// Queue contracts
+export 'src/queue/clearable_queue.dart';
+export 'src/queue/entity_not_found_exception.dart';
+export 'src/queue/entity_resolver.dart';
+export 'src/queue/queue_factory.dart' show QueueFactory;
+export 'src/queue/job.dart';
+export 'src/queue/jobs.dart';
+export 'src/queue/monitor.dart';
+export 'src/queue/queue.dart';
+export 'src/queue/queueable_collection.dart';
+export 'src/queue/queueable_entity.dart';
+export 'src/queue/should_be_encrypted.dart';
+export 'src/queue/should_be_unique.dart' show QueueShouldBeUnique;
+export 'src/queue/should_be_unique_until_processing.dart';
+//export 'src/queue/should_queue.dart';
+export 'src/queue/should_queue_after_commit.dart';
 
 /// Reflection
 export 'src/mirrors/reflector_contract.dart';
