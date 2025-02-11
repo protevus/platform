@@ -1,4 +1,4 @@
-import 'package:illuminate_cookie/platform_cookie.dart';
+import 'package:illuminate_cookie/cookie.dart';
 
 void main() {
   // Create a CookieJar instance
