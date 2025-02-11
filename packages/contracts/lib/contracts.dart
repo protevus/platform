@@ -20,6 +20,7 @@ export 'src/config/cache_config.dart';
 export 'src/config/cors_config.dart';
 export 'src/config/file_storage_config.dart';
 export 'src/config/logger_config.dart';
+export 'src/config/repository.dart';
 
 /// Encryption
 export 'src/encryption/decrypt_exception.dart';
@@ -36,6 +37,9 @@ export 'src/filesystem/lock_timeout_exception.dart';
 
 /// Foundation
 export 'src/foundation/application_interface.dart';
+
+/// Hashing
+export 'src/hashing/hasher.dart';
 
 /// Http
 export 'src/http/http_exception_interface.dart';
