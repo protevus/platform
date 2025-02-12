@@ -161,17 +161,21 @@ class Table {
 
   /// Format a cell with alignment.
   String _formatCell(String text, int width, ColumnAlignment alignment) {
+    String result;
     switch (alignment) {
       case ColumnAlignment.left:
-        return text.padRight(width);
+        result = text.padRight(width);
+        break;
       case ColumnAlignment.right:
-        return text.padLeft(width);
+        result = text.padLeft(width);
+        break;
       case ColumnAlignment.center:
         final spaces = width - text.length;
         final leftPad = spaces ~/ 2;
-        final rightPad = spaces - leftPad;
-        return ' ' * leftPad + text + ' ' * rightPad;
+        result = text.padLeft(text.length + leftPad).padRight(width);
+        break;
     }
+    return ' ' * cellPadding + result + ' ' * cellPadding;
   }
 
   /// Format a row of cells.
@@ -182,7 +186,7 @@ class Table {
       final parts = <String>[];
       for (var i = 0; i < data.length; i++) {
         final cell = _formatCell(data[i], columnWidths[i], columnAlignments[i]);
-        parts.add(' ' * cellPadding + cell + ' ' * cellPadding);
+        parts.add(cell);
       }
       return parts.join('');
     } else {
@@ -190,7 +194,7 @@ class Table {
       final parts = <String>[vertical];
       for (var i = 0; i < data.length; i++) {
         final cell = _formatCell(data[i], columnWidths[i], columnAlignments[i]);
-        parts.add(' ' * cellPadding + cell + ' ' * cellPadding);
+        parts.add(cell);
         parts.add(vertical);
       }
       return parts.join();
