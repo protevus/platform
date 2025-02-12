@@ -114,13 +114,13 @@ class Table {
 
     // Check headers
     for (var i = 0; i < headers.length; i++) {
-      widths[i] = max(widths[i], headers[i].length);
+      widths[i] = max(widths[i], headers[i].length + cellPadding * 2);
     }
 
     // Check rows
     for (final row in rows) {
       for (var i = 0; i < row.length; i++) {
-        widths[i] = max(widths[i], row[i].length);
+        widths[i] = max(widths[i], row[i].length + cellPadding * 2);
       }
     }
 
@@ -144,7 +144,7 @@ class Table {
     parts.add(left);
 
     for (var i = 0; i < columnWidths.length; i++) {
-      parts.add(horizontal * (columnWidths[i] + cellPadding * 2));
+      parts.add(horizontal * columnWidths[i]);
       if (i < columnWidths.length - 1) {
         // Use '┴' for bottom border joins in box style
         if (isBottom && borderStyle == BorderStyle.box) {
@@ -164,15 +164,17 @@ class Table {
     String result;
     switch (alignment) {
       case ColumnAlignment.left:
-        result = text.padRight(width);
+        result = text.padRight(width - cellPadding * 2);
         break;
       case ColumnAlignment.right:
-        result = text.padLeft(width);
+        result = text.padLeft(width - cellPadding * 2);
         break;
       case ColumnAlignment.center:
-        final spaces = width - text.length;
+        final spaces = width - cellPadding * 2 - text.length;
         final leftPad = spaces ~/ 2;
-        result = text.padLeft(text.length + leftPad).padRight(width);
+        result = text
+            .padLeft(text.length + leftPad)
+            .padRight(width - cellPadding * 2);
         break;
     }
     return ' ' * cellPadding + result + ' ' * cellPadding;
