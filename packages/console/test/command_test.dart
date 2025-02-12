@@ -20,16 +20,17 @@ void main() {
       );
 
       expect(command.name, equals('test'));
-      expect(command.hasArgument('name'), isFalse); // Not parsed until run
-      expect(command.hasOption('flag'), isFalse); // Not parsed until run
-      expect(command.hasOption('option'), isFalse); // Not parsed until run
-      expect(command.hasOption('default'), isFalse); // Not parsed until run
+      expect(command.hasArgument('name'), isTrue); // Check if defined
+      expect(command.hasOption('flag'), isTrue); // Check if defined
+      expect(command.hasOption('option'), isTrue); // Check if defined
+      expect(command.hasOption('default'), isTrue); // Check if defined
     });
 
     test('handles required arguments', () async {
       final command = TestCommand(
         signature: 'test {name}',
       );
+      command.setOutput(output);
 
       await command.run(['John']);
       expect(command.argument<String>('name'), equals('John'));
@@ -39,6 +40,7 @@ void main() {
       final command = TestCommand(
         signature: 'test {name?}',
       );
+      command.setOutput(output);
 
       await command.run([]);
       expect(command.argument<String>('name'), isNull);
@@ -51,6 +53,7 @@ void main() {
       final command = TestCommand(
         signature: 'test {name=World}',
       );
+      command.setOutput(output);
 
       await command.run([]);
       expect(command.argument<String>('name'), equals('World'));
@@ -63,6 +66,7 @@ void main() {
       final command = TestCommand(
         signature: 'test {--flag}',
       );
+      command.setOutput(output);
 
       await command.run([]);
       expect(command.option<bool>('flag'), isFalse);
@@ -75,6 +79,7 @@ void main() {
       final command = TestCommand(
         signature: 'test {--option=}',
       );
+      command.setOutput(output);
 
       await command.run([]);
       expect(command.option('option'), isNull);
@@ -87,6 +92,7 @@ void main() {
       final command = TestCommand(
         signature: 'test {--option=default}',
       );
+      command.setOutput(output);
 
       await command.run([]);
       expect(command.option('option'), equals('default'));
@@ -99,6 +105,7 @@ void main() {
       final command = TestCommand(
         signature: 'test {-f|--flag}',
       );
+      command.setOutput(output);
 
       await command.run([]);
       expect(command.option<bool>('flag'), isFalse);
@@ -114,16 +121,18 @@ void main() {
       final command = TestCommand(
         signature: 'test {name}',
       );
+      command.setOutput(output);
 
-      expect(() => command.run([]), throwsArgumentError);
+      expect(() => command.run([]), throwsA(isA<ArgumentError>()));
     });
 
     test('throws on invalid option format', () async {
       final command = TestCommand(
         signature: 'test {--option=}',
       );
+      command.setOutput(output);
 
-      expect(() => command.run(['--option']), throwsArgumentError);
+      expect(() => command.run(['--option']), throwsA(isA<ArgumentError>()));
     });
 
     test('provides access to output', () {

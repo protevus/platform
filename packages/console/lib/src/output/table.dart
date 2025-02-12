@@ -124,26 +124,25 @@ class Table {
       }
     }
 
-    // Add padding
-    return widths.map((w) => w + (cellPadding * 2)).toList();
+    // Add padding for bordered tables
+    if (borderStyle != BorderStyle.none) {
+      return widths.map((w) => w + (cellPadding * 2)).toList();
+    }
+    return widths;
   }
 
   /// Align text within a given width.
   String _alignText(String text, int width, ColumnAlignment alignment) {
-    final content = text
-        .padRight(text.length + cellPadding)
-        .padLeft(text.length + cellPadding * 2);
-    final spaces = width - content.length;
+    final spaces = width - text.length;
 
     switch (alignment) {
       case ColumnAlignment.left:
-        return content.padRight(width);
+        return text.padRight(width);
       case ColumnAlignment.right:
-        return content.padLeft(width);
+        return text.padLeft(width);
       case ColumnAlignment.center:
         final leftPad = spaces ~/ 2;
-        final rightPad = spaces - leftPad;
-        return content.padLeft(content.length + leftPad).padRight(width);
+        return text.padLeft(text.length + leftPad).padRight(width);
     }
   }
 
@@ -153,8 +152,9 @@ class Table {
     String left,
     String middle,
     String right,
-    String horizontal,
-  ) {
+    String horizontal, {
+    bool isBottom = false,
+  }) {
     if (borderStyle == BorderStyle.none) {
       return '';
     }
@@ -165,7 +165,12 @@ class Table {
     for (var i = 0; i < columnWidths.length; i++) {
       parts.add(horizontal * columnWidths[i]);
       if (i < columnWidths.length - 1) {
-        parts.add(middle);
+        // Use '┴' for bottom border joins in box style
+        if (isBottom && borderStyle == BorderStyle.box) {
+          parts.add('┴');
+        } else {
+          parts.add(middle);
+        }
       }
     }
 
@@ -176,13 +181,23 @@ class Table {
   /// Draw a row of data.
   String _drawRow(List<String> data, List<int> columnWidths, String vertical) {
     final parts = <String>[];
-    if (borderStyle != BorderStyle.none) {
-      parts.add(vertical);
-    }
 
-    for (var i = 0; i < data.length; i++) {
-      parts.add(_alignText(data[i], columnWidths[i], columnAlignments[i]));
-      if (i < data.length - 1 || borderStyle != BorderStyle.none) {
+    if (borderStyle == BorderStyle.none) {
+      // For borderless tables, add single space padding
+      for (var i = 0; i < data.length; i++) {
+        final cell = _alignText(data[i], columnWidths[i], columnAlignments[i]);
+        parts.add(' $cell ');
+        if (i < data.length - 1) {
+          parts.add('');
+        }
+      }
+    } else {
+      // For bordered tables, add cell padding
+      parts.add(vertical);
+      for (var i = 0; i < data.length; i++) {
+        final cell = _alignText(
+            data[i], columnWidths[i] - (cellPadding * 2), columnAlignments[i]);
+        parts.add(' ' * cellPadding + cell + ' ' * cellPadding);
         parts.add(vertical);
       }
     }
@@ -235,6 +250,7 @@ class Table {
       borders.cross,
       borders.bottomRight,
       borders.horizontal,
+      isBottom: true,
     );
     if (bottomBorder.isNotEmpty) {
       lines.add(bottomBorder);

@@ -10,6 +10,10 @@ class Parser {
   /// - List of InputOption objects
   static (String, List<InputArgument>, List<InputOption>) parse(
       String signature) {
+    if (!_isValidSignature(signature)) {
+      throw ArgumentError('Invalid command signature format');
+    }
+
     final name = _extractName(signature);
     final parameters = _extractParameters(signature);
 
@@ -19,12 +23,37 @@ class Parser {
     for (final param in parameters) {
       if (param.startsWith('--')) {
         options.add(_parseOption(param.substring(2)));
+      } else if (param.startsWith('-')) {
+        // Handle shortcut-only options
+        options.add(_parseOption(param.substring(1)));
       } else {
         arguments.add(_parseArgument(param));
       }
     }
 
     return (name, arguments, options);
+  }
+
+  /// Validate the signature format.
+  static bool _isValidSignature(String signature) {
+    if (signature.trim().isEmpty) return false;
+
+    // Check for balanced braces
+    var openBraces = 0;
+    for (var i = 0; i < signature.length; i++) {
+      if (signature[i] == '{') openBraces++;
+      if (signature[i] == '}') openBraces--;
+      if (openBraces < 0) return false;
+    }
+    if (openBraces != 0) return false;
+
+    // Check for valid command name
+    final parts = signature.trim().split(' ');
+    if (parts.isEmpty || !RegExp(r'^[a-zA-Z][\w:-]*$').hasMatch(parts.first)) {
+      return false;
+    }
+
+    return true;
   }
 
   /// Extract the command name from the signature.
@@ -60,16 +89,15 @@ class Parser {
       description = parts[1].trim();
     }
 
-    // Check for optional argument
-    if (name.endsWith('?')) {
-      name = name.substring(0, name.length - 1);
-      mode = InputArgumentMode.optional;
-    }
-
-    // Check for array argument
+    // Check for array argument (must check before optional)
     if (name.endsWith('*')) {
       name = name.substring(0, name.length - 1);
       mode = InputArgumentMode.isArray;
+    }
+    // Check for optional argument
+    else if (name.endsWith('?')) {
+      name = name.substring(0, name.length - 1);
+      mode = InputArgumentMode.optional;
     }
 
     // Check for default value
@@ -103,21 +131,23 @@ class Parser {
       description = parts[1].trim();
     }
 
-    // Check for shortcut
+    // Check for shortcut (must check first to avoid conflicts)
     if (name.contains('|')) {
       final parts = name.split('|');
       shortcut = parts[0].trim();
       name = parts[1].trim();
+      if (name.startsWith('--')) {
+        name = name.substring(2);
+      }
     }
 
-    // Check for array option
-    if (name.endsWith('*')) {
-      name = name.substring(0, name.length - 1);
+    // Check for array option (must check before value option)
+    if (name.endsWith('=*')) {
+      name = name.substring(0, name.length - 2);
       mode = InputOptionMode.isArray;
     }
-
     // Check for value option
-    if (name.endsWith('=')) {
+    else if (name.endsWith('=')) {
       name = name.substring(0, name.length - 1);
       mode = InputOptionMode.optional;
     }

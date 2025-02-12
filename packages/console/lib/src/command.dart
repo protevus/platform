@@ -106,19 +106,23 @@ abstract class Command {
           );
           break;
         case InputOptionMode.optional:
-          _argParser.addOption(
-            opt.name,
-            abbr: opt.shortcut,
-            help: opt.description,
-            defaultsTo: opt.defaultValue.isNotEmpty ? opt.defaultValue : null,
-          );
-          break;
         case InputOptionMode.isArray:
-          _argParser.addMultiOption(
-            opt.name,
-            abbr: opt.shortcut,
-            help: opt.description,
-          );
+          if (opt.mode == InputOptionMode.isArray) {
+            _argParser.addMultiOption(
+              opt.name,
+              abbr: opt.shortcut,
+              help: opt.description,
+              defaultsTo:
+                  opt.defaultValue.isNotEmpty ? [opt.defaultValue] : null,
+            );
+          } else {
+            _argParser.addOption(
+              opt.name,
+              abbr: opt.shortcut,
+              help: opt.description,
+              defaultsTo: opt.defaultValue.isNotEmpty ? opt.defaultValue : null,
+            );
+          }
           break;
       }
     }
@@ -171,10 +175,10 @@ abstract class Command {
   @protected
   FutureOr<void> handle();
 
-  /// Run the console command.
+  /// Parse command arguments.
   ///
-  /// This method handles parsing arguments and executing the command.
-  Future<void> run(List<String> args) async {
+  /// This method handles parsing both positional arguments and options.
+  void _parseArguments(List<String> args) {
     try {
       // Split args into positional args and options
       final optionIndex = args.indexWhere((arg) => arg.startsWith('-'));
@@ -186,22 +190,54 @@ abstract class Command {
         _argResults = _argParser.parse(args.sublist(optionIndex));
       }
 
-      await handle();
+      // Validate required arguments
+      for (var i = 0; i < _arguments.length; i++) {
+        final arg = _arguments[i];
+        if (arg.mode == InputArgumentMode.required &&
+            i >= _positionalArgs.length) {
+          throw ArgumentError('Required argument "${arg.name}" is missing.');
+        }
+      }
     } catch (e) {
-      // TODO: Implement proper error handling
+      if (e is FormatException) {
+        throw ArgumentError(e.message);
+      }
       rethrow;
     }
+  }
+
+  /// Run the console command.
+  ///
+  /// This method handles parsing arguments and executing the command.
+  Future<void> run(List<String> args) async {
+    try {
+      _parseArguments(args);
+      await handle();
+    } catch (e) {
+      if (e is ArgumentError) {
+        if (_output != null) {
+          output.error(e.message);
+        }
+        rethrow;
+      }
+      rethrow;
+    }
+  }
+
+  /// Check if an argument is defined in the command signature.
+  bool hasArgument(String name) {
+    return _arguments.any((arg) => arg.name == name);
+  }
+
+  /// Check if an option is defined in the command signature.
+  bool hasOption(String name) {
+    return _argParser.options.containsKey(name);
   }
 
   /// Get the value of a command argument.
   ///
   /// Returns the value of the specified argument, or null if not provided.
   T? argument<T>(String name) {
-    if (_positionalArgs.isEmpty && _arguments.isNotEmpty) {
-      throw StateError(
-          'Command arguments have not been parsed. Call run() first.');
-    }
-
     final argIndex = _arguments.indexWhere((arg) => arg.name == name);
     if (argIndex == -1) {
       throw ArgumentError('Argument "$name" is not defined.');
@@ -211,6 +247,9 @@ abstract class Command {
       final arg = _arguments[argIndex];
       if (arg.mode == InputArgumentMode.required) {
         throw ArgumentError('Required argument "$name" is missing.');
+      }
+      if (arg.defaultValue.isNotEmpty) {
+        return arg.defaultValue as T;
       }
       return null;
     }
@@ -223,29 +262,11 @@ abstract class Command {
   ///
   /// Returns the value of the specified option, or null if not provided.
   T? option<T>(String name) {
-    if (_argResults == null) {
-      throw StateError(
-          'Command arguments have not been parsed. Call run() first.');
+    if (!_argParser.options.containsKey(name)) {
+      throw ArgumentError('Could not find an option named "$name".');
     }
+
     return _argResults![name] as T?;
-  }
-
-  /// Check if an argument exists and has been provided.
-  bool hasArgument(String name) {
-    final argIndex = _arguments.indexWhere((arg) => arg.name == name);
-    if (argIndex == -1) {
-      return false;
-    }
-    return argIndex < _positionalArgs.length;
-  }
-
-  /// Check if an option exists and has been provided.
-  bool hasOption(String name) {
-    if (_argResults == null) {
-      throw StateError(
-          'Command arguments have not been parsed. Call run() first.');
-    }
-    return _argResults!.wasParsed(name);
   }
 
   /// Get the argument parser.

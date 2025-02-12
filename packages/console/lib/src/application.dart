@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:meta/meta.dart';
 import 'command.dart';
+import 'commands/list_command.dart';
 import 'output/output.dart';
 import 'parser.dart';
 
@@ -25,7 +26,10 @@ class Application {
     this.name = 'Console Application',
     this.version = '1.0.0',
     Output? output,
-  }) : _output = output ?? ConsoleOutput();
+  }) : _output = output ?? ConsoleOutput() {
+    // Register built-in commands
+    add(ListCommand());
+  }
 
   /// Register a command with the application.
   ///
@@ -79,7 +83,7 @@ class Application {
 
   /// Show help information for a command.
   void _showCommandHelp(Command command) {
-    _output.info('${command.name} - ${command.description}');
+    _output.writeln('${command.name} - ${command.description}');
     _output.newLine();
 
     if (command.help != command.description) {
@@ -92,11 +96,38 @@ class Application {
     _output.writeln('  ${command.name} [arguments] [options]');
     _output.newLine();
 
-    // Show arguments and options
-    final usage = command.argumentParser.usage;
-    if (usage.isNotEmpty) {
+    // Show options
+    final parser = command.argumentParser;
+    if (parser.options.isNotEmpty) {
       _output.writeln('Options:');
-      _output.writeln(usage);
+      for (final option in parser.options.entries) {
+        final name = option.key;
+        final opt = option.value;
+
+        // Format flag options
+        if (opt.type == bool) {
+          _output.write('    --[no-]$name');
+        } else {
+          _output.write('    --$name');
+          if (opt.isMultiple) {
+            _output.write('=VALUE...');
+          } else if (opt.valueHelp != null) {
+            _output.write('=${opt.valueHelp?.toUpperCase()}');
+          }
+        }
+
+        // Add shortcut if available
+        if (opt.abbr != null) {
+          _output.write(', -${opt.abbr}');
+        }
+
+        // Add help text
+        if (opt.help != null && opt.help!.isNotEmpty) {
+          _output.write('    ${opt.help}');
+        }
+
+        _output.newLine();
+      }
       _output.newLine();
     }
 

@@ -1,3 +1,4 @@
+import 'package:args/args.dart';
 import 'package:illuminate_console/console.dart';
 import 'package:test/test.dart';
 
@@ -45,8 +46,10 @@ void main() {
         _HiddenCommand(),
       ]);
 
-      expect(app.visibleCommands.length, equals(1));
-      expect(app.visibleCommands.first.name, equals('visible'));
+      // Note: The list command is registered by default
+      expect(app.visibleCommands.length, equals(2));
+      expect(app.visibleCommands.any((cmd) => cmd.name == 'visible'), isTrue);
+      expect(app.visibleCommands.any((cmd) => cmd.name == 'list'), isTrue);
     });
 
     test('runs commands by name', () async {
@@ -117,6 +120,15 @@ class _RunTrackingCommand extends Command {
 
   @override
   String get description => 'Tracking command';
+
+  @override
+  void configure(ArgParser parser) {
+    parser.addFlag(
+      'flag',
+      help: 'Test flag',
+      negatable: true,
+    );
+  }
 
   @override
   Future<void> handle() async {

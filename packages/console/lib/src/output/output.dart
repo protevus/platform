@@ -152,32 +152,32 @@ class BufferedOutput implements Output {
   @override
   final Verbosity verbosity;
 
-  /// The buffer of messages.
-  final List<String> _buffer = [];
+  /// The buffer storing the output content.
+  final StringBuffer _buffer = StringBuffer();
 
   /// Create a new buffered output instance.
   BufferedOutput({this.verbosity = Verbosity.normal});
 
   /// Get the buffered content.
-  String get content => _buffer.join('\n');
+  String get content => _buffer.toString();
 
   /// Clear the buffer.
   void clear() => _buffer.clear();
 
   @override
   void write(String message) {
-    _buffer.add(message);
+    _buffer.write(message);
   }
 
   @override
   void writeln(String message) {
-    _buffer.add('$message\n');
+    _buffer.writeln(message);
   }
 
   @override
   void newLine([int count = 1]) {
     for (var i = 0; i < count; i++) {
-      _buffer.add('\n');
+      _buffer.writeln();
     }
   }
 
