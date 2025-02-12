@@ -124,26 +124,7 @@ class Table {
       }
     }
 
-    // Add padding for bordered tables
-    if (borderStyle != BorderStyle.none) {
-      return widths.map((w) => w + (cellPadding * 2)).toList();
-    }
     return widths;
-  }
-
-  /// Align text within a given width.
-  String _alignText(String text, int width, ColumnAlignment alignment) {
-    final spaces = width - text.length;
-
-    switch (alignment) {
-      case ColumnAlignment.left:
-        return text.padRight(width);
-      case ColumnAlignment.right:
-        return text.padLeft(width);
-      case ColumnAlignment.center:
-        final leftPad = spaces ~/ 2;
-        return text.padLeft(text.length + leftPad).padRight(width);
-    }
   }
 
   /// Draw a horizontal border line.
@@ -163,7 +144,7 @@ class Table {
     parts.add(left);
 
     for (var i = 0; i < columnWidths.length; i++) {
-      parts.add(horizontal * columnWidths[i]);
+      parts.add(horizontal * (columnWidths[i] + cellPadding * 2));
       if (i < columnWidths.length - 1) {
         // Use '┴' for bottom border joins in box style
         if (isBottom && borderStyle == BorderStyle.box) {
@@ -178,31 +159,50 @@ class Table {
     return parts.join();
   }
 
-  /// Draw a row of data.
-  String _drawRow(List<String> data, List<int> columnWidths, String vertical) {
+  /// Format a cell with alignment.
+  String _formatCell(String text, int width, ColumnAlignment alignment) {
+    final spaces = width - text.length;
+    String aligned;
+
+    switch (alignment) {
+      case ColumnAlignment.left:
+        aligned = text + ' ' * spaces;
+        break;
+      case ColumnAlignment.right:
+        aligned = ' ' * spaces + text;
+        break;
+      case ColumnAlignment.center:
+        final leftPad = spaces ~/ 2;
+        final rightPad = spaces - leftPad;
+        aligned = ' ' * leftPad + text + ' ' * rightPad;
+        break;
+    }
+
+    return aligned;
+  }
+
+  /// Format a row of cells.
+  String _formatRow(
+      List<String> data, List<int> columnWidths, String vertical) {
     final parts = <String>[];
 
     if (borderStyle == BorderStyle.none) {
-      // For borderless tables, add single space padding
+      // For borderless tables, join cells with a single space
       for (var i = 0; i < data.length; i++) {
-        final cell = _alignText(data[i], columnWidths[i], columnAlignments[i]);
+        final cell = _formatCell(data[i], columnWidths[i], columnAlignments[i]);
         parts.add(' $cell ');
-        if (i < data.length - 1) {
-          parts.add('');
-        }
       }
+      return parts.join('');
     } else {
-      // For bordered tables, add cell padding
+      // For bordered tables, add cell padding and borders
       parts.add(vertical);
       for (var i = 0; i < data.length; i++) {
-        final cell = _alignText(
-            data[i], columnWidths[i] - (cellPadding * 2), columnAlignments[i]);
+        final cell = _formatCell(data[i], columnWidths[i], columnAlignments[i]);
         parts.add(' ' * cellPadding + cell + ' ' * cellPadding);
         parts.add(vertical);
       }
+      return parts.join();
     }
-
-    return parts.join();
   }
 
   /// Render the table to a string.
@@ -224,7 +224,7 @@ class Table {
     }
 
     // Headers
-    lines.add(_drawRow(headers, columnWidths, borders.vertical));
+    lines.add(_formatRow(headers, columnWidths, borders.vertical));
 
     // Header separator
     final headerSeparator = _drawHorizontalBorder(
@@ -240,7 +240,7 @@ class Table {
 
     // Rows
     for (final row in rows) {
-      lines.add(_drawRow(row, columnWidths, borders.vertical));
+      lines.add(_formatRow(row, columnWidths, borders.vertical));
     }
 
     // Bottom border
