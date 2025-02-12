@@ -161,41 +161,33 @@ class Table {
 
   /// Format a cell with alignment.
   String _formatCell(String text, int width, ColumnAlignment alignment) {
-    final spaces = width - text.length;
-    String aligned;
-
     switch (alignment) {
       case ColumnAlignment.left:
-        aligned = text + ' ' * spaces;
-        break;
+        return text.padRight(width);
       case ColumnAlignment.right:
-        aligned = ' ' * spaces + text;
-        break;
+        return text.padLeft(width);
       case ColumnAlignment.center:
+        final spaces = width - text.length;
         final leftPad = spaces ~/ 2;
         final rightPad = spaces - leftPad;
-        aligned = ' ' * leftPad + text + ' ' * rightPad;
-        break;
+        return ' ' * leftPad + text + ' ' * rightPad;
     }
-
-    return aligned;
   }
 
   /// Format a row of cells.
   String _formatRow(
       List<String> data, List<int> columnWidths, String vertical) {
-    final parts = <String>[];
-
     if (borderStyle == BorderStyle.none) {
-      // For borderless tables, join cells with a single space
+      // For borderless tables, join cells with single spaces
+      final parts = <String>[];
       for (var i = 0; i < data.length; i++) {
         final cell = _formatCell(data[i], columnWidths[i], columnAlignments[i]);
-        parts.add(' $cell ');
+        parts.add(' ' * cellPadding + cell + ' ' * cellPadding);
       }
       return parts.join('');
     } else {
-      // For bordered tables, add cell padding and borders
-      parts.add(vertical);
+      // For bordered tables, add borders and padding
+      final parts = <String>[vertical];
       for (var i = 0; i < data.length; i++) {
         final cell = _formatCell(data[i], columnWidths[i], columnAlignments[i]);
         parts.add(' ' * cellPadding + cell + ' ' * cellPadding);
