@@ -13,6 +13,7 @@ dependencies:
   illuminate_encryption: ^0.0.1
   illuminate_cache: ^0.0.1
   illuminate_contracts: ^0.0.1
+  illuminate_http: ^0.0.1
   illuminate_support: ^0.0.1
   illuminate_container: ^0.0.1
   illuminate_database: ^0.0.1
