@@ -114,14 +114,19 @@ class Table {
 
     // Check headers
     for (var i = 0; i < headers.length; i++) {
-      widths[i] = max(widths[i], headers[i].length + cellPadding * 2);
+      widths[i] = max(widths[i], headers[i].length);
     }
 
     // Check rows
     for (final row in rows) {
       for (var i = 0; i < row.length; i++) {
-        widths[i] = max(widths[i], row[i].length + cellPadding * 2);
+        widths[i] = max(widths[i], row[i].length);
       }
+    }
+
+    // Add padding to each width
+    for (var i = 0; i < widths.length; i++) {
+      widths[i] += cellPadding * 2;
     }
 
     return widths;
@@ -199,11 +204,12 @@ class Table {
         parts.add(cell);
         parts.add(vertical);
       }
-      return parts.join();
+      return parts.join('');
     }
   }
 
   /// Render the table to a string.
+  @override
   String toString() {
     final borders = _getBorderChars();
     final columnWidths = _calculateColumnWidths();
