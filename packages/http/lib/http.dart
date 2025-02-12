@@ -20,7 +20,7 @@ export 'src/http_route_handler.dart';
 export 'src/http_websocket_handler.dart';
 
 /// Enum
-export 'src/http_request_method.dart';
+export 'src/constants/http_request_method.dart';
 
 /// Constants
 export 'src/constants/constants.dart';
