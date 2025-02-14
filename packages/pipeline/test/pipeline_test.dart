@@ -22,7 +22,7 @@ void main() {
   late Pipeline pipeline;
 
   setUp(() {
-    app = Application(reflector: MirrorsReflector());
+    app = Application();
     container = app.container;
     container.registerSingleton(AddExclamationPipe());
     container.registerSingleton(UppercasePipe());
