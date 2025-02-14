@@ -1,6 +1,6 @@
 import 'package:illuminate_events/events.dart';
 import 'package:illuminate_mail/mail.dart';
-import 'package:illuminate_database/eloquent.dart';
+import 'package:illuminate_database/query_builder.dart';
 
 import 'channels/broadcast_channel.dart';
 import 'channels/database_channel.dart';
@@ -16,8 +16,8 @@ class NotificationServiceProvider {
   /// The mail manager instance.
   final MailManager _mailManager;
 
-  /// The database connection instance.
-  final Connection _database;
+  /// The database instance.
+  final SqlQueryBuilder _database;
 
   /// The event dispatcher instance.
   final EventDispatcher _events;
@@ -31,7 +31,7 @@ class NotificationServiceProvider {
   NotificationServiceProvider({
     required NotificationFactory factory,
     required MailManager mailManager,
-    required Connection database,
+    required SqlQueryBuilder database,
     required EventDispatcher events,
   })  : _factory = factory,
         _mailManager = mailManager,
@@ -45,7 +45,7 @@ class NotificationServiceProvider {
     // Register the default channels
     manager
       ..registerChannel(MailChannel(_mailManager))
-      ..registerChannel(DatabaseChannel(_database))
+      ..registerChannel(DatabaseChannel())
       ..registerChannel(BroadcastChannel(_events));
 
     return manager;

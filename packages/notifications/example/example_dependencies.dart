@@ -1,6 +1,6 @@
 import 'package:illuminate_events/events.dart';
 import 'package:illuminate_mail/mail.dart';
-import 'package:illuminate_database/eloquent.dart';
+import 'package:illuminate_database/query_builder.dart';
 
 /// Example mailable implementation.
 class ExampleMailable extends Mailable {
@@ -230,24 +230,6 @@ class YourMailManager extends BaseMailManager {
   }
 }
 
-/// Base database connection implementation.
-abstract class BaseDatabaseConnection implements Connection {
-  @override
-  String get name => 'default';
-
-  @override
-  Future<void> close() async {}
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
-}
-
-/// Example database connection implementation.
-class YourDatabaseConnection extends BaseDatabaseConnection {
-  @override
-  QueryBuilder query() => YourQueryBuilder();
-}
-
 /// Base event dispatcher implementation.
 abstract class BaseEventDispatcher implements EventDispatcher {
   @override
@@ -297,10 +279,4 @@ class YourEventDispatcher extends BaseEventDispatcher {
 
   @override
   dynamic until(dynamic event, [dynamic payload = const []]) {}
-}
-
-/// Example query builder implementation.
-class YourQueryBuilder implements QueryBuilder {
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }

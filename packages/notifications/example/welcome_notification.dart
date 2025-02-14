@@ -1,3 +1,4 @@
+import 'package:illuminate_database/query_builder.dart';
 import 'package:illuminate_notifications/notifications.dart';
 import 'example_dependencies.dart';
 
@@ -58,7 +59,10 @@ void main() async {
   // Set up dependencies (normally done by your DI container)
   final factory = YourNotificationFactory();
   final mailManager = YourMailManager();
-  final database = YourDatabaseConnection();
+  // Initialize database with SqlQueryBuilder
+  final database = SqlQueryBuilder();
+  // The database connection and driver type would be initialized
+  // by your application's database configuration
   final events = YourEventDispatcher();
 
   // Create and configure the notification system

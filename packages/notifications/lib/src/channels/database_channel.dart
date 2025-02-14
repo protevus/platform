@@ -1,24 +1,19 @@
 import 'dart:async';
 
-import 'package:illuminate_database/eloquent.dart';
+import 'package:illuminate_database/query_builder.dart';
 
 import '../notification.dart';
 import 'notification_channel.dart';
 
 /// Channel for storing notifications in a database.
 class DatabaseChannel implements NotificationChannel {
-  /// The database connection.
-  final Connection _connection;
-
   /// The table to store notifications in.
-  final String _table;
+  final String table;
 
   /// Creates a new database channel instance.
   ///
-  /// [connection] The database connection to use
   /// [table] The table to store notifications in (defaults to 'notifications')
-  DatabaseChannel(this._connection, {String table = 'notifications'})
-      : _table = table;
+  DatabaseChannel({this.table = 'notifications'});
 
   @override
   String get id => 'database';
@@ -40,7 +35,7 @@ class DatabaseChannel implements NotificationChannel {
   Future<void> send(dynamic notification, dynamic notifiable) async {
     final data = await _getData(notification, notifiable);
 
-    await _connection.query().from(_table).insert({
+    await QueryBuilder.table(table).insert({
       'id': notification.id,
       'type': _getType(notification, notifiable),
       'notifiable_type': notifiable.runtimeType.toString(),
