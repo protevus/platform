@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:illuminate_container/container.dart';
 import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_http/http.dart';
+import 'package:illuminate_routing/routing.dart';
 import 'package:illuminate_session/session.dart';
 
 void main() async {
@@ -21,70 +22,93 @@ void main() async {
   final manager = SessionManager(config, app.container);
 
   // Create session middleware
-  sessionHandler(RequestContext req, ResponseContext res) {
-    final request = req as HttpRequestContext;
-    final response = res as HttpResponseContext;
-    return session(manager, config)(request, response);
+  sessionHandler(Request req, Response res) {
+    return session(manager, config)(req, res);
   }
 
   // Example usage in a route handler
-  app.get('/profile', (RequestContext req, ResponseContext res) async {
-    final request = req as HttpRequestContext;
-    final response = res as HttpResponseContext;
+  Route.middleware([sessionHandler], () {
+    Route.get('/profile', (Request req, Response res) async {
+      // Get session data
+      final session = req.platformSession;
+      final user = session?['user'];
+      if (user == null) {
+        res.statusCode(302).header(HttpHeaders.locationHeader, '/login');
+        return false;
+      }
 
-    // Get session data
-    final user = request.illuminateSession?['user'];
-    if (user == null) {
-      response.redirect('/login');
-      return false;
-    }
+      // Use session data
+      res.content('Welcome back, ${(user as Map)['name']}!');
 
-    // Use session data
-    response.write('Welcome back, ${user['name']}!');
+      // Store data in session
+      session?['last_visit'] = DateTime.now().toIso8601String();
 
-    // Store data in session
-    request.illuminateSession?['last_visit'] = DateTime.now().toIso8601String();
+      // Flash data for next request
+      session?['status'] = 'Profile viewed successfully';
+      return true;
+    });
 
-    // Flash data for next request
-    request.illuminateSession?['status'] = 'Profile viewed successfully';
-    return true;
-  }, middleware: [sessionHandler]);
+    // Example login handler
+    Route.post('/login', (Request req, Response res) async {
+      // Store user data in session
+      req.platformSession?['user'] = {
+        'id': 1,
+        'name': 'John Doe',
+        'email': 'john@example.com',
+      };
 
-  // Example login handler
-  app.post('/login', (RequestContext req, ResponseContext res) async {
-    final request = req as HttpRequestContext;
-    final response = res as HttpResponseContext;
+      res.statusCode(302).header(HttpHeaders.locationHeader, '/profile');
+      return true;
+    });
 
-    // Store user data in session
-    request.illuminateSession?['user'] = {
-      'id': 1,
-      'name': 'John Doe',
-      'email': 'john@example.com',
-    };
-
-    response.redirect('/profile');
-    return true;
-  }, middleware: [sessionHandler]);
-
-  // Example logout handler
-  app.post('/logout', (RequestContext req, ResponseContext res) async {
-    final request = req as HttpRequestContext;
-    final response = res as HttpResponseContext;
-
-    // Clear session data
-    request.illuminateSession?.destroy();
-    response.redirect('/login');
-    return true;
-  }, middleware: [sessionHandler]);
+    // Example logout handler
+    Route.post('/logout', (Request req, Response res) async {
+      // Clear session data
+      req.platformSession?.destroy();
+      res.statusCode(302).header(HttpHeaders.locationHeader, '/login');
+      return true;
+    });
+  });
 
   // Start server
   final server = await HttpServer.bind('localhost', 3000);
   print('Server running at http://localhost:3000');
 
-  await for (var request in server) {
-    final httpRequest =
-        await HttpRequestContext.from(request, app, request.uri.path);
-    final httpResponse = HttpResponseContext(request.response, app);
-    await app.executeHandler(app.optimizedRouter, httpRequest, httpResponse);
+  // Start handling requests
+  await for (final request in server) {
+    try {
+      final route = Route().routes.firstWhere(
+            (r) =>
+                r.path == request.uri.path &&
+                r.method == request.method.toUpperCase(),
+            orElse: () => throw Exception('Route not found'),
+          );
+      try {
+        final req = Request(
+          route: route,
+          uri: request.uri,
+          body: {},
+          httpHeaders: request.headers,
+          httpRequest: request,
+        );
+        final res = Response(null);
+        for (final controller in route.controllers) {
+          if (controller is Function) {
+            await controller(req, res);
+          }
+        }
+      } catch (e) {
+        if (e.toString().contains('Route not found')) {
+          request.response.statusCode = HttpStatus.notFound;
+          await request.response.close();
+        } else {
+          rethrow;
+        }
+      }
+    } catch (e) {
+      print('Error handling request: $e');
+      request.response.statusCode = HttpStatus.internalServerError;
+      await request.response.close();
+    }
   }
 }

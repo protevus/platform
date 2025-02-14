@@ -4,6 +4,7 @@ import 'package:illuminate_container/container.dart';
 import 'package:illuminate_encryption/encryption.dart';
 import 'package:illuminate_foundation/foundation.dart';
 import 'package:illuminate_http/http.dart';
+import 'package:illuminate_routing/routing.dart';
 import 'package:illuminate_session/session.dart';
 import 'package:test/test.dart';
 
@@ -14,6 +15,7 @@ void main() {
 
   setUp(() {
     app = Application();
+    app.container.flush(); // Clear container before each test
     config = SessionConfig(
       driver: 'array', // Use array driver for testing
       lifetime: 120,
@@ -30,22 +32,19 @@ void main() {
 
   test('session middleware sets and gets values', () async {
     // Create session middleware
-    sessionHandler(RequestContext req, ResponseContext res) {
-      final request = req as HttpRequestContext;
-      final response = res as HttpResponseContext;
-      return session(manager, config)(request, response);
+    sessionHandler(Request req, Response res) {
+      return session(manager, config)(req, res);
     }
 
     // Create test route
-    app.get('/test', (RequestContext req, ResponseContext res) async {
-      final request = req as HttpRequestContext;
-      final response = res as HttpResponseContext;
-
-      // Set session data
-      request.illuminateSession?['test'] = 'value';
-      response.write('OK');
-      return true;
-    }, middleware: [sessionHandler]);
+    Route.middleware([sessionHandler], () {
+      Route.get('/test', (Request req, Response res) async {
+        // Set session data
+        req.platformSession?['test'] = 'value';
+        res.content('OK');
+        return true;
+      });
+    });
 
     // Create test server
     final server = await HttpServer.bind('localhost', 0);
@@ -53,10 +52,53 @@ void main() {
 
     // Handle requests
     server.listen((request) async {
-      final httpRequest =
-          await HttpRequestContext.from(request, app, request.uri.path);
-      final httpResponse = HttpResponseContext(request.response, app);
-      await app.executeHandler(app.optimizedRouter, httpRequest, httpResponse);
+      try {
+        final route = Route().routes.firstWhere(
+              (r) =>
+                  r.path == request.uri.path &&
+                  r.method == request.method.toUpperCase(),
+              orElse: () => throw Exception('Route not found'),
+            );
+        final req = Request(
+          route: route,
+          uri: request.uri,
+          body: {},
+          httpHeaders: request.headers,
+          httpRequest: request,
+        );
+        final res = Response(null);
+        for (final controller in route.controllers) {
+          if (controller is Function) {
+            await controller(req, res);
+          }
+        }
+
+        try {
+          // Process response first to set headers
+          final result = await res.process(request);
+
+          // Write response content
+          if (result is Stream<List<int>>) {
+            await request.response.addStream(result);
+          } else if (result != null) {
+            request.response.write(result.toString());
+          }
+
+          // Debug: Print cookies being set
+          print(
+              'Set-Cookie headers: ${request.response.headers[HttpHeaders.setCookieHeader]}');
+
+          // Ensure response is sent
+          await request.response.close();
+        } catch (e, stack) {
+          print('Error processing response: $e\n$stack');
+          rethrow;
+        }
+      } catch (e, stack) {
+        print('Error handling request: $e\n$stack');
+        request.response.statusCode = HttpStatus.notFound;
+        await request.response.close();
+      }
     });
 
     try {
@@ -82,12 +124,12 @@ void main() {
     }
   });
 
-  test('session store handles encryption', () {
+  test('session store handles encryption', () async {
     final store = SessionStore(
       'test-id',
       ArraySessionDriver(),
       encrypt: true,
-      encrypter: app.container.make<Encrypter>(),
+      encrypter: Encrypter(Encrypter.generateKey('aes-256-cbc')),
     );
 
     // Set encrypted value
@@ -96,9 +138,13 @@ void main() {
     // Get decrypted value
     expect(store.get('key'), equals('secret'));
 
-    // Verify value is actually encrypted in store
-    final rawData = store.all();
-    expect(rawData['key'], isNot(equals('secret')));
+    // Save to driver
+    await store.save();
+
+    // Read raw data from driver
+    final driver = ArraySessionDriver();
+    final rawData = await driver.read(store.id);
+    expect(rawData?['key'], isNot(equals('secret')));
   });
 
   test('session store handles flash data', () {

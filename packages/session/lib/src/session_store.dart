@@ -115,6 +115,14 @@ class SessionStore {
 
   /// Ages the flash data.
   void ageFlashData() {
+    // Remove old flash data
+    final List<String> old =
+        (get<List>('_flash.old') ?? <String>[]).cast<String>();
+    for (final key in old) {
+      remove(key);
+    }
+
+    // Move current flash to old
     final List<String> current =
         (get<List>('_flash.new') ?? <String>[]).cast<String>();
     set('_flash.old', current);
