@@ -164,9 +164,8 @@ not_in_nav: |
 
 nav:
   - Home: index.md
-  - Features: features.md
-  - Ecosystem:
-    - ecosystem/index.md
+  # - Features: features.md
+  
   - Documentation:
     - Documentation: documentation/index.md
     - Prologue:
@@ -174,29 +173,60 @@ nav:
       - documentation/prologue/upgrade-guide.md
       - documentation/prologue/contributing-guide.md
     - Getting Started:
-      - documentation/the-basic/installation.md
+      - documentation/getting-started/installation.md
+      - documentation/getting-started/configuration.md
+      - documentation/getting-started/directory-structure.md
+      - documentation/getting-started/frontend.md
+      - documentation/getting-started/starter-kits.md
+      - documentation/getting-started/deployment.md
     - Architecture Concepts:
+      - documentation/architecture-concepts/isolate.md
       - documentation/architecture-concepts/request-lifecycle.md
       - documentation/architecture-concepts/service-container.md
       - documentation/architecture-concepts/services.md
       - documentation/architecture-concepts/facades.md
     - The Basics:
       - documentation/the-basic/routing.md
+      - documentation/the-basic/middleware.md
+      - documentation/the-basic/csrf-protection.md
+      - documentation/the-basic/controller.md
       - documentation/the-basic/request.md
       - documentation/the-basic/response.md
-      - documentation/the-basic/controller.md
-      - documentation/the-basic/middleware.md
+      - documentation/the-basic/views.md
+      - Template Engines:
+        - documentation/the-basic/template-engines/blade-templates.md
+        - documentation/the-basic/template-engines/jinja-templates.md
+        - documentation/the-basic/template-engines/jael-templates.md
+        - documentation/the-basic/template-engines/mustache-templates.md
+      - documentation/the-basic/asset-bundling.md
+      - documentation/the-basic/url-generation.md
+      - documentation/the-basic/session.md
       - documentation/the-basic/validation.md
+      - documentation/the-basic/error-handling.md
+      - documentation/the-basic/logging.md
     - Digging Deeper:
+      - documentation/digging-deeper/artisan-console.md
+      - documentation/digging-deeper/broadcasting.md
       - documentation/digging-deeper/cache.md
+      - documentation/digging-deeper/collections.md
+      - documentation/digging-deeper/concurrency.md
+      - documentation/digging-deeper/context.md
+      - documentation/digging-deeper/contracts.md
+      - documentation/digging-deeper/events.md
       - documentation/digging-deeper/file-storage.md
+      - documentation/digging-deeper/helpers.md
+      - documentation/digging-deeper/http-client.md
+      - documentation/digging-deeper/localization.md
+      - documentation/digging-deeper/mail.md
+      - documentation/digging-deeper/notifications.md
+      - documentation/digging-deeper/package-development.md
+      - documentation/digging-deeper/processes.md
+      - documentation/digging-deeper/queues.md
+      - documentation/digging-deeper/rate-limiting.md
+      - documentation/digging-deeper/strings.md
+      - documentation/digging-deeper/task-scheduling.md
       - documentation/digging-deeper/env.md
-      - documentation/digging-deeper/isolate.md
-      - documentation/digging-deeper/services.md
       - documentation/digging-deeper/websocket.md
-      - documentation/digging-deeper/dox-cli.md
-      - documentation/digging-deeper/deployment.md
-      - documentation/digging-deeper/testing.md
     - Security:
       - documentation/security/authentication.md
       - documentation/security/cors.md
@@ -213,15 +243,45 @@ nav:
         - documentation/database/model/relationship/belongs-to.md
         - documentation/database/model/relationship/many-to-many.md
         - documentation/database/model/serializer.md
-  - Examples:
-    - examples/index.md
-  - Certification: certification/
+    - Eloquent ORM:
+      - documentation/eloquent-orm/index.md
+    - Testing:
+      - documentation/testing/index.md
+      - documentation/testing/testing.md
+    - Packages:
+      - documentation/packages/index.md
+    - Examples:
+      - documentation/examples/index.md
+    - API Documentation:
+      - documentation/api-documentation/index.md
+  - Ecosystem:
+    - ecosystem/index.md
+  - Developers:
+    - developers/index.md
+    - developers/contribute.md
+    - developers/forking-repos.md
+    - developers/bug-report.md
+    - developers/failing-test.md
+    - developers/doc-report.md
+    - developers/feature-request.md
+    - developers/enhancement-request.md
+    - developers/translations.md
+    - developers/pull-request.md
+    - developers/questions-support.md
+    - developers/security-report.md
+    - Guides:
+      - Package Development: developers/guides/package-development.md
   - Insiders:
-    - insiders/insiders.md
-  - Community:
-    - community/contribute.md
-    - Releases:
-      - community/releases/core-release.md
-      - community/releases/query-builder-release.md
+    - insiders/index.md
+    - insiders/why-sponsor.md
+    - insiders/whats-in-it.md
+    - insiders/who-is-sponsoring.md
+    - insiders/sponsoring-tiers.md
+    - insiders/how-to-sponsor.md
+  - Releases:
+      - releases/core-release.md
+      - releases/query-builder-release.md
+  - Foundation:
+    - foundation/index.md
   - Blog:
     - blog/index.md

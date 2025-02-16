@@ -7,7 +7,7 @@ Middleware serves as a connector between routes and controllers, and its signifi
 === "Create"
 
     ```bash
-    dox create:middleware Logger
+    artisan create:middleware Logger
     ```
 
 ######
@@ -19,7 +19,7 @@ Middleware serves as a connector between routes and controllers, and its signifi
         handle(IDoxRequest req) {
             /// write your logic here
 
-            /// return DoxRequest back to continue next to the controller
+            /// return Request back to continue next to the controller
             return req; 
         }
     }
@@ -41,10 +41,10 @@ If you prefer not to use class-based middleware, you have the option to create m
 === "Middleware"
 
     ```dart
-    authMiddleware(DoxRequest req) {
+    authMiddleware(Request req) {
         /// write your logic here
 
-        /// return DoxRequest back to continue next to the controller
+        /// return Request back to continue next to the controller
         return req;
     }
     ```
@@ -65,7 +65,7 @@ If you prefer not to use class-based middleware, you have the option to create m
         handle(IDoxRequest req) {
             /// write your logic here
 
-            /// return DoxRequest back to continue next to the controller
+            /// return Request back to continue next to the controller
             return req;
         }
     }
@@ -74,10 +74,10 @@ If you prefer not to use class-based middleware, you have the option to create m
 === "Function middleware"
 
     ```dart
-    authMiddleware(DoxRequest req) {
+    authMiddleware(Request req) {
         /// write your logic here
 
-        /// return DoxRequest back to continue next to the controller
+        /// return Request back to continue next to the controller
         return req;
     }
     ```
@@ -86,7 +86,7 @@ If you prefer not to use class-based middleware, you have the option to create m
 
     ```dart
     class WebController {
-        pong(DoxRequest req) async {
+        pong(Request req) async {
             return 'pong';
         }
     }

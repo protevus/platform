@@ -1,4 +1,4 @@
-# Isolate
+# Isolates
 
 Dox support multi-threaded HTTP server using isolates that can handle 10x concurrency requests with high speed.
 

@@ -1,4 +1,4 @@
-# Dox CLI
+# Artisan Console
 
 Dox has a CLI tool to generate migration, model and to handle database migration which support up and down methods to control migration version.
 

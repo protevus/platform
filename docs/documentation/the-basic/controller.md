@@ -3,7 +3,7 @@
 ## Class based controller
 
 ```bash
-dox create:controller Blog
+artisan create:controller Blog
 ```
 
 === "Route"
@@ -17,7 +17,7 @@ dox create:controller Blog
 
     ```dart
     class AppController {
-        ping(DoxRequest req) {
+        ping(Request req) {
             return 'pong';
         }
     }
@@ -36,7 +36,7 @@ dox create:controller Blog
 
     ```dart
     class AppController {
-        static ping(DoxRequest req) {
+        static ping(Request req) {
             return 'pong';
         }
     }
@@ -53,7 +53,7 @@ dox create:controller Blog
 === "Controller"
 
     ```dart
-    listBlog(DoxRequest req) {
+    listBlog(Request req) {
         return 'pong';
     }
     ```
@@ -63,34 +63,34 @@ dox create:controller Blog
 === "Create"
 
     ```bash
-    dox create:controller Blog -r
+    artisan create:controller Blog -r
     ```
 ######
 === "Sample"
 
     ```dart
-    import 'package:illuminate_foundation/foundation.dart';
+    import 'package:illuminate_http/http.dart';
 
     class BlogController {
         /// GET /resource
-        index(DoxRequest req) async {}
+        index(Request req) async {}
 
         /// GET /resource/create
-        create(DoxRequest req) async {}
+        create(Request req) async {}
 
         /// POST /resource
-        store(DoxRequest req) async {}
+        store(Request req) async {}
 
         /// GET /resource/{id}
-        show(DoxRequest req, String id) async {}
+        show(Request req, String id) async {}
 
         /// GET /resource/{id}/edit
-        edit(DoxRequest req, String id) async {}
+        edit(Request req, String id) async {}
 
         /// PUT|PATCH /resource/{id}
-        update(DoxRequest req, String id) async {}
+        update(Request req, String id) async {}
 
         /// DELETE /resource/{id}
-        destroy(DoxRequest req, String id) async {}
+        destroy(Request req, String id) async {}
     }
     ```
