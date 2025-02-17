@@ -1,17 +1,17 @@
 name: illuminate_bus
 description: Bus implementation for the Platform framework
-version: 0.1.0
+version: 0.5.1
 publish_to: none
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
-  illuminate_collections: ^2.0.0
-  illuminate_container: ^9.0.0
-  illuminate_contracts: ^9.0.0
-  illuminate_pipeline: ^9.0.0
-  illuminate_support: ^9.0.0
+  illuminate_collections: ^0.5.1
+  illuminate_container: ^0.5.1
+  illuminate_contracts: ^0.5.1
+  illuminate_pipeline: ^0.5.1
+  illuminate_support: ^0.5.1
 
 dev_dependencies:
   lints: ^2.0.0

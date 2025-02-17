@@ -1,5 +1,5 @@
 name: illuminate_container
-version: 9.0.0
+version: 0.5.1
 description: Protevus Platform hierarchical DI container, and pluggable backends for reflection.
 homepage: https://protevus.com
 documentation: https://docs.protevus.com

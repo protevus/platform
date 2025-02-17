@@ -1,6 +1,6 @@
 name: illuminate_conditionable
 description: A Dart implementation of Laravel's Conditionable trait, providing fluent conditional execution
-version: 0.1.0
+version: 0.5.1
 
 environment:
   sdk: ">=3.0.0 <4.0.0"

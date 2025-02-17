@@ -1,17 +1,17 @@
 name: illuminate_notifications
 description: Laravel-style notifications for Dart
-version: 0.0.1
+version: 0.5.1
 homepage: https://protevus.com
 
 environment:
   sdk: ^3.4.2
 
 dependencies:
-  illuminate_events: ^0.0.1
-  illuminate_queue: ^0.0.1
-  illuminate_contracts: ^0.0.1
-  illuminate_database: ^0.0.1
-  illuminate_mail: ^0.0.1
+  illuminate_events: ^0.5.1
+  illuminate_queue: ^0.5.1
+  illuminate_contracts: ^0.5.1
+  illuminate_database: ^0.5.1
+  illuminate_mail: ^0.5.1
   mustache_template: ^2.0.0
 
 dev_dependencies:

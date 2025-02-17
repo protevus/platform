@@ -6,9 +6,9 @@ environment:
   sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
-  illuminate_events: ^9.0.0
-  illuminate_container: ^9.0.0
-  illuminate_contracts: ^0.0.1
+  illuminate_events: ^0.5.1
+  illuminate_container: ^0.5.1
+  illuminate_contracts: ^0.5.1
 
 dev_dependencies:
   lints: ^2.0.0

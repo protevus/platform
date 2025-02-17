@@ -1,14 +1,14 @@
 name: illuminate_collections
 description: A Dart implementation of Laravel's Collection class, providing fluent wrappers for working with arrays of data
-version: 0.1.0
+version: 0.5.1
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   meta: ^1.9.0
-  illuminate_contracts: ^0.0.1
-  illuminate_mirrors: ^0.1.0
+  illuminate_contracts: ^0.5.1
+  illuminate_mirrors: ^0.5.1
 
 dev_dependencies:
   lints: ^2.1.0

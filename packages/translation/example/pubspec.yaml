@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  illuminate_translation: ^0.0.1
+  illuminate_translation: ^0.5.1
 
 dev_dependencies:
   flutter_test:

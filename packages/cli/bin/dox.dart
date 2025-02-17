@@ -8,7 +8,7 @@ import 'package:dox/src/tools/generate_key.dart';
 import 'package:dox/src/tools/help.dart';
 import 'package:dox/src/tools/server_serve.dart';
 import 'package:dox/src/tools/update_dox.dart';
-import 'package:dox_migration/dox_migration.dart';
+import 'package:illuminate_migration/migration.dart';
 
 void main(List<String> args) async {
   List<String> versionKeys = [

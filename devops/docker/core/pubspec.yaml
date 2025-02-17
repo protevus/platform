@@ -1,6 +1,6 @@
 name: dev_service_manager
 description: A modular development service management system
-version: 1.0.0
+version: 0.5.1
 
 environment:
   sdk: '>=3.0.0 <4.0.0'

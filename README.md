@@ -1,4 +1,4 @@
-<p align="center"><a href="https://protevus.com" target="_blank"><img src="https://git.protevus.com/protevus/branding/raw/branch/main/protevus-logo-bg.png"></a></p>
+<p align="center"><a href="https://protevus.com" target="_blank"><img src="https://raw.githubusercontent.com/dartondox/assets/main/dox-logo.png" width="70"></a></p>
 
 # Protevus Platform
 

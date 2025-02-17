@@ -311,140 +311,140 @@ packages:
       path: "../../packages/auth"
       relative: true
     source: path
-    version: "2.0.0"
+    version: "0.5.1"
   illuminate_builder:
     dependency: "direct dev"
     description:
       path: "../../packages/builder"
       relative: true
     source: path
-    version: "2.0.0"
+    version: "0.5.1"
   illuminate_cache:
     dependency: "direct main"
     description:
       path: "../../packages/cache"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.5.1"
   illuminate_collections:
     dependency: "direct overridden"
     description:
       path: "../../packages/collections"
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.5.1"
   illuminate_conditionable:
     dependency: "direct overridden"
     description:
       path: "../../packages/conditionable"
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.5.1"
   illuminate_config:
     dependency: "direct main"
     description:
       path: "../../packages/config"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.5.1"
   illuminate_container:
     dependency: "direct overridden"
     description:
       path: "../../packages/container"
       relative: true
     source: path
-    version: "9.0.0"
+    version: "0.5.1"
   illuminate_contracts:
     dependency: "direct main"
     description:
       path: "../../packages/contracts"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.5.1"
   illuminate_database:
     dependency: "direct main"
     description:
       path: "../../packages/database"
       relative: true
     source: path
-    version: "2.1.0"
+    version: "0.5.1"
   illuminate_foundation:
     dependency: "direct main"
     description:
       path: "../../packages/foundation"
       relative: true
     source: path
-    version: "2.0.0"
+    version: "0.5.1"
   illuminate_http:
     dependency: "direct main"
     description:
       path: "../../packages/http"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.5.1"
   illuminate_log:
     dependency: "direct main"
     description:
       path: "../../packages/log"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.5.1"
   illuminate_macroable:
     dependency: "direct overridden"
     description:
       path: "../../packages/macroable"
       relative: true
     source: path
-    version: "0.1.0"
+    version: "0.5.1"
   illuminate_migration:
     dependency: "direct main"
     description:
       path: "../../packages/migration"
       relative: true
     source: path
-    version: "2.0.0"
+    version: "0.5.1"
   illuminate_mirrors:
     dependency: "direct overridden"
     description:
       path: "../../packages/mirrors"
       relative: true
     source: path
-    version: "1.0.0"
+    version: "0.5.1"
   illuminate_routing:
     dependency: "direct main"
     description:
       path: "../../packages/routing"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.5.1"
   illuminate_storage:
     dependency: "direct main"
     description:
       path: "../../packages/storage"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.5.1"
   illuminate_support:
     dependency: "direct main"
     description:
       path: "../../packages/support"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.5.1"
   illuminate_validation:
     dependency: "direct overridden"
     description:
       path: "../../packages/validation"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "0.5.1"
   illuminate_websocket:
     dependency: "direct main"
     description:
       path: "../../packages/websocket"
       relative: true
     source: path
-    version: "1.0.0"
+    version: "0.5.1"
   intl:
     dependency: transitive
     description:
