@@ -278,6 +278,17 @@ nav:
     - insiders/who-is-sponsoring.md
     - insiders/sponsoring-tiers.md
     - insiders/how-to-sponsor.md
+    - Additional Information:
+      - insiders/payment-billing.md
+      - insiders/access-management.md
+      - insiders/runtime-cancellations.md
+      - insiders/privacy.md
+      - insiders/license.md
+      - insiders/support.md
+    - Using Insiders:
+      - insiders/getting-started.md
+      - insiders/changelog.md
+      - insiders/upgrade.md
   - Releases:
       - releases/core-release.md
       - releases/query-builder-release.md
