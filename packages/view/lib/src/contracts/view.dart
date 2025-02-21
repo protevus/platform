@@ -1,0 +1,86 @@
+import 'base.dart';
+
+/// Contract for the View implementation.
+abstract class View implements Arrayable, Htmlable {
+  /// Get the name of the view.
+  String get name;
+
+  /// Get the array of view data.
+  Map<String, dynamic> get data;
+
+  /// Get the path to the view file.
+  String get path;
+
+  /// Add a piece of data to the view.
+  View withData(String key, dynamic value);
+
+  /// Add multiple pieces of data to the view.
+  View withManyData(Map<String, dynamic> data);
+
+  /// Get the evaluated contents of the view.
+  ///
+  /// Throws a [ViewException] if rendering fails.
+  Future<String> render();
+
+  /// Get the string contents of the view.
+  ///
+  /// This is an alias for [render].
+  @override
+  String toString() => 'View($name)';
+
+  /// Implementation of [Arrayable]
+  @override
+  Map<String, dynamic> toArray() => data;
+
+  /// Implementation of [Htmlable]
+  @override
+  String toHtml() => toString();
+}
+
+/// Contract for the View Factory implementation.
+abstract class ViewFactory {
+  /// Get the evaluated view contents for the given view.
+  Future<View> make(String view, [Map<String, dynamic>? data]);
+
+  /// Determine if a given view exists.
+  bool exists(String view);
+
+  /// Add a piece of shared data to the environment.
+  void share(String key, dynamic value);
+
+  /// Add a location to the array of view locations.
+  void addLocation(String location);
+
+  /// Add a new namespace to the loader.
+  ViewFactory addNamespace(String namespace, List<String> hints);
+
+  /// Register a valid view extension and its engine.
+  void addExtension(String extension, String engine);
+
+  /// Get all of the shared data for the environment.
+  Map<String, dynamic> get shared;
+}
+
+/// Contract for the View Engine implementation.
+abstract class ViewEngine {
+  /// Get the evaluated contents of the view.
+  Future<String> get(String path, Map<String, dynamic> data);
+}
+
+/// Contract for the View Finder implementation.
+abstract class ViewFinder {
+  /// Get the fully qualified location of the view.
+  String find(String view);
+
+  /// Add a location to the finder.
+  void addLocation(String location);
+
+  /// Add a namespace hint to the finder.
+  void addNamespace(String namespace, List<String> hints);
+
+  /// Add a valid view extension.
+  void addExtension(String extension);
+
+  /// Flush the cache of located views.
+  void flush();
+}
