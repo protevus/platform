@@ -149,6 +149,24 @@ abstract class ViewFactoryContract {
 
   /// Flush all inheritance state.
   void flushState();
+
+  /// Add new loop to the stack.
+  void addLoop(dynamic data);
+
+  /// Increment the top loop's indices.
+  void incrementLoopIndices();
+
+  /// Pop a loop from the top of the loop stack.
+  void popLoop();
+
+  /// Get an instance of the last loop in the stack.
+  Map<String, dynamic>? getLastLoop();
+
+  /// Get the entire loop stack.
+  List<Map<String, dynamic>> getLoopStack();
+
+  /// Flush all loops.
+  void flushLoops();
 }
 
 /// Contract for the View Engine implementation.
