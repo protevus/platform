@@ -6,6 +6,7 @@ import 'package:path/path.dart' as path;
 import 'package:illuminate_container/container.dart';
 import 'package:illuminate_container/mirrors.dart';
 import 'package:illuminate_events/events.dart';
+import 'package:illuminate_translation/translation.dart';
 
 import 'concerns/manages_components.dart';
 import 'concerns/manages_events.dart';
@@ -14,6 +15,7 @@ import 'concerns/manages_inheritance.dart';
 import 'concerns/manages_layouts.dart';
 import 'concerns/manages_loops.dart';
 import 'concerns/manages_stacks.dart';
+import 'concerns/manages_translations.dart';
 import 'contracts/base.dart';
 import 'contracts/view.dart';
 import 'engines/engine_resolver.dart';
@@ -28,7 +30,8 @@ class ViewFactory
         ManagesStacks,
         ManagesComponents,
         ManagesFragments,
-        ManagesEvents
+        ManagesEvents,
+        ManagesTranslations
     implements ViewFactoryContract {
   /// The engine resolver instance.
   final EngineResolver _engines;
@@ -47,6 +50,10 @@ class ViewFactory
   @override
   final Container container;
 
+  /// The translator instance.
+  @override
+  final Translator translator;
+
   /// The extension to engine bindings.
   final Map<String, String> _extensions = {
     'html': 'file',
@@ -58,10 +65,14 @@ class ViewFactory
       : _engines = engines,
         _finder = finder,
         container = Container(MirrorsReflector()),
-        events = EventDispatcher() {
+        events = EventDispatcher(),
+        translator = Translator(FileLoader(['translations']), 'en') {
     // Register default engines
     _engines.register('file', () => FileEngine());
     _engines.register('template', () => TemplateEngine());
+
+    // Register translator in container
+    container.registerSingleton<Translator>(translator);
   }
 
   @override
