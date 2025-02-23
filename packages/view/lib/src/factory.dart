@@ -3,7 +3,12 @@ import 'dart:io';
 
 import 'package:path/path.dart' as path;
 
+import 'package:illuminate_container/container.dart';
+import 'package:illuminate_container/mirrors.dart';
+import 'package:illuminate_events/events.dart';
+
 import 'concerns/manages_components.dart';
+import 'concerns/manages_events.dart';
 import 'concerns/manages_fragments.dart';
 import 'concerns/manages_inheritance.dart';
 import 'concerns/manages_layouts.dart';
@@ -22,7 +27,8 @@ class ViewFactory
         ManagesLoops,
         ManagesStacks,
         ManagesComponents,
-        ManagesFragments
+        ManagesFragments,
+        ManagesEvents
     implements ViewFactoryContract {
   /// The engine resolver instance.
   final EngineResolver _engines;
@@ -33,11 +39,13 @@ class ViewFactory
   /// Data that should be available to all templates.
   final Map<String, dynamic> _shared = {};
 
-  /// The view creator events.
-  final Map<String, List<Function>> _creators = {};
+  /// The event dispatcher instance.
+  @override
+  final EventDispatcher events;
 
-  /// The view composer events.
-  final Map<String, List<Function>> _composers = {};
+  /// The IoC container instance.
+  @override
+  final Container container;
 
   /// The extension to engine bindings.
   final Map<String, String> _extensions = {
@@ -48,7 +56,9 @@ class ViewFactory
   /// Create a new factory instance.
   ViewFactory(EngineResolver engines, ViewFinder finder)
       : _engines = engines,
-        _finder = finder {
+        _finder = finder,
+        container = Container(MirrorsReflector()),
+        events = EventDispatcher() {
     // Register default engines
     _engines.register('file', () => FileEngine());
     _engines.register('template', () => TemplateEngine());
@@ -145,62 +155,6 @@ class ViewFactory
     super.flushState();
   }
 
-  @override
-  void creator(dynamic views, Function callback) {
-    final viewsList = views is List ? views : [views];
-
-    for (final view in viewsList) {
-      final normalizedView = _normalizeName(view.toString());
-      _creators[normalizedView] ??= [];
-      _creators[normalizedView]!.add(callback);
-    }
-  }
-
-  @override
-  void creators(Map<Function, List<String>> creators) {
-    creators.forEach((callback, views) {
-      creator(views, callback);
-    });
-  }
-
-  @override
-  void callCreator(View view) {
-    final creators = _creators[view.name];
-    if (creators != null) {
-      for (final callback in creators) {
-        callback(view);
-      }
-    }
-  }
-
-  @override
-  void composer(dynamic views, Function callback) {
-    final viewsList = views is List ? views : [views];
-
-    for (final view in viewsList) {
-      final normalizedView = _normalizeName(view.toString());
-      _composers[normalizedView] ??= [];
-      _composers[normalizedView]!.add(callback);
-    }
-  }
-
-  @override
-  void composers(Map<Function, List<String>> composers) {
-    composers.forEach((callback, views) {
-      composer(views, callback);
-    });
-  }
-
-  @override
-  void callComposer(View view) {
-    final composers = _composers[view.name];
-    if (composers != null) {
-      for (final callback in composers) {
-        callback(view);
-      }
-    }
-  }
-
   /// Create a new view instance.
   View _viewInstance(String view, String path, Map<String, dynamic> data) {
     return ViewImpl(
@@ -225,8 +179,22 @@ class ViewFactory
   }
 
   /// Normalize a view name.
-  String _normalizeName(String name) {
+  @override
+  String normalizeName(String name) {
     return name.replaceAll('.', '/');
+  }
+
+  String _normalizeName(String name) {
+    return normalizeName(name);
+  }
+
+  @override
+  List<Function> creators(Map<Function, List<String>> creators) {
+    final registered = <Function>[];
+    creators.forEach((callback, views) {
+      registered.addAll(creator(views, callback));
+    });
+    return registered;
   }
 }
 
