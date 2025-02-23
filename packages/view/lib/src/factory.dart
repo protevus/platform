@@ -3,13 +3,14 @@ import 'dart:io';
 
 import 'package:path/path.dart' as path;
 
+import 'concerns/manages_layouts.dart';
 import 'contracts/base.dart';
 import 'contracts/view.dart';
 import 'engines/engine_resolver.dart';
 import 'view.dart';
 
 /// The View Factory implementation.
-class ViewFactory implements ViewFactoryContract {
+class ViewFactory with ManagesLayouts implements ViewFactoryContract {
   /// The engine resolver instance.
   final EngineResolver _engines;
 

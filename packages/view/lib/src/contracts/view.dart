@@ -86,6 +86,33 @@ abstract class ViewFactoryContract {
 
   /// Clear the view cache.
   void flushCache();
+
+  /// Start injecting content into a section.
+  void startSection(String section, [String? content]);
+
+  /// Stop injecting content into a section.
+  String stopSection({bool overwrite = false});
+
+  /// Stop injecting content into a section and append it.
+  String appendSection();
+
+  /// Get the string contents of a section.
+  String yieldContent(String section, [String defaultContent = '']);
+
+  /// Check if section exists.
+  bool hasSection(String name);
+
+  /// Check if section does not exist.
+  bool sectionMissing(String name);
+
+  /// Get the contents of a section.
+  String? getSection(String name, [String? defaultContent]);
+
+  /// Get all sections.
+  Map<String, String> get sections;
+
+  /// Flush all of the sections.
+  void flushSections();
 }
 
 /// Contract for the View Engine implementation.
