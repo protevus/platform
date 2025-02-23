@@ -24,6 +24,20 @@ class ViewImpl implements View {
   @override
   final Map<String, dynamic> data;
 
+  /// The parent view being extended.
+  View? _parent;
+
+  @override
+  View? get parent => _parent;
+
+  @override
+  set parent(View? view) {
+    _parent = view;
+  }
+
+  @override
+  bool get hasParent => _parent != null;
+
   /// Create a new view instance.
   ViewImpl(
     this._factory,
@@ -49,11 +63,22 @@ class ViewImpl implements View {
   @override
   Future<String> render() async {
     try {
+      // Start rendering this view
+      _factory.startRender(this);
+
       // Gather all data including shared data from factory
       final allData = _gatherData();
 
       // Get the contents using the engine
       final contents = await _engine.get(path, allData);
+
+      // If this view has a parent, render it
+      if (hasParent) {
+        return await parent!.render();
+      }
+
+      // Stop rendering this view
+      _factory.stopRender();
 
       return contents;
     } catch (e, stackTrace) {

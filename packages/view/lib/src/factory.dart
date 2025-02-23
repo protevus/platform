@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:path/path.dart' as path;
 
+import 'concerns/manages_inheritance.dart';
 import 'concerns/manages_layouts.dart';
 import 'contracts/base.dart';
 import 'contracts/view.dart';
@@ -10,7 +11,9 @@ import 'engines/engine_resolver.dart';
 import 'view.dart';
 
 /// The View Factory implementation.
-class ViewFactory with ManagesLayouts implements ViewFactoryContract {
+class ViewFactory
+    with ManagesLayouts, ManagesInheritance
+    implements ViewFactoryContract {
   /// The engine resolver instance.
   final EngineResolver _engines;
 
@@ -108,6 +111,24 @@ class ViewFactory with ManagesLayouts implements ViewFactoryContract {
   @override
   void flushCache() {
     _finder.flush();
+  }
+
+  @override
+  Future<void> extendView(String name, [Map<String, dynamic>? data]) async {
+    if (currentView == null) {
+      throw ViewException(
+          'Cannot extend view: no view is currently being rendered.');
+    }
+
+    // Create the parent view
+    final parentView = await make(name, data);
+    currentView!.parent = parentView;
+  }
+
+  @override
+  void flushState() {
+    flushSections();
+    super.flushState();
   }
 
   @override

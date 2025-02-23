@@ -28,6 +28,15 @@ abstract class View implements Arrayable, Htmlable {
   @override
   String toString() => 'View($name)';
 
+  /// Get the parent view being extended.
+  View? get parent;
+
+  /// Set the parent view being extended.
+  set parent(View? view);
+
+  /// Check if this view extends another view.
+  bool get hasParent;
+
   /// Implementation of [Arrayable]
   @override
   Map<String, dynamic> toArray() => data;
@@ -113,6 +122,33 @@ abstract class ViewFactoryContract {
 
   /// Flush all of the sections.
   void flushSections();
+
+  /// Start rendering a view.
+  void startRender(View view);
+
+  /// Stop rendering a view.
+  void stopRender();
+
+  /// Get the current view being rendered.
+  View? get currentView;
+
+  /// Check if a view is currently being rendered.
+  bool isRenderingView(View view);
+
+  /// Check if any view is being rendered.
+  bool get hasRendering;
+
+  /// Get the number of views being rendered.
+  int get renderCount;
+
+  /// Check if we're done rendering all views.
+  bool get doneRendering;
+
+  /// Extend a parent view.
+  Future<void> extendView(String name, [Map<String, dynamic>? data]);
+
+  /// Flush all inheritance state.
+  void flushState();
 }
 
 /// Contract for the View Engine implementation.
