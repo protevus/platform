@@ -14,148 +14,159 @@
 
 ## 📖 Overview
 
-Protevus Platform is a high-performance, modular unified full-stack platform for Dart that provides a comprehensive suite of tools for building scalable web applications, APIs, and microservices. Built on the Dox framework, it combines modern architecture patterns with Dart's powerful async/await capabilities and strong typing.
+Protevus Platform is a high-performance, modular unified full-stack platform for Dart that provides a comprehensive suite of tools for building scalable web applications, APIs, and microservices. Built with a focus on Laravel's architecture patterns while embracing Dart's powerful features, it offers a robust foundation for modern application development.
 
 ### 🌟 Key Features
 
-- **High Performance**: Built on Dart's efficient runtime
-- **Type Safety**: Leverages Dart's strong type system for compile-time error catching
-- **Modular Architecture**: Highly extensible with independent, composable packages
-- **Developer Friendly**: Intuitive API design with extensive documentation
-- **Enterprise Ready**: Built-in support for authentication, caching, and database operations
+- **Pure Dart Implementation**: No VM dependencies, cross-platform support
+- **Laravel-Inspired Architecture**: Familiar patterns in a Dart context
+- **Comprehensive Package Ecosystem**: 35+ specialized packages
+- **Modern Development Tools**: Melos-powered monorepo management
+- **Enterprise Ready**: Built for scalability and maintainability
 
 ## 🏗️ Architecture
 
-Protevus Platform uses a modular architecture where each component is a separate package, allowing for flexible composition and minimal dependencies.
+Our platform uses a modular architecture with 35+ specialized packages, each focusing on specific functionality while maintaining high cohesion and loose coupling.
 
-### Core Components
+### Core Packages
 
-#### 🚀 Foundation
-The heart of the framework, providing core HTTP server functionality:
+#### 🔄 Mirrors Package
+Pure Dart reflection without VM dependencies:
 
 ```dart
-import 'package:dox/dox.dart';
+import 'package:illuminate_mirrors/mirrors.dart';
 
-void main() async {
-  var app = Application();
-  
-  // Route handling
-  Route.get('/api/users', [
-    AuthMiddleware(),
-    userController.index
-  ]);
-
-  await app.startServer();
-}
+// Cross-platform reflection
+final reflector = Reflector();
+final metadata = reflector.reflect(MyClass);
+final methods = metadata.methods;
 ```
 
-Key features:
-- HTTP server support
-- Middleware pipeline
-- Request/Response abstraction
+Features:
+- VM-independent reflection
+- Cross-platform support
+- Type information
+- Method inspection
+- Property access
+
+#### 📊 DBO (Database Operations)
+PDO-inspired database operations:
+
+```dart
+import 'package:illuminate_dbo/dbo.dart';
+
+// Database operations
+final connection = DBO.connection();
+await connection.execute('SELECT * FROM users WHERE active = ?', [true]);
+
+// Transaction support
+await connection.transaction((tx) async {
+  await tx.execute('INSERT INTO users (name) VALUES (?)', ['John']);
+  await tx.execute('INSERT INTO profiles (user_id) VALUES (?)', [1]);
+});
+```
+
+Features:
+- PDO-style operations
+- Transaction support
+- Multiple connections
+- Prepared statements
 - Error handling
 
-#### 🛣️ Routing
-Advanced routing system with expressive syntax:
+#### 🔄 Event System
+Robust event handling:
 
 ```dart
-// Route groups with shared middleware
-Route.group('/api/v1', () {
-  // Resource routes
-  Route.resource('users', UserController());
-  
-  // Protected routes
-  Route.middleware([AuthMiddleware()], () {
-    Route.get('/profile', userController.profile);
-    Route.post('/logout', authController.logout);
+import 'package:illuminate_events/events.dart';
+
+// Event definition
+class UserRegistered extends Event {
+  final User user;
+  UserRegistered(this.user);
+}
+
+// Event listening
+EventManager.listen<UserRegistered>((event) {
+  // Handle user registration
+});
+
+// Event dispatch
+await EventManager.dispatch(UserRegistered(newUser));
+```
+
+Features:
+- Type-safe events
+- Async handling
+- Event queuing
+- Conditional dispatch
+- Error handling
+
+#### 🌐 WebSocket
+Advanced WebSocket implementation:
+
+```dart
+import 'package:illuminate_websocket/websocket.dart';
+
+// Server setup
+final server = WebsocketServer();
+server.on('connection', (socket) {
+  socket.on('message', (data) {
+    // Handle message
   });
-  
-  // Parameter routes
-  Route.get('/posts/{id}', postController.show);
-});
-```
-
-Features:
-- Named routes
-- Route parameters
-- Route groups and prefixing
-- Middleware attachment
-- RESTful resource routing
-
-#### 🔐 Authentication
-Comprehensive authentication system:
-
-```dart
-// Auth configuration
-Auth.initialize(AuthConfig(
-  defaultGuard: 'web',
-  guards: {
-    'web': AuthGuard(
-      driver: JwtAuthDriver(secret: SecretKey(Env.get('APP_KEY'))),
-      provider: AuthProvider(
-        model: () => User(),
-      ),
-    ),
-  },
-));
-
-// Auth middleware
-Route.get('/protected', [
-  AuthMiddleware(), 
-  controller.method
-]);
-
-// Login attempt
-String? token = await auth.attempt(credentials);
-if(token != null) {
-  User? user = auth.user<User>();
-  return user;
-}
-```
-
-Features:
-- JWT authentication
-- Guard system
-- Provider system
-- Middleware integration
-- Token management
-
-#### 📊 Database
-Powerful database abstraction layer:
-
-```dart
-// Query builder
-var users = await User()
-  .select(['id', 'name', 'email'])
-  .where('active', true)
-  .whereIn('role', ['admin', 'moderator'])
-  .orderBy('created_at', 'desc')
-  .get();
-
-// Create
-await User().create({
-  'name': 'John Doe',
-  'email': 'john@example.com'
 });
 
-// Relationships
-class User extends Model {
-  @override
-  String get table => 'users';
-  
-  Future<List<Post>> posts() {
-    return hasMany(Post);
-  }
-}
+// Channel management
+final channel = server.channel('notifications');
+channel.broadcast('update', {'type': 'new_message'});
 ```
 
 Features:
-- Query builder
-- Model system
-- Relationships
-- Soft deletes
-- Debug mode
-- Raw queries
+- Channel system
+- Real-time events
+- Connection management
+- Authentication
+- Redis adapter
+
+## 📦 Package Ecosystem
+
+### Application Core
+- **illuminate_foundation**: Core framework functionality
+- **illuminate_container**: Service container implementation
+- **illuminate_contracts**: Interface definitions
+- **illuminate_support**: Utility functions and helpers
+
+### HTTP & Routing
+- **illuminate_http**: HTTP client/server implementation
+- **illuminate_routing**: Advanced routing system
+- **illuminate_session**: Session management
+- **illuminate_cookie**: Cookie handling
+- **illuminate_websocket**: WebSocket implementation
+
+### Database & Storage
+- **illuminate_database**: Database abstraction layer
+- **illuminate_dbo**: PDO-inspired database operations
+- **illuminate_migration**: Database migrations
+- **illuminate_pagination**: Query result pagination
+- **illuminate_storage**: File storage abstraction
+
+### Authentication & Security
+- **illuminate_auth**: Authentication system
+- **illuminate_encryption**: Data encryption
+- **illuminate_hashing**: Cryptographic hashing
+
+### Messaging & Events
+- **illuminate_events**: Event dispatch system
+- **illuminate_broadcasting**: Event broadcasting
+- **illuminate_bus**: Message bus implementation
+- **illuminate_queue**: Queue management
+- **illuminate_notifications**: Notification system
+
+### Development Tools
+- **illuminate_testing**: Testing framework
+- **illuminate_validation**: Data validation
+- **illuminate_translation**: Internationalization
+- **illuminate_view**: Template rendering
+- **illuminate_cache**: Data caching
 
 ## 🚀 Getting Started
 
@@ -165,85 +176,74 @@ Features:
 # Install Dart SDK (>=3.3.0)
 curl -fsSL https://dart.dev/get-dart | bash
 
-# Install Dox CLI
-dart pub global activate dox
+# Install Melos
+dart pub global activate melos
 ```
 
-### Creating a New Project
+### Project Setup
 
 ```bash
-# Create new project
-dox create my_app
+# Clone repository
+git clone https://github.com/protevus/platform.git
+cd platform
 
-# Start development server
-cd my_app
-dox s
+# Bootstrap project
+melos bs
 
-# Or with Docker
-docker-compose up -d --build
+# Run tests
+melos test
 ```
 
-### Environment Configuration
+### Development Workflow
 
 ```bash
-# Development mode (hot reload)
-APP_ENV=development
+# Create new package
+melos run create -- --type dart --category package --name my_package
 
-# Production mode (compiled)
-APP_ENV=production
-```
+# Run specific package tests
+MELOS_SCOPE="package_name" melos run test:custom
 
-## 🛠️ Development Tools
-
-### CLI Commands
-
-```bash
-# Development server
-dox s
-
-# Watch mode for code generation
-dox build_runner:watch
-
-# Create new project
-dox create project_name
-
-# Create new project with specific version
-dox create project_name --version v2.0.0
+# Generate documentation
+melos run docs:generate
 ```
 
 ## 📚 Documentation
 
-- [Installation](docs/documentation/the-basic/installation.md)
-- [Routing](docs/documentation/the-basic/routing.md)
-- [Controllers](docs/documentation/the-basic/controller.md)
-- [Database](docs/documentation/database/query-builder.md)
-- [Authentication](docs/documentation/security/authentication.md)
-- [Deployment](docs/documentation/digging-deeper/deployment.md)
+- [Getting Started](/docs/documentation/getting-started/installation.md)
+- [Architecture Concepts](/docs/documentation/architecture-concepts/index.md)
+- [Package Development](/docs/documentation/digging-deeper/package-development.md)
+- [Contributing Guide](/docs/documentation/prologue/contributing-guide.md)
+- [API Reference](/docs/documentation/api-documentation/index.md)
 
 ## 🔧 Troubleshooting
 
 ### Common Issues
 
-1. **Server won't start**:
-   - Check port availability
-   - Verify environment variables
-   - Check logs
+1. **Bootstrap Issues**:
+   ```bash
+   melos clean
+   melos bootstrap
+   ```
 
-2. **Database connection issues**:
-   - Verify connection string
-   - Check database credentials
-   - Ensure database service is running
+2. **Generation Issues**:
+   ```bash
+   melos run clean
+   melos run generate
+   ```
 
-3. **Authentication failures**:
-   - Verify JWT secret
-   - Check token expiration
-   - Validate middleware order
+3. **Dependency Conflicts**:
+   ```bash
+   melos run deps:check
+   ```
 
-### Debug Mode
+### Debug Commands
 
-```dart
-// Enable query debugging
-await User().debug(true).all();
+```bash
+# Debug package names
+melos run debug_pkg_name
+
+# Check reflectable files
+MELOS_SCOPE="package_name" melos run debug:reflectable
 ```
 
 ## 🤝 Contributing
