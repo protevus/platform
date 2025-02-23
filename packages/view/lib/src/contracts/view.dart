@@ -38,12 +38,21 @@ abstract class View implements Arrayable, Htmlable {
 }
 
 /// Contract for the View Factory implementation.
-abstract class ViewFactory {
+abstract class ViewFactoryContract {
   /// Get the evaluated view contents for the given view.
   Future<View> make(String view, [Map<String, dynamic>? data]);
 
   /// Determine if a given view exists.
   bool exists(String view);
+
+  /// Register a view composer.
+  void composer(dynamic views, Function callback);
+
+  /// Register multiple view composers via an array.
+  void composers(Map<Function, List<String>> composers);
+
+  /// Call the composer for a given view.
+  void callComposer(View view);
 
   /// Add a piece of shared data to the environment.
   void share(String key, dynamic value);
@@ -52,7 +61,7 @@ abstract class ViewFactory {
   void addLocation(String location);
 
   /// Add a new namespace to the loader.
-  ViewFactory addNamespace(String namespace, List<String> hints);
+  ViewFactoryContract addNamespace(String namespace, List<String> hints);
 
   /// Register a valid view extension and its engine.
   void addExtension(String extension, String engine);

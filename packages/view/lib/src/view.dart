@@ -7,7 +7,7 @@ import 'engines/engine_resolver.dart';
 /// The main View implementation.
 class ViewImpl implements View {
   /// The view factory instance.
-  final ViewFactory _factory;
+  final ViewFactoryContract _factory;
 
   /// The engine implementation.
   final ViewEngine _engine;

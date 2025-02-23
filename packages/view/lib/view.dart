@@ -11,8 +11,8 @@ import 'src/factory.dart';
 export 'src/view.barrel.dart';
 
 /// Create a new view factory instance with default configuration.
-ViewFactory createViewFactory() {
+ViewFactoryContract createViewFactory() {
   final engines = EngineResolver();
   final finder = FileViewFinder();
-  return ViewFactoryImpl(engines, finder);
+  return ViewFactory(engines, finder);
 }

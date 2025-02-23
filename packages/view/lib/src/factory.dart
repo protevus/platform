@@ -9,7 +9,7 @@ import 'engines/engine_resolver.dart';
 import 'view.dart';
 
 /// The View Factory implementation.
-class ViewFactoryImpl implements ViewFactory {
+class ViewFactory implements ViewFactoryContract {
   /// The engine resolver instance.
   final EngineResolver _engines;
 
@@ -19,6 +19,9 @@ class ViewFactoryImpl implements ViewFactory {
   /// Data that should be available to all templates.
   final Map<String, dynamic> _shared = {};
 
+  /// The view composer events.
+  final Map<String, List<Function>> _composers = {};
+
   /// The extension to engine bindings.
   final Map<String, String> _extensions = {
     'html': 'file',
@@ -26,7 +29,7 @@ class ViewFactoryImpl implements ViewFactory {
   };
 
   /// Create a new factory instance.
-  ViewFactoryImpl(EngineResolver engines, ViewFinder finder)
+  ViewFactory(EngineResolver engines, ViewFinder finder)
       : _engines = engines,
         _finder = finder {
     // Register default engines
@@ -39,11 +42,15 @@ class ViewFactoryImpl implements ViewFactory {
     final normalizedView = _normalizeName(view);
     final path = _finder.find(normalizedView);
 
-    return _viewInstance(
+    final viewInstance = _viewInstance(
       normalizedView,
       path,
       data ?? {},
     );
+
+    callComposer(viewInstance);
+
+    return viewInstance;
   }
 
   @override
@@ -67,7 +74,7 @@ class ViewFactoryImpl implements ViewFactory {
   }
 
   @override
-  ViewFactory addNamespace(String namespace, List<String> hints) {
+  ViewFactoryContract addNamespace(String namespace, List<String> hints) {
     _finder.addNamespace(namespace, hints);
     return this;
   }
@@ -80,6 +87,34 @@ class ViewFactoryImpl implements ViewFactory {
 
   @override
   Map<String, dynamic> get shared => Map.unmodifiable(_shared);
+
+  @override
+  void composer(dynamic views, Function callback) {
+    final viewsList = views is List ? views : [views];
+
+    for (final view in viewsList) {
+      final normalizedView = _normalizeName(view.toString());
+      _composers[normalizedView] ??= [];
+      _composers[normalizedView]!.add(callback);
+    }
+  }
+
+  @override
+  void composers(Map<Function, List<String>> composers) {
+    composers.forEach((callback, views) {
+      composer(views, callback);
+    });
+  }
+
+  @override
+  void callComposer(View view) {
+    final composers = _composers[view.name];
+    if (composers != null) {
+      for (final callback in composers) {
+        callback(view);
+      }
+    }
+  }
 
   /// Create a new view instance.
   View _viewInstance(String view, String path, Map<String, dynamic> data) {
