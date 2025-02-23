@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:path/path.dart' as path;
 
+import 'concerns/manages_components.dart';
+import 'concerns/manages_fragments.dart';
 import 'concerns/manages_inheritance.dart';
 import 'concerns/manages_layouts.dart';
 import 'concerns/manages_loops.dart';
@@ -14,7 +16,13 @@ import 'view.dart';
 
 /// The View Factory implementation.
 class ViewFactory
-    with ManagesLayouts, ManagesInheritance, ManagesLoops, ManagesStacks
+    with
+        ManagesLayouts,
+        ManagesInheritance,
+        ManagesLoops,
+        ManagesStacks,
+        ManagesComponents,
+        ManagesFragments
     implements ViewFactoryContract {
   /// The engine resolver instance.
   final EngineResolver _engines;
@@ -132,6 +140,8 @@ class ViewFactory
     flushSections();
     flushLoops();
     flushStacks();
+    flushComponents();
+    flushFragments();
     super.flushState();
   }
 

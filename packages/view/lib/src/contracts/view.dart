@@ -185,6 +185,42 @@ abstract class ViewFactoryContract {
 
   /// Flush all of the stacks.
   void flushStacks();
+
+  /// Start a component rendering process.
+  void startComponent(dynamic view, [Map<String, dynamic> data]);
+
+  /// Start the first component that exists from the given list.
+  void startComponentFirst(List<String> names, [Map<String, dynamic> data]);
+
+  /// Render the current component.
+  Future<String> renderComponent();
+
+  /// Get an item from the component data that exists above the current component.
+  T? getConsumableComponentData<T>(String key, [T? defaultValue]);
+
+  /// Start the slot rendering process.
+  void slot(String name, [String? content, Map<String, dynamic> attributes]);
+
+  /// Save the slot content for rendering.
+  void endSlot();
+
+  /// Flush all of the components.
+  void flushComponents();
+
+  /// Start injecting content into a fragment.
+  void startFragment(String fragment);
+
+  /// Stop injecting content into a fragment.
+  String stopFragment();
+
+  /// Get the contents of a fragment.
+  String? getFragment(String name, [String? defaultContent]);
+
+  /// Get the entire array of rendered fragments.
+  Map<String, String> getFragments();
+
+  /// Flush all of the fragments.
+  void flushFragments();
 }
 
 /// Contract for the View Engine implementation.
