@@ -77,6 +77,15 @@ abstract class ViewFactoryContract {
 
   /// Get all of the shared data for the environment.
   Map<String, dynamic> get shared;
+
+  /// Determine if a view path is cached.
+  bool isCached(String view);
+
+  /// Get the cached path to a view.
+  String? getCachedPath(String view);
+
+  /// Clear the view cache.
+  void flushCache();
 }
 
 /// Contract for the View Engine implementation.

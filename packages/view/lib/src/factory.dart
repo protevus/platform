@@ -93,6 +93,23 @@ class ViewFactory implements ViewFactoryContract {
   Map<String, dynamic> get shared => Map.unmodifiable(_shared);
 
   @override
+  bool isCached(String view) {
+    final normalizedView = _normalizeName(view);
+    return (_finder as FileViewFinder)._viewCache.containsKey(normalizedView);
+  }
+
+  @override
+  String? getCachedPath(String view) {
+    final normalizedView = _normalizeName(view);
+    return (_finder as FileViewFinder)._viewCache[normalizedView];
+  }
+
+  @override
+  void flushCache() {
+    _finder.flush();
+  }
+
+  @override
   void creator(dynamic views, Function callback) {
     final viewsList = views is List ? views : [views];
 
@@ -188,13 +205,22 @@ class FileViewFinder implements ViewFinder {
   /// The list of registered extensions.
   final Set<String> _extensions = {'html', 'dart'};
 
+  /// The cache of located views.
+  final Map<String, String> _viewCache = {};
+
   @override
   String find(String name) {
-    if (name.contains('::')) {
-      return _findNamespacedView(name);
+    // Check if the view is in cache
+    if (_viewCache.containsKey(name)) {
+      return _viewCache[name]!;
     }
 
-    return _findInPaths(name);
+    final path =
+        name.contains('::') ? _findNamespacedView(name) : _findInPaths(name);
+
+    // Cache the result
+    _viewCache[name] = path;
+    return path;
   }
 
   @override
@@ -215,7 +241,7 @@ class FileViewFinder implements ViewFinder {
 
   @override
   void flush() {
-    // No cache implemented yet
+    _viewCache.clear();
   }
 
   /// Find a namespaced view.
