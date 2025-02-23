@@ -167,6 +167,24 @@ abstract class ViewFactoryContract {
 
   /// Flush all loops.
   void flushLoops();
+
+  /// Start injecting content into a push section.
+  void startPush(String section, [String content = '']);
+
+  /// Stop injecting content into a push section.
+  String stopPush();
+
+  /// Start prepending content into a push section.
+  void startPrepend(String section, [String content = '']);
+
+  /// Stop prepending content into a push section.
+  String stopPrepend();
+
+  /// Get the string contents of a push section.
+  String yieldPushContent(String section, [String defaultContent = '']);
+
+  /// Flush all of the stacks.
+  void flushStacks();
 }
 
 /// Contract for the View Engine implementation.
