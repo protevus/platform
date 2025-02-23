@@ -19,6 +19,9 @@ class ViewFactory implements ViewFactoryContract {
   /// Data that should be available to all templates.
   final Map<String, dynamic> _shared = {};
 
+  /// The view creator events.
+  final Map<String, List<Function>> _creators = {};
+
   /// The view composer events.
   final Map<String, List<Function>> _composers = {};
 
@@ -48,6 +51,7 @@ class ViewFactory implements ViewFactoryContract {
       data ?? {},
     );
 
+    callCreator(viewInstance);
     callComposer(viewInstance);
 
     return viewInstance;
@@ -87,6 +91,34 @@ class ViewFactory implements ViewFactoryContract {
 
   @override
   Map<String, dynamic> get shared => Map.unmodifiable(_shared);
+
+  @override
+  void creator(dynamic views, Function callback) {
+    final viewsList = views is List ? views : [views];
+
+    for (final view in viewsList) {
+      final normalizedView = _normalizeName(view.toString());
+      _creators[normalizedView] ??= [];
+      _creators[normalizedView]!.add(callback);
+    }
+  }
+
+  @override
+  void creators(Map<Function, List<String>> creators) {
+    creators.forEach((callback, views) {
+      creator(views, callback);
+    });
+  }
+
+  @override
+  void callCreator(View view) {
+    final creators = _creators[view.name];
+    if (creators != null) {
+      for (final callback in creators) {
+        callback(view);
+      }
+    }
+  }
 
   @override
   void composer(dynamic views, Function callback) {

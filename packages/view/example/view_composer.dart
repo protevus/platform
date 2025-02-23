@@ -7,8 +7,27 @@ void main() async {
   // Add a view location
   factory.addLocation('views');
 
-  // Register a view composer for a specific view
+  // Register a view creator - runs first when view is instantiated
+  factory.creator('welcome', (View view) {
+    // Initialize base data
+    view.withData('meta', {
+      'title': 'Welcome Page',
+      'description': 'Our welcome page with dynamic content'
+    });
+  });
+
+  // Register multiple creators at once
+  factory.creators({
+    (View view) {
+      // Set default template structure
+      view.withData('layout', 'main');
+      view.withData('sections', ['header', 'content', 'footer']);
+    }: ['*'], // Apply to all views
+  });
+
+  // Register a view composer - runs after creators
   factory.composer('welcome', (View view) {
+    // Add dynamic content
     view.withData('greeting', 'Welcome to our website!');
     view.withData('user', {'name': 'John Doe'});
   });
@@ -33,7 +52,12 @@ void main() async {
   final content = await view.render();
   print(content);
 
-  // The view will have access to:
+  // The view will have access to (in order of execution):
+  // From creators:
+  // - meta: {"title": "Welcome Page", "description": "..."}
+  // - layout: "main"
+  // - sections: ["header", "content", "footer"]
+  // From composers:
   // - greeting: "Welcome to our website!"
   // - user: {"name": "John Doe"}
   // - footer: "Copyright 2025"
@@ -45,19 +69,28 @@ void main() async {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Welcome</title>
+    <title>{{ meta.title }}</title>
+    <meta name="description" content="{{ meta.description }}">
 </head>
 <body>
-    <h1>{{ greeting }}</h1>
-    <p>Hello {{ user.name }}!</p>
+    {% if layout == 'main' %}
+    <header>
+        <h1>{{ greeting }}</h1>
+        <p>Hello {{ user.name }}!</p>
     
-    <nav>
-        {% for item in navigation %}
-        <a href="{{ item.url }}">{{ item.title }}</a>
-        {% endfor %}
-    </nav>
+        <nav>
+            {% for item in navigation %}
+            <a href="{{ item.url }}">{{ item.title }}</a>
+            {% endfor %}
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
 
     <footer>{{ footer }}</footer>
+    {% endif %}
 </body>
 </html>
 */

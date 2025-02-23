@@ -45,6 +45,15 @@ abstract class ViewFactoryContract {
   /// Determine if a given view exists.
   bool exists(String view);
 
+  /// Register a view creator.
+  void creator(dynamic views, Function callback);
+
+  /// Register multiple view creators via an array.
+  void creators(Map<Function, List<String>> creators);
+
+  /// Call the creator for a given view.
+  void callCreator(View view);
+
   /// Register a view composer.
   void composer(dynamic views, Function callback);
 
