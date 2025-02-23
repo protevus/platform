@@ -271,24 +271,24 @@ nav:
     - developers/security-report.md
     - Guides:
       - Package Development: developers/guides/package-development.md
-  - Insiders:
-    - insiders/index.md
-    - insiders/why-sponsor.md
-    - insiders/whats-in-it.md
-    - insiders/who-is-sponsoring.md
-    - insiders/sponsoring-tiers.md
-    - insiders/how-to-sponsor.md
-    - Additional Information:
-      - insiders/payment-billing.md
-      - insiders/access-management.md
-      - insiders/runtime-cancellations.md
-      - insiders/privacy.md
-      - insiders/license.md
-      - insiders/support.md
-    - Using Insiders:
-      - insiders/getting-started.md
-      - insiders/changelog.md
-      - insiders/upgrade.md
+  # - Insiders:
+  #   - insiders/index.md
+  #   - insiders/why-sponsor.md
+  #   - insiders/whats-in-it.md
+  #   - insiders/who-is-sponsoring.md
+  #   - insiders/sponsoring-tiers.md
+  #   - insiders/how-to-sponsor.md
+  #   - Additional Information:
+  #     - insiders/payment-billing.md
+  #     - insiders/access-management.md
+  #     - insiders/runtime-cancellations.md
+  #     - insiders/privacy.md
+  #     - insiders/license.md
+  #     - insiders/support.md
+  #   - Using Insiders:
+  #     - insiders/getting-started.md
+  #     - insiders/changelog.md
+  #     - insiders/upgrade.md
   - Releases:
       - releases/index.md
       - releases/release-process.md
@@ -298,7 +298,48 @@ nav:
       - 0.3.0-dev: releases/notes/v0.3.0-dev.md
       - 0.2.0-dev: releases/notes/v0.2.0-dev.md
       - 0.1.0-dev: releases/notes/v0.1.0-dev.md
-  - Foundation:
-    - foundation/index.md
+  - Roadmaps:
+    - notes/index.md
+    - Authentication: notes/auth_dev_notes.md
+    - Broadcasting: notes/broadcasting_dev_notes.md
+    - Builder: notes/builder_dev_notes.md
+    - Bus: notes/bus_dev_notes.md
+    - Cache: notes/cache_dev_notes.md
+    - CLI: notes/cli_dev_notes.md
+    - Collections: notes/collections_dev_notes.md
+    - Concurrency: notes/concurrency_dev_notes.md
+    - Conditionable: notes/conditionable_dev_notes.md
+    - Config: notes/config_dev_notes.md
+    - Console: notes/console_dev_notes.md
+    - Container: notes/container_dev_notes.md
+    - Contracts: notes/contracts_dev_notes.md
+    - Cookie: notes/cookie_dev_notes.md
+    - Database: notes/database_dev_notes.md
+    - DBO: notes/dbo_dev_notes.md
+    - Encryption: notes/encryption_dev_notes.md
+    - Events: notes/events_dev_notes.md
+    - Filesystem: notes/filesystem_dev_notes.md
+    - Foundation: notes/foundation_dev_notes.md
+    - Hashing: notes/hashing_dev_notes.md
+    - HTTP: notes/http_dev_notes.md
+    - Log: notes/log_dev_notes.md
+    - Macroable: notes/macroable_dev_notes.md
+    - Mail: notes/mail_dev_notes.md
+    - Migration: notes/migration_dev_notes.md
+    - Mirrors: notes/mirrors_dev_notes.md
+    - Notifications: notes/notifications_dev_notes.md
+    - Pagination: notes/pagination_dev_notes.md
+    - Pipeline: notes/pipeline_dev_notes.md
+    - Process: notes/process_dev_notes.md
+    - Queue: notes/queue_dev_notes.md
+    - Routing: notes/routing_dev_notes.md
+    - Session: notes/session_dev_notes.md
+    - Storage: notes/storage_dev_notes.md
+    - Support: notes/support_dev_notes.md
+    - Testing: notes/testing_dev_notes.md
+    - Translation: notes/translation_dev_notes.md
+    - Validation: notes/validation_dev_notes.md
+    - View: notes/view_dev_notes.md
+    - Websocket: notes/websocket_dev_notes.md
   - Blog:
     - blog/index.md
