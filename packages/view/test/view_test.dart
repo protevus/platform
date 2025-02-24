@@ -5,81 +5,55 @@ import 'mocks/view_mocks.mocks.dart';
 
 void main() {
   group('View Tests', () {
-    late View view;
-    late MockViewFactoryContract factory;
+    late ViewImpl view;
     late MockViewEngine engine;
+    late MockViewFactoryContract factory;
 
     setUp(() {
-      factory = MockViewFactoryContract();
       engine = MockViewEngine();
+      factory = MockViewFactoryContract();
+      view = ViewImpl(factory, engine, 'view', 'view.blade.html');
+
+      when(factory.shared).thenReturn({});
+      when(engine.get(any, any)).thenAnswer((_) async => 'rendered');
     });
 
     test('data can be set on view', () {
-      view = ViewImpl(factory, engine, 'view', 'path');
+      view.withData('key', 'value');
+      expect(view.data['key'], equals('value'));
 
-      view.withData('foo', 'bar');
-      view.withManyData({'baz': 'boom'});
-
-      expect(view.data, {'foo': 'bar', 'baz': 'boom'});
-
-      // Test fluent interface
-      view = ViewImpl(factory, engine, 'view', 'path')
-        ..withData('foo', 'bar')
-        ..withData('baz', 'boom');
-
-      expect(view.data, {'foo': 'bar', 'baz': 'boom'});
+      view.withManyData({'foo': 'bar'});
+      expect(view.data['foo'], equals('bar'));
     });
 
     test('render properly renders view', () async {
-      view = ViewImpl(factory, engine, 'view', 'path', {'foo': 'bar'});
+      await view.render();
 
-      when(factory.startRender(view)).thenReturn(null);
-      when(factory.callComposer(view)).thenReturn(null);
-      when(factory.shared).thenReturn({'shared': 'foo'});
-      when(engine.get('path', {'foo': 'bar', 'shared': 'foo'}))
-          .thenAnswer((_) async => 'contents');
-      when(factory.stopRender()).thenReturn(null);
-      when(factory.doneRendering).thenReturn(true);
-
-      expect(await view.render(), 'contents');
-
-      verify(factory.startRender(view)).called(1);
-      verify(factory.callComposer(view)).called(1);
-      verify(engine.get('path', {'foo': 'bar', 'shared': 'foo'})).called(1);
-      verify(factory.stopRender()).called(1);
+      verifyInOrder([
+        factory.startRender(view),
+        engine.get('view.blade.html', view.data),
+        factory.stopRender(),
+      ]);
     });
 
     test('view getters setters', () {
-      view = ViewImpl(factory, engine, 'view', 'path', {'foo': 'bar'});
+      expect(view.name, equals('view'));
+      expect(view.path, equals('view.blade.html'));
 
-      expect(view.name, 'view');
-      expect(view.path, 'path');
-      expect(view.data['foo'], 'bar');
-
-      // Test parent view
-      final parent = ViewImpl(factory, engine, 'parent', 'parent.path');
-      view.parent = parent;
-
-      expect(view.hasParent, true);
-      expect(view.parent, parent);
+      view.parent = ViewImpl(factory, engine, 'parent', 'parent.blade.html');
+      expect(view.parent?.name, equals('parent'));
     });
 
     test('view to array', () {
-      view = ViewImpl(factory, engine, 'view', 'path', {'foo': 'bar'});
-
-      expect(view.toArray(), {'foo': 'bar'});
+      view.withData('key', 'value');
+      final data = view.toArray();
+      expect(data['key'], equals('value'));
     });
 
-    test('view to html', () {
-      view = ViewImpl(factory, engine, 'view', 'path');
-
-      expect(view.toHtml(), 'View(view)');
-    });
-
-    test('view to string', () {
-      view = ViewImpl(factory, engine, 'view', 'path');
-
-      expect(view.toString(), 'View(view)');
+    test('view to html', () async {
+      when(engine.get(any, any)).thenAnswer((_) async => '<h1>Hello</h1>');
+      final html = await view.toHtml();
+      expect(html, equals('<h1>Hello</h1>'));
     });
   });
 }

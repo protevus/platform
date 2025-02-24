@@ -79,11 +79,13 @@ void main() {
     });
 
     test('shared data is merged with view data', () async {
+      // Setup shared data
       factory.share('shared', 'data');
+      when(factory.shared).thenReturn({'shared': 'data'});
 
       final view = await factory.make('view', {'foo': 'bar'});
-      expect(view.data['shared'], equals('data'));
-      expect(view.data['foo'], equals('bar'));
+      expect(view.toArray()['shared'], equals('data'));
+      expect(view.toArray()['foo'], equals('bar'));
     });
 
     test('composers are properly registered', () async {
@@ -118,17 +120,19 @@ void main() {
       factory.startSection('content', 'parent content');
       final content = factory.yieldContent('content', 'child content');
       expect(content, equals('child content'));
+      expect(factory.getSection('content'), equals('parent content'));
     });
 
     test('stacks are properly managed', () {
-      factory.startPush('scripts');
+      factory.startPush('scripts', '<script>first</script>');
       factory.stopPush();
 
-      factory.startPush('scripts');
+      factory.startPush('scripts', '<script>second</script>');
       factory.stopPush();
 
       final content = factory.yieldPushContent('scripts');
-      expect(content.isNotEmpty, isTrue);
+      expect(content, contains('first'));
+      expect(content, contains('second'));
     });
 
     test('rendering state is properly managed', () {

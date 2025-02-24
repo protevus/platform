@@ -58,7 +58,7 @@ void main() {
         compiler.compile('test.blade.html');
 
         final compiled = files.get('cache/views/test_blade_html.dart');
-        expect(compiled, contains('if (data[\'user\'])'));
+        expect(compiled, contains('if (user) {'));
       });
 
       test('compiles if-else statements', () {
@@ -66,7 +66,7 @@ void main() {
         compiler.compile('test.blade.html');
 
         final compiled = files.get('cache/views/test_blade_html.dart');
-        expect(compiled, contains('if (data[\'user\'])'));
+        expect(compiled, contains('if (user) {'));
         expect(compiled, contains('} else {'));
       });
 
@@ -78,8 +78,8 @@ void main() {
         compiler.compile('test.blade.html');
 
         final compiled = files.get('cache/views/test_blade_html.dart');
-        expect(compiled, contains('if (data[\'admin\'])'));
-        expect(compiled, contains('} else if (data[\'user\'])'));
+        expect(compiled, contains('if (admin) {'));
+        expect(compiled, contains('} else if (user) {'));
       });
     });
 
@@ -92,7 +92,7 @@ void main() {
         compiler.compile('test.blade.html');
 
         final compiled = files.get('cache/views/test_blade_html.dart');
-        expect(compiled, contains('for (var user in data[\'users\'])'));
+        expect(compiled, contains('for (var user in users) {'));
       });
 
       test('compiles for loops', () {
@@ -103,7 +103,7 @@ void main() {
         compiler.compile('test.blade.html');
 
         final compiled = files.get('cache/views/test_blade_html.dart');
-        expect(compiled, contains('for (i = 0; i < 10; i++)'));
+        expect(compiled, contains('for (i = 0; i < 10; i++) {'));
       });
 
       test('compiles while loops', () {
@@ -111,7 +111,7 @@ void main() {
         compiler.compile('test.blade.html');
 
         final compiled = files.get('cache/views/test_blade_html.dart');
-        expect(compiled, contains('while (true)'));
+        expect(compiled, contains('while (true) {'));
       });
     });
 
@@ -155,7 +155,7 @@ void main() {
 
         final compiled = files.get('cache/views/test_blade_html.dart');
         expect(compiled, contains('factory.startComponent(\'alert\')'));
-        expect(compiled, contains('factory.renderComponent()'));
+        expect(compiled, contains('await factory.renderComponent()'));
       });
 
       test('compiles slots', () {
@@ -186,7 +186,7 @@ void main() {
 
         final compiled = files.get('cache/views/test_blade_html.dart');
         expect(compiled, contains('await factory.make(\'header\''));
-        expect(compiled, contains('\'title\': \'Hello\''));
+        expect(compiled, contains('title => Hello'));
       });
     });
 

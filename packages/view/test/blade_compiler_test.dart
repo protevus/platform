@@ -98,7 +98,7 @@ void main() {
       compiler.compile('test.blade.html');
 
       final compiled = files.get('cache/views/test_blade_html.dart');
-      expect(compiled, contains('if (data[\'user\'])'));
+      expect(compiled, contains('if (user) {'));
     });
 
     test('compile creates cache directory if needed', () {
@@ -114,7 +114,7 @@ void main() {
         compiler.compile('test.blade.html');
 
         final compiled = files.get('cache/views/test_blade_html.dart');
-        expect(compiled, contains('if (data[\'user\'])'));
+        expect(compiled, contains('if (user) {'));
       });
 
       test('compiles foreach loops', () {
@@ -125,7 +125,7 @@ void main() {
         compiler.compile('test.blade.html');
 
         final compiled = files.get('cache/views/test_blade_html.dart');
-        expect(compiled, contains('for (var user in data[\'users\'])'));
+        expect(compiled, contains('for (var user in users) {'));
       });
 
       test('compiles sections', () {
@@ -156,6 +156,18 @@ void main() {
         expect(compiled, contains('await factory.make(\'header\')'));
       });
 
+      test('compiles includes with data', () {
+        files.put(
+          'test.blade.html',
+          '@include(\'header\', [\'title\' => \'Hello\'])',
+        );
+        compiler.compile('test.blade.html');
+
+        final compiled = files.get('cache/views/test_blade_html.dart');
+        expect(compiled, contains('await factory.make(\'header\''));
+        expect(compiled, contains('title => Hello'));
+      });
+
       test('compiles components', () {
         files.put(
           'test.blade.html',
@@ -165,7 +177,7 @@ void main() {
 
         final compiled = files.get('cache/views/test_blade_html.dart');
         expect(compiled, contains('factory.startComponent(\'alert\')'));
-        expect(compiled, contains('factory.renderComponent()'));
+        expect(compiled, contains('await factory.renderComponent()'));
       });
     });
   });
