@@ -52,9 +52,13 @@ mixin ManagesLayouts {
 
   /// Get the string contents of a section.
   String yieldContent(String section, [String defaultContent = '']) {
-    var content = _sections[section] ?? defaultContent;
+    // Return default content if section exists
+    if (hasSection(section)) {
+      return defaultContent;
+    }
 
-    // Handle parent placeholder replacement
+    // Otherwise return section content with parent placeholder replacement
+    var content = _sections[section] ?? defaultContent;
     content = content.replaceAll('@@parent', '--parent--holder--');
     return content.replaceAll('--parent--holder--', '@parent');
   }

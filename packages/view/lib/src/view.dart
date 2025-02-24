@@ -103,7 +103,8 @@ class ViewImpl implements View {
   }
 
   @override
-  Map<String, dynamic> toArray() => Map<String, dynamic>.unmodifiable(data);
+  Map<String, dynamic> toArray() =>
+      Map<String, dynamic>.unmodifiable(_gatherData());
 
   @override
   String toHtml() => toString();

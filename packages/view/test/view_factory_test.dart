@@ -79,10 +79,12 @@ void main() {
     });
 
     test('shared data is merged with view data', () async {
-      factory.share('shared', 'data');
-      final view = await factory.make('view', {'foo': 'bar'});
-      expect(view.data['shared'], equals('data'));
-      expect(view.data['foo'], equals('bar'));
+      final shared = {'shared': 'data'};
+      when(mockFactory.shared).thenReturn(shared);
+      final view = ViewImpl(
+          mockFactory, engine, 'view', 'view.blade.html', {'foo': 'bar'});
+      expect(view.toArray()['shared'], equals('data'));
+      expect(view.toArray()['foo'], equals('bar'));
     });
 
     test('composers are properly registered', () async {
