@@ -1,94 +1,75 @@
-# Illuminate View
+# Laravel-like View System for Dart
 
-A flexible and powerful templating system for Dart, inspired by Laravel's View system.
+This package provides a Laravel-inspired view system with Blade-like templates. The example demonstrates all major features:
 
 ## Features
 
-- Simple and intuitive template syntax using `{{variable}}` notation
-- Support for multiple template engines
-- Shared data across views
-- Namespaced views
-- File-based template loading
-- Extensible engine system
+1. **Template Inheritance**
+   - `@extends` - Extend layout templates
+   - `@section/@yield` - Define and render content blocks
+   - `@parent` - Include parent section content
 
-## Installation
+2. **Components**
+   - `@component` - Include reusable components
+   - `@slot` - Pass content to components
+   - Component classes support
 
-```yaml
-dependencies:
-  illuminate_view: ^0.0.1
+3. **Partials**
+   - `@include` - Include sub-templates
+   - `@includeIf` - Conditional includes
+   - `@includeWhen` - Conditional includes with expression
+
+4. **Asset Management**
+   - `@push/@stack` - Group and render assets
+   - Multiple stack support
+   - Prepend/append capabilities
+
+5. **Control Structures**
+   - `@if/@else` - Conditionals
+   - `@foreach` - Loops
+   - `@for` - Counting loops
+
+6. **View Composers**
+   - Attach data to views
+   - Share data across views
+   - Event-based view modification
+
+## Directory Structure
+
+```
+views/
+├── layouts/           # Base layouts
+│   └── app.blade.html
+├── components/        # Reusable components
+│   └── card.blade.html
+├── partials/         # Partial templates
+│   └── nav.blade.html
+└── pages/            # Page templates
+    └── home.blade.html
 ```
 
 ## Usage
 
-### Basic Example
-
 ```dart
-import 'package:illuminate_view/illuminate_view.dart';
+// Setup view system
+final factory = ViewFactory(engines, finder);
+final compiler = BladeCompiler(files, cachePath, factory);
+final bladeEngine = BladeEngine(files, compiler, factory);
 
-void main() async {
-  // Create the view factory
-  final viewFactory = createViewFactory();
-  
-  // Add template directories
-  viewFactory.addLocation('views');
-  
-  // Create and render a view with data
-  final view = await viewFactory.make('welcome', {
-    'title': 'Welcome Page',
-    'content': 'Hello from Illuminate View!',
-  });
-  
-  // Render the view
-  print(await view.render());
-}
+// Register Blade engine
+engines.register('blade', () => bladeEngine);
+factory.addExtension('blade.html', 'blade');
+
+// Add view composers
+factory.composer('pages.home', (view) {
+  view.withData('menuItems', getMenuItems());
+});
+
+// Render views
+return view('pages.home', {
+  'title': 'Welcome',
+  'content': 'Page content'
+});
 ```
 
-### Template Example
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{{title}}</title>
-</head>
-<body>
-    <div class="content">
-        {{content}}
-    </div>
-</body>
-</html>
-```
-
-### Shared Data
-
-Share data across all views:
-
-```dart
-// Make data available to all views
-viewFactory.share('siteName', 'My Website');
-viewFactory.share('year', '2025');
-
-// Data will be available in all rendered views
-final view1 = await viewFactory.make('page1');
-final view2 = await viewFactory.make('page2');
-```
-
-### View Namespaces
-
-Organize views in namespaces:
-
-```dart
-// Register a namespace
-viewFactory.addNamespace('admin', ['admin/views']);
-
-// Use namespaced views
-final view = await viewFactory.make('admin::dashboard');
-```
-
-## Features and bugs
-
-Please file feature requests and bugs at the [issue tracker](https://github.com/protevus/platform/issues).
-
-## License
-
-This package is open-sourced software licensed under the [MIT license](LICENSE).
+See `complete_example.dart` for a full working example of all features.

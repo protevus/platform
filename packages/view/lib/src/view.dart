@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'contracts/base.dart';
 import 'contracts/view.dart';
-import 'engines/engine_resolver.dart';
 
 /// The main View implementation.
 class ViewImpl implements View {
