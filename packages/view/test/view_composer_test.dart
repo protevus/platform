@@ -111,7 +111,7 @@ void main() {
 
     test('composer can be registered once', () async {
       var callCount = 0;
-      factory.composer('profile', (String event, List<dynamic> args) {
+      factory.composerOnce('profile', (String event, List<dynamic> args) {
         callCount++;
       });
 

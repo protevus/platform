@@ -10,9 +10,6 @@ mixin ManagesEvents {
   /// The IoC container instance.
   Container get container;
 
-  /// The array of composers that have been called.
-  final Set<String> _calledComposers = {};
-
   /// Register a view creator event.
   List<Function> creator(dynamic views, dynamic callback) {
     final creators = <Function>[];
@@ -37,22 +34,31 @@ mixin ManagesEvents {
   }
 
   /// Register a view composer event.
-  List<Function> composer(dynamic views, dynamic callback,
-      {bool once = false}) {
+  List<Function> composer(dynamic views, dynamic callback) {
     final composers = <Function>[];
 
     final viewsList = views is List ? views : [views];
     for (final view in viewsList) {
-      composers.add(_addViewEvent(view, (String event, List<dynamic> args) {
-        if (once) {
-          final key = '${event}_${callback.hashCode}';
-          if (_calledComposers.contains(key)) {
-            return;
-          }
-          _calledComposers.add(key);
-        }
+      composers.add(_addViewEvent(view, callback));
+    }
+
+    return composers;
+  }
+
+  /// Register a one-time view composer event.
+  List<Function> composerOnce(dynamic views, dynamic callback) {
+    final composers = <Function>[];
+
+    final viewsList = views is List ? views : [views];
+    for (final view in viewsList) {
+      final eventName = 'composing: ${normalizeName(view)}';
+      wrappedCallback(String event, List<dynamic> args) {
         callback(event, args);
-      }));
+        events.forget(eventName);
+      }
+
+      events.listen(eventName, wrappedCallback);
+      composers.add(wrappedCallback);
     }
 
     return composers;
