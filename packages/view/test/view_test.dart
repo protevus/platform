@@ -51,8 +51,9 @@ void main() {
     });
 
     test('view to html', () async {
-      when(engine.get(any, any)).thenAnswer((_) async => '<h1>Hello</h1>');
-      final html = await view.toHtml();
+      when(engine.get('view.blade.html', any))
+          .thenAnswer((_) async => '<h1>Hello</h1>');
+      final html = await view.render();
       expect(html, equals('<h1>Hello</h1>'));
     });
   });
