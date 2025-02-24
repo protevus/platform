@@ -16,9 +16,8 @@ mixin ManagesStacks {
 
   /// Start injecting content into a push section.
   void startPush(String section, [String content = '']) {
-    if (content.isEmpty) {
-      _pushStack.add(section);
-    } else {
+    _pushStack.add(section);
+    if (content.isNotEmpty) {
       extendPush(section, content);
     }
   }
