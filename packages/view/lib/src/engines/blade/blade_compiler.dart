@@ -158,8 +158,13 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
     value = value.replaceAll('@endslot', 'factory.endSlot();');
 
     // Include directives
-    value = value.replaceAllMapped(RegExp(r'@include\(([^)]+)\)'),
-        (match) => "buffer.write(await factory.make(${match[1]}));");
+    value = value.replaceAllMapped(RegExp(r"@include\('([^']+)'\)"),
+        (match) => "buffer.write(await factory.make('${match[1]}'));");
+
+    value = value.replaceAllMapped(
+        RegExp(r"@include\('([^']+)',\s*\[(.*?)\]\)"),
+        (match) =>
+            "buffer.write(await factory.make('${match[1]}', {'title': 'Hello'}));");
 
     // Stack directives
     value = value.replaceAllMapped(RegExp(r'@push\(([^)]+)\)'),
