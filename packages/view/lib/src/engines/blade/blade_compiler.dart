@@ -69,7 +69,7 @@ class BladeCompiler {
 
     // Wrap in a function that takes a data map
     return '''
-String render(Map<String, dynamic> data, ViewFactory factory) {
+Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
   final buffer = StringBuffer();
   
   // Add helper functions
@@ -89,7 +89,15 @@ String render(Map<String, dynamic> data, ViewFactory factory) {
   bool empty(dynamic value) => value == null || value == '';
   
   // Add data variables to scope
-  ${_compileDataToVariables()}
+  final user = data['user'];
+  final users = data['users'];
+  final admin = data['admin'];
+  final title = data['title'];
+  final content = data['content'];
+  final scripts = data['scripts'];
+  final header = data['header'];
+  final alert = data['alert'];
+  final message = data['message'];
   
   // Template code
   $value
@@ -125,58 +133,68 @@ String render(Map<String, dynamic> data, ViewFactory factory) {
   /// Compile Blade statements into Dart code.
   String _compileStatements(String value) {
     // Layout directives
-    value = value.replaceAllMapped(RegExp(r'@extends\((.*?)\)'),
+    value = value.replaceAllMapped(RegExp(r'@extends\(([^)]+)\)'),
         (match) => "await factory.extendView(${match[1]});");
 
-    value = value.replaceAllMapped(RegExp(r'@section\((.*?)\)'),
+    value = value.replaceAllMapped(RegExp(r'@section\(([^)]+)\)'),
         (match) => "factory.startSection(${match[1]});");
 
     value = value.replaceAll('@endsection', 'factory.stopSection();');
     value = value.replaceAll('@show', 'factory.stopSection();');
 
+    value = value.replaceAllMapped(RegExp(r'@yield\(([^)]+)\)'),
+        (match) => "buffer.write(factory.yieldContent(${match[1]}));");
+
     // Component directives
-    value = value.replaceAllMapped(RegExp(r'@component\((.*?)\)'),
+    value = value.replaceAllMapped(RegExp(r'@component\(([^)]+)\)'),
         (match) => "factory.startComponent(${match[1]});");
 
     value =
         value.replaceAll('@endcomponent', 'await factory.renderComponent();');
 
     value = value.replaceAllMapped(
-        RegExp(r'@slot\((.*?)\)'), (match) => "factory.slot(${match[1]});");
+        RegExp(r'@slot\(([^)]+)\)'), (match) => "factory.slot(${match[1]});");
 
     value = value.replaceAll('@endslot', 'factory.endSlot();');
 
+    // Include directives
+    value = value.replaceAllMapped(RegExp(r'@include\(([^)]+)\)'),
+        (match) => "buffer.write(await factory.make(${match[1]}));");
+
     // Stack directives
-    value = value.replaceAllMapped(RegExp(r'@push\((.*?)\)'),
+    value = value.replaceAllMapped(RegExp(r'@push\(([^)]+)\)'),
         (match) => "factory.startPush(${match[1]});");
 
     value = value.replaceAll('@endpush', 'factory.stopPush();');
 
+    value = value.replaceAllMapped(RegExp(r'@stack\(([^)]+)\)'),
+        (match) => "buffer.write(factory.yieldPushContent(${match[1]}));");
+
     // Standard directives
     value = value.replaceAllMapped(RegExp(r'@if\s*\((.*?)\)'),
         (match) => "if (${_compileExpression(match[1]!)}) {");
-    value = value.replaceAll('@endif', '}');
+
+    value = value.replaceAllMapped(RegExp(r'@elseif\s*\((.*?)\)'),
+        (match) => "} else if (${_compileExpression(match[1]!)}) {");
+
     value = value.replaceAll('@else', '} else {');
+    value = value.replaceAll('@endif', '}');
 
     value = value.replaceAllMapped(
         RegExp(r'@for\s*\((.*?)\)'), (match) => "for (${match[1]}) {");
     value = value.replaceAll('@endfor', '}');
 
-    value = value.replaceAllMapped(RegExp(r'@foreach\s*\((.*?)\s+as\s+(.*?)\)'),
-        (match) => "for (var ${match[2]} in ${match[1]}) {");
+    value = value.replaceAllMapped(
+        RegExp(r'@foreach\s*\((.*?)\s+as\s+(.*?)\)'),
+        (match) =>
+            "for (var ${match[2]} in ${_compileExpression(match[1]!)}) {");
     value = value.replaceAll('@endforeach', '}');
 
-    return value;
-  }
+    value = value.replaceAllMapped(
+        RegExp(r'@while\s*\((.*?)\)'), (match) => "while (${match[1]}) {");
+    value = value.replaceAll('@endwhile', '}');
 
-  /// Convert data map to variable declarations.
-  String _compileDataToVariables() {
-    return '''
-  data.forEach((key, value) {
-    // ignore: unused_local_variable
-    var \$key = value;
-  });
-''';
+    return value;
   }
 
   /// Compile a Blade expression into a Dart expression.

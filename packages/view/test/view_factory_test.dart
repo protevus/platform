@@ -79,15 +79,10 @@ void main() {
     });
 
     test('shared data is merged with view data', () async {
-      // Setup shared data
-      final shared = {'shared': 'data'};
-      final mockFactory = MockViewFactoryContract();
-      when(mockFactory.shared).thenReturn(shared);
-
-      final view = ViewImpl(
-          mockFactory, engine, 'view', 'view.blade.html', {'foo': 'bar'});
-      expect(view.toArray()['shared'], equals('data'));
-      expect(view.toArray()['foo'], equals('bar'));
+      factory.share('shared', 'data');
+      final view = await factory.make('view', {'foo': 'bar'});
+      expect(view.data['shared'], equals('data'));
+      expect(view.data['foo'], equals('bar'));
     });
 
     test('composers are properly registered', () async {
@@ -119,18 +114,22 @@ void main() {
     });
 
     test('parent placeholder is replaced', () {
-      factory.startSection('content');
-      factory.stopSection();
+      factory.startSection('content', 'parent content');
       final content = factory.yieldContent('content', 'child content');
       expect(content, equals('child content'));
+      expect(factory.getSection('content'), equals('parent content'));
     });
 
     test('stacks are properly managed', () {
-      factory.startPush('scripts');
+      factory.startPush('scripts', '<script>first</script>');
+      factory.stopPush();
+
+      factory.startPush('scripts', '<script>second</script>');
       factory.stopPush();
 
       final content = factory.yieldPushContent('scripts');
-      expect(content.isEmpty, isFalse);
+      expect(content, contains('first'));
+      expect(content, contains('second'));
     });
 
     test('rendering state is properly managed', () {

@@ -174,7 +174,7 @@ void main() {
         compiler.compile('test.blade.html');
 
         final compiled = files.get('cache/views/test_blade_html.dart');
-        expect(compiled, contains('@include(\'header\')'));
+        expect(compiled, contains('await factory.make(\'header\')'));
       });
 
       test('compiles includes with data', () {
@@ -186,7 +186,7 @@ void main() {
 
         final compiled = files.get('cache/views/test_blade_html.dart');
         expect(compiled,
-            contains('@include(\'header\', [\'title\' => \'Hello\'])'));
+            contains('await factory.make(\'header\', {\'title\': \'Hello\'})'));
       });
     });
 
