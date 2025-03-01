@@ -31,25 +31,37 @@ class BladeCompiler {
   /// Determine if the view at the given path is expired.
   bool isExpired(String path) {
     final compiled = getCompiledPath(path);
+    print('Checking if expired: $path');
+    print('Compiled path: $compiled');
+    print('Source exists: ${_files.exists(path)}');
+    print('Compiled exists: ${_files.exists(compiled)}');
 
     // If the compiled file doesn't exist, we will return true
     if (!_files.exists(compiled)) {
+      print('Compiled file does not exist');
       return true;
     }
 
     // Get the last modified time of the views
     final lastModified = _files.lastModified(path);
     final lastCompiled = _files.lastModified(compiled);
+    print('Last modified: $lastModified');
+    print('Last compiled: $lastCompiled');
 
-    return lastModified > lastCompiled;
+    final isExpired = lastModified > lastCompiled;
+    print('Is expired: $isExpired');
+    return isExpired;
   }
 
   /// Compile the view at the given path.
   void compile(String path) {
+    print('Compiling view: $path');
     final contents = _files.get(path) ?? '';
+    print('Source contents:\n$contents');
 
     // Compile the Blade syntax to Dart code
     var compiled = _compileString(contents);
+    print('Compiled code:\n$compiled');
 
     // Add the file path to the compiled output
     compiled = _appendFilePath(compiled, path);
@@ -58,7 +70,9 @@ class BladeCompiler {
     _files.makeDirectory(_cachePath);
 
     // Save the compiled view
-    _files.put(getCompiledPath(path), compiled);
+    final compiledPath = getCompiledPath(path);
+    print('Saving to: $compiledPath');
+    _files.put(compiledPath, compiled);
   }
 
   /// Compile Blade statements into valid Dart code.
