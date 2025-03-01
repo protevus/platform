@@ -190,12 +190,16 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
   /// Compile Blade echo statements into Dart string interpolation.
   String _compileEchos(String value) {
     // Compile unescaped echoes
-    value = value.replaceAllMapped(RegExp(r'{{{(.+?)}}}'),
-        (match) => "buffer.write(${_compileExpression(match[1]!)});");
+    value = value.replaceAllMapped(
+        RegExp(r'{{{(.+?)}}}'),
+        (match) =>
+            "buffer.write(e(${_compileExpression(match[1]!)}.toString()));");
 
     // Compile unescaped echoes (alternate syntax)
-    value = value.replaceAllMapped(RegExp(r'{!!(.+?)!!}'),
-        (match) => "buffer.write(${_compileExpression(match[1]!)});");
+    value = value.replaceAllMapped(
+        RegExp(r'{!!(.+?)!!}'),
+        (match) =>
+            "buffer.write(e(${_compileExpression(match[1]!)}.toString()));");
 
     // Compile regular echoes
     value = value.replaceAllMapped(
@@ -255,7 +259,7 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
     value = value.replaceAllMapped(
         RegExp(r'@if\s*\((.*?)\)\s*(.*?)\s*@endif'),
         (match) =>
-            "if (${_compileExpression(match[1]!)}) { buffer.write('${match[2]}'); }");
+            "if (${_compileExpression(match[1]!)}) { buffer.write('${match[2]?.trim() ?? ''}'); }");
 
     value = value.replaceAllMapped(RegExp(r'@elseif\s*\((.*?)\)'),
         (match) => "} else if (${_compileExpression(match[1]!)}) {");
@@ -269,7 +273,7 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
     value = value.replaceAllMapped(
         RegExp(r'@foreach\s*\((.*?)\s+as\s+(.*?)\)'),
         (match) =>
-            "for (var ${match[2]} in ${_compileExpression(match[1]!)}) { buffer.write(${match[2]}.toString() + ' '); }");
+            "for (var ${match[2]} in ${_compileExpression(match[1]!)}) { buffer.write(e(${match[2]}.toString())); buffer.write(' '); }");
     value = value.replaceAll('@endforeach', '');
 
     value = value.replaceAllMapped(
