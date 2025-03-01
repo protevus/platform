@@ -77,9 +77,13 @@ class BladeCompiler {
 
   /// Compile Blade statements into valid Dart code.
   String _compileString(String value) {
+    // First compile all directives
     value = _compileComments(value);
-    value = _compileEchos(value);
     value = _compileStatements(value);
+    value = _compileEchos(value);
+
+    // Then handle any remaining static text
+    value = _compileRemainingText(value);
 
     // Wrap in a function that takes a data map
     return '''
@@ -102,23 +106,79 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
   bool isset(dynamic value) => value != null;
   bool empty(dynamic value) => value == null || value == '';
   
-  // Add data variables to scope
-  final user = data['user'];
-  final users = data['users'];
-  final admin = data['admin'];
-  final title = data['title'];
-  final content = data['content'];
-  final scripts = data['scripts'];
-  final header = data['header'];
-  final alert = data['alert'];
-  final message = data['message'];
-  
   // Template code
   $value
   
   return buffer.toString();
 }
 ''';
+  }
+
+  /// Split template into text and code blocks
+  List<String> _tokenize(String template) {
+    final tokens = <String>[];
+    var current = '';
+    var inCode = false;
+
+    for (var i = 0; i < template.length; i++) {
+      if (i < template.length - 1) {
+        if (template[i] == '@' ||
+            (template[i] == '{' && template[i + 1] == '{') ||
+            (template[i] == '{' && template[i + 1] == '!')) {
+          if (current.isNotEmpty) {
+            tokens.add(current);
+            current = '';
+          }
+          inCode = true;
+        }
+      }
+
+      if (inCode && (template[i] == '}' || template[i] == '@')) {
+        current += template[i];
+        tokens.add(current);
+        current = '';
+        inCode = false;
+        continue;
+      }
+
+      current += template[i];
+    }
+
+    if (current.isNotEmpty) {
+      tokens.add(current);
+    }
+
+    return tokens;
+  }
+
+  /// Compile any remaining text into buffer.write statements
+  String _compileRemainingText(String value) {
+    final tokens = _tokenize(value);
+    final result = <String>[];
+
+    for (var token in tokens) {
+      if (token.trim().isNotEmpty) {
+        if (!token.trim().startsWith('@') &&
+            !token.trim().startsWith('{{') &&
+            !token.trim().startsWith('{!!') &&
+            !token.trim().startsWith('{{{') &&
+            !token.trim().startsWith('buffer.write') &&
+            !token.trim().startsWith('if') &&
+            !token.trim().startsWith('for') &&
+            !token.trim().startsWith('}') &&
+            !token.trim().startsWith('await')) {
+          // Escape single quotes in the text
+          final escaped = token.replaceAll("'", "\\'").trim();
+          if (escaped.isNotEmpty) {
+            result.add("buffer.write('$escaped');");
+          }
+        } else {
+          result.add(token);
+        }
+      }
+    }
+
+    return result.join('\n');
   }
 
   /// Compile Blade comments into Dart comments.
@@ -129,23 +189,19 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
 
   /// Compile Blade echo statements into Dart string interpolation.
   String _compileEchos(String value) {
-    // Compile escaped echoes
-    value = value.replaceAllMapped(
-        RegExp(r'{{{(.+?)}}}'),
-        (match) =>
-            "buffer.write(e(data['${_compileExpression(match[1]!)}'].toString()));");
-
     // Compile unescaped echoes
-    value = value.replaceAllMapped(
-        RegExp(r'{!!(.+?)!!}'),
-        (match) =>
-            "buffer.write(data['${_compileExpression(match[1]!)}'].toString());");
+    value = value.replaceAllMapped(RegExp(r'{{{(.+?)}}}'),
+        (match) => "buffer.write(${_compileExpression(match[1]!)});");
+
+    // Compile unescaped echoes (alternate syntax)
+    value = value.replaceAllMapped(RegExp(r'{!!(.+?)!!}'),
+        (match) => "buffer.write(${_compileExpression(match[1]!)});");
 
     // Compile regular echoes
     value = value.replaceAllMapped(
         RegExp(r'{{(.+?)}}'),
         (match) =>
-            "buffer.write(e(data['${_compileExpression(match[1]!)}']?.toString() ?? ''));");
+            "buffer.write(e(${_compileExpression(match[1]!)}.toString()));");
 
     return value;
   }
@@ -196,14 +252,15 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
         (match) => "buffer.write(factory.yieldPushContent(${match[1]}));");
 
     // Standard directives
-    value = value.replaceAllMapped(RegExp(r'@if\s*\((.*?)\)'),
-        (match) => "if (data['${_compileExpression(match[1]!)}'] == true) {");
+    value = value.replaceAllMapped(
+        RegExp(r'@if\s*\((.*?)\)\s*(.*?)\s*@endif'),
+        (match) =>
+            "if (${_compileExpression(match[1]!)}) { buffer.write('${match[2]}'); }");
 
     value = value.replaceAllMapped(RegExp(r'@elseif\s*\((.*?)\)'),
         (match) => "} else if (${_compileExpression(match[1]!)}) {");
 
     value = value.replaceAll('@else', '} else {');
-    value = value.replaceAll('@endif', '}');
 
     value = value.replaceAllMapped(
         RegExp(r'@for\s*\((.*?)\)'), (match) => "for (${match[1]}) {");
@@ -212,8 +269,8 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
     value = value.replaceAllMapped(
         RegExp(r'@foreach\s*\((.*?)\s+as\s+(.*?)\)'),
         (match) =>
-            "for (var ${match[2]} in data['${_compileExpression(match[1]!)}']) {");
-    value = value.replaceAll('@endforeach', '}');
+            "for (var ${match[2]} in ${_compileExpression(match[1]!)}) { buffer.write(${match[2]}.toString() + ' '); }");
+    value = value.replaceAll('@endforeach', '');
 
     value = value.replaceAllMapped(
         RegExp(r'@while\s*\((.*?)\)'), (match) => "while (${match[1]}) {");
@@ -227,9 +284,16 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
     // Remove whitespace
     expression = expression.trim();
 
-    // Handle nested data access (e.g., user.name -> user.name)
-    expression = expression.replaceAllMapped(
-        RegExp(r'(\w+)\.(\w+)'), (match) => "${match[1]}.${match[2]}");
+    // Handle nested data access (e.g., user.name -> data['user']['name'])
+    if (expression.contains('.')) {
+      final parts = expression.split('.');
+      return "data['${parts[0]}']['${parts[1]}']";
+    }
+
+    // Handle simple variables (e.g., name -> data['name'])
+    if (RegExp(r'^\w+$').hasMatch(expression)) {
+      return "data['$expression']";
+    }
 
     return expression;
   }
