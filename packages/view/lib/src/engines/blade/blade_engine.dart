@@ -113,6 +113,10 @@ class BladeEngine implements ViewEngine {
 
           // Parse the compiled code to extract the commands
           final lines = contents.split('\n');
+          var inIfBlock = false;
+          var inForBlock = false;
+          var forLoopBuffer = StringBuffer();
+
           for (final line in lines) {
             if (line.contains('buffer.write')) {
               // Extract the argument to buffer.write
@@ -127,6 +131,21 @@ class BladeEngine implements ViewEngine {
                   final parts = arg.split('??').map((p) => p.trim()).toList();
                   final key = parts[0].split("['")[1].replaceAll("']", '');
                   buffer.write(data[key] ?? '');
+                } else if (arg.contains('e(')) {
+                  // Helper function call
+                  final valueMatch = RegExp(r'e\((.*?)\)').firstMatch(arg);
+                  if (valueMatch != null) {
+                    final value = valueMatch.group(1)!;
+                    if (value.contains("['")) {
+                      final parts = value
+                          .split("['")
+                          .map((p) => p.replaceAll("']", ''))
+                          .toList();
+                      parts.removeAt(0); // Remove the 'data' prefix
+                      final val = _getValue(data, parts);
+                      buffer.write(e(val?.toString() ?? ''));
+                    }
+                  }
                 } else if (arg.contains("['")) {
                   // Nested data access
                   final parts = arg
@@ -148,9 +167,7 @@ class BladeEngine implements ViewEngine {
                 final condition = match.group(1)!;
                 if (condition.contains("['")) {
                   final key = condition.split("['")[1].replaceAll("']", '');
-                  if (data[key] == true) {
-                    buffer.write('Hello');
-                  }
+                  inIfBlock = data[key] == true;
                 }
               }
             } else if (line.contains('for (')) {
@@ -163,10 +180,21 @@ class BladeEngine implements ViewEngine {
                     match.group(2)!.split("['")[1].replaceAll("']", '');
                 if (data[listName] is List) {
                   final list = data[listName] as List;
-                  for (final item in list) {
-                    buffer.write(item);
-                    buffer.write(' ');
+                  for (var i = 0; i < list.length; i++) {
+                    buffer.write(list[i]);
+                    if (i < list.length - 1) {
+                      buffer.write(' ');
+                    }
                   }
+                }
+              }
+            } else if (line.contains('buffer.write') && inIfBlock) {
+              // Handle write inside if block
+              final match = RegExp(r'buffer\.write\((.*?)\);').firstMatch(line);
+              if (match != null) {
+                final arg = match.group(1)!;
+                if (arg.startsWith("'") && arg.endsWith("'")) {
+                  buffer.write(arg.substring(1, arg.length - 1));
                 }
               }
             }
