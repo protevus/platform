@@ -6,9 +6,26 @@ import 'package:illuminate_filesystem/filesystem.dart';
 class MockFilesystem extends Mock implements Filesystem {
   final Map<String, String> _files = {};
   final Map<String, DateTime> _timestamps = {};
+  final Set<String> _directories = {};
 
   @override
-  bool exists(String path) => _files.containsKey(path);
+  bool exists(String path) =>
+      _files.containsKey(path) || _directories.contains(path);
+
+  @override
+  bool makeDirectory(String path, [bool recursive = false]) {
+    if (recursive) {
+      final parts = path.split('/');
+      var currentPath = '';
+      for (final part in parts) {
+        currentPath = currentPath.isEmpty ? part : '$currentPath/$part';
+        _directories.add(currentPath);
+      }
+    } else {
+      _directories.add(path);
+    }
+    return true;
+  }
 
   @override
   String? get(String path) => _files[path];
@@ -49,7 +66,7 @@ void main() {
 
     test('evaluates simple echo statements', () async {
       // Setup source template
-      files.put('test.blade.html', 'Hello {{ name }}');
+      files.put('resources/views/test/echo.blade.html', 'Hello {{ name }}');
 
       // Setup compiled template
       files.put('cache/views/test_blade_html.dart', '''
@@ -61,13 +78,15 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
 }
 ''');
 
-      final result = await engine.get('test.blade.html', {'name': 'World'});
+      final result = await engine
+          .get('resources/views/test/echo.blade.html', {'name': 'World'});
       expect(result, equals('Hello World'));
     });
 
     test('evaluates if statements', () async {
       // Setup source template
-      files.put('test.blade.html', '@if (show) Hello @endif');
+      files.put(
+          'resources/views/test/if.blade.html', '@if (show) Hello @endif');
 
       // Setup compiled template
       files.put('cache/views/test_blade_html.dart', '''
@@ -80,14 +99,15 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
 }
 ''');
 
-      final result = await engine.get('test.blade.html', {'show': true});
+      final result = await engine
+          .get('resources/views/test/if.blade.html', {'show': true});
       expect(result, equals('Hello'));
     });
 
     test('evaluates foreach loops', () async {
       // Setup source template
-      files.put(
-          'test.blade.html', '@foreach (items as item) {{ item }} @endforeach');
+      files.put('resources/views/test/foreach.blade.html',
+          '@foreach (items as item) {{ item }} @endforeach');
 
       // Setup compiled template
       files.put('cache/views/test_blade_html.dart', '''
@@ -101,7 +121,8 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
 }
 ''');
 
-      final result = await engine.get('test.blade.html', {
+      final result =
+          await engine.get('resources/views/test/foreach.blade.html', {
         'items': ['a', 'b', 'c']
       });
       expect(result, equals('a b c '));
@@ -109,7 +130,7 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
 
     test('evaluates nested data access', () async {
       // Setup source template
-      files.put('test.blade.html', '{{ user.name }}');
+      files.put('resources/views/test/nested.blade.html', '{{ user.name }}');
 
       // Setup compiled template
       files.put('cache/views/test_blade_html.dart', '''
@@ -120,7 +141,8 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
 }
 ''');
 
-      final result = await engine.get('test.blade.html', {
+      final result =
+          await engine.get('resources/views/test/nested.blade.html', {
         'user': {'name': 'John'}
       });
       expect(result, equals('John'));
@@ -128,7 +150,7 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
 
     test('handles missing data gracefully', () async {
       // Setup source template
-      files.put('test.blade.html', '{{ missing }}');
+      files.put('resources/views/test/missing.blade.html', '{{ missing }}');
 
       // Setup compiled template
       files.put('cache/views/test_blade_html.dart', '''
@@ -139,13 +161,14 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
 }
 ''');
 
-      final result = await engine.get('test.blade.html', {});
+      final result =
+          await engine.get('resources/views/test/missing.blade.html', {});
       expect(result, equals(''));
     });
 
     test('evaluates compiled code with helper functions', () async {
       // Setup source template
-      files.put('test.blade.html', '{{{ content }}}');
+      files.put('resources/views/test/helper.blade.html', '{{{ content }}}');
 
       // Setup compiled template
       files.put('cache/views/test_blade_html.dart', '''
@@ -169,8 +192,8 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
 }
 ''');
 
-      final result =
-          await engine.get('test.blade.html', {'content': '<p>Hello</p>'});
+      final result = await engine.get('resources/views/test/helper.blade.html',
+          {'content': '<p>Hello</p>'});
       expect(result, equals('&lt;p&gt;Hello&lt;/p&gt;'));
     });
   });

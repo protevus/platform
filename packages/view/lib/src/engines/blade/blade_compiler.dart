@@ -130,16 +130,22 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
   /// Compile Blade echo statements into Dart string interpolation.
   String _compileEchos(String value) {
     // Compile escaped echoes
-    value = value.replaceAllMapped(RegExp(r'{{{(.+?)}}}'),
-        (match) => "buffer.write(e(${_compileExpression(match[1]!)}));");
+    value = value.replaceAllMapped(
+        RegExp(r'{{{(.+?)}}}'),
+        (match) =>
+            "buffer.write(e(data['${_compileExpression(match[1]!)}'].toString()));");
 
     // Compile unescaped echoes
-    value = value.replaceAllMapped(RegExp(r'{!!(.+?)!!}'),
-        (match) => "buffer.write(${_compileExpression(match[1]!)});");
+    value = value.replaceAllMapped(
+        RegExp(r'{!!(.+?)!!}'),
+        (match) =>
+            "buffer.write(data['${_compileExpression(match[1]!)}'].toString());");
 
     // Compile regular echoes
-    value = value.replaceAllMapped(RegExp(r'{{(.+?)}}'),
-        (match) => "buffer.write(e(${_compileExpression(match[1]!)}));");
+    value = value.replaceAllMapped(
+        RegExp(r'{{(.+?)}}'),
+        (match) =>
+            "buffer.write(e(data['${_compileExpression(match[1]!)}']?.toString() ?? ''));");
 
     return value;
   }
@@ -191,7 +197,7 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
 
     // Standard directives
     value = value.replaceAllMapped(RegExp(r'@if\s*\((.*?)\)'),
-        (match) => "if (${_compileExpression(match[1]!)}) {");
+        (match) => "if (data['${_compileExpression(match[1]!)}'] == true) {");
 
     value = value.replaceAllMapped(RegExp(r'@elseif\s*\((.*?)\)'),
         (match) => "} else if (${_compileExpression(match[1]!)}) {");
@@ -206,7 +212,7 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
     value = value.replaceAllMapped(
         RegExp(r'@foreach\s*\((.*?)\s+as\s+(.*?)\)'),
         (match) =>
-            "for (var ${match[2]} in ${_compileExpression(match[1]!)}) {");
+            "for (var ${match[2]} in data['${_compileExpression(match[1]!)}']) {");
     value = value.replaceAll('@endforeach', '}');
 
     value = value.replaceAllMapped(
@@ -221,9 +227,9 @@ Future<String> render(Map<String, dynamic> data, ViewFactory factory) async {
     // Remove whitespace
     expression = expression.trim();
 
-    // Replace . with []
+    // Handle nested data access (e.g., user.name -> user.name)
     expression = expression.replaceAllMapped(
-        RegExp(r'(\w+)\.(\w+)'), (match) => "${match[1]}['${match[2]}']");
+        RegExp(r'(\w+)\.(\w+)'), (match) => "${match[1]}.${match[2]}");
 
     return expression;
   }

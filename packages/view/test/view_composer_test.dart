@@ -50,10 +50,8 @@ void main() {
 
       when(engine.get(any, any)).thenAnswer((_) async => 'rendered');
 
-      // Create test views
-      await createView('profile');
-      await createView('dashboard');
-      await createView('user/profile');
+      // Add resources directory to view finder
+      finder.addLocation('resources/views');
     });
 
     tearDown(() {
