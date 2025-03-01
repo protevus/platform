@@ -95,7 +95,22 @@ class BladeEngine implements ViewEngine {
           // Create a buffer for the output
           final buffer = StringBuffer();
 
-          // Add helper functions to the scope
+          // Parse the compiled code to extract the commands
+          final lines = contents.split('\n');
+          var inIfBlock = false;
+          var inForBlock = false;
+          var forLoopBuffer = StringBuffer();
+
+          // Extract helper function if present
+          String? helperFunction;
+          for (final line in lines) {
+            if (line.contains('String e(')) {
+              helperFunction = line;
+              break;
+            }
+          }
+
+          // Define helper functions
           String e(String value, [bool doubleEncode = true]) {
             if (!doubleEncode) {
               value = value.replaceAll('&amp;', '&');
@@ -110,12 +125,6 @@ class BladeEngine implements ViewEngine {
 
           bool isset(dynamic value) => value != null;
           bool empty(dynamic value) => value == null || value == '';
-
-          // Parse the compiled code to extract the commands
-          final lines = contents.split('\n');
-          var inIfBlock = false;
-          var inForBlock = false;
-          var forLoopBuffer = StringBuffer();
 
           for (final line in lines) {
             if (line.contains('buffer.write')) {
@@ -133,7 +142,8 @@ class BladeEngine implements ViewEngine {
                   buffer.write(data[key] ?? '');
                 } else if (arg.contains('e(')) {
                   // Helper function call
-                  final valueMatch = RegExp(r'e\((.*?)\)').firstMatch(arg);
+                  final valueMatch =
+                      RegExp(r'e\((.*?)\.toString\(\)\)').firstMatch(arg);
                   if (valueMatch != null) {
                     final value = valueMatch.group(1)!;
                     if (value.contains("['")) {

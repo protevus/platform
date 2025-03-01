@@ -39,7 +39,12 @@ mixin ManagesEvents {
 
     final viewsList = views is List ? views : [views];
     for (final view in viewsList) {
-      composers.add(_addViewEvent(view, callback));
+      // Support both class names and callbacks
+      if (callback is String) {
+        composers.add(_addViewEvent(view, [callback.runtimeType, callback]));
+      } else {
+        composers.add(_addViewEvent(view, callback));
+      }
     }
 
     return composers;
@@ -53,7 +58,15 @@ mixin ManagesEvents {
     for (final view in viewsList) {
       final eventName = 'composing: ${normalizeName(view)}';
       wrappedCallback(String event, List<dynamic> args) {
-        callback(event, args);
+        // Support both class names and callbacks
+        if (callback is String) {
+          final instance = container.make(callback.runtimeType);
+          if (instance != null) {
+            instance.compose(args[0]);
+          }
+        } else {
+          callback(event, args);
+        }
         events.forget(eventName);
       }
 
