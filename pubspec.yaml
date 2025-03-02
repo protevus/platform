@@ -12,6 +12,8 @@ environment:
 # Add regular dependencies here.
 dependencies:
   path: ^1.9.1
+  illuminate_console:
+    path: packages/console
 
 dev_dependencies:
   lints: ^4.0.0

@@ -30,6 +30,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.2+1"
+  ansicolor:
+    dependency: transitive
+    description:
+      name: ansicolor
+      sha256: "50e982d500bc863e1d703448afdbf9e5a72eb48840a4f766fa361ffd6877055f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
   args:
     dependency: "direct dev"
     description:
@@ -182,6 +190,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.1"
+  illuminate_console:
+    dependency: "direct main"
+    description:
+      path: "packages/console"
+      relative: true
+    source: path
+    version: "0.5.1"
   intl:
     dependency: transitive
     description:
@@ -559,4 +574,4 @@ packages:
     source: hosted
     version: "2.2.1"
 sdks:
-  dart: ">=3.4.0 <4.0.0"
+  dart: ">=3.4.2 <4.0.0"

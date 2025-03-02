@@ -1,6 +1,8 @@
 #!/usr/bin/env dart
 
-void main(List<String> args) {
-  print('Protevus Platform Artisan CLI');
-  print('Version: 1.0.0');
+import 'package:illuminate_console/src/dev_application.dart';
+
+void main(List<String> args) async {
+  final app = DevApplication();
+  await app.runWithArguments(args);
 }
