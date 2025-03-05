@@ -28,7 +28,6 @@ Options:
   --fail-fast       Stop on first failure
 ''';
 
-  @override
   Future<void> execute() async {
     final scope = arguments['scope'] as String?;
     final failFast = arguments.containsKey('fail-fast');

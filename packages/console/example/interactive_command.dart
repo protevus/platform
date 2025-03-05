@@ -80,7 +80,7 @@ void main(List<String> arguments) async {
   );
 
   app.addCommands([
-    ListCommand(),
+    HelpCommand(),
     SetupCommand(),
   ]);
 

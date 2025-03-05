@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:meta/meta.dart';
 import 'command.dart';
-import 'commands/system/list_command.dart';
+import 'commands/system/help_command.dart';
 import 'output/output.dart';
 import 'parser.dart';
 
@@ -28,7 +28,7 @@ class Application {
     Output? output,
   }) : _output = output ?? ConsoleOutput() {
     // Register built-in commands
-    add(ListCommand());
+    add(HelpCommand());
   }
 
   /// Register a command with the application.
@@ -154,7 +154,7 @@ class Application {
   Future<void> runWithArguments(List<String> arguments) async {
     if (arguments.isEmpty) {
       // Show list of available commands
-      await run('list');
+      await run('help');
       return;
     }
 

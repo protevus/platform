@@ -6,15 +6,15 @@ import '../../output/table.dart';
 ///
 /// This command displays a formatted list of all available commands,
 /// grouped by category with proper alignment and styling.
-class ListCommand extends Command {
+class HelpCommand extends Command {
   @override
-  String get name => 'list';
+  String get name => 'help';
 
   @override
   String get description => 'List all available commands';
 
   @override
-  String get signature => 'list {--format=} : Output format (text, json)';
+  String get signature => 'help {--format=} : Output format (text, json)';
 
   @override
   Future<void> handle() async {
@@ -117,7 +117,7 @@ class ListCommand extends Command {
           name.contains('melos') ||
           name.contains('deps')) {
         groups['Package Commands']!.add(command);
-      } else if (name == 'list' ||
+      } else if (name == 'help' ||
           name.contains('clean') ||
           name.contains('bootstrap')) {
         groups['System Commands']!.add(command);

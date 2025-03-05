@@ -8,4 +8,4 @@ export 'src/output/table.dart' show ColumnAlignment, BorderStyle;
 export 'src/parser.dart';
 
 // Core command implementations
-export 'src/commands/system/list_command.dart' show ListCommand;
+export 'src/commands/system/help_command.dart' show HelpCommand;

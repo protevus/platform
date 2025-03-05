@@ -34,7 +34,7 @@ void main(List<String> arguments) async {
 
   // Register commands
   app.addCommands([
-    ListCommand(),
+    HelpCommand(),
     GreetCommand(),
   ]);
 
