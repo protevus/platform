@@ -1,5 +1,5 @@
 import 'package:illuminate_contracts/contracts.dart';
-import 'package:platform_hashing/hashing.dart';
+import 'package:illuminate_hashing/hashing.dart';
 import 'package:test/test.dart';
 
 class TestConfig implements ConfigContract {
