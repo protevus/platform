@@ -14,7 +14,7 @@ class GenerateDumbTestCommand extends MelosCommand {
 {package? : The package to generate dummy tests for}''';
 
   /// The dummy test file content
-  final String _dummyTestContent = r'''import 'package:test/test.dart';
+  final String _dummyTestContent = '''import 'package:test/test.dart';
 
 void main() {
   group("Dummy Test", () {
@@ -51,17 +51,20 @@ void main() {
 
         // List all packages
         await melosExec(
-          r'if [ -d "test" ] && [ $(ls -A test | grep -v .gitkeep | wc -l) -eq 0 ]; then echo "{MELOS_PACKAGE_NAME}"; fi',
+          'if [ -d "test" ] && [ \$(ls -A test | grep -v .gitkeep | wc -l) -eq 0 ]; then echo "{MELOS_PACKAGE_NAME}"; fi',
           throwOnNonZero: false,
         );
 
         // Generate tests for packages that need them
-        await melosExec(
-          'if [ -d "test" ] && [ \$(ls -A test | grep -v .gitkeep | wc -l) -eq 0 ]; then mkdir -p test && printf "%s" \'' +
-              _dummyTestContent +
-              '\' > test/dummy_test.dart && echo "Generated dummy test for {MELOS_PACKAGE_NAME}"; fi',
-          throwOnNonZero: false,
-        );
+        final command =
+            '''if [ -d "test" ] && [ \$(ls -A test | grep -v .gitkeep | wc -l) -eq 0 ]; then 
+  mkdir -p test
+  cat > test/dummy_test.dart << "EOF"
+$_dummyTestContent
+EOF
+  echo "Generated dummy test for {MELOS_PACKAGE_NAME}"
+fi''';
+        await melosExec(command, throwOnNonZero: false);
       }
 
       output.newLine();
@@ -79,12 +82,16 @@ void main() {
     output.info('Checking package: $package');
     output.writeln('----------------------------------------');
 
-    await melosExec(
-      'if [ -d "test" ] && [ \$(ls -A test | grep -v .gitkeep | wc -l) -eq 0 ]; then mkdir -p test && printf "%s" \'' +
-          _dummyTestContent +
-          '\' > test/dummy_test.dart && echo "Generated dummy test"; else echo "Package already has tests, skipping."; fi',
-      scope: package,
-      throwOnNonZero: false,
-    );
+    final command =
+        '''if [ -d "test" ] && [ \$(ls -A test | grep -v .gitkeep | wc -l) -eq 0 ]; then 
+  mkdir -p test
+  cat > test/dummy_test.dart << "EOF"
+$_dummyTestContent
+EOF
+  echo "Generated dummy test"
+else
+  echo "Package already has tests, skipping."
+fi''';
+    await melosExec(command, scope: package, throwOnNonZero: false);
   }
 }
