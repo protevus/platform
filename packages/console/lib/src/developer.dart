@@ -13,6 +13,8 @@ import 'commands/system/analyze_command.dart';
 import 'commands/system/clean_command.dart';
 import 'commands/system/package_command.dart';
 import 'commands/system/publish_command.dart';
+import 'commands/system/deps_check_command.dart';
+import 'commands/system/deps_upgrade_command.dart';
 
 /// The development console application.
 ///
@@ -41,6 +43,8 @@ class Developer extends Application {
     add(FormatCommand());
     add(PackageCommand());
     add(PublishCommand());
+    add(DepsCheckCommand());
+    add(DepsUpgradeCommand());
 
     // Register melos commands
     add(MelosAnalyzeCommand());
