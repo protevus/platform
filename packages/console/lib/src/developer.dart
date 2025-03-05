@@ -6,6 +6,7 @@ import 'commands/test/test_package_command.dart';
 import 'commands/system/generate_command.dart';
 import 'commands/system/generate_package_command.dart';
 import 'commands/system/generate_check_command.dart';
+import 'commands/system/generate_dumbtest_command.dart';
 import 'commands/system/analyze_command.dart';
 import 'commands/system/clean_command.dart';
 
@@ -31,6 +32,7 @@ class Developer extends Application {
     add(GenerateCommand());
     add(GeneratePackageCommand());
     add(GenerateCheckCommand());
+    add(GenerateDumbTestCommand());
 
     // Register melos commands
     add(MelosAnalyzeCommand());
