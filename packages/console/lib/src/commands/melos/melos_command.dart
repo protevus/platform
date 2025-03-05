@@ -67,6 +67,7 @@ abstract class MelosCommand extends Command {
       scope: scope,
       failFast: failFast,
       concurrency: concurrency,
+      throwOnNonZero: throwOnNonZero, // Pass through throwOnNonZero
     );
   }
 
