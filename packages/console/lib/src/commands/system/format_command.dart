@@ -11,7 +11,7 @@ class FormatCommand extends MelosCommand {
   @override
   String get signature => '''format 
 {--line-length= : Wrap lines longer than this length}
-{--output=show : Show output (show), write to files (write), or write with colored diffs (diff)}
+{--output=write : Set output (write, show, json, or none)}
 {--set-exit-if-changed : Return exit code 1 if there were any formatting changes}
 {--fix : Apply all style fixes}''';
 
