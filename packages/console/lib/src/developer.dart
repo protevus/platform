@@ -15,6 +15,7 @@ import 'commands/system/package_command.dart';
 import 'commands/system/publish_command.dart';
 import 'commands/system/deps_check_command.dart';
 import 'commands/system/deps_upgrade_command.dart';
+import 'commands/system/generate_config_command.dart';
 
 /// The development console application.
 ///
@@ -45,6 +46,7 @@ class Developer extends Application {
     add(PublishCommand());
     add(DepsCheckCommand());
     add(DepsUpgradeCommand());
+    add(GenerateConfigCommand());
 
     // Register melos commands
     add(MelosAnalyzeCommand());
