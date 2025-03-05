@@ -1,4 +1,4 @@
-import '../command.dart';
+import '../../command.dart';
 
 /// A command that lists all available commands.
 class ListCommand extends Command {

@@ -77,7 +77,7 @@ class Artisan extends Application {
     } catch (e) {
       output.error(e.toString());
       // Exit with error code
-      throw e;
+      rethrow;
     }
   }
 }

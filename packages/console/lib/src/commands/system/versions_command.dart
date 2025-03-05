@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:illuminate_console/console.dart';
-import 'tool_info.dart';
+import '../../utils/tool_info.dart';
 
 /// Command to display versions of all tools in the stack.
 class VersionsCommand extends Command {
@@ -41,7 +41,7 @@ class VersionsCommand extends Command {
     return {
       'core': ToolCategory({
         'Artisan CLI': ToolInfo(
-          version: '1.0.0',
+          version: '0.5.1',
           description: 'Protevus Platform CLI tool',
         ),
         'Dart SDK': ToolInfo(

@@ -1,6 +1,6 @@
 name: artisan
 description: Command-line interface for the Protevus Platform
-version: 1.0.0
+version: 0.5.1
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
