@@ -1,5 +1,5 @@
 /// A Dart implementation of Laravel's console package.
-library platform_console;
+library illuminate_console;
 
 export 'src/application.dart';
 export 'src/command.dart';

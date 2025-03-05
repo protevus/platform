@@ -24,7 +24,7 @@ class Application {
   /// Create a new console application instance.
   Application({
     this.name = 'Console Application',
-    this.version = '1.0.0',
+    this.version = '0.5.1',
     Output? output,
   }) : _output = output ?? ConsoleOutput() {
     // Register built-in commands

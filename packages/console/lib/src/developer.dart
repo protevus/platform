@@ -11,6 +11,8 @@ import 'commands/system/bootstrap_command.dart';
 import 'commands/system/format_command.dart';
 import 'commands/system/analyze_command.dart';
 import 'commands/system/clean_command.dart';
+import 'commands/system/package_command.dart';
+import 'commands/system/publish_command.dart';
 
 /// The development console application.
 ///
@@ -20,7 +22,7 @@ class Developer extends Application {
   /// Create a new development console application.
   Developer({
     String name = 'Protevus Platform',
-    String version = '1.0.0',
+    String version = '0.5.1',
     Output? output,
   }) : super(
           name: name,
@@ -37,6 +39,8 @@ class Developer extends Application {
     add(GenerateDumbTestCommand());
     add(BootstrapCommand());
     add(FormatCommand());
+    add(PackageCommand());
+    add(PublishCommand());
 
     // Register melos commands
     add(MelosAnalyzeCommand());
