@@ -16,6 +16,9 @@ import 'commands/system/publish_command.dart';
 import 'commands/system/deps_check_command.dart';
 import 'commands/system/deps_upgrade_command.dart';
 import 'commands/system/generate_config_command.dart';
+import 'commands/system/create_command.dart';
+import 'commands/system/docs_api_command.dart';
+import 'commands/system/gitignore_setup_command.dart';
 
 /// The development console application.
 ///
@@ -47,6 +50,9 @@ class Developer extends Application {
     add(DepsCheckCommand());
     add(DepsUpgradeCommand());
     add(GenerateConfigCommand());
+    add(CreateCommand());
+    add(DocsApiCommand());
+    add(GitignoreSetupCommand());
 
     // Register melos commands
     add(MelosAnalyzeCommand());
