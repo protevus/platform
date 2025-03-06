@@ -1,0 +1,107 @@
+# Dartdoc configuration options
+dartdoc:
+  # Include all public APIs in the documentation
+  includeExternal: true
+  
+  # Categories to organize the documentation
+  categories:
+    "Core":
+      markdown: doc/core.md
+    "Drivers":
+      markdown: doc/drivers.md
+    "Examples":
+      markdown: doc/examples.md
+  
+  # Custom footer text
+  footer: ["PDO for Dart", "Copyright © 2023"]
+  
+  # Documentation metadata
+  nodoc: ["lib/src/internal/**"]
+  
+  # Show inheritance diagrams
+  showInheritanceOn: true
+  
+  # Documentation generation settings
+  input:
+    - lib
+    - example
+  
+  # Output directory for generated documentation
+  output: doc/api
+  
+  # Documentation templates and resources
+  templates:
+    - default
+    - templates
+  resources:
+    - doc/resources
+  
+  # Documentation header
+  header: |
+    PDO for Dart
+    ============
+    A Dart implementation of PHP's PDO (PHP Data Objects) database abstraction layer.
+  
+  # Documentation metadata
+  metadata:
+    title: "PDO for Dart Documentation"
+    description: "Documentation for the PDO for Dart package"
+    keywords: "dart, pdo, database, sql, mysql, postgresql, sqlite"
+  
+  # Documentation settings
+  showUndocumentedCategories: false
+  validateLinks: true
+  useCategories: true
+  
+  # Documentation validation
+  warnings:
+    - unresolved-doc-reference
+    - unknown-directive
+    - unknown-macro
+    - missing-from-search-index
+    - tool-error
+  
+  errors:
+    - broken-link
+    - invalid-parameter
+    - missing-required-param
+    - missing-return-description
+    - missing-from-search-index
+  
+  # File patterns
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "**/generated/**"
+    - "**/test/**"
+  
+  include:
+    - "lib/**"
+    - "example/**"
+  
+  # Category organization
+  categoryOrder:
+    - "Getting Started"
+    - "Core Concepts"
+    - "Database Drivers"
+    - "Advanced Usage"
+    - "Examples"
+    - "Best Practices"
+  
+  categoryGroups:
+    core:
+      name: "Core Documentation"
+      categories:
+        - "Getting Started"
+        - "Core Concepts"
+    drivers:
+      name: "Database Drivers"
+      categories:
+        - "Database Drivers"
+        - "Driver Development"
+    usage:
+      name: "Usage Guide"
+      categories:
+        - "Advanced Usage"
+        - "Examples"
+        - "Best Practices"
