@@ -5,6 +5,9 @@
 .packages
 build/
 
+# Mkdocs build artifcats
+site/
+
 # Coverage files
 coverage/
 coverage_report/
