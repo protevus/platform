@@ -3,12 +3,15 @@ import 'output/output.dart';
 import 'commands/system/versions_command.dart';
 import 'commands/test/test_command.dart';
 import 'commands/test/test_package_command.dart';
+import 'commands/test/test_coverage_report_command.dart';
+import 'commands/test/test_coverage_command.dart';
 import 'commands/system/generate_command.dart';
 import 'commands/system/generate_package_command.dart';
 import 'commands/system/generate_check_command.dart';
 import 'commands/system/generate_dumbtest_command.dart';
 import 'commands/system/bootstrap_command.dart';
 import 'commands/system/format_command.dart';
+import 'commands/system/fix_command.dart';
 import 'commands/system/analyze_command.dart';
 import 'commands/system/clean_command.dart';
 import 'commands/system/package_command.dart';
@@ -17,12 +20,16 @@ import 'commands/system/deps_check_command.dart';
 import 'commands/system/deps_upgrade_command.dart';
 import 'commands/system/generate_config_command.dart';
 import 'commands/system/create_command.dart';
+import 'commands/system/create_template_command.dart';
 import 'commands/system/docs_api_command.dart';
 import 'commands/system/gitignore_setup_command.dart';
 import 'commands/system/dart_info_command.dart';
 import 'commands/system/docs_serve_command.dart';
 import 'commands/system/list_dart_files_command.dart';
 import 'commands/system/mkdocs_command.dart';
+import 'commands/system/debug_pkgname_command.dart';
+import 'commands/system/debug_pkgpath_command.dart';
+import 'commands/system/debug_reflectable_command.dart';
 
 /// The development console application.
 ///
@@ -31,36 +38,39 @@ import 'commands/system/mkdocs_command.dart';
 class Developer extends Application {
   /// Create a new development console application.
   Developer({
-    String name = 'Protevus Platform',
-    String version = '0.5.1',
-    Output? output,
-  }) : super(
-          name: name,
-          version: version,
-          output: output,
-        ) {
+    super.name = 'Protevus Platform',
+    super.version,
+    super.output,
+  }) {
     // Register development commands
     add(VersionsCommand());
     add(TestCommand());
     add(TestPackageCommand());
+    add(TestCoverageCommand());
+    add(TestCoverageReportCommand());
     add(GenerateCommand());
     add(GeneratePackageCommand());
     add(GenerateCheckCommand());
     add(GenerateDumbTestCommand());
     add(BootstrapCommand());
     add(FormatCommand());
+    add(FixCommand());
     add(PackageCommand());
     add(PublishCommand());
     add(DepsCheckCommand());
     add(DepsUpgradeCommand());
     add(GenerateConfigCommand());
     add(CreateCommand());
+    add(CreateTemplateCommand());
     add(DocsApiCommand());
     add(GitignoreSetupCommand());
     add(DartInfoCommand());
     add(DocsServeCommand());
     add(ListDartFilesCommand());
     add(MkdocsCommand());
+    add(DebugPkgnameCommand());
+    add(DebugPkgpathCommand());
+    add(DebugReflectableCommand());
 
     // Register melos commands
     add(MelosAnalyzeCommand());
