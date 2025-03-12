@@ -2,7 +2,7 @@ services:
   caching:
     redis:
       category: caching
-      version: '7.0'
+      version: 7.0
       enabled: true
       config:
         active_defrag: false
@@ -10,8 +10,8 @@ services:
         active_defrag_threshold_upper: 100
         appendfsync: everysec
         appendonly: true
-        client_output_buffer_limit_normal: '0 0 0'
-        client_output_buffer_limit_pubsub: '32mb 8mb 60'
+        client_output_buffer_limit_normal: "0 0 0"
+        client_output_buffer_limit_pubsub: "32mb 8mb 60"
         databases: 16
         latency_monitor_threshold: 100
         lazyfree_lazy_eviction: true
@@ -23,15 +23,15 @@ services:
         password: development
         port: 6379
         replica_read_only: true
-        save_intervals: '900:1 300:10 60:10000'
+        save_intervals: "900:1 300:10 60:10000"
         slowlog_log_slower_than: 10000
         slowlog_max_len: 128
         tcp_keepalive: 300
         timeout: 0
     test-redis:
       category: caching
-      version: '7.0'
-      enabled: false
+      version: 7.0
+      enabled: true
       config:
         appendfsync: always
         appendonly: true
@@ -41,16 +41,16 @@ services:
         maxmemory_samples: 10
         notify_keyspace_events: AKE
         port: 6380
-        save_intervals: '300:1 60:10 10:100'
+        save_intervals: "300:1 60:10 10:100"
         slowlog_log_slower_than: 5000
         slowlog_max_len: 256
   coordination:
     zookeeper:
       category: coordination
-      version: '3.9'
+      version: 3.9
       enabled: false
       config:
-        4lw_commands: 'mntr,conf,ruok,stat,envi'
+        4lw_commands: mntr,conf,ruok,stat,envi
         autopurge_purge_interval: 24
         autopurge_snap_retain_count: 3
         client_port: 2181
@@ -69,7 +69,7 @@ services:
   databases:
     firebird:
       category: databases
-      version: '4.0'
+      version: 4.0
       enabled: false
       config:
         architecture: superclassic
@@ -89,7 +89,7 @@ services:
         wire_encryption: false
     mariadb:
       category: databases
-      version: '10.11'
+      version: 10.11
       enabled: false
       config:
         binlog_expire_logs_seconds: 604800
@@ -108,7 +108,7 @@ services:
         thread_cache_size: 8
     mongodb:
       category: databases
-      version: '6.0'
+      version: 6.0
       enabled: false
       config:
         auth_enabled: true
@@ -123,13 +123,13 @@ services:
         wired_tiger_cache_size: 256MB
     mssql:
       category: databases
-      version: '2022'
+      version: 2022
       enabled: false
       config:
         allow_snapshot_isolation: true
         clr_enabled: false
         cost_threshold_for_parallelism: 50
-        filestream_access_level: '0'
+        filestream_access_level: 0
         max_degree_of_parallelism: 2
         max_memory: 2048MB
         max_server_memory: 2048
@@ -146,7 +146,7 @@ services:
         tempdb_files: 4
     mysql:
       category: databases
-      version: '8.0'
+      version: 8.0
       enabled: false
       config:
         character_set_server: utf8mb4
@@ -162,7 +162,7 @@ services:
         thread_cache_size: 8
     postgres:
       category: databases
-      version: '14'
+      version: 14
       enabled: false
       config:
         effective_cache_size: 4GB
@@ -174,15 +174,15 @@ services:
         work_mem: 4MB
     rethinkdb:
       category: databases
-      version: '2.4'
+      version: 2.4
       enabled: false
       config:
         bind_cluster: all
         bind_driver: all
         bind_http: all
-        cache_size: '1024'
+        cache_size: 1024
         cluster_port: 29015
-        cors_allowed_origins: *
+        cors_allowed_origins: all
         direct_io: true
         directory: /data
         driver_port: 28015
@@ -197,26 +197,26 @@ services:
   messaging:
     kafka:
       category: messaging
-      version: '3.5'
-      enabled: false
+      version: 3.5
+      enabled: true
       config:
-        advertised_listeners: 'PLAINTEXT://localhost:9092,INTERNAL://kafka:9093'
+        advertised_listeners: PLAINTEXT://localhost:9092,INTERNAL://kafka:9093
         auto_create_topics: true
         delete_topic_enable: true
-        heap_opts: '-Xmx1G -Xms1G'
+        heap_opts: "-Xmx1G -Xms1G"
         internal_port: 9093
         jmx_port: 9999
-        listeners: 'PLAINTEXT://:9092,INTERNAL://:9093'
-        log_retention_bytes: '1073741824'
+        listeners: PLAINTEXT://:9092,INTERNAL://:9093
+        log_retention_bytes: 1073741824
         log_retention_hours: 168
         min_insync_replicas: 1
         num_partitions: 3
         port: 9092
         replication_factor: 1
-        zookeeper_connection: 'zookeeper:2181'
+        zookeeper_connection: zookeeper:2181
     rabbitmq:
       category: messaging
-      version: '3.12'
+      version: 3.12
       enabled: false
       config:
         amqp_port: 5672
@@ -231,8 +231,8 @@ services:
         heartbeat: 60
         management_db_cache_multiplier: 5
         management_port: 15672
-        memory_high_watermark: '0.4'
+        memory_high_watermark: 0.4
         mqtt_port: 1883
         port: 5672
         stomp_port: 61613
-        vm_memory_high_watermark_paging_ratio: '0.5'
+        vm_memory_high_watermark_paging_ratio: 0.5

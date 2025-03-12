@@ -32,6 +32,7 @@ class ServicesCommand extends Command {
     output.info('  services:add       Add a new service module');
     output.info('  services:remove    Remove a service module');
     output.info('  services:configure Configure a service');
+    output.info('  services:generate  Generate docker-compose file');
     output.newLine();
     output.info('Run a command with --help to see command-specific options.');
   }
