@@ -1,5 +1,4 @@
 import 'application.dart';
-import 'output/output.dart';
 import 'commands/system/versions_command.dart';
 import 'commands/test/test_command.dart';
 import 'commands/test/test_package_command.dart';
@@ -21,6 +20,15 @@ import 'commands/system/deps_upgrade_command.dart';
 import 'commands/system/generate_config_command.dart';
 import 'commands/system/create_command.dart';
 import 'commands/system/create_template_command.dart';
+import 'commands/services/services_command.dart';
+import 'commands/services/up_command.dart';
+import 'commands/services/down_command.dart';
+import 'commands/services/status_command.dart';
+import 'commands/services/logs_command.dart';
+import 'commands/services/cleanup_command.dart';
+import 'commands/services/add_command.dart';
+import 'commands/services/remove_command.dart';
+import 'commands/services/configure_command.dart';
 import 'commands/system/docs_api_command.dart';
 import 'commands/system/gitignore_setup_command.dart';
 import 'commands/system/dart_info_command.dart';
@@ -62,6 +70,17 @@ class Developer extends Application {
     add(GenerateConfigCommand());
     add(CreateCommand());
     add(CreateTemplateCommand());
+
+    // Register services commands
+    add(ServicesCommand());
+    add(UpCommand());
+    add(DownCommand());
+    add(StatusCommand());
+    add(LogsCommand());
+    add(CleanupCommand());
+    add(AddCommand());
+    add(RemoveCommand());
+    add(ConfigureCommand());
     add(DocsApiCommand());
     add(GitignoreSetupCommand());
     add(DartInfoCommand());

@@ -1,86 +1,89 @@
 services:
-  databases:
+  uncategorized:
     postgres:
+      category: uncategorized
+      version: 14
       enabled: true
-      version: "14"
       config:
         port: 5432
         max_connections: 100
-        shared_buffers: "256MB"
-        
+        shared_buffers: 256MB
     mysql:
+      category: uncategorized
+      version: 8.0
       enabled: false
-      version: "8.0"
       config:
         port: 3306
         max_connections: 100
-        
     mongodb:
+      category: uncategorized
+      version: 5.0
       enabled: false
-      version: "5.0"
       config:
         port: 27017
-        storage_engine: "wiredTiger"
-        
+        storage_engine: wiredTiger
     redis:
+      category: uncategorized
+      version: 6.2
       enabled: true
-      version: "6.2"
       config:
         port: 6379
-        maxmemory: "256mb"
-        maxmemory_policy: "allkeys-lru"
-
-  messaging:
+        maxmemory: 256mb
+        maxmemory_policy: allkeys-lru
     kafka:
+      category: uncategorized
+      version: 3.0
       enabled: false
-      version: "3.0"
       config:
         port: 9092
         num_partitions: 3
         replication_factor: 1
-        
     rabbitmq:
+      category: uncategorized
+      version: 3.9
       enabled: false
-      version: "3.9"
       config:
         port: 5672
         management_port: 15672
-        
-  caching:
     hazelcast:
+      category: uncategorized
+      version: 5.1
       enabled: false
-      version: "5.1"
       config:
         port: 5701
-        cluster_name: "dev-cluster"
-        
+        cluster_name: dev-cluster
     memcached:
+      category: uncategorized
+      version: 1.6
       enabled: false
-      version: "1.6"
       config:
         port: 11211
-        memory_limit: "64mb"
-
-  search:
+        memory_limit: 64mb
     elasticsearch:
+      category: uncategorized
+      version: 7.17
       enabled: false
-      version: "7.17"
       config:
         port: 9200
-        memory: "512m"
-        discovery_type: "single-node"
-
-  monitoring:
+        memory: 512m
+        discovery_type: single-node
     prometheus:
+      category: uncategorized
+      version: 2.36
       enabled: false
-      version: "2.36"
       config:
         port: 9090
-        retention_time: "15d"
-        
+        retention_time: 15d
     grafana:
+      category: uncategorized
+      version: 8.5
       enabled: false
-      version: "8.5"
       config:
         port: 3000
-        admin_user: "admin"
+        admin_user: admin
+  caching:
+    test-redis:
+      category: caching
+      version: latest
+      enabled: true
+      config:
