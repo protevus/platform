@@ -5,10 +5,16 @@ LABEL maintainer="DevOps Team"
 LABEL description="Redis server for development"
 
 # Install additional tools
-RUN apt-get update && apt-get install -y \
-    procps \
-    vim \
-    netcat \
+ENV DEBIAN_FRONTEND=noninteractive
+RUN echo "deb http://deb.debian.org/debian bullseye main" > /etc/apt/sources.list && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        procps \
+        vim \
+        netcat \
+        gettext-base \
     && rm -rf /var/lib/apt/lists/*
 
 # Create necessary directories
@@ -16,8 +22,18 @@ RUN mkdir -p /data /backups /var/log/redis /var/run/redis \
     && chown -R redis:redis /data /backups /var/log/redis /var/run/redis
 
 # Copy configuration
-COPY config/redis.conf /etc/redis/redis.conf
-RUN chown redis:redis /etc/redis/redis.conf && chmod 644 /etc/redis/redis.conf
+COPY config/redis.conf /etc/redis/redis.conf.template
+RUN chown redis:redis /etc/redis/redis.conf.template && chmod 644 /etc/redis/redis.conf.template
+
+# Create script to substitute environment variables
+RUN echo '#!/bin/sh\n\
+envsubst < /etc/redis/redis.conf.template > /etc/redis/redis.conf\n\
+chown redis:redis /etc/redis/redis.conf\n\
+chmod 644 /etc/redis/redis.conf\n\
+exec "$@"' > /usr/local/bin/docker-entrypoint.sh \
+    && chmod +x /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh", "redis-server", "/etc/redis/redis.conf"]
 
 # Copy initialization scripts
 COPY init/01-init-dev-utils.lua /docker-entrypoint-initdb.d/
@@ -64,6 +80,3 @@ VOLUME ["/data", "/backups", "/var/log/redis"]
 # Health check
 HEALTHCHECK --interval=10s --timeout=5s --start-period=30s --retries=3 \
     CMD /usr/local/bin/healthcheck || exit 1
-
-# Default command
-CMD ["redis-server", "/etc/redis/redis.conf"]

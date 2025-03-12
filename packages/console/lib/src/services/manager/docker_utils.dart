@@ -91,11 +91,15 @@ class DockerUtils {
       args.addAll(services);
     }
 
-    final result = await Process.run('docker', args);
-    if (result.exitCode != 0) {
-      throw DockerException(
-        'Failed to start services: ${result.stderr}',
-      );
+    final process = await Process.start('docker', args);
+
+    // Stream stdout and stderr
+    process.stdout.transform(utf8.decoder).listen(stdout.write);
+    process.stderr.transform(utf8.decoder).listen(stderr.write);
+
+    final exitCode = await process.exitCode;
+    if (exitCode != 0) {
+      throw DockerException('Failed to start services');
     }
   }
 
@@ -114,11 +118,15 @@ class DockerUtils {
       args.addAll(services);
     }
 
-    final result = await Process.run('docker', args);
-    if (result.exitCode != 0) {
-      throw DockerException(
-        'Failed to stop services: ${result.stderr}',
-      );
+    final process = await Process.start('docker', args);
+
+    // Stream stdout and stderr
+    process.stdout.transform(utf8.decoder).listen(stdout.write);
+    process.stderr.transform(utf8.decoder).listen(stderr.write);
+
+    final exitCode = await process.exitCode;
+    if (exitCode != 0) {
+      throw DockerException('Failed to stop services');
     }
   }
 
@@ -240,14 +248,26 @@ class DockerUtils {
       service,
     ];
 
-    final result = await Process.run('docker', args);
-    if (result.exitCode != 0) {
-      throw DockerException(
-        'Failed to get logs: ${result.stderr}',
-      );
+    final process = await Process.start('docker', args);
+    final output = StringBuffer();
+
+    // Collect stdout
+    await process.stdout.transform(utf8.decoder).forEach((str) {
+      output.write(str);
+      stdout.write(str);
+    });
+
+    // Collect stderr
+    await process.stderr.transform(utf8.decoder).forEach((str) {
+      stderr.write(str);
+    });
+
+    final exitCode = await process.exitCode;
+    if (exitCode != 0) {
+      throw DockerException('Failed to get logs');
     }
 
-    return result.stdout.toString();
+    return output.toString();
   }
 
   /// Execute command in a service container
@@ -257,7 +277,7 @@ class DockerUtils {
     bool interactive = false,
   }) async {
     // Get container ID
-    final psResult = await Process.run(
+    final psProcess = await Process.start(
       'docker',
       [
         'compose',
@@ -271,14 +291,14 @@ class DockerUtils {
       ],
     );
 
-    if (psResult.exitCode != 0) {
-      throw DockerException(
-        'Failed to get container ID: ${psResult.stderr}',
-      );
+    final containerId = await psProcess.stdout.transform(utf8.decoder).join();
+    final psExitCode = await psProcess.exitCode;
+
+    if (psExitCode != 0) {
+      throw DockerException('Failed to get container ID');
     }
 
-    final containerId = psResult.stdout.toString().trim();
-    if (containerId.isEmpty) {
+    if (containerId.trim().isEmpty) {
       throw DockerException('Service container not found: $service');
     }
 
@@ -286,18 +306,38 @@ class DockerUtils {
     final args = [
       'exec',
       if (interactive) '-it',
-      containerId,
+      containerId.trim(),
       ...command,
     ];
 
-    final result = await Process.run('docker', args);
-    if (result.exitCode != 0) {
-      throw DockerException(
-        'Command execution failed: ${result.stderr}',
-      );
+    final output = StringBuffer();
+    final errorOutput = StringBuffer();
+
+    final process = await Process.start('docker', args);
+
+    // Collect stdout and stderr while also streaming to terminal
+    await Future.wait([
+      process.stdout.transform(utf8.decoder).forEach((str) {
+        output.write(str);
+        stdout.write(str);
+      }),
+      process.stderr.transform(utf8.decoder).forEach((str) {
+        errorOutput.write(str);
+        stderr.write(str);
+      })
+    ]);
+
+    final exitCode = await process.exitCode;
+    if (exitCode != 0) {
+      throw DockerException('Command execution failed');
     }
 
-    return result;
+    return ProcessResult(
+      process.pid,
+      exitCode,
+      output.toString(),
+      errorOutput.toString(),
+    );
   }
 
   /// Clean up service resources
@@ -325,11 +365,15 @@ class DockerUtils {
         args.addAll(services);
       }
 
-      final result = await Process.run('docker', args);
-      if (result.exitCode != 0) {
-        throw DockerException(
-          'Failed to remove volumes: ${result.stderr}',
-        );
+      final process = await Process.start('docker', args);
+
+      // Stream stdout and stderr
+      process.stdout.transform(utf8.decoder).listen(stdout.write);
+      process.stderr.transform(utf8.decoder).listen(stderr.write);
+
+      final exitCode = await process.exitCode;
+      if (exitCode != 0) {
+        throw DockerException('Failed to remove volumes');
       }
     }
 
@@ -350,11 +394,15 @@ class DockerUtils {
         args.addAll(services);
       }
 
-      final result = await Process.run('docker', args);
-      if (result.exitCode != 0) {
-        throw DockerException(
-          'Failed to remove images: ${result.stderr}',
-        );
+      final process = await Process.start('docker', args);
+
+      // Stream stdout and stderr
+      process.stdout.transform(utf8.decoder).listen(stdout.write);
+      process.stderr.transform(utf8.decoder).listen(stderr.write);
+
+      final exitCode = await process.exitCode;
+      if (exitCode != 0) {
+        throw DockerException('Failed to remove images');
       }
     }
   }

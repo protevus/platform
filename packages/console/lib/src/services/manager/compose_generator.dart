@@ -25,12 +25,9 @@ class ComposeGenerator {
     final buffer = StringBuffer();
     final activeServices = _getActiveServices(services, specificServices);
 
-    // Write header
-    buffer.writeln('version: "$composeVersion"');
-    buffer.writeln();
-
     // Write services section
     buffer.writeln('services:');
+    buffer.writeln();
     for (final entry in activeServices.entries) {
       final config = entry.value;
       final manifest = manifests[config.name];
@@ -71,13 +68,13 @@ class ComposeGenerator {
     Map<String, ServiceConfig> services,
     List<String>? specificServices,
   ) {
-    if (specificServices == null || specificServices.isEmpty) {
+    if (specificServices != null && specificServices.isNotEmpty) {
       return Map.fromEntries(
-        services.entries.where((entry) => entry.value.enabled),
+        services.entries.where((entry) => specificServices.contains(entry.key)),
       );
     }
     return Map.fromEntries(
-      services.entries.where((entry) => specificServices.contains(entry.key)),
+      services.entries.where((entry) => entry.value.enabled),
     );
   }
 
@@ -94,7 +91,7 @@ class ComposeGenerator {
     // Build context and args
     buffer.writeln('$indent  build:');
     buffer.writeln(
-        '$indent    context: ${path.join(servicesPath, config.category, config.name)}');
+        '$indent    context: ./services/${config.category}/${config.name}');
     buffer.writeln('$indent    args:');
     buffer.writeln('$indent      VERSION: ${config.version}');
 
@@ -105,9 +102,23 @@ class ComposeGenerator {
     buffer.writeln('$indent  restart: unless-stopped');
 
     // Environment variables
+    final envVars = <String>[];
+    // Add manifest environment variables
     if (manifest.environment.isNotEmpty) {
-      buffer.writeln('$indent  environment:');
       for (final env in manifest.environment) {
+        if (config.config.containsKey('password') && env == 'REDIS_PASSWORD') {
+          continue; // Skip REDIS_PASSWORD from manifest if we have it in config
+        }
+        envVars.add(env);
+      }
+    }
+    // Add config-based environment variables
+    if (config.config.containsKey('password')) {
+      envVars.add('REDIS_PASSWORD=${config.config['password']}');
+    }
+    if (envVars.isNotEmpty) {
+      buffer.writeln('$indent  environment:');
+      for (final env in envVars) {
         buffer.writeln('$indent    - $env');
       }
     }
@@ -129,7 +140,8 @@ class ComposeGenerator {
 
     // Health check
     buffer.writeln('$indent  healthcheck:');
-    buffer.writeln('$indent    test: ${manifest.healthCheck.command}');
+    buffer.writeln(
+        '$indent    test: ["CMD-SHELL", "${manifest.healthCheck.command}"]');
     buffer.writeln('$indent    interval: ${manifest.healthCheck.interval}');
     buffer.writeln('$indent    timeout: ${manifest.healthCheck.timeout}');
     buffer.writeln('$indent    retries: ${manifest.healthCheck.retries}');

@@ -49,8 +49,7 @@ class ServiceManager {
     _composeGenerator = ComposeGenerator();
     _dockerUtils = DockerUtils(
       projectName: 'dev_services',
-      composePath:
-          path.join('devops', 'docker', 'docker-compose.generated.yml'),
+      composePath: path.join(workingDir, 'docker-compose.generated.yml'),
     );
   }
 
@@ -175,22 +174,22 @@ services: {}
   /// Generate docker-compose file
   Future<void> generateComposeFile([List<String>? services]) async {
     try {
+      // Filter services if specific ones are requested
+      final activeServices = services != null && services.isNotEmpty
+          ? Map.fromEntries(
+              _services.entries.where((e) => services.contains(e.key)))
+          : _services;
+
       final content = _composeGenerator.generate(
-        services: _services,
+        services: activeServices,
         manifests: _manifests,
         servicesPath: servicesPath,
-        specificServices: services,
+        specificServices: null, // We've already filtered the services
       );
-
-      // Create docker directory if needed
-      final dockerDir = Directory(path.join('devops', 'docker'));
-      if (!await dockerDir.exists()) {
-        await dockerDir.create(recursive: true);
-      }
 
       // Write compose file
       final composeFile =
-          File(path.join('devops', 'docker', 'docker-compose.generated.yml'));
+          File(path.join(workingDir, 'docker-compose.generated.yml'));
       await composeFile.writeAsString(content);
     } catch (e) {
       throw ServiceException('Failed to generate compose file', e);

@@ -29,6 +29,7 @@ import 'commands/services/cleanup_command.dart';
 import 'commands/services/add_command.dart';
 import 'commands/services/remove_command.dart';
 import 'commands/services/configure_command.dart';
+import 'commands/services/exec_command.dart';
 import 'commands/system/docs_api_command.dart';
 import 'commands/system/gitignore_setup_command.dart';
 import 'commands/system/dart_info_command.dart';
@@ -81,6 +82,7 @@ class Developer extends Application {
     add(AddCommand());
     add(RemoveCommand());
     add(ConfigureCommand());
+    add(ExecCommand());
     add(DocsApiCommand());
     add(GitignoreSetupCommand());
     add(DartInfoCommand());
