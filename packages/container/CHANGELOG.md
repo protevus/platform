@@ -1,3 +1,14 @@
+## 0.5.1-dev.0+1
+
+ - **REFACTOR**: updating container with more features from laravel service container. ([f0d516de](https://github.com/protevus/platform/commit/f0d516de1b7521e89b0371bdbbe597fb53b78804))
+ - **REFACTOR**: container package. ([42a48af9](https://github.com/protevus/platform/commit/42a48af9db25272bdc11f92fdfdc8e21a669ef86))
+ - **REFACTOR**(zero): completed angel3 core integration implementing new core. ([c87e3899](https://github.com/protevus/platform/commit/c87e389945b79bfdc0a3d3cf61f2040e2ce8f607))
+ - **REFACTOR**: working on constructor injection 175 pass 2 fail. ([ab9ebde5](https://github.com/protevus/platform/commit/ab9ebde517133439a0adf705f724d5994dcbc50d))
+ - **REFACTOR**: working on constructor injection 175 pass 2 fail. ([8c031ec7](https://github.com/protevus/platform/commit/8c031ec7402372c407849477b08c477ea7501d6c))
+ - **REFACTOR**: working on constructor injection 174 pass 3 fail. ([9c2297ce](https://github.com/protevus/platform/commit/9c2297cedff3af5e8e092778ee5c499bc7d5c664))
+ - **REFACTOR**: upgrade container to package status. ([0fbb79e4](https://github.com/protevus/platform/commit/0fbb79e4d725766f1f43557a3f14c61c47eb4821))
+ - **REFACTOR**: refactored core package to foundation package. ([2258f301](https://github.com/protevus/platform/commit/2258f301e82b28e6f372120262d7aeec4ece1aad))
+
 # Change Log
 
 ## 8.1.1

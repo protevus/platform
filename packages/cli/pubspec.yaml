@@ -1,14 +1,14 @@
-name: artisan
+name: illuminate_artisan
 description: Command-line interface for the Protevus Platform
-version: 0.5.1
+version: 0.5.1-dev.0+1
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  illuminate_console: ^0.5.1
-  illuminate_foundation: ^0.5.1
-  illuminate_filesystem: ^0.5.1
+  illuminate_console: ^0.5.2-dev.0
+  illuminate_foundation: ^0.5.1-dev.0+1
+  illuminate_filesystem: ^0.5.1-dev.0+1
   meta: ^1.0.0
   path: ^1.0.0
   watcher: ^1.1.0

@@ -1,3 +1,13 @@
+## 0.5.1-dev.0+1
+
+ - **REFACTOR**: finished, removing annotation package. ([9ee1d98e](https://github.com/protevus/platform/commit/9ee1d98e6b19d1bca8522eb4112fc29375dc6a4c))
+ - **REFACTOR**: database package. ([3eb77df4](https://github.com/protevus/platform/commit/3eb77df48227d6b84b768b9e456fc7c81574361f))
+ - **REFACTOR**: re-branding. ([40ccdcaa](https://github.com/protevus/platform/commit/40ccdcaa071134ddeb8e6de17bcfe3ea36177d4a))
+ - **REFACTOR**: re-branding. ([943fa95b](https://github.com/protevus/platform/commit/943fa95b8b4e265044f8d77eff1d421e4c0d1c57))
+ - **REFACTOR**(add): initial new core commit. ([a70e2f53](https://github.com/protevus/platform/commit/a70e2f53945d5eda87c08ee5514acaa26e52ce87))
+ - **REFACTOR**(zero): completed angel3 core integration implementing new core. ([c87e3899](https://github.com/protevus/platform/commit/c87e389945b79bfdc0a3d3cf61f2040e2ce8f607))
+ - **REFACTOR**: renaming PDO to DBO. ([7448e712](https://github.com/protevus/platform/commit/7448e7129597aa08c0822dfd1a78c5be71aed37e))
+
 ## 2.1.0
 
 - Added support for MYSQL driver

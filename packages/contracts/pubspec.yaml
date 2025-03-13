@@ -1,6 +1,6 @@
 name: illuminate_contracts
 description: This package defines the protevus API
-version: 0.5.1
+version: 0.5.1-dev.0+1
 homepage: https://protevus.com
 documentation: https://docs.protevus.com
 repository: https://git.protevus.com/protevus/platform
@@ -10,12 +10,12 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
-  illuminate_collections: ^0.5.1
-  illuminate_database: ^0.5.1
-  illuminate_http: ^0.5.1
-  illuminate_log: ^0.5.1
-  illuminate_routing: ^0.5.1
-  illuminate_support: ^0.5.1
+  illuminate_collections: ^0.5.1-dev.0+1
+  illuminate_database: ^0.5.1-dev.0+1
+  illuminate_http: ^0.5.1-dev.0+1
+  illuminate_log: ^0.5.1-dev.0+1
+  illuminate_routing: ^0.5.1-dev.0+1
+  illuminate_support: ^0.5.1-dev.0+1
 
 dev_dependencies:
   lints: ^3.0.0
