@@ -1,6 +1,6 @@
 name: illuminate_cookie
 description: A Dart implementation of Laravel-inspired cookie management for the Protevus platform.
-version: 0.5.1
+version: 0.5.1-dev.0+1
 homepage: https://protevus.com
 
 environment:
@@ -8,10 +8,10 @@ environment:
 
 dependencies:
   crypto: ^3.0.1
-  illuminate_collections: ^0.5.1
-  illuminate_contracts: ^0.5.1
-  illuminate_macroable: ^0.5.1
-  illuminate_support: ^0.5.1
+  illuminate_collections: ^0.5.1-dev.0+1
+  illuminate_contracts: ^0.5.1-dev.0+1
+  illuminate_macroable: ^0.5.1-dev.0+1
+  illuminate_support: ^0.5.1-dev.0+1
 
 dev_dependencies:
   test: ^1.16.0

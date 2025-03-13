@@ -1,6 +1,6 @@
 name: illuminate_migration
 description: Database migration package for Postgres SQL
-version: 0.5.1
+version: 0.5.1-dev.0+1
 repository: https://github.com/dartondox/dox
 
 environment:

@@ -1,6 +1,6 @@
 name: illuminate_foundation
 description: A perfect solution for your web backend development with dart that offers a wide range of features to help you build powerful and scalable web applications.
-version: 0.5.1
+version: 0.5.1-dev.0+1
 repository: https://github.com/dartondox/dox
 
 environment:
@@ -14,16 +14,16 @@ dependencies:
   mime: ^1.0.4
   string_scanner: ^1.1.0
   uuid: ^3.0.6
-  illuminate_cache: ^0.5.1
-  illuminate_config: ^0.5.1
-  illuminate_container: ^0.5.1
-  illuminate_contracts: ^0.5.1
-  illuminate_http: ^0.5.1
-  illuminate_log: ^0.5.1
-  illuminate_routing: ^0.5.1
-  illuminate_storage: ^0.5.1
-  illuminate_support: ^0.5.1
-  illuminate_validation: ^0.5.1
+  illuminate_cache: ^0.5.1-dev.0+1
+  illuminate_config: ^0.5.1-dev.0+1
+  illuminate_container: ^0.5.1-dev.0+1
+  illuminate_contracts: ^0.5.1-dev.0+1
+  illuminate_http: ^0.5.1-dev.0+1
+  illuminate_log: ^0.5.1-dev.0+1
+  illuminate_routing: ^0.5.1-dev.0+1
+  illuminate_storage: ^0.5.1-dev.0+1
+  illuminate_support: ^0.5.1-dev.0+1
+  illuminate_validation: ^0.5.1-dev.0+1
 
 dev_dependencies:
   lints: ^2.0.0
