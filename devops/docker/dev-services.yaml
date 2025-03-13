@@ -3,7 +3,7 @@ services:
     redis:
       category: caching
       version: 7.0
-      enabled: true
+      enabled: false
       config:
         active_defrag: false
         active_defrag_threshold_lower: 10
@@ -28,22 +28,6 @@ services:
         slowlog_max_len: 128
         tcp_keepalive: 300
         timeout: 0
-    test-redis:
-      category: caching
-      version: 7.0
-      enabled: true
-      config:
-        appendfsync: always
-        appendonly: true
-        databases: 8
-        maxmemory: 128mb
-        maxmemory_policy: volatile-lru
-        maxmemory_samples: 10
-        notify_keyspace_events: AKE
-        port: 6380
-        save_intervals: "300:1 60:10 10:100"
-        slowlog_log_slower_than: 5000
-        slowlog_max_len: 256
   coordination:
     zookeeper:
       category: coordination
@@ -198,7 +182,7 @@ services:
     kafka:
       category: messaging
       version: 3.5
-      enabled: true
+      enabled: false
       config:
         advertised_listeners: PLAINTEXT://localhost:9092,INTERNAL://kafka:9093
         auto_create_topics: true
