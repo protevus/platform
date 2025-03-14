@@ -4,16 +4,16 @@ import '../../command.dart';
 import '../../services/manager/service_manager.dart';
 
 /// Command to generate docker-compose file for services
-class GenerateCommand extends Command {
+class GenerateServicesCommand extends Command {
   @override
-  String get name => 'services:generate';
+  String get name => 'generate:services';
 
   @override
   String get description => 'Generate docker-compose file for services';
 
   @override
   String get signature =>
-      'services:generate {--services=* : Specific services to include} {--force : Force regeneration of compose file}';
+      'generate:services {--services=* : Specific services to include} {--force : Force regeneration of compose file}';
 
   @override
   Future<void> handle() async {

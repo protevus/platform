@@ -1,15 +1,15 @@
 import '../base/melos_command.dart';
 
 /// Command to ensure .gitignore files are properly set up in packages
-class GitignoreSetupCommand extends MelosCommand {
+class GenerateGitignoreCommand extends MelosCommand {
   @override
-  String get name => 'gitignore:setup';
+  String get name => 'generate:gitignore';
 
   @override
   String get description => 'Set up .gitignore files in packages';
 
   @override
-  String get signature => 'gitignore:setup';
+  String get signature => 'generate:gitignore';
 
   static const gitignoreContent =
       '''# See https://www.dartlang.org/guides/libraries/private-files
