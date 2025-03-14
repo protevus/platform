@@ -4,7 +4,7 @@ import 'commands/testing/test_command.dart';
 import 'commands/testing/test_package_command.dart';
 import 'commands/testing/test_coverage_report_command.dart';
 import 'commands/testing/test_coverage_command.dart';
-import 'commands/development/generate_command.dart' as system;
+import 'commands/development/generate_command.dart';
 import 'commands/development/generate_package_command.dart';
 import 'commands/development/generate_check_command.dart';
 import 'commands/development/generate_dumbtest_command.dart';
@@ -15,6 +15,7 @@ import 'commands/core/analyze_command.dart';
 import 'commands/core/clean_command.dart';
 import 'commands/development/list_package_command.dart';
 import 'commands/release/publish_command.dart';
+import 'commands/release/version_command.dart';
 import 'commands/development/deps_check_command.dart';
 import 'commands/development/deps_upgrade_command.dart';
 import 'commands/development/generate_config_command.dart';
@@ -31,9 +32,9 @@ import 'commands/services/remove_command.dart';
 import 'commands/services/configure_command.dart';
 import 'commands/services/discover_command.dart';
 import 'commands/services/exec_command.dart';
-import 'commands/services/generate_command.dart';
+import 'commands/development/generate_services_command.dart';
 import 'commands/documentation/api_command.dart';
-import 'commands/release/gitignore_setup_command.dart';
+import 'commands/development/generate_gitignore_command.dart';
 import 'commands/core/info_command.dart';
 import 'commands/documentation/api_serve_command.dart';
 import 'commands/development/list_files_command.dart';
@@ -59,7 +60,7 @@ class Developer extends Application {
     add(TestPackageCommand());
     add(TestCoverageCommand());
     add(TestCoverageReportCommand());
-    add(system.GenerateCommand());
+    add(GenerateCommand());
     add(GeneratePackageCommand());
     add(GenerateCheckCommand());
     add(GenerateDumbTestCommand());
@@ -86,9 +87,9 @@ class Developer extends Application {
     add(ConfigureCommand());
     add(DiscoverCommand());
     add(ExecCommand());
-    add(GenerateCommand());
+    add(GenerateServicesCommand());
     add(ApiCommand());
-    add(GitignoreSetupCommand());
+    add(GenerateGitignoreCommand());
     add(InfoCommand());
     add(ApiServeCommand());
     add(ListFilesCommand());
@@ -98,7 +99,9 @@ class Developer extends Application {
     add(DebugReflectableCommand());
 
     // Register melos commands
+    // Register melos commands
     add(AnalyzeCommand());
     add(CleanCommand());
+    add(VersionCommand());
   }
 }
