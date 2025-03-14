@@ -83,8 +83,9 @@ class HelpCommand extends Command {
 
   /// Get command directory from its file path
   String _getCommandDirectory(Command command) {
-    // Get the command's name (e.g., "services:generate" from ServicesGenerateCommand)
+    // Get the command's name and class name
     final commandName = command.name;
+    final className = command.runtimeType.toString();
 
     // Get all command directories
     final commandsDir =
@@ -95,27 +96,30 @@ class HelpCommand extends Command {
         .where((dir) => path.basename(dir.path) != 'base')
         .toList();
 
-    // For commands with colons (e.g., "services:generate"), use the first part
-    // to determine the directory
-    if (commandName.contains(':')) {
-      final mainCommand = commandName.split(':')[0];
-      for (var dir in directories) {
-        final dirName = path.basename(dir.path);
-        if (dirName == mainCommand) {
-          return dirName;
-        }
-      }
-    }
-
-    // For other commands, look for the command file in each directory
+    // Convert class name to file name
     final classFileName =
-        '${command.runtimeType.toString().replaceAllMapped(RegExp(r'([A-Z])'), (match) => '_${match[1]!.toLowerCase()}').toLowerCase().replaceFirst(RegExp(r'^_'), '')}.dart';
+        '${className.replaceAllMapped(RegExp(r'([A-Z])'), (match) => '_${match[1]!.toLowerCase()}').toLowerCase().replaceFirst(RegExp(r'^_'), '')}.dart';
 
+    // Try to find by file location first
     for (var dir in directories) {
       final dirName = path.basename(dir.path);
       final filePath = path.join(dir.path, classFileName);
       if (File(filePath).existsSync()) {
         return dirName;
+      }
+    }
+
+    // If file not found and command has colon, try using the prefix
+    if (commandName.contains(':')) {
+      final mainCommand = commandName.split(':')[0];
+      if (mainCommand == 'generate') {
+        return 'development';
+      }
+      for (var dir in directories) {
+        final dirName = path.basename(dir.path);
+        if (dirName == mainCommand) {
+          return dirName;
+        }
       }
     }
 
