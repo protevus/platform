@@ -1,5 +1,3 @@
-import 'package:args/args.dart';
-
 /// Parses command signatures into arguments and options.
 class Parser {
   /// Parse the given console command signature into its components.

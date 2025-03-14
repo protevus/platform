@@ -1,7 +1,7 @@
 #!/usr/bin/env dart
 
 import 'dart:io';
-import 'package:artisan/artisan.dart';
+import 'package:illuminate_artisan/artisan.dart';
 
 void main(List<String> arguments) async {
   final app = Artisan();

@@ -196,7 +196,7 @@ packages:
       path: "packages/console"
       relative: true
     source: path
-    version: "0.5.1"
+    version: "0.5.2-dev.0"
   intl:
     dependency: transitive
     description:

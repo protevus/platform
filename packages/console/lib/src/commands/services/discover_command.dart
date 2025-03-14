@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:path/path.dart' as path;
 import 'package:yaml/yaml.dart';
 import '../../command.dart';
-import '../../services/manager/service_manager.dart';
 
 /// Command to discover available services and update configuration
 class DiscoverCommand extends Command {

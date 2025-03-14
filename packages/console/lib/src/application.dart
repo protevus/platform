@@ -1,7 +1,6 @@
 import 'dart:async';
-import 'package:meta/meta.dart';
 import 'command.dart';
-import 'commands/system/help_command.dart';
+import 'commands/core/help_command.dart';
 import 'output/output.dart';
 import 'parser.dart';
 

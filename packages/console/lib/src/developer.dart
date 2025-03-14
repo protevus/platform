@@ -1,25 +1,25 @@
 import 'application.dart';
-import 'commands/system/versions_command.dart';
-import 'commands/test/test_command.dart';
-import 'commands/test/test_package_command.dart';
-import 'commands/test/test_coverage_report_command.dart';
-import 'commands/test/test_coverage_command.dart';
-import 'commands/system/generate_command.dart' as system;
-import 'commands/system/generate_package_command.dart';
-import 'commands/system/generate_check_command.dart';
-import 'commands/system/generate_dumbtest_command.dart';
-import 'commands/system/bootstrap_command.dart';
-import 'commands/system/format_command.dart';
-import 'commands/system/fix_command.dart';
-import 'commands/system/analyze_command.dart';
-import 'commands/system/clean_command.dart';
-import 'commands/system/package_command.dart';
-import 'commands/system/publish_command.dart';
-import 'commands/system/deps_check_command.dart';
-import 'commands/system/deps_upgrade_command.dart';
-import 'commands/system/generate_config_command.dart';
-import 'commands/system/create_command.dart';
-import 'commands/system/create_template_command.dart';
+import 'commands/core/stack_command.dart';
+import 'commands/testing/test_command.dart';
+import 'commands/testing/test_package_command.dart';
+import 'commands/testing/test_coverage_report_command.dart';
+import 'commands/testing/test_coverage_command.dart';
+import 'commands/development/generate_command.dart' as system;
+import 'commands/development/generate_package_command.dart';
+import 'commands/development/generate_check_command.dart';
+import 'commands/development/generate_dumbtest_command.dart';
+import 'commands/core/bootstrap_command.dart';
+import 'commands/core/format_command.dart';
+import 'commands/core/fix_command.dart';
+import 'commands/core/analyze_command.dart';
+import 'commands/core/clean_command.dart';
+import 'commands/development/list_package_command.dart';
+import 'commands/release/publish_command.dart';
+import 'commands/development/deps_check_command.dart';
+import 'commands/development/deps_upgrade_command.dart';
+import 'commands/development/generate_config_command.dart';
+import 'commands/development/create_command.dart';
+import 'commands/development/create_template_command.dart';
 import 'commands/services/services_command.dart';
 import 'commands/services/up_command.dart';
 import 'commands/services/down_command.dart';
@@ -32,15 +32,15 @@ import 'commands/services/configure_command.dart';
 import 'commands/services/discover_command.dart';
 import 'commands/services/exec_command.dart';
 import 'commands/services/generate_command.dart';
-import 'commands/system/docs_api_command.dart';
-import 'commands/system/gitignore_setup_command.dart';
-import 'commands/system/dart_info_command.dart';
-import 'commands/system/docs_serve_command.dart';
-import 'commands/system/list_dart_files_command.dart';
-import 'commands/system/mkdocs_command.dart';
-import 'commands/system/debug_pkgname_command.dart';
-import 'commands/system/debug_pkgpath_command.dart';
-import 'commands/system/debug_reflectable_command.dart';
+import 'commands/documentation/api_command.dart';
+import 'commands/release/gitignore_setup_command.dart';
+import 'commands/core/info_command.dart';
+import 'commands/documentation/api_serve_command.dart';
+import 'commands/development/list_files_command.dart';
+import 'commands/documentation/docs_command.dart';
+import 'commands/testing/debug_pkgname_command.dart';
+import 'commands/testing/debug_pkgpath_command.dart';
+import 'commands/testing/debug_reflectable_command.dart';
 
 /// The development console application.
 ///
@@ -54,7 +54,7 @@ class Developer extends Application {
     super.output,
   }) {
     // Register development commands
-    add(VersionsCommand());
+    add(StackCommand());
     add(TestCommand());
     add(TestPackageCommand());
     add(TestCoverageCommand());
@@ -66,7 +66,7 @@ class Developer extends Application {
     add(BootstrapCommand());
     add(FormatCommand());
     add(FixCommand());
-    add(PackageCommand());
+    add(ListPackageCommand());
     add(PublishCommand());
     add(DepsCheckCommand());
     add(DepsUpgradeCommand());
@@ -87,18 +87,18 @@ class Developer extends Application {
     add(DiscoverCommand());
     add(ExecCommand());
     add(GenerateCommand());
-    add(DocsApiCommand());
+    add(ApiCommand());
     add(GitignoreSetupCommand());
-    add(DartInfoCommand());
-    add(DocsServeCommand());
-    add(ListDartFilesCommand());
-    add(MkdocsCommand());
+    add(InfoCommand());
+    add(ApiServeCommand());
+    add(ListFilesCommand());
+    add(DocsCommand());
     add(DebugPkgnameCommand());
     add(DebugPkgpathCommand());
     add(DebugReflectableCommand());
 
     // Register melos commands
-    add(MelosAnalyzeCommand());
-    add(MelosCleanCommand());
+    add(AnalyzeCommand());
+    add(CleanCommand());
   }
 }

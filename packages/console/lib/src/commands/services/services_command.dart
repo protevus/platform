@@ -1,12 +1,4 @@
 import '../../command.dart';
-import 'up_command.dart';
-import 'down_command.dart';
-import 'status_command.dart';
-import 'logs_command.dart';
-import 'cleanup_command.dart';
-import 'add_command.dart';
-import 'remove_command.dart';
-import 'configure_command.dart';
 
 /// Command group for managing development services
 class ServicesCommand extends Command {
