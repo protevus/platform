@@ -12,7 +12,20 @@ abstract class MelosCommand extends Command {
     int? concurrency,
     bool throwOnNonZero = true,
     Map<String, String>? env,
+    bool interactive = false,
   }) async {
+    if (interactive) {
+      return await executeInteractiveMelos(
+        command,
+        args: args,
+        scope: scope,
+        failFast: failFast,
+        concurrency: concurrency,
+        throwOnNonZero: throwOnNonZero,
+        env: env,
+      );
+    }
+
     final melosArgs = [
       command,
       if (scope != null) '--scope=$scope',
@@ -42,6 +55,49 @@ abstract class MelosCommand extends Command {
     process.stderr.transform(const SystemEncoding().decoder).listen((data) {
       output.error(data);
     });
+
+    // Wait for the process to complete and get exit code
+    final exitCode = await process.exitCode;
+
+    if (throwOnNonZero && exitCode != 0) {
+      throw Exception('Melos command failed with exit code $exitCode');
+    }
+
+    return exitCode;
+  }
+
+  /// Execute an interactive melos command with the given arguments.
+  /// This method inherits stdio to properly handle user input.
+  Future<int> executeInteractiveMelos(
+    String command, {
+    List<String> args = const [],
+    String? scope,
+    bool failFast = false,
+    int? concurrency,
+    bool throwOnNonZero = true,
+    Map<String, String>? env,
+  }) async {
+    final melosArgs = [
+      command,
+      if (scope != null) '--scope=$scope',
+      if (failFast) '--fail-fast',
+      if (concurrency != null) '-c',
+      if (concurrency != null) '$concurrency',
+      ...args,
+    ];
+
+    // Merge provided env with current process env
+    final environment = {...Platform.environment};
+    if (env != null) environment.addAll(env);
+    if (scope != null) environment['MELOS_SCOPE'] = scope;
+
+    // Create a process that inherits stdio for interactive input
+    final process = await Process.start(
+      'melos',
+      melosArgs,
+      mode: ProcessStartMode.inheritStdio,
+      environment: environment,
+    );
 
     // Wait for the process to complete and get exit code
     final exitCode = await process.exitCode;

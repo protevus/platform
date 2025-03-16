@@ -29,9 +29,13 @@ class PublishCommand extends MelosCommand {
         output.info('Publishing packages...');
       }
 
-      // Execute melos publish command
-      final exitCode =
-          await executeMelos('publish', args: args, throwOnNonZero: false);
+      // Execute melos publish command with interactive mode
+      final exitCode = await executeMelos(
+        'publish',
+        args: args,
+        throwOnNonZero: false,
+        interactive: true,
+      );
 
       // Handle result
       if (exitCode == 0) {
@@ -47,7 +51,6 @@ class PublishCommand extends MelosCommand {
       } else {
         output
             .error('Failed to publish packages - see output above for details');
-        throw Exception('Publish command failed with exit code $exitCode');
       }
     } catch (e) {
       if (option<bool>('dry-run') != true) {

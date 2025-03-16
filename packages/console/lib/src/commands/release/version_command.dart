@@ -1,4 +1,3 @@
-import 'dart:io';
 import '../base/melos_command.dart';
 
 /// Command to version packages in the monorepo
@@ -100,18 +99,8 @@ class VersionCommand extends MelosCommand {
       }
     }
 
-    // Create a process to handle interactive input
-    final process = await Process.start(
-      'melos',
-      ['version', ...args],
-      mode: ProcessStartMode.inheritStdio,
-      environment: Platform.environment,
-    );
-
-    // Wait for the process to complete
-    final exitCode = await process.exitCode;
-    if (exitCode != 0) {
-      output.info('Operation cancelled no versioning occured');
-    }
+    // Run melos version with interactive mode to handle user input
+    await executeMelos('version',
+        args: args, interactive: true, throwOnNonZero: false);
   }
 }
