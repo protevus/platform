@@ -1,18 +1,5 @@
-/// The View Package for the Protevus Platform.
-///
-/// This package provides a flexible and powerful templating system
-/// inspired by Laravel's View system, adapted for Dart.
-library illuminate_view;
-
-import 'src/contracts/view.dart';
-import 'src/engines/engine_resolver.dart';
-import 'src/factory.dart';
-
-export 'src/view.barrel.dart';
-
-/// Create a new view factory instance with default configuration.
-ViewFactoryContract createViewFactory() {
-  final engines = EngineResolver();
-  final finder = FileViewFinder();
-  return ViewFactory(engines, finder);
-}
+export 'src/ast/ast.dart';
+export 'src/text/parser.dart';
+export 'src/text/scanner.dart';
+export 'src/core/formatter.dart';
+export 'src/core/renderer.dart';

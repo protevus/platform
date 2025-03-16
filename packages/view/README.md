@@ -1,75 +1,53 @@
-# Laravel-like View System for Dart
+# Jael 3
 
-This package provides a Laravel-inspired view system with Blade-like templates. The example demonstrates all major features:
+![Pub Version (including pre-releases)](https://img.shields.io/pub/v/illuminate_view?include_prereleases)
+[![Null Safety](https://img.shields.io/badge/null-safety-brightgreen)](https://dart.dev/null-safety)
+[![Discord](https://img.shields.io/discord/1060322353214660698)](https://discord.gg/3X6bxTUdCM)
+[![License](https://img.shields.io/github/license/dart-backend/angel)](https://github.com/dart-backend/angel/tree/master/packages/jael/jael/LICENSE)
 
-## Features
+A simple server-side HTML templating engine for Dart.
 
-1. **Template Inheritance**
-   - `@extends` - Extend layout templates
-   - `@section/@yield` - Define and render content blocks
-   - `@parent` - Include parent section content
+[See documentation.](https://angel3-docs.dukefirehawk.com/packages/front-end/jael)
 
-2. **Components**
-   - `@component` - Include reusable components
-   - `@slot` - Pass content to components
-   - Component classes support
+## Installation
 
-3. **Partials**
-   - `@include` - Include sub-templates
-   - `@includeIf` - Conditional includes
-   - `@includeWhen` - Conditional includes with expression
+In your `pubspec.yaml`:
 
-4. **Asset Management**
-   - `@push/@stack` - Group and render assets
-   - Multiple stack support
-   - Prepend/append capabilities
-
-5. **Control Structures**
-   - `@if/@else` - Conditionals
-   - `@foreach` - Loops
-   - `@for` - Counting loops
-
-6. **View Composers**
-   - Attach data to views
-   - Share data across views
-   - Event-based view modification
-
-## Directory Structure
-
-```
-views/
-├── layouts/           # Base layouts
-│   └── app.blade.html
-├── components/        # Reusable components
-│   └── card.blade.html
-├── partials/         # Partial templates
-│   └── nav.blade.html
-└── pages/            # Page templates
-    └── home.blade.html
+```yaml
+dependencies:
+  illuminate_view: ^8.0.0
 ```
 
-## Usage
+## API
+
+The core `illuminate_view` package exports classes for parsing Jael templates, an AST library, and a `Renderer` class that generates HTML on-the-fly.
 
 ```dart
-// Setup view system
-final factory = ViewFactory(engines, finder);
-final compiler = BladeCompiler(files, cachePath, factory);
-final bladeEngine = BladeEngine(files, compiler, factory);
+import 'package:belatuk_code_buffer/belatuk_code_buffer.dart';
+import 'package:belatuk_symbol_table/belatuk_symbol_table.dart';
+import 'package:illuminate_view/illuminate_view.dart' as jael;
 
-// Register Blade engine
-engines.register('blade', () => bladeEngine);
-factory.addExtension('blade.html', 'blade');
+void myFunction() {
+    const template = '''
+<html>
+  <body>
+    <h1>Hello</h1>
+    <img src=profile['avatar']>
+  </body>
+</html>
+''';
 
-// Add view composers
-factory.composer('pages.home', (view) {
-  view.withData('menuItems', getMenuItems());
-});
+    var buf = CodeBuffer();
+    var document = jael.parseDocument(template, sourceUrl: 'test.jael', asDSX: false);
+    var scope = SymbolTable(values: {
+      'profile': {
+        'avatar': 'thosakwe.png',
+      }
+    });
 
-// Render views
-return view('pages.home', {
-  'title': 'Welcome',
-  'content': 'Page content'
-});
+    const jael.Renderer().render(document, buf, scope);
+    print(buf);
+}
 ```
 
-See `complete_example.dart` for a full working example of all features.
+Pre-processing (i.e. handling of blocks and includes) is handled by `package:illuminate_view_preprocessor.`.
