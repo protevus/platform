@@ -2,6 +2,21 @@
 
 We track development versions with semantic versioning. See below for information about each release.
 
+## [0.5.1-dev.0+1](notes/v0.5.1-dev.0+1.md)
+
+*Development Release*
+
+| Package | Description | Version |
+|---------|-------------|----------|
+| Platform | Core Framework | [`v0.5.1-dev.0+1`](notes/v0.5.1-dev.0+1.md) |
+
+- Key Updates:
+    - Comprehensive view system implementation
+    - Enhanced Artisan CLI developer tools
+    - Service manager integration
+    - Documentation infrastructure improvements
+    - New pagination package
+
 ## [0.5.1-dev](notes/v0.5.1-dev.md)
 
 *Development Release*

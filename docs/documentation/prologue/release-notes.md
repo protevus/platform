@@ -2,19 +2,46 @@
 
 Welcome to the unified release notes for our platform. This document provides a comprehensive overview of all releases across our package ecosystem.
 
-## Latest Release: v0.5.1-dev
+## Latest Release: v0.5.1-dev.0+1
 
 ### Overview
-The current development release focuses on documentation improvements, bug fixes, and refinements to the notifications package. It brings significant improvements to documentation organization, example clarity, and testing infrastructure.
+This release introduces a comprehensive view system, enhanced CLI tooling, and improved service management capabilities. It represents a significant step forward in developer tooling and template handling.
 
 ### Key Improvements
+- Complete view package implementation with extensive features
+  * View inheritance, caching, sections, loops, and stacks
+  * Components, events, translations, and fragments support
+  * View composer and creator functionality
+- Enhanced Artisan CLI developer commands
+  * New generation commands for packages, tests, and configurations
+  * Debug tools for reflectable and package management
+  * Test coverage reporting and formatting capabilities
+- Service Management Enhancements
+  * New service manager integration with console package
+  * Application config stubs and compose config generation
+  * Improved service discovery system
+- Documentation and Infrastructure
+  * Updated documentation with new roadmaps
+  * Enhanced API documentation system with mkdoc support
+  * Improved GitHub Pages integration
+- New Packages
+  * Added pagination package
+  * Enhanced view system architecture
+- No breaking changes - maintains backward compatibility
+
+## Version History
+
+### v0.5.1-dev
+
+#### Overview
+The development release focused on documentation improvements, bug fixes, and refinements to the notifications package. It brought significant improvements to documentation organization, example clarity, and testing infrastructure.
+
+#### Key Improvements
 - Enhanced documentation with better navigation and structure
 - Refactored notifications package with improved database integration
 - Updated examples and usage guides
 - Improved pipeline test coverage and reliability
-- No breaking changes - maintains backward compatibility
-
-## Version History
+- No breaking changes - maintained backward compatibility
 
 ### v0.5.0-dev
 
