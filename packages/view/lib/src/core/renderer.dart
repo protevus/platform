@@ -130,15 +130,16 @@ class Renderer {
 
     // Single attribute handling section for all elements
     for (var attribute in element.attributes) {
-      var value =
-          attribute.string?.value ?? attribute.value?.compute(childScope);
-      if (value == false || value == null) continue;
+      var value = attribute.value?.compute(childScope);
+      if (value == false || value == null && !attribute.isRaw) continue;
 
       buffer.write(' ${attribute.name}');
       if (value == true) continue;
 
       buffer.write('="');
-      if (value is Iterable) {
+      if (attribute.isRaw && attribute.string != null) {
+        buffer.write(attribute.string!.value);
+      } else if (value is Iterable) {
         buffer.write(htmlEscape.convert(value.join(' ')));
       } else if (value is Map) {
         buffer.write(htmlEscape
