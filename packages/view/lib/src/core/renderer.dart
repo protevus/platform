@@ -104,11 +104,24 @@ class Renderer {
       return;
     }
 
+    // Check for conditional attributes
+    if (element.attributes.any((a) => a.name == 'if')) {
+      var ifAttribute = element.attributes.singleWhere((a) => a.name == 'if');
+      var condition =
+          _evaluateCondition(ifAttribute.value!.compute(scope), scope);
+      if (!condition) return;
+      element = _stripAttribute(element, 'if');
+    } else if (element.attributes.any((a) => a.name == 'else-if')) {
+      var elseIfAttribute =
+          element.attributes.singleWhere((a) => a.name == 'else-if');
+      var condition =
+          _evaluateCondition(elseIfAttribute.value!.compute(scope), scope);
+      if (!condition) return;
+      element = _stripAttribute(element, 'else-if');
+    }
+
     if (element.attributes.any((a) => a.name == 'for-each')) {
       renderForeach(element, buffer, childScope, html5);
-      return;
-    } else if (element.attributes.any((a) => a.name == 'if')) {
-      renderIf(element, buffer, childScope, html5);
       return;
     } else if (element.attributes.any((a) => a.name == 'unless')) {
       renderUnless(element, buffer, childScope, html5);
@@ -130,6 +143,18 @@ class Renderer {
         renderCustomElement(element, buffer, childScope, html5);
         return;
       }
+    }
+
+    // Check if this element has conditional children
+    var hasConditionalChildren = element.children.any((child) {
+      if (child is! Element) return false;
+      return child.attributes.any(
+          (a) => a.name == 'if' || a.name == 'else-if' || a.name == 'else');
+    });
+
+    if (hasConditionalChildren) {
+      renderIf(element, buffer, scope, html5);
+      return;
     }
 
     buffer
@@ -228,11 +253,7 @@ class Renderer {
     }
   }
 
-  void renderIf(
-      Element element, CodeBuffer buffer, SymbolTable scope, bool html5) {
-    var attribute = element.attributes.singleWhere((a) => a.name == 'if');
-
-    var value = attribute.value!.compute(scope);
+  bool _evaluateCondition(dynamic value, SymbolTable scope) {
     var condition = false;
 
     if (value is String) {
@@ -255,16 +276,18 @@ class Renderer {
       condition = condition == true;
     }
 
-    if (!condition) return;
+    return condition;
+  }
 
-    var otherAttributes = element.attributes.where((a) => a.name != 'if');
-    late Element strippedElement;
+  Element _stripAttribute(Element element, String attributeName) {
+    var otherAttributes =
+        element.attributes.where((a) => a.name != attributeName);
 
     if (element is SelfClosingElement) {
-      strippedElement = SelfClosingElement(element.lt, element.tagName,
-          otherAttributes, element.slash, element.gt);
+      return SelfClosingElement(element.lt, element.tagName, otherAttributes,
+          element.slash, element.gt);
     } else if (element is RegularElement) {
-      strippedElement = RegularElement(
+      return RegularElement(
           element.lt,
           element.tagName,
           otherAttributes,
@@ -276,7 +299,117 @@ class Renderer {
           element.gt2);
     }
 
-    renderElement(strippedElement, buffer, scope, html5);
+    return element;
+  }
+
+  void renderIf(
+      Element element, CodeBuffer buffer, SymbolTable scope, bool html5) {
+    if (element is! RegularElement) return;
+
+    // Write opening tag and attributes
+    buffer.write('<${element.tagName.name}');
+    for (var attribute in element.attributes) {
+      var value = attribute.value?.compute(scope);
+      if (value == false || value == null && !attribute.isRaw) continue;
+
+      buffer.write(' ${attribute.name}');
+      if (value == true) continue;
+
+      buffer.write('="');
+      if (attribute.isRaw && attribute.string != null) {
+        buffer.write(attribute.string!.value);
+      } else if (value is Iterable) {
+        buffer.write(htmlEscape.convert(value.join(' ')));
+      } else if (value is Map) {
+        buffer.write(htmlEscape
+            .convert(value.keys.fold<StringBuffer>(StringBuffer(), (buf, k) {
+          var v = value[k];
+          if (v == null) return buf;
+          return buf..write('$k: $v;');
+        }).toString()));
+      } else {
+        buffer.write(attribute.isRaw
+            ? value.toString()
+            : htmlEscape.convert(value.toString()));
+      }
+      buffer.write('"');
+    }
+    buffer.writeln('>');
+    buffer.indent();
+
+    // Process children
+    var children = element.children.toList();
+    var i = 0;
+    var foundIf = false;
+    var foundMatch = false;
+    var inConditionalChain = false;
+
+    try {
+      while (i < children.length) {
+        var child = children[i];
+        if (child is! Element) {
+          if (!inConditionalChain) {
+            renderElementChild(
+                element, child, buffer, scope, html5, i, children.length);
+          }
+          i++;
+          continue;
+        }
+
+        // Check for start of conditional chain
+        if (child.attributes.any((a) => a.name == 'if')) {
+          foundIf = true;
+          inConditionalChain = true;
+          var condition = _evaluateCondition(
+              child.attributes
+                  .singleWhere((a) => a.name == 'if')
+                  .value!
+                  .compute(scope),
+              scope);
+
+          if (condition) {
+            renderElement(_stripAttribute(child, 'if'), buffer, scope, html5);
+            foundMatch = true;
+            return;
+          }
+        } else if (foundIf && !foundMatch) {
+          // Handle else-if conditions
+          if (child.attributes.any((a) => a.name == 'else-if')) {
+            var condition = _evaluateCondition(
+                child.attributes
+                    .singleWhere((a) => a.name == 'else-if')
+                    .value!
+                    .compute(scope),
+                scope);
+            if (condition) {
+              renderElement(
+                  _stripAttribute(child, 'else-if'), buffer, scope, html5);
+              foundMatch = true;
+              return;
+            }
+          }
+          // Handle else condition
+          else if (child.attributes.any((a) => a.name == 'else')) {
+            if (!foundMatch) {
+              renderElement(
+                  _stripAttribute(child, 'else'), buffer, scope, html5);
+              foundMatch = true;
+            }
+            return;
+          }
+          // Exit if we find a non-conditional element after starting a chain
+          else if (!child.attributes.any((a) => a.name == 'else-if')) {
+            return;
+          }
+        } else if (!inConditionalChain) {
+          renderElement(child, buffer, scope, html5);
+        }
+        i++;
+      }
+    } finally {
+      buffer.outdent();
+      buffer.writeln('</${element.tagName.name}>');
+    }
   }
 
   void renderDeclare(
