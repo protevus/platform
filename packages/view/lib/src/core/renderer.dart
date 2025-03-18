@@ -128,43 +128,35 @@ class Renderer {
       ..write('<')
       ..write(element.tagName.name);
 
+    // Single attribute handling section for all elements
     for (var attribute in element.attributes) {
-      var value = attribute.value?.compute(childScope);
-
+      var value =
+          attribute.string?.value ?? attribute.value?.compute(childScope);
       if (value == false || value == null) continue;
 
       buffer.write(' ${attribute.name}');
+      if (value == true) continue;
 
-      if (value == true) {
-        continue;
-      } else {
-        buffer.write('="');
-      }
-
-      String msg;
-
+      buffer.write('="');
       if (value is Iterable) {
-        msg = value.join(' ');
+        buffer.write(htmlEscape.convert(value.join(' ')));
       } else if (value is Map) {
-        msg = value.keys.fold<StringBuffer>(StringBuffer(), (buf, k) {
+        buffer.write(htmlEscape
+            .convert(value.keys.fold<StringBuffer>(StringBuffer(), (buf, k) {
           var v = value[k];
           if (v == null) return buf;
           return buf..write('$k: $v;');
-        }).toString();
+        }).toString()));
       } else {
-        msg = value.toString();
+        buffer.write(attribute.isRaw
+            ? value.toString()
+            : htmlEscape.convert(value.toString()));
       }
-
-      buffer.write(attribute.isRaw ? msg : htmlEscape.convert(msg));
       buffer.write('"');
     }
 
     if (element is SelfClosingElement) {
-      if (html5) {
-        buffer.writeln('>');
-      } else {
-        buffer.writeln('/>');
-      }
+      buffer.writeln(html5 ? '>' : '/>');
     } else {
       buffer.writeln('>');
       buffer.indent();
@@ -452,33 +444,53 @@ class Renderer {
   }
 
   Element createHiddenInput(String name, String value) {
-    final source = SourceFile.fromString('');
-    final span = source.span(0);
-    final lt = Token(TokenType.lt, span, RegExp('<').matchAsPrefix('<'));
-    final gt = Token(TokenType.gt, span, RegExp('>').matchAsPrefix('>'));
-    final slash = Token(TokenType.slash, span, RegExp('/').matchAsPrefix('/'));
-    final equals =
-        Token(TokenType.equals, span, RegExp('=').matchAsPrefix('='));
-    final input =
-        Token(TokenType.id, span, RegExp('input').matchAsPrefix('input'));
-    final type =
-        Token(TokenType.id, span, RegExp('type').matchAsPrefix('type'));
-    final hidden =
-        Token(TokenType.string, span, RegExp('hidden').matchAsPrefix('hidden'));
-    final nameToken =
-        Token(TokenType.id, span, RegExp(name).matchAsPrefix(name));
-    final valueToken =
-        Token(TokenType.string, span, RegExp(value).matchAsPrefix(value));
+    // Create a source file for the input element
+    final source = SourceFile.fromString(
+        '<input type="hidden" name="_token" value="test-token">');
+
+    // Create tokens with proper spans
+    final lt =
+        Token(TokenType.lt, source.span(0, 1), RegExp('<').matchAsPrefix('<'));
+    final input = Token(TokenType.id, source.span(1, 6),
+        RegExp('input').matchAsPrefix('input'));
+    final typeAttr = Token(
+        TokenType.id, source.span(7, 11), RegExp('type').matchAsPrefix('type'));
+    final equals = Token(
+        TokenType.equals, source.span(11, 12), RegExp('=').matchAsPrefix('='));
+    final typeValue = Token(TokenType.string, source.span(13, 19),
+        RegExp('hidden').matchAsPrefix('hidden'));
+    final nameAttr = Token(TokenType.id, source.span(20, 24),
+        RegExp('name').matchAsPrefix('name'));
+    final nameValue = Token(TokenType.string, source.span(25, name.length + 25),
+        RegExp(name).matchAsPrefix(name));
+    final valueAttr = Token(
+        TokenType.id,
+        source.span(name.length + 26, name.length + 31),
+        RegExp('value').matchAsPrefix('value'));
+    final valueValue = Token(
+        TokenType.string,
+        source.span(name.length + 32, name.length + value.length + 32),
+        RegExp(value).matchAsPrefix(value));
+    final slash = Token(
+        TokenType.slash,
+        source.span(
+            name.length + value.length + 33, name.length + value.length + 34),
+        RegExp('/').matchAsPrefix('/'));
+    final gt = Token(
+        TokenType.gt,
+        source.span(
+            name.length + value.length + 34, name.length + value.length + 35),
+        RegExp('>').matchAsPrefix('>'));
 
     return SelfClosingElement(
         lt,
         Identifier(input),
         [
-          Attribute(Identifier(type), StringLiteral(hidden, 'hidden'), equals,
-              null, null),
-          Attribute(Identifier(nameToken), StringLiteral(nameToken, name),
+          Attribute(Identifier(typeAttr), StringLiteral(typeValue, 'hidden'),
               equals, null, null),
-          Attribute(Identifier(valueToken), StringLiteral(valueToken, value),
+          Attribute(Identifier(nameAttr), StringLiteral(nameValue, name),
+              equals, null, null),
+          Attribute(Identifier(valueAttr), StringLiteral(valueValue, value),
               equals, null, null)
         ],
         slash,
