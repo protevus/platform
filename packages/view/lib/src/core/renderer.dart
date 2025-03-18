@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:belatuk_code_buffer/belatuk_code_buffer.dart';
 import 'package:collection/collection.dart' show IterableExtension;
-//import 'package:source_span/source_span.dart';
+import 'package:source_span/source_span.dart';
 import 'package:belatuk_symbol_table/belatuk_symbol_table.dart';
 import '../ast/ast.dart';
 import '../text/parser.dart';
@@ -93,6 +93,11 @@ class Renderer {
   void renderElement(
       Element element, CodeBuffer buffer, SymbolTable scope, bool html5) {
     var childScope = scope.createChild();
+
+    if (element.tagName.name == 'form') {
+      renderForm(element, buffer, childScope, html5);
+      return;
+    }
 
     if (element.attributes.any((a) => a.name == 'for-each')) {
       renderForeach(element, buffer, childScope, html5);
@@ -378,6 +383,106 @@ class Renderer {
           "Cannot re-define element '$name' in this scope.",
           element.getAttribute('name')!.span);
     }
+  }
+
+  void renderForm(
+      Element element, CodeBuffer buffer, SymbolTable scope, bool html5) {
+    // Get method first to determine if we need CSRF token
+    print('All attributes:');
+    for (var attr in element.attributes) {
+      print(
+          'Attribute name: ${attr.name}, string: ${attr.string?.value}, value: ${attr.value?.compute(scope)}');
+      print('Attribute name type: ${attr.name.runtimeType}');
+      print('Attribute name == "method": ${attr.name == 'method'}');
+      print('Attribute name chars: ${attr.name.codeUnits}');
+      print('method chars: ${'method'.codeUnits}');
+    }
+    var methodAttr =
+        element.attributes.firstWhereOrNull((a) => a.name == 'method');
+    print('Method attr: $methodAttr');
+    print('Method attr string: ${methodAttr?.string?.value}');
+    print('Method attr value: ${methodAttr?.value?.compute(scope)}');
+    var method = methodAttr?.string?.value ??
+        methodAttr?.value?.compute(scope)?.toString();
+    print('Final method: $method');
+
+    // Start form tag
+    buffer.write('<form');
+
+    // Write attributes
+    for (var attribute in element.attributes) {
+      var value = attribute.string?.value ?? attribute.value?.compute(scope);
+      if (value == false || value == null) continue;
+
+      buffer.write(' ');
+      buffer.write(attribute.name);
+      if (value == true) continue;
+
+      buffer.write('="');
+      if (attribute.name == 'method') {
+        buffer.write(htmlEscape.convert(method ?? value.toString()));
+      } else {
+        buffer.write(htmlEscape.convert(value.toString()));
+      }
+      buffer.write('"');
+    }
+
+    buffer.writeln('>');
+    buffer.indent();
+
+    // Add CSRF token for POST forms
+    if (method?.toUpperCase() == 'POST') {
+      var token = scope.resolve('_token')?.value;
+      if (token != null) {
+        var input = createHiddenInput('_token', token);
+        renderElement(input, buffer, scope, html5);
+      }
+    }
+
+    // Render children
+    for (var i = 0; i < element.children.length; i++) {
+      var child = element.children.elementAt(i);
+      renderElementChild(
+          element, child, buffer, scope, html5, i, element.children.length);
+    }
+
+    buffer.writeln();
+    buffer.outdent();
+    buffer.writeln('</form>');
+  }
+
+  Element createHiddenInput(String name, String value) {
+    final source = SourceFile.fromString('');
+    final span = source.span(0);
+    final lt = Token(TokenType.lt, span, RegExp('<').matchAsPrefix('<'));
+    final gt = Token(TokenType.gt, span, RegExp('>').matchAsPrefix('>'));
+    final slash = Token(TokenType.slash, span, RegExp('/').matchAsPrefix('/'));
+    final equals =
+        Token(TokenType.equals, span, RegExp('=').matchAsPrefix('='));
+    final input =
+        Token(TokenType.id, span, RegExp('input').matchAsPrefix('input'));
+    final type =
+        Token(TokenType.id, span, RegExp('type').matchAsPrefix('type'));
+    final hidden =
+        Token(TokenType.string, span, RegExp('hidden').matchAsPrefix('hidden'));
+    final nameToken =
+        Token(TokenType.id, span, RegExp(name).matchAsPrefix(name));
+    final valueToken =
+        Token(TokenType.string, span, RegExp(value).matchAsPrefix(value));
+
+    return SelfClosingElement(
+        lt,
+        Identifier(input),
+        [
+          Attribute(Identifier(type), StringLiteral(hidden, 'hidden'), equals,
+              null, null),
+          Attribute(Identifier(nameToken), StringLiteral(nameToken, name),
+              equals, null, null),
+          Attribute(Identifier(valueToken), StringLiteral(valueToken, value),
+              equals, null, null)
+        ],
+        slash,
+        gt);
   }
 
   void renderCustomElement(
