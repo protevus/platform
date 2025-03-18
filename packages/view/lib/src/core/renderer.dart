@@ -334,13 +334,16 @@ class Renderer {
   void renderElementChild(Element parent, ElementChild child, CodeBuffer buffer,
       SymbolTable scope, bool html5, int index, int total) {
     if (child is Text && parent.tagName.name != 'textarea') {
+      var text = child.span.text;
       if (index == 0) {
-        buffer.write(child.span.text.trimLeft());
-      } else if (index == total - 1) {
-        buffer.write(child.span.text.trimRight());
-      } else {
-        buffer.write(child.span.text);
+        text = text.trimLeft();
       }
+      if (index == total - 1) {
+        text = text.trimRight();
+      }
+      // Remove extra newlines and normalize whitespace
+      text = text.replaceAll(RegExp(r'\n\s*\n'), '\n');
+      buffer.write(text);
     } else if (child is Interpolation) {
       var value = child.expression.compute(scope);
 
@@ -511,10 +514,13 @@ class Renderer {
       }
     }
 
+    // For expressions like "items.length > 0", value will be the result
     if (value is bool) {
       condition = value;
     } else if (value is String) {
       condition = value.toLowerCase() == 'true';
+    } else if (value is num) {
+      condition = value != 0;
     } else {
       condition = value != null;
     }
@@ -523,7 +529,7 @@ class Renderer {
       condition = condition == true;
     }
 
-    // Unless is inverse of if
+    // Unless is inverse of if - only render if condition is false
     if (condition) return;
 
     var otherAttributes = element.attributes.where((a) => a.name != 'unless');

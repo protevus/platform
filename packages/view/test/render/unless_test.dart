@@ -60,7 +60,10 @@ void main() {
 
     var buf = CodeBuffer();
     var document = jael.parseDocument(template, sourceUrl: 'test.jael')!;
-    var scope = SymbolTable<dynamic>(values: {'items': [], 'total': 150});
+    var scope = SymbolTable<dynamic>(values: {
+      'items': [],
+      'total': 50 // Changed to 50 to make total < 100 true
+    });
 
     const jael.Renderer().render(document, buf, scope);
 
