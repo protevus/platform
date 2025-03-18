@@ -83,7 +83,12 @@ class Renderer {
   /// instead of throwing.
   void render(Document document, CodeBuffer buffer, SymbolTable scope,
       {bool strictResolution = true}) {
-    scope.create('!strict!', value: strictResolution != false);
+    // Only create strict mode symbol if it doesn't exist
+    try {
+      scope.create('!strict!', value: strictResolution != false);
+    } on StateError {
+      // Symbol already exists, ignore
+    }
 
     if (document.doctype != null) buffer.writeln(document.doctype!.span.text);
     renderElement(
@@ -104,6 +109,9 @@ class Renderer {
       return;
     } else if (element.attributes.any((a) => a.name == 'if')) {
       renderIf(element, buffer, childScope, html5);
+      return;
+    } else if (element.attributes.any((a) => a.name == 'unless')) {
+      renderUnless(element, buffer, childScope, html5);
       return;
     } else if (element.tagName.name == 'declare') {
       renderDeclare(element, buffer, childScope, html5);
@@ -486,6 +494,58 @@ class Renderer {
     ];
 
     return SelfClosingElement(lt, Identifier(input), attributes, slash, gt);
+  }
+
+  void renderUnless(
+      Element element, CodeBuffer buffer, SymbolTable scope, bool html5) {
+    var attribute = element.attributes.singleWhere((a) => a.name == 'unless');
+
+    var value = attribute.value!.compute(scope);
+    var condition = false;
+
+    if (value is String) {
+      // Try to get value from scope
+      var scopeValue = scope.resolve(value)?.value;
+      if (scopeValue != null) {
+        value = scopeValue;
+      }
+    }
+
+    if (value is bool) {
+      condition = value;
+    } else if (value is String) {
+      condition = value.toLowerCase() == 'true';
+    } else {
+      condition = value != null;
+    }
+
+    if (scope.resolve('!strict!')?.value == false) {
+      condition = condition == true;
+    }
+
+    // Unless is inverse of if
+    if (condition) return;
+
+    var otherAttributes = element.attributes.where((a) => a.name != 'unless');
+    late Element strippedElement;
+
+    if (element is SelfClosingElement) {
+      strippedElement = SelfClosingElement(element.lt, element.tagName,
+          otherAttributes, element.slash, element.gt);
+    } else if (element is RegularElement) {
+      strippedElement = RegularElement(
+          element.lt,
+          element.tagName,
+          otherAttributes,
+          element.gt,
+          element.children,
+          element.lt2,
+          element.slash,
+          element.tagName2,
+          element.gt2);
+    }
+
+    renderElement(strippedElement, buffer, scope, html5);
   }
 
   void renderCustomElement(
