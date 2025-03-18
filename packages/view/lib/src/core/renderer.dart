@@ -447,54 +447,44 @@ class Renderer {
     // Create a source file for the input element
     final source = SourceFile.fromString(
         '<input type="hidden" name="_token" value="test-token">');
+    final span = source.span(0);
 
-    // Create tokens with proper spans
-    final lt =
-        Token(TokenType.lt, source.span(0, 1), RegExp('<').matchAsPrefix('<'));
-    final input = Token(TokenType.id, source.span(1, 6),
-        RegExp('input').matchAsPrefix('input'));
-    final typeAttr = Token(
-        TokenType.id, source.span(7, 11), RegExp('type').matchAsPrefix('type'));
-    final equals = Token(
-        TokenType.equals, source.span(11, 12), RegExp('=').matchAsPrefix('='));
-    final typeValue = Token(TokenType.string, source.span(13, 19),
-        RegExp('hidden').matchAsPrefix('hidden'));
-    final nameAttr = Token(TokenType.id, source.span(20, 24),
-        RegExp('name').matchAsPrefix('name'));
-    final nameValue = Token(TokenType.string, source.span(25, name.length + 25),
-        RegExp(name).matchAsPrefix(name));
-    final valueAttr = Token(
-        TokenType.id,
-        source.span(name.length + 26, name.length + 31),
-        RegExp('value').matchAsPrefix('value'));
-    final valueValue = Token(
-        TokenType.string,
-        source.span(name.length + 32, name.length + value.length + 32),
-        RegExp(value).matchAsPrefix(value));
-    final slash = Token(
-        TokenType.slash,
-        source.span(
-            name.length + value.length + 33, name.length + value.length + 34),
-        RegExp('/').matchAsPrefix('/'));
-    final gt = Token(
-        TokenType.gt,
-        source.span(
-            name.length + value.length + 34, name.length + value.length + 35),
-        RegExp('>').matchAsPrefix('>'));
+    // Create tokens
+    final lt = Token(TokenType.lt, span, RegExp('<').matchAsPrefix('<'));
+    final input =
+        Token(TokenType.id, span, RegExp('input').matchAsPrefix('input'));
+    final equals =
+        Token(TokenType.equals, span, RegExp('=').matchAsPrefix('='));
+    final slash = Token(TokenType.slash, span, RegExp('/').matchAsPrefix('/'));
+    final gt = Token(TokenType.gt, span, RegExp('>').matchAsPrefix('>'));
 
-    return SelfClosingElement(
-        lt,
-        Identifier(input),
-        [
-          Attribute(Identifier(typeAttr), StringLiteral(typeValue, 'hidden'),
-              equals, null, null),
-          Attribute(Identifier(nameAttr), StringLiteral(nameValue, name),
-              equals, null, null),
-          Attribute(Identifier(valueAttr), StringLiteral(valueValue, value),
-              equals, null, null)
-        ],
-        slash,
-        gt);
+    // Create attribute tokens
+    final typeToken =
+        Token(TokenType.id, span, RegExp('type').matchAsPrefix('type'));
+    final nameToken =
+        Token(TokenType.id, span, RegExp('name').matchAsPrefix('name'));
+    final valueToken =
+        Token(TokenType.id, span, RegExp('value').matchAsPrefix('value'));
+
+    // Create string tokens
+    final hiddenToken =
+        Token(TokenType.string, span, RegExp('hidden').matchAsPrefix('hidden'));
+    final nameValueToken =
+        Token(TokenType.string, span, RegExp(name).matchAsPrefix(name));
+    final valueValueToken =
+        Token(TokenType.string, span, RegExp(value).matchAsPrefix(value));
+
+    // Create attributes
+    final attributes = [
+      Attribute(Identifier(typeToken), null, equals, null,
+          StringLiteral(hiddenToken, 'hidden')),
+      Attribute(Identifier(nameToken), null, equals, null,
+          StringLiteral(nameValueToken, name)),
+      Attribute(Identifier(valueToken), null, equals, null,
+          StringLiteral(valueValueToken, value))
+    ];
+
+    return SelfClosingElement(lt, Identifier(input), attributes, slash, gt);
   }
 
   void renderCustomElement(
