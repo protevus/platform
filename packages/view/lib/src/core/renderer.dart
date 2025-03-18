@@ -501,7 +501,9 @@ class Renderer {
 
   void renderUnless(
       Element element, CodeBuffer buffer, SymbolTable scope, bool html5) {
-    var attribute = element.attributes.singleWhere((a) => a.name == 'unless');
+    var attribute =
+        element.attributes.firstWhereOrNull((a) => a.name == 'unless') ??
+            element.attributes.firstWhere((a) => a.name == 'unless!');
 
     var value = attribute.value!.compute(scope);
     var condition = false;
@@ -514,13 +516,17 @@ class Renderer {
       }
     }
 
-    // For expressions like "items.length > 0", value will be the result
+    print('Unless condition value: $value (${value.runtimeType})');
+
+    // Handle different value types
     if (value is bool) {
       condition = value;
-    } else if (value is String) {
-      condition = value.toLowerCase() == 'true';
     } else if (value is num) {
       condition = value != 0;
+    } else if (value is String) {
+      condition = value.toLowerCase() == 'true';
+    } else if (value is Iterable) {
+      condition = value.isNotEmpty;
     } else {
       condition = value != null;
     }

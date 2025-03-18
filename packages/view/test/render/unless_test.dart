@@ -48,10 +48,10 @@ void main() {
     const template = '''
 <html>
   <body>
-    <div unless="items.length > 0">
+    <div unless!=items.length>
       Cart is empty
     </div>
-    <div unless="total < 100">
+    <div unless!=total>
       Eligible for free shipping
     </div>
   </body>
