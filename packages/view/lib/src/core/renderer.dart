@@ -138,6 +138,9 @@ class Renderer {
     } else if (element.attributes.any((a) => a.name == 'guest')) {
       renderGuest(element, buffer, childScope, html5);
       return;
+    } else if (element.attributes.any((a) => a.name == 'production')) {
+      renderProduction(element, buffer, childScope, html5);
+      return;
     } else if (element.tagName.name == 'declare') {
       renderDeclare(element, buffer, childScope, html5);
       return;
@@ -827,6 +830,25 @@ class Renderer {
     if (!isGuest) return;
 
     var strippedElement = _stripAttribute(element, 'guest');
+    renderElement(strippedElement, buffer, scope, html5);
+  }
+
+  void renderProduction(
+      Element element, CodeBuffer buffer, SymbolTable scope, bool html5) {
+    var isProduction = false;
+
+    // Get app environment from scope
+    var app = scope.resolve('app')?.value;
+    if (app is Map) {
+      var env = app['env'];
+      if (env is String) {
+        isProduction = env.toLowerCase() == 'production';
+      }
+    }
+
+    if (!isProduction) return;
+
+    var strippedElement = _stripAttribute(element, 'production');
     renderElement(strippedElement, buffer, scope, html5);
   }
 
