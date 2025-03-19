@@ -144,6 +144,9 @@ class Renderer {
     } else if (element.attributes.any((a) => a.name == 'env')) {
       renderEnv(element, buffer, childScope, html5);
       return;
+    } else if (element.attributes.any((a) => a.name == 'method')) {
+      renderMethod(element, buffer, childScope, html5);
+      return;
     } else if (element.tagName.name == 'declare') {
       renderDeclare(element, buffer, childScope, html5);
       return;
@@ -586,8 +589,13 @@ class Renderer {
       buffer.indent();
       for (var i = 0; i < element.children.length; i++) {
         var child = element.children.elementAt(i);
-        renderElementChild(
-            element, child, buffer, scope, html5, i, element.children.length);
+        if (child is Element &&
+            child.attributes.any((a) => a.name == 'method')) {
+          renderMethod(child, buffer, scope, html5, insideForm: true);
+        } else {
+          renderElementChild(
+              element, child, buffer, scope, html5, i, element.children.length);
+        }
       }
       buffer.outdent();
     }
@@ -875,6 +883,22 @@ class Renderer {
     if (!isMatchingEnv) return;
 
     var strippedElement = _stripAttribute(element, 'env');
+    renderElement(strippedElement, buffer, scope, html5);
+  }
+
+  void renderMethod(
+      Element element, CodeBuffer buffer, SymbolTable scope, bool html5,
+      {bool insideForm = false}) {
+    var attribute = element.attributes.singleWhere((a) => a.name == 'method');
+    var method = attribute.value!.compute(scope).toString().toUpperCase();
+
+    // Only add _method field for PUT, PATCH, DELETE methods inside a form
+    if (insideForm && method != 'GET' && method != 'POST') {
+      buffer.write(
+          '<input type="hidden" name="_method" value="${htmlEscape.convert(method)}">');
+    }
+
+    var strippedElement = _stripAttribute(element, 'method');
     renderElement(strippedElement, buffer, scope, html5);
   }
 
