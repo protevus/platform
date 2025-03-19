@@ -135,6 +135,9 @@ class Renderer {
     } else if (element.attributes.any((a) => a.name == 'auth')) {
       renderAuth(element, buffer, childScope, html5);
       return;
+    } else if (element.attributes.any((a) => a.name == 'guest')) {
+      renderGuest(element, buffer, childScope, html5);
+      return;
     } else if (element.tagName.name == 'declare') {
       renderDeclare(element, buffer, childScope, html5);
       return;
@@ -796,6 +799,34 @@ class Renderer {
     if (!isAuthenticated) return;
 
     var strippedElement = _stripAttribute(element, 'auth');
+    renderElement(strippedElement, buffer, scope, html5);
+  }
+
+  void renderGuest(
+      Element element, CodeBuffer buffer, SymbolTable scope, bool html5) {
+    var attribute =
+        element.attributes.firstWhereOrNull((a) => a.name == 'guest');
+    var guard = attribute?.value?.compute(scope)?.toString() ?? 'default';
+    var isGuest = true;
+
+    // Get auth value from scope
+    var auth = scope.resolve('auth')?.value;
+    if (auth != null) {
+      if (auth is bool) {
+        // Simple boolean auth check
+        isGuest = !auth;
+      } else if (auth is Map) {
+        // Check specific guard
+        var guardValue = auth[guard];
+        if (guardValue is bool) {
+          isGuest = !guardValue;
+        }
+      }
+    }
+
+    if (!isGuest) return;
+
+    var strippedElement = _stripAttribute(element, 'guest');
     renderElement(strippedElement, buffer, scope, html5);
   }
 
