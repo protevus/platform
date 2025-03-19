@@ -147,6 +147,9 @@ class Renderer {
     } else if (element.attributes.any((a) => a.name == 'method')) {
       renderMethod(element, buffer, childScope, html5);
       return;
+    } else if (element.attributes.any((a) => a.name == 'error')) {
+      renderError(element, buffer, childScope, html5);
+      return;
     } else if (element.tagName.name == 'declare') {
       renderDeclare(element, buffer, childScope, html5);
       return;
@@ -900,6 +903,32 @@ class Renderer {
 
     var strippedElement = _stripAttribute(element, 'method');
     renderElement(strippedElement, buffer, scope, html5);
+  }
+
+  void renderError(
+      Element element, CodeBuffer buffer, SymbolTable scope, bool html5) {
+    var attribute = element.attributes.singleWhere((a) => a.name == 'error');
+    var field = attribute.value!.compute(scope).toString();
+    var hasError = false;
+    var errorMessage = '';
+
+    // Get errors from scope
+    var errors = scope.resolve('errors')?.value;
+    if (errors is Map && errors.containsKey(field)) {
+      var fieldErrors = errors[field];
+      if (fieldErrors is List && fieldErrors.isNotEmpty) {
+        hasError = true;
+        errorMessage = fieldErrors[0].toString();
+      }
+    }
+
+    if (!hasError) return;
+
+    // Create child scope with error message
+    var childScope = scope.createChild(values: {'message': errorMessage});
+
+    var strippedElement = _stripAttribute(element, 'error');
+    renderElement(strippedElement, buffer, childScope, html5);
   }
 
   void renderCustomElement(
