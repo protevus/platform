@@ -129,6 +129,9 @@ class Renderer {
     } else if (element.attributes.any((a) => a.name == 'isset')) {
       renderIsset(element, buffer, childScope, html5);
       return;
+    } else if (element.attributes.any((a) => a.name == 'empty')) {
+      renderEmpty(element, buffer, childScope, html5);
+      return;
     } else if (element.tagName.name == 'declare') {
       renderDeclare(element, buffer, childScope, html5);
       return;
@@ -716,6 +719,52 @@ class Renderer {
     if (!isSet) return;
 
     var strippedElement = _stripAttribute(element, 'isset');
+    renderElement(strippedElement, buffer, scope, html5);
+  }
+
+  void renderEmpty(
+      Element element, CodeBuffer buffer, SymbolTable scope, bool html5) {
+    var attribute = element.attributes.singleWhere((a) => a.name == 'empty');
+    var value = attribute.value!.compute(scope);
+    var isEmpty = true;
+
+    if (value is String) {
+      // Handle nested properties with dot notation
+      var parts = value.split('.');
+      dynamic val = scope.resolve(parts[0])?.value;
+      for (var i = 1; i < parts.length && val != null; i++) {
+        if (val is Map) {
+          val = val[parts[i]];
+        } else {
+          val = null;
+          break;
+        }
+      }
+      value = val;
+    } else {
+      // Try to get value from scope if it's a simple variable
+      var scopeValue = scope.resolve(value)?.value;
+      if (scopeValue != null) {
+        value = scopeValue;
+      }
+    }
+
+    // Check if value is not empty
+    if (value != null) {
+      if (value is String && value.isNotEmpty) {
+        isEmpty = false;
+      } else if (value is Iterable && value.isNotEmpty) {
+        isEmpty = false;
+      } else if (value is num && value != 0) {
+        isEmpty = false;
+      } else if (value is bool && value == true) {
+        isEmpty = false;
+      }
+    }
+
+    if (!isEmpty) return;
+
+    var strippedElement = _stripAttribute(element, 'empty');
     renderElement(strippedElement, buffer, scope, html5);
   }
 
