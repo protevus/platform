@@ -126,6 +126,9 @@ class Renderer {
     } else if (element.attributes.any((a) => a.name == 'unless')) {
       renderUnless(element, buffer, childScope, html5);
       return;
+    } else if (element.attributes.any((a) => a.name == 'isset')) {
+      renderIsset(element, buffer, childScope, html5);
+      return;
     } else if (element.tagName.name == 'declare') {
       renderDeclare(element, buffer, childScope, html5);
       return;
@@ -677,6 +680,42 @@ class Renderer {
           element.gt2);
     }
 
+    renderElement(strippedElement, buffer, scope, html5);
+  }
+
+  void renderIsset(
+      Element element, CodeBuffer buffer, SymbolTable scope, bool html5) {
+    var attribute = element.attributes.singleWhere((a) => a.name == 'isset');
+    var value = attribute.value!.compute(scope);
+    var isSet = false;
+
+    if (value is String) {
+      // Handle multiple variables with && operator
+      if (value.contains('&&')) {
+        var variables = value.split('&&').map((v) => v.trim());
+        isSet = variables.every((variable) {
+          var val = scope.resolve(variable)?.value;
+          return val != null;
+        });
+      } else {
+        // Handle nested properties with dot notation
+        var parts = value.split('.');
+        dynamic val = scope.resolve(parts[0])?.value;
+        for (var i = 1; i < parts.length && val != null; i++) {
+          if (val is Map) {
+            val = val[parts[i]];
+          } else {
+            val = null;
+            break;
+          }
+        }
+        isSet = val != null;
+      }
+    }
+
+    if (!isSet) return;
+
+    var strippedElement = _stripAttribute(element, 'isset');
     renderElement(strippedElement, buffer, scope, html5);
   }
 
