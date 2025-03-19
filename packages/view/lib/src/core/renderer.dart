@@ -524,68 +524,57 @@ class Renderer {
 
   void renderForm(
       Element element, CodeBuffer buffer, SymbolTable scope, bool html5) {
-    // Get method first to determine if we need CSRF token
-    print('All attributes:');
-    for (var attr in element.attributes) {
-      print(
-          'Attribute name: ${attr.name}, string: ${attr.string?.value}, value: ${attr.value?.compute(scope)}');
-      print('Attribute name type: ${attr.name.runtimeType}');
-      print('Attribute name == "method": ${attr.name == 'method'}');
-      print('Attribute name chars: ${attr.name.codeUnits}');
-      print('method chars: ${'method'.codeUnits}');
-    }
+    if (element is! RegularElement) return;
+
     var methodAttr =
         element.attributes.firstWhereOrNull((a) => a.name == 'method');
-    print('Method attr: $methodAttr');
-    print('Method attr string: ${methodAttr?.string?.value}');
-    print('Method attr value: ${methodAttr?.value?.compute(scope)}');
-    var method = methodAttr?.string?.value ??
-        methodAttr?.value?.compute(scope)?.toString();
-    print('Final method: $method');
+    var methodValue = methodAttr?.value?.compute(scope);
+    var method = methodValue?.toString().toUpperCase() ?? 'GET';
 
-    // Start form tag
+    // Write opening tag
     buffer.write('<form');
 
-    // Write attributes
+    // Write method attribute
+    buffer.write(' method="${htmlEscape.convert(method)}"');
+
+    // Write other attributes
     for (var attribute in element.attributes) {
-      var value = attribute.string?.value ?? attribute.value?.compute(scope);
-      if (value == false || value == null) continue;
+      if (attribute.name == 'method') continue;
+      var value = attribute.value?.compute(scope);
+      if (value == false || value == null && !attribute.isRaw) continue;
 
-      buffer.write(' ');
-      buffer.write(attribute.name);
-      if (value == true) continue;
-
-      buffer.write('="');
-      if (attribute.name == 'method') {
-        buffer.write(htmlEscape.convert(method ?? value.toString()));
+      buffer.write(' ${attribute.name}="');
+      if (attribute.isRaw && attribute.string != null) {
+        buffer.write(attribute.string!.value);
       } else {
         buffer.write(htmlEscape.convert(value.toString()));
       }
       buffer.write('"');
     }
 
-    buffer.writeln('>');
-    buffer.indent();
+    buffer.write('>');
 
     // Add CSRF token for POST forms
-    if (method?.toUpperCase() == 'POST') {
+    if (method == 'POST') {
       var token = scope.resolve('_token')?.value;
       if (token != null) {
-        var input = createHiddenInput('_token', token);
-        renderElement(input, buffer, scope, html5);
+        buffer.write(
+            '<input type="hidden" name="_token" value="${htmlEscape.convert(token.toString())}">');
       }
     }
 
     // Render children
-    for (var i = 0; i < element.children.length; i++) {
-      var child = element.children.elementAt(i);
-      renderElementChild(
-          element, child, buffer, scope, html5, i, element.children.length);
+    if (element.children.isNotEmpty) {
+      buffer.indent();
+      for (var i = 0; i < element.children.length; i++) {
+        var child = element.children.elementAt(i);
+        renderElementChild(
+            element, child, buffer, scope, html5, i, element.children.length);
+      }
+      buffer.outdent();
     }
 
-    buffer.writeln();
-    buffer.outdent();
-    buffer.writeln('</form>');
+    buffer.write('</form>');
   }
 
   Element createHiddenInput(String name, String value) {
@@ -648,8 +637,6 @@ class Renderer {
         value = scopeValue;
       }
     }
-
-    print('Unless condition value: $value (${value.runtimeType})');
 
     // Handle different value types
     if (value is bool) {

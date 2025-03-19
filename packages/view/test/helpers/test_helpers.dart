@@ -26,22 +26,41 @@ Element createElement(String name, List<Attribute> attributes,
   final slash = Token(TokenType.slash, span, RegExp('/').matchAsPrefix('/'));
   final gt = Token(TokenType.gt, span, RegExp('>').matchAsPrefix('>'));
 
-  if (children.isEmpty) {
-    return SelfClosingElement(lt, Identifier(tagName), attributes, slash, gt);
-  }
+  // Create new tokens for closing tag
+  final lt2 = Token(TokenType.lt, span, RegExp('<').matchAsPrefix('<'));
+  final slash2 = Token(TokenType.slash, span, RegExp('/').matchAsPrefix('/'));
+  final tagName2 = Token(TokenType.id, span, RegExp(name).matchAsPrefix(name));
+  final gt2 = Token(TokenType.gt, span, RegExp('>').matchAsPrefix('>'));
 
-  return RegularElement(lt, Identifier(tagName), attributes, gt, children, lt,
-      slash, Identifier(tagName), gt);
+  return RegularElement(lt, Identifier(tagName), attributes, gt, children, lt2,
+      slash2, Identifier(tagName2), gt2);
 }
 
 Attribute createAttribute(
-    String name, String value, SourceFile source, int offset) {
-  final span = source.span(offset);
-  final nameToken = Token(TokenType.id, span, RegExp(name).matchAsPrefix(name));
-  final equals = Token(TokenType.equals, span, RegExp('=').matchAsPrefix('='));
-  final valueToken =
-      Token(TokenType.string, span, RegExp(value).matchAsPrefix(value));
+    String name, String? value, SourceFile source, int offset) {
+  // Create a new source file just for this attribute
+  final attrSource = SourceFile.fromString('$name=${value ?? ""}');
 
-  return Attribute(Identifier(nameToken), null, equals, null,
-      StringLiteral(valueToken, value));
+  // Create tokens
+  final nameToken = Token(TokenType.id, attrSource.span(0, name.length),
+      RegExp(name).matchAsPrefix(name));
+  final equalsToken = Token(
+      TokenType.equals,
+      attrSource.span(name.length, name.length + 1),
+      RegExp('=').matchAsPrefix('='));
+
+  // Create value token and string literal if value is present
+  final stringLiteral = value == null
+      ? null
+      : StringLiteral(
+          Token(TokenType.string, attrSource.span(name.length + 1),
+              RegExp(value).matchAsPrefix(value)),
+          value);
+
+  return Attribute(
+      Identifier(nameToken),
+      null, // Don't set string for name
+      equalsToken,
+      null,
+      stringLiteral);
 }

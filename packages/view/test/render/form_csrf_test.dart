@@ -15,7 +15,7 @@ void main() {
     renderer = Renderer();
     buffer = CodeBuffer();
     scope = SymbolTable();
-    source = SourceFile.fromString('<form method="POST"></form>');
+    source = SourceFile.fromString('form');
   });
 
   test('adds csrf token to POST forms', () {
@@ -23,7 +23,7 @@ void main() {
     scope.create('_token', value: 'test-token');
 
     final form = createElement(
-        'form', [createAttribute('method', 'POST', source, 0)], [], source, 0);
+        'form', [createAttribute('method', 'post', source, 0)], [], source, 0);
 
     // Act
     renderer.renderElement(form, buffer, scope, true);
