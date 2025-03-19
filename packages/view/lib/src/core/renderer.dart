@@ -141,6 +141,9 @@ class Renderer {
     } else if (element.attributes.any((a) => a.name == 'production')) {
       renderProduction(element, buffer, childScope, html5);
       return;
+    } else if (element.attributes.any((a) => a.name == 'env')) {
+      renderEnv(element, buffer, childScope, html5);
+      return;
     } else if (element.tagName.name == 'declare') {
       renderDeclare(element, buffer, childScope, html5);
       return;
@@ -849,6 +852,29 @@ class Renderer {
     if (!isProduction) return;
 
     var strippedElement = _stripAttribute(element, 'production');
+    renderElement(strippedElement, buffer, scope, html5);
+  }
+
+  void renderEnv(
+      Element element, CodeBuffer buffer, SymbolTable scope, bool html5) {
+    var attribute = element.attributes.singleWhere((a) => a.name == 'env');
+    var envList =
+        attribute.value!.compute(scope).toString().toLowerCase().split(',');
+    var isMatchingEnv = false;
+
+    // Get app environment from scope
+    var app = scope.resolve('app')?.value;
+    if (app is Map) {
+      var env = app['env'];
+      if (env is String) {
+        // Check if current environment matches any in the comma-separated list
+        isMatchingEnv = envList.any((e) => e.trim() == env.toLowerCase());
+      }
+    }
+
+    if (!isMatchingEnv) return;
+
+    var strippedElement = _stripAttribute(element, 'env');
     renderElement(strippedElement, buffer, scope, html5);
   }
 
