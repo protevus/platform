@@ -15,6 +15,9 @@ coverage_report/
 # Files and directories created by developer
 spike/
 devbox.d/
+monorepo_manager.log
+monorepo.sh
+subtree.sh
 
 # If you're building an application, you may want to check-in your pubspec.lock
 #pubspec.lock
